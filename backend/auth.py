@@ -10,7 +10,7 @@ ALGORITHM           = "HS256"
 TOKEN_EXPIRE_HOURS  = 24 * 7
 RESET_EXPIRE_HOURS  = 1
 
-DB_PATH = Path(__file__).parent / "users.db"
+DB_PATH = Path(os.getenv("DB_PATH", str(Path(__file__).parent / "users.db")))
 
 
 def init_db() -> None:
