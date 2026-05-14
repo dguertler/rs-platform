@@ -84,6 +84,11 @@ class AdminPatchUser(BaseModel):
 @app.on_event("startup")
 async def startup():
     init_db()
+    admin_email = os.getenv("ADMIN_EMAIL")
+    admin_password = os.getenv("ADMIN_PASSWORD")
+    if admin_email and admin_password and not get_all_users():
+        create_user(admin_email, admin_password)
+        set_admin(admin_email, True)
 
 
 @app.get("/health")
