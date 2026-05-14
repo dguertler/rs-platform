@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RS Platform - Konto</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0a0f1e; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .card { background: #0f172a; border: 1px solid #1e293b; border-radius: 12px; padding: 40px; width: 100%; max-width: 420px; }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 28px; color: #f1f5f9; }
+    .row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #1e293b; font-size: 14px; }
+    .lbl { color: #64748b; } .val { color: #f1f5f9; font-weight: 500; }
+    .badge { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+    .pro  { background: #1e3a5f; color: #60a5fa; }
+    .free { background: #1e293b; color: #94a3b8; }
+    h2 { font-size: 14px; font-weight: 600; color: #64748b; margin: 28px 0 16px; text-transform: uppercase; letter-spacing: 0.06em; }
+    label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.06em; }
+    input { width: 100%; background: #1e293b; border: 1px solid #334155; border-radius: 6px; color: #e2e8f0; font-size: 14px; padding: 10px 14px; margin-bottom: 14px; outline: none; transition: border-color 0.15s; }
+    input:focus { border-color: #3b82f6; }
+    button { width: 100%; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-size: 14px; font-weight: 500; padding: 11px; cursor: pointer; transition: background 0.15s; }
+    button:hover:not(:disabled) { background: #1d4ed8; }
+    button:disabled { background: #1e3a5f; cursor: not-allowed; color: #64748b; }
+    .btn-muted { background: #1e293b; color: #94a3b8; margin-top: 10px; }
+    .btn-muted:hover { background: #334155; }
+    .msg { border-radius: 6px; font-size: 13px; padding: 10px 14px; margin-bottom: 14px; display: none; }
+    .err { background: #450a0a; border: 1px solid #7f1d1d; color: #fca5a5; }
+    .ok  { background: #052e16; border: 1px solid #166534; color: #86efac; }
+    .nav { font-size: 13px; margin-bottom: 24px; display: flex; gap: 16px; }
+    .nav a { color: #64748b; text-decoration: none; } .nav a:hover { color: #94a3b8; }
+    .upgrade-btn { background: #2563eb; color: #fff; border: none; padding: 3px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="nav"><a href="/">Dashboard</a><span id="adm" style="display:none"><a href="/admin.html">Admin</a></span></div>
+    <h1>Mein Konto</h1>
+    <div class="row"><span class="lbl">E-Mail</span><span class="val" id="em"></span></div>
+    <div class="row"><span class="lbl">Plan</span><span class="val" id="pl"></span></div>
+    <h2>Passwort aendern</h2>
+    <div class="msg err" id="err"></div>
+    <div class="msg ok"  id="ok"></div>
+    <form id="form">
+      <label>Aktuelles Passwort</label><input type="password" id="cur" required placeholder="........">
+      <label>Neues Passwort</label><input type="password" id="nw" required placeholder="........">
+      <label>Wiederholen</label><input type="password" id="nw2" required placeholder="........">
+      <button type="submit" id="btn">Passwort aendern</button>
+    </form>
+    <button class="btn-muted" onclick="localStorage.clear();window.location.href='/login.html'">Abmelden</button>
+  </div>
+  <script>
+    var _t=localStorage.getItem("rs_token"); if(!_t) window.location.href="/login.html";
+    function api(url,o){o=o||{};o.headers=Object.assign({},o.headers,{"Authorization":"Bearer "+_t});return fetch(url,o).then(function(r){if(r.status===401){localStorage.clear();window.location.href="/login.html";}return r;});}
+    async function load(){
+      var r=await api("/api/user/me"), u=await r.json();
+      document.getElementById("em").textContent=u.email;
+      var pl=document.getElementById("pl");
+      if(u.plan==="pro") pl.innerHTML='<span class="badge pro">Pro</span>';
+      else pl.innerHTML='<span class="badge free">Free</span> <button class="upgrade-btn" onclick="upgrade()">Upgrade</button>';
+      if(u.is_admin) document.getElementById("adm").style.display="";
+    }
+    async function upgrade(){var r=await api("/api/stripe/checkout");var d=await r.json();if(d.url)window.location.href=d.url;}
+    document.getElementById("form").addEventListener("submit",async function(e){
+      e.preventDefault();
+      var btn=document.getElementById("btn"),err=document.getElementById("err"),ok=document.getElementById("ok");
+      var nw=document.getElementById("nw").value,nw2=document.getElementById("nw2").value;
+      err.style.display="none";ok.style.display="none";
+      if(nw!==nw2){err.textContent="Passwoerter stimmen nicht ueberein.";err.style.display="block";return;}
+      btn.disabled=true;btn.textContent="Speichern...";
+      try{
+        var r=await api("/api/user/change-password",{method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({current_password:document.getElementById("cur").value,new_password:nw})});
+        var d=await r.json();
+        if(!r.ok)throw new Error(d.detail||"Fehler");
+        ok.textContent="Passwort geaendert.";ok.style.display="block";document.getElementById("form").reset();
+      }catch(ex){err.textContent=ex.message;err.style.display="block";}
+      finally{btn.disabled=false;btn.textContent="Passwort aendern";}
+    });
+    load();
+  </script>
+</body>
+</html>

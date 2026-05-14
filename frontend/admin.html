@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RS Platform - Admin</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:#0a0f1e;color:#e2e8f0;font-family:'Inter',system-ui,sans-serif;min-height:100vh}
+    .top{background:#0f172a;border-bottom:1px solid #1e293b;padding:14px 28px;display:flex;align-items:center;gap:20px}
+    .top h1{font-size:16px;font-weight:600;color:#f1f5f9;flex:1}
+    .top a{font-size:13px;color:#64748b;text-decoration:none}.top a:hover{color:#94a3b8}
+    .wrap{max-width:960px;margin:36px auto;padding:0 20px}
+    .hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+    .hdr h2{font-size:14px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.06em}
+    .btn{background:#2563eb;border:none;border-radius:6px;color:#fff;font-size:13px;font-weight:500;padding:8px 16px;cursor:pointer}
+    .btn:hover{background:#1d4ed8}
+    .btn-sm{padding:4px 10px;font-size:12px;border-radius:4px;border:none;cursor:pointer;font-weight:500}
+    .btn-danger{background:#450a0a;color:#fca5a5}.btn-danger:hover{background:#7f1d1d}
+    .btn-muted{background:#1e293b;color:#94a3b8}.btn-muted:hover{background:#334155}
+    .btn-green{background:#052e16;color:#86efac}.btn-green:hover{background:#166534}
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th{text-align:left;color:#64748b;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding:8px 10px;border-bottom:1px solid #1e293b}
+    td{padding:10px;border-bottom:1px solid #0f172a;vertical-align:middle}
+    tr:hover td{background:#0f172a}
+    .badge{padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600}
+    .bp{background:#1e3a5f;color:#60a5fa}.bf{background:#1e293b;color:#94a3b8}
+    .ba{background:#2d1b00;color:#fbbf24}.bn{background:#1e293b;color:#475569}
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:100}
+    .overlay.on{display:flex}
+    .modal{background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:32px;width:100%;max-width:400px}
+    .modal h3{font-size:16px;font-weight:600;margin-bottom:20px;color:#f1f5f9}
+    .modal label{display:block;font-size:11px;color:#94a3b8;margin-bottom:5px;text-transform:uppercase;letter-spacing:.06em}
+    .modal input,.modal select{width:100%;background:#1e293b;border:1px solid #334155;border-radius:6px;color:#e2e8f0;font-size:14px;padding:9px 12px;margin-bottom:14px;outline:none}
+    .modal-row{display:flex;gap:10px;margin-top:8px}.modal-row button{flex:1}
+    .msg{border-radius:6px;font-size:13px;padding:10px 14px;margin-bottom:14px;display:none}
+    .err{background:#450a0a;border:1px solid #7f1d1d;color:#fca5a5}
+    .ok{background:#052e16;border:1px solid #166534;color:#86efac}
+    .acts{display:flex;gap:6px}
+  </style>
+</head>
+<body>
+  <div class="top"><h1>RS Platform - Admin</h1><a href="/account.html">Konto</a><a href="/">Dashboard</a></div>
+  <div class="wrap">
+    <div class="msg err" id="gerr"></div><div class="msg ok" id="gok"></div>
+    <div class="hdr"><h2>Benutzer</h2><button class="btn" onclick="openC()">+ Neuer Benutzer</button></div>
+    <table><thead><tr><th>E-Mail</th><th>Plan</th><th>Admin</th><th>Status</th><th>Erstellt</th><th>Aktionen</th></tr></thead>
+    <tbody id="tb"></tbody></table>
+  </div>
+
+  <div class="overlay" id="co"><div class="modal">
+    <h3>Neuer Benutzer</h3><div class="msg err" id="cerr"></div>
+    <form id="cf">
+      <label>E-Mail</label><input type="email" id="ce" required placeholder="name@example.com">
+      <label>Passwort</label><input type="password" id="cp" required placeholder="........">
+      <label>Plan</label><select id="cpl"><option value="free">Free</option><option value="pro">Pro</option></select>
+      <label style="display:flex;align-items:center;gap:8px;text-transform:none;margin-bottom:14px">
+        <input type="checkbox" id="ca" style="width:auto;margin:0"> Admin
+      </label>
+      <div class="modal-row"><button type="submit" class="btn">Anlegen</button><button type="button" class="btn btn-muted" onclick="closeC()">Abbrechen</button></div>
+    </form>
+  </div></div>
+
+  <div class="overlay" id="eo"><div class="modal">
+    <h3 id="et">Benutzer bearbeiten</h3><div class="msg err" id="eerr"></div>
+    <form id="ef">
+      <label>Plan</label><select id="epl"><option value="free">Free</option><option value="pro">Pro</option></select>
+      <label style="display:flex;align-items:center;gap:8px;text-transform:none;margin-bottom:14px">
+        <input type="checkbox" id="ea" style="width:auto;margin:0"> Admin
+      </label>
+      <label>Neues Passwort <span style="color:#475569;text-transform:none">(leer = unveraendert)</span></label>
+      <input type="password" id="epw" placeholder="........">
+      <div class="modal-row"><button type="submit" class="btn">Speichern</button><button type="button" class="btn btn-muted" onclick="closeE()">Abbrechen</button></div>
+    </form>
+  </div></div>
+
+  <script>
+    var _t=localStorage.getItem("rs_token"); if(!_t) window.location.href="/login.html";
+    var _et=null;
+    function api(url,o){o=o||{};o.headers=Object.assign({},o.headers,{"Authorization":"Bearer "+_t});return fetch(url,o).then(function(r){if(r.status===401){localStorage.clear();window.location.href="/login.html";}if(r.status===403)window.location.href="/";return r;});}
+    function flash(id,msg,isErr){var el=document.getElementById(id);el.textContent=msg;el.className="msg "+(isErr?"err":"ok");el.style.display="block";setTimeout(function(){el.style.display="none";},4000);}
+    async function load(){
+      var r=await api("/api/admin/users"),users=await r.json(),tb=document.getElementById("tb");
+      tb.innerHTML="";
+      users.forEach(function(u){
+        var pb=u.plan==="pro"?'<span class="badge bp">Pro</span>':'<span class="badge bf">Free</span>';
+        var ab=u.is_admin?'<span class="badge ba">Admin</span>':'<span class="badge bn">-</span>';
+        var sb=u.is_active?'<span class="badge bf" style="color:#4ade80">Aktiv</span>':'<span class="badge bn">Inaktiv</span>';
+        var tb2=u.is_active
+          ?'<button class="btn-sm btn-danger" onclick="tog(\''+u.email+'\',false)">Deaktivieren</button>'
+          :'<button class="btn-sm btn-green"  onclick="tog(\''+u.email+'\',true)">Aktivieren</button>';
+        tb.innerHTML+='<tr><td>'+u.email+'</td><td>'+pb+'</td><td>'+ab+'</td><td>'+sb+'</td>'
+          +'<td>'+(u.created_at||"").slice(0,10)+'</td>'
+          +'<td class="acts"><button class="btn-sm btn-muted" onclick="openE(\''+u.email+'\',\''+u.plan+'\','+u.is_admin+')">Bearb.</button>'+tb2+'</td></tr>';
+      });
+    }
+    function openC(){document.getElementById("co").classList.add("on");}
+    function closeC(){document.getElementById("co").classList.remove("on");document.getElementById("cf").reset();document.getElementById("cerr").style.display="none";}
+    document.getElementById("cf").addEventListener("submit",async function(e){
+      e.preventDefault();
+      var r=await api("/api/admin/users",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({email:document.getElementById("ce").value,password:document.getElementById("cp").value,
+          plan:document.getElementById("cpl").value,is_admin:document.getElementById("ca").checked})});
+      var d=await r.json();
+      if(!r.ok){document.getElementById("cerr").textContent=d.detail;document.getElementById("cerr").style.display="block";return;}
+      closeC();flash("gok",d.detail,false);load();
+    });
+    function openE(email,plan,isAdmin){
+      _et=email;document.getElementById("et").textContent="Bearbeiten: "+email;
+      document.getElementById("epl").value=plan;document.getElementById("ea").checked=!!isAdmin;
+      document.getElementById("epw").value="";document.getElementById("eerr").style.display="none";
+      document.getElementById("eo").classList.add("on");
+    }
+    function closeE(){document.getElementById("eo").classList.remove("on");}
+    document.getElementById("ef").addEventListener("submit",async function(e){
+      e.preventDefault();
+      var body={plan:document.getElementById("epl").value,is_admin:document.getElementById("ea").checked};
+      var pw=document.getElementById("epw").value; if(pw) body.new_password=pw;
+      var r=await api("/api/admin/users/"+encodeURIComponent(_et),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+      var d=await r.json();
+      if(!r.ok){document.getElementById("eerr").textContent=d.detail;document.getElementById("eerr").style.display="block";return;}
+      closeE();flash("gok","Gespeichert.",false);load();
+    });
+    async function tog(email,active){
+      var r=await api("/api/admin/users/"+encodeURIComponent(email),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({is_active:active})});
+      var d=await r.json();
+      if(!r.ok){flash("gerr",d.detail,true);return;}
+      load();
+    }
+    load();
+  </script>
+</body>
+</html>

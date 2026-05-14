@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RS · Backtest</title>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <script src="/backtest_logic.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1e; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    select, button { outline: none; }
+    .chart-wrap { position: relative; }
+    .chart-wrap svg { display: block; }
+    .charts-grid { display:flex; flex-direction:column; gap:10px; }
+    @media (min-width:768px) {
+      .charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+      .chart-full-width { grid-column:1/-1; }
+    }
+    @media (min-width:1100px) {
+      .desktop-layout { display:flex; flex-direction:row; align-items:flex-start; gap:16px; }
+      .desktop-left  { width:560px; flex-shrink:0; }
+      .desktop-right { flex:1; min-width:0; position:sticky; top:16px; align-self:flex-start; }
+    }
+    .nav-bar { display:inline-flex; align-items:center; gap:5px; padding:12px 12px 0; }
+    .nav-switch { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:6px 13px; font-size:12px; font-weight:700; color:#94a3b8; text-decoration:none; font-family:monospace; white-space:nowrap; box-shadow:0 2px 8px #00000066; transition:border-color .15s,color .15s; }
+    .nav-switch:hover  { border-color:#3b82f6; color:#e2e8f0; }
+    .nav-switch.active { border-color:#f59e0b; color:#fbbf24; background:#1a1a0a; }
+    .tbl-row { cursor:pointer; transition:background .1s; }
+    .tbl-row:hover { background:#1e293b !important; }
+    .dot { display:inline-block; width:9px; height:9px; border-radius:50%; }
+  </style>
+</head>
+<body>
+  <div id="pro-gate" style="display:none;position:fixed;inset:0;background:rgba(10,15,30,0.97);z-index:10000;align-items:center;justify-content:center">
+    <div style="text-align:center;padding:40px;background:#0f172a;border:1px solid #1e293b;border-radius:16px;max-width:380px;width:90%">
+      <div style="font-size:40px;margin-bottom:16px">&#128274;</div>
+      <h2 style="color:#f1f5f9;font-size:20px;font-weight:600;margin-bottom:10px">Pro-Account erforderlich</h2>
+      <p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:24px">Backtests sind exklusiv fuer Pro-Nutzer verfuegbar.<br>Upgrade jetzt und erhalte Zugriff auf alle Analysen.</p>
+      <button onclick="(async function(){var x=await window.apiFetch('/api/stripe/checkout');var d=await x.json();if(d.url)window.location.href=d.url;})()" style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:12px 0;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-bottom:12px">Jetzt upgraden</button>
+      <a href="/" style="display:block;color:#64748b;font-size:13px;text-decoration:none">&#8592; Zurueck zum Dashboard</a>
+    </div>
+  </div>
+
+  <div id="plan-bar" style="position:fixed;top:8px;right:14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
+
+<div class="nav-bar">
+  <a href="index.html"  class="nav-switch">QQQ</a>
+  <a href="dax.html"    class="nav-switch">DAX</a>
+  <a href="sp500.html"  class="nav-switch">SPX</a>
+  <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
+  <a href="backtest.html" class="nav-switch active">B-DETAILS</a>
+</div>
+<div id="root"></div>
+<script>
+/* RS Auth */
+(function () {
+  function getToken() { return localStorage.getItem('rs_token'); }
+  function logout() {
+    localStorage.removeItem('rs_token');
+    localStorage.removeItem('rs_email');
+    window.location.href = '/login.html';
+  }
+  window.rsLogout = logout;
+  window.apiFetch = async function (url, opts) {
+    opts = opts || {};
+    var token = getToken();
+    if (!token) { logout(); return new Response('{}', { status: 401 }); }
+    var r = await fetch(url, Object.assign({}, opts, {
+      headers: Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token })
+    }));
+    if (r.status === 401) { logout(); }
+    return r;
+  };
+  if (!getToken()) { window.location.href = '/login.html'; return; }
+  /* Logout-Button */
+  document.addEventListener('DOMContentLoaded', function () {
+    var email = localStorage.getItem('rs_email') || '';
+    var btn = document.createElement('button');
+    btn.textContent = 'Logout' + (email ? ' · ' + email : '');
+    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
+    btn.onclick = function () { window.rsLogout(); };
+    document.body.appendChild(btn);
+  });
+})()
+</script>
+<script>
+  (async function() {
+    try {
+      var r = await window.apiFetch('/api/user/me');
+      if (!r || r.status !== 200) return;
+      var u = await r.json();
+      if (u.plan !== 'pro') {
+        var gate = document.getElementById('pro-gate');
+        if (gate) gate.style.display = 'flex';
+        return;
+      }
+      var bar = document.getElementById('plan-bar');
+      if (!bar) return;
+      var adminLink = u.is_admin
+        ? '&nbsp;&nbsp;<a href="/admin.html" style="color:#fbbf24;font-size:12px;text-decoration:none">Admin</a>'
+        : '';
+      bar.innerHTML = '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
+        + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
+        + adminLink;
+    } catch(e) {}
+  })();
+</script>
+<script type="text/babel">
+const { useState, useMemo, useRef, useCallback, useEffect } = React;
+
+// ── GWS-D Analyse (korrekte Down-Retracement Logik) ──────────────────────────
+//
+// Ein Down-Retracement entsteht ERST wenn ein vorheriges Swing-Tief unterschritten wird.
+// Das GWS-D ist dann das HÖCHSTE Hoch zwischen dem alten Tief und dem neuen tieferen Tief.
+//
+// Ablauf:
+//   1. Sequenz von Swing-Hochs und Swing-Tiefs ermitteln
+//   2. Suche tiefere Tiefs (jedes Swing-Tief, das ein vorheriges Swing-Tief unterschreitet)
+//   3. Für jedes tiefere Tief: GWS-D = höchstes Hoch zwischen dem alten Tief und dem neuen Tief
+//   4. Aktuelles GWS-D = letztes so ermitteltes Hoch
+//   5. Bullish = Close über GWS-D Preis
+// ── Analyse- und Simulationsfunktionen → backtest_logic.js ───────────────────
+
+function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {
+  const svgRef = useRef(null);
+  const [hover, setHover] = useState(null);
+  const W = 600, H = 260;
+  const PL = 56, PR = 52, PT = 18, PB = 32;
+  const cW = W - PL - PR, cH = H - PT - PB;
+  const n = ohlcvW.length;
+  const allH = ohlcvW.map(d => d.h), allL = ohlcvW.map(d => d.l);
+  const rawMax = Math.max(...allH), rawMin = Math.min(...allL);
+  const pad = (rawMax - rawMin) * 0.07;
+  const maxP = rawMax + pad, minP = rawMin - pad, range = maxP - minP;
+  const toY = p => PT + (1 - (p - minP) / range) * cH;
+  const toX = i => PL + (i + 0.5) * (cW / n);
+  const bW  = Math.max(2, cW / n * 0.65);
+
+  const yTicks = [];
+  for (let k = 0; k <= 5; k++) yTicks.push(minP + k * range / 5);
+
+  // Monats-Labels für Weekly
+  const monthLabels = [];
+  let lastMonth = null;
+  ohlcvW.forEach((d, i) => {
+    const m = d.d.slice(0, 7);
+    if (m !== lastMonth) { monthLabels.push({ i, label: d.d.slice(5,7)+"/"+d.d.slice(2,4) }); lastMonth = m; }
+  });
+
+  const { gwswHigh, breakoutIdx, breakoutPrice, broken, prevGwswHigh, prevBreakoutIdx } = structureW || {};
+
+  // Index-Linie (grau) – normalisiert auf Aktien-Preisskala
+  const benchLine = useMemo(() => {
+    if (!benchOhlcv || !ohlcvW.length) return [];
+    const benchMap = {};
+    benchOhlcv.forEach(d => { benchMap[d.d] = d.c; });
+    let stockRef = null, benchRef = null;
+    for (const d of ohlcvW) {
+      if (benchMap[d.d] != null) { stockRef = d.c; benchRef = benchMap[d.d]; break; }
+    }
+    if (!stockRef || !benchRef) return [];
+    return ohlcvW.map((d, i) => {
+      const bc = benchMap[d.d];
+      return bc != null ? { i, price: stockRef * (bc / benchRef) } : null;
+    }).filter(Boolean);
+  }, [benchOhlcv, ohlcvW]);
+  const gwswColor  = "#f59e0b"; // Amber für Weekly
+  const gwswLineEnd = breakoutIdx !== null ? breakoutIdx : n - 1;
+
+  const handleMouseMove = useCallback((e) => {
+    const svg = svgRef.current; if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    const idx = Math.round((mx - PL) / (cW / n) - 0.5);
+    setHover(idx >= 0 && idx < n ? idx : null);
+  }, [n, cW]);
+
+  const hd = hover !== null ? ohlcvW[hover] : null;
+
+  return (
+    <div className="chart-wrap" style={{background:"#07090f",borderRadius:8,border:"1px solid #1e293b",overflow:"hidden"}}>
+      <div style={{height:28,padding:"0 12px",display:"flex",alignItems:"center",gap:14,background:"#0a0f1e",borderBottom:"1px solid #1e293b",fontSize:10,fontFamily:"monospace"}}>
+        {hd ? <>
+          <span style={{color:"#475569"}}>{hd.d}</span>
+          <span>O <span style={{color:"#e2e8f0"}}>{hd.o.toFixed(2)}</span></span>
+          <span>H <span style={{color:"#4ade80"}}>{hd.h.toFixed(2)}</span></span>
+          <span>L <span style={{color:"#f87171"}}>{hd.l.toFixed(2)}</span></span>
+          <span>C <span style={{color:hd.c>=hd.o?"#4ade80":"#f87171",fontWeight:700}}>{hd.c.toFixed(2)}</span></span>
+          <span style={{color:"#475569",marginLeft:"auto"}}>{hd.c>=hd.o?"▲":"▼"} {((hd.c-hd.o)/hd.o*100).toFixed(2)}%</span>
+        </> : <span style={{color:"#334155"}}>Hover für Weekly-Details</span>}
+      </div>
+
+      <svg ref={svgRef} width="100%" viewBox={`0 0 ${W} ${H}`}
+        onMouseMove={handleMouseMove} onMouseLeave={()=>setHover(null)} style={{cursor:"crosshair"}}>
+        <defs>
+          <linearGradient id={`bgW_${chartId}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.10"/>
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.01"/>
+          </linearGradient>
+          <clipPath id={`clipW_${chartId}`}>
+            <rect x={PL} y={PT} width={cW} height={cH}/>
+          </clipPath>
+        </defs>
+        <rect x={PL} y={PT} width={cW} height={cH} fill="#07090f"/>
+
+        {/* Gitter */}
+        {yTicks.map((val, k) => {
+          const y = toY(val);
+          return <g key={k}>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#1a2235" strokeWidth="0.8"/>
+            <text x={PL-5} y={y+3.5} textAnchor="end" fill="#334155" fontSize="9" fontFamily="monospace">{val.toFixed(0)}</text>
+          </g>;
+        })}
+
+        {/* Monatstrennlinien */}
+        {monthLabels.map(({i, label}) => (
+          <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,4" opacity="0.25"/>
+            <text x={toX(i)} y={PT+cH+14} textAnchor="middle" fill="#334155" fontSize="8.5" fontFamily="monospace">{label}</text>
+          </g>
+        ))}
+
+        {/* Breakout-Zone */}
+        {breakoutIdx !== null && (
+          <rect x={toX(breakoutIdx)} y={PT} width={PL+cW-toX(breakoutIdx)} height={cH} fill={`url(#bgW_${chartId})`}/>
+        )}
+
+        {/* Index-Linie (grau) */}
+        {benchLine.length > 1 && (
+          <polyline
+            points={benchLine.map(({i, price}) => `${toX(i)},${toY(price)}`).join(' ')}
+            fill="none" stroke="#64748b" strokeWidth="1.2" opacity="0.55"
+            clipPath={`url(#clipW_${chartId})`}/>
+        )}
+
+        {/* Vorheriger GWS-W Break (gedimmt) */}
+        {prevGwswHigh && (() => {
+          const prevLineEnd = prevBreakoutIdx !== null ? prevBreakoutIdx : (gwswHigh ? gwswHigh.idx : n - 1);
+          const y  = toY(prevGwswHigh.price);
+          const x1 = toX(prevGwswHigh.idx);
+          const x2 = toX(prevLineEnd);
+          return <>
+            <line x1={x1} x2={x2} y1={y} y2={y} stroke={gwswColor} strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/>
+          </>;
+        })()}
+
+        {/* Aktueller GWS-W */}
+        {gwswHigh && (() => {
+          const y  = toY(breakoutPrice ?? gwswHigh.price);
+          const x1 = toX(gwswHigh.idx);
+          const x2 = toX(gwswLineEnd);
+          return <line x1={x1} x2={x2} y1={y} y2={y} stroke={gwswColor} strokeWidth="1.8" strokeDasharray="5,4"/>;
+        })()}
+                {/* Trend-Fallback: kein GWS aber höhere Hochs (Weekly) */}
+        {broken && !gwswHigh && structureW?.swingHighs?.length >= 2 && (() => {
+          const lastSH = structureW.swingHighs[structureW.swingHighs.length - 1];
+          const y = toY(lastSH.price);
+          return <>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#4ade80" strokeWidth="1.2" strokeDasharray="3,6" opacity="0.7"/>
+            <text x={PL+6} y={y-4} fill="#4ade80" fontSize="8" fontFamily="monospace" opacity="0.8">Trend ↑</text>
+          </>;
+        })()}
+
+        {/* Kerzen */}
+        {ohlcvW.map((d, i) => {
+          const bull = d.c >= d.o;
+          const isBoc = i === breakoutIdx;
+          const col  = bull ? "#22c55e" : "#ef4444";
+          const bTop = toY(Math.max(d.o, d.c));
+          const bH   = Math.max(1.5, toY(Math.min(d.o, d.c)) - bTop);
+          const isHov = hover === i;
+          return <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={toY(d.h)} y2={toY(d.l)} stroke={col} strokeWidth={isHov?1.5:1} opacity={0.9}/>
+            <rect x={toX(i)-bW/2} y={bTop} width={bW} height={bH}
+              fill={col} opacity={isBoc?1:isHov?0.95:0.8}
+              stroke={isBoc?gwswColor:"none"} strokeWidth={isBoc?1.2:0}/>
+          </g>;
+        })}
+
+        {/* Trade-Marker */}
+        {tradeMarkers.map((m, mi) => {
+          const idx = ohlcvW.findIndex(d => d.d.slice(0,10) === (m.weeklyDate ?? m.date).slice(0,10));
+          if (idx < 0) return null;
+          const x = toX(idx);
+          if (m.type === 'entry') {
+            const yTip = Math.min(toY(ohlcvW[idx].l) + 3, PT + cH - 16);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip+10} ${x+5},${yTip+10} ${x},${yTip}`} fill="#4ade80" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip+10} y2={Math.min(yTip+20, PT+cH)} stroke="#4ade80" strokeWidth="1.5"/>
+            </g>;
+          } else {
+            const yTip = Math.max(toY(ohlcvW[idx].h) - 3, PT + 14);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
+            </g>;
+          }
+        })}
+
+        {/* Signal-Pfeile (Weekly-Chart: alle Timeframes) */}
+        {signals.filter(s => s.weekly_bar_date).map((sig, si) => {
+          const idx = ohlcvW.findIndex(d => d.d.slice(0,10) === sig.weekly_bar_date.slice(0,10));
+          if (idx < 0) return null;
+          const x = toX(idx);
+          const yTip = Math.min(toY(ohlcvW[idx].l) + 4, PT + cH - 28);
+          const lbl = [sig.weekly_bar_date&&'W', sig.daily_bar_date&&'D', sig.h4_bar_date&&'4H'].filter(Boolean).join('/');
+          return <g key={si}>
+            <rect x={x-6} y={yTip-2} width={12} height={22} rx={2} fill="#eab308" opacity={0.2}/>
+            <polygon points={`${x-4},${yTip+8} ${x+4},${yTip+8} ${x},${yTip}`} fill="#eab308" opacity="0.95"/>
+            <line x1={x} x2={x} y1={yTip+8} y2={yTip+18} stroke="#eab308" strokeWidth="1.5" opacity="0.95"/>
+            <text x={x} y={yTip+28} textAnchor="middle" fill="#eab308" fontSize="7" fontFamily="monospace" opacity="0.9">{lbl}</text>
+          </g>;
+        })}
+
+        {/* Aktueller Preis */}
+        <line x1={PL} x2={PL+cW} y1={toY(ohlcvW[n-1].c)} y2={toY(ohlcvW[n-1].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.45"/>
+        <rect x={PL+cW+2} y={toY(ohlcvW[n-1].c)-8} width={46} height={15} rx="3" fill="#1e293b"/>
+        <text x={PL+cW+25} y={toY(ohlcvW[n-1].c)+3} textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontFamily="monospace">{ohlcvW[n-1].c.toFixed(2)}</text>
+
+        {/* Crosshair */}
+        {hover !== null && <>
+          <line x1={toX(hover)} x2={toX(hover)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+          <line x1={PL} x2={PL+cW} y1={toY(ohlcvW[hover].c)} y2={toY(ohlcvW[hover].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+          <rect x={PL-52} y={toY(ohlcvW[hover].c)-8} width={48} height={15} rx="3" fill="#1e293b"/>
+          <text x={PL-28} y={toY(ohlcvW[hover].c)+3} textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontFamily="monospace">{ohlcvW[hover].c.toFixed(2)}</text>
+        </>}
+        <rect x={PL} y={PT} width={cW} height={cH} fill="none" stroke="#1e293b" strokeWidth="0.8"/>
+      </svg>
+
+      <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>GWS-W</span>
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
+        </div>
+        {benchLine.length > 1 && benchLabel && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>{benchLabel}</span>
+          </div>
+        )}
+        {signals.length > 0 && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
+            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
+          </div>
+        )}
+        <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcvW.length} Wochen · Weekly</div>
+      </div>
+    </div>
+  );
+}
+
+// ── Daily Candlestick Chart ────────────────────────────────────────────────
+function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {
+  const svgRef = useRef(null);
+  const [hover, setHover] = useState(null);
+  const W = 600, H = 270;
+  const PL = 56, PR = 52, PT = 18, PB = 32;
+  const cW = W - PL - PR, cH = H - PT - PB;
+  const n = ohlcv.length;
+  const allH = ohlcv.map(d => d.h), allL = ohlcv.map(d => d.l);
+  const rawMax = Math.max(...allH), rawMin = Math.min(...allL);
+  const pad = (rawMax - rawMin) * 0.07;
+  const maxP = rawMax + pad, minP = rawMin - pad, range = maxP - minP;
+  const toY = p => PT + (1 - (p - minP) / range) * cH;
+  const toX = i => PL + (i + 0.5) * (cW / n);
+  const bW  = Math.max(2, cW / n * 0.65);
+
+  const yTicks = [];
+  for (let k = 0; k <= 5; k++) yTicks.push(minP + k * range / 5);
+
+  const monthLabels = [];
+  let lastMonth = null;
+  ohlcv.forEach((d, i) => {
+    const m = d.d.slice(0, 7);
+    if (m !== lastMonth) { monthLabels.push({ i, label: d.d.slice(5,7)+"/"+d.d.slice(2,4) }); lastMonth = m; }
+  });
+
+  const { gwsdHigh, breakoutIdx, breakoutPrice, broken, prevGwsdHigh, prevBreakoutIdx } = structure || {};
+
+  // Index-Linie (grau) – normalisiert auf Aktien-Preisskala
+  const benchLine = useMemo(() => {
+    if (!benchOhlcv || !ohlcv.length) return [];
+    const benchMap = {};
+    benchOhlcv.forEach(d => { benchMap[d.d] = d.c; });
+    let stockRef = null, benchRef = null;
+    for (const d of ohlcv) {
+      if (benchMap[d.d] != null) { stockRef = d.c; benchRef = benchMap[d.d]; break; }
+    }
+    if (!stockRef || !benchRef) return [];
+    return ohlcv.map((d, i) => {
+      const bc = benchMap[d.d];
+      return bc != null ? { i, price: stockRef * (bc / benchRef) } : null;
+    }).filter(Boolean);
+  }, [benchOhlcv, ohlcv]);
+  const gwsdColor   = "#ef4444";
+  const gwsdLineEnd = breakoutIdx !== null ? breakoutIdx : n - 1;
+
+  const handleMouseMove = useCallback((e) => {
+    const svg = svgRef.current; if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    const idx = Math.round((mx - PL) / (cW / n) - 0.5);
+    setHover(idx >= 0 && idx < n ? idx : null);
+  }, [n, cW]);
+
+  const hd = hover !== null ? ohlcv[hover] : null;
+
+  return (
+    <div className="chart-wrap" style={{background:"#07090f",borderRadius:8,border:"1px solid #1e293b",overflow:"hidden"}}>
+      <div style={{height:28,padding:"0 12px",display:"flex",alignItems:"center",gap:14,background:"#0a0f1e",borderBottom:"1px solid #1e293b",fontSize:10,fontFamily:"monospace"}}>
+        {hd ? <>
+          <span style={{color:"#475569"}}>{hd.d}</span>
+          <span>O <span style={{color:"#e2e8f0"}}>{hd.o.toFixed(2)}</span></span>
+          <span>H <span style={{color:"#4ade80"}}>{hd.h.toFixed(2)}</span></span>
+          <span>L <span style={{color:"#f87171"}}>{hd.l.toFixed(2)}</span></span>
+          <span>C <span style={{color:hd.c>=hd.o?"#4ade80":"#f87171",fontWeight:700}}>{hd.c.toFixed(2)}</span></span>
+          <span style={{color:"#475569",marginLeft:"auto"}}>{hd.c>=hd.o?"▲":"▼"} {((hd.c-hd.o)/hd.o*100).toFixed(2)}%</span>
+        </> : <span style={{color:"#334155"}}>Hover für Daily-Details</span>}
+      </div>
+
+      <svg ref={svgRef} width="100%" viewBox={`0 0 ${W} ${H}`}
+        onMouseMove={handleMouseMove} onMouseLeave={()=>setHover(null)} style={{cursor:"crosshair"}}>
+        <defs>
+          <linearGradient id={`bg_${chartId}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.12"/>
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.01"/>
+          </linearGradient>
+          <clipPath id={`clipD_${chartId}`}>
+            <rect x={PL} y={PT} width={cW} height={cH}/>
+          </clipPath>
+        </defs>
+        <rect x={PL} y={PT} width={cW} height={cH} fill="#07090f"/>
+
+        {/* Gitter */}
+        {yTicks.map((val, k) => {
+          const y = toY(val);
+          return <g key={k}>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#1a2235" strokeWidth="0.8"/>
+            <text x={PL-5} y={y+3.5} textAnchor="end" fill="#334155" fontSize="9" fontFamily="monospace">{val.toFixed(0)}</text>
+          </g>;
+        })}
+
+        {/* Monatstrennlinien */}
+        {monthLabels.map(({i, label}) => (
+          <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,4" opacity="0.25"/>
+            <text x={toX(i)} y={PT+cH+14} textAnchor="middle" fill="#334155" fontSize="8.5" fontFamily="monospace">{label}</text>
+          </g>
+        ))}
+
+        {/* Breakout-Zone */}
+        {breakoutIdx !== null && (
+          <rect x={toX(breakoutIdx)} y={PT}
+            width={PL+cW-toX(breakoutIdx)} height={cH}
+            fill={`url(#bg_${chartId})`}/>
+        )}
+
+        {/* Index-Linie (grau) */}
+        {benchLine.length > 1 && (
+          <polyline
+            points={benchLine.map(({i, price}) => `${toX(i)},${toY(price)}`).join(' ')}
+            fill="none" stroke="#64748b" strokeWidth="1.2" opacity="0.55"
+            clipPath={`url(#clipD_${chartId})`}/>
+        )}
+
+        {/* Vorheriger GWS-D Break (gedimmt) */}
+        {prevGwsdHigh && (() => {
+          const prevLineEnd = prevBreakoutIdx !== null ? prevBreakoutIdx : (gwsdHigh ? gwsdHigh.idx : n - 1);
+          const y  = toY(prevGwsdHigh.price);
+          const x1 = toX(prevGwsdHigh.idx);
+          const x2 = toX(prevLineEnd);
+          return <>
+            <line x1={x1} x2={x2} y1={y} y2={y} stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/>
+          </>;
+        })()}
+
+        {/* Aktueller GWS-D */}
+        {gwsdHigh && (() => {
+          const levelPrice = breakoutPrice ?? gwsdHigh.price;
+          const y  = toY(levelPrice);
+          const x1 = toX(gwsdHigh.idx);
+          const x2 = toX(gwsdLineEnd);
+          return <line x1={x1} x2={x2} y1={y} y2={y} stroke={gwsdColor} strokeWidth="1.8" strokeDasharray="5,4"/>;
+        })()}
+
+                {/* Trend-Fallback: kein GWS aber höhere Hochs (Daily) */}
+        {broken && !gwsdHigh && structure?.swingHighs?.length >= 2 && (() => {
+          const lastSH = structure.swingHighs[structure.swingHighs.length - 1];
+          const y = toY(lastSH.price);
+          return <>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#4ade80" strokeWidth="1.2" strokeDasharray="3,6" opacity="0.7"/>
+            <text x={PL+6} y={y-4} fill="#4ade80" fontSize="8" fontFamily="monospace" opacity="0.8">Trend ↑</text>
+          </>;
+        })()}
+
+        {/* Kerzen */}
+        {ohlcv.map((d, i) => {
+          const bull = d.c >= d.o;
+          const isBoc = i === breakoutIdx;
+          const col  = bull ? "#22c55e" : "#ef4444";
+          const bTop = toY(Math.max(d.o, d.c));
+          const bH   = Math.max(1.5, toY(Math.min(d.o, d.c)) - bTop);
+          const isHov = hover === i;
+          return <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={toY(d.h)} y2={toY(d.l)} stroke={col} strokeWidth={isHov?1.5:1} opacity={0.9}/>
+            <rect x={toX(i)-bW/2} y={bTop} width={bW} height={bH}
+              fill={col} opacity={isBoc?1:isHov?0.95:0.8}
+              stroke={isBoc?"#ef4444":"none"} strokeWidth={isBoc?1.2:0}/>
+          </g>;
+        })}
+
+        {/* Trade-Marker mit SL-Linie */}
+        {tradeMarkers.map((m, mi) => {
+          const target = m.date.slice(0,10);
+          let best = Infinity, idx = -1;
+          ohlcv.forEach((d, i) => { const diff = Math.abs(new Date(d.d.slice(0,10)) - new Date(target)); if (diff < best) { best = diff; idx = i; } });
+          if (idx < 0 || best > 2 * 86400000) return null;
+          const x = toX(idx);
+          if (m.type === 'entry') {
+            const yTip = Math.min(toY(ohlcv[idx].l) + 3, PT + cH - 16);
+            const ySL  = m.stopPrice != null ? toY(m.stopPrice) : null;
+            const x2SL = Math.min(toX(idx + 5), PL + cW - 4);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip+10} ${x+5},${yTip+10} ${x},${yTip}`} fill="#4ade80" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip+10} y2={Math.min(yTip+20, PT+cH)} stroke="#4ade80" strokeWidth="1.5"/>
+              {ySL != null && ySL > PT && ySL < PT + cH && <>
+                <line x1={x} x2={x2SL} y1={ySL} y2={ySL} stroke="#e2e8f0" strokeWidth="1.2" strokeDasharray="4,3" opacity="0.85"/>
+                <text x={x2SL + 2} y={ySL + 3} fill="#e2e8f0" fontSize="8" fontFamily="monospace" opacity="0.85">SL</text>
+              </>}
+            </g>;
+          } else {
+            const yTip = Math.max(toY(ohlcv[idx].h) - 3, PT + 14);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
+            </g>;
+          }
+        })}
+
+        {/* Signal-Pfeile (Daily-Chart: alle Signale mit daily_bar_date) */}
+        {signals.filter(s => s.daily_bar_date).map((sig, si) => {
+          const idx = ohlcv.findIndex(d => d.d.slice(0,10) === sig.daily_bar_date.slice(0,10));
+          if (idx < 0) return null;
+          const x = toX(idx);
+          const yTip = Math.min(toY(ohlcv[idx].l) + 4, PT + cH - 28);
+          const lbl = [sig.weekly_bar_date&&'W', sig.daily_bar_date&&'D', sig.h4_bar_date&&'4H'].filter(Boolean).join('/');
+          return <g key={si}>
+            <rect x={x-6} y={yTip-2} width={12} height={22} rx={2} fill="#eab308" opacity={0.2}/>
+            <polygon points={`${x-4},${yTip+8} ${x+4},${yTip+8} ${x},${yTip}`} fill="#eab308" opacity="0.95"/>
+            <line x1={x} x2={x} y1={yTip+8} y2={yTip+18} stroke="#eab308" strokeWidth="1.5" opacity="0.95"/>
+            <text x={x} y={yTip+28} textAnchor="middle" fill="#eab308" fontSize="7" fontFamily="monospace" opacity="0.9">{lbl}</text>
+          </g>;
+        })}
+
+        {/* Aktueller Preis */}
+        <line x1={PL} x2={PL+cW} y1={toY(ohlcv[n-1].c)} y2={toY(ohlcv[n-1].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.45"/>
+        <rect x={PL+cW+2} y={toY(ohlcv[n-1].c)-8} width={46} height={15} rx="3" fill="#1e293b"/>
+        <text x={PL+cW+25} y={toY(ohlcv[n-1].c)+3} textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontFamily="monospace">{ohlcv[n-1].c.toFixed(2)}</text>
+
+        {/* Crosshair */}
+        {hover !== null && <>
+          <line x1={toX(hover)} x2={toX(hover)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+          <line x1={PL} x2={PL+cW} y1={toY(ohlcv[hover].c)} y2={toY(ohlcv[hover].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+          <rect x={PL-52} y={toY(ohlcv[hover].c)-8} width={48} height={15} rx="3" fill="#1e293b"/>
+          <text x={PL-28} y={toY(ohlcv[hover].c)+3} textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontFamily="monospace">{ohlcv[hover].c.toFixed(2)}</text>
+        </>}
+        <rect x={PL} y={PT} width={cW} height={cH} fill="none" stroke="#1e293b" strokeWidth="0.8"/>
+      </svg>
+
+      <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>GWS-D</span>
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
+        </div>
+        {benchLine.length > 1 && benchLabel && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>{benchLabel}</span>
+          </div>
+        )}
+        {signals.filter(s => s.trigger_tf === 'daily' || s.trigger_tf === '4h').length > 0 && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
+            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
+          </div>
+        )}
+        <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcv.length} Tage · Daily</div>
+      </div>
+    </div>
+  );
+}
+
+// ── 4H Candlestick Chart (60 Kerzen) ─────────────────────────────────────────
+function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [] }) {
+  const svgRef = useRef(null);
+  const [hover, setHover] = useState(null);
+  const W = 600, H = 260;
+  const PL = 56, PR = 52, PT = 18, PB = 32;
+  const cW = W - PL - PR, cH = H - PT - PB;
+
+  const display4h = useMemo(() => ohlcv4h, [ohlcv4h]);
+  const n = display4h.length;
+
+  const allH = display4h.map(d => d.h), allL = display4h.map(d => d.l);
+  const rawMax = Math.max(...allH), rawMin = Math.min(...allL);
+  const pad = (rawMax - rawMin) * 0.07;
+  const maxP = rawMax + pad, minP = rawMin - pad, range = maxP - minP;
+  const toY = p => PT + (1 - (p - minP) / range) * cH;
+  const toX = i => PL + (i + 0.5) * (cW / n);
+  const bW  = Math.max(1.5, cW / n * 0.65);
+
+  const yTicks = [];
+  for (let k = 0; k <= 5; k++) yTicks.push(minP + k * range / 5);
+
+  const dayLabels = [];
+  let lastDay = null;
+  display4h.forEach((d, i) => {
+    const day = d.d.slice(0, 10);
+    if (day !== lastDay && i % 2 === 0) { dayLabels.push({ i, label: d.d.slice(5, 10) }); lastDay = day; }
+  });
+
+  const offset = 0;
+  const { gws4hHigh, breakout4hIdx, broken4h, prevGws4hHigh, prevBreakout4hIdx } = structure4h || {};
+  const col4h = broken4h ? "#ef4444" : "#a78bfa";
+
+  const localGws4hIdx      = gws4hHigh      ? gws4hHigh.idx - offset      : null;
+  const localBreakout4hIdx = breakout4hIdx  !== null ? breakout4hIdx - offset  : null;
+  const localPrevGws4hIdx  = prevGws4hHigh  ? prevGws4hHigh.idx - offset  : null;
+  const localPrevBreakIdx  = prevBreakout4hIdx !== null ? prevBreakout4hIdx - offset : null;
+
+  const lineEnd4h = localBreakout4hIdx !== null && localBreakout4hIdx >= 0
+    ? Math.min(localBreakout4hIdx, n - 1)
+    : n - 1;
+
+  const handleMouseMove = useCallback((e) => {
+    const svg = svgRef.current; if (!svg) return;
+    const rect = svg.getBoundingClientRect();
+    const mx = (e.clientX - rect.left) * (W / rect.width);
+    const idx = Math.round((mx - PL) / (cW / n) - 0.5);
+    setHover(idx >= 0 && idx < n ? idx : null);
+  }, [n, cW]);
+
+  const hd = hover !== null ? display4h[hover] : null;
+
+  return (
+    <div className="chart-wrap" style={{background:"#07090f",borderRadius:8,border:"1px solid #1e293b",overflow:"hidden"}}>
+      <div style={{height:28,padding:"0 12px",display:"flex",alignItems:"center",gap:14,background:"#0a0f1e",borderBottom:"1px solid #1e293b",fontSize:10,fontFamily:"monospace"}}>
+        {hd ? <>
+          <span style={{color:"#475569"}}>{hd.d}</span>
+          <span>O <span style={{color:"#e2e8f0"}}>{hd.o.toFixed(2)}</span></span>
+          <span>H <span style={{color:"#4ade80"}}>{hd.h.toFixed(2)}</span></span>
+          <span>L <span style={{color:"#f87171"}}>{hd.l.toFixed(2)}</span></span>
+          <span>C <span style={{color:hd.c>=hd.o?"#4ade80":"#f87171",fontWeight:700}}>{hd.c.toFixed(2)}</span></span>
+        </> : <span style={{color:"#334155"}}>Hover für 4H-Details</span>}
+      </div>
+
+      <svg ref={svgRef} width="100%" viewBox={`0 0 ${W} ${H}`}
+        onMouseMove={handleMouseMove} onMouseLeave={()=>setHover(null)} style={{cursor:"crosshair"}}>
+        <defs>
+          <linearGradient id={`g4h_${chartId}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" stopOpacity="0.13"/>
+            <stop offset="100%" stopColor="#22c55e" stopOpacity="0.01"/>
+          </linearGradient>
+        </defs>
+        <rect x={PL} y={PT} width={cW} height={cH} fill="#07090f"/>
+
+        {yTicks.map((val, k) => {
+          const y = toY(val);
+          return <g key={k}>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#1a2235" strokeWidth="0.8"/>
+            <text x={PL-5} y={y+3.5} textAnchor="end" fill="#334155" fontSize="9" fontFamily="monospace">{val.toFixed(0)}</text>
+          </g>;
+        })}
+
+        {/* Tagestrennlinien */}
+        {dayLabels.map(({i, label}) => (
+          <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,4" opacity="0.25"/>
+            <text x={toX(i)} y={PT+cH+14} textAnchor="middle" fill="#334155" fontSize="8" fontFamily="monospace">{label}</text>
+          </g>
+        ))}
+
+        {/* Breakout-Zone 4H */}
+        {localBreakout4hIdx !== null && localBreakout4hIdx >= 0 && (
+          <rect x={toX(localBreakout4hIdx)} y={PT} width={PL+cW-toX(localBreakout4hIdx)} height={cH} fill={`url(#g4h_${chartId})`}/>
+        )}
+
+        {/* Vorheriger GWS-4H Break (gedimmt) */}
+        {prevGws4hHigh && localPrevGws4hIdx !== null && localPrevGws4hIdx >= 0 && (() => {
+          const prevEnd = localPrevBreakIdx !== null && localPrevBreakIdx >= 0
+            ? Math.min(localPrevBreakIdx, localGws4hIdx !== null && localGws4hIdx >= 0 ? localGws4hIdx : n - 1)
+            : (localGws4hIdx !== null && localGws4hIdx >= 0 ? localGws4hIdx : n - 1);
+          const y  = toY(prevGws4hHigh.price);
+          const x1 = toX(Math.max(0, localPrevGws4hIdx));
+          const x2 = toX(prevEnd);
+          return <>
+            <line x1={x1} x2={x2} y1={y} y2={y} stroke={col4h} strokeWidth="1.1" strokeDasharray="4,4" opacity="0.3"/>
+          </>;
+        })()}
+
+        {/* Aktueller GWS-4H */}
+        {gws4hHigh && localGws4hIdx !== null && localGws4hIdx >= 0 && (() => {
+          const y  = toY(gws4hHigh.price);
+          const x1 = toX(localGws4hIdx);
+          const x2 = toX(lineEnd4h);
+          return <>
+            <line x1={x1} x2={x2} y1={y} y2={y} stroke={col4h} strokeWidth="1.8" strokeDasharray="4,3"/>
+          </>;
+        })()}
+
+                {/* Trend-Fallback: kein GWS aber höhere Hochs (4H) */}
+        {broken4h && !gws4hHigh && structure4h?.swingHighs?.length >= 2 && (() => {
+          const lastSH4h = structure4h.swingHighs[structure4h.swingHighs.length - 1];
+          const localIdx = lastSH4h.idx - offset;
+          if (localIdx < 0) return null;
+          const y = toY(lastSH4h.price);
+          return <>
+            <line x1={PL} x2={PL+cW} y1={y} y2={y} stroke="#4ade80" strokeWidth="1.2" strokeDasharray="3,6" opacity="0.7"/>
+            <text x={PL+6} y={y-4} fill="#4ade80" fontSize="8" fontFamily="monospace" opacity="0.8">Trend ↑</text>
+          </>;
+        })()}
+
+        {/* Kerzen 4H */}
+        {display4h.map((d, i) => {
+          const bull = d.c >= d.o;
+          const isBoc = i === localBreakout4hIdx;
+          const col  = bull ? "#22c55e" : "#ef4444";
+          const bTop = toY(Math.max(d.o, d.c));
+          const bH   = Math.max(1, toY(Math.min(d.o, d.c)) - bTop);
+          const isHov = hover === i;
+          return <g key={i}>
+            <line x1={toX(i)} x2={toX(i)} y1={toY(d.h)} y2={toY(d.l)} stroke={col} strokeWidth={isHov?1.5:0.8} opacity={0.85}/>
+            <rect x={toX(i)-bW/2} y={bTop} width={bW} height={bH}
+              fill={col} opacity={isBoc?1:isHov?0.95:0.75}
+              stroke={isBoc?col4h:"none"} strokeWidth={isBoc?1:0}/>
+          </g>;
+        })}
+
+        {/* Trade-Marker */}
+        {tradeMarkers.map((m, mi) => {
+          const target = m.date.slice(0,10);
+          let best = Infinity, idx = -1;
+          display4h.forEach((d, i) => { const diff = Math.abs(new Date(d.d.slice(0,10)) - new Date(target)); if (diff < best) { best = diff; idx = i; } });
+          if (idx < 0 || best > 3 * 86400000) return null;
+          const x = toX(idx);
+          if (m.type === 'entry') {
+            const yTip = Math.min(toY(display4h[idx].l) + 3, PT + cH - 16);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip+10} ${x+5},${yTip+10} ${x},${yTip}`} fill="#4ade80" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip+10} y2={Math.min(yTip+20, PT+cH)} stroke="#4ade80" strokeWidth="1.5"/>
+            </g>;
+          } else {
+            const yTip = Math.max(toY(display4h[idx].h) - 3, PT + 14);
+            return <g key={`tm${mi}`}>
+              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
+              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
+            </g>;
+          }
+        })}
+
+        {/* Signal-Pfeile (4H-Chart: alle Signale mit h4_bar_date) */}
+        {signals.filter(s => s.h4_bar_date).map((sig, si) => {
+          const idx = display4h.findIndex(d => d.d.slice(0,16) === sig.h4_bar_date.slice(0,16));
+          if (idx < 0) return null;
+          const x = toX(idx);
+          const yTip = Math.min(toY(display4h[idx].l) + 4, PT + cH - 20);
+          return <g key={si}>
+            <rect x={x-6} y={yTip-2} width={12} height={22} rx={2} fill="#eab308" opacity={0.2}/>
+            <polygon points={`${x-4},${yTip+8} ${x+4},${yTip+8} ${x},${yTip}`} fill="#eab308" opacity="0.95"/>
+            <line x1={x} x2={x} y1={yTip+8} y2={yTip+18} stroke="#eab308" strokeWidth="1.5" opacity="0.95"/>
+          </g>;
+        })}
+
+        {/* Aktueller Preis */}
+        <line x1={PL} x2={PL+cW} y1={toY(display4h[n-1].c)} y2={toY(display4h[n-1].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.45"/>
+        <rect x={PL+cW+2} y={toY(display4h[n-1].c)-8} width={46} height={15} rx="3" fill="#1e293b"/>
+        <text x={PL+cW+25} y={toY(display4h[n-1].c)+3} textAnchor="middle" fill="#94a3b8" fontSize="8.5" fontFamily="monospace">{display4h[n-1].c.toFixed(2)}</text>
+
+        {/* Crosshair */}
+        {hover !== null && <>
+          <line x1={toX(hover)} x2={toX(hover)} y1={PT} y2={PT+cH} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+          <line x1={PL} x2={PL+cW} y1={toY(display4h[hover].c)} y2={toY(display4h[hover].c)} stroke="#7dd3fc" strokeWidth="0.7" strokeDasharray="2,3" opacity="0.5"/>
+        </>}
+        <rect x={PL} y={PT} width={cW} height={cH} fill="none" stroke="#1e293b" strokeWidth="0.8"/>
+      </svg>
+
+      <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>GWS-4H</span>
+        </div>
+        <div style={{display:"flex",alignItems:"center",gap:4}}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.1" strokeDasharray="4,4" opacity="0.3"/></svg>
+          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
+        </div>
+        {signals.filter(s => s.trigger_tf === '4h').length > 0 && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
+            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
+          </div>
+        )}
+        <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{n} Kerzen (von {ohlcv4h.length}) · 4H</div>
+      </div>
+    </div>
+  );
+}
+
+
+// ── Hilfsfunktionen ────────────────────────────────────────────────────────
+
+function PktDot({ val, has }) {
+  if (!has) return <span style={{color:'#334155',fontSize:11,fontFamily:'monospace'}}>–</span>;
+  return <span className="dot" style={{background: val ? '#4ade80' : '#1e293b', border: val ? 'none' : '1px solid #334155'}}/>;
+}
+
+function PktBadge({ pts, has4h }) {
+  const max = has4h ? 3 : 2;
+  const colors = ['#1e293b','#854d0e','#713f12','#14532d'];
+  const textColors = ['#475569','#fbbf24','#fde047','#4ade80'];
+  return (
+    <span style={{
+      display:'inline-block', minWidth:28, textAlign:'center',
+      background: pts >= max ? colors[3] : pts >= 2 ? colors[2] : pts >= 1 ? colors[1] : colors[0],
+      color: pts >= max ? textColors[3] : pts >= 2 ? textColors[2] : pts >= 1 ? textColors[1] : textColors[0],
+      borderRadius:4, padding:'1px 6px', fontFamily:'monospace', fontSize:12, fontWeight:700
+    }}>{pts}{has4h ? '' : '*'}</span>
+  );
+}
+
+// ── Equity-Kurve ─────────────────────────────────────────────────────────────
+function EquityCurve({ curve }) {
+  const W = 600, H = 90, PL = 52, PR = 12, PT = 8, PB = 22;
+  const cW = W - PL - PR, cH = H - PT - PB;
+  const equities = curve.map(p => p.equity);
+  const minE = Math.min(...equities), maxE = Math.max(...equities);
+  const range = maxE - minE || 1;
+  const toX = i => PL + (i / (curve.length - 1)) * cW;
+  const toY = e => PT + cH - ((e - minE) / range) * cH;
+  const pts = curve.map((p, i) => `${toX(i)},${toY(p.equity)}`).join(' ');
+  const yBase = toY(10000);
+  return (
+    <div style={{marginBottom:12}}>
+      <svg viewBox={`0 0 ${W} ${H}`} style={{width:'100%',maxWidth:W,display:'block',
+        background:'#07090f',borderRadius:6,border:'1px solid #1e293b'}}>
+        <line x1={PL} x2={W-PR} y1={yBase} y2={yBase} stroke="#1e293b" strokeWidth="1" strokeDasharray="4,3"/>
+        <text x={PL-4} y={yBase+3} fill="#334155" fontSize="7" textAnchor="end">10k</text>
+        <polyline points={pts} fill="none" stroke="#4ade80" strokeWidth="1.5"/>
+        {curve.map((p, i) => (
+          <circle key={i} cx={toX(i)} cy={toY(p.equity)} r="2.5"
+            fill={p.equity >= 10000 ? '#4ade80' : '#f87171'} opacity="0.9"/>
+        ))}
+        <text x={PL-4} y={PT+6} fill="#475569" fontSize="7" textAnchor="end">
+          {maxE >= 10000 ? '+' : ''}€{(maxE-10000).toFixed(0)}
+        </text>
+        <text x={PL-4} y={H-PB+6} fill="#475569" fontSize="7" textAnchor="end">
+          {minE >= 10000 ? '+' : ''}€{(minE-10000).toFixed(0)}
+        </text>
+        <text x={W/2} y={H-3} fill="#334155" fontSize="7" textAnchor="middle">
+          Equity-Kurve · {curve.length - 1} abgeschl. Trades · Start €10.000
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+const fmtK = v => Math.round(Math.abs(v)).toLocaleString('de-DE');
+
+// ── Backtest App ────────────────────────────────────────────────────────────
+function BacktestApp() {
+  const [data,        setData]        = useState(null);
+  const [ticker,      setTicker]      = useState('SNDK');
+  const [loadError,   setLoadError]   = useState(null);
+  const [loading,     setLoading]     = useState(true);
+  const [selectedIdx, setSelectedIdx] = useState(null);
+  const [top20Hist,   setTop20Hist]   = useState(null);
+  const [useTop20,    setUseTop20]    = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
+  const chartRef     = useRef(null);
+  const weekTableRef = useRef(null);
+  const weekRowRefs  = useRef({});
+
+  useEffect(() => {
+    const params      = new URLSearchParams(window.location.search);
+    const t           = (params.get('t') || localStorage.getItem('bt_last_ticker') || 'SNDK').toUpperCase();
+    localStorage.setItem('bt_last_ticker', t);
+    setTicker(t);
+    document.title    = `RS · Backtest ${t}`;
+    const jsonFile    = `/api/backtest/${t}`;
+
+    window.apiFetch(jsonFile)
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(d => {
+        const ohlcv_w = (d.ohlcv_w || []).slice(-104);
+        const cutDate = ohlcv_w[0]?.d ?? '2000-01-01';
+        setData({
+          ...d,
+          ohlcv_w,
+          ohlcv_d:  (d.ohlcv_d  || []).filter(x => x.d >= cutDate),
+          ohlcv_4h: (d.ohlcv_4h || []).filter(x => x.d.slice(0,10) >= cutDate),
+        });
+        setLoading(false);
+      })
+      .catch(() => {
+        // Fallback: Daten aus den RS-JSON-Dateien laden
+        const sources = ['/api/rs/nasdaq', '/api/rs/sp500', '/api/rs/dax'];
+        Promise.any(
+          sources.map(src =>
+            window.apiFetch(src)
+              .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP error')))
+              .then(d => {
+                const entry = (d.data || []).find(e => e.ticker === t);
+                if (!entry) throw new Error('not found');
+                return {
+                  ohlcv_w:   entry.ohlcv_w  || [],
+                  ohlcv_d:   entry.ohlcv    || [],
+                  ohlcv_4h:  entry.ohlcv_4h || [],
+                  generated: d.generated    || '–',
+                };
+              })
+          )
+        )
+        .then(d => { setData(d); setLoading(false); })
+        .catch(e => { setLoadError(e.message); setLoading(false); });
+    });
+
+    // top20_history immer laden – unabhängig ob backtest-JSON oder rs-JSON
+    const rsFiles = ['/api/rs/nasdaq', '/api/rs/sp500', '/api/rs/dax'];
+    Promise.any(rsFiles.map(f =>
+      window.apiFetch(f).then(r => r.ok ? r.json() : Promise.reject())
+        .then(d => {
+          if (!(d.data || []).find(e => e.ticker === t)) throw new Error('not found');
+          if (!d.top20_history) throw new Error('no history');
+          return d.top20_history;
+        })
+    )).then(h => setTop20Hist(h)).catch(() => setTop20Hist(null));
+  }, []);
+
+  // ── Pre-Compute aller Wochen mit historisch korrekt geschnittenen Daten ──
+  const weekRows = useMemo(() => {
+    if (!data) return [];
+    return buildWeekRows(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h);
+  }, [data]);
+
+  const sel = selectedIdx !== null ? weekRows[selectedIdx] : null;
+
+  // ── Trade-Simulation ──────────────────────────────────────────────────────
+  const CAPITAL  = 10000;
+  const MAX_RISK = 1000;
+
+  const trades = useMemo(() => {
+    if (!data) return [];
+    return simulateTrades(weekRows, data.ohlcv_d, ticker, top20Hist, useTop20);
+  }, [weekRows, data, top20Hist, useTop20]);
+
+  const kpis = useMemo(() => {
+    const closed = trades.filter(t => !t.isOpen);
+    if (closed.length === 0) return null;
+    const wins   = closed.filter(t =>  t.isWin);
+    const losses = closed.filter(t => !t.isWin);
+    const grossWin  = wins.reduce((s, t) => s + t.pnl, 0);
+    const grossLoss = Math.abs(losses.reduce((s, t) => s + t.pnl, 0));
+    let equity = CAPITAL, peak = CAPITAL, maxDD = 0;
+    const equityCurve = [{ equity: CAPITAL }];
+    for (const t of closed) {
+      equity += t.pnl; peak = Math.max(peak, equity);
+      maxDD = Math.max(maxDD, (peak - equity) / peak * 100);
+      equityCurve.push({ date: t.exitDate, equity });
+    }
+    const gesamtGewinn = trades.reduce((s, t) => s + t.pnl, 0);
+    return {
+      nTrades: closed.length, nWins: wins.length, nLosses: losses.length,
+      winrate: wins.length / closed.length * 100,
+      profitFactor: grossLoss > 0 ? grossWin / grossLoss : null,
+      maxDD, avgWin: wins.length > 0 ? grossWin / wins.length : 0,
+      avgLoss: losses.length > 0 ? grossLoss / losses.length : 0,
+      gesamtGewinn, equityCurve,
+    };
+  }, [trades]);
+
+  const tradeMarkers = useMemo(() =>
+    trades.flatMap(t => [
+      { date: t.entryDate, weeklyDate: t.weeklyDate, type: 'entry', stopPrice: t.stopPrice },
+      ...(!t.isOpen ? [{ date: t.exitDate, type: 'exit', price: t.exitPrice }] : []),
+    ]),
+  [trades]);
+
+  const handleRowClick = (i) => {
+    setSelectedIdx(prev => prev === i ? null : i);
+    setTimeout(() => chartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+  };
+
+  const handleTradeClick = (t) => {
+    const target = t.weeklyDate?.slice(0,10);
+    const row = weekRows.find(r => r.week.d.slice(0,10) === target);
+    if (!row) return;
+    setSelectedIdx(row.i);
+    setTimeout(() => {
+      const el = weekRowRefs.current[row.i];
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  };
+
+  // Neueste zuerst
+  const tableRows = [...weekRows].reverse();
+
+  if (loading) return (
+    <div style={{padding:'80px 24px',textAlign:'center',color:'#475569',fontFamily:'monospace'}}>
+      Lade {ticker} …
+    </div>
+  );
+
+  if (loadError) return (
+    <div style={{padding:'80px 24px',textAlign:'center',fontFamily:'monospace'}}>
+      <div style={{color:'#f87171',fontSize:15,marginBottom:16}}>Keine Daten gefunden</div>
+      <div style={{color:'#64748b',fontSize:13,marginBottom:8}}>Bitte zuerst ausführen:</div>
+      <code style={{background:'#1e293b',color:'#fbbf24',padding:'8px 18px',borderRadius:6,fontSize:13,display:'inline-block'}}>
+        python3 load_backtest.py
+      </code>
+      <div style={{color:'#334155',fontSize:11,marginTop:12}}>({loadError})</div>
+    </div>
+  );
+
+  return (
+    <div style={{padding:'56px 12px 32px'}}>
+
+      {/* ── Header ── */}
+      <div style={{marginBottom:14,display:'flex',alignItems:'center',gap:16,flexWrap:'wrap'}}>
+        <div>
+          <span style={{fontSize:20,fontWeight:800,color:'#f1f5f9',fontFamily:'monospace'}}>{ticker}</span>
+          <span style={{fontSize:12,color:'#475569',marginLeft:10,fontFamily:'monospace'}}>Backtest · historische GWS-Punkte</span>
+        </div>
+        <button onClick={() => { const v = !useTop20; setUseTop20(v); localStorage.setItem('bt_use_top20', v); }}
+          style={{ background: useTop20 ? '#14532d' : 'transparent',
+            border: `1px solid ${useTop20 ? '#4ade80' : '#334155'}`,
+            borderRadius: 6, padding: '5px 14px', color: useTop20 ? '#4ade80' : '#475569',
+            fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+          TOP 20 {useTop20 ? 'AN' : 'AUS'}
+        </button>
+        <div style={{marginLeft:'auto',fontSize:11,color:'#334155',fontFamily:'monospace'}}>
+          {weekRows.length} Wochen · Stand {data.generated}
+        </div>
+      </div>
+
+      <div style={{marginBottom:10,fontSize:11,color:'#475569',fontFamily:'monospace'}}>
+        Legende:&nbsp;
+        <span className="dot" style={{background:'#4ade80',display:'inline-block',verticalAlign:'middle'}}/> = GWS gebrochen &nbsp;
+        <span className="dot" style={{background:'#1e293b',border:'1px solid #334155',display:'inline-block',verticalAlign:'middle'}}/> = kein Bruch &nbsp;
+        <span style={{color:'#94a3b8'}}>* = kein 4H-Daten für diese Woche</span>
+      </div>
+
+      {/* ── KPI-Boxen + Equity-Kurve ── */}
+      {kpis && (
+        <div style={{marginBottom:12}}>
+          <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(110px,1fr))',gap:6,marginBottom:8}}>
+            {[
+              ['Trades',        trades.length,                                                              '',  '#94a3b8'],
+              ['Winrate',       kpis.winrate.toFixed(0),                                                    '%', kpis.winrate >= 50 ? '#4ade80' : '#f87171'],
+              ['Profit Faktor', kpis.profitFactor != null ? kpis.profitFactor.toFixed(2) : '∞',             '',  kpis.profitFactor == null || kpis.profitFactor >= 1 ? '#4ade80' : '#f87171'],
+              ['Max Drawdown',  kpis.maxDD.toFixed(1),                                                      '%', '#f87171'],
+              ['Ø Win',         '+' + fmtK(kpis.avgWin) + '€',                                            '',  '#4ade80'],
+              ['Ø Loss',        '−' + fmtK(kpis.avgLoss) + '€',                                           '',  '#f87171'],
+              ['Gesamtgewinn',  (kpis.gesamtGewinn >= 0 ? '+' : '−') + fmtK(kpis.gesamtGewinn) + '€',   '', kpis.gesamtGewinn >= 0 ? '#4ade80' : '#f87171'],
+            ].map(([label, val, unit, color]) => (
+              <div key={label} style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:8,padding:'8px 10px',fontFamily:'monospace'}}>
+                <div style={{fontSize:9,color:'#475569',marginBottom:3,letterSpacing:'0.04em'}}>{label}</div>
+                <div style={{fontSize:17,fontWeight:800,color,lineHeight:1}}>
+                  {val}<span style={{fontSize:10,fontWeight:400}}>{unit}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+          {kpis.equityCurve.length > 1 && <EquityCurve curve={kpis.equityCurve}/>}
+        </div>
+      )}
+      {!kpis && weekRows.length > 0 && (
+        <div style={{marginBottom:10,fontSize:11,color:'#475569',fontFamily:'monospace',
+          background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:8,padding:'10px 14px'}}>
+          Keine abgeschlossenen Trades im Datenzeitraum
+        </div>
+      )}
+
+      <div className="desktop-layout">
+
+        {/* ── Linke Spalte: Trade-Liste + Tabelle ── */}
+        <div className="desktop-left">
+
+          {/* Trade-Liste */}
+          {trades.length > 0 && (
+            <div style={{marginBottom:10}}>
+              <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,overflowX:'auto'}}>
+                <div style={{minWidth:540}}>
+                  <div style={{display:'grid',gridTemplateColumns:'80px 24px 72px 84px 72px 72px 62px 52px',
+                    gap:0,background:'#0f172a',borderBottom:'1px solid #1e293b',padding:'6px 12px',
+                    fontSize:10,fontWeight:700,color:'#475569',fontFamily:'monospace',letterSpacing:'0.04em'}}>
+                    <span>Entry</span><span>TF</span>
+                    <span style={{textAlign:'right'}}>Entry €</span>
+                    <span style={{textAlign:'right'}}>Exit</span>
+                    <span style={{textAlign:'right'}}>Exit €</span>
+                    <span style={{textAlign:'right'}}>Gewinn</span>
+                    <span style={{textAlign:'right'}}>Rendite</span>
+                    <span style={{textAlign:'right'}}>W</span>
+                  </div>
+                  {[...trades].reverse().map((t, i) => (
+                    <div key={i} onClick={() => handleTradeClick(t)}
+                      style={{display:'grid',gridTemplateColumns:'80px 24px 72px 84px 72px 72px 62px 52px',
+                      gap:0,padding:'5px 12px',borderBottom:'1px solid #0f172a',alignItems:'center',
+                      cursor:'pointer',
+                      background: t.isOpen ? '#0a1520' : t.isWin ? '#061206' : '#120606'}}>
+                      <span style={{fontFamily:'monospace',fontSize:11,color:'#94a3b8'}}>{t.entryDate}</span>
+                      <span style={{fontFamily:'monospace',fontSize:10,fontWeight:700,
+                        color: t.trigger==='4H'?'#a78bfa':t.trigger==='D'?'#38bdf8':'#fbbf24'}}>{t.trigger}</span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:'#cbd5e1'}}>{t.entryPrice.toFixed(2)}</span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:t.isOpen?'#fbbf24':'#94a3b8'}}>
+                        {t.isOpen ? 'offen ◆' : t.exitDate}
+                      </span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:t.isOpen?'#fbbf24':'#cbd5e1'}}>
+                        {t.exitPrice.toFixed(2)}
+                      </span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,fontWeight:700,color:t.pnl>=0?'#4ade80':'#f87171'}}>
+                        {t.pnl>=0?'+':'−'}{fmtK(t.pnl)}€
+                      </span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:t.pnlPct>=0?'#4ade80':'#f87171'}}>
+                        {t.pnlPct>=0?'+':''}{t.pnlPct.toFixed(1)}%
+                      </span>
+                      <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:'#475569'}}>{t.holdingWeeks}W</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,overflow:'hidden'}}>
+
+            {/* Tabellen-Header */}
+            <div style={{display:'grid',gridTemplateColumns:'72px 96px 72px 36px 36px 36px 40px',gap:0,
+              background:'#0f172a',borderBottom:'1px solid #1e293b',padding:'7px 12px',
+              fontSize:10,fontWeight:700,color:'#475569',fontFamily:'monospace',letterSpacing:'0.05em'}}>
+              <span>KW</span><span>Datum</span><span style={{textAlign:'right'}}>Close</span>
+              <span style={{textAlign:'center'}}>W</span>
+              <span style={{textAlign:'center'}}>D</span>
+              <span style={{textAlign:'center'}}>4H</span>
+              <span style={{textAlign:'center'}}>T20</span>
+            </div>
+
+            {/* Scroll-Container */}
+            <div ref={weekTableRef} style={{maxHeight:'75vh',overflowY:'auto',scrollbarGutter:'stable'}}>
+              {tableRows.map(row => {
+                const isSel = selectedIdx === row.i;
+                const bgPts = row.pts >= 3 ? '#0a1a0a'
+                            : row.pts === 2 && row.has4h ? '#1a1200'
+                            : row.pts >= 2 ? '#1a1200'
+                            : row.pts === 1 ? '#0f0f0f'
+                            : '#060b14';
+                const borderLeft = row.pts >= 3 ? '3px solid #4ade80'
+                                 : row.pts >= 2 ? '3px solid #fbbf24'
+                                 : row.pts >= 1 ? '3px solid #334155'
+                                 : '3px solid transparent';
+                const fri = new Date(row.weekEnd + 'T12:00:00Z');
+                fri.setUTCDate(fri.getUTCDate() - 1);
+                const friStr = fri.toISOString().slice(0,10);
+                const isT20 = top20Hist ? (top20Hist[friStr] || []).includes(ticker) : null;
+                return (
+                  <div key={row.i}
+                    ref={el => weekRowRefs.current[row.i] = el}
+                    className="tbl-row"
+                    onClick={() => handleRowClick(row.i)}
+                    style={{
+                      display:'grid', gridTemplateColumns:'72px 96px 72px 36px 36px 36px 40px',
+                      gap:0, padding:'5px 12px',
+                      background: isSel ? '#1a2f4a' : bgPts,
+                      borderLeft: isSel ? '3px solid #3b82f6' : borderLeft,
+                      borderBottom:'1px solid #0f172a',
+                      alignItems:'center'
+                    }}>
+                    <span style={{fontFamily:'monospace',fontSize:11,color: isSel?'#93c5fd':'#64748b'}}
+                      title={`W:${row.structW?.broken} D:${row.structD?.broken} 4H:${row.struct4H?.broken4h} | dSlice:${row.dSlice.length} gwsD:${row.structD?.gwsdHigh?.price}`}>
+                      KW {row.kw} / {row.year}
+                    </span>
+                    <span style={{fontFamily:'monospace',fontSize:11,color: isSel?'#e2e8f0':'#94a3b8'}}>
+                      {row.week.d}
+                    </span>
+                    <span style={{fontFamily:'monospace',fontSize:11,textAlign:'right',
+                      color: isSel?'#e2e8f0':'#cbd5e1', fontWeight:600}}>
+                      {row.week.c.toFixed(2)}
+                    </span>
+                    <span style={{textAlign:'center'}}><PktDot val={row.pW}  has={true}/></span>
+                    <span style={{textAlign:'center'}}><PktDot val={row.pD}  has={row.dSlice.length >= 10}/></span>
+                    <span style={{textAlign:'center'}}><PktDot val={row.p4H} has={row.has4h}/></span>
+                    <span style={{textAlign:'center'}}>
+                      {isT20 === null ? <span style={{color:'#334155',fontSize:9}}>–</span>
+                        : isT20 ? <span style={{color:'#4ade80',fontSize:9,fontWeight:700,fontFamily:'monospace'}}>T20</span>
+                        : <span style={{color:'#1e293b',fontSize:9}}>·</span>}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Rechte Spalte: Charts ── */}
+        <div className="desktop-right" ref={chartRef}>
+          {sel ? (
+            <div>
+              {/* Ausgewählte Woche Info */}
+              <div style={{background:'#0f172a',border:'1px solid #1e293b',borderRadius:10,
+                padding:'10px 14px',marginBottom:12,display:'flex',alignItems:'center',gap:12,flexWrap:'wrap'}}>
+                <span style={{fontFamily:'monospace',fontSize:14,fontWeight:800,color:'#f1f5f9'}}>
+                  {ticker} · KW {sel.kw} / {sel.year}
+                </span>
+                <span style={{fontFamily:'monospace',fontSize:11,color:'#64748b'}}>{sel.week.d}</span>
+                <span style={{fontFamily:'monospace',fontSize:12,color:'#cbd5e1',marginLeft:'auto'}}>
+                  Close: <strong>{sel.week.c.toFixed(2)}</strong>
+                </span>
+                <div style={{display:'flex',gap:10,alignItems:'center'}}>
+                  {[['W', sel.pW, true],['D', sel.pD, sel.dSlice.length >= 10],['4H', sel.p4H, sel.has4h]].map(([lbl,val,has]) => (
+                    <span key={lbl} style={{fontFamily:'monospace',fontSize:11,
+                      color: !has ? '#334155' : val ? '#4ade80' : '#ef4444'}}>
+                      {lbl}: {!has ? '–' : val ? '✓' : '✗'}
+                    </span>
+                  ))}
+                  <span style={{marginLeft:4}}><PktBadge pts={sel.pts} has4h={sel.has4h}/></span>
+                </div>
+              </div>
+
+              <div className="charts-grid">
+                {/* Weekly Chart */}
+                {sel.wSlice.length >= 8 ? (
+                  <ChartWeekly
+                    ohlcvW={sel.wSlice}
+                    structureW={sel.structW}
+                    chartId={`bt_w_${sel.i}`}
+                    tradeMarkers={tradeMarkers}/>
+                ) : (
+                  <div style={{background:'#07090f',borderRadius:8,border:'1px solid #1e293b',
+                    padding:'20px',color:'#334155',fontSize:11,fontFamily:'monospace',textAlign:'center'}}>
+                    Zu wenig Weekly-Daten
+                  </div>
+                )}
+
+                {/* Daily Chart */}
+                {sel.dSlice.length >= 10 ? (
+                  <CandleChart
+                    ohlcv={sel.dSlice}
+                    structure={sel.structD}
+                    chartId={`bt_d_${sel.i}`}
+                    tradeMarkers={tradeMarkers}/>
+                ) : (
+                  <div style={{background:'#07090f',borderRadius:8,border:'1px solid #1e293b',
+                    padding:'20px',color:'#334155',fontSize:11,fontFamily:'monospace',textAlign:'center'}}>
+                    Keine Daily-Daten für diese Woche
+                  </div>
+                )}
+
+                {/* 4H Chart – volle Breite */}
+                {sel.has4h && sel.struct4H ? (
+                  <div className="chart-full-width">
+                    <Chart4H
+                      ohlcv4h={sel.h4Slice}
+                      structure4h={sel.struct4H}
+                      chartId={`bt_4h_${sel.i}`}
+                      tradeMarkers={tradeMarkers.filter(m => m.type === 'entry')}/>
+                  </div>
+                ) : (
+                  <div className="chart-full-width" style={{background:'#07090f',borderRadius:8,
+                    border:'1px solid #1e293b',padding:'14px',color:'#334155',
+                    fontSize:11,fontFamily:'monospace',textAlign:'center'}}>
+                    4H-Daten nur für die letzten ~730 Tage verfügbar
+                  </div>
+                )}
+              </div>
+
+              {/* Hinweis historische Simulation */}
+              <p style={{fontSize:9,color:'#1e293b',marginTop:8,fontFamily:'monospace',textAlign:'center'}}>
+                Historische Simulation · Daten geschnitten auf KW {sel.kw}/{sel.year} ({sel.weekEnd}) ·
+                W: {sel.wSlice.length} Kerzen · D: {sel.dSlice.length} Kerzen · 4H: {sel.h4Slice.length} Kerzen
+              </p>
+            </div>
+          ) : (
+            <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,
+              padding:'40px 24px',textAlign:'center',color:'#334155',fontFamily:'monospace',fontSize:13}}>
+              ← Woche in der Tabelle anklicken<br/>
+              <span style={{fontSize:11,color:'#1e293b',display:'block',marginTop:8}}>
+                Charts zeigen den historisch korrekten Stand dieser KW
+              </span>
+            </div>
+          )}
+        </div>
+
+      </div>{/* end desktop-layout */}
+
+      <p style={{textAlign:'center',color:'#1e293b',fontSize:9,marginTop:16,fontFamily:'monospace'}}>
+        Daten via yfinance · Kein Handelssignal · Backtest-Modus · Datenladen: python3 load_backtest.py
+      </p>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<BacktestApp/>);
+</script>
+</body>
+</html>
