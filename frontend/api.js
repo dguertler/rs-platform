@@ -1,4 +1,4 @@
-window.BACKEND_URL = 'https://PLACEHOLDER.onrender.com';
+window.BACKEND_URL = 'https://rs-platform.onrender.com';
 
 (function () {
   const HEALTH_URL = window.BACKEND_URL + '/health';
