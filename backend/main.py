@@ -28,7 +28,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATA_DIR     = Path(r"C:\Users\danie\Rel.-Strength")
+DATA_DIR     = Path(os.getenv("DATA_DIR", r"C:\Users\danie\Rel.-Strength"))
 MARKET_FILES = {"nasdaq": "rs_full.json", "sp500": "rs_sp500.json", "dax": "rs_dax.json"}
 PRO_MARKETS  = set()
 FREE_LIMIT   = 20
@@ -84,6 +84,11 @@ class AdminPatchUser(BaseModel):
 @app.on_event("startup")
 async def startup():
     init_db()
+
+
+@app.get("/health")
+async def health():
+    return {"status": "ok"}
 
 
 @app.post("/api/auth/login")
