@@ -89,6 +89,7 @@ async def startup():
     if admin_email and admin_password and not get_all_users():
         create_user(admin_email, admin_password)
         set_admin(admin_email, True)
+        set_user_plan(admin_email, "pro")
 
 
 @app.get("/health")
