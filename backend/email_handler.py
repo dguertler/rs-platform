@@ -1,30 +1,42 @@
-import smtplib, os
-from email.mime.text import MIMEText
+import os, json
+from urllib.request import Request, urlopen
+from urllib.error import URLError
 
 
 def send_reset_email(to_email: str, reset_url: str) -> bool:
-    host  = os.environ.get("SMTP_HOST", "")
-    port  = int(os.environ.get("SMTP_PORT", "587"))
-    user  = os.environ.get("SMTP_USER", "")
-    pw    = os.environ.get("SMTP_PASS", "")
-    frm   = os.environ.get("SMTP_FROM", user)
-    if not host or not user:
+    api_key = os.environ.get("BREVO_API_KEY", "")
+    sender_email = os.environ.get("SMTP_FROM", os.environ.get("SMTP_USER", ""))
+    sender_name = "RS Platform"
+
+    if "<" in sender_email:
+        parts = sender_email.split("<")
+        sender_name = parts[0].strip()
+        sender_email = parts[1].replace(">", "").strip()
+
+    if not api_key or not sender_email:
         print(f"[RESET LINK] {to_email} -> {reset_url}")
         return True
-    msg = MIMEText(
-        f"Hallo,\n\nPasswort zuruecksetzen:\n\n{reset_url}\n\n"
-        "Der Link ist 1 Stunde gueltig.\n\nRS Platform"
+
+    payload = json.dumps({
+        "sender": {"name": sender_name, "email": sender_email},
+        "to": [{"email": to_email}],
+        "subject": "RS Platform - Passwort zuruecksetzen",
+        "textContent": (
+            f"Hallo,\n\nPasswort zuruecksetzen:\n\n{reset_url}\n\n"
+            "Der Link ist 1 Stunde gueltig.\n\nRS Platform"
+        )
+    }).encode("utf-8")
+
+    req = Request(
+        "https://api.brevo.com/v3/smtp/email",
+        data=payload,
+        headers={"api-key": api_key, "Content-Type": "application/json"},
+        method="POST"
     )
-    msg["Subject"] = "RS Platform - Passwort zuruecksetzen"
-    msg["From"]    = frm
-    msg["To"]      = to_email
     try:
-        with smtplib.SMTP(host, port) as s:
-            s.starttls()
-            s.login(user, pw)
-            s.send_message(msg)
+        urlopen(req, timeout=10)
         return True
-    except Exception as e:
+    except URLError as e:
         print(f"[EMAIL ERROR] {e}")
         print(f"[RESET LINK] {to_email} -> {reset_url}")
         return False
