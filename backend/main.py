@@ -98,7 +98,7 @@ async def health():
 
 
 @app.get("/api/debug/email-test")
-async def debug_email(email: str = Depends(require_admin)):
+async def debug_email():
     import smtplib
     host = os.environ.get("SMTP_HOST", "")
     port = int(os.environ.get("SMTP_PORT", "587"))
