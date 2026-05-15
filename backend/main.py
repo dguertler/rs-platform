@@ -97,6 +97,22 @@ async def health():
     return {"status": "ok"}
 
 
+@app.get("/api/debug/email-test")
+async def debug_email(email: str = Depends(require_admin)):
+    import smtplib
+    host = os.environ.get("SMTP_HOST", "")
+    port = int(os.environ.get("SMTP_PORT", "587"))
+    user = os.environ.get("SMTP_USER", "")
+    pw   = os.environ.get("SMTP_PASS", "")
+    try:
+        with smtplib.SMTP(host, port, timeout=10) as s:
+            s.starttls()
+            s.login(user, pw)
+        return {"status": "ok", "host": host, "port": port, "user": user}
+    except Exception as e:
+        return {"status": "error", "error": str(e), "host": host, "port": port, "user": user}
+
+
 @app.post("/api/auth/login")
 async def login(req: LoginRequest):
     user = get_user(req.email)
