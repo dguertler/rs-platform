@@ -24,7 +24,11 @@ def send_reset_email(to_email: str, reset_url: str) -> bool:
     req = Request(
         "https://api.resend.com/emails",
         data=payload,
-        headers={"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"},
+        headers={
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "User-Agent": "rs-platform/1.0",
+        },
         method="POST"
     )
     try:
