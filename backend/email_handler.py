@@ -6,7 +6,6 @@ from urllib.error import URLError
 def send_reset_email(to_email: str, reset_url: str) -> bool:
     api_key = os.environ.get("RESEND_API_KEY", "")
 
-    print(f"[RESEND DEBUG] api_key present: {bool(api_key)}")
     if not api_key:
         print(f"[RESET LINK] {to_email} -> {reset_url}")
         return True
