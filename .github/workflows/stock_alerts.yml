@@ -19,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
           fetch-depth: 0
 
       - name: Python einrichten
@@ -52,7 +52,7 @@ jobs:
           git add alerts_state.json
           [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
           git diff --staged --quiet || git commit -m "Alert-Zustand aktualisiert"
-          git push origin main
+          git push origin master
 
       - name: Fehler-Mail senden
         if: failure()

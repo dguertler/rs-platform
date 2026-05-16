@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: master
           fetch-depth: 0
 
       - name: Python einrichten
@@ -38,7 +38,7 @@ jobs:
           git config user.email "actions@github.com"
           git add data/rs_sp500.json
           git diff --staged --quiet || git commit -m "S&P 500 Daten aktualisiert"
-          git push origin main
+          git push origin master
 
       - name: Fehler-Mail senden
         if: failure()
