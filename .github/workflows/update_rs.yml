@@ -1,5 +1,8 @@
 name: NASDAQ100 Daten aktualisieren
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '0 1 * * 2-6'    # Di-Sa 03:00 MESZ (01:00 UTC)

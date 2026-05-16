@@ -1,5 +1,8 @@
 name: DAX Daten aktualisieren
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '30 1 * * 2-6'   # Di-Sa 03:30 MESZ (01:30 UTC)

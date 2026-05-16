@@ -1,5 +1,8 @@
 name: Backtest-Daten für alle Aktien laden (manuell)
 
+permissions:
+  contents: write
+
 on:
   workflow_dispatch:
 

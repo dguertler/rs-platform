@@ -1,5 +1,8 @@
 name: Backtest täglich aktualisieren
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '45 1 * * 2-6'   # Di-Sa 03:45 MESZ (01:45 UTC) – nach allen RS-Updates

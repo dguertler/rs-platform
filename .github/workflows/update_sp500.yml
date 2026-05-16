@@ -1,5 +1,8 @@
 name: S&P 500 Daten aktualisieren
 
+permissions:
+  contents: write
+
 on:
   schedule:
     - cron: '15 1 * * 2-6'   # Di-Sa 03:15 MESZ (01:15 UTC) – 15 Min nach NASDAQ
