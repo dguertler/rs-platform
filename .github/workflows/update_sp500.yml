@@ -1,0 +1,53 @@
+name: S&P 500 Daten aktualisieren
+
+on:
+  schedule:
+    - cron: '15 1 * * 2-6'   # Di-Sa 03:15 MESZ (01:15 UTC) – 15 Min nach NASDAQ
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas lxml
+
+      - name: Teil 1 laden (Financials, Healthcare, Consumer, Energy, Industrials)
+        run: python sp500_colab_1.py
+
+      - name: Teil 2 laden (Tech, Comm, Utilities, Real Estate, Materials)
+        run: python sp500_colab_2.py
+
+      - name: Daten zusammenführen
+        run: python sp500_merge.py
+
+      - name: JSON nach data/ verschieben und committen
+        run: |
+          mv rs_sp500.json data/rs_sp500.json
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/rs_sp500.json
+          git diff --staged --quiet || git commit -m "S&P 500 Daten aktualisiert"
+          git push origin main
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "S&P-500-Update (update_sp500.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

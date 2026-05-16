@@ -1,0 +1,41 @@
+name: Backtest-Daten laden (manuell)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ticker:
+        description: 'Ticker (Standard: SNDK)'
+        required: false
+        default: 'SNDK'
+
+jobs:
+  load:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas
+
+      - name: Backtest-Daten laden
+        run: python load_backtest.py
+        env:
+          BACKTEST_TICKER: ${{ github.event.inputs.ticker }}
+
+      - name: JSON nach data/ verschieben und committen
+        run: |
+          TICKER_LOWER=$(echo "${{ github.event.inputs.ticker }}" | tr '[:upper:]' '[:lower:]' | tr '.' '_')
+          mv backtest_${TICKER_LOWER}.json data/ 2>/dev/null || true
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/backtest_*.json
+          git diff --staged --quiet || git commit -m "Backtest-Daten aktualisiert (${{ github.event.inputs.ticker }})"
+          git push origin main

@@ -1,0 +1,35 @@
+name: Backtest-Daten für alle Aktien laden (manuell)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  load-all:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas
+
+      - name: Backtest-Daten für alle Ticker laden
+        run: python load_backtest_all.py
+
+      - name: Alle backtest_*.json nach data/ verschieben und committen
+        run: |
+          mv backtest_*.json data/ 2>/dev/null || true
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/backtest_*.json
+          git diff --staged --quiet || git commit -m "Backtest-Daten für alle Aktien aktualisiert"
+          git push origin main

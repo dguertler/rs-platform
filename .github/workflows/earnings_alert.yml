@@ -1,0 +1,51 @@
+name: Earnings-Überraschung (≥5% Kurssprung + ≥10% EPS-Beat)
+
+on:
+  schedule:
+    - cron: '15 2 * * 2-6'
+  workflow_dispatch:
+    inputs:
+      test_date:
+        description: 'Test-Datum (YYYY-MM-DD) – leer = gestern'
+        required: false
+        default: ''
+
+jobs:
+  check-earnings:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas matplotlib lxml
+
+      - name: Earnings-Skript ausführen
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          TEST_DATE:      ${{ github.event.inputs.test_date }}
+        run: python check_earnings.py
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Earnings-Alert (earnings_alert.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

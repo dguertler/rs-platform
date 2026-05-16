@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RS · QQQ Dashboard</title>
+  <title>RS · Nasdaq Dashboard</title>
   <script src="/api.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -41,9 +41,9 @@
   <div id="plan-bar" style="position:fixed;top:8px;right:14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
 
 <div class="nav-bar">
-  <a href="index.html" class="nav-switch active">QQQ</a>
+  <a href="index.html" class="nav-switch active">Nasdaq</a>
   <a href="dax.html" class="nav-switch">DAX</a>
-  <a href="sp500.html" class="nav-switch">SPX</a>
+  <a href="sp500.html" class="nav-switch">S&amp;P500</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
 </div>
@@ -1063,7 +1063,6 @@ function BreachDots({ structW, structD, struct4H, changedW, changedD, changed4H 
 function App() {
   const [data, setData]         = useState(null);
   const [error, setError]       = useState(null);
-  const [sortBy, setSortBy]     = useState("score");
   const [showAll, setShowAll]   = useState(false);
   const [selected, setSelected] = useState(null);
   const chartRef = useRef(null);
@@ -1142,8 +1141,8 @@ function App() {
 
   const sorted = useMemo(() =>
     [...rsData].sort((a, b) =>
-      sortBy === "score" ? b.s - a.s : (b.w[sortBy]??-999) - (a.w[sortBy]??-999)
-    ), [rsData, sortBy]);
+      b.s - a.s
+    ), [rsData]);
 
   const rows = showAll ? sorted : sorted.slice(0, 20);
 
@@ -1232,30 +1231,7 @@ function App() {
   return (
     <div style={{minHeight:"100vh",background:"#060b14",color:"#e2e8f0",fontFamily:"'Inter',system-ui,sans-serif",padding:"16px 12px"}}>
 
-      {/* Header */}
-      <div style={{marginBottom:14,paddingLeft:200}}>
-        <h1 style={{margin:0,fontSize:18,fontWeight:800,color:"#f8fafc"}}>⚡ RS · QQQ</h1>
-        <p style={{margin:"2px 0 0",color:"#475569",fontSize:11}}>
-          Outperformance vs. Nasdaq 100 · {data.timestamp}
-          {(() => {
-            const last = new Date(data.timestamp);
-            const diffDays = (Date.now() - last) / 86400000;
-            const ok = !isNaN(diffDays) && diffDays <= 5;
-            return <span title={ok ? "Daten aktuell" : "Daten veraltet"} style={{display:"inline-block",width:7,height:7,borderRadius:"50%",background:ok?"#22c55e":"#ef4444",marginLeft:5,verticalAlign:"middle"}}/>;
-          })()}
-        </p>
-      </div>
 
-      {/* Steuerung */}
-      <div style={{display:"flex",gap:8,marginBottom:12,flexWrap:"wrap",alignItems:"flex-end"}}>
-        <div style={{display:"flex",flexDirection:"column",gap:2}}>
-          <label style={{fontSize:9,color:"#475569",textTransform:"uppercase",letterSpacing:1}}>Sortieren</label>
-          <select style={sel} value={sortBy} onChange={e => setSortBy(e.target.value)}>
-            <option value="score">Score</option>
-            {WINDOWS.map(w => <option key={w} value={w}>{w}</option>)}
-          </select>
-        </div>
-      </div>
 
       <div className="desktop-layout">
       <div className="desktop-left">

@@ -1,0 +1,53 @@
+name: Backtest täglich aktualisieren
+
+on:
+  schedule:
+    - cron: '45 1 * * 2-6'   # Di-Sa 03:45 MESZ (01:45 UTC) – nach allen RS-Updates
+  workflow_dispatch:
+
+jobs:
+  update-backtest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas
+
+      - name: Vorhandene Backtest-Dateien in Root kopieren (für Script)
+        run: cp data/backtest_*.json . 2>/dev/null || true
+
+      - name: Backtest inkrementell aktualisieren
+        run: python update_backtest_daily.py
+
+      - name: Geänderte JSONs nach data/ verschieben und committen
+        run: |
+          mv backtest_*.json data/ 2>/dev/null || true
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/backtest_*.json
+          git diff --staged --quiet || git commit -m "Backtest-Daten täglich aktualisiert"
+          git pull --rebase origin main
+          git push origin main
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Backtest-Update (update_backtest_daily.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
