@@ -28,6 +28,12 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pip install yfinance pandas matplotlib lxml
 
+      - name: RS-Datendateien für Script bereitstellen
+        run: |
+          cp data/rs_full.json . 2>/dev/null || true
+          cp data/rs_dax.json . 2>/dev/null || true
+          cp data/rs_sp500.json . 2>/dev/null || true
+
       - name: Earnings-Skript ausführen
         env:
           SMTP_HOST:      ${{ secrets.SMTP_HOST }}
