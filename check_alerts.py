@@ -488,11 +488,10 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
         img.add_header('Content-Disposition', 'inline', filename=f'{cid}.png')
         msg.attach(img)
 
-    with smtplib.SMTP(smtp_host, int(smtp_port)) as server:
-        server.ehlo()
+    with smtplib.SMTP(smtp_host, int(smtp_port), timeout=30) as server:
         server.starttls()
         server.login(smtp_user, smtp_pass)
-        server.sendmail(smtp_user, to_addr, msg.as_bytes())
+        server.sendmail(smtp_user, to_addr, msg.as_string())
 
     print(f'E-Mail gesendet an {to_addr}')
 
