@@ -30,6 +30,7 @@ def send_reset_email(to_email: str, reset_url: str) -> bool:
         urlopen(req, timeout=10)
         return True
     except URLError as e:
-        print(f"[EMAIL ERROR] {e}")
+        body = e.read().decode("utf-8") if hasattr(e, "read") else ""
+        print(f"[EMAIL ERROR] {e} | {body}")
         print(f"[RESET LINK] {to_email} -> {reset_url}")
         return False
