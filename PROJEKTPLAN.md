@@ -5,6 +5,75 @@
 
 ---
 
+## 0. Sofort vs. Später — Prioritätsliste
+
+### JETZT SOFORT (vor Launch — nicht verhandelbar)
+
+#### Recht & Steuern
+- [ ] Steuerberater engagieren (vor Gründung!)
+- [ ] Holding-UG gründen (Notar, 1 EUR Stammkapital)
+- [ ] Operative UG gründen (Notar, 1 EUR Stammkapital, 100% Anteile an Holding)
+- [ ] Geschäftskonto für beide UGs eröffnen
+- [ ] Finanzamt: Steuerliche Erfassung, USt-ID beantragen
+- [ ] EU-OSS-Verfahren anmelden (für EU-Auslandskunden)
+
+#### Rechtliche Pflichtseiten (vor erstem Nutzer live)
+- [ ] Impressum (§ 5 TMG) — vollständige Anschrift, Verantwortlicher
+- [ ] Datenschutzerklärung (DSGVO-konform, alle Dienste gelistet)
+- [ ] AGB mit Haftungsausschluss (keine Anlageberatung)
+- [ ] Cookiebanner mit echtem Opt-in (keine Pre-Checked-Boxes)
+- [ ] Pflicht-Disclaimer auf jeder Seite und in jeder E-Mail
+- [ ] AVV (Auftragsverarbeitungsvertrag) mit Stripe, SendGrid/Postmark
+
+#### Technische Sicherheit (vor erstem Nutzer live)
+- [ ] HTTPS überall (TLS 1.3)
+- [ ] Alle Secrets aus dem Code entfernt → nur noch Environment Variables
+- [ ] 2FA auf allen Admin-Accounts aktiviert
+- [ ] Rate Limiting auf Auth-Endpunkten
+- [ ] Passwort-Hashing: bcrypt (cost factor 12)
+- [ ] GitHub Dependabot aktivieren
+
+#### Payments
+- [ ] Stripe-Account im Live-Modus (nicht nur Test)
+- [ ] Korrekte Rechnungsstellung inkl. USt. (DE 19%, EU je Land)
+- [ ] Stripe Webhooks für Abo-Events (zahlung fehlgeschlagen, Kündigung)
+
+#### MVP-Features
+- [ ] Ampelsystem live (mindestens DE-Aktien oder S&P 500)
+- [ ] Free / Basic / Pro Tier funktionsfähig
+- [ ] E-Mail-Alerts funktionsfähig
+- [ ] Grundlegendes Dashboard mit Signalübersicht
+
+---
+
+### SPÄTER (nach Launch — erst wenn Nutzer da sind)
+
+#### Nach den ersten 50–100 zahlenden Nutzern
+- [ ] Trustpilot-Integration (automatische Anfrage 7 Tage nach Pro-Upgrade)
+- [ ] Google Reviews (automatische Anfrage 14 Tage nach Pro-Upgrade)
+- [ ] Referral-Programm
+- [ ] Feature-Voting-System (braucht Community-Basis)
+- [ ] Push-Notifications (Web PWA)
+
+#### Nach Product-Market Fit (500+ Nutzer)
+- [ ] API-Zugang (Pro, rate-limited)
+- [ ] Backtesting-Interface
+- [ ] Englische Version (i18n)
+- [ ] Telegram-Bot / Discord-Bot
+- [ ] Automatisierte Social-Media-Drafts
+- [ ] Newsletter-Automatisierung
+
+#### Langfristig (Jahr 2+)
+- [ ] Paper Trading mit Community-Events
+- [ ] Mobile App (React Native)
+- [ ] DAX, MDAX, NASDAQ, Krypto
+- [ ] Internationale Expansion (EN, FR, ES)
+- [ ] Algo-Strategie-Marktplatz
+- [ ] White-Label für Broker
+- [ ] Institutionelle API-Pakete
+
+---
+
 ## 1. Vision & Produktidee
 
 Eine SaaS-Plattform für technische Börsensignale, die Privatanleger und aktive Trader mit klaren, datenbasierten Kauf-/Verkaufsempfehlungen unterstützt. Kein Rauschen, kein Lärm — nur ein klares Ampelsystem basierend auf mehrstufiger Zeitrahmenanalyse.
