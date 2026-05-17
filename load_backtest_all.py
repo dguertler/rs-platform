@@ -70,7 +70,9 @@ def load_ticker(ticker):
                     raw_1h.columns = raw_1h.columns.get_level_values(0)
                 raw_1h = raw_1h[["Open", "High", "Low", "Close"]].dropna()
                 raw_1h.index = pd.to_datetime(raw_1h.index)
-                raw_4h = raw_1h.resample("4h", offset="1h30min").agg({
+                med = raw_1h["Close"].median()
+                raw_1h = raw_1h[(raw_1h["Low"] >= med * 0.4) & (raw_1h["High"] <= med * 2.5)]
+                raw_4h = raw_1h.resample("4h").agg({
                     "Open":  "first",
                     "High":  "max",
                     "Low":   "min",

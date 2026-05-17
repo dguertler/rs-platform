@@ -148,7 +148,9 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
             df.columns = df.columns.get_level_values(0)
         df = df[["Open","High","Low","Close"]].dropna()
         df.index = pd.to_datetime(df.index)
-        df_4h = df.resample("4h", offset="1h30min").agg(
+        med = df["Close"].median()
+        df = df[(df["Low"] >= med * 0.4) & (df["High"] <= med * 2.5)]
+        df_4h = df.resample("4h").agg(
             {"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
         result = []
         for dt, row in df_4h.iterrows():
