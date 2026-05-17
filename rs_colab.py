@@ -190,12 +190,7 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
              for ts in df.index],
             index=df.index, dtype=bool
         )
-        # 1. Volume <= 1 in extended hours → phantom tick, remove bar + ffill
-        bad_vol = extended & (df["Volume"] <= 1)
-        df.loc[bad_vol, ["Open", "High", "Low", "Close"]] = float("nan")
-        df[["Open", "High", "Low", "Close"]] = df[["Open", "High", "Low", "Close"]].ffill()
-        df.dropna(subset=["Close"], inplace=True)
-        # 2. Low spike: >30% below both neighbours in extended hours → fix Low only
+        # Low spike in extended hours: >30% below both prev and next Low → fix Low only
         prev_low = df["Low"].shift(1)
         next_low = df["Low"].shift(-1)
         bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)

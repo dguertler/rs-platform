@@ -158,10 +158,6 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
              for ts in df.index],
             index=df.index, dtype=bool
         )
-        bad_vol = extended & (df["Volume"] <= 1)
-        df.loc[bad_vol, ["Open","High","Low","Close"]] = float("nan")
-        df[["Open","High","Low","Close"]] = df[["Open","High","Low","Close"]].ffill()
-        df.dropna(subset=["Close"], inplace=True)
         prev_low = df["Low"].shift(1)
         next_low = df["Low"].shift(-1)
         bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)

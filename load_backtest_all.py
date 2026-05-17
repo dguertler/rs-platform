@@ -84,10 +84,6 @@ def load_ticker(ticker):
                      for ts in raw_1h.index],
                     index=raw_1h.index, dtype=bool
                 )
-                _bad_vol = _ext & (raw_1h["Volume"] <= 1)
-                raw_1h.loc[_bad_vol, ["Open","High","Low","Close"]] = float("nan")
-                raw_1h[["Open","High","Low","Close"]] = raw_1h[["Open","High","Low","Close"]].ffill()
-                raw_1h.dropna(subset=["Close"], inplace=True)
                 _prev_low = raw_1h["Low"].shift(1)
                 _next_low = raw_1h["Low"].shift(-1)
                 _bad_low  = _ext & (raw_1h["Low"] < _prev_low * 0.70) & (raw_1h["Low"] < _next_low * 0.70)
