@@ -1317,7 +1317,7 @@ function App() {
                   {rating && (
                     <span onClick={e => { e.stopPropagation(); setRatingModal(item.t); }}
                       title={`Bewertung · ${rating.verdict} · Score ${rating.score}`}
-                      style={{fontSize:11,color:"#60a5fa",cursor:"pointer",lineHeight:1,userSelect:"none"}}>ⓘ</span>
+                      style={{fontSize:15,color:"#60a5fa",cursor:"pointer",lineHeight:1,userSelect:"none"}}>ⓘ</span>
                   )}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
