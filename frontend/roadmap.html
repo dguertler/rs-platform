@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RS · Roadmap Dashboard</title>
+  <script src="/api.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    body { background:#060b14; color:#e2e8f0; font-family:'Inter',system-ui,sans-serif; min-height:100vh; }
+    ::-webkit-scrollbar { width:6px; }
+    ::-webkit-scrollbar-track { background:#0a0f1e; }
+    ::-webkit-scrollbar-thumb { background:#1e293b; border-radius:3px; }
+
+    .nav-bar { display:inline-flex; align-items:center; gap:5px; padding:12px 12px 0; flex-wrap:wrap; }
+    .nav-switch { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:6px 13px; font-size:12px; font-weight:700; color:#94a3b8; text-decoration:none; font-family:monospace; white-space:nowrap; box-shadow:0 2px 8px #00000066; transition:border-color .15s,color .15s; }
+    .nav-switch:hover { border-color:#3b82f6; color:#e2e8f0; }
+    .nav-switch.active { border-color:#7c3aed; color:#a78bfa; background:#130a2a; }
+
+    #app { max-width:1240px; margin:0 auto; padding:20px 12px 80px; }
+
+    .page-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-bottom:8px; }
+    .page-title { font-size:20px; font-weight:700; color:#e2e8f0; }
+    .page-sub { font-size:12px; color:#475569; margin-top:3px; }
+    .reset-btn { background:transparent; border:1px solid #334155; color:#64748b; padding:5px 14px; border-radius:6px; font-size:11px; cursor:pointer; font-family:monospace; transition:border-color .15s,color .15s; flex-shrink:0; }
+    .reset-btn:hover { border-color:#ef4444; color:#f87171; }
+
+    .global-bar-wrap { background:#1e293b; border-radius:8px; height:10px; overflow:hidden; margin-bottom:6px; }
+    .global-bar-fill { height:100%; background:linear-gradient(90deg,#5b21b6,#7c3aed,#a78bfa); border-radius:8px; transition:width .5s ease; }
+    .progress-meta { font-size:12px; color:#64748b; display:flex; justify-content:space-between; margin-bottom:28px; }
+
+    .phases-grid { display:grid; grid-template-columns:1fr; gap:14px; }
+    @media (min-width:860px) { .phases-grid { grid-template-columns:1fr 1fr; } }
+
+    .phase-card { background:#08111f; border:1px solid #1e293b; border-radius:12px; overflow:hidden; transition:border-color .2s; }
+    .phase-card:hover { border-color:#2d3f5e; }
+    .phase-header { padding:13px 16px 9px; border-bottom:1px solid #0f172a; display:flex; justify-content:space-between; align-items:flex-start; gap:8px; }
+    .phase-title { font-size:12.5px; font-weight:700; font-family:monospace; }
+    .phase-sub { font-size:10.5px; color:#475569; margin-top:2px; }
+    .phase-count { font-size:11px; font-family:monospace; flex-shrink:0; margin-top:2px; }
+    .phase-progress-bar { height:3px; }
+    .phase-bar-bg { background:#0f172a; }
+    .phase-bar-fill { height:3px; transition:width .4s ease; }
+
+    .section-label { font-size:10px; font-weight:700; color:#334155; text-transform:uppercase; letter-spacing:.09em; padding:10px 16px 3px; }
+
+    .task-row { display:flex; align-items:flex-start; gap:9px; padding:5px 16px 5px; cursor:pointer; transition:background .1s; }
+    .task-row:hover { background:#0d1526; }
+    .task-row:last-child { padding-bottom:10px; }
+    .task-cb { margin-top:2px; cursor:pointer; accent-color:#7c3aed; flex-shrink:0; width:13px; height:13px; }
+    .task-badge { font-size:9px; font-weight:700; font-family:monospace; padding:1px 5px; border-radius:3px; flex-shrink:0; margin-top:2px; letter-spacing:.02em; }
+    .b-DEV   { background:#0f2340; color:#60a5fa; }
+    .b-MKT   { background:#092318; color:#4ade80; }
+    .b-ZIEL  { background:#251800; color:#fbbf24; }
+    .b-RECHT { background:#220808; color:#f87171; }
+    .b-LEGAL { background:#200a1a; color:#f472b6; }
+    .task-text { font-size:12.5px; color:#94a3b8; line-height:1.5; flex:1; transition:color .15s; }
+    .task-text.done { text-decoration:line-through; color:#334155; }
+
+    .ref-wrap { margin-top:36px; display:grid; grid-template-columns:1fr; gap:20px; }
+    @media (min-width:900px) { .ref-wrap { grid-template-columns:1fr 1fr; } }
+    .ref-card { background:#08111f; border:1px solid #1e293b; border-radius:10px; overflow:hidden; }
+    .ref-card-title { font-size:11px; font-weight:700; color:#64748b; text-transform:uppercase; letter-spacing:.08em; padding:12px 16px 8px; border-bottom:1px solid #0f172a; }
+    .ref-table { width:100%; border-collapse:collapse; font-size:11.5px; }
+    .ref-table th { background:#0d1526; color:#475569; font-weight:600; padding:7px 14px; text-align:left; }
+    .ref-table td { padding:7px 14px; border-top:1px solid #0d1526; color:#64748b; }
+    .ref-table tr:hover td { background:#0a111e; }
+    .val-hi { color:#a78bfa; font-weight:600; }
+    .sav-hi { color:#4ade80; font-weight:600; }
+  </style>
+</head>
+<body>
+  <div id="plan-bar" style="position:fixed;top:8px;right:14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
+
+  <div class="nav-bar">
+    <a href="index.html" class="nav-switch">Nasdaq</a>
+    <a href="dax.html" class="nav-switch">DAX</a>
+    <a href="sp500.html" class="nav-switch">S&amp;P500</a>
+    <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
+    <a href="backtest.html" class="nav-switch">B-DETAILS</a>
+    <a href="roadmap.html" class="nav-switch active">ROADMAP</a>
+  </div>
+
+  <div id="app" style="display:none"></div>
+
+<script>
+(function(){
+  function getToken(){ return localStorage.getItem('rs_token'); }
+  function logout(){ localStorage.removeItem('rs_token'); localStorage.removeItem('rs_email'); window.location.href='/login.html'; }
+  window.rsLogout = logout;
+  window.apiFetch = async function(url, opts){
+    opts = opts||{};
+    var token = getToken();
+    if(!token){ logout(); return new Response('{}',{status:401}); }
+    var r = await fetch(url, Object.assign({},opts,{headers:Object.assign({},opts.headers||{},{'Authorization':'Bearer '+token})}));
+    if(r.status===401){ logout(); }
+    return r;
+  };
+  if(!getToken()){ window.location.href='/login.html'; return; }
+  document.addEventListener('DOMContentLoaded', function(){
+    var email = localStorage.getItem('rs_email')||'';
+    var btn = document.createElement('button');
+    btn.textContent = 'Logout'+(email?' · '+email:'');
+    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
+    btn.onclick = function(){ window.rsLogout(); };
+    document.body.appendChild(btn);
+  });
+})();
+</script>
+
+<script>
+const STORAGE_KEY = 'rs_roadmap_v1';
+
+const PHASES = [
+  {
+    id:'p0', title:'Sofort-Checkliste', subtitle:'Vor Launch — nicht verhandelbar', color:'#ef4444',
+    sections:[
+      { name:'Recht & Steuern', tasks:[
+        {id:'p0-0', type:'RECHT', text:'Steuerberater engagieren (vor Gründung!)'},
+        {id:'p0-1', type:'RECHT', text:'Holding-UG gründen (Notar, 1 EUR Stammkapital)'},
+        {id:'p0-2', type:'RECHT', text:'Operative UG gründen (100% Anteile an Holding)'},
+        {id:'p0-3', type:'RECHT', text:'Geschäftskonto für beide UGs eröffnen'},
+        {id:'p0-4', type:'RECHT', text:'Finanzamt: Steuerliche Erfassung + USt-ID beantragen'},
+        {id:'p0-5', type:'RECHT', text:'EU-OSS-Verfahren anmelden (EU-Auslandskunden)'},
+      ]},
+      { name:'Rechtliche Pflichtseiten', tasks:[
+        {id:'p0-6',  type:'LEGAL', text:'Impressum (§ 5 TMG) — vollständige Anschrift'},
+        {id:'p0-7',  type:'LEGAL', text:'Datenschutzerklärung (DSGVO-konform, alle Dienste)'},
+        {id:'p0-8',  type:'LEGAL', text:'AGB mit Haftungsausschluss (keine Anlageberatung)'},
+        {id:'p0-9',  type:'LEGAL', text:'Cookiebanner mit echtem Opt-in (keine Pre-Checked-Boxes)'},
+        {id:'p0-10', type:'LEGAL', text:'Pflicht-Disclaimer auf jeder Seite + E-Mail'},
+        {id:'p0-11', type:'LEGAL', text:'AVV mit Stripe, SendGrid/Postmark'},
+      ]},
+      { name:'Technische Sicherheit', tasks:[
+        {id:'p0-12', type:'DEV', text:'HTTPS überall (TLS 1.3)'},
+        {id:'p0-13', type:'DEV', text:'Alle Secrets aus Code → nur Environment Variables'},
+        {id:'p0-14', type:'DEV', text:'2FA auf allen Admin-Accounts'},
+        {id:'p0-15', type:'DEV', text:'Rate Limiting auf Auth-Endpunkten'},
+        {id:'p0-16', type:'DEV', text:'Passwort-Hashing: bcrypt (cost factor 12)'},
+        {id:'p0-17', type:'DEV', text:'GitHub Dependabot aktivieren'},
+      ]},
+      { name:'Payments', tasks:[
+        {id:'p0-18', type:'DEV', text:'Stripe-Account im Live-Modus (nicht nur Test)'},
+        {id:'p0-19', type:'DEV', text:'Korrekte Rechnungsstellung inkl. USt. (DE 19%, EU je Land)'},
+        {id:'p0-20', type:'DEV', text:'Stripe Webhooks für Abo-Events konfigurieren'},
+      ]},
+      { name:'MVP-Features', tasks:[
+        {id:'p0-21', type:'DEV', text:'Ampelsystem live (DE-Aktien oder S&P 500)'},
+        {id:'p0-22', type:'DEV', text:'Free / Basic / Pro Tier funktionsfähig'},
+        {id:'p0-23', type:'DEV', text:'E-Mail-Alerts funktionsfähig'},
+        {id:'p0-24', type:'DEV', text:'Grundlegendes Dashboard mit Signalübersicht'},
+      ]},
+    ]
+  },
+  {
+    id:'p1', title:'Phase 1 — Foundation', subtitle:'Monat 1–2', color:'#3b82f6',
+    sections:[
+      { name:'Entwicklung', tasks:[
+        {id:'p1-0', type:'DEV', text:'Redesign Dashboard + Login/Account (Dark Theme)'},
+        {id:'p1-1', type:'DEV', text:'Landing Page (DE) mit FAQ + Preistabelle'},
+        {id:'p1-2', type:'DEV', text:'DSGVO: Impressum, Datenschutz, AGB, Cookie-Banner'},
+        {id:'p1-3', type:'DEV', text:'yfinance 4H Daten-Patch + Validierungsschicht'},
+        {id:'p1-4', type:'DEV', text:'FOMO-E-Mail-System (trigger-basiert, max. 1x/Monat)'},
+        {id:'p1-5', type:'DEV', text:'E-Mail-Onboarding-Sequenz (5 Mails: Tag 0/1/3/7/14)'},
+        {id:'p1-6', type:'DEV', text:'Freemium-Limits schärfen (Lock-Icons, Upgrade-CTAs)'},
+        {id:'p1-7', type:'DEV', text:'Aktien-Ratings für Top 50 RS-Aktien ausbauen'},
+        {id:'p1-8', type:'DEV', text:'Onboarding-Wizard (3 Schritte nach Registrierung)'},
+      ]},
+      { name:'Marketing', tasks:[
+        {id:'p1-9',  type:'MKT', text:'Instagram + TikTok Account anlegen + Handle sichern'},
+        {id:'p1-10', type:'MKT', text:'Erste 10 Posts erstellen (Claude-Drafts, manuell prüfen)'},
+      ]},
+      { name:'Ziele', tasks:[
+        {id:'p1-11', type:'ZIEL', text:'Anwalt für AGB/Disclaimer beauftragen (~€300)'},
+        {id:'p1-12', type:'ZIEL', text:'Beta-Nutzer: 50 kostenlose Pro-Accounts vergeben'},
+      ]},
+    ]
+  },
+  {
+    id:'p15', title:'Phase 1.5 — Launch-Vorbereitung', subtitle:'Monat 2–3', color:'#06b6d4',
+    sections:[
+      { name:'Entwicklung', tasks:[
+        {id:'p15-0', type:'DEV', text:'Watchlist-Feature (Markierung + DB-Tabelle)'},
+        {id:'p15-1', type:'DEV', text:'Wöchentliche personalisierte Watchlist-E-Mail'},
+        {id:'p15-2', type:'DEV', text:'Earnings-Kalender in Watchlist-E-Mail integrieren'},
+        {id:'p15-3', type:'DEV', text:'Landing Page EN + i18n Frontend'},
+        {id:'p15-4', type:'DEV', text:'Performance-Kennzahlen Section (nach Rechtscheck)'},
+      ]},
+      { name:'Marketing', tasks:[
+        {id:'p15-5', type:'MKT', text:'3 Posts/Woche Instagram + TikTok (Reels)'},
+        {id:'p15-6', type:'MKT', text:'Reddit-Posts in r/finanzen, r/Boersenhandel'},
+        {id:'p15-7', type:'MKT', text:'5 Testimonials von Beta-Nutzern einsammeln'},
+      ]},
+      { name:'Ziele', tasks:[
+        {id:'p15-8', type:'ZIEL', text:'Soft-Launch: Erste 200 registrierte Nutzer'},
+      ]},
+    ]
+  },
+  {
+    id:'p2', title:'Phase 2 — Wachstum', subtitle:'Monat 3–6', color:'#22c55e',
+    sections:[
+      { name:'Entwicklung', tasks:[
+        {id:'p2-0', type:'DEV', text:'Referral-Programm (Stripe Coupons API)'},
+        {id:'p2-1', type:'DEV', text:'Feature-Voting-Bereich (Upvote + Punkte/Badges)'},
+        {id:'p2-2', type:'DEV', text:'SEO-Aktien-Seiten (public, indexierbar, gecacht)'},
+        {id:'p2-3', type:'DEV', text:'Claude-API Social-Media-Draft + Freigabe-Workflow'},
+        {id:'p2-4', type:'DEV', text:'Trustpilot + Google Reviews Auto-Anfrage nach Upgrade'},
+        {id:'p2-5', type:'DEV', text:'Backtesting-Interface (Pro-only)'},
+      ]},
+      { name:'Marketing', tasks:[
+        {id:'p2-6', type:'MKT', text:'Meta Ads starten: €200/Mo, 2 Creatives testen'},
+        {id:'p2-7', type:'MKT', text:'Google Search Ads (Long-Tail Keywords)'},
+        {id:'p2-8', type:'MKT', text:'Erster Micro-Influencer Deal (5–20k Follower)'},
+        {id:'p2-9', type:'MKT', text:'Black Friday Aktion (30% Rabatt, 72h)'},
+      ]},
+      { name:'Ziele', tasks:[
+        {id:'p2-10', type:'ZIEL', text:'100 zahlende Nutzer → ~€1.900 MRR'},
+      ]},
+    ]
+  },
+  {
+    id:'p3', title:'Phase 3 — Skalierung', subtitle:'Monat 7–18', color:'#f59e0b',
+    sections:[
+      { name:'Entwicklung', tasks:[
+        {id:'p3-0', type:'DEV', text:'Paper-Trading-Wettbewerb (Anti-Fake-Design)'},
+        {id:'p3-1', type:'DEV', text:'Portfolio-Tracker (manuelle Einträge, forward-only)'},
+        {id:'p3-2', type:'DEV', text:'KI-E-Mail-Support (Claude-API-basiert)'},
+        {id:'p3-3', type:'DEV', text:'Weitere Indizes (EURO STOXX, MDAX, NASDAQ, Krypto)'},
+        {id:'p3-4', type:'DEV', text:'PostgreSQL Migration / Optimierung (bei >3.000 Nutzern)'},
+        {id:'p3-5', type:'DEV', text:'Mobile App (React Native)'},
+      ]},
+      { name:'Marketing', tasks:[
+        {id:'p3-6',  type:'MKT', text:'Ads-Budget skalieren: €500 → €1.500 → €3.000/Mo'},
+        {id:'p3-7',  type:'MKT', text:'EN-Markt aktivieren (UK, NL, Skandinavien)'},
+        {id:'p3-8',  type:'MKT', text:'YouTube Pre-Roll Ads'},
+        {id:'p3-9',  type:'MKT', text:'Affiliate-Programm (20% recurring)'},
+        {id:'p3-10', type:'MKT', text:'Neujahrs-Aktion (20% auf Jahresabo, 1.–7. Jan)'},
+      ]},
+      { name:'Ziele', tasks:[
+        {id:'p3-11', type:'ZIEL', text:'500 zahlende Nutzer → ~€9.500 MRR'},
+        {id:'p3-12', type:'ZIEL', text:'1.200 zahlende Nutzer → ~€22.800 MRR (passiv)'},
+      ]},
+    ]
+  },
+  {
+    id:'p4', title:'Phase 4 — Scaling / Exit-Vorbereitung', subtitle:'Jahr 2–4', color:'#7c3aed',
+    sections:[
+      { name:'Entwicklung', tasks:[
+        {id:'p4-0', type:'DEV', text:'API-Zugang für Drittanbieter (Pro, rate-limited)'},
+        {id:'p4-1', type:'DEV', text:'Algo-Strategie-Marktplatz (User-eigene Strategien)'},
+        {id:'p4-2', type:'DEV', text:'White-Label-Option für Broker'},
+        {id:'p4-3', type:'DEV', text:'Institutionelle API-Pakete'},
+        {id:'p4-4', type:'DEV', text:'Internationale Expansion (EN vollständig, FR, ES)'},
+      ]},
+      { name:'Ziele', tasks:[
+        {id:'p4-5', type:'ZIEL', text:'UG → GmbH-Umwandlung'},
+        {id:'p4-6', type:'ZIEL', text:'2.000–10.000 Nutzer → €6,6M–€54M Unternehmenswert'},
+      ]},
+    ]
+  }
+];
+
+function loadState(){ try{ return JSON.parse(localStorage.getItem(STORAGE_KEY)||'{}'); }catch(e){ return {}; } }
+function saveState(s){ localStorage.setItem(STORAGE_KEY, JSON.stringify(s)); }
+
+function allTasks(){
+  var all=[];
+  PHASES.forEach(function(p){ p.sections.forEach(function(s){ s.tasks.forEach(function(t){ all.push(t); }); }); });
+  return all;
+}
+function phaseTasks(phase){
+  var all=[];
+  phase.sections.forEach(function(s){ s.tasks.forEach(function(t){ all.push(t); }); });
+  return all;
+}
+
+function render(){
+  var state = loadState();
+  var all = allTasks();
+  var doneCount = all.filter(function(t){ return state[t.id]; }).length;
+  var totalCount = all.length;
+  var pct = totalCount ? Math.round(doneCount/totalCount*100) : 0;
+
+  var app = document.getElementById('app');
+  app.innerHTML = '';
+
+  // Header
+  var hdr = document.createElement('div');
+  hdr.className = 'page-header';
+  hdr.innerHTML = '<div><div class="page-title">Projektplan Dashboard</div>'
+    + '<div class="page-sub">RS Platform &nbsp;·&nbsp; Admin-only &nbsp;·&nbsp; Fortschritt wird lokal gespeichert</div></div>'
+    + '<button class="reset-btn" onclick="resetAll()">Zurücksetzen</button>';
+  app.appendChild(hdr);
+
+  // Global progress bar
+  var gp = document.createElement('div');
+  gp.innerHTML = '<div class="global-bar-wrap"><div class="global-bar-fill" style="width:'+pct+'%"></div></div>'
+    + '<div class="progress-meta"><span>Gesamtfortschritt</span><span>'+doneCount+' / '+totalCount+' Aufgaben &nbsp;·&nbsp; '+pct+'%</span></div>';
+  app.appendChild(gp);
+
+  // Phases grid
+  var grid = document.createElement('div');
+  grid.className = 'phases-grid';
+
+  PHASES.forEach(function(phase){
+    var ptasks = phaseTasks(phase);
+    var pdone = ptasks.filter(function(t){ return state[t.id]; }).length;
+    var ppct = ptasks.length ? Math.round(pdone/ptasks.length*100) : 0;
+
+    var card = document.createElement('div');
+    card.className = 'phase-card';
+
+    // Header
+    var ph = document.createElement('div');
+    ph.className = 'phase-header';
+    ph.innerHTML = '<div><div class="phase-title" style="color:'+phase.color+'">'+phase.title+'</div>'
+      + '<div class="phase-sub">'+phase.subtitle+'</div></div>'
+      + '<div class="phase-count" style="color:'+phase.color+'">'+pdone+' / '+ptasks.length+'</div>';
+    card.appendChild(ph);
+
+    // Progress bar
+    var pbWrap = document.createElement('div');
+    pbWrap.className = 'phase-bar-bg';
+    var pbFill = document.createElement('div');
+    pbFill.className = 'phase-bar-fill';
+    pbFill.style.cssText = 'width:'+ppct+'%;background:'+phase.color+';height:3px;';
+    pbWrap.appendChild(pbFill);
+    card.appendChild(pbWrap);
+
+    // Sections + tasks
+    phase.sections.forEach(function(sec){
+      var sl = document.createElement('div');
+      sl.className = 'section-label';
+      sl.textContent = sec.name;
+      card.appendChild(sl);
+
+      sec.tasks.forEach(function(task){
+        var row = document.createElement('label');
+        row.className = 'task-row';
+
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'task-cb';
+        cb.checked = !!state[task.id];
+        cb.addEventListener('change', function(){
+          var s = loadState();
+          s[task.id] = cb.checked;
+          saveState(s);
+          render();
+        });
+
+        var badge = document.createElement('span');
+        badge.className = 'task-badge b-'+task.type;
+        badge.textContent = task.type;
+
+        var txt = document.createElement('span');
+        txt.className = 'task-text' + (state[task.id] ? ' done' : '');
+        txt.textContent = task.text;
+
+        row.appendChild(cb);
+        row.appendChild(badge);
+        row.appendChild(txt);
+        card.appendChild(row);
+      });
+    });
+
+    grid.appendChild(card);
+  });
+
+  app.appendChild(grid);
+
+  // Reference tables
+  var ref = document.createElement('div');
+  ref.className = 'ref-wrap';
+
+  // KPI table
+  var kpiCard = document.createElement('div');
+  kpiCard.className = 'ref-card';
+  kpiCard.innerHTML = '<div class="ref-card-title">KPI-Ziele nach Phase</div>'
+    + '<table class="ref-table"><thead><tr><th>Kennzahl</th><th>Phase 1</th><th>Phase 2</th><th>Phase 3</th></tr></thead><tbody>'
+    + '<tr><td>Zahlende Nutzer</td><td>50</td><td>300</td><td>1.000</td></tr>'
+    + '<tr><td>MRR</td><td>€2k</td><td>€13k</td><td>€45k</td></tr>'
+    + '<tr><td>Monatl. Churn</td><td>&lt; 10%</td><td>&lt; 6%</td><td>&lt; 3%</td></tr>'
+    + '<tr><td>Free-to-Paid</td><td>5%</td><td>8%</td><td>12%</td></tr>'
+    + '<tr><td>NPS</td><td>&gt; 30</td><td>&gt; 45</td><td>&gt; 60</td></tr>'
+    + '<tr><td>Signal-Accuracy</td><td>Messen</td><td>&gt; 55%</td><td>&gt; 60%</td></tr>'
+    + '</tbody></table>';
+  ref.appendChild(kpiCard);
+
+  // Holding tax savings
+  var holdCard = document.createElement('div');
+  holdCard.className = 'ref-card';
+  holdCard.innerHTML = '<div class="ref-card-title">Steuerersparnis Holding bei Exit (§ 8b KStG)</div>'
+    + '<table class="ref-table"><thead><tr><th>Verkaufspreis</th><th>Privat ~26,4%</th><th>Holding ~1,5%</th><th>Ersparnis</th></tr></thead><tbody>'
+    + '<tr><td>€500k</td><td>~€132k</td><td>~€7,5k</td><td class="sav-hi">~€124k</td></tr>'
+    + '<tr><td>€2M</td><td>~€528k</td><td>~€30k</td><td class="sav-hi">~€498k</td></tr>'
+    + '<tr><td>€10M</td><td>~€2,64M</td><td>~€150k</td><td class="sav-hi">~€2,49M</td></tr>'
+    + '</tbody></table>';
+  ref.appendChild(holdCard);
+
+  // Valuation table (full width)
+  var valOuter = document.createElement('div');
+  valOuter.style.cssText = 'grid-column:1/-1;';
+  var valCard = document.createElement('div');
+  valCard.className = 'ref-card';
+  valCard.innerHTML = '<div class="ref-card-title">Plattformbewertung nach Ausbaustufe &nbsp;·&nbsp; Ø €45/Mo je Nutzer</div>'
+    + '<table class="ref-table"><thead><tr><th>Stufe</th><th>Nutzer</th><th>ARR</th><th>Multiple</th><th>Bewertung</th></tr></thead><tbody>'
+    + '<tr><td>MVP / Launch (M 0–6)</td><td>0–100</td><td>€0–54k</td><td>—</td><td class="val-hi">€100k–250k</td></tr>'
+    + '<tr><td>Early Traction (M 6–18)</td><td>100–500</td><td>€54k–270k</td><td>3–5x</td><td class="val-hi">€200k–1,3M</td></tr>'
+    + '<tr><td>Product-Market Fit (J 2–3)</td><td>500–2.000</td><td>€270k–1,1M</td><td>5–8x</td><td class="val-hi">€1,3M–8,8M</td></tr>'
+    + '<tr><td>Scaling (J 3–5)</td><td>2.000–10.000</td><td>€1,1M–5,4M</td><td>6–10x</td><td class="val-hi">€6,6M–54M</td></tr>'
+    + '<tr><td>Strategischer Exit (J 5+)</td><td>10.000+</td><td>€5,4M+</td><td>+ Aufschlag</td><td class="val-hi">€30M–100M+</td></tr>'
+    + '</tbody></table>';
+  valOuter.appendChild(valCard);
+  ref.appendChild(valOuter);
+
+  app.appendChild(ref);
+}
+
+function resetAll(){
+  if(!confirm('Alle Aufgaben als unerledigt markieren?')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  render();
+}
+
+(async function(){
+  try {
+    var r = await window.apiFetch('/api/user/me');
+    if(!r || r.status !== 200){ window.location.href='/index.html'; return; }
+    var u = await r.json();
+    if(!u.is_admin){ window.location.href='/index.html'; return; }
+
+    var bar = document.getElementById('plan-bar');
+    if(bar){
+      bar.innerHTML = '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
+        + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
+        + '&nbsp;&nbsp;<a href="/admin.html" style="color:#fbbf24;font-size:12px;text-decoration:none">Admin</a>';
+    }
+
+    document.getElementById('app').style.display = 'block';
+    render();
+  } catch(e) {
+    window.location.href='/index.html';
+  }
+})();
+</script>
+</body>
+</html>

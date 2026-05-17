@@ -109,6 +109,10 @@
       bar.innerHTML = '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
         + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
         + adminLink;
+      if (u.is_admin) {
+        var nb = document.querySelector('.nav-bar');
+        if (nb) { var ra=document.createElement('a'); ra.href='/roadmap.html'; ra.className='nav-switch'; ra.style.cssText='border-color:#7c3aed;color:#a78bfa;'; ra.textContent='ROADMAP'; nb.appendChild(ra); }
+      }
     } catch(e) {}
   })();
 </script>
