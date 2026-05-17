@@ -86,8 +86,8 @@ def update_ticker(ticker):
                 raw_1h.columns = raw_1h.columns.get_level_values(0)
             raw_1h = raw_1h[["Open", "High", "Low", "Close"]].dropna()
             raw_1h.index = pd.to_datetime(raw_1h.index)
-            med = raw_1h["Close"].median()
-            raw_1h = raw_1h[(raw_1h["Low"] >= med * 0.4) & (raw_1h["High"] <= med * 2.5)]
+            rolling_med = raw_1h["Close"].rolling(20, min_periods=3, center=True).median()
+            raw_1h = raw_1h[(raw_1h["Low"] >= rolling_med * 0.5) & (raw_1h["High"] <= rolling_med * 2.0)]
             raw_4h = raw_1h.resample("4h").agg(
                 {"Open": "first", "High": "max", "Low": "min", "Close": "last"}
             ).dropna()
