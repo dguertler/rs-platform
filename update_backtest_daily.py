@@ -88,7 +88,6 @@ def update_ticker(ticker):
             raw_1h.index = pd.to_datetime(raw_1h.index)
             raw_1h.dropna(subset=["Close"], inplace=True)
             _et = ZoneInfo("America/New_York")
-            _EH_DEV = 0.50
             _ext = pd.Series(
                 [ts.astimezone(_et).hour < 9 or
                  (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
@@ -96,15 +95,14 @@ def update_ticker(ticker):
                  for ts in raw_1h.index],
                 index=raw_1h.index, dtype=bool
             )
-            _rmed = raw_1h["Close"].rolling(5, min_periods=1, center=True).median()
-            _bad  = _ext & (
-                (raw_1h["Volume"] <= 1) |
-                ((raw_1h["Close"] - _rmed).abs() / _rmed > _EH_DEV) |
-                ((_rmed - raw_1h["Low"]) / _rmed > _EH_DEV)
-            )
-            raw_1h.loc[_bad, ["Open","High","Low","Close"]] = float("nan")
+            _bad_vol = _ext & (raw_1h["Volume"] <= 1)
+            raw_1h.loc[_bad_vol, ["Open","High","Low","Close"]] = float("nan")
             raw_1h[["Open","High","Low","Close"]] = raw_1h[["Open","High","Low","Close"]].ffill()
             raw_1h.dropna(subset=["Close"], inplace=True)
+            _prev_low = raw_1h["Low"].shift(1)
+            _next_low = raw_1h["Low"].shift(-1)
+            _bad_low  = _ext & (raw_1h["Low"] < _prev_low * 0.70) & (raw_1h["Low"] < _next_low * 0.70)
+            raw_1h.loc[_bad_low, "Low"] = raw_1h.loc[_bad_low, ["Open","Close"]].min(axis=1)
             raw_4h = raw_1h[["Open","High","Low","Close"]].resample("4h").agg(
                 {"Open": "first", "High": "max", "Low": "min", "Close": "last"}
             ).dropna()

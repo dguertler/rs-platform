@@ -152,7 +152,6 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         from zoneinfo import ZoneInfo
         _et     = ZoneInfo("America/New_York")
         _berlin = ZoneInfo("Europe/Berlin")
-        _EH_DEV  = 0.50
         extended = pd.Series(
             [ts.astimezone(_et).hour < 9 or
              (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
@@ -160,13 +159,14 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
              for ts in df.index],
             index=df.index, dtype=bool
         )
-        rmed      = df["Close"].rolling(5, min_periods=1, center=True).median()
-        close_dev = (df["Close"] - rmed).abs() / rmed
-        low_dev   = (rmed - df["Low"]) / rmed
-        bad = extended & ((df["Volume"] <= 1) | (close_dev > _EH_DEV) | (low_dev > _EH_DEV))
-        df.loc[bad, ["Open","High","Low","Close"]] = float("nan")
+        bad_vol = extended & (df["Volume"] <= 1)
+        df.loc[bad_vol, ["Open","High","Low","Close"]] = float("nan")
         df[["Open","High","Low","Close"]] = df[["Open","High","Low","Close"]].ffill()
         df.dropna(subset=["Close"], inplace=True)
+        prev_low = df["Low"].shift(1)
+        next_low = df["Low"].shift(-1)
+        bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
+        df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open","Close"]].min(axis=1)
         df_4h = df[["Open","High","Low","Close"]].resample("4h").agg(
             {"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
         from zoneinfo import ZoneInfo
