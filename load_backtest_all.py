@@ -73,11 +73,28 @@ def load_ticker(ticker):
             if not raw_1h.empty:
                 if isinstance(raw_1h.columns, pd.MultiIndex):
                     raw_1h.columns = raw_1h.columns.get_level_values(0)
-                raw_1h = raw_1h[["Open", "High", "Low", "Close"]].dropna()
+                raw_1h = raw_1h[["Open", "High", "Low", "Close", "Volume"]].copy()
                 raw_1h.index = pd.to_datetime(raw_1h.index)
-                rolling_med = raw_1h["Close"].rolling(20, min_periods=3, center=True).median()
-                raw_1h = raw_1h[(raw_1h["Low"] >= rolling_med * 0.5) & (raw_1h["High"] <= rolling_med * 2.0)]
-                raw_4h = raw_1h.resample("4h").agg({
+                raw_1h.dropna(subset=["Close"], inplace=True)
+                _et = ZoneInfo("America/New_York")
+                _EH_DEV = 0.20
+                _ext = pd.Series(
+                    [ts.astimezone(_et).hour < 9 or
+                     (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
+                     ts.astimezone(_et).hour >= 16
+                     for ts in raw_1h.index],
+                    index=raw_1h.index, dtype=bool
+                )
+                _rmed = raw_1h["Close"].rolling(5, min_periods=1, center=True).median()
+                _bad  = _ext & (
+                    (raw_1h["Volume"] <= 1) |
+                    ((raw_1h["Close"] - _rmed).abs() / _rmed > _EH_DEV) |
+                    ((_rmed - raw_1h["Low"]) / _rmed > _EH_DEV)
+                )
+                raw_1h.loc[_bad, ["Open","High","Low","Close"]] = float("nan")
+                raw_1h[["Open","High","Low","Close"]] = raw_1h[["Open","High","Low","Close"]].ffill()
+                raw_1h.dropna(subset=["Close"], inplace=True)
+                raw_4h = raw_1h[["Open","High","Low","Close"]].resample("4h").agg({
                     "Open":  "first",
                     "High":  "max",
                     "Low":   "min",

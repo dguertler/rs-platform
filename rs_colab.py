@@ -175,20 +175,37 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
 
-        df = df[["Open", "High", "Low", "Close"]].dropna()
+        df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
         df.index = pd.to_datetime(df.index)
-        rolling_med = df["Close"].rolling(20, min_periods=3, center=True).median()
-        df = df[(df["Low"] >= rolling_med * 0.5) & (df["High"] <= rolling_med * 2.0)]
+        df.dropna(subset=["Close"], inplace=True)
 
-        df_4h = df.resample("4h").agg({
+        from zoneinfo import ZoneInfo
+        _et     = ZoneInfo("America/New_York")
+        _berlin = ZoneInfo("Europe/Berlin")
+
+        _EH_DEV  = 0.20
+        extended = pd.Series(
+            [ts.astimezone(_et).hour < 9 or
+             (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
+             ts.astimezone(_et).hour >= 16
+             for ts in df.index],
+            index=df.index, dtype=bool
+        )
+        rmed      = df["Close"].rolling(5, min_periods=1, center=True).median()
+        close_dev = (df["Close"] - rmed).abs() / rmed
+        low_dev   = (rmed - df["Low"]) / rmed
+        bad = extended & ((df["Volume"] <= 1) | (close_dev > _EH_DEV) | (low_dev > _EH_DEV))
+        df.loc[bad, ["Open", "High", "Low", "Close"]] = float("nan")
+        df[["Open", "High", "Low", "Close"]] = df[["Open", "High", "Low", "Close"]].ffill()
+        df.dropna(subset=["Close"], inplace=True)
+
+        df_4h = df[["Open", "High", "Low", "Close"]].resample("4h").agg({
             "Open":  "first",
             "High":  "max",
             "Low":   "min",
             "Close": "last"
         }).dropna()
 
-        from zoneinfo import ZoneInfo
-        _berlin = ZoneInfo("Europe/Berlin")
         result = []
         for dt, row in df_4h.iterrows():
             if pd.isna(row["Close"]): continue
