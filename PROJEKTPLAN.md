@@ -185,41 +185,106 @@ Der 4H-Chart ist als systematische Validierungsschicht implementiert — verhind
 
 ---
 
-## 6. Feature-Roadmap nach Ausbaustufen
+## 6. Detaillierter Phasenplan (Roadmap + Marketing)
 
-### Phase 1 — MVP (Monat 1–3)
-- [ ] Ampelsystem live (DE-Aktien + S&P 500)
-- [ ] Free / Basic / Pro Tier
-- [ ] Stripe-Integration
-- [ ] E-Mail-Alerts
-- [ ] Grundlegendes Dashboard
-- [ ] Impressum, DSGVO, AGB, Disclaimer
-- [ ] Holding-Struktur & operative UG gegründet
+### Phase 1 — Foundation (Monat 1–2)
 
-### Phase 2 — Early Growth (Monat 3–9)
-- [ ] Push-Notifications (Web + Mobile PWA)
-- [ ] Backtesting-Interface (Pro)
-- [ ] Watchlist-Funktion
-- [ ] Feature-Voting-System (Community)
-- [ ] Trustpilot + Google Reviews Integration
-- [ ] Referral-Programm
-- [ ] Englische Version (i18n)
+**Entwicklung**
+- [ ] Redesign Dashboard + Login/Account (Dark Theme)
+- [ ] Landing Page (DE) mit FAQ + Preistabelle
+- [ ] DSGVO: Impressum, Datenschutz, AGB, Cookie-Banner
+- [ ] yfinance 4H Daten-Patch + Validierungsschicht (3-Zeitrahmen-Konsistenzprüfung)
+- [ ] FOMO-E-Mail-System (trigger-basiert, max. 1x/Monat)
+- [ ] E-Mail-Onboarding-Sequenz (5 E-Mails: Tag 0/1/3/7/14)
+- [ ] Freemium-Limits schärfen (Lock-Icons, Upgrade-CTAs)
+- [ ] Aktien-Ratings für Top 50 RS-Aktien ausbauen
+- [ ] Onboarding-Wizard (3 Schritte nach Registrierung)
 
-### Phase 3 — Product-Market Fit (Monat 9–24)
-- [ ] API-Zugang (Pro, rate-limited)
-- [ ] DAX, MDAX, NASDAQ, Krypto
-- [ ] Telegram-Bot / Discord-Bot
-- [ ] Automatisierte Social-Media-Drafts
-- [ ] Newsletter-Automatisierung
-- [ ] Paper Trading (simuliert, ohne Echtgeld)
+**Marketing**
+- [ ] Instagram + TikTok Account anlegen, Handle sichern (@rs.trading o.ä.)
+- [ ] Erste 10 Posts erstellen (Claude-Drafts, manuell geprüft)
+
+**Ziele**
+- [ ] Anwalt für AGB/Disclaimer-Formulierungen beauftragen (~€300)
+- [ ] Beta-Nutzer: 50 kostenlose Pro-Accounts vergeben
+
+---
+
+### Phase 1.5 — Launch-Vorbereitung (Monat 2–3)
+
+**Entwicklung**
+- [ ] Watchlist-Feature (Markierung + DB-Tabelle)
+- [ ] Wöchentliche personalisierte Watchlist-E-Mail
+- [ ] Earnings-Kalender in Watchlist-E-Mail integrieren
+- [ ] Landing Page EN + i18n Frontend
+- [ ] Performance-Kennzahlen Section (nach Rechtscheck freischalten)
+
+**Marketing**
+- [ ] 3 Posts/Woche Instagram + TikTok (Reels)
+- [ ] Reddit-Posts in r/finanzen, r/Boersenhandel
+- [ ] 5 Testimonials von Beta-Nutzern einsammeln
+
+**Ziele**
+- [ ] Soft-Launch: Erste 200 registrierte Nutzer
+
+---
+
+### Phase 2 — Wachstum (Monat 3–6)
+
+**Entwicklung**
+- [ ] Referral-Programm (Stripe Coupons API)
+- [ ] Feature-Voting-Bereich (Upvote-System + Punkte/Badges)
+- [ ] SEO-Aktien-Seiten (public, indexierbar, gecacht)
+- [ ] Claude-API Social-Media-Draft + Freigabe-Workflow
+- [ ] Trustpilot + Google Reviews (automatische Anfrage nach Pro-Upgrade)
+- [ ] Backtesting-Interface (Pro-only)
+
+**Marketing**
+- [ ] Meta Ads starten: €200/Mo, 2 Creatives testen
+- [ ] Google Search Ads (Long-Tail Keywords: "Aktiensignale kostenlos" etc.)
+- [ ] Erster Micro-Influencer Deal (5–20k Follower, Finance-Nische)
+- [ ] Black Friday Aktion (30% Rabatt, 72h)
+
+**Ziele**
+- [ ] 100 zahlende Nutzer → ~€1.900 MRR
+
+---
+
+### Phase 3 — Skalierung (Monat 7–18)
+
+**Entwicklung**
+- [ ] Paper-Trading-Wettbewerb (Anti-Fake-Design, klarer "kein Echtgeld"-Hinweis)
+- [ ] Portfolio-Tracker (echte manuelle Einträge, nur forward-looking)
+- [ ] KI-E-Mail-Support (technische Fragen, Claude-API-basiert)
+- [ ] Weitere Indizes (EURO STOXX, MDAX, NASDAQ, Krypto)
+- [ ] PostgreSQL Migration / Optimierung (bei >3.000 Nutzern)
 - [ ] Mobile App (React Native)
 
-### Phase 4 — Scaling (Jahr 2–4)
-- [ ] Internationale Expansion (EN, FR, ES)
-- [ ] Wettbewerbs-/Community-Events (Paper-Trading-Contests mit Preisen)
+**Marketing**
+- [ ] Ads-Budget skalieren: €500 → €1.500 → €3.000/Mo
+- [ ] EN-Markt aktivieren (UK, NL, Skandinavien)
+- [ ] YouTube Pre-Roll Ads
+- [ ] Affiliate-Programm (20% recurring Commission)
+- [ ] Neujahrs-Aktion (20% auf Jahresabo, 1.–7. Januar)
+
+**Ziele**
+- [ ] 500 zahlende Nutzer → ~€9.500 MRR
+- [ ] 1.200 zahlende Nutzer → ~€22.800 MRR (passiv skalierend)
+
+---
+
+### Phase 4 — Scaling / Exit-Vorbereitung (Jahr 2–4)
+
+**Entwicklung**
+- [ ] API-Zugang für Drittanbieter (Pro, rate-limited)
 - [ ] Algo-Strategie-Marktplatz (User-eigene Strategien)
 - [ ] White-Label-Option für Broker
 - [ ] Institutionelle API-Pakete
+- [ ] Internationale Expansion (EN vollständig, FR, ES)
+
+**Ziele**
+- [ ] UG → GmbH-Umwandlung (bei ausreichend Kapitalreserve)
+- [ ] 2.000–10.000 zahlende Nutzer → €6,6M–€54M Unternehmenswert
 
 ---
 
