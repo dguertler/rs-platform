@@ -76,7 +76,7 @@ try:
         raw_1h.index = pd.to_datetime(raw_1h.index)
         raw_1h.dropna(subset=["Close"], inplace=True)
         _et = ZoneInfo("America/New_York")
-        _EH_DEV = 0.20
+        _EH_DEV = 0.50
         _ext = pd.Series(
             [ts.astimezone(_et).hour < 9 or
              (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or

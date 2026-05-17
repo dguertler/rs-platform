@@ -152,7 +152,7 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         from zoneinfo import ZoneInfo
         _et     = ZoneInfo("America/New_York")
         _berlin = ZoneInfo("Europe/Berlin")
-        _EH_DEV  = 0.20
+        _EH_DEV  = 0.50
         extended = pd.Series(
             [ts.astimezone(_et).hour < 9 or
              (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
