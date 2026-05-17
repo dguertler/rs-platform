@@ -12,6 +12,9 @@ OUT_FILE = f"backtest_{TICKER.lower().replace('.', '_')}.json"
 
 print(f"Lade {TICKER} Daten von yfinance ...")
 
+from zoneinfo import ZoneInfo
+_berlin = ZoneInfo("Europe/Berlin")
+
 def df_to_ohlcv(df, fmt="%Y-%m-%d"):
     if df is None or df.empty:
         return []
@@ -23,6 +26,8 @@ def df_to_ohlcv(df, fmt="%Y-%m-%d"):
             c = float(row["Close"])
             if pd.isna(c):
                 continue
+            if "%H" in fmt and dt.tzinfo:
+                dt = dt.astimezone(_berlin)
             result.append({
                 "d": dt.strftime(fmt),
                 "o": round(float(row["Open"]),  2),

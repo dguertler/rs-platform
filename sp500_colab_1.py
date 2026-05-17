@@ -151,10 +151,13 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         df = df[(df["Low"] >= med * 0.4) & (df["High"] <= med * 2.5)]
         df_4h = df.resample("4h").agg(
             {"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
+        from zoneinfo import ZoneInfo
+        _berlin = ZoneInfo("Europe/Berlin")
         result = []
         for dt, row in df_4h.iterrows():
             if pd.isna(row["Close"]): continue
-            result.append({"d": dt.strftime("%Y-%m-%d %H:%M"),
+            dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
+            result.append({"d": dt_local.strftime("%Y-%m-%d %H:%M"),
                            "o": round(float(row["Open"]),  2),
                            "h": round(float(row["High"]),  2),
                            "l": round(float(row["Low"]),   2),
