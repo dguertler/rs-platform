@@ -17,7 +17,7 @@ from auth import (
     create_reset_token, use_reset_token, get_all_users, create_user,
 )
 from stripe_handler import create_checkout_session, parse_webhook
-from email_handler import send_reset_email
+from email_handler import send_reset_email, send_reset_email_gmail
 
 app = FastAPI(title="RS Platform")
 
@@ -129,6 +129,16 @@ async def forgot(req: ForgotRequest, bg: BackgroundTasks):
         url = f"{app_url}/reset.html?token={token}"
         bg.add_task(send_reset_email, req.email, url)
     return {"detail": "Wenn deine E-Mail registriert ist, wurde ein Reset-Link versandt."}
+
+
+@app.post("/api/auth/forgot-gmail")
+async def forgot_gmail(req: ForgotRequest, bg: BackgroundTasks):
+    token = create_reset_token(req.email)
+    if token:
+        app_url = os.environ.get("APP_URL", "http://localhost:8000")
+        url = f"{app_url}/reset.html?token={token}"
+        bg.add_task(send_reset_email_gmail, req.email, url)
+    return {"detail": "Wenn deine E-Mail registriert ist, wurde ein Reset-Link versandt (Gmail)."}
 
 
 @app.post("/api/auth/reset")

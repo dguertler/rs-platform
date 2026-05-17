@@ -17,6 +17,8 @@
     button { width: 100%; background: #2563eb; border: none; border-radius: 6px; color: #fff; font-size: 14px; font-weight: 500; padding: 11px; cursor: pointer; }
     button:hover:not(:disabled) { background: #1d4ed8; }
     button:disabled { background: #1e3a5f; cursor: not-allowed; color: #64748b; }
+    .btn-gmail { background: #166534; margin-top: 8px; }
+    .btn-gmail:hover:not(:disabled) { background: #14532d; }
     .msg { border-radius: 6px; font-size: 13px; padding: 10px 14px; margin-bottom: 16px; display: none; }
     .err { background: #450a0a; border: 1px solid #7f1d1d; color: #fca5a5; }
     .ok  { background: #052e16; border: 1px solid #166534; color: #86efac; }
@@ -33,17 +35,17 @@
     <form id="form">
       <label>E-Mail</label>
       <input type="email" id="email" required placeholder="name@example.com">
-      <button type="submit" id="btn">Link anfordern</button>
+      <button type="submit" id="btn">Link anfordern (Resend)</button>
+      <button type="button" id="btn-gmail" class="btn-gmail">Link anfordern (Gmail Test)</button>
     </form>
     <a class="back" href="/login.html">Zurueck zum Login</a>
   </div>
   <script>
-    document.getElementById("form").addEventListener("submit", async function(e) {
-      e.preventDefault();
-      var btn=document.getElementById("btn"), err=document.getElementById("err"), ok=document.getElementById("ok");
+    async function sendForgot(endpoint, btn, label) {
+      var err=document.getElementById("err"), ok=document.getElementById("ok");
       btn.disabled=true; btn.textContent="Senden..."; err.style.display="none"; ok.style.display="none";
       try {
-        var r = await fetch("/api/auth/forgot", { method:"POST", headers:{"Content-Type":"application/json"},
+        var r = await fetch(endpoint, { method:"POST", headers:{"Content-Type":"application/json"},
           body: JSON.stringify({email: document.getElementById("email").value}) });
         var d = await r.json();
         if (!r.ok) throw new Error(d.detail||"Fehler");
@@ -51,8 +53,15 @@
         document.getElementById("form").style.display="none";
       } catch(ex) {
         err.textContent=ex.message; err.style.display="block";
-        btn.disabled=false; btn.textContent="Link anfordern";
+        btn.disabled=false; btn.textContent=label;
       }
+    }
+    document.getElementById("form").addEventListener("submit", function(e) {
+      e.preventDefault();
+      sendForgot("/api/auth/forgot", document.getElementById("btn"), "Link anfordern (Resend)");
+    });
+    document.getElementById("btn-gmail").addEventListener("click", function() {
+      sendForgot("/api/auth/forgot-gmail", document.getElementById("btn-gmail"), "Link anfordern (Gmail Test)");
     });
   </script>
 </body>
