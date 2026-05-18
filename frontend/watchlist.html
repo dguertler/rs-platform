@@ -742,6 +742,11 @@ function WatchlistApp() {
     }
   };
 
+  // Sort by score descending
+  const sortedItems = useMemo(() =>
+    [...(items || [])].sort((a, b) => (b.score ?? -Infinity) - (a.score ?? -Infinity)),
+  [items]);
+
   // Compute structure for selected ticker
   const selectedItem = useMemo(() => (items || []).find(it => it.ticker === selected), [items, selected]);
 
@@ -842,7 +847,7 @@ function WatchlistApp() {
             </div>
           )}
 
-          {(items || []).flatMap((item, idx) => {
+          {sortedItems.flatMap((item, idx) => {
             const structs = structureMap[item.ticker] || {};
             const isBOC   = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
             const hasChart = item.ohlcv?.length > 0;

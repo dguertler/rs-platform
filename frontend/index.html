@@ -1079,7 +1079,15 @@ function App() {
   const [signals, setSignals] = useState({});
   const [ratings, setRatings] = useState({});
   const [ratingModal, setRatingModal] = useState(null);
-  const [wlAdded, setWlAdded] = useState({});
+  const [wlTickers, setWlTickers] = useState(new Set());
+  const [wlErr,     setWlErr]     = useState({});
+
+  useEffect(() => {
+    apiFetch("/api/watchlist")
+      .then(r => r.ok ? r.json() : { items: [] })
+      .then(json => setWlTickers(new Set((json.items || []).map(it => it.ticker))))
+      .catch(() => {});
+  }, []);
 
   const addToWatchlist = useCallback(async (ticker, e) => {
     e.stopPropagation();
@@ -1089,11 +1097,15 @@ function App() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ticker }),
       });
-      setWlAdded(prev => ({ ...prev, [ticker]: r.ok ? "ok" : "err" }));
-      setTimeout(() => setWlAdded(prev => { const n = {...prev}; delete n[ticker]; return n; }), 1800);
+      if (r.ok) {
+        setWlTickers(prev => new Set([...prev, ticker]));
+      } else {
+        setWlErr(prev => ({ ...prev, [ticker]: true }));
+        setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
+      }
     } catch {
-      setWlAdded(prev => ({ ...prev, [ticker]: "err" }));
-      setTimeout(() => setWlAdded(prev => { const n = {...prev}; delete n[ticker]; return n; }), 1800);
+      setWlErr(prev => ({ ...prev, [ticker]: true }));
+      setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
     }
   }, []);
 
@@ -1278,7 +1290,7 @@ function App() {
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
             <span style={{textAlign:"center",color:"#a78bfa"}}>4H</span>
             {WINDOWS.map(w => <span key={w} style={{textAlign:"center"}}>{w}</span>)}
-            <span></span>
+            <span style={{textAlign:"center",color:"#7c3aed"}}>WL</span>
           </div>
 
           {rows.map(item => {
@@ -1380,16 +1392,17 @@ function App() {
                   <div key={w} style={{textAlign:"center"}}><Cell v={item.w[w]}/></div>
                 ))}
                 <button
-                  onClick={e => addToWatchlist(item.t, e)}
-                  title="Zur Watchlist hinzufügen"
+                  onClick={e => !wlTickers.has(item.t) && addToWatchlist(item.t, e)}
+                  title={wlTickers.has(item.t) ? "In Watchlist" : "Zur Watchlist hinzufügen"}
                   style={{
-                    background:"none",
-                    border:`1px solid ${wlAdded[item.t]==="ok"?"#22c55e":wlAdded[item.t]==="err"?"#ef4444":"#334155"}`,
-                    color:wlAdded[item.t]==="ok"?"#22c55e":wlAdded[item.t]==="err"?"#ef4444":"#475569",
-                    borderRadius:4,padding:"1px 4px",fontSize:11,cursor:"pointer",lineHeight:1,
-                    transition:"border-color .15s,color .15s",
+                    background: wlTickers.has(item.t) ? "#0a2a0a" : "none",
+                    border:`1px solid ${wlTickers.has(item.t)?"#22c55e":wlErr[item.t]?"#ef4444":"#334155"}`,
+                    color: wlTickers.has(item.t) ? "#22c55e" : wlErr[item.t] ? "#ef4444" : "#475569",
+                    borderRadius:4,padding:"1px 4px",fontSize:11,
+                    cursor: wlTickers.has(item.t) ? "default" : "pointer",
+                    lineHeight:1, transition:"border-color .15s,color .15s",
                   }}>
-                  {wlAdded[item.t]==="ok"?"✓":wlAdded[item.t]==="err"?"✗":"+"}
+                  {wlTickers.has(item.t) ? "✓" : wlErr[item.t] ? "✗" : "+"}
                 </button>
               </div>
             );
