@@ -77,28 +77,41 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
 # ── Öffentliche Funktionen ────────────────────────────────────────────────────
 
 def fetch_nasdaq100(fallback: list) -> list:
-    """Nasdaq-100 Ticker: FMP → Wikipedia → Fallback"""
+    """Nasdaq-100 Ticker: FMP → Wikipedia, Fallback immer als Ergänzung"""
     print("Lade Nasdaq-100 Ticker-Liste …")
+
+    primary = None
 
     # 1) FMP
     raw = _fmp_fetch("nasdaq_constituent")
     if raw and len(raw) >= 95:
-        return list(set(raw))
+        primary = list(set(raw))
 
     # 2) Wikipedia
-    def _clean_ndx(ts):
-        return [x for x in ts if x and x.replace('-','').isalpha() and 1 < len(x) <= 5]
+    if primary is None:
+        def _clean_ndx(ts):
+            return [x for x in ts if x and x.replace('-','').isalpha() and 1 < len(x) <= 5]
 
-    ts = _wikipedia_table(
-        "https://en.wikipedia.org/wiki/Nasdaq-100",
-        ("ticker", "symbol"), 95, _clean_ndx
-    )
-    if ts:
-        return list(set(ts))
+        ts = _wikipedia_table(
+            "https://en.wikipedia.org/wiki/Nasdaq-100",
+            ("ticker", "symbol"), 95, _clean_ndx
+        )
+        if ts:
+            primary = list(set(ts))
 
-    # 3) Fallback
-    print(f"  Fallback: {len(fallback)} Ticker")
-    return list(fallback)
+    # 3) Nur Fallback (beide Quellen fehlgeschlagen)
+    if primary is None:
+        print(f"  Fallback: {len(fallback)} Ticker")
+        return list(fallback)
+
+    # Fallback-Ticker ergänzen, die API/Wikipedia noch nicht kennt
+    primary_set = set(primary)
+    extra = [t for t in fallback if t not in primary_set]
+    if extra:
+        print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
+        primary.extend(extra)
+
+    return primary
 
 
 def fetch_sp500(fallback: list) -> list | None:
