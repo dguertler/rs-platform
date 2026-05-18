@@ -15,7 +15,9 @@ from auth import (
     get_user_plan, set_user_plan, downgrade_by_customer,
     check_is_admin, set_admin, set_active, change_password,
     create_reset_token, use_reset_token, get_all_users, create_user,
+    get_watchlist, add_to_watchlist, remove_from_watchlist,
 )
+from news_handler import fetch_news
 from stripe_handler import create_checkout_session, parse_webhook
 from email_handler import send_reset_email
 
@@ -79,6 +81,9 @@ class AdminPatchUser(BaseModel):
     is_admin: bool | None = None
     is_active: bool | None = None
     new_password: str | None = None
+
+class WatchlistAddRequest(BaseModel):
+    ticker: str
 
 
 @app.on_event("startup")
@@ -232,6 +237,97 @@ async def get_ratings(email: str = Depends(require_auth)):
     if not path.exists():
         return JSONResponse(content={"ratings": []})
     return JSONResponse(content=_load(path))
+
+
+def _find_ticker_in_markets(ticker: str) -> list[dict]:
+    """Search all market JSON files for ticker, return list of {name, rank, in_top20, data}."""
+    results = []
+    for market, filename in MARKET_FILES.items():
+        path = DATA_DIR / filename
+        if not path.exists():
+            continue
+        try:
+            market_data = _load(path)
+            arr = market_data if isinstance(market_data, list) else market_data.get("data", [])
+            for idx, entry in enumerate(arr):
+                if entry.get("ticker", "").upper() == ticker.upper():
+                    results.append({
+                        "market": market,
+                        "rank": idx + 1,
+                        "in_top20": idx < 20,
+                        "entry": entry,
+                        "benchmark": market_data.get("benchmark", "QQQ") if not isinstance(market_data, list) else "QQQ",
+                        "benchmark_ohlcv_w": market_data.get("benchmark_ohlcv_w", []) if not isinstance(market_data, list) else [],
+                        "benchmark_ohlcv": market_data.get("benchmark_ohlcv", []) if not isinstance(market_data, list) else [],
+                    })
+                    break
+        except Exception:
+            continue
+    return results
+
+
+@app.get("/api/watchlist")
+async def get_user_watchlist(email: str = Depends(require_auth)):
+    tickers = get_watchlist(email)
+    items = []
+    for ticker in tickers:
+        market_hits = _find_ticker_in_markets(ticker)
+        if not market_hits:
+            # Ticker not found in any market data – include with minimal info
+            items.append({
+                "ticker": ticker.upper(),
+                "markets": [],
+                "score": None,
+                "windows": {},
+                "prev_rank": None,
+                "ohlcv_w": [],
+                "ohlcv": [],
+                "ohlcv_4h": [],
+                "benchmark": "QQQ",
+                "benchmark_ohlcv_w": [],
+                "benchmark_ohlcv": [],
+            })
+            continue
+        # Use first found market for chart data
+        primary = market_hits[0]
+        entry = primary["entry"]
+        items.append({
+            "ticker": ticker.upper(),
+            "markets": [{"name": h["market"], "rank": h["rank"], "in_top20": h["in_top20"]} for h in market_hits],
+            "score": entry.get("score"),
+            "windows": entry.get("windows", {}),
+            "prev_rank": entry.get("prev_rank"),
+            "ohlcv_w": entry.get("ohlcv_w", []),
+            "ohlcv": entry.get("ohlcv", []),
+            "ohlcv_4h": entry.get("ohlcv_4h", []),
+            "benchmark": primary["benchmark"],
+            "benchmark_ohlcv_w": primary["benchmark_ohlcv_w"],
+            "benchmark_ohlcv": primary["benchmark_ohlcv"],
+        })
+    return JSONResponse(content={"items": items})
+
+
+@app.post("/api/watchlist")
+async def add_watchlist_ticker(req: WatchlistAddRequest, email: str = Depends(require_auth)):
+    ticker = req.ticker.strip().upper()
+    if not ticker or len(ticker) > 12:
+        raise HTTPException(400, "Ungültiger Ticker")
+    added = add_to_watchlist(email, ticker)
+    if not added:
+        raise HTTPException(409, f"{ticker} ist bereits in deiner Watchlist")
+    return {"detail": f"{ticker} zur Watchlist hinzugefügt"}
+
+
+@app.delete("/api/watchlist/{ticker}")
+async def remove_watchlist_ticker(ticker: str, email: str = Depends(require_auth)):
+    remove_from_watchlist(email, ticker)
+    return {"detail": f"{ticker} aus Watchlist entfernt"}
+
+
+@app.get("/api/watchlist/news/{ticker}")
+async def get_watchlist_news(ticker: str, email: str = Depends(require_auth)):
+    news = fetch_news(ticker.upper())
+    return JSONResponse(content=news)
 
 
 @app.get("/api/stripe/checkout")
