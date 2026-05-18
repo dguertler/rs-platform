@@ -115,37 +115,51 @@ def fetch_nasdaq100(fallback: list) -> list:
 
 
 def fetch_sp500(fallback: list) -> list | None:
-    """S&P 500 Ticker: FMP → Wikipedia → None (Caller nutzt eigenen Fallback)"""
+    """S&P 500 Ticker: FMP → Wikipedia, Fallback immer als Ergänzung"""
     print("Lade S&P 500 Ticker-Liste …")
+
+    primary = None
 
     # 1) FMP
     raw = _fmp_fetch("sp500_constituent")
     if raw and len(raw) >= 490:
-        return sorted(set(t.replace(".", "-") for t in raw))
+        primary = sorted(set(t.replace(".", "-") for t in raw))
 
     # 2) Wikipedia
-    try:
-        import pandas as pd
-        df = pd.read_html(
-            "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
-        )[0]
-        ts = (df["Symbol"].dropna().astype(str).str.strip()
-              .str.replace(".", "-", regex=False).tolist())
-        ts = sorted([x for x in ts if x and len(x) <= 6])
-        if len(ts) >= 490:
-            print(f"  Wikipedia: {len(ts)} Ticker geladen")
-            return ts
-        print(f"  Wikipedia: nur {len(ts)} Ticker – zu wenig")
-    except Exception as e:
-        print(f"  Wikipedia: Fehler – {e}")
+    if primary is None:
+        try:
+            import pandas as pd
+            df = pd.read_html(
+                "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+            )[0]
+            ts = (df["Symbol"].dropna().astype(str).str.strip()
+                  .str.replace(".", "-", regex=False).tolist())
+            ts = sorted([x for x in ts if x and len(x) <= 6])
+            if len(ts) >= 490:
+                print(f"  Wikipedia: {len(ts)} Ticker geladen")
+                primary = ts
+            else:
+                print(f"  Wikipedia: nur {len(ts)} Ticker – zu wenig")
+        except Exception as e:
+            print(f"  Wikipedia: Fehler – {e}")
 
-    # 3) Signalisiert dem Aufrufer: eigenen Fallback verwenden
-    print(f"  Fallback: {len(fallback)} Ticker")
-    return None
+    # 3) Beide Quellen fehlgeschlagen – Caller nutzt eigenen Fallback
+    if primary is None:
+        print(f"  Fallback: {len(fallback)} Ticker")
+        return None
+
+    # Fallback-Ticker ergänzen, die API/Wikipedia noch nicht kennt
+    primary_set = set(primary)
+    extra = [t for t in fallback if t not in primary_set]
+    if extra:
+        print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
+        primary = sorted(set(primary) | set(extra))
+
+    return primary
 
 
 def fetch_dax40(fallback: list) -> list:
-    """DAX 40 Ticker: Wikipedia → Fallback  (FMP hat kein DAX-Endpoint)"""
+    """DAX 40 Ticker: Wikipedia, Fallback immer als Ergänzung  (FMP hat kein DAX-Endpoint)"""
     print("Lade DAX 40 Ticker-Liste …")
 
     def _clean_dax(ts):
@@ -158,12 +172,20 @@ def fetch_dax40(fallback: list) -> list:
             result.append(x)
         return [x for x in result if x.endswith(".DE")]
 
-    ts = _wikipedia_table(
+    primary = _wikipedia_table(
         "https://en.wikipedia.org/wiki/DAX",
         ("ticker", "symbol"), 35, _clean_dax
     )
-    if ts:
-        return list(set(ts))
 
-    print(f"  Fallback: {len(fallback)} Ticker")
-    return list(fallback)
+    if primary is None:
+        print(f"  Fallback: {len(fallback)} Ticker")
+        return list(fallback)
+
+    # Fallback-Ticker ergänzen, die Wikipedia noch nicht kennt
+    primary_set = set(primary)
+    extra = [t for t in fallback if t not in primary_set]
+    if extra:
+        print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
+        primary = list(set(primary) | set(extra))
+
+    return primary
