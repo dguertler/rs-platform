@@ -6,6 +6,7 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
+from fetch_tickers import fetch_dax40
 
 _DAX40_FALLBACK = [
     "ADS.DE",   # Adidas
@@ -50,24 +51,7 @@ _DAX40_FALLBACK = [
     "VNA.DE",   # Vonovia
 ]
 
-def _fetch_dax40_tickers():
-    try:
-        tables = pd.read_html('https://en.wikipedia.org/wiki/DAX')
-        for t in tables:
-            for col in t.columns:
-                if str(col).lower() in ('ticker', 'symbol'):
-                    ts = t[col].dropna().astype(str).str.strip().tolist()
-                    ts = [x if x.endswith('.DE') else x + '.DE' for x in ts if x and len(x) <= 10]
-                    ts = [x for x in ts if x.endswith('.DE')]
-                    if len(ts) >= 35:
-                        print(f"DAX 40: {len(ts)} Ticker von Wikipedia geladen")
-                        return ts
-        raise ValueError("Keine Ticker-Spalte gefunden")
-    except Exception as e:
-        print(f"⚠️  Wikipedia-Fetch fehlgeschlagen ({e}), nutze Fallback ({len(_DAX40_FALLBACK)} Ticker)")
-        return _DAX40_FALLBACK
-
-tickers = list(set(_fetch_dax40_tickers()))
+tickers = fetch_dax40(fallback=_DAX40_FALLBACK)
 
 benchmark = "^GDAXI"  # DAX Performance Index
 rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}

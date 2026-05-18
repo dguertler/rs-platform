@@ -6,6 +6,7 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
+from fetch_tickers import fetch_sp500
 
 _SP500_FALLBACK_1 = [
     # Financials
@@ -37,20 +38,7 @@ _SP500_FALLBACK_1 = [
     "HII", "HWM", "XYL", "MAS", "AME",
 ]
 
-def _fetch_sp500_tickers():
-    try:
-        df = pd.read_html('https://en.wikipedia.org/wiki/List_of_S%26P_500_companies')[0]
-        ts = df['Symbol'].dropna().astype(str).str.strip().str.replace('.', '-', regex=False).tolist()
-        ts = sorted([x for x in ts if x and len(x) <= 6])
-        if len(ts) >= 490:
-            print(f"S&P 500: {len(ts)} Ticker von Wikipedia geladen")
-            return ts
-        raise ValueError(f"Nur {len(ts)} Ticker gefunden")
-    except Exception as e:
-        print(f"⚠️  Wikipedia-Fetch fehlgeschlagen ({e}), nutze Fallback")
-        return None
-
-_all_sp500 = _fetch_sp500_tickers()
+_all_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_1)
 if _all_sp500:
     tickers = _all_sp500[:len(_all_sp500)//2]
     print(f"Teil 1: {len(tickers)} Ticker (erste Hälfte A–M)")

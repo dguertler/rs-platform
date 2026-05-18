@@ -5,6 +5,7 @@ import yfinance as yf
 import pandas as pd
 import json
 from datetime import datetime, timedelta
+from fetch_tickers import fetch_nasdaq100
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "TSLA", "AVGO", "COST",
@@ -16,26 +17,10 @@ _NASDAQ100_FALLBACK = [
     "VRSK", "GEHC", "ON", "ANSS", "CTSH", "DLTR", "XEL", "FANG", "CRWD", "TTWO",
     "ILMN", "MRNA", "SMCI", "ARM", "MCHP", "ADSK", "CHTR", "PAYX", "DXCM", "CEG",
     "CCEP", "COIN", "APP", "AXON", "WELL", "HUBS", "TTD", "OKTA", "SNDK", "MSTR",
-    "PLTR", "RXRX", "GFS", "LULU", "EBAY", "CSGP", "FSLR", "DASH"
+    "PLTR", "RXRX", "GFS", "LULU", "EBAY", "LITE", "FSLR", "DASH"
 ]
 
-def _fetch_nasdaq100_tickers():
-    try:
-        tables = pd.read_html('https://en.wikipedia.org/wiki/Nasdaq-100')
-        for t in tables:
-            for col in t.columns:
-                if str(col).lower() in ('ticker', 'symbol'):
-                    ts = t[col].dropna().astype(str).str.strip().tolist()
-                    ts = [x for x in ts if x and x.isalpha() and 1 < len(x) <= 5]
-                    if len(ts) >= 95:
-                        print(f"NASDAQ-100: {len(ts)} Ticker von Wikipedia geladen")
-                        return ts
-        raise ValueError("Keine Ticker-Spalte gefunden")
-    except Exception as e:
-        print(f"⚠️  Wikipedia-Fetch fehlgeschlagen ({e}), nutze Fallback ({len(_NASDAQ100_FALLBACK)} Ticker)")
-        return _NASDAQ100_FALLBACK
-
-tickers = list(set(_fetch_nasdaq100_tickers()))
+tickers = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
 
 benchmark = "QQQ"
 rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
