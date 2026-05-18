@@ -640,7 +640,7 @@ function WatchlistApp() {
   const [addInput,    setAddInput]    = useState("");
   const [addLoading,  setAddLoading]  = useState(false);
   const [addError,    setAddError]    = useState(null);
-  const [expandedNews, setExpandedNews] = useState(new Set());
+  const [expandedNews, setExpandedNews] = useState(null);
   const [newsData,    setNewsData]    = useState({});
   const [newsLoading, setNewsLoading] = useState({});
   const [signals,     setSignals]     = useState({});
@@ -715,19 +715,16 @@ function WatchlistApp() {
       await apiFetch(`/api/watchlist/${encodeURIComponent(ticker)}`, { method: "DELETE" });
       setItems(prev => (prev || []).filter(it => it.ticker !== ticker));
       if (selected === ticker) setSelected(null);
-      setExpandedNews(prev => { const n = new Set(prev); n.delete(ticker); return n; });
+      setExpandedNews(prev => prev === ticker ? null : prev);
     } catch {}
   };
 
   const toggleNews = async (ticker) => {
-    const newExpanded = new Set(expandedNews);
-    if (newExpanded.has(ticker)) {
-      newExpanded.delete(ticker);
-      setExpandedNews(newExpanded);
+    if (expandedNews === ticker) {
+      setExpandedNews(null);
       return;
     }
-    newExpanded.add(ticker);
-    setExpandedNews(newExpanded);
+    setExpandedNews(ticker);
     if (!newsData[ticker]) {
       setNewsLoading(prev => ({ ...prev, [ticker]: true }));
       try {
@@ -852,7 +849,7 @@ function WatchlistApp() {
             const isBOC   = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
             const hasChart = item.ohlcv?.length > 0;
             const isSelected = item.ticker === selected;
-            const newsExpanded = expandedNews.has(item.ticker);
+            const newsExpanded = expandedNews === item.ticker;
 
             const rows = [
               <div key={item.ticker}
