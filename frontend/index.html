@@ -46,6 +46,7 @@
   <a href="sp500.html" class="nav-switch">S&amp;P500</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
+  <a href="watchlist.html" class="nav-switch" style="border-color:#7c3aed;color:#a78bfa;">★ WATCHLIST</a>
 </div>
 <div id="root"></div>
 <script>
@@ -1078,6 +1079,23 @@ function App() {
   const [signals, setSignals] = useState({});
   const [ratings, setRatings] = useState({});
   const [ratingModal, setRatingModal] = useState(null);
+  const [wlAdded, setWlAdded] = useState({});
+
+  const addToWatchlist = useCallback(async (ticker, e) => {
+    e.stopPropagation();
+    try {
+      const r = await apiFetch("/api/watchlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ticker }),
+      });
+      setWlAdded(prev => ({ ...prev, [ticker]: r.ok ? "ok" : "err" }));
+      setTimeout(() => setWlAdded(prev => { const n = {...prev}; delete n[ticker]; return n; }), 1800);
+    } catch {
+      setWlAdded(prev => ({ ...prev, [ticker]: "err" }));
+      setTimeout(() => setWlAdded(prev => { const n = {...prev}; delete n[ticker]; return n; }), 1800);
+    }
+  }, []);
 
   // Live-Fetch Benchmark OHLCV (QQQ) von Yahoo Finance als Fallback
   useEffect(() => {
@@ -1246,7 +1264,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr)",
+            gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr) 24px",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1260,6 +1278,7 @@ function App() {
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
             <span style={{textAlign:"center",color:"#a78bfa"}}>4H</span>
             {WINDOWS.map(w => <span key={w} style={{textAlign:"center"}}>{w}</span>)}
+            <span></span>
           </div>
 
           {rows.map(item => {
@@ -1275,7 +1294,7 @@ function App() {
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr)",
+                  gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr) 24px",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${isBOC?"#ef444422":"#0a0f1e"}`,
                   background: isBOC
@@ -1360,6 +1379,18 @@ function App() {
                 {WINDOWS.map(w => (
                   <div key={w} style={{textAlign:"center"}}><Cell v={item.w[w]}/></div>
                 ))}
+                <button
+                  onClick={e => addToWatchlist(item.t, e)}
+                  title="Zur Watchlist hinzufügen"
+                  style={{
+                    background:"none",
+                    border:`1px solid ${wlAdded[item.t]==="ok"?"#22c55e":wlAdded[item.t]==="err"?"#ef4444":"#334155"}`,
+                    color:wlAdded[item.t]==="ok"?"#22c55e":wlAdded[item.t]==="err"?"#ef4444":"#475569",
+                    borderRadius:4,padding:"1px 4px",fontSize:11,cursor:"pointer",lineHeight:1,
+                    transition:"border-color .15s,color .15s",
+                  }}>
+                  {wlAdded[item.t]==="ok"?"✓":wlAdded[item.t]==="err"?"✗":"+"}
+                </button>
               </div>
             );
           })}

@@ -29,6 +29,15 @@ def init_db() -> None:
                 created_at        TEXT    DEFAULT CURRENT_TIMESTAMP
             )
         """)
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS watchlist (
+                id         INTEGER PRIMARY KEY AUTOINCREMENT,
+                user_email TEXT    NOT NULL,
+                ticker     TEXT    NOT NULL,
+                added_at   TEXT    DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(user_email, ticker)
+            )
+        """)
         cols = {r[1] for r in conn.execute("PRAGMA table_info(users)")}
         for col, defn in [
             ("plan",               "TEXT DEFAULT 'free'"),
@@ -176,3 +185,33 @@ def decode_token(token: str) -> str | None:
         return payload.get("sub")
     except JWTError:
         return None
+
+
+def get_watchlist(email: str) -> list[str]:
+    with sqlite3.connect(DB_PATH) as conn:
+        rows = conn.execute(
+            "SELECT ticker FROM watchlist WHERE user_email=? ORDER BY added_at",
+            (email,)
+        ).fetchall()
+    return [r[0] for r in rows]
+
+
+def add_to_watchlist(email: str, ticker: str) -> bool:
+    """Returns False if ticker already in watchlist."""
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            conn.execute(
+                "INSERT INTO watchlist (user_email, ticker) VALUES (?, ?)",
+                (email, ticker.upper()),
+            )
+        return True
+    except sqlite3.IntegrityError:
+        return False
+
+
+def remove_from_watchlist(email: str, ticker: str) -> None:
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            "DELETE FROM watchlist WHERE user_email=? AND ticker=?",
+            (email, ticker.upper()),
+        )
