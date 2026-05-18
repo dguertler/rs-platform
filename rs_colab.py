@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100
 
 _NASDAQ100_FALLBACK = [
-    "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "TSLA", "AVGO", "COST",
+    "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
     "NFLX", "AMD", "ADBE", "QCOM", "PEP", "INTU", "CSCO", "AMAT", "TXN", "HON",
     "AMGN", "SBUX", "BKNG", "ISRG", "GILD", "ADI", "LRCX", "REGN", "MU", "VRTX",
     "PANW", "KLAC", "SNPS", "CDNS", "MRVL", "ORLY", "CTAS", "ASML", "FTNT", "MDLZ",
@@ -17,7 +17,8 @@ _NASDAQ100_FALLBACK = [
     "VRSK", "GEHC", "ON", "ANSS", "CTSH", "DLTR", "XEL", "FANG", "CRWD", "TTWO",
     "ILMN", "MRNA", "SMCI", "ARM", "MCHP", "ADSK", "CHTR", "PAYX", "DXCM", "CEG",
     "CCEP", "COIN", "APP", "AXON", "WELL", "HUBS", "TTD", "OKTA", "SNDK", "MSTR",
-    "PLTR", "RXRX", "GFS", "LULU", "EBAY", "LITE", "FSLR", "DASH"
+    "PLTR", "RXRX", "GFS", "LULU", "EBAY", "LITE", "FSLR", "DASH",
+    "ROP", "CDW", "NTRA",
 ]
 
 tickers = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
