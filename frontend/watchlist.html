@@ -869,7 +869,7 @@ function WatchlistApp() {
                 <span style={{fontSize:10,fontWeight:700,color:"#334155"}}>{idx+1}</span>
                 <span style={{fontWeight:700,fontSize:11,fontFamily:"monospace",color:isBOC?"#fca5a5":isSelected?"#c4b5fd":"#f1f5f9",display:"flex",alignItems:"center",gap:2}}>
                   {isNew
-                    ? <span style={{fontSize:8,fontWeight:700,color:"#a78bfa",background:"#2e1065",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
+                    ? <span className={isBOC?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
                     : isBOC && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
                   {item.ticker}
                   {hasChart && <span style={{fontSize:8,color:"#334155",marginLeft:2}}>▸</span>}
