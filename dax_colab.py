@@ -51,11 +51,11 @@ _DAX40_FALLBACK = [
     "VNA.DE",   # Vonovia
 ]
 
-tickers = fetch_dax40(fallback=_DAX40_FALLBACK)
+tickers, _official = fetch_dax40(fallback=_DAX40_FALLBACK)
 
-# IC vs. EDC: neue Aktien im DAX erkennen
+# IC vs. EDC: neue Aktien im DAX erkennen (nur offizielle Wikipedia-Liste)
 print("\nPrüfe Indexänderungen (IC vs. EDC)...")
-_changes = detect_index_changes(tickers, "data/rs_dax.json")
+_changes = detect_index_changes(_official, "data/rs_dax.json")
 _new_stocks = set(_changes["new"])
 if _new_stocks:
     print(f"Neue Aktien erhalten vollständige 2-Jahres-Historie: {', '.join(sorted(_new_stocks))}")
@@ -320,6 +320,7 @@ print(f"Benchmark {benchmark}: Weekly={len(benchmark_ohlcv_w)} Kerzen, Daily={le
 output = {
     "timestamp":     datetime.now().strftime("%Y-%m-%d %H:%M"),
     "benchmark":     "DAX",
+    "fmp_tickers":   _official,
     "top20":         top20,
     "top20_history": top20_history,
     "data":          data,

@@ -38,17 +38,18 @@ _SP500_FALLBACK_1 = [
     "HII", "HWM", "XYL", "MAS", "AME",
 ]
 
-_all_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_1)
+_all_sp500, _official_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_1)
 if _all_sp500:
     tickers = _all_sp500[:len(_all_sp500)//2]
     print(f"Teil 1: {len(tickers)} Ticker (erste Hälfte A–M)")
     print("\nPrüfe Indexänderungen (IC vs. EDC) Teil 1...")
-    _changes = detect_index_changes(_all_sp500, "data/rs_sp500.json")
+    _changes = detect_index_changes(_official_sp500, "data/rs_sp500.json")
     _new_stocks = set(_changes["new"])
     if _new_stocks:
         print(f"Neue Aktien im S&P 500 (gesamt): {', '.join(sorted(_new_stocks))}")
 else:
     tickers = list(set(_SP500_FALLBACK_1))
+    _official_sp500 = []
     _new_stocks = set()
 
 # new_since-Datum: aus EDC übernehmen oder heute für neue Aktien setzen
@@ -250,6 +251,7 @@ for r in all_results:
 output = {
     "timestamp":            datetime.now().strftime("%Y-%m-%d %H:%M"),
     "benchmark":            "SPX",
+    "fmp_tickers":          _official_sp500,
     "data":                 data,
     "daily_scores_by_date": daily_scores_by_date,
     "prev_week_scores":     prev_week_scores,

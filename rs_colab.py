@@ -22,11 +22,11 @@ _NASDAQ100_FALLBACK = [
     "ROP", "CDW", "NTRA",
 ]
 
-tickers = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
+tickers, _official = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
 
-# IC vs. EDC: neue Aktien im Index erkennen
+# IC vs. EDC: neue Aktien im Index erkennen (nur offizielle FMP/Wikipedia-Liste)
 print("\nPrüfe Indexänderungen (IC vs. EDC)...")
-_changes = detect_index_changes(tickers, "data/rs_full.json")
+_changes = detect_index_changes(_official, "data/rs_full.json")
 _new_stocks = set(_changes["new"])
 if _new_stocks:
     print(f"Neue Aktien erhalten vollständige 2-Jahres-Historie: {', '.join(sorted(_new_stocks))}")
@@ -346,6 +346,7 @@ print(f"Benchmark {benchmark}: Weekly={len(benchmark_ohlcv_w)} Kerzen, Daily={le
 output = {
     "timestamp":         datetime.now().strftime("%Y-%m-%d %H:%M"),
     "benchmark":         "QQQ",
+    "fmp_tickers":       _official,
     "top20":             top20,
     "top20_history":     top20_history,
     "data":              data,

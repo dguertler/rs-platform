@@ -6,6 +6,18 @@ Reihenfolge pro Index:
   2. Wikipedia  (pd.read_html)
   3. Hardcoded Fallback
 
+Alle fetch_*-Funktionen geben ein Tupel zurück:
+  (all_tickers, official_tickers)
+
+  all_tickers     = offizielle Ticker + Fallback-Ergänzungen
+  official_tickers = nur FMP/Wikipedia-Ergebnis (ohne Fallback)
+                     Leere Liste wenn nur Fallback genutzt wurde.
+
+Der Unterschied ist entscheidend für detect_index_changes():
+Nur Ticker die neu in der offiziellen Quelle auftauchen, werden als
+"neu im Index" gewertet – nicht Ticker die vorher schon im Fallback
+waren (wie LITE vor der offiziellen Aufnahme).
+
 API-Key setzen:  .env  →  FMP_API_KEY=dein_key_hier
 Registrierung:   https://financialmodelingprep.com/developer/docs  (kostenlos)
 """
@@ -16,28 +28,42 @@ import urllib.request
 from pathlib import Path
 
 
-def detect_index_changes(ic_tickers: list, edc_json_path: str) -> dict:
+def detect_index_changes(ic_official: list, edc_json_path: str) -> dict:
     """
-    Vergleicht aktuelle Index-Zusammensetzung (IC) mit vorherigem JSON-Cache (EDC).
+    Vergleicht die OFFIZIELLE Index-Zusammensetzung (IC, ohne Fallback) mit
+    dem zuletzt gespeicherten JSON-Cache (EDC, Feld 'fmp_tickers').
+
+    Wichtig: ic_official muss das reine FMP/Wikipedia-Ergebnis sein,
+    OHNE Fallback-Ergänzungen. Nur so werden Ticker korrekt als neu
+    erkannt, die vorher nur im Fallback standen (z.B. LITE).
+
     Gibt {'new': [...], 'removed': [...]} zurück.
-    Neue Aktien (in IC, nicht in EDC) werden für den 2-Jahres-Historien-Download markiert.
     """
+    if not ic_official:
+        print("  IC leer (nur Fallback aktiv) – kein Vergleich möglich")
+        return {"new": [], "removed": []}
+
     edc_path = Path(edc_json_path)
     if not edc_path.exists():
         print(f"  EDC: {edc_json_path} nicht gefunden – erster Lauf, kein Vergleich")
-        return {"new": list(ic_tickers), "removed": []}
+        return {"new": list(ic_official), "removed": []}
 
     try:
         with open(edc_path, encoding="utf-8") as f:
             edc = json.load(f)
-        edc_tickers = {d["ticker"] for d in edc.get("data", [])}
+        # Bevorzuge gespeicherte fmp_tickers (genau dieser Vergleich)
+        # Fallback auf data-Ticker für Rückwärtskompatibilität
+        if "fmp_tickers" in edc:
+            edc_official = set(edc["fmp_tickers"])
+        else:
+            edc_official = {d["ticker"] for d in edc.get("data", [])}
     except Exception as e:
         print(f"  EDC: Fehler beim Lesen – {e}")
         return {"new": [], "removed": []}
 
-    ic_set = set(ic_tickers)
-    new_tickers     = sorted(ic_set - edc_tickers)
-    removed_tickers = sorted(edc_tickers - ic_set)
+    ic_set = set(ic_official)
+    new_tickers     = sorted(ic_set - edc_official)
+    removed_tickers = sorted(edc_official - ic_set)
 
     if new_tickers:
         print(f"  ✅ Neue Aktien im Index ({len(new_tickers)}): {', '.join(new_tickers)}")
@@ -45,7 +71,7 @@ def detect_index_changes(ic_tickers: list, edc_json_path: str) -> dict:
     if removed_tickers:
         print(f"  ⚠️  Aus dem Index entfernt ({len(removed_tickers)}): {', '.join(removed_tickers)}")
     if not new_tickers and not removed_tickers:
-        print(f"  Keine Indexänderungen erkannt ({len(ic_tickers)} Ticker unverändert)")
+        print(f"  Keine Indexänderungen erkannt ({len(ic_official)} Ticker unverändert)")
 
     return {"new": new_tickers, "removed": removed_tickers}
 
@@ -110,8 +136,11 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
 
 # ── Öffentliche Funktionen ────────────────────────────────────────────────────
 
-def fetch_nasdaq100(fallback: list) -> list:
-    """Nasdaq-100 Ticker: FMP → Wikipedia, Fallback immer als Ergänzung"""
+def fetch_nasdaq100(fallback: list) -> tuple[list, list]:
+    """Nasdaq-100: FMP → Wikipedia → Fallback.
+    Gibt (all_tickers, official_tickers) zurück.
+    official_tickers = FMP/Wikipedia-Ergebnis ohne Fallback ([] wenn nur Fallback).
+    """
     print("Lade Nasdaq-100 Ticker-Liste …")
 
     primary = None
@@ -124,8 +153,7 @@ def fetch_nasdaq100(fallback: list) -> list:
     # 2) Wikipedia
     if primary is None:
         def _clean_ndx(ts):
-            return [x for x in ts if x and x.replace('-','').isalpha() and 1 < len(x) <= 5]
-
+            return [x for x in ts if x and x.replace('-', '').isalpha() and 1 < len(x) <= 5]
         ts = _wikipedia_table(
             "https://en.wikipedia.org/wiki/Nasdaq-100",
             ("ticker", "symbol"), 95, _clean_ndx
@@ -133,23 +161,28 @@ def fetch_nasdaq100(fallback: list) -> list:
         if ts:
             primary = list(set(ts))
 
-    # 3) Nur Fallback (beide Quellen fehlgeschlagen)
+    # 3) Nur Fallback
     if primary is None:
         print(f"  Fallback: {len(fallback)} Ticker")
-        return list(fallback)
+        return list(fallback), []
 
-    # Fallback-Ticker ergänzen, die API/Wikipedia noch nicht kennt
+    official = list(primary)  # Snapshot vor Fallback-Ergänzungen
+
+    # Fallback-Ticker ergänzen die FMP/Wikipedia noch nicht kennt
     primary_set = set(primary)
     extra = [t for t in fallback if t not in primary_set]
     if extra:
         print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
         primary.extend(extra)
 
-    return primary
+    return primary, official
 
 
-def fetch_sp500(fallback: list) -> list | None:
-    """S&P 500 Ticker: FMP → Wikipedia, Fallback immer als Ergänzung"""
+def fetch_sp500(fallback: list) -> tuple[list | None, list]:
+    """S&P 500: FMP → Wikipedia → Fallback.
+    Gibt (all_tickers, official_tickers) zurück.
+    all_tickers = None wenn nur Fallback verfügbar.
+    """
     print("Lade S&P 500 Ticker-Liste …")
 
     primary = None
@@ -177,23 +210,27 @@ def fetch_sp500(fallback: list) -> list | None:
         except Exception as e:
             print(f"  Wikipedia: Fehler – {e}")
 
-    # 3) Beide Quellen fehlgeschlagen – Caller nutzt eigenen Fallback
+    # 3) Beide Quellen fehlgeschlagen
     if primary is None:
         print(f"  Fallback: {len(fallback)} Ticker")
-        return None
+        return None, []
 
-    # Fallback-Ticker ergänzen, die API/Wikipedia noch nicht kennt
+    official = list(primary)  # Snapshot vor Fallback-Ergänzungen
+
+    # Fallback-Ticker ergänzen
     primary_set = set(primary)
     extra = [t for t in fallback if t not in primary_set]
     if extra:
         print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
         primary = sorted(set(primary) | set(extra))
 
-    return primary
+    return primary, official
 
 
-def fetch_dax40(fallback: list) -> list:
-    """DAX 40 Ticker: Wikipedia, Fallback immer als Ergänzung  (FMP hat kein DAX-Endpoint)"""
+def fetch_dax40(fallback: list) -> tuple[list, list]:
+    """DAX 40: Wikipedia → Fallback  (FMP hat kein DAX-Endpoint).
+    Gibt (all_tickers, official_tickers) zurück.
+    """
     print("Lade DAX 40 Ticker-Liste …")
 
     def _clean_dax(ts):
@@ -213,13 +250,15 @@ def fetch_dax40(fallback: list) -> list:
 
     if primary is None:
         print(f"  Fallback: {len(fallback)} Ticker")
-        return list(fallback)
+        return list(fallback), []
 
-    # Fallback-Ticker ergänzen, die Wikipedia noch nicht kennt
+    official = list(primary)  # Snapshot vor Fallback-Ergänzungen
+
+    # Fallback-Ticker ergänzen
     primary_set = set(primary)
     extra = [t for t in fallback if t not in primary_set]
     if extra:
         print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
         primary = list(set(primary) | set(extra))
 
-    return primary
+    return primary, official
