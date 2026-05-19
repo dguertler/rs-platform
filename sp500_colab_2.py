@@ -39,7 +39,7 @@ _SP500_FALLBACK_2 = [
     "NDSN","GGG", "PWR", "FLR", "J",   "MTZ", "ACM",
 ]
 
-_all_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_2)
+_all_sp500, _official_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_2)
 if _all_sp500:
     tickers = _all_sp500[len(_all_sp500)//2:]
     print(f"Teil 2: {len(tickers)} Ticker (zweite Hälfte N–Z)")
