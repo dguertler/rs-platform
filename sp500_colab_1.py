@@ -6,7 +6,7 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
-from fetch_tickers import fetch_sp500
+from fetch_tickers import fetch_sp500, detect_index_changes
 
 _SP500_FALLBACK_1 = [
     # Financials
@@ -42,8 +42,14 @@ _all_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_1)
 if _all_sp500:
     tickers = _all_sp500[:len(_all_sp500)//2]
     print(f"Teil 1: {len(tickers)} Ticker (erste Hälfte A–M)")
+    print("\nPrüfe Indexänderungen (IC vs. EDC) Teil 1...")
+    _changes = detect_index_changes(_all_sp500, "data/rs_sp500.json")
+    _new_stocks = set(_changes["new"])
+    if _new_stocks:
+        print(f"Neue Aktien im S&P 500 (gesamt): {', '.join(sorted(_new_stocks))}")
 else:
     tickers = list(set(_SP500_FALLBACK_1))
+    _new_stocks = set()
 
 benchmark   = "^GSPC"
 rs_windows  = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}

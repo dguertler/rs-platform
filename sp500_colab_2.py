@@ -6,7 +6,7 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
-from fetch_tickers import fetch_sp500
+from fetch_tickers import fetch_sp500, detect_index_changes
 
 _SP500_FALLBACK_2 = [
     # Technology (nicht im QQQ)
@@ -43,6 +43,7 @@ _all_sp500 = fetch_sp500(fallback=_SP500_FALLBACK_2)
 if _all_sp500:
     tickers = _all_sp500[len(_all_sp500)//2:]
     print(f"Teil 2: {len(tickers)} Ticker (zweite Hälfte N–Z)")
+    # Indexänderungen werden nur in Teil 1 geprüft (gleiche Gesamtliste)
 else:
     tickers = list(set(_SP500_FALLBACK_2))
 
