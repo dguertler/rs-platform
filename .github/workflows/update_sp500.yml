@@ -26,9 +26,13 @@ jobs:
         run: pip install yfinance pandas lxml
 
       - name: Teil 1 laden (Financials, Healthcare, Consumer, Energy, Industrials)
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_1.py
 
       - name: Teil 2 laden (Tech, Comm, Utilities, Real Estate, Materials)
+        env:
+          FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_2.py
 
       - name: Daten zusammenführen
@@ -41,6 +45,7 @@ jobs:
           git config user.email "actions@github.com"
           git add data/rs_sp500.json
           git diff --staged --quiet || git commit -m "S&P 500 Daten aktualisiert"
+          git pull --rebase origin master
           git push origin master
 
       - name: Fehler-Mail senden

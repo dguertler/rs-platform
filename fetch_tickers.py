@@ -16,6 +16,40 @@ import urllib.request
 from pathlib import Path
 
 
+def detect_index_changes(ic_tickers: list, edc_json_path: str) -> dict:
+    """
+    Vergleicht aktuelle Index-Zusammensetzung (IC) mit vorherigem JSON-Cache (EDC).
+    Gibt {'new': [...], 'removed': [...]} zurück.
+    Neue Aktien (in IC, nicht in EDC) werden für den 2-Jahres-Historien-Download markiert.
+    """
+    edc_path = Path(edc_json_path)
+    if not edc_path.exists():
+        print(f"  EDC: {edc_json_path} nicht gefunden – erster Lauf, kein Vergleich")
+        return {"new": list(ic_tickers), "removed": []}
+
+    try:
+        with open(edc_path, encoding="utf-8") as f:
+            edc = json.load(f)
+        edc_tickers = {d["ticker"] for d in edc.get("data", [])}
+    except Exception as e:
+        print(f"  EDC: Fehler beim Lesen – {e}")
+        return {"new": [], "removed": []}
+
+    ic_set = set(ic_tickers)
+    new_tickers     = sorted(ic_set - edc_tickers)
+    removed_tickers = sorted(edc_tickers - ic_set)
+
+    if new_tickers:
+        print(f"  ✅ Neue Aktien im Index ({len(new_tickers)}): {', '.join(new_tickers)}")
+        print(f"     → Historische Kursdaten (bis 2 Jahre) werden geladen")
+    if removed_tickers:
+        print(f"  ⚠️  Aus dem Index entfernt ({len(removed_tickers)}): {', '.join(removed_tickers)}")
+    if not new_tickers and not removed_tickers:
+        print(f"  Keine Indexänderungen erkannt ({len(ic_tickers)} Ticker unverändert)")
+
+    return {"new": new_tickers, "removed": removed_tickers}
+
+
 def _get_fmp_key() -> str:
     # 1) Umgebungsvariable (Railway / Shell)
     key = os.environ.get("FMP_API_KEY", "")

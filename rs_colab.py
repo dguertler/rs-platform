@@ -6,7 +6,7 @@ import pandas as pd
 import json
 import math
 from datetime import datetime, timedelta
-from fetch_tickers import fetch_nasdaq100
+from fetch_tickers import fetch_nasdaq100, detect_index_changes
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
@@ -23,6 +23,13 @@ _NASDAQ100_FALLBACK = [
 ]
 
 tickers = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
+
+# IC vs. EDC: neue Aktien im Index erkennen
+print("\nPrüfe Indexänderungen (IC vs. EDC)...")
+_changes = detect_index_changes(tickers, "data/rs_full.json")
+_new_stocks = set(_changes["new"])
+if _new_stocks:
+    print(f"Neue Aktien erhalten vollständige 2-Jahres-Historie: {', '.join(sorted(_new_stocks))}")
 
 benchmark = "QQQ"
 rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
