@@ -4,6 +4,7 @@ subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
 import yfinance as yf
 import pandas as pd
 import json
+import math
 from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100
 
@@ -26,12 +27,32 @@ tickers = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
 benchmark = "QQQ"
 rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
 
-# ── Schritt 1: RS-Score für alle Ticker ─────────────────────────────────────────
+def sanitize_nan(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: sanitize_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize_nan(v) for v in obj]
+    return obj
+
+# ── Schritt 1: RS-Score Batch-Download ──────────────────────────────────────
 print(f"Schritt 1: RS-Berechnung für alle {len(tickers)} Aktien...")
 all_tickers = tickers + [benchmark]
 raw = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
 close = raw["Close"]
 qqq = close[benchmark]
+
+def _calc_rs(s, qqq_s):
+    windows_result = {}
+    for label, days in rs_windows.items():
+        try:
+            windows_result[label] = round(
+                float((s.iloc[-1]/s.iloc[-days]-1)*100 - (qqq_s.iloc[-1]/qqq_s.iloc[-days]-1)*100), 2)
+        except:
+            windows_result[label] = None
+    score = round(sum(v for v in windows_result.values() if v is not None), 2)
+    return score, windows_result
 
 all_results = []
 for ticker in tickers:
@@ -40,24 +61,43 @@ for ticker in tickers:
     s = close[ticker].dropna()
     if len(s) < 50:
         continue
-    windows_result = {}
-    for label, days in rs_windows.items():
-        try:
-            windows_result[label] = round(float((s.iloc[-1]/s.iloc[-days]-1)*100 - (qqq.iloc[-1]/qqq.iloc[-days]-1)*100), 2)
-        except:
-            windows_result[label] = None
-    score = round(sum(v for v in windows_result.values() if v is not None), 2)
+    score, windows_result = _calc_rs(s, qqq)
     all_results.append({"ticker": ticker, "score": score, "windows": windows_result})
+
+# Nachlader: Ticker die im Batch fehlen oder < 50 Tage haben
+batch_found = {r["ticker"] for r in all_results}
+missing_rs  = [t for t in tickers if t not in batch_found]
+if missing_rs:
+    print(f"\n  Nachlader RS: {len(missing_rs)} fehlende Ticker: {', '.join(missing_rs)}")
+    qqq_ind = yf.download(benchmark, period="2y", auto_adjust=True, progress=False)
+    if isinstance(qqq_ind.columns, pd.MultiIndex):
+        qqq_ind.columns = qqq_ind.columns.get_level_values(0)
+    qqq_ind_s = qqq_ind["Close"].dropna()
+    for t in missing_rs:
+        try:
+            r = yf.download(t, period="2y", auto_adjust=True, progress=False)
+            if isinstance(r.columns, pd.MultiIndex):
+                r.columns = r.columns.get_level_values(0)
+            s = r["Close"].dropna()
+            if len(s) < 10:
+                print(f"    {t}: zu wenig Daten ({len(s)} Tage) – übersprungen")
+                continue
+            score, windows_result = _calc_rs(s, qqq_ind_s)
+            all_results.append({"ticker": t, "score": score, "windows": windows_result})
+            print(f"    {t}: ✓ Score={score}, {len(s)} Tage")
+        except Exception as e:
+            print(f"    {t}: Fehler – {e}")
 
 all_results.sort(key=lambda x: x["score"], reverse=True)
 top20 = [r["ticker"] for r in all_results[:20]]
 print(f"Top 20: {', '.join(top20)}")
 
-# ── Schritt 2: Weekly OHLCV für ALLE Ticker (letzte 104 Wochen = 2 Jahre)
-print(f"\nSchritt 2: Weekly OHLCV für alle {len(tickers)} Ticker (104 Wochen)...")
-end_date    = datetime.now()
-end_str     = (end_date + timedelta(days=1)).strftime("%Y-%m-%d")
+# ── Schritt 2: Weekly OHLCV (letzte 104 Wochen = 2 Jahre) ───────────────────
+print(f"\nSchritt 2: Weekly OHLCV für {len(all_results)} Ticker (104 Wochen)...")
+end_date     = datetime.now()
+end_str      = (end_date + timedelta(days=1)).strftime("%Y-%m-%d")
 start_weekly = end_date - timedelta(days=730)
+start_daily  = end_date - timedelta(days=730)
 
 all_tickers_list = [r["ticker"] for r in all_results]
 raw_weekly = yf.download(
@@ -69,8 +109,7 @@ raw_weekly = yf.download(
     progress=False
 )
 
-def extract_ohlcv_weekly(ticker, raw_data, n_candles=104):
-    """Extrahiert Weekly OHLCV-Daten für einen Ticker, letzte n_candles Kerzen."""
+def _ohlcv_from_raw(ticker, raw_data, n_candles, date_fmt="%Y-%m-%d"):
     try:
         if isinstance(raw_data.columns, pd.MultiIndex):
             c = raw_data["Close"][ticker].dropna()
@@ -86,21 +125,51 @@ def extract_ohlcv_weekly(ticker, raw_data, n_candles=104):
         for date, ov, hv, lv, cv in zip(c.index, o, h, l, c):
             if pd.isna(cv): continue
             result.append({
-                "d": date.strftime("%Y-%m-%d"),
+                "d": date.strftime(date_fmt),
                 "o": round(float(ov), 2),
                 "h": round(float(hv), 2),
                 "l": round(float(lv), 2),
                 "c": round(float(cv), 2)
             })
         return result[-n_candles:]
-    except Exception as e:
-        print(f"  Fehler Weekly OHLCV {ticker}: {e}")
+    except:
         return []
 
-# ── Schritt 3: Daily OHLCV für ALLE Ticker (letzte 520 Kerzen ≈ 2 Jahre)
-print(f"\nSchritt 3: Daily OHLCV für alle {len(tickers)} Ticker (520 Kerzen)...")
-start_daily = end_date - timedelta(days=730)
+def _ohlcv_individual(ticker, start_str, end_str, interval, n_candles, date_fmt="%Y-%m-%d"):
+    """Einzeldownload für einen Ticker – Fallback wenn Batch-Daten fehlen/dünn."""
+    try:
+        df = yf.download(ticker, start=start_str, end=end_str,
+                         interval=interval, auto_adjust=True, progress=False)
+        if df.empty:
+            return []
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        df = df[["Open", "High", "Low", "Close"]].dropna(subset=["Close"])
+        result = []
+        for date, row in df.iterrows():
+            if pd.isna(row["Close"]): continue
+            result.append({
+                "d": date.strftime(date_fmt),
+                "o": round(float(row["Open"]), 2),
+                "h": round(float(row["High"]), 2),
+                "l": round(float(row["Low"]),  2),
+                "c": round(float(row["Close"]), 2)
+            })
+        return result[-n_candles:]
+    except Exception as e:
+        print(f"    Einzeldownload {ticker} ({interval}): Fehler – {e}")
+        return []
 
+def extract_ohlcv_weekly(ticker, raw_data, n_candles=104):
+    data = _ohlcv_from_raw(ticker, raw_data, n_candles)
+    if len(data) < 10:
+        print(f"  {ticker}: nur {len(data)} Wochenkerzen im Batch – lade individuell nach...")
+        data = _ohlcv_individual(ticker, start_weekly.strftime("%Y-%m-%d"), end_str, "1wk", n_candles)
+        print(f"    → {len(data)} Kerzen")
+    return data
+
+# ── Schritt 3: Daily OHLCV (letzte 520 Kerzen ≈ 2 Jahre) ────────────────────
+print(f"\nSchritt 3: Daily OHLCV für {len(all_results)} Ticker (520 Kerzen)...")
 raw_daily = yf.download(
     all_tickers_list + [benchmark],
     start=start_daily.strftime("%Y-%m-%d"),
@@ -111,40 +180,18 @@ raw_daily = yf.download(
 )
 
 def extract_ohlcv_daily(ticker, raw_data, n_candles=520):
-    """Extrahiert Daily OHLCV-Daten für einen Ticker, letzte n_candles Kerzen."""
-    try:
-        if isinstance(raw_data.columns, pd.MultiIndex):
-            c = raw_data["Close"][ticker].dropna()
-            o = raw_data["Open"][ticker].reindex(c.index)
-            h = raw_data["High"][ticker].reindex(c.index)
-            l = raw_data["Low"][ticker].reindex(c.index)
-        else:
-            c = raw_data["Close"].dropna()
-            o = raw_data["Open"].reindex(c.index)
-            h = raw_data["High"].reindex(c.index)
-            l = raw_data["Low"].reindex(c.index)
-        result = []
-        for date, ov, hv, lv, cv in zip(c.index, o, h, l, c):
-            if pd.isna(cv): continue
-            result.append({
-                "d": date.strftime("%Y-%m-%d"),
-                "o": round(float(ov), 2),
-                "h": round(float(hv), 2),
-                "l": round(float(lv), 2),
-                "c": round(float(cv), 2)
-            })
-        return result[-n_candles:]
-    except Exception as e:
-        print(f"  Fehler Daily OHLCV {ticker}: {e}")
-        return []
+    data = _ohlcv_from_raw(ticker, raw_data, n_candles)
+    if len(data) < 30:
+        print(f"  {ticker}: nur {len(data)} Tageskerzen im Batch – lade individuell nach...")
+        data = _ohlcv_individual(ticker, start_daily.strftime("%Y-%m-%d"), end_str, "1d", n_candles)
+        print(f"    → {len(data)} Kerzen")
+    return data
 
-# ── Schritt 4: 4H OHLCV für ALLE Ticker (ca. 2 Jahre inkl. Extended Hours)
-print(f"\nSchritt 4: 4H OHLCV für alle {len(tickers)} Ticker (60 Tage, inkl. Pre-/Post-Market)...")
+# ── Schritt 4: 4H OHLCV ─────────────────────────────────────────────────────
+print(f"\nSchritt 4: 4H OHLCV für {len(all_results)} Ticker (60 Tage)...")
 start_4h = end_date - timedelta(days=60)
 
 def extract_ohlcv_4h(ticker, n_candles=3000):
-    """Lädt 4H-Daten inkl. Extended Hours (Pre-Market 04:00-09:30 ET ≈ London-Session,
-    After-Hours 16:00-20:00 ET) via yfinance (1H → 4H aggregiert), letzte n_candles."""
     try:
         df = yf.download(
             ticker,
@@ -157,10 +204,8 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         )
         if df.empty:
             return []
-
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-
         df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
         df.index = pd.to_datetime(df.index)
         df.dropna(subset=["Close"], inplace=True)
@@ -176,7 +221,6 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
              for ts in df.index],
             index=df.index, dtype=bool
         )
-        # Low spike in extended hours: >30% below both prev and next Low → fix Low only
         prev_low = df["Low"].shift(1)
         next_low = df["Low"].shift(-1)
         bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
@@ -212,7 +256,7 @@ for i, ticker in enumerate(all_tickers_list):
     ohlcv_4h_map[ticker] = data_4h
     print(f"{len(data_4h)} Kerzen")
 
-# ── Schritt 5: Historisches tägliches Top-20-Ranking ─────────────────────────
+# ── Schritt 5: Historisches tägliches Top-20-Ranking ────────────────────────
 print("\nSchritt 5: Historisches tägliches Top-20-Ranking...")
 try:
     d_close = raw_daily["Close"] if isinstance(raw_daily.columns, pd.MultiIndex) else raw_daily
@@ -256,7 +300,7 @@ except Exception as e:
     prev_rank_map = {}
     print(f"  ⚠️ Fehler: {e}")
 
-# ── Schritt 6: Ausgabe zusammenbauen ──────────────────────────────────────────
+# ── Schritt 6: JSON zusammenbauen ───────────────────────────────────────────
 print("\nSchritt 6: JSON zusammenbauen...")
 data = []
 for r in all_results:
@@ -274,36 +318,24 @@ for r in all_results:
         "ohlcv_4h":  ohlcv4h
     })
 
-# Benchmark (QQQ) OHLCV für Index-Overlay in Charts
 benchmark_ohlcv_w = extract_ohlcv_weekly(benchmark, raw_weekly)
 benchmark_ohlcv_d = extract_ohlcv_daily(benchmark, raw_daily)
 print(f"Benchmark {benchmark}: Weekly={len(benchmark_ohlcv_w)} Kerzen, Daily={len(benchmark_ohlcv_d)} Kerzen")
 
 output = {
-    "timestamp":     datetime.now().strftime("%Y-%m-%d %H:%M"),
-    "benchmark":     "QQQ",
-    "top20":         top20,
-    "top20_history": top20_history,
-    "data":          data,
+    "timestamp":         datetime.now().strftime("%Y-%m-%d %H:%M"),
+    "benchmark":         "QQQ",
+    "top20":             top20,
+    "top20_history":     top20_history,
+    "data":              data,
     "benchmark_ohlcv_w": benchmark_ohlcv_w,
     "benchmark_ohlcv":   benchmark_ohlcv_d,
 }
 
-def sanitize_nan(obj):
-    """Ersetzt NaN/Infinity durch None, damit gültiges JSON entsteht."""
-    import math
-    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
-        return None
-    if isinstance(obj, dict):
-        return {k: sanitize_nan(v) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [sanitize_nan(v) for v in obj]
-    return obj
-
 with open("rs_full.json", "w") as f:
     json.dump(sanitize_nan(output), f)
 
-size_kb = len(json.dumps(output)) / 1024
+size_kb = len(json.dumps(sanitize_nan(output))) / 1024
 print(f"\n✅ Fertig! Dateigröße: {size_kb:.0f} KB")
 print(f"Timestamp: {output['timestamp']}")
 print(f"Ticker gesamt: {len(data)}")
@@ -312,7 +344,7 @@ for i, r in enumerate(data[:5]):
     print(f"  {i+1}. {r['ticker']}: Score={r['score']}, Weekly={len(r['ohlcv_w'])} Kerzen, Daily={len(r['ohlcv'])} Kerzen, 4H={len(r['ohlcv_4h'])} Kerzen")
 print("\nDatei gespeichert: rs_full.json")
 
-# ── Validierung ───────────────────────────────────────────────────────────────
+# ── Validierung ──────────────────────────────────────────────────────────────
 _loaded   = len(data)
 _expected = len(tickers)
 _missing  = set(tickers) - {r['ticker'] for r in data}
