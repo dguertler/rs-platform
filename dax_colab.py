@@ -60,6 +60,19 @@ _new_stocks = set(_changes["new"])
 if _new_stocks:
     print(f"Neue Aktien erhalten vollständige 2-Jahres-Historie: {', '.join(sorted(_new_stocks))}")
 
+# new_since-Datum: aus EDC übernehmen oder heute für neue Aktien setzen
+_today = datetime.now().strftime("%Y-%m-%d")
+_new_since_map = {}
+try:
+    with open("data/rs_dax.json", encoding="utf-8") as _f:
+        for _d in json.load(_f).get("data", []):
+            if _d.get("new_since"):
+                _new_since_map[_d["ticker"]] = _d["new_since"]
+except Exception:
+    pass
+for _t in _new_stocks:
+    _new_since_map.setdefault(_t, _today)
+
 benchmark = "^GDAXI"  # DAX Performance Index
 rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
 
@@ -293,6 +306,7 @@ for r in all_results:
         "score":     r["score"],
         "windows":   r["windows"],
         "prev_rank": prev_rank_map.get(ticker),
+        "new_since": _new_since_map.get(ticker),
         "ohlcv_w":   ohlcv_w,
         "ohlcv":     ohlcv_d,
         "ohlcv_4h":  ohlcv4h

@@ -47,6 +47,16 @@ if _all_sp500:
 else:
     tickers = list(set(_SP500_FALLBACK_2))
 
+# new_since-Datum aus EDC übernehmen (neue Aktien werden in Teil 1 erkannt)
+_new_since_map = {}
+try:
+    with open("data/rs_sp500.json", encoding="utf-8") as _f:
+        for _d in json.load(_f).get("data", []):
+            if _d.get("new_since"):
+                _new_since_map[_d["ticker"]] = _d["new_since"]
+except Exception:
+    pass
+
 benchmark   = "^GSPC"
 rs_windows  = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
 OUTPUT_FILE = "rs_sp500_2.json"
@@ -225,6 +235,7 @@ data = []
 for r in all_results:
     t = r["ticker"]
     data.append({"ticker": t, "score": r["score"], "windows": r["windows"],
+                 "new_since": _new_since_map.get(t),
                  "ohlcv_w":  extract_ohlcv(t, raw_weekly, 104),
                  "ohlcv":    extract_ohlcv(t, raw_daily, 520),
                  "ohlcv_4h": ohlcv_4h_map.get(t, [])})
