@@ -739,9 +739,27 @@ def main():
     all_new_states.update(new_sp500)
     all_alerts.extend(alerts_sp500)
 
-    # Bereits heute gemeldete Ticker herausfiltern
-    fresh_alerts = [a for a in all_alerts
-                    if alerted.get(a['ticker']) != today_str]
+    # Bereits heute gemeldete Ticker herausfiltern + gleiche Breakout-Struktur überspringen
+    signals = load_signals()
+    fresh_alerts = []
+    for a in all_alerts:
+        ticker = a['ticker']
+        if alerted.get(ticker) == today_str:
+            continue
+        # Wenn Ticker schon alerted wurde: Breakout-Bar-Datum prüfen.
+        # Der GWS-Algorithmus kann bei neuen Daten minimal andere Kerzen finden
+        # (z.B. 09:30 → 10:00 am selben Tag). Gleiches Datum = gleiche Struktur
+        # war schon grün → kein neues Signal.
+        if alerted.get(ticker) and signals.get(ticker):
+            last_sig = signals[ticker][-1]
+            trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')
+            bar_field  = {'weekly': 'weekly_bar_date', 'daily': 'daily_bar_date', '4h': 'h4_bar_date'}[trigger_tf]
+            new_bar  = (a.get(bar_field) or '')[:10]
+            last_bar = (last_sig.get(bar_field) or '')[:10]
+            if new_bar and new_bar == last_bar:
+                print(f'  SKIP (gleiche Breakout-Struktur, {trigger_tf}): {ticker}  {bar_field}={new_bar}')
+                continue
+        fresh_alerts.append(a)
 
     print(f'\nAlertes gesamt: {len(all_alerts)}  '
           f'(davon neu heute: {len(fresh_alerts)})')
@@ -749,7 +767,6 @@ def main():
     if fresh_alerts:
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
-        signals = load_signals()
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')
