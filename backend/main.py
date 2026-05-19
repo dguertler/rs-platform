@@ -297,6 +297,7 @@ async def get_user_watchlist(email: str = Depends(require_auth)):
             "score": entry.get("score"),
             "windows": entry.get("windows", {}),
             "prev_rank": entry.get("prev_rank"),
+            "new_since": entry.get("new_since"),
             "ohlcv_w": entry.get("ohlcv_w", []),
             "ohlcv": entry.get("ohlcv", []),
             "ohlcv_4h": entry.get("ohlcv_4h", []),
