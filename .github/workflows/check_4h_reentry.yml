@@ -1,0 +1,72 @@
+name: 4H Wiederkehr-Check
+
+# Prüft alle 4h ob Ticker, die zuvor 3 Punkte hatten (W+D aktiv),
+# dann den 4H-Punkt verloren haben, diesen wieder zurückgewonnen haben.
+# Alle anderen Breakout-Fälle bleiben dem nächtlichen stock_alerts.yml (02:00 UTC) überlassen.
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    # Mo-Fr um 10:00, 14:00, 18:00 und 22:00 UTC
+    # → deckt DAX-Mittagsschluss (~11:00 UTC), DAX-Börsenschluss (~15:30 UTC),
+    #   US-Mittagsschluss (~17:30 UTC) und US-Börsenschluss (~21:30 UTC) ab
+    - cron: '0 10,14,18,22 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  check-4h-reentry:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas matplotlib deep-translator
+
+      - name: RS-Datendateien und signals.json bereitstellen
+        run: |
+          cp data/rs_full.json  . 2>/dev/null || true
+          cp data/rs_dax.json   . 2>/dev/null || true
+          cp data/rs_sp500.json . 2>/dev/null || true
+          cp data/signals.json  . 2>/dev/null || true
+
+      - name: 4H-Wiederkehr prüfen
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: python check_4h_reentry.py
+
+      - name: Zustandsdatei und signals.json committen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add alerts_state.json
+          [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
+          git diff --staged --quiet || git commit -m "4H-Wiederkehr-Zustand aktualisiert"
+          git pull --rebase origin master
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "4H-Wiederkehr-Check (check_4h_reentry.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
