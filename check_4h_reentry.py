@@ -26,7 +26,7 @@ import sys
 import os
 import json
 import smtplib
-from datetime import datetime
+from datetime import datetime, timedelta
 
 # Gemeinsame Funktionen aus check_alerts importieren
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -45,6 +45,8 @@ from check_alerts import (
 )
 
 import yfinance as yf
+import pandas as pd
+from zoneinfo import ZoneInfo
 
 # ── Konfiguration ─────────────────────────────────────────────────────────────
 
@@ -54,33 +56,77 @@ SOURCES = {
     'SPX': 'rs_sp500.json',
 }
 
-# Anzahl Tage, die für frische 4H-Daten geladen werden
-FRESH_4H_DAYS = 15
+_ET     = ZoneInfo('America/New_York')
+_BERLIN = ZoneInfo('Europe/Berlin')
 
 
 # ── Frische 4H-OHLCV-Daten per yfinance ──────────────────────────────────────
 
-def fetch_fresh_4h(ticker):
+def fetch_fresh_4h(ticker, days=60):
     """
-    Holt aktuelle 4H-OHLCV-Daten via yfinance.
-    Gibt Liste von {o, h, l, c, d}-Dicts zurück (aufsteigend nach Datum).
+    Holt 4H-OHLCV-Daten identisch zu rs_colab.py:
+      - interval='1h', dann resample('4h')
+      - 60 Tage History (gleicher Kontext wie Nacht-Update)
+      - Pre/Post-Market Spike-Filter
+      - Timestamps in Europe/Berlin
     """
     try:
-        hist = yf.Ticker(ticker).history(
-            period=f'{FRESH_4H_DAYS}d', interval='4h', auto_adjust=True
+        end_dt   = datetime.now()
+        start_dt = end_dt - timedelta(days=days)
+
+        df = yf.download(
+            ticker,
+            start=start_dt.strftime('%Y-%m-%d'),
+            end=end_dt.strftime('%Y-%m-%d'),
+            interval='1h',
+            prepost=True,
+            auto_adjust=True,
+            progress=False,
         )
-        if hist.empty:
+        if df.empty:
             return []
+
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        df = df[['Open', 'High', 'Low', 'Close']].copy()
+        df.index = pd.to_datetime(df.index)
+        df.dropna(subset=['Close'], inplace=True)
+
+        # Pre/Post-Market Spike-Filter (identisch zu rs_colab.py)
+        extended = pd.Series(
+            [ts.astimezone(_ET).hour < 9 or
+             (ts.astimezone(_ET).hour == 9 and ts.astimezone(_ET).minute < 30) or
+             ts.astimezone(_ET).hour >= 16
+             for ts in df.index],
+            index=df.index, dtype=bool,
+        )
+        prev_low = df['Low'].shift(1)
+        next_low = df['Low'].shift(-1)
+        bad_low  = extended & (df['Low'] < prev_low * 0.70) & (df['Low'] < next_low * 0.70)
+        df.loc[bad_low, 'Low'] = df.loc[bad_low, ['Open', 'Close']].min(axis=1)
+
+        df_4h = df[['Open', 'High', 'Low', 'Close']].resample('4h').agg({
+            'Open':  'first',
+            'High':  'max',
+            'Low':   'min',
+            'Close': 'last',
+        }).dropna()
+
         result = []
-        for ts, row in hist.iterrows():
+        for dt, row in df_4h.iterrows():
+            if pd.isna(row['Close']):
+                continue
+            dt_local = (dt.astimezone(_BERLIN) if dt.tzinfo
+                        else dt.replace(tzinfo=ZoneInfo('UTC')).astimezone(_BERLIN))
             result.append({
-                'o': float(row['Open']),
-                'h': float(row['High']),
-                'l': float(row['Low']),
-                'c': float(row['Close']),
-                'd': ts.strftime('%Y-%m-%d %H:%M'),
+                'd': dt_local.strftime('%Y-%m-%d %H:%M'),
+                'o': round(float(row['Open']),  2),
+                'h': round(float(row['High']),  2),
+                'l': round(float(row['Low']),   2),
+                'c': round(float(row['Close']), 2),
             })
         return result
+
     except Exception as e:
         print(f'  4H-Fetch fehlgeschlagen für {ticker}: {e}')
         return []
