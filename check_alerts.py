@@ -530,11 +530,14 @@ def save_signals(signals):
 
 # ── Hauptprogramm ───────────────────────────────────────────────
 
-def process_json(json_path, source_label, prev_states, today_str):
+def process_json(json_path, source_label, prev_states, today_str, signals=None):
     """
     Lädt eine RS-JSON-Datei, berechnet Punkte, gibt neue Zustände
     und eine Liste von Alert-Dicts zurück.
     """
+    if signals is None:
+        signals = {}
+
     if not os.path.exists(json_path):
         print(f'Datei nicht gefunden: {json_path}')
         return {}, []
@@ -562,14 +565,37 @@ def process_json(json_path, source_label, prev_states, today_str):
         prev = prev_states.get(ticker, {})
         prev_points = prev.get('points', 0)
 
-        # Auslöser: genau 2 → 3, nur für Top-20-Aktien des Index
-        if prev_points == 2 and info['points'] == 3 and ticker in top20_set:
-            print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte')
+        if info['points'] == 3 and ticker in top20_set:
+            # Breakout-Daten der aktuellen Timeframes
+            cur_w_date  = _breakout_date(entry.get('ohlcv_w',  []), info['struct_w'])
+            cur_d_date  = _breakout_date(entry.get('ohlcv',    []), info['struct_d'])
+            cur_h4_date = _breakout_date(entry.get('ohlcv_4h', []), info['struct_4h'])
 
-            # Welcher Punkt ist neu hinzugekommen?
-            new_w  = info['weekly'] and not prev.get('weekly', False)
-            new_d  = info['daily']  and not prev.get('daily',  False)
-            new_h4 = info['h4']     and not prev.get('h4',     False)
+            # Letztes gespeichertes Signal für Vergleich der Breakout-Daten
+            last_sig = (signals.get(ticker) or [{}])[-1]
+
+            # Ein Teilsignal ist "frisch", wenn sein Breakout-Datum sich geändert hat
+            # (Signal war weg und ist neu zurückgekommen – auch ohne messbaren 2→3-Übergang)
+            w_is_fresh  = bool(info['weekly'] and cur_w_date  and cur_w_date  != last_sig.get('weekly_bar_date'))
+            d_is_fresh  = bool(info['daily']  and cur_d_date  and cur_d_date  != last_sig.get('daily_bar_date'))
+            h4_is_fresh = bool(info['h4']     and cur_h4_date and cur_h4_date != last_sig.get('h4_bar_date'))
+
+            # Auslöser:
+            # 1. Klassisch: von < 3 auf 3 (inkl. 0/1→3, nicht nur 2→3)
+            # 2. Wiederkehrender Punkt: auf 3 geblieben, aber mind. ein Breakout ist neu
+            #    (Punkt war weg und zurückgekommen innerhalb desselben Tages)
+            trigger = (prev_points < 3) or (prev_points == 3 and (w_is_fresh or d_is_fresh or h4_is_fresh))
+
+            if not trigger:
+                continue
+
+            print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte'
+                  + (' [Wiederkehr]' if prev_points == 3 else ''))
+
+            # Welcher Punkt ist neu hinzugekommen oder frisch wiedergekehrt?
+            new_w  = (info['weekly'] and not prev.get('weekly', False)) or w_is_fresh
+            new_d  = (info['daily']  and not prev.get('daily',  False)) or d_is_fresh
+            new_h4 = (info['h4']     and not prev.get('h4',     False)) or h4_is_fresh
 
             # Charts: Weekly → Daily → 4H
             w_b64  = render_chart(
@@ -602,9 +628,9 @@ def process_json(json_path, source_label, prev_states, today_str):
                 'new_weekly':      new_w,
                 'new_daily':       new_d,
                 'new_h4':          new_h4,
-                'weekly_bar_date': _breakout_date(entry.get('ohlcv_w',   []), info['struct_w']),
-                'daily_bar_date':  _breakout_date(entry.get('ohlcv',     []), info['struct_d']),
-                'h4_bar_date':     _breakout_date(entry.get('ohlcv_4h',  []), info['struct_4h']),
+                'weekly_bar_date': cur_w_date,
+                'daily_bar_date':  cur_d_date,
+                'h4_bar_date':     cur_h4_date,
                 'news':            news,
                 'in_top20':        ticker in top20_set,
             })
@@ -714,6 +740,7 @@ def main():
     state      = load_state()
     prev_states = state.get('states', {})
     alerted     = state.get('alerted', {})  # ticker → letztes Alert-Datum
+    signals     = load_signals()             # für Breakout-Datum-Vergleich (Wiederkehr-Erkennung)
 
     print(f'check_alerts.py  –  {today_str}')
     print(f'Vorheriger Zustand: {len(prev_states)} Ticker')
@@ -723,19 +750,19 @@ def main():
 
     # US-Aktien (QQQ)
     print('\n── US-Aktien (rs_full.json) ──')
-    new_us, alerts_us = process_json('rs_full.json', 'QQQ', prev_states, today_str)
+    new_us, alerts_us = process_json('rs_full.json', 'QQQ', prev_states, today_str, signals)
     all_new_states.update(new_us)
     all_alerts.extend(alerts_us)
 
     # DAX-Aktien
     print('\n── DAX-Aktien (rs_dax.json) ──')
-    new_dax, alerts_dax = process_json('rs_dax.json', 'DAX', prev_states, today_str)
+    new_dax, alerts_dax = process_json('rs_dax.json', 'DAX', prev_states, today_str, signals)
     all_new_states.update(new_dax)
     all_alerts.extend(alerts_dax)
 
     # S&P 500 Aktien
     print('\n── S&P 500 (rs_sp500.json) ──')
-    new_sp500, alerts_sp500 = process_json('rs_sp500.json', 'SPX', prev_states, today_str)
+    new_sp500, alerts_sp500 = process_json('rs_sp500.json', 'SPX', prev_states, today_str, signals)
     all_new_states.update(new_sp500)
     all_alerts.extend(alerts_sp500)
 
@@ -749,7 +776,6 @@ def main():
     if fresh_alerts:
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
-        signals = load_signals()
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')

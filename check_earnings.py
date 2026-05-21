@@ -1,5 +1,5 @@
 import subprocess
-subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "lxml", "-q"])
+subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "lxml", "deep-translator", "-q"])
 
 import json
 import os
@@ -18,11 +18,73 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import yfinance as yf
 import pandas as pd
+from deep_translator import GoogleTranslator
 
 # ── Konfiguration ─────────────────────────────────────────────────────────────
 
 MIN_PRICE_JUMP   = 0.05   # ≥5 % Close-zu-Close
 MIN_EPS_SURPRISE = 10.0   # ≥10 % EPS-Surprise
+
+# ── News-Abruf ────────────────────────────────────────────────────────────────
+
+def fetch_news(ticker, max_specific=5, max_general=5):
+    try:
+        raw = yf.Ticker(ticker).news or []
+        ticker_upper = ticker.upper().replace('.DE', '')
+        all_parsed = []
+
+        for item in raw:
+            if len(all_parsed) >= max_specific + max_general:
+                break
+            content = item.get('content', {}) or {}
+            title = content.get('title') or item.get('title', '')
+            url = (content.get('canonicalUrl', {}) or {}).get('url') or \
+                  (content.get('clickThroughUrl', {}) or {}).get('url') or \
+                  item.get('link', '')
+            if not title or not url:
+                continue
+            publisher = (content.get('provider') or {}).get('displayName') or item.get('publisher', '')
+            pub_time = content.get('pubDate') or ''
+            if pub_time:
+                date_str = pub_time[:10]
+            else:
+                ts = item.get('providerPublishTime', 0)
+                date_str = datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d') if ts else ''
+
+            tagged = [t.get('symbol', '').upper() for t in
+                      (content.get('finance') or {}).get('stockTickers', [])]
+            if not tagged:
+                tagged = [t.upper() for t in item.get('relatedTickers', [])]
+
+            is_specific = ticker_upper in tagged and len(tagged) <= 3
+
+            try:
+                title = GoogleTranslator(source='auto', target='de').translate(title)
+            except Exception:
+                pass
+
+            all_parsed.append({
+                'entry': {'title': title, 'url': url, 'publisher': publisher, 'date_str': date_str},
+                'is_specific': is_specific,
+            })
+
+        specific, general = [], []
+        for p in all_parsed:
+            if p['is_specific'] and len(specific) < max_specific:
+                specific.append(p['entry'])
+            elif not p['is_specific'] and len(general) < max_general:
+                general.append(p['entry'])
+
+        if not specific:
+            flat = [p['entry'] for p in all_parsed]
+            specific = flat[:max_specific]
+            general  = flat[max_specific:max_specific + max_general]
+
+        return {'specific': specific, 'general': general}
+    except Exception as e:
+        print(f'  News-Abruf für {ticker} fehlgeschlagen: {e}')
+        return {'specific': [], 'general': []}
+
 
 # ── Chart-Rendering ───────────────────────────────────────────────────────────
 
@@ -319,6 +381,39 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
                     f'style="width:100%;max-width:720px;display:block;'
                     f'margin:6px 0;border-radius:6px">\n'
                 )
+
+        news = a.get('news', {})
+        specific_news = news.get('specific', []) if isinstance(news, dict) else []
+        general_news  = news.get('general',  []) if isinstance(news, dict) else []
+
+        def news_block(items, label, accent_color, bg_color, icon):
+            if not items:
+                return
+            html_parts.append(
+                f'    <div style="margin-top:12px;padding:10px 12px;'
+                f'background:{bg_color};border-left:3px solid {accent_color};border-radius:4px">\n'
+            )
+            html_parts.append(
+                f'      <div style="font-size:10px;color:{accent_color};'
+                f'margin-bottom:7px;letter-spacing:1px;font-weight:bold">'
+                f'{icon}&nbsp;{label}</div>\n'
+            )
+            for n in items:
+                date_label      = f'<span style="color:#475569">{n["date_str"]}</span>&nbsp;&middot;&nbsp;' if n['date_str'] else ''
+                publisher_label = f'<span style="color:#475569">{n["publisher"]}</span>&nbsp;&mdash;&nbsp;' if n['publisher'] else ''
+                html_parts.append(
+                    f'      <div style="margin-bottom:6px;font-size:11px;line-height:1.4">'
+                    f'{date_label}{publisher_label}'
+                    f'<a href="{n["url"]}" style="color:#93c5fd;text-decoration:none">{n["title"]}</a>'
+                    f'</div>\n'
+                )
+            html_parts.append('    </div>\n')
+
+        news_block(specific_news, f'NEWS – {display}',
+                   accent_color='#3b82f6', bg_color='#0c1929', icon='&#9679;')
+        news_block(general_news,  'BRANCHE / MARKT',
+                   accent_color='#94a3b8', bg_color='#0f172a', icon='&#9675;')
+
         html_parts.append('  </div>\n')
 
     html_parts.append("""
@@ -440,6 +535,8 @@ def main():
             if d_b64:  charts.append((d_b64,  'Daily'))
             if h4_b64: charts.append((h4_b64, '4H'))
 
+            news = fetch_news(ticker)
+
             all_alerts.append({
                 'ticker':             ticker,
                 'score':              score,
@@ -450,6 +547,7 @@ def main():
                 'eps_actual':         earnings['eps_actual'],
                 'revenue_growth_yoy': rev_yoy,
                 'charts':             charts,
+                'news':               news,
             })
 
     all_alerts.sort(key=lambda a: a['score'], reverse=True)
