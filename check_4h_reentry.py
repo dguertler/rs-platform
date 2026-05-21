@@ -118,9 +118,121 @@ def find_reentry_candidates(state):
     return candidates
 
 
+# ── Ticker in allen Sources suchen ───────────────────────────────────────────
+
+def find_ticker_source(ticker, source_cache):
+    """Sucht Ticker in allen geladenen Sources. Gibt (entry, top20_set, source) zurück."""
+    for src, (entries, top20_set) in source_cache.items():
+        if ticker in entries:
+            return entries[ticker], top20_set, src
+    return None, set(), None
+
+
+# ── Einen Ticker analysieren und ggf. Alert bauen ────────────────────────────
+
+def check_one_ticker(ticker, source, entries, top20_set, signals, alerted,
+                     today_str, test_mode=False):
+    """
+    Prüft einen Ticker auf 4H-Wiederkehr.
+    Gibt ein Alert-Dict zurück oder None.
+    Im test_mode werden alle Sperren (alerted, bar-Datum) umgangen.
+    """
+    if not test_mode and alerted.get(ticker) == today_str:
+        print(f'  {ticker}: heute bereits gemeldet – übersprungen')
+        return None
+
+    if ticker not in top20_set:
+        if test_mode:
+            print(f'  [TEST] {ticker}: nicht in Top 20 – trotzdem fortfahren')
+        else:
+            print(f'  {ticker}: nicht in Top 20 von {source} – übersprungen')
+            return None
+
+    print(f'  {ticker} ({source}): hole frische 4H-Daten …')
+    fresh_4h = fetch_fresh_4h(ticker)
+
+    if not fresh_4h:
+        print(f'  {ticker}: keine 4H-Daten erhalten – übersprungen')
+        return None
+
+    struct_4h = analyze_4h_structure(fresh_4h)
+    if not struct_4h or not struct_4h.get('broken4h'):
+        print(f'  {ticker}: 4H-Struktur {"(Test) " if test_mode else ""}nicht gebrochen')
+        return None
+
+    cur_h4_date = _breakout_date(fresh_4h, struct_4h)
+
+    if not test_mode:
+        last_sig = (signals.get(ticker) or [{}])[-1]
+        if cur_h4_date and cur_h4_date == last_sig.get('h4_bar_date'):
+            print(f'  {ticker}: 4H-Breakout ({cur_h4_date}) bereits bekannt – übersprungen')
+            return None
+
+    label = '[TEST] ' if test_mode else ''
+    print(f'  ✓ {label}WIEDERKEHR: {ticker} ({source})  4H aktiv (Breakout: {cur_h4_date})')
+
+    entry    = entries.get(ticker, {})
+    ohlcv_w  = entry.get('ohlcv_w', [])
+    ohlcv_d  = entry.get('ohlcv', [])
+    score    = entry.get('score', 0)
+
+    struct_w = analyze_weekly_structure(ohlcv_w)
+    struct_d = analyze_daily_structure(ohlcv_d)
+
+    w_b64  = render_chart(ohlcv_w,   ticker, 'Weekly (letzten 60 Kerzen)',
+                          gws_price=struct_w['gws_price'] if struct_w else None, n_candles=60)
+    d_b64  = render_chart(ohlcv_d,   ticker, 'Daily (letzten 60 Kerzen)',
+                          gws_price=struct_d['gws_price'] if struct_d else None, n_candles=60)
+    h4_b64 = render_chart(fresh_4h,  ticker, '4H (letzten 60 Kerzen)',
+                          gws_price=struct_4h.get('gws_price'), n_candles=60)
+
+    charts = []
+    if w_b64:  charts.append((w_b64,  'Weekly'))
+    if d_b64:  charts.append((d_b64,  'Daily'))
+    if h4_b64: charts.append((h4_b64, '4H'))
+
+    display_ticker = f'[TEST] {ticker}' if test_mode else ticker
+
+    return {
+        'ticker':          display_ticker,
+        '_real_ticker':    ticker,
+        'score':           score,
+        'info':            {
+            'weekly': True, 'daily': True, 'h4': True,
+            'struct_w': struct_w, 'struct_d': struct_d, 'struct_4h': struct_4h,
+            'points': 3,
+        },
+        'source':          source,
+        'charts':          charts,
+        'new_weekly':      False,
+        'new_daily':       False,
+        'new_h4':          True,
+        'weekly_bar_date': _breakout_date(ohlcv_w, struct_w),
+        'daily_bar_date':  _breakout_date(ohlcv_d, struct_d),
+        'h4_bar_date':     cur_h4_date,
+        'news':            fetch_news(ticker),
+        'in_top20':        ticker in top20_set,
+        '_test_mode':      test_mode,
+    }
+
+
 # ── Haupt-Logik ───────────────────────────────────────────────────────────────
 
 def main():
+    # --test TICKER  → Testmodus für einen bestimmten Ticker
+    test_ticker = None
+    if '--test' in sys.argv:
+        idx = sys.argv.index('--test')
+        if idx + 1 < len(sys.argv):
+            test_ticker = sys.argv[idx + 1].upper()
+        else:
+            print('FEHLER: --test erwartet einen Ticker, z.B.: --test ARM')
+            sys.exit(1)
+
+    # Auch über Umgebungsvariable steuerbar (für workflow_dispatch)
+    if not test_ticker:
+        test_ticker = os.environ.get('TEST_TICKER', '').strip().upper() or None
+
     smtp_host = os.environ.get('SMTP_HOST', '')
     smtp_port = os.environ.get('SMTP_PORT', '587')
     smtp_user = os.environ.get('SMTP_USER', '')
@@ -133,143 +245,89 @@ def main():
 
     today_str = datetime.now().strftime('%Y-%m-%d')
     now_str   = datetime.now().strftime('%Y-%m-%d %H:%M')
-    print(f'check_4h_reentry.py – {now_str}')
+    mode_label = f'  [TEST: {test_ticker}]' if test_ticker else ''
+    print(f'check_4h_reentry.py – {now_str}{mode_label}')
 
     state   = load_state()
     signals = load_signals()
     alerted = state.get('alerted', {})
 
-    candidates = find_reentry_candidates(state)
-    print(f'Wiederkehr-Kandidaten (W+D aktiv, 4H fehlt): {len(candidates)}'
-          + (f' – {[c["ticker"] for c in candidates]}' if candidates else ''))
-
-    if not candidates:
-        print('Keine Kandidaten. Beende.')
-        return
-
-    # Quell-Daten je Source einmal laden (nicht für jeden Ticker neu)
+    # Quell-Daten je Source einmal laden
     source_cache = {}
     for src in SOURCES:
         source_cache[src] = load_source_data(src)
 
     alerts = []
 
-    for cand in candidates:
-        ticker = cand['ticker']
-        source = cand['source']
+    if test_ticker:
+        # ── Testmodus: gezielt einen Ticker erzwingen ─────────────────────────
+        entry, top20_set, source = find_ticker_source(test_ticker, source_cache)
+        if entry is None:
+            # Ticker nicht in den RS-Daten: trotzdem 4H-Daten holen, Source=QQQ annehmen
+            print(f'  [TEST] {test_ticker} nicht in RS-Daten gefunden – versuche QQQ')
+            _, top20_set, source = source_cache.get('QQQ', ({}, set(), 'QQQ'))
+            source = 'QQQ'
+            entries_fallback = {}
+        else:
+            entries_fallback = source_cache[source][0]
 
-        # Bereits heute gemeldet → überspringen
-        if alerted.get(ticker) == today_str:
-            print(f'  {ticker}: heute bereits gemeldet – übersprungen')
-            continue
-
-        entries, top20_set = source_cache.get(source, ({}, set()))
-
-        if ticker not in top20_set:
-            print(f'  {ticker}: nicht in Top 20 von {source} – übersprungen')
-            continue
-
-        print(f'  {ticker} ({source}): hole frische 4H-Daten …')
-        fresh_4h = fetch_fresh_4h(ticker)
-
-        if not fresh_4h:
-            print(f'  {ticker}: keine 4H-Daten erhalten – übersprungen')
-            continue
-
-        struct_4h = analyze_4h_structure(fresh_4h)
-        if not struct_4h or not struct_4h.get('broken4h'):
-            print(f'  {ticker}: 4H-Struktur noch nicht gebrochen')
-            continue
-
-        # 4H ist jetzt aktiv → Wiederkehr!
-        cur_h4_date = _breakout_date(fresh_4h, struct_4h)
-
-        # Prüfen ob dieser Breakout neu ist (nicht schon bekannt in signals.json)
-        last_sig    = (signals.get(ticker) or [{}])[-1]
-        if cur_h4_date and cur_h4_date == last_sig.get('h4_bar_date'):
-            print(f'  {ticker}: 4H-Breakout ({cur_h4_date}) bereits bekannt – übersprungen')
-            continue
-
-        print(f'  ✓ WIEDERKEHR: {ticker} ({source})  4H wieder aktiv (Breakout: {cur_h4_date})')
-
-        # Bestehende W+D Struktur aus den RS-Daten (Charts und GWS-Preise)
-        entry     = entries.get(ticker, {})
-        ohlcv_w   = entry.get('ohlcv_w', [])
-        ohlcv_d   = entry.get('ohlcv', [])
-        score     = entry.get('score', 0)
-
-        struct_w  = analyze_weekly_structure(ohlcv_w)
-        struct_d  = analyze_daily_structure(ohlcv_d)
-
-        # Charts mit frischen 4H-Daten
-        w_b64  = render_chart(
-            ohlcv_w, ticker, 'Weekly (letzten 60 Kerzen)',
-            gws_price=struct_w['gws_price'] if struct_w else None, n_candles=60
+        alert = check_one_ticker(
+            test_ticker, source,
+            entries_fallback if entry is None else source_cache[source][0],
+            top20_set, signals, alerted, today_str,
+            test_mode=True
         )
-        d_b64  = render_chart(
-            ohlcv_d, ticker, 'Daily (letzten 60 Kerzen)',
-            gws_price=struct_d['gws_price'] if struct_d else None, n_candles=60
-        )
-        h4_b64 = render_chart(
-            fresh_4h, ticker, '4H (letzten 60 Kerzen)',
-            gws_price=struct_4h.get('gws_price'), n_candles=60
-        )
+        if alert:
+            alerts.append(alert)
 
-        charts = []
-        if w_b64:  charts.append((w_b64,  'Weekly'))
-        if d_b64:  charts.append((d_b64,  'Daily'))
-        if h4_b64: charts.append((h4_b64, '4H'))
+    else:
+        # ── Normalmodus: alle Wiederkehr-Kandidaten aus State ─────────────────
+        candidates = find_reentry_candidates(state)
+        print(f'Wiederkehr-Kandidaten (W+D aktiv, 4H fehlt): {len(candidates)}'
+              + (f' – {[c["ticker"] for c in candidates]}' if candidates else ''))
 
-        cur_w_date = _breakout_date(ohlcv_w, struct_w)
-        cur_d_date = _breakout_date(ohlcv_d, struct_d)
+        if not candidates:
+            print('Keine Kandidaten. Beende.')
+            return
 
-        alerts.append({
-            'ticker':          ticker,
-            'score':           score,
-            'info':            {
-                'weekly': True, 'daily': True, 'h4': True,
-                'struct_w': struct_w, 'struct_d': struct_d, 'struct_4h': struct_4h,
-                'points': 3,
-            },
-            'source':          source,
-            'charts':          charts,
-            'new_weekly':      False,
-            'new_daily':       False,
-            'new_h4':          True,   # 4H ist das wiedergekehrte Signal → gelb
-            'weekly_bar_date': cur_w_date,
-            'daily_bar_date':  cur_d_date,
-            'h4_bar_date':     cur_h4_date,
-            'news':            fetch_news(ticker),
-            'in_top20':        True,
-            '_fresh_4h':       fresh_4h,   # intern für State-Update
-            '_struct_4h':      struct_4h,
-        })
+        for cand in candidates:
+            entries, top20_set = source_cache.get(cand['source'], ({}, set()))
+            alert = check_one_ticker(
+                cand['ticker'], cand['source'],
+                entries, top20_set, signals, alerted, today_str,
+                test_mode=False
+            )
+            if alert:
+                alerts.append(alert)
 
     if not alerts:
         print('Keine neuen 4H-Wiederkehren.')
-        # State unverändert lassen
         return
 
     # Mail senden
+    is_test     = any(a.get('_test_mode') for a in alerts)
+    date_label  = datetime.now().strftime('%d.%m.%Y')
     subject = (
-        f'4H-Wiederkehr {datetime.now().strftime("%d.%m.%Y")}: '
-        f'{len(alerts)} Aktie(n) – 4H-Signal zurückgekehrt'
+        f'[TEST] 4H-Wiederkehr {date_label} – {alerts[0]["_real_ticker"] if is_test else ""}'
+        if is_test else
+        f'4H-Wiederkehr {date_label}: {len(alerts)} Aktie(n) – 4H-Signal zurückgekehrt'
     )
     send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr,
                      subject_override=subject)
 
+    # Im Testmodus: State NICHT verändern
+    if is_test:
+        print('Test-Mail gesendet. State bleibt unverändert.')
+        return
+
     # State und signals.json aktualisieren
     states = state.get('states', {})
     for a in alerts:
-        ticker = a['ticker']
+        ticker = a['_real_ticker']
         alerted[ticker] = today_str
-
-        # 4H wieder auf True setzen
         if ticker in states:
             states[ticker]['h4']    = True
             states[ticker]['points'] = 3
-
-        # Signal eintragen
         signals.setdefault(ticker, []).append({
             'signal_date':     today_str,
             'trigger_tf':      '4h',
@@ -277,7 +335,7 @@ def main():
             'daily_bar_date':  a.get('daily_bar_date'),
             'h4_bar_date':     a.get('h4_bar_date'),
             'source':          a['source'],
-            'reentry':         True,   # Markierung: Wiederkehr (nicht Erstbreakout)
+            'reentry':         True,
         })
 
     state['states']  = states

@@ -9,11 +9,19 @@ permissions:
 
 on:
   schedule:
-    # Mo-Fr um 10:00, 14:00, 18:00 und 22:00 UTC
-    # → deckt DAX-Mittagsschluss (~11:00 UTC), DAX-Börsenschluss (~15:30 UTC),
-    #   US-Mittagsschluss (~17:30 UTC) und US-Börsenschluss (~21:30 UTC) ab
-    - cron: '0 10,14,18,22 * * 1-5'
+    # Mo-Fr jeweils 5 Min nach der vollen Stunde → 4H-Kerze sicher abgeschlossen
+    # 10:05 UTC (12:05 MESZ) – nach DAX-Mittag-4H-Schluss
+    # 14:05 UTC (16:05 MESZ) – nach DAX-Börsenschluss (~15:30 UTC)
+    # 18:05 UTC (20:05 MESZ) – nach erstem US-4H-Schluss (~17:30 UTC = 13:30 ET)
+    # 22:05 UTC (00:05 MESZ) – nach US-Börsenschluss (~21:30 UTC = 17:30 ET)
+    - cron: '5 10,14,18,22 * * 1-5'
   workflow_dispatch:
+    inputs:
+      test_ticker:
+        description: 'Testmodus: Ticker erzwingen (z.B. ARM) – kein State-Update'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   check-4h-reentry:
@@ -47,6 +55,7 @@ jobs:
           SMTP_USER:      ${{ secrets.SMTP_USER }}
           SMTP_PASS:      ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          TEST_TICKER:    ${{ github.event.inputs.test_ticker }}
         run: python check_4h_reentry.py
 
       - name: Zustandsdatei und signals.json committen
