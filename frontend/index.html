@@ -1079,6 +1079,8 @@ function App() {
   const [signals, setSignals] = useState({});
   const [ratings, setRatings] = useState({});
   const [ratingModal, setRatingModal] = useState(null);
+  const [ratingHtml, setRatingHtml] = useState('');
+  const [ratingsLoaded, setRatingsLoaded] = useState(false);
   const [wlTickers, setWlTickers] = useState(new Set());
   const [wlErr,     setWlErr]     = useState({});
 
@@ -1164,9 +1166,29 @@ function App() {
           if (base !== k) map[base] = r;
         });
         setRatings(map);
+        setRatingsLoaded(true);
       })
-      .catch(() => {});
+      .catch(() => { setRatingsLoaded(true); });
   }, []);
+
+  // Deep-Link: ?openRating=TXN aus E-Mail-Button
+  useEffect(() => {
+    if (!ratingsLoaded) return;
+    const t = new URLSearchParams(window.location.search).get('openRating');
+    if (t) setRatingModal(t.toUpperCase());
+  }, [ratingsLoaded]);
+
+  // HTML für Rating-Modal vom Backend laden (auth-geschützt)
+  useEffect(() => {
+    if (!ratingModal) { setRatingHtml(''); return; }
+    const r = ratings[ratingModal.toUpperCase()];
+    const ticker = r ? r.ticker.toLowerCase() : ratingModal.toLowerCase();
+    setRatingHtml('');
+    apiFetch(`/api/ratings/${ticker}/html`)
+      .then(res => res.ok ? res.text() : null)
+      .then(html => setRatingHtml(html || '<p style="color:#64748b;padding:24px;font-family:monospace">Keine Analyse vorhanden.</p>'))
+      .catch(() => setRatingHtml('<p style="color:#f87171;padding:24px;font-family:monospace">Fehler beim Laden der Analyse.</p>'));
+  }, [ratingModal]);
 
   const rsData = useMemo(() => {
     if (!data) return [];
@@ -1496,8 +1518,13 @@ function App() {
                 <button onClick={() => setRatingModal(null)}
                   style={{background:"transparent",border:"1px solid #1e2d45",color:"#94a3b8",cursor:"pointer",fontSize:13,borderRadius:4,padding:"3px 10px"}}> Schließen</button>
               </div>
-              <iframe src={`ratings/${r ? r.ticker.toLowerCase() : ratingModal.toLowerCase()}.html`}
-                style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
+              {ratingHtml
+                ? <iframe srcdoc={ratingHtml}
+                    style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
+                : <div style={{padding:"32px",textAlign:"center",color:"#64748b",fontFamily:"monospace",fontSize:13}}>
+                    Analyse wird geladen…
+                  </div>
+              }
             </div>
           </div>
         );

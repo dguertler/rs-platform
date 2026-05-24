@@ -467,6 +467,18 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
         news_block(general_news,  'BRANCHE / MARKT',
                    accent_color='#94a3b8', bg_color='#0f172a', icon='&#9675;')
 
+        # "Analyse ansehen"-Button — öffnet die Bewertungsseite im Dashboard
+        frontend_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', '')).rstrip('/')
+        if frontend_url:
+            html_parts.append(
+                f'    <div style="margin-top:14px">'
+                f'<a href="{frontend_url}?openRating={display_ticker}" '
+                f'style="display:inline-block;padding:7px 16px;background:#1e3a5f;'
+                f'color:#60a5fa;border:1px solid #2563eb;border-radius:5px;'
+                f'font-size:12px;font-weight:600;text-decoration:none;font-family:monospace">'
+                f'&#128196; KI-Analyse ansehen &rarr;</a></div>\n'
+            )
+
         html_parts.append('  </div>\n')
 
     html_parts.append("""
@@ -622,6 +634,7 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             alerts.append({
                 'ticker':          ticker,
                 'score':           score,
+                'windows':         entry.get('windows', {}),
                 'info':            info,
                 'source':          source_label,
                 'charts':          charts,
@@ -788,6 +801,24 @@ def main():
                 'source':          a['source'],
             })
         save_signals(signals)
+
+        # KI-Analysen für alle neu gemeldeten Ticker generieren
+        try:
+            import generate_rating
+            for a in fresh_alerts:
+                real_ticker = a['ticker']
+                gws = {
+                    'weekly':      a['info']['weekly'],
+                    'daily':       a['info']['daily'],
+                    'h4':          a['info']['h4'],
+                    'points':      a['info']['points'],
+                    'signal_type': 'Erstmaliger Breakout',
+                }
+                generate_rating.generate_for_ticker(
+                    real_ticker, a['score'], a.get('windows', {}), gws
+                )
+        except Exception as _e:
+            print(f'Rating-Generierung fehlgeschlagen (nicht kritisch): {_e}')
     else:
         print('Keine neuen 2→3-Übergänge heute.')
 

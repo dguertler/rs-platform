@@ -39,7 +39,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib deep-translator
+        run: pip install yfinance pandas matplotlib deep-translator anthropic
 
       - name: RS-Datendateien und signals.json bereitstellen
         run: |
@@ -50,21 +50,24 @@ jobs:
 
       - name: 4H-Wiederkehr prüfen
         env:
-          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
-          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
-          SMTP_USER:      ${{ secrets.SMTP_USER }}
-          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
-          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
-          TEST_TICKER:    ${{ github.event.inputs.test_ticker }}
+          SMTP_HOST:         ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:         ${{ secrets.SMTP_PORT }}
+          SMTP_USER:         ${{ secrets.SMTP_USER }}
+          SMTP_PASS:         ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:    ${{ secrets.ALERT_EMAIL_TO }}
+          TEST_TICKER:       ${{ github.event.inputs.test_ticker }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
         run: python check_4h_reentry.py
 
-      - name: Zustandsdatei und signals.json committen
+      - name: Zustandsdatei, signals.json und Ratings committen
         run: |
           git config user.name  "github-actions"
           git config user.email "actions@github.com"
           git add alerts_state.json
           [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
-          git diff --staged --quiet || git commit -m "4H-Wiederkehr-Zustand aktualisiert"
+          [ -d data/ratings ] && git add data/ratings/ || true
+          git diff --staged --quiet || git commit -m "4H-Wiederkehr-Zustand + KI-Ratings aktualisiert"
           git pull --rebase origin master
           git push origin master
 

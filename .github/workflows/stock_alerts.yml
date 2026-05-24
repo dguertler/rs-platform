@@ -31,7 +31,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib
+        run: pip install yfinance pandas matplotlib deep-translator anthropic
 
       - name: RS-Datendateien für Script bereitstellen
         run: |
@@ -40,21 +40,24 @@ jobs:
 
       - name: Alert-Skript ausführen
         env:
-          SMTP_HOST:        ${{ secrets.SMTP_HOST }}
-          SMTP_PORT:        ${{ secrets.SMTP_PORT }}
-          SMTP_USER:        ${{ secrets.SMTP_USER }}
-          SMTP_PASS:        ${{ secrets.SMTP_PASS }}
-          ALERT_EMAIL_TO:   ${{ secrets.ALERT_EMAIL_TO }}
-          ALERT_TEST_MODE:  ${{ github.event.inputs.test_mode == 'ja' && 'true' || 'false' }}
+          SMTP_HOST:         ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:         ${{ secrets.SMTP_PORT }}
+          SMTP_USER:         ${{ secrets.SMTP_USER }}
+          SMTP_PASS:         ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:    ${{ secrets.ALERT_EMAIL_TO }}
+          ALERT_TEST_MODE:   ${{ github.event.inputs.test_mode == 'ja' && 'true' || 'false' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
         run: python check_alerts.py
 
-      - name: Zustandsdatei und signals.json committen
+      - name: Zustandsdatei, signals.json und Ratings committen
         run: |
           git config user.name  "github-actions"
           git config user.email "actions@github.com"
           git add alerts_state.json
           [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
-          git diff --staged --quiet || git commit -m "Alert-Zustand aktualisiert"
+          [ -d data/ratings ] && git add data/ratings/ || true
+          git diff --staged --quiet || git commit -m "Alert-Zustand + KI-Ratings aktualisiert"
           git push origin master
 
       - name: Fehler-Mail senden

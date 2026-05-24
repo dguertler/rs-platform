@@ -239,6 +239,18 @@ async def get_ratings(email: str = Depends(require_auth)):
     return JSONResponse(content=_load(path))
 
 
+@app.get("/api/ratings/{ticker}/html")
+async def get_rating_html(ticker: str, email: str = Depends(require_auth)):
+    from fastapi.responses import HTMLResponse
+    safe = re.sub(r"[^a-z0-9]", "_", ticker.lower())
+    path = DATA_DIR / "ratings" / f"{safe}.html"
+    if not path.exists():
+        raise HTTPException(404, f"Keine Bewertung für '{ticker}' vorhanden")
+    with open(path, encoding="utf-8") as f:
+        content = f.read()
+    return HTMLResponse(content=content)
+
+
 def _find_ticker_in_markets(ticker: str) -> list[dict]:
     """Search all market JSON files for ticker, return list of {name, rank, in_top20, data}."""
     results = []

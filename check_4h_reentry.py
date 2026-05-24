@@ -390,6 +390,25 @@ def main():
     save_signals(signals)
     print(f'State und signals.json aktualisiert ({len(alerts)} Wiederkehr-Alert(s)).')
 
+    # KI-Analysen für Wiederkehr-Kandidaten generieren
+    try:
+        import generate_rating
+        for a in alerts:
+            ticker  = a['_real_ticker']
+            entry   = source_cache.get(a['source'], ({}, set()))[0].get(ticker, {})
+            gws = {
+                'weekly':      True,
+                'daily':       True,
+                'h4':          True,
+                'points':      3,
+                'signal_type': '4H-Wiederkehr',
+            }
+            generate_rating.generate_for_ticker(
+                ticker, a['score'], entry.get('windows', {}), gws
+            )
+    except Exception as _e:
+        print(f'Rating-Generierung fehlgeschlagen (nicht kritisch): {_e}')
+
 
 if __name__ == '__main__':
     main()
