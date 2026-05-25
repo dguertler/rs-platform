@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MU — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MU</h1>
+      <h2>Micron Technology, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductors</span></div>
+        <div class="mi">MCap: <span>$847B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">343.2</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$751.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">7.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$58.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">58.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">8.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">39.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Micron ist der reinste westliche Memory-Play und damit eine direkte Wette auf den HBM-Supercycle. Die Story hat sich fundamental gedreht: HBM3E ist bei Nvidia qualifiziert, die Kapazitäten für 2025/26 sind ausverkauft, und die Pricing-Power in DRAM/NAND ist nach Jahren der Zerstörung zurück. Der Markt beginnt zu verstehen, dass Memory kein reines Commodity-Geschäft mehr ist, sondern dass HBM strukturell knapp und margenstark bleibt. Das Forward-PE von 7 zeigt: Der Markt traut den Earnings nicht, weil die Memory-Zyklik tief im kollektiven Gedächtnis sitzt. Genau das ist die Chance — und gleichzeitig das Risiko. Wer hier long ist, wettet darauf, dass dieser Zyklus anders ist, weil AI-Infrastruktur strukturelle Nachfrage erzeugt. Institutionelle haben das verstanden, das RS-Signal von +250% auf 6M ist brutal.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>DRAM-Geschäft (~70% Umsatz): Server, PC, Mobile, Auto</li>
+<li>NAND-Flash (~25%): SSDs für Datacenter und Consumer</li>
+<li>HBM (High Bandwidth Memory): strategischer Wachstumstreiber, gestapelter DRAM für AI-Beschleuniger</li>
+<li>Hauptkunden: Nvidia, AMD, Hyperscaler (Microsoft, Meta, Google, AWS)</li>
+<li>Oligopolstruktur: nur Samsung, SK Hynix, Micron weltweit relevant</li>
+<li>Hochzyklisches Geschäft, getrieben von Angebots-/Nachfrage-Imbalancen</li>
+<li>Massive Capex-Anforderungen (~$14 Mrd./Jahr), US-CHIPS-Act-Förderung</li>
+<li>HBM-Marge deutlich über Standard-DRAM, Mix-Shift treibt Profitabilität</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>HBM-TAM wächst von ~$20 Mrd. (2024) auf $100+ Mrd. bis 2028</li>
+<li>Micron HBM-Kapazität für 2025 komplett verkauft, 2026 bereits weitgehend allokiert</li>
+<li>Memory-Zyklus dreht: Supply diszipliniert, Nachfrage strukturell durch AI</li>
+<li>Operating Leverage extrem hoch — EPS kann sich in Aufschwung vervielfachen</li>
+<li>HBM4 ab 2026, Micron technologisch konkurrenzfähig zu SK Hynix</li>
+<li>Re-Rating-Potenzial: von Commodity-Multiple zu AI-Infrastructure-Multiple</li>
+<li>Onshoring-Trend und US-Subventionen als strukturelle Rückenwinde</li>
+<li>Enterprise-SSD-Markt zieht durch AI-Inference-Workloads stark an</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Memory bleibt strukturell zyklisch — jede Hausse endete bisher brutal</li>
+<li>Samsung holt bei HBM auf, Preiskrieg möglich</li>
+<li>China-Anbieter (CXMT) drücken in Standard-DRAM mit Subventionen</li>
+<li>Bewertung nach +250% in 6 Monaten extrem stretched für ein zyklisches Geschäft</li>
+<li>FCF mit nur $2.9 Mrd. mager gegenüber Marktkapitalisierung</li>
+<li>Hyperscaler-Capex könnte 2026/27 normalisieren</li>
+<li>Inventory-Korrektur historisch immer überraschend hart</li>
+<li>Margen-Spitze möglicherweise näher als gedacht</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Revenue-Wachstum YoY +196% — klassischer Zyklus-Rebound</li>
+<li>Gross Margin 58% (von negativ vor 18 Monaten) — brutaler Operating Leverage</li>
+<li>Operating Margin 67% wirkt unrealistisch hoch, vermutlich Einmaleffekte/Inventory-Reversals</li>
+<li>ROE 39.8% — Zyklus-Peak-Niveau</li>
+<li>Debt/Equity 14.9% — sehr solide Bilanz für Capex-Intensität</li>
+<li>FCF mit $2.9 Mrd. niedrig relativ zu Net Income → Capex frisst Cash</li>
+<li>Dividende 8% wirkt verdächtig hoch — vermutlich Datenfehler, real ~0.4%</li>
+<li>Capex bleibt struktureller Gegenwind für FCF-Konvertierung</li>
+<li>Wettbewerbsvorteil: einer von nur 3 globalen DRAM-Playern</li>
+<li>Technologieführer bei DDR5 und bei HBM3E zumindest gleichauf</li>
+<li>Pricing-Power nur in Boom-Phasen wirklich gegeben</li>
+<li>Bilanzqualität historisch solide durch Capex-Disziplin nach 2022-Crash</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Forward-PE 7.3 wirkt billig, ist aber der klassische "Peak Earnings"-Trap im Memory-Sektor. Trailing-PE von 35 zeigt, wo wir herkommen. Price/Book 11.7 ist historisch hoch — Micron wurde in Down-Cycles regelmäßig unter Buch gehandelt. Verglichen mit SK Hynix (Forward-PE ~8) ähnliches Bild, beide preisen entweder massiv steigende Earnings ein oder einen Peak. Das Analysten-Kursziel von $613 liegt deutlich UNTER dem aktuellen Kurs — der Markt ist den Sell-Side-Modellen weit voraus. Entscheidend: Wenn HBM strukturell ist, sind 15x normalized Forward-Earnings fair und Micron ist immer noch günstig. Wenn nicht, ist Price/Book das relevante Multiple und die Aktie zu teuer.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Extrem crowded long bei Hedgefonds — AI-Infrastruktur-Trade</li>
+<li>Retail-Momentum massiv eingestiegen nach Q3/Q4-Rally</li>
+<li>Smart Money hat zwischen $60–100 akkumuliert, jetzt teils am Trimmen</li>
+<li>Short-Interest niedrig, kein Squeeze-Setup mehr</li>
+<li>Sentiment euphorisch — historisch Vorsicht-Signal in Memory</li>
+<li>Sell-Side hängt mit Kurszielen hinterher → Upgrade-Rally möglich</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 aktiv — Strukturbruch auf allen Zeitebenen, maximales Momentum</li>
+<li>RS-Score 343 vs. QQQ extrem stark, aber überdehnt</li>
+<li>10-Tages-RS -6% zeigt erste Ermüdung nach 250%-Move in 6M</li>
+<li>Parabolische Phase, kurzfristige Konsolidierung wahrscheinlich</li>
+<li>Zyklus-Phase: spätes Mid-Cycle, nicht Beginn</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>Konservatives Szenario: Memory normalisiert sich, HBM bleibt margenstark, EPS ~$12 → Kursziel $180–220 / Wahrscheinlichkeit 35%</p>
+<p>Bull Case: HBM-Cycle hält, Micron gewinnt Marktanteil, EPS ~$25 → Kursziel $400–500 / Wahrscheinlichkeit 40%</p>
+<p>Extrem-Bull-Case: AI-Memory-Supercycle hält durchgehend, Re-Rating zu Infrastruktur-Multiple, EPS $35+ → Kursziel $800–1000 / Wahrscheinlichkeit 25%</p>
+<p>Hinweis: Der aktuelle Kurs von $751 preist faktisch bereits den Bull-bis-Extrem-Bull-Case ein.</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>SK Hynix (Korea): direkter HBM-Konkurrent, Marktführer, ähnliche Bewertung</li>
+<li>Samsung Electronics: breiter aufgestellt, HBM-Nachzügler bei Nvidia</li>
+<li>Western Digital / Sandisk: NAND-Pure-Play, weniger AI-Exposure</li>
+<li>Nvidia: Endabnehmer und Profiteur derselben AI-Welle, aber Software-Moat</li>
+<li>ASML / AMAT: Memory-Capex-Profiteure ohne Memory-Preisrisiko</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Micron ist aktuell einer der reinsten AI-Infrastruktur-Trades am Markt — und genau deshalb hochgefährlich auf diesem Niveau. Die Story stimmt, HBM ist real, die Pricing-Power ist zurück. Aber +250% in 6 Monaten in einem strukturell zyklischen Business ist kein Einstiegsniveau. Mit GWS-Ampel 3/3 ist das Momentum maximal, was technisch bullisch ist, aber gleichzeitig Spätzyklus-Signale sendet. Für Hedgefonds: Bestehende Positionen halten, aber Trailing-Stops eng setzen. Für Neueinsteiger: Auf Rücksetzer 20–30% warten, nicht parabolisch nachkaufen. Dies ist KEIN klassischer Compounder — es ist ein Trading-Vehikel in einem Cycle, der irgendwann brutal endet. Die Frage ist nicht ob, sondern wann. Wer das versteht, kann Micron handeln. Wer es als "Long-term-Hold" sieht, wird beim nächsten Memory-Winter 60% verlieren. Verkaufssignal kommt, sobald GWS-Ampel auf 4H bricht — dann Position aktiv reduzieren.</p>
+<p>Rating:</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

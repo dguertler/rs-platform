@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ARM — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ARM</h1>
+      <h2>Arm Holdings plc</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductors</span></div>
+        <div class="mi">MCap: <span>$326B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">370.6</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$306.51</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">100.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">97.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">12.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>ARM ist kein klassischer Halbleiterhersteller, sondern ein IP-Lizenzgeber mit einer fast monopolartigen Stellung im mobilen Computing und einer wachsenden Präsenz in Rechenzentren, Automotive und AI-Edge. Der eigentliche Investmentcase liegt im Wandel des Royalty-Modells: ARMv9-Architekturen generieren etwa doppelt so hohe Lizenzgebühren wie ARMv8, und AI-Workloads treiben den Bedarf nach effizienter CPU-Architektur. Der Markt preist ARM als strukturellen AI-Profiteur ein – nicht als zyklischen Halbleiterwert. Bei einem Forward-PE von 100 und einer Market Cap von $326 Mrd. bei nur $4,9 Mrd. Umsatz ist klar: Das ist eine reine Story-Aktie mit extremer Bewertungsprämie. Die These funktioniert nur, wenn ARM in den nächsten 5 Jahren Royalty-Umsätze drastisch hochskalieren kann, insbesondere durch Custom-Silicon-Designs bei Hyperscalern (NVIDIA Grace, AWS Graviton, Microsoft Cobalt).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Haupteinnahmequellen: License Fees (Vorab-Gebühren) und Royalties (pro verkauftem Chip)</li>
+<li>Praktisch jedes Smartphone weltweit nutzt ARM-IP – über 99% Marktanteil im Mobile</li>
+<li>ARMv9-Migration: höhere Royalty-Rate pro Chip, deutlicher Mix-Shift im Gange</li>
+<li>Wachstumsfelder: Data Center (NVIDIA Grace, AWS Graviton), Automotive, AI-Edge, IoT</li>
+<li>Compute Subsystems (CSS): vorgefertigte Designs, höhere Wertschöpfung pro Lizenz</li>
+<li>Sehr asset-light: 97,5% Gross Margin spiegelt reines IP-Geschäftsmodell wider</li>
+<li>Kunden-Konzentration: Apple, Qualcomm, MediaTek, Samsung, NVIDIA dominieren</li>
+<li>Mehrheitseigentümer SoftBank (~90%) – freier Streubesitz extrem niedrig</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>ARMv9-Royalty-Verdopplung beschleunigt sich – Umsatz pro Chip steigt mehrjährig</li>
+<li>AI-Inference am Edge (Smartphones, PCs, Autos) braucht effiziente ARM-Cores</li>
+<li>Hyperscaler bauen zunehmend eigene ARM-basierte Server-Chips → Margen-Booster</li>
+<li>Windows-on-ARM und Apple-Silicon-Effekt erreichen den PC-Markt strukturell</li>
+<li>Automotive-Royalties wachsen mit Software-defined Vehicles zweistellig</li>
+<li>China-Risiken könnten ironischerweise zu mehr ARM-Adoption führen (vs. x86)</li>
+<li>Sehr kleiner Float → jeder positive Newsflow erzeugt überproportionale Bewegung</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Bewertung: 66x Sales und 100x Forward-Earnings lassen null Toleranz für Enttäuschungen</li>
+<li>Analysten-Kursziel $232 liegt 24% unter aktuellem Kurs – institutioneller Skeptizismus</li>
+<li>RISC-V als Open-Source-Alternative gewinnt traction, besonders in China und im IoT</li>
+<li>Qualcomm-Rechtsstreit zeigt Spannungen mit Schlüsselkunden</li>
+<li>Hohe Abhängigkeit von Smartphone-Zyklus (~50% der Royalties)</li>
+<li>SoftBank-Overhang: potenzielle Sekundärplatzierungen drücken Aktie</li>
+<li>Beta 3,41 → bei jeder AI-Korrektur überproportionaler Drawdown</li>
+<li>Free Cashflow nur $770 Mio. – rechtfertigt keine $326 Mrd. Bewertung kurzfristig</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatzwachstum 20,1% YoY – solide, aber nicht hyper-skalierend</li>
+<li>Gross Margin 97,5% – Best-in-Class IP-Modell</li>
+<li>Operating Margin 29,6% – Spielraum nach oben durch Skalierung</li>
+<li>Net Margin 18,4% – durch hohe R&D und SBC gedrückt</li>
+<li>FCF $770 Mio. → FCF-Yield <0,3% bei aktueller Bewertung</li>
+<li>Debt/Equity 5,21 – optisch hoch, aber Bilanz solide</li>
+<li>ROE nur 12% – für IP-Business unterdurchschnittlich</li>
+<li>Price/Book 39 – reine Goodwill-/IP-Bewertung</li>
+<li>Stock-Based Compensation drückt GAAP-Earnings massiv</li>
+<li>Royalty-Mix-Shift hin zu v9 = struktureller Margen-Tailwind</li>
+<li>Wettbewerbsvorteil: Ökosystem-Lock-in, Software-Compatibility, jahrzehntelange IP</li>
+<li>Kapitaleffizienz operativ exzellent, aber Aktien-Bewertung übertrieben</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>ARM handelt bei 66x Sales und 100x Forward-Earnings – das ist Bewertungsterritorium, das selbst NVIDIA mit besserem Wachstum nicht trägt. Die EV/Sales von ~65x ist mehr als doppelt so hoch wie der Sektorschnitt für High-Quality-Semiconductor-Werte. Der Markt preist mehrjähriges Royalty-Wachstum von 25-30% mit margenexpansion linear ein. Vergleichsweise: Synopsys und Cadence (ebenfalls IP-/EDA-Modelle) handeln bei 40-50x Forward-Earnings bei ähnlichem Wachstum. Analysten-Konsens-Kursziel $232 impliziert deutliches Downside. Bei einem realistischen Wachstumspfad rechtfertigen Fundamentaldaten eher $180-220 – alles darüber ist Momentum- und Knappheits-Prämie durch den kleinen Float.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Extrem crowded auf der Long-Seite unter Retail und AI-Thementradern</li>
+<li>Institutionelles Ownership niedrig wegen SoftBank-Float-Problem</li>
+<li>Smart Money tendenziell skeptisch – Analystenziele unter Kurs</li>
+<li>Short-Interest moderat, aber steigend bei jedem neuen ATH</li>
+<li>Hype-Komponente hoch, fundamentale Komponente moderat</li>
+<li>Klassische "narrative stock" – getrieben von AI-Story, nicht Cashflows</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>RS-Score 370 vs. QQQ – extrem starkes Outperformance-Signal</li>
+<li>50T-Performance +143%, 6M +108% – parabolisch, kurzfristig überhitzt</li>
+<li>GWS-Ampel 3/3 AKTIV: Weekly, Daily, 4H Strukturbruch – starkes Momentum-Setup</li>
+<li>Nahe 52W-Hoch ($315) – Breakout-Charakter, aber Anstieg vertikal</li>
+<li>Risk/Reward kurzfristig schlecht – Rücksetzer auf $250-270 wahrscheinlich vor Fortsetzung</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>Konservatives Szenario: Royalty-Wachstum 15-18% p.a., Margen stagnieren / Kursziel $220-260 / Wahrscheinlichkeit 40%</p>
+<p>Bull Case: ARMv9 + Data-Center-Penetration + AI-Edge / Royalty-Wachstum 25%+ / Kursziel $450-550 / Wahrscheinlichkeit 35%</p>
+<p>Extrem-Bull-Case: ARM wird "AI-CPU-Standard" auch im Server-Markt, CSS-Adoption explodiert / Kursziel $700-900 / Wahrscheinlichkeit 15%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>NVDA: bessere Margen, höheres Wachstum, günstigere Bewertung relativ zum FCF</li>
+<li>SNPS/CDNS: vergleichbares IP-Modell, viel günstiger bei ähnlicher Qualität</li>
+<li>QCOM: ARM-Kunde, deutlich günstiger, aber zyklischer</li>
+<li>AVGO: diversifizierter, höherer FCF-Yield, attraktiveres Risk/Reward</li>
+<li>ARM ist mit Abstand die teuerste Aktie der Peergroup</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>ARM ist ein Qualitätsunternehmen mit echtem strukturellem Moat, aber zum aktuellen Kurs eine reine Momentum- und Knappheits-Play. Aus Hedgefonds-Perspektive ist das kein "Buy and Hold"-Compounder zu diesen Multiples, sondern ein taktisches Trading-Vehikel mit starkem Tape, aber katastrophalem Risk/Reward bei Einstieg am ATH. Die GWS-Ampel 3/3 zeigt starkes kurzfristiges Momentum, aber die parabolische Bewegung (+143% in 50 Tagen) ist klassisch überhitzt. Wer long ist: Gewinne sichern, Trailing-Stop unter $270 setzen. Wer einsteigen will: NICHT jagen – auf Rücksetzer in den Bereich $230-260 warten, idealerweise mit erneutem GWS-Setup. Strukturell bleibe ich konstruktiv für ARM auf 3-5 Jahre, aber die Aktie braucht erst eine Konsolidierungsphase, bevor das nächste Bewertungslevel gerechtfertigt ist. Klassischer Fall: Großartiges Unternehmen, schlechter Einstiegspunkt.</p>
+<p>Rating:</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 1/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>
