@@ -480,17 +480,46 @@ if __name__ == "__main__":
         print("Verwendung: python generate_rating.py TICKER [TICKER2 ...]")
         sys.exit(1)
 
-    tickers = [t.upper() for t in sys.argv[1:]]
+    # Spezial-Keywords in echte Ticker-Listen expandieren
+    KEYWORDS = {
+        "DAX_TOP20":     ("data/rs_dax.json",   "rs_dax.json",   20),
+        "SP500_TOP20":   ("data/rs_sp500.json",  "rs_sp500.json", 20),
+        "NASDAQ_TOP20":  ("data/rs_full.json",   "rs_full.json",  20),
+    }
 
-    # RS-Daten aus rs_full.json laden (Score + Windows)
+    raw_args = [t.upper() for t in sys.argv[1:]]
+    tickers = []
+    for arg in raw_args:
+        if arg in KEYWORDS:
+            paths = KEYWORDS[arg]
+            for fname in (paths[0], paths[1]):
+                if Path(fname).exists():
+                    with open(fname) as f:
+                        entries = json.load(f).get("data", [])
+                    expanded = [e["ticker"].upper() for e in entries[:paths[2]]]
+                    print(f"  {arg} → {expanded}")
+                    tickers.extend(expanded)
+                    break
+            else:
+                print(f"  Warnung: Datei für {arg} nicht gefunden")
+        else:
+            tickers.append(arg)
+
+    if not tickers:
+        print("Keine Ticker gefunden.")
+        sys.exit(1)
+
+    # RS-Daten aller verfügbaren Dateien laden (Score + Windows)
     rs_data = {}
-    for fname in ("rs_full.json", "data/rs_full.json"):
+    for fname in ("rs_full.json", "data/rs_full.json",
+                  "rs_dax.json",  "data/rs_dax.json",
+                  "rs_sp500.json","data/rs_sp500.json"):
         if Path(fname).exists():
             with open(fname) as f:
                 for entry in json.load(f).get("data", []):
                     rs_data[entry["ticker"].upper()] = entry
-            print(f"rs_full.json geladen: {len(rs_data)} Einträge")
-            break
+
+    print(f"RS-Daten geladen: {len(rs_data)} Einträge")
 
     for ticker in tickers:
         entry    = rs_data.get(ticker, {})
