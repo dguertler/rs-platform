@@ -20,7 +20,7 @@ Doppel-Mail-Schutz:
 """
 
 import subprocess
-subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "deep-translator", "-q"])
+subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "deep-translator", "requests", "-q"])
 
 import sys
 import os
@@ -253,6 +253,7 @@ def check_one_ticker(ticker, source, entries, top20_set, signals, alerted,
         'new_weekly':      False,
         'new_daily':       False,
         'new_h4':          True,
+        'reentry':         True,
         'weekly_bar_date': _breakout_date(ohlcv_w, struct_w),
         'daily_bar_date':  _breakout_date(ohlcv_d, struct_d),
         'h4_bar_date':     cur_h4_date,
@@ -360,6 +361,13 @@ def main():
     )
     send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr,
                      subject_override=subject)
+
+    tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
+    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+    if tg_token and tg_chat_id:
+        from telegram_handler import send_breakout_telegram
+        for a in alerts:
+            send_breakout_telegram(tg_token, tg_chat_id, a)
 
     # Im Testmodus: State NICHT verändern
     if is_test:

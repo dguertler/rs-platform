@@ -31,12 +31,14 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib deep-translator anthropic
+        run: pip install yfinance pandas matplotlib deep-translator requests anthropic
 
       - name: RS-Datendateien für Script bereitstellen
         run: |
-          cp data/rs_full.json . 2>/dev/null || true
-          cp data/signals.json . 2>/dev/null || true
+          cp data/rs_full.json  . 2>/dev/null || true
+          cp data/rs_dax.json   . 2>/dev/null || true
+          cp data/rs_sp500.json . 2>/dev/null || true
+          cp data/signals.json  . 2>/dev/null || true
 
       - name: Alert-Skript ausführen
         env:
@@ -48,6 +50,8 @@ jobs:
           ALERT_TEST_MODE:   ${{ github.event.inputs.test_mode == 'ja' && 'true' || 'false' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
+          TELEGRAM_TOKEN:    ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID:  ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python check_alerts.py
 
       - name: Zustandsdatei, signals.json und Ratings committen

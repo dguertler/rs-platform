@@ -26,22 +26,24 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib lxml
+        run: pip install yfinance pandas matplotlib lxml deep-translator requests
 
       - name: RS-Datendateien für Script bereitstellen
         run: |
-          cp data/rs_full.json . 2>/dev/null || true
-          cp data/rs_dax.json . 2>/dev/null || true
+          cp data/rs_full.json  . 2>/dev/null || true
+          cp data/rs_dax.json   . 2>/dev/null || true
           cp data/rs_sp500.json . 2>/dev/null || true
 
       - name: Earnings-Skript ausführen
         env:
-          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
-          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
-          SMTP_USER:      ${{ secrets.SMTP_USER }}
-          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
-          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
-          TEST_DATE:      ${{ github.event.inputs.test_date }}
+          SMTP_HOST:        ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:        ${{ secrets.SMTP_PORT }}
+          SMTP_USER:        ${{ secrets.SMTP_USER }}
+          SMTP_PASS:        ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:   ${{ secrets.ALERT_EMAIL_TO }}
+          TEST_DATE:        ${{ github.event.inputs.test_date }}
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: python check_earnings.py
 
       - name: Fehler-Mail senden

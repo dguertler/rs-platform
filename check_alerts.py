@@ -1,5 +1,5 @@
 import subprocess
-subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "deep-translator", "-q"])
+subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "deep-translator", "requests", "-q"])
 
 import json
 import os
@@ -788,9 +788,16 @@ def main():
     print(f'\nAlertes gesamt: {len(all_alerts)}  '
           f'(davon neu heute: {len(fresh_alerts)})')
 
+    tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
+    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+
     if fresh_alerts:
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
+        if tg_token and tg_chat_id:
+            from telegram_handler import send_breakout_telegram
+            for a in fresh_alerts:
+                send_breakout_telegram(tg_token, tg_chat_id, a)
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')

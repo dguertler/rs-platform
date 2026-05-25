@@ -1,5 +1,5 @@
 import subprocess
-subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "lxml", "deep-translator", "-q"])
+subprocess.run(["pip", "install", "yfinance", "pandas", "matplotlib", "lxml", "deep-translator", "requests", "-q"])
 
 import json
 import os
@@ -555,6 +555,12 @@ def main():
 
     if all_alerts:
         send_earnings_email(all_alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr)
+        tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
+        tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+        if tg_token and tg_chat_id:
+            from telegram_handler import send_earnings_telegram
+            for a in all_alerts:
+                send_earnings_telegram(tg_token, tg_chat_id, a)
     else:
         print('Keine Earnings-Überraschungen heute.')
 
