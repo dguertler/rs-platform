@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSCO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CSCO</h1>
+      <h2>Cisco Systems, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Communication Equipment</span></div>
+        <div class="mi">MCap: <span>$475B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">121.5</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$120.41</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">25.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$60.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">64.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">140.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">25.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Cisco war jahrelang die Inkarnation einer "Value Trap" im Tech-Sektor — solides Geschäft, aber strukturell stagnierend, mit einer Bewertung, die das widerspiegelte. Das Splunk-Akquisitionsspiel und der überraschende AI-Networking-Pull (Hyperscaler-Aufträge in Milliardenhöhe) haben die Story neu kalibriert. Der Markt erkennt langsam, dass Cisco kein reines Legacy-Enterprise-Networking-Unternehmen mehr ist, sondern ein Hybrid aus Networking, Security (Splunk) und AI-Infrastruktur-Profiteur. Die Aktie auf 52-Wochen-Hoch zeigt, dass institutionelle Investoren beginnen, diese Neubewertung einzupreisen. Was der Markt möglicherweise noch unterschätzt: Die AI-Backbone-Komponente bei Hyperscalern könnte Cisco erstmals seit über einem Jahrzehnt wieder organisch zweistellig wachsen lassen. Was potenziell überschätzt wird: die Nachhaltigkeit dieser AI-Aufträge nach dem ersten Capex-Zyklus.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Networking-Hardware (Switches, Router) — Kerngeschäft, ca. 50% des Umsatzes</li>
+<li>Security (inkl. Splunk) — strategisches Wachstumssegment mit hohen Recurring Revenues</li>
+<li>Collaboration (Webex) — strukturell unter Druck durch Teams/Zoom</li>
+<li>Observability & Software-Services — Margenträger mit ARR-Modell</li>
+<li>Hyperscaler-AI-Networking — neuer Wachstumstreiber (Ethernet vs. InfiniBand)</li>
+<li>Wiederkehrende Umsätze >50% durch Subscription-Shift</li>
+<li>Massiver Service-/Support-Footprint im Enterprise-Bereich</li>
+<li>Hoher Switching-Cost bei Bestandskunden (Cisco-Zertifizierungen, Architektur-Lock-in)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>AI-Capex-Welle: Hyperscaler bauen Ethernet-Backbones, Cisco Hauptprofiteur (Ultra Ethernet Consortium)</li>
+<li>Splunk-Integration entfaltet Cross-Sell-Potenzial in Security/Observability</li>
+<li>Subscription-Shift verbessert Earnings-Qualität und rechtfertigt Multiple-Expansion</li>
+<li>Rückkehr zur 10%+ Umsatzwachstumsrate erstmals seit Jahren</li>
+<li>Margen-Hebel durch Software-Mix (>65% Gross Margin Ziel realistisch)</li>
+<li>Defensive Bilanz, hohe Dividende, massive Buybacks</li>
+<li>Re-Rating-Potenzial: Von "Legacy Tech" zu "AI-Infrastruktur-Profiteur"</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Forward PE 25 ist für ein zyklisches Networking-Unternehmen historisch teuer</li>
+<li>AI-Networking-Aufträge konzentriert auf wenige Hyperscaler — Klumpenrisiko</li>
+<li>Konkurrenz von Arista (technologisch führend), Nvidia (Spectrum-X), Juniper/HPE</li>
+<li>Trailing PE 40 zeigt: viel Vorschuss-Lorbeer eingepreist</li>
+<li>Strukturelle Schwäche in Collaboration und Campus-Switching</li>
+<li>Enterprise-IT-Budgets bei Makro-Eintrübung anfällig</li>
+<li>Integrationsrisiken Splunk noch nicht vollständig durch</li>
+<li>Historisch enttäuschende Capital Allocation (teure M&A)</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatzwachstum 12% YoY — Beschleunigung sichtbar</li>
+<li>Gross Margin 64,3% — solide für Hardware-Mix</li>
+<li>Operating Margin 25% — gesund, aber nicht spektakulär</li>
+<li>Net Margin 19,7%</li>
+<li>FCF $9,3 Mrd. — sehr stark, deckt Dividende komfortabel</li>
+<li>ROE 25,2% — hochwertig</li>
+<li>Debt/Equity 67,5 — erhöht nach Splunk-Deal, aber tragbar</li>
+<li>Price/Book 9,7 — historisch hoch</li>
+<li>Recurring Revenue >50%</li>
+<li>Dividenden-Track-Record stabil, hohe Payout</li>
+<li>Bilanz ausreichend stark für weitere Buybacks</li>
+<li>Capital Discipline historisch durchwachsen</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Mit Forward PE 25 und Trailing PE 40 ist Cisco deutlich teurer als der eigene 10-Jahres-Durchschnitt (typisch 14-17x). Das Re-Rating spiegelt die AI-Story wider — die Frage ist, ob das nachhaltig ist. Im Vergleich: Arista handelt bei ~40x Forward, Juniper bei ~18x, Broadcom bei ~32x. Cisco liegt damit im Mittelfeld der Networking-Peers, aber mit deutlich niedrigerem Wachstumsprofil als Arista oder Broadcom. EV/FCF von ca. 50 ist sportlich. Der Analysten-Konsens bei $124 signalisiert minimales Upside auf Konsensbasis — die Aktie ist nach dem Lauf fair bis leicht teuer bewertet. Ein Multiple-Halt erfordert konsequente Lieferung der AI-Networking-Zahlen.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Von "ignoriert" zu "wiederentdeckt" — Sentiment-Shift in den letzten 6 Monaten klar</li>
+<li>Institutionelle Ownership hoch und stabil, nicht crowded wie NVDA/AVGO</li>
+<li>Momentum stark: +33% in 50 Tagen, +38% in 6 Monaten</li>
+<li>Smart Money rotiert in "Second-Derivative-AI-Plays" — Cisco profitiert davon</li>
+<li>Retail-Beachtung gering, eher institutionelle Story</li>
+<li>Defensives AI-Exposure für konservative Mandate</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>Kurs auf 52-Wochen-Hoch ($120,41 vs. $120,79) — Ausbruchssituation</li>
+<li>RS-Score 121 vs. QQQ zeigt klare Outperformance</li>
+<li>5-Tages-RS leicht negativ (-0,36) → kurzfristige Konsolidierung möglich</li>
+<li>GWS-Ampel 3/3 AKTIV (Weekly/Daily/4H) — strukturell vollumfänglich bullish</li>
+<li>Setup: Trendfortsetzung wahrscheinlich, Pullbacks zu kaufen statt zu shorten</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>**Konservativ:** Wachstum normalisiert auf 5-6%, AI-Pull flacht ab. Multiple-Kompression auf 18x. Kursziel: $115-130. Wahrscheinlichkeit: 40%.</p>
+<p>**Bull Case:** AI-Networking liefert, Splunk-Synergien materialisieren sich, 8-10% Umsatzwachstum nachhaltig. Multiple hält 22-25x. Kursziel: $170-190. Wahrscheinlichkeit: 40%.</p>
+<p>**Extrem-Bull:** Cisco wird dominanter Ethernet-AI-Player, Margen-Expansion auf 30%+ Operating, EPS verdoppelt sich. Kursziel: $220-250. Wahrscheinlichkeit: 20%.</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>ANET (Arista): Technologisch führend, höheres Wachstum, deutlich teurer</li>
+<li>AVGO (Broadcom): Breiteres AI-Portfolio, bessere Margen, höhere Multiple</li>
+<li>JNPR (Juniper): Wird von HPE übernommen, weniger relevant</li>
+<li>HPE: Mit Juniper-Deal direkter Networking-Konkurrent, deutlich günstiger</li>
+<li>NVDA Spectrum-X: Indirekter Bedrohungsfaktor im AI-Networking-Stack</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Cisco ist aus institutioneller Sicht der "defensive AI-Trade" — kein Hyper-Grower wie Nvidia, aber ein qualitativ hochwertiger Cashflow-Generator, der erstmals seit Jahren wieder eine Wachstumsstory besitzt. Aus Hedgefonds-Perspektive ist das primär ein Re-Rating-Play, kein klassischer Compounder. Die Aktie hat den einfachen Teil des Repricings hinter sich; jetzt muss Cisco liefern. Das Risiko/Rendite-Profil ist nach dem 33%-Move in 50 Tagen kurzfristig weniger attraktiv — Einstiege auf Pullbacks Richtung $108-112 sind sinnvoller als das Kaufen am ATH. Die GWS-Ampel ist mit 3/3 vollumfänglich aktiv, was Trendfortsetzung signalisiert, aber das kurzfristige RS-Signal (-0,36 auf 5T) deutet auf Konsolidierung. Langfristig (3-5 Jahre) ist ein Total Return von 8-12% p.a. realistisch — solide, nicht spektakulär. Verkaufssignal wäre ein Bruch der Weekly-GWS-Struktur kombiniert mit einer Enttäuschung bei AI-Networking-Zahlen. Position: Halten/Akkumulieren auf Schwäche, kein FOMO-Kauf am Hoch.</p>
+<p>**Rating:**</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

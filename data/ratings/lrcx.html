@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LRCX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>LRCX</h1>
+      <h2>Lam Research Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductor Equipment & Materials</span></div>
+        <div class="mi">MCap: <span>$382B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">139.8</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$305.35</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">38.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">50.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">34.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">66.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Lam Research ist einer der drei globalen Gatekeeper für Halbleiter-Equipment, mit dominanter Position bei Etch und Deposition – kritisch für 3D-NAND, Advanced DRAM (HBM) und Logic-Scaling unter 3nm. Die Story ist nicht "Chip-Aktie", sondern "Picks & Shovels" des AI-Capex-Zyklus: Jede neue Nvidia-GPU, jeder HBM-Stack und jedes fortschrittliche Foundry-Werk benötigt Lam-Tools. Der Markt erkennt das mittlerweile – RS vs. QQQ von 140 und +96% in 6 Monaten zeigen aggressives Repricing. Institutionelle Investoren spielen Lam als zyklisch-strukturelles Hybrid: Memory-Recovery (NAND/DRAM-Capex bottomte 2024) plus säkularer HBM/AI-Booster. Was der Markt teilweise unterschätzt: Die Service-Sparte (CSBG) liefert wachsende Recurring Revenues und glättet die Zyklik. Was bereits eingepreist ist: Ein WFE-Aufschwung 2025–2026. Auf 38x Forward ist die Aktie nicht mehr billig – aber qualitativ Top-3 im Sektor.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Marktführer bei Etch (~50% Marktanteil) und Deposition (~25%) – beides essenziell für moderne Chips</li>
+<li>Hauptkunden: Samsung, SK Hynix, Micron, TSMC, Intel</li>
+<li>Memory-Exposure historisch ~55–60% – höher als ASML oder AMAT</li>
+<li>Wachstumstreiber HBM: Jeder HBM-Stack benötigt deutlich mehr Etch/Dep-Schritte</li>
+<li>CSBG (Customer Support Business Group): Ersatzteile, Upgrades, Service – stabiler Recurring-Cashflow</li>
+<li>Hohe Switching Costs: Tools sind in Fabs tief integriert, Requalifizierung kostet Monate</li>
+<li>Profitiert von Gate-All-Around (GAA) Transition bei TSMC/Samsung/Intel</li>
+<li>China-Umsatz strukturell rückläufig durch Exportkontrollen, aber Inlandsnachfrage hoch</li>
+<li>Capital-light Modell mit hohen Margen und exzellenter Kapitalrückführung</li>
+<li>F&E ~12% vom Umsatz – Innovationsführerschaft wird verteidigt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>HBM-Capex explodiert: SK Hynix, Samsung, Micron verdreifachen HBM-Kapazitäten bis 2026</li>
+<li>NAND-Zyklus dreht: Nach 2 Jahren Underinvestment kommt Capex zurück</li>
+<li>AI-Logic-Boom: 2nm/3nm-Nodes erfordern mehr Etch-Schritte pro Wafer</li>
+<li>Advanced Packaging (CoWoS, HBM-Stacking) ist Etch-intensiv – direkter Profiteur</li>
+<li>Operating Leverage: Bei Revenue-Beschleunigung explodieren Margen Richtung 38–40%</li>
+<li>Aktive Aktienrückkäufe + 34%-Payout-Ratio: Kapitalrückführung weiterhin aggressiv</li>
+<li>Mögliche WFE-Marktexpansion auf $140–150 Mrd. bis 2027 (von ~$110 Mrd. heute)</li>
+<li>ROE 66.8% – Compounder-Qualität trotz Zyklik</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Bewertung extrem gestreckt: 38x Forward PE, Price/Book 36 – wenig Sicherheitsmarge</li>
+<li>Memory-Zyklus könnte 2026 wieder kippen – historisch volatile Revenue-Swings</li>
+<li>China-Restriktionen verschärfen sich potenziell unter neuer US-Administration</li>
+<li>Konzentrationsrisiko: Top-5-Kunden ~70% des Umsatzes</li>
+<li>ASML und AMAT als direkte Konkurrenten mit teils überlappendem Portfolio</li>
+<li>Aktie +96% in 6 Monaten – Mean Reversion sehr wahrscheinlich</li>
+<li>Beta 1.82 – bei Markt-Drawdown überproportionale Korrektur erwartbar</li>
+<li>HBM-Capex könnte 2026/2027 in Überkapazitäten münden (klassisches Memory-Pattern)</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Revenue $21.68 Mrd., +23.8% YoY – starke Beschleunigung</li>
+<li>Gross Margin 50.0% – stabil auf Premium-Niveau</li>
+<li>Operating Margin 35.0% – best-in-class für Equipment-Sektor</li>
+<li>Net Margin 30.9% – exzellent</li>
+<li>Free Cashflow $4.35 Mrd. – solide, aber FCF-Yield nur ~1.1%</li>
+<li>ROE 66.8% – außergewöhnlich, teils durch Buybacks verzerrt</li>
+<li>Debt/Equity 35.28 – moderat, gut managbar</li>
+<li>Dividenden-Payout 34% – nachhaltig</li>
+<li>Aktive Aktienrückkäufe reduzieren Share Count kontinuierlich</li>
+<li>Bilanz: Netto-Cash-Position, sehr robust</li>
+<li>Capex-light: hohe Kapitaleffizienz</li>
+<li>F&E-Pipeline solide, GAA und Advanced Packaging gut positioniert</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Auf 38x Forward PE und 57x Trailing handelt Lam deutlich über dem historischen Schnitt von ~18–22x. Price/Book 36 ist optisch extrem, aber durch aggressive Buybacks verzerrt. Im Peer-Vergleich: ASML ~32x Forward, AMAT ~24x Forward, KLAC ~28x. Lam ist damit der teuerste der großen WFE-Player – gerechtfertigt nur, wenn HBM/NAND-Capex strukturell hoch bleibt. EV/Sales ~17 ist historisch oberes Ende. Das Analystenkursziel $312 liegt praktisch am aktuellen Kurs – wenig Aufwärts-Konsens. Der Markt preist bereits einen mehrjährigen Capex-Superzyklus ein. Bei jeder Enttäuschung droht Multiple-Compression auf 25–28x.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Institutionell stark gehalten (>85% Ownership) – kein under-owned Play</li>
+<li>Momentum extrem: RS-Score 140, +96% in 6 Monaten – Late-Stage-Rally-Charakteristik</li>
+<li>Sentiment euphorisch, AI-Picks-&-Shovels-Narrativ dominant</li>
+<li>Smart Money hat 2023/24 akkumuliert – aktuelle Phase ist Retail-/Generalisten-Getrieben</li>
+<li>Crowded Trade im Equipment-Sektor (ASML/LRCX/AMAT als Bundle gespielt)</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 aktiv – alle Zeitebenen gebrochen, struktureller Breakout bestätigt</li>
+<li>Kurz vor 52W-Hoch ($309.98) – Ausbruch oder Doppeltop entscheidet</li>
+<li>Kurzfristig überhitzt: 5T +8.2%, 50T +22.9% – Pullback-Risiko hoch</li>
+<li>Zyklus-Phase: Mid-to-late Stage – nicht mehr früh, aber Momentum noch intakt</li>
+<li>Solides Setup für Trendfolge, aber Risiko/Rendite verschlechtert sich</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>**Konservativ:** WFE-Markt seitwärts, Margen leicht rückläufig / Kursziel $280–320 / Wahrscheinlichkeit 35%</p>
+<p>**Bull Case:** HBM/Logic-Capex bleibt stark, EPS wächst auf $14–16 / Kursziel $450–500 / Wahrscheinlichkeit 45%</p>
+<p>**Extrem-Bull:** Strukturelle WFE-Expansion auf $150 Mrd.+, Multiple bleibt premium / Kursziel $650–750 / Wahrscheinlichkeit 20%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>ASML: Monopol-Qualität (EUV), höhere Margen, aber langsamer wachsend, günstiger bewertet</li>
+<li>AMAT: Breiter diversifiziert, weniger Memory-Exposure, günstiger – defensiver Play</li>
+<li>KLAC: Process Control Monopolist, höchste Margen im Sektor, weniger zyklisch</li>
+<li>TER: Test-Equipment, kleiner, volatiler, höheres Beta</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Lam Research ist fundamental ein erstklassiges Geschäft – hohe Margen, ROE 66%, strukturelle Monopolposition bei Etch und massiver HBM-Profiteur. Aber bei 38x Forward und nach +96% in 6 Monaten ist die Aktie kein Bargain mehr. Die GWS-Ampel mit 3/3 ist technisch konstruktiv, aber praktisch am 52W-Hoch und mit überhitzten Momentum-Werten – das ist nicht der Zeitpunkt für aggressive Neueinstiege. Hedgefonds-Perspektive: Bestehende Positionen halten, Trims auf Stärke vernünftig, Neukäufe besser auf Pullback Richtung $250–270 timen. Für Compounder-Investoren bleibt die Aktie ein langfristiges Core-Holding im AI-Capex-Theme – aber Position-Sizing über Tranchen aufbauen. Größtes Risiko ist nicht das Geschäftsmodell, sondern Multiple-Compression bei zyklischer Enttäuschung 2026. Wann verkaufen: Bei Bruch der Daily-GWS-Struktur oder Memory-Capex-Revisionen nach unten. Risiko/Rendite aktuell neutral – Qualität hoch, Einstiegspreis suboptimal.</p>
+<p>**Rating:**</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>
