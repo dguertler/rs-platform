@@ -53,9 +53,12 @@ def _get_market_cache(market: str):
     path = DATA_DIR / MARKET_FILES[market]
     if not path.exists():
         raise HTTPException(503, "Datendatei noch nicht vorhanden")
+    ratings_path = DATA_DIR / "ratings" / "index.json"
     mtime = path.stat().st_mtime
+    rmtime = ratings_path.stat().st_mtime if ratings_path.exists() else 0
+    cache_key = (mtime, rmtime)
     cached = _rs_cache.get(market)
-    if cached and cached["mtime"] == mtime:
+    if cached and cached.get("cache_key") == cache_key:
         return cached
     raw = _load(path)
     arr = raw if isinstance(raw, list) else raw.get("data", [])
@@ -66,11 +69,20 @@ def _get_market_cache(market: str):
             d = ohlcv[-1].get("d", "")
             if d > last_date:
                 last_date = d
+    ratings_map = {}
+    if ratings_path.exists():
+        try:
+            for r in _load(ratings_path).get("ratings", []):
+                ratings_map[r["ticker"].upper()] = r
+        except Exception:
+            pass
     stripped = []
     for entry in arr:
         s = {k: v for k, v in entry.items() if k not in ("ohlcv_w", "ohlcv", "ohlcv_4h")}
         s["struct"] = struct_for_entry(entry)
         s["has_ohlcv"] = bool(entry.get("ohlcv"))
+        t = entry.get("ticker", "").upper()
+        s["rating"] = ratings_map.get(t) or ratings_map.get(t.split(".")[0])
         stripped.append(s)
     payload = {
         "timestamp": last_date or (raw.get("timestamp", "–") if not isinstance(raw, list) else "–"),
@@ -79,7 +91,7 @@ def _get_market_cache(market: str):
         "benchmark_ohlcv":   raw.get("benchmark_ohlcv",   []) if not isinstance(raw, list) else [],
         "data": stripped,
     }
-    _rs_cache[market] = {"mtime": mtime, "payload": payload, "arr": arr}
+    _rs_cache[market] = {"cache_key": cache_key, "payload": payload, "arr": arr}
     return _rs_cache[market]
 
 

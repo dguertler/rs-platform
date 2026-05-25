@@ -1144,6 +1144,17 @@ function App() {
         setData(normalized);
         const first = normalized.data.find(d => d.has_ohlcv);
         if (first) setSelected(first.ticker);
+        // Pre-populate ratings from embedded data so badges appear immediately
+        const map = {};
+        arr.forEach(e => {
+          if (e.rating) {
+            const k = e.rating.ticker.toUpperCase();
+            map[k] = e.rating;
+            const base = k.replace(/\.[^.]+$/, '');
+            if (base !== k) map[base] = e.rating;
+          }
+        });
+        if (Object.keys(map).length > 0) setRatings(prev => ({ ...map, ...prev }));
       })
       .catch(e => setError(e.message));
   }, []);
@@ -1335,9 +1346,11 @@ function App() {
             const hasChart   = !!_entry?.has_ohlcv;
             const structs    = structureMap[item.t] || {};
             const isBOC      = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
+            const hasRecent  = structs.weekly?.recentBreakout || structs.daily?.recentBreakout || structs.h4?.recentBreakout;
             const _newSince  = _entry?.new_since;
             const isNew      = !!_newSince && (Date.now() - new Date(_newSince).getTime()) < 7*24*3600*1000;
             const rating     = ratings[item.t.toUpperCase()] || ratings[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
+            const showFlame  = isBOC && hasRecent && rating?.verdict === "BUY";
 
             return (
               <div key={item.t}
@@ -1380,8 +1393,8 @@ function App() {
                   color:isBOC?"#fca5a5":rank===0?"#ffffff":isTop?"#f1f5f9":"#475569",
                   display:"flex",alignItems:"center",gap:2}}>
                   {isNew
-                    ? <span className={isBOC?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
-                    : isBOC && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
+                    ? <span className={showFlame?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
+                    : showFlame && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
                   {item.t}
                   {hasChart && <span style={{fontSize:8,color:"#334155",marginLeft:2}}>▸</span>}
                 </span>
