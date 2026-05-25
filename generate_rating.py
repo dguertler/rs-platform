@@ -466,3 +466,37 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     print(f"  Index aktualisiert: {len(idx['ratings'])} Rating(s)")
 
     return True
+
+
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Verwendung: python generate_rating.py TICKER [TICKER2 ...]")
+        sys.exit(1)
+
+    tickers = [t.upper() for t in sys.argv[1:]]
+
+    # RS-Daten aus rs_full.json laden (Score + Windows)
+    rs_data = {}
+    for fname in ("rs_full.json", "data/rs_full.json"):
+        if Path(fname).exists():
+            with open(fname) as f:
+                for entry in json.load(f).get("data", []):
+                    rs_data[entry["ticker"].upper()] = entry
+            print(f"rs_full.json geladen: {len(rs_data)} Einträge")
+            break
+
+    for ticker in tickers:
+        entry    = rs_data.get(ticker, {})
+        rs_score = entry.get("score", 0.0)
+        windows  = entry.get("windows", {})
+        gws = {
+            "weekly":      True,
+            "daily":       True,
+            "h4":          True,
+            "points":      3,
+            "signal_type": "Manuell generiert",
+        }
+        ok = generate_for_ticker(ticker, rs_score, windows, gws)
+        print(f"  {ticker}: {'OK' if ok else 'FEHLER'}")
