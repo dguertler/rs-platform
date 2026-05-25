@@ -20,6 +20,7 @@ from auth import (
 from news_handler import fetch_news
 from stripe_handler import create_checkout_session, parse_webhook
 from email_handler import send_reset_email
+from gws_analysis import struct_for_entry
 
 app = FastAPI(title="RS Platform")
 
@@ -36,10 +37,48 @@ PRO_MARKETS  = set()
 FREE_LIMIT   = 20
 security     = HTTPBearer()
 
+# Per-market cache: {market: {mtime, payload, arr}}
+_rs_cache: dict = {}
+
 
 def _load(path: Path):
     with open(path, encoding="utf-8") as f:
         return json.load(f)
+
+
+def _get_market_cache(market: str):
+    """Load, cache, and return {payload, arr} for a market. Reloads when file changes."""
+    path = DATA_DIR / MARKET_FILES[market]
+    if not path.exists():
+        raise HTTPException(503, "Datendatei noch nicht vorhanden")
+    mtime = path.stat().st_mtime
+    cached = _rs_cache.get(market)
+    if cached and cached["mtime"] == mtime:
+        return cached
+    raw = _load(path)
+    arr = raw if isinstance(raw, list) else raw.get("data", [])
+    last_date = ""
+    for entry in arr:
+        ohlcv = entry.get("ohlcv", [])
+        if ohlcv:
+            d = ohlcv[-1].get("d", "")
+            if d > last_date:
+                last_date = d
+    stripped = []
+    for entry in arr:
+        s = {k: v for k, v in entry.items() if k not in ("ohlcv_w", "ohlcv", "ohlcv_4h")}
+        s["struct"] = struct_for_entry(entry)
+        s["has_ohlcv"] = bool(entry.get("ohlcv"))
+        stripped.append(s)
+    payload = {
+        "timestamp": last_date or (raw.get("timestamp", "–") if not isinstance(raw, list) else "–"),
+        "benchmark": raw.get("benchmark", "QQQ") if not isinstance(raw, list) else "QQQ",
+        "benchmark_ohlcv_w": raw.get("benchmark_ohlcv_w", []) if not isinstance(raw, list) else [],
+        "benchmark_ohlcv":   raw.get("benchmark_ohlcv",   []) if not isinstance(raw, list) else [],
+        "data": stripped,
+    }
+    _rs_cache[market] = {"mtime": mtime, "payload": payload, "arr": arr}
+    return _rs_cache[market]
 
 
 def require_auth(credentials: HTTPAuthorizationCredentials = Depends(security)) -> str:
@@ -203,11 +242,23 @@ async def get_rs(market: str, email: str = Depends(require_auth)):
     plan = get_user_plan(email)
     if market in PRO_MARKETS and plan != "pro":
         raise HTTPException(403, "DAX und S&P500 erfordern ein Pro-Abo")
-    path = DATA_DIR / MARKET_FILES[market]
-    if not path.exists():
-        raise HTTPException(503, "Datendatei noch nicht vorhanden")
-    data = _load(path)
-    return JSONResponse(content=data)
+    cache = _get_market_cache(market)
+    return JSONResponse(content=cache["payload"])
+
+
+@app.get("/api/rs/{market}/{ticker}")
+async def get_rs_ticker(market: str, ticker: str, email: str = Depends(require_auth)):
+    if market not in MARKET_FILES:
+        raise HTTPException(404, f"Unbekannter Markt '{market}'")
+    cache = _get_market_cache(market)
+    for entry in cache["arr"]:
+        if entry.get("ticker", "").upper() == ticker.upper():
+            return JSONResponse(content={
+                "ohlcv_w":  entry.get("ohlcv_w",  []),
+                "ohlcv":    entry.get("ohlcv",    []),
+                "ohlcv_4h": entry.get("ohlcv_4h", []),
+            })
+    raise HTTPException(404, f"Ticker '{ticker}' nicht gefunden")
 
 
 @app.get("/api/backtest/{ticker}")
