@@ -320,6 +320,11 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
 </style>
 </head>
 <body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">{today}</strong></span>
+</div>
 <div class="w">
   <div class="hdr">
     <div>

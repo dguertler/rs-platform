@@ -1522,7 +1522,7 @@ function App() {
                 <div style={{display:"flex",alignItems:"center",gap:10}}>
                   <span style={{fontSize:13,fontWeight:700,color:"#94a3b8",fontFamily:"monospace"}}>Aktienbewertung · {ratingModal}</span>
                   {r && <span style={{fontSize:11,padding:"2px 8px",borderRadius:4,background: r.verdict==="BUY"?"#1a3a0a":r.verdict==="HOLD"?"#2a1f05":"#3a0a0a",color: r.verdict==="BUY"?"#86c429":r.verdict==="HOLD"?"#f59e0b":"#f87171",border:`1px solid ${r.verdict==="BUY"?"#639922":r.verdict==="HOLD"?"#b45309":"#A32D2D"}`}}>{r.verdict} · Score {r.score}</span>}
-                  {r && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
+                  {r?.created_at && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
                 </div>
                 <button onClick={() => setRatingModal(null)}
                   style={{background:"transparent",border:"1px solid #1e2d45",color:"#94a3b8",cursor:"pointer",fontSize:13,borderRadius:4,padding:"3px 10px"}}> Schließen</button>
