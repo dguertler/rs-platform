@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ALV.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ALV.DE</h1>
+      <h2>Allianz SE                    v</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Insurance - Diversified</span></div>
+        <div class="mi">MCap: <span>$148B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">80</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">28.8</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$391.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$115.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">24.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">443.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">18.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Allianz ist der archetypische europäische Compounder im Versicherungssektor — kein Kursfeuerwerk, aber ein Geldschöpfungsmotor mit globaler Diversifikation über P&C, Lebensversicherung und Asset Management (PIMCO/AGI). Der Markt unterschätzt strukturell, wie stark steigende Zinsen das Lebensgeschäft und die Reinvestitionsrenditen befeuern, während der harte P&C-Zyklus weiterhin Pricing Power liefert. Mit einem Forward-KGV von 11,8 und einer effektiven Cash-Yield (Dividende + Buybacks) von 7-8% bezahlt der Markt für 18,7% ROE einen Bewertungsabschlag gegenüber US-Peers. Die Aktie nähert sich dem 52W-Hoch — Momentum bestätigt, GWS-Ampel 3/3 aktiv. Klassischer "boring is beautiful"-Case mit institutionellem Cashflow-Profil. Keine Wachstumsstory, aber ein Total-Return-Vehikel mit niedriger Beta (0,67) und Krisenresistenz.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>P&C-Versicherung (Sach/Unfall): Größter Gewinnbringer, Kern in Europa, harter Zyklus mit Preisanhebungen</li>
+<li>Lebens- & Krankenversicherung: Profitiert massiv von höheren Zinsen über Reinvestition</li>
+<li>Asset Management: PIMCO (~2 Bio. USD AuM) + Allianz Global Investors — Gebührenmodell</li>
+<li>Globale Diversifikation: Europa, USA, Asien-Pazifik</li>
+<li>Float-Modell: Prämien werden investiert, bevor Schäden ausgezahlt werden</li>
+<li>Buffett-Style Kapitalallokation: Aggressive Buybacks (>1 Mrd. EUR p.a.) + steigende Dividenden</li>
+<li>Solvency-II-Quote >200% — Überkapital ermöglicht weitere Rückkäufe</li>
+<li>Strukturelle Megatrends: Alternde Bevölkerung, Klimarisiko-Versicherung, Cyber</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>Höhere Zinsen = strukturell höhere Reinvestitionsrenditen für viele Jahre</li>
+<li>Hartes P&C-Cycle treibt Combined Ratios und Underwriting-Profite</li>
+<li>Aggressive Buybacks reduzieren Aktienanzahl jährlich um 2-3%</li>
+<li>PIMCO-Comeback bei Bond-Inflows nach Zinswende</li>
+<li>Re-Rating auf 14-15x KGV möglich bei Annäherung an US-Peers</li>
+<li>Dividendenrendite ~5% + Buyback-Yield = 7-8% Cash-Return</li>
+<li>Defensives Qualitätsprofil zieht in Volatilitätsphasen Kapital an</li>
+<li>Asset-Management-Erträge skalieren bei steigenden Märkten</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Großschäden (Naturkatastrophen, Hurricanes) können Quartale ruinieren</li>
+<li>Sinkende Zinsen würden Bull-Case beim Lebensgeschäft brechen</li>
+<li>Europa-Exposure: Schwaches Makro begrenzt Prämienwachstum</li>
+<li>PIMCO leidet bei erneutem Bond-Selloff (siehe 2022)</li>
+<li>Reputationsrisiken (Structured Alpha Settlement 2022 — 6 Mrd. USD)</li>
+<li>Regulatorisches Risiko: Solvency-Anforderungen können steigen</li>
+<li>Kursziel bereits nahezu erreicht ($403,9 vs. $391) — wenig Luft</li>
+<li>Wechselkurs- und Reservenrisiken bei Inflationsspitzen</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatz TTM: 115,5 Mrd. USD, YoY +8,8% — solide für Versicherer</li>
+<li>Operating Margin 19,3% — Spitzenwert im Sektor</li>
+<li>Net Margin 10,4% — typisch für Diversifizierte</li>
+<li>ROE 18,7% — exzellent, deutlich über Kapitalkosten</li>
+<li>KGV 12,6 / Forward 11,8 — defensiv bewertet</li>
+<li>Price/Book 2,37 — gerechtfertigt durch hohen ROE</li>
+<li>Dividende: ~5% Yield, stabil und steigend</li>
+<li>Buybacks: ~1,5 Mrd. EUR p.a., kapitaleffizient</li>
+<li>Solvency-II >200% — Festungsbilanz</li>
+<li>Beta 0,67 — defensives Risikoprofil</li>
+<li>Combined Ratio im P&C konstant <94%</li>
+<li>Kein FCF ausgewiesen (Versicherer-typisch), aber starke Cash-Generierung</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Mit 11,8x Forward-KGV und 2,37x Book handelt Allianz mit Abschlag zu US-Peers wie Chubb (14x) oder Progressive (20x+), aber im Einklang mit AXA und Zurich. Bei einem ROE von 18,7% ist ein P/B von 2,4 fair bis leicht günstig — implizit Eigenkapitalrendite-Spread bleibt attraktiv. Der Markt preist moderates Wachstum und stabile Margen ein, nicht jedoch eine signifikante Re-Rating auf US-Niveau. Analysten-Kursziel 403,9 USD liegt nur 3% über Spot — wenig Upside laut Konsens, aber das ist meist zu konservativ bei Compoundern. Total Return über 3 Jahre dürfte bei 10-12% p.a. liegen (Earnings-Wachstum + Yield + leichtes Re-Rating). Nicht teuer, nicht spottbillig — fair gepreister Qualitätstitel.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Under-owned von US-Fonds, gut allokiert bei europäischen Value-Investoren</li>
+<li>Kein Hype-Titel — institutionelles Dividendenkern-Holding</li>
+<li>Smart Money (Norges, Blackrock) langfristig positioniert</li>
+<li>Momentum bestätigt: 12M-RS +12,7%, gesund ohne Übertreibung</li>
+<li>Sentiment neutral-positiv, kein FOMO, kein Pessimismus</li>
+<li>Klassisches "Sleep-well-at-night"-Asset</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 AKTIV (Weekly, Daily, 4H gebrochen) — vollständiger Bruch</li>
+<li>RS-Score 28,77 vs. QQQ — solide relative Stärke</li>
+<li>Kurs nahe 52W-Hoch ($391 vs. $397) — gesunder Uptrend</li>
+<li>50T-RS +8,6% — Momentum-Beschleunigung sichtbar</li>
+<li>Zyklus-Phase: Markup, kein Anzeichen für Distribution</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>Konservatives Szenario: Stabile Margen, leichtes Earnings-Wachstum 5-7% p.a., kein Re-Rating. Kursziel: 470-500 USD. Wahrscheinlichkeit: 55%.</p>
+<p>Bull Case: Höhere Zinsen halten, P&C-Hard-Market hält, Re-Rating auf 14x. Kursziel: 580-620 USD. Wahrscheinlichkeit: 30%.</p>
+<p>Extrem-Bull-Case: PIMCO-Renaissance, US-Bewertungs-Konvergenz, aggressive Buybacks. Kursziel: 700+ USD. Wahrscheinlichkeit: 15%.</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>AXA (CS.PA): Günstiger (~9x KGV), aber niedrigerer ROE und schwächere Diversifikation</li>
+<li>Zurich Insurance (ZURN.SW): Höher bewertet, defensiver, ähnliches Yield-Profil</li>
+<li>Munich Re (MUV2.DE): Reinsurer-Fokus, höhere Zyklik, beste Solvency</li>
+<li>Chubb (CB): US-Premium-Bewertung 14x, bestes P&C-Underwriting global</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Allianz ist kein Trading-Play, sondern ein klassischer Compounder mit Cash-Return-Charakter — die Aktie, die man kauft und 10 Jahre liegen lässt. Aus Hedgefonds-Perspektive nicht das spannendste Asset, aber ein Anker für Multi-Strategy-Portfolios mit niedriger Beta, hoher Qualität und institutionellem Cashflow. Die Qualität ist exzellent (ROE 18,7%, Festungsbilanz), die Bewertung fair bis attraktiv, das Momentum bestätigt. GWS-Ampel auf 3/3 mit Bruch über alle Zeitebenen ist ein klares Long-Signal — typischer Einstieg auf Pullbacks Richtung 370-375 USD wäre ideal. Bei Erreichen des 52W-Hochs würde ich nicht aggressiv nachkaufen, sondern Geduld zeigen. Verkaufen würde ich bei Combined-Ratio-Verschlechterung über 96% oder bei massivem Zinscrash. Für ein Buy-and-Hold-Portfolio: Kernposition. Für aggressive Hedgefonds-Strategien: zu langweilig. Risiko/Rendite klar positiv asymmetrisch nach unten geschützt durch Dividende und Buybacks.</p>
+<p>Rating:</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IFX.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>IFX.DE</h1>
+      <h2>INFINEON TECHNOLOGIES AG      N</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductors</span></div>
+        <div class="mi">MCap: <span>$100B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">70</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">287.2</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$76.73</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">29.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$15.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">41.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">48.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># IFX.DE – Infineon Technologies AG</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Infineon ist Europas größter Halbleiterhersteller und ein dominanter Player in Power-Semis, Automotive-Chips und SiC/GaN. Die Aktie hat sich von ihrem 52W-Tief bei 30,82 € fast verdreifacht und steht jetzt am 52W-Hoch – das ist ein klassisches Repricing nach dem Auto-/Industrial-Zyklustief. Der Markt antizipiert eine Trendwende im Automotive-Markt (xEV-Hochlauf, ADAS), das Anziehen industrieller Endmärkte und die strukturelle Power-Story rund um AI-Rechenzentren (Server-Power-Delivery). Was viele unterschätzen: Infineon ist neben Nvidia einer der größten Profiteure des AI-Capex-Booms – nicht über Compute, sondern über Power. Gleichzeitig ist die Aktie nach dem Run heiß gelaufen, Analysten-Kursziel liegt mit 66 € unter dem Spotkurs. Ein typisches "Smart Money is early"-Setup: Die Story ist da, aber kurzfristig läuft sie der Realität voraus.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Vier Segmente: Automotive (ATV, ~50%), Green Industrial Power (GIP), Power & Sensor Systems (PSS), Connected Secure Systems (CSS)</li>
+<li>Marktführer bei Power-Semis weltweit (~Nr. 1 Diskrete Leistungshalbleiter)</li>
+<li>Stark in MOSFETs, IGBTs, SiC (Siliziumkarbid) und GaN – Schlüssel für EV-Effizienz</li>
+<li>Größter Automotive-Chiplieferant der Welt (Mikrocontroller, Sensoren, Power)</li>
+<li>Hochfahrender SiC-Power-Bereich (Kulim-Fab Malaysia) für EVs und Solarwechselrichter</li>
+<li>Power-Delivery-Komponenten für AI-Rechenzentren (Hyperscaler-Boards) – wachsendes Segment</li>
+<li>Industrieautomatisierung, erneuerbare Energien, Smart-Home-Anwendungen</li>
+<li>Zyklisch geprägt mit Auto/Industrie-Cycle, gemildert durch strukturelles xEV-Wachstum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>AI-Power-Delivery: Server-Stromversorgung wird zum strukturellen Wachstumstreiber, Infineon ist Premium-Lieferant</li>
+<li>EV-Hochlauf nach Auto-Krise 2024/25 – SiC-Inhalt pro Fahrzeug steigt 3-5x</li>
+<li>Industrial-Recovery 2025/26 als zyklischer Kicker für GIP und PSS</li>
+<li>Marktkonsolidierung in Power-Semis stärkt Pricing Power (vs. Onsemi, STM, Wolfspeed)</li>
+<li>Europäische Chip-Souveränität: Subventionen, EU-Chips-Act-Profiteur</li>
+<li>Margen-Erholung von aktuellem Tief Richtung 25%+ EBIT-Marge möglich</li>
+<li>Dividenden-Wachstum und potenzielle Kapitalrückgaben bei Cycle-Upturn</li>
+<li>Re-Rating Richtung TSMC/ASML-Multiples möglich bei AI-Power-Anerkennung</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Aktie ist nach +100% in 12M technisch extrem überdehnt, Analystenziel unter Spot</li>
+<li>Automotive-Erholung verzögert sich, Bestände bei OEMs weiterhin hoch</li>
+<li>China-Konkurrenz bei Power-Semis (BYD, Hua Hong) drückt Preise</li>
+<li>Wolfspeed/STM/Onsemi-Wettbewerb im SiC-Markt verschärft sich</li>
+<li>Operating Margin von 46,7% wirkt verzerrt – Net Margin 7,2% zeigt Realität</li>
+<li>Hohe Fixkosten (Kulim-Fab) bei Unterauslastung sind Margen-Killer</li>
+<li>Beta 1,9 – die Aktie wird im nächsten Risk-off-Move überproportional fallen</li>
+<li>Forward PE 29,87 ist für einen zyklischen Semi-Player ambitioniert</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Revenue TTM: 15,1 Mrd. € – nach Schwächephase wieder Stabilisierung erwartet</li>
+<li>Gross Margin 41,2% – solide, aber unter historischem Peak (~46%)</li>
+<li>Operating Margin 46,7% (Reporting-Effekt, bereinigt eher ~18-20%)</li>
+<li>Net Margin nur 7,2% – Hinweis auf Restrukturierung und hohe Abschreibungen</li>
+<li>Free Cashflow 1,36 Mrd. € – akzeptabel, aber Capex-intensiv</li>
+<li>Debt/Equity 47,65 – moderat verschuldet (Cypress-Akquisition Legacy)</li>
+<li>ROE nur 6,3% – schwach, deutet auf aktuelles Zyklustief hin</li>
+<li>Price/Book 5,94 – sportlich für aktuelles ROE-Niveau</li>
+<li>Marktanteil-Stärke und Tech-IP bei Power und SiC als echter Moat</li>
+<li>Dividende existent (48% Payout), aber nicht der Investment-Grund</li>
+<li>Forward PE 29,87 vs. Trailing 93,57 – Markt preist starke EPS-Erholung ein</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Mit Forward PE 29,87 wird Infineon klar als Wachstumswert gepreist, nicht mehr als zyklischer Semi. Gegenüber STM (Forward ~22), Onsemi (~18) und NXP (~16) ist Infineon der teuerste europäische Auto/Power-Semi – das Premium beruht auf SiC-Leadership und AI-Power-Fantasie. P/B von 5,94 ist hoch im Verhältnis zum aktuellen ROE 6,3%, was nur durch ein massives Margen-Recovery-Szenario zu rechtfertigen ist. Das Analystenkursziel von 66 € liegt 14% unter Spot – ein Warnsignal, dass die Erwartungen bereits aggressiv eingepreist sind. Der Markt preist im Grunde Recovery + AI-Power + SiC-Wachstum gleichzeitig ein. Solange die Industrial/Auto-Daten mitspielen, hält die Bewertung; bei Enttäuschungen folgt schnelle De-Rating-Phase.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Massive Trendwende-Story – institutionelle Investoren rotieren rein (RS-Score 287)</li>
+<li>Crowded Long bei europäischen Fonds als "AI-Beneficiary Europe"</li>
+<li>Retail-FOMO am 52W-Hoch deutlich spürbar</li>
+<li>Sentiment dreht von Bear-to-Bull – die einfachen Gewinne sind durch</li>
+<li>Strong Buy Consensus trotz Kursziel unter Spot = Lag der Analysten</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 aktiv – Weekly/Daily/4H-Strukturen gebrochen, voller Bullish-Bias</li>
+<li>RS vs. QQQ +101% auf 12M – außergewöhnlich starke Relative Stärke</li>
+<li>Aktie am 52W-Hoch ohne Widerstand, aber überkauft kurzfristig</li>
+<li>Pullbacks zur 20T/50T-EMA sind hochwahrscheinlich und Kaufgelegenheiten</li>
+<li>Zyklus-Phase: Mid-Stage Bull, Mark-Up-Phase nach Basis-Breakout</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>**Konservativ:** Auto/Industrial-Recovery moderat, SiC läuft – Umsatz 18-19 Mrd. €, EBIT-Marge 18%. Kursziel: 70-80 € | Wahrscheinlichkeit: 45%</p>
+<p>**Bull Case:** Voller Cycle-Upturn + AI-Power-Story zündet – Umsatz 22 Mrd. €, EBIT-Marge 22%. Kursziel: 110-130 € | Wahrscheinlichkeit: 35%</p>
+<p>**Extrem-Bull-Case:** Infineon wird als "Power-ASML" gepreist, SiC-Marktführerschaft, AI-Server-Power-Boom – Kursziel: 160-180 € | Wahrscheinlichkeit: 15%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>STMicroelectronics (STM): Direkter SiC-Konkurrent, deutlich günstiger, aber schwächeres Momentum</li>
+<li>ON Semiconductor (ON): US-Pendant, niedrigere Bewertung, US-Auto-Exposure</li>
+<li>NXP (NXPI): Auto-Fokus, günstiger, aber weniger Power-Story</li>
+<li>Wolfspeed (WOLF): Pure SiC-Play, hochriskant, strukturell angeschlagen</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Infineon ist aktuell eines der besten Momentum-Setups in Europa – die GWS-Ampel auf 3/3, RS-Score 287 und Bruch aller Zeitebenen sind ein klares technisches Kaufsignal. Fundamental ist die Story intakt: SiC-Leadership, AI-Power-Komponenten und der bevorstehende Auto/Industrial-Recovery-Zyklus rechtfertigen ein Re-Rating. Aber: Die Aktie hat bereits 100% in 12M gemacht, die Bewertung ist sportlich, und Analysten hängen mit ihren Kurszielen hinterher – das spricht für temporäre Übertreibung. Aus Hedgefonds-Sicht ist das ein Compounder mit zyklischer Komponente, kein reines Trading-Play. Die intelligente Strategie: Position halten, aber Neueinstiege auf Pullbacks zur 50T-EMA oder strukturelle Daily-Re-Tests warten. Nicht ins 52W-Hoch jagen. Bei Ampel-Reset auf Daily nachladen, bei Weekly-Ampel-Bruch (4-Tages-Schluss unter Trigger) Position reduzieren. Risiko/Rendite ist langfristig attraktiv, kurzfristig neutral bis negativ.</p>
+<p>**Rating:**</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

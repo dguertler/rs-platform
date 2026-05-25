@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CNC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CNC</h1>
+      <h2>Centene Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Healthcare Plans</span></div>
+        <div class="mi">MCap: <span>$29B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">151.0</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$59.14</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$178.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">10.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-26.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Centene ist eine klassische Distressed-Recovery-Story im US-Krankenversicherungssektor. Der größte Medicaid-Managed-Care-Anbieter der USA wurde 2024/25 brutal abgestraft – Medicaid-Redeterminationen nach Pandemie, Margendruck im Marketplace-Geschäft und ein verfehlter ACA-Ausblick haben den Kurs zeitweise unter $25 gedrückt. Der Markt preiste ein strukturelles Problem ein, was wahrscheinlich übertrieben war. Jetzt sehen wir eine massive Rotation zurück: +59% in 50 Tagen, RS vs. QQQ bei 150. Institutionelle decken Shorts ein und positionieren sich für Margennormalisierung 2026. Bei Forward-KGV 13 und $6,85 Mrd. FCF ist die Bewertung absolut zerbombt – das ist kein Compounder, das ist ein Mean-Reversion-Play mit asymmetrischem Setup. Der Markt versteht, dass Medicaid-Raten politisch nachziehen müssen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Größter Medicaid-Anbieter der USA mit ~13 Mio. Mitgliedern in 30+ Bundesstaaten</li>
+<li>Medicare Advantage als zweites Standbein (Wellcare-Brand), strukturell wachsend mit US-Demografie</li>
+<li>ACA-Marketplace-Geschäft (Ambetter) – Wachstumstreiber, aber margenseitig 2025 unter Druck</li>
+<li>TRICARE-Verträge für Militärangehörige als stabile Cashflow-Säule</li>
+<li>Erlös = staatliche Capitation-Zahlungen pro Mitglied, Marge = Differenz zu Medical Loss Ratio (MLR)</li>
+<li>MLR aktuell ~89-90% – jeder Prozentpunkt = Milliarden EBIT-Hebel</li>
+<li>PBM-Geschäft (Pharmacy Benefits) intern und extern – nach Magellan-Restrukturierung schlanker</li>
+<li>Skaleneffekte über IT-Plattform, Provider-Netzwerke und Verhandlungsmacht</li>
+<li>Politisch reguliertes Geschäft – Raten werden von Bundesstaaten gesetzt, mit Verzögerung</li>
+<li>Niedrige Kapitalintensität, asset-light, hohe FCF-Konvertierung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>Medicaid-Raten 2026 dürften deutlich angehoben werden – Bundesstaaten müssen Anbieter halten</li>
+<li>Margennormalisierung von ~5% Op-Marge zurück Richtung 6-7% bedeutet EPS-Verdopplung möglich</li>
+<li>Forward-KGV 13 bei $178 Mrd. Umsatz – jede Marge-Erholung ist purer Hebel</li>
+<li>Massives Buyback-Programm – Management kauft aggressiv unter Buchwert zurück</li>
+<li>Medicare Advantage Reset 2025 schafft saubere Vergleichsbasis für 2026</li>
+<li>Short Interest war hoch – Squeeze-Dynamik unterstützt aktuelle Bewegung</li>
+<li>Mögliche M&A-Fantasie – konsolidierender Sektor, CNC wäre Target oder Aggressor</li>
+<li>Demografischer Rückenwind: Alterung, Medicaid-Expansion in republikanischen Staaten</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Politisches Risiko: Trump-Administration könnte Medicaid-Funding kürzen</li>
+<li>ACA-Subventionen laufen Ende 2025 aus – Marketplace-Geschäft könnte schrumpfen</li>
+<li>Net Margin negativ (-3,6%), ROE bei -26% – fundamentale Lage noch nicht repariert</li>
+<li>Medical Loss Ratio bleibt stubborn hoch – Krankenhauskosten steigen weiter</li>
+<li>Debt/Equity 76 ist nicht kritisch, aber Refinanzierungskosten gestiegen</li>
+<li>Regulatorisches Risiko bei Star Ratings (Medicare) – jede Herabstufung kostet Hunderte Millionen</li>
+<li>Nach +59% in 50 Tagen ist viel Recovery bereits eingepreist</li>
+<li>Kein Pricing-Power-Geschäft – Margen strukturell dünn und politisch limitiert</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatzwachstum +5,1% YoY – solide, aber niedrig-margig</li>
+<li>Gross Margin nur 10,6% – typisch für Managed Care, kein Qualitätsindikator</li>
+<li>Operating Margin 5,1% – unter historischem Schnitt (~6-7%)</li>
+<li>Net Margin -3,6% – durch Impairments und ACA-Reserven belastet</li>
+<li>FCF $6,85 Mrd. – das ist die eigentliche Stärke, FCF-Yield ~23%</li>
+<li>ROE -26% – verzerrt durch GAAP-Verluste, normalisiert deutlich positiv</li>
+<li>Debt/Equity 76 – moderat für Versicherer</li>
+<li>Price/Book 1,36 – historisch tief, Distress-Niveau</li>
+<li>Buchwert pro Aktie als Floor zunehmend relevant</li>
+<li>Keine Dividende – Kapital geht in Buybacks</li>
+<li>Cash-Generation deutlich über Net Income – GAAP underrepresents Reality</li>
+<li>Kein klassischer Compounder, sondern Cashflow-Maschine in zyklischer Phase</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Forward-KGV 13, EV/EBITDA niedrig einstellig, Price/Book 1,36 – das ist eine Distressed-Bewertung für ein Unternehmen mit $178 Mrd. Umsatz und $6,85 Mrd. FCF. Peer Elevance handelt bei Forward-KGV ~14-15, UnitedHealth historisch bei 18-20. Der Bewertungsabschlag spiegelt operatives Risiko und Vertrauensverlust wider. FCF-Yield bei ~23% ist absurd hoch – das schreit nach Repricing, sofern 2026er Guidance hält. Analysten-Kursziel $58 wurde gerade erreicht – Ziele werden in den nächsten Quartalen nach oben revidiert, wenn Margentrend bestätigt. Faire Bewertung bei normalisierten Earnings: $75-85.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Stark under-owned bei Long-Only-Fonds nach Capitulation-Phase Q2/Q3 2024</li>
+<li>Hedgefonds haben in Q3/Q4 2025 aggressiv aufgebaut – Smart-Money-Rotation</li>
+<li>Sentiment dreht von "Sell" zu "Buy" – Analysten upgraden verzögert</li>
+<li>Kein Hype-Wert – institutionelles Recovery-Play, kein Retail-Favorit</li>
+<li>Short-Covering treibt Momentum, fundamentale Bestätigung muss folgen</li>
+<li>Sektor-Rotation aus AI-Megacaps in defensive Value findet hier Heimat</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 aktiv – Weekly, Daily und 4H bestätigen Strukturbruch nach oben</li>
+<li>RS-Score 150 vs. QQQ ist außergewöhnlich stark – klare Outperformance</li>
+<li>52W-Hoch wird gerade erobert, Breakout-Setup nach langer Bodenbildung</li>
+<li>Kurzfristig überkauft (+59% in 50T), Pullback Richtung $52-55 möglich und gesund</li>
+<li>Phase 2 nach Stage-Analysis – früher Aufwärtstrend, technisch attraktiv</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)</h3>
+<p>**Konservativ:** Margen normalisieren auf 5,5-6%, EPS $8-9, KGV 11 → Kursziel $90-100. Wahrscheinlichkeit: 50%</p>
+<p>**Bull Case:** Vollständige Recovery auf 6,5% Op-Marge, EPS $11-12, KGV 13 → Kursziel $140-150. Wahrscheinlichkeit: 30%</p>
+<p>**Extrem-Bull:** Margenexpansion + Buybacks reduzieren Aktien um 20%, EPS $14+, Re-Rating auf KGV 15 → Kursziel $200+. Wahrscheinlichkeit: 15%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>ELV (Elevance) – höhere Qualität, Forward-KGV 14, weniger Upside</li>
+<li>UNH (UnitedHealth) – Branchenprimus, eigene Probleme, defensiver</li>
+<li>HUM (Humana) – ähnliches Distress-Setup, fokussierter auf Medicare Advantage</li>
+<li>MOH (Molina) – Medicaid-Pure-Play, kleiner, höhere Volatilität</li>
+<li>CVS – integriertes Modell, mehr Komplexität, aber günstig bewertet</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>CNC ist ein klassisches Hedgefonds-Setup: tiefe Bewertung, gebrochene Story, beginnende operative Wende und technische Bestätigung durch GWS 3/3. Das ist kein Compounder für die Schublade – das ist ein 12-24-Monats-Trade mit Recovery-These und asymmetrischem Risk/Reward. Wer früh eingestiegen ist (RS-Signal hätte unter $35 ausgelöst), sitzt jetzt auf Gewinnen und sollte Teilverkäufe bei $65-70 erwägen. Neue Positionen würde ich nicht bei aktuellem Kurs aufbauen, sondern bei Pullback in die $50-54-Zone. GWS-Ampel-Status auf 3/3 erlaubt Halten/Aufbauen mit klarem Stopp unter $48. Die Story funktioniert nur, wenn 2026er Guidance Margennormalisierung bestätigt – das ist Q1/Q2 2026 der Katalysator. Wer Qualität sucht, kauft UNH oder ELV. Wer Asymmetrie sucht, bleibt bei CNC. Risiko bleibt politisch und regulatorisch – keine Position über 3-4% Portfolio.</p>
+<p>**Rating:**</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 5/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

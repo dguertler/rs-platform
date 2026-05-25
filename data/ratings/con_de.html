@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CON.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CON.DE</h1>
+      <h2>CONTINENTAL AG                I</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Auto Parts</span></div>
+        <div class="mi">MCap: <span>$14B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-20.6</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$68.62</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$19.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">26.7%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">402.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-4.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># CONTINENTAL AG (CON.DE) – Institutionelle Analyse</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Continental ist klassisches "Sum-of-the-Parts"-Spiel mit Restrukturierungs-Trigger. Die Abspaltung von Aumovio (Automotive) im September 2025 und die geplante Trennung von ContiTech sollen den Konzern auf das margenstarke Reifengeschäft fokussieren. Der Markt preist Continental aktuell wie einen zyklischen Auto-Zulieferer – übersieht aber, dass das verbleibende Reifengeschäft strukturell eher mit Michelin und Bridgestone vergleichbar ist (höhere Multiples, stabilere Margen). Forward-PE von 9,2 reflektiert Skepsis bzgl. europäischer Autoindustrie und China-Schwäche. Das ist ein Deep-Value- und Special-Situation-Play – kein Compounder. Aktuell allerdings mit gebrochener Chartstruktur auf allen Zeitebenen (GWS 3/3 aktiv), was institutionelle Distribution signalisiert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Tires (Reifen) – Kernsegment nach Spin-offs, ~50% Umsatz, OEM + Replacement (Aftermarket margenstärker)</li>
+<li>ContiTech – Industriegummi, Förderbänder, Schläuche; soll abgespalten/verkauft werden</li>
+<li>Aumovio (ehem. Automotive) – seit Sept. 2025 separat gelistet, ADAS, Software, Display</li>
+<li>Replacement-Geschäft als Cashflow-Anker mit Pricing-Power über Premium-Marke "Continental"</li>
+<li>Hohe Exposure zu europäischer OEM-Produktion (VW, BMW, Mercedes, Stellantis)</li>
+<li>China-Geschäft unter Druck durch lokale Wettbewerber (Sailun, Linglong)</li>
+<li>Rohstoffabhängigkeit: Naturkautschuk, Synthesekautschuk, Stahlcord</li>
+<li>Strukturwandel zu EV reduziert Bremskomponenten-Geschäft, erhöht aber Reifenverschleiß (EV = höheres Gewicht)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>Re-Rating durch Fokussierung auf Pure-Play Reifenhersteller (Multiple-Expansion Richtung Michelin: ~13x PE)</li>
+<li>ContiTech-Verkauf könnte 3-5 Mrd. EUR freisetzen für Buybacks/Sonderdividende</li>
+<li>Replacement-Reifen-Zyklus 2025/26 dürfte anziehen (gealterter Fahrzeugbestand)</li>
+<li>EV-Trend strukturell positiv für Reifenabsatz (höherer Verschleiß)</li>
+<li>Cash-Flow-Stärke bereits sichtbar (FCF deutlich über Net Income)</li>
+<li>Dividendenrendite attraktiv nach Restrukturierung</li>
+<li>Sehr niedrige Erwartungshaltung – jeder positive Newsflow wirkt überproportional</li>
+<li>Aktivisten-Druck (Schaeffler-Familie) als Katalysator</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Europäische Autoproduktion strukturell rückläufig, deutscher OEM-Sektor verliert Marktanteile</li>
+<li>Chinesische Reifenhersteller drücken global Preise (besonders im Mid-Tier)</li>
+<li>Debt/Equity von 143% ist hoch – Refinanzierungsrisiko bei steigenden Zinsen</li>
+<li>Net Margin negativ (-0,2%) und ROE bei -4,4% – operativ schwach</li>
+<li>Restrukturierungskosten und Spin-off-Komplexität belasten kurzfristig</li>
+<li>US-Zölle auf Reifenimporte unklar (Trump-Politik)</li>
+<li>GWS-Ampel 3/3 aktiv – charttechnischer Bruch auf allen Zeitebenen</li>
+<li>Revenue-Wachstum von -10,4% YoY zeigt fundamentale Schwäche</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatz TTM: 19,2 Mrd. EUR, YoY -10,4% (post Aumovio-Abspaltung verzerrt)</li>
+<li>Gross Margin: 26,7% – akzeptabel, aber unter Michelin (~25-27%) trotz Skala</li>
+<li>Operating Margin: 9,4% – im Branchenmittel</li>
+<li>Net Margin: -0,2% – durch Sondereffekte und Restrukturierung</li>
+<li>ROE: -4,4% – ungenügend, klares Qualitätsproblem</li>
+<li>FCF: 10,5 Mrd. EUR (wahrscheinlich inkl. Spin-off-Effekten – mit Vorsicht zu interpretieren)</li>
+<li>Debt/Equity: 143,8% – hoher Leverage</li>
+<li>Price/Book: 3,14 – nicht günstig auf Buchwertbasis</li>
+<li>Forward PE: 9,25 – günstig, falls Earnings-Schätzungen halten</li>
+<li>Kein klarer Moat außerhalb der Reifenmarke</li>
+<li>Pricing-Power im Premium-Replacement-Segment vorhanden</li>
+<li>Bilanzqualität durch Spin-offs in Transformation</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Forward-PE von 9,25 wirkt auf den ersten Blick günstig, ist aber für einen zyklischen Auto-Zulieferer mit negativer Top-Line nicht extrem billig. Michelin handelt bei ~10-11x, Bridgestone bei ~11x – Continental hat also nur geringen Bewertungsabschlag. Price/Book von 3,14 ist eher hoch für einen Industriewert mit negativem ROE. Das Kursziel von 74,50 EUR impliziert ~9% Upside – Analysten sind verhalten konstruktiv. Die eigentliche Bewertungs-Story liegt in der Sum-of-the-Parts-Logik: Reifen-Segment isoliert betrachtet könnte 50-60 EUR rechtfertigen, ContiTech-Erlös 10-15 EUR on top. Aktuell preist der Markt also weder Best- noch Worst-Case ein – fairer Bewertungskorridor.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Under-owned bei US-Hedgefonds, klassisches "European Industrial Special Situation"</li>
+<li>Schaeffler-Familie hält Mehrheit – Free Float begrenzt, geringe Trading-Liquidität</li>
+<li>Sentiment negativ wegen deutscher Autoindustrie-Krise (VW, Bosch Layoffs)</li>
+<li>Kein Hype, kein Momentum – klassisches "Show-me"-Investment</li>
+<li>Smart Money wartet auf ContiTech-Deal-Klarheit</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 AKTIV – Struktur auf Wochen-, Tages- und 4H-Ebene gebrochen, klares Verkaufssignal</li>
+<li>RS-Score -20,58 vs. QQQ – massive relative Schwäche</li>
+<li>5T- und 10T-Performance stark negativ (-5,2%/-8,9%) – akute Distribution</li>
+<li>Vom 52W-Hoch (78,68) ca. 13% entfernt, aber Momentum klar nach unten</li>
+<li>Aktuell KEIN Kauf-Setup – abwarten bis GWS-Ampel grün wird</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>Konservatives Szenario: Reifen-Margen stabil, ContiTech zu fairem Preis veräußert, EU-Auto bleibt schwach. Kursziel: 75-85 EUR. Wahrscheinlichkeit: 50%</p>
+<p>Bull Case: Erfolgreiche Pure-Play-Transformation, Re-Rating auf Michelin-Niveau, Sonderdividende. Kursziel: 100-115 EUR. Wahrscheinlichkeit: 30%</p>
+<p>Extrem-Bull-Case: Übernahmeangebot durch strategischen Investor oder PE, vollständige Zerschlagung. Kursziel: 130-150 EUR. Wahrscheinlichkeit: 10%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>Michelin (ML.PA) – qualitativ besser, stabilere Margen, fairer Multiple-Benchmark</li>
+<li>Bridgestone (5108.T) – globaler Marktführer, defensiver, höhere Bewertung</li>
+<li>Pirelli (PIRC.MI) – Premium-Fokus, höhere Margen, weniger zyklisch</li>
+<li>Goodyear (GT) – US-Vergleich, schwächere Bilanz, ähnliche Probleme</li>
+<li>Schaeffler (SHA.DE) – verwandte Eigentümerstruktur, ähnliche Restrukturierungsthematik</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>Continental ist ein Special-Situation- und Sum-of-the-Parts-Play, kein Qualitäts-Compounder. Die strategische Logik der Aufspaltung ist plausibel und kann erhebliches Re-Rating-Potenzial freisetzen – aber Timing ist entscheidend. Aktuell sendet der Chart auf allen Zeitebenen Verkaufssignale (GWS 3/3), und die fundamentalen Daten (negative Marge, schwacher ROE, hoher Leverage) bestätigen die institutionelle Skepsis. Aus Hedgefonds-Perspektive: interessant für Event-Driven-Strategien rund um ContiTech-Verkauf, ungeeignet als Buy-and-Hold-Investment. Kauf erst sinnvoll, wenn GWS-Ampel auf grün dreht ODER Klarheit über ContiTech-Verkauf besteht. Bis dahin Beobachten, nicht kaufen. Stop-Loss bei klarem Durchbruch unter 60 EUR zwingend. Position-Sizing klein halten – das ist kein Tier-1-Compounder, sondern taktischer Trade.</p>
+<p>Rating:</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 3/5</li>
+<li>Langfristiges Potenzial: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>
