@@ -134,6 +134,16 @@ async def startup():
         create_user(admin_email, admin_password)
         set_admin(admin_email, True)
         set_user_plan(admin_email, "pro")
+    import asyncio
+    async def _warm():
+        for market in MARKET_FILES:
+            path = DATA_DIR / MARKET_FILES[market]
+            if path.exists():
+                try:
+                    await asyncio.to_thread(_get_market_cache, market)
+                except Exception:
+                    pass
+    asyncio.create_task(_warm())
 
 
 @app.get("/health")
