@@ -430,7 +430,7 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     try:
         msg = client.messages.create(
             model="claude-opus-4-7",
-            max_tokens=2048,
+            max_tokens=4096,
             system=[{
                 "type": "text",
                 "text": SYSTEM_PROMPT,
