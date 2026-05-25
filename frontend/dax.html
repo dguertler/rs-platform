@@ -1088,6 +1088,8 @@ function App() {
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
   const [wlTickers, setWlTickers] = useState(new Set());
   const [wlErr,     setWlErr]     = useState({});
+  const [ohlcvCache, setOhlcvCache] = useState({});
+  const [ohlcvLoading, setOhlcvLoading] = useState(false);
 
   useEffect(() => {
     apiFetch("/api/watchlist")
@@ -1130,15 +1132,9 @@ function App() {
     apiFetch("/api/rs/dax")
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(json => {
-        // Beide Formate unterstützen: Array (alt) und Objekt mit data-Key (neu)
         const arr = Array.isArray(json) ? json : json.data;
-        // Letztes Datum aus den täglichen Kerzen ableiten (zuverlässiger als timestamp-Feld)
-        const lastDate = arr.reduce((best, d) => {
-          const last = d.ohlcv?.[d.ohlcv.length - 1]?.d;
-          return last > best ? last : best;
-        }, "");
         const normalized = {
-          timestamp: lastDate || (Array.isArray(json) ? "–" : json.timestamp),
+          timestamp: Array.isArray(json) ? "–" : (json.timestamp || "–"),
           benchmark: "DAX",
           top20: arr.slice(0, 20).map(d => d.ticker),
           data: arr,
@@ -1146,7 +1142,7 @@ function App() {
           benchmark_ohlcv:   Array.isArray(json) ? [] : (json.benchmark_ohlcv   || []),
         };
         setData(normalized);
-        const first = normalized.data.find(d => d.ohlcv?.length > 0);
+        const first = normalized.data.find(d => d.has_ohlcv);
         if (first) setSelected(first.ticker);
       })
       .catch(e => setError(e.message));
@@ -1176,6 +1172,19 @@ function App() {
       .catch(() => { setRatingsLoaded(true); });
   }, []);
 
+  // Lazy-load OHLCV für ausgewählten Ticker
+  useEffect(() => {
+    if (!selected || ohlcvCache[selected]) return;
+    const entry = data?.data.find(d => d.ticker === selected);
+    if (!entry?.has_ohlcv) return;
+    setOhlcvLoading(true);
+    apiFetch(`/api/rs/dax/${selected}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setOhlcvCache(prev => ({ ...prev, [selected]: d })); })
+      .catch(() => {})
+      .finally(() => setOhlcvLoading(false));
+  }, [selected, data]);
+
   useEffect(() => {
     if (!ratingModal) { setRatingHtml(''); return; }
     const r = ratings[ratingModal.toUpperCase()];
@@ -1199,26 +1208,26 @@ function App() {
 
   const rows = showAll ? sorted : sorted.slice(0, 20);
 
-  // Weekly OHLCV
+  // Weekly OHLCV (lazy-loaded)
   const ohlcvW = useMemo(() => {
-    if (!data || !selected) return null;
-    const entry = data.data.find(d => d.ticker === selected);
-    return entry?.ohlcv_w?.length > 0 ? entry.ohlcv_w : null;
-  }, [data, selected]);
+    if (!selected) return null;
+    const c = ohlcvCache[selected];
+    return c?.ohlcv_w?.length > 0 ? c.ohlcv_w : null;
+  }, [ohlcvCache, selected]);
 
-  // Daily OHLCV
+  // Daily OHLCV (lazy-loaded)
   const ohlcv = useMemo(() => {
-    if (!data || !selected) return null;
-    const entry = data.data.find(d => d.ticker === selected);
-    return entry?.ohlcv?.length > 0 ? entry.ohlcv : null;
-  }, [data, selected]);
+    if (!selected) return null;
+    const c = ohlcvCache[selected];
+    return c?.ohlcv?.length > 0 ? c.ohlcv : null;
+  }, [ohlcvCache, selected]);
 
-  // 4H OHLCV: nur echte Daten
+  // 4H OHLCV (lazy-loaded)
   const ohlcv4h = useMemo(() => {
-    if (!data || !selected) return null;
-    const entry = data.data.find(d => d.ticker === selected);
-    return entry?.ohlcv_4h?.length > 0 ? entry.ohlcv_4h : null;
-  }, [data, selected]);
+    if (!selected) return null;
+    const c = ohlcvCache[selected];
+    return c?.ohlcv_4h?.length > 0 ? c.ohlcv_4h : null;
+  }, [ohlcvCache, selected]);
 
   const structureW  = useMemo(() => analyzeWeeklyStructure(ohlcvW), [ohlcvW]);
 
@@ -1241,16 +1250,11 @@ function App() {
     liveBench.d?.length > 0           ? liveBench.d           : null,
   [data, liveBench]);
 
-  // Struktur ALLER Ticker (für Badges und Breach-Punkte in Tabelle)
+  // Struktur ALLER Ticker aus vorberechneten Backend-Flags
   const structureMap = useMemo(() => {
     if (!data) return {};
     const map = {};
-    data.data.forEach(entry => {
-      const d = map[entry.ticker] = {};
-      if (entry.ohlcv?.length > 0)    d.daily  = analyzeStructure(entry.ohlcv);
-      if (entry.ohlcv_w?.length > 0)  d.weekly = analyzeWeeklyStructure(entry.ohlcv_w);
-      if (entry.ohlcv_4h?.length > 0) d.h4     = analyze4HStructure(entry.ohlcv_4h);
-    });
+    data.data.forEach(entry => { map[entry.ticker] = entry.struct || {}; });
     return map;
   }, [data]);
 
@@ -1315,10 +1319,11 @@ function App() {
           {rows.map(item => {
             const rank       = sorted.indexOf(item);
             const isTop      = rank < 20;
-            const hasChart   = data.data.find(d=>d.ticker===item.t)?.ohlcv?.length > 0;
+            const _entry     = data.data.find(d=>d.ticker===item.t);
+            const hasChart   = !!_entry?.has_ohlcv;
             const structs    = structureMap[item.t] || {};
             const isBOC      = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
-            const _newSince  = data.data.find(d=>d.ticker===item.t)?.new_since;
+            const _newSince  = _entry?.new_since;
             const isNew      = !!_newSince && (Date.now() - new Date(_newSince).getTime()) < 7*24*3600*1000;
             const rating     = ratings[item.t.toUpperCase()] || ratings[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
 
@@ -1493,6 +1498,10 @@ function App() {
               </div>
             )}
           </div>
+        ) : ohlcvLoading ? (
+          <div style={{color:"#475569",fontSize:12,textAlign:"center",padding:"20px 0"}}>
+            ⟳ Chart wird geladen…
+          </div>
         ) : (
           <div style={{color:"#475569",fontSize:12,textAlign:"center",padding:"20px 0"}}>
             Klick auf einen Ticker mit ▸ für Strukturanalyse.
@@ -1527,8 +1536,7 @@ function App() {
                     style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
                 : <div style={{padding:"32px",textAlign:"center",color:"#64748b",fontFamily:"monospace",fontSize:13}}>
                     Analyse wird geladen…
-                  </div>
-              }
+                  </div>}
             </div>
           </div>
         );
