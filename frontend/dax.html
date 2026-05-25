@@ -1084,6 +1084,8 @@ function App() {
   const [signals, setSignals] = useState({});
   const [ratings, setRatings] = useState({});
   const [ratingModal, setRatingModal] = useState(null);
+  const [ratingHtml, setRatingHtml] = useState('');
+  const [ratingsLoaded, setRatingsLoaded] = useState(false);
   const [wlTickers, setWlTickers] = useState(new Set());
   const [wlErr,     setWlErr]     = useState({});
 
@@ -1169,9 +1171,21 @@ function App() {
           if (base !== k) map[base] = r;
         });
         setRatings(map);
+        setRatingsLoaded(true);
       })
-      .catch(() => {});
+      .catch(() => { setRatingsLoaded(true); });
   }, []);
+
+  useEffect(() => {
+    if (!ratingModal) { setRatingHtml(''); return; }
+    const r = ratings[ratingModal.toUpperCase()];
+    const ticker = r ? r.ticker.toLowerCase() : ratingModal.toLowerCase();
+    setRatingHtml('');
+    apiFetch(`/api/ratings/${ticker}/html`)
+      .then(res => res.ok ? res.text() : null)
+      .then(html => setRatingHtml(html || '<p style="color:#64748b;padding:24px;font-family:monospace">Keine Analyse vorhanden.</p>'))
+      .catch(() => setRatingHtml('<p style="color:#f87171;padding:24px;font-family:monospace">Fehler beim Laden.</p>'));
+  }, [ratingModal]);
 
   const rsData = useMemo(() => {
     if (!data) return [];
@@ -1281,7 +1295,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr) 24px",
+            gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1289,7 +1303,7 @@ function App() {
             <span>#</span>
             <span style={{textAlign:"center",color:"#334155"}}>Δ</span>
             <span>Ticker</span>
-            <span></span>
+            <span style={{textAlign:"center"}}>Analyse</span>
             <span>Score</span>
             <span style={{textAlign:"center",color:"#f59e0b"}}>W</span>
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
@@ -1313,7 +1327,7 @@ function App() {
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 18px 56px 18px 18px 18px repeat(5,1fr) 24px",
+                  gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${isBOC?"#ef444422":"#0a0f1e"}`,
                   background: isBOC
@@ -1358,7 +1372,14 @@ function App() {
                   {rating && (
                     <span onClick={e => { e.stopPropagation(); setRatingModal(item.t); }}
                       title={`Bewertung · ${rating.verdict} · Score ${rating.score}`}
-                      style={{fontSize:15,color:"#60a5fa",cursor:"pointer",lineHeight:1,userSelect:"none"}}>ⓘ</span>
+                      style={{
+                        fontSize:11, fontWeight:700, letterSpacing:0.5,
+                        padding:"2px 5px", borderRadius:3, cursor:"pointer",
+                        userSelect:"none", lineHeight:1.4,
+                        color:  rating.verdict==="BUY"  ? "#86c429" : rating.verdict==="HOLD" ? "#f59e0b" : "#f87171",
+                        background: rating.verdict==="BUY" ? "#1a2e0a" : rating.verdict==="HOLD" ? "#1a1200" : "#1a0505",
+                        border:`1px solid ${rating.verdict==="BUY"?"#639922":rating.verdict==="HOLD"?"#b45309":"#A32D2D"}`,
+                      }}>{rating.verdict}</span>
                   )}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
@@ -1496,13 +1517,18 @@ function App() {
                 <div style={{display:"flex",alignItems:"center",gap:10}}>
                   <span style={{fontSize:13,fontWeight:700,color:"#94a3b8",fontFamily:"monospace"}}>Aktienbewertung · {r ? displayTicker(ratingModal) : ratingModal}</span>
                   {r && <span style={{fontSize:11,padding:"2px 8px",borderRadius:4,background: r.verdict==="BUY"?"#1a3a0a":r.verdict==="HOLD"?"#2a1f05":"#3a0a0a",color: r.verdict==="BUY"?"#86c429":r.verdict==="HOLD"?"#f59e0b":"#f87171",border:`1px solid ${r.verdict==="BUY"?"#639922":r.verdict==="HOLD"?"#b45309":"#A32D2D"}`}}>{r.verdict} · Score {r.score}</span>}
-                  {r && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
+                  {r?.created_at && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
                 </div>
                 <button onClick={() => setRatingModal(null)}
                   style={{background:"transparent",border:"1px solid #1e2d45",color:"#94a3b8",cursor:"pointer",fontSize:13,borderRadius:4,padding:"3px 10px"}}> Schließen</button>
               </div>
-              <iframe src={`ratings/${r ? r.ticker.toLowerCase() : ratingModal.toLowerCase()}.html`}
-                style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
+              {ratingHtml
+                ? <iframe srcdoc={ratingHtml}
+                    style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
+                : <div style={{padding:"32px",textAlign:"center",color:"#64748b",fontFamily:"monospace",fontSize:13}}>
+                    Analyse wird geladen…
+                  </div>
+              }
             </div>
           </div>
         );
