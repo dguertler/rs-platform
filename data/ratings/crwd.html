@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CRWD — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CRWD</h1>
+      <h2>CrowdStrike Holdings, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$169B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">103.9</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$663.46</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">107.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">74.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-4.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># CrowdStrike Holdings (CRWD) – Institutionelle Analyse</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>CrowdStrike ist der unangefochtene Premium-Player im Endpoint-Security-Markt und entwickelt sich zur dominanten Cybersecurity-Plattform der nächsten Generation. Nach dem katastrophalen IT-Outage im Juli 2024 hat sich die Aktie nicht nur erholt, sondern markiert neue Allzeithochs – ein klares Zeichen, dass institutionelle Investoren das Vertrauen vollständig zurückgewonnen haben. Der eigentliche Bull-Case ist nicht Endpoint Protection, sondern die Falcon-Plattform-Konsolidierung: Cloud Security, Identity Protection, SIEM, Exposure Management. Der Markt preist hier eine SaaS-Compounder-Maschine mit 70%+ Gross Margins und massivem Operating Leverage ein. Was viele übersehen: Die Net Retention liegt zwar etwas niedriger als früher, aber Module-Adoption beschleunigt sich wieder. Bewertung ist sportlich, aber nicht absurd für diese Qualität. Die GWS-Ampel mit 3/3 bestätigt das technische Setup eindrucksvoll.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Cloud-native Cybersecurity-Plattform "Falcon" mit Single-Agent-Architektur</li>
+<li>Subscription-basiertes SaaS-Modell mit hoher Visibility (ARR-Modell)</li>
+<li>28+ Module – Cross-Sell ist der zentrale Wachstumshebel</li>
+<li>Endpoint Protection als Einstiegsprodukt, dann Expansion in Cloud/Identity/SIEM</li>
+<li>Wachstumstreiber: Konsolidierung mehrerer Security-Vendoren auf eine Plattform</li>
+<li>Großkundengeschäft dominiert, zunehmend auch SMB via Falcon Go</li>
+<li>Datenvorteil: Threat Graph verarbeitet Billionen Events täglich – AI-Edge</li>
+<li>Hauptkonkurrenten: Microsoft Defender, SentinelOne, Palo Alto, Zscaler</li>
+<li>Strukturtrend: Cybersecurity-Budgets wachsen zweistellig trotz IT-Sparzwängen</li>
+<li>Charlotte AI als GenAI-Layer öffnet Upsell-Potenzial</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>Plattform-Konsolidierung: Kunden ersetzen 3-5 Vendoren durch Falcon</li>
+<li>TAM-Expansion auf $250 Mrd.+ durch SIEM, Cloud Security, Identity</li>
+<li>Free Cashflow Margin von 30%+ – seltene Kombination aus Wachstum und Cash</li>
+<li>Rule of 50+ Profil – das Heilige Gral der SaaS-Bewertung</li>
+<li>AI/GenAI als Tailwind für SOC-Automatisierung</li>
+<li>Outage-Trauma abgehakt – kein Kundenverlust in nennenswertem Umfang</li>
+<li>Margenexpansion durch Skaleneffekte noch lange nicht ausgereizt</li>
+<li>Potenzielle Übernahme von kleineren Security-Playern beschleunigt Wachstum</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>Forward PE >100 lässt wenig Raum für Enttäuschungen</li>
+<li>Microsoft Defender als "Good-Enough"-Lösung im Bundle ist strukturelle Bedrohung</li>
+<li>Wachstum verlangsamt von 50%+ auf ~23% – Reifephase beginnt</li>
+<li>Net Retention Rate gefallen – Expansion-Motor zeigt erste Schwächen</li>
+<li>Analysten-Kursziel ($535) liegt deutlich UNTER Kurs ($663) – Warnsignal</li>
+<li>GAAP-Verluste (Net Margin -3,4%) trotz $4,8 Mrd. Umsatz</li>
+<li>Hohe SBC-Belastung verzerrt Non-GAAP-Profitabilität</li>
+<li>Cybersecurity-Konsolidierung könnte Pricing-Power von Palo Alto/Cisco erhöhen</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatzwachstum 23,3% YoY – solide, aber Deceleration sichtbar</li>
+<li>Gross Margin 74,8% – Best-in-Class SaaS-Niveau</li>
+<li>Operating Margin GAAP nur 1% – Non-GAAP deutlich höher (~21%)</li>
+<li>Free Cashflow $1,6 Mrd. – FCF-Margin ~33%, exzellent</li>
+<li>Net Income negativ – primär durch SBC und Outage-Kosten getrieben</li>
+<li>Bilanz: $4 Mrd.+ Cash, niedrige Verschuldung</li>
+<li>ROE -4,1% – durch GAAP-Verluste verzerrt</li>
+<li>ARR über $4 Mrd., Wachstumsrate gesund</li>
+<li>Module-Adoption: 65%+ Kunden mit 5+ Modulen</li>
+<li>Magic Number weiterhin >1 – effiziente Vertriebsmaschine</li>
+<li>Rule of 56 (Wachstum + FCF-Margin) – Top-Tier</li>
+<li>Geringe Customer Concentration – diversifizierte Kundenbasis</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Mit Forward PE von 107 und EV/Sales von ~28x ist CRWD eine der teuersten Cybersecurity-Aktien. Im Vergleich: Palo Alto bei ~13x Sales, Zscaler ~13x, SentinelOne ~8x. Die Prämie ist durch Plattform-Status, FCF-Margin und Wachstumsqualität gerechtfertigt – aber nur, solange Wachstum nicht unter 20% fällt. EV/FCF von ~105 ist sportlich, aber bei 25%+ FCF-Wachstum vertretbar. Analysten-Konsens-Kursziel liegt $128 unter Spot – die Aktie ist dem Sell-Side-Konsens davongelaufen. Historisch war das oft ein Vorbote von Konsolidierung, nicht zwingend eines Crashes. Der Markt preist nahezu perfekte Execution ein.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Institutionelles Ownership hoch (~75%) – Hedgefonds-Liebling</li>
+<li>Momentum-Trade: Aktie nahe ATH, hohe Aufmerksamkeit</li>
+<li>Sentiment euphorisch, aber nicht Bubble-artig wie 2021</li>
+<li>Long-only-Quality-Manager halten als Cybersecurity-Kerninvestment</li>
+<li>Short Interest gering – wenig Brennstoff für Squeeze, aber auch keine Skepsis</li>
+<li>Crowded auf der Long-Seite – Vorsicht bei Sektor-Rotation</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 – Weekly, Daily, 4H alle gebrochen, hochwertiges Setup</li>
+<li>RS-Score 103,9 vs. QQQ – Outperformance bestätigt</li>
+<li>20T-Performance +37,9% – kurzfristig überhitzt, Konsolidierung möglich</li>
+<li>Chartbild: Ausbruch über $650 mit Volumen – strukturell bullisch</li>
+<li>Zyklus-Phase: Stage 2 Advance, aber im fortgeschrittenen Stadium</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>**Konservativ:** Wachstum 18-20%, Multiple-Kompression auf 70x FCF / Kursziel: $750 / Wahrscheinlichkeit: 40%</p>
+<p>**Bull Case:** Wachstum hält 22-25%, FCF-Margin 35%+, Plattform-Dominanz / Kursziel: $1.100 / Wahrscheinlichkeit: 35%</p>
+<p>**Extrem-Bull:** Cybersecurity-Konsolidierung beschleunigt, ARR verdoppelt sich, AI-Layer monetarisiert / Kursziel: $1.500+ / Wahrscheinlichkeit: 15%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>PANW (Palo Alto): Größer, günstiger, aber weniger pure-play Cloud</li>
+<li>ZS (Zscaler): Ähnliches Profil, billiger, aber langsameres Wachstum</li>
+<li>S (SentinelOne): Günstigere Alternative, aber Execution-Risiken</li>
+<li>NET (Cloudflare): Adjazent, höhere Bewertung, anderes Geschäftsmodell</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>CrowdStrike ist ein echter Compounder mit Plattform-Status – die Art von Aktie, die institutionelle Investoren 5-10 Jahre halten wollen. Aber bei aktueller Bewertung ist es kein "Kaufe alles zurück, was du kriegen kannst"-Setup mehr. Die GWS-Ampel 3/3 signalisiert technisch hochwertiges Momentum, und solange das intakt ist, läuft der Trade weiter. Hedgefonds-Perspektive: Trimmen in Stärke, nicht verkaufen. Quality-Compounder-Investoren akkumulieren bei jedem 15-20% Drawdown. Der Outage-Episode hat gezeigt, wie resilient das Geschäftsmodell ist – das ist ein extrem wertvolles Signal. Risiko/Rendite asymmetrisch nach Konsolidierung deutlich besser als auf ATH. Wer keine Position hat: warten auf Pullback Richtung $560-580. Wer drin ist: Trailing Stop unter 50T-EMA, Position halten solange GWS-Ampel grün. Das ist eine Aktie, die man besitzen muss, aber zum richtigen Preis kauft.</p>
+<p>**Rating:**</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>

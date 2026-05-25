@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AMAT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AMAT</h1>
+      <h2>Applied Materials, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductor Equipment & Materials</span></div>
+        <div class="mi">MCap: <span>$343B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">78.3</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$432.16</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">26.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$29.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">49.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">49.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">39.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># Applied Materials (AMAT) – Institutionelle Analyse</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Applied Materials ist der weltweit zweitgrößte WFE-Player (Wafer Fab Equipment) hinter ASML und einer der strategisch wichtigsten Profiteure des AI-CapEx-Superzyklus. Die Story dreht sich nicht mehr nur um Memory-Zyklik, sondern um strukturelles Wachstum in Leading-Edge Logic (TSMC N2/A16), Advanced Packaging (HBM, CoWoS), und Gate-All-Around-Transitions. Der Markt beginnt AMAT vom zyklischen Equipment-Stock zum Compounder umzubewerten — die 12M-Performance und das Forward-PE von 26,8 zeigen das deutlich. Was der Markt richtig versteht: AMAT ist im Advanced Packaging strukturell unterversorgt. Was er möglicherweise unterschätzt: Die China-Exposure (~30% Umsatz) bleibt geopolitisch fragil. Die GWS-Ampel mit 3/3 zeigt einen klaren strukturellen Bruch — Momentum-Setup, aber nach +73% in 6 Monaten kein Einstieg ohne Plan.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Semiconductor Systems (~75% Umsatz): Equipment für Deposition, Etch, CMP, Ion Implant</li>
+<li>Applied Global Services (~22%): Wiederkehrende Service- und Spare-Parts-Umsätze, margenstark</li>
+<li>Display & Adjacent Markets (~3%): OLED-Equipment, schwächeres Segment</li>
+<li>Strukturell profitiert AMAT von Leading-Edge-Logik (GAA-Transition bei TSMC, Samsung, Intel)</li>
+<li>Massiver Tailwind durch HBM/Advanced Packaging — hier Marktführer bei Hybrid Bonding</li>
+<li>China-Mature-Node-Geschäft als zweischneidiges Schwert: Cashcow, aber Exportkontroll-Risiko</li>
+<li>Service-Geschäft wächst zweistellig und stabilisiert die Zyklik</li>
+<li>Wettbewerb fokussiert: Lam Research (Etch), Tokyo Electron, KLA (Metrology), ASML (Litho)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<ul class="al">
+<li>AI-CapEx-Superzyklus: TSMC plant >$40 Mrd. CapEx p.a., Samsung & Intel folgen</li>
+<li>HBM-Boom: Jeder NVIDIA Blackwell/Rubin-Chip benötigt mehr Advanced Packaging</li>
+<li>GAA-Transition ab N2 erhöht WFE-Intensity strukturell um ~15%</li>
+<li>Service-Umsatz mit 80%+ Wiederkehrrate — bewertungstreibend</li>
+<li>Margenexpansion durch Mix-Shift zu Leading-Edge sichtbar (Operating Margin 31,9%)</li>
+<li>Aktionärsrückführung: ~$5 Mrd. Buybacks + Dividende</li>
+<li>Re-Rating-Potenzial: Von Equipment-Multiple Richtung Plattform-Compounder</li>
+<li>Geopolitischer Onshoring-Trend (US CHIPS Act, EU, Japan) erweitert TAM</li>
+</ul>
+<h3>4. BEAR CASE</h3>
+<ul class="al">
+<li>China macht ~30% Umsatz — neue Exportrestriktionen jederzeit möglich</li>
+<li>WFE-Markt bleibt zyklisch, 2026 könnte Memory-Peak markieren</li>
+<li>Bewertung nach +73% in 6 Monaten ambitioniert für zyklischen Wert</li>
+<li>ASML/Lam haben in spezifischen Nischen technologische Vorsprünge</li>
+<li>US-China-Eskalation könnte 10-15% Umsatzeinbruch auslösen</li>
+<li>Free Cashflow mit nur $3 Mrd. verdächtig niedrig vs. Net Income — Working-Capital-Aufbau</li>
+<li>Beta 1.65: hohe Volatilität bei Risk-off-Phasen</li>
+<li>Forward-PE 26,8 lässt wenig Spielraum für Enttäuschungen</li>
+</ul>
+<h3>5. FUNDAMENTALE QUALITÄT</h3>
+<ul class="al">
+<li>Umsatzwachstum 11,4% YoY — solide, beschleunigend</li>
+<li>Gross Margin 49% — stabil, leicht expandierend</li>
+<li>Operating Margin 31,9% — Best-in-Class für Equipment-Sektor</li>
+<li>Net Margin 29,3% — exzellent</li>
+<li>ROE 39,7% — outstanding, kapitaleffizient</li>
+<li>FCF $3,04 Mrd. — auffällig niedrig vs. Net Income, beobachten</li>
+<li>Debt/Equity 30,4 — konservative Bilanz</li>
+<li>Price/Book 14,35 — hoch, reflektiert Asset-Light-Modell</li>
+<li>Service-Segment wachstumsstark, glättet Zyklik</li>
+<li>Buybacks reduzieren Share Count konstant</li>
+<li>Hohes R&D-Investment (~$3 Mrd. p.a.) sichert Technologieführerschaft</li>
+<li>Working Capital aktuell aufgebläht — kurzfristiger FCF-Druck</li>
+</ul>
+<h3>6. BEWERTUNG</h3>
+<p>Mit Trailing-PE 40,65 und Forward-PE 26,8 ist AMAT historisch teuer — der 10-Jahres-Schnitt liegt bei 15-18x Forward. Das EV/Sales von ~11x ist deutlich über Zyklus-Schnitt. Gegenüber Lam Research (Forward-PE ~25x) und KLA (~28x) handelt AMAT auf Peer-Niveau, ASML wesentlich teurer (~32x). Analystenkursziel $509 impliziert ~18% Upside — moderat angesichts des Run-ups. Der Markt preist klar eine strukturelle Re-Rating-These ein, kein zyklisches Mean-Reversion-Szenario mehr. Für einen Einstieg auf diesen Niveaus muss man an die "WFE-Compounder"-These glauben. Risiko/Rendite hier asymmetrisch nach unten kurzfristig.</p>
+<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<ul class="al">
+<li>Institutionelles Ownership hoch, Smart Money im AI-Picks-and-Shovels-Trade voll positioniert</li>
+<li>Sentiment nach +73% in 6M deutlich euphorisch — Crowded Trade</li>
+<li>Retail-Aufmerksamkeit steigend, aber nicht extrem</li>
+<li>Momentum stark, aber kurzfristig überdehnt (10T -3%, 5T +3% — Konsolidierungssignal)</li>
+<li>RS-Score 78 vs. QQQ zeigt klare Outperformance</li>
+<li>Keine Short-Squeeze-Setups, sauberer institutioneller Trade</li>
+</ul>
+<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<ul class="al">
+<li>GWS-Ampel 3/3 AKTIV: struktureller Bruch auf Weekly/Daily/4H — bullisches Setup</li>
+<li>Nahe 52W-Hoch ($448), 6M-Performance +73% — Zyklus-Phase: Mark-up/Late Stage</li>
+<li>Kurzfristig überdehnt, 10T negativ — gesunde Konsolidierung möglich</li>
+<li>Pullbacks Richtung $380-400 wären strukturell kaufbar</li>
+<li>RS-Stärke intakt, aber Vorsicht vor Blow-off-Top-Verhalten</li>
+</ul>
+<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
+<p>**Konservativ:** WFE-Markt wächst 6-8% p.a., China-Headwinds materialisieren teilweise, Multiple-Kompression auf 20x. Kursziel: $480-520. Wahrscheinlichkeit: 40%</p>
+<p>**Bull Case:** AI-CapEx-Zyklus hält an, GAA + HBM treiben Margenexpansion, EPS verdoppelt sich. Kursziel: $650-750. Wahrscheinlichkeit: 40%</p>
+<p>**Extrem-Bull:** Vollständiges Re-Rating zum Compounder-Multiple (30x+), Sovereign-Chip-CapEx weltweit, Margen >35%. Kursziel: $900-1.000. Wahrscheinlichkeit: 20%</p>
+<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
+<ul class="al">
+<li>LRCX (Lam Research): Etch-Spezialist, ähnliches Profil, etwas günstiger</li>
+<li>KLAC (KLA): Höhere Margen, Metrology-Monopol, defensiver</li>
+<li>ASML: Litho-Monopol, höchste Qualität, teuerste Bewertung</li>
+<li>TOELY (Tokyo Electron): Günstiger, weniger AI-Exposure</li>
+</ul>
+<h3>11. PROFI-FAZIT</h3>
+<p>AMAT ist einer der hochwertigsten Picks-and-Shovels-Plays im AI-Zyklus — institutionell ein Kernhalten im Semis-Equipment-Bucket. Die GWS-Ampel mit 3/3 bestätigt den strukturellen Aufwärtstrend, aber der Trade ist nach +73% in 6 Monaten kein Lay-up mehr. Aus Hedgefonds-Sicht: Halten, nicht aggressiv neu aufbauen auf diesen Levels. Qualität exzellent, Bewertung gestreckt — die Kombination ist klassisch für "Compounder-im-Übergang". Strategie: Pullbacks in den $380-400-Bereich abwarten für Neueinstiege, bei Bruch der Daily-GWS-Struktur Trailing-Stops setzen. Trading-Play kurzfristig riskant (überhitzt), Compounder-Play mittelfristig attraktiv. China-Risiko bleibt das Schwarze Schwan-Szenario. Wer schon dabei ist: laufen lassen, Position trimmen bei Blow-off-Verhalten.</p>
+<p>**Ratings:**</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>
