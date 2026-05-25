@@ -59,6 +59,11 @@
     window.location.href = '/login.html';
   }
   window.rsLogout = logout;
+  // openRating-Param vor dem Auth-Redirect retten (sessionStorage überlebt Navigation)
+  (function() {
+    var t = new URLSearchParams(window.location.search).get('openRating');
+    if (t) sessionStorage.setItem('openRating', t);
+  })();
   window.apiFetch = async function (url, opts) {
     opts = opts || {};
     var token = getToken();
@@ -1171,11 +1176,15 @@ function App() {
       .catch(() => { setRatingsLoaded(true); });
   }, []);
 
-  // Deep-Link: ?openRating=TXN aus E-Mail-Button
+  // Deep-Link: ?openRating=TXN aus E-Mail-Button (auch nach Login-Redirect via sessionStorage)
   useEffect(() => {
     if (!ratingsLoaded) return;
-    const t = new URLSearchParams(window.location.search).get('openRating');
-    if (t) setRatingModal(t.toUpperCase());
+    const t = new URLSearchParams(window.location.search).get('openRating')
+           || sessionStorage.getItem('openRating');
+    if (t) {
+      sessionStorage.removeItem('openRating');
+      setRatingModal(t.toUpperCase());
+    }
   }, [ratingsLoaded]);
 
   // HTML für Rating-Modal vom Backend laden (auth-geschützt)

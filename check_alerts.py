@@ -390,15 +390,16 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                        'border-radius:10px;font-size:10px;font-weight:bold">TOP&nbsp;20</span>&nbsp;'
                        if alert.get('in_top20') else '')
 
+        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app')).rstrip('/')
         if source == 'DAX':
-            dashboard_url   = 'https://dguertler.github.io/Rel.-Strength/dax.html'
+            dashboard_url   = _base_url
             dashboard_label = 'DAX-Dashboard'
         elif source == 'SPX':
-            dashboard_url   = 'https://dguertler.github.io/Rel.-Strength/sp500.html'
+            dashboard_url   = _base_url
             dashboard_label = 'S&P 500-Dashboard'
         else:
-            dashboard_url   = 'https://dguertler.github.io/Rel.-Strength/'
-            dashboard_label = 'Nasdaq-Dashboard'
+            dashboard_url   = _base_url
+            dashboard_label = 'RS-Dashboard'
 
         html_parts.append(f"""
   <div style="margin:0 0 28px;padding:16px;
@@ -468,11 +469,12 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                    accent_color='#94a3b8', bg_color='#0f172a', icon='&#9675;')
 
         # "Analyse ansehen"-Button — öffnet die Bewertungsseite im Dashboard
-        frontend_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', '')).rstrip('/')
+        frontend_url = _base_url
+        url_ticker   = display_ticker.replace('[TEST] ', '').strip()
         if frontend_url:
             html_parts.append(
                 f'    <div style="margin-top:14px">'
-                f'<a href="{frontend_url}?openRating={display_ticker}" '
+                f'<a href="{frontend_url}?openRating={url_ticker}" '
                 f'style="display:inline-block;padding:7px 16px;background:#1e3a5f;'
                 f'color:#60a5fa;border:1px solid #2563eb;border-radius:5px;'
                 f'font-size:12px;font-weight:600;text-decoration:none;font-family:monospace">'
