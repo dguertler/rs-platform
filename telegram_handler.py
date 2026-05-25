@@ -3,13 +3,14 @@ telegram_handler.py – Telegram-Benachrichtigungen für RS-Platform
 =================================================================
 Wird von check_alerts.py, check_4h_reentry.py und check_earnings.py
 importiert. Sendet:
-  - Textnachricht (HTML-formatiert) mit Ticker-Info, Dots, Links, News
-  - Foto-Album mit Charts (Weekly, Daily, 4H)
+  - Foto-Album mit Charts (Weekly, Daily, 4H) — zuerst
+  - Textnachricht (HTML-formatiert) mit Ticker-Info, Dots, Links, News, Analyse-Link
 """
 
 import base64
 import json
 import os
+import urllib.parse
 import urllib.request
 from datetime import datetime
 
@@ -86,6 +87,16 @@ def _news_lines(news, max_specific=3, max_general=2):
     return ('\n' + '\n'.join(lines)) if lines else ''
 
 
+def _analyse_link(display_ticker):
+    """Gibt einen HTML-Link zur KI-Analyse zurück, oder ''."""
+    frontend_url = os.environ.get('FRONTEND_URL', '').rstrip('/')
+    if not frontend_url:
+        return ''
+    ticker_param = urllib.parse.quote(display_ticker.replace('[TEST] ', '').strip())
+    url = f'{frontend_url}?openRating={ticker_param}'
+    return f'\n📊 <a href="{url}">Zur {_esc(display_ticker)}-Analyse</a>'
+
+
 def _send_charts(token, chat_id, charts):
     """Schickt bis zu 3 Charts als Foto-Album (sendMediaGroup)."""
     if not charts:
@@ -110,7 +121,7 @@ def _send_charts(token, chat_id, charts):
 def send_breakout_telegram(token, chat_id, alert):
     """
     Breakout- oder 4H-Wiederkehr-Alert:
-    Textnachricht + Charts als Foto-Album.
+    Charts zuerst als Foto-Album, dann Textnachricht.
     """
     if not token or not chat_id:
         return
@@ -136,23 +147,24 @@ def send_breakout_telegram(token, chat_id, alert):
         f'<b>{today}</b>{reentry}\n'
         f'RS-Score: <b>{score:.1f}</b>\n'
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
-        f'<a href="{dash_url}">→ {_esc(dash_label)}</a>'
+        f'<a href="{dash_url}">Zum {_esc(dash_label)}</a>'
         + _news_lines(alert.get('news'))
+        + _analyse_link(display)
     )
 
+    _send_charts(token, chat_id, alert.get('charts', []))
     _post_json(token, 'sendMessage', {
         'chat_id':    chat_id,
         'text':       text,
         'parse_mode': 'HTML',
         'link_preview_options': {'is_disabled': True},
     })
-    _send_charts(token, chat_id, alert.get('charts', []))
 
 
 def send_earnings_telegram(token, chat_id, alert):
     """
     Earnings-Überraschungs-Alert:
-    Textnachricht + Charts als Foto-Album.
+    Charts zuerst als Foto-Album, dann Textnachricht.
     """
     if not token or not chat_id:
         return
@@ -185,14 +197,15 @@ def send_earnings_telegram(token, chat_id, alert):
         f'Kurssprung: <b>+{jump:.1f}%</b>  EPS-Surprise: <b>+{surprise:.1f}%</b>'
         f'{rev_line}{eps_line}\n'
         f'RS-Score: <b>{score:.1f}</b>\n'
-        f'<a href="{dash_url}">→ {_esc(dash_label)}</a>'
+        f'<a href="{dash_url}">Zum {_esc(dash_label)}</a>'
         + _news_lines(alert.get('news'))
+        + _analyse_link(display)
     )
 
+    _send_charts(token, chat_id, alert.get('charts', []))
     _post_json(token, 'sendMessage', {
         'chat_id':    chat_id,
         'text':       text,
         'parse_mode': 'HTML',
         'link_preview_options': {'is_disabled': True},
     })
-    _send_charts(token, chat_id, alert.get('charts', []))
