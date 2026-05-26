@@ -644,6 +644,9 @@ function WatchlistApp() {
   const [newsData,    setNewsData]    = useState({});
   const [newsLoading, setNewsLoading] = useState({});
   const [signals,     setSignals]     = useState({});
+  const [ratings,     setRatings]     = useState({});
+  const [ratingModal, setRatingModal] = useState(null);
+  const [ratingHtml,  setRatingHtml]  = useState('');
   const [liveBench,   setLiveBench]   = useState({ w: null, d: null });
   const chartRef = useRef(null);
 
@@ -672,6 +675,33 @@ function WatchlistApp() {
       .then(json => setSignals(json))
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    apiFetch("/api/ratings")
+      .then(r => r.ok ? r.json() : { ratings: [] })
+      .then(json => {
+        const map = {};
+        (json.ratings || []).forEach(r => {
+          const k = r.ticker.toUpperCase();
+          map[k] = r;
+          const base = k.replace(/\.[^.]+$/, '');
+          if (base !== k) map[base] = r;
+        });
+        setRatings(map);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!ratingModal) { setRatingHtml(''); return; }
+    const r = ratings[ratingModal.toUpperCase()];
+    const ticker = r ? r.ticker.toLowerCase() : ratingModal.toLowerCase();
+    setRatingHtml('');
+    apiFetch(`/api/ratings/${ticker}/html`)
+      .then(res => res.ok ? res.text() : null)
+      .then(html => setRatingHtml(html || '<p style="color:#64748b;padding:24px;font-family:monospace">Keine Analyse vorhanden.</p>'))
+      .catch(() => setRatingHtml('<p style="color:#f87171;padding:24px;font-family:monospace">Fehler beim Laden.</p>'));
+  }, [ratingModal]);
 
   useEffect(() => {
     Promise.all([
@@ -782,7 +812,7 @@ function WatchlistApp() {
     return map;
   }, [items]);
 
-  const GRID = "22px 62px 90px 56px 18px 18px 18px repeat(5,1fr) 46px 28px";
+  const GRID = "22px 62px 90px 62px 56px 18px 18px 18px repeat(5,1fr) 46px 28px";
 
   if (error) return (
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#060b14",color:"#f87171",fontFamily:"monospace",flexDirection:"column",gap:8}}>
@@ -824,6 +854,7 @@ function WatchlistApp() {
             <span>#</span>
             <span>Ticker</span>
             <span>Index / Rang</span>
+            <span style={{textAlign:"center"}}>Analyse</span>
             <span>Score</span>
             <span style={{textAlign:"center",color:"#f59e0b"}}>W</span>
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
@@ -847,6 +878,9 @@ function WatchlistApp() {
           {sortedItems.flatMap((item, idx) => {
             const structs = structureMap[item.ticker] || {};
             const isBOC   = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
+            const hasRecent = structs.weekly?.recentBreakout || structs.daily?.recentBreakout || structs.h4?.recentBreakout;
+            const rating  = ratings[item.ticker.toUpperCase()] || ratings[item.ticker.replace(/\.[^.]+$/,'').toUpperCase()];
+            const showFlame = isBOC && hasRecent && rating?.verdict === "BUY";
             const isNew   = !!item.new_since && (Date.now() - new Date(item.new_since).getTime()) < 7*24*3600*1000;
             const hasChart = item.ohlcv?.length > 0;
             const isSelected = item.ticker === selected;
@@ -860,21 +894,35 @@ function WatchlistApp() {
                   gridTemplateColumns:GRID,
                   padding:"6px 10px",
                   gap:2,
-                  borderTop:`1px solid ${isBOC?"#ef444422":"#0a0f1e"}`,
-                  background: isBOC ? (isSelected?"#3a0808":"#160303") : isSelected ? "#1a2f4a" : (idx%2===0?"#0d1526":"#0a1020"),
+                  borderTop:`1px solid ${showFlame?"#ef444422":"#0a0f1e"}`,
+                  background: showFlame ? (isSelected?"#3a0808":"#160303") : isSelected ? "#1a2f4a" : (idx%2===0?"#0d1526":"#0a1020"),
                   alignItems:"center",
                   cursor: hasChart ? "pointer" : "default",
-                  borderLeft: isBOC ? "2px solid #ef4444" : isSelected ? "2px solid #8b5cf6" : "2px solid transparent",
+                  borderLeft: showFlame ? "2px solid #ef4444" : isSelected ? "2px solid #8b5cf6" : "2px solid transparent",
                 }}>
                 <span style={{fontSize:10,fontWeight:700,color:"#334155"}}>{idx+1}</span>
-                <span style={{fontWeight:700,fontSize:11,fontFamily:"monospace",color:isBOC?"#fca5a5":isSelected?"#c4b5fd":"#f1f5f9",display:"flex",alignItems:"center",gap:2}}>
+                <span style={{fontWeight:700,fontSize:11,fontFamily:"monospace",color:showFlame?"#fca5a5":isSelected?"#c4b5fd":"#f1f5f9",display:"flex",alignItems:"center",gap:2}}>
                   {isNew
-                    ? <span className={isBOC?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
-                    : isBOC && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
+                    ? <span className={showFlame?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
+                    : showFlame && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
                   {item.ticker}
                   {hasChart && <span style={{fontSize:8,color:"#334155",marginLeft:2}}>▸</span>}
                 </span>
                 <MarketBadges markets={item.markets} />
+                <span style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
+                  {rating && (
+                    <span onClick={e => { e.stopPropagation(); setRatingModal(item.ticker); }}
+                      title={`Bewertung · ${rating.verdict} · Score ${rating.score}`}
+                      style={{
+                        fontSize:11, fontWeight:700, letterSpacing:0.5,
+                        padding:"2px 5px", borderRadius:3, cursor:"pointer",
+                        userSelect:"none", lineHeight:1.4,
+                        color:  rating.verdict==="BUY"  ? "#86c429" : rating.verdict==="HOLD" ? "#f59e0b" : "#f87171",
+                        background: rating.verdict==="BUY" ? "#1a2e0a" : rating.verdict==="HOLD" ? "#1a1200" : "#1a0505",
+                        border:`1px solid ${rating.verdict==="BUY"?"#639922":rating.verdict==="HOLD"?"#b45309":"#A32D2D"}`,
+                      }}>{rating.verdict}</span>
+                  )}
+                </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.score>0?"#4ade80":item.score<0?"#f87171":"#475569"}}>
                   {item.score != null ? `${item.score>0?"+":""}${Math.round(item.score)}` : "–"}
                 </span>
@@ -980,6 +1028,33 @@ function WatchlistApp() {
       </div>
       </div>{/* end desktop-right */}
       </div>{/* end desktop-layout */}
+
+      {ratingModal && (() => {
+        const r = ratings[ratingModal.toUpperCase()] || ratings[ratingModal.replace(/\.[^.]+$/,'').toUpperCase()];
+        return (
+          <div onClick={() => setRatingModal(null)}
+            style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.88)",zIndex:1000,display:"flex",alignItems:"flex-start",justifyContent:"center",padding:16,overflowY:"auto"}}>
+            <div onClick={e => e.stopPropagation()}
+              style={{width:"100%",maxWidth:980,background:"#060b14",borderRadius:10,border:"1px solid #1e2d45",overflow:"hidden",display:"flex",flexDirection:"column",marginTop:8}}>
+              <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 16px",borderBottom:"1px solid #1e2d45",background:"#0d1526"}}>
+                <div style={{display:"flex",alignItems:"center",gap:10}}>
+                  <span style={{fontSize:13,fontWeight:700,color:"#94a3b8",fontFamily:"monospace"}}>Aktienbewertung · {ratingModal}</span>
+                  {r && <span style={{fontSize:11,padding:"2px 8px",borderRadius:4,background:r.verdict==="BUY"?"#1a3a0a":r.verdict==="HOLD"?"#2a1f05":"#3a0a0a",color:r.verdict==="BUY"?"#86c429":r.verdict==="HOLD"?"#f59e0b":"#f87171",border:`1px solid ${r.verdict==="BUY"?"#639922":r.verdict==="HOLD"?"#b45309":"#A32D2D"}`}}>{r.verdict} · Score {r.score}</span>}
+                  {r?.created_at && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
+                </div>
+                <button onClick={() => setRatingModal(null)}
+                  style={{background:"transparent",border:"1px solid #1e2d45",color:"#94a3b8",cursor:"pointer",fontSize:13,borderRadius:4,padding:"3px 10px"}}> Schließen</button>
+              </div>
+              {ratingHtml
+                ? <iframe srcdoc={ratingHtml}
+                    style={{border:"none",width:"100%",height:"85vh"}} title={`Bewertung ${ratingModal}`}/>
+                : <div style={{padding:"32px",textAlign:"center",color:"#64748b",fontFamily:"monospace",fontSize:13}}>
+                    Analyse wird geladen…
+                  </div>}
+            </div>
+          </div>
+        );
+      })()}
 
     </div>
   );
