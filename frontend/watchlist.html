@@ -812,7 +812,7 @@ function WatchlistApp() {
     return map;
   }, [items]);
 
-  const GRID = "22px 62px 90px 62px 56px 18px 18px 18px repeat(5,1fr) 46px 28px";
+  const GRID = "22px 62px 90px 62px 56px 18px 18px 18px repeat(5,38px) 46px 28px";
 
   if (error) return (
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#060b14",color:"#f87171",fontFamily:"monospace",flexDirection:"column",gap:8}}>
@@ -847,7 +847,7 @@ function WatchlistApp() {
 
       {/* Watchlist Table */}
       <div style={{background:"#0f172a",borderRadius:10,border:"1px solid #1e293b",marginBottom:12,overflowX:"auto"}}>
-        <div style={{minWidth:520}}>
+        <div style={{minWidth:630}}>
 
           {/* Header */}
           <div style={{display:"grid",gridTemplateColumns:GRID,padding:"6px 10px",background:"#1e293b",gap:2,fontSize:9,color:"#475569",textTransform:"uppercase",letterSpacing:0.5,alignItems:"center"}}>
