@@ -13,7 +13,7 @@ _SP500_FALLBACK_2 = [
     "ORCL","CRM", "IBM", "ACN", "FICO","GLW", "HPQ", "HPE", "STX", "WDC",
     "NTAP","KEYS","TER", "SWKS","QRVO","AKAM","CDW", "GDDY","VRT", "LDOS",
     "TDY", "TRMB","PAYC","IT",  "JNPR","JKHY","ANET","PTC", "EPAM","DXC",
-    "ZBRA",
+    "ZBRA","DELL",
     # Communication Services (nicht im QQQ)
     "DIS", "CMCSA","T",  "VZ",  "WBD", "FOXA","FOX", "IPG", "OMC", "LYV",
     "PARA","NWSA",
