@@ -415,30 +415,27 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
         print(f"  generate_rating: GEMINI_API_KEY nicht gesetzt — übersprungen")
         return False
 
-    try:
-        from google import genai
-        from google.genai import types as genai_types
-    except ImportError:
-        print("  generate_rating: 'google-genai' nicht installiert — übersprungen")
-        return False
-
     print(f"  Generiere Rating für {ticker}...")
 
     fund    = fetch_fundamentals(ticker)
     context = build_context(ticker, fund, rs_score, windows, gws)
 
-    client = genai.Client(api_key=api_key)
+    import requests as _req
+    url = (
+        "https://generativelanguage.googleapis.com/v1/models/"
+        f"gemini-1.5-flash:generateContent?key={api_key}"
+    )
+    payload = {
+        "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+        "contents": [{"parts": [{"text": context}]}],
+    }
     try:
-        response   = client.models.generate_content(
-            model="gemini-1.5-flash",
-            contents=context,
-            config=genai_types.GenerateContentConfig(
-                system_instruction=SYSTEM_PROMPT,
-            ),
-        )
-        analysis   = response.text
-        usage      = response.usage_metadata
-        print(f"  Tokens: input={usage.prompt_token_count}  output={usage.candidates_token_count}")
+        resp = _req.post(url, json=payload, timeout=120)
+        resp.raise_for_status()
+        data     = resp.json()
+        analysis = data["candidates"][0]["content"]["parts"][0]["text"]
+        usage    = data.get("usageMetadata", {})
+        print(f"  Tokens: input={usage.get('promptTokenCount')}  output={usage.get('candidatesTokenCount')}")
     except Exception as e:
         print(f"  Gemini API Fehler für {ticker}: {e}")
         return False
