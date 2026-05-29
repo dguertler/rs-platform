@@ -28,7 +28,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib google-generativeai
+        run: pip install yfinance pandas matplotlib google-genai
 
       - name: RS-Datendateien bereitstellen
         run: |

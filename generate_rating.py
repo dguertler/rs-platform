@@ -416,9 +416,10 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
         return False
 
     try:
-        import google.generativeai as genai
+        from google import genai
+        from google.genai import types as genai_types
     except ImportError:
-        print("  generate_rating: 'google-generativeai' nicht installiert — übersprungen")
+        print("  generate_rating: 'google-genai' nicht installiert — übersprungen")
         return False
 
     print(f"  Generiere Rating für {ticker}...")
@@ -426,13 +427,15 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     fund    = fetch_fundamentals(ticker)
     context = build_context(ticker, fund, rs_score, windows, gws)
 
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash-latest",
-        system_instruction=SYSTEM_PROMPT,
-    )
+    client = genai.Client(api_key=api_key)
     try:
-        response   = model.generate_content(context)
+        response   = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=context,
+            config=genai_types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+            ),
+        )
         analysis   = response.text
         usage      = response.usage_metadata
         print(f"  Tokens: input={usage.prompt_token_count}  output={usage.candidates_token_count}")
