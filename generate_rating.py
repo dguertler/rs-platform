@@ -426,8 +426,8 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
         f"gemini-1.5-flash:generateContent?key={api_key}"
     )
     payload = {
-        "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-        "contents": [{"parts": [{"text": context}]}],
+        "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+        "contents": [{"role": "user", "parts": [{"text": context}]}],
     }
     try:
         resp = _req.post(url, json=payload, timeout=120)
