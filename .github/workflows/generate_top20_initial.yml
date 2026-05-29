@@ -28,7 +28,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib anthropic
+        run: pip install yfinance pandas matplotlib google-generativeai
 
       - name: RS-Datendateien bereitstellen
         run: |
@@ -38,7 +38,7 @@ jobs:
 
       - name: Analysen generieren
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           KEYWORDS=$(echo "${{ github.event.inputs.markets }}" | tr ',' ' ')
           python generate_rating.py $KEYWORDS

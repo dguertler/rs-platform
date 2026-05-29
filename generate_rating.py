@@ -6,7 +6,7 @@ wenn ein Ticker ein 3-Punkte-GWS-Signal erreicht.
 
 Ablauf:
 1. Fundamentaldaten on-demand via yfinance
-2. Claude API (claude-opus-4-7) mit Prompt Caching für den System-Prompt
+2. Gemini Flash API (gemini-2.0-flash) für die KI-Analyse
 3. HTML-Seite generieren → data/ratings/{ticker}.html
 4. data/ratings/index.json aktualisieren
 """
@@ -410,15 +410,15 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     Wird von check_alerts.py und check_4h_reentry.py aufgerufen.
     Gibt True zurück bei Erfolg.
     """
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
-        print(f"  generate_rating: ANTHROPIC_API_KEY nicht gesetzt — übersprungen")
+        print(f"  generate_rating: GEMINI_API_KEY nicht gesetzt — übersprungen")
         return False
 
     try:
-        import anthropic
+        import google.generativeai as genai
     except ImportError:
-        print("  generate_rating: 'anthropic' nicht installiert — übersprungen")
+        print("  generate_rating: 'google-generativeai' nicht installiert — übersprungen")
         return False
 
     print(f"  Generiere Rating für {ticker}...")
@@ -426,24 +426,18 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     fund    = fetch_fundamentals(ticker)
     context = build_context(ticker, fund, rs_score, windows, gws)
 
-    client = anthropic.Anthropic(api_key=api_key)
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(
+        model_name="gemini-2.0-flash",
+        system_instruction=SYSTEM_PROMPT,
+    )
     try:
-        msg = client.messages.create(
-            model="claude-opus-4-7",
-            max_tokens=4096,
-            system=[{
-                "type": "text",
-                "text": SYSTEM_PROMPT,
-                "cache_control": {"type": "ephemeral"},
-            }],
-            messages=[{"role": "user", "content": context}],
-        )
-        analysis   = msg.content[0].text
-        usage      = msg.usage
-        cached     = getattr(usage, "cache_read_input_tokens", 0)
-        print(f"  Tokens: input={usage.input_tokens}  output={usage.output_tokens}  cached={cached}")
+        response   = model.generate_content(context)
+        analysis   = response.text
+        usage      = response.usage_metadata
+        print(f"  Tokens: input={usage.prompt_token_count}  output={usage.candidates_token_count}")
     except Exception as e:
-        print(f"  Claude API Fehler für {ticker}: {e}")
+        print(f"  Gemini API Fehler für {ticker}: {e}")
         return False
 
     rt    = _extract_ratings(analysis)

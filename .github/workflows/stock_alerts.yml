@@ -31,7 +31,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib deep-translator requests anthropic
+        run: pip install yfinance pandas matplotlib deep-translator requests google-generativeai
 
       - name: RS-Datendateien für Script bereitstellen
         run: |
@@ -48,7 +48,7 @@ jobs:
           SMTP_PASS:         ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL_TO:    ${{ secrets.ALERT_EMAIL_TO }}
           ALERT_TEST_MODE:   ${{ github.event.inputs.test_mode == 'ja' && 'true' || 'false' }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
           FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
           TELEGRAM_TOKEN:    ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID:  ${{ secrets.TELEGRAM_CHAT_ID }}
