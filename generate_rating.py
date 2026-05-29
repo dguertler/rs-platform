@@ -428,7 +428,7 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
 
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-1.5-flash-latest",
         system_instruction=SYSTEM_PROMPT,
     )
     try:
