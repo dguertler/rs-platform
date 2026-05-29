@@ -286,10 +286,6 @@ def main():
     smtp_pass = os.environ.get('SMTP_PASS', '')
     to_addr   = os.environ.get('ALERT_EMAIL_TO', '')
 
-    if not all([smtp_host, smtp_user, smtp_pass, to_addr]):
-        print('FEHLER: Bitte SMTP_HOST, SMTP_USER, SMTP_PASS und ALERT_EMAIL_TO setzen.')
-        sys.exit(1)
-
     today_str = datetime.now().strftime('%Y-%m-%d')
     now_str   = datetime.now().strftime('%Y-%m-%d %H:%M')
     mode_label = f'  [TEST: {test_ticker}]' if test_ticker else ''
@@ -312,7 +308,8 @@ def main():
         if entry is None:
             # Ticker nicht in den RS-Daten: trotzdem 4H-Daten holen, Source=QQQ annehmen
             print(f'  [TEST] {test_ticker} nicht in RS-Daten gefunden – versuche QQQ')
-            _, top20_set, source = source_cache.get('QQQ', ({}, set(), 'QQQ'))
+            _qqq_data = source_cache.get('QQQ', ({}, set()))
+            _, top20_set = _qqq_data
             source = 'QQQ'
             entries_fallback = {}
         else:
@@ -339,11 +336,15 @@ def main():
 
         for cand in candidates:
             entries, top20_set = source_cache.get(cand['source'], ({}, set()))
-            alert = check_one_ticker(
-                cand['ticker'], cand['source'],
-                entries, top20_set, signals, alerted, today_str,
-                test_mode=False
-            )
+            try:
+                alert = check_one_ticker(
+                    cand['ticker'], cand['source'],
+                    entries, top20_set, signals, alerted, today_str,
+                    test_mode=False
+                )
+            except Exception as _e:
+                print(f'  {cand["ticker"]}: Analyse-Fehler (übersprungen): {_e}')
+                alert = None
             if alert:
                 alerts.append(alert)
 
@@ -352,6 +353,10 @@ def main():
         return
 
     # Mail senden
+    if not all([smtp_host, smtp_user, smtp_pass, to_addr]):
+        print('FEHLER: SMTP nicht konfiguriert – Alert-Mail kann nicht gesendet werden.')
+        sys.exit(1)
+
     is_test     = any(a.get('_test_mode') for a in alerts)
     date_label  = datetime.now().strftime('%d.%m.%Y')
     subject = (
