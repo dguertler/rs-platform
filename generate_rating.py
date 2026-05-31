@@ -102,7 +102,31 @@ nicht verwenden, nicht erwähnen, nicht in die Analyse einbeziehen.
 Keine Kennzahlen erfinden oder aus dem Kontext ableiten.
 Neu gelistete Ticker oder Spin-offs können unvollständige TTM-Daten
 haben — dies explizit im Investment-Case erwähnen wenn mehr als 3
-Felder N/A oder UNGÜLTIG sind."""
+Felder N/A oder UNGÜLTIG sind.
+
+STRUKTURELLE GESCHÄFTSMODELL-ANALYSE
+Im Investment-Case explizit prüfen ob strukturelle
+Geschäftsmodell-Veränderungen die Zyklus-These abschwächen
+oder widerlegen — z.B. langfristige Lieferverträge,
+Multi-Year-Abnahmevereinbarungen oder strategische
+Partnerschaften mit Hyperscalern. Falls solche Strukturen
+aus den Fundamentaldaten oder dem Marktkontext erkennbar
+sind, müssen sie bewertet werden: Verändern sie das
+Risikoprofil fundamental oder sind sie zyklisch überlagert?
+
+WAHRSCHEINLICHKEITEN
+Bull Case + Base Case + Bear Case müssen zusammen exakt 100%
+ergeben. Keine unzugeordneten Restwahrscheinlichkeiten.
+Alle drei Wahrscheinlichkeiten explizit ausweisen.
+
+BASE CASE DEFINITION
+Base Case = wahrscheinlichstes Szenario auf Sicht 12–18 Monate
+unter aktuellen Marktbedingungen — nicht das rechnerische
+Mittel zwischen Bull und Bear. Das Kursziel im Base Case muss
+konsistent mit der zugehörigen Wahrscheinlichkeit sein:
+Ein Base Case mit negativem Kurspotenzial von über 30% vom
+aktuellen Kurs ist definitorisch kein Base Case sondern
+ein Bear Case. Entsprechend neu einordnen."""
 
 
 # ── Fundamentaldaten ──────────────────────────────────────────────────────────
