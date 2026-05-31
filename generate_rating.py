@@ -423,7 +423,7 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     import requests as _req
     url = (
         "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-1.5-flash:generateContent?key={api_key}"
+        f"gemini-2.5-flash:generateContent?key={api_key}"
     )
     payload = {
         "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
