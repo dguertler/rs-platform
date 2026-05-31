@@ -171,13 +171,13 @@ def fetch_fundamentals(ticker: str) -> dict:
 
 
 def _pct(v):
-    return f"{v * 100:.1f}%" if v is not None else "N/A"
+    return f"{v * 100:.1f}%" if isinstance(v, (int, float)) else "N/A" if v is None else str(v)
 
 def _bn(v):
-    return f"${v / 1e9:.2f} Mrd." if v is not None else "N/A"
+    return f"${v / 1e9:.2f} Mrd." if isinstance(v, (int, float)) else "N/A" if v is None else str(v)
 
 def _fmt(v):
-    return str(round(v, 2)) if v is not None else "N/A"
+    return str(round(v, 2)) if isinstance(v, (int, float)) else "N/A" if v is None else str(v)
 
 
 def build_context(ticker: str, fund: dict, rs_score: float, windows: dict, gws: dict) -> str:
