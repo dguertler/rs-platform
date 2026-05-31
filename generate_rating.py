@@ -90,15 +90,57 @@ FORMATIERUNGS-REGELN
 - MAX. 1000 Wörter gesamt
 - Sprache: DEUTSCH
 - Keine horizontalen Trennlinien
-- Konkrete Zahlen > vage Formulierungen — wo immer möglich"""
+- Konkrete Zahlen > vage Formulierungen — wo immer möglich
+
+DATENVERFÜGBARKEIT
+Fehlende oder als "N/A" markierte Kennzahlen nicht interpolieren oder
+schätzen. Explizit als "nicht verfügbar" kennzeichnen und die Analyse
+entsprechend einschränken.
+Als "UNGÜLTIG (Wert)" markierte Kennzahlen sind yfinance-Artefakte —
+nicht verwenden, nicht erwähnen, nicht in die Analyse einbeziehen.
+Keine Kennzahlen erfinden oder aus dem Kontext ableiten.
+Neu gelistete Ticker oder Spin-offs können unvollständige TTM-Daten
+haben — dies explizit im Investment-Case erwähnen wenn mehr als 3
+Felder N/A oder UNGÜLTIG sind."""
 
 
 # ── Fundamentaldaten ──────────────────────────────────────────────────────────
 
+PLAUSIBILITY = {
+    "grossMargins":     (0.0, 1.0),
+    "operatingMargins": (-1.0, 1.0),
+    "profitMargins":    (-1.0, 1.0),
+    "returnOnEquity":   (-5.0, 10.0),
+    "debtToEquity":     (0.0, 2000.0),
+    "trailingPE":       (0.0, 2000.0),
+    "forwardPE":        (0.0, 500.0),
+    "revenueGrowth":    (-1.0, 50.0),
+    "beta":             (-3.0, 10.0),
+}
+
+def validate_fundamentals(data: dict) -> dict:
+    cleaned = {}
+    for key, value in data.items():
+        if value is None:
+            cleaned[key] = "N/A"
+            continue
+        if key in PLAUSIBILITY:
+            try:
+                lo, hi = PLAUSIBILITY[key]
+                if not (lo <= float(value) <= hi):
+                    cleaned[key] = f"UNGÜLTIG ({value})"
+                    continue
+            except (TypeError, ValueError):
+                cleaned[key] = "N/A"
+                continue
+        cleaned[key] = value
+    return cleaned
+
+
 def fetch_fundamentals(ticker: str) -> dict:
     try:
         info = yf.Ticker(ticker).info or {}
-        return {
+        raw = {
             "shortName":        info.get("shortName", ticker),
             "sector":           info.get("sector", "N/A"),
             "industry":         info.get("industry", "N/A"),
@@ -122,6 +164,7 @@ def fetch_fundamentals(ticker: str) -> dict:
             "recommendationKey":info.get("recommendationKey"),
             "targetMeanPrice":  info.get("targetMeanPrice"),
         }
+        return validate_fundamentals(raw)
     except Exception as e:
         print(f"  Fundamentaldaten für {ticker} fehlgeschlagen: {e}")
         return {}
