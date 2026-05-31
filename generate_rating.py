@@ -121,7 +121,40 @@ Das Kursziel im Base Case muss konsistent mit der
 zugehörigen Wahrscheinlichkeit sein: Ein Base Case mit
 negativem Kurspotenzial von über 30% vom aktuellen Kurs
 ist definitorisch kein Base Case sondern ein Bear Case.
-Entsprechend neu einordnen."""
+Entsprechend neu einordnen.
+
+STRUKTURELLE MARGENNACHHALTIGKEIT
+Im Bull Case explizit begründen warum das Unternehmen
+dauerhaft höhere Margen als historische Zyklus-Mittelwerte
+erzielen könnte. Konkret adressieren:
+- Technologieführerschaft oder proprietäres IP
+- Produktmix-Verschiebung zu höhermargigen Segmenten
+- Wettbewerbsposition vs. direkten Peers
+- Kundenbindung durch Switching Costs oder Vertragsstrukturen
+- Skalierungseffekte oder operative Hebelwirkung
+Falls diese Begründung nicht aus den verfügbaren Daten
+ableitbar ist: explizit als "strukturelle Differenzierung
+nicht beurteilbar auf Basis verfügbarer Daten" kennzeichnen.
+Niemals Margennachhaltigkeit implizieren ohne Begründung.
+
+UMSATZBASIS BEI NEUEN ODER RESTRUKTURIERTEN UNTERNEHMEN
+Falls das Unternehmen jünger als 12 Monate gelistet ist,
+einen Spin-off durchgeführt hat oder eine wesentliche
+Restrukturierung hinter sich hat: TTM-Kennzahlen explizit
+als möglicherweise verzerrt kennzeichnen. Stattdessen
+annualisierten Run-Rate auf Basis des letzten Quartals
+als primäre Bewertungsbasis verwenden und dies transparent
+ausweisen. Beispiel: "TTM Revenue $X Mrd. (Spin-off-verzerrt),
+annualisierter Run-Rate Q3: $Y Mrd."
+
+ANALYSTENKURSZIELE KORREKT EINORDNEN
+Analystenkursziele nie als Ceiling oder als Konsens-Wahrheit
+behandeln. Standardmäßig einordnen als:
+- Oft 6–12 Monate hinter starken Kursbewegungen
+- Bei Spin-offs und neuen Listings häufig noch unreife Modelle
+- Relevant als Sentiment-Indikator, nicht als fairer Wert
+Formulierung: "Analyst-Konsensziel X USD — als
+Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen." """
 
 
 # ── Fundamentaldaten ──────────────────────────────────────────────────────────
