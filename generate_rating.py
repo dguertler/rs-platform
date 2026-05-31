@@ -53,31 +53,33 @@ Max. 6–8 Sätze. Was ist die eigentliche Story hinter der Aktie — nicht das 
 Max. 8–10 Bullet Points mit -. Keine Selbstverständlichkeiten. Fokus auf: Wie verdient das Unternehmen wirklich Geld? Wo liegt der operative Hebel? Wo liegt die strukturelle Abhängigkeit?
 
 ## 3. BULL CASE
-Konkret und quantifiziert wo möglich. Welche spezifischen Faktoren müssen eintreten? Nenne reale Datenpunkte, Analystenziele oder strukturelle Argumente. Abschließend: Eintrittswahrscheinlichkeit in Prozent nennen.
+Konkret und quantifiziert wo möglich. Welche spezifischen Faktoren müssen eintreten? Nenne reale Datenpunkte, Analystenziele oder strukturelle Argumente. Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
 
-## 4. BEAR CASE
-Gleiche Tiefe wie Bull Case. Welches Szenario zerstört die These? Nenne den konkreten Auslöser — nicht nur "Zyklus dreht". Was passiert mit der Bewertung in diesem Fall? Eintrittswahrscheinlichkeit in Prozent nennen.
+## 4. BASE CASE
+Wahrscheinlichstes Szenario auf Sicht 12–18 Monate unter aktuellen Marktbedingungen — nicht das rechnerische Mittel zwischen Bull und Bear. Kursziel-Bandbreite angeben. Eintrittswahrscheinlichkeit in Prozent nennen.
 
-## 5. FUNDAMENTALE QUALITÄT
+## 5. BEAR CASE
+Gleiche Tiefe wie Bull Case. Welches Szenario zerstört die These? Nenne den konkreten Auslöser — nicht nur "Zyklus dreht". Was passiert mit der Bewertung in diesem Fall? Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
+
+Bull + Base + Bear müssen exakt 100% ergeben — Summe am Ende von Abschnitt 5 ausweisen.
+
+## 6. FUNDAMENTALE QUALITÄT
 Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig: Bewerte die Kennzahlen im Zykluskontext — Top-of-Cycle-Zahlen anders gewichten als normalisierte Werte. Wo liegt der echte wirtschaftliche Burggraben, wo ist er nur scheinbar?
 
-## 6. BEWERTUNG
+## 7. BEWERTUNG
 Niemals eine zyklische Aktie nur anhand des aktuellen KGVs bewerten. Pflicht: Bewertung über normalisierten FCF über den vollen Zyklus oder KBV. Zusätzlich Forward-Multiples und was der Markt damit implizit aussagt. Ist die aktuelle Bewertung eine Value-Falle, eine strukturierte Wette oder echtes Upside?
 
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 Wie ist die institutionelle Positionierung aktuell? Short Float, Fast Money vs. Long Only, FOMO-Dynamik. Was muss künftig passieren, damit neue Käufer anziehen? Wo liegt das Enttäuschungsrisiko?
 
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 Trendstruktur, SMA-Stellung, RSI, Volumen. Ist das Momentum fundamental gestützt oder rein reaktiv? Was wäre ein technisches Warnsignal?
 
-## 9. LANGFRISTIGES POTENZIAL (3–5 Jahre)
-Drei explizite Szenarien mit Kurszielbandbreiten: Base Case / Bull Case / Bear Case. Was ist die entscheidende Variable, die zwischen den Szenarien unterscheidet?
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-Max. 3–4 direkte Peers. Fokus auf: Wer hat den stärkeren Burggraben? Wer ist das reinere Instrument für die jeweilige These? Wo ist die Bewertung relativ am attraktivsten?
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
+Drei explizite Szenarien mit Kurszielbandbreiten: Bull / Base / Bear. Was ist die entscheidende Variable, die zwischen den Szenarien unterscheidet?
 
 ## 11. PROFI-FAZIT
-Klare Positionierung: Ist das ein Buy-and-Hold-Compounder, ein zyklischer Trading-Trade oder ein High-Conviction-Momentum-Play? Für welchen Investorentyp geeignet? Explizite Risikowarnung zur Positionsgröße wenn relevant. Kein Herumdrucksen — klare Aussage.
+Klare Positionierung: Ist das ein Buy-and-Hold-Compounder, ein zyklischer Trading-Trade oder ein High-Conviction-Momentum-Play? Für welchen Investorentyp geeignet? Explizite Risikowarnung zur Positionsgröße wenn relevant. Kein Herumdrucksen — klare Aussage. Max. 2–3 direkte Peers nennen: Wer ist das reinere Instrument für die These, wo ist die relative Bewertung attraktiver?
 
 Rating (Zahl, nicht Sterne):
 - Qualität: X/5
@@ -114,19 +116,12 @@ aus den Fundamentaldaten oder dem Marktkontext erkennbar
 sind, müssen sie bewertet werden: Verändern sie das
 Risikoprofil fundamental oder sind sie zyklisch überlagert?
 
-WAHRSCHEINLICHKEITEN
-Bull Case + Base Case + Bear Case müssen zusammen exakt 100%
-ergeben. Keine unzugeordneten Restwahrscheinlichkeiten.
-Alle drei Wahrscheinlichkeiten explizit ausweisen.
-
-BASE CASE DEFINITION
-Base Case = wahrscheinlichstes Szenario auf Sicht 12–18 Monate
-unter aktuellen Marktbedingungen — nicht das rechnerische
-Mittel zwischen Bull und Bear. Das Kursziel im Base Case muss
-konsistent mit der zugehörigen Wahrscheinlichkeit sein:
-Ein Base Case mit negativem Kurspotenzial von über 30% vom
-aktuellen Kurs ist definitorisch kein Base Case sondern
-ein Bear Case. Entsprechend neu einordnen."""
+BASE CASE VALIDIERUNG
+Das Kursziel im Base Case muss konsistent mit der
+zugehörigen Wahrscheinlichkeit sein: Ein Base Case mit
+negativem Kurspotenzial von über 30% vom aktuellen Kurs
+ist definitorisch kein Base Case sondern ein Bear Case.
+Entsprechend neu einordnen."""
 
 
 # ── Fundamentaldaten ──────────────────────────────────────────────────────────
