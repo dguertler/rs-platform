@@ -19,7 +19,8 @@ from pathlib import Path
 
 import yfinance as yf
 
-RATINGS_DIR = Path("data/ratings")
+RATINGS_DIR  = Path("data/ratings")
+ANALYSES_DIR = Path("analyses")
 
 # ── System-Prompt (wird gecacht — spart ~90% Input-Token-Kosten) ─────────────
 
@@ -168,6 +169,21 @@ def fetch_fundamentals(ticker: str) -> dict:
     except Exception as e:
         print(f"  Fundamentaldaten für {ticker} fehlgeschlagen: {e}")
         return {}
+
+
+def load_fundamentals(ticker: str) -> dict:
+    """Lädt Fundamentaldaten aus data/fundamentals.json; Fallback auf live yfinance."""
+    p = Path("data/fundamentals.json")
+    if p.exists():
+        with open(p, encoding="utf-8") as f:
+            cached = json.load(f)
+        fund = cached.get("tickers", {}).get(ticker.upper())
+        if fund:
+            updated = cached.get("updated_at", "unbekannt")[:10]
+            print(f"  Fundamentaldaten aus Cache ({updated})")
+            return fund
+    print(f"  {ticker} nicht in fundamentals.json — live fetch via yfinance...")
+    return fetch_fundamentals(ticker)
 
 
 def _pct(v):
@@ -424,6 +440,58 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
 </html>'''
 
 
+# ── Markdown-Generierung ─────────────────────────────────────────────────────
+
+def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws: dict) -> str:
+    today      = datetime.now().strftime("%d.%m.%Y")
+    short_name = fund.get("shortName", ticker)
+    sector     = fund.get("sector",    "N/A")
+    sig_type   = gws.get("signal_type", "Breakout")
+
+    rt = _extract_ratings(analysis_text)
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
+    score = round((q + g + v + p) / 20 * 100)
+    verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
+
+    gws_weekly = "✓ Aktiv" if gws.get("weekly") else "✗ Inaktiv"
+    gws_daily  = "✓ Aktiv" if gws.get("daily")  else "✗ Inaktiv"
+    gws_h4     = "✓ Aktiv" if gws.get("h4")     else "✗ Inaktiv"
+
+    return f"""# {ticker} — KI-Aktienbewertung
+
+**{short_name}** · {sector} · {today} · Signal: {sig_type}
+
+| Kennzahl | Wert |
+|---|---|
+| Kurs | {_fmt(fund.get('currentPrice'))} |
+| Market Cap | {_bn(fund.get('marketCap'))} |
+| Forward PE | {_fmt(fund.get('forwardPE'))} |
+| Revenue (TTM) | {_bn(fund.get('totalRevenue'))} |
+| Gross Margin | {_pct(fund.get('grossMargins'))} |
+| ROE | {_pct(fund.get('returnOnEquity'))} |
+| RS-Score | {rs_score:.1f} |
+
+**GWS-Ampel:** Weekly {gws_weekly} · Daily {gws_daily} · 4H {gws_h4}
+
+---
+
+{analysis_text}
+
+---
+
+| Rating | Score |
+|---|---|
+| Qualität | {q}/5 |
+| Wachstum | {g}/5 |
+| Bewertung | {v}/5 |
+| Langfristiges Potenzial | {p}/5 |
+
+**Verdict: {verd} ({score}/100)**
+
+*Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
+"""
+
+
 # ── Index-Verwaltung ──────────────────────────────────────────────────────────
 
 def load_index() -> dict:
@@ -440,56 +508,34 @@ def save_index(data: dict):
         json.dump(data, f, indent=2)
 
 
-# ── Haupt-Funktion ────────────────────────────────────────────────────────────
+# ── Datei-Schreiber (wird von Claude Code nach Analyse-Generierung aufgerufen) ─
 
-def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) -> bool:
+def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict, gws: dict):
     """
-    Generiert eine KI-Analyse für einen Breakout-Ticker.
-    Wird von check_alerts.py und check_4h_reentry.py aufgerufen.
-    Gibt True zurück bei Erfolg.
+    Schreibt HTML + Markdown und aktualisiert den Index.
+    Wird von Claude Code aufgerufen, nachdem die Analyse generiert wurde.
+    Kein LLM-Call — analysis_text kommt direkt von Claude Code.
     """
-    api_key = os.environ.get("GEMINI_API_KEY")
-    if not api_key:
-        print(f"  generate_rating: GEMINI_API_KEY nicht gesetzt — übersprungen")
-        return False
+    fund = load_fundamentals(ticker)
 
-    print(f"  Generiere Rating für {ticker}...")
-
-    fund    = fetch_fundamentals(ticker)
-    context = build_context(ticker, fund, rs_score, windows, gws)
-
-    import requests as _req
-    url = (
-        "https://generativelanguage.googleapis.com/v1beta/models/"
-        f"gemini-2.5-flash:generateContent?key={api_key}"
-    )
-    payload = {
-        "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-        "contents": [{"role": "user", "parts": [{"text": context}]}],
-    }
-    try:
-        resp = _req.post(url, json=payload, timeout=120)
-        resp.raise_for_status()
-        data     = resp.json()
-        analysis = data["candidates"][0]["content"]["parts"][0]["text"]
-        usage    = data.get("usageMetadata", {})
-        print(f"  Tokens: input={usage.get('promptTokenCount')}  output={usage.get('candidatesTokenCount')}")
-    except Exception as e:
-        print(f"  Gemini API Fehler für {ticker}: {e}")
-        return False
-
-    rt    = _extract_ratings(analysis)
+    rt    = _extract_ratings(analysis_text)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
     score = round((q + g + v + p) / 20 * 100)
     verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
 
-    html = build_html(ticker, fund, analysis, rs_score, gws)
+    html = build_html(ticker, fund, analysis_text, rs_score, gws)
 
     RATINGS_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RATINGS_DIR / f"{_safe_name(ticker)}.html"
     with open(out_path, "w", encoding="utf-8") as f:
         f.write(html)
     print(f"  Gespeichert: {out_path}")
+
+    ANALYSES_DIR.mkdir(parents=True, exist_ok=True)
+    md_path = ANALYSES_DIR / f"{_safe_name(ticker)}.md"
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write(build_markdown(ticker, fund, analysis_text, rs_score, gws))
+    print(f"  Gespeichert: {md_path}")
 
     idx = load_index()
     idx["ratings"] = [r for r in idx["ratings"] if r.get("ticker", "").upper() != ticker.upper()]
@@ -502,7 +548,11 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     save_index(idx)
     print(f"  Index aktualisiert: {len(idx['ratings'])} Rating(s)")
 
-    return True
+
+def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) -> bool:
+    """Stub für check_alerts.py / check_4h_reentry.py — Ratings werden manuell via Claude Code generiert."""
+    print(f"  generate_rating: Ratings werden manuell via Claude Code generiert — übersprungen")
+    return False
 
 
 if __name__ == "__main__":
@@ -510,35 +560,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         print("Verwendung: python generate_rating.py TICKER [TICKER2 ...]")
-        sys.exit(1)
-
-    # Spezial-Keywords in echte Ticker-Listen expandieren
-    KEYWORDS = {
-        "DAX_TOP20":     ("data/rs_dax.json",   "rs_dax.json",   20),
-        "SP500_TOP20":   ("data/rs_sp500.json",  "rs_sp500.json", 20),
-        "NASDAQ_TOP20":  ("data/rs_full.json",   "rs_full.json",  20),
-    }
-
-    raw_args = [t.upper() for t in sys.argv[1:]]
-    tickers = []
-    for arg in raw_args:
-        if arg in KEYWORDS:
-            paths = KEYWORDS[arg]
-            for fname in (paths[0], paths[1]):
-                if Path(fname).exists():
-                    with open(fname) as f:
-                        entries = json.load(f).get("data", [])
-                    expanded = [e["ticker"].upper() for e in entries[:paths[2]]]
-                    print(f"  {arg} → {expanded}")
-                    tickers.extend(expanded)
-                    break
-            else:
-                print(f"  Warnung: Datei für {arg} nicht gefunden")
-        else:
-            tickers.append(arg)
-
-    if not tickers:
-        print("Keine Ticker gefunden.")
+        print()
+        print("Gibt den formatierten Analyse-Kontext für Claude Code aus.")
+        print("Claude Code generiert daraus die Analyse und ruft write_rating() auf.")
         sys.exit(1)
 
     # RS-Daten aller verfügbaren Dateien laden (Score + Windows)
@@ -551,7 +575,7 @@ if __name__ == "__main__":
                 for entry in json.load(f).get("data", []):
                     rs_data[entry["ticker"].upper()] = entry
 
-    print(f"RS-Daten geladen: {len(rs_data)} Einträge")
+    tickers = [t.upper() for t in sys.argv[1:]]
 
     for ticker in tickers:
         entry    = rs_data.get(ticker, {})
@@ -564,5 +588,9 @@ if __name__ == "__main__":
             "points":      3,
             "signal_type": "Manuell generiert",
         }
-        ok = generate_for_ticker(ticker, rs_score, windows, gws)
-        print(f"  {ticker}: {'OK' if ok else 'FEHLER'}")
+        fund    = load_fundamentals(ticker)
+        context = build_context(ticker, fund, rs_score, windows, gws)
+        print("=" * 60)
+        print(context)
+        print("=" * 60)
+        print()
