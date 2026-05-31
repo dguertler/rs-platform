@@ -1,0 +1,39 @@
+name: Fundamentaldaten wöchentlich fetchen
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '30 3 * * 1'   # Jeden Montag 03:30 UTC (nach RS-Updates ab 01:00)
+  workflow_dispatch:         # Manuell auslösbar
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance
+
+      - name: Fundamentaldaten fetchen
+        run: python fetch_fundamentals.py
+
+      - name: Ergebnisse committen und pushen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/fundamentals.json
+          git diff --staged --quiet || git commit -m "Fundamentaldaten aktualisiert ($(date -u '+%Y-%m-%d'))"
+          git pull --rebase origin master
+          git push origin master
