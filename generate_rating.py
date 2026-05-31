@@ -19,7 +19,6 @@ from pathlib import Path
 
 import yfinance as yf
 
-MODEL       = "claude-sonnet-4-20250514"
 RATINGS_DIR  = Path("data/ratings")
 ANALYSES_DIR = Path("analyses")
 
@@ -509,45 +508,22 @@ def save_index(data: dict):
         json.dump(data, f, indent=2)
 
 
-# ── Haupt-Funktion ────────────────────────────────────────────────────────────
+# ── Datei-Schreiber (wird von Claude Code nach Analyse-Generierung aufgerufen) ─
 
-def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) -> bool:
+def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict, gws: dict):
     """
-    Generiert eine KI-Analyse für einen Breakout-Ticker.
-    Wird von check_alerts.py und check_4h_reentry.py aufgerufen.
-    Gibt True zurück bei Erfolg.
+    Schreibt HTML + Markdown und aktualisiert den Index.
+    Wird von Claude Code aufgerufen, nachdem die Analyse generiert wurde.
+    Kein LLM-Call — analysis_text kommt direkt von Claude Code.
     """
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key:
-        print(f"  generate_rating: ANTHROPIC_API_KEY nicht gesetzt — übersprungen")
-        return False
+    fund = load_fundamentals(ticker)
 
-    print(f"  Generiere Rating für {ticker}...")
-
-    fund    = load_fundamentals(ticker)
-    context = build_context(ticker, fund, rs_score, windows, gws)
-
-    import anthropic as _anthropic
-    client = _anthropic.Anthropic(api_key=api_key)
-    try:
-        msg = client.messages.create(
-            model=MODEL,
-            max_tokens=2048,
-            system=SYSTEM_PROMPT,
-            messages=[{"role": "user", "content": context}],
-        )
-        analysis = msg.content[0].text
-        print(f"  Tokens: input={msg.usage.input_tokens}  output={msg.usage.output_tokens}")
-    except Exception as e:
-        print(f"  Claude API Fehler für {ticker}: {e}")
-        return False
-
-    rt    = _extract_ratings(analysis)
+    rt    = _extract_ratings(analysis_text)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
     score = round((q + g + v + p) / 20 * 100)
     verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
 
-    html = build_html(ticker, fund, analysis, rs_score, gws)
+    html = build_html(ticker, fund, analysis_text, rs_score, gws)
 
     RATINGS_DIR.mkdir(parents=True, exist_ok=True)
     out_path = RATINGS_DIR / f"{_safe_name(ticker)}.html"
@@ -558,7 +534,7 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     ANALYSES_DIR.mkdir(parents=True, exist_ok=True)
     md_path = ANALYSES_DIR / f"{_safe_name(ticker)}.md"
     with open(md_path, "w", encoding="utf-8") as f:
-        f.write(build_markdown(ticker, fund, analysis, rs_score, gws))
+        f.write(build_markdown(ticker, fund, analysis_text, rs_score, gws))
     print(f"  Gespeichert: {md_path}")
 
     idx = load_index()
@@ -572,7 +548,11 @@ def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) 
     save_index(idx)
     print(f"  Index aktualisiert: {len(idx['ratings'])} Rating(s)")
 
-    return True
+
+def generate_for_ticker(ticker: str, rs_score: float, windows: dict, gws: dict) -> bool:
+    """Stub für check_alerts.py / check_4h_reentry.py — Ratings werden manuell via Claude Code generiert."""
+    print(f"  generate_rating: Ratings werden manuell via Claude Code generiert — übersprungen")
+    return False
 
 
 if __name__ == "__main__":
@@ -580,35 +560,9 @@ if __name__ == "__main__":
 
     if len(sys.argv) < 2:
         print("Verwendung: python generate_rating.py TICKER [TICKER2 ...]")
-        sys.exit(1)
-
-    # Spezial-Keywords in echte Ticker-Listen expandieren
-    KEYWORDS = {
-        "DAX_TOP20":     ("data/rs_dax.json",   "rs_dax.json",   20),
-        "SP500_TOP20":   ("data/rs_sp500.json",  "rs_sp500.json", 20),
-        "NASDAQ_TOP20":  ("data/rs_full.json",   "rs_full.json",  20),
-    }
-
-    raw_args = [t.upper() for t in sys.argv[1:]]
-    tickers = []
-    for arg in raw_args:
-        if arg in KEYWORDS:
-            paths = KEYWORDS[arg]
-            for fname in (paths[0], paths[1]):
-                if Path(fname).exists():
-                    with open(fname) as f:
-                        entries = json.load(f).get("data", [])
-                    expanded = [e["ticker"].upper() for e in entries[:paths[2]]]
-                    print(f"  {arg} → {expanded}")
-                    tickers.extend(expanded)
-                    break
-            else:
-                print(f"  Warnung: Datei für {arg} nicht gefunden")
-        else:
-            tickers.append(arg)
-
-    if not tickers:
-        print("Keine Ticker gefunden.")
+        print()
+        print("Gibt den formatierten Analyse-Kontext für Claude Code aus.")
+        print("Claude Code generiert daraus die Analyse und ruft write_rating() auf.")
         sys.exit(1)
 
     # RS-Daten aller verfügbaren Dateien laden (Score + Windows)
@@ -621,7 +575,7 @@ if __name__ == "__main__":
                 for entry in json.load(f).get("data", []):
                     rs_data[entry["ticker"].upper()] = entry
 
-    print(f"RS-Daten geladen: {len(rs_data)} Einträge")
+    tickers = [t.upper() for t in sys.argv[1:]]
 
     for ticker in tickers:
         entry    = rs_data.get(ticker, {})
@@ -634,5 +588,9 @@ if __name__ == "__main__":
             "points":      3,
             "signal_type": "Manuell generiert",
         }
-        ok = generate_for_ticker(ticker, rs_score, windows, gws)
-        print(f"  {ticker}: {'OK' if ok else 'FEHLER'}")
+        fund    = load_fundamentals(ticker)
+        context = build_context(ticker, fund, rs_score, windows, gws)
+        print("=" * 60)
+        print(context)
+        print("=" * 60)
+        print()
