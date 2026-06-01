@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>F — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>F</h1>
+      <h2>Ford Motor Company</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Auto Manufacturers</span></div>
+        <div class="mi">MCap: <span>$69B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">148.1</span></div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$17.44</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$189.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">7.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">344.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-14.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Ford Motor Company ist kein klassisches Automobil-Investment mehr — es ist eine intern zerrissene Drei-Segment-Wette. Ford Pro (Nutzfahrzeuge, Transit, F-Series Commercial) ist ein hochprofitables Geschäft mit starker Pricing Power. Ford Blue (ICE-Privatkundenwagen) schrumpft strukturell. Ford Model e (EV) verbrennt jährlich mehrere Milliarden Dollar Kapital. Der strukturelle Kern: Ford hat das rentabelste Nutzfahrzeugportfolio in Nordamerika, finanziert aber damit den kostspieligsten EV-Turnaround der Branche. Was der Markt gerade einpreist: Die Rally von 9,88 auf 17,44 USD reflektiert primär Zoll-Narrativ-Entspannung (USMCA-Compliance bei F-Series) und Makro-Rotation in zyklische Substanzwerte — weniger fundamentale Verbesserung. Das Analyst-Konsensziel 14,05 USD liegt deutlich unter dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; zeigt aber dass die Coverage die Rally als überschossen betrachtet. Negativer FCF und negatives Net Margin TTM sind strukturelle Warnzeichen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Ford Pro: Nutzfahrzeuge (F-Series, Transit, Transit Connect) — profitabelster Bereich, starke Fleet-Kundenbindung, Wartungsverträge und Software-Dienste als wachsende Ertragsquelle</li>
+<li>Ford Blue: ICE-Privatkundenwagen (Mustang, Explorer, Bronco) — stabile Cashcow, strukturell rückläufig</li>
+<li>Ford Model e: EV-Segment — verlustbringend, operative Verluste im Mrd.-USD-Bereich, Zukunftsoption ohne heutigen Ertrag</li>
+<li>Ford Credit (Finanzierungsarm): Wesentlicher Ergebnisbeitrag, erklärt strukturell hohe D/E-Quote (425x) — für Auto-OEMs mit Finanzierungsarm normal</li>
+<li>Revenue $189,9 Mrd. TTM — Revenue-Wachstum 6,4% YoY, aber negativer FCF ($-2,25 Mrd.) zeigt: Wachstum ist kapitalintensiv</li>
+<li>Dividende 3,44% — bei negativem FCF nicht aus dem operativen Cashflow gedeckt, Risiko bei Cashflow-Verschlechterung</li>
+<li>Abhängigkeit: USMCA-Zollstruktur, Stahlpreise, Consumer-Kreditqualität (Ford Credit), EV-Batterie-Versorgungskette</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Ford Pro skaliert weiter: Fleet-Software-Services und E-Transit-Abonnements schaffen wiederkehrende Umsätze mit höheren Margen. Ford restrukturiert Model e aggressiv (Stellenabbau, Plattformkonsolidierung) und reduziert EV-Verluste auf unter 1 Mrd. USD p.a. bis Ende 2026. Zollentlastung für USMCA-Fahrzeuge hält. FCF dreht positiv. Kursziel $20–24, Rerate auf 12x Forward-PE. Strukturelle Margennachhaltigkeit im Bull Case: Ford Pro hat durch Fleet-Software (Ford Pro Intelligence) und Wartungsverträge einen wachsenden strukturellen Margenhebel der über den Zyklus hinaus trägt. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Ford Pro bleibt profitabel, Model-e-Verluste bleiben erhöht, FCF negativ bis leicht positiv. Makrozyklus für US-Autos moderat — kein Boom, keine Rezession. Aktie handelt in der Spanne $13–18, gestützt durch Dividende und Ford-Pro-Ergebnisse. Fundamentale Aufholjagd zur aktuellen Bewertung ($17,44) ist begrenzt. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>US-Konsumenten kreditieren sich in Rezession aus: Ford-Credit-Ausfälle steigen, FCF verschlechtert sich deutlich. EV-Verluste bleiben unkontrolliert hoch. Dividende wird gekürzt (Trigger für institutionelle Verkäufer). Zollrisiken bei Mexico-Produktion eskalieren. Kursziel $8–11, unter 1x Buchwert. Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Bull 20% + Base 45% + Bear 35% = 100%</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 7,1% ist automobiltypisch dünn — kein struktureller Burggraben. Operating Margin 5,7% unter Druck durch EV-Verluste. Net Margin -3,2% TTM — Unternehmen macht unter dem Strich Verlust. FCF -2,25 Mrd. USD ist das kritischste Signal: Kapitalintensives Wachstum ohne Cashflow-Deckung. ROE -14,8% negativ. D/E 425 enthält Ford Credit (Finanzierungsarm) — bei Herausrechnung des Finanzarms ist die operative Bilanz deutlich gesünder, bleibt aber gehebelt. Dividende 3,44% wird nicht durch FCF gedeckt — strukturelles Risiko. Echter Burggraben: F-Series-Marktführerschaft in US-Pickups (seit 47 Jahren meistverkauftes Fahrzeug USA), nicht replizierbar durch neue Marktteilnehmer.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE nicht verfügbar (negatives EPS). Forward PE 9,5x suggeriert günstige Bewertung — aber nur wenn Earnings-Normalisierung eintritt. Normalisierter FCF über den vollen Automobilzyklus geschätzt bei 1–3 Mrd. USD (wenn Model-e-Verluste kontrolliert werden) — ergibt FCF-KGV 23–70x auf aktuellem Niveau, kein klassisches Value. P/B 1,86x ist günstig relativ zu Tech, aber für einen Verlust machenden Autobauer ohne FCF-Deckung keine Sicherheitsmarge. Analyst-Konsensziel $14,05 — erheblich unter dem aktuellen Kurs von $17,44. Aktuelle Bewertung: Momentum-Trade auf Makro-Rotation und Zoll-Narrativ, kein fundamentales Upside.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Ford hat in 20T +43,8% zugelegt — ein Momentum-Move der primär durch Makro-Narrative (Zoll-Entspannung, zyklische Rotation, Short-Squeezes in auto-lastige ETFs) getrieben wurde. Institutionelle Value-Fonds sind untergewichtet solange FCF negativ bleibt. Retail-Investoren und ETF-Flows dominieren. Enttäuschungsrisiko: Jedes negative Signal zu Ford-Credit-Qualität, EV-Verlusten oder Dividendensicherheit kann einen schnellen 20-30% Rückgang auslösen — der Kurs hat die fundamentale Basis überholt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 148 im S&P 500 — überdurchschnittlich. Kurs $17,44 nahe 52-Wochen-Hoch $17,78. 5T +15,4%, 20T +43,8% — extremes Kurzzeit-Momentum. Beta 1,66 — erheblich volatiler als Markt. Warnsignal: Bruch unter $14 (Analyst-Konsensziel) würde Momentum-Umkehr signalisieren und institutionelle Stop-Losses auslösen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($22–30):** Ford Pro etabliert sich als profitabler Fleet-Tech-Anbieter, Model e dreht profitabel durch Plattformkonsolidierung, F-Series EV-Führerschaft im US-Markt.</p>
+<p>**Base ($10–16):** Struktureller ICE-Rückgang nicht kompensiert, EV-Verluste persistieren, FCF bleibt angespannt. Dividendenkürzung möglich.</p>
+<p>**Bear ($5–9):** US-Rezession, Ford-Credit-Ausfälle, EV-Abschreibungen, Dividende gestrichen. Bilanzielle Restrukturierung notwendig.</p>
+<p>Entscheidende Variable: Geschwindigkeit der Ford-Model-e-Verlustreduzierung — das ist der einzige Hebel der Ford vom Zykliker zum Compounder macht.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Ford ist ein hochriskanter zyklischer Trading-Trade, kein Compounder. Das aktuelle Niveau $17,44 — deutlich über Analyst-Konsens $14,05 — ist durch Momentum, nicht durch Fundamentals gerechtfertigt. Für konservative Investoren: klares Nein. Für taktische Trader: nur mit engem Stop-Loss unter $14. Peers: General Motors (GM) handelt bei ähnlichem Forward-PE, hat aber besseres FCF-Profil; Stellantis günstiger bewertet mit diversen Marken. Ford ist das risikoreichste Instrument im US-Auto-Sektor durch die EV-Verlust-Unsicherheit.</p>
+<p>Rating (Zahl, nicht Sterne):</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Langfristiges Potenzial: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
+      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★☆☆☆</span></div>
+    </div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+</body>
+</html>
