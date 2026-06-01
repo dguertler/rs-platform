@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductor Equipment & Materials</span></div>
-        <div class="mi">MCap: <span>$343B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$357B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">78.3</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">68.1</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$432.16</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">26.8×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$450.06</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">27.8×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$29.0B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">49.0%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">49.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">47.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">39.7%</div></div>
   </div>
 
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Semiconductor Systems (~75% Umsatz): Equipment für Deposition, Etch, CMP, Ion Implant</li>
+</ul>
+<ul class="al">
 <li>Applied Global Services (~22%): Wiederkehrende Service- und Spare-Parts-Umsätze, margenstark</li>
+</ul>
+<ul class="al">
 <li>Display & Adjacent Markets (~3%): OLED-Equipment, schwächeres Segment</li>
+</ul>
+<ul class="al">
 <li>Strukturell profitiert AMAT von Leading-Edge-Logik (GAA-Transition bei TSMC, Samsung, Intel)</li>
+</ul>
+<ul class="al">
 <li>Massiver Tailwind durch HBM/Advanced Packaging — hier Marktführer bei Hybrid Bonding</li>
+</ul>
+<ul class="al">
 <li>China-Mature-Node-Geschäft als zweischneidiges Schwert: Cashcow, aber Exportkontroll-Risiko</li>
+</ul>
+<ul class="al">
 <li>Service-Geschäft wächst zweistellig und stabilisiert die Zyklik</li>
+</ul>
+<ul class="al">
 <li>Wettbewerb fokussiert: Lam Research (Etch), Tokyo Electron, KLA (Metrology), ASML (Litho)</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>AI-CapEx-Superzyklus: TSMC plant >$40 Mrd. CapEx p.a., Samsung & Intel folgen</li>
+</ul>
+<ul class="al">
 <li>HBM-Boom: Jeder NVIDIA Blackwell/Rubin-Chip benötigt mehr Advanced Packaging</li>
+</ul>
+<ul class="al">
 <li>GAA-Transition ab N2 erhöht WFE-Intensity strukturell um ~15%</li>
+</ul>
+<ul class="al">
 <li>Service-Umsatz mit 80%+ Wiederkehrrate — bewertungstreibend</li>
+</ul>
+<ul class="al">
 <li>Margenexpansion durch Mix-Shift zu Leading-Edge sichtbar (Operating Margin 31,9%)</li>
+</ul>
+<ul class="al">
 <li>Aktionärsrückführung: ~$5 Mrd. Buybacks + Dividende</li>
+</ul>
+<ul class="al">
 <li>Re-Rating-Potenzial: Von Equipment-Multiple Richtung Plattform-Compounder</li>
+</ul>
+<ul class="al">
 <li>Geopolitischer Onshoring-Trend (US CHIPS Act, EU, Japan) erweitert TAM</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>China macht ~30% Umsatz — neue Exportrestriktionen jederzeit möglich</li>
+</ul>
+<ul class="al">
 <li>WFE-Markt bleibt zyklisch, 2026 könnte Memory-Peak markieren</li>
+</ul>
+<ul class="al">
 <li>Bewertung nach +73% in 6 Monaten ambitioniert für zyklischen Wert</li>
+</ul>
+<ul class="al">
 <li>ASML/Lam haben in spezifischen Nischen technologische Vorsprünge</li>
+</ul>
+<ul class="al">
 <li>US-China-Eskalation könnte 10-15% Umsatzeinbruch auslösen</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow mit nur $3 Mrd. verdächtig niedrig vs. Net Income — Working-Capital-Aufbau</li>
+</ul>
+<ul class="al">
 <li>Beta 1.65: hohe Volatilität bei Risk-off-Phasen</li>
+</ul>
+<ul class="al">
 <li>Forward-PE 26,8 lässt wenig Spielraum für Enttäuschungen</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum 11,4% YoY — solide, beschleunigend</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 49% — stabil, leicht expandierend</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 31,9% — Best-in-Class für Equipment-Sektor</li>
+</ul>
+<ul class="al">
 <li>Net Margin 29,3% — exzellent</li>
+</ul>
+<ul class="al">
 <li>ROE 39,7% — outstanding, kapitaleffizient</li>
+</ul>
+<ul class="al">
 <li>FCF $3,04 Mrd. — auffällig niedrig vs. Net Income, beobachten</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 30,4 — konservative Bilanz</li>
+</ul>
+<ul class="al">
 <li>Price/Book 14,35 — hoch, reflektiert Asset-Light-Modell</li>
+</ul>
+<ul class="al">
 <li>Service-Segment wachstumsstark, glättet Zyklik</li>
+</ul>
+<ul class="al">
 <li>Buybacks reduzieren Share Count konstant</li>
+</ul>
+<ul class="al">
 <li>Hohes R&D-Investment (~$3 Mrd. p.a.) sichert Technologieführerschaft</li>
+</ul>
+<ul class="al">
 <li>Working Capital aktuell aufgebläht — kurzfristiger FCF-Druck</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,18 +219,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Institutionelles Ownership hoch, Smart Money im AI-Picks-and-Shovels-Trade voll positioniert</li>
+</ul>
+<ul class="al">
 <li>Sentiment nach +73% in 6M deutlich euphorisch — Crowded Trade</li>
+</ul>
+<ul class="al">
 <li>Retail-Aufmerksamkeit steigend, aber nicht extrem</li>
+</ul>
+<ul class="al">
 <li>Momentum stark, aber kurzfristig überdehnt (10T -3%, 5T +3% — Konsolidierungssignal)</li>
+</ul>
+<ul class="al">
 <li>RS-Score 78 vs. QQQ zeigt klare Outperformance</li>
+</ul>
+<ul class="al">
 <li>Keine Short-Squeeze-Setups, sauberer institutioneller Trade</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 AKTIV: struktureller Bruch auf Weekly/Daily/4H — bullisches Setup</li>
+</ul>
+<ul class="al">
 <li>Nahe 52W-Hoch ($448), 6M-Performance +73% — Zyklus-Phase: Mark-up/Late Stage</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig überdehnt, 10T negativ — gesunde Konsolidierung möglich</li>
+</ul>
+<ul class="al">
 <li>Pullbacks Richtung $380-400 wären strukturell kaufbar</li>
+</ul>
+<ul class="al">
 <li>RS-Stärke intakt, aber Vorsicht vor Blow-off-Top-Verhalten</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -168,8 +258,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>LRCX (Lam Research): Etch-Spezialist, ähnliches Profil, etwas günstiger</li>
+</ul>
+<ul class="al">
 <li>KLAC (KLA): Höhere Margen, Metrology-Monopol, defensiver</li>
+</ul>
+<ul class="al">
 <li>ASML: Litho-Monopol, höchste Qualität, teuerste Bewertung</li>
+</ul>
+<ul class="al">
 <li>TOELY (Tokyo Electron): Günstiger, weniger AI-Exposure</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -177,8 +273,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Ratings:**</p>
 <ul class="al">
 <li>Qualität: 5/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 4/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -186,14 +288,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

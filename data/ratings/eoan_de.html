@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Utilities</span></div>
         <div class="mi">Industrie: <span>Utilities - Diversified</span></div>
-        <div class="mi">MCap: <span>$48B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$47B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">27.7</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">11.7</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$18.43</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.8×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$18.16</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.6×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$77.0B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">27.8%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">311.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">313.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">15.4%</div></div>
   </div>
 
@@ -97,48 +105,110 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Größter Stromnetzbetreiber Europas (Deutschland, Schweden, Osteuropa) – ca. 70% des EBITDA</li>
+</ul>
+<ul class="al">
 <li>Regulierte Erlöse über Anreizregulierung, planbare Cashflows über Jahrzehnte</li>
+</ul>
+<ul class="al">
 <li>Customer Solutions: Strom-/Gasvertrieb an 47 Mio. Kunden, dünne Margen, hohes Volumen</li>
+</ul>
+<ul class="al">
 <li>Energy Infrastructure Solutions: dezentrale Lösungen, Wärme, B2B</li>
+</ul>
+<ul class="al">
 <li>Wachstum primär durch RAB-Expansion (Netzausbau für EE-Integration)</li>
+</ul>
+<ul class="al">
 <li>Kein nennenswertes Erzeugungsgeschäft mehr (nach Uniper-Tausch mit RWE)</li>
+</ul>
+<ul class="al">
 <li>Profiteur höherer regulatorischer EK-Renditen ab 2024 (Bundesnetzagentur)</li>
+</ul>
+<ul class="al">
 <li>Strukturell defensiv, zyklisch nur in der Vertriebssparte</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Elektrifizierungs-Supercycle: EU-Stromverbrauch +40-60% bis 2040</li>
+</ul>
+<ul class="al">
 <li>Regulatorische Eigenkapitalverzinsung in DE steigt deutlich (ab 2024er Regulierungsperiode)</li>
+</ul>
+<ul class="al">
 <li>RAB-Wachstum >8% p.a. → fast mechanisches Ergebniswachstum</li>
+</ul>
+<ul class="al">
 <li>Re-Rating von 14x KGV Richtung 16-18x bei sinkenden Zinsen denkbar</li>
+</ul>
+<ul class="al">
 <li>Dividendenwachstum bis 2028 mit mindestens +5% p.a. kommuniziert</li>
+</ul>
+<ul class="al">
 <li>Geopolitik: Energie-Souveränität Europas treibt Investitionen</li>
+</ul>
+<ul class="al">
 <li>KI-/Rechenzentrumsboom in Europa erhöht Netzlast und Capex-Bedarf</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Negativer FCF (-3,4 Mrd.) durch massive Capex – Finanzierung über Schulden</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 150% – sensitiv gegenüber Zinsanstieg</li>
+</ul>
+<ul class="al">
 <li>Regulatorisches Risiko: politische Eingriffe in Renditeparameter</li>
+</ul>
+<ul class="al">
 <li>Verwässerungsrisiko durch mögliche Kapitalerhöhung</li>
+</ul>
+<ul class="al">
 <li>Bewertung relativ zu historischem Schnitt nicht mehr günstig</li>
+</ul>
+<ul class="al">
 <li>Vertriebsmargen unter Druck durch Wettbewerb und sinkende Großhandelspreise</li>
+</ul>
+<ul class="al">
 <li>Umsatz YoY -13% zeigt Normalisierung nach Energiekrise</li>
+</ul>
+<ul class="al">
 <li>Politisches Risiko in Deutschland (Ampel-Nachfolger, Energiepolitik)</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz 77 Mrd., aber rückläufig durch Preisnormalisierung</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 17,9% – solide für Utility</li>
+</ul>
+<ul class="al">
 <li>Net Margin nur 4,5% – typisch durchgereichtes Geschäft</li>
+</ul>
+<ul class="al">
 <li>ROE 15,4% – ordentlich, aber durch Leverage gehebelt</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow negativ – Capex-Schwerpunkt, kein Warnsignal per se</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 150% – hoch, aber für regulierte Utility tragbar</li>
+</ul>
+<ul class="al">
 <li>Beta 0,82 – defensives Profil</li>
+</ul>
+<ul class="al">
 <li>Dividendenrendite ca. 4,5-5% (gemeldete 311% irreführend)</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 27,8% – stabil</li>
+</ul>
+<ul class="al">
 <li>Bilanzqualität: Investment Grade, BBB+ Niveau</li>
+</ul>
+<ul class="al">
 <li>Keine echten Wettbewerbsvorteile außer regulatorischem Moat</li>
+</ul>
+<ul class="al">
 <li>Compounder-Charakter über RAB-Wachstum, nicht über organisches Wachstum</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -146,17 +216,33 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Institutionell solide besetzt, aber nicht "crowded" wie US-Tech</li>
+</ul>
+<ul class="al">
 <li>Klassisches "Defensive-Rotation"-Vehikel bei Risk-Off</li>
+</ul>
+<ul class="al">
 <li>Smart Money kauft regulierte Netzbetreiber als Bond-Proxy mit Wachstum</li>
+</ul>
+<ul class="al">
 <li>Retail-Interesse in DE hoch wegen Dividende und Markenname</li>
+</ul>
+<ul class="al">
 <li>Sentiment neutral-positiv, kein Hype</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>12M-RS +18% stark, aber 20T/50T-RS negativ → kurzfristige Korrektur</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 aktiv – strukturelle Brüche auf allen Zeitebenen, Vorsicht</li>
+</ul>
+<ul class="al">
 <li>Kurs nahe 52W-Hoch, aber Konsolidierungsphase</li>
+</ul>
+<ul class="al">
 <li>Setup spricht für Pullback in den Bereich 17-17,50 EUR</li>
+</ul>
+<ul class="al">
 <li>Zyklus-Phase: späte Trendphase, kein Frühzykliker-Einstieg mehr</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -166,8 +252,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>Iberdrola (IBE): qualitativ stärker, globaler, teurer bewertet</li>
+</ul>
+<ul class="al">
 <li>National Grid (NG): reineres Netzgeschäft, aber UK-Regulierungsrisiko</li>
+</ul>
+<ul class="al">
 <li>Enel (ENEL): höhere Dividendenrendite, mehr Schwellenländer-Exposure</li>
+</ul>
+<ul class="al">
 <li>RWE: komplementär, Erzeugungsfokus, höheres Beta</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -175,8 +267,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 3,5/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 3/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 3/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3,5/5</li>
 </ul></div>
   </div>
@@ -184,14 +282,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

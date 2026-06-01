@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -58,7 +66,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
         <div class="mi">Sektor: <span>Basic Materials</span></div>
         <div class="mi">Industrie: <span>Chemicals</span></div>
         <div class="mi">MCap: <span>$45B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">50.7</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">19.8</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$51.35</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.2×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$51.21</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.4×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$59.2B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">23.4%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">435.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">443.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">4.4%</div></div>
   </div>
 
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Größter integrierter Chemiekonzern der Welt mit Verbund-Produktion (Skalen- und Energievorteile)</li>
+</ul>
+<ul class="al">
 <li>Sechs Segmente: Chemicals, Materials, Industrial Solutions, Surface Technologies, Nutrition & Care, Agricultural Solutions</li>
+</ul>
+<ul class="al">
 <li>Agrar-Sparte (Saatgut, Pflanzenschutz) — Spin-off/IPO bis 2027 geplant</li>
+</ul>
+<ul class="al">
 <li>Coatings (Automotive) — separate Verselbstständigung in Vorbereitung</li>
+</ul>
+<ul class="al">
 <li>China-Großprojekt Zhanjiang (~10 Mrd. € Investition) als zweiter Verbund-Standort</li>
+</ul>
+<ul class="al">
 <li>Standort Ludwigshafen wird verkleinert — strukturell zu hohe Energiekosten in Deutschland</li>
+</ul>
+<ul class="al">
 <li>Hohe Zyklizität: Nachfrage abhängig von Auto, Bau, Industrie, Landwirtschaft</li>
+</ul>
+<ul class="al">
 <li>Pricing Power begrenzt im Basis-Chemie-Bereich, höher in Specialties</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Spin-off Agrar-Sparte könnte 15-25 Mrd. € Wert freisetzen (Sum-of-the-Parts-Hebel)</li>
+</ul>
+<ul class="al">
 <li>Zyklischer Turnaround in Chemie 2025/26 bei sinkenden Zinsen und Industrie-Erholung</li>
+</ul>
+<ul class="al">
 <li>China-Standort Zhanjiang ab 2025 produktiv — Margen-Mix-Verbesserung</li>
+</ul>
+<ul class="al">
 <li>Hohe Dividendenrendite (~6-7%) zieht Income-Investoren an</li>
+</ul>
+<ul class="al">
 <li>Niedrige Bewertung (P/B 1.3) bietet asymmetrisches Upside bei Earnings-Recovery</li>
+</ul>
+<ul class="al">
 <li>Energie-Kostenentlastung bei fallenden EU-Gaspreisen</li>
+</ul>
+<ul class="al">
 <li>Short-Interest und Pessimismus institutionell hoch — Contrarian-Setup</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 aktiv signalisiert technischen Strukturbruch nach oben</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Free Cashflow negativ (-1.57 Mrd. $) — Dividende strukturell gefährdet</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Energiekostennachteile in Europa vs. US/Naher Osten dauerhaft</li>
+</ul>
+<ul class="al">
 <li>China-Überkapazitäten in Basischemie drücken globale Preise</li>
+</ul>
+<ul class="al">
 <li>ROE nur 4.4% — Kapital wird nicht produktiv eingesetzt</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 67% bei schwachem Cashflow — Bilanz unter Druck</li>
+</ul>
+<ul class="al">
 <li>Auto- und Bau-Endmärkte strukturell schwach (besonders Deutschland)</li>
+</ul>
+<ul class="al">
 <li>Spin-off-Komplexität und Timing-Risiken</li>
+</ul>
+<ul class="al">
 <li>Dividenden-Kürzung wahrscheinlich — Income-Investoren würden verkaufen</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM 59 Mrd. $ — YoY -3%, anhaltende Schrumpfung</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 23.4% — niedrig, typisch für Commodity-Chemie</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 7.7% — historisch unter Durchschnitt</li>
+</ul>
+<ul class="al">
 <li>Net Margin nur 2.9% — sehr dünn</li>
+</ul>
+<ul class="al">
 <li>FCF negativ — größtes fundamentales Problem</li>
+</ul>
+<ul class="al">
 <li>ROE 4.4% — zerstört Kapitalkosten</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 66.7% — moderat erhöht</li>
+</ul>
+<ul class="al">
 <li>P/B 1.32 — nahe Buchwert, was Markt-Skepsis zeigt</li>
+</ul>
+<ul class="al">
 <li>Dividendenausschüttung übersteigt aktuell FCF — nicht nachhaltig</li>
+</ul>
+<ul class="al">
 <li>Verbund-System bleibt struktureller Wettbewerbsvorteil</li>
+</ul>
+<ul class="al">
 <li>ROIC unter WACC seit mehreren Jahren</li>
+</ul>
+<ul class="al">
 <li>Kein Compounder — klassischer Deep-Cyclical</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,18 +219,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Institutionell under-owned bei US-Funds, hohe DACH-Konzentration</li>
+</ul>
+<ul class="al">
 <li>Sentiment am Tiefpunkt — Contrarian-Setup vorhanden</li>
+</ul>
+<ul class="al">
 <li>Hedgefonds spielen eher Spin-off-Story als operative Erholung</li>
+</ul>
+<ul class="al">
 <li>Dividenden-Investoren halten loyal, aber bröckelnd</li>
+</ul>
+<ul class="al">
 <li>Keine Hype-Komponente — pures Value/Deep-Cyclical-Play</li>
+</ul>
+<ul class="al">
 <li>Smart Money positioniert sich selektiv vor möglichem Agrar-IPO</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 aktiv — Strukturbruch auf allen Zeitebenen bestätigt</li>
+</ul>
+<ul class="al">
 <li>12M-Performance +27% deutet auf institutionelle Akkumulation</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig (5-20T) leichte Konsolidierung nach Anstieg</li>
+</ul>
+<ul class="al">
 <li>50T-RS +12.7% — Momentum intakt, aber nicht überhitzt</li>
+</ul>
+<ul class="al">
 <li>Chart nahe 52W-Hoch (51 vs. 55) — Ausbruchsversuch realistisch</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -168,8 +258,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>Dow Inc. (DOW): Ähnliches Profil, höhere US-Margen, bessere FCF</li>
+</ul>
+<ul class="al">
 <li>LyondellBasell (LYB): Stärkere Kapitalrendite, fokussierter</li>
+</ul>
+<ul class="al">
 <li>Covestro (1COV.DE): Reinerer Materials-Play, Übernahmefantasie ADNOC</li>
+</ul>
+<ul class="al">
 <li>Air Liquide (AI.PA): Premium-Bewertung, defensiver, höhere Qualität</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -177,8 +273,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 2/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 1/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 3/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3/5</li>
 </ul></div>
   </div>
@@ -186,14 +288,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

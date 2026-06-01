@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
-        <div class="mi">MCap: <span>$169B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$186B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,14 +74,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">103.9</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">148.4</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$663.46</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">107.7×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$731.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">118.5×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">74.8%</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
@@ -97,51 +105,119 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Cloud-native Cybersecurity-Plattform "Falcon" mit Single-Agent-Architektur</li>
+</ul>
+<ul class="al">
 <li>Subscription-basiertes SaaS-Modell mit hoher Visibility (ARR-Modell)</li>
+</ul>
+<ul class="al">
 <li>28+ Module – Cross-Sell ist der zentrale Wachstumshebel</li>
+</ul>
+<ul class="al">
 <li>Endpoint Protection als Einstiegsprodukt, dann Expansion in Cloud/Identity/SIEM</li>
+</ul>
+<ul class="al">
 <li>Wachstumstreiber: Konsolidierung mehrerer Security-Vendoren auf eine Plattform</li>
+</ul>
+<ul class="al">
 <li>Großkundengeschäft dominiert, zunehmend auch SMB via Falcon Go</li>
+</ul>
+<ul class="al">
 <li>Datenvorteil: Threat Graph verarbeitet Billionen Events täglich – AI-Edge</li>
+</ul>
+<ul class="al">
 <li>Hauptkonkurrenten: Microsoft Defender, SentinelOne, Palo Alto, Zscaler</li>
+</ul>
+<ul class="al">
 <li>Strukturtrend: Cybersecurity-Budgets wachsen zweistellig trotz IT-Sparzwängen</li>
+</ul>
+<ul class="al">
 <li>Charlotte AI als GenAI-Layer öffnet Upsell-Potenzial</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Plattform-Konsolidierung: Kunden ersetzen 3-5 Vendoren durch Falcon</li>
+</ul>
+<ul class="al">
 <li>TAM-Expansion auf $250 Mrd.+ durch SIEM, Cloud Security, Identity</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow Margin von 30%+ – seltene Kombination aus Wachstum und Cash</li>
+</ul>
+<ul class="al">
 <li>Rule of 50+ Profil – das Heilige Gral der SaaS-Bewertung</li>
+</ul>
+<ul class="al">
 <li>AI/GenAI als Tailwind für SOC-Automatisierung</li>
+</ul>
+<ul class="al">
 <li>Outage-Trauma abgehakt – kein Kundenverlust in nennenswertem Umfang</li>
+</ul>
+<ul class="al">
 <li>Margenexpansion durch Skaleneffekte noch lange nicht ausgereizt</li>
+</ul>
+<ul class="al">
 <li>Potenzielle Übernahme von kleineren Security-Playern beschleunigt Wachstum</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Forward PE >100 lässt wenig Raum für Enttäuschungen</li>
+</ul>
+<ul class="al">
 <li>Microsoft Defender als "Good-Enough"-Lösung im Bundle ist strukturelle Bedrohung</li>
+</ul>
+<ul class="al">
 <li>Wachstum verlangsamt von 50%+ auf ~23% – Reifephase beginnt</li>
+</ul>
+<ul class="al">
 <li>Net Retention Rate gefallen – Expansion-Motor zeigt erste Schwächen</li>
+</ul>
+<ul class="al">
 <li>Analysten-Kursziel ($535) liegt deutlich UNTER Kurs ($663) – Warnsignal</li>
+</ul>
+<ul class="al">
 <li>GAAP-Verluste (Net Margin -3,4%) trotz $4,8 Mrd. Umsatz</li>
+</ul>
+<ul class="al">
 <li>Hohe SBC-Belastung verzerrt Non-GAAP-Profitabilität</li>
+</ul>
+<ul class="al">
 <li>Cybersecurity-Konsolidierung könnte Pricing-Power von Palo Alto/Cisco erhöhen</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum 23,3% YoY – solide, aber Deceleration sichtbar</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 74,8% – Best-in-Class SaaS-Niveau</li>
+</ul>
+<ul class="al">
 <li>Operating Margin GAAP nur 1% – Non-GAAP deutlich höher (~21%)</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow $1,6 Mrd. – FCF-Margin ~33%, exzellent</li>
+</ul>
+<ul class="al">
 <li>Net Income negativ – primär durch SBC und Outage-Kosten getrieben</li>
+</ul>
+<ul class="al">
 <li>Bilanz: $4 Mrd.+ Cash, niedrige Verschuldung</li>
+</ul>
+<ul class="al">
 <li>ROE -4,1% – durch GAAP-Verluste verzerrt</li>
+</ul>
+<ul class="al">
 <li>ARR über $4 Mrd., Wachstumsrate gesund</li>
+</ul>
+<ul class="al">
 <li>Module-Adoption: 65%+ Kunden mit 5+ Modulen</li>
+</ul>
+<ul class="al">
 <li>Magic Number weiterhin >1 – effiziente Vertriebsmaschine</li>
+</ul>
+<ul class="al">
 <li>Rule of 56 (Wachstum + FCF-Margin) – Top-Tier</li>
+</ul>
+<ul class="al">
 <li>Geringe Customer Concentration – diversifizierte Kundenbasis</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -149,18 +225,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Institutionelles Ownership hoch (~75%) – Hedgefonds-Liebling</li>
+</ul>
+<ul class="al">
 <li>Momentum-Trade: Aktie nahe ATH, hohe Aufmerksamkeit</li>
+</ul>
+<ul class="al">
 <li>Sentiment euphorisch, aber nicht Bubble-artig wie 2021</li>
+</ul>
+<ul class="al">
 <li>Long-only-Quality-Manager halten als Cybersecurity-Kerninvestment</li>
+</ul>
+<ul class="al">
 <li>Short Interest gering – wenig Brennstoff für Squeeze, aber auch keine Skepsis</li>
+</ul>
+<ul class="al">
 <li>Crowded auf der Long-Seite – Vorsicht bei Sektor-Rotation</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 – Weekly, Daily, 4H alle gebrochen, hochwertiges Setup</li>
+</ul>
+<ul class="al">
 <li>RS-Score 103,9 vs. QQQ – Outperformance bestätigt</li>
+</ul>
+<ul class="al">
 <li>20T-Performance +37,9% – kurzfristig überhitzt, Konsolidierung möglich</li>
+</ul>
+<ul class="al">
 <li>Chartbild: Ausbruch über $650 mit Volumen – strukturell bullisch</li>
+</ul>
+<ul class="al">
 <li>Zyklus-Phase: Stage 2 Advance, aber im fortgeschrittenen Stadium</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -170,8 +264,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>PANW (Palo Alto): Größer, günstiger, aber weniger pure-play Cloud</li>
+</ul>
+<ul class="al">
 <li>ZS (Zscaler): Ähnliches Profil, billiger, aber langsameres Wachstum</li>
+</ul>
+<ul class="al">
 <li>S (SentinelOne): Günstigere Alternative, aber Execution-Risiken</li>
+</ul>
+<ul class="al">
 <li>NET (Cloudflare): Adjazent, höhere Bewertung, anderes Geschäftsmodell</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -179,8 +279,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 5/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 4/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -188,14 +294,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

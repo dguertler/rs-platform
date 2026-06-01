@@ -1,6 +1,6 @@
 # SNDK — KI-Aktienbewertung
 
-**Sandisk Corporation** · Technology · 31.05.2026 · Signal: GWS Breakout 3/3
+**Sandisk Corporation** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
 
 | Kennzahl | Wert |
 |---|---|
@@ -23,12 +23,19 @@ Sandisk Corporation (SNDK) ist seit dem Spin-off aus Western Digital im Februar 
 ## 2. GESCHÄFTSMODELL
 
 - Entwicklung und Fertigung von 3D-NAND-Flash (BiCS-Technologie, 6. Generation), ausgerichtet auf Enterprise-SSDs als Wachstumssegment
+
 - Fertigungspartnerschaft mit Kioxia (Japan Joint Ventures) — kein vollständig eigenständiger Fab-Betrieb; Kioxia-Abhängigkeit ist strukturelles Risiko
+
 - Enterprise-NVMe-SSDs für KI-Rechenzentren (AWS, Azure, GCP) sind das margenstarke Kernsegment mit längeren Beschaffungszyklen
+
 - Client-SSDs (Laptops, Consumer-PCs) und Retail-Flash als zyklischere Ergänzungssegmente
+
 - Operating Leverage extrem: Fixkostenstruktur erzeugt bei NAND-Preisanstieg überproportionale Margensteigerung — und umgekehrt
+
 - NAND-Spotpreis als primärer Ergebnis-Treiber, nicht Volumen oder Produktmix allein
+
 - CXL-Speicherlösungen in Entwicklung — strukturell neues Marktsegment für KI-Inference-Workloads (noch kein Material Revenue)
+
 - D/E 1,5x: Verschuldung aus WD-Aufteilung, im Abschwung belastend, im Aufschwung tragbar
 
 ## 3. BULL CASE
@@ -72,7 +79,9 @@ Alle drei GWS-Ebenen aktiv (Weekly, Daily, 4H) — maximales 3/3-Breakout-Signal
 ## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
 
 - **Micron (MU):** Direkter Peer (DRAM+NAND-Mix). Forward-PE ~10x, stärkere Bilanz, bessere Diversifikation durch DRAM und HBM. Für die meisten Investoren das bessere Risk/Reward-Instrument.
+
 - **SK Hynix:** Nicht US-gelistet, dominant in HBM für KI-GPUs. Bei der KI-Memory-Wette ist HBM (SK Hynix) strukturell relevanter als NAND.
+
 - **Kioxia (TYO:6600):** Joint-Venture-Partner von SNDK, ähnliche NAND-Exposure, geringere Liquidität und weniger KI-Narrativ-Prämie.
 
 SNDK ist das reinste NAND-Instrument im US-Markt — mit der schärfsten Zyklus-Exposition in beide Richtungen.
@@ -82,9 +91,13 @@ SNDK ist das reinste NAND-Instrument im US-Markt — mit der schärfsten Zyklus-
 SNDK ist ein zyklischer High-Conviction-Momentum-Trade, kein Buy-and-Hold-Compounder. Die strukturellen Elemente — Enterprise-SSD-Beziehungen mit Hyperscalern, CXL-Optionalität — dämpfen das Zyklus-Risiko am Rand, eliminieren es aber nicht. Das Analyst-Konsensziel unter dem Marktpreis ist ein klares Signal: Das institutionelle Upside gilt als weitgehend eingepreist. Für Momentum-Trader mit Trailing-Stop-Disziplin (15–20%) und klarem Exit-Plan: vertretbar. Für Long-Only-Investoren ohne aktives Monitoring: falsches Einstiegsniveau. Positionsgröße: max. 2–3% eines diversifizierten Portfolios. Explizite Risikowarnung: NAND-Aktien können 60–80% korrigieren wenn der Zyklus dreht — Micron verlor 2022 über 75%.
 
 Rating (Zahl, nicht Sterne):
+
 - Qualität: 3/5
+
 - Wachstum: 4/5
+
 - Bewertung: 2/5
+
 - Langfristiges Potenzial: 3/5
 
 ---

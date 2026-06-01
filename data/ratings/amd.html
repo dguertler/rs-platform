@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductors</span></div>
-        <div class="mi">MCap: <span>$762B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$842B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,14 +74,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">267.2</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">305.9</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$467.51</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">36.1×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$516.10</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">39.7×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$37.5B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">53.1%</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Data Center (CPU + GPU): größtes und am schnellsten wachsendes Segment, ~50% Revenue, EPYC-Server-CPUs + Instinct-MI-GPUs</li>
+</ul>
+<ul class="al">
 <li>Client (Consumer-CPUs): Ryzen-Desktop/Notebook, profitabel aber zyklisch</li>
+</ul>
+<ul class="al">
 <li>Gaming: semi-custom Chips für PlayStation 5 / Xbox Series X – margenschwach, im Niedergang</li>
+</ul>
+<ul class="al">
 <li>Embedded: Xilinx-Akquisition, FPGAs für Industrie/Auto/Aerospace – stabil, hochmargig</li>
+</ul>
+<ul class="al">
 <li>Fabless-Modell: produziert bei TSMC, hohe Abhängigkeit von 3nm/2nm-Kapazität</li>
+</ul>
+<ul class="al">
 <li>AI-GPU-Roadmap: MI300X → MI325X → MI350 (2025) → MI400 (2026)</li>
+</ul>
+<ul class="al">
 <li>Software-Stack ROCm: kritischer Schwachpunkt vs. Nvidias CUDA-Moat</li>
+</ul>
+<ul class="al">
 <li>OpenAI-Partnership: strukturelle Validierung als Second-Source AI-Compute</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>AI-GPU-TAM explodiert auf $500Mrd+ bis 2028 – AMD braucht nur 15-20% Share für massive Earnings-Power</li>
+</ul>
+<ul class="al">
 <li>Hyperscaler (Meta, Microsoft, Oracle) wollen aktiv Nvidia-Diversifikation</li>
+</ul>
+<ul class="al">
 <li>EPYC weiter auf Marktanteilsgewinn-Pfad – Intel strukturell geschwächt</li>
+</ul>
+<ul class="al">
 <li>MI350/MI400 mit deutlich verbesserter Software-Performance, könnte CUDA-Lock-in aufweichen</li>
+</ul>
+<ul class="al">
 <li>Operating Leverage massiv: Bei Skalierung springen Margen von 14% Richtung 25-30%</li>
+</ul>
+<ul class="al">
 <li>OpenAI-Deal als Blueprint für weitere Mega-Deals (Anthropic, Meta)</li>
+</ul>
+<ul class="al">
 <li>Embedded-Segment unterschätztes Compounder-Asset</li>
+</ul>
+<ul class="al">
 <li>Lisa Su = einer der besten CEOs der Tech-Industrie, exzellente Execution-Historie</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Forward PE 36 bei 8% ROE – Bewertung preist Perfektion ein</li>
+</ul>
+<ul class="al">
 <li>CUDA-Moat real und tief; AMDs Software-Stack hinkt strukturell hinterher</li>
+</ul>
+<ul class="al">
 <li>Nvidia liefert jährliche Architektur-Upgrades (Blackwell → Rubin) – AMD muss rennen</li>
+</ul>
+<ul class="al">
 <li>TSMC-Kapazität als Bottleneck, direkte Konkurrenz mit Nvidia, Apple um 3nm</li>
+</ul>
+<ul class="al">
 <li>Gaming-Segment im Decline – PS6-Zyklus ungewiss</li>
+</ul>
+<ul class="al">
 <li>Custom Silicon (Google TPU, AWS Trainium, MS Maia) frisst potenziellen AMD-TAM</li>
+</ul>
+<ul class="al">
 <li>AI-Capex-Zyklus könnte 2026/27 in Verdauungsphase übergehen</li>
+</ul>
+<ul class="al">
 <li>Aktie nach +330% in 6 Monaten extrem überhitzt – jeder Earnings-Miss = -25%</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Revenue-Wachstum +37.8% YoY – stark beschleunigend</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 53.1% – solide, aber 20+ Punkte unter Nvidia</li>
+</ul>
+<ul class="al">
 <li>Operating Margin nur 14.4% – Beleg für Software/Skalen-Defizit</li>
+</ul>
+<ul class="al">
 <li>Net Margin 13.4% – niedrig für Halbleiter-Premium-Story</li>
+</ul>
+<ul class="al">
 <li>FCF $7.17 Mrd. – gesund, aber bei $762Mrd Cap = 1% FCF-Yield</li>
+</ul>
+<ul class="al">
 <li>ROE nur 8.1% – Folge der Xilinx-Goodwill-Last</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 6.0 – sieht hoch aus, ist aber im Kontext managebar</li>
+</ul>
+<ul class="al">
 <li>Bilanz: solide Liquidität, keine Stressfaktoren</li>
+</ul>
+<ul class="al">
 <li>ROIC weit unter Nvidia (~50%) – strukturelle Profitabilitätslücke</li>
+</ul>
+<ul class="al">
 <li>Capital Allocation: Aktienrückkäufe + R&D-Reinvestition, keine Dividende</li>
+</ul>
+<ul class="al">
 <li>TSMC-Abhängigkeit = Single Point of Failure</li>
+</ul>
+<ul class="al">
 <li>Pricing Power deutlich unter Nvidia, aber besser als Intel</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,17 +219,33 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Extrem crowded long – AI-Play Nummer 2 nach NVDA in jedem Tech-Fonds</li>
+</ul>
+<ul class="al">
 <li>Forced Buying durch Underperformer-Fonds nach OpenAI-Deal sichtbar</li>
+</ul>
+<ul class="al">
 <li>Retail-Momentum massiv – Optionsmarkt zeigt Euphorie</li>
+</ul>
+<ul class="al">
 <li>Smart Money teilweise am Trimmen nach +300% Rally</li>
+</ul>
+<ul class="al">
 <li>Sentiment-Übertreibung: von "abgehängt" zu "Nvidia-Killer" in 3 Monaten</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>RS-Score 267 vs. QQQ – extreme relative Stärke, parabolisch</li>
+</ul>
+<ul class="al">
 <li>50T-Performance +120% – klassisches Blow-off-Top-Risiko</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 AKTIV – Struktur auf allen Zeitebenen gebrochen = maximales Momentum</li>
+</ul>
+<ul class="al">
 <li>Kurs am 52W-Hoch ($467 vs $481) – kein Widerstand mehr darüber</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig massiv überhitzt – jede Konsolidierung von 15-25% wäre gesund und kaufbar</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -167,8 +255,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>NVDA: höhere Qualität, bessere Margen, ähnliches Multiple – AMD nur Hedge dazu</li>
+</ul>
+<ul class="al">
 <li>INTC: strukturelle Verlierer-Story, AMD nimmt Share – nicht vergleichbar mehr</li>
+</ul>
+<ul class="al">
 <li>AVGO: diversifizierter, custom-Silicon-Profiteur, defensiver – bessere Risk/Reward</li>
+</ul>
+<ul class="al">
 <li>TSM: indirekter Profiteur jeder AMD-Story, weniger volatil</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +270,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 5/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +285,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

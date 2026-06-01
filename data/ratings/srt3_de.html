@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Healthcare</span></div>
         <div class="mi">Industrie: <span>Medical Instruments & Supplies</span></div>
-        <div class="mi">MCap: <span>$16B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$17B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">27.7</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">38.3</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$234.50</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">36.7×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$242.30</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">38.0×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.6B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">45.6%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">32.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">30.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">6.2%</div></div>
   </div>
 
@@ -97,50 +105,116 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Bioprocess Solutions (~75% Umsatz): Single-Use-Bioreaktoren, Filter, Medien für Biopharma-Produktion</li>
+</ul>
+<ul class="al">
 <li>Lab Products & Services (~25%): Laborequipment, Pipetten, Waagen</li>
+</ul>
+<ul class="al">
 <li>Hohes Recurring-Revenue durch Consumables (Razor-Blade-Modell)</li>
+</ul>
+<ul class="al">
 <li>Kunden: Top-20-Pharmakonzerne + Biotech-CDMOs (Lonza, Samsung Biologics)</li>
+</ul>
+<ul class="al">
 <li>Strukturtreiber: Biologics-Wachstum, mRNA-Plattformen, Zell- & Gentherapien</li>
+</ul>
+<ul class="al">
 <li>Hohe Switching Costs durch FDA-validierte Prozesse</li>
+</ul>
+<ul class="al">
 <li>Geografisch: Europa ~40%, Americas ~35%, Asien ~25%</li>
+</ul>
+<ul class="al">
 <li>Konsolidierter Markt mit Danaher (Cytiva), Thermo Fisher, Merck KGaA</li>
+</ul>
+<ul class="al">
 <li>M&A-getrieben in den letzten 10 Jahren (Polyplus, BIA Separations)</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Destocking-Zyklus läuft aus — Auftragsbücher stabilisieren sich</li>
+</ul>
+<ul class="al">
 <li>GLP-1-Boom (Ozempic/Mounjaro) erfordert massive Biologics-Capacity</li>
+</ul>
+<ul class="al">
 <li>Wiederbeschleunigung auf 10-15% organisches Wachstum möglich</li>
+</ul>
+<ul class="al">
 <li>Operating Leverage: Bei Volumenrückkehr Margen-Expansion von 17% Richtung 28-30%</li>
+</ul>
+<ul class="al">
 <li>Cell & Gene Therapy-Pipeline kommt strukturell in Produktion</li>
+</ul>
+<ul class="al">
 <li>Schwacher Euro hilft margenseitig</li>
+</ul>
+<ul class="al">
 <li>GWS-Signal 3/3 deutet auf institutionelles Akkumulieren hin</li>
+</ul>
+<ul class="al">
 <li>Übernahmefantasie als deutscher Pure-Play möglich</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>KGV 100 lässt keinerlei Fehler zu — Bewertung priced perfection</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 110% ist nach M&A-Welle problematisch bei höheren Zinsen</li>
+</ul>
+<ul class="al">
 <li>China-Exposure mit Biotech-Schwäche</li>
+</ul>
+<ul class="al">
 <li>ROE nur 6,2% — Kapitaleffizienz hat strukturell gelitten</li>
+</ul>
+<ul class="al">
 <li>Konkurrenz durch Danaher/Cytiva aggressiver geworden</li>
+</ul>
+<ul class="al">
 <li>Biotech-Funding bleibt unter Druck — kleinere Kunden investieren weniger</li>
+</ul>
+<ul class="al">
 <li>FCF von 310 Mio. € deckt Dividende und Zinslast nur knapp</li>
+</ul>
+<ul class="al">
 <li>Forward PE 37 immer noch deutlich über historischem Durchschnitt vergleichbarer Compounder</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum TTM: nur +1,8% (vs. historisch 15-20%)</li>
+</ul>
+<ul class="al">
 <li>Gross Margin: 45,6% — solide, aber unter Peak (~55%)</li>
+</ul>
+<ul class="al">
 <li>Operating Margin: 17,1% — komprimiert durch Underutilization</li>
+</ul>
+<ul class="al">
 <li>Net Margin: 4,6% — sehr schwach, belastet durch Zinslast und Abschreibungen</li>
+</ul>
+<ul class="al">
 <li>FCF: 310 Mio. € — deutlich unter historischem Niveau</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity: 110% — hoch, Hauptrisiko</li>
+</ul>
+<ul class="al">
 <li>ROE: 6,2% — historisch enttäuschend</li>
+</ul>
+<ul class="al">
 <li>Wettbewerbsvorteile: Hoher Burggraben, FDA-Validierungen, Single-Use-Standards</li>
+</ul>
+<ul class="al">
 <li>Recurring Revenue ~70% — Qualitätsmerkmal</li>
+</ul>
+<ul class="al">
 <li>Bilanz nach Polyplus-Übernahme angespannt</li>
+</ul>
+<ul class="al">
 <li>Capex-Phase weitgehend abgeschlossen — FCF-Hebel intakt</li>
+</ul>
+<ul class="al">
 <li>Klassischer Mid-Cycle-Trough-Earnings-Case</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -148,18 +222,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Sentiment nach 60%-Crash 2022/23 weiterhin vorsichtig — kein Hype</li>
+</ul>
+<ul class="al">
 <li>Institutionelle Quote stabil, aber Fonds untergewichtet vs. Peers</li>
+</ul>
+<ul class="al">
 <li>Short Interest moderat, kein Squeeze-Setup</li>
+</ul>
+<ul class="al">
 <li>Smart Money beginnt selektiv zu akkumulieren (siehe RS-Outperformance 5T+12%)</li>
+</ul>
+<ul class="al">
 <li>Retail-Interesse niedrig — Aktie ist aus der Mode</li>
+</ul>
+<ul class="al">
 <li>Klassischer „Reverse-Compounder"-Trade mit Mean-Reversion-Charakter</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 AKTIV: Weekly, Daily, 4H alle gebrochen — sehr starkes Setup</li>
+</ul>
+<ul class="al">
 <li>RS vs. QQQ: 27,67 — verbessert sich rapide auf kurzen Fenstern</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig sehr stark (+12,4% in 5T), aber 6M noch leicht negativ</li>
+</ul>
+<ul class="al">
 <li>Trendwende vom Boden plausibel — Übergang Akkumulation → Markup-Phase</li>
+</ul>
+<ul class="al">
 <li>Widerstand bei 250-267 € (52W-High-Zone), Support bei 200 €</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)</h3>
@@ -169,9 +261,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>Danaher (DHR): Diversifizierter, weniger Pure-Play, robuster, aber teurer</li>
+</ul>
+<ul class="al">
 <li>Merck KGaA: Hybrid Pharma/Life Science, günstiger, weniger Reinheit</li>
+</ul>
+<ul class="al">
 <li>Repligen (RGEN): US-Pure-Play, kleinerer Hebel, höhere Beta</li>
+</ul>
+<ul class="al">
 <li>Thermo Fisher (TMO): Quality-Leader, defensiver, weniger Upside</li>
+</ul>
+<ul class="al">
 <li>Sartorius bietet höchsten operativen Hebel bei höchstem Risiko</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -179,8 +279,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -188,14 +294,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

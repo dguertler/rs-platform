@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductors</span></div>
-        <div class="mi">MCap: <span>$326B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$377B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,14 +74,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">370.6</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">428.3</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$306.51</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">100.3×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$353.29</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">115.6×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.9B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">97.5%</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
@@ -96,48 +104,110 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Zwei Haupteinnahmequellen: License Fees (Vorab-Gebühren) und Royalties (pro verkauftem Chip)</li>
+</ul>
+<ul class="al">
 <li>Praktisch jedes Smartphone weltweit nutzt ARM-IP – über 99% Marktanteil im Mobile</li>
+</ul>
+<ul class="al">
 <li>ARMv9-Migration: höhere Royalty-Rate pro Chip, deutlicher Mix-Shift im Gange</li>
+</ul>
+<ul class="al">
 <li>Wachstumsfelder: Data Center (NVIDIA Grace, AWS Graviton), Automotive, AI-Edge, IoT</li>
+</ul>
+<ul class="al">
 <li>Compute Subsystems (CSS): vorgefertigte Designs, höhere Wertschöpfung pro Lizenz</li>
+</ul>
+<ul class="al">
 <li>Sehr asset-light: 97,5% Gross Margin spiegelt reines IP-Geschäftsmodell wider</li>
+</ul>
+<ul class="al">
 <li>Kunden-Konzentration: Apple, Qualcomm, MediaTek, Samsung, NVIDIA dominieren</li>
+</ul>
+<ul class="al">
 <li>Mehrheitseigentümer SoftBank (~90%) – freier Streubesitz extrem niedrig</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>ARMv9-Royalty-Verdopplung beschleunigt sich – Umsatz pro Chip steigt mehrjährig</li>
+</ul>
+<ul class="al">
 <li>AI-Inference am Edge (Smartphones, PCs, Autos) braucht effiziente ARM-Cores</li>
+</ul>
+<ul class="al">
 <li>Hyperscaler bauen zunehmend eigene ARM-basierte Server-Chips → Margen-Booster</li>
+</ul>
+<ul class="al">
 <li>Windows-on-ARM und Apple-Silicon-Effekt erreichen den PC-Markt strukturell</li>
+</ul>
+<ul class="al">
 <li>Automotive-Royalties wachsen mit Software-defined Vehicles zweistellig</li>
+</ul>
+<ul class="al">
 <li>China-Risiken könnten ironischerweise zu mehr ARM-Adoption führen (vs. x86)</li>
+</ul>
+<ul class="al">
 <li>Sehr kleiner Float → jeder positive Newsflow erzeugt überproportionale Bewegung</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Bewertung: 66x Sales und 100x Forward-Earnings lassen null Toleranz für Enttäuschungen</li>
+</ul>
+<ul class="al">
 <li>Analysten-Kursziel $232 liegt 24% unter aktuellem Kurs – institutioneller Skeptizismus</li>
+</ul>
+<ul class="al">
 <li>RISC-V als Open-Source-Alternative gewinnt traction, besonders in China und im IoT</li>
+</ul>
+<ul class="al">
 <li>Qualcomm-Rechtsstreit zeigt Spannungen mit Schlüsselkunden</li>
+</ul>
+<ul class="al">
 <li>Hohe Abhängigkeit von Smartphone-Zyklus (~50% der Royalties)</li>
+</ul>
+<ul class="al">
 <li>SoftBank-Overhang: potenzielle Sekundärplatzierungen drücken Aktie</li>
+</ul>
+<ul class="al">
 <li>Beta 3,41 → bei jeder AI-Korrektur überproportionaler Drawdown</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow nur $770 Mio. – rechtfertigt keine $326 Mrd. Bewertung kurzfristig</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum 20,1% YoY – solide, aber nicht hyper-skalierend</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 97,5% – Best-in-Class IP-Modell</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 29,6% – Spielraum nach oben durch Skalierung</li>
+</ul>
+<ul class="al">
 <li>Net Margin 18,4% – durch hohe R&D und SBC gedrückt</li>
+</ul>
+<ul class="al">
 <li>FCF $770 Mio. → FCF-Yield <0,3% bei aktueller Bewertung</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 5,21 – optisch hoch, aber Bilanz solide</li>
+</ul>
+<ul class="al">
 <li>ROE nur 12% – für IP-Business unterdurchschnittlich</li>
+</ul>
+<ul class="al">
 <li>Price/Book 39 – reine Goodwill-/IP-Bewertung</li>
+</ul>
+<ul class="al">
 <li>Stock-Based Compensation drückt GAAP-Earnings massiv</li>
+</ul>
+<ul class="al">
 <li>Royalty-Mix-Shift hin zu v9 = struktureller Margen-Tailwind</li>
+</ul>
+<ul class="al">
 <li>Wettbewerbsvorteil: Ökosystem-Lock-in, Software-Compatibility, jahrzehntelange IP</li>
+</ul>
+<ul class="al">
 <li>Kapitaleffizienz operativ exzellent, aber Aktien-Bewertung übertrieben</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -145,18 +215,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Extrem crowded auf der Long-Seite unter Retail und AI-Thementradern</li>
+</ul>
+<ul class="al">
 <li>Institutionelles Ownership niedrig wegen SoftBank-Float-Problem</li>
+</ul>
+<ul class="al">
 <li>Smart Money tendenziell skeptisch – Analystenziele unter Kurs</li>
+</ul>
+<ul class="al">
 <li>Short-Interest moderat, aber steigend bei jedem neuen ATH</li>
+</ul>
+<ul class="al">
 <li>Hype-Komponente hoch, fundamentale Komponente moderat</li>
+</ul>
+<ul class="al">
 <li>Klassische "narrative stock" – getrieben von AI-Story, nicht Cashflows</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>RS-Score 370 vs. QQQ – extrem starkes Outperformance-Signal</li>
+</ul>
+<ul class="al">
 <li>50T-Performance +143%, 6M +108% – parabolisch, kurzfristig überhitzt</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 AKTIV: Weekly, Daily, 4H Strukturbruch – starkes Momentum-Setup</li>
+</ul>
+<ul class="al">
 <li>Nahe 52W-Hoch ($315) – Breakout-Charakter, aber Anstieg vertikal</li>
+</ul>
+<ul class="al">
 <li>Risk/Reward kurzfristig schlecht – Rücksetzer auf $250-270 wahrscheinlich vor Fortsetzung</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -166,9 +254,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>NVDA: bessere Margen, höheres Wachstum, günstigere Bewertung relativ zum FCF</li>
+</ul>
+<ul class="al">
 <li>SNPS/CDNS: vergleichbares IP-Modell, viel günstiger bei ähnlicher Qualität</li>
+</ul>
+<ul class="al">
 <li>QCOM: ARM-Kunde, deutlich günstiger, aber zyklischer</li>
+</ul>
+<ul class="al">
 <li>AVGO: diversifizierter, höherer FCF-Yield, attraktiveres Risk/Reward</li>
+</ul>
+<ul class="al">
 <li>ARM ist mit Abstand die teuerste Aktie der Peergroup</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +272,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 4/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 1/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +287,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

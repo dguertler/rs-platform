@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Financial Services</span></div>
         <div class="mi">Industrie: <span>Banks - Regional</span></div>
-        <div class="mi">MCap: <span>$56B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$53B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-2.7</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">19.7</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$29.28</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">7.5×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$27.68</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">7.1×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$29.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">355.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">359.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">8.7%</div></div>
   </div>
 
@@ -97,50 +105,116 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Investment Bank (IB): FICC-Trading historisch stärkster Ertragstreiber, sehr zyklisch</li>
+</ul>
+<ul class="al">
 <li>Corporate Bank: Stabiles, margenstarkes Geschäft mit deutschen Mittelständlern und Multinationals</li>
+</ul>
+<ul class="al">
 <li>Private Bank: Retail Deutschland + International Private Bank, Niedrigmargengeschäft</li>
+</ul>
+<ul class="al">
 <li>Asset Management (DWS, 79% Anteil): Stabile Fee-Erträge, separat gelistet</li>
+</ul>
+<ul class="al">
 <li>Zinsabhängigkeit: Profitiert massiv von EZB-Zinsen, leidet bei schneller Lockerung</li>
+</ul>
+<ul class="al">
 <li>Trend: Fokus auf Capital-Light-Geschäft, weg von Risk-Weighted-Assets-Intensität</li>
+</ul>
+<ul class="al">
 <li>Hauptmärkte: Deutschland (~40%), restliches Europa, USA, Asien</li>
+</ul>
+<ul class="al">
 <li>Kostenbasis seit 2019 strukturell um >20% gesenkt</li>
+</ul>
+<ul class="al">
 <li>Buyback- und Dividendenprogramm zurück: Kapitalrückführung als zentraler Treiber</li>
+</ul>
+<ul class="al">
 <li>CET1-Ratio ~13,8% — komfortabel über regulatorischem Minimum</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Re-Rating Potenzial: P/B 0,71 → 1,0 = +40% rein mechanisch</li>
+</ul>
+<ul class="al">
 <li>ROTE-Ziel 2025: >10%, was Bewertungsexpansion rechtfertigt</li>
+</ul>
+<ul class="al">
 <li>M&A-Welle in Europa: IB-Erträge könnten 2025/26 überraschen</li>
+</ul>
+<ul class="al">
 <li>Kapitalrückführung: Dividenden + Buybacks zusammen ~8-10% Yield erwartet</li>
+</ul>
+<ul class="al">
 <li>Europäische Bankenkonsolidierung: DBK potenzieller Akquisiteur (Commerzbank-Fantasie)</li>
+</ul>
+<ul class="al">
 <li>Zinskurve normalisiert sich: NII-Druck nimmt ab, Risk-Free-Spread stabilisiert</li>
+</ul>
+<ul class="al">
 <li>Underowned vs. französische und italienische Konkurrenz</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Strukturell niedrige Profitabilität vs. US-Investmentbanken (JPM, GS)</li>
+</ul>
+<ul class="al">
 <li>Deutsche Wirtschaft in Stagnation: Corporate Loan Defaults könnten ansteigen</li>
+</ul>
+<ul class="al">
 <li>Commercial Real Estate Exposure (US-Office): Wiederkehrende Sorge</li>
+</ul>
+<ul class="al">
 <li>Rechtsrisiken & Legacy-Litigation chronisch unterschätzt</li>
+</ul>
+<ul class="al">
 <li>EZB-Zinssenkungen drücken NII über die nächsten 6-12 Monate</li>
+</ul>
+<ul class="al">
 <li>IB-Erträge hochvolatil: Bad Quarter kann Story sofort kippen</li>
+</ul>
+<ul class="al">
 <li>Regulatorischer Druck (Basel IV) bindet Kapital</li>
+</ul>
+<ul class="al">
 <li>Kein echter Compounder-Status — bleibt zyklisches Tradinginstrument</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum mager: +1,2% YoY — kein Wachstumstitel</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 37,3%: Solide, aber unter Top-Banken</li>
+</ul>
+<ul class="al">
 <li>Net Margin 22,7%: Anständig für europäische Bank</li>
+</ul>
+<ul class="al">
 <li>ROE 8,7%: Unter Kapitalkosten — Hauptgrund für P/B<1</li>
+</ul>
+<ul class="al">
 <li>Forward PE 7,55: Klassisches europäisches Bank-Multiple</li>
+</ul>
+<ul class="al">
 <li>CET1 ~13,8%: Bilanztechnisch robust</li>
+</ul>
+<ul class="al">
 <li>Dividende reaktiviert, Payout-Ratio steigt</li>
+</ul>
+<ul class="al">
 <li>Cost-Income-Ratio ~65%: Verbessert, aber noch nicht best-in-class</li>
+</ul>
+<ul class="al">
 <li>Beta 1,0: Geringer als historisch (war 1,4+)</li>
+</ul>
+<ul class="al">
 <li>DWS-Beteiligung als versteckter Wert (~€7 Mrd.)</li>
+</ul>
+<ul class="al">
 <li>Keine echten Moats — Commodity-Banking</li>
+</ul>
+<ul class="al">
 <li>Bilanzqualität deutlich besser als 2016-2019</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -148,18 +222,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Under-owned bei US-Institutionellen, weiterhin "Once-burned-twice-shy"-Status</li>
+</ul>
+<ul class="al">
 <li>Sentiment in Europa moderat positiv, kein Hype</li>
+</ul>
+<ul class="al">
 <li>Retail-Beteiligung in Deutschland hoch, oft Schwächezeichen</li>
+</ul>
+<ul class="al">
 <li>Hedgefonds-Positionierung: Gemischt, einige Long-Europe-Banks-Trades</li>
+</ul>
+<ul class="al">
 <li>Momentum: Nach 6M-Schwäche jetzt frische Stärke (+2,7% 5T)</li>
+</ul>
+<ul class="al">
 <li>Short Interest moderat, kein Squeeze-Setup</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 AKTIV: Strukturbruch auf allen Zeitebenen — starkes Setup</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig: Erholung nach 6M-Korrektur, frische Stärke</li>
+</ul>
+<ul class="al">
 <li>Position im 52W-Range: 71% — gesund, nicht überhitzt</li>
+</ul>
+<ul class="al">
 <li>RS-Score -2,67 vs. QQQ: Underperformer, aber Trendwende möglich</li>
+</ul>
+<ul class="al">
 <li>Setup: Klassisches Mean-Reversion-Plus-Trendwende-Pattern</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)</h3>
@@ -169,9 +261,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>BNP Paribas (BNP.PA): Profitabler, stabiler, weniger IB-Volatilität, höher bewertet</li>
+</ul>
+<ul class="al">
 <li>UBS (UBSG.SW): Wealth-Management-Premium, deutlich höhere Bewertung gerechtfertigt</li>
+</ul>
+<ul class="al">
 <li>Barclays (BARC.L): Ähnliches IB-Profil, billiger, aber UK-Risiko</li>
+</ul>
+<ul class="al">
 <li>Commerzbank (CBK.DE): Pure-Play Deutschland, M&A-Spekulationsobjekt, höhere Zinssensitivität</li>
+</ul>
+<ul class="al">
 <li>ING (INGA.AS): Best-in-Class europäische Universalbank, höherer ROE</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -179,8 +279,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 3/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3/5</li>
 </ul></div>
   </div>
@@ -188,14 +294,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

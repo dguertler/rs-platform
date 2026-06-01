@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Financial Services</span></div>
         <div class="mi">Industrie: <span>Insurance - Diversified</span></div>
-        <div class="mi">MCap: <span>$148B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$143B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">80</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">28.8</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">11.8</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$391.00</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.8×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$377.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.4×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$115.5B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">24.3%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">443.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">448.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">18.7%</div></div>
   </div>
 
@@ -96,49 +104,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>P&C-Versicherung (Sach/Unfall): Größter Gewinnbringer, Kern in Europa, harter Zyklus mit Preisanhebungen</li>
+</ul>
+<ul class="al">
 <li>Lebens- & Krankenversicherung: Profitiert massiv von höheren Zinsen über Reinvestition</li>
+</ul>
+<ul class="al">
 <li>Asset Management: PIMCO (~2 Bio. USD AuM) + Allianz Global Investors — Gebührenmodell</li>
+</ul>
+<ul class="al">
 <li>Globale Diversifikation: Europa, USA, Asien-Pazifik</li>
+</ul>
+<ul class="al">
 <li>Float-Modell: Prämien werden investiert, bevor Schäden ausgezahlt werden</li>
+</ul>
+<ul class="al">
 <li>Buffett-Style Kapitalallokation: Aggressive Buybacks (>1 Mrd. EUR p.a.) + steigende Dividenden</li>
+</ul>
+<ul class="al">
 <li>Solvency-II-Quote >200% — Überkapital ermöglicht weitere Rückkäufe</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Megatrends: Alternde Bevölkerung, Klimarisiko-Versicherung, Cyber</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Höhere Zinsen = strukturell höhere Reinvestitionsrenditen für viele Jahre</li>
+</ul>
+<ul class="al">
 <li>Hartes P&C-Cycle treibt Combined Ratios und Underwriting-Profite</li>
+</ul>
+<ul class="al">
 <li>Aggressive Buybacks reduzieren Aktienanzahl jährlich um 2-3%</li>
+</ul>
+<ul class="al">
 <li>PIMCO-Comeback bei Bond-Inflows nach Zinswende</li>
+</ul>
+<ul class="al">
 <li>Re-Rating auf 14-15x KGV möglich bei Annäherung an US-Peers</li>
+</ul>
+<ul class="al">
 <li>Dividendenrendite ~5% + Buyback-Yield = 7-8% Cash-Return</li>
+</ul>
+<ul class="al">
 <li>Defensives Qualitätsprofil zieht in Volatilitätsphasen Kapital an</li>
+</ul>
+<ul class="al">
 <li>Asset-Management-Erträge skalieren bei steigenden Märkten</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Großschäden (Naturkatastrophen, Hurricanes) können Quartale ruinieren</li>
+</ul>
+<ul class="al">
 <li>Sinkende Zinsen würden Bull-Case beim Lebensgeschäft brechen</li>
+</ul>
+<ul class="al">
 <li>Europa-Exposure: Schwaches Makro begrenzt Prämienwachstum</li>
+</ul>
+<ul class="al">
 <li>PIMCO leidet bei erneutem Bond-Selloff (siehe 2022)</li>
+</ul>
+<ul class="al">
 <li>Reputationsrisiken (Structured Alpha Settlement 2022 — 6 Mrd. USD)</li>
+</ul>
+<ul class="al">
 <li>Regulatorisches Risiko: Solvency-Anforderungen können steigen</li>
+</ul>
+<ul class="al">
 <li>Kursziel bereits nahezu erreicht ($403,9 vs. $391) — wenig Luft</li>
+</ul>
+<ul class="al">
 <li>Wechselkurs- und Reservenrisiken bei Inflationsspitzen</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM: 115,5 Mrd. USD, YoY +8,8% — solide für Versicherer</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 19,3% — Spitzenwert im Sektor</li>
+</ul>
+<ul class="al">
 <li>Net Margin 10,4% — typisch für Diversifizierte</li>
+</ul>
+<ul class="al">
 <li>ROE 18,7% — exzellent, deutlich über Kapitalkosten</li>
+</ul>
+<ul class="al">
 <li>KGV 12,6 / Forward 11,8 — defensiv bewertet</li>
+</ul>
+<ul class="al">
 <li>Price/Book 2,37 — gerechtfertigt durch hohen ROE</li>
+</ul>
+<ul class="al">
 <li>Dividende: ~5% Yield, stabil und steigend</li>
+</ul>
+<ul class="al">
 <li>Buybacks: ~1,5 Mrd. EUR p.a., kapitaleffizient</li>
+</ul>
+<ul class="al">
 <li>Solvency-II >200% — Festungsbilanz</li>
+</ul>
+<ul class="al">
 <li>Beta 0,67 — defensives Risikoprofil</li>
+</ul>
+<ul class="al">
 <li>Combined Ratio im P&C konstant <94%</li>
+</ul>
+<ul class="al">
 <li>Kein FCF ausgewiesen (Versicherer-typisch), aber starke Cash-Generierung</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -146,18 +218,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Under-owned von US-Fonds, gut allokiert bei europäischen Value-Investoren</li>
+</ul>
+<ul class="al">
 <li>Kein Hype-Titel — institutionelles Dividendenkern-Holding</li>
+</ul>
+<ul class="al">
 <li>Smart Money (Norges, Blackrock) langfristig positioniert</li>
+</ul>
+<ul class="al">
 <li>Momentum bestätigt: 12M-RS +12,7%, gesund ohne Übertreibung</li>
+</ul>
+<ul class="al">
 <li>Sentiment neutral-positiv, kein FOMO, kein Pessimismus</li>
+</ul>
+<ul class="al">
 <li>Klassisches "Sleep-well-at-night"-Asset</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 AKTIV (Weekly, Daily, 4H gebrochen) — vollständiger Bruch</li>
+</ul>
+<ul class="al">
 <li>RS-Score 28,77 vs. QQQ — solide relative Stärke</li>
+</ul>
+<ul class="al">
 <li>Kurs nahe 52W-Hoch ($391 vs. $397) — gesunder Uptrend</li>
+</ul>
+<ul class="al">
 <li>50T-RS +8,6% — Momentum-Beschleunigung sichtbar</li>
+</ul>
+<ul class="al">
 <li>Zyklus-Phase: Markup, kein Anzeichen für Distribution</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -167,8 +257,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>AXA (CS.PA): Günstiger (~9x KGV), aber niedrigerer ROE und schwächere Diversifikation</li>
+</ul>
+<ul class="al">
 <li>Zurich Insurance (ZURN.SW): Höher bewertet, defensiver, ähnliches Yield-Profil</li>
+</ul>
+<ul class="al">
 <li>Munich Re (MUV2.DE): Reinsurer-Fokus, höhere Zyklik, beste Solvency</li>
+</ul>
+<ul class="al">
 <li>Chubb (CB): US-Premium-Bewertung 14x, bestes P&C-Underwriting global</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +272,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 5/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 3/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +287,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

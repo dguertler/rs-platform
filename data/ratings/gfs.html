@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductors</span></div>
-        <div class="mi">MCap: <span>$47B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$44B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">298.5</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">178.6</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$85.64</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">34.1×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$79.97</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">31.8×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">26.1%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">56.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">60.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">6.8%</div></div>
   </div>
 
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Pure-Play-Foundry für Mature/Specialty Nodes (22FDX, 12LP+, RF-SOI)</li>
+</ul>
+<ul class="al">
 <li>Hauptkunden: Qualcomm, AMD (Legacy), NXP, Infineon, STMicro, Defense-Sektor</li>
+</ul>
+<ul class="al">
 <li>Endmärkte: Smart Mobile (~45%), Automotive (~20%), Communications, IoT, Industrial</li>
+</ul>
+<ul class="al">
 <li>FD-SOI-Technologie als Differenzierungs-Moat gegenüber TSMC</li>
+</ul>
+<ul class="al">
 <li>Long-Term-Agreements (LTAs) mit Pre-Payments sichern Auslastung</li>
+</ul>
+<ul class="al">
 <li>Fabs in USA (NY, VT), Deutschland (Dresden), Singapur – geografische Diversifikation</li>
+</ul>
+<ul class="al">
 <li>CHIPS-Act-Förderung: $1,5 Mrd. direkte Subvention plus Steuergutschriften</li>
+</ul>
+<ul class="al">
 <li>Defense-Foundry-Status als einziger US-Trusted-Foundry-Partner</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Strukturelle Re-Rating-Story durch geopolitische De-Risking-Trades</li>
+</ul>
+<ul class="al">
 <li>Automotive-Semis: SiC, Power Management, Radar – mehrjähriger Capex-Zyklus der Tier-1s</li>
+</ul>
+<ul class="al">
 <li>AI-Edge-Inference benötigt energieeffiziente Mature-Node-Chips (nicht alles läuft auf 3nm)</li>
+</ul>
+<ul class="al">
 <li>Pricing-Power durch LTAs – stabilere Marge als zyklische Peers</li>
+</ul>
+<ul class="al">
 <li>CHIPS-Act-Subventionen heben effektive Cash-Generierung deutlich</li>
+</ul>
+<ul class="al">
 <li>Margenexpansion bei Auslastungserholung: jeder 5%-Util-Punkt = massiver Operating Leverage</li>
+</ul>
+<ul class="al">
 <li>Übernahme von Tagrisse Foundries / Konsolidierung könnte GFS aufwerten</li>
+</ul>
+<ul class="al">
 <li>Defense-Exposure als unzyklischer Buffer mit Premium-Margen</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Zyklisches Geschäft – Smartphone-Demand bleibt schwach, Inventory-Korrektur nicht beendet</li>
+</ul>
+<ul class="al">
 <li>Strukturell niedrigere Margen als TSMC (Gross Margin 26% vs. TSMC 53%)</li>
+</ul>
+<ul class="al">
 <li>3% Umsatzwachstum rechtfertigt KGV 51 fundamental nicht</li>
+</ul>
+<ul class="al">
 <li>Kein Zugang zu Leading Edge – langfristiger TAM-Verlust an TSMC/Samsung</li>
+</ul>
+<ul class="al">
 <li>Hoher Capex-Bedarf drückt FCF in Investitionsphasen</li>
+</ul>
+<ul class="al">
 <li>China-Foundries (SMIC, Hua Hong) greifen Mature Nodes aggressiv mit Subventionen an</li>
+</ul>
+<ul class="al">
 <li>Analysten-Kursziel $78.95 LIEGT UNTER aktuellem Kurs – institutionelle Skepsis</li>
+</ul>
+<ul class="al">
 <li>Mubadala (Großaktionär) Overhang – mögliche Block-Verkäufe</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM: $6,84 Mrd., Wachstum nur +3,1% YoY – ausgebombte Basis</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 26,1% – Foundry-Mittelfeld, deutlich unter TSMC</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 11% – akzeptabel im Zyklustief</li>
+</ul>
+<ul class="al">
 <li>Net Margin 11,4%, Free Cashflow $1,19 Mrd. – solide Cash-Konversion</li>
+</ul>
+<ul class="al">
 <li>ROE 6,8% – schwach, spiegelt Underutilization wider</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 14,7% – sehr gesunde Bilanz, geringes Finanzrisiko</li>
+</ul>
+<ul class="al">
 <li>Price/Book 3,99 – nicht teuer für Asset-Heavy-Business</li>
+</ul>
+<ul class="al">
 <li>Beta 1,71 – klar zyklisches Risikoprofil</li>
+</ul>
+<ul class="al">
 <li>Keine Dividende relevant – Capital wird reinvestiert</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Moat: FD-SOI, US-Trusted-Foundry-Status</li>
+</ul>
+<ul class="al">
 <li>ROIC unter Kapitalkosten – Qualitäts-Schwachpunkt</li>
+</ul>
+<ul class="al">
 <li>CHIPS-Act-Cash verbessert Bilanzqualität weiter</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,18 +219,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Vom Underowned-Status in Momentum-Long-Bücher gewandert</li>
+</ul>
+<ul class="al">
 <li>Short Interest dürfte nach +143% in 6M massiv eingedeckt worden sein (Squeeze-Komponente)</li>
+</ul>
+<ul class="al">
 <li>Institutionelles Ownership steigt – ETF-Flows in Semi-ex-NVDA-Themen</li>
+</ul>
+<ul class="al">
 <li>Sentiment-Shift von "Boring Foundry" zu "Geopolitical Winner"</li>
+</ul>
+<ul class="al">
 <li>Mubadala-Overhang bleibt psychologischer Deckel</li>
+</ul>
+<ul class="al">
 <li>Crowding-Risiko aktuell mittel, Late-Cycle-Momentum</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 AKTIV – Weekly, Daily, 4H allesamt gebrochen, maximales Bullish-Setup</li>
+</ul>
+<ul class="al">
 <li>RS-Score 298 vs. QQQ – außergewöhnliche relative Stärke</li>
+</ul>
+<ul class="al">
 <li>5T +25%, 20T +34% – kurzfristig überhitzt, Pullback-Risiko hoch</li>
+</ul>
+<ul class="al">
 <li>Nahe 52W-Hoch ($89,9), klarer Uptrend</li>
+</ul>
+<ul class="al">
 <li>Trading-Setup: Long bei Pullbacks auf 4H-Struktur-Retest, nicht chasen</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)</h3>
@@ -168,8 +258,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>TSMC: Premium-Foundry, technologisch führend, Geopolitik-Risiko, fairer bewertet</li>
+</ul>
+<ul class="al">
 <li>UMC: Direkter Mature-Node-Peer, deutlich günstiger (13x), aber kein US-Onshoring-Trade</li>
+</ul>
+<ul class="al">
 <li>SMIC: China-Pendant, höchstes Geopolitik-Risiko, ähnliche Bewertung</li>
+</ul>
+<ul class="al">
 <li>Tower Semiconductor: Nischen-Foundry, kleiner, weniger liquide</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -177,8 +273,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 3/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -186,14 +288,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

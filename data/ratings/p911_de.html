@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
         <div class="mi">Industrie: <span>Auto Manufacturers</span></div>
-        <div class="mi">MCap: <span>$42B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$43B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">15.3</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">40.9</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$46.41</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">20.2×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$47.45</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">20.6×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$35.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">14.1%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">219.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">215.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">0.8%</div></div>
   </div>
 
@@ -97,51 +105,119 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Premium-Sportwagenhersteller mit ~310k Auslieferungen p.a. (911, Cayenne, Macan, Panamera, Taycan)</li>
+</ul>
+<ul class="al">
 <li>Margenträger 911 (zweistellige EBIT-Marge, hoher Customizing-Anteil)</li>
+</ul>
+<ul class="al">
 <li>Cayenne & Macan als Volumenmodelle mit globaler Reichweite</li>
+</ul>
+<ul class="al">
 <li>China historisch ~25-30% des Absatzes – aktuell strukturell rückläufig (-28% YoY)</li>
+</ul>
+<ul class="al">
 <li>Übergang zur EV-Plattform (Taycan, Macan EV) verläuft schleppend, hohe Capex-Belastung</li>
+</ul>
+<ul class="al">
 <li>Financial Services & Leasing als margenstabiler Sekundärblock</li>
+</ul>
+<ul class="al">
 <li>Lifestyle/Merchandise mit Premium-Markenstrahlkraft, aber finanziell marginal</li>
+</ul>
+<ul class="al">
 <li>Hohe vertikale Integration mit VW-Konzern (Plattformen, Einkauf, Skalierung)</li>
+</ul>
+<ul class="al">
 <li>Pricing Power historisch stark, aktuell durch Mix-Verschiebung erodiert</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Abhängigkeit von zyklischem Premium-Auto-Markt</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Sentiment am Tiefpunkt: Aktie -45% seit IPO, institutionelle Erwartungen kapituliert</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 signalisiert technischen Trendwechsel über alle Zeitebenen</li>
+</ul>
+<ul class="al">
 <li>911 bleibt Cash-Cow mit ikonischem Markenstatus und Pricing Power</li>
+</ul>
+<ul class="al">
 <li>Macan EV-Ramp ab 2025/26 könnte Volumen und Marge stabilisieren</li>
+</ul>
+<ul class="al">
 <li>China-Stabilisierung als optionaler Re-Rating-Trigger</li>
+</ul>
+<ul class="al">
 <li>Kostenprogramm in Vorbereitung (Personal, Plattformen, Komplexitätsreduktion)</li>
+</ul>
+<ul class="al">
 <li>Bewertung auf 20x Forward PE mit Erholungspotenzial auf 25-30x bei Luxus-Narrativ-Comeback</li>
+</ul>
+<ul class="al">
 <li>Insider/Familie Porsche-Piëch als Anker, kein Take-Under-Risiko</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>China-Markt strukturell verloren an BYD, Nio, Li Auto – kein einfacher Comeback</li>
+</ul>
+<ul class="al">
 <li>EV-Transition kostet Marge: Taycan -49% YoY, Macan EV mit Software-Problemen</li>
+</ul>
+<ul class="al">
 <li>Operating Margin von 18% (2022) auf 7% kollabiert – noch nicht stabilisiert</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow negativ, Dividende fragwürdig nachhaltig</li>
+</ul>
+<ul class="al">
 <li>Luxus-Premium-Narrativ ist gebrochen, Markt behandelt Porsche wie OEM</li>
+</ul>
+<ul class="al">
 <li>Komplexe Holding-Struktur mit Porsche SE drückt auf Multiple</li>
+</ul>
+<ul class="al">
 <li>Premium-Konkurrenz (Ferrari, Mercedes-AMG, BMW M) gewinnt Marktanteil</li>
+</ul>
+<ul class="al">
 <li>Konsumzyklus in Europa/USA fragil, Premium-Auto frühzyklisch</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM 35,8 Mrd. €, -5,2% YoY – klare Schrumpfung</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 14,1% – sehr niedrig für ein angebliches "Luxus"-Unternehmen</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 7,1% – historisch lag man bei 16-18%</li>
+</ul>
+<ul class="al">
 <li>Net Margin 0,9% – nahezu unprofitabel auf Bottom-Line</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow -0,43 Mrd. € – ein Warnsignal</li>
+</ul>
+<ul class="al">
 <li>ROE 0,8% – Kapitaleffizienz aktuell katastrophal</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 50,4 – moderat, kein Bilanzrisiko</li>
+</ul>
+<ul class="al">
 <li>Hohe Capex-Last durch EV-Transformation</li>
+</ul>
+<ul class="al">
 <li>Dividendenrendite optisch hoch, aber Payout fraglich</li>
+</ul>
+<ul class="al">
 <li>Markenstärke und Kundenbindung weiterhin Top-3 global</li>
+</ul>
+<ul class="al">
 <li>Historische Capital Allocation solide, aktuelle Phase ausnahmsweise schwach</li>
+</ul>
+<ul class="al">
 <li>Qualität strukturell hoch, zyklisch aber stark gedrückt</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -149,17 +225,33 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Sentiment extrem negativ, klassisches "fallen angel" Setup</li>
+</ul>
+<ul class="al">
 <li>Institutionelles Ownership ausgedünnt, Long-Only-Investoren kapituliert</li>
+</ul>
+<ul class="al">
 <li>Hedge Funds teilweise short auf strukturellen China- und EV-Thesen</li>
+</ul>
+<ul class="al">
 <li>Retail-Anteil gering, kein Hype mehr vorhanden</li>
+</ul>
+<ul class="al">
 <li>Smart Money beginnt vorsichtig zu akkumulieren – frühe Phase</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 aktiv – Strukturbruch auf Weekly, Daily und 4H</li>
+</ul>
+<ul class="al">
 <li>50T-RS +14,3% deutet auf beginnende relative Stärke vs. QQQ</li>
+</ul>
+<ul class="al">
 <li>6M noch -7,3%, aber kurzfristige Trendwende sichtbar</li>
+</ul>
+<ul class="al">
 <li>Chartbild: Bodenbildungsphase mit erstem höheren Hoch</li>
+</ul>
+<ul class="al">
 <li>GWS-Status spricht für taktischen Long-Einstieg mit engem Stopp</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
@@ -169,8 +261,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>Ferrari (RACE): echter Luxus-Compounder, 45x PE, 25%+ EBIT-Marge – Benchmark, die Porsche nicht erreicht</li>
+</ul>
+<ul class="al">
 <li>Mercedes-Benz (MBG): billiger (6x PE), aber kein Premium-Narrativ</li>
+</ul>
+<ul class="al">
 <li>BMW (BMW): solide, breiter aufgestellt, weniger China-exponiert</li>
+</ul>
+<ul class="al">
 <li>Aston Martin (AML): Worst Case Szenario eines Luxus-OEMs</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -178,8 +276,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 3/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 3/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3/5</li>
 </ul></div>
   </div>
@@ -187,14 +291,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

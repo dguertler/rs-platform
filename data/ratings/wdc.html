@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Computer Hardware</span></div>
-        <div class="mi">MCap: <span>$167B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$183B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">311.0</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">313.2</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$484.28</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">27.8×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$531.21</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">30.2×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">45.4%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">12.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">11.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">85.9%</div></div>
   </div>
 
@@ -96,49 +104,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Reiner HDD-Hersteller nach Sandisk-Abspaltung (Februar 2025)</li>
+</ul>
+<ul class="al">
 <li>Hauptprodukt: Nearline-HDDs für Cloud-/Hyperscaler-Rechenzentren (>50% Umsatz)</li>
+</ul>
+<ul class="al">
 <li>Client/Consumer-HDDs: rückläufiges Segment, geringere Marge</li>
+</ul>
+<ul class="al">
 <li>Duopol mit Seagate (zusammen ~85% Marktanteil), Toshiba als Nr. 3</li>
+</ul>
+<ul class="al">
 <li>Technologie-Vorsprung durch HAMR/ePMR-Roadmap, 32TB+ Drives in Pipeline</li>
+</ul>
+<ul class="al">
 <li>Umsatzmodell: kapazitätsgetrieben, Hyperscaler-Verträge mit langer Visibilität</li>
+</ul>
+<ul class="al">
 <li>Hohe Fixkostenbasis → operating leverage enorm in Upcycles</li>
+</ul>
+<ul class="al">
 <li>Kapitalintensiv, aber Capex-Disziplin nach Branchenkonsolidierung deutlich verbessert</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>AI-Capex-Welle treibt Exabyte-Nachfrage über Jahre, nicht Quartale</li>
+</ul>
+<ul class="al">
 <li>Duopol-Struktur ermöglicht erstmals nachhaltige Preisdisziplin</li>
+</ul>
+<ul class="al">
 <li>HAMR-Technologie verlängert HDD-Lebenszyklus gegen SSD-Substitution</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 37% zeigt: strukturell höhere Profitabilität als historisch (10-15%)</li>
+</ul>
+<ul class="al">
 <li>FCF-Generierung erlaubt Dividenden + Buybacks + Schuldenabbau parallel</li>
+</ul>
+<ul class="al">
 <li>Pure-Play-Story nach Sandisk-Spin-off lockt neue Investorengruppe an</li>
+</ul>
+<ul class="al">
 <li>Analysten-Konsens "Strong Buy" deutet auf weitere Upgrades hin</li>
+</ul>
+<ul class="al">
 <li>Lagerbestände bei Kunden niedrig → Bestellzyklus könnte länger laufen</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Beta 2.16 zeigt: massive Drawdown-Gefahr bei Marktstress</li>
+</ul>
+<ul class="al">
 <li>HDD bleibt langfristig substitutionsbedroht durch fallende SSD-Preise</li>
+</ul>
+<ul class="al">
 <li>Bewertung von 23x P/B extrem für Hardware-Hersteller — historisch teuer</li>
+</ul>
+<ul class="al">
 <li>Zyklik nicht eliminiert, nur verzögert — jeder Hyperscaler-Capex-Cut trifft sofort</li>
+</ul>
+<ul class="al">
 <li>Net Margin 55% wirkt unnatürlich hoch, evtl. durch Einmaleffekte (Spin-off) verzerrt</li>
+</ul>
+<ul class="al">
 <li>Konzentrationsrisiko: Top-5-Kunden machen Großteil Cloud-Umsatz aus</li>
+</ul>
+<ul class="al">
 <li>China-Exposure und Geopolitik bleiben Tail Risk</li>
+</ul>
+<ul class="al">
 <li>Nach +850% vom 52W-Tief: extrem überdehnter Chart, Mean Reversion möglich</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum 45,5% YoY — außergewöhnlich für Hardware</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 45,4% (historisch 25-30%) → strukturelle Verbesserung</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 37% — Spitzenniveau, Frage der Nachhaltigkeit</li>
+</ul>
+<ul class="al">
 <li>FCF $2,08 Mrd. solide, aber im Verhältnis zur Marktkap. nur ~1,2%</li>
+</ul>
+<ul class="al">
 <li>ROE 85,9% beeindruckend, aber durch Spin-off-Effekte verzerrt</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 17,8 — Bilanz nach Restrukturierung deutlich entlastet</li>
+</ul>
+<ul class="al">
 <li>Forward PE 27,8 ≈ Trailing PE → kaum Wachstumsabschlag eingepreist</li>
+</ul>
+<ul class="al">
 <li>Price/Book 23 — historisch nie auf diesem Niveau</li>
+</ul>
+<ul class="al">
 <li>Dividendenrendite 12% ist Spin-off-Effekt, nicht sustainable</li>
+</ul>
+<ul class="al">
 <li>Wettbewerbsvorteil: Skaleneffekte + IP in HAMR/Areal-Density</li>
+</ul>
+<ul class="al">
 <li>Capex-Disziplin der Branche ist entscheidender struktureller Wandel</li>
+</ul>
+<ul class="al">
 <li>Working Capital gut managed, Lagerumschlag verbessert</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -146,18 +218,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Smart Money ist drin — Momentum-Hedgefonds + AI-Themen-Fonds aggressiv long</li>
+</ul>
+<ul class="al">
 <li>Retail entdeckt die Story erst jetzt → späte Phase des Trends</li>
+</ul>
+<ul class="al">
 <li>Short Interest stark gefallen → kein Squeeze-Treiber mehr</li>
+</ul>
+<ul class="al">
 <li>Sentiment euphorisch, aber noch nicht "Bubble-Stage"</li>
+</ul>
+<ul class="al">
 <li>Institutionelles Ownership steigt, aktive Fonds erhöhen Gewichtung</li>
+</ul>
+<ul class="al">
 <li>Risiko: bei jedem AI-Capex-Zweifel wird WDC unter den ersten Verkäufen sein</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>RS-Score 311 vs. QQQ: extreme relative Stärke, Top-Decile</li>
+</ul>
+<ul class="al">
 <li>6M-Performance +231% → parabolisch, klassisches Spätstadium</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 AKTIV (Weekly, Daily, 4H) → maximales Bruchsignal, voll im Trend</li>
+</ul>
+<ul class="al">
 <li>10T-Performance -6,93% deutet erste Konsolidierung an — gesund nach diesem Run</li>
+</ul>
+<ul class="al">
 <li>Einstieg auf Rücksetzer in vorherige Wochenstruktur sinnvoller als Chase</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -167,8 +257,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>STX (Seagate): direkter Konkurrent, sehr ähnliche Story, leicht günstiger bewertet</li>
+</ul>
+<ul class="al">
 <li>MU (Micron): breitere Speicher-Exposure, aber zyklischer und volatiler</li>
+</ul>
+<ul class="al">
 <li>NTAP (NetApp): Storage-Lösungen, defensiver, weniger AI-Upside</li>
+</ul>
+<ul class="al">
 <li>ANET (Arista): AI-Netzwerk-Pure-Play, höhere Qualität, aber teurer</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +272,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 5/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +287,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

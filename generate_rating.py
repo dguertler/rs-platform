@@ -418,9 +418,17 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
 .al{{padding-left:16px;margin-bottom:8px}}
 .al li{{font-size:13px;margin-bottom:4px;line-height:1.5}}
 .sg{{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}}
+@media(max-width:480px){{.sg{{grid-template-columns:1fr}}}}
 .sr{{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}}
-.stars{{color:var(--al);font-size:14px;letter-spacing:1px}}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}}
+.stars{{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}}
+.tip{{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}}
+.sr:hover .tip,.sr.open .tip{{display:block}}
 .dis{{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}}
 </style>
@@ -479,15 +487,41 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">{_stars(q)}</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">{_stars(g)}</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">{_stars(v)}</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">{_stars(p)}</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">{_stars(q)}</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">{_stars(g)}</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">{_stars(v)}</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">{_stars(p)}</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){{
+  el.addEventListener('click',function(e){{
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){{x.classList.remove('open');}});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  }});
+}});
+document.addEventListener('click',function(){{
+  srs.forEach(function(el){{el.classList.remove('open');}});
+}});
+</script>
 </body>
 </html>'''
 

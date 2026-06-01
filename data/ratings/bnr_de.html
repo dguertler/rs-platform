@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -58,7 +66,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
         <div class="mi">Sektor: <span>Basic Materials</span></div>
         <div class="mi">Industrie: <span>Specialty Chemicals</span></div>
         <div class="mi">MCap: <span>$8B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">33.2</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-0.6</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$57.08</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.5×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$56.58</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.4×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$14.8B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">25.5%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">330.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">336.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">5.0%</div></div>
   </div>
 
@@ -97,51 +105,119 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Globaler Chemiedistributor mit Nr.-1-Position weltweit (>10% Marktanteil)</li>
+</ul>
+<ul class="al">
 <li>Zwei Segmente: Brenntag Essentials (Industriechemikalien, Commodity) und Brenntag Specialties (Spezialchemie, höhere Margen)</li>
+</ul>
+<ul class="al">
 <li>Aggregator zwischen ~10.000 Chemieproduzenten und >190.000 Kunden</li>
+</ul>
+<ul class="al">
 <li>Mehrwert durch Logistik, Lagerung, Mixing, Verpackung, Regulierung</li>
+</ul>
+<ul class="al">
 <li>Hohe Fragmentierung des Marktes → Konsolidierung via Bolt-on-M&A</li>
+</ul>
+<ul class="al">
 <li>Asset-light: ~17 Mrd. € Umsatz mit relativ niedrigem CapEx</li>
+</ul>
+<ul class="al">
 <li>Working-Capital-intensiv, stark abhängig von Chemiepreisen und Volumen</li>
+</ul>
+<ul class="al">
 <li>Defensive Endmärkte (Pharma, Food, Personal Care) vs. zyklische (Coatings, Industrial)</li>
+</ul>
+<ul class="al">
 <li>Pricing-Power über regionale Marktstellung und Servicekomponente</li>
+</ul>
+<ul class="al">
 <li>Strukturell profitierend von Outsourcing-Trend in der Chemieindustrie</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Mögliche Aufspaltung Specialties/Essentials könnte 30-40% Wertaufdeckung bringen</li>
+</ul>
+<ul class="al">
 <li>Margennormalisierung 2025/26 nach Destocking-Zyklus</li>
+</ul>
+<ul class="al">
 <li>Aktive M&A-Pipeline mit ~50-100 Mio. € EBITA-Beitrag p.a. möglich</li>
+</ul>
+<ul class="al">
 <li>Forward PE 13,5 deutet auf erhebliches Earnings-Recovery-Potenzial</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Nachfrage durch Outsourcing-Trend chemischer Wertschöpfungsketten</li>
+</ul>
+<ul class="al">
 <li>Niedriges Beta + Dividende attraktiv in rezessivem Makro-Umfeld</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 aktiv → technisches Strukturbruch-Setup auf allen Zeitebenen</li>
+</ul>
+<ul class="al">
 <li>50T-RS +26,8% zeigt institutionelles Kaufinteresse</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Umsatzrückgang -10,1% YoY signalisiert anhaltende Volumen-/Preisschwäche</li>
+</ul>
+<ul class="al">
 <li>Operating Margin nur 4,9%, Net Margin 1,5% – sehr schmaler Puffer</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 74,8 – moderat verschuldet bei zyklischer Earnings-Basis</li>
+</ul>
+<ul class="al">
 <li>ROE 5% ist unterdurchschnittlich – Kapitalrendite enttäuscht</li>
+</ul>
+<ul class="al">
 <li>Konkurrenz durch Univar (Apollo-Übernahme) und IMCD aggressiver</li>
+</ul>
+<ul class="al">
 <li>Chemieindustrie in Europa strukturell unter Druck (Energiekosten, China)</li>
+</ul>
+<ul class="al">
 <li>Aufspaltungsfantasie könnte sich verzögern oder scheitern</li>
+</ul>
+<ul class="al">
 <li>Kursziel-Konsens ($56,43) liegt unter aktuellem Kurs → kein Upside laut Street</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM 14,76 Mrd. $, Wachstum -10,1% YoY (negativ)</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 25,5% – solide für Distributor</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 4,9% – unter Mehrjahresschnitt (~6-7%)</li>
+</ul>
+<ul class="al">
 <li>Net Margin 1,5% – dünn, zyklisch belastet</li>
+</ul>
+<ul class="al">
 <li>FCF 0,64 Mrd. $ – respektabel, FCF-Yield ~7,8%</li>
+</ul>
+<ul class="al">
 <li>ROE 5% – mager, sollte sich Richtung 10-12% normalisieren</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 74,8 – tragbar, Investment-Grade-Rating</li>
+</ul>
+<ul class="al">
 <li>Price/Book 1,84 – fair für Asset-light-Geschäft</li>
+</ul>
+<ul class="al">
 <li>Beta 0,53 – defensiver als Sektor</li>
+</ul>
+<ul class="al">
 <li>Dividendenrendite real ~3-4% (angegebene 330% ist Datenfehler)</li>
+</ul>
+<ul class="al">
 <li>Marktführerposition als struktureller Burggraben</li>
+</ul>
+<ul class="al">
 <li>Bilanzqualität: solide, aber kein Festungs-Balance-Sheet</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -149,18 +225,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Under-owned von Growth-Fonds, fair gehalten von Value/Mid-Cap-Strategien</li>
+</ul>
+<ul class="al">
 <li>Sentiment neutral-negativ nach mehreren Guidance-Senkungen</li>
+</ul>
+<ul class="al">
 <li>Aktivisten-Interesse (Primestone) erhöht Wahrscheinlichkeit für Restrukturierung</li>
+</ul>
+<ul class="al">
 <li>Kein Hype-Stock – fundamentale Value-Story</li>
+</ul>
+<ul class="al">
 <li>Smart Money sammelt vermutlich in Schwächephasen (50T-RS +26,8%)</li>
+</ul>
+<ul class="al">
 <li>Short Interest unauffällig, kein Crowded Trade</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 aktiv auf Weekly, Daily und 4H – starkes Struktur-Setup</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig (5T/10T/20T) leichte Konsolidierung nach Anstieg</li>
+</ul>
+<ul class="al">
 <li>50T-Momentum +26,8% – sehr stark, Trendwende eingeleitet</li>
+</ul>
+<ul class="al">
 <li>Kurs nahe 52W-Hoch (57 vs. 63,76) – konstruktive Position</li>
+</ul>
+<ul class="al">
 <li>RS-Score 33 gegen QQQ schwach – Underperformance vs. Tech, aber Sektor-relativ stark</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -170,8 +264,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>IMCD (IMCD.AS): Specialties-Pure-Play, höhere Margen, doppelte Bewertung</li>
+</ul>
+<ul class="al">
 <li>Univar (delisted): Wurde von Apollo bei ~10x EBITDA übernommen – Benchmark</li>
+</ul>
+<ul class="al">
 <li>Azelis (AZE.BR): Specialties-Distributor, kleiner, schnelleres Wachstum, teurer</li>
+</ul>
+<ul class="al">
 <li>Quaker Houghton: Spezial-Lubricants, andere Nische, höhere Margen</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -179,8 +279,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 3/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3/5</li>
 </ul></div>
   </div>
@@ -188,14 +294,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

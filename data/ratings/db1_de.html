@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Financial Services</span></div>
         <div class="mi">Industrie: <span>Financial Data & Stock Exchanges</span></div>
-        <div class="mi">MCap: <span>$47B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$45B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">80</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">18.0</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-32.5</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$256.50</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">19.3×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$246.80</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.6×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.5B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">81.2%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">164.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">170.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">19.2%</div></div>
   </div>
 
@@ -97,51 +105,119 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Eurex (Derivate-Clearing): Quasi-Monopol bei europäischen Zinsfutures, hochmargig</li>
+</ul>
+<ul class="al">
 <li>Clearstream (Post-Trade/Settlement): Verwahrt €18+ Bio. Assets, Zinsabhängige Erträge</li>
+</ul>
+<ul class="al">
 <li>Xetra (Cash Equities): Klassisches Handelsgeschäft, eher zyklisch</li>
+</ul>
+<ul class="al">
 <li>Data & Analytics: STOXX-Indizes, ISS (Governance/ESG-Daten) — strukturelles Wachstum</li>
+</ul>
+<ul class="al">
 <li>Fund Services: Wachstumssegment via Kaiser Partner / SimCorp-Akquisition</li>
+</ul>
+<ul class="al">
 <li>SimCorp: Investment-Management-Software, SaaS-Transformation läuft</li>
+</ul>
+<ul class="al">
 <li>360T: Globale FX-Trading-Plattform</li>
+</ul>
+<ul class="al">
 <li>Recurring Revenue inzwischen >60% — strukturelle De-Risking-Story</li>
+</ul>
+<ul class="al">
 <li>Zinssensitiv: Höhere Zinsen = höhere Net Interest Income bei Clearstream</li>
+</ul>
+<ul class="al">
 <li>Regulatorische Burggräben durch EMIR, MiFID</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Strukturelle Volatilität (Geopolitik, Zinsen) treibt Eurex-Volumina</li>
+</ul>
+<ul class="al">
 <li>SimCorp-Integration entfaltet Cross-Selling-Potenzial ab 2025/26</li>
+</ul>
+<ul class="al">
 <li>Data-Geschäft skaliert mit hohen Inkrementalmargen (>70%)</li>
+</ul>
+<ul class="al">
 <li>Quasi-Monopolposition in EU-Clearing wird durch Brexit weiter zementiert</li>
+</ul>
+<ul class="al">
 <li>Höhere Zinsen für längere Zeit = strukturell höhere NII bei Clearstream</li>
+</ul>
+<ul class="al">
 <li>Dividendenwachstum + Buybacks stützen Total Return</li>
+</ul>
+<ul class="al">
 <li>Defensive Eigenschaften (Beta 0,28) gefragt in Late-Cycle-Umfeld</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 aktiv — strukturelle Trendwende technisch bestätigt</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Konkurrenz durch CBOE, ICE, LSEG nimmt im Datengeschäft zu</li>
+</ul>
+<ul class="al">
 <li>Zinssenkungen der EZB drücken Clearstream-NII (2025-Risiko)</li>
+</ul>
+<ul class="al">
 <li>SimCorp-Akquisition (€3,9 Mrd.) muss sich erst rechnen — Integrationsrisiko</li>
+</ul>
+<ul class="al">
 <li>D/E von 65 zeigt höhere Verschuldung post-SimCorp</li>
+</ul>
+<ul class="al">
 <li>Regulatorische Eingriffe (EU-Gebührenregulierung) möglich</li>
+</ul>
+<ul class="al">
 <li>Europäische Equity-Volumina strukturell schwach vs. US</li>
+</ul>
+<ul class="al">
 <li>12M-Underperformance vs. QQQ zeigt Kapitalrotation in US-Tech</li>
+</ul>
+<ul class="al">
 <li>Bewertung bietet wenig Margin of Safety bei Wachstumsenttäuschung</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM €7,54 Mrd., Wachstum +8,5% YoY — solide, nicht spektakulär</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 81% — strukturell hervorragend</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 43,6% — Weltklasse-Niveau</li>
+</ul>
+<ul class="al">
 <li>Net Margin 27,3% — sehr profitabel</li>
+</ul>
+<ul class="al">
 <li>ROE 19% — solide, durch Leverage gestützt</li>
+</ul>
+<ul class="al">
 <li>Beta 0,28 — defensiver Charakter</li>
+</ul>
+<ul class="al">
 <li>Recurring Revenue >60% — De-Risking erfolgreich</li>
+</ul>
+<ul class="al">
 <li>D/E 65% — erhöht durch SimCorp, aber Cashflow-gedeckt</li>
+</ul>
+<ul class="al">
 <li>Dividendenpolitik stabil und wachsend</li>
+</ul>
+<ul class="al">
 <li>Burggraben durch Regulierung + Netzwerkeffekte extrem tief</li>
+</ul>
+<ul class="al">
 <li>Capex-light Geschäftsmodell mit hoher Cash-Konversion</li>
+</ul>
+<ul class="al">
 <li>Wenig zyklisch im Vergleich zu Investmentbanken</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -149,18 +225,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Klassischer "Bond Proxy mit Wachstum" — beliebt bei europäischen Pensionskassen</li>
+</ul>
+<ul class="al">
 <li>Under-owned bei US-Hedgefonds, dominant in europäischen Long-Only-Books</li>
+</ul>
+<ul class="al">
 <li>Kein Hype, kein Retail-Interest — pure institutionelle Story</li>
+</ul>
+<ul class="al">
 <li>Smart Money sieht SimCorp-Story noch nicht eingepreist</li>
+</ul>
+<ul class="al">
 <li>Momentum durchwachsen: stark auf 6M, schwach auf 12M vs. QQQ</li>
+</ul>
+<ul class="al">
 <li>RS-Score +18 zeigt einsetzende relative Stärke</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 aktiv (Weekly, Daily, 4H gebrochen) — sehr starkes Setup</li>
+</ul>
+<ul class="al">
 <li>Kurs €256 vs. 52W-Hoch €292 = 12% Distanz, Raum nach oben</li>
+</ul>
+<ul class="al">
 <li>6M +21% relativ zeigt frische Outperformance-Phase</li>
+</ul>
+<ul class="al">
 <li>20-Tage RS -4% deutet kurzfristige Konsolidierung an — gesund</li>
+</ul>
+<ul class="al">
 <li>Zyklus-Phase: frühe Trendfortsetzung nach Akkumulation</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -170,8 +264,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>LSEG.L: Höhere Data-Quote, aber teurer (24x) und volatiler nach Refinitiv-Deal</li>
+</ul>
+<ul class="al">
 <li>ICE: Stärkere US-Exponierung, höheres Wachstum, aber zyklischer</li>
+</ul>
+<ul class="al">
 <li>CME: Reines Derivate-Play, höhere Margen, weniger Diversifikation</li>
+</ul>
+<ul class="al">
 <li>Euronext: Günstiger (14x), aber niedrigere Qualität und weniger Burggraben</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -179,8 +279,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 5/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 3/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -188,14 +294,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

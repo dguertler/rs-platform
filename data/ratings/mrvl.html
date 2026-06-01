@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductors</span></div>
-        <div class="mi">MCap: <span>$172B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$179B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,18 +74,18 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">281.0</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">245.9</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$196.33</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">36.0×</div></div>
-    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$8.2B</div></div>
-    <div class="card"><div class="cl">Gross Margin</div><div class="cv">51.0%</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$205.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">33.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$8.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">51.5%</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">12.00%</div></div>
-    <div class="card"><div class="cl">ROE</div><div class="cv">19.3%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">16.0%</div></div>
   </div>
 
   <div class="sec">
@@ -96,48 +104,110 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Data Center (~75% Revenue): Custom ASICs für Hyperscaler, Optical DSPs, Switches</li>
+</ul>
+<ul class="al">
 <li>Custom Silicon: Co-Design mit AWS (Trainium), Microsoft, Meta – mehrjährige Programme</li>
+</ul>
+<ul class="al">
 <li>Optical Connectivity: PAM4-DSPs für 800G/1.6T, Coherent DSPs (Inphi-Akquisition)</li>
+</ul>
+<ul class="al">
 <li>Storage: Controller-ICs (HDD/SSD) – schrumpfendes Legacy-Segment</li>
+</ul>
+<ul class="al">
 <li>Carrier Infrastructure: 5G-Basisstationen, schwach zyklisch</li>
+</ul>
+<ul class="al">
 <li>Enterprise Networking: Ethernet-Switches, stabil aber langsam wachsend</li>
+</ul>
+<ul class="al">
 <li>Fabless-Modell: Produktion bei TSMC (5nm/3nm), hohe Capital Efficiency</li>
+</ul>
+<ul class="al">
 <li>Royalty/Design-Win-Modell mit langem Tail (5-7 Jahre pro Sockel)</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Custom-Silicon-TAM wächst von ~$15 Mrd. (2024) auf $40-50 Mrd. (2028) laut Marvell</li>
+</ul>
+<ul class="al">
 <li>AWS Trainium 2/3 Ramp 2025/26 könnte $4-5 Mrd. zusätzlichen Revenue bringen</li>
+</ul>
+<ul class="al">
 <li>1.6T-Optical-Cycle 2025/26 – Marvell hat technologischen Vorsprung</li>
+</ul>
+<ul class="al">
 <li>Microsoft-Design-Win (Maia) und Meta-Programme noch nicht voll im Modell</li>
+</ul>
+<ul class="al">
 <li>Operating Leverage massiv: Bei $12-14 Mrd. Revenue könnten Margen auf 35%+ steigen</li>
+</ul>
+<ul class="al">
 <li>Sentiment-Reset nach Q4-FY25-Earnings hat Floor gesetzt</li>
+</ul>
+<ul class="al">
 <li>Übernahme-Spekulation (strategischer Wert für Broadcom-Konkurrenten)</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Konzentrationsrisiko: AWS ist ~20%+ Revenue – jeder Programmverlust wäre brutal</li>
+</ul>
+<ul class="al">
 <li>Custom-ASIC-Kunden können intern entwickeln oder zu Alchip/MediaTek wechseln</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 36x Forward PE bei 22% Growth ist nicht günstig</li>
+</ul>
+<ul class="al">
 <li>Beta 2.25 – bei Tech-Drawdown extrem volatil</li>
+</ul>
+<ul class="al">
 <li>Storage/Carrier-Geschäfte weiterhin schwach, ziehen Headline-Numbers runter</li>
+</ul>
+<ul class="al">
 <li>Optical-Wettbewerb durch Broadcom und Coherent verschärft sich</li>
+</ul>
+<ul class="al">
 <li>China-Exposure und Exportrestriktionen</li>
+</ul>
+<ul class="al">
 <li>TTM Net Margin von 32.6% ist durch Einmaleffekte verzerrt – normalisiert eher 18-22%</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Revenue Wachstum: 22% YoY, beschleunigend Richtung 35%+ in FY26</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 51% – solide aber unter Broadcom (75%) und NVDA (75%)</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 18.7% – Raum nach oben bei Scale</li>
+</ul>
+<ul class="al">
 <li>Free Cashflow $1.44 Mrd. – FCF-Conversion verbessert sich deutlich</li>
+</ul>
+<ul class="al">
 <li>ROE 19.3% – akzeptabel, durch Inphi-Goodwill belastet</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 33% – moderate Verschuldung, gut handhabbar</li>
+</ul>
+<ul class="al">
 <li>Buyback-Programm aktiv, Dividende symbolisch</li>
+</ul>
+<ul class="al">
 <li>Bilanz: ~$1 Mrd. Cash, $4 Mrd. Debt – kein Stressfaktor</li>
+</ul>
+<ul class="al">
 <li>R&D-Intensität ~25% – hoch, aber nötig im Custom-Silicon-Game</li>
+</ul>
+<ul class="al">
 <li>Net Margin TTM täuscht – cleane operative Margin eher 20%</li>
+</ul>
+<ul class="al">
 <li>Capital-light Fabless-Modell, hohe Skalierbarkeit</li>
+</ul>
+<ul class="al">
 <li>Wettbewerbsvorteil: IP-Portfolio in SerDes/DSP weltklasse</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -145,19 +215,39 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Von "under-owned" (Q1 2025) zu "rapidly being added" durch Hedgefonds</li>
+</ul>
+<ul class="al">
 <li>Sentiment-Shift: AI-Custom-Silicon-Narrative ist jetzt mainstream</li>
+</ul>
+<ul class="al">
 <li>Short-Interest niedrig, kein Squeeze-Setup mehr</li>
+</ul>
+<ul class="al">
 <li>Smart Money (Tiger, Coatue) hat in Q3 aufgestockt</li>
+</ul>
+<ul class="al">
 <li>Retail-Aufmerksamkeit steigt – Vorsicht vor Late-Stage-FOMO</li>
+</ul>
+<ul class="al">
 <li>Crowding-Risk noch moderat, nicht NVDA-Level</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>RS-Score 281 vs. QQQ – extreme relative Stärke, top-decile</li>
+</ul>
+<ul class="al">
 <li>+102% in 50 Tagen, +133% in 6M – parabolisch, kurzfristig überhitzt</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 AKTIV: Weekly, Daily, 4H – maximales Breakout-Signal</li>
+</ul>
+<ul class="al">
 <li>An 52W-Hoch ($198) – Ausbruchszone, keine Overhead-Resistance</li>
+</ul>
+<ul class="al">
 <li>Pullback auf $160-170 wäre gesundes Reset, kein Strukturbruch</li>
+</ul>
+<ul class="al">
 <li>Zyklusphase: Mid-cycle Acceleration, nicht Top-Phase</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -167,8 +257,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>AVGO: Premium-Comp, höhere Margen, breitere Diversifikation, doppelte Bewertung</li>
+</ul>
+<ul class="al">
 <li>NVDA: Andere Liga (Merchant Silicon), nicht direkter Konkurrent, sondern Symbiose</li>
+</ul>
+<ul class="al">
 <li>AMD: Schwächere AI-Story, günstiger bewertet, mehr Client-Exposure</li>
+</ul>
+<ul class="al">
 <li>Alchip (Taiwan): Direkter Custom-ASIC-Konkurrent, kleiner aber aggressiv</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +272,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>Rating:</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 5/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 2/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +287,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -57,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Healthcare</span></div>
         <div class="mi">Industrie: <span>Drug Manufacturers - Specialty & Generic</span></div>
-        <div class="mi">MCap: <span>$57B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$56B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">51.4</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">59.9</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$130.00</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$129.85</div></div>
     <div class="card"><div class="cl">Forward PE</div><div class="cv">14.9×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.0B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">58.9%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">171.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">168.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">8.5%</div></div>
   </div>
 
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Drei-Säulen-Modell: Healthcare (~40%), Life Science (~35%), Electronics (~25%)</li>
+</ul>
+<ul class="al">
 <li>Healthcare: Onkologie (Erbitux, Bavencio), Fertilität, Neurologie, MS-Franchise</li>
+</ul>
+<ul class="al">
 <li>Life Science: Bioprocessing-Tools, Filtration, Lab-Materialien – Pricing Power</li>
+</ul>
+<ul class="al">
 <li>Electronics: Halbleiter-Materialien, Display-Solutions, Specialty Chemicals</li>
+</ul>
+<ul class="al">
 <li>Familienkontrolliert (E. Merck KG hält ~70%) – langfristige Kapitalallokation</li>
+</ul>
+<ul class="al">
 <li>Hohe regulatorische Eintrittsbarrieren in Life Science und Electronics</li>
+</ul>
+<ul class="al">
 <li>Wachstumstreiber: Biologics-Manufacturing, GLP-1-Produktion, AI-Chips</li>
+</ul>
+<ul class="al">
 <li>Stabile Cash-Generierung mit zyklischer Überlagerung in zwei der drei Sparten</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Life-Science-Destocking läuft aus – Bioprocessing-Demand normalisiert sich 2024/25</li>
+</ul>
+<ul class="al">
 <li>Electronics profitiert direkt vom AI-Halbleiter-Capex-Zyklus</li>
+</ul>
+<ul class="al">
 <li>Forward PE 14,9 deutlich unter historischem Durchschnitt (~18-20)</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 signalisiert technisches Trendreversal über alle Zeitebenen</li>
+</ul>
+<ul class="al">
 <li>Pipeline-Optionalität in Onkologie (Xevinapant, Cladribine-Indikationen)</li>
+</ul>
+<ul class="al">
 <li>Möglicher Spin-off oder Restrukturierung als langfristiger Werthebel</li>
+</ul>
+<ul class="al">
 <li>EUR-Schwäche unterstützt Übersetzungseffekte bei USD-Umsätzen</li>
+</ul>
+<ul class="al">
 <li>Analystenkonsens Buy mit Kursziel $143 – moderates Upside konsensuell</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Life-Science-Recovery verzögert sich strukturell, nicht nur zyklisch</li>
+</ul>
+<ul class="al">
 <li>China-Exposure in Electronics gefährdet durch Geopolitik/Exportkontrollen</li>
+</ul>
+<ul class="al">
 <li>Healthcare-Pipeline schwach im Vergleich zu Big-Pharma-Peers</li>
+</ul>
+<ul class="al">
 <li>Umsatzwachstum YoY noch negativ (-2,8%) – Trendwende noch nicht bestätigt</li>
+</ul>
+<ul class="al">
 <li>ROE nur 8,5% – mittelmäßige Kapitalrendite für Pharma-Standards</li>
+</ul>
+<ul class="al">
 <li>Hohe Verschuldung (D/E 40) limitiert M&A-Flexibilität</li>
+</ul>
+<ul class="al">
 <li>Familienstruktur reduziert M&A-Take-out-Phantasie</li>
+</ul>
+<ul class="al">
 <li>Erbitux-Patentdruck und Bavencio-Schwäche im US-Markt</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatz TTM: 20,96 Mrd. – aber YoY -2,8% (zyklischer Trog)</li>
+</ul>
+<ul class="al">
 <li>Bruttomarge 58,9% – solide, aber unter Best-in-Class Pharma</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 18,2% – komprimiert vs. historischen 22-25%</li>
+</ul>
+<ul class="al">
 <li>FCF 3,08 Mrd. – robust trotz Zyklik</li>
+</ul>
+<ul class="al">
 <li>Net Margin 12,1% – Raum für Erholung Richtung 18%+</li>
+</ul>
+<ul class="al">
 <li>ROE 8,5% – unterdurchschnittlich, sollte sich erholen</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 40 – managebar, kein Stressfaktor</li>
+</ul>
+<ul class="al">
 <li>Price/Book 1,9 – defensiv bewertet</li>
+</ul>
+<ul class="al">
 <li>Diversifikation reduziert Volatilität (Beta 0,78)</li>
+</ul>
+<ul class="al">
 <li>Dividende stabil, konservative Payout-Politik</li>
+</ul>
+<ul class="al">
 <li>Forschungsquote ~10% des Umsatzes – wettbewerbsfähig</li>
+</ul>
+<ul class="al">
 <li>Familienstruktur = strukturelle Langfrist-Orientierung</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,17 +219,33 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Under-owned bei US-Institutionellen seit 2022-Crash</li>
+</ul>
+<ul class="al">
 <li>Sentiment dreht: Hedge Funds beginnen, Life-Science-Recovery-Trade aufzubauen</li>
+</ul>
+<ul class="al">
 <li>Keine Hype-Aktie – fundamental getrieben, kein Retail-Interesse</li>
+</ul>
+<ul class="al">
 <li>Momentum 20T/50T mit +11%/+10% deutlich – institutionelles Akkumulieren sichtbar</li>
+</ul>
+<ul class="al">
 <li>Smart Money positioniert sich pre-Earnings-Cycle-Turn</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 grün – Trendbruch auf Weekly, Daily und 4H bestätigt</li>
+</ul>
+<ul class="al">
 <li>Kurs nahe 52W-Hoch ($131,65) – relative Stärke vs. Sektor</li>
+</ul>
+<ul class="al">
 <li>RS-Score 51,36 vs. QQQ – neutral, aber stark drehend</li>
+</ul>
+<ul class="al">
 <li>Kurzfristig leicht überkauft (20T +11,9%), aber strukturell intakt</li>
+</ul>
+<ul class="al">
 <li>Phase: Frühe Akkumulations-/Markup-Phase nach Bodenbildung</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)</h3>
@@ -167,8 +255,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>Sartorius (SRT.DE): Reiner Life-Science-Play, teurer, höhere Vola</li>
+</ul>
+<ul class="al">
 <li>Danaher (DHR): Premium-Compounder, qualitativ besser, deutlich teurer</li>
+</ul>
+<ul class="al">
 <li>Bayer (BAYN.DE): Schwächere Bilanz, Litigation-Risiko – Merck KGaA klar besser</li>
+</ul>
+<ul class="al">
 <li>Roche (ROG.SW): Defensiver, weniger zyklisch, weniger Upside</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -176,8 +270,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 4/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 3/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 4/5</li>
 </ul></div>
   </div>
@@ -185,14 +285,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★★☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

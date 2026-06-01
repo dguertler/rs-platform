@@ -36,9 +36,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
@@ -47,7 +55,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">25.05.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -58,7 +66,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
         <div class="mi">Sektor: <span>Industrials</span></div>
         <div class="mi">Industrie: <span>Farm & Heavy Construction Machinery</span></div>
         <div class="mi">MCap: <span>$32B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -66,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">1.6</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">28.5</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$41.91</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.1×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$42.01</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.2×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$44.0B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">17.7%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">473.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">451.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">5.4%</div></div>
   </div>
 
@@ -97,49 +105,113 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Weltgrößter Nutzfahrzeughersteller nach Umsatz (Trucks & Busses)</li>
+</ul>
+<ul class="al">
 <li>Vier Segmente: Trucks North America (Freightliner/Western Star), Mercedes-Benz Trucks (Europa), Trucks Asia (FUSO), Daimler Buses</li>
+</ul>
+<ul class="al">
 <li>TNA ist die Profit-Maschine: ~50% des EBIT historisch</li>
+</ul>
+<ul class="al">
 <li>Hochzyklisches Geschäft: Korreliert mit Frachtraten, BIP, Capex-Zyklen</li>
+</ul>
+<ul class="al">
 <li>Aftermarket/Services ~20% Umsatz, deutlich höhere Margen</li>
+</ul>
+<ul class="al">
 <li>E-Truck-Roadmap (eActros, eCascadia) als langfristige Option</li>
+</ul>
+<ul class="al">
 <li>Joint Venture mit Volvo (cellcentric) für Wasserstoff-Brennstoffzellen</li>
+</ul>
+<ul class="al">
 <li>Strukturell vom Diesel-Verbot, Emissionsregulierung und Logistik-Boom getrieben</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Forward-PE 9,1 ist historisch günstig — Repricing bei Zyklus-Turn möglich</li>
+</ul>
+<ul class="al">
 <li>US Class-8-Pre-Buy 2025/26 vor EPA-2027-Emissionsregeln erwartet</li>
+</ul>
+<ul class="al">
 <li>Cost-Down-Europe-Programm soll 1 Mrd. € jährliche Einsparungen bringen</li>
+</ul>
+<ul class="al">
 <li>Kapitalrückführung: hohe Dividende + Buyback-Programm aktiv</li>
+</ul>
+<ul class="al">
 <li>Margenziel 12% bis 2030 bietet erhebliches operatives Hebel-Potenzial</li>
+</ul>
+<ul class="al">
 <li>E-Mobility-Optionalität noch nicht im Kurs eingepreist</li>
+</ul>
+<ul class="al">
 <li>Spin-off-Story noch nicht ausgereizt (versteckte Werte in Finanzdienstleistungen)</li>
+</ul>
+<ul class="al">
 <li>6M/12M-RS positiv (+11,6% / +10,1%) zeigt institutionelles Interesse</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Umsatz YoY -13,3% — Zyklus-Schwäche real und tief</li>
+</ul>
+<ul class="al">
 <li>Operating Margin nur 5,3%, weit weg vom Ziel</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 133% — hohe Verschuldung, kapitalintensives Business</li>
+</ul>
+<ul class="al">
 <li>China-Geschäft (FUSO/Asia) schwach, Wettbewerb durch BYD/SANY</li>
+</ul>
+<ul class="al">
 <li>E-Truck-Adoption langsamer als erhofft, Capex-intensiv</li>
+</ul>
+<ul class="al">
 <li>US-Trucking-Rezession kann länger dauern als erwartet</li>
+</ul>
+<ul class="al">
 <li>Tariff-Risiko bei Trump-Administration für TNA-Geschäft</li>
+</ul>
+<ul class="al">
 <li>GWS-Ampel 3/3 aktiv: technisches Bild kurzfristig gebrochen</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Umsatzwachstum: -13,3% YoY (zyklisch belastet)</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 17,7% — typisch für OEM, nicht spektakulär</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 5,3% — unter Zielniveau (8-10%)</li>
+</ul>
+<ul class="al">
 <li>Net Margin 3,1% — dünn, zyklus-typisch</li>
+</ul>
+<ul class="al">
 <li>FCF nur 0,21 Mrd. — Cash-Generierung aktuell schwach</li>
+</ul>
+<ul class="al">
 <li>ROE 5,4% — unterdurchschnittlich, sollte sich erholen</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 133% — hoch, aber inkl. Captive-Financing</li>
+</ul>
+<ul class="al">
 <li>P/B 1,46 — moderat, kein Substanzrisiko</li>
+</ul>
+<ul class="al">
 <li>Aftermarket-Anteil bietet Margen-Stabilität</li>
+</ul>
+<ul class="al">
 <li>Kapitalrückführung aktiv über Dividende + Buybacks</li>
+</ul>
+<ul class="al">
 <li>Vergleich zu PACCAR: deutlich schwächere Profitabilität</li>
+</ul>
+<ul class="al">
 <li>Bilanz solide, aber kein Top-Tier-Compounder</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -147,18 +219,36 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
 <ul class="al">
 <li>Underowned bei US-Hedgefonds, primär europäisch gehalten</li>
+</ul>
+<ul class="al">
 <li>Kein Hype-Status — eher Value/Deep-Cyclical-Narrativ</li>
+</ul>
+<ul class="al">
 <li>Smart Money positioniert sich für Zyklus-Turn 2025/26</li>
+</ul>
+<ul class="al">
 <li>6M-Momentum stark (+11,6%), kurzfristig aber Korrektur (-8,4% 20T)</li>
+</ul>
+<ul class="al">
 <li>Sentiment neutral bis leicht positiv, kein crowded trade</li>
+</ul>
+<ul class="al">
 <li>Spin-off-Discount langsam abgebaut</li>
 </ul>
 <h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
 <ul class="al">
 <li>GWS-Ampel 3/3 aktiv — alle Zeitebenen gebrochen, Vorsicht geboten</li>
+</ul>
+<ul class="al">
 <li>Kurzfristige Schwäche: -2,6% (5T), -8,4% (20T) signalisiert Korrektur</li>
+</ul>
+<ul class="al">
 <li>Mittelfristig intakt: 6M +11,6%, 12M +10,1%</li>
+</ul>
+<ul class="al">
 <li>RS-Score 1,56 vs QQQ positiv, aber abnehmend</li>
+</ul>
+<ul class="al">
 <li>Aktuell in Korrekturphase nach Aufwärtsbewegung — Bodenbildung abwarten</li>
 </ul>
 <h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
@@ -168,8 +258,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
 <ul class="al">
 <li>PACCAR (PCAR): Höhere Margen (~13%), besserer Compounder, aber teurer</li>
+</ul>
+<ul class="al">
 <li>Volvo AB (VOLV-B): Ähnliches Profil, leicht bessere Profitabilität</li>
+</ul>
+<ul class="al">
 <li>Traton (8TRA): Schwester-Konzern VW, ebenfalls günstig bewertet</li>
+</ul>
+<ul class="al">
 <li>Cummins (CMI): Komplementär (Antriebe), defensiver mit Power-Gen-Exposure</li>
 </ul>
 <h3>11. PROFI-FAZIT</h3>
@@ -177,8 +273,14 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <p>**Rating:**</p>
 <ul class="al">
 <li>Qualität: 3/5</li>
+</ul>
+<ul class="al">
 <li>Wachstum: 2/5</li>
+</ul>
+<ul class="al">
 <li>Bewertung: 4/5</li>
+</ul>
+<ul class="al">
 <li>Langfristiges Potenzial: 3/5</li>
 </ul></div>
   </div>
@@ -186,14 +288,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>

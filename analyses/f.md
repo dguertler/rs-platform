@@ -23,11 +23,17 @@ Ford Motor Company ist kein klassisches Automobil-Investment mehr — es ist ein
 ## 2. GESCHÄFTSMODELL
 
 - Ford Pro: Nutzfahrzeuge (F-Series, Transit, Transit Connect) — profitabelster Bereich, starke Fleet-Kundenbindung, Wartungsverträge und Software-Dienste als wachsende Ertragsquelle
+
 - Ford Blue: ICE-Privatkundenwagen (Mustang, Explorer, Bronco) — stabile Cashcow, strukturell rückläufig
+
 - Ford Model e: EV-Segment — verlustbringend, operative Verluste im Mrd.-USD-Bereich, Zukunftsoption ohne heutigen Ertrag
+
 - Ford Credit (Finanzierungsarm): Wesentlicher Ergebnisbeitrag, erklärt strukturell hohe D/E-Quote (425x) — für Auto-OEMs mit Finanzierungsarm normal
+
 - Revenue $189,9 Mrd. TTM — Revenue-Wachstum 6,4% YoY, aber negativer FCF ($-2,25 Mrd.) zeigt: Wachstum ist kapitalintensiv
+
 - Dividende 3,44% — bei negativem FCF nicht aus dem operativen Cashflow gedeckt, Risiko bei Cashflow-Verschlechterung
+
 - Abhängigkeit: USMCA-Zollstruktur, Stahlpreise, Consumer-Kreditqualität (Ford Credit), EV-Batterie-Versorgungskette
 
 ## 3. BULL CASE
@@ -75,9 +81,13 @@ Entscheidende Variable: Geschwindigkeit der Ford-Model-e-Verlustreduzierung — 
 Ford ist ein hochriskanter zyklischer Trading-Trade, kein Compounder. Das aktuelle Niveau $17,44 — deutlich über Analyst-Konsens $14,05 — ist durch Momentum, nicht durch Fundamentals gerechtfertigt. Für konservative Investoren: klares Nein. Für taktische Trader: nur mit engem Stop-Loss unter $14. Peers: General Motors (GM) handelt bei ähnlichem Forward-PE, hat aber besseres FCF-Profil; Stellantis günstiger bewertet mit diversen Marken. Ford ist das risikoreichste Instrument im US-Auto-Sektor durch die EV-Verlust-Unsicherheit.
 
 Rating (Zahl, nicht Sterne):
+
 - Qualität: 2/5
+
 - Wachstum: 2/5
+
 - Bewertung: 2/5
+
 - Langfristiges Potenzial: 2/5
 
 ---

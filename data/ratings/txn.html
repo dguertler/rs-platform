@@ -36,14 +36,27 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .al{padding-left:16px;margin-bottom:8px}
 .al li{font-size:13px;margin-bottom:4px;line-height:1.5}
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
 .sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
-  display:flex;align-items:center;justify-content:space-between}
-.stars{color:var(--al);font-size:14px;letter-spacing:1px}
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
 .dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
   padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
 </style>
 </head>
 <body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
+</div>
 <div class="w">
   <div class="hdr">
     <div>
@@ -52,8 +65,8 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Technology</span></div>
         <div class="mi">Industrie: <span>Semiconductors</span></div>
-        <div class="mi">MCap: <span>$281B</span></div>
-        <div class="mi">Signal: <span>Manuell generiert</span></div>
+        <div class="mi">MCap: <span>$278B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
@@ -61,17 +74,17 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 25.05.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">134.8</span></div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">97.6</span></div>
     </div>
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$309.21</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">32.8×</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$305.68</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">32.5×</div></div>
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$18.4B</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">57.3%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">184.00%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">186.00%</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">32.3%</div></div>
   </div>
 
@@ -91,51 +104,119 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
 <li>Analog-Halbleiter (~75% Umsatz): Power Management, Signal Chain – langlebige Produkte mit 10+ Jahren Lebenszyklus</li>
+</ul>
+<ul class="al">
 <li>Embedded Processing (~20%): Mikrocontroller für Industrie & Automotive</li>
+</ul>
+<ul class="al">
 <li>Vertikal integriertes IDM-Modell: Eigene Fabs (300mm), strukturelle Kostenvorteile</li>
+</ul>
+<ul class="al">
 <li>Endmärkte: Industrial (~35%), Automotive (~35%), Personal Electronics, Communications</li>
+</ul>
+<ul class="al">
 <li>Über 100.000 Kunden, kein Kunde >10% Umsatz – extreme Diversifikation</li>
+</ul>
+<ul class="al">
 <li>Hohe Wechselkosten: Analog-Chips designed-in über Produktzyklen</li>
+</ul>
+<ul class="al">
 <li>Pricing Power durch IP, Skalierung und Reliability</li>
+</ul>
+<ul class="al">
 <li>CHIPS-Act-Profiteur: $1,6 Mrd. direkte Förderung + Investment Tax Credits</li>
+</ul>
+<ul class="al">
 <li>Massiver Capacity-Buildout in Sherman/TX und Lehi/UT bis 2030</li>
+</ul>
+<ul class="al">
 <li>Dividenden- und Buyback-Maschine historisch – aktuell durch CapEx limitiert</li>
 </ul>
 <h3>3. BULL CASE</h3>
 <ul class="al">
 <li>Zyklischer Upturn in Industrial & Auto erst am Anfang – historisch 2-3 Jahre lang</li>
+</ul>
+<ul class="al">
 <li>Operating Leverage massiv: Bei Auslastungssteigerung explodieren Margen</li>
+</ul>
+<ul class="al">
 <li>300mm-Fab-Vorteil: 40% Kostenvorsparnis vs. 200mm-Wettbewerber</li>
+</ul>
+<ul class="al">
 <li>FCF-Inflexion 2026/27 wenn CapEx zurückgeht – möglich $8-10 Mrd. FCF/Jahr</li>
+</ul>
+<ul class="al">
 <li>Onshoring-Trend: US-Kunden zahlen Premium für US-Supply</li>
+</ul>
+<ul class="al">
 <li>AI-Datacenter benötigen massiv Power-Management-Chips (indirekter AI-Play)</li>
+</ul>
+<ul class="al">
 <li>Auto-Content pro Fahrzeug wächst strukturell durch EV/ADAS</li>
+</ul>
+<ul class="al">
 <li>Capital Return wird zurückkehren – TXN war historisch Buyback-König</li>
 </ul>
 <h3>4. BEAR CASE</h3>
 <ul class="al">
 <li>Bewertung historisch hoch: 33x Forward PE für einen Zykliker ist sportlich</li>
+</ul>
+<ul class="al">
 <li>FCF nur $1,07 Mrd. TTM – Dividende kaum gedeckt, Bilanz wird strapaziert</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 83% – früher Netto-Cash, jetzt Netto-Verschuldung</li>
+</ul>
+<ul class="al">
 <li>Chinesische Analog-Konkurrenz (will Semi, SG Micro) drückt Preise im Low-End</li>
+</ul>
+<ul class="al">
 <li>CapEx-Risiko: Wenn Zyklus enttäuscht, sitzt TXN auf Overcapacity</li>
+</ul>
+<ul class="al">
 <li>Auto-Schwäche bei BEVs könnte länger dauern als erwartet</li>
+</ul>
+<ul class="al">
 <li>Multiple-Compression-Risiko bei jedem Wachstums-Hiccup</li>
+</ul>
+<ul class="al">
 <li>Konsensus-Kursziel $285 liegt UNTER aktuellem Kurs – Analysten sind skeptisch</li>
 </ul>
 <h3>5. FUNDAMENTALE QUALITÄT</h3>
 <ul class="al">
 <li>Revenue-Wachstum: +18,6% YoY – klare Trendwende</li>
+</ul>
+<ul class="al">
 <li>Gross Margin 57,3% – stark, aber unter Peak von 70%</li>
+</ul>
+<ul class="al">
 <li>Operating Margin 37,8% – beeindruckend trotz Underutilization</li>
+</ul>
+<ul class="al">
 <li>Net Margin 29,1% – Top-Tier-Profitabilität</li>
+</ul>
+<ul class="al">
 <li>ROE 32,3% – exzellent</li>
+</ul>
+<ul class="al">
 <li>FCF nur $1,07 Mrd. – das größte Sorgenkind</li>
+</ul>
+<ul class="al">
 <li>Debt/Equity 83% – historisch hoch</li>
+</ul>
+<ul class="al">
 <li>Dividend-Aristokrat: 21 Jahre Steigerungen</li>
+</ul>
+<ul class="al">
 <li>Bilanz solide aber nicht mehr Festung wie früher</li>
+</ul>
+<ul class="al">
 <li>CapEx-Intensität >25% des Umsatzes – außergewöhnlich</li>
+</ul>
+<ul class="al">
 <li>Inventory-Niveau leicht erhöht – muss beobachtet werden</li>
+</ul>
+<ul class="al">
 <li>Strukturelle Margen-Vorteile durch IDM-Modell intakt</li>
 </ul>
 <h3>6. BEWERTUNG</h3>
@@ -145,14 +226,40 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span></div>
-      <div class="sr"><span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span></div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+      </div>
     </div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
 </body>
 </html>
