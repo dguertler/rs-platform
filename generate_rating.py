@@ -335,32 +335,97 @@ def _extract_ratings(text: str) -> dict:
 
 
 def _extract_scenarios(text: str) -> dict:
-    result = {}
+    result = {"bull": {"price": "N/A", "prob": "N/A"},
+              "base": {"price": "N/A", "prob": "N/A"},
+              "bear": {"price": "N/A", "prob": "N/A"}}
+
+    def _price(s: str) -> str:
+        def _from(txt: str) -> str:
+            # Range + explicit currency: "2.450–2.800 USD"
+            m = re.search(r'(\d[\d.]*\s*[–—-]+\s*[\d.,]+)\s*(USD|EUR|€)', txt)
+            if m:
+                return f"{m.group(1).strip()} {m.group(2)}"
+            # "$X–$Y" or "$X-Y" dollar range
+            m = re.search(r'\$\s*(\d[\d.,]+)\s*[–—-]+\s*\$?\s*(\d[\d.,]+)', txt)
+            if m:
+                return f"${m.group(1)}–${m.group(2)}"
+            # "$X+" or "$X" single dollar value
+            m = re.search(r'\$\s*(\d[\d.,]+\+?)', txt)
+            if m:
+                return f"${m.group(1)}"
+            # "45 USD" or "90+ USD" — single value with explicit currency
+            m = re.search(r'(\d[\d.,]+\+?)\s*(USD|EUR|€)', txt)
+            if m:
+                return f"{m.group(1)} {m.group(2)}"
+            # Bare range — NOT followed by % (avoids matching e.g. "9-10%")
+            m = re.search(r'(\d[\d.,]*\s*[–—-]+\s*[\d.,]+)(?!\s*%)', txt)
+            if m:
+                return m.group(1).strip()
+            return "N/A"
+        # Prioritize value after "Kursziel" keyword
+        kz = re.search(r'Kursziel[:\s]+(.{1,60})', s, re.IGNORECASE)
+        if kz:
+            p = _from(kz.group(1))
+            if p != "N/A":
+                return p.rstrip('.,').strip()
+        p = _from(s)
+        return p.rstrip('.,').strip() if p != "N/A" else "N/A"
+
+    def _prob(s: str) -> str:
+        m = re.search(r'(?:Eintrittswahrscheinlichkeit|Wahrscheinlichkeit)[:\s]*(\d+)\s*%', s, re.IGNORECASE)
+        return f"{m.group(1)}%" if m else "N/A"
+
+    # ── Neue Struktur: BULL/BASE/BEAR CASE Abschnitte ────────────────────────
     for case, key in [("BULL", "bull"), ("BASE", "base"), ("BEAR", "bear")]:
         m = re.search(
             rf'##\s*\d*\.?\s*{case}\s+CASE\b(.*?)(?=\n\s*##|\Z)',
             text, re.DOTALL | re.IGNORECASE
         )
         if not m:
-            result[key] = {"price": "N/A", "prob": "N/A"}
             continue
         section = m.group(1)
-        pm = re.search(r'Eintrittswahrscheinlichkeit[:\s]*(\d+)\s*%', section, re.IGNORECASE)
-        prob = f"{pm.group(1)}%" if pm else "N/A"
-        price = "N/A"
-        for pat in [
-            r'(\d[\d.]*\s*[–—-]+\s*[\d.,]+)\s*(USD|EUR|€)',
-            r'\$\s*(\d[\d.,]+)\s*[–—-]+\s*\$?\s*([\d.,]+)',
-        ]:
-            pm2 = re.search(pat, section)
-            if pm2:
-                price = pm2.group(1).strip()
-                if len(pm2.groups()) > 1 and pm2.group(2):
-                    curr = pm2.group(2)
-                    if curr not in price:
-                        price += f" {curr}"
-                break
-        result[key] = {"price": price, "prob": prob}
+        prob = _prob(section)
+        if prob != "N/A":
+            result[key] = {"price": _price(section), "prob": prob}
+
+    # ── Alte Struktur: LANGFRISTIGES POTENZIAL Abschnitt ─────────────────────
+    if all(result[k]["prob"] == "N/A" for k in ["bull", "base", "bear"]):
+        lt_m = re.search(
+            r'##\s*\d*\.?\s*LANGFRISTIG[^\n]*\n(.*?)(?=\n\s*##|\Z)',
+            text, re.DOTALL | re.IGNORECASE
+        )
+        if lt_m:
+            entries = []  # (label_lower, price, prob)
+            for line in lt_m.group(1).split('\n'):
+                line = line.strip()
+                p = _prob(line)
+                if p == "N/A":
+                    continue
+                # Extract label: strip leading *, get text before first ':'
+                stripped = line.lstrip('*').lstrip()
+                colon = stripped.find(':')
+                label = stripped[:colon].rstrip('*').strip().lower() if colon > 0 else ""
+                entries.append((label, _price(line), p))
+
+            bear_kw  = ('konservativ', 'bear', 'bär', 'negativ')
+            bull_kw  = ('bull',)
+            extrm_kw = ('extrem',)
+
+            bears  = [(l, p, pr) for l, p, pr in entries if any(k in l for k in bear_kw)]
+            extrm  = [(l, p, pr) for l, p, pr in entries if any(k in l for k in extrm_kw)]
+            bulls  = [(l, p, pr) for l, p, pr in entries if any(k in l for k in bull_kw)
+                      and not any(k in l for k in extrm_kw)]
+
+            # Konservativ → bear card, Bull Case → base card, Extrem-Bull → bull card
+            if bears:
+                result["bear"] = {"price": bears[0][1], "prob": bears[0][2]}
+            if bulls:
+                result["base"] = {"price": bulls[0][1], "prob": bulls[0][2]}
+            if extrm:
+                result["bull"] = {"price": extrm[0][1], "prob": extrm[0][2]}
+            elif bulls and len(bulls) > 1:
+                result["bull"] = {"price": bulls[-1][1], "prob": bulls[-1][2]}
+
     return result
 
 
