@@ -68,7 +68,7 @@ Klare Positionierung: Ist das ein Buy-and-Hold-Compounder, ein zyklischer Tradin
 - Qualität: X/5
 - Wachstum: X/5
 - Bewertung: X/5
-- Langfristiges Potenzial: X/5
+- Katalysator: X/5
 
 ---
 

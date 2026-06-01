@@ -97,8 +97,8 @@ Rating (Zahl, nicht Sterne):
 | Qualität | 2/5 |
 | Wachstum | 2/5 |
 | Bewertung | 2/5 |
-| Langfristiges Potenzial | 2/5 |
+| Katalysator | 3/5 |
 
-**Verdict: WATCH (40/100)**
+**Verdict: WATCH (45/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

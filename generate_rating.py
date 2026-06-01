@@ -85,7 +85,13 @@ Rating (Zahl, nicht Sterne):
 - Qualität: X/5
 - Wachstum: X/5
 - Bewertung: X/5
-- Langfristiges Potenzial: X/5
+- Katalysator: X/5
+
+Katalysator bewertet die Stärke und Nachhaltigkeit des fundamentalen Auslösers
+hinter dem Momentum-Signal: Earnings-Beat, Guidance-Anhebung, Produktzyklus,
+Sektorrotation oder Makro-Tailwind.
+5 = starker, nachhaltiger fundamentaler Treiber.
+1 = kein erkennbarer fundamentaler Katalysator — rein technisches Momentum.
 
 FORMATIERUNGS-REGELN
 - ## für Hauptüberschriften (exakt wie in der Struktur angegeben)
@@ -322,7 +328,7 @@ def _md_to_html(text: str) -> str:
 
 def _extract_ratings(text: str) -> dict:
     out = {}
-    for cat in ["Qualität", "Wachstum", "Bewertung", "Langfristiges Potenzial"]:
+    for cat in ["Qualität", "Wachstum", "Bewertung", "Katalysator"]:
         m = re.search(rf'{re.escape(cat)}:\s*(\d)/5', text)
         out[cat] = int(m.group(1)) if m else 3
     return out
@@ -340,7 +346,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     sig_type   = gws.get("signal_type", "Breakout")
 
     rt = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     score = round((q + g + v + p) / 20 * 100)
 
     if score >= 70:
@@ -500,8 +506,8 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
         <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
       </div>
       <div class="sr">
-        <span style="font-size:12px;color:var(--mu)">Langfrist. Potenzial</span><span class="stars">{_stars(p)}</span>
-        <div class="tip">Chancen auf strukturellen Wertzuwachs in 3–5 Jahren. Marktposition, Reinvestitionsfähigkeit.<br><br>5 = klarer Compounder<br>1 = strukturell rückläufig</div>
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">{_stars(p)}</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
       </div>
     </div>
   </div>
@@ -535,7 +541,7 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
     sig_type   = gws.get("signal_type", "Breakout")
 
     rt = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     score = round((q + g + v + p) / 20 * 100)
     verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
 
@@ -570,7 +576,7 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 | Qualität | {q}/5 |
 | Wachstum | {g}/5 |
 | Bewertung | {v}/5 |
-| Langfristiges Potenzial | {p}/5 |
+| Katalysator | {p}/5 |
 
 **Verdict: {verd} ({score}/100)**
 
@@ -605,7 +611,7 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     fund = load_fundamentals(ticker)
 
     rt    = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Langfristiges Potenzial"]
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     score = round((q + g + v + p) / 20 * 100)
     verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
 

@@ -107,7 +107,7 @@ Rating (Zahl, nicht Sterne):
 | Qualität | 3/5 |
 | Wachstum | 4/5 |
 | Bewertung | 2/5 |
-| Langfristiges Potenzial | 3/5 |
+| Katalysator | 3/5 |
 
 **Verdict: HOLD (60/100)**
 

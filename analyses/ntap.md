@@ -99,8 +99,8 @@ Rating (Zahl, nicht Sterne):
 | Qualität | 4/5 |
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
-| Langfristiges Potenzial | 4/5 |
+| Katalysator | 3/5 |
 
-**Verdict: BUY (70/100)**
+**Verdict: HOLD (65/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
