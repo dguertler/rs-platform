@@ -917,10 +917,11 @@ function WatchlistApp() {
                         fontSize:11, fontWeight:700, letterSpacing:0.5,
                         padding:"2px 5px", borderRadius:3, cursor:"pointer",
                         userSelect:"none", lineHeight:1.4,
+                        display:"flex", flexDirection:"column", alignItems:"center",
                         color:  rating.verdict==="BUY"  ? "#86c429" : rating.verdict==="HOLD" ? "#f59e0b" : "#f87171",
                         background: rating.verdict==="BUY" ? "#1a2e0a" : rating.verdict==="HOLD" ? "#1a1200" : "#1a0505",
                         border:`1px solid ${rating.verdict==="BUY"?"#639922":rating.verdict==="HOLD"?"#b45309":"#A32D2D"}`,
-                      }}>{rating.verdict}</span>
+                      }}>{rating.verdict}<span style={{fontSize:9,fontWeight:600,opacity:0.85,lineHeight:1}}>{rating.score}</span></span>
                   )}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.score>0?"#4ade80":item.score<0?"#f87171":"#475569"}}>
