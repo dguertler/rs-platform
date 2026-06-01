@@ -334,6 +334,36 @@ def _extract_ratings(text: str) -> dict:
     return out
 
 
+def _extract_scenarios(text: str) -> dict:
+    result = {}
+    for case, key in [("BULL", "bull"), ("BASE", "base"), ("BEAR", "bear")]:
+        m = re.search(
+            rf'##\s*\d*\.?\s*{case}\s+CASE\b(.*?)(?=\n\s*##|\Z)',
+            text, re.DOTALL | re.IGNORECASE
+        )
+        if not m:
+            result[key] = {"price": "N/A", "prob": "N/A"}
+            continue
+        section = m.group(1)
+        pm = re.search(r'Eintrittswahrscheinlichkeit[:\s]*(\d+)\s*%', section, re.IGNORECASE)
+        prob = f"{pm.group(1)}%" if pm else "N/A"
+        price = "N/A"
+        for pat in [
+            r'(\d[\d.]*\s*[–—-]+\s*[\d.,]+)\s*(USD|EUR|€)',
+            r'\$\s*(\d[\d.,]+)\s*[–—-]+\s*\$?\s*([\d.,]+)',
+        ]:
+            pm2 = re.search(pat, section)
+            if pm2:
+                price = pm2.group(1).strip()
+                if len(pm2.groups()) > 1 and pm2.group(2):
+                    curr = pm2.group(2)
+                    if curr not in price:
+                        price += f" {curr}"
+                break
+        result[key] = {"price": price, "prob": prob}
+    return result
+
+
 def _safe_name(ticker: str) -> str:
     return re.sub(r'[^a-z0-9]', '_', ticker.lower())
 
@@ -348,6 +378,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     rt = _extract_ratings(analysis_text)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     score = round((q + g + v + p) / 20 * 100)
+    sc = _extract_scenarios(analysis_text)
 
     if score >= 70:
         verd, vc, vbg, vbr = "BUY",   "#86c429", "#3B6D11", "#639922"
@@ -383,6 +414,21 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
             f'<div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:{dot_c};margin-right:5px;vertical-align:middle"></span>'
             f'<span style="font-size:12px;font-weight:700;color:{text_c}">{txt}</span></div></div>'
         )
+
+    def sc_card(label: str, icon: str, pv: str, prob: str, bg: str, bdr: str, clr: str) -> str:
+        return (
+            f'<div style="background:{bg};border:1px solid {bdr};border-radius:8px;padding:14px 16px;text-align:center">'
+            f'<div style="font-size:10px;color:{clr};text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">{icon} {label}</div>'
+            f'<div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div>'
+            f'<div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">{pv}</div>'
+            f'<div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div>'
+            f'<div style="font-size:20px;font-weight:800;color:{clr}">{prob}</div>'
+            f'</div>'
+        )
+
+    bull_card = sc_card("Bull Case", "▲", sc["bull"]["price"], sc["bull"]["prob"], "#0a1a00", "#2d5a00", "#86c429")
+    base_card = sc_card("Base Case", "◆", sc["base"]["price"], sc["base"]["prob"], "#111d33", "#1e2d45", "#f59e0b")
+    bear_card = sc_card("Bear Case", "▼", sc["bear"]["price"], sc["bear"]["prob"], "#1a0505", "#3b0a0a", "#f87171")
 
     analysis_html = _md_to_html(analysis_text)
 
@@ -425,6 +471,8 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
 .al li{{font-size:13px;margin-bottom:4px;line-height:1.5}}
 .sg{{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}}
 @media(max-width:480px){{.sg{{grid-template-columns:1fr}}}}
+.sz{{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}}
+@media(max-width:600px){{.sz{{grid-template-columns:1fr}}}}
 .sr{{background:var(--bg3);border-radius:6px;padding:10px 12px;
   display:flex;align-items:center;justify-content:space-between;
   position:relative;cursor:pointer;user-select:none}}
@@ -467,29 +515,6 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
     </div>
   </div>
 
-  <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">{price_s}</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">{fpe_s}</div></div>
-    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">{rev_s}</div></div>
-    <div class="card"><div class="cl">Gross Margin</div><div class="cv">{gm_s}</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">{div_s}</div></div>
-    <div class="card"><div class="cl">ROE</div><div class="cv">{roe_s}</div></div>
-  </div>
-
-  <div class="sec">
-    <div class="st">GWS-Ampel — Breakout-Status</div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      {gws_item("Weekly", bool(gws.get("weekly")))}
-      {gws_item("Daily",  bool(gws.get("daily")))}
-      {gws_item("4H",     bool(gws.get("h4")))}
-    </div>
-  </div>
-
-  <div class="sec">
-    <div class="st">Professionelle Analyse</div>
-    <div class="ac">{analysis_html}</div>
-  </div>
-
   <div class="sec">
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
@@ -510,6 +535,38 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
         <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
       </div>
     </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">{price_s}</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">{fpe_s}</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">{rev_s}</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">{gm_s}</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">{div_s}</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">{roe_s}</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      {bull_card}
+      {base_card}
+      {bear_card}
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      {gws_item("Weekly", bool(gws.get("weekly")))}
+      {gws_item("Daily",  bool(gws.get("daily")))}
+      {gws_item("4H",     bool(gws.get("h4")))}
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac">{analysis_html}</div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
