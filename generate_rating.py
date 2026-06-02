@@ -17,8 +17,6 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-import yfinance as yf
-
 RATINGS_DIR  = Path("data/ratings")
 ANALYSES_DIR = Path("analyses")
 
@@ -65,15 +63,21 @@ Bull + Base + Bear müssen exakt 100% ergeben — Summe am Ende von Abschnitt 5 
 
 ## 6. FUNDAMENTALE QUALITÄT
 Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig: Bewerte die Kennzahlen im Zykluskontext — Top-of-Cycle-Zahlen anders gewichten als normalisierte Werte. Wo liegt der echte wirtschaftliche Burggraben, wo ist er nur scheinbar?
+Pflicht: ROIC im Verhältnis zu den Kapitalkosten (WACC) bewerten — schafft das Unternehmen Wert ÜBER den Kapitalkosten? Nutze Beta zur Plausibilisierung der Eigenkapitalkosten (Beta > 1,5 ⇒ erhöhte Kapitalkosten und Drawdown-Sensitivität explizit benennen). FCF-Conversion (Free Cashflow / Nettogewinn) ausweisen und einordnen.
+Bei NEGATIVEM Eigenkapital: P/B und Debt/Equity sind Artefakte — kommentarlos überspringen (nicht erklären, nicht erwähnen); stattdessen Net Debt/EBITDA heranziehen. Sind diese Größen nicht aus den gelieferten Daten berechenbar, explizit als Datenlücke kennzeichnen — niemals "Schulden manageable" o.ä. ohne Kennzahl behaupten.
 
 ## 7. BEWERTUNG
 Niemals eine zyklische Aktie nur anhand des aktuellen KGVs bewerten. Pflicht: Bewertung über normalisierten FCF über den vollen Zyklus oder KBV. Zusätzlich Forward-Multiples und was der Markt damit implizit aussagt. Ist die aktuelle Bewertung eine Value-Falle, eine strukturierte Wette oder echtes Upside?
+Eine hohe Trailing-Bewertung NICHT nur als "verzerrt" abtun, sondern die vom Markt IMPLIZIT eingepreiste Erwartung explizit ausrechnen (z.B. "Forward-PE 33x impliziert ~2,5-fachen Gewinn") und einen Mid-Cycle-Ertragsanker nennen (oder als Datenlücke kennzeichnen).
+Das gelieferte Analysten-Konsensziel (targetMeanPrice) und die Empfehlung (recommendationKey) sind IMMER zu verwenden, sofern nicht N/A — niemals als "nicht verfügbar" bezeichnen, wenn ein Wert vorliegt. Konsensziel ins Verhältnis zum aktuellen Kurs setzen (Kurs ÜBER Konsensziel = Markt handelt bereits über der Sell-Side).
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 Wie ist die institutionelle Positionierung aktuell? Short Float, Fast Money vs. Long Only, FOMO-Dynamik. Was muss künftig passieren, damit neue Käufer anziehen? Wo liegt das Enttäuschungsrisiko?
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-Trendstruktur, SMA-Stellung, RSI, Volumen. Ist das Momentum fundamental gestützt oder rein reaktiv? Was wäre ein technisches Warnsignal?
+Trendstruktur, SMA-Stellung, RSI. Es werden berechnete Indikatoren geliefert (SMA50, SMA200, RSI14, Abstand zum 52W-Hoch) — diese verwenden. Volumen ist NICHT verfügbar und darf nicht erfunden werden. "GWS NICHT AKTIV" bedeutet "kein Breakout-Signal", NICHT "Daten nicht verfügbar".
+Parabolik-Check: Steht der Kurs >90% am 52W-Hoch UND mehr als 3x über dem 52W-Tief, das Mean-Reversion-/Drawdown-Risiko explizit benennen.
+Ist das Momentum fundamental gestützt oder rein reaktiv? Was wäre ein technisches Warnsignal?
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 Drei explizite Szenarien mit Kurszielbandbreiten: Bull / Base / Bear. Was ist die entscheidende Variable, die zwischen den Szenarien unterscheidet?
@@ -93,10 +97,20 @@ Sektorrotation oder Makro-Tailwind.
 5 = starker, nachhaltiger fundamentaler Treiber.
 1 = kein erkennbarer fundamentaler Katalysator — rein technisches Momentum.
 
+## 12. FAZIT & KLASSIFIKATION
+2–3 Sätze Schluss-Fazit, dann eine explizite Klassifikation aus dieser festen Taxonomie. Die Klassifikation ist REIN FUNDAMENTAL — der RS-Score und das Momentum fließen NICHT in die Einstufung ein, sie dienen nur als Kontext:
+- CHAMPION — herausragende Qualität, Wachstum UND Katalysator; Top-Konviktion
+- AUFSTREBENDER CHAMPION — starke Fundamentaldaten im Aufbau; Ziel ist, solche Kandidaten FRÜH zu erkennen, bevor der breite Markt sie einpreist (Hidden-Champion-Logik)
+- SOLIDE — überdurchschnittlich, aber kein Marktführer-Profil
+- NEUTRAL — marktkonform, kein Edge
+- SCHWACH — fundamentale Schwächen überwiegen
+Kennzeichne explizit, ob es sich um einen "Hidden Champion" handelt (fundamental stark, aber vom Markt — gemessen am RS-Score — noch nicht erkannt) oder um einen bereits "bestätigten Leader" (fundamental stark UND hohes RS-Momentum, also schon eingepreist). Der höchste Wert liegt in fundamental starken Titeln mit noch niedrigem RS.
+Die maßgebliche, screenbare Klassifikation berechnet die Pipeline deterministisch aus den vier Sub-Ratings — formuliere konsistent dazu.
+
 FORMATIERUNGS-REGELN
 - ## für Hauptüberschriften (exakt wie in der Struktur angegeben)
 - - als Bullet-Marker (kein •)
-- MAX. 1000 Wörter gesamt
+- MAX. 1300 Wörter gesamt
 - Sprache: DEUTSCH
 - Keine horizontalen Trennlinien
 - Konkrete Zahlen > vage Formulierungen — wo immer möglich
@@ -111,6 +125,20 @@ Keine Kennzahlen erfinden oder aus dem Kontext ableiten.
 Neu gelistete Ticker oder Spin-offs können unvollständige TTM-Daten
 haben — dies explizit im Investment-Case erwähnen wenn mehr als 3
 Felder N/A oder UNGÜLTIG sind.
+
+DATENVERBINDLICHKEIT
+Jede in der Analyse genannte Zahl muss auf ein geliefertes Datenfeld
+zurückführbar sein — nicht zurückführbare Zahlen weglassen oder klar
+als Annahme kennzeichnen. targetMeanPrice (Analysten-Konsensziel) und
+recommendationKey werden im Kontext geliefert: bei vorhandenem Wert
+immer nutzen, nie als "nicht verfügbar" bezeichnen.
+
+MOMENTUM IST KEIN BEWEIS
+RS-Score und vergangene Performance belegen NICHT die fundamentale
+These — sie messen nur vergangene relative Kursbewegung und
+Konsens-Popularität. Fundamentale Argumentation (§1, §6, §7) und
+Momentum-Lesart (§9) strikt trennen. Steigende Kurse oder ein hoher
+RS-Score niemals als Bestätigung der These anführen.
 
 STRUKTURELLE GESCHÄFTSMODELL-ANALYSE
 Im Investment-Case explizit prüfen ob strukturelle
@@ -198,6 +226,7 @@ def validate_fundamentals(data: dict) -> dict:
 
 def fetch_fundamentals(ticker: str) -> dict:
     try:
+        import yfinance as yf  # lazy: nur für den Live-Fallback nötig
         info = yf.Ticker(ticker).info or {}
         raw = {
             "shortName":        info.get("shortName", ticker),
@@ -254,7 +283,148 @@ def _fmt(v):
     return str(round(v, 2)) if isinstance(v, (int, float)) else "N/A" if v is None else str(v)
 
 
-def build_context(ticker: str, fund: dict, rs_score: float, windows: dict, gws: dict) -> str:
+def _num(v):
+    """True, wenn v eine echte Zahl ist (kein N/A / UNGÜLTIG-String)."""
+    return isinstance(v, (int, float))
+
+
+# ── Verdict-Logik (risikoadjustiert) ──────────────────────────────────────────
+
+def compute_verdict(rt: dict) -> tuple:
+    """
+    Risikoadjustiertes Verdict aus den vier Sub-Ratings.
+    - Bewertung wird stärker gewichtet als der reine Mittelwert.
+    - Hard Cap: schwache Bewertung (<=2/5) deckelt das Verdict auf HOLD.
+    Gibt (score:int, verdict:str) zurück.
+    """
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
+    score = round((0.20 * q + 0.25 * g + 0.30 * v + 0.25 * p) / 5 * 100)
+    if v <= 2:                       # keine Sicherheitsmarge → kein BUY
+        score = min(score, 69)
+    verd = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
+    return score, verd
+
+
+# ── Leadership / Hidden-Champion-Klassifikation ───────────────────────────────
+# WICHTIG: Der RS-Score fließt NICHT in den Klassifikations-Score ein. Die
+# Klassifikation ist rein fundamental (Qualität/Wachstum/Katalysator/Bewertung).
+# Der RS-Score dient ausschließlich als nicht-bewertendes Overlay, um einen noch
+# nicht erkannten "Hidden Champion" von einem bereits bestätigten Leader zu
+# unterscheiden — genau die Marvell-vor-Durchbruch-Situation.
+
+_RS_SCORES_CACHE = None
+
+def _all_rs_scores() -> list:
+    global _RS_SCORES_CACHE
+    if _RS_SCORES_CACHE is not None:
+        return _RS_SCORES_CACHE
+    scores, seen = [], set()
+    for fname in ("data/rs_full.json", "rs_full.json",
+                  "data/rs_dax.json",  "rs_dax.json",
+                  "data/rs_sp500.json","rs_sp500.json"):
+        p = Path(fname)
+        if not p.exists():
+            continue
+        try:
+            for e in json.load(open(p, encoding="utf-8")).get("data", []):
+                t, s = e.get("ticker"), e.get("score")
+                if t and _num(s) and t.upper() not in seen:
+                    seen.add(t.upper())
+                    scores.append(s)
+        except Exception:
+            continue
+    _RS_SCORES_CACHE = scores
+    return scores
+
+
+def rs_percentile(rs_score) -> int:
+    """Perzentil (0–100) des RS-Scores im Gesamt-Universum. None wenn unbekannt."""
+    scores = _all_rs_scores()
+    if not scores or not _num(rs_score):
+        return None
+    return round(100 * sum(1 for s in scores if s <= rs_score) / len(scores))
+
+
+def champion_score(rt: dict) -> int:
+    """
+    Fundamentale Überzeugung (0–100) — OHNE RS/Momentum.
+    Qualität, Wachstum und Katalysator tragen die Substanz; eine attraktive
+    Bewertung gibt einen Bonus (Hidden Champion = stark UND noch nicht teuer).
+    """
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
+    return round((0.30 * q + 0.30 * g + 0.25 * p + 0.15 * v) / 5 * 100)
+
+
+def classify_leadership(rt: dict, rs_score) -> dict:
+    cs = champion_score(rt)
+    if   cs >= 80: emoji, tier = "🏆", "CHAMPION"
+    elif cs >= 65: emoji, tier = "🚀", "AUFSTREBENDER CHAMPION"
+    elif cs >= 50: emoji, tier = "✅", "SOLIDE"
+    elif cs >= 35: emoji, tier = "⚖️", "NEUTRAL"
+    else:          emoji, tier = "⚠️", "SCHWACH"
+
+    pct = rs_percentile(rs_score)
+    if   pct is None: recognition = ""
+    elif pct < 40:    recognition = f"💎 Hidden — vom Markt noch nicht erkannt (RS-Perzentil {pct})"
+    elif pct >= 80:   recognition = f"Bestätigter Leader — bereits eingepreist (RS-Perzentil {pct})"
+    else:             recognition = f"im Aufbau (RS-Perzentil {pct})"
+
+    risk = "⚡ Hohes Bewertungsrisiko" if rt["Bewertung"] <= 2 else ""
+    return {
+        "tier":            tier,
+        "emoji":           emoji,
+        "champion_score":  cs,
+        "rs_percentile":   pct,
+        "recognition":     recognition,
+        "risk_flag":       risk,
+    }
+
+
+# ── Technische Indikatoren (aus Tagesdaten der RS-JSONs) ──────────────────────
+
+def _rsi(closes: list, period: int = 14):
+    if len(closes) < period + 1:
+        return None
+    gains = losses = 0.0
+    for i in range(-period, 0):
+        ch = closes[i] - closes[i - 1]
+        if ch >= 0: gains += ch
+        else:       losses -= ch
+    avg_g, avg_l = gains / period, losses / period
+    if avg_l == 0:
+        return 100.0
+    rs = avg_g / avg_l
+    return round(100 - 100 / (1 + rs), 1)
+
+
+def compute_technicals(entry: dict, fund: dict) -> dict:
+    """SMA50/200, RSI14, Trendstruktur und 52W-Position aus der Tagesserie."""
+    o = (entry or {}).get("ohlcv") or []
+    closes = [c["c"] for c in o if isinstance(c, dict) and _num(c.get("c"))]
+    if len(closes) < 50:
+        return None
+    last = closes[-1]
+    sma50  = sum(closes[-50:]) / 50
+    sma200 = sum(closes[-200:]) / 200 if len(closes) >= 200 else None
+    hi52   = fund.get("fiftyTwoWeekHigh")
+    lo52   = fund.get("fiftyTwoWeekLow")
+    tech = {
+        "last":     round(last, 2),
+        "sma50":    round(sma50, 2),
+        "sma200":   round(sma200, 2) if sma200 else None,
+        "rsi14":    _rsi(closes, 14),
+        "vs_sma50": round((last / sma50 - 1) * 100, 1),
+        "vs_sma200":round((last / sma200 - 1) * 100, 1) if sma200 else None,
+        "below_52w_high": round((last / hi52 - 1) * 100, 1) if _num(hi52) and hi52 else None,
+        "above_52w_low":  round((last / lo52 - 1) * 100, 1) if _num(lo52) and lo52 else None,
+    }
+    if sma200:
+        tech["stage"] = "Stage 2 (Aufwärtstrend: Kurs > SMA50 > SMA200)" \
+            if last > sma50 > sma200 else "kein sauberer Aufwärtstrend"
+    return tech
+
+
+def build_context(ticker: str, fund: dict, rs_score: float, windows: dict, gws: dict, tech: dict = None) -> str:
     return f"""FUNDAMENTALDATEN FÜR DIE ANALYSE:
 Ticker: {ticker}
 Unternehmen: {fund.get('shortName', ticker)}
@@ -285,8 +455,31 @@ GWS-AMPEL (Gleichgewichts-Widerstandsstruktur):
 - 4H:     {'AKTIV — 4H-Struktur gebrochen'          if gws.get('h4')     else 'NICHT AKTIV'}
 - Gesamtpunkte: {gws.get('points', 0)}/3
 - Signal-Typ: {gws.get('signal_type', 'Erstmaliger Breakout')}
+HINWEIS: "NICHT AKTIV" bedeutet "kein Breakout-Signal", NICHT "Daten nicht verfügbar".
+
+{_tech_block(tech)}
+HINWEIS ZUR DATENVERBINDLICHKEIT: Analysten-Konsensziel (targetMeanPrice) und
+recommendationKey sind oben enthalten — bei vorhandenem Wert immer nutzen, nie
+als "nicht verfügbar" bezeichnen. Jede in der Analyse genannte Zahl muss auf ein
+hier geliefertes Feld zurückführbar sein.
 
 Analysiere jetzt: {ticker}"""
+
+
+def _tech_block(tech: dict) -> str:
+    if not tech:
+        return ("TECHNISCHE INDIKATOREN: nicht verfügbar (zu wenige Kursdaten). "
+                "Volumen ist generell NICHT verfügbar.")
+    parts = [
+        "TECHNISCHE INDIKATOREN (aus Tagesdaten berechnet; Volumen NICHT verfügbar):",
+        f"- Kurs: {tech.get('last')} | SMA50: {tech.get('sma50')} | SMA200: {tech.get('sma200')}",
+        f"- Abstand zu SMA50: {tech.get('vs_sma50')}% | zu SMA200: {tech.get('vs_sma200')}%",
+        f"- RSI(14): {tech.get('rsi14')}",
+        f"- Abstand zum 52W-Hoch: {tech.get('below_52w_high')}% | über 52W-Tief: {tech.get('above_52w_low')}%",
+    ]
+    if tech.get("stage"):
+        parts.append(f"- Trendstruktur: {tech['stage']}")
+    return "\n".join(parts)
 
 
 # ── HTML-Generierung ──────────────────────────────────────────────────────────
@@ -442,7 +635,8 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
 
     rt = _extract_ratings(analysis_text)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
+    score, verd = compute_verdict(rt)
+    cls = classify_leadership(rt, rs_score)
     sc = _extract_scenarios(analysis_text)
 
     if score >= 70:
@@ -466,8 +660,12 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     rev_s   = f"${rev/1e9:.1f}B" if isinstance(rev,   (int, float)) else "N/A"
     gm_s    = f"{gm*100:.1f}%"   if isinstance(gm,    (int, float)) else "N/A"
     div_s   = f"{div*100:.2f}%"  if isinstance(div,   (int, float)) else "—"
-    roe_s   = f"{roe*100:.1f}%"  if isinstance(roe,   (int, float)) else "N/A"
     rs_c    = "#86c429" if rs_score > 0 else "#f87171"
+
+    # ROE-Card nur rendern, wenn echter Zahlenwert (kein N/A / UNGÜLTIG-Artefakt)
+    roe_card = (f'<div class="card"><div class="cl">ROE</div>'
+                f'<div class="cv">{roe*100:.1f}%</div></div>'
+                ) if isinstance(roe, (int, float)) else ""
 
     def gws_item(label: str, active: bool) -> str:
         dot_c  = "#86c429" if active else "#334155"
@@ -496,6 +694,23 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     bear_card = sc_card("Bear Case", "▼", sc["bear"]["price"], sc["bear"]["prob"], "#1a0505", "#3b0a0a", "#f87171")
 
     analysis_html = _md_to_html(analysis_text)
+
+    # Klassifikations-Badge (fundamental; RS nur als Overlay)
+    cls_color = {"CHAMPION": "#86c429", "AUFSTREBENDER CHAMPION": "#86c429",
+                 "SOLIDE": "#f59e0b", "NEUTRAL": "#94a3b8",
+                 "SCHWACH": "#f87171"}.get(cls["tier"], "#94a3b8")
+    cls_extra = " &middot; ".join(x for x in (cls["recognition"], cls["risk_flag"]) if x)
+    cls_html = (
+        f'<div class="sec" style="border-color:{cls_color}">'
+        f'<div class="st">Klassifikation</div>'
+        f'<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">'
+        f'<span style="font-size:20px;font-weight:800;color:{cls_color}">{cls["emoji"]} {cls["tier"]}</span>'
+        f'<span style="font-size:13px;color:var(--mu)">Champion-Score '
+        f'<strong style="color:{cls_color}">{cls["champion_score"]}</strong>/100</span>'
+        f'</div>'
+        + (f'<div style="font-size:12px;color:var(--mu);margin-top:8px">{cls_extra}</div>' if cls_extra else '')
+        + '</div>'
+    )
 
     return f'''<!DOCTYPE html>
 <html lang="de">
@@ -608,7 +823,7 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
     <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">{rev_s}</div></div>
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">{gm_s}</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">{div_s}</div></div>
-    <div class="card"><div class="cl">ROE</div><div class="cv">{roe_s}</div></div>
+    {roe_card}
   </div>
 
   <div class="sec">
@@ -633,6 +848,8 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
     <div class="st">Professionelle Analyse</div>
     <div class="ac">{analysis_html}</div>
   </div>
+
+  {cls_html}
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
 </div>
@@ -664,12 +881,21 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 
     rt = _extract_ratings(analysis_text)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
-    verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
+    score, verd = compute_verdict(rt)
+    cls = classify_leadership(rt, rs_score)
 
     gws_weekly = "✓ Aktiv" if gws.get("weekly") else "✗ Inaktiv"
     gws_daily  = "✓ Aktiv" if gws.get("daily")  else "✗ Inaktiv"
     gws_h4     = "✓ Aktiv" if gws.get("h4")     else "✗ Inaktiv"
+
+    # ROE-Zeile nur bei echtem Zahlenwert (kein N/A / UNGÜLTIG-Artefakt)
+    roe = fund.get("returnOnEquity")
+    roe_row = f"| ROE | {_pct(roe)} |\n" if isinstance(roe, (int, float)) else ""
+
+    cls_extra = " · ".join(x for x in (cls["recognition"], cls["risk_flag"]) if x)
+    cls_line = f"**Klassifikation: {cls['emoji']} {cls['tier']}** · Champion-Score {cls['champion_score']}/100"
+    if cls_extra:
+        cls_line += f" · {cls_extra}"
 
     return f"""# {ticker} — KI-Aktienbewertung
 
@@ -682,8 +908,7 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 | Forward PE | {_fmt(fund.get('forwardPE'))} |
 | Revenue (TTM) | {_bn(fund.get('totalRevenue'))} |
 | Gross Margin | {_pct(fund.get('grossMargins'))} |
-| ROE | {_pct(fund.get('returnOnEquity'))} |
-| RS-Score | {rs_score:.1f} |
+{roe_row}| RS-Score | {rs_score:.1f} |
 
 **GWS-Ampel:** Weekly {gws_weekly} · Daily {gws_daily} · 4H {gws_h4}
 
@@ -701,6 +926,8 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 | Katalysator | {p}/5 |
 
 **Verdict: {verd} ({score}/100)**
+
+{cls_line}
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
 """
@@ -733,9 +960,8 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     fund = load_fundamentals(ticker)
 
     rt    = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
-    verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
+    score, verd = compute_verdict(rt)
+    cls = classify_leadership(rt, rs_score)
 
     html = build_html(ticker, fund, analysis_text, rs_score, gws)
 
@@ -754,10 +980,15 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     idx = load_index()
     idx["ratings"] = [r for r in idx["ratings"] if r.get("ticker", "").upper() != ticker.upper()]
     idx["ratings"].append({
-        "ticker":     ticker.upper(),
-        "verdict":    verd,
-        "score":      score,
-        "created_at": datetime.now().isoformat(),
+        "ticker":         ticker.upper(),
+        "verdict":        verd,
+        "score":          score,
+        "classification": cls["tier"],
+        "champion_score": cls["champion_score"],
+        "rs_percentile":  cls["rs_percentile"],
+        "hidden":         (cls["rs_percentile"] is not None and cls["rs_percentile"] < 40),
+        "risk_flag":      bool(cls["risk_flag"]),
+        "created_at":     datetime.now().isoformat(),
     })
     save_index(idx)
     print(f"  Index aktualisiert: {len(idx['ratings'])} Rating(s)")
@@ -803,7 +1034,8 @@ if __name__ == "__main__":
             "signal_type": "Manuell generiert",
         }
         fund    = load_fundamentals(ticker)
-        context = build_context(ticker, fund, rs_score, windows, gws)
+        tech    = compute_technicals(entry, fund)
+        context = build_context(ticker, fund, rs_score, windows, gws, tech)
         print("=" * 60)
         print(context)
         print("=" * 60)
