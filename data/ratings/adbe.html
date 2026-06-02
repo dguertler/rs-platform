@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ADBE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">02.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ADBE</h1>
+      <h2>Adobe Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$105B</span></div>
+        <div class="mi">Signal: <span>Kein Signal (Contrarian-Setup)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">74</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 02.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-40.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$259.21</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$24.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">89.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">58.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$360–$460</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">40%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$300–$380</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$190–$240</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">15%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Adobe ist das Quasi-Monopol kreativer Software (Photoshop, Acrobat/PDF, Creative Cloud) — und wird gerade wie ein strukturell verlierendes Geschäft bepreist: −38% vom 52W-Hoch, Forward-PE 9,8x, FCF-Rendite ~8,9%. Der strukturelle Kern: ein tiefer Workflow-Burggraben mit hohen Switching Costs, 89,4% Gross Margin und $9,3 Mrd. FCF. Die Angst, die der Markt einpreist, ist GenAI-Disruption (generative Bild-/Video-Modelle, Canva). Die Wette: Adobe monetarisiert GenAI über „Firefly" und Creative-Cloud-Integration und verteidigt damit Pricing Power und Datenrechte (kommerziell sichere Trainingsdaten als Differenzierung). Bei einem zweistelligen Wachstum (+12%) und elitärer Profitabilität ist ein einstelliges Forward-PE eine seltene Diskrepanz zwischen Qualität und Preis. Konsens „hold", Kursziel $327 (~+26%). Was übersehen wird: Adobes Enterprise-Verankerung und Workflow-Lock-in sind durch Einzel-Tool-GenAI schwer zu ersetzen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Digital Media (Creative Cloud + Document Cloud): wiederkehrende Abos, hohe Switching Costs, der Cash-Kern</li>
+<li>Digital Experience: Marketing-/Analytics-Suite für Enterprises, wiederkehrend</li>
+<li>GenAI-Layer „Firefly": kommerziell sichere generative Modelle als Upsell/Verteidigung des Moats</li>
+<li>Geschäftsökonomik: 89,4% Gross Margin, 38,8% Operating Margin, 29,5% Net Margin, FCF $9,3 Mrd.</li>
+<li>ROE 58,8% — sehr hohe Kapitalrendite (teils durch Rückkäufe/geringe Eigenkapitalbasis gehoben)</li>
+<li>Strukturelle Abhängigkeit: Verteidigung der kreativen Pricing Power gegen GenAI-Substitute — der entscheidende Stresstest</li>
+<li>Keine Dividende (N/A korrekt) — Kapitalrückgabe über Rückkäufe</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>GenAI-Angst überzogen; Firefly wird zum Umsatz-Upsell, Creative-Cloud-ARPU steigt, Wachstum bleibt zweistellig. Margennachhaltigkeit begründet durch Workflow-Lock-in, Enterprise-Integration, kommerziell sichere Trainingsdaten und Skaleneffekte. Re-Rating vom Krisen-Multiple (9,8x) Richtung 16–20x → Kursziel $360–460. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum hält im niedrigen Zehnerbereich, GenAI ist netto neutral bis leicht positiv, FCF bleibt sehr stark, Rückkäufe stützen den EPS. Multiple normalisiert teilweise (12–15x). Kursziel $300–380 auf 12–18 Monate. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Konkreter Auslöser: GenAI-Tools (kostenlos/billig) erodieren die kreative Pricing Power am unteren Ende, Canva & Co. gewinnen Share, Wachstum verlangsamt sich Richtung hoch-einstellig und darunter. Dann ist 9,8x fair statt billig, das Multiple bleibt komprimiert. Kursziel $190–240. Eintrittswahrscheinlichkeit: 15%.</p>
+<p>**Summe: 40% + 45% + 15% = 100%**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Elitär: Gross Margin 89,4%, Operating Margin 38,8%, Net Margin 29,5%, FCF $9,3 Mrd. ROE 58,8% ist sehr hoch (teils rückkaufgetrieben — kleine Eigenkapitalbasis); die operative Kapitalrendite ist fundamental stark. ROIC liegt mit hoher Wahrscheinlichkeit deutlich über dem WACC (Beta 1,42 ⇒ erhöhte Eigenkapitalkosten ~11–12%, also höhere Messlatte und mehr Drawdown-Sensitivität — explizit zu beachten); exakter ROIC nicht aus den Daten berechenbar (Datenlücke). FCF-Conversion sehr stark (FCF $9,3 Mrd. > Nettogewinn). Moderate Verschuldung (D/E 58). Burggraben tief: Workflow-Standard, Switching Costs, Format-Ökosystem (PDF). Zentrale offene Frage bleibt die GenAI-Substitution. (Dividende N/A — Adobe zahlt keine, kein Artefakt.)</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 9,8x (Trailing 15,1x) ist für ein 89%-Gross-Margin-Software-Quasi-Monopol außergewöhnlich niedrig (Adobe handelte historisch 30–40x). FCF-Rendite ~8,9% ($9,32 Mrd. auf $104,8 Mrd.) ist der belastbarste Anker und für diese Qualität extrem hoch. P/B 9,2 ist für asset-light irrelevant. Konsens „hold", Kursziel $327 (~+26%) — gedämpfte Stimmung trotz tiefer Bewertung: der Markt traut der GenAI-Verteidigung (noch) nicht. Einordnung: tiefe Value-Chance MIT realem Bären-Szenario — die Bewertung bietet Puffer, aber die Disruptionsfrage ist nicht trivial; daher attraktiv (4/5), nicht „risikolos billig" (5/5).</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>„AI killt Adobe" ist das dominante Narrativ; Wachstumsfonds haben reduziert (RS −40, 6M −35%). Da der Konsens nur „hold" ist, ist die Erwartungshaltung niedrig — positive Überraschungen (Firefly-Monetarisierung, ARPU) hätten Hebel. Erste Stabilisierung sichtbar (5T +12%, Kurs über SMA50). Enttäuschungsrisiko: schwache Net-New-ARR-Zahlen bestätigen das Bärennarrativ.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Frühe Bodenbildung: Kurs (~$274) über SMA50 ($245), aber unter SMA200 ($304); −35% unter dem 52W-Hoch, +22% über dem Tief. RSI(14) ~67 — erholt, am oberen Ende des neutralen Bereichs (kurzfristig etwas heißgelaufen nach der Gegenbewegung). GWS: kein Signal. Das Momentum dreht erst zaghaft; noch kein bestätigter Aufwärtstrend (SMA50 < SMA200). Bestätigung erst über der SMA200 (~$304); Warnsignal: Rückfall unter SMA50 ($245).</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($500–700):** Firefly/GenAI wird Wachstumshebel, Adobe verteidigt Pricing Power, Multiple-Re-Rating + Buybacks. Entscheidende Variable: GenAI-Monetarisierung vs. -Disruption.</p>
+<p>**Base ($350–480):** solider Compounder bei moderaterem Wachstum, FCF + Rückkäufe tragen. Entscheidende Variable: Net-New-ARR-Trend.</p>
+<p>**Bear ($180–250):** struktureller Share-/Pricing-Verlust an GenAI-Tools. Entscheidende Variable: kreative Pricing Power.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Adobe ist ein Elite-Software-Franchise zum tiefsten Multiple seiner Geschichte — ein High-Conviction-Contrarian-Buy gegen das AI-Disruptionsnarrativ, ausdrücklich kein Momentum-Trade. Höheres Beta (1,42) bedeutet mehr Volatilität als bei INTU/ICE/BRO — Positionsgröße entsprechend 2–3%, Tranchen-Aufbau sinnvoll. Die zentrale These-Frage ist binär (Firefly verteidigt den Moat — ja/nein); wer das positiv einschätzt, bekommt 8,9% FCF-Rendite als Polster. Peers: **INTU** (gleiches „Qualität-zum-AI-Discount"-Muster, niedrigere Volatilität); **Canva (privat)** und **Microsoft Designer** als Disruptoren am unteren Ende. Adobe ist das günstigste Premium-Franchise, INTU das defensivere.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<h3>12. FAZIT & KLASSIFIKATION</h3>
+<p>Adobe ist fundamental ein Elite-Geschäft (89% Gross Margin, 8,9% FCF-Rendite) zum Forward-PE 9,8 — vom Markt aus GenAI-Angst auf RS-Perzentil 36 abgestraft, während das Konsensziel +26% impliziert. Fundamental stark, vom Momentum-Markt noch nicht erkannt: Hidden Champion. Einschränkung: reales, binäres Disruptionsrisiko und höheres Beta.</p>
+<p>**Klassifikation: AUFSTREBENDER CHAMPION — 💎 HIDDEN CHAMPION (RS-Perzentil 36). Contrarian-Buy mit Disruptions-Vorbehalt.**</p></div>
+  </div>
+
+  <div class="sec" style="border-color:#86c429"><div class="st">Klassifikation</div><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span style="font-size:20px;font-weight:800;color:#86c429">🚀 AUFSTREBENDER CHAMPION</span><span style="font-size:13px;color:var(--mu)">Champion-Score <strong style="color:#86c429">75</strong>/100</span></div><div style="font-size:12px;color:var(--mu);margin-top:8px">💎 Hidden — vom Markt noch nicht erkannt (RS-Perzentil 36)</div></div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

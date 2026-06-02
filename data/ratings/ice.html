@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ICE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">02.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ICE</h1>
+      <h2>Intercontinental Exchange Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Financial Data & Stock Exchanges</span></div>
+        <div class="mi">MCap: <span>$84B</span></div>
+        <div class="mi">Signal: <span>Kein Signal (Contrarian-Setup)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">79</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 02.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-71.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$147.85</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$10.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">100.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">141.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">13.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$195–$230</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">40%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$165–$195</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$120–$140</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">15%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Intercontinental Exchange ist ein Wide-Moat-Oligopol aus drei wiederkehrenden Ertragssäulen — Börsen/Clearing (NYSE, ICE-Futures), Fixed-Income-/Daten-Services und Mortgage Technology (Ellie Mae/Black Knight) — das aktuell nahe dem 52W-Tief und bei RSI 19 (tief überverkauft) gehandelt wird. Der strukturelle Kern: ICE besitzt kritische Finanzmarkt-Infrastruktur mit hohen Wechselkosten, regulatorischen Burggräben und einem wachsenden Anteil planbarer Abo-/Datenerlöse. Mit +20,4% Umsatzwachstum, 57,3% Operating Margin und $3,7 Mrd. FCF wächst ICE schneller als ein klassischer Exchange-Operator — getrieben von der Mortgage-Tech-Integration und Datenabos. Der Markt straft die Zinssensitivität des Hypothekengeschäfts ab und übersieht die strukturelle Verschiebung zu wiederkehrenden Erlösen. Konsensrating strong_buy, Kursziel $199,53 (~+35%). Das ist ein erstklassiges Geschäft, das aus Sektor-Rotation, nicht aus fundamentaler Schwäche, billig geworden ist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Exchanges & Clearing (NYSE, ICE-Futures, Energie-/Rohstoff-Derivate): transaktions- + abogetrieben, regulatorischer Moat</li>
+<li>Fixed Income & Data Services: wiederkehrende Datenabos, ICE-Indizes, hohe Planbarkeit</li>
+<li>Mortgage Technology (Ellie Mae + Black Knight): End-to-End-Hypotheken-Plattform — zyklisch (zinssensitiv), aber strukturell wachsend</li>
+<li>Geschäftsmodell-Qualität: ~100% Gross Margin (Datencharakter), 57,3% Operating Margin, 37,7% Net Margin</li>
+<li>FCF $3,7 Mrd., wiederkehrender Erlösanteil steigt — der eigentliche strukturelle Treiber</li>
+<li>Strukturelle Abhängigkeit: Hypotheken-Volumina (Zinsen) kurzfristig; langfristig Daten-/Abo-Mix als Stabilisator</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Zinsen sinken, Hypotheken-Volumina erholen sich, Mortgage-Tech-Synergien (Black Knight) materialisieren sich, Datenabos wachsen zweistellig. Margennachhaltigkeit begründet durch Infrastruktur-Monopolcharakter, Switching Costs und Skaleneffekte. Re-Rating vom überverkauften Niveau zurück Richtung historischer Multiples → Kursziel $195–230 (konsistent mit Konsens $199,5). Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>4. BASE CASE</h3>
+<p>Daten-/Exchange-Säulen wachsen stetig, Mortgage Tech bleibt zinsbedingt verhalten; Gesamtwachstum hoch-einstellig bis niedrig-zweistellig. Multiple normalisiert moderat von 16,8x. Kursziel $165–195 auf 12–18 Monate. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Konkreter Auslöser: „Higher for longer"-Zinsen halten Hypotheken-Volumina gedrückt, Black-Knight-Integration enttäuscht, Schuldenlast (D/E 71) belastet bei steigenden Refinanzierungskosten. Wachstum verlangsamt sich, Multiple bleibt komprimiert. Kursziel $120–140. Eintrittswahrscheinlichkeit: 15%.</p>
+<p>**Summe: 40% + 45% + 15% = 100%**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Elitäre Ertragsqualität: ~100% Gross Margin (Daten/Infrastruktur), 57,3% Operating Margin, 37,7% Net Margin, FCF $3,7 Mrd. ROE 13,9% wirkt moderat, ist aber durch die große Goodwill-/Intangible-Basis (Black-Knight-Akquisition, P/B 2,84) gedrückt — operativ ist die Kapitalrendite höher. Exakter ROIC nicht aus den Daten berechenbar (Datenlücke); bei niedrigem WACC (Beta 0,96) ist Wertschöpfung über Kapitalkosten wahrscheinlich. Verschuldung erhöht (D/E 71, akquisitionsbedingt) — eine präzise Einordnung verlangt Net Debt/EBITDA (nicht berechenbar, Datenlücke); $3,7 Mrd. FCF decken den Schuldendienst komfortabel. Burggraben sehr breit: regulatorische Barrieren, Netzwerkeffekte (Liquidität), Daten-Lock-in. (Dividendenrendite-Feld 141% ist ein Daten-Artefakt, nicht verwendet.)</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 16,8x (Trailing 21,5x) ist für ein Finanzinfrastruktur-Oligopol mit 57% Marge und +20% Wachstum attraktiv. FCF-Rendite ~4,5% ($3,74 Mrd. auf $83,6 Mrd.) — solide, wenn auch nicht spektakulär, gestützt durch hohe Planbarkeit. Konsens strong_buy, Kursziel $199,53 (~+35% über Kurs) — als Orientierung zu lesen, signalisiert aber breite Sell-Side-Überzeugung trotz schwacher Kursentwicklung. Einordnung: Qualität zum fairen-bis-attraktiven Preis, Bewertung durch Sektor-Rotation gedrückt — strukturierte Wette mit Puffer.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Zinssensitive Finanztitel sind aus der Mode; ICE wurde mit dem Mortgage-Komplex abverkauft (RS −71, 6M −18%). RSI 19 zeigt Verkaufskapitulation — antizyklisch interessant. Kein aktives Momentum-Signal. Neue Käufer brauchen einen Zins-/Hypotheken-Wendepunkt oder ein starkes Daten-Segment-Quartal. Enttäuschungsrisiko: bei „higher for longer" bleibt der Mortgage-Hebel aus.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Überverkauft im Abwärtstrend: Kurs (~$145) knapp unter SMA50 ($157) und SMA200 ($161), nur 1,3% über dem 52W-Tief, −23% unter dem Hoch. RSI(14) ~19 — stark überverkauft, erhöhte Wahrscheinlichkeit einer technischen Gegenbewegung. GWS: kein Signal. Contrarian-Setup, kein Trendfolge-Trade. Bestätigung erst mit Rückeroberung der SMA50/200-Region (~$157–161); Warnsignal nach unten: nachhaltiger Bruch von $143.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($260–340):** Mortgage-Tech-Plattform skaliert, Datenabos compounden, ICE wird als Daten-/Infrastruktur-Compounder neu bewertet. Entscheidende Variable: Mix-Shift zu wiederkehrenden Erlösen.</p>
+<p>**Base ($200–260):** stetiges Oligopol-Wachstum, Multiple stabil. Entscheidende Variable: Zinsumfeld.</p>
+<p>**Bear ($120–150):** struktureller Hypotheken-Gegenwind, Integrations-Enttäuschung. Entscheidende Variable: Erfolg der Black-Knight-Integration.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>ICE ist ein erstklassiger Finanzinfrastruktur-Compounder, der antizyklisch (RSI 19, 52W-Tief) zu einem fairen Preis zu haben ist — ein hochwertiger Contrarian-Buy, der dank Beta 0,96 zugleich defensiv ist. Kein Momentum-Trade; die Belohnung kommt mit Zins-/Hypotheken-Normalisierung und dem fortgesetzten Daten-Mix-Shift. Positionsgröße bis 4%. Peers: **CME Group** (reineres Derivate-Monopol, höhere Marge, aber teurer und ohne Mortgage-Hebel); **S&P Global/MCO** (Daten-Compounder, höher bewertet). ICE bietet das beste Wachstum-zu-Bewertung-Verhältnis der Gruppe.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<h3>12. FAZIT & KLASSIFIKATION</h3>
+<p>ICE vereint Elite-Qualität (Oligopol, 57% Marge), zweistelliges Wachstum und eine durch Sektor-Rotation gedrückte Bewertung — bei RS-Perzentil 14 vom Momentum-Markt schlicht ignoriert, während die Sell-Side strong_buy ruft. Das ist ein Lehrbuch-Hidden-Champion: fundamental stark, noch nicht erkannt.</p>
+<p>**Klassifikation: CHAMPION — 💎 HIDDEN CHAMPION (RS-Perzentil 14). Hochwertigster Treffer des Screens.**</p></div>
+  </div>
+
+  <div class="sec" style="border-color:#86c429"><div class="st">Klassifikation</div><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span style="font-size:20px;font-weight:800;color:#86c429">🏆 CHAMPION</span><span style="font-size:13px;color:var(--mu)">Champion-Score <strong style="color:#86c429">81</strong>/100</span></div><div style="font-size:12px;color:var(--mu);margin-top:8px">💎 Hidden — vom Markt noch nicht erkannt (RS-Perzentil 14)</div></div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>INTU — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">02.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>INTU</h1>
+      <h2>Intuit Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$91B</span></div>
+        <div class="mi">Signal: <span>Kein Signal (Contrarian-Setup)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">74</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 02.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-140.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$331.53</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">12.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$20.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">80.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">145.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$480–$560</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">45%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$370–$460</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$240–$290</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">15%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Intuit ist ein dominantes SMB- und Consumer-Software-Franchise (TurboTax, QuickBooks, Credit Karma, Mailchimp), das vom Markt gerade wie ein strukturell bedrohtes Geschäft bepreist wird — die Aktie ist von $814 auf ~$330 eingebrochen (−57% vom 52W-Hoch) und handelt bei Forward-PE 12,1x. Der strukturelle Kern: QuickBooks ist das Betriebssystem der US-Kleinunternehmen mit massiven Switching Costs, TurboTax ein quasi-monopolistischer Steuer-Workflow. Die Angst, die der Markt einpreist, ist GenAI-Disruption (KI-Steuer-/Buchhaltungs-Tools) — die Wette ist, dass Intuit mit „Intuit Assist" GenAI in den eigenen Burggraben integriert, statt von ihm verdrängt zu werden. Bei 80,8% Gross Margin, 47% Operating Margin und $5,2 Mrd. FCF ist das ein elitäres Geschäftsmodell zum Value-Preis — vorausgesetzt, der Moat hält. Das Analysten-Konsensziel $502 (buy) impliziert ~+50%, der Markt liegt also deutlich unter der Sell-Side. Was der Markt übersieht: Die installierte Basis und die Datenposition sind selbst ein GenAI-Vorteil.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>QuickBooks/Small Business Platform: wiederkehrende SaaS-Erlöse, hohe Switching Costs, Cross-Sell (Payments, Payroll, Capital)</li>
+<li>TurboTax (Consumer): quasi-monopolistischer DIY-Steuer-Workflow, saisonal, hohe Marge</li>
+<li>Credit Karma: datengetriebene Finanzvermittlung, zyklisch (zinssensitiv)</li>
+<li>Mailchimp: Marketing-Automation für KMU, Cross-Sell-Hebel</li>
+<li>Operativer Hebel exzellent: 80,8% Gross / 47% Operating Margin; FCF $5,2 Mrd. (FCF-Conversion über Nettogewinn)</li>
+<li>Niedrige Verschuldung (D/E 33), Beta 1,03 — kein Bilanzrisiko</li>
+<li>Strukturelle Abhängigkeit: Pricing Power bei TurboTax/QuickBooks muss gegen GenAI-Alternativen verteidigt werden — der zentrale Stresstest</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>GenAI-Angst erweist sich als überzogen; Intuit monetarisiert „Intuit Assist" als Upsell, organisches Wachstum stabilisiert sich im niedrigen-bis-mittleren Zehnerbereich, Marge expandiert. Begründung der Margennachhaltigkeit: Switching Costs, Datenvorsprung, Plattform-Cross-Sell. Re-Rating vom Krisen-Multiple (12x) zurück Richtung 18–22x → Kursziel $480–560 (konsistent mit Konsensziel $502). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum verlangsamt sich auf hoch-einstellig, GenAI bleibt ein Margenkosten-, aber kein Umsatz-Killer; FCF bleibt robust. Multiple normalisiert nur teilweise (14–16x). Kursziel $370–460 auf 12–18 Monate. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Konkreter Auslöser: GenAI-Tools (oder kostenlose IRS-Direktfile-Angebote) erodieren TurboTax-Pricing-Power und QuickBooks-Neugeschäft; organisches Wachstum fällt Richtung niedrig-einstellig. Dann ist 12x kein Schnäppchen, sondern fair, und das Multiple bleibt komprimiert. Kursziel $240–290. Eintrittswahrscheinlichkeit: 15%.</p>
+<p>**Summe: 45% + 40% + 15% = 100%**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Elitär: Gross Margin 80,8%, Operating Margin 47,0%, Net Margin 21,9%, FCF $5,2 Mrd. ROE 22,5% bei niedriger Leverage (D/E 33) — qualitativ hochwertig, nicht leverage-getrieben. ROIC dürfte deutlich über dem WACC liegen (Beta 1,03 ⇒ Eigenkapitalkosten grob 9%); der exakte ROIC ist aus den Daten nicht berechenbar (Datenlücke), aber das Profil (hohe Marge, geringer Kapitalbedarf) spricht für hohe Kapitalrendite. FCF-Rendite ~5,8% ($5,23 Mrd. auf $90,7 Mrd. Market Cap). Burggraben echt und tief: Switching Costs (QuickBooks-Buchhaltungsdaten), Workflow-Lock-in (TurboTax), Netzwerk-/Datenvorteile. (Dividendenrendite-Feld 145% ist ein Daten-Artefakt und wird nicht verwendet.)</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 12,1x (Trailing 20,2x) ist für ein 80%-Gross-Margin-Software-Quasi-Monopol historisch extrem niedrig (Intuit handelte jahrelang bei 30–40x). FCF-Rendite 5,8% ist der belastbarste Anker und ungewöhnlich hoch für diese Qualität. P/B 4,83 ist für ein asset-light-Modell wenig relevant. Analysten-Konsensziel $502 (buy) liegt ~50% ÜBER dem Kurs — als Orientierung, nicht als Ceiling, aber die Diskrepanz zeigt: Der Markt preist ein Disruptions-Worst-Case ein. Einordnung: echtes Upside MIT Sicherheitsmarge, solange der Moat intakt bleibt — die Bewertung ist die These.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Klassischer „abgestürzter Liebling": Wachstumsfonds sind raus (RS-Score −140, 6M −64%), das Narrativ ist „AI killt Intuit". Genau diese Kapitulation schafft die Gelegenheit. Es ist KEIN Momentum-Trade — es gibt kein aktives technisches Signal. Was neue Käufer bringt: ein Quartal mit stabilem organischen Wachstum + überzeugender Intuit-Assist-Monetarisierung. Enttäuschungsrisiko: bei erneut schwacher Guidance kann der Boden noch tiefer liegen — Geduld und Tranchen-Aufbau nötig.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Abwärtstrend, nicht Ausbruch: Kurs (~$354) unter SMA50 ($389) und weit unter SMA200 ($547), −56% unter dem 52W-Hoch. RSI(14) ~41 — neutral, weder überkauft noch kapitulationsartig oversold. GWS: kein Signal. Das Momentum ist eindeutig negativ; das ist ein fundamental getriebenes Contrarian-Setup, KEIN technischer Trade. Positives Frühzeichen: 5T +14,5% — erste Stabilisierung. Technisches Warnsignal nach unten: Bruch des 52W-Tiefs ($300). Bestätigung nach oben erst über der SMA50.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($700–900):** GenAI wird zum Margen- und Umsatzhebel, Intuit verteidigt Pricing Power, Compounding mit Multiple-Re-Rating. Entscheidende Variable: GenAI-Monetarisierung vs. -Disruption.</p>
+<p>**Base ($450–600):** solider, etwas langsamerer Compounder, Multiple normalisiert teilweise. Entscheidende Variable: organische Wachstumsrate.</p>
+<p>**Bear ($220–320):** struktureller Pricing-Power-Verlust, dauerhaft komprimiertes Multiple. Entscheidende Variable: TurboTax/QuickBooks-Wettbewerbsdruck.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Intuit ist ein Quality-Compounder zum Krisenpreis — ein High-Conviction-Contrarian-Buy für geduldige Investoren, ausdrücklich KEIN Momentum-Play (es gibt kein Signal, der Trend ist abwärts). Wer kauft, kauft den Burggraben gegen die AI-Angst und braucht Sitzfleisch sowie Tranchen-Disziplin. Positionsgröße 3–4% mit Bereitschaft, bei weiterer Schwäche aufzustocken. Peers: **ADBE** (gleiches Muster: Qualität zum AI-Discount, noch günstiger auf FCF); **PYPL/Block** im Payments-Adjazenz, aber geringere Moat-Qualität. Intuit ist das hochwertigere Franchise, Adobe das günstigere.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<h3>12. FAZIT & KLASSIFIKATION</h3>
+<p>Intuit ist fundamental ein Elite-Geschäft (Qualität 5/5, FCF-stark) zum Forward-PE 12 — der Markt hat es wegen GenAI-Angst kapituliert verkauft (RS-Perzentil 1), obwohl das Konsensziel +50% impliziert. Genau diese Divergenz zwischen Fundamental-Stärke und nicht-vorhandenem Momentum ist die Definition eines Hidden Champions.</p>
+<p>**Klassifikation: AUFSTREBENDER CHAMPION — 💎 HIDDEN CHAMPION (RS-Perzentil 1, vom Markt noch nicht erkannt). Contrarian-Buy mit Sicherheitsmarge.**</p></div>
+  </div>
+
+  <div class="sec" style="border-color:#86c429"><div class="st">Klassifikation</div><div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap"><span style="font-size:20px;font-weight:800;color:#86c429">🚀 AUFSTREBENDER CHAMPION</span><span style="font-size:13px;color:var(--mu)">Champion-Score <strong style="color:#86c429">75</strong>/100</span></div><div style="font-size:12px;color:var(--mu);margin-top:8px">💎 Hidden — vom Markt noch nicht erkannt (RS-Perzentil 1)</div></div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
