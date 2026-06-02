@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IBM — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">02.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>IBM</h1>
+      <h2>International Business Machines</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Information Technology Services</span></div>
+        <div class="mi">MCap: <span>$280B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">70</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 02.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">114.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$297.80</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">22.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$68.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">58.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">227.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">35.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">380–450 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">290–360 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">220–260 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>IBM hat in den vergangenen zwei Wochen einen explosiven Breakout vollzogen: +41% in 10 Handelstagen auf $320 — ein Kurs, den das Unternehmen seit Jahren nicht gesehen hat. Der strukturelle Kern hinter dieser Bewegung ist nicht klassisches IT-Services-Momentum, sondern die Konvergenz von drei Treibern: (1) watsonx AI-Consulting-Revenue übertrifft erstmals öffentliche Erwartungen, (2) HashiCorp-Integration liefert schneller als erwartet Cross-Selling-Synergien in DevOps/Security, (3) Hybrid-Cloud-Momentum bei Red Hat beschleunigt sich durch Enterprise-AI-Deployment-Bedarf. Was der Markt lange unterschätzt hat: IBM generiert $13 Mrd. FCF pro Jahr — eine der stärksten FCF-Renditen im S&P 500 auf absoluter Basis. Das gibt Management Flexibilität für Aktienrückkäufe, Dividenden (2,27%) und M&A gleichzeitig. Analyst-Konsensziel $277,68 liegt 15% unter dem aktuellen Kurs $320 — Coverage hat die Geschwindigkeit der Transformation nicht antizipiert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Software (Red Hat, watsonx, Automation): ~45% Revenue, 70%+ Gross Margin — Kernwachstumssegment</li>
+<li>Consulting (AI-Implementierung, HashiCorp-Integration): ~35% Revenue, niedrigere Margen, aber AI-Uplift-Katalysator</li>
+<li>Infrastructure (Mainframe z-Series, Storage): ~20% Revenue, zyklisch aber cash-generierend</li>
+<li>Red Hat OpenShift: De-facto-Standard für Enterprise Hybrid Cloud — tiefe Switching Costs</li>
+<li>watsonx: IBM's AI-Plattform für Enterprise; differenziert durch Daten-Souveränität und regulatorische Compliance-Features</li>
+<li>HashiCorp: DevOps-/IaC-Integration schafft Cross-Sell-Pipeline in Consulting</li>
+<li>FCF $13 Mrd. bei $68,9 Mrd. Revenue (19% FCF-Marge) — außergewöhnlich stark</li>
+<li>Kapitalallokation: Dividende $6,68/Jahr (+2,27%), Buybacks, M&A-Kapazität</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>watsonx-Revenue skaliert auf $3–4 Mrd. p.a. bis 2027 (vs. ca. $1,5 Mrd. heute); Red Hat wächst weiter +15% p.a.; HashiCorp-Synergien übererfüllen Guidance. Operating Margin verbessert sich von 13,8% auf 18–22%. FCF skaliert auf $15–17 Mrd., Rerate auf 25–28x Forward-PE. Strukturelle Margennachhaltigkeit: Software-Mix-Verschiebung (Red Hat + watsonx) treibt Gross Margin dauerhaft über 62–65%; Consulting-AI-Premiumgebühren vs. klassisches IT-Consulting begründen Margenexpansion strukturell. Kursziel 380–450 USD. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>AI-Consulting-Momentum hält, Revenue-Wachstum bei 9–12% p.a. Operating Margin verbessert sich moderat auf 16–18%. FCF stabil bei $13–14 Mrd. Analyst-Coverage-Revisionen nach oben auf $320–360. Kursziel 290–360 USD. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>AI-Investitionen bei Enterprises werden durch makroökonomische Unsicherheit verzögert; IBM verliert Consulting-Mandate an Accenture/Capgemini; Red Hat-Wachstum enttäuscht durch Kubernetes-Plattform-Alternativen. FCF-Wachstum stagniert, Aktie korrigiert nach explosivem Anstieg. Kursziel 220–260 USD (−19 bis −31% vom aktuellen Kurs). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>FCF $13,08 Mrd. bei $68,9 Mrd. Revenue (19% FCF-Marge) ist herausragend — kaum ein IT-Services-Unternehmen dieser Größe erzielt vergleichbare Cash-Generierung. Gross Margin 58,4% — hoch für ein Technologie-Services-Unternehmen. Operating Margin 13,8% — Verbesserungspotenzial durch Software-Mix-Shift. ROE 35,8% — stark, partiell durch Leverage getrieben. D/E 211x: Unternehmensanleihen und Pensionsverpflichtungen — für ein FCF-starkes Unternehmen manageable. Revenue-Wachstum 9,5% — für IBM historisch stark und beschleunigend.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 22,1x erscheint auf den ersten Blick hoch für ein IT-Conglomerat — auf FCF-Basis (Kurs/FCF ca. 21x) ist es fair für ein Unternehmen mit Software-Revenue-Anteil >45%. Analyst-Konsensziel $277,68 liegt 15% unter aktuellem Kurs — Coverage muss grundlegend neu modellieren. EV/FCF impliziert, dass der Markt nun ~30% mehr FCF-Wachstum einpreist als der Konsens — das ist der eigentliche Treiber des Repricing. Dividende 2,27% bietet Carry, der bei einer Value-Rerating-These ungewöhnlich attraktiv ist.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>+41% in 10 Handelstagen: Das ist kein normales Momentum — das ist ein Paradigmenwechsel in der Marktwahrnehmung. IBM galt institutionell als "Dinosaurier", der sein Mainframe-Erbe nicht transformieren kann. Die Kombination aus watsonx-Überraschung + HashiCorp-Erfolg hat diese Narrative gebrochen. Positionierung: Value-Fonds mussten underweight abbauen, Tech-Crossover-Fonds akkumulieren. 6M RS-Score noch -5,77% — IBM war ein Laggard, der plötzlich zum Leader wird. Short-Float-Abbau beschleunigt Bewegung. Enttäuschungsrisiko: Nächste Quartalsmeldung muss die hohen watsonx-Erwartungen bestätigen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS 3/3 aktiv. RS-Score 113,97, #177 im S&P 500 — aber Aufwärtstrend im RS ist der entscheidende Faktor. 5T: +26,74%, 10T: +41,19%, 20T: +35,11% — außergewöhnliche Beschleunigung. 6M: -5,77% zeigt: IBM war ein Laggard, der jetzt aufholt — klassisches Mean-Reversion + Catalyst-Kombination. Kurs $320 nahe 52-Wochen-Hoch $324,90. Warnsignal: Rückfall unter $270 (ehemaliger Widerstand) würde die Breakout-These invalidieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($450–600):** IBM als führende Enterprise-AI-Plattform etabliert, Red Hat auf $30+ Mrd. Revenue, watsonx-Monetarisierung skaliert. FCF $18–22 Mrd. p.a. Entscheidende Variable: Tempo der Enterprise-AI-Adoption und IBMs Execution.</p>
+<p>**Base Case ($280–400):** Solides Software-Wachstum, stabiles FCF-Profil, moderate Multiple-Expansion. Entscheidende Variable: Red Hat vs. OpenShift-Konkurrenten (Microsoft AKS, AWS EKS).</p>
+<p>**Bear Case ($180–250):** AI-Investitionen bleiben hinter Erwartungen, klassisches IT-Consulting-Margenpressur, Mainframe-Erosion beschleunigt. Historisch 12–15x FCF als Boden.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>IBM ist kein klassisches Momentum-Play und kein reiner Growth-Titel — es ist ein Value-Compounder, der gerade sein Rerating erfährt. Das Fundamentalprofil (FCF $13 Mrd., Software-Mix, Dividende) kombiniert mit dem strukturellen AI-Consulting-Katalysator macht IBM zu einem seltenen Instrument: Buy-and-Hold-tauglich mit kurzfristigem Momentum-Overlay. Für institutionelle Long-Only-Investoren: Starkes Überzeugungsargument bei dieser Bewertung. Für Momentum-Trader: GWS 3/3, aber nach +41% in 10 Tagen ist Konsolidierungsphase wahrscheinlich. Positionsgröße: 3–5% für diversifizierte Tech-Portfolios. Direkter Peer-Vergleich: **Accenture (ACN)** dominiert AI-Consulting ohne Hardware-Legacy-Ballast, aber teurer. **Oracle (ORCL)** mit ähnlichem Cloud/AI-Rerating, stärkerem Database-Moat. IBM bietet die tiefste Dividende und FCF-Rendite der drei.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 5/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
