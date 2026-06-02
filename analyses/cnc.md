@@ -1,6 +1,6 @@
 # CNC — KI-Aktienbewertung
 
-**Centene Corporation** · Healthcare · 01.06.2026 · Signal: GWS Breakout 3/3
+**Centene Corporation** · Healthcare · 02.06.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
@@ -10,163 +10,73 @@
 | Revenue (TTM) | $178.33 Mrd. |
 | Gross Margin | 10.6% |
 | ROE | -26.0% |
-| RS-Score | 98.8 |
+| RS-Score | 131.4 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-Centene ist eine klassische Distressed-Recovery-Story im US-Krankenversicherungssektor. Der größte Medicaid-Managed-Care-Anbieter der USA wurde 2024/25 brutal abgestraft – Medicaid-Redeterminationen nach Pandemie, Margendruck im Marketplace-Geschäft und ein verfehlter ACA-Ausblick haben den Kurs zeitweise unter $25 gedrückt. Der Markt preiste ein strukturelles Problem ein, was wahrscheinlich übertrieben war. Jetzt sehen wir eine massive Rotation zurück: +59% in 50 Tagen, RS vs. QQQ bei 150. Institutionelle decken Shorts ein und positionieren sich für Margennormalisierung 2026. Bei Forward-KGV 13 und $6,85 Mrd. FCF ist die Bewertung absolut zerbombt – das ist kein Compounder, das ist ein Mean-Reversion-Play mit asymmetrischem Setup. Der Markt versteht, dass Medicaid-Raten politisch nachziehen müssen.
+Centene ist der größte Medicaid-Managed-Care-Anbieter der USA — und gleichzeitig einer der extremsten Wertfallen-Kandidaten oder Turnaround-Plays im US-Healthcare-Sektor. $178 Mrd. Revenue bei $29 Mrd. Market Cap ergibt P/S 0,16x — eine der günstigsten Bewertungen im S&P 500. Der strukturelle Kern: Centene verwaltet staatliche Gesundheitsausgaben gegen eine Marge — das Modell ist stabil, solange MCR (Medical Cost Ratio) kontrollierbar bleibt. Was schiefläuft: Negative ROE -26% signalisiert jüngste Verluste aus drei simultanen Belastungsfaktoren — Medicaid-Redeterminations post-COVID (Enrollment-Rückgang), höhere MCR durch selektiveres Restrisikoprofil, und Medicare-Advantage-Verluste. FCF $6,85 Mrd. trotz GAAP-Verlust ist charakteristisch für Managed Care: Claims-Verbindlichkeiten als Working-Capital-Puffer. Die entscheidende Variable: Normalisierung des MCR bis 2026/27.
 
 ## 2. GESCHÄFTSMODELL
 
-- Größter Medicaid-Anbieter der USA mit ~13 Mio. Mitgliedern in 30+ Bundesstaaten
-
-- Medicare Advantage als zweites Standbein (Wellcare-Brand), strukturell wachsend mit US-Demografie
-
-- ACA-Marketplace-Geschäft (Ambetter) – Wachstumstreiber, aber margenseitig 2025 unter Druck
-
-- TRICARE-Verträge für Militärangehörige als stabile Cashflow-Säule
-
-- Erlös = staatliche Capitation-Zahlungen pro Mitglied, Marge = Differenz zu Medical Loss Ratio (MLR)
-
-- MLR aktuell ~89-90% – jeder Prozentpunkt = Milliarden EBIT-Hebel
-
-- PBM-Geschäft (Pharmacy Benefits) intern und extern – nach Magellan-Restrukturierung schlanker
-
-- Skaleneffekte über IT-Plattform, Provider-Netzwerke und Verhandlungsmacht
-
-- Politisch reguliertes Geschäft – Raten werden von Bundesstaaten gesetzt, mit Verzögerung
-
-- Niedrige Kapitalintensität, asset-light, hohe FCF-Konvertierung
+- Medicaid (~65% Revenue): Managed-Care-Verträge mit US-Bundesstaaten; Centene verwaltet Versorgung für >26 Mio. Medicaid-Mitglieder; Umsatz = state-paid Prämien
+- Medicare Advantage (~20%): Freiwillige Medicare-Pläne für 65+; strukturell herausfordernd durch regulatorische MCR-Mindestanforderungen
+- Marketplace/ACA (~15%): ACA Exchange Plans; politisch exponiert, abhängig von Subventionsverlängerungen
+- MCR als primäre Profitabilitätsvariable: Jedes 1%-Punkt MCR-Bewegung bei $178 Mrd. Revenue = $1,78 Mrd. Ergebniseffekt — extremer operativer Hebel
+- Bargaining Power begrenzt: Preise werden von staatlichen Regulatoren gesetzt; Marge entsteht durch Netzwerkeffizienz und Präventionsqualität
+- FCF-Charakteristik: Claims-Verbindlichkeiten erzeugen float-ähnliche Working-Capital-Vorteile; FCF strukturell höher als GAAP-Gewinn
+- D/E 0,76x: manageable, kein Bilanzstress trotz jüngster Verluste
+- Politisches Risiko: Medicaid-Finanzierungskürzungen durch Kongress würden Enrollment und Prämien direkt treffen
 
 ## 3. BULL CASE
 
-- Medicaid-Raten 2026 dürften deutlich angehoben werden – Bundesstaaten müssen Anbieter halten
+MCR normalisiert auf 87–88% durch verbesserte Netzwerkverträge und Mitglieder-Mix-Stabilisierung; Medicaid-Enrollment stabilisiert sich nach abgeschlossenen Redeterminations; Medicare-Advantage-Portfolio wird auf profitablen Kern reduziert. Normalisiertes EPS steigt auf $7–9/Aktie; Forward-PE rerate auf 15–17x. Kursziel $105–150. Eintrittswahrscheinlichkeit: 25%.
 
-- Margennormalisierung von ~5% Op-Marge zurück Richtung 6-7% bedeutet EPS-Verdopplung möglich
+## 4. BASE CASE
 
-- Forward-KGV 13 bei $178 Mrd. Umsatz – jede Marge-Erholung ist purer Hebel
+Turnaround verläuft langsamer als erwartet: MCR normalisiert graduell auf 88–90% bis 2026/27; Medicare-Advantage-Verluste werden begrenzt, aber nicht eliminiert; ACA-Subventionen werden verlängert (Base-Assumption). Revenue wächst moderat 5–8% p.a.; normalisiertes EPS $4–6/Aktie ab 2026; Forward-PE bei 12–14x. Kursziel $55–85. Eintrittswahrscheinlichkeit: 50%.
 
-- Massives Buyback-Programm – Management kauft aggressiv unter Buchwert zurück
+## 5. BEAR CASE
 
-- Medicare Advantage Reset 2025 schafft saubere Vergleichsbasis für 2026
+Medicaid-Bundesfinanzierung wird politisch gekürzt (Block-Grant-Mechanismus); MCR-Normalisierung scheitert durch adverse Selektion im verbliebenen Enrollment; ACA-Subventionen laufen aus. Revenue fällt 10–15%, GAAP-Verluste weiten sich aus; Kapitalerhöhung oder Portfolioverkäufe erzwungen. Kursziel $25–40. Eintrittswahrscheinlichkeit: 25%.
 
-- Short Interest war hoch – Squeeze-Dynamik unterstützt aktuelle Bewegung
+**Summe: 25% + 50% + 25% = 100%**
 
-- Mögliche M&A-Fantasie – konsolidierender Sektor, CNC wäre Target oder Aggressor
+## 6. FUNDAMENTALE QUALITÄT
 
-- Demografischer Rückenwind: Alterung, Medicaid-Expansion in republikanischen Staaten
+ROE -26% — aktuell negativ durch Verlustperiode; historisch liegt Managed-Care-ROE bei 15–25% im Normalbetrieb. Gross Margin 10,6% reflektiert MCR ~89% — am oberen Ende der Problembandbreite; normalisiertes Ziel 87–88%. Operating Margin 5,1% gibt es im GAAP-Sinne, aber FCF $6,85 Mrd. divergiert massiv — Working-Capital-Puffer aus Claims-Verbindlichkeiten typisch für das Geschäftsmodell. Bilanz: D/E 0,76x — vertretbar; P/B 1,37x impliziert Markt sieht moderaten strukturellen Schaden, keinen Substanzverlust. Echter Burggraben: staatliche Vertragsbeziehungen (mehrjährige Laufzeiten), Mitgliederbasis >26 Mio. und IT-Infrastruktur für Claims-Management.
 
-## 4. BEAR CASE
+## 7. BEWERTUNG
 
-- Politisches Risiko: Trump-Administration könnte Medicaid-Funding kürzen
+Forward-PE 13,4x auf normalisiertes EPS — historisch günstiger Einstieg für Managed Care (typisches PE-Range 14–18x). P/B 1,37x nahe Buchwert — impliziert begrenzte Substanzprämie, hohes Upside bei Normalisierung. FCF-Yield $6,85 Mrd. / $29,4 Mrd. Market Cap = 23% — optisch extrem; durch Claims-Timing verzerrt, aber strukturell hoch. Normalisierter FCF über Zyklus geschätzt $3–5 Mrd. ergibt auf $29,4 Mrd. Market Cap P/FCF 6–10x — das ist echtes Deep Value bei gelingender Normalisierung. Analyst-Konsensziel nicht verfügbar. Fazit: Bewertung ist tatsächlich günstig — das Risiko ist nicht der Preis, sondern die Ausführung.
 
-- ACA-Subventionen laufen Ende 2025 aus – Marketplace-Geschäft könnte schrumpfen
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Net Margin negativ (-3,6%), ROE bei -26% – fundamentale Lage noch nicht repariert
+RS-Score 131 — moderates Momentum; Erholung nach tiefem Drawdown. 20T +10,2%, 50T +63,4%, 6M +46,6% — Recovery-Muster, nicht Momentum-Story. Institutionelle Positionierung: Value-Investoren und Healthcare-Spezialisten aktuell dominant; Growth-Fonds untergewichtet. Neues Kapital braucht sichtbare MCR-Verbesserung in Quartalszahlen oder politische Klarheit zu Medicaid-Finanzierung. Enttäuschungsrisiko: hoch bei weiterer MCR-Überschreitung oder Medicaid-Budget-Cuts.
 
-- Medical Loss Ratio bleibt stubborn hoch – Krankenhauskosten steigen weiter
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- Debt/Equity 76 ist nicht kritisch, aber Refinanzierungskosten gestiegen
+GWS-Daten nicht verfügbar. RS-Score 131 — mittleres Momentum im S&P 500-Universum; Recovery-Profil. 50T +63,4% — starke mittelfristige Erholung vom Tief. 6M +46,6% solide. Kurs $59–62 auf Wochenbasis stabil. Fundamental durch Bewertungsattraktivität und Turnaround-Erwartung gestützt; kein Momentum-Trade. Warnsignal: Rückfall unter $48 würde bärische Bodenstruktur wiederaufnehmen.
 
-- Regulatorisches Risiko bei Star Ratings (Medicare) – jede Herabstufung kostet Hunderte Millionen
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- Nach +59% in 50 Tagen ist viel Recovery bereits eingepreist
+**Bull Case ($120–180):** MCR normalisiert auf 86–88%; Medicare-Advantage-Portfolio repositioniert; ACA-Subventionen strukturell verlängert. Entscheidende Variable: Medicaid-Finanzierungsstabilität und MCR-Execution.
 
-- Kein Pricing-Power-Geschäft – Margen strukturell dünn und politisch limitiert
+**Base Case ($70–100):** Gradueller Turnaround; moderate Bewertungsexpansion auf 15–17x normalisiertes EPS. Entscheidende Variable: Tempo der MCR-Normalisierung und regulatorisches Umfeld.
 
-## 5. FUNDAMENTALE QUALITÄT
-
-- Umsatzwachstum +5,1% YoY – solide, aber niedrig-margig
-
-- Gross Margin nur 10,6% – typisch für Managed Care, kein Qualitätsindikator
-
-- Operating Margin 5,1% – unter historischem Schnitt (~6-7%)
-
-- Net Margin -3,6% – durch Impairments und ACA-Reserven belastet
-
-- FCF $6,85 Mrd. – das ist die eigentliche Stärke, FCF-Yield ~23%
-
-- ROE -26% – verzerrt durch GAAP-Verluste, normalisiert deutlich positiv
-
-- Debt/Equity 76 – moderat für Versicherer
-
-- Price/Book 1,36 – historisch tief, Distress-Niveau
-
-- Buchwert pro Aktie als Floor zunehmend relevant
-
-- Keine Dividende – Kapital geht in Buybacks
-
-- Cash-Generation deutlich über Net Income – GAAP underrepresents Reality
-
-- Kein klassischer Compounder, sondern Cashflow-Maschine in zyklischer Phase
-
-## 6. BEWERTUNG
-
-Forward-KGV 13, EV/EBITDA niedrig einstellig, Price/Book 1,36 – das ist eine Distressed-Bewertung für ein Unternehmen mit $178 Mrd. Umsatz und $6,85 Mrd. FCF. Peer Elevance handelt bei Forward-KGV ~14-15, UnitedHealth historisch bei 18-20. Der Bewertungsabschlag spiegelt operatives Risiko und Vertrauensverlust wider. FCF-Yield bei ~23% ist absurd hoch – das schreit nach Repricing, sofern 2026er Guidance hält. Analysten-Kursziel $58 wurde gerade erreicht – Ziele werden in den nächsten Quartalen nach oben revidiert, wenn Margentrend bestätigt. Faire Bewertung bei normalisierten Earnings: $75-85.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Stark under-owned bei Long-Only-Fonds nach Capitulation-Phase Q2/Q3 2024
-
-- Hedgefonds haben in Q3/Q4 2025 aggressiv aufgebaut – Smart-Money-Rotation
-
-- Sentiment dreht von "Sell" zu "Buy" – Analysten upgraden verzögert
-
-- Kein Hype-Wert – institutionelles Recovery-Play, kein Retail-Favorit
-
-- Short-Covering treibt Momentum, fundamentale Bestätigung muss folgen
-
-- Sektor-Rotation aus AI-Megacaps in defensive Value findet hier Heimat
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- GWS-Ampel 3/3 aktiv – Weekly, Daily und 4H bestätigen Strukturbruch nach oben
-
-- RS-Score 150 vs. QQQ ist außergewöhnlich stark – klare Outperformance
-
-- 52W-Hoch wird gerade erobert, Breakout-Setup nach langer Bodenbildung
-
-- Kurzfristig überkauft (+59% in 50T), Pullback Richtung $52-55 möglich und gesund
-
-- Phase 2 nach Stage-Analysis – früher Aufwärtstrend, technisch attraktiv
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 JAHRE)
-
-**Konservativ:** Margen normalisieren auf 5,5-6%, EPS $8-9, KGV 11 → Kursziel $90-100. Wahrscheinlichkeit: 50%
-
-**Bull Case:** Vollständige Recovery auf 6,5% Op-Marge, EPS $11-12, KGV 13 → Kursziel $140-150. Wahrscheinlichkeit: 30%
-
-**Extrem-Bull:** Margenexpansion + Buybacks reduzieren Aktien um 20%, EPS $14+, Re-Rating auf KGV 15 → Kursziel $200+. Wahrscheinlichkeit: 15%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- ELV (Elevance) – höhere Qualität, Forward-KGV 14, weniger Upside
-
-- UNH (UnitedHealth) – Branchenprimus, eigene Probleme, defensiver
-
-- HUM (Humana) – ähnliches Distress-Setup, fokussierter auf Medicare Advantage
-
-- MOH (Molina) – Medicaid-Pure-Play, kleiner, höhere Volatilität
-
-- CVS – integriertes Modell, mehr Komplexität, aber günstig bewertet
+**Bear Case ($15–35):** Medicaid-Block-Grant + MCR-Verschlechterung + ACA-Subventionsauslauf simultan. Kapitalbedarf und Portfolioverkäufe. Entscheidende Variable: Politische Entwicklung der Medicaid-Bundesfinanzierung.
 
 ## 11. PROFI-FAZIT
 
-CNC ist ein klassisches Hedgefonds-Setup: tiefe Bewertung, gebrochene Story, beginnende operative Wende und technische Bestätigung durch GWS 3/3. Das ist kein Compounder für die Schublade – das ist ein 12-24-Monats-Trade mit Recovery-These und asymmetrischem Risk/Reward. Wer früh eingestiegen ist (RS-Signal hätte unter $35 ausgelöst), sitzt jetzt auf Gewinnen und sollte Teilverkäufe bei $65-70 erwägen. Neue Positionen würde ich nicht bei aktuellem Kurs aufbauen, sondern bei Pullback in die $50-54-Zone. GWS-Ampel-Status auf 3/3 erlaubt Halten/Aufbauen mit klarem Stopp unter $48. Die Story funktioniert nur, wenn 2026er Guidance Margennormalisierung bestätigt – das ist Q1/Q2 2026 der Katalysator. Wer Qualität sucht, kauft UNH oder ELV. Wer Asymmetrie sucht, bleibt bei CNC. Risiko bleibt politisch und regulatorisch – keine Position über 3-4% Portfolio.
-
-**Rating:**
+Centene ist kein Momentum-Play — es ist eine binäre Turnaround-Wette auf MCR-Normalisierung in einem politisch exponiertem Geschäftsmodell. Für Value-Investoren mit hoher Risikobereitschaft und 24–36 Monaten Geduld: P/B 1,37x und Forward-PE 13,4x bieten echte Upside-Asymmetrie wenn Turnaround gelingt. Für Growth- oder Momentum-Investoren: falsches Risikoprofil. Positionsgröße: max. 1–2% angesichts binärer politischer Komponente. Politische Risikowarnung: US-Medicaid-Finanzierungskürzungen könnten 30–50% des Revenue strukturell gefährden — dieses Risiko ist nicht einpreisbar. Direkter Peer-Vergleich: **Molina Healthcare (MOH)** ist fokussierter Medicaid-Pure-Play mit schlankerem Portfolio; **Humana (HUM)** ist Medicare-Advantage-fokussierter ohne Centenes Medicaid-Exposure; **UnitedHealth (UNH)** bietet diversifizierteres Profil mit besserem Track-Record.
 
 - Qualität: 2/5
-
 - Wachstum: 2/5
-
-- Bewertung: 5/5
-
-- Langfristiges Potenzial: 4/5
+- Bewertung: 4/5
+- Katalysator: 3/5
 
 ---
 
@@ -174,9 +84,9 @@ CNC ist ein klassisches Hedgefonds-Setup: tiefe Bewertung, gebrochene Story, beg
 |---|---|
 | Qualität | 2/5 |
 | Wachstum | 2/5 |
-| Bewertung | 5/5 |
+| Bewertung | 4/5 |
 | Katalysator | 3/5 |
 
-**Verdict: HOLD (60/100)**
+**Verdict: HOLD (55/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
