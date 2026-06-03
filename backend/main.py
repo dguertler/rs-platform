@@ -1,11 +1,11 @@
-from fastapi import FastAPI, HTTPException, Depends, Request, BackgroundTasks
+from fastapi import FastAPI, HTTPException, Depends, Request, BackgroundTasks, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
-import json, os, re
+import json, os, re, urllib.request
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -17,6 +17,7 @@ from auth import (
     check_is_admin, set_admin, set_active, change_password,
     create_reset_token, use_reset_token, get_all_users, create_user,
     get_watchlist, add_to_watchlist, remove_from_watchlist,
+    get_telegram_chat_id, set_telegram_chat_id, get_all_telegram_chat_ids,
 )
 from news_handler import fetch_news
 from stripe_handler import create_checkout_session, parse_webhook
@@ -138,6 +139,36 @@ class AdminPatchUser(BaseModel):
 class WatchlistAddRequest(BaseModel):
     ticker: str
 
+class TelegramRequest(BaseModel):
+    chat_id: str
+
+
+# ── Telegram-Hilfsfunktionen ──────────────────────────────────────────────────
+
+TELEGRAM_BOT_USERNAME = os.environ.get("TELEGRAM_BOT_USERNAME", "")
+ALERT_API_KEY         = os.environ.get("ALERT_API_KEY", "")
+
+
+def _telegram_send(chat_id: str, text: str) -> tuple[bool, str]:
+    """Sendet eine einfache Textnachricht. Gibt (ok, fehlertext) zurück.
+    Braucht TELEGRAM_TOKEN in der Backend-Umgebung."""
+    token = os.environ.get("TELEGRAM_TOKEN", "")
+    if not token:
+        return False, "Backend hat keinen TELEGRAM_TOKEN konfiguriert."
+    url  = f"https://api.telegram.org/bot{token}/sendMessage"
+    data = json.dumps({"chat_id": chat_id, "text": text, "parse_mode": "HTML"}).encode()
+    req  = urllib.request.Request(
+        url, data=data, headers={"Content-Type": "application/json"}, method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            result = json.loads(resp.read())
+        if result.get("ok"):
+            return True, ""
+        return False, result.get("description", "Unbekannter Telegram-Fehler")
+    except Exception as e:
+        return False, str(e)
+
 
 @app.on_event("startup")
 async def startup():
@@ -211,7 +242,61 @@ async def reset_password(req: ResetRequest):
 
 @app.get("/api/user/me")
 async def me(email: str = Depends(require_auth)):
-    return {"email": email, "plan": get_user_plan(email), "is_admin": check_is_admin(email)}
+    return {
+        "email": email,
+        "plan": get_user_plan(email),
+        "is_admin": check_is_admin(email),
+        "telegram_chat_id": get_telegram_chat_id(email),
+    }
+
+
+@app.get("/api/telegram/info")
+async def telegram_info():
+    """Öffentliche Bot-Infos für die Anleitung im Frontend."""
+    return {
+        "bot_username": TELEGRAM_BOT_USERNAME,
+        "bot_url": f"https://t.me/{TELEGRAM_BOT_USERNAME}" if TELEGRAM_BOT_USERNAME else "",
+    }
+
+
+@app.post("/api/user/telegram")
+async def save_telegram(req: TelegramRequest, email: str = Depends(require_auth)):
+    """Hinterlegt die persönliche Telegram-Chat-ID und schickt — sofern das
+    Backend einen TELEGRAM_TOKEN hat — eine Bestätigungsnachricht zur Prüfung."""
+    chat_id = req.chat_id.strip()
+    if not re.fullmatch(r"-?\d{1,20}|@[A-Za-z0-9_]{4,40}", chat_id):
+        raise HTTPException(400, "Ungültige Chat-ID. Erlaubt: Zahl (z. B. 123456789) "
+                                 "oder @kanalname.")
+    ok, err = _telegram_send(
+        chat_id,
+        "✅ <b>RS-Platform</b> verbunden!\n"
+        "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.",
+    )
+    # Wenn das Backend einen Token hat und das Senden scheitert, ist die ID
+    # falsch oder der Bot wurde noch nicht gestartet → nicht speichern.
+    if os.environ.get("TELEGRAM_TOKEN") and not ok:
+        raise HTTPException(
+            400,
+            f"Konnte keine Nachricht senden: {err}. Hast du den Bot gestartet "
+            f"(/start) und die richtige Chat-ID eingetragen?",
+        )
+    set_telegram_chat_id(email, chat_id)
+    return {"detail": "Telegram-Benachrichtigungen aktiviert.", "verified": ok}
+
+
+@app.delete("/api/user/telegram")
+async def delete_telegram(email: str = Depends(require_auth)):
+    set_telegram_chat_id(email, None)
+    return {"detail": "Telegram-Benachrichtigungen deaktiviert."}
+
+
+@app.get("/api/telegram/recipients")
+async def telegram_recipients(x_alert_key: str = Header(default="")):
+    """Liefert alle registrierten Chat-IDs für den Alert-Versand.
+    Geschützt durch den gemeinsamen ALERT_API_KEY (Header X-Alert-Key)."""
+    if not ALERT_API_KEY or x_alert_key != ALERT_API_KEY:
+        raise HTTPException(401, "Nicht autorisiert")
+    return {"chat_ids": get_all_telegram_chat_ids()}
 
 
 @app.post("/api/user/change-password")

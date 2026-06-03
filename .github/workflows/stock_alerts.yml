@@ -52,6 +52,8 @@ jobs:
           FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
           TELEGRAM_TOKEN:    ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID:  ${{ secrets.TELEGRAM_CHAT_ID }}
+          RS_API_URL:        ${{ secrets.RS_API_URL }}
+          ALERT_API_KEY:     ${{ secrets.ALERT_API_KEY }}
         run: python check_alerts.py
 
       - name: Zustandsdatei, signals.json und Ratings committen

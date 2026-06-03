@@ -44,6 +44,8 @@ jobs:
           TEST_DATE:        ${{ github.event.inputs.test_date }}
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RS_API_URL:       ${{ secrets.RS_API_URL }}
+          ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
         run: python check_earnings.py
 
       - name: Fehler-Mail senden

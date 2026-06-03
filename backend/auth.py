@@ -45,6 +45,7 @@ def init_db() -> None:
             ("is_admin",           "INTEGER DEFAULT 0"),
             ("reset_token",        "TEXT"),
             ("reset_token_exp",    "TEXT"),
+            ("telegram_chat_id",   "TEXT"),
         ]:
             if col not in cols:
                 conn.execute(f"ALTER TABLE users ADD COLUMN {col} {defn}")
@@ -185,6 +186,32 @@ def decode_token(token: str) -> str | None:
         return payload.get("sub")
     except JWTError:
         return None
+
+
+def get_telegram_chat_id(email: str) -> str | None:
+    with sqlite3.connect(DB_PATH) as conn:
+        row = conn.execute(
+            "SELECT telegram_chat_id FROM users WHERE email=? AND is_active=1", (email,)
+        ).fetchone()
+    return (row[0] if row else None) or None
+
+
+def set_telegram_chat_id(email: str, chat_id: str | None) -> None:
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            "UPDATE users SET telegram_chat_id=? WHERE email=?",
+            (chat_id or None, email),
+        )
+
+
+def get_all_telegram_chat_ids() -> list[str]:
+    """Alle hinterlegten Chat-IDs aktiver User — für den Alert-Versand."""
+    with sqlite3.connect(DB_PATH) as conn:
+        rows = conn.execute(
+            "SELECT DISTINCT telegram_chat_id FROM users "
+            "WHERE is_active=1 AND telegram_chat_id IS NOT NULL AND telegram_chat_id != ''"
+        ).fetchall()
+    return [r[0] for r in rows]
 
 
 def get_watchlist(email: str) -> list[str]:

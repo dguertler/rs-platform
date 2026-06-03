@@ -29,6 +29,11 @@
     .nav { font-size: 13px; margin-bottom: 24px; display: flex; gap: 16px; }
     .nav a { color: #64748b; text-decoration: none; } .nav a:hover { color: #94a3b8; }
     .upgrade-btn { background: #2563eb; color: #fff; border: none; padding: 3px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+    .tg-steps { margin: 0 0 16px 18px; padding: 0; font-size: 13px; color: #cbd5e1; line-height: 1.7; }
+    .tg-steps a { color: #60a5fa; text-decoration: none; }
+    .tg-steps a:hover { text-decoration: underline; }
+    .tg-status { font-size: 13px; padding: 10px 14px; margin-bottom: 14px; border-radius: 6px; background: #052e16; border: 1px solid #166534; color: #86efac; display: none; }
+    .tg-status.off { background: #1e293b; border-color: #334155; color: #94a3b8; }
   </style>
 </head>
 <body>
@@ -46,6 +51,21 @@
       <label>Wiederholen</label><input type="password" id="nw2" required placeholder="........">
       <button type="submit" id="btn">Passwort aendern</button>
     </form>
+
+    <h2>Telegram-Benachrichtigungen</h2>
+    <div class="msg err" id="tgErr"></div>
+    <div class="msg ok"  id="tgOk"></div>
+    <div id="tgStatus" class="tg-status"></div>
+    <ol class="tg-steps">
+      <li>Telegram-Bot oeffnen: <a id="tgBotLink" href="#" target="_blank" rel="noopener">Bot starten</a> und auf <b>Start</b> tippen.</li>
+      <li>Deine <b>Chat-ID</b> herausfinden: schreibe <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> an &ndash; er antwortet mit deiner ID (eine Zahl).</li>
+      <li>Die Zahl unten eintragen und speichern. Du bekommst sofort eine Test-Nachricht.</li>
+    </ol>
+    <label>Deine Telegram Chat-ID</label>
+    <input type="text" id="tgChat" placeholder="z. B. 123456789" autocomplete="off">
+    <button id="tgSave">Aktivieren / Speichern</button>
+    <button class="btn-muted" id="tgDel" style="display:none">Benachrichtigungen deaktivieren</button>
+
     <button class="btn-muted" onclick="localStorage.clear();window.location.href='/login.html'">Abmelden</button>
   </div>
   <script>
@@ -58,7 +78,63 @@
       if(u.plan==="pro") pl.innerHTML='<span class="badge pro">Pro</span>';
       else pl.innerHTML='<span class="badge free">Free</span> <button class="upgrade-btn" onclick="upgrade()">Upgrade</button>';
       if(u.is_admin) document.getElementById("adm").style.display="";
+      renderTelegram(u.telegram_chat_id);
     }
+
+    async function loadTelegramInfo(){
+      try{
+        var r=await fetch("/api/telegram/info"); var d=await r.json();
+        var link=document.getElementById("tgBotLink");
+        if(d.bot_url){ link.href=d.bot_url; link.textContent="@"+d.bot_username+" oeffnen"; }
+        else { link.removeAttribute("href"); link.textContent="(Bot-Name noch nicht konfiguriert)"; }
+      }catch(e){}
+    }
+
+    function renderTelegram(chatId){
+      var st=document.getElementById("tgStatus"), del=document.getElementById("tgDel"),
+          inp=document.getElementById("tgChat");
+      if(chatId){
+        st.className="tg-status"; st.style.display="block";
+        st.textContent="Aktiv – Alerts gehen an Chat-ID "+chatId;
+        del.style.display=""; inp.value=chatId;
+      }else{
+        st.className="tg-status off"; st.style.display="block";
+        st.textContent="Noch nicht aktiviert.";
+        del.style.display="none"; inp.value="";
+      }
+    }
+
+    document.getElementById("tgSave").addEventListener("click", async function(){
+      var btn=this, err=document.getElementById("tgErr"), ok=document.getElementById("tgOk");
+      var chat=document.getElementById("tgChat").value.trim();
+      err.style.display="none"; ok.style.display="none";
+      if(!chat){ err.textContent="Bitte deine Chat-ID eintragen."; err.style.display="block"; return; }
+      btn.disabled=true; btn.textContent="Speichern...";
+      try{
+        var r=await api("/api/user/telegram",{method:"POST",headers:{"Content-Type":"application/json"},
+          body:JSON.stringify({chat_id:chat})});
+        var d=await r.json();
+        if(!r.ok) throw new Error(d.detail||"Fehler");
+        ok.textContent=d.verified ? "Aktiviert – Test-Nachricht gesendet." : d.detail;
+        ok.style.display="block";
+        renderTelegram(chat);
+      }catch(ex){ err.textContent=ex.message; err.style.display="block"; }
+      finally{ btn.disabled=false; btn.textContent="Aktivieren / Speichern"; }
+    });
+
+    document.getElementById("tgDel").addEventListener("click", async function(){
+      var btn=this, err=document.getElementById("tgErr"), ok=document.getElementById("tgOk");
+      err.style.display="none"; ok.style.display="none";
+      btn.disabled=true; btn.textContent="...";
+      try{
+        var r=await api("/api/user/telegram",{method:"DELETE"});
+        var d=await r.json();
+        if(!r.ok) throw new Error(d.detail||"Fehler");
+        ok.textContent=d.detail; ok.style.display="block";
+        renderTelegram(null);
+      }catch(ex){ err.textContent=ex.message; err.style.display="block"; }
+      finally{ btn.disabled=false; btn.textContent="Benachrichtigungen deaktivieren"; }
+    });
     async function upgrade(){var r=await api("/api/stripe/checkout");var d=await r.json();if(d.url)window.location.href=d.url;}
     document.getElementById("form").addEventListener("submit",async function(e){
       e.preventDefault();
@@ -76,6 +152,7 @@
       }catch(ex){err.textContent=ex.message;err.style.display="block";}
       finally{btn.disabled=false;btn.textContent="Passwort aendern";}
     });
+    loadTelegramInfo();
     load();
   </script>
 </body>
