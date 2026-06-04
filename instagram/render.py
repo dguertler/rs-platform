@@ -82,6 +82,9 @@ class Canvas:
         try:
             from PIL import Image
             img = Image.open(path).convert("RGBA")
+            bbox = img.getbbox()           # transparente Ränder wegschneiden
+            if bbox:
+                img = img.crop(bbox)
             w = int(img.width * height / img.height)
             img = img.resize((w, int(height)), Image.LANCZOS)
             arr = np.asarray(img)

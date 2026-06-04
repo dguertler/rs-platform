@@ -16,11 +16,18 @@ LOGO_PATH = os.path.join(ASSETS, "logo.png")   # Ziel für make_logo.py
 
 
 def logo_file():
-    """Findet dein Logo (PNG bevorzugt, sonst JPG). None, wenn keins da ist."""
-    for name in ("logo.png", "logo.jpg", "logo.jpeg"):
-        p = os.path.join(ASSETS, name)
-        if os.path.exists(p):
-            return p
+    """Findet dein Logo (logo.png/.jpg/.webp, Groß-/Kleinschreibung egal).
+    PNG/WEBP bevorzugt. None, wenn keins da ist."""
+    if not os.path.isdir(ASSETS):
+        return None
+    found = {}
+    for f in os.listdir(ASSETS):
+        low = f.lower()
+        if low in ("logo.png", "logo.webp", "logo.jpg", "logo.jpeg"):
+            found[low] = os.path.join(ASSETS, f)
+    for pref in ("logo.png", "logo.webp", "logo.jpg", "logo.jpeg"):
+        if pref in found:
+            return found[pref]
     return None
 
 # ── Farben (an das Logo „AI Alpha Selection" angelehnt: Navy + Royalblau) ──────
