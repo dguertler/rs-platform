@@ -542,6 +542,25 @@ def save_signals(signals):
         json.dump(signals, f, indent=2)
 
 
+# Letzte tatsächlich verschickte Breakout-Charge – wird vom Backend genutzt,
+# um neu verbundenen Telegram-Usern die letzten Alerts nachzureichen.
+LAST_BATCH_FILE = 'last_breakout_alerts.json'
+
+
+def save_last_breakout_batch(alerts):
+    """Speichert die zuletzt verschickte Breakout-Charge (inkl. Charts) mit
+    Zeitstempel, damit das Backend sie nachreichen kann."""
+    now = datetime.now()
+    payload = {
+        'sent_at':      now.isoformat(timespec='seconds'),
+        'sent_at_label': now.strftime('%d.%m.%Y %H:%M'),
+        'date_label':   now.strftime('%d.%m.%Y'),
+        'alerts':       alerts,
+    }
+    with open(LAST_BATCH_FILE, 'w') as f:
+        json.dump(payload, f)
+
+
 # ── Hauptprogramm ───────────────────────────────────────────────
 
 def process_json(json_path, source_label, prev_states, today_str, signals=None):
@@ -808,6 +827,8 @@ def main():
                 print(f'Telegram-Empfaenger: {len(tg_recipients)}')
                 for a in fresh_alerts:
                     send_breakout_telegram(tg_token, tg_recipients, a)
+        # Letzte verschickte Charge persistieren (für Willkommens-Nachreichung)
+        save_last_breakout_batch(fresh_alerts)
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')

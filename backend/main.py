@@ -5,8 +5,11 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
-import json, os, re, urllib.request
+import json, os, re, sys, asyncio, urllib.request
 from pathlib import Path
+
+# Repo-Root in den Importpfad, damit telegram_handler (Charts-Versand) nutzbar ist
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / ".env")
@@ -217,6 +220,62 @@ def _set_telegram_webhook() -> None:
           f"{'OK' if ok else res.get('description')}")
 
 
+# Verzögerung, bis die letzten Breakout-Alerts nach dem Willkommenstext kommen
+WELCOME_ALERTS_DELAY = 30
+
+
+def _last_breakout_batch() -> dict | None:
+    """Lädt die zuletzt verschickte Breakout-Charge (von check_alerts.py)."""
+    path = DATA_DIR / "last_breakout_alerts.json"
+    if not path.exists():
+        return None
+    try:
+        return _load(path)
+    except Exception:
+        return None
+
+
+async def _welcome_and_replay(chat_id: str) -> None:
+    """Einmaliger Willkommenstext nach dem Verbinden; danach – 30 s später –
+    die zuletzt verschickte Breakout-Charge (inkl. Charts) nachreichen."""
+    batch  = _last_breakout_batch()
+    alerts = (batch or {}).get("alerts") or []
+    when   = (batch or {}).get("sent_at_label") or (batch or {}).get("date_label") or ""
+
+    if alerts:
+        welcome = (
+            "✅ <b>RS-Platform</b> verbunden!\n"
+            "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.\n\n"
+            f"📨 Gleich bekommst du die <b>letzten Breakout-Alerts</b> "
+            f"(Stand: {when}) nachgereicht – in {WELCOME_ALERTS_DELAY} Sekunden."
+        )
+    else:
+        welcome = (
+            "✅ <b>RS-Platform</b> verbunden!\n"
+            "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.\n"
+            "Aktuell liegen keine vergangenen Breakout-Alerts vor – du bekommst die "
+            "nächsten automatisch, sobald sie auftreten."
+        )
+    await asyncio.to_thread(_telegram_send, chat_id, welcome)
+
+    if not alerts:
+        return
+
+    await asyncio.sleep(WELCOME_ALERTS_DELAY)
+
+    await asyncio.to_thread(
+        _telegram_send, chat_id,
+        f"📨 <b>Letzte Breakout-Alerts</b> (Stand: {when}):",
+    )
+    token = _telegram_token()
+    try:
+        from telegram_handler import send_breakout_telegram
+        for alert in alerts:
+            await asyncio.to_thread(send_breakout_telegram, token, [chat_id], alert)
+    except Exception as e:
+        print(f"[Telegram] Nachreichung der letzten Alerts fehlgeschlagen: {e}")
+
+
 @app.on_event("startup")
 async def startup():
     init_db()
@@ -347,11 +406,9 @@ async def telegram_webhook(
     if payload:
         email = link_telegram_by_token(payload, chat_id)
         if email:
-            _telegram_send(
-                chat_id,
-                "✅ <b>RS-Platform</b> verbunden!\n"
-                "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.",
-            )
+            # Willkommenstext + Nachreichung der letzten Alerts im Hintergrund,
+            # damit der Webhook sofort antwortet.
+            asyncio.create_task(_welcome_and_replay(chat_id))
             return {"ok": True}
     _telegram_send(
         chat_id,

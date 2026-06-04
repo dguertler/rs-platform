@@ -62,6 +62,7 @@ jobs:
           git config user.email "actions@github.com"
           git add alerts_state.json
           [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
+          [ -f last_breakout_alerts.json ] && mv last_breakout_alerts.json data/last_breakout_alerts.json && git add data/last_breakout_alerts.json || true
           [ -d data/ratings ] && git add data/ratings/ || true
           git diff --staged --quiet || git commit -m "Alert-Zustand + KI-Ratings aktualisiert"
           git push origin master
