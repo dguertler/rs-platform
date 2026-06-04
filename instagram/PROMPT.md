@@ -60,17 +60,21 @@ NASDAQ-Vergleich, Wochen-/Gesamtrendite, Alpha, Wochen-Historie und
 
 ## Slide-Reihenfolge (Wochenpost)
 
-1. Hook — KW, Wochenperformance, Gesamtrendite
-2. Performance Musterdepot vs. NASDAQ-100 (Equity-Kurve)
-3. Kennzahlen — Gesamtrendite, Alpha, Wochen geschlagen, Ø Gewinn/Verlustwoche
-4. Wochen-Historie (Balken grün/rot je KW)
-5. **Stärkste Positionen** (Top-5, Wertzuwachs seit Kauf)
-6. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kaufmarker +
-   eingearbeiteten weiteren Signalen
-7. CTA + Risikohinweis
+1. **Performance vs. NASDAQ-100** (Eye-Catcher, erste Slide) — Equity-Kurve +
+   Kennzahlen unter dem Graph: Gesamtrendite, NASDAQ, Alpha, Trades seit Start,
+   Trefferquote, Profitfaktor, Ø Gewinn/Trade, Ø Verlust/Trade
+2. **Wochen-Historie** — wöchentliche Mehrrendite ggü. NASDAQ-100 (grün = besser)
+3. **Stärkste Positionen** (Top-5, mit Kaufdatum + Einstiegskurs)
+4. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kauf-Signal
+   (blau) + eingearbeiteten weiteren Signalen
+5. **Newcomer** — bestperformende Aktie der letzten 3 Wochen, NUR wenn sie nicht
+   in den Top-5 ist (sonst entfällt die Slide)
+6. CTA + Risikohinweis
 
 Rotation der Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`
 (in `holdings.json`). Jede Woche eine andere – auch wenn die Top-5 gleich bleiben.
+Kennzahlen werden aus `trades.json` (abgeschlossene Trades) + den aktiven
+Positionen berechnet.
 
 **Bewusst NICHT enthalten:** Erklärung, *wie* das System funktioniert
 (RS-Methodik) — bleibt dem wikifolio vorbehalten.
@@ -84,6 +88,7 @@ Rotation der Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`
 | `config.json` | Symbol, Startdatum, Startwert, Account | einmalig |
 | `wikifolio_history.json` | Zertifikatswert je KW | **wöchentlich** (Nutzer/Claude) |
 | `holdings.json` | ALLE Positionen + Kaufdatum + Einstiegskurs (EUR) + `base_kw` | bei Kauf/Verkauf |
+| `trades.json` | abgeschlossene Trades (realisierte Rendite) für Kennzahlen | bei Verkauf |
 
 - **`value`** in `wikifolio_history.json`: Zertifikatswert auf gleicher Skala wie
   `start_value` in `config.json` (z. B. Index 100 oder echter EUR-Wert; dann

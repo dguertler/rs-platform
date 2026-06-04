@@ -21,52 +21,72 @@ from . import data, render, report, store
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
+def _pos_sub(t):
+    s = t.get("name", "")
+    if t.get("buy_date"):
+        s += f" · Kauf {render.fmt_de_date(t['buy_date'])}"
+    if t.get("buy_price_eur"):
+        s += f" · {t['buy_price_eur']:.2f}".replace(".", ",") + " €"
+    return s
+
+
 def build_from_store(fmt, ctx, outdir):
     """Wochen-Carousel aus den persistenten Daten (store.compute)."""
     saved = []
     emit = _emitter(fmt, outdir, saved)
+    di = ctx["date_iso"]
 
-    emit("hook", lambda c: render.slide_hook_weekly(
-        c, ctx["date_iso"], ctx["kw"], ctx["period"], ctx["week_perf"], ctx["total_perf"]))
+    # 1) Performance (Eye-Catcher) inkl. Kennzahlen unter dem Graph
     emit("performance", lambda c: render.slide_performance(
-        c, ctx["date_iso"], ctx["eq_dates"], ctx["eq_vals"], ctx["nas_dates"],
-        ctx["nas_vals"], ctx["total_perf"], ctx["nasdaq_total"], False))
-    emit("kpis", lambda c: render.slide_kpis_weekly(
-        c, ctx["date_iso"], ctx["total_perf"], ctx["alpha"], ctx["weeks_beaten"],
-        ctx["weeks_total"], ctx["avg_win"], ctx["avg_loss"]))
-    emit("historie", lambda c: render.slide_history(c, ctx["date_iso"], ctx["history"]))
-
+        c, di, ctx["eq_dates"], ctx["eq_vals"], ctx["nas_dates"], ctx["nas_vals"],
+        ctx["total_perf"], ctx["nasdaq_total"], False, stats=ctx["stats"]))
+    # 2) Wochen-Historie (Mehrrendite ggü. NASDAQ)
+    emit("historie", lambda c: render.slide_history(c, di, ctx["history"]))
+    # 3) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
     if ctx["top_holdings"]:
-        rows = [{"main": t["ticker"], "sub": t.get("name", ""),
+        rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]),
                  "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
-            c, ctx["date_iso"], "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
+            c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
+    # 4) Aktie der Woche (Rotation)
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
-             lambda c: render.slide_featured(c, ctx["date_iso"], ctx["featured"]))
-
-    emit("cta", lambda c: render.slide_cta(c, ctx["date_iso"]))
+             lambda c: render.slide_featured(c, di, ctx["featured"]))
+    # 5) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
+    if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
+        emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
+             lambda c: render.slide_featured(c, di, ctx["newcomer"], label="NEWCOMER"))
+    # 6) CTA + Risikohinweis
+    emit("cta", lambda c: render.slide_cta(c, di))
     return saved
 
 
 def caption_from_store(ctx):
     top = "\n".join(f"• {t['ticker']} ({t.get('name','')}): {render.fmt_pct(t['ret'])}"
                     for t in ctx["top_holdings"][:5])
+    s = ctx["stats"]
+    pf = "∞" if s["profit_factor"] is None else f"{s['profit_factor']:.1f}".replace(".", ",")
     f = ctx["featured"]
-    feat = (f"\n🔎 Aktie der Woche: {f['ticker']} – seit Kauf "
-            f"{render.fmt_pct(f['ret'])}." if f.get("ret") is not None else "")
+    feat = (f"\n🔎 Aktie der Woche: {f['ticker']} – seit Kauf {render.fmt_pct(f['ret'])}."
+            if f.get("ret") is not None else "")
+    nc = ctx.get("newcomer")
+    newc = (f"\n🆕 Newcomer: {nc['ticker']} – {render.fmt_pct(nc['ret'])} seit Kauf."
+            if nc and nc.get("ret") is not None else "")
     return (
         f"📊 Wochenupdate KW {ctx['kw']} ({ctx['period']})\n\n"
-        f"Musterdepot diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
+        f"Diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
         f"NASDAQ-100: {render.fmt_pct(ctx['nasdaq_week'])}\n"
         f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} | "
         f"NASDAQ: {render.fmt_pct(ctx['nasdaq_total'])} | "
         f"Alpha: {render.fmt_pct(ctx['alpha'])}\n"
-        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen den NASDAQ geschlagen.\n\n"
+        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen über dem NASDAQ.\n"
+        f"Trades: {s['trades']} · Trefferquote {round(s['win_rate']*100)} % · "
+        f"Profitfaktor {pf} · Ø Gewinn {render.fmt_pct(s['avg_win'])} · "
+        f"Ø Verlust {render.fmt_pct(s['avg_loss'])}\n\n"
         f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
-        f"{feat}\n\n"
+        f"{feat}{newc}\n\n"
         f"➡️ Mehr: {ctx['account']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
@@ -220,7 +240,7 @@ def main():
 
     # ── Wochenmodus aus persistenten Daten (Hauptweg) ─────────────────────────
     if args.kw:
-        ctx = store.compute(args.kw, universe, benchmark)
+        ctx = store.compute(args.kw, universe, benchmark, ref_date=args.date)
         ctx["date_iso"] = args.date
         base = os.path.join(ROOT, "out", "instagram", f"{args.date}_KW{args.kw}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]

@@ -17,6 +17,7 @@ externer Aufruf nötig.
 """
 import json
 import os
+from datetime import datetime, timedelta
 
 from . import data, report
 
@@ -38,6 +39,25 @@ def load_history():
 
 def load_holdings():
     return _load("holdings.json")
+
+
+def load_trades():
+    try:
+        return _load("trades.json")
+    except FileNotFoundError:
+        return {"closed": []}
+
+
+def _featured_dict(universe, p):
+    """Baut die Daten für eine Chart-Slide (Aktie der Woche / Newcomer)."""
+    ret, entry = _ret_since(universe, p["ticker"], p["buy_date"])
+    return {
+        "ticker": p["ticker"], "name": p.get("name", ""),
+        "buy_date": p["buy_date"], "buy_price_eur": p.get("buy_price_eur"),
+        "ret": ret, "entry": entry,
+        "ohlcv": universe[p["ticker"]]["ohlcv"],
+        "signals": data.load_signals().get(p["ticker"], []),
+    }
 
 
 def append_week(kw, value):
@@ -74,7 +94,7 @@ def _ret_since(universe, ticker, buy_date):
     return ohlcv[-1]["c"] / entry["c"] - 1.0, entry
 
 
-def compute(kw, universe, benchmark):
+def compute(kw, universe, benchmark, ref_date=None):
     cfg = load_config()
     year = cfg["year"]
     start_date, start_value = cfg["start_date"], cfg["start_value"]
@@ -99,19 +119,19 @@ def compute(kw, universe, benchmark):
     nasdaq_week = nas_raw[-1] / nas_raw[-2] - 1 if len(nas_raw) > 1 else 0.0
     alpha = total_perf - nasdaq_total
 
-    # ── Wochen-Historie + „geschlagen" ───────────────────────────────────────
+    # ── Wochen-Historie: wöchentliche Mehrrendite ggü. NASDAQ ────────────────
     history, beaten = [], 0
     prev_v, prev_n = start_value, nas_raw[0] if nas_raw else None
     for i, w in enumerate(weekly):
         wk = w["value"] / prev_v - 1
-        history.append({"kw": w["kw"], "perf": wk})
-        if prev_n and i + 1 < len(nas_raw):
-            if wk > (nas_raw[i + 1] / prev_n - 1):
-                beaten += 1
-            prev_n = nas_raw[i + 1]
+        nwk = (nas_raw[i + 1] / prev_n - 1) if (prev_n and i + 1 < len(nas_raw)) else 0.0
+        dev = wk - nwk
+        history.append({"kw": w["kw"], "perf": wk, "nasdaq": nwk, "dev": dev})
+        if dev > 0:
+            beaten += 1
         prev_v = w["value"]
-    wins = [h["perf"] for h in history if h["perf"] >= 0]
-    losses = [h["perf"] for h in history if h["perf"] < 0]
+        if i + 1 < len(nas_raw):
+            prev_n = nas_raw[i + 1]
 
     # ── Top-Positionen: Performance seit Kauf ────────────────────────────────
     hold = load_holdings()
@@ -122,12 +142,32 @@ def compute(kw, universe, benchmark):
         if ret is not None:
             top.append({**p, "ret": ret})
     top.sort(key=lambda t: t["ret"], reverse=True)
+    top5_tickers = {t["ticker"] for t in top[:5]}
 
-    # ── „Aktie der Woche" (Rotation) ─────────────────────────────────────────
+    # ── Trade-Kennzahlen: abgeschlossene + aktive Trades zusammen ────────────
+    closed = [t["ret"] for t in load_trades().get("closed", [])]
+    active = [t["ret"] for t in top]
+    rets = closed + active
+    wins = [r for r in rets if r > 0]
+    losses = [r for r in rets if r < 0]
+    stats = {
+        "alpha": alpha,
+        "trades": len(rets),
+        "win_rate": len(wins) / len(rets) if rets else 0.0,
+        "avg_win": sum(wins) / len(wins) if wins else 0.0,
+        "avg_loss": sum(losses) / len(losses) if losses else 0.0,
+        "profit_factor": (sum(wins) / abs(sum(losses))) if losses else None,
+    }
+
+    # ── „Aktie der Woche" (Rotation durch ALLE Positionen) ───────────────────
     base_kw = hold.get("base_kw", weekly[0]["kw"])
-    feat = positions[(kw - base_kw) % len(positions)]
-    feat_ret, feat_entry = _ret_since(universe, feat["ticker"], feat["buy_date"])
-    feat_signals = data.load_signals().get(feat["ticker"], [])
+    featured = _featured_dict(universe, positions[(kw - base_kw) % len(positions)])
+
+    # ── Newcomer: bester Kauf der letzten 3 Wochen, NICHT in den Top-5 ───────
+    ref = datetime.strptime(ref_date or dates[-1], "%Y-%m-%d")
+    cutoff = (ref - timedelta(days=21)).strftime("%Y-%m-%d")
+    cand = [t for t in top if t["buy_date"] >= cutoff and t["ticker"] not in top5_tickers]
+    newcomer = _featured_dict(universe, max(cand, key=lambda t: t["ret"])) if cand else None
 
     return {
         "kw": kw,
@@ -139,15 +179,10 @@ def compute(kw, universe, benchmark):
         "nasdaq_week": nasdaq_week, "nasdaq_total": nasdaq_total, "alpha": alpha,
         "history": history,
         "weeks_beaten": beaten, "weeks_total": len(history),
-        "avg_win": sum(wins) / len(wins) if wins else 0.0,
-        "avg_loss": sum(losses) / len(losses) if losses else 0.0,
+        "stats": stats,
         "top_holdings": top,
-        "featured": {
-            "ticker": feat["ticker"], "name": feat.get("name", ""),
-            "buy_date": feat["buy_date"], "buy_price_eur": feat.get("buy_price_eur"),
-            "ret": feat_ret, "entry": feat_entry,
-            "ohlcv": universe[feat["ticker"]]["ohlcv"], "signals": feat_signals,
-        },
+        "featured": featured,
+        "newcomer": newcomer,
     }
 
 

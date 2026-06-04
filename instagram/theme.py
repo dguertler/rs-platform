@@ -70,23 +70,21 @@ def register_fonts():
 
 
 # ── Pflicht-Disclaimer ──────────────────────────────────────────────────────
-# An die wikifolio-Trennungsregel angepasst: Es wird ausschließlich über das
-# wikifolio (Musterdepot) gesprochen, NICHT über das Zertifikat; keine ISIN,
-# keine Kaufempfehlung für ein Zertifikat.
+# An die wikifolio-Trennungsregel angepasst: Es wird über das wikifolio /
+# Depot gesprochen, NICHT über das Zertifikat; keine ISIN, keine Kaufempfehlung.
 DISCLAIMER_SHORT = (
     "Keine Anlageberatung oder Kaufempfehlung. Dargestellt wird die vergangene "
-    "Wertentwicklung des Musterdepots – kein verlässlicher Indikator für die "
+    "Wertentwicklung des Depots – kein verlässlicher Indikator für die "
     "Zukunft. Kapitalanlagen bergen Verlustrisiken bis zum Totalverlust."
 )
 
 DISCLAIMER_LONG = (
     "Risikohinweis & Disclaimer\n"
-    "Dieser Beitrag bezieht sich auf das wikifolio (Musterdepot) "
-    "„AI Alpha Selections\" und dient der Information/Eigenwerbung. Er stellt "
-    "KEINE Anlageberatung, Finanzanalyse oder Kauf-/Verkaufsempfehlung dar – "
-    "insbesondere keine Empfehlung zum Erwerb eines Zertifikats. Gezeigt wird "
-    "die vergangene Wertentwicklung des Musterdepots; diese ist KEIN "
-    "verlässlicher Indikator für künftige Ergebnisse. Kapitalmarktanlagen "
-    "bergen Verlustrisiken bis zum Totalverlust. Triff keine "
-    "Anlageentscheidung allein aufgrund dieses Beitrags."
+    "Dieser Beitrag bezieht sich auf das wikifolio „AI Alpha Selection\" und "
+    "dient der Information/Eigenwerbung. Er stellt KEINE Anlageberatung, "
+    "Finanzanalyse oder Kauf-/Verkaufsempfehlung dar – insbesondere keine "
+    "Empfehlung zum Erwerb eines Zertifikats. Gezeigt wird die vergangene "
+    "Wertentwicklung des Depots; diese ist KEIN verlässlicher Indikator für "
+    "künftige Ergebnisse. Kapitalmarktanlagen bergen Verlustrisiken bis zum "
+    "Totalverlust. Triff keine Anlageentscheidung allein aufgrund dieses Beitrags."
 )

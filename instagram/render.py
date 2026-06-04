@@ -16,8 +16,8 @@ from matplotlib.patches import FancyBboxPatch
 from . import theme as T
 
 _FONTS = T.register_fonts()
-HANDLE = "@aialphaselections"
-BRAND = "AI ALPHA SELECTIONS"
+HANDLE = "@aialphaselection"
+BRAND = "AI ALPHA SELECTION"
 MX = 90  # Seitenrand in px
 
 
@@ -150,13 +150,13 @@ def slide_hook(c, date_iso, perf_ret, nasdaq_ret, period_label):
 
 
 def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
-                      wf_ret, nas_ret, is_sample):
+                      wf_ret, nas_ret, is_sample, stats=None):
     header(c, date_iso)
-    c.text(MX, 200, "Wertentwicklung vs. NASDAQ-100", 40, weight="bold")
-    c.text(MX, 252, "Indexiert auf 100 zum Startzeitpunkt", 18, color=T.MUTED)
+    c.text(MX, 196, "Wertentwicklung vs. NASDAQ-100", 40, weight="bold")
+    c.text(MX, 248, "Indexiert auf 100 zum Startzeitpunkt", 18, color=T.MUTED)
 
-    chart_h = int(c.H * 0.42)
-    ax = c.chart_axes(MX, 320, c.W - 2 * MX, chart_h)
+    chart_h = int(c.H * (0.30 if stats else 0.42))
+    ax = c.chart_axes(MX, 306, c.W - 2 * MX, chart_h)
     _style_chart(ax)
 
     wf_x = np.array([datetime.strptime(d, "%Y-%m-%d").toordinal() for d in wf_dates], float)
@@ -172,34 +172,54 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
         ax.fill_between(wf_x, wf_y, nas_on_wf, where=(wf_y >= nas_on_wf),
                         color=T.GREEN, alpha=0.12, zorder=1)
 
-    # Kompakte Legende oben links im Chart (immer im Bild)
     def _leg(y, col, label):
         ax.plot([0.02, 0.06], [y, y], transform=ax.transAxes,
                 color=col, lw=4, solid_capstyle="round", clip_on=False)
         ax.text(0.08, y, label, transform=ax.transAxes, color=col,
-                fontsize=11, va="center", fontweight="bold",
-                fontfamily=_FONTS["sans"])
-    _leg(0.95, T.GREEN, "AI Alpha Selections")
+                fontsize=11, va="center", fontweight="bold", fontfamily=_FONTS["sans"])
+    _leg(0.95, T.GREEN, "AI Alpha Selection")
     if nas_dates:
         _leg(0.87, T.BLUE, "NASDAQ-100")
 
-    # Datums-Endpunkte
-    c.text(MX, 320 + chart_h + 20, short_date(wf_dates[0]), 14, color=T.MUTED)
-    c.text(c.W - MX, 320 + chart_h + 20, short_date(wf_dates[-1]), 14,
+    c.text(MX, 306 + chart_h + 16, short_date(wf_dates[0]), 14, color=T.MUTED)
+    c.text(c.W - MX, 306 + chart_h + 16, short_date(wf_dates[-1]), 14,
            color=T.MUTED, ha="right")
 
-    # KPI-Zeile unter dem Chart
-    ky = 320 + chart_h + 70
+    # Zwei große Renditen-Kacheln
+    ky = 306 + chart_h + 48
     half = (c.W - 2 * MX - 30) // 2
-    c.tile(MX, ky, half, 110, color=T.PANEL)
-    c.text(MX + 30, ky + 26, "AI Alpha Selections", 17, color=T.MUTED)
-    c.text(MX + 30, ky + 52, fmt_pct(wf_ret), 40, color=T.GREEN, weight="bold", font="mono")
-    c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
-    c.text(MX + half + 60, ky + 26, "NASDAQ-100", 17, color=T.MUTED)
-    c.text(MX + half + 60, ky + 52, fmt_pct(nas_ret), 40, color=T.BLUE, weight="bold", font="mono")
+    c.tile(MX, ky, half, 104, color=T.PANEL)
+    c.text(MX + 30, ky + 24, "AI Alpha Selection", 17, color=T.MUTED)
+    c.text(MX + 30, ky + 50, fmt_pct(wf_ret), 40, color=T.GREEN, weight="bold", font="mono")
+    c.tile(MX + half + 30, ky, half, 104, color=T.PANEL)
+    c.text(MX + half + 60, ky + 24, "NASDAQ-100", 17, color=T.MUTED)
+    c.text(MX + half + 60, ky + 50, fmt_pct(nas_ret), 40, color=T.BLUE, weight="bold", font="mono")
+
+    # Kennzahlen-Streifen
+    if stats:
+        pf = stats.get("profit_factor")
+        chips = [
+            ("Alpha vs. NASDAQ", fmt_pct(stats["alpha"]), T.BLUE),
+            ("Trades seit Start", str(stats["trades"]), T.TEXT),
+            ("Trefferquote", f"{round(stats['win_rate'] * 100)} %", T.GREEN),
+            ("Profitfaktor", "∞" if pf is None else f"{pf:.1f}".replace(".", ","), T.GREEN),
+            ("Ø Gewinn/Trade", fmt_pct(stats["avg_win"]), T.GREEN),
+            ("Ø Verlust/Trade", fmt_pct(stats["avg_loss"]), T.RED),
+        ]
+        gap = 20
+        cw = (c.W - 2 * MX - 2 * gap) // 3
+        ch = 92
+        sy = ky + 104 + 22
+        for i, (lab, val, col) in enumerate(chips):
+            r, cc = divmod(i, 3)
+            x = MX + cc * (cw + gap)
+            y = sy + r * (ch + gap)
+            c.tile(x, y, cw, ch, color=T.PANEL)
+            c.text(x + 22, y + 22, lab, 14, color=T.MUTED)
+            c.text(x + 22, y + ch - 56, val, 34, color=col, weight="bold", font="mono")
 
     if is_sample:
-        c.text(c.W - MX, 200, "BEISPIELDATEN", 18, color=T.RED, weight="bold", ha="right")
+        c.text(c.W - MX, 196, "BEISPIELDATEN", 18, color=T.RED, weight="bold", ha="right")
     footer(c)
 
 
@@ -275,7 +295,7 @@ def slide_cta(c, date_iso):
     c.text(MX, cy, "Folge für wöchentliche", 50, weight="bold")
     c.text(MX, cy + 64, "Updates & Signale.", 50, weight="bold")
     c.text(MX, cy + 150, HANDLE, 30, color=T.GREEN, weight="bold")
-    c.text(MX, cy + 200, "→ Das wikifolio „AI Alpha Selections\" auf wikifolio.com", 20, color=T.MUTED)
+    c.text(MX, cy + 200, "→ Das wikifolio „AI Alpha Selection\" auf wikifolio.com", 20, color=T.MUTED)
 
     # Disclaimer-Panel
     panel_top = int(c.H * 0.55)
@@ -296,7 +316,7 @@ def slide_hook_weekly(c, date_iso, kw, period, week_perf, total_perf):
     c.text(MX, cy - 18, period, 20, color=T.MUTED)
     col = T.GREEN if week_perf >= 0 else T.RED
     c.text(MX, cy + 30, fmt_pct(week_perf), 120, color=col, weight="bold", font="mono")
-    c.text(MX, cy + 195, "Wochenperformance Musterdepot", 22, color=T.MUTED)
+    c.text(MX, cy + 195, "Wochenperformance", 22, color=T.MUTED)
     # Gesamt-Chip
     chip_top = cy + 260
     c.tile(MX, chip_top, c.W - 2 * MX, 120, color=T.PANEL)
@@ -332,18 +352,20 @@ def slide_kpis_weekly(c, date_iso, total_perf, alpha, beaten, of_weeks, avg_win,
 
 
 def slide_history(c, date_iso, history):
-    """Balkendiagramm der Wochenperformance (grün/rot)."""
+    """Balkendiagramm der wöchentlichen Mehrrendite ggü. NASDAQ (grün/rot)."""
     header(c, date_iso)
-    c.text(MX, 200, "Wochen-Historie", 40, weight="bold")
-    won = sum(1 for h in history if h["perf"] >= 0)
-    c.text(MX, 252, f"{won} von {len(history)} Wochen positiv", 18, color=T.MUTED)
+    c.text(MX, 200, "Mehrrendite ggü. NASDAQ-100", 40, weight="bold")
+    vkey = "dev" if history and "dev" in history[0] else "perf"
+    won = sum(1 for h in history if h[vkey] >= 0)
+    c.text(MX, 252, f"Pro Woche · {won} von {len(history)} Wochen über dem NASDAQ",
+           18, color=T.MUTED)
 
     chart_h = int(c.H * 0.46)
     ax = c.chart_axes(MX, 320, c.W - 2 * MX, chart_h)
     ax.grid(axis="y", color=T.GRID, lw=1, alpha=0.5)
     ax.set_axisbelow(True)
     labels = [f"KW{h['kw']}" for h in history]
-    vals = [h["perf"] * 100 for h in history]
+    vals = [h[vkey] * 100 for h in history]
     xs = np.arange(len(vals))
     colors = [T.GREEN if v >= 0 else T.RED for v in vals]
     ax.bar(xs, vals, color=colors, width=0.66, zorder=3)
@@ -385,13 +407,14 @@ def slide_list(c, date_iso, title, subtitle, rows):
     footer(c)
 
 
-def slide_featured(c, date_iso, feat):
-    """„Aktie der Woche": Kursverlauf mit Kaufmarker + eingearbeiteten Signalen."""
+def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
+    """Kursverlauf mit Kauf-Signal (blau) + eingearbeiteten weiteren Signalen."""
     header(c, date_iso)
     ticker, ohlcv = feat["ticker"], feat["ohlcv"]
     entry, ret = feat["entry"], feat["ret"]
-    ccol = T.GREEN if (ret or 0) >= 0 else T.RED
-    c.text(MX, 200, "AKTIE DER WOCHE", 22, color=T.BLUE, weight="bold")
+    rcol = T.GREEN if (ret or 0) >= 0 else T.RED   # Farbe für Renditewert
+    mcol = T.BLUE                                   # Kauf = Signal -> blau
+    c.text(MX, 200, label, 22, color=T.BLUE, weight="bold")
     c.text(MX, 232, ticker, 64, weight="bold")
     sub = feat.get("name", "")
     if feat.get("buy_date"):
@@ -423,21 +446,20 @@ def slide_featured(c, date_iso, feat):
             ax.scatter([pt[0]], [pt[1]], s=42, color=T.BLUE, zorder=4,
                        edgecolor=T.BG, lw=1.5)
 
-    # Kaufmarker (groß, farbig)
+    # Kauf-Signal (groß, blau)
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
-    ax.axvline(ex, color=ccol, lw=2, ls=(0, (4, 4)), zorder=2)
-    ax.scatter([ex], [entry["c"]], s=130, color=ccol, zorder=5, edgecolor=T.BG, lw=2)
+    ax.axvline(ex, color=mcol, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([ex], [entry["c"]], s=140, color=mcol, zorder=5, edgecolor=T.BG, lw=2)
     right = (ex - xs.min()) / (xs.max() - xs.min() + 1e-9) > 0.6
-    ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
+    ax.annotate(f"Kauf-Signal {short_date(entry['d'])}", (ex, entry["c"]),
                 xytext=(-12 if right else 12, 18), textcoords="offset points",
-                color=ccol, fontsize=15, fontweight="bold",
+                color=mcol, fontsize=15, fontweight="bold",
                 ha="right" if right else "left", fontfamily=_FONTS["sans"])
 
     # Mini-Legende
-    ax.scatter([], [], s=42, color=T.BLUE, label="weiteres Signal")
-    c.text(MX, 350 + chart_h + 22, "● Kauf", 14, color=ccol, weight="bold")
-    if feat.get("signals"):
-        c.text(MX + 130, 350 + chart_h + 22, "● weitere Signale", 14, color=T.BLUE)
+    c.text(MX, 350 + chart_h + 22, "● Kauf-Signal", 14, color=mcol, weight="bold")
+    if any(s.get("signal_date") != entry["d"] for s in feat.get("signals", [])):
+        c.text(MX + 200, 350 + chart_h + 22, "● weitere Signale", 14, color=T.BLUE)
 
     # KPI-Kacheln
     ky = 350 + chart_h + 70
@@ -445,7 +467,7 @@ def slide_featured(c, date_iso, feat):
     c.tile(MX, ky, half, 110, color=T.PANEL)
     c.text(MX + 30, ky + 26, "Wertzuwachs seit Kauf", 17, color=T.MUTED)
     c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
-           color=ccol, weight="bold", font="mono")
+           color=rcol, weight="bold", font="mono")
     c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
     bp = feat.get("buy_price_eur")
     if bp:
