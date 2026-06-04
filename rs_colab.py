@@ -116,8 +116,8 @@ print(f"Top 20: {', '.join(top20)}")
 print(f"\nSchritt 2: Weekly OHLCV für {len(all_results)} Ticker (104 Wochen)...")
 end_date     = datetime.now()
 end_str      = (end_date + timedelta(days=1)).strftime("%Y-%m-%d")
-start_weekly = end_date - timedelta(days=730)
-start_daily  = end_date - timedelta(days=730)
+start_weekly = end_date - timedelta(days=760)
+start_daily  = end_date - timedelta(days=760)
 
 all_tickers_list = [r["ticker"] for r in all_results]
 raw_weekly = yf.download(
