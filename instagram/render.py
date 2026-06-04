@@ -121,7 +121,7 @@ def footer(c):
     # Disclaimer volle Breite (links nach rechts), ohne Handle
     import textwrap
     c.ax.plot([MX, c.W - MX], [c.y(c.H - 150), c.y(c.H - 150)], color=T.GRID, lw=1.5)
-    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=112)
+    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=132)
     for i, ln in enumerate(lines):
         c.text(MX, c.H - 128 + i * 26, ln, 13, color=T.MUTED)
 
@@ -214,8 +214,8 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
             x = MX + cc * (cw + gap)
             y = sy + r * (ch + gap)
             c.tile(x, y, cw, ch, color=T.PANEL)
-            c.text(x + 22, y + 20, lab, 14, color=T.MUTED)
-            c.text(x + 22, y + 60, val, 34, color=col, weight="bold", font="mono")
+            c.text(x + 22, y + 24, lab, 14, color=T.MUTED)
+            c.text(x + 22, y + 50, val, 34, color=col, weight="bold", font="mono")
         c.text(MX, sy + 2 * (ch + gap) + 4, "* inkl. offener Positionen",
                13, color=T.MUTED)
 
@@ -266,13 +266,10 @@ def slide_signal(c, date_iso, ticker, sig, ret, ohlcv, entry):
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(ex, color=color, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=120, color=color, zorder=4, edgecolor=T.BG, lw=2)
-    # Beschriftung links vom Marker, falls dieser im rechten Drittel liegt
-    xmin, xmax = xs.min(), xs.max()
-    right = (ex - xmin) / (xmax - xmin + 1e-9) > 0.6
     ax.annotate(f"Signal {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12 if right else 12, 18), textcoords="offset points",
+                xytext=(-12, 18), textcoords="offset points",
                 color=color, fontsize=15, fontweight="bold",
-                ha="right" if right else "left", fontfamily=_FONTS["sans"])
+                ha="right", fontfamily=_FONTS["sans"])
 
     ky = 340 + chart_h + 60
     half = (c.W - 2 * MX - 30) // 2
@@ -298,14 +295,16 @@ def slide_cta(c, date_iso):
     c.text(MX, cy + 150, "AI Alpha Selection", 30, color=T.BLUE, weight="bold")
     c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
 
-    # Disclaimer-Panel (Text volle Breite)
-    panel_top = int(c.H * 0.55)
-    panel_h = int(c.H * 0.31)
+    # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
+    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=112)
+    line_h = 30
+    panel_h = 74 + (len(body) - 1) * line_h + 42
+    panel_bottom = c.H - 175
+    panel_top = panel_bottom - panel_h
     c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
     c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=90)
-    for i, ln in enumerate(body[:8]):
-        c.text(MX + 36, panel_top + 74 + i * 30, ln, 15, color=T.MUTED)
+    for i, ln in enumerate(body):
+        c.text(MX + 36, panel_top + 74 + i * line_h, ln, 15, color=T.MUTED)
     footer(c)
 
 
@@ -451,11 +450,10 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(ex, color=mcol, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=140, color=mcol, zorder=5, edgecolor=T.BG, lw=2)
-    right = (ex - xs.min()) / (xs.max() - xs.min() + 1e-9) > 0.6
     ax.annotate(f"Kauf-Signal {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12 if right else 12, 18), textcoords="offset points",
+                xytext=(-12, 18), textcoords="offset points",
                 color=mcol, fontsize=15, fontweight="bold",
-                ha="right" if right else "left", fontfamily=_FONTS["sans"])
+                ha="right", fontfamily=_FONTS["sans"])
 
     # Mini-Legende
     c.text(MX, 350 + chart_h + 22, "● Kauf-Signal", 14, color=mcol, weight="bold")
