@@ -104,6 +104,9 @@ def caption_from_store(ctx):
 
 def _emitter(fmt, outdir, saved):
     os.makedirs(outdir, exist_ok=True)
+    for f in os.listdir(outdir):           # veraltete Slides entfernen
+        if f.endswith(".png"):
+            os.remove(os.path.join(outdir, f))
     counter = {"n": 0}
 
     def emit(name, draw):
