@@ -12,15 +12,28 @@ pip install -r instagram/requirements.txt
 
 ## Nutzung
 
-```bash
-# Beide Formate (Carousel 4:5 + Reel-Frames 9:16), heutiges Datum
-python3 -m instagram.generate
+**Wochenmodus (Hauptfall)** — aus deinem wikifolio-Wochenreport:
 
-# Nur Carousel, 3 Signal-Slides
+```bash
+python3 -m instagram.generate --report instagram/reports/KW21.example.json
+```
+
+Erzeugt das komplette Wochen-Carousel (Hook, Performance, Kennzahlen,
+Wochen-Historie, Käufe, Top-Positionen, Verkäufe, CTA) +`caption.txt`.
+→ Ablauf & Regeln: **`instagram/PROMPT.md`**.
+
+**Auto-Modus** — Signale direkt aus den Repo-Daten (ohne Wochenreport):
+
+```bash
+python3 -m instagram.generate                      # beide Formate
 python3 -m instagram.generate --format carousel --signals 3
 ```
 
-Output: `out/instagram/<DATUM>/{carousel,reel}/NN_*.png` + `caption.txt`.
+Output: `out/instagram/<DATUM>[_KW<NN>]/{carousel,reel}/NN_*.png` + `caption.txt`.
+
+> ⚖️ **wikifolio-Regeln** (Trennung Musterdepot/Zertifikat, keine ISIN, kein
+> wikifolio-Logo, Pflicht-Disclaimer) sind in `PROMPT.md` dokumentiert und im
+> Generator umgesetzt.
 
 ## Wikifolio-Performance
 

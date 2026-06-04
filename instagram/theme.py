@@ -3,7 +3,16 @@ Marken- und Design-System für die AI-Alpha-Selections Instagram-Grafiken.
 Zentrale Stelle für Farben, Fonts, Canvas-Größen und Layout-Konstanten,
 damit Carousel (4:5) und Reel (9:16) konsistent aussehen.
 """
+import os
+
 from matplotlib import font_manager
+
+# ── Eigenes Logo (optional) ────────────────────────────────────────────────────
+# Lege dein Logo unter instagram/assets/logo.png ab (PNG, transparent).
+# WICHTIG: Das wikifolio-Logo NICHT verwenden – nur mit vorheriger schriftlicher
+# Freigabe durch wikifolio erlaubt. Dein eigenes Marken-Logo ist frei nutzbar.
+ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
+LOGO_PATH = os.path.join(ASSETS, "logo.png")
 
 # ── Farben ───────────────────────────────────────────────────────────────────
 BG        = "#0B0E14"   # fast-schwarzer Hintergrund
@@ -44,20 +53,24 @@ def register_fonts():
     }
 
 
-# Pflicht-Disclaimer (kurz fürs Bild, lang für die Caption)
+# ── Pflicht-Disclaimer ──────────────────────────────────────────────────────
+# An die wikifolio-Trennungsregel angepasst: Es wird ausschließlich über das
+# wikifolio (Musterdepot) gesprochen, NICHT über das Zertifikat; keine ISIN,
+# keine Kaufempfehlung für ein Zertifikat.
 DISCLAIMER_SHORT = (
-    "Keine Anlageberatung. Investieren in Wertpapiere birgt Verlustrisiken "
-    "bis zum Totalverlust. Vergangene Wertentwicklung ist kein verlässlicher "
-    "Indikator für die Zukunft."
+    "Keine Anlageberatung oder Kaufempfehlung. Dargestellt wird die vergangene "
+    "Wertentwicklung des Musterdepots – kein verlässlicher Indikator für die "
+    "Zukunft. Kapitalanlagen bergen Verlustrisiken bis zum Totalverlust."
 )
 
 DISCLAIMER_LONG = (
-    "⚠️ Risikohinweis & Disclaimer\n"
-    "Dieser Beitrag ist Eigenwerbung für das wikifolio „AI Alpha Selections\" "
-    "und stellt KEINE Anlageberatung, Kauf-/Verkaufsempfehlung oder "
-    "Finanzanalyse dar. Ein wikifolio-Zertifikat ist eine "
-    "Inhaberschuldverschreibung mit Emittentenrisiko (Totalverlustrisiko). "
-    "Die gezeigte Wertentwicklung bezieht sich auf einen kurzen, vergangenen "
-    "Zeitraum und ist KEIN verlässlicher Indikator für künftige Ergebnisse. "
-    "Triff keine Anlageentscheidung allein aufgrund dieses Beitrags."
+    "Risikohinweis & Disclaimer\n"
+    "Dieser Beitrag bezieht sich auf das wikifolio (Musterdepot) "
+    "„AI Alpha Selections\" und dient der Information/Eigenwerbung. Er stellt "
+    "KEINE Anlageberatung, Finanzanalyse oder Kauf-/Verkaufsempfehlung dar – "
+    "insbesondere keine Empfehlung zum Erwerb eines Zertifikats. Gezeigt wird "
+    "die vergangene Wertentwicklung des Musterdepots; diese ist KEIN "
+    "verlässlicher Indikator für künftige Ergebnisse. Kapitalmarktanlagen "
+    "bergen Verlustrisiken bis zum Totalverlust. Triff keine "
+    "Anlageentscheidung allein aufgrund dieses Beitrags."
 )

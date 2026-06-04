@@ -16,9 +16,95 @@ import argparse
 import os
 from datetime import datetime
 
-from . import data, render
+from . import data, render, report
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _emitter(fmt, outdir, saved):
+    os.makedirs(outdir, exist_ok=True)
+    counter = {"n": 0}
+
+    def emit(name, draw):
+        counter["n"] += 1
+        c = render.Canvas(fmt)
+        draw(c)
+        path = os.path.join(outdir, f"{counter['n']:02d}_{name}.png")
+        c.save(path)
+        saved.append(path)
+    return emit
+
+
+def build_weekly(fmt, r, benchmark, date_iso, outdir):
+    """Wochenreport-Carousel aus instagram/reports/KW<NN>.json."""
+    saved = []
+    emit = _emitter(fmt, outdir, saved)
+    nas_dates, nas_vals = data.benchmark_window(
+        benchmark or [], r["eq_dates"][0], r["eq_dates"][-1])
+
+    emit("hook", lambda c: render.slide_hook_weekly(
+        c, date_iso, r["kw"], r["period"], r["week_perf"], r["total_perf"]))
+    emit("performance", lambda c: render.slide_performance(
+        c, date_iso, r["eq_dates"], r["eq_vals"], nas_dates, nas_vals,
+        r["total_perf"], r["nasdaq_total"], False))
+    emit("kpis", lambda c: render.slide_kpis_weekly(
+        c, date_iso, r["total_perf"], r["alpha"], r["weeks_beaten"],
+        r["weeks_total"], r["avg_win"], r["avg_loss"]))
+    emit("historie", lambda c: render.slide_history(c, date_iso, r["history"]))
+
+    if r["buys"]:
+        rows = [{"main": b["ticker"], "sub": f"{b['name']} · {b['date']}",
+                 "value": render.fmt_pct(b.get("size", 0), signed=False),
+                 "color": render.T.GREEN} for b in r["buys"]]
+        emit("kaeufe", lambda c: render.slide_list(
+            c, date_iso, "Käufe der Woche", "Positionsgröße im Depot", rows))
+    if r["top_holdings"]:
+        rows = [{"main": t["ticker"], "sub": t.get("name", ""),
+                 "value": render.fmt_pct(t["ret"]), "color": render.T.GREEN}
+                for t in r["top_holdings"]]
+        emit("top", lambda c: render.slide_list(
+            c, date_iso, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
+    if r["sells"]:
+        rows = [{"main": s["ticker"], "sub": f"{s['name']} · {s['date']}",
+                 "value": render.fmt_pct(s["ret"]),
+                 "color": render.T.GREEN if s["ret"] >= 0 else render.T.RED}
+                for s in r["sells"]]
+        emit("verkaeufe", lambda c: render.slide_list(
+            c, date_iso, "Verkäufe der Woche", "Performance bei Verkauf", rows))
+
+    emit("cta", lambda c: render.slide_cta(c, date_iso))
+    return saved
+
+
+def build_weekly_caption(r):
+    def line_buys():
+        return "\n".join(f"✅ {b['ticker']} — {b['name']} ({b['date']}, "
+                         f"{render.fmt_pct(b.get('size', 0), signed=False)})"
+                         for b in r["buys"])
+
+    def line_sells():
+        return "\n".join(f"{'✅' if s['ret'] >= 0 else '❌'} {s['ticker']} — "
+                         f"{s['name']} ({s['date']}, {render.fmt_pct(s['ret'])})"
+                         for s in r["sells"])
+
+    parts = [
+        f"📊 Wochenreport KW {r['kw']} ({r['period']})\n",
+        f"Musterdepot diese Woche: {render.fmt_pct(r['week_perf'])} | "
+        f"NASDAQ-100: {render.fmt_pct(r['nasdaq_week'])}",
+        f"Gesamtrendite seit Start: {render.fmt_pct(r['total_perf'])} | "
+        f"NASDAQ: {render.fmt_pct(r['nasdaq_total'])} | "
+        f"Alpha: {render.fmt_pct(r['alpha'])}",
+        f"{r['weeks_beaten']} von {r['weeks_total']} Wochen den NASDAQ geschlagen.\n",
+    ]
+    if r["buys"]:
+        parts.append("Käufe:\n" + line_buys() + "\n")
+    if r["sells"]:
+        parts.append("Verkäufe:\n" + line_sells() + "\n")
+    parts.append(f"➡️ Mehr: {render.HANDLE}\n")
+    parts.append(render.T.DISCLAIMER_LONG)
+    parts.append("\n#wikifolio #aktien #investing #nasdaq #trading #boerse "
+                 "#geldanlage #finanzen #relativestärke #wochenreport")
+    return "\n".join(parts)
 
 
 def build(fmt, ctx, outdir):
@@ -72,10 +158,29 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--format", choices=["carousel", "reel", "both"], default="both")
     ap.add_argument("--signals", type=int, default=2)
+    ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (Wochenmodus)")
     ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
     args = ap.parse_args()
 
     universe, benchmark = data.load_universe()
+
+    # ── Wochenmodus (report-getrieben) ────────────────────────────────────────
+    if args.report:
+        r = report.load_report(args.report)
+        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_KW{r['kw']}")
+        fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
+        all_saved = []
+        for fmt in fmts:
+            all_saved += build_weekly(fmt, r, benchmark, args.date,
+                                      os.path.join(base, fmt))
+        os.makedirs(base, exist_ok=True)
+        with open(os.path.join(base, "caption.txt"), "w") as f:
+            f.write(build_weekly_caption(r))
+        print(f"✓ {len(all_saved)} Slides (Wochenreport KW{r['kw']}) in {base}")
+        for p in all_saved:
+            print("  ", os.path.relpath(p, ROOT))
+        return
+
     signals = data.load_signals()
     wf_dates, wf_vals, is_sample, meta = data.load_performance()
 
