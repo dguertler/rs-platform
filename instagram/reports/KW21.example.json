@@ -1,0 +1,37 @@
+{
+  "_hinweis": "Beispiel-Report aus dem wikifolio-Wochenfeed KW21. Kopiere das Schema nach instagram/reports/KW<NN>.json. 'top_holdings' hier illustrativ.",
+  "kw": 21,
+  "year": 2026,
+  "period": "18.05. – 22.05.2026",
+  "week_perf": 0.031,
+  "total_perf": 0.418,
+  "nasdaq_week": 0.011,
+  "nasdaq_total": 0.277,
+  "alpha": 0.141,
+  "weeks_beaten": 6,
+  "weeks_total": 8,
+  "history": [
+    { "kw": 14, "perf": 0.074 },
+    { "kw": 15, "perf": 0.055 },
+    { "kw": 16, "perf": 0.060 },
+    { "kw": 17, "perf": 0.066 },
+    { "kw": 18, "perf": -0.004 },
+    { "kw": 19, "perf": 0.083 },
+    { "kw": 20, "perf": -0.004 },
+    { "kw": 21, "perf": 0.031 }
+  ],
+  "buys": [
+    { "ticker": "STX", "name": "Seagate Technology", "date": "21.05.", "size": 0.074 },
+    { "ticker": "WDC", "name": "Western Digital", "date": "22.05.", "size": 0.073 }
+  ],
+  "sells": [
+    { "ticker": "ASML", "name": "ASML Holding", "date": "18.05.", "ret": -0.053 },
+    { "ticker": "AKAM", "name": "Akamai Technologies", "date": "19.05.", "ret": -0.077 },
+    { "ticker": "ADI", "name": "Analog Devices", "date": "21.05.", "ret": 0.110 }
+  ],
+  "top_holdings": [
+    { "ticker": "STX", "name": "Seagate Technology", "ret": 0.182 },
+    { "ticker": "NXPI", "name": "NXP Semiconductors", "ret": 0.143 },
+    { "ticker": "WDC", "name": "Western Digital", "ret": 0.091 }
+  ]
+}

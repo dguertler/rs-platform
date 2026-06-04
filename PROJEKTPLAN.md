@@ -449,4 +449,21 @@ Bei einem Exit von €10M:
 
 ---
 
+## 13. Instagram-Marketing (@aialphaselections)
+
+Faceless-Account zur Bewerbung des wikifolios „AI Alpha Selections".
+Technik & Ablauf: **`instagram/PROMPT.md`** (Generator unter `instagram/`).
+
+- **Phase 1 (jetzt):** Wöchentliches **Carousel (4:5)** aus dem wikifolio-
+  Wochenreport, automatisch generiert, manueller Upload nach Kontrolle.
+  Reel-Frames (9:16) entstehen parallel aus derselben Pipeline.
+- **Phase 2 (bei genügend Followern):** **Stories** für kurze Updates;
+  Reel-Animation aus den 9:16-Frames (ffmpeg).
+- **Phase 3 (optional):** Auto-Upload via Instagram Graph API (Business-Account),
+  erst nach finalem Design + rechtlicher Freigabe.
+- **Recht:** strikte Trennung Musterdepot/Zertifikat, keine ISIN, kein
+  wikifolio-Logo ohne Freigabe, Pflicht-Disclaimer (in PROMPT.md verankert).
+
+---
+
 *Dieses Dokument ist ein lebendes Dokument und wird mit jeder Entwicklungsphase aktualisiert.*

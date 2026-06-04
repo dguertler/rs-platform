@@ -3,6 +3,7 @@ Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selections-Design.
 Reines matplotlib, kein Browser nötig. Jede Slide funktioniert in beiden
 Formaten (Carousel 4:5 / Reel 9:16) über pixelbasierte Layout-Koordinaten.
 """
+import os
 from datetime import datetime
 
 import numpy as np
@@ -21,8 +22,8 @@ MX = 90  # Seitenrand in px
 
 
 # ── Formatierungs-Helfer ──────────────────────────────────────────────────────
-def fmt_pct(x, decimals=1):
-    sign = "+" if x >= 0 else "−"
+def fmt_pct(x, decimals=1, signed=True):
+    sign = ("+" if x >= 0 else "−") if signed else ""
     return f"{sign}{abs(x) * 100:.{decimals}f}".replace(".", ",") + "%"
 
 
@@ -72,6 +73,22 @@ class Canvas:
             linewidth=0, facecolor=color, mutation_aspect=1)
         self.ax.add_patch(box)
 
+    def draw_logo(self, x, top, height):
+        """Zeichnet instagram/assets/logo.png (falls vorhanden). Gibt die
+        gezeichnete Breite zurück (0, wenn kein Logo da ist)."""
+        if not os.path.exists(T.LOGO_PATH):
+            return 0
+        try:
+            from PIL import Image
+            img = Image.open(T.LOGO_PATH).convert("RGBA")
+            w = int(img.width * height / img.height)
+            img = img.resize((w, int(height)), Image.LANCZOS)
+            arr = np.asarray(img)
+            self.fig.figimage(arr, xo=int(x), yo=int(self.H - top - height), zorder=10)
+            return w
+        except Exception:
+            return 0
+
     def chart_axes(self, x, top, w, h):
         bottom = self.y(top + h)
         ax = self.fig.add_axes([x / self.W, bottom / self.H, w / self.W, h / self.H])
@@ -88,8 +105,10 @@ class Canvas:
 
 # ── Gemeinsame Bausteine ────────────────────────────────────────────────────────
 def header(c, date_iso):
-    c.text(MX, 70, BRAND, 22, color=T.TEXT, weight="bold")
-    c.text(MX, 102, "Datengetriebene Aktienauswahl", 15, color=T.MUTED)
+    lw = c.draw_logo(MX, 60, 64)          # Logo (falls vorhanden)
+    tx = MX + (lw + 24 if lw else 0)
+    c.text(tx, 70, BRAND, 22, color=T.TEXT, weight="bold")
+    c.text(tx, 102, "Datengetriebene Aktienauswahl", 15, color=T.MUTED)
     c.text(c.W - MX, 70, fmt_de_date(date_iso), 18, color=T.MUTED, ha="right")
     c.ax.plot([MX, c.W - MX], [c.y(150), c.y(150)], color=T.GRID, lw=1.5)
 
@@ -252,7 +271,7 @@ def slide_cta(c, date_iso):
     c.text(MX, cy, "Folge für wöchentliche", 50, weight="bold")
     c.text(MX, cy + 64, "Updates & Signale.", 50, weight="bold")
     c.text(MX, cy + 150, HANDLE, 30, color=T.GREEN, weight="bold")
-    c.text(MX, cy + 200, "→ Link in Bio: wikifolio „AI Alpha Selections\"", 20, color=T.MUTED)
+    c.text(MX, cy + 200, "→ Das wikifolio „AI Alpha Selections\" auf wikifolio.com", 20, color=T.MUTED)
 
     # Disclaimer-Panel
     panel_top = int(c.H * 0.55)
@@ -262,4 +281,101 @@ def slide_cta(c, date_iso):
     body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=58)
     for i, ln in enumerate(body[:9]):
         c.text(MX + 36, panel_top + 74 + i * 30, ln, 15, color=T.MUTED)
+    footer(c)
+
+
+# ── Wochenreport-Slides (report-getrieben) ─────────────────────────────────────
+def slide_hook_weekly(c, date_iso, kw, period, week_perf, total_perf):
+    header(c, date_iso)
+    cy = int(c.H * 0.34)
+    c.text(MX, cy - 60, f"WOCHENREPORT KW {kw}", 26, color=T.MUTED, weight="bold")
+    c.text(MX, cy - 18, period, 20, color=T.MUTED)
+    col = T.GREEN if week_perf >= 0 else T.RED
+    c.text(MX, cy + 30, fmt_pct(week_perf), 120, color=col, weight="bold", font="mono")
+    c.text(MX, cy + 195, "Wochenperformance Musterdepot", 22, color=T.MUTED)
+    # Gesamt-Chip
+    chip_top = cy + 260
+    c.tile(MX, chip_top, c.W - 2 * MX, 120, color=T.PANEL)
+    c.text(MX + 40, chip_top + 32, "Gesamtrendite seit Start", 20, color=T.MUTED)
+    c.text(c.W - MX - 40, chip_top + 28, fmt_pct(total_perf), 44,
+           color=T.GREEN, weight="bold", ha="right", font="mono")
+    footer(c)
+
+
+def slide_kpis_weekly(c, date_iso, total_perf, alpha, beaten, of_weeks, avg_win, avg_loss):
+    header(c, date_iso)
+    c.text(MX, 200, "Die Zahlen im Überblick", 40, weight="bold")
+    cells = [
+        ("Gesamtrendite", fmt_pct(total_perf), T.GREEN),
+        ("Alpha vs. NASDAQ-100", fmt_pct(alpha), T.BLUE),
+        ("Wochen geschlagen", f"{beaten}/{of_weeks}", T.TEXT),
+        ("Ø Gewinn / Verlustwoche",
+         f"{fmt_pct(avg_win)} / {fmt_pct(avg_loss)}", T.TEXT),
+    ]
+    gap = 30
+    tw = (c.W - 2 * MX - gap) // 2
+    th = int((c.H * 0.42) / 2 - gap / 2)
+    top0 = 300
+    for i, (label, val, col) in enumerate(cells):
+        r, cc = divmod(i, 2)
+        x = MX + cc * (tw + gap)
+        y = top0 + r * (th + gap)
+        c.tile(x, y, tw, th, color=T.PANEL)
+        c.text(x + 36, y + 36, label, 19, color=T.MUTED)
+        size = 64 if len(val) <= 7 else 40
+        c.text(x + 36, y + th - 70, val, size, color=col, weight="bold", font="mono")
+    footer(c)
+
+
+def slide_history(c, date_iso, history):
+    """Balkendiagramm der Wochenperformance (grün/rot)."""
+    header(c, date_iso)
+    c.text(MX, 200, "Wochen-Historie", 40, weight="bold")
+    won = sum(1 for h in history if h["perf"] >= 0)
+    c.text(MX, 252, f"{won} von {len(history)} Wochen positiv", 18, color=T.MUTED)
+
+    chart_h = int(c.H * 0.46)
+    ax = c.chart_axes(MX, 320, c.W - 2 * MX, chart_h)
+    ax.grid(axis="y", color=T.GRID, lw=1, alpha=0.5)
+    ax.set_axisbelow(True)
+    labels = [f"KW{h['kw']}" for h in history]
+    vals = [h["perf"] * 100 for h in history]
+    xs = np.arange(len(vals))
+    colors = [T.GREEN if v >= 0 else T.RED for v in vals]
+    ax.bar(xs, vals, color=colors, width=0.66, zorder=3)
+    ax.axhline(0, color=T.MUTED, lw=1.2)
+    pad = max(abs(min(vals)), abs(max(vals))) * 0.18 + 0.5
+    for x, v in zip(xs, vals):
+        ax.text(x, v + (pad if v >= 0 else -pad),
+                f"{v:+.1f}".replace(".", ",") + "%",
+                ha="center", va="bottom" if v >= 0 else "top",
+                color=T.TEXT, fontsize=11, fontweight="bold",
+                fontfamily=_FONTS["sans"])
+        ax.text(x, min(vals) - pad * 2.6, labels[int(x)], ha="center", va="top",
+                color=T.MUTED, fontsize=11, fontfamily=_FONTS["sans"])
+    ax.set_ylim(min(vals) - pad * 3.6, max(vals) + pad * 2.4)
+    footer(c)
+
+
+def slide_list(c, date_iso, title, subtitle, rows):
+    """Generische Listen-Slide für Käufe / Verkäufe / Top-Performer.
+    rows: Liste von dict(main, sub, value, color)."""
+    header(c, date_iso)
+    c.text(MX, 200, title, 40, weight="bold")
+    if subtitle:
+        c.text(MX, 252, subtitle, 18, color=T.MUTED)
+    rows = rows[:4]
+    top0 = 310
+    gap = 24
+    rh = min(150, int((c.H * 0.52 - gap * (len(rows) - 1)) / max(1, len(rows))))
+    for i, row in enumerate(rows):
+        y = top0 + i * (rh + gap)
+        c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
+        # farbiger Akzentbalken links
+        c.tile(MX, y, 10, rh, color=row["color"], radius=5)
+        c.text(MX + 42, y + rh / 2 - 28, row["main"], 30, weight="bold")
+        if row.get("sub"):
+            c.text(MX + 42, y + rh / 2 + 14, row["sub"], 16, color=T.MUTED)
+        c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 40,
+               color=row["color"], weight="bold", ha="right", font="mono")
     footer(c)

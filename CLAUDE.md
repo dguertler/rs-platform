@@ -63,3 +63,18 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 
 Max. **5 Ticker pro Session** für optimale Kontext-Qualität.
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
+
+## Instagram-Workflow (@aialphaselections)
+
+Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
+`Instagram KW<NN>` / `Erstelle Instagram-Post`:
+
+1. **`instagram/PROMPT.md` lesen** — dort stehen Ablauf, Slide-Aufbau und die
+   **zwingenden wikifolio-Regeln** (Trennung Musterdepot/Zertifikat, keine ISIN,
+   kein wikifolio-Logo, Pflicht-Disclaimer).
+2. Aus dem Feed `instagram/reports/KW<NN>.json` füllen (Schema siehe PROMPT.md).
+3. Generieren: `python3 -m instagram.generate --report instagram/reports/KW<NN>.json`
+4. Slides aus `out/` dem Nutzer zeigen — **kein Auto-Upload**, manueller Post.
+
+Hauptformat **Carousel (4:5)**; Reel-Frames (9:16) entstehen parallel.
+Stories erst später (bei genügend Followern) — siehe Roadmap in PROMPT.md.
