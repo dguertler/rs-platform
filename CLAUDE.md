@@ -69,9 +69,11 @@ Beispiel: `Analysiere MU ARM AMD MRVL ON`
 Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 `Instagram KW<NN>` / `Erstelle Instagram-Post`:
 
-1. **`instagram/PROMPT.md` lesen** — dort stehen Ablauf, Slide-Aufbau und die
-   **zwingenden wikifolio-Regeln** (Trennung Musterdepot/Zertifikat, keine ISIN,
-   kein wikifolio-Logo, Pflicht-Disclaimer).
+1. **`instagram/CONTEXT.md` lesen** — zentrale Wissensdatei mit komplettem
+   Projektstand (Stammdaten, Regeln, Daten-Snapshot, offene Punkte). Danach
+   `instagram/PROMPT.md` für den detaillierten Ablauf und die **zwingenden
+   wikifolio-Regeln** (Trennung Depot/Zertifikat, keine ISIN, kein wikifolio-Logo,
+   Pflicht-Disclaimer).
 2. Aus dem Feed `instagram/reports/KW<NN>.json` füllen (Schema siehe PROMPT.md).
 3. Generieren: `python3 -m instagram.generate --report instagram/reports/KW<NN>.json`
 4. Slides aus `out/` dem Nutzer zeigen — **kein Auto-Upload**, manueller Post.
