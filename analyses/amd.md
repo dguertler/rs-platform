@@ -1,6 +1,6 @@
 # AMD — KI-Aktienbewertung
 
-**Advanced Micro Devices, Inc.** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
+**Advanced Micro Devices, Inc.** · Technology · 04.06.2026 · Signal: Manuell generiert
 
 | Kennzahl | Wert |
 |---|---|
@@ -10,157 +10,76 @@
 | Revenue (TTM) | $37.45 Mrd. |
 | Gross Margin | 53.1% |
 | ROE | 8.1% |
-| RS-Score | 305.9 |
+| RS-Score | 311.0 |
 
 **GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
 
 ---
 
-# AMD – Advanced Micro Devices, Inc.
-
 ## 1. INVESTMENT-CASE
 
-AMD ist von der "ewigen Nummer 2" hinter Intel zum legitimen AI-Compute-Challenger gegen Nvidia mutiert. Der MI300/MI325-Zyklus und der bevorstehende MI350/MI400-Launch haben die Story fundamental verändert – nicht weil AMD Nvidia schlägt, sondern weil Hyperscaler aktiv eine zweite Quelle wollen. Der OpenAI-Deal (6GW Compute-Commitment) hat die Aktie repriced und institutionelle Skeptiker zu Forced Buyers gemacht. Der Markt preist nun ein, was Lisa Su seit Jahren predigt: AMD als 20%+ AI-GPU-Player. Was der Markt unterschätzt: die Server-CPU-Dominanz (EPYC nimmt weiter Share von Intel) als Cash-Cow im Hintergrund. Was der Markt überschätzt: die Geschwindigkeit, mit der ROCm CUDA als Software-Stack ernsthaft Konkurrenz machen kann. Bei $467 ist das kein Value-Trade mehr – das ist eine Momentum-getriebene Story-Aktie auf institutionellem FOMO-Niveau.
+AMD ist die einzige glaubwürdige Nr. 2 im AI-Beschleuniger-Markt — und genau das ist die Wette. Der strukturelle Kern: Hyperscaler und Souveräne-AI-Projekte wollen aus strategischen Gründen eine Alternative zu Nvidias CUDA-Monopol, und AMDs MI300/MI350-Serie ist die einzige x86-kompatible, am Markt verfügbare Option mit konkurrenzfähiger Speicherbandbreite. Die Aktie hat in 12 Monaten von $111 auf $516 rerated (~4,6x) — der Markt hat den Übergang von einem CPU-Zykliker zu einem AI-Datacenter-Wachstumswert vollzogen. Was noch unterschätzt wird: AMDs Operating Margin liegt erst bei 14,4% — der operative Hebel aus dem Hochlauf margenstarker Datacenter-GPUs ist noch nicht im Ergebnis. Trailing-PE 173x ist bedeutungslos; Forward-PE 39,7x preist die Gewinninflexion ein. Strukturell relevant: Mehrjährige Abnahme-Commitments von Hyperscalern (u.a. die jüngsten Großdeals) verändern das Risikoprofil von rein zyklisch zu teil-kontraktiert — das stützt die Volumen-Visibilität, nicht aber die Marge gegen Preisdruck.
 
 ## 2. GESCHÄFTSMODELL
 
-- Data Center (CPU + GPU): größtes und am schnellsten wachsendes Segment, ~50% Revenue, EPYC-Server-CPUs + Instinct-MI-GPUs
-
-- Client (Consumer-CPUs): Ryzen-Desktop/Notebook, profitabel aber zyklisch
-
-- Gaming: semi-custom Chips für PlayStation 5 / Xbox Series X – margenschwach, im Niedergang
-
-- Embedded: Xilinx-Akquisition, FPGAs für Industrie/Auto/Aerospace – stabil, hochmargig
-
-- Fabless-Modell: produziert bei TSMC, hohe Abhängigkeit von 3nm/2nm-Kapazität
-
-- AI-GPU-Roadmap: MI300X → MI325X → MI350 (2025) → MI400 (2026)
-
-- Software-Stack ROCm: kritischer Schwachpunkt vs. Nvidias CUDA-Moat
-
-- OpenAI-Partnership: strukturelle Validierung als Second-Source AI-Compute
+- Datacenter-Segment (Instinct-GPUs + EPYC-CPUs) ist der Ergebnistreiber — GPUs sind der Margen- und Wachstumshebel
+- Fabless-Modell: Fertigung bei TSMC — Abhängigkeit von TSMC-Leading-Edge-Allokation und CoWoS-Packaging-Kapazität
+- EPYC-Server-CPUs nehmen Intel kontinuierlich Marktanteile ab — der stabile, profitable Cash-Sockel
+- Client (Ryzen) und Gaming (Konsolen-Semi-Custom) als zyklische, niedrigmargigere Ergänzung
+- ROCm-Software-Ökosystem ist der kritische Engpass — der CUDA-Rückstand entscheidet über die GPU-Adoption
+- Operativer Hebel: Datacenter-GPU-Mix-Verschiebung hebt Gruppen-Marge strukturell
+- HBM-Speicherbeschaffung (SK Hynix/Samsung) als Kosten- und Verfügbarkeitsrisiko
+- Niedrige Verschuldung (D/E 6) — Bilanz ist kein Risiko, finanziert Wachstum aus FCF ($7,2 Mrd.)
 
 ## 3. BULL CASE
 
-- AI-GPU-TAM explodiert auf $500Mrd+ bis 2028 – AMD braucht nur 15-20% Share für massive Earnings-Power
+MI350/MI400-Hochlauf skaliert, ROCm schließt zur CUDA-Usability auf, weitere Hyperscaler- und Souveräne-AI-Deals materialisieren sich. Datacenter-GPU-Umsatz vervielfacht sich, Mix-Verschiebung hebt Operating Margin Richtung 25–30%. Strukturelle Margennachhaltigkeit ist hier teilweise begründbar: Technologie-Parität bei Speicherbandbreite, x86-Ökosystem-Lock-in bei EPYC und mehrjährige Abnahmeverträge erhöhen Preissetzungsmacht — die CUDA-Lücke bleibt aber der limitierende Faktor. EPS Richtung $18–22, Multiple hält 35x+. Kursziel 750–900 USD. Eintrittswahrscheinlichkeit: 30%.
 
-- Hyperscaler (Meta, Microsoft, Oracle) wollen aktiv Nvidia-Diversifikation
+## 4. BASE CASE
 
-- EPYC weiter auf Marktanteilsgewinn-Pfad – Intel strukturell geschwächt
+Wahrscheinlichstes Szenario 12–18 Monate: AMD etabliert sich als fester Nr.-2-Lieferant mit einstelligem GPU-Marktanteil, Datacenter wächst kräftig weiter, Operating Margin steigt auf 18–22%. Umsatzwachstum bleibt über 30%. Forward-EPS-Revisionen nach oben, Multiple normalisiert. Kursziel 560–700 USD. Eintrittswahrscheinlichkeit: 45%.
 
-- MI350/MI400 mit deutlich verbesserter Software-Performance, könnte CUDA-Lock-in aufweichen
+## 5. BEAR CASE
 
-- Operating Leverage massiv: Bei Skalierung springen Margen von 14% Richtung 25-30%
+Auslöser: Nvidias CUDA-Moat hält, ROCm-Adoption enttäuscht, Hyperscaler beschleunigen eigene Custom-Silicon (TPU, Trainium, MTIA) statt Merchant-GPUs zu kaufen. AMD bleibt in der GPU-Nische, Margen-Hochlauf verzögert sich. Bei Forward-PE 40x reicht eine Wachstumsverlangsamung für eine scharfe Derate auf 20–25x. Kursziel 280–380 USD (−26% bis −46%). Eintrittswahrscheinlichkeit: 25%.
 
-- OpenAI-Deal als Blueprint für weitere Mega-Deals (Anthropic, Meta)
+**Summe: 30% + 45% + 25% = 100%**
 
-- Embedded-Segment unterschätztes Compounder-Asset
+## 6. FUNDAMENTALE QUALITÄT
 
-- Lisa Su = einer der besten CEOs der Tech-Industrie, exzellente Execution-Historie
+Im Übergang. Gross Margin 53% ist solide und steigend, Operating Margin 14,4% jedoch erst am Anfang des Hebels — nicht Top-of-Cycle, sondern Pre-Inflection. Net Margin 13,4%, ROE 8,1% (durch hohe Goodwill-Basis aus der Xilinx-Übernahme gedrückt). FCF $7,2 Mrd. ist real und stark. Bilanz exzellent: D/E nur 6. Der Burggraben ist bei EPYC echt (x86-Ökosystem), bei Instinct-GPUs noch im Aufbau — er steht und fällt mit ROCm. Revenue-Wachstum 37,8% ist überwiegend strukturell (AI), nicht rein zyklisch.
 
-## 4. BEAR CASE
+## 7. BEWERTUNG
 
-- Forward PE 36 bei 8% ROE – Bewertung preist Perfektion ein
+Trailing-PE 173x ist als Pre-Inflection-Artefakt zu ignorieren. Forward-PE 39,7x ist die relevante Kennzahl und preist eine erhebliche Gewinninflexion ein — die Bewertung ist eine strukturierte Wette auf Margen-Hochlauf, keine Value-Position. P/B 13x. Der Markt sagt implizit: AMD liefert den Datacenter-GPU-Hochlauf mit Margenexpansion. Jeder Quartals-Miss bei GPU-Umsatz oder -Marge trifft die Aktie hart. Analyst-Konsensziel $472 liegt unter dem Kurs $516 — Coverage hinkt der Rally hinterher, als Orientierung, nicht als Ceiling zu lesen.
 
-- CUDA-Moat real und tief; AMDs Software-Stack hinkt strukturell hinterher
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Nvidia liefert jährliche Architektur-Upgrades (Blackwell → Rubin) – AMD muss rennen
+RS-Score 311 — extremes Momentum (50T +137%, 6M +132%). Die Aktie ist ein FOMO-Magnet im AI-Trade, institutionell stark gewichtet, Momentum- und Growth-Fonds dominant. Neue Käufer brauchen jetzt harte Datapoints: GPU-Umsatz-Beats und konkrete Margenexpansion. Enttäuschungsrisiko hoch — die Erwartungen sind nach der Vervierfachung anspruchsvoll; ein einziger schwacher Datacenter-Guide kann 20%+ kosten.
 
-- TSMC-Kapazität als Bottleneck, direkte Konkurrenz mit Nvidia, Apple um 3nm
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- Gaming-Segment im Decline – PS6-Zyklus ungewiss
+Sehr starker Aufwärtstrend, Kurs über allen SMAs (SMA50 ~347, SMA200 ~243), nahe 52W-Hoch $527 und auf neue Hochs ausgebrochen. Beta 2,4 — überdurchschnittliche Volatilität. Momentum fundamental gestützt (AI-Capex), aber zunehmend reaktiv auf Deal-Newsflow. Technisches Warnsignal: Tagesschluss unter SMA20 (~466), gravierender bei Verlust der $450-Zone.
 
-- Custom Silicon (Google TPU, AWS Trainium, MS Maia) frisst potenziellen AMD-TAM
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- AI-Capex-Zyklus könnte 2026/27 in Verdauungsphase übergehen
+**Bull ($1.000–1.400):** AMD erobert 15–25% des AI-Beschleuniger-Marktes, ROCm wird ernsthafte CUDA-Alternative. Entscheidende Variable: Software-Ökosystem-Adoption.
 
-- Aktie nach +330% in 6 Monaten extrem überhitzt – jeder Earnings-Miss = -25%
+**Base ($600–850):** Stabiler Nr.-2-Anbieter, einstelliger bis niedrig-zweistelliger GPU-Share, EPYC dominiert Server weiter.
 
-## 5. FUNDAMENTALE QUALITÄT
+**Bear ($250–400):** Hyperscaler-Custom-Silicon verdrängt Merchant-GPUs, ROCm bleibt Nische.
 
-- Revenue-Wachstum +37.8% YoY – stark beschleunigend
-
-- Gross Margin 53.1% – solide, aber 20+ Punkte unter Nvidia
-
-- Operating Margin nur 14.4% – Beleg für Software/Skalen-Defizit
-
-- Net Margin 13.4% – niedrig für Halbleiter-Premium-Story
-
-- FCF $7.17 Mrd. – gesund, aber bei $762Mrd Cap = 1% FCF-Yield
-
-- ROE nur 8.1% – Folge der Xilinx-Goodwill-Last
-
-- Debt/Equity 6.0 – sieht hoch aus, ist aber im Kontext managebar
-
-- Bilanz: solide Liquidität, keine Stressfaktoren
-
-- ROIC weit unter Nvidia (~50%) – strukturelle Profitabilitätslücke
-
-- Capital Allocation: Aktienrückkäufe + R&D-Reinvestition, keine Dividende
-
-- TSMC-Abhängigkeit = Single Point of Failure
-
-- Pricing Power deutlich unter Nvidia, aber besser als Intel
-
-## 6. BEWERTUNG
-
-Mit Forward PE 36 und Price/Book 11.8 ist AMD definitiv kein Value-Investment mehr. Trailing PE 156 ist aufgrund des Margen-Trough irreführend – die forward-Zahl ist relevanter. Im Peer-Vergleich: Nvidia handelt bei Forward PE ~35 mit 50%+ Margen und 70%+ Wachstum – AMD ist relativ teurer pro Qualitätseinheit. Intel bei Forward PE 25 ist optisch billiger, aber Value-Trap. Der Markt preist bei AMD bereits ~25% AI-GPU-Share und 25%+ Operating Margins für 2026/27 ein. Bei perfekter Execution ist die Bewertung rechtfertigbar, bei jeglicher Verzögerung folgt deutliche Multiple-Compression. Analystenkursziel $472 = praktisch erreicht, was zeigt: die Aktie ist bereits dort, wo Sell-Side sie sehen will.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Extrem crowded long – AI-Play Nummer 2 nach NVDA in jedem Tech-Fonds
-
-- Forced Buying durch Underperformer-Fonds nach OpenAI-Deal sichtbar
-
-- Retail-Momentum massiv – Optionsmarkt zeigt Euphorie
-
-- Smart Money teilweise am Trimmen nach +300% Rally
-
-- Sentiment-Übertreibung: von "abgehängt" zu "Nvidia-Killer" in 3 Monaten
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- RS-Score 267 vs. QQQ – extreme relative Stärke, parabolisch
-
-- 50T-Performance +120% – klassisches Blow-off-Top-Risiko
-
-- GWS-Ampel 3/3 AKTIV – Struktur auf allen Zeitebenen gebrochen = maximales Momentum
-
-- Kurs am 52W-Hoch ($467 vs $481) – kein Widerstand mehr darüber
-
-- Kurzfristig massiv überhitzt – jede Konsolidierung von 15-25% wäre gesund und kaufbar
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-**Konservatives Szenario:** AI-Share stagniert bei 10-12%, Margen erreichen 20%. Kursziel: $400-450. Wahrscheinlichkeit: 35%
-
-**Bull Case:** AI-Share 18-22%, Margen 25%+, EPYC dominiert Server. Kursziel: $750-900. Wahrscheinlichkeit: 45%
-
-**Extrem-Bull-Case:** ROCm wird ernsthafte CUDA-Alternative, 25%+ AI-Share, Margen 30%+. Kursziel: $1200-1400. Wahrscheinlichkeit: 20%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- NVDA: höhere Qualität, bessere Margen, ähnliches Multiple – AMD nur Hedge dazu
-
-- INTC: strukturelle Verlierer-Story, AMD nimmt Share – nicht vergleichbar mehr
-
-- AVGO: diversifizierter, custom-Silicon-Profiteur, defensiver – bessere Risk/Reward
-
-- TSM: indirekter Profiteur jeder AMD-Story, weniger volatil
+Entscheidende Variable: Schließt AMD die CUDA-Software-Lücke — alles andere ist sekundär.
 
 ## 11. PROFI-FAZIT
 
-AMD ist aktuell kein Compounder-Kauf, sondern ein hochkomplexer Momentum-Trade mit fundamentalem Rückenwind. Die GWS-Ampel auf 3/3 plus RS-Score 267 signalisiert: institutionelles Geld jagt aktiv den Trend, Trend-Following funktioniert. Aber: Wer hier auf $467 zum ersten Mal kauft, kauft auf parabolischer Extension – Risiko/Rendite kurzfristig schlecht. Smart Money hat zwischen $90 und $250 aufgebaut, jetzt wird ausgepreist. Trading-Play: Pullbacks zur 20- oder 50-Tage-Linie kaufen, solange GWS-Ampel grün bleibt. Investment-Play: Auf Konsolidierung warten ($380-420 wäre attraktive Zone). Bei Bruch der Wochen-GWS-Struktur konsequent reduzieren – diese Aktie kann genauso schnell -40% wie sie +300% gemacht hat. Qualität ist real, aber Bewertung lässt keinen Raum für Fehler. Die Aktie ist ein "Trade-it, don't marry it"-Setup auf aktuellem Niveau.
-
-**Rating:**
+AMD ist ein High-Conviction-Momentum-/Growth-Play auf die AI-Beschleuniger-Diversifikation — kein Value, kein defensiver Compounder. Für wachstumsorientierte Investoren mit Volatilitätstoleranz und mehrjährigem Horizont geeignet; nach der Vervierfachung gestaffelt einsteigen und Rücksetzer nutzen, nicht das Allzeithoch jagen. Explizite Risikowarnung: Bei Beta 2,4 und Forward-PE 40x sind 30–40%-Drawdowns Teil der These — Positionsgröße entsprechend begrenzen (max. 3–4%). Peers: **Nvidia (NVDA)** bleibt das überlegene Qualitäts- und Margen-Instrument der AI-These (CUDA-Moat), ist aber teurer eingepreist; **Broadcom (AVGO)** ist die reinere Wette auf Custom-Silicon/ASICs der Hyperscaler. AMD ist die asymmetrischste, aber softwareabhängigste der drei.
 
 - Qualität: 4/5
-
 - Wachstum: 5/5
-
 - Bewertung: 2/5
+- Katalysator: 5/5
 
-- Langfristiges Potenzial: 4/5
 
 ---
 
@@ -169,8 +88,8 @@ AMD ist aktuell kein Compounder-Kauf, sondern ein hochkomplexer Momentum-Trade m
 | Qualität | 4/5 |
 | Wachstum | 5/5 |
 | Bewertung | 2/5 |
-| Katalysator | 3/5 |
+| Katalysator | 5/5 |
 
-**Verdict: BUY (70/100)**
+**Verdict: BUY (80/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
