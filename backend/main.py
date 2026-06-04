@@ -235,13 +235,12 @@ def _last_breakout_batch() -> dict | None:
         return None
 
 
-async def _welcome_and_replay(chat_id: str) -> None:
-    """Einmaliger Willkommenstext nach dem Verbinden; danach – 30 s später –
-    die zuletzt verschickte Breakout-Charge (inkl. Charts) nachreichen."""
+def _welcome_payload() -> tuple[str, list, str]:
+    """Baut den Willkommenstext + liefert die nachzureichenden Alerts und das
+    Datum der letzten Charge."""
     batch  = _last_breakout_batch()
     alerts = (batch or {}).get("alerts") or []
     when   = (batch or {}).get("sent_at_label") or (batch or {}).get("date_label") or ""
-
     if alerts:
         welcome = (
             "✅ <b>RS-Platform</b> verbunden!\n"
@@ -256,13 +255,14 @@ async def _welcome_and_replay(chat_id: str) -> None:
             "Aktuell liegen keine vergangenen Breakout-Alerts vor – du bekommst die "
             "nächsten automatisch, sobald sie auftreten."
         )
-    await asyncio.to_thread(_telegram_send, chat_id, welcome)
+    return welcome, alerts, when
 
+
+async def _replay_last_alerts(chat_id: str, alerts: list, when: str) -> None:
+    """Reicht 30 s später die zuletzt verschickte Breakout-Charge nach."""
     if not alerts:
         return
-
     await asyncio.sleep(WELCOME_ALERTS_DELAY)
-
     await asyncio.to_thread(
         _telegram_send, chat_id,
         f"📨 <b>Letzte Breakout-Alerts</b> (Stand: {when}):",
@@ -274,6 +274,13 @@ async def _welcome_and_replay(chat_id: str) -> None:
             await asyncio.to_thread(send_breakout_telegram, token, [chat_id], alert)
     except Exception as e:
         print(f"[Telegram] Nachreichung der letzten Alerts fehlgeschlagen: {e}")
+
+
+async def _welcome_and_replay(chat_id: str) -> None:
+    """Einmaliger Willkommenstext nach dem Verbinden; danach Nachreichung."""
+    welcome, alerts, when = _welcome_payload()
+    await asyncio.to_thread(_telegram_send, chat_id, welcome)
+    await _replay_last_alerts(chat_id, alerts, when)
 
 
 @app.on_event("startup")
@@ -420,26 +427,27 @@ async def telegram_webhook(
 
 @app.post("/api/user/telegram")
 async def save_telegram(req: TelegramRequest, email: str = Depends(require_auth)):
-    """Hinterlegt die persönliche Telegram-Chat-ID und schickt — sofern das
-    Backend einen TELEGRAM_TOKEN hat — eine Bestätigungsnachricht zur Prüfung."""
+    """Hinterlegt die persönliche Telegram-Chat-ID. Sendet — wie der Button-
+    Flow — den Willkommenstext zur Prüfung und reicht 30 s später die letzten
+    Breakout-Alerts nach."""
     chat_id = req.chat_id.strip()
     if not re.fullmatch(r"-?\d{1,20}|@[A-Za-z0-9_]{4,40}", chat_id):
         raise HTTPException(400, "Ungültige Chat-ID. Erlaubt: Zahl (z. B. 123456789) "
                                  "oder @kanalname.")
-    ok, err = _telegram_send(
-        chat_id,
-        "✅ <b>RS-Platform</b> verbunden!\n"
-        "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.",
-    )
+    welcome, alerts, when = _welcome_payload()
+    # Synchron senden, um die Chat-ID zu verifizieren.
+    ok, err = await asyncio.to_thread(_telegram_send, chat_id, welcome)
     # Wenn das Backend einen Token hat und das Senden scheitert, ist die ID
     # falsch oder der Bot wurde noch nicht gestartet → nicht speichern.
-    if os.environ.get("TELEGRAM_TOKEN") and not ok:
+    if _telegram_token() and not ok:
         raise HTTPException(
             400,
             f"Konnte keine Nachricht senden: {err}. Hast du den Bot gestartet "
             f"(/start) und die richtige Chat-ID eingetragen?",
         )
     set_telegram_chat_id(email, chat_id)
+    if ok and alerts:
+        asyncio.create_task(_replay_last_alerts(chat_id, alerts, when))
     return {"detail": "Telegram-Benachrichtigungen aktiviert.", "verified": ok}
 
 
