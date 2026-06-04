@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cmd=$(jq -r '.tool_input.command // \"\"'); printf '%s' \"$cmd\" | grep -q 'git commit' && cd \"$CLAUDE_PROJECT_DIR\" && echo \"[$(git rev-parse --short HEAD)] $(git log -1 --pretty=%s)\"; true",
+            "statusMessage": "Git-Hash anzeigen"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -11,8 +11,9 @@ __pycache__/
 dist/
 build/
 
-# Claude Code
-.claude/
+# Claude Code (alles ignorieren außer der versionierten settings.json)
+.claude/*
+!.claude/settings.json
 
 # OS
 .DS_Store
