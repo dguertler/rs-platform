@@ -114,12 +114,24 @@ def _dot(active, is_new=False):
     return '⚫'
 
 
+def _base_url():
+    """Kanonische Origin der Plattform (Login + Dashboards + Analyse werden
+    alle von hier ausgeliefert). Identisch zu check_alerts.py, damit Dashboard-
+    und Analyse-Links dieselbe Origin und damit denselben localStorage-Login
+    teilen — sonst muss man sich beim Wechsel neu anmelden."""
+    return os.environ.get(
+        'FRONTEND_URL',
+        os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app'),
+    ).rstrip('/')
+
+
 def _dashboard(source):
+    base = _base_url()
     if source == 'DAX':
-        return 'https://dguertler.github.io/Rel.-Strength/dax.html', 'DAX-Dashboard'
+        return f'{base}/dax.html', 'DAX-Dashboard'
     if source == 'SPX':
-        return 'https://dguertler.github.io/Rel.-Strength/sp500.html', 'S&amp;P 500-Dashboard'
-    return 'https://dguertler.github.io/Rel.-Strength/', 'Nasdaq-Dashboard'
+        return f'{base}/sp500.html', 'S&amp;P 500-Dashboard'
+    return f'{base}/', 'Nasdaq-Dashboard'
 
 
 def _news_lines(news, max_specific=3, max_general=2):
@@ -140,11 +152,11 @@ def _news_lines(news, max_specific=3, max_general=2):
 
 def _analyse_link(display_ticker):
     """Gibt einen HTML-Link zur KI-Analyse zurück, oder ''."""
-    frontend_url = os.environ.get('FRONTEND_URL', '').rstrip('/')
+    frontend_url = _base_url()
     if not frontend_url:
         return ''
     ticker_param = urllib.parse.quote(display_ticker.replace('[TEST] ', '').strip())
-    url = f'{frontend_url}?openRating={ticker_param}'
+    url = f'{frontend_url}/?openRating={ticker_param}'
     return f'\n📊 <a href="{url}">Zur {_esc(display_ticker)}-Analyse</a>'
 
 

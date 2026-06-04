@@ -326,12 +326,15 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
         eps_est  = a['eps_estimate']
         eps_act  = a['eps_actual']
 
+        # Kanonische App-Origin (gleiche Origin wie Login + Analyse), damit der
+        # Login beim Klick aufs Dashboard erhalten bleibt — identisch zu check_alerts.py.
+        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app')).rstrip('/')
         if source == 'DAX':
-            dash_url, dash_label = 'https://dguertler.github.io/Rel.-Strength/dax.html', 'DAX-Dashboard'
+            dash_url, dash_label = f'{_base_url}/dax.html', 'DAX-Dashboard'
         elif source == 'SPX':
-            dash_url, dash_label = 'https://dguertler.github.io/Rel.-Strength/sp500.html', 'S&P 500-Dashboard'
+            dash_url, dash_label = f'{_base_url}/sp500.html', 'S&P 500-Dashboard'
         else:
-            dash_url, dash_label = 'https://dguertler.github.io/Rel.-Strength/', 'Nasdaq-Dashboard'
+            dash_url, dash_label = f'{_base_url}/', 'Nasdaq-Dashboard'
 
         eps_est_str = f'{eps_est:.2f}' if eps_est is not None else '–'
         eps_act_str = f'{eps_act:.2f}' if eps_act is not None else '–'
