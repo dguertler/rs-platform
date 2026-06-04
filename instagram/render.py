@@ -121,14 +121,40 @@ def footer(c):
     # Disclaimer volle Breite (links nach rechts), ohne Handle
     import textwrap
     c.ax.plot([MX, c.W - MX], [c.y(c.H - 150), c.y(c.H - 150)], color=T.GRID, lw=1.5)
-    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=132)
+    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=150)
     for i, ln in enumerate(lines):
-        c.text(MX, c.H - 128 + i * 26, ln, 13, color=T.MUTED)
+        c.text(MX, c.H - 128 + i * 25, ln, 12, color=T.MUTED)
 
 
 def _style_chart(ax):
     ax.grid(axis="y", color=T.GRID, lw=1, alpha=0.6)
     ax.set_axisbelow(True)
+
+
+def _justify_line(c, x, top, words, size, color, target_w, font="sans"):
+    """Zeichnet eine Zeile im Blocksatz: Wörter werden auf target_w (px) verteilt."""
+    try:
+        r = c.fig.canvas.get_renderer()
+    except Exception:
+        c.fig.canvas.draw()
+        r = c.fig.canvas.get_renderer()
+    pt = size * 72.0 / T.DPI
+
+    def wpx(s):
+        t = c.ax.text(0, 0, s, fontsize=pt, fontfamily=_FONTS[font])
+        bb = t.get_window_extent(renderer=r)
+        t.remove()
+        return bb.width
+
+    if len(words) <= 1:
+        c.text(x, top, words[0] if words else "", size, color=color, font=font)
+        return
+    widths = [wpx(w) for w in words]
+    gap = max((target_w - sum(widths)) / (len(words) - 1), wpx(" "))
+    cx = x
+    for w, ww in zip(words, widths):
+        c.text(cx, top, w, size, color=color, font=font)
+        cx += ww + gap
 
 
 # ── Slides ───────────────────────────────────────────────────────────────────────
@@ -296,15 +322,20 @@ def slide_cta(c, date_iso):
     c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
 
     # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=112)
+    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=104)
     line_h = 30
     panel_h = 74 + (len(body) - 1) * line_h + 42
     panel_bottom = c.H - 175
     panel_top = panel_bottom - panel_h
     c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
     c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
+    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
     for i, ln in enumerate(body):
-        c.text(MX + 36, panel_top + 74 + i * line_h, ln, 15, color=T.MUTED)
+        ty = panel_top + 74 + i * line_h
+        if i < len(body) - 1:             # alle Zeilen außer der letzten: Blocksatz
+            _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
+        else:
+            c.text(MX + 36, ty, ln, 15, color=T.MUTED)
     footer(c)
 
 
