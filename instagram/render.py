@@ -118,14 +118,12 @@ def header(c, date_iso):
 
 
 def footer(c):
-    # Disclaimer mehrzeilig umbrechen
+    # Disclaimer volle Breite (links nach rechts), ohne Handle
     import textwrap
-    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=64)
-    y0 = c.H - 130
-    c.ax.plot([MX, c.W - MX], [c.y(c.H - 165), c.y(c.H - 165)], color=T.GRID, lw=1.5)
-    c.text(MX, c.H - 150, HANDLE, 16, color=T.GREEN, weight="bold")
+    c.ax.plot([MX, c.W - MX], [c.y(c.H - 150), c.y(c.H - 150)], color=T.GRID, lw=1.5)
+    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=112)
     for i, ln in enumerate(lines):
-        c.text(MX, c.H - 122 + i * 26, ln, 13, color=T.MUTED)
+        c.text(MX, c.H - 128 + i * 26, ln, 13, color=T.MUTED)
 
 
 def _style_chart(ax):
@@ -198,25 +196,28 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
     # Kennzahlen-Streifen
     if stats:
         pf = stats.get("profit_factor")
+        pfs = "∞" if pf is None else f"{pf:.1f}".replace(".", ",")
         chips = [
             ("Alpha vs. NASDAQ", fmt_pct(stats["alpha"]), T.BLUE),
-            ("Trades seit Start", str(stats["trades"]), T.TEXT),
-            ("Trefferquote", f"{round(stats['win_rate'] * 100)} %", T.GREEN),
-            ("Profitfaktor", "∞" if pf is None else f"{pf:.1f}".replace(".", ","), T.GREEN),
-            ("Ø Gewinn/Trade", fmt_pct(stats["avg_win"]), T.GREEN),
-            ("Ø Verlust/Trade", fmt_pct(stats["avg_loss"]), T.RED),
+            ("Trades seit Start", f"{stats['trades']}*", T.TEXT),
+            ("Trefferquote", f"{round(stats['win_rate'] * 100)} %*", T.GREEN),
+            ("Profitfaktor", pfs + "*", T.GREEN),
+            ("Ø Gewinn/Trade", fmt_pct(stats["avg_win"]) + "*", T.GREEN),
+            ("Ø Verlust/Trade", fmt_pct(stats["avg_loss"]) + "*", T.RED),
         ]
         gap = 20
         cw = (c.W - 2 * MX - 2 * gap) // 3
-        ch = 92
+        ch = 104
         sy = ky + 104 + 22
         for i, (lab, val, col) in enumerate(chips):
             r, cc = divmod(i, 3)
             x = MX + cc * (cw + gap)
             y = sy + r * (ch + gap)
             c.tile(x, y, cw, ch, color=T.PANEL)
-            c.text(x + 22, y + 22, lab, 14, color=T.MUTED)
-            c.text(x + 22, y + ch - 56, val, 34, color=col, weight="bold", font="mono")
+            c.text(x + 22, y + 20, lab, 14, color=T.MUTED)
+            c.text(x + 22, y + 60, val, 34, color=col, weight="bold", font="mono")
+        c.text(MX, sy + 2 * (ch + gap) + 4, "* inkl. offener Positionen",
+               13, color=T.MUTED)
 
     if is_sample:
         c.text(c.W - MX, 196, "BEISPIELDATEN", 18, color=T.RED, weight="bold", ha="right")
@@ -294,16 +295,16 @@ def slide_cta(c, date_iso):
     cy = int(c.H * 0.30)
     c.text(MX, cy, "Folge für wöchentliche", 50, weight="bold")
     c.text(MX, cy + 64, "Updates & Signale.", 50, weight="bold")
-    c.text(MX, cy + 150, HANDLE, 30, color=T.GREEN, weight="bold")
-    c.text(MX, cy + 200, "→ Das wikifolio „AI Alpha Selection\" auf wikifolio.com", 20, color=T.MUTED)
+    c.text(MX, cy + 150, "AI Alpha Selection", 30, color=T.BLUE, weight="bold")
+    c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
 
-    # Disclaimer-Panel
+    # Disclaimer-Panel (Text volle Breite)
     panel_top = int(c.H * 0.55)
     panel_h = int(c.H * 0.31)
     c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
     c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=58)
-    for i, ln in enumerate(body[:9]):
+    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=90)
+    for i, ln in enumerate(body[:8]):
         c.text(MX + 36, panel_top + 74 + i * 30, ln, 15, color=T.MUTED)
     footer(c)
 
@@ -357,7 +358,7 @@ def slide_history(c, date_iso, history):
     c.text(MX, 200, "Mehrrendite ggü. NASDAQ-100", 40, weight="bold")
     vkey = "dev" if history and "dev" in history[0] else "perf"
     won = sum(1 for h in history if h[vkey] >= 0)
-    c.text(MX, 252, f"Pro Woche · {won} von {len(history)} Wochen über dem NASDAQ",
+    c.text(MX, 252, f"{won} von {len(history)} Wochen über dem NASDAQ",
            18, color=T.MUTED)
 
     chart_h = int(c.H * 0.46)

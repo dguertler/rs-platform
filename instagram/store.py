@@ -105,7 +105,7 @@ def compute(kw, universe, benchmark, ref_date=None):
         raise ValueError(f"Keine wikifolio-Werte bis KW{kw} in wikifolio_history.json")
 
     # ── Equity-Kurve (auf 100 indexiert) ─────────────────────────────────────
-    dates = [start_date] + [report.week_friday(year, w["kw"]) for w in weekly]
+    dates = [start_date] + [w.get("date") or report.week_friday(year, w["kw"]) for w in weekly]
     vals = [start_value] + [w["value"] for w in weekly]
     eq_vals = [v / start_value * 100 for v in vals]
     total_perf = vals[-1] / vals[0] - 1
@@ -124,7 +124,10 @@ def compute(kw, universe, benchmark, ref_date=None):
     prev_v, prev_n = start_value, nas_raw[0] if nas_raw else None
     for i, w in enumerate(weekly):
         wk = w["value"] / prev_v - 1
-        nwk = (nas_raw[i + 1] / prev_n - 1) if (prev_n and i + 1 < len(nas_raw)) else 0.0
+        if "nasdaq_pct" in w:                      # vom Nutzer hinterlegter NDX-Wert
+            nwk = w["nasdaq_pct"]
+        else:
+            nwk = (nas_raw[i + 1] / prev_n - 1) if (prev_n and i + 1 < len(nas_raw)) else 0.0
         dev = wk - nwk
         history.append({"kw": w["kw"], "perf": wk, "nasdaq": nwk, "dev": dev})
         if dev > 0:
@@ -181,6 +184,7 @@ def compute(kw, universe, benchmark, ref_date=None):
         "weeks_beaten": beaten, "weeks_total": len(history),
         "stats": stats,
         "top_holdings": top,
+        "rest_holdings": top[5:],
         "featured": featured,
         "newcomer": newcomer,
     }

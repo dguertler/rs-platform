@@ -54,6 +54,14 @@ def build_from_store(fmt, ctx, outdir):
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
+    # 4b) Weitere Positionen (alle außerhalb der Top-5)
+    if ctx.get("rest_holdings"):
+        rows = [{"main": t["ticker"], "sub": _pos_sub(t),
+                 "value": render.fmt_pct(t["ret"]),
+                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
+                for t in ctx["rest_holdings"]]
+        emit("weitere", lambda c: render.slide_list(
+            c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
     # 5) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
     if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
         emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
