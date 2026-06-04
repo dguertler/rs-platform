@@ -759,6 +759,11 @@ def run_test_mode(smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
         send_breakout_telegram(tg_token, tg_chat_id, test_alert[0])
         print('Test-Telegram gesendet.')
 
+    # Letzte Charge auch im Testmodus persistieren, damit das Backend die
+    # Willkommens-Nachreichung (neuer Telegram-User) testen kann.
+    save_last_breakout_batch(test_alert)
+    print('last_breakout_alerts.json (Test) geschrieben.')
+
 
 def main():
     test_mode = '--test' in sys.argv or os.environ.get('ALERT_TEST_MODE', '') == 'true'
