@@ -364,10 +364,12 @@ def main():
 
     tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
     tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
-    if tg_token and tg_chat_id:
-        from telegram_handler import send_breakout_telegram
-        for a in alerts:
-            send_breakout_telegram(tg_token, tg_chat_id, a)
+    if tg_token:
+        from telegram_handler import send_breakout_telegram, resolve_recipients
+        tg_recipients = resolve_recipients(tg_chat_id)
+        if tg_recipients:
+            for a in alerts:
+                send_breakout_telegram(tg_token, tg_recipients, a)
 
     # Im Testmodus: State NICHT verändern
     if is_test:

@@ -45,6 +45,9 @@ def init_db() -> None:
             ("is_admin",           "INTEGER DEFAULT 0"),
             ("reset_token",        "TEXT"),
             ("reset_token_exp",    "TEXT"),
+            ("telegram_chat_id",   "TEXT"),
+            ("tg_link_token",      "TEXT"),
+            ("tg_link_exp",        "TEXT"),
         ]:
             if col not in cols:
                 conn.execute(f"ALTER TABLE users ADD COLUMN {col} {defn}")
@@ -185,6 +188,69 @@ def decode_token(token: str) -> str | None:
         return payload.get("sub")
     except JWTError:
         return None
+
+
+def get_telegram_chat_id(email: str) -> str | None:
+    with sqlite3.connect(DB_PATH) as conn:
+        row = conn.execute(
+            "SELECT telegram_chat_id FROM users WHERE email=? AND is_active=1", (email,)
+        ).fetchone()
+    return (row[0] if row else None) or None
+
+
+def set_telegram_chat_id(email: str, chat_id: str | None) -> None:
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute(
+            "UPDATE users SET telegram_chat_id=? WHERE email=?",
+            (chat_id or None, email),
+        )
+
+
+def create_tg_link_token(email: str) -> str | None:
+    """Erzeugt einen kurzen Einmal-Token für den Telegram-Deep-Link
+    (https://t.me/<bot>?start=<token>). Läuft nach 15 Minuten ab."""
+    token   = secrets.token_urlsafe(16)
+    expires = (datetime.utcnow() + timedelta(minutes=15)).isoformat()
+    with sqlite3.connect(DB_PATH) as conn:
+        cur = conn.execute(
+            "UPDATE users SET tg_link_token=?, tg_link_exp=? WHERE email=? AND is_active=1",
+            (token, expires, email),
+        )
+        if cur.rowcount == 0:
+            return None
+    return token
+
+
+def link_telegram_by_token(token: str, chat_id: str) -> str | None:
+    """Verknüpft eine Chat-ID mit dem User, dem der Token gehört. Gibt die
+    E-Mail zurück (oder None bei ungültigem/abgelaufenem Token)."""
+    with sqlite3.connect(DB_PATH) as conn:
+        row = conn.execute(
+            "SELECT email, tg_link_exp FROM users "
+            "WHERE tg_link_token=? AND is_active=1",
+            (token,),
+        ).fetchone()
+        if not row:
+            return None
+        email, exp = row
+        if not exp or datetime.utcnow().isoformat() > exp:
+            return None
+        conn.execute(
+            "UPDATE users SET telegram_chat_id=?, tg_link_token=NULL, "
+            "tg_link_exp=NULL WHERE email=?",
+            (str(chat_id), email),
+        )
+    return email
+
+
+def get_all_telegram_chat_ids() -> list[str]:
+    """Alle hinterlegten Chat-IDs aktiver User — für den Alert-Versand."""
+    with sqlite3.connect(DB_PATH) as conn:
+        rows = conn.execute(
+            "SELECT DISTINCT telegram_chat_id FROM users "
+            "WHERE is_active=1 AND telegram_chat_id IS NOT NULL AND telegram_chat_id != ''"
+        ).fetchall()
+    return [r[0] for r in rows]
 
 
 def get_watchlist(email: str) -> list[str]:

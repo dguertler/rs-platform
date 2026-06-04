@@ -801,10 +801,13 @@ def main():
     if fresh_alerts:
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
-        if tg_token and tg_chat_id:
-            from telegram_handler import send_breakout_telegram
-            for a in fresh_alerts:
-                send_breakout_telegram(tg_token, tg_chat_id, a)
+        if tg_token:
+            from telegram_handler import send_breakout_telegram, resolve_recipients
+            tg_recipients = resolve_recipients(tg_chat_id)
+            if tg_recipients:
+                print(f'Telegram-Empfaenger: {len(tg_recipients)}')
+                for a in fresh_alerts:
+                    send_breakout_telegram(tg_token, tg_recipients, a)
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')

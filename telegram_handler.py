@@ -10,9 +10,60 @@ importiert. Sendet:
 import base64
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime
+
+
+# ── Empfänger-Auflösung ───────────────────────────────────────────────────────
+
+def _parse_chat_ids(raw):
+    """Zerlegt einen kommagetrennten (oder Leerzeichen/Newline) Chat-ID-String
+    in eine Liste eindeutiger IDs. Akzeptiert auch bereits fertige Listen."""
+    if not raw:
+        return []
+    if isinstance(raw, (list, tuple, set)):
+        parts = [str(x) for x in raw]
+    else:
+        parts = re.split(r'[,\s]+', str(raw).strip())
+    seen, out = set(), []
+    for p in (x.strip() for x in parts):
+        if p and p not in seen:
+            seen.add(p)
+            out.append(p)
+    return out
+
+
+def fetch_registered_chat_ids():
+    """Holt zusätzlich die von registrierten Usern hinterlegten Chat-IDs vom
+    Backend. Nur aktiv, wenn RS_API_URL und ALERT_API_KEY gesetzt sind —
+    sonst leere Liste (voll abwärtskompatibel)."""
+    base = (os.environ.get('RS_API_URL') or os.environ.get('FRONTEND_URL') or '').rstrip('/')
+    key  = os.environ.get('ALERT_API_KEY', '')
+    if not base or not key:
+        return []
+    try:
+        req = urllib.request.Request(
+            f'{base}/api/telegram/recipients',
+            headers={'X-Alert-Key': key},
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read())
+        return [str(c) for c in data.get('chat_ids', []) if c]
+    except Exception as e:
+        print(f'  [Telegram] Empfaenger-Abruf vom Backend fehlgeschlagen: {e}')
+        return []
+
+
+def resolve_recipients(chat_id_env):
+    """Kombiniert die env-Chat-IDs (kommagetrennt) mit den im Backend
+    registrierten Empfängern. Doppelte werden entfernt."""
+    ids = _parse_chat_ids(chat_id_env)
+    for cid in fetch_registered_chat_ids():
+        if cid not in ids:
+            ids.append(cid)
+    return ids
 
 
 # ── Interne Hilfsfunktionen ───────────────────────────────────────────────────
@@ -122,8 +173,11 @@ def send_breakout_telegram(token, chat_id, alert):
     """
     Breakout- oder 4H-Wiederkehr-Alert:
     Charts zuerst als Foto-Album, dann Textnachricht.
+    `chat_id` darf eine einzelne ID, eine kommagetrennte Liste oder eine
+    Python-Liste sein — es wird an alle Empfänger gesendet.
     """
-    if not token or not chat_id:
+    recipients = _parse_chat_ids(chat_id)
+    if not token or not recipients:
         return
 
     raw_ticker = alert['ticker'].replace('[TEST] ', '')
@@ -152,21 +206,26 @@ def send_breakout_telegram(token, chat_id, alert):
         + _analyse_link(display)
     )
 
-    _send_charts(token, chat_id, alert.get('charts', []))
-    _post_json(token, 'sendMessage', {
-        'chat_id':    chat_id,
-        'text':       text,
-        'parse_mode': 'HTML',
-        'link_preview_options': {'is_disabled': True},
-    })
+    charts = alert.get('charts', [])
+    for cid in recipients:
+        _send_charts(token, cid, charts)
+        _post_json(token, 'sendMessage', {
+            'chat_id':    cid,
+            'text':       text,
+            'parse_mode': 'HTML',
+            'link_preview_options': {'is_disabled': True},
+        })
 
 
 def send_earnings_telegram(token, chat_id, alert):
     """
     Earnings-Überraschungs-Alert:
     Charts zuerst als Foto-Album, dann Textnachricht.
+    `chat_id` darf eine einzelne ID, eine kommagetrennte Liste oder eine
+    Python-Liste sein — es wird an alle Empfänger gesendet.
     """
-    if not token or not chat_id:
+    recipients = _parse_chat_ids(chat_id)
+    if not token or not recipients:
         return
 
     ticker  = alert['ticker']
@@ -202,10 +261,12 @@ def send_earnings_telegram(token, chat_id, alert):
         + _analyse_link(display)
     )
 
-    _send_charts(token, chat_id, alert.get('charts', []))
-    _post_json(token, 'sendMessage', {
-        'chat_id':    chat_id,
-        'text':       text,
-        'parse_mode': 'HTML',
-        'link_preview_options': {'is_disabled': True},
-    })
+    charts = alert.get('charts', [])
+    for cid in recipients:
+        _send_charts(token, cid, charts)
+        _post_json(token, 'sendMessage', {
+            'chat_id':    cid,
+            'text':       text,
+            'parse_mode': 'HTML',
+            'link_preview_options': {'is_disabled': True},
+        })
