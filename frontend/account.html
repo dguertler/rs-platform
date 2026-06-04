@@ -29,11 +29,15 @@
     .nav { font-size: 13px; margin-bottom: 24px; display: flex; gap: 16px; }
     .nav a { color: #64748b; text-decoration: none; } .nav a:hover { color: #94a3b8; }
     .upgrade-btn { background: #2563eb; color: #fff; border: none; padding: 3px 12px; border-radius: 4px; font-size: 12px; cursor: pointer; }
-    .tg-steps { margin: 0 0 16px 18px; padding: 0; font-size: 13px; color: #cbd5e1; line-height: 1.7; }
-    .tg-steps a { color: #60a5fa; text-decoration: none; }
-    .tg-steps a:hover { text-decoration: underline; }
+    .tg-intro { font-size: 13px; color: #cbd5e1; line-height: 1.6; margin-bottom: 14px; }
     .tg-status { font-size: 13px; padding: 10px 14px; margin-bottom: 14px; border-radius: 6px; background: #052e16; border: 1px solid #166534; color: #86efac; display: none; }
     .tg-status.off { background: #1e293b; border-color: #334155; color: #94a3b8; }
+    .tg-manual { margin-top: 14px; font-size: 13px; color: #94a3b8; }
+    .tg-manual summary { cursor: pointer; color: #64748b; }
+    .tg-manual summary:hover { color: #94a3b8; }
+    .tg-steps-hint { margin: 10px 0; line-height: 1.6; }
+    .tg-steps-hint a { color: #60a5fa; text-decoration: none; }
+    .tg-steps-hint a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -56,15 +60,15 @@
     <div class="msg err" id="tgErr"></div>
     <div class="msg ok"  id="tgOk"></div>
     <div id="tgStatus" class="tg-status"></div>
-    <ol class="tg-steps">
-      <li>Telegram-Bot oeffnen: <a id="tgBotLink" href="#" target="_blank" rel="noopener">Bot starten</a> und auf <b>Start</b> tippen.</li>
-      <li>Deine <b>Chat-ID</b> herausfinden: schreibe <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> an &ndash; er antwortet mit deiner ID (eine Zahl).</li>
-      <li>Die Zahl unten eintragen und speichern. Du bekommst sofort eine Test-Nachricht.</li>
-    </ol>
-    <label>Deine Telegram Chat-ID</label>
-    <input type="text" id="tgChat" placeholder="z. B. 123456789" autocomplete="off">
-    <button id="tgSave">Aktivieren / Speichern</button>
+    <p class="tg-intro">Erhalte Breakout-, 4H- und Earnings-Alerts direkt in Telegram. Ein Klick &ndash; in Telegram nur auf <b>Start</b> tippen, fertig.</p>
+    <button id="tgConnect">📲 Mit Telegram verbinden</button>
     <button class="btn-muted" id="tgDel" style="display:none">Benachrichtigungen deaktivieren</button>
+    <details class="tg-manual">
+      <summary>Verbindung klappt nicht? Chat-ID manuell eintragen</summary>
+      <p class="tg-steps-hint">Schreibe <a href="https://t.me/userinfobot" target="_blank" rel="noopener">@userinfobot</a> an &ndash; er nennt dir deine Chat-ID (eine Zahl). Diese hier eintragen:</p>
+      <input type="text" id="tgChat" placeholder="z. B. 123456789" autocomplete="off">
+      <button class="btn-muted" id="tgSave">Speichern</button>
+    </details>
 
     <button class="btn-muted" onclick="localStorage.clear();window.location.href='/login.html'">Abmelden</button>
   </div>
@@ -81,28 +85,66 @@
       renderTelegram(u.telegram_chat_id);
     }
 
+    var _tgOneClick=true;
     async function loadTelegramInfo(){
       try{
         var r=await fetch("/api/telegram/info"); var d=await r.json();
-        var link=document.getElementById("tgBotLink");
-        if(d.bot_url){ link.href=d.bot_url; link.textContent="@"+d.bot_username+" oeffnen"; }
-        else { link.removeAttribute("href"); link.textContent="(Bot-Name noch nicht konfiguriert)"; }
-      }catch(e){}
+        _tgOneClick=!!d.one_click;
+      }catch(e){ _tgOneClick=false; }
+      // Ohne konfigurierten Bot keinen Ein-Klick-Button anbieten, Fallback offen lassen
+      var con=document.getElementById("tgConnect"), man=document.querySelector(".tg-manual");
+      if(!_tgOneClick){ con.style.display="none"; if(man) man.open=true; }
+    }
+
+    var _tgPoll=null;
+    function pollTelegram(){
+      var tries=0;
+      clearInterval(_tgPoll);
+      _tgPoll=setInterval(async function(){
+        tries++;
+        try{
+          var r=await api("/api/user/me"); var u=await r.json();
+          if(u.telegram_chat_id){
+            clearInterval(_tgPoll);
+            renderTelegram(u.telegram_chat_id);
+            var ok=document.getElementById("tgOk");
+            ok.textContent="Verbunden! Du bekommst ab jetzt Alerts in Telegram.";
+            ok.style.display="block";
+          }
+        }catch(e){}
+        if(tries>=20) clearInterval(_tgPoll);   // ~60s
+      },3000);
     }
 
     function renderTelegram(chatId){
       var st=document.getElementById("tgStatus"), del=document.getElementById("tgDel"),
-          inp=document.getElementById("tgChat");
+          con=document.getElementById("tgConnect"), inp=document.getElementById("tgChat");
       if(chatId){
         st.className="tg-status"; st.style.display="block";
         st.textContent="Aktiv – Alerts gehen an Chat-ID "+chatId;
-        del.style.display=""; inp.value=chatId;
+        del.style.display=""; con.style.display="none"; inp.value=chatId;
       }else{
         st.className="tg-status off"; st.style.display="block";
         st.textContent="Noch nicht aktiviert.";
-        del.style.display="none"; inp.value="";
+        del.style.display="none"; if(_tgOneClick) con.style.display=""; inp.value="";
       }
     }
+
+    document.getElementById("tgConnect").addEventListener("click", async function(){
+      var btn=this, err=document.getElementById("tgErr"), ok=document.getElementById("tgOk");
+      err.style.display="none"; ok.style.display="none";
+      btn.disabled=true; btn.textContent="Telegram wird geoeffnet...";
+      try{
+        var r=await api("/api/user/telegram/link",{method:"POST"});
+        var d=await r.json();
+        if(!r.ok||!d.url) throw new Error(d.detail||"Konnte Verbindung nicht starten");
+        window.open(d.url,"_blank","noopener");
+        ok.textContent="Tippe in Telegram auf Start. Diese Seite aktualisiert sich automatisch...";
+        ok.style.display="block";
+        pollTelegram();
+      }catch(ex){ err.textContent=ex.message; err.style.display="block"; }
+      finally{ btn.disabled=false; btn.textContent="📲 Mit Telegram verbinden"; }
+    });
 
     document.getElementById("tgSave").addEventListener("click", async function(){
       var btn=this, err=document.getElementById("tgErr"), ok=document.getElementById("tgOk");

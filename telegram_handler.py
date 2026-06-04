@@ -39,7 +39,7 @@ def fetch_registered_chat_ids():
     """Holt zusätzlich die von registrierten Usern hinterlegten Chat-IDs vom
     Backend. Nur aktiv, wenn RS_API_URL und ALERT_API_KEY gesetzt sind —
     sonst leere Liste (voll abwärtskompatibel)."""
-    base = os.environ.get('RS_API_URL', '').rstrip('/')
+    base = (os.environ.get('RS_API_URL') or os.environ.get('FRONTEND_URL') or '').rstrip('/')
     key  = os.environ.get('ALERT_API_KEY', '')
     if not base or not key:
         return []

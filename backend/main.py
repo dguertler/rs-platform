@@ -18,6 +18,7 @@ from auth import (
     create_reset_token, use_reset_token, get_all_users, create_user,
     get_watchlist, add_to_watchlist, remove_from_watchlist,
     get_telegram_chat_id, set_telegram_chat_id, get_all_telegram_chat_ids,
+    create_tg_link_token, link_telegram_by_token,
 )
 from news_handler import fetch_news
 from stripe_handler import create_checkout_session, parse_webhook
@@ -145,29 +146,75 @@ class TelegramRequest(BaseModel):
 
 # ── Telegram-Hilfsfunktionen ──────────────────────────────────────────────────
 
-TELEGRAM_BOT_USERNAME = os.environ.get("TELEGRAM_BOT_USERNAME", "")
-ALERT_API_KEY         = os.environ.get("ALERT_API_KEY", "")
+ALERT_API_KEY      = os.environ.get("ALERT_API_KEY", "")
+# Mögliche Env-Namen für den Bot-Token (erster gefundener gewinnt)
+_TG_TOKEN_NAMES    = ("TELEGRAM_TOKEN", "TELEGRAM_BOT_TOKEN", "BOT_TOKEN", "TG_BOT_TOKEN")
+_bot_info: dict    = {}   # Cache für getMe
 
 
-def _telegram_send(chat_id: str, text: str) -> tuple[bool, str]:
-    """Sendet eine einfache Textnachricht. Gibt (ok, fehlertext) zurück.
-    Braucht TELEGRAM_TOKEN in der Backend-Umgebung."""
-    token = os.environ.get("TELEGRAM_TOKEN", "")
+def _telegram_token() -> str:
+    for name in _TG_TOKEN_NAMES:
+        v = os.environ.get(name)
+        if v:
+            return v
+    return ""
+
+
+def _telegram_api(method: str, payload: dict, timeout: int = 15) -> tuple[bool, dict]:
+    """Ruft eine Telegram-Bot-API-Methode auf. Gibt (ok, result_or_error)."""
+    token = _telegram_token()
     if not token:
-        return False, "Backend hat keinen TELEGRAM_TOKEN konfiguriert."
-    url  = f"https://api.telegram.org/bot{token}/sendMessage"
-    data = json.dumps({"chat_id": chat_id, "text": text, "parse_mode": "HTML"}).encode()
+        return False, {"description": "Backend hat keinen Telegram-Token konfiguriert."}
+    url  = f"https://api.telegram.org/bot{token}/{method}"
+    data = json.dumps(payload).encode()
     req  = urllib.request.Request(
         url, data=data, headers={"Content-Type": "application/json"}, method="POST",
     )
     try:
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
             result = json.loads(resp.read())
         if result.get("ok"):
-            return True, ""
-        return False, result.get("description", "Unbekannter Telegram-Fehler")
+            return True, result.get("result", {})
+        return False, {"description": result.get("description", "Telegram-Fehler")}
     except Exception as e:
-        return False, str(e)
+        return False, {"description": str(e)}
+
+
+def _telegram_send(chat_id: str, text: str) -> tuple[bool, str]:
+    ok, res = _telegram_api("sendMessage", {
+        "chat_id": chat_id, "text": text, "parse_mode": "HTML",
+    })
+    return ok, ("" if ok else res.get("description", "Fehler"))
+
+
+def _bot_username() -> str:
+    """Ermittelt den Bot-Benutzernamen via getMe (gecached)."""
+    if "username" in _bot_info:
+        return _bot_info["username"]
+    username = ""
+    if _telegram_token():
+        ok, res = _telegram_api("getMe", {})
+        if ok:
+            username = res.get("username", "")
+    _bot_info["username"] = username
+    return username
+
+
+def _set_telegram_webhook() -> None:
+    """Registriert den Webhook beim Hochfahren – idempotent.
+    Basis-URL aus APP_URL bzw. FRONTEND_URL."""
+    base = (os.environ.get("APP_URL") or os.environ.get("FRONTEND_URL") or "").rstrip("/")
+    if not _telegram_token() or not base:
+        return
+    payload = {
+        "url": f"{base}/api/telegram/webhook",
+        "allowed_updates": ["message"],
+    }
+    if ALERT_API_KEY:
+        payload["secret_token"] = ALERT_API_KEY
+    ok, res = _telegram_api("setWebhook", payload)
+    print(f"[Telegram] setWebhook → {base}/api/telegram/webhook : "
+          f"{'OK' if ok else res.get('description')}")
 
 
 @app.on_event("startup")
@@ -189,6 +236,8 @@ async def startup():
                 except Exception:
                     pass
     asyncio.create_task(_warm())
+    # Telegram-Webhook für den Ein-Klick-Flow registrieren (idempotent)
+    asyncio.create_task(asyncio.to_thread(_set_telegram_webhook))
 
 
 @app.get("/health")
@@ -252,11 +301,64 @@ async def me(email: str = Depends(require_auth)):
 
 @app.get("/api/telegram/info")
 async def telegram_info():
-    """Öffentliche Bot-Infos für die Anleitung im Frontend."""
+    """Öffentliche Bot-Infos für die Anleitung im Frontend.
+    Bot-Username wird automatisch via getMe aus dem Token ermittelt."""
+    uname = _bot_username()
     return {
-        "bot_username": TELEGRAM_BOT_USERNAME,
-        "bot_url": f"https://t.me/{TELEGRAM_BOT_USERNAME}" if TELEGRAM_BOT_USERNAME else "",
+        "bot_username": uname,
+        "bot_url": f"https://t.me/{uname}" if uname else "",
+        "one_click": bool(uname),
     }
+
+
+@app.post("/api/user/telegram/link")
+async def telegram_link(email: str = Depends(require_auth)):
+    """Liefert einen Deep-Link für den Ein-Klick-Flow. Der User tippt in
+    Telegram nur auf Start – der Webhook verknüpft die Chat-ID automatisch."""
+    uname = _bot_username()
+    if not uname:
+        raise HTTPException(503, "Telegram-Bot im Backend nicht konfiguriert.")
+    token = create_tg_link_token(email)
+    if not token:
+        raise HTTPException(400, "Verknüpfung konnte nicht vorbereitet werden.")
+    return {"url": f"https://t.me/{uname}?start={token}"}
+
+
+@app.post("/api/telegram/webhook")
+async def telegram_webhook(
+    request: Request,
+    x_telegram_bot_api_secret_token: str = Header(default=""),
+):
+    """Empfängt Updates von Telegram. Bei '/start <token>' wird die Chat-ID
+    automatisch mit dem User verknüpft."""
+    if ALERT_API_KEY and x_telegram_bot_api_secret_token != ALERT_API_KEY:
+        raise HTTPException(401, "Nicht autorisiert")
+    try:
+        update = await request.json()
+    except Exception:
+        return {"ok": True}
+    msg = update.get("message") or update.get("edited_message") or {}
+    text = (msg.get("text") or "").strip()
+    chat_id = str((msg.get("chat") or {}).get("id", "") or "")
+    if not chat_id or not text.startswith("/start"):
+        return {"ok": True}
+    parts   = text.split(maxsplit=1)
+    payload = parts[1].strip() if len(parts) > 1 else ""
+    if payload:
+        email = link_telegram_by_token(payload, chat_id)
+        if email:
+            _telegram_send(
+                chat_id,
+                "✅ <b>RS-Platform</b> verbunden!\n"
+                "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.",
+            )
+            return {"ok": True}
+    _telegram_send(
+        chat_id,
+        "Bitte starte die Verknüpfung über den Button "
+        "<b>„Mit Telegram verbinden“</b> auf deiner Konto-Seite.",
+    )
+    return {"ok": True}
 
 
 @app.post("/api/user/telegram")
