@@ -144,7 +144,8 @@ def compute(kw, universe, benchmark):
         "top_holdings": top,
         "featured": {
             "ticker": feat["ticker"], "name": feat.get("name", ""),
-            "buy_date": feat["buy_date"], "ret": feat_ret, "entry": feat_entry,
+            "buy_date": feat["buy_date"], "buy_price_eur": feat.get("buy_price_eur"),
+            "ret": feat_ret, "entry": feat_entry,
             "ohlcv": universe[feat["ticker"]]["ohlcv"], "signals": feat_signals,
         },
     }

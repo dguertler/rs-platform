@@ -1,11 +1,16 @@
 {
-  "_hinweis": "Aktuelle Top-Positionen mit Kaufdatum. Bei jeder Aenderung aktualisieren. Die 'Aktie der Woche' rotiert woechentlich durch diese Liste: index = (kw - base_kw) % anzahl. ACHTUNG: Kaufdaten sind BEISPIELE – durch echte ersetzen.",
-  "base_kw": 21,
+  "_hinweis": "Alle aktuellen Depotpositionen mit Kaufdatum und Einstiegskurs (EUR). Bei neuen Kaeufen/Verkaeufen hier pflegen. Die 'Staerkste Positionen'-Slide zeigt automatisch die Top-5 nach Wertzuwachs. Die 'Aktie der Woche' rotiert woechentlich durch ALLE Positionen: index = (kw - base_kw) % anzahl. Rendite wird aus den OHLCV-Kursdaten berechnet (native %); buy_price_eur ist der reale Einstieg in EUR (zur Anzeige).",
+  "base_kw": 22,
   "positions": [
-    { "ticker": "STX",  "name": "Seagate Technology",   "buy_date": "2026-05-21" },
-    { "ticker": "WDC",  "name": "Western Digital",       "buy_date": "2026-05-22" },
-    { "ticker": "NXPI", "name": "NXP Semiconductors",    "buy_date": "2026-05-05" },
-    { "ticker": "MU",   "name": "Micron Technology",     "buy_date": "2026-04-28" },
-    { "ticker": "MRVL", "name": "Marvell Technology",    "buy_date": "2026-05-12" }
+    { "ticker": "MRVL", "name": "Marvell Technology",  "buy_date": "2026-03-24", "buy_price_eur": 80.07 },
+    { "ticker": "AMD",  "name": "AMD",                 "buy_date": "2026-04-22", "buy_price_eur": 247.73 },
+    { "ticker": "LRCX", "name": "Lam Research",        "buy_date": "2026-04-08", "buy_price_eur": 205.07 },
+    { "ticker": "MU",   "name": "Micron Technology",   "buy_date": "2026-05-21", "buy_price_eur": 658.47 },
+    { "ticker": "CNC",  "name": "Centene",             "buy_date": "2026-04-29", "buy_price_eur": 42.55 },
+    { "ticker": "WDC",  "name": "Western Digital",     "buy_date": "2026-05-22", "buy_price_eur": 421.19 },
+    { "ticker": "STX",  "name": "Seagate Technology",  "buy_date": "2026-05-21", "buy_price_eur": 676.07 },
+    { "ticker": "DDOG", "name": "Datadog",             "buy_date": "2026-05-15", "buy_price_eur": 178.62 },
+    { "ticker": "AMAT", "name": "Applied Materials",   "buy_date": "2026-05-27", "buy_price_eur": 398.09 },
+    { "ticker": "NXPI", "name": "NXP Semiconductors",  "buy_date": "2026-05-25", "buy_price_eur": 282.16 }
   ]
 }

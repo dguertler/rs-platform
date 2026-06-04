@@ -83,18 +83,24 @@ Rotation der Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`
 |---|---|---|
 | `config.json` | Symbol, Startdatum, Startwert, Account | einmalig |
 | `wikifolio_history.json` | Zertifikatswert je KW | **wöchentlich** (Nutzer/Claude) |
-| `holdings.json` | Top-Positionen + Kaufdatum + `base_kw` | bei Änderung |
+| `holdings.json` | ALLE Positionen + Kaufdatum + Einstiegskurs (EUR) + `base_kw` | bei Kauf/Verkauf |
 
 - **`value`** in `wikifolio_history.json`: Zertifikatswert auf gleicher Skala wie
   `start_value` in `config.json` (z. B. Index 100 oder echter EUR-Wert; dann
   `start_value` = Wert am Startdatum).
-- **Top-Positionen-Performance** wird aus den OHLCV-Daten der RS-JSONs berechnet
-  (Kurs seit `buy_date`). Ticker müssen im Universum vorhanden sein.
+- In `holdings.json` werden **alle** Depotpositionen gespeichert. Die Slide
+  „Stärkste Positionen" zeigt automatisch die **Top-5 nach Wertzuwachs**; die
+  „Aktie der Woche" rotiert wöchentlich durch **alle** Positionen.
+- **Performance** wird aus den OHLCV-Daten der RS-JSONs berechnet (Kurs seit
+  `buy_date`, native %). `buy_price_eur` ist nur Anzeige (echter EUR-Einstieg).
+- Neue Käufe/Verkäufe: Position in `holdings.json` ergänzen/entfernen; Top-5 und
+  Rotation passen sich automatisch an.
 
 ### Ticker-Mapping (häufige Namen → Symbol)
 Seagate→STX · Western Digital→WDC · NXP→NXPI · Micron→MU · Marvell→MRVL ·
-ASML→ASML · Akamai→AKAM · Analog Devices→ADI · Broadcom→AVGO. Bei Unsicherheit
-nachfragen statt raten.
+Lam Research→LRCX · Applied Materials→AMAT · Datadog→DDOG · Centene→CNC ·
+AMD→AMD · ASML→ASML · Akamai→AKAM · Analog Devices→ADI · Broadcom→AVGO.
+Bei Unsicherheit nachfragen statt raten.
 
 ---
 

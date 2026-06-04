@@ -393,8 +393,11 @@ def slide_featured(c, date_iso, feat):
     ccol = T.GREEN if (ret or 0) >= 0 else T.RED
     c.text(MX, 200, "AKTIE DER WOCHE", 22, color=T.BLUE, weight="bold")
     c.text(MX, 232, ticker, 64, weight="bold")
-    if feat.get("name"):
-        c.text(MX + 12, 300, feat["name"], 20, color=T.MUTED)
+    sub = feat.get("name", "")
+    if feat.get("buy_date"):
+        sub += f"  ·  Kauf {fmt_de_date(feat['buy_date'])}"
+    if sub:
+        c.text(MX + 12, 300, sub, 20, color=T.MUTED)
 
     # Fenster: ~25 Bars vor Kauf bis heute
     idx = next((i for i, p in enumerate(ohlcv) if p["d"] >= feat["buy_date"]), 0)
@@ -444,6 +447,12 @@ def slide_featured(c, date_iso, feat):
     c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
            color=ccol, weight="bold", font="mono")
     c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
-    c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
-    c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
+    bp = feat.get("buy_price_eur")
+    if bp:
+        c.text(MX + half + 60, ky + 26, "Einstiegskurs", 17, color=T.MUTED)
+        c.text(MX + half + 60, ky + 52,
+               f"{bp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
+    else:
+        c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
+        c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
     footer(c)
