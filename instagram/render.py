@@ -76,11 +76,12 @@ class Canvas:
     def draw_logo(self, x, top, height):
         """Zeichnet instagram/assets/logo.png (falls vorhanden). Gibt die
         gezeichnete Breite zurück (0, wenn kein Logo da ist)."""
-        if not os.path.exists(T.LOGO_PATH):
+        path = T.logo_file()
+        if not path:
             return 0
         try:
             from PIL import Image
-            img = Image.open(T.LOGO_PATH).convert("RGBA")
+            img = Image.open(path).convert("RGBA")
             w = int(img.width * height / img.height)
             img = img.resize((w, int(height)), Image.LANCZOS)
             arr = np.asarray(img)
@@ -105,11 +106,11 @@ class Canvas:
 
 # ── Gemeinsame Bausteine ────────────────────────────────────────────────────────
 def header(c, date_iso):
-    lw = c.draw_logo(MX, 60, 64)          # Logo (falls vorhanden)
-    tx = MX + (lw + 24 if lw else 0)
-    c.text(tx, 70, BRAND, 22, color=T.TEXT, weight="bold")
-    c.text(tx, 102, "Datengetriebene Aktienauswahl", 15, color=T.MUTED)
-    c.text(c.W - MX, 70, fmt_de_date(date_iso), 18, color=T.MUTED, ha="right")
+    lw = c.draw_logo(MX, 62, 60)          # Logo (falls vorhanden)
+    if not lw:                            # Fallback: Wortmarke
+        c.text(MX, 70, BRAND, 22, color=T.TEXT, weight="bold")
+        c.text(MX, 102, "Datengetriebene Aktienauswahl", 15, color=T.MUTED)
+    c.text(c.W - MX, 78, fmt_de_date(date_iso), 18, color=T.MUTED, ha="right")
     c.ax.plot([MX, c.W - MX], [c.y(150), c.y(150)], color=T.GRID, lw=1.5)
 
 

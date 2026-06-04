@@ -12,18 +12,27 @@ from matplotlib import font_manager
 # WICHTIG: Das wikifolio-Logo NICHT verwenden – nur mit vorheriger schriftlicher
 # Freigabe durch wikifolio erlaubt. Dein eigenes Marken-Logo ist frei nutzbar.
 ASSETS = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets")
-LOGO_PATH = os.path.join(ASSETS, "logo.png")
+LOGO_PATH = os.path.join(ASSETS, "logo.png")   # Ziel für make_logo.py
 
-# ── Farben ───────────────────────────────────────────────────────────────────
-BG        = "#0B0E14"   # fast-schwarzer Hintergrund
-PANEL     = "#131A26"   # Kachel-/Panel-Hintergrund
-PANEL_HI  = "#1B2433"   # hellere Kachel
-GREEN     = "#22D3A0"   # Akzent / positiv
+
+def logo_file():
+    """Findet dein Logo (PNG bevorzugt, sonst JPG). None, wenn keins da ist."""
+    for name in ("logo.png", "logo.jpg", "logo.jpeg"):
+        p = os.path.join(ASSETS, name)
+        if os.path.exists(p):
+            return p
+    return None
+
+# ── Farben (an das Logo „AI Alpha Selection" angelehnt: Navy + Royalblau) ──────
+BG        = "#0E1320"   # dunkles Navy (Logo-Hintergrund)
+PANEL     = "#172131"   # Kachel-/Panel-Hintergrund
+PANEL_HI  = "#1F2A3D"   # hellere Kachel
+GREEN     = "#22D3A0"   # positiv / eigenes Depot
 RED       = "#FF5C6C"   # negativ
-BLUE      = "#4C8DFF"   # Benchmark / sekundär
+BLUE      = "#2F6BFF"   # Markenakzent (Logo-Blau) / Benchmark / Alpha
 TEXT      = "#FFFFFF"   # Haupttext
 MUTED     = "#8A93A6"   # Sekundärtext
-GRID      = "#222C3C"   # Gitterlinien
+GRID      = "#232E42"   # Gitterlinien
 
 # ── Canvas-Formate (Breite, Höhe in px) ───────────────────────────────────────
 FORMATS = {
