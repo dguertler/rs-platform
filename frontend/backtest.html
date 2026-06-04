@@ -894,6 +894,7 @@ function BacktestApp() {
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [top20Hist,   setTop20Hist]   = useState(null);
   const [useTop20,    setUseTop20]    = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
+  const [benchData,   setBenchData]   = useState(null);
   const chartRef     = useRef(null);
   const weekTableRef = useRef(null);
   const weekRowRefs  = useRef({});
@@ -941,6 +942,18 @@ function BacktestApp() {
         .then(d => { setData(d); setLoading(false); })
         .catch(e => { setLoadError(e.message); setLoading(false); });
     });
+
+    // Benchmark (QQQ) OHLCV für Chart-Hintergrundlinie laden
+    window.apiFetch('/api/rs/nasdaq')
+      .then(r => r.ok ? r.json() : null)
+      .then(d => {
+        if (d) setBenchData({
+          benchmark:         d.benchmark         || 'QQQ',
+          benchmark_ohlcv_w: d.benchmark_ohlcv_w || [],
+          benchmark_ohlcv:   d.benchmark_ohlcv   || [],
+        });
+      })
+      .catch(() => {});
 
     // top20_history immer laden – unabhängig ob backtest-JSON oder rs-JSON
     const rsFiles = ['/api/rs/nasdaq', '/api/rs/sp500', '/api/rs/dax'];
@@ -1250,6 +1263,8 @@ function BacktestApp() {
                     ohlcvW={sel.wSlice}
                     structureW={sel.structW}
                     chartId={`bt_w_${sel.i}`}
+                    benchOhlcv={benchData?.benchmark_ohlcv_w}
+                    benchLabel={benchData?.benchmark}
                     tradeMarkers={tradeMarkers}/>
                 ) : (
                   <div style={{background:'#07090f',borderRadius:8,border:'1px solid #1e293b',
@@ -1264,6 +1279,8 @@ function BacktestApp() {
                     ohlcv={sel.dSlice}
                     structure={sel.structD}
                     chartId={`bt_d_${sel.i}`}
+                    benchOhlcv={benchData?.benchmark_ohlcv}
+                    benchLabel={benchData?.benchmark}
                     tradeMarkers={tradeMarkers}/>
                 ) : (
                   <div style={{background:'#07090f',borderRadius:8,border:'1px solid #1e293b',
