@@ -16,9 +16,62 @@ import argparse
 import os
 from datetime import datetime
 
-from . import data, render, report
+from . import data, render, report, store
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def build_from_store(fmt, ctx, outdir):
+    """Wochen-Carousel aus den persistenten Daten (store.compute)."""
+    saved = []
+    emit = _emitter(fmt, outdir, saved)
+
+    emit("hook", lambda c: render.slide_hook_weekly(
+        c, ctx["date_iso"], ctx["kw"], ctx["period"], ctx["week_perf"], ctx["total_perf"]))
+    emit("performance", lambda c: render.slide_performance(
+        c, ctx["date_iso"], ctx["eq_dates"], ctx["eq_vals"], ctx["nas_dates"],
+        ctx["nas_vals"], ctx["total_perf"], ctx["nasdaq_total"], False))
+    emit("kpis", lambda c: render.slide_kpis_weekly(
+        c, ctx["date_iso"], ctx["total_perf"], ctx["alpha"], ctx["weeks_beaten"],
+        ctx["weeks_total"], ctx["avg_win"], ctx["avg_loss"]))
+    emit("historie", lambda c: render.slide_history(c, ctx["date_iso"], ctx["history"]))
+
+    if ctx["top_holdings"]:
+        rows = [{"main": t["ticker"], "sub": t.get("name", ""),
+                 "value": render.fmt_pct(t["ret"]),
+                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
+                for t in ctx["top_holdings"]]
+        emit("positionen", lambda c: render.slide_list(
+            c, ctx["date_iso"], "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
+    if ctx["featured"]["entry"]:
+        emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
+             lambda c: render.slide_featured(c, ctx["date_iso"], ctx["featured"]))
+
+    emit("cta", lambda c: render.slide_cta(c, ctx["date_iso"]))
+    return saved
+
+
+def caption_from_store(ctx):
+    top = "\n".join(f"• {t['ticker']} ({t.get('name','')}): {render.fmt_pct(t['ret'])}"
+                    for t in ctx["top_holdings"][:5])
+    f = ctx["featured"]
+    feat = (f"\n🔎 Aktie der Woche: {f['ticker']} – seit Kauf "
+            f"{render.fmt_pct(f['ret'])}." if f.get("ret") is not None else "")
+    return (
+        f"📊 Wochenupdate KW {ctx['kw']} ({ctx['period']})\n\n"
+        f"Musterdepot diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
+        f"NASDAQ-100: {render.fmt_pct(ctx['nasdaq_week'])}\n"
+        f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} | "
+        f"NASDAQ: {render.fmt_pct(ctx['nasdaq_total'])} | "
+        f"Alpha: {render.fmt_pct(ctx['alpha'])}\n"
+        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen den NASDAQ geschlagen.\n\n"
+        f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
+        f"{feat}\n\n"
+        f"➡️ Mehr: {ctx['account']}\n\n"
+        f"{render.T.DISCLAIMER_LONG}\n\n"
+        f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
+        f"#geldanlage #finanzen #relativestärke #wochenupdate"
+    )
 
 
 def _emitter(fmt, outdir, saved):
@@ -158,11 +211,30 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--format", choices=["carousel", "reel", "both"], default="both")
     ap.add_argument("--signals", type=int, default=2)
-    ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (Wochenmodus)")
+    ap.add_argument("--kw", type=int, help="Kalenderwoche – baut den Wochenpost aus instagram/data/")
+    ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
     ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
     args = ap.parse_args()
 
     universe, benchmark = data.load_universe()
+
+    # ── Wochenmodus aus persistenten Daten (Hauptweg) ─────────────────────────
+    if args.kw:
+        ctx = store.compute(args.kw, universe, benchmark)
+        ctx["date_iso"] = args.date
+        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_KW{args.kw}")
+        fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
+        all_saved = []
+        for fmt in fmts:
+            all_saved += build_from_store(fmt, ctx, os.path.join(base, fmt))
+        os.makedirs(base, exist_ok=True)
+        with open(os.path.join(base, "caption.txt"), "w") as f:
+            f.write(caption_from_store(ctx))
+        print(f"✓ {len(all_saved)} Slides (KW{args.kw}) in {base}")
+        print(f"  Aktie der Woche: {ctx['featured']['ticker']}")
+        for p in all_saved:
+            print("  ", os.path.relpath(p, ROOT))
+        return
 
     # ── Wochenmodus (report-getrieben) ────────────────────────────────────────
     if args.report:

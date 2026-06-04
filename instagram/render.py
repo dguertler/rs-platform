@@ -365,10 +365,10 @@ def slide_list(c, date_iso, title, subtitle, rows):
     c.text(MX, 200, title, 40, weight="bold")
     if subtitle:
         c.text(MX, 252, subtitle, 18, color=T.MUTED)
-    rows = rows[:4]
+    rows = rows[:5]
     top0 = 310
-    gap = 24
-    rh = min(150, int((c.H * 0.52 - gap * (len(rows) - 1)) / max(1, len(rows))))
+    gap = 22
+    rh = min(150, int((c.H * 0.56 - gap * (len(rows) - 1)) / max(1, len(rows))))
     for i, row in enumerate(rows):
         y = top0 + i * (rh + gap)
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
@@ -379,4 +379,68 @@ def slide_list(c, date_iso, title, subtitle, rows):
             c.text(MX + 42, y + rh / 2 + 14, row["sub"], 16, color=T.MUTED)
         c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 40,
                color=row["color"], weight="bold", ha="right", font="mono")
+    footer(c)
+
+
+def slide_featured(c, date_iso, feat):
+    """„Aktie der Woche": Kursverlauf mit Kaufmarker + eingearbeiteten Signalen."""
+    header(c, date_iso)
+    ticker, ohlcv = feat["ticker"], feat["ohlcv"]
+    entry, ret = feat["entry"], feat["ret"]
+    ccol = T.GREEN if (ret or 0) >= 0 else T.RED
+    c.text(MX, 200, "AKTIE DER WOCHE", 22, color=T.BLUE, weight="bold")
+    c.text(MX, 232, ticker, 64, weight="bold")
+    if feat.get("name"):
+        c.text(MX + 12, 300, feat["name"], 20, color=T.MUTED)
+
+    # Fenster: ~25 Bars vor Kauf bis heute
+    idx = next((i for i, p in enumerate(ohlcv) if p["d"] >= feat["buy_date"]), 0)
+    sub = ohlcv[max(0, idx - 25):]
+    chart_h = int(c.H * 0.40)
+    ax = c.chart_axes(MX, 350, c.W - 2 * MX, chart_h)
+    _style_chart(ax)
+    xs = np.array([datetime.strptime(p["d"], "%Y-%m-%d").toordinal() for p in sub], float)
+    ys = np.array([p["c"] for p in sub])
+    ax.plot(xs, ys, color=T.TEXT, lw=2.5, zorder=3)
+    ax.fill_between(xs, ys, ys.min(), color=T.TEXT, alpha=0.05, zorder=1)
+
+    def _on(dt):
+        p = next((q for q in sub if q["d"] >= dt), None)
+        return (datetime.strptime(p["d"], "%Y-%m-%d").toordinal(), p["c"]) if p else None
+
+    # weitere Signale (klein, blau)
+    for s in feat.get("signals", []):
+        if s.get("signal_date") == entry["d"]:
+            continue
+        pt = _on(s.get("signal_date", ""))
+        if pt:
+            ax.scatter([pt[0]], [pt[1]], s=42, color=T.BLUE, zorder=4,
+                       edgecolor=T.BG, lw=1.5)
+
+    # Kaufmarker (groß, farbig)
+    ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
+    ax.axvline(ex, color=ccol, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([ex], [entry["c"]], s=130, color=ccol, zorder=5, edgecolor=T.BG, lw=2)
+    right = (ex - xs.min()) / (xs.max() - xs.min() + 1e-9) > 0.6
+    ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
+                xytext=(-12 if right else 12, 18), textcoords="offset points",
+                color=ccol, fontsize=15, fontweight="bold",
+                ha="right" if right else "left", fontfamily=_FONTS["sans"])
+
+    # Mini-Legende
+    ax.scatter([], [], s=42, color=T.BLUE, label="weiteres Signal")
+    c.text(MX, 350 + chart_h + 22, "● Kauf", 14, color=ccol, weight="bold")
+    if feat.get("signals"):
+        c.text(MX + 130, 350 + chart_h + 22, "● weitere Signale", 14, color=T.BLUE)
+
+    # KPI-Kacheln
+    ky = 350 + chart_h + 70
+    half = (c.W - 2 * MX - 30) // 2
+    c.tile(MX, ky, half, 110, color=T.PANEL)
+    c.text(MX + 30, ky + 26, "Wertzuwachs seit Kauf", 17, color=T.MUTED)
+    c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
+           color=ccol, weight="bold", font="mono")
+    c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
+    c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
+    c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
     footer(c)

@@ -12,24 +12,27 @@ pip install -r instagram/requirements.txt
 
 ## Nutzung
 
-**Wochenmodus (Hauptfall)** — aus deinem wikifolio-Wochenreport:
+**Wochenmodus (Hauptweg)** — aus den gespeicherten Daten (`instagram/data/`):
+
+```bash
+# 1) aktuellen Zertifikatswert der KW speichern
+python3 -m instagram.add_week --kw 22 --value 145.30
+# 2) Wochenpost erzeugen (Carousel 4:5 + Reel 9:16)
+python3 -m instagram.generate --kw 22
+```
+
+Erzeugt Hook, Performance vs. NASDAQ, Kennzahlen, Wochen-Historie,
+Stärkste Positionen, **Aktie der Woche** (rotierend) und CTA + `caption.txt`.
+NASDAQ/Alpha/Historie werden automatisch berechnet.
+→ Ablauf, Regeln & Datenpflege: **`instagram/PROMPT.md`**.
+
+**Alternativ** — vollständig manueller Wochenreport ohne Stores:
 
 ```bash
 python3 -m instagram.generate --report instagram/reports/KW21.example.json
 ```
 
-Erzeugt das komplette Wochen-Carousel (Hook, Performance, Kennzahlen,
-Wochen-Historie, Käufe, Top-Positionen, Verkäufe, CTA) +`caption.txt`.
-→ Ablauf & Regeln: **`instagram/PROMPT.md`**.
-
-**Auto-Modus** — Signale direkt aus den Repo-Daten (ohne Wochenreport):
-
-```bash
-python3 -m instagram.generate                      # beide Formate
-python3 -m instagram.generate --format carousel --signals 3
-```
-
-Output: `out/instagram/<DATUM>[_KW<NN>]/{carousel,reel}/NN_*.png` + `caption.txt`.
+Output: `out/instagram/<DATUM>_KW<NN>/{carousel,reel}/NN_*.png` + `caption.txt`.
 
 > ⚖️ **wikifolio-Regeln** (Trennung Musterdepot/Zertifikat, keine ISIN, kein
 > wikifolio-Logo, Pflicht-Disclaimer) sind in `PROMPT.md` dokumentiert und im
