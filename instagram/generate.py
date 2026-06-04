@@ -89,7 +89,7 @@ def caption_from_store(ctx):
         f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} | "
         f"NASDAQ: {render.fmt_pct(ctx['nasdaq_total'])} | "
         f"Alpha: {render.fmt_pct(ctx['alpha'])}\n"
-        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen über dem NASDAQ.\n"
+        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen den NASDAQ geschlagen.\n"
         f"Trades: {s['trades']} · Trefferquote {round(s['win_rate']*100)} % · "
         f"Profitfaktor {pf} · Ø Gewinn {render.fmt_pct(s['avg_win'])} · "
         f"Ø Verlust {render.fmt_pct(s['avg_loss'])}\n\n"

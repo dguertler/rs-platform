@@ -388,7 +388,7 @@ def slide_history(c, date_iso, history):
     c.text(MX, 200, "Mehrrendite ggü. NASDAQ-100", 40, weight="bold")
     vkey = "dev" if history and "dev" in history[0] else "perf"
     won = sum(1 for h in history if h[vkey] >= 0)
-    c.text(MX, 252, f"{won} von {len(history)} Wochen über dem NASDAQ",
+    c.text(MX, 252, f"{won} von {len(history)} Wochen den NASDAQ geschlagen",
            18, color=T.MUTED)
 
     chart_h = int(c.H * 0.46)

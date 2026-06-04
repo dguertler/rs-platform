@@ -122,15 +122,17 @@ def compute(kw, universe, benchmark, ref_date=None):
     # ── Wochen-Historie: wöchentliche Mehrrendite ggü. NASDAQ ────────────────
     history, beaten = [], 0
     prev_v, prev_n = start_value, nas_raw[0] if nas_raw else None
+    def _r1(x):                                    # auf 1 Nachkommastelle (% wie im Report)
+        return round(x * 100, 1) / 100
     for i, w in enumerate(weekly):
         wk = w["value"] / prev_v - 1
         if "nasdaq_pct" in w:                      # vom Nutzer hinterlegter NDX-Wert
             nwk = w["nasdaq_pct"]
         else:
             nwk = (nas_raw[i + 1] / prev_n - 1) if (prev_n and i + 1 < len(nas_raw)) else 0.0
-        dev = wk - nwk
+        dev = _r1(wk) - _r1(nwk)                    # Differenz der gerundeten Wochenwerte
         history.append({"kw": w["kw"], "perf": wk, "nasdaq": nwk, "dev": dev})
-        if dev > 0:
+        if dev >= 0:                               # Gleichstand zählt als „geschlagen" (wie Report)
             beaten += 1
         prev_v = w["value"]
         if i + 1 < len(nas_raw):
