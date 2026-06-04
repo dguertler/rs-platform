@@ -561,6 +561,89 @@ def save_last_breakout_batch(alerts):
         json.dump(payload, f)
 
 
+# Quelle → RS-JSON-Datei (im Actions-Lauf liegen die Dateien im Root)
+_SOURCE_FILE = {'QQQ': 'rs_full.json', 'DAX': 'rs_dax.json', 'SPX': 'rs_sp500.json'}
+
+
+def _build_alert(entry, source_label, top20_set, trigger_tf=None):
+    """Baut ein vollständiges Alert-Dict (inkl. Charts + News) für einen Ticker –
+    unabhängig von Trigger-/Dedup-Logik. Für Backfill der letzten Charge."""
+    ticker = entry['ticker']
+    score  = entry.get('score', 0)
+    info   = count_points(entry)
+
+    cur_w_date  = _breakout_date(entry.get('ohlcv_w',  []), info['struct_w'])
+    cur_d_date  = _breakout_date(entry.get('ohlcv',    []), info['struct_d'])
+    cur_h4_date = _breakout_date(entry.get('ohlcv_4h', []), info['struct_4h'])
+
+    w_b64  = render_chart(entry.get('ohlcv_w', []), ticker, 'Weekly (letzten 60 Kerzen)',
+                          gws_price=info['struct_w']['gws_price'] if info['struct_w'] else None,
+                          n_candles=60)
+    d_b64  = render_chart(entry.get('ohlcv', []), ticker, 'Daily (letzten 60 Kerzen)',
+                          gws_price=info['struct_d']['gws_price'] if info['struct_d'] else None,
+                          n_candles=60)
+    h4_b64 = render_chart(entry.get('ohlcv_4h', []), ticker, '4H (letzten 60 Kerzen)',
+                          gws_price=info['struct_4h']['gws_price'] if info['struct_4h'] else None,
+                          n_candles=60)
+    charts = []
+    if w_b64:  charts.append((w_b64,  'Weekly'))
+    if d_b64:  charts.append((d_b64,  'Daily'))
+    if h4_b64: charts.append((h4_b64, '4H'))
+
+    return {
+        'ticker':          ticker,
+        'score':           score,
+        'windows':         entry.get('windows', {}),
+        'info':            info,
+        'source':          source_label,
+        'charts':          charts,
+        'new_weekly':      trigger_tf == 'weekly',
+        'new_daily':       trigger_tf == 'daily',
+        'new_h4':          trigger_tf == '4h',
+        'weekly_bar_date': cur_w_date,
+        'daily_bar_date':  cur_d_date,
+        'h4_bar_date':     cur_h4_date,
+        'news':            fetch_news(ticker),
+        'in_top20':        ticker in top20_set,
+    }
+
+
+def backfill_last_batch(date_str):
+    """Rekonstruiert die Breakouts eines Datums aus signals.json (inkl. Charts)
+    und speichert sie als 'letzte Charge' – ohne erneuten Versand."""
+    signals = load_signals()
+    # Quelle → {ticker: trigger_tf}
+    wanted = {}
+    for ticker, lst in signals.items():
+        for s in lst:
+            if s.get('signal_date') == date_str:
+                wanted.setdefault(s.get('source', 'QQQ'), {})[ticker] = s.get('trigger_tf')
+
+    total = sum(len(v) for v in wanted.values())
+    print(f'Backfill {date_str}: {total} Ticker aus signals.json')
+
+    alerts = []
+    for source, tickmap in wanted.items():
+        path = _SOURCE_FILE.get(source)
+        if not path or not os.path.exists(path):
+            print(f'  RS-Datei für Quelle {source} fehlt ({path}) – übersprungen.')
+            continue
+        with open(path) as f:
+            data = json.load(f)
+        top20_set = set(data.get('top20', []))
+        by_ticker = {e['ticker']: e for e in data.get('data', [])}
+        for ticker, tf in tickmap.items():
+            entry = by_ticker.get(ticker)
+            if not entry:
+                print(f'  {ticker} nicht in {path} gefunden – übersprungen.')
+                continue
+            print(f'  Baue Alert: {ticker} ({source}, tf={tf})')
+            alerts.append(_build_alert(entry, source, top20_set, tf))
+
+    save_last_breakout_batch(alerts)
+    print(f'Backfill: {len(alerts)} Alerts in {LAST_BATCH_FILE} gespeichert.')
+
+
 # ── Hauptprogramm ───────────────────────────────────────────────
 
 def process_json(json_path, source_label, prev_states, today_str, signals=None):
@@ -767,6 +850,14 @@ def run_test_mode(smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
 
 def main():
     test_mode = '--test' in sys.argv or os.environ.get('ALERT_TEST_MODE', '') == 'true'
+
+    # Backfill-Modus: letzte Charge aus signals.json rekonstruieren (kein Versand)
+    backfill_date = os.environ.get('BACKFILL_LAST_BATCH', '').strip()
+    if backfill_date:
+        if backfill_date.lower() in ('today', 'heute'):
+            backfill_date = datetime.now().strftime('%Y-%m-%d')
+        backfill_last_batch(backfill_date)
+        return
 
     smtp_host = os.environ.get('SMTP_HOST', '')
     smtp_port = os.environ.get('SMTP_PORT', '587')

@@ -14,6 +14,11 @@ on:
         default: 'nein'
         type: choice
         options: ['nein', 'ja']
+      backfill_date:
+        description: 'Letzte Charge aus signals.json rekonstruieren (YYYY-MM-DD oder "today", leer = aus)'
+        required: false
+        default: ''
+        type: string
 
 jobs:
   check-alerts:
@@ -48,6 +53,7 @@ jobs:
           SMTP_PASS:         ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL_TO:    ${{ secrets.ALERT_EMAIL_TO }}
           ALERT_TEST_MODE:   ${{ github.event.inputs.test_mode == 'ja' && 'true' || 'false' }}
+          BACKFILL_LAST_BATCH: ${{ github.event.inputs.backfill_date }}
           GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
           FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
           TELEGRAM_TOKEN:    ${{ secrets.TELEGRAM_TOKEN }}

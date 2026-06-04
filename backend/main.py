@@ -221,7 +221,7 @@ def _set_telegram_webhook() -> None:
 
 
 # Verzögerung, bis die letzten Breakout-Alerts nach dem Willkommenstext kommen
-WELCOME_ALERTS_DELAY = 30
+WELCOME_ALERTS_DELAY = 5
 
 
 def _last_breakout_batch() -> dict | None:
@@ -246,7 +246,7 @@ def _welcome_payload() -> tuple[str, list, str]:
             "✅ <b>RS-Platform</b> verbunden!\n"
             "Du erhältst ab jetzt Breakout-, 4H- und Earnings-Alerts hier im Chat.\n\n"
             f"📨 Gleich bekommst du die <b>letzten Breakout-Alerts</b> "
-            f"(Stand: {when}) nachgereicht – in {WELCOME_ALERTS_DELAY} Sekunden."
+            f"(Stand: {when}) nachgereicht."
         )
     else:
         welcome = (
