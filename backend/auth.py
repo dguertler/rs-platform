@@ -177,8 +177,8 @@ def verify_password(plain: str, hashed: str) -> bool:
     return _bcrypt.checkpw(plain.encode("utf-8")[:72], hashed.encode("utf-8"))
 
 
-def create_token(email: str) -> str:
-    expire = datetime.utcnow() + timedelta(hours=TOKEN_EXPIRE_HOURS)
+def create_token(email: str, expire_hours: int = TOKEN_EXPIRE_HOURS) -> str:
+    expire = datetime.utcnow() + timedelta(hours=expire_hours)
     return jwt.encode({"sub": email, "exp": expire}, SECRET_KEY, algorithm=ALGORITHM)
 
 
@@ -241,6 +241,17 @@ def link_telegram_by_token(token: str, chat_id: str) -> str | None:
             (str(chat_id), email),
         )
     return email
+
+
+def get_telegram_recipients_with_email() -> list[tuple[str, str]]:
+    """(chat_id, email) aller aktiven User mit hinterlegter Chat-ID — Basis für
+    die Auto-Login-Deep-Links in den Telegram-Alerts."""
+    with sqlite3.connect(DB_PATH) as conn:
+        rows = conn.execute(
+            "SELECT telegram_chat_id, email FROM users "
+            "WHERE is_active=1 AND telegram_chat_id IS NOT NULL AND telegram_chat_id != ''"
+        ).fetchall()
+    return [(str(r[0]), r[1]) for r in rows]
 
 
 def get_all_telegram_chat_ids() -> list[str]:

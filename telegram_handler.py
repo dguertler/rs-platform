@@ -125,13 +125,58 @@ def _base_url():
     ).rstrip('/')
 
 
-def _dashboard(source):
-    base = _base_url()
+def _dashboard_path(source):
+    """Relativer Pfad + Label des passenden Dashboards (App-intern)."""
     if source == 'DAX':
-        return f'{base}/dax.html', 'DAX-Dashboard'
+        return '/dax.html', 'DAX-Dashboard'
     if source == 'SPX':
-        return f'{base}/sp500.html', 'S&amp;P 500-Dashboard'
-    return f'{base}/', 'Nasdaq-Dashboard'
+        return '/sp500.html', 'S&amp;P 500-Dashboard'
+    return '/', 'Nasdaq-Dashboard'
+
+
+def _magic(path, auth=None):
+    """Absolute URL zum Ziel `path` (z. B. '/dax.html' oder '/?openRating=NVDA').
+    Mit `auth`-Token läuft der Link über login.html und loggt den Empfänger im
+    (In-App-)Browser automatisch ein, bevor er zum Ziel weitergeleitet wird —
+    sonst der normale Pfad (manueller Login)."""
+    base = _base_url()
+    if not base:
+        return path
+    if auth:
+        return (f'{base}/login.html?auth={urllib.parse.quote(auth)}'
+                f'&next={urllib.parse.quote(path, safe="")}')
+    return f'{base}{path}'
+
+
+_recipient_tokens_cache = None
+
+
+def fetch_recipient_tokens():
+    """{chat_id: auth_token} der registrierten User für die Auto-Login-Links.
+    Nutzt denselben Endpoint wie die Empfänger-Auflösung; das Ergebnis wird
+    prozessweit gecacht (ein Alert-Lauf = ein Abruf)."""
+    global _recipient_tokens_cache
+    if _recipient_tokens_cache is not None:
+        return _recipient_tokens_cache
+    base = (os.environ.get('RS_API_URL') or os.environ.get('FRONTEND_URL') or '').rstrip('/')
+    key  = os.environ.get('ALERT_API_KEY', '')
+    if not base or not key:
+        _recipient_tokens_cache = {}
+        return _recipient_tokens_cache
+    try:
+        req = urllib.request.Request(
+            f'{base}/api/telegram/recipients',
+            headers={'X-Alert-Key': key},
+        )
+        with urllib.request.urlopen(req, timeout=20) as resp:
+            data = json.loads(resp.read())
+        _recipient_tokens_cache = {
+            str(k): v for k, v in (data.get('tokens') or {}).items() if v
+        }
+    except Exception as e:
+        print(f'  [Telegram] Token-Abruf fehlgeschlagen: {e}')
+        _recipient_tokens_cache = {}
+    return _recipient_tokens_cache
 
 
 def _news_lines(news, max_specific=3, max_general=2):
@@ -150,13 +195,12 @@ def _news_lines(news, max_specific=3, max_general=2):
     return ('\n' + '\n'.join(lines)) if lines else ''
 
 
-def _analyse_link(display_ticker):
+def _analyse_link(display_ticker, auth=None):
     """Gibt einen HTML-Link zur KI-Analyse zurück, oder ''."""
-    frontend_url = _base_url()
-    if not frontend_url:
+    if not _base_url():
         return ''
     ticker_param = urllib.parse.quote(display_ticker.replace('[TEST] ', '').strip())
-    url = f'{frontend_url}/?openRating={ticker_param}'
+    url = _magic(f'/?openRating={ticker_param}', auth)
     return f'\n📊 <a href="{url}">Zur {_esc(display_ticker)}-Analyse</a>'
 
 
@@ -203,23 +247,29 @@ def send_breakout_telegram(token, chat_id, alert):
     d_dot  = _dot(info.get('daily'),  alert.get('new_daily'))
     h4_dot = _dot(info.get('h4'),     alert.get('new_h4'))
 
-    dash_url, dash_label = _dashboard(source)
+    dash_path, dash_label = _dashboard_path(source)
     top20   = '  ✅ <b>TOP 20</b>' if alert.get('in_top20') else ''
     reentry = '  <i>↩ 4H Wiederkehr</i>' if is_reentry else ''
     today   = datetime.now().strftime('%d.%m.%Y')
 
-    text = (
+    header = (
         f'🔥 <b>{_esc(display)}</b> · {_esc(source)}{top20}\n'
         f'<b>{today}</b>{reentry}\n'
         f'RS-Score: <b>{score:.1f}</b>\n'
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
-        f'<a href="{dash_url}">Zum {_esc(dash_label)}</a>'
-        + _news_lines(alert.get('news'))
-        + _analyse_link(display)
     )
+    news = _news_lines(alert.get('news'))
 
+    tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
     for cid in recipients:
+        auth = tokens.get(str(cid))
+        text = (
+            header
+            + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
+            + news
+            + _analyse_link(display, auth)
+        )
         _send_charts(token, cid, charts)
         _post_json(token, 'sendMessage', {
             'chat_id':    cid,
@@ -251,7 +301,7 @@ def send_earnings_telegram(token, chat_id, alert):
     rev_yoy  = alert.get('revenue_growth_yoy')
     today    = datetime.now().strftime('%d.%m.%Y')
 
-    dash_url, dash_label = _dashboard(source)
+    dash_path, dash_label = _dashboard_path(source)
 
     rev_line = ''
     if rev_yoy is not None:
@@ -262,19 +312,25 @@ def send_earnings_telegram(token, chat_id, alert):
     if eps_est is not None and eps_act is not None:
         eps_line = f'\nEPS: Schätzung <b>{eps_est:.2f}</b> → Ist <b>{eps_act:.2f}</b>'
 
-    text = (
+    header = (
         f'📈 <b>{_esc(display)}</b> · {_esc(source)}\n'
         f'<b>{today}</b>\n'
         f'Kurssprung: <b>+{jump:.1f}%</b>  EPS-Surprise: <b>+{surprise:.1f}%</b>'
         f'{rev_line}{eps_line}\n'
         f'RS-Score: <b>{score:.1f}</b>\n'
-        f'<a href="{dash_url}">Zum {_esc(dash_label)}</a>'
-        + _news_lines(alert.get('news'))
-        + _analyse_link(display)
     )
+    news = _news_lines(alert.get('news'))
 
+    tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
     for cid in recipients:
+        auth = tokens.get(str(cid))
+        text = (
+            header
+            + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
+            + news
+            + _analyse_link(display, auth)
+        )
         _send_charts(token, cid, charts)
         _post_json(token, 'sendMessage', {
             'chat_id':    cid,

@@ -21,6 +21,7 @@ from auth import (
     create_reset_token, use_reset_token, get_all_users, create_user,
     get_watchlist, add_to_watchlist, remove_from_watchlist,
     get_telegram_chat_id, set_telegram_chat_id, get_all_telegram_chat_ids,
+    get_telegram_recipients_with_email,
     create_tg_link_token, link_telegram_by_token,
 )
 from news_handler import fetch_news
@@ -150,6 +151,9 @@ class TelegramRequest(BaseModel):
 # ── Telegram-Hilfsfunktionen ──────────────────────────────────────────────────
 
 ALERT_API_KEY      = os.environ.get("ALERT_API_KEY", "")
+# Gültigkeit der Auto-Login-Tokens in den Telegram-Deep-Links (Stunden).
+# Bewusst kürzer als die normale Session (7 Tage), da der Token im Chat steht.
+MAGIC_LINK_EXPIRE_HOURS = int(os.environ.get("MAGIC_LINK_EXPIRE_HOURS", "72"))
 # Mögliche Env-Namen für den Bot-Token (erster gefundener gewinnt)
 _TG_TOKEN_NAMES    = ("TELEGRAM_TOKEN", "TELEGRAM_BOT_TOKEN", "BOT_TOKEN", "TG_BOT_TOKEN")
 _bot_info: dict    = {}   # Cache für getMe
@@ -463,7 +467,16 @@ async def telegram_recipients(x_alert_key: str = Header(default="")):
     Geschützt durch den gemeinsamen ALERT_API_KEY (Header X-Alert-Key)."""
     if not ALERT_API_KEY or x_alert_key != ALERT_API_KEY:
         raise HTTPException(401, "Nicht autorisiert")
-    return {"chat_ids": get_all_telegram_chat_ids()}
+    # Pro Chat-ID einen kurzlebigen Auto-Login-Token mitliefern, damit der
+    # Telegram-Button direkt in die Plattform führt (ohne erneutes Anmelden im
+    # In-App-Browser). Tokens sind optional — fehlt einer, greift der normale
+    # Login-Flow.
+    tokens: dict[str, str] = {}
+    for chat_id, email in get_telegram_recipients_with_email():
+        if chat_id not in tokens:
+            tokens[chat_id] = create_token(email, MAGIC_LINK_EXPIRE_HOURS)
+    chat_ids = list(tokens.keys()) or get_all_telegram_chat_ids()
+    return {"chat_ids": chat_ids, "tokens": tokens}
 
 
 @app.post("/api/user/change-password")

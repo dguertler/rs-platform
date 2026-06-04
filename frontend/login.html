@@ -89,7 +89,32 @@
     </form>
   </div>
   <script>
-    if (localStorage.getItem('rs_token')) window.location.href = '/';
+    // Ziel-Pfad nach dem Login (z. B. aus dem Telegram-Deep-Link). Nur
+    // app-interne Pfade zulassen — schützt vor Open-Redirect.
+    var _params = new URLSearchParams(location.search);
+    var _next   = _params.get('next') || '/';
+    if (!/^\/(?!\/)/.test(_next)) _next = '/';
+
+    // Auto-Login per Deep-Link (?auth=<token>): Token verifizieren, übernehmen
+    // und direkt zum Ziel weiterleiten — kein manuelles Anmelden nötig.
+    var _auth = _params.get('auth');
+    if (_auth) {
+      document.body.style.visibility = 'hidden';
+      fetch('/api/user/me', { headers: { 'Authorization': 'Bearer ' + _auth } })
+        .then(function(r) { return r.ok ? r.json() : null; })
+        .then(function(d) {
+          if (d && d.email) {
+            localStorage.setItem('rs_token', _auth);
+            localStorage.setItem('rs_email', d.email);
+            location.replace(_next);
+          } else {
+            document.body.style.visibility = '';   // Token ungültig → Formular zeigen
+          }
+        })
+        .catch(function() { document.body.style.visibility = ''; });
+    } else if (localStorage.getItem('rs_token')) {
+      window.location.href = _next;
+    }
     document.getElementById('form').addEventListener('submit', async function(e) {
       e.preventDefault();
       var btn = document.getElementById('btn');
@@ -110,7 +135,7 @@
         if (!r.ok) throw new Error(data.detail || 'Login fehlgeschlagen');
         localStorage.setItem('rs_token', data.token);
         localStorage.setItem('rs_email', data.email);
-        window.location.href = '/';
+        window.location.href = _next;
       } catch(ex) {
         err.textContent = ex.message;
         err.style.display = 'block';
