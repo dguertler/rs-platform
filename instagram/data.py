@@ -43,9 +43,12 @@ def load_universe():
                 "score": e.get("score"),
                 "windows": e.get("windows", {}),
             }
-        # NASDAQ-Benchmark einmalig aus rs_full übernehmen
-        if benchmark is None and d.get("benchmark_ohlcv"):
-            benchmark = [(c["d"], c["c"]) for c in d["benchmark_ohlcv"]]
+        # NASDAQ-Benchmark einmalig aus rs_full übernehmen.
+        # NDX-Index (exakt) bevorzugen, sonst QQQ-ETF als Fallback.
+        if benchmark is None:
+            src = d.get("ndx_ohlcv") or d.get("benchmark_ohlcv")
+            if src:
+                benchmark = [(c["d"], c["c"]) for c in src]
     return universe, benchmark
 
 

@@ -92,11 +92,12 @@ Neue Käufe/Verkäufe → `holdings.json` / `trades.json` pflegen.
 In einer neuen Session reicht: „Folge instagram/CONTEXT.md, KW23-Wert ist X".
 
 ## 8. Offene Punkte / Entscheidungen
-- **NDX-Wochenwerte (7 vs. 6):** Die „X von 9 Wochen über NASDAQ" rechnet aus
-  dem **QQQ-ETF** (im Repo) = 6/9. Dein wikifolio-Report nutzt den **NASDAQ-100-
-  Index (NDX)** = 7/9 (eine Woche, KW16 oder KW20, lag nur −0,1…−0,2 % drunter).
-  Fix: in `wikifolio_history.json` je Woche `"nasdaq_pct": <NDX-Wochenrendite>`
-  ergänzen → dann 7/9 wie im Report. (Werte vom Nutzer nötig.)
+- **NASDAQ-Quelle (NDX vs. QQQ):** Es wird jetzt der echte **NASDAQ-100-Index
+  `^NDX`** verwendet (exakt wie im wikifolio-Report → 7/9 statt 6/9). `^NDX` wird
+  automatisch von `rs_colab.py` (Workflow `update_rs.yml`, täglich) mit nach
+  `data/rs_full.json` → `ndx_ohlcv` geladen. `store.py`/`data.py` bevorzugen
+  `ndx_ohlcv`, fallback QQQ (`benchmark_ohlcv`). Optionaler Override pro Woche
+  via `"nasdaq_pct"` in `wikifolio_history.json` bleibt möglich.
 - **Instagram-Handle:** aktuell kein @handle auf den Bildern (nur Markenname).
   Echten Handle in `config.json` → `account` eintragen, falls er erscheinen soll.
 

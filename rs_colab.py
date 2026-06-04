@@ -343,6 +343,21 @@ benchmark_ohlcv_w = extract_ohlcv_weekly(benchmark, raw_weekly)
 benchmark_ohlcv_d = extract_ohlcv_daily(benchmark, raw_daily)
 print(f"Benchmark {benchmark}: Weekly={len(benchmark_ohlcv_w)} Kerzen, Daily={len(benchmark_ohlcv_d)} Kerzen")
 
+# ── NASDAQ-100-Index (NDX) für exakten Vergleich (z.B. Instagram) ────────────
+# QQQ ist der ETF; ^NDX ist der echte Index. Wird hier zusätzlich mitgeladen,
+# damit die Mehrrendite-Berechnung exakt zum wikifolio-Report passt.
+try:
+    ndx_raw = yf.download("^NDX", period="2y", auto_adjust=True, progress=False)
+    if isinstance(ndx_raw.columns, pd.MultiIndex):
+        ndx_raw.columns = ndx_raw.columns.get_level_values(0)
+    ndx_close = ndx_raw["Close"].dropna()
+    ndx_ohlcv = [{"d": d.strftime("%Y-%m-%d"), "c": round(float(v), 2)}
+                 for d, v in ndx_close.items()]
+    print(f"NDX (^NDX): {len(ndx_ohlcv)} Tageskerzen")
+except Exception as _e:
+    print(f"NDX-Download fehlgeschlagen: {_e}")
+    ndx_ohlcv = []
+
 output = {
     "timestamp":         datetime.now().strftime("%Y-%m-%d %H:%M"),
     "benchmark":         "QQQ",
@@ -352,6 +367,7 @@ output = {
     "data":              data,
     "benchmark_ohlcv_w": benchmark_ohlcv_w,
     "benchmark_ohlcv":   benchmark_ohlcv_d,
+    "ndx_ohlcv":         ndx_ohlcv,
 }
 
 with open("rs_full.json", "w") as f:
