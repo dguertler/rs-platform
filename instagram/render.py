@@ -2,6 +2,12 @@
 Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selections-Design.
 Reines matplotlib, kein Browser nötig. Jede Slide funktioniert in beiden
 Formaten (Carousel 4:5 / Reel 9:16) über pixelbasierte Layout-Koordinaten.
+
+CHART-KONVENTIONEN (verbindlich):
+  - Marker-Texte stehen IMMER LINKS der gepunkteten (vertikalen) Linie
+    (ha="right", negativer x-Offset).
+  - Kauf-Marker = GRÜN (T.GREEN), Verkauf-Marker = ROT (T.RED).
+  - Renditewert (Kachel/Titel) bleibt vorzeichenabhängig grün/rot.
 """
 import os
 from datetime import datetime
@@ -444,7 +450,7 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     ticker, ohlcv = feat["ticker"], feat["ohlcv"]
     entry, ret = feat["entry"], feat["ret"]
     rcol = T.GREEN if (ret or 0) >= 0 else T.RED   # Farbe für Renditewert
-    mcol = T.BLUE                                   # Kauf = Signal -> blau
+    mcol = T.GREEN                                  # Kauf-Marker = grün
     c.text(MX, 200, label, 22, color=T.BLUE, weight="bold")
     c.text(MX, 232, ticker, 64, weight="bold")
     sub = feat.get("name", "")
@@ -520,8 +526,9 @@ def slide_trade(c, date_iso, t, label="GROSSER VERKAUF DER WOCHE"):
     header(c, date_iso)
     ticker, ohlcv = t["ticker"], t["ohlcv"]
     entry, exit_pt, ret = t["entry"], t["exit"], t["ret"]
-    rcol = T.GREEN if (ret or 0) >= 0 else T.RED
-    bcol = T.BLUE                                   # Kauf = blau
+    rcol = T.GREEN if (ret or 0) >= 0 else T.RED   # Renditewert (Vorzeichen)
+    bcol = T.GREEN                                  # Kauf-Marker = grün
+    scol = T.RED                                    # Verkauf-Marker = rot
     c.text(MX, 200, label, 22, color=rcol, weight="bold")
     c.text(MX, 232, ticker, 64, weight="bold")
     sub = t.get("name", "")
@@ -545,31 +552,31 @@ def slide_trade(c, date_iso, t, label="GROSSER VERKAUF DER WOCHE"):
     def _eur(v):
         return f"{v:.2f}".replace(".", ",") + " €" if v else ""
 
-    # Kauf-Marker (blau)
+    # Kauf-Marker (grün) – Label IMMER links der gepunkteten Linie
     bx = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(bx, color=bcol, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([bx], [entry["c"]], s=140, color=bcol, zorder=5, edgecolor=T.BG, lw=2)
     blab = f"Kauf {short_date(entry['d'])}"
     if t.get("buy_price_eur"):
         blab += "\n" + _eur(t["buy_price_eur"])
-    ax.annotate(blab, (bx, entry["c"]), xytext=(10, 16), textcoords="offset points",
-                color=bcol, fontsize=14, fontweight="bold", ha="left",
+    ax.annotate(blab, (bx, entry["c"]), xytext=(-10, 16), textcoords="offset points",
+                color=bcol, fontsize=14, fontweight="bold", ha="right",
                 fontfamily=_FONTS["sans"])
 
-    # Verkauf-Marker (grün/rot)
+    # Verkauf-Marker (rot) – Label IMMER links der gepunkteten Linie
     sx = datetime.strptime(exit_pt["d"], "%Y-%m-%d").toordinal()
-    ax.axvline(sx, color=rcol, lw=2, ls=(0, (4, 4)), zorder=2)
-    ax.scatter([sx], [exit_pt["c"]], s=140, color=rcol, zorder=5, edgecolor=T.BG, lw=2)
+    ax.axvline(sx, color=scol, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([sx], [exit_pt["c"]], s=140, color=scol, zorder=5, edgecolor=T.BG, lw=2)
     slab = f"Verkauf {short_date(t['sell_date'])}"
     if t.get("sell_price_eur"):
         slab += "\n" + _eur(t["sell_price_eur"])
     ax.annotate(slab, (sx, exit_pt["c"]), xytext=(-10, 16), textcoords="offset points",
-                color=rcol, fontsize=14, fontweight="bold", ha="right",
+                color=scol, fontsize=14, fontweight="bold", ha="right",
                 fontfamily=_FONTS["sans"])
 
     # Mini-Legende
     c.text(MX, 350 + chart_h + 22, "● Kauf", 14, color=bcol, weight="bold")
-    c.text(MX + 130, 350 + chart_h + 22, "● Verkauf", 14, color=rcol, weight="bold")
+    c.text(MX + 130, 350 + chart_h + 22, "● Verkauf", 14, color=scol, weight="bold")
 
     # Drei KPI-Kacheln: Rendite · Einstiegskurs · Verkaufskurs
     ky = 350 + chart_h + 70

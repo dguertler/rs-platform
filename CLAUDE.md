@@ -64,41 +64,13 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 Max. **5 Ticker pro Session** für optimale Kontext-Qualität.
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
-## Instagram-Workflow (@aialphaselections)
+## Instagram & wikifolio (Doku ausschließlich im Repo)
 
-Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
-`Instagram KW<NN>` / `Erstelle Instagram-Post`:
+Sämtliche Details zu Instagram-Post **und** wikifolio-News-Feed werden
+ausschließlich unter `instagram/` gepflegt — **nicht** in dieser Datei.
+Bei Triggern wie `Instagram KW<NN>`, `Wochenfeed KW<NN>`,
+„Erstelle Instagram-Post" / „wikifolio-Wochenbericht":
 
-1. **`instagram/CONTEXT.md` lesen** — zentrale Wissensdatei mit komplettem
-   Projektstand (Stammdaten, Regeln, Daten-Snapshot, offene Punkte). Danach
-   `instagram/PROMPT.md` für den detaillierten Ablauf und die **zwingenden
-   wikifolio-Regeln** (Trennung Depot/Zertifikat, keine ISIN, kein wikifolio-Logo,
-   Pflicht-Disclaimer).
-2. Aus dem Feed `instagram/reports/KW<NN>.json` füllen (Schema siehe PROMPT.md).
-3. Generieren: `python3 -m instagram.generate --report instagram/reports/KW<NN>.json`
-4. Slides aus `out/` dem Nutzer zeigen — **kein Auto-Upload**, manueller Post.
-
-Hauptformat **Carousel (4:5)**; Reel-Frames (9:16) entstehen parallel.
-Stories erst später (bei genügend Followern) — siehe Roadmap in PROMPT.md.
-
-**Großer Verkauf der Woche:** Wird eine Position mit |Rendite| ≥ 25 % realisiert,
-ersetzt deren Kauf-/Verkauf-Chart (Kauf- **und** Verkaufskurs eingezeichnet, inkl.
-realisierter Rendite) die „Aktie der Woche"; die „Weitere Positionen"-Slide entfällt
-dann automatisch. Dafür den Trade in `trades.json` mit
-`ticker/kw/buy_date/sell_date/buy_price_eur/sell_price_eur` anreichern.
-
-## wikifolio News-Feed (Wochenreport-Text)
-
-Getrennt vom Instagram-Post: der **Text-Wochenreport** für den wikifolio-News-Feed.
-Wenn der Nutzer `Wochenfeed KW<NN>` / „erstelle den wikifolio-Wochenbericht" schreibt:
-
-1. **`instagram/wikifolio_feed/FORMAT.md` lesen** — verbindliche Struktur, Ton und
-   wikifolio-Regeln. Referenz-Beispiele: `KW21.md`, `KW22.md`.
-2. Zahlen aus `instagram/data/` bzw. `store.compute(kw, …)` ziehen — **müssen mit den
-   Instagram-Slides übereinstimmen** (gleiche Quelle, gleicher NASDAQ-Stand).
-3. `instagram/wikifolio_feed/KW<NN>.md` exakt nach Schema schreiben.
-4. Dem Nutzer zeigen — **kein Auto-Post**, manuelles Einstellen im wikifolio-Feed.
-
-**NASDAQ-Korrektur:** Ist der NDX-Tageswert in der RS-JSON noch nicht enthalten oder
-soll überschrieben werden, `"nasdaq_value": <NDX-Stand>` in den KW-Eintrag von
-`wikifolio_history.json` setzen — greift für Wochen- **und** Gesamt-/Alpha-Rechnung.
+1. **`instagram/CONTEXT.md`** lesen (zentrale Wissensdatei, aktueller Stand).
+2. Dann je nach Aufgabe **`instagram/PROMPT.md`** (Instagram-Slides) bzw.
+   **`instagram/wikifolio_feed/FORMAT.md`** (wikifolio-News-Feed).

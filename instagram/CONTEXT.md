@@ -110,3 +110,10 @@ Jetzt: Carousel wöchentlich (manueller Upload). Später: Stories + Reel-Animati
 ## 10. Render-Technik
 matplotlib + Pillow (kein Browser nötig). Design/Farben/Disclaimer in `theme.py`.
 Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
+
+**Chart-Konventionen (verbindlich, in `render.py` umgesetzt):**
+- Marker-Texte stehen **immer links** der gepunkteten Linie (`ha="right"`, negativer Offset).
+- **Kauf = grün**, **Verkauf = rot** (Marker). Der Renditewert (Kachel/Titel) bleibt
+  vorzeichenabhängig grün/rot.
+- „Großer Verkauf" (|Rendite| ≥ 25 %): eigener Kauf-/Verkauf-Chart (`slide_trade`)
+  mit beiden Kursen; ersetzt „Aktie der Woche", „Weitere Positionen" entfällt.
