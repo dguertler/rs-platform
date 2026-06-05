@@ -639,7 +639,6 @@ def slide_strategy_cover(c, kicker, title, subtitle):
     sy = cy + 36 + len(lines) * 74 + 18
     for i, ln in enumerate(_wrap_px(c, subtitle, 26, target)):
         c.text(MX, sy + i * 40, ln, 26, color=T.MUTED)
-    _risk_box(c)
     footer(c)
 
 
@@ -656,7 +655,6 @@ def slide_strategy_phase(c, no, kicker, title, text):
     ty = top + 150
     for i, ln in enumerate(_wrap_px(c, text, 27, target)):
         c.text(MX, ty + i * 44, ln, 27, color=T.TEXT)
-    _risk_box(c)
     footer(c)
 
 

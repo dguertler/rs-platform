@@ -139,5 +139,7 @@ Erzeugen: `python3 -m instagram.generate --strategie`
 → `out/instagram/strategie/{carousel,reel}/*.png` + `caption.txt`.
 Slide-Typen: `slide_strategy_cover`, `slide_strategy_phase`, `slide_strategy_cta`.
 **wikifolio-konform:** kein „Zertifikat kaufen/investierbar", keine ISIN, immer
-„Musterdepot/wikifolio", Pflicht-Disclaimer auf jeder Slide. Hier DARF die RS-Methodik
-erklärt werden (anders als im Wochenpost).
+„Musterdepot/wikifolio". **Disclaimer-Konvention:** schmale Risikohinweis-Fußzeile
+(`footer()`) auf **jeder** Slide; die große RISIKOHINWEIS-Box (`_risk_box`) nur auf der
+**CTA-/letzten** Slide (genau wie im Wochenpost). Hier DARF die RS-Methodik erklärt
+werden (anders als im Wochenpost).
