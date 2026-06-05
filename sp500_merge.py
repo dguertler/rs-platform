@@ -42,7 +42,7 @@ for path in parts:
             combined_scores[date][ticker] = score
     combined_prev_week.update(part.get("prev_week_scores", {}))
 
-all_data.sort(key=lambda x: x.get("score", 0), reverse=True)
+all_data.sort(key=lambda x: x.get("score") if x.get("score") is not None else float("-inf"), reverse=True)
 top20 = [d["ticker"] for d in all_data[:20]]
 
 top20_history = {}

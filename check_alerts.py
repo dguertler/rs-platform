@@ -380,6 +380,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
         ticker         = alert['ticker']
         display_ticker = ticker.replace('.DE', '') if ticker.endswith('.DE') else ticker
         score    = alert['score']
+        score_str = f"{score:.1f}" if isinstance(score, (int, float)) else "–"
         info     = alert['info']
         source   = alert.get('source', 'QQQ')
 
@@ -410,7 +411,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
       <span style="font-size:16px;font-weight:bold;color:#fca5a5">{display_ticker}</span>
       <span style="font-size:11px;color:#64748b">({source})</span>
       <span style="margin-left:auto;font-size:11px;color:#94a3b8;display:flex;align-items:center;gap:6px">
-        {top20_badge}RS-Score:&nbsp;<strong style="color:#f1f5f9">{score:.1f}</strong>
+        {top20_badge}RS-Score:&nbsp;<strong style="color:#f1f5f9">{score_str}</strong>
       </span>
     </div>
     <div style="font-size:12px;margin-bottom:10px;letter-spacing:1px">
@@ -786,7 +787,7 @@ def run_test_mode(smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
 
     entry, info = best_entry
     ticker = entry['ticker']
-    score  = entry.get('score', 0)
+    score  = entry.get('score') or 0
     print(f'Test-Aktie: {ticker}  ({best_points} Punkte, Score {score:.1f})')
 
     # Charts: Weekly → Daily → 4H

@@ -239,7 +239,8 @@ def send_breakout_telegram(token, chat_id, alert):
     raw_ticker = alert['ticker'].replace('[TEST] ', '')
     display    = raw_ticker.replace('.DE', '') if raw_ticker.endswith('.DE') else raw_ticker
     source     = alert.get('source', 'QQQ')
-    score      = alert.get('score', 0)
+    score      = alert.get('score')
+    score_str  = f'{score:.1f}' if isinstance(score, (int, float)) else '–'
     info       = alert.get('info', {})
     is_reentry = alert.get('reentry', False)
 
@@ -255,7 +256,7 @@ def send_breakout_telegram(token, chat_id, alert):
     header = (
         f'🔥 <b>{_esc(display)}</b> · {_esc(source)}{top20}\n'
         f'<b>{today}</b>{reentry}\n'
-        f'RS-Score: <b>{score:.1f}</b>\n'
+        f'RS-Score: <b>{score_str}</b>\n'
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
     )
     news = _news_lines(alert.get('news'))
@@ -293,9 +294,10 @@ def send_earnings_telegram(token, chat_id, alert):
     ticker  = alert['ticker']
     display = ticker.replace('.DE', '') if ticker.endswith('.DE') else ticker
     source  = alert.get('source', 'QQQ')
-    score   = alert.get('score', 0)
-    jump    = alert.get('jump_pct', 0) * 100
-    surprise = alert.get('surprise_pct', 0)
+    score   = alert.get('score')
+    score_str = f'{score:.1f}' if isinstance(score, (int, float)) else '–'
+    jump    = (alert.get('jump_pct') or 0) * 100
+    surprise = alert.get('surprise_pct') or 0
     eps_est  = alert.get('eps_estimate')
     eps_act  = alert.get('eps_actual')
     rev_yoy  = alert.get('revenue_growth_yoy')
@@ -317,7 +319,7 @@ def send_earnings_telegram(token, chat_id, alert):
         f'<b>{today}</b>\n'
         f'Kurssprung: <b>+{jump:.1f}%</b>  EPS-Surprise: <b>+{surprise:.1f}%</b>'
         f'{rev_line}{eps_line}\n'
-        f'RS-Score: <b>{score:.1f}</b>\n'
+        f'RS-Score: <b>{score_str}</b>\n'
     )
     news = _news_lines(alert.get('news'))
 

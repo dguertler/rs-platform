@@ -321,6 +321,7 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
         display  = ticker.replace('.DE', '') if ticker.endswith('.DE') else ticker
         source   = a['source']
         score    = a['score']
+        score_str = f"{score:.1f}" if isinstance(score, (int, float)) else "–"
         jump_pct = a['jump_pct'] * 100
         surprise = a['surprise_pct']
         eps_est  = a['eps_estimate']
@@ -355,7 +356,7 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
       <span style="font-size:16px;font-weight:bold;color:#86efac">{display}</span>
       <span style="font-size:11px;color:#64748b">({source})</span>
       <span style="margin-left:auto;font-size:11px;color:#94a3b8">
-        RS-Score:&nbsp;<strong style="color:#f1f5f9">{score:.1f}</strong>
+        RS-Score:&nbsp;<strong style="color:#f1f5f9">{score_str}</strong>
       </span>
     </div>
     <div style="font-size:12px;margin-bottom:8px;display:flex;gap:24px">
@@ -553,7 +554,7 @@ def main():
                 'news':               news,
             })
 
-    all_alerts.sort(key=lambda a: a['score'], reverse=True)
+    all_alerts.sort(key=lambda a: a['score'] if a.get('score') is not None else float("-inf"), reverse=True)
     print(f'\nEarnings-Alerts gesamt: {len(all_alerts)}')
 
     if all_alerts:
