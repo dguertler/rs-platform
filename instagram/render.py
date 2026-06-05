@@ -163,6 +163,35 @@ def _justify_line(c, x, top, words, size, color, target_w, font="sans"):
         cx += ww + gap
 
 
+def _wrap_px(c, text, size, target_w, font="sans"):
+    """Umbruch nach Pixelbreite: packt je Zeile so viele Wörter wie möglich, bis
+    target_w (px) erreicht ist. Dadurch sind die Zeilen voll und der Blocksatz
+    erzeugt nur minimale Lücken (statt großer Abstände bei zeichen-basiertem Wrap)."""
+    try:
+        r = c.fig.canvas.get_renderer()
+    except Exception:
+        c.fig.canvas.draw()
+        r = c.fig.canvas.get_renderer()
+    pt = size * 72.0 / T.DPI
+
+    def wpx(s):
+        t = c.ax.text(0, 0, s, fontsize=pt, fontfamily=_FONTS[font])
+        bb = t.get_window_extent(renderer=r)
+        t.remove()
+        return bb.width
+
+    lines, cur = [], []
+    for w in text.split():
+        if cur and wpx(" ".join(cur + [w])) > target_w:
+            lines.append(" ".join(cur))
+            cur = [w]
+        else:
+            cur.append(w)
+    if cur:
+        lines.append(" ".join(cur))
+    return lines
+
+
 # ── Slides ───────────────────────────────────────────────────────────────────────
 def slide_hook(c, date_iso, perf_ret, nasdaq_ret, period_label):
     header(c, date_iso)
@@ -319,7 +348,6 @@ def slide_signal(c, date_iso, ticker, sig, ret, ohlcv, entry):
 
 
 def slide_cta(c, date_iso):
-    import textwrap
     header(c, date_iso)
     cy = int(c.H * 0.30)
     c.text(MX, cy, "Folge für wöchentliche", 50, weight="bold")
@@ -328,14 +356,14 @@ def slide_cta(c, date_iso):
     c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
 
     # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=104)
+    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
+    body = _wrap_px(c, T.DISCLAIMER_LONG.split("\n", 1)[1], 15, target_w)
     line_h = 30
     panel_h = 74 + (len(body) - 1) * line_h + 42
     panel_bottom = c.H - 175
     panel_top = panel_bottom - panel_h
     c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
     c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
     for i, ln in enumerate(body):
         ty = panel_top + 74 + i * line_h
         if i < len(body) - 1:             # alle Zeilen außer der letzten: Blocksatz

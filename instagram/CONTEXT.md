@@ -82,7 +82,7 @@ Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · 
 mit Chart-Metadaten in `trades.json`). Kennzahlen KW23: 26 Trades, Trefferquote 77 %,
 Profitfaktor 12,4, Ø Gewinn +24,5 %, Ø Verlust −6,6 % (inkl. offener Positionen).
 **Großer Verkauf KW23 = AMD +69,7 %** → eigener Kauf-/Verkauf-Chart (ersetzt
-„Aktie der Woche", „Weitere Positionen" entfällt).
+„Weitere Positionen", Newcomer entfällt; „Aktie der Woche" = MU bleibt).
 
 ## 7. Wöchentlicher Ablauf (Kurzform)
 ```bash
@@ -116,4 +116,7 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
 - **Kauf = grün**, **Verkauf = rot** (Marker). Der Renditewert (Kachel/Titel) bleibt
   vorzeichenabhängig grün/rot.
 - „Großer Verkauf" (|Rendite| ≥ 25 %): eigener Kauf-/Verkauf-Chart (`slide_trade`)
-  mit beiden Kursen; ersetzt „Aktie der Woche", „Weitere Positionen" entfällt.
+  mit beiden Kursen; ersetzt die **„Weitere Positionen"**-Slide und unterdrückt den
+  **Newcomer**. Die rotierende **„Aktie der Woche" bleibt** erhalten.
+- Risikohinweis-Box (`slide_cta`): Zeilen werden **pixelbasiert** gefüllt
+  (`_wrap_px`), damit der Blocksatz keine großen Lücken erzeugt.

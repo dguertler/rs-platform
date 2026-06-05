@@ -50,18 +50,18 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
-    # 4) Großer Verkauf der Woche -> Kauf-/Verkauf-Chart ERSETZT die „Aktie der
-    #    Woche" und die „Weitere Positionen"-Slide entfaellt. Sonst Normalfall.
+    # 4) Aktie der Woche (Rotation) — bleibt IMMER erhalten (z. B. MU).
+    if ctx["featured"]["entry"]:
+        emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
+             lambda c: render.slide_featured(c, di, ctx["featured"]))
+    # 5) Großer Verkauf der Woche -> Kauf-/Verkauf-Chart ERSETZT die „Weitere
+    #    Positionen"-Slide UND unterdrueckt den Newcomer. Sonst Normalfall.
     if ctx.get("big_sell"):
         bs = ctx["big_sell"]
         emit(f"verkauf_{bs['ticker'].replace('.', '_')}",
              lambda c: render.slide_trade(c, di, bs))
     else:
-        # 4a) Aktie der Woche (Rotation)
-        if ctx["featured"]["entry"]:
-            emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
-                 lambda c: render.slide_featured(c, di, ctx["featured"]))
-        # 4b) Weitere Positionen (alle außerhalb der Top-5)
+        # 5a) Weitere Positionen (alle außerhalb der Top-5)
         if ctx.get("rest_holdings"):
             rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                      "value": render.fmt_pct(t["ret"]),
@@ -69,10 +69,10 @@ def build_from_store(fmt, ctx, outdir):
                     for t in ctx["rest_holdings"]]
             emit("weitere", lambda c: render.slide_list(
                 c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
-    # 5) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
-    if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
-        emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
-             lambda c: render.slide_featured(c, di, ctx["newcomer"], label="NEWCOMER"))
+        # 5b) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
+        if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
+            emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
+                 lambda c: render.slide_featured(c, di, ctx["newcomer"], label="NEWCOMER"))
     # 6) CTA + Risikohinweis
     emit("cta", lambda c: render.slide_cta(c, di))
     return saved
