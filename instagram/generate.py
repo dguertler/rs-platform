@@ -131,6 +131,26 @@ def _emitter(fmt, outdir, saved):
     return emit
 
 
+def build_strategy(fmt, data, outdir):
+    """Evergreen-Strategie-Post: Cover + 3 Phasen + CTA."""
+    saved = []
+    emit = _emitter(fmt, outdir, saved)
+    cov = data["cover"]
+    emit("cover", lambda c: render.slide_strategy_cover(
+        c, cov["kicker"], cov["title"], cov["subtitle"]))
+    for p in data["phases"]:
+        emit(f"phase{p['no']}", lambda c, p=p: render.slide_strategy_phase(
+            c, p["no"], p["kicker"], p["title"], p["text"]))
+    cta = data["cta"]
+    emit("cta", lambda c: render.slide_strategy_cta(
+        c, cta["title"], cta["hl_label"], cta["hl_value"], cta["text"]))
+    return saved
+
+
+def strategy_caption(data):
+    return data["caption"].rstrip() + "\n\n" + data["hashtags"]
+
+
 def build_weekly(fmt, r, benchmark, date_iso, outdir):
     """Wochenreport-Carousel aus instagram/reports/KW<NN>.json."""
     saved = []
@@ -256,8 +276,28 @@ def main():
     ap.add_argument("--signals", type=int, default=2)
     ap.add_argument("--kw", type=int, help="Kalenderwoche – baut den Wochenpost aus instagram/data/")
     ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
+    ap.add_argument("--strategie", action="store_true",
+                    help="Evergreen-Strategie-/Intro-Post aus instagram/strategy.json")
     ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
     args = ap.parse_args()
+
+    # ── Strategie-/Intro-Post (evergreen, ohne Marktdaten) ────────────────────
+    if args.strategie:
+        import json
+        with open(os.path.join(ROOT, "instagram", "strategy.json")) as f:
+            sdata = json.load(f)
+        base = os.path.join(ROOT, "out", "instagram", "strategie")
+        fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
+        all_saved = []
+        for fmt in fmts:
+            all_saved += build_strategy(fmt, sdata, os.path.join(base, fmt))
+        os.makedirs(base, exist_ok=True)
+        with open(os.path.join(base, "caption.txt"), "w") as f:
+            f.write(strategy_caption(sdata))
+        print(f"✓ {len(all_saved)} Strategie-Slides in {base}")
+        for p in all_saved:
+            print("  ", os.path.relpath(p, ROOT))
+        return
 
     universe, benchmark = data.load_universe()
 

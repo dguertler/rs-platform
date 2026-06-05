@@ -192,6 +192,24 @@ def _wrap_px(c, text, size, target_w, font="sans"):
     return lines
 
 
+def _risk_box(c):
+    """Pflicht-Risikohinweis als Box am unteren Rand (Blocksatz, pixelgefüllt)."""
+    target_w = (c.W - 2 * MX) - 72
+    body = _wrap_px(c, T.DISCLAIMER_LONG.split("\n", 1)[1], 15, target_w)
+    line_h = 30
+    panel_h = 74 + (len(body) - 1) * line_h + 42
+    panel_bottom = c.H - 175
+    panel_top = panel_bottom - panel_h
+    c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
+    c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
+    for i, ln in enumerate(body):
+        ty = panel_top + 74 + i * line_h
+        if i < len(body) - 1:
+            _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
+        else:
+            c.text(MX + 36, ty, ln, 15, color=T.MUTED)
+
+
 # ── Slides ───────────────────────────────────────────────────────────────────────
 def slide_hook(c, date_iso, perf_ret, nasdaq_ret, period_label):
     header(c, date_iso)
@@ -354,22 +372,7 @@ def slide_cta(c, date_iso):
     c.text(MX, cy + 64, "Updates & Signale.", 50, weight="bold")
     c.text(MX, cy + 150, "AI Alpha Selection", 30, color=T.BLUE, weight="bold")
     c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
-
-    # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
-    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
-    body = _wrap_px(c, T.DISCLAIMER_LONG.split("\n", 1)[1], 15, target_w)
-    line_h = 30
-    panel_h = 74 + (len(body) - 1) * line_h + 42
-    panel_bottom = c.H - 175
-    panel_top = panel_bottom - panel_h
-    c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
-    c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    for i, ln in enumerate(body):
-        ty = panel_top + 74 + i * line_h
-        if i < len(body) - 1:             # alle Zeilen außer der letzten: Blocksatz
-            _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
-        else:
-            c.text(MX + 36, ty, ln, 15, color=T.MUTED)
+    _risk_box(c)
     footer(c)
 
 
@@ -620,4 +623,55 @@ def slide_trade(c, date_iso, t, label="GROSSER VERKAUF DER WOCHE"):
         c.tile(x, ky, tw, 110, color=T.PANEL)
         c.text(x + 24, ky + 26, lab, 16, color=T.MUTED)
         c.text(x + 24, ky + 54, val, 32, color=col, weight="bold", font="mono")
+    footer(c)
+
+
+# ── Strategie-/Intro-Post (evergreen) ──────────────────────────────────────────
+def slide_strategy_cover(c, kicker, title, subtitle):
+    """Cover des Strategie-Posts: Kicker + großer (umbrechender) Titel + Untertitel."""
+    header(c, "")
+    target = c.W - 2 * MX
+    cy = int(c.H * 0.30)
+    c.text(MX, cy - 8, kicker, 22, color=T.BLUE, weight="bold")
+    lines = _wrap_px(c, title, 60, target)
+    for i, ln in enumerate(lines):
+        c.text(MX, cy + 36 + i * 74, ln, 60, weight="bold")
+    sy = cy + 36 + len(lines) * 74 + 18
+    for i, ln in enumerate(_wrap_px(c, subtitle, 26, target)):
+        c.text(MX, sy + i * 40, ln, 26, color=T.MUTED)
+    _risk_box(c)
+    footer(c)
+
+
+def slide_strategy_phase(c, no, kicker, title, text):
+    """Phasen-Slide: Nummern-Badge + Kicker/Titel, darunter Fließtext (umgebrochen)."""
+    header(c, "")
+    top = 210
+    c.tile(MX, top, 88, 88, color=T.PANEL, radius=22)
+    c.text(MX + 44, top + 20, str(no), 50, color=T.BLUE, weight="bold",
+           font="mono", ha="center")
+    c.text(MX + 116, top + 10, kicker, 20, color=T.MUTED, weight="bold")
+    c.text(MX + 116, top + 40, title, 38, weight="bold")
+    target = c.W - 2 * MX
+    ty = top + 150
+    for i, ln in enumerate(_wrap_px(c, text, 27, target)):
+        c.text(MX, ty + i * 44, ln, 27, color=T.TEXT)
+    _risk_box(c)
+    footer(c)
+
+
+def slide_strategy_cta(c, title, hl_label, hl_value, text):
+    """CTA-Slide des Strategie-Posts: Titel + Performance-Chip + Fließtext + Risikobox."""
+    header(c, "")
+    cy = int(c.H * 0.22)
+    c.text(MX, cy, title, 50, weight="bold")
+    chip_top = cy + 86
+    c.tile(MX, chip_top, c.W - 2 * MX, 132, color=T.PANEL)
+    c.text(MX + 36, chip_top + 28, hl_label, 19, color=T.MUTED)
+    c.text(MX + 36, chip_top + 60, hl_value, 50, color=T.GREEN, weight="bold", font="mono")
+    target = c.W - 2 * MX
+    ty = chip_top + 176
+    for i, ln in enumerate(_wrap_px(c, text, 24, target)):
+        c.text(MX, ty + i * 38, ln, 24, color=T.TEXT)
+    _risk_box(c)
     footer(c)

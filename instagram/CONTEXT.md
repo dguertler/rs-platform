@@ -129,5 +129,15 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
   **Newcomer**. Die rotierende **„Aktie der Woche" bleibt** erhalten. Voraussetzung:
   der Trade steht in `trades.json`/Snapshot mit `ticker/kw/buy_date/sell_date/
   buy_price_eur/sell_price_eur`.
-- Risikohinweis-Box (`slide_cta`): Zeilen werden **pixelbasiert** gefüllt
-  (`_wrap_px`), damit der Blocksatz keine großen Lücken erzeugt.
+- Risikohinweis-Box (`_risk_box`, genutzt von `slide_cta`/Strategie-CTA): Zeilen werden
+  **pixelbasiert** gefüllt (`_wrap_px`), damit der Blocksatz keine großen Lücken erzeugt.
+
+## 11. Strategie-/Intro-Post (evergreen)
+Allgemeiner Erklär-Post zur Handelsstrategie (kein Wochenbezug). Inhalt editierbar in
+`instagram/strategy.json` (Cover · 3 Phasen · CTA + caption + hashtags).
+Erzeugen: `python3 -m instagram.generate --strategie`
+→ `out/instagram/strategie/{carousel,reel}/*.png` + `caption.txt`.
+Slide-Typen: `slide_strategy_cover`, `slide_strategy_phase`, `slide_strategy_cta`.
+**wikifolio-konform:** kein „Zertifikat kaufen/investierbar", keine ISIN, immer
+„Musterdepot/wikifolio", Pflicht-Disclaimer auf jeder Slide. Hier DARF die RS-Methodik
+erklärt werden (anders als im Wochenpost).
