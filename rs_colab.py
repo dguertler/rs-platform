@@ -61,7 +61,12 @@ print(f"Schritt 1: RS-Berechnung für alle {len(tickers)} Aktien...")
 all_tickers = tickers + [benchmark]
 raw = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
 close = raw["Close"]
-qqq = close[benchmark]
+qqq = close[benchmark].dropna()
+if len(qqq) < 60:
+    raise RuntimeError(
+        f"Benchmark {benchmark}: nur {len(qqq)} gueltige Kurse im Batch-Download – "
+        f"Abbruch, damit keine leeren RS-Scores committet werden."
+    )
 
 def _calc_rs(s, qqq_s):
     windows_result = {}
@@ -108,7 +113,17 @@ if missing_rs:
         except Exception as e:
             print(f"    {t}: Fehler – {e}")
 
-all_results.sort(key=lambda x: x["score"], reverse=True)
+# Schutz: bei fehlerhafter Datenquelle (z.B. NaN-Benchmark) nicht stillschweigend
+# leere Scores committen, sondern abbrechen -> Workflow schlaegt fehl + Fehler-Mail,
+# bestehende gute Daten bleiben erhalten.
+_valid = sum(1 for r in all_results if r["score"] is not None and r["score"] == r["score"])
+if _valid < len(tickers) * 0.5:
+    raise RuntimeError(
+        f"Nur {_valid}/{len(tickers)} gueltige RS-Scores berechnet – Abbruch "
+        f"(Datenquelle fehlerhaft, keine NaN-Daten committen)."
+    )
+
+all_results.sort(key=lambda x: (x["score"] is not None and x["score"] == x["score"], x["score"]), reverse=True)
 top20 = [r["ticker"] for r in all_results[:20]]
 print(f"Top 20: {', '.join(top20)}")
 

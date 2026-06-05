@@ -74,7 +74,12 @@ print(f"Teil 2: RS-Berechnung für {len(tickers)} S&P 500-Aktien (ohne QQQ-Werte
 all_tickers = tickers + [benchmark]
 raw   = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
 close = raw["Close"]
-spx   = close[benchmark]
+spx   = close[benchmark].dropna()
+if len(spx) < 60:
+    raise RuntimeError(
+        f"Benchmark {benchmark}: nur {len(spx)} gueltige Kurse im Batch-Download – "
+        f"Abbruch, damit keine leeren RS-Scores committet werden."
+    )
 
 all_results = []
 for ticker in tickers:
@@ -93,7 +98,16 @@ for ticker in tickers:
     score = round(sum(v for v in windows_result.values() if v is not None), 2)
     all_results.append({"ticker": ticker, "score": score, "windows": windows_result})
 
-all_results.sort(key=lambda x: x["score"], reverse=True)
+# Schutz: bei fehlerhafter Datenquelle (z.B. NaN-Benchmark) nicht stillschweigend
+# leere Scores committen, sondern abbrechen -> Workflow schlaegt fehl + Fehler-Mail.
+_valid = sum(1 for r in all_results if r["score"] is not None and r["score"] == r["score"])
+if _valid < len(tickers) * 0.5:
+    raise RuntimeError(
+        f"Nur {_valid}/{len(tickers)} gueltige RS-Scores berechnet – Abbruch "
+        f"(Datenquelle fehlerhaft, keine NaN-Daten committen)."
+    )
+
+all_results.sort(key=lambda x: (x["score"] is not None and x["score"] == x["score"], x["score"]), reverse=True)
 print(f"Top 5: {', '.join(r['ticker'] for r in all_results[:5])}")
 
 end_date     = datetime.now()
