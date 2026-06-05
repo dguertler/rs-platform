@@ -87,8 +87,9 @@ Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · 
 **AMD +69,7 · Lam Research +29,9 · NXP −6,0 · IBM −12,6** (alle in %, KW23-Verkäufe
 mit Chart-Metadaten in `trades.json`). Kennzahlen KW23: 26 Trades, Trefferquote 77 %,
 Profitfaktor 12,4, Ø Gewinn +24,5 %, Ø Verlust −6,6 % (inkl. offener Positionen).
-**Großer Verkauf KW23 = AMD +69,7 %** → eigener Kauf-/Verkauf-Chart (ersetzt
-„Weitere Positionen", Newcomer entfällt; „Aktie der Woche" = MU bleibt).
+**Große Verkäufe KW23 (Gewinn ≥ 10 %) = AMD +69,7 % und Lam Research +29,9 %** →
+je ein Kauf-/Verkauf-Chart (ersetzen „Weitere Positionen", Newcomer entfällt;
+„Aktie der Woche" = MU bleibt). NXP −6 % / IBM −12,6 % erhalten keinen Slide (Verluste).
 
 ## 7. Wöchentlicher Ablauf (Kurzform)
 ```bash
@@ -121,8 +122,12 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
 - Marker-Texte stehen **immer links** der gepunkteten Linie (`ha="right"`, negativer Offset).
 - **Kauf = grün**, **Verkauf = rot** (Marker). Der Renditewert (Kachel/Titel) bleibt
   vorzeichenabhängig grün/rot.
-- „Großer Verkauf" (|Rendite| ≥ 25 %): eigener Kauf-/Verkauf-Chart (`slide_trade`)
-  mit beiden Kursen; ersetzt die **„Weitere Positionen"**-Slide und unterdrückt den
-  **Newcomer**. Die rotierende **„Aktie der Woche" bleibt** erhalten.
+- „Große Verkäufe" (realisierter **Gewinn ≥ 10 %**, `SELL_SLIDE_THRESHOLD`): **jeder**
+  qualifizierende Gewinner der Woche bekommt einen eigenen Kauf-/Verkauf-Chart
+  (`slide_trade`, mit beiden Kursen) — also ggf. **mehrere** Slides, sortiert nach
+  Rendite. Sie ersetzen die **„Weitere Positionen"**-Slide und unterdrücken den
+  **Newcomer**. Die rotierende **„Aktie der Woche" bleibt** erhalten. Voraussetzung:
+  der Trade steht in `trades.json`/Snapshot mit `ticker/kw/buy_date/sell_date/
+  buy_price_eur/sell_price_eur`.
 - Risikohinweis-Box (`slide_cta`): Zeilen werden **pixelbasiert** gefüllt
   (`_wrap_px`), damit der Blocksatz keine großen Lücken erzeugt.

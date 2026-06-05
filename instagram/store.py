@@ -23,9 +23,9 @@ from . import data, report
 
 DATA_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 
-# Ab dieser absoluten Rendite gilt ein realisierter Trade als „grosser Verkauf"
-# und bekommt einen eigenen Kauf-/Verkauf-Chart (statt „Aktie der Woche").
-BIG_SELL_THRESHOLD = 0.25
+# Ab diesem realisierten GEWINN bekommt ein Verkauf der Woche einen eigenen
+# Kauf-/Verkauf-Chart. Mehrere Gewinner >= Schwelle ergeben mehrere Slides.
+SELL_SLIDE_THRESHOLD = 0.10
 
 
 def _load(name):
@@ -79,35 +79,37 @@ def _snapshot(kw):
     return None
 
 
-def _big_sell(universe, closed_raw, kw, as_of=None):
-    """Groesster realisierter Trade der laufenden KW (|ret| >= Schwelle) mit
-    genug Chart-Metadaten, um Kauf UND Verkauf einzuzeichnen. Sonst None."""
-    cand = [
-        t for t in closed_raw
-        if t.get("kw") == kw and t.get("ticker") in universe
-        and t.get("buy_date") and universe[t["ticker"]]["ohlcv"]
-        and abs(t.get("ret", 0)) >= BIG_SELL_THRESHOLD
-    ]
-    if not cand:
-        return None
-    t = max(cand, key=lambda x: abs(x["ret"]))
-    ohlcv = universe[t["ticker"]]["ohlcv"]
-    if as_of:
-        ohlcv = [c for c in ohlcv if c["d"] <= as_of]
-        if not ohlcv:
-            return None
-    entry = next((c for c in ohlcv if c["d"] >= t["buy_date"]), None)
-    sell_date = t.get("sell_date") or ohlcv[-1]["d"]
-    exit_pt = next((c for c in reversed(ohlcv) if c["d"] <= sell_date), ohlcv[-1])
-    if not entry:
-        return None
-    return {
-        "ticker": t["ticker"], "name": t.get("name", ""),
-        "buy_date": t["buy_date"], "sell_date": sell_date,
-        "buy_price_eur": t.get("buy_price_eur"),
-        "sell_price_eur": t.get("sell_price_eur"),
-        "ret": t["ret"], "ohlcv": ohlcv, "entry": entry, "exit": exit_pt,
-    }
+def _big_sells(universe, closed_raw, kw, as_of=None):
+    """ALLE realisierten Trades der laufenden KW mit Gewinn >= Schwelle und genug
+    Chart-Metadaten (Kauf/Verkauf). Sortiert nach Rendite absteigend → je ein
+    eigener Kauf-/Verkauf-Chart. Leere Liste, wenn keiner qualifiziert."""
+    out = []
+    for t in closed_raw:
+        if t.get("kw") != kw or t.get("ticker") not in universe:
+            continue
+        if not t.get("buy_date") or not universe[t["ticker"]]["ohlcv"]:
+            continue
+        if t.get("ret", 0) < SELL_SLIDE_THRESHOLD:
+            continue
+        ohlcv = universe[t["ticker"]]["ohlcv"]
+        if as_of:
+            ohlcv = [c for c in ohlcv if c["d"] <= as_of]
+            if not ohlcv:
+                continue
+        entry = next((c for c in ohlcv if c["d"] >= t["buy_date"]), None)
+        if not entry:
+            continue
+        sell_date = t.get("sell_date") or ohlcv[-1]["d"]
+        exit_pt = next((c for c in reversed(ohlcv) if c["d"] <= sell_date), ohlcv[-1])
+        out.append({
+            "ticker": t["ticker"], "name": t.get("name", ""),
+            "buy_date": t["buy_date"], "sell_date": sell_date,
+            "buy_price_eur": t.get("buy_price_eur"),
+            "sell_price_eur": t.get("sell_price_eur"),
+            "ret": t["ret"], "ohlcv": ohlcv, "entry": entry, "exit": exit_pt,
+        })
+    out.sort(key=lambda x: x["ret"], reverse=True)
+    return out
 
 
 def append_week(kw, value):
@@ -235,11 +237,11 @@ def compute(kw, universe, benchmark, ref_date=None):
     base_kw = hold.get("base_kw", weekly[0]["kw"])
     featured = _featured_dict(universe, positions[(kw - base_kw) % len(positions)], as_of)
 
-    # ── „Großer Verkauf der Woche" ───────────────────────────────────────────
-    # Wurde diese KW eine grosse Position realisiert (|Rendite| >= Schwelle),
-    # ersetzt deren Kauf-/Verkauf-Chart die „Weitere Positionen"-Slide und der
+    # ── „Große Verkäufe der Woche" ───────────────────────────────────────────
+    # Alle in dieser KW realisierten Gewinner (>= Schwelle) bekommen je einen
+    # Kauf-/Verkauf-Chart; diese ersetzen die „Weitere Positionen"-Slide und der
     # Newcomer entfaellt (siehe generate.build_from_store).
-    big_sell = _big_sell(universe, closed_raw, kw, as_of)
+    big_sells = _big_sells(universe, closed_raw, kw, as_of)
 
     # ── Newcomer: bester Kauf der letzten 3 Wochen, NICHT in den Top-5 ───────
     ref = datetime.strptime(ref_date or dates[-1], "%Y-%m-%d")
@@ -262,7 +264,7 @@ def compute(kw, universe, benchmark, ref_date=None):
         "rest_holdings": top[5:],
         "featured": featured,
         "newcomer": newcomer,
-        "big_sell": big_sell,
+        "big_sells": big_sells,
     }
 
 

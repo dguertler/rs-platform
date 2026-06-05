@@ -54,12 +54,13 @@ def build_from_store(fmt, ctx, outdir):
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 5) Großer Verkauf der Woche -> Kauf-/Verkauf-Chart ERSETZT die „Weitere
-    #    Positionen"-Slide UND unterdrueckt den Newcomer. Sonst Normalfall.
-    if ctx.get("big_sell"):
-        bs = ctx["big_sell"]
-        emit(f"verkauf_{bs['ticker'].replace('.', '_')}",
-             lambda c: render.slide_trade(c, di, bs))
+    # 5) Große Verkäufe der Woche (Gewinn >= Schwelle) -> je ein Kauf-/Verkauf-
+    #    Chart. Diese ERSETZEN die „Weitere Positionen"-Slide UND unterdruecken
+    #    den Newcomer. Sonst Normalfall.
+    if ctx.get("big_sells"):
+        for bs in ctx["big_sells"]:
+            emit(f"verkauf_{bs['ticker'].replace('.', '_')}",
+                 lambda c, bs=bs: render.slide_trade(c, di, bs))
     else:
         # 5a) Weitere Positionen (alle außerhalb der Top-5)
         if ctx.get("rest_holdings"):
@@ -89,9 +90,10 @@ def caption_from_store(ctx):
     nc = ctx.get("newcomer")
     newc = (f"\n🆕 Newcomer: {nc['ticker']} – {render.fmt_pct(nc['ret'])} seit Kauf."
             if nc and nc.get("ret") is not None else "")
-    bs = ctx.get("big_sell")
-    sell = (f"\n💸 Verkauf der Woche: {bs['ticker']} – realisiert {render.fmt_pct(bs['ret'])}."
-            if bs else "")
+    bss = ctx.get("big_sells") or []
+    sell = "".join(
+        f"\n💸 Verkauf: {b['ticker']} – realisiert {render.fmt_pct(b['ret'])}."
+        for b in bss)
     return (
         f"📊 Wochenupdate KW {ctx['kw']} ({ctx['period']})\n\n"
         f"Diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
