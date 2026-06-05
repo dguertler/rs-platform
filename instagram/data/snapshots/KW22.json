@@ -1,0 +1,33 @@
+{
+  "_hinweis": "Historischer Depot-Snapshot KW22 (Stand 29.05.2026) fuer historisch korrekte Slides. Wird von store._snapshot(22) genutzt, wenn 'python3 -m instagram.generate --kw 22' laeuft. Aendert NICHT die Live-Daten (holdings.json/trades.json). positions = Depot zum Wochenende KW22 (10 Stueck, inkl. der in KW23 verkauften AMD/LRCX/NXPI); closed = bis KW22 abgeschlossene Trades (15).",
+  "base_kw": 22,
+  "positions": [
+    { "ticker": "MRVL", "name": "Marvell Technology",  "buy_date": "2026-03-24", "buy_price_eur": 80.07 },
+    { "ticker": "AMD",  "name": "AMD",                 "buy_date": "2026-04-22", "buy_price_eur": 247.73 },
+    { "ticker": "LRCX", "name": "Lam Research",        "buy_date": "2026-04-08", "buy_price_eur": 205.07 },
+    { "ticker": "MU",   "name": "Micron Technology",   "buy_date": "2026-05-21", "buy_price_eur": 658.47 },
+    { "ticker": "CNC",  "name": "Centene",             "buy_date": "2026-04-29", "buy_price_eur": 42.55 },
+    { "ticker": "WDC",  "name": "Western Digital",     "buy_date": "2026-05-22", "buy_price_eur": 421.19 },
+    { "ticker": "STX",  "name": "Seagate Technology",  "buy_date": "2026-05-21", "buy_price_eur": 676.07 },
+    { "ticker": "DDOG", "name": "Datadog",             "buy_date": "2026-05-15", "buy_price_eur": 178.62 },
+    { "ticker": "AMAT", "name": "Applied Materials",   "buy_date": "2026-05-27", "buy_price_eur": 398.09 },
+    { "ticker": "NXPI", "name": "NXP Semiconductors",  "buy_date": "2026-05-25", "buy_price_eur": 282.16 }
+  ],
+  "closed": [
+    { "name": "NVIDIA",                 "ret":  0.0039 },
+    { "name": "Analog Devices",         "ret":  0.1099 },
+    { "name": "Akamai Technologies",    "ret": -0.0758 },
+    { "name": "ASML",                   "ret": -0.0528 },
+    { "name": "Amazon",                 "ret":  0.0082 },
+    { "name": "Broadcom",               "ret":  0.0011 },
+    { "name": "Siemens Energy",         "ret":  0.0037 },
+    { "name": "Applied Materials",      "ret":  0.0108 },
+    { "name": "Definium Therapeutics",  "ret":  0.2232 },
+    { "name": "ASML",                   "ret":  0.0063 },
+    { "name": "Credo Technology",       "ret":  0.0056 },
+    { "name": "Alphabet",               "ret":  0.0293 },
+    { "name": "IBM",                    "ret": -0.0741 },
+    { "name": "Microsoft",              "ret": -0.0068 },
+    { "name": "NXP Semiconductors",     "ret":  0.0030 }
+  ]
+}

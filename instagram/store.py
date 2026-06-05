@@ -52,19 +52,34 @@ def load_trades():
         return {"closed": []}
 
 
-def _featured_dict(universe, p):
+def _featured_dict(universe, p, as_of=None):
     """Baut die Daten für eine Chart-Slide (Aktie der Woche / Newcomer)."""
-    ret, entry = _ret_since(universe, p["ticker"], p["buy_date"])
+    ret, entry = _ret_since(universe, p["ticker"], p["buy_date"], as_of)
+    ohlcv = universe[p["ticker"]]["ohlcv"]
+    if as_of:
+        ohlcv = [c for c in ohlcv if c["d"] <= as_of]
     return {
         "ticker": p["ticker"], "name": p.get("name", ""),
         "buy_date": p["buy_date"], "buy_price_eur": p.get("buy_price_eur"),
         "ret": ret, "entry": entry,
-        "ohlcv": universe[p["ticker"]]["ohlcv"],
+        "ohlcv": ohlcv,
         "signals": data.load_signals().get(p["ticker"], []),
     }
 
 
-def _big_sell(universe, closed_raw, kw):
+def _snapshot(kw):
+    """Optionaler historischer Depot-Snapshot in
+    instagram/data/snapshots/KW<kw>.json (Felder: base_kw, positions, closed).
+    Ermöglicht historisch korrekte Slides vergangener Wochen, ohne die Live-Daten
+    (holdings.json/trades.json) zu verändern."""
+    path = os.path.join(DATA_DIR, "snapshots", f"KW{kw}.json")
+    if os.path.exists(path):
+        with open(path) as f:
+            return json.load(f)
+    return None
+
+
+def _big_sell(universe, closed_raw, kw, as_of=None):
     """Groesster realisierter Trade der laufenden KW (|ret| >= Schwelle) mit
     genug Chart-Metadaten, um Kauf UND Verkauf einzuzeichnen. Sonst None."""
     cand = [
@@ -77,6 +92,10 @@ def _big_sell(universe, closed_raw, kw):
         return None
     t = max(cand, key=lambda x: abs(x["ret"]))
     ohlcv = universe[t["ticker"]]["ohlcv"]
+    if as_of:
+        ohlcv = [c for c in ohlcv if c["d"] <= as_of]
+        if not ohlcv:
+            return None
     entry = next((c for c in ohlcv if c["d"] >= t["buy_date"]), None)
     sell_date = t.get("sell_date") or ohlcv[-1]["d"]
     exit_pt = next((c for c in reversed(ohlcv) if c["d"] <= sell_date), ohlcv[-1])
@@ -114,11 +133,16 @@ def _qqq_on(benchmark, date_iso):
     return val
 
 
-def _ret_since(universe, ticker, buy_date):
-    """Reale Rendite vom Schlusskurs am/ nach Kaufdatum bis zum letzten Kurs."""
+def _ret_since(universe, ticker, buy_date, as_of=None):
+    """Reale Rendite vom Schlusskurs am/ nach Kaufdatum bis zum Stichtag (as_of)
+    bzw. bis zum letzten verfügbaren Kurs."""
     if ticker not in universe or not universe[ticker]["ohlcv"]:
         return None, None
     ohlcv = universe[ticker]["ohlcv"]
+    if as_of:
+        ohlcv = [c for c in ohlcv if c["d"] <= as_of]
+        if not ohlcv:
+            return None, None
     entry = next((c for c in ohlcv if c["d"] >= buy_date), None)
     if not entry:
         return None, None
@@ -175,19 +199,24 @@ def compute(kw, universe, benchmark, ref_date=None):
         if i + 1 < len(nas_raw):
             prev_n = nas_raw[i + 1]
 
-    # ── Top-Positionen: Performance seit Kauf ────────────────────────────────
-    hold = load_holdings()
+    # ── Depotstand: Live-Daten oder historischer Snapshot (vergangene KW) ────
+    # Stichtag = Datum der Woche; Kurse werden darauf begrenzt (historisch korrekt).
+    as_of = dates[-1]
+    snap = _snapshot(kw)
+    hold = snap or load_holdings()
+
+    # ── Top-Positionen: Performance seit Kauf (bis Stichtag) ─────────────────
     positions = hold["positions"]
     top = []
     for p in positions:
-        ret, _ = _ret_since(universe, p["ticker"], p["buy_date"])
+        ret, _ = _ret_since(universe, p["ticker"], p["buy_date"], as_of)
         if ret is not None:
             top.append({**p, "ret": ret})
     top.sort(key=lambda t: t["ret"], reverse=True)
     top5_tickers = {t["ticker"] for t in top[:5]}
 
     # ── Trade-Kennzahlen: abgeschlossene + aktive Trades zusammen ────────────
-    closed_raw = load_trades().get("closed", [])
+    closed_raw = snap["closed"] if (snap and "closed" in snap) else load_trades().get("closed", [])
     closed = [t["ret"] for t in closed_raw]
     active = [t["ret"] for t in top]
     rets = closed + active
@@ -204,19 +233,19 @@ def compute(kw, universe, benchmark, ref_date=None):
 
     # ── „Aktie der Woche" (Rotation durch ALLE Positionen) ───────────────────
     base_kw = hold.get("base_kw", weekly[0]["kw"])
-    featured = _featured_dict(universe, positions[(kw - base_kw) % len(positions)])
+    featured = _featured_dict(universe, positions[(kw - base_kw) % len(positions)], as_of)
 
     # ── „Großer Verkauf der Woche" ───────────────────────────────────────────
     # Wurde diese KW eine grosse Position realisiert (|Rendite| >= Schwelle),
-    # ersetzt deren Kauf-/Verkauf-Chart die „Aktie der Woche" und die
-    # „Weitere Positionen"-Slide entfaellt (siehe generate.build_from_store).
-    big_sell = _big_sell(universe, closed_raw, kw)
+    # ersetzt deren Kauf-/Verkauf-Chart die „Weitere Positionen"-Slide und der
+    # Newcomer entfaellt (siehe generate.build_from_store).
+    big_sell = _big_sell(universe, closed_raw, kw, as_of)
 
     # ── Newcomer: bester Kauf der letzten 3 Wochen, NICHT in den Top-5 ───────
     ref = datetime.strptime(ref_date or dates[-1], "%Y-%m-%d")
     cutoff = (ref - timedelta(days=21)).strftime("%Y-%m-%d")
     cand = [t for t in top if t["buy_date"] >= cutoff and t["ticker"] not in top5_tickers]
-    newcomer = _featured_dict(universe, max(cand, key=lambda t: t["ret"])) if cand else None
+    newcomer = _featured_dict(universe, max(cand, key=lambda t: t["ret"]), as_of) if cand else None
 
     return {
         "kw": kw,

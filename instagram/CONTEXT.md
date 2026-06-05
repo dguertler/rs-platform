@@ -53,6 +53,12 @@ OHLCV der RS-JSONs). NASDAQ aus QQQ-Benchmark (`data/rs_full.json`).
 | `wikifolio_history.json` | Zertifikatswert je KW (+opt. `nasdaq_pct`) | **wöchentlich** |
 | `holdings.json` | alle Positionen + Kaufdatum + Einstiegskurs + `base_kw` | bei Kauf/Verkauf |
 | `trades.json` | abgeschlossene Trades (realisierte Rendite) | bei Verkauf |
+| `snapshots/KW<NN>.json` | historischer Depotstand (`base_kw`/`positions`/`closed`) einer vergangenen KW | optional, für Backfill |
+
+**Vergangene Wochen (Backfill):** `python3 -m instagram.generate --kw <NN> --date <Wochendatum>`
+nutzt automatisch `snapshots/KW<NN>.json` (falls vorhanden) statt der Live-Daten und
+**kappt die Kurse aufs Wochendatum** (`as_of`) → historisch korrekte Slides, ohne die
+Live-Daten zu verändern.
 
 ## 6. Aktueller Daten-Snapshot (Stand KW23 / 05.06.2026)
 
