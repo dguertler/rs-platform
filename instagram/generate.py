@@ -50,18 +50,25 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
-    # 4) Aktie der Woche (Rotation)
-    if ctx["featured"]["entry"]:
-        emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
-             lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 4b) Weitere Positionen (alle außerhalb der Top-5)
-    if ctx.get("rest_holdings"):
-        rows = [{"main": t["ticker"], "sub": _pos_sub(t),
-                 "value": render.fmt_pct(t["ret"]),
-                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
-                for t in ctx["rest_holdings"]]
-        emit("weitere", lambda c: render.slide_list(
-            c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
+    # 4) Großer Verkauf der Woche -> Kauf-/Verkauf-Chart ERSETZT die „Aktie der
+    #    Woche" und die „Weitere Positionen"-Slide entfaellt. Sonst Normalfall.
+    if ctx.get("big_sell"):
+        bs = ctx["big_sell"]
+        emit(f"verkauf_{bs['ticker'].replace('.', '_')}",
+             lambda c: render.slide_trade(c, di, bs))
+    else:
+        # 4a) Aktie der Woche (Rotation)
+        if ctx["featured"]["entry"]:
+            emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
+                 lambda c: render.slide_featured(c, di, ctx["featured"]))
+        # 4b) Weitere Positionen (alle außerhalb der Top-5)
+        if ctx.get("rest_holdings"):
+            rows = [{"main": t["ticker"], "sub": _pos_sub(t),
+                     "value": render.fmt_pct(t["ret"]),
+                     "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
+                    for t in ctx["rest_holdings"]]
+            emit("weitere", lambda c: render.slide_list(
+                c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
     # 5) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
     if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
         emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
@@ -82,6 +89,9 @@ def caption_from_store(ctx):
     nc = ctx.get("newcomer")
     newc = (f"\n🆕 Newcomer: {nc['ticker']} – {render.fmt_pct(nc['ret'])} seit Kauf."
             if nc and nc.get("ret") is not None else "")
+    bs = ctx.get("big_sell")
+    sell = (f"\n💸 Verkauf der Woche: {bs['ticker']} – realisiert {render.fmt_pct(bs['ret'])}."
+            if bs else "")
     return (
         f"📊 Wochenupdate KW {ctx['kw']} ({ctx['period']})\n\n"
         f"Diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
@@ -94,7 +104,7 @@ def caption_from_store(ctx):
         f"Profitfaktor {pf} · Ø Gewinn {render.fmt_pct(s['avg_win'])} · "
         f"Ø Verlust {render.fmt_pct(s['avg_loss'])}\n\n"
         f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
-        f"{feat}{newc}\n\n"
+        f"{feat}{newc}{sell}\n\n"
         f"➡️ Mehr: {ctx['account']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"#wikifolio #aktien #investing #nasdaq #trading #boerse "

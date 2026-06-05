@@ -80,3 +80,25 @@ Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 
 Hauptformat **Carousel (4:5)**; Reel-Frames (9:16) entstehen parallel.
 Stories erst später (bei genügend Followern) — siehe Roadmap in PROMPT.md.
+
+**Großer Verkauf der Woche:** Wird eine Position mit |Rendite| ≥ 25 % realisiert,
+ersetzt deren Kauf-/Verkauf-Chart (Kauf- **und** Verkaufskurs eingezeichnet, inkl.
+realisierter Rendite) die „Aktie der Woche"; die „Weitere Positionen"-Slide entfällt
+dann automatisch. Dafür den Trade in `trades.json` mit
+`ticker/kw/buy_date/sell_date/buy_price_eur/sell_price_eur` anreichern.
+
+## wikifolio News-Feed (Wochenreport-Text)
+
+Getrennt vom Instagram-Post: der **Text-Wochenreport** für den wikifolio-News-Feed.
+Wenn der Nutzer `Wochenfeed KW<NN>` / „erstelle den wikifolio-Wochenbericht" schreibt:
+
+1. **`instagram/wikifolio_feed/FORMAT.md` lesen** — verbindliche Struktur, Ton und
+   wikifolio-Regeln. Referenz-Beispiele: `KW21.md`, `KW22.md`.
+2. Zahlen aus `instagram/data/` bzw. `store.compute(kw, …)` ziehen — **müssen mit den
+   Instagram-Slides übereinstimmen** (gleiche Quelle, gleicher NASDAQ-Stand).
+3. `instagram/wikifolio_feed/KW<NN>.md` exakt nach Schema schreiben.
+4. Dem Nutzer zeigen — **kein Auto-Post**, manuelles Einstellen im wikifolio-Feed.
+
+**NASDAQ-Korrektur:** Ist der NDX-Tageswert in der RS-JSON noch nicht enthalten oder
+soll überschrieben werden, `"nasdaq_value": <NDX-Stand>` in den KW-Eintrag von
+`wikifolio_history.json` setzen — greift für Wochen- **und** Gesamt-/Alpha-Rechnung.

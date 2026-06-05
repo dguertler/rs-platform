@@ -477,11 +477,15 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
             ax.scatter([pt[0]], [pt[1]], s=42, color=T.BLUE, zorder=4,
                        edgecolor=T.BG, lw=1.5)
 
-    # Kauf-Signal (groß, blau)
+    # Kauf-Signal (groß, blau) inkl. Kaufkurs am Marker
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(ex, color=mcol, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=140, color=mcol, zorder=5, edgecolor=T.BG, lw=2)
-    ax.annotate(f"Kauf-Signal {short_date(entry['d'])}", (ex, entry["c"]),
+    bp = feat.get("buy_price_eur")
+    klabel = f"Kauf {short_date(entry['d'])}"
+    if bp:
+        klabel += "\n" + f"{bp:.2f}".replace(".", ",") + " €"
+    ax.annotate(klabel, (ex, entry["c"]),
                 xytext=(-12, 18), textcoords="offset points",
                 color=mcol, fontsize=15, fontweight="bold",
                 ha="right", fontfamily=_FONTS["sans"])
@@ -507,4 +511,78 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     else:
         c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
         c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
+    footer(c)
+
+
+def slide_trade(c, date_iso, t, label="GROSSER VERKAUF DER WOCHE"):
+    """Realisierter Trade: Kursverlauf mit Kauf- (blau) UND Verkauf-Marker
+    (grün/rot), beide mit Kurs, plus Rendite/Einstiegs-/Verkaufskurs-Kacheln."""
+    header(c, date_iso)
+    ticker, ohlcv = t["ticker"], t["ohlcv"]
+    entry, exit_pt, ret = t["entry"], t["exit"], t["ret"]
+    rcol = T.GREEN if (ret or 0) >= 0 else T.RED
+    bcol = T.BLUE                                   # Kauf = blau
+    c.text(MX, 200, label, 22, color=rcol, weight="bold")
+    c.text(MX, 232, ticker, 64, weight="bold")
+    sub = t.get("name", "")
+    sub += (f"  ·  Kauf {fmt_de_date(t['buy_date'])}"
+            f"  →  Verkauf {fmt_de_date(t['sell_date'])}")
+    c.text(MX + 12, 300, sub, 18, color=T.MUTED)
+
+    # Fenster: ~15 Bars vor Kauf bis zum Verkauf
+    idx_b = next((i for i, p in enumerate(ohlcv) if p["d"] >= t["buy_date"]), 0)
+    idx_e = next((i for i in range(len(ohlcv) - 1, -1, -1)
+                  if ohlcv[i]["d"] <= t["sell_date"]), len(ohlcv) - 1)
+    win = ohlcv[max(0, idx_b - 15):idx_e + 1] or ohlcv
+    chart_h = int(c.H * 0.40)
+    ax = c.chart_axes(MX, 350, c.W - 2 * MX, chart_h)
+    _style_chart(ax)
+    xs = np.array([datetime.strptime(p["d"], "%Y-%m-%d").toordinal() for p in win], float)
+    ys = np.array([p["c"] for p in win])
+    ax.plot(xs, ys, color=T.TEXT, lw=2.5, zorder=3)
+    ax.fill_between(xs, ys, ys.min(), color=T.TEXT, alpha=0.05, zorder=1)
+
+    def _eur(v):
+        return f"{v:.2f}".replace(".", ",") + " €" if v else ""
+
+    # Kauf-Marker (blau)
+    bx = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
+    ax.axvline(bx, color=bcol, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([bx], [entry["c"]], s=140, color=bcol, zorder=5, edgecolor=T.BG, lw=2)
+    blab = f"Kauf {short_date(entry['d'])}"
+    if t.get("buy_price_eur"):
+        blab += "\n" + _eur(t["buy_price_eur"])
+    ax.annotate(blab, (bx, entry["c"]), xytext=(10, 16), textcoords="offset points",
+                color=bcol, fontsize=14, fontweight="bold", ha="left",
+                fontfamily=_FONTS["sans"])
+
+    # Verkauf-Marker (grün/rot)
+    sx = datetime.strptime(exit_pt["d"], "%Y-%m-%d").toordinal()
+    ax.axvline(sx, color=rcol, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([sx], [exit_pt["c"]], s=140, color=rcol, zorder=5, edgecolor=T.BG, lw=2)
+    slab = f"Verkauf {short_date(t['sell_date'])}"
+    if t.get("sell_price_eur"):
+        slab += "\n" + _eur(t["sell_price_eur"])
+    ax.annotate(slab, (sx, exit_pt["c"]), xytext=(-10, 16), textcoords="offset points",
+                color=rcol, fontsize=14, fontweight="bold", ha="right",
+                fontfamily=_FONTS["sans"])
+
+    # Mini-Legende
+    c.text(MX, 350 + chart_h + 22, "● Kauf", 14, color=bcol, weight="bold")
+    c.text(MX + 130, 350 + chart_h + 22, "● Verkauf", 14, color=rcol, weight="bold")
+
+    # Drei KPI-Kacheln: Rendite · Einstiegskurs · Verkaufskurs
+    ky = 350 + chart_h + 70
+    gap = 20
+    tw = (c.W - 2 * MX - 2 * gap) // 3
+    cells = [
+        ("Realisierte Rendite", fmt_pct(ret) if ret is not None else "—", rcol),
+        ("Einstiegskurs", _eur(t.get("buy_price_eur")) or "—", T.TEXT),
+        ("Verkaufskurs", _eur(t.get("sell_price_eur")) or "—", T.TEXT),
+    ]
+    for i, (lab, val, col) in enumerate(cells):
+        x = MX + i * (tw + gap)
+        c.tile(x, ky, tw, 110, color=T.PANEL)
+        c.text(x + 24, ky + 26, lab, 16, color=T.MUTED)
+        c.text(x + 24, ky + 54, val, 32, color=col, weight="bold", font="mono")
     footer(c)

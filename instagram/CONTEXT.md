@@ -54,33 +54,35 @@ OHLCV der RS-JSONs). NASDAQ aus QQQ-Benchmark (`data/rs_full.json`).
 | `holdings.json` | alle Positionen + Kaufdatum + Einstiegskurs + `base_kw` | bei Kauf/Verkauf |
 | `trades.json` | abgeschlossene Trades (realisierte Rendite) | bei Verkauf |
 
-## 6. Aktueller Daten-Snapshot (Stand KW22 / 04.06.2026)
+## 6. Aktueller Daten-Snapshot (Stand KW23 / 05.06.2026)
 
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
-20 135,44 · 21 139,66 · **22 148,25** → Gesamt **+50,5 %**, NASDAQ +32,2 %,
-Alpha +18,3 %, 6/9 Wochen über NASDAQ (QQQ-basiert, siehe §8).
+20 135,44 · 21 139,66 · 22 148,25 · **23 150,08** → Gesamt **+52,4 %**,
+NASDAQ **+26,5 %**, Alpha **+25,9 %**, **8/10** Wochen über NASDAQ.
+KW23: NDX fiel auf **29.035** (−4,3 % Woche) → Override `nasdaq_value` im
+KW23-Eintrag von `wikifolio_history.json` (RS-JSON hatte den Tag noch nicht).
 
-**Positionen (10):**
+**Positionen (7):** (AMD, LRCX, NXPI in KW23 verkauft)
 | Ticker | Name | Kauf | Einstieg € |
 |---|---|---|---|
 | MRVL | Marvell Technology | 24.03.2026 | 80,07 |
-| AMD | AMD | 22.04.2026 | 247,73 |
-| LRCX | Lam Research | 08.04.2026 | 205,07 |
 | MU | Micron Technology | 21.05.2026 | 658,47 |
 | CNC | Centene | 29.04.2026 | 42,55 |
 | WDC | Western Digital | 22.05.2026 | 421,19 |
 | STX | Seagate Technology | 21.05.2026 | 676,07 |
 | DDOG | Datadog | 15.05.2026 | 178,62 |
 | AMAT | Applied Materials | 27.05.2026 | 398,09 |
-| NXPI | NXP Semiconductors | 25.05.2026 | 282,16 |
 
-**Abgeschlossene Trades (15):** NVIDIA +0,39 · Analog Devices +10,99 ·
+**Abgeschlossene Trades (19):** NVIDIA +0,39 · Analog Devices +10,99 ·
 Akamai −7,58 · ASML −5,28 · Amazon +0,82 · Broadcom +0,11 · Siemens Energy +0,37 ·
 Applied Materials +1,08 · Definium Therapeutics +22,32 · ASML +0,63 ·
-Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · NXP +0,30
-(alle in %). Kennzahlen KW22: 25 Trades, Trefferquote 80 %, Profitfaktor 21,0,
-Ø Gewinn +25,4 %, Ø Verlust −4,8 % (inkl. offener Positionen).
+Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · NXP +0,30 ·
+**AMD +69,7 · Lam Research +29,9 · NXP −6,0 · IBM −12,6** (alle in %, KW23-Verkäufe
+mit Chart-Metadaten in `trades.json`). Kennzahlen KW23: 26 Trades, Trefferquote 77 %,
+Profitfaktor 12,4, Ø Gewinn +24,5 %, Ø Verlust −6,6 % (inkl. offener Positionen).
+**Großer Verkauf KW23 = AMD +69,7 %** → eigener Kauf-/Verkauf-Chart (ersetzt
+„Aktie der Woche", „Weitere Positionen" entfällt).
 
 ## 7. Wöchentlicher Ablauf (Kurzform)
 ```bash
