@@ -17,6 +17,7 @@ import os
 from datetime import datetime
 
 from . import data, render, report, store
+from . import analysis as ana
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -191,6 +192,83 @@ def build_weekly_caption(r):
     return "\n".join(parts)
 
 
+# ── Aktien-Analyse-Post (analyses/TICKER.md) ──────────────────────────────────
+def _has_scenarios(a):
+    sc = a["scenarios"]
+    return all(sc[k]["prob"] is not None for k in ("bull", "base", "bear"))
+
+
+def _has_longterm(a):
+    lt = a["longterm"]
+    return any(lt[k] and lt[k].get("low") is not None for k in ("bull", "base", "bear"))
+
+
+def build_analysis(fmt, a, date_iso, outdir):
+    """Analyse-Carousel aus einer geparsten Analyse (analyses/TICKER.md)."""
+    saved = []
+    emit = _emitter(fmt, outdir, saved)
+
+    emit("cover", lambda c: render.slide_analysis_cover(c, a, date_iso))
+    emit("einschaetzung", lambda c: render.slide_analysis_verdict(c, a, date_iso))
+    if _has_scenarios(a):
+        emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
+    if _has_longterm(a):
+        emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
+    if a.get("business_bullets"):
+        emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
+    if _has_scenarios(a):
+        emit("szenarien_erklaert", lambda c: render.slide_analysis_cases(c, a, date_iso))
+    emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))
+    return saved
+
+
+def caption_analysis(a):
+    v = a["verdict"]
+    lab = render.VERDICT_LABEL.get((v or "").upper(), v)
+    scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
+    head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
+
+    parts = [f"📊 {head}\n"]
+    if a.get("hook"):
+        parts.append(a["hook"] + "\n")
+
+    if _has_scenarios(a):
+        sc = a["scenarios"]
+        lines = []
+        for key, name in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
+            prob = sc[key]["prob"]
+            rng = ana.fmt_range(sc[key]["range"])
+            seg = f"• {name}: {prob}%" if prob is not None else f"• {name}:"
+            if rng:
+                seg += f" · Kursziel {rng}"
+            lines.append(seg)
+        parts.append("🎯 Szenarien (12–18 Monate):\n" + "\n".join(lines) + "\n")
+
+    if a.get("business_bullets"):
+        bl = "\n".join(f"• {b}" for b in a["business_bullets"][:4])
+        parts.append("🏭 Geschäftsmodell:\n" + bl + "\n")
+
+    if a.get("fazit_core"):
+        parts.append("🧭 Profi-Fazit:\n" + a["fazit_core"] + "\n")
+
+    if a.get("peers"):
+        parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
+
+    parts.append(f"➡️ Mehr Analysen: {render.HANDLE} — Link in Bio.\n")
+    parts.append(render.T.DISCLAIMER_ANALYSE_LONG)
+
+    sector_tag = {
+        "Technology": "#technologie #tech", "Healthcare": "#healthcare #pharma",
+        "Industrials": "#industrie", "Energy": "#energie",
+        "Financial Services": "#finanzen", "Consumer Cyclical": "#konsum",
+    }.get(a.get("sector", ""), "")
+    tic = a["ticker"].replace(".", "").lower()
+    parts.append(
+        f"\n#aktien #aktienanalyse #börse #investing #{tic} #boersewissen "
+        f"#geldanlage #finanzen #stockanalysis #aialphaselection {sector_tag}".rstrip())
+    return "\n".join(parts)
+
+
 def build(fmt, ctx, outdir):
     os.makedirs(outdir, exist_ok=True)
     date_iso = ctx["date_iso"]
@@ -244,8 +322,32 @@ def main():
     ap.add_argument("--signals", type=int, default=2)
     ap.add_argument("--kw", type=int, help="Kalenderwoche – baut den Wochenpost aus instagram/data/")
     ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
+    ap.add_argument("--analysis", help="Ticker oder Pfad zu analyses/TICKER.md (Analyse-Post)")
     ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
     args = ap.parse_args()
+
+    # ── Analyse-Post aus analyses/TICKER.md ───────────────────────────────────
+    if args.analysis:
+        a = ana.parse_analysis(args.analysis)
+        slug = a["ticker"].replace(".", "_")
+        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_ANALYSE_{slug}")
+        fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
+        all_saved = []
+        for fmt in fmts:
+            all_saved += build_analysis(fmt, a, args.date, os.path.join(base, fmt))
+        os.makedirs(base, exist_ok=True)
+        with open(os.path.join(base, "caption.txt"), "w") as f:
+            f.write(caption_analysis(a))
+        full = _has_scenarios(a)
+        print(f"✓ {len(all_saved)} Slides (Analyse {a['ticker']}) in {base}")
+        print(f"  Verdict {a['verdict']} · Score {a['score']} · "
+              f"Szenarien {'ja' if full else 'NEIN (Alt-Schema → reduziert)'}")
+        if not render.T.company_logo_file(a["ticker"]):
+            print(f"  ⚠ Kein Firmenlogo gefunden — Cover nutzt Wortmarke. "
+                  f"Logo ablegen unter instagram/assets/logos/{slug}.png")
+        for p in all_saved:
+            print("  ", os.path.relpath(p, ROOT))
+        return
 
     universe, benchmark = data.load_universe()
 

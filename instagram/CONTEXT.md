@@ -108,3 +108,27 @@ Jetzt: Carousel wöchentlich (manueller Upload). Später: Stories + Reel-Animati
 ## 10. Render-Technik
 matplotlib + Pillow (kein Browser nötig). Design/Farben/Disclaimer in `theme.py`.
 Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
+
+## 11. Zweiter Post-Typ: Aktien-Analyse-Posts
+Neben dem Wochenupdate werden **fertige KI-Analysen** (`analyses/TICKER.md`) als
+Carousel gepostet — Ziel **1–2/Woche**. Details + Slide-Standard + SEO stehen in
+`PROMPT.md` (Abschnitt „Zweiter Post-Typ: AKTIEN-ANALYSE").
+
+- **Befehl:** `python3 -m instagram.generate --analysis AMD`
+  → `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` + `caption.txt`.
+- **Grid-Unterscheidung:** Wochenpost = AI-Alpha-Marke; Analyse = **Firmenlogo**
+  der AG auf dem Cover + Verdict-Badge (BUY grün / HOLD gelb / WATCH-SELL rot).
+- **Slides:** Cover · Gesamteinschätzung+Rating · Szenarien 12–18 M (mit
+  Wahrscheinlichkeit) · Langfrist 3–5 J · Geschäftsmodell · Szenarien erklärt ·
+  Profi-Fazit. **Nicht** auf den Slides: aktueller Kurs, GWS-Ampel/Breakout
+  (Punkt 9), Detail-Punkte 6/7/8.
+- **Code:** Parser `instagram/analysis.py` (liest die 11 Abschnitte, extrahiert
+  Verdict/Score/Ratings/Wahrscheinlichkeiten/Kursziele/Peers); Slides in
+  `render.py` (`slide_analysis_*`); CLI-Pfad `--analysis` in `generate.py`.
+- **Logos:** `instagram/assets/logos/<TICKER>.png` (transparent). Fehlt eins →
+  Wortmarke-Fallback; Generator meldet das. Auto-Download in der Cloud geblockt.
+- **Achtung Schema:** Nur **17 von 55** Analysen folgen aktuell dem neuen
+  11-Abschnitte-Schema mit %/Kurszielen (AMD, SNDK, MU, AMAT, MRVL, STX, NXPI,
+  KLAC, NTAP, LITE, AKAM, HPE, IBM, MGM, SM, CNC, F). Bei alten Analysen
+  entfallen die Szenario-Slides automatisch (reduziertes Carousel) — für volle
+  Posts Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.

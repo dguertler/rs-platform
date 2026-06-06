@@ -26,6 +26,19 @@ Stärkste Positionen, **Aktie der Woche** (rotierend) und CTA + `caption.txt`.
 NASDAQ/Alpha/Historie werden automatisch berechnet.
 → Ablauf, Regeln & Datenpflege: **`instagram/PROMPT.md`**.
 
+**Analyse-Post** — aus einer fertigen KI-Analyse (`analyses/TICKER.md`):
+
+```bash
+# Firmenlogo einmalig ablegen: instagram/assets/logos/<TICKER>.png (transparent)
+python3 -m instagram.generate --analysis AMD
+```
+
+Erzeugt ein Carousel (Cover mit Firmenlogo + Verdict, Gesamteinschätzung,
+Szenarien 12–18 M mit Wahrscheinlichkeiten, Langfrist 3–5 J, Geschäftsmodell,
+Szenarien erklärt, Profi-Fazit) + SEO-Caption. **Ohne** aktuellen Kurs und
+**ohne** GWS-Ampel/Breakout. Details: **`instagram/PROMPT.md`** (Abschnitt
+„Zweiter Post-Typ: AKTIEN-ANALYSE").
+
 **Alternativ** — vollständig manueller Wochenreport ohne Stores:
 
 ```bash
