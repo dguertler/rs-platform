@@ -604,6 +604,16 @@ def _pips(c, x, top, value, total=5, size=22, gap=12, col=T.BLUE):
                radius=size // 2)
 
 
+def _stars(c, x, top, value, total=5, gap=50, s=520, col=T.BLUE):
+    """5 Sterne als Bewertung; gefüllte = Wert (robust als Marker gezeichnet)."""
+    for i in range(total):
+        cx = x + i * gap
+        filled = i < (value or 0)
+        c.ax.scatter(cx, c.y(top), s=s, marker="*",
+                     color=(col if filled else T.GRID),
+                     edgecolor="none", zorder=11)
+
+
 # 1) COVER — Firmenlogo + Verdict + Hook
 def slide_analysis_cover(c, a, date_iso):
     col = verdict_color(a["verdict"])
@@ -677,7 +687,7 @@ def slide_analysis_verdict(c, a, date_iso):
         c.text(x + 30, yy + 26, label.upper(), 16, color=T.MUTED, weight="bold")
         c.text(x + cw - 30, yy + 22, f"{val if val is not None else '–'}/5", 30,
                color=T.TEXT, weight="bold", ha="right", font="mono")
-        _pips(c, x + 30, yy + 84, val, col=col)
+        _stars(c, x + 44, yy + 100, val, col=col)
     analysis_footer(c)
 
 
@@ -761,6 +771,30 @@ def slide_analysis_business(c, a, date_iso):
         else:
             _draw_paragraph(c, MX + 40, y + rh / 2 - 24, b, 21,
                             c.W - 2 * MX - 80, color=T.TEXT, max_lines=2)
+    analysis_footer(c)
+
+
+# 5b) CHANCEN & RISIKEN — für Posts ohne Szenario-Wahrscheinlichkeiten (Alt-Schema)
+def slide_analysis_chances(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    c.text(MX, 184, "Chancen & Risiken", 42, weight="bold")
+    c.text(MX, 240, "Das Wichtigste aus Bull- und Bear-Sicht", 18, color=T.MUTED)
+
+    def block(title, bullets, col, top, h):
+        c.tile(MX, top, c.W - 2 * MX, h, color=T.PANEL)
+        c.tile(MX, top, 12, h, color=col, radius=6)
+        c.text(MX + 40, top + 24, title, 26, color=col, weight="bold")
+        y = top + 84
+        for b in bullets[:4]:
+            c.text(MX + 40, y, "›", 22, color=col, weight="bold")
+            yy = _draw_paragraph(c, MX + 70, y, b, 20, c.W - 2 * MX - 110,
+                                 color=T.TEXT, line_h=29, max_lines=2)
+            y = yy + 14
+
+    gap = 30
+    h = int((c.H * 0.62 - gap) / 2)
+    block("Chancen", a.get("pro_bullets", []), T.GREEN, 300, h)
+    block("Risiken", a.get("con_bullets", []), T.RED, 300 + h + gap, h)
     analysis_footer(c)
 
 

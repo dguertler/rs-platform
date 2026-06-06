@@ -218,6 +218,9 @@ def build_analysis(fmt, a, date_iso, outdir):
         emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
     if _has_scenarios(a):
         emit("szenarien_erklaert", lambda c: render.slide_analysis_cases(c, a, date_iso))
+    elif a.get("pro_bullets") or a.get("con_bullets"):
+        # Alt-Schema ohne Wahrscheinlichkeiten: Chancen/Risiken statt Szenarien
+        emit("chancen_risiken", lambda c: render.slide_analysis_chances(c, a, date_iso))
     emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))
     return saved
 

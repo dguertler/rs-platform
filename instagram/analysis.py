@@ -209,6 +209,11 @@ def parse_analysis(path_or_ticker):
     # Was macht die AG: Highlights aus 1 (Kernsatz) + 2 (Bullets)
     a["business_bullets"] = _bullets(sections.get(2, ""), limit=6)
 
+    # Chancen/Risiken als Bullets (v. a. Alt-Schema: 3=BULL, 4=BEAR als Listen).
+    # Im neuen Schema sind 3/4 Fließtext -> _bullets liefert [] (Slide entfällt).
+    a["pro_bullets"] = _bullets(sections.get(3, ""), limit=5)
+    a["con_bullets"] = _bullets(sections.get(4, ""), limit=5)
+
     # Szenarien 12–18 Mon. aus 3/4/5
     scen = {}
     for key, sec in (("bull", 3), ("base", 4), ("bear", 5)):
