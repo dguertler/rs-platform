@@ -859,9 +859,9 @@ def slide_analysis_fazit(c, a, date_iso):
     cta_top = max(y + 40, c.H - 360)
     c.tile(MX, cta_top, c.W - 2 * MX, 120, color=T.PANEL)
     c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
-    c.text(MX + 40, cta_top + 26, "Vollständige Analyse in der Caption", 26,
+    c.text(MX + 40, cta_top + 26, "Ganze Analyse als Text unter diesem Post", 26,
            color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 70, "Tippe auf „mehr“ unter dem Post  ·  Link in Bio",
+    c.text(MX + 40, cta_top + 70, "Tippe auf „mehr“  ·  folge für 1–2 Analysen/Woche",
            19, color=T.MUTED)
     # nach unten zeigende Dreiecke (robust gezeichnet statt Glyph)
     for i in range(3):
