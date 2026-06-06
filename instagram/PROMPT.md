@@ -131,9 +131,26 @@ KI-Analyse (`analyses/TICKER.md`) ein Carousel. Ziel: **1–2 Analysen pro Woche
 # Logo der AG (einmalig) ablegen: instagram/assets/logos/<TICKER>.png
 python3 -m instagram.generate --analysis AMD          # Carousel 4:5 + Reel 9:16
 python3 -m instagram.generate --analysis sie_de       # Ticker oder Pfad/Dateiname
+# Eigene, knackige Headline (Frage/These) fürs Cover + Reel-Hook:
+python3 -m instagram.generate --analysis AMD \
+  --headline "AMD: Nvidias einziger echter Rivale — Kauf oder Hype?"
 ```
 Output: `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` +
 `caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
+
+### Carousel vs. Reel (zwei getrennte Outputs, ein Lauf)
+- **Carousel (4:5):** die VOLLE Analyse (7 Slides) — zum Speichern/Lesen.
+- **Reel (9:16):** ein KURZER Teaser (4 Frames): Frage-Hook → Szenarien →
+  Das Wichtigste → **Hybrid-CTA** „Die ganze Analyse findest du im
+  Karussell-Post auf meinem Profil". Das Reel holt Reichweite und leitet sie
+  auf den Karussell-Post um (Hybrid-Funnel).
+
+### Hook = Frage/These (die ersten 3 Sekunden)
+Die erste Slide (und der Reel-Hook) trägt eine **Frage oder steile These** statt
+„Aktienanalyse Firma X" — z. B. „<Aktie>: Kauf oder Falle?". Ohne `--headline`
+erzeugt der Generator automatisch eine **verdict-bewusste, pro Ticker variierte**
+Frage. Für maximale Wirkung schreibt Claude pro Post eine **individuelle**
+Headline und übergibt sie via `--headline` (jede Analyse anders gestalten).
 
 ### Slide-Reihenfolge (Analyse, 5–7 Slides)
 1. **Cover** — Firmenlogo + Name/Sektor + Verdict-Badge + Score/100 + 1-Satz-Hook
