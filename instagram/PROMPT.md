@@ -114,6 +114,75 @@ Bei Unsicherheit nachfragen statt raten.
   im Header genutzt; sonst Wortmarke als Fallback.
 - Farben/Fonts/Disclaimer: `instagram/theme.py` (Navy + Royalblau, am Logo orientiert).
 
+---
+
+## Zweiter Post-Typ: AKTIEN-ANALYSE (aus `analyses/TICKER.md`)
+
+Neben dem Wochenupdate gibt es **Analyse-Posts**: Sie machen aus einer fertigen
+KI-Analyse (`analyses/TICKER.md`) ein Carousel. Ziel: **1–2 Analysen pro Woche**.
+
+**Grid-Logik (auf einen Blick erkennbar):**
+- **Wochenupdate** → Cover mit AI-Alpha-Marke + Equity-Kurve.
+- **Analyse** → Cover mit **Firmenlogo** der AG + Verdict-Badge (BUY=grün,
+  HOLD=gelb, WATCH/SELL=rot). So sieht man im Profil-Raster sofort, was was ist.
+
+### Ablauf
+```bash
+# Logo der AG (einmalig) ablegen: instagram/assets/logos/<TICKER>.png
+python3 -m instagram.generate --analysis AMD          # Carousel 4:5 + Reel 9:16
+python3 -m instagram.generate --analysis sie_de       # Ticker oder Pfad/Dateiname
+```
+Output: `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` +
+`caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
+
+### Slide-Reihenfolge (Analyse, 5–7 Slides)
+1. **Cover** — Firmenlogo + Name/Sektor + Verdict-Badge + Score/100 + 1-Satz-Hook
+2. **Gesamteinschätzung** — Kernthese (Investment-Case) + 4 Rating-Pips
+   (Qualität/Wachstum/Bewertung/Katalysator)
+3. **Szenarien · 12–18 Monate** — Bull/Base/Bear mit **Eintrittswahrscheinlichkeit**
+   (Balken) + Kursziel-Spanne *(aus Analyse-Punkten 3–5)*
+4. **Langfrist · 3–5 Jahre** — Kursziel-Spannen je Szenario *(aus Punkt 10)*,
+   bewusst **ohne** Wahrscheinlichkeiten — Zeithorizont klar getrennt von Slide 3
+5. **Was macht das Unternehmen?** — Highlights aus Punkt 1+2 (Geschäftsmodell)
+6. **Die drei Szenarien erklärt** — je 1 Treibersatz Bull/Base/Bear (konsistent zu 3)
+7. **Profi-Fazit** — Kernaussage + vergleichbare Titel (Peers) + Verweis auf die
+   vollständige Analyse in der **Caption** (Pfeile ⌄ + „Link in Bio")
+
+**Bewusst NICHT auf den Slides:** aktueller Kurs; Punkt 9 (Technik/Momentum);
+**GWS-Ampel & Breakout-Status**; Punkte 6/7/8 (Detail zu Qualität/Bewertung/
+Psychologie) — die volle Tiefe steht in der Caption / auf der Rating-Seite.
+
+### Wichtig: Kursziele konsistent halten
+- **Slide 3 = 12–18 Monate** (mit Wahrscheinlichkeit, aus Punkt 3/4/5).
+- **Slide 4 = 3–5 Jahre** (ohne Wahrscheinlichkeit, aus Punkt 10).
+- Jede Slide trägt ihren **Zeithorizont** in der Überschrift → keine
+  widersprüchlichen Zahlen, weil Leser den Bezug sehen.
+
+### Analyse-Schema beachten (sonst reduziertes Carousel!)
+Nur Analysen im **neuen 11-Abschnitte-Schema** (`analyses/PROMPT.md`) liefern
+Wahrscheinlichkeiten + Kursziele. Ältere/abweichende Analysen (z. B. mit
+„## 4. BEAR CASE" statt BASE, ohne `Eintrittswahrscheinlichkeit: X%`) lassen
+die Szenario-Slides automatisch weg (Cover/Einschätzung/Unternehmen/Fazit
+bleiben). Der Generator meldet beim Lauf `Szenarien ja/NEIN`. Für volle Posts:
+Analyse vorher nach `analyses/PROMPT.md` neu generieren.
+
+### SEO / Algorithmus (in `caption.txt` umgesetzt)
+- **Erste Zeile = Keyword zuerst:** „<Firmenname> (TICKER) — Aktienanalyse:
+  <Verdict>" → das indexiert Instagram für die Suche.
+- Strukturierte Kurzfassung (Szenarien, Geschäftsmodell, Fazit, Peers) als
+  „👇 vollständige Analyse" — die echte Langfassung (bis 1000 Wörter) passt
+  nicht in die 2.200-Zeichen-Caption → **Link in Bio** auf die Rating-Seite
+  (`data/ratings/TICKER.html`).
+- Hashtag-Mix: breit (#aktien #börse) + Ticker (#amd) + Sektor (#technologie) +
+  Branded (#aialphaselection). Pflicht-Disclaimer in jeder Caption.
+- **Saves/Dwell** treiben: Carousel „swipe für alle Szenarien" + Verweis auf
+  Caption. Reels (9:16) zusätzlich für Reichweite.
+
+### Firmenlogos
+Siehe `instagram/assets/logos/README.md`. Kurz: `TICKER.png` (transparent)
+dort ablegen; fehlt es, nutzt der Cover eine Wortmarke. Auto-Download ist in
+der Cloud geblockt — Logos manuell ablegen (oder im Chat hochladen).
+
 ## Roadmap
 - **Jetzt:** wöchentliches Carousel, manueller Upload.
 - **Später (genug Follower):** Stories (kurze Updates); Reel-Animation aus den
