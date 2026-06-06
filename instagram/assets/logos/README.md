@@ -10,10 +10,13 @@ AI-Alpha-Marke, Analyse = Firmenlogo).
   - `SIE_DE.png` **oder** `SIE.DE.png` (beides wird gefunden)
 - Format: **PNG mit transparentem Hintergrund** bevorzugt (auch `.webp`,
   `.jpg`/`.jpeg` möglich). Groß-/Kleinschreibung egal.
-- Empfehlung: möglichst quadratisch oder breit, mind. ~400 px Kantenlänge,
-  heller/weißer Logo-Look auf transparent (der Cover-Hintergrund ist dunkles
-  Navy). Transparente Ränder werden automatisch beschnitten und das Logo
-  proportional in das Cover-Panel eingepasst.
+- Das Logo sitzt auf einer **weißen Karte** → **dunkle/schwarze Logos** (das
+  übliche „Logo Black PNG") wirken am besten. Auch farbige Logos auf weiß sind
+  ok. Reine weiße Logos wären auf der weißen Karte unsichtbar — dann lieber die
+  schwarze/farbige Variante nehmen.
+- Empfehlung: möglichst quadratisch oder breit, mind. ~400 px Kantenlänge.
+  Transparente/weiße Ränder werden automatisch beschnitten und das Logo
+  proportional in die Karte eingepasst.
 
 ## Fehlt ein Logo?
 Dann fällt der Cover automatisch auf eine **Wortmarke** zurück (Ticker groß +

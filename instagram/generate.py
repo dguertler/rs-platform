@@ -225,6 +225,18 @@ def build_analysis(fmt, a, date_iso, outdir):
     return saved
 
 
+def build_analysis_reel(a, date_iso, outdir):
+    """Reel-Teaser (9:16): kurz & knackig, leitet auf den Karussell-Post um."""
+    saved = []
+    emit = _emitter("reel", outdir, saved)
+    emit("hook", lambda c: render.slide_reel_hook(c, a, date_iso))
+    if _has_scenarios(a):
+        emit("szenarien", lambda c: render.slide_reel_scenarios(c, a, date_iso))
+    emit("fazit", lambda c: render.slide_reel_takeaway(c, a, date_iso))
+    emit("cta", lambda c: render.slide_reel_cta(c, a, date_iso))
+    return saved
+
+
 def caption_analysis(a):
     """Vollständige, für Instagram aufbereitete Caption (Text unter den Fotos).
     Kein externer Link — die Analyse steht direkt als Text im Post.
@@ -365,18 +377,24 @@ def main():
     ap.add_argument("--kw", type=int, help="Kalenderwoche – baut den Wochenpost aus instagram/data/")
     ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
     ap.add_argument("--analysis", help="Ticker oder Pfad zu analyses/TICKER.md (Analyse-Post)")
+    ap.add_argument("--headline", help="Eigene Cover-Headline (Frage/These) für den Analyse-Post")
     ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
     args = ap.parse_args()
 
     # ── Analyse-Post aus analyses/TICKER.md ───────────────────────────────────
     if args.analysis:
         a = ana.parse_analysis(args.analysis)
+        if args.headline:
+            a["headline"] = args.headline
         slug = a["ticker"].replace(".", "_")
         base = os.path.join(ROOT, "out", "instagram", f"{args.date}_ANALYSE_{slug}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
         all_saved = []
         for fmt in fmts:
-            all_saved += build_analysis(fmt, a, args.date, os.path.join(base, fmt))
+            if fmt == "reel":
+                all_saved += build_analysis_reel(a, args.date, os.path.join(base, fmt))
+            else:
+                all_saved += build_analysis(fmt, a, args.date, os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_analysis(a))

@@ -614,45 +614,70 @@ def _stars(c, x, top, value, total=5, gap=50, s=520, col=T.BLUE):
                      edgecolor="none", zorder=11)
 
 
-# 1) COVER — Firmenlogo + Verdict + Hook
+def _logo_card(c, x, top, w, h, ticker, radius=28):
+    """Helle Karte mit Firmenlogo (contain). Fehlt das Logo: Ticker dunkel
+    zentriert. So wirken auch schwarze Firmenlogos sauber auf dem dunklen Cover."""
+    c.tile(x, top, w, h, color="#FFFFFF", radius=radius)
+    logo = T.company_logo_file(ticker)
+    pad_x, pad_y = int(w * 0.12), int(h * 0.18)
+    drew = c.draw_image_contain(logo, x + pad_x, top + pad_y,
+                                w - 2 * pad_x, h - 2 * pad_y) if logo else None
+    if not drew:
+        c.text(x + w / 2, top + h / 2 - h * 0.16, ticker,
+               int(h * 0.42), weight="bold", ha="center", font="mono", color=T.BG)
+    return bool(drew)
+
+
+def analysis_headline(a):
+    """Frage/These als Hook (erste 3 Sekunden). a['headline'] hat Vorrang
+    (bespoke); sonst verdict-bewusst & pro Ticker variiert."""
+    if a.get("headline"):
+        return a["headline"]
+    name = A.short_name(a.get("name", a["ticker"]))
+    t, sc = a["ticker"], a.get("score")
+    v = (a["verdict"] or "").upper()
+    buy = [f"{name}: Kaufen — oder schon zu spät?",
+           f"Ist {name} der nächste Verdoppler?",
+           f"{t}: {sc}/100 — verdient diese Aktie den Hype?",
+           f"{name}: Warum die Bullen jetzt am Drücker sind"]
+    hold = [f"{name}: Kauf oder Falle?",
+            f"{name} — abwarten oder zugreifen?",
+            f"{t}: Top-Story, aber der richtige Preis?",
+            f"{name}: Chance oder Überbewertung?"]
+    watch = [f"{name}: Finger weg — oder Schnäppchen?",
+             f"{t}: Mehr Risiko als Chance?",
+             f"{name}: Lieber abwarten?"]
+    pool = buy if v == "BUY" else (watch if v in ("WATCH", "SELL") else hold)
+    return pool[sum(ord(ch) for ch in a["ticker"]) % len(pool)]
+
+
+# 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict
 def slide_analysis_cover(c, a, date_iso):
-    col = verdict_color(a["verdict"])
     # Top-Leiste: Marke + Tag + Datum
-    lw = c.draw_logo(MX, 70, 48)
+    lw = c.draw_logo(MX, 64, 46)
     if not lw:
-        c.text(MX, 74, BRAND, 20, color=T.TEXT, weight="bold")
-    c.text(c.W - MX, 80, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
-    c.tile(MX, 150, 220, 50, color=T.PANEL_HI)
-    c.text(MX + 24, 163, "AKTIENANALYSE", 17, color=T.BLUE, weight="bold")
+        c.text(MX, 68, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 74, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+    c.tile(MX, 140, 220, 50, color=T.PANEL_HI)
+    c.text(MX + 24, 153, "AKTIENANALYSE", 17, color=T.BLUE, weight="bold")
 
-    # Logo-Panel (Firmenlogo oder Wortmarke)
-    panel_top, panel_h = 250, 430
-    c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
-    logo = T.company_logo_file(a["ticker"])
-    drew = c.draw_image_contain(logo, MX + 80, panel_top + 60,
-                                c.W - 2 * MX - 160, panel_h - 200) if logo else None
-    if drew:
-        c.text(c.W / 2, panel_top + panel_h - 78, a["ticker"], 40,
-               weight="bold", ha="center")
-    else:
-        # Wortmarke-Fallback: Ticker groß zentriert (Name steht unter dem Panel)
-        c.text(c.W / 2, panel_top + panel_h / 2 - 95, a["ticker"], 150,
-               weight="bold", ha="center", font="mono")
+    # HEADLINE (Frage/These) — die ersten 3 Sekunden
+    hy = _draw_paragraph(c, MX, 226, analysis_headline(a), 50, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=62, max_lines=3)
 
-    # Name + Sektor unter dem Panel
-    sub = a["name"]
+    # Weiße Logo-Karte
+    card_top = max(hy + 40, 430)
+    card_h = 360
+    _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, a["ticker"])
+
+    # Name + Sektor
+    sub = A.short_name(a["name"])
     if a.get("sector"):
         sub += f"  ·  {a['sector']}"
-    c.text(MX, panel_top + panel_h + 34, sub, 22, color=T.MUTED)
+    c.text(MX, card_top + card_h + 30, sub, 22, color=T.MUTED)
 
     # Verdict-Badge
-    badge_top = panel_top + panel_h + 86
-    _verdict_badge(c, MX, badge_top, a["verdict"], a["score"], h=130)
-
-    # Hook
-    if a.get("hook"):
-        _draw_paragraph(c, MX, badge_top + 162, a["hook"], 24,
-                        c.W - 2 * MX, color=T.TEXT, weight="bold", max_lines=3)
+    _verdict_badge(c, MX, card_top + card_h + 78, a["verdict"], a["score"], h=130)
     analysis_footer(c)
 
 
@@ -867,4 +892,83 @@ def slide_analysis_fazit(c, a, date_iso):
     for i in range(3):
         c.ax.scatter(c.W - MX - 60 - i * 34, c.y(cta_top + 60), s=150,
                      marker="v", color=T.BLUE, edgecolor="none", zorder=12)
+    analysis_footer(c)
+
+
+# ── Reel-Teaser (9:16): kurz & knackig, leitet aufs Karussell um ───────────────
+def reel_header(c, date_iso):
+    lw = c.draw_logo(MX, 80, 50)
+    if not lw:
+        c.text(MX, 84, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 92, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+    c.tile(MX, 168, 240, 54, color=T.PANEL_HI)
+    c.text(MX + 24, 182, "AKTIENANALYSE", 18, color=T.BLUE, weight="bold")
+
+
+def slide_reel_hook(c, a, date_iso):
+    reel_header(c, date_iso)
+    # Frage/These groß (erste 3 Sekunden)
+    hy = _draw_paragraph(c, MX, 300, analysis_headline(a), 58, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=72, max_lines=3)
+    card_top = max(hy + 60, 600)
+    _logo_card(c, MX, card_top, c.W - 2 * MX, 470, a["ticker"])
+    sub = A.short_name(a["name"])
+    if a.get("sector"):
+        sub += f"  ·  {a['sector']}"
+    c.text(MX, card_top + 470 + 34, sub, 24, color=T.MUTED)
+    _verdict_badge(c, MX, card_top + 470 + 86, a["verdict"], a["score"], h=150)
+    analysis_footer(c)
+
+
+def slide_reel_scenarios(c, a, date_iso):
+    reel_header(c, date_iso)
+    _scenario_rows(c, a, 320, "scenarios",
+                   "Szenarien · 12–18 Monate",
+                   "Wahrscheinlichkeit & Kursziel — Bull + Base + Bear = 100 %")
+    analysis_footer(c)
+
+
+def slide_reel_takeaway(c, a, date_iso):
+    reel_header(c, date_iso)
+    col = verdict_color(a["verdict"])
+    c.text(MX, 320, "Das Wichtigste", 48, weight="bold")
+    _verdict_badge(c, MX, 410, a["verdict"], a["score"], h=150)
+    core = a.get("fazit_core") or A._first_sentence(a["sections"].get(11, ""), 280)
+    y = _draw_paragraph(c, MX, 620, core, 28, c.W - 2 * MX,
+                        color=T.TEXT, line_h=42, max_lines=6)
+    rt = a["ratings"]
+    items = [("Qualität", rt.get("Qualität")), ("Wachstum", rt.get("Wachstum")),
+             ("Bewertung", rt.get("Bewertung")), ("Katalysator", rt.get("Katalysator"))]
+    top0 = max(y + 60, 1080)
+    for i, (label, val) in enumerate(items):
+        yy = top0 + i * 120
+        c.text(MX, yy, label.upper(), 22, color=T.MUTED, weight="bold")
+        _stars(c, MX + 360, yy + 14, val, col=col, gap=58, s=620)
+        c.text(c.W - MX, yy, f"{val if val is not None else '–'}/5", 30,
+               color=T.TEXT, weight="bold", ha="right", font="mono")
+    analysis_footer(c)
+
+
+def slide_reel_cta(c, a, date_iso):
+    """Hybrid-Trick: das Reel leitet auf den vollständigen Karussell-Post um."""
+    reel_header(c, date_iso)
+    col = verdict_color(a["verdict"])
+    c.text(MX, 460, "Willst du die", 56, weight="bold")
+    c.text(MX, 532, "ganze Analyse?", 56, color=col, weight="bold")
+    box_top = 700
+    c.tile(MX, box_top, c.W - 2 * MX, 470, color=T.PANEL)
+    c.tile(MX, box_top, 12, 470, color=T.BLUE, radius=6)
+    _draw_paragraph(c, MX + 50, box_top + 50,
+                    f"Die komplette {a['ticker']}-Analyse mit allen Zahlen, "
+                    f"Szenarien und Kurszielen findest du als Karussell-Post "
+                    f"auf meinem Profil.", 30, c.W - 2 * MX - 100,
+                    color=T.TEXT, line_h=46, max_lines=6)
+    c.text(MX + 50, box_top + 330, "Profil öffnen", 26, color=T.MUTED)
+    c.text(MX + 50, box_top + 372, HANDLE, 40, color=T.BLUE, weight="bold")
+    # nach oben zeigende Dreiecke (zum Profil/Feed)
+    for i in range(3):
+        c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + 360), s=170,
+                     marker="^", color=T.BLUE, edgecolor="none", zorder=12)
+    c.text(MX, 1230, f"Folge {HANDLE} für 1–2 Analysen pro Woche", 24,
+           color=T.MUTED)
     analysis_footer(c)

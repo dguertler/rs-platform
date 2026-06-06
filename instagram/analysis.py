@@ -169,7 +169,7 @@ def parse_analysis(path_or_ticker):
     # Meta: '**Name** · Sector · Datum · Signal: X'
     m = re.search(r"^\*\*(.+?)\*\*\s*·\s*(.+?)\s*·\s*([\d.]+)", md, re.MULTILINE)
     if m:
-        a["name"] = m.group(1).strip()
+        a["name"] = " ".join(m.group(1).split())
         a["sector"] = m.group(2).strip()
         a["date"] = m.group(3).strip()
     else:
@@ -235,6 +235,22 @@ def parse_analysis(path_or_ticker):
     a["peers"] = _peers(fazit)
 
     return a
+
+
+def short_name(name):
+    """'Advanced Micro Devices, Inc.' -> 'Advanced Micro Devices' (für Headlines)."""
+    n = " ".join((name or "").split(",")[0].split())
+    sufs = (" Inc.", " Inc", " Incorporated", " Corporation", " Corp.", " Corp",
+            " Company", " Co.", " Co", " AG", " SE", " N.V.", " NV", " plc",
+            " Ltd.", " Ltd", " Group", " Holding", " Holdings")
+    changed = True
+    while changed:
+        changed = False
+        for s in sufs:
+            if n.endswith(s):
+                n = n[:-len(s)].strip(" .")
+                changed = True
+    return n or name
 
 
 def fmt_range(rng, decimals=0):
