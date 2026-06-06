@@ -80,3 +80,19 @@ Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 
 Hauptformat **Carousel (4:5)**; Reel-Frames (9:16) entstehen parallel.
 Stories erst später (bei genügend Followern) — siehe Roadmap in PROMPT.md.
+
+### Instagram-Analyse-Post (Einzelaktie)
+
+Wenn der Nutzer schreibt `Instagram-Analyse TICKER` / `Analyse-Post TICKER`
+(macht aus einer fertigen `analyses/TICKER.md` ein Carousel + Reel-Teaser):
+
+1. `instagram/CONTEXT.md` (Abschnitt 11) + `PROMPT.md` (Abschnitt „Zweiter
+   Post-Typ: AKTIEN-ANALYSE") lesen.
+2. Generieren — am besten mit individueller Hook-Frage:
+   ```bash
+   python3 -m instagram.generate --analysis TICKER --headline "<Frage/These>"
+   ```
+3. Output `out/instagram/<DATUM>_ANALYSE_<TICKER>/`: `carousel/` (10 PNG),
+   `reel/` (4 PNG), `reel.mp4`, `caption.txt`, `reel_script.txt` zeigen —
+   **kein Auto-Upload**. Firmenlogo unter `instagram/assets/logos/TICKER.png`.
+   Kein aktueller Kurs, keine GWS-Ampel/Breakout auf den Slides.
