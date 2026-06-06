@@ -145,6 +145,18 @@ Output: `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` +
   Karussell-Post auf meinem Profil". Das Reel holt Reichweite und leitet sie
   auf den Karussell-Post um (Hybrid-Funnel).
 
+### Reel-Video & Script (zwei Wege)
+Jeder Analyse-Lauf erzeugt zusätzlich:
+- **`reel_script.txt`** — fertiges Voiceover-Script + KI-Generator-Prompt (düster,
+  cineastisch, B-Roll je Sektor, Timecodes) für **InVideo AI / Google Veo /
+  CapCut**. Dort einfügen → professionelles Reel mit KI-Stimme & B-Roll bauen.
+- **`reel.mp4`** — einfache, sofort postbare MP4 aus den 9:16-Frames
+  (Ken-Burns-Zoom + Crossfade, **ohne** Voiceover/B-Roll). Braucht
+  `imageio`+`imageio-ffmpeg` (in requirements; sonst entfällt nur die MP4).
+
+Beide Reels sind **Teaser** und enden mit dem **Hybrid-CTA** „ganze Analyse im
+Karussell-Post auf meinem Profil" → leiten Reel-Reichweite aufs Carousel um.
+
 ### Hook = Frage/These (die ersten 3 Sekunden)
 Die erste Slide (und der Reel-Hook) trägt eine **Frage oder steile These** statt
 „Aktienanalyse Firma X" — z. B. „<Aktie>: Kauf oder Falle?". Ohne `--headline`
@@ -152,22 +164,24 @@ erzeugt der Generator automatisch eine **verdict-bewusste, pro Ticker variierte*
 Frage. Für maximale Wirkung schreibt Claude pro Post eine **individuelle**
 Headline und übergibt sie via `--headline` (jede Analyse anders gestalten).
 
-### Slide-Reihenfolge (Analyse, 5–7 Slides)
-1. **Cover** — Firmenlogo + Name/Sektor + Verdict-Badge + Score/100 + 1-Satz-Hook
-2. **Gesamteinschätzung** — Kernthese (Investment-Case) + 4 Rating-Pips
-   (Qualität/Wachstum/Bewertung/Katalysator)
+### Slide-Reihenfolge (Analyse, ~8–10 Slides, Tiefe = USP)
+1. **Cover** — Frage/These-Hook + Firmenlogo (weiße Karte) + Verdict-Badge + Score
+2. **Gesamteinschätzung** — Kernthese (Investment-Case) + 4 **Sterne**-Ratings
 3. **Szenarien · 12–18 Monate** — Bull/Base/Bear mit **Eintrittswahrscheinlichkeit**
-   (Balken) + Kursziel-Spanne *(aus Analyse-Punkten 3–5)*
-4. **Langfrist · 3–5 Jahre** — Kursziel-Spannen je Szenario *(aus Punkt 10)*,
-   bewusst **ohne** Wahrscheinlichkeiten — Zeithorizont klar getrennt von Slide 3
-5. **Was macht das Unternehmen?** — Highlights aus Punkt 1+2 (Geschäftsmodell)
-6. **Die drei Szenarien erklärt** — je 1 Treibersatz Bull/Base/Bear (konsistent zu 3)
-7. **Profi-Fazit** — Kernaussage + vergleichbare Titel (Peers) + Verweis auf die
-   vollständige Analyse in der **Caption** (Pfeile ⌄ + „Link in Bio")
+   (Balken) + Kursziel-Spanne *(aus Punkt 3–5)*
+4. **Was macht das Unternehmen?** — Highlights aus Punkt 1+2 (Geschäftsmodell)
+5. **Die drei Szenarien erklärt** — je 1 Treibersatz Bull/Base/Bear (konsistent zu 3)
+6. **Bewertung: die KGV-Illusion** — Trailing- vs. Forward-KGV-Chips + Text *(Punkt 7)*
+7. **Risiko & Realitätscheck** — Positionierung/Erwartungen + Positionsgrößen-Chip
+   *(Punkt 8; Kurs & GWS herausgefiltert)*
+8. **Langfrist · 3–5 Jahre** — Kursziel-Spannen je Szenario *(Punkt 10)*, ohne %
+9. **Profi-Fazit** — Kernaussage + vergleichbare Titel (Peers)
+10. **Speichern & mitreden** — Save-CTA + Community-Frage (Engagement)
 
-**Bewusst NICHT auf den Slides:** aktueller Kurs; Punkt 9 (Technik/Momentum);
-**GWS-Ampel & Breakout-Status**; Punkte 6/7/8 (Detail zu Qualität/Bewertung/
-Psychologie) — die volle Tiefe steht in der Caption / auf der Rating-Seite.
+Tiefen-Slides (6/7/8/10) entfallen automatisch, wenn der Abschnitt fehlt
+(Alt-Schema → kürzeres Carousel). **Bewusst NICHT auf den Slides:** aktueller
+Kurs; **GWS-Ampel & Breakout-Status** (Punkt 9) — wird aus allen Texten
+gefiltert (`analysis.clean_for_slide`).
 
 ### Wichtig: Kursziele konsistent halten
 - **Slide 3 = 12–18 Monate** (mit Wahrscheinlichkeit, aus Punkt 3/4/5).

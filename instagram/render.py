@@ -614,6 +614,23 @@ def _stars(c, x, top, value, total=5, gap=50, s=520, col=T.BLUE):
                      edgecolor="none", zorder=11)
 
 
+def _num(s):
+    try:
+        return float(str(s).replace(".", "").replace(",", "."))
+    except (ValueError, AttributeError):
+        return 0.0
+
+
+def _draw_bookmark(c, x, top, w, h, col):
+    """Lesezeichen-Icon (Save-Symbol) als Polygon."""
+    from matplotlib.patches import Polygon
+    notch = h * 0.28
+    pts = [(x, c.y(top)), (x + w, c.y(top)), (x + w, c.y(top + h)),
+           (x + w / 2, c.y(top + h - notch)), (x, c.y(top + h))]
+    c.ax.add_patch(Polygon(pts, closed=True, facecolor=col, edgecolor="none",
+                           zorder=11))
+
+
 def _logo_card(c, x, top, w, h, ticker, radius=28):
     """Helle Karte mit Firmenlogo (contain). Fehlt das Logo: Ticker dunkel
     zentriert. So wirken auch schwarze Firmenlogos sauber auf dem dunklen Cover."""
@@ -892,6 +909,101 @@ def slide_analysis_fazit(c, a, date_iso):
     for i in range(3):
         c.ax.scatter(c.W - MX - 60 - i * 34, c.y(cta_top + 60), s=150,
                      marker="v", color=T.BLUE, edgecolor="none", zorder=12)
+    analysis_footer(c)
+
+
+# 6b) BEWERTUNG — „KGV-Illusion" (Abschnitt 7), ohne aktuellen Kurs
+def slide_analysis_valuation(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    pe = A.pe_multiples(a["sections"].get(7, ""))
+    illusion = (pe["trailing"] and pe["forward"]
+                and _num(pe["trailing"]) > _num(pe["forward"]) * 1.8)
+    title = "Bewertung: die KGV-Illusion" if illusion else "Bewertung"
+    c.text(MX, 184, title, 42, weight="bold")
+    c.text(MX, 240, "Warum das optische KGV in die Irre führt"
+           if illusion else "Bewertung im Zykluskontext", 18, color=T.MUTED)
+
+    y = 300
+    if pe["trailing"] or pe["forward"]:
+        gap = 26
+        cw = (c.W - 2 * MX - gap) // 2
+        ch = 150
+        if pe["trailing"]:
+            c.tile(MX, y, cw, ch, color=T.PANEL)
+            c.tile(MX, y, 10, ch, color=T.RED, radius=5)
+            c.text(MX + 34, y + 26, "TRAILING-KGV", 16, color=T.MUTED, weight="bold")
+            c.text(MX + 34, y + 56, pe["trailing"] + "x", 50, color=T.RED,
+                   weight="bold", font="mono")
+            c.text(MX + 34, y + 118, "optisch teuer · Artefakt", 16, color=T.MUTED)
+        if pe["forward"]:
+            x2 = MX + cw + gap
+            c.tile(x2, y, cw, ch, color=T.PANEL)
+            c.tile(x2, y, 10, ch, color=T.GREEN, radius=5)
+            c.text(x2 + 34, y + 26, "FORWARD-KGV", 16, color=T.MUTED, weight="bold")
+            c.text(x2 + 34, y + 56, pe["forward"] + "x", 50, color=T.GREEN,
+                   weight="bold", font="mono")
+            c.text(x2 + 34, y + 118, "die relevante Kennzahl", 16, color=T.MUTED)
+        y += ch + 40
+
+    txt = A.clean_for_slide(a["sections"].get(7, ""))
+    _draw_paragraph(c, MX, y, txt, 24, c.W - 2 * MX, color=T.TEXT,
+                    line_h=37, max_lines=11)
+    analysis_footer(c)
+
+
+# 7b) RISIKO & REALITÄTSCHECK — Positionierung/Psychologie (Abschnitt 8), ohne GWS
+def slide_analysis_risk(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    c.text(MX, 184, "Risiko & Realitätscheck", 42, weight="bold")
+    c.text(MX, 240, "Positionierung, Erwartungen, Volatilität", 18, color=T.MUTED)
+
+    # Positionsgrößen-Hinweis als Warnchip (falls im Fazit genannt)
+    y = 300
+    psz = A.position_size(a.get("fazit", ""))
+    if psz:
+        c.tile(MX, y, c.W - 2 * MX, 96, color=T.PANEL)
+        c.tile(MX, y, 10, 96, color=T.AMBER, radius=5)
+        c.text(MX + 34, y + 24, "POSITIONSGRÖSSE BEGRENZEN", 16,
+               color=T.AMBER, weight="bold")
+        c.text(c.W - MX - 34, y + 26, psz, 40, color=T.AMBER, weight="bold",
+               ha="right", font="mono")
+        y += 96 + 36
+
+    body = A.clean_for_slide(a["sections"].get(8, "")) or \
+        A.clean_for_slide(a["scenarios"]["bear"]["summary"])
+    _draw_paragraph(c, MX, y, body, 24, c.W - 2 * MX, color=T.TEXT,
+                    line_h=37, max_lines=12)
+    analysis_footer(c)
+
+
+# 9b) SPEICHERN & MITREDEN — Engagement-CTA (Save + Community-Frage)
+def slide_analysis_cta(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    c.text(MX, 200, "Speichern & mitreden", 46, weight="bold")
+
+    # Save-Box
+    c.tile(MX, 300, c.W - 2 * MX, 150, color=T.PANEL)
+    c.tile(MX, 300, 12, 150, color=T.BLUE, radius=6)
+    _draw_bookmark(c, MX + 46, 336, 44, 78, T.BLUE)
+    c.text(MX + 130, 326, "Speichere diesen Beitrag", 30, weight="bold")
+    c.text(MX + 130, 372, "für deine Watchlist — die ganze Analyse auf einen Blick.",
+           19, color=T.MUTED)
+
+    # Community-Frage
+    name = A.short_name(a["name"])
+    c.tile(MX, 500, c.W - 2 * MX, 240, color=T.PANEL_HI)
+    c.text(MX + 40, 532, "DEINE MEINUNG?", 16, color=T.BLUE, weight="bold")
+    _draw_paragraph(c, MX + 40, 576,
+                    f"{name}: berechtigter Hype oder überhitzt? "
+                    f"Schreib deine These in die Kommentare.", 28,
+                    c.W - 2 * MX - 80, color=T.TEXT, weight="bold", line_h=42,
+                    max_lines=4)
+
+    # Folgen-CTA
+    c.text(MX, 800, "Folge für mehr Profi-Analysen", 30, color=T.TEXT, weight="bold")
+    c.text(MX, 846, HANDLE, 34, color=T.BLUE, weight="bold")
+    c.text(MX, 904, "1–2 Aktienanalysen pro Woche · faceless · datengetrieben",
+           19, color=T.MUTED)
     analysis_footer(c)
 
 

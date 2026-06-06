@@ -105,19 +105,28 @@ _ABBREV = {"nr", "z", "b", "ca", "mrd", "mio", "bzw", "u", "a", "ggf", "inkl",
            "tsd", "abb"}
 
 
-def _first_sentence(text, max_len=240):
-    """Erster Satz — Abkürzungen (Nr., z.B., Mrd. …) brechen NICHT um,
-    Zahlen mit Punkt (4.800) ebenfalls nicht (Regex verlangt Space/Ende)."""
-    text = " ".join(text.split())
-    s = text
-    for m in re.finditer(r"[.!?](\s|$)", text):
+def sentences(text):
+    """Satz-Splitter, der Abkürzungen (Nr., z.B., Mrd. …) und Zahlen mit Punkt
+    (4.800) respektiert."""
+    t = " ".join((text or "").split())
+    out, start = [], 0
+    for m in re.finditer(r"[.!?](\s|$)", t):
         i = m.start()
-        prev = re.search(r"(\S+)$", text[:i])
+        prev = re.search(r"(\S+)$", t[:i])
         word = prev.group(1).lower().strip(".,;:()-—«»\"'") if prev else ""
         if word in _ABBREV:
             continue
-        s = text[:i + 1].strip()
-        break
+        out.append(t[start:i + 1].strip())
+        start = i + 1
+    if start < len(t):
+        out.append(t[start:].strip())
+    return [s for s in out if s]
+
+
+def _first_sentence(text, max_len=240):
+    """Erster Satz (abkürzungssicher), auf max_len gekürzt."""
+    ss = sentences(text)
+    s = ss[0] if ss else " ".join((text or "").split())
     if len(s) > max_len:
         s = s[:max_len].rsplit(" ", 1)[0] + "…"
     return s.strip()
@@ -235,6 +244,41 @@ def parse_analysis(path_or_ticker):
     a["peers"] = _peers(fazit)
 
     return a
+
+
+def clean_for_slide(text):
+    """Bereinigt Analyse-Text für die Slides: entfernt GWS-/Breakout-/Ampel-Sätze,
+    RS-Score-Nennungen und anonymisiert den AKTUELLEN Kurs (Vorgabe: kein Kurs)."""
+    sents = [s for s in sentences(text)
+             if not re.search(r"GWS|Breakout|Ampel", s, re.I)]
+    t = " ".join(sents)
+    t = re.sub(r"RS-Score\s*[\d.,]+\s*[—–-]?\s*", "", t)
+    # "Kurs $516" / "Kurs von 516 USD" -> "aktuellen Kurs"
+    t = re.sub(r"\bKurs(?:\s*von)?\s*\$?\s*\d[\d.,]*\s*(?:USD|EUR)?\b",
+               "aktuellen Kurs", t, flags=re.I)
+    t = re.sub(r"\b(bei|auf|über)\s*\$\s*\d[\d.,]*\b", r"\1 aktuellem Niveau", t)
+    t = " ".join(t.split()).strip()
+    if t and t[0].islower():
+        t = t[0].upper() + t[1:]
+    return t
+
+
+def pe_multiples(sec7):
+    """Trailing-/Forward-KGV + P/B aus dem Bewertungs-Abschnitt (für KGV-Illusion)."""
+    def g(pat):
+        m = re.search(pat, sec7 or "", re.I)
+        return m.group(1) if m else None
+    return {
+        "trailing": g(r"Trailing-?PE\s*([\d.,]+)\s*x"),
+        "forward": g(r"Forward-?PE\s*([\d.,]+)\s*x"),
+        "pb": g(r"P/?B\s*([\d.,]+)\s*x"),
+    }
+
+
+def position_size(fazit):
+    """'max. 3–4%' o.ä. aus dem Profi-Fazit (Positionsgrößen-Hinweis)."""
+    m = re.search(r"max\.?\s*(\d+(?:\s*[–\-]\s*\d+)?)\s*%", fazit or "", re.I)
+    return f"max. {m.group(1).replace(' ', '')}%" if m else None
 
 
 def short_name(name):

@@ -212,8 +212,6 @@ def build_analysis(fmt, a, date_iso, outdir):
     emit("einschaetzung", lambda c: render.slide_analysis_verdict(c, a, date_iso))
     if _has_scenarios(a):
         emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
-    if _has_longterm(a):
-        emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
     if a.get("business_bullets"):
         emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
     if _has_scenarios(a):
@@ -221,7 +219,14 @@ def build_analysis(fmt, a, date_iso, outdir):
     elif a.get("pro_bullets") or a.get("con_bullets"):
         # Alt-Schema ohne Wahrscheinlichkeiten: Chancen/Risiken statt Szenarien
         emit("chancen_risiken", lambda c: render.slide_analysis_chances(c, a, date_iso))
+    if a["sections"].get(7):                       # Bewertung / KGV-Illusion
+        emit("bewertung", lambda c: render.slide_analysis_valuation(c, a, date_iso))
+    if a["sections"].get(8):                       # Risiko & Realitätscheck
+        emit("risiko", lambda c: render.slide_analysis_risk(c, a, date_iso))
+    if _has_longterm(a):
+        emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
     emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))
+    emit("cta", lambda c: render.slide_analysis_cta(c, a, date_iso))
     return saved
 
 
@@ -235,6 +240,94 @@ def build_analysis_reel(a, date_iso, outdir):
     emit("fazit", lambda c: render.slide_reel_takeaway(c, a, date_iso))
     emit("cta", lambda c: render.slide_reel_cta(c, a, date_iso))
     return saved
+
+
+def reel_script(a):
+    """Fertiges Voiceover-Script + KI-Generator-Prompt (InVideo/Veo/CapCut).
+    Dynamisch aus der Analyse — im Stil eines düsteren, professionellen
+    Finanz-Reels (9:16)."""
+    name = render.A.short_name(a["name"])
+    t = a["ticker"]
+    broll = {
+        "Technology": "Makroaufnahmen glühender Mikrochips, Serverräume mit "
+                      "blinkenden LEDs, fließender Code auf Monitoren, abstrakte "
+                      "3D-Aktiencharts",
+        "Healthcare": "moderne Labore, DNA-/Molekül-Visualisierungen, Pipetten "
+                      "und Reinräume, abstrakte 3D-Aktiencharts",
+        "Industrials": "Roboterarme in Fabriken, Stromnetze und Turbinen, "
+                       "Hightech-Produktion, abstrakte 3D-Aktiencharts",
+        "Energy": "Windräder und Solarfelder, Stromnetze bei Nacht, Turbinen, "
+                  "abstrakte 3D-Aktiencharts",
+    }.get(a.get("sector", ""), "abstrakte Hightech- und Finanz-Visualisierungen, "
+          "Serverräume, fließender Code, 3D-Aktiencharts")
+
+    pe = ana.pe_multiples(a["sections"].get(7, ""))
+    misconception = ""
+    if pe["trailing"] and pe["forward"]:
+        misconception = (f"Wer nur auf das optische KGV von {pe['trailing']}x schaut, "
+                         f"versteht die Aktie nicht — relevant ist das Forward-KGV "
+                         f"von {pe['forward']}x.")
+
+    sc = a["scenarios"]
+    def rng(k): return ana.fmt_range(sc[k]["range"]) if _has_scenarios(a) else ""
+    targets = ""
+    if _has_scenarios(a):
+        lo = rng("bear").split("–")[0] if rng("bear") else ""
+        hi = rng("bull").split("–")[-1] if rng("bull") else ""
+        targets = f"{lo} bis {hi}".strip()
+
+    bear = ana.clean_for_slide(sc["bear"]["summary"]) if _has_scenarios(a) else ""
+    headline = render.analysis_headline(a)
+
+    L = []
+    L.append("# REEL-SCRIPT — " + f"{name} ({t})")
+    L.append("# Format 9:16 · ~45 Sek · faceless · für InVideo AI / Google Veo / "
+             "CapCut Script-to-Video")
+    L.append("")
+    L.append("## [AI-GENERATOR-PROMPT]")
+    L.append(
+        f"\"Erstelle ein düsteres, hochprofessionelles Finanz-Reel für Instagram "
+        f"im Format 9:16. Schnelle, dynamische Schnitte alle ~1,5 Sekunden. "
+        f"Visueller Stil: minimalistisch, cineastisch, High-Tech, dunkler "
+        f"Hintergrund mit blauen/cyan Akzenten. B-Roll: {broll}. Stimme: tiefe, "
+        f"professionelle, charismatische deutsche Männerstimme (KI). Musik: "
+        f"subtiler, rhythmischer, dramatischer Tech-Beat. Untertitel groß, fett, "
+        f"zentriert, synchron zum Voiceover aufpoppend.\"")
+    L.append("")
+    L.append("## [SCRIPT]")
+    L.append(f"[0:00–0:05]  (Overlay: {t} — {a['verdict']})")
+    L.append(f"VO: \"{headline} {a.get('hook','')}\"")
+    L.append("")
+    if misconception:
+        L.append(f"[0:05–0:13]  (Overlay: KGV {pe['trailing']}x = irreführend)")
+        L.append(f"VO: \"{misconception}\"")
+        L.append("")
+    core = ana.clean_for_slide(a["sections"].get(1, ""))
+    csents = ana.sentences(core)
+    core_vo = " ".join(csents[1:3]).strip() if len(csents) > 1 else core
+    if core_vo:
+        L.append("[0:13–0:23]  (Overlay: Der Kern)")
+        L.append(f"VO: \"{core_vo}\"")
+        L.append("")
+    if bear:
+        L.append("[0:23–0:33]  (Overlay: Das größte Risiko)")
+        L.append(f"VO: \"Das Hauptrisiko: {bear}\"")
+        L.append("")
+    if _has_scenarios(a):
+        L.append("[0:33–0:40]  (Overlay: Szenarien & Kursziele)")
+        L.append(f"VO: \"Drei Szenarien auf 12 bis 18 Monate: Bull "
+                 f"{sc['bull']['prob']} Prozent, Base {sc['base']['prob']} Prozent, "
+                 f"Bear {sc['bear']['prob']} Prozent — Kursziele {targets}.\"")
+        L.append("")
+    L.append("[0:40–0:45]  (Overlay: Ganze Analyse im Karussell 👆)")
+    L.append(f"VO: \"Den kompletten Deep Dive mit allen Kurszielen findest du im "
+             f"Karussell-Post auf diesem Profil. Folge {render.HANDLE} für 1–2 "
+             f"Profi-Analysen pro Woche.\"")
+    L.append("")
+    L.append("## [HINWEIS]  Pflicht-Disclaimer einblenden/vorlesen:")
+    L.append("Keine Anlageberatung · KI-generierte Analyse · Kursziele sind "
+             "Szenarien, keine Prognosen.")
+    return "\n".join(L)
 
 
 def caption_analysis(a):
@@ -398,8 +491,25 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_analysis(a))
+        with open(os.path.join(base, "reel_script.txt"), "w") as f:
+            f.write(reel_script(a))
+
+        # Einfache Reel-MP4 aus den 9:16-Frames (ffmpeg via imageio-ffmpeg)
+        reel_dir = os.path.join(base, "reel")
+        if "reel" in fmts and os.path.isdir(reel_dir):
+            frames = sorted(os.path.join(reel_dir, f) for f in os.listdir(reel_dir)
+                            if f.endswith(".png"))
+            try:
+                from . import video
+                mp4 = video.build_reel_video(frames, os.path.join(base, "reel.mp4"))
+                all_saved.append(mp4)
+                print(f"  🎬 Reel-Video: {os.path.relpath(mp4, ROOT)}")
+            except Exception as e:
+                print(f"  ⚠ Reel-MP4 übersprungen ({e.__class__.__name__}: {e}). "
+                      f"pip install imageio imageio-ffmpeg")
+
         full = _has_scenarios(a)
-        print(f"✓ {len(all_saved)} Slides (Analyse {a['ticker']}) in {base}")
+        print(f"✓ {len(all_saved)} Dateien (Analyse {a['ticker']}) in {base}")
         print(f"  Verdict {a['verdict']} · Score {a['score']} · "
               f"Szenarien {'ja' if full else 'NEIN (Alt-Schema → reduziert)'}")
         if not render.T.company_logo_file(a["ticker"]):
