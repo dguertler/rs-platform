@@ -96,3 +96,10 @@ Wenn der Nutzer schreibt `Instagram-Analyse TICKER` / `Analyse-Post TICKER`
    `reel/` (4 PNG), `reel.mp4`, `caption.txt`, `reel_script.txt` zeigen —
    **kein Auto-Upload**. Firmenlogo unter `instagram/assets/logos/TICKER.png`.
    Kein aktueller Kurs, keine GWS-Ampel/Breakout auf den Slides.
+
+## Monetarisierung / Controlling
+
+Geschäfts-/Umsatz-Ebene (5 Säulen, Content-Pipeline, KPI-Funnel) liegt in
+**`controlling/`** — bei Fragen zu Umsatz, Telegram-SaaS (39 €/Monat), Affiliate,
+Newsletter, Sponsoring oder Conversion-KPIs dort starten (`controlling/README.md`).
+KPI-Rechner: `python3 controlling/kpi_model.py`.
