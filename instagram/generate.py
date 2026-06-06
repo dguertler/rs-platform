@@ -226,50 +226,89 @@ def build_analysis(fmt, a, date_iso, outdir):
 
 
 def caption_analysis(a):
+    """Vollständige, für Instagram aufbereitete Caption (Text unter den Fotos).
+    Kein externer Link — die Analyse steht direkt als Text im Post.
+    Instagram-Limit 2.200 Zeichen wird beachtet (notfalls wird gekürzt)."""
     v = a["verdict"]
-    lab = render.VERDICT_LABEL.get((v or "").upper(), v)
     scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
     head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
 
-    parts = [f"📊 {head}\n"]
-    if a.get("hook"):
-        parts.append(a["hook"] + "\n")
-
-    if _has_scenarios(a):
-        sc = a["scenarios"]
-        lines = []
-        for key, name in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
-            prob = sc[key]["prob"]
-            rng = ana.fmt_range(sc[key]["range"])
-            seg = f"• {name}: {prob}%" if prob is not None else f"• {name}:"
-            if rng:
-                seg += f" · Kursziel {rng}"
-            lines.append(seg)
-        parts.append("🎯 Szenarien (12–18 Monate):\n" + "\n".join(lines) + "\n")
-
-    if a.get("business_bullets"):
-        bl = "\n".join(f"• {b}" for b in a["business_bullets"][:4])
-        parts.append("🏭 Geschäftsmodell:\n" + bl + "\n")
-
-    if a.get("fazit_core"):
-        parts.append("🧭 Profi-Fazit:\n" + a["fazit_core"] + "\n")
-
-    if a.get("peers"):
-        parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
-
-    parts.append(f"➡️ Mehr Analysen: {render.HANDLE} — Link in Bio.\n")
-    parts.append(render.T.DISCLAIMER_ANALYSE_LONG)
-
+    star = lambda n: ("★" * (n or 0)) + ("☆" * (5 - (n or 0)))
+    rt = a["ratings"]
+    DISC = ("Keine Anlageberatung · KI-generierte Analyse · Kursziele sind "
+            "Szenarien, keine Prognosen. Kapitalanlagen bergen Verlustrisiken "
+            "bis zum Totalverlust.")
     sector_tag = {
         "Technology": "#technologie #tech", "Healthcare": "#healthcare #pharma",
         "Industrials": "#industrie", "Energy": "#energie",
         "Financial Services": "#finanzen", "Consumer Cyclical": "#konsum",
     }.get(a.get("sector", ""), "")
     tic = a["ticker"].replace(".", "").lower()
-    parts.append(
-        f"\n#aktien #aktienanalyse #börse #investing #{tic} #boersewissen "
-        f"#geldanlage #finanzen #stockanalysis #aialphaselection {sector_tag}".rstrip())
-    return "\n".join(parts)
+    tags = (f"#aktien #aktienanalyse #börse #investing #{tic} #boersewissen "
+            f"#geldanlage #finanzen #stockanalysis #aialphaselection "
+            f"{sector_tag}").rstrip()
+
+    def assemble(biz_n, with_longterm, with_cases):
+        parts = [f"📊 {head}\n"]
+        if a.get("hook"):
+            parts.append(a["hook"] + "\n")
+
+        if a.get("business_bullets") and biz_n:
+            bl = "\n".join(f"› {b}" for b in a["business_bullets"][:biz_n])
+            parts.append("🏭 Das Unternehmen:\n" + bl + "\n")
+
+        if _has_scenarios(a):
+            sc = a["scenarios"]
+            emo = {"bull": "🟢", "base": "🔵", "bear": "🔴"}
+            lines = []
+            for key, name in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
+                prob = sc[key]["prob"]
+                rng = ana.fmt_range(sc[key]["range"])
+                seg = f"{emo[key]} {name} {prob}%" if prob is not None else f"{emo[key]} {name}"
+                if rng:
+                    seg += f" · Ziel {rng}"
+                if with_cases and sc[key]["summary"]:
+                    seg += f"\n   {sc[key]['summary']}"
+                lines.append(seg)
+            parts.append("🎯 Szenarien · 12–18 Monate (= 100 %):\n"
+                         + "\n".join(lines) + "\n")
+            if with_longterm and _has_longterm(a):
+                lt = a["longterm"]
+                lts = " · ".join(f"{n} {ana.fmt_range(lt[k])}"
+                                 for k, n in (("bull", "Bull"), ("base", "Base"),
+                                              ("bear", "Bear")) if ana.fmt_range(lt[k]))
+                parts.append("🔭 Langfristig · 3–5 Jahre: " + lts + "\n")
+        elif a.get("pro_bullets") or a.get("con_bullets"):
+            if a.get("pro_bullets"):
+                parts.append("🟢 Chancen:\n" + "\n".join(
+                    f"› {b}" for b in a["pro_bullets"][:biz_n or 3]) + "\n")
+            if a.get("con_bullets"):
+                parts.append("🔴 Risiken:\n" + "\n".join(
+                    f"› {b}" for b in a["con_bullets"][:biz_n or 3]) + "\n")
+
+        if any(rt.values()):
+            parts.append(f"⭐ Rating: Qualität {star(rt.get('Qualität'))} · "
+                         f"Wachstum {star(rt.get('Wachstum'))} · "
+                         f"Bewertung {star(rt.get('Bewertung'))} · "
+                         f"Katalysator {star(rt.get('Katalysator'))}\n")
+
+        if a.get("fazit_core"):
+            parts.append("🧭 Fazit: " + a["fazit_core"] + "\n")
+        if a.get("peers"):
+            parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
+
+        parts.append(f"👉 Folge {render.HANDLE} für 1–2 Aktienanalysen pro Woche.\n")
+        parts.append("❗ " + DISC)
+        parts.append("\n" + tags)
+        return "\n".join(parts)
+
+    # Schrittweise kürzen, bis die Caption ins 2.200-Zeichen-Limit passt
+    for biz_n, lt, cases in ((4, True, True), (4, True, False), (3, True, False),
+                             (3, False, False), (2, False, False)):
+        cap = assemble(biz_n, lt, cases)
+        if len(cap) <= 2200:
+            return cap
+    return cap[:2180].rsplit(" ", 1)[0] + " …"
 
 
 def build(fmt, ctx, outdir):

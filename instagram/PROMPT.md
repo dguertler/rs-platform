@@ -169,10 +169,9 @@ Analyse vorher nach `analyses/PROMPT.md` neu generieren.
 ### SEO / Algorithmus (in `caption.txt` umgesetzt)
 - **Erste Zeile = Keyword zuerst:** „<Firmenname> (TICKER) — Aktienanalyse:
   <Verdict>" → das indexiert Instagram für die Suche.
-- Strukturierte Kurzfassung (Szenarien, Geschäftsmodell, Fazit, Peers) als
-  „👇 vollständige Analyse" — die echte Langfassung (bis 1000 Wörter) passt
-  nicht in die 2.200-Zeichen-Caption → **Link in Bio** auf die Rating-Seite
-  (`data/ratings/TICKER.html`).
+- **Die Caption IST die Analyse** (Text unter den Fotos), kein externer Link:
+  Hook, Geschäftsmodell, Szenarien mit %/Kurszielen, Langfrist, Sterne-Rating,
+  Fazit, Peers — automatisch auf 2.200 Zeichen zugeschnitten.
 - Hashtag-Mix: breit (#aktien #börse) + Ticker (#amd) + Sektor (#technologie) +
   Branded (#aialphaselection). Pflicht-Disclaimer in jeder Caption.
 - **Saves/Dwell** treiben: Carousel „swipe für alle Szenarien" + Verweis auf
@@ -180,8 +179,22 @@ Analyse vorher nach `analyses/PROMPT.md` neu generieren.
 
 ### Firmenlogos
 Siehe `instagram/assets/logos/README.md`. Kurz: `TICKER.png` (transparent)
-dort ablegen; fehlt es, nutzt der Cover eine Wortmarke. Auto-Download ist in
-der Cloud geblockt — Logos manuell ablegen (oder im Chat hochladen).
+dort ablegen; fehlt es, nutzt der Cover eine Wortmarke.
+
+**Logo-Suche (Claude):** zuerst auf der **offiziellen Firmenseite** suchen —
+Brand-/Media-/Newsroom-/Presse-Portal, sonst Investor Relations (z. B.
+`amplify.amd.com` für AMD). Auto-Download ist in der Cloud geblockt
+(`Host not in allowlist`) → Claude nennt die gefundene Logo-URL, der Nutzer
+lädt die Datei im Chat hoch, Claude legt sie als `<TICKER>.png` ab und committet.
+
+### Caption = die vollständige Analyse (kein externer Link)
+Die Caption (`caption.txt`) ist die **für Instagram aufbereitete Analyse als
+Text unter den Fotos** — KEIN „Link in Bio" auf eine externe Seite. Sie wird auf
+das Instagram-Limit von **2.200 Zeichen** zugeschnitten (Hook, Geschäftsmodell,
+Szenarien mit %/Kurszielen, Langfrist, Sterne-Rating, Fazit, Peers, kurzer
+Disclaimer, Hashtags). Reicht der Platz nicht, kürzt der Generator automatisch
+(weniger Bullets / ohne Langfrist). Die ausführliche Roh-Analyse bleibt in
+`analyses/TICKER.md` (Archiv), wird aber NICHT auf Instagram verlinkt.
 
 ## Roadmap
 - **Jetzt:** wöchentliches Carousel, manueller Upload.
