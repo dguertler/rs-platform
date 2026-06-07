@@ -74,9 +74,18 @@ Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
    `instagram/PROMPT.md` für den detaillierten Ablauf und die **zwingenden
    wikifolio-Regeln** (Trennung Depot/Zertifikat, keine ISIN, kein wikifolio-Logo,
    Pflicht-Disclaimer).
-2. Aus dem Feed `instagram/reports/KW<NN>.json` füllen (Schema siehe PROMPT.md).
-3. Generieren: `python3 -m instagram.generate --report instagram/reports/KW<NN>.json`
+2. **PFLICHT — gelieferte Werte zuerst abspeichern** (automatisch, ohne
+   Rückfrage), bevor generiert wird:
+   - Zertifikatswert → `instagram/data/wikifolio_history.json`
+     (`python3 -m instagram.add_week --kw <NN> --value <WERT> --date YYYY-MM-DD`)
+   - Käufe → Position in `instagram/data/holdings.json` ergänzen
+   - Verkäufe → Position aus `holdings.json` entfernen **und** abgeschlossenen
+     Trade in `instagram/data/trades.json` (`closed`: `name` + `ret` als Dezimal)
+3. Generieren (Hauptweg, dynamische Felder texten):
+   `python3 -m instagram.generate --kw <NN> --hook "…" --why "…" --frage "…"`
+   (Slide-Datum = Samstag der KW automatisch; ohne Flags greifen Fallbacks.)
 4. Slides aus `out/` dem Nutzer zeigen — **kein Auto-Upload**, manueller Post.
+5. Datendateien committen (die `out/`-Slides sind gitignored).
 
 Hauptformat **Carousel (4:5)**; Reel-Frames (9:16) entstehen parallel.
 Stories erst später (bei genügend Followern) — siehe Roadmap in PROMPT.md.

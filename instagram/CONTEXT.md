@@ -67,37 +67,46 @@ OHLCV der RS-JSONs). NASDAQ aus QQQ-Benchmark (`data/rs_full.json`).
 | `holdings.json` | alle Positionen + Kaufdatum + Einstiegskurs + `base_kw` | bei Kauf/Verkauf |
 | `trades.json` | abgeschlossene Trades (realisierte Rendite) | bei Verkauf |
 
-## 6. Aktueller Daten-Snapshot (Stand KW22 / 04.06.2026)
+## 6. Aktueller Daten-Snapshot (Stand KW23 / 06.06.2026)
 
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
-20 135,44 · 21 139,66 · **22 148,25** → Gesamt **+50,5 %**, NASDAQ +32,2 %,
-Alpha +18,3 %, 6/9 Wochen über NASDAQ (QQQ-basiert, siehe §8).
+20 135,44 · 21 139,66 · 22 148,25 · **23 149,86** → Gesamt **+52,2 %**,
+NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (QQQ-basiert, siehe §8).
 
-**Positionen (10):**
+**Positionen (7):**
 | Ticker | Name | Kauf | Einstieg € |
 |---|---|---|---|
 | MRVL | Marvell Technology | 24.03.2026 | 80,07 |
-| AMD | AMD | 22.04.2026 | 247,73 |
-| LRCX | Lam Research | 08.04.2026 | 205,07 |
 | MU | Micron Technology | 21.05.2026 | 658,47 |
 | CNC | Centene | 29.04.2026 | 42,55 |
 | WDC | Western Digital | 22.05.2026 | 421,19 |
 | STX | Seagate Technology | 21.05.2026 | 676,07 |
 | DDOG | Datadog | 15.05.2026 | 178,62 |
 | AMAT | Applied Materials | 27.05.2026 | 398,09 |
-| NXPI | NXP Semiconductors | 25.05.2026 | 282,16 |
 
-**Abgeschlossene Trades (15):** NVIDIA +0,39 · Analog Devices +10,99 ·
+**KW23-Trades:** Kauf IBM (02.06., 285,95 €). Verkäufe (05.06.):
+AMD +69,7 % · Lam Research +29,9 % · NXP −6,0 % · IBM −12,6 % (kurzfristiger
+Roundtrip Kauf 02.06./Verkauf 05.06.).
+
+**Abgeschlossene Trades (19):** NVIDIA +0,39 · Analog Devices +10,99 ·
 Akamai −7,58 · ASML −5,28 · Amazon +0,82 · Broadcom +0,11 · Siemens Energy +0,37 ·
 Applied Materials +1,08 · Definium Therapeutics +22,32 · ASML +0,63 ·
-Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · NXP +0,30
-(alle in %). Kennzahlen KW22: 25 Trades, Trefferquote 80 %, Profitfaktor 21,0,
-Ø Gewinn +25,4 %, Ø Verlust −4,8 % (inkl. offener Positionen).
+Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · NXP +0,30 ·
+NXP −6,0 · AMD +69,7 · IBM −12,6 · Lam Research +29,9
+(alle in %). Kennzahlen KW23: 26 Trades, Trefferquote 77 %, Profitfaktor 9,6,
+Ø Gewinn +18,9 %, Ø Verlust −6,6 % (inkl. offener Positionen).
 
 ## 7. Wöchentlicher Ablauf (Kurzform)
+> ⚠️ **PFLICHT:** Gelieferte Werte (Zertifikatswert + Käufe/Verkäufe) **immer
+> zuerst** in `instagram/data/` abspeichern (Schritt 1), dann generieren.
+> Details: `PROMPT.md`, „Wöchentlicher Ablauf".
 ```bash
-python3 -m instagram.add_week --kw 23 --value <Zertifikatswert> --date 2026-06-05
+# 1) Werte persistieren — IMMER zuerst
+python3 -m instagram.add_week --kw 23 --value 149.86 --date 2026-06-05
+#    Käufe  → holdings.json (Position ergänzen)
+#    Verkäufe → holdings.json (Position entfernen) + trades.json (closed: name+ret)
+# 2) Generieren
 python3 -m instagram.generate --kw 23 \
   --hook  "<dynamische Schlagzeile aus den Wochendaten>" \
   --why   "<KI-Kontext: Sektor/Thema · Marktereignis · Aktie X>" \
