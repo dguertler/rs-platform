@@ -668,7 +668,7 @@ def analysis_headline(a):
     return pool[sum(ord(ch) for ch in a["ticker"]) % len(pool)]
 
 
-# 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict
+# 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict + Rating-Blöcke
 def slide_analysis_cover(c, a, date_iso):
     # Top-Leiste: Marke + Tag + Datum
     lw = c.draw_logo(MX, 64, 46)
@@ -682,23 +682,49 @@ def slide_analysis_cover(c, a, date_iso):
     hy = _draw_paragraph(c, MX, 226, analysis_headline(a), 50, c.W - 2 * MX,
                          color=T.TEXT, weight="bold", line_h=62, max_lines=3)
 
-    # Weiße Logo-Karte
+    # Weiße Logo-Karte (kompakter als früher, damit Rating-Blöcke Platz haben)
     card_top = max(hy + 40, 430)
-    card_h = 360
+    card_h = 260
     _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, a["ticker"])
 
     # Name + Sektor
     sub = A.short_name(a["name"])
     if a.get("sector"):
         sub += f"  ·  {a['sector']}"
-    c.text(MX, card_top + card_h + 30, sub, 22, color=T.MUTED)
+    c.text(MX, card_top + card_h + 22, sub, 20, color=T.MUTED)
 
-    # Verdict-Badge
-    _verdict_badge(c, MX, card_top + card_h + 78, a["verdict"], a["score"], h=130)
+    # Verdict-Badge (etwas kompakter)
+    col = verdict_color(a["verdict"])
+    verdict_top = card_top + card_h + 60
+    _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=106)
+    verdict_bottom = verdict_top + 106
+
+    # Rating-Karten 2×2 (kompakt) unter dem Verdict-Badge
+    rt = a["ratings"]
+    rating_items = [
+        ("Qualität",    rt.get("Qualität")),
+        ("Wachstum",    rt.get("Wachstum")),
+        ("Bewertung",   rt.get("Bewertung")),
+        ("Katalysator", rt.get("Katalysator")),
+    ]
+    r_gap = 16
+    r_cw = (c.W - 2 * MX - r_gap) // 2
+    r_ch = 78
+    r_top = verdict_bottom + 14
+    for i, (label, val) in enumerate(rating_items):
+        row, col_i = divmod(i, 2)
+        rx = MX + col_i * (r_cw + r_gap)
+        ry = r_top + row * (r_ch + r_gap)
+        c.tile(rx, ry, r_cw, r_ch, color=T.PANEL)
+        c.text(rx + 18, ry + 10, label.upper(), 12, color=T.MUTED, weight="bold")
+        c.text(rx + r_cw - 18, ry + 8,
+               f"{val if val is not None else '–'}/5", 22,
+               color=col, weight="bold", ha="right", font="mono")
+        _stars(c, rx + 28, ry + 56, val, col=col, gap=34, s=220)
     analysis_footer(c)
 
 
-# 2) GESAMTEINSCHÄTZUNG — Kernthese + Rating-Pips
+# 2) GESAMTEINSCHÄTZUNG — vollständiger Investment-Case (Rating-Blöcke auf Cover)
 def slide_analysis_verdict(c, a, date_iso):
     analysis_header(c, a, date_iso)
     c.text(MX, 184, "Gesamteinschätzung", 42, weight="bold")
@@ -708,28 +734,11 @@ def slide_analysis_verdict(c, a, date_iso):
            if a["score"] is not None else f"{a['verdict']} · {lab}",
            22, color=col, weight="bold")
 
-    # Kernthese: vollständiger Investment-Case (mehrzeilig, sauber gekürzt)
+    # Vollständiger Investment-Case — kein Abschneiden (Rating-Blöcke sind auf Cover)
+    # Verfügbarer Bereich: ~888 px → ~23 Zeilen à 38 px; längere Texte passen immer
     core = " ".join(a["sections"].get(1, "").split()) or a.get("hook", "")
-    y = _draw_paragraph(c, MX, 312, core, 25, c.W - 2 * MX,
-                        color=T.TEXT, line_h=38, max_lines=12)
-
-    # Rating-Karten 2x2 mit Pips
-    rt = a["ratings"]
-    items = [("Qualität", rt.get("Qualität")), ("Wachstum", rt.get("Wachstum")),
-             ("Bewertung", rt.get("Bewertung")), ("Katalysator", rt.get("Katalysator"))]
-    gap = 26
-    cw = (c.W - 2 * MX - gap) // 2
-    ch = 150
-    top0 = max(y + 40, 760)
-    for i, (label, val) in enumerate(items):
-        r, cc = divmod(i, 2)
-        x = MX + cc * (cw + gap)
-        yy = top0 + r * (ch + gap)
-        c.tile(x, yy, cw, ch, color=T.PANEL)
-        c.text(x + 30, yy + 26, label.upper(), 16, color=T.MUTED, weight="bold")
-        c.text(x + cw - 30, yy + 22, f"{val if val is not None else '–'}/5", 30,
-               color=T.TEXT, weight="bold", ha="right", font="mono")
-        _stars(c, x + 44, yy + 100, val, col=col)
+    _draw_paragraph(c, MX, 312, core, 25, c.W - 2 * MX,
+                    color=T.TEXT, line_h=38, max_lines=22)
     analysis_footer(c)
 
 
@@ -840,23 +849,42 @@ def slide_analysis_chances(c, a, date_iso):
     analysis_footer(c)
 
 
-# 6) BULL / BASE / BEAR ERKLÄRT — Treibersätze (konsistent zu Slide 3)
-def slide_analysis_cases(c, a, date_iso):
-    analysis_header(c, a, date_iso)
-    c.text(MX, 184, "Die drei Szenarien erklärt", 42, weight="bold")
-    c.text(MX, 240, "Was hinter Bull, Base und Bear steckt", 18, color=T.MUTED)
-    top0, gap = 300, 26
-    rh = 318
+def _cases_item_data(a):
+    """Bereitet Szenario-Texte + dynamische Tile-Höhen vor (kein Truncating).
+    Filtert Summen-/Metazeilen (z. B. '**Summe: 30%+45%+25%=100%**') heraus."""
+    import re
     sc = a["scenarios"]
-    for i, key in enumerate(("bull", "base", "bear")):
+    inner_w = 1080 - 2 * MX - 80   # 820 px
+    body_size, body_lh = 21, 32
+    head_h, pad_bot = 78, 24        # Platz für Label+Meta, Abstand unten
+    sec_map = {"bull": 3, "base": 4, "bear": 5}
+    items = []
+    for key in ("bull", "base", "bear"):
+        raw = a["sections"].get(sec_map[key], "") or sc[key]["summary"]
+        raw = re.sub(r"\*?\*?\s*Summe[^.\n*]*\.?\s*\*?\*?", "", raw, flags=re.I)
+        body_text = A.clean_for_slide(raw).strip()
+        lines = _wrap_px(body_text, inner_w, body_size)
+        rh = head_h + len(lines) * body_lh + pad_bot
+        items.append({"key": key, "text": body_text, "lines": lines, "rh": rh})
+    return items
+
+
+def _draw_cases_blocks(c, a, items, top0=300):
+    """Zeichnet Szenario-Blöcke mit dynamischer Höhe — kein Text wird abgeschnitten."""
+    sc = a["scenarios"]
+    inner_w = c.W - 2 * MX - 80
+    body_size, body_lh, head_h = 21, 32, 78
+    gap = 22
+    y = top0
+    for item in items:
+        key = item["key"]
         col = SCEN_COLOR[key]
-        y = top0 + i * (rh + gap)
+        rh = item["rh"]
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         c.tile(MX, y, 12, rh, color=col, radius=6)
         rng = A.fmt_range(sc[key]["range"])
         prob = sc[key]["prob"]
-        hdr = f"{SCEN_LABEL[key]} Case"
-        c.text(MX + 40, y + 24, hdr, 26, color=col, weight="bold")
+        c.text(MX + 40, y + 24, SCEN_LABEL[key] + " Case", 26, color=col, weight="bold")
         meta = []
         if prob is not None:
             meta.append(f"{prob}%")
@@ -865,11 +893,26 @@ def slide_analysis_cases(c, a, date_iso):
         if meta:
             c.text(c.W - MX - 40, y + 28, "  ·  ".join(meta), 24,
                    color=T.TEXT, weight="bold", ha="right", font="mono")
-        sec_num = {"bull": 3, "base": 4, "bear": 5}[key]
-        body_text = A.clean_for_slide(
-            a["sections"].get(sec_num, "") or sc[key]["summary"])
-        _draw_paragraph(c, MX + 40, y + 84, body_text, 21,
-                        c.W - 2 * MX - 80, color=T.TEXT, line_h=32, max_lines=7)
+        _draw_paragraph(c, MX + 40, y + head_h, item["text"], body_size,
+                        inner_w, color=T.TEXT, line_h=body_lh)
+        y += rh + gap
+
+
+# 6) BULL / BASE / BEAR ERKLÄRT — dynamische Tile-Höhen, kein Überlappen/Abschneiden
+def slide_analysis_cases(c, a, date_iso, items=None):
+    """items: Teilliste aus _cases_item_data() für Overflow-Splits.
+    Titel passt sich an (2 von 3 Szenarien → 'Bull & Base Case erklärt')."""
+    if items is None:
+        items = _cases_item_data(a)
+    keys = [d["key"] for d in items]
+    if len(keys) == 3:
+        title = "Die drei Szenarien erklärt"
+    else:
+        title = " & ".join(SCEN_LABEL[k] + " Case" for k in keys) + " erklärt"
+    analysis_header(c, a, date_iso)
+    c.text(MX, 184, title, 42, weight="bold")
+    c.text(MX, 240, "Was hinter Bull, Base und Bear steckt", 18, color=T.MUTED)
+    _draw_cases_blocks(c, a, items)
     analysis_footer(c)
 
 

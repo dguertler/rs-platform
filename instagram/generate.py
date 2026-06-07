@@ -208,29 +208,42 @@ def build_analysis(fmt, a, date_iso, outdir):
     saved = []
     emit = _emitter(fmt, outdir, saved)
 
-    emit("cover", lambda c: render.slide_analysis_cover(c, a, date_iso))
+    emit("cover",         lambda c: render.slide_analysis_cover(c, a, date_iso))
     emit("einschaetzung", lambda c: render.slide_analysis_verdict(c, a, date_iso))
-    if _has_scenarios(a):
-        emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
+    # Geschäftsmodell VOR Szenarien — logischer Lesefluss
     if a.get("business_bullets"):
         emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
     if _has_scenarios(a):
-        emit("szenarien_erklaert", lambda c: render.slide_analysis_cases(c, a, date_iso))
+        emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
+    if _has_scenarios(a):
+        # Overflow-Check: passen alle 3 Szenario-Blöcke auf eine Slide?
+        # Verfügbar: 1350 − 300 (top0) − 150 (footer) = 900 px
+        _avail = 900
+        _items = render._cases_item_data(a)
+        _total = sum(d["rh"] for d in _items) + 22 * (len(_items) - 1)
+        if _total <= _avail:
+            emit("szenarien_erklaert",
+                 lambda c, _i=_items: render.slide_analysis_cases(c, a, date_iso, _i))
+        else:
+            # Overflow: Bull+Base auf Slide 1, Bear auf Slide 2
+            emit("szenarien_erklaert_1",
+                 lambda c, _i=_items[:2]: render.slide_analysis_cases(c, a, date_iso, _i))
+            emit("szenarien_erklaert_2",
+                 lambda c, _i=_items[2:]: render.slide_analysis_cases(c, a, date_iso, _i))
     elif a.get("pro_bullets") or a.get("con_bullets"):
-        # Alt-Schema ohne Wahrscheinlichkeiten: Chancen/Risiken statt Szenarien
         emit("chancen_risiken", lambda c: render.slide_analysis_chances(c, a, date_iso))
-    if a["sections"].get(6):                       # Fundamentale Qualität (NEU)
-        emit("fundamentals", lambda c: render.slide_analysis_fundamentals(c, a, date_iso))
-    if a["sections"].get(7):                       # Bewertung / KGV-Illusion
-        emit("bewertung", lambda c: render.slide_analysis_valuation(c, a, date_iso))
-    if a["sections"].get(8):                       # Risiko & Realitätscheck
-        emit("risiko", lambda c: render.slide_analysis_risk(c, a, date_iso))
-    if a["sections"].get(9):                       # Technisches Bild (NEU)
-        emit("technical", lambda c: render.slide_analysis_technical(c, a, date_iso))
+    if a["sections"].get(6):
+        emit("fundamentals",  lambda c: render.slide_analysis_fundamentals(c, a, date_iso))
+    if a["sections"].get(7):
+        emit("bewertung",     lambda c: render.slide_analysis_valuation(c, a, date_iso))
+    if a["sections"].get(8):
+        emit("risiko",        lambda c: render.slide_analysis_risk(c, a, date_iso))
+    if a["sections"].get(9):
+        emit("technical",     lambda c: render.slide_analysis_technical(c, a, date_iso))
     if _has_longterm(a):
-        emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
-    emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))
-    emit("cta", lambda c: render.slide_analysis_cta(c, a, date_iso))
+        emit("langfrist",     lambda c: render.slide_analysis_longterm(c, a, date_iso))
+    emit("fazit",         lambda c: render.slide_analysis_fazit(c, a, date_iso))
+    emit("cta",           lambda c: render.slide_analysis_cta(c, a, date_iso))
     return saved
 
 
