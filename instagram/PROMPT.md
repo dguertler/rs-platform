@@ -44,10 +44,20 @@ Freigabe (eigenes Logo nutzen).
    (Claude darf die JSON auch direkt editieren.)
 2. **Holdings ggf. aktualisieren:** `data/holdings.json` (Top-Positionen +
    `buy_date`). Reihenfolge = Rotationsreihenfolge der „Aktie der Woche".
-3. **Generieren:**
+3. **Dynamische Felder texten (PFLICHT, siehe unten):** Claude formuliert pro
+   Woche aus den Daten eine **Hook-Schlagzeile**, ein strategisches **„Warum"**
+   und eine **Interaktions-Frage** und übergibt sie:
    ```bash
-   python3 -m instagram.generate --kw 22
+   python3 -m instagram.generate --kw 22 \
+     --hook  "+18,4% Alpha: Während der Nasdaq schlief, hat die KI agiert." \
+     --why   "Sektor-Rotation in Halbleiter: Volatilitäts-Check bestanden, der \
+              bestätigte Trend hat die Signale für MRVL getriggert." \
+     --frage "Hättest du MU bei diesem Kurs auch gekauft – oder auf einen \
+              Rücksetzer gewartet? Schreib's unten rein!"
    ```
+   Ohne Flags greifen datenbasierte **Fallbacks** (`auto_hook` / `auto_why` /
+   `auto_question` in `generate.py`) — die Slides funktionieren also immer, aber
+   die individuell getextete Variante ist Standard für maximale CTR/Engagement.
 4. **Review:** Slides aus `out/instagram/<DATUM>_KW22/` zeigen.
 5. **Manuell posten.** Carousel = `carousel/`-PNGs in Reihenfolge; Caption aus
    `caption.txt`. Reel-Frames in `reel/`.
@@ -56,20 +66,45 @@ NASDAQ-Vergleich, Wochen-/Gesamtrendite, Alpha, Wochen-Historie und
 „X von Y Wochen geschlagen" werden **automatisch** aus den gespeicherten Werten
 + dem QQQ-Benchmark (`data/rs_full.json`) berechnet.
 
+### Slide-Datum (oben rechts) — Samstag der KW
+Das Datum oben rechts ist **standardmäßig der Samstag der jeweiligen KW**
+(Wochenabschluss). Logik (`report.slide_date`):
+
+- Liegt der Samstag der KW in der **Vergangenheit** (Bericht wird später oder
+  rückwirkend erstellt) → es wird **dieser Samstag** eingetragen. Bsp.: heute ist
+  KW24, du erstellst den Report für KW23 → Datum = Samstag KW23.
+- Liegt der Samstag noch in der **Zukunft** (Bericht entsteht in der laufenden
+  Woche vor Samstag) → es wird **heute** eingetragen. Bsp.: heute ist noch KW23
+  (z. B. Donnerstag) → Datum = heute.
+- Ein expliziter `--date YYYY-MM-DD` hat immer Vorrang (manuelles Override).
+
+So trägt jede rückwirkend erzeugte Analyse automatisch das korrekte
+Wochen-Samstagsdatum. Der Output-Ordner heißt entsprechend `<DATUM>_KW<NN>`.
+
 ---
 
 ## Slide-Reihenfolge (Wochenpost)
 
-1. **Performance vs. NASDAQ-100** (Eye-Catcher, erste Slide) — Equity-Kurve +
-   Kennzahlen unter dem Graph: Gesamtrendite, NASDAQ, Alpha, Trades seit Start,
+1. **🆕 Dynamic Hook** (Slide 1, visueller Stopper – KEIN Dashboard) — eine
+   dynamische **Schlagzeile** (`--hook`) + 1–2 prominente **Kennzahlen als
+   Beweis** (Gesamtrendite + Alpha). Macht in den ersten 3 Sek. neugierig.
+2. **Performance vs. NASDAQ-100** (Eye-Catcher) — Equity-Kurve + Kennzahlen
+   unter dem Graph: Gesamtrendite, NASDAQ, Alpha, Trades seit Start,
    Trefferquote, Profitfaktor, Ø Gewinn/Trade, Ø Verlust/Trade
-2. **Wochen-Historie** — wöchentliche Mehrrendite ggü. NASDAQ-100 (grün = besser)
-3. **Stärkste Positionen** (Top-5, mit Kaufdatum + Einstiegskurs)
-4. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kauf-Signal
+3. **Wochen-Historie** — wöchentliche Mehrrendite ggü. NASDAQ-100 (grün = besser)
+4. **Stärkste Positionen** (Top-5, mit Kaufdatum + Einstiegskurs)
+5. **🆕 Strategisches „Warum"** (minimalistische Text-Slide, KI-Kontext) —
+   Übergang von den Positionen zu den Einzelaktien. Erklärt kurz, warum das
+   Modell so entschieden hat (Sektor-Rotation / Volatilitäts-Check /
+   Trendbestätigung). Text aus `--why`.
+6. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kauf-Signal
    (blau) + eingearbeiteten weiteren Signalen
-5. **Newcomer** — bestperformende Aktie der letzten 3 Wochen, NUR wenn sie nicht
+7. **Weitere Positionen** (alle außerhalb der Top-5)
+8. **Newcomer** — bestperformende Aktie der letzten 3 Wochen, NUR wenn sie nicht
    in den Top-5 ist (sonst entfällt die Slide)
-6. CTA + Risikohinweis
+9. **🆕 CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs sind in
+   IG-Beiträgen nicht klickbar) + dynamische Interaktions-Frage (`--frage`) +
+   Pflicht-Risikohinweis.
 
 Rotation der Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`
 (in `holdings.json`). Jede Woche eine andere – auch wenn die Top-5 gleich bleiben.
@@ -78,6 +113,43 @@ Positionen berechnet.
 
 **Bewusst NICHT enthalten:** Erklärung, *wie* das System funktioniert
 (RS-Methodik) — bleibt dem wikifolio vorbehalten.
+
+---
+
+## Dynamische Felder (Standard-Workflow für jede KW)
+
+Diese drei Texte schreibt **Claude pro Woche aus den Daten** — sie sind der Kern
+des CTR-/Engagement-Upgrades. Render-Funktionen: `slide_hook_dynamic`,
+`slide_why`, `slide_cta` in `render.py`.
+
+### 1) `--hook` — Dynamic-Hook-Schlagzeile (Slide 1)
+- **Logik:** Aus den Wochendaten die *eine* Story ableiten, die neugierig macht —
+  hoher Alpha-Wert, Outperformance ggü. NASDAQ, Krisenfestigkeit oder
+  Sektor-Gewinne.
+- **Dynamik-Regel:** an wöchentliche Ereignisse koppeln, z. B.
+  - „Warum die KI Halbleiter-Dips ignoriert hat"
+  - „+X% Alpha: Während der Nasdaq schlief, hat die KI agiert"
+  - „Sektor-Rotation: Wie das Modell rechtzeitig in Memory-Chips drehte"
+- **Beweis:** Die Slide zeigt zusätzlich automatisch Gesamtrendite + Alpha als
+  Kennzahlen-Chips (Daten, kein Texten nötig).
+
+### 2) `--why` — Strategisches „Warum" (KI-Kontext-Slide)
+- **Zweck:** Kontext zur KI-Logik, Übergang zu den Einzelaktien-Deep-Dives.
+- **Template:** „Hinter den Kulissen: Unser KI-Modell hat diese Woche den Fokus
+  auf **[Sektor/Thema]** gelegt, da **[Marktereignis]** die Signale für
+  **[Aktie X]** getriggert hat."
+
+### 3) `--frage` — Interaktions-Frage (CTA-Slide, Engagement-Boost)
+- **Zweck:** Kommentare pushen (Algorithmus-Signal).
+- **Logik:** spezifisch aus den Trades der Woche generieren, z. B.
+  „Hättest du **[Aktie]** bei diesem Preis auch gekauft oder hättest du auf einen
+  Rücksetzer gewartet? Schreib's unten rein! 👇"
+- Die **CTA-Slide** verweist strikt auf die **Bio** (Link zum Live-Depot), da
+  URLs im IG-Text nicht klickbar sind: „👉 Den Link zum Live-Depot findest du
+  aktuell in unserer Bio! @aialphaselection".
+
+> ⚖️ wikifolio-Regeln bleiben bindend: kein „kauf das Zertifikat", keine ISIN.
+> Der Bio-Link führt auf die **wikifolio-Seite des Depots** (erlaubt).
 
 ---
 

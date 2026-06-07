@@ -17,13 +17,17 @@ pip install -r instagram/requirements.txt
 ```bash
 # 1) aktuellen Zertifikatswert der KW speichern
 python3 -m instagram.add_week --kw 22 --value 145.30
-# 2) Wochenpost erzeugen (Carousel 4:5 + Reel 9:16)
-python3 -m instagram.generate --kw 22
+# 2) Wochenpost erzeugen (Carousel 4:5 + Reel 9:16) — mit dynamischen Feldern
+python3 -m instagram.generate --kw 22 \
+  --hook "<Schlagzeile>" --why "<KI-Kontext>" --frage "<Kommentar-Frage>"
 ```
 
-Erzeugt Hook, Performance vs. NASDAQ, Kennzahlen, Wochen-Historie,
-Stärkste Positionen, **Aktie der Woche** (rotierend) und CTA + `caption.txt`.
-NASDAQ/Alpha/Historie werden automatisch berechnet.
+Erzeugt **Dynamic Hook** (Slide 1: Schlagzeile + Beweis-Chips), Performance vs.
+NASDAQ, Wochen-Historie, Stärkste Positionen, **strategisches „Warum"**,
+**Aktie der Woche** (rotierend), Weitere/Newcomer und **CTA mit Bio-Link +
+Interaktions-Frage** + `caption.txt`. NASDAQ/Alpha/Historie werden automatisch
+berechnet; ohne `--hook/--why/--frage` greifen datenbasierte Fallbacks. Das
+Slide-Datum ist der **Samstag der KW** (sonst heute; `--date` überschreibt).
 → Ablauf, Regeln & Datenpflege: **`instagram/PROMPT.md`**.
 
 **Analyse-Post** — aus einer fertigen KI-Analyse (`analyses/TICKER.md`):
@@ -78,13 +82,16 @@ Die NASDAQ-100-Vergleichslinie kommt real aus `data/rs_full.json` (QQQ).
 | `generate.py` | CLI: baut Slide-Set + Caption |
 | `fetch_wikifolio.py` | Holt die Equity-Kurve (best effort) |
 
-## Slide-Reihenfolge
+## Slide-Reihenfolge (Wochenpost)
 
-1. Hook (große Performance-Zahl)
-2. Performance vs. NASDAQ-100
-3. Kennzahlen (Rendite, Outperformance, Signale, Titel)
-4…n. Einzelne Trade-Signale (Chart + Marker)
-letzte. CTA + Risikohinweis
+1. **Dynamic Hook** — dynamische Schlagzeile + Beweis-Chips (Gesamtrendite, Alpha)
+2. Performance vs. NASDAQ-100 (Equity-Kurve + Kennzahlen)
+3. Mehrrendite ggü. NASDAQ-100 (Wochen-Historie)
+4. Stärkste Positionen (Top-5)
+5. **Strategisches „Warum"** (KI-Kontext, Text-Slide)
+6. Aktie der Woche (rotierend, Chart + Marker)
+7. Weitere Positionen · 8. Newcomer (falls vorhanden)
+9. **CTA + Engagement-Boost** (Bio-Link + Interaktions-Frage) + Risikohinweis
 
 ## Anpassen
 
