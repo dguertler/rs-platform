@@ -219,10 +219,14 @@ def build_analysis(fmt, a, date_iso, outdir):
     elif a.get("pro_bullets") or a.get("con_bullets"):
         # Alt-Schema ohne Wahrscheinlichkeiten: Chancen/Risiken statt Szenarien
         emit("chancen_risiken", lambda c: render.slide_analysis_chances(c, a, date_iso))
+    if a["sections"].get(6):                       # Fundamentale Qualität (NEU)
+        emit("fundamentals", lambda c: render.slide_analysis_fundamentals(c, a, date_iso))
     if a["sections"].get(7):                       # Bewertung / KGV-Illusion
         emit("bewertung", lambda c: render.slide_analysis_valuation(c, a, date_iso))
     if a["sections"].get(8):                       # Risiko & Realitätscheck
         emit("risiko", lambda c: render.slide_analysis_risk(c, a, date_iso))
+    if a["sections"].get(9):                       # Technisches Bild (NEU)
+        emit("technical", lambda c: render.slide_analysis_technical(c, a, date_iso))
     if _has_longterm(a):
         emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
     emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))

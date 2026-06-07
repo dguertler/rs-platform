@@ -711,7 +711,7 @@ def slide_analysis_verdict(c, a, date_iso):
     # Kernthese: vollständiger Investment-Case (mehrzeilig, sauber gekürzt)
     core = " ".join(a["sections"].get(1, "").split()) or a.get("hook", "")
     y = _draw_paragraph(c, MX, 312, core, 25, c.W - 2 * MX,
-                        color=T.TEXT, line_h=38, max_lines=10)
+                        color=T.TEXT, line_h=38, max_lines=12)
 
     # Rating-Karten 2x2 mit Pips
     rt = a["ratings"]
@@ -797,7 +797,7 @@ def slide_analysis_business(c, a, date_iso):
     analysis_header(c, a, date_iso)
     c.text(MX, 184, "Was macht das Unternehmen?", 42, weight="bold")
     c.text(MX, 240, "Geschäftsmodell & Investment-Case in Kürze", 18, color=T.MUTED)
-    bullets = a.get("business_bullets", [])[:5]
+    bullets = a.get("business_bullets", [])[:8]
     top0, gap = 304, 22
     rh = min(150, int((c.H * 0.58 - gap * (len(bullets) - 1)) / max(1, len(bullets))))
     for i, b in enumerate(bullets):
@@ -865,8 +865,11 @@ def slide_analysis_cases(c, a, date_iso):
         if meta:
             c.text(c.W - MX - 40, y + 28, "  ·  ".join(meta), 24,
                    color=T.TEXT, weight="bold", ha="right", font="mono")
-        _draw_paragraph(c, MX + 40, y + 84, sc[key]["summary"], 21,
-                        c.W - 2 * MX - 80, color=T.TEXT, line_h=32, max_lines=6)
+        sec_num = {"bull": 3, "base": 4, "bear": 5}[key]
+        body_text = A.clean_for_slide(
+            a["sections"].get(sec_num, "") or sc[key]["summary"])
+        _draw_paragraph(c, MX + 40, y + 84, body_text, 21,
+                        c.W - 2 * MX - 80, color=T.TEXT, line_h=32, max_lines=7)
     analysis_footer(c)
 
 
@@ -877,9 +880,12 @@ def slide_analysis_fazit(c, a, date_iso):
     c.text(MX, 184, "Profi-Fazit", 42, weight="bold")
     _verdict_badge(c, MX, 244, a["verdict"], a["score"], h=120)
 
-    core = a.get("fazit_core") or A._first_sentence(a["sections"].get(11, ""), 320)
+    import re as _re
+    raw11 = a["sections"].get(11, "")
+    raw11 = _re.sub(r"\n-\s*(Qualität|Wachstum|Bewertung|Katalysator)[^\n]*", "", raw11)
+    core = A.clean_for_slide(raw11.strip()) or a.get("fazit_core", "")
     y = _draw_paragraph(c, MX, 396, core, 24, c.W - 2 * MX,
-                        color=T.TEXT, line_h=36, max_lines=6)
+                        color=T.TEXT, line_h=36, max_lines=12)
 
     # Peers
     peers = a.get("peers", [])
@@ -947,7 +953,7 @@ def slide_analysis_valuation(c, a, date_iso):
 
     txt = A.clean_for_slide(a["sections"].get(7, ""))
     _draw_paragraph(c, MX, y, txt, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=11)
+                    line_h=37, max_lines=18)
     analysis_footer(c)
 
 
@@ -972,7 +978,7 @@ def slide_analysis_risk(c, a, date_iso):
     body = A.clean_for_slide(a["sections"].get(8, "")) or \
         A.clean_for_slide(a["scenarios"]["bear"]["summary"])
     _draw_paragraph(c, MX, y, body, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=12)
+                    line_h=37, max_lines=18)
     analysis_footer(c)
 
 
@@ -1004,6 +1010,28 @@ def slide_analysis_cta(c, a, date_iso):
     c.text(MX, 846, HANDLE, 34, color=T.BLUE, weight="bold")
     c.text(MX, 904, "1–2 Aktienanalysen pro Woche · faceless · datengetrieben",
            19, color=T.MUTED)
+    analysis_footer(c)
+
+
+# 6b) FUNDAMENTALE QUALITÄT — Abschnitt 6 (Bilanz, Margen, Kapitalrendite)
+def slide_analysis_fundamentals(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    c.text(MX, 184, "Fundamentale Qualität", 42, weight="bold")
+    c.text(MX, 240, "Bilanz, Margen, Kapitalrendite", 18, color=T.MUTED)
+    txt = A.clean_for_slide(a["sections"].get(6, ""))
+    _draw_paragraph(c, MX, 304, txt, 24, c.W - 2 * MX, color=T.TEXT,
+                    line_h=37, max_lines=22)
+    analysis_footer(c)
+
+
+# 9b) TECHNISCHES BILD & MOMENTUM — Abschnitt 9 (Kurs & GWS herausgefiltert)
+def slide_analysis_technical(c, a, date_iso):
+    analysis_header(c, a, date_iso)
+    c.text(MX, 184, "Technisches Bild & Momentum", 42, weight="bold")
+    c.text(MX, 240, "Trend, Volatilität, Warnsignale", 18, color=T.MUTED)
+    txt = A.clean_for_slide(a["sections"].get(9, ""))
+    _draw_paragraph(c, MX, 304, txt, 24, c.W - 2 * MX, color=T.TEXT,
+                    line_h=37, max_lines=22)
     analysis_footer(c)
 
 
