@@ -525,9 +525,9 @@ def slide_list(c, date_iso, title, subtitle, rows):
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         # farbiger Akzentbalken links
         c.tile(MX, y, 10, rh, color=row["color"], radius=5)
-        c.text(MX + 42, y + rh / 2 - 28, row["main"], 30, weight="bold")
+        c.text(MX + 42, y + rh / 2 - 32, row["main"], 30, weight="bold")
         if row.get("sub"):
-            c.text(MX + 42, y + rh / 2 + 14, row["sub"], 16, color=T.MUTED)
+            c.text(MX + 42, y + rh / 2 + 8, row["sub"], 22, color=T.SUBTLE)
         c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 40,
                color=row["color"], weight="bold", ha="right", font="mono")
     footer(c)
@@ -539,7 +539,7 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     ticker, ohlcv = feat["ticker"], feat["ohlcv"]
     entry, ret = feat["entry"], feat["ret"]
     rcol = T.GREEN if (ret or 0) >= 0 else T.RED   # Farbe für Renditewert
-    mcol = T.BLUE                                   # Kauf = Signal -> blau
+    buy_col, sell_col = T.GREEN, T.RED             # Konvention: Kauf grün, Verkauf rot
     c.text(MX, 200, label, 22, color=T.BLUE, weight="bold")
     c.text(MX, 232, ticker, 64, weight="bold")
     sub = feat.get("name", "")
@@ -548,9 +548,15 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     if sub:
         c.text(MX + 12, 300, sub, 20, color=T.MUTED)
 
-    # Fenster: ~25 Bars vor Kauf bis heute
+    # Fenster: ~25 Bars vor Kauf bis heute (bei abgeschlossenem Trade bis kurz nach Verkauf)
     idx = next((i for i, p in enumerate(ohlcv) if p["d"] >= feat["buy_date"]), 0)
-    sub = ohlcv[max(0, idx - 25):]
+    end_i = len(ohlcv)
+    if feat.get("closed") and feat.get("sells"):
+        last_sell = max((s.get("date") or s.get("sell_date") or "") for s in feat["sells"])
+        if last_sell:
+            j = next((i for i, p in enumerate(ohlcv) if p["d"] > last_sell), len(ohlcv))
+            end_i = min(len(ohlcv), j + 4)
+    sub = ohlcv[max(0, idx - 25):end_i]
     chart_h = int(c.H * 0.40)
     ax = c.chart_axes(MX, 350, c.W - 2 * MX, chart_h)
     _style_chart(ax)
@@ -563,39 +569,69 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
         p = next((q for q in sub if q["d"] >= dt), None)
         return (datetime.strptime(p["d"], "%Y-%m-%d").toordinal(), p["c"]) if p else None
 
-    # weitere Signale (klein, blau)
+    # weitere Kauf-Signale (klein, grün)
+    has_extra = False
     for s in feat.get("signals", []):
         if s.get("signal_date") == entry["d"]:
             continue
         pt = _on(s.get("signal_date", ""))
         if pt:
-            ax.scatter([pt[0]], [pt[1]], s=42, color=T.BLUE, zorder=4,
-                       edgecolor=T.BG, lw=1.5)
+            has_extra = True
+            ax.scatter([pt[0]], [pt[1]], s=42, color=buy_col, zorder=4,
+                       edgecolor=T.BG, lw=1.5, alpha=0.6)
 
-    # Kauf-Signal (groß, blau)
+    # Verkaufs-Signale (groß, rot) — falls die Position (teil-)verkauft wurde
+    drawn_sell = False
+    for sl in feat.get("sells", []) or []:
+        sd = sl.get("date") or sl.get("sell_date")
+        pt = _on(sd) if sd else None
+        if not pt:
+            continue
+        sx, sy = pt
+        ax.axvline(sx, color=sell_col, lw=2, ls=(0, (4, 4)), zorder=2)
+        ax.scatter([sx], [sy], s=140, color=sell_col, zorder=5, edgecolor=T.BG, lw=2)
+        # Beschriftung nach links setzen (Verkäufe liegen meist nahe am rechten Rand)
+        ax.annotate(f"Verkauf {short_date(sd)}", (sx, sy),
+                    xytext=(-12, -24), textcoords="offset points",
+                    color=sell_col, fontsize=15, fontweight="bold",
+                    ha="right", fontfamily=_FONTS["sans"])
+        drawn_sell = True
+
+    # Kauf-Signal (groß, grün)
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
-    ax.axvline(ex, color=mcol, lw=2, ls=(0, (4, 4)), zorder=2)
-    ax.scatter([ex], [entry["c"]], s=140, color=mcol, zorder=5, edgecolor=T.BG, lw=2)
-    ax.annotate(f"Kauf-Signal {short_date(entry['d'])}", (ex, entry["c"]),
+    ax.axvline(ex, color=buy_col, lw=2, ls=(0, (4, 4)), zorder=2)
+    ax.scatter([ex], [entry["c"]], s=140, color=buy_col, zorder=5, edgecolor=T.BG, lw=2)
+    ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
                 xytext=(-12, 18), textcoords="offset points",
-                color=mcol, fontsize=15, fontweight="bold",
+                color=buy_col, fontsize=15, fontweight="bold",
                 ha="right", fontfamily=_FONTS["sans"])
 
-    # Mini-Legende
-    c.text(MX, 350 + chart_h + 22, "● Kauf-Signal", 14, color=mcol, weight="bold")
-    if any(s.get("signal_date") != entry["d"] for s in feat.get("signals", [])):
-        c.text(MX + 200, 350 + chart_h + 22, "● weitere Signale", 14, color=T.BLUE)
+    # Mini-Legende (Kauf grün · Verkauf rot · weitere Kauf-Signale)
+    ly = 350 + chart_h + 22
+    c.text(MX, ly, "● Kauf", 15, color=buy_col, weight="bold")
+    lx = MX + 130
+    if drawn_sell:
+        c.text(lx, ly, "● Verkauf", 15, color=sell_col, weight="bold")
+        lx += 175
+    if has_extra:
+        c.text(lx, ly, "● weitere Kauf-Signale", 15, color=buy_col, alpha=0.7)
 
     # KPI-Kacheln
     ky = 350 + chart_h + 70
     half = (c.W - 2 * MX - 30) // 2
     c.tile(MX, ky, half, 110, color=T.PANEL)
-    c.text(MX + 30, ky + 26, "Wertzuwachs seit Kauf", 17, color=T.MUTED)
+    lbl1 = "Realisierter Gewinn" if feat.get("closed") else "Wertzuwachs seit Kauf"
+    c.text(MX + 30, ky + 26, lbl1, 17, color=T.MUTED)
     c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
            color=rcol, weight="bold", font="mono")
     c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
+    sp = feat.get("sell_price_eur")
     bp = feat.get("buy_price_eur")
-    if bp:
+    if feat.get("closed") and sp:
+        c.text(MX + half + 60, ky + 26, "Verkaufskurs", 17, color=T.MUTED)
+        c.text(MX + half + 60, ky + 52,
+               f"{sp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
+    elif bp:
         c.text(MX + half + 60, ky + 26, "Einstiegskurs", 17, color=T.MUTED)
         c.text(MX + half + 60, ky + 52,
                f"{bp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")

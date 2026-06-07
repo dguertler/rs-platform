@@ -90,6 +90,7 @@ Die NASDAQ-100-Vergleichslinie kommt real aus `data/rs_full.json` (QQQ).
 4. Stärkste Positionen (Top-5)
 5. **Strategisches „Warum"** (KI-Kontext, Text-Slide)
 6. Aktie der Woche (rotierend, Chart + Marker)
+6a. Trade der Woche (Chart mit Kauf grün + Verkauf rot — falls KW-Verkauf vorhanden)
 7. Weitere Positionen · 8. Newcomer (falls vorhanden)
 9. **CTA + Engagement-Boost** (Bio-Link + Interaktions-Frage) + Risikohinweis
 
