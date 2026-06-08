@@ -349,33 +349,41 @@ Die Caption enthält automatisch:
 
 **Cover (Slide 1):**
 - Hook: 60 px, Zeilenabstand 74, Start y=170
-- Logo-Karte: zentriert zwischen Hook-Ende und Bottom-Section (von unten berechnet)
-- Verdict-Badge + Rating-Blöcke: verankert am Footer, Rating-Blöcke zentriert im Restabstand
+- Logo-Karte: zentriert zwischen Hook-Ende und gesamtem unteren Block (via chain_h)
+- Aktienname + Sektor: **direkt unter der Logo-Karte** (y = card_top + card_h + 16)
+- Verdict-Badge + Rating-Blöcke: direkt nach dem Namen, bis Footer
 - Rating-Labels: 24 px (eine Größe kleiner als TY_BODY), Sterne unter den Labels
 
 **Business-Slide (Slide 3):**
-- Blaue Überschriften und Body-Text: beide TY_BODY=28
+- Box-Höhe **dynamisch** pro Bullet: `pad_top + n_head*TY_BODY_LH + n_body*TY_BODY_LH + pad_bot`
+- Blaue Überschriften und Body-Text: beide TY_BODY=28, line_h=TY_BODY_LH
 - Jede Box hat immer eine blaue Überschrift (bei fehlendem " — "-Trenner: erste 5 Wörter als Titel)
+- Titeltext wird geWrapped (kein Überlaufen der Box)
+- Boxes die footer_y=c.H-160 überschreiten: werden abgebrochen
 
 **Szenarien-Slide (Slide 4):**
-- Box-Höhe rh=220 (damit Wahrscheinlichkeit + Kursziel nicht überlaufen)
-- Wahrscheinlichkeit und Kursziel rechts übereinander: Label 22px, Wert 38px / TY_BODY
+- Box-Höhe rh=180 (content-fit: Wahrscheinlichkeit + Kursziel passen rein)
+- Wahrscheinlichkeit und Kursziel rechts übereinander: Label 22px, Wert 38px
 
-**Cases-Blöcke (Slides 5+6):**
+**Cases-Blöcke (Slides 5+6+):**
 - Wahrscheinlichkeit + Kursziel in EINER Zeile: `"45%  ·  560–700 $"` rechts-oben
-- Overflow-Schutz: Blöcke die footer_y=c.H-160 überschreiten werden abgebrochen
+- Overflow-Split in generate.py: findet automatisch wieviele Items auf eine Slide passen
+  (avail=890px: c.H-160 - top0=300). Kann 3 Slides erzeugen (szenarien_erklaert_1/2/3)
+- _draw_cases_blocks bricht NICHT ab — die Split-Logik in generate.py ist dafür zuständig
 
-**CTA-Slide (Slide 13):**
-- Community-Box: dynamische Höhe (an Text angepasst), zentriert zwischen Save-Box und CTA-Text
+**Risk-Slide (Slide 9):**
+- Positions-Warn-Box: Text-Größe TY_BODY=28 (gleich wie der weiße Text darunter)
 
 **KGV-Slide (Slide 8):**
 - "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
-- Erklärung: Hoher Trailing-PE ist ein Basiseffekt — aktuelle Gewinne noch niedrig, GPU-Hochlauf nicht reflektiert
+- Basiseffekt = hoher Trailing-PE durch noch-niedrige Gewinne vor GPU-Hochlauf, kein echtes Warnsignal
 
 **Allgemeine Regeln:**
-- Keine hardcodierten "ae/oe/ue" in deutschen Strings → immer ä/ö/ü
+- **Ausnahmslos echte Umlaute** (ä, ö, ü, Ä, Ö, Ü, ß) in allen deutschen Strings — niemals ae/oe/ue/ss
+- Keine hardcodierten `--headline` Argumente mit ASCII-Ersatz übergeben (auto-Headline verwendet korrekte Umlaute)
 - Bindestrich zwischen Buchstaben: automatisch `Text - Text` via `_wrap_px`
-- Wenn Box/Text Footer-Linie (y=c.H-150) überschreitet → auf weiterem Slide fortführen
+- Graue Boxen: Höhe immer dynamisch berechnet (an Text angepasst)
+- Wenn Box/Text Footer-Linie überschreitet: weiterer Slide (Overflow-Split in generate.py)
 
 ### 12.10 AMD-Analyse: Abdeckung auf den Slides (Vergleich)
 
