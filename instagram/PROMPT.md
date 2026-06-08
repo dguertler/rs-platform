@@ -472,10 +472,12 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
 **Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).
 
 **Design-Regeln (verbindlich — alle Vorgaben aus dem Review):**
-- **Hook (Slide 1) nennt IMMER die Aktie** — Firmenname **+ Ticker** in Klammern,
-  z. B. „Centene (CNC): Turnaround bestätigt …". Der Default macht das automatisch;
-  bei eigenem `--headline` wird der Wert vorangestellt, falls Name/Ticker fehlen
-  (`earnings_headline`). So ist auf den ersten Blick klar, um welchen Wert es geht.
+- **Hook (Slide 1) nennt KEINE Aktie** — **kein Firmenname, kein Tickerkürzel**
+  (z. B. weder „Centene" noch „(CNC)"). Der Hook ist eine zugespitzte Beat-These
+  („Turnaround bestätigt — der Quartalsgewinn schlägt die Erwartung um 62 %"); um
+  welchen Wert es geht, zeigen die **Logo-Karte** und die **Zeile darunter**
+  (Firma · Sektor). `earnings_headline` erzeugt das automatisch; ein eigenes
+  `--headline` wird unverändert übernommen (dann selbst auf diese Regel achten).
 - **Bewertungs-Slide: Chips immer linksbündig auffüllen.** Fehlt eine Kennzahl
   (z. B. kein Trailing-KGV), rückt die nächste (Forward-KGV) in die **linke** Spalte
   — nie in die Mitte. Verfügbare Chips in der Reihenfolge Trailing-KGV · Forward-KGV

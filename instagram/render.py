@@ -1566,26 +1566,18 @@ def _e_sector(e):
 
 
 def earnings_headline(e):
-    """Hook für Slide 1 — macht klar, dass es ein EARNINGS-Post ist (Beat-Story),
-    keine normale Analyse. e['headline'] hat Vorrang (bespoke via --headline).
-    Regel: Der Hook nennt IMMER die Aktie (Firmenname + Ticker), damit beim ersten
-    Blick klar ist, um welchen Wert es geht."""
-    name = _e_name(e)
-    tick = e["ticker"]
-    label = f"{name} ({tick})" if name and name != tick else tick
+    """Hook für Slide 1 — kurze, zugespitzte Beat-These. Regel: KEIN Firmenname und
+    KEIN Tickerkürzel im Hook (z. B. weder „Centene" noch „(CNC)") — um welchen Wert
+    es geht, zeigen die Logo-Karte und die Zeile darunter. e['headline'] (via
+    --headline) hat Vorrang und wird unverändert übernommen."""
     if e.get("headline"):
-        h = e["headline"]
-        # Sicherstellen, dass die Aktie im Hook vorkommt
-        if name.lower() not in h.lower() and tick.lower() not in h.lower():
-            h = f"{label}: {h}"
-        return h
+        return e["headline"]
     surp = e.get("eps_surprise_pct")
     if (surp or 0) >= 0:
         s = E.fmt_pct_pts(surp, 0, signed=False) if surp is not None else ""
-        return (f"{label}: Turnaround bestätigt — der Quartalsgewinn schlägt "
-                f"die Erwartung um {s}".rstrip(" —um ")) if s else \
-               f"{label}: Die Quartalszahlen schlagen die Erwartungen"
-    return f"{label}: Quartalszahlen verfehlen die Erwartungen"
+        return (f"Turnaround bestätigt — der Quartalsgewinn schlägt die Erwartung "
+                f"um {s}") if s else "Die Quartalszahlen schlagen die Erwartungen"
+    return "Quartalszahlen verfehlen die Erwartungen"
 
 
 def _eyebrow_pill(c, x, top, text, col=T.GREEN, h=52):
