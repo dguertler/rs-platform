@@ -1,7 +1,9 @@
 {
-  "_hinweis": "Historischer Snapshot KW14 (30.03.-04.04.2026). Erster vollständiger AI Alpha Selection Wochenabschluss. Nur MRVL als AI-selektierte Position (Kauf 24.03., direkt vor offiziellem Start). MSFT war noch als manuelles Restposition im Depot (Verkauf 15.04.), wird im AI Alpha Reporting nicht geführt.",
+  "_hinweis": "Historischer Snapshot KW14 (30.03.–04.04.2026). AI Alpha Selection Woche 1. Positionen zum Wochenende: MRVL (AI Alpha, Kauf 24.03.), MSFT (manuelles Restposition, Kauf vor Excel-Tracking, Verkauf 15.04.), Definium Therapeutics (Kauf 03.03., Verkauf 24.04. — Ticker DFNM nicht in NASDAQ/S&P-Daten, daher keine Chart-Rendite berechnet). SNDK wurde erst am 08.04. (KW15) gekauft.",
   "base_kw": 14,
   "positions": [
-    { "ticker": "MRVL", "name": "Marvell Technology", "buy_date": "2026-03-24", "buy_price_eur": 80.07 }
+    { "ticker": "MRVL", "name": "Marvell Technology",      "buy_date": "2026-03-24", "buy_price_eur": 80.07 },
+    { "ticker": "MSFT", "name": "Microsoft",               "buy_date": "2026-03-30", "buy_price_eur": null },
+    { "ticker": "DFNM", "name": "Definium Therapeutics",   "buy_date": "2026-03-03", "buy_price_eur": 15.49 }
   ]
 }
