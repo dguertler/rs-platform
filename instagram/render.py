@@ -1713,8 +1713,8 @@ def slide_earnings_reaction(c, e, date_iso):
     # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
     dy = max(0, (c.H - 1350) // 2)
     c.text(MX, 184 + dy, "Die Kursreaktion", 42, weight="bold")
-    c.text(MX, 240 + dy, "Tageskerzen der letzten 5 Wochen bis zum Meldetag", TY_SUB,
-           color=T.MUTED)
+    c.text(MX, 240 + dy, "Tageskerzen — die letzten 35 Handelstage bis zum Meldetag",
+           TY_SUB, color=T.MUTED)
 
     candles = e.get("reaction_ohlcv") or []
     idx = e.get("reaction_idx")

@@ -301,6 +301,11 @@ Tiefen-Slides (6/7/8/10) entfallen automatisch, wenn der Abschnitt fehlt
 Kurs; **GWS-Ampel & Breakout-Status** (Punkt 9) — wird aus allen Texten
 gefiltert (`analysis.clean_for_slide`).
 
+**Marken-Tagline (Profi-Fazit + „Speichern & mitreden"-Slide):** unter „Folge für
+wöchentliche Profi-Analysen" steht exakt **„datengetrieben · unabhängig ·
+systematisiert"** (kein „faceless"). Gilt einheitlich für Analyse- UND
+Earnings-Posts (`slide_analysis_fazit`, `slide_analysis_cta`, `slide_earnings_cta`).
+
 ### Wichtig: Kursziele konsistent halten
 - **Slide 3 = 12–18 Monate** (mit Wahrscheinlichkeit, aus Punkt 3/4/5).
 - **Slide 4 = 3–5 Jahre** (ohne Wahrscheinlichkeit, aus Punkt 10).
@@ -455,10 +460,12 @@ Hybrid-CTA „ganze Analyse im Karussell".
 - **Slide 2 „Der Beat in Zahlen":** EPS- + Umsatz-Vergleich Ist/Erwartung; darunter
   eine **Kurz-Zusammenfassung als Text** (Feld `beat_summary`, sonst auto aus den
   Zahlen). **Keine** technischen Chips (kein RS-Score, kein GAAP-EPS).
-- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 5 Wochen (25 Handelstage)
-  bis EINSCHLIESSLICH Meldetag** (kein Tag danach). Mit **Datums-Achse unten**
-  (≈ wöchentliche Labels, Meldetag grün), Preis-Labels links, Sprung-Highlight +
-  „+X %"-Callout. Untertitel: „Tageskerzen der letzten 5 Wochen bis zum Meldetag".
+- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 35 Handelstage
+  bis EINSCHLIESSLICH Meldetag** (kein Tag danach; `reaction_window(before=34,
+  after=0)`). Mit **Datums-Achse unten** (Meldetag grün), Preis-Labels links,
+  Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 35
+  Handelstage bis zum Meldetag". Hinweis: OHLCV enthält nur **Handelstage** (keine
+  Wochenenden/Feiertage) — 35 Kerzen ≈ 7 Kalenderwochen.
 - **Slide 5 „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
   (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
   Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).

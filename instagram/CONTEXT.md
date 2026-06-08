@@ -179,6 +179,10 @@ Langfrist 3–5J · Profi-Fazit · **Speichern & mitreden** (Community-CTA).
 **Grid-Logik:** Wochenpost = AI-Alpha-Marke; Analyse = **Firmenlogo** der AG auf
 weißer Karte + Verdict-Badge (BUY grün / HOLD gelb / WATCH-SELL rot).
 
+**Marken-Tagline (Fazit + „Speichern & mitreden"-Slide):** exakt
+**„datengetrieben · unabhängig · systematisiert"** (kein „faceless") — einheitlich
+für Analyse- und Earnings-Posts.
+
 **Hook:** Cover + Reel tragen eine **Frage/These** (erste 3 Sek). Ohne
 `--headline` autogeneriert (verdict-bewusst, pro Ticker variiert); für beste
 Wirkung pro Post eine **individuelle** `--headline` setzen.
@@ -256,8 +260,9 @@ fehlen.
   `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
   (`_trim_logo` schneidet transparente UND weiße Ränder weg).
 - Slide 2 ohne RS-Score/GAAP-Chips, dafür `beat_summary`-Text.
-- Slide 3 Chart = **Tageskerzen 5 Wochen bis zum Meldetag** (after=0) mit
-  **Datums-Achse unten** + Preis-Labels links; Untertitel nennt „5 Wochen".
+- Slide 3 Chart = **Tageskerzen, letzte 35 Handelstage bis zum Meldetag**
+  (`reaction_window(before=34, after=0)`) mit **Datums-Achse unten** + Preis-Labels
+  links. OHLCV hat nur Handelstage → 35 Kerzen ≈ 7 Kalenderwochen.
 - Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
   weil Base Case zwar über Kurs, aber binäres Risiko).
 - Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.
