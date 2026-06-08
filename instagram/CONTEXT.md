@@ -209,4 +209,93 @@ Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 - Optional: individuelle Headlines für die 17 Ticker vorbereiten;
   Reel-MP4-Feintuning (Tempo/Textgröße); Stories; Auto-Upload via Graph API.
 - Abhängigkeiten: `pip install -r instagram/requirements.txt` (matplotlib,
-  numpy, Pillow, imageio, imageio-ffmpeg).
+  numpy, Pillow, imageio, imageio-ffmpeg, **pyphen**).
+
+## 12. Design-System & Typografie-Regeln (render.py — verbindlich für alle Slide-Typen)
+
+Beide Post-Typen (Wochenpost + Analyse) verwenden **dieselbe** Render-Engine
+(`instagram/render.py`). Folgende Regeln gelten für alle Slides — Änderungen
+hier immer in render.py umsetzen und als Konstante/Parameter fixieren.
+
+### 12.1 Farbschema (`instagram/theme.py`)
+| Konstante | Hex | Einsatz |
+|---|---|---|
+| `BG` | `#0E1320` | Slide-Hintergrund (Navy) |
+| `PANEL` | `#172131` | Kachel-/Tile-Hintergrund |
+| `PANEL_HI` | `#1F2A3D` | hellere Kachel (Tags etc.) |
+| `GREEN` | `#22D3A0` | BUY · positiv · Depot |
+| `RED` | `#FF5C6C` | SELL · negativ · Bear |
+| `BLUE` | `#2F6BFF` | Markenakzent · Base · Alpha |
+| `AMBER` | `#F5B43C` | HOLD · WATCH · neutral |
+| `TEXT` | `#FFFFFF` | Haupttext |
+| `MUTED` | `#8A93A6` | Sekundärtext / Labels |
+| `GRID` | `#232E42` | Trennlinien |
+
+### 12.2 Schrift (`register_fonts()`)
+- **Liberation Sans** (Regular + Bold) — Körpertext, Headlines, Labels
+- **DejaVu Sans Mono** (Bold) — Zahlen, Kursziele, Prozente, Scores
+- DPI = 150; Größen in *Pixel* (intern zu Punkt: `px * 72 / 150`)
+
+### 12.3 Typografie-Konstanten (nach `MX = 90` in render.py)
+```python
+TY_H1      = 42   # Slide-Hauptüberschrift
+TY_SUB     = 18   # Subtitle / Kontext-Zeile (MUTED)
+TY_BODY    = 28   # Fließtext (Investment-Case, Szenarien, Fazit usw.)
+TY_BODY_LH = 44   # Zeilenabstand zu TY_BODY
+MX         = 90   # Seitenrand links/rechts in px
+```
+**Regel:** Alle neuen Fließtext-Slides verwenden `TY_BODY`/`TY_BODY_LH`.
+Alle H1-Überschriften verwenden `TY_H1`. Alle Subtitles `TY_SUB` in `MUTED`.
+
+### 12.4 Textausrichtung & Zeilenumbruch (gültig für Deutsch + Englisch)
+
+**Standard: linksbündig** (`justify=False` in `_draw_paragraph`).
+Blocksatz (`justify=True`) nur für abgegrenzte Boxen wie den CTA-Disclaimer.
+
+**Zeilenumbruch:** `_wrap_px(text, px_width, size, factor=0.50, lang="de")`
+- `factor=0.50` entspricht der durchschnittlichen Zeichenbreite von Liberation
+  Sans (0.50 × Schriftgröße px), gibt ~64 Zeichen/Zeile bei 28 px / 900 px Breite.
+- `lang="de"`: aktiviert **pyphen-Silbentrennung** (`de_DE`-Wörterbuch).
+  Lange deutsche Komposita (≥ 10 Zeichen, kein echter Bindestrich) werden am
+  **rechtesten passenden Silbenpunkt** getrennt; Trennstrich erscheint **nur am
+  echten Zeilenende** — nie mitten im Wort.
+- `lang=None`: Silbentrennung deaktiviert (für englische Texte).
+
+**Äquivalenz CSS ↔ Python (zur Orientierung):**
+| CSS | Python-Äquivalent |
+|---|---|
+| `text-align: left` | `justify=False` (Standard) |
+| `hyphens: auto; lang="de"` | `_wrap_px(..., lang="de")` via pyphen |
+| `word-break: break-word` | `break_long_words=True` in textwrap |
+| `text-align: justify` + Hyphens | `justify=True` nur mit `lang="de"` |
+
+### 12.5 Slide-Layout-Muster (für neue Slides)
+```python
+def slide_analysis_NEU(c, a, date_iso):
+    analysis_header(c, a, date_iso)               # Header + Trennlinie bei y=140
+    c.text(MX, 184, "Titel", TY_H1, weight="bold")
+    c.text(MX, 240, "Untertitel", TY_SUB, color=T.MUTED)
+    txt = A.clean_for_slide(a["sections"].get(N, ""))
+    _draw_paragraph(c, MX, 304, txt, TY_BODY, c.W - 2 * MX,
+                    color=T.TEXT, line_h=TY_BODY_LH, max_lines=20)
+    analysis_footer(c)                             # Linie + Disclaimer bei y=H-150
+```
+
+**Verfügbare Textfläche** (Carousel 1080×1350):
+- Content-Bereich: y=160 … y=1200 (nach Header/vor Footer) = ~1040 px
+- Body-Text ab y=304: ~896 px / TY_BODY_LH=44 ≈ **20 Zeilen** ohne max_lines-Limit
+
+### 12.6 Wochenpost-Slides (dieselben Regeln)
+Alle `slide_performance`, `slide_history`, `slide_list`, `slide_featured` etc.
+verwenden denselben `MX=90`, dieselben Farben und dieselbe Footer-Funktion.
+Textgröße für Kachel-Zahlen: 34–64 px (je Wichtigkeit), Labels immer `MUTED`.
+Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
+
+### 12.7 Konsistenz-Checkliste für neue Slides
+- [ ] `analysis_header` / `analysis_footer` aufrufen (Analyse-Posts)
+- [ ] Überschrift: `TY_H1=42`, bold; Subtitle: `TY_SUB=18`, `color=T.MUTED`
+- [ ] Fließtext: `TY_BODY=28`, `TY_BODY_LH=44`, `justify=False` (Standard)
+- [ ] Silbentrennung: `_wrap_px` automatisch via `lang="de"` (kein manuelles Eingreifen)
+- [ ] Kein aktueller Kurs, keine GWS-/Breakout-Nennungen → `A.clean_for_slide()`
+- [ ] Disclaimer: `DISCLAIMER_ANALYSE_SHORT` im Footer (kein wikifolio-Bezug)
+
