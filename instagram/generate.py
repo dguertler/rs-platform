@@ -78,8 +78,9 @@ def build_from_store(fmt, ctx, outdir):
     emit("performance", lambda c: render.slide_performance(
         c, di, ctx["eq_dates"], ctx["eq_vals"], ctx["nas_dates"], ctx["nas_vals"],
         ctx["total_perf"], ctx["nasdaq_total"], False, stats=ctx["stats"]))
-    # 3) Wochen-Historie (Mehrrendite ggü. NASDAQ)
-    emit("historie", lambda c: render.slide_history(c, di, ctx["history"]))
+    # 3) Wochen-Historie (Mehrrendite ggü. NASDAQ) — erst ab 2+ Wochen sinnvoll (KW15+)
+    if len(ctx["history"]) >= 2:
+        emit("historie", lambda c: render.slide_history(c, di, ctx["history"]))
     # 4) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
     if ctx["top_holdings"]:
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
@@ -909,6 +910,17 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_from_store(ctx))
+        # ZIP der Carousel-PNGs für einfachen Versand / Upload
+        import zipfile
+        carousel_dir = os.path.join(base, "carousel")
+        if os.path.isdir(carousel_dir):
+            zip_path = os.path.join(base, f"carousel_KW{args.kw:02d}.zip")
+            with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
+                for fname in sorted(os.listdir(carousel_dir)):
+                    if fname.endswith(".png"):
+                        zf.write(os.path.join(carousel_dir, fname), fname)
+            all_saved.append(zip_path)
+            print(f"  📦 ZIP: {os.path.relpath(zip_path, ROOT)}")
         print(f"✓ {len(all_saved)} Slides (KW{args.kw}) in {base}")
         print(f"  Datum (Slide): {date_iso} · Aktie der Woche: {ctx['featured']['ticker']}")
         for p in all_saved:

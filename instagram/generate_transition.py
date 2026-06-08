@@ -160,19 +160,8 @@ def slide_transition(c, date_iso, ai_data, nasdaq_ret=None):
 
     # Vertikale Trennlinie
     trans_x = datetime.strptime(TRANSITION_DATE, "%Y-%m-%d").toordinal()
+    x_range = (ax_.max() - mx.min()) if (len(ax_) and len(mx)) else 1
     ax.axvline(trans_x, color=T.BLUE, lw=1.8, linestyle="--", alpha=0.85, zorder=5)
-
-    # Restrukturierungs-Annotation (oben, nicht auf dem Chart-Inhalt)
-    x_range = ax_.max() - mx.min() if len(ax_) and len(mx) else 1
-    ax.annotate(
-        "Depot-Neuaufstellung\n(Einmaleffekt)",
-        xy=(trans_x, TRANSITION_VALUE + 1),
-        xytext=(trans_x - x_range * 0.05, TRANSITION_VALUE + (ymax - ymin) * 0.38),
-        color=T.MUTED, fontsize=8.5,
-        fontfamily=render._FONTS["sans"],
-        arrowprops=dict(arrowstyle="->", color=T.MUTED, lw=1.1),
-        ha="right", va="center",
-    )
 
     # "KI übernimmt"-Label RECHTS vom Transition-Strich (im oberen Drittel)
     ax.text(trans_x + x_range * 0.013,

@@ -116,11 +116,36 @@ python3 -m instagram.generate --kw 23 \
   --frage "<Interaktions-Frage zu den Trades der Woche>"
 # ohne --hook/--why/--frage greifen datenbasierte Fallbacks
 ```
-Output: `out/instagram/<SAMSTAG-KW>_KW<NN>/{carousel,reel}/*.png` + `caption.txt`
-(Datum = Samstag der KW, sonst heute; `--date` überschreibt).
+Output: `out/instagram/<SAMSTAG-KW>_KW<NN>/`
+- `carousel/*.png` — einzelne Slides (werden dem Nutzer einzeln gezeigt)
+- `reel/*.png` — Reel-Frames
+- `caption.txt` — Caption-Text
+- **`carousel_KW<NN>.zip`** — ZIP aller Carousel-PNGs (wird automatisch erstellt,
+  für einfachen Download und Upload)
+
+Datum = Samstag der KW, sonst heute; `--date` überschreibt.
 Neue Käufe/Verkäufe → `holdings.json` / `trades.json` pflegen.
 In einer neuen Session reicht: „Folge instagram/CONTEXT.md, KW23-Wert ist X" —
 Claude textet Hook/Warum/Frage selbst aus den Daten.
+
+### Slide-Regeln für rückwirkende / erste Reports
+- **Slide 3 (Mehrrendite-Historie) erst ab KW15** (erst ab 2+ Wochen Datenbasis
+  sinnvoll). Für KW14 wird Slide 3 automatisch übersprungen.
+- **Slide 5 (Strategisches Warum)** bezieht sich auf die aktuelle AI-Alpha-Position
+  der Woche — bei KW14 nur MRVL nennen, MSFT (manuelle Restposition) ignorieren.
+- **Historisch korrekte Performance:** `store.py` begrenzt Kursrenditen via `as_of`
+  auf das Berichtsdatum (nicht auf den heutigen Kurs). Korrekt für alle `--kw`-Aufrufe.
+
+### Historische Snapshots (`instagram/data/snapshots/KW<NN>/`)
+Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
+- `holdings.json` — Depot-Zustand am Ende der Woche
+- `trades.json` — abgeschlossene Trades bis zu dieser Woche
+`store.py` lädt automatisch den Snapshot wenn er existiert, sonst die Live-Daten.
+
+**Bestehende Snapshots:**
+| KW | Positionen | Trades |
+|---|---|---|
+| KW14 | MRVL (24.03.), MSFT (30.03., Restpos.), DFNM (03.03., kein OHLCV) | — |
 
 ## 8. Offene Punkte / Entscheidungen
 - **NASDAQ-Quelle (NDX vs. QQQ):** Es wird jetzt der echte **NASDAQ-100-Index
