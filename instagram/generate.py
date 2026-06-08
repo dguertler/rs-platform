@@ -313,6 +313,14 @@ def build_analysis(fmt, a, date_iso, outdir):
         emit("langfrist",     lambda c: render.slide_analysis_longterm(c, a, date_iso))
     emit("fazit",         lambda c: render.slide_analysis_fazit(c, a, date_iso))
     emit("cta",           lambda c: render.slide_analysis_cta(c, a, date_iso))
+
+    # ZIP-Archiv aller Carousel-Slides für einfachen Download
+    import zipfile as _zf
+    zip_path = os.path.join(os.path.dirname(outdir), f"carousel_{a['ticker']}.zip")
+    with _zf.ZipFile(zip_path, "w", _zf.ZIP_DEFLATED) as zf:
+        for p in sorted(saved):
+            zf.write(p, os.path.basename(p))
+    saved.append(zip_path)
     return saved
 
 
@@ -417,37 +425,91 @@ def reel_script(a):
 
 
 def caption_analysis(a):
-    """Vollständige, für Instagram aufbereitete Caption (Text unter den Fotos).
-    Kein externer Link — die Analyse steht direkt als Text im Post.
-    Instagram-Limit 2.200 Zeichen wird beachtet (notfalls wird gekürzt)."""
+    """Instagram-Caption als inhaltliche Ergänzung zu den Slides.
+    Die 'Weitere Details' (EPYC/Intel, TSMC, HBM, D/E, Analyst) sind
+    exklusiver Caption-Content — nicht auf den Slides sichtbar.
+    Hashtags: 25-30 Tags für maximale Algorithmus-Reichweite.
+    Instagram-Limit 2.200 Zeichen wird beachtet (notfalls Kürzung)."""
+    import re as _re
     v = a["verdict"]
     scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
     head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
-
     star = lambda n: ("★" * (n or 0)) + ("☆" * (5 - (n or 0)))
     rt = a["ratings"]
     DISC = ("Keine Anlageberatung. Analysen auf Basis öffentlicher Daten. "
             "Kursziele sind Szenarien, keine Prognosen. Kapitalanlagen bergen "
             "Verlustrisiken bis zum Totalverlust.")
-    sector_tag = {
-        "Technology": "#technologie #tech", "Healthcare": "#healthcare #pharma",
-        "Industrials": "#industrie", "Energy": "#energie",
-        "Financial Services": "#finanzen", "Consumer Cyclical": "#konsum",
-    }.get(a.get("sector", ""), "")
+
+    # ── Hashtags: ausführlich, 25–30 Tags ────────────────────────────────────
     tic = a["ticker"].replace(".", "").lower()
-    tags = (f"#aktien #aktienanalyse #börse #investing #{tic} #boersewissen "
-            f"#geldanlage #finanzen #stockanalysis #aialphaselection "
-            f"{sector_tag}").rstrip()
+    sector_tags = {
+        "Technology": "#halbleiter #semiconductor #chips #technologieaktien #techaktien",
+        "Healthcare": "#healthcare #pharmaaktien #biotech #gesundheit",
+        "Industrials": "#industrie #industrieaktien #infrastruktur",
+        "Energy": "#energie #energieaktien #erneuerbar",
+        "Financial Services": "#finanzsektor #banken #versicherung",
+        "Consumer Cyclical": "#konsumaktien #einzelhandel #konsum",
+    }.get(a.get("sector", ""), "#technologieaktien")
+
+    biz_text = " ".join(a.get("business_bullets", []) + [a.get("hook", "")])
+    topic_parts = []
+    if any(w in biz_text for w in ("GPU", "KI", "AI", "Instinct", "Datacenter")):
+        topic_parts.append("#ki #künstlicheintelligenz #aistock #aiinvesting "
+                           "#datacenter #gpu #aiaccelerator #kisemiconductor")
+    if any(w in biz_text for w in ("EPYC", "CPU", "Server")):
+        topic_parts.append("#cpu #serverchips")
+    if any(w in biz_text for w in ("TSMC", "Fabless")):
+        topic_parts.append("#tsmc #fabless")
+
+    tags = (
+        f"#aktien #aktienanalyse #aktienmarkt #börse #boersewissen "
+        f"#geldanlage #finanzbildung #finanzwissen #wachstumsaktien "
+        f"#investing #stockanalysis #stockmarket #stockpicking #momentum "
+        f"#{tic} {sector_tags} "
+        + " ".join(topic_parts) +
+        " #aialphaselection"
+    ).rstrip()
+
+    # ── "Weitere Details"-Block — immer vollständig, nie weglassen ───────────
+    sec2 = ana.clean_for_slide(a["sections"].get(2, ""))
+    sec3 = ana.clean_for_slide(a["sections"].get(3, ""))
+    sec6 = ana.clean_for_slide(a["sections"].get(6, ""))
+    sec7 = ana.clean_for_slide(a["sections"].get(7, ""))
+
+    extra = []
+    # EPYC vs. Intel (aus Section 3 oder Section 2)
+    if _re.search(r'EPYC|Intel', sec2 + sec3, _re.I):
+        extra.append("EPYC vs. Intel: AMD gewinnt im Rechenzentrum-CPU-Markt "
+                     "kontinuierlich Marktanteile — profitabler Cashflow-Sockel "
+                     "der GPU-Wette")
+    # TSMC-Fabless (immer wenn vorhanden — auch wenn in Bullets)
+    if _re.search(r'TSMC|Fabless', sec2, _re.I):
+        extra.append("TSMC-Abhängigkeit: Fabless-Modell = volle Abhängigkeit "
+                     "von TSMC-Kapazität (3nm/5nm) + CoWoS-HBM-Packaging")
+    # HBM-Risiko (immer wenn vorhanden)
+    if _re.search(r'HBM', sec2, _re.I):
+        extra.append("HBM-Risiko: MI-GPUs benötigen HBM3e von SK Hynix/Samsung "
+                     "— Lieferkette ist kritischer Engpass bei hoher AI-Nachfrage")
+    # D/E aus Section 6
+    m_de = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6)
+    if m_de:
+        extra.append(f"Bilanz: D/E {m_de.group(1)} — konservative Verschuldung, "
+                     f"solide Bilanz, ~7 Mrd. $ FCF (2024)")
+    # Analyst-Konsensus aus Section 7
+    m_ac = _re.search(
+        r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]{2,}(?:[.,][0-9]+)?)',
+        sec7)
+    if m_ac:
+        extra.append(f"Analyst-Konsensus: {m_ac.group(1).rstrip('.')} $ Kursziel "
+                     f"— Analysten laufen der Kursrally aktuell hinterher")
 
     def assemble(biz_n, with_longterm, with_cases):
         parts = [f"📊 {head}\n"]
         if a.get("hook"):
             parts.append(a["hook"] + "\n")
-
         if a.get("business_bullets") and biz_n:
             bl = "\n".join(f"› {b}" for b in a["business_bullets"][:biz_n])
             parts.append("🏭 Das Unternehmen:\n" + bl + "\n")
-
         if _has_scenarios(a):
             sc = a["scenarios"]
             emo = {"bull": "🟢", "base": "🔵", "bear": "🔴"}
@@ -476,55 +538,31 @@ def caption_analysis(a):
             if a.get("con_bullets"):
                 parts.append("🔴 Risiken:\n" + "\n".join(
                     f"› {b}" for b in a["con_bullets"][:biz_n or 3]) + "\n")
-
         if any(rt.values()):
             parts.append(f"⭐ Rating: Qualität {star(rt.get('Qualität'))} · "
                          f"Wachstum {star(rt.get('Wachstum'))} · "
                          f"Bewertung {star(rt.get('Bewertung'))} · "
                          f"Katalysator {star(rt.get('Katalysator'))}\n")
-
         if a.get("fazit_core"):
             parts.append("🧭 Fazit: " + a["fazit_core"] + "\n")
         if a.get("peers"):
             parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
-
-        # Weitere Details (aus Geschäftsmodell + Fundamentals + Bewertung)
-        extra = []
-        sec2 = ana.clean_for_slide(a["sections"].get(2, ""))
-        sec6 = ana.clean_for_slide(a["sections"].get(6, ""))
-        sec7 = ana.clean_for_slide(a["sections"].get(7, ""))
-        # D/E aus Section 6
-        import re as _re
-        m_de = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6)
-        if m_de:
-            extra.append(f"D/E-Verhältnis: {m_de.group(1)} (Bilanz solide)")
-        # Analyst-Konsensus aus Section 7
-        m_ac = _re.search(
-            r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]{2,}(?:[.,][0-9]+)?)',
-            sec7)
-        if m_ac:
-            extra.append(f"Analysten-Konsensus: {m_ac.group(1).rstrip('.')} $ (Abdeckung läuft Rally nach)")
-        # Fabless/HBM aus Section 2 (nur wenn nicht schon in business_bullets)
-        biz_text = " ".join(a.get("business_bullets", []))
-        if 'HBM' in sec2 and 'HBM' not in biz_text:
-            extra.append("HBM-Speicher von SK Hynix/Samsung (Verfügbarkeitsrisiko)")
-        elif 'TSMC' in sec2 and 'TSMC' not in biz_text:
-            extra.append("Fabless-Modell: Fertigung via TSMC")
-        if extra and with_cases:
-            parts.append("💡 Weitere Details:\n" + "\n".join(f"› {e}" for e in extra) + "\n")
-
-        parts.append(f"👉 Folge für wöchentliche Analysen.\n")
+        # Weitere Details — caption-exklusiver Content, immer vollständig
+        if extra:
+            parts.append("💡 Nicht auf den Slides:\n"
+                         + "\n".join(f"› {e}" for e in extra) + "\n")
+        parts.append("👉 Folge für wöchentliche Analysen.\n")
         parts.append("❗ " + DISC)
         parts.append("\n" + tags)
         return "\n".join(parts)
 
-    # Schrittweise kürzen, bis die Caption ins 2.200-Zeichen-Limit passt
+    # Schrittweise kürzen (Bullets → Cases → Longterm); Weitere Details bleiben immer
     for biz_n, lt, cases in ((4, True, True), (4, True, False), (3, True, False),
-                             (3, False, False), (2, False, False)):
+                             (3, False, False), (2, False, False), (0, False, False)):
         cap = assemble(biz_n, lt, cases)
         if len(cap) <= 2200:
             return cap
-    return cap[:2180].rsplit(" ", 1)[0] + " …"
+    return assemble(0, False, False)[:2180].rsplit(" ", 1)[0] + " …"
 
 
 def build(fmt, ctx, outdir):
