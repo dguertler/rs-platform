@@ -20,6 +20,12 @@ HANDLE = "@aialphaselection"
 BRAND = "AI ALPHA SELECTION"
 MX = 90  # Seitenrand in px
 
+# ── Typografie-Konstanten (einheitlich auf allen Slides) ──────────────────────
+TY_H1      = 42   # Slide-Überschrift  (z. B. "Gesamteinschätzung")
+TY_SUB     = 18   # Untertitel / Kontext-Zeile
+TY_BODY    = 28   # Fließtext / Analysetext
+TY_BODY_LH = 44   # Zeilenabstand für TY_BODY
+
 
 # ── Formatierungs-Helfer ──────────────────────────────────────────────────────
 def fmt_pct(x, decimals=1, signed=True):
@@ -152,7 +158,7 @@ def _style_chart(ax):
     ax.set_axisbelow(True)
 
 
-def _justify_line(c, x, top, words, size, color, target_w, font="sans"):
+def _justify_line(c, x, top, words, size, color, target_w, font="sans", weight="normal"):
     """Zeichnet eine Zeile im Blocksatz: Wörter werden auf target_w (px) verteilt."""
     try:
         r = c.fig.canvas.get_renderer()
@@ -162,19 +168,19 @@ def _justify_line(c, x, top, words, size, color, target_w, font="sans"):
     pt = size * 72.0 / T.DPI
 
     def wpx(s):
-        t = c.ax.text(0, 0, s, fontsize=pt, fontfamily=_FONTS[font])
+        t = c.ax.text(0, 0, s, fontsize=pt, fontfamily=_FONTS[font], fontweight=weight)
         bb = t.get_window_extent(renderer=r)
         t.remove()
         return bb.width
 
     if len(words) <= 1:
-        c.text(x, top, words[0] if words else "", size, color=color, font=font)
+        c.text(x, top, words[0] if words else "", size, color=color, font=font, weight=weight)
         return
     widths = [wpx(w) for w in words]
     gap = max((target_w - sum(widths)) / (len(words) - 1), wpx(" "))
     cx = x
     for w, ww in zip(words, widths):
-        c.text(cx, top, w, size, color=color, font=font)
+        c.text(cx, top, w, size, color=color, font=font, weight=weight)
         cx += ww + gap
 
 
@@ -619,21 +625,27 @@ def verdict_color(v):
             "WATCH": T.AMBER, "SELL": T.RED}.get((v or "").upper(), T.BLUE)
 
 
-def _wrap_px(text, px_width, size, factor=0.52):
+def _wrap_px(text, px_width, size, factor=0.56):
     import textwrap
     width = max(8, int(px_width / max(1.0, size * factor)))
     return textwrap.wrap(text, width=width)
 
 
 def _draw_paragraph(c, x, top, text, size, px_width, color=T.TEXT,
-                    weight="normal", line_h=None, max_lines=None):
+                    weight="normal", line_h=None, max_lines=None,
+                    justify=True, font="sans"):
     lines = _wrap_px(text, px_width, size)
     if max_lines and len(lines) > max_lines:
         lines = lines[:max_lines]
         lines[-1] = lines[-1].rstrip(" .,;") + " …"
     lh = line_h or int(size * 1.34)
     for i, ln in enumerate(lines):
-        c.text(x, top + i * lh, ln, size, color=color, weight=weight)
+        is_last = (i == len(lines) - 1)
+        if justify and not is_last and len(ln.split()) > 1:
+            _justify_line(c, x, top + i * lh, ln.split(), size, color,
+                          px_width, font=font, weight=weight)
+        else:
+            c.text(x, top + i * lh, ln, size, color=color, weight=weight, font=font)
     return top + len(lines) * lh
 
 
@@ -666,9 +678,9 @@ def _verdict_badge(c, x, top, verdict, score, w=None, h=120):
     c.text(x + 40, top + 24, "EINSCHÄTZUNG", 16, color=T.MUTED)
     c.text(x + 40, top + 52, f"{verdict} · {lab}", 40, color=col, weight="bold")
     if score is not None:
-        c.text(x + w - 40, top + 30, f"{score}", 64, color=col,
+        c.text(x + w - 40, top + h // 2 - 24, f"{score}", 46, color=col,
                weight="bold", ha="right", font="mono")
-        c.text(x + w - 40, top + 98, "/100", 20, color=T.MUTED, ha="right")
+        c.text(x + w - 40, top + h // 2 + 6, "/100", 24, color=T.MUTED, ha="right")
 
 
 def _pips(c, x, top, value, total=5, size=22, gap=12, col=T.BLUE):
@@ -754,7 +766,8 @@ def slide_analysis_cover(c, a, date_iso):
 
     # HEADLINE (Frage/These) — die ersten 3 Sekunden
     hy = _draw_paragraph(c, MX, 226, analysis_headline(a), 50, c.W - 2 * MX,
-                         color=T.TEXT, weight="bold", line_h=62, max_lines=3)
+                         color=T.TEXT, weight="bold", line_h=62, max_lines=3,
+                         justify=False)
 
     # Weiße Logo-Karte (kompakter als früher, damit Rating-Blöcke Platz haben)
     card_top = max(hy + 40, 430)
@@ -783,18 +796,19 @@ def slide_analysis_cover(c, a, date_iso):
     ]
     r_gap = 16
     r_cw = (c.W - 2 * MX - r_gap) // 2
-    r_ch = 78
+    r_ch = 100
+    vcol = verdict_color(a["verdict"])
     r_top = verdict_bottom + 14
     for i, (label, val) in enumerate(rating_items):
         row, col_i = divmod(i, 2)
         rx = MX + col_i * (r_cw + r_gap)
         ry = r_top + row * (r_ch + r_gap)
         c.tile(rx, ry, r_cw, r_ch, color=T.PANEL)
-        c.text(rx + 18, ry + 10, label.upper(), 12, color=T.MUTED, weight="bold")
+        c.text(rx + 18, ry + 10, label.upper(), 13, color=T.MUTED, weight="bold")
         c.text(rx + r_cw - 18, ry + 8,
-               f"{val if val is not None else '–'}/5", 22,
-               color=col, weight="bold", ha="right", font="mono")
-        _stars(c, rx + 28, ry + 56, val, col=col, gap=34, s=220)
+               f"{val if val is not None else '–'}/5", 36,
+               color=vcol, weight="bold", ha="right", font="mono")
+        _stars(c, rx + 28, ry + 68, val, col=vcol, gap=34, s=220)
     analysis_footer(c)
 
 
@@ -809,10 +823,9 @@ def slide_analysis_verdict(c, a, date_iso):
            22, color=col, weight="bold")
 
     # Vollständiger Investment-Case — kein Abschneiden (Rating-Blöcke sind auf Cover)
-    # Verfügbarer Bereich: ~888 px → ~23 Zeilen à 38 px; längere Texte passen immer
     core = " ".join(a["sections"].get(1, "").split()) or a.get("hook", "")
-    _draw_paragraph(c, MX, 312, core, 25, c.W - 2 * MX,
-                    color=T.TEXT, line_h=38, max_lines=22)
+    _draw_paragraph(c, MX, 312, core, TY_BODY, c.W - 2 * MX,
+                    color=T.TEXT, line_h=TY_BODY_LH, max_lines=20)
     analysis_footer(c)
 
 
@@ -1000,9 +1013,10 @@ def slide_analysis_fazit(c, a, date_iso):
     import re as _re
     raw11 = a["sections"].get(11, "")
     raw11 = _re.sub(r"\n-\s*(Qualität|Wachstum|Bewertung|Katalysator)[^\n]*", "", raw11)
+    raw11 = _re.sub(r"\*\*([^*]+)\*\*", r"\1", raw11)
     core = A.clean_for_slide(raw11.strip()) or a.get("fazit_core", "")
-    y = _draw_paragraph(c, MX, 396, core, 24, c.W - 2 * MX,
-                        color=T.TEXT, line_h=36, max_lines=12)
+    y = _draw_paragraph(c, MX, 396, core, TY_BODY, c.W - 2 * MX,
+                        color=T.TEXT, line_h=TY_BODY_LH, max_lines=10)
 
     # Peers
     peers = a.get("peers", [])
@@ -1069,8 +1083,8 @@ def slide_analysis_valuation(c, a, date_iso):
         y += ch + 40
 
     txt = A.clean_for_slide(a["sections"].get(7, ""))
-    _draw_paragraph(c, MX, y, txt, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=18)
+    _draw_paragraph(c, MX, y, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
+                    line_h=TY_BODY_LH, max_lines=15)
     analysis_footer(c)
 
 
@@ -1094,8 +1108,8 @@ def slide_analysis_risk(c, a, date_iso):
 
     body = A.clean_for_slide(a["sections"].get(8, "")) or \
         A.clean_for_slide(a["scenarios"]["bear"]["summary"])
-    _draw_paragraph(c, MX, y, body, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=18)
+    _draw_paragraph(c, MX, y, body, TY_BODY, c.W - 2 * MX, color=T.TEXT,
+                    line_h=TY_BODY_LH, max_lines=16)
     analysis_footer(c)
 
 
@@ -1136,8 +1150,8 @@ def slide_analysis_fundamentals(c, a, date_iso):
     c.text(MX, 184, "Fundamentale Qualität", 42, weight="bold")
     c.text(MX, 240, "Bilanz, Margen, Kapitalrendite", 18, color=T.MUTED)
     txt = A.clean_for_slide(a["sections"].get(6, ""))
-    _draw_paragraph(c, MX, 304, txt, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=22)
+    _draw_paragraph(c, MX, 304, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
+                    line_h=TY_BODY_LH, max_lines=20)
     analysis_footer(c)
 
 
@@ -1147,8 +1161,8 @@ def slide_analysis_technical(c, a, date_iso):
     c.text(MX, 184, "Technisches Bild & Momentum", 42, weight="bold")
     c.text(MX, 240, "Trend, Volatilität, Warnsignale", 18, color=T.MUTED)
     txt = A.clean_for_slide(a["sections"].get(9, ""))
-    _draw_paragraph(c, MX, 304, txt, 24, c.W - 2 * MX, color=T.TEXT,
-                    line_h=37, max_lines=22)
+    _draw_paragraph(c, MX, 304, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
+                    line_h=TY_BODY_LH, max_lines=20)
     analysis_footer(c)
 
 
@@ -1166,7 +1180,8 @@ def slide_reel_hook(c, a, date_iso):
     reel_header(c, date_iso)
     # Frage/These groß (erste 3 Sekunden)
     hy = _draw_paragraph(c, MX, 300, analysis_headline(a), 58, c.W - 2 * MX,
-                         color=T.TEXT, weight="bold", line_h=72, max_lines=3)
+                         color=T.TEXT, weight="bold", line_h=72, max_lines=3,
+                         justify=False)
     card_top = max(hy + 60, 600)
     _logo_card(c, MX, card_top, c.W - 2 * MX, 470, a["ticker"])
     sub = A.short_name(a["name"])
