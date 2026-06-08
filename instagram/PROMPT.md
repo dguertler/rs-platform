@@ -423,27 +423,50 @@ Claude befüllt die dynamischen Felder aus dem Web. Pflicht: `ticker`, `quarter`
   "context": "Was die Zahlen für die These bedeuten (2–3 Sätze).",
   "beat_summary": "Kurz-Zusammenfassung für Slide 2 (optional; sonst auto).",
   "verdict_note": "Warum dieses Verdict trotz Beat (optional; sonst auto aus Analyse).",
+
+  // ── Earnings-Tiefgang (optional; nur wenn Daten aus dem Web vorhanden) ──
+  "quarterly_label": "Bereinigtes EPS je Quartal ($)",
+  "quarterly_note": "1 Satz zum Trend (z. B. V-Erholung).",
+  "quarterly": [                       // Mini-Balkenchart „Gewinn je Quartal"
+    {"q": "Q4 24", "eps": 0.80}, {"q": "Q1 25", "eps": 2.90},
+    {"q": "Q2 25", "eps": -0.16}, {"q": "Q1 26", "eps": 3.37}
+  ],
+  "quarterly_derived_note": "Falls ein Quartal abgeleitet ist: Quelle/Rechnung notieren.",
+  "segments_note": "1 Satz, was den Umsatz/Beat segmentübergreifend trug.",
+  "segments": [                        // Slide „Was den Beat getragen hat"
+    {"name": "Medicaid", "metric": "HBR 93,1 %", "note": "…"},
+    {"name": "Medicare", "metric": "HBR 84,9 %", "note": "…"}
+  ],
   "sources": ["https://…"]             // Quellen-Links (Nachvollziehbarkeit)
 }
 ```
 Schnelltest der Datenschicht: `python3 -m instagram.earnings CNC`.
 
-### Slide-Reihenfolge (Earnings, eigenständig)
+### Slide-Reihenfolge (Earnings, eigenständig — bis zu 14 Slides, Tiefe = USP)
+**Earnings-Block (die News):**
 1. **Cover** — EARNINGS-Pille + Beat-Hook + Firmenlogo + Hero-Zahlen
    (EPS-Surprise + Kurssprung)
-2. **Der Beat in Zahlen** — EPS & Umsatz Ist vs. Erwartung + Surprise-Chips
-3. **Die Kursreaktion** — Candle-Chart um den Meldetag, Sprungtag markiert
-   (live aus `data/rs_*.json`)
-4. **Ausblick & Treiber** — angehobene Guidance + Turnaround-Kennzahl + Treiber
-5. **Einordnung** — was die Zahlen für die These bedeuten + KI-Verdict-Badge
-6. **Szenarien · 12–18 Monate** *(aus der Basis-Analyse)*
-7. **Langfrist · 3–5 Jahre** *(aus der Basis-Analyse, falls vorhanden)*
-8. **Profi-Fazit** *(aus der Basis-Analyse)*
-9. **Speichern & mitreden** — Save-CTA + Community-Frage (Turnaround vs. Strohfeuer)
+2. **Der Beat in Zahlen** — EPS & Umsatz Ist vs. Erwartung + Kurz-Zusammenfassung
+3. **Gewinn je Quartal** — Mini-Balkenchart bereinigtes EPS *(B; nur mit `quarterly`)*
+4. **Die Kursreaktion** — 50-Handelstage-Candle-Chart (live aus `data/rs_*.json`)
+5. **Ausblick & Treiber** — angehobene Guidance + Turnaround-Kennzahl + Treiber
+6. **Was den Beat getragen hat** — Segmente im Detail *(B; nur mit `segments`)*
 
-Slides 3/4/5/7 entfallen automatisch, wenn die Daten fehlen (z. B. kein OHLCV →
-keine Reaktions-Slide). Reel-Teaser (9:16): Beat-Hook → Szenarien → Wichtigstes →
-Hybrid-CTA „ganze Analyse im Karussell".
+**Unternehmen & These (aus der Basis-Analyse):**
+7. **Was macht das Unternehmen?** — Geschäftsmodell *(A; aus Analyse-Punkt 2)*
+8. **Einordnung** — was die Zahlen für die These bedeuten + Verdict + „Warum?"
+9. **Bewertung** — Forward-KGV: noch günstig nach dem Pop? *(A; aus Analyse-Punkt 7)*
+10. **Qualität auf einen Blick** — 4 Sterne-Ratings *(A; aus Analyse)*
+11. **Szenarien · 12–18 Monate** *(aus der Basis-Analyse)*
+12. **Langfrist · 3–5 Jahre** *(aus der Basis-Analyse, falls vorhanden)*
+13. **Profi-Fazit** *(aus der Basis-Analyse)*
+14. **Speichern & mitreden** — Save-CTA + Community-Frage (Turnaround vs. Strohfeuer)
+
+Jede Slide entfällt automatisch, wenn die Daten fehlen: B-Slides (3, 6) nur mit
+`quarterly`/`segments` in der JSON; A-/These-Slides (7–13) nur mit passender
+Basis-Analyse (neues 11-Abschnitte-Schema); Reaktion (4) nur mit OHLCV. So bleibt
+der Post auch ohne Tiefgang-Daten lauffähig (Minimal-Set: 1, 2, 4, 5, 8, 14).
+Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CTA.
 
 **Grid-Logik:** Wochenupdate = Equity-Kurve · Analyse = Firmenlogo + Verdict ·
 **Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).

@@ -570,22 +570,35 @@ def caption_analysis(a):
 
 # ── Earnings-Analyse-Post (instagram/data/earnings/TICKER.json) ───────────────
 def build_earnings(fmt, e, date_iso, outdir):
-    """Earnings-Carousel: Beat-Story + Verknüpfung zur Investment-These.
-    Eigenständig (8–10 Slides); die Basis-Analyse (e['analysis']) liefert
-    Verdict, Szenarien & Kursziele."""
+    """Earnings-Carousel: Beat-Story + Earnings-Tiefgang + Verknüpfung zur These.
+    Eigenständig; die Basis-Analyse (e['analysis']) liefert Geschäftsmodell,
+    Verdict, Bewertung, Sterne, Szenarien & Kursziele. Earnings-spezifische
+    Tiefen-Slides (Quartals-Trend, Segmente) erscheinen nur, wenn die Daten in der
+    Earnings-JSON stehen."""
     saved = []
     emit = _emitter(fmt, outdir, saved)
     a = e.get("analysis")
 
+    # ── Earnings-Block: die News ──────────────────────────────────────────────
     emit("cover",     lambda c: render.slide_earnings_cover(c, e, date_iso))
     emit("zahlen",    lambda c: render.slide_earnings_numbers(c, e, date_iso))
+    if e.get("quarterly"):
+        emit("quartale", lambda c: render.slide_earnings_quarterly(c, e, date_iso))
     if e.get("reaction_ohlcv"):
         emit("reaktion", lambda c: render.slide_earnings_reaction(c, e, date_iso))
     if e.get("guidance") or e.get("drivers") or e.get("key_metric_value"):
         emit("ausblick", lambda c: render.slide_earnings_guidance(c, e, date_iso))
+    if e.get("segments"):
+        emit("segmente", lambda c: render.slide_earnings_segments(c, e, date_iso))
+    # ── Unternehmen & These aus der Basis-Analyse ─────────────────────────────
+    if a and a.get("business_bullets"):
+        emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
     if a and e.get("context"):
         emit("einordnung", lambda c: render.slide_earnings_context(c, e, date_iso))
-    # Investment-These aus der Basis-Analyse (Szenarien + Langfrist + Fazit)
+    if a and a["sections"].get(7):
+        emit("bewertung", lambda c: render.slide_analysis_valuation(c, a, date_iso))
+    if a and any(a["ratings"].values()):
+        emit("ratings", lambda c: render.slide_earnings_ratings(c, e, date_iso))
     if a and _has_scenarios(a):
         emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
     if a and _has_longterm(a):

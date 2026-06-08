@@ -1896,6 +1896,111 @@ def slide_earnings_context(c, e, date_iso):
     analysis_footer(c)
 
 
+# 6) GEWINN JE QUARTAL — bereinigtes EPS als Mini-Balkenchart (Turnaround-Trend)
+def slide_earnings_quarterly(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Gewinn je Quartal", 42, weight="bold")
+    c.text(MX, 240 + dy, e.get("quarterly_label", "Bereinigtes EPS je Quartal ($)"),
+           TY_SUB, color=T.MUTED)
+
+    q = e.get("quarterly") or []
+    chart_top, chart_h = 320 + dy, 470
+    if q:
+        ax = c.chart_axes(MX, chart_top, c.W - 2 * MX, chart_h)
+        vals = [d["eps"] for d in q]
+        labels = [d["q"] for d in q]
+        n = len(q)
+        ymax = max(vals + [0])
+        ymin = min(vals + [0])
+        span = (ymax - ymin) or 1
+        for i, v in enumerate(vals):
+            is_last = (i == n - 1)
+            bcol = T.GREEN if v >= 0 else T.RED
+            ax.bar(i, v, width=0.62, color=bcol, zorder=3,
+                   alpha=1.0 if is_last else 0.8)
+            ax.text(i, v + (0.03 * span if v >= 0 else -0.03 * span),
+                    f"{v:.2f}".replace(".", ","),
+                    ha="center", va="bottom" if v >= 0 else "top",
+                    color=bcol, fontsize=15, fontweight="bold",
+                    fontfamily=_FONTS["mono"])
+        ax.axhline(0, color=T.MUTED, lw=1.4, zorder=2)
+        ax.set_xlim(-0.7, n - 0.3)
+        ax.set_ylim(ymin - 0.32 * span, ymax + 0.18 * span)
+        for i, lab in enumerate(labels):
+            is_last = (i == n - 1)
+            ax.text(i, ymin - 0.20 * span, lab, ha="center", va="top",
+                    color=col if is_last else T.MUTED, fontsize=14,
+                    fontweight="bold" if is_last else "normal",
+                    fontfamily=_FONTS["sans"])
+    note = e.get("quarterly_note")
+    if note:
+        _draw_paragraph(c, MX, chart_top + chart_h + 80, note, TY_BODY,
+                        c.W - 2 * MX, color=T.SUBTLE, line_h=TY_BODY_LH, max_lines=3)
+    analysis_footer(c)
+
+
+# 7) WAS DEN BEAT GETRAGEN HAT — Segmente im Detail
+def slide_earnings_segments(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Was den Beat getragen hat", 42, weight="bold")
+    c.text(MX, 240, "Die Segmente im Detail", TY_SUB, color=T.MUTED)
+
+    segs = e.get("segments") or []
+    y = 312
+    for s in segs[:4]:
+        note = s.get("note", "")
+        nlines = _wrap_px(note, c.W - 2 * MX - 340, TY_SUB) if note else []
+        h = max(124, 56 + len(nlines) * 30 + 24)
+        c.tile(MX, y, c.W - 2 * MX, h, color=T.PANEL)
+        c.tile(MX, y, 10, h, color=col, radius=5)
+        c.text(MX + 34, y + 22, s["name"].upper(), 24, color=col, weight="bold")
+        if s.get("metric"):
+            c.text(MX + 34, y + 56, s["metric"], 34, color=T.TEXT,
+                   weight="bold", font="mono")
+        for i, ln in enumerate(nlines[:4]):
+            c.text(MX + 330, y + 28 + i * 30, ln, TY_SUB, color=T.MUTED)
+        y += h + 20
+    if e.get("segments_note"):
+        _draw_paragraph(c, MX, y + 8, e["segments_note"], TY_SUB, c.W - 2 * MX,
+                        color=T.MUTED, line_h=32, max_lines=3)
+    analysis_footer(c)
+
+
+# 10) QUALITÄT AUF EINEN BLICK — Sterne-Ratings aus der Basis-Analyse
+def slide_earnings_ratings(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    a = e.get("analysis")
+    c.text(MX, 184, "Qualität auf einen Blick", 42, weight="bold")
+    c.text(MX, 240, "KI-Bewertung in vier Dimensionen", TY_SUB, color=T.MUTED)
+    if not a:
+        analysis_footer(c)
+        return
+    rt = a["ratings"]
+    vcol = verdict_color(a["verdict"])
+    items = [("Qualität", rt.get("Qualität"), "Bilanz, Margen, Kapitalrendite"),
+             ("Wachstum", rt.get("Wachstum"), "Umsatz- & Gewinndynamik"),
+             ("Bewertung", rt.get("Bewertung"), "Preis vs. fairer Wert"),
+             ("Katalysator", rt.get("Katalysator"), "Auslöser für Neubewertung")]
+    gap, top0 = 24, 320
+    cw = (c.W - 2 * MX - gap) // 2
+    ch = 230
+    for i, (label, val, desc) in enumerate(items):
+        row, coli = divmod(i, 2)
+        rx = MX + coli * (cw + gap)
+        ry = top0 + row * (ch + gap)
+        c.tile(rx, ry, cw, ch, color=T.PANEL)
+        c.text(rx + 28, ry + 24, label.upper(), 24, color=vcol, weight="bold")
+        c.text(rx + cw - 28, ry + 20, f"{val if val is not None else '–'}/5", 34,
+               color=vcol, weight="bold", ha="right", font="mono")
+        _stars(c, rx + 34, ry + 118, val, col=vcol, gap=46, s=430)
+        for j, ln in enumerate(_wrap_px(desc, cw - 56, TY_SUB)[:2]):
+            c.text(rx + 28, ry + 150 + j * 28, ln, TY_SUB, color=T.MUTED)
+    analysis_footer(c)
+
+
 # 9) EARNINGS-FAZIT / CTA — Speichern, Frage, Quellen-Hinweis
 def slide_earnings_cta(c, e, date_iso):
     analysis_header(c, e, date_iso)

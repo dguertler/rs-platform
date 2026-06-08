@@ -276,10 +276,15 @@ fehlen.
   geparste Basis-Analyse unter `e["analysis"]`), `price_jump()`,
   `reaction_window()`, `fmt_num`/`fmt_pct`/`fmt_pct_pts`. Schnelltest:
   `python3 -m instagram.earnings CNC`.
-- `instagram/render.py` — `slide_earnings_*` (cover, numbers, reaction, guidance,
-  context, cta) + `slide_earnings_reel_*` (hook, cta) + `earnings_headline()` +
-  `_stat_tile`/`_eyebrow_pill`. Reused: `slide_analysis_scenarios/-longterm/-fazit`
-  + `slide_reel_scenarios/-takeaway` (aus `e["analysis"]`).
+- `instagram/render.py` — `slide_earnings_*` (cover, numbers, **quarterly**,
+  reaction, guidance, **segments**, context, **ratings**, cta) + `slide_earnings_reel_*`
+  + `earnings_headline()` + `_stat_tile`/`_eyebrow_pill`. Reused aus der Analyse:
+  `slide_analysis_business/-valuation/-scenarios/-longterm/-fazit` (aus `e["analysis"]`).
+- **Tiefgang-Slides:** A = aus der Basis-Analyse (Geschäftsmodell, Bewertung,
+  Sterne, Szenarien, Langfrist, Fazit). B = aus Earnings-JSON-Feldern `quarterly`
+  (Mini-Balkenchart bereinigtes EPS, V-Turnaround) + `segments` (Segment-Treiber).
+  Jede Slide entfällt ohne ihre Daten. Bis zu 14 Slides; Minimal-Set ohne
+  Tiefgang-Daten: Cover/Zahlen/Reaktion/Ausblick/Einordnung/CTA.
 - `instagram/generate.py` — CLI `--earnings` / `--headline`; `build_earnings`,
   `build_earnings_reel`, `caption_earnings`.
 - `instagram/data/earnings/<TICKER>.json` — persistierte Beat-Zahlen (Beispiel:
