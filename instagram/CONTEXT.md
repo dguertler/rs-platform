@@ -30,17 +30,30 @@ nennen, **wikifolio-Logo** ohne Freigabe, sich als wikifolio-Mitarbeiter ausgebe
 Pflicht-Risikohinweis ist in jeder Slide (Footer) + CTA + Caption integriert.
 Wort „Musterdepot" wird bewusst NICHT verwendet (es sind reale Käufe).
 
-## 4. Slide-Reihenfolge (Wochenpost, 7 Slides)
-1. **Performance vs. NASDAQ-100** (Eye-Catcher) + Kennzahlen-Streifen
+## 4. Slide-Reihenfolge (Wochenpost, 9 Slides — CTR-/Engagement-Upgrade)
+1. **🆕 Dynamic Hook** (Slide 1, visueller Stopper, KEIN Dashboard) — dynamische
+   Schlagzeile (`--hook`) + Beweis-Chips Gesamtrendite + Alpha
+2. **Performance vs. NASDAQ-100** (Eye-Catcher) + Kennzahlen-Streifen
    (Gesamtrendite, NASDAQ, Alpha, Trades, Trefferquote, Profitfaktor,
    Ø Gewinn/Trade, Ø Verlust/Trade; `*` = inkl. offener Positionen)
-2. **Mehrrendite ggü. NASDAQ-100** (wöchentliche Abweichung, Balken)
-3. **Stärkste Positionen** (Top-5 nach Wertzuwachs, mit Kaufdatum + Einstiegskurs)
-4. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal,
+3. **Mehrrendite ggü. NASDAQ-100** (wöchentliche Abweichung, Balken)
+4. **Stärkste Positionen** (Top-5 nach Wertzuwachs, mit Kaufdatum + Einstiegskurs)
+5. **🆕 Strategisches „Warum"** (minimalistische Text-Slide, KI-Kontext) —
+   Übergang zu den Einzelaktien; Text aus `--why`
+6. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal,
    weitere Signale als blaue Punkte)
-5. **Weitere Positionen** (alle außerhalb der Top-5)
-6. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
-7. **CTA + Risikohinweis** (Blocksatz, Box unten)
+7. **Weitere Positionen** (alle außerhalb der Top-5)
+8. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
+9. **🆕 CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs im
+   IG-Text nicht klickbar) + dynamische Interaktions-Frage (`--frage`), Box unten
+
+**Dynamische Felder (Claude textet pro Woche, siehe PROMPT.md):** `--hook`
+(Schlagzeile), `--why` (KI-Kontext), `--frage` (Kommentar-Frage). Ohne Flags
+greifen datenbasierte Fallbacks (`auto_hook/auto_why/auto_question`).
+
+**Slide-Datum (oben rechts):** standardmäßig **Samstag der KW** (`report.slide_date`);
+liegt dieser noch in der Zukunft → heute; `--date` überschreibt. So bekommt jede
+rückwirkend erzeugte Analyse das passende Wochen-Samstagsdatum.
 
 Rotation Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`.
 Kennzahlen = `trades.json` (abgeschlossen) **+** aktive Positionen (Rendite aus
@@ -85,11 +98,17 @@ Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · 
 ## 7. Wöchentlicher Ablauf (Kurzform)
 ```bash
 python3 -m instagram.add_week --kw 23 --value <Zertifikatswert> --date 2026-06-05
-python3 -m instagram.generate --kw 23          # Carousel + Reel + caption.txt
+python3 -m instagram.generate --kw 23 \
+  --hook  "<dynamische Schlagzeile aus den Wochendaten>" \
+  --why   "<KI-Kontext: Sektor/Thema · Marktereignis · Aktie X>" \
+  --frage "<Interaktions-Frage zu den Trades der Woche>"
+# ohne --hook/--why/--frage greifen datenbasierte Fallbacks
 ```
-Output: `out/instagram/<DATUM>_KW<NN>/{carousel,reel}/*.png` + `caption.txt`.
+Output: `out/instagram/<SAMSTAG-KW>_KW<NN>/{carousel,reel}/*.png` + `caption.txt`
+(Datum = Samstag der KW, sonst heute; `--date` überschreibt).
 Neue Käufe/Verkäufe → `holdings.json` / `trades.json` pflegen.
-In einer neuen Session reicht: „Folge instagram/CONTEXT.md, KW23-Wert ist X".
+In einer neuen Session reicht: „Folge instagram/CONTEXT.md, KW23-Wert ist X" —
+Claude textet Hook/Warum/Frage selbst aus den Daten.
 
 ## 8. Offene Punkte / Entscheidungen
 - **NASDAQ-Quelle (NDX vs. QQQ):** Es wird jetzt der echte **NASDAQ-100-Index

@@ -31,19 +31,55 @@ def _pos_sub(t):
     return s
 
 
+def _hook_metrics(ctx):
+    """1–2 prominente Kennzahlen als visueller Beweis für den Dynamic Hook."""
+    return [
+        ("Gesamtrendite seit Start", render.fmt_pct(ctx["total_perf"]),
+         render.T.GREEN if ctx["total_perf"] >= 0 else render.T.RED),
+        ("Alpha vs. NASDAQ-100", render.fmt_pct(ctx["alpha"]), render.T.BLUE),
+    ]
+
+
+def auto_hook(ctx):
+    """Fallback-Schlagzeile aus den Daten, falls Claude keine `--hook` setzt.
+    Claude sollte pro Woche eine eigene, ereignisbezogene Headline übergeben."""
+    alpha = render.fmt_pct(ctx["alpha"])
+    if ctx["alpha"] >= 0:
+        return f"{alpha} Alpha: Während der NASDAQ schlief, hat die KI agiert."
+    return "Sturm an der Börse — wie die KI das Depot stabil hält."
+
+
+def auto_why(ctx):
+    """Fallback-Begründung der KI-Logik, falls Claude kein `--why` setzt."""
+    f = ctx["featured"]["ticker"]
+    return (f"Unser KI-Modell hat diese Woche den Fokus auf relative Stärke im "
+            f"Sektor gelegt — ein bestätigter Trend hat die Signale für {f} "
+            f"getriggert.")
+
+
+def auto_question(ctx):
+    """Fallback-Interaktionsfrage, falls Claude keine `--frage` setzt."""
+    f = ctx["featured"]["ticker"]
+    return (f"Hättest du {f} bei diesem Kurs auch gekauft – oder auf einen "
+            f"Rücksetzer gewartet? Schreib's unten rein!")
+
+
 def build_from_store(fmt, ctx, outdir):
     """Wochen-Carousel aus den persistenten Daten (store.compute)."""
     saved = []
     emit = _emitter(fmt, outdir, saved)
     di = ctx["date_iso"]
 
-    # 1) Performance (Eye-Catcher) inkl. Kennzahlen unter dem Graph
+    # 1) Dynamic Hook (visueller Stopper, KEIN Dashboard) — Schlagzeile + Beweis
+    emit("hook", lambda c: render.slide_hook_dynamic(
+        c, di, ctx["hook"], _hook_metrics(ctx), kw=ctx["kw"]))
+    # 2) Performance (Eye-Catcher) inkl. Kennzahlen unter dem Graph
     emit("performance", lambda c: render.slide_performance(
         c, di, ctx["eq_dates"], ctx["eq_vals"], ctx["nas_dates"], ctx["nas_vals"],
         ctx["total_perf"], ctx["nasdaq_total"], False, stats=ctx["stats"]))
-    # 2) Wochen-Historie (Mehrrendite ggü. NASDAQ)
+    # 3) Wochen-Historie (Mehrrendite ggü. NASDAQ)
     emit("historie", lambda c: render.slide_history(c, di, ctx["history"]))
-    # 3) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
+    # 4) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
     if ctx["top_holdings"]:
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]),
@@ -51,11 +87,13 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
-    # 4) Aktie der Woche (Rotation)
+    # 5) Strategisches „Warum" (KI-Kontext) — Übergang zu den Einzelaktien
+    emit("warum", lambda c: render.slide_why(c, di, ctx["why"]))
+    # 6) Aktie der Woche (Rotation)
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 4b) Weitere Positionen (alle außerhalb der Top-5)
+    # 6b) Weitere Positionen (alle außerhalb der Top-5)
     if ctx.get("rest_holdings"):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]),
@@ -63,12 +101,13 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["rest_holdings"]]
         emit("weitere", lambda c: render.slide_list(
             c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
-    # 5) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
+    # 7) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
     if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
         emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["newcomer"], label="NEWCOMER"))
-    # 6) CTA + Risikohinweis
-    emit("cta", lambda c: render.slide_cta(c, di))
+    # 8) CTA: Bio-Link-Pfad + dynamische Interaktions-Frage + Risikohinweis
+    emit("cta", lambda c: render.slide_cta(
+        c, di, question=ctx["question"], account=ctx["account"]))
     return saved
 
 
@@ -83,8 +122,10 @@ def caption_from_store(ctx):
     nc = ctx.get("newcomer")
     newc = (f"\n🆕 Newcomer: {nc['ticker']} – {render.fmt_pct(nc['ret'])} seit Kauf."
             if nc and nc.get("ret") is not None else "")
+    why = f"\n🤖 Hinter den Kulissen: {ctx['why']}\n" if ctx.get("why") else ""
     return (
-        f"📊 Wochenupdate KW {ctx['kw']} ({ctx['period']})\n\n"
+        f"📊 {ctx['hook']}\n\n"
+        f"Wochenupdate KW {ctx['kw']} ({ctx['period']})\n"
         f"Diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
         f"NASDAQ-100: {render.fmt_pct(ctx['nasdaq_week'])}\n"
         f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} | "
@@ -95,8 +136,10 @@ def caption_from_store(ctx):
         f"Profitfaktor {pf} · Ø Gewinn {render.fmt_pct(s['avg_win'])} · "
         f"Ø Verlust {render.fmt_pct(s['avg_loss'])}\n\n"
         f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
-        f"{feat}{newc}\n\n"
-        f"➡️ Mehr: {ctx['account']}\n\n"
+        f"{feat}{newc}\n"
+        f"{why}\n"
+        f"👉 Den Link zum Live-Depot findest du aktuell in unserer Bio! {ctx['account']}\n\n"
+        f"💬 {ctx['question']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
         f"#geldanlage #finanzen #relativestärke #wochenupdate"
@@ -488,23 +531,30 @@ def main():
     ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
     ap.add_argument("--analysis", help="Ticker oder Pfad zu analyses/TICKER.md (Analyse-Post)")
     ap.add_argument("--headline", help="Eigene Cover-Headline (Frage/These) für den Analyse-Post")
-    ap.add_argument("--date", default=datetime.utcnow().strftime("%Y-%m-%d"))
+    ap.add_argument("--hook", help="Dynamic-Hook-Schlagzeile für Slide 1 (Wochenpost)")
+    ap.add_argument("--why", help="Strategisches „Warum“ (KI-Kontext-Slide, Wochenpost)")
+    ap.add_argument("--frage", help="Dynamische Interaktions-Frage für die CTA-Slide")
+    ap.add_argument("--date", help="Slide-Datum (YYYY-MM-DD). Ohne Angabe: Samstag "
+                                   "der KW (bzw. heute, falls dieser Samstag noch "
+                                   "in der Zukunft liegt).")
     args = ap.parse_args()
+    today = datetime.utcnow().strftime("%Y-%m-%d")
 
     # ── Analyse-Post aus analyses/TICKER.md ───────────────────────────────────
     if args.analysis:
+        date_iso = args.date or today
         a = ana.parse_analysis(args.analysis)
         if args.headline:
             a["headline"] = args.headline
         slug = a["ticker"].replace(".", "_")
-        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_ANALYSE_{slug}")
+        base = os.path.join(ROOT, "out", "instagram", f"{date_iso}_ANALYSE_{slug}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
         all_saved = []
         for fmt in fmts:
             if fmt == "reel":
-                all_saved += build_analysis_reel(a, args.date, os.path.join(base, fmt))
+                all_saved += build_analysis_reel(a, date_iso, os.path.join(base, fmt))
             else:
-                all_saved += build_analysis(fmt, a, args.date, os.path.join(base, fmt))
+                all_saved += build_analysis(fmt, a, date_iso, os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_analysis(a))
@@ -540,9 +590,16 @@ def main():
 
     # ── Wochenmodus aus persistenten Daten (Hauptweg) ─────────────────────────
     if args.kw:
-        ctx = store.compute(args.kw, universe, benchmark, ref_date=args.date)
-        ctx["date_iso"] = args.date
-        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_KW{args.kw}")
+        # Slide-Datum = Samstag der KW (rückwirkend), sonst heute (siehe report.slide_date)
+        year = store.load_config().get("year", int(today[:4]))
+        date_iso = report.slide_date(year, args.kw, args.date)
+        ctx = store.compute(args.kw, universe, benchmark, ref_date=date_iso)
+        ctx["date_iso"] = date_iso
+        # Dynamische Felder: Claude übergibt sie via CLI; sonst datenbasierter Fallback
+        ctx["hook"] = args.hook or auto_hook(ctx)
+        ctx["why"] = args.why or auto_why(ctx)
+        ctx["question"] = args.frage or auto_question(ctx)
+        base = os.path.join(ROOT, "out", "instagram", f"{date_iso}_KW{args.kw}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
         all_saved = []
         for fmt in fmts:
@@ -551,7 +608,7 @@ def main():
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_from_store(ctx))
         print(f"✓ {len(all_saved)} Slides (KW{args.kw}) in {base}")
-        print(f"  Aktie der Woche: {ctx['featured']['ticker']}")
+        print(f"  Datum (Slide): {date_iso} · Aktie der Woche: {ctx['featured']['ticker']}")
         for p in all_saved:
             print("  ", os.path.relpath(p, ROOT))
         return
@@ -559,11 +616,12 @@ def main():
     # ── Wochenmodus (report-getrieben) ────────────────────────────────────────
     if args.report:
         r = report.load_report(args.report)
-        base = os.path.join(ROOT, "out", "instagram", f"{args.date}_KW{r['kw']}")
+        date_iso = report.slide_date(r["year"], r["kw"], args.date)
+        base = os.path.join(ROOT, "out", "instagram", f"{date_iso}_KW{r['kw']}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
         all_saved = []
         for fmt in fmts:
-            all_saved += build_weekly(fmt, r, benchmark, args.date,
+            all_saved += build_weekly(fmt, r, benchmark, date_iso,
                                       os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
@@ -594,8 +652,9 @@ def main():
             continue
         chosen.append((ticker, sig, ret, universe[ticker]["ohlcv"], entry))
 
+    date_iso = args.date or today
     ctx = {
-        "date_iso": args.date,
+        "date_iso": date_iso,
         "period_label": f"{render.fmt_de_date(start)} – {render.fmt_de_date(end)}",
         "wf_dates": wf_dates, "wf_vals": wf_vals, "is_sample": is_sample,
         "nas_dates": nas_dates, "nas_vals": nas_vals,
@@ -604,7 +663,7 @@ def main():
         "signals": chosen,
     }
 
-    base = os.path.join(ROOT, "out", "instagram", args.date)
+    base = os.path.join(ROOT, "out", "instagram", date_iso)
     fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
     all_saved = []
     for fmt in fmts:
