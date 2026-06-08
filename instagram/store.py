@@ -48,6 +48,28 @@ def load_trades():
         return {"closed": []}
 
 
+def _snap(kw, filename):
+    """Gibt den Pfad zum historischen Snapshot zurück falls vorhanden, sonst None."""
+    p = os.path.join(DATA_DIR, "snapshots", f"KW{kw:02d}", filename)
+    return p if os.path.exists(p) else None
+
+
+def _load_holdings_for(kw):
+    snap = _snap(kw, "holdings.json")
+    if snap:
+        with open(snap) as f:
+            return json.load(f)
+    return load_holdings()
+
+
+def _load_trades_for(kw):
+    snap = _snap(kw, "trades.json")
+    if snap:
+        with open(snap) as f:
+            return json.load(f)
+    return load_trades()
+
+
 def _sells_for(ticker):
     """Abgeschlossene Verkäufe eines Tickers (für rote Verkaufsmarker im Chart).
     Quelle: trades.json -> closed mit passendem `ticker` und Verkaufsdatum."""
@@ -172,7 +194,7 @@ def compute(kw, universe, benchmark, ref_date=None):
             prev_n = nas_raw[i + 1]
 
     # ── Top-Positionen: Performance seit Kauf ────────────────────────────────
-    hold = load_holdings()
+    hold = _load_holdings_for(kw)
     positions = hold["positions"]
     top = []
     for p in positions:
@@ -183,7 +205,8 @@ def compute(kw, universe, benchmark, ref_date=None):
     top5_tickers = {t["ticker"] for t in top[:5]}
 
     # ── Trade-Kennzahlen: abgeschlossene + aktive Trades zusammen ────────────
-    closed = [t["ret"] for t in load_trades().get("closed", [])]
+    _trades_snap = _load_trades_for(kw)
+    closed = [t["ret"] for t in _trades_snap.get("closed", [])]
     active = [t["ret"] for t in top]
     rets = closed + active
     wins = [r for r in rets if r > 0]
@@ -213,7 +236,7 @@ def compute(kw, universe, benchmark, ref_date=None):
     from datetime import date as _date
     wk_mon = _date.fromisocalendar(year, kw, 1).isoformat()
     wk_sun = _date.fromisocalendar(year, kw, 7).isoformat()
-    week_sells = [t for t in load_trades().get("closed", [])
+    week_sells = [t for t in _trades_snap.get("closed", [])
                   if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun]
     trade = None
     if week_sells:
