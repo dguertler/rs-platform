@@ -250,16 +250,21 @@ fehlen.
 **Grid-Logik:** Wochenpost = Equity-Kurve · Analyse = Logo + Verdict-Badge ·
 **Earnings = Logo + grüne EARNINGS/BEAT-Pille** (akzentfarbe Grün=Beat / Rot=Miss).
 
-**Design-Regeln (Round 12 — verbindlich):**
+**Design-Regeln (Round 12/13 — verbindlich):**
 - Slide-Datum oben rechts = **Tag nach dem Earningscall** (`report_date`+1, auto).
 - Firmenlogo **ab Slide 2 oben rechts auf weißer Karte** (AMD-Größe) —
   `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
   (`_trim_logo` schneidet transparente UND weiße Ränder weg).
-- **Reel = Slides 1–3 der Analyse** (Cover/Zahlen/Reaktion) + CTA (Slide 4) ohne
-  Verdict, ohne „Profil öffnen" (nur Handle + ▲).
 - Slide 2 ohne RS-Score/GAAP-Chips, dafür `beat_summary`-Text.
+- Slide 3 Chart = **Tageskerzen 5 Wochen bis zum Meldetag** (after=0) mit
+  **Datums-Achse unten** + Preis-Labels links; Untertitel nennt „5 Wochen".
 - Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
   weil Base Case zwar über Kurs, aber binäres Risiko).
+- Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.
+- **Reel = Slides 1–3 der Analyse** (Cover/Zahlen/Reaktion) + CTA (Slide 4) ohne
+  Verdict, ohne „Profil öffnen" (nur Handle + ▲). Reel = **9:16 (1080×1920)**,
+  Carousel = **4:5 (1080×1350)** → wiederverwendete Slides werden auf dem hohen
+  Canvas automatisch vertikal zentriert (`dy=(c.H−1350)//2`).
 
 **Code-Karte:**
 - `instagram/earnings.py` — `load_earnings()` (JSON + Kurssprung aus RS-JSON +

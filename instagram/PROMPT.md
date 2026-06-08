@@ -443,21 +443,34 @@ Hybrid-CTA „ganze Analyse im Karussell".
 **Grid-Logik:** Wochenupdate = Equity-Kurve · Analyse = Firmenlogo + Verdict ·
 **Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).
 
-**Design-Regeln (verbindlich):**
+**Design-Regeln (verbindlich — alle Vorgaben aus dem Review):**
 - **Slide-Datum (oben rechts) = Tag NACH dem Earningscall** (`report_date` + 1).
   Wird automatisch gesetzt (auch rückwirkend), `--date` überschreibt. So ist der
-  Post immer auf den Folgetag der Zahlen datiert.
+  Post immer auf den Folgetag der Zahlen datiert. Datum steht nur auf dem Cover.
 - **Firmenlogo ab Slide 2 oben rechts auf weißer Karte** (AMD-Logo-Größe), damit
   dunkle/transparente Logos sichtbar sind (`_company_logo_chip` in render.py; gilt
   via `analysis_header` für Analyse- UND Earnings-Innen-Slides). Auf dem Cover sitzt
-  das getrimmte, mittig zentrierte Logo auf der großen weißen Karte.
+  das getrimmte, **mittig** (horizontal + vertikal) zentrierte Logo auf der großen
+  weißen Karte (`_trim_logo` schneidet transparente UND weiße Ränder weg).
+- **Slide 2 „Der Beat in Zahlen":** EPS- + Umsatz-Vergleich Ist/Erwartung; darunter
+  eine **Kurz-Zusammenfassung als Text** (Feld `beat_summary`, sonst auto aus den
+  Zahlen). **Keine** technischen Chips (kein RS-Score, kein GAAP-EPS).
+- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 5 Wochen (25 Handelstage)
+  bis EINSCHLIESSLICH Meldetag** (kein Tag danach). Mit **Datums-Achse unten**
+  (≈ wöchentliche Labels, Meldetag grün), Preis-Labels links, Sprung-Highlight +
+  „+X %"-Callout. Untertitel: „Tageskerzen der letzten 5 Wochen bis zum Meldetag".
+- **Slide 5 „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
+  (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
+  Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).
+- **Vorletzte + letzte Slide (Fazit + CTA):** Tagline lautet exakt
+  **„datengetrieben · unabhängig · systematisiert"** (kein „faceless").
 - **Reel = Slides 1–3 der Earnings-Analyse** (Cover → Beat in Zahlen → Kursreaktion)
-  + Hybrid-CTA (Slide 4) ohne Verdict.
-- **Verdict-Begründung:** Liegt der Base Case über dem Kurs, der Post ist aber kein
-  klares Kaufsignal → optionales Feld `verdict_note` (Slide „Einordnung") erklärt das
-  KI-Verdict; Fallback verdict-bewusst aus der Analyse (Positionsgröße/Risiko).
-- **Kurz-Zusammenfassung auf Slide 2:** Feld `beat_summary` (Fallback auto aus den
-  Zahlen) — keine technischen Chips (kein RS-Score / GAAP-EPS).
+  in **9:16 (1080×1920)** + Hybrid-CTA (Slide 4) **ohne Verdict**, ohne „Profil
+  öffnen" (nur Handle + ▲). **Format-Hinweis:** Reel ist absichtlich höher als das
+  **Carousel (4:5, 1080×1350)** — das ist das Instagram-Reel/Story-Format; der Inhalt
+  der wiederverwendeten Slides wird auf dem hohen Canvas automatisch **vertikal
+  zentriert** (`dy = (c.H − 1350)//2`), das untere Drittel ist Safe-Zone für die
+  Instagram-UI.
 
 **Caption (`caption.txt`):** erste Zeile „<Firma> (TICKER) — Earnings-Analyse
 Q<N>: Beat" (SEO) + Beat-Zahlen + Guidance + These/Szenarien + Disclaimer +

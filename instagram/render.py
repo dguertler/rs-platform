@@ -1271,7 +1271,7 @@ def slide_analysis_fazit(c, a, date_iso):
     c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
     c.text(MX + 40, cta_top + 28, "Folge für wöchentliche Profi-Analysen", 28,
            color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · faceless",
+    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · systematisiert",
            TY_SUB, color=T.MUTED)
     analysis_footer(c)
 
@@ -1401,7 +1401,7 @@ def slide_analysis_cta(c, a, date_iso):
     cta_y = c.H - 330
     c.text(c.W // 2, cta_y, "Folge für wöchentliche Profi-Analysen",
            TY_BODY, color=T.TEXT, weight="bold", ha="center")
-    c.text(c.W // 2, cta_y + TY_BODY_LH, "faceless · datengetrieben · unabhängig",
+    c.text(c.W // 2, cta_y + TY_BODY_LH, "datengetrieben · unabhängig · systematisiert",
            TY_SUB, color=T.MUTED, ha="center")
     analysis_footer(c)
 
@@ -1645,8 +1645,10 @@ def slide_earnings_cover(c, e, date_iso):
 def slide_earnings_numbers(c, e, date_iso):
     analysis_header(c, e, date_iso)
     col = earn_color(e)
-    c.text(MX, 184, "Der Beat in Zahlen", 42, weight="bold")
-    c.text(MX, 240, f"{e['quarter']} · Ist gegen Analysten-Erwartung", TY_SUB,
+    # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Der Beat in Zahlen", 42, weight="bold")
+    c.text(MX, 240 + dy, f"{e['quarter']} · Ist gegen Analysten-Erwartung", TY_SUB,
            color=T.MUTED)
     cur = e.get("currency", "")
 
@@ -1676,7 +1678,7 @@ def slide_earnings_numbers(c, e, date_iso):
         c.text(ex, iy + 116, unit, TY_SUB, color=T.MUTED)
         return top + h
 
-    y = compare_tile(300, "GEWINN JE AKTIE (ADJ.)", e.get("eps_actual"),
+    y = compare_tile(300 + dy, "GEWINN JE AKTIE (ADJ.)", e.get("eps_actual"),
                      e.get("eps_estimate"), "je Aktie", e.get("eps_surprise_pct"))
     y = compare_tile(y + 28, "UMSATZ", e.get("revenue_actual"),
                      e.get("revenue_estimate"), e.get("revenue_unit", ""),
@@ -1708,13 +1710,15 @@ def slide_earnings_reaction(c, e, date_iso):
     from matplotlib.patches import Rectangle
     analysis_header(c, e, date_iso)
     col = earn_color(e)
-    c.text(MX, 184, "Die Kursreaktion", 42, weight="bold")
-    c.text(MX, 240, f"Markt-Antwort auf die {e['quarter']}-Zahlen", TY_SUB,
+    # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Die Kursreaktion", 42, weight="bold")
+    c.text(MX, 240 + dy, "Tageskerzen der letzten 5 Wochen bis zum Meldetag", TY_SUB,
            color=T.MUTED)
 
     candles = e.get("reaction_ohlcv") or []
     idx = e.get("reaction_idx")
-    chart_top, chart_h = 310, int(c.H * 0.42)
+    chart_top, chart_h = 310 + dy, int(1350 * 0.42)
     if candles:
         ax = c.chart_axes(MX, chart_top, c.W - 2 * MX, chart_h)
         n = len(candles)
@@ -1737,7 +1741,8 @@ def slide_earnings_reaction(c, e, date_iso):
         all_l = [cd["l"] for cd in candles]
         pad = (max(all_h) - min(all_l)) * 0.10
         ax.set_xlim(-1, n)
-        ax.set_ylim(min(all_l) - pad, max(all_h) + pad)
+        # mehr Luft unten für die Datums-Achse
+        ax.set_ylim(min(all_l) - pad * 2.4, max(all_h) + pad)
 
         # Prev-Close-Referenzlinie + Sprung-Annotation
         if idx is not None and e.get("jump_prev_close"):
@@ -1749,14 +1754,25 @@ def slide_earnings_reaction(c, e, date_iso):
                         xytext=(-4, 18), textcoords="offset points",
                         color=col, fontsize=16, fontweight="bold",
                         ha="right", fontfamily=_FONTS["mono"])
-            # Datum am Sprungtag — rechtsbündig, damit es bei der letzten Kerze
-            # nicht über den rechten Rand läuft
-            ax.annotate(f"Zahlen {short_date(e['report_date'])}",
-                        (idx, min(all_l) - pad), xytext=(0, 4),
-                        textcoords="offset points", color=col, fontsize=13,
-                        fontweight="bold",
-                        ha="right" if idx >= n - 3 else "center",
-                        fontfamily=_FONTS["sans"])
+
+        # ── Datums-Achse unten: macht die 5-Wochen-Tagesspanne sichtbar ───────
+        ylabel_y = min(all_l) - pad * 1.5
+        step = max(1, (n - 1) // 5)
+        xticks = list(range(0, n, step))
+        if (n - 1) not in xticks:
+            xticks.append(n - 1)
+        for xi in xticks:
+            is_evt = (idx is not None and xi == idx)
+            ax.text(xi, ylabel_y, short_date(candles[xi]["d"]),
+                    color=col if is_evt else T.MUTED,
+                    fontsize=13 if is_evt else 12,
+                    fontweight="bold" if is_evt else "normal",
+                    va="top", ha="center", fontfamily=_FONTS["sans"])
+        # kleine Tick-Striche an den Datumslabels
+        for xi in xticks:
+            ax.plot([xi, xi], [min(all_l) - pad * 1.15, min(all_l) - pad * 0.85],
+                    color=T.GRID, lw=1.2, zorder=1)
+
         # Preis-Labels links (damit sie nicht mit der letzten Kerze kollidieren)
         for yv in (min(all_l), (min(all_l) + max(all_h)) / 2, max(all_h)):
             ax.text(-0.6, yv, f"{yv:.0f}", color=T.MUTED, fontsize=12,
@@ -1909,7 +1925,7 @@ def slide_earnings_cta(c, e, date_iso):
 
     c.text(c.W // 2, cta_y, "Folge für Earnings & Profi-Analysen", TY_BODY,
            color=T.TEXT, weight="bold", ha="center")
-    c.text(c.W // 2, cta_y + TY_BODY_LH, "faceless · datengetrieben · unabhängig",
+    c.text(c.W // 2, cta_y + TY_BODY_LH, "datengetrieben · unabhängig · systematisiert",
            TY_SUB, color=T.MUTED, ha="center")
     analysis_footer(c)
 
