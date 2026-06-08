@@ -1713,7 +1713,7 @@ def slide_earnings_reaction(c, e, date_iso):
     # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
     dy = max(0, (c.H - 1350) // 2)
     c.text(MX, 184 + dy, "Die Kursreaktion", 42, weight="bold")
-    c.text(MX, 240 + dy, "Tageskerzen — die letzten 35 Handelstage bis zum Meldetag",
+    c.text(MX, 240 + dy, "Tageskerzen — die letzten 50 Handelstage bis zum Meldetag",
            TY_SUB, color=T.MUTED)
 
     candles = e.get("reaction_ohlcv") or []
@@ -1755,12 +1755,14 @@ def slide_earnings_reaction(c, e, date_iso):
                         color=col, fontsize=16, fontweight="bold",
                         ha="right", fontfamily=_FONTS["mono"])
 
-        # ── Datums-Achse unten: macht die 5-Wochen-Tagesspanne sichtbar ───────
+        # ── Datums-Achse unten: macht die Tagesspanne sichtbar ────────────────
         ylabel_y = min(all_l) - pad * 1.5
         step = max(1, (n - 1) // 5)
         xticks = list(range(0, n, step))
-        if (n - 1) not in xticks:
-            xticks.append(n - 1)
+        # letzte (Meldetag-)Kerze immer beschriften; reguläre Ticks, die zu nah
+        # daran liegen, entfernen, damit sich die Labels nicht überlappen
+        xticks = [t for t in xticks if (n - 1) - t >= step * 0.7]
+        xticks.append(n - 1)
         for xi in xticks:
             is_evt = (idx is not None and xi == idx)
             ax.text(xi, ylabel_y, short_date(candles[xi]["d"]),

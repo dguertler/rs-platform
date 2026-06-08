@@ -100,12 +100,12 @@ def price_jump(ohlcv, target_date_str):
     return None, None, None
 
 
-def reaction_window(ohlcv, target_date_str, before=34, after=0):
-    """OHLCV-Fenster für den Reaktions-Chart. Standard: die letzten 35 Handelstage
-    bis EINSCHLIESSLICH Meldetag — der Sprungtag ist die letzte Kerze (after=0).
-    Hinweis: OHLCV enthält nur Handelstage (keine Wochenenden/Feiertage), 35 Kerzen
-    decken daher ~7 Kalenderwochen ab. Liefert (candles, idx) — idx = Position des
-    Meldetags im Fenster (oder None)."""
+def reaction_window(ohlcv, target_date_str, before=49, after=0):
+    """OHLCV-Fenster für den Reaktions-Chart. Standard: die letzten 50 Handelstage
+    (10 × 5) bis EINSCHLIESSLICH Meldetag — der Sprungtag ist die letzte Kerze
+    (after=0). Hinweis: OHLCV enthält nur Handelstage (keine Wochenenden/Feiertage),
+    50 Kerzen decken daher ~10 Kalenderwochen ab. Liefert (candles, idx) — idx =
+    Position des Meldetags im Fenster (oder None)."""
     days = [c["d"][:10] for c in ohlcv]
     if target_date_str in days:
         i = days.index(target_date_str)

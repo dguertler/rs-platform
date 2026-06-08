@@ -460,12 +460,12 @@ Hybrid-CTA „ganze Analyse im Karussell".
 - **Slide 2 „Der Beat in Zahlen":** EPS- + Umsatz-Vergleich Ist/Erwartung; darunter
   eine **Kurz-Zusammenfassung als Text** (Feld `beat_summary`, sonst auto aus den
   Zahlen). **Keine** technischen Chips (kein RS-Score, kein GAAP-EPS).
-- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 35 Handelstage
-  bis EINSCHLIESSLICH Meldetag** (kein Tag danach; `reaction_window(before=34,
+- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 50 Handelstage (10 × 5)
+  bis EINSCHLIESSLICH Meldetag** (kein Tag danach; `reaction_window(before=49,
   after=0)`). Mit **Datums-Achse unten** (Meldetag grün), Preis-Labels links,
-  Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 35
+  Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 50
   Handelstage bis zum Meldetag". Hinweis: OHLCV enthält nur **Handelstage** (keine
-  Wochenenden/Feiertage) — 35 Kerzen ≈ 7 Kalenderwochen.
+  Wochenenden/Feiertage) — 50 Kerzen ≈ 10 Kalenderwochen.
 - **Slide 5 „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
   (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
   Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).

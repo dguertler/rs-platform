@@ -260,9 +260,9 @@ fehlen.
   `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
   (`_trim_logo` schneidet transparente UND weiße Ränder weg).
 - Slide 2 ohne RS-Score/GAAP-Chips, dafür `beat_summary`-Text.
-- Slide 3 Chart = **Tageskerzen, letzte 35 Handelstage bis zum Meldetag**
-  (`reaction_window(before=34, after=0)`) mit **Datums-Achse unten** + Preis-Labels
-  links. OHLCV hat nur Handelstage → 35 Kerzen ≈ 7 Kalenderwochen.
+- Slide 3 Chart = **Tageskerzen, letzte 50 Handelstage (10×5) bis zum Meldetag**
+  (`reaction_window(before=49, after=0)`) mit **Datums-Achse unten** + Preis-Labels
+  links. OHLCV hat nur Handelstage → 50 Kerzen ≈ 10 Kalenderwochen.
 - Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
   weil Base Case zwar über Kurs, aber binäres Risiko).
 - Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.
