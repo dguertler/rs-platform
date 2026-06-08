@@ -210,7 +210,7 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
                       wf_ret, nas_ret, is_sample, stats=None):
     header(c, date_iso)
     c.text(MX, 196, "Wertentwicklung vs. NASDAQ-100", 40, weight="bold")
-    c.text(MX, 248, "Indexiert auf 100 zum Startzeitpunkt", 18, color=T.MUTED)
+    c.text(MX, 248, "Indexiert auf 100 zum Startzeitpunkt", 22, color=T.MUTED)
 
     chart_h = int(c.H * (0.30 if stats else 0.42))
     ax = c.chart_axes(MX, 306, c.W - 2 * MX, chart_h)
@@ -246,10 +246,10 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
     ky = 306 + chart_h + 48
     half = (c.W - 2 * MX - 30) // 2
     c.tile(MX, ky, half, 104, color=T.PANEL)
-    c.text(MX + 30, ky + 24, "AI Alpha Selection", 17, color=T.MUTED)
+    c.text(MX + 30, ky + 24, "AI Alpha Selection", 20, color=T.MUTED)
     c.text(MX + 30, ky + 50, fmt_pct(wf_ret), 40, color=T.GREEN, weight="bold", font="mono")
     c.tile(MX + half + 30, ky, half, 104, color=T.PANEL)
-    c.text(MX + half + 60, ky + 24, "NASDAQ-100", 17, color=T.MUTED)
+    c.text(MX + half + 60, ky + 24, "NASDAQ-100", 20, color=T.MUTED)
     c.text(MX + half + 60, ky + 50, fmt_pct(nas_ret), 40, color=T.BLUE, weight="bold", font="mono")
 
     # Kennzahlen-Streifen
@@ -273,8 +273,8 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
             x = MX + cc * (cw + gap)
             y = sy + r * (ch + gap)
             c.tile(x, y, cw, ch, color=T.PANEL)
-            c.text(x + 22, y + 24, lab, 14, color=T.MUTED)
-            c.text(x + 22, y + 50, val, 34, color=col, weight="bold", font="mono")
+            c.text(x + 22, y + 24, lab, 17, color=T.MUTED)
+            c.text(x + 22, y + 50, val, 36, color=col, weight="bold", font="mono")
         c.text(MX, sy + 2 * (ch + gap) + 4, "* inkl. offener Positionen",
                13, color=T.MUTED)
 
@@ -350,44 +350,34 @@ def slide_cta(c, date_iso, question=None, account=None):
     (Engagement-Boost) + Pflicht-Risikohinweis.
 
     `question` = von Claude pro Woche aus den Trades getextete Frage; treibt die
-    Kommentare. `account` = Handle für den Bio-Verweis (Default: Marke).
+    Kommentare. Kein @-Handle auf der Slide (folgt aus IG-Bio-Konvention).
     """
     import textwrap
     header(c, date_iso)
-    handle = account or HANDLE
     cy = int(c.H * 0.24)
-    c.text(MX, cy, "Mehr Trades & Updates?", 50, weight="bold")
-    # URLs sind in IG-Beiträgen nicht klickbar → strikt auf die Bio verweisen.
-    c.text(MX, cy + 80, "Den Link zum Live-Depot findest du", 24, color=T.TEXT)
-    c.text(MX, cy + 116, "aktuell in unserer Bio.", 24, color=T.TEXT)
-    c.text(MX, cy + 168, handle, 30, color=T.BLUE, weight="bold")
+    c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
+    c.text(MX, cy + 88, "Den Link zum Live-Depot findest du", 26, color=T.TEXT)
+    c.text(MX, cy + 128, "aktuell in unserer Bio.", 26, color=T.TEXT)
 
-    # Dynamische Interaktions-Frage (Engagement / Kommentare anfeuern)
+    # Interaktions-Frage — Analysis-Stil (PANEL + blauer Akzentbalken links)
     if question:
-        qlines = textwrap.wrap(question, width=44)
-        qy = cy + 236
-        box_h = 60 + len(qlines) * 34
+        qlines = textwrap.wrap(question, width=40)
+        qy = cy + 192
+        box_h = 72 + len(qlines) * 42
         c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
-        c.text(MX + 34, qy + 24, "DEINE MEINUNG?", 16, color=T.BLUE, weight="bold")
+        c.tile(MX, qy, 8, box_h, color=T.BLUE, radius=5)
+        c.text(MX + 36, qy + 26, "DEINE MEINUNG?", 20, color=T.BLUE, weight="bold")
         for i, ln in enumerate(qlines):
-            c.text(MX + 34, qy + 60 + i * 34, ln, 22, weight="bold")
+            c.text(MX + 36, qy + 68 + i * 42, ln, 28, weight="bold")
 
-    # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=104)
-    line_h = 30
-    panel_h = 74 + (len(body) - 1) * line_h + 42
-    panel_bottom = c.H - 175
-    panel_top = panel_bottom - panel_h
-    c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
-    c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
-    for i, ln in enumerate(body):
-        ty = panel_top + 74 + i * line_h
-        if i < len(body) - 1:             # alle Zeilen außer der letzten: Blocksatz
-            _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
-        else:
-            c.text(MX + 36, ty, ln, 15, color=T.MUTED)
-    footer(c)
+    # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
+    disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
+    disc_lines = textwrap.wrap(disc, width=108)
+    sep_y = c.H - 218
+    c.ax.plot([MX, c.W - MX], [c.y(sep_y), c.y(sep_y)], color=T.GRID, lw=1.5)
+    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 14, color=T.MUTED, weight="bold")
+    for i, ln in enumerate(disc_lines):
+        c.text(MX, sep_y + 46 + i * 22, ln, 12, color=T.MUTED)
 
 
 def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
@@ -401,7 +391,7 @@ def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
     import textwrap
     header(c, date_iso)
     eyebrow = f"WOCHENUPDATE · KW {kw}" if kw else "WOCHENUPDATE"
-    c.text(MX, 200, eyebrow, 24, color=T.BLUE, weight="bold")
+    c.text(MX, 200, eyebrow, 28, color=T.BLUE, weight="bold")
 
     # Schlagzeile groß umbrechen (visueller Stopper)
     wrapped = textwrap.wrap(headline, width=20)[:4]
@@ -421,7 +411,7 @@ def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
         for i, (label, val, col) in enumerate(metrics):
             x = MX + i * (tw + gap)
             c.tile(x, chip_top, tw, ch, color=T.PANEL)
-            c.text(x + 34, chip_top + 32, label, 18, color=T.MUTED)
+            c.text(x + 34, chip_top + 32, label, 22, color=T.MUTED)
             c.text(x + 34, chip_top + ch - 92, val, 58, color=col,
                    weight="bold", font="mono")
     footer(c)
@@ -436,8 +426,8 @@ def slide_why(c, date_iso, text):
     """
     import textwrap
     header(c, date_iso)
-    c.text(MX, 210, "HINTER DEN KULISSEN", 26, color=T.BLUE, weight="bold")
-    c.text(MX, 250, "Warum die KI so entschieden hat", 18, color=T.MUTED)
+    c.text(MX, 210, "HINTER DEN KULISSEN", 30, color=T.BLUE, weight="bold")
+    c.text(MX, 254, "Warum die KI so entschieden hat", 22, color=T.MUTED)
     wrapped = textwrap.wrap(text, width=32)
     size = 46 if len(wrapped) <= 8 else 36
     cy = int(c.H * 0.36)
@@ -496,7 +486,7 @@ def slide_history(c, date_iso, history):
     vkey = "dev" if history and "dev" in history[0] else "perf"
     won = sum(1 for h in history if h[vkey] >= 0)
     c.text(MX, 252, f"{won} von {len(history)} Wochen den NASDAQ geschlagen",
-           18, color=T.MUTED)
+           22, color=T.MUTED)
 
     chart_h = int(c.H * 0.46)
     ax = c.chart_axes(MX, 320, c.W - 2 * MX, chart_h)
@@ -527,7 +517,7 @@ def slide_list(c, date_iso, title, subtitle, rows):
     header(c, date_iso)
     c.text(MX, 200, title, 40, weight="bold")
     if subtitle:
-        c.text(MX, 252, subtitle, 18, color=T.MUTED)
+        c.text(MX, 252, subtitle, 22, color=T.MUTED)
     rows = rows[:5]
     top0 = 310
     gap = 22
@@ -537,10 +527,10 @@ def slide_list(c, date_iso, title, subtitle, rows):
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         # farbiger Akzentbalken links
         c.tile(MX, y, 10, rh, color=row["color"], radius=5)
-        c.text(MX + 42, y + rh / 2 - 32, row["main"], 30, weight="bold")
+        c.text(MX + 42, y + rh / 2 - 32, row["main"], 34, weight="bold")
         if row.get("sub"):
-            c.text(MX + 42, y + rh / 2 + 8, row["sub"], 22, color=T.SUBTLE)
-        c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 40,
+            c.text(MX + 42, y + rh / 2 + 10, row["sub"], 26, color=T.SUBTLE)
+        c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 44,
                color=row["color"], weight="bold", ha="right", font="mono")
     footer(c)
 

@@ -131,10 +131,22 @@ Claude textet Hook/Warum/Frage selbst aus den Daten.
 ### Slide-Regeln für rückwirkende / erste Reports
 - **Slide 3 (Mehrrendite-Historie) erst ab KW15** (erst ab 2+ Wochen Datenbasis
   sinnvoll). Für KW14 wird Slide 3 automatisch übersprungen.
-- **Slide 5 (Strategisches Warum)** bezieht sich auf die aktuelle AI-Alpha-Position
-  der Woche — bei KW14 nur MRVL nennen, MSFT (manuelle Restposition) ignorieren.
+- **Positionen ohne Kursdaten** (z. B. DFNM/Definium Therapeutics — nicht in
+  NASDAQ-100/S&P-500-Daten) erscheinen auf dem Positionen-Slide mit „—" als
+  Rendite und werden ans Ende der Liste gesetzt. Kein Ausschluss mehr.
 - **Historisch korrekte Performance:** `store.py` begrenzt Kursrenditen via `as_of`
   auf das Berichtsdatum (nicht auf den heutigen Kurs). Korrekt für alle `--kw`-Aufrufe.
+
+### Design-Regeln Wochenbericht-Slides
+- **Schriftgrößen**: Alle Wochenbericht-Slides nutzen vergrößerte Fonts. Subtitles
+  18 px → 22 px, Listen-Haupttext 30 → 34 px, Untertitelzeilen 22 → 26 px,
+  Rendite-Werte 40 → 44 px, Eyebrow-Label 24 → 28 px.
+- **CTA-Slide (letzter Slide)**:
+  - Kein @-Handle auf dem Bild (Handle gehört in die IG-Bio, nicht in den Post)
+  - Frage-Box im Analysis-Stil: PANEL-Hintergrund + blauer Akzentbalken links (8 px),
+    „DEINE MEINUNG?"-Label 20 px blau, Fragetext 28 px bold
+  - Risikohinweis als Plain-Text (kein roter Kasten), Trennlinie + 12-14 px MUTED,
+    analog zur Analyse-Footer-Formatierung
 
 ### Historische Snapshots (`instagram/data/snapshots/KW<NN>/`)
 Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
@@ -142,10 +154,19 @@ Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
 - `trades.json` — abgeschlossene Trades bis zu dieser Woche
 `store.py` lädt automatisch den Snapshot wenn er existiert, sonst die Live-Daten.
 
-**Bestehende Snapshots:**
-| KW | Positionen | Trades |
+**Bestehende Snapshots (KW14–KW23, vollständig aus Excel-Transaktionsexport):**
+| KW | Positionen am Ende | Neue Closes diese KW |
 |---|---|---|
-| KW14 | MRVL (24.03.), MSFT (30.03., Restpos.), DFNM (03.03., kein OHLCV) | — |
+| KW14 | MRVL, DFNM | — |
+| KW15 | +LRCX, AMAT, ADI, SNDK, ASML | — |
+| KW16 | +MSFT (15.04.), SIEGY (17.04.) | — |
+| KW17 | −ASML, −DFNM / +CRDO, AMD, AVGO | ASML +0,65 %, DFNM +22,3 % |
+| KW18 | −CRDO, −AMAT / +AMZN, NVDA, CNC, GOOGL | CRDO +0,07 %, AMAT +1,1 % |
+| KW19 | −MSFT / +ASML (07.05.) | MSFT −1,3 % |
+| KW20 | −SIEGY, AVGO, AMZN / +AKAM, DDOG | SIEGY +0,4 %, AVGO +0,1 %, AMZN +0,8 % |
+| KW21 | −ASML, AKAM, ADI / +STX, MU, WDC | ASML −5,2 %, AKAM −7,6 %, ADI +11,0 % |
+| KW22 | −NVDA, GOOGL / +NXPI (25.05.), AMAT (27.05.) | NVDA +0,4 %, GOOGL −7,4 % |
+| KW23 | −NXPI, AMD, LRCX / +NXPI (307,33 €) | NXPI −6,2 %, AMD +69,6 %, LRCX +29,9 % |
 
 ## 8. Offene Punkte / Entscheidungen
 - **NASDAQ-Quelle (NDX vs. QQQ):** Es wird jetzt der echte **NASDAQ-100-Index

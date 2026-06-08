@@ -231,15 +231,15 @@ def compute(kw, universe, benchmark, ref_date=None):
     top = []
     for p in positions:
         ret, _ = _ret_since(universe, p["ticker"], p["buy_date"], as_of=as_of)
-        if ret is not None:
-            top.append({**p, "ret": ret})
-    top.sort(key=lambda t: t["ret"], reverse=True)
+        top.append({**p, "ret": ret})
+    # Positionen mit Kursdaten zuerst (absteigend), danach alle ohne Kursdaten (ret=None)
+    top.sort(key=lambda t: (t["ret"] is None, -(t["ret"] or 0)))
     top5_tickers = {t["ticker"] for t in top[:5]}
 
     # ── Trade-Kennzahlen: abgeschlossene + aktive Trades zusammen ────────────
     _trades_snap = _load_trades_for(kw)
     closed = [t["ret"] for t in _trades_snap.get("closed", [])]
-    active = [t["ret"] for t in top]
+    active = [t["ret"] for t in top if t["ret"] is not None]
     rets = closed + active
     wins = [r for r in rets if r > 0]
     losses = [r for r in rets if r < 0]
@@ -264,7 +264,8 @@ def compute(kw, universe, benchmark, ref_date=None):
     # ── Newcomer: bester Kauf der letzten 3 Wochen, NICHT in den Top-5 ───────
     ref = datetime.strptime(ref_date or as_of, "%Y-%m-%d")
     cutoff = (ref - timedelta(days=21)).strftime("%Y-%m-%d")
-    cand = [t for t in top if t["buy_date"] >= cutoff and t["ticker"] not in top5_tickers]
+    cand = [t for t in top if t["buy_date"] >= cutoff and t["ticker"] not in top5_tickers
+            and t["ret"] is not None]
     newcomer = (_featured_dict(universe, max(cand, key=lambda t: t["ret"]),
                                as_of=as_of, trades_data=_trades_snap)
                 if cand else None)

@@ -84,8 +84,9 @@ def build_from_store(fmt, ctx, outdir):
     # 4) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
     if ctx["top_holdings"]:
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
-                 "value": render.fmt_pct(t["ret"]),
-                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
+                 "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
+                 "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
+                          if t["ret"] is not None else render.T.MUTED}
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
@@ -102,8 +103,9 @@ def build_from_store(fmt, ctx, outdir):
     # 6b) Weitere Positionen (alle außerhalb der Top-5)
     if ctx.get("rest_holdings"):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
-                 "value": render.fmt_pct(t["ret"]),
-                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED}
+                 "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
+                 "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
+                          if t["ret"] is not None else render.T.MUTED}
                 for t in ctx["rest_holdings"]]
         emit("weitere", lambda c: render.slide_list(
             c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
@@ -118,7 +120,8 @@ def build_from_store(fmt, ctx, outdir):
 
 
 def caption_from_store(ctx):
-    top = "\n".join(f"• {t['ticker']} ({t.get('name','')}): {render.fmt_pct(t['ret'])}"
+    top = "\n".join(f"• {t['ticker']} ({t.get('name','')}): "
+                    + (render.fmt_pct(t["ret"]) if t["ret"] is not None else "—")
                     for t in ctx["top_holdings"][:5])
     s = ctx["stats"]
     pf = "∞" if s["profit_factor"] is None else f"{s['profit_factor']:.1f}".replace(".", ",")
