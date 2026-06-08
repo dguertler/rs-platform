@@ -250,6 +250,17 @@ fehlen.
 **Grid-Logik:** Wochenpost = Equity-Kurve · Analyse = Logo + Verdict-Badge ·
 **Earnings = Logo + grüne EARNINGS/BEAT-Pille** (akzentfarbe Grün=Beat / Rot=Miss).
 
+**Design-Regeln (Round 12 — verbindlich):**
+- Slide-Datum oben rechts = **Tag nach dem Earningscall** (`report_date`+1, auto).
+- Firmenlogo **ab Slide 2 oben rechts auf weißer Karte** (AMD-Größe) —
+  `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
+  (`_trim_logo` schneidet transparente UND weiße Ränder weg).
+- **Reel = Slides 1–3 der Analyse** (Cover/Zahlen/Reaktion) + CTA (Slide 4) ohne
+  Verdict, ohne „Profil öffnen" (nur Handle + ▲).
+- Slide 2 ohne RS-Score/GAAP-Chips, dafür `beat_summary`-Text.
+- Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
+  weil Base Case zwar über Kurs, aber binäres Risiko).
+
 **Code-Karte:**
 - `instagram/earnings.py` — `load_earnings()` (JSON + Kurssprung aus RS-JSON +
   geparste Basis-Analyse unter `e["analysis"]`), `price_jump()`,

@@ -763,14 +763,12 @@ def _draw_paragraph(c, x, top, text, size, px_width, color=T.TEXT,
 
 
 def analysis_header(c, a, date_iso):
-    """Kompakter Marken-Header für Innen-Slides: Brand-Logo links, Firmen-Logo rechts."""
+    """Kompakter Marken-Header für Innen-Slides: Brand-Logo links, Firmen-Logo
+    rechts auf weißer Karte (damit dunkle/transparente Logos sichtbar sind)."""
     lw = c.draw_logo(MX, 62, 52)
     if not lw:
         c.text(MX, 66, BRAND, 20, color=T.TEXT, weight="bold")
-    # Firmen-Logo rechts (gleiche Höhe wie Brand-Logo: 52 px)
-    logo = T.company_logo_file(a["ticker"])
-    if logo:
-        c.draw_image_contain(logo, c.W - MX - 120, 62, 120, 52)
+    _company_logo_chip(c, a["ticker"], top=50)
     c.ax.plot([MX, c.W - MX], [c.y(140), c.y(140)], color=T.GRID, lw=1.5)
 
 
@@ -780,6 +778,20 @@ def analysis_footer(c):
     lines = textwrap.wrap(T.DISCLAIMER_ANALYSE_SHORT, width=120)
     for i, ln in enumerate(lines):
         c.text(MX, c.H - 128 + i * 28, ln, 16, color=T.MUTED)
+
+
+def _company_logo_chip(c, ticker, top=52, card_w=156, card_h=66):
+    """Firmenlogo oben rechts auf weißer Karte (für Innen-Slides ab Slide 2).
+    Größe am AMD-Logo der Analyse-Seiten orientiert; weißer Hintergrund, damit
+    dunkle/transparente Logos sauber sichtbar sind."""
+    logo = T.company_logo_file(ticker)
+    img = _trim_logo(logo) if logo else None
+    if img is None:
+        return False
+    cx = c.W - MX - card_w
+    c.tile(cx, top, card_w, card_h, color="#FFFFFF", radius=14)
+    _draw_logo_contain(c, img, cx + 14, top + 10, card_w - 28, card_h - 20)
+    return True
 
 
 def _verdict_badge(c, x, top, verdict, score, w=None, h=120):
@@ -830,18 +842,56 @@ def _draw_bookmark(c, x, top, w, h, col):
                            zorder=11))
 
 
+def _trim_logo(path):
+    """Lädt ein Logo und schneidet transparente UND weiße Ränder weg, damit der
+    sichtbare Schriftzug sauber zentriert werden kann (unabhängig davon, wie viel
+    Leerraum das PNG eingebacken hat). Gibt ein PIL-RGBA-Bild oder None."""
+    try:
+        from PIL import Image, ImageChops
+        img = Image.open(path).convert("RGBA")
+        bbox = img.getbbox()                      # transparente Ränder
+        if bbox:
+            img = img.crop(bbox)
+        # weiße Ränder: transparent auf Weiß komponieren, dann Differenz zu Weiß
+        bg = Image.new("RGBA", img.size, (255, 255, 255, 255))
+        comp = Image.alpha_composite(bg, img).convert("RGB")
+        diff = ImageChops.difference(comp, Image.new("RGB", img.size, (255, 255, 255)))
+        wbbox = diff.getbbox()
+        if wbbox:
+            img = img.crop(wbbox)
+        return img
+    except Exception:
+        return None
+
+
+def _draw_logo_contain(c, img, x, top, w, h, zorder=10):
+    """Zeichnet ein (bereits getrimmtes) PIL-Logo größtmöglich INNERHALB der Box,
+    Seitenverhältnis erhalten, horizontal + vertikal zentriert."""
+    from PIL import Image
+    iw, ih = img.size
+    scale = min(w / iw, h / ih)
+    nw, nh = max(1, int(iw * scale)), max(1, int(ih * scale))
+    arr = np.asarray(img.resize((nw, nh), Image.LANCZOS))
+    ox = int(x + (w - nw) / 2)
+    oy_top = top + (h - nh) / 2
+    c.fig.figimage(arr, xo=ox, yo=int(c.H - oy_top - nh), zorder=zorder)
+    return nw, nh
+
+
 def _logo_card(c, x, top, w, h, ticker, radius=28):
-    """Helle Karte mit Firmenlogo (contain). Fehlt das Logo: Ticker dunkel
-    zentriert. So wirken auch schwarze Firmenlogos sauber auf dem dunklen Cover."""
+    """Helle Karte mit Firmenlogo — getrimmt und mittig (horizontal + vertikal).
+    Fehlt das Logo: Ticker dunkel zentriert."""
     c.tile(x, top, w, h, color="#FFFFFF", radius=radius)
     logo = T.company_logo_file(ticker)
-    pad_x, pad_y = int(w * 0.12), int(h * 0.18)
-    drew = c.draw_image_contain(logo, x + pad_x, top + pad_y,
-                                w - 2 * pad_x, h - 2 * pad_y) if logo else None
-    if not drew:
-        c.text(x + w / 2, top + h / 2 - h * 0.16, ticker,
-               int(h * 0.42), weight="bold", ha="center", font="mono", color=T.BG)
-    return bool(drew)
+    img = _trim_logo(logo) if logo else None
+    if img is not None:
+        # Logo füllt ~80 % Breite / ~62 % Höhe der Karte, exakt zentriert
+        _draw_logo_contain(c, img, x + w * 0.10, top + h * 0.19,
+                           w * 0.80, h * 0.62)
+        return True
+    c.text(x + w / 2, top + h / 2 - h * 0.16, ticker,
+           int(h * 0.42), weight="bold", ha="center", font="mono", color=T.BG)
+    return False
 
 
 def analysis_headline(a):
@@ -1632,21 +1682,25 @@ def slide_earnings_numbers(c, e, date_iso):
                      e.get("revenue_estimate"), e.get("revenue_unit", ""),
                      e.get("revenue_surprise_pct"), surp_dec=1)
 
-    # Kontext-Chips (GAAP-EPS / RS-Score), wenn vorhanden
-    chips = []
-    if e.get("eps_gaap") is not None:
-        chips.append(("GAAP-EPS", f"{cur}{E.fmt_num(e['eps_gaap'])}"))
-    if e.get("rs_score") is not None:
-        chips.append(("RS-SCORE", f"{e['rs_score']:.0f}"))
-    if chips:
-        cy = y + 30
-        cw = (c.W - 2 * MX - (len(chips) - 1) * 24) // max(1, len(chips))
-        for i, (lab, val) in enumerate(chips):
-            cx = MX + i * (cw + 24)
-            c.tile(cx, cy, cw, 96, color=T.PANEL_HI)
-            c.text(cx + 28, cy + 18, lab, 20, color=T.MUTED, weight="bold")
-            c.text(cx + 28, cy + 46, val, 36, color=T.TEXT, weight="bold", font="mono")
+    # Kurze Zusammenfassung als Text (statt technischer Chips)
+    summary = e.get("beat_summary") or _auto_beat_summary(e)
+    if summary:
+        c.tile(MX, y + 30, c.W - 2 * MX, 4, color=T.GRID, radius=2)  # feine Trennlinie
+        _draw_paragraph(c, MX, y + 56, summary, TY_BODY, c.W - 2 * MX,
+                        color=T.SUBTLE, line_h=TY_BODY_LH, max_lines=4)
     analysis_footer(c)
+
+
+def _auto_beat_summary(e):
+    """Fallback-Zusammenfassung für Slide 2, falls keine 'beat_summary' gesetzt ist."""
+    cur = e.get("currency", "")
+    parts = []
+    if e.get("eps_actual") is not None and e.get("eps_surprise_pct") is not None:
+        parts.append(f"Bereinigt verdiente das Unternehmen {cur}{E.fmt_num(e['eps_actual'])} "
+                     f"je Aktie — rund {E.fmt_pct_pts(e['eps_surprise_pct'], 0)} mehr als erwartet.")
+    if e.get("revenue_actual") is not None:
+        parts.append("Auch der Umsatz lag über den Schätzungen — ein Beat auf ganzer Linie.")
+    return " ".join(parts)
 
 
 # 3) KURSREAKTION — Candle-Chart um den Meldetag, Sprungtag markiert
@@ -1695,14 +1749,18 @@ def slide_earnings_reaction(c, e, date_iso):
                         xytext=(-4, 18), textcoords="offset points",
                         color=col, fontsize=16, fontweight="bold",
                         ha="right", fontfamily=_FONTS["mono"])
+            # Datum am Sprungtag — rechtsbündig, damit es bei der letzten Kerze
+            # nicht über den rechten Rand läuft
             ax.annotate(f"Zahlen {short_date(e['report_date'])}",
                         (idx, min(all_l) - pad), xytext=(0, 4),
                         textcoords="offset points", color=col, fontsize=13,
-                        fontweight="bold", ha="center", fontfamily=_FONTS["sans"])
-        # Preis-Labels rechts
+                        fontweight="bold",
+                        ha="right" if idx >= n - 3 else "center",
+                        fontfamily=_FONTS["sans"])
+        # Preis-Labels links (damit sie nicht mit der letzten Kerze kollidieren)
         for yv in (min(all_l), (min(all_l) + max(all_h)) / 2, max(all_h)):
-            ax.text(n - 0.5, yv, f"{yv:.0f}", color=T.MUTED, fontsize=12,
-                    va="center", ha="left", fontfamily=_FONTS["mono"])
+            ax.text(-0.6, yv, f"{yv:.0f}", color=T.MUTED, fontsize=12,
+                    va="center", ha="right", fontfamily=_FONTS["mono"])
     else:
         c.text(MX, chart_top + 40, "Keine Kursdaten verfügbar.", TY_BODY,
                color=T.MUTED)
@@ -1742,18 +1800,20 @@ def slide_earnings_guidance(c, e, date_iso):
                         c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
         y += gh + 26
 
-    # Turnaround-Kennzahl
+    # Turnaround-Kennzahl: blaue Überschrift OBEN (volle Breite), darunter die
+    # große Zahl links + Erklärungstext rechts daneben (tiefer, damit die
+    # Überschrift nicht in den Text ragt). Boxhöhe passt sich dem Text an.
     if e.get("key_metric_value"):
-        klines = _wrap_px(e.get("key_metric_note", ""), c.W - 2 * MX - 360, TY_SUB)
-        kh = max(150, 60 + len(klines) * 30 + 30)
+        note = e.get("key_metric_note", "")
+        klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
+        kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
         c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
         c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
                color=T.BLUE, weight="bold")
-        c.text(MX + 34, y + 56, e["key_metric_value"], 60, color=T.TEXT,
+        c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
                weight="bold", font="mono")
-        if klines:
-            for i, ln in enumerate(klines[:4]):
-                c.text(MX + 360, y + 30 + i * 30, ln, TY_SUB, color=T.MUTED)
+        for i, ln in enumerate(klines[:4]):
+            c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
         y += kh + 26
 
     # Treiber-Bullets
@@ -1771,7 +1831,28 @@ def slide_earnings_guidance(c, e, date_iso):
     analysis_footer(c)
 
 
-# 5) EINORDNUNG — Brücke vom Beat zur Investment-These (Verdict-Badge)
+def _verdict_note(e):
+    """Erklärt das KI-Verdict im Earnings-Kontext (warum z. B. HALTEN trotz Beat
+    und Kursziel über dem aktuellen Kurs). e['verdict_note'] hat Vorrang."""
+    if e.get("verdict_note"):
+        return e["verdict_note"]
+    a = e.get("analysis")
+    if not a:
+        return ""
+    v = (a.get("verdict") or "").upper()
+    ps = A.position_size(a["sections"].get(11, "")) or ""
+    if v == "BUY":
+        return "Die Quartalszahlen stützen das positive KI-Verdict zusätzlich."
+    if v in ("HOLD", "WATCH", "SELL"):
+        tail = f" Empfohlene Positionsgröße daher {ps}." if ps else ""
+        return ("Trotz starker Zahlen bleibt das KI-Verdict bewusst vorsichtig: "
+                "Das Aufwärtspotenzial ist real, aber an erhöhte (u. a. regulatorische) "
+                "Risiken gekoppelt — daher kein klares Kaufsignal, sondern eine "
+                f"kleinere Position.{tail}")
+    return ""
+
+
+# 5) EINORDNUNG — Brücke vom Beat zur Investment-These (Verdict-Badge + Begründung)
 def slide_earnings_context(c, e, date_iso):
     analysis_header(c, e, date_iso)
     a = e.get("analysis")
@@ -1781,13 +1862,19 @@ def slide_earnings_context(c, e, date_iso):
     y = 306
     if e.get("context"):
         y = _draw_paragraph(c, MX, y, e["context"], TY_BODY, c.W - 2 * MX,
-                            color=T.TEXT, line_h=TY_BODY_LH, max_lines=12) + 30
+                            color=T.TEXT, line_h=TY_BODY_LH, max_lines=8) + 36
 
     if a:
-        _verdict_badge(c, MX, max(y, c.H - 470), a["verdict"], a["score"], h=130)
-        c.text(MX, max(y, c.H - 470) + 150,
-               "Aus der vollständigen KI-Aktienbewertung — Szenarien & Kursziele "
-               "auf den folgenden Slides.", TY_SUB, color=T.MUTED)
+        _verdict_badge(c, MX, y, a["verdict"], a["score"], h=120)
+        y += 120 + 22
+        note = _verdict_note(e)
+        if note:
+            c.tile(MX, y, c.W - 2 * MX, 6, color=verdict_color(a["verdict"]), radius=3)
+            c.text(MX, y + 24, "WARUM DIESES VERDICT?", TY_SUB,
+                   color=verdict_color(a["verdict"]), weight="bold")
+            _draw_paragraph(c, MX, y + 24 + TY_BODY_LH, note, TY_BODY,
+                            c.W - 2 * MX, color=T.SUBTLE, line_h=TY_BODY_LH,
+                            max_lines=7)
     analysis_footer(c)
 
 
@@ -1842,48 +1929,24 @@ def earnings_reel_header(c, date_iso, e):
     c.text(MX + 46, 182, label, 18, color=col, weight="bold")
 
 
-def slide_earnings_reel_hook(c, e, date_iso):
-    earnings_reel_header(c, date_iso, e)
-    col = earn_color(e)
-    hy = _draw_paragraph(c, MX, 290, earnings_headline(e), 56, c.W - 2 * MX,
-                         color=T.TEXT, weight="bold", line_h=70, max_lines=3)
-    card_top = max(hy + 50, 560)
-    _logo_card(c, MX, card_top, c.W - 2 * MX, 400, e["ticker"])
-    sub = _e_name(e) + (f"  ·  {_e_sector(e)}" if _e_sector(e) else "")
-    c.text(MX, card_top + 400 + 30, sub, 24, color=T.MUTED)
-    # Hero-Kacheln
-    sy = card_top + 400 + 90
-    gap = 24
-    tw = (c.W - 2 * MX - gap) // 2
-    _stat_tile(c, MX, sy, tw, 172, "EPS-SURPRISE",
-               E.fmt_pct_pts(e.get("eps_surprise_pct"), 0), "Ist vs. Erwartung", col)
-    jump = e.get("jump_pct")
-    _stat_tile(c, MX + tw + gap, sy, tw, 172, "KURSSPRUNG",
-               E.fmt_pct(jump, 1), f"am {short_date(e['report_date'])}",
-               col if (jump or 0) >= 0 else T.RED)
-    analysis_footer(c)
-
-
 def slide_earnings_reel_cta(c, e, date_iso):
-    """Hybrid-Trick: das Reel leitet auf den vollständigen Karussell-Post um."""
+    """Hybrid-Trick: das Reel leitet auf den vollständigen Karussell-Post um.
+    Reel-Slide 4 — ohne Verdict (Wunsch: Verdict nur im Karussell)."""
     earnings_reel_header(c, date_iso, e)
-    a = e.get("analysis")
     col = earn_color(e)
-    c.text(MX, 440, "Die ganze", 56, weight="bold")
-    c.text(MX, 512, "Earnings-Analyse?", 56, color=col, weight="bold")
-    box_top = 680
-    c.tile(MX, box_top, c.W - 2 * MX, 470, color=T.PANEL)
-    c.tile(MX, box_top, 12, 470, color=col, radius=6)
-    verdict_txt = f" Verdict: {a['verdict']}." if a else ""
+    c.text(MX, 470, "Die ganze", 56, weight="bold")
+    c.text(MX, 542, "Earnings-Analyse?", 56, color=col, weight="bold")
+    box_top = 720
+    box_h = 360
+    c.tile(MX, box_top, c.W - 2 * MX, box_h, color=T.PANEL)
+    c.tile(MX, box_top, 12, box_h, color=col, radius=6)
     _draw_paragraph(c, MX + 50, box_top + 50,
                     f"Alle Zahlen, der Turnaround-Check und die Kursziel-Szenarien "
-                    f"zu {e['ticker']} findest du als Karussell-Post auf meinem "
-                    f"Profil.{verdict_txt}", 30, c.W - 2 * MX - 100,
-                    color=T.TEXT, line_h=46, max_lines=7)
-    c.text(MX + 50, box_top + 350, "Profil öffnen", 26, color=T.MUTED)
-    c.text(MX + 50, box_top + 392, HANDLE, 40, color=col, weight="bold")
+                    f"zu {e['ticker']} findest du im Karussell-Post.", 30,
+                    c.W - 2 * MX - 100, color=T.TEXT, line_h=46, max_lines=6)
+    c.text(MX + 50, box_top + box_h - 86, HANDLE, 40, color=col, weight="bold")
     for i in range(3):
-        c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + 380), s=170,
+        c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + box_h - 70), s=170,
                      marker="^", color=col, edgecolor="none", zorder=12)
     c.text(MX, 1230, f"Folge {HANDLE} für Earnings & Analysen", 24, color=T.MUTED)
     analysis_footer(c)

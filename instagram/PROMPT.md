@@ -416,6 +416,8 @@ Claude befüllt die dynamischen Felder aus dem Web. Pflicht: `ticker`, `quarter`
   "key_metric_note": "verbessert — genau die Normalisierung, auf die …",
   "drivers": ["…", "…"],               // 3–4 Treiber-Bullets
   "context": "Was die Zahlen für die These bedeuten (2–3 Sätze).",
+  "beat_summary": "Kurz-Zusammenfassung für Slide 2 (optional; sonst auto).",
+  "verdict_note": "Warum dieses Verdict trotz Beat (optional; sonst auto aus Analyse).",
   "sources": ["https://…"]             // Quellen-Links (Nachvollziehbarkeit)
 }
 ```
@@ -440,6 +442,22 @@ Hybrid-CTA „ganze Analyse im Karussell".
 
 **Grid-Logik:** Wochenupdate = Equity-Kurve · Analyse = Firmenlogo + Verdict ·
 **Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).
+
+**Design-Regeln (verbindlich):**
+- **Slide-Datum (oben rechts) = Tag NACH dem Earningscall** (`report_date` + 1).
+  Wird automatisch gesetzt (auch rückwirkend), `--date` überschreibt. So ist der
+  Post immer auf den Folgetag der Zahlen datiert.
+- **Firmenlogo ab Slide 2 oben rechts auf weißer Karte** (AMD-Logo-Größe), damit
+  dunkle/transparente Logos sichtbar sind (`_company_logo_chip` in render.py; gilt
+  via `analysis_header` für Analyse- UND Earnings-Innen-Slides). Auf dem Cover sitzt
+  das getrimmte, mittig zentrierte Logo auf der großen weißen Karte.
+- **Reel = Slides 1–3 der Earnings-Analyse** (Cover → Beat in Zahlen → Kursreaktion)
+  + Hybrid-CTA (Slide 4) ohne Verdict.
+- **Verdict-Begründung:** Liegt der Base Case über dem Kurs, der Post ist aber kein
+  klares Kaufsignal → optionales Feld `verdict_note` (Slide „Einordnung") erklärt das
+  KI-Verdict; Fallback verdict-bewusst aus der Analyse (Positionsgröße/Risiko).
+- **Kurz-Zusammenfassung auf Slide 2:** Feld `beat_summary` (Fallback auto aus den
+  Zahlen) — keine technischen Chips (kein RS-Score / GAAP-EPS).
 
 **Caption (`caption.txt`):** erste Zeile „<Firma> (TICKER) — Earnings-Analyse
 Q<N>: Beat" (SEO) + Beat-Zahlen + Guidance + These/Szenarien + Disclaimer +

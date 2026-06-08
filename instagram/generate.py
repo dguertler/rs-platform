@@ -604,16 +604,15 @@ def build_earnings(fmt, e, date_iso, outdir):
 
 
 def build_earnings_reel(e, date_iso, outdir):
-    """Reel-Teaser (9:16): Beat-Hook → Szenarien → Hybrid-CTA aufs Karussell."""
+    """Reel-Teaser (9:16): spiegelt die ersten drei Earnings-Slides (Cover →
+    Beat in Zahlen → Kursreaktion) und schließt mit Hybrid-CTA aufs Karussell."""
     saved = []
     emit = _emitter("reel", outdir, saved)
-    a = e.get("analysis")
-    emit("hook", lambda c: render.slide_earnings_reel_hook(c, e, date_iso))
-    if a and _has_scenarios(a):
-        emit("szenarien", lambda c: render.slide_reel_scenarios(c, a, date_iso))
-    if a:
-        emit("fazit", lambda c: render.slide_reel_takeaway(c, a, date_iso))
-    emit("cta", lambda c: render.slide_earnings_reel_cta(c, e, date_iso))
+    emit("cover",  lambda c: render.slide_earnings_cover(c, e, date_iso))
+    emit("zahlen", lambda c: render.slide_earnings_numbers(c, e, date_iso))
+    if e.get("reaction_ohlcv"):
+        emit("reaktion", lambda c: render.slide_earnings_reaction(c, e, date_iso))
+    emit("cta",    lambda c: render.slide_earnings_reel_cta(c, e, date_iso))
     return saved
 
 
@@ -770,8 +769,19 @@ def main():
 
     # ── Earnings-Post aus instagram/data/earnings/TICKER.json ─────────────────
     if args.earnings:
-        date_iso = args.date or today
         e = earn.load_earnings(args.earnings)
+        # Slide-Datum (oben rechts) = standardmäßig der Tag NACH dem Earningscall
+        # (so wird der Post immer am Folgetag der Zahlen datiert, auch rückwirkend);
+        # ein explizites --date hat Vorrang.
+        if args.date:
+            date_iso = args.date
+        else:
+            try:
+                from datetime import timedelta
+                rd = datetime.strptime(e["report_date"][:10], "%Y-%m-%d").date()
+                date_iso = (rd + timedelta(days=1)).strftime("%Y-%m-%d")
+            except Exception:
+                date_iso = today
         if e.get("analysis") is None:
             print(f"⚠ Keine Basis-Analyse gefunden: analyses/{e['ticker'].lower()}.md")
             print("  Bitte zuerst die Aktienanalyse erzeugen (siehe analyses/PROMPT.md),")
