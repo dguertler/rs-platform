@@ -454,20 +454,22 @@ def caption_analysis(a):
     biz_text = " ".join(a.get("business_bullets", []) + [a.get("hook", "")])
     topic_parts = []
     if any(w in biz_text for w in ("GPU", "KI", "AI", "Instinct", "Datacenter")):
-        topic_parts.append("#ki #künstlicheintelligenz #aistock #aiinvesting "
-                           "#datacenter #gpu #aiaccelerator #kisemiconductor")
+        topic_parts.append("#ki #aistock #aiinvesting #datacenter #gpu #aiinfrastructure")
     if any(w in biz_text for w in ("EPYC", "CPU", "Server")):
         topic_parts.append("#cpu #serverchips")
-    if any(w in biz_text for w in ("TSMC", "Fabless")):
-        topic_parts.append("#tsmc #fabless")
+    # Vergleichsticker — zieht Suchanfragen ähnlicher Aktien
+    peers = a.get("peers", [])
+    peer_tags = " ".join(f"#{p.replace('.','').lower()}"
+                         for p in peers[:2] if len(p) <= 6)
 
     tags = (
         f"#aktien #aktienanalyse #aktienmarkt #börse #boersewissen "
-        f"#geldanlage #finanzbildung #finanzwissen #wachstumsaktien "
-        f"#investing #stockanalysis #stockmarket #stockpicking #momentum "
-        f"#{tic} {sector_tags} "
-        + " ".join(topic_parts) +
-        " #aialphaselection"
+        f"#geldanlage #finanzbildung #vermögensaufbau #wachstumsaktien "
+        f"#börsentipps #investing #stockanalysis "
+        f"#{tic} #{''.join([tic, 'stock'])} {sector_tags} "
+        + " ".join(topic_parts)
+        + (f" {peer_tags}" if peer_tags else "")
+        + " #aialphaselection"
     ).rstrip()
 
     # ── "Weitere Details"-Block — immer vollständig, nie weglassen ───────────
