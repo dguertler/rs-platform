@@ -34,17 +34,31 @@ Freigabe (eigenes Logo nutzen).
 
 ## Wöchentlicher Ablauf (Hauptweg)
 
-**Der Nutzer schickt:** den aktuellen **Zertifikatswert** der KW
-(eine Zahl). Bei Änderungen zusätzlich aktualisierte **Top-Positionen**.
+**Der Nutzer schickt:** den aktuellen **Zertifikatswert** der KW (eine Zahl) und
+bei Änderungen die **Käufe/Verkäufe** der Woche (Ticker/Name, Datum, Kurs, ggf.
+realisierte Rendite in %).
 
-1. **Wert speichern** (hängt an `data/wikifolio_history.json` an):
-   ```bash
-   python3 -m instagram.add_week --kw 22 --value 145.30
-   ```
-   (Claude darf die JSON auch direkt editieren.)
-2. **Holdings ggf. aktualisieren:** `data/holdings.json` (Top-Positionen +
-   `buy_date`). Reihenfolge = Rotationsreihenfolge der „Aktie der Woche".
-3. **Dynamische Felder texten (PFLICHT, siehe unten):** Claude formuliert pro
+> ⚠️ **PFLICHT — Werte IMMER zuerst persistent abspeichern.** Sobald der Nutzer
+> einen Wochenstand und/oder Trades schickt, schreibt Claude diese **automatisch
+> und ohne Rückfrage** in die Datendateien (Schritt 1), **bevor** generiert wird.
+> Das ist fixer Bestandteil jeder Wochen-Session — auch rückwirkend.
+
+1. **Alle gelieferten Werte abspeichern** (`instagram/data/`):
+   1. **Zertifikatswert** → `wikifolio_history.json` (echtes Datum mitgeben):
+      ```bash
+      python3 -m instagram.add_week --kw 23 --value 149.86 --date 2026-06-05
+      ```
+      (Claude darf die JSON auch direkt editieren; ein Eintrag pro KW.)
+   2. **Käufe** → neue Position in `holdings.json` ergänzen
+      (`ticker`, `name`, `buy_date`, `buy_price_eur`).
+   3. **Verkäufe** → Position aus `holdings.json` **entfernen** **und** den
+      abgeschlossenen Trade in `trades.json` (`closed`) ergänzen
+      (`name` + `ret` als **Dezimal**, z. B. +69,7 % → `0.697`, −6 % → `-0.06`).
+      Ein im selben Zeitraum ge- und wieder verkaufter Titel (z. B. IBM Kauf Mo /
+      Verkauf Do) erscheint **nicht** in `holdings.json`, sondern **nur** als
+      abgeschlossener Trade.
+   4. Ticker-Mapping bei Namen beachten (Tabelle unten). Bei Unsicherheit fragen.
+2. **Dynamische Felder texten (PFLICHT, siehe unten):** Claude formuliert pro
    Woche aus den Daten eine **Hook-Schlagzeile**, ein strategisches **„Warum"**
    und eine **Interaktions-Frage** und übergibt sie:
    ```bash
@@ -58,9 +72,12 @@ Freigabe (eigenes Logo nutzen).
    Ohne Flags greifen datenbasierte **Fallbacks** (`auto_hook` / `auto_why` /
    `auto_question` in `generate.py`) — die Slides funktionieren also immer, aber
    die individuell getextete Variante ist Standard für maximale CTR/Engagement.
-4. **Review:** Slides aus `out/instagram/<DATUM>_KW22/` zeigen.
-5. **Manuell posten.** Carousel = `carousel/`-PNGs in Reihenfolge; Caption aus
+3. **Review:** Slides aus `out/instagram/<DATUM>_KW<NN>/` zeigen.
+4. **Manuell posten.** Carousel = `carousel/`-PNGs in Reihenfolge; Caption aus
    `caption.txt`. Reel-Frames in `reel/`.
+5. **Datendateien committen** (`wikifolio_history.json`, `holdings.json`,
+   `trades.json`) — die `out/`-Slides sind bewusst gitignored, die Werte bleiben
+   aber dauerhaft im Repo.
 
 NASDAQ-Vergleich, Wochen-/Gesamtrendite, Alpha, Wochen-Historie und
 „X von Y Wochen geschlagen" werden **automatisch** aus den gespeicherten Werten
