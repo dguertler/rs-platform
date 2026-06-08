@@ -246,11 +246,39 @@ def parse_analysis(path_or_ticker):
     return a
 
 
+_NA_PHRASE = (r"(?:nicht\s+(?:verfügbar|bezifferbar|quantifizierbar|aussagekräftig|"
+              r"vorhanden|sinnvoll(?:\s+möglich)?)|keine\s+(?:Angabe|Daten|Schätzung)|"
+              r"liegt\s+nicht\s+vor|n/a)")
+
+
+def _strip_unavailable(s):
+    """Entfernt 'X nicht verfügbar'-Klauseln; gibt den Satz ohne sie zurück
+    (oder '', wenn nichts Sinnvolles übrig bleibt). Fehlende Daten sollen NIE
+    als 'nicht verfügbar' o.ä. auf den Slides erscheinen."""
+    if not re.search(_NA_PHRASE, s, re.I):
+        return s
+    # angehängte/eingeschobene Klausel nach , ; – — entfernen
+    s2 = re.sub(r"\s*[,;–—-]\s*[^,;–—-]*?" + _NA_PHRASE + r"[^,;.]*", "", s, flags=re.I)
+    if re.search(_NA_PHRASE, s2, re.I):
+        # ganze Klausel/den Satz verwerfen, wenn die Phrase noch drinsteckt
+        s2 = re.sub(r"[^,;.]*?" + _NA_PHRASE + r"[^,;.]*", "", s2, flags=re.I)
+    s2 = re.sub(r"\s+([.,;:])", r"\1", s2)
+    s2 = re.sub(r"\s{2,}", " ", s2).strip(" ,;–—-")
+    # nur behalten, wenn ein vollständiger, sinnvoller Satz übrig bleibt
+    return s2 if len(s2.split()) >= 4 else ""
+
+
 def clean_for_slide(text):
     """Bereinigt Analyse-Text für die Slides: entfernt GWS-/Breakout-/Ampel-Sätze,
-    RS-Score-Nennungen und anonymisiert den AKTUELLEN Kurs (Vorgabe: kein Kurs)."""
-    sents = [s for s in sentences(text)
-             if not re.search(r"GWS|Breakout|Ampel", s, re.I)]
+    'nicht verfügbar'-Hinweise, RS-Score-Nennungen und anonymisiert den AKTUELLEN
+    Kurs (Vorgabe: kein Kurs)."""
+    sents = []
+    for s in sentences(text):
+        if re.search(r"GWS|Breakout|Ampel", s, re.I):
+            continue
+        s = _strip_unavailable(s)
+        if s:
+            sents.append(s)
     t = " ".join(sents)
     t = re.sub(r"RS-Score\s*[\d.,]+\s*[—–-]?\s*", "", t)
     # "Kurs $516" / "Kurs von 516 USD" -> "aktuellen Kurs"

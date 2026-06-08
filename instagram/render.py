@@ -1290,25 +1290,30 @@ def slide_analysis_valuation(c, a, date_iso):
            if illusion else "Bewertung im Zykluskontext", TY_SUB, color=T.MUTED)
 
     y = 300
-    if pe["trailing"] or pe["forward"]:
+    # Bewertungs-Chips immer linksbündig auffüllen — fehlt das Trailing-KGV,
+    # rückt das Forward-KGV in die linke Spalte (nicht in die Mitte).
+    chip_defs = []
+    if pe["trailing"]:
+        chip_defs.append(("TRAILING-KGV", pe["trailing"] + "x", T.RED,
+                          "optisch teuer · Basiseffekt"))
+    if pe["forward"]:
+        chip_defs.append(("FORWARD-KGV", pe["forward"] + "x", T.GREEN,
+                          "die relevante Kennzahl"))
+    if pe.get("pb"):
+        chip_defs.append(("KURS-BUCHWERT", pe["pb"] + "x", T.BLUE,
+                          "Substanzbewertung"))
+    chip_defs = chip_defs[:2]
+    if chip_defs:
         gap = 26
         cw = (c.W - 2 * MX - gap) // 2
         ch = 150
-        if pe["trailing"]:
-            c.tile(MX, y, cw, ch, color=T.PANEL)
-            c.tile(MX, y, 10, ch, color=T.RED, radius=5)
-            c.text(MX + 34, y + 26, "TRAILING-KGV", 26, color=T.RED, weight="bold")
-            c.text(MX + 34, y + 56, pe["trailing"] + "x", 50, color=T.RED,
-                   weight="bold", font="mono")
-            c.text(MX + 34, y + 118, "optisch teuer · Basiseffekt", TY_SUB, color=T.MUTED)
-        if pe["forward"]:
-            x2 = MX + cw + gap
-            c.tile(x2, y, cw, ch, color=T.PANEL)
-            c.tile(x2, y, 10, ch, color=T.GREEN, radius=5)
-            c.text(x2 + 34, y + 26, "FORWARD-KGV", 26, color=T.GREEN, weight="bold")
-            c.text(x2 + 34, y + 56, pe["forward"] + "x", 50, color=T.GREEN,
-                   weight="bold", font="mono")
-            c.text(x2 + 34, y + 118, "die relevante Kennzahl", TY_SUB, color=T.MUTED)
+        for i, (lab, val, ccol, note) in enumerate(chip_defs):
+            cx = MX + i * (cw + gap)
+            c.tile(cx, y, cw, ch, color=T.PANEL)
+            c.tile(cx, y, 10, ch, color=ccol, radius=5)
+            c.text(cx + 34, y + 26, lab, 26, color=ccol, weight="bold")
+            c.text(cx + 34, y + 56, val, 50, color=ccol, weight="bold", font="mono")
+            c.text(cx + 34, y + 118, note, TY_SUB, color=T.MUTED)
         y += ch + 26
 
     # Analyst-Konsensus-Tile (wenn vorhanden)
@@ -1562,17 +1567,25 @@ def _e_sector(e):
 
 def earnings_headline(e):
     """Hook für Slide 1 — macht klar, dass es ein EARNINGS-Post ist (Beat-Story),
-    keine normale Analyse. e['headline'] hat Vorrang (bespoke via --headline)."""
-    if e.get("headline"):
-        return e["headline"]
+    keine normale Analyse. e['headline'] hat Vorrang (bespoke via --headline).
+    Regel: Der Hook nennt IMMER die Aktie (Firmenname + Ticker), damit beim ersten
+    Blick klar ist, um welchen Wert es geht."""
     name = _e_name(e)
+    tick = e["ticker"]
+    label = f"{name} ({tick})" if name and name != tick else tick
+    if e.get("headline"):
+        h = e["headline"]
+        # Sicherstellen, dass die Aktie im Hook vorkommt
+        if name.lower() not in h.lower() and tick.lower() not in h.lower():
+            h = f"{label}: {h}"
+        return h
     surp = e.get("eps_surprise_pct")
     if (surp or 0) >= 0:
         s = E.fmt_pct_pts(surp, 0, signed=False) if surp is not None else ""
-        return (f"{name}: Turnaround bestätigt — der Quartalsgewinn schlägt "
+        return (f"{label}: Turnaround bestätigt — der Quartalsgewinn schlägt "
                 f"die Erwartung um {s}".rstrip(" —um ")) if s else \
-               f"{name}: Die Quartalszahlen schlagen die Erwartungen"
-    return f"{name}: Quartalszahlen verfehlen die Erwartungen"
+               f"{label}: Die Quartalszahlen schlagen die Erwartungen"
+    return f"{label}: Quartalszahlen verfehlen die Erwartungen"
 
 
 def _eyebrow_pill(c, x, top, text, col=T.GREEN, h=52):

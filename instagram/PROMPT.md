@@ -472,6 +472,21 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
 **Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).
 
 **Design-Regeln (verbindlich — alle Vorgaben aus dem Review):**
+- **Hook (Slide 1) nennt IMMER die Aktie** — Firmenname **+ Ticker** in Klammern,
+  z. B. „Centene (CNC): Turnaround bestätigt …". Der Default macht das automatisch;
+  bei eigenem `--headline` wird der Wert vorangestellt, falls Name/Ticker fehlen
+  (`earnings_headline`). So ist auf den ersten Blick klar, um welchen Wert es geht.
+- **Bewertungs-Slide: Chips immer linksbündig auffüllen.** Fehlt eine Kennzahl
+  (z. B. kein Trailing-KGV), rückt die nächste (Forward-KGV) in die **linke** Spalte
+  — nie in die Mitte. Verfügbare Chips in der Reihenfolge Trailing-KGV · Forward-KGV
+  · Kurs-Buchwert, max. 2 nebeneinander (`slide_analysis_valuation`).
+- **Fehlende Daten NIE als „nicht verfügbar" zeigen.** Sätze/Klauseln wie
+  „… nicht verfügbar", „keine Angabe", „n/a" werden in `clean_for_slide` automatisch
+  entfernt; der Text muss ohne sie schlüssig weiterlaufen. Generell: nur zeigen, was
+  belastbar ist — keine Platzhalter, keine Negativ-Hinweise auf fehlende Daten.
+- **Output wie bei den Aktienanalysen:** pro Post die **Einzel-Slides als PNG**
+  (`carousel/01_…png …`) **und** ein gebündeltes **`carousel_<TICKER>.zip`** zum
+  einfachen Hochladen (erzeugt `build_earnings`, identisch zu `build_analysis`).
 - **Slide-Datum (oben rechts) = Tag NACH dem Earningscall** (`report_date` + 1).
   Wird automatisch gesetzt (auch rückwirkend), `--date` überschreibt. So ist der
   Post immer auf den Folgetag der Zahlen datiert. Datum steht nur auf dem Cover.
