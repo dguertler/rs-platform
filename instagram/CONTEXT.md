@@ -243,16 +243,18 @@ Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 ## 11b. Dritter Post-Typ: Earnings-Analyse-Posts
 
 Aus einem **Quartalsbericht mit Beat** wird ein eigenständiger Carousel-Post
-(8–10 Slides) + Reel-Teaser, mit **Fokus auf dem Earnings-Ereignis**. Vollständiger
-Ablauf + JSON-Schema: `PROMPT.md`, Abschnitt „Dritter Post-Typ: EARNINGS-ANALYSE".
+(bis zu 14 Slides — Tiefe = USP) + Reel-Teaser, mit **Fokus auf dem
+Earnings-Ereignis**. Vollständiger Ablauf + JSON-Schema + Design-Regeln:
+`PROMPT.md`, Abschnitt „Dritter Post-Typ: EARNINGS-ANALYSE".
 
-**Befehl:**
+**Befehl** (die Hook nennt **weder Firmenname noch Ticker** — siehe Design-Regeln):
 ```bash
 python3 -m instagram.generate --earnings CNC \
-  --headline "Centene: Turnaround bestätigt — Q1-Gewinn sprengt die Erwartung"
+  --headline "Turnaround bestätigt — der Q1-Gewinn sprengt die Erwartung"
 ```
-Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (≈9 PNG) ·
-`reel/` (4 PNG) · `caption.txt`. Nichts wird hochgeladen — manuell posten.
+Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (bis zu 14 PNG) ·
+`reel/` (4 PNG) · `caption.txt` · **`carousel_<TICKER>.zip`** (alle Slides
+gebündelt, wie bei den Aktienanalysen). Nichts wird hochgeladen — manuell posten.
 
 **Drei Datenquellen:**
 1. `instagram/data/earnings/<TICKER>.json` — Beat-Zahlen **aus dem Web** (EPS

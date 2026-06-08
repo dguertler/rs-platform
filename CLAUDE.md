@@ -121,13 +121,17 @@ Prognosen — z. B. Kandidaten aus der `check_earnings.py`-Mail: ≥ 5 % Kursspr
 3. **Earnings-Zahlen aus dem Web** holen und in `instagram/data/earnings/TICKER.json`
    schreiben (Schema in `PROMPT.md`; Pflicht: ticker, quarter, report_date, source,
    eps_actual/_estimate/_surprise_pct). Der Kurssprung wird automatisch aus
-   `data/rs_*.json` berechnet — nicht eintragen.
-4. Generieren — am besten mit individueller Beat-Hook:
+   `data/rs_*.json` berechnet — nicht eintragen. **Für den Tiefgang zusätzlich**
+   (optional, empfohlen): `quarterly` (Quartals-EPS → Slide „Gewinn je Quartal")
+   und `segments` (Segment-Treiber → Slide „Was den Beat getragen hat").
+4. Generieren — am besten mit individueller Beat-Hook (die Hook nennt **weder
+   Firmenname noch Ticker**, siehe Design-Regeln in `PROMPT.md`):
    ```bash
    python3 -m instagram.generate --earnings TICKER --headline "<Beat/Turnaround-These>"
    ```
-5. Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (≈9 PNG),
-   `reel/` (4 PNG), `caption.txt` zeigen — **kein Auto-Upload**. Danach die
+5. Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (bis zu 14 PNG),
+   `reel/` (4 PNG), `caption.txt` **und `carousel_<TICKER>.zip`** (alle Slides
+   gebündelt, wie bei den Aktienanalysen) zeigen — **kein Auto-Upload**. Danach die
    `instagram/data/earnings/TICKER.json` committen (out/-Slides sind gitignored).
 
 ## Monetarisierung / Controlling

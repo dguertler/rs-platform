@@ -356,7 +356,7 @@ Disclaimer, Hashtags). Reicht der Platz nicht, kürzt der Generator automatisch
 mit übertroffenen Prognosen) bzw. `Earnings-Analyse TICKER`.
 
 Macht aus einem **Quartalsbericht mit Beat** einen eigenständigen Carousel-Post
-(8–10 Slides) + Reel-Teaser. Anders als der Analyse-Post liegt der Fokus auf dem
+(bis zu 14 Slides — Tiefe ist der USP) + Reel-Teaser. Anders als der Analyse-Post liegt der Fokus auf dem
 **Earnings-Ereignis** (Beat-Zahlen, Kurssprung, Guidance) — die Slide 1 macht
 sofort klar: *das ist ein Earnings-Post, keine normale Analyse* (grüne
 „EARNINGS · Q<N> <Jahr> · BEAT"-Pille + Hero-Zahlen EPS-Surprise & Kurssprung).
@@ -388,15 +388,23 @@ Kandidat für einen Earnings-Post.
    `instagram/data/earnings/<TICKER>.json` (Schema unten). Der **Kurssprung** wird
    NICHT eingetragen — er wird automatisch live aus der passenden RS-JSON
    (`data/rs_*.json`) berechnet (inkl. Reaktions-Chart).
+   - **Optional, für den Tiefgang (sehr empfohlen):** zusätzlich die Felder
+     `quarterly` (bereinigtes EPS der letzten ~6 Quartale → Slide „Gewinn je
+     Quartal") und `segments` (Segment-Treiber des Beats → Slide „Was den Beat
+     getragen hat") aus dem Web recherchieren. Fehlen sie, entfallen die beiden
+     Slides automatisch. Abgeleitete Werte (z. B. ein fehlendes Quartal aus
+     Jahres- minus Neunmonatszahl) in `quarterly_derived_note` dokumentieren.
 
 3. **Generieren:**
    ```bash
    python3 -m instagram.generate --earnings CNC \
-     --headline "Centene: Turnaround bestätigt — Q1-Gewinn sprengt die Erwartung"
+     --headline "Turnaround bestätigt — der Q1-Gewinn sprengt die Erwartung"
    ```
    Ohne `--headline` baut der Generator eine Beat-bewusste Hook automatisch.
-   Output: `out/instagram/<DATUM>_EARNINGS_<TICKER>/{carousel,reel}/*.png` +
-   `caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
+   **Wichtig:** Die Hook nennt **weder Firmenname noch Ticker** (siehe Design-Regeln).
+   Output: `out/instagram/<DATUM>_EARNINGS_<TICKER>/{carousel,reel}/*.png`,
+   `caption.txt` **und `carousel_<TICKER>.zip`** (alle Carousel-Slides gebündelt,
+   wie bei den Aktienanalysen). **Kein Auto-Upload** — prüfen und manuell posten.
 
 4. **Earnings-JSON committen** (die `out/`-Slides sind gitignored).
 
@@ -500,13 +508,13 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
 - **Slide 2 „Der Beat in Zahlen":** EPS- + Umsatz-Vergleich Ist/Erwartung; darunter
   eine **Kurz-Zusammenfassung als Text** (Feld `beat_summary`, sonst auto aus den
   Zahlen). **Keine** technischen Chips (kein RS-Score, kein GAAP-EPS).
-- **Slide 3 „Die Kursreaktion":** **Tageskerzen der letzten 50 Handelstage (10 × 5)
+- **Slide „Die Kursreaktion":** **Tageskerzen der letzten 50 Handelstage (10 × 5)
   bis EINSCHLIESSLICH Meldetag** (kein Tag danach; `reaction_window(before=49,
   after=0)`). Mit **Datums-Achse unten** (Meldetag grün), Preis-Labels links,
   Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 50
   Handelstage bis zum Meldetag". Hinweis: OHLCV enthält nur **Handelstage** (keine
   Wochenenden/Feiertage) — 50 Kerzen ≈ 10 Kalenderwochen.
-- **Slide 5 „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
+- **Slide „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
   (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
   Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).
 - **Vorletzte + letzte Slide (Fazit + CTA):** Tagline lautet exakt
