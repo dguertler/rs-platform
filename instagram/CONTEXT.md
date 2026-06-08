@@ -323,7 +323,61 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 - [ ] Cover: kein AKTIENANALYSE-Tag; Header: kein ANALYSE-Tag
 - [ ] Header rechts: Firmen-Logo (52 px), kein Ticker-Tag
 
-### 12.8 AMD-Analyse: Abdeckung auf den Slides (Vergleich)
+### 12.8 Caption-Aufbau (generate.py `caption_analysis`)
+
+Die Caption enthält automatisch:
+1. Titel + Verdict + Score
+2. Hook-Satz (Section 1)
+3. Business-Bullets (Section 2, max 4)
+4. Szenarien 12-18M mit Wahrscheinlichkeit + Kursziel + Zusammenfassung
+5. Langfrist-Spannen (3-5J)
+6. Rating-Sterne
+7. Fazit-Kernaussage
+8. Vergleichbare Titel (Peers)
+9. **💡 Weitere Details** (automatisch aus Sections 2, 6, 7 extrahiert):
+   - D/E-Verhältnis (regex: `D/E`)
+   - Analysten-Konsensus/Konsensziel + Wert (regex: `Konsensus|Konsensziel|Analysten`)
+   - HBM-Sourcing-Risiko (wenn `HBM` in Section 2 und nicht schon in Bullets)
+   - TSMC-Fabless (wenn `TSMC` in Section 2 und nicht schon in Bullets)
+10. Folge-CTA
+11. Disclaimer
+12. Hashtags
+
+**Slide 12 (Fazit) CTA-Box:** "Weitere Details zur Analyse in der Caption" (nicht auf vollständigen Text verweisen).
+
+### 12.9 Slide-spezifische Layout-Regeln
+
+**Cover (Slide 1):**
+- Hook: 60 px, Zeilenabstand 74, Start y=170
+- Logo-Karte: zentriert zwischen Hook-Ende und Bottom-Section (von unten berechnet)
+- Verdict-Badge + Rating-Blöcke: verankert am Footer, Rating-Blöcke zentriert im Restabstand
+- Rating-Labels: 24 px (eine Größe kleiner als TY_BODY), Sterne unter den Labels
+
+**Business-Slide (Slide 3):**
+- Blaue Überschriften und Body-Text: beide TY_BODY=28
+- Jede Box hat immer eine blaue Überschrift (bei fehlendem " — "-Trenner: erste 5 Wörter als Titel)
+
+**Szenarien-Slide (Slide 4):**
+- Box-Höhe rh=220 (damit Wahrscheinlichkeit + Kursziel nicht überlaufen)
+- Wahrscheinlichkeit und Kursziel rechts übereinander: Label 22px, Wert 38px / TY_BODY
+
+**Cases-Blöcke (Slides 5+6):**
+- Wahrscheinlichkeit + Kursziel in EINER Zeile: `"45%  ·  560–700 $"` rechts-oben
+- Overflow-Schutz: Blöcke die footer_y=c.H-160 überschreiten werden abgebrochen
+
+**CTA-Slide (Slide 13):**
+- Community-Box: dynamische Höhe (an Text angepasst), zentriert zwischen Save-Box und CTA-Text
+
+**KGV-Slide (Slide 8):**
+- "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
+- Erklärung: Hoher Trailing-PE ist ein Basiseffekt — aktuelle Gewinne noch niedrig, GPU-Hochlauf nicht reflektiert
+
+**Allgemeine Regeln:**
+- Keine hardcodierten "ae/oe/ue" in deutschen Strings → immer ä/ö/ü
+- Bindestrich zwischen Buchstaben: automatisch `Text - Text` via `_wrap_px`
+- Wenn Box/Text Footer-Linie (y=c.H-150) überschreitet → auf weiterem Slide fortführen
+
+### 12.10 AMD-Analyse: Abdeckung auf den Slides (Vergleich)
 
 **Abgedeckt auf den Slides:**
 - Investment-Case (Slide 2): AMD als glaubwürdige Nr. 2 im KI-Beschleuniger-Markt, MI300 als CUDA-Alternative
@@ -337,13 +391,14 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 - Profi-Fazit (Slide 12): BUY 80/100, Beta + Forward-PE = 30-40% Drawdowns möglich
 - Peers (Slide 12): NVDA, AVGO
 
-**Nicht auf den Slides (in Caption oder weggelassen):**
-- EPYC-Marktanteilsgewinne vs. Intel (Geschäftsmodell-Detail)
-- HBM-Speicher-Sourcing-Risiko (SK Hynix/Samsung)
-- D/E-Verhältnis 6 (niedrig, kein Bilanzrisiko)
-- ROCm als kritischer Engpass im Detail
-- Fabless-Modell / TSMC-Fertigung
-- Analyst-Konsensus $472 liegt hinter aktualem Kurs $516
-- Beta 2,4: Volatilitäts-Warnung (in Risiko-Slide erwähnt, aber kein eigener Block)
-- Jahrestarget EPS $18-22 (Bull) und Forward-EPS-Revisionen aufwärts (Base)
+**In der Caption (automatisch extrahiert via "Weitere Details"-Block):**
+- D/E-Verhältnis 6 (Bilanz solide)
+- Analysten-Konsensus $472 < aktueller Kurs $516 (Abdeckung läuft Rally nach)
+- HBM-Speicher von SK Hynix/Samsung (Verfügbarkeitsrisiko)
+- TSMC-Fabless (wenn nicht schon in Business-Bullets)
+
+**Bewusst weggelassen (zu technisch für IG-Publikum):**
+- Jahrestarget EPS $18-22 (Bull), Forward-EPS-Revisionen aufwärts (Base)
+- ROCm-Architektur-Details (CUDA-Gap)
+- Beta 2,4 → bereits auf Risiko-Slide erwähnt
 
