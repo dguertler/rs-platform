@@ -10,6 +10,12 @@ import numpy as np
 import matplotlib
 
 matplotlib.use("Agg")
+# Dollar-Zeichen ($3,37) NICHT als LaTeX-Mathmodus interpretieren — sonst werden
+# Zeichen zwischen zwei $ kursiv gesetzt und Leerzeichen verschluckt.
+try:
+    matplotlib.rcParams["text.parse_math"] = False
+except (KeyError, ValueError):
+    pass
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
@@ -1476,4 +1482,408 @@ def slide_reel_cta(c, a, date_iso):
                      marker="^", color=T.BLUE, edgecolor="none", zorder=12)
     c.text(MX, 1230, f"Folge {HANDLE} für 1–2 Analysen pro Woche", 24,
            color=T.MUTED)
+    analysis_footer(c)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# EARNINGS-ANALYSE-SLIDES (Dritter Post-Typ)
+# Datenquelle: instagram/earnings.load_earnings(ticker) -> e
+#   e enthält die Earnings-Zahlen (aus dem Web), den Kurssprung (aus RS-JSON)
+#   und die geparste Basis-Analyse unter e["analysis"].
+# Designsystem identisch zu den Analyse-Slides (analysis_header/-footer, Farben).
+# Akzentfarbe = Grün (Beat) bzw. Rot (Miss) — signalisiert sofort „Earnings".
+# ══════════════════════════════════════════════════════════════════════════════
+from . import earnings as E
+
+
+def earn_color(e):
+    return T.GREEN if (e.get("eps_surprise_pct") or 0) >= 0 else T.RED
+
+
+def _e_name(e):
+    a = e.get("analysis")
+    return A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
+
+
+def _e_sector(e):
+    a = e.get("analysis")
+    return a.get("sector", "") if a else ""
+
+
+def earnings_headline(e):
+    """Hook für Slide 1 — macht klar, dass es ein EARNINGS-Post ist (Beat-Story),
+    keine normale Analyse. e['headline'] hat Vorrang (bespoke via --headline)."""
+    if e.get("headline"):
+        return e["headline"]
+    name = _e_name(e)
+    surp = e.get("eps_surprise_pct")
+    if (surp or 0) >= 0:
+        s = E.fmt_pct_pts(surp, 0, signed=False) if surp is not None else ""
+        return (f"{name}: Turnaround bestätigt — der Quartalsgewinn schlägt "
+                f"die Erwartung um {s}".rstrip(" —um ")) if s else \
+               f"{name}: Die Quartalszahlen schlagen die Erwartungen"
+    return f"{name}: Quartalszahlen verfehlen die Erwartungen"
+
+
+def _eyebrow_pill(c, x, top, text, col=T.GREEN, h=52):
+    """Kleine Akzent-Pille (z. B. 'EARNINGS · Q1 2026 · BEAT')."""
+    w = 56 + int(len(text) * 13.5)
+    c.tile(x, top, w, h, color=T.PANEL_HI, radius=h // 2)
+    c.tile(x + 18, top + h // 2 - 7, 14, 14, color=col, radius=7)
+    c.text(x + 46, top + h // 2 - 13, text, 22, color=col, weight="bold")
+    return w
+
+
+def _stat_tile(c, x, top, w, h, label, value, sub, col, value_size=48):
+    """Kennzahl-Kachel: Label oben, große Zahl, Untertitel. h ≥ 168 empfohlen."""
+    c.tile(x, top, w, h, color=T.PANEL)
+    c.tile(x, top, 10, h, color=col, radius=5)
+    c.text(x + 34, top + 20, label, 22, color=col, weight="bold")
+    c.text(x + 34, top + 54, value, value_size, color=T.TEXT, weight="bold",
+           font="mono")
+    if sub:
+        for i, ln in enumerate(_wrap_px(sub, w - 60, 20)[:2]):
+            c.text(x + 34, top + 120 + i * 26, ln, 20, color=T.MUTED)
+
+
+# 1) COVER — Earnings-Hook, Logo, Beat-Badge, die zwei Hero-Zahlen
+def slide_earnings_cover(c, e, date_iso):
+    col = earn_color(e)
+    footer_line = c.H - 150
+
+    lw = c.draw_logo(MX, 64, 46)
+    if not lw:
+        c.text(MX, 68, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 74, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+
+    beat_word = "BEAT" if (e.get("eps_surprise_pct") or 0) >= 0 else "MISS"
+    _eyebrow_pill(c, MX, 150, f"EARNINGS · {e['quarter']} · {beat_word}", col=col)
+
+    hy = _draw_paragraph(c, MX, 232, earnings_headline(e), 56, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=70, max_lines=3)
+
+    # Kette: Logo-Karte + Name + zwei Hero-Kacheln, zwischen Hook & Footer zentriert
+    card_h, sub_h, stat_h = 210, 44, 172
+    gap_card_sub, gap_sub_stat = 16, 40
+    chain_h = card_h + gap_card_sub + sub_h + gap_sub_stat + stat_h
+    card_top = hy + max(20, (footer_line - hy - chain_h) // 2)
+
+    _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, e["ticker"])
+
+    sub = _e_name(e) + (f"  ·  {_e_sector(e)}" if _e_sector(e) else "")
+    sub_y = card_top + card_h + gap_card_sub
+    c.text(MX, sub_y, sub, TY_BODY, color=T.TEXT)
+
+    # Zwei Hero-Kacheln: EPS-Surprise + Kurssprung
+    stat_top = sub_y + sub_h + gap_sub_stat
+    gap = 24
+    tw = (c.W - 2 * MX - gap) // 2
+    surp = e.get("eps_surprise_pct")
+    cur = e.get("currency", "")
+    eps_sub = (f"Ist {cur}{E.fmt_num(e.get('eps_actual'))} · "
+               f"Erw. {cur}{E.fmt_num(e.get('eps_estimate'))}")
+    _stat_tile(c, MX, stat_top, tw, stat_h, "EPS-SURPRISE",
+               E.fmt_pct_pts(surp, 0), eps_sub, col)
+    jump = e.get("jump_pct")
+    _stat_tile(c, MX + tw + gap, stat_top, tw, stat_h, "KURSSPRUNG",
+               E.fmt_pct(jump, 1), f"am Tag der Zahlen ({short_date(e['report_date'])})",
+               col if (jump or 0) >= 0 else T.RED)
+    analysis_footer(c)
+
+
+# 2) DER BEAT IN ZAHLEN — EPS & Umsatz Ist vs. Erwartung
+def slide_earnings_numbers(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Der Beat in Zahlen", 42, weight="bold")
+    c.text(MX, 240, f"{e['quarter']} · Ist gegen Analysten-Erwartung", TY_SUB,
+           color=T.MUTED)
+    cur = e.get("currency", "")
+
+    def compare_tile(top, label, actual, estimate, unit, surprise, surp_dec=0):
+        h = 250
+        c.tile(MX, top, c.W - 2 * MX, h, color=T.PANEL)
+        c.tile(MX, top, 12, h, color=col, radius=6)
+        c.text(MX + 40, top + 26, label, 26, color=col, weight="bold")
+        # Surprise-Chip rechts
+        chip = E.fmt_pct_pts(surprise, surp_dec) if surprise is not None else ""
+        if chip:
+            cw = 60 + int(len(chip) * 22)
+            c.tile(c.W - MX - cw - 24, top + 22, cw, 60, color=T.PANEL_HI, radius=30)
+            c.text(c.W - MX - cw / 2 - 24, top + 32, chip, 34, color=col,
+                   weight="bold", ha="center", font="mono")
+        # Ist (groß, grün) vs. Erwartet (gedämpft)
+        col_w = (c.W - 2 * MX - 80) // 2
+        iy = top + 110
+        c.text(MX + 40, iy, "IST", 22, color=T.MUTED, weight="bold")
+        c.text(MX + 40, iy + 34, f"{cur}{E.fmt_num(actual)}", 64,
+               color=T.TEXT, weight="bold", font="mono")
+        c.text(MX + 40, iy + 116, unit, TY_SUB, color=T.MUTED)
+        ex = MX + 40 + col_w
+        c.text(ex, iy, "ERWARTET", 22, color=T.MUTED, weight="bold")
+        c.text(ex, iy + 34, f"{cur}{E.fmt_num(estimate)}", 64,
+               color=T.MUTED, weight="bold", font="mono")
+        c.text(ex, iy + 116, unit, TY_SUB, color=T.MUTED)
+        return top + h
+
+    y = compare_tile(300, "GEWINN JE AKTIE (ADJ.)", e.get("eps_actual"),
+                     e.get("eps_estimate"), "je Aktie", e.get("eps_surprise_pct"))
+    y = compare_tile(y + 28, "UMSATZ", e.get("revenue_actual"),
+                     e.get("revenue_estimate"), e.get("revenue_unit", ""),
+                     e.get("revenue_surprise_pct"), surp_dec=1)
+
+    # Kontext-Chips (GAAP-EPS / RS-Score), wenn vorhanden
+    chips = []
+    if e.get("eps_gaap") is not None:
+        chips.append(("GAAP-EPS", f"{cur}{E.fmt_num(e['eps_gaap'])}"))
+    if e.get("rs_score") is not None:
+        chips.append(("RS-SCORE", f"{e['rs_score']:.0f}"))
+    if chips:
+        cy = y + 30
+        cw = (c.W - 2 * MX - (len(chips) - 1) * 24) // max(1, len(chips))
+        for i, (lab, val) in enumerate(chips):
+            cx = MX + i * (cw + 24)
+            c.tile(cx, cy, cw, 96, color=T.PANEL_HI)
+            c.text(cx + 28, cy + 18, lab, 20, color=T.MUTED, weight="bold")
+            c.text(cx + 28, cy + 46, val, 36, color=T.TEXT, weight="bold", font="mono")
+    analysis_footer(c)
+
+
+# 3) KURSREAKTION — Candle-Chart um den Meldetag, Sprungtag markiert
+def slide_earnings_reaction(c, e, date_iso):
+    from matplotlib.patches import Rectangle
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Die Kursreaktion", 42, weight="bold")
+    c.text(MX, 240, f"Markt-Antwort auf die {e['quarter']}-Zahlen", TY_SUB,
+           color=T.MUTED)
+
+    candles = e.get("reaction_ohlcv") or []
+    idx = e.get("reaction_idx")
+    chart_top, chart_h = 310, int(c.H * 0.42)
+    if candles:
+        ax = c.chart_axes(MX, chart_top, c.W - 2 * MX, chart_h)
+        n = len(candles)
+        for i, cd in enumerate(candles):
+            o, h, l, cl = cd["o"], cd["h"], cd["l"], cd["c"]
+            up = cl >= o
+            ccol = T.GREEN if up else T.RED
+            is_evt = (i == idx)
+            lw = 2.4 if is_evt else 1.0
+            ax.plot([i, i], [l, h], color=ccol, lw=lw, zorder=3 if is_evt else 1)
+            body_h = max(abs(cl - o), (h - l) * 0.02)
+            ax.add_patch(Rectangle((i - 0.34, min(o, cl)), 0.68, body_h,
+                                   facecolor=ccol, edgecolor=ccol,
+                                   lw=lw, zorder=3 if is_evt else 2))
+            if is_evt:
+                # Highlight-Säule hinter dem Meldetag
+                ax.axvspan(i - 0.5, i + 0.5, color=col, alpha=0.10, zorder=0)
+
+        all_h = [cd["h"] for cd in candles]
+        all_l = [cd["l"] for cd in candles]
+        pad = (max(all_h) - min(all_l)) * 0.10
+        ax.set_xlim(-1, n)
+        ax.set_ylim(min(all_l) - pad, max(all_h) + pad)
+
+        # Prev-Close-Referenzlinie + Sprung-Annotation
+        if idx is not None and e.get("jump_prev_close"):
+            ax.axhline(e["jump_prev_close"], color=T.MUTED, lw=1.2,
+                       ls=(0, (5, 5)), zorder=2)
+            jlabel = E.fmt_pct(e.get("jump_pct"), 1)
+            # Annotation nach oben-links, damit sie nicht über die Folgekerzen läuft
+            ax.annotate(jlabel, (idx - 0.4, candles[idx]["h"]),
+                        xytext=(-4, 18), textcoords="offset points",
+                        color=col, fontsize=16, fontweight="bold",
+                        ha="right", fontfamily=_FONTS["mono"])
+            ax.annotate(f"Zahlen {short_date(e['report_date'])}",
+                        (idx, min(all_l) - pad), xytext=(0, 4),
+                        textcoords="offset points", color=col, fontsize=13,
+                        fontweight="bold", ha="center", fontfamily=_FONTS["sans"])
+        # Preis-Labels rechts
+        for yv in (min(all_l), (min(all_l) + max(all_h)) / 2, max(all_h)):
+            ax.text(n - 0.5, yv, f"{yv:.0f}", color=T.MUTED, fontsize=12,
+                    va="center", ha="left", fontfamily=_FONTS["mono"])
+    else:
+        c.text(MX, chart_top + 40, "Keine Kursdaten verfügbar.", TY_BODY,
+               color=T.MUTED)
+
+    # Kacheln: Kurssprung + Schlusskurs am Meldetag
+    ky = chart_top + chart_h + 70
+    gap = 24
+    tw = (c.W - 2 * MX - gap) // 2
+    jump = e.get("jump_pct")
+    _stat_tile(c, MX, ky, tw, 172, "KURSSPRUNG",
+               E.fmt_pct(jump, 1),
+               f"Vortag {E.fmt_num(e.get('jump_prev_close'))} → "
+               f"{E.fmt_num(e.get('jump_close'))}",
+               col if (jump or 0) >= 0 else T.RED)
+    _stat_tile(c, MX + tw + gap, ky, tw, 172, "SCHLUSSKURS",
+               f"{e.get('currency','')}{E.fmt_num(e.get('jump_close'))}",
+               f"am {fmt_de_date(e['report_date'])}", T.BLUE)
+    analysis_footer(c)
+
+
+# 4) GUIDANCE & TURNAROUND-TREIBER
+def slide_earnings_guidance(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Ausblick & Treiber", 42, weight="bold")
+    c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
+
+    y = 300
+    # Guidance-Kachel (volle Breite)
+    if e.get("guidance"):
+        glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
+        gh = 70 + len(glines) * TY_BODY_LH + 20
+        c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
+        c.tile(MX, y, 12, gh, color=col, radius=6)
+        c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
+        _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
+                        c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
+        y += gh + 26
+
+    # Turnaround-Kennzahl
+    if e.get("key_metric_value"):
+        klines = _wrap_px(e.get("key_metric_note", ""), c.W - 2 * MX - 360, TY_SUB)
+        kh = max(150, 60 + len(klines) * 30 + 30)
+        c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
+        c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
+               color=T.BLUE, weight="bold")
+        c.text(MX + 34, y + 56, e["key_metric_value"], 60, color=T.TEXT,
+               weight="bold", font="mono")
+        if klines:
+            for i, ln in enumerate(klines[:4]):
+                c.text(MX + 360, y + 30 + i * 30, ln, TY_SUB, color=T.MUTED)
+        y += kh + 26
+
+    # Treiber-Bullets
+    drivers = e.get("drivers") or []
+    if drivers:
+        c.text(MX, y + 6, "DIE TREIBER", 22, color=T.MUTED, weight="bold")
+        y += 48
+        for d in drivers[:4]:
+            dl = _wrap_px(d, c.W - 2 * MX - 56, TY_BODY)
+            c.ax.scatter(MX + 12, c.y(y + 16), s=120, marker="o",
+                         color=col, edgecolor="none", zorder=11)
+            for i, ln in enumerate(dl[:2]):
+                c.text(MX + 50, y + i * TY_BODY_LH, ln, TY_BODY, color=T.TEXT)
+            y += max(TY_BODY_LH, len(dl[:2]) * TY_BODY_LH) + 14
+    analysis_footer(c)
+
+
+# 5) EINORDNUNG — Brücke vom Beat zur Investment-These (Verdict-Badge)
+def slide_earnings_context(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    a = e.get("analysis")
+    c.text(MX, 184, "Einordnung", 42, weight="bold")
+    c.text(MX, 240, "Was die Zahlen für die These bedeuten", TY_SUB, color=T.MUTED)
+
+    y = 306
+    if e.get("context"):
+        y = _draw_paragraph(c, MX, y, e["context"], TY_BODY, c.W - 2 * MX,
+                            color=T.TEXT, line_h=TY_BODY_LH, max_lines=12) + 30
+
+    if a:
+        _verdict_badge(c, MX, max(y, c.H - 470), a["verdict"], a["score"], h=130)
+        c.text(MX, max(y, c.H - 470) + 150,
+               "Aus der vollständigen KI-Aktienbewertung — Szenarien & Kursziele "
+               "auf den folgenden Slides.", TY_SUB, color=T.MUTED)
+    analysis_footer(c)
+
+
+# 9) EARNINGS-FAZIT / CTA — Speichern, Frage, Quellen-Hinweis
+def slide_earnings_cta(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    name = _e_name(e)
+    c.text(MX, 184, "Speichern & mitreden", TY_H1, weight="bold")
+
+    # Save-Box
+    c.tile(MX, 272, c.W - 2 * MX, 150, color=T.PANEL)
+    c.tile(MX, 272, 12, 150, color=col, radius=6)
+    _draw_bookmark(c, MX + 46, 308, 44, 78, col)
+    c.text(MX + 130, 298, "Speichere die Earnings-Analyse", TY_BODY, weight="bold")
+    c.text(MX + 130, 298 + TY_BODY_LH,
+           f"und behalte {name} zur nächsten Zahlen-Saison im Blick.",
+           TY_SUB, color=T.MUTED)
+
+    # Community-Frage
+    q_text = (f"{name} nach den Zahlen: echter Turnaround oder Strohfeuer? "
+              f"Schreib deine These in die Kommentare.")
+    q_lines = _wrap_px(q_text, c.W - 2 * MX - 80, TY_BODY)
+    q_box_h = 16 + TY_BODY_LH + len(q_lines) * TY_BODY_LH + 24
+    save_box_bottom = 272 + 150
+    cta_y = c.H - 330
+    q_top = save_box_bottom + (cta_y - save_box_bottom - q_box_h) // 2
+    c.tile(MX, q_top, c.W - 2 * MX, q_box_h, color=T.PANEL_HI)
+    c.text(MX + 40, q_top + 16, "DEINE MEINUNG?", TY_SUB, color=col, weight="bold")
+    _draw_paragraph(c, MX + 40, q_top + 16 + TY_BODY_LH, q_text, TY_BODY,
+                    c.W - 2 * MX - 80, color=T.TEXT, weight="bold", line_h=TY_BODY_LH)
+
+    c.text(c.W // 2, cta_y, "Folge für Earnings & Profi-Analysen", TY_BODY,
+           color=T.TEXT, weight="bold", ha="center")
+    c.text(c.W // 2, cta_y + TY_BODY_LH, "faceless · datengetrieben · unabhängig",
+           TY_SUB, color=T.MUTED, ha="center")
+    analysis_footer(c)
+
+
+# ── Earnings-Reel (9:16): kurzer Teaser ───────────────────────────────────────
+def earnings_reel_header(c, date_iso, e):
+    lw = c.draw_logo(MX, 80, 50)
+    if not lw:
+        c.text(MX, 84, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 92, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+    col = earn_color(e)
+    beat_word = "BEAT" if (e.get("eps_surprise_pct") or 0) >= 0 else "MISS"
+    label = f"EARNINGS · {e['quarter']} · {beat_word}"
+    w = 56 + int(len(label) * 12)
+    c.tile(MX, 168, w, 54, color=T.PANEL_HI, radius=27)
+    c.tile(MX + 20, 168 + 20, 14, 14, color=col, radius=7)
+    c.text(MX + 46, 182, label, 18, color=col, weight="bold")
+
+
+def slide_earnings_reel_hook(c, e, date_iso):
+    earnings_reel_header(c, date_iso, e)
+    col = earn_color(e)
+    hy = _draw_paragraph(c, MX, 290, earnings_headline(e), 56, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=70, max_lines=3)
+    card_top = max(hy + 50, 560)
+    _logo_card(c, MX, card_top, c.W - 2 * MX, 400, e["ticker"])
+    sub = _e_name(e) + (f"  ·  {_e_sector(e)}" if _e_sector(e) else "")
+    c.text(MX, card_top + 400 + 30, sub, 24, color=T.MUTED)
+    # Hero-Kacheln
+    sy = card_top + 400 + 90
+    gap = 24
+    tw = (c.W - 2 * MX - gap) // 2
+    _stat_tile(c, MX, sy, tw, 172, "EPS-SURPRISE",
+               E.fmt_pct_pts(e.get("eps_surprise_pct"), 0), "Ist vs. Erwartung", col)
+    jump = e.get("jump_pct")
+    _stat_tile(c, MX + tw + gap, sy, tw, 172, "KURSSPRUNG",
+               E.fmt_pct(jump, 1), f"am {short_date(e['report_date'])}",
+               col if (jump or 0) >= 0 else T.RED)
+    analysis_footer(c)
+
+
+def slide_earnings_reel_cta(c, e, date_iso):
+    """Hybrid-Trick: das Reel leitet auf den vollständigen Karussell-Post um."""
+    earnings_reel_header(c, date_iso, e)
+    a = e.get("analysis")
+    col = earn_color(e)
+    c.text(MX, 440, "Die ganze", 56, weight="bold")
+    c.text(MX, 512, "Earnings-Analyse?", 56, color=col, weight="bold")
+    box_top = 680
+    c.tile(MX, box_top, c.W - 2 * MX, 470, color=T.PANEL)
+    c.tile(MX, box_top, 12, 470, color=col, radius=6)
+    verdict_txt = f" Verdict: {a['verdict']}." if a else ""
+    _draw_paragraph(c, MX + 50, box_top + 50,
+                    f"Alle Zahlen, der Turnaround-Check und die Kursziel-Szenarien "
+                    f"zu {e['ticker']} findest du als Karussell-Post auf meinem "
+                    f"Profil.{verdict_txt}", 30, c.W - 2 * MX - 100,
+                    color=T.TEXT, line_h=46, max_lines=7)
+    c.text(MX + 50, box_top + 350, "Profil öffnen", 26, color=T.MUTED)
+    c.text(MX + 50, box_top + 392, HANDLE, 40, color=col, weight="bold")
+    for i in range(3):
+        c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + 380), s=170,
+                     marker="^", color=col, edgecolor="none", zorder=12)
+    c.text(MX, 1230, f"Folge {HANDLE} für Earnings & Analysen", 24, color=T.MUTED)
     analysis_footer(c)
