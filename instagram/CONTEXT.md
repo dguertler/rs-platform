@@ -211,9 +211,70 @@ Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 - Abhängigkeiten: `pip install -r instagram/requirements.txt` (matplotlib,
   numpy, Pillow, imageio, imageio-ffmpeg, **pyphen**).
 
+## 11b. Dritter Post-Typ: Earnings-Analyse-Posts
+
+Aus einem **Quartalsbericht mit Beat** wird ein eigenständiger Carousel-Post
+(8–10 Slides) + Reel-Teaser, mit **Fokus auf dem Earnings-Ereignis**. Vollständiger
+Ablauf + JSON-Schema: `PROMPT.md`, Abschnitt „Dritter Post-Typ: EARNINGS-ANALYSE".
+
+**Befehl:**
+```bash
+python3 -m instagram.generate --earnings CNC \
+  --headline "Centene: Turnaround bestätigt — Q1-Gewinn sprengt die Erwartung"
+```
+Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (≈9 PNG) ·
+`reel/` (4 PNG) · `caption.txt`. Nichts wird hochgeladen — manuell posten.
+
+**Drei Datenquellen:**
+1. `instagram/data/earnings/<TICKER>.json` — Beat-Zahlen **aus dem Web** (EPS
+   Ist/Erwartung/Surprise, Umsatz, Guidance, Turnaround-Kennzahl, Treiber,
+   Kontext). Claude befüllt + committet die Datei (yfinance ist in der Cloud
+   geblockt → Zahlen aus IR/SEC-8-K/Finanzportalen).
+2. **Kurssprung + Reaktions-Chart** — live aus `data/rs_*.json` berechnet
+   (`report_date` → Close-zu-Close + OHLCV-Fenster). NICHT in der JSON dupliziert.
+3. **Basis-Analyse** `analyses/TICKER.md` (Pflicht) — Verdict/Szenarien/Kursziele/
+   Fazit. Fehlt sie → zuerst Analyse erzeugen; ist sie älter als der Earnings-
+   Termin → vorher neu generieren.
+
+**Beat-Kandidaten** liefert der bestehende `check_earnings.py` (tägliche
+Earnings-Mail/Telegram): ≥ 5 % Kurssprung **+** ≥ 10 % EPS-Surprise **+** Umsatz
+YoY ≥ 0. Dieselben Schwellen sind in `instagram/earnings.py` gespiegelt.
+
+**Slide-Reihenfolge:** Cover (EARNINGS/BEAT-Pille + Beat-Hook + Logo + Hero-Zahlen)
+· Der Beat in Zahlen (EPS+Umsatz Ist/Erwartung) · Die Kursreaktion (Candle-Chart,
+Sprungtag markiert) · Ausblick & Treiber (Guidance + Turnaround-Kennzahl) ·
+Einordnung (+ Verdict-Badge) · Szenarien 12–18M · Langfrist 3–5J · Profi-Fazit ·
+Speichern & mitreden. Datengetriebene Slides entfallen automatisch, wenn Felder
+fehlen.
+
+**Grid-Logik:** Wochenpost = Equity-Kurve · Analyse = Logo + Verdict-Badge ·
+**Earnings = Logo + grüne EARNINGS/BEAT-Pille** (akzentfarbe Grün=Beat / Rot=Miss).
+
+**Code-Karte:**
+- `instagram/earnings.py` — `load_earnings()` (JSON + Kurssprung aus RS-JSON +
+  geparste Basis-Analyse unter `e["analysis"]`), `price_jump()`,
+  `reaction_window()`, `fmt_num`/`fmt_pct`/`fmt_pct_pts`. Schnelltest:
+  `python3 -m instagram.earnings CNC`.
+- `instagram/render.py` — `slide_earnings_*` (cover, numbers, reaction, guidance,
+  context, cta) + `slide_earnings_reel_*` (hook, cta) + `earnings_headline()` +
+  `_stat_tile`/`_eyebrow_pill`. Reused: `slide_analysis_scenarios/-longterm/-fazit`
+  + `slide_reel_scenarios/-takeaway` (aus `e["analysis"]`).
+- `instagram/generate.py` — CLI `--earnings` / `--headline`; `build_earnings`,
+  `build_earnings_reel`, `caption_earnings`.
+- `instagram/data/earnings/<TICKER>.json` — persistierte Beat-Zahlen (Beispiel:
+  `CNC.json` — Q1 2026, +62 % EPS-Surprise, +14 % Kurssprung).
+
+**Wichtig (Render-Engine):** Dollarzeichen in Texten werden NICHT als
+LaTeX-Mathmodus interpretiert (`matplotlib.rcParams["text.parse_math"] = False`
+in render.py) — sonst würden „$3,37 …" kursiv und ohne Leerzeichen gesetzt.
+
+**Status / Beispiel:** CNC Q1 2026 (Earnings 28.04.) ist vollständig umgesetzt &
+getestet (`instagram/data/earnings/CNC.json`). Nächste Schritte: weitere
+Beat-Ticker aus der Earnings-Mail als Posts; Firmenlogos hochladen.
+
 ## 12. Design-System & Typografie-Regeln (render.py — verbindlich für alle Slide-Typen)
 
-Beide Post-Typen (Wochenpost + Analyse) verwenden **dieselbe** Render-Engine
+Alle drei Post-Typen (Wochenpost + Analyse + Earnings) verwenden **dieselbe** Render-Engine
 (`instagram/render.py`). Folgende Regeln gelten für alle Slides — Änderungen
 hier immer in render.py umsetzen und als Konstante/Parameter fixieren.
 

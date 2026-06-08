@@ -106,6 +106,30 @@ Wenn der Nutzer schreibt `Instagram-Analyse TICKER` / `Analyse-Post TICKER`
    **kein Auto-Upload**. Firmenlogo unter `instagram/assets/logos/TICKER.png`.
    Kein aktueller Kurs, keine GWS-Ampel/Breakout auf den Slides.
 
+### Instagram-Earnings-Analyse (Quartalszahlen mit Beat)
+
+Wenn der Nutzer schreibt `Earnings-Analyse TICKER für Insta` / `Earnings-Analyse
+TICKER` (eigenständiger Post mit Fokus auf einen Earnings-Termin mit übertroffenen
+Prognosen — z. B. Kandidaten aus der `check_earnings.py`-Mail: ≥ 5 % Kurssprung +
+≥ 10 % EPS-Surprise + Umsatz YoY ≥ 0):
+
+1. `instagram/CONTEXT.md` (Abschnitt 11b) + `PROMPT.md` (Abschnitt „Dritter
+   Post-Typ: EARNINGS-ANALYSE") lesen.
+2. **Basis-Analyse sicherstellen:** `analyses/TICKER.md` muss existieren (neues
+   11-Abschnitte-Schema). Fehlt sie → zuerst „Analysiere TICKER". Älter als der
+   Earnings-Termin → vorher neu generieren; danach unverändert nutzen.
+3. **Earnings-Zahlen aus dem Web** holen und in `instagram/data/earnings/TICKER.json`
+   schreiben (Schema in `PROMPT.md`; Pflicht: ticker, quarter, report_date, source,
+   eps_actual/_estimate/_surprise_pct). Der Kurssprung wird automatisch aus
+   `data/rs_*.json` berechnet — nicht eintragen.
+4. Generieren — am besten mit individueller Beat-Hook:
+   ```bash
+   python3 -m instagram.generate --earnings TICKER --headline "<Beat/Turnaround-These>"
+   ```
+5. Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (≈9 PNG),
+   `reel/` (4 PNG), `caption.txt` zeigen — **kein Auto-Upload**. Danach die
+   `instagram/data/earnings/TICKER.json` committen (out/-Slides sind gitignored).
+
 ## Monetarisierung / Controlling
 
 Geschäfts-/Umsatz-Ebene (5 Säulen, Content-Pipeline, KPI-Funnel) liegt in

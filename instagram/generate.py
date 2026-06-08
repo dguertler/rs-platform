@@ -18,6 +18,7 @@ from datetime import datetime
 
 from . import data, render, report, store
 from . import analysis as ana
+from . import earnings as earn
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -567,6 +568,141 @@ def caption_analysis(a):
     return assemble(0, False, False)[:2180].rsplit(" ", 1)[0] + " …"
 
 
+# ── Earnings-Analyse-Post (instagram/data/earnings/TICKER.json) ───────────────
+def build_earnings(fmt, e, date_iso, outdir):
+    """Earnings-Carousel: Beat-Story + Verknüpfung zur Investment-These.
+    Eigenständig (8–10 Slides); die Basis-Analyse (e['analysis']) liefert
+    Verdict, Szenarien & Kursziele."""
+    saved = []
+    emit = _emitter(fmt, outdir, saved)
+    a = e.get("analysis")
+
+    emit("cover",     lambda c: render.slide_earnings_cover(c, e, date_iso))
+    emit("zahlen",    lambda c: render.slide_earnings_numbers(c, e, date_iso))
+    if e.get("reaction_ohlcv"):
+        emit("reaktion", lambda c: render.slide_earnings_reaction(c, e, date_iso))
+    if e.get("guidance") or e.get("drivers") or e.get("key_metric_value"):
+        emit("ausblick", lambda c: render.slide_earnings_guidance(c, e, date_iso))
+    if a and e.get("context"):
+        emit("einordnung", lambda c: render.slide_earnings_context(c, e, date_iso))
+    # Investment-These aus der Basis-Analyse (Szenarien + Langfrist + Fazit)
+    if a and _has_scenarios(a):
+        emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
+    if a and _has_longterm(a):
+        emit("langfrist", lambda c: render.slide_analysis_longterm(c, a, date_iso))
+    if a:
+        emit("fazit", lambda c: render.slide_analysis_fazit(c, a, date_iso))
+    emit("cta",       lambda c: render.slide_earnings_cta(c, e, date_iso))
+
+    import zipfile as _zf
+    zip_path = os.path.join(os.path.dirname(outdir), f"carousel_{e['ticker']}.zip")
+    with _zf.ZipFile(zip_path, "w", _zf.ZIP_DEFLATED) as zf:
+        for p in sorted(saved):
+            zf.write(p, os.path.basename(p))
+    saved.append(zip_path)
+    return saved
+
+
+def build_earnings_reel(e, date_iso, outdir):
+    """Reel-Teaser (9:16): Beat-Hook → Szenarien → Hybrid-CTA aufs Karussell."""
+    saved = []
+    emit = _emitter("reel", outdir, saved)
+    a = e.get("analysis")
+    emit("hook", lambda c: render.slide_earnings_reel_hook(c, e, date_iso))
+    if a and _has_scenarios(a):
+        emit("szenarien", lambda c: render.slide_reel_scenarios(c, a, date_iso))
+    if a:
+        emit("fazit", lambda c: render.slide_reel_takeaway(c, a, date_iso))
+    emit("cta", lambda c: render.slide_earnings_reel_cta(c, e, date_iso))
+    return saved
+
+
+def caption_earnings(e):
+    """Instagram-Caption für den Earnings-Post. SEO: erste Zeile mit Keyword
+    'Earnings-Analyse'. Beat-Zahlen + Guidance + These + Disclaimer + Hashtags,
+    auf 2.200 Zeichen zugeschnitten."""
+    a = e.get("analysis")
+    cur = e.get("currency", "")
+    name = render.A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
+    tic = e["ticker"].replace(".", "").lower()
+    beat_word = "Beat" if (e.get("eps_surprise_pct") or 0) >= 0 else "Miss"
+    head = f"{name} ({e['ticker']}) — Earnings-Analyse {e['quarter']}: {beat_word}"
+
+    DISC = render.T.DISCLAIMER_ANALYSE_SHORT
+    sector_tags = {
+        "Technology": "#halbleiter #technologieaktien #techaktien",
+        "Healthcare": "#healthcare #pharmaaktien #gesundheit #medicaid",
+        "Industrials": "#industrie #industrieaktien",
+        "Energy": "#energie #energieaktien",
+        "Financial Services": "#finanzsektor #banken #versicherung",
+    }.get((a or {}).get("sector", ""), "")
+    tags = (
+        f"#earnings #quartalszahlen #earningsseason #aktien #aktienanalyse "
+        f"#börse #boersewissen #geldanlage #finanzbildung #investing "
+        f"#stockanalysis #turnaround #{tic} #{tic}stock {sector_tags} "
+        f"#aialphaselection"
+    ).rstrip()
+
+    def assemble(with_context, with_cases, with_drivers):
+        P = [f"📊 {head}\n"]
+        # Beat-Zahlen
+        beat = []
+        if e.get("eps_actual") is not None:
+            beat.append(f"› EPS {cur}{earn.fmt_num(e['eps_actual'])} vs. "
+                        f"{cur}{earn.fmt_num(e.get('eps_estimate'))} erwartet "
+                        f"({earn.fmt_pct_pts(e.get('eps_surprise_pct'), 0)})")
+        if e.get("revenue_actual") is not None:
+            # revenue_unit ('Mrd. $') trägt bereits die Währung → kein cur-Präfix
+            beat.append(f"› Umsatz {earn.fmt_num(e['revenue_actual'])} "
+                        f"{e.get('revenue_unit','')} vs. "
+                        f"{earn.fmt_num(e.get('revenue_estimate'))} erwartet "
+                        f"({earn.fmt_pct_pts(e.get('revenue_surprise_pct'), 1)})")
+        if e.get("jump_pct") is not None:
+            beat.append(f"› Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
+        if beat:
+            P.append("🚀 Die Zahlen:\n" + "\n".join(beat) + "\n")
+        if e.get("guidance"):
+            P.append("🎯 Ausblick: " + e["guidance"] + "\n")
+        if e.get("key_metric_value"):
+            P.append(f"🔑 {e['key_metric_label']}: {e['key_metric_value']} "
+                     f"— {e.get('key_metric_note','')}".rstrip(" —") + "\n")
+        if with_drivers and e.get("drivers"):
+            P.append("📌 Treiber:\n" + "\n".join(
+                f"› {d}" for d in e["drivers"][:3]) + "\n")
+        if with_context and e.get("context"):
+            P.append("🧭 Einordnung: " + e["context"] + "\n")
+        # Investment-These aus der Basis-Analyse
+        if a:
+            if a.get("verdict"):
+                scal = f" · Score {a['score']}/100" if a.get("score") is not None else ""
+                P.append(f"⚖️ KI-Verdict: {a['verdict']}{scal}\n")
+            if _has_scenarios(a) and with_cases:
+                sc = a["scenarios"]
+                emo = {"bull": "🟢", "base": "🔵", "bear": "🔴"}
+                lines = []
+                for key, nm in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
+                    prob = sc[key]["prob"]
+                    rng = ana.fmt_range(sc[key]["range"])
+                    seg = f"{emo[key]} {nm} {prob}%" if prob is not None else f"{emo[key]} {nm}"
+                    if rng:
+                        seg += f" · Ziel {rng}"
+                    lines.append(seg)
+                P.append("📈 Szenarien · 12–18 Monate:\n" + "\n".join(lines) + "\n")
+            if a.get("fazit_core"):
+                P.append("💡 Fazit: " + a["fazit_core"] + "\n")
+        P.append("👉 Ganze Analyse im Karussell. Folge für Earnings & Analysen.\n")
+        P.append("❗ " + DISC)
+        P.append("\n" + tags)
+        return "\n".join(P)
+
+    for ctx_, cases, drv in ((True, True, True), (True, True, False),
+                             (False, True, False), (False, False, False)):
+        cap = assemble(ctx_, cases, drv)
+        if len(cap) <= 2200:
+            return cap
+    return assemble(False, False, False)[:2180].rsplit(" ", 1)[0] + " …"
+
+
 def build(fmt, ctx, outdir):
     os.makedirs(outdir, exist_ok=True)
     date_iso = ctx["date_iso"]
@@ -621,7 +757,8 @@ def main():
     ap.add_argument("--kw", type=int, help="Kalenderwoche – baut den Wochenpost aus instagram/data/")
     ap.add_argument("--report", help="Pfad zu instagram/reports/KW<NN>.json (manueller Modus)")
     ap.add_argument("--analysis", help="Ticker oder Pfad zu analyses/TICKER.md (Analyse-Post)")
-    ap.add_argument("--headline", help="Eigene Cover-Headline (Frage/These) für den Analyse-Post")
+    ap.add_argument("--earnings", help="Ticker oder Pfad zu instagram/data/earnings/TICKER.json (Earnings-Post)")
+    ap.add_argument("--headline", help="Eigene Cover-Headline (Frage/These) für den Analyse-/Earnings-Post")
     ap.add_argument("--hook", help="Dynamic-Hook-Schlagzeile für Slide 1 (Wochenpost)")
     ap.add_argument("--why", help="Strategisches „Warum“ (KI-Kontext-Slide, Wochenpost)")
     ap.add_argument("--frage", help="Dynamische Interaktions-Frage für die CTA-Slide")
@@ -630,6 +767,57 @@ def main():
                                    "in der Zukunft liegt).")
     args = ap.parse_args()
     today = datetime.utcnow().strftime("%Y-%m-%d")
+
+    # ── Earnings-Post aus instagram/data/earnings/TICKER.json ─────────────────
+    if args.earnings:
+        date_iso = args.date or today
+        e = earn.load_earnings(args.earnings)
+        if e.get("analysis") is None:
+            print(f"⚠ Keine Basis-Analyse gefunden: analyses/{e['ticker'].lower()}.md")
+            print("  Bitte zuerst die Aktienanalyse erzeugen (siehe analyses/PROMPT.md),")
+            print("  dann den Earnings-Post bauen. Szenarien/Verdict/Fazit fehlen sonst.")
+        if args.headline:
+            e["headline"] = args.headline
+        slug = e["ticker"].replace(".", "_")
+        base = os.path.join(ROOT, "out", "instagram", f"{date_iso}_EARNINGS_{slug}")
+        fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
+        all_saved = []
+        for fmt in fmts:
+            if fmt == "reel":
+                all_saved += build_earnings_reel(e, date_iso, os.path.join(base, fmt))
+            else:
+                all_saved += build_earnings(fmt, e, date_iso, os.path.join(base, fmt))
+        os.makedirs(base, exist_ok=True)
+        with open(os.path.join(base, "caption.txt"), "w") as f:
+            f.write(caption_earnings(e))
+
+        reel_dir = os.path.join(base, "reel")
+        if "reel" in fmts and os.path.isdir(reel_dir):
+            frames = sorted(os.path.join(reel_dir, f) for f in os.listdir(reel_dir)
+                            if f.endswith(".png"))
+            try:
+                from . import video
+                mp4 = video.build_reel_video(frames, os.path.join(base, "reel.mp4"))
+                all_saved.append(mp4)
+                print(f"  🎬 Reel-Video: {os.path.relpath(mp4, ROOT)}")
+            except Exception as ex:
+                print(f"  ⚠ Reel-MP4 übersprungen ({ex.__class__.__name__}: {ex}).")
+
+        jp = e.get("jump_pct")
+        print(f"✓ {len(all_saved)} Dateien (Earnings {e['ticker']} {e['quarter']}) in {base}")
+        print(f"  EPS-Surprise {earn.fmt_pct_pts(e.get('eps_surprise_pct'),0)} · "
+              f"Kurssprung {render.fmt_pct(jp) if jp is not None else '–'} · "
+              f"Beat {'ja' if e.get('beat') else 'NEIN'}")
+        if not e.get("meets_jump") or not e.get("meets_surprise"):
+            print(f"  ⚠ Schwellen-Hinweis: Kurssprung≥5% {e.get('meets_jump')} · "
+                  f"EPS-Surprise≥10% {e.get('meets_surprise')} "
+                  f"(Post wird trotzdem gebaut)")
+        if not render.T.company_logo_file(e["ticker"]):
+            print(f"  ⚠ Kein Firmenlogo — Cover nutzt Wortmarke. "
+                  f"Logo: instagram/assets/logos/{slug}.png")
+        for p in all_saved:
+            print("  ", os.path.relpath(p, ROOT))
+        return
 
     # ── Analyse-Post aus analyses/TICKER.md ───────────────────────────────────
     if args.analysis:

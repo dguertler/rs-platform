@@ -345,6 +345,108 @@ Disclaimer, Hashtags). Reicht der Platz nicht, kürzt der Generator automatisch
 (weniger Bullets / ohne Langfrist). Die ausführliche Roh-Analyse bleibt in
 `analyses/TICKER.md` (Archiv), wird aber NICHT auf Instagram verlinkt.
 
+## Dritter Post-Typ: EARNINGS-ANALYSE (aus Quartalszahlen)
+
+**Trigger:** `Earnings-Analyse TICKER für Insta` (z. B. nach einem Earnings-Termin
+mit übertroffenen Prognosen) bzw. `Earnings-Analyse TICKER`.
+
+Macht aus einem **Quartalsbericht mit Beat** einen eigenständigen Carousel-Post
+(8–10 Slides) + Reel-Teaser. Anders als der Analyse-Post liegt der Fokus auf dem
+**Earnings-Ereignis** (Beat-Zahlen, Kurssprung, Guidance) — die Slide 1 macht
+sofort klar: *das ist ein Earnings-Post, keine normale Analyse* (grüne
+„EARNINGS · Q<N> <Jahr> · BEAT"-Pille + Hero-Zahlen EPS-Surprise & Kurssprung).
+
+### Welche Aktien? — die Beat-Regeln (aus `check_earnings.py`)
+Der bestehende Workflow `check_earnings.py` findet täglich genau diese Kandidaten
+und mailt/telegrammt sie. Schwellen (identisch in `instagram/earnings.py` gespiegelt):
+- **≥ 5 % Kurssprung** (Close-zu-Close am Meldetag), **und**
+- **≥ 10 % EPS-Surprise** (Ist vs. Analysten-Erwartung), **und**
+- **Umsatz YoY ≥ 0** (kein schrumpfender Umsatz).
+
+→ Ein Titel aus der Earnings-Mail / dem Telegram-Alert ist immer ein guter
+Kandidat für einen Earnings-Post.
+
+### Ablauf (was Claude pro Earnings-Post tut)
+
+1. **Basis-Analyse sicherstellen (Voraussetzung).** Es muss eine `analyses/TICKER.md`
+   im **neuen 11-Abschnitte-Schema** geben (liefert Verdict, Szenarien, Kursziele,
+   Fazit für die Slides).
+   - Fehlt sie → **zuerst** die Aktienanalyse nach `analyses/PROMPT.md` erzeugen
+     (siehe Haupt-`CLAUDE.md`, „Analysiere TICKER").
+   - **Ist sie älter als der Earnings-Termin** → vorher **neu generieren**, damit
+     Zahlen/Verdict den Quartalsstand widerspiegeln. (Ist sie nach dem Earnings-
+     Datum erstellt, unverändert nutzen.)
+
+2. **Earnings-Daten aus dem Web holen & persistieren (PFLICHT, zuerst).**
+   yfinance ist in der Cloud meist geblockt → die harten Zahlen kommen aus dem
+   **Web** (Pressemitteilung/IR, SEC-8-K, Finanzportale). Claude schreibt sie in
+   `instagram/data/earnings/<TICKER>.json` (Schema unten). Der **Kurssprung** wird
+   NICHT eingetragen — er wird automatisch live aus der passenden RS-JSON
+   (`data/rs_*.json`) berechnet (inkl. Reaktions-Chart).
+
+3. **Generieren:**
+   ```bash
+   python3 -m instagram.generate --earnings CNC \
+     --headline "Centene: Turnaround bestätigt — Q1-Gewinn sprengt die Erwartung"
+   ```
+   Ohne `--headline` baut der Generator eine Beat-bewusste Hook automatisch.
+   Output: `out/instagram/<DATUM>_EARNINGS_<TICKER>/{carousel,reel}/*.png` +
+   `caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
+
+4. **Earnings-JSON committen** (die `out/`-Slides sind gitignored).
+
+### `instagram/data/earnings/<TICKER>.json` — Schema
+Claude befüllt die dynamischen Felder aus dem Web. Pflicht: `ticker`, `quarter`,
+`report_date`, `source`, `eps_actual`, `eps_estimate`, `eps_surprise_pct`.
+```jsonc
+{
+  "ticker": "CNC",
+  "quarter": "Q1 2026",
+  "report_date": "2026-04-28",        // Handelstag des Kurssprungs (für RS-JSON-Lookup)
+  "source": "SPX",                     // QQQ→rs_full · DAX→rs_dax · SPX→rs_sp500
+  "currency": "$",
+  "eps_actual": 3.37, "eps_estimate": 2.08, "eps_surprise_pct": 62.0,
+  "eps_gaap": 3.11,                    // optional
+  "revenue_actual": 49.94, "revenue_estimate": 47.53,
+  "revenue_unit": "Mrd. $", "revenue_surprise_pct": 5.1,
+  "revenue_yoy_pct": null,             // optional (Beat-Regel: ≥ 0)
+  "guidance": "FY2026 adj. EPS-Untergrenze auf > $3,40 angehoben; …",
+  "key_metric_label": "Health Benefits Ratio (MCR)",   // die Turnaround-Kennzahl
+  "key_metric_value": "87,3 %",
+  "key_metric_note": "verbessert — genau die Normalisierung, auf die …",
+  "drivers": ["…", "…"],               // 3–4 Treiber-Bullets
+  "context": "Was die Zahlen für die These bedeuten (2–3 Sätze).",
+  "sources": ["https://…"]             // Quellen-Links (Nachvollziehbarkeit)
+}
+```
+Schnelltest der Datenschicht: `python3 -m instagram.earnings CNC`.
+
+### Slide-Reihenfolge (Earnings, eigenständig)
+1. **Cover** — EARNINGS-Pille + Beat-Hook + Firmenlogo + Hero-Zahlen
+   (EPS-Surprise + Kurssprung)
+2. **Der Beat in Zahlen** — EPS & Umsatz Ist vs. Erwartung + Surprise-Chips
+3. **Die Kursreaktion** — Candle-Chart um den Meldetag, Sprungtag markiert
+   (live aus `data/rs_*.json`)
+4. **Ausblick & Treiber** — angehobene Guidance + Turnaround-Kennzahl + Treiber
+5. **Einordnung** — was die Zahlen für die These bedeuten + KI-Verdict-Badge
+6. **Szenarien · 12–18 Monate** *(aus der Basis-Analyse)*
+7. **Langfrist · 3–5 Jahre** *(aus der Basis-Analyse, falls vorhanden)*
+8. **Profi-Fazit** *(aus der Basis-Analyse)*
+9. **Speichern & mitreden** — Save-CTA + Community-Frage (Turnaround vs. Strohfeuer)
+
+Slides 3/4/5/7 entfallen automatisch, wenn die Daten fehlen (z. B. kein OHLCV →
+keine Reaktions-Slide). Reel-Teaser (9:16): Beat-Hook → Szenarien → Wichtigstes →
+Hybrid-CTA „ganze Analyse im Karussell".
+
+**Grid-Logik:** Wochenupdate = Equity-Kurve · Analyse = Firmenlogo + Verdict ·
+**Earnings = Firmenlogo + grüne EARNINGS/BEAT-Pille** (sofort als Earnings erkennbar).
+
+**Caption (`caption.txt`):** erste Zeile „<Firma> (TICKER) — Earnings-Analyse
+Q<N>: Beat" (SEO) + Beat-Zahlen + Guidance + These/Szenarien + Disclaimer +
+Hashtags (#earnings #quartalszahlen …). Auf 2.200 Zeichen zugeschnitten.
+
+---
+
 ## Roadmap
 - **Jetzt:** wöchentliches Carousel, manueller Upload.
 - **Später (genug Follower):** Stories (kurze Updates); Reel-Animation aus den
