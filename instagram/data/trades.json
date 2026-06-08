@@ -1,5 +1,5 @@
 {
-  "_hinweis": "Abgeschlossene Trades (realisierte Rendite als Dezimal). Fuer Kennzahlen werden diese mit den AKTIVEN Trades (Positionen in holdings.json, Rendite aus Kursdaten) kombiniert. Neue abgeschlossene Trades hier ergaenzen.",
+  "_hinweis": "Abgeschlossene Trades (realisierte Rendite 'ret' als Dezimal). Fuer Kennzahlen werden diese mit den AKTIVEN Trades (Positionen in holdings.json, Rendite aus Kursdaten) kombiniert. Neue abgeschlossene Trades hier ergaenzen. Optionale Felder fuer rote Verkaufsmarker im Chart: 'ticker', 'date' (Verkaufsdatum), 'sell_price_eur', 'buy_date', 'buy_price_eur'. Konvention: Kauf=gruen, Verkauf=rot.",
   "closed": [
     { "name": "NVIDIA",                 "ret":  0.0039 },
     { "name": "Analog Devices",         "ret":  0.1099 },
@@ -16,9 +16,9 @@
     { "name": "IBM",                    "ret": -0.0741 },
     { "name": "Microsoft",              "ret": -0.0068 },
     { "name": "NXP Semiconductors",     "ret":  0.0030 },
-    { "name": "NXP Semiconductors",     "ret": -0.0600 },
-    { "name": "AMD",                    "ret":  0.6970 },
-    { "name": "IBM",                    "ret": -0.1260 },
-    { "name": "Lam Research",           "ret":  0.2990 }
+    { "name": "NXP Semiconductors", "ticker": "NXPI", "ret": -0.0600, "buy_date": "2026-05-25", "buy_price_eur": 282.16, "date": "2026-06-05", "sell_price_eur": 265.10 },
+    { "name": "AMD",                "ticker": "AMD",  "ret":  0.6970, "buy_date": "2026-04-22", "buy_price_eur": 247.73, "date": "2026-06-05", "sell_price_eur": 419.75 },
+    { "name": "IBM",                "ticker": "IBM",  "ret": -0.1260, "buy_date": "2026-06-02", "buy_price_eur": 285.95, "date": "2026-06-05" },
+    { "name": "Lam Research",       "ticker": "LRCX", "ret":  0.2990, "buy_date": "2026-04-08", "buy_price_eur": 205.07, "date": "2026-06-05", "sell_price_eur": 266.25 }
   ]
 }
