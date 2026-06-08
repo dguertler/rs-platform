@@ -350,9 +350,9 @@ Die Caption enthält automatisch:
 
 ### 12.9 Slide-spezifische Layout-Regeln
 
-**Cover (Slide 1) — Round 8:**
+**Cover (Slide 1) — Round 9:**
 - Hook: 60 px, Zeilenabstand 74, Start y=170
-- BUY-Verdict: Hook **immer** `"<Name>: Kaufen — oder schon zu spät?"` (pool-Index 0, kein Hash-Lookup). In `analysis_headline()`: `if v == "BUY": return buy[0]`
+- BUY-Verdict: Hook **immer** `"Kaufen — oder schon zu spät?"` — **KEIN Aktienname im Hook** (pool[0] = `"Kaufen — oder schon zu spät?"`, kein `{name}:` Präfix). In `analysis_headline()`: `if v == "BUY": return buy[0]`
 - Logo-Karte: zentriert zwischen Hook-Ende und gesamtem unteren Block (via chain_h)
 - Aktienname + Sektor: **direkt unter der Logo-Karte** (y = card_top + card_h + 16)
 - **Visueller Abstand Name → Verdict-Badge: `logo_name_gap = 70` px** — Logo und Aktienname stehen allein oben, erst dann folgen die grauen Boxen
@@ -391,9 +391,18 @@ Die Caption enthält automatisch:
 - "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
 - Basiseffekt = hoher Trailing-PE durch noch-niedrige Gewinne vor GPU-Hochlauf, kein echtes Warnsignal
 
-**Allgemeine Regeln — Round 8 (aktualisiert):**
+**Profi-Fazit (Slide 12) — Round 9:**
+- `max_lines` **dynamisch** berechnet: `max(4, int(((c.H-160) - 256 - 120 - 40 - peers_reserve) / TY_BODY_LH))`
+  (peers_reserve=100 wenn Peers vorhanden, sonst 0) → ca. 15 Zeilen, nie mehr abschneiden
+- Markdown-Tabellen + Disclaimer aus Section 11 vor dem Rendern entfernen:
+  `re.sub(r'\s*-{3,}\s*\|.*', '', raw11, flags=DOTALL)` + `re.sub(r'\|[^\n]*', '', raw11)`
+  + `re.sub(r'\*?Keine Anlageberatung[^*\n]*\*?', '', raw11)`
+  + `re.sub(r'Verdict:\s*\w+\s*\(\d+/\d+\)[^\n]*', '', raw11)`
+
+**Allgemeine Regeln — Round 9 (aktualisiert):**
 - **Ausnahmslos echte Umlaute** (ä, ö, ü, Ä, Ö, Ü, ß) in allen deutschen Strings — niemals ae/oe/ue/ss
 - Keine hardcodierten `--headline` Argumente mit ASCII-Ersatz übergeben (auto-Headline verwendet korrekte Umlaute)
+- **Hook-Texte enthalten KEINEN Aktiennamen** — nur die generische Frage/These
 - **Bindestrich in Komposita: unveränderlich** (`GPU-Mix` bleibt `GPU-Mix`). Kein `re.sub` in `_wrap_px`
 - Pyphen-Silbentrennung bei langen Wörtern (≥10 Zeichen) am Zeilenende: aktiv und erwünscht
 - Graue Boxen: Höhe immer dynamisch berechnet (an Text angepasst)
