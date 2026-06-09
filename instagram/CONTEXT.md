@@ -282,8 +282,11 @@ gebündelt, wie bei den Aktienanalysen). Nichts wird hochgeladen — manuell pos
    Ist/Erwartung/Surprise, Umsatz, Guidance, Turnaround-Kennzahl, Treiber,
    Kontext). Claude befüllt + committet die Datei (yfinance ist in der Cloud
    geblockt → Zahlen aus IR/SEC-8-K/Finanzportalen).
-2. **Kurssprung + Reaktions-Chart** — live aus `data/rs_*.json` berechnet
-   (`report_date` → Close-zu-Close + OHLCV-Fenster). NICHT in der JSON dupliziert.
+2. **Kurssprung + Reaktions-Chart** — live aus `data/rs_*.json` berechnet.
+   `price_jump()` und `reaction_window()` verwenden **`reaction_date`** (falls
+   vorhanden) sonst `report_date`. `reaction_date` muss gesetzt werden, wenn
+   die Zahlen **nach Marktschluss** kamen (After-Hours) — dann ist der Kurssprung
+   am Folgetag. NICHT in der JSON dupliziert.
 3. **Basis-Analyse** `analyses/TICKER.md` (Pflicht) — Verdict/Szenarien/Kursziele/
    Fazit. Fehlt sie → zuerst Analyse erzeugen; ist sie älter als der Earnings-
    Termin → vorher neu generieren.
@@ -304,6 +307,9 @@ fehlen.
 
 **Design-Regeln (Round 12/13 — verbindlich):**
 - Slide-Datum oben rechts = **Tag nach dem Earningscall** (`report_date`+1, auto).
+- **After-Hours-Sonderfall:** Bei Zahlen nach Marktschluss (z. B. GOOGL 29. Apr.)
+  `report_date` = Earnings-Tag, `reaction_date` = Folgetag (Kurssprung-Tag).
+  Beide Felder zusammen ergeben korrektes Datum + korrekten Kurssprung.
 - Firmenlogo **ab Slide 2 oben rechts auf weißer Karte** (AMD-Größe) —
   `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
   (`_trim_logo` schneidet transparente UND weiße Ränder weg).
@@ -311,6 +317,14 @@ fehlen.
 - Slide 3 Chart = **Tageskerzen, letzte 50 Handelstage (10×5) bis zum Meldetag**
   (`reaction_window(before=49, after=0)`) mit **Datums-Achse unten** + Preis-Labels
   links. OHLCV hat nur Handelstage → 50 Kerzen ≈ 10 Kalenderwochen.
+- **Slide „Ausblick & Treiber" (Slide 5):** Wenn `guidance`+`key_metric_value`
+  vorhanden UND mehr als 2 Treiber (`drivers`) → automatischer Überlauf auf
+  Folgefolie „Treiber im Detail". Logik in `generate.py`/`render.py` eingebaut;
+  kein manueller Eingriff nötig.
+- **Slide „Was den Beat getragen hat" (Segmente):** Metriken werden vertikal
+  gestapelt: absoluter Wert (32 px, T.TEXT, mono) + Prozentwert (26 px, Akzentfarbe,
+  mono) auf je einer eigenen Zeile. Notiz-Texte darunter mit TY_BODY=28, T.TEXT
+  (nicht TY_SUB/T.MUTED). Box-Höhe passt sich automatisch an den Text an.
 - Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
   weil Base Case zwar über Kurs, aber binäres Risiko).
 - Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.

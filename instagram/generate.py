@@ -591,7 +591,15 @@ def build_earnings(fmt, e, date_iso, outdir):
     if e.get("reaction_ohlcv"):
         emit("reaktion", lambda c: render.slide_earnings_reaction(c, e, date_iso))
     if e.get("guidance") or e.get("drivers") or e.get("key_metric_value"):
-        emit("ausblick", lambda c: render.slide_earnings_guidance(c, e, date_iso))
+        _all_drivers = e.get("drivers") or []
+        _has_blocks = bool(e.get("guidance") or e.get("key_metric_value"))
+        # wenn blocks + >2 Treiber → Slide 1 zeigt nur die ersten 2, Folgefolie den Rest
+        _split = 2 if (_has_blocks and len(_all_drivers) > 2) else len(_all_drivers)
+        emit("ausblick", lambda c, _s=_split: render.slide_earnings_guidance(
+            c, e, date_iso, driver_start=0, driver_end=_s, show_blocks=True))
+        if _split < len(_all_drivers):
+            emit("ausblick_2", lambda c, _s=_split: render.slide_earnings_guidance(
+                c, e, date_iso, driver_start=_s, driver_end=None, show_blocks=False))
     if e.get("segments"):
         emit("segmente", lambda c: render.slide_earnings_segments(c, e, date_iso))
     # ── Unternehmen & These aus der Basis-Analyse ─────────────────────────────

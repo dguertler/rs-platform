@@ -134,11 +134,12 @@ def load_earnings(ticker_or_path):
     if entry:
         e["rs_score"] = entry.get("score")
         ohlcv = entry.get("ohlcv", [])
-        jump, close, prev = price_jump(ohlcv, e["report_date"])
+        react_date = e.get("reaction_date") or e["report_date"]
+        jump, close, prev = price_jump(ohlcv, react_date)
         e["jump_pct"] = jump
         e["jump_close"] = close
         e["jump_prev_close"] = prev
-        window, rel = reaction_window(ohlcv, e["report_date"])
+        window, rel = reaction_window(ohlcv, react_date)
         e["reaction_ohlcv"] = window
         e["reaction_idx"] = rel
     else:

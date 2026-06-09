@@ -415,7 +415,9 @@ Claude befüllt die dynamischen Felder aus dem Web. Pflicht: `ticker`, `quarter`
 {
   "ticker": "CNC",
   "quarter": "Q1 2026",
-  "report_date": "2026-04-28",        // Handelstag des Kurssprungs (für RS-JSON-Lookup)
+  "report_date": "2026-04-28",        // Earnings-Tag (für Slide-Datum: +1)
+  // "reaction_date": "2026-04-29",  // NUR bei After-Hours: Kurssprung-Tag (Folgetag)
+  //   → Bei Pre/Regular-Market-Zahlen WEGLASSEN (report_date wird verwendet)
   "source": "SPX",                     // QQQ→rs_full · DAX→rs_dax · SPX→rs_sp500
   "currency": "$",
   "eps_actual": 3.37, "eps_estimate": 2.08, "eps_surprise_pct": 62.0,
@@ -500,6 +502,11 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
 - **Slide-Datum (oben rechts) = Tag NACH dem Earningscall** (`report_date` + 1).
   Wird automatisch gesetzt (auch rückwirkend), `--date` überschreibt. So ist der
   Post immer auf den Folgetag der Zahlen datiert. Datum steht nur auf dem Cover.
+- **After-Hours-Sonderfall:** Wenn die Zahlen nach Marktschluss kamen (z. B.
+  GOOGL nach 22 Uhr), ist der Kurssprung erst am Folgetag sichtbar.
+  Lösung: `report_date` = Earnings-Tag, `reaction_date` = Kurssprung-Tag.
+  `price_jump()` und `reaction_window()` in `earnings.py` nutzen `reaction_date`
+  wenn vorhanden, sonst `report_date`.
 - **Firmenlogo ab Slide 2 oben rechts auf weißer Karte** (AMD-Logo-Größe), damit
   dunkle/transparente Logos sichtbar sind (`_company_logo_chip` in render.py; gilt
   via `analysis_header` für Analyse- UND Earnings-Innen-Slides). Auf dem Cover sitzt
@@ -514,6 +521,16 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
   Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 50
   Handelstage bis zum Meldetag". Hinweis: OHLCV enthält nur **Handelstage** (keine
   Wochenenden/Feiertage) — 50 Kerzen ≈ 10 Kalenderwochen.
+- **Slide „Ausblick & Treiber" (Slide 5):** Wenn `guidance`/`key_metric_value`
+  vorhanden UND mehr als 2 `drivers` → automatischer Überlauf auf Folgefolie
+  „Treiber im Detail" (Slide 5b). `generate.py` berechnet den Splitpunkt
+  (max. 2 Treiber auf Slide 5 bei Blocks) und emittiert die zweite Folie
+  automatisch — kein manueller Eingriff nötig.
+- **Slide „Was den Beat getragen hat" (Segmente):** Metriken vertikal stapeln:
+  Absoluter Wert (32 px, T.TEXT, Mono-Font) auf Zeile 1 + Prozentwert (26 px,
+  Akzentfarbe, Mono-Font) auf Zeile 2. Notiz-Text darunter: TY_BODY=28 px,
+  T.TEXT (nicht kleiner TY_SUB/T.MUTED). Box-Höhe passt sich automatisch an.
+  Format der `metric`-Felder: `"$20,03 Mrd. (+63%)"` — Splitpunkt bei `" ("`.
 - **Slide „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
   (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
   Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).

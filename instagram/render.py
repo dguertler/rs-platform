@@ -1795,52 +1795,62 @@ def slide_earnings_reaction(c, e, date_iso):
 
 
 # 4) GUIDANCE & TURNAROUND-TREIBER
-def slide_earnings_guidance(c, e, date_iso):
+def slide_earnings_guidance(c, e, date_iso, driver_start=0, driver_end=None,
+                             show_blocks=True):
     analysis_header(c, e, date_iso)
     col = earn_color(e)
-    c.text(MX, 184, "Ausblick & Treiber", 42, weight="bold")
-    c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
+    if show_blocks:
+        c.text(MX, 184, "Ausblick & Treiber", 42, weight="bold")
+        c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
+    else:
+        c.text(MX, 184, "Treiber im Detail", 42, weight="bold")
+        c.text(MX, 240, "Weitere Quartalsergebnisse", TY_SUB, color=T.MUTED)
 
+    footer_y = c.H - 200
     y = 300
-    # Guidance-Kachel (volle Breite)
-    if e.get("guidance"):
-        glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
-        gh = 70 + len(glines) * TY_BODY_LH + 20
-        c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
-        c.tile(MX, y, 12, gh, color=col, radius=6)
-        c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
-        _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
-                        c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
-        y += gh + 26
+    if show_blocks:
+        # Guidance-Kachel (volle Breite)
+        if e.get("guidance"):
+            glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
+            gh = 70 + len(glines) * TY_BODY_LH + 20
+            c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
+            c.tile(MX, y, 12, gh, color=col, radius=6)
+            c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
+            _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
+                            c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
+            y += gh + 26
 
-    # Turnaround-Kennzahl: blaue Überschrift OBEN (volle Breite), darunter die
-    # große Zahl links + Erklärungstext rechts daneben (tiefer, damit die
-    # Überschrift nicht in den Text ragt). Boxhöhe passt sich dem Text an.
-    if e.get("key_metric_value"):
-        note = e.get("key_metric_note", "")
-        klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
-        kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
-        c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
-        c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
-               color=T.BLUE, weight="bold")
-        c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
-               weight="bold", font="mono")
-        for i, ln in enumerate(klines[:4]):
-            c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
-        y += kh + 26
+        # Turnaround-Kennzahl
+        if e.get("key_metric_value"):
+            note = e.get("key_metric_note", "")
+            klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
+            kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
+            c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
+            c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
+                   color=T.BLUE, weight="bold")
+            c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
+                   weight="bold", font="mono")
+            for i, ln in enumerate(klines[:4]):
+                c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
+            y += kh + 26
 
     # Treiber-Bullets
     drivers = e.get("drivers") or []
-    if drivers:
+    end = driver_end if driver_end is not None else len(drivers)
+    visible = drivers[driver_start:end]
+    if visible:
         c.text(MX, y + 6, "DIE TREIBER", 22, color=T.MUTED, weight="bold")
         y += 48
-        for d in drivers[:4]:
+        for d in visible:
             dl = _wrap_px(d, c.W - 2 * MX - 56, TY_BODY)
+            bullet_h = max(TY_BODY_LH, min(2, len(dl)) * TY_BODY_LH) + 14
+            if y + bullet_h > footer_y:
+                break
             c.ax.scatter(MX + 12, c.y(y + 16), s=120, marker="o",
                          color=col, edgecolor="none", zorder=11)
             for i, ln in enumerate(dl[:2]):
                 c.text(MX + 50, y + i * TY_BODY_LH, ln, TY_BODY, color=T.TEXT)
-            y += max(TY_BODY_LH, len(dl[:2]) * TY_BODY_LH) + 14
+            y += bullet_h
     analysis_footer(c)
 
 
@@ -1947,17 +1957,33 @@ def slide_earnings_segments(c, e, date_iso):
     y = 312
     for s in segs[:4]:
         note = s.get("note", "")
-        nlines = _wrap_px(note, c.W - 2 * MX - 340, TY_SUB) if note else []
-        h = max(124, 56 + len(nlines) * 30 + 24)
+        metric_raw = s.get("metric", "")
+        # Split "€20 Mrd. (+63%)" → abs on line 1, pct on line 2
+        split_idx = metric_raw.find(" (")
+        if split_idx >= 0:
+            metric_abs = metric_raw[:split_idx].strip()
+            metric_pct = metric_raw[split_idx:].strip()
+        else:
+            metric_abs = metric_raw
+            metric_pct = ""
+        nlines = _wrap_px(note, c.W - 2 * MX - 68, TY_BODY) if note else []
+        note_h = min(len(nlines), 2) * 36
+        h = max(120, 26 + 14 + (42 if metric_abs else 0) + (34 if metric_pct else 0)
+                + 12 + note_h + 22)
         c.tile(MX, y, c.W - 2 * MX, h, color=T.PANEL)
         c.tile(MX, y, 10, h, color=col, radius=5)
         c.text(MX + 34, y + 22, s["name"].upper(), 24, color=col, weight="bold")
-        if s.get("metric"):
-            c.text(MX + 34, y + 56, s["metric"], 34, color=T.TEXT,
-                   weight="bold", font="mono")
-        for i, ln in enumerate(nlines[:4]):
-            c.text(MX + 330, y + 28 + i * 30, ln, TY_SUB, color=T.MUTED)
-        y += h + 20
+        my = y + 58
+        if metric_abs:
+            c.text(MX + 34, my, metric_abs, 32, color=T.TEXT, weight="bold", font="mono")
+            my += 42
+        if metric_pct:
+            c.text(MX + 34, my, metric_pct, 26, color=col, weight="bold", font="mono")
+            my += 34
+        my += 10
+        for i, ln in enumerate(nlines[:2]):
+            c.text(MX + 34, my + i * 36, ln, TY_BODY, color=T.TEXT)
+        y += h + 18
     if e.get("segments_note"):
         _draw_paragraph(c, MX, y + 8, e["segments_note"], TY_SUB, c.W - 2 * MX,
                         color=T.MUTED, line_h=32, max_lines=3)
