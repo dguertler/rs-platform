@@ -166,11 +166,14 @@ keine falschen Zeiträume.
   - **Textumbruch Frage-Box**: `_wrap_px(question, inner_w, 28)` (pixel-basiert),
     NICHT `textwrap.wrap(width=40)` — verhindert halbe Zeilen durch zeichenbasierte
     Breite. `inner_w = c.W - 2*MX - 44` (8 px Balken + 36 px Inset).
+  - **Text Bio-Verweis**: „Den Link zum wikifolio AI Alpha Selection findest du
+    aktuell in unserer Bio." — NICHT „Live-Depot" (das ist kein Live-Depot,
+    sondern das wikifolio AI Alpha Selection).
   - **Risikohinweis**: Plain-Text (kein roter Kasten), Trennlinie. Schrift
-    **2 Stufen größer als Fußnoten** (12 → 14 → **16 px** Body, **18 px** Header
-    „Risikohinweis & Disclaimer"). Textumbruch via `_draw_paragraph(... 16, c.W - 2*MX)`
+    **3 Stufen größer als Fußnoten** (12 → 14 → 16 → **18 px** Body, **20 px** Header
+    „Risikohinweis & Disclaimer"). Textumbruch via `_draw_paragraph(... 18, c.W - 2*MX)`
     für volle Breite links → rechts (= selbe Formatierung wie Aktienanalysen-Footer).
-    sep_y = c.H - 240, line_h=28.
+    sep_y = c.H - 260, line_h=30.
 - **Positionen ohne Kursdaten** (DFNM, CRDO, SIEGY etc.): `value="—"`,
   `value_font="sans"` (em dash sicher in Liberation Sans), `color=T.SUBTLE`
   (heller als MUTED, gut sichtbar). Sortierung: Positionen mit Kursdaten zuerst

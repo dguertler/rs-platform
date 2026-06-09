@@ -358,8 +358,8 @@ def slide_cta(c, date_iso, question=None, account=None):
     header(c, date_iso)
     cy = int(c.H * 0.24)
     c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
-    c.text(MX, cy + 88, "Den Link zum Live-Depot findest du", 26, color=T.TEXT)
-    c.text(MX, cy + 128, "aktuell in unserer Bio.", 26, color=T.TEXT)
+    c.text(MX, cy + 88, "Den Link zum wikifolio AI Alpha Selection", 26, color=T.TEXT)
+    c.text(MX, cy + 128, "findest du aktuell in unserer Bio.", 26, color=T.TEXT)
 
     # Interaktions-Frage — Analysis-Stil (PANEL + blauer Akzentbalken links)
     # Pixel-basierter Umbruch (_wrap_px): nutzt volle Breite ohne halbe Zeilen
@@ -375,13 +375,13 @@ def slide_cta(c, date_iso, question=None, account=None):
             c.text(MX + 36, qy + 68 + i * 42, ln, 28, weight="bold")
 
     # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
-    # 2 Stufen größer: 12 → 14 → 16 px; pixel-basierter Umbruch via _draw_paragraph
+    # 3 Stufen größer: 12 → 14 → 16 → 18 px; pixel-basierter Umbruch via _draw_paragraph
     disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
-    sep_y = c.H - 240
+    sep_y = c.H - 260
     c.ax.plot([MX, c.W - MX], [c.y(sep_y), c.y(sep_y)], color=T.GRID, lw=1.5)
-    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 18, color=T.MUTED, weight="bold")
-    _draw_paragraph(c, MX, sep_y + 52, disc, 16, c.W - 2 * MX,
-                    color=T.MUTED, line_h=28)
+    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 20, color=T.MUTED, weight="bold")
+    _draw_paragraph(c, MX, sep_y + 56, disc, 18, c.W - 2 * MX,
+                    color=T.MUTED, line_h=30)
 
 
 def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
