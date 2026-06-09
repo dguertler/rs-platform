@@ -356,18 +356,22 @@ def slide_cta(c, date_iso, question=None, account=None):
     wie Aktienanalysen — Text füllt volle Breite links → rechts ohne halbe Zeilen.
     """
     header(c, date_iso)
-    cy = int(c.H * 0.24)
+    cy = int(c.H * 0.20)
     c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
-    c.text(MX, cy + 88, "Den Link zum wikifolio AI Alpha Selection", 26, color=T.TEXT)
-    c.text(MX, cy + 128, "findest du aktuell in unserer Bio.", 26, color=T.TEXT)
+    # Bio-Text als Paragraph: füllt volle Breite links → rechts (kein hardcodierter Umbruch)
+    bio = ("Den Link zum wikifolio AI Alpha Selection "
+           "findest du aktuell in unserer Bio.")
+    bio_bottom = _draw_paragraph(c, MX, cy + 92, bio, 26, c.W - 2 * MX,
+                                 color=T.TEXT, line_h=40)
 
-    # Interaktions-Frage — Analysis-Stil (PANEL + blauer Akzentbalken links)
-    # Pixel-basierter Umbruch (_wrap_px): nutzt volle Breite ohne halbe Zeilen
+    # Interaktions-Frage — zentriert zwischen Bio-Text und Risikohinweis-Trennlinie
+    sep_y = c.H - 260
     if question:
         inner_w = c.W - 2 * MX - 44   # 8 px Balken + 36 px Inset
         qlines = _wrap_px(question, inner_w, 28)
-        qy = cy + 192
         box_h = 72 + len(qlines) * 42
+        # Mitte zwischen Ende Bio-Text und Beginn Separator
+        qy = int((bio_bottom + (sep_y - box_h)) / 2)
         c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
         c.tile(MX, qy, 8, box_h, color=T.BLUE, radius=5)
         c.text(MX + 36, qy + 26, "DEINE MEINUNG?", 20, color=T.BLUE, weight="bold")
@@ -375,9 +379,7 @@ def slide_cta(c, date_iso, question=None, account=None):
             c.text(MX + 36, qy + 68 + i * 42, ln, 28, weight="bold")
 
     # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
-    # 3 Stufen größer: 12 → 14 → 16 → 18 px; pixel-basierter Umbruch via _draw_paragraph
     disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
-    sep_y = c.H - 260
     c.ax.plot([MX, c.W - MX], [c.y(sep_y), c.y(sep_y)], color=T.GRID, lw=1.5)
     c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 20, color=T.MUTED, weight="bold")
     _draw_paragraph(c, MX, sep_y + 56, disc, 18, c.W - 2 * MX,
