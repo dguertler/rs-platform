@@ -163,7 +163,13 @@ keine falschen Zeiträume.
   - Kein @-Handle auf dem Bild (Handle gehört in die IG-Bio, nicht in den Post)
   - Frage-Box im Analysis-Stil: PANEL-Hintergrund + blauer Akzentbalken links (8 px),
     „DEINE MEINUNG?"-Label 20 px blau, Fragetext 28 px bold
-  - **Textumbruch Frage-Box**: `_wrap_px(question, inner_w, 28)` (pixel-basiert),
+  - **Frage-Box Größe & Schrift (aktuelle Werte):**
+    `box_h = 112 + len(qlines) * 54` (Padding top/bottom je ~28px).
+    „DEINE MEINUNG?" Label: **24 px** blau. Fragetext: **32 px** weiß bold, line_h=54.
+    Inset: `MX + 36` horizontal (nach dem 8px blauen Balken).
+    Position: vertikal zentriert zwischen Bio-Text-Ende und Risikohinweis-Trennlinie
+    (`qy = int((bio_bottom + (sep_y - box_h)) / 2)`).
+  - **Textumbruch Frage-Box**: `_wrap_px(question, inner_w, 32)` (pixel-basiert),
     NICHT `textwrap.wrap(width=40)` — verhindert halbe Zeilen durch zeichenbasierte
     Breite. `inner_w = c.W - 2*MX - 44` (8 px Balken + 36 px Inset).
   - **Text Bio-Verweis**: „Den Link zum wikifolio AI Alpha Selection findest du
