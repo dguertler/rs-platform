@@ -42,6 +42,7 @@ from check_alerts import (
     load_signals,
     save_signals,
     _breakout_date,
+    _is_recent,
 )
 
 import yfinance as yf
@@ -207,6 +208,11 @@ def check_one_ticker(ticker, source, entries, top20_set, signals, alerted,
         return None
 
     cur_h4_date = _breakout_date(fresh_4h, struct_4h)
+
+    # 4H-Breakout muss aktuell sein (≤ 3 Kalendertage), sonst kein Alert.
+    if not test_mode and not _is_recent(cur_h4_date):
+        print(f'  {ticker}: 4H-Breakout veraltet ({cur_h4_date}) – übersprungen')
+        return None
 
     if not test_mode:
         last_sig = (signals.get(ticker) or [{}])[-1]

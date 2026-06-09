@@ -2,7 +2,7 @@ name: Earnings-Überraschung (≥5% Kurssprung + ≥10% EPS-Beat)
 
 on:
   schedule:
-    - cron: '15 2 * * 2-6'
+    - cron: '30 2 * * 2-6'
   workflow_dispatch:
     inputs:
       test_date:

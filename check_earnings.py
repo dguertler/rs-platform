@@ -517,8 +517,8 @@ def main():
                 print(f'    → unter EPS-Schwelle ({MIN_EPS_SURPRISE}%) – übersprungen')
                 continue
 
-            if rev_yoy is not None and rev_yoy < 0:
-                print(f'    → Umsatz YoY negativ ({rev_yoy*100:.1f}%) – übersprungen')
+            if rev_yoy is not None and rev_yoy < -0.05:
+                print(f'    → Umsatz YoY stark negativ ({rev_yoy*100:.1f}%) – übersprungen')
                 continue
 
             print(f'  ✓ ALERT: {ticker} ({source_label})  Sprung={jump*100:.1f}%  Surprise={surprise:.1f}%')
