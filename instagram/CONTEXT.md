@@ -30,29 +30,33 @@ nennen, **wikifolio-Logo** ohne Freigabe, sich als wikifolio-Mitarbeiter ausgebe
 Pflicht-Risikohinweis ist in jeder Slide (Footer) + CTA + Caption integriert.
 Wort „Musterdepot" wird bewusst NICHT verwendet (es sind reale Käufe).
 
-## 4. Slide-Reihenfolge (Wochenpost, 9 Slides — CTR-/Engagement-Upgrade)
+## 4. Slide-Reihenfolge (Wochenpost — VERBINDLICH)
 1. **🆕 Dynamic Hook** (Slide 1, visueller Stopper, KEIN Dashboard) — dynamische
-   Schlagzeile (`--hook`) + Beweis-Chips Gesamtrendite + Alpha
+   Schlagzeile (`--hook`) + Beweis-Chips Gesamtrendite + NASDAQ-100 seit Start
 2. **Performance vs. NASDAQ-100** (Eye-Catcher) + Kennzahlen-Streifen
    (Gesamtrendite, NASDAQ, Alpha, Trades, Trefferquote, Profitfaktor,
    Ø Gewinn/Trade, Ø Verlust/Trade; `*` = inkl. offener Positionen)
-3. **Mehrrendite ggü. NASDAQ-100** (wöchentliche Abweichung, Balken)
+3. **Mehrrendite ggü. NASDAQ-100** (wöchentliche Abweichung, Balken) — ab KW15
 4. **Stärkste Positionen** (Top-5 nach Wertzuwachs, mit Kaufdatum + Einstiegskurs)
-5. **🆕 Strategisches „Warum"** (minimalistische Text-Slide, KI-Kontext) —
-   Übergang zu den Einzelaktien; Text aus `--why`
-6. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal,
-   weitere Signale als blaue Punkte)
-6a. **Trade der Woche** (NUR wenn diese KW ein Verkauf in `trades.json` liegt):
-   größter realisierter Verkauf der Woche, Chart mit **Kauf grün + Verkauf rot**,
-   Kacheln „Realisierter Gewinn" + „Verkaufskurs"
-7. **Weitere Positionen** (alle außerhalb der Top-5)
-8. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
-9. **🆕 CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs im
-   IG-Text nicht klickbar) + dynamische Interaktions-Frage (`--frage`), Box unten
+5. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal)
+6. **Weitere Positionen** (alle außerhalb der Top-5, mit Chart-Slide für Newcomer)
+7. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
+8. **🆕 Strategisches „Warum"** (KI-Kontext, Text aus `--why`) — NACH den Positionsslides
+9+. **Trade der Woche** (ALLE Verkäufe der KW als einzelne Slides, sortiert nach
+   Rendite absteigend): Chart mit **Kauf grün + Verkauf rot**
+Last. **CTA** — Bio-Link-Pfad + dynamische Interaktions-Frage (`--frage`)
+
+**Reihenfolge-Begründung:** Erst Portfolio zeigen (Positionen + Charts), dann
+erklären WARUM (Rotation/Trades). Trades folgen nach dem Warum.
 
 **Dynamische Felder (Claude textet pro Woche, siehe PROMPT.md):** `--hook`
 (Schlagzeile), `--why` (KI-Kontext), `--frage` (Kommentar-Frage). Ohne Flags
 greifen datenbasierte Fallbacks (`auto_hook/auto_why/auto_question`).
+
+**`--why`-Regel:** Der Narrative-Text soll **keine Trade-Renditen in % nennen**
+— diese werden automatisch als „Realisiert: TICKER1 +X% · TICKER2 +Y%"-Zeile
+an den `--why`-Text angehängt (Code in `generate.py` nach `ctx["why"]` setzen).
+Claude schreibt in `--why` nur den narrativen Kontext (Marktereignis, Sektor, Logik).
 
 **Slide-Datum (oben rechts):** standardmäßig **Samstag der KW** (`report.slide_date`);
 liegt dieser noch in der Zukunft → heute; `--date` überschreibt. So bekommt jede
@@ -256,9 +260,12 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
   berechnung USD/USD ≈ EUR/EUR (Näherung, gültig für kurze Halteperioden).
   Für exakte EUR-Renditen: EUR/USD-Kurs-Zeitreihe nötig oder europäische Kurse nutzen
   (DAX-Daten in EUR). Kaufkurse in `holdings.json` sind immer in EUR.
-- **Fehlende Kursdaten (OTC / Small Cap):** Ticker nicht in NASDAQ-100/DAX/S&P500
-  (z.B. CRDO) → `instagram/data/custom_ohlcv.json` manuell ergänzen (EUR-Preise,
+- **Fehlende Kursdaten (OTC / Small Cap / Mid Cap):** CRDO (Credo Technology) ist
+  im S&P 500 und im NASDAQ-100 **NICHT enthalten** (gelistet an der NASDAQ-Börse,
+  aber kein Index-Mitglied) — und damit **nicht in `rs_full.json` / `rs_sp500.json`**.
+  Für solche Ticker → `instagram/data/custom_ohlcv.json` manuell ergänzen (EUR-Preise,
   Freitags-Schlusskurse, Format wie DFNM). Bis zur Ergänzung zeigt der Slide "—".
+  **Gleiches gilt für DFNM** (Definium Therapeutics, OTC-Biotech).
 - Listen-Slides (Stärkste/Weitere Positionen): Detailzeile unter dem Ticker
   **groß & gut lesbar** (Größe 22, `T.SUBTLE`).
 - CTA-Slide: Frage-Box `box_h = 112 + n*54` px (n = Zeilenzahl der Frage);

@@ -91,19 +91,11 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
-    # 5) Strategisches „Warum" (KI-Kontext) — Übergang zu den Einzelaktien
-    emit("warum", lambda c: render.slide_why(c, di, ctx["why"]))
-    # 6) Aktie der Woche (Rotation)
+    # 5) Aktie der Woche (Rotation) — vor warum für besseren Lesefluss
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 6a) Trade der Woche: alle realisierten Verkäufe der KW (Kauf grün + Verkauf rot)
-    for _tr in ctx.get("trades", []):
-        if _tr.get("entry"):
-            _tk = _tr["ticker"].replace(".", "_")
-            emit(f"trade_{_tk}",
-                 lambda c, t=_tr: render.slide_featured(c, di, t, label="TRADE DER WOCHE"))
-    # 6b) Weitere Positionen (alle außerhalb der Top-5)
+    # 6) Weitere Positionen (alle außerhalb der Top-5) — vor warum
     if ctx.get("rest_holdings"):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
@@ -113,11 +105,19 @@ def build_from_store(fmt, ctx, outdir):
                 for t in ctx["rest_holdings"]]
         emit("weitere", lambda c: render.slide_list(
             c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
-    # 7) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5)
+    # 7) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5) — vor warum
     if ctx.get("newcomer") and ctx["newcomer"]["entry"]:
         emit(f"newcomer_{ctx['newcomer']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["newcomer"], label="NEWCOMER"))
-    # 8) CTA: Bio-Link-Pfad + dynamische Interaktions-Frage + Risikohinweis
+    # 8) Strategisches „Warum" (KI-Kontext) — nach den Positionsslides
+    emit("warum", lambda c: render.slide_why(c, di, ctx["why"]))
+    # 9+) Trade der Woche: alle realisierten Verkäufe der KW (Kauf grün + Verkauf rot)
+    for _tr in ctx.get("trades", []):
+        if _tr.get("entry"):
+            _tk = _tr["ticker"].replace(".", "_")
+            emit(f"trade_{_tk}",
+                 lambda c, t=_tr: render.slide_featured(c, di, t, label="TRADE DER WOCHE"))
+    # Last) CTA: Bio-Link-Pfad + dynamische Interaktions-Frage + Risikohinweis
     emit("cta", lambda c: render.slide_cta(
         c, di, question=ctx["question"], account=ctx["account"]))
     return saved
@@ -908,6 +908,16 @@ def main():
         # Dynamische Felder: Claude übergibt sie via CLI; sonst datenbasierter Fallback
         ctx["hook"] = args.hook or auto_hook(ctx)
         ctx["why"] = args.why or auto_why(ctx)
+        # Auto-append realized trade returns so all sold tickers always show %
+        # Claude schreibt in --why nur den narrativen Text (ohne %-Werte der Trades);
+        # die Renditen werden hier automatisch als "Realisiert:"-Zeile angehängt.
+        if ctx.get("trades"):
+            trade_parts = [f"{t['ticker']} {render.fmt_pct(t['ret'])}"
+                           for t in ctx["trades"] if t.get("ret") is not None]
+            if trade_parts:
+                trade_line = "Realisiert: " + " · ".join(trade_parts)
+                if trade_line not in ctx["why"]:
+                    ctx["why"] = ctx["why"].rstrip() + "\n\n" + trade_line
         ctx["question"] = args.frage or auto_question(ctx)
         base = os.path.join(ROOT, "out", "instagram", f"{date_iso}_KW{args.kw}")
         fmts = ["carousel", "reel"] if args.format == "both" else [args.format]
