@@ -351,8 +351,10 @@ def slide_cta(c, date_iso, question=None, account=None):
 
     `question` = von Claude pro Woche aus den Trades getextete Frage; treibt die
     Kommentare. Kein @-Handle auf der Slide (folgt aus IG-Bio-Konvention).
+
+    Risikohinweis: 16 px (2 Stufen über 12 px) + _draw_paragraph/_wrap_px
+    wie Aktienanalysen — Text füllt volle Breite links → rechts ohne halbe Zeilen.
     """
-    import textwrap
     header(c, date_iso)
     cy = int(c.H * 0.24)
     c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
@@ -360,8 +362,10 @@ def slide_cta(c, date_iso, question=None, account=None):
     c.text(MX, cy + 128, "aktuell in unserer Bio.", 26, color=T.TEXT)
 
     # Interaktions-Frage — Analysis-Stil (PANEL + blauer Akzentbalken links)
+    # Pixel-basierter Umbruch (_wrap_px): nutzt volle Breite ohne halbe Zeilen
     if question:
-        qlines = textwrap.wrap(question, width=40)
+        inner_w = c.W - 2 * MX - 44   # 8 px Balken + 36 px Inset
+        qlines = _wrap_px(question, inner_w, 28)
         qy = cy + 192
         box_h = 72 + len(qlines) * 42
         c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
@@ -371,13 +375,13 @@ def slide_cta(c, date_iso, question=None, account=None):
             c.text(MX + 36, qy + 68 + i * 42, ln, 28, weight="bold")
 
     # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
+    # 2 Stufen größer: 12 → 14 → 16 px; pixel-basierter Umbruch via _draw_paragraph
     disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
-    disc_lines = textwrap.wrap(disc, width=108)
-    sep_y = c.H - 218
+    sep_y = c.H - 240
     c.ax.plot([MX, c.W - MX], [c.y(sep_y), c.y(sep_y)], color=T.GRID, lw=1.5)
-    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 14, color=T.MUTED, weight="bold")
-    for i, ln in enumerate(disc_lines):
-        c.text(MX, sep_y + 46 + i * 22, ln, 12, color=T.MUTED)
+    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 18, color=T.MUTED, weight="bold")
+    _draw_paragraph(c, MX, sep_y + 52, disc, 16, c.W - 2 * MX,
+                    color=T.MUTED, line_h=28)
 
 
 def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
@@ -531,7 +535,8 @@ def slide_list(c, date_iso, title, subtitle, rows):
         if row.get("sub"):
             c.text(MX + 42, y + rh / 2 + 10, row["sub"], 26, color=T.SUBTLE)
         c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 44,
-               color=row["color"], weight="bold", ha="right", font="mono")
+               color=row["color"], weight="bold", ha="right",
+               font=row.get("value_font", "mono"))
     footer(c)
 
 

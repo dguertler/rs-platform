@@ -86,7 +86,8 @@ def build_from_store(fmt, ctx, outdir):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
                  "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
-                          if t["ret"] is not None else render.T.MUTED}
+                          if t["ret"] is not None else render.T.SUBTLE,
+                 "value_font": "mono" if t["ret"] is not None else "sans"}
                 for t in ctx["top_holdings"]]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
@@ -105,7 +106,8 @@ def build_from_store(fmt, ctx, outdir):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
                  "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
                  "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
-                          if t["ret"] is not None else render.T.MUTED}
+                          if t["ret"] is not None else render.T.SUBTLE,
+                 "value_font": "mono" if t["ret"] is not None else "sans"}
                 for t in ctx["rest_holdings"]]
         emit("weitere", lambda c: render.slide_list(
             c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))

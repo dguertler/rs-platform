@@ -145,8 +145,28 @@ Claude textet Hook/Warum/Frage selbst aus den Daten.
   - Kein @-Handle auf dem Bild (Handle gehört in die IG-Bio, nicht in den Post)
   - Frage-Box im Analysis-Stil: PANEL-Hintergrund + blauer Akzentbalken links (8 px),
     „DEINE MEINUNG?"-Label 20 px blau, Fragetext 28 px bold
-  - Risikohinweis als Plain-Text (kein roter Kasten), Trennlinie + 12-14 px MUTED,
-    analog zur Analyse-Footer-Formatierung
+  - **Textumbruch Frage-Box**: `_wrap_px(question, inner_w, 28)` (pixel-basiert),
+    NICHT `textwrap.wrap(width=40)` — verhindert halbe Zeilen durch zeichenbasierte
+    Breite. `inner_w = c.W - 2*MX - 44` (8 px Balken + 36 px Inset).
+  - **Risikohinweis**: Plain-Text (kein roter Kasten), Trennlinie. Schrift
+    **2 Stufen größer als Fußnoten** (12 → 14 → **16 px** Body, **18 px** Header
+    „Risikohinweis & Disclaimer"). Textumbruch via `_draw_paragraph(... 16, c.W - 2*MX)`
+    für volle Breite links → rechts (= selbe Formatierung wie Aktienanalysen-Footer).
+    sep_y = c.H - 240, line_h=28.
+- **Positionen ohne Kursdaten** (DFNM, CRDO, SIEGY etc.): `value="—"`,
+  `value_font="sans"` (em dash sicher in Liberation Sans), `color=T.SUBTLE`
+  (heller als MUTED, gut sichtbar). Sortierung: Positionen mit Kursdaten zuerst
+  (absteigend nach Rendite), danach alle ohne (`ret is None`).
+
+### Qualitätssicherung: Slides immer kontrollieren
+**PFLICHT nach jeder Slide-Generierung** (weekly KW, Aktienanalyse, Earnings):
+1. Jede PNG-Datei mit dem `Read`-Tool als Bild öffnen und visuell prüfen.
+2. Auf folgende Fehler achten: fehlende Texte/Werte, Überlappungen, abgeschnittene
+   Inhalte, leere Slides, falsche Farben, zu frühe Zeilenumbrüche.
+3. Fehler sofort korrigieren (render.py / generate.py anpassen) und die betroffenen
+   Slides neu generieren und erneut prüfen — erst dann als fertig melden.
+4. Auch nach ZIP-Erstellung nochmals Spot-Check der Schlüssel-Slides (Positionen,
+   CTA, Cover/Hook).
 
 ### Historische Snapshots (`instagram/data/snapshots/KW<NN>/`)
 Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
