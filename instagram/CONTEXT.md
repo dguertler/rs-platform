@@ -237,8 +237,18 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
 „Standard-Konventionen für Charts & Slides"):
 - Chart-Marker: **Kauf = grün, Verkauf = rot** (rote Marker aus `trades.json`,
   wenn `ticker` + Verkaufsdatum gesetzt sind).
+- **Chart-Annotations: Texte dürfen NIEMALS Chartlinien berühren.** Alle
+  `ax.annotate()`-Aufrufe erhalten einen opaken BG-Hintergrund:
+  `bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9)`.
+  Y-Offset Kauf/Signal: min. +28 pt (nach oben). Y-Offset Verkauf: min. −32 pt
+  (nach unten). Gilt für `slide_featured`, `slide_newcomer`, `slide_trade` und
+  alle anderen Chart-Slides mit Annotierungen.
 - Listen-Slides (Stärkste/Weitere Positionen): Detailzeile unter dem Ticker
   **groß & gut lesbar** (Größe 22, `T.SUBTLE`).
+- CTA-Slide: Frage-Box `box_h = 112 + n*54` px (n = Zeilenzahl der Frage);
+  Label "DEINE MEINUNG?" 24 px (blau, bold); Fragetext 32 px (weiß, bold).
+  Bio-Text via `_draw_paragraph` (volle Breite); Frage-Box vertikal zentriert
+  zwischen Bio-Text-Ende und Risikohinweis-Trenner.
 - **Single Source of Truth:** alle neuen Vorgaben/Details werden sofort in den
   Repo-MD-Dateien (`PROMPT.md`/`CONTEXT.md`) festgehalten — nicht nur im Chat.
 

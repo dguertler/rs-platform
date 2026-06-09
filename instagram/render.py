@@ -326,9 +326,10 @@ def slide_signal(c, date_iso, ticker, sig, ret, ohlcv, entry):
     ax.axvline(ex, color=color, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=120, color=color, zorder=4, edgecolor=T.BG, lw=2)
     ax.annotate(f"Signal {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12, 18), textcoords="offset points",
+                xytext=(-12, 28), textcoords="offset points",
                 color=color, fontsize=15, fontweight="bold",
-                ha="right", fontfamily=_FONTS["sans"])
+                ha="right", fontfamily=_FONTS["sans"],
+                bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
 
     ky = 340 + chart_h + 60
     half = (c.W - 2 * MX - 30) // 2
@@ -602,9 +603,10 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
         ax.scatter([sx], [sy], s=140, color=sell_col, zorder=5, edgecolor=T.BG, lw=2)
         # Beschriftung nach links setzen (Verkäufe liegen meist nahe am rechten Rand)
         ax.annotate(f"Verkauf {short_date(sd)}", (sx, sy),
-                    xytext=(-12, -24), textcoords="offset points",
+                    xytext=(-12, -32), textcoords="offset points",
                     color=sell_col, fontsize=15, fontweight="bold",
-                    ha="right", fontfamily=_FONTS["sans"])
+                    ha="right", fontfamily=_FONTS["sans"],
+                    bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
         drawn_sell = True
 
     # Kauf-Signal (groß, grün)
@@ -615,9 +617,10 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
     _ha_buy = "left" if n_before < 3 else "right"
     _ox_buy = 14 if n_before < 3 else -12
     ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(_ox_buy, 18), textcoords="offset points",
+                xytext=(_ox_buy, 28), textcoords="offset points",
                 color=buy_col, fontsize=15, fontweight="bold",
-                ha=_ha_buy, fontfamily=_FONTS["sans"])
+                ha=_ha_buy, fontfamily=_FONTS["sans"],
+                bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
 
     # Mini-Legende (Kauf grün · Verkauf rot · weitere Kauf-Signale)
     ly = 350 + chart_h + 22
