@@ -557,6 +557,7 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
 
     # Fenster: ~25 Bars vor Kauf bis heute (bei abgeschlossenem Trade bis kurz nach Verkauf)
     idx = next((i for i, p in enumerate(ohlcv) if p["d"] >= feat["buy_date"]), 0)
+    n_before = idx - max(0, idx - 25)   # Anzahl Bars links vom Kaufpunkt im Fenster
     end_i = len(ohlcv)
     if feat.get("closed") and feat.get("sells"):
         last_sell = max((s.get("date") or s.get("sell_date") or "") for s in feat["sells"])
@@ -605,13 +606,16 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
         drawn_sell = True
 
     # Kauf-Signal (groß, grün)
+    # Nahe linkem Rand (n_before < 3): Label nach rechts, sonst nach links
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(ex, color=buy_col, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=140, color=buy_col, zorder=5, edgecolor=T.BG, lw=2)
+    _ha_buy = "left" if n_before < 3 else "right"
+    _ox_buy = 14 if n_before < 3 else -12
     ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12, 18), textcoords="offset points",
+                xytext=(_ox_buy, 18), textcoords="offset points",
                 color=buy_col, fontsize=15, fontweight="bold",
-                ha="right", fontfamily=_FONTS["sans"])
+                ha=_ha_buy, fontfamily=_FONTS["sans"])
 
     # Mini-Legende (Kauf grün · Verkauf rot · weitere Kauf-Signale)
     ly = 350 + chart_h + 22

@@ -20,6 +20,10 @@ DATA = os.path.join(ROOT, "data")
 
 _RS_FILES = ["rs_full.json", "rs_dax.json", "rs_sp500.json"]
 
+# Manuelle OHLCV-Daten für Ticker ohne RS-Repo-Abdeckung (z.B. OTC-Aktien)
+_INSTAGRAM_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
+_CUSTOM_OHLCV = os.path.join(_INSTAGRAM_DATA, "custom_ohlcv.json")
+
 
 def _load(path):
     with open(path) as f:
@@ -49,6 +53,16 @@ def load_universe():
             src = d.get("ndx_ohlcv") or d.get("benchmark_ohlcv")
             if src:
                 benchmark = [(c["d"], c["c"]) for c in src]
+    # Manuelle OHLCV-Daten für Ticker ohne RS-Abdeckung (z.B. DFNM, OTC-Biotech)
+    if os.path.exists(_CUSTOM_OHLCV):
+        custom = _load(_CUSTOM_OHLCV)
+        for e in custom.get("data", []):
+            universe[e["ticker"]] = {
+                "ohlcv": e.get("ohlcv", []),
+                "ohlcv_w": e.get("ohlcv_w", []),
+                "score": e.get("score"),
+                "windows": e.get("windows", {}),
+            }
     return universe, benchmark
 
 
