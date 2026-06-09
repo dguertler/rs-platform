@@ -137,6 +137,24 @@ Claude textet Hook/Warum/Frage selbst aus den Daten.
 - **Historisch korrekte Performance:** `store.py` begrenzt Kursrenditen via `as_of`
   auf das Berichtsdatum (nicht auf den heutigen Kurs). Korrekt für alle `--kw`-Aufrufe.
 
+### Datums-Konvention für custom_ohlcv.json (KRITISCH)
+Preise in `instagram/data/custom_ohlcv.json` werden als **Freitag** der jeweiligen
+Woche gespeichert (letzter Handelstag), auch wenn die Notiz vom Montag stammt.
+**Hintergrund:** `as_of` = Samstag der KW (`slide_date()` → `date.fromisocalendar(kw, 6)`).
+Filter: `ohlcv = [c for c in ohlcv if c["d"] <= as_of]`. Ein Montag-Datum liegt NACH
+dem Samstag `as_of` der Vorwoche → wird herausgefiltert → falscher (niedrigerer) Kurs.
+**Regel:** "Montag notiert 06.April 20,43" = Schlusskurs von KW14 → speichern als
+`"d": "2026-04-03"` (Freitag von KW14), NICHT als `"2026-04-06"` (Montag KW15).
+
+### Hook-Genauigkeits-Regel (ZWINGEND)
+**Hooks MÜSSEN auf den im Post gezeigten Daten basieren** — keine erfundenen Zahlen,
+keine falschen Zeiträume.
+- Zeitraum: KW14 ist der ERSTE Wochenbericht → kein „in X Wochen" wenn es die erste Woche ist
+- Rendite: Exakt die Zahl aus dem Zertifikatswert-Verlauf, nicht gerundet oder übertrieben
+- Alpha: Nur nennen wenn tatsächlich gegen NASDAQ outperformed
+- Gute Formulierung KW14: `"+7,4% in Woche 1 — KI-Selektion startet mit NASDAQ-Outperformance"`
+  (falls NASDAQ negativ war: `"KW14: +7,4% während der Markt crashte — Woche 1"`)
+
 ### Design-Regeln Wochenbericht-Slides
 - **Schriftgrößen**: Alle Wochenbericht-Slides nutzen vergrößerte Fonts. Subtitles
   18 px → 22 px, Listen-Haupttext 30 → 34 px, Untertitelzeilen 22 → 26 px,

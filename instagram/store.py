@@ -195,8 +195,10 @@ def compute(kw, universe, benchmark, ref_date=None):
     total_perf = vals[-1] / vals[0] - 1
     week_perf = vals[-1] / vals[-2] - 1 if len(vals) > 1 else 0.0
 
-    # as_of: Performance der Positionen historisch korrekt auf letztes Wochendatum begrenzen
-    as_of = dates[-1]
+    # as_of: Performance der Positionen auf letztes Wochendatum begrenzen.
+    # Mindestens Freitag der KW, damit Freitagskurse (custom_ohlcv o.ä.) immer inkludiert werden,
+    # auch wenn das Zertifikats-Datum früher in der Woche liegt.
+    as_of = max(dates[-1], report.week_friday(year, kw))
 
     # ── NASDAQ (QQQ) im selben Zeitfenster, auf 100 indexiert ────────────────
     nas_raw = [_qqq_on(benchmark, d) for d in dates]
