@@ -7,7 +7,7 @@ import smtplib
 import base64
 import io
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
@@ -230,6 +230,17 @@ def _breakout_date(ohlcv, struct):
     if idx is not None and 0 <= idx < len(ohlcv):
         return ohlcv[idx]['d']
     return None
+
+
+def _is_recent(date_str, max_days=3):
+    """True wenn date_str (YYYY-MM-DD) nicht älter als max_days Kalendertage ist."""
+    if not date_str:
+        return False
+    try:
+        d = datetime.strptime(date_str[:10], '%Y-%m-%d').date()
+        return (datetime.now().date() - d) <= timedelta(days=max_days)
+    except ValueError:
+        return False
 
 
 def count_points(entry):
@@ -693,9 +704,23 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
 
             # Ein Teilsignal ist "frisch", wenn sein Breakout-Datum sich geändert hat
             # (Signal war weg und ist neu zurückgekommen – auch ohne messbaren 2→3-Übergang)
+            # Zusätzlich: 4H-Breakout muss aktuell sein (≤ 3 Kalendertage), sonst kein Alert.
             w_is_fresh  = bool(info['weekly'] and cur_w_date  and cur_w_date  != last_sig.get('weekly_bar_date'))
             d_is_fresh  = bool(info['daily']  and cur_d_date  and cur_d_date  != last_sig.get('daily_bar_date'))
-            h4_is_fresh = bool(info['h4']     and cur_h4_date and cur_h4_date != last_sig.get('h4_bar_date'))
+            h4_is_fresh = bool(info['h4']     and cur_h4_date and cur_h4_date != last_sig.get('h4_bar_date')
+                               and _is_recent(cur_h4_date))
+
+            # Welcher Punkt ist neu hinzugekommen?
+            new_w  = (info['weekly'] and not prev.get('weekly', False)) or w_is_fresh
+            new_d  = (info['daily']  and not prev.get('daily',  False)) or d_is_fresh
+            new_h4 = (info['h4']     and not prev.get('h4',     False)) or h4_is_fresh
+
+            # Beim klassischen 2→3-Übergang (prev_points < 3): 4H-Breakout muss aktuell sein,
+            # wenn 4H der neu hinzugekommene Punkt ist. Sonst kein Alert für veraltete 4H-Brüche.
+            h4_newly_added = info['h4'] and not prev.get('h4', False)
+            if h4_newly_added and not _is_recent(cur_h4_date):
+                print(f'  SKIP {ticker}: 4H-Breakout veraltet ({cur_h4_date}), kein Alert.')
+                continue
 
             # Auslöser:
             # 1. Klassisch: von < 3 auf 3 (inkl. 0/1→3, nicht nur 2→3)
@@ -708,11 +733,6 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
 
             print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte'
                   + (' [Wiederkehr]' if prev_points == 3 else ''))
-
-            # Welcher Punkt ist neu hinzugekommen oder frisch wiedergekehrt?
-            new_w  = (info['weekly'] and not prev.get('weekly', False)) or w_is_fresh
-            new_d  = (info['daily']  and not prev.get('daily',  False)) or d_is_fresh
-            new_h4 = (info['h4']     and not prev.get('h4',     False)) or h4_is_fresh
 
             # Charts: Weekly → Daily → 4H
             w_b64  = render_chart(
