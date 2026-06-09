@@ -63,6 +63,12 @@ def load_universe():
                 "score": e.get("score"),
                 "windows": e.get("windows", {}),
             }
+    # Ticker-Aliase: US-ADRs/Handelsnamen → DAX/europäische Kürzel mit EUR-Preisen
+    # SIEGY (US OTC/ADR für Siemens Energy) → ENR.DE (DAX, EUR-Preise)
+    _ALIASES = {"SIEGY": "ENR.DE"}
+    for alias, target in _ALIASES.items():
+        if target in universe and alias not in universe:
+            universe[alias] = universe[target]
     return universe, benchmark
 
 

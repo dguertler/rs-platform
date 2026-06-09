@@ -280,12 +280,13 @@ def compute(kw, universe, benchmark, ref_date=None):
     wk_sun = _date.fromisocalendar(year, kw, 7).isoformat()
     week_sells = [t for t in _trades_snap.get("closed", [])
                   if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun]
-    trade = None
-    if week_sells:
-        best = max(week_sells, key=lambda t: t.get("ret", -999))
-        # Trade-Chart: as_of = Verkaufsdatum (nicht weiter), damit der Chart korrekt endet
-        trade_as_of = best.get("date") or as_of
-        trade = _trade_dict(universe, best, as_of=trade_as_of)
+    # Alle Trades der Woche als Slides (nach Rendite absteigend sortiert)
+    trades = []
+    for sell in sorted(week_sells, key=lambda t: t.get("ret", -999), reverse=True):
+        trade_as_of = sell.get("date") or as_of
+        td = _trade_dict(universe, sell, as_of=trade_as_of)
+        if td:
+            trades.append(td)
 
     return {
         "kw": kw,
@@ -302,7 +303,7 @@ def compute(kw, universe, benchmark, ref_date=None):
         "rest_holdings": top[5:],
         "featured": featured,
         "newcomer": newcomer,
-        "trade": trade,
+        "trades": trades,
     }
 
 

@@ -243,6 +243,22 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
   Y-Offset Kauf/Signal: min. +28 pt (nach oben). Y-Offset Verkauf: min. −32 pt
   (nach unten). Gilt für `slide_featured`, `slide_newcomer`, `slide_trade` und
   alle anderen Chart-Slides mit Annotierungen.
+- **Hook-Slide (Slide 1):** Rechter Chip = **"NASDAQ-100 seit Start"** mit
+  `ctx["nasdaq_total"]` (kumulierter NASDAQ-Wert), NICHT Alpha. Linker Chip =
+  Gesamtrendite. → In `generate.py` `_hook_metrics()`.
+- **Trades der Woche:** ALLE Verkäufe der KW erhalten je einen eigenen Trade-Slide
+  (Kauf grün + Verkauf rot), sortiert nach Rendite absteigend. Store gibt `"trades"`
+  als Liste zurück (nicht mehr einzelnes `"trade"`). → `store.py` + `generate.py`.
+- **Ticker-Aliase (EUR-Kurse):** US-Tickerbezeichnungen ohne eigenes RS-Dataset
+  werden automatisch auf den DAX/europäischen Kurs gemappt:
+  `SIEGY → ENR.DE` (Siemens Energy AG, DAX, EUR-Preise). Mapping in `data.py`.
+- **Kurswährung:** `rs_full.json` enthält USD-Preise (NASDAQ-100). Die Rendite-
+  berechnung USD/USD ≈ EUR/EUR (Näherung, gültig für kurze Halteperioden).
+  Für exakte EUR-Renditen: EUR/USD-Kurs-Zeitreihe nötig oder europäische Kurse nutzen
+  (DAX-Daten in EUR). Kaufkurse in `holdings.json` sind immer in EUR.
+- **Fehlende Kursdaten (OTC / Small Cap):** Ticker nicht in NASDAQ-100/DAX/S&P500
+  (z.B. CRDO) → `instagram/data/custom_ohlcv.json` manuell ergänzen (EUR-Preise,
+  Freitags-Schlusskurse, Format wie DFNM). Bis zur Ergänzung zeigt der Slide "—".
 - Listen-Slides (Stärkste/Weitere Positionen): Detailzeile unter dem Ticker
   **groß & gut lesbar** (Größe 22, `T.SUBTLE`).
 - CTA-Slide: Frage-Box `box_h = 112 + n*54` px (n = Zeilenzahl der Frage);

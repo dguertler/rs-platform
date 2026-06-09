@@ -37,7 +37,7 @@ def _hook_metrics(ctx):
     return [
         ("Gesamtrendite seit Start", render.fmt_pct(ctx["total_perf"]),
          render.T.GREEN if ctx["total_perf"] >= 0 else render.T.RED),
-        ("Alpha vs. NASDAQ-100", render.fmt_pct(ctx["alpha"]), render.T.BLUE),
+        ("NASDAQ-100 seit Start", render.fmt_pct(ctx["nasdaq_total"]), render.T.BLUE),
     ]
 
 
@@ -97,10 +97,12 @@ def build_from_store(fmt, ctx, outdir):
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 6a) Trade der Woche: größter realisierter Verkauf der KW (Kauf grün + Verkauf rot)
-    if ctx.get("trade") and ctx["trade"].get("entry"):
-        emit(f"trade_{ctx['trade']['ticker'].replace('.', '_')}",
-             lambda c: render.slide_featured(c, di, ctx["trade"], label="TRADE DER WOCHE"))
+    # 6a) Trade der Woche: alle realisierten Verkäufe der KW (Kauf grün + Verkauf rot)
+    for _tr in ctx.get("trades", []):
+        if _tr.get("entry"):
+            _tk = _tr["ticker"].replace(".", "_")
+            emit(f"trade_{_tk}",
+                 lambda c, t=_tr: render.slide_featured(c, di, t, label="TRADE DER WOCHE"))
     # 6b) Weitere Positionen (alle außerhalb der Top-5)
     if ctx.get("rest_holdings"):
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
