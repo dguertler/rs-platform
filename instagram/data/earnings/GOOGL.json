@@ -1,0 +1,57 @@
+{
+  "ticker": "GOOGL",
+  "quarter": "Q1 2026",
+  "report_date": "2026-04-30",
+  "source": "QQQ",
+  "currency": "$",
+  "eps_actual": 5.11,
+  "eps_estimate": 2.67,
+  "eps_surprise_pct": 91.3,
+  "eps_gaap": 5.11,
+  "revenue_actual": 109.9,
+  "revenue_estimate": 107.2,
+  "revenue_unit": "Mrd. $",
+  "revenue_surprise_pct": 2.5,
+  "revenue_yoy_pct": 22.0,
+  "guidance": "CapEx FY2026 auf $180–190 Mrd. angehoben (zuvor $175–185 Mrd.) — Alphabet signalisiert höchste KI-Infrastruktur-Investition aller Zeiten. Cloud rechnet mit weiterem Wachstum; Compute-Kapazität bleibt der Engpassfaktor.",
+  "key_metric_label": "Google Cloud Operating Margin",
+  "key_metric_value": "32,9 %",
+  "key_metric_note": "Q1 2025: 17,8 % → Q1 2026: 32,9 % — Marge nahezu verdoppelt. Erstmals überholt Cloud in absoluten Gewinnen den Vergleichszeitraum des Vorjahres deutlich; Cloud-Backlog $462 Mrd. nahezu verdoppelt QoQ.",
+  "drivers": [
+    "Google Cloud $20,03 Mrd. (+63% YoY) schlägt StreetAccount-Schätzung von $18,05 Mrd. um $2 Mrd. — Operating Margin steigt von 17,8% auf 32,9%",
+    "Gesamtumsatz $109,9 Mrd. übertrifft LSEG-Konsens von $107,2 Mrd.; Revenue +22% YoY — breitbasiert über alle Segmente",
+    "Google Search $60,4 Mrd. (+19% YoY): AI Overviews und AI Mode treiben Abfragevolumina auf Allzeithoch; CPM-Effekt positiv",
+    "GAAP EPS $5,11 enthält $37 Mrd. Equity-Mark-up auf Waymo/Anthropic-Beteiligungen — bereinigtes EPS $2,62 (1 Cent unter Konsens von $2,63)"
+  ],
+  "context": "Die Q1-2026-Zahlen liefern den Beweis, dass Alphabets Cloud-Investment-These aufgeht: Google Cloud wächst +63% YoY und verdoppelt dabei gleichzeitig die operative Marge. Der Umsatz schlägt den Konsens deutlich, Search profitiert strukturell von AI-Integrationen, und der Cloud-Auftragsbestand von $462 Mrd. sichert Wachstums-Visibility weit in 2027+. Das GAAP-EPS von $5,11 ist durch einen einmaligen $37-Mrd.-Equity-Gewinn inflationiert (Waymo/Anthropic-Beteiligungen). Der operative Kern — Cloud-Beschleunigung bei simultaner Margin-Expansion — ist das eigentliche Signal.",
+  "beat_summary": "Googles GAAP-EPS von 5,11 $ je Aktie übersteigt die Konsenserwartung um 91 % — allerdings dank eines einmaligen $37-Mrd.-Equity-Gewinns aus Waymo/Anthropic. Operativ entscheidend: Google Cloud ($20 Mrd.) überraschte um $2 Mrd. bei gleichzeitig nahezu verdoppelter Marge. Der Gesamtumsatz schlug den Konsens ebenfalls.",
+  "verdict_note": "Alphabet bleibt ein BUY: Cloud-Beschleunigung und Margin-Expansion bestätigen die KI-Infrastruktur-These. Das CapEx-Programm ($180–190 Mrd.) komprimiert kurzfristig den FCF, schafft aber den Infrastruktur-Moat für die nächste Wachstumsphase. DOJ-Antitrust bleibt das einzige strukturelle Binär-Risiko — daher Position in Tranchen aufbauen.",
+
+  "quarterly_label": "GAAP-Gewinn je Aktie ($)",
+  "quarterly_note": "Stetiges Wachstum von Q4 2024 bis Q4 2025; Q1 2026 enthält $37 Mrd. einmaligen Equity-Gewinn (Waymo/Anthropic).",
+  "quarterly": [
+    {"q": "Q4 24", "eps": 2.15},
+    {"q": "Q1 25", "eps": 2.81},
+    {"q": "Q2 25", "eps": 2.31},
+    {"q": "Q3 25", "eps": 2.87},
+    {"q": "Q4 25", "eps": 2.82},
+    {"q": "Q1 26", "eps": 5.11}
+  ],
+  "quarterly_derived_note": "Q3 2025 abgeleitet: FY2025 GAAP EPS $10,81 minus Q1 ($2,81) + Q2 ($2,31) + Q4 ($2,82) = $2,87. Übrige Quartale aus SEC-8-K-Meldungen.",
+
+  "segments_note": "Das Umsatzplus trug sich über alle Segmente — getrieben von Cloud-Beschleunigung (+63%) und Search-AI-Momentum (+19%). YouTube und Subscriptions lieferten solides zweistelliges Wachstum.",
+  "segments": [
+    {"name": "Google Cloud", "metric": "$20,03 Mrd. (+63%)", "note": "Operating Margin 32,9% vs. 17,8% — erstmals klarer Top-Beitrag; Auftragsbestand $462 Mrd."},
+    {"name": "Google Search", "metric": "$60,4 Mrd. (+19%)", "note": "AI Overviews und AI Mode treiben Abfragevolumina auf Allzeithoch; CPM-Effekt positiv"},
+    {"name": "YouTube Ads", "metric": "$9,88 Mrd. (+11%)", "note": "Connected-TV und Shorts-Monetarisierung; Wachstum ggü. traditionellem TV-Budget"},
+    {"name": "Subscriptions & Platforms", "metric": "$12,4 Mrd. (+19%)", "note": "Google One und YouTube Premium; stabiles Abo-Wachstum mit hoher Retention"}
+  ],
+
+  "sources": [
+    "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q1/2026q1-alphabet-earnings-release.pdf",
+    "https://news.alphastreet.com/alphabet-googl-q1-2026-cloud-surges-63-to-20b-as-ai-demand-outstrips-capacity/",
+    "https://www.cnbc.com/2026/04/29/alphabet-googl-q1-2026-earnings.html",
+    "https://finance.yahoo.com/markets/stocks/articles/googl-q1-earnings-beat-cloud-163300485.html",
+    "https://www.tikr.com/blog/alphabet-stock-surged-10-after-q1-2026-earnings-whats-next-for-googl"
+  ]
+}
