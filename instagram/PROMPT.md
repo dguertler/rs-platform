@@ -216,7 +216,11 @@ Bei Unsicherheit nachfragen statt raten.
 - Farben/Fonts/Disclaimer: `instagram/theme.py` (Navy + Royalblau, am Logo orientiert).
 
 ### Standard-Konventionen für Charts & Slides (verbindlich)
-Diese Regeln gelten für **alle künftigen** Wochenposts (in `render.py` umgesetzt):
+Diese Regeln gelten für **alle künftigen** Slides und Carousel-Posts (in `render.py` umgesetzt):
+
+- **Seitenabstand `MX = 195 px` (≈ 18 % der Breite) — NICHT unterschreiten.**
+  Instagram beschneidet 4:5-Slides im Profil-Raster seitlich. Alle Texte, Boxen und
+  Charts beginnen frühestens bei `x = MX`. Kein lokaler Override mit kleinerem Wert.
 
 - **Chart-Marker = Ampel-Logik:** **Kauf = grün** (`T.GREEN`), **Verkauf = rot**
   (`T.RED`). Das große Kauf-Signal ist grün, weitere Kauf-Signale grün (kleiner,

@@ -24,7 +24,7 @@ from . import theme as T
 _FONTS = T.register_fonts()
 HANDLE = "@aialphaselection"
 BRAND = "AI ALPHA SELECTION"
-MX = 90  # Seitenrand in px
+MX = 195  # Seitenrand in px — mind. 18 % der Breite (Instagram beschneidet Profil-Raster)
 
 # ── Typografie-Konstanten (einheitlich auf allen Slides) ──────────────────────
 TY_H1      = 42   # Slide-Überschrift  (z. B. "Gesamteinschätzung")
