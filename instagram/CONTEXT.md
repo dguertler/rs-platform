@@ -42,6 +42,9 @@ Wort „Musterdepot" wird bewusst NICHT verwendet (es sind reale Käufe).
    Übergang zu den Einzelaktien; Text aus `--why`
 6. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal,
    weitere Signale als blaue Punkte)
+6a. **Trade der Woche** (NUR wenn diese KW ein Verkauf in `trades.json` liegt):
+   größter realisierter Verkauf der Woche, Chart mit **Kauf grün + Verkauf rot**,
+   Kacheln „Realisierter Gewinn" + „Verkaufskurs"
 7. **Weitere Positionen** (alle außerhalb der Top-5)
 8. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
 9. **🆕 CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs im
@@ -136,6 +139,15 @@ Jetzt: Carousel wöchentlich (manueller Upload). Später: Stories + Reel-Animati
 ## 10. Render-Technik
 matplotlib + Pillow (kein Browser nötig). Design/Farben/Disclaimer in `theme.py`.
 Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
+
+**Verbindliche Slide-Konventionen** (Details + Begründung: `PROMPT.md`,
+„Standard-Konventionen für Charts & Slides"):
+- Chart-Marker: **Kauf = grün, Verkauf = rot** (rote Marker aus `trades.json`,
+  wenn `ticker` + Verkaufsdatum gesetzt sind).
+- Listen-Slides (Stärkste/Weitere Positionen): Detailzeile unter dem Ticker
+  **groß & gut lesbar** (Größe 22, `T.SUBTLE`).
+- **Single Source of Truth:** alle neuen Vorgaben/Details werden sofort in den
+  Repo-MD-Dateien (`PROMPT.md`/`CONTEXT.md`) festgehalten — nicht nur im Chat.
 
 ## 11. Zweiter Post-Typ: Aktien-Analyse-Posts  (★ HIER WEITERARBEITEN)
 Neben dem Wochenupdate werden **fertige KI-Analysen** (`analyses/TICKER.md`) als

@@ -11,6 +11,13 @@ Hauptformat **Carousel (4:5)** + **Reel-Frames (9:16)**. Faceless.
 **Es wird nichts automatisch hochgeladen** – der Nutzer prüft `out/` und postet
 manuell.
 
+> 📌 **Single Source of Truth:** ALLE Details, Regeln, Konventionen und
+> Workflow-Entscheidungen werden **ausschließlich hier in den Repo-MD-Dateien**
+> dokumentiert (`instagram/PROMPT.md` + `instagram/CONTEXT.md`). Wenn der Nutzer
+> künftig eine neue Vorgabe macht (Design, Ablauf, Texte, …), hält Claude sie
+> **sofort in diesen MD-Dateien** fest, damit jede neue Session sie automatisch
+> befolgt. Nichts „nur im Chat" merken — immer in die MD schreiben.
+
 ---
 
 ## ⚖️ wikifolio-Regeln (ZWINGEND einhalten)
@@ -116,6 +123,11 @@ Wochen-Samstagsdatum. Der Output-Ordner heißt entsprechend `<DATUM>_KW<NN>`.
    Trendbestätigung). Text aus `--why`.
 6. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kauf-Signal
    (blau) + eingearbeiteten weiteren Signalen
+6a. **Trade der Woche** — NUR wenn in der KW ein Verkauf abgeschlossen wurde
+   (`trades.json` -> `closed` mit Verkaufsdatum in der KW). Zeigt den größten
+   realisierten Verkauf der Woche im Chart mit **Kauf grün + Verkauf rot**;
+   Kacheln „Realisierter Gewinn" (realisierte Rendite) + „Verkaufskurs". Das
+   Chart-Fenster endet kurz nach dem Verkauf.
 7. **Weitere Positionen** (alle außerhalb der Top-5)
 8. **Newcomer** — bestperformende Aktie der letzten 3 Wochen, NUR wenn sie nicht
    in den Top-5 ist (sonst entfällt die Slide)
@@ -202,6 +214,23 @@ Bei Unsicherheit nachfragen statt raten.
 - Logo: `instagram/assets/logo.png` (transparent) bzw. `.jpg` — wird automatisch
   im Header genutzt; sonst Wortmarke als Fallback.
 - Farben/Fonts/Disclaimer: `instagram/theme.py` (Navy + Royalblau, am Logo orientiert).
+
+### Standard-Konventionen für Charts & Slides (verbindlich)
+Diese Regeln gelten für **alle künftigen** Wochenposts (in `render.py` umgesetzt):
+
+- **Chart-Marker = Ampel-Logik:** **Kauf = grün** (`T.GREEN`), **Verkauf = rot**
+  (`T.RED`). Das große Kauf-Signal ist grün, weitere Kauf-Signale grün (kleiner,
+  transparent), Verkäufe als rote Marker mit „Verkauf <Datum>". Legende unter dem
+  Chart: „● Kauf · ● Verkauf · ● weitere Kauf-Signale".
+- **Verkaufsmarker-Datenquelle:** rote Marker erscheinen automatisch, wenn ein
+  abgeschlossener Trade in `trades.json` ein `ticker` + Verkaufsdatum (`date`)
+  trägt (siehe Schema dort). Aktuell gehaltene Titel (Aktie der Woche / Newcomer)
+  zeigen nur den grünen Kauf — ein roter Marker kommt erst, wenn die Position
+  (teil-)verkauft wurde.
+- **Listen-Slides** „Stärkste Positionen" und „Weitere Positionen": die
+  **Detailzeile unter dem Ticker** (Name · Kaufdatum · Einstiegskurs) wird **groß
+  und gut lesbar** gesetzt (Schriftgröße 22, Farbe `T.SUBTLE`) — bewusst größer
+  als der Standard-Sekundärtext.
 
 ---
 

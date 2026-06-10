@@ -65,6 +65,7 @@ RED       = "#FF5C6C"   # negativ / Bear / SELL
 BLUE      = "#2F6BFF"   # Markenakzent (Logo-Blau) / Benchmark / Alpha / Base
 AMBER     = "#F5B43C"   # neutral / HOLD / WATCH
 TEXT      = "#FFFFFF"   # Haupttext
+SUBTLE    = "#C2C9D6"   # gut lesbarer Sekundärtext (heller als MUTED)
 MUTED     = "#8A93A6"   # Sekundärtext
 GRID      = "#232E42"   # Gitterlinien
 
