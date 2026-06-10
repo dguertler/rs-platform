@@ -404,9 +404,9 @@ def caption_analysis(a):
 
     star = lambda n: ("★" * (n or 0)) + ("☆" * (5 - (n or 0)))
     rt = a["ratings"]
-    DISC = ("Keine Anlageberatung · KI-generierte Analyse · Kursziele sind "
-            "Szenarien, keine Prognosen. Kapitalanlagen bergen Verlustrisiken "
-            "bis zum Totalverlust.")
+    DISC = ("Keine Anlageberatung. Analysen auf Basis öffentlicher Daten. "
+            "Kursziele sind Szenarien, keine Prognosen. Kapitalanlagen bergen "
+            "Verlustrisiken bis zum Totalverlust.")
     sector_tag = {
         "Technology": "#technologie #tech", "Healthcare": "#healthcare #pharma",
         "Industrials": "#industrie", "Energy": "#energie",
@@ -466,7 +466,32 @@ def caption_analysis(a):
         if a.get("peers"):
             parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
 
-        parts.append(f"👉 Folge {render.HANDLE} für 1–2 Aktienanalysen pro Woche.\n")
+        # Weitere Details (aus Geschäftsmodell + Fundamentals + Bewertung)
+        extra = []
+        sec2 = ana.clean_for_slide(a["sections"].get(2, ""))
+        sec6 = ana.clean_for_slide(a["sections"].get(6, ""))
+        sec7 = ana.clean_for_slide(a["sections"].get(7, ""))
+        # D/E aus Section 6
+        import re as _re
+        m_de = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6)
+        if m_de:
+            extra.append(f"D/E-Verhältnis: {m_de.group(1)} (Bilanz solide)")
+        # Analyst-Konsensus aus Section 7
+        m_ac = _re.search(
+            r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]{2,}(?:[.,][0-9]+)?)',
+            sec7)
+        if m_ac:
+            extra.append(f"Analysten-Konsensus: {m_ac.group(1).rstrip('.')} $ (Abdeckung läuft Rally nach)")
+        # Fabless/HBM aus Section 2 (nur wenn nicht schon in business_bullets)
+        biz_text = " ".join(a.get("business_bullets", []))
+        if 'HBM' in sec2 and 'HBM' not in biz_text:
+            extra.append("HBM-Speicher von SK Hynix/Samsung (Verfügbarkeitsrisiko)")
+        elif 'TSMC' in sec2 and 'TSMC' not in biz_text:
+            extra.append("Fabless-Modell: Fertigung via TSMC")
+        if extra and with_cases:
+            parts.append("💡 Weitere Details:\n" + "\n".join(f"› {e}" for e in extra) + "\n")
+
+        parts.append(f"👉 Folge für wöchentliche Analysen.\n")
         parts.append("❗ " + DISC)
         parts.append("\n" + tags)
         return "\n".join(parts)

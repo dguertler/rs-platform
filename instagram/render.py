@@ -865,35 +865,50 @@ def analysis_headline(a):
 
 # 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict + Rating-Blöcke
 def slide_analysis_cover(c, a, date_iso):
+    footer_line = c.H - 150          # y-Koordinate der Footer-Linie
+
     # Top-Leiste: Marke + Datum
     lw = c.draw_logo(MX, 64, 46)
     if not lw:
         c.text(MX, 68, BRAND, 20, color=T.TEXT, weight="bold")
     c.text(c.W - MX, 74, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
 
-    # HEADLINE (Frage/These) — die ersten 3 Sekunden
-    hy = _draw_paragraph(c, MX, 140, analysis_headline(a), 50, c.W - 2 * MX,
-                         color=T.TEXT, weight="bold", line_h=62, max_lines=3,
-                         justify=False)
+    # HEADLINE — 2 Schriftgrößen größer (60 px), eine Zeile tiefer (y=170)
+    hook_size, hook_lh = 60, 74
+    hy = _draw_paragraph(c, MX, 170, analysis_headline(a), hook_size, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=hook_lh, max_lines=3)
 
-    # Weiße Logo-Karte (kompakter als früher, damit Rating-Blöcke Platz haben)
-    card_top = max(hy + 40, 430)
-    card_h = 260
+    # ── Bottom-Section von unten berechnen (Verdict + Ratings) ──────────────────
+    r_gap = 16
+    r_cw = (c.W - 2 * MX - r_gap) // 2
+    r_ch = 90           # Rating-Kachel-Höhe (etwas kleiner als vorher)
+    ratings_h = 2 * r_ch + r_gap          # 2 Reihen
+    verdict_h = 106
+    sub_h = 50                             # Name/Sektor-Zeile
+    bottom_h = sub_h + verdict_h + 14 + ratings_h + 20
+    bottom_start = footer_line - bottom_h - 10
+
+    # Logo-Karte: zentriert zwischen Hook-Ende und Bottom-Section
+    card_h = 240
+    card_top = hy + max(20, (bottom_start - hy - card_h) // 2)
+
     _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, a["ticker"])
 
     # Name + Sektor
     sub = A.short_name(a["name"])
     if a.get("sector"):
         sub += f"  ·  {a['sector']}"
-    c.text(MX, card_top + card_h + 22, sub, TY_BODY, color=T.TEXT)
+    c.text(MX, bottom_start, sub, TY_BODY, color=T.TEXT)
 
-    # Verdict-Badge (etwas kompakter)
-    col = verdict_color(a["verdict"])
-    verdict_top = card_top + card_h + 60
-    _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=106)
-    verdict_bottom = verdict_top + 106
+    # Verdict-Badge
+    verdict_top = bottom_start + sub_h
+    _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=verdict_h)
+    verdict_bottom = verdict_top + verdict_h
 
-    # Rating-Karten 2×2 (kompakt) unter dem Verdict-Badge
+    # Rating-Blöcke 2×2: zentriert zwischen Verdict-Badge und Footer-Linie
+    rating_area_h = footer_line - verdict_bottom - 20
+    r_top = verdict_bottom + 14 + max(0, (rating_area_h - ratings_h) // 2)
+
     rt = a["ratings"]
     rating_items = [
         ("Qualität",    rt.get("Qualität")),
@@ -901,21 +916,18 @@ def slide_analysis_cover(c, a, date_iso):
         ("Bewertung",   rt.get("Bewertung")),
         ("Katalysator", rt.get("Katalysator")),
     ]
-    r_gap = 16
-    r_cw = (c.W - 2 * MX - r_gap) // 2
-    r_ch = 100
     vcol = verdict_color(a["verdict"])
-    r_top = verdict_bottom + 14
     for i, (label, val) in enumerate(rating_items):
         row, col_i = divmod(i, 2)
         rx = MX + col_i * (r_cw + r_gap)
         ry = r_top + row * (r_ch + r_gap)
         c.tile(rx, ry, r_cw, r_ch, color=T.PANEL)
-        c.text(rx + 18, ry + 10, label.upper(), TY_BODY, color=T.TEXT, weight="bold")
+        # Schriftgröße 24 (eine Größe kleiner als TY_BODY=28)
+        c.text(rx + 18, ry + 10, label.upper(), 24, color=T.TEXT, weight="bold")
         c.text(rx + r_cw - 18, ry + 8,
-               f"{val if val is not None else '–'}/5", 36,
+               f"{val if val is not None else '–'}/5", 32,
                color=vcol, weight="bold", ha="right", font="mono")
-        _stars(c, rx + 28, ry + 68, val, col=vcol, gap=34, s=220)
+        _stars(c, rx + 28, ry + r_ch - 32, val, col=vcol, gap=30, s=180)
     analysis_footer(c)
 
 
@@ -943,7 +955,7 @@ def _scenario_rows(c, a, top, horizon_key, title, subtitle):
     c.text(MX, top + 56, subtitle, TY_SUB, color=T.MUTED)
     data = a[horizon_key]
     rows_top = top + 110
-    rh, gap = 168, 26
+    rh, gap = 220, 22
     maxprob = 0
     if horizon_key == "scenarios":
         maxprob = max([(data[k]["prob"] or 0) for k in ("bull", "base", "bear")] + [1])
@@ -963,15 +975,16 @@ def _scenario_rows(c, a, top, horizon_key, title, subtitle):
             if prob:
                 c.tile(bar_x, bar_top, int(bar_w * prob / maxprob), 30,
                        color=col, radius=15)
+            # Wahrscheinlichkeit + Kursziel rechts (vertikal gestapelt, aber kompakt)
+            prob_str = f"{prob}%" if prob is not None else "–"
             c.text(c.W - MX - 40, y + 22, "Wahrscheinlichkeit:", TY_SUB,
                    color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 22 + TY_BODY_LH,
-                   (f"{prob}%" if prob is not None else "–"), 40,
+            c.text(c.W - MX - 40, y + 44, prob_str, 38,
                    color=col, weight="bold", ha="right", font="mono")
-            c.text(c.W - MX - 40, y + 22 + TY_BODY_LH + 52, "Kursziel:", TY_SUB,
+            c.text(c.W - MX - 40, y + 100, "Kursziel:", TY_SUB,
                    color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 22 + TY_BODY_LH + 52 + TY_BODY_LH,
-                   rng or "k. A.", TY_BODY, color=T.TEXT, ha="right", weight="bold")
+            c.text(c.W - MX - 40, y + 122, rng or "k. A.", TY_BODY,
+                   color=T.TEXT, ha="right", weight="bold")
         else:
             rng = A.fmt_range(data[key])
             c.text(MX + 40, y + 78, "Kursziel-Spanne", TY_SUB, color=T.MUTED)
@@ -1012,12 +1025,15 @@ def slide_analysis_business(c, a, date_iso):
         c.tile(MX, y, 10, rh, color=T.BLUE, radius=5)
         # Bullet kann " — " als Trenner Kopf/Detail haben
         head, _, rest = b.partition(" — ")
-        if rest:
-            c.text(MX + 40, y + 22, head.strip(), TY_SUB, color=T.BLUE, weight="bold")
+        if not rest:
+            # Kein expliziter Trenner: erste 5 Wörter als Blau-Titel, Rest als Body
+            words = b.split()
+            split = min(5, max(2, len(words) - 2))
+            head = " ".join(words[:split])
+            rest = " ".join(words[split:])
+        c.text(MX + 40, y + 22, head.strip(), TY_BODY, color=T.BLUE, weight="bold")
+        if rest.strip():
             _draw_paragraph(c, MX + 40, y + 22 + TY_BODY_LH, rest.strip(), TY_BODY,
-                            c.W - 2 * MX - 80, color=T.TEXT, max_lines=2)
-        else:
-            _draw_paragraph(c, MX + 40, y + rh / 2 - 24, b, TY_BODY,
                             c.W - 2 * MX - 80, color=T.TEXT, max_lines=2)
     analysis_footer(c)
 
@@ -1053,7 +1069,7 @@ def _cases_item_data(a):
     sc = a["scenarios"]
     inner_w = 1080 - 2 * MX - 80   # 820 px
     body_size, body_lh = TY_BODY, TY_BODY_LH
-    head_h, pad_bot = 100, 24        # Platz für Label+Meta, Abstand unten
+    head_h, pad_bot = 72, 24         # Platz für Label+Meta (eine Zeile), Abstand unten
     sec_map = {"bull": 3, "base": 4, "bear": 5}
     items = []
     for key in ("bull", "base", "bear"):
@@ -1070,29 +1086,31 @@ def _draw_cases_blocks(c, a, items, top0=300):
     """Zeichnet Szenario-Blöcke mit dynamischer Höhe — kein Text wird abgeschnitten."""
     sc = a["scenarios"]
     inner_w = c.W - 2 * MX - 80
-    body_size, body_lh, head_h = TY_BODY, TY_BODY_LH, 100
+    body_size, body_lh, head_h = TY_BODY, TY_BODY_LH, 72
     gap = 22
+    footer_y = c.H - 160             # Slide-Footer-Linie (nicht überschreiten)
     y = top0
     for item in items:
         key = item["key"]
         col = SCEN_COLOR[key]
         rh = item["rh"]
+        # Overflow-Schutz: Block würde Footer überschreiten → abbrechen
+        if y + rh > footer_y:
+            break
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         c.tile(MX, y, 12, rh, color=col, radius=6)
         rng = A.fmt_range(sc[key]["range"])
         prob = sc[key]["prob"]
-        c.text(MX + 40, y + 24, SCEN_LABEL[key] + " Case", 26, color=col, weight="bold")
-        # Wahrscheinlichkeit + Kursziele als Labels rechts
+        c.text(MX + 40, y + 20, SCEN_LABEL[key] + " Case", 26, color=col, weight="bold")
+        # Wahrscheinlichkeit · Kursziel in EINER Zeile rechts
+        meta_parts = []
         if prob is not None:
-            c.text(c.W - MX - 40, y + 18, "Wahrscheinlichkeit:", TY_SUB,
-                   color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 18 + TY_SUB + 6, f"{prob}%", TY_BODY,
-                   color=col, weight="bold", ha="right", font="mono")
+            meta_parts.append(f"{prob}%")
         if rng:
-            c.text(c.W - MX - 40, y + 18 + TY_SUB + 6 + TY_BODY + 6,
-                   "Kursziele:", TY_SUB, color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 18 + TY_SUB + 6 + TY_BODY + 6 + TY_SUB + 6,
-                   rng, TY_BODY, color=T.TEXT, weight="bold", ha="right", font="mono")
+            meta_parts.append(rng)
+        if meta_parts:
+            c.text(c.W - MX - 40, y + 20, "  ·  ".join(meta_parts), TY_BODY,
+                   color=col, weight="bold", ha="right", font="mono")
         _draw_paragraph(c, MX + 40, y + head_h, item["text"], body_size,
                         inner_w, color=T.TEXT, line_h=body_lh)
         y += rh + gap
@@ -1150,9 +1168,9 @@ def slide_analysis_fazit(c, a, date_iso):
     cta_top = max(y + 40, c.H - 360)
     c.tile(MX, cta_top, c.W - 2 * MX, 120, color=T.PANEL)
     c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
-    c.text(MX + 40, cta_top + 26, "Ganze Analyse als Text unter diesem Post", 26,
+    c.text(MX + 40, cta_top + 26, "Weitere Details zur Analyse in der Caption", 26,
            color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 70, "Tippe auf mehr  ·  folge fuer woechentliche Analysen",
+    c.text(MX + 40, cta_top + 70, "Tippe auf 'mehr'  ·  folge für wöchentliche Analysen",
            TY_SUB, color=T.MUTED)
     # nach unten zeigende Dreiecke (robust gezeichnet statt Glyph)
     for i in range(3):
@@ -1183,7 +1201,7 @@ def slide_analysis_valuation(c, a, date_iso):
             c.text(MX + 34, y + 26, "TRAILING-KGV", 26, color=T.RED, weight="bold")
             c.text(MX + 34, y + 56, pe["trailing"] + "x", 50, color=T.RED,
                    weight="bold", font="mono")
-            c.text(MX + 34, y + 118, "optisch teuer · Artefakt", TY_SUB, color=T.MUTED)
+            c.text(MX + 34, y + 118, "optisch teuer · Basiseffekt", TY_SUB, color=T.MUTED)
         if pe["forward"]:
             x2 = MX + cw + gap
             c.tile(x2, y, cw, ch, color=T.PANEL)
@@ -1239,15 +1257,20 @@ def slide_analysis_cta(c, a, date_iso):
            "für deine Watchlist — die ganze Analyse auf einen Blick.",
            TY_SUB, color=T.MUTED)
 
-    # Community-Frage
+    # Community-Frage — dynamische Box-Höhe an Text angepasst
     name = A.short_name(a["name"])
-    c.tile(MX, 472, c.W - 2 * MX, 260, color=T.PANEL_HI)
-    c.text(MX + 40, 504, "DEINE MEINUNG?", TY_SUB, color=T.BLUE, weight="bold")
-    _draw_paragraph(c, MX + 40, 504 + TY_BODY_LH,
-                    f"{name}: berechtigter Hype oder überhitzt? "
-                    f"Schreib deine These in die Kommentare.", TY_BODY,
-                    c.W - 2 * MX - 80, color=T.TEXT, weight="bold", line_h=TY_BODY_LH,
-                    max_lines=3)
+    q_text = (f"{name}: berechtigter Hype oder überhitzt? "
+              f"Schreib deine These in die Kommentare.")
+    q_lines = _wrap_px(q_text, c.W - 2 * MX - 80, TY_BODY)
+    q_box_h = 16 + TY_BODY_LH + len(q_lines) * TY_BODY_LH + 24  # label + lines + padding
+    save_box_bottom = 272 + 150                                    # Ende der Save-Box
+    cta_y = c.H - 330                                             # Anfang CTA-Text
+    q_top = save_box_bottom + (cta_y - save_box_bottom - q_box_h) // 2  # zentriert
+    c.tile(MX, q_top, c.W - 2 * MX, q_box_h, color=T.PANEL_HI)
+    c.text(MX + 40, q_top + 16, "DEINE MEINUNG?", TY_SUB, color=T.BLUE, weight="bold")
+    _draw_paragraph(c, MX + 40, q_top + 16 + TY_BODY_LH,
+                    q_text, TY_BODY, c.W - 2 * MX - 80,
+                    color=T.TEXT, weight="bold", line_h=TY_BODY_LH)
 
     # Folgen-CTA (unten, zentriert)
     cta_y = c.H - 330
