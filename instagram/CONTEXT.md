@@ -178,10 +178,13 @@ keine falschen Zeiträume.
     „Risikohinweis & Disclaimer"). Textumbruch via `_draw_paragraph(... 18, c.W - 2*MX)`
     für volle Breite links → rechts (= selbe Formatierung wie Aktienanalysen-Footer).
     sep_y = c.H - 260, line_h=30.
-- **Positionen ohne Kursdaten** (DFNM, CRDO, SIEGY etc.): `value="—"`,
-  `value_font="sans"` (em dash sicher in Liberation Sans), `color=T.SUBTLE`
-  (heller als MUTED, gut sichtbar). Sortierung: Positionen mit Kursdaten zuerst
-  (absteigend nach Rendite), danach alle ohne (`ret is None`).
+- **Positionen ohne Kursdaten (ret=None) werden ausgeblendet:** Ticker ohne
+  Preisdaten (z. B. CRDO) erscheinen weder auf dem Positionen-Slide noch auf dem
+  Weitere-Slide. Nur Positionen mit `ret is not None` werden gerendert.
+  Filter in `generate.py build_from_store()`.
+- **Footer-Disclaimer Schriftgröße: 14 px** (vorher 12 px, einmalig erhöht).
+  Line-Spacing 28 px, `width=130` für Textwrap. Gilt für `footer()` in render.py
+  (alle wöchentlichen Post-Slides). `analysis_footer()` bleibt bei 16 px.
 
 ### Qualitätssicherung: Slides immer kontrollieren
 **PFLICHT nach jeder Slide-Generierung** (weekly KW, Aktienanalyse, Earnings):

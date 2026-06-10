@@ -81,28 +81,28 @@ def build_from_store(fmt, ctx, outdir):
     # 3) Wochen-Historie (Mehrrendite ggü. NASDAQ) — erst ab 2+ Wochen sinnvoll (KW15+)
     if len(ctx["history"]) >= 2:
         emit("historie", lambda c: render.slide_history(c, di, ctx["history"]))
-    # 4) Stärkste Positionen (Top-5, mit Kaufdatum + Kaufpreis)
-    if ctx["top_holdings"]:
+    # 4) Stärkste Positionen (nur Positionen mit Kursdaten; ret=None werden ausgeblendet)
+    _pos_with_data = [t for t in ctx["top_holdings"] if t["ret"] is not None]
+    if _pos_with_data:
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
-                 "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
-                 "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
-                          if t["ret"] is not None else render.T.SUBTLE,
-                 "value_font": "mono" if t["ret"] is not None else "sans"}
-                for t in ctx["top_holdings"]]
+                 "value": render.fmt_pct(t["ret"]),
+                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED,
+                 "value_font": "mono"}
+                for t in _pos_with_data]
         emit("positionen", lambda c: render.slide_list(
             c, di, "Stärkste Positionen", "Wertzuwachs seit Kauf", rows))
     # 5) Aktie der Woche (Rotation) — vor warum für besseren Lesefluss
     if ctx["featured"]["entry"]:
         emit(f"aktie_{ctx['featured']['ticker'].replace('.', '_')}",
              lambda c: render.slide_featured(c, di, ctx["featured"]))
-    # 6) Weitere Positionen (alle außerhalb der Top-5) — vor warum
-    if ctx.get("rest_holdings"):
+    # 6) Weitere Positionen (alle außerhalb der Top-5, nur mit Kursdaten) — vor warum
+    _rest_with_data = [t for t in ctx.get("rest_holdings", []) if t["ret"] is not None]
+    if _rest_with_data:
         rows = [{"main": t["ticker"], "sub": _pos_sub(t),
-                 "value": render.fmt_pct(t["ret"]) if t["ret"] is not None else "—",
-                 "color": (render.T.GREEN if t["ret"] >= 0 else render.T.RED)
-                          if t["ret"] is not None else render.T.SUBTLE,
-                 "value_font": "mono" if t["ret"] is not None else "sans"}
-                for t in ctx["rest_holdings"]]
+                 "value": render.fmt_pct(t["ret"]),
+                 "color": render.T.GREEN if t["ret"] >= 0 else render.T.RED,
+                 "value_font": "mono"}
+                for t in _rest_with_data]
         emit("weitere", lambda c: render.slide_list(
             c, di, "Weitere Positionen", "Wertzuwachs seit Kauf", rows))
     # 7) Newcomer (bester Kauf der letzten 3 Wochen, nicht in Top-5) — vor warum

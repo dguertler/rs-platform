@@ -156,9 +156,9 @@ def footer(c):
     # Disclaimer volle Breite (links nach rechts), ohne Handle
     import textwrap
     c.ax.plot([MX, c.W - MX], [c.y(c.H - 150), c.y(c.H - 150)], color=T.GRID, lw=1.5)
-    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=150)
+    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=130)
     for i, ln in enumerate(lines):
-        c.text(MX, c.H - 128 + i * 25, ln, 12, color=T.MUTED)
+        c.text(MX, c.H - 128 + i * 28, ln, 14, color=T.MUTED)
 
 
 def _style_chart(ax):
