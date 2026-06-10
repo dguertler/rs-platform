@@ -61,18 +61,25 @@ def _wrap(c, x, top, text, size, color, line_h, weight="normal"):
 
 
 def slide_intro(c, date_iso):
-    """Slide 1 — DIE STRATEGIE: Hook-Frage + Subtitle."""
+    """Slide 1 — DIE STRATEGIE: Hook-Frage + Subtitle.
+
+    mx_s = 13 % der Breite (~140 px) als Sicherheitsabstand gegen den
+    seitlichen Beschnitt im Profil-Raster.
+    """
     header(c, date_iso)
+    mx_s = int(c.W * 0.13)   # ≈ 140 px — schützt gegen Grid-Beschnitt links/rechts
 
-    c.text(MX, 285, "DIE STRATEGIE", 18, color=T.BLUE, weight="bold")
+    c.text(mx_s, 285, "DIE STRATEGIE", 18, color=T.BLUE, weight="bold")
 
-    h1_lines = textwrap.wrap("Wie schlägt man den NASDAQ-100?", width=20)
+    wrap_w = c.W - 2 * mx_s
+    h1_lines = textwrap.wrap("Wie schlägt man den NASDAQ-100?",
+                             width=max(12, int(wrap_w / (72 * 0.52))))
     y = 335
     for line in h1_lines:
-        c.text(MX, y, line, 72, color=T.TEXT, weight="bold")
+        c.text(mx_s, y, line, 72, color=T.TEXT, weight="bold")
         y += 94
 
-    c.text(MX, y + 30, "Das datengetriebene System hinter AI Alpha Selection.",
+    c.text(mx_s, y + 30, "Das datengetriebene System hinter AI Alpha Selection.",
            28, color=T.SUBTLE)
 
     footer(c)
