@@ -48,6 +48,33 @@ def load_trades():
         return {"closed": []}
 
 
+def _sells_for(ticker):
+    """Abgeschlossene Verkäufe eines Tickers (für rote Verkaufsmarker im Chart).
+    Quelle: trades.json -> closed mit passendem `ticker` und Verkaufsdatum."""
+    return [t for t in load_trades().get("closed", [])
+            if t.get("ticker") == ticker and (t.get("date") or t.get("sell_date"))]
+
+
+def _trade_dict(universe, t):
+    """Chart-Daten für einen abgeschlossenen Trade (Kauf grün + Verkauf rot).
+    `ret` ist die realisierte Rendite aus trades.json (nicht der aktuelle Kurs)."""
+    tk = t.get("ticker")
+    if not tk or tk not in universe or not universe[tk]["ohlcv"]:
+        return None
+    ohlcv = universe[tk]["ohlcv"]
+    bd = t.get("buy_date")
+    entry = next((c for c in ohlcv if c["d"] >= bd), ohlcv[0]) if bd else ohlcv[0]
+    return {
+        "ticker": tk, "name": t.get("name", ""),
+        "buy_date": bd or entry["d"], "buy_price_eur": t.get("buy_price_eur"),
+        "ret": t.get("ret"), "entry": entry,
+        "ohlcv": ohlcv,
+        "signals": data.load_signals().get(tk, []),
+        "sells": [t], "closed": True,
+        "sell_price_eur": t.get("sell_price_eur"),
+    }
+
+
 def _featured_dict(universe, p):
     """Baut die Daten für eine Chart-Slide (Aktie der Woche / Newcomer)."""
     ret, entry = _ret_since(universe, p["ticker"], p["buy_date"])
@@ -57,6 +84,7 @@ def _featured_dict(universe, p):
         "ret": ret, "entry": entry,
         "ohlcv": universe[p["ticker"]]["ohlcv"],
         "signals": data.load_signals().get(p["ticker"], []),
+        "sells": _sells_for(p["ticker"]),   # rote Verkaufsmarker (falls (teil-)verkauft)
     }
 
 
@@ -179,6 +207,19 @@ def compute(kw, universe, benchmark, ref_date=None):
     cand = [t for t in top if t["buy_date"] >= cutoff and t["ticker"] not in top5_tickers]
     newcomer = _featured_dict(universe, max(cand, key=lambda t: t["ret"])) if cand else None
 
+    # ── Trade der Woche: größter realisierter Verkauf DIESER KW ───────────────
+    #    (Chart mit Kauf grün + Verkauf rot). Quelle: trades.json -> closed
+    #    mit `ticker` + Verkaufsdatum `date` innerhalb der KW.
+    from datetime import date as _date
+    wk_mon = _date.fromisocalendar(year, kw, 1).isoformat()
+    wk_sun = _date.fromisocalendar(year, kw, 7).isoformat()
+    week_sells = [t for t in load_trades().get("closed", [])
+                  if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun]
+    trade = None
+    if week_sells:
+        best = max(week_sells, key=lambda t: t.get("ret", -999))
+        trade = _trade_dict(universe, best)
+
     return {
         "kw": kw,
         "period": _period(start_date, dates[-1]),
@@ -194,6 +235,7 @@ def compute(kw, universe, benchmark, ref_date=None):
         "rest_holdings": top[5:],
         "featured": featured,
         "newcomer": newcomer,
+        "trade": trade,
     }
 
 
