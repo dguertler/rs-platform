@@ -253,9 +253,12 @@ automatisch (kürzeres Carousel, dafür „Chancen & Risiken"). Für volle Posts
 Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 
 **Offene Punkte / nächste Schritte:**
-- **Logos hochladen:** Firmenlogos fehlen noch (Auto-Download in der Cloud
-  geblockt). Datei als `instagram/assets/logos/<TICKER>.png` ins Repo legen
-  (z. B. GitHub-Upload) → echtes Logo erscheint auf der weißen Cover-Karte.
+- **Logo-Workflow:** Firmenlogos als `<TICKER>.png` unter
+  `instagram/assets/logos/` ablegen (GitHub-Upload oder lokaler Push). **PNG
+  mit weißem oder transparentem Hintergrund** — beides funktioniert, da
+  `_trim_logo` automatisch weiße UND transparente Ränder abschneidet. Logo
+  erscheint auf der weißen Cover-Karte und oben rechts auf allen Innen-Slides.
+  Fehlt ein Logo → Wortmarke (Fallback). Auto-Download in der Cloud geblockt.
 - Optional: individuelle Headlines für die 17 Ticker vorbereiten;
   Reel-MP4-Feintuning (Tempo/Textgröße); Stories; Auto-Upload via Graph API.
 - Abhängigkeiten: `pip install -r instagram/requirements.txt` (matplotlib,

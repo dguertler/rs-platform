@@ -8,12 +8,16 @@ AI-Alpha-Marke, Analyse = Firmenlogo).
 - Dateiname = **Ticker** wie in `analyses/` (Punkt durch `_` oder weglassen):
   - `AMD.png`, `MU.png`, `NXPI.png`
   - `SIE_DE.png` **oder** `SIE.DE.png` (beides wird gefunden)
-- Format: **PNG mit transparentem Hintergrund** bevorzugt (auch `.webp`,
-  `.jpg`/`.jpeg` möglich). Groß-/Kleinschreibung egal.
+- Format: **PNG bevorzugt** — sowohl transparenter als auch **weißer Hintergrund
+  funktioniert** (beide werden von `_trim_logo` automatisch abgeschnitten).
+  Auch `.webp`, `.jpg`/`.jpeg` möglich. Groß-/Kleinschreibung egal.
 - Das Logo sitzt auf einer **weißen Karte** → **dunkle/schwarze Logos** (das
   übliche „Logo Black PNG") wirken am besten. Auch farbige Logos auf weiß sind
   ok. Reine weiße Logos wären auf der weißen Karte unsichtbar — dann lieber die
   schwarze/farbige Variante nehmen.
+- **Standard-Workflow:** Logo als `<TICKER>.png` (weiß oder transparent) unter
+  `instagram/assets/logos/` ablegen → Generator nutzt es automatisch auf Cover
+  und allen Innen-Slides. Fehlt das Logo → Wortmarke als Fallback.
 - Empfehlung: möglichst quadratisch oder breit, mind. ~400 px Kantenlänge.
   Transparente/weiße Ränder werden automatisch beschnitten und das Logo
   proportional in die Karte eingepasst.
