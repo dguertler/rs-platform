@@ -50,18 +50,35 @@ PFLICHT-STRUKTUR
 Max. 6–8 Sätze. Was ist die eigentliche Story hinter der Aktie — nicht das offensichtliche Narrativ, sondern der strukturelle Kern? Warum ist das jetzt relevant? Was übersieht der Markt gerade noch?
 
 ## 2. GESCHÄFTSMODELL
-Max. 8–10 Bullet Points mit -. Keine Selbstverständlichkeiten. Fokus auf: Wie verdient das Unternehmen wirklich Geld? Wo liegt der operative Hebel? Wo liegt die strukturelle Abhängigkeit?
+Max. 8 Bullet Points mit -. Keine Selbstverständlichkeiten. Fokus auf: Wie verdient das Unternehmen wirklich Geld? Wo liegt der operative Hebel? Wo liegt die strukturelle Abhängigkeit?
 
 ## 3. BULL CASE
 Konkret und quantifiziert wo möglich. Welche spezifischen Faktoren müssen eintreten? Nenne reale Datenpunkte, Analystenziele oder strukturelle Argumente. Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Beispiel: "Base $340 = FY28-EPS ~$8,50 × 40x Forward." Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
 
 ## 4. BASE CASE
 Wahrscheinlichstes Szenario auf Sicht 12–18 Monate unter aktuellen Marktbedingungen — nicht das rechnerische Mittel zwischen Bull und Bear. Kursziel-Bandbreite angeben. Eintrittswahrscheinlichkeit in Prozent nennen.
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
 
 ## 5. BEAR CASE
 Gleiche Tiefe wie Bull Case. Welches Szenario zerstört die These? Nenne den konkreten Auslöser — nicht nur "Zyklus dreht". Was passiert mit der Bewertung in diesem Fall? Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Bandbreiten ohne Herleitung sind unzulässig.
+
+Der Bear Case muss folgende Risikodimensionen jeweils adressieren oder explizit als "auf Datenbasis nicht beurteilbar" kennzeichnen:
+- Kundenkonzentration (quantifizieren falls Daten vorhanden)
+- Geopolitik / Exportkontrollen / China-Exposure
+- Lieferketten-/Foundry-Abhängigkeit (Single-Source-Risiko)
+- Verwässerung (SBC, Aktienanzahl-Trend)
+- Regulierung / Rechtsrisiken
+Keine dieser Dimensionen darf stillschweigend übergangen werden.
 
 Bull + Base + Bear müssen exakt 100% ergeben — Summe am Ende von Abschnitt 5 ausweisen.
+
+Erwartungswert (PFLICHT, am Ende von Abschnitt 5):
+EV = Σ (Wahrscheinlichkeit × Mittelwert der Kursziel-Bandbreite) über Bull, Base und Bear. Ausweisen als:
+"Erwartungswert: $X — implizites Upside/Downside vs. aktuellem Kurs: ±Y%."
+Liegt der EV unter oder weniger als 10% über dem aktuellen Kurs, muss dies im Profi-Fazit explizit adressiert werden:
+"Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge." Ein High-Conviction-Framing im Fazit ist dann unzulässig. Die Szenarien dürfen nicht nachträglich so kalibriert werden, dass der EV positiv wird.
 
 ## 6. FUNDAMENTALE QUALITÄT
 Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig: Bewerte die Kennzahlen im Zykluskontext — Top-of-Cycle-Zahlen anders gewichten als normalisierte Werte. Wo liegt der echte wirtschaftliche Burggraben, wo ist er nur scheinbar?
@@ -69,8 +86,12 @@ Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig:
 ## 7. BEWERTUNG
 Niemals eine zyklische Aktie nur anhand des aktuellen KGVs bewerten. Pflicht: Bewertung über normalisierten FCF über den vollen Zyklus oder KBV. Zusätzlich Forward-Multiples und was der Markt damit implizit aussagt. Ist die aktuelle Bewertung eine Value-Falle, eine strukturierte Wette oder echtes Upside?
 
+Zusätzlich Pflicht: Rückrechnung "Was preist der Kurs ein?" — welches Umsatzwachstum, welche Marge und welches Exit-Multiple rechtfertigen den AKTUELLEN Kurs (vereinfachte Rechnung genügt, Annahmen nennen). Danach ein Satz: Ist das plausibel, ambitioniert oder unrealistisch?
+
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 Wie ist die institutionelle Positionierung aktuell? Short Float, Fast Money vs. Long Only, FOMO-Dynamik. Was muss künftig passieren, damit neue Käufer anziehen? Wo liegt das Enttäuschungsrisiko?
+
+Aussagen zur institutionellen Positionierung (Long-Only vs. Fast Money, FOMO, Ownership) nur, wenn sie aus den gelieferten Daten ableitbar sind (z.B. Short Float, Volumen-Spikes). Alles andere klar kennzeichnen: "Hypothese, nicht datenbasiert:". Erfundene Positionierungs-Narrative sind ein Analysefehler.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 Trendstruktur, SMA-Stellung, RSI, Volumen. Ist das Momentum fundamental gestützt oder rein reaktiv? Was wäre ein technisches Warnsignal?
@@ -80,6 +101,8 @@ Drei explizite Szenarien mit Kurszielbandbreiten: Bull / Base / Bear. Was ist di
 
 ## 11. PROFI-FAZIT
 Klare Positionierung: Ist das ein Buy-and-Hold-Compounder, ein zyklischer Trading-Trade oder ein High-Conviction-Momentum-Play? Für welchen Investorentyp geeignet? Explizite Risikowarnung zur Positionsgröße wenn relevant. Kein Herumdrucksen — klare Aussage. Max. 2–3 direkte Peers nennen: Wer ist das reinere Instrument für die These, wo ist die relative Bewertung attraktiver?
+
+Peer-Aussagen zur relativen Bewertung ("oft attraktiver bewertet") nur mit konkreter Zahl, falls Peer-Multiples in den Daten enthalten sind. Andernfalls qualitativ einordnen und kennzeichnen: "Peer-Multiples nicht im Datensatz — relative Bewertung indikativ."
 
 Rating (Zahl, nicht Sterne):
 - Qualität: X/5
@@ -93,10 +116,18 @@ Sektorrotation oder Makro-Tailwind.
 5 = starker, nachhaltiger fundamentaler Treiber.
 1 = kein erkennbarer fundamentaler Katalysator — rein technisches Momentum.
 
+SZENARIO-KONSISTENZ ÜBER ZEITHORIZONTE
+Die 12–18-Monats-Szenarien (Abschnitte 3–5) und die 3–5-Jahres-
+Szenarien (Abschnitt 10) müssen ineinander überführbar sein:
+Der kurzfristige Bear darf nicht über dem langfristigen Base
+liegen, der kurzfristige Bull nicht über dem langfristigen Bull.
+Bei Inkonsistenz die Szenarien anpassen, nicht die Regel ignorieren.
+
 FORMATIERUNGS-REGELN
 - ## für Hauptüberschriften (exakt wie in der Struktur angegeben)
 - - als Bullet-Marker (kein •)
-- MAX. 1000 Wörter gesamt
+- MAX. 1200 Wörter gesamt (EV-Rechnung, Kursziel-Herleitung und
+  Risiko-Sweep brauchen Raum; max. 8 Bullets in Abschnitt 2)
 - Sprache: DEUTSCH
 - Keine horizontalen Trennlinien
 - Konkrete Zahlen > vage Formulierungen — wo immer möglich
@@ -111,6 +142,33 @@ Keine Kennzahlen erfinden oder aus dem Kontext ableiten.
 Neu gelistete Ticker oder Spin-offs können unvollständige TTM-Daten
 haben — dies explizit im Investment-Case erwähnen wenn mehr als 3
 Felder N/A oder UNGÜLTIG sind.
+
+Auffällige Kennzahl-Anomalien (z.B. Net Margin > Operating Margin,
+Steuerquote <10%, ROE-Sprünge) müssen: (1) benannt, (2) mit den
+plausiblen Ursachen erklärt und (3) explizit als "aus den Daten
+nicht abschließend auflösbar" markiert werden, falls die Ursache
+nicht belegbar ist. Anomalie-verzerrte Kennzahlen dürfen NICHT in
+Bewertung, Szenario-Herleitung oder Scoring einfließen — stattdessen
+die nächstbeste unverzerrte Kennzahl verwenden und dies ausweisen.
+
+DATENKONSISTENZ & VERALTETE SNAPSHOTS
+Prüfe vor der Analyse, ob Kurs-/Signaldaten und Fundamental-Snapshot
+zeitlich auseinanderfallen (erkennbar an Snapshot-Datum, Preis-Gap-Flag
+oder Kursniveau weit über/unter dem Snapshot-Kurs).
+
+Falls die Abweichung >5% beträgt oder price_gap_detected=True gesetzt:
+- Alle Multiples ZUSÄTZLICH auf das aktuelle Kursniveau umrechnen und
+  dieses Niveau als primäre Bewertungsbasis verwenden. Snapshot-Multiples
+  nur als historischer Referenzpunkt.
+- Den Auslöser der Bewegung NIEMALS behaupten oder inferieren.
+  Formulierungen wie "offenkundig", "vermutlich Earnings" sind verboten.
+  Stattdessen: "Auslöser aus den vorliegenden Daten nicht verifizierbar —
+  vor einer Positionsentscheidung zwingend prüfen."
+- Am Anfang des Investment-Case einen Hinweisblock setzen:
+  "DATENLAGE: Fundamental-Snapshot vom [Datum] liegt vor der jüngsten
+  Kursbewegung. Konfidenz der Bewertungsaussagen reduziert."
+- Das Rating-Feld "Bewertung: X/5" in diesem Fall mit dem Zusatz
+  "(vorläufig, Datenstand)" versehen.
 
 STRUKTURELLE GESCHÄFTSMODELL-ANALYSE
 Im Investment-Case explizit prüfen ob strukturelle
@@ -198,50 +256,118 @@ def validate_fundamentals(data: dict) -> dict:
 
 def fetch_fundamentals(ticker: str) -> dict:
     try:
-        info = yf.Ticker(ticker).info or {}
+        stock = yf.Ticker(ticker)
+        info = stock.info or {}
         raw = {
-            "shortName":        info.get("shortName", ticker),
-            "sector":           info.get("sector", "N/A"),
-            "industry":         info.get("industry", "N/A"),
-            "marketCap":        info.get("marketCap"),
-            "currentPrice":     info.get("currentPrice") or info.get("regularMarketPrice"),
-            "trailingPE":       info.get("trailingPE"),
-            "forwardPE":        info.get("forwardPE"),
-            "grossMargins":     info.get("grossMargins"),
-            "operatingMargins": info.get("operatingMargins"),
-            "profitMargins":    info.get("profitMargins"),
-            "freeCashflow":     info.get("freeCashflow"),
-            "totalRevenue":     info.get("totalRevenue"),
-            "revenueGrowth":    info.get("revenueGrowth"),
-            "dividendYield":    info.get("dividendYield"),
-            "debtToEquity":     info.get("debtToEquity"),
-            "returnOnEquity":   info.get("returnOnEquity"),
-            "priceToBook":      info.get("priceToBook"),
-            "fiftyTwoWeekHigh": info.get("fiftyTwoWeekHigh"),
-            "fiftyTwoWeekLow":  info.get("fiftyTwoWeekLow"),
-            "beta":             info.get("beta"),
-            "recommendationKey":info.get("recommendationKey"),
-            "targetMeanPrice":  info.get("targetMeanPrice"),
+            "shortName":             info.get("shortName", ticker),
+            "sector":                info.get("sector", "N/A"),
+            "industry":              info.get("industry", "N/A"),
+            "marketCap":             info.get("marketCap"),
+            "currentPrice":          info.get("currentPrice") or info.get("regularMarketPrice"),
+            "trailingPE":            info.get("trailingPE"),
+            "forwardPE":             info.get("forwardPE"),
+            "grossMargins":          info.get("grossMargins"),
+            "operatingMargins":      info.get("operatingMargins"),
+            "profitMargins":         info.get("profitMargins"),
+            "freeCashflow":          info.get("freeCashflow"),
+            "totalRevenue":          info.get("totalRevenue"),
+            "revenueGrowth":         info.get("revenueGrowth"),
+            "dividendYield":         info.get("dividendYield"),
+            "debtToEquity":          info.get("debtToEquity"),
+            "returnOnEquity":        info.get("returnOnEquity"),
+            "priceToBook":           info.get("priceToBook"),
+            "fiftyTwoWeekHigh":      info.get("fiftyTwoWeekHigh"),
+            "fiftyTwoWeekLow":       info.get("fiftyTwoWeekLow"),
+            "beta":                  info.get("beta"),
+            "recommendationKey":     info.get("recommendationKey"),
+            "targetMeanPrice":       info.get("targetMeanPrice"),
+            "numberOfAnalystOpinions": info.get("numberOfAnalystOpinions"),
+            "sharesOutstanding":     info.get("sharesOutstanding"),
+            "floatShares":           info.get("floatShares"),
+            "shortRatio":            info.get("shortRatio"),
+            "shortPercentOfFloat":   info.get("shortPercentOfFloat"),
+            "_snapshot_date":        datetime.now().strftime("%Y-%m-%d"),
         }
-        return validate_fundamentals(raw)
+        validated = validate_fundamentals(raw)
+        # Fetch SBC from cashflow statement (B4)
+        try:
+            cf = stock.cashflow
+            if cf is not None and not cf.empty:
+                sbc_row = None
+                for label in ("Stock Based Compensation", "Share Based Compensation"):
+                    if label in cf.index:
+                        sbc_row = cf.loc[label]
+                        break
+                if sbc_row is not None:
+                    latest_sbc = sbc_row.iloc[0]
+                    validated["stockBasedCompensation"] = latest_sbc if latest_sbc else None
+        except Exception:
+            pass
+        # Fetch earnings dates (B2)
+        try:
+            cal = stock.calendar
+            if cal is not None and not cal.empty:
+                if "Earnings Date" in cal.index:
+                    ed = cal.loc["Earnings Date"]
+                    validated["_next_earnings"] = str(ed.iloc[0])[:10] if hasattr(ed, "iloc") else str(ed)[:10]
+        except Exception:
+            pass
+        return validated
     except Exception as e:
         print(f"  Fundamentaldaten für {ticker} fehlgeschlagen: {e}")
         return {}
 
 
+def _live_price(ticker: str):
+    """Fetch current price via yfinance fast_info."""
+    try:
+        fi = yf.Ticker(ticker).fast_info
+        return fi.get("last_price") or fi.get("regularMarketPrice")
+    except Exception:
+        return None
+
+
 def load_fundamentals(ticker: str) -> dict:
-    """Lädt Fundamentaldaten aus data/fundamentals.json; Fallback auf live yfinance."""
+    """Lädt Fundamentaldaten aus data/fundamentals.json; Fallback auf live yfinance.
+    B1: Snapshot-Datum mitliefern.
+    B3: Live-Kurs gegen Snapshot-Kurs prüfen; bei >5% Abweichung Snapshot refreshen
+        und price_gap_detected setzen.
+    """
     p = Path("data/fundamentals.json")
+    fund = None
+    snapshot_date = None
     if p.exists():
         with open(p, encoding="utf-8") as f:
             cached = json.load(f)
         fund = cached.get("tickers", {}).get(ticker.upper())
         if fund:
-            updated = cached.get("updated_at", "unbekannt")[:10]
-            print(f"  Fundamentaldaten aus Cache ({updated})")
-            return fund
-    print(f"  {ticker} nicht in fundamentals.json — live fetch via yfinance...")
-    return fetch_fundamentals(ticker)
+            snapshot_date = cached.get("updated_at", "unbekannt")[:10]
+            print(f"  Fundamentaldaten aus Cache ({snapshot_date})")
+            fund = dict(fund)
+            fund.setdefault("_snapshot_date", snapshot_date)
+
+    if fund is None:
+        print(f"  {ticker} nicht in fundamentals.json — live fetch via yfinance...")
+        return fetch_fundamentals(ticker)
+
+    # B3: live price check
+    snapshot_price = fund.get("currentPrice")
+    if isinstance(snapshot_price, (int, float)) and snapshot_price > 0:
+        live_price = _live_price(ticker)
+        if live_price and isinstance(live_price, (int, float)):
+            gap_pct = abs(live_price - snapshot_price) / snapshot_price
+            if gap_pct > 0.05:
+                print(f"  Preis-Gap {gap_pct*100:.1f}% erkannt (Snapshot ${snapshot_price:.2f} → Live ${live_price:.2f}) — refreshe Fundamentaldaten...")
+                fresh = fetch_fundamentals(ticker)
+                fresh["_price_gap_detected"] = True
+                fresh["_price_gap_pct"] = round(gap_pct * 100, 1)
+                fresh["_snapshot_price"] = snapshot_price
+                fresh["_snapshot_date"] = snapshot_date or fresh.get("_snapshot_date", "unbekannt")
+                return fresh
+            else:
+                fund["_live_price"] = round(live_price, 2)
+
+    return fund
 
 
 def _pct(v):
@@ -255,11 +381,42 @@ def _fmt(v):
 
 
 def build_context(ticker: str, fund: dict, rs_score: float, windows: dict, gws: dict) -> str:
+    snapshot_date = fund.get("_snapshot_date", "unbekannt")
+    live_price    = fund.get("_live_price")
+    gap_detected  = fund.get("_price_gap_detected", False)
+    gap_pct       = fund.get("_price_gap_pct")
+    snap_price    = fund.get("_snapshot_price")
+    next_earnings = fund.get("_next_earnings", "N/A")
+    shares_out    = fund.get("sharesOutstanding")
+    sbc           = fund.get("stockBasedCompensation")
+    short_pct     = fund.get("shortPercentOfFloat")
+    short_ratio   = fund.get("shortRatio")
+    num_analysts  = fund.get("numberOfAnalystOpinions")
+
+    gap_warning = ""
+    if gap_detected:
+        gap_warning = (
+            f"\n⚠ PREIS-GAP ERKANNT: Snapshot-Kurs ${snap_price} vs. aktuellem Kurs "
+            f"${_fmt(fund.get('currentPrice'))} — Abweichung {gap_pct}%. "
+            f"price_gap_detected=True — Datenlage-Hinweis im Investment-Case PFLICHT."
+        )
+
+    live_price_line = ""
+    if live_price and not gap_detected:
+        live_price_line = f"\nAktueller Live-Kurs (Prüfung): ${live_price}"
+
+    sbc_line     = f"- Stock-based Compensation (letztes FJ): {_bn(sbc)}" if sbc else "- SBC: N/A"
+    shares_line  = f"- Shares Outstanding: {shares_out/1e9:.2f} Mrd." if isinstance(shares_out, (int, float)) else "- Shares Outstanding: N/A"
+    short_line   = (f"- Short % of Float: {short_pct*100:.1f}% | Short Ratio: {_fmt(short_ratio)}"
+                    if isinstance(short_pct, (int, float)) else "- Short Float: N/A")
+    analysts_line = f"- Anzahl Analysten (Konsens): {num_analysts}" if num_analysts else "- Anzahl Analysten: N/A"
+
     return f"""FUNDAMENTALDATEN FÜR DIE ANALYSE:
 Ticker: {ticker}
 Unternehmen: {fund.get('shortName', ticker)}
 Sektor: {fund.get('sector', 'N/A')} | Industrie: {fund.get('industry', 'N/A')}
-Kurs: ${_fmt(fund.get('currentPrice'))} | Market Cap: {_bn(fund.get('marketCap'))}
+Fundamental-Snapshot-Datum: {snapshot_date}{gap_warning}{live_price_line}
+Kurs (Snapshot): ${_fmt(fund.get('currentPrice'))} | Market Cap: {_bn(fund.get('marketCap'))}
 52W-Hoch: ${_fmt(fund.get('fiftyTwoWeekHigh'))} | 52W-Tief: ${_fmt(fund.get('fiftyTwoWeekLow'))}
 Beta: {_fmt(fund.get('beta'))}
 
@@ -267,6 +424,7 @@ Bewertung:
 - Trailing PE: {_fmt(fund.get('trailingPE'))} | Forward PE: {_fmt(fund.get('forwardPE'))}
 - Price/Book: {_fmt(fund.get('priceToBook'))}
 - Analysten-Konsens: {fund.get('recommendationKey', 'N/A')} | Kursziel: ${_fmt(fund.get('targetMeanPrice'))}
+{analysts_line}
 
 Finanzkennzahlen:
 - Revenue (TTM): {_bn(fund.get('totalRevenue'))} | Wachstum YoY: {_pct(fund.get('revenueGrowth'))}
@@ -274,6 +432,14 @@ Finanzkennzahlen:
 - Net Margin: {_pct(fund.get('profitMargins'))} | Free Cashflow: {_bn(fund.get('freeCashflow'))}
 - Dividende: {_pct(fund.get('dividendYield'))} | Debt/Equity: {_fmt(fund.get('debtToEquity'))}
 - Return on Equity: {_pct(fund.get('returnOnEquity'))}
+{sbc_line}
+{shares_line}
+
+Positionierung & Leerverkäufer:
+{short_line}
+
+Earnings-Kalender:
+- Nächster Earnings-Termin: {next_earnings}
 
 RS-PLATFORM SIGNALDATEN:
 RS-Score vs. QQQ: {rs_score:.2f}
