@@ -26,6 +26,7 @@ _FONTS = T.register_fonts()
 # es erscheint nur der Markenname.
 BRAND_NAME = "AI Alpha Selection"
 BRAND = "AI ALPHA SELECTION"
+HANDLE = "AI Alpha Selection"
 MX = 195  # Seitenrand in px — 18 % der Carousel-Breite (1080 px), schützt gegen
            # seitlichen Beschnitt im Instagram-Profil-Raster
 
@@ -1583,7 +1584,6 @@ def slide_reel_cta(c, a, date_iso):
 # Designsystem identisch zu den Analyse-Slides (analysis_header/-footer, Farben).
 # Akzentfarbe = Grün (Beat) bzw. Rot (Miss) — signalisiert sofort „Earnings".
 # ══════════════════════════════════════════════════════════════════════════════
-from . import earnings as E
 
 
 def earn_color(e):
