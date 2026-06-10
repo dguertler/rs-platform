@@ -174,6 +174,28 @@ def _style_chart(ax):
     ax.set_axisbelow(True)
 
 
+# ── Profil-Grid Safe-Zone ─────────────────────────────────────────────────────
+# Instagram beschneidet 4:5-Slides in der Profilübersicht oben und unten zu
+# einem Quadrat (1:1). Überschriften und Kennzahlen, die zu weit oben/unten
+# sitzen, gehen im Raster verloren. Wir halten deshalb oben und unten je `frac`
+# (Default 20 %) der Höhe frei und platzieren den Kerninhalt im sichtbaren
+# Mittelband. Header (Logo/Datum) und Footer (Disclaimer) dürfen bewusst in den
+# beschnittenen Randzonen liegen — im Einzelpost sind sie sichtbar, im Grid
+# nicht nötig.
+SAFE_FRAC = 0.20
+
+
+def safe_band(c, frac=SAFE_FRAC):
+    """Sichtbares 1:1-Mittelband im Profil-Grid.
+
+    Gibt (top, bottom, center, height) in Pixeln (von oben) zurück. Kerninhalt
+    (Headline, Performance-Boxen) zwischen `top` und `bottom` halten.
+    """
+    top = int(round(c.H * frac))
+    bottom = int(round(c.H * (1 - frac)))
+    return top, bottom, (top + bottom) // 2, bottom - top
+
+
 def _justify_line(c, x, top, words, size, color, target_w, font="sans", weight="normal"):
     """Zeichnet eine Zeile im Blocksatz: Wörter werden auf target_w (px) verteilt."""
     try:
