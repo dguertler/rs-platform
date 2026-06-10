@@ -591,12 +591,14 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
         p = next((q for q in sub if q["d"] >= dt), None)
         return (datetime.strptime(p["d"], "%Y-%m-%d").toordinal(), p["c"]) if p else None
 
-    # weitere Kauf-Signale (klein, grün)
+    # weitere Kauf-Signale (klein, grün) — nur Signale VOR dem Kaufdatum
+    # Signale nach dem Kauf werden ignoriert (man hält die Aktie bereits)
     has_extra = False
     for s in feat.get("signals", []):
-        if s.get("signal_date") == entry["d"]:
+        sd = s.get("signal_date", "")
+        if sd >= entry["d"]:   # Kaufdatum oder danach → kein "weiteres Signal"
             continue
-        pt = _on(s.get("signal_date", ""))
+        pt = _on(sd)
         if pt:
             has_extra = True
             ax.scatter([pt[0]], [pt[1]], s=42, color=buy_col, zorder=4,
