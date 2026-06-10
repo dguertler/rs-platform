@@ -67,7 +67,7 @@ def slide_intro(c, date_iso):
     seitlichen Beschnitt im Profil-Raster.
     """
     header(c, date_iso)
-    mx_s = int(c.W * 0.13)   # ≈ 140 px — schützt gegen Grid-Beschnitt links/rechts
+    mx_s = int(c.W * 0.18)   # ≈ 195 px — schützt gegen Grid-Beschnitt links/rechts
 
     c.text(mx_s, 285, "DIE STRATEGIE", 18, color=T.BLUE, weight="bold")
 
