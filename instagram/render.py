@@ -846,10 +846,10 @@ def analysis_headline(a):
     name = A.short_name(a.get("name", a["ticker"]))
     t, sc = a["ticker"], a.get("score")
     v = (a["verdict"] or "").upper()
-    buy = [f"{name}: Kaufen — oder schon zu spät?",
+    buy = ["Kaufen — oder schon zu spät?",
            f"Ist {name} der nächste Verdoppler?",
-           f"{t}: {sc}/100 — verdient diese Aktie den Hype?",
-           f"{name}: Warum die Bullen jetzt am Drücker sind"]
+           f"Score {sc}/100 — verdient diese Aktie den Hype?",
+           f"Warum die Bullen bei {name} jetzt am Drücker sind"]
     hold = [f"{name}: Kauf oder Falle?",
             f"{name} — abwarten oder zugreifen?",
             f"{t}: Top-Story, aber der richtige Preis?",
@@ -1177,11 +1177,21 @@ def slide_analysis_fazit(c, a, date_iso):
 
     import re as _re
     raw11 = a["sections"].get(11, "")
+    # Rating-Bullet-Zeilen entfernen
     raw11 = _re.sub(r"\n-\s*(Qualität|Wachstum|Bewertung|Katalysator)[^\n]*", "", raw11)
     raw11 = _re.sub(r"\*\*([^*]+)\*\*", r"\1", raw11)
+    # Markdown-Tabellen und Disclaimer abschneiden
+    raw11 = _re.sub(r"\s*-{3,}\s*\|.*", "", raw11, flags=_re.DOTALL)
+    raw11 = _re.sub(r"\|[^\n]*", "", raw11)
+    raw11 = _re.sub(r"\*?Keine Anlageberatung[^*\n]*\*?", "", raw11)
+    raw11 = _re.sub(r"Verdict:\s*\w+\s*\(\d+/\d+\)[^\n]*", "", raw11)
     core = A.clean_for_slide(raw11.strip()) or a.get("fazit_core", "")
+    # max_lines dynamisch: reserviert 120px CTA + 40px gap + 90px Peers (falls vorhanden)
+    peers_reserve = 100 if a.get("peers") else 0
+    _avail_text = (c.H - 160) - 256 - 120 - 40 - peers_reserve
+    max_lines_fazit = max(4, int(_avail_text / TY_BODY_LH))
     y = _draw_paragraph(c, MX, 256, core, TY_BODY, c.W - 2 * MX,
-                        color=T.TEXT, line_h=TY_BODY_LH, max_lines=10)
+                        color=T.TEXT, line_h=TY_BODY_LH, max_lines=max_lines_fazit)
 
     # Peers
     peers = a.get("peers", [])
