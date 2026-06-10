@@ -218,10 +218,12 @@ Bei Unsicherheit nachfragen statt raten.
 ### Standard-Konventionen für Charts & Slides (verbindlich)
 Diese Regeln gelten für **alle künftigen** Slides und Carousel-Posts (in `render.py` umgesetzt):
 
-- **Seitenabstand `MX = 195 px` (≈ 18 % der Breite) — NICHT unterschreiten.**
-  Instagram beschneidet 4:5-Slides im Profil-Raster seitlich. Alle Texte, Boxen und
-  Charts beginnen frühestens bei `x = MX`. Kein lokaler Override mit kleinerem Wert.
-  Nach Änderungen an render.py/theme.py: `python3 -m instagram.qa_golden --update` ausführen.
+- **Seitenabstand: `COVER_MX = 195 px` gilt NUR für Slide 1 (Cover/Hook).**
+  Instagram beschneidet 4:5-Slides im Profil-Raster seitlich — der Cover braucht
+  mehr Luft. Alle Innen-Slides (ab Slide 2) verwenden `MX = 90 px`.
+  Implementiert als lokales `MX = COVER_MX` am Anfang jeder Cover/Hook-Funktion:
+  `slide_analysis_cover`, `slide_earnings_cover`, `slide_hook`, `slide_hook_dynamic`,
+  `slide_hook_weekly`. Kein globaler Override; Innen-Slides bleiben bei MX = 90.
 
 - **Chart-Marker = Ampel-Logik:** **Kauf = grün** (`T.GREEN`), **Verkauf = rot**
   (`T.RED`). Das große Kauf-Signal ist grün, weitere Kauf-Signale grün (kleiner,

@@ -27,8 +27,9 @@ _FONTS = T.register_fonts()
 BRAND_NAME = "AI Alpha Selection"
 BRAND = "AI ALPHA SELECTION"
 HANDLE = "AI Alpha Selection"
-MX = 195  # Seitenrand in px — 18 % der Carousel-Breite (1080 px), schützt gegen
-           # seitlichen Beschnitt im Instagram-Profil-Raster
+MX = 90        # Seitenrand für alle Innen-Slides (ab Slide 2)
+COVER_MX = 195  # Seitenrand nur für Slide 1 (Cover/Hook) — schützt gegen seitlichen
+               # Beschnitt im Instagram-Profil-Raster (≈ 18 % der Breite)
 
 # ── Typografie-Konstanten (einheitlich auf allen Slides) ──────────────────────
 TY_H1      = 42   # Slide-Überschrift  (z. B. "Gesamteinschätzung")
@@ -204,6 +205,7 @@ def _justify_line(c, x, top, words, size, color, target_w, font="sans", weight="
 
 # ── Slides ───────────────────────────────────────────────────────────────────────
 def slide_hook(c, date_iso, perf_ret, nasdaq_ret, period_label):
+    MX = COVER_MX
     header(c, date_iso)
     cy = int(c.H * 0.40)
     c.text(MX, cy - 70, "WIKIFOLIO-PERFORMANCE", 24, color=T.MUTED, weight="bold")
@@ -407,6 +409,7 @@ def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
     `metrics` = Liste (label, value, color) — 1–2 prominente Kennzahlen als
     visueller Beweis direkt auf der Slide (z. B. Alpha, Gesamtrendite).
     """
+    MX = COVER_MX
     import textwrap
     header(c, date_iso)
     eyebrow = f"WOCHENUPDATE · KW {kw}" if kw else "WOCHENUPDATE"
@@ -457,6 +460,7 @@ def slide_why(c, date_iso, text):
 
 # ── Wochenreport-Slides (report-getrieben) ─────────────────────────────────────
 def slide_hook_weekly(c, date_iso, kw, period, week_perf, total_perf):
+    MX = COVER_MX
     header(c, date_iso)
     cy = int(c.H * 0.34)
     c.text(MX, cy - 60, f"WOCHENREPORT KW {kw}", 26, color=T.MUTED, weight="bold")
@@ -957,6 +961,7 @@ def analysis_headline(a):
 
 # 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict + Rating-Blöcke
 def slide_analysis_cover(c, a, date_iso):
+    MX = COVER_MX
     footer_line = c.H - 150
 
     # Top-Leiste: Marke + Datum
@@ -1638,6 +1643,7 @@ def _stat_tile(c, x, top, w, h, label, value, sub, col, value_size=48):
 
 # 1) COVER — Earnings-Hook, Logo, Beat-Badge, die zwei Hero-Zahlen
 def slide_earnings_cover(c, e, date_iso):
+    MX = COVER_MX
     col = earn_color(e)
     footer_line = c.H - 150
 
