@@ -1,6 +1,11 @@
 """
 Aktualisiert backtest_*.json inkrementell mit neuen Kerzen seit dem letzten bekannten Datum.
 Nur Ticker mit vorhandener JSON-Datei werden verarbeitet.
+
+Rolling Window: Der Datenbestand bleibt konstant — kommt ein Tag hinzu,
+fällt der älteste weg. Daily/Weekly werden auf 4 Jahre begrenzt (genug für
+das 60-Wochen-Lookback in backtest_logic.js, identisch zu trim_backtest.py),
+4H auf 730 Tage (yfinance-Maximum für 1h-Daten).
 """
 import os, json, time
 import yfinance as yf
@@ -10,6 +15,17 @@ from datetime import datetime, timedelta
 OUT_DIR = os.path.dirname(os.path.abspath(__file__))
 PAUSE          = 2   # Sekunden zwischen Tickern
 PAUSE_ON_ERROR = 10  # Sekunden nach einem Fehler
+
+CUTOFF_DW = (datetime.now() - timedelta(days=4 * 365)).strftime("%Y-%m-%d")
+CUTOFF_4H = (datetime.now() - timedelta(days=730)).strftime("%Y-%m-%d")
+
+
+def _trim(rows, cutoff):
+    """Behält nur Kerzen ab cutoff (Datum-Präfix-Vergleich, auch '... HH:MM')."""
+    if not rows:
+        return rows, False
+    kept = [r for r in rows if str(r.get("d", ""))[:10] >= cutoff]
+    return kept, len(kept) != len(rows)
 
 
 from zoneinfo import ZoneInfo
@@ -114,6 +130,17 @@ def update_ticker(ticker):
                     changed = True
     except Exception:
         pass  # 4H-Fehler nicht kritisch
+
+    # Rolling Window: älteste Kerzen jenseits des Fensters entfernen,
+    # damit der Datenbestand trotz täglicher neuer Kerzen konstant bleibt.
+    for key, cutoff in (("ohlcv_d", CUTOFF_DW), ("ohlcv_w", CUTOFF_DW),
+                        ("ohlcv_4h", CUTOFF_4H)):
+        if data.get(key):
+            data[key], trimmed = _trim(data[key], cutoff)
+            changed = changed or trimmed
+    if isinstance(data.get("top20Hist"), list):
+        data["top20Hist"], trimmed = _trim(data["top20Hist"], CUTOFF_DW)
+        changed = changed or trimmed
 
     if changed:
         data["generated"] = datetime.now().strftime("%Y-%m-%d %H:%M")

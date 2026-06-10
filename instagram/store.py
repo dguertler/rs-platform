@@ -85,9 +85,32 @@ def _sells_for(ticker, trades_data=None):
             if t.get("ticker") == ticker and (t.get("date") or t.get("sell_date"))]
 
 
+_FX_CACHE = {"loaded": False, "series": []}
+
+
+def _fx_on(date_iso):
+    """EUR/USD (USD je EUR) am/vor date_iso; None falls keine FX-Daten."""
+    if not _FX_CACHE["loaded"]:
+        _FX_CACHE["series"] = data.load_fx()
+        _FX_CACHE["loaded"] = True
+    val = None
+    for d, c in _FX_CACHE["series"]:
+        if d <= date_iso:
+            val = c
+        else:
+            break
+    return val
+
+
 def _ret_since(universe, ticker, buy_date, as_of=None):
-    """Reale Rendite vom Schlusskurs am/nach Kaufdatum bis as_of (Standard: letzter Kurs).
-    as_of begrenzt die OHLCV-Daten — wichtig für historisch korrekte Wochenberichte."""
+    """Reale EUR-Rendite vom Schlusskurs am/nach Kaufdatum bis as_of (Standard:
+    letzter Kurs). as_of begrenzt die OHLCV-Daten — wichtig für historisch
+    korrekte Wochenberichte.
+
+    USD-notierte Ticker (ccy == "USD") werden über die EUR/USD-Serie
+    (eurusd_ohlcv in rs_full.json) in echte EUR-Renditen umgerechnet:
+    ret_eur = (P1/P0) * (fx0/fx1) - 1. Fehlt die FX-Serie, bleibt die
+    USD-Rendite als Näherung (bisheriges Verhalten)."""
     if ticker not in universe or not universe[ticker]["ohlcv"]:
         return None, None
     ohlcv = universe[ticker]["ohlcv"]
@@ -98,7 +121,13 @@ def _ret_since(universe, ticker, buy_date, as_of=None):
     entry = next((c for c in ohlcv if c["d"] >= buy_date), None)
     if not entry:
         return None, None
-    return ohlcv[-1]["c"] / entry["c"] - 1.0, entry
+    last = ohlcv[-1]
+    ret = last["c"] / entry["c"] - 1.0
+    if universe[ticker].get("ccy") == "USD":
+        fx0, fx1 = _fx_on(entry["d"]), _fx_on(last["d"])
+        if fx0 and fx1:
+            ret = (last["c"] / entry["c"]) * (fx0 / fx1) - 1.0
+    return ret, entry
 
 
 def _trade_dict(universe, t, as_of=None):

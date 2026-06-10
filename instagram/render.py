@@ -1,5 +1,5 @@
 """
-Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selections-Design.
+Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selection-Design.
 Reines matplotlib, kein Browser nötig. Jede Slide funktioniert in beiden
 Formaten (Carousel 4:5 / Reel 9:16) über pixelbasierte Layout-Koordinaten.
 """
@@ -22,7 +22,9 @@ from matplotlib.patches import FancyBboxPatch
 from . import theme as T
 
 _FONTS = T.register_fonts()
-HANDLE = "@aialphaselection"
+# Kein @-Handle auf Slides/Reels (für den IG-Algorithmus unnötig) —
+# es erscheint nur der Markenname.
+BRAND_NAME = "AI Alpha Selection"
 BRAND = "AI ALPHA SELECTION"
 MX = 90  # Seitenrand in px
 
@@ -1229,7 +1231,7 @@ def slide_analysis_cases(c, a, date_iso, items=None):
     analysis_footer(c)
 
 
-# 7) PROFI-FAZIT — Kernaussage + Peers + Verweis auf Caption
+# 7) PROFI-FAZIT — Kernaussage + Peers + Folgen-CTA
 def slide_analysis_fazit(c, a, date_iso):
     analysis_header(c, a, date_iso)
     col = verdict_color(a["verdict"])
@@ -1534,12 +1536,12 @@ def slide_reel_cta(c, a, date_iso):
                     f"auf meinem Profil.", 30, c.W - 2 * MX - 100,
                     color=T.TEXT, line_h=46, max_lines=6)
     c.text(MX + 50, box_top + 330, "Profil öffnen", 26, color=T.MUTED)
-    c.text(MX + 50, box_top + 372, HANDLE, 40, color=T.BLUE, weight="bold")
+    c.text(MX + 50, box_top + 372, BRAND_NAME, 40, color=T.BLUE, weight="bold")
     # nach oben zeigende Dreiecke (zum Profil/Feed)
     for i in range(3):
         c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + 360), s=170,
                      marker="^", color=T.BLUE, edgecolor="none", zorder=12)
-    c.text(MX, 1230, f"Folge {HANDLE} für 1–2 Analysen pro Woche", 24,
+    c.text(MX, 1230, f"Folge {BRAND_NAME} für 1–2 Analysen pro Woche", 24,
            color=T.MUTED)
     analysis_footer(c)
 
@@ -2076,9 +2078,9 @@ def slide_earnings_reel_cta(c, e, date_iso):
                     f"Alle Zahlen, der Turnaround-Check und die Kursziel-Szenarien "
                     f"zu {e['ticker']} findest du im Karussell-Post.", 30,
                     c.W - 2 * MX - 100, color=T.TEXT, line_h=46, max_lines=6)
-    c.text(MX + 50, box_top + box_h - 86, HANDLE, 40, color=col, weight="bold")
+    c.text(MX + 50, box_top + box_h - 86, BRAND_NAME, 40, color=col, weight="bold")
     for i in range(3):
         c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + box_h - 70), s=170,
                      marker="^", color=col, edgecolor="none", zorder=12)
-    c.text(MX, 1230, f"Folge {HANDLE} für Earnings & Analysen", 24, color=T.MUTED)
+    c.text(MX, 1230, f"Folge {BRAND_NAME} für Earnings & Analysen", 24, color=T.MUTED)
     analysis_footer(c)

@@ -1,5 +1,9 @@
 name: Earnings-Überraschung (≥5% Kurssprung + ≥10% EPS-Beat)
 
+# Sendet nur Mail/Telegram, committet nichts → Lese-Rechte genügen.
+permissions:
+  contents: read
+
 on:
   schedule:
     - cron: '30 2 * * 2-6'

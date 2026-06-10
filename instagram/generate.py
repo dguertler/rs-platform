@@ -1,5 +1,5 @@
 """
-AI Alpha Selections — Instagram-Generator (Prototyp)
+AI Alpha Selection — Instagram-Generator
 
 Erzeugt ein komplettes Slide-Set (Carousel 4:5 + Reel-Frames 9:16) plus
 Caption-Text in einen Review-Ordner. NICHTS wird hochgeladen – du prüfst
@@ -151,11 +151,10 @@ def caption_from_store(ctx):
         f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
         f"{feat}{newc}\n"
         f"{why}\n"
-        f"👉 Den Link zum Live-Depot findest du aktuell in unserer Bio! {ctx['account']}\n\n"
+        f"👉 Den Link zum wikifolio AI Alpha Selection findest du aktuell in unserer Bio.\n\n"
         f"💬 {ctx['question']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
-        f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
-        f"#geldanlage #finanzen #relativestärke #wochenupdate"
+        f"{HASHTAGS_WEEKLY}"
     )
 
 
@@ -241,10 +240,9 @@ def build_weekly_caption(r):
         parts.append("Käufe:\n" + line_buys() + "\n")
     if r["sells"]:
         parts.append("Verkäufe:\n" + line_sells() + "\n")
-    parts.append(f"➡️ Mehr: {render.HANDLE}\n")
+    parts.append("➡️ Mehr: AI Alpha Selection — Link in Bio.\n")
     parts.append(render.T.DISCLAIMER_LONG)
-    parts.append("\n#wikifolio #aktien #investing #nasdaq #trading #boerse "
-                 "#geldanlage #finanzen #relativestärke #wochenreport")
+    parts.append("\n" + HASHTAGS_WEEKLY)
     return "\n".join(parts)
 
 
@@ -424,7 +422,7 @@ def reel_script(a):
         L.append("")
     L.append("[0:40–0:45]  (Overlay: Ganze Analyse im Karussell 👆)")
     L.append(f"VO: \"Den kompletten Deep Dive mit allen Kurszielen findest du im "
-             f"Karussell-Post auf diesem Profil. Folge {render.HANDLE} für 1–2 "
+             f"Karussell-Post auf diesem Profil. Folge {render.BRAND_NAME} für 1–2 "
              f"Profi-Analysen pro Woche.\"")
     L.append("")
     L.append("## [HINWEIS]  Pflicht-Disclaimer einblenden/vorlesen:")
@@ -433,147 +431,53 @@ def reel_script(a):
     return "\n".join(L)
 
 
+# ── Hashtags: max. 5 pro Post (Instagram-Limit seit 2025; optimal 3–5) ───────
+# Wenige, hochrelevante Tags = Kontextsignal für den Algorithmus.
+# Mix: Ticker + Kern-Keyword + Sektor/Thema + breit + Brand.
+HASHTAGS_WEEKLY = "#wikifolio #nasdaq #aktien #trading #aialphaselection"
+
+_SECTOR_TAG = {
+    "Technology": "#technologieaktien",
+    "Healthcare": "#healthcare",
+    "Industrials": "#industrieaktien",
+    "Energy": "#energieaktien",
+    "Financial Services": "#finanzaktien",
+    "Consumer Cyclical": "#konsumaktien",
+}
+
+
+def hashtags_analysis(a):
+    tic = a["ticker"].replace(".", "").lower()
+    sector = _SECTOR_TAG.get(a.get("sector", ""), "#börse")
+    return f"#{tic} #aktienanalyse {sector} #investieren #aialphaselection"
+
+
+def hashtags_earnings(e):
+    tic = e["ticker"].replace(".", "").lower()
+    return f"#{tic} #earnings #quartalszahlen #aktienanalyse #aialphaselection"
+
+
 def caption_analysis(a):
-    """Instagram-Caption als inhaltliche Ergänzung zu den Slides.
-    Die 'Weitere Details' (EPYC/Intel, TSMC, HBM, D/E, Analyst) sind
-    exklusiver Caption-Content — nicht auf den Slides sichtbar.
-    Hashtags: 25-30 Tags für maximale Algorithmus-Reichweite.
-    Instagram-Limit 2.200 Zeichen wird beachtet (notfalls Kürzung)."""
-    import re as _re
+    """Kurz-Caption für Analyse-Posts. Die VOLLE Analyse steht auf den Slides
+    (kein Analyse-Content in der Caption — Vorgabe). Die Caption liefert nur:
+    SEO-Zeile (Keyword zuerst), Hook, Save-/Folge-CTA, Disclaimer und max. 5
+    gezielte Hashtags (Instagram-Limit seit 2025; lt. IG optimal 3–5)."""
     v = a["verdict"]
     scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
     head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
-    star = lambda n: ("★" * (n or 0)) + ("☆" * (5 - (n or 0)))
-    rt = a["ratings"]
     DISC = ("Keine Anlageberatung. Analysen auf Basis öffentlicher Daten. "
             "Kursziele sind Szenarien, keine Prognosen. Kapitalanlagen bergen "
             "Verlustrisiken bis zum Totalverlust.")
-
-    # ── Hashtags: ausführlich, 25–30 Tags ────────────────────────────────────
-    tic = a["ticker"].replace(".", "").lower()
-    sector_tags = {
-        "Technology": "#halbleiter #semiconductor #chips #technologieaktien #techaktien",
-        "Healthcare": "#healthcare #pharmaaktien #biotech #gesundheit",
-        "Industrials": "#industrie #industrieaktien #infrastruktur",
-        "Energy": "#energie #energieaktien #erneuerbar",
-        "Financial Services": "#finanzsektor #banken #versicherung",
-        "Consumer Cyclical": "#konsumaktien #einzelhandel #konsum",
-    }.get(a.get("sector", ""), "#technologieaktien")
-
-    biz_text = " ".join(a.get("business_bullets", []) + [a.get("hook", "")])
-    topic_parts = []
-    if any(w in biz_text for w in ("GPU", "KI", "AI", "Instinct", "Datacenter")):
-        topic_parts.append("#ki #aistock #aiinvesting #datacenter #gpu #aiinfrastructure")
-    if any(w in biz_text for w in ("EPYC", "CPU", "Server")):
-        topic_parts.append("#cpu #serverchips")
-    # Vergleichsticker — zieht Suchanfragen ähnlicher Aktien
-    peers = a.get("peers", [])
-    peer_tags = " ".join(f"#{p.replace('.','').lower()}"
-                         for p in peers[:2] if len(p) <= 6)
-
-    tags = (
-        f"#aktien #aktienanalyse #aktienmarkt #börse #boersewissen "
-        f"#geldanlage #finanzbildung #vermögensaufbau #wachstumsaktien "
-        f"#börsentipps #investing #stockanalysis "
-        f"#{tic} #{''.join([tic, 'stock'])} {sector_tags} "
-        + " ".join(topic_parts)
-        + (f" {peer_tags}" if peer_tags else "")
-        + " #aialphaselection"
-    ).rstrip()
-
-    # ── "Weitere Details"-Block — immer vollständig, nie weglassen ───────────
-    sec2 = ana.clean_for_slide(a["sections"].get(2, ""))
-    sec3 = ana.clean_for_slide(a["sections"].get(3, ""))
-    sec6 = ana.clean_for_slide(a["sections"].get(6, ""))
-    sec7 = ana.clean_for_slide(a["sections"].get(7, ""))
-
-    extra = []
-    # EPYC vs. Intel (aus Section 3 oder Section 2)
-    if _re.search(r'EPYC|Intel', sec2 + sec3, _re.I):
-        extra.append("EPYC vs. Intel: AMD gewinnt im Rechenzentrum-CPU-Markt "
-                     "kontinuierlich Marktanteile — profitabler Cashflow-Sockel "
-                     "der GPU-Wette")
-    # TSMC-Fabless (immer wenn vorhanden — auch wenn in Bullets)
-    if _re.search(r'TSMC|Fabless', sec2, _re.I):
-        extra.append("TSMC-Abhängigkeit: Fabless-Modell = volle Abhängigkeit "
-                     "von TSMC-Kapazität (3nm/5nm) + CoWoS-HBM-Packaging")
-    # HBM-Risiko (immer wenn vorhanden)
-    if _re.search(r'HBM', sec2, _re.I):
-        extra.append("HBM-Risiko: MI-GPUs benötigen HBM3e von SK Hynix/Samsung "
-                     "— Lieferkette ist kritischer Engpass bei hoher AI-Nachfrage")
-    # D/E aus Section 6
-    m_de = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6)
-    if m_de:
-        extra.append(f"Bilanz: D/E {m_de.group(1)} — konservative Verschuldung, "
-                     f"solide Bilanz, ~7 Mrd. $ FCF (2024)")
-    # Analyst-Konsensus aus Section 7
-    m_ac = _re.search(
-        r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]{2,}(?:[.,][0-9]+)?)',
-        sec7)
-    if m_ac:
-        extra.append(f"Analyst-Konsensus: {m_ac.group(1).rstrip('.')} $ Kursziel "
-                     f"— Analysten laufen der Kursrally aktuell hinterher")
-
-    def assemble(biz_n, with_longterm, with_cases):
-        parts = [f"📊 {head}\n"]
-        if a.get("hook"):
-            parts.append(a["hook"] + "\n")
-        if a.get("business_bullets") and biz_n:
-            bl = "\n".join(f"› {b}" for b in a["business_bullets"][:biz_n])
-            parts.append("🏭 Das Unternehmen:\n" + bl + "\n")
-        if _has_scenarios(a):
-            sc = a["scenarios"]
-            emo = {"bull": "🟢", "base": "🔵", "bear": "🔴"}
-            lines = []
-            for key, name in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
-                prob = sc[key]["prob"]
-                rng = ana.fmt_range(sc[key]["range"])
-                seg = f"{emo[key]} {name} {prob}%" if prob is not None else f"{emo[key]} {name}"
-                if rng:
-                    seg += f" · Ziel {rng}"
-                if with_cases and sc[key]["summary"]:
-                    seg += f"\n   {sc[key]['summary']}"
-                lines.append(seg)
-            parts.append("🎯 Szenarien · 12–18 Monate (= 100 %):\n"
-                         + "\n".join(lines) + "\n")
-            if with_longterm and _has_longterm(a):
-                lt = a["longterm"]
-                lts = " · ".join(f"{n} {ana.fmt_range(lt[k])}"
-                                 for k, n in (("bull", "Bull"), ("base", "Base"),
-                                              ("bear", "Bear")) if ana.fmt_range(lt[k]))
-                parts.append("🔭 Langfristig · 3–5 Jahre: " + lts + "\n")
-        elif a.get("pro_bullets") or a.get("con_bullets"):
-            if a.get("pro_bullets"):
-                parts.append("🟢 Chancen:\n" + "\n".join(
-                    f"› {b}" for b in a["pro_bullets"][:biz_n or 3]) + "\n")
-            if a.get("con_bullets"):
-                parts.append("🔴 Risiken:\n" + "\n".join(
-                    f"› {b}" for b in a["con_bullets"][:biz_n or 3]) + "\n")
-        if any(rt.values()):
-            parts.append(f"⭐ Rating: Qualität {star(rt.get('Qualität'))} · "
-                         f"Wachstum {star(rt.get('Wachstum'))} · "
-                         f"Bewertung {star(rt.get('Bewertung'))} · "
-                         f"Katalysator {star(rt.get('Katalysator'))}\n")
-        if a.get("fazit_core"):
-            parts.append("🧭 Fazit: " + a["fazit_core"] + "\n")
-        if a.get("peers"):
-            parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
-        # Weitere Details — caption-exklusiver Content, immer vollständig
-        if extra:
-            parts.append("💡 Nicht auf den Slides:\n"
-                         + "\n".join(f"› {e}" for e in extra) + "\n")
-        parts.append("👉 Folge für wöchentliche Analysen.\n")
-        parts.append("❗ " + DISC)
-        parts.append("\n" + tags)
-        return "\n".join(parts)
-
-    # Schrittweise kürzen (Bullets → Cases → Longterm); Weitere Details bleiben immer
-    for biz_n, lt, cases in ((4, True, True), (4, True, False), (3, True, False),
-                             (3, False, False), (2, False, False), (0, False, False)):
-        cap = assemble(biz_n, lt, cases)
-        if len(cap) <= 2200:
-            return cap
-    return assemble(0, False, False)[:2180].rsplit(" ", 1)[0] + " …"
+    parts = [f"📊 {head}\n"]
+    if a.get("hook"):
+        parts.append(a["hook"] + "\n")
+    parts.append("Die komplette Analyse — Geschäftsmodell, Szenarien mit "
+                 "Kurszielen, Bewertung, Risiken und Profi-Fazit — findest du "
+                 "auf den Slides. Speichere den Beitrag für deine Watchlist.\n")
+    parts.append("👉 Folge AI Alpha Selection für wöchentliche Profi-Analysen.\n")
+    parts.append("❗ " + DISC)
+    parts.append("\n" + hashtags_analysis(a))
+    return "\n".join(parts)
 
 
 # ── Earnings-Analyse-Post (instagram/data/earnings/TICKER.json) ───────────────
@@ -638,89 +542,30 @@ def build_earnings_reel(e, date_iso, outdir):
 
 
 def caption_earnings(e):
-    """Instagram-Caption für den Earnings-Post. SEO: erste Zeile mit Keyword
-    'Earnings-Analyse'. Beat-Zahlen + Guidance + These + Disclaimer + Hashtags,
-    auf 2.200 Zeichen zugeschnitten."""
+    """Kurz-Caption für Earnings-Posts (analog caption_analysis): alle Zahlen
+    und die Einordnung stehen auf den Slides. SEO-Zeile + Beat-Einzeiler +
+    Save-/Folge-CTA + Disclaimer + max. 5 Hashtags."""
     a = e.get("analysis")
-    cur = e.get("currency", "")
     name = render.A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
-    tic = e["ticker"].replace(".", "").lower()
     beat_word = "Beat" if (e.get("eps_surprise_pct") or 0) >= 0 else "Miss"
     head = f"{name} ({e['ticker']}) — Earnings-Analyse {e['quarter']}: {beat_word}"
-
     DISC = render.T.DISCLAIMER_ANALYSE_SHORT
-    sector_tags = {
-        "Technology": "#halbleiter #technologieaktien #techaktien",
-        "Healthcare": "#healthcare #pharmaaktien #gesundheit #medicaid",
-        "Industrials": "#industrie #industrieaktien",
-        "Energy": "#energie #energieaktien",
-        "Financial Services": "#finanzsektor #banken #versicherung",
-    }.get((a or {}).get("sector", ""), "")
-    tags = (
-        f"#earnings #quartalszahlen #earningsseason #aktien #aktienanalyse "
-        f"#börse #boersewissen #geldanlage #finanzbildung #investing "
-        f"#stockanalysis #turnaround #{tic} #{tic}stock {sector_tags} "
-        f"#aialphaselection"
-    ).rstrip()
 
-    def assemble(with_context, with_cases, with_drivers):
-        P = [f"📊 {head}\n"]
-        # Beat-Zahlen
-        beat = []
-        if e.get("eps_actual") is not None:
-            beat.append(f"› EPS {cur}{earn.fmt_num(e['eps_actual'])} vs. "
-                        f"{cur}{earn.fmt_num(e.get('eps_estimate'))} erwartet "
-                        f"({earn.fmt_pct_pts(e.get('eps_surprise_pct'), 0)})")
-        if e.get("revenue_actual") is not None:
-            # revenue_unit ('Mrd. $') trägt bereits die Währung → kein cur-Präfix
-            beat.append(f"› Umsatz {earn.fmt_num(e['revenue_actual'])} "
-                        f"{e.get('revenue_unit','')} vs. "
-                        f"{earn.fmt_num(e.get('revenue_estimate'))} erwartet "
-                        f"({earn.fmt_pct_pts(e.get('revenue_surprise_pct'), 1)})")
-        if e.get("jump_pct") is not None:
-            beat.append(f"› Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
-        if beat:
-            P.append("🚀 Die Zahlen:\n" + "\n".join(beat) + "\n")
-        if e.get("guidance"):
-            P.append("🎯 Ausblick: " + e["guidance"] + "\n")
-        if e.get("key_metric_value"):
-            P.append(f"🔑 {e['key_metric_label']}: {e['key_metric_value']} "
-                     f"— {e.get('key_metric_note','')}".rstrip(" —") + "\n")
-        if with_drivers and e.get("drivers"):
-            P.append("📌 Treiber:\n" + "\n".join(
-                f"› {d}" for d in e["drivers"][:3]) + "\n")
-        if with_context and e.get("context"):
-            P.append("🧭 Einordnung: " + e["context"] + "\n")
-        # Investment-These aus der Basis-Analyse
-        if a:
-            if a.get("verdict"):
-                scal = f" · Score {a['score']}/100" if a.get("score") is not None else ""
-                P.append(f"⚖️ KI-Verdict: {a['verdict']}{scal}\n")
-            if _has_scenarios(a) and with_cases:
-                sc = a["scenarios"]
-                emo = {"bull": "🟢", "base": "🔵", "bear": "🔴"}
-                lines = []
-                for key, nm in (("bull", "Bull"), ("base", "Base"), ("bear", "Bear")):
-                    prob = sc[key]["prob"]
-                    rng = ana.fmt_range(sc[key]["range"])
-                    seg = f"{emo[key]} {nm} {prob}%" if prob is not None else f"{emo[key]} {nm}"
-                    if rng:
-                        seg += f" · Ziel {rng}"
-                    lines.append(seg)
-                P.append("📈 Szenarien · 12–18 Monate:\n" + "\n".join(lines) + "\n")
-            if a.get("fazit_core"):
-                P.append("💡 Fazit: " + a["fazit_core"] + "\n")
-        P.append("👉 Ganze Analyse im Karussell. Folge für Earnings & Analysen.\n")
-        P.append("❗ " + DISC)
-        P.append("\n" + tags)
-        return "\n".join(P)
-
-    for ctx_, cases, drv in ((True, True, True), (True, True, False),
-                             (False, True, False), (False, False, False)):
-        cap = assemble(ctx_, cases, drv)
-        if len(cap) <= 2200:
-            return cap
-    return assemble(False, False, False)[:2180].rsplit(" ", 1)[0] + " …"
+    teaser = []
+    if e.get("eps_surprise_pct") is not None:
+        teaser.append(f"EPS-Überraschung {earn.fmt_pct_pts(e['eps_surprise_pct'], 0)}")
+    if e.get("jump_pct") is not None:
+        teaser.append(f"Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
+    parts = [f"📊 {head}\n"]
+    if teaser:
+        parts.append("🚀 " + " · ".join(teaser) + ".\n")
+    parts.append("Alle Zahlen, die Kursreaktion, Guidance und die Einordnung in "
+                 "die These findest du auf den Slides. Speichere den Beitrag "
+                 "für deine Watchlist.\n")
+    parts.append("👉 Folge AI Alpha Selection für Earnings & Profi-Analysen.\n")
+    parts.append("❗ " + DISC)
+    parts.append("\n" + hashtags_earnings(e))
+    return "\n".join(parts)
 
 
 def build(fmt, ctx, outdir):
@@ -757,16 +602,15 @@ def build_caption(ctx):
         f"• {t}: {render.fmt_pct(r)} seit Signal ({render.short_date(e['d'])})"
         for t, s, r, o, e in ctx["signals"] if r is not None)
     return (
-        f"📊 AI Alpha Selections — Update {ctx['period_label']}\n\n"
+        f"📊 AI Alpha Selection — Update {ctx['period_label']}\n\n"
         f"Das wikifolio liegt bei {render.fmt_pct(ctx['wf_ret'])} und schlägt "
         f"den NASDAQ-100 um {render.fmt_pct(ctx['out_ret'])}.\n\n"
         f"Ausgewählte Signale des Systems:\n{sig_lines}\n\n"
         f"Das System kombiniert relative Stärke mit Breakout-Logik und wählt "
         f"datengetrieben aus über {ctx['n_tickers']} beobachteten Titeln.\n\n"
-        f"➡️ Mehr Updates: {render.HANDLE} — Link in Bio.\n\n"
+        f"➡️ Mehr Updates: {render.BRAND_NAME} — Link in Bio.\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
-        f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
-        f"#geldanlage #finanzen #relativestärke #aktienanalyse"
+        f"{HASHTAGS_WEEKLY}"
     )
 
 
