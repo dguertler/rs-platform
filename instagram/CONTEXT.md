@@ -317,14 +317,17 @@ fehlen.
 - Slide 3 Chart = **Tageskerzen, letzte 50 Handelstage (10×5) bis zum Meldetag**
   (`reaction_window(before=49, after=0)`) mit **Datums-Achse unten** + Preis-Labels
   links. OHLCV hat nur Handelstage → 50 Kerzen ≈ 10 Kalenderwochen.
-- **Slide „Ausblick & Treiber" (Slide 5):** Wenn `guidance`+`key_metric_value`
-  vorhanden UND mehr als 2 Treiber (`drivers`) → automatischer Überlauf auf
-  Folgefolie „Treiber im Detail". Logik in `generate.py`/`render.py` eingebaut;
-  kein manueller Eingriff nötig.
-- **Slide „Was den Beat getragen hat" (Segmente):** Metriken werden vertikal
-  gestapelt: absoluter Wert (32 px, T.TEXT, mono) + Prozentwert (26 px, Akzentfarbe,
-  mono) auf je einer eigenen Zeile. Notiz-Texte darunter mit TY_BODY=28, T.TEXT
-  (nicht TY_SUB/T.MUTED). Box-Höhe passt sich automatisch an den Text an.
+- **„Ausblick" und „Die Treiber" sind IMMER zwei separate Slides:**
+  Slide „Ausblick" = Guidance-Kachel + Turnaround-Kennzahl.
+  Slide „Die Treiber" = alle Driver-Bullets. Kein Mischen mehr.
+  Funktionen: `render.slide_earnings_ausblick` / `render.slide_earnings_treiber`.
+- **Overflow-Regel (gilt für alle Slides):** Sobald eine Box oder ein Text
+  den unteren Bildbereich berühren würde (footer_y = Canvas-H − 200),
+  kommt der Inhalt auf eine Folgefolie. Gilt für Treiber-Bullets UND Segment-Boxen.
+- **Slide „Was den Beat getragen hat" (Segmente):** Automatischer Seitenumbruch
+  via `_seg_pages()` in `generate.py` — emit mehrere `segmente`/`segmente_2`-Slides
+  wenn nötig. Metriken vertikal gestapelt: absoluter Wert (32 px, T.TEXT, mono) +
+  Prozentwert (26 px, Akzentfarbe, mono). Notizen: TY_BODY=28, T.TEXT.
 - Slide „Einordnung": `verdict_note` erklärt das Verdict (z. B. HALTEN trotz Beat,
   weil Base Case zwar über Kurs, aber binäres Risiko).
 - Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.

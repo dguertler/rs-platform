@@ -1794,64 +1794,69 @@ def slide_earnings_reaction(c, e, date_iso):
     analysis_footer(c)
 
 
-# 4) GUIDANCE & TURNAROUND-TREIBER
-def slide_earnings_guidance(c, e, date_iso, driver_start=0, driver_end=None,
-                             show_blocks=True):
+# 4a) AUSBLICK — Guidance + Turnaround-Kennzahl (immer eigene Slide)
+def slide_earnings_ausblick(c, e, date_iso):
     analysis_header(c, e, date_iso)
     col = earn_color(e)
-    if show_blocks:
-        c.text(MX, 184, "Ausblick & Treiber", 42, weight="bold")
-        c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
-    else:
-        c.text(MX, 184, "Treiber im Detail", 42, weight="bold")
-        c.text(MX, 240, "Weitere Quartalsergebnisse", TY_SUB, color=T.MUTED)
-
-    footer_y = c.H - 200
+    c.text(MX, 184, "Ausblick", 42, weight="bold")
+    c.text(MX, 240, "Prognose & Turnaround-Kennzahl", TY_SUB, color=T.MUTED)
     y = 300
-    if show_blocks:
-        # Guidance-Kachel (volle Breite)
-        if e.get("guidance"):
-            glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
-            gh = 70 + len(glines) * TY_BODY_LH + 20
-            c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
-            c.tile(MX, y, 12, gh, color=col, radius=6)
-            c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
-            _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
-                            c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
-            y += gh + 26
+    if e.get("guidance"):
+        glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
+        gh = 70 + len(glines) * TY_BODY_LH + 20
+        c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
+        c.tile(MX, y, 12, gh, color=col, radius=6)
+        c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
+        _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
+                        c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
+        y += gh + 26
+    if e.get("key_metric_value"):
+        note = e.get("key_metric_note", "")
+        klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
+        kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
+        c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
+        c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
+               color=T.BLUE, weight="bold")
+        c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
+               weight="bold", font="mono")
+        for i, ln in enumerate(klines[:4]):
+            c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
+        y += kh + 26
+    analysis_footer(c)
 
-        # Turnaround-Kennzahl
-        if e.get("key_metric_value"):
-            note = e.get("key_metric_note", "")
-            klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
-            kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
-            c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
-            c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
-                   color=T.BLUE, weight="bold")
-            c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
-                   weight="bold", font="mono")
-            for i, ln in enumerate(klines[:4]):
-                c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
-            y += kh + 26
 
-    # Treiber-Bullets
+# 4b) TREIBER — Bullet-Liste (immer eigene Slide; overflow-safe)
+def slide_earnings_treiber(c, e, date_iso, driver_start=0, driver_end=None):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Die Treiber", 42, weight="bold")
+    c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
+    footer_y = c.H - 200
     drivers = e.get("drivers") or []
     end = driver_end if driver_end is not None else len(drivers)
     visible = drivers[driver_start:end]
-    if visible:
-        c.text(MX, y + 6, "DIE TREIBER", 22, color=T.MUTED, weight="bold")
-        y += 48
-        for d in visible:
-            dl = _wrap_px(d, c.W - 2 * MX - 56, TY_BODY)
-            bullet_h = max(TY_BODY_LH, min(2, len(dl)) * TY_BODY_LH) + 14
-            if y + bullet_h > footer_y:
-                break
-            c.ax.scatter(MX + 12, c.y(y + 16), s=120, marker="o",
-                         color=col, edgecolor="none", zorder=11)
-            for i, ln in enumerate(dl[:2]):
-                c.text(MX + 50, y + i * TY_BODY_LH, ln, TY_BODY, color=T.TEXT)
-            y += bullet_h
+    y = 300
+    for d in visible:
+        dl = _wrap_px(d, c.W - 2 * MX - 56, TY_BODY)
+        bullet_h = max(TY_BODY_LH, min(2, len(dl)) * TY_BODY_LH) + 14
+        if y + bullet_h > footer_y:
+            break
+        c.ax.scatter(MX + 12, c.y(y + 16), s=120, marker="o",
+                     color=col, edgecolor="none", zorder=11)
+        for i, ln in enumerate(dl[:2]):
+            c.text(MX + 50, y + i * TY_BODY_LH, ln, TY_BODY, color=T.TEXT)
+        y += bullet_h
     analysis_footer(c)
+
+
+# kept for backward-compat; delegates to the two new functions above
+def slide_earnings_guidance(c, e, date_iso, driver_start=0, driver_end=None,
+                             show_blocks=True):
+    if show_blocks:
+        slide_earnings_ausblick(c, e, date_iso)
+    else:
+        slide_earnings_treiber(c, e, date_iso, driver_start=driver_start,
+                               driver_end=driver_end)
 
 
 def _verdict_note(e):
@@ -1946,19 +1951,21 @@ def slide_earnings_quarterly(c, e, date_iso):
     analysis_footer(c)
 
 
-# 7) WAS DEN BEAT GETRAGEN HAT — Segmente im Detail
-def slide_earnings_segments(c, e, date_iso):
+# 7) WAS DEN BEAT GETRAGEN HAT — Segmente im Detail (split-fähig)
+def slide_earnings_segments(c, e, date_iso, seg_start=0, seg_end=None):
     analysis_header(c, e, date_iso)
     col = earn_color(e)
     c.text(MX, 184, "Was den Beat getragen hat", 42, weight="bold")
     c.text(MX, 240, "Die Segmente im Detail", TY_SUB, color=T.MUTED)
 
-    segs = e.get("segments") or []
+    all_segs = e.get("segments") or []
+    segs = all_segs[seg_start:seg_end]
+    footer_y = c.H - 200
     y = 312
-    for s in segs[:4]:
+    for s in segs:
         note = s.get("note", "")
         metric_raw = s.get("metric", "")
-        # Split "€20 Mrd. (+63%)" → abs on line 1, pct on line 2
+        # Split "$20 Mrd. (+63%)" → abs Zeile 1, % Zeile 2
         split_idx = metric_raw.find(" (")
         if split_idx >= 0:
             metric_abs = metric_raw[:split_idx].strip()
@@ -1970,6 +1977,9 @@ def slide_earnings_segments(c, e, date_iso):
         note_h = min(len(nlines), 2) * 36
         h = max(120, 26 + 14 + (42 if metric_abs else 0) + (34 if metric_pct else 0)
                 + 12 + note_h + 22)
+        # Overflow-Check: Box würde Footer berühren → nicht mehr auf diese Slide
+        if y + h > footer_y:
+            break
         c.tile(MX, y, c.W - 2 * MX, h, color=T.PANEL)
         c.tile(MX, y, 10, h, color=col, radius=5)
         c.text(MX + 34, y + 22, s["name"].upper(), 24, color=col, weight="bold")
@@ -1984,7 +1994,9 @@ def slide_earnings_segments(c, e, date_iso):
         for i, ln in enumerate(nlines[:2]):
             c.text(MX + 34, my + i * 36, ln, TY_BODY, color=T.TEXT)
         y += h + 18
-    if e.get("segments_note"):
+    # segments_note nur auf der letzten Seite
+    last_seg = seg_end if seg_end is not None else len(all_segs)
+    if e.get("segments_note") and last_seg >= len(all_segs):
         _draw_paragraph(c, MX, y + 8, e["segments_note"], TY_SUB, c.W - 2 * MX,
                         color=T.MUTED, line_h=32, max_lines=3)
     analysis_footer(c)

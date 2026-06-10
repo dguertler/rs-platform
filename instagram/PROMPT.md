@@ -521,16 +521,17 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
   Sprung-Highlight + „+X %"-Callout. Untertitel: „Tageskerzen — die letzten 50
   Handelstage bis zum Meldetag". Hinweis: OHLCV enthält nur **Handelstage** (keine
   Wochenenden/Feiertage) — 50 Kerzen ≈ 10 Kalenderwochen.
-- **Slide „Ausblick & Treiber" (Slide 5):** Wenn `guidance`/`key_metric_value`
-  vorhanden UND mehr als 2 `drivers` → automatischer Überlauf auf Folgefolie
-  „Treiber im Detail" (Slide 5b). `generate.py` berechnet den Splitpunkt
-  (max. 2 Treiber auf Slide 5 bei Blocks) und emittiert die zweite Folie
-  automatisch — kein manueller Eingriff nötig.
-- **Slide „Was den Beat getragen hat" (Segmente):** Metriken vertikal stapeln:
-  Absoluter Wert (32 px, T.TEXT, Mono-Font) auf Zeile 1 + Prozentwert (26 px,
-  Akzentfarbe, Mono-Font) auf Zeile 2. Notiz-Text darunter: TY_BODY=28 px,
-  T.TEXT (nicht kleiner TY_SUB/T.MUTED). Box-Höhe passt sich automatisch an.
-  Format der `metric`-Felder: `"$20,03 Mrd. (+63%)"` — Splitpunkt bei `" ("`.
+- **„Ausblick" und „Die Treiber" sind IMMER separate Slides:**
+  `guidance`/`key_metric_value` → eigene Slide „Ausblick".
+  `drivers`-Bullets → eigene Slide „Die Treiber".
+  Kein Mischen; Treiber-Slide hat Overflow-Schutz (footer_y = H−200).
+- **Overflow-Regel (universell):** Kein Element darf den Footer berühren
+  (footer_y = Canvas-H − 200 = 1150 px bei Carousel). Überfüllende Inhalte
+  kommen auf eine Folgefolie. Gilt für Treiber-Bullets UND Segment-Boxen.
+- **Slide „Was den Beat getragen hat" (Segmente):** Automatischer Seitenumbruch
+  via `_seg_pages()` in `generate.py`. Metriken gestapelt: abs. Wert (32 px,
+  T.TEXT, mono) + % (26 px, Akzentfarbe, mono). Notizen: TY_BODY=28, T.TEXT.
+  Format `metric`-Felder: `"$20,03 Mrd. (+63%)"` → Split bei `" ("`.
 - **Slide „Einordnung":** Kontext + Verdict-Badge + **„Warum dieses Verdict?"**
   (Feld `verdict_note`, sonst verdict-bewusster Fallback). Erklärt z. B. HALTEN trotz
   Beat, obwohl der Base Case über dem Kurs liegt (Risiko/Positionsgröße).

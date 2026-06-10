@@ -572,6 +572,31 @@ def caption_analysis(a):
     return assemble(0, False, False)[:2180].rsplit(" ", 1)[0] + " …"
 
 
+def _seg_pages(segs, y_start=312, footer_y=1150, gap=18):
+    """Berechnet Seitenumbrüche für Segment-Slides (konservative Schätzung).
+    Gibt eine Liste von (seg_start, seg_end_or_None)-Tupeln zurück."""
+    if not segs:
+        return []
+    pages = []
+    page_start = 0
+    y = y_start
+    for i, s in enumerate(segs):
+        metric_raw = s.get("metric", "")
+        has_pct = " (" in metric_raw
+        note = s.get("note", "")
+        # ~50 Zeichen/Zeile bei TY_BODY=28, max 2 Zeilen
+        note_lines = min(2, max(1, (len(note) + 49) // 50)) if note else 0
+        note_h = note_lines * 36
+        h = max(120, 26 + 14 + 42 + (34 if has_pct else 0) + 12 + note_h + 22)
+        if y + h > footer_y and i > page_start:
+            pages.append((page_start, i))
+            page_start = i
+            y = y_start
+        y += h + gap
+    pages.append((page_start, None))
+    return pages
+
+
 # ── Earnings-Analyse-Post (instagram/data/earnings/TICKER.json) ───────────────
 def build_earnings(fmt, e, date_iso, outdir):
     """Earnings-Carousel: Beat-Story + Earnings-Tiefgang + Verknüpfung zur These.
@@ -590,18 +615,18 @@ def build_earnings(fmt, e, date_iso, outdir):
         emit("quartale", lambda c: render.slide_earnings_quarterly(c, e, date_iso))
     if e.get("reaction_ohlcv"):
         emit("reaktion", lambda c: render.slide_earnings_reaction(c, e, date_iso))
-    if e.get("guidance") or e.get("drivers") or e.get("key_metric_value"):
-        _all_drivers = e.get("drivers") or []
-        _has_blocks = bool(e.get("guidance") or e.get("key_metric_value"))
-        # wenn blocks + >2 Treiber → Slide 1 zeigt nur die ersten 2, Folgefolie den Rest
-        _split = 2 if (_has_blocks and len(_all_drivers) > 2) else len(_all_drivers)
-        emit("ausblick", lambda c, _s=_split: render.slide_earnings_guidance(
-            c, e, date_iso, driver_start=0, driver_end=_s, show_blocks=True))
-        if _split < len(_all_drivers):
-            emit("ausblick_2", lambda c, _s=_split: render.slide_earnings_guidance(
-                c, e, date_iso, driver_start=_s, driver_end=None, show_blocks=False))
+    # Ausblick (Guidance + Key Metric) und Treiber immer auf separaten Slides
+    if e.get("guidance") or e.get("key_metric_value"):
+        emit("ausblick", lambda c: render.slide_earnings_ausblick(c, e, date_iso))
+    if e.get("drivers"):
+        emit("treiber", lambda c: render.slide_earnings_treiber(c, e, date_iso))
+    # Segmente: automatischer Seitenumbruch wenn Boxen den Footer berühren
     if e.get("segments"):
-        emit("segmente", lambda c: render.slide_earnings_segments(c, e, date_iso))
+        _pages = _seg_pages(e.get("segments") or [])
+        for _pi, (_s0, _s1) in enumerate(_pages):
+            _name = "segmente" if _pi == 0 else f"segmente_{_pi + 1}"
+            emit(_name, lambda c, _a=_s0, _b=_s1:
+                 render.slide_earnings_segments(c, e, date_iso, seg_start=_a, seg_end=_b))
     # ── Unternehmen & These aus der Basis-Analyse ─────────────────────────────
     if a and a.get("business_bullets"):
         emit("unternehmen", lambda c: render.slide_analysis_business(c, a, date_iso))
