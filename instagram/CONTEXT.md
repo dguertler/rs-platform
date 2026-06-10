@@ -310,7 +310,8 @@ python3 -m instagram.generate --analysis AMD \
   --headline "AMD: Nvidias einziger echter Rivale — Kauf oder Hype?"
 ```
 Output `out/instagram/<DATUM>_ANALYSE_<TICKER>/`:
-`carousel/` (10 PNG) · `reel/` (4 PNG) · **`reel.mp4`** · `caption.txt` ·
+`carousel/` (10 PNG) · `reel/` (4 PNG) · **`reel.mp4`** · `caption.txt` (Carousel) ·
+**`reel_caption.txt`** (Reel als eigener Post, Funnel-CTA aufs Karussell) ·
 **`reel_script.txt`**. Nichts wird hochgeladen — manuell posten.
 
 **Karussell (10 Slides, volle Tiefe = USP):** Cover (Frage-Hook + Logo) ·
@@ -378,7 +379,8 @@ python3 -m instagram.generate --earnings CNC \
   --headline "Turnaround bestätigt — der Q1-Gewinn sprengt die Erwartung"
 ```
 Output `out/instagram/<DATUM>_EARNINGS_<TICKER>/`: `carousel/` (bis zu 14 PNG) ·
-`reel/` (4 PNG) · `caption.txt` · **`carousel_<TICKER>.zip`** (alle Slides
+`reel/` (4 PNG) · `caption.txt` (Carousel) · **`reel_caption.txt`** (Reel als
+eigener Post, Funnel-CTA aufs Karussell) · **`carousel_<TICKER>.zip`** (alle Slides
 gebündelt, wie bei den Aktienanalysen). Nichts wird hochgeladen — manuell posten.
 
 **Drei Datenquellen:**
@@ -570,6 +572,12 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 
 **Kurz-Caption — die VOLLE Analyse steht auf den Slides** (Vorgabe des
 Nutzers: kein Analyse-Content in der Caption, nichts wird ausgelagert).
+
+**Reel-Caption (`reel_caption.txt`)** — eigener Post → eigene Caption. Gleicher
+Aufbau (SEO-Zeile zuerst + Hook + dieselben 5 Hashtags), aber statt Save-CTA der
+Funnel-CTA „Die ganze Analyse findest du im Karussell-Post auf meinem Profil".
+Funktionen: `reel_caption_analysis`, `reel_caption_earnings`,
+`reel_caption_from_store`. Wird nur geschrieben, wenn das Reel-Format mitläuft.
 
 Aufbau (Analyse-Post):
 1. SEO-Zeile: „<Firmenname> (TICKER) — Aktienanalyse: <Verdict> · Score X/100"

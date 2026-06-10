@@ -265,7 +265,8 @@ python3 -m instagram.generate --analysis AMD \
   --headline "AMD: Nvidias einziger echter Rivale — Kauf oder Hype?"
 ```
 Output: `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` +
-`caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
+`caption.txt` (Carousel) + `reel_caption.txt` (Reel als eigener Post).
+**Kein Auto-Upload** — prüfen und manuell posten.
 
 ### Carousel vs. Reel (zwei getrennte Outputs, ein Lauf)
 - **Carousel (4:5):** die VOLLE Analyse (10 Slides, siehe Slide-Reihenfolge
@@ -286,6 +287,19 @@ Jeder Analyse-Lauf erzeugt zusätzlich:
 
 Beide Reels sind **Teaser** und enden mit dem **Hybrid-CTA** „ganze Analyse im
 Karussell-Post auf meinem Profil" → leiten Reel-Reichweite aufs Carousel um.
+
+### Reel = eigener Post → eigene Caption (`reel_caption.txt`)
+Ein Reel ist auf Instagram ein **eigenständiger Post** (getrennt vom Carousel),
+braucht also eine **eigene Caption**. Jeder Lauf mit Reel-Format schreibt daher
+zusätzlich eine **`reel_caption.txt`** in den Post-Ordner (neben der Carousel-
+`caption.txt`). Aufbau identisch zur Carousel-Caption — **SEO-Zeile zuerst**
+(Keyword/Firmenname + Ticker, damit das Reel über die Suche gefunden wird), Hook
+und **dieselben max. 5 Hashtags** — aber statt des Save-CTAs der **Funnel-CTA**
+„Die ganze Analyse findest du im Karussell-Post auf meinem Profil". So wird das
+Reel separat postbar und schiebt seine Reichweite auf den Carousel-Post.
+Funktionen: `reel_caption_analysis`, `reel_caption_earnings`,
+`reel_caption_from_store` in `generate.py`. Gilt für **alle** Post-Typen
+(Analyse, Earnings, Wochenrückblick).
 
 ### Hook = Frage/These (die ersten 3 Sekunden)
 Die erste Slide (und der Reel-Hook) trägt eine **Frage oder steile These** statt
@@ -417,7 +431,8 @@ Kandidat für einen Earnings-Post.
    Ohne `--headline` baut der Generator eine Beat-bewusste Hook automatisch.
    **Wichtig:** Die Hook nennt **weder Firmenname noch Ticker** (siehe Design-Regeln).
    Output: `out/instagram/<DATUM>_EARNINGS_<TICKER>/{carousel,reel}/*.png`,
-   `caption.txt` **und `carousel_<TICKER>.zip`** (alle Carousel-Slides gebündelt,
+   `caption.txt` (Carousel) + `reel_caption.txt` (Reel als eigener Post)
+   **und `carousel_<TICKER>.zip`** (alle Carousel-Slides gebündelt,
    wie bei den Aktienanalysen). **Kein Auto-Upload** — prüfen und manuell posten.
 
 4. **Earnings-JSON committen** (die `out/`-Slides sind gitignored).

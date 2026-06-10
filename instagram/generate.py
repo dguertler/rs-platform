@@ -158,6 +158,25 @@ def caption_from_store(ctx):
     )
 
 
+def reel_caption_from_store(ctx):
+    """Caption für das Wochen-Reel (eigener IG-Post, getrennt vom Carousel). Teaser
+    → leitet auf den Karussell-Post um (Hybrid-Funnel). Bewusst kurz: Hook + die
+    zwei stärksten Kennzahlen (Alpha/Gesamtrendite) als Beweis + Funnel-CTA aufs
+    Karussell + Bio-Hinweis + Interaktions-Frage + Disclaimer + 5 Hashtags."""
+    return (
+        f"📊 {ctx['hook']}\n\n"
+        f"Wochenupdate KW {ctx['kw']} ({ctx['period']})\n"
+        f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} · "
+        f"Alpha ggü. NASDAQ-100: {render.fmt_pct(ctx['alpha'])}\n\n"
+        f"🎬 Das ist der Teaser. Alle Positionen, Charts und das komplette "
+        f"Wochenupdate findest du im Karussell-Post auf meinem Profil.\n\n"
+        f"👉 Den Link zum wikifolio AI Alpha Selection findest du aktuell in unserer Bio.\n\n"
+        f"💬 {ctx['question']}\n\n"
+        f"{render.T.DISCLAIMER_LONG}\n\n"
+        f"{HASHTAGS_WEEKLY}"
+    )
+
+
 def _emitter(fmt, outdir, saved):
     os.makedirs(outdir, exist_ok=True)
     for f in os.listdir(outdir):           # veraltete Slides entfernen
@@ -480,6 +499,28 @@ def caption_analysis(a):
     return "\n".join(parts)
 
 
+def reel_caption_analysis(a):
+    """Caption für das Reel (eigener IG-Post, getrennt vom Carousel). Das Reel ist
+    der Teaser, der Reichweite holt und auf den Karussell-Post umleitet
+    (Hybrid-Funnel). Aufbau wie die Carousel-Caption — SEO-Zeile (Keyword zuerst)
+    für die Reel-Suche, Hook, aber statt Save-CTA der Funnel-CTA aufs Karussell —
+    Disclaimer + dieselben max. 5 Hashtags."""
+    v = a["verdict"]
+    scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
+    head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
+    DISC = render.T.DISCLAIMER_ANALYSE_SHORT
+    parts = [f"📊 {head}\n"]
+    if a.get("headline") or a.get("hook"):
+        parts.append((a.get("headline") or a["hook"]) + "\n")
+    parts.append("🎬 Das ist der Teaser. Die komplette Analyse — Geschäftsmodell, "
+                 "Szenarien mit Kurszielen, Bewertung und Profi-Fazit — findest du "
+                 "im Karussell-Post auf meinem Profil.\n")
+    parts.append("👉 Folge AI Alpha Selection für wöchentliche Profi-Analysen.\n")
+    parts.append("❗ " + DISC)
+    parts.append("\n" + hashtags_analysis(a))
+    return "\n".join(parts)
+
+
 # ── Earnings-Analyse-Post (instagram/data/earnings/TICKER.json) ───────────────
 def build_earnings(fmt, e, date_iso, outdir):
     """Earnings-Carousel: Beat-Story + Earnings-Tiefgang + Verknüpfung zur These.
@@ -562,6 +603,32 @@ def caption_earnings(e):
     parts.append("Alle Zahlen, die Kursreaktion, Guidance und die Einordnung in "
                  "die These findest du auf den Slides. Speichere den Beitrag "
                  "für deine Watchlist.\n")
+    parts.append("👉 Folge AI Alpha Selection für Earnings & Profi-Analysen.\n")
+    parts.append("❗ " + DISC)
+    parts.append("\n" + hashtags_earnings(e))
+    return "\n".join(parts)
+
+
+def reel_caption_earnings(e):
+    """Caption für das Earnings-Reel (eigener IG-Post). Teaser → leitet auf den
+    Karussell-Post um. SEO-Zeile + Beat-Einzeiler + Funnel-CTA aufs Karussell +
+    Disclaimer + max. 5 Hashtags (wie caption_earnings, aber mit Reel-CTA)."""
+    a = e.get("analysis")
+    name = render.A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
+    beat_word = "Beat" if (e.get("eps_surprise_pct") or 0) >= 0 else "Miss"
+    head = f"{name} ({e['ticker']}) — Earnings-Analyse {e['quarter']}: {beat_word}"
+    DISC = render.T.DISCLAIMER_ANALYSE_SHORT
+    teaser = []
+    if e.get("eps_surprise_pct") is not None:
+        teaser.append(f"EPS-Überraschung {earn.fmt_pct_pts(e['eps_surprise_pct'], 0)}")
+    if e.get("jump_pct") is not None:
+        teaser.append(f"Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
+    parts = [f"📊 {head}\n"]
+    if teaser:
+        parts.append("🚀 " + " · ".join(teaser) + ".\n")
+    parts.append("🎬 Das ist der Teaser. Alle Zahlen, die Kursreaktion, Guidance und "
+                 "die Einordnung in die These findest du im Karussell-Post auf "
+                 "meinem Profil.\n")
     parts.append("👉 Folge AI Alpha Selection für Earnings & Profi-Analysen.\n")
     parts.append("❗ " + DISC)
     parts.append("\n" + hashtags_earnings(e))
@@ -665,6 +732,9 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_earnings(e))
+        if "reel" in fmts:
+            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+                f.write(reel_caption_earnings(e))
 
         reel_dir = os.path.join(base, "reel")
         if "reel" in fmts and os.path.isdir(reel_dir):
@@ -712,6 +782,9 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_analysis(a))
+        if "reel" in fmts:
+            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+                f.write(reel_caption_analysis(a))
         with open(os.path.join(base, "reel_script.txt"), "w") as f:
             f.write(reel_script(a))
 
@@ -771,6 +844,9 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(caption_from_store(ctx))
+        if "reel" in fmts:
+            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+                f.write(reel_caption_from_store(ctx))
         # ZIP der Carousel-PNGs für einfachen Versand / Upload
         import zipfile
         carousel_dir = os.path.join(base, "carousel")
