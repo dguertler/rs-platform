@@ -232,7 +232,7 @@ def build_weekly_caption(r):
         parts.append("Käufe:\n" + line_buys() + "\n")
     if r["sells"]:
         parts.append("Verkäufe:\n" + line_sells() + "\n")
-    parts.append(f"➡️ Mehr: {render.HANDLE}\n")
+    parts.append(f"➡️ Mehr: {render.BRAND_NAME}\n")
     parts.append(render.T.DISCLAIMER_LONG)
     parts.append("\n#wikifolio #aktien #investing #nasdaq #trading #boerse "
                  "#geldanlage #finanzen #relativestärke #wochenreport")
@@ -415,7 +415,7 @@ def reel_script(a):
         L.append("")
     L.append("[0:40–0:45]  (Overlay: Ganze Analyse im Karussell 👆)")
     L.append(f"VO: \"Den kompletten Deep Dive mit allen Kurszielen findest du im "
-             f"Karussell-Post auf diesem Profil. Folge {render.HANDLE} für 1–2 "
+             f"Karussell-Post auf diesem Profil. Folge {render.BRAND_NAME} für 1–2 "
              f"Profi-Analysen pro Woche.\"")
     L.append("")
     L.append("## [HINWEIS]  Pflicht-Disclaimer einblenden/vorlesen:")
@@ -609,7 +609,7 @@ def build_caption(ctx):
         f"Ausgewählte Signale des Systems:\n{sig_lines}\n\n"
         f"Das System kombiniert relative Stärke mit Breakout-Logik und wählt "
         f"datengetrieben aus über {ctx['n_tickers']} beobachteten Titeln.\n\n"
-        f"➡️ Mehr Updates: {render.HANDLE} — Link in Bio.\n\n"
+        f"➡️ Mehr Updates: {render.BRAND_NAME} — Link in Bio.\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"#wikifolio #aktien #investing #nasdaq #trading #boerse "
         f"#geldanlage #finanzen #relativestärke #aktienanalyse"
