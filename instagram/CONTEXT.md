@@ -326,10 +326,10 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 - [ ] Cover: kein AKTIENANALYSE-Tag; Header: kein ANALYSE-Tag
 - [ ] Header rechts: Firmen-Logo (52 px), kein Ticker-Tag
 
-### 12.8 Caption-Aufbau (generate.py `caption_analysis`) — Round 10
+### 12.8 Caption-Aufbau (generate.py `caption_analysis`) — Round 12
 
 Die Caption ist eine **inhaltliche Ergänzung zu den Slides**, keine Zusammenfassung.
-Die "💡 Nicht auf den Slides"-Sektion enthält exklusiven Content der Caption.
+Der "💡 Mehr Details"-Block liefert tiefer gehende Kennzahlen zu den Slides.
 
 Reihenfolge:
 1. Titel + Verdict + Score
@@ -340,18 +340,24 @@ Reihenfolge:
 6. Rating-Sterne
 7. Fazit-Kernaussage
 8. Vergleichbare Titel (Peers)
-9. **💡 Nicht auf den Slides** (caption-exklusiv, IMMER vollständig, nie beim Kürzen weglassen):
+9. **💡 Mehr Details** (IMMER vollständig, nie beim Kürzen weglassen):
    - **EPYC vs. Intel**: AMD gewinnt Rechenzentrums-CPU-Marktanteile (aus Sections 2+3)
    - **TSMC-Abhängigkeit**: Fabless-Modell, 3nm/5nm-Kapazität + CoWoS-Packaging (IMMER wenn in Sec2)
    - **HBM-Risiko**: HBM3e von SK Hynix/Samsung, Lieferketten-Engpass (IMMER wenn in Sec2)
-   - **D/E-Ratio + Bilanz**: Verschuldungsgrad + FCF (aus Section 6, regex: `D/E`)
-   - **Analyst-Konsensus**: Kursziel vs. aktueller Kurs (aus Section 7, regex: Konsensus|Konsensziel)
+   - **D/E + FCF dynamisch** aus Section 6 raw (NICHT clean_for_slide):
+     - D/E regex: `r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)'`
+     - FCF regex: `r'FCF[^0-9$]*\$?\s*~?\s*([0-9]+[,\.][0-9]+)\s*(Mrd|Mio)\.?\s*\$?'`
+     - Ausgabe: `"Bilanz: D/E X — konservative Verschuldung, solide Bilanz, ~Y Mrd. $ FCF"`
+     - **KEIN hardcodierter FCF-Wert** — wird je Ticker aus Section 6 extrahiert
+   - **Analyst-Konsensus** aus Section 7 **raw** (NICHT `clean_for_slide` — dieser könnte Zahlen verändern):
+     - Regex: `r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]+(?:[.,][0-9]+)?)'`
+     - `[0-9]+` (kein `{2,}`) — fängt auch `1.609 $` (dt. Tausendertrennzeichen) korrekt
 10. Folge-CTA
 11. Disclaimer
 12. Hashtags (25–30 Tags, maximale Algorithmus-Reichweite)
 
 **Kürzungsreihenfolge** bei Überschreitung des 2.200-Zeichen-Limits (Python `len()`):
-Bullets 4→3→2→0, Cases-Zusammenfassung, Langfrist — "Weitere Details" bleibt IMMER drin.
+Bullets 4→3→2→0, Cases-Zusammenfassung, Langfrist — "Mehr Details" bleibt IMMER drin.
 
 **Hashtag-Strategie** (22–25 zielgerichtete Tags, Round 11):
 - Basis (12): `#aktien #aktienanalyse #aktienmarkt #börse #boersewissen #geldanlage #finanzbildung #vermögensaufbau #wachstumsaktien #börsentipps #investing #stockanalysis`

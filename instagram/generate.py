@@ -475,8 +475,8 @@ def caption_analysis(a):
     # ── "Weitere Details"-Block — immer vollständig, nie weglassen ───────────
     sec2 = ana.clean_for_slide(a["sections"].get(2, ""))
     sec3 = ana.clean_for_slide(a["sections"].get(3, ""))
-    sec6 = ana.clean_for_slide(a["sections"].get(6, ""))
-    sec7 = ana.clean_for_slide(a["sections"].get(7, ""))
+    sec6_raw = a["sections"].get(6, "")
+    sec7_raw = a["sections"].get(7, "")
 
     extra = []
     # EPYC vs. Intel (aus Section 3 oder Section 2)
@@ -492,15 +492,17 @@ def caption_analysis(a):
     if _re.search(r'HBM', sec2, _re.I):
         extra.append("HBM-Risiko: MI-GPUs benötigen HBM3e von SK Hynix/Samsung "
                      "— Lieferkette ist kritischer Engpass bei hoher AI-Nachfrage")
-    # D/E aus Section 6
-    m_de = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6)
+    # D/E + FCF dynamisch aus Section 6 (raw)
+    m_de  = _re.search(r'D/E[^0-9]*([0-9]+(?:[,\.][0-9]+)?)', sec6_raw)
+    m_fcf = _re.search(r'FCF[^0-9$]*\$?\s*~?\s*([0-9]+[,\.][0-9]+)\s*(Mrd|Mio)\.?\s*\$?', sec6_raw)
     if m_de:
+        fcf_str = (f", ~{m_fcf.group(1)} {m_fcf.group(2)}. $ FCF" if m_fcf else "")
         extra.append(f"Bilanz: D/E {m_de.group(1)} — konservative Verschuldung, "
-                     f"solide Bilanz, ~7 Mrd. $ FCF (2024)")
-    # Analyst-Konsensus aus Section 7
+                     f"solide Bilanz{fcf_str}")
+    # Analyst-Konsensus aus Section 7 (raw — vor clean_for_slide, damit Zahlen erhalten bleiben)
     m_ac = _re.search(
-        r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]{2,}(?:[.,][0-9]+)?)',
-        sec7)
+        r'(?:[Kk]onsensus|[Kk]onsensziel|[Aa]nalysten)[^0-9$]*\$?\s*([0-9]+(?:[.,][0-9]+)?)',
+        sec7_raw)
     if m_ac:
         extra.append(f"Analyst-Konsensus: {m_ac.group(1).rstrip('.')} $ Kursziel "
                      f"— Analysten laufen der Kursrally aktuell hinterher")
@@ -551,7 +553,7 @@ def caption_analysis(a):
             parts.append("📌 Vergleichbar: " + ", ".join(a["peers"]) + "\n")
         # Weitere Details — caption-exklusiver Content, immer vollständig
         if extra:
-            parts.append("💡 Nicht auf den Slides:\n"
+            parts.append("💡 Mehr Details:\n"
                          + "\n".join(f"› {e}" for e in extra) + "\n")
         parts.append("👉 Folge für wöchentliche Analysen.\n")
         parts.append("❗ " + DISC)
