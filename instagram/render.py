@@ -333,14 +333,32 @@ def slide_signal(c, date_iso, ticker, sig, ret, ohlcv, entry):
     footer(c)
 
 
-def slide_cta(c, date_iso):
+def slide_cta(c, date_iso, question=None, account=None):
+    """Abschluss-Slide: Bio-Link-Pfad + dynamische Interaktions-Frage
+    (Engagement-Boost) + Pflicht-Risikohinweis.
+
+    `question` = von Claude pro Woche aus den Trades getextete Frage; treibt die
+    Kommentare. `account` = Handle für den Bio-Verweis (Default: Marke).
+    """
     import textwrap
     header(c, date_iso)
-    cy = int(c.H * 0.30)
-    c.text(MX, cy, "Folge für wöchentliche", 50, weight="bold")
-    c.text(MX, cy + 64, "Updates & Signale.", 50, weight="bold")
-    c.text(MX, cy + 150, "AI Alpha Selection", 30, color=T.BLUE, weight="bold")
-    c.text(MX, cy + 200, "→ Das wikifolio auf wikifolio.com", 20, color=T.MUTED)
+    handle = account or HANDLE
+    cy = int(c.H * 0.24)
+    c.text(MX, cy, "Mehr Trades & Updates?", 50, weight="bold")
+    # URLs sind in IG-Beiträgen nicht klickbar → strikt auf die Bio verweisen.
+    c.text(MX, cy + 80, "Den Link zum Live-Depot findest du", 24, color=T.TEXT)
+    c.text(MX, cy + 116, "aktuell in unserer Bio.", 24, color=T.TEXT)
+    c.text(MX, cy + 168, handle, 30, color=T.BLUE, weight="bold")
+
+    # Dynamische Interaktions-Frage (Engagement / Kommentare anfeuern)
+    if question:
+        qlines = textwrap.wrap(question, width=44)
+        qy = cy + 236
+        box_h = 60 + len(qlines) * 34
+        c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
+        c.text(MX + 34, qy + 24, "DEINE MEINUNG?", 16, color=T.BLUE, weight="bold")
+        for i, ln in enumerate(qlines):
+            c.text(MX + 34, qy + 60 + i * 34, ln, 22, weight="bold")
 
     # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
     body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=104)
@@ -357,6 +375,62 @@ def slide_cta(c, date_iso):
             _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
         else:
             c.text(MX + 36, ty, ln, 15, color=T.MUTED)
+    footer(c)
+
+
+def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
+    """Slide 1 — **Dynamic Hook** (visueller Stopper, KEIN Dashboard).
+
+    `headline` = wöchentlich aus den Daten getextete Schlagzeile, die neugierig
+    macht (hoher Alpha-Wert, Outperformance, Krisenfestigkeit, Sektor-Gewinne).
+    `metrics` = Liste (label, value, color) — 1–2 prominente Kennzahlen als
+    visueller Beweis direkt auf der Slide (z. B. Alpha, Gesamtrendite).
+    """
+    import textwrap
+    header(c, date_iso)
+    eyebrow = f"WOCHENUPDATE · KW {kw}" if kw else "WOCHENUPDATE"
+    c.text(MX, 200, eyebrow, 24, color=T.BLUE, weight="bold")
+
+    # Schlagzeile groß umbrechen (visueller Stopper)
+    wrapped = textwrap.wrap(headline, width=20)[:4]
+    size = 78 if len(wrapped) <= 3 else 62
+    top = 272
+    for i, ln in enumerate(wrapped):
+        c.text(MX, top + i * (size + 12), ln, size, weight="bold")
+
+    # Kennzahlen als Beweis (Chips unten)
+    metrics = (metrics or [])[:2]
+    n = len(metrics)
+    if n:
+        gap = 28
+        chip_top = int(c.H * 0.64)
+        tw = (c.W - 2 * MX - gap * (n - 1)) / n
+        ch = 178
+        for i, (label, val, col) in enumerate(metrics):
+            x = MX + i * (tw + gap)
+            c.tile(x, chip_top, tw, ch, color=T.PANEL)
+            c.text(x + 34, chip_top + 32, label, 18, color=T.MUTED)
+            c.text(x + 34, chip_top + ch - 92, val, 58, color=col,
+                   weight="bold", font="mono")
+    footer(c)
+
+
+def slide_why(c, date_iso, text):
+    """Strategisches „Warum" — minimalistische Text-Slide (KI-Kontext).
+
+    Übergang von den Positionen zu den Einzelaktien-Deep-Dives. `text` =
+    wöchentlich getextete Begründung der KI-Logik (Sektor-Rotation,
+    Volatilitäts-Check, Trendbestätigung).
+    """
+    import textwrap
+    header(c, date_iso)
+    c.text(MX, 210, "HINTER DEN KULISSEN", 26, color=T.BLUE, weight="bold")
+    c.text(MX, 250, "Warum die KI so entschieden hat", 18, color=T.MUTED)
+    wrapped = textwrap.wrap(text, width=32)
+    size = 46 if len(wrapped) <= 8 else 36
+    cy = int(c.H * 0.36)
+    for i, ln in enumerate(wrapped):
+        c.text(MX, cy + i * (size + 16), ln, size, weight="bold")
     footer(c)
 
 

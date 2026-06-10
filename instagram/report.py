@@ -15,6 +15,26 @@ def week_friday(year, kw):
     return date.fromisocalendar(year, kw, 5).isoformat()
 
 
+def week_saturday(year, kw):
+    """ISO-Samstag der Kalenderwoche -> ISO-Datumsstring (Slide-Datum)."""
+    return date.fromisocalendar(year, kw, 6).isoformat()
+
+
+def slide_date(year, kw, override=None):
+    """Datum oben rechts auf den Slides.
+
+    Regel: Standardmäßig der **Samstag der jeweiligen KW** (Wochenabschluss).
+    Liegt dieser Samstag noch in der Zukunft (Bericht wird in der laufenden
+    Woche vor Samstag erstellt), wird stattdessen das heutige Datum genutzt.
+    `override` (z. B. CLI `--date`) hat immer Vorrang.
+    """
+    if override:
+        return override
+    sat = week_saturday(year, kw)
+    today = date.today().isoformat()
+    return sat if sat <= today else today
+
+
 def equity_curve(history, year, start_kw=None):
     """Baut aus den Wochenrenditen eine indexierte Equity-Kurve (Start=100)."""
     hist = sorted(history, key=lambda h: h["kw"])
