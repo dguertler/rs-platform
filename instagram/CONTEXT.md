@@ -239,18 +239,26 @@ hier immer in render.py umsetzen und als Konstante/Parameter fixieren.
 ### 12.3 Typografie-Konstanten (nach `MX = 90` in render.py)
 ```python
 TY_H1      = 42   # Slide-Hauptüberschrift
-TY_SUB     = 18   # Subtitle / Kontext-Zeile (MUTED)
+TY_SUB     = 22   # Subtitle / Kontext-Zeile (MUTED)
 TY_BODY    = 28   # Fließtext (Investment-Case, Szenarien, Fazit usw.)
 TY_BODY_LH = 44   # Zeilenabstand zu TY_BODY
 MX         = 90   # Seitenrand links/rechts in px
 ```
 **Regel:** Alle neuen Fließtext-Slides verwenden `TY_BODY`/`TY_BODY_LH`.
-Alle H1-Überschriften verwenden `TY_H1`. Alle Subtitles `TY_SUB` in `MUTED`.
+Alle H1-Überschriften `TY_H1`. Alle Subtitles `TY_SUB` in `T.MUTED`.
+Rating-Labels, Firmenname, Kachel-Beschriftungen: `TY_BODY`, `color=T.TEXT`.
+Footer-Disclaimer: 16 px, `color=T.MUTED`.
 
 ### 12.4 Textausrichtung & Zeilenumbruch (gültig für Deutsch + Englisch)
 
 **Standard: linksbündig** (`justify=False` in `_draw_paragraph`).
 Blocksatz (`justify=True`) nur für abgegrenzte Boxen wie den CTA-Disclaimer.
+
+**Bindestrich-Darstellung (Deutsch + Englisch):**
+Zusammengesetzte Wörter mit Bindestrich (`Text-Text`) werden auf Slides immer als
+`Text - Text` dargestellt (Leerzeichen um den Bindestrich). Dies geschieht automatisch
+am Anfang von `_wrap_px` via `re.sub(r'([A-Za-zäöüÄÖÜß])-([A-Za-zäöüÄÖÜß])', r'\1 - \2', text)`.
+Gilt für alle Slides (Wochenpost + Analyse).
 
 **Zeilenumbruch:** `_wrap_px(text, px_width, size, factor=0.50, lang="de")`
 - `factor=0.50` entspricht der durchschnittlichen Zeichenbreite von Liberation
@@ -270,6 +278,17 @@ Blocksatz (`justify=True`) nur für abgegrenzte Boxen wie den CTA-Disclaimer.
 | `text-align: justify` + Hyphens | `justify=True` nur mit `lang="de"` |
 
 ### 12.5 Slide-Layout-Muster (für neue Slides)
+
+**Header (`analysis_header`):** Brand-Logo links (52 px), Firmen-Logo rechts (52 px,
+`T.company_logo_file(ticker)`), Trennlinie bei y=140. Kein ANALYSE-Tag mehr.
+
+**Cover (`slide_analysis_cover`):** Kein AKTIENANALYSE-Tag oben links. Headline
+direkt ab y=140. Firmename/Sektor: `TY_BODY`, `color=T.TEXT`. Rating-Labels
+(Wachstum, Qualität, ...): `TY_BODY`, `color=T.TEXT`.
+
+**Verdict-Badge:** Score als "80 von 100 Punkten" (nicht "/100"). Label-Zeile
+"EINSCHÄTZUNG" in `TY_BODY`, `color=T.TEXT`.
+
 ```python
 def slide_analysis_NEU(c, a, date_iso):
     analysis_header(c, a, date_iso)               # Header + Trennlinie bei y=140
@@ -278,7 +297,7 @@ def slide_analysis_NEU(c, a, date_iso):
     txt = A.clean_for_slide(a["sections"].get(N, ""))
     _draw_paragraph(c, MX, 304, txt, TY_BODY, c.W - 2 * MX,
                     color=T.TEXT, line_h=TY_BODY_LH, max_lines=20)
-    analysis_footer(c)                             # Linie + Disclaimer bei y=H-150
+    analysis_footer(c)                             # Linie + Disclaimer 16 px bei y=H-150
 ```
 
 **Verfügbare Textfläche** (Carousel 1080×1350):
@@ -293,9 +312,38 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 
 ### 12.7 Konsistenz-Checkliste für neue Slides
 - [ ] `analysis_header` / `analysis_footer` aufrufen (Analyse-Posts)
-- [ ] Überschrift: `TY_H1=42`, bold; Subtitle: `TY_SUB=18`, `color=T.MUTED`
+- [ ] Überschrift: `TY_H1=42`, bold; Subtitle: `TY_SUB=22`, `color=T.MUTED`
 - [ ] Fließtext: `TY_BODY=28`, `TY_BODY_LH=44`, `justify=False` (Standard)
+- [ ] Labels/Firmennamen/Rating-Beschriftungen: `TY_BODY`, `color=T.TEXT`
 - [ ] Silbentrennung: `_wrap_px` automatisch via `lang="de"` (kein manuelles Eingreifen)
+- [ ] Bindestrich-Darstellung: automatisch in `_wrap_px` (`Text - Text` statt `Text-Text`)
 - [ ] Kein aktueller Kurs, keine GWS-/Breakout-Nennungen → `A.clean_for_slide()`
-- [ ] Disclaimer: `DISCLAIMER_ANALYSE_SHORT` im Footer (kein wikifolio-Bezug)
+- [ ] Disclaimer: `DISCLAIMER_ANALYSE_SHORT` im Footer 16 px (kein wikifolio-Bezug)
+- [ ] Verdict-Badge: Score als "X von 100 Punkten", kein "/100"
+- [ ] Cover: kein AKTIENANALYSE-Tag; Header: kein ANALYSE-Tag
+- [ ] Header rechts: Firmen-Logo (52 px), kein Ticker-Tag
+
+### 12.8 AMD-Analyse: Abdeckung auf den Slides (Vergleich)
+
+**Abgedeckt auf den Slides:**
+- Investment-Case (Slide 2): AMD als glaubwürdige Nr. 2 im KI-Beschleuniger-Markt, MI300 als CUDA-Alternative
+- Szenarien 12-18M (Slide 4): Bull 750-900$ 30%, Base 560-700$ 45%, Bear 280-380$ 25%
+- Bull/Base/Bear erklärt (Slides 5+6): ROCm-Gap, Margin-Expansion, CUDA-Moat, Custom Silicon
+- Fundamentale Qualität (Slide 7): Gross Margin 53%, Operating Margin 14,4%, FCF 7,2B, ROE 8,1%
+- Bewertung KGV (Slide 8): Trailing-PE 173x vs. Forward-PE 39,7x (Pre-Inflection-Artefakt)
+- Risiko & Psychologie (Slide 9): RS-Score 311, Beta 2,4, FOMO-Magnet, Positionsgröße max 3-4%
+- Technisches Bild (Slide 10): SMA50 ~347, SMA200 ~243, Warnsignal SMA20 ~466
+- Langfrist 3-5J (Slide 11): Bull 1000-1400$, Base 600-850$, Bear 250-400$
+- Profi-Fazit (Slide 12): BUY 80/100, Beta + Forward-PE = 30-40% Drawdowns möglich
+- Peers (Slide 12): NVDA, AVGO
+
+**Nicht auf den Slides (in Caption oder weggelassen):**
+- EPYC-Marktanteilsgewinne vs. Intel (Geschäftsmodell-Detail)
+- HBM-Speicher-Sourcing-Risiko (SK Hynix/Samsung)
+- D/E-Verhältnis 6 (niedrig, kein Bilanzrisiko)
+- ROCm als kritischer Engpass im Detail
+- Fabless-Modell / TSMC-Fertigung
+- Analyst-Konsensus $472 liegt hinter aktualem Kurs $516
+- Beta 2,4: Volatilitäts-Warnung (in Risiko-Slide erwähnt, aber kein eigener Block)
+- Jahrestarget EPS $18-22 (Bull) und Forward-EPS-Revisionen aufwärts (Base)
 
