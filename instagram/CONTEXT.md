@@ -69,7 +69,7 @@ KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
 20 135,44 · 21 139,66 · 22 148,25 · **23 149,86** → Gesamt **+52,2 %**,
 NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (^NDX-basiert, siehe §8).
 
-**Positionen (7, aus `holdings.json`):**
+**Positionen (8, aus `holdings.json`):**
 | Ticker | Name | Kauf | Einstieg € |
 |---|---|---|---|
 | MRVL | Marvell Technology | 24.03.2026 | 80,07 |
@@ -79,16 +79,20 @@ NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (^NDX-basiert, siehe §8
 | STX | Seagate Technology | 21.05.2026 | 676,07 |
 | DDOG | Datadog | 15.05.2026 | 178,62 |
 | AMAT | Applied Materials | 27.05.2026 | 398,09 |
+| NXPI | NXP Semiconductors | 05.06.2026 | 307,33 |
 
 **KW23-Trades (Verkäufe 05.06., aus `trades.json`):**
-AMD +69,6 % · Lam Research +29,9 % · NXP Semiconductors −6,2 %.
+AMD +69,6 % · Lam Research +29,9 % · NXP Semiconductors −6,2 % ·
+IBM −12,6 % (Roundtrip: Kauf 02.06. 285,95 € / Verkauf 05.06.).
+Nachkauf NXPI 05.06. zu 307,33 € (aktive Position).
 
-**Abgeschlossene Trades (19, aus `trades.json`, in %):**
+**Abgeschlossene Trades (20, aus `trades.json`, in %):**
 Alphabet +2,9 · IBM −7,4 · NXP +0,3 (alle drei pre-Excel) ·
 Definium Therapeutics +22,3 · ASML +0,7 · Credo Technology +0,1 ·
 Applied Materials +1,1 · Microsoft −1,3 · Siemens Energy +0,4 ·
 Broadcom +0,1 · Amazon +0,8 · ASML −5,2 · Akamai −7,6 · Analog Devices +11,0 ·
-NVIDIA +0,4 · Alphabet −7,4 · NXP −6,2 · AMD +69,6 · Lam Research +29,9.
+NVIDIA +0,4 · Alphabet −7,4 · NXP −6,2 · AMD +69,6 · Lam Research +29,9 ·
+IBM −12,6 (Roundtrip).
 
 Die Report-Kennzahlen (Trades, Trefferquote, Profitfaktor, Ø Gewinn/Verlust)
 werden **automatisch** aus `trades.json` + aktiven Positionen berechnet —
@@ -214,7 +218,7 @@ Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
 | KW20 | −SIEGY, AVGO, AMZN / +AKAM, DDOG | SIEGY +0,4 %, AVGO +0,1 %, AMZN +0,8 % |
 | KW21 | −ASML, AKAM, ADI / +STX, MU, WDC | ASML −5,2 %, AKAM −7,6 %, ADI +11,0 % |
 | KW22 | −NVDA, GOOGL / +NXPI (25.05.), AMAT (27.05.) | NVDA +0,4 %, GOOGL −7,4 % |
-| KW23 | −NXPI, AMD, LRCX / +NXPI (307,33 €) | NXPI −6,2 %, AMD +69,6 %, LRCX +29,9 % |
+| KW23 | −NXPI, AMD, LRCX, IBM (Roundtrip 02.–05.06.) / +NXPI (307,33 €) | NXPI −6,2 %, AMD +69,6 %, LRCX +29,9 %, IBM −12,6 % |
 
 ## 8. Entscheidungen & offene Punkte
 **Entschieden:**
@@ -227,11 +231,6 @@ Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
   unnötig) — es erscheint nur der Markenname **AI Alpha Selection** (Singular).
 
 **Offen:**
-- **IBM-Roundtrip KW23:** Im Chat war ein IBM-Trade (Kauf 02.06. 285,95 € /
-  Verkauf 05.06., ca. −12,6 %) genannt, der in `trades.json` NICHT erfasst ist
-  (dito ein NXPI-Nachkauf 307,33 € aus der KW23-Snapshot-Tabelle). Mit dem
-  Nutzer klären und ggf. in `trades.json`/`holdings.json` nachtragen —
-  die JSONs sind führend.
 - **EUR/USD-Daten:** `eurusd_ohlcv` erscheint in `data/rs_full.json` erst nach
   dem nächsten täglichen `update_rs.yml`-Lauf; bis dahin rechnet `store.py`
   mit der USD≈EUR-Näherung (Fallback).
