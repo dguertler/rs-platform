@@ -865,7 +865,7 @@ def analysis_headline(a):
 
 # 1) COVER — Frage-Hook + Firmenlogo (weiße Karte) + Verdict + Rating-Blöcke
 def slide_analysis_cover(c, a, date_iso):
-    footer_line = c.H - 150          # y-Koordinate der Footer-Linie
+    footer_line = c.H - 150
 
     # Top-Leiste: Marke + Datum
     lw = c.draw_logo(MX, 64, 46)
@@ -873,41 +873,41 @@ def slide_analysis_cover(c, a, date_iso):
         c.text(MX, 68, BRAND, 20, color=T.TEXT, weight="bold")
     c.text(c.W - MX, 74, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
 
-    # HEADLINE — 2 Schriftgrößen größer (60 px), eine Zeile tiefer (y=170)
+    # HEADLINE — 60 px, eine Zeile tiefer (y=170)
     hook_size, hook_lh = 60, 74
     hy = _draw_paragraph(c, MX, 170, analysis_headline(a), hook_size, c.W - 2 * MX,
                          color=T.TEXT, weight="bold", line_h=hook_lh, max_lines=3)
 
-    # ── Bottom-Section von unten berechnen (Verdict + Ratings) ──────────────────
+    # Gesamthöhe der Kette: Karte + Name + Verdict + Ratings
     r_gap = 16
     r_cw = (c.W - 2 * MX - r_gap) // 2
-    r_ch = 90           # Rating-Kachel-Höhe (etwas kleiner als vorher)
-    ratings_h = 2 * r_ch + r_gap          # 2 Reihen
+    r_ch = 90
+    ratings_h = 2 * r_ch + r_gap
     verdict_h = 106
-    sub_h = 50                             # Name/Sektor-Zeile
-    bottom_h = sub_h + verdict_h + 14 + ratings_h + 20
-    bottom_start = footer_line - bottom_h - 10
+    sub_h = 44        # Name/Sektor direkt unter der Karte
+    card_h = 230
+    chain_h = card_h + 16 + sub_h + 14 + verdict_h + 14 + ratings_h + 10
 
-    # Logo-Karte: zentriert zwischen Hook-Ende und Bottom-Section
-    card_h = 240
-    card_top = hy + max(20, (bottom_start - hy - card_h) // 2)
+    # Logo-Karte: zentriert zwischen Hook-Ende und Footer
+    available = footer_line - hy
+    card_top = hy + max(16, (available - chain_h) // 2)
 
     _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, a["ticker"])
 
-    # Name + Sektor
+    # Name + Sektor direkt unter der Logo-Karte
     sub = A.short_name(a["name"])
     if a.get("sector"):
         sub += f"  ·  {a['sector']}"
-    c.text(MX, bottom_start, sub, TY_BODY, color=T.TEXT)
+    sub_y = card_top + card_h + 16
+    c.text(MX, sub_y, sub, TY_BODY, color=T.TEXT)
 
     # Verdict-Badge
-    verdict_top = bottom_start + sub_h
+    verdict_top = sub_y + sub_h
     _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=verdict_h)
     verdict_bottom = verdict_top + verdict_h
 
-    # Rating-Blöcke 2×2: zentriert zwischen Verdict-Badge und Footer-Linie
-    rating_area_h = footer_line - verdict_bottom - 20
-    r_top = verdict_bottom + 14 + max(0, (rating_area_h - ratings_h) // 2)
+    # Rating-Blöcke 2×2 — direkt unter Verdict, zentriert bis Footer
+    r_top = verdict_bottom + 14
 
     rt = a["ratings"]
     rating_items = [
@@ -922,7 +922,6 @@ def slide_analysis_cover(c, a, date_iso):
         rx = MX + col_i * (r_cw + r_gap)
         ry = r_top + row * (r_ch + r_gap)
         c.tile(rx, ry, r_cw, r_ch, color=T.PANEL)
-        # Schriftgröße 24 (eine Größe kleiner als TY_BODY=28)
         c.text(rx + 18, ry + 10, label.upper(), 24, color=T.TEXT, weight="bold")
         c.text(rx + r_cw - 18, ry + 8,
                f"{val if val is not None else '–'}/5", 32,
@@ -955,7 +954,7 @@ def _scenario_rows(c, a, top, horizon_key, title, subtitle):
     c.text(MX, top + 56, subtitle, TY_SUB, color=T.MUTED)
     data = a[horizon_key]
     rows_top = top + 110
-    rh, gap = 220, 22
+    rh, gap = 180, 22
     maxprob = 0
     if horizon_key == "scenarios":
         maxprob = max([(data[k]["prob"] or 0) for k in ("bull", "base", "bear")] + [1])
@@ -1017,24 +1016,36 @@ def slide_analysis_business(c, a, date_iso):
     c.text(MX, 184, "Was macht das Unternehmen?", 42, weight="bold")
     c.text(MX, 240, "Geschäftsmodell & Investment-Case in Kürze", TY_SUB, color=T.MUTED)
     bullets = a.get("business_bullets", [])[:8]
-    top0, gap = 304, 22
-    rh = min(150, int((c.H * 0.58 - gap * (len(bullets) - 1)) / max(1, len(bullets))))
-    for i, b in enumerate(bullets):
-        y = top0 + i * (rh + gap)
-        c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
-        c.tile(MX, y, 10, rh, color=T.BLUE, radius=5)
-        # Bullet kann " — " als Trenner Kopf/Detail haben
+    inner_w = c.W - 2 * MX - 80
+    pad_top, pad_bot, b_gap = 22, 20, 16
+    footer_y = c.H - 160
+
+    # Berechne dynamische Höhe pro Box anhand der tatsächlich umgebrochenen Zeilen
+    def _bullet_split(b):
         head, _, rest = b.partition(" — ")
         if not rest:
-            # Kein expliziter Trenner: erste 5 Wörter als Blau-Titel, Rest als Body
             words = b.split()
             split = min(5, max(2, len(words) - 2))
-            head = " ".join(words[:split])
-            rest = " ".join(words[split:])
-        c.text(MX + 40, y + 22, head.strip(), TY_BODY, color=T.BLUE, weight="bold")
-        if rest.strip():
-            _draw_paragraph(c, MX + 40, y + 22 + TY_BODY_LH, rest.strip(), TY_BODY,
-                            c.W - 2 * MX - 80, color=T.TEXT, max_lines=2)
+            head, rest = " ".join(words[:split]), " ".join(words[split:])
+        return head.strip(), rest.strip()
+
+    y = 304
+    for b in bullets:
+        head, rest = _bullet_split(b)
+        n_head = len(_wrap_px(head, inner_w, TY_BODY))
+        n_body = len(_wrap_px(rest, inner_w, TY_BODY)) if rest else 0
+        rh = pad_top + n_head * TY_BODY_LH + n_body * TY_BODY_LH + pad_bot
+        if y + rh > footer_y:
+            break                          # Box würde Footer überschreiten
+        c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
+        c.tile(MX, y, 10, rh, color=T.BLUE, radius=5)
+        head_bottom = _draw_paragraph(c, MX + 40, y + pad_top, head, TY_BODY,
+                                      inner_w, color=T.BLUE, weight="bold",
+                                      line_h=TY_BODY_LH)
+        if rest:
+            _draw_paragraph(c, MX + 40, head_bottom, rest, TY_BODY,
+                            inner_w, color=T.TEXT, line_h=TY_BODY_LH)
+        y += rh + b_gap
     analysis_footer(c)
 
 
@@ -1088,15 +1099,11 @@ def _draw_cases_blocks(c, a, items, top0=300):
     inner_w = c.W - 2 * MX - 80
     body_size, body_lh, head_h = TY_BODY, TY_BODY_LH, 72
     gap = 22
-    footer_y = c.H - 160             # Slide-Footer-Linie (nicht überschreiten)
     y = top0
     for item in items:
         key = item["key"]
         col = SCEN_COLOR[key]
         rh = item["rh"]
-        # Overflow-Schutz: Block würde Footer überschreiten → abbrechen
-        if y + rh > footer_y:
-            break
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         c.tile(MX, y, 12, rh, color=col, radius=6)
         rng = A.fmt_range(sc[key]["range"])
@@ -1228,13 +1235,14 @@ def slide_analysis_risk(c, a, date_iso):
     y = 300
     psz = A.position_size(a.get("fazit", ""))
     if psz:
-        c.tile(MX, y, c.W - 2 * MX, 96, color=T.PANEL)
-        c.tile(MX, y, 10, 96, color=T.AMBER, radius=5)
-        c.text(MX + 34, y + 24, "POSITIONSGRÖSSE BEGRENZEN", 16,
+        box_h = 24 + TY_BODY + 24
+        c.tile(MX, y, c.W - 2 * MX, box_h, color=T.PANEL)
+        c.tile(MX, y, 10, box_h, color=T.AMBER, radius=5)
+        c.text(MX + 34, y + 24, "POSITIONSGRÖSSE BEGRENZEN", TY_BODY,
                color=T.AMBER, weight="bold")
-        c.text(c.W - MX - 34, y + 26, psz, 40, color=T.AMBER, weight="bold",
+        c.text(c.W - MX - 34, y + 24, psz, TY_BODY, color=T.AMBER, weight="bold",
                ha="right", font="mono")
-        y += 96 + 36
+        y += box_h + 36
 
     body = A.clean_for_slide(a["sections"].get(8, "")) or \
         A.clean_for_slide(a["scenarios"]["bear"]["summary"])
