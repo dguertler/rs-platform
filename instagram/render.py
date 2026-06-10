@@ -1,5 +1,5 @@
 """
-Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selections-Design.
+Render-Engine: zeichnet einzelne Slides als PNG im AI-Alpha-Selection-Design.
 Reines matplotlib, kein Browser nötig. Jede Slide funktioniert in beiden
 Formaten (Carousel 4:5 / Reel 9:16) über pixelbasierte Layout-Koordinaten.
 """
@@ -10,15 +10,24 @@ import numpy as np
 import matplotlib
 
 matplotlib.use("Agg")
+# Dollar-Zeichen ($3,37) NICHT als LaTeX-Mathmodus interpretieren — sonst werden
+# Zeichen zwischen zwei $ kursiv gesetzt und Leerzeichen verschluckt.
+try:
+    matplotlib.rcParams["text.parse_math"] = False
+except (KeyError, ValueError):
+    pass
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
 
 from . import theme as T
 
 _FONTS = T.register_fonts()
-HANDLE = "@aialphaselection"
+# Kein @-Handle auf Slides/Reels (für den IG-Algorithmus unnötig) —
+# es erscheint nur der Markenname.
+BRAND_NAME = "AI Alpha Selection"
 BRAND = "AI ALPHA SELECTION"
-MX = 90  # Seitenrand in px
+MX = 195  # Seitenrand in px — 18 % der Carousel-Breite (1080 px), schützt gegen
+           # seitlichen Beschnitt im Instagram-Profil-Raster
 
 # ── Typografie-Konstanten (einheitlich auf allen Slides) ──────────────────────
 TY_H1      = 42   # Slide-Überschrift  (z. B. "Gesamteinschätzung")
@@ -31,6 +40,14 @@ TY_BODY_LH = 44   # Zeilenabstand für TY_BODY
 def fmt_pct(x, decimals=1, signed=True):
     sign = ("+" if x >= 0 else "−") if signed else ""
     return f"{sign}{abs(x) * 100:.{decimals}f}".replace(".", ",") + "%"
+
+
+def fmt_eur(v):
+    """Deutschen Preis mit Tausenderpunkt: 1.224,20 €"""
+    if v is None:
+        return "—"
+    s = f"{v:,.2f}"                              # "1,224.20"
+    return s.replace(",", "X").replace(".", ",").replace("X", ".") + " €"
 
 
 def fmt_de_date(iso):
@@ -148,9 +165,9 @@ def footer(c):
     # Disclaimer volle Breite (links nach rechts), ohne Handle
     import textwrap
     c.ax.plot([MX, c.W - MX], [c.y(c.H - 150), c.y(c.H - 150)], color=T.GRID, lw=1.5)
-    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=150)
+    lines = textwrap.wrap(T.DISCLAIMER_SHORT, width=130)
     for i, ln in enumerate(lines):
-        c.text(MX, c.H - 128 + i * 25, ln, 12, color=T.MUTED)
+        c.text(MX, c.H - 128 + i * 28, ln, 14, color=T.MUTED)
 
 
 def _style_chart(ax):
@@ -204,7 +221,7 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
                       wf_ret, nas_ret, is_sample, stats=None):
     header(c, date_iso)
     c.text(MX, 196, "Wertentwicklung vs. NASDAQ-100", 40, weight="bold")
-    c.text(MX, 248, "Indexiert auf 100 zum Startzeitpunkt", 18, color=T.MUTED)
+    c.text(MX, 248, "Indexiert auf 100 zum Startzeitpunkt", 22, color=T.MUTED)
 
     chart_h = int(c.H * (0.30 if stats else 0.42))
     ax = c.chart_axes(MX, 306, c.W - 2 * MX, chart_h)
@@ -240,10 +257,10 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
     ky = 306 + chart_h + 48
     half = (c.W - 2 * MX - 30) // 2
     c.tile(MX, ky, half, 104, color=T.PANEL)
-    c.text(MX + 30, ky + 24, "AI Alpha Selection", 17, color=T.MUTED)
+    c.text(MX + 30, ky + 24, "AI Alpha Selection", 20, color=T.MUTED)
     c.text(MX + 30, ky + 50, fmt_pct(wf_ret), 40, color=T.GREEN, weight="bold", font="mono")
     c.tile(MX + half + 30, ky, half, 104, color=T.PANEL)
-    c.text(MX + half + 60, ky + 24, "NASDAQ-100", 17, color=T.MUTED)
+    c.text(MX + half + 60, ky + 24, "NASDAQ-100", 20, color=T.MUTED)
     c.text(MX + half + 60, ky + 50, fmt_pct(nas_ret), 40, color=T.BLUE, weight="bold", font="mono")
 
     # Kennzahlen-Streifen
@@ -267,8 +284,8 @@ def slide_performance(c, date_iso, wf_dates, wf_vals, nas_dates, nas_vals,
             x = MX + cc * (cw + gap)
             y = sy + r * (ch + gap)
             c.tile(x, y, cw, ch, color=T.PANEL)
-            c.text(x + 22, y + 24, lab, 14, color=T.MUTED)
-            c.text(x + 22, y + 50, val, 34, color=col, weight="bold", font="mono")
+            c.text(x + 22, y + 24, lab, 17, color=T.MUTED)
+            c.text(x + 22, y + 50, val, 36, color=col, weight="bold", font="mono")
         c.text(MX, sy + 2 * (ch + gap) + 4, "* inkl. offener Positionen",
                13, color=T.MUTED)
 
@@ -320,9 +337,10 @@ def slide_signal(c, date_iso, ticker, sig, ret, ohlcv, entry):
     ax.axvline(ex, color=color, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=120, color=color, zorder=4, edgecolor=T.BG, lw=2)
     ax.annotate(f"Signal {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12, 18), textcoords="offset points",
+                xytext=(-12, 28), textcoords="offset points",
                 color=color, fontsize=15, fontweight="bold",
-                ha="right", fontfamily=_FONTS["sans"])
+                ha="right", fontfamily=_FONTS["sans"],
+                bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
 
     ky = 340 + chart_h + 60
     half = (c.W - 2 * MX - 30) // 2
@@ -344,44 +362,40 @@ def slide_cta(c, date_iso, question=None, account=None):
     (Engagement-Boost) + Pflicht-Risikohinweis.
 
     `question` = von Claude pro Woche aus den Trades getextete Frage; treibt die
-    Kommentare. `account` = Handle für den Bio-Verweis (Default: Marke).
+    Kommentare. Kein @-Handle auf der Slide (folgt aus IG-Bio-Konvention).
+
+    Risikohinweis: 16 px (2 Stufen über 12 px) + _draw_paragraph/_wrap_px
+    wie Aktienanalysen — Text füllt volle Breite links → rechts ohne halbe Zeilen.
     """
-    import textwrap
     header(c, date_iso)
-    handle = account or HANDLE
-    cy = int(c.H * 0.24)
-    c.text(MX, cy, "Mehr Trades & Updates?", 50, weight="bold")
-    # URLs sind in IG-Beiträgen nicht klickbar → strikt auf die Bio verweisen.
-    c.text(MX, cy + 80, "Den Link zum Live-Depot findest du", 24, color=T.TEXT)
-    c.text(MX, cy + 116, "aktuell in unserer Bio.", 24, color=T.TEXT)
-    c.text(MX, cy + 168, handle, 30, color=T.BLUE, weight="bold")
+    cy = int(c.H * 0.20)
+    c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
+    # Bio-Text als Paragraph: füllt volle Breite links → rechts (kein hardcodierter Umbruch)
+    bio = ("Den Link zum wikifolio AI Alpha Selection "
+           "findest du in unserer Bio.")
+    bio_bottom = _draw_paragraph(c, MX, cy + 92, bio, 26, c.W - 2 * MX,
+                                 color=T.TEXT, line_h=40)
 
-    # Dynamische Interaktions-Frage (Engagement / Kommentare anfeuern)
+    # Interaktions-Frage — zentriert zwischen Bio-Text und Risikohinweis-Trennlinie
+    sep_y = c.H - 260
     if question:
-        qlines = textwrap.wrap(question, width=44)
-        qy = cy + 236
-        box_h = 60 + len(qlines) * 34
+        inner_w = c.W - 2 * MX - 44   # 8 px Balken + 36 px Inset
+        qlines = _wrap_px(question, inner_w, 32)
+        box_h = 112 + len(qlines) * 54
+        # Mitte zwischen Ende Bio-Text und Beginn Separator
+        qy = int((bio_bottom + (sep_y - box_h)) / 2)
         c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
-        c.text(MX + 34, qy + 24, "DEINE MEINUNG?", 16, color=T.BLUE, weight="bold")
+        c.tile(MX, qy, 8, box_h, color=T.BLUE, radius=5)
+        c.text(MX + 36, qy + 36, "DEINE MEINUNG?", 24, color=T.BLUE, weight="bold")
         for i, ln in enumerate(qlines):
-            c.text(MX + 34, qy + 60 + i * 34, ln, 22, weight="bold")
+            c.text(MX + 36, qy + 88 + i * 54, ln, 32, weight="bold")
 
-    # Risikohinweis-Box: Text volle Breite, Box an Textgröße angepasst, unten ausgerichtet
-    body = textwrap.wrap(T.DISCLAIMER_LONG.split("\n", 1)[1], width=104)
-    line_h = 30
-    panel_h = 74 + (len(body) - 1) * line_h + 42
-    panel_bottom = c.H - 175
-    panel_top = panel_bottom - panel_h
-    c.tile(MX, panel_top, c.W - 2 * MX, panel_h, color=T.PANEL)
-    c.text(MX + 36, panel_top + 30, "RISIKOHINWEIS", 20, color=T.RED, weight="bold")
-    target_w = (c.W - 2 * MX) - 72        # Innenbreite der Box
-    for i, ln in enumerate(body):
-        ty = panel_top + 74 + i * line_h
-        if i < len(body) - 1:             # alle Zeilen außer der letzten: Blocksatz
-            _justify_line(c, MX + 36, ty, ln.split(), 15, T.MUTED, target_w)
-        else:
-            c.text(MX + 36, ty, ln, 15, color=T.MUTED)
-    footer(c)
+    # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
+    disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
+    c.ax.plot([MX, c.W - MX], [c.y(sep_y), c.y(sep_y)], color=T.GRID, lw=1.5)
+    c.text(MX, sep_y + 22, "Risikohinweis & Disclaimer", 20, color=T.MUTED, weight="bold")
+    _draw_paragraph(c, MX, sep_y + 56, disc, 18, c.W - 2 * MX,
+                    color=T.MUTED, line_h=30)
 
 
 def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
@@ -395,7 +409,7 @@ def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
     import textwrap
     header(c, date_iso)
     eyebrow = f"WOCHENUPDATE · KW {kw}" if kw else "WOCHENUPDATE"
-    c.text(MX, 200, eyebrow, 24, color=T.BLUE, weight="bold")
+    c.text(MX, 200, eyebrow, 28, color=T.BLUE, weight="bold")
 
     # Schlagzeile groß umbrechen (visueller Stopper)
     wrapped = textwrap.wrap(headline, width=20)[:4]
@@ -415,7 +429,7 @@ def slide_hook_dynamic(c, date_iso, headline, metrics, kw=None):
         for i, (label, val, col) in enumerate(metrics):
             x = MX + i * (tw + gap)
             c.tile(x, chip_top, tw, ch, color=T.PANEL)
-            c.text(x + 34, chip_top + 32, label, 18, color=T.MUTED)
+            c.text(x + 34, chip_top + 32, label, 22, color=T.MUTED)
             c.text(x + 34, chip_top + ch - 92, val, 58, color=col,
                    weight="bold", font="mono")
     footer(c)
@@ -430,8 +444,8 @@ def slide_why(c, date_iso, text):
     """
     import textwrap
     header(c, date_iso)
-    c.text(MX, 210, "HINTER DEN KULISSEN", 26, color=T.BLUE, weight="bold")
-    c.text(MX, 250, "Warum die KI so entschieden hat", 18, color=T.MUTED)
+    c.text(MX, 210, "HINTER DEN KULISSEN", 30, color=T.BLUE, weight="bold")
+    c.text(MX, 254, "Warum die KI so entschieden hat", 22, color=T.MUTED)
     wrapped = textwrap.wrap(text, width=32)
     size = 46 if len(wrapped) <= 8 else 36
     cy = int(c.H * 0.36)
@@ -490,7 +504,7 @@ def slide_history(c, date_iso, history):
     vkey = "dev" if history and "dev" in history[0] else "perf"
     won = sum(1 for h in history if h[vkey] >= 0)
     c.text(MX, 252, f"{won} von {len(history)} Wochen den NASDAQ geschlagen",
-           18, color=T.MUTED)
+           22, color=T.MUTED)
 
     chart_h = int(c.H * 0.46)
     ax = c.chart_axes(MX, 320, c.W - 2 * MX, chart_h)
@@ -521,7 +535,7 @@ def slide_list(c, date_iso, title, subtitle, rows):
     header(c, date_iso)
     c.text(MX, 200, title, 40, weight="bold")
     if subtitle:
-        c.text(MX, 252, subtitle, 18, color=T.MUTED)
+        c.text(MX, 252, subtitle, 22, color=T.MUTED)
     rows = rows[:5]
     top0 = 310
     gap = 22
@@ -531,11 +545,12 @@ def slide_list(c, date_iso, title, subtitle, rows):
         c.tile(MX, y, c.W - 2 * MX, rh, color=T.PANEL)
         # farbiger Akzentbalken links
         c.tile(MX, y, 10, rh, color=row["color"], radius=5)
-        c.text(MX + 42, y + rh / 2 - 32, row["main"], 30, weight="bold")
+        c.text(MX + 42, y + rh / 2 - 32, row["main"], 34, weight="bold")
         if row.get("sub"):
-            c.text(MX + 42, y + rh / 2 + 8, row["sub"], 22, color=T.SUBTLE)
-        c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 40,
-               color=row["color"], weight="bold", ha="right", font="mono")
+            c.text(MX + 42, y + rh / 2 + 10, row["sub"], 26, color=T.SUBTLE)
+        c.text(c.W - MX - 40, y + rh / 2 - 26, row["value"], 44,
+               color=row["color"], weight="bold", ha="right",
+               font=row.get("value_font", "mono"))
     footer(c)
 
 
@@ -556,6 +571,7 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
 
     # Fenster: ~25 Bars vor Kauf bis heute (bei abgeschlossenem Trade bis kurz nach Verkauf)
     idx = next((i for i, p in enumerate(ohlcv) if p["d"] >= feat["buy_date"]), 0)
+    n_before = idx - max(0, idx - 25)   # Anzahl Bars links vom Kaufpunkt im Fenster
     end_i = len(ohlcv)
     if feat.get("closed") and feat.get("sells"):
         last_sell = max((s.get("date") or s.get("sell_date") or "") for s in feat["sells"])
@@ -598,52 +614,75 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
         ax.scatter([sx], [sy], s=140, color=sell_col, zorder=5, edgecolor=T.BG, lw=2)
         # Beschriftung nach links setzen (Verkäufe liegen meist nahe am rechten Rand)
         ax.annotate(f"Verkauf {short_date(sd)}", (sx, sy),
-                    xytext=(-12, -24), textcoords="offset points",
+                    xytext=(-12, -32), textcoords="offset points",
                     color=sell_col, fontsize=15, fontweight="bold",
-                    ha="right", fontfamily=_FONTS["sans"])
+                    ha="right", fontfamily=_FONTS["sans"],
+                    bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
         drawn_sell = True
 
     # Kauf-Signal (groß, grün)
+    # Nahe linkem Rand (n_before < 3): Label nach rechts, sonst nach links
     ex = datetime.strptime(entry["d"], "%Y-%m-%d").toordinal()
     ax.axvline(ex, color=buy_col, lw=2, ls=(0, (4, 4)), zorder=2)
     ax.scatter([ex], [entry["c"]], s=140, color=buy_col, zorder=5, edgecolor=T.BG, lw=2)
+    _ha_buy = "left" if n_before < 3 else "right"
+    _ox_buy = 14 if n_before < 3 else -12
     ax.annotate(f"Kauf {short_date(entry['d'])}", (ex, entry["c"]),
-                xytext=(-12, 18), textcoords="offset points",
+                xytext=(_ox_buy, 28), textcoords="offset points",
                 color=buy_col, fontsize=15, fontweight="bold",
-                ha="right", fontfamily=_FONTS["sans"])
+                ha=_ha_buy, fontfamily=_FONTS["sans"],
+                bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
 
     # Mini-Legende (Kauf grün · Verkauf rot · weitere Kauf-Signale)
+    # Schriftgröße = 20px (identisch zu KPI-Chip-Labels darunter)
     ly = 350 + chart_h + 22
-    c.text(MX, ly, "● Kauf", 15, color=buy_col, weight="bold")
-    lx = MX + 130
+    c.text(MX, ly, "● Kauf", 20, color=buy_col, weight="bold")
+    lx = MX + 160
     if drawn_sell:
-        c.text(lx, ly, "● Verkauf", 15, color=sell_col, weight="bold")
-        lx += 175
+        c.text(lx, ly, "● Verkauf", 20, color=sell_col, weight="bold")
+        lx += 215
     if has_extra:
-        c.text(lx, ly, "● weitere Kauf-Signale", 15, color=buy_col, alpha=0.7)
+        c.text(lx, ly, "● weitere Kauf-Signale", 20, color=buy_col, alpha=0.7)
 
     # KPI-Kacheln
-    ky = 350 + chart_h + 70
+    ky = 350 + chart_h + 76
     half = (c.W - 2 * MX - 30) // 2
-    c.tile(MX, ky, half, 110, color=T.PANEL)
-    lbl1 = "Realisierter Gewinn" if feat.get("closed") else "Wertzuwachs seit Kauf"
-    c.text(MX + 30, ky + 26, lbl1, 17, color=T.MUTED)
-    c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
-           color=rcol, weight="bold", font="mono")
-    c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
     sp = feat.get("sell_price_eur")
     bp = feat.get("buy_price_eur")
-    if feat.get("closed") and sp:
-        c.text(MX + half + 60, ky + 26, "Verkaufskurs", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 52,
-               f"{sp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
-    elif bp:
-        c.text(MX + half + 60, ky + 26, "Einstiegskurs", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 52,
-               f"{bp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
+    lbl1 = "Realisierter Gewinn" if feat.get("closed") else "Wertzuwachs seit Kauf"
+
+    if feat.get("closed") and (sp or bp):
+        # Abgeschlossener Trade: links Rendite, rechts ZWEI Kacheln (Eintritt + Austritt)
+        tile_h = 95
+        tile_gap = 12
+        total_h = tile_h * 2 + tile_gap
+        # Linke Kachel (volle Höhe, vertikal zentriert)
+        c.tile(MX, ky, half, total_h, color=T.PANEL)
+        c.text(MX + 30, ky + total_h // 2 - 36, lbl1, 20, color=T.MUTED)
+        c.text(MX + 30, ky + total_h // 2 + 4, fmt_pct(ret) if ret is not None else "—",
+               40, color=rcol, weight="bold", font="mono")
+        # Rechte Kachel oben: Eintrittskurs
+        c.tile(MX + half + 30, ky, half, tile_h, color=T.PANEL)
+        c.text(MX + half + 60, ky + 20, "Eintrittskurs", 20, color=T.MUTED)
+        c.text(MX + half + 60, ky + 50, fmt_eur(bp), 34, weight="bold", font="mono")
+        # Rechte Kachel unten: Austrittskurs
+        c.tile(MX + half + 30, ky + tile_h + tile_gap, half, tile_h, color=T.PANEL)
+        c.text(MX + half + 60, ky + tile_h + tile_gap + 20, "Austrittskurs", 20, color=T.MUTED)
+        c.text(MX + half + 60, ky + tile_h + tile_gap + 50, fmt_eur(sp), 34,
+               weight="bold", font="mono")
     else:
-        c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
+        # Offene Position: zwei Kacheln nebeneinander (unverändert)
+        c.tile(MX, ky, half, 110, color=T.PANEL)
+        c.text(MX + 30, ky + 26, lbl1, 20, color=T.MUTED)
+        c.text(MX + 30, ky + 56, fmt_pct(ret) if ret is not None else "—", 40,
+               color=rcol, weight="bold", font="mono")
+        c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
+        if bp:
+            c.text(MX + half + 60, ky + 26, "Einstiegskurs", 20, color=T.MUTED)
+            c.text(MX + half + 60, ky + 56, fmt_eur(bp), 40, weight="bold", font="mono")
+        else:
+            c.text(MX + half + 60, ky + 26, "Kaufdatum", 20, color=T.MUTED)
+            c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
     footer(c)
 
 
@@ -757,14 +796,12 @@ def _draw_paragraph(c, x, top, text, size, px_width, color=T.TEXT,
 
 
 def analysis_header(c, a, date_iso):
-    """Kompakter Marken-Header für Innen-Slides: Brand-Logo links, Firmen-Logo rechts."""
+    """Kompakter Marken-Header für Innen-Slides: Brand-Logo links, Firmen-Logo
+    rechts auf weißer Karte (damit dunkle/transparente Logos sichtbar sind)."""
     lw = c.draw_logo(MX, 62, 52)
     if not lw:
         c.text(MX, 66, BRAND, 20, color=T.TEXT, weight="bold")
-    # Firmen-Logo rechts (gleiche Höhe wie Brand-Logo: 52 px)
-    logo = T.company_logo_file(a["ticker"])
-    if logo:
-        c.draw_image_contain(logo, c.W - MX - 120, 62, 120, 52)
+    _company_logo_chip(c, a["ticker"], top=50)
     c.ax.plot([MX, c.W - MX], [c.y(140), c.y(140)], color=T.GRID, lw=1.5)
 
 
@@ -774,6 +811,20 @@ def analysis_footer(c):
     lines = textwrap.wrap(T.DISCLAIMER_ANALYSE_SHORT, width=120)
     for i, ln in enumerate(lines):
         c.text(MX, c.H - 128 + i * 28, ln, 16, color=T.MUTED)
+
+
+def _company_logo_chip(c, ticker, top=52, card_w=156, card_h=66):
+    """Firmenlogo oben rechts auf weißer Karte (für Innen-Slides ab Slide 2).
+    Größe am AMD-Logo der Analyse-Seiten orientiert; weißer Hintergrund, damit
+    dunkle/transparente Logos sauber sichtbar sind."""
+    logo = T.company_logo_file(ticker)
+    img = _trim_logo(logo) if logo else None
+    if img is None:
+        return False
+    cx = c.W - MX - card_w
+    c.tile(cx, top, card_w, card_h, color="#FFFFFF", radius=14)
+    _draw_logo_contain(c, img, cx + 14, top + 10, card_w - 28, card_h - 20)
+    return True
 
 
 def _verdict_badge(c, x, top, verdict, score, w=None, h=120):
@@ -824,18 +875,56 @@ def _draw_bookmark(c, x, top, w, h, col):
                            zorder=11))
 
 
+def _trim_logo(path):
+    """Lädt ein Logo und schneidet transparente UND weiße Ränder weg, damit der
+    sichtbare Schriftzug sauber zentriert werden kann (unabhängig davon, wie viel
+    Leerraum das PNG eingebacken hat). Gibt ein PIL-RGBA-Bild oder None."""
+    try:
+        from PIL import Image, ImageChops
+        img = Image.open(path).convert("RGBA")
+        bbox = img.getbbox()                      # transparente Ränder
+        if bbox:
+            img = img.crop(bbox)
+        # weiße Ränder: transparent auf Weiß komponieren, dann Differenz zu Weiß
+        bg = Image.new("RGBA", img.size, (255, 255, 255, 255))
+        comp = Image.alpha_composite(bg, img).convert("RGB")
+        diff = ImageChops.difference(comp, Image.new("RGB", img.size, (255, 255, 255)))
+        wbbox = diff.getbbox()
+        if wbbox:
+            img = img.crop(wbbox)
+        return img
+    except Exception:
+        return None
+
+
+def _draw_logo_contain(c, img, x, top, w, h, zorder=10):
+    """Zeichnet ein (bereits getrimmtes) PIL-Logo größtmöglich INNERHALB der Box,
+    Seitenverhältnis erhalten, horizontal + vertikal zentriert."""
+    from PIL import Image
+    iw, ih = img.size
+    scale = min(w / iw, h / ih)
+    nw, nh = max(1, int(iw * scale)), max(1, int(ih * scale))
+    arr = np.asarray(img.resize((nw, nh), Image.LANCZOS))
+    ox = int(x + (w - nw) / 2)
+    oy_top = top + (h - nh) / 2
+    c.fig.figimage(arr, xo=ox, yo=int(c.H - oy_top - nh), zorder=zorder)
+    return nw, nh
+
+
 def _logo_card(c, x, top, w, h, ticker, radius=28):
-    """Helle Karte mit Firmenlogo (contain). Fehlt das Logo: Ticker dunkel
-    zentriert. So wirken auch schwarze Firmenlogos sauber auf dem dunklen Cover."""
+    """Helle Karte mit Firmenlogo — getrimmt und mittig (horizontal + vertikal).
+    Fehlt das Logo: Ticker dunkel zentriert."""
     c.tile(x, top, w, h, color="#FFFFFF", radius=radius)
     logo = T.company_logo_file(ticker)
-    pad_x, pad_y = int(w * 0.12), int(h * 0.18)
-    drew = c.draw_image_contain(logo, x + pad_x, top + pad_y,
-                                w - 2 * pad_x, h - 2 * pad_y) if logo else None
-    if not drew:
-        c.text(x + w / 2, top + h / 2 - h * 0.16, ticker,
-               int(h * 0.42), weight="bold", ha="center", font="mono", color=T.BG)
-    return bool(drew)
+    img = _trim_logo(logo) if logo else None
+    if img is not None:
+        # Logo füllt ~80 % Breite / ~62 % Höhe der Karte, exakt zentriert
+        _draw_logo_contain(c, img, x + w * 0.10, top + h * 0.19,
+                           w * 0.80, h * 0.62)
+        return True
+    c.text(x + w / 2, top + h / 2 - h * 0.16, ticker,
+           int(h * 0.42), weight="bold", ha="center", font="mono", color=T.BG)
+    return False
 
 
 def analysis_headline(a):
@@ -1169,7 +1258,7 @@ def slide_analysis_cases(c, a, date_iso, items=None):
     analysis_footer(c)
 
 
-# 7) PROFI-FAZIT — Kernaussage + Peers + Verweis auf Caption
+# 7) PROFI-FAZIT — Kernaussage + Peers + Folgen-CTA
 def slide_analysis_fazit(c, a, date_iso):
     analysis_header(c, a, date_iso)
     col = verdict_color(a["verdict"])
@@ -1215,7 +1304,7 @@ def slide_analysis_fazit(c, a, date_iso):
     c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
     c.text(MX + 40, cta_top + 28, "Folge für wöchentliche Profi-Analysen", 28,
            color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · faceless",
+    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · systematisiert",
            TY_SUB, color=T.MUTED)
     analysis_footer(c)
 
@@ -1234,25 +1323,30 @@ def slide_analysis_valuation(c, a, date_iso):
            if illusion else "Bewertung im Zykluskontext", TY_SUB, color=T.MUTED)
 
     y = 300
-    if pe["trailing"] or pe["forward"]:
+    # Bewertungs-Chips immer linksbündig auffüllen — fehlt das Trailing-KGV,
+    # rückt das Forward-KGV in die linke Spalte (nicht in die Mitte).
+    chip_defs = []
+    if pe["trailing"]:
+        chip_defs.append(("TRAILING-KGV", pe["trailing"] + "x", T.RED,
+                          "optisch teuer · Basiseffekt"))
+    if pe["forward"]:
+        chip_defs.append(("FORWARD-KGV", pe["forward"] + "x", T.GREEN,
+                          "die relevante Kennzahl"))
+    if pe.get("pb"):
+        chip_defs.append(("KURS-BUCHWERT", pe["pb"] + "x", T.BLUE,
+                          "Substanzbewertung"))
+    chip_defs = chip_defs[:2]
+    if chip_defs:
         gap = 26
         cw = (c.W - 2 * MX - gap) // 2
         ch = 150
-        if pe["trailing"]:
-            c.tile(MX, y, cw, ch, color=T.PANEL)
-            c.tile(MX, y, 10, ch, color=T.RED, radius=5)
-            c.text(MX + 34, y + 26, "TRAILING-KGV", 26, color=T.RED, weight="bold")
-            c.text(MX + 34, y + 56, pe["trailing"] + "x", 50, color=T.RED,
-                   weight="bold", font="mono")
-            c.text(MX + 34, y + 118, "optisch teuer · Basiseffekt", TY_SUB, color=T.MUTED)
-        if pe["forward"]:
-            x2 = MX + cw + gap
-            c.tile(x2, y, cw, ch, color=T.PANEL)
-            c.tile(x2, y, 10, ch, color=T.GREEN, radius=5)
-            c.text(x2 + 34, y + 26, "FORWARD-KGV", 26, color=T.GREEN, weight="bold")
-            c.text(x2 + 34, y + 56, pe["forward"] + "x", 50, color=T.GREEN,
-                   weight="bold", font="mono")
-            c.text(x2 + 34, y + 118, "die relevante Kennzahl", TY_SUB, color=T.MUTED)
+        for i, (lab, val, ccol, note) in enumerate(chip_defs):
+            cx = MX + i * (cw + gap)
+            c.tile(cx, y, cw, ch, color=T.PANEL)
+            c.tile(cx, y, 10, ch, color=ccol, radius=5)
+            c.text(cx + 34, y + 26, lab, 26, color=ccol, weight="bold")
+            c.text(cx + 34, y + 56, val, 50, color=ccol, weight="bold", font="mono")
+            c.text(cx + 34, y + 118, note, TY_SUB, color=T.MUTED)
         y += ch + 26
 
     # Analyst-Konsensus-Tile (wenn vorhanden)
@@ -1345,7 +1439,7 @@ def slide_analysis_cta(c, a, date_iso):
     cta_y = c.H - 330
     c.text(c.W // 2, cta_y, "Folge für wöchentliche Profi-Analysen",
            TY_BODY, color=T.TEXT, weight="bold", ha="center")
-    c.text(c.W // 2, cta_y + TY_BODY_LH, "faceless · datengetrieben · unabhängig",
+    c.text(c.W // 2, cta_y + TY_BODY_LH, "datengetrieben · unabhängig · systematisiert",
            TY_SUB, color=T.MUTED, ha="center")
     analysis_footer(c)
 
@@ -1469,11 +1563,551 @@ def slide_reel_cta(c, a, date_iso):
                     f"auf meinem Profil.", 30, c.W - 2 * MX - 100,
                     color=T.TEXT, line_h=46, max_lines=6)
     c.text(MX + 50, box_top + 330, "Profil öffnen", 26, color=T.MUTED)
-    c.text(MX + 50, box_top + 372, HANDLE, 40, color=T.BLUE, weight="bold")
+    c.text(MX + 50, box_top + 372, BRAND_NAME, 40, color=T.BLUE, weight="bold")
     # nach oben zeigende Dreiecke (zum Profil/Feed)
     for i in range(3):
         c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + 360), s=170,
                      marker="^", color=T.BLUE, edgecolor="none", zorder=12)
-    c.text(MX, 1230, f"Folge {HANDLE} für 1–2 Analysen pro Woche", 24,
+    c.text(MX, 1230, f"Folge {BRAND_NAME} für 1–2 Analysen pro Woche", 24,
            color=T.MUTED)
+    analysis_footer(c)
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# EARNINGS-ANALYSE-SLIDES (Dritter Post-Typ)
+# Datenquelle: instagram/earnings.load_earnings(ticker) -> e
+#   e enthält die Earnings-Zahlen (aus dem Web), den Kurssprung (aus RS-JSON)
+#   und die geparste Basis-Analyse unter e["analysis"].
+# Designsystem identisch zu den Analyse-Slides (analysis_header/-footer, Farben).
+# Akzentfarbe = Grün (Beat) bzw. Rot (Miss) — signalisiert sofort „Earnings".
+# ══════════════════════════════════════════════════════════════════════════════
+from . import earnings as E
+
+
+def earn_color(e):
+    return T.GREEN if (e.get("eps_surprise_pct") or 0) >= 0 else T.RED
+
+
+def _e_name(e):
+    a = e.get("analysis")
+    return A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
+
+
+def _e_sector(e):
+    a = e.get("analysis")
+    return a.get("sector", "") if a else ""
+
+
+def earnings_headline(e):
+    """Hook für Slide 1 — kurze, zugespitzte Beat-These. Regel: KEIN Firmenname und
+    KEIN Tickerkürzel im Hook (z. B. weder „Centene" noch „(CNC)") — um welchen Wert
+    es geht, zeigen die Logo-Karte und die Zeile darunter. e['headline'] (via
+    --headline) hat Vorrang und wird unverändert übernommen."""
+    if e.get("headline"):
+        return e["headline"]
+    surp = e.get("eps_surprise_pct")
+    if (surp or 0) >= 0:
+        s = E.fmt_pct_pts(surp, 0, signed=False) if surp is not None else ""
+        return (f"Turnaround bestätigt — der Quartalsgewinn schlägt die Erwartung "
+                f"um {s}") if s else "Die Quartalszahlen schlagen die Erwartungen"
+    return "Quartalszahlen verfehlen die Erwartungen"
+
+
+def _eyebrow_pill(c, x, top, text, col=T.GREEN, h=52):
+    """Kleine Akzent-Pille (z. B. 'EARNINGS · Q1 2026 · BEAT')."""
+    w = 56 + int(len(text) * 13.5)
+    c.tile(x, top, w, h, color=T.PANEL_HI, radius=h // 2)
+    c.tile(x + 18, top + h // 2 - 7, 14, 14, color=col, radius=7)
+    c.text(x + 46, top + h // 2 - 13, text, 22, color=col, weight="bold")
+    return w
+
+
+def _stat_tile(c, x, top, w, h, label, value, sub, col, value_size=48):
+    """Kennzahl-Kachel: Label oben, große Zahl, Untertitel. h ≥ 168 empfohlen."""
+    c.tile(x, top, w, h, color=T.PANEL)
+    c.tile(x, top, 10, h, color=col, radius=5)
+    c.text(x + 34, top + 20, label, 22, color=col, weight="bold")
+    c.text(x + 34, top + 54, value, value_size, color=T.TEXT, weight="bold",
+           font="mono")
+    if sub:
+        for i, ln in enumerate(_wrap_px(sub, w - 60, 20)[:2]):
+            c.text(x + 34, top + 120 + i * 26, ln, 20, color=T.MUTED)
+
+
+# 1) COVER — Earnings-Hook, Logo, Beat-Badge, die zwei Hero-Zahlen
+def slide_earnings_cover(c, e, date_iso):
+    col = earn_color(e)
+    footer_line = c.H - 150
+
+    lw = c.draw_logo(MX, 64, 46)
+    if not lw:
+        c.text(MX, 68, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 74, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+
+    beat_word = "BEAT" if (e.get("eps_surprise_pct") or 0) >= 0 else "MISS"
+    _eyebrow_pill(c, MX, 150, f"EARNINGS · {e['quarter']} · {beat_word}", col=col)
+
+    hy = _draw_paragraph(c, MX, 232, earnings_headline(e), 56, c.W - 2 * MX,
+                         color=T.TEXT, weight="bold", line_h=70, max_lines=3)
+
+    # Kette: Logo-Karte + Name + zwei Hero-Kacheln, zwischen Hook & Footer zentriert
+    card_h, sub_h, stat_h = 210, 44, 172
+    gap_card_sub, gap_sub_stat = 16, 40
+    chain_h = card_h + gap_card_sub + sub_h + gap_sub_stat + stat_h
+    card_top = hy + max(20, (footer_line - hy - chain_h) // 2)
+
+    _logo_card(c, MX, card_top, c.W - 2 * MX, card_h, e["ticker"])
+
+    sub = _e_name(e) + (f"  ·  {_e_sector(e)}" if _e_sector(e) else "")
+    sub_y = card_top + card_h + gap_card_sub
+    c.text(MX, sub_y, sub, TY_BODY, color=T.TEXT)
+
+    # Zwei Hero-Kacheln: EPS-Surprise + Kurssprung
+    stat_top = sub_y + sub_h + gap_sub_stat
+    gap = 24
+    tw = (c.W - 2 * MX - gap) // 2
+    surp = e.get("eps_surprise_pct")
+    cur = e.get("currency", "")
+    eps_sub = (f"Ist {cur}{E.fmt_num(e.get('eps_actual'))} · "
+               f"Erw. {cur}{E.fmt_num(e.get('eps_estimate'))}")
+    _stat_tile(c, MX, stat_top, tw, stat_h, "EPS-SURPRISE",
+               E.fmt_pct_pts(surp, 0), eps_sub, col)
+    jump = e.get("jump_pct")
+    _stat_tile(c, MX + tw + gap, stat_top, tw, stat_h, "KURSSPRUNG",
+               E.fmt_pct(jump, 1), f"am Tag der Zahlen ({short_date(e['report_date'])})",
+               col if (jump or 0) >= 0 else T.RED)
+    analysis_footer(c)
+
+
+# 2) DER BEAT IN ZAHLEN — EPS & Umsatz Ist vs. Erwartung
+def slide_earnings_numbers(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Der Beat in Zahlen", 42, weight="bold")
+    c.text(MX, 240 + dy, f"{e['quarter']} · Ist gegen Analysten-Erwartung", TY_SUB,
+           color=T.MUTED)
+    cur = e.get("currency", "")
+
+    def compare_tile(top, label, actual, estimate, unit, surprise, surp_dec=0):
+        h = 250
+        c.tile(MX, top, c.W - 2 * MX, h, color=T.PANEL)
+        c.tile(MX, top, 12, h, color=col, radius=6)
+        c.text(MX + 40, top + 26, label, 26, color=col, weight="bold")
+        # Surprise-Chip rechts
+        chip = E.fmt_pct_pts(surprise, surp_dec) if surprise is not None else ""
+        if chip:
+            cw = 60 + int(len(chip) * 22)
+            c.tile(c.W - MX - cw - 24, top + 22, cw, 60, color=T.PANEL_HI, radius=30)
+            c.text(c.W - MX - cw / 2 - 24, top + 32, chip, 34, color=col,
+                   weight="bold", ha="center", font="mono")
+        # Ist (groß, grün) vs. Erwartet (gedämpft)
+        col_w = (c.W - 2 * MX - 80) // 2
+        iy = top + 110
+        c.text(MX + 40, iy, "IST", 22, color=T.MUTED, weight="bold")
+        c.text(MX + 40, iy + 34, f"{cur}{E.fmt_num(actual)}", 64,
+               color=T.TEXT, weight="bold", font="mono")
+        c.text(MX + 40, iy + 116, unit, TY_SUB, color=T.MUTED)
+        ex = MX + 40 + col_w
+        c.text(ex, iy, "ERWARTET", 22, color=T.MUTED, weight="bold")
+        c.text(ex, iy + 34, f"{cur}{E.fmt_num(estimate)}", 64,
+               color=T.MUTED, weight="bold", font="mono")
+        c.text(ex, iy + 116, unit, TY_SUB, color=T.MUTED)
+        return top + h
+
+    y = compare_tile(300 + dy, "GEWINN JE AKTIE (ADJ.)", e.get("eps_actual"),
+                     e.get("eps_estimate"), "je Aktie", e.get("eps_surprise_pct"))
+    y = compare_tile(y + 28, "UMSATZ", e.get("revenue_actual"),
+                     e.get("revenue_estimate"), e.get("revenue_unit", ""),
+                     e.get("revenue_surprise_pct"), surp_dec=1)
+
+    # Kurze Zusammenfassung als Text (statt technischer Chips)
+    summary = e.get("beat_summary") or _auto_beat_summary(e)
+    if summary:
+        c.tile(MX, y + 30, c.W - 2 * MX, 4, color=T.GRID, radius=2)  # feine Trennlinie
+        _draw_paragraph(c, MX, y + 56, summary, TY_BODY, c.W - 2 * MX,
+                        color=T.SUBTLE, line_h=TY_BODY_LH, max_lines=4)
+    analysis_footer(c)
+
+
+def _auto_beat_summary(e):
+    """Fallback-Zusammenfassung für Slide 2, falls keine 'beat_summary' gesetzt ist."""
+    cur = e.get("currency", "")
+    parts = []
+    if e.get("eps_actual") is not None and e.get("eps_surprise_pct") is not None:
+        parts.append(f"Bereinigt verdiente das Unternehmen {cur}{E.fmt_num(e['eps_actual'])} "
+                     f"je Aktie — rund {E.fmt_pct_pts(e['eps_surprise_pct'], 0)} mehr als erwartet.")
+    if e.get("revenue_actual") is not None:
+        parts.append("Auch der Umsatz lag über den Schätzungen — ein Beat auf ganzer Linie.")
+    return " ".join(parts)
+
+
+# 3) KURSREAKTION — Candle-Chart um den Meldetag, Sprungtag markiert
+def slide_earnings_reaction(c, e, date_iso):
+    from matplotlib.patches import Rectangle
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    # auf hohem (Reel-)Canvas den Inhalt vertikal zentrieren, auf 4:5 unverändert
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Die Kursreaktion", 42, weight="bold")
+    c.text(MX, 240 + dy, "Tageskerzen — die letzten 50 Handelstage bis zum Meldetag",
+           TY_SUB, color=T.MUTED)
+
+    candles = e.get("reaction_ohlcv") or []
+    idx = e.get("reaction_idx")
+    chart_top, chart_h = 310 + dy, int(1350 * 0.42)
+    if candles:
+        ax = c.chart_axes(MX, chart_top, c.W - 2 * MX, chart_h)
+        n = len(candles)
+        for i, cd in enumerate(candles):
+            o, h, l, cl = cd["o"], cd["h"], cd["l"], cd["c"]
+            up = cl >= o
+            ccol = T.GREEN if up else T.RED
+            is_evt = (i == idx)
+            lw = 2.4 if is_evt else 1.0
+            ax.plot([i, i], [l, h], color=ccol, lw=lw, zorder=3 if is_evt else 1)
+            body_h = max(abs(cl - o), (h - l) * 0.02)
+            ax.add_patch(Rectangle((i - 0.34, min(o, cl)), 0.68, body_h,
+                                   facecolor=ccol, edgecolor=ccol,
+                                   lw=lw, zorder=3 if is_evt else 2))
+            if is_evt:
+                # Highlight-Säule hinter dem Meldetag
+                ax.axvspan(i - 0.5, i + 0.5, color=col, alpha=0.10, zorder=0)
+
+        all_h = [cd["h"] for cd in candles]
+        all_l = [cd["l"] for cd in candles]
+        pad = (max(all_h) - min(all_l)) * 0.10
+        ax.set_xlim(-1, n)
+        # mehr Luft unten für die Datums-Achse
+        ax.set_ylim(min(all_l) - pad * 2.4, max(all_h) + pad)
+
+        # Prev-Close-Referenzlinie + Sprung-Annotation
+        if idx is not None and e.get("jump_prev_close"):
+            ax.axhline(e["jump_prev_close"], color=T.MUTED, lw=1.2,
+                       ls=(0, (5, 5)), zorder=2)
+            jlabel = E.fmt_pct(e.get("jump_pct"), 1)
+            # Annotation nach oben-links, damit sie nicht über die Folgekerzen läuft
+            ax.annotate(jlabel, (idx - 0.4, candles[idx]["h"]),
+                        xytext=(-4, 18), textcoords="offset points",
+                        color=col, fontsize=16, fontweight="bold",
+                        ha="right", fontfamily=_FONTS["mono"])
+
+        # ── Datums-Achse unten: macht die Tagesspanne sichtbar ────────────────
+        ylabel_y = min(all_l) - pad * 1.5
+        step = max(1, (n - 1) // 5)
+        xticks = list(range(0, n, step))
+        # letzte (Meldetag-)Kerze immer beschriften; reguläre Ticks, die zu nah
+        # daran liegen, entfernen, damit sich die Labels nicht überlappen
+        xticks = [t for t in xticks if (n - 1) - t >= step * 0.7]
+        xticks.append(n - 1)
+        for xi in xticks:
+            is_evt = (idx is not None and xi == idx)
+            ax.text(xi, ylabel_y, short_date(candles[xi]["d"]),
+                    color=col if is_evt else T.MUTED,
+                    fontsize=13 if is_evt else 12,
+                    fontweight="bold" if is_evt else "normal",
+                    va="top", ha="center", fontfamily=_FONTS["sans"])
+        # kleine Tick-Striche an den Datumslabels
+        for xi in xticks:
+            ax.plot([xi, xi], [min(all_l) - pad * 1.15, min(all_l) - pad * 0.85],
+                    color=T.GRID, lw=1.2, zorder=1)
+
+        # Preis-Labels links (damit sie nicht mit der letzten Kerze kollidieren)
+        for yv in (min(all_l), (min(all_l) + max(all_h)) / 2, max(all_h)):
+            ax.text(-0.6, yv, f"{yv:.0f}", color=T.MUTED, fontsize=12,
+                    va="center", ha="right", fontfamily=_FONTS["mono"])
+    else:
+        c.text(MX, chart_top + 40, "Keine Kursdaten verfügbar.", TY_BODY,
+               color=T.MUTED)
+
+    # Kacheln: Kurssprung + Schlusskurs am Meldetag
+    ky = chart_top + chart_h + 70
+    gap = 24
+    tw = (c.W - 2 * MX - gap) // 2
+    jump = e.get("jump_pct")
+    _stat_tile(c, MX, ky, tw, 172, "KURSSPRUNG",
+               E.fmt_pct(jump, 1),
+               f"Vortag {E.fmt_num(e.get('jump_prev_close'))} → "
+               f"{E.fmt_num(e.get('jump_close'))}",
+               col if (jump or 0) >= 0 else T.RED)
+    _stat_tile(c, MX + tw + gap, ky, tw, 172, "SCHLUSSKURS",
+               f"{e.get('currency','')}{E.fmt_num(e.get('jump_close'))}",
+               f"am {fmt_de_date(e['report_date'])}", T.BLUE)
+    analysis_footer(c)
+
+
+# 4) GUIDANCE & TURNAROUND-TREIBER
+def slide_earnings_guidance(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Ausblick & Treiber", 42, weight="bold")
+    c.text(MX, 240, "Was hinter dem Beat steckt", TY_SUB, color=T.MUTED)
+
+    y = 300
+    # Guidance-Kachel (volle Breite)
+    if e.get("guidance"):
+        glines = _wrap_px(e["guidance"], c.W - 2 * MX - 80, TY_BODY)
+        gh = 70 + len(glines) * TY_BODY_LH + 20
+        c.tile(MX, y, c.W - 2 * MX, gh, color=T.PANEL)
+        c.tile(MX, y, 12, gh, color=col, radius=6)
+        c.text(MX + 40, y + 22, "ANGEHOBENE PROGNOSE", 22, color=col, weight="bold")
+        _draw_paragraph(c, MX + 40, y + 62, e["guidance"], TY_BODY,
+                        c.W - 2 * MX - 80, color=T.TEXT, line_h=TY_BODY_LH)
+        y += gh + 26
+
+    # Turnaround-Kennzahl: blaue Überschrift OBEN (volle Breite), darunter die
+    # große Zahl links + Erklärungstext rechts daneben (tiefer, damit die
+    # Überschrift nicht in den Text ragt). Boxhöhe passt sich dem Text an.
+    if e.get("key_metric_value"):
+        note = e.get("key_metric_note", "")
+        klines = _wrap_px(note, c.W - 2 * MX - 380, TY_SUB) if note else []
+        kh = max(150, 76 + max(len(klines), 2) * 30 + 14)
+        c.tile(MX, y, c.W - 2 * MX, kh, color=T.PANEL_HI)
+        c.text(MX + 34, y + 22, e["key_metric_label"].upper(), 22,
+               color=T.BLUE, weight="bold")
+        c.text(MX + 34, y + 62, e["key_metric_value"], 56, color=T.TEXT,
+               weight="bold", font="mono")
+        for i, ln in enumerate(klines[:4]):
+            c.text(MX + 360, y + 66 + i * 30, ln, TY_SUB, color=T.MUTED)
+        y += kh + 26
+
+    # Treiber-Bullets
+    drivers = e.get("drivers") or []
+    if drivers:
+        c.text(MX, y + 6, "DIE TREIBER", 22, color=T.MUTED, weight="bold")
+        y += 48
+        for d in drivers[:4]:
+            dl = _wrap_px(d, c.W - 2 * MX - 56, TY_BODY)
+            c.ax.scatter(MX + 12, c.y(y + 16), s=120, marker="o",
+                         color=col, edgecolor="none", zorder=11)
+            for i, ln in enumerate(dl[:2]):
+                c.text(MX + 50, y + i * TY_BODY_LH, ln, TY_BODY, color=T.TEXT)
+            y += max(TY_BODY_LH, len(dl[:2]) * TY_BODY_LH) + 14
+    analysis_footer(c)
+
+
+def _verdict_note(e):
+    """Erklärt das KI-Verdict im Earnings-Kontext (warum z. B. HALTEN trotz Beat
+    und Kursziel über dem aktuellen Kurs). e['verdict_note'] hat Vorrang."""
+    if e.get("verdict_note"):
+        return e["verdict_note"]
+    a = e.get("analysis")
+    if not a:
+        return ""
+    v = (a.get("verdict") or "").upper()
+    ps = A.position_size(a["sections"].get(11, "")) or ""
+    if v == "BUY":
+        return "Die Quartalszahlen stützen das positive KI-Verdict zusätzlich."
+    if v in ("HOLD", "WATCH", "SELL"):
+        tail = f" Empfohlene Positionsgröße daher {ps}." if ps else ""
+        return ("Trotz starker Zahlen bleibt das KI-Verdict bewusst vorsichtig: "
+                "Das Aufwärtspotenzial ist real, aber an erhöhte (u. a. regulatorische) "
+                "Risiken gekoppelt — daher kein klares Kaufsignal, sondern eine "
+                f"kleinere Position.{tail}")
+    return ""
+
+
+# 5) EINORDNUNG — Brücke vom Beat zur Investment-These (Verdict-Badge + Begründung)
+def slide_earnings_context(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    a = e.get("analysis")
+    c.text(MX, 184, "Einordnung", 42, weight="bold")
+    c.text(MX, 240, "Was die Zahlen für die These bedeuten", TY_SUB, color=T.MUTED)
+
+    y = 306
+    if e.get("context"):
+        y = _draw_paragraph(c, MX, y, e["context"], TY_BODY, c.W - 2 * MX,
+                            color=T.TEXT, line_h=TY_BODY_LH, max_lines=8) + 36
+
+    if a:
+        _verdict_badge(c, MX, y, a["verdict"], a["score"], h=120)
+        y += 120 + 22
+        note = _verdict_note(e)
+        if note:
+            c.tile(MX, y, c.W - 2 * MX, 6, color=verdict_color(a["verdict"]), radius=3)
+            c.text(MX, y + 24, "WARUM DIESES VERDICT?", TY_SUB,
+                   color=verdict_color(a["verdict"]), weight="bold")
+            _draw_paragraph(c, MX, y + 24 + TY_BODY_LH, note, TY_BODY,
+                            c.W - 2 * MX, color=T.SUBTLE, line_h=TY_BODY_LH,
+                            max_lines=7)
+    analysis_footer(c)
+
+
+# 6) GEWINN JE QUARTAL — bereinigtes EPS als Mini-Balkenchart (Turnaround-Trend)
+def slide_earnings_quarterly(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    dy = max(0, (c.H - 1350) // 2)
+    c.text(MX, 184 + dy, "Gewinn je Quartal", 42, weight="bold")
+    c.text(MX, 240 + dy, e.get("quarterly_label", "Bereinigtes EPS je Quartal ($)"),
+           TY_SUB, color=T.MUTED)
+
+    q = e.get("quarterly") or []
+    chart_top, chart_h = 320 + dy, 470
+    if q:
+        ax = c.chart_axes(MX, chart_top, c.W - 2 * MX, chart_h)
+        vals = [d["eps"] for d in q]
+        labels = [d["q"] for d in q]
+        n = len(q)
+        ymax = max(vals + [0])
+        ymin = min(vals + [0])
+        span = (ymax - ymin) or 1
+        for i, v in enumerate(vals):
+            is_last = (i == n - 1)
+            bcol = T.GREEN if v >= 0 else T.RED
+            ax.bar(i, v, width=0.62, color=bcol, zorder=3,
+                   alpha=1.0 if is_last else 0.8)
+            ax.text(i, v + (0.03 * span if v >= 0 else -0.03 * span),
+                    f"{v:.2f}".replace(".", ","),
+                    ha="center", va="bottom" if v >= 0 else "top",
+                    color=bcol, fontsize=15, fontweight="bold",
+                    fontfamily=_FONTS["mono"])
+        ax.axhline(0, color=T.MUTED, lw=1.4, zorder=2)
+        ax.set_xlim(-0.7, n - 0.3)
+        ax.set_ylim(ymin - 0.32 * span, ymax + 0.18 * span)
+        for i, lab in enumerate(labels):
+            is_last = (i == n - 1)
+            ax.text(i, ymin - 0.20 * span, lab, ha="center", va="top",
+                    color=col if is_last else T.MUTED, fontsize=14,
+                    fontweight="bold" if is_last else "normal",
+                    fontfamily=_FONTS["sans"])
+    note = e.get("quarterly_note")
+    if note:
+        _draw_paragraph(c, MX, chart_top + chart_h + 80, note, TY_BODY,
+                        c.W - 2 * MX, color=T.SUBTLE, line_h=TY_BODY_LH, max_lines=3)
+    analysis_footer(c)
+
+
+# 7) WAS DEN BEAT GETRAGEN HAT — Segmente im Detail
+def slide_earnings_segments(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    c.text(MX, 184, "Was den Beat getragen hat", 42, weight="bold")
+    c.text(MX, 240, "Die Segmente im Detail", TY_SUB, color=T.MUTED)
+
+    segs = e.get("segments") or []
+    y = 312
+    for s in segs[:4]:
+        note = s.get("note", "")
+        nlines = _wrap_px(note, c.W - 2 * MX - 340, TY_SUB) if note else []
+        h = max(124, 56 + len(nlines) * 30 + 24)
+        c.tile(MX, y, c.W - 2 * MX, h, color=T.PANEL)
+        c.tile(MX, y, 10, h, color=col, radius=5)
+        c.text(MX + 34, y + 22, s["name"].upper(), 24, color=col, weight="bold")
+        if s.get("metric"):
+            c.text(MX + 34, y + 56, s["metric"], 34, color=T.TEXT,
+                   weight="bold", font="mono")
+        for i, ln in enumerate(nlines[:4]):
+            c.text(MX + 330, y + 28 + i * 30, ln, TY_SUB, color=T.MUTED)
+        y += h + 20
+    if e.get("segments_note"):
+        _draw_paragraph(c, MX, y + 8, e["segments_note"], TY_SUB, c.W - 2 * MX,
+                        color=T.MUTED, line_h=32, max_lines=3)
+    analysis_footer(c)
+
+
+# 10) QUALITÄT AUF EINEN BLICK — Sterne-Ratings aus der Basis-Analyse
+def slide_earnings_ratings(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    a = e.get("analysis")
+    c.text(MX, 184, "Qualität auf einen Blick", 42, weight="bold")
+    c.text(MX, 240, "KI-Bewertung in vier Dimensionen", TY_SUB, color=T.MUTED)
+    if not a:
+        analysis_footer(c)
+        return
+    rt = a["ratings"]
+    vcol = verdict_color(a["verdict"])
+    items = [("Qualität", rt.get("Qualität"), "Bilanz, Margen, Kapitalrendite"),
+             ("Wachstum", rt.get("Wachstum"), "Umsatz- & Gewinndynamik"),
+             ("Bewertung", rt.get("Bewertung"), "Preis vs. fairer Wert"),
+             ("Katalysator", rt.get("Katalysator"), "Auslöser für Neubewertung")]
+    gap, top0 = 24, 320
+    cw = (c.W - 2 * MX - gap) // 2
+    ch = 230
+    for i, (label, val, desc) in enumerate(items):
+        row, coli = divmod(i, 2)
+        rx = MX + coli * (cw + gap)
+        ry = top0 + row * (ch + gap)
+        c.tile(rx, ry, cw, ch, color=T.PANEL)
+        c.text(rx + 28, ry + 24, label.upper(), 24, color=vcol, weight="bold")
+        c.text(rx + cw - 28, ry + 20, f"{val if val is not None else '–'}/5", 34,
+               color=vcol, weight="bold", ha="right", font="mono")
+        _stars(c, rx + 34, ry + 118, val, col=vcol, gap=46, s=430)
+        for j, ln in enumerate(_wrap_px(desc, cw - 56, TY_SUB)[:2]):
+            c.text(rx + 28, ry + 150 + j * 28, ln, TY_SUB, color=T.MUTED)
+    analysis_footer(c)
+
+
+# 9) EARNINGS-FAZIT / CTA — Speichern, Frage, Quellen-Hinweis
+def slide_earnings_cta(c, e, date_iso):
+    analysis_header(c, e, date_iso)
+    col = earn_color(e)
+    name = _e_name(e)
+    c.text(MX, 184, "Speichern & mitreden", TY_H1, weight="bold")
+
+    # Save-Box
+    c.tile(MX, 272, c.W - 2 * MX, 150, color=T.PANEL)
+    c.tile(MX, 272, 12, 150, color=col, radius=6)
+    _draw_bookmark(c, MX + 46, 308, 44, 78, col)
+    c.text(MX + 130, 298, "Speichere die Earnings-Analyse", TY_BODY, weight="bold")
+    c.text(MX + 130, 298 + TY_BODY_LH,
+           f"und behalte {name} zur nächsten Zahlen-Saison im Blick.",
+           TY_SUB, color=T.MUTED)
+
+    # Community-Frage
+    q_text = (f"{name} nach den Zahlen: echter Turnaround oder Strohfeuer? "
+              f"Schreib deine These in die Kommentare.")
+    q_lines = _wrap_px(q_text, c.W - 2 * MX - 80, TY_BODY)
+    q_box_h = 16 + TY_BODY_LH + len(q_lines) * TY_BODY_LH + 24
+    save_box_bottom = 272 + 150
+    cta_y = c.H - 330
+    q_top = save_box_bottom + (cta_y - save_box_bottom - q_box_h) // 2
+    c.tile(MX, q_top, c.W - 2 * MX, q_box_h, color=T.PANEL_HI)
+    c.text(MX + 40, q_top + 16, "DEINE MEINUNG?", TY_SUB, color=col, weight="bold")
+    _draw_paragraph(c, MX + 40, q_top + 16 + TY_BODY_LH, q_text, TY_BODY,
+                    c.W - 2 * MX - 80, color=T.TEXT, weight="bold", line_h=TY_BODY_LH)
+
+    c.text(c.W // 2, cta_y, "Folge für Earnings & Profi-Analysen", TY_BODY,
+           color=T.TEXT, weight="bold", ha="center")
+    c.text(c.W // 2, cta_y + TY_BODY_LH, "datengetrieben · unabhängig · systematisiert",
+           TY_SUB, color=T.MUTED, ha="center")
+    analysis_footer(c)
+
+
+# ── Earnings-Reel (9:16): kurzer Teaser ───────────────────────────────────────
+def earnings_reel_header(c, date_iso, e):
+    lw = c.draw_logo(MX, 80, 50)
+    if not lw:
+        c.text(MX, 84, BRAND, 20, color=T.TEXT, weight="bold")
+    c.text(c.W - MX, 92, fmt_de_date(date_iso), 16, color=T.MUTED, ha="right")
+    col = earn_color(e)
+    beat_word = "BEAT" if (e.get("eps_surprise_pct") or 0) >= 0 else "MISS"
+    label = f"EARNINGS · {e['quarter']} · {beat_word}"
+    w = 56 + int(len(label) * 12)
+    c.tile(MX, 168, w, 54, color=T.PANEL_HI, radius=27)
+    c.tile(MX + 20, 168 + 20, 14, 14, color=col, radius=7)
+    c.text(MX + 46, 182, label, 18, color=col, weight="bold")
+
+
+def slide_earnings_reel_cta(c, e, date_iso):
+    """Hybrid-Trick: das Reel leitet auf den vollständigen Karussell-Post um.
+    Reel-Slide 4 — ohne Verdict (Wunsch: Verdict nur im Karussell)."""
+    earnings_reel_header(c, date_iso, e)
+    col = earn_color(e)
+    c.text(MX, 470, "Die ganze", 56, weight="bold")
+    c.text(MX, 542, "Earnings-Analyse?", 56, color=col, weight="bold")
+    box_top = 720
+    box_h = 360
+    c.tile(MX, box_top, c.W - 2 * MX, box_h, color=T.PANEL)
+    c.tile(MX, box_top, 12, box_h, color=col, radius=6)
+    _draw_paragraph(c, MX + 50, box_top + 50,
+                    f"Alle Zahlen, der Turnaround-Check und die Kursziel-Szenarien "
+                    f"zu {e['ticker']} findest du im Karussell-Post.", 30,
+                    c.W - 2 * MX - 100, color=T.TEXT, line_h=46, max_lines=6)
+    c.text(MX + 50, box_top + box_h - 86, BRAND_NAME, 40, color=col, weight="bold")
+    for i in range(3):
+        c.ax.scatter(c.W - MX - 60 - i * 36, c.y(box_top + box_h - 70), s=170,
+                     marker="^", color=col, edgecolor="none", zorder=12)
+    c.text(MX, 1230, f"Folge {BRAND_NAME} für Earnings & Analysen", 24, color=T.MUTED)
     analysis_footer(c)
