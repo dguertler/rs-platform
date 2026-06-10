@@ -171,8 +171,7 @@ keine falschen Zeiträume.
     NICHT `textwrap.wrap(width=40)` — verhindert halbe Zeilen durch zeichenbasierte
     Breite. `inner_w = c.W - 2*MX - 44` (8 px Balken + 36 px Inset).
   - **Text Bio-Verweis**: „Den Link zum wikifolio AI Alpha Selection findest du
-    aktuell in unserer Bio." — NICHT „Live-Depot" (das ist kein Live-Depot,
-    sondern das wikifolio AI Alpha Selection).
+    in unserer Bio." — kein „aktuell", NICHT „Live-Depot".
   - **Risikohinweis**: Plain-Text (kein roter Kasten), Trennlinie. Schrift
     **3 Stufen größer als Fußnoten** (12 → 14 → 16 → **18 px** Body, **20 px** Header
     „Risikohinweis & Disclaimer"). Textumbruch via `_draw_paragraph(... 18, c.W - 2*MX)`
@@ -185,6 +184,18 @@ keine falschen Zeiträume.
 - **Footer-Disclaimer Schriftgröße: 14 px** (vorher 12 px, einmalig erhöht).
   Line-Spacing 28 px, `width=130` für Textwrap. Gilt für `footer()` in render.py
   (alle wöchentlichen Post-Slides). `analysis_footer()` bleibt bei 16 px.
+- **Chart-Slides (slide_featured): Schriftgrößen & Layout:**
+  - Chip-Labels ("Wertzuwachs seit Kauf", "Einstiegskurs", "Realisierter Gewinn" etc.):
+    **20 px** (vorher 17 px).
+  - Mini-Legende unter dem Chart ("● Kauf", "● Verkauf", "● weitere Kauf-Signale"):
+    **20 px** — identisch zu den Chip-Labels.
+  - **Abgeschlossene Trades (closed=True):** Rechte Seite = zwei gestapelte Kacheln
+    (Tile-Höhe je 95 px, Abstand 12 px): oben „Eintrittskurs" + Kaufpreis, unten
+    „Austrittskurs" + Verkaufspreis. Linke Kachel (Realisierter Gewinn) hat volle
+    Gesamthöhe (202 px), Inhalt vertikal zentriert.
+  - **Offene Positionen:** eine Kachel rechts „Einstiegskurs" (110 px, unverändert).
+- **Preisformat: 1.234,56 €** (Tausenderpunkt + Komma-Dezimal). Funktion `fmt_eur(v)`
+  in render.py. Gilt für alle Preisanzeigen in Slides und `_pos_sub()` in generate.py.
 
 ### Qualitätssicherung: Slides immer kontrollieren
 **PFLICHT nach jeder Slide-Generierung** (weekly KW, Aktienanalyse, Earnings):

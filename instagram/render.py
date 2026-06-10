@@ -41,6 +41,14 @@ def fmt_pct(x, decimals=1, signed=True):
     return f"{sign}{abs(x) * 100:.{decimals}f}".replace(".", ",") + "%"
 
 
+def fmt_eur(v):
+    """Deutschen Preis mit Tausenderpunkt: 1.224,20 €"""
+    if v is None:
+        return "—"
+    s = f"{v:,.2f}"                              # "1,224.20"
+    return s.replace(",", "X").replace(".", ",").replace("X", ".") + " €"
+
+
 def fmt_de_date(iso):
     try:
         d = datetime.strptime(iso[:10], "%Y-%m-%d")
@@ -363,7 +371,7 @@ def slide_cta(c, date_iso, question=None, account=None):
     c.text(MX, cy, "Mehr Trades & Updates?", 54, weight="bold")
     # Bio-Text als Paragraph: füllt volle Breite links → rechts (kein hardcodierter Umbruch)
     bio = ("Den Link zum wikifolio AI Alpha Selection "
-           "findest du aktuell in unserer Bio.")
+           "findest du in unserer Bio.")
     bio_bottom = _draw_paragraph(c, MX, cy + 92, bio, 26, c.W - 2 * MX,
                                  color=T.TEXT, line_h=40)
 
@@ -625,37 +633,55 @@ def slide_featured(c, date_iso, feat, label="AKTIE DER WOCHE"):
                 bbox=dict(boxstyle="square,pad=0.3", fc=T.BG, ec="none", alpha=0.9))
 
     # Mini-Legende (Kauf grün · Verkauf rot · weitere Kauf-Signale)
+    # Schriftgröße = 20px (identisch zu KPI-Chip-Labels darunter)
     ly = 350 + chart_h + 22
-    c.text(MX, ly, "● Kauf", 15, color=buy_col, weight="bold")
-    lx = MX + 130
+    c.text(MX, ly, "● Kauf", 20, color=buy_col, weight="bold")
+    lx = MX + 160
     if drawn_sell:
-        c.text(lx, ly, "● Verkauf", 15, color=sell_col, weight="bold")
-        lx += 175
+        c.text(lx, ly, "● Verkauf", 20, color=sell_col, weight="bold")
+        lx += 215
     if has_extra:
-        c.text(lx, ly, "● weitere Kauf-Signale", 15, color=buy_col, alpha=0.7)
+        c.text(lx, ly, "● weitere Kauf-Signale", 20, color=buy_col, alpha=0.7)
 
     # KPI-Kacheln
-    ky = 350 + chart_h + 70
+    ky = 350 + chart_h + 76
     half = (c.W - 2 * MX - 30) // 2
-    c.tile(MX, ky, half, 110, color=T.PANEL)
-    lbl1 = "Realisierter Gewinn" if feat.get("closed") else "Wertzuwachs seit Kauf"
-    c.text(MX + 30, ky + 26, lbl1, 17, color=T.MUTED)
-    c.text(MX + 30, ky + 52, fmt_pct(ret) if ret is not None else "—", 40,
-           color=rcol, weight="bold", font="mono")
-    c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
     sp = feat.get("sell_price_eur")
     bp = feat.get("buy_price_eur")
-    if feat.get("closed") and sp:
-        c.text(MX + half + 60, ky + 26, "Verkaufskurs", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 52,
-               f"{sp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
-    elif bp:
-        c.text(MX + half + 60, ky + 26, "Einstiegskurs", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 52,
-               f"{bp:.2f}".replace(".", ",") + " €", 40, weight="bold", font="mono")
+    lbl1 = "Realisierter Gewinn" if feat.get("closed") else "Wertzuwachs seit Kauf"
+
+    if feat.get("closed") and (sp or bp):
+        # Abgeschlossener Trade: links Rendite, rechts ZWEI Kacheln (Eintritt + Austritt)
+        tile_h = 95
+        tile_gap = 12
+        total_h = tile_h * 2 + tile_gap
+        # Linke Kachel (volle Höhe, vertikal zentriert)
+        c.tile(MX, ky, half, total_h, color=T.PANEL)
+        c.text(MX + 30, ky + total_h // 2 - 36, lbl1, 20, color=T.MUTED)
+        c.text(MX + 30, ky + total_h // 2 + 4, fmt_pct(ret) if ret is not None else "—",
+               40, color=rcol, weight="bold", font="mono")
+        # Rechte Kachel oben: Eintrittskurs
+        c.tile(MX + half + 30, ky, half, tile_h, color=T.PANEL)
+        c.text(MX + half + 60, ky + 20, "Eintrittskurs", 20, color=T.MUTED)
+        c.text(MX + half + 60, ky + 50, fmt_eur(bp), 34, weight="bold", font="mono")
+        # Rechte Kachel unten: Austrittskurs
+        c.tile(MX + half + 30, ky + tile_h + tile_gap, half, tile_h, color=T.PANEL)
+        c.text(MX + half + 60, ky + tile_h + tile_gap + 20, "Austrittskurs", 20, color=T.MUTED)
+        c.text(MX + half + 60, ky + tile_h + tile_gap + 50, fmt_eur(sp), 34,
+               weight="bold", font="mono")
     else:
-        c.text(MX + half + 60, ky + 26, "Kaufdatum", 17, color=T.MUTED)
-        c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
+        # Offene Position: zwei Kacheln nebeneinander (unverändert)
+        c.tile(MX, ky, half, 110, color=T.PANEL)
+        c.text(MX + 30, ky + 26, lbl1, 20, color=T.MUTED)
+        c.text(MX + 30, ky + 56, fmt_pct(ret) if ret is not None else "—", 40,
+               color=rcol, weight="bold", font="mono")
+        c.tile(MX + half + 30, ky, half, 110, color=T.PANEL)
+        if bp:
+            c.text(MX + half + 60, ky + 26, "Einstiegskurs", 20, color=T.MUTED)
+            c.text(MX + half + 60, ky + 56, fmt_eur(bp), 40, weight="bold", font="mono")
+        else:
+            c.text(MX + half + 60, ky + 26, "Kaufdatum", 20, color=T.MUTED)
+            c.text(MX + half + 60, ky + 56, fmt_de_date(entry["d"]), 30, weight="bold")
     footer(c)
 
 

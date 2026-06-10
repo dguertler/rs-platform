@@ -28,7 +28,7 @@ def _pos_sub(t):
     if t.get("buy_date"):
         s += f" · Kauf {render.fmt_de_date(t['buy_date'])}"
     if t.get("buy_price_eur"):
-        s += f" · {t['buy_price_eur']:.2f}".replace(".", ",") + " €"
+        s += f" · {render.fmt_eur(t['buy_price_eur'])}"
     return s
 
 
