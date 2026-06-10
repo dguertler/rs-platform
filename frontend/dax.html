@@ -1197,8 +1197,8 @@ function App() {
 
   useEffect(() => {
     if (!ratingModal) { setRatingHtml(''); return; }
-    const r = ratings[ratingModal.toUpperCase()];
-    const ticker = r ? r.ticker.toLowerCase() : ratingModal.toLowerCase();
+    const r = ratings[ratingModal.toUpperCase()] || ratings[ratingModal.replace(/\.[^.]+$/, '').toUpperCase()];
+    const ticker = r ? r.ticker.toLowerCase() : ratingModal.replace(/\.[^.]+$/, '').toLowerCase();
     setRatingHtml('');
     apiFetch(`/api/ratings/${ticker}/html`)
       .then(res => res.ok ? res.text() : null)
