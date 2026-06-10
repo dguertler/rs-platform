@@ -661,25 +661,90 @@ def verdict_color(v):
             "WATCH": T.AMBER, "SELL": T.RED}.get((v or "").upper(), T.BLUE)
 
 
-def _wrap_px(text, px_width, size, factor=0.50):
-    """Bricht Text auf Basis der Pixelbreite um.
-    factor ≈ durchschnittliche Zeichenbreite relativ zur Schriftgröße (px).
-    0.50 passt gut zu Liberation Sans und füllt Zeilen ohne künstliche Lücken."""
+def _wrap_px(text, px_width, size, factor=0.50, lang="de"):
+    """Bricht deutschen Text pixelbreitenbasiert um.
+
+    factor: durchschnittliche Zeichenbreite / Schriftgröße (Liberation Sans ≈ 0.50).
+    lang='de': Silbentrennung via pyphen (de_DE) — verhindert halbvolle Zeilen durch
+               lange deutsche Komposita; zeigt Trennstrich nur am echten Zeilenende.
+    lang=None: kein pyphen (für englische Texte oder wenn pyphen nicht installiert).
+
+    Entspricht CSS: text-align:left; hyphens:auto; word-break:break-word; lang='de'.
+    """
     import textwrap
-    width = max(8, int(px_width / max(1.0, size * factor)))
-    return textwrap.wrap(text, width=width)
+    target = max(8, int(px_width / max(1.0, size * factor)))
+
+    dic = None
+    if lang == "de":
+        try:
+            import pyphen
+            dic = pyphen.Pyphen(lang="de_DE")
+        except ImportError:
+            pass
+
+    if dic is None:
+        return textwrap.wrap(text, width=target, break_long_words=True)
+
+    # Zeilenweise aufbauen mit Silbentrennung am rechtesten Silbenpunkt
+    words = text.split()
+    lines = []
+    current: list[str] = []
+    cur_len = 0  # Zeichenanzahl der laufenden Zeile
+
+    for word in words:
+        wlen = len(word)
+        needed = wlen + (1 if current else 0)
+
+        if cur_len + needed <= target:
+            current.append(word)
+            cur_len += needed
+        else:
+            space_left = target - cur_len - (1 if current else 0)
+            broke = False
+
+            # Silbentrennung nur für lange Wörter ohne echten Bindestrich
+            if wlen >= 10 and "-" not in word and space_left >= 3:
+                hyph = dic.inserted(word)          # z. B. "Ein-tritts-wahr-schein-..."
+                parts = hyph.split("-")
+                best_pos = 0
+                pos = 0
+                for part in parts[:-1]:            # letzten Part nie trennen
+                    pos += len(part)
+                    if pos + 1 <= space_left:      # Präfix + Trennstrich passt
+                        best_pos = pos
+
+                if best_pos > 0:
+                    current.append(word[:best_pos] + "-")   # z. B. "Eintritts-"
+                    lines.append(" ".join(current))
+                    current = [word[best_pos:]]              # Rest auf neue Zeile
+                    cur_len = len(word[best_pos:])
+                    broke = True
+
+            if not broke:
+                if current:
+                    lines.append(" ".join(current))
+                current = [word]
+                cur_len = wlen
+
+    if current:
+        lines.append(" ".join(current))
+
+    return lines
 
 
 def _draw_paragraph(c, x, top, text, size, px_width, color=T.TEXT,
                     weight="normal", line_h=None, max_lines=None,
                     justify=False, font="sans"):
-    """Zeichnet einen Fließtext-Block linksbündig (justify=False, Standard).
-    justify=True nur explizit setzen wenn Blocksatz in einer abgegrenzten Box
-    sinnvoll ist — sonst entstehen bei kurzen Zeilen riesige Wortlücken."""
+    """Fließtext-Block, linksbündig (justify=False Standard).
+
+    Nutzt _wrap_px mit German-Silbentrennung: lange Komposita werden am
+    rechtesten Silbenpunkt getrennt, Trennstrich nur am echten Zeilenende.
+    justify=True nur für abgegrenzte Boxen (z. B. CTA-Disclaimer).
+    """
     lines = _wrap_px(text, px_width, size)
     if max_lines and len(lines) > max_lines:
         lines = lines[:max_lines]
-        lines[-1] = lines[-1].rstrip(" .,;") + " …"
+        lines[-1] = lines[-1].rstrip(" .,;-") + " …"
     lh = line_h or int(size * 1.34)
     for i, ln in enumerate(lines):
         is_last = (i == len(lines) - 1)
