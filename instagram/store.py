@@ -60,11 +60,16 @@ def _featured_dict(universe, p):
     }
 
 
-def append_week(kw, value):
-    """Hängt einen Zertifikatswert für KW an (oder aktualisiert ihn)."""
+def append_week(kw, value, date=None):
+    """Hängt einen Zertifikatswert für KW an (oder aktualisiert ihn).
+    `date` (YYYY-MM-DD) wird als echtes Datum des Wochenwerts gespeichert;
+    ohne Angabe fällt die Equity-Kurve auf den Freitag der KW zurück."""
     h = load_history()
     weekly = [w for w in h["weekly"] if w["kw"] != kw]
-    weekly.append({"kw": kw, "value": round(float(value), 2)})
+    entry = {"kw": kw, "value": round(float(value), 2)}
+    if date:
+        entry["date"] = date
+    weekly.append(entry)
     weekly.sort(key=lambda w: w["kw"])
     h["weekly"] = weekly
     with open(os.path.join(DATA_DIR, "wikifolio_history.json"), "w") as f:
