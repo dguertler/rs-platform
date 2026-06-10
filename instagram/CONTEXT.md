@@ -313,6 +313,13 @@ def slide_analysis_NEU(c, a, date_iso):
 Alle `slide_performance`, `slide_history`, `slide_list`, `slide_featured` etc.
 verwenden denselben `MX=195`, dieselben Farben und dieselbe Footer-Funktion.
 Textgröße für Kachel-Zahlen: 34–64 px (je Wichtigkeit), Labels immer `MUTED`.
+- **Footer „keine Anlageberatung":** 14 px, `width=130`, Line-Spacing 28 px.
+- **Chart-Slides (`slide_featured`):** Chip-Labels + Mini-Legende: **20 px**.
+  **„Weitere Kauf-Signale"** nur wenn `signal_date < entry["d"]` (Signale nach
+  dem Kaufdatum werden nicht geplottet — Aktie ist bereits im Depot).
+  Abgeschlossene Trades: rechte Seite = 2 gestapelte Kacheln „Eintrittskurs" (oben)
+  + „Austrittskurs" (unten), je 95 px, Abstand 12 px. Offene Positionen: 1 Kachel
+  „Einstiegskurs" (110 px).
 Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 
 ### 12.7 Konsistenz-Checkliste für neue Slides
