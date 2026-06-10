@@ -61,23 +61,13 @@ def _wrap(c, x, top, text, size, color, line_h, weight="normal"):
 
 
 def slide_intro(c, date_iso):
-    """Slide 1 — DIE STRATEGIE: Hook-Frage + Subtitle.
-
-    Eyebrow + H1 + Subtitle werden als Block vertikal im sichtbaren 1:1-
-    Mittelband zentriert, damit die Überschrift im Profil-Raster (Quadrat-Crop)
-    weder oben noch unten abgeschnitten wird.
-    """
+    """Slide 1 — DIE STRATEGIE: Hook-Frage + Subtitle."""
     header(c, date_iso)
-    safe_top, _, center_y, _ = render.safe_band(c)
+
+    c.text(MX, 285, "DIE STRATEGIE", 18, color=T.BLUE, weight="bold")
 
     h1_lines = textwrap.wrap("Wie schlägt man den NASDAQ-100?", width=20)
-    # Blockhöhe: Eyebrow→H1 (50) + n·Zeilenhöhe (94) + H1→Subtitle (30) + Subtitle (34)
-    block_h = 50 + len(h1_lines) * 94 + 30 + 34
-    e_top = max(safe_top, center_y - block_h // 2)
-
-    c.text(MX, e_top, "DIE STRATEGIE", 18, color=T.BLUE, weight="bold")
-
-    y = e_top + 50
+    y = 335
     for line in h1_lines:
         c.text(MX, y, line, 72, color=T.TEXT, weight="bold")
         y += 94
@@ -89,20 +79,11 @@ def slide_intro(c, date_iso):
 
 
 def slide_phase(c, date_iso, phase):
-    """Slides 2–4 — PHASE 1/2/3.
-
-    Nummern-Box, Titel und Fließtext werden als Block vertikal im sichtbaren
-    1:1-Mittelband zentriert (Profil-Raster-sicher).
-    """
+    """Slides 2–4 — PHASE 1/2/3."""
     header(c, date_iso)
-    safe_top, _, center_y, _ = render.safe_band(c)
 
     box_size = 112
-    # Blockhöhe: Box + Abstand (54) + Body-Zeilen abschätzen, dann zentrieren
-    body_chars = max(20, int((c.W - 2 * MX) / (28 * 0.56)))
-    n_body = len(textwrap.wrap(phase["body"], width=body_chars))
-    block_h = box_size + 54 + n_body * 46
-    box_top  = max(safe_top, center_y - block_h // 2)
+    box_top  = 190
 
     # Nummern-Box
     c.tile(MX, box_top, box_size, box_size, color=T.PANEL_HI, radius=22)
@@ -125,18 +106,13 @@ def slide_phase(c, date_iso, phase):
 
 
 def slide_cta(c, date_iso, total_perf, nas_total, weeks):
-    """Slide 5 — Folge dem wikifolio: Performance-Box + Disclaimer-Box.
-
-    Headline und Performance-Box starten an der oberen Safe-Zone-Grenze, damit
-    die wichtige Renditezahl im Profil-Raster sichtbar bleibt.
-    """
+    """Slide 5 — Folge dem wikifolio: Performance-Box + Disclaimer-Box."""
     header(c, date_iso)
-    safe_top, _, _, _ = render.safe_band(c)
 
-    c.text(MX, safe_top, "Folge dem wikifolio", 52, color=T.TEXT, weight="bold")
+    c.text(MX, 190, "Folge dem wikifolio", 52, color=T.TEXT, weight="bold")
 
     # Performance-Box
-    pb_top = safe_top + 82
+    pb_top = 272
     pb_h   = 140
     c.tile(MX, pb_top, c.W - 2 * MX, pb_h, color=T.PANEL)
     nas_str = fmt_pct(nas_total)
