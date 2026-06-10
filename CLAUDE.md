@@ -98,6 +98,19 @@ Wochenpost, Reel) IMMER:
 3. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
    und Rating-Dateien committen, Slides sind gitignored
 
+### Logo-Suche für Instagram-Slides
+
+Logos liegen unter `instagram/assets/logos/`. Der Generator erwartet den
+Dateinamen `TICKER.png` (Großbuchstaben). Existiert diese Datei nicht, nach
+dem **vollen Unternehmensnamen** und gängigen Varianten suchen (z.B.
+`Marvell.png` → `MRVL.png`, `Sandisk.png` → `SNDK.png`) und eine Kopie unter
+dem Ticker-Namen anlegen. Reihenfolge der Suche:
+1. `TICKER.png` (exakt)
+2. Firmenname (shortName aus `data/fundamentals.json`) als Dateiname
+3. Erste Silbe / bekannte Kurzform des Firmennamens
+Wird ein Logo gefunden und kopiert → vor der Generierung erledigen, damit
+das Cover das Logo zeigt.
+
 Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 `Instagram KW<NN>` / `Erstelle Instagram-Post`:
 
