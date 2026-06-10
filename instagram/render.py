@@ -625,7 +625,10 @@ def verdict_color(v):
             "WATCH": T.AMBER, "SELL": T.RED}.get((v or "").upper(), T.BLUE)
 
 
-def _wrap_px(text, px_width, size, factor=0.56):
+def _wrap_px(text, px_width, size, factor=0.50):
+    """Bricht Text auf Basis der Pixelbreite um.
+    factor ≈ durchschnittliche Zeichenbreite relativ zur Schriftgröße (px).
+    0.50 passt gut zu Liberation Sans und füllt Zeilen ohne künstliche Lücken."""
     import textwrap
     width = max(8, int(px_width / max(1.0, size * factor)))
     return textwrap.wrap(text, width=width)
@@ -633,7 +636,10 @@ def _wrap_px(text, px_width, size, factor=0.56):
 
 def _draw_paragraph(c, x, top, text, size, px_width, color=T.TEXT,
                     weight="normal", line_h=None, max_lines=None,
-                    justify=True, font="sans"):
+                    justify=False, font="sans"):
+    """Zeichnet einen Fließtext-Block linksbündig (justify=False, Standard).
+    justify=True nur explizit setzen wenn Blocksatz in einer abgegrenzten Box
+    sinnvoll ist — sonst entstehen bei kurzen Zeilen riesige Wortlücken."""
     lines = _wrap_px(text, px_width, size)
     if max_lines and len(lines) > max_lines:
         lines = lines[:max_lines]
