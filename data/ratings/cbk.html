@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CBK — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CBK</h1>
+      <h2>Commerzbank AG                I</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Banks - Regional</span></div>
+        <div class="mi">MCap: <span>$40B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">68.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$36.49</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">296.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">8.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1,5-2</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">3,50-4,00</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">2-2,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Commerzbank ist die interessanteste Sondersituation im DAX: UniCredit hat ~29% Anteil aufgebaut und strebt eine Übernahme an — von BaFin und Bundesregierung bisher blockiert. Das ist der eigentliche Investmentcase: nicht das organische Banking-Geschäft, sondern die M&A-Optionalität. Forward PE 9,71x bei €36,49 signalisiert generische Unterbewertung für eine Bank mit verbesserter Profitabilität (Net Margin 23,3%, Op Margin 44,1%) in einem noch vorteilhaften Zinsumfeld. Was der Markt einpreist: strategisches Premium oder Übernahme. Was übersehen wird: Ohne Deal ist CBK eine solide, aber nicht exzeptionelle deutsche Bank — und bei anhaltenden ECB-Zinssenkungen bricht das NII-Fundament.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Retail Banking Deutschland (~35% Revenue): klassisches Einlagen-/Kredit-Geschäft; hohe Kostenbasis, Digitalisierung im Gange</li>
+<li>Corporate Banking (~45%): mittelstandsorientiert, Export-Finanzierung, Außenhandelsgarantien — strukturelles Differenzierungsmerkmal</li>
+<li>mBank (Polen, ~20%): gut positionierte digitale Tochterbank; Wachstumshebel, aber auch Osteuropa-Kreditrisikoexposition</li>
+<li>Net Interest Margin: primärer Ergebnistreiber; stark zinssensitiv — Anomalie Gross Margin 0% ist yfinance-Artefakt für Banken, nicht verwendbar</li>
+<li>UniCredit-Stake ~29%: Übernahme-Optionalität, aber auch Lähmung der Strategie</li>
+<li>D/E nicht relevant: für Banken bankenaufsichtlich definiert; Tier-1-Ratio stabil (aus Daten nicht verfügbar)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>UniCredit-Übernahme zu 1,5-2x Buchwert durchgesetzt oder strategisches Premium durch Bieterwettbewerb. Buchwert ~€31,50 × 1,7x = **€54–€63**. Alternativ: organisch, hohe Zinsen persistent, mBank-Wachstum. EPS FY27 ~€5-6 × 13x = **€65–€78**. Annahme, kein Konsens. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Kein Deal, stabile Zinsen, organisches Wachstum. EPS FY27 ~€3,50-4,00. Multiple: 11x auf €3,75 = **€38–€44**. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>ECB senkt Zinsen schneller als erwartet auf <1,5%, German Recession führt zu Kreditausfällen, Deal platzt endgültig. EPS fällt auf €2-2,50. Multiple: 7x auf €2,25 = **€14–€18**.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: breite Retail- und KMU-Kundenbasis — kein strukturelles Klumpenrisiko, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik / Osteuropa-Exposure: mBank Polen exponiert gegenüber Osteuropa-Kreditrisiken, Ukraine-Krieg-Spill-over; moderat</li>
+<li>Lieferketten: nicht relevant für Banken</li>
+<li>Verwässerung: Aktienanzahl stabil; SBC nicht relevant für Banken-Investment-Case</li>
+<li>Regulierung / Rechtsrisiken: Schweizer-Franken-Kredit-Altlasten (mBank Polen), CHF-Kreditklagen weiterhin laufend — erhebliches Restrisiko; Quantifizierung auf Datenbasis nicht möglich</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × 60 + 0,50 × 41 + 0,25 × 16 = 15,0 + 20,5 + 4,0 = **€39,50** — implizites Upside vs. €36,49: **+8,2%**. Knapp unter der 10%-Asymmetrie-Schwelle. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen klar asymmetrischen Edge — ohne Deal-Katalysator ist das Upside-Potenzial begrenzt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Net Margin 23,3% und Op Margin 44,1% reflektieren gesundes Banking in positivem Zinsumfeld — strukturell nicht nachhaltig bei Zinsnormalisierung. ROE 8,2%: unterdurchschnittlich für europäische Bankenpeer-Gruppe (10-15% gilt als Minimum für Wertschaffung). P/B 1,16x: markteffizient eingepreist; kein deutlicher Value-Discount. Beta 0,691: defensive Charakteristik. Anomalie: Gross Margin 0% = yfinance-Artefakt für Banken, nicht verwenden. Burggraben: Firmenkundennetzwerk und mBank-Digitalinfrastruktur moderat differenzierend.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 9,71x ist attraktiv für eine Bank mit 8,2% ROE. P/B 1,16x fair. Normalisiertes Earning Power: Bei ECB-Rate-Normalisierung auf 2% fällt NII um schätzungsweise 20-25%; EPS würde auf €2,50-3 fallen → P/E dann ~14x — nicht mehr günstig.</p>
+<p>Rückrechnung: Was preist €36,49 ein? Forward EPS ~€3,76 × 9,7x = €36,5. Der Markt zahlt exakt Forward-Earnings ohne Wachstumsprämie — das ist Konsens-Erwartung, nicht Optionalitäts-Prämie. Der Deal-Optionswert (differenz zu €54+ im Bull Case) wird nur zu ~25% eingepreist. Analyst-Konsensziel €39,95 — als Orientierungspunkt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 68,0, 12M RS +35,22% — stärkstes langfristiges Momentum im DAX-Universum. 6M RS +7,83%, moderate Beschleunigung. Short Float nicht im Datensatz. Institutionelle Positionierung: M&A-getriebene Sondersituationsfonds dürften signifikant positioniert sein — Hypothese, nicht datenbasiert. Enttäuschungsrisiko: Endgültiges BaFin-Veto gegen UniCredit-Deal könnte 15-20% Korrektur auslösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs €36,97 über SMA20 €36,32, SMA50 €34,57, SMA200 €32,79 — klarer Aufwärtstrend, alle SMAs klar darunter. Nahe 52W-Hoch €38,40. Technisches Warnsignal: Scheitern am 52W-Hoch bei €38,40 ohne Deal-News; Verlust SMA20 €36,32 würde Momentum bremsen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case (€55–€80):** Übernahme durch UniCredit zu 1,5-2x Buchwert realisiert oder organische Normalisierung bei dauerhaft höherem Zins. EPS €5-6 × 13x = €65-78 im Übernahme-Szenario. Entscheidende Variable: Politisches Umfeld für grenzüberschreitende EU-Bankfusionen.</p>
+<p>**Base Case (€35–€50):** Kein Deal, stabiles organisches Wachstum, Zinsen 2-3%. EPS €3,50-4,00 × 12x = €42-48. Entscheidende Variable: ECB-Zinspfad.</p>
+<p>**Bear Case (€12–€22):** Deutsches Rezessionsszenario + Zinssenkungen + CHF-Kredit-Urteil kostspielig. EPS €1,5-2 × 8x = €12-16 + Buchwert-Stützung ~€20. Entscheidende Variable: mBank CHF-Kredit-Rechtsrisiken.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Commerzbank ist ein M&A-Optionsschein, verpackt in eine unterdurchschnittliche deutsche Bank. EV +8,2% ohne Deal-Katalysator: kein ausreichend asymmetrischer Edge. Mit realisiertem Deal: erheblicher Upside (€54-78). Für Event-Driven-Investoren und Sondersituationsspezialisten die interessanteste DAX-Position. Für Buy-and-Hold ohne M&A-Überzeugung: Organik rechtfertigt Bewertung, aber nicht die Positionsgröße.</p>
+<p>Peer-Vergleich: **Deutsche Bank (DBK.DE)** — größer, diversifizierter, Forward PE ~8x (öffentlich verfügbar, indikativ günstiger), aber komplexeres Risikoprofil. **ING Groep (INGA.AS)** — stärker digitalisiert, höhere ROE ~14%, P/B ~1,3x — Peer-Multiples nicht vollständig im Datensatz verfügbar.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

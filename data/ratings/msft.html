@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MSFT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MSFT</h1>
+      <h2>Microsoft Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$3095B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-43.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$416.67</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">21.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$318.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">68.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">87.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">34.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$55–$65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$20–$22</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$15–$17</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">20%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Microsoft ist kein Wachstums-Optionsschein mehr — es ist eine reife Plattform, die 46% Operating Margin auf $318 Mrd. Revenue generiert und für Anleger dennoch schlechter performt als der NASDAQ-100 (-29% RS 6 Monate). Der Kern der These: Azure-Wachstum (~29% YoY) muss sich auf 32-35% beschleunigen, damit die $3,1 Billionen-Bewertung fundamental gerechtfertigt bleibt. Was der Markt eingepreist hat: permanente AI-Infrastruktur-Dominanz via OpenAI-Partnerschaft, Azure-Copilot-Monetarisierung und strukturelle Unternehmens-Software-Abhängigkeit. Was der Markt möglicherweise zu optimistisch sieht: Copilot-Adoption-Raten bleiben hinter frühen Forecasts zurück, Google Workspace + AWS Bedrock gewinnen Enterprise-Budget-Anteile, und ein Forward-PE von 21,5x bei 18% Revenue-Wachstum lässt kaum Bewertungspuffer. RS-Score -43 vs. QQQ signalisiert: Institutionelle verkaufen die AI-Narrative-Prämie ab.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Azure Cloud (Intelligent Cloud ~$125 Mrd. TTM): primärer Wachstumstreiber mit ~29% YoY; AI-Workloads (Copilot, OpenAI-APIs) beginnen beizutragen — noch <5% des Segment-Revenue</li>
+<li>Microsoft 365 / Productivity Cloud (~$82 Mrd.): hochmargige, recurring-Revenue-Basis; Copilot-Upsell der entscheidende Hebel der nächsten 3 Jahre</li>
+<li>Dynamics / Power Platform: Enterprise-ERP/CRM mit signifikantem SAP/Salesforce-Substitutionspotenzial</li>
+<li>Gaming / Xbox / Activision-Blizzard: Post-Merger-Integration, geringer als erwarteter Margenhebel; nicht Kern der Investitionsthese</li>
+<li>Operating Leverage: 46% Op Margin ist strukturell — SCale-Effekte im Cloud-Segment überwiegen AI-Capex</li>
+<li>D/E 30,3: moderate Verschuldung für dieses Cash-Profil; FCF $37 Mrd. deckt Dividende + Buybacks komfortabel</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Azure re-beschleunigt auf 35-38% Wachstum, getrieben durch Copilot Enterprise-Rollout (je 30$/Nutzer/Monat) und KI-Workload-Migration von On-Premise. Operativer Hebel erhöht FCF auf $55-65 Mrd. FY27. FY27-EPS-Annahme: ~$23-25 (Basis: Revenue $420 Mrd. × 46% Op Margin × 75% Net Income Conversion ÷ 7,55 Mrd. Shares). Multiple-Annahme: 24x Forward auf $24 EPS = **$552–$600**. Annahme, kein Konsens. Eintrittswahrscheinlichkeit: 30%.</p>
+<h3>4. BASE CASE</h3>
+<p>Azure bleibt bei 25-29% Wachstum, Copilot-Umsatz nimmt graduell zu, keine dramatische Margenausweitung. FY27-EPS-Annahme: ~$20-22 (Revenue $380 Mrd., Margen stabil). Multiple: 22x auf $21 EPS = **$440–$484**. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Azure-Wachstum verlangsamt auf <15% durch Google-/AWS-Gewinnmarkt-Share im Enterprise-Segment und AI-Capex-Gegenwind auf FCF. EPS unter Druck: FY27-EPS-Annahme ~$15-17 (Revenue-Wachstum <10%, Margenkompressions 2-3 Pkt.). Multiple: 17x auf $16 EPS = **$255–$289**.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: diversifiziert — kein Einzelkunde >5%, auf Datenbasis nicht bezifferbar</li>
+<li>Geopolitik / Exportkontrollen: Azure China-Geschäft eingeschränkt, kein wesentliches Risiko</li>
+<li>Lieferketten: Cloud-Hardware-Abhängigkeit von NVIDIA/TSMC; Alternativ-Sourcing begrenzt</li>
+<li>Verwässerung: SBC erheblich (~$10 Mrd./Jahr), jedoch durch Buybacks kompensiert; Aktienanzahl stagniert</li>
+<li>Regulierung: EU Digital Markets Act, DOJ-Verfahren zu GitHub/Teams aktiv — moderates Risiko</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit: 20%.</p>
+<p>**Summe: 30% + 50% + 20% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,30 × 576 + 0,50 × 462 + 0,20 × 272 = 172,8 + 231,0 + 54,4 = **$458,20** — implizites Upside vs. aktuellem Kurs $416,67: **+9,9%**. Liegt knapp unter der 10%-Asymmetrie-Schwelle. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 34% ist strukturell robust, nicht zyklisch — SaaS-Plattform-Charakteristik. Gross Margin 68,3% und Operating Margin 46,3% bestätigen defensiven Charakter. FCF $37 Mrd. auf $3,1 Billionen Marktkapitalisierung ergibt FCF-Yield von 1,2% — kaum attraktiv für ein Qualitätsinvestment. D/E 30,3 ist bei diesem Cash-Profil unproblematisch. Bilanzqualität: sehr hoch, ~$80 Mrd. liquide Mittel. Burggraben: strukturell belastbar via Cloud-Lock-in (Azure + M365), hohe Switching Costs in Enterprise, OpenAI-Exklusivität. Schwachpunkt: kein erkennbarer fundamentaler Katalysator, der die AI-Capex-Aufwendungen kurzfristig monetarisiert.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 21,5x bei 18% Revenue-Wachstum — fair, aber keine Unterbewertung. Normalisierter FCF-Yield 1,2% ist für eine Anleihe attraktiv, für eine Aktie bei diesem Risikoprofil grenzwertig.</p>
+<p>Rückrechnung: Was preist der Kurs $416,67 ein? Revenue $318 Mrd. × 15% Wachstum p.a. 5 Jahre = ~$640 Mrd. FY30-Revenue; Op Margin 45% = $288 Mrd. Op Income; nach Steuer ~$245 Mrd.; bei 7,3 Mrd. Shares ≈ EPS $33,50. Diskontiert mit 10% über 5 Jahre: PV Terminal Value bei 22x Trailing = ~$416. Ergebnis: Der Kurs ist mit 15% Revenue-Wachstum bei Margenkontinuität fair bewertet — ambitioniert, nicht günstig. Analyst-Konsensziel $560,95 als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Institutionelle Positionierung: MSFT ist Pflichtposition in Fast-Money- und Long-Only-Technologiefonds — Untergewichtung ist aktive Alpha-Wette. Der RS-Score -43 vs. QQQ deutet auf aktive Reduzierung hin, nicht auf Verkaufsdruck aus Fundamentalgründen. Short Float: auf Datenbasis nicht verfügbar. Hypothese, nicht datenbasiert: Institutionelle rotieren in "reinere" AI-Plays (NVDA, AMZN). Enttäuschungsrisiko: Azure-Quartalsbericht mit Wachstum <25% könnte 10-15% Gap auslösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $411,74 (letzte Datenbasis) unter SMA200 ($453,99) und SMA20 ($422,05), knapp über SMA50 ($408,60). Trendstruktur bearish: 6-Monats-RS -29,18%, 50T-RS -11,63%. SMA200 bei $454 wirkt als massiver Widerstand. Warnsignal: Verlust von $408 (SMA50) würde tiefere Struktur Richtung $390-356 öffnen. Erholungs-Signal: Wochenschluss über $430 mit Volumen. Momentum nicht fundamental gestützt — rein technisch reaktiv auf AI-Capex-Bedenken.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($600–$800):** Azure erreicht 35%+ Wachstum sustained, Copilot monetarisiert auf $20 Mrd. ARR, FCF $80 Mrd. FY29. Multiple 25x auf $32 EPS = $800. Entscheidende Variable: AI-Capex-Rentabilität evident in 2027.</p>
+<p>**Base Case ($380–$520):** Stabiles 15-18% Wachstum, Margins halten. EPS $26-28 FY29 × 19x = $494-$532. Multiple-Kompression auf reiferes Wachstumsprofil. Entscheidende Variable: Azure-Marktanteile vs. AWS/GCP.</p>
+<p>**Bear Case ($220–$320):** Regulierung zerschneidet Plattform-Bundling (Teams/Office), Azure-Wachstum <10%, Bewertungskollaps. EPS $18 × 14x = $252. Entscheidende Variable: DOJ/EU-Regulierungsergebnis.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>MSFT ist ein Quality-Compounder mit klarer Struktur aber ohne kurzfristige Asymmetrie. Die eigenen Szenarien zeigen einen Erwartungswert von +9,9% — knapp unterhalb der 10%-Asymmetrie-Schwelle. Kein High-Conviction-Setup. Für Buy-and-Hold-Investoren mit 3-5 Jahren Horizont nach wie vor erste Wahl im Tech-Sektor — nicht für kurzfristigen Trade.</p>
+<p>Peers: **Alphabet (GOOGL)** — Cloud + AI, Forward PE ~19x (Peer-Multiples basieren auf öffentlichen Datenpunkten), günstigere relative Bewertung mit vergleichbarem AI-Cloud-Profil. **Amazon (AMZN)** — AWS dominanter bei Enterprise AI-Workloads, kein direkter PE-Vergleich (AWS-Segment-PE ~18x implizit, Peer-Multiples nicht im Datensatz — relative Bewertung indikativ).</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

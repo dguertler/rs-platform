@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SY1 — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SY1</h1>
+      <h2>Symrise AG                    I</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Basic Materials</span></div>
+        <div class="mi">Industrie: <span>Specialty Chemicals</span></div>
+        <div class="mi">MCap: <span>$11B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">16.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$75.24</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">37.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">164.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">14-1</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">10-1</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1,75-2,25</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 2026-06-08 (€75,24) liegt vor der jüngsten Kursbewegung. Aktueller Kurs ca. €81,22 — Abweichung ~8%. Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Konfidenz der Bewertungsaussagen reduziert. Alle Multiples wurden auf Basis €81,22 angepasst.</p>
+<p>Symrise ist ein Aroma- und Duftstoffhersteller (Flavor & Fragrance) im globalen Oligopol mit Givaudan und IFF/Firmenich. Der strukturelle Kern: Die F&F-Branche ist ein stilles Burggraben-Geschäft — Kunden ersetzen selten Lieferanten, da Rezepturen patentiert und eingebaut sind. Was den Kursdruck auf €75 erklärt: Revenue -2,4% YoY, Operating Margin 8,8% weit unter dem historischen ~15% EBITDA-Niveau — Input-Kosteninflation (Citral, Naturextrakte) trifft ein hochmargiges Geschäftsmodell. Trailing PE 42x vs. Forward PE ~19,1x (bei €81) signalisiert: Der Markt preist eine Margin-Erholung ein. Was übersehen wird: Der Zeitplan für diese Erholung ist unsicher, und das aktuelle Kursniveau von €81 nach dem Gap impliziert bereits eingepreiste Erholung — der Erwartungswert ist auf diesem Niveau negativ.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Flavors (~45% Revenue): Aroma-Verbindungen für Lebensmittel, Getränke, Nutrition; hohe Kundenbindung durch Rezeptur-IP</li>
+<li>Fragrance (~55% Revenue): Parfüm-Rohstoffe, Ingredient-Branding ("Iso E Super", Ambroxan) und kosmetische Aktivstoffe</li>
+<li>Pet Nutrition (Diana Animal Nutrition): Wachstumssegment; Heimtierfutter-Boom strukturell intakt</li>
+<li>Geografische Diversifikation: Europa ~40%, Asien ~25%, Amerika ~35% — keine Einzelregionen-Abhängigkeit</li>
+<li>Preissetzungsmacht real: nachweisbar durch historische Weitergabe von Input-Kostensteigerungen über 12-18 Monate Verzögerung</li>
+<li>D/E 70,3: erhöht durch Akquisitionen (Diana, ADF/IDF), nicht strukturell gefährlich bei stabilen Cashflows</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Input-Kosten normalisieren, Preiserhöhungen der letzten 18 Monate schlagen voll durch. Op Margin erholt auf historisch 14-15% EBIT. FY27-EPS-Annahme: ~€5,00 (Revenue €5,2 Mrd. × 14,5% EBIT × 70% Net-Conversion ÷ 140 Mio. Shares). Multiple: 22x auf €5 EPS = **€110**. Annahme, kein Konsens. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Langsame Margenerholung auf 10-12% EBIT, Revenue +2-3% p.a. FY27-EPS: ~€3,50. Multiple: 20x auf €3,50 = **€70**. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Anhaltender Kostendruck, IFF/Givaudan gewinnen Marktanteile, China-Konsum strukturell schwach. Margin bleibt bei 7-9% EBIT, Revenue stagniert. FY27-EPS: ~€1,75-2,25. Multiple: 14x auf €2 = **€21–€28**.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: breite Kundenbasis, keine Einzelkunde >5% — auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik / China-Exposure: ~15-20% Revenue Asien-Pazifik, moderates China-Risiko</li>
+<li>Lieferketten: Naturextrakt-Sourcing aus teils instabilen Regionen (Vetiver Haiti), Single-Source-Risiken bei Spezialverbindungen</li>
+<li>Verwässerung: Aktienanzahl stabil; SBC nicht im Datensatz</li>
+<li>Regulierung: REACH (EU Chemikalienrecht), Nachhaltigkeitsauflagen — operativ managebar</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert (bei €81,22):** EV = 0,25 × 110 + 0,45 × 70 + 0,30 × 24,5 = 27,5 + 31,5 + 7,35 = **€66,35** — implizites Downside vs. €81,22: **–18,3%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. High-Conviction-Framing ist unzulässig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Trailing PE 42x durch Tief-Margen-Phase verzerrt — Forward PE ~19,1x (bei €81) als Basis. Gross Margin 37,6% strukturell solide. Anomalie: Net Margin 5,1% < Op Margin 8,8% — Zinslast (D/E 70,3) und Steueraufwand erklären den Spread, plausibel aber aus Daten nicht abschließend auflösbar. Anomalie-verzerrte TTM-Kennzahlen (Op Margin, ROE 6,5%) nicht für Normalbewertung verwenden. FCF €229 Mio. / MCap ~€11,4 Mrd. = 2,0% FCF-Yield. Burggraben: Rezeptur-IP und Kunden-Lock-in real, aber kein Monopol-Schutz.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE ~19,1x bei €81,22 — für ein F&F-Franchise fair, wenn Margenerholung eintritt. Normalisiertes FCF-Modell: Bei historischer FCF-Marge ~10% auf €5 Mrd. Revenue = €500 Mio. FCF × 22x = €11,0 Mrd. MCap = ~€78/Aktie. Aktuell €81: fair bis leicht überstreckt.</p>
+<p>Rückrechnung: Was preist €81 ein? Revenue €4,93 Mrd. × 13% EBIT × 70% Net × 1/140 Mio. Shares ≈ EPS €3,20 × 25x = €80 — der Markt nimmt Margenerholung auf 13% EBIT vorweg. Ambitioniert als 12-Monats-Call, plausibel als 3-Jahres-Ziel. Analyst-Konsensziel €92,06 — als Orientierungspunkt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 16,6 — moderates Momentum, keine institutionelle Euphorie. Short Float nicht im Datensatz. Hypothese, nicht datenbasiert: Quality-Investoren halten Position auf Normalisierungs-Zeitraum. Enttäuschungsrisiko: Q-Ergebnis mit Op Margin <9% würde Erholungsthese verschieben.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs €81,22 über SMA20 €77,40, SMA50 €74,85, SMA200 €73,23 — nach Gap bullische Trendstruktur. Momentum 6M +16,5%, 12M -22,9%: Erholung ist frisch. Warnsignal: Schließen des Gaps auf €75-76 würde Breakout invalidieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case (€110–€140):** Vollständige Margenerholung ~15% EBIT, Pet-Nutrition +8% p.a. EPS €6-7 × 22x = €132-154. Entscheidende Variable: Timing der Input-Kosten-Normalisierung.</p>
+<p>**Base Case (€70–€90):** Partielle Erholung ~12% EBIT, Revenue +3% p.a. EPS €4-5 × 18x = €72-90. Entscheidende Variable: Wettbewerbsintensität vs. Givaudan/IFF.</p>
+<p>**Bear Case (€25–€45):** Dauerhafte Margenkompression, Volumenverlust. EPS €1,5-2,5 × 14x = €21-35. Entscheidende Variable: China-Konsumtrend.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Symrise ist ein Quality-Compounder in einem Temporärtief — strukturell attraktives Geschäftsmodell, auf aktuellem Kursniveau €81 jedoch ohne ausreichende Sicherheitsmarge. EV -18,3% von hier. Für Buy-and-Hold-Investoren mit 3-5 Jahren Horizont und Einstieg bei €68-74 (SMA50-Zone) ein solides Qualitätsinvestment. Zu aktuellen Kursen kein asymmetrisches Setup.</p>
+<p>Peer-Vergleich: **Givaudan (GIVN.SW)** — Branchenführer, höhere normalisierte Margen, Forward PE ~25-28x (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). **IFF (IFF)** — nach Merger-Integration schwächere Bilanz, weniger attraktiv als SY1 auf Qualitätsbasis.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
