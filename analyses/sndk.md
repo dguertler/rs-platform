@@ -1,6 +1,6 @@
 # SNDK — KI-Aktienbewertung
 
-**Sandisk Corporation** · Technology · 02.06.2026 · Signal: GWS Breakout 3/3
+**Sandisk Corporation** · Technology · 10.06.2026 · Signal: GWS Breakout 3/3
 
 | Kennzahl | Wert |
 |---|---|

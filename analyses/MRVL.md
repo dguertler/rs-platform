@@ -1,23 +1,5 @@
 # MRVL — KI-Aktienbewertung
 
-**Marvell Technology, Inc.** · Technology · 10.06.2026 · Signal: Momentum
-
-| Kennzahl | Wert |
-|---|---|
-| Kurs | 263.47 |
-| Market Cap | $230.48 Mrd. |
-| Forward PE | 42.68 |
-| Revenue (TTM) | $8.72 Mrd. |
-| Gross Margin | 51.5% |
-| ROE | 16.0% |
-| RS-Score | 467.6 |
-
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
-
----
-
-# MRVL — KI-Aktienbewertung
-
 **Marvell Technology, Inc.** · Technology · Semiconductors · 03.06.2026 · Signal: Top 5 NASDAQ-100 (#4)
 
 | Kennzahl | Wert |
@@ -119,17 +101,3 @@ Direkte Peers: **Broadcom (AVGO)** — reineres Netzwerk-Semiconductor-Exposure 
 - Wachstum: 4/5
 - Bewertung: 2/5 (vorläufig, Datenstand)
 - Katalysator: 4/5
-
-
----
-
-| Rating | Score |
-|---|---|
-| Qualität | 3/5 |
-| Wachstum | 4/5 |
-| Bewertung | 2/5 |
-| Katalysator | 4/5 |
-
-**Verdict: HOLD (65/100)**
-
-*Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
