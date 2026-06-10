@@ -1,5 +1,5 @@
 """
-Marken- und Design-System für die AI-Alpha-Selections Instagram-Grafiken.
+Marken- und Design-System für die AI-Alpha-Selection-Instagram-Grafiken.
 Zentrale Stelle für Farben, Fonts, Canvas-Größen und Layout-Konstanten,
 damit Carousel (4:5) und Reel (9:16) konsistent aussehen.
 """

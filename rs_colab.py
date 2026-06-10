@@ -373,6 +373,21 @@ except Exception as _e:
     print(f"NDX-Download fehlgeschlagen: {_e}")
     ndx_ohlcv = []
 
+# ── EUR/USD-Zeitreihe für exakte EUR-Renditen (Instagram-Slides) ─────────────
+# EURUSD=X = USD je EUR. instagram/store.py rechnet damit USD-Kursrenditen in
+# echte EUR-Renditen um: ret_eur = (P1/P0) * (fx0/fx1) - 1.
+try:
+    fx_raw = yf.download("EURUSD=X", period="2y", auto_adjust=True, progress=False)
+    if isinstance(fx_raw.columns, pd.MultiIndex):
+        fx_raw.columns = fx_raw.columns.get_level_values(0)
+    fx_close = fx_raw["Close"].dropna()
+    eurusd_ohlcv = [{"d": d.strftime("%Y-%m-%d"), "c": round(float(v), 4)}
+                    for d, v in fx_close.items()]
+    print(f"EUR/USD (EURUSD=X): {len(eurusd_ohlcv)} Tageswerte")
+except Exception as _e:
+    print(f"EUR/USD-Download fehlgeschlagen: {_e}")
+    eurusd_ohlcv = []
+
 output = {
     "timestamp":         datetime.now().strftime("%Y-%m-%d %H:%M"),
     "benchmark":         "QQQ",
@@ -383,6 +398,7 @@ output = {
     "benchmark_ohlcv_w": benchmark_ohlcv_w,
     "benchmark_ohlcv":   benchmark_ohlcv_d,
     "ndx_ohlcv":         ndx_ohlcv,
+    "eurusd_ohlcv":      eurusd_ohlcv,
 }
 
 with open("rs_full.json", "w") as f:

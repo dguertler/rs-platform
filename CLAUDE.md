@@ -3,8 +3,23 @@
 ## Git-Regeln
 
 - Alle Änderungen direkt auf `master` pushen (kein Feature-Branch, kein PR, außer explizit gewünscht)
+- **Ausnahme Cloud-/Web-Sessions:** Gibt die Session-Umgebung einen Arbeits-Branch
+  vor (z. B. `claude/...`), gilt dieser Branch — nicht eigenmächtig auf `master` pushen
 - **Bei jedem Commit den Git-Hash im Chat ausgeben**, z.B.: `[a3f92c1] Commit-Nachricht`
 - Commit-Messages auf Deutsch oder Englisch, klar und beschreibend
+
+## Doku-Pflege-Regeln (gilt für ALLE MD-Dateien im Repo)
+
+- Neue Vorgaben des Nutzers sofort in der zuständigen MD-Datei festhalten —
+  dabei die veraltete Aussage **ersetzen**, nicht als neue „Runde"/Notiz anhängen
+- Jede Regel lebt an genau **einer** Stelle (Single Source of Truth):
+  - Analyse-Prompt → `analyses/PROMPT.md` (keine Kopie im Code)
+  - Instagram-Workflow & -Regeln → `instagram/PROMPT.md`
+  - Instagram-Projektstand, Daten-Snapshot, Code-Karte → `instagram/CONTEXT.md`
+- **Keine manuell gepflegten Zähler/Stände** in der Doku (z. B. „X von Y
+  Analysen") — solche Werte bei Bedarf per Skript/grep frisch ermitteln
+- Zahlen in Doku-Snapshots stammen immer aus den JSON-Dateien
+  (`instagram/data/*.json`) — die JSONs sind führend, nie umgekehrt
 
 ## Analyse-Workflow
 
@@ -64,7 +79,14 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 Max. **5 Ticker pro Session** für optimale Kontext-Qualität.
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
-## Instagram-Workflow (@aialphaselections)
+## Instagram-Workflow (AI Alpha Selection)
+
+Markenname: **AI Alpha Selection** (Singular, kein „Selections"). Kein
+@-Handle auf Slides oder in Captions — nur der Markenname. Captions sind
+**Kurz-Captions** (die volle Analyse steht auf den Slides) mit **max. 5
+Hashtags** (Instagram-Limit; optimal 3–5). Nach Änderungen an
+`instagram/render.py`/`theme.py`: `python3 -m instagram.qa_golden` laufen
+lassen (Golden-Image-Regressionstest).
 
 Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 `Instagram KW<NN>` / `Erstelle Instagram-Post`:

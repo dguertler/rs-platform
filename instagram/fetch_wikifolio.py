@@ -73,7 +73,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--symbol", help="z.B. WFAIALPHA")
     ap.add_argument("--url", help="vollständige wikifolio-URL")
-    ap.add_argument("--name", default="AI Alpha Selections")
+    ap.add_argument("--name", default="AI Alpha Selection")
     args = ap.parse_args()
     if not (args.symbol or args.url):
         ap.error("--symbol oder --url angeben")

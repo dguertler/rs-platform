@@ -1,7 +1,10 @@
 # Analyse-Prompt — RS-Platform
 
 Dieser Prompt definiert Struktur, Stil und Regeln für alle Aktienanalysen.
-Er entspricht dem `SYSTEM_PROMPT` in `generate_rating.py`.
+**Diese Datei ist die einzige Quelle (Single Source of Truth)** — in
+`generate_rating.py` existiert keine Kopie mehr. Änderungen an Struktur,
+Stil oder Regeln werden ausschließlich hier gepflegt; veraltete Aussagen
+dabei ersetzen, nicht ergänzen.
 
 ---
 
@@ -87,11 +90,30 @@ Klare Positionierung: Ist das ein Buy-and-Hold-Compounder, ein zyklischer Tradin
 
 Peer-Aussagen zur relativen Bewertung ("oft attraktiver bewertet") nur mit konkreter Zahl, falls Peer-Multiples in den Daten enthalten sind. Andernfalls qualitativ einordnen und kennzeichnen: "Peer-Multiples nicht im Datensatz — relative Bewertung indikativ."
 
-**Rating (Zahl, nicht Sterne):**
+**Rating (Zahl, nicht Sterne) — exakt dieses Format, je eine Zeile:**
 - Qualität: X/5
 - Wachstum: X/5
 - Bewertung: X/5
 - Katalysator: X/5
+
+**Katalysator** bewertet die Stärke und Nachhaltigkeit des fundamentalen
+Auslösers hinter dem Momentum-Signal: Earnings-Beat, Guidance-Anhebung,
+Produktzyklus, Sektorrotation oder Makro-Tailwind.
+5 = starker, nachhaltiger fundamentaler Treiber.
+1 = kein erkennbarer fundamentaler Katalysator — rein technisches Momentum.
+
+---
+
+## VERDICT & SCORE (automatisch — NICHT selbst schreiben)
+`write_rating()` in `generate_rating.py` berechnet aus den vier Ratings
+automatisch Score und Verdict und hängt sie als Tabelle + Zeile
+`**Verdict: BUY (70/100)**` an die Markdown-Datei an:
+- Score = (Qualität + Wachstum + Bewertung + Katalysator) / 20 × 100
+- Verdict: **BUY** ≥ 70 · **HOLD** ≥ 50 · **WATCH** < 50
+
+Deshalb: Die vier Rating-Zeilen sind **Pflicht im exakten Format oben**
+(Parser-Grundlage für Frontend und Instagram-Slides). Keine eigene
+Verdict-/Score-Zeile in den Analysetext schreiben — sie wird angehängt.
 
 ---
 

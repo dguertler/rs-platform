@@ -30,9 +30,25 @@ def _load(path):
         return json.load(f)
 
 
+# Kurswährung je Quelle: NASDAQ-100/S&P-500-Kurse sind USD, DAX-Kurse EUR.
+# custom_ohlcv.json wird per Konvention in EUR gepflegt (siehe CONTEXT.md).
+_FILE_CCY = {"rs_full.json": "USD", "rs_sp500.json": "USD", "rs_dax.json": "EUR"}
+
+
+def load_fx():
+    """EUR/USD-Tagesserie (USD je EUR) aus rs_full.json -> [(datum, kurs), ...].
+    Wird von rs_colab.py (Workflow update_rs.yml) täglich als `eurusd_ohlcv`
+    mitgeladen. Leere Liste, falls (noch) nicht vorhanden."""
+    path = os.path.join(DATA, "rs_full.json")
+    if not os.path.exists(path):
+        return []
+    d = _load(path)
+    return [(c["d"], c["c"]) for c in d.get("eurusd_ohlcv", []) if c.get("c")]
+
+
 def load_universe():
-    """Mischt alle RS-Universen zu ticker -> {ohlcv, ohlcv_w, score, windows}
-    und liefert zusätzlich die Benchmark-Serie (QQQ / NASDAQ-100)."""
+    """Mischt alle RS-Universen zu ticker -> {ohlcv, ohlcv_w, score, windows, ccy}
+    und liefert zusätzlich die Benchmark-Serie (NDX / NASDAQ-100)."""
     universe = {}
     benchmark = None
     for fname in _RS_FILES:
@@ -46,6 +62,7 @@ def load_universe():
                 "ohlcv_w": e.get("ohlcv_w", []),
                 "score": e.get("score"),
                 "windows": e.get("windows", {}),
+                "ccy": _FILE_CCY.get(fname, "USD"),
             }
         # NASDAQ-Benchmark einmalig aus rs_full übernehmen.
         # NDX-Index (exakt) bevorzugen, sonst QQQ-ETF als Fallback.
@@ -62,6 +79,7 @@ def load_universe():
                 "ohlcv_w": e.get("ohlcv_w", []),
                 "score": e.get("score"),
                 "windows": e.get("windows", {}),
+                "ccy": e.get("ccy", "EUR"),
             }
     # Ticker-Aliase: US-ADRs/Handelsnamen → DAX/europäische Kürzel mit EUR-Preisen
     # SIEGY (US OTC/ADR für Siemens Energy) → ENR.DE (DAX, EUR-Preise)
@@ -133,7 +151,7 @@ def load_performance():
         v *= (1 + s / 100.0 * 3)  # grob skaliert auf ~+60 %
         dates.append(d.strftime("%Y-%m-%d"))
         vals.append(round(v, 2))
-    meta = {"name": "AI Alpha Selections", "currency": "EUR", "sample": True}
+    meta = {"name": "AI Alpha Selection", "currency": "EUR", "sample": True}
     return dates, vals, True, meta
 
 

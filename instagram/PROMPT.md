@@ -1,22 +1,27 @@
-# Instagram-Workflow — AI Alpha Selections
+# Instagram-Workflow — AI Alpha Selection
 
 **Diese Datei ist die Anleitung für Claude.** In einer neuen Session genügt es,
 hierauf zu verweisen („Folge instagram/PROMPT.md") und den aktuellen
 wikifolio-Wert (+ ggf. Trades) zu schicken. Claude erzeugt daraus die fertigen
 Slides + Caption in `out/`.
 
-Account: **@aialphaselections** · wikifolio: `wfdg1983go`
-(https://www.wikifolio.com/de/de/w/wfdg1983go)
-Hauptformat **Carousel (4:5)** + **Reel-Frames (9:16)**. Faceless.
+Marke: **AI Alpha Selection** (Singular; Instagram-Handle noch offen — kein
+@-Handle auf Slides oder in Captions, nur der Markenname) ·
+wikifolio: `wfdg1983go` (https://www.wikifolio.com/de/de/w/wfdg1983go)
+Hauptformat **Carousel (4:5)** + **Reel-Frames (9:16)**. Faceless betrieben
+(das Wort „faceless" erscheint nirgends auf Slides/Captions).
 **Es wird nichts automatisch hochgeladen** – der Nutzer prüft `out/` und postet
 manuell.
 
-> 📌 **Single Source of Truth:** ALLE Details, Regeln, Konventionen und
-> Workflow-Entscheidungen werden **ausschließlich hier in den Repo-MD-Dateien**
-> dokumentiert (`instagram/PROMPT.md` + `instagram/CONTEXT.md`). Wenn der Nutzer
-> künftig eine neue Vorgabe macht (Design, Ablauf, Texte, …), hält Claude sie
-> **sofort in diesen MD-Dateien** fest, damit jede neue Session sie automatisch
-> befolgt. Nichts „nur im Chat" merken — immer in die MD schreiben.
+> 📌 **Single Source of Truth & Pflege-Regel:**
+> - **Diese Datei (`PROMPT.md`)** = alle Abläufe, Regeln und Konventionen.
+> - **`CONTEXT.md`** = aktueller Projektstand (Daten-Snapshot, Design-System,
+>   Code-Karte, offene Punkte). Regeln stehen NICHT doppelt dort.
+> - Macht der Nutzer eine neue Vorgabe (Design, Ablauf, Texte, …), wird sie
+>   **sofort** in der zuständigen Datei festgehalten — dabei die veraltete
+>   Aussage **ersetzen statt ergänzen** (keine „Round"-Historie; die Historie
+>   liegt im Git-Log). Nichts „nur im Chat" merken.
+> - Keine manuell gepflegten Zähler („X von Y Analysen") — per grep ermitteln.
 
 ---
 
@@ -35,7 +40,8 @@ Freigabe (eigenes Logo nutzen).
 — im Generator als CTA-Slide + Caption integriert.
 
 → Nie „kauf das Zertifikat", keine ISIN, kein „investiere jetzt". Immer
-„das Musterdepot / das wikifolio".
+„das wikifolio AI Alpha Selection". Das Wort „Musterdepot" wird in Posts
+bewusst NICHT verwendet (es sind reale Käufe); ebenso nicht „Live-Depot".
 
 ---
 
@@ -88,7 +94,9 @@ realisierte Rendite in %).
 
 NASDAQ-Vergleich, Wochen-/Gesamtrendite, Alpha, Wochen-Historie und
 „X von Y Wochen geschlagen" werden **automatisch** aus den gespeicherten Werten
-+ dem QQQ-Benchmark (`data/rs_full.json`) berechnet.
++ dem **^NDX**-Benchmark (`ndx_ohlcv` in `data/rs_full.json`; QQQ nur
+Fallback) berechnet. USD-Kursrenditen werden über die EUR/USD-Serie
+(`eurusd_ohlcv`) in echte EUR-Renditen umgerechnet.
 
 ### Slide-Datum (oben rechts) — Samstag der KW
 Das Datum oben rechts ist **standardmäßig der Samstag der jeweiligen KW**
@@ -107,33 +115,36 @@ Wochen-Samstagsdatum. Der Output-Ordner heißt entsprechend `<DATUM>_KW<NN>`.
 
 ---
 
-## Slide-Reihenfolge (Wochenpost)
+## Slide-Reihenfolge (Wochenpost — VERBINDLICH, entspricht `generate.build_from_store`)
 
-1. **🆕 Dynamic Hook** (Slide 1, visueller Stopper – KEIN Dashboard) — eine
-   dynamische **Schlagzeile** (`--hook`) + 1–2 prominente **Kennzahlen als
-   Beweis** (Gesamtrendite + Alpha). Macht in den ersten 3 Sek. neugierig.
+1. **Dynamic Hook** (visueller Stopper – KEIN Dashboard) — dynamische
+   **Schlagzeile** (`--hook`) + Beweis-Chips (Gesamtrendite + NASDAQ-100 seit
+   Start). Macht in den ersten 3 Sek. neugierig.
 2. **Performance vs. NASDAQ-100** (Eye-Catcher) — Equity-Kurve + Kennzahlen
    unter dem Graph: Gesamtrendite, NASDAQ, Alpha, Trades seit Start,
    Trefferquote, Profitfaktor, Ø Gewinn/Trade, Ø Verlust/Trade
-3. **Wochen-Historie** — wöchentliche Mehrrendite ggü. NASDAQ-100 (grün = besser)
-4. **Stärkste Positionen** (Top-5, mit Kaufdatum + Einstiegskurs)
-5. **🆕 Strategisches „Warum"** (minimalistische Text-Slide, KI-Kontext) —
-   Übergang von den Positionen zu den Einzelaktien. Erklärt kurz, warum das
-   Modell so entschieden hat (Sektor-Rotation / Volatilitäts-Check /
-   Trendbestätigung). Text aus `--why`.
-6. **Aktie der Woche** — rotierend eine Position; Kursverlauf mit Kauf-Signal
-   (blau) + eingearbeiteten weiteren Signalen
-6a. **Trade der Woche** — NUR wenn in der KW ein Verkauf abgeschlossen wurde
-   (`trades.json` -> `closed` mit Verkaufsdatum in der KW). Zeigt den größten
-   realisierten Verkauf der Woche im Chart mit **Kauf grün + Verkauf rot**;
-   Kacheln „Realisierter Gewinn" (realisierte Rendite) + „Verkaufskurs". Das
+   (`*` = inkl. offener Positionen)
+3. **Wochen-Historie** — wöchentliche Mehrrendite ggü. NASDAQ-100 (grün =
+   besser); erscheint erst ab 2+ Wochen Datenbasis (ab KW15)
+4. **Stärkste Positionen** (Top-5 nach Wertzuwachs, mit Kaufdatum + Einstiegskurs)
+5. **Aktie der Woche** — rotiert durch ALLE Positionen; Kursverlauf mit
+   Kauf-Signal + eingearbeiteten weiteren Signalen
+6. **Weitere Positionen** (alle außerhalb der Top-5)
+7. **Newcomer** — bester Kauf der letzten 3 Wochen, NUR wenn nicht in den
+   Top-5 (sonst entfällt die Slide)
+8. **Strategisches „Warum"** (minimalistische Text-Slide, KI-Kontext) — NACH
+   den Positionsslides: erklärt kurz, warum das Modell so entschieden hat
+   (Sektor-Rotation / Volatilitäts-Check / Trendbestätigung). Text aus `--why`.
+9. **Trade der Woche** — ALLE realisierten Verkäufe der KW als je eine eigene
+   Slide, sortiert nach Rendite absteigend (`trades.json` → `closed` mit
+   Verkaufsdatum in der KW). Chart mit **Kauf grün + Verkauf rot**; das
    Chart-Fenster endet kurz nach dem Verkauf.
-7. **Weitere Positionen** (alle außerhalb der Top-5)
-8. **Newcomer** — bestperformende Aktie der letzten 3 Wochen, NUR wenn sie nicht
-   in den Top-5 ist (sonst entfällt die Slide)
-9. **🆕 CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs sind in
+10. **CTA + Engagement-Boost + Risikohinweis** — Bio-Link-Pfad (URLs sind in
    IG-Beiträgen nicht klickbar) + dynamische Interaktions-Frage (`--frage`) +
    Pflicht-Risikohinweis.
+
+**Reihenfolge-Begründung:** Erst das Portfolio zeigen (Positionen + Charts),
+dann erklären WARUM (Rotation/Trades); die Trade-Slides folgen nach dem „Warum".
 
 Rotation der Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`
 (in `holdings.json`). Jede Woche eine andere – auch wenn die Top-5 gleich bleiben.
@@ -173,9 +184,9 @@ des CTR-/Engagement-Upgrades. Render-Funktionen: `slide_hook_dynamic`,
 - **Logik:** spezifisch aus den Trades der Woche generieren, z. B.
   „Hättest du **[Aktie]** bei diesem Preis auch gekauft oder hättest du auf einen
   Rücksetzer gewartet? Schreib's unten rein! 👇"
-- Die **CTA-Slide** verweist strikt auf die **Bio** (Link zum Live-Depot), da
-  URLs im IG-Text nicht klickbar sind: „👉 Den Link zum Live-Depot findest du
-  aktuell in unserer Bio! @aialphaselection".
+- Die **CTA-Slide** verweist strikt auf die **Bio**, da URLs im IG-Text nicht
+  klickbar sind: „Den Link zum wikifolio AI Alpha Selection findest du aktuell
+  in unserer Bio." (kein @-Handle, kein „Live-Depot").
 
 > ⚖️ wikifolio-Regeln bleiben bindend: kein „kauf das Zertifikat", keine ISIN.
 > Der Bio-Link führt auf die **wikifolio-Seite des Depots** (erlaubt).
@@ -257,7 +268,8 @@ Output: `out/instagram/<DATUM>_ANALYSE_<TICKER>/{carousel,reel}/*.png` +
 `caption.txt`. **Kein Auto-Upload** — prüfen und manuell posten.
 
 ### Carousel vs. Reel (zwei getrennte Outputs, ein Lauf)
-- **Carousel (4:5):** die VOLLE Analyse (7 Slides) — zum Speichern/Lesen.
+- **Carousel (4:5):** die VOLLE Analyse (10 Slides, siehe Slide-Reihenfolge
+  unten) — alle Analyseteile stehen auf den Slides, zum Speichern/Lesen.
 - **Reel (9:16):** ein KURZER Teaser (4 Frames): Frage-Hook → Szenarien →
   Das Wichtigste → **Hybrid-CTA** „Die ganze Analyse findest du im
   Karussell-Post auf meinem Profil". Das Reel holt Reichweite und leitet sie
@@ -323,13 +335,17 @@ Analyse vorher nach `analyses/PROMPT.md` neu generieren.
 ### SEO / Algorithmus (in `caption.txt` umgesetzt)
 - **Erste Zeile = Keyword zuerst:** „<Firmenname> (TICKER) — Aktienanalyse:
   <Verdict>" → das indexiert Instagram für die Suche.
-- **Die Caption IST die Analyse** (Text unter den Fotos), kein externer Link:
-  Hook, Geschäftsmodell, Szenarien mit %/Kurszielen, Langfrist, Sterne-Rating,
-  Fazit, Peers — automatisch auf 2.200 Zeichen zugeschnitten.
-- Hashtag-Mix: breit (#aktien #börse) + Ticker (#amd) + Sektor (#technologie) +
-  Branded (#aialphaselection). Pflicht-Disclaimer in jeder Caption.
-- **Saves/Dwell** treiben: Carousel „swipe für alle Szenarien" + Verweis auf
-  Caption. Reels (9:16) zusätzlich für Reichweite.
+- **Kurz-Caption:** Die volle Analyse steht AUF DEN SLIDES — die Caption
+  enthält keinen Analyse-Content, sondern nur SEO-Zeile, Hook-Satz,
+  Save-/Folge-CTA, Pflicht-Disclaimer und Hashtags (`caption_analysis`
+  in `generate.py`).
+- **Hashtags: max. 5 pro Post** (Instagram-Limit seit 2025; lt. Instagram
+  optimal 3–5 hochrelevante Tags als Kontextsignal — Masse bringt nichts):
+  Ticker (#amd) + Kern-Keyword (#aktienanalyse) + Sektor
+  (#technologieaktien) + breit (#investieren) + Brand (#aialphaselection).
+  Hashtags in die Caption, nicht in die Kommentare (sofortige Indexierung).
+- **Saves/Dwell** treiben: Carousel „swipe für alle Szenarien" + Save-CTA.
+  Reels (9:16) zusätzlich für Reichweite.
 
 ### Firmenlogos
 Siehe `instagram/assets/logos/README.md`. Kurz: `TICKER.png` (transparent)
@@ -341,13 +357,11 @@ Brand-/Media-/Newsroom-/Presse-Portal, sonst Investor Relations (z. B.
 (`Host not in allowlist`) → Claude nennt die gefundene Logo-URL, der Nutzer
 lädt die Datei im Chat hoch, Claude legt sie als `<TICKER>.png` ab und committet.
 
-### Caption = die vollständige Analyse (kein externer Link)
-Die Caption (`caption.txt`) ist die **für Instagram aufbereitete Analyse als
-Text unter den Fotos** — KEIN „Link in Bio" auf eine externe Seite. Sie wird auf
-das Instagram-Limit von **2.200 Zeichen** zugeschnitten (Hook, Geschäftsmodell,
-Szenarien mit %/Kurszielen, Langfrist, Sterne-Rating, Fazit, Peers, kurzer
-Disclaimer, Hashtags). Reicht der Platz nicht, kürzt der Generator automatisch
-(weniger Bullets / ohne Langfrist). Die ausführliche Roh-Analyse bleibt in
+### Caption = Kurz-Caption (volle Analyse auf den Slides)
+Die Caption (`caption.txt`) ist bewusst kurz — **alle Analyseteile stehen auf
+den Slides**, nichts wird in die Caption ausgelagert und kein externer Link
+gesetzt. Inhalt: SEO-Zeile (Keyword zuerst) · Hook-Satz · Save-/Folge-CTA ·
+Pflicht-Disclaimer · max. 5 Hashtags. Die ausführliche Roh-Analyse bleibt in
 `analyses/TICKER.md` (Archiv), wird aber NICHT auf Instagram verlinkt.
 
 ## Dritter Post-Typ: EARNINGS-ANALYSE (aus Quartalszahlen)
@@ -521,15 +535,18 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
   **„datengetrieben · unabhängig · systematisiert"** (kein „faceless").
 - **Reel = Slides 1–3 der Earnings-Analyse** (Cover → Beat in Zahlen → Kursreaktion)
   in **9:16 (1080×1920)** + Hybrid-CTA (Slide 4) **ohne Verdict**, ohne „Profil
-  öffnen" (nur Handle + ▲). **Format-Hinweis:** Reel ist absichtlich höher als das
+  öffnen" (nur Markenname „AI Alpha Selection" + ▲ — kein @-Handle).
+  **Format-Hinweis:** Reel ist absichtlich höher als das
   **Carousel (4:5, 1080×1350)** — das ist das Instagram-Reel/Story-Format; der Inhalt
   der wiederverwendeten Slides wird auf dem hohen Canvas automatisch **vertikal
   zentriert** (`dy = (c.H − 1350)//2`), das untere Drittel ist Safe-Zone für die
   Instagram-UI.
 
-**Caption (`caption.txt`):** erste Zeile „<Firma> (TICKER) — Earnings-Analyse
-Q<N>: Beat" (SEO) + Beat-Zahlen + Guidance + These/Szenarien + Disclaimer +
-Hashtags (#earnings #quartalszahlen …). Auf 2.200 Zeichen zugeschnitten.
+**Caption (`caption.txt`):** Kurz-Caption wie beim Analyse-Post — erste Zeile
+„<Firma> (TICKER) — Earnings-Analyse Q<N>: Beat" (SEO) + Beat-Einzeiler
+(EPS-Überraschung · Kurssprung) + Save-/Folge-CTA + Disclaimer + max. 5
+Hashtags (#ticker #earnings #quartalszahlen #aktienanalyse #aialphaselection).
+Alle Zahlen und die Einordnung stehen auf den Slides.
 
 ---
 

@@ -449,9 +449,9 @@ Bei einem Exit von €10M:
 
 ---
 
-## 13. Instagram-Marketing (@aialphaselections)
+## 13. Instagram-Marketing (AI Alpha Selection)
 
-Faceless-Account zur Bewerbung des wikifolios „AI Alpha Selections".
+Faceless-Account zur Bewerbung des wikifolios „AI Alpha Selection".
 Technik & Ablauf: **`instagram/PROMPT.md`** (Generator unter `instagram/`).
 
 - **Phase 1 (jetzt):** Wöchentliches **Carousel (4:5)** aus dem wikifolio-
