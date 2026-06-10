@@ -236,13 +236,15 @@ hier immer in render.py umsetzen und als Konstante/Parameter fixieren.
 - **DejaVu Sans Mono** (Bold) — Zahlen, Kursziele, Prozente, Scores
 - DPI = 150; Größen in *Pixel* (intern zu Punkt: `px * 72 / 150`)
 
-### 12.3 Typografie-Konstanten (nach `MX = 90` in render.py)
+### 12.3 Typografie-Konstanten (nach `MX = 195` in render.py)
 ```python
 TY_H1      = 42   # Slide-Hauptüberschrift
 TY_SUB     = 22   # Subtitle / Kontext-Zeile (MUTED)
 TY_BODY    = 28   # Fließtext (Investment-Case, Szenarien, Fazit usw.)
 TY_BODY_LH = 44   # Zeilenabstand zu TY_BODY
-MX         = 90   # Seitenrand links/rechts in px
+MX         = 195  # Seitenrand links/rechts in px — 18 % der Breite (1080 px)
+                  # NICHT unterschreiten: schützt gegen seitlichen Beschnitt
+                  # im Instagram-Profil-Raster.
 ```
 **Regel:** Alle neuen Fließtext-Slides verwenden `TY_BODY`/`TY_BODY_LH`.
 Alle H1-Überschriften `TY_H1`. Alle Subtitles `TY_SUB` in `T.MUTED`.
@@ -309,7 +311,7 @@ def slide_analysis_NEU(c, a, date_iso):
 
 ### 12.6 Wochenpost-Slides (dieselben Regeln)
 Alle `slide_performance`, `slide_history`, `slide_list`, `slide_featured` etc.
-verwenden denselben `MX=90`, dieselben Farben und dieselbe Footer-Funktion.
+verwenden denselben `MX=195`, dieselben Farben und dieselbe Footer-Funktion.
 Textgröße für Kachel-Zahlen: 34–64 px (je Wichtigkeit), Labels immer `MUTED`.
 Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 
