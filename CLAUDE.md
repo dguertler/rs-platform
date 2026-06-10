@@ -88,6 +88,16 @@ Hashtags** (Instagram-Limit; optimal 3–5). Nach Änderungen an
 `instagram/render.py`/`theme.py`: `python3 -m instagram.qa_golden` laufen
 lassen (Golden-Image-Regressionstest).
 
+### Ausgabe-Pflichten nach Instagram-Generierung
+
+Nach jeder Generierung von Instagram-Slides (Analyse-Post, Earnings-Post,
+Wochenpost, Reel) IMMER:
+1. **Alle Slides einzeln anzeigen** (jeden PNG via SendUserFile ausgeben —
+   kein Überspringen, keine Auswahl)
+2. **ZIP-Datei ausgeben** (`carousel_TICKER.zip` bzw. entsprechendes Archiv)
+3. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
+   und Rating-Dateien committen, Slides sind gitignored
+
 Wenn der Nutzer einen wikifolio-Wochenreport einfügt oder schreibt
 `Instagram KW<NN>` / `Erstelle Instagram-Post`:
 
