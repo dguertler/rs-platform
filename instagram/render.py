@@ -1209,25 +1209,23 @@ def slide_analysis_fazit(c, a, date_iso):
             px += w + 18
         y = yy + 56
 
-    # Verweis auf vollständige Analyse (Caption)
+    # Folgen-CTA
     cta_top = max(y + 40, c.H - 360)
     c.tile(MX, cta_top, c.W - 2 * MX, 120, color=T.PANEL)
     c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
-    c.text(MX + 40, cta_top + 26, "Weitere Details zur Analyse in der Caption", 26,
+    c.text(MX + 40, cta_top + 28, "Folge für wöchentliche Profi-Analysen", 28,
            color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 70, "Tippe auf 'mehr'  ·  folge für wöchentliche Analysen",
+    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · faceless",
            TY_SUB, color=T.MUTED)
-    # nach unten zeigende Dreiecke (robust gezeichnet statt Glyph)
-    for i in range(3):
-        c.ax.scatter(c.W - MX - 60 - i * 34, c.y(cta_top + 60), s=150,
-                     marker="v", color=T.BLUE, edgecolor="none", zorder=12)
     analysis_footer(c)
 
 
 # 6b) BEWERTUNG — „KGV-Illusion" (Abschnitt 7), ohne aktuellen Kurs
 def slide_analysis_valuation(c, a, date_iso):
+    import re as _re
     analysis_header(c, a, date_iso)
-    pe = A.pe_multiples(a["sections"].get(7, ""))
+    sec7_raw = a["sections"].get(7, "")
+    pe = A.pe_multiples(sec7_raw)
     illusion = (pe["trailing"] and pe["forward"]
                 and _num(pe["trailing"]) > _num(pe["forward"]) * 1.8)
     title = "Bewertung: die KGV-Illusion" if illusion else "Bewertung"
@@ -1255,11 +1253,25 @@ def slide_analysis_valuation(c, a, date_iso):
             c.text(x2 + 34, y + 56, pe["forward"] + "x", 50, color=T.GREEN,
                    weight="bold", font="mono")
             c.text(x2 + 34, y + 118, "die relevante Kennzahl", TY_SUB, color=T.MUTED)
-        y += ch + 40
+        y += ch + 26
 
-    txt = A.clean_for_slide(a["sections"].get(7, ""))
+    # Analyst-Konsensus-Tile (wenn vorhanden)
+    m_ac = _re.search(
+        r'Analyst-?Konsens(?:us|ziel)\s*\$\s*([0-9]+(?:[,.][0-9]+)?)', sec7_raw)
+    if m_ac:
+        ac_h = 120
+        c.tile(MX, y, c.W - 2 * MX, ac_h, color=T.PANEL)
+        c.tile(MX, y, 10, ac_h, color=T.AMBER, radius=5)
+        c.text(MX + 34, y + 22, "ANALYSTEN-KONSENSUS", 24, color=T.AMBER, weight="bold")
+        c.text(MX + 34, y + 60, "Ø Kursziel: " + m_ac.group(1) + " $", 38,
+               color=T.AMBER, weight="bold", font="mono")
+        c.text(c.W - MX - 34, y + 60, "Coverage hinkt der Rally hinterher",
+               TY_SUB, color=T.MUTED, ha="right")
+        y += ac_h + 26
+
+    txt = A.clean_for_slide(sec7_raw)
     _draw_paragraph(c, MX, y, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
-                    line_h=TY_BODY_LH, max_lines=15)
+                    line_h=TY_BODY_LH, max_lines=11)
     analysis_footer(c)
 
 
@@ -1282,10 +1294,21 @@ def slide_analysis_risk(c, a, date_iso):
                ha="right", font="mono")
         y += box_h + 36
 
+    # HBM-Lieferkettenrisiko (aus Geschäftsmodell-Section, falls vorhanden)
+    if "HBM" in a["sections"].get(2, ""):
+        hbm_h = 24 + TY_BODY + 24
+        c.tile(MX, y, c.W - 2 * MX, hbm_h, color=T.PANEL)
+        c.tile(MX, y, 10, hbm_h, color=T.AMBER, radius=5)
+        c.text(MX + 34, y + 24, "HBM-LIEFERKETTENRISIKO", TY_BODY,
+               color=T.AMBER, weight="bold")
+        c.text(c.W - MX - 34, y + 24, "SK Hynix / Samsung", TY_BODY,
+               color=T.MUTED, weight="bold", ha="right", font="mono")
+        y += hbm_h + 20
+
     body = A.clean_for_slide(a["sections"].get(8, "")) or \
         A.clean_for_slide(a["scenarios"]["bear"]["summary"])
     _draw_paragraph(c, MX, y, body, TY_BODY, c.W - 2 * MX, color=T.TEXT,
-                    line_h=TY_BODY_LH, max_lines=16)
+                    line_h=TY_BODY_LH, max_lines=14)
     analysis_footer(c)
 
 
@@ -1329,12 +1352,39 @@ def slide_analysis_cta(c, a, date_iso):
 
 # 6b) FUNDAMENTALE QUALITÄT — Abschnitt 6 (Bilanz, Margen, Kapitalrendite)
 def slide_analysis_fundamentals(c, a, date_iso):
+    import re as _re
     analysis_header(c, a, date_iso)
     c.text(MX, 184, "Fundamentale Qualität", 42, weight="bold")
     c.text(MX, 240, "Bilanz, Margen, Kapitalrendite", TY_SUB, color=T.MUTED)
-    txt = A.clean_for_slide(a["sections"].get(6, ""))
-    _draw_paragraph(c, MX, 304, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
-                    line_h=TY_BODY_LH, max_lines=20)
+
+    sec6_raw = a["sections"].get(6, "")
+    m_de  = _re.search(r'D/E[^0-9]*([0-9]+(?:[,.][0-9]+)?)', sec6_raw)
+    m_fcf = _re.search(r'FCF\s*\$\s*([0-9]+[,.][0-9]+)\s*(Mrd|Mio)', sec6_raw)
+
+    y = 304
+    if m_de or m_fcf:
+        gap, cw, ch = 26, (c.W - 2 * MX - 26) // 2, 140
+        if m_de:
+            c.tile(MX, y, cw, ch, color=T.PANEL)
+            c.tile(MX, y, 10, ch, color=T.GREEN, radius=5)
+            c.text(MX + 34, y + 22, "D/E-VERHÄLTNIS", 24, color=T.GREEN, weight="bold")
+            c.text(MX + 34, y + 56, m_de.group(1), 50, color=T.GREEN,
+                   weight="bold", font="mono")
+            c.text(MX + 34, y + 116, "konservative Verschuldung", TY_SUB, color=T.MUTED)
+        if m_fcf:
+            x2 = MX + cw + gap
+            c.tile(x2, y, cw, ch, color=T.PANEL)
+            c.tile(x2, y, 10, ch, color=T.BLUE, radius=5)
+            c.text(x2 + 34, y + 22, "FREE CASHFLOW", 24, color=T.BLUE, weight="bold")
+            c.text(x2 + 34, y + 56,
+                   m_fcf.group(1) + " " + m_fcf.group(2) + ". $",
+                   42, color=T.BLUE, weight="bold", font="mono")
+            c.text(x2 + 34, y + 116, "starke Mittelgenerierung", TY_SUB, color=T.MUTED)
+        y += ch + 32
+
+    txt = A.clean_for_slide(sec6_raw)
+    _draw_paragraph(c, MX, y, txt, TY_BODY, c.W - 2 * MX, color=T.TEXT,
+                    line_h=TY_BODY_LH, max_lines=14)
     analysis_footer(c)
 
 

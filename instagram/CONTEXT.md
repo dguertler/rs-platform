@@ -353,12 +353,14 @@ Reihenfolge:
 **Kürzungsreihenfolge** bei Überschreitung des 2.200-Zeichen-Limits (Python `len()`):
 Bullets 4→3→2→0, Cases-Zusammenfassung, Langfrist — "Weitere Details" bleibt IMMER drin.
 
-**Hashtag-Strategie** (25–30 Tags):
-- Basis: `#aktien #aktienanalyse #aktienmarkt #börse #boersewissen #geldanlage #finanzbildung #finanzwissen #wachstumsaktien #investing #stockanalysis #stockmarket #stockpicking #momentum`
-- Ticker: `#{ticker.lower()}`
-- Sektor Technology: `#halbleiter #semiconductor #chips #technologieaktien #techaktien`
-- Themen-Tags (aus Bullets erkannt): GPU/KI → `#ki #künstlicheintelligenz #aistock #aiinvesting #datacenter #gpu #aiaccelerator #kisemiconductor`; EPYC/CPU → `#cpu #serverchips`; TSMC/Fabless → `#tsmc #fabless`
-- Brand: `#aialphaselection`
+**Hashtag-Strategie** (22–25 zielgerichtete Tags, Round 11):
+- Basis (12): `#aktien #aktienanalyse #aktienmarkt #börse #boersewissen #geldanlage #finanzbildung #vermögensaufbau #wachstumsaktien #börsentipps #investing #stockanalysis`
+- Ticker + Stock-Tag (2): `#{tic} #{tic}stock` (z.B. #amd + #amdstock)
+- Sektor Technology (5): `#halbleiter #semiconductor #chips #technologieaktien #techaktien`
+- Themen-Tags (aus Bullets erkannt): GPU/KI → `#ki #aistock #aiinvesting #datacenter #gpu #aiinfrastructure`; EPYC/CPU → `#cpu #serverchips`
+- Peer-Tags (max 2, aus a["peers"]): automatisch aus der Analyse (z.B. #nvda #avgo)
+- Brand (1): `#aialphaselection`
+- Entfernt (zu unspezifisch/falsch): `#kisemiconductor #fabless #stockpicking #momentum #aiaccelerator`
 
 **ZIP-Download**: `build_analysis` erstellt nach dem Rendern automatisch `carousel_{TICKER}.zip`
 mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeben und im Output angezeigt.
@@ -401,14 +403,29 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
   (avail=890px: c.H-160 - top0=300). Kann 3 Slides erzeugen (szenarien_erklaert_1/2/3)
 - _draw_cases_blocks bricht NICHT ab — die Split-Logik in generate.py ist dafür zuständig
 
-**Risk-Slide (Slide 9):**
-- Positions-Warn-Box: Text-Größe TY_BODY=28 (gleich wie der weiße Text darunter)
+**Fundamentals-Slide (Slide 7) — Round 11:**
+- Oben 2 Kennzahl-Tiles nebeneinander (gap=26, ch=140):
+  - Links: D/E-Verhältnis (grün) — regex `r'D/E[^0-9]*([0-9]+(?:[,.][0-9]+)?)'` aus Section 6
+  - Rechts: Free Cashflow (blau) — regex `r'FCF\s*\$\s*([0-9]+[,.][0-9]+)\s*(Mrd|Mio)'` aus Section 6
+  - Darunter: Fließtext Section 6, max_lines=14
 
-**KGV-Slide (Slide 8):**
+**Bewertungs-Slide (Slide 8) — Round 11:**
+- Oben 2 KGV-Tiles (Trailing rot / Forward grün, ch=150)
+- Darunter: **Analysten-Konsensus-Tile** (amber, h=120) — regex
+  `r'Analyst-?Konsens(?:us|ziel)\s*\$\s*([0-9]+(?:[,.][0-9]+)?)'` aus Section 7
+  Text: "Ø Kursziel: 472 $" + rechts "Coverage hinkt der Rally hinterher"
+- Darunter: Fließtext Section 7, max_lines=11
 - "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
-- Basiseffekt = hoher Trailing-PE durch noch-niedrige Gewinne vor GPU-Hochlauf, kein echtes Warnsignal
 
-**Profi-Fazit (Slide 12) — Round 9:**
+**Risk-Slide (Slide 9) — Round 11:**
+- Positions-Warn-Box: Text-Größe TY_BODY=28 (gleich wie der weiße Text darunter)
+- **HBM-Lieferkettenrisiko-Box** (amber, h=24+TY_BODY+24) wenn "HBM" in Section 2:
+  `c.text(MX+34, y+24, "HBM-LIEFERKETTENRISIKO", TY_BODY, color=T.AMBER, weight="bold")`
+  Rechts: "SK Hynix / Samsung" — max_lines=14 für den Fließtext darunter
+
+**Profi-Fazit (Slide 12) — Round 11:**
+- CTA-Box ohne Caption-Verweis: "Folge für wöchentliche Profi-Analysen" + "datengetrieben · unabhängig · faceless"
+- Kein "Weitere Details in der Caption" — alle Infos sind auf den Slides
 - `max_lines` **dynamisch** berechnet: `max(4, int(((c.H-160) - 256 - 120 - 40 - peers_reserve) / TY_BODY_LH))`
   (peers_reserve=100 wenn Peers vorhanden, sonst 0) → ca. 15 Zeilen, nie mehr abschneiden
 - Markdown-Tabellen + Disclaimer aus Section 11 vor dem Rendern entfernen:
@@ -416,7 +433,7 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
   + `re.sub(r'\*?Keine Anlageberatung[^*\n]*\*?', '', raw11)`
   + `re.sub(r'Verdict:\s*\w+\s*\(\d+/\d+\)[^\n]*', '', raw11)`
 
-**Allgemeine Regeln — Round 9 (aktualisiert):**
+**Allgemeine Regeln — Round 11 (aktualisiert):**
 - **Ausnahmslos echte Umlaute** (ä, ö, ü, Ä, Ö, Ü, ß) in allen deutschen Strings — niemals ae/oe/ue/ss
 - Keine hardcodierten `--headline` Argumente mit ASCII-Ersatz übergeben (auto-Headline verwendet korrekte Umlaute)
 - **Hook-Texte enthalten KEINEN Aktiennamen** — nur die generische Frage/These
