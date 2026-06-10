@@ -579,27 +579,29 @@ Funnel-CTA „Die ganze Analyse findest du im Karussell-Post auf meinem Profil".
 Funktionen: `reel_caption_analysis`, `reel_caption_earnings`,
 `reel_caption_from_store`. Wird nur geschrieben, wenn das Reel-Format mitläuft.
 
-Aufbau (Analyse-Post):
-1. SEO-Zeile: „<Firmenname> (TICKER) — Aktienanalyse: <Verdict> · Score X/100"
+Aufbau Caption (Analyse-Post):
+1. **SEO-Zeile: Keyword zuerst, Emoji danach** — IG indexiert die ersten 125 Zeichen
+   besonders; kein Emoji VOR dem Keyword: `<Firmenname> (<TICKER>) Aktienanalyse: <Verdict> · Score X/100 📊`
 2. Hook-Satz (aus Section 1)
-3. Slides-Hinweis + Save-CTA („Die komplette Analyse … findest du auf den
-   Slides. Speichere den Beitrag für deine Watchlist.")
-4. Folge-CTA („Folge AI Alpha Selection …" — kein @-Handle)
+3. Kurzer Slides-Hinweis + Save-CTA (kein langer Analyse-Text in der Caption)
+4. Folge-CTA (kein @-Handle)
 5. Disclaimer
-6. Hashtags (siehe unten)
+6. Hashtags
 
-Earnings-Post analog: SEO-Zeile „… — Earnings-Analyse Q<N>: Beat/Miss" +
-Beat-Einzeiler (EPS-Überraschung · Kurssprung) + Slides-Hinweis + CTA +
-Disclaimer + Hashtags.
+Earnings analog: `<Firma> (<TICKER>) Earnings <Quartal>: Beat/Miss 📊` + Beat-Einzeiler.
+Wochenpost: `Wikifolio Wochenupdate KW XX: <Hook> 📊` + 2 Kennzahlen + Slides-CTA.
+Caption bewusst kurz (max. ~250 Zeichen vor Disclaimer) — Details stehen auf den Slides.
 
-**Hashtag-Strategie: max. 5 Tags pro Post** (Instagram-Limit seit 2025;
-lt. Instagram optimal 3–5 — wenige hochrelevante Tags als Kontextsignal,
-Tag-Massen bringen keine Reichweite). In die Caption, nicht in die Kommentare.
+**Hashtag-Strategie: max. 5 Tags pro Post** (Instagram-Limit seit 2025; optimal 3–5).
 - Analyse: `#{tic} #aktienanalyse <Sektor-Tag> #investieren #aialphaselection`
   (Sektor-Tags in `_SECTOR_TAG` in generate.py, Fallback `#börse`)
 - Earnings: `#{tic} #earnings #quartalszahlen #aktienanalyse #aialphaselection`
-- Wochenpost: `HASHTAGS_WEEKLY` = `#wikifolio #nasdaq #aktien #trading
-  #aialphaselection`
+- Wochenpost: `HASHTAGS_WEEKLY` = `#wikifolio #algotrading #nasdaq100 #investieren #aialphaselection`
+
+**ALT-Texte (`alt_texts.txt`):** Jeder Generierungslauf schreibt eine `alt_texts.txt`
+mit keyword-reichen ALT-Texten pro Carousel-Slide (Reels werden als Video hochgeladen —
+kein ALT-Text nötig). Beim manuellen IG-Upload pro Bild eintragen → Accessibility +
+Suchalgorithmus. Funktion `write_alt_texts` in `generate.py` (`_DESC`-Mapping nach Slide-Stem).
 
 **ZIP-Download**: `build_analysis` erstellt nach dem Rendern automatisch `carousel_{TICKER}.zip`
 mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeben und im Output angezeigt.

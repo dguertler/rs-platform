@@ -14,6 +14,7 @@ Output:  out/instagram/<YYYY-MM-DD>/<format>/NN_*.png  +  caption.txt
 """
 import argparse
 import os
+import re
 from datetime import datetime
 
 from . import data, render, report, store
@@ -124,34 +125,15 @@ def build_from_store(fmt, ctx, outdir):
 
 
 def caption_from_store(ctx):
-    top = "\n".join(f"• {t['ticker']} ({t.get('name','')}): "
-                    + (render.fmt_pct(t["ret"]) if t["ret"] is not None else "—")
-                    for t in ctx["top_holdings"][:5])
-    s = ctx["stats"]
-    pf = "∞" if s["profit_factor"] is None else f"{s['profit_factor']:.1f}".replace(".", ",")
-    f = ctx["featured"]
-    feat = (f"\n🔎 Aktie der Woche: {f['ticker']} – seit Kauf {render.fmt_pct(f['ret'])}."
-            if f.get("ret") is not None else "")
-    nc = ctx.get("newcomer")
-    newc = (f"\n🆕 Newcomer: {nc['ticker']} – {render.fmt_pct(nc['ret'])} seit Kauf."
-            if nc and nc.get("ret") is not None else "")
-    why = f"\n🤖 Hinter den Kulissen: {ctx['why']}\n" if ctx.get("why") else ""
+    """Wochen-Carousel-Caption. SEO-Keyword 'Wikifolio' zuerst (IG indexiert die
+    ersten 125 Zeichen besonders stark). Kurz gehalten: Hook + 2 Kennzahlen +
+    Slides-CTA — Details (Positionen, Trades, Kennzahlen) stehen auf den Slides."""
     return (
-        f"📊 {ctx['hook']}\n\n"
-        f"Wochenupdate KW {ctx['kw']} ({ctx['period']})\n"
-        f"Diese Woche: {render.fmt_pct(ctx['week_perf'])} | "
-        f"NASDAQ-100: {render.fmt_pct(ctx['nasdaq_week'])}\n"
+        f"Wikifolio Wochenupdate KW {ctx['kw']}: {ctx['hook']} 📊\n\n"
         f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} | "
-        f"NASDAQ: {render.fmt_pct(ctx['nasdaq_total'])} | "
-        f"Alpha: {render.fmt_pct(ctx['alpha'])}\n"
-        f"{ctx['weeks_beaten']} von {ctx['weeks_total']} Wochen den NASDAQ geschlagen.\n"
-        f"Trades: {s['trades']} · Trefferquote {round(s['win_rate']*100)} % · "
-        f"Profitfaktor {pf} · Ø Gewinn {render.fmt_pct(s['avg_win'])} · "
-        f"Ø Verlust {render.fmt_pct(s['avg_loss'])}\n\n"
-        f"Stärkste Positionen (Zuwachs seit Kauf):\n{top}\n"
-        f"{feat}{newc}\n"
-        f"{why}\n"
-        f"👉 Den Link zum wikifolio AI Alpha Selection findest du aktuell in unserer Bio.\n\n"
+        f"Alpha ggü. NASDAQ-100: {render.fmt_pct(ctx['alpha'])}\n\n"
+        f"Alle Positionen, Charts und Trades auf den Slides. Speichere für deinen Überblick.\n\n"
+        f"👉 Link zum wikifolio AI Alpha Selection in der Bio.\n\n"
         f"💬 {ctx['question']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"{HASHTAGS_WEEKLY}"
@@ -164,13 +146,12 @@ def reel_caption_from_store(ctx):
     zwei stärksten Kennzahlen (Alpha/Gesamtrendite) als Beweis + Funnel-CTA aufs
     Karussell + Bio-Hinweis + Interaktions-Frage + Disclaimer + 5 Hashtags."""
     return (
-        f"📊 {ctx['hook']}\n\n"
-        f"Wochenupdate KW {ctx['kw']} ({ctx['period']})\n"
+        f"Wikifolio Wochenupdate KW {ctx['kw']}: {ctx['hook']} 📊\n\n"
         f"Gesamtrendite seit Start: {render.fmt_pct(ctx['total_perf'])} · "
         f"Alpha ggü. NASDAQ-100: {render.fmt_pct(ctx['alpha'])}\n\n"
-        f"🎬 Das ist der Teaser. Alle Positionen, Charts und das komplette "
-        f"Wochenupdate findest du im Karussell-Post auf meinem Profil.\n\n"
-        f"👉 Den Link zum wikifolio AI Alpha Selection findest du aktuell in unserer Bio.\n\n"
+        f"🎬 Das ist der Teaser. Alle Positionen, Charts und Trades im "
+        f"Karussell-Post auf meinem Profil.\n\n"
+        f"👉 Link zum wikifolio AI Alpha Selection in der Bio.\n\n"
         f"💬 {ctx['question']}\n\n"
         f"{render.T.DISCLAIMER_LONG}\n\n"
         f"{HASHTAGS_WEEKLY}"
@@ -247,19 +228,16 @@ def build_weekly_caption(r):
                          for s in r["sells"])
 
     parts = [
-        f"📊 Wochenreport KW {r['kw']} ({r['period']})\n",
-        f"Musterdepot diese Woche: {render.fmt_pct(r['week_perf'])} | "
-        f"NASDAQ-100: {render.fmt_pct(r['nasdaq_week'])}",
+        f"Wikifolio Wochenupdate KW {r['kw']} 📊\n",
         f"Gesamtrendite seit Start: {render.fmt_pct(r['total_perf'])} | "
-        f"NASDAQ: {render.fmt_pct(r['nasdaq_total'])} | "
-        f"Alpha: {render.fmt_pct(r['alpha'])}",
-        f"{r['weeks_beaten']} von {r['weeks_total']} Wochen den NASDAQ geschlagen.\n",
+        f"Alpha ggü. NASDAQ-100: {render.fmt_pct(r['alpha'])}\n",
     ]
     if r["buys"]:
         parts.append("Käufe:\n" + line_buys() + "\n")
     if r["sells"]:
         parts.append("Verkäufe:\n" + line_sells() + "\n")
-    parts.append("➡️ Mehr: AI Alpha Selection — Link in Bio.\n")
+    parts.append("Alle Charts und Positionen auf den Slides. "
+                 "👉 Link zum wikifolio AI Alpha Selection in der Bio.\n")
     parts.append(render.T.DISCLAIMER_LONG)
     parts.append("\n" + HASHTAGS_WEEKLY)
     return "\n".join(parts)
@@ -453,7 +431,7 @@ def reel_script(a):
 # ── Hashtags: max. 5 pro Post (Instagram-Limit seit 2025; optimal 3–5) ───────
 # Wenige, hochrelevante Tags = Kontextsignal für den Algorithmus.
 # Mix: Ticker + Kern-Keyword + Sektor/Thema + breit + Brand.
-HASHTAGS_WEEKLY = "#wikifolio #nasdaq #aktien #trading #aialphaselection"
+HASHTAGS_WEEKLY = "#wikifolio #algotrading #nasdaq100 #investieren #aialphaselection"
 
 _SECTOR_TAG = {
     "Technology": "#technologieaktien",
@@ -477,22 +455,19 @@ def hashtags_earnings(e):
 
 
 def caption_analysis(a):
-    """Kurz-Caption für Analyse-Posts. Die VOLLE Analyse steht auf den Slides
-    (kein Analyse-Content in der Caption — Vorgabe). Die Caption liefert nur:
-    SEO-Zeile (Keyword zuerst), Hook, Save-/Folge-CTA, Disclaimer und max. 5
-    gezielte Hashtags (Instagram-Limit seit 2025; lt. IG optimal 3–5)."""
+    """Kurz-Caption für Analyse-Posts. SEO-Zeile: Keyword (Firmenname + Ticker +
+    'Aktienanalyse') zuerst, Emoji danach — Instagram indexiert die ersten 125 Zeichen
+    besonders stark. Die VOLLE Analyse steht auf den Slides (kein Analyse-Content in
+    der Caption). Max. 5 Hashtags (Instagram-Limit seit 2025; optimal 3–5)."""
     v = a["verdict"]
     scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
-    head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
-    DISC = ("Keine Anlageberatung. Analysen auf Basis öffentlicher Daten. "
-            "Kursziele sind Szenarien, keine Prognosen. Kapitalanlagen bergen "
-            "Verlustrisiken bis zum Totalverlust.")
-    parts = [f"📊 {head}\n"]
+    name = render.A.short_name(a["name"])
+    DISC = render.T.DISCLAIMER_ANALYSE_SHORT
+    parts = [f"{name} ({a['ticker']}) Aktienanalyse: {v}{scal} 📊\n"]
     if a.get("hook"):
         parts.append(a["hook"] + "\n")
-    parts.append("Die komplette Analyse — Geschäftsmodell, Szenarien mit "
-                 "Kurszielen, Bewertung, Risiken und Profi-Fazit — findest du "
-                 "auf den Slides. Speichere den Beitrag für deine Watchlist.\n")
+    parts.append("Die komplette Analyse — Szenarien mit Kurszielen, Bewertung und "
+                 "Profi-Fazit — auf den Slides. Speichere für deine Watchlist.\n")
     parts.append("👉 Folge AI Alpha Selection für wöchentliche Profi-Analysen.\n")
     parts.append("❗ " + DISC)
     parts.append("\n" + hashtags_analysis(a))
@@ -507,14 +482,14 @@ def reel_caption_analysis(a):
     Disclaimer + dieselben max. 5 Hashtags."""
     v = a["verdict"]
     scal = (f" · Score {a['score']}/100" if a["score"] is not None else "")
-    head = f"{a['name']} ({a['ticker']}) — Aktienanalyse: {v}{scal}"
+    name = render.A.short_name(a["name"])
     DISC = render.T.DISCLAIMER_ANALYSE_SHORT
-    parts = [f"📊 {head}\n"]
+    parts = [f"{name} ({a['ticker']}) Aktienanalyse: {v}{scal} 📊\n"]
     if a.get("headline") or a.get("hook"):
         parts.append((a.get("headline") or a["hook"]) + "\n")
-    parts.append("🎬 Das ist der Teaser. Die komplette Analyse — Geschäftsmodell, "
-                 "Szenarien mit Kurszielen, Bewertung und Profi-Fazit — findest du "
-                 "im Karussell-Post auf meinem Profil.\n")
+    parts.append("🎬 Das ist der Teaser. Die komplette Analyse — Szenarien mit "
+                 "Kurszielen, Bewertung und Profi-Fazit — im Karussell-Post auf "
+                 "meinem Profil.\n")
     parts.append("👉 Folge AI Alpha Selection für wöchentliche Profi-Analysen.\n")
     parts.append("❗ " + DISC)
     parts.append("\n" + hashtags_analysis(a))
@@ -583,13 +558,12 @@ def build_earnings_reel(e, date_iso, outdir):
 
 
 def caption_earnings(e):
-    """Kurz-Caption für Earnings-Posts (analog caption_analysis): alle Zahlen
-    und die Einordnung stehen auf den Slides. SEO-Zeile + Beat-Einzeiler +
-    Save-/Folge-CTA + Disclaimer + max. 5 Hashtags."""
+    """Kurz-Caption für Earnings-Posts. SEO-Zeile: Firmenname + Ticker + 'Earnings'
+    zuerst, Emoji danach (Keyword-Signal). Alle Zahlen und Einordnung auf den Slides.
+    SEO-Zeile + Beat-Einzeiler + Save-/Folge-CTA + Disclaimer + max. 5 Hashtags."""
     a = e.get("analysis")
     name = render.A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
     beat_word = "Beat" if (e.get("eps_surprise_pct") or 0) >= 0 else "Miss"
-    head = f"{name} ({e['ticker']}) — Earnings-Analyse {e['quarter']}: {beat_word}"
     DISC = render.T.DISCLAIMER_ANALYSE_SHORT
 
     teaser = []
@@ -597,12 +571,11 @@ def caption_earnings(e):
         teaser.append(f"EPS-Überraschung {earn.fmt_pct_pts(e['eps_surprise_pct'], 0)}")
     if e.get("jump_pct") is not None:
         teaser.append(f"Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
-    parts = [f"📊 {head}\n"]
+    parts = [f"{name} ({e['ticker']}) Earnings {e['quarter']}: {beat_word} 📊\n"]
     if teaser:
         parts.append("🚀 " + " · ".join(teaser) + ".\n")
-    parts.append("Alle Zahlen, die Kursreaktion, Guidance und die Einordnung in "
-                 "die These findest du auf den Slides. Speichere den Beitrag "
-                 "für deine Watchlist.\n")
+    parts.append("Zahlen, Kursreaktion, Guidance und Einordnung auf den Slides. "
+                 "Speichere für deine Watchlist.\n")
     parts.append("👉 Folge AI Alpha Selection für Earnings & Profi-Analysen.\n")
     parts.append("❗ " + DISC)
     parts.append("\n" + hashtags_earnings(e))
@@ -611,28 +584,106 @@ def caption_earnings(e):
 
 def reel_caption_earnings(e):
     """Caption für das Earnings-Reel (eigener IG-Post). Teaser → leitet auf den
-    Karussell-Post um. SEO-Zeile + Beat-Einzeiler + Funnel-CTA aufs Karussell +
+    Karussell-Post um. Keyword-first SEO-Zeile + Beat-Einzeiler + Funnel-CTA +
     Disclaimer + max. 5 Hashtags (wie caption_earnings, aber mit Reel-CTA)."""
     a = e.get("analysis")
     name = render.A.short_name(a["name"]) if a and a.get("name") else e["ticker"]
     beat_word = "Beat" if (e.get("eps_surprise_pct") or 0) >= 0 else "Miss"
-    head = f"{name} ({e['ticker']}) — Earnings-Analyse {e['quarter']}: {beat_word}"
     DISC = render.T.DISCLAIMER_ANALYSE_SHORT
     teaser = []
     if e.get("eps_surprise_pct") is not None:
         teaser.append(f"EPS-Überraschung {earn.fmt_pct_pts(e['eps_surprise_pct'], 0)}")
     if e.get("jump_pct") is not None:
         teaser.append(f"Kurssprung {render.fmt_pct(e['jump_pct'])} am Tag der Zahlen")
-    parts = [f"📊 {head}\n"]
+    parts = [f"{name} ({e['ticker']}) Earnings {e['quarter']}: {beat_word} 📊\n"]
     if teaser:
         parts.append("🚀 " + " · ".join(teaser) + ".\n")
-    parts.append("🎬 Das ist der Teaser. Alle Zahlen, die Kursreaktion, Guidance und "
-                 "die Einordnung in die These findest du im Karussell-Post auf "
-                 "meinem Profil.\n")
+    parts.append("🎬 Das ist der Teaser. Zahlen, Kursreaktion und Guidance im "
+                 "Karussell-Post auf meinem Profil.\n")
     parts.append("👉 Folge AI Alpha Selection für Earnings & Profi-Analysen.\n")
     parts.append("❗ " + DISC)
     parts.append("\n" + hashtags_earnings(e))
     return "\n".join(parts)
+
+
+def write_alt_texts(base, saved, meta):
+    """Schreibt alt_texts.txt: vorgeschlagene ALT-Texte für jeden Slide.
+    Beim manuellen IG-Upload eintragen → Accessibility + Suchalgorithmus.
+    Jede Zeile: 'Slide N: <keyword-reicher Text>'."""
+    _DESC = {
+        # Analyse
+        "cover":                "{name} ({ticker}) {kind} — Verdict {verdict} · Score {score}/100",
+        "einschaetzung":        "{name} Gesamteinschätzung: Investment-Case und Sterne-Ratings",
+        "unternehmen":          "Was macht {name}? Geschäftsmodell und Highlights",
+        "szenarien":            "{name} Kursszenarien 12–18 Monate: Bull / Base / Bear mit Eintrittswahrscheinlichkeit",
+        "szenarien_erklaert":   "{name} Szenarien erklärt: Treiber für Bull, Base und Bear Case",
+        "szenarien_erklaert_1": "{name} Szenarien erklärt (Teil 1): Bull und Base Case Treiber",
+        "szenarien_erklaert_2": "{name} Szenarien erklärt (Teil 2): weitere Treiber",
+        "szenarien_erklaert_3": "{name} Szenarien erklärt (Teil 3): weitere Treiber",
+        "chancen_risiken":      "{name} Chancen und Risiken: Pro und Contra Übersicht",
+        "fundamentals":         "{name} Fundamentaldaten: Wachstum, Margen und Kennzahlen",
+        "bewertung":            "{name} Bewertung: KGV-Analyse Trailing vs. Forward",
+        "risiko":               "{name} Risiko und Realitätscheck: Positionsgröße und Erwartungen",
+        "technical":            "{name} Technische Analyse: Chartsignal und Trend",
+        "langfrist":            "{name} Langfrist-Kursziele 3–5 Jahre: Szenarien und Spannen",
+        "fazit":                "{name} Profi-Fazit und vergleichbare Titel (Peers)",
+        "cta":                  "AI Alpha Selection — für Watchlist speichern · wöchentliche Profi-Analysen",
+        # Earnings
+        "zahlen":               "{name} ({ticker}) {quarter} Quartalszahlen: EPS {eps_actual} vs. Erwartung {eps_estimate}",
+        "quartale":             "{name} Bereinigtes EPS je Quartal: Gewinntrend {quarter}",
+        "reaktion":             "{name} Kursreaktion am Meldetag: 50 Handelstage Candle-Chart",
+        "ausblick":             "{name} Guidance und Wachstumstreiber {quarter}",
+        "segmente":             "{name} Was den Beat getragen hat: Segment-Analyse {quarter}",
+        "einordnung":           "{name} Einordnung: Was die Zahlen für die These bedeuten · Verdict {verdict}",
+        "ratings":              "{name} Qualität auf einen Blick: vier Sterne-Ratings",
+        # Weekly
+        "hook":                 "AI Alpha Selection Wochenupdate KW {kw} — {hook}",
+        "performance":          "Equity-Kurve AI Alpha Selection vs. NASDAQ-100: {total_perf} vs. {nasdaq_total} seit Start",
+        "historie":             "Wöchentliche Mehrrendite ggü. NASDAQ-100 seit Portfoliostart",
+        "positionen":           "Stärkste Positionen AI Alpha Selection KW {kw}: Top-5 nach Wertzuwachs",
+        "weitere":              "Weitere Positionen AI Alpha Selection KW {kw}: alle Titel außerhalb Top-5",
+        "warum":                "Strategischer Kontext KW {kw}: warum das KI-Modell diese Woche so entschieden hat",
+    }
+    m = {
+        "kind": "Aktienanalyse", "name": "", "ticker": "", "verdict": "",
+        "score": "—", "quarter": "", "eps_actual": "—", "eps_estimate": "—",
+        "kw": "", "hook": "", "total_perf": "", "nasdaq_total": "",
+    }
+    m.update({k: (v if v is not None else "—") for k, v in meta.items()})
+
+    lines = []
+    slide_n = 0
+    for path in saved:
+        fname = os.path.basename(path)
+        # Nur Carousel-Slides — Reels werden als Video hochgeladen (kein ALT-Text nötig)
+        if not fname.endswith(".png") or os.sep + "reel" + os.sep in path:
+            continue
+        slide_n += 1
+        stem_m = re.match(r"^\d+_(.+)\.png$", fname)
+        stem = stem_m.group(1) if stem_m else fname[:-4]
+
+        if stem in _DESC:
+            desc = _DESC[stem].format_map(m)
+        elif stem.startswith("aktie_"):
+            t = stem[6:].replace("_", ".")
+            desc = f"Aktie der Woche KW {m['kw']}: {t} — Kursverlauf mit Kauf-Signal"
+        elif stem.startswith("newcomer_"):
+            t = stem[9:].replace("_", ".")
+            desc = f"Newcomer KW {m['kw']}: {t} — bester Kauf der letzten 3 Wochen"
+        elif stem.startswith("trade_"):
+            t = stem[6:].replace("_", ".")
+            desc = f"Trade der Woche KW {m['kw']}: {t} — realisierter Gewinn/Verlust"
+        else:
+            desc = f"AI Alpha Selection — {stem.replace('_', ' ')}"
+
+        lines.append(f"Slide {slide_n}: {desc}")
+
+    if lines:
+        with open(os.path.join(base, "alt_texts.txt"), "w") as f:
+            f.write("# ALT-Texte für Instagram-Upload\n"
+                    "# Beim manuellen Hochladen pro Slide eintragen "
+                    "(Accessibility + Suchalgorithmus)\n\n")
+            f.write("\n".join(lines) + "\n")
 
 
 def build(fmt, ctx, outdir):
@@ -735,6 +786,17 @@ def main():
         if "reel" in fmts:
             with open(os.path.join(base, "reel_caption.txt"), "w") as f:
                 f.write(reel_caption_earnings(e))
+        _a = e.get("analysis") or {}
+        write_alt_texts(base, all_saved, {
+            "kind": f"Earnings {e.get('quarter','')}",
+            "name": render.A.short_name(_a["name"]) if _a.get("name") else e["ticker"],
+            "ticker": e["ticker"],
+            "verdict": _a.get("verdict", ""),
+            "score": _a.get("score"),
+            "quarter": e.get("quarter", ""),
+            "eps_actual": e.get("eps_actual", "—"),
+            "eps_estimate": e.get("eps_estimate", "—"),
+        })
 
         reel_dir = os.path.join(base, "reel")
         if "reel" in fmts and os.path.isdir(reel_dir):
@@ -785,6 +847,12 @@ def main():
         if "reel" in fmts:
             with open(os.path.join(base, "reel_caption.txt"), "w") as f:
                 f.write(reel_caption_analysis(a))
+        write_alt_texts(base, all_saved, {
+            "name": render.A.short_name(a["name"]),
+            "ticker": a["ticker"],
+            "verdict": a.get("verdict", ""),
+            "score": a.get("score"),
+        })
         with open(os.path.join(base, "reel_script.txt"), "w") as f:
             f.write(reel_script(a))
 
@@ -847,6 +915,13 @@ def main():
         if "reel" in fmts:
             with open(os.path.join(base, "reel_caption.txt"), "w") as f:
                 f.write(reel_caption_from_store(ctx))
+        write_alt_texts(base, all_saved, {
+            "kind": "Wochenupdate",
+            "kw": ctx["kw"],
+            "hook": ctx["hook"][:80],
+            "total_perf": render.fmt_pct(ctx["total_perf"]),
+            "nasdaq_total": render.fmt_pct(ctx["nasdaq_total"]),
+        })
         # ZIP der Carousel-PNGs für einfachen Versand / Upload
         import zipfile
         carousel_dir = os.path.join(base, "carousel")
@@ -877,6 +952,11 @@ def main():
         os.makedirs(base, exist_ok=True)
         with open(os.path.join(base, "caption.txt"), "w") as f:
             f.write(build_weekly_caption(r))
+        write_alt_texts(base, all_saved, {
+            "kind": "Wochenupdate", "kw": r["kw"],
+            "total_perf": render.fmt_pct(r["total_perf"]),
+            "nasdaq_total": render.fmt_pct(r["nasdaq_total"]),
+        })
         print(f"✓ {len(all_saved)} Slides (Wochenreport KW{r['kw']}) in {base}")
         for p in all_saved:
             print("  ", os.path.relpath(p, ROOT))

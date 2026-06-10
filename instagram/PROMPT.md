@@ -347,17 +347,22 @@ bleiben). Der Generator meldet beim Lauf `Szenarien ja/NEIN`. Für volle Posts:
 Analyse vorher nach `analyses/PROMPT.md` neu generieren.
 
 ### SEO / Algorithmus (in `caption.txt` umgesetzt)
-- **Erste Zeile = Keyword zuerst:** „<Firmenname> (TICKER) — Aktienanalyse:
-  <Verdict>" → das indexiert Instagram für die Suche.
-- **Kurz-Caption:** Die volle Analyse steht AUF DEN SLIDES — die Caption
-  enthält keinen Analyse-Content, sondern nur SEO-Zeile, Hook-Satz,
-  Save-/Folge-CTA, Pflicht-Disclaimer und Hashtags (`caption_analysis`
-  in `generate.py`).
-- **Hashtags: max. 5 pro Post** (Instagram-Limit seit 2025; lt. Instagram
-  optimal 3–5 hochrelevante Tags als Kontextsignal — Masse bringt nichts):
-  Ticker (#amd) + Kern-Keyword (#aktienanalyse) + Sektor
-  (#technologieaktien) + breit (#investieren) + Brand (#aialphaselection).
+- **Keyword zuerst — kein Emoji davor:** Instagram indexiert die **ersten 125 Zeichen**
+  besonders stark. Format: `<Firmenname> (<TICKER>) Aktienanalyse: <Verdict> · Score X/100 📊`
+  — Emoji steht NACH dem Keyword-Block (schwächt sonst das Index-Signal).
+  Gleiches Prinzip für Earnings und Wochenpost (`Wikifolio Wochenupdate KW XX: <Hook> 📊`).
+- **Kurz-Caption (max. 200–300 Zeichen vor Disclaimer):** Die volle Analyse steht auf den
+  Slides — Caption enthält NUR SEO-Zeile + Hook + Slides-CTA + Bio-Link + Disclaimer +
+  Hashtags. Keine Positionen, Trades oder Kennzahlen-Listen (stehen auf den Slides).
+- **Hashtags: max. 5 pro Post** (Instagram-Limit seit 2025; optimal 3–5 als Kontextsignal):
+  Analyse: `#{tic} #aktienanalyse <Sektor-Tag> #investieren #aialphaselection`
+  Earnings: `#{tic} #earnings #quartalszahlen #aktienanalyse #aialphaselection`
+  Woche: `#wikifolio #algotrading #nasdaq100 #investieren #aialphaselection`
   Hashtags in die Caption, nicht in die Kommentare (sofortige Indexierung).
+- **ALT-Texte (`alt_texts.txt`):** Pro Generierungslauf entsteht eine `alt_texts.txt`
+  mit vorgeschlagenen ALT-Texten für jeden Carousel-Slide. Beim manuellen IG-Upload
+  pro Bild eintragen — verbessert Accessibility und Suchalgorithmus. Funktion:
+  `write_alt_texts` in `generate.py`.
 - **Saves/Dwell** treiben: Carousel „swipe für alle Szenarien" + Save-CTA.
   Reels (9:16) zusätzlich für Reichweite.
 
@@ -558,10 +563,9 @@ Reel-Teaser (9:16): Slides 1–3 der Analyse (Cover/Zahlen/Reaktion) + Hybrid-CT
   Instagram-UI.
 
 **Caption (`caption.txt`):** Kurz-Caption wie beim Analyse-Post — erste Zeile
-„<Firma> (TICKER) — Earnings-Analyse Q<N>: Beat" (SEO) + Beat-Einzeiler
-(EPS-Überraschung · Kurssprung) + Save-/Folge-CTA + Disclaimer + max. 5
-Hashtags (#ticker #earnings #quartalszahlen #aktienanalyse #aialphaselection).
-Alle Zahlen und die Einordnung stehen auf den Slides.
+„<Firma> (<TICKER>) Earnings <Quartal>: Beat 📊" (Keyword zuerst, Emoji nach dem
+Keyword-Block). Beat-Einzeiler (EPS-Überraschung · Kurssprung) + kurzer Slides-CTA
++ Bio-Link + Disclaimer + max. 5 Hashtags. Alle Zahlen und die Einordnung auf den Slides.
 
 ---
 
