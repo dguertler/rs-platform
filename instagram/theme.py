@@ -120,7 +120,7 @@ DISCLAIMER_LONG = (
 # Analyse-Posts sind redaktionelle Einschätzungen zu einer Aktie — KEINE
 # Anlageberatung. Score/Verdict/Kursziele sind KI-generiert.
 DISCLAIMER_ANALYSE_SHORT = (
-    "Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten. "
+    "Keine Anlageberatung. Analysen auf Basis öffentlicher Daten. "
     "Kursziele sind Szenarien, keine Prognosen. Kapitalanlagen bergen "
     "Verlustrisiken bis zum Totalverlust."
 )
