@@ -263,20 +263,42 @@ def build_analysis(fmt, a, date_iso, outdir):
     if _has_scenarios(a):
         emit("szenarien", lambda c: render.slide_analysis_scenarios(c, a, date_iso))
     if _has_scenarios(a):
-        # Overflow-Check: passen alle 3 Szenario-Blöcke auf eine Slide?
-        # Verfügbar: 1350 − 300 (top0) − 150 (footer) = 900 px
-        _avail = 900
+        # Overflow-Check: wieviele Szenarien passen auf eine Slide?
+        # Verfügbar: H(1350) - 160(footer_y-offset) - 300(top0) = 890 px
+        _avail = 890
+        _gap = 22
         _items = render._cases_item_data(a)
-        _total = sum(d["rh"] for d in _items) + 22 * (len(_items) - 1)
-        if _total <= _avail:
+        # Finde maximale Anzahl Items, die auf eine Slide passen
+        _fit1, _used = [], 0
+        for _it in _items:
+            _needed = _it["rh"] + (_gap if _fit1 else 0)
+            if _used + _needed <= _avail:
+                _fit1.append(_it)
+                _used += _needed
+            else:
+                break
+        _rest = _items[len(_fit1):]
+        if not _rest:
             emit("szenarien_erklaert",
                  lambda c, _i=_items: render.slide_analysis_cases(c, a, date_iso, _i))
         else:
-            # Overflow: Bull+Base auf Slide 1, Bear auf Slide 2
             emit("szenarien_erklaert_1",
-                 lambda c, _i=_items[:2]: render.slide_analysis_cases(c, a, date_iso, _i))
+                 lambda c, _i=_fit1: render.slide_analysis_cases(c, a, date_iso, _i))
+            # Rest ggf. weiter aufteilen
+            _fit2, _used2 = [], 0
+            for _it in _rest:
+                _needed = _it["rh"] + (_gap if _fit2 else 0)
+                if _used2 + _needed <= _avail:
+                    _fit2.append(_it)
+                    _used2 += _needed
+                else:
+                    break
+            _rest2 = _rest[len(_fit2):]
             emit("szenarien_erklaert_2",
-                 lambda c, _i=_items[2:]: render.slide_analysis_cases(c, a, date_iso, _i))
+                 lambda c, _i=_fit2: render.slide_analysis_cases(c, a, date_iso, _i))
+            if _rest2:
+                emit("szenarien_erklaert_3",
+                     lambda c, _i=_rest2: render.slide_analysis_cases(c, a, date_iso, _i))
     elif a.get("pro_bullets") or a.get("con_bullets"):
         emit("chancen_risiken", lambda c: render.slide_analysis_chances(c, a, date_iso))
     if a["sections"].get(6):
