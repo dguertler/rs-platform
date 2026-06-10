@@ -254,11 +254,14 @@ Footer-Disclaimer: 16 px, `color=T.MUTED`.
 **Standard: linksbündig** (`justify=False` in `_draw_paragraph`).
 Blocksatz (`justify=True`) nur für abgegrenzte Boxen wie den CTA-Disclaimer.
 
-**Bindestrich-Darstellung (Deutsch + Englisch):**
-Zusammengesetzte Wörter mit Bindestrich (`Text-Text`) werden auf Slides immer als
-`Text - Text` dargestellt (Leerzeichen um den Bindestrich). Dies geschieht automatisch
-am Anfang von `_wrap_px` via `re.sub(r'([A-Za-zäöüÄÖÜß])-([A-Za-zäöüÄÖÜß])', r'\1 - \2', text)`.
-Gilt für alle Slides (Wochenpost + Analyse).
+**Bindestrich-Darstellung (Deutsch + Englisch) — REGEL (Round 8):**
+Zusammengesetzte Wörter bleiben **genau so wie sie sind** (`CUDA-Moat` bleibt `CUDA-Moat`,
+`GPU-Mix` bleibt `GPU-Mix`). Das frühere `re.sub` das `Text - Text` aus `Text-Text` machte
+wurde **entfernt** — sah falsch aus und brach Fachbegriffe auseinander.
+
+**Pyphen-Silbentrennung am Zeilenumbruch bleibt aktiv:** Lange Wörter ohne Bindestrich
+(≥ 10 Zeichen) werden am letzten passenden Silbenpunkt getrennt. Der Trennstrich
+erscheint nur am echten Zeilenende — nicht im Wortinneren.
 
 **Zeilenumbruch:** `_wrap_px(text, px_width, size, factor=0.50, lang="de")`
 - `factor=0.50` entspricht der durchschnittlichen Zeichenbreite von Liberation
@@ -316,7 +319,7 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 - [ ] Fließtext: `TY_BODY=28`, `TY_BODY_LH=44`, `justify=False` (Standard)
 - [ ] Labels/Firmennamen/Rating-Beschriftungen: `TY_BODY`, `color=T.TEXT`
 - [ ] Silbentrennung: `_wrap_px` automatisch via `lang="de"` (kein manuelles Eingreifen)
-- [ ] Bindestrich-Darstellung: automatisch in `_wrap_px` (`Text - Text` statt `Text-Text`)
+- [ ] Bindestrich in Komposita: unveränderlich lassen (`CUDA-Moat` bleibt `CUDA-Moat`); kein `re.sub`
 - [ ] Kein aktueller Kurs, keine GWS-/Breakout-Nennungen → `A.clean_for_slide()`
 - [ ] Disclaimer: `DISCLAIMER_ANALYSE_SHORT` im Footer 16 px (kein wikifolio-Bezug)
 - [ ] Verdict-Badge: Score als "X von 100 Punkten", kein "/100"
@@ -347,26 +350,36 @@ Die Caption enthält automatisch:
 
 ### 12.9 Slide-spezifische Layout-Regeln
 
-**Cover (Slide 1):**
+**Cover (Slide 1) — Round 8:**
 - Hook: 60 px, Zeilenabstand 74, Start y=170
+- BUY-Verdict: Hook **immer** `"<Name>: Kaufen — oder schon zu spät?"` (pool-Index 0, kein Hash-Lookup). In `analysis_headline()`: `if v == "BUY": return buy[0]`
 - Logo-Karte: zentriert zwischen Hook-Ende und gesamtem unteren Block (via chain_h)
 - Aktienname + Sektor: **direkt unter der Logo-Karte** (y = card_top + card_h + 16)
-- Verdict-Badge + Rating-Blöcke: direkt nach dem Namen, bis Footer
+- **Visueller Abstand Name → Verdict-Badge: `logo_name_gap = 70` px** — Logo und Aktienname stehen allein oben, erst dann folgen die grauen Boxen
+- Verdict-Badge + Rating-Blöcke: nach dem Abstand, bis Footer
+- chain_h berücksichtigt `logo_name_gap`: `card_h + 16 + sub_h + logo_name_gap + verdict_h + 14 + ratings_h + 10`
 - Rating-Labels: 24 px (eine Größe kleiner als TY_BODY), Sterne unter den Labels
 
-**Business-Slide (Slide 3):**
+**Business-Slide (Slide 3) — Round 8:**
 - Box-Höhe **dynamisch** pro Bullet: `pad_top + n_head*TY_BODY_LH + n_body*TY_BODY_LH + pad_bot`
 - Blaue Überschriften und Body-Text: beide TY_BODY=28, line_h=TY_BODY_LH
 - Jede Box hat immer eine blaue Überschrift (bei fehlendem " — "-Trenner: erste 5 Wörter als Titel)
 - Titeltext wird geWrapped (kein Überlaufen der Box)
+- **Jargon-Vereinfachung:** `_simplify_bullet()` in render.py ersetzt Fachbegriffe vor dem Rendern:
+  - `"TSMC-Leading-Edge-Allokation und CoWoS-Packaging-Kapazität"` → `"TSMC-Fertigungskapazität für die neusten Chips"`
+  - `"Datacenter-GPU-Mix-Verschiebung hebt Gruppen-Marge strukturell"` → `"Mehr GPU-Umsatz verbessert die Gesamtmarge dauerhaft"`
+  - `"Operativer Hebel:"`, `"Fabless-Modell:"` → entfernt (Resttext bleibt)
+  - `"niedrigmargigere"` → `"margenschwächere"`, `"Cash-Sockel"` → `"stabile Cashflow-Basis"`
 - Boxes die footer_y=c.H-160 überschreiten: werden abgebrochen
 
-**Szenarien-Slide (Slide 4):**
+**Szenarien-Slide (Slide 4) — Round 8:**
 - Box-Höhe rh=180 (content-fit: Wahrscheinlichkeit + Kursziel passen rein)
-- Wahrscheinlichkeit und Kursziel rechts übereinander: Label 22px, Wert 38px
+- **Wahrscheinlichkeit-Label y+36** (war y+22), **Wert y+58** (war y+44)
+- **Kursziel-Label y+114** (war y+100), **Wert y+136** (war y+122)
+- Mehr Abstand von der Case-Überschrift, optisch klar getrennt
 
-**Cases-Blöcke (Slides 5+6+):**
-- Wahrscheinlichkeit + Kursziel in EINER Zeile: `"45%  ·  560–700 $"` rechts-oben
+**Cases-Blöcke (Slides 5+6+) — Round 8:**
+- Wahrscheinlichkeit + Kursziel in EINER Zeile rechts: `"45%  ·  560–700 $"` — Position y+36 (mehr Abstand zur Case-Überschrift)
 - Overflow-Split in generate.py: findet automatisch wieviele Items auf eine Slide passen
   (avail=890px: c.H-160 - top0=300). Kann 3 Slides erzeugen (szenarien_erklaert_1/2/3)
 - _draw_cases_blocks bricht NICHT ab — die Split-Logik in generate.py ist dafür zuständig
@@ -378,10 +391,11 @@ Die Caption enthält automatisch:
 - "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
 - Basiseffekt = hoher Trailing-PE durch noch-niedrige Gewinne vor GPU-Hochlauf, kein echtes Warnsignal
 
-**Allgemeine Regeln:**
+**Allgemeine Regeln — Round 8 (aktualisiert):**
 - **Ausnahmslos echte Umlaute** (ä, ö, ü, Ä, Ö, Ü, ß) in allen deutschen Strings — niemals ae/oe/ue/ss
 - Keine hardcodierten `--headline` Argumente mit ASCII-Ersatz übergeben (auto-Headline verwendet korrekte Umlaute)
-- Bindestrich zwischen Buchstaben: automatisch `Text - Text` via `_wrap_px`
+- **Bindestrich in Komposita: unveränderlich** (`GPU-Mix` bleibt `GPU-Mix`). Kein `re.sub` in `_wrap_px`
+- Pyphen-Silbentrennung bei langen Wörtern (≥10 Zeichen) am Zeilenende: aktiv und erwünscht
 - Graue Boxen: Höhe immer dynamisch berechnet (an Text angepasst)
 - Wenn Box/Text Footer-Linie überschreitet: weiterer Slide (Overflow-Split in generate.py)
 

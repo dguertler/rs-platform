@@ -671,9 +671,7 @@ def _wrap_px(text, px_width, size, factor=0.50, lang="de"):
 
     Entspricht CSS: text-align:left; hyphens:auto; word-break:break-word; lang='de'.
     """
-    import re, textwrap
-    # Binde-Strich zwischen Buchstaben als " - " darstellen (kein Text-Text, sondern Text - Text)
-    text = re.sub(r'([A-Za-zäöüÄÖÜß])-([A-Za-zäöüÄÖÜß])', r'\1 - \2', text)
+    import textwrap
     target = max(8, int(px_width / max(1.0, size * factor)))
 
     dic = None
@@ -859,7 +857,9 @@ def analysis_headline(a):
     watch = [f"{name}: Finger weg — oder Schnäppchen?",
              f"{t}: Mehr Risiko als Chance?",
              f"{name}: Lieber abwarten?"]
-    pool = buy if v == "BUY" else (watch if v in ("WATCH", "SELL") else hold)
+    if v == "BUY":
+        return buy[0]  # immer "Kaufen — oder schon zu spät?" für BUY-Verdicts
+    pool = watch if v in ("WATCH", "SELL") else hold
     return pool[sum(ord(ch) for ch in a["ticker"]) % len(pool)]
 
 
@@ -885,8 +885,9 @@ def slide_analysis_cover(c, a, date_iso):
     ratings_h = 2 * r_ch + r_gap
     verdict_h = 106
     sub_h = 44        # Name/Sektor direkt unter der Karte
+    logo_name_gap = 70  # visueller Abstand zwischen Name und Verdict-Badge
     card_h = 230
-    chain_h = card_h + 16 + sub_h + 14 + verdict_h + 14 + ratings_h + 10
+    chain_h = card_h + 16 + sub_h + logo_name_gap + verdict_h + 14 + ratings_h + 10
 
     # Logo-Karte: zentriert zwischen Hook-Ende und Footer
     available = footer_line - hy
@@ -901,8 +902,8 @@ def slide_analysis_cover(c, a, date_iso):
     sub_y = card_top + card_h + 16
     c.text(MX, sub_y, sub, TY_BODY, color=T.TEXT)
 
-    # Verdict-Badge
-    verdict_top = sub_y + sub_h
+    # Verdict-Badge — mit Abstand zum Namen
+    verdict_top = sub_y + sub_h + logo_name_gap
     _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=verdict_h)
     verdict_bottom = verdict_top + verdict_h
 
@@ -976,13 +977,13 @@ def _scenario_rows(c, a, top, horizon_key, title, subtitle):
                        color=col, radius=15)
             # Wahrscheinlichkeit + Kursziel rechts (vertikal gestapelt, aber kompakt)
             prob_str = f"{prob}%" if prob is not None else "–"
-            c.text(c.W - MX - 40, y + 22, "Wahrscheinlichkeit:", TY_SUB,
+            c.text(c.W - MX - 40, y + 36, "Wahrscheinlichkeit:", TY_SUB,
                    color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 44, prob_str, 38,
+            c.text(c.W - MX - 40, y + 58, prob_str, 38,
                    color=col, weight="bold", ha="right", font="mono")
-            c.text(c.W - MX - 40, y + 100, "Kursziel:", TY_SUB,
+            c.text(c.W - MX - 40, y + 114, "Kursziel:", TY_SUB,
                    color=T.MUTED, ha="right")
-            c.text(c.W - MX - 40, y + 122, rng or "k. A.", TY_BODY,
+            c.text(c.W - MX - 40, y + 136, rng or "k. A.", TY_BODY,
                    color=T.TEXT, ha="right", weight="bold")
         else:
             rng = A.fmt_range(data[key])
@@ -1010,12 +1011,39 @@ def slide_analysis_longterm(c, a, date_iso):
     analysis_footer(c)
 
 
+# ── Business-Bullet-Vereinfachung (Fachjargon → klares Deutsch) ──────────────
+_JARGON_MAP = [
+    # Muster  →  Ersatz
+    ("TSMC-Leading-Edge-Allokation und CoWoS-Packaging-Kapazität",
+     "TSMC-Fertigungskapazität für die neusten Chips"),
+    ("Datacenter-GPU-Mix-Verschiebung hebt Gruppen-Marge strukturell",
+     "Mehr GPU-Umsatz verbessert die Gesamtmarge dauerhaft"),
+    ("Operativer Hebel:", ""),
+    ("Fabless-Modell:", ""),
+    ("Semi-Custom", "Konsolen-Chips"),
+    ("Leading-Edge-Allokation", "Fertigungskapazität"),
+    ("CoWoS-Packaging-Kapazität", "Chip-Packaging-Kapazität"),
+    ("niedrigmargigere", "margenschwächere"),
+    ("Cash-Sockel", "stabile Cashflow-Basis"),
+]
+
+
+def _simplify_bullet(text: str) -> str:
+    for pattern, replacement in _JARGON_MAP:
+        text = text.replace(pattern, replacement)
+    # Doppelleerzeichen nach Ersetzung bereinigen
+    import re as _re
+    text = _re.sub(r"  +", " ", text).strip()
+    text = _re.sub(r"^[:\s]+", "", text).strip()
+    return text
+
+
 # 5) WAS MACHT DAS UNTERNEHMEN — Highlights aus Investment-Case + Geschäftsmodell
 def slide_analysis_business(c, a, date_iso):
     analysis_header(c, a, date_iso)
     c.text(MX, 184, "Was macht das Unternehmen?", 42, weight="bold")
     c.text(MX, 240, "Geschäftsmodell & Investment-Case in Kürze", TY_SUB, color=T.MUTED)
-    bullets = a.get("business_bullets", [])[:8]
+    bullets = [_simplify_bullet(b) for b in a.get("business_bullets", [])[:8]]
     inner_w = c.W - 2 * MX - 80
     pad_top, pad_bot, b_gap = 22, 20, 16
     footer_y = c.H - 160
@@ -1109,14 +1137,14 @@ def _draw_cases_blocks(c, a, items, top0=300):
         rng = A.fmt_range(sc[key]["range"])
         prob = sc[key]["prob"]
         c.text(MX + 40, y + 20, SCEN_LABEL[key] + " Case", 26, color=col, weight="bold")
-        # Wahrscheinlichkeit · Kursziel in EINER Zeile rechts
+        # Wahrscheinlichkeit · Kursziel in EINER Zeile rechts — etwas tiefer als Label
         meta_parts = []
         if prob is not None:
             meta_parts.append(f"{prob}%")
         if rng:
             meta_parts.append(rng)
         if meta_parts:
-            c.text(c.W - MX - 40, y + 20, "  ·  ".join(meta_parts), TY_BODY,
+            c.text(c.W - MX - 40, y + 36, "  ·  ".join(meta_parts), TY_BODY,
                    color=col, weight="bold", ha="right", font="mono")
         _draw_paragraph(c, MX + 40, y + head_h, item["text"], body_size,
                         inner_w, color=T.TEXT, line_h=body_lh)
