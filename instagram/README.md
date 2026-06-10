@@ -1,4 +1,4 @@
-# Instagram-Generator — AI Alpha Selections
+# Instagram-Generator — AI Alpha Selection
 
 Erzeugt automatisiert Slides (PNG) + Caption für Instagram aus den
 vorhandenen Repo-Daten. **Lädt nichts hoch** — du prüfst alles und postest

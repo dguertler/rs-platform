@@ -5,6 +5,13 @@
 > Ablauf). Damit kannst du nahtlos weiterarbeiten. Live-Daten stehen in
 > `instagram/data/*.json` — diese Datei beschreibt sie + den aktuellen Snapshot.
 
+> **Pflege-Regel (verbindlich):** Abläufe/Regeln werden in `PROMPT.md` gepflegt,
+> diese Datei hält Projektstand, Daten-Snapshot, Design-System und Code-Karte.
+> Diese Datei dokumentiert immer nur den **aktuellen Endstand** — neue Vorgaben
+> ersetzen die veraltete Aussage (keine „Round"-Historie; Historie = Git-Log).
+> Snapshot-Zahlen stammen immer aus `instagram/data/*.json` (JSONs führend).
+> Keine manuell gepflegten Zähler — Stände per grep/Skript ermitteln.
+
 ---
 
 ## 1. Projekt in einem Satz
@@ -30,41 +37,18 @@ nennen, **wikifolio-Logo** ohne Freigabe, sich als wikifolio-Mitarbeiter ausgebe
 Pflicht-Risikohinweis ist in jeder Slide (Footer) + CTA + Caption integriert.
 Wort „Musterdepot" wird bewusst NICHT verwendet (es sind reale Käufe).
 
-## 4. Slide-Reihenfolge (Wochenpost — VERBINDLICH)
-1. **🆕 Dynamic Hook** (Slide 1, visueller Stopper, KEIN Dashboard) — dynamische
-   Schlagzeile (`--hook`) + Beweis-Chips Gesamtrendite + NASDAQ-100 seit Start
-2. **Performance vs. NASDAQ-100** (Eye-Catcher) + Kennzahlen-Streifen
-   (Gesamtrendite, NASDAQ, Alpha, Trades, Trefferquote, Profitfaktor,
-   Ø Gewinn/Trade, Ø Verlust/Trade; `*` = inkl. offener Positionen)
-3. **Mehrrendite ggü. NASDAQ-100** (wöchentliche Abweichung, Balken) — ab KW15
-4. **Stärkste Positionen** (Top-5 nach Wertzuwachs, mit Kaufdatum + Einstiegskurs)
-5. **Aktie der Woche** (rotiert durch ALLE Positionen; Kauf = blaues Signal)
-6. **Weitere Positionen** (alle außerhalb der Top-5, mit Chart-Slide für Newcomer)
-7. **Newcomer** (bester Kauf der letzten 3 Wochen, NUR wenn nicht in Top-5)
-8. **🆕 Strategisches „Warum"** (KI-Kontext, Text aus `--why`) — NACH den Positionsslides
-9+. **Trade der Woche** (ALLE Verkäufe der KW als einzelne Slides, sortiert nach
-   Rendite absteigend): Chart mit **Kauf grün + Verkauf rot**
-Last. **CTA** — Bio-Link-Pfad + dynamische Interaktions-Frage (`--frage`)
-
-**Reihenfolge-Begründung:** Erst Portfolio zeigen (Positionen + Charts), dann
-erklären WARUM (Rotation/Trades). Trades folgen nach dem Warum.
-
-**Dynamische Felder (Claude textet pro Woche, siehe PROMPT.md):** `--hook`
-(Schlagzeile), `--why` (KI-Kontext), `--frage` (Kommentar-Frage). Ohne Flags
-greifen datenbasierte Fallbacks (`auto_hook/auto_why/auto_question`).
-
-**`--why`-Regel:** Der Narrative-Text soll **keine Trade-Renditen in % nennen**
-— diese werden automatisch als „Realisiert: TICKER1 +X% · TICKER2 +Y%"-Zeile
-an den `--why`-Text angehängt (Code in `generate.py` nach `ctx["why"]` setzen).
-Claude schreibt in `--why` nur den narrativen Kontext (Marktereignis, Sektor, Logik).
-
-**Slide-Datum (oben rechts):** standardmäßig **Samstag der KW** (`report.slide_date`);
-liegt dieser noch in der Zukunft → heute; `--date` überschreibt. So bekommt jede
-rückwirkend erzeugte Analyse das passende Wochen-Samstagsdatum.
+## 4. Slide-Reihenfolge & Wochenpost-Regeln → `PROMPT.md`
+Die verbindliche Slide-Reihenfolge des Wochenposts, die dynamischen Felder
+(`--hook`/`--why`/`--frage` inkl. `--why`-Regel: keine Trade-Renditen in % —
+die „Realisiert: …"-Zeile wird automatisch angehängt) und die
+Slide-Datum-Logik (Samstag der KW; `--date` überschreibt) stehen
+**ausschließlich in `PROMPT.md`** („Slide-Reihenfolge (Wochenpost)" und
+„Dynamische Felder") — hier nicht doppelt pflegen.
 
 Rotation Aktie der Woche: `index = (kw - base_kw) % anzahl_positionen`.
 Kennzahlen = `trades.json` (abgeschlossen) **+** aktive Positionen (Rendite aus
-OHLCV der RS-JSONs). NASDAQ aus QQQ-Benchmark (`data/rs_full.json`).
+OHLCV der RS-JSONs, EUR-umgerechnet — siehe §10 „Kurswährung").
+NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallback.
 
 ## 5. Daten-Dateien (Live-Quelle: `instagram/data/`)
 | Datei | Inhalt | Pflege |
@@ -76,12 +60,16 @@ OHLCV der RS-JSONs). NASDAQ aus QQQ-Benchmark (`data/rs_full.json`).
 
 ## 6. Aktueller Daten-Snapshot (Stand KW23 / 06.06.2026)
 
+> Führende Quelle sind IMMER die JSONs (`wikifolio_history.json`,
+> `holdings.json`, `trades.json`). Dieser Abschnitt wird bei jedem
+> Wochenupdate **ersetzt** (Werte 1:1 aus den JSONs, eine Dezimale).
+
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
 20 135,44 · 21 139,66 · 22 148,25 · **23 149,86** → Gesamt **+52,2 %**,
-NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (QQQ-basiert, siehe §8).
+NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (^NDX-basiert, siehe §8).
 
-**Positionen (7):**
+**Positionen (7, aus `holdings.json`):**
 | Ticker | Name | Kauf | Einstieg € |
 |---|---|---|---|
 | MRVL | Marvell Technology | 24.03.2026 | 80,07 |
@@ -92,17 +80,19 @@ NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (QQQ-basiert, siehe §8)
 | DDOG | Datadog | 15.05.2026 | 178,62 |
 | AMAT | Applied Materials | 27.05.2026 | 398,09 |
 
-**KW23-Trades:** Kauf IBM (02.06., 285,95 €). Verkäufe (05.06.):
-AMD +69,7 % · Lam Research +29,9 % · NXP −6,0 % · IBM −12,6 % (kurzfristiger
-Roundtrip Kauf 02.06./Verkauf 05.06.).
+**KW23-Trades (Verkäufe 05.06., aus `trades.json`):**
+AMD +69,6 % · Lam Research +29,9 % · NXP Semiconductors −6,2 %.
 
-**Abgeschlossene Trades (19):** NVIDIA +0,39 · Analog Devices +10,99 ·
-Akamai −7,58 · ASML −5,28 · Amazon +0,82 · Broadcom +0,11 · Siemens Energy +0,37 ·
-Applied Materials +1,08 · Definium Therapeutics +22,32 · ASML +0,63 ·
-Credo Technology +0,56 · Alphabet +2,93 · IBM −7,41 · Microsoft −0,68 · NXP +0,30 ·
-NXP −6,0 · AMD +69,7 · IBM −12,6 · Lam Research +29,9
-(alle in %). Kennzahlen KW23: 26 Trades, Trefferquote 77 %, Profitfaktor 9,6,
-Ø Gewinn +18,9 %, Ø Verlust −6,6 % (inkl. offener Positionen).
+**Abgeschlossene Trades (19, aus `trades.json`, in %):**
+Alphabet +2,9 · IBM −7,4 · NXP +0,3 (alle drei pre-Excel) ·
+Definium Therapeutics +22,3 · ASML +0,7 · Credo Technology +0,1 ·
+Applied Materials +1,1 · Microsoft −1,3 · Siemens Energy +0,4 ·
+Broadcom +0,1 · Amazon +0,8 · ASML −5,2 · Akamai −7,6 · Analog Devices +11,0 ·
+NVIDIA +0,4 · Alphabet −7,4 · NXP −6,2 · AMD +69,6 · Lam Research +29,9.
+
+Die Report-Kennzahlen (Trades, Trefferquote, Profitfaktor, Ø Gewinn/Verlust)
+werden **automatisch** aus `trades.json` + aktiven Positionen berechnet —
+hier nicht manuell pflegen.
 
 ## 7. Wöchentlicher Ablauf (Kurzform)
 > ⚠️ **PFLICHT:** Gelieferte Werte (Zertifikatswert + Käufe/Verkäufe) **immer
@@ -199,6 +189,13 @@ keine falschen Zeiträume.
 4. Auch nach ZIP-Erstellung nochmals Spot-Check der Schlüssel-Slides (Positionen,
    CTA, Cover/Hook).
 
+**Zusätzlich nach JEDER Änderung an `render.py`/`theme.py`:**
+`python3 -m instagram.qa_golden` — Golden-Image-Regressionstest (vergleicht
+feste Test-Slides pixelbasiert mit `instagram/qa/golden/`). Schlägt er an,
+war die Änderung entweder ungewollt (fixen) oder gewollt → betroffene Slides
+visuell prüfen, dann `python3 -m instagram.qa_golden --update` und die neuen
+Referenzbilder mitcommitten.
+
 ### Historische Snapshots (`instagram/data/snapshots/KW<NN>/`)
 Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
 - `holdings.json` — Depot-Zustand am Ende der Woche
@@ -219,15 +216,25 @@ Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
 | KW22 | −NVDA, GOOGL / +NXPI (25.05.), AMAT (27.05.) | NVDA +0,4 %, GOOGL −7,4 % |
 | KW23 | −NXPI, AMD, LRCX / +NXPI (307,33 €) | NXPI −6,2 %, AMD +69,6 %, LRCX +29,9 % |
 
-## 8. Offene Punkte / Entscheidungen
-- **NASDAQ-Quelle (NDX vs. QQQ):** Es wird jetzt der echte **NASDAQ-100-Index
-  `^NDX`** verwendet (exakt wie im wikifolio-Report → 7/9 statt 6/9). `^NDX` wird
-  automatisch von `rs_colab.py` (Workflow `update_rs.yml`, täglich) mit nach
-  `data/rs_full.json` → `ndx_ohlcv` geladen. `store.py`/`data.py` bevorzugen
-  `ndx_ohlcv`, fallback QQQ (`benchmark_ohlcv`). Optionaler Override pro Woche
-  via `"nasdaq_pct"` in `wikifolio_history.json` bleibt möglich.
-- **Instagram-Handle:** aktuell kein @handle auf den Bildern (nur Markenname).
-  Echten Handle in `config.json` → `account` eintragen, falls er erscheinen soll.
+## 8. Entscheidungen & offene Punkte
+**Entschieden:**
+- **NASDAQ-Quelle = `^NDX`** (echter NASDAQ-100-Index, exakt wie im
+  wikifolio-Report). Wird täglich von `rs_colab.py` (Workflow `update_rs.yml`)
+  nach `data/rs_full.json` → `ndx_ohlcv` geladen; `store.py`/`data.py`
+  bevorzugen `ndx_ohlcv`, QQQ (`benchmark_ohlcv`) nur Fallback. Optionaler
+  Override pro Woche via `"nasdaq_pct"` in `wikifolio_history.json` bleibt möglich.
+- **Kein @-Handle auf Slides oder in Captions** (für den IG-Algorithmus
+  unnötig) — es erscheint nur der Markenname **AI Alpha Selection** (Singular).
+
+**Offen:**
+- **IBM-Roundtrip KW23:** Im Chat war ein IBM-Trade (Kauf 02.06. 285,95 € /
+  Verkauf 05.06., ca. −12,6 %) genannt, der in `trades.json` NICHT erfasst ist
+  (dito ein NXPI-Nachkauf 307,33 € aus der KW23-Snapshot-Tabelle). Mit dem
+  Nutzer klären und ggf. in `trades.json`/`holdings.json` nachtragen —
+  die JSONs sind führend.
+- **EUR/USD-Daten:** `eurusd_ohlcv` erscheint in `data/rs_full.json` erst nach
+  dem nächsten täglichen `update_rs.yml`-Lauf; bis dahin rechnet `store.py`
+  mit der USD≈EUR-Näherung (Fallback).
 
 ## 9. Roadmap
 Jetzt: Carousel wöchentlich (manueller Upload). Später: Stories + Reel-Animation
@@ -256,10 +263,13 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
 - **Ticker-Aliase (EUR-Kurse):** US-Tickerbezeichnungen ohne eigenes RS-Dataset
   werden automatisch auf den DAX/europäischen Kurs gemappt:
   `SIEGY → ENR.DE` (Siemens Energy AG, DAX, EUR-Preise). Mapping in `data.py`.
-- **Kurswährung:** `rs_full.json` enthält USD-Preise (NASDAQ-100). Die Rendite-
-  berechnung USD/USD ≈ EUR/EUR (Näherung, gültig für kurze Halteperioden).
-  Für exakte EUR-Renditen: EUR/USD-Kurs-Zeitreihe nötig oder europäische Kurse nutzen
-  (DAX-Daten in EUR). Kaufkurse in `holdings.json` sind immer in EUR.
+- **Kurswährung — exakte EUR-Renditen:** `rs_full.json`/`rs_sp500.json`
+  enthalten USD-Preise, `rs_dax.json` + `custom_ohlcv.json` EUR. USD-Renditen
+  werden in `store._ret_since()` über die tägliche **EUR/USD-Serie**
+  (`eurusd_ohlcv` in `rs_full.json`, geladen von `rs_colab.py`) in echte
+  EUR-Renditen umgerechnet: `ret_eur = (P1/P0) · (fx0/fx1) − 1`. Fehlt die
+  FX-Serie (noch kein Lauf), greift die alte USD≈EUR-Näherung als Fallback.
+  Kauf-/Verkaufskurse in `holdings.json`/`trades.json` sind immer in EUR.
 - **Fehlende Kursdaten (OTC / Small Cap / Mid Cap):** CRDO (Credo Technology) ist
   im S&P 500 und im NASDAQ-100 **NICHT enthalten** (gelistet an der NASDAQ-Börse,
   aber kein Index-Mitglied) — und damit **nicht in `rs_full.json` / `rs_sp500.json`**.
@@ -272,8 +282,8 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
   Label "DEINE MEINUNG?" 24 px (blau, bold); Fragetext 32 px (weiß, bold).
   Bio-Text via `_draw_paragraph` (volle Breite); Frage-Box vertikal zentriert
   zwischen Bio-Text-Ende und Risikohinweis-Trenner.
-- **Single Source of Truth:** alle neuen Vorgaben/Details werden sofort in den
-  Repo-MD-Dateien (`PROMPT.md`/`CONTEXT.md`) festgehalten — nicht nur im Chat.
+- **Pflege:** siehe Pflege-Regel am Dateianfang (Regeln → `PROMPT.md`,
+  Stand → hier; ersetzen statt anhängen, nichts nur im Chat).
 
 ## 11. Zweiter Post-Typ: Aktien-Analyse-Posts  (★ HIER WEITERARBEITEN)
 Neben dem Wochenupdate werden **fertige KI-Analysen** (`analyses/TICKER.md`) als
@@ -326,9 +336,10 @@ Wirkung pro Post eine **individuelle** `--headline` setzen.
 - `instagram/video.py` — `build_reel_video()` (MP4 via imageio-ffmpeg).
 - `instagram/assets/logos/<TICKER>.png` — Firmenlogos (siehe dortige README).
 
-**Schema-Hinweis:** Nur **17 von 55** Analysen folgen dem neuen 11-Abschnitte-
-Schema mit %/Kurszielen (AMD, SNDK, MU, AMAT, MRVL, STX, NXPI, KLAC, NTAP, LITE,
-AKAM, HPE, IBM, MGM, SM, CNC, F). Alt-Schema → Tiefen-/Szenario-Slides entfallen
+**Schema-Hinweis:** Nicht alle Analysen folgen dem neuen 11-Abschnitte-Schema
+mit %/Kurszielen. Aktuellen Stand IMMER frisch ermitteln (kein manuell
+gepflegter Zähler): `grep -L "BASE CASE" analyses/*.md` listet die
+Alt-Schema-Dateien. Alt-Schema → Tiefen-/Szenario-Slides entfallen
 automatisch (kürzeres Carousel, dafür „Chancen & Risiken"). Für volle Posts die
 Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 
@@ -336,7 +347,7 @@ Analyse zuvor nach `analyses/PROMPT.md` neu erzeugen.
 - **Logos hochladen:** Firmenlogos fehlen noch (Auto-Download in der Cloud
   geblockt). Datei als `instagram/assets/logos/<TICKER>.png` ins Repo legen
   (z. B. GitHub-Upload) → echtes Logo erscheint auf der weißen Cover-Karte.
-- Optional: individuelle Headlines für die 17 Ticker vorbereiten;
+- Optional: individuelle Headlines je Ticker vorbereiten;
   Reel-MP4-Feintuning (Tempo/Textgröße); Stories; Auto-Upload via Graph API.
 - Abhängigkeiten: `pip install -r instagram/requirements.txt` (matplotlib,
   numpy, Pillow, imageio, imageio-ffmpeg, **pyphen**).
@@ -382,7 +393,7 @@ fehlen.
 **Grid-Logik:** Wochenpost = Equity-Kurve · Analyse = Logo + Verdict-Badge ·
 **Earnings = Logo + grüne EARNINGS/BEAT-Pille** (akzentfarbe Grün=Beat / Rot=Miss).
 
-**Design-Regeln (Round 12/13 — verbindlich):**
+**Design-Regeln (verbindlich):**
 - Slide-Datum oben rechts = **Tag nach dem Earningscall** (`report_date`+1, auto).
 - Firmenlogo **ab Slide 2 oben rechts auf weißer Karte** (AMD-Größe) —
   `_company_logo_chip()`; auf dem Cover getrimmt & mittig auf großer weißer Karte
@@ -395,7 +406,8 @@ fehlen.
   weil Base Case zwar über Kurs, aber binäres Risiko).
 - Fazit + CTA-Tagline: **„datengetrieben · unabhängig · systematisiert"**.
 - **Reel = Slides 1–3 der Analyse** (Cover/Zahlen/Reaktion) + CTA (Slide 4) ohne
-  Verdict, ohne „Profil öffnen" (nur Handle + ▲). Reel = **9:16 (1080×1920)**,
+  Verdict, ohne „Profil öffnen" (nur Markenname „AI Alpha Selection" + ▲ —
+  kein @-Handle). Reel = **9:16 (1080×1920)**,
   Carousel = **4:5 (1080×1350)** → wiederverwendete Slides werden auf dem hohen
   Canvas automatisch vertikal zentriert (`dy=(c.H−1350)//2`).
 
@@ -469,7 +481,7 @@ Footer-Disclaimer: 16 px, `color=T.MUTED`.
 **Standard: linksbündig** (`justify=False` in `_draw_paragraph`).
 Blocksatz (`justify=True`) nur für abgegrenzte Boxen wie den CTA-Disclaimer.
 
-**Bindestrich-Darstellung (Deutsch + Englisch) — REGEL (Round 8):**
+**Bindestrich-Darstellung (Deutsch + Englisch) — REGEL:**
 Zusammengesetzte Wörter bleiben **genau so wie sie sind** (`CUDA-Moat` bleibt `CUDA-Moat`,
 `GPU-Mix` bleibt `GPU-Mix`). Das frühere `re.sub` das `Text - Text` aus `Text-Text` machte
 wurde **entfernt** — sah falsch aus und brach Fachbegriffe auseinander.
@@ -541,50 +553,42 @@ Das `_draw_paragraph`-Muster wird auch im Wochenpost genutzt (z. B. Hook-Text).
 - [ ] Cover: kein AKTIENANALYSE-Tag; Header: kein ANALYSE-Tag
 - [ ] Header rechts: Firmen-Logo (52 px), kein Ticker-Tag
 
-### 12.8 Caption-Aufbau (generate.py `caption_analysis`) — Round 10
+### 12.8 Caption-Aufbau (generate.py `caption_analysis` / `caption_earnings`)
 
-Die Caption ist eine **inhaltliche Ergänzung zu den Slides**, keine Zusammenfassung.
-Die "💡 Nicht auf den Slides"-Sektion enthält exklusiven Content der Caption.
+**Kurz-Caption — die VOLLE Analyse steht auf den Slides** (Vorgabe des
+Nutzers: kein Analyse-Content in der Caption, nichts wird ausgelagert).
 
-Reihenfolge:
-1. Titel + Verdict + Score
-2. Hook-Satz (Section 1)
-3. Business-Bullets (Section 2, max 4 → wird beim Kürzen reduziert)
-4. Szenarien 12-18M mit Wahrscheinlichkeit + Kursziel (+ Zusammenfassung wenn Platz)
-5. Langfrist-Spannen (3-5J)
-6. Rating-Sterne
-7. Fazit-Kernaussage
-8. Vergleichbare Titel (Peers)
-9. **💡 Nicht auf den Slides** (caption-exklusiv, IMMER vollständig, nie beim Kürzen weglassen):
-   - **EPYC vs. Intel**: AMD gewinnt Rechenzentrums-CPU-Marktanteile (aus Sections 2+3)
-   - **TSMC-Abhängigkeit**: Fabless-Modell, 3nm/5nm-Kapazität + CoWoS-Packaging (IMMER wenn in Sec2)
-   - **HBM-Risiko**: HBM3e von SK Hynix/Samsung, Lieferketten-Engpass (IMMER wenn in Sec2)
-   - **D/E-Ratio + Bilanz**: Verschuldungsgrad + FCF (aus Section 6, regex: `D/E`)
-   - **Analyst-Konsensus**: Kursziel vs. aktueller Kurs (aus Section 7, regex: Konsensus|Konsensziel)
-10. Folge-CTA
-11. Disclaimer
-12. Hashtags (25–30 Tags, maximale Algorithmus-Reichweite)
+Aufbau (Analyse-Post):
+1. SEO-Zeile: „<Firmenname> (TICKER) — Aktienanalyse: <Verdict> · Score X/100"
+2. Hook-Satz (aus Section 1)
+3. Slides-Hinweis + Save-CTA („Die komplette Analyse … findest du auf den
+   Slides. Speichere den Beitrag für deine Watchlist.")
+4. Folge-CTA („Folge AI Alpha Selection …" — kein @-Handle)
+5. Disclaimer
+6. Hashtags (siehe unten)
 
-**Kürzungsreihenfolge** bei Überschreitung des 2.200-Zeichen-Limits (Python `len()`):
-Bullets 4→3→2→0, Cases-Zusammenfassung, Langfrist — "Weitere Details" bleibt IMMER drin.
+Earnings-Post analog: SEO-Zeile „… — Earnings-Analyse Q<N>: Beat/Miss" +
+Beat-Einzeiler (EPS-Überraschung · Kurssprung) + Slides-Hinweis + CTA +
+Disclaimer + Hashtags.
 
-**Hashtag-Strategie** (22–25 zielgerichtete Tags, Round 11):
-- Basis (12): `#aktien #aktienanalyse #aktienmarkt #börse #boersewissen #geldanlage #finanzbildung #vermögensaufbau #wachstumsaktien #börsentipps #investing #stockanalysis`
-- Ticker + Stock-Tag (2): `#{tic} #{tic}stock` (z.B. #amd + #amdstock)
-- Sektor Technology (5): `#halbleiter #semiconductor #chips #technologieaktien #techaktien`
-- Themen-Tags (aus Bullets erkannt): GPU/KI → `#ki #aistock #aiinvesting #datacenter #gpu #aiinfrastructure`; EPYC/CPU → `#cpu #serverchips`
-- Peer-Tags (max 2, aus a["peers"]): automatisch aus der Analyse (z.B. #nvda #avgo)
-- Brand (1): `#aialphaselection`
-- Entfernt (zu unspezifisch/falsch): `#kisemiconductor #fabless #stockpicking #momentum #aiaccelerator`
+**Hashtag-Strategie: max. 5 Tags pro Post** (Instagram-Limit seit 2025;
+lt. Instagram optimal 3–5 — wenige hochrelevante Tags als Kontextsignal,
+Tag-Massen bringen keine Reichweite). In die Caption, nicht in die Kommentare.
+- Analyse: `#{tic} #aktienanalyse <Sektor-Tag> #investieren #aialphaselection`
+  (Sektor-Tags in `_SECTOR_TAG` in generate.py, Fallback `#börse`)
+- Earnings: `#{tic} #earnings #quartalszahlen #aktienanalyse #aialphaselection`
+- Wochenpost: `HASHTAGS_WEEKLY` = `#wikifolio #nasdaq #aktien #trading
+  #aialphaselection`
 
 **ZIP-Download**: `build_analysis` erstellt nach dem Rendern automatisch `carousel_{TICKER}.zip`
 mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeben und im Output angezeigt.
 
-**Slide 12 (Fazit) CTA-Box:** "Weitere Details zur Analyse in der Caption" (nicht auf vollständigen Text verweisen).
+**Slide 12 (Fazit) CTA-Box:** kein Caption-Verweis — alle Infos sind auf den
+Slides („Folge für wöchentliche Profi-Analysen" + Tagline).
 
 ### 12.9 Slide-spezifische Layout-Regeln
 
-**Cover (Slide 1) — Round 9:**
+**Cover (Slide 1):**
 - Hook: 60 px, Zeilenabstand 74, Start y=170
 - BUY-Verdict: Hook **immer** `"Kaufen — oder schon zu spät?"` — **KEIN Aktienname im Hook** (pool[0] = `"Kaufen — oder schon zu spät?"`, kein `{name}:` Präfix). In `analysis_headline()`: `if v == "BUY": return buy[0]`
 - Logo-Karte: zentriert zwischen Hook-Ende und gesamtem unteren Block (via chain_h)
@@ -594,7 +598,7 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
 - chain_h berücksichtigt `logo_name_gap`: `card_h + 16 + sub_h + logo_name_gap + verdict_h + 14 + ratings_h + 10`
 - Rating-Labels: 24 px (eine Größe kleiner als TY_BODY), Sterne unter den Labels
 
-**Business-Slide (Slide 3) — Round 8:**
+**Business-Slide (Slide 3):**
 - Box-Höhe **dynamisch** pro Bullet: `pad_top + n_head*TY_BODY_LH + n_body*TY_BODY_LH + pad_bot`
 - Blaue Überschriften und Body-Text: beide TY_BODY=28, line_h=TY_BODY_LH
 - Jede Box hat immer eine blaue Überschrift (bei fehlendem " — "-Trenner: erste 5 Wörter als Titel)
@@ -606,25 +610,25 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
   - `"niedrigmargigere"` → `"margenschwächere"`, `"Cash-Sockel"` → `"stabile Cashflow-Basis"`
 - Boxes die footer_y=c.H-160 überschreiten: werden abgebrochen
 
-**Szenarien-Slide (Slide 4) — Round 8:**
+**Szenarien-Slide (Slide 4):**
 - Box-Höhe rh=180 (content-fit: Wahrscheinlichkeit + Kursziel passen rein)
 - **Wahrscheinlichkeit-Label y+36** (war y+22), **Wert y+58** (war y+44)
 - **Kursziel-Label y+114** (war y+100), **Wert y+136** (war y+122)
 - Mehr Abstand von der Case-Überschrift, optisch klar getrennt
 
-**Cases-Blöcke (Slides 5+6+) — Round 8:**
+**Cases-Blöcke (Slides 5+6+):**
 - Wahrscheinlichkeit + Kursziel in EINER Zeile rechts: `"45%  ·  560–700 $"` — Position y+36 (mehr Abstand zur Case-Überschrift)
 - Overflow-Split in generate.py: findet automatisch wieviele Items auf eine Slide passen
   (avail=890px: c.H-160 - top0=300). Kann 3 Slides erzeugen (szenarien_erklaert_1/2/3)
 - _draw_cases_blocks bricht NICHT ab — die Split-Logik in generate.py ist dafür zuständig
 
-**Fundamentals-Slide (Slide 7) — Round 11:**
+**Fundamentals-Slide (Slide 7):**
 - Oben 2 Kennzahl-Tiles nebeneinander (gap=26, ch=140):
   - Links: D/E-Verhältnis (grün) — regex `r'D/E[^0-9]*([0-9]+(?:[,.][0-9]+)?)'` aus Section 6
   - Rechts: Free Cashflow (blau) — regex `r'FCF\s*\$\s*([0-9]+[,.][0-9]+)\s*(Mrd|Mio)'` aus Section 6
   - Darunter: Fließtext Section 6, max_lines=14
 
-**Bewertungs-Slide (Slide 8) — Round 11:**
+**Bewertungs-Slide (Slide 8):**
 - Oben 2 KGV-Tiles (Trailing rot / Forward grün, ch=150)
 - Darunter: **Analysten-Konsensus-Tile** (amber, h=120) — regex
   `r'Analyst-?Konsens(?:us|ziel)\s*\$\s*([0-9]+(?:[,.][0-9]+)?)'` aus Section 7
@@ -632,14 +636,14 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
 - Darunter: Fließtext Section 7, max_lines=11
 - "Trailing-KGV": Label "optisch teuer · Basiseffekt" (nicht "Artefakt")
 
-**Risk-Slide (Slide 9) — Round 11:**
+**Risk-Slide (Slide 9):**
 - Positions-Warn-Box: Text-Größe TY_BODY=28 (gleich wie der weiße Text darunter)
 - **HBM-Lieferkettenrisiko-Box** (amber, h=24+TY_BODY+24) wenn "HBM" in Section 2:
   `c.text(MX+34, y+24, "HBM-LIEFERKETTENRISIKO", TY_BODY, color=T.AMBER, weight="bold")`
   Rechts: "SK Hynix / Samsung" — max_lines=14 für den Fließtext darunter
 
-**Profi-Fazit (Slide 12) — Round 11:**
-- CTA-Box ohne Caption-Verweis: "Folge für wöchentliche Profi-Analysen" + "datengetrieben · unabhängig · faceless"
+**Profi-Fazit (Slide 12):**
+- CTA-Box ohne Caption-Verweis: "Folge für wöchentliche Profi-Analysen" + Tagline exakt "datengetrieben · unabhängig · systematisiert"
 - Kein "Weitere Details in der Caption" — alle Infos sind auf den Slides
 - `max_lines` **dynamisch** berechnet: `max(4, int(((c.H-160) - 256 - 120 - 40 - peers_reserve) / TY_BODY_LH))`
   (peers_reserve=100 wenn Peers vorhanden, sonst 0) → ca. 15 Zeilen, nie mehr abschneiden
@@ -648,7 +652,7 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
   + `re.sub(r'\*?Keine Anlageberatung[^*\n]*\*?', '', raw11)`
   + `re.sub(r'Verdict:\s*\w+\s*\(\d+/\d+\)[^\n]*', '', raw11)`
 
-**Allgemeine Regeln — Round 11 (aktualisiert):**
+**Allgemeine Regeln:**
 - **Ausnahmslos echte Umlaute** (ä, ö, ü, Ä, Ö, Ü, ß) in allen deutschen Strings — niemals ae/oe/ue/ss
 - Keine hardcodierten `--headline` Argumente mit ASCII-Ersatz übergeben (auto-Headline verwendet korrekte Umlaute)
 - **Hook-Texte enthalten KEINEN Aktiennamen** — nur die generische Frage/These
@@ -671,11 +675,9 @@ mit allen Carousel-PNGs im Output-Ordner. Wird in der `saved`-Liste zurückgegeb
 - Profi-Fazit (Slide 12): BUY 80/100, Beta + Forward-PE = 30-40% Drawdowns möglich
 - Peers (Slide 12): NVDA, AVGO
 
-**In der Caption (automatisch extrahiert via "Weitere Details"-Block):**
-- D/E-Verhältnis 6 (Bilanz solide)
-- Analysten-Konsensus $472 < aktueller Kurs $516 (Abdeckung läuft Rally nach)
-- HBM-Speicher von SK Hynix/Samsung (Verfügbarkeitsrisiko)
-- TSMC-Fabless (wenn nicht schon in Business-Bullets)
+**In der Caption:** nur Kurz-Caption (SEO-Zeile, Hook, Save-/Folge-CTA,
+Disclaimer, 5 Hashtags) — kein Analyse-Content; D/E, Analysten-Konsens und
+HBM-Risiko stehen auf den Slides (Fundamentals-/Bewertungs-/Risk-Slide).
 
 **Bewusst weggelassen (zu technisch für IG-Publikum):**
 - Jahrestarget EPS $18-22 (Bull), Forward-EPS-Revisionen aufwärts (Base)
