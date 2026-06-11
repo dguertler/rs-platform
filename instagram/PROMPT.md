@@ -113,21 +113,6 @@ Das Datum oben rechts ist **standardmäßig der Samstag der jeweiligen KW**
 So trägt jede rückwirkend erzeugte Analyse automatisch das korrekte
 Wochen-Samstagsdatum. Der Output-Ordner heißt entsprechend `<DATUM>_KW<NN>`.
 
-### Slide-Datum (oben rechts) — Samstag der KW
-Das Datum oben rechts ist **standardmäßig der Samstag der jeweiligen KW**
-(Wochenabschluss). Logik (`report.slide_date`):
-
-- Liegt der Samstag der KW in der **Vergangenheit** (Bericht wird später oder
-  rückwirkend erstellt) → es wird **dieser Samstag** eingetragen. Bsp.: heute ist
-  KW24, du erstellst den Report für KW23 → Datum = Samstag KW23.
-- Liegt der Samstag noch in der **Zukunft** (Bericht entsteht in der laufenden
-  Woche vor Samstag) → es wird **heute** eingetragen. Bsp.: heute ist noch KW23
-  (z. B. Donnerstag) → Datum = heute.
-- Ein expliziter `--date YYYY-MM-DD` hat immer Vorrang (manuelles Override).
-
-So trägt jede rückwirkend erzeugte Analyse automatisch das korrekte
-Wochen-Samstagsdatum. Der Output-Ordner heißt entsprechend `<DATUM>_KW<NN>`.
-
 ---
 
 ## Slide-Reihenfolge (Wochenpost — VERBINDLICH, entspricht `generate.build_from_store`)
