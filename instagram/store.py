@@ -317,6 +317,19 @@ def compute(kw, universe, benchmark, ref_date=None):
         if td:
             trades.append(td)
 
+    # ── Trade der Woche: größter realisierter Verkauf DIESER KW ───────────────
+    #    (Chart mit Kauf grün + Verkauf rot). Quelle: trades.json -> closed
+    #    mit `ticker` + Verkaufsdatum `date` innerhalb der KW.
+    from datetime import date as _date
+    wk_mon = _date.fromisocalendar(year, kw, 1).isoformat()
+    wk_sun = _date.fromisocalendar(year, kw, 7).isoformat()
+    week_sells = [t for t in load_trades().get("closed", [])
+                  if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun]
+    trade = None
+    if week_sells:
+        best = max(week_sells, key=lambda t: t.get("ret", -999))
+        trade = _trade_dict(universe, best)
+
     return {
         "kw": kw,
         "period": _period(start_date, as_of),
