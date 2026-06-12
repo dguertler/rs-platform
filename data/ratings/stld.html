@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>STLD — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">12.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>STLD</h1>
+      <h2>Steel Dynamics, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Basic Materials</span></div>
+        <div class="mi">Industrie: <span>Steel</span></div>
+        <div class="mi">MCap: <span>$39B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 12.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">131.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$268.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$19.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">14.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">79.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">15.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">310–350 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">230–260 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">120–150 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Steel Dynamics ist der beste Operator der US-Stahlindustrie — Elektrolichtbogenöfen (EAF) statt Hochöfen, variable Kostenstruktur, eigene Schrott-Versorgung über OmniSource und ein Aluminium-Flachwalzwerk als neues Standbein. Der strukturelle Kern der aktuellen Bewegung: US-Handelsprotektion (Zölle auf Importstahl) plus Reshoring-/Infrastruktur-Nachfrage treffen auf diszipliniertes US-Angebot — Stahlpreise und Spreads laufen, der Umsatz wächst +19,1% YoY auf $19,0 Mrd. Hinweis zur Datenlage: Fundamental-Snapshot vom 08.06. (Kurs $268,50) liegt ~4% unter dem aktuellen Kurs ($279,55, Allzeithoch) — Abweichung innerhalb der Toleranz, Multiples näherungsweise gültig. Was der Markt einpreist: verlängerte Spread-Stärke. Was er übersieht bzw. ausblendet: Das ist ein Commodity-Zykliker nahe Zyklushoch mit aktuell negativem Free Cashflow (Capex-Programm). Analyst-Konsensziel $256 liegt unter dem Kurs — die Coverage traut der Spread-Rally nicht voll.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>EAF-Stahlproduktion (Flachstahl, Profile, Spezialstähle): schrottbasiert, variable Kosten — in Abschwüngen strukturell profitabler als integrierte Hochofen-Konkurrenz</li>
+<li>OmniSource: eigenes Schrott-Recycling — sichert Rohstoffzugang und einen Teil der Marge upstream</li>
+<li>Downstream-Fabrication (Träger, Decking) für Bau/Infrastruktur — höhermargig, auftragsbuchgestützt</li>
+<li>Neues Aluminium-Flachwalzwerk: Diversifikation in Getränkedosen-/Automotive-Aluminium — Ramp bindet aktuell Capex (FCF negativ)</li>
+<li>Ergebnistreiber Nr. 1: Metal Spread (Stahlpreis minus Schrottkosten) — nicht Volumen</li>
+<li>Zoll-/Handelspolitik (Section 232 u.ä.) als externer Margenschutz — politisch, nicht strukturell</li>
+<li>Bruttomarge 14%, operative Marge 10,3% — Commodity-Ökonomie trotz bester Ausführung</li>
+<li>D/E 46% moderat; Dividende 0,79% plus historisch aggressive Buybacks</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Zölle bleiben oder verschärfen sich, Reshoring-Capex (Fabs, Datacenter, Infrastruktur) hält die Inlandsnachfrage hoch, der Aluminium-Ramp dreht 2027 von Kostenfresser auf Ergebnisbeitrag. Margennachhaltigkeit: EAF-Kostenvorteil und Downstream-Mix sind real und strukturell vs. integrierte Peers; dauerhaft über dem Zyklusmittel liegende Spreads erfordern aber anhaltende Handelsprotektion — das ist eine politische, als solche zu kennzeichnende Annahme. 2027-EPS $22 (Annahme, kein Konsens: Spread-Stärke + Aluminium-Beitrag; vs. Forward-EPS $17,52) × 15x = $330. Kursziel-Bandbreite 310–350 USD. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Stahlpreise geben vom Hoch nach, bleiben aber über altem Zyklusmittel; Aluminium-Ramp läuft planmäßig, kostet aber noch. EPS ~$17,50 (Forward-EPS aus Snapshot-Forward-PE 15,3) × 13–15x (historischer EAF-Korridor) = 230–260 USD — unter dem aktuellen Kurs: Die Aktie hat das Szenario bereits überholt. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: US-Bau-/Automotive-Nachfrage kippt rezessiv, Importzölle werden politisch aufgeweicht oder durch Handelsdeals umgangen, Schrottpreise steigen relativ — der Metal Spread komprimiert von beiden Seiten. Risikodimensionen: Kundenkonzentration — breite industrielle Abnehmerbasis, geringes Einzelkundenrisiko (Detail nicht im Datensatz). Geopolitik/Handelspolitik — hier invertiert: STLD ist Profiteur von Protektion; das Risiko ist deren Rückbau, nicht Exportkontrolle. Lieferkette — schrottbasiert und domestisch, kein Foundry-/Single-Source-Risiko; Schrottpreis-Volatilität ist das Pendant. Verwässerung — SBC/Aktienanzahl nicht im Datensatz, auf Datenbasis nicht beurteilbar; historisch Nettorückkäufer. Regulierung — CO2-/Umweltauflagen treffen EAF deutlich milder als Hochöfen (relativer Vorteil). Im Bear-Fall: EPS $10 (Spread-Normalisierung wie 2023/24) × 12x = $120. Kursziel-Bandbreite 120–150 USD. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × 330 + 0,45 × 245 + 0,30 × 135 = $233 — implizites Downside vs. aktuellem Kurs ($279,55): −17%.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 15,2% — ordentlich, aber bereits Zyklusaufschwung-gestützt; über den Zyklus schwankt STLDs ROE massiv. Bruttomarge 14%, Nettomarge 7,2% — Commodity-Realität. Kritisch: FCF −$32 Mio. trotz $19 Mrd. Umsatz — das Aluminium-Capex-Programm verschlingt den operativen Cashflow; als Investition in Diversifikation vertretbar, aber es nimmt den Puffer für den nächsten Abschwung (aus den Daten nicht auflösbar, wie viel Capex Wachstum vs. Erhalt ist). D/E 46% tragbar. Echter Burggraben: Kostenposition (EAF + OmniSource) und Ausführungskultur — relativ zur Branche. Absolut gibt es im Commodity-Stahl keinen Burggraben; Preissetzer ist der Markt, nicht das Unternehmen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing-PE 28,8x / Forward-PE 15,3x (auf $279,55: ~16x) — die klassische Zykliker-Falle: Optisch moderate Multiples nahe Zyklushoch sind teuer, nicht billig. P/B 4,3x ist für STLD historisch hoch (Zyklustiefs nahe 1–1,5x Buchwert). Normalisierter FCF über den Zyklus (Annahme $1,2–1,8 Mrd. nach Capex-Normalisierung): auf $38,7 Mrd. Market Cap ein Multiple von 22–32x normalisiertem FCF — für einen Stahlwert ambitioniert. Rückrechnung "Was preist der Kurs ein?": $279,55 bei Exit-Multiple 12x in 5 Jahren erfordert ~$23 EPS nachhaltig — also dauerhafte Spreads nahe dem heutigen Niveau plus voller Aluminium-Erfolg. Das ist ambitioniert und hängt an der Handelspolitik. Eher strukturierte Zollpolitik-Wette als echtes Upside.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 132, alle Fenster positiv (50T +40,4%), Allzeithoch. RSI 83,5 — die Aktie wird gejagt. Hypothese, nicht datenbasiert: Sektor-Rotation in US-Industrials/Protektions-Profiteure; generalistische Käufer, die 16x Forward als günstig lesen, ohne den Zyklus zu adjustieren. Neue Käufer brauchen anhaltend steigende Stahlpreise — der Treiber ist extern und politisch. Enttäuschungsrisiko hoch: Kurs über Konsensziel, Positionierung heiß, und Spread-Daten kommen wöchentlich.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS 3/3 aktiv. Kurs $279,55 auf Allzeithoch, +22% über SMA50 ($230), +55% über SMA200 ($180). RSI(14) 83,5 — stark überkauft, höchster Wert im hier betrachteten Set. 20T +20,6%, 6M +56,9% — beschleunigtes Momentum, zunehmend reaktiv auf Stahlpreis-Schlagzeilen statt fundamentale Neubewertung. Warnsignale: Tagesschluss unter $268 (Ausbruchsbasis), hartes Signal bei Wochenschluss unter SMA50 $230.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($400–480):** Dauerhafte Handelsprotektion + Aluminium-Erfolg; nachhaltiges EPS $28–32, Multiple 14–15x.</p>
+<p>**Base Case ($280–330):** Normaler Stahlzyklus mit höherem Sockel durch Aluminium-Diversifikation; nachhaltiges EPS $20–24, Multiple 13–14x.</p>
+<p>**Bear Case ($130–170):** Spread-Normalisierung + Zoll-Rückbau; EPS-Mittel $11–13, Multiple 12x.</p>
+<p>Entscheidende Variable: US-Handelspolitik — sie entscheidet über das Spread-Niveau, an dem alles andere hängt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>STLD ist der Qualitätsführer einer Branche ohne Preissetzungsmacht — bester Operator, richtige Strategie (EAF, Downstream, Aluminium), aber am Ende ein Zykliker auf Allzeithoch mit RSI 83 und negativem FCF. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV $233 vs. Kurs $280, −17%). Einordnung: zyklischer Momentum-Trade, ausschließlich für Trader mit strikter Stop-Disziplin (Stop $268, Trailing 12–15%); für Buy-and-Hold der falsche Zeitpunkt im Zyklus — der nächste attraktive Einstieg entsteht historisch bei 1,5–2x Buchwert, nicht bei 4,3x. Positionsgröße max. 1–2%. Peers: **Nucor (NUE)** ist der größere EAF-Zwilling mit gleicher These und ähnlicher Qualität, **Reliance (RS)** das defensivere Service-Center-Modell mit weniger Spread-Risiko (Forward-PE 18,8x vs. STLD 15,3x — STLD optisch günstiger, aber zyklischer; Nucor-Multiples nicht im Datensatz, relative Bewertung indikativ).</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

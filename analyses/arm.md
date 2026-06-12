@@ -1,16 +1,16 @@
 # ARM — KI-Aktienbewertung
 
-**Arm Holdings plc** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
+**Arm Holdings plc** · Technology · 12.06.2026 · Signal: GWS Breakout 3/3
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 353.29 |
-| Market Cap | $377.34 Mrd. |
-| Forward PE | 115.64 |
+| Kurs | 342.93 |
+| Market Cap | $366.28 Mrd. |
+| Forward PE | 112.03 |
 | Revenue (TTM) | $4.92 Mrd. |
 | Gross Margin | 97.5% |
 | ROE | 12.0% |
-| RS-Score | 428.3 |
+| RS-Score | 273.2 |
 
 **GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
 
@@ -18,149 +18,69 @@
 
 ## 1. INVESTMENT-CASE
 
-ARM ist kein klassischer Halbleiterhersteller, sondern ein IP-Lizenzgeber mit einer fast monopolartigen Stellung im mobilen Computing und einer wachsenden Präsenz in Rechenzentren, Automotive und AI-Edge. Der eigentliche Investmentcase liegt im Wandel des Royalty-Modells: ARMv9-Architekturen generieren etwa doppelt so hohe Lizenzgebühren wie ARMv8, und AI-Workloads treiben den Bedarf nach effizienter CPU-Architektur. Der Markt preist ARM als strukturellen AI-Profiteur ein – nicht als zyklischen Halbleiterwert. Bei einem Forward-PE von 100 und einer Market Cap von $326 Mrd. bei nur $4,9 Mrd. Umsatz ist klar: Das ist eine reine Story-Aktie mit extremer Bewertungsprämie. Die These funktioniert nur, wenn ARM in den nächsten 5 Jahren Royalty-Umsätze drastisch hochskalieren kann, insbesondere durch Custom-Silicon-Designs bei Hyperscalern (NVIDIA Grace, AWS Graviton, Microsoft Cobalt).
+ARM ist die Mautstation der globalen Chip-Industrie: Nahezu jedes Smartphone, zunehmend aber auch Hyperscaler-CPUs (AWS Graviton, NVIDIA Grace, Custom-ASICs) zahlen Lizenz- und Royalty-Gebühren auf ARM-IP. Der strukturelle Kern der Story ist nicht das Umsatzwachstum (+20,1% YoY auf $4,92 Mrd. TTM), sondern der Royalty-Mix-Shift: v9-Architektur und Compute-Subsysteme tragen pro Chip deutlich höhere Royalty-Raten als die v8-Basis — der Umsatz pro verkauftem Endgerät steigt, ohne dass ARM mehr Geräte braucht. Der Markt preist das mit 112x Forward-Earnings aber bereits sehr weit ein. Kennzahl-Anomalie: Trailing-PE 399 vs. Forward-PE 112 impliziert nahezu eine Verdreifachung des EPS binnen 12 Monaten — plausibel durch operativen Hebel und Lizenz-Timing, aus den Daten aber nicht abschließend auflösbar. Analyst-Konsensziel $247 liegt ~28% unter dem Kurs von $342 — als Sentiment-Indikator, nicht als Kursziel-Ceiling zu verstehen, signalisiert hier aber: Die Coverage hält die Bewertung für ausgereizt. Strukturelle Geschäftsmodell-Stärke: Royalty-Verträge laufen über Dekaden — das ist kein Zyklus-Play, sondern ein Bewertungs-Risiko-Play.
 
 ## 2. GESCHÄFTSMODELL
 
-- Zwei Haupteinnahmequellen: License Fees (Vorab-Gebühren) und Royalties (pro verkauftem Chip)
-
-- Praktisch jedes Smartphone weltweit nutzt ARM-IP – über 99% Marktanteil im Mobile
-
-- ARMv9-Migration: höhere Royalty-Rate pro Chip, deutlicher Mix-Shift im Gange
-
-- Wachstumsfelder: Data Center (NVIDIA Grace, AWS Graviton), Automotive, AI-Edge, IoT
-
-- Compute Subsystems (CSS): vorgefertigte Designs, höhere Wertschöpfung pro Lizenz
-
-- Sehr asset-light: 97,5% Gross Margin spiegelt reines IP-Geschäftsmodell wider
-
-- Kunden-Konzentration: Apple, Qualcomm, MediaTek, Samsung, NVIDIA dominieren
-
-- Mehrheitseigentümer SoftBank (~90%) – freier Streubesitz extrem niedrig
+- Zwei Erlösströme: Lizenzgebühren (upfront, projektgetrieben) und Royalties pro verkauftem Chip (wiederkehrend, margenstark)
+- Bruttomarge 97,5% — reines IP-Modell ohne Fertigung, ohne Inventar-Risiko
+- Royalty-Hebel: v9 trägt etwa doppelte Royalty-Rate vs. v8, Compute-Subsysteme (CSS) nochmals mehr — Mix-Shift ist der eigentliche Wachstumstreiber
+- Smartphone-Basis (>99% Marktanteil bei Mobile-CPUs) als stabiler Cash-Sockel
+- Wachstumsvektor Datacenter: Hyperscaler-eigene CPUs und KI-Inference-Chips basieren überwiegend auf ARM-IP
+- Operative Marge 29,5% trotz 97,5% Bruttomarge — massive F&E-Quote; jeder Umsatz-Dollar oberhalb der F&E-Basis fällt fast vollständig durch
+- Konzentration auf wenige Großlizenznehmer (Apple, Qualcomm, MediaTek) — Verhandlungsmacht-Risiko
+- SoftBank hält die große Mehrheit der Aktien (öffentlich bekannt, nicht im Datensatz) — geringer Free Float erklärt Beta 3,79
 
 ## 3. BULL CASE
 
-- ARMv9-Royalty-Verdopplung beschleunigt sich – Umsatz pro Chip steigt mehrjährig
+Datacenter-Royalties skalieren schneller als erwartet: Hyperscaler verlagern weitere CPU-Workloads auf ARM, Edge-AI bringt höhere Royalty-Raten in Smartphones und PCs, CSS-Adoption beschleunigt. Strukturelle Margennachhaltigkeit ist hier begründbar: IP-Quasi-Monopol im Mobile-Ökosystem, Switching Costs der gesamten Software-Basis, keine Fertigungskosten — die operative Marge kann bei Umsatzskalierung Richtung 45–50% laufen, weil F&E nicht proportional mitwächst. FY28-EPS $4,50 (Annahme, kein Konsens) × 100x Forward (Premium-IP-Multiple) = $450. Kursziel-Bandbreite 420–480 USD. Eintrittswahrscheinlichkeit: 25%.
 
-- AI-Inference am Edge (Smartphones, PCs, Autos) braucht effiziente ARM-Cores
+## 4. BASE CASE
 
-- Hyperscaler bauen zunehmend eigene ARM-basierte Server-Chips → Margen-Booster
+Wahrscheinlichstes Szenario 12–18 Monate: Royalty-Wachstum ~20–25% p.a. hält, Datacenter-Ramp läuft, aber das Multiple komprimiert leicht, weil die Wachstumsbeschleunigung bereits eingepreist ist. Forward-EPS ~$3,05 (implizit aus Forward-PE 112 auf Snapshot-Kurs) wächst Richtung $3,40–3,60; Multiple 90–95x ergibt 305–340 USD — Seitwärtsbewegung mit hoher Volatilität (Beta 3,79). Kursziel-Bandbreite 290–335 USD. Eintrittswahrscheinlichkeit: 45%.
 
-- Windows-on-ARM und Apple-Silicon-Effekt erreichen den PC-Markt strukturell
+## 5. BEAR CASE
 
-- Automotive-Royalties wachsen mit Software-defined Vehicles zweistellig
+Auslöser: Smartphone-Nachfrage stagniert, ein Großlizenznehmer eskaliert Royalty-Verhandlungen (Qualcomm-Rechtsstreit als Präzedenz), RISC-V gewinnt bei Embedded/IoT strukturell Anteile. Risikodimensionen: Kundenkonzentration — wenige Lizenznehmer dominieren den Royalty-Strom, Quantifizierung im Datensatz nicht enthalten. Geopolitik/China — ARM China ist strukturell eigenständige Einheit mit historischen Kontrollproblemen; Exportkontrollen auf High-End-IP treffen direkt den China-Umsatzanteil (Anteil nicht im Datensatz). Lieferkette/Foundry — als Fabless-IP-Haus kein direktes Single-Source-Risiko, aber voll abhängig vom Chip-Volumen der Lizenznehmer. Verwässerung — SBC-Daten und Aktienanzahl-Trend nicht im Datensatz, auf Datenbasis nicht beurteilbar; bei Tech-IPOs dieser Art typischerweise materiell. Regulierung/Recht — Lizenzstreitigkeiten sind beim Geschäftsmodell inhärent. Im Bear-Fall fällt das EPS-Wachstum auf ~15%, EPS $2,50 × 60x (immer noch Premium) = $150. Kursziel-Bandbreite 140–180 USD. Eintrittswahrscheinlichkeit: 30%.
 
-- China-Risiken könnten ironischerweise zu mehr ARM-Adoption führen (vs. x86)
+**Summe: 25% + 45% + 30% = 100%**
 
-- Sehr kleiner Float → jeder positive Newsflow erzeugt überproportionale Bewegung
+**Erwartungswert:** EV = 0,25 × 450 + 0,45 × 312,5 + 0,30 × 160 = $301 — implizites Downside vs. aktuellem Kurs ($342): −12%.
 
-## 4. BEAR CASE
+## 6. FUNDAMENTALE QUALITÄT
 
-- Bewertung: 66x Sales und 100x Forward-Earnings lassen null Toleranz für Enttäuschungen
+Bruttomarge 97,5% ist Weltklasse und strukturell (IP-Modell). Operative Marge 29,5% und Nettomarge 18,4% zeigen die hohe F&E-Last — der Burggraben wird teuer verteidigt. ROE 11,95% ist für ein Asset-Light-Modell unauffällig; die enorme Kapitalbasis aus dem IPO drückt die Kennzahl. FCF $0,75 Mrd. bei $4,92 Mrd. Umsatz (15% FCF-Marge) — solide, aber nicht spektakulär für 97% Bruttomarge. D/E 5,9% — praktisch schuldenfrei, Bilanz makellos. Der echte Burggraben: das Software-Ökosystem auf ARM-Architektur — Switching Costs sind real und dekadenlang. Scheinbar ist der Burggraben dort, wo RISC-V als lizenzfreie Alternative ansetzt: Embedded und Low-End.
 
-- Analysten-Kursziel $232 liegt 24% unter aktuellem Kurs – institutioneller Skeptizismus
+## 7. BEWERTUNG
 
-- RISC-V als Open-Source-Alternative gewinnt traction, besonders in China und im IoT
+Kein Zyklus-Play, daher KGV-Betrachtung zulässig — aber: Forward-PE 112x, P/B 44x, Trailing-PE 399x. Normalisierter FCF: $0,75 Mrd. auf $366 Mrd. Market Cap = FCF-Yield 0,2% — der Kurs lebt vollständig von künftigem Wachstum. Rückrechnung "Was preist der Kurs ein?": Um $342 mit einem Exit-Multiple von 35x in 5 Jahren zu rechtfertigen, braucht ARM ~$10 EPS — also Verzwölffachung des Trailing-EPS bzw. >30% EPS-Wachstum p.a. ab dem bereits ambitionierten Forward-EPS. Das ist am oberen Rand des Plausiblen und lässt keinerlei Raum für Execution-Fehler — ambitioniert bis unrealistisch. Das ist kein Value, keine strukturierte Wette mit Sicherheitsmarge, sondern ein reines Wachstums-Momentum-Asset.
 
-- Qualcomm-Rechtsstreit zeigt Spannungen mit Schlüsselkunden
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Hohe Abhängigkeit von Smartphone-Zyklus (~50% der Royalties)
+RS-Score 273 (Top-Bereich NASDAQ-100), aber 5T/10T leicht negativ — das kurzfristige Momentum kühlt ab, der Kurs schwankte binnen einer Woche zwischen $307 und $412. Hypothese, nicht datenbasiert: Geringer Free Float (SoftBank-Mehrheit) verstärkt Fast-Money-Dominanz; Long-Only-Adressen tun sich mit 112x Forward schwer. Neue Käufer brauchen sichtbare Datacenter-Royalty-Beschleunigung in den Quartalszahlen. Enttäuschungsrisiko: sehr hoch — bei diesem Multiple genügt eine In-Line-Guidance für −15–20%.
 
-- SoftBank-Overhang: potenzielle Sekundärplatzierungen drücken Aktie
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- Beta 3,41 → bei jeder AI-Korrektur überproportionaler Drawdown
+GWS 3/3 aktiv. Kurs $342 deutlich über SMA50 ($238) und SMA200 ($161) — intakter Aufwärtstrend, aber extrem gedehnt. RSI(14) 57 — neutral nach der jüngsten Korrektur vom Hoch $428 (−20%). 20T +50%, 50T +98%, 6M +127% — starkes, aber zuletzt hochvolatiles Momentum (Tagesbewegungen ±10%). Warnsignal: Wochenschluss unter $300 (Verlust der Konsolidierungszone); darunter ist $238 (SMA50) die letzte Trendmarke.
 
-- Free Cashflow nur $770 Mio. – rechtfertigt keine $326 Mrd. Bewertung kurzfristig
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-## 5. FUNDAMENTALE QUALITÄT
+**Bull Case ($600–800):** ARM wird Standard-Architektur im Datacenter und Edge-AI; Royalty-Rate pro Gerät verdoppelt sich; EPS läuft Richtung $10–12.
 
-- Umsatzwachstum 20,1% YoY – solide, aber nicht hyper-skalierend
+**Base Case ($350–500):** Royalty-Wachstum solide, aber Multiple normalisiert auf 40–50x; EPS ~$8–10 in 2030.
 
-- Gross Margin 97,5% – Best-in-Class IP-Modell
+**Bear Case ($120–200):** RISC-V erodiert Low-End, Datacenter-Ramp enttäuscht, Multiple-Kompression auf 30x bei EPS ~$5.
 
-- Operating Margin 29,6% – Spielraum nach oben durch Skalierung
-
-- Net Margin 18,4% – durch hohe R&D und SBC gedrückt
-
-- FCF $770 Mio. → FCF-Yield <0,3% bei aktueller Bewertung
-
-- Debt/Equity 5,21 – optisch hoch, aber Bilanz solide
-
-- ROE nur 12% – für IP-Business unterdurchschnittlich
-
-- Price/Book 39 – reine Goodwill-/IP-Bewertung
-
-- Stock-Based Compensation drückt GAAP-Earnings massiv
-
-- Royalty-Mix-Shift hin zu v9 = struktureller Margen-Tailwind
-
-- Wettbewerbsvorteil: Ökosystem-Lock-in, Software-Compatibility, jahrzehntelange IP
-
-- Kapitaleffizienz operativ exzellent, aber Aktien-Bewertung übertrieben
-
-## 6. BEWERTUNG
-
-ARM handelt bei 66x Sales und 100x Forward-Earnings – das ist Bewertungsterritorium, das selbst NVIDIA mit besserem Wachstum nicht trägt. Die EV/Sales von ~65x ist mehr als doppelt so hoch wie der Sektorschnitt für High-Quality-Semiconductor-Werte. Der Markt preist mehrjähriges Royalty-Wachstum von 25-30% mit margenexpansion linear ein. Vergleichsweise: Synopsys und Cadence (ebenfalls IP-/EDA-Modelle) handeln bei 40-50x Forward-Earnings bei ähnlichem Wachstum. Analysten-Konsens-Kursziel $232 impliziert deutliches Downside. Bei einem realistischen Wachstumspfad rechtfertigen Fundamentaldaten eher $180-220 – alles darüber ist Momentum- und Knappheits-Prämie durch den kleinen Float.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Extrem crowded auf der Long-Seite unter Retail und AI-Thementradern
-
-- Institutionelles Ownership niedrig wegen SoftBank-Float-Problem
-
-- Smart Money tendenziell skeptisch – Analystenziele unter Kurs
-
-- Short-Interest moderat, aber steigend bei jedem neuen ATH
-
-- Hype-Komponente hoch, fundamentale Komponente moderat
-
-- Klassische "narrative stock" – getrieben von AI-Story, nicht Cashflows
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- RS-Score 370 vs. QQQ – extrem starkes Outperformance-Signal
-
-- 50T-Performance +143%, 6M +108% – parabolisch, kurzfristig überhitzt
-
-- GWS-Ampel 3/3 AKTIV: Weekly, Daily, 4H Strukturbruch – starkes Momentum-Setup
-
-- Nahe 52W-Hoch ($315) – Breakout-Charakter, aber Anstieg vertikal
-
-- Risk/Reward kurzfristig schlecht – Rücksetzer auf $250-270 wahrscheinlich vor Fortsetzung
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-Konservatives Szenario: Royalty-Wachstum 15-18% p.a., Margen stagnieren / Kursziel $220-260 / Wahrscheinlichkeit 40%
-
-Bull Case: ARMv9 + Data-Center-Penetration + AI-Edge / Royalty-Wachstum 25%+ / Kursziel $450-550 / Wahrscheinlichkeit 35%
-
-Extrem-Bull-Case: ARM wird "AI-CPU-Standard" auch im Server-Markt, CSS-Adoption explodiert / Kursziel $700-900 / Wahrscheinlichkeit 15%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- NVDA: bessere Margen, höheres Wachstum, günstigere Bewertung relativ zum FCF
-
-- SNPS/CDNS: vergleichbares IP-Modell, viel günstiger bei ähnlicher Qualität
-
-- QCOM: ARM-Kunde, deutlich günstiger, aber zyklischer
-
-- AVGO: diversifizierter, höherer FCF-Yield, attraktiveres Risk/Reward
-
-- ARM ist mit Abstand die teuerste Aktie der Peergroup
+Entscheidende Variable: Datacenter-Royalty-Anteil — skaliert er, trägt er das Multiple; stagniert er, ist ARM eine teure Mobile-Royalty-Annuität.
 
 ## 11. PROFI-FAZIT
 
-ARM ist ein Qualitätsunternehmen mit echtem strukturellem Moat, aber zum aktuellen Kurs eine reine Momentum- und Knappheits-Play. Aus Hedgefonds-Perspektive ist das kein "Buy and Hold"-Compounder zu diesen Multiples, sondern ein taktisches Trading-Vehikel mit starkem Tape, aber katastrophalem Risk/Reward bei Einstieg am ATH. Die GWS-Ampel 3/3 zeigt starkes kurzfristiges Momentum, aber die parabolische Bewegung (+143% in 50 Tagen) ist klassisch überhitzt. Wer long ist: Gewinne sichern, Trailing-Stop unter $270 setzen. Wer einsteigen will: NICHT jagen – auf Rücksetzer in den Bereich $230-260 warten, idealerweise mit erneutem GWS-Setup. Strukturell bleibe ich konstruktiv für ARM auf 3-5 Jahre, aber die Aktie braucht erst eine Konsolidierungsphase, bevor das nächste Bewertungslevel gerechtfertigt ist. Klassischer Fall: Großartiges Unternehmen, schlechter Einstiegspunkt.
-
-Rating:
+ARM ist qualitativ ein erstklassiges IP-Monopol, aber auf diesem Niveau kein Investment mit Sicherheitsmarge. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV $301 vs. Kurs $342). Das ist ein Momentum-/Narrativ-Play für Trader mit enger Risikokontrolle, kein Buy-and-Hold-Einstieg — den gäbe es erst 25–30% tiefer. Für Langfrist-Investoren: Qualität ja, Preis nein. Positionsgröße: max. 1–2%, Beta 3,79 beachten. Peers: **NVIDIA** ist das direktere KI-Compute-Instrument, **Synopsys/Cadence** die stabileren IP/EDA-Compounder — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ; ARMs 112x Forward dürfte deutlich über beiden liegen.
 
 - Qualität: 4/5
-
 - Wachstum: 4/5
-
 - Bewertung: 1/5
-
-- Langfristiges Potenzial: 4/5
+- Katalysator: 3/5
 
 ---
 
