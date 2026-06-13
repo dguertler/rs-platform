@@ -58,7 +58,7 @@ NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallba
 | `holdings.json` | alle Positionen + Kaufdatum + Einstiegskurs + `base_kw` | bei Kauf/Verkauf |
 | `trades.json` | abgeschlossene Trades (realisierte Rendite) | bei Verkauf |
 
-## 6. Aktueller Daten-Snapshot (Stand KW23 / 06.06.2026)
+## 6. Aktueller Daten-Snapshot (Stand KW24 / 13.06.2026)
 
 > Führende Quelle sind IMMER die JSONs (`wikifolio_history.json`,
 > `holdings.json`, `trades.json`). Dieser Abschnitt wird bei jedem
@@ -66,8 +66,8 @@ NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallba
 
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
-20 135,44 · 21 139,66 · 22 148,25 · **23 149,86** → Gesamt **+52,2 %**,
-NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (^NDX-basiert, siehe §8).
+20 135,44 · 21 139,66 · 22 148,25 · 23 149,86 · **24 154,79** → Gesamt **+57,2 %**
+(^NDX-basiert, siehe §8).
 
 **Positionen (8, aus `holdings.json`):**
 | Ticker | Name | Kauf | Einstieg € |
@@ -75,24 +75,23 @@ NASDAQ +26,2 %, Alpha +26,0 %, 8/10 Wochen über NASDAQ (^NDX-basiert, siehe §8
 | MRVL | Marvell Technology | 24.03.2026 | 80,07 |
 | MU | Micron Technology | 21.05.2026 | 658,47 |
 | CNC | Centene | 29.04.2026 | 42,55 |
-| WDC | Western Digital | 22.05.2026 | 421,19 |
 | STX | Seagate Technology | 21.05.2026 | 676,07 |
-| DDOG | Datadog | 15.05.2026 | 178,62 |
-| AMAT | Applied Materials | 27.05.2026 | 398,09 |
-| NXPI | NXP Semiconductors | 05.06.2026 | 307,33 |
+| SNDK | SNDK | 08.04.2026 | 768,00 |
+| GOOGL | Alphabet | 09.06.2026 | 313,75 |
+| ASML | ASML | 12.06.2026 | 1.608,20 |
+| MSTR | Strategy | 12.06.2026 | 103,90 |
 
-**KW23-Trades (Verkäufe 05.06., aus `trades.json`):**
-AMD +69,6 % · Lam Research +29,9 % · NXP Semiconductors −6,2 % ·
-IBM −12,6 % (Roundtrip: Kauf 02.06. 285,95 € / Verkauf 05.06.).
-Nachkauf NXPI 05.06. zu 307,33 € (aktive Position).
+**KW24-Trades (Verkäufe 09.06., aus `trades.json`):**
+Applied Materials +5,1 % · Western Digital +2,7 % · Datadog +7,6 %.
+NXPI (Zweiteinstieg 307,33 €) ebenfalls 09.06. verkauft — Sell-Preis noch offen (beim Nutzer erfragen).
 
-**Abgeschlossene Trades (20, aus `trades.json`, in %):**
+**Abgeschlossene Trades (23, aus `trades.json`, in %):**
 Alphabet +2,9 · IBM −7,4 · NXP +0,3 (alle drei pre-Excel) ·
 Definium Therapeutics +22,3 · ASML +0,7 · Credo Technology +0,1 ·
 Applied Materials +1,1 · Microsoft −1,3 · Siemens Energy +0,4 ·
 Broadcom +0,1 · Amazon +0,8 · ASML −5,2 · Akamai −7,6 · Analog Devices +11,0 ·
 NVIDIA +0,4 · Alphabet −7,4 · NXP −6,2 · AMD +69,6 · Lam Research +29,9 ·
-IBM −12,6 (Roundtrip).
+IBM −12,6 (Roundtrip) · Applied Materials +5,1 · Western Digital +2,7 · Datadog +7,6.
 
 Die Report-Kennzahlen (Trades, Trefferquote, Profitfaktor, Ø Gewinn/Verlust)
 werden **automatisch** aus `trades.json` + aktiven Positionen berechnet —
@@ -233,6 +232,7 @@ Für rückwirkende Wochenberichte legt man Snapshot-Dateien ab:
 | KW21 | −ASML, AKAM, ADI / +STX, MU, WDC | ASML −5,2 %, AKAM −7,6 %, ADI +11,0 % |
 | KW22 | −NVDA, GOOGL / +NXPI (25.05.), AMAT (27.05.) | NVDA +0,4 %, GOOGL −7,4 % |
 | KW23 | −NXPI, AMD, LRCX, IBM (Roundtrip 02.–05.06.) / +NXPI (307,33 €) | NXPI −6,2 %, AMD +69,6 %, LRCX +29,9 %, IBM −12,6 % |
+| KW24 | −AMAT, WDC, DDOG, NXPI (09.06.) / +GOOGL (09.06., 313,75 €), ASML (12.06., 1.608,20 €), MSTR (12.06., 103,90 €) | AMAT +5,1 %, WDC +2,7 %, DDOG +7,6 %, NXPI: Preis offen |
 
 ## 8. Entscheidungen & offene Punkte
 **Entschieden:**
