@@ -383,14 +383,15 @@ def slide_cta(c, date_iso, question=None, account=None):
     if question:
         inner_w = c.W - 2 * MX - 44   # 8 px Balken + 36 px Inset
         qlines = _wrap_px(question, inner_w, 32)
-        box_h = 112 + len(qlines) * 54
+        # Box-Höhe: 28px oben + 24px Label + 40px Abstand + Zeilentext + 28px unten
+        box_h = 28 + 24 + 40 + len(qlines) * 54 + 28
         # Mitte zwischen Ende Bio-Text und Beginn Separator
         qy = int((bio_bottom + (sep_y - box_h)) / 2)
         c.tile(MX, qy, c.W - 2 * MX, box_h, color=T.PANEL)
         c.tile(MX, qy, 8, box_h, color=T.BLUE, radius=5)
-        c.text(MX + 36, qy + 36, "DEINE MEINUNG?", 24, color=T.BLUE, weight="bold")
+        c.text(MX + 36, qy + 28, "DEINE MEINUNG?", 24, color=T.BLUE, weight="bold")
         for i, ln in enumerate(qlines):
-            c.text(MX + 36, qy + 88 + i * 54, ln, 32, weight="bold")
+            c.text(MX + 36, qy + 92 + i * 54, ln, 32, weight="bold")
 
     # Risikohinweis — plain text wie Analyse-Footer, kein Kasten
     disc = T.DISCLAIMER_LONG.split("\n", 1)[1] if "\n" in T.DISCLAIMER_LONG else T.DISCLAIMER_LONG
