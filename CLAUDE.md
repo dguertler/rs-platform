@@ -88,6 +88,19 @@ Hashtags** (Instagram-Limit; optimal 3–5). Nach Änderungen an
 `instagram/render.py`/`theme.py`: `python3 -m instagram.qa_golden` laufen
 lassen (Golden-Image-Regressionstest).
 
+### Wochenrückblick-Regeln (Samstags)
+
+**Kurse aktualisieren:** Wenn der Wochenrückblick am **Samstag** erstellt wird,
+verwenden IMMER die **Freitags-Kurse** (letzter Handelstag):
+- `--date YYYY-MM-DD` mit dem **Freitag-Datum** setzen (z. B. `2026-06-12`)
+- Dies ensures alle Charts (Performance, Positionen, Trades, Aktie der Woche)
+  zeigen die aktuellsten verfügbaren Kurse (EUR/USD, NASDAQ-100, Positionen)
+- Nicht das Samstags-Datum verwenden — das würde ältere Kurse heranziehen
+
+**Trade-Filter:** Nur Verkäufe mit **Rendite > 5%** (positiv oder negativ) als
+Chart-Slides zeigen. Kleine Trades (<5%) und aktive Positionen (noch nicht
+verkauft) nicht als Trade-Slides darstellen.
+
 ### Ausgabe-Pflichten nach Instagram-Generierung
 
 Nach jeder Generierung von Instagram-Slides (Analyse-Post, Earnings-Post,
@@ -95,7 +108,8 @@ Wochenpost, Reel) IMMER:
 1. **Alle Slides einzeln anzeigen** (jeden PNG via SendUserFile ausgeben —
    kein Überspringen, keine Auswahl)
 2. **ZIP-Datei ausgeben** (`carousel_TICKER.zip` bzw. entsprechendes Archiv)
-3. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
+3. **Reel MP4 erzeugen** (44 Sekunden, 0.75 FPS, 11 Slides à 4s)
+4. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
    und Rating-Dateien committen, Slides sind gitignored
 
 ### Logo-Suche für Instagram-Slides
