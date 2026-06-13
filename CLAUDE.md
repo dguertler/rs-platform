@@ -108,8 +108,11 @@ Wochenpost, Reel) IMMER:
 1. **Alle Slides einzeln anzeigen** (jeden PNG via SendUserFile ausgeben —
    kein Überspringen, keine Auswahl)
 2. **ZIP-Datei ausgeben** (`carousel_TICKER.zip` bzw. entsprechendes Archiv)
-3. **Reel MP4 erzeugen** (44 Sekunden, 0.75 FPS, 11 Slides à 4s)
-4. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
+3. **Reel MP4 erzeugen** und ausgeben (Wochenpost: nur Hook + Wochenvergleich +
+   CTA-Slide; Analyse/Earnings: 4 Teaser-Frames)
+4. **Caption ausgeben** — `caption.txt` (Carousel) direkt im Chat anzeigen;
+   bei Reel zusätzlich `reel_caption.txt`. Immer zusammen mit Slides + Reel.
+5. **Auf `master` pushen** (bzw. den vorgegebenen Session-Branch) — Analyse-
    und Rating-Dateien committen, Slides sind gitignored
 
 ### Logo-Suche für Instagram-Slides
