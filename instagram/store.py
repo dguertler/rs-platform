@@ -301,17 +301,20 @@ def compute(kw, universe, benchmark, ref_date=None):
                                as_of=as_of, trades_data=_trades_snap)
                 if cand else None)
 
-    # ── Trade der Woche: größter realisierter Verkauf DIESER KW ───────────────
+    # ── Trade der Woche: Verkäufe DIESER KW mit Rendite >5% (NICHT aktive Positionen) ──
     #    (Chart mit Kauf grün + Verkauf rot). Quelle: trades.json -> closed
     #    mit `ticker` + Verkaufsdatum `date` innerhalb der KW.
     from datetime import date as _date
     wk_mon = _date.fromisocalendar(year, kw, 1).isoformat()
     wk_sun = _date.fromisocalendar(year, kw, 7).isoformat()
+    active_tickers = {p["ticker"] for p in positions}  # aktive Positionen
     week_sells = [t for t in _trades_snap.get("closed", [])
-                  if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun]
+                  if t.get("ticker") and wk_mon <= (t.get("date") or "") <= wk_sun
+                  and t.get("ticker") not in active_tickers  # nicht aktiv
+                  and abs(t.get("ret", -999)) >= 0.05]  # nur >5% Rendite (pos. oder neg.)
     # Alle Trades der Woche als Slides (nach Rendite absteigend sortiert)
     trades = []
-    for sell in sorted(week_sells, key=lambda t: t.get("ret", -999), reverse=True):
+    for sell in sorted(week_sells, key=lambda t: abs(t.get("ret", -999)), reverse=True):
         trade_as_of = sell.get("date") or as_of
         td = _trade_dict(universe, sell, as_of=trade_as_of)
         if td:
