@@ -114,10 +114,22 @@ python3 -m instagram.generate --kw 23 \
 ```
 Output: `out/instagram/<SAMSTAG-KW>_KW<NN>/`
 - `carousel/*.png` — einzelne Slides (werden dem Nutzer einzeln gezeigt)
-- `reel/*.png` — Reel-Frames
+- `reel/*.png` — Reel-Frames (9:16; alle Slides)
 - `caption.txt` — Caption-Text
+- `reel_caption.txt` — Caption für den Reel-Post (mit Teaser-CTA auf den Carousel)
 - **`carousel_KW<NN>.zip`** — ZIP aller Carousel-PNGs (wird automatisch erstellt,
   für einfachen Download und Upload)
+
+**Reel-Regel (Wochenpost):** Das Reel-MP4 wird nach der Generierung auf
+**3 Slides** gekürzt: `01_hook` → `02_performance` → `11_cta`. Der CTA-Slide
+verweist auf den vollen Carousel-Post. Befehl nach `generate`:
+```python
+from instagram import video
+video.build_reel_video(
+    ['reel/01_hook.png', 'reel/02_performance.png', 'reel/11_cta.png'],
+    'reel.mp4', fps=30, sec=4.0, fade=0.4
+)
+```
 
 Datum = Samstag der KW, sonst heute; `--date` überschreibt.
 Neue Käufe/Verkäufe → `holdings.json` / `trades.json` pflegen.
