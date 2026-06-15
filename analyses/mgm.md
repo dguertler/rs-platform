@@ -1,92 +1,116 @@
 # MGM — KI-Aktienbewertung
 
-**MGM Resorts International** · Consumer Cyclical · 02.06.2026 · Signal: GWS Breakout 3/3
+**MGM Resorts International** · Consumer Cyclical · 15.06.2026 · Signal: Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 43.67 |
-| Market Cap | $11.17 Mrd. |
-| Forward PE | 19.53 |
+| Kurs | 47.51 |
+| Market Cap | $12.16 Mrd. |
+| Forward PE | 20.47 |
 | Revenue (TTM) | $17.72 Mrd. |
 | Gross Margin | 44.2% |
 | ROE | 13.5% |
-| RS-Score | 151.0 |
+| RS-Score | 78.0 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-MGM Resorts hat in der Woche vom 01. Juni 2026 einen explosiven Breakout vollzogen: +16% in 5 Handelstagen auf $50,69 — von einem 52-Wochen-Tief bei $29,19 sind es jetzt +74%. Der strukturelle Kern hinter dieser Bewegung ist nicht Las-Vegas-Volumen, sondern BetMGM. Das Joint Venture mit Entain ist mit ~25% US-Marktanteil im Online-Sports-Betting zum profitablen Oligopolisten geworden — ein Strukturwandel, den der Markt lange als Verlustbringer abgetan hat. Jetzt zahlt es sich aus: BetMGM wird 2026 erstmals EBITDA-positiv auf annualisierter Basis. Zusätzlich: Macau-Recovery beschleunigt stärker als erwartet, Japan-IR-Projekt (Osaka) nähert sich dem Baugenehmigungsmeilenstein. Was der Markt übersieht: MGM International Online und das Loyalty-Ökosystem (M life) sind strukturelle Kundenbindungsmaschinen, die in keinem Standard-DCF-Modell korrekt bewertet werden. Analyst-Konsensziel $44,84 liegt weit unter dem aktuellen Kurs $50,69 — Coverage ist dramatisch hinter der Rally.
+MGM Resorts ist einer der wenigen integrierten Gaming-Konzerne mit starker physischer Las-Vegas-Strip-Präsenz und wachsender digitaler Plattform (BetMGM). Der Kurs hat in den letzten 20 Handelstagen über 32 % zugelegt und notiert nahe des 52-Wochen-Hochs bei $51,59. Der RS-Score von 77,96 signalisiert relative Stärke gegenüber dem S&P-500-Universum, bleibt aber im mittleren Bereich — kein institutioneller Kaufdruck wie bei Scores über 90. Das Analyst-Konsensziel von $46,17 liegt unterhalb des aktuellen Kurses; das allein ist kein Verkaufssignal, aber ein klarer Hinweis, dass der Konsens die aktuelle Preisung nicht stützt. Die operative Marge von 6,86 % ist dünn — jede Kostensteigerung oder Umsatzschwäche trifft den Gewinn überproportional. Der positive Momentum-Schub Anfang Juni 2026 (Gap-Up ca. +11 %) ist in den Daten sichtbar; Auslöser aus vorliegenden Quellen nicht verifizierbar — vor Positionsentscheidung zwingend prüfen. Das Trailing PE von 65 ist durch temporäre Ergebnisschwäche verzerrt; entscheidend ist das Forward PE von 20,47 — für einen zyklischen Consumer-Titel mit begrenztem Wachstum keine günstige Einstiegsbewertung.
 
 ## 2. GESCHÄFTSMODELL
 
-- Las Vegas Strip-Hotels und Casinos: ~55% Revenue, stabile EBITDA-Marge ~35%
-- Regional US-Casinos: ca. 20% Revenue, niedrigere Margen, zyklischer
-- BetMGM (Online Sports Betting + iGaming, JV mit Entain): 25% US-Marktanteil, Pfad zu EBITDA-Break-Even 2026
-- MGM China (Macau): Recovery-Story, EBITDA vor COVID-Niveau in Reichweite
-- MGM Osaka (Japan IR): Langfristiger Wachstumskatalysator, Eröffnung ~2030, Capex ~$10 Mrd.
-- Operating Leverage: Casino-Fixkostenbasis erzeugt überproportionale EBITDA-Skalierung bei Umsatzwachstum
-- M life Rewards: 40+ Mio. Mitglieder — Cross-Selling-Plattform, strukturelle Kundenbindung
-- Leverage strukturell hoch (D/E 951x — Casino-typisch): Verpflichtungen durch VICI-Properties-REITs für Immobilien
+- **Las Vegas Strip:** Flaggschiff-Properties (Bellagio, MGM Grand, Aria) mit hoher Marge und Pricing-Power
+- **Regional Casinos:** Diversifikation über 20+ US-Standorte außerhalb Las Vegas
+- **BetMGM (iGaming/Sportwetten):** 50/50-JV mit Entain; Online-Kanal mit zweistelligem Wachstum, noch nicht nachhaltig profitabel
+- **MGM China:** Konzessionen in Macau — Wachstumshebel, aber politisches Risiko
+- **REIT-Struktur (VICI Properties):** MGM hat wesentliche Casino-Immobilien an VICI verkauft (Sale-Leaseback); Leasingverbindlichkeiten erscheinen als Schulden — erklärt D/E von 951; kein klassisches Insolvenzrisiko, aber Zinssensitivität real
+- **Einnahmen-Mix:** Gaming (~55 %), Food & Beverage, Entertainment, Hotel (~45 %)
+- **Aktienrückkäufe:** Aggressive Buyback-Politik; Float-Reduktion als Werttreiber
+- **Loyalty-Plattform:** MGM Rewards mit über 40 Mio. Mitgliedern als Direktkanal
 
 ## 3. BULL CASE
 
-BetMGM erreicht EBITDA-Break-Even Q3/2026 und wird auf 2–3x Revenue gehandelt (vergleichbar DraftKings-Multiple): Wertbeitrag allein $8–12/Aktie. Macau-EBITDA erholt sich auf Pre-COVID-Niveaus ($600–700 Mio. p.a.), Japan-IR-Genehmigung als weiterer Katalysator. Las Vegas Strip-Occupancy und RevPAR weiter stark durch Mega-Events. EPS-Rerate auf 30–35x ergibt Kursziel 65–75 USD. Strukturelle Margennachhaltigkeit: BetMGM-Skalierung + Loyalty-Monetarisierung + Operating Leverage unterstützen nachhaltig höhere Margen als historische Zyklusmittel. Eintrittswahrscheinlichkeit: 25%.
+Szenario: Las Vegas hält Nachfrageniveau, BetMGM erreicht EBITDA-Break-even 2027, Macau-Aufschwung setzt sich fort, Buybacks reduzieren Share Count um 5–8 % p.a.
+
+**Herleitung:** Annahme (kein Konsens): Forward EPS FY27 ~$2,85 × 22× Multiple = $62,70; unter Buyback-Effekt Kurszielmitte $58–$68.
+
+Eintrittswahrscheinlichkeit: **25 %**
 
 ## 4. BASE CASE
 
-BetMGM-Profitabilität setzt sich durch, Las Vegas bleibt solide, Macau wächst moderat. EBITDA-Margen verbessern sich von 25% auf 28–30% über 18 Monate. Analyst-Coverage holt auf, Kursziel-Revisionen nach oben auf $55–60. Aktie handelt 45–60 USD. Eintrittswahrscheinlichkeit: 45%.
+Szenario: Stabiler US-Gaming-Markt, BetMGM wächst moderat, Macau ohne große Impulse, operative Margen unter leichtem Druck durch Personalkosten. Analyst-Konsens stützt ca. $46.
+
+**Herleitung:** Annahme (kein Konsens): Forward EPS FY27 ~$2,39 × 18× = $43,02; mit Buyback-Effekt Kurszielmitte $43–$50.
+
+Eintrittswahrscheinlichkeit: **50 %**
 
 ## 5. BEAR CASE
 
-US-Rezession dämpft Konsumausgaben für Glücksspiel und Entertainment scharf (historisch -20–35% EBITDA-Einbruch). Las Vegas RevPAR fällt, BetMGM verbrennt weiter Cash. Leveraged Balance Sheet einschränkend bei steigenden Kapitalkosten. Macau-Regulierung verschärft sich. Kursziel 32–40 USD. Eintrittswahrscheinlichkeit: 30%.
+Szenario: US-Konsumabkühlung, Las-Vegas-Besucherzahlen rückläufig, BetMGM verbrennt weiter Kapital, Macau-Lizenzdruck steigt.
 
-**Summe: 25% + 45% + 30% = 100%**
+**Herleitung:** Annahme (kein Konsens): EPS-Kompression auf ~$1,50 × 15× = $22,50; Kurszielmitte $20–$28.
+
+**Risikodimensionen:**
+- Makro/Konjunktur: Rezession trifft diskretionären Konsum überproportional; Gaming ist nicht defensiv
+- Geopolitik/China: Macau-Lizenzen unter chinesischer Regulierungshoheit; politisches Risiko nicht quantifizierbar
+- Lieferketten/Foundry: Nicht relevant für Gaming-Geschäftsmodell
+- Verwässerung/SBC: Aggressive Buybacks wirken gegenteilig; SBC-Niveau aus Daten nicht abschließend beurteilbar
+- Regulierung/Rechtsrisiken: Sportwetten-Besteuerung in US-Bundesstaaten steigt; Compliance-Kosten für BetMGM erhöhen Break-even-Hürde
+
+**Summe: 25 % + 50 % + 25 % = 100 %**
+
+**Erwartungswert:** EV = (0,25 × $63) + (0,50 × $46,50) + (0,25 × $24) = $15,75 + $23,25 + $6,00 = **$45,00**
+
+Der Erwartungswert von ~$45 liegt rund 8 % unter dem aktuellen Kurs (~$49). Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Trailing PE 59,8x optisch hoch — irreführend wegen Net Margin 1% (nach Zinsen auf Immobilien-Leasingverpflichtungen). Relevanter: EBITDA-Marge ~25% und FCF $528 Mio. bei $17,7 Mrd. Revenue. ROE 13,5% ist ordentlich. D/E 951x ist eine Casino-Bilanzkennzahl, nicht mit klassischen Unternehmen vergleichbar; Net Debt/EBITDA ~5–6x — am oberen Ende, manageable bei stabiler Cashflow-Generierung. Revenue-Wachstum 4,2% — moderat, BetMGM-Skalierung bringt akzeleriertes EBITDA-Wachstum.
+Die Gross Margin von 44,2 % zeigt strukturelle Stärke im Kern-Gaming-Segment. Operative Marge 6,86 % und Nettomarge 1,03 % zeigen, wie viel Umsatz durch Abschreibungen, Leasing-Zahlungen und Zinslast aufgezehrt wird. FCF von $528 Mio. ist solide und bestätigt, dass MGM echtes Geld verdient trotz gedrückter GAAP-Margen. FCF-Yield: $528 Mio. ÷ $12,16 Mrd. Market Cap = ca. 4,3 % — akzeptabel, kein Schnäppchen. ROE 13,49 % durch Leverage-Effekt der Sale-Leaseback-Struktur beeinflusst. Revenue-Wachstum 4,2 % ist moderat für einen Titel mit aktuellem Bewertungsaufschlag.
 
 ## 7. BEWERTUNG
 
-Forward-PE 19,5x auf Basis normalisierter EPS ist vertretbar für einen Casino-Operator mit digitalem Wachstumsmotiv. EV/EBITDA ~12–14x (geschätzt) ist für Vegas-Strip-Qualität moderat. Analyst-Konsensziel $44,84 liegt 11% unter aktuellem Kurs — Coverage muss Modelle anpassen. BetMGM-Option ist im Kurs nicht vollständig eingepreist: Bei DraftKings-Vergleichsmultiple wären $8–12/Aktie zusätzlicher Wert. Japan-IR ist eine kostenlose Optionalität für 3–5 Jahreshorizont.
+Forward PE 20,47× setzt voraus, dass Las Vegas stabil bleibt und BetMGM kein Ergebnisbremser wird. Analyst-Konsensziel $46,17 ist Orientierungspunkt, keine harte Decke — signalisiert aber, dass breiter Konsens die aktuelle Preisung als fair bis leicht überzogen sieht. Rückrechnung: Was preist $49 ein? Annahme ~$2,39 Forward EPS × 20,5× — plausibel bei stabilem Betrieb, aber kein Puffer für negative Überraschungen. Bewertung: fair, nicht günstig.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-+74% vom 52-Wochen-Tief, +16% in einer einzigen Woche: Klarer Short-Squeeze und FOMO-Dynamik durch möglichen Katalysator-Event. Institutionelle Positionierung: Gaming-Sektorfonds + Event-Driven Momentum. Short-Float war nach dem langen Abschwung erhöht — Squeeze wahrscheinlich noch nicht vollständig abgeschlossen. Enttäuschungsrisiko: Ohne konkreten fundamentalen Treiber für den +16%-Move könnte schnelle Reversion auf $43–45 folgen.
+Das Gap-Up Anfang Juni hat Short-Positionen komprimiert und Momentum-Käufer angelockt. Kurs nahe 52W-Hoch erzeugt psychologischen Widerstand bei $51,59. Analyst-Ziel unter dem Kurs dämpft aggressives institutionelles Nachkaufen. Beta 1,31: In Risk-off-Phasen fällt MGM überproportional. Hypothese, nicht datenbasiert: Fast-Money-Käufer dominieren das aktuelle Volumen nach dem Gap-Up.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 aktiv. RS-Score 150,97, prev_rank #115 im S&P 500. 5T: +30,76%, 10T: +34,01% — explosiver Breakout über 52-Wochen-Hoch ($44,28). Momentum fundamental partiell gestützt (BetMGM-Profitabilität), aber die Geschwindigkeit des Moves ist überwiegend positionierungsgetrieben. Warnsignal: Rückfall unter $44 (ehemaliges 52W-Hoch als neue Unterstützung) wäre technisches Sell-Signal.
+RS-Score 77,96 — solides Momentum, kein Ausreißer nach oben. 20T-Performance +32 % ist außergewöhnlich stark und erzeugt technische Überdehnung. 52W-Tief $29,19 zeigt, dass MGM in den letzten 12 Monaten massive Volatilität zeigte. Unterstützung: $43–$45 (Vor-Gap-Niveau). Widerstand: $51,59 (52W-Hoch). Ein Rücktest des Gap-Niveaus wäre technisch gesund und würde günstigeren Einstieg bieten. Warnsignal: Wochenschluss unter $43.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($75–100):** BetMGM als profitabler Digital-Leader, Japan-IR-Eröffnung ~2030, Macau auf Pre-COVID-Niveau. Entscheidende Variable: US-Online-Gaming-Regulierungsexpansion und Japan-Capex-Management.
+**Bull ($75–$85):** BetMGM profitabel, Las Vegas Premium-Segment wächst strukturell, Macau-Rebound, Buybacks reduzieren Aktienanzahl stark. Annahme FY29 EPS $4,50 × 18× = $81.
 
-**Base Case ($50–70):** Solides US-Gaming-Geschäft, moderates BetMGM-EBITDA-Wachstum, keine Japan-Prämie eingepreist. Entscheidende Variable: BetMGM-Profitabilitätstrajektorie.
+**Base ($52–$62):** Moderates Wachstum, stabile Margen, kontinuierliche Buybacks. Annahme FY29 EPS $3,20 × 18× = $57,60.
 
-**Bear Case ($25–38):** US-Konsumabschwung, BetMGM-Verluste halten an, Leverage wird zur Last. Entscheidende Variable: Makroumfeld und Konsumklima.
+**Bear ($22–$32):** US-Rezession + regulatorischer Gegenwind + BetMGM-Verluste. Annahme FY29 EPS $1,50 × 17× = $25,50.
+
+Entscheidende Variable: Entwicklung von BetMGM — Break-even oder dauerhafter Cash-Verbrenner.
 
 ## 11. PROFI-FAZIT
 
-MGM ist ein hochkomplexes Multi-Asset-Play: Legacy-Casino-Operator + Digital-Gaming-Wette + Japan-Optionalität. Für Momentum-Trader: GWS 3/3 und Breakout über 52W-Hoch sind positive Signale, aber das Tempo (+16% in einer Woche) erfordert Trailing-Stop-Disziplin (12–15%). Für fundamentale Investoren: fairer Einstieg bei $42–46 wäre besser. Positionsgröße: max. 2–3%. Direkter Peer-Vergleich: **Caesars Entertainment (CZR)** ähnlich geleverted, ohne Japan-Optionalität. **Las Vegas Sands (LVS)** für die reinere Macau/Singapur-Wette ohne US-Kasino-Exposure.
+MGM ist ein qualitativ solides Unternehmen in einem schwer skalierbaren Sektor. Die operative Marge ist strukturell eng, das Momentum kurzfristig überdehnt, und der Erwartungswert (~$45) liegt unter dem aktuellen Kurs — kein High-Conviction-Setup. Wer bereits positioniert ist, kann halten; ein Neueinstieg über $49 ohne verifizierten Katalysator ist aus Chance-Risiko-Sicht nicht überzeugend. Abwarten auf Rücksetzer in die $42–$45-Zone. Peers: **Las Vegas Sands (LVS)** — strukturell qualitativ hochwertiger mit Asien-Fokus; **Caesars Entertainment (CZR)** — ähnliche Zyklizität, höhere Schuldenlast; **Flutter Entertainment** als direkter iGaming-Vergleich für BetMGM-Optionalität. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-- Qualität: 2/5
-- Wachstum: 3/5
-- Bewertung: 3/5
-- Katalysator: 4/5
+- Qualität: 3/5
+- Wachstum: 2/5
+- Bewertung: 2/5
+- Katalysator: 2/5
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
-| Wachstum | 3/5 |
-| Bewertung | 3/5 |
-| Katalysator | 4/5 |
+| Qualität | 3/5 |
+| Wachstum | 2/5 |
+| Bewertung | 2/5 |
+| Katalysator | 2/5 |
 
-**Verdict: HOLD (60/100)**
+**Verdict: WATCH (45/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
