@@ -14,6 +14,8 @@
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
+**Szenarien (12–18 Monate):** Bull $320–$370 (20 %) · Base $245–$270 (50 %) · Bear $90–$120 (30 %) · EV ~$229
+
 ---
 
 ## 1. INVESTMENT-CASE

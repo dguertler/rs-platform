@@ -132,6 +132,16 @@ Bei Inkonsistenz die Szenarien anpassen, nicht die Regel ignorieren.
 - Keine horizontalen Trennlinien
 - Konkrete Zahlen > vage Formulierungen — wo immer möglich
 
+## HEADER-BLOCK (PFLICHT nach GWS-Ampel-Zeile)
+
+Direkt nach der GWS-Ampel-Zeile, vor der `---`-Trennlinie, muss diese Zeile stehen:
+
+```
+**Szenarien (12–18 Monate):** Bull $X–$Y (Z %) · Base $X–$Y (Z %) · Bear $X–$Y (Z %) · EV ~$X
+```
+
+Die Werte stammen aus Abschnitten 3–5. Diese Zeile ist Pflicht — sie gibt dem Leser sofort die Kursziel-Bandbreiten im Überblick.
+
 ---
 
 ## DATENVERFÜGBARKEIT
