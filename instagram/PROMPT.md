@@ -309,7 +309,7 @@ Frage. Für maximale Wirkung schreibt Claude pro Post eine **individuelle**
 Headline und übergibt sie via `--headline` (jede Analyse anders gestalten).
 
 ### Slide-Reihenfolge (Analyse, ~8–10 Slides, Tiefe = USP)
-1. **Cover** — Frage/These-Hook + Firmenlogo (weiße Karte) + Verdict-Badge + Score. Im Badge: Score-Zahl (z. B. „70") groß, darunter „von 100 Punkten" klein — gestapelt rechts im Badge. Alle grauen Boxen und das Logo-Karte verwenden identische linke/rechte Seitenränder (MX).
+1. **Cover** — Frage/These-Hook + Firmenlogo (weiße Karte) + Verdict-Badge + Score. Im Badge: Score-Zahl (z. B. „70") groß, darunter „von 100 Punkten" klein — gestapelt rechts im Badge. Alle Elemente (Logo-Karte, Verdict-Badge, Rating-Blöcke) verwenden exakt `COVER_MX=195` als Seitenrand → identische Breite `c.W - 2*COVER_MX = 690px`. Der Verdict-Badge muss `w=c.W - 2*MX` explizit übergeben bekommen, damit er nicht das globale `MX=90` erbt.
 2. **Gesamteinschätzung** — Kernthese (Investment-Case) + 4 **Sterne**-Ratings
 3. **Szenarien · 12–18 Monate** — Bull/Base/Bear mit **Eintrittswahrscheinlichkeit**
    (Balken) + Kursziel-Spanne *(aus Punkt 3–5)*

@@ -1002,7 +1002,8 @@ def slide_analysis_cover(c, a, date_iso):
 
     # Verdict-Badge — mit Abstand zum Namen
     verdict_top = sub_y + sub_h + logo_name_gap
-    _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=verdict_h)
+    _verdict_badge(c, MX, verdict_top, a["verdict"], a["score"], h=verdict_h,
+                   w=c.W - 2 * MX)
     verdict_bottom = verdict_top + verdict_h
 
     # Rating-Blöcke 2×2 — direkt unter Verdict, zentriert bis Footer
