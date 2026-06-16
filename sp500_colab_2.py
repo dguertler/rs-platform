@@ -152,6 +152,59 @@ def extract_ohlcv(ticker, raw_data, n_candles):
     except:
         return []
 
+def _ohlcv_individual(ticker, start_str, end_str_local, interval, n_candles):
+    """Einzeldownload für einen Ticker – Fallback wenn Batch-Daten fehlen/veraltet."""
+    try:
+        df = yf.download(ticker, start=start_str, end=end_str_local,
+                         interval=interval, auto_adjust=True, progress=False)
+        if df.empty:
+            return []
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        df = df[["Open", "High", "Low", "Close"]].dropna(subset=["Close"])
+        result = []
+        for date, row in df.iterrows():
+            if pd.isna(row["Close"]): continue
+            result.append({
+                "d": date.strftime("%Y-%m-%d"),
+                "o": round(float(row["Open"]), 2),
+                "h": round(float(row["High"]), 2),
+                "l": round(float(row["Low"]),  2),
+                "c": round(float(row["Close"]), 2)
+            })
+        return result[-n_candles:]
+    except Exception as e:
+        print(f"    Einzeldownload {ticker} ({interval}): Fehler – {e}")
+        return []
+
+def _last_expected_trading_day():
+    """Letzter erwarteter Handelstag (Mo–Fr) vor heute."""
+    d = datetime.now().date() - timedelta(days=1)
+    while d.weekday() >= 5:
+        d -= timedelta(days=1)
+    return d
+
+def extract_ohlcv_daily(ticker, raw_data, n_candles=520):
+    data = extract_ohlcv(ticker, raw_data, n_candles)
+    if len(data) < 30:
+        print(f"  {ticker}: nur {len(data)} Tageskerzen im Batch – lade individuell nach...")
+        data = _ohlcv_individual(ticker, start_daily.strftime("%Y-%m-%d"), end_str, "1d", n_candles)
+        print(f"    → {len(data)} Kerzen")
+        return data
+    # Recency-Check: fehlende Kerzen der letzten Handelstage nachziehen
+    last_date = datetime.strptime(data[-1]['d'], '%Y-%m-%d').date()
+    expected  = _last_expected_trading_day()
+    if last_date < expected:
+        patch_start = (last_date + timedelta(days=1)).strftime('%Y-%m-%d')
+        patch = _ohlcv_individual(ticker, patch_start, end_str, '1d', n_candles)
+        if patch:
+            existing = {c['d'] for c in data}
+            new_c = [c for c in patch if c['d'] not in existing]
+            if new_c:
+                data = (data + new_c)[-n_candles:]
+                print(f"  {ticker}: +{len(new_c)} fehlende Tageskerzen nachgeladen ({new_c[0]['d']}–{new_c[-1]['d']})")
+    return data
+
 def extract_ohlcv_4h(ticker, n_candles=3000):
     try:
         df = yf.download(ticker, start=start_4h.strftime("%Y-%m-%d"), end=end_str,
@@ -251,7 +304,7 @@ for r in all_results:
     data.append({"ticker": t, "score": r["score"], "windows": r["windows"],
                  "new_since": _new_since_map.get(t),
                  "ohlcv_w":  extract_ohlcv(t, raw_weekly, 104),
-                 "ohlcv":    extract_ohlcv(t, raw_daily, 520),
+                 "ohlcv":    extract_ohlcv_daily(t, raw_daily),
                  "ohlcv_4h": ohlcv_4h_map.get(t, [])})
 
 output = {
@@ -261,7 +314,7 @@ output = {
     "daily_scores_by_date": daily_scores_by_date,
     "prev_week_scores":     prev_week_scores,
     "benchmark_ohlcv_w":    extract_ohlcv(benchmark, raw_weekly, 104),
-    "benchmark_ohlcv":      extract_ohlcv(benchmark, raw_daily, 520),
+    "benchmark_ohlcv":      extract_ohlcv_daily(benchmark, raw_daily),
 }
 with open(OUTPUT_FILE, "w") as f:
     json.dump(sanitize_nan(output), f)

@@ -214,12 +214,32 @@ raw_daily = yf.download(
     progress=False
 )
 
+def _last_expected_trading_day():
+    """Letzter erwarteter Handelstag (Mo–Fr) vor heute."""
+    d = datetime.now().date() - timedelta(days=1)
+    while d.weekday() >= 5:
+        d -= timedelta(days=1)
+    return d
+
 def extract_ohlcv_daily(ticker, raw_data, n_candles=520):
     data = _ohlcv_from_raw(ticker, raw_data, n_candles)
     if len(data) < 30:
         print(f"  {ticker}: nur {len(data)} Tageskerzen im Batch – lade individuell nach...")
         data = _ohlcv_individual(ticker, start_daily.strftime("%Y-%m-%d"), end_str, "1d", n_candles)
         print(f"    → {len(data)} Kerzen")
+        return data
+    # Recency-Check: fehlende Kerzen der letzten Handelstage nachziehen
+    last_date = datetime.strptime(data[-1]['d'], '%Y-%m-%d').date()
+    expected  = _last_expected_trading_day()
+    if last_date < expected:
+        patch_start = (last_date + timedelta(days=1)).strftime('%Y-%m-%d')
+        patch = _ohlcv_individual(ticker, patch_start, end_str, '1d', n_candles)
+        if patch:
+            existing = {c['d'] for c in data}
+            new_c = [c for c in patch if c['d'] not in existing]
+            if new_c:
+                data = (data + new_c)[-n_candles:]
+                print(f"  {ticker}: +{len(new_c)} fehlende Tageskerzen nachgeladen ({new_c[0]['d']}–{new_c[-1]['d']})")
     return data
 
 # ── Schritt 4: 4H OHLCV ─────────────────────────────────────────────────────
