@@ -315,7 +315,15 @@ def build_analysis(fmt, a, date_iso, outdir):
         emit("technical",     lambda c: render.slide_analysis_technical(c, a, date_iso))
     if _has_longterm(a):
         emit("langfrist",     lambda c: render.slide_analysis_longterm(c, a, date_iso))
-    emit("fazit",         lambda c: render.slide_analysis_fazit(c, a, date_iso))
+    # Fazit: Overflow-Prüfung — zweite Folie wenn Text nicht passt
+    _p1, _p2 = render.fazit_split(a)
+    if _p2:
+        emit("fazit",   lambda c, t=_p1: render.slide_analysis_fazit(
+            c, a, date_iso, text_override=t, show_peers_cta=False))
+        emit("fazit2",  lambda c, t=_p2: render.slide_analysis_fazit(
+            c, a, date_iso, text_override=t, show_peers_cta=True))
+    else:
+        emit("fazit",   lambda c: render.slide_analysis_fazit(c, a, date_iso))
     emit("cta",           lambda c: render.slide_analysis_cta(c, a, date_iso))
 
     # ZIP-Archiv aller Carousel-Slides für einfachen Download

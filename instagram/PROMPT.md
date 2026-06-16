@@ -309,7 +309,7 @@ Frage. Für maximale Wirkung schreibt Claude pro Post eine **individuelle**
 Headline und übergibt sie via `--headline` (jede Analyse anders gestalten).
 
 ### Slide-Reihenfolge (Analyse, ~8–10 Slides, Tiefe = USP)
-1. **Cover** — Frage/These-Hook + Firmenlogo (weiße Karte) + Verdict-Badge + Score
+1. **Cover** — Frage/These-Hook + Firmenlogo (weiße Karte) + Verdict-Badge + Score. Im Badge: Score-Zahl (z. B. „70") groß, darunter „von 100 Punkten" klein — gestapelt rechts im Badge. Alle grauen Boxen und das Logo-Karte verwenden identische linke/rechte Seitenränder (MX).
 2. **Gesamteinschätzung** — Kernthese (Investment-Case) + 4 **Sterne**-Ratings
 3. **Szenarien · 12–18 Monate** — Bull/Base/Bear mit **Eintrittswahrscheinlichkeit**
    (Balken) + Kursziel-Spanne *(aus Punkt 3–5)*
@@ -319,7 +319,7 @@ Headline und übergibt sie via `--headline` (jede Analyse anders gestalten).
 7. **Risiko & Realitätscheck** — Positionierung/Erwartungen + Positionsgrößen-Chip
    *(Punkt 8; Kurs & GWS herausgefiltert)*
 8. **Langfrist · 3–5 Jahre** — Kursziel-Spannen je Szenario *(Punkt 10)*, ohne %
-9. **Profi-Fazit** — Kernaussage + vergleichbare Titel (Peers)
+9. **Profi-Fazit** — Kernaussage + vergleichbare Titel (Peers). Passt der Text nicht auf eine Folie, wird automatisch eine zweite Fazit-Folie erzeugt (Peers + CTA nur auf der letzten Fazit-Folie).
 10. **Speichern & mitreden** — Save-CTA + Community-Frage (Engagement)
 
 Tiefen-Slides (6/7/8/10) entfallen automatisch, wenn der Abschnitt fehlt

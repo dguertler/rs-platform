@@ -842,9 +842,11 @@ def _verdict_badge(c, x, top, verdict, score, w=None, h=120):
     c.text(x + 40, top + 24, "EINSCHÄTZUNG", TY_BODY, color=T.TEXT, weight="bold")
     c.text(x + 40, top + 24 + TY_BODY_LH, f"{verdict} · {lab}", 40, color=col, weight="bold")
     if score is not None:
-        score_label = f"{score} von 100 Punkten"
-        c.text(x + w - 40, top + h // 2 - 10, score_label, TY_BODY, color=col,
-               weight="bold", ha="right", font="mono")
+        # Zahl groß, darunter "von 100 Punkten" — gestapelt rechts im Badge
+        c.text(x + w - 40, top + 16, str(score), 46,
+               color=col, weight="bold", ha="right", font="mono")
+        c.text(x + w - 40, top + 66, "von 100 Punkten", 20,
+               color=col, ha="right")
 
 
 def _pips(c, x, top, value, total=5, size=22, gap=12, col=T.BLUE):
@@ -1265,54 +1267,87 @@ def slide_analysis_cases(c, a, date_iso, items=None):
     analysis_footer(c)
 
 
-# 7) PROFI-FAZIT — Kernaussage + Peers + Folgen-CTA
-def slide_analysis_fazit(c, a, date_iso):
-    analysis_header(c, a, date_iso)
-    col = verdict_color(a["verdict"])
-    c.text(MX, 184, "Profi-Fazit", 42, weight="bold")
-
+def _fazit_clean_text(a):
+    """Bereinigt Abschnitt 11 für Slide-Darstellung (ohne Ratings, Disclaimer etc.)."""
     import re as _re
     raw11 = a["sections"].get(11, "")
-    # Rating-Bullet-Zeilen entfernen
     raw11 = _re.sub(r"\n-\s*(Qualität|Wachstum|Bewertung|Katalysator)[^\n]*", "", raw11)
     raw11 = _re.sub(r"\*\*([^*]+)\*\*", r"\1", raw11)
-    # Markdown-Tabellen und Disclaimer abschneiden
     raw11 = _re.sub(r"\s*-{3,}\s*\|.*", "", raw11, flags=_re.DOTALL)
     raw11 = _re.sub(r"\|[^\n]*", "", raw11)
     raw11 = _re.sub(r"\*?Keine Anlageberatung[^*\n]*\*?", "", raw11)
     raw11 = _re.sub(r"Verdict:\s*\w+\s*\(\d+/\d+\)[^\n]*", "", raw11)
-    core = A.clean_for_slide(raw11.strip()) or a.get("fazit_core", "")
-    # max_lines dynamisch: reserviert 120px CTA + 40px gap + 90px Peers (falls vorhanden)
-    peers_reserve = 100 if a.get("peers") else 0
+    return A.clean_for_slide(raw11.strip()) or a.get("fazit_core", "")
+
+
+def _fazit_max_lines(canvas_h, has_peers):
+    """Maximale Zeilenanzahl für Fazit-Fließtext (ohne Overflow-Folie)."""
+    peers_reserve = 100 if has_peers else 0
+    avail = (canvas_h - 160) - 256 - 120 - 40 - peers_reserve
+    return max(4, int(avail / TY_BODY_LH))
+
+
+def _rejoin_wrapped_lines(lines):
+    """Rekonstruiert Fließtext aus _wrap_px-Zeilen (entfernt Trenn-Bindestriche)."""
+    result = ""
+    for line in lines:
+        if result.endswith("-"):
+            result = result[:-1] + line   # getrenntes Wort zusammenführen
+        else:
+            result = (result + " " + line).strip()
+    return result
+
+
+def fazit_split(a, canvas_h=1350):
+    """Gibt (page1_text, page2_text_or_None) zurück — für Overflow-Erkennung in generate.py."""
+    core = _fazit_clean_text(a)
+    max_l = _fazit_max_lines(canvas_h, bool(a.get("peers")))
+    all_lines = _wrap_px(core, 1080 - 2 * MX, TY_BODY)
+    if len(all_lines) <= max_l:
+        return core, None
+    return _rejoin_wrapped_lines(all_lines[:max_l]), _rejoin_wrapped_lines(all_lines[max_l:])
+
+
+# 7) PROFI-FAZIT — Kernaussage + Peers + Folgen-CTA
+def slide_analysis_fazit(c, a, date_iso, text_override=None, show_peers_cta=True):
+    analysis_header(c, a, date_iso)
+    col = verdict_color(a["verdict"])
+    c.text(MX, 184, "Profi-Fazit", 42, weight="bold")
+
+    core = text_override if text_override is not None else _fazit_clean_text(a)
+    peers_reserve = 100 if (show_peers_cta and a.get("peers")) else 0
     _avail_text = (c.H - 160) - 256 - 120 - 40 - peers_reserve
-    max_lines_fazit = max(4, int(_avail_text / TY_BODY_LH))
+    max_lines_fazit = _fazit_max_lines(c.H, show_peers_cta and bool(a.get("peers")))
+    # Bei text_override (Fortsetzungsfolie) keinen Truncate-Marker setzen
+    use_max = None if text_override is not None else max_lines_fazit
     y = _draw_paragraph(c, MX, 256, core, TY_BODY, c.W - 2 * MX,
-                        color=T.TEXT, line_h=TY_BODY_LH, max_lines=max_lines_fazit)
+                        color=T.TEXT, line_h=TY_BODY_LH, max_lines=use_max)
 
-    # Peers
-    peers = a.get("peers", [])
-    if peers:
-        c.text(MX, y + 30, "VERGLEICHBARE TITEL", TY_SUB, color=T.MUTED, weight="bold")
-        px = MX
-        yy = y + 64
-        for p in peers:
-            w = min(360, 60 + int(len(p) * 12))
-            if px + w > c.W - MX:
-                px = MX
-                yy += 70
-            c.tile(px, yy, w, 56, color=T.PANEL_HI)
-            c.text(px + 24, yy + 16, p, 20, color=T.TEXT, weight="bold")
-            px += w + 18
-        y = yy + 56
+    # Peers nur auf der letzten Fazit-Folie
+    if show_peers_cta:
+        peers = a.get("peers", [])
+        if peers:
+            c.text(MX, y + 30, "VERGLEICHBARE TITEL", TY_SUB, color=T.MUTED, weight="bold")
+            px = MX
+            yy = y + 64
+            for p in peers:
+                w = min(360, 60 + int(len(p) * 12))
+                if px + w > c.W - MX:
+                    px = MX
+                    yy += 70
+                c.tile(px, yy, w, 56, color=T.PANEL_HI)
+                c.text(px + 24, yy + 16, p, 20, color=T.TEXT, weight="bold")
+                px += w + 18
+            y = yy + 56
 
-    # Folgen-CTA
-    cta_top = max(y + 40, c.H - 360)
-    c.tile(MX, cta_top, c.W - 2 * MX, 120, color=T.PANEL)
-    c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
-    c.text(MX + 40, cta_top + 28, "Folge für wöchentliche Profi-Analysen", 28,
-           color=T.TEXT, weight="bold")
-    c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · systematisiert",
-           TY_SUB, color=T.MUTED)
+        # Folgen-CTA
+        cta_top = max(y + 40, c.H - 360)
+        c.tile(MX, cta_top, c.W - 2 * MX, 120, color=T.PANEL)
+        c.tile(MX, cta_top, 12, 120, color=T.BLUE, radius=6)
+        c.text(MX + 40, cta_top + 28, "Folge für wöchentliche Profi-Analysen", 28,
+               color=T.TEXT, weight="bold")
+        c.text(MX + 40, cta_top + 74, "datengetrieben · unabhängig · systematisiert",
+               TY_SUB, color=T.MUTED)
     analysis_footer(c)
 
 
