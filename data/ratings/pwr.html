@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PWR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">17.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>PWR</h1>
+      <h2>Quanta Services, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Engineering & Construction</span></div>
+        <div class="mi">MCap: <span>$106B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 2/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">70</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 17.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">77.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$707.74</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">43.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$30.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">15.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">6.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">13.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$850–$950</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$680–$780</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$380–$480</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Quanta Services, Inc.** · Industrials · 17.06.2026 · Signal: GWS Breakout 2/3</p>
+<p>| Kennzahl | Wert |</p>
+<p>|---|---|</p>
+<p>| Kurs | 719.29 |</p>
+<p>| Market Cap | $106.2 Mrd. |</p>
+<p>| Forward PE | 43.00 |</p>
+<p>| Revenue (TTM) | $30.1 Mrd. |</p>
+<p>| Gross Margin | 15.1% |</p>
+<p>| ROE | 13.5% |</p>
+<p>| RS-Score | 77.65 |</p>
+<p>**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✗ Nicht aktiv</p>
+<p>**Szenarien (12–18 Monate):** Bull $850–$950 (25 %) · Base $680–$780 (50 %) · Bear $380–$480 (25 %) · EV ~$720</p>
+<p>---</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Quanta Services ist der unsichtbare Motor hinter den sichtbarsten Megatrends: Energiewende, Netzmodernisierung, Rechenzentrum-Stromversorgung, und Elektrifizierung des Transportsektors. Mit $30,1 Mrd. Umsatz (+26% YoY) ist Quanta der unbestrittene Marktführer für elektrische Infrastrukturdienstleistungen in Nordamerika — kein Technologieunternehmen, aber das Rückgrat der Energieinfrastruktur, ohne die KI-Rechenzentren und Renewables nicht betrieben werden können. Der strukturelle Kern: Quanta baut und wartet die Hochspannungsleitungen, die Power zu Rechenzentren transportieren, und die Windparks und Solaranlagen, die diesen Power erzeugen. Revenue-Wachstum +26% YoY spiegelt explodierenden Backlog durch IRA-Fördergelder, Utility-Capex-Erhöhungen und Hyperscaler-Direktabnahmekontrakte wider. Was der Markt möglicherweise unterschätzt: Die Marginexpansion-Story ist noch nicht eingepreist — Quanta skaliert operative Effizienz bei wachsender Projektgröße und verbesserter Projektmix (höhermargige Renewables und Offshore-Wind gegenüber klassischem Leitungsbau).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Electric Power Segment (~75% Revenue): Bau, Wartung und Upgrade von Übertragungs- und Verteilnetzen; direkte Profiteure von IRA-Subventionen und Utility-Investitionsprogrammen</li>
+<li>Renewable Energy Segment (~25% Revenue): Wind, Solar, Batteriespeicher — wachstumsstarkes Segment mit strukturell höheren Margen als klassischer Netzbau</li>
+<li>Projektbasiertes Geschäft mit Multijahres-Rahmenverträgen (MSA): höhere Umsatzsichtbarkeit als rein projekt-transaktionales Modell</li>
+<li>Qualifizierter Arbeitskräftemangel als struktureller Wettbewerbsvorteil: Zehntausende ausgebildete Elektriker und Linemen sind nicht kurzfristig replizierbar</li>
+<li>Akquisitionsstrategie: Quanta hat in den letzten 5 Jahren >30 Unternehmen übernommen — erhöht Revenue, aber auch Integrationskomplexität und Goodwill</li>
+<li>Operative Margin 4,2% reflektiert Bausektor-Charakteristika — kein Tech-Business; FCF $1,04 Mrd. ist solid aber nicht außergewöhnlich bei diesem Revenue-Volumen</li>
+<li>Kundenbasis diversifiziert: große US-Utilities (Duke, NextEra, Xcel), Hyperscaler (für Netzanschlüsse), Öl- und Gasunternehmen als sekundäre Kunden</li>
+<li>Geografische Konzentration USA/Kanada: Geopolitik-Risiko gering, aber begrenzte internationale Diversifikation</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>IRA-Förderprogramme bleiben politisch stabil oder werden ausgebaut; US-Utility-Capex-Boom hält bis 2030 an; Quanta gewinnt überproportional bei Offshore-Wind-Projekten (strukturell höhere Margen). Strukturelle Margennachhaltigkeit: Verbesserung des Projektmixes (Renewables >35% Revenue) und operative Skaleneffekte bei größeren Projekten ermöglichen Operating Margin-Steigerung von 4,2% auf 6–7%. Annahme (kein Konsens): FY28-EPS ~$22 bei Revenue $40 Mrd. und 5,5% Operating Margin. Kursziel $850–$950 = FY28-EPS $22 × 39–43x Forward — Premium für strukturelle Infrastruktur-Positionierung und Wachstumssicherbarkeit. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>IRA bleibt intakt, aber politische Unsicherheiten verlangsamen einige Renewable-Projekte; Utility-Capex-Wachstum stabil bei 8–12%; Quanta hält Revenue-Wachstum bei 15–20% p.a. Operating Margin steigt moderat auf 4,5–5,5% durch Skaleneffekte. Annahme (kein Konsens): FY28-EPS ~$18 bei Revenue $36 Mrd. Kursziel $680–$780 = FY28-EPS $18 × 38–43x Forward — leichte Prämie für strukturelles Infrastruktur-Wachstum. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: IRA-Teilrücknahme durch politischen Kurswechsel oder Haushaltszwang; Hyperscaler reduzieren Rechenzentrum-Neubauten nach AI-ROI-Ernüchterung; Rezession komprimiert Utility-Capex-Budgets. Kundenkonzentration: Abhängigkeit von großen Utilities — Top-10-Kunden schätzungsweise >50% Revenue (auf Datenbasis nicht exakt quantifizierbar). Geopolitik: USA-zentriert, minimal. Lieferketten: Kabelknappheit und Transformatoren als kritische Bottlenecks — bereits heute ein Risikofaktor; kein Single-Source-Risiko erkennbar. Verwässerung: Akquisitions-getriebenes Wachstum erhöht SBC und Goodwill-Amortisation; SBC-Höhe nicht im Datensatz. Regulierung: FERC-Rahmenbedingungen für Netzbauvorhaben; keine materiellen Rechtsrisiken erkennbar. Bei Capex-Kürzung: Revenue-Wachstum auf <5%; Operating Margin unter Druck auf 3%; Annahme (kein Konsens): EPS kollabiert auf $9–$12. Kursziel $380–$480 = EPS $10,50 × 36–46x — Multiple-Kontraktion durch Wachstumsenttäuschung. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>Erwartungswert: $720 — implizites Upside vs. aktuellem Kurs ($719,29): +0,1%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Niveau nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 13,5% für einen Infrastruktur-Contractor mit projektbasiertem Geschäft ist angemessen — kein struktureller Compounder, aber solide. Gross Margin 15,1% ist für Baudienstleister typisch; entscheidend ist die Operating-Leverage-Fähigkeit bei steigenden Projektvolumina. Operating Margin 4,2% liegt unter dem Niveau, das bei reinem Infrastructure-Play Bewertungsprämien rechtfertigt. FCF $1,04 Mrd. bei $30 Mrd. Revenue (3,5% FCF-Marge) — ausreichend für Dividende ($0,06%) und selektive M&A, aber keine strukturelle FCF-Stärke. Net Margin 3,67% optisch bescheiden; Trailing PE 97x ist Artefakt von noch nicht normalisierten Gewinnen bei beschleunigtem Revenue-Wachstum — Forward PE 43x ist relevante Basis. D/E 69x buchhalterisch — ähnlich wie VRT durch Akquisitions-Goodwill dominiert, kein unmittelbares Solvenz-Signal.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 43x bei 26% Revenue-Wachstum: PEG-Ratio ~1,7 — teuer für einen Baudienstleister, fair für einen strukturellen Infrastruktur-Compounder. FCF-Rendite: $1,04 Mrd. / $106 Mrd. = 1,0% — sehr niedrig; rechtfertigt sich nur bei deutlicher FCF-Expansion. Rückrechnung: Kurs $719 impliziert bei 4% FCF-Marge und 8% Diskontrate ein Revenue von ~$47 Mrd. in FY30 — entspricht 12% p.a. Wachstum. Das ist plausibel bei IRA-Tailwind, aber ambitioniert wenn Margenexpansion ausbleibt. P/B 11,7x ist für Industriedienstleister eine massive Prämie — ausschließlich durch Wachstumserwartung gerechtfertigt. Peer-Multiples (MYR Group, Aecom, Mastec) nicht im Datensatz — relative Bewertung indikativ; kleinere Konkurrenten handeln strukturell günstiger, aber ohne Quantas Scale-Vorteil.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht im Datensatz — quantitative Aussage nicht möglich. Hypothese, nicht datenbasiert: Quanta zieht ESG-orientierte institutionelle Investoren und Infrastruktur-Long-Only-Fonds an — stabilere Basis als reine Momentum-Fonds, aber anfällig für IRA-Policy-Nachrichtenlage. 50T +16% zeigt starkes mittelfristiges Momentum; 20T -1,4% deutet auf kurzfristige Konsolidierung. Enttäuschungsrisiko: IRA-Gegenwind oder Projektverschiebungen würden Wachstumsnarrative direkt treffen. Beta 1,22 ist für einen Infrastruktur-Contractor überraschend hoch — reflektiert Policy-Abhängigkeit, nicht operatives Risiko.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS 2/3 (Weekly + Daily aktiv, 4H inaktiv) — mittlere Momentum-Stärke. RS-Score 77,65 — obere 22% des S&P 500-Universums. 5T +7,1%, 10T +1,1%, 20T -1,4%, 50T +16%, 6M +55% — starkes Halbjahres-Momentum, kurzfristige Konsolidierung. Letzter Schluss $719,29 (Tageshoch $738), 9% unter 52W-Hoch $788,75. Technisches Warnsignal: Wochenschluss unter $650 würde Trendstruktur gefährden; Support bei $660–$680 aus 50T-Bewegung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($1.200–$1.500):** IRA-Megaprojekte beschleunigen, Offshore-Wind-Segment etabliert sich als Hochmargen-Wachstumssäule, Operating Margin steigt auf 7%; FY30-EPS ~$32 × 38–47x = $1.200–$1.500. Entscheidende Variable: Politische Kontinuität der IRA-Förderstruktur.</p>
+<p>**Base Case ($800–$1.050):** Stabiles Wachstum 12–15% p.a., Operating Margin auf 5–6%; FY30-EPS ~$24 × 33–44x = $800–$1.050. Entscheidende Variable: Tempo der US-Netzmodernisierung und Utility-Capex-Budgets.</p>
+<p>**Bear Case ($280–$400):** IRA teilweise zurückgenommen, Capex-Zyklus dreht, Revenue-Wachstum <5%; normalisiertes EPS $8–$10 × 35–40x. Entscheidende Variable: Bundesregierung-Policy ab 2026/2027.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Quanta Services ist kein klassischer Buy-and-Hold-Compounder im Buffett-Sinne, aber ein überzeugendes strukturelles Wachstumsinstrument auf den US-Infrastruktur-Superzyklus. Die Kombination aus IRA-Rückenwind, Netzmodernisierungs-Zwang und KI-Stromnachfrage schafft einen mehrjährigen Nachfragesockel, der von keinem Konkurrenten in dieser Breite bedient werden kann. Das Kernproblem: Die Bewertung preist viel Wachstum bereits ein — EV der Szenarien liegt am aktuellen Kursniveau, kein asymmetrischer Edge sichtbar. Für geduldige Infrastruktur-Investoren mit 3–5 Jahren Horizont: Quanta bleibt ein Kern-Holding in jedem Energie-/Infrastruktur-Portfolio. Für kurzfristige Trades: Einstieg bei Korrekturen auf $620–$660 schafft attraktiveres Risiko-Rendite-Verhältnis. Positionsgröße: 3–5% eines diversifizierten Portfolios; Beta 1,22 erlaubt moderate Größe. Direkter Peer-Vergleich: **MYR Group (MYRG)** und **MasTec (MTZ)** bieten ähnliche Infrastruktur-Exposition auf günstigeren Multiples (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ), aber ohne Quantas Marktführer-Scale und Backlog-Tiefe. **NextEra Energy** ist alternatives Infrastruktur-Instrument mit defensiverem Profil.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
