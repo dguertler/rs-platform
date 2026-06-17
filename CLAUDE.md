@@ -41,6 +41,15 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 
 3. **`analyses/PROMPT.md` lesen** — dort stehen Analyse-Struktur, Prompt und alle Formatregeln
 
+3a. **Analyse-Datei suchen (Ticker-Mapping beachten):** Analysen werden in `analyses/` mit
+    dem **internen Ticker-Namen** gespeichert — oft **Kleinbuchstaben** und manchmal vom
+    Nutzer-Ticker abweichend (z. B. `KLA` → `analyses/klac.md`, `SIE` → `analyses/sie_de.md`).
+    Suche immer **case-insensitiv** und prüfe Varianten:
+    ```bash
+    ls analyses/ | grep -i "TICKER"
+    ```
+    Erst wenn keine Datei gefunden wird, eine neue Analyse erstellen.
+
 4. **`analyses/sndk.md` als Format-Referenz** für den Aufbau der Ausgabe nutzen
 
 5. **Analyse generieren** — Claude Code ist das LLM, kein externer API-Call
@@ -253,6 +262,13 @@ Wenn der Nutzer schreibt `Instagram-Analyse TICKER` / `Analyse-Post TICKER`
 
 1. `instagram/CONTEXT.md` (Abschnitt 11) + `PROMPT.md` (Abschnitt „Zweiter
    Post-Typ: AKTIEN-ANALYSE") lesen.
+1a. **Analyse-Datei finden (PFLICHT vor Generierung):** Dateinamen in `analyses/`
+    case-insensitiv suchen — Analysen können unter Kleinbuchstaben oder abweichendem
+    Ticker-Namen liegen (z. B. `KLA` → `klac.md`, `SIE` → `sie_de.md`):
+    ```bash
+    ls analyses/ | grep -i "TICKER"
+    ```
+    Den gefundenen Dateinamen (ohne `.md`) als `--analysis`-Argument verwenden.
 2. Generieren — am besten mit individueller Hook-Frage:
    ```bash
    python3 -m instagram.generate --analysis TICKER --headline "<Frage/These>"
