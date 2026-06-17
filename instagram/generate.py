@@ -878,42 +878,14 @@ def main():
             "verdict": a.get("verdict", ""),
             "score": a.get("score"),
         })
-        # ── Stage 1: Reel-Skript im Terminal ausgeben + auf Bestätigung warten ──
+        # Reel-Skript für Stage-2-Rendering speichern
         script_txt = reel_script(a)
         with open(os.path.join(base, "reel_script.txt"), "w") as f:
             f.write(script_txt)
-
-        if "reel" in fmts:
-            print("\n" + "─" * 60)
-            print(script_txt)
-            print("─" * 60)
-            print("\n⏸  Stage 1 abgeschlossen. Reel-Skript zur Überprüfung oben.")
-            print("   Cinematisches Rendering starten? [y/Rendern/Abfahrt/n]: ",
-                  end="", flush=True)
-            try:
-                answer = input().strip().lower()
-            except EOFError:
-                answer = "n"
-            if answer in ("y", "yes", "rendern", "abfahrt", "j", "ja"):
-                from . import cinematic_reel as cr
-                hook = hook_generator.get_hook(a["ticker"])
-                output_mp4 = os.path.join(base, "reel_cinematic.mp4")
-                print("\n🎬 Stage 2: Cinematisches Rendering startet…\n")
-                try:
-                    cr.render(
-                        ticker=a["ticker"],
-                        hook_typ=hook["typ"],
-                        script_path=os.path.join(base, "reel_script.txt"),
-                        output_path=output_mp4,
-                        score=a.get("score"),
-                        verdict=a.get("verdict", ""),
-                    )
-                    all_saved.append(output_mp4)
-                    print(f"  🎬 Cinematic Reel: {os.path.relpath(output_mp4, ROOT)}")
-                except Exception as e:
-                    print(f"  ⚠ Rendering fehlgeschlagen: {e}")
-            else:
-                print("  Rendering übersprungen. Render-Befehl steht in reel_script.txt.")
+        print(f"  📄 Reel-Skript: {os.path.relpath(os.path.join(base, 'reel_script.txt'), ROOT)}")
+        print("  ▶ Cinematisches Rendering: python3 instagram/cinematic_reel.py "
+              f"--ticker {a['ticker']} --script <pfad>/reel_script.txt "
+              f"--output <pfad>/reel_cinematic.mp4")
 
         full = _has_scenarios(a)
         print(f"✓ {len(all_saved)} Dateien (Analyse {a['ticker']}) in {base}")

@@ -78,16 +78,39 @@ def _pexels_download(query: str, dest: str, api_key: str, min_dur: int = 4) -> b
     return False
 
 
-# ── TTS via edge-tts ───────────────────────────────────────────────────────────
+# ── TTS: edge-tts (bevorzugt) oder espeak-ng (Fallback) ───────────────────────
 
-async def _tts_async(text: str, voice: str, dest: str) -> None:
+async def _tts_edge_async(text: str, voice: str, dest: str) -> None:
     import edge_tts
     communicate = edge_tts.Communicate(text, voice)
     await communicate.save(dest)
 
 
 def _run_tts(text: str, voice: str, dest: str) -> None:
-    asyncio.run(_tts_async(text, voice, dest))
+    """Versucht edge-tts; fällt bei SSL-Fehler auf espeak-ng zurück."""
+    try:
+        asyncio.run(_tts_edge_async(text, voice, dest))
+        print("  [TTS] edge-tts ✓")
+    except Exception as exc:
+        print(f"  [TTS] edge-tts fehlgeschlagen ({exc.__class__.__name__}), "
+              f"Fallback auf espeak-ng…")
+        _run_tts_espeak(text, dest)
+
+
+def _run_tts_espeak(text: str, dest: str) -> None:
+    """Offline-TTS via espeak-ng (deutsche Stimme, moderate Sprechgeschwindigkeit)."""
+    wav_path = dest.replace(".mp3", ".wav")
+    cmd = ["espeak-ng", "-v", "de", "-s", "135", "-w", wav_path, text]
+    result = subprocess.run(cmd, capture_output=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"espeak-ng fehlgeschlagen: {result.stderr.decode()}")
+    # WAV → MP3 via ffmpeg
+    subprocess.run(
+        ["ffmpeg", "-y", "-i", wav_path, "-codec:a", "libmp3lame", "-q:a", "4", dest],
+        capture_output=True, check=True,
+    )
+    os.remove(wav_path)
+    print("  [TTS] espeak-ng ✓")
 
 
 # ── Whisper-Untertitel ─────────────────────────────────────────────────────────
@@ -150,6 +173,71 @@ def _parse_scenes(script_path: str) -> list[dict]:
     return scenes
 
 
+# ── SRT aus Szenen-Text generieren (kein Whisper-Download nötig) ──────────────
+
+def _build_srt_from_scenes(scenes: list[dict], audio_path: str,
+                           srt_path: str) -> Optional[str]:
+    """
+    Baut eine SRT-Datei direkt aus dem Szenen-Voiceover-Text.
+    Teilt den Text gleichmäßig auf die Audio-Dauer auf — kein Whisper-Modell nötig.
+    """
+    try:
+        # Audio-Dauer per ffprobe ermitteln
+        result = subprocess.run(
+            ["ffprobe", "-v", "quiet", "-print_format", "json",
+             "-show_format", audio_path],
+            capture_output=True, text=True, check=True,
+        )
+        import json
+        duration = float(json.loads(result.stdout)["format"]["duration"])
+    except Exception as exc:
+        print(f"  [SRT] ffprobe fehlgeschlagen ({exc}) — ohne Untertitel")
+        return None
+
+    words_per_scene = [s["vo"].split() for s in scenes]
+    total_words = sum(len(w) for w in words_per_scene)
+    if total_words == 0:
+        return None
+
+    idx = 1
+    lines = []
+    t = 0.0
+    for w_list in words_per_scene:
+        if not w_list:
+            continue
+        scene_dur = duration * len(w_list) / total_words
+        word_dur = scene_dur / len(w_list)
+        for word in w_list:
+            end = min(t + word_dur, duration)
+            lines.append(str(idx))
+            lines.append(f"{_ts(t)} --> {_ts(end)}")
+            lines.append(word)
+            lines.append("")
+            idx += 1
+            t = end
+
+    with open(srt_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
+    print(f"  [SRT] {idx - 1} Wort-Untertitel generiert ✓")
+    return srt_path
+
+
+# ── PNG → kurzes MP4 (Ken-Burns-Zoom via ffmpeg) ──────────────────────────────
+
+def _png_to_video(png_path: str, dest: str, W: int, H: int, dur: float) -> None:
+    """Konvertiert ein PNG-Bild in ein kurzes MP4 mit leichtem Zoom-Effekt."""
+    zoom = "scale=8000:-1,zoompan=z='min(zoom+0.0015,1.5)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps=30".replace("{W}", str(W)).replace("{H}", str(H))
+    cmd = [
+        "ffmpeg", "-y",
+        "-loop", "1", "-i", png_path,
+        "-vf", zoom,
+        "-t", str(dur),
+        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        dest,
+    ]
+    subprocess.run(cmd, capture_output=True, check=True)
+
+
 # ── Rating-Overlay (dynamisch gerendert) ──────────────────────────────────────
 
 def _make_rating_overlay(score: Optional[int], verdict: str,
@@ -186,13 +274,14 @@ def _logo_width(path: Path, height: int = 80) -> int:
 # ── Clip-Crop ──────────────────────────────────────────────────────────────────
 
 def _crop_portrait(clip, W: int, H: int):
+    import moviepy.video.fx as vfx
     cw, ch = clip.size
     scale = max(W / cw, H / ch)
-    clip = clip.resize(width=int(cw * scale), height=int(ch * scale))
-    nw, nh = clip.size
-    x1 = (nw - W) // 2
-    y1 = (nh - H) // 2
-    return clip.crop(x1=x1, y1=y1, x2=x1 + W, y2=y1 + H)
+    new_w, new_h = int(cw * scale), int(ch * scale)
+    clip = clip.with_effects([vfx.Resize((new_w, new_h))])
+    x1 = (new_w - W) // 2
+    y1 = (new_h - H) // 2
+    return clip.with_effects([vfx.Crop(x1=x1, y1=y1, x2=x1 + W, y2=y1 + H)])
 
 
 # ── Untertitel einbrennen ──────────────────────────────────────────────────────
@@ -227,10 +316,11 @@ def render(
     verdict: str = "",
     hype_aktie: str = "Nvidia",
 ) -> str:
-    from moviepy.editor import (
+    from moviepy import (
         VideoFileClip, ImageClip, CompositeVideoClip,
         concatenate_videoclips, AudioFileClip, ColorClip,
     )
+    import moviepy.video.fx as vfx
 
     cfg = _load_cfg()
     api_key = os.environ.get(cfg["stock_footage"]["api_key_env"], "")
@@ -242,7 +332,12 @@ def render(
     rov_start = cfg["rating_overlay"]["start_sec"]
     rov_end = cfg["rating_overlay"]["end_sec"]
 
-    from . import hook_generator
+    try:
+        from . import hook_generator
+    except ImportError:
+        import sys
+        sys.path.insert(0, str(ROOT))
+        from instagram import hook_generator
     hook = hook_generator.get_hook_typed(hook_typ, ticker, hype_aktie)
 
     # Szenen laden und Hook als Szene 1 setzen
@@ -267,15 +362,15 @@ def render(
     print("[1/5] TTS generieren…")
     _run_tts(full_vo, voice, audio_path)
 
-    print("[2/5] Whisper-Transkription…")
-    try:
-        _whisper_srt(audio_path, srt_path)
-    except Exception as exc:
-        print(f"  Whisper fehlgeschlagen ({exc}) — ohne Untertitel")
-        srt_path = None
+    print("[2/5] Untertitel aus Voiceover-Text generieren…")
+    srt_path = _build_srt_from_scenes(scenes, audio_path, srt_path)
 
-    print("[3/5] Stock-Footage laden…")
+    print("[3/5] Stock-Footage laden (Pexels → Fallback auf Reel-PNGs)…")
     fallback_kw = cfg["stock_footage"]["fallback_keywords"]
+    # Reel-PNGs als lokaler Fallback (immer verfügbar)
+    reel_png_dir = Path(script_path).parent / "reel" if script_path else None
+    reel_pngs = sorted(reel_png_dir.glob("*.png")) if (
+        reel_png_dir and reel_png_dir.exists()) else []
     video_paths = []
     for i, scene in enumerate(scenes):
         dest = os.path.join(tmpdir, f"scene_{i:02d}.mp4")
@@ -286,6 +381,11 @@ def render(
             if not ok:
                 ok = _pexels_download(fallback_kw[i % len(fallback_kw)],
                                       dest, api_key, min_dur=int(scene_sec))
+        if not ok and reel_pngs:
+            # Reel-PNG → kurzes MP4 via ffmpeg (Ken-Burns-Zoom)
+            png = str(reel_pngs[i % len(reel_pngs)])
+            _png_to_video(png, dest, W, H, scene_sec)
+            ok = True
         video_paths.append(dest if ok else None)
 
     print("[4/5] Clips zusammenstellen…")
@@ -293,37 +393,38 @@ def render(
     for i, vpath in enumerate(video_paths):
         if vpath and Path(vpath).exists():
             try:
-                cl = VideoFileClip(vpath).subclip(0, scene_sec)
+                cl = VideoFileClip(vpath).subclipped(0, scene_sec)
                 clips.append(_crop_portrait(cl, W, H))
                 continue
             except Exception as exc:
                 print(f"  Clip {i} fehlgeschlagen ({exc})")
         clips.append(ColorClip(size=(W, H), color=(14, 19, 32), duration=scene_sec))
 
+    # Crossfade zwischen Clips (moviepy 2.x: with_effects)
     final_clips = [clips[0]]
     for cl in clips[1:]:
-        final_clips.append(cl.crossfadein(fade))
+        final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
     video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
 
-    audio = AudioFileClip(audio_path).set_duration(video.duration)
-    video = video.set_audio(audio)
+    audio = AudioFileClip(audio_path).with_duration(video.duration)
+    video = video.with_audio(audio)
 
     # Logo (oben rechts, dauerhaft)
     if LOGO_PATH.exists():
         lw = _logo_width(LOGO_PATH, height=80)
         logo = (ImageClip(str(LOGO_PATH))
-                .resize(height=80)
-                .set_duration(video.duration)
-                .set_position((W - lw - 40, 40)))
+                .with_effects([vfx.Resize(height=80)])
+                .with_duration(video.duration)
+                .with_position((W - lw - 40, 40)))
         video = CompositeVideoClip([video, logo])
 
     # Rating-Overlay (Sek. 6–9)
     if video.duration >= rov_end and (score is not None or verdict):
         rating_png = _make_rating_overlay(score, verdict)
         rating_clip = (ImageClip(rating_png)
-                       .set_start(rov_start)
-                       .set_end(rov_end)
-                       .set_position("center"))
+                       .with_start(rov_start)
+                       .with_end(rov_end)
+                       .with_position("center"))
         video = CompositeVideoClip([video, rating_clip])
 
     raw_path = os.path.join(tmpdir, "raw.mp4")

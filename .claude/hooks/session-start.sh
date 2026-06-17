@@ -13,10 +13,10 @@ pip install --quiet \
   -r "$CLAUDE_PROJECT_DIR/requirements.txt" \
   -r "$CLAUDE_PROJECT_DIR/instagram/requirements.txt"
 
-# ── ffmpeg (für moviepy + Whisper-Untertitel) ──────────────────────────────────
-if ! command -v ffmpeg &>/dev/null; then
+# ── ffmpeg + espeak-ng (für moviepy, Whisper-Untertitel, TTS-Fallback) ─────────
+if ! command -v ffmpeg &>/dev/null || ! command -v espeak-ng &>/dev/null; then
   sudo apt --fix-broken install -y --quiet
-  sudo apt-get install -y --quiet ffmpeg
+  sudo apt-get install -y --quiet ffmpeg espeak-ng
 fi
 
 # ── PYTHONPATH setzen ──────────────────────────────────────────────────────────
