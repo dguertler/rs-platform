@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AMG — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">17.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AMG</h1>
+      <h2>Affiliated Managers Group, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Asset Management</span></div>
+        <div class="mi">MCap: <span>$9B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 2/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 17.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">76.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$354.62</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">49.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">1.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">21.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$500–$520</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$340–$380</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$170–$200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>AMG ist kein klassischer Asset Manager — es ist eine Holdinggesellschaft, die Minderheitsbeteiligungen an unabhängigen Boutique-Investment-Managern (sogenannte Affiliates) hält und dafür eine Revenue-Share-Vergütung erhält. Das Geschäftsmodell ist kapitalleicht, skalierbar und strukturell von der M&A-Aktivität im Asset-Management-Sektor abhängig. Der strukturelle Kern: AMG kauft Anteile an leistungsstarken Nischenfonds, bevor diese zu groß für Private-Equity-Käufer werden — und profitiert dann überproportional vom AUM-Wachstum dieser Manager. Was der Markt möglicherweise unterschätzt: Forward-PE 9x für ein kapitalleichtes Gebührenmodell mit 22% Operating Margin ist auffallend günstig. Anomalie: Net Margin 35,5% liegt deutlich über der Operating Margin 22,1% — wahrscheinlich durch nicht-operative Einmalposten wie Mark-to-Market-Gewinne auf Beteiligungen oder Verkaufserlöse, aus den Daten nicht abschließend auflösbar. Diese Kennzahl ist daher aus der Bewertungsbasis herausgenommen. Die Aktie notiert nahe ihrem 52-Wochen-Hoch und hat sich seit dem Jahrestief ($179) fast verdoppelt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Minderheitsbeteiligungen (meist 30–60%) an unabhängigen Boutique-Asset-Managern (Affiliates) weltweit — kein direktes Fondsmanagement</li>
+<li>Revenue-Share-Modell: AMG erhält prozentualen Anteil der Affiliate-Umsätze ohne Eingriff ins operative Geschäft</li>
+<li>AUM-sensitiv: Steigende Märkte und gute Performance der Affiliates treiben AMG-Einnahmen direkt; schlechte Performance oder Outflows umgekehrt</li>
+<li>Kapitalleichtes Beteiligungsmodell: Niedrige laufende Capex, operative Hebel durch AUM-Wachstum ohne proportionale Kostensteigerung</li>
+<li>Internationale Diversifikation: Affiliates in USA, UK, Asien — reduziert Single-Market-Risiko</li>
+<li>Wachstum durch neue Affiliate-Akquisitionen oder Erweiterung bestehender Beteiligungen; M&A-Pipeline entscheidend</li>
+<li>Debt/Equity 73x erscheint hoch, ist aber für Beteiligungsholdings durch strukturierte Verbindlichkeiten nicht direkt vergleichbar mit Industrieunternehmen</li>
+<li>Dividendenrendite 1% und aktive Aktienrückkäufe als kapitalallokatives Signal</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Globale AUM-Reflation durch sinkende Zinsen treibt Performance-Gebühren der Affiliates; zwei bis drei neue Top-Tier-Affiliate-Akquisitionen erhöhen Gebührenbase um 10–15%. AMG realisiert weitere Beteiligungsverkäufe und hebt Guidance an. Strukturelle Margennachhaltigkeit: Das kapitalleichte Beteiligungsmodell hat strukturell niedrige Fixkosten — steigende AUM erzeugen überproportionale Revenue-Steigerungen ohne Personalaufbau (operative Leverage). Annahme (kein Konsens): FY27-EPS ~$42 × 12x Forward ergibt Kursziel $500–$520. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Affiliates wachsen mit moderatem AUM-Wachstum von 5–8% p.a. bei stabilen Märkten; eine bis zwei neue Akquisitionen pro Jahr. AMG hält Operating Margin bei ~22%. Annahme (kein Konsens): FY27-EPS ~$36 × 10x Forward ergibt Kursziel $340–$380. Aktienrückkäufe stützen EPS-Wachstum. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Marktkorrektur von 20–30% drückt AUM und Performancegebühren; wichtige Affiliates erleiden Performance-Drawdowns und signifikante Outflows. Bewertung komprimiert auf 7–8x Forward-EPS. Kundenkonzentration: auf Datenbasis nicht quantifizierbar, aber einzelne große Affiliates erzeugen strukturelle Klumpenrisiken. Geopolitik/China-Exposure: AMG hat Affiliates mit internationalem AUM-Fokus — Marktturbulenzen in Asien erhöhen Outflow-Risiko. Lieferkette/Foundry-Abhängigkeit: nicht relevant für Asset Manager. Verwässerung: SBC auf Datenbasis nicht beurteilbar; Aktienanzahl-Trend war zuletzt rückläufig durch Rückkäufe. Regulierung: Verschärfte SEC-Anforderungen an Gebührenstrukturen bei Boutique-Managern möglich. Annahme (kein Konsens): FY27-EPS ~$26 × 7x Forward ergibt Kursziel $170–$200. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>Erwartungswert: EV = 0,25 × $510 + 0,50 × $360 + 0,25 × $185 = $127,50 + $180 + $46,25 = **$353,75** — implizites Upside/Downside vs. aktuellem Kurs ($357,50): ca. −1%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Kursniveau nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 21,8% ist solide für ein kapitalleichtes Beteiligungsmodell — nicht zyklisch verzerrt, da kein operatives Kapital gebunden. Operating Margin 22,1% stabil und nachvollziehbar. Net Margin 35,5% enthält nicht-operative Posten (Mark-to-Market oder Verkaufserlöse) — aus den Daten nicht abschließend auflösbar, für Bewertungszwecke nicht verwendet. FCF $237,5 Mio. bei $2,12 Mrd. Revenue ergibt FCF-Marge ~11,2% — konservativ, da ein Teil der Cashflows in neue Affiliate-Akquisitionen fließt. Gross Margin 49,3% reflektiert das kapitalleichte Gebührenmodell. Bilanzqualität: D/E 73x optisch hoch, für Beteiligungsstrukturen aber kontextabhängig zu werten — Einschränkung der Beurteilbarkeit.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 9,0x für ein kapitalleichtes Gebührenmodell mit stabiler Margenstruktur ist optisch günstig. Normalisierter FCF-Ansatz: FCF $237,5 Mio. × 15x (normalisiertes Multiple für Gebührenholdings) ergibt fairen Wert ~$3,6 Mrd. — deutlich unter aktueller Market Cap $9,4 Mrd. Dies impliziert, dass der Markt entweder deutlich höheres FCF-Wachstum einpreist oder künftige Beteiligungsverkäufe als wesentlichen Wertfaktor sieht. Rückrechnung „Was preist der Kurs ein?": Bei $9,4 Mrd. Market Cap und FCF-Multiple 20x wäre FCF von ~$470 Mio. nötig — das bedeutet FCF-Wachstum von +98% vs. TTM. Bei Revenue-Wachstum 9,7% und stabiler Marge ist das ambitioniert. Der Kurs preist entweder weitere Beteiligungsgewinne oder AUM-Beschleunigung ein — ambitioniert, aber nicht unrealistisch bei sinkendem Zinsumfeld.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 76 signalisiert überdurchschnittliche Relatve Stärke — die Aktie outperformt den S&P 500 über alle beobachteten Fenster: +3,3% (5T), +15,3% (10T), +19,1% (20T), +18,7% (50T), +19,6% (6M). Kurs nahe 52-Wochen-Hoch $355,55 — Breakout-Niveau technisch signifikant. Hypothese, nicht datenbasiert: Sektorrotation in „cheap financials" als Narrativ möglicherweise treibend; institutionelle Long-Only-Rotation aus Wachstumswerten in günstig bewertete Finanzwerte. Enttäuschungsrisiko: Ausbleiben neuer Affiliate-Akquisitionen oder Marktkorrektur mit AUM-Rückgang.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS Breakout 2/3 (Weekly + Daily aktiv, 4H nicht bestätigt). Kurs $357,50 marginally über 52-Wochen-Hoch $355,55 — frischer Ausbruch. Momentum über alle Fenster positiv und beschleunigend: 20T +19,1%, 50T +18,7%, 6M +19,6%. Fundamental gestützt durch Revenue-Wachstum 9,7% und stabile Margenstruktur. 12-Monats-Fenster nicht verfügbar. Technisches Warnsignal: Wochenschluss unter $310 (vorheriger Widerstandsbereich) würde Trendfortsetzung infrage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($550–$700):** Zwei bis drei große Affiliate-Akquisitionen; AUM-Inflationseffekt bei sinkenden Zinsen; EPS ~$50 × 12–14x = $600–$700. Entscheidende Variable: Qualität der M&A-Pipeline und Zinsumfeld.</p>
+<p>**Base Case ($380–$480):** Organisches AUM-Wachstum 5–8% p.a., eine Akquisition p.a.; EPS ~$40 × 10–12x. Entscheidende Variable: Performance der bestehenden Affiliates.</p>
+<p>**Bear Case ($150–$220):** Fundamentale Marktkorrektur kollabiert AUM und Performancegebühren; Affiliate-Exits durch Konkurrenz. Bewertung 6–7x deprimiertes EPS.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>AMG ist kein Compounder im klassischen Sinne, aber auch kein reiner zyklischer Trade — es ist eine strukturierte Wette auf die Outperformance unabhängiger Boutique-Manager im Asset-Management-Sektor, verpackt als günstig bewertete Holding. Forward-PE 9x ist für dieses Geschäftsmodell cheap, aber der Erwartungswert der eigenen Szenarien ergibt auf aktuellem Niveau keinen asymmetrischen Edge. Geeignet für Value-Investoren mit Finanzsektor-Überzeugung und 12–24-Monats-Horizont; weniger geeignet für reine Wachstumsinvestoren. Positionsgröße: moderat, da Upside limitiert und Kurs nahe 52-Wochen-Hoch.</p>
+<p>Direkte Peers: **Artisan Partners (APAM)** — reinere Boutique-Struktur, höhere Ausschüttungsquote; **WisdomTree (WETF)** — kleinerer ETF-Fokus, weniger vergleichbar. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
