@@ -20,6 +20,7 @@ from datetime import datetime
 from . import data, render, report, store
 from . import analysis as ana
 from . import earnings as earn
+from . import hook_generator
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -377,54 +378,75 @@ def reel_script(a):
     bear = ana.clean_for_slide(sc["bear"]["summary"]) if _has_scenarios(a) else ""
     headline = render.analysis_headline(a)
 
+    # Psychologischer Hook (zufällig gezogen, konsistent für diesen Durchlauf)
+    psych = hook_generator.get_hook(t)
+
     L = []
     L.append("# REEL-SCRIPT — " + f"{name} ({t})")
-    L.append("# Format 9:16 · ~45 Sek · faceless · für InVideo AI / Google Veo / "
-             "CapCut Script-to-Video")
+    L.append("# Format 9:16 · ~15–45 Sek · faceless")
+    L.append("# Für cinematic_reel.py ODER InVideo AI / Google Veo / CapCut")
+    L.append(f"# Hook-Typ: {psych['typ']}")
     L.append("")
     L.append("## [AI-GENERATOR-PROMPT]")
     L.append(
         f"\"Erstelle ein düsteres, hochprofessionelles Finanz-Reel für Instagram "
-        f"im Format 9:16. Schnelle, dynamische Schnitte alle ~1,5 Sekunden. "
+        f"im Format 9:16. Schnelle, dynamische Schnitte alle ~2–3 Sekunden. "
         f"Visueller Stil: minimalistisch, cineastisch, High-Tech, dunkler "
         f"Hintergrund mit blauen/cyan Akzenten. B-Roll: {broll}. Stimme: tiefe, "
         f"professionelle, charismatische deutsche Männerstimme (KI). Musik: "
         f"subtiler, rhythmischer, dramatischer Tech-Beat. Untertitel groß, fett, "
-        f"zentriert, synchron zum Voiceover aufpoppend.\"")
+        f"zentriert, wortweise synchron zum Voiceover aufpoppend.\"")
     L.append("")
     L.append("## [SCRIPT]")
-    L.append(f"[0:00–0:05]  (Overlay: {t} — {a['verdict']})")
-    L.append(f"VO: \"{headline} {a.get('hook','')}\"")
+    L.append("[SZENE 1 – 0:00–0:03]  ← HOOK (cinematic_reel.py: Szene 1)")
+    L.append(f"Visual: [Pexels: {psych['visual']}]")
+    L.append(f"Voiceover: \"{psych['text']}\"")
+    L.append("")
+    L.append(f"[SZENE 2 – 0:03–0:06]  (Overlay: {t} — {a['verdict']})")
+    L.append(f"Visual: [Pexels: {broll.split(',')[0].strip()} 4k]")
+    L.append(f"Voiceover: \"{headline} {a.get('hook','')}\"")
     L.append("")
     if misconception:
-        L.append(f"[0:05–0:13]  (Overlay: KGV {pe['trailing']}x = irreführend)")
-        L.append(f"VO: \"{misconception}\"")
+        L.append(f"[SZENE 3 – 0:06–0:14]  (Overlay: KGV {pe['trailing']}x = irreführend)")
+        L.append(f"Visual: [Pexels: abstract financial data neon 4k]")
+        L.append(f"Voiceover: \"{misconception}\"")
         L.append("")
     core = ana.clean_for_slide(a["sections"].get(1, ""))
     csents = ana.sentences(core)
     core_vo = " ".join(csents[1:3]).strip() if len(csents) > 1 else core
     if core_vo:
-        L.append("[0:13–0:23]  (Overlay: Der Kern)")
-        L.append(f"VO: \"{core_vo}\"")
+        L.append("[SZENE 4 – 0:14–0:24]  (Overlay: Der Kern)")
+        L.append(f"Visual: [Pexels: {broll.split(',')[0].strip()} 4k]")
+        L.append(f"Voiceover: \"{core_vo}\"")
         L.append("")
     if bear:
-        L.append("[0:23–0:33]  (Overlay: Das größte Risiko)")
-        L.append(f"VO: \"Das Hauptrisiko: {bear}\"")
+        L.append("[SZENE 5 – 0:24–0:34]  (Overlay: Das größte Risiko)")
+        L.append(f"Visual: [Pexels: dark risk warning abstract 4k]")
+        L.append(f"Voiceover: \"Das Hauptrisiko: {bear}\"")
         L.append("")
     if _has_scenarios(a):
-        L.append("[0:33–0:40]  (Overlay: Szenarien & Kursziele)")
-        L.append(f"VO: \"Drei Szenarien auf 12 bis 18 Monate: Bull "
+        L.append("[SZENE 6 – 0:34–0:41]  (Overlay: Szenarien & Kursziele)")
+        L.append(f"Visual: [Pexels: stock market chart three scenarios 4k]")
+        L.append(f"Voiceover: \"Drei Szenarien auf 12 bis 18 Monate: Bull "
                  f"{sc['bull']['prob']} Prozent, Base {sc['base']['prob']} Prozent, "
                  f"Bear {sc['bear']['prob']} Prozent — Kursziele {targets}.\"")
         L.append("")
-    L.append("[0:40–0:45]  (Overlay: Ganze Analyse im Karussell 👆)")
-    L.append(f"VO: \"Den kompletten Deep Dive mit allen Kurszielen findest du im "
+    L.append("[SZENE 7 – 0:41–0:46]  (Overlay: Ganze Analyse im Karussell 👆)")
+    L.append(f"Visual: [Pexels: dark screen carousel swipe 4k]")
+    L.append(f"Voiceover: \"Den kompletten Deep Dive mit allen Kurszielen findest du im "
              f"Karussell-Post auf diesem Profil. Folge {render.BRAND_NAME} für 1–2 "
              f"Profi-Analysen pro Woche.\"")
     L.append("")
     L.append("## [HINWEIS]  Pflicht-Disclaimer einblenden/vorlesen:")
     L.append("Keine Anlageberatung · KI-generierte Analyse · Kursziele sind "
              "Szenarien, keine Prognosen.")
+    L.append("")
+    L.append("## [CINEMATIC RENDER]")
+    L.append("# Cinematisches Rendering (Stage 2 — nach Bestätigung):")
+    L.append(f"# python3 instagram/cinematic_reel.py --ticker {t} \\")
+    L.append(f"#   --hook-typ {psych['typ']} \\")
+    L.append(f"#   --script <pfad>/reel_script.txt \\")
+    L.append(f"#   --output <pfad>/reel_cinematic.mp4")
     return "\n".join(L)
 
 
@@ -464,7 +486,10 @@ def caption_analysis(a):
     name = render.A.short_name(a["name"])
     DISC = render.T.DISCLAIMER_ANALYSE_SHORT
     parts = [f"{name} ({a['ticker']}) Aktienanalyse: {v}{scal} 📊\n"]
-    if a.get("hook"):
+    # Psychologischer Hook als zweite Zeile (Verlustangst / Wissenslücke / Widerspruch)
+    psych_hook = hook_generator.get_hook(a["ticker"])
+    parts.append(psych_hook["text"] + "\n")
+    if a.get("hook") and a["hook"] != psych_hook["text"]:
         parts.append(a["hook"] + "\n")
     parts.append("Die komplette Analyse — Szenarien mit Kurszielen, Bewertung und "
                  "Profi-Fazit — auf den Slides. Speichere für deine Watchlist.\n")

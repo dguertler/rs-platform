@@ -1,0 +1,36 @@
+brand: "AI Alpha Selection"
+language: "de"
+voice: "de-DE-KillianNeural"      # Fallback: de-DE-ConradNeural
+colors:
+  background: "#0E1320"            # theme.py: NAVY
+  accent: "#2F6BFF"                # theme.py: BLUE
+  highlight: "#00F0FF"             # Neon-Cyan für Untertitel Hook-Szene
+  text: "#FFFFFF"
+video:
+  resolution: [1080, 1920]         # 9:16
+  fps: 30
+  scene_max_sec: 3.0               # max. 3 Sek./Clip → 2-Sek.-Dropoff zerstören
+  crossfade_sec: 0.3
+  logo_path: "instagram/assets/Logo.png"
+  logo_position: "top_right"       # 40px Rand, dauerhaft sichtbar
+subtitles:
+  style: "word_by_word"
+  font_size: 72
+  font_color: "#FFFFFF"
+  outline_color: "#000000"
+  outline_width: 3
+  position: "center"
+  hook_color: "#00F0FF"            # Neon-Cyan nur in Szene 1 (Hook)
+rating_overlay:
+  start_sec: 6.0
+  end_sec: 9.0
+  # dynamisch aus Analyse-Score gerendert via Pillow — kein festes rating_box.png
+stock_footage:
+  source: "pexels"                 # kostenlos, keine Video-Attribution nötig
+  api_key_env: "PEXELS_API_KEY"
+  fallback_keywords:
+    - "dark server room glowing blue 4k"
+    - "semiconductor wafer production closeup"
+    - "abstract dark financial chart neon"
+    - "microchip glowing blue 4k"
+    - "stock market data screen night"
