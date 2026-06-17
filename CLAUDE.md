@@ -79,6 +79,100 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 Max. **5 Ticker pro Session** für optimale Kontext-Qualität.
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
+## Wikifolio Wochenrückblick (Feed-Post)
+
+Wenn der Nutzer schreibt `Wochenrückblick KW<NN>` oder `Feed-Post KW<NN>`:
+
+### Datenabruf und Berechnung
+
+```python
+import json
+
+hist   = json.load(open('instagram/data/wikifolio_history.json'))['weekly']
+trades = json.load(open('instagram/data/trades.json'))['closed']
+holds  = json.load(open('instagram/data/holdings.json'))['positions']
+ndx    = json.load(open('data/rs_full.json'))['ndx_ohlcv']
+
+# Konstanten
+START_VALUE = 98.48          # EUR, 30.03.2026
+NDX_START   = 22953.38       # NDX-Close 30.03.2026
+
+# Wochenwerte
+kw_curr = next(e for e in hist if e['kw'] == NN)
+kw_prev = next(e for e in hist if e['kw'] == NN - 1)
+port_wk    = (kw_curr['value'] - kw_prev['value']) / kw_prev['value']
+port_total = (kw_curr['value'] - START_VALUE) / START_VALUE
+
+# NASDAQ: Freitag KW-Ende vs. Freitag Vorwoche
+ndx_curr = next(e for e in ndx if e['d'] == kw_curr['date'])['c']
+ndx_prev = next(e for e in ndx if e['d'] == kw_prev['date'])['c']
+ndx_wk    = (ndx_curr - ndx_prev) / ndx_prev
+ndx_total = (ndx_curr - NDX_START) / NDX_START
+
+alpha_wk    = port_wk - ndx_wk
+alpha_total = port_total - ndx_total
+```
+
+Wochen über NASDAQ: manuell aus Historie ermitteln (Vergleich port_wk vs. ndx_wk
+je KW) oder aus `instagram/CONTEXT.md` entnehmen.
+
+### KW24-Trades (Referenzbeispiel)
+
+Verkäufe KW24: DDOG +7,6% (09.06.), AMAT +5,1% (09.06.), WDC +2,7% (09.06.)
+Käufe KW24: GOOGL (09.06.), ASML (12.06.), SQ (12.06.)
+
+### Textformat (Plain Text, kein Markdown)
+
+Ausgabe **ohne Markdown-Formatierung** (keine ##, keine **, keine ---),
+damit der Text direkt kopiert und in den wikifolio-Feed eingefügt werden kann.
+Struktur analog KW23-Referenz:
+
+```
+📊 Wochenreport KW NN (DD.MM. – DD.MM.)
+
+Performance:
+	•	Portfoliowert: +X,X% diese Woche
+	•	Gesamtrendite Wikifolio seit 30.03.: +XX,X%
+	•	Nasdaq-100: +X,X% diese Woche
+	•	Gesamtrendite Nasdaq seit 30.03.: +XX,X%
+	•	Alpha seit 30.03.: +XX,Xpp
+	•	N von M Wochen den Nasdaq geschlagen
+
+🔥 Trades der Woche:
+✅ Käufe:
+→ FIRMENNAME (DD.MM.)
+Kurzbeschreibung: Sektor, RS-Signal, Positionsgröße.
+
+❌ Verkäufe:
+← FIRMENNAME (DD.MM., +/-XX,X% seit Kauf)
+Kurzbeschreibung: Exit-Grund (RS-Abschwächung / Stopp / Gewinn mitgenommen).
+
+[2–3 Narrativ-Abschnitte mit Emoji-Headline, je 3–5 Sätze]
+
+⚙️ System-Konsistenz:
+Die Kombination aus: [4 Bullet-Points] …beweist sich / liefert Woche für Woche.
+N von M Wochen den Nasdaq geschlagen. Gesamtrendite XX% vs. XX%.
+
+🎯 Ausblick:
+[2–3 Sätze. Immer enden mit: Keine Prognosen, keine Meinungen – nur Daten,
+Disziplin und Umsetzung.]
+```
+
+### Themen-Auswahl für Narrativ-Abschnitte
+
+Pro Woche 2–3 der folgenden Winkel wählen (je nach Datenlage):
+- Outperformance in schwachem Markt (Portfolio + vs. NASDAQ -)
+- Outperformance in positivem Markt (beide +, Portfolio stärker)
+- Einzeltrade-Highlight (größter Gewinner / Verlierer mit System-Erklärung)
+- Schnelle Stopp-Umsetzung (Roundtrip < 5 Tage mit Verlust)
+- Portfolio-Rotation (mehrere Exits + Entries in kurzer Folge)
+- Re-Entry (Titel der früher mit Verlust verkauft wurde und jetzt zurückkommt)
+
+### Nach dem Erstellen
+
+Keine Datei-Commits nötig (Feed-Text ist reines LLM-Output). Nur committen,
+wenn Daten-JSONs geändert wurden (neue Trades, neue Holdings, neuer KW-Wert).
+
 ## Instagram-Workflow (AI Alpha Selection)
 
 Markenname: **AI Alpha Selection** (Singular, kein „Selections"). Kein
