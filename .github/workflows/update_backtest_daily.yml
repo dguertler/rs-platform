@@ -27,15 +27,11 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pip install yfinance pandas
 
-      - name: Vorhandene Backtest-Dateien in Root kopieren (für Script)
-        run: cp data/backtest_*.json . 2>/dev/null || true
-
       - name: Backtest inkrementell aktualisieren
         run: python update_backtest_daily.py
 
-      - name: Geänderte JSONs nach data/ verschieben und committen
+      - name: Geänderte JSONs committen und pushen
         run: |
-          mv backtest_*.json data/ 2>/dev/null || true
           git config user.name "github-actions"
           git config user.email "actions@github.com"
           git add data/backtest_*.json

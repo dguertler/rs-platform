@@ -12,7 +12,8 @@ import yfinance as yf
 import pandas as pd
 from datetime import datetime, timedelta
 
-OUT_DIR = os.path.dirname(os.path.abspath(__file__))
+_REPO   = os.path.dirname(os.path.abspath(__file__))
+OUT_DIR = os.path.join(_REPO, "data")
 PAUSE          = 2   # Sekunden zwischen Tickern
 PAUSE_ON_ERROR = 10  # Sekunden nach einem Fehler
 
@@ -155,7 +156,7 @@ sources = ["rs_full.json", "rs_sp500.json", "rs_dax.json"]
 tickers = []
 seen = set()
 for src in sources:
-    path = os.path.join(OUT_DIR, src)
+    path = os.path.join(_REPO, "data", src)
     if not os.path.exists(path):
         print(f"  {src} nicht gefunden, übersprungen")
         continue
