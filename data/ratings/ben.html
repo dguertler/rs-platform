@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BEN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">17.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BEN</h1>
+      <h2>Franklin Resources, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Asset Management</span></div>
+        <div class="mi">MCap: <span>$17B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 2/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 17.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">78.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$32.13</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$9.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">37.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">411.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$49–$64</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$33–$39</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">N/A</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">N/A</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Franklin Resources (BEN) ist einer der ältesten aktiven Asset Manager der USA — und genau das ist Fluch und Segen zugleich. Das Kernproblem: Aktives Management verliert seit einem Jahrzehnt strukturell Marktanteile an Passivprodukte (ETFs, Indexfonds). Die Akquisition von Legg Mason (2020) hat das AUM-Volumen verdoppelt, die Integration ist weitgehend abgeschlossen — doch die Synergien müssen sich erst vollständig in den Margen materialisieren. Das attraktive Element für 2025/2026: BEN notiert nahe 52W-Hoch ($32,47), RS-Score 78,92 signalisiert relative Stärke im Sektor, und die Dividendenrendite von 4,1% bietet substanziellen Total-Return-Puffer. Negativer FCF ($-242M) ist ungewöhnlich für Asset Manager — vermutlich durch Akquisitions- oder Seed-Capital-Investments; die Ursache ist aus den vorliegenden Daten nicht abschließend auflösbar. Das Kerngeschäft — Gebühreneinnahmen auf verwaltetes Vermögen — ist kapitalextrem leicht und sollte strukturell positiven FCF generieren.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>AUM-basierte Managementgebühren als primäre Revenue-Quelle: Revenue $9,03 Mrd. TTM bei ~$1,6 Bln. AUM (Annahme, kein Konsens)</li>
+<li>Legg Mason-Integration: Diversifikation in Anleihen, Multi-Asset, Alternativen — reduziert Abhängigkeit von Aktien-Fonds</li>
+<li>Aktive Strategien unter Gebührendruck: Struktureller Abfluss aus aktiven Aktienfonds in passive ETFs belastet langfristiges AUM-Wachstum</li>
+<li>Revenue-Wachstum +8,7% YoY: teilweise durch Marktperformance-Effekt (Beta auf Aktienmärkte), nicht nur durch Netto-Zuflüsse</li>
+<li>Dividende $1,20/Aktie/Jahr (4,11% Yield) — hohe Ausschüttungsquote signalisiert begrenztes Reinvestitionspotenzial</li>
+<li>Gross Margin 37,4%, Operating Margin 17,2%, Net Margin 8,1%: für Asset Manager unterdurchschnittliche operative Effizienz</li>
+<li>Negativer FCF ($-242M) anomal; als "aus den Daten nicht abschließend auflösbar" markiert — nicht in Bewertungs-Herleitung verwendet</li>
+<li>Beta 1,59: höhere Marktkorrelation als erwartet — BEN ist eine Wette auf Aktienmarkt-Stärke und hohes Risk-On-Sentiment</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Strukturelle Margin-Verbesserung durch vollständige Legg Mason-Synergien: Operating Margin von 17,2% auf 22–25% (Annahme, kein Konsens); gleichzeitig Marktperformance-Effekt treibt AUM und damit Revenue +10–15%. Alternativanlage-Bereich (Privatekredit, Infrastruktur) gewinnt an AUM-Anteil — höhere Margenstruktur als traditionelle Fonds. EPS normalisiert auf $3,50–$4,00 (Annahme, kein Konsens) × 14–16x Forward-Multiple: Kursziel $49–$64. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>AUM wächst moderat durch Marktperformance; Netto-Abflüsse aus aktiven Strategien werden durch Anleihe- und Alternativfonds-Zuflüsse weitgehend kompensiert. Revenue-Wachstum verlangsamt auf +5–7%. Operating Margin bleibt bei 17–19%. EPS normalisiert ~$3,00 (Annahme, kein Konsens) × 11–13x: Kursziel $33–$39. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Signifikante Marktkorrektur (-20%+ Aktienmarkt) trifft AUM und damit Revenue direkt. Parallel: Netto-Abflüsse aus aktiven Fonds beschleunigen sich. Operating Leverage wirkt negativ: Revenue fällt, Fixkosten (Mitarbeiter, Technologie) bleiben. EPS komprimiert auf $1,50–$2,00 (Annahme, kein Konsens) × 8–10x: Kursziel $12–$20.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Institutionelle Mandate typischerweise konzentriert; Datenbasis erlaubt keine Quantifizierung — auf Datenbasis nicht beurteilbar</li>
+<li>Geopolitik/Exportkontrollen: Globaler Asset Manager mit internationalem AUM-Exposure; Kapitalmarkt-Restriktionen einzelner Märkte möglich — nicht quantifizierbar</li>
+<li>Lieferkette: Nicht relevant für Finanzdienstleister</li>
+<li>Verwässerung: SBC-Niveau für Asset Manager typisch moderat; Aktienanzahl-Trend aus Daten nicht ableitbar</li>
+<li>Regulierung: SEC-Regulierung, MiFID II international; kein akutes Rechtsrisiko erkennbar aus Datenbasis</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit Bear: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>Erwartungswert: EV = 0,25 × $56,50 + 0,45 × $36,00 + 0,30 × $16,00 = $14,13 + $16,20 + $4,80 = **$35,13** — implizites Upside vs. aktuellem Kurs ($33,18): +5,9%.</p>
+<p>**Szenarien (12–18 Monate):** Bull $49–$64 (25 %) · Base $33–$39 (45 %) · Bear $12–$20 (30 %) · EV ~$35,13</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 6,7% ist für einen Asset Manager unterdurchschnittlich — Peers wie T. Rowe Price oder BlackRock erzielen strukturell 15–30% (Peer-Multiples nicht im Datensatz). Operating Margin 17,2% unter Branchendurchschnitt; Net Margin 8,1% reflektiert Integrationskosten und möglicherweise hohe Zinskosten (D/E 23,47). Gross Margin 37,4% ist für reine Gebühreneinnahmen niedrig — suggeriert hohe variable Vergütungskosten oder Distributions-Aufwendungen. Negativer FCF ($-242M) anomal für Asset Manager und auf Datenbasis nicht abschließend auflösbar — vermutlich seed capital oder Akquisitions-Cashflows; bei Bewertungsherleitung nicht verwendet. Revenue +8,7% YoY überwiegend marktgetrieben, nicht durch Netto-Zuflüsse.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 10,78x: optisch günstig für Finanzwerte. Trailing-PE 24,53x deutlich höher — signalisiert starke EPS-Steigerung in der Konsenserwartung oder temporäre Bewertungsverzerrung; Anomalie (Trailing PE > 2× Forward PE) aus Daten nicht abschließend auflösbar. Bewertung primär auf normalisierter Basis: EPS-Normalisierung ~$3,00 × 11x = $33 — deckt sich mit aktuellem Kurs. P/B 1,38x: günstig, aber nur relevant wenn AUM-Generierungskraft strukturell erhalten bleibt. Rückrechnung — was preist der aktuelle Kurs ($33,18) ein? Bei Forward-PE 10,78x impliziert das EPS ~$3,08 — plausibel bei moderater Margenverbesserung, aber ambitioniert bei strukturellem Gebührendruck. Die eigenen Szenarien ergeben auf dem aktuellen Niveau einen EV von ~$35,13 — knapp 6% Upside. Das ist kein asymmetrisches Risk/Reward.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 78,92 — gute relative Stärke. 5T +3,2%, 10T +9,8%, 20T +5,6% — kurzfristiger Momentum-Aufbau. 6M +34,3%, 50T +26,0% — starke Rally aus dem 52W-Tief ($21,11) auf nahe Allzeithoch ($32,47, nun bei $33,18 leicht darüber). Hypothese, nicht datenbasiert: Value- und Dividenden-Fonds haben die Aktie aus dem Tief gekauft; neue Käufer auf diesem Niveau benötigen Margin-Expansion-Narrative. Enttäuschungsrisiko bei negativem AUM-Update oder Marktkorrektur.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS Weekly und Daily aktiv (2/3, 4H inaktiv). Kurs $33,18 übersteigt 52W-Hoch $32,47 — technischer Breakout bestätigt. 6M-Performance +34,3% zeigt strukturellen Aufwärtstrend. 5T +3,2%: Momentum hält kurzfristig an. Momentum ist teilweise sektoral (Finanzwerte-Rotation) gestützt, nicht nur unternehmensspezifisch. Technische Warnsignale: Rückfall unter $29 würde Breakout-Struktur negieren; unter $26 Trendwende bestätigt.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($55–$75):** Vollständige Legg Mason-Synergien + Alternativanlagen-AUM-Wachstum; Operating Margin 24%+; EPS $4,50+ × 15x. Entscheidende Variable: Netto-Zuflüsse in höhermargige Alternativ-Strategien.</p>
+<p>**Base Case ($30–$45):** Moderates AUM-Wachstum; struktureller Aktiv-Fonds-Abfluss teilweise kompensiert; Dividende stabil. EPS ~$3,00–$3,50 × 11–13x. Entscheidende Variable: Marktperformance und Bindung institutioneller Mandate.</p>
+<p>**Bear Case ($10–$20):** Marktkorrektur + Beschleunigung der Abflüsse; Dividendenkürzung; Revenue-Rückgang. Historische 1x Buchwert-Böden implizieren ~$24 — tiefere Levels möglich bei Restrukturierung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>BEN ist kein Wachstums-Asset und kein Momentum-Play — es ist eine Dividenden-Value-Wette mit begrenztem Upside. Die eigenen Szenarien ergeben auf dem aktuellen Niveau einen EV von ~$35,13, knapp 6% über dem aktuellen Kurs. Das ist kein asymmetrischer Edge; die Dividende von 4,1% liefert den eigentlichen Total-Return-Beitrag. Für konservative Einkommens-Investoren mit Toleranz für Marktkorrelationsrisiko (Beta 1,59) ist BEN auf diesem Niveau akzeptabel. Für Wachstums- und Momentum-Investoren falsches Instrument. Direkter Peer-Vergleich: **T. Rowe Price (TROW)** bietet strukturell höhere Margen und ROE; **BlackRock (BLK)** mit breiterem ETF-Exposure ist das reinere Instrument für die Asset-Management-These — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ. Positionsgröße: kann als Dividendenposition 2–4% eines Income-Portfolios belegen; für konzentrierte Wachstumsportfolios nicht geeignet.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
