@@ -1,23 +1,5 @@
 # TXN — KI-Aktienbewertung
 
-**Texas Instruments Incorporated** · Technology · 17.06.2026 · Signal: Breakout
-
-| Kennzahl | Wert |
-|---|---|
-| Kurs | 301.12 |
-| Market Cap | $274.05 Mrd. |
-| Forward PE | 31.99 |
-| Revenue (TTM) | $18.44 Mrd. |
-| Gross Margin | 57.3% |
-| ROE | 32.3% |
-| RS-Score | 85.0 |
-
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
-
----
-
-# TXN — KI-Aktienbewertung
-
 **Texas Instruments Incorporated** · Technology · Semiconductors · 17.06.2026 · Signal: GWS Breakout 3/3
 
 | Kennzahl | Wert |
@@ -107,19 +89,5 @@ Direkter Peer-Vergleich: **Analog Devices (ADI)** und **Microchip Technology (MC
 - Wachstum: 3/5
 - Bewertung: 2/5
 - Katalysator: 3/5
-
-*Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
-
-
----
-
-| Rating | Score |
-|---|---|
-| Qualität | 5/5 |
-| Wachstum | 3/5 |
-| Bewertung | 2/5 |
-| Katalysator | 3/5 |
-
-**Verdict: HOLD (65/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
