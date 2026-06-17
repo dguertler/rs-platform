@@ -71,6 +71,7 @@ jobs:
           [ -f last_breakout_alerts.json ] && mv last_breakout_alerts.json data/last_breakout_alerts.json && git add data/last_breakout_alerts.json || true
           [ -d data/ratings ] && git add data/ratings/ || true
           git diff --staged --quiet || git commit -m "Alert-Zustand + KI-Ratings aktualisiert"
+          git pull --rebase origin master
           git push origin master
 
       - name: Fehler-Mail senden

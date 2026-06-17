@@ -856,8 +856,8 @@ def run_test_mode(smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
                                       f'Mail-Versand funktioniert!')
     print('Test-Mail gesendet.')
 
-    tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
-    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+    tg_token   = os.environ.get('TELEGRAM_TOKEN', '').strip()
+    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
     if tg_token and tg_chat_id:
         from telegram_handler import send_breakout_telegram
         send_breakout_telegram(tg_token, tg_chat_id, test_alert[0])
@@ -931,8 +931,8 @@ def main():
     print(f'\nAlertes gesamt: {len(all_alerts)}  '
           f'(davon neu heute: {len(fresh_alerts)})')
 
-    tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
-    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+    tg_token   = os.environ.get('TELEGRAM_TOKEN', '').strip()
+    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '').strip()
 
     if fresh_alerts:
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
