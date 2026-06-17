@@ -1118,6 +1118,22 @@ function App() {
     }
   }, []);
 
+  const removeFromWatchlist = useCallback(async (ticker, e) => {
+    e.stopPropagation();
+    try {
+      const r = await apiFetch(`/api/watchlist/${ticker}`, { method: "DELETE" });
+      if (r.ok) {
+        setWlTickers(prev => { const n = new Set(prev); n.delete(ticker); return n; });
+      } else {
+        setWlErr(prev => ({ ...prev, [ticker]: true }));
+        setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
+      }
+    } catch {
+      setWlErr(prev => ({ ...prev, [ticker]: true }));
+      setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
+    }
+  }, []);
+
   // Live-Fetch Benchmark OHLCV (QQQ) von Yahoo Finance als Fallback
   useEffect(() => {
     Promise.all([
@@ -1452,14 +1468,14 @@ function App() {
                   <div key={w} style={{textAlign:"center"}}><Cell v={item.w[w]}/></div>
                 ))}
                 <button
-                  onClick={e => !wlTickers.has(item.t) && addToWatchlist(item.t, e)}
-                  title={wlTickers.has(item.t) ? "In Watchlist" : "Zur Watchlist hinzufügen"}
+                  onClick={e => wlTickers.has(item.t) ? removeFromWatchlist(item.t, e) : addToWatchlist(item.t, e)}
+                  title={wlTickers.has(item.t) ? "Aus Watchlist entfernen" : "Zur Watchlist hinzufügen"}
                   style={{
                     background: wlTickers.has(item.t) ? "#0a2a0a" : "none",
                     border:`1px solid ${wlTickers.has(item.t)?"#22c55e":wlErr[item.t]?"#ef4444":"#334155"}`,
                     color: wlTickers.has(item.t) ? "#22c55e" : wlErr[item.t] ? "#ef4444" : "#475569",
                     borderRadius:4,padding:"1px 4px",fontSize:11,
-                    cursor: wlTickers.has(item.t) ? "default" : "pointer",
+                    cursor: "pointer",
                     lineHeight:1, transition:"border-color .15s,color .15s",
                   }}>
                   {wlTickers.has(item.t) ? "✓" : wlErr[item.t] ? "✗" : "+"}
