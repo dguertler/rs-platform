@@ -1,86 +1,87 @@
 # RS — KI-Aktienbewertung
 
-**Reliance, Inc.** · Basic Materials · 12.06.2026 · Signal: GWS Breakout 3/3
+**Reliance, Inc.** · Basic Materials · 17.06.2026 · Signal: GWS Breakout 2/3
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 394.41 |
-| Market Cap | $20.13 Mrd. |
-| Forward PE | 18.8 |
+| Kurs | 413.43 |
+| Market Cap | $21.10 Mrd. |
+| Forward PE | 19.61 |
 | Revenue (TTM) | $14.84 Mrd. |
 | Gross Margin | 28.7% |
 | ROE | 11.3% |
-| RS-Score | 84.9 |
+| RS-Score | 75.0 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-Reliance ist kein Stahlwerk, sondern der größte Metall-Service-Center-Betreiber Nordamerikas — ein Distributions- und Verarbeitungsgeschäft mit über 300 Standorten, das an der Spanne zwischen Ein- und Verkauf von Metallen verdient, nicht am Rohstoffpreis selbst. Der strukturelle Kern: kleinteilige Aufträge (kurze Lieferzeiten, Vorverarbeitung), die Mühlen nicht bedienen können — dafür zahlt der Kunde eine strukturelle Service-Marge. Dazu eine jahrzehntelange Roll-up-Strategie: fragmentierten Wettbewerb aufkaufen, dezentral führen, Cash zurückgeben. Umsatz +15,5% YoY auf $14,8 Mrd. — getragen vom US-Metallpreis- und Reshoring-Zyklus. Hinweis zur Datenlage: Fundamental-Snapshot vom 08.06. (Kurs $394,41) liegt ~4% unter dem aktuellen Kurs ($410,43, Allzeithoch) — innerhalb der Toleranz. Bemerkenswert: Analysten-Konsens steht auf „Hold" mit Ziel $360 — unter dem Kurs. Der Markt kauft hier Qualität und Protektions-Rückenwind, die Coverage sieht den Zyklus eingepreist. Beide haben einen Punkt.
+Reliance Inc. ist nicht zu verwechseln mit einem Stahlhersteller — das Unternehmen ist das größte Metall-Service-Center Nordamerikas. Der Unterschied ist fundamental: Reliance kauft Stahl, Aluminium und Edelstahl von Produzenten und verarbeitet/verteilt diese an Endkunden (Industrie, Bau, Aerospace, Automotive, Verteidigung). Die eigentliche Story: Infrastrukturausbau, Re-Shoring-Trend und Verteidigungsausgaben treiben die Nachfrage strukturell, während Reliance von seiner einzigartigen Marktposition als größter US-Distributor mit >100.000 Kunden und breitem Produktmix profitiert. Revenue-Wachstum +15,5% YoY ist für einen Distributor beeindruckend. Was der Markt möglicherweise unterschätzt: Reliance ist kein reiner Stahlpreis-Trade — der Service-Center-Ansatz (Zuschnitt, Verarbeitung, Just-in-Time-Lieferung) schafft echte Switching Costs und ermöglicht stabile Margen auch bei moderater Stahlpreisvolatilität. Kurs nahe 52-Wochen-Hoch $417,25.
 
 ## 2. GESCHÄFTSMODELL
 
-- Metall-Distribution und Vorverarbeitung (Sägen, Schneiden, Entgraten) — über 300 dezentrale Standorte, extrem breite Kundenbasis mit Kleinaufträgen
-- Verdient an der Service-Spanne, nicht an der Rohstoff-Direktionalität — Bruttomarge 28,7% ist für „Stahl" außergewöhnlich und der Beleg des Modells
-- Durchschnittsauftrag klein, Lieferzeit kurz — Mühlen können das nicht replizieren; lokale Dichte ist der Burggraben
-- Roll-up-Maschine: kontinuierliche Akquisition kleiner Service-Center, dezentrale P&L-Verantwortung
-- Preisweitergabe-Modell: Metallpreis-Inflation läuft durch den Umsatz, die Spanne bleibt relativ stabil — Volumen × Spanne ist der echte Treiber
-- Operative Marge 9,1%, Nettomarge 5,4% — Distributionsökonomie: dünn, aber stabil
-- D/E 28,4% konservativ; Dividende 1,27% plus historisch konsequente Buybacks
-- Beta 0,96 — der defensivste Wert im Metallsektor
+- Größtes Metall-Service-Center Nordamerikas: Einkauf von Stahl/Aluminium/Edelstahl von Produzenten, Verarbeitung (Zuschnitt, Formung) und Verteilung an >100.000 Endkunden
+- Revenue-Quellen: Produkt-Spread (Differenz Einkaufs-/Verkaufspreis) + Servicevergütung für Verarbeitungsleistungen (Value-Added Services)
+- Endmärkte: Nicht-Wohnbau (stärkster Treiber), Aerospace/Verteidigung, Automotive, Industrie/Maschinenbau — breite Diversifikation reduziert Sektorkonzentration
+- Operative Stärke durch Netzwerk: >300 Standorte USA/Kanada — Just-in-Time-Logistik als Wettbewerbsvorteil gegenüber direktem Einkauf beim Produzenten
+- Preisgestaltungsmacht begrenzt: Margen folgen Stahlpreiszyklus; Distributor-Spread als Puffer, aber keine vollständige Entkopplung
+- Konservative Bilanz: D/E 28x — für diesen kapitalintensiven Sektor niedrig; ermöglicht M&A-Flexibilität
+- Kapitalrückgabe: Dividendenrendite 1,21% + historisch aktive Aktienrückkäufe
+- FCF $421,3 Mio. bei $14,84 Mrd. Revenue (FCF-Marge 2,8%) — typisch für Distribution; absolutes FCF-Niveau solide
 
 ## 3. BULL CASE
 
-Reshoring-/Infrastruktur-Nachfrage hält das Volumen hoch, Zölle stützen US-Metallpreise (höherer Umsatz bei stabiler Spanne), Akquisitionspipeline liefert weiter anorganisches Wachstum. Margennachhaltigkeit: Die Service-Spanne ist strukturell (lokale Dichte, Kleinauftrags-Nische, Switching Costs durch Just-in-Time-Integration beim Kunden) — aber das aktuelle Niveau enthält Zyklus-Rückenwind; dauerhaft höhere Margen als das eigene Langfristmittel sind nicht ableitbar. 2027-EPS $25 (Annahme, kein Konsens: Volumen + Buyback-Effekt; vs. Forward-EPS $20,98) × 19x = $475. Kursziel-Bandbreite 450–500 USD. Eintrittswahrscheinlichkeit: 20%.
+Infrastrukturausbau (US Infrastructure Act), Re-Shoring-Investitionen in Halbleiterfabriken, Verteidigungsausgabenplus und Aerospace-Erholung treiben Nachfrage strukturell für 3–5 Jahre. Margennachhaltigkeit: Value-Added Services (Verarbeitung vor Ort) ermöglichen dauerhaft höhere Spreads als reiner Commodity-Handel — strukturell höhere Margen durch Serviceanteil begründbar. Annahme (kein Konsens): FY27-EPS ~$27 × 18x Forward ergibt Kursziel $460–$490. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: Metallpreise normalisieren leicht, Volumen bleibt solide, Buybacks stützen das EPS. EPS ~$21 (Forward-EPS aus Snapshot-Forward-PE 18,8) × 17–19x (oberer historischer Korridor, gerechtfertigt durch Qualität) = 355–400 USD — der Kurs steht bereits am oberen Rand. Eintrittswahrscheinlichkeit: 50%.
+Moderates Volumenwachstum 5–8% p.a. getragen von Infrastruktur und Verteidigung; Stahlpreise seitwärts bis leicht steigend. Operating Margin hält bei 8–10%. Annahme (kein Konsens): FY27-EPS ~$22 × 17x Forward ergibt Kursziel $360–$400. Aktienrückkäufe und Dividende stützen Total Return. Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: US-Industrierezession drückt Volumen UND Spanne gleichzeitig (Lagerabwertung bei fallenden Metallpreisen), Zoll-Rückbau beschleunigt den Preisverfall. Risikodimensionen: Kundenkonzentration — strukturell minimal (zehntausende Kunden, Kleinaufträge); das ist eine echte Stärke. Geopolitik/Handelspolitik — wie bei allen US-Metallwerten: Risiko ist der Rückbau der Protektion, nicht Exportkontrolle; China-Exposure operativ unbedeutend. Lieferkette — bezieht von vielen Mühlen, kein Single-Source-Risiko; Verfügbarkeit in Knappheitsphasen eher Vorteil (Lagerbestand). Verwässerung — SBC/Aktienanzahl nicht im Datensatz, auf Datenbasis nicht beurteilbar; historisch sinkt die Aktienzahl durch Buybacks. Regulierung — keine spezifischen Risiken im Datensatz erkennbar; Umweltauflagen treffen Distribution kaum. Im Bear-Fall: EPS $16 (Volumen- und Spannen-Druck wie in milden Rezessionen) × 14x = $225. Kursziel-Bandbreite 225–270 USD. Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Globale Rezession drückt Bau- und Industrienachfrage; Stahlpreise fallen 25–35% durch Importdruck (Trump-Tarifpolitik-Kehrtwende) oder China-Überkapazitäten. Distributor-Spreads kollabieren bei fallenden Preisen durch Lagerverluste. Kundenkonzentration: >100.000 Kunden, auf Datenbasis keine Klumpenrisiken erkennbar. Geopolitik/China-Exposure: Indirekt durch globale Stahlpreise; US-Importtarife können sowohl Schutz (teurer Import) als auch Schaden (Wachstumsdämpfung Endmärkte) bedeuten — ambivalent. Lieferkette: Abhängigkeit von US-Stahlproduzenten (Nucor, Steel Dynamics) — bei Knappheit Margenrisiko; kein Single-Source-Risiko durch breite Lieferantenbasis. Verwässerung: Aktienanzahl-Trend rückläufig durch Rückkäufe. Regulierung: Keine wesentlichen branchenspezifischen Regulierungsrisiken erkennbar. Annahme (kein Konsens): FY27-EPS ~$12 × 13x Forward ergibt Kursziel $150–$180. Eintrittswahrscheinlichkeit: 25%.
 
-**Summe: 20% + 50% + 30% = 100%**
+**Summe: 25% + 50% + 25% = 100%**
 
-**Erwartungswert:** EV = 0,20 × 475 + 0,50 × 377,5 + 0,30 × 247,5 = $358 — implizites Downside vs. aktuellem Kurs ($410,43): −13%.
+Erwartungswert: EV = 0,25 × $475 + 0,50 × $380 + 0,25 × $165 = $118,75 + $190 + $41,25 = **$350** — implizites Downside vs. aktuellem Kurs ($413,34): ca. −15%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Kursniveau nicht gerechtfertigt.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 11,3% — unspektakulär, aber bemerkenswert stabil über Zyklen; das ist der Punkt des Modells. Bruttomarge 28,7% vs. ~14% bei Produzenten zeigt die Service-Wertschöpfung. Nettomarge 5,4% — dünn, Distributionsgeschäft. FCF $421 Mio. (2,8% FCF-Marge) wirkt schwach — bei steigenden Metallpreisen bindet Working Capital (Lager) Cash; in Abschwüngen dreht das und RS wird zur Cash-Maschine (kontrazyklischer FCF — aus den Daten nicht direkt belegbar, aber modellinhärent). D/E 28,4% konservativ. Echter Burggraben: lokale Dichte + Kleinauftrags-Nische + dezentrale Kultur — schwer kopierbar, weil unsexy und kapillar.
+ROE 11,3% — für einen kapitalintensiven Distributor moderat; nicht zyklisch verzerrt. Gross Margin 28,7% typisch für Service-Center-Modell (keine Fertigungstiefe). Operating Margin 9,1% stabil; höher als reine Händler durch Verarbeitungsanteil. Net Margin 5,4% konsistent mit Operating Margin — keine Anomalien. FCF $421,3 Mio. absolut solide; FCF-Marge 2,8% ist sektortypisch, nicht strukturell schwach. Bilanzqualität: D/E 28 — konservativ für diesen Sektor, gibt M&A-Spielraum. Beta 0,96 ≈ Marktvolatilität — kein High-Beta-Zykliker trotz Stahlexposure.
 
 ## 7. BEWERTUNG
 
-Trailing-PE 25,7x / Forward-PE 18,8x (auf $410,43: ~19,6x) — historisch teuer; RS handelte über weite Strecken bei 12–16x. P/B 2,8x ebenfalls am oberen Rand der eigenen Historie. Normalisierter FCF über den Zyklus (Annahme $1,0–1,4 Mrd. inkl. Working-Capital-Release in Schwächephasen): auf $20,1 Mrd. Market Cap 14–20x normalisierter FCF — fair bis leicht teuer für einen Qualitäts-Zykliker. Rückrechnung "Was preist der Kurs ein?": $410 bei Exit-Multiple 16x in 5 Jahren erfordert ~$25,50 EPS — ~+22% kumuliert vs. Forward-EPS, also ~4–5% EPS-Wachstum p.a. (inkl. Buybacks). Das ist plausibel — aber es setzt voraus, dass das Multiple nicht auf den historischen Korridor zurückfällt. Kein Value mehr, sondern Qualität zum vollen Preis.
+Forward-PE 19,6x und Trailing PE 27x für einen Distributor mit 9% Operating Margin sind ambitioniert. Normalisierter FCF-Ansatz: FCF $421 Mio. × 20x (Premium für Marktführerschaft und Netzwerkeffekte) ergibt fairen Wert ~$8,4 Mrd. — deutlich unter aktueller Market Cap $21,1 Mrd. Das impliziert, dass der Markt entweder deutliches FCF-Wachstum oder eine strukturelle Prämie für Marktführerschaft einpreist. Rückrechnung „Was preist der Kurs ein?": Bei $21,1 Mrd. Market Cap und FCF-Multiple 20x wäre FCF von ~$1,05 Mrd. nötig — +150% vs. TTM. Bei Revenue-Wachstum 15,5% und stabiler Marge braucht es 5–7 Jahre organisches Wachstum. Das ist unrealistisch auf 12–18 Monate, aber plausibel als 5-Jahres-Prämie für Marktführerschaft eingepreist. KBV 3,0x — moderat für ein Unternehmen mit echtem Netzwerkwert.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 84,9 mit auffälligem Rang-Sprung (zuvor Rang 50) — die Aktie kam erst spät in die Momentum-Kohorte. RSI 85 — kurzfristig die heißeste Aktie im betrachteten Set. Hypothese, nicht datenbasiert: Generalisten rotieren in „sichere" Industrials mit Protektions-Rückenwind; RS ist dabei die Qualitäts-Default-Wahl. Konsens-„Hold" mit Ziel unter Kurs bedeutet: Upgrades wären der nächste Katalysator — oder die Coverage behält recht. Enttäuschungsrisiko: eher Multiple- als Earnings-getrieben; bei einem Wert mit Beta 0,96 sind −15% schon ein schwerer Drawdown.
+RS-Score 75 zeigt überdurchschnittliche Relative Stärke. Momentum beschleunigt über alle Zeitfenster: +1,5% (5T), +5,5% (10T), +13,9% (20T), +21,7% (50T), +32,5% (6M) — starke 6-Monats-Bewegung. Kurs nahe 52-Wochen-Hoch $417,25 (aktuell $413,34). Hypothese, nicht datenbasiert: Sektorrotation in zyklische US-Industriewerte durch Re-Shoring-Narrativ und Infrastrukturthema als Treiber. Enttäuschungsrisiko: Ausbleiben von Infrastructure-Spending-Umsetzung oder Rezessionssignal aus dem Bausektor.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 aktiv. Kurs $410,43 auf Allzeithoch, +15% über SMA50 ($357), +32% über SMA200 ($310). RSI(14) 85 — extrem überkauft; bei einem Low-Beta-Wert ist das ein ungewöhnliches und ernstzunehmendes Signal kurzfristiger Überhitzung. 20T +13,4%, 6M +35,8% — für RS-Verhältnisse sehr steil; das Momentum ist eher rotations- als ergebnisgetrieben. Warnsignale: Tagesschluss unter $394 (Ausbruchszone), hartes Signal bei Wochenschluss unter SMA50 $357.
+GWS Breakout 2/3 (Weekly + Daily aktiv, 4H nicht bestätigt). Kurs $413,34 nahe 52-Wochen-Hoch $417,25 — potenzieller Ausbruch auf neues Allzeithoch. 20T: +13,9%, 50T: +21,7%, 6M: +32,5% — Momentum fundamental durch Revenue-Wachstum gestützt. Beta 0,96 — niedrige Marktvolatilität ist ein Qualitätssignal für defensivere Zykliker. Technisches Warnsignal: Rückfall unter $370 (20T-Basis) würde Trendfortsetzung infrage stellen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($550–620):** Reshoring-Dekade + fortgesetzter Roll-up; EPS Richtung $32–35, Multiple 17–18x.
+**Bull Case ($550–$650):** Re-Shoring-Welle und Infrastrukturprojekte treiben Volumenwachstum 8–10% p.a.; M&A-Akquisitionen erweitern Marktanteil; EPS ~$35 × 17x. Entscheidende Variable: Umsetzungstempo US-Infrastruktur-Ausgaben.
 
-**Base Case ($420–470):** Stetiges Compounding (Volumen + Akquisitionen + Buybacks); EPS ~$27–29, Multiple 15–16x.
+**Base Case ($380–$480):** Organisches Wachstum 5–7% p.a.; stabile Margen; EPS ~$25 × 17x. Entscheidende Variable: Stahlpreisniveau und Baunachfrage.
 
-**Bear Case ($250–300):** US-Industrie-Stagnation; EPS ~$18–20, Multiple-Rückfall auf 13–14x.
-
-Entscheidende Variable: US-Industrieproduktion/Reshoring-Volumen — die Spanne ist stabil, das Volumen entscheidet.
+**Bear Case ($150–$220):** Rezession kollabiert Bau- und Industrienachfrage; Lagerverluste durch Stahlpreisverfall; EPS ~$10 × 15x. Historische Preiskorrektur 30–50% bei Zyklus-Wende möglich.
 
 ## 11. PROFI-FAZIT
 
-Reliance ist der seltene Fall eines echten Compounders im Metallsektor — kapitaldisziplinierter Roll-up mit struktureller Service-Marge und kontrazyklischem Cashflow. Aber: Auf 19–20x Forward, RSI 85 und über dem Konsensziel kauft man Qualität zum Spitzenpreis am Zyklushoch. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV $358 vs. Kurs $410, −13%). Einordnung: Buy-and-Hold-Compounder auf der Watchlist, Kauf in Schwäche ($340–360), nicht auf dem Allzeithoch; Bestandshalter halten. Für Momentum-Trader: Signal aktiv, aber das Chance-Risiko nach RSI 85 ist dünn — enger Stop ($394) zwingend. Positionsgröße für Trader max. 1–2%, als Langfrist-Coreposition 2–3% bei besserem Einstieg. Peers: **Steel Dynamics (STLD)** ist das aggressivere Produzenten-Play mit mehr Spread-Hebel (Forward-PE 15,3x — optisch günstiger, aber deutlich zyklischer); **Nucor** dazwischen (Multiples nicht im Datensatz, relative Bewertung indikativ). Wer den Zyklus traden will, nimmt STLD; wer das Geschäftsmodell besitzen will, wartet bei RS auf den Rücksetzer.
+Reliance ist kein reiner Stahlzykliker, sondern ein qualitativ hochwertiger Infrastruktur-Distributor mit echter Netzwerkstärke und konservativer Bilanz. Das Geschäftsmodell ist strukturell defensiver als der Sektor vermuten lässt — >100.000 Kunden, breite Endmarktdiversifikation und Value-Added Services schaffen echte Wettbewerbsbarrieren. Das Problem: Die Bewertung auf aktuellem Niveau ($413) preist bereits erhebliches Wachstum ein, und der eigene Szenario-Erwartungswert von $350 liegt 15% unter aktuellem Kurs. Geeignet für langfristige Infrastruktur-Investoren mit 3–5-Jahres-Horizont; auf 12–18-Monats-Sicht ist das Risiko-Rendite-Verhältnis unattraktiv.
+
+Direkte Peers: **Metals USA** (privat), **Olympic Steel (ZEUS)**, **Service Center Metals** — Peer-Multiples nicht im Datensatz — relative Bewertung indikativ. Reliance ist das Premiumsegment des Sektors mit entsprechender Bewertungsprämie.
 
 - Qualität: 4/5
 - Wachstum: 3/5
-- Bewertung: 3/5
-- Katalysator: 2/5
+- Bewertung: 2/5
+- Katalysator: 3/5
+
 
 ---
 
@@ -88,8 +89,8 @@ Reliance ist der seltene Fall eines echten Compounders im Metallsektor — kapit
 |---|---|
 | Qualität | 4/5 |
 | Wachstum | 3/5 |
-| Bewertung | 3/5 |
-| Katalysator | 2/5 |
+| Bewertung | 2/5 |
+| Katalysator | 3/5 |
 
 **Verdict: HOLD (60/100)**
 
