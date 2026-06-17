@@ -253,11 +253,22 @@ Wenn der Nutzer schreibt `Instagram-Analyse TICKER` / `Analyse-Post TICKER`
 
 1. `instagram/CONTEXT.md` (Abschnitt 11) + `PROMPT.md` (Abschnitt „Zweiter
    Post-Typ: AKTIEN-ANALYSE") lesen.
-2. Generieren — am besten mit individueller Hook-Frage:
+2. **Analyse-Datei lokalisieren** — Analysen liegen unter `analyses/` mit dem
+   **vollen Börsenkürzel** als Dateiname (z. B. `KLAC.md` für KLA, `SNDK.md`
+   für SanDisk). Nutzer-Eingabe kann abgekürzt sein. Suchstrategie:
+   ```bash
+   # Exakt (Großbuchstaben):
+   ls analyses/TICKER.md 2>/dev/null
+   # Fallback: case-insensitive Suche nach Teilstring:
+   find analyses/ -iname "*TICKER*" -name "*.md"
+   ```
+   Den gefundenen Dateinamen (ohne `.md`) als tatsächlichen TICKER für alle
+   weiteren Schritte verwenden.
+3. Generieren — am besten mit individueller Hook-Frage:
    ```bash
    python3 -m instagram.generate --analysis TICKER --headline "<Frage/These>"
    ```
-3. Output `out/instagram/<DATUM>_ANALYSE_<TICKER>/`: `carousel/` (10 PNG),
+4. Output `out/instagram/<DATUM>_ANALYSE_<TICKER>/`: `carousel/` (10 PNG),
    `reel/` (4 PNG), `reel.mp4`, `caption.txt`, `reel_script.txt` zeigen —
    **kein Auto-Upload**. Firmenlogo unter `instagram/assets/logos/TICKER.png`.
    Kein aktueller Kurs, keine GWS-Ampel/Breakout auf den Slides.
