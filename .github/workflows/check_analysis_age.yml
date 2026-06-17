@@ -1,0 +1,56 @@
+name: Analyse-Alterscheck (Top-20 / 3 Punkte)
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  check-analysis-age:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas matplotlib deep-translator requests
+
+      - name: Skript ausführen
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: python check_analysis_age.py
+
+      - name: Top-20-State committen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/top20_state.json
+          git diff --staged --quiet || git commit -m "Top-20-State aktualisiert (Analyse-Alterscheck)"
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Analyse-Alterscheck (check_analysis_age.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
