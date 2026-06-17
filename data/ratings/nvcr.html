@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NVCR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">17.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NVCR</h1>
+      <h2>NovoCure Limited</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Medical Devices</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>GWS Breakout 2/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 17.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">84.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$17.78</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">75.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-50.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$26–$35</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$18–$23</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">N/A</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">N/A</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>NovoCure ist kein klassisches Medtech-Unternehmen — es ist eine Wette auf eine einzelne physikalische Therapieplattform: Tumor Treating Fields (TTF), elektrische Wechselfelder, die Tumorzellen in der Zellteilung hemmen. Die Story ist strukturell überzeugend: TTF hat in GBM (Glioblastom) OS-Verbesserungen gezeigt, die FDA-Zulassung gesichert, und der Aufbau eines globalen Verordnungsnetzes läuft. Das Kernproblem: Revenue von $674M wächst mit +12,3% YoY, aber die Gesellschaft verbrennt trotz 75% Bruttomarge weiterhin Cash auf Betriebsebene (-38,7% Operating Margin), weil die klinischen Pipeline-Investitionen (Lunge, Eierstock, Leber) hohe Fixkosten erzeugen. Der nahezu ausgeglichene FCF ($5,1M) markiert jedoch einen strukturellen Wendepunkt: Das Unternehmen ist nicht mehr abhängig von externer Finanzierung, wenn die Pipeline keine negativen Überraschungen liefert. EPS- und Forward-PE-Daten sind nicht verfügbar — Bewertung ausschließlich auf Basis von Revenue-Multiples und FCF-Annäherung.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>TTF-Gerät (Optune) wird an Patienten vermietet, kein Einmalkauf — monatliche Behandlungsgebühren erzeugen Recurring Revenue mit hoher Bruttomarge</li>
+<li>Bruttomarge 75,4% trotz Geräteerstellung und -wartung: hohe Skalierbarkeit, sobald SG&A und R&D langsamer wachsen als Umsatz</li>
+<li>Primärindikation GBM zugelassen (USA, Deutschland, Japan und weitere); Mesotheliom-Zulassung EU</li>
+<li>Pipeline: Phase-III-Studien in NSCLC (Lungenkarzinom), Ovarialkarzinom, Lebermetastasen — binärer Katalysator-Charakter jedes Readouts</li>
+<li>Adoption hängt von Onkologen und Krankenversicherungsdeckung ab; Reimbursement-Risiko USA/International asymmetrisch</li>
+<li>D/E-Kennzahl von 71x anomal und nicht als Standard-Leverage-Kennzahl zu werten — vermutlich strukturell durch Konvertibel-Schulden bei niedrigem Eigenkapital verzerrt</li>
+<li>Beta 0,92: geringere Marktkorrelation als typisch für Pre-Profit-Biotech — reflektiert spezifischen Produktcharakter</li>
+<li>FCF $5,1M: nahezu Breakeven, strukturell positiv, aber kein Cashflow-Polster bei Pipeline-Fehlschlag</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Positive Phase-III-Readouts in NSCLC: Marktpotenzial vielfach größer als GBM (>200.000 Neudiagnosen/Jahr in den USA). Strukturelle Margennachhaltigkeit: TTF-Technologie ist proprietäres IP ohne direkten Wettbewerber; FDA-Zulassung als echter Burggraben; Skalierungseffekte bei wachsender Patientenzahl reduzieren operative Verluste überproportional durch fixen Geräteentwicklungs-Overhead. Bei NSCLC-Zulassung und Revenue-Beschleunigung auf $1,1–1,3 Mrd. (Annahme, kein Konsens) und Rerate auf 4–5x Revenue: Kursziel $26–$35. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>GBM-Revenue wächst weiter moderat (+10–15%); keine neue große Indikation in 12–18 Monaten. Operating Margin verbessert sich schrittweise von -38,7% Richtung -25% durch Skaleneffekte. Revenue $740–$780M auf TTM-Basis. Bewertung auf 2,5–3x Forward Revenue (Annahme, kein Konsens): Kursziel $18–$23. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Negativer NSCLC-Readout. Kapitalmarkt bestraft Pre-Profit-Biotech ohne zweite Indikation massiv. Pipeline-Kosten bleiben, Revenue-Wachstum verlangsamt sich auf <5%. FCF dreht wieder negativ, Kapitalerhöhungsrisiko steigt. Revenue-Multiple komprimiert auf 1,5–2x (Annahme, kein Konsens): Kursziel $8–$12.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Auf Patientenebene breit diversifiziert, jedoch abhängig von wenigen großen Versicherern — nicht quantifizierbar aus vorliegenden Daten</li>
+<li>Geopolitik/Exportkontrollen: Kein China-Exposure erkennbar; nicht material</li>
+<li>Lieferkette: Geräteherstellung proprietär; Single-Source-Risiko auf Komponentenebene auf Datenbasis nicht beurteilbar</li>
+<li>Verwässerung: SBC bei Pre-Profit-Biotech typischerweise hoch; Aktienanzahl-Trend aus Daten nicht ableitbar — Risiko vorhanden</li>
+<li>Regulierung: FDA-Abhängigkeit für jede neue Indikation; Reimbursement-Entscheidungen als binäres Risiko</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit Bear: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>Erwartungswert: EV = 0,25 × $30,50 + 0,45 × $20,50 + 0,30 × $10,00 = $7,63 + $9,23 + $3,00 = **$19,86** — implizites Upside vs. aktuellem Kurs ($17,60): +12,8%.</p>
+<p>**Szenarien (12–18 Monate):** Bull $26–$35 (25 %) · Base $18–$23 (45 %) · Bear $8–$12 (30 %) · EV ~$19,86</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge 75,4% ist strukturell stark — nahe Software-Niveau für ein Medizingerät-Unternehmen. Operating Margin -38,7% ist der entscheidende Negativposten: R&D-Ausgaben für Multi-Indikationspipeline sind notwendig, aber riskant. ROE -49,97% reflektiert akkumulierte Verluste, nicht operative Schwäche des Kerngeschäfts. FCF $5,1M bei $674M Revenue entspricht <1% FCF-Marge — kein Cash-Return, aber Wendepunkt-Signal. D/E-Kennzahl von 71x ist anomal und aus den vorliegenden Daten nicht abschließend auflösbar — nicht als Standard-Leverage-Bewertung zu verwenden. Bilanzqualität eingeschränkt beurteilbar ohne absolute Schuldenhöhe.</p>
+<h3>7. BEWERTUNG</h3>
+<p>EPS-Daten nicht verfügbar; KGV-basierte Bewertung nicht möglich. Revenue-Multiple: $2,06 Mrd. Market Cap / $674M Revenue = 3,06x TTM Revenue. Für ein Pre-Profit-Medtech mit 75% Bruttomarge und Pipeline-Optionalität ist 3x Revenue historisch moderat. Rückrechnung — was preist der aktuelle Kurs ein? Bei 3x Multiple wird impliziert: $687M Revenue auf TTM-Basis (nahezu erfüllt) und schrittweise Annäherung an Profitabilität. Das ist plausibel für den GBM-Sockel — aber verdankt sich vollständig der Pipeline-Prämie. Ohne NSCLC-Hoffnung wäre 1,5–2x Revenue der faire Wert, was $7–$10 impliziert. Die aktuelle Bewertung ist eine strukturierte Pipeline-Wette, keine Value-Position.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 84,45 — starkes Momentum im S&P-500-Universum. 52W-Tief $9,82 zu aktuellem Kurs $17,60: Aktie hat sich fast verdoppelt, liegt aber noch 7% unter dem 52W-Hoch ($18,92). Hypothese, nicht datenbasiert: Positionierung dürfte Biotech-Growth-Fonds und Event-Driven-Spieler mit NSCLC-Readout-Spekulation übergewichten. Enttäuschungsrisiko hoch — negativer Readout kann 30–40% Kursverlust binnen Tagen auslösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS Weekly und Daily aktiv (2/3, 4H inaktiv). RS-Score 84,45 mit starker 50T-Performance (+53,3%) und moderater 6M-Komponente (+21,9%). Kurzfristig leichte Schwäche: 5T -1,3%, 20T -1,3%. Kurs bei $17,60, nahe 52W-Hoch $18,92 — Widerstand dort. Momentum fundamental durch Pipeline-Spekulation gestützt, nicht durch Gewinne. Technische Warnsignale: Rückfall unter $15 würde Trendstruktur brechen; unter $13 Long-These beschädigt.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($50–$80):** NSCLC-Zulassung + zweite große Indikation; Revenue $2+ Mrd., Profitabilität erreicht, Multiple 4–5x Revenue. Entscheidende Variable: erfolgreiche Phase-III-Readouts in mehreren Indikationen.</p>
+<p>**Base Case ($20–$35):** GBM-Wachstum konsolidiert; eine weitere Indikation zugelassen; Revenue $900M–$1,2 Mrd., Annäherung an operative Profitabilität. Multiple 3–4x Revenue.</p>
+<p>**Bear Case ($5–$12):** Pipeline-Fehlschläge in NSCLC und weiteren Indikationen; Finanzierungszwang; Revenue-Wachstum stagniert. Multiple 1–1,5x Revenue; Verwässerungsrisiko materialisiert sich.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>NovoCure ist ein hochspezialisierter Pipeline-Trade, kein Compounder. Die eigenen Szenarien ergeben auf dem aktuellen Niveau einen EV von ~$19,86 — knapp 13% über dem aktuellen Kurs. Das ist kein asymmetrischer Edge, der hohe Conviction rechtfertigt. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Eine Position ist nur dann sinnvoll, wenn man explizit eine NSCLC-Readout-Spekulation eingehen möchte und das Totalverlustrisiko bei negativem Ausgang bewusst einpreist. Direkter Peer-Vergleich: **Insulet (PODD)** und **iRhythm (IRTC)** als weitere Medtech-Wachstumswetten mit unterschiedlichem Profil; **Invacare** und ähnliche Geräteunternehmen ohne Pipeline-Optionalität wären das konservativere Instrument — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ. Positionsgröße: max. 1–2% für risikobewusste Wachstumsportfolios. Für konservative Anleger und Buy-and-Hold-Investoren ungeeignet.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
