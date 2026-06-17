@@ -309,6 +309,78 @@ def _extract_ratings(text: str) -> dict:
     return out
 
 
+def _parse_price_range_midpoint(price_str: str) -> float | None:
+    """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900') und gibt den Mittelpunkt zurück."""
+    s = price_str.replace(",", "").replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
+    m = re.search(r'([\d.]+)\s*[–—-]+\s*([\d.]+)', s)
+    if m:
+        try:
+            lo, hi = float(m.group(1)), float(m.group(2))
+            return (lo + hi) / 2
+        except ValueError:
+            return None
+    m = re.search(r'([\d.]+)', s)
+    if m:
+        try:
+            return float(m.group(1))
+        except ValueError:
+            return None
+    return None
+
+
+def _compute_ev_score(analysis_text: str, current_price) -> tuple:
+    """
+    Berechnet EV-Score (0–20 Punkte) aus Bull/Base/Bear-Kurszielen.
+    EV = Mittelwert der Szenario-Mittelpunkte (mind. 2 Szenarien nötig).
+    Gibt (ev_punkte, upside_pct_oder_None) zurück.
+    """
+    if not isinstance(current_price, (int, float)) or current_price <= 0:
+        return 10, None
+
+    sc = _extract_scenarios(analysis_text)
+    mids = []
+    for key in ("bull", "base", "bear"):
+        price_str = sc[key].get("price", "N/A")
+        if price_str and price_str != "N/A":
+            mid = _parse_price_range_midpoint(price_str)
+            if mid:
+                mids.append(mid)
+
+    if len(mids) < 2:
+        return 10, None
+
+    ev = sum(mids) / len(mids)
+    upside = (ev / current_price - 1) * 100
+
+    if upside > 20:
+        pts = 20
+    elif upside > 10:
+        pts = 15
+    elif upside > 0:
+        pts = 10
+    elif upside > -10:
+        pts = 5
+    else:
+        pts = 0
+
+    return pts, round(upside, 1)
+
+
+def _calc_score_and_verdict(rt: dict, ev_pts: int) -> tuple:
+    """Score = 80% Basis-Ratings + 20% EV-Punkte. Thresholds: BUY≥70, HOLD≥55, WATCH≥40, AVOID<40."""
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
+    score = min(100, round((q + g + v + p) / 20 * 80) + ev_pts)
+    if score >= 70:
+        verd = "BUY"
+    elif score >= 55:
+        verd = "HOLD"
+    elif score >= 40:
+        verd = "WATCH"
+    else:
+        verd = "AVOID"
+    return score, verd
+
+
 def _extract_scenarios(text: str) -> dict:
     result = {"bull": {"price": "N/A", "prob": "N/A"},
               "base": {"price": "N/A", "prob": "N/A"},
@@ -416,18 +488,20 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     sig_type   = gws.get("signal_type", "Breakout")
 
     rt = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
     sc = _extract_scenarios(analysis_text)
-
-    if score >= 70:
-        verd, vc, vbg, vbr = "BUY",   "#86c429", "#3B6D11", "#639922"
-    elif score >= 50:
-        verd, vc, vbg, vbr = "HOLD",  "#f59e0b", "#1a1200", "#b45309"
-    else:
-        verd, vc, vbg, vbr = "WATCH", "#f87171", "#1a0505", "#ef4444"
-
     price  = fund.get("currentPrice")
+    ev_pts, upside_pct = _compute_ev_score(analysis_text, price)
+    score, verd = _calc_score_and_verdict(rt, ev_pts)
+
+    if verd == "BUY":
+        vc, vbg, vbr = "#86c429", "#3B6D11", "#639922"
+    elif verd == "HOLD":
+        vc, vbg, vbr = "#f59e0b", "#1a1200", "#b45309"
+    elif verd == "WATCH":
+        vc, vbg, vbr = "#f87171", "#1a0505", "#ef4444"
+    else:  # AVOID
+        vc, vbg, vbr = "#ef4444", "#1a0000", "#7f1d1d"
+
     mcap   = fund.get("marketCap")
     fpe    = fund.get("forwardPE")
     rev    = fund.get("totalRevenue")
@@ -443,6 +517,8 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     div_s   = f"{div*100:.2f}%"  if isinstance(div,   (int, float)) else "—"
     roe_s   = f"{roe*100:.1f}%"  if isinstance(roe,   (int, float)) else "N/A"
     rs_c    = "#86c429" if rs_score > 0 else "#f87171"
+    upside_s = (f"{upside_pct:+.1f}%" if upside_pct is not None else "N/A")
+    upside_c = ("#86c429" if (upside_pct or 0) > 0 else "#f87171") if upside_pct is not None else "#64748b"
 
     def gws_item(label: str, active: bool) -> str:
         dot_c  = "#86c429" if active else "#334155"
@@ -584,6 +660,7 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
     <div class="card"><div class="cl">Gross Margin</div><div class="cv">{gm_s}</div></div>
     <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">{div_s}</div></div>
     <div class="card"><div class="cl">ROE</div><div class="cv">{roe_s}</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:{upside_c}">{upside_s}</div></div>
   </div>
 
   <div class="sec">
@@ -638,9 +715,9 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
     sig_type   = gws.get("signal_type", "Breakout")
 
     rt = _extract_ratings(analysis_text)
+    ev_pts, upside_pct = _compute_ev_score(analysis_text, fund.get("currentPrice"))
+    score, verd = _calc_score_and_verdict(rt, ev_pts)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
-    verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
 
     gws_weekly = "✓ Aktiv" if gws.get("weekly") else "✗ Inaktiv"
     gws_daily  = "✓ Aktiv" if gws.get("daily")  else "✗ Inaktiv"
@@ -674,6 +751,7 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 | Wachstum | {g}/5 |
 | Bewertung | {v}/5 |
 | Katalysator | {p}/5 |
+| EV-Upside | {f"{upside_pct:+.1f}%" if upside_pct is not None else "N/A"} |
 
 **Verdict: {verd} ({score}/100)**
 
@@ -708,9 +786,8 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     fund = load_fundamentals(ticker)
 
     rt    = _extract_ratings(analysis_text)
-    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
-    score = round((q + g + v + p) / 20 * 100)
-    verd  = "BUY" if score >= 70 else ("HOLD" if score >= 50 else "WATCH")
+    ev_pts, _ = _compute_ev_score(analysis_text, fund.get("currentPrice"))
+    score, verd = _calc_score_and_verdict(rt, ev_pts)
 
     html = build_html(ticker, fund, analysis_text, rs_score, gws)
 

@@ -108,8 +108,9 @@ Produktzyklus, Sektorrotation oder Makro-Tailwind.
 `write_rating()` in `generate_rating.py` berechnet aus den vier Ratings
 automatisch Score und Verdict und hängt sie als Tabelle + Zeile
 `**Verdict: BUY (70/100)**` an die Markdown-Datei an:
-- Score = (Qualität + Wachstum + Bewertung + Katalysator) / 20 × 100
-- Verdict: **BUY** ≥ 70 · **HOLD** ≥ 50 · **WATCH** < 50
+- Score = (Q+G+V+P)/20 × 80 (Basis) + EV-Punkte 0–20 (aus Bull/Base/Bear-Mittelpunkten vs. aktuellem Kurs)
+- EV-Punkte: Upside >20% → 20 · >10% → 15 · >0% → 10 · >−10% → 5 · ≤−10% → 0
+- Verdict: **BUY** ≥ 70 · **HOLD** ≥ 55 · **WATCH** ≥ 40 · **AVOID** < 40
 
 Deshalb: Die vier Rating-Zeilen sind **Pflicht im exakten Format oben**
 (Parser-Grundlage für Frontend und Instagram-Slides). Keine eigene
