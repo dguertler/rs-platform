@@ -14,6 +14,7 @@ build/
 # Claude Code (alles ignorieren außer der versionierten settings.json und rules/)
 .claude/*
 !.claude/settings.json
+!.claude/hooks/
 !.claude/rules/
 .claude/rules/*
 !.claude/rules/ecc/
