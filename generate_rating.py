@@ -492,6 +492,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     price  = fund.get("currentPrice")
     ev_pts, upside_pct = _compute_ev_score(analysis_text, price)
     score, verd = _calc_score_and_verdict(rt, ev_pts)
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
 
     if verd == "BUY":
         vc, vbg, vbr = "#86c429", "#3B6D11", "#639922"

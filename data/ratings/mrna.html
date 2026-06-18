@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MRNA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">18.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MRNA</h1>
+      <h2>Moderna, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Biotechnology</span></div>
+        <div class="mi">MCap: <span>$20B</span></div>
+        <div class="mi">Signal: <span>Breakout</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">64</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 18.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">160.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$49.91</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-36.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+21.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$85–$110</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$45–$65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$25–$35</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot (Kurs ~$49.91) liegt vor der jüngsten Kursbewegung. Laut OHLCV-Daten schloss MRNA am 13.06.2026 bei $61.80 — ein Anstieg von >23% nach dem Snapshot-Datum. Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Konfidenz der Bewertungsaussagen reduziert.</p>
+<p>Moderna ist keine klassische Biotech-Story mehr — und noch kein etablierter Pharmamulti. Das Unternehmen steht an einer strategischen Weggabelung: Der COVID-Impfumsatz kollabiert strukturell, während das diversifizierte mRNA-Portfolio (RSV, Influenza, individualisierte Krebs-Impfstoffe, latente Viren) erst beginnt, kommerzielle Relevanz zu entwickeln. Der strukturelle Kern ist die mRNA-Plattform selbst: ein programmierbares Produktionssystem, das bei erfolgreicher Diversifizierung ein völlig anderes Risikoprofil erzeugt als ein Ein-Produkt-Biotech. Was der Markt aktuell einpreist: anhaltend hohe Verluste, schrumpfender COVID-Marktanteil und eine Plattform ohne zweiten klaren Blockbuster-Beweis. Was möglicherweise unterschätzt wird: Die Kombination mRNA-Influenza + RSV könnte Moderna bis 2027/28 in eine strukturell stabile Umsatzbasis führen. Wichtig: Mehrere Fundamentalkennzahlen sind nicht verfügbar oder strukturell verzerrt — die Analyse ist entsprechend eingeschränkt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Kernprodukt COVID-19-Impfstoff (Spikevax): stark rückläufiger Umsatzbeitrag, strukturell sinkender Marktanteil gegenüber Pfizer/BioNTech — zyklische Basiseffekt-Abhängigkeit</li>
+<li>mRNA-Plattform als Produktionshebel: einmal validiert, können neue Impfstoff-Kandidaten deutlich schneller und günstiger entwickelt werden als mit konventioneller Technologie</li>
+<li>Pipeline-Prioritäten: RSV (mResvia, zugelassen 2024), Influenza-Kombivakzine (Phase 3), personalisierte mRNA-Krebsimpfstoffe (mRNA-4157, Partnership mit Merck)</li>
+<li>Lizenz- und Partnerschaftsmodell für Krebsimpfstoffe (Merck): teilt Entwicklungskosten, begrenzt aber auch Upside-Beteiligung</li>
+<li>Kostenstruktur: hohe fixe F&E-Aufwendungen belasten den FCF bis zur Pipeline-Monetarisierung erheblich</li>
+<li>Bilanzstärke als Puffer: D/E 17,5 absolut überschaubar — Cash-Position aus COVID-Jahren absorbiert aktuell Verluste</li>
+<li>Internationalisierung: US-Markt dominiert, Europa wichtiger Sekundärmarkt — Zulassungsrisiken je nach Markt unterschiedlich</li>
+<li>Keine Dividende, kein Aktienrückkauf-Programm — Kapital fließt vollständig in Pipeline</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>RSV und Influenza werden zu echten Blockbustern: mResvia gewinnt Marktanteile im RSV-Erwachsenensegment; Kombivakzin (COVID+Influenza+RSV) wird 2026–2027 zugelassen und adressiert einen Markt von $8–12 Mrd. jährlich. Krebsimpfstoff mRNA-4157 zeigt in Phase-3-Daten bei Melanom signifikante Überlebensvorteile. Umsatz-Recovery auf $5–6 Mrd. ab 2027 (Annahme, kein Konsens); bei Break-even-Marge (~15% Operating Margin, Annahme) und 5x EV/Revenue ergibt sich ein Kursziel von $85–110. Strukturelle Margennachhaltigkeit: mRNA-Plattform hat nach erstem Skalierungsschritt niedrigere Grenzkosten als konventionelle Vakzine — technologische Differenzierung real, aber noch nicht durch normalisierte Margen-Daten belegt. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: COVID-Umsatz stabilisiert sich auf niedrigem Niveau ($1–1,5 Mrd./Jahr), RSV wächst moderat, Influenza und Krebsimpfstoff befinden sich noch in klinischer Phase ohne Umsatzbeitrag. Gesamtumsatz bleibt bei $2–2,5 Mrd.; FCF negativ oder leicht positiv. Auf Basis P/B 2,5x auf fortgeschriebenen Buchwert ~$7–8 Mrd. (Annahme, kein Konsens) ergibt sich ein fairer Wert von $45–65. Auf Basis aktueller Kursniveaus von ~$62 ist das Aufwärtspotenzial begrenzt. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Negative Phase-3-Daten beim Kombivakzin oder mRNA-4157 (Melanom), kombiniert mit weiter sinkenden COVID-Booster-Raten und Preisdruck durch generische Impfstoffe. Cash-Burn erhöht sich auf $2+ Mrd./Jahr — Kapitalerhöhungsrisiko steigt ab 2026. Bei Buchwert-Erosion auf $5 Mrd. und P/B-Kompression auf 1,5x (Distress-Szenario, Annahme) ergibt sich ein Kursziel von $25–35.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: COVID-Impfstoffmarkt stark von staatlichen Beschaffungsverträgen abhängig — auf Datenbasis nicht vollständig quantifizierbar</li>
+<li>Geopolitik/China-Exposure: begrenzt; primär US/EU-Markt — keine signifikanten China-Risiken erkennbar</li>
+<li>Lieferketten-/Foundry-Abhängigkeit: mRNA-Produktion in eigenen Werken — Single-Source-Risiko reduziert, Rohstofflieferkette auf Datenbasis nicht abschließend beurteilbar</li>
+<li>Verwässerung/SBC: Aktienzahl-Trend nicht im Datensatz — Risiko bei Cash-Burn-Erhöhung real; auf Datenbasis nicht quantifizierbar</li>
+<li>Regulierung: FDA-Zulassungsrisiken für Pipeline-Kandidaten real; politisches Risiko in USA durch veränderte Gesundheitspolitik erhöht</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:**</p>
+<p>EV = 0,25 x $97,50 + 0,45 x $55,00 + 0,30 x $30,00</p>
+<p>EV = $24,38 + $24,75 + $9,00 = $58,13</p>
+<p>Erwartungswert: $58,13 — implizites Downside vs. aktuellem Kurs (~$62): −6%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Niveau unzulässig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE -36,6% — strukturell verlustbringend, keine Normalisierung erkennbar. Margen nicht verfügbar (yfinance-Datenqualität). Free Cashflow -$20 Mio. TTM — minimal negativ, aber Trendrichtung entscheidend. Revenue-Wachstum +260,2% YoY ist ein COVID-Basiseffekt-Artefakt und nicht als strukturelles Wachstum zu interpretieren. P/B 2,67x bei negativem ROE impliziert, dass der Markt ausschließlich Plattform-Optionswert zahlt. D/E 17,5 absolut gering — kein strukturelles Risiko bei aktuellem Cash-Niveau. Bilanzqualität kurzfristig stabil, bei anhaltendem Cash-Burn ohne Pipeline-Monetarisierung in 24–36 Monaten unter Druck.</p>
+<h3>7. BEWERTUNG</h3>
+<p>EPS/PE nicht verfügbar — KGV-Bewertung strukturell nicht möglich. Primäre Bewertungsbasis: P/B 2,67x auf ~$7–8 Mrd. Buchwert entspricht Market Cap ~$19–21 Mrd. — für ein verlustbringendes Biotech mit echter Plattform-Option vertretbar, aber nicht günstig. Normalisierter FCF nicht berechenbar — Margenkennzahlen nicht verfügbar. Rückrechnung auf aktuellen Kurs (~$62 nach Kurssprung): Bei P/B 2,5x und Break-even wäre ein Kurs von $65–70 erreichbar (Annahme) — setzt RSV/Influenza-Monetarisierung voraus. Ambitioniert auf aktuellem Niveau. Snapshot-Multiples (basierend auf $49.91) dienen nur als historischer Referenzpunkt — aktuelles Kursniveau $62 ist Primärbasis.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>20T-Momentum +27,12%, 5T +23,74%, 6M +88,35% — deutlicher Turnaround nach langer Underperformance. Der Kurssprung nach Snapshot-Datum ($49 → $62) deutet auf ereignisgetriebenes Kaufinteresse hin — Auslöser nicht verifizierbar, zwingend prüfen vor Positionseröffnung. Hypothese, nicht datenbasiert: mögliche Pipeline-Neuigkeit oder institutionelle Neubewertung der Plattform-Optionen. Short Float-Daten nicht im Datensatz. Enttäuschungsrisiko: Nach +88% in 6 Monaten ist die Erwartungslatte erhöht; negative Studiendaten koennten 30–40% Rückschlag auslösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS Breakout auf allen drei Zeitrahmen (Weekly, Daily, 4H) aktiv — starkes technisches Setup. RS-Score 160,85 im NASDAQ-100 — deutlich überdurchschnittlich. 5T +23,74% und 10T +22,23% signalisieren Momentum-Beschleunigung; 50T -0,59% zeigt, dass der Trend noch jung ist. 6M +88,35% bestätigt strukturellen Trendwechsel. Momentum teilweise reaktiv nach Katalysator-Ereignis — fundamental nicht vollständig verifizierbar. Warnsignal: Wochenschluss unter $50 würde GWS-Signal infrage stellen; unter $45 wäre der kurzfristige Trend gebrochen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($120–180):** mRNA-Plattform liefert 3+ zugelassene Produkte (Influenza, RSV, Krebsimpfstoff); Umsatz $8–10 Mrd.; operative Break-even erreicht. Bei 3x EV/Revenue: $120–180. Entscheidende Variable: Phase-3-Erfolg des Krebsimpfstoffs mRNA-4157.</p>
+<p>**Base Case ($40–70):** COVID sinkt weiter, RSV wächst moderat, Influenza 2028+. Umsatz stabilisiert $2,5–3,5 Mrd. Cash-Burn anhaltend. Buchwert-basierte Bewertung P/B 2–3x. Entscheidende Variable: Zulassungsgeschwindigkeit der Nicht-COVID-Pipeline.</p>
+<p>**Bear Case ($10–25):** Pipeline-Fehlschläge + Cash-Burn zwingt zu Kapitalerhöhung; Verwässerung; Markt bewertet nur noch Residualwert der Plattform. Historische Biotechs ohne zweiten Produkterfolg fallen auf 0,5–1x Buchwert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>MRNA ist kein Compounder und kein klassisches Growth-Asset — es ist eine hochvolatile Plattform-Wette mit limitierter Datenbasis und negativem kurzfristigen EV auf dem aktuellen Niveau. Die eigenen Szenarien ergeben auf ~$62 keinen asymmetrischen Edge; der Erwartungswert liegt leicht darunter. Das aktuelle Momentum (GWS 3/3, RS 160) rechtfertigt taktisches Interesse für kurzfristig orientierte Trader mit striktem Stopp-Management ($50 als kritische Marke). Für langfristige Investoren bleibt die entscheidende Variable: Liefert die mRNA-Plattform einen zweiten klinisch validierten Blockbuster bis 2027?</p>
+<p>Direkter Peer-Vergleich: **BioNTech (BNTX)** — aehnliche COVID-Abhängigkeit, aber stärkere Cash-Position und frühere Diversifizierung ins Krebsimpfstoff-Segment; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ. **Pfizer (PFE)** — weniger reines Plattform-Play, aber deutlich stabileres Profil mit Dividende.</p>
+<p>Positionsgröße: max. 1–2% eines diversifizierten Portfolios. Kontraindiziert für risikoaverse Anleger.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
