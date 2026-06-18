@@ -312,6 +312,8 @@ def _extract_ratings(text: str) -> dict:
 def _parse_price_range_midpoint(price_str: str) -> float | None:
     """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900') und gibt den Mittelpunkt zurück."""
     s = price_str.replace(",", "").replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
+    # Normalize German thousands separators: "1.500" → "1500", "2.100" → "2100"
+    s = re.sub(r'(\d)\.(\d{3})(?!\d)', r'\1\2', s)
     m = re.search(r'([\d.]+)\s*[–—-]+\s*([\d.]+)', s)
     if m:
         try:
@@ -489,6 +491,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
 
     rt = _extract_ratings(analysis_text)
     sc = _extract_scenarios(analysis_text)
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     price  = fund.get("currentPrice")
     ev_pts, upside_pct = _compute_ev_score(analysis_text, price)
     score, verd = _calc_score_and_verdict(rt, ev_pts)
