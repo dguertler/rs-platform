@@ -685,26 +685,41 @@ def render(
         scenes.append({"visual": "instagram profile swipe", "vo": ""})
         print(f"  [CTA] Endszene mit Analyse-Slides ✓")
 
+    # Audio-Dauer ermitteln um letzten Clip richtig lang zu generieren
+    try:
+        import json as _json
+        _probe = subprocess.run(
+            ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", audio_path],
+            capture_output=True, text=True, check=True)
+        audio_dur = float(_json.loads(_probe.stdout)["format"]["duration"])
+    except Exception:
+        audio_dur = len(scenes) * scene_sec
+
+    n = len(scenes)
+    total_video_dur = n * scene_sec - max(0, n - 1) * fade
+    # Letzten Clip so lang machen dass Video >= Audio (+ 0.3s Puffer)
+    last_scene_dur = scene_sec + max(0.0, audio_dur - total_video_dur + 0.3)
+
     video_paths = []
     for i, scene in enumerate(scenes):
         dest = os.path.join(tmpdir, f"scene_{i:02d}.mp4")
+        dur = last_scene_dur if i == n - 1 else scene_sec
         ok = False
         # Szene 2 (Index 1) → Chart-PNG
         if i == 1 and chart_ok:
-            _png_to_video(chart_png, dest, W, H, scene_sec)
+            _png_to_video(chart_png, dest, W, H, dur)
             ok = True
         # Letzte Szene → CTA-PNG
-        if not ok and cta_ok and i == len(scenes) - 1:
-            _png_to_video(cta_png, dest, W, H, scene_sec)
+        if not ok and cta_ok and i == n - 1:
+            _png_to_video(cta_png, dest, W, H, dur)
             ok = True
         if not ok and api_key:
-            # Sektor-spezifische Keywords für diese Szene
             kw = ticker_kw[i % len(ticker_kw)] if ticker_kw else scene["visual"]
-            ok = _pexels_download(scene["visual"], dest, api_key, min_dur=int(scene_sec))
+            ok = _pexels_download(scene["visual"], dest, api_key, min_dur=int(dur))
             if not ok:
-                ok = _pexels_download(kw, dest, api_key, min_dur=int(scene_sec))
+                ok = _pexels_download(kw, dest, api_key, min_dur=int(dur))
         if not ok:
-            _generate_bg_cinematic(i, dest, W, H, scene_sec)
+            _generate_bg_cinematic(i, dest, W, H, dur)
             ok = True
         video_paths.append(dest if ok else None)
 
@@ -727,18 +742,9 @@ def render(
     video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
 
     audio = AudioFileClip(audio_path)
-    # Video auf Audio-Dauer verlängern (letzten Frame einfrieren) statt Audio kürzen
-    if audio.duration > video.duration:
-        last = clips[-1]
-        extra = audio.duration - video.duration + 0.5  # Puffer
-        clips[-1] = last.with_duration(last.duration + extra)
-        final_clips = [clips[0]]
-        for cl in clips[1:]:
-            final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
-        video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
-    # Audio nie über seine tatsächliche Dauer hinaus verlängern
-    safe_audio_dur = min(audio.duration - 0.05, video.duration)
-    video = video.with_audio(audio.with_duration(safe_audio_dur))
+    # Audio auf Video-Dauer anpassen (sicher: nie über echte Audio-Länge hinaus)
+    safe_dur = min(audio.duration - 0.05, video.duration)
+    video = video.with_audio(audio.with_duration(safe_dur))
 
     # Logo — AI Alpha Selection Brand + Ticker-Firmenlogo (oben links)
     overlays = [video]
