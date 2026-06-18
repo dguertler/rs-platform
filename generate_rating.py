@@ -488,6 +488,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     sig_type   = gws.get("signal_type", "Breakout")
 
     rt = _extract_ratings(analysis_text)
+    q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
     sc = _extract_scenarios(analysis_text)
     price  = fund.get("currentPrice")
     ev_pts, upside_pct = _compute_ev_score(analysis_text, price)
