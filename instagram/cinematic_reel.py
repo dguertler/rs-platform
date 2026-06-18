@@ -290,6 +290,135 @@ def _png_to_video(png_path: str, dest: str, W: int, H: int, dur: float) -> None:
     subprocess.run(cmd, capture_output=True, check=True)
 
 
+# ── Chart-Szene (Kurschart + Kennzahlen) ──────────────────────────────────────
+
+def _generate_chart_scene(ticker: str, score: Optional[int], verdict: str,
+                          dest_png: str, W: int, H: int) -> bool:
+    """Generiert ein dunkles Kurschart-PNG mit RS-Score und Kennzahlen."""
+    try:
+        import json, numpy as np
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        import matplotlib.dates as mdates
+        from matplotlib.patches import FancyBboxPatch
+        from datetime import datetime as dt
+
+        # Kursdaten laden (NASDAQ-100 → S&P 500 → DAX als Fallback)
+        ohlcv = None
+        rs_score_val = None
+        for fname in ("data/rs_full.json", "data/rs_sp500.json", "data/rs_dax.json"):
+            fpath = ROOT / fname
+            if not fpath.exists():
+                continue
+            data = json.loads(fpath.read_text(encoding="utf-8"))
+            entry = next((e for e in data.get("data", [])
+                          if e.get("ticker") == ticker), None)
+            if entry and entry.get("ohlcv"):
+                ohlcv = entry["ohlcv"]
+                rs_score_val = entry.get("rs_score")
+                break
+
+        if not ohlcv:
+            return False
+
+        # Letzte 26 Wochen (~6 Monate)
+        ohlcv = ohlcv[-130:]
+        dates = [dt.strptime(r["d"], "%Y-%m-%d") for r in ohlcv]
+        closes = [r["c"] for r in ohlcv]
+
+        # Fundamentaldaten
+        fund_path = ROOT / "data" / "fundamentals.json"
+        fund = {}
+        if fund_path.exists():
+            all_fund = json.loads(fund_path.read_text(encoding="utf-8"))
+            fund = all_fund.get("tickers", {}).get(ticker, {})
+
+        # Dark-Theme Chart
+        fig = plt.figure(figsize=(W / 150, H / 150), dpi=150)
+        fig.patch.set_facecolor("#0d0e1a")
+        ax = fig.add_axes([0.08, 0.30, 0.84, 0.52])
+        ax.set_facecolor("#0d0e1a")
+
+        # Kurslinie + Gradient-Fill
+        color = "#00c896" if closes[-1] >= closes[0] else "#ff4d6d"
+        ax.plot(dates, closes, color=color, linewidth=2.0, zorder=3)
+        ax.fill_between(dates, closes, min(closes) * 0.98,
+                        color=color, alpha=0.15, zorder=2)
+
+        # Achsen
+        ax.xaxis.set_major_formatter(mdates.DateFormatter("%b '%y"))
+        ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+        ax.tick_params(colors="#888888", labelsize=9)
+        for spine in ax.spines.values():
+            spine.set_edgecolor("#333344")
+        ax.yaxis.set_tick_params(labelcolor="#888888")
+        ax.set_xlim(dates[0], dates[-1])
+
+        # Ticker + Verdict oben
+        pct = (closes[-1] / closes[0] - 1) * 100
+        pct_str = f"+{pct:.1f}%" if pct >= 0 else f"{pct:.1f}%"
+        fig.text(0.08, 0.89, ticker, color="#ffffff", fontsize=28, fontweight="bold",
+                 transform=fig.transFigure)
+        fig.text(0.08, 0.84, f"6-Monats-Performance: {pct_str}",
+                 color=color, fontsize=13, transform=fig.transFigure)
+
+        # Verdict + Score Badge
+        verdict_color = {"BUY": "#00c896", "HOLD": "#f5a623", "SELL": "#ff4d6d"}.get(
+            (verdict or "").upper(), "#aaaaaa")
+        if verdict:
+            fig.text(0.92, 0.89, verdict.upper(), color=verdict_color,
+                     fontsize=22, fontweight="bold", ha="right",
+                     transform=fig.transFigure)
+        if score is not None:
+            fig.text(0.92, 0.84, f"Score {score}/100", color="#aaaaaa",
+                     fontsize=12, ha="right", transform=fig.transFigure)
+
+        # Kennzahlen-Grid unten (4 Metriken)
+        metrics = []
+        pe = fund.get("trailingPE") or fund.get("forwardPE")
+        if pe:
+            metrics.append(("KGV", f"{pe:.1f}x"))
+        rev_growth = fund.get("revenueGrowth")
+        if rev_growth is not None:
+            metrics.append(("Umsatzwachstum", f"{rev_growth*100:+.1f}%"))
+        mkt = fund.get("marketCap")
+        if mkt:
+            if mkt >= 1e12:
+                metrics.append(("Marktkapitalisierung", f"${mkt/1e12:.1f}B"))
+            else:
+                metrics.append(("Marktkapitalisierung", f"${mkt/1e9:.0f}Mrd"))
+        if rs_score_val is not None:
+            metrics.append(("RS-Score", f"{rs_score_val:.0f}"))
+
+        metrics = metrics[:4]
+        if metrics:
+            cols = len(metrics)
+            for j, (label, val) in enumerate(metrics):
+                x = 0.08 + j * (0.84 / cols) + (0.84 / cols) / 2
+                fig.text(x, 0.22, val, color="#ffffff", fontsize=14,
+                         fontweight="bold", ha="center", transform=fig.transFigure)
+                fig.text(x, 0.17, label, color="#666688", fontsize=9,
+                         ha="center", transform=fig.transFigure)
+
+        # Trennlinie
+        fig.add_artist(plt.Line2D([0.05, 0.95], [0.27, 0.27],
+                                  transform=fig.transFigure,
+                                  color="#333344", linewidth=0.8))
+
+        # Branding
+        fig.text(0.5, 0.04, "AI Alpha Selection", color="#444466",
+                 fontsize=10, ha="center", transform=fig.transFigure)
+
+        plt.savefig(dest_png, dpi=150, bbox_inches="tight",
+                    facecolor="#0d0e1a", edgecolor="none")
+        plt.close(fig)
+        return True
+    except Exception as exc:
+        print(f"  [Chart] Fehler beim Generieren ({exc})")
+        return False
+
+
 # ── Rating-Overlay (dynamisch gerendert) ──────────────────────────────────────
 
 def _make_rating_overlay(score: Optional[int], verdict: str,
@@ -433,24 +562,31 @@ def render(
     print("[2/5] Untertitel aus Voiceover-Text generieren…")
     srt_path = _build_srt_from_scenes(scenes, audio_path, srt_path)
 
-    print("[3/5] Stock-Footage laden (Pexels → Fallback auf Reel-PNGs)…")
+    print("[3/5] Stock-Footage laden (Pexels → Chart-Szene → Gradient-Fallback)…")
     fallback_kw = cfg["stock_footage"]["fallback_keywords"]
-    # Reel-PNGs als lokaler Fallback (immer verfügbar)
-    reel_png_dir = Path(script_path).parent / "reel" if script_path else None
-    reel_pngs = sorted(reel_png_dir.glob("*.png")) if (
-        reel_png_dir and reel_png_dir.exists()) else []
+
+    # Chart-PNG als Szene 2 (nach dem Hook) generieren
+    chart_png = os.path.join(tmpdir, "chart_scene.png")
+    chart_ok = _generate_chart_scene(ticker, score, verdict or "", chart_png, W, H)
+    if chart_ok:
+        print(f"  [Chart] Kurschart + Kennzahlen ✓")
+
     video_paths = []
     for i, scene in enumerate(scenes):
         dest = os.path.join(tmpdir, f"scene_{i:02d}.mp4")
         ok = False
-        if api_key:
+        # Szene 2 (Index 1) → Chart-PNG als Video
+        if i == 1 and chart_ok:
+            _png_to_video(chart_png, dest, W, H, scene_sec)
+            ok = True
+        if not ok and api_key:
             ok = _pexels_download(scene["visual"], dest, api_key,
                                   min_dur=int(scene_sec))
             if not ok:
                 ok = _pexels_download(fallback_kw[i % len(fallback_kw)],
                                       dest, api_key, min_dur=int(scene_sec))
         if not ok:
-            # Cinematic Prozedur-Hintergrund (animierter Gradient, vollständig offline)
+            # Animierter Gradient-Hintergrund (vollständig offline)
             _generate_bg_cinematic(i, dest, W, H, scene_sec)
             ok = True
         video_paths.append(dest if ok else None)
