@@ -730,13 +730,15 @@ def render(
     # Video auf Audio-Dauer verlängern (letzten Frame einfrieren) statt Audio kürzen
     if audio.duration > video.duration:
         last = clips[-1]
-        extra = audio.duration - video.duration + 1.0  # +1s Puffer für CTA
+        extra = audio.duration - video.duration + 0.5  # Puffer
         clips[-1] = last.with_duration(last.duration + extra)
         final_clips = [clips[0]]
         for cl in clips[1:]:
             final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
         video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
-    video = video.with_audio(audio.with_duration(video.duration))
+    # Audio nie über seine tatsächliche Dauer hinaus verlängern
+    safe_audio_dur = min(audio.duration - 0.05, video.duration)
+    video = video.with_audio(audio.with_duration(safe_audio_dur))
 
     # Logo — AI Alpha Selection Brand + Ticker-Firmenlogo (oben links)
     overlays = [video]
