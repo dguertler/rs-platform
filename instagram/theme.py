@@ -78,22 +78,59 @@ FORMATS = {
 DPI = 150  # figsize wird daraus berechnet: px / DPI
 
 # ── Schrift ────────────────────────────────────────────────────────────────────
-# Liberation Sans ist Helvetica-artig und sauber; DejaVu Mono für Zahlen.
-_SANS = "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf"
-_SANS_BOLD = "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf"
-_MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf"
+# Plattformübergreifende Font-Kandidaten (Linux → Windows → macOS → Fallback)
+_FONT_CANDIDATES = {
+    "sans": [
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",   # Linux
+        "C:/Windows/Fonts/arial.ttf",                                         # Windows
+        "/Library/Fonts/Arial.ttf",                                           # macOS
+        "/System/Library/Fonts/Helvetica.ttc",                                # macOS alt
+    ],
+    "sans_bold": [
+        "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+        "C:/Windows/Fonts/arialbd.ttf",
+        "/Library/Fonts/Arial Bold.ttf",
+    ],
+    "mono": [
+        "/usr/share/fonts/truetype/dejavu/DejaVuSansMono-Bold.ttf",
+        "C:/Windows/Fonts/cour.ttf",
+        "/Library/Fonts/Courier New Bold.ttf",
+    ],
+}
+
+
+def _find_font(candidates: list) -> str | None:
+    import os
+    for p in candidates:
+        if os.path.exists(p):
+            return p
+    return None
 
 
 def register_fonts():
     """Registriert die Fonts in matplotlib und liefert Namen zurück."""
-    for path in (_SANS, _SANS_BOLD, _MONO):
+    sans_path = _find_font(_FONT_CANDIDATES["sans"])
+    bold_path = _find_font(_FONT_CANDIDATES["sans_bold"])
+    mono_path = _find_font(_FONT_CANDIDATES["mono"])
+    for path in (sans_path, bold_path, mono_path):
+        if path:
+            try:
+                font_manager.fontManager.addfont(path)
+            except Exception:
+                pass
+    # Namen aus dem registrierten Font ableiten
+    from matplotlib import font_manager as fm
+    def _name(path, fallback):
+        if not path:
+            return fallback
         try:
-            font_manager.fontManager.addfont(path)
+            prop = fm.FontProperties(fname=path)
+            return prop.get_name()
         except Exception:
-            pass
+            return fallback
     return {
-        "sans": "Liberation Sans",
-        "mono": "DejaVu Sans Mono",
+        "sans": _name(sans_path, "DejaVu Sans"),
+        "mono": _name(mono_path, "DejaVu Sans Mono"),
     }
 
 

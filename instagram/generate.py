@@ -704,7 +704,7 @@ def write_alt_texts(base, saved, meta):
         lines.append(f"Slide {slide_n}: {desc}")
 
     if lines:
-        with open(os.path.join(base, "alt_texts.txt"), "w") as f:
+        with open(os.path.join(base, "alt_texts.txt"), "w", encoding="utf-8") as f:
             f.write("# ALT-Texte für Instagram-Upload\n"
                     "# Beim manuellen Hochladen pro Slide eintragen "
                     "(Accessibility + Suchalgorithmus)\n\n")
@@ -806,10 +806,10 @@ def main():
             else:
                 all_saved += build_earnings(fmt, e, date_iso, os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
-        with open(os.path.join(base, "caption.txt"), "w") as f:
+        with open(os.path.join(base, "caption.txt"), "w", encoding="utf-8") as f:
             f.write(caption_earnings(e))
         if "reel" in fmts:
-            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+            with open(os.path.join(base, "reel_caption.txt"), "w", encoding="utf-8") as f:
                 f.write(reel_caption_earnings(e))
         _a = e.get("analysis") or {}
         write_alt_texts(base, all_saved, {
@@ -867,10 +867,10 @@ def main():
             else:
                 all_saved += build_analysis(fmt, a, date_iso, os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
-        with open(os.path.join(base, "caption.txt"), "w") as f:
+        with open(os.path.join(base, "caption.txt"), "w", encoding="utf-8") as f:
             f.write(caption_analysis(a))
         if "reel" in fmts:
-            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+            with open(os.path.join(base, "reel_caption.txt"), "w", encoding="utf-8") as f:
                 f.write(reel_caption_analysis(a))
         write_alt_texts(base, all_saved, {
             "name": render.A.short_name(a["name"]),
@@ -943,10 +943,10 @@ def main():
         for fmt in fmts:
             all_saved += build_from_store(fmt, ctx, os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
-        with open(os.path.join(base, "caption.txt"), "w") as f:
+        with open(os.path.join(base, "caption.txt"), "w", encoding="utf-8") as f:
             f.write(caption_from_store(ctx))
         if "reel" in fmts:
-            with open(os.path.join(base, "reel_caption.txt"), "w") as f:
+            with open(os.path.join(base, "reel_caption.txt"), "w", encoding="utf-8") as f:
                 f.write(reel_caption_from_store(ctx))
         write_alt_texts(base, all_saved, {
             "kind": "Wochenupdate",
@@ -983,7 +983,7 @@ def main():
             all_saved += build_weekly(fmt, r, benchmark, date_iso,
                                       os.path.join(base, fmt))
         os.makedirs(base, exist_ok=True)
-        with open(os.path.join(base, "caption.txt"), "w") as f:
+        with open(os.path.join(base, "caption.txt"), "w", encoding="utf-8") as f:
             f.write(build_weekly_caption(r))
         write_alt_texts(base, all_saved, {
             "kind": "Wochenupdate", "kw": r["kw"],
@@ -1033,7 +1033,7 @@ def main():
     for fmt in fmts:
         all_saved += build(fmt, ctx, os.path.join(base, fmt))
 
-    with open(os.path.join(base, "caption.txt"), "w") as f:
+    with open(os.path.join(base, "caption.txt"), "w", encoding="utf-8") as f:
         f.write(build_caption(ctx))
 
     print(f"✓ {len(all_saved)} Slides erzeugt in {base}")

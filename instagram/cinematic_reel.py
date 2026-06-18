@@ -301,13 +301,21 @@ def _make_rating_overlay(score: Optional[int], verdict: str,
     draw.rounded_rectangle([(0, 0), (w - 1, h - 1)], radius=24,
                             fill=(47, 107, 255, 220))
     score_txt = f"{score}/100" if score is not None else "—"
-    try:
-        font_big = ImageFont.truetype(
-            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf", 56)
-        font_sm = ImageFont.truetype(
-            "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf", 28)
-    except OSError:
-        font_big = font_sm = ImageFont.load_default()
+    def _pil_font(size):
+        candidates = [
+            "/usr/share/fonts/truetype/liberation/LiberationSans-Bold.ttf",
+            "C:/Windows/Fonts/arialbd.ttf",
+            "/Library/Fonts/Arial Bold.ttf",
+        ]
+        for p in candidates:
+            if os.path.exists(p):
+                try:
+                    return ImageFont.truetype(p, size)
+                except OSError:
+                    continue
+        return ImageFont.load_default()
+    font_big = _pil_font(56)
+    font_sm  = _pil_font(28)
     draw.text((w // 2, 55), score_txt, fill="#FFFFFF", font=font_big, anchor="mm")
     draw.text((w // 2, 110), verdict, fill="#00F0FF", font=font_sm, anchor="mm")
     dest = tempfile.mktemp(suffix="_rating.png")
