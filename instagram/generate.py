@@ -878,14 +878,30 @@ def main():
             "verdict": a.get("verdict", ""),
             "score": a.get("score"),
         })
-        # Reel-Skript für Stage-2-Rendering speichern
+        # Reel-Skript speichern und cinematic_reel.py direkt aufrufen
         script_txt = reel_script(a)
-        with open(os.path.join(base, "reel_script.txt"), "w") as f:
+        script_path = os.path.join(base, "reel_script.txt")
+        with open(script_path, "w") as f:
             f.write(script_txt)
-        print(f"  📄 Reel-Skript: {os.path.relpath(os.path.join(base, 'reel_script.txt'), ROOT)}")
-        print("  ▶ Cinematisches Rendering: python3 instagram/cinematic_reel.py "
-              f"--ticker {a['ticker']} --script <pfad>/reel_script.txt "
-              f"--output <pfad>/reel_cinematic.mp4")
+        print(f"  📄 Reel-Skript: {os.path.relpath(script_path, ROOT)}")
+
+        reel_out = os.path.join(base, "reel.mp4")
+        try:
+            from . import cinematic_reel
+            psych = hook_generator.get_hook(a["ticker"])
+            cinematic_reel.render(
+                ticker=a["ticker"],
+                hook_typ=psych["typ"],
+                script_path=script_path,
+                output_path=reel_out,
+                score=a.get("score"),
+                verdict=a.get("verdict"),
+                hype_aktie="Nvidia",
+            )
+            all_saved.append(reel_out)
+            print(f"  🎬 Cinematic Reel: {os.path.relpath(reel_out, ROOT)}")
+        except Exception as ex:
+            print(f"  ⚠ Cinematic Reel übersprungen ({ex.__class__.__name__}: {ex})")
 
         full = _has_scenarios(a)
         print(f"✓ {len(all_saved)} Dateien (Analyse {a['ticker']}) in {base}")
