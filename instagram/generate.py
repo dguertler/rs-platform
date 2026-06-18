@@ -15,7 +15,7 @@ Output:  out/instagram/<YYYY-MM-DD>/<format>/NN_*.png  +  caption.txt
 import argparse
 import os
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 
 from . import data, render, report, store
 from . import analysis as ana
@@ -773,7 +773,7 @@ def main():
                                    "der KW (bzw. heute, falls dieser Samstag noch "
                                    "in der Zukunft liegt).")
     args = ap.parse_args()
-    today = datetime.utcnow().strftime("%Y-%m-%d")
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     # ── Earnings-Post aus instagram/data/earnings/TICKER.json ─────────────────
     if args.earnings:
@@ -881,7 +881,7 @@ def main():
         # Reel-Skript speichern und cinematic_reel.py direkt aufrufen
         script_txt = reel_script(a)
         script_path = os.path.join(base, "reel_script.txt")
-        with open(script_path, "w") as f:
+        with open(script_path, "w", encoding="utf-8") as f:
             f.write(script_txt)
         print(f"  📄 Reel-Skript: {os.path.relpath(script_path, ROOT)}")
 
