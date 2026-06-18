@@ -32,6 +32,51 @@ from typing import Optional
 ROOT = Path(__file__).resolve().parent.parent
 CFG_PATH = Path(__file__).parent / "config" / "tech_trader.yaml"
 LOGO_PATH = Path(__file__).parent / "assets" / "Logo.png"
+LOGOS_DIR = Path(__file__).parent / "assets" / "logos"
+
+# Sektor → Pexels-Keywords für stock-footage
+_SECTOR_KEYWORDS = {
+    "Technology":            ["semiconductor chip closeup 4k", "data center servers glowing 4k", "circuit board macro 4k"],
+    "Semiconductors":        ["semiconductor wafer production 4k", "microchip glowing blue 4k", "chip factory cleanroom 4k"],
+    "Software":              ["dark code screen abstract 4k", "software developer multiple screens 4k", "abstract digital network 4k"],
+    "Healthcare":            ["medical laboratory research 4k", "biotech lab glowing 4k", "doctor digital screen 4k"],
+    "Consumer Cyclical":     ["modern retail store 4k", "electric vehicle charging 4k", "luxury consumer products 4k"],
+    "Financial Services":    ["stock market trading floor 4k", "financial data screen night 4k", "banking skyscrapers 4k"],
+    "Communication Services":["fiber optic network abstract 4k", "social media data stream 4k", "5g tower night 4k"],
+    "Energy":                ["oil refinery night 4k", "solar panel field aerial 4k", "energy grid abstract 4k"],
+    "Industrials":           ["industrial factory automation 4k", "robotic arm factory 4k", "aerospace jet engine 4k"],
+    "default":               ["abstract financial data neon 4k", "dark tech background 4k", "stock market data screen night 4k"],
+}
+
+
+def _ticker_footage_keywords(ticker: str) -> list[str]:
+    """Gibt sektor-spezifische Pexels-Keywords für einen Ticker zurück."""
+    try:
+        import json
+        fund_path = ROOT / "data" / "fundamentals.json"
+        if fund_path.exists():
+            fund = json.loads(fund_path.read_text(encoding="utf-8"))
+            t = fund.get("tickers", {}).get(ticker, {})
+            sector = t.get("sector", "")
+            industry = t.get("industry", "")
+            # Semiconductors gezielt abfangen
+            if "semiconductor" in (industry or "").lower():
+                return _SECTOR_KEYWORDS["Semiconductors"]
+            for key in _SECTOR_KEYWORDS:
+                if key.lower() in (sector or "").lower():
+                    return _SECTOR_KEYWORDS[key]
+    except Exception:
+        pass
+    return _SECTOR_KEYWORDS["default"]
+
+
+def _ticker_logo(ticker: str) -> Optional[Path]:
+    """Sucht das Firmenlogo in logos/ — PNG bevorzugt, JPEG akzeptiert."""
+    for ext in (".png", ".PNG", ".jpeg", ".jpg", ".JPEG"):
+        p = LOGOS_DIR / f"{ticker}{ext}"
+        if p.exists():
+            return p
+    return None
 
 
 def _load_cfg() -> dict:
@@ -419,6 +464,66 @@ def _generate_chart_scene(ticker: str, score: Optional[int], verdict: str,
         return False
 
 
+# ── CTA-Endszene mit Analyse-Slide-Montage ────────────────────────────────────
+
+def _generate_cta_scene(ticker: str, carousel_dir: Optional[Path],
+                        dest_png: str, W: int, H: int) -> bool:
+    """CTA-Slide: 4 Analyse-Slides als Montage + 'Komplette Analyse auf meinem Profil'."""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+        from PIL import Image as PILImage
+        import numpy as np
+
+        fig = plt.figure(figsize=(W / 150, H / 150), dpi=150)
+        fig.patch.set_facecolor("#0d0e1a")
+
+        # Analyse-Slides sammeln (max. 4)
+        slides = []
+        if carousel_dir and carousel_dir.exists():
+            for f in sorted(carousel_dir.glob("*.png"))[:4]:
+                try:
+                    slides.append(np.array(PILImage.open(f).convert("RGB")))
+                except Exception:
+                    pass
+
+        if slides:
+            # 2×2 Grid der Slides (leicht geneigt für Tiefe)
+            positions = [(0.05, 0.38, 0.43, 0.42), (0.52, 0.38, 0.43, 0.42),
+                         (0.05, 0.08, 0.43, 0.28), (0.52, 0.08, 0.43, 0.28)]
+            for idx, (img, (x, y, w, h)) in enumerate(zip(slides, positions)):
+                ax = fig.add_axes([x, y, w, h])
+                ax.imshow(img)
+                ax.axis("off")
+                for spine in ax.spines.values():
+                    spine.set_visible(False)
+                # Rahmen
+                rect = plt.Rectangle((0, 0), 1, 1, fill=False,
+                                      edgecolor="#2a2a4a", linewidth=2,
+                                      transform=ax.transAxes)
+                ax.add_patch(rect)
+
+        # CTA-Text
+        fig.text(0.5, 0.94, "Komplette Analyse", color="#ffffff",
+                 fontsize=22, fontweight="bold", ha="center",
+                 transform=fig.transFigure)
+        fig.text(0.5, 0.89, "auf meinem Instagram-Profil 👆",
+                 color="#00c896", fontsize=14, ha="center",
+                 transform=fig.transFigure)
+        fig.text(0.5, 0.84, f"AI Alpha Selection  ·  {ticker}",
+                 color="#555577", fontsize=11, ha="center",
+                 transform=fig.transFigure)
+
+        plt.savefig(dest_png, dpi=150, bbox_inches="tight",
+                    facecolor="#0d0e1a", edgecolor="none")
+        plt.close(fig)
+        return True
+    except Exception as exc:
+        print(f"  [CTA] Fehler ({exc})")
+        return False
+
+
 # ── Rating-Overlay (dynamisch gerendert) ──────────────────────────────────────
 
 def _make_rating_overlay(score: Optional[int], verdict: str,
@@ -563,6 +668,7 @@ def render(
     srt_path = _build_srt_from_scenes(scenes, audio_path, srt_path)
 
     print("[3/5] Stock-Footage laden (Pexels → Chart-Szene → Gradient-Fallback)…")
+    ticker_kw = _ticker_footage_keywords(ticker)
     fallback_kw = cfg["stock_footage"]["fallback_keywords"]
 
     # Chart-PNG als Szene 2 (nach dem Hook) generieren
@@ -571,22 +677,33 @@ def render(
     if chart_ok:
         print(f"  [Chart] Kurschart + Kennzahlen ✓")
 
+    # CTA-Szene ans Ende anhängen
+    carousel_dir = Path(script_path).parent / "carousel" if script_path else None
+    cta_png = os.path.join(tmpdir, "cta_scene.png")
+    cta_ok = _generate_cta_scene(ticker, carousel_dir, cta_png, W, H)
+    if cta_ok:
+        scenes.append({"visual": "instagram profile swipe", "vo": ""})
+        print(f"  [CTA] Endszene mit Analyse-Slides ✓")
+
     video_paths = []
     for i, scene in enumerate(scenes):
         dest = os.path.join(tmpdir, f"scene_{i:02d}.mp4")
         ok = False
-        # Szene 2 (Index 1) → Chart-PNG als Video
+        # Szene 2 (Index 1) → Chart-PNG
         if i == 1 and chart_ok:
             _png_to_video(chart_png, dest, W, H, scene_sec)
             ok = True
+        # Letzte Szene → CTA-PNG
+        if not ok and cta_ok and i == len(scenes) - 1:
+            _png_to_video(cta_png, dest, W, H, scene_sec)
+            ok = True
         if not ok and api_key:
-            ok = _pexels_download(scene["visual"], dest, api_key,
-                                  min_dur=int(scene_sec))
+            # Sektor-spezifische Keywords für diese Szene
+            kw = ticker_kw[i % len(ticker_kw)] if ticker_kw else scene["visual"]
+            ok = _pexels_download(scene["visual"], dest, api_key, min_dur=int(scene_sec))
             if not ok:
-                ok = _pexels_download(fallback_kw[i % len(fallback_kw)],
-                                      dest, api_key, min_dur=int(scene_sec))
+                ok = _pexels_download(kw, dest, api_key, min_dur=int(scene_sec))
         if not ok:
-            # Animierter Gradient-Hintergrund (vollständig offline)
             _generate_bg_cinematic(i, dest, W, H, scene_sec)
             ok = True
         video_paths.append(dest if ok else None)
@@ -609,17 +726,40 @@ def render(
         final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
     video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
 
-    audio = AudioFileClip(audio_path).with_duration(video.duration)
-    video = video.with_audio(audio)
+    audio = AudioFileClip(audio_path)
+    # Video auf Audio-Dauer verlängern (letzten Frame einfrieren) statt Audio kürzen
+    if audio.duration > video.duration:
+        last = clips[-1]
+        extra = audio.duration - video.duration + 1.0  # +1s Puffer für CTA
+        clips[-1] = last.with_duration(last.duration + extra)
+        final_clips = [clips[0]]
+        for cl in clips[1:]:
+            final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
+        video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
+    video = video.with_audio(audio.with_duration(video.duration))
 
-    # Logo (oben rechts, dauerhaft)
+    # Logo — AI Alpha Selection Brand + Ticker-Firmenlogo (oben links)
+    overlays = [video]
     if LOGO_PATH.exists():
-        lw = _logo_width(LOGO_PATH, height=80)
+        lw = _logo_width(LOGO_PATH, height=60)
         logo = (ImageClip(str(LOGO_PATH))
-                .with_effects([vfx.Resize(height=80)])
+                .with_effects([vfx.Resize(height=60)])
                 .with_duration(video.duration)
-                .with_position((W - lw - 40, 40)))
-        video = CompositeVideoClip([video, logo])
+                .with_position((W - lw - 30, 30)))
+        overlays.append(logo)
+    ticker_logo_path = _ticker_logo(ticker)
+    if ticker_logo_path:
+        try:
+            tlw = _logo_width(ticker_logo_path, height=70)
+            tlogo = (ImageClip(str(ticker_logo_path))
+                     .with_effects([vfx.Resize(height=70)])
+                     .with_duration(video.duration)
+                     .with_position((30, 30)))
+            overlays.append(tlogo)
+        except Exception:
+            pass
+    if len(overlays) > 1:
+        video = CompositeVideoClip(overlays)
 
     # Rating-Overlay (Sek. 6–9)
     if video.duration >= rov_end and (score is not None or verdict):
