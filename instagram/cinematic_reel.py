@@ -98,19 +98,29 @@ def _run_tts(text: str, voice: str, dest: str) -> None:
 
 
 def _run_tts_espeak(text: str, dest: str) -> None:
-    """Offline-TTS via espeak-ng (deutsche Stimme, moderate Sprechgeschwindigkeit)."""
+    """Offline-TTS: MBROLA mb-de6 (natürlicher) → Fallback espeak-ng Standard."""
     wav_path = dest.replace(".mp3", ".wav")
-    cmd = ["espeak-ng", "-v", "de", "-s", "135", "-w", wav_path, text]
-    result = subprocess.run(cmd, capture_output=True)
+    # Versuche zuerst MBROLA mb-de6 (klingt deutlich natürlicher)
+    result = subprocess.run(
+        ["espeak-ng", "-v", "mb-de6", "-s", "130", "-w", wav_path, text],
+        capture_output=True,
+    )
     if result.returncode != 0:
-        raise RuntimeError(f"espeak-ng fehlgeschlagen: {result.stderr.decode()}")
-    # WAV → MP3 via ffmpeg
+        # Fallback auf Standard-espeak-ng
+        result = subprocess.run(
+            ["espeak-ng", "-v", "de", "-s", "130", "-w", wav_path, text],
+            capture_output=True,
+        )
+        if result.returncode != 0:
+            raise RuntimeError(f"espeak-ng fehlgeschlagen: {result.stderr.decode()}")
+        print("  [TTS] espeak-ng de ✓")
+    else:
+        print("  [TTS] espeak-ng mb-de6 (MBROLA) ✓")
     subprocess.run(
         ["ffmpeg", "-y", "-i", wav_path, "-codec:a", "libmp3lame", "-q:a", "4", dest],
         capture_output=True, check=True,
     )
     os.remove(wav_path)
-    print("  [TTS] espeak-ng ✓")
 
 
 # ── Whisper-Untertitel ─────────────────────────────────────────────────────────
@@ -222,18 +232,60 @@ def _build_srt_from_scenes(scenes: list[dict], audio_path: str,
     return srt_path
 
 
-# ── PNG → kurzes MP4 (Ken-Burns-Zoom via ffmpeg) ──────────────────────────────
+# ── Cinematische Prozedur-Hintergründe via ffmpeg geq-Filter ─────────────────
 
-def _png_to_video(png_path: str, dest: str, W: int, H: int, dur: float) -> None:
-    """Konvertiert ein PNG-Bild in ein kurzes MP4 mit leichtem Zoom-Effekt."""
-    zoom = "scale=8000:-1,zoompan=z='min(zoom+0.0015,1.5)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps=30".replace("{W}", str(W)).replace("{H}", str(H))
+# Jede Szene bekommt einen anderen animierten Dunkel-Gradienten
+_BG_PRESETS = [
+    # hook: dunkles Lila-Blau pulsierend
+    "r='15+8*sin(2*PI*T/7)':g='5+3*sin(2*PI*T/9+1)':b='45+25*sin(2*PI*T/5+2)'",
+    # daten: dunkles Cyan-Teal
+    "r='8+5*sin(2*PI*T/8+1)':g='25+15*sin(2*PI*T/6)':b='40+20*sin(2*PI*T/7+3)'",
+    # analyse: dunkles Gold-Orange
+    "r='40+20*sin(2*PI*T/6)':g='20+10*sin(2*PI*T/8+1)':b='5+3*sin(2*PI*T/10)'",
+    # fazit: dunkles Grün
+    "r='8+4*sin(2*PI*T/9)':g='35+18*sin(2*PI*T/7+2)':b='10+5*sin(2*PI*T/5+1)'",
+    # cta: dunkles Magenta
+    "r='38+18*sin(2*PI*T/6+1)':g='5+3*sin(2*PI*T/9)':b='40+20*sin(2*PI*T/7+2)'",
+    # extra: dunkles Blau-Silber
+    "r='12+6*sin(2*PI*T/8+2)':g='18+10*sin(2*PI*T/6+1)':b='50+22*sin(2*PI*T/5)'",
+    # extra2: dunkles Rot-Dunkel
+    "r='45+18*sin(2*PI*T/5)':g='8+4*sin(2*PI*T/8+2)':b='12+6*sin(2*PI*T/9+1)'",
+]
+
+
+def _generate_bg_cinematic(scene_idx: int, dest: str, W: int, H: int, dur: float) -> None:
+    """Erzeugt einen animierten Cinematic-Hintergrund via ffmpeg geq (vollständig offline)."""
+    preset = _BG_PRESETS[scene_idx % len(_BG_PRESETS)]
+    # Animierter Gradient + leichtes Grain für Film-Look
+    vf = (
+        f"nullsrc=size={W}x{H}:rate=30,geq={preset},"
+        f"noise=alls=12:allf=t+u,"
+        f"vignette=PI/4"
+    )
     cmd = [
         "ffmpeg", "-y",
-        "-loop", "1", "-i", png_path,
-        "-vf", zoom,
+        "-f", "lavfi", "-i", vf,
         "-t", str(dur),
-        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
         dest,
+    ]
+    result = subprocess.run(cmd, capture_output=True)
+    if result.returncode != 0:
+        # Fallback: einfarbiger dunkler Clip
+        subprocess.run([
+            "ffmpeg", "-y", "-f", "lavfi",
+            "-i", f"color=c=0x0d0e1a:size={W}x{H}:rate=30",
+            "-t", str(dur), "-c:v", "libx264", "-pix_fmt", "yuv420p", dest,
+        ], capture_output=True, check=True)
+
+
+def _png_to_video(png_path: str, dest: str, W: int, H: int, dur: float) -> None:
+    """Konvertiert ein PNG-Bild in ein kurzes MP4 mit leichtem Zoom-Effekt (Legacy-Fallback)."""
+    zoom = "scale=8000:-1,zoompan=z='min(zoom+0.0015,1.5)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps=30".replace("{W}", str(W)).replace("{H}", str(H))
+    cmd = [
+        "ffmpeg", "-y", "-loop", "1", "-i", png_path,
+        "-vf", zoom, "-t", str(dur),
+        "-c:v", "libx264", "-pix_fmt", "yuv420p", dest,
     ]
     subprocess.run(cmd, capture_output=True, check=True)
 
@@ -381,10 +433,9 @@ def render(
             if not ok:
                 ok = _pexels_download(fallback_kw[i % len(fallback_kw)],
                                       dest, api_key, min_dur=int(scene_sec))
-        if not ok and reel_pngs:
-            # Reel-PNG → kurzes MP4 via ffmpeg (Ken-Burns-Zoom)
-            png = str(reel_pngs[i % len(reel_pngs)])
-            _png_to_video(png, dest, W, H, scene_sec)
+        if not ok:
+            # Cinematic Prozedur-Hintergrund (animierter Gradient, vollständig offline)
+            _generate_bg_cinematic(i, dest, W, H, scene_sec)
             ok = True
         video_paths.append(dest if ok else None)
 
