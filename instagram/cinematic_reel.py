@@ -508,7 +508,7 @@ def _generate_cta_scene(ticker: str, carousel_dir: Optional[Path],
         fig.text(0.5, 0.94, "Komplette Analyse", color="#ffffff",
                  fontsize=22, fontweight="bold", ha="center",
                  transform=fig.transFigure)
-        fig.text(0.5, 0.89, "auf meinem Instagram-Profil 👆",
+        fig.text(0.5, 0.89, "auf meinem Instagram-Profil",
                  color="#00c896", fontsize=14, ha="center",
                  transform=fig.transFigure)
         fig.text(0.5, 0.84, f"AI Alpha Selection  ·  {ticker}",
