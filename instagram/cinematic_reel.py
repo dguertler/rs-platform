@@ -353,16 +353,24 @@ def _burn_subtitles(video_in: str, srt_path: str, video_out: str, cfg: dict) -> 
     ow = cfg["subtitles"]["outline_width"]
     style = (f"FontSize={fs},PrimaryColour=&H{fc},OutlineColour=&H{oc},"
              f"Outline={ow},Alignment=2,MarginV=200")
-    srt_escaped = srt_path.replace("\\", "/").replace(":", "\\:")
+    # SRT neben das Video kopieren → relativer Pfad vermeidet Windows-Laufwerksbuchstaben-Problem
+    srt_local = os.path.join(os.path.dirname(video_in), "subtitles_burn.srt")
+    shutil.copy2(srt_path, srt_local)
+    # ffmpeg aus dem Verzeichnis des Videos ausführen → nur Dateiname nötig
+    srt_name = os.path.basename(srt_local).replace(":", "\\:")
     cmd = [
         "ffmpeg", "-y", "-i", video_in,
-        "-vf", f"subtitles={srt_escaped}:force_style='{style}'",
+        "-vf", f"subtitles={srt_name}:force_style='{style}'",
         "-c:a", "copy", video_out,
     ]
-    result = subprocess.run(cmd, capture_output=True)
+    result = subprocess.run(cmd, capture_output=True, cwd=os.path.dirname(video_in))
     if result.returncode != 0:
         shutil.copy2(video_in, video_out)
         print("  [Untertitel] ffmpeg-Fehler, Video ohne Untertitel gespeichert.")
+    try:
+        os.remove(srt_local)
+    except OSError:
+        pass
 
 
 # ── Haupt-Rendering ────────────────────────────────────────────────────────────
