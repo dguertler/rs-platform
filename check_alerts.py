@@ -106,8 +106,9 @@ def _find_swing_points(highs, lows, n, window=2):
     return swing_highs, swing_lows
 
 
-def _gws_core(swing_highs, swing_lows, closes, n):
-    """Kernlogik: tiefere Tiefs erkennen → GWS = höchstes Hoch dazwischen."""
+def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
+    """Kernlogik: tiefere Tiefs erkennen → GWS = höchstes Hoch dazwischen.
+    min_margin: Close muss mindestens diesen Bruchteil über GWS liegen (Standard 0.1%)."""
     candidates = []
     for j in range(1, len(swing_lows)):
         tief_neu = swing_lows[j]
@@ -123,8 +124,9 @@ def _gws_core(swing_highs, swing_lows, closes, n):
 
     breakout_idx = None
     if gws_high:
+        threshold = gws_high['price'] * (1 + min_margin)
         for i in range(gws_high['idx'] + 1, n):
-            if closes[i] > gws_high['price']:
+            if closes[i] > threshold:
                 breakout_idx = i
                 break
 
