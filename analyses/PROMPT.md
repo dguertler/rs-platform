@@ -143,6 +143,32 @@ Direkt nach der GWS-Ampel-Zeile, vor der `---`-Trennlinie, muss diese Zeile steh
 
 Die Werte stammen aus Abschnitten 3–5. Diese Zeile ist Pflicht — sie gibt dem Leser sofort die Kursziel-Bandbreiten im Überblick.
 
+## HIDDEN CHAMPION BEGRÜNDUNG (PFLICHT bei Profil-2-Kandidaten)
+
+Wenn der Ticker durch Alpha-Screening Profil 2 als **Hidden Champion** identifiziert wurde
+(erkennbar daran, dass der Nutzer „Analysiere TICKER" für einen Profil-2-Kandidaten aufruft
+oder das Screening diesen explizit als Hidden Champion kennzeichnet), MUSS unmittelbar
+nach der Szenarien-Zeile, vor `## 1. INVESTMENT-CASE`, folgende Pflichtzeile stehen:
+
+```
+**Hidden Champion Kriterien:** ROIC X% · D/E X,X · nur X Analysten · FCF +$XM · RevWachstum +X% · RS X
+```
+
+Regeln:
+- Alle Werte mit tatsächlichen Zahlen aus den Fundamentaldaten füllen (keine Platzhalter)
+- Falls ROIC nicht verfügbar: ROE als Ersatzwert mit Kennzeichnung „ROE" statt „ROIC"
+- FCF in Mio. (M) oder Mrd. (B), immer mit Vorzeichen (+/-)
+- RevWachstum in %, auf ganze Zahl gerundet
+- RS-Score aus dem passenden RS-JSON (Ganzzahl)
+- Diese Zeile ist die **maschinell lesbare Begründung**, die auch im Frontend (alpha.html)
+  als grüner Badge angezeigt wird — Format daher exakt einhalten
+
+Zusätzlich muss in `## 1. INVESTMENT-CASE` explizit erklärt werden,
+**warum das Unternehmen ein Hidden Champion ist** — d.h. welche Kombination aus
+geringer Analystencoverage, strukturellem Burggraben, Kapitaleffizienz und Marktnische
+diesen Status begründet. Diese Erklärung gehört in den laufenden Text von Abschnitt 1,
+nicht in eine separate Liste.
+
 ---
 
 ## ZOMBIE-STOCK-FILTER (PFLICHT vor jeder Analyse)

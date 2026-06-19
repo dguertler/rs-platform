@@ -95,6 +95,33 @@ def gws_min_yellow(state: dict | None) -> bool:
     return bool(state.get("daily") and state.get("weekly"))
 
 
+def build_hc_reason(f: dict, roic_or_roe: float, de_ratio: float,
+                    fcf: float, rev_growth: float, analyst_n, score: float) -> str:
+    """Einzeiliger Text: warum dieser Ticker als Hidden Champion gilt."""
+    parts = []
+    roic = f.get("returnOnInvestedCapital")
+    roe  = f.get("returnOnEquity")
+    if roic is not None:
+        parts.append(f"ROIC {roic * 100:.0f}%")
+    elif roe is not None:
+        parts.append(f"ROE {roe * 100:.0f}%")
+    if de_ratio is not None:
+        parts.append(f"D/E {de_ratio:.1f}")
+    if analyst_n is not None:
+        parts.append(f"nur {int(analyst_n)} Analysten")
+    else:
+        parts.append("keine Coverage")
+    if fcf is not None:
+        if abs(fcf) >= 1e9:
+            parts.append(f"FCF +${fcf / 1e9:.1f}B")
+        else:
+            parts.append(f"FCF +${fcf / 1e6:.0f}M")
+    if rev_growth is not None:
+        parts.append(f"RevWachstum +{rev_growth * 100:.0f}%")
+    parts.append(f"RS {round(score)}")
+    return " · ".join(parts)
+
+
 def gws_state_for_item(ticker: str, gws: dict) -> dict | None:
     state = gws.get(ticker)
     if not state:
@@ -325,7 +352,7 @@ def screen_profile1(fund: dict, rs_entries: list[dict], gws: dict) -> list[dict]
             },
         })
 
-    results.sort(key=lambda x: x["rs_score"], reverse=True)
+    results.sort(key=lambda x: x["score"], reverse=True)
     return results[:PROFILE1_MAX_RESULTS]
 
 # ── Profil 2: Hidden Champions ─────────────────────────────────────────────────
@@ -369,18 +396,20 @@ def screen_profile2(fund: dict, rs_entries: list[dict], gws: dict,
         if forward_pe and sector in sector_pe_median:
             pe_below_median = forward_pe < sector_pe_median[sector] * 1.1
 
+        reason = build_hc_reason(f, quality, de_ratio, fcf, rev_growth, analyst_n, score)
         results.append({
-            "ticker":          ticker,
-            "score":           round(score, 1),
-            "gws":             gws_state_for_item(ticker, gws),
-            "source":          source,
-            "pe_below_median": pe_below_median,
-            "sector_pe_med":   round(sector_pe_median.get(sector, 0), 1),
+            "ticker":                   ticker,
+            "score":                    round(score, 1),
+            "gws":                      gws_state_for_item(ticker, gws),
+            "source":                   source,
+            "pe_below_median":          pe_below_median,
+            "sector_pe_med":            round(sector_pe_median.get(sector, 0), 1),
+            "hidden_champion_reason":   reason,
             "fundamentals": {
                 "shortName":               f.get("shortName", ticker),
                 "sector":                  sector,
-                "industry":                f.get("industry", "N/A"),
-                "marketCap":               _float(f.get("marketCap")),
+                "industry":               f.get("industry", "N/A"),
+                "marketCap":              _float(f.get("marketCap")),
                 "returnOnInvestedCapital": roic if roic is not None else roe,
                 "returnOnEquity":          roe,
                 "debtToEquity":            de_ratio,
@@ -392,7 +421,7 @@ def screen_profile2(fund: dict, rs_entries: list[dict], gws: dict,
             },
         })
 
-    results.sort(key=lambda x: x["roic"], reverse=True)
+    results.sort(key=lambda x: (x["fundamentals"].get("returnOnInvestedCapital") or 0), reverse=True)
     return results[:PROFILE2_MAX_RESULTS]
 
 # ── E-Mail-Benachrichtigung ───────────────────────────────────────────────────

@@ -18,9 +18,11 @@
 
 **Szenarien (12–18 Monate):** Bull $340–$390 (20 %) · Base $270–$320 (50 %) · Bear $125–$165 (30 %) · EV ~$268
 
+**Hidden Champion Kriterien:** ROIC 88% · D/E 0,3 · nur 4 Analysten · FCF +$142M · RevWachstum +7% · RS 181
+
 ## 1. INVESTMENT-CASE
 
-Powell Industries ist ein industrieller Nischenhersteller, den nahezu niemand kennt — vier Analysten decken einen $10,8-Mrd.-Titel. Das ist keine Lücke im Markt, sondern Absicht: POWL baut kundenspezifische Mittelspannungsschaltanlagen und Motorsteuerungssysteme für kritische Infrastruktur — Öl & Gas, Petrochemie, Rechenzentren, Versorgungsunternehmen. Switching Costs sind real: Ein Qualifikationsprozess für einen Neuzulieferer dauert 12–24 Monate. Der strukturelle Kern jetzt: Der KI-Rechenzentrum-Boom erhöht den Strombedarf massiv und damit die Nachfrage nach exakt dem Infrastrukturmaterial, das POWL liefert. Die Aktie hat sich in 12 Monaten verfünffacht und notiert bei 43x Forward PE — der Markt hat die Story entdeckt, aber die Bewertung vergibt kaum noch Puffer für Enttäuschungen. ROIC von 88% (yfinance-Datensatz — Kalkulationsmethodik sollte vor Positionsentscheidung verifiziert werden) bei D/E 0,28 und $142 Mio. FCF legt einen tiefen wirtschaftlichen Burggraben nahe.
+Powell Industries ist ein industrieller Nischenhersteller, den nahezu niemand kennt — vier Analysten decken einen $10,8-Mrd.-Titel. Das ist keine Lücke im Markt, sondern Struktur: POWL baut kundenspezifische Mittelspannungsschaltanlagen und Motorsteuerungssysteme für kritische Infrastruktur — Öl & Gas, Petrochemie, Rechenzentren, Versorgungsunternehmen. Genau das macht das Unternehmen zum Hidden Champion: geringe öffentliche Sichtbarkeit trotz außerordentlicher Kapitalrendite (ROIC 88%), schuldenfreier Bilanz (D/E 0,3) und positivem FCF — die klassische Kombination aus Qualitätsunternehmen und Marktlücke im Investorenradar. Switching Costs sind real: Ein Qualifikationsprozess für einen Neuzulieferer dauert 12–24 Monate. Der strukturelle Kern jetzt: Der KI-Rechenzentrum-Boom erhöht den Strombedarf massiv und damit die Nachfrage nach exakt dem Infrastrukturmaterial, das POWL liefert. Die Aktie hat sich in 12 Monaten verfünffacht und notiert bei 43x Forward PE — der Markt hat die Story entdeckt, aber die Bewertung vergibt kaum noch Puffer für Enttäuschungen.
 
 ## 2. GESCHÄFTSMODELL
 

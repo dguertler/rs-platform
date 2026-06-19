@@ -215,6 +215,12 @@ function HiddenChampionCard({ item }) {
           <GwsBadge gws={item.gws}/>
         </div>
       </div>
+      {item.hidden_champion_reason && (
+        <div style={{marginTop:8, padding:"5px 10px", background:"#071a07", borderRadius:5, border:"1px solid #14532d"}}>
+          <span style={{fontSize:10, color:"#4ade80", fontFamily:"monospace", fontWeight:700}}>💎 </span>
+          <span style={{fontSize:10, color:"#86efac", fontFamily:"monospace"}}>{item.hidden_champion_reason}</span>
+        </div>
+      )}
       <div className="kv">
         <span>Sektor:</span><b>{meta.sector || "–"}</b>
         <span>ROIC:</span><b style={{color: parseFloat(meta.returnOnInvestedCapital) > 0.12 ? "#4ade80" : "#94a3b8"}}>
