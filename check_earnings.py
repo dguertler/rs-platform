@@ -449,9 +449,10 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
 # ── Hauptprogramm ─────────────────────────────────────────────────────────────
 
 SOURCES = [
-    ('rs_full.json',  'QQQ'),
-    ('rs_dax.json',   'DAX'),
-    ('rs_sp500.json', 'SPX'),
+    ('rs_full.json',     'QQQ'),
+    ('rs_dax.json',      'DAX'),
+    ('rs_sp500.json',    'SPX'),
+    ('rs_smallcap.json', 'SC600'),
 ]
 
 

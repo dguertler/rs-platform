@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RS · DAX Dashboard</title>
+  <title>RS · S&P 600 SmallCap Dashboard</title>
   <script src="/api.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
@@ -42,9 +42,9 @@
 
 <div class="nav-bar">
   <a href="index.html" class="nav-switch">Nasdaq</a>
-  <a href="dax.html" class="nav-switch active">DAX</a>
+  <a href="dax.html" class="nav-switch">DAX</a>
   <a href="sp500.html" class="nav-switch">S&amp;P500</a>
-  <a href="smallcap.html" class="nav-switch">SC600</a>
+  <a href="smallcap.html" class="nav-switch active">SC600</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
   <a href="alpha.html" class="nav-switch" style="border-color:#f59e0b;color:#fbbf24;">ALPHA</a>
@@ -109,8 +109,6 @@
 </script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
-
-const displayTicker = t => t && t.endsWith('.DE') ? t.slice(0, -3) : (t ?? '');
 
 // ── GWS-D Analyse (korrekte Down-Retracement Logik) ──────────────────────────
 //
@@ -525,10 +523,8 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
         })}
 
         {/* Signal-Pfeile (Weekly-Chart: alle Timeframes) */}
-        {signals.map((sig, si) => {
-          const td = sig.weekly_bar_date?.slice(0,10);
-          if (!td) return null;
-          const idx = ohlcvW.findIndex(d => d.d.slice(0,10) === td);
+        {signals.filter(s => s.weekly_bar_date).map((sig, si) => {
+          const idx = ohlcvW.findIndex(d => d.d.slice(0,10) === sig.weekly_bar_date.slice(0,10));
           if (idx < 0) return null;
           const x = toX(idx);
           const yTip = Math.min(toY(ohlcvW[idx].l) + 4, PT + cH - 28);
@@ -743,11 +739,9 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </g>;
         })}
 
-        {/* Signal-Pfeile (Daily-Chart: Daily + 4H) */}
+        {/* Signal-Pfeile (Daily-Chart: alle Signale mit daily_bar_date) */}
         {signals.filter(s => s.daily_bar_date).map((sig, si) => {
-          const td = sig.daily_bar_date?.slice(0,10);
-          if (!td) return null;
-          const idx = ohlcv.findIndex(d => d.d.slice(0,10) === td);
+          const idx = ohlcv.findIndex(d => d.d.slice(0,10) === sig.daily_bar_date.slice(0,10));
           if (idx < 0) return null;
           const x = toX(idx);
           const yTip = Math.min(toY(ohlcv[idx].l) + 4, PT + cH - 28);
@@ -790,7 +784,7 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
             <span style={{fontSize:9,color:"#64748b"}}>{benchLabel}</span>
           </div>
         )}
-        {signals.filter(s => s.daily_bar_date).length > 0 && (
+        {signals.filter(s => s.trigger_tf === 'daily' || s.trigger_tf === '4h').length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
             <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
@@ -948,15 +942,14 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
           </g>;
         })}
 
-        {/* Signal-Pfeile (4H-Chart: nur 4H) */}
+        {/* Signal-Pfeile (4H-Chart: alle Signale mit h4_bar_date) */}
         {signals.filter(s => s.h4_bar_date).map((sig, si) => {
-          if (!sig.h4_bar_date) return null;
           const idx = display4h.findIndex(d => d.d.slice(0,16) === sig.h4_bar_date.slice(0,16));
           if (idx < 0) return null;
           const x = toX(idx);
           const yTip = Math.min(toY(display4h[idx].l) + 4, PT + cH - 20);
           return <g key={si}>
-            <rect x={x-6} y={yTip-2} width={12} height={20} rx={2} fill="#eab308" opacity={0.2}/>
+            <rect x={x-6} y={yTip-2} width={12} height={22} rx={2} fill="#eab308" opacity={0.2}/>
             <polygon points={`${x-4},${yTip+8} ${x+4},${yTip+8} ${x},${yTip}`} fill="#eab308" opacity="0.95"/>
             <line x1={x} x2={x} y1={yTip+8} y2={yTip+18} stroke="#eab308" strokeWidth="1.5" opacity="0.95"/>
           </g>;
@@ -984,7 +977,7 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.1" strokeDasharray="4,4" opacity="0.3"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
-        {signals.filter(s => s.h4_bar_date).length > 0 && (
+        {signals.filter(s => s.trigger_tf === '4h').length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
             <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
@@ -1023,7 +1016,7 @@ async function fetchYFChart(ticker, interval, range) {
 
   // Versuch 2: Stooq.com CSV (CORS-freundlich)
   try {
-    const stooqSym = ticker === "^GDAXI" ? "%5EGDAXI" : encodeURIComponent(ticker);
+    const stooqSym = ticker === "SPY" ? "SPY.US" : encodeURIComponent(ticker);
     const si = interval === "1wk" ? "w" : "d";
     const url2 = `https://stooq.com/q/d/l/?s=${stooqSym}&i=${si}`;
     const r2 = await fetch(url2);
@@ -1036,6 +1029,7 @@ async function fetchYFChart(ticker, interval, range) {
         if (!c || c === 'null' || isNaN(+c)) continue;
         result.push({ d, o:+o, h:+h, l:+l, c:+c });
       }
+      // Stooq gibt neueste zuerst – umdrehen für chronologische Reihenfolge
       result.reverse();
       if (result.length > 0) return result;
     }
@@ -1136,24 +1130,24 @@ function App() {
     }
   }, []);
 
-  // Live-Fetch Benchmark OHLCV (^GDAXI) von Yahoo Finance als Fallback
+  // Live-Fetch Benchmark OHLCV (QQQ) von Yahoo Finance als Fallback
   useEffect(() => {
     Promise.all([
-      fetchYFChart("^GDAXI", "1wk", "60wk"),
-      fetchYFChart("^GDAXI", "1d",  "3mo"),
+      fetchYFChart("^SP600", "1wk", "60wk"),
+      fetchYFChart("^SP600", "1d",  "3mo"),
     ]).then(([w, d]) => {
       if (w.length > 0 || d.length > 0) setLiveBench({ w, d });
     });
   }, []);
 
   useEffect(() => {
-    apiFetch("/api/rs/dax")
+    apiFetch("/api/rs/smallcap")
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(json => {
         const arr = Array.isArray(json) ? json : json.data;
         const normalized = {
           timestamp: Array.isArray(json) ? "–" : (json.timestamp || "–"),
-          benchmark: "DAX",
+          benchmark: "SC600",
           top20: arr.slice(0, 20).map(d => d.ticker),
           data: arr,
           benchmark_ohlcv_w: Array.isArray(json) ? [] : (json.benchmark_ohlcv_w || []),
@@ -1200,23 +1194,10 @@ function App() {
       .catch(() => { setRatingsLoaded(true); });
   }, []);
 
-  // Lazy-load OHLCV für ausgewählten Ticker
-  useEffect(() => {
-    if (!selected || ohlcvCache[selected]) return;
-    const entry = data?.data.find(d => d.ticker === selected);
-    if (!entry?.has_ohlcv) return;
-    setOhlcvLoading(true);
-    apiFetch(`/api/rs/dax/${selected}`)
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setOhlcvCache(prev => ({ ...prev, [selected]: d })); })
-      .catch(() => {})
-      .finally(() => setOhlcvLoading(false));
-  }, [selected, data]);
-
   useEffect(() => {
     if (!ratingModal) { setRatingHtml(''); return; }
-    const r = ratings[ratingModal.toUpperCase()] || ratings[ratingModal.replace(/\.[^.]+$/, '').toUpperCase()];
-    const ticker = r ? r.ticker.toLowerCase() : ratingModal.replace(/\.[^.]+$/, '').toLowerCase();
+    const r = ratings[ratingModal.toUpperCase()];
+    const ticker = r ? r.ticker.toLowerCase() : ratingModal.toLowerCase();
     setRatingHtml('');
     apiFetch(`/api/ratings/${ticker}/html`)
       .then(res => res.ok ? res.text() : null)
@@ -1224,6 +1205,18 @@ function App() {
       .catch(() => setRatingHtml('<p style="color:#f87171;padding:24px;font-family:monospace">Fehler beim Laden.</p>'));
   }, [ratingModal]);
 
+  // Lazy-load OHLCV für ausgewählten Ticker
+  useEffect(() => {
+    if (!selected || ohlcvCache[selected]) return;
+    const entry = data?.data.find(d => d.ticker === selected);
+    if (!entry?.has_ohlcv) return;
+    setOhlcvLoading(true);
+    apiFetch(`/api/rs/smallcap/${selected}`)
+      .then(r => r.ok ? r.json() : null)
+      .then(d => { if (d) setOhlcvCache(prev => ({ ...prev, [selected]: d })); })
+      .catch(() => {})
+      .finally(() => setOhlcvLoading(false));
+  }, [selected, data]);
   const rsData = useMemo(() => {
     if (!data) return [];
     return data.data.map(d => ({ t: d.ticker, s: d.score, w: d.windows, pr: d.prev_rank ?? null }));
@@ -1303,13 +1296,13 @@ function App() {
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#060b14",color:"#f87171",fontFamily:"monospace",flexDirection:"column",gap:8}}>
       <span style={{fontSize:18}}>⚠ Fehler beim Laden</span>
       <span style={{fontSize:12,color:"#475569"}}>{error}</span>
-      <span style={{fontSize:11,color:"#334155"}}>Stelle sicher, dass rs_dax.json im selben Verzeichnis liegt.</span>
+      <span style={{fontSize:11,color:"#334155"}}>Stelle sicher, dass rs_smallcap.json im selben Verzeichnis liegt.</span>
     </div>
   );
   if (!data) return (
     <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",background:"#060b14",color:"#475569",fontFamily:"monospace",flexDirection:"column",gap:8}}>
       <span style={{fontSize:24}}>⟳</span>
-      <span style={{fontSize:12}}>Lade rs_dax.json …</span>
+      <span style={{fontSize:12}}>Lade rs_smallcap.json …</span>
     </div>
   );
 
@@ -1400,7 +1393,7 @@ function App() {
                   {isNew
                     ? <span className={showFlame?"flame-anim":""} style={{fontSize:8,fontWeight:700,color:"#fbbf24",background:"#422006",borderRadius:3,padding:"1px 3px",lineHeight:1.4,letterSpacing:0.5}}>NEU</span>
                     : showFlame && <span className="flame-anim" style={{fontSize:11}}>🔥</span>}
-                  {displayTicker(item.t)}
+                  {item.t}
                   {hasChart && <span style={{fontSize:8,color:"#334155",marginLeft:2}}>▸</span>}
                 </span>
                 <span style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
@@ -1495,7 +1488,7 @@ function App() {
       {/* Strukturanalyse */}
       <div style={{background:"#0f172a",borderRadius:10,border:"1px solid #1e293b",padding:14,marginBottom:12}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-          <p style={{margin:0,fontSize:15,fontWeight:800,color:"#f1f5f9",fontFamily:"monospace"}}>{selected ? displayTicker(selected) : "–"}</p>
+          <p style={{margin:0,fontSize:15,fontWeight:800,color:"#f1f5f9",fontFamily:"monospace"}}>{selected ?? "–"}</p>
           {selectedRs && (
             <span style={{fontSize:11,fontFamily:"monospace",color:selectedRs.s>0?"#4ade80":"#f87171"}}>
               RS Score: {selectedRs.s>0?"+":""}{Math.round(selectedRs.s)}
@@ -1554,7 +1547,7 @@ function App() {
               style={{width:"100%",maxWidth:980,background:"#060b14",borderRadius:10,border:"1px solid #1e2d45",overflow:"hidden",display:"flex",flexDirection:"column",marginTop:8}}>
               <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",padding:"10px 16px",borderBottom:"1px solid #1e2d45",background:"#0d1526"}}>
                 <div style={{display:"flex",alignItems:"center",gap:10}}>
-                  <span style={{fontSize:13,fontWeight:700,color:"#94a3b8",fontFamily:"monospace"}}>Aktienbewertung · {r ? displayTicker(ratingModal) : ratingModal}</span>
+                  <span style={{fontSize:13,fontWeight:700,color:"#94a3b8",fontFamily:"monospace"}}>Aktienbewertung · {ratingModal}</span>
                   {r && <span style={{fontSize:11,padding:"2px 8px",borderRadius:4,background: r.verdict==="BUY"?"#1a3a0a":r.verdict==="HOLD"?"#2a1f05":"#3a0a0a",color: r.verdict==="BUY"?"#86c429":r.verdict==="HOLD"?"#f59e0b":"#f87171",border:`1px solid ${r.verdict==="BUY"?"#639922":r.verdict==="HOLD"?"#b45309":"#A32D2D"}`}}>{r.verdict} · Score {r.score}</span>}
                   {r?.created_at && <span style={{fontSize:10,color:"#475569"}}>Erstellt: {new Date(r.created_at).toLocaleDateString('de-DE')}</span>}
                 </div>

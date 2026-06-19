@@ -227,6 +227,58 @@ def fetch_sp500(fallback: list) -> tuple[list | None, list]:
     return primary, official
 
 
+def fetch_sp600(fallback: list) -> tuple[list, list]:
+    """S&P 600 SmallCap: FMP → Wikipedia → Fallback.
+    Gibt (all_tickers, official_tickers) zurück.
+    """
+    print("Lade S&P 600 SmallCap Ticker-Liste …")
+
+    primary = None
+
+    # 1) FMP
+    raw = _fmp_fetch("sp600_constituent")
+    if raw and len(raw) >= 550:
+        primary = sorted(set(t.replace(".", "-") for t in raw))
+
+    # 2) Wikipedia
+    if primary is None:
+        try:
+            import pandas as pd
+            tables = pd.read_html(
+                "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies"
+            )
+            for t in tables:
+                for col in t.columns:
+                    if str(col).lower() in ("ticker", "symbol"):
+                        ts = (t[col].dropna().astype(str).str.strip()
+                              .str.replace(".", "-", regex=False).tolist())
+                        ts = sorted([x for x in ts if x and len(x) <= 6])
+                        if len(ts) >= 550:
+                            print(f"  Wikipedia: {len(ts)} Ticker geladen")
+                            primary = ts
+                            break
+                if primary:
+                    break
+            if primary is None:
+                print("  Wikipedia: Keine passende Tabelle gefunden")
+        except Exception as e:
+            print(f"  Wikipedia: Fehler – {e}")
+
+    if primary is None:
+        print(f"  Fallback: {len(fallback)} Ticker")
+        return list(fallback), []
+
+    official = list(primary)
+
+    primary_set = set(primary)
+    extra = [t for t in fallback if t not in primary_set]
+    if extra:
+        print(f"  +{len(extra)} Fallback-Ticker ergänzt: {', '.join(extra)}")
+        primary = sorted(set(primary) | set(extra))
+
+    return primary, official
+
+
 def fetch_dax40(fallback: list) -> tuple[list, list]:
     """DAX 40: Wikipedia → Fallback  (FMP hat kein DAX-Endpoint).
     Gibt (all_tickers, official_tickers) zurück.
