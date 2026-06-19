@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>KLIC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>KLIC</h1>
+      <h2>Kulicke and Soffa Industries, I</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductor Equipment & Materials</span></div>
+        <div class="mi">MCap: <span>$6B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">64</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$121.87</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">28.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">53.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">70.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+127.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$160–$185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$85–$105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$550–$575</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Kulicke & Soffa ist der globale Marktführer für Wire-Bonding-Equipment — und positioniert sich zunehmend als Advanced-Packaging-Player für die AI-getriebene Semiconductor-Packaging-Revolution. Der strukturelle Kern: Wire Bonding bleibt unverzichtbar für Mainstream-Chips (Automotive, IoT, Consumer), während KLIC mit seiner APAMA-Plattform (Advanced Packaging) und Thermocompression-Bonder-Technologie in den wachsenden Markt für Flip-Chip- und 3D-Packaging vordringt — exakt der Bereich, der durch HBM-Memory und CoWoS-Packaging für AI-GPUs explodiert. Revenue $768 Mio. mit +49,8% Wachstum YoY ist eindrucksvoll, aber Beta 1,69 und PE 117x reflektieren, dass der Markt bereits viel einpreist. 3 Analysten mit Konsensziel $100 — 18% unter aktuellem Kurs — mahnen zur Vorsicht. FCF $17,7 Mio. bei $768 Mio. Revenue (2,3% FCF-Marge) ist für eine Wachstumsphase vertretbar, aber dünn.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Wire-Bonding-Equipment: Marktführerschaft mit Ball-Bonder und Wedge-Bonder für Standard-Packaging — reife, defensivere Einnahmequelle</li>
+<li>Advanced Packaging (APAMA): Thermocompression-Bonder und Flip-Chip-Equipment für High-Density-Interconnect — Wachstumssegment mit Exposure zu HBM, CoWoS, SoIC</li>
+<li>Aftermarket und Verbrauchsmaterialien: wiederkehrende Revenue-Komponente (Capillaries, Wedges)</li>
+<li>Gross Margin 53,6% — stark für Equipment, Hinweis auf proprietäres IP und Marktmacht im Wire-Bonding-Segment</li>
+<li>Operating Margin 15,9%: positiv und expanding bei Revenue-Skalierung</li>
+<li>FCF $17,7 Mio. bei $768 Mio. Revenue — ungewöhnlich niedrig; Working-Capital-Aufbau oder hohe CapEx wahrscheinlich (auf Datenbasis nicht abschließend auflösbar)</li>
+<li>Debt/Equity 4,64 — praktisch schuldenfrei; saubere Bilanz für M&A oder Buybacks</li>
+<li>ROE 6,4% — noch moderat; steigt bei Revenue-Normalisierung und Margensteigerung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Advanced Packaging strukturell im Multijahres-Boom: AI-GPU-Stückzahlen steigen, CoWoS-Kapazitäten werden verdoppelt (TSMC), HBM-Nachfrage wächst 40%+ p.a. KLIC gewinnt Marktanteile im Advanced-Packaging-Segment. Revenue $1,2 Mrd. in 12–18 Monaten; Gross Margin hält 54–56%; Operating Margin auf 20–22%. EPS-Annahme ~$8 (kein Konsens) × 22x Forward = $175. Bull $160–185. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: Wire-Bonding-IP über jahrzehntealte Kundenbindung und Prozesskalibrierung; Advanced-Packaging-Plattform als First-Mover in Thermocompression-Nische — strukturelle Differenzierung nachweisbar.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Revenue-Wachstum verlangsamt auf 10–20%; Advanced-Packaging-Zyklus setzt sich fort, aber Wire-Bonding normalisiert. Operating Margin hält 12–16%. EPS-Annahme ~$5 (kein Konsens) × 18–20x Forward = $90–100. Analyst-Konsens $100 als Orientierungspunkt — das Base Case impliziert Korrektur vom aktuellen Kurs. Kursziel Base: $85–105. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: AI-CapEx-Pause (Hyperscaler-Budgetkürzungen), gleichzeitig Wire-Bonding-Zyklus dreht bei Automotive/Consumer-Schwäche. Revenue −25–30% auf $550–575 Mio.; Operating Margin kollabiert auf 3–5%; FCF marginal. KLIC hat historisch 2022/23 über 70% vom Hoch verloren — Zyklizität ist real. Bear $40–60 (Annahme: 1,2–1,5x Buchwert als Zyklus-Boden, Buchwert nicht direkt verfügbar — Annahme basierend auf historischen Zyklus-Böden). Eintrittswahrscheinlichkeit: 40%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Wahrscheinlich hoch (TSMC, Samsung, Intel als Schlüsselkunden) — Auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/China: Sehr relevant — Wire-Bonding-Equipment für China-OSATs betroffen von US-Exportkontrollen; China-Revenue-Anteil erheblich (Hypothese, nicht datenbasiert)</li>
+<li>Lieferkette/Foundry: Komponentenabhängigkeiten für Präzisionsmechanik und Optik; auf Datenbasis nicht abschließend beurteilbar</li>
+<li>Verwässerung: Niedrig — D/E 4,64, konservative Bilanz; SBC-Level nicht im Datensatz</li>
+<li>Regulierung: BIS-Exportkontrollen als materielles Risiko für China-Geschäft</li>
+</ul>
+<p>**Summe: 20% + 40% + 40% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $172,50 + 0,40 × $95,00 + 0,40 × $50,00 = $34,50 + $38,00 + $20,00 = **$92,50** — implizites Downside vs. aktuellem Kurs $121,87: **−24%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 53,6% — hervorragend für Equipment; Wire-Bonding-IP und Marktmacht real. Operating Margin 15,9%: positiv und ausbaufähig. FCF $17,7 Mio. ungewöhnlich niedrig vs. Revenue — Working-Capital-Anomalie oder Capex-Zyklus wahrscheinlich (Anomalie: FCF-Marge 2,3% vs. Operating Margin 15,9% — auf Datenbasis nicht abschließend auflösbar; anomalie-verzerrter FCF nicht als primäre Bewertungsbasis verwendbar). Debt/Equity 4,64: nahezu schuldenfrei — saubere Bilanz. ROE 6,4% noch moderat. Wirtschaftlicher Burggraben: real — Wire-Bonding-Marktführerschaft mit hohen Switching Costs durch Prozessintegration und Werkzeug-Kalibrierung.</p>
+<h3>7. BEWERTUNG</h3>
+<p>PE 117x auf TTM-Basis — vorübergehend, nicht strukturell aussagekräftig. Forward PE 28,8x reflektiert Markterwartung deutlich höherer EPS. Normalisierter FCF auf Basis Operating Margin 15,9% × $768 Mio. Revenue = $122 Mio. Operating Income → angenommene 70% FCF-Konversion = $85 Mio. normalized FCF × 20x = $1,7 Mrd. → ~$32/Aktie (Annahme ~52 Mio. Aktien). Market Cap $6,38 Mrd. / $85 Mio. normalized FCF = 75x — signifikant überbewertet auf normalisierter Basis. Rückrechnung: Was preist $121,87 ein? Revenue $1,1–1,2 Mrd. × 18% Operating Margin × 25x PE — das ist ein aggressives Wachstumsszenario, das mindestens den Bull Case erfordert. Analyst-Konsensziel $100 als Orientierungspunkt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Near 52w-Hoch ($125,14) nach 4x-Move von $31,32. Hypothese, nicht datenbasiert: Momentum-Long-Only-Fonds in Advanced-Packaging-Thema aktiv positioniert; AI-CapEx-Narrativ als Treiber. Short Float nicht im Datensatz. Enttäuschungsrisiko: hoch — Aktie handelt 22% über Analyst-Konsens; jede Guidance-Enttäuschung bei Earnings trifft auf erhöhte Positionierung.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $121,87 — 2,6% unter 52w-Hoch $125,14. RS-Fenster: 5T +5,12%, 10T +7,8%, 20T +11,4%, 50T +52,55%, 6M +136,32% — Momentum über mittlere Zeitrahmen positiv, kurzfristig verlangsamt. GWS-Signal nicht verfügbar (Smallcap-Universum). Momentum fundamental durch Advanced-Packaging-Nachfrage gestützt, aber Kurzzeit-Impuls (5T/10T) schwächer. Technische Warnsignale: Unterschreiten $105 signalisiert potenzielle Trendwende; $95–100 als Analyst-Konsens-Support.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($200–300):** Advanced Packaging wird struktureller Wachstumsmarkt für KLIC; Wire-Bonding stabil; M&A-Target für AMAT, LRCX oder strategische Asien-Player. Entscheidende Variable: APAMA-Marktanteilsgewinne bei 2,5D/3D-Packaging.</p>
+<p>**Base Case ($70–110):** Normalisierter Zyklus; Wire-Bonding unter Druck, Advanced Packaging wächst. Bewertungskompression auf 15–18x normalisiertes EPS.</p>
+<p>**Bear Case ($20–40):** Wire-Bonding-Zyklus kollabiert, Advanced Packaging wächst nicht schnell genug. Historisches Zyklus-Tief bei P/BV-Böden.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Kulicke & Soffa ist ein hochwertiges Semiconductor-Equipment-Unternehmen mit realem Burggraben — aber die Bewertung bei $121 reflektiert den besten Fall, nicht den wahrscheinlichen Fall. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge: EV $92,50 vs. Kurs $121,87 bedeutet −24% Erwartungswert. Die Analyst-Untersützung bei $100 definiert den fundamentalen Ankerwert klarer als das aktuelle Momentum-Niveau. Für Momentum-Trader: near-Allzeithoch mit schwächem Kurzzeit-RS — Trailing-Stop bei $105. Für Buy-and-Hold-Investoren: attraktiver Einstieg bei Rücksetzern auf $80–95. Positionsgröße: maximal 2% bei Rücksetzer-Einstieg.</p>
+<p>Peers: **Teradyne (TER)** als breiteres Semiconductor-Equipment-Instrument mit AI-Test-Exposure; **BESI (BE Semiconductor Industries)** als europäischer Advanced-Packaging-Pure-Play (stärkere Fokussierung). Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

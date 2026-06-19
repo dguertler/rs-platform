@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>QURE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>QURE</h1>
+      <h2>uniQure N.V.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Biotechnology</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$46.29</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-228.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-39.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">2,5–3</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$45–$65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$10–$20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>uniQure ist einer der wenigen klinisch fortgeschrittenen reinen Gen-Therapie-Pure-Plays mit einer breiten Pipeline in seltenen Erkrankungen. Der strukturelle Kern: Das Unternehmen hat mit AMT-061 (Etranacogene dezaparvovec) die erste zugelassene Gen-Therapie für Hämophilie B (FDA/EMA-Zulassung 2022–2023) — jetzt ist AMT-130 für Huntington-Krankheit der entscheidende Katalysator. Revenue $18,1 Mio. mit +127% Wachstum YoY — primär Meilenstein- und Lizenzeinnahmen, nicht Produktumsatz im klassischen Sinne. Das Unternehmen verbrennt erheblich Kapital (FCF −$103,7 Mio.), und die Finanzierbarkeit ist der eigentliche Risikotreiber. Der Move von $8,73 auf $71,50 in 12 Monaten (dann Korrektur auf $46,29) reflektiert Hochphasen bei positiven AMT-130-Datenpunkten. 11 Analysten mit Konsensziel $58,73 (+27% Upside) sehen strukturell mehr Wert. DATENLAGE: Mehrere Felder N/A oder UNGÜLTIG (Operating Margin, Forward PE, EPS) — OP-Margin-Anomalie auf Datenbasis nicht beurteilbar.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Gen-Therapie-Plattform auf Basis von AAV-Vektoren (Adeno-assoziierte Viren) — proprietary Manufacturing-Know-how ist zentrales IP</li>
+<li>Etranacogene dezaparvovec (AMT-061, Hemgenix): einmalige Gen-Therapie für Hämophilie B — kommerzieller Vertrieb über CSL Behring, uniQure erhält Meilensteine und Royalties</li>
+<li>AMT-130: Phase-2-Studie für Huntington-Krankheit — größter Pipeline-Katalysator; CNS-Gen-Therapie ist strukturell hochkomplex</li>
+<li>Revenue-Basis primär nicht-wiederkehrender Natur: Kollaborationsmeilensteine, Forschungszuschüsse</li>
+<li>FCF −$103,7 Mio. bei $18,1 Mio. Revenue: jährlicher Kapitalverbrauch übersteigt Revenue ~6x</li>
+<li>Debt/Equity 365% — Konvertierbare Anleihen wahrscheinlich; Bilanzstruktur im Detail nicht aus Datensatz ableitbar</li>
+<li>Keine Produktrevenue aus Direktvertrieb; kommerzielles Risiko teilweise an CSL Behring ausgelagert</li>
+<li>Marktkapital $2,9 Mrd. vs. Revenue $18 Mio.: valuation reflektiert Pipeline-Optionswert, nicht aktuelle Ertragskraft</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AMT-130-Daten überzeugen: Phase-2-Datenpunkt zeigt signifikante Huntingtin-Reduktion + klinisch relevante neurologische Stabilisierung. Partner- oder M&A-Interesse von Big Pharma (Sanofi, Roche, Novartis — strukturell aktive Gen-Therapie-Käufer). Kursziel Bull: Annahme: Übernahmeprämie 2,5–3x auf Analyst-Konsens → $120–150. Ohne M&A: AMT-130-Partnerschaft + Meilensteine → EV/Revenue auf Pipeline-Phase-3-Basis ~30–40x Revenue-Annahme $150 Mio. in 3 Jahren diskontiert → $90–120. Bull $90–120. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: AAV-Herstellungs-IP und Plattform-Know-how sind nachweisbarer Burggraben; nach Approbation und Partnering können Royalty-Ströme margenstark sein.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: AMT-130-Daten zeigen moderaten Effekt, zusätzliche Finanzierungsrunde zu marktüblichen Konditionen. Analysten-Konsens $58,73 als Leitgröße — plausibel bei keinem Rückschlag. Revenue steigt moderat durch Hemgenix-Meilensteine. Kursziel Base: $45–65. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: AMT-130 zeigt in Phase-2-Zwischenanalyse unzureichende Effizienz oder Sicherheitssignal. Cash-Burn von $103 Mio. p.a. erfordert Kapitalerhöhung zu erheblich verwässernden Konditionen; Markt antizipiert mehrere Runden. Kurs bricht auf Basis-Substanzwert plus Cash zurück. Bear $10–20 (Annahme: Cash-Position als Boden, kein EPS-basiertes Kursziel möglich). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Hoch — CSL Behring als einziger kommerzieller Partner; Abhängigkeit auf Datenbasis quantifizierbar (ein Kooperationspartner für Hemgenix)</li>
+<li>Geopolitik/China: Gering (Gen-Therapie-Regulierung primär FDA/EMA)</li>
+<li>Lieferkette/Foundry: AAV-Herstellung komplex; Single-Site-Risiko bei Lexington-Anlage nicht ausschließbar — auf Datenbasis nicht abschließend beurteilbar</li>
+<li>Verwässerung: Hoch — D/E 365% + FCF −$103 Mio. impliziert fortlaufende Equity-Raises</li>
+<li>Regulierung: FDA-Auflagen für Gen-Therapien streng; Long-Term-Safety-Follow-Up-Anforderungen als kostenintensiver Faktor</li>
+</ul>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $105 + 0,45 × $55 + 0,35 × $15 = $21 + $24,75 + $5,25 = **$51** — implizites Upside vs. aktuellem Kurs $46,29: **+10,2%**.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Revenue $18,1 Mio. — zu klein für normalisierte Margenbetrachtung. Gross Margin 0% im Datensatz (Anomalie — wahrscheinlich Datenfehler da R&D-Ausgaben als COGS gebucht, auf Datenbasis nicht abschließend auflösbar; nicht in Bewertung einbezogen). FCF −$103,7 Mio.: Unternehmen ist vollständig kapitalmarktabhängig. ROE −2,28 (negativ, konsistent mit Verlustphase). Debt/Equity 365% — strukturell belastet. Burggraben: AAV-Vektor-IP und klinisches Know-how sind real; ob sie dauerhaft defensiv sind, hängt von Konkurrenten-Pipeline ab (BioMarin, Spark, Ultragenyx).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Keine konventionelle EPS- oder FCF-basierte Bewertung möglich. EV/Revenue implizit: $2,9 Mrd. Market Cap / $18 Mio. Revenue = ~161x — Pure Pipeline-Option. Rückrechnung: Was preist der Kurs $46,29 ein? Bei 10% Zulassungswahrscheinlichkeit für AMT-130 und angenommenem Peak-Revenue $600 Mio. bei 10% Net Margin × 15x PE = $900 Mio. Wert × 10% p = $90 Mio. — impliziert auf $2,9 Mrd. Marktwert eine Markterwartung von >30% Zulassungswahrscheinlichkeit plus Hemgenix-Royalty-Barwert. Das ist ambitioniert, aber für eine Phase-2-Asset-in-CNS-Rare-Disease nicht unrealistisch. Analyst-Konsensziel $58,73 als Orientierungspunkt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Volatilität 52w: $8,73–$71,50 belegt Data-Driven-Event-Trading. Institutionelle Positionierung: Biotech-Long-Only und Healthcare-Momentum-Fonds — Hypothese, nicht datenbasiert; Short Float nicht im Datensatz. Enttäuschungsrisiko: sehr hoch bei Datenpunkt-Misses — bis zu −50% in Tagesfrist bei Studienfehler möglich (historische Präzedenzfälle in Gen-Therapie).</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $46,29 — 35% unter 52w-Hoch $71,50, 430% über 52w-Tief $8,73. RS-Fenster: 5T +80,49%, 10T +71,5%, 20T +92,08%, 50T +194,62%, 6M +105,31% — starkes Momentum über alle Zeitrahmen. GWS-Signal nicht verfügbar (Smallcap-Universum). Momentum ist fundamental durch Phase-2-Datenpunkte getrieben, nicht rein reaktiv. Technische Warnsignale: Unterschreiten $35 signalisiert strukturellen Trendbruch; $25 als nächste Unterstützung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($120–200):** AMT-130 erhält Zulassung, Partnerschaft mit Big Pharma, Blockbuster-Royalties für CNS-Gen-Therapie. Huntington-Markt potentiell $2–3 Mrd. Peak Revenue.</p>
+<p>**Base Case ($40–80):** AMT-130 zeigt Effekt, aber langwieriger Zulassungsweg; mehrere Kapitalerhöhungen; Hemgenix-Royalties stabilisieren. Cash-Burn-Problem durch Partnerschaft gelöst.</p>
+<p>**Bear Case ($5–15):** AMT-130 scheitert klinisch; Kapitalerhöhungen zu Niedrigstkursen; Substanzwert dominiert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>uniQure ist ein hochspekulativer Gen-Therapie-Pure-Play mit einem klar definierten Binary-Event-Katalysator: AMT-130 Huntington-Daten. Das ist kein Compounder und kein Value-Play — es ist eine strukturierte Wette auf klinischen Erfolg in einer der schwierigsten neurologischen Indikationen (ZNS-Gen-Therapie). Für Biotech-Spezialisten mit Verständnis für klinische Studienmethodik und klarer Position-Sizing-Disziplin: EV $51 impliziert +10,2% Upside — bescheidene Kompensation für das binäre Risiko. Positionsgröße: maximal 1–2% eines diversifizierten Portfolios. Analyst-Konsens $58,73 (11 Coverage-Häuser) gibt Rückenwind.</p>
+<p>Peers: **BioMarin (BMRN)** als kommerziell reiferer Gen-Therapie-Player; **Ultragenyx (RARE)** als CNS-Rare-Disease-Vergleich; **Spark Therapeutics** (Roche-Tochter) als strukturell ähnliche Pipeline. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

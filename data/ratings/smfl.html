@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SMFL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0000;color:#ef4444;border:1px solid #7f1d1d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SMFL</h1>
+      <h2>Smart for Life, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Packaged Foods</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">AVOID</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#ef4444;font-size:20px">36</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$0.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">47.7%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+99900.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0,01–$0,03</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">5%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0,0003–$0,001</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">55%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Smart for Life ist ein Nano-Cap-Konsumgüterunternehmen im Segment Functional Foods mit einem Marktkapital von unter $20.000 — de facto nicht investierbar für institutionelle oder semi-professionelle Anleger. Revenue $5,67 Mio. mit einem Rückgang von −43,5% YoY belegt einen aktiven Unternehmensverfall, keine Wachstumsstory. Das Verhältnis Debt/Equity von 467,6x bedeutet: Das Unternehmen ist technisch mehrfach überschuldet; Eigenkapital existiert nur nominell. Der Aktienkurs von $0,002 ist charakteristisch für Pre-Insolvenz oder Zombie-Status. RS-Fenster zeigen kurzfristige Volatilitätsspitzen (5T +123%, 20T +229%) — klassische Penny-Stock-Pumping-Muster ohne fundamentale Basis. Der aktuelle Kurslevel erlaubt keine sinnvolle Bewertungsanalyse auf Basis konventioneller Multiples. DATENLAGE: Mehr als 5 Fundamental-Felder sind N/A oder UNGÜLTIG — Analyse stark eingeschränkt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Herstellung und Vertrieb von Functional-Food-Produkten (Riegel, Shakes, Nahrungsergänzungsmittel) unter verschiedenen Marken</li>
+<li>Revenue $5,67 Mio. bei −43,5% YoY-Rückgang — Marktanteile erodieren aktiv</li>
+<li>Gross Margin 47,7% nominal positiv, aber Operating Margin −94,9% zeigt: Das Unternehmen verbrennt fast doppelt so viel wie Gross Profit durch SG&A und sonstige Kosten</li>
+<li>Free Cashflow −$5,7 Mio. bei $5,7 Mio. Revenue — Unternehmen verbrennt 100% des Umsatzes</li>
+<li>Debt/Equity 467,6x: Schulden dominieren vollständig; Eigenkapital existiert nur auf dem Papier</li>
+<li>Keine Analystencoverage, kein Kursziel, kein institutionelles Interesse</li>
+<li>Aktive Verwässerung durch Debt-to-Equity-Konversionen und neue Aktienemissionen wahrscheinlich</li>
+<li>Kein erkennbarer wirtschaftlicher Burggraben; Marken ohne nachgewiesene Differenzierung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Turnaround-Wunder: Akquisition durch strategischen Käufer oder transformativer Investor übernimmt Schulden und restrukturiert das Unternehmen. Revenue stabilisiert sich; Marken werden mit Kapital hinterlegt. Kursziel Bull: $0,01–0,03 (Annahme: Restrukturierungsaufschlag ohne belastbare EPS/FCF-Basis — aus Datenlage keine quantifizierbare Herleitung möglich). Eintrittswahrscheinlichkeit: 5%.</p>
+<h3>4. BASE CASE</h3>
+<p>Revenue-Rückgang setzt sich fort; Schulden steigen durch Zinslast; Kapitalerhöhungen zu Niedrigstkursen verwässern Aktionäre systematisch. Kurs pendelt zwischen $0,0003–0,001 (Annahme ohne belastbare Fundamentalbasis). Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Schulden werden fällig, keine Refinanzierungsmöglichkeit; Delisting-Verfahren durch NASDAQ/OTC-Regulatoren (Sub-Cent-Preis verletzt Mindestpreisregeln). Totalverlust für Aktionäre. Bear $0. Eintrittswahrscheinlichkeit: 55%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Auf Datenbasis nicht beurteilbar</li>
+<li>Geopolitik/China: Nicht material</li>
+<li>Lieferkette/Foundry: Abhängigkeit von Lohnherstellern, Single-Source-Risiko möglich</li>
+<li>Verwässerung: Extrem hoch — D/E 467x impliziert fortlaufende Equity-Dilution</li>
+<li>Regulierung: Delisting-Risiko real bei Sub-$1-Kursniveau über 30 Handelstage</li>
+</ul>
+<p>**Summe: 5% + 40% + 55% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,05 × $0,020 + 0,40 × $0,0007 + 0,55 × $0 = $0,001 + $0,00028 = **$0,0013** — implizites Downside vs. aktuellem Kurs $0,002: **−35%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 47,7% nominal positiv — aber irrelevant bei Operating Margin −94,9% und FCF −$5,7 Mio. bei $5,7 Mio. Revenue. Debt/Equity 467,6x: Insolvenzrisiko dominiert jede andere Fundamentalbetrachtung. ROE, ROA, Marktkapital im zweistelligen Dollar-Bereich: keine sinnvolle Qualitätsbewertung möglich. Wirtschaftlicher Burggraben: nicht vorhanden.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei einem Kurs von $0,002 und einem Marktkapital unter $20.000 sind konventionelle Bewertungsmetriken nicht anwendbar. Kein Forward PE belastbar (UNGÜLTIG im Datensatz). Kein P/S berechenbar auf sinnvoller Basis bei $5,7 Mio. Revenue und weiterem Rückgang. Rückrechnung: Was preist der Kurs ein? Nihil — der Markt preist Optiönswert auf Überleben ein, keine Fundamentalbewertung. Das ist charakteristisch für Zombie-Aktien in letzter Restrukturierungsphase.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Kurzfristige RS-Spitzen (5T +123%, 10T +99%) sind charakteristisch für koordinierte Pump-and-Dump-Muster im Penny-Stock-Segment — keine institutionelle Positionierung, kein Long-Only-Interesse. Hypothese, nicht datenbasiert: Retail-Spekulanten mit hoher Risikobereitschaft; kein seriöses Kapital. Enttäuschungsrisiko: maximal — De-listing oder Totalverlust jederzeit möglich.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $0,002 — 97,8% unter 52w-Hoch $0,0899. RS-Fenster: 5T +123%, 20T +229%, 6M −75,48% — volatile Spike-and-Crash-Muster typisch für spekulative Nano-Caps. GWS-Signal nicht verfügbar. Kein seriöses technisches Signal ableitbar. Technische Warnsignale: Kurs selbst ist das Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($0,05–0,20):** Vollständige Restrukturierung, neue Kapitalbasis, Wachstumsstrategie. Entscheidende Variable: externer strategischer Investor übernimmt Schulden.</p>
+<p>**Base Case ($0–0,001):** Weiterer Verfall, fortlaufende Verwässerung, De-listing. Aktionäre verlieren fast alles.</p>
+<p>**Bear Case ($0):** Insolvenz, Totalverlust.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Smart for Life ist kein Investmentvehikel — es ist ein Zombie-Unternehmen mit D/E 467x, −43,5% Revenue-Rückgang und einem Marktkapital im Cent-Bereich. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge: EV $0,0013 vs. Kurs $0,002 bedeutet −35% Erwartungswert. Für keine Investorenkategorie geeignet — auch nicht für hochspekulative Portfolios mit Verlusttoleranz. Explizite Risikowarnung: Totalverlust ist das wahrscheinlichste Langzeitszenario. Peer-Multiples nicht relevant — kein vergleichbares Investmentvehikel.</p>
+<ul class="al">
+<li>Qualität: 1/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 1/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

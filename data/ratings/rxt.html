@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RXT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>RXT</h1>
+      <h2>Rackspace Technology, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">48</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$7.22</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">138.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">18.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+5761.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$11–$14</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">6–8</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$12,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Rackspace ist kein klassisches Cloud-Wachstumsunternehmen — es ist eine hochverschuldete Managed-Services-Plattform im Schatten von AWS, Azure und GCP. Der strukturelle Kern: Rackspace verwaltet die Hybrid-Cloud-Komplexität für Unternehmen, die weder vollständig in die Public Cloud migrieren können noch wollen. Revenue $2,70 Mrd. mit nur 1,9% Wachstum YoY belegt das Dilemma: Kunden optimieren ihre Cloud-Ausgaben, kaufen weniger Managed Services. Die Aktie explodierte von $0,39 auf $8,60 — ein ~20x-Move innerhalb von 12 Monaten. Dieser Move ist auf der Basis verfügbarer Fundamentaldaten nicht vollständig erklärbar; D/E fehlt im Datensatz (negativer Buchwert PB −1,48 belegt negatives Eigenkapital), was auf eine Restrukturierung hindeutet. Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Analyst-Konsensziel $4,83 (3 Analysten) liegt signifikant unter dem aktuellen Kurs von $7,22.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Managed Cloud Services für Hybrid- und Multi-Cloud-Umgebungen (AWS, Azure, GCP, Private-Cloud)</li>
+<li>Revenue-Mix: Professional Services + recurring Managed Hosting + Value-Added Services</li>
+<li>Kernkompetenz: Komplexitätsreduktion für Unternehmen ohne eigene Cloud-Expertise — strukturell abhängig vom Cloud-Reifegrad der Kunden</li>
+<li>Bruttomargen 18,85% extrem niedrig für Tech — typisch für personalkostenintensive Managed Services ohne proprietäres IP</li>
+<li>Free Cashflow $235 Mio. bei negativer Nettomarge (−5,4%) — EBITDA-getrieben mit hohen Abschreibungen</li>
+<li>Operativer Hebel gering: serviceintensives Geschäftsmodell skaliert schlecht</li>
+<li>Beta 3,05 — strukturell überproportionale Reaktion auf Marktbewegungen</li>
+<li>Negativer Buchwert (PB −1,48): Überschuldungssituation belegt; D/E-Ratio nicht im Datensatz</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Turnaround: Bilanzrestrukturierung gelingt, KI-Managed-Cloud-Nachfrage treibt Revenue auf +8–12% p.a. Gross Margin expandiert von 18,85% auf 23–25% durch Automatisierung. FCF steigt auf $350 Mio. → 12x FCF = ~$4,2 Mrd. Marktwert → ~$11–14 je Aktie (Annahme ~300–380 Mio. Aktien, kein Konsens verfügbar). Bull $11–14. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: proprietäres IP nicht nachweisbar — Verbesserung möglich, aber nicht belegt.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Revenue-Wachstum 1–4% p.a., Margen stagnieren. FCF $200–250 Mio. hält Betrieb stabil. Aktie handelt $5,50–8,00, gestützt durch FCF, gedeckelt durch schwaches Wachstum und Analystenskepsis. Kursziel Base: $6–8. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Kunden-Churn beschleunigt sich; Unternehmen ersetzen Managed Services durch direkte Cloud-Verträge. Revenue −5–10% p.a.; FCF kippt negativ. Kapitalerhöhungsrisiko bei negativem Eigenkapital real — massive Verwässerung möglich. Bear $2–4. Eintrittswahrscheinlichkeit: 40%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Auf Datenbasis nicht beurteilbar</li>
+<li>Geopolitik/China: Gering (primär US-fokussiert)</li>
+<li>Lieferkette/Foundry: Nicht relevant (Dienstleistungsunternehmen)</li>
+<li>Verwässerung: Hohes Risiko — negativer Buchwert impliziert strukturelles Kapitalerhöhungsrisiko</li>
+<li>Regulierung: Datenschutz-Compliance als Standard-Kostenposition</li>
+</ul>
+<p>**Summe: 20% + 40% + 40% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $12,50 + 0,40 × $7,00 + 0,40 × $3,00 = $2,50 + $2,80 + $1,20 = **$6,50** — implizites Downside vs. aktuellem Kurs $7,22: **−10%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 18,85% — extrem niedrig für Tech. Operating Margin −1,06%, Profit Margin −5,41%: kein profitables Unternehmen. FCF $235 Mio. ist einziger positiver Anker. ROE/ROA nicht verfügbar (negativer Buchwert). Bilanzqualität: schlecht. Wirtschaftlicher Burggraben: gering — moderate Switching Costs, keine Preissetzungsmacht gegenüber Hyperscalern.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 138,8x bei 1,9% Revenue-Wachstum ist nicht fundamental rechtfertigbar. Normalisierter FCF $200–235 Mio. × 8–10x = $1,6–2,35 Mrd. Marktwert → ~$4,50–7,00 je Aktie (Annahme ~250–330 Mio. Aktien, kein Konsens). Aktueller Kurs $7,22 liegt am oberen Ende. Rückrechnung: $1,8 Mrd. Market Cap / $235 Mio. FCF = 7,7x FCF-Multiple — bei 1,9% Wachstum und negativen Margen ambitioniert. Analyst-Konsensziel $4,83 als Orientierungspunkt; aktueller Kurs liegt 49% darüber.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Move von $0,39 auf $8,60 in 12 Monaten: Auslöser nicht aus vorliegenden Daten ableitbar — Hypothese, nicht datenbasiert: Short-Squeeze + Restrukturierungs-Katalysator. Short Float nicht im Datensatz. Beta 3,05: Rücksetzer verlaufen überproportional stark. Enttäuschungsrisiko: hoch — bei ausbleibendem Turnaround kann der Kurs 50%+ vom Hoch korrigieren.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $7,22 — 16% unter 52w-Hoch $8,60. RS-Fenster: 20T +84,56%, 50T +666,23%, 6M +589,04% — extremes Momentum aus sehr niedriger Basis. GWS-Signal nicht verfügbar (Smallcap-Universum). Momentum ist reaktiv auf Restrukturierungsnarrativ, nicht durch fundamentale Verbesserungen gestützt. Technische Warnsignale: Unterschreiten $6,00 signalisiert Distributionsphase; $4,50 als FCF-basierter Support.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($15–25):** Schuldenabbau erfolgreich, KI-Managed-Cloud wächst, Margin Recovery. Entscheidende Variable: Bilanzrestrukturierung + Revenue-Reacceleration.</p>
+<p>**Base Case ($4–8):** Weiterwirtschaften, moderate FCF-Generierung, kaum Wachstum. Marktbewertung bei 7–8x FCF.</p>
+<p>**Bear Case ($0–2):** Negativer FCF, Kapitalerhöhung oder Insolvenz. Aktionäre strukturell nachrangig.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Rackspace ist kein Compounder — es ist ein hochriskantes Restrukturierungs-Vehikel mit negativem Eigenkapital, unvollständiger Datenlage und schwachem Wachstum. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge: EV $6,50 vs. Kurs $7,22 bedeutet −10% Erwartungswert. Für Distressed-Equity-Spezialisten mit vollständiger Kenntnis der Kapitalstruktur möglicherweise interessant. Für Long-Only- und Wachstumsinvestoren: falsches Instrument. Positionsgröße: maximal 0,5% eines Portfolios mit hartem Stop-Loss.</p>
+<p>Peers: **Kyndryl (KD)** als reineres Managed-Infrastructure-Instrument; **Conduent (CNDT)** und **Unisys (UIS)** als IT-Services-Vergleiche. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
