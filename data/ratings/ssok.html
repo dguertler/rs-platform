@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SSOK — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0000;color:#ef4444;border:1px solid #7f1d1d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SSOK</h1>
+      <h2>Sunstock, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Luxury Goods</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">AVOID</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#ef4444;font-size:20px">36</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$0.02</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">6.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">47.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+26143.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0,05–$0,10</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">5%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0,003–$0,01</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">55%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Sunstock ist ein Nano-Cap mit einem Marktkapital von ~$110.000 — strukturell nicht investierbar. Der Sektor "Luxury Goods" ist irreführend: Revenue $9,2 Mio. mit Gross Margin 6,5% deutet auf niedrigmargigen Handelsbetrieb hin, nicht auf Luxusgüter im klassischen Sinne. TrailPE 0,13 ist eine offensichtliche Datensatz-Anomalie bei diesem Kursniveau und nicht als echte Bewertungskennzahl zu verwenden. RS-Fenster: 6M +790% — typisches Penny-Stock-Pump-Muster ohne fundamentale Basis. Die Aktie hat sich von $0,0013 auf $0,1995 bewegt und ist jetzt wieder auf $0,0181 eingebrochen — 91% unter dem 52w-Hoch. D/E 8,8 ist für einen Nano-Cap mit negativem FCF bedenklich. DATENLAGE: Mehrere Felder UNGÜLTIG oder N/A; Analyse stark eingeschränkt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Handel und Vertrieb von Konsumgütern (Details auf Datenbasis nicht präzise bestimmbar)</li>
+<li>Revenue $9,2 Mio. nahezu stagnierend (−0,2% YoY)</li>
+<li>Gross Margin 6,5%: Händler-Niveau ohne Wertschöpfung oder proprietäre Marken</li>
+<li>Operating Margin +4,2% / Net Margin +8%: nominal positiv, aber bei $110k Market Cap und negativem FCF nicht nachhaltig beurteilbar</li>
+<li>FCF −$602k: Unternehmen verbrennt mehr als es verdient (FCF-Basis)</li>
+<li>D/E 8,8: für einen Nano-Cap problematisch</li>
+<li>Kein institutionelles Interesse, keine Analystencoverage</li>
+<li>ROE 47,7% (Datensatz-Anomalie bei negativem FCF und Nano-Cap — nicht in Bewertung einzubeziehen)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Vollständige Restrukturierung oder Übernahme durch strategischen Partner; Margin-Turnaround. Kursziel Bull: $0,05–0,10 (kein EPS/FCF-basiertes Kursziel möglich — Annahme: Restrukturierungsoptionswert). Eintrittswahrscheinlichkeit: 5%.</p>
+<h3>4. BASE CASE</h3>
+<p>Stagnation bei minimalem Betrieb; Kurs bleibt im Sub-Cent-Bereich; Delisting-Risiko latent. Kursziel Base: $0,003–0,01. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: FCF weiter negativ, Schulden nicht refinanzierbar, Delisting/Insolvenz. Bear $0. Eintrittswahrscheinlichkeit: 55%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Auf Datenbasis nicht beurteilbar</li>
+<li>Geopolitik: Nicht material</li>
+<li>Lieferkette: Auf Datenbasis nicht beurteilbar</li>
+<li>Verwässerung: Extrem wahrscheinlich bei D/E 8,8 und negativem FCF</li>
+<li>Regulierung: Delisting-Risiko bei Sub-$1-Kurs über 30 Handelstage</li>
+</ul>
+<p>**Summe: 5% + 40% + 55% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,05 × $0,075 + 0,40 × $0,0065 + 0,55 × $0 = $0,00375 + $0,0026 = **$0,0063** — implizites Downside vs. aktuellem Kurs $0,0181: **−65%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>GM 6,5%, OM 4,2% nominal positiv — aber FCF negativ und Market Cap $110k macht jede Kennzahl bedeutungslos auf Investitionsebene. ROE 47,7% ist als Datensatz-Anomalie bei Nano-Cap einzustufen und nicht in Bewertung einzubeziehen. Wirtschaftlicher Burggraben: nicht vorhanden.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei $110k Market Cap sind konventionelle Bewertungsmetriken irrelevant. TrailPE 0,13 und PB 0,056 sind Artefakte des Penny-Stock-Status. Das Unternehmen besitzt keinen beurteilbaren Substanzwert aus den vorliegenden Daten.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>6M +790%, dann Crash auf $0,0181: klassisches Pump-and-Dump-Schema. Kein institutionelles Kapital. Enttäuschungsrisiko: maximaal — weiterer 90%+ Verlust möglich.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $0,0181 — 91% unter 52w-Hoch $0,1995. Kurzfristiges Momentum neutral/negativ. GWS nicht verfügbar. Kein seriöses technisches Signal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($0,10–0,50):** Vollständige Neupositionierung mit Kapital und Team.</p>
+<p>**Base Case ($0–0,005):** Weitere Verwässerung und Verfall.</p>
+<p>**Bear Case ($0):** Totalverlust.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Sunstock ist für keine Investorenkategorie geeignet. EV $0,0063 vs. Kurs $0,0181 bedeutet −65% Erwartungswert. Totalverlustrisiko dominiert. Explizite Risikowarnung: Penny-Stocks unter $0,05 mit Pump-Mustern und negativem FCF sollten vollständig gemieden werden.</p>
+<ul class="al">
+<li>Qualität: 1/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 1/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

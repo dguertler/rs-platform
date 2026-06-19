@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>OPTX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>OPTX</h1>
+      <h2>Syntec Optics Holdings, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Electronic Components</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$12.11</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">18.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-30.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+25.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$15–$20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">15%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">6–10</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$18–$22</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">45%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Syntec Optics ist ein Spezialoptik-Hersteller für Verteidigungs-, Medizin- und kommerzielle Märkte — und eines der faszinierendsten Momentum-Rätsel im Smallcap-Universum. Der Kurs zog von $1,18 auf $14,92 in 12 Monaten (+1.164%), eine Kursbewegung, die auf Basis verfügbarer Fundamentaldaten nicht vollständig erklärbar ist: Revenue $27,5 Mio. mit −7,9% YoY-Rückgang, Gross Margin 18,8%, Operating Margin −11,9%. Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Negatives Beta (−0,81) ist ein technisches Anomalie-Signal, möglicherweise aus dünnliquidem Handel. PB 51,3x bei D/E 129 zeigt: Der Markt bewertet kaum vorhandenes Eigenkapital mit einem extremen Aufschlag. Keine Analystencoverage. Der strukturelle Kern, falls ein Narrativ trägt: Syntec könnte Defense-Optical-Lieferant für Drohnen-, Nachtsicht- oder Präzisionsoptik-Programme sein — das ist auf Datenbasis nicht verifizierbar.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Herstellung von Präzisionsoptik-Komponenten (Linsen, Prismen, Spiegel) für Defense, Medical Imaging und kommerzielle Anwendungen</li>
+<li>Revenue $27,5 Mio. — sehr kleines Unternehmen; einzelne Großaufträge dominieren das Umsatzbild</li>
+<li>Gross Margin 18,8% extrem niedrig für Optik — deutet auf Lohnfertigungs-Mix ohne proprietäre High-Value-Defense-Komponenten hin</li>
+<li>Operating Margin −11,9%: Fixkostenbasis übersteigt aktuellen Umsatz</li>
+<li>FCF $1,1 Mio. nominell positiv — aber bei $27,5 Mio. Revenue sehr anfällig für Nachfrageschwankungen</li>
+<li>D/E 129: stark verschuldet; Bilanzqualität kritisch zu bewerten</li>
+<li>ROE −30%: negativ, konsistent mit Verlustphase</li>
+<li>Keine Analystencoverage, kein institutionelles Tracking — Kursbildung rein durch Retail und Momentum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Verteidigungsauftrag-Szenario: Syntec erhält signifikante Defense-Optik-Verträge (z.B. für Drohnen-Targeting oder Nachtsicht-Systeme), Revenue wächst auf $50–70 Mio. Gross Margin expandiert bei Defense-Mix auf 30%+; Unternehmen erreicht Profitabilität. Kursziel: Annahme kein EPS verfügbar — $15–20 (Revenue-Multiple 0,3–0,4x auf $50 Mio. Defense-Peer-Basis, kein Konsens). Bull $15–20. Eintrittswahrscheinlichkeit: 15%.</p>
+<p>Strukturelle Margennachhaltigkeit: Defense-Optik-Kontrakte bieten prinzipiell höhere ASPs — strukturelle Differenzierung auf Datenbasis nicht beurteilbar.</p>
+<h3>4. BASE CASE</h3>
+<p>Revenue stagniert oder leicht rückläufig; Margen bleiben negativ; Unternehmen finanziert sich weiter über Schulden. Kurs konsolidiert auf niedrigerem Niveau, da Fundamentaldaten das Bewertungsniveau nicht stützen. Kursziel Base: $6–10. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Auftragsrückgang bei Defense (Budget-Squeeze) + Commercial-Flaute; Revenue fällt auf $18–22 Mio.; Unternehmen kann Schuldenlast bei D/E 129 nicht bedienen; Kapitalerhöhung zu Pennies. Bear $2–4 (Annahme: kein EPS/FCF-Boden verfügbar — basiert auf historischen Smallcap-Distressed-Niveaus). Eintrittswahrscheinlichkeit: 45%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Wahrscheinlich hoch (wenige Defense-Kunden) — Auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik: Defense-Budgets zyklisch; Exportkontrolle bei Dual-Use-Optik möglich</li>
+<li>Lieferkette: Spezialglas und optische Rohmaterialien potenziell Single-Source</li>
+<li>Verwässerung: D/E 129 + Verlustphase impliziert hohes Verwässerungsrisiko</li>
+<li>Regulierung: ITAR-Compliance als Kostenfaktor für Defense-Optik</li>
+</ul>
+<p>**Summe: 15% + 40% + 45% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,15 × $17,50 + 0,40 × $8,00 + 0,45 × $3,00 = $2,625 + $3,20 + $1,35 = **$7,18** — implizites Downside vs. aktuellem Kurs $12,11: **−41%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Revenue $27,5 Mio. rückläufig (−7,9%). Gross Margin 18,8% und OM −11,9% — kein profitables Unternehmen. FCF $1,1 Mio. marginal positiv. ROE −30%. D/E 129: kritische Verschuldung. Negativer Buchwert rechnerisch wahrscheinlich (PB 51,3x impliziert minimales nominelles Eigenkapital). Wirtschaftlicher Burggraben: gering bis nicht vorhanden auf Datenbasis.</p>
+<h3>7. BEWERTUNG</h3>
+<p>PB 51,3x für ein verlustmachendes Unternehmen mit rückläufigem Revenue ist fundamental nicht rechtfertigbar. PS-Multiple nicht berechenbar aus Datensatz; implizit: $488 Mio. Market Cap / $27,5 Mio. Revenue = 17,7x PS — für ein schrumpfendes, unprofitables Optik-Unternehmen extremes Multiples. Rückrechnung: Was preist $12,11 ein? Ein Revenue-Ziel von mindestens $80–100 Mio. bei positiver Marge — vollständig unbelegt durch aktuelle Datenlage. Das ist unrealistisch auf Basis verfügbarer Fundamentaldaten.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>+1.164% in 12 Monaten ohne fundamentale Substanzverbesserung: klassisches Retail-Momentum / Defense-Themen-Narrativ. Keine institutionelle Coverage. Hypothese, nicht datenbasiert: Pump durch Defense-/Drone-Sektorthema. Short Float nicht im Datensatz. Enttäuschungsrisiko: sehr hoch.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $12,11 — 19% unter 52w-Hoch $14,92. RS-Fenster: 6M +779% (extreme Basis-Move), aber kurzfristig schwach (5T −7,9%, 10T −2,6%) — Momentum am Abkühlen. GWS-Signal nicht verfügbar. Technische Warnsignale: Unterschreiten $10 signalisiert strukturellen Trendbruch; $6 als nächste Support-Zone.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($20–35):** Defense-Optik-Verträge etablieren Wachstum; Margin Recovery auf 25%+.</p>
+<p>**Base Case ($4–8):** Stagnation, Schuldenabbau schwierig, Bewertungskorrektur.</p>
+<p>**Bear Case ($0–2):** Insolvenz oder Totalverwässerung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Syntec Optics ist ein hochspekulatives Momentum-Play ohne fundamentale Unterstützung auf aktuellem Bewertungsniveau. EV $7,18 vs. Kurs $12,11 bedeutet −41% Erwartungswert. Keine Analystencoverage, kein Nachweis des Defense-Narrativs aus den vorliegenden Daten. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Für keine Investorenkategorie ohne deutlichen Rücksetzer geeignet. Explizite Risikowarnung: 45% Insolvenz-/Totalverlust-Wahrscheinlichkeit im Bear Case.</p>
+<p>Peers: **II-VI (IIVI)**, **OSI Systems** als Defense-Optik-Vergleiche — Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 1/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

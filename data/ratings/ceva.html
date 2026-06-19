@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CEVA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CEVA</h1>
+      <h2>CEVA, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductors</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">HOLD</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">64</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$49.72</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">60.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">87.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-3.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+76.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$180–$200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$42–$55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$20–$30</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>CEVA ist der führende unabhängige Anbieter von Semiconductor-IP-Cores für DSPs, AI-Prozessoren, Bluetooth, WiFi und 5G-Modem — eines der reinsten und qualitativ hochwertigsten IP-Licensing-Geschäftsmodelle im Halbleiterbereich. Der strukturelle Kern: CEVA verkauft keine Chips, sondern lizenziert die Baupläne an Hunderte von Chip-Designern weltweit. Jedes Mal, wenn ein lizenzierter Chip produziert wird, erhält CEVA eine Royalty. Das ist ein klassisches Pick-and-Shovel-Modell — mit 87,2% Gross Margin. Revenue $112 Mio. wächst +11,5% YoY. Die Losses sind Investitionen in neue IP-Generationen, nicht operative Ineffizienz. Kurs nahe 52w-Hoch ($49,72 vs. $51,25), aber 9 Analysten mit Konsensziel $46,11 — leicht unter aktuellem Kurs. Die eigentliche Wette: Edge-AI-Adoption in Smartphones, TWS-Kopfhörern, Automotive und IoT treibt CEVA-Royalties strukturell.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>IP-Licensing: Einmalige Lizenzgebühren (NRE + Upfront) bei Design-Win + Royalties je verschifftem Chip</li>
+<li>Produktportfolio: DSP-Cores (SensePro-AI-Familie), Bluetooth/WiFi-IP (RivieraWaves), 5G-Modem-IP (PentaG), Neural-Network-IP (NeuPro)</li>
+<li>Kunden: >150 Chip-Designer weltweit; keine Einzelkunden-Abhängigkeit strukturell (IP-Diversifizierung)</li>
+<li>Gross Margin 87,2%: das ist die Benchmark für IP-Licensing-Pure-Plays; bestätigt Qualität des Modells</li>
+<li>Revenue-Mix: ~50% Royalties (recurring, volume-abhängig) + ~50% Licensing (project-abhängig)</li>
+<li>Op-Marge −18,8%: R&D-Intensität für neue IP-Generationen (NeuPro-AI, 5G-Advanced); Investment-Phase, nicht Strukturschwäche</li>
+<li>FCF $3,6 Mio. marginal positiv — R&D-Level bei ~60% Revenue ist hoch, aber strategisch notwendig</li>
+<li>D/E 4,99: nahezu schuldenfrei; saubere Bilanz für eine IP-Gesellschaft</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Edge-AI-Adoption skaliert: Jedes Smartphone, TWS-Headset und AI-Kamera benötigt einen AI-Prozessor-Core. CEVA gewinnt Design-Wins bei koreanischen und taiwanesischen Fabless-Kunden für die nächste Smartphone-Generation. Royalty-Volumen wächst 25–30% p.a. Revenue auf $180–200 Mio.; R&D-Ratio fällt auf 45%; Op-Marge auf 15%+. EPS-Schätzung (Annahme, kein Konsens): $2,50 × 35x = $87,50. Bull $80–110. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: Royalty-basiertes Modell ohne variable Fertigungskosten schafft dauerhaft hohe Skalierungsmargen — strukturell klar belegt durch 87% GM.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Revenue wächst 10–15%; Royalties expandieren durch AI-Edge-Chips. Op-Marge verbessert sich auf −5 bis 0%. Analyst-Konsens $46,11 als Leitgröße. Kursziel Base: $42–55. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: ARM und Qualcomm entwickeln eigene AI-DSP-IP-Stacks in-house; CEVA verliert Design-Wins bei Tier-1-Kunden. 5G-Rollout enttäuscht; Smartphone-Markt stagniert. Revenue stagniert unter $110 Mio.; R&D-Kosten bleiben konstant → Verluste weiten sich aus. FCF negativ. Bear $20–30 (Annahme: 2–3x Revenue auf stagnierende $110 Mio. als Boden — kein EPS-Boden möglich). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Strukturell diversifiziert (150+ Kunden) — kein Einzelkunden-Klumpenrisiko; Royalties abhängig von Endmarkt-Volumen</li>
+<li>Geopolitik/China: China ist großer Chip-Produktionsmarkt; US-Exportkontrollen könnten China-Kundenvolumen reduzieren — auf Datenbasis nicht quantifizierbar</li>
+<li>Lieferkette/Foundry: Als IP-Anbieter keine direkte Foundry-Abhängigkeit — struktureller Vorteil</li>
+<li>Verwässerung: R&D-getriebene Verlustphase impliziert SBC-Nutzung; D/E 5,0 gibt Spielraum; moderate Verwässerung wahrscheinlich</li>
+<li>Regulierung: IP-Exportkontrolle (EAR) für Military/AI-Chips als latentes Risiko für bestimmte Kundensegmente</li>
+</ul>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $95,00 + 0,45 × $48,50 + 0,35 × $25,00 = $19,00 + $21,825 + $8,75 = **$49,575** — implizites Downside vs. aktuellem Kurs $49,72: **−0,3%** — praktisch neutral. EV-Punkte: >−10% → 5.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 87,2% — Spitzenklasse im Halbleitersektor; IP-Modell bestätigt. Op-Marge −18,8%: Investment-Phase, nicht strukturelle Schwäche. FCF +$3,6 Mio. marginal positiv. D/E 5,0: nahezu schuldenfrei. ROE −3,9%: konsistent mit Investitionsphase. Wirtschaftlicher Burggraben: stark — IP-Bibliotheken mit Jahrzehnten an Optimierungen, Design-Win-Momentum und Kundenbindung durch SW-Tools und Design-Support.</p>
+<h3>7. BEWERTUNG</h3>
+<p>FwdPE 60,6x — hoch, aber für ein IP-Licensing-Unternehmen in Investitionsphase akzeptabler als für Hardware-Unternehmen. PS-implizit: $1,385 Mrd. MCap / $112 Mio. Revenue = 12,4x PS — ARM handelt bei >30x PS (als Referenz); CEVA deutlich günstiger. Rückrechnung: Was preist $49,72 ein? Revenue $160 Mio. × 15% OM × 25x PE = $600 Mio. + Technologie-Premium → das ist das Szenario eines erfolgreichen AI-Royalty-Zyklus in 2–3 Jahren. Ambitioniert, aber bei 87% GM und IP-Plattform vertretbar. Analyst-Konsens $46,11 als Orientierungspunkt — Kurs $49,72 liegt 8% darüber.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Kurs nahe 52w-Hoch: starke Akkumulation. RS-Fenster: 50T +108,8%, 6M +96,75% — starkes mittelfristiges Momentum, kurzfristig (10T −10%) leichte Konsolidierung. Hypothese, nicht datenbasiert: Institutionelle Tech-Fonds mit AI-Hardware-Exposure + Semiconductor-IP-Thema. Beta 2,0: volatil. Enttäuschungsrisiko: Konsolidierung nach starkem Run; 9 Analysten leicht unterhalb — begrenzter Upside-Konsens.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $49,72 — 3% unter 52w-Hoch $51,25. RS-Fenster: 50T +108,8%, 6M +96,75%, kurzfristig 10T −10%: Momentum nahe Hoch mit leichter Konsolidierung. GWS nicht verfügbar. Momentum fundamental durch Edge-AI-Tailwind gestützt. Technische Warnsignale: Unterschreiten $42 (Analyst-Konsens-Niveau) signalisiert strukturellen Rücksetzer.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($100–150):** Edge-AI-Adoption macht CEVA-IP zum Standard in Milliarden Geräten; Royalty-Volumen explodiert; ARM-ähnliches Rerate. Entscheidende Variable: AI-DSP-Design-Win-Rate bei Tier-1-Kunden.</p>
+<p>**Base Case ($40–65):** Solides Wachstum, IP-Bibliothek expandiert, aber kein Blockbuster-Design-Win; Bewertung bleibt bei 10–15x Revenue.</p>
+<p>**Bear Case ($15–25):** ARM und In-House-IP verdrängen CEVA; Royalty-Basis erodiert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>CEVA ist das qualitativ reinste IP-Licensing-Modell unter den hier analysierten Werten — 87% Gross Margin und strukturelle Diversifikation über 150+ Kunden sind echte Differenzierungsmerkmale. EV $49,58 vs. Kurs $49,72 ist neutral (+/−0%), was bedeutet: kein asymmetrischer Edge auf aktuellem Niveau, aber auch kein offensichtlicher Abschlag gerechtfertigt. Für Investoren mit Horizont 2–3 Jahre und Überzeugung im Edge-AI-Thema: CEVA ist der reinere, günstigere Zugang als ARM. Positionsgröße: maximal 2% eines Portfolios, Einstieg ideal bei Rücksetzern auf $42–45.</p>
+<p>Peers: **ARM Holdings (ARM)** als größerer IP-Peer mit höherem Premium; **Rambus (RMBS)** als Speicherchip-IP-Vergleich. Peer-Multiples nicht im Datensatz — aber ARM bei >30x Revenue macht CEVAs 12x günstiger erscheinen.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

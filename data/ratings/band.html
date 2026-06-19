@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BAND — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BAND</h1>
+      <h2>Bandwidth Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">44</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$51.39</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">23.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">38.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-1.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-40.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$1,0–$1,1</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$48–$62</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$20–$32</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: RS-Fenster zeigen 10T −31,1% — ein massiver Einbruch in den letzten 10 Handelstagen. Fundamental-Snapshot wurde vor dieser Kursbewegung erstellt. Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Konfidenz der Bewertungsaussagen reduziert.</p>
+<p>Bandwidth ist ein CPaaS-Anbieter (Communications Platform as a Service) mit einem entscheidenden Differenzierungsmerkmal: direkter Zugang zu Carrier-Grade-Sprach- und Messaging-Netzwerken über eigene Infrastruktur. Der strukturelle Kern: Bandwidth kontrolliert Tier-1-Telefonnummern-Ressourcen und Routing-Kapazitäten — das ist kein Layer über einem Aggregator, sondern eigene Netz-Assets. Revenue $788 Mio. wächst +19,8% YoY. FCF $80,4 Mio. ist der eigentliche Anker: Ein CPaaS-Unternehmen mit positiver Cashflow-Generierung ist fundamental belastbarer als viele Peers. 4 Analysten, Konsensziel $55,75 — über dem aktuellen Kurs $51,39 nach dem Einbruch.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Betrieb eigener Carrier-Grade-Sprach- und Messaging-Infrastruktur — Differenzierung zu Reseller-Modellen (Twilio nutzt partiell Drittnetze)</li>
+<li>Revenue-Mix: Nutzungsbasierte CPaaS-Gebühren + Software-Subscriptions; Unternehmenskunden (Zoom, Microsoft Teams, RingCentral als Typ-Kunden)</li>
+<li>Gross Margin 38,2%: für CPaaS moderat — niedriger als reine Software-Peers durch Netzinfrastruktur-Kosten</li>
+<li>FCF $80,4 Mio. positiv bei $788 Mio. Revenue (10,2% FCF-Marge) — solide</li>
+<li>Operating Margin −2,2%: noch nicht profitabel, aber FCF-positiv durch Working-Capital-Dynamik</li>
+<li>D/E 104,3: signifikante Verschuldung — bei negativer Op-Marge und positivem FCF strukturell handhabbar, aber kein Puffer</li>
+<li>Beta 2,92: hohe Volatilität; bestätigt durch aktuellen −31%-Einbruch</li>
+<li>Revenue-Wachstum 19,8% belegt Marktanteilsgewinne im CPaaS-Segment</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Kursbewegung war Überreaktion; FCF-Generierung überzeugt Re-Rating. AI-Voice-APIs (Echtzeit-Sprachsynthese, AI-Agents-Telefonie) treiben Volumen auf Bandwidths Netzinfrastruktur. Revenue wächst auf $1,0–1,1 Mrd.; FCF auf $140–160 Mio.; Re-Rating auf 15x FCF = $2,1–2,4 Mrd. Marktwert → ~$65–75 je Aktie (Annahme: ~32 Mio. Aktien). Bull $70–85. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Strukturelle Margennachhaltigkeit: eigene Netzinfrastruktur ermöglicht Operating Leverage bei Volumenanstieg — strukturelle Differenzierung nachweisbar.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Revenue wächst 12–15%; FCF hält $70–90 Mio. Analyst-Konsens $55,75 spielt sich aus. Kursziel Base: $48–62. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Earnings-Enttäuschung war fundamental (Kunden-Churn bei großen Accounts, Preiswettbewerb durch Twilio/Vonage). Revenue-Wachstum fällt auf <10%; D/E 104 wird bei Refinanzierung belastend; FCF kippt negativ. Bear $20–32 (Annahme: 0,5–0,8x Revenue als Boden bei Wachstums-Implosion, kein EPS-Boden möglich). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Wahrscheinlich bei großen SaaS-Kunden — auf Datenbasis nicht quantifizierbar; Top-Kunde-Verlust kann signifikant sein</li>
+<li>Geopolitik: Carrier-Regulierung je Land; Telecom-Lizenzrisiken in Wachstumsmärkten</li>
+<li>Lieferkette: Eigene Netzinfrastruktur erhöht CapEx-Risiko; keine Foundry-Abhängigkeit im klassischen Sinne</li>
+<li>Verwässerung: D/E 104 + negative Op-Marge impliziert Refinanzierungsrisiko; SBC-Level nicht im Datensatz</li>
+<li>Regulierung: Telefonbetrug/STIR-SHAKEN-Compliance als Infrastrukturpflicht; Robo-Call-Regulierung betrifft CPaaS-Volumen</li>
+</ul>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $77,50 + 0,45 × $55,00 + 0,30 × $26,00 = $19,375 + $24,75 + $7,80 = **$51,93** — implizites Upside vs. aktuellem Kurs $51,39: **+1%**.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>FCF $80,4 Mio. positiv — echter Wert, nicht nur EBITDA-Fiktion. Gross Margin 38,2%: ausbaufähig, aber durch Netz-CapEx strukturell begrenzt. Op-Marge −2,2%: knapp unter Breakeven. D/E 104: strukturelles Risiko, aber FCF-Deckung vorhanden. ROE −1,4%: konsistent mit Verlustphase. Wirtschaftlicher Burggraben: moderat — eigene Carrier-Assets schaffen echten Vorteil, aber kein starkes Moat gegenüber AT&T, Lumen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 23x setzt positive EPS-Entwicklung voraus. FCF-basiert: $80 Mio. × 18–20x = $1,44–1,60 Mrd. Marktwert → ~$45–50 je Aktie (Annahme ~32 Mio. Aktien). Aktueller Kurs $51,39 liegt leicht über FCF-Bewertungsmitte — moderat bewertet nach dem Einbruch. Rückrechnung: Was preist $51 ein? Revenue $950 Mio. × 10% FCF-Marge × 17x Multiple — das ist ein realistisches 18-Monate-Szenario bei moderatem Wachstum. Analyst-Konsensziel $55,75 als Orientierungspunkt — impliziert nach dem Einbruch begrenztes Upside.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>−31% in 10 Handelstagen bei einem CPaaS-Unternehmen mit positivem FCF ist ein extremes Signal — entweder fundamentale Enttäuschung oder überproportionale Reaktion auf sektorbezogene Nervosität (Twilio-Probleme, SaaS-Multiples-Kompression). Hypothese, nicht datenbasiert: earnings-getriebener Sell-off mit Capitulation-artiger Struktur bei Beta 2,92. Enttäuschungsrisiko: mittel — Analytiker haben den Kurs bereits auf $55,75 adjustiert; weiterer Downside durch fundamentale Verschlechterung möglich.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $51,39 — 32% unter 52w-Hoch $75,98. RS-Fenster: 5T −20%, 10T −31%: aktiver Momentum-Bruch. 50T +173%, 6M +224% belegen die Basis-Stärke der Bewegung. GWS nicht verfügbar. Momentum kurzfristig stark negativ — kein technischer Einstiegspunkt bis Stabilisierung erkennbar. Technische Warnsignale: Unterschreiten $42 signalisiert strukturellen Test der 6M-Aufwärtsbewegung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($90–120):** CPaaS-Konsolidierung, AI-Voice-Volumen treibt Revenue auf $1,5+ Mrd., FCF $200 Mio.+, Re-Rating auf 20x FCF.</p>
+<p>**Base Case ($40–65):** Moderates Wachstum, FCF-Expansion auf $100–130 Mio., Bewertung auf 12–15x FCF normalisiert.</p>
+<p>**Bear Case ($10–25):** Preiswettbewerb, D/E-Problem, Revenue-Stagnation.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Bandwidth ist nach dem −31%-Einbruch kein offensichtliches Avoid mehr — der FCF-Anker $80 Mio. und Analyst-Konsens über aktuellem Kurs geben dem Unternehmen strukturelle Substanz. Aber EV $51,93 vs. Kurs $51,39 ist kein asymmetrischer Edge. Für antizyklische Investoren, die den Sell-off als Überreaktion einordnen: Einstieg nach Klärung des Einbruch-Auslösers sinnvoll. Für Momentum-Investoren: kein Einstiegspunkt bei aktivem Momentum-Bruch. Positionsgröße: maximal 1,5% nach Stabilisierung. D/E 104 als dauerhaftes Risikosignal beachten.</p>
+<p>Peers: **Twilio (TWLO)** als direkter CPaaS-Peer (größer, stärker skaliert); **Sinch** und **Vonage (Ericsson)** als europäische Vergleiche. Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

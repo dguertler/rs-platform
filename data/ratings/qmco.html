@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>QMCO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>QMCO</h1>
+      <h2>Quantum Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Computer Hardware</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$15.60</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">37.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+5809.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$340–$360</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$13–$18</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$24,00</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Quantum Corporation ist ein Storage-Hardware- und Software-Anbieter mit Spezialisierung auf Video-Surveillance-Storage, High-Performance-Computing und — zunehmend — AI-Datenmanagement. Der strukturelle Kern: Quantum hat sich neu positioniert als "Active Scale Object Storage" + Tape-Archive-Lösung für Video- und KI-Workloads. Revenue $262,8 Mio. mit +8,6% Wachstum signalisiert eine frühe Erholungsphase aus einem Multi-Jahr-Restrukturierungszyklus. Die Aktie hat sich von $4,19 auf $18,48 vervierfacht (+341%) — jetzt bei $15,60. Kritisch: Negativer Buchwert (PB −1,20), fehlende D/E-Daten und Net Margin −37,8% bei Operating Margin nur +0,5% deuten auf massive nicht-operative Belastungen hin — wahrscheinlich Zinslast auf Schulden oder Restrukturierungsaufwendungen (Anomalie: Net Margin weit unter Op-Marge — aus Datenbasis nicht abschließend auflösbar; anomalie-verzerrte Netto-Marge nicht in Bewertung einbezogen). 2 Analysten, Konsensziel $16,50.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Hardware-Plattformen: Scale-Out-NAS und Object-Storage für Video-Surveillance-Archivierung (Behörden, Medien, Sicherheit)</li>
+<li>Tape-Archive: LTO-Tape-Libraries (Quantum ist Marktführer bei LTO-Tape-Automation) — high-margin, recurring Replacement-Revenue</li>
+<li>Software/Services: ActiveScale Object Storage Software, Scalar Tape-Software + Managed Services als wachsende, margenstärkere Komponente</li>
+<li>AI-Repositionierung: Quantum positioniert Storage-Systeme als Data-Preparation-Layer für KI-Trainingsworkflows</li>
+<li>Gross Margin 37,8%: Mix aus Hardware (niedrig) und Software/Service (hoch)</li>
+<li>Op-Marge +0,5%: an Break-Even; Recovery-Phase</li>
+<li>FCF −$38 Mio.: noch cash-negativ; Restrukturierungs-CapEx oder Schuldenlast belastet</li>
+<li>Negativer Buchwert: Überschuldung — D/E auf Datenbasis nicht quantifizierbar</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AI-Data-Management positioniert Quantum als Storage-Infrastruktur für Unstrukturierte-Daten-Workloads: Video-AI, Autonomous-Driving-Datasets, Scientific-Computing. Revenue wächst auf $340–360 Mio.; Software/Service-Mix steigt auf 50%+ und hebt Gross Margin auf 45%+. FCF dreht auf $20–30 Mio. positiv; Schuldenabbau möglich. EPS-Schätzung (Annahme, kein Konsens) ~$0,80 × 25x = $20–22. Bull $20–28. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: Tape-Archive-Software und Storage-as-a-Service-Modelle bieten höheres Margenpotenzial — strukturell möglich, aber Recovery-Nachweis steht aus.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario 12–18 Monate: Revenue-Wachstum moderat bei 5–10%; FCF verbessert sich auf Breakeven bis leicht positiv. Analyst-Konsens $16,50 als Orientierungspunkt. Kursziel Base: $13–18. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Hyperscaler-Eigenlösung für Video-Storage verdrängt Quantum; Tape-Markt erodiert schneller als AI-Repositionierung wächst; Schulden auf negativem Eigenkapital nicht refinanzierbar. FCF tief negativ; Kapitalerhöhung zu Verwässerungskonditionen. Bear $5–8. Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Behörden/Medien als Schlüsselkunden — zyklisch und budgetabhängig; auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik: US-Regierungsaufträge betroffen von Budget-Sequestration; China-Exposition nicht aus Datensatz ableitbar</li>
+<li>Lieferkette: LTO-Tape-Laufwerke von IBM/HPE abhängig (OEM-Partnerschaften); Single-Source-Risiko für kritische Komponenten</li>
+<li>Verwässerung: Negativer Buchwert + FCF negativ = hohes Dilutionsrisiko bei Refinanzierung</li>
+<li>Regulierung: FISMA/FedRAMP-Compliance als Voraussetzung für Government-Geschäft — Kosten, aber auch Schutzwall</li>
+</ul>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $24,00 + 0,45 × $15,50 + 0,35 × $6,50 = $4,80 + $6,975 + $2,275 = **$14,05** — implizites Downside vs. aktuellem Kurs $15,60: **−10%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 37,8% solide. Op-Marge +0,5%: Recovery-Phase. Net Margin −37,8% stark anomal vs. Op-Marge — Zinslast oder Restrukturierungsaufwand als wahrscheinlichste Ursache; anomalie-verzerrte Net-Marge nicht in Bewertung einbezogen. FCF −$38 Mio.: noch negativ. Negativer Buchwert: größtes strukturelles Risiko. Wirtschaftlicher Burggraben: LTO-Tape-Marktführerschaft mit hohen Switching Costs für Archiv-Libraries — echter, wenn auch rückläufiger Burggraben.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Kein EPS-basiertes Multiples sinnvoll anwendbar (N/A). Normalisierter Revenue-basierter Ansatz: $262 Mio. × 1,5x PS = $393 Mio. Marktwert → ~$27 je Aktie (Annahme ~14,6 Mio. Aktien). Aber Market Cap nur $228 Mio. = 0,87x PS — günstig auf Revenue-Basis wenn Erholung eintritt. Rückrechnung: Was preist $15,60 ein? Revenue $280–300 Mio. × 1x PS → plausibel; aber nur wenn FCF dreht positiv. Analyst-Konsens $16,50 bestätigt moderate Upside-Einschätzung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Move von $4,19 auf $18,48 (+341%) getrieben durch AI-Storage-Narrativ und Restrukturierungs-Hoffnung. Aktuell Konsolidierung. Hypothese, nicht datenbasiert: Early-Mover-Retail-Positionierung in AI-Adjacent-Storage; kaum institutionelles Kapital bei $228 Mio. MCap. Beta 2,99: hoch volatile Aktie. Enttäuschungsrisiko: hoch — jede FCF-Enttäuschung trifft spekulativ positionierte Halter.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $15,60 — 16% unter 52w-Hoch $18,48. RS-Fenster: 5T +15,4%, 20T +79,5%, 50T +137,4%, 6M +73,1% — starkes Mittelfrist-Momentum, kurzfristig (10T −5,8%) leichte Abschwächung. GWS nicht verfügbar. Technische Warnsignale: Unterschreiten $12 signalisiert strukturellen Trendbruch.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($30–50):** AI-Storage-Repositionierung erfolgreich; Software-Mix dominant; Schuldenabbau.</p>
+<p>**Base Case ($10–18):** Moderate Recovery; Tape-Markt stabil; AI-Beitrag marginal.</p>
+<p>**Bear Case ($1–5):** Tape erodiert, AI-Repositionierung scheitert, Refinanzierung scheitert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Quantum ist eine hochspekulative Restrukturierungs-Wette auf AI-Storage-Repositionierung mit negativem Eigenkapital. EV $14,05 vs. Kurs $15,60 bedeutet −10% Erwartungswert — kein asymmetrischer Edge auf aktuellem Niveau. Analyst-Konsens $16,50 lässt minimales Upside bei erheblichem Risiko. Für Spezialisten in Distressed-Tech-Turnarounds: vollständige Kenntnis der Kapitalstruktur (nicht im Datensatz verfügbar) ist Pflicht. Kein Buy-and-Hold.</p>
+<p>Peers: **Seagate (STX)** für Storage-Hardware; **Spectra Logic** (privat) als Tape-Direct-Peer; **Pure Storage (PSTG)** als modernerer All-Flash-Vergleich. Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
