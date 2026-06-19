@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CARR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">19.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CARR</h1>
+      <h2>Carrier Global Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Building Products & Equipment</span></div>
+        <div class="mi">MCap: <span>$58B</span></div>
+        <div class="mi">Signal: <span>Breakout</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">WATCH</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 19.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">55.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$69.91</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">21.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">25.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">137.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">9.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-31.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$25–$27</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$65–$80</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$40–$52</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">20%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># Carrier Global Corporation (CARR)</p>
+<p>**Kurs:** $71,81 (15.06.2026) | **RS-Score:** 55,76 | **Rank:** #94 (S&P 500)</p>
+<p>**GWS:** —</p>
+<p>**Szenarien (12–18 Monate):** Bull $90–$100 (25%) · Base $65–$80 (55%) · Bear $40–$52 (20%) · EV ~$73</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Carrier Global ist nach der Viessmann-Klimaakquisition (2023, €12 Mrd.) und dem Abschluss der Portfolio-Transformation ein anderes Unternehmen als noch 2022. Die These: Carrier hat sich vom diversifizierten HVAC/Kältekonzern zum fokussierten Klimatisierungsanbieter mit europäischer Wärmepumpen-Plattform repositioniert. Was der Markt einpreist: Normalisierung der HVAC-Nachfrage und Viessmann-Synergien. Was er möglicherweise unterschätzt: der strukturelle Rückenwind aus dem europäischen Wärmepumpen-Markt ist langfristiger als zyklisch — EU-Gebäuderichtlinie ist ein gesetzlicher Treiber. 12M-RS-Fenster fehlt. Trailing PE 46,6x vs. Forward PE 21,8x zeigt hohe Earnings-Recovery-Erwartung.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>HVAC: Klimaanlagen (Nordamerika) und Wärmepumpen (Europa via Viessmann)</li>
+<li>Kältetechnik: Transport-Kühlung — zyklischer, globaler Markt</li>
+<li>Gebäudeautomation und -sicherheit: nach Portfolio-Bereinigung reduziert</li>
+<li>Viessmann-Integration: europäischer Wärmepumpen-Marktführer, Synergien €250 Mio. p.a. bis 2027 erwartet (Konsens-Schätzung, kein Konsens-Datenpunkt)</li>
+<li>Revenue €21,9 Mrd. TTM, Growth +2,4% YoY — Übergangsphase</li>
+<li>Gross Margin 25,2%, Operating Margin 6,6%, Net Margin 6% — Margen unter Integrationsdruck</li>
+<li>D/E 91x auf Buchwert — durch Viessmann-Verschuldung erhöht, Schuldenabbau prioritär</li>
+<li>ROE 9,9% — unter Druck durch Akquisitionsverwässerung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Viessmann-Synergien materialisieren sich schneller, europäischer Wärmepumpen-Markt erholt sich. Revenue auf $25–27 Mrd. in FY28 mit Operating Margin Expansion auf 11–12%. Annahme (kein Konsens): FY27-EPS ~$3,80 × 25x Forward = $95 Midpoint; Bandbreite $90–$100. Strukturelle Margennachhaltigkeit: Viessmann-Technologieführerschaft im Wärmepumpen-Segment — auf Datenbasis noch nicht beurteilbar. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Moderate Synergieentwicklung, europäischer Markt erholt sich langsam. Revenue +4–6% p.a. Annahme (kein Konsens): FY27-EPS ~$3,10 × 23x Forward = $71 Midpoint; Bandbreite $65–$80. Wahrscheinlichkeit: 55%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Europäischer Wärmepumpen-Markt bleibt strukturell schwach, Viessmann-Integration überschreitet Kostenziele. Annahme (kein Konsens): FY27-EPS ~$1,80 × 25x Forward = $45 Midpoint; Bandbreite $40–$52. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Stark fragmentierter HVAC-Markt — kein Single-Customer-Risiko erkennbar</li>
+<li>Geopolitik/Exportkontrollen: Kein direktes Exportrisiko; EU-Energiepolitikänderung als indirektes Risiko</li>
+<li>Lieferkette: Abhängigkeit von Kupfer und Kältemittelpreisen; Lieferketten normalisiert</li>
+<li>Verwässerung: Viessmann cash-finanziert, erhebliche Schuldenaufnahme — Aktienanzahl-Trend nicht aus Daten ableitbar</li>
+<li>Regulierung: EU-Gebäuderichtlinie als positiver Treiber; Förderkürzungen (Deutschland 2024) als negativer Impuls bereits eingetreten</li>
+</ul>
+<p>Summe: 25% + 55% + 20% = 100%</p>
+<p>Erwartungswert: (0,25 × 95) + (0,55 × 72,50) + (0,20 × 46) = 23,75 + 39,88 + 9,20 = 72,83 USD — implizites Upside vs. aktuellem Kurs (71,81 USD): +1,4%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Gross Margin 25,2% typisch für Industriegüter. Operating Margin 6,6% und Net Margin 6% unter Integrationsdruck. ROE 9,9% durch Akquisitionsverwässerung belastet. D/E 91x auf Buchwert — kritisch; Schuldenabbau Voraussetzung für Multiple-Expansion. Revenue Growth +2,4% spiegelt Übergangsphase.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 46,6x, Forward PE 21,8x — Konsens erwartet deutliche EPS-Steigerung. Rückrechnung: Kurs $71,81 preist EPS ~$3,10 × 23x Forward ein — bei erfolgreicher Integration realistisch. Normalisierter FCF-Schätzung: Net Margin 9% (Zielkorridor) auf $24 Mrd. = ~$2,2 Mrd. FCF; MarketCap $58 Mrd. → ~26x normalisierter FCF — fair, nicht günstig.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Rank #94 im S&P 500 — unterdurchschnittlich, aber +26% in 6 Monaten. Kein FOMO-Momentum. EV praktisch gleich aktuellem Kurs — institutionelle beobachten Integration abwartend.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $71,81 unter 52W-Hoch $81,09 (–11%). 20T +14,8% kurzer Impuls. 6M +26,5% — solider Mittelfrist-Trend. Technisches Warnsignal: Rückfall unter $60 würde 50T-Struktur brechen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: Wärmepumpen-Boom, vollständige Synergien, Margin 12%+. Annahme EPS ~$6 × 25x = $150. Kursziel $130–$175.</li>
+<li>Base: Moderate Integration, Margin 9–10%. Annahme EPS ~$4,50 × 22x = $99. Kursziel $85–$115.</li>
+<li>Bear: Strukturschwäche Europa, Schuldenabbau zieht sich. Annahme EPS ~$2,50 × 18x = $45. Kursziel $35–$55.</li>
+</ul>
+<p>Entscheidende Variable: Viessmann-Synergiegeschwindigkeit und europäische Wärmepumpen-Marktentwicklung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>CARR ist ein Post-Akquisitions-Restrukturierungsfall mit strukturell interessantem Wärmepumpen-Narrativ — auf aktuellem Niveau ohne asymmetrischen Edge. Geeignet für geduldige Value-Investoren mit 3-4 Jahres-Horizont. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (+1,4% EV). Einstieg bei Rücksetzer unter $60 oder nach bestätigter Synergielieferung attraktiver. Direkte Peers: Trane Technologies (TT) — höhere Margen; Lennox International (LII) — US-fokussiert. Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

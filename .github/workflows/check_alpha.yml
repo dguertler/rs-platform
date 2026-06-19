@@ -1,7 +1,7 @@
 name: Alpha-Screening (Early Tech · Hidden Champions · Post-Earnings)
 
 permissions:
-  contents: read
+  contents: write
 
 on:
   schedule:
@@ -35,14 +35,23 @@ jobs:
 
       - name: Alpha-Screening ausführen
         env:
-          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
         run: python check_hidden_alpha.py
 
-      - name: Kandidaten in data/ ablegen
+      - name: Kandidaten committen und pushen
         run: |
           mkdir -p data
           cp alpha_candidates.json data/alpha_candidates.json 2>/dev/null || true
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/alpha_candidates.json
+          git diff --staged --quiet || git commit -m "Alpha-Kandidaten aktualisiert ($(date -u '+%Y-%m-%d'))"
+          git pull --rebase origin master
+          git push origin master
 
       - name: Fehler-Mail senden
         if: failure()

@@ -388,7 +388,11 @@ def _extract_scenarios(text: str) -> dict:
 
     def _price(s: str) -> str:
         def _from(txt: str) -> str:
-            # Range + explicit currency: "2.450–2.800 USD"
+            # "€X–€Y" or "$X–$Y" — currency symbol precedes each number (European format)
+            m = re.search(r'[€$]\s*(\d[\d.,]+)\s*[–—-]+\s*[€$]\s*(\d[\d.,]+)', txt)
+            if m:
+                return f"{m.group(1)}–{m.group(2)}"
+            # Range + explicit currency after: "2.450–2.800 USD"
             m = re.search(r'(\d[\d.]*\s*[–—-]+\s*[\d.,]+)\s*(USD|EUR|€)', txt)
             if m:
                 return f"{m.group(1).strip()} {m.group(2)}"
@@ -400,6 +404,10 @@ def _extract_scenarios(text: str) -> dict:
             m = re.search(r'\$\s*(\d[\d.,]+\+?)', txt)
             if m:
                 return f"${m.group(1)}"
+            # "€X+" or "€X" single euro value
+            m = re.search(r'€\s*(\d[\d.,]+\+?)', txt)
+            if m:
+                return f"€{m.group(1)}"
             # "45 USD" or "90+ USD" — single value with explicit currency
             m = re.search(r'(\d[\d.,]+\+?)\s*(USD|EUR|€)', txt)
             if m:

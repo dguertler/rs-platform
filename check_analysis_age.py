@@ -73,7 +73,9 @@ def load_ratings_index():
 def load_state():
     data = load_json(STATE_FILE)
     if not data:
-        return {"top20": []}
+        return {"top20": [], "last_seen": {}}
+    if "last_seen" not in data:
+        data["last_seen"] = {}
     return data
 
 
@@ -213,25 +215,43 @@ def main():
             })
 
     # Check for newly entered top-20
+    # A stock counts as "new" only if it hasn't appeared in the top-20 for the last 7 days.
+    NEW_COOLDOWN_DAYS = 7
+    last_seen: dict = state.get("last_seen", {})
+    cooldown_cutoff = today - timedelta(days=NEW_COOLDOWN_DAYS)
+
     new_items = []
     for ticker in current_top20:
-        if ticker not in prev_top20:
-            r = ratings.get(ticker.upper())
-            if r and r.get("created_at"):
-                try:
-                    created = datetime.fromisoformat(r["created_at"])
-                    new_items.append({
-                        "ticker": ticker,
-                        "has_analysis": True,
-                        "created_str": created.strftime("%d.%m.%Y"),
-                    })
-                except Exception:
-                    new_items.append({"ticker": ticker, "has_analysis": False})
-            else:
+        last_seen_date = last_seen.get(ticker)
+        if last_seen_date:
+            try:
+                last_seen_dt = datetime.fromisoformat(last_seen_date)
+                if last_seen_dt >= cooldown_cutoff:
+                    # Seen within the last 7 days – not really new
+                    continue
+            except Exception:
+                pass
+        # Not seen in 7 days (or never) → genuinely new
+        r = ratings.get(ticker.upper())
+        if r and r.get("created_at"):
+            try:
+                created = datetime.fromisoformat(r["created_at"])
+                new_items.append({
+                    "ticker": ticker,
+                    "has_analysis": True,
+                    "created_str": created.strftime("%d.%m.%Y"),
+                })
+            except Exception:
                 new_items.append({"ticker": ticker, "has_analysis": False})
+        else:
+            new_items.append({"ticker": ticker, "has_analysis": False})
 
-    # Update state
+    # Update state: save top20 list and refresh last_seen timestamps
+    today_iso = today.strftime("%Y-%m-%d")
+    for ticker in current_top20:
+        last_seen[ticker] = today_iso
     state["top20"] = current_top20
+    state["last_seen"] = last_seen
     save_state(state)
 
     if not stale_items and not new_items:

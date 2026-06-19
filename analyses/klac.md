@@ -1,95 +1,107 @@
 # KLAC — KI-Aktienbewertung
 
-**KLA Corporation** · Technology · 04.06.2026 · Signal: Manuell generiert
+**KLA Corporation** · Technology · 19.06.2026 · Signal: Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 1921.71 |
-| Market Cap | $251.03 Mrd. |
-| Forward PE | 38.55 |
+| Kurs | 254.54 |
+| Market Cap | $332.50 Mrd. |
+| Forward PE | 50.43 |
 | Revenue (TTM) | $13.10 Mrd. |
 | Gross Margin | 61.4% |
 | ROE | 95.0% |
-| RS-Score | 98.6 |
+| RS-Score | 142.9 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+# KLA Corporation (KLAC)
+
+**Kurs:** $259,56 (15.06.2026) | **RS-Score:** 142,86 | **Rank:** #9 (NASDAQ-100)
+**GWS:** —
+**Szenarien (12–18 Monate):** Bull $340–$380 (25%) · Base $270–$310 (55%) · Bear $170–$210 (20%) · EV ~$288
+
 ## 1. INVESTMENT-CASE
 
-KLA ist kein klassischer Halbleiter-Zykliker, sondern der Maut-Erheber des fortschrittlichsten Chip-Designs. Das Unternehmen dominiert Prozesskontrolle, Inspektion und Metrologie mit über 50% Marktanteil — der margenstärkste und klebrigste Nischenmarkt innerhalb des WFE-Universums (Wafer Fab Equipment). Der strukturelle Kern: Je kleiner die Strukturbreiten und je komplexer Advanced Packaging (HBM, Chiplets, 2.5D/3D), desto höher die Inspektions-Intensität pro Wafer — KLAs adressierbarer Markt wächst überproportional zum reinen Wafer-Volumen. Das ist der Punkt, den der Markt im AI-Capex-Narrativ oft übersieht: KLA profitiert nicht vom Volumen, sondern von der Komplexität. Rund ein Viertel des Umsatzes ist wiederkehrendes Service-Geschäft auf der installierten Basis — das dämpft die Zyklizität gegenüber Memory-Equipment-Herstellern deutlich. Analyst-Konsensziel $1.855 liegt unter dem aktuellen Kurs $1.922 — als Sentiment-Indikator, nicht als Kursziel-Ceiling zu verstehen; die Coverage hinkt der jüngsten Rally hinterher.
+KLA ist das reinste Instrument für den Messprozess-Zyklus in der Halbleiterausrüstung — Prozesskontrolle und Inspektion sind nicht diskretionär, sondern existenziell für jeden Advanced-Node-Übergang zu 3nm und darunter. Der strukturelle Kern: je kleiner die Transistoren, desto höher der Defektdruck, desto unverzichtbarer KLAC. Der Markt behandelt KLAC wie einen zyklischen Ausrüster; er unterschätzt dabei, dass Prozesskontrolle überproportional von Komplexitätszuwächsen profitiert, nicht nur von Investitionsvolumen. Der Kursanstieg von +77% in 6 Monaten spiegelt einen Markt wider, der beginnt, den CHIPS-Act-Zyklus und den KI-Infrastrukturausbau korrekt einzupreisen — TSMC, Intel und Samsung erhöhen Capex gleichzeitig. 12M-Fenster fehlt (neuer Zeitraum in der Datenbasis), die 52-Wochen-Range von $83 bis $255 zeigt die explosive Neubewertung. China-Exposure bleibt das zentrale Risiko.
 
 ## 2. GESCHÄFTSMODELL
 
-- Optische und e-Beam-Inspektionssysteme zur Defekt-Erkennung — De-facto-Standard bei Leading-Edge-Logic (TSMC, Samsung, Intel) und HBM
-- Prozesskontrolle ist Pflicht-, keine Kür-Investition: Yield-Verlust kostet Foundries Millionen pro Tag — extrem hohe Switching Costs
-- Service- und Ersatzteil-Geschäft (~25% Umsatz) auf installierter Basis: wiederkehrend, hochmargig, antizyklisch dämpfend
-- Operativer Hebel über Software/Algorithmen — Defekt-Klassifikation ist datengetrieben, nicht hardwarelimitiert
-- Strukturelle Abhängigkeit von Leading-Edge-Capex der Top-3-Foundries — Kundenkonzentration ist real
-- Advanced-Packaging-Inspektion als struktureller Wachstumstreiber jenseits klassischer Lithografie
-- China-Umsatzanteil als regulatorisches Risiko (Exportkontrollen)
-- Aktive Kapitalrückführung: Buybacks + Dividende (0,48% Yield) als Kapitaldisziplin-Signal
+- Waferkontrolle und -inspektion (~60% Umsatz) — monopolähnliche Position in Bright-Field-Inspektion auf Leading Edge
+- Service und Upgrades (~20%) generieren wiederkehrende Margen unabhängig von Capex-Schwankungen
+- Datenanalytik-Software (KLA Zeta, ~10%) mit wachsendem Recurring-Revenue-Anteil
+- Prozesskontroll-Intensität steigt strukturell: Gate-All-Around (GAA) benötigt 3× mehr Inspektionsschritte als FinFET
+- Abhängigkeit von TSMC als Einzelkunde — genaue Quote nicht aus Daten ableitbar, Hypothese: >20%
+- China-Umsatz nach Exportkontrollen reduziert, aber auf Legacy-Nodes nicht eliminiert
+- ROE 95% durch Financial Leverage (D/E 105x) verzerrt — Interpretation mit Vorsicht
+- Gross Margin 61%, Operating Margin 41% — strukturell überlegen gegenüber diversifizierten Anbietern
 
 ## 3. BULL CASE
 
-AI-WFE-Supercycle setzt sich fort: Leading-Edge-Capex (2nm, GAA) plus HBM-Kapazitätsausbau treiben Inspektions-Intensität strukturell. Strukturelle Margennachhaltigkeit ist hier gut begründbar — nicht Zyklusartefakt: Quasi-Monopol in optischer Inspektion, proprietäres IP, ~25% wiederkehrender Service-Umsatz und Switching Costs durch Yield-Kritikalität ermöglichen dauerhaft Gross Margins über 60%. EPS steigt Richtung $48–52, Multiple hält 40x+. Kursziel 2.600–3.200 USD. Eintrittswahrscheinlichkeit: 25%.
+KI-Infrastrukturausbau und CHIPS-Act-getriebene Fab-Expansion übersteigen Konsenserwartungen. TSMC erhöht Capex auf >40 Mrd. USD in 2026/27. KLA-Umsatz wächst auf 16–18 Mrd. USD in FY28 mit Operating Margin Expansion auf 44–46%. Annahme (kein Konsens): FY27-EPS ~22 USD × 17x Forward-Umsatz-Multiple = Bull $340–$380 auf 12-Monatssicht. Strukturelle Margennachhaltigkeit begründet durch Switching Costs via proprietäre Rezepturbibliotheken und Co-Engineering mit Fabs. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: WFE-Markt wächst mittleres Zehnerprozent, KLA wächst durch Prozesskontroll-Intensität leicht darüber (~12–15% Umsatz). Operating Margin hält ~40%, EPS ~$40–44, Forward-Multiple normalisiert auf 36–40x. Kursziel 2.000–2.500 USD. Eintrittswahrscheinlichkeit: 50%.
+Solider WFE-Zyklus ohne Überraschungen. Umsatzwachstum +11–15% YoY. KGV normalisiert sich von 72x auf 45–55x Forward. Annahme (kein Konsens): FY27-EPS ~19 USD × 15–16x Forward-Umsatz = $270–$310 auf 12–18 Monate. Markt verdaut den Kursanstieg, Konsolidierung seitwärts. Eintrittswahrscheinlichkeit: 55%.
 
 ## 5. BEAR CASE
 
-Auslöser: WFE-Verdauungsphase nach AI-Capex-Spitze, verschärfte China-Exportkontrollen treffen 25–30% des Umsatzes, oder Memory-Capex-Pause. Service-Geschäft dämpft, schützt aber nicht vollständig. Multiple derated von 38x auf 25–28x bei stagnierendem EPS. Kursziel 1.300–1.600 USD (−17% bis −32%). Eintrittswahrscheinlichkeit: 25%.
+Geopolitik: US-Exportkontrolle auf Legacy-Nodes ausgeweitet oder China-Gegensanktionen. Kundenzyklus dreht durch Überkapazität bei Memory-Fabs. Annahme (kein Konsens): EPS ~13 USD × 15x Forward = $195 Midpoint; Bandbreite $170–$210 bei Multiple-Kontraktion. Eintrittswahrscheinlichkeit: 20%.
 
-**Summe: 25% + 50% + 25% = 100%**
+Risiko-Sweep:
+- Kundenkonzentration: TSMC wahrscheinlich >20% — Hypothese, nicht aus Daten ableitbar
+- Geopolitik/China: Exportkontrollen aktiv, Restrisiko bei Legacy-Erweiterungen — hohes Risiko
+- Lieferkette: Precision-Optics-Abhängigkeit von Japan — Single-Source-Risiko partiell
+- Verwässerung: SBC-Trend nicht aus Daten ableitbar
+- Regulierung: US-Exportkontrollregime bleibt primäres Regulierungsrisiko
+
+Summe: 25% + 55% + 20% = 100%
+Erwartungswert: (0,25 × 360) + (0,55 × 290) + (0,20 × 190) = 90 + 159,50 + 38 = 287,50 USD — implizites Upside vs. aktuellem Kurs (259,56 USD): +10,8%.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Erstklassig und überwiegend strukturell, nicht zyklisch überzeichnet. Gross Margin 61,4%, Operating Margin 41,2%, Net Margin 35,7% — diese Niveaus hält KLA über Zyklen, nicht nur an der Spitze. FCF $2,89 Mrd. bei $13,1 Mrd. Umsatz (~22% FCF-Marge). ROE 95% ist optisch spektakulär, aber durch aggressive Buybacks und D/E 105 verzerrt — das geschrumpfte Eigenkapital überzeichnet die Kennzahl; ROIC ist die ehrlichere (weiterhin starke) Messgröße. P/B 43 ist aus demselben Grund nicht aussagekräftig — Bewertung über FCF/Earnings, nicht über Buchwert. Echter Burggraben: Quasi-Monopol in Prozesskontrolle plus installierte Service-Basis.
+ROE 95% durch Financial Leverage verzerrt (D/E 105x auf Buchwertbasis). Gross Margin 61%, Operating Margin 41%, Net Margin 36% — strukturell hochwertig. Revenue +11,5% YoY bei diesen Margen deutet auf starke Preissetzungsmacht. FCF nicht direkt aus Daten ableitbar; bei 41% Operating Margin und Asset-Light-Modell strukturell stark geschätzt. Margen nahe Zyklushoch — durch strukturelle Komplexitätszunahme der Nodes nachhaltiger als in früheren Zyklen.
 
 ## 7. BEWERTUNG
 
-Forward-PE 38,5x ist ambitioniert, aber für ein strukturell weniger zyklisches Quality-Asset mit Monopol-Charakteristik vertretbarer als für Memory-Equipment. Trailing-PE 54x reflektiert den Pre-Inflection-Punkt. Da KLA weniger zyklisch ist, ist das Forward-Multiple aussagekräftiger als ein normalisierter Vollzyklus-FCF — dennoch preist der Markt nahezu perfekte AI-Capex-Kontinuität ein. Keine Value-Position: bezahlte Qualitätsprämie mit begrenztem Bewertungspuffer nach unten. Analyst-Konsensziel $1.855 unter aktuellem Kurs signalisiert ausgereizte Coverage-Modelle.
+Trailing PE 72x, Forward PE 50x bei Revenue-Wachstum von 11,5% — ambitioniert für ein Monopol mit 41% Operating Margin. FCF-Yield Schätzung: ~30% FCF-Marge auf 13,1 Mrd. USD = ~3,9 Mrd. FCF bei MarketCap 332 Mrd. → FCF-Yield ~1,2% — strukturell teuer. Rückrechnung: Kurs preist FCF-Wachstum auf ~8 Mrd. in 5 Jahren ein (CAGR ~15%) — bei WFE-Wachstumsmarkt plausibel, aber aggressiv. 12M-RS-Fenster fehlt, da Kurs vor <12 Monaten noch bei ~83 USD lag — Fundamental-Snapshot kann veraltete Multiples enthalten.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 98,6 — solides, aber nicht extremes Momentum (6M +59%). Institutionell als AI-Infrastruktur-Qualitätsname Long-Only-gehalten, geringer Short-Float. Für neue Käufer braucht es WFE-Aufwärtsrevisionen und bestätigte 2nm/HBM-Capex-Pläne der Foundries. Enttäuschungsrisiko: jede Andeutung einer Capex-Verschiebung bei TSMC/Samsung oder neue China-Restriktionen — bei Forward-PE 38x reagiert die Aktie empfindlich.
+RS-Rank #9 im NASDAQ-100 bei +77% in 6 Monaten zeigt institutionelle Akkumulation. 20T +29% und 50T +24% deuten auf nachhaltiges Momentum ohne Anzeichen von Distribution. Enttäuschungsrisiko: Quartals-Guidance muss nach oben überraschen, sonst Multiple-Kontraktion. Short Float: aus Daten nicht ableitbar. FOMO-Dynamik auf aktuellem Niveau erhöht.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Intakter Aufwärtstrend, Kurs über allen relevanten SMAs (SMA50 ~1.762, SMA200 ~1.363), jüngster Ausbruch auf neue Allzeithochs über die 52W-Marke $2.060. Momentum fundamental gestützt durch AI-Capex, nicht rein reaktiv. Beta 1,5. Technisches Warnsignal: Wochenschluss unter SMA50 (~1.760) bzw. Verlust der $1.760-Zone würde die Trendstruktur infrage stellen.
+Kurs 259,56 USD über 52W-Hoch 254,93 USD — klarer Breakout, Allzeithoch-Bereich. 5T –1,8% signalisiert kurzfristige Konsolidierung nach starkem 10T/20T-Lauf. Momentum fundamental gestützt durch Revenue-Wachstum und Margenstärke. Technisches Warnsignal: Rückfall unter 220 USD würde 50T-Unterstützung brechen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($3.500–4.500):** Prozesskontroll-Intensität wächst mit jeder Node-Generation und Advanced Packaging; KLA festigt Monopol. Entscheidende Variable: anhaltende Leading-Edge- und HBM-Capex-Disziplin.
+- Bull: GAA-Übergang bei allen Tier-1-Fabs. Annahme EPS ~35 USD × 45x = 1.575 USD. Kursziel 1.400–1.800 USD.
+- Base: WFE wächst 8–10% p.a., KLAC behält Marktanteil. Annahme EPS ~27 USD × 35x = 945 USD. Kursziel 800–1.100 USD.
+- Bear: Geopolitischer Schock, China-Embargo. Annahme EPS ~15 USD × 25x = 375 USD. Kursziel 300–450 USD.
 
-**Base ($2.500–3.200):** WFE wächst strukturell, KLA hält Share und Marge. Multiple normalisiert moderat.
-
-**Bear ($1.400–1.800):** WFE-Plateau plus China-Decoupling drückt adressierbaren Markt; Multiple-Kompression.
-
-Entscheidende Variable über alle Szenarien: Verhältnis von Strukturkomplexität (pro KLA) zu reinem Wafer-Volumen.
+Entscheidende Variable: Tempo des GAA-Übergangs und geopolitische Stabilität der Halbleiter-Exporte.
 
 ## 11. PROFI-FAZIT
 
-KLA ist ein echter Buy-and-Hold-Compounder mit Burggraben — das Quality-Instrument für die AI-WFE-These, nicht das schärfste Momentum-Play. Für langfristig orientierte Investoren, die strukturelle Qualität über zyklisches Timing stellen, ein Kerninvestment der Halbleiter-Ausrüster. Einschränkung: Die Bewertung (Forward-PE 38x) bietet wenig Puffer — Einstieg gestaffelt, nicht auf einmal. Positionsgröße für ein diversifiziertes Portfolio unkritisch (3–5%). Peers: **ASML** ist das reinere Litho-Monopol mit noch tieferem Burggraben, aber höherer China-Exponierung; **Lam Research/AMAT** sind zyklischer und volumenabhängiger — KLA ist das defensivste WFE-Instrument.
+KLAC ist ein struktureller Compounder mit monopolähnlicher Stellung in einem unverzichtbaren Fertigungsschritt. Geeignet für Investoren mit 3–5 Jahren Horizont und Halbleitervolatilität-Toleranz. Der EV von ~288 USD impliziert nur ~11% Upside — kein asymmetrischer Edge auf 12 Monate; die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Aufbau bei Rücksetzern unter 230 USD attraktiver. Direkte Peers: Applied Materials (AMAT) — diversifizierter, indikativ günstigere Bewertung (Peer-Multiples nicht im Datensatz); Onto Innovation (ONTO) — kleineres Wachstumsinstrument.
 
 - Qualität: 5/5
-- Wachstum: 3/5
+- Wachstum: 4/5
 - Bewertung: 2/5
-- Katalysator: 4/5
-
+- Katalysator: 5/5
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 5/5 |
-| Wachstum | 3/5 |
+| Wachstum | 4/5 |
 | Bewertung | 2/5 |
-| Katalysator | 4/5 |
+| Katalysator | 5/5 |
+| EV-Upside | +10.0% |
 
-**Verdict: BUY (70/100)**
+**Verdict: BUY (79/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
