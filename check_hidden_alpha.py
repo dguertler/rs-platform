@@ -94,6 +94,17 @@ def gws_min_yellow(state: dict | None) -> bool:
         return False
     return bool(state.get("daily") and state.get("weekly"))
 
+
+def gws_state_for_item(ticker: str, gws: dict) -> dict | None:
+    state = gws.get(ticker)
+    if not state:
+        return None
+    return {
+        "weekly": {"broken": bool(state.get("weekly"))},
+        "daily":  {"broken": bool(state.get("daily"))},
+        "h4":     {"broken4h": bool(state.get("h4"))},
+    }
+
 # ── Fundamentaldaten laden ────────────────────────────────────────────────────
 
 def load_fundamentals() -> dict:
@@ -143,7 +154,7 @@ def build_sector_pe_median(fund: dict) -> dict:
 
 # ── Post-Earnings-Kandidaten aus check_earnings-Logik (leichtgewichtig) ───────
 
-def get_recent_earnings_candidates(rs_entries: list[dict], lookback_days: int = 21) -> list[dict]:
+def get_recent_earnings_candidates(rs_entries: list[dict], fund: dict = None, gws: dict = None, lookback_days: int = 21) -> list[dict]:
     """
     Prüft Earnings-Daten für die High-Score-Aktien (Top 300 nach RS) der letzten
     lookback_days Tage. Füllt Profil 3 mit den stärksten Setups.
@@ -230,20 +241,28 @@ def get_recent_earnings_candidates(rs_entries: list[dict], lookback_days: int = 
             except Exception:
                 pass
 
+            _f = (fund or {}).get(ticker) or (fund or {}).get(ticker.split(".")[0]) or {}
             results.append({
                 "ticker":           ticker,
+                "score":            score,
+                "gws":              gws_state_for_item(ticker, gws or {}),
                 "source":           source,
-                "rs_score":         score,
+                "fundamentals": {
+                    "shortName":     _f.get("shortName", ticker),
+                    "sector":        _f.get("sector"),
+                    "industry":      _f.get("industry"),
+                    "profitMargins": _f.get("profitMargins"),
+                },
                 "earnings_date":    earnings_date,
                 "days_since":       days_since,
                 "eps_surprise_pct": round(eps_surprise, 1),
                 "eps_estimate":     eps_est,
                 "eps_actual":       eps_actual,
                 "jump_pct":         round(jump_pct * 100, 1) if jump_pct is not None else None,
-                "revenue_yoy_pct":  round(rev_yoy * 100, 1) if rev_yoy is not None else None,
+                "revenue_yoy_pct":  rev_yoy,
                 "revenue_beat":     rev_yoy is not None and rev_yoy >= 0,
                 "persistence_flag": persistence_flag,
-                "guidance_raise":   None,  # Nicht automatisch verfügbar; LLM prüft
+                "guidance_raise":   None,
             })
 
             if len(results) >= 7:
@@ -288,20 +307,22 @@ def screen_profile1(fund: dict, rs_entries: list[dict], gws: dict) -> list[dict]
 
         results.append({
             "ticker":       ticker,
-            "name":         f.get("shortName", ticker),
+            "score":        round(score, 1),
+            "gws":          gws_state_for_item(ticker, gws),
             "source":       source,
-            "rs_score":     round(score, 1),
-            "gws":          gws_label(gws.get(ticker)),
-            "sector":       sector,
-            "industry":     f.get("industry", "N/A"),
-            "market_cap_b": round(market_cap / 1e9, 1) if market_cap else None,
-            "rev_growth":   round(rev_growth * 100, 1),
-            "gross_margin": round(gross_m * 100, 1),
-            "forward_pe":   _float(f.get("forwardPE")),
-            "roe":          round(_float(f.get("returnOnEquity"), 0) * 100, 1),
-            "roic":         round(_float(f.get("returnOnInvestedCapital"), 0) * 100, 1),
-            "de_ratio":     _float(f.get("debtToEquity")),
-            "fcf_positive": (_float(f.get("freeCashflow")) or 0) > 0,
+            "fundamentals": {
+                "shortName":               f.get("shortName", ticker),
+                "sector":                  sector,
+                "industry":                f.get("industry", "N/A"),
+                "marketCap":               market_cap,
+                "revenueGrowth":           rev_growth,
+                "grossMargins":            gross_m,
+                "forwardPE":               _float(f.get("forwardPE")),
+                "returnOnEquity":          _float(f.get("returnOnEquity")),
+                "returnOnInvestedCapital": _float(f.get("returnOnInvestedCapital")),
+                "debtToEquity":            _float(f.get("debtToEquity")),
+                "freeCashflow":            _float(f.get("freeCashflow")),
+            },
         })
 
     results.sort(key=lambda x: x["rs_score"], reverse=True)
@@ -350,24 +371,85 @@ def screen_profile2(fund: dict, rs_entries: list[dict], gws: dict,
 
         results.append({
             "ticker":          ticker,
-            "name":            f.get("shortName", ticker),
+            "score":           round(score, 1),
+            "gws":             gws_state_for_item(ticker, gws),
             "source":          source,
-            "rs_score":        round(score, 1),
-            "gws":             gws_label(gws.get(ticker)),
-            "sector":          sector,
-            "industry":        f.get("industry", "N/A"),
-            "market_cap_b":    round(_float(f.get("marketCap"), 0) / 1e9, 1),
-            "roic":            round(quality * 100, 1),
-            "de_ratio":        round(de_ratio, 2),
-            "rev_growth":      round(rev_growth * 100, 1),
-            "forward_pe":      forward_pe,
-            "sector_pe_med":   round(sector_pe_median.get(sector, 0), 1),
             "pe_below_median": pe_below_median,
-            "analyst_count":   int(analyst_n) if analyst_n is not None else None,
+            "sector_pe_med":   round(sector_pe_median.get(sector, 0), 1),
+            "fundamentals": {
+                "shortName":               f.get("shortName", ticker),
+                "sector":                  sector,
+                "industry":                f.get("industry", "N/A"),
+                "marketCap":               _float(f.get("marketCap")),
+                "returnOnInvestedCapital": roic if roic is not None else roe,
+                "returnOnEquity":          roe,
+                "debtToEquity":            de_ratio,
+                "freeCashflow":            fcf,
+                "revenueGrowth":           rev_growth,
+                "forwardPE":               forward_pe,
+                "numberOfAnalystOpinions": int(analyst_n) if analyst_n is not None else None,
+                "profitMargins":           _float(f.get("profitMargins")),
+            },
         })
 
     results.sort(key=lambda x: x["roic"], reverse=True)
     return results[:PROFILE2_MAX_RESULTS]
+
+# ── E-Mail-Benachrichtigung ───────────────────────────────────────────────────
+
+def send_alpha_email(p1, p2, p3, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
+    import smtplib
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+
+    if not all([smtp_host, smtp_port, smtp_user, smtp_pass, to_addr]):
+        print("  SMTP nicht konfiguriert – E-Mail übersprungen")
+        return
+
+    subject = (f"Alpha-Screener {datetime.now().strftime('%d.%m.%Y')} – "
+               f"{len(p1)} Early Tech · {len(p2)} Hidden · {len(p3)} Earnings")
+
+    lines = [
+        f"Alpha-Screening – {datetime.now().strftime('%Y-%m-%d %H:%M')} UTC\n",
+        f"🚀 Profil 1 – Early Tech Alpha: {len(p1)} Kandidaten",
+    ]
+    for item in p1:
+        f = item.get("fundamentals", {})
+        lines.append(f"  • {item['ticker']} ({f.get('shortName', '')})"
+                     f"  RS={round(item.get('score', 0))}"
+                     f"  RevGrowth={round((f.get('revenueGrowth') or 0) * 100, 1)}%"
+                     f"  Marge={round((f.get('grossMargins') or 0) * 100, 1)}%")
+    lines.append(f"\n💎 Profil 2 – Hidden Champions: {len(p2)} Kandidaten")
+    for item in p2:
+        f = item.get("fundamentals", {})
+        lines.append(f"  • {item['ticker']} ({f.get('shortName', '')})"
+                     f"  RS={round(item.get('score', 0))}"
+                     f"  ROIC={round((f.get('returnOnInvestedCapital') or 0) * 100, 1)}%"
+                     f"  D/E={f.get('debtToEquity', '–')}")
+    lines.append(f"\n⚡ Profil 3 – Post-Earnings Breakout: {len(p3)} Kandidaten")
+    for item in p3:
+        f = item.get("fundamentals", {})
+        lines.append(f"  • {item['ticker']} ({f.get('shortName', '')})"
+                     f"  EPS-Beat={item.get('eps_surprise_pct', 0)}%"
+                     f"  Kurssprung={item.get('jump_pct') or '–'}%"
+                     f"  ({item.get('earnings_date', '')})")
+
+    body = "\n".join(lines)
+    msg = MIMEMultipart()
+    msg["Subject"] = subject
+    msg["From"]    = smtp_user
+    msg["To"]      = to_addr
+    msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    try:
+        with smtplib.SMTP(smtp_host, int(smtp_port)) as server:
+            server.starttls()
+            server.login(smtp_user, smtp_pass)
+            server.sendmail(smtp_user, [to_addr], msg.as_string())
+        print(f"  E-Mail gesendet an {to_addr}")
+    except Exception as e:
+        print(f"  E-Mail-Fehler: {e}")
+
 
 # ── Hauptprogramm ──────────────────────────────────────────────────────────────
 
@@ -401,15 +483,17 @@ def main():
     print(f"     {len(p2)} Kandidaten")
 
     print("  → Profil 3: Post-Earnings (Live-Prüfung)")
-    p3 = get_recent_earnings_candidates(rs_entries)
+    p3 = get_recent_earnings_candidates(rs_entries, fund, gws)
     print(f"     {len(p3)} Kandidaten")
 
     output = {
-        "generated_at":            datetime.utcnow().isoformat() + "Z",
-        "universe_size":           len(rs_entries),
-        "profile1_early_tech":     p1,
-        "profile2_hidden_champion": p2,
-        "profile3_earnings_breakout": p3,
+        "updated_at":    datetime.utcnow().isoformat() + "Z",
+        "universe_size": len(rs_entries),
+        "profiles": {
+            "early_tech":       p1,
+            "hidden_champions": p2,
+            "post_earnings":    p3,
+        },
     }
 
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -418,30 +502,13 @@ def main():
     print(f"\n✅ alpha_candidates.json geschrieben:")
     print(f"   Profil 1: {len(p1)} | Profil 2: {len(p2)} | Profil 3: {len(p3)}")
 
-    # Kompakter Telegram-Ping
-    tg_token   = os.environ.get("TELEGRAM_TOKEN", "")
-    tg_chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
-    if tg_token and tg_chat_id and (p1 or p2 or p3):
-        top3 = ([x["ticker"] for x in p1[:2]] +
-                [x["ticker"] for x in p2[:1]] +
-                [x["ticker"] for x in p3[:2]])
-        msg = (
-            f"🔍 <b>Alpha-Screener {datetime.now().strftime('%d.%m.')}</b>\n"
-            f"📈 Early Tech: {len(p1)} | 🏆 Hidden: {len(p2)} | "
-            f"⚡ Earnings: {len(p3)}\n"
-            f"Top: {' · '.join(top3[:5])}"
-        )
-        try:
-            import urllib.request
-            url  = f"https://api.telegram.org/bot{tg_token}/sendMessage"
-            data = json.dumps({"chat_id": tg_chat_id, "text": msg, "parse_mode": "HTML"}).encode()
-            req  = urllib.request.Request(url, data=data,
-                                          headers={"Content-Type": "application/json"})
-            with urllib.request.urlopen(req, timeout=10):
-                pass
-            print("  Telegram-Ping gesendet")
-        except Exception as e:
-            print(f"  Telegram-Fehler: {e}")
+    if p1 or p2 or p3:
+        smtp_host = os.environ.get("SMTP_HOST", "")
+        smtp_port = os.environ.get("SMTP_PORT", "587")
+        smtp_user = os.environ.get("SMTP_USER", "")
+        smtp_pass = os.environ.get("SMTP_PASS", "")
+        to_addr   = os.environ.get("ALERT_EMAIL_TO", "")
+        send_alpha_email(p1, p2, p3, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr)
 
 
 if __name__ == "__main__":
