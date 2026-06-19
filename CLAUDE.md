@@ -36,7 +36,23 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
    # NASDAQ-100 → data/rs_full.json
    # DAX-40    → data/rs_dax.json
    # S&P 500   → data/rs_sp500.json
+   # Smallcap  → data/rs_smallcap.json
    rs = next(e for e in json.load(open('data/rs_full.json'))['data'] if e['ticker']=='TICKER')
+   rs_score  = rs['score']        # Feldname ist 'score', NICHT 'rs_score'
+   rs_rank   = rs['prev_rank']    # Feldname ist 'prev_rank', NICHT 'rank'
+   windows   = rs['windows']
+   gws       = rs.get('gws')      # None bei Smallcaps — dann gws_smallcap-Dict übergeben:
+   # gws = gws or {"weekly": False, "daily": False, "h4": False, "points": 0, "signal_type": "Smallcap"}
+   ```
+
+   **Zombie-Stock-Filter (PFLICHT vor jeder Analyse):**
+   ```python
+   fund = json.load(open('data/fundamentals.json'))['tickers']['TICKER']
+   market_cap = fund.get('marketCap') or 0
+   if market_cap < 5_000_000:
+       print(f"ZOMBIE-STOCK: {TICKER} MCap ${market_cap:,.0f} — keine Analyse, kein write_rating().")
+       # Stattdessen nur kurze Chat-Ausgabe: "TICKER — AVOID (Zombie-Stock, MCap < $5M)"
+       # STOP — nicht weiter analysieren
    ```
 
 3. **`analyses/PROMPT.md` lesen** — dort stehen Analyse-Struktur, Prompt und alle Formatregeln

@@ -10,7 +10,7 @@
 | Revenue (TTM) | $0.55 Mrd. |
 | Gross Margin | 20.2% |
 | ROE | 10.7% |
-| RS-Score | 0.0 |
+| RS-Score | 211.8 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 

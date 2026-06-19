@@ -145,6 +145,19 @@ Die Werte stammen aus Abschnitten 3–5. Diese Zeile ist Pflicht — sie gibt de
 
 ---
 
+## ZOMBIE-STOCK-FILTER (PFLICHT vor jeder Analyse)
+
+Vor dem Start jeder Analyse prüfen:
+- MarketCap < $5 Mio. **oder**
+- Revenue nicht verfügbar (N/A) **und** alle Margen 0% **und** kein EPS
+
+→ **SOFORT STOPPEN.** Keine 11-Abschnitte-Analyse. Keine write_rating()-Aufruf.
+→ Nur kurze Chat-Ausgabe: `TICKER — AVOID (Zombie-Stock, MCap $X — nicht analysierbar)`
+
+Begründung: Zombie-Stocks (Sub-Penny-Shells, leere Mantelgesellschaften, Delisting-Kandidaten) produzieren irreführende RS-Signale durch Pump-and-Dump-Muster. Eine Vollanalyse suggeriert fälschlicherweise Investierbarkeit.
+
+---
+
 ## DATENVERFÜGBARKEIT
 Fehlende oder als "N/A" markierte Kennzahlen nicht interpolieren oder schätzen. Explizit als "nicht verfügbar" kennzeichnen und die Analyse entsprechend einschränken.
 Als "UNGÜLTIG (Wert)" markierte Kennzahlen sind yfinance-Artefakte — nicht verwenden, nicht erwähnen, nicht in die Analyse einbeziehen.
