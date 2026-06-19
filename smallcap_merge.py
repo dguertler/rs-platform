@@ -55,6 +55,33 @@ for d in all_data:
         deduped.append(d)
 all_data = deduped
 
+# Zombie-Filter: MCap < $5M oder Kurs < $0.10
+ZOMBIE_MCAP_THRESHOLD = 5_000_000
+fund_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "fundamentals.json")
+fund_map = {}
+if os.path.exists(fund_path):
+    with open(fund_path) as f:
+        fund_map = json.load(f).get("tickers", {})
+
+def is_zombie(entry):
+    ticker = entry.get("ticker", "")
+    fund = fund_map.get(ticker, {})
+    mcap = fund.get("marketCap")
+    if mcap is not None and mcap < ZOMBIE_MCAP_THRESHOLD:
+        return True
+    ohlcv = entry.get("ohlcv_w") or entry.get("ohlcv", [])
+    if ohlcv:
+        last_price = ohlcv[-1].get("c", 999)
+        if last_price < 0.10:
+            return True
+    return False
+
+pre_filter = len(all_data)
+all_data = [d for d in all_data if not is_zombie(d)]
+filtered = pre_filter - len(all_data)
+if filtered:
+    print(f"   Zombie-Filter: {filtered} Ticker entfernt (MCap < $5M oder Kurs < $0.10)")
+
 all_data.sort(key=lambda x: x.get("score") if x.get("score") is not None else float("-inf"), reverse=True)
 top20 = [d["ticker"] for d in all_data[:20]]
 
