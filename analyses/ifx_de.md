@@ -92,6 +92,7 @@ IFX ist ein zyklischer Rebound-Trade mit strukturellem Energiewende-Rückenwind.
 - Bewertung: 3/5
 - Katalysator: 4/5
 
+
 ---
 
 | Rating | Score |
@@ -100,8 +101,8 @@ IFX ist ein zyklischer Rebound-Trade mit strukturellem Energiewende-Rückenwind.
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
 | Katalysator | 4/5 |
-| EV-Upside | +3534.8% |
+| EV-Upside | +6.3% |
 
-**Verdict: BUY (72/100)**
+**Verdict: HOLD (62/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
