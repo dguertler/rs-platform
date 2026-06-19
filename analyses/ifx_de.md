@@ -1,174 +1,107 @@
 # IFX.DE — KI-Aktienbewertung
 
-**INFINEON TECHNOLOGIES AG      N** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
+**INFINEON TECHNOLOGIES AG      N** · Technology · 19.06.2026 · Signal: Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 83.67 |
-| Market Cap | $108.73 Mrd. |
-| Forward PE | 32.68 |
+| Kurs | 79.16 |
+| Market Cap | $102.87 Mrd. |
+| Forward PE | 30.59 |
 | Revenue (TTM) | $15.12 Mrd. |
 | Gross Margin | 41.2% |
 | ROE | 6.3% |
-| RS-Score | 433.4 |
+| RS-Score | 366.6 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-# IFX.DE – Infineon Technologies AG
+# Infineon Technologies AG (IFX.DE)
+
+**Kurs:** €82,01 (15.06.2026) | **RS-Score:** 366,61 | **Rank:** #1 (DAX-40)
+**GWS:** —
+**Szenarien (12–18 Monate):** Bull €105–€125 (25%) · Base €75–€95 (55%) · Bear €45–€60 (20%) · EV ~€86
 
 ## 1. INVESTMENT-CASE
 
-Infineon ist Europas größter Halbleiterhersteller und ein dominanter Player in Power-Semis, Automotive-Chips und SiC/GaN. Die Aktie hat sich von ihrem 52W-Tief bei 30,82 € fast verdreifacht und steht jetzt am 52W-Hoch – das ist ein klassisches Repricing nach dem Auto-/Industrial-Zyklustief. Der Markt antizipiert eine Trendwende im Automotive-Markt (xEV-Hochlauf, ADAS), das Anziehen industrieller Endmärkte und die strukturelle Power-Story rund um AI-Rechenzentren (Server-Power-Delivery). Was viele unterschätzen: Infineon ist neben Nvidia einer der größten Profiteure des AI-Capex-Booms – nicht über Compute, sondern über Power. Gleichzeitig ist die Aktie nach dem Run heiß gelaufen, Analysten-Kursziel liegt mit 66 € unter dem Spotkurs. Ein typisches "Smart Money is early"-Setup: Die Story ist da, aber kurzfristig läuft sie der Realität voraus.
+Infineon ist Europas prominentester Rebound-Kandidat im Halbleiterbereich — nach einem Einbruch von über 60% vom Allzeithoch hat die Aktie in 6 Monaten +127% zurückgewonnen und belegt Rang #1 im DAX. Die Story: Neubewertung eines strukturellen Zyklus-Tals. Infineon ist führender Anbieter für Automotive-Halbleiter (Leistungshalbleiter, Mikrocontroller, Sensorik) und industrielle Energiesteuerung. Was der Markt einpreist: das Ende des Auto-Chip-Destocking-Zyklus und Elektrifizierungs-Capex. Was er möglicherweise unterschätzt: der operative Hebel bei Auslastungsverbesserung in eigenen Fabs (Villach, Dresden). Forward PE 30,6x suggeriert Normalisierungserwartung; Trailing PE 96x zeigt das aktuelle Earnings-Tal. RevGrowth nicht aus Daten verfügbar — Datenlage eingeschränkt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Vier Segmente: Automotive (ATV, ~50%), Green Industrial Power (GIP), Power & Sensor Systems (PSS), Connected Secure Systems (CSS)
-
-- Marktführer bei Power-Semis weltweit (~Nr. 1 Diskrete Leistungshalbleiter)
-
-- Stark in MOSFETs, IGBTs, SiC (Siliziumkarbid) und GaN – Schlüssel für EV-Effizienz
-
-- Größter Automotive-Chiplieferant der Welt (Mikrocontroller, Sensoren, Power)
-
-- Hochfahrender SiC-Power-Bereich (Kulim-Fab Malaysia) für EVs und Solarwechselrichter
-
-- Power-Delivery-Komponenten für AI-Rechenzentren (Hyperscaler-Boards) – wachsendes Segment
-
-- Industrieautomatisierung, erneuerbare Energien, Smart-Home-Anwendungen
-
-- Zyklisch geprägt mit Auto/Industrie-Cycle, gemildert durch strukturelles xEV-Wachstum
+- Automotive (~50% Umsatz): Leistungshalbleiter, SiC-MOSFETs für EV, Mikrocontroller, ADAS — höchste Wachstumserwartung
+- Industrial Power Control (~20%): Frequenzumrichter, Solarwechselrichter, Netzinfrastruktur — Energiewende-Treiber
+- Green Industrial Power (~15%): Industrielle Automatisierung, Robotik
+- Connected Secure Systems (~10%): IoT, Smart Card, Sicherheits-ICs
+- Eigene Fertigungskapazitäten (Villach: 300mm SiC-Pilotlinie) — Differenzierungsmerkmal mit Fixkostenhebel
+- SiC-Technologie als strategischer Wettbewerb gegen STMicro und ON Semiconductor
+- Abhängigkeit vom Automotive-Zyklus: OEM-Schwäche schlägt direkt durch
+- Währungsrisiko (EUR/USD) und Zollrisiko bei US-Handelspolitik
 
 ## 3. BULL CASE
 
-- AI-Power-Delivery: Server-Stromversorgung wird zum strukturellen Wachstumstreiber, Infineon ist Premium-Lieferant
+Auto-Destocking endet 2026, Umsatz normalisiert auf €16–18 Mrd. in FY28. SiC-Marktanteil verteidigt, Villach-Auslastung auf 80%+. Annahme (kein Konsens): FY27-EPS ~€3,00 × 40x Forward = €120 Midpoint; Bandbreite €105–€125. Strukturelle Margennachhaltigkeit durch proprietäre SiC-Plattform — Differenzierung vs. STMicro auf Datenbasis nur bedingt beurteilbar. Eintrittswahrscheinlichkeit: 25%.
 
-- EV-Hochlauf nach Auto-Krise 2024/25 – SiC-Inhalt pro Fahrzeug steigt 3-5x
+## 4. BASE CASE
 
-- Industrial-Recovery 2025/26 als zyklischer Kicker für GIP und PSS
+Auto-Erholung moderat, SiC-Wettbewerbsdruck durch chinesische Anbieter drückt Pricing. Umsatz wächst 3–7% p.a. Annahme (kein Konsens): FY27-EPS ~€2,20 × 38x Forward = €84 Midpoint; Bandbreite €75–€95 auf 12–18 Monate. Wahrscheinlichkeit: 55%.
 
-- Marktkonsolidierung in Power-Semis stärkt Pricing Power (vs. Onsemi, STM, Wolfspeed)
+## 5. BEAR CASE
 
-- Europäische Chip-Souveränität: Subventionen, EU-Chips-Act-Profiteur
+Automotive-Nachfrage bricht erneut ein, SiC-Preiskampf mit chinesischen Wettbewerbern drückt Margen unter 10%. Annahme (kein Konsens): FY27-EPS ~€0,90 × 58x (Stress-Multiple im Tal) = €52 Midpoint; Bandbreite €45–€60. Eintrittswahrscheinlichkeit: 20%.
 
-- Margen-Erholung von aktuellem Tief Richtung 25%+ EBIT-Marge möglich
+Risiko-Sweep:
+- Kundenkonzentration: Automotive ~50% Umsatz — starke OEM-Abhängigkeit; einzelne Großkunden nicht aus Daten ableitbar
+- Geopolitik/China: China EV als Wachstumstreiber; gleichzeitig Chinese-Domestic-Supplier-Gefahr; US-Zollrisiko
+- Lieferkette: Eigene Fabs reduzieren Single-Source-Risiko, erhöhen aber Fixkostenhebel im Abschwung
+- Verwässerung: Aktienanzahl-Trend nicht aus Daten ableitbar
+- Regulierung: EU-Chips Act als positiver Hebel; Exportkontrollen für China relevant
 
-- Dividenden-Wachstum und potenzielle Kapitalrückgaben bei Cycle-Upturn
+Summe: 25% + 55% + 20% = 100%
+Erwartungswert: (0,25 × 115) + (0,55 × 85) + (0,20 × 52,50) = 28,75 + 46,75 + 10,50 = 86,00 EUR — implizites Upside vs. aktuellem Kurs (82,01 EUR): +4,9%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
-- Re-Rating Richtung TSMC/ASML-Multiples möglich bei AI-Power-Anerkennung
+## 6. FUNDAMENTALE QUALITÄT
 
-## 4. BEAR CASE
+Anomalie: Operating Margin 46,7% übertrifft Gross Margin 41,2% — Datenartefakt, aus den Daten nicht abschließend auflösbar; Operating Margin nicht für Bewertungsherleitung verwendet. Net Margin 7,2% als primäre Profitabilitätskennzahl. ROE 6,3% im Zyklustal nicht repräsentativ. D/E 47,6x branchenüblich bei kapitalintensiver Fertigung. Normalisierter FCF bei Margin-Recovery auf 15% auf €15 Mrd. Umsatz: ~€1,5 Mrd.
 
-- Aktie ist nach +100% in 12M technisch extrem überdehnt, Analystenziel unter Spot
+## 7. BEWERTUNG
 
-- Automotive-Erholung verzögert sich, Bestände bei OEMs weiterhin hoch
+Trailing PE 96x im Zyklustal irreführend. Forward PE 30,6x impliziert EPS-Normalisierung auf ~€2,20 in FY27. Normalisierter FCF ~€1,5 Mrd. bei MarketCap €103 Mrd. → ~69x normalisierter FCF — teuer. Rückrechnung: Kurs €82 preist EPS-Recovery auf ~€2,20 bei 37x Forward ein — bei Destocking-Ende realistisch, bei SiC-Preiskampf ambitioniert. RevGrowth nicht verfügbar. Bewertung: 3/5 (vorläufig, Datenstand).
 
-- China-Konkurrenz bei Power-Semis (BYD, Hua Hong) drückt Preise
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Wolfspeed/STM/Onsemi-Wettbewerb im SiC-Markt verschärft sich
+RS-Rank #1 im DAX nach +127% in 6 Monaten — extremes Momentum, institutionelle Umschichtung in europäische Industriewerte. Enttäuschungsrisiko hoch: jede EPS-Revision oder Auto-Produktionswarnung trifft auf hohe Erwartungshaltung. Short Float nicht aus Daten ableitbar.
 
-- Operating Margin von 46,7% wirkt verzerrt – Net Margin 7,2% zeigt Realität
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- Hohe Fixkosten (Kulim-Fab) bei Unterauslastung sind Margen-Killer
+Kurs €82 nahe 52W-Hoch €88,46. 50T +90%, 6M +127% — extraordinäres Momentum. 5T –0,6% signalisiert Konsolidierung auf hohem Niveau. Technisches Warnsignal: Rückfall unter €65 würde Trendstruktur brechen.
 
-- Beta 1,9 – die Aktie wird im nächsten Risk-off-Move überproportional fallen
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- Forward PE 29,87 ist für einen zyklischen Semi-Player ambitioniert
+- Bull: SiC-Marktführerschaft gesichert, Auto-Elektrifikation vollständig. Annahme EPS ~€4,50 × 35x = €157. Kursziel €130–€180.
+- Base: Moderates Wachstum, Wettbewerbsdruck. Annahme EPS ~€3,00 × 30x = €90. Kursziel €75–€110.
+- Bear: Struktureller Auto-Schock und chinesische Konkurrenz. Annahme EPS ~€1,20 × 25x = €30. Kursziel €25–€40.
 
-## 5. FUNDAMENTALE QUALITÄT
-
-- Revenue TTM: 15,1 Mrd. € – nach Schwächephase wieder Stabilisierung erwartet
-
-- Gross Margin 41,2% – solide, aber unter historischem Peak (~46%)
-
-- Operating Margin 46,7% (Reporting-Effekt, bereinigt eher ~18-20%)
-
-- Net Margin nur 7,2% – Hinweis auf Restrukturierung und hohe Abschreibungen
-
-- Free Cashflow 1,36 Mrd. € – akzeptabel, aber Capex-intensiv
-
-- Debt/Equity 47,65 – moderat verschuldet (Cypress-Akquisition Legacy)
-
-- ROE nur 6,3% – schwach, deutet auf aktuelles Zyklustief hin
-
-- Price/Book 5,94 – sportlich für aktuelles ROE-Niveau
-
-- Marktanteil-Stärke und Tech-IP bei Power und SiC als echter Moat
-
-- Dividende existent (48% Payout), aber nicht der Investment-Grund
-
-- Forward PE 29,87 vs. Trailing 93,57 – Markt preist starke EPS-Erholung ein
-
-## 6. BEWERTUNG
-
-Mit Forward PE 29,87 wird Infineon klar als Wachstumswert gepreist, nicht mehr als zyklischer Semi. Gegenüber STM (Forward ~22), Onsemi (~18) und NXP (~16) ist Infineon der teuerste europäische Auto/Power-Semi – das Premium beruht auf SiC-Leadership und AI-Power-Fantasie. P/B von 5,94 ist hoch im Verhältnis zum aktuellen ROE 6,3%, was nur durch ein massives Margen-Recovery-Szenario zu rechtfertigen ist. Das Analystenkursziel von 66 € liegt 14% unter Spot – ein Warnsignal, dass die Erwartungen bereits aggressiv eingepreist sind. Der Markt preist im Grunde Recovery + AI-Power + SiC-Wachstum gleichzeitig ein. Solange die Industrial/Auto-Daten mitspielen, hält die Bewertung; bei Enttäuschungen folgt schnelle De-Rating-Phase.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Massive Trendwende-Story – institutionelle Investoren rotieren rein (RS-Score 287)
-
-- Crowded Long bei europäischen Fonds als "AI-Beneficiary Europe"
-
-- Retail-FOMO am 52W-Hoch deutlich spürbar
-
-- Sentiment dreht von Bear-to-Bull – die einfachen Gewinne sind durch
-
-- Strong Buy Consensus trotz Kursziel unter Spot = Lag der Analysten
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- GWS-Ampel 3/3 aktiv – Weekly/Daily/4H-Strukturen gebrochen, voller Bullish-Bias
-
-- RS vs. QQQ +101% auf 12M – außergewöhnlich starke Relative Stärke
-
-- Aktie am 52W-Hoch ohne Widerstand, aber überkauft kurzfristig
-
-- Pullbacks zur 20T/50T-EMA sind hochwahrscheinlich und Kaufgelegenheiten
-
-- Zyklus-Phase: Mid-Stage Bull, Mark-Up-Phase nach Basis-Breakout
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-**Konservativ:** Auto/Industrial-Recovery moderat, SiC läuft – Umsatz 18-19 Mrd. €, EBIT-Marge 18%. Kursziel: 70-80 € | Wahrscheinlichkeit: 45%
-
-**Bull Case:** Voller Cycle-Upturn + AI-Power-Story zündet – Umsatz 22 Mrd. €, EBIT-Marge 22%. Kursziel: 110-130 € | Wahrscheinlichkeit: 35%
-
-**Extrem-Bull-Case:** Infineon wird als "Power-ASML" gepreist, SiC-Marktführerschaft, AI-Server-Power-Boom – Kursziel: 160-180 € | Wahrscheinlichkeit: 15%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- STMicroelectronics (STM): Direkter SiC-Konkurrent, deutlich günstiger, aber schwächeres Momentum
-
-- ON Semiconductor (ON): US-Pendant, niedrigere Bewertung, US-Auto-Exposure
-
-- NXP (NXPI): Auto-Fokus, günstiger, aber weniger Power-Story
-
-- Wolfspeed (WOLF): Pure SiC-Play, hochriskant, strukturell angeschlagen
+Entscheidende Variable: SiC-Preisdynamik und europäischer Auto-Elektrifizierungszyklus.
 
 ## 11. PROFI-FAZIT
 
-Infineon ist aktuell eines der besten Momentum-Setups in Europa – die GWS-Ampel auf 3/3, RS-Score 287 und Bruch aller Zeitebenen sind ein klares technisches Kaufsignal. Fundamental ist die Story intakt: SiC-Leadership, AI-Power-Komponenten und der bevorstehende Auto/Industrial-Recovery-Zyklus rechtfertigen ein Re-Rating. Aber: Die Aktie hat bereits 100% in 12M gemacht, die Bewertung ist sportlich, und Analysten hängen mit ihren Kurszielen hinterher – das spricht für temporäre Übertreibung. Aus Hedgefonds-Sicht ist das ein Compounder mit zyklischer Komponente, kein reines Trading-Play. Die intelligente Strategie: Position halten, aber Neueinstiege auf Pullbacks zur 50T-EMA oder strukturelle Daily-Re-Tests warten. Nicht ins 52W-Hoch jagen. Bei Ampel-Reset auf Daily nachladen, bei Weekly-Ampel-Bruch (4-Tages-Schluss unter Trigger) Position reduzieren. Risiko/Rendite ist langfristig attraktiv, kurzfristig neutral bis negativ.
+IFX ist ein zyklischer Rebound-Trade mit strukturellem Energiewende-Rückenwind. Geeignet für Investoren die den Automotive-Halbleiterzyklus aktiv spielen. Nach +127% in 6 Monaten ist der EV nur 5% über dem aktuellen Kurs — die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Auf Rücksetzer unter €65 warten. Direkte Peers: STMicroelectronics (STM) — stärker in Consumer, indikativ günstigere Bewertung (Peer-Multiples nicht im Datensatz); ON Semiconductor — reiner SiC-Play mit höherem Wachstumsprofil.
 
-**Rating:**
-
-- Qualität: 4/5
-
-- Wachstum: 4/5
-
-- Bewertung: 2/5
-
-- Langfristiges Potenzial: 4/5
+- Qualität: 3/5
+- Wachstum: 3/5
+- Bewertung: 3/5
+- Katalysator: 4/5
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 4/5 |
-| Wachstum | 4/5 |
-| Bewertung | 2/5 |
-| Katalysator | 3/5 |
+| Qualität | 3/5 |
+| Wachstum | 3/5 |
+| Bewertung | 3/5 |
+| Katalysator | 4/5 |
+| EV-Upside | +3534.8% |
 
-**Verdict: HOLD (65/100)**
+**Verdict: BUY (72/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
