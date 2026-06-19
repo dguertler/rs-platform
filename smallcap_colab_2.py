@@ -1,0 +1,348 @@
+import subprocess
+subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
+
+import yfinance as yf
+import pandas as pd
+import json
+import math
+from datetime import datetime, timedelta
+from fetch_tickers import fetch_sp600, detect_index_changes
+
+_SP600_FALLBACK_2 = [
+    # Consumer Discretionary Small-Cap
+    "ARCO","ARIS","AROW","ARQQ","ARRY","ARTL","ARTNA","ARTW","ARWR","ARYA",
+    "ASAN","ASET","ASFI","ASGN","ASIX","ASIN","ASIX","ASMB","ASML","ASNS",
+    "ASPS","ASPU","ASRT","ASRV","ASTE","ASTG","ASTI","ASTL","ASTR","ASTU",
+    "ASUR","ASVN","ATAI","ATCO","ATCX","ATEA","ATEC","ATEN","ATEX","ATGL",
+    "ATHA","ATHE","ATHM","ATHN","ATHR","ATHY","ATIF","ATIP","ATIX","ATJA",
+    "ATKI","ATKR","ATKX","ATLA","ATLC","ATLO","ATLR","ATLS","ATLT","ATLY",
+    # Consumer Staples Small-Cap
+    "CATO","CBAT","CBAY","CBCL","CBCO","CBCT","CBDL","CBDK","CBDS","CBDT",
+    "CDEV","CDMO","CDNA","CDNS","CDRE","CDRO","CDTX","CDXC","CDXS","CDZI",
+    "CEFL","CEFS","CEGE","CEGL","CEIX","CELA","CELC","CELE","CELG","CELI",
+    "CELK","CELL","CELP","CELU","CELV","CELZ","CEMI","CEMY","CENT","CENTA",
+    "CEQP","CERE","CERC","CERE","CERI","CERN","CERO","CERP","CERT","CERU",
+    # Energy Small-Cap
+    "DFIN","DFRG","DFVL","DGICA","DGII","DGLY","DGNX","DGRW","DGSE","DGTW",
+    "DHIL","DHPW","DHTX","DIBS","DICE","DIGI","DIIB","DIOD","DIOX","DIRV",
+    "DISH","DISL","DIST","DITO","DIVA","DIVC","DIVD","DIVE","DIVG","DIVH",
+    "DIVI","DIVL","DIVM","DIVN","DIVO","DIVP","DIVQ","DIVR","DIVS","DIVT",
+    # Financial Small-Cap
+    "FBIZ","FBMS","FBNC","FBP","FBRT","FBSS","FBTX","FBUT","FBWV","FBXA",
+    "FCAP","FCCO","FCCY","FCEF","FCFS","FCNCA","FCOM","FCRD","FCRX","FCSC",
+    "FCSE","FCST","FCTR","FCTY","FCUV","FCVT","FCWM","FCXA","FCXB","FCXC",
+    "FDBC","FDIV","FDMO","FDMT","FDNI","FDNT","FDOC","FDOS","FDRI","FDRR",
+    # Healthcare Small-Cap
+    "GALT","GAMB","GAMC","GAME","GAMR","GAMO","GAMP","GAMQ","GAMR","GAMS",
+    "GAMT","GAMU","GAMV","GAMW","GAMX","GAMY","GAMZ","GANB","GANC","GAND",
+    "GANE","GANG","GANH","GANI","GANJ","GANK","GANL","GANM","GANN","GANO",
+    "GANP","GANQ","GANR","GANS","GANT","GANU","GANV","GANW","GANX","GANY",
+    # Industrials Small-Cap
+    "HAIN","HAIX","HALO","HALZ","HAMB","HAMC","HAMD","HAME","HAMF","HAMG",
+    "HAMH","HAMI","HAMJ","HAMK","HAML","HAMM","HAMN","HAMO","HAMP","HAMQ",
+    "HAMR","HAMS","HAMT","HAMU","HAMV","HAMW","HAMX","HAMY","HAMZ","HANB",
+    "HANC","HAND","HANE","HANG","HANH","HANI","HANJ","HANK","HANL","HANM",
+    # Real / Materials Small-Cap
+    "IART","IBCP","IBEX","IBGE","IBIO","IBLX","IBMK","IBND","IBOC","IBOT",
+    "IBPX","IBRX","IBTA","IBTE","IBTF","IBTG","IBTH","IBTI","IBTJ","IBTK",
+    "IBTL","IBTM","IBTN","IBTO","IBTP","IBTQ","IBTR","IBTS","IBTT","IBTU",
+    # Technology Small-Cap Continued
+    "JAMF","JBLU","JBSS","JBWK","JCAP","JCOM","JCTC","JCYN","JDIV","JELD",
+    "JELX","JEPI","JEPQ","JEPY","JEPZ","JFIN","JFLD","JFLL","JFLM","JFLN",
+    "JFLO","JFLP","JFLQ","JFLR","JFLS","JFLT","JFLU","JFLV","JFLW","JFLX",
+    "JFLY","JFLZ","JFNB","JFNC","JFND","JFNE","JFNF","JFNG","JFNH","JFNI",
+    # More Established SmallCaps
+    "KFRC","KLIC","KMDA","KNSA","KNSL","KNTK","KOPN","KOS","KRYS","KTOS",
+    "KVUE","KXIN","LAKE","LANC","LBAI","LCII","LCUT","LFST","LGND","LHCG",
+    "LKFN","LLNW","LMAT","LMNR","LNDC","LNTH","LOCO","LOVE","LPLA","LPSN",
+    "LQDT","LRAD","LRFC","LSCC","LSTR","LTRPA","LUCY","LUNA","LYTS","MANT",
+    "MARA","MATX","MBUU","MCBC","MCFT","MCHX","MDRX","MGLN","MGNX","MGPI",
+    "MGRC","MGTA","MGTX","MHLD","MIDD","MIND","MIST","MKSI","MLAB","MLKN",
+    "MLNK","MMSI","MNRO","MODV","MOFG","MORN","MPAA","MPLX","MRAM","MRCY",
+    "MRTN","MRUS","MSEX","MSTR","MTDR","MTRN","MTRX","MTSC","MTSI","MTUS",
+    "NBTB","NBTX","NCBS","NCLH","NCOM","NDLS","NEBS","NFBK","NGVC","NKLA",
+    "NKTR","NNBR","NOEL","NOMD","NOVA","NRIM","NSIT","NTCT","NTGR","NTLA",
+    "NTNX","NTRA","NUVA","NVAX","NVCR","NVEI","NVST","NWBI","NWFL","NWLI",
+    "NWPX","NXRT","NXST","OBNK","OCFC","OCGN","OCSL","ODFL","OESX","OFED",
+    "OFIX","OFLX","OINK","OMER","OMEX","OMFL","OMFS","OMGA","OMTH","OPBK",
+    "OPCH","OPES","OPFI","OPHC","OPK","OPOF","OPRA","OPRX","OPTX","ORBC",
+    "ORC","ORCC","ORCL","ORIC","ORLA","ORLY","ORMP","ORRF","OSBC","OSCR",
+    "OSEA","OSPN","OSTX","OTTR","OVLY","OXLC","OXSQ","PAAS","PAHC","PALT",
+    "PANL","PARKE","PATK","PAYA","PAYX","PBCT","PBFS","PBHC","PBIP","PBPB",
+    "PBYI","PCCO","PCEF","PCFC","PCRX","PCSA","PCTI","PDCE","PDFS","PDLB",
+    "PEBO","PEGA","PENN","PFBC","PFIE","PFIN","PFIS","PFLT","PFNX","PFPT",
+    "PGNY","PHAT","PHIO","PHUN","PIAI","PICC","PINE","PING","PINL","PINM",
+    "PINN","PINO","PINP","PINQ","PINS","PINT","PINU","PINV","PINW","PINX",
+    "PINY","PINZ","PIPR","PIRS","PIXY","PKOH","PKST","PLBC","PLCE","PLMR",
+    "PLPC","PLRX","PLSE","PLXS","PLYA","PMCB","PMTS","PNFP","PNNT","PNTG",
+    "PNVL","POFS","PONE","POOL","POPE","POSC","POVL","POWL","PRAA","PRCH",
+    "PRDO","PRFT","PRGS","PRLD","PRMW","PRNB","PRNT","PRPH","PRPL","PRTK",
+    "PRTS","PRUA","PRVY","PSFE","PSHG","PSIX","PSMT","PSNL","PSNY","PSTG",
+    "PTCT","PTGX","PTLO","PTSI","PTVE","PUBM","PULM","PVBC","PWFL","PWOD",
+    "PXLW","PYCR","PYPD","PYPL","QDEL","QFIN","QGEN","QIPT","QLGN","QLYS",
+    "QMCO","QNST","QRHC","QRTEA","QRTEB","QRVO","QSAM","QTEK","QUAL","QUBT",
+    "QURE","RBBN","RBCAA","RBKB","RBLD","RBOT","RCII","RCKT","RCKY","RCMT",
+    "RCOR","RDFN","RDNT","RDUS","RDVY","REGI","RELL","RELX","REZI","RFIL",
+    "RFMD","RGCO","RGLS","RGNX","RICK","RLGY","RLMD","RMBL","RMED","RMNI",
+    "RMTI","RNAZ","RNDB","RNST","RNTX","ROCL","ROCR","RODI","ROIC","ROOF",
+    "ROTH","ROVR","RPAY","RPTX","RRCX","RRTS","RSSS","RTLX","RUBY","RUSHA",
+    "RUSH","RUTH","RYAM","SABR","SAEP","SAFE","SAFM","SAIA","SAIC","SAIK",
+    "SAIL","SAIM","SAIN","SAIO","SAIP","SAIQ","SAIR","SAIS","SAIT","SAIU",
+    "SAIV","SAIW","SAIX","SAIY","SAIZ","SAMG","SANM","SANW","SASR","SBCF",
+    "SBCP","SBGI","SBII","SBNY","SBSI","SBST","SBTX","SCCO","SCHL","SCHN",
+    "SCHR","SCKT","SCLX","SCNX","SCPH","SCPL","SCPS","SCVL","SDOW","SDRY",
+    "SEMR","SENB","SFBS","SFIX","SFNC","SFST","SGBX","SGFY","SGHT","SGMO",
+    "SGMS","SGOC","SGPA","SGPX","SHFS","SHLS","SHLX","SHMD","SHOO","SHPW",
+    "SHTO","SIBN","SIGA","SIGI","SILK","SILV","SINA","SISI","SKYW","SLCA",
+    "SLDB","SLGG","SLGN","SLHN","SLIM","SLNX","SLRC","SLXN","SMBC","SMCI",
+    "SMFL","SMLR","SMMT","SMPW","SMSI","SMTC","SNDL","SNES","SNFCA","SNGX",
+    "SNOA","SNPO","SNPS","SNSE","SNSR","SNSS","SNTA","SNVX","SNWV","SNXD",
+    "SOCL","SODI","SOFI","SOHO","SOHU","SOLO","SOLV","SONM","SONN","SONO",
+    "SOPA","SOPH","SOQR","SOTK","SOWG","SPFI","SPGS","SPGX","SPHD","SPHQ",
+    "SPLK","SPLP","SPMD","SPMO","SPNS","SPNT","SPPX","SPRA","SPRC","SPRD",
+    "SPRO","SPRS","SPRT","SPSC","SPSM","SPTN","SPVV","SPWH","SPWX","SPXC",
+    "SPXL","SPXS","SPXX","SPYD","SPYX","SQBG","SQFT","SQSP","SRAX","SRCL",
+    "SRGA","SRLN","SRPT","SRRK","SRTS","SRUN","SRUT","SRVR","SSBI","SSBT",
+    "SSFN","SSNX","SSNT","SSOK","SSRM","SSSS","SSTK","STVN","STXB","STXS",
+    "SUMO","SUNL","SUNW","SUPN","SURF","SVFD","SVNX","SWAG","SWAV","SWBI",
+    "SWCH","SWET","SWIM","SWIN","SWIR","SWIS","SWIT","SWIV","SWIW","SWIX",
+    "SWIY","SWIZ","SWKH","SWKS","SWOC","SWOH","SWOI","SWOJ","SWOK","SWOL",
+]
+
+_all_sp600, _official_sp600 = fetch_sp600(fallback=_SP600_FALLBACK_2)
+if _all_sp600:
+    tickers = _all_sp600[len(_all_sp600)//2:]
+    print(f"Teil 2: {len(tickers)} Ticker (zweite Hälfte)")
+else:
+    tickers = list(set(_SP600_FALLBACK_2))
+    _official_sp600 = []
+
+_new_since_map = {}
+try:
+    with open("data/rs_smallcap.json", encoding="utf-8") as _f:
+        for _d in json.load(_f).get("data", []):
+            if _d.get("new_since"):
+                _new_since_map[_d["ticker"]] = _d["new_since"]
+except Exception:
+    pass
+
+benchmark   = "^SP600"
+rs_windows  = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
+OUTPUT_FILE = "rs_smallcap_2.json"
+
+def sanitize_nan(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: sanitize_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize_nan(v) for v in obj]
+    return obj
+
+print(f"Teil 2: RS-Berechnung für {len(tickers)} S&P 600-Aktien...")
+all_tickers = tickers + [benchmark]
+raw   = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
+close = raw["Close"]
+spsc  = close[benchmark].dropna()
+if len(spsc) < 60:
+    raise RuntimeError(
+        f"Benchmark {benchmark}: nur {len(spsc)} gueltige Kurse – Abbruch."
+    )
+
+all_results = []
+for ticker in tickers:
+    if ticker not in close.columns:
+        continue
+    s = close[ticker].dropna()
+    if len(s) < 50:
+        continue
+    windows_result = {}
+    for label, days in rs_windows.items():
+        try:
+            windows_result[label] = round(
+                float((s.iloc[-1]/s.iloc[-days]-1)*100 - (spsc.iloc[-1]/spsc.iloc[-days]-1)*100), 2)
+        except:
+            windows_result[label] = None
+    score = round(sum(v for v in windows_result.values() if v is not None), 2)
+    all_results.append({"ticker": ticker, "score": score, "windows": windows_result})
+
+_valid = sum(1 for r in all_results if r["score"] is not None and r["score"] == r["score"])
+if _valid < len(tickers) * 0.5:
+    raise RuntimeError(f"Nur {_valid}/{len(tickers)} gueltige RS-Scores – Abbruch.")
+
+all_results.sort(key=lambda x: (x["score"] is not None and x["score"] == x["score"], x["score"]), reverse=True)
+print(f"Top 5: {', '.join(r['ticker'] for r in all_results[:5])}")
+
+end_date     = datetime.now()
+end_str      = (end_date + timedelta(days=1)).strftime("%Y-%m-%d")
+start_weekly = end_date - timedelta(days=730)
+start_daily  = end_date - timedelta(days=730)
+start_4h     = end_date - timedelta(days=60)
+
+all_tickers_list = [r["ticker"] for r in all_results]
+
+print(f"\nWeekly OHLCV ({len(all_tickers_list)} Ticker)...")
+raw_weekly = yf.download(
+    all_tickers_list + [benchmark],
+    start=start_weekly.strftime("%Y-%m-%d"), end=end_str,
+    interval="1wk", auto_adjust=True, progress=False)
+
+print(f"Daily OHLCV ({len(all_tickers_list)} Ticker)...")
+raw_daily = yf.download(
+    all_tickers_list + [benchmark],
+    start=start_daily.strftime("%Y-%m-%d"), end=end_str,
+    interval="1d", auto_adjust=True, progress=False)
+
+def extract_ohlcv(ticker, raw_data, n_candles):
+    try:
+        if isinstance(raw_data.columns, pd.MultiIndex):
+            c = raw_data["Close"][ticker].dropna()
+            o = raw_data["Open"][ticker].reindex(c.index)
+            h = raw_data["High"][ticker].reindex(c.index)
+            l = raw_data["Low"][ticker].reindex(c.index)
+        else:
+            c = raw_data["Close"].dropna()
+            o = raw_data["Open"].reindex(c.index)
+            h = raw_data["High"].reindex(c.index)
+            l = raw_data["Low"].reindex(c.index)
+        result = []
+        for date, ov, hv, lv, cv in zip(c.index, o, h, l, c):
+            if pd.isna(cv): continue
+            result.append({"d": date.strftime("%Y-%m-%d"),
+                           "o": round(float(ov), 2), "h": round(float(hv), 2),
+                           "l": round(float(lv), 2), "c": round(float(cv), 2)})
+        return result[-n_candles:]
+    except:
+        return []
+
+def extract_ohlcv_4h(ticker, n_candles=3000):
+    try:
+        df = yf.download(ticker, start=start_4h.strftime("%Y-%m-%d"), end=end_str,
+                         interval="1h", prepost=True, auto_adjust=True, progress=False)
+        if df.empty: return []
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        df = df[["Open","High","Low","Close"]].copy()
+        df.index = pd.to_datetime(df.index)
+        df.dropna(subset=["Close"], inplace=True)
+        from zoneinfo import ZoneInfo
+        _et     = ZoneInfo("America/New_York")
+        _berlin = ZoneInfo("Europe/Berlin")
+        extended = pd.Series(
+            [ts.astimezone(_et).hour < 9 or
+             (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
+             ts.astimezone(_et).hour >= 16
+             for ts in df.index],
+            index=df.index, dtype=bool
+        )
+        prev_low = df["Low"].shift(1)
+        next_low = df["Low"].shift(-1)
+        bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
+        df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open","Close"]].min(axis=1)
+        df_4h = df[["Open","High","Low","Close"]].resample("4h").agg(
+            {"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
+        result = []
+        for dt, row in df_4h.iterrows():
+            if pd.isna(row["Close"]): continue
+            dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
+            result.append({"d": dt_local.strftime("%Y-%m-%d %H:%M"),
+                           "o": round(float(row["Open"]),  2),
+                           "h": round(float(row["High"]),  2),
+                           "l": round(float(row["Low"]),   2),
+                           "c": round(float(row["Close"]), 2)})
+        return result[-n_candles:]
+    except Exception as e:
+        print(f"  4H Fehler {ticker}: {e}")
+        return []
+
+top100_set = set(r["ticker"] for r in all_results[:100])
+print(f"\n4H OHLCV ({len(all_tickers_list)} Ticker, vollständig für Top 100)...")
+ohlcv_4h_map = {}
+for i, ticker in enumerate(all_tickers_list):
+    if ticker in top100_set:
+        print(f"  4H [{i+1}/{len(all_tickers_list)}] {ticker}...", end=" ", flush=True)
+        ohlcv_4h_map[ticker] = extract_ohlcv_4h(ticker)
+        print(f"{len(ohlcv_4h_map[ticker])} Kerzen")
+    else:
+        ohlcv_4h_map[ticker] = []
+
+print("\nHistorisches tägliches Ranking (Teil 2)...")
+try:
+    d_close = raw_daily["Close"] if isinstance(raw_daily.columns, pd.MultiIndex) else raw_daily
+    if benchmark not in d_close.columns:
+        raise KeyError(f"Benchmark {benchmark} nicht in Tagesdaten")
+    bench_s = d_close[benchmark]
+    avail   = [t for t in all_tickers_list if t in d_close.columns]
+    daily_scores_by_date = {}
+    prev_week_scores = {}
+    n = len(d_close)
+    prev_week_i = max(0, n - 6)
+    for i in range(n):
+        date_str = d_close.index[i].strftime("%Y-%m-%d")
+        b_now = bench_s.iloc[i]
+        if pd.isna(b_now) or b_now == 0:
+            continue
+        scores = []
+        for t in avail:
+            s_now = d_close[t].iloc[i]
+            if pd.isna(s_now) or s_now == 0:
+                continue
+            total, cnt = 0, 0
+            for days in rs_windows.values():
+                if i >= days:
+                    s_prev = d_close[t].iloc[i - days]
+                    b_prev = bench_s.iloc[i - days]
+                    if not pd.isna(s_prev) and not pd.isna(b_prev) and s_prev != 0 and b_prev != 0:
+                        total += (s_now / s_prev - 1) * 100 - (b_now / b_prev - 1) * 100
+                        cnt   += 1
+            if cnt > 0:
+                scores.append((t, total))
+        if scores:
+            daily_scores_by_date[date_str] = scores
+        if i == prev_week_i:
+            prev_week_scores = dict(scores)
+    print(f"  {len(daily_scores_by_date)} Tage berechnet")
+except Exception as e:
+    daily_scores_by_date = {}
+    prev_week_scores = {}
+    print(f"  ⚠️ Fehler: {e}")
+
+print("\nJSON zusammenbauen (Teil 2)...")
+data = []
+for r in all_results:
+    ticker = r["ticker"]
+    data.append({
+        "ticker":    ticker,
+        "score":     r["score"],
+        "windows":   r["windows"],
+        "prev_rank": None,
+        "new_since": _new_since_map.get(ticker),
+        "ohlcv_w":   extract_ohlcv(ticker, raw_weekly, 104),
+        "ohlcv":     extract_ohlcv(ticker, raw_daily, 520),
+        "ohlcv_4h":  ohlcv_4h_map.get(ticker, []),
+    })
+
+benchmark_ohlcv_w = extract_ohlcv(benchmark, raw_weekly, 104)
+benchmark_ohlcv_d = extract_ohlcv(benchmark, raw_daily, 520)
+
+output = {
+    "timestamp":            datetime.now().strftime("%Y-%m-%d %H:%M"),
+    "benchmark":            "SC600",
+    "data":                 data,
+    "benchmark_ohlcv_w":    benchmark_ohlcv_w,
+    "benchmark_ohlcv":      benchmark_ohlcv_d,
+    "daily_scores_by_date": {d: s for d, s in daily_scores_by_date.items()},
+    "prev_week_scores":     prev_week_scores,
+}
+
+with open(OUTPUT_FILE, "w") as f:
+    json.dump(sanitize_nan(output), f)
+
+size_kb = len(json.dumps(sanitize_nan(output))) / 1024
+print(f"\n✅ Teil 2 fertig! {len(data)} Ticker, {size_kb:.0f} KB → {OUTPUT_FILE}")
+
+_sf = __import__("os").environ.get("GITHUB_STEP_SUMMARY")
+if _sf:
+    _pct = len(data) / len(tickers) * 100 if tickers else 0
+    with open(_sf, "a") as _f:
+        _f.write(f"### S&P 600 SmallCap – Teil 2\n✅ **{len(data)}/{len(tickers)} Ticker ({_pct:.0f}%)**\n\n")

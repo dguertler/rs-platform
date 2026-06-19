@@ -1,21 +1,15 @@
-name: Earnings-Überraschung (≥5% Kurssprung + ≥10% EPS-Beat)
+name: Alpha-Screening (Early Tech · Hidden Champions · Post-Earnings)
 
-# Sendet nur Mail/Telegram, committet nichts → Lese-Rechte genügen.
 permissions:
   contents: read
 
 on:
   schedule:
-    - cron: '30 2 * * 2-6'
+    - cron: '0 3 * * 2-6'   # Di-Sa 03:00 UTC – nach RS-Updates (01:00-02:00 UTC)
   workflow_dispatch:
-    inputs:
-      test_date:
-        description: 'Test-Datum (YYYY-MM-DD) – leer = gestern'
-        required: false
-        default: ''
 
 jobs:
-  check-earnings:
+  screen:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,29 +24,25 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas matplotlib lxml deep-translator requests
+        run: pip install yfinance pandas requests
 
-      - name: RS-Datendateien für Script bereitstellen
+      - name: RS-Datendateien bereitstellen
         run: |
           cp data/rs_full.json     . 2>/dev/null || true
           cp data/rs_dax.json      . 2>/dev/null || true
           cp data/rs_sp500.json    . 2>/dev/null || true
           cp data/rs_smallcap.json . 2>/dev/null || true
 
-      - name: Earnings-Skript ausführen
+      - name: Alpha-Screening ausführen
         env:
-          SMTP_HOST:        ${{ secrets.SMTP_HOST }}
-          SMTP_PORT:        ${{ secrets.SMTP_PORT }}
-          SMTP_USER:        ${{ secrets.SMTP_USER }}
-          SMTP_PASS:        ${{ secrets.SMTP_PASS }}
-          ALERT_EMAIL_TO:   ${{ secrets.ALERT_EMAIL_TO }}
-          TEST_DATE:        ${{ github.event.inputs.test_date }}
-          FRONTEND_URL:     ${{ secrets.FRONTEND_URL }}
           TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          RS_API_URL:       ${{ secrets.RS_API_URL }}
-          ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
-        run: python check_earnings.py
+        run: python check_hidden_alpha.py
+
+      - name: Kandidaten in data/ ablegen
+        run: |
+          mkdir -p data
+          cp alpha_candidates.json data/alpha_candidates.json 2>/dev/null || true
 
       - name: Fehler-Mail senden
         if: failure()
@@ -62,6 +52,6 @@ jobs:
           SMTP_USER:      ${{ secrets.SMTP_USER }}
           SMTP_PASS:      ${{ secrets.SMTP_PASS }}
           ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
-          JOB_NAME:       "Earnings-Alert (earnings_alert.yml)"
+          JOB_NAME:       "Alpha-Screening (check_alpha.yml)"
           RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
         run: python notify_failure.py

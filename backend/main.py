@@ -40,7 +40,7 @@ app.add_middleware(
 )
 
 DATA_DIR     = Path(os.getenv("DATA_DIR", r"C:\Users\danie\Rel.-Strength"))
-MARKET_FILES = {"nasdaq": "rs_full.json", "sp500": "rs_sp500.json", "dax": "rs_dax.json"}
+MARKET_FILES = {"nasdaq": "rs_full.json", "sp500": "rs_sp500.json", "dax": "rs_dax.json", "smallcap": "rs_smallcap.json"}
 PRO_MARKETS  = set()
 FREE_LIMIT   = 20
 security     = HTTPBearer()
@@ -548,6 +548,14 @@ async def get_rs_ticker(market: str, ticker: str, email: str = Depends(require_a
                 "ohlcv_4h": entry.get("ohlcv_4h", []),
             })
     raise HTTPException(404, f"Ticker '{ticker}' nicht gefunden")
+
+
+@app.get("/api/alpha/candidates")
+async def get_alpha_candidates(email: str = Depends(require_auth)):
+    path = DATA_DIR / "alpha_candidates.json"
+    if not path.exists():
+        return JSONResponse(content={"updated_at": None, "profiles": {}})
+    return JSONResponse(content=_load(path))
 
 
 @app.get("/api/backtest/{ticker}")
