@@ -64,6 +64,12 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
    ```
    → Git-Hash danach im Chat ausgeben
 
+8. **Chat-Ausgabe:** Nur die Zusammenfassungs-Tabelle ausgeben — KEINE vollständige Analyse im Chat. Format:
+
+   | Ticker | Name | Kurs | RS | Verdict | Ratings |
+   |--------|------|------|-----|---------|---------|
+   | TICKER | Name | $X | Score (Rank) | **VERDICT** | Q· G· V· K· · EV ±X% |
+
 ## Datenquellen
 
 | Datei | Inhalt | Aktualisierung |
