@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NOW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">20.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NOW</h1>
+      <h2>ServiceNow, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software—Application</span></div>
+        <div class="mi">MCap: <span>$178B</span></div>
+        <div class="mi">Signal: <span>Kein RS-Signal (nicht im Universum)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">70</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 20.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$870.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">48.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">79.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">35.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+9.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1200–1350</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">900–1050</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">580–650</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $1200–$1350 (25 %) · Base $900–$1050 (50 %) · Bear $580–$650 (25 %) · EV ~$960</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamentaldaten geschätzt auf Basis Wissensstand Aug 2025 — aktueller Kurs und FY2025/Q1-2026-Zahlen nicht im Datensatz verfügbar. Bewertungsaussagen mit reduzierter Konfidenz (vorläufig, Datenstand). Vor jeder Positionsentscheidung aktuelle Daten prüfen.</p>
+<p>ServiceNow ist das Betriebssystem für Enterprise-Workflows — und das klingt nach Marketing-Sprache, beschreibt aber einen echten strukturellen Vorteil: Wer einmal ITSM, HR, Customer Service und Field Service auf einer Plattform konsolidiert hat, verlässt sie kaum. Die Switching Costs sind nicht technisch, sondern organisatorisch — ServiceNow ist in die Prozess-DNA von Großkonzernen eingebacken. Der eigentliche Katalysator 2025/2026: "Now Intelligence" und Agentic-AI-Workflows transformieren ServiceNow von einer Prozessmaschine zu einem autonomen Workflow-Orchestrierer. Jeder der ~8.100 Bestandskunden ist ein potenzieller AI-Upsell. Der Markt preist stabile ~22% Wachstum ein — was unterschätzt wird: AI-ACV-Expansion je Bestandskunde kann die Net Revenue Retention strukturell über 130% treiben und das Wachstum re-acceleraten, ohne dass Neukundengewinnung skalieren muss. Risiko: Premium-Bewertung lässt wenig Spielraum für Enttäuschungen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>SaaS-Plattform für ITSM, HR-Workflows, Customer Service Management, Field Service — >99% Subscription Revenue, vorhersehbare Cashflows</li>
+<li>Land-and-expand: ~8.100 Kunden, ~1.400 mit >$1 Mio. ACV; Upsell durch neue Workflow-Module ist der primäre Wachstumsmotor</li>
+<li>Net Revenue Retention ~125% — organisches Wachstum aus Bestandskunden ohne Neukundengewinnung</li>
+<li>cRPO (Committed Remaining Performance Obligation) als verlässlichster Vorlaufindikator für Quartalswachstum</li>
+<li>"Now Intelligence" / AI Pro Plus-Tier: Premium-Preisschicht mit AI-Agenten, nachweisbare ROI-Dokumentation gegenüber Wettbewerb</li>
+<li>Bruttomargen ~79,5% → reines Software-Modell, kaum kapitalintensiv; Operating Leverage skaliert mit ARR</li>
+<li>Geografisch: USA dominant; EMEA/APAC mit deutlich niedrigerer Penetration — strukturelles Expansionsfeld</li>
+<li>Hauptrisiko: Microsoft-Overlap (Copilot/Azure) und Salesforce als potenzielle Plattform-Disruptoren bei Enterprise-Mega-Deals</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AI-Produktlinie katalysiert ACV-Expansion: Pro Plus-Tier wird von >30% des Kundenstamms adoptiert, NRR steigt auf ~135%. Revenue re-accelerates auf 25%+. Strukturelle Margennachhaltigkeit durch höhermargigen AI-Tier-Mix und Operating Leverage: Non-GAAP Operating Margin Richtung 35%. Annahme (kein Konsens): FY2026 non-GAAP EPS ~$22 × 59x Forward = $1.298. Kursziel $1200–$1350. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Revenue-Wachstum hält bei 20–22%, cRPO-Wachstum signalisiert keine Beschleunigung. AI-Features werden schrittweise adoptiert, kein disruptiver Upsell-Sprung im 12-Monats-Fenster. FCF-Marge stabil bei 28–31%. Annahme (kein Konsens): FY2026 non-GAAP EPS ~$19–20 × 50x Forward = $950–$1.000. Kursziel $900–$1050. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Enterprise-IT-Budgets werden durch Rezession oder CFO-Spardruck um 10–15% gekürzt; Microsoft schlägt mit tieferer Azure/Copilot-Integration Mega-Deals bei Neu- und Bestandskunden. Wachstum verlangsamt auf 12–15%, NRR sinkt auf ~115%. Multiple-Kontraktion auf 35–40x Forward.</p>
+<ul class="al">
+<li>Kundenkonzentration: Kein einzelner Kunde >5% Revenue — auf Datenbasis nicht abschließend quantifizierbar</li>
+<li>Geopolitik/China: Minimales China-Exposure (Enterprise-Software) — geringes Risiko</li>
+<li>Lieferkette/Foundry: N/A — reines Software-Modell</li>
+<li>Verwässerung: SBC ~$1,5 Mrd. p.a. bei $11 Mrd. Revenue — signifikant; Aktienanzahl-Trend leicht steigend trotz Buybacks</li>
+<li>Regulierung: DSGVO/AI-Act-Compliance real, nicht existenzbedrohend</li>
+</ul>
+<p>Annahme (kein Konsens): FY2026 non-GAAP EPS ~$16 × 39x = $624. Kursziel $580–$650. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = (0,25 × $1.275) + (0,50 × $975) + (0,25 × $615) = **~$960** — implizites Upside vs. Referenzkurs $870: **+10,3%.** Knappe Asymmetrie — kein überzeugender Edge im 12-18-Monats-Fenster auf diesem Niveau.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomargen 79,5% — strukturell nachhaltig, Software-Natur des Modells. Operating Margin ~21,5% GAAP (non-GAAP ~30%) — signifikante SBC-Lücke; FCF als sauberere Kennzahl: ~$3,3 Mrd. auf $11 Mrd. Revenue = 30% FCF-Marge. ROE ~35% durch geringe Kapitalbindung und SBC strukturell hoch — kein Leverage-Effekt. Bilanz: Netto-Cash-positiv ($4 Mrd. Cash, $1,5 Mrd. Debt) — keine Stresssituation. ROIC nicht direkt verfügbar; ROE als Ersatzindikator. Einziger Makel: SBC ~14% Revenue — für GAAP-Anleger substanziell.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE ~74x (GAAP) — unbrauchbar durch SBC-Verzerrung. Forward PE ~48x auf non-GAAP EPS $18 — impliziert aktuellen Kurs $870. FCF-Yield ~1,9% ($3,3 Mrd. / $178 Mrd. MCap) — für Growth-Investoren tolerierbar, für Income-Anleger inakzeptabel. Rückrechnung: Welches Wachstum rechtfertigt $870? Annahme 18% Revenue-CAGR 5 Jahre, Terminal FCF-Marge 35%, Diskontrate 9%, Exit 35x FCF → implizierter fairer Wert ~$840–$890. Das ist plausibel, aber ohne Sicherheitspuffer — jede Wachstumsenttäuschung unter 15% erzeugt erheblichen Multiple-Druck. Analyst-Konsensziel ~$1.050 (Stand Aug 2025) — als Sentiment-Indikator, nicht als fairer Wert zu verstehen. Bewertung: (vorläufig, Datenstand Aug 2025)</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Hypothese, nicht datenbasiert: ServiceNow gehört zum Kern-Exposure vieler Large-Cap-Tech-Fonds — wird bei Risk-off proportional mit dem Sektor verkauft, nicht aufgrund spezifischer Fundamentalentwicklung. Short Float historisch niedrig (<2%) — keine Short-Squeeze-Dynamik. Enttäuschungsrisiko: cRPO-Guidance-Miss löst sofortige Neubewertung aus, da der Markt auf Forward-Sichtbarkeit angewiesen ist. FOMO-Dynamik durch AI-Narrativ aktiv, aber breit gepreist.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Technische Daten nicht im Datensatz — auf Datenbasis nicht beurteilbar. Allgemein: ServiceNow zeigt scharfe Post-Earnings-Bewegungen (±8–15%) als primären Kurs-Katalysator. Warnsignal wäre ein Abgleiten unter die 200-Tage-Linie bei abnehmendem Volumen — klassischer institutioneller Abbau.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Entscheidende Variable: Durchsetzung des AI Pro Plus-Tiers als Standard vs. Commoditisierung durch Microsoft/Salesforce.</p>
+<p>**Bull Case ($2200–$2800):** AI-Plattform-Dominanz, 25–30% Revenue-CAGR, FCF-Marge >35%, 55x Exit-Multiple auf FY2029 FCF ~$7 Mrd. Wahrscheinlichkeit: 20%.</p>
+<p>**Base Case ($1300–$1800):** 18–22% CAGR, FCF-Marge 30–34%, 42x Exit-Multiple. Wahrscheinlichkeit: 55%.</p>
+<p>**Bear Case ($500–$700):** Wachstum unter 12%, Multiple-Kontraktion auf 25–30x, Marktanteilsverlust. Wahrscheinlichkeit: 25%.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>ServiceNow ist ein klassischer Buy-and-Hold-Compounder — aber ausschließlich für Investoren mit echtem 3-5-Jahres-Horizont und Toleranz für Premium-Bewertungen ohne kurzfristigen Sicherheitspuffer. **Die eigenen Szenarien ergeben auf dem Referenzkursniveau ($870) keinen asymmetrischen Edge** — +10,3% EV-Upside im 12-18-Monats-Fenster ist kein überzeugender Einstiegsgrund. Langfristig ist NOW eine Kernposition im Enterprise-SaaS-Bereich, aber kein Timing-Trade und kein zyklisches Instrument.</p>
+<p>Positionsgröße: moderat (3–5% Portfolio) für einen Growth-Long-Only-Investor. Nicht geeignet für Value-orientierte oder ertragsorientierte Anleger.</p>
+<p>Peers: Salesforce (CRM) — breiter aufgestellt, historisch günstiger bewertet (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ); Workday (WDAY) — ähnliches SaaS-Profil, HR-fokussiert; Microsoft (MSFT) — relevanter als AI-Plattform-Überlappungsrisiko denn als direkter Ersatz.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
