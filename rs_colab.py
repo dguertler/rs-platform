@@ -361,24 +361,19 @@ print(f"Benchmark {benchmark}: Weekly={len(benchmark_ohlcv_w)} Kerzen, Daily={le
 # ── NASDAQ-100-Index (NDX) für exakten Vergleich (z.B. Instagram) ────────────
 # QQQ ist der ETF; ^NDX ist der echte Index. Wird hier zusätzlich mitgeladen,
 # damit die Mehrrendite-Berechnung exakt zum wikifolio-Report passt.
+# Explizite Daten statt period= vermeidet das 500-Kerzen-Limit bei ^NDX.
 try:
-    ndx_raw = yf.download("^NDX", period="2y", auto_adjust=True, progress=False)
+    import datetime as _dt
+    _ndx_end = (_dt.date.today() + _dt.timedelta(days=1)).isoformat()
+    _ndx_start = (_dt.date.today() - _dt.timedelta(days=760)).isoformat()
+    ndx_raw = yf.download("^NDX", start=_ndx_start, end=_ndx_end,
+                           auto_adjust=True, progress=False)
     if isinstance(ndx_raw.columns, pd.MultiIndex):
         ndx_raw.columns = ndx_raw.columns.get_level_values(0)
     ndx_close = ndx_raw["Close"].dropna()
-    ndx_dict = {d.strftime("%Y-%m-%d"): round(float(v), 2) for d, v in ndx_close.items()}
-    # Zusätzlich kurzen Fetch für die letzten 5 Tage — yfinance liefert bei
-    # period="2y" die letzten 1-3 Handelstage oft mit Verzögerung.
-    try:
-        ndx_recent = yf.download("^NDX", period="5d", auto_adjust=True, progress=False)
-        if isinstance(ndx_recent.columns, pd.MultiIndex):
-            ndx_recent.columns = ndx_recent.columns.get_level_values(0)
-        for d, v in ndx_recent["Close"].dropna().items():
-            ndx_dict[d.strftime("%Y-%m-%d")] = round(float(v), 2)
-    except Exception:
-        pass
-    ndx_ohlcv = [{"d": d, "c": c} for d, c in sorted(ndx_dict.items())]
-    print(f"NDX (^NDX): {len(ndx_ohlcv)} Tageskerzen")
+    ndx_ohlcv = [{"d": d.strftime("%Y-%m-%d"), "c": round(float(v), 2)}
+                 for d, v in ndx_close.items()]
+    print(f"NDX (^NDX): {len(ndx_ohlcv)} Tageskerzen (letzter: {ndx_ohlcv[-1]['d'] if ndx_ohlcv else 'n/a'})")
 except Exception as _e:
     print(f"NDX-Download fehlgeschlagen: {_e}")
     ndx_ohlcv = []
