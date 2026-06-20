@@ -366,8 +366,18 @@ try:
     if isinstance(ndx_raw.columns, pd.MultiIndex):
         ndx_raw.columns = ndx_raw.columns.get_level_values(0)
     ndx_close = ndx_raw["Close"].dropna()
-    ndx_ohlcv = [{"d": d.strftime("%Y-%m-%d"), "c": round(float(v), 2)}
-                 for d, v in ndx_close.items()]
+    ndx_dict = {d.strftime("%Y-%m-%d"): round(float(v), 2) for d, v in ndx_close.items()}
+    # Zusätzlich kurzen Fetch für die letzten 5 Tage — yfinance liefert bei
+    # period="2y" die letzten 1-3 Handelstage oft mit Verzögerung.
+    try:
+        ndx_recent = yf.download("^NDX", period="5d", auto_adjust=True, progress=False)
+        if isinstance(ndx_recent.columns, pd.MultiIndex):
+            ndx_recent.columns = ndx_recent.columns.get_level_values(0)
+        for d, v in ndx_recent["Close"].dropna().items():
+            ndx_dict[d.strftime("%Y-%m-%d")] = round(float(v), 2)
+    except Exception:
+        pass
+    ndx_ohlcv = [{"d": d, "c": c} for d, c in sorted(ndx_dict.items())]
     print(f"NDX (^NDX): {len(ndx_ohlcv)} Tageskerzen")
 except Exception as _e:
     print(f"NDX-Download fehlgeschlagen: {_e}")
