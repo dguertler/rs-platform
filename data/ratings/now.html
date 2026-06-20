@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NOW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">20.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NOW</h1>
+      <h2>ServiceNow, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$105B</span></div>
+        <div class="mi">Signal: <span>SP500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div class="vb">BUY</div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 20.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">15.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$101.33</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">23.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$13.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">81.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">16.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+16.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">140–174</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">18%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">110–138</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">52%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">62–82</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $140–$174 (18%) · Base $110–$138 (52%) · Bear $62–$82 (30%) · EV ~$114</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>ServiceNow ist der reinste Pure-Play auf KI-getriebene Enterprise-Workflow-Automatisierung — und damit strukturell besser positioniert als jedes klassische ERP- oder ITSM-Angebot. Die eigentliche Story ist nicht IT-Ticketing, sondern die Konvergenz von AI-Agenten und Geschäftsprozessen: Now Assist trackt $1,5 Mrd. ACV in 2026 (Jahresbeginn-Ziel war $1 Mrd.; bereits +50% nach oben korrigiert). Kunden, die $1M+ auf Now Assist ausgeben, wuchsen Q1 2026 um 130% YoY — das ist nicht mehr Experimentierphase. Der strukturelle Kern: ServiceNow ist das Betriebssystem für Enterprise-Prozesse, und AI-Agenten brauchen genau dieses Datenfundament und diese Integrationstiefen. Was der Markt aktuell einpreist: Wachstumsverlangsamung und Bewertungsprämien-Abbau nach dem -50%-Drawdown vom Juli-Hoch. Was der Markt möglicherweise übersieht: Der cRPO von $12,64 Mrd. (+22,5% YoY) gibt 3-4 Quartale Sichtbarkeit auf konstant zweistelliges Wachstum — das ist keine Prognose, sondern bereits kontrahiertes Geschäft.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Subscription-SaaS mit ~97% Subscription-Revenue-Anteil; Gross Margin 81,5% — strukturell überlegene Cashflow-Maschine</li>
+<li>Multi-Product-Plattform: IT Service Management (ITSM) als Basisumsatz, Customer Workflows, HR Service Delivery, Finance Operations als Expansion-Vektoren</li>
+<li>AI-Erweiterung über Now Assist: GenAI-Features in bestehende Workflows eingebettet — kein Upsell-Risiko, sondern Premium-Tier-Monetisierung</li>
+<li>cRPO als Forward-Revenue-Indikator: $12,64 Mrd. entspricht ~85% des erwarteten Jahresumsatzes 2026 — hohe Visibilität</li>
+<li>NRR strukturell >125% (nicht separat reportiert, aber impliziert durch Umsatzwachstum bei bestehender Kundenbasis)</li>
+<li>Armis-Akquisition bringt Cybersecurity-Workflow-Integration und addiert ~125 Basispunkte auf FY2026-Revenue-Wachstum</li>
+<li>D/E 0,21x — nahezu schuldenfreie Bilanz relativ zu Buchwert, begrenzt Kapitalmarktrisiko</li>
+<li>SBC ~$1,6 Mrd. (11,6% des Revenue) — bedeutende Verwässerungsquelle, die GAAP-Margen verdeckt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Now Assist-ACV überschreitet $2,5 Mrd. bis Ende 2026 und generiert einen Analyst-Upgrade-Zyklus. Revenue FY2027E: $19 Mrd. (+21% auf 2026E). FCF-Marge auf 37%: FCF $7,0 Mrd. Marktkapitalisierung bei 8,5× P/S (historisches unteres Tertil für ServiceNow): $161 Mrd. / 1,032 Mrd. Aktien = Kursziel **$140–$174**. Herleitung: $19 Mrd. × 8,0–9,0× P/S = $152–171 Mrd. / 1,032 Mrd. Aktien. Wahrscheinlichkeit: 18%. Strukturelle Margennachhaltigkeit: AI-Tier schafft höhermargige Revenue-Streams ohne proportional steigende Kosten; Enterprise-NDA-Bindung (Switching Costs durch tiefe SAP/Microsoft-Integrationen) schützt den Preis-Floor dauerhaft.</p>
+<h3>4. BASE CASE</h3>
+<p>Revenue FY2026 trifft Mitte der Guidance ($15,755 Mrd.), FY2027E: $18,5 Mrd. FCF FY2026: $5,5 Mrd. (35% Marge). Multiple bleibt bei 6,5×P/S auf FY2026-Revenue: $15,755 Mrd. × 6,5 = $102 Mrd. / 1,032 Mrd. Aktien = $99. Auf FY2027E: $18,5 Mrd. × 6,5 = $120 Mrd. / 1,032 Mrd. = $116. Kursziel 12–18 Monate: **$110–$138**. Herleitung: $15,755–18,5 Mrd. × 6,5× P/S. Wahrscheinlichkeit: 52%. Analyst-Konsensziel $149 liegt etwas über diesem Szenario und ist als Sentiment-Indikator, nicht als fairer Wert zu verstehen.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Enterprise IT-Budgetkürzungen durch rezessive Makro-Entwicklung oder US-Regierungs-Spending-Freeze (ServiceNow hat signifikante Federal-Government-Exposition). Revenue-Wachstum verlangsamt auf 12–14%; cRPO-Wachstum fällt unter 15%. Multiple-Kompression auf 4,0–4,5× P/S. Revenue 2026E $15,5 Mrd. × 4,0–4,5× P/S = $62–70 Mrd. / 1,032 Mrd. Aktien. Kursziel $62–$82. Wahrscheinlichkeit: 30%.</p>
+<p>Risiko-Sweep:</p>
+<ul class="al">
+<li>Kundenkonzentration: Kein Einzelkunde >10% Revenue — Risiko auf Datenbasis nicht quantifizierbar, aber Diversifikation gilt als hoch</li>
+<li>Geopolitik: Kein signifikantes China-Exposure; US Federal Government dagegen ~15% Revenue (Schätzung) — DOGE/Spending-Cuts ist reales Risiko</li>
+<li>Lieferkette: Rein Software-SaaS — keine physische Lieferketten-Abhängigkeit</li>
+<li>Verwässerung: SBC $1,6 Mrd. p.a. (~1,5% jährliche Dilution auf Basis 1,032 Mrd. Aktien) — strukturell relevant, aber nicht akut</li>
+<li>Regulierung: GDPR/Datenschutz bei AI-Agenten in Workflow-Daten — potentielles EU-Risiko, auf Datenbasis nicht abschließend beurteilbar</li>
+</ul>
+<p>**Summe: 18% + 52% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,18 × $157 + 0,52 × $124 + 0,30 × $72 = $28,26 + $64,48 + $21,60 = **$114 — implizites Upside vs. aktuellem Kurs: +12,5%.**</p>
+<p>Der EV liegt über, aber weniger als 20% über dem aktuellen Kurs. Das ist kein asymmetrischer Edge, sondern eine faire Kompensation für das Risiko — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 16,1%, ROIC 16,8% — solide, aber nicht Compounder-Klasse (>25%). Gross Margin 81,5% ist strukturell nachhaltig — SaaS-Software mit tiefen Integrationen hat kaum variable Kosten. FCF-Marge 35% guided / 44% in Q1 2026 — das ergibt TTM-FCF ~$4,8 Mrd. SBC $1,6 Mrd. reduziert den ökonomisch relevanten FCF auf ~$3,2 Mrd. (bereinigte FCF-Marge ~23%). D/E 0,21x — starke Bilanzqualität. Kritisch: GAAP-Profitmargen verzerrt durch SBC-Belastung (GAAP Net Margin ~6%, non-GAAP >25%) — die GAAP-Zahlen unterschätzen die Ertragskraft systematisch.</p>
+<h3>7. BEWERTUNG</h3>
+<p>P/S auf TTM-Revenue $13,8 Mrd.: $104,5 Mrd. / $13,8 Mrd. = 7,6×. Auf FY2026-Guidance $15,75 Mrd.: 6,6×. Historisch handelte NOW bei 15–20× P/S in 2021/2022 und bei 8–12× P/S in 2023/2024. Aktuell 6,6× ist unteres Tertil der Bewertungshistorie für 20%+ SaaS-Wachstum.</p>
+<p>Normalisierter FCF (bereinigt um SBC): ~$3,2 Mrd. P/FCF auf Basis Market Cap $104,5 Mrd.: 32,7× — moderat für ein Compounerwachstum von 20%.</p>
+<p>Rückrechnung "Was preist der Kurs ein?": Um $101 zu rechtfertigen bei 25× normalisiertem FCF: FCF muss $4,06 Mrd. erzielen → bei 30% FCF-Marge: Revenue ~$13,5 Mrd. Das entspricht aktuellem TTM-Niveau. Der Kurs preist damit kein Wachstum ein — das ist plausibel als Pessimismus-Boden, nicht als Gleichgewichtspreis bei 20% Wachstum.</p>
+<p>Forward PE 23×: Auf Basis GAAP-EPS (inkl. SBC) = günstig für 20%-Wachstumsunternehmen. Non-GAAP Forward PE deutlich niedriger (~8–9×).</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>-50% Drawdown vom Juli-Hoch ($211 → $81 April-Tief) mit anschließender Erholung auf $101. Short Float 1,2% / Short Ratio 2,3 — kein Short-Squeeze-Kandidat, aber auch kein extremes Short-Sentiment. Analyst-Coverage: 28 Analysten, 16 Strong Buy (57%) — institutionelle Positionierung bullish bei überwiegend Long-Only-Fonds. Enttäuschungsrisiko: Wachstumsdeceleration unter 18% YoY würde Multiple weiter komprimieren. Neue Käufer benötigen entweder Guidance-Anhebung oder makroökonomische Entspannung als Katalysator.</p>
+<p>Hypothese, nicht datenbasiert: Fast-Money/Momentum-Fonds haben bei $150-200 reduziert; aktuelle Halter sind stärker Long-Only-orientiert — was kurzfristige Volatilität dämpft.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $101 erholt sich vom 52W-Tief $81,24 (April 2026) um +25%; liegt aber 52% unter 52W-Hoch $211,48 (Juli 2025). RS-Score nicht verfügbar (Ticker nicht in RS-Datenbank) — die -50% 12M-Performance impliziert RS deutlich unter 30 im S&P 500-Universum. GWS-Signale: alle inaktiv (Downtrend). Technisches Warnsignal: Rückfall unter $90 würde Erholungsmuster invalidieren und Wiedertesten des Aprils-Tiefs signalisieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($240–$300):** AI-Agenten-Markt reift; Now Assist erreicht $5+ Mrd. ACV; Revenue 2030E: $30 Mrd.; FCF $11+ Mrd. bei 37% Marge; 25× normalisierter FCF = $275 Mrd. / 1,05 Mrd. Aktien (leichte Dilution) = $262/Aktie.</p>
+<p>**Base ($150–$200):** Revenue 2030E: $24 Mrd.; FCF $8,5 Mrd.; 20× = $170 Mrd. / 1,05 Mrd. = $162/Aktie. Entscheidende Variable: Wachstumspfad der Now-Assist-Monetisierung ab 2027.</p>
+<p>**Bear ($60–$85):** Strukturelles Wachstumsproblem durch Marktsättigung im Enterprise; Revenue plateau um 8–10% ab 2027; FCF-Kompression auf 25%; Multiple-Kollaps auf 12–14× norm. FCF = $65–78 Mrd. / 1,05 Mrd. = $62–74/Aktie.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>ServiceNow ist ein qualitativ hochwertiger SaaS-Compounder, der nach einem 50%-Drawdown zu einer Bewertung handelt, die strukturell angemessen ist — nicht mehr teuer, aber auch nicht billig genug für High-Conviction-Größen. Das 12% EV-Upside ergibt auf dem aktuellen Niveau keinen asymmetrischen Edge: Die eigenen Szenarien zeigen eine faire Kompensation, keine Schieflage zugunsten des Investors.</p>
+<p>Für Buy-and-Hold-Investoren: NOW ist bei $95–105 ein solides Basis-Investment für ein diversifiziertes Tech-Portfolio — kein Trading-Setup. Positionsgröße: 2–4% eines diversifizierten Portfolios, nicht mehr. Trigger für Größenaufbau: cRPO-Wachstum hält >20% in Q2 2026, Now-Assist-ACV-Update bei Q2-Earnings.</p>
+<p>Direkte Peers: **Salesforce (CRM)** — ähnliches Wachstum, tiefere Bewertung (~6,5× P/S), stärkere FCF-Generierung nach SBC (Peer-Multiples im Datensatz verfügbar: CRM Forward PE ~9,8× vs. NOW 23×). **Workday (WDAY)** als HR/Finance-Workflow-Peer (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). NOW ist das technologisch überlegenere AI-Plattform-Asset, handelt aber mit Premium gegenüber Peers.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
