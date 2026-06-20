@@ -72,7 +72,7 @@ jobs:
           [ -f signals.json ] && mv signals.json data/signals.json && git add data/signals.json || true
           [ -d data/ratings ] && git add data/ratings/ || true
           git diff --staged --quiet || git commit -m "4H-Wiederkehr-Zustand + KI-Ratings aktualisiert"
-          git pull --rebase origin master
+          git pull --rebase --autostash origin master
           git push origin master
 
       - name: Fehler-Mail senden
