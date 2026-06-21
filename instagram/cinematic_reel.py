@@ -34,6 +34,28 @@ CFG_PATH = Path(__file__).parent / "config" / "tech_trader.yaml"
 LOGO_PATH = Path(__file__).parent / "assets" / "Logo.png"
 LOGOS_DIR = Path(__file__).parent / "assets" / "logos"
 
+
+def _ffmpeg_exe() -> str:
+    """Gibt den Pfad zur ffmpeg-Binary zurück (imageio_ffmpeg → System-Fallback)."""
+    try:
+        import imageio_ffmpeg
+        return imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        return "ffmpeg"
+
+
+def _ffprobe_exe() -> str:
+    """Gibt den Pfad zu ffprobe zurück (neben imageio-ffmpeg-Binary oder System)."""
+    try:
+        import imageio_ffmpeg
+        exe = imageio_ffmpeg.get_ffmpeg_exe()
+        probe = exe.replace("ffmpeg", "ffprobe")
+        if Path(probe).exists():
+            return probe
+    except Exception:
+        pass
+    return "ffprobe"
+
 # Sektor → Pexels-Keywords für stock-footage
 _SECTOR_KEYWORDS = {
     "Technology":            ["semiconductor chip closeup 4k", "data center servers glowing 4k", "circuit board macro 4k"],
@@ -131,15 +153,36 @@ async def _tts_edge_async(text: str, voice: str, dest: str) -> None:
     await communicate.save(dest)
 
 
+def _run_tts_silent(dest: str, duration: float = 15.0) -> None:
+    """Erzeugt stille MP3-Datei als letzten Fallback (kein TTS verfügbar)."""
+    ffmpeg = _ffmpeg_exe()
+    subprocess.run(
+        [ffmpeg, "-y", "-f", "lavfi", "-i", f"anullsrc=r=44100:cl=mono",
+         "-t", str(duration), "-c:a", "libmp3lame", "-q:a", "9", dest],
+        capture_output=True, check=True,
+    )
+    print(f"  [TTS] stille Audio-Spur erzeugt ({duration:.0f}s) — kein TTS verfügbar")
+
+
 def _run_tts(text: str, voice: str, dest: str) -> None:
-    """Versucht edge-tts; fällt bei SSL-Fehler auf espeak-ng zurück."""
+    """Versucht edge-tts; fällt bei SSL-Fehler auf espeak-ng zurück, dann auf Stille."""
     try:
         asyncio.run(_tts_edge_async(text, voice, dest))
         print("  [TTS] edge-tts ✓")
+        return
     except Exception as exc:
         print(f"  [TTS] edge-tts fehlgeschlagen ({exc.__class__.__name__}), "
               f"Fallback auf espeak-ng…")
+    try:
         _run_tts_espeak(text, dest)
+        return
+    except Exception as exc2:
+        print(f"  [TTS] espeak-ng fehlgeschlagen ({exc2.__class__.__name__}), "
+              f"Fallback auf stille Spur…")
+    # Dauer grob abschätzen: ~120 Wörter/Min
+    words = len(text.split())
+    duration = max(10.0, words / 2.0)
+    _run_tts_silent(dest, duration)
 
 
 def _run_tts_espeak(text: str, dest: str) -> None:
@@ -162,7 +205,7 @@ def _run_tts_espeak(text: str, dest: str) -> None:
     else:
         print("  [TTS] espeak-ng mb-de6 (MBROLA) ✓")
     subprocess.run(
-        ["ffmpeg", "-y", "-i", wav_path, "-codec:a", "libmp3lame", "-q:a", "4", dest],
+        [_ffmpeg_exe(), "-y", "-i", wav_path, "-codec:a", "libmp3lame", "-q:a", "4", dest],
         capture_output=True, check=True,
     )
     os.remove(wav_path)
@@ -239,7 +282,7 @@ def _build_srt_from_scenes(scenes: list[dict], audio_path: str,
     try:
         # Audio-Dauer per ffprobe ermitteln
         result = subprocess.run(
-            ["ffprobe", "-v", "quiet", "-print_format", "json",
+            [_ffprobe_exe(), "-v", "quiet", "-print_format", "json",
              "-show_format", audio_path],
             capture_output=True, text=True, check=True,
         )
@@ -308,7 +351,7 @@ def _generate_bg_cinematic(scene_idx: int, dest: str, W: int, H: int, dur: float
         f"vignette=PI/4"
     )
     cmd = [
-        "ffmpeg", "-y",
+        _ffmpeg_exe(), "-y",
         "-f", "lavfi", "-i", vf,
         "-t", str(dur),
         "-c:v", "libx264", "-preset", "ultrafast", "-pix_fmt", "yuv420p",
@@ -318,7 +361,7 @@ def _generate_bg_cinematic(scene_idx: int, dest: str, W: int, H: int, dur: float
     if result.returncode != 0:
         # Fallback: einfarbiger dunkler Clip
         subprocess.run([
-            "ffmpeg", "-y", "-f", "lavfi",
+            _ffmpeg_exe(), "-y", "-f", "lavfi",
             "-i", f"color=c=0x0d0e1a:size={W}x{H}:rate=30",
             "-t", str(dur), "-c:v", "libx264", "-pix_fmt", "yuv420p", dest,
         ], capture_output=True, check=True)
@@ -328,7 +371,7 @@ def _png_to_video(png_path: str, dest: str, W: int, H: int, dur: float) -> None:
     """Konvertiert ein PNG-Bild in ein kurzes MP4 mit leichtem Zoom-Effekt (Legacy-Fallback)."""
     zoom = "scale=8000:-1,zoompan=z='min(zoom+0.0015,1.5)':d=1:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={W}x{H}:fps=30".replace("{W}", str(W)).replace("{H}", str(H))
     cmd = [
-        "ffmpeg", "-y", "-loop", "1", "-i", png_path,
+        _ffmpeg_exe(), "-y", "-loop", "1", "-i", png_path,
         "-vf", zoom, "-t", str(dur),
         "-c:v", "libx264", "-pix_fmt", "yuv420p", dest,
     ]
@@ -593,7 +636,7 @@ def _burn_subtitles(video_in: str, srt_path: str, video_out: str, cfg: dict) -> 
     # ffmpeg aus dem Verzeichnis des Videos ausführen → nur Dateiname nötig
     srt_name = os.path.basename(srt_local).replace(":", "\\:")
     cmd = [
-        "ffmpeg", "-y", "-i", video_in,
+        _ffmpeg_exe(), "-y", "-i", video_in,
         "-vf", f"subtitles={srt_name}:force_style='{style}'",
         "-c:a", "copy", video_out,
     ]
@@ -689,7 +732,7 @@ def render(
     try:
         import json as _json
         _probe = subprocess.run(
-            ["ffprobe", "-v", "quiet", "-print_format", "json", "-show_format", audio_path],
+            [_ffprobe_exe(), "-v", "quiet", "-print_format", "json", "-show_format", audio_path],
             capture_output=True, text=True, check=True)
         audio_dur = float(_json.loads(_probe.stdout)["format"]["duration"])
     except Exception:
@@ -822,6 +865,245 @@ def main() -> None:
         verdict=args.verdict,
         hype_aktie=args.hype_aktie,
     )
+
+
+# ── Wochenrückblick-Reel ──────────────────────────────────────────────────────
+
+def _generate_performance_slide(ctx: dict, dest: str, W: int, H: int) -> bool:
+    """Performance-Chart-PNG für den Wochenrückblick."""
+    try:
+        import matplotlib
+        matplotlib.use("Agg")
+        import matplotlib.pyplot as plt
+
+        port_wk   = ctx["week_perf"]
+        port_tot  = ctx["total_perf"]
+        ndx_wk    = ctx["nasdaq_week"]
+        ndx_tot   = ctx["nasdaq_total"]
+        kw        = ctx["kw"]
+        alpha_wk  = port_wk - ndx_wk
+
+        fig = plt.figure(figsize=(W / 150, H / 150), dpi=150)
+        fig.patch.set_facecolor("#0d0e1a")
+
+        def _pct(v):
+            return f"+{v*100:.1f}%" if v >= 0 else f"{v*100:.1f}%"
+
+        # Titel
+        fig.text(0.5, 0.91, f"KW {kw} — Performance", color="#ffffff",
+                 fontsize=26, fontweight="bold", ha="center", transform=fig.transFigure)
+
+        # 2-Spalten-Grid: Portfolio vs NASDAQ
+        rows = [
+            ("Diese Woche", _pct(port_wk), _pct(ndx_wk)),
+            ("Seit Start", _pct(port_tot), _pct(ndx_tot)),
+            ("Alpha", _pct(alpha_wk), ""),
+        ]
+        labels = ["", "AI Alpha", "Nasdaq-100"]
+        col_x = [0.10, 0.52, 0.78]
+        row_y = [0.78, 0.62, 0.46]
+
+        for j, label in enumerate(labels):
+            if label:
+                fig.text(col_x[j], 0.85, label, color="#888899", fontsize=13,
+                         ha="center", transform=fig.transFigure)
+
+        for i, (rlabel, port_val, ndx_val) in enumerate(rows):
+            y = row_y[i]
+            fig.text(col_x[0], y, rlabel, color="#aaaacc", fontsize=14,
+                     ha="center", va="center", transform=fig.transFigure)
+            c1 = "#00c896" if "+" in port_val else "#ff4d6d"
+            fig.text(col_x[1], y, port_val, color=c1, fontsize=20,
+                     fontweight="bold", ha="center", va="center",
+                     transform=fig.transFigure)
+            if ndx_val:
+                c2 = "#00c896" if "+" in ndx_val else "#ff4d6d"
+                fig.text(col_x[2], y, ndx_val, color=c2, fontsize=20,
+                         fontweight="bold", ha="center", va="center",
+                         transform=fig.transFigure)
+
+        # Trennlinie
+        fig.add_artist(plt.Line2D([0.08, 0.92], [0.40, 0.40],
+                                  transform=fig.transFigure, color="#333344", linewidth=0.8))
+
+        # Branding
+        fig.text(0.5, 0.10, "AI Alpha Selection", color="#444466",
+                 fontsize=11, ha="center", transform=fig.transFigure)
+
+        plt.savefig(dest, dpi=150, bbox_inches="tight",
+                    facecolor="#0d0e1a", edgecolor="none")
+        plt.close(fig)
+        return True
+    except Exception as exc:
+        print(f"  [Perf-Slide] Fehler ({exc})")
+        return False
+
+
+def render_weekly(ctx: dict, output_path: str) -> str:
+    """
+    Cinematischer Reel für den Wochenrückblick.
+
+    ctx muss enthalten:
+      kw, week_perf, total_perf, nasdaq_week, nasdaq_total,
+      hook (str), trades (list[dict] mit ticker+ret), featured (dict mit ticker)
+    """
+    from moviepy import (
+        VideoFileClip, ImageClip, CompositeVideoClip,
+        concatenate_videoclips, AudioFileClip, ColorClip,
+    )
+    import moviepy.video.fx as vfx
+
+    cfg = _load_cfg()
+    api_key = os.environ.get(cfg["stock_footage"]["api_key_env"], "")
+    voice = cfg["voice"]
+    fps = cfg["video"]["fps"]
+    scene_sec = cfg["video"]["scene_max_sec"]
+    fade = cfg["video"]["crossfade_sec"]
+    W, H = cfg["video"]["resolution"]
+
+    kw = ctx["kw"]
+    port_wk = ctx["week_perf"]
+    hook_text = ctx.get("hook", f"KW {kw} — +{port_wk*100:.1f}% diese Woche!")
+
+    # Trades mit Rendite > 5% für Voiceover
+    trades = [t for t in ctx.get("trades", []) if abs(t.get("ret", 0)) >= 0.05]
+    featured = ctx.get("featured", {})
+    feat_ticker = featured.get("ticker", "")
+
+    # Szenen aufbauen
+    alpha_wk = ctx["week_perf"] - ctx["nasdaq_week"]
+    trade_vo = ""
+    if trades:
+        parts = [f"{t['ticker']} {'+' if t['ret']>0 else ''}{t['ret']*100:.0f} Prozent" for t in trades]
+        trade_vo = "Trades: " + ", ".join(parts) + ". "
+
+    scenes = [
+        {
+            "visual": "abstract financial data neon 4k",
+            "vo": hook_text,
+        },
+        {
+            "visual": "stock market performance chart 4k",
+            "vo": (f"Portfolio plus {port_wk*100:.1f} Prozent diese Woche. "
+                   f"Nasdaq plus {ctx['nasdaq_week']*100:.1f} Prozent. "
+                   f"Alpha plus {alpha_wk*100:.1f} Prozentpunkte. "
+                   f"Gesamtrendite seit Start plus {ctx['total_perf']*100:.1f} Prozent."),
+        },
+        {
+            "visual": "semiconductor chip technology 4k",
+            "vo": (trade_vo or
+                   f"Aktie der Woche: {feat_ticker}. Das Momentum-System bleibt diszipliniert."),
+        },
+        {
+            "visual": "instagram social media profile 4k",
+            "vo": "Komplette Analyse auf meinem Instagram-Profil. AI Alpha Selection.",
+        },
+    ]
+
+    print(f"\n[Weekly Reel] KW{kw} | Portfolio {port_wk*100:+.1f}%")
+
+    tmpdir = tempfile.mkdtemp(prefix=f"reel_kw{kw}_")
+    full_vo = " ".join(s["vo"] for s in scenes)
+    audio_path = os.path.join(tmpdir, "voiceover.mp3")
+    srt_path_out = os.path.join(tmpdir, "subtitles.srt")
+
+    print("[1/5] TTS generieren…")
+    _run_tts(full_vo, voice, audio_path)
+
+    print("[2/5] Untertitel generieren…")
+    srt_result = _build_srt_from_scenes(scenes, audio_path, srt_path_out)
+
+    print("[3/5] Performance-Slide + Hintergründe…")
+    perf_png = os.path.join(tmpdir, "perf_slide.png")
+    perf_ok = _generate_performance_slide(ctx, perf_png, W, H)
+
+    # CTA-Slide (leere carousel_dir → nur Text)
+    cta_png = os.path.join(tmpdir, "cta_scene.png")
+    _generate_cta_scene(feat_ticker or "AI Alpha Selection", None, cta_png, W, H)
+
+    # Audio-Dauer ermitteln
+    try:
+        import json as _json
+        _probe = subprocess.run(
+            [_ffprobe_exe(), "-v", "quiet", "-print_format", "json", "-show_format", audio_path],
+            capture_output=True, text=True, check=True)
+        audio_dur = float(_json.loads(_probe.stdout)["format"]["duration"])
+    except Exception:
+        audio_dur = len(scenes) * scene_sec
+
+    n = len(scenes)
+    total_video_dur = n * scene_sec - max(0, n - 1) * fade
+    last_scene_dur = scene_sec + max(0.0, audio_dur - total_video_dur + 0.3)
+
+    video_paths = []
+    for i, scene in enumerate(scenes):
+        dest = os.path.join(tmpdir, f"scene_{i:02d}.mp4")
+        dur = last_scene_dur if i == n - 1 else scene_sec
+        ok = False
+        # Szene 2 (Index 1) → Performance-Slide
+        if i == 1 and perf_ok:
+            _png_to_video(perf_png, dest, W, H, dur)
+            ok = True
+        # Letzte Szene → CTA
+        if not ok and i == n - 1:
+            _png_to_video(cta_png, dest, W, H, dur)
+            ok = True
+        if not ok and api_key:
+            ok = _pexels_download(scene["visual"], dest, api_key, min_dur=int(dur))
+        if not ok:
+            _generate_bg_cinematic(i, dest, W, H, dur)
+            ok = True
+        video_paths.append(dest)
+
+    print("[4/5] Clips zusammenstellen…")
+    clips = []
+    for i, vpath in enumerate(video_paths):
+        if vpath and Path(vpath).exists():
+            try:
+                cl = VideoFileClip(vpath).subclipped(0, scene_sec)
+                clips.append(_crop_portrait(cl, W, H))
+                continue
+            except Exception as exc:
+                print(f"  Clip {i} fehlgeschlagen ({exc})")
+        clips.append(ColorClip(size=(W, H), color=(14, 19, 32), duration=scene_sec))
+
+    final_clips = [clips[0]]
+    for cl in clips[1:]:
+        final_clips.append(cl.with_effects([vfx.CrossFadeIn(fade)]))
+    video = concatenate_videoclips(final_clips, method="compose", padding=-fade)
+
+    audio = AudioFileClip(audio_path)
+    safe_dur = min(audio.duration - 0.05, video.duration)
+    video = video.with_audio(audio.with_duration(safe_dur))
+
+    # Logo-Overlay
+    overlays = [video]
+    if LOGO_PATH.exists():
+        lw = _logo_width(LOGO_PATH, height=60)
+        logo = (ImageClip(str(LOGO_PATH))
+                .with_effects([vfx.Resize(height=60)])
+                .with_duration(video.duration)
+                .with_position((W - lw - 30, 30)))
+        overlays.append(logo)
+    if len(overlays) > 1:
+        video = CompositeVideoClip(overlays)
+
+    raw_path = os.path.join(tmpdir, "raw.mp4")
+    print("[5/5] Video schreiben…")
+    os.makedirs(Path(output_path).parent, exist_ok=True)
+    video.write_videofile(
+        raw_path, codec="libx264", fps=fps, audio_codec="aac",
+        ffmpeg_params=["-pix_fmt", "yuv420p", "-crf", "23"],
+        logger=None,
+    )
+
+    if srt_result and Path(srt_result).exists():
+        _burn_subtitles(raw_path, srt_result, output_path, cfg)
+    else:
+        shutil.copy2(raw_path, output_path)
+
+    print(f"\n✓ Weekly Reel gespeichert: {output_path}")
+    return output_path
 
 
 if __name__ == "__main__":

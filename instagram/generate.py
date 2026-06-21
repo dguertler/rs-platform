@@ -966,6 +966,16 @@ def main():
                         zf.write(os.path.join(carousel_dir, fname), fname)
             all_saved.append(zip_path)
             print(f"  📦 ZIP: {os.path.relpath(zip_path, ROOT)}")
+        # Cinematischer Reel für den Wochenrückblick
+        reel_out = os.path.join(base, "reel_cinematic.mp4")
+        try:
+            from . import cinematic_reel
+            cinematic_reel.render_weekly(ctx, reel_out)
+            all_saved.append(reel_out)
+            print(f"  🎬 Cinematic Reel: {os.path.relpath(reel_out, ROOT)}")
+        except Exception as ex:
+            print(f"  ⚠ Cinematic Reel übersprungen ({ex.__class__.__name__}: {ex})")
+
         print(f"✓ {len(all_saved)} Slides (KW{args.kw}) in {base}")
         print(f"  Datum (Slide): {date_iso} · Aktie der Woche: {ctx['featured']['ticker']}")
         for p in all_saved:
