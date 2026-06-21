@@ -58,7 +58,7 @@ NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallba
 | `holdings.json` | alle Positionen + Kaufdatum + Einstiegskurs + `base_kw` | bei Kauf/Verkauf |
 | `trades.json` | abgeschlossene Trades (realisierte Rendite) | bei Verkauf |
 
-## 6. Aktueller Daten-Snapshot (Stand KW24 / 12.06.2026)
+## 6. Aktueller Daten-Snapshot (Stand KW25 / 19.06.2026)
 
 > Führende Quelle sind IMMER die JSONs (`wikifolio_history.json`,
 > `holdings.json`, `trades.json`). Dieser Abschnitt wird bei jedem
@@ -66,8 +66,8 @@ NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallba
 
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
-20 135,44 · 21 139,66 · 22 148,25 · 23 149,86 · **24 154,79** → Gesamt **+57,2 %**,
-NASDAQ +29,1 %, Alpha +28,1 %, 9/11 Wochen über NASDAQ (^NDX-basiert, siehe §8).
+20 135,44 · 21 139,66 · 22 148,25 · 23 149,86 · 24 154,79 · **25 163,91** → Gesamt **+66,4 %**,
+NASDAQ +33,5 %, Alpha +32,9 %, 10/12 Wochen über NASDAQ (^NDX-basiert, siehe §8).
 
 **Positionen (7, aus `holdings.json`):**
 | Ticker | Name | Kauf | Einstieg € |
@@ -78,19 +78,19 @@ NASDAQ +29,1 %, Alpha +28,1 %, 9/11 Wochen über NASDAQ (^NDX-basiert, siehe §8
 | STX | Seagate Technology | 21.05.2026 | 676,07 |
 | GOOGL | Alphabet | 09.06.2026 | 313,75 |
 | ASML | ASML | 12.06.2026 | 1.608,20 |
-| SQ | Block Inc. | 12.06.2026 | 103,90 |
+| TER | Teradyne | 19.06.2026 | 374,15 |
 
-**KW24-Trades (Verkäufe 09.06., aus `trades.json`):**
-Datadog +7,6 % · Applied Materials +5,1 % · Western Digital +2,7 % (< 5%, kein Trade-Slide).
-Neue Positionen: Alphabet (09.06.), ASML (12.06.), Block Inc. (12.06.).
+**KW25-Trades (aus `trades.json`):**
+Verkauf: Strategy Inc. (MSTR) +0,7 % (19.06., < 5%, kein Trade-Slide).
+Kauf: Teradyne (TER, 19.06.).
 
-**Abgeschlossene Trades (23, aus `trades.json`, in %):**
+**Abgeschlossene Trades (24, aus `trades.json`, in %):**
 Alphabet +2,9 · IBM −7,4 · NXP +0,3 (alle drei pre-Excel) ·
 Definium Therapeutics +22,3 · ASML +0,7 · Credo Technology +0,1 ·
 Applied Materials +1,1 · Microsoft −1,3 · Siemens Energy +0,4 ·
 Broadcom +0,1 · Amazon +0,8 · ASML −5,2 · Akamai −7,6 · Analog Devices +11,0 ·
 NVIDIA +0,4 · Alphabet −7,4 · NXP −6,2 · AMD +69,6 · Lam Research +29,9 ·
-IBM −12,6 (Roundtrip) · Applied Materials +5,1 · Western Digital +2,7 · Datadog +7,6.
+IBM −12,6 (Roundtrip) · Applied Materials +5,1 · Western Digital +2,7 · Datadog +7,6 · Strategy Inc. +0,7.
 
 Die Report-Kennzahlen (Trades, Trefferquote, Profitfaktor, Ø Gewinn/Verlust)
 werden **automatisch** aus `trades.json` + aktiven Positionen berechnet —
