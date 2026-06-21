@@ -1,6 +1,6 @@
 # NOW — KI-Aktienbewertung
 
-**ServiceNow, Inc.** · Technology · 20.06.2026 · Signal: SP500
+**ServiceNow, Inc.** · Technology · 21.06.2026 · Signal: SP500
 
 | Kennzahl | Wert |
 |---|---|

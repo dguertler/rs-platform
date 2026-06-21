@@ -501,6 +501,7 @@ def build_html(ticker: str, fund: dict, analysis_text: str, rs_score: float, gws
     ev_pts, upside_pct = _compute_ev_score(analysis_text, price)
     score, verd = _calc_score_and_verdict(rt, ev_pts)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
+    asymm_edge = upside_pct is not None and upside_pct > 20
 
     if verd == "BUY":
         vc, vbg, vbr = "#86c429", "#3B6D11", "#639922"
@@ -631,7 +632,10 @@ body{{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-se
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-      <div class="vb">{verd}</div>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">{verd}</div>
+        {f'<span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >{upside_pct:.0f}%">!</span>' if asymm_edge else ''}
+      </div>
       <div style="font-size:12px;color:var(--mu);text-align:right">
         Score: <strong style="color:{vc};font-size:20px">{score}</strong><span style="color:var(--mu)">/100</span>
       </div>
@@ -727,6 +731,8 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
     ev_pts, upside_pct = _compute_ev_score(analysis_text, fund.get("currentPrice"))
     score, verd = _calc_score_and_verdict(rt, ev_pts)
     q, g, v, p = rt["Qualität"], rt["Wachstum"], rt["Bewertung"], rt["Katalysator"]
+    asymm_edge = upside_pct is not None and upside_pct > 20
+    edge_line  = f"\n**⚡ ASYMMETRISCHER EDGE** — EV-Upside {upside_pct:+.1f}% (>20%)\n" if asymm_edge else ""
 
     gws_weekly = "✓ Aktiv" if gws.get("weekly") else "✗ Inaktiv"
     gws_daily  = "✓ Aktiv" if gws.get("daily")  else "✗ Inaktiv"
@@ -747,7 +753,7 @@ def build_markdown(ticker: str, fund: dict, analysis_text: str, rs_score: float,
 | RS-Score | {rs_score:.1f} |
 
 **GWS-Ampel:** Weekly {gws_weekly} · Daily {gws_daily} · 4H {gws_h4}
-
+{edge_line}
 ---
 
 {analysis_text}
@@ -795,8 +801,9 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     fund = load_fundamentals(ticker)
 
     rt    = _extract_ratings(analysis_text)
-    ev_pts, _ = _compute_ev_score(analysis_text, fund.get("currentPrice"))
+    ev_pts, upside_pct = _compute_ev_score(analysis_text, fund.get("currentPrice"))
     score, verd = _calc_score_and_verdict(rt, ev_pts)
+    asymm_edge = upside_pct is not None and upside_pct > 20
 
     html = build_html(ticker, fund, analysis_text, rs_score, gws)
 
@@ -815,10 +822,11 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     idx = load_index()
     idx["ratings"] = [r for r in idx["ratings"] if r.get("ticker", "").upper() != ticker.upper()]
     idx["ratings"].append({
-        "ticker":     ticker.upper(),
-        "verdict":    verd,
-        "score":      score,
-        "created_at": datetime.now().isoformat(),
+        "ticker":          ticker.upper(),
+        "verdict":         verd,
+        "score":           score,
+        "asymmetric_edge": asymm_edge,
+        "created_at":      datetime.now().isoformat(),
     })
     save_index(idx)
     print(f"  Index aktualisiert: {len(idx['ratings'])} Rating(s)")

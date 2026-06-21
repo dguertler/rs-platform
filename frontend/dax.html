@@ -1406,7 +1406,7 @@ function App() {
                 <span style={{display:"flex",alignItems:"center",justifyContent:"center"}}>
                   {rating && (
                     <span onClick={e => { e.stopPropagation(); setRatingModal(item.t); }}
-                      title={`Bewertung · ${rating.verdict} · Score ${rating.score}`}
+                      title={`Bewertung · ${rating.verdict} · Score ${rating.score}${rating.asymmetric_edge?" · ⚡ Asymm. Edge":""}`}
                       style={{
                         fontSize:11, fontWeight:700, letterSpacing:0.5,
                         padding:"2px 5px", borderRadius:3, cursor:"pointer",
@@ -1416,6 +1416,7 @@ function App() {
                         border:`1px solid ${rating.verdict==="BUY"?"#639922":rating.verdict==="HOLD"?"#b45309":"#A32D2D"}`,
                       }}>{rating.verdict}</span>
                   )}
+                  {rating?.asymmetric_edge && <span style={{color:"#ef4444",fontSize:11,fontWeight:900,marginLeft:2,cursor:"default",lineHeight:1}} title="Asymmetrischer Edge: EV-Upside >20%">!</span>}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
                   {item.s>0?"+":""}{Math.round(item.s)}
