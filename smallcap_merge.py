@@ -67,8 +67,11 @@ def is_zombie(entry):
     ticker = entry.get("ticker", "")
     fund = fund_map.get(ticker, {})
     mcap = fund.get("marketCap")
-    if mcap is not None and mcap < ZOMBIE_MCAP_THRESHOLD:
-        return True
+    try:
+        if mcap is not None and float(mcap) < ZOMBIE_MCAP_THRESHOLD:
+            return True
+    except (TypeError, ValueError):
+        pass
     ohlcv = entry.get("ohlcv_w") or entry.get("ohlcv", [])
     if ohlcv:
         last_price = ohlcv[-1].get("c", 999)
