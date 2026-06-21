@@ -67,7 +67,7 @@ NASDAQ-Vergleich = **^NDX** (`ndx_ohlcv` in `data/rs_full.json`), QQQ nur Fallba
 **Wikifolio-Werte (EUR):** Start 30.03. = 98,48 →
 KW14 105,80 · 15 111,91 · 16 118,55 · 17 126,15 · 18 125,50 · 19 135,98 ·
 20 135,44 · 21 139,66 · 22 148,25 · 23 149,86 · 24 154,79 · **25 163,91** → Gesamt **+66,4 %**,
-NASDAQ +33,5 %, Alpha +32,9 %, **8/11 Wochen über NASDAQ** (^NDX-basiert, KW15–KW25; KW20 Randfall −0,02 pp).
+NASDAQ +33,5 %, Alpha +32,9 %, **9/12 Wochen über NASDAQ** (^NDX-basiert, KW14–KW25; KW14 vs. 30.03. gezählt; KW20 Randfall −0,02 pp).
 
 **Positionen (7, aus `holdings.json`):**
 | Ticker | Name | Kauf | Einstieg € |
