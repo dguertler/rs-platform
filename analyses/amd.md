@@ -1,16 +1,16 @@
 # AMD — KI-Aktienbewertung
 
-**Advanced Micro Devices, Inc.** · Technology · 17.06.2026 · Signal: Manuell generiert
+**Advanced Micro Devices, Inc.** · Technology · 21.06.2026 · Signal: Triple Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 511.57 |
-| Market Cap | $834.17 Mrd. |
-| Forward PE | 39.04 |
+| Kurs | 537.37 |
+| Market Cap | $876.24 Mrd. |
+| Forward PE | 41.01 |
 | Revenue (TTM) | $37.45 Mrd. |
 | Gross Margin | 53.1% |
 | ROE | 8.1% |
-| RS-Score | 250.3 |
+| RS-Score | 281.7 |
 
 **GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
 
@@ -18,82 +18,67 @@
 
 ## 1. INVESTMENT-CASE
 
-Advanced Micro Devices hat sich in weniger als fünf Jahren von einem Nischen-CPU-Hersteller zu einem vollwertigen Rechenzentrums-Plattformanbieter transformiert. Der strukturelle Kern des Investment-Case liegt in der MI300X-GPU-Roadmap: AMD adressiert erstmals den KI-Trainings- und Inferenz-Markt mit kompetitiver Hardware und gewinnt dabei Hyperscaler-Kunden (Microsoft Azure, Meta, Oracle) auf Segmenten, die bislang NVIDIA-Monopole waren. Der Markt unterschätzt zwei Dinge gleichzeitig: erstens die Geschwindigkeit, mit der AMD-GPUs in Inferenz-Workloads kosteneffizient skalieren, und zweitens die Hebelwirkung der Embedded/Adaptive-Compute-Sparte (Xilinx-Erbe) im industriellen Automatisierungszyklus. Das Forward-KGV von 39x erscheint bei einem Umsatzwachstum von fast 38% und steigenden Rechenzentrums-Margen nicht überzogen. Kritisch bleibt die Abhängigkeit von TSMC als einzigem Hochleistungs-Fab-Partner sowie das reale Exportkontrollrisiko in Richtung China. Der niedrige ROE von 8,1% ist buchhalterisch bedingt — das Xilinx-Goodwill (ca. 22 Mrd. USD) verzerrt die Eigenkapitalbasis und verschleiert die operative Kapitalrendite. AMD ist kein Momentum-Vehikel mehr, sondern zunehmend ein struktureller Wachstumscompunder — mit zyklischer Beimischung.
+AMD steht an der Schwelle zur zweiten Phase des KI-Halbleiterzyklus: Während Nvidia die erste Welle dominierte, verlagert sich Enterprise-Capex auf Multi-Vendor-Strategien. AMDs MI300X/MI350-GPU-Serie hat sich als ernsthafte Alternative bei Hyperscalern (Microsoft Azure, Meta, Oracle Cloud) etabliert — nicht durch Marktanteilsdiebstahl bei Nvidia, sondern durch Erschließung der zweiten Beschaffungsschicht. Der strukturelle Kern: Server-CPU EPYC setzt Intel weiter unter Druck (Marktanteile +30pp in 2 Jahren), während das GPU-Portfolio mit KI-Inference-Workloads skaliert. Revenue-Wachstum 37,8% YoY zeigt operative Hebelwirkung. Was der Markt möglicherweise unterschätzt: EPYC schafft Cross-Sell-Vorteil — wer AMDs CPUs kauft, prüft MI300 zuerst. Trailing PE 179x ist yfinance-Artefakt durch hohe Goodwill-Abschreibungen (Xilinx $35 Mrd.); Forward PE 41x spiegelt Konsens-EPS ~$13,1 FY26, was ambitious, aber nicht absurd ist.
 
 ## 2. GESCHÄFTSMODELL
 
-- Data Center (GPU/CPU): Größtes und am schnellsten wachsendes Segment. EPYC-CPUs gewinnen Servermarktanteile von Intel; MI300X/MI350-GPUs adressieren KI-Inferenz und -Training bei Hyperscalern.
-- Client (PC-CPUs): Ryzen-Prozessoren für Consumer und Commercial PCs. Zyklisch, aber mit stabiler Margenanker-Funktion; Marktanteilsgewinne gegenüber Intel halten an.
-- Gaming (Konsolen-APUs): Sony PlayStation 5 und Microsoft Xbox verwenden AMD-Chips. Rückläufig im Zyklus, hoher Fixkostenanteil pro Design-Win, aber langfristig stabile Volumina.
-- Embedded/Adaptive (Xilinx): FPGAs und adaptive SoCs für Industrie, Automotive, Verteidigung. Momentan im Lagerabbau-Zyklus, Recovery ab H2 2026 erwartet.
-- Fabless-Modell: AMD designt, TSMC (N3/N4/N5) fertigt. Capex-leichtes Modell mit hohem operativem Hebel bei Umsatzwachstum.
-- Lizenz-/IP-Komponente: ARM-Architektur-Partnerschaft und proprietäre CDNA/RDNA-ISAs schaffen Switching-Costs auf Softwareebene (ROCm-Ökosystem).
-- Bruttomarge-Hebel: Datencenter-GPUs generieren strukturell höhere Margen (>55%) als Gaming oder Embedded; Produktmix-Shift ist der primäre Margenreiber der nächsten zwei Jahre.
-- Software-Moat im Aufbau: ROCm-Stack und PyTorch-Integration reduzieren CUDA-Lock-in; noch im Aufbau, aber strategisch entscheidend für Langfrist-Positionierung.
+- Datacenter-GPU (MI300X/MI350): Primärwachstumstreiber, KI-Training und Inference bei Hyperscalern, Margen >50%
+- Server-CPU EPYC: struktureller Gewinner vs. Intel, Generationen-Vorsprung bei Leistung/Watt
+- Gaming-GPU (Radeon): zyklisch, margenschwach, kein strategisches Differenzierungsmerkmal mehr
+- Embedded/Semi-Custom: Sony/Xbox-Design-Wins auslaufend, Segment stagniert
+- PC-CPU (Ryzen): stabiler Free-Cash-Flow-Generator ohne Wachstumsphantasie
+- Foundry-Abhängigkeit TSMC N3/N4: kein eigenes Fab — höchste Prozessqualität, aber Kapazitätsrisiko bei Engpässen
+- SBC ~3–4% Revenue: verwässert kontinuierlich, branchenüblich für Halbleiter
+- ROE 8% optisch schwach durch $35 Mrd. Xilinx-Goodwill — bereinigt deutlich höher
 
 ## 3. BULL CASE
 
-Treiberannahmen: Datenzentrum-Umsatz wächst auf 30 Mrd. USD in FY2027 (aktuell ~20 Mrd. USD run-rate), Embedded erholt sich auf 4 Mrd. USD, Gesamtumsatz erreicht 45–48 Mrd. USD. Operating Margin expandiert auf 28–30% durch GPU-Mixshift. Non-GAAP EPS von 12–14 USD in FY2027 ist realistisch. Bei einem KGV von 45x (gerechtfertigt durch >25% EPS-CAGR) ergibt sich ein Kursziel von 540–630 USD in 18 Monaten. Strukturelle Margennachhaltigkeit: Der Enterprise-GPU-Mix über 60% Revenue ermöglicht dauerhaft höhere Margen als historische PC-Zyklus-Mittelwerte durch proprietäre CDNA-Architektur und wachsende ROCm-Bindung. Eintrittswahrscheinlichkeit: 30%
+KI-GPU-Markt wächst 2025–2028 auf $200+ Mrd.; AMD gewinnt 15–20% Marktanteil. EPYC erreicht $12+ Mrd. Revenue/Jahr. Annahme (kein Konsens): FY27-EPS ~$16–18 bei 45x Forward-Multiple → Kursziel $720–$810. Strukturelle Margennachhaltigkeit: Datacenter-Mix >60% Revenue ermöglicht dauerhaft 55%+ Gross-Margin durch proprietäre Chiplet-Architektur und CDNA-Roadmap-Vorsprung. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Umsatz FY2027 bei 40–43 Mrd. USD. Non-GAAP EPS 9,50–11 USD. Datenzentrum wächst stabil, Embedded erholt sich moderat, Gaming bleibt flach. Operating Margin 22–25% (Mixshift teilweise, ROCm-Investitionen dämpfen). KGV 35–38x auf FY2027 EPS ergibt Kursziel 380–420 USD in 12–18 Monaten — implizites Downside von ca. 17–25% gegenüber aktuellem Kurs von 507 USD. Auf FCF-Basis: 9–10 Mrd. USD normierter FCF × 38x = Kursziel ca. 390–410 USD. Das Bewertungsniveau preist bereits ein ausgezeichnetes Szenario ein; der Markt lässt wenig Puffer für Enttäuschungen. Eintrittswahrscheinlichkeit: 45%
+Wahrscheinlichstes Szenario: KI-Capex normalisiert ab 2027, aber AMD hält GPU-Marktanteile durch Software-Ökosystem-Investitionen (ROCm). Konsens-EPS FY26 ~$13,1 × 41x = $537 — aktuelles Niveau gut eingepreist. FY27-EPS ~$15 × 40x = $600. Kursziel $480–$600. Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Exportkontrollen werden auf MI300X/MI350 ausgeweitet. China-Umsatz, derzeit ca. 10–15% der Datenzentrum-Pipeline, fällt weitgehend aus. TSMC-Engpässe verzögern MI400-Ramp. NVIDIA verteidigt Hyperscaler-Konten aggressiver durch CUDA-Ökosystem-Lock-in; AMD verliert geplante GPU-Design-Wins. Embedded bleibt länger im Lagerabbau.
+Auslöser: Nvidia CUDA-Ökosystem bleibt unüberwindbar; AMDs ROCm-Software-Stack gewinnt keine kritische Masse; Hyperscaler pausieren GPU-Capex 2026. Gaming-Segment komprimiert weiter. Annahme: FY27-EPS fällt auf $7–8, Multiple-Kompression auf 25x → Kursziel $175–$220. Kundenkonzentration: Microsoft >20% Revenue (nicht im Datensatz verifizierbar — Hypothese). Geopolitik/China: ITAR-Exportkontrollen treffen MI-Chips; China-Ersatzprodukte weniger margenstark. Lieferkette: TSMC-Abhängigkeit bei Engpässen strukturelles Risiko. Verwässerung: SBC-Druck moderat. Regulierung: Kartellrecht bei weiterer Konsolidierung. Eintrittswahrscheinlichkeit: 25%.
 
-Risiko-Sweep:
-- Kundenkonzentration: Microsoft Azure, Meta und Oracle machen schätzungsweise 30–40% der GPU-Pipeline aus (Hypothese, nicht datenbasiert) — Verlust eines großen Kunden wäre material.
-- Geopolitik/Exportkontrollen: Real und quantifizierbar; China-Exposure ~15% des potenziellen Datenzentrum-Umsatzes direkt betroffen.
-- Lieferketten/Foundry: Vollständige TSMC-Abhängigkeit bei N3/N4; kein Backup-Foundry für führende Nodes.
-- Verwässerung: SBC ca. 1,5 Mrd. USD p.a. bei 1,64 Mrd. Aktien — moderat, aber kontinuierlich verwässernd.
-- Regulierung: Kartellrechtliche Prüfung bei weiterem Marktanteilswachstum möglich; KI-Regulierung im Entstehen.
+**Summe: 25% + 50% + 25% = 100%**
 
-Umsatz FY2027 stagniert bei 35–37 Mrd. USD, EPS 6–7 USD, KGV 28–30x = Kursziel 170–210 USD. Eintrittswahrscheinlichkeit: 25%
-
-Summe: 30% + 45% + 25% = 100%
-
-Erwartungswert: (0,30 × 585) + (0,45 × 400) + (0,25 × 190) = 175,5 + 180,0 + 47,5 = $403 — implizites Downside vs. aktuellem Kurs: −21%
-
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25×$765 + 0,50×$540 + 0,25×$198 = $191 + $270 + $49 = **$510** — implizites Downside vs. aktuellem Kurs $537: **–5%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Der ROE von 8,1% ist nicht das richtige Messinstrument für AMD. Das Xilinx-Goodwill (ca. 22 Mrd. USD) bläht die Eigenkapitalbasis auf; bereinigt liegt der ROIC näher an 12–15%, was für ein Fabless-Unternehmen im Wachstumszyklus akzeptabel ist. Die Bruttomarge von 53,1% liegt auf dem Weg zu 55–57%, getrieben durch GPU-Mixshift. Der eigentliche Moat liegt in zwei Faktoren: TSMC-Zugang zu leading-edge Nodes auf gleicher Augenhöhe mit NVIDIA sowie wachsende Softwarebindung durch ROCm. Schwäche: AMD hat keinen eigenständigen Fab-Zugang und ist bei geopolitischen Disruptions-Szenarien exponiert. Free Cashflow von 7,17 Mrd. USD zeigt echte Kapitalproduktion; D/E von 6,0 ist für ein Investment-Grade-Unternehmen dieser Größe unproblematisch.
+ROE 8% durch Goodwill-Belastung verzerrt — bereinigt um immaterielle Xilinx-Assets strukturell höher. Net-Margin 13,4% zeigt operative Effizienz in einem Asset-light-Fabless-Modell. Revenue-Wachstum 37,8% YoY ist substanziell und primär volumengetrieben (nicht Preiszyklus wie NAND). Bilanz: Debt/Equity 6,0 — moderat, aus Xilinx-Übernahme; kein strukturelles Risiko bei aktuellem Cash-Flow. FCF nicht direkt verfügbar, aber Fabless-Struktur impliziert hohen Cash-Flow-Umwandlungsgrad. Echter wirtschaftlicher Burggraben: Chiplet-Architektur + Co-Packaged-Optics-Roadmap, nicht leicht replizierbar.
 
 ## 7. BEWERTUNG
 
-Aktueller Kurs 507 USD impliziert eine Market Cap von ca. 834 Mrd. USD. Bei TTM-FCF von 7,17 Mrd. USD handelt AMD zum 116-fachen des aktuellen Free Cashflows — keine Substanzbewertung, sondern eine reine Wachstumswette. Rückrechnung: Was muss stimmen, damit 507 USD fair sind? Revenue 45 Mrd. USD (FY2027) × 25% Net Margin = 11,25 Mrd. USD Nettogewinn ÷ 1,64 Mrd. Aktien = 6,86 USD EPS × KGV 74x — oder realistischer: 11 USD EPS × KGV 46x = 506 USD. Das setzt voraus, dass AMD ein KGV von >40x auf FY2027-Basis verdient. Möglich bei >25% EPS-Wachstum, aber ohne Fehlertoleranz. Das Forward-KGV von 39x ist das günstigste Argument für die Aktie.
+Forward PE 41x impliziert FY26-EPS ~$13,1 — erreichbar bei moderater Datacenter-Beschleunigung. Rückrechnung: Aktueller Kurs $537 rechtfertigt Revenue ~$35 Mrd. FY27 × 12% Net-Margin × 130x EPS-Multiple oder $35 Mrd. × ~2,5% FCF-Yield ÷ Aktienanzahl — ambitioniert, aber nicht unrealistisch für Wachstumsphase. Normalisiertes KGV bei Zyklusabschwung (EPS $7): impliziertes Multiple 77x — das ist keine Value-Position. Bewertung setzt Wachstumskontinuität voraus.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Hypothese (nicht datenbasiert): Der Kursanstieg von +105% in 50 Tagen und +125% in 6 Monaten deutet auf eine Repricing-Phase hin, in der institutionelle Investoren AMD als KI-Infrastruktur-Aktie reklassifiziert haben — nicht mehr als PC/Gaming-Zykliker. Diese Reklassifizierung ist ein einmaliger Bewertungshub, kein wiederholbarer Wachstumstreiber. Der RS-Score von 250 und Rank 5 im NASDAQ-100 zeigen, dass AMD zu den stärksten Momentum-Trägern im Index gehört. Das 10-Tages-Fenster mit −4,6% bei gleichzeitig +18,5% über 20 Tage legt kurzfristige Gewinnmitnahmen nahe, der mittelfristige Aufwärtstrend ist aber intakt. Positionierungsrisiko: Wenn AMD aus dem KI-Themenbasket rotiert wird, kann der Kurs schnell 20–30% korrigieren, ohne dass sich die Fundamentals geändert hätten.
+RS-Score 281,7, Rank #5 im NASDAQ-100-Universum — institutionelle Neupositionierung erkennbar am 50T-Window +105,7%. 52-Wochen-Spanne 126,82–558,37 zeigt extreme Volatilität; aktueller Kurs nahe 52W-Hoch signalisiert Momentum-Long-Only-Dominanz. Hypothese (nicht datenbasiert): Short-Float dürfte nach Rally signifikant reduziert sein, FOMO-Phase läuft. Enttäuschungsrisiko: KI-GPU-Revenue unter Erwartung bei nächsten Earnings.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Trendstruktur bullisch: AMD notiert oberhalb aller drei relevanten gleitenden Durchschnitte — MA20 (492 USD), MA50 (399 USD), MA200 (258 USD) — mit wachsenden Abständen. Das GWS ist auf Weekly, Daily und 4H aktiv. Der Kurs liegt ca. 3% oberhalb des MA20, was kurzfristig wenig Überhitzung signalisiert. Das 50-Tage-Momentum von +105% ist außergewöhnlich stark. Warnsignale: Ein Schlusskurs unterhalb des MA20 (ca. 492 USD) wäre ein erstes Warnsignal. Ein Bruch des MA50 (399 USD) würde den mittelfristigen Trend infrage stellen. Beta von 2,49 bedeutet: Bei einem NASDAQ-Rückgang von 10% ist ein AMD-Rückgang von 20–25% statistisch zu erwarten.
+GWS 3/3 aktiv — Weekly, Daily, 4H über SMA(10). Kurs $537 nahe 52W-Hoch $558,37. 5T: +2,4%; 10T: +10,2%; 20T: +15,9%; 50T: +105,7%; 6M: +147,6% — Momentum beschleunigt über alle Zeitrahmen. Fundamental durch GPU-Ramp gestützt. Technisches Warnsignal: Wochenschluss unter $460 (50T-SMA-Bruch) oder Verlust $500 als Trendumkehr-Signal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-Bull ($720–$880): AMD etabliert sich als Nummer-2-KI-Chip-Plattform mit 15–20% GPU-Marktanteil. Umsatz 60–70 Mrd. USD, Net Margin 22%, EPS 18–22 USD × KGV 40x. Entscheidende Variable: ROCm-Ökosystem gewinnt Software-Entwickler.
+**Bull Case ($900–$1.200):** AMD wird zweiter struktureller KI-GPU-Lieferant. EPYC-Dominanz + MI-GPU-Ökosystem schafft Plattform-Lock-in. Entscheidende Variable: ROCm-Software-Reife.
 
-Base ($415–$510): Solides Wachstum im Datenzentrum (EPYC dominiert), GPU bleibt Nische mit 8–12% Marktanteil, Embedded erholt sich. Umsatz 48–55 Mrd. USD, EPS 13–16 USD × KGV 32x. Entscheidende Variable: Exportkontroll-Regime bleibt stabil.
+**Base Case ($500–$700):** Wachstumsnormalisierung 2027–2028; AMD hält 10–15% GPU-Marktanteil, EPYC stabil. Bewertungsmultiple komprimiert auf 30–35x.
 
-Bear ($155–$200): Exportrestriktionen verschärfen sich, NVIDIA baut CUDA-Graben aus, Embedded schwächt sich strukturell ab. Umsatz 38–42 Mrd. USD, EPS 7–9 USD × KGV 22x. Entscheidende Variable: Geopolitik und US-China-Technologiekonflikt.
+**Bear Case ($150–$280):** Nvidia hält 95%+ Marktanteil durch CUDA-Burggraben; AMD verliert Differenzierung. Zyklische Multiple-Kompression auf 20x bei $8 EPS.
 
 ## 11. PROFI-FAZIT
 
-AMD ist ein struktureller Wachstumscompunder mit zyklischer Beimischung — kein reines Momentum-Vehikel, aber auch keine klassische Value-Situation. Geeignet für Wachstumsinvestoren mit 3–5 Jahren Zeithorizont und hoher Risikotoleranz (Beta 2,49). Kurzfristige Trader profitieren von intaktem Momentum, müssen aber MA20-Brüche konsequent als Stopsignal werten.
-
-Positionsgrößen-Warnung: Aufgrund des hohen Betas und des berechneten negativen Erwartungswerts auf 18-Monats-Sicht sollte die Positionsgröße in diversifizierten Portfolios auf 3–7% begrenzt werden. Ein Nachkauf auf aktuellem Niveau ist aus Risk/Reward-Perspektive nicht zwingend.
-
-Peer-Vergleich (Peer-Multiples nicht im Datensatz): NVIDIA (NVDA) — höhere Margen, stärkeres Ökosystem (CUDA), höheres KGV; Qualitätsprämie gerechtfertigt. Intel (INTC) — niedrigeres KGV, aber strukturelle Schwäche; AMD operativ klar überlegen. Marvell Technology (MRVL) — ähnliches Datenzentrum-Exposure, kleinere Marktkapitalisierung, günstigere Bewertung auf FCF-Basis (indikativ).
+AMD ist kein Compounder, aber auch kein reines Momentum-Play — es ist eine strukturierte Wette auf den zweiten KI-Chip-Anbieter. Der Investment-Case ist real und fundamental untermauert; das Problem ist die Bewertung: EV ~$510 liegt unter dem aktuellen Kurs $537, es gibt keinen asymmetrischen Edge auf diesem Niveau. Für Momentum-Trader mit GWS 3/3 und definiertem Stop unter $460 vertretbar. Für Buy-and-Hold: Bessere Einstiegspunkte bei $420–$460 abwarten. Peers: **Nvidia (NVDA)** bietet reineres KI-GPU-Exposure mit überlegenem Software-Ökosystem (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). **Intel (INTC)** ist das günstigere, aber kaputte Alternative — falsche Risikostruktur.
 
 - Qualität: 3/5
 - Wachstum: 5/5
 - Bewertung: 2/5
-- Katalysator: 4/5
+- Katalysator: 5/5
 
 ---
 
@@ -102,8 +87,9 @@ Peer-Vergleich (Peer-Multiples nicht im Datensatz): NVIDIA (NVDA) — höhere Ma
 | Qualität | 3/5 |
 | Wachstum | 5/5 |
 | Bewertung | 2/5 |
-| Katalysator | 4/5 |
+| Katalysator | 5/5 |
+| EV-Upside | -6.8% |
 
-**Verdict: BUY (70/100)**
+**Verdict: HOLD (65/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
