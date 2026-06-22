@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AMZN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">22.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AMZN</h1>
+      <h2>Amazon.com, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Internet Retail</span></div>
+        <div class="mi">MCap: <span>$2629B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">67</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 22.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-48.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$244.39</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">24.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$742.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">50.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">24.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+13.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">380–420</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">270–310</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–160</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># AMZN — KI-Aktienbewertung</p>
+<p>**Amazon.com, Inc.** · Consumer Cyclical / Internet Retail · 22.06.2026 · Signal: Kein GWS-Signal aktiv</p>
+<p>| Kennzahl | Wert |</p>
+<p>|---|---|</p>
+<p>| Kurs | $244.39 |</p>
+<p>| Market Cap | $2.629 Bio. |</p>
+<p>| Forward PE | 24.79 |</p>
+<p>| Revenue (TTM) | $742.8 Mrd. |</p>
+<p>| Gross Margin | 50.6% |</p>
+<p>| ROE | 24.3% |</p>
+<p>| RS-Score | -48.55 |</p>
+<p>**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv</p>
+<p>**Szenarien (12–18 Monate):** Bull $380–$420 (20 %) · Base $270–$310 (55 %) · Bear $130–$160 (25 %) · EV ~$276</p>
+<p>---</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Amazon ist kein Internet-Retailer mehr — das ist die Wahrnehmung, die der Markt noch immer teilweise preist. Der strukturelle Kern: AWS generiert ~17% des Umsatzes aber den Großteil des operativen Gewinns, wächst mit 35–40% p.a. und baut als AI-Infrastruktur-Backbone gerade die nächste Wachstumsebene aus. Advertising nähert sich $60 Mrd. annualisiert mit hohen Margen. Das Retail-Segment ist nicht die Story — es ist die Cashflow-Maschine, die AWS-Investitionen querfinanziert hat. Was der Markt gerade möglicherweise zu pessimistisch einpreist: Die operative Hebelwirkung von AWS + Advertising bei weiterem Skalieren hat das Potential, die Konzern-Marge von aktuell 13,1% in Richtung 20%+ zu verschieben — ohne strukturelle Veränderungen am Geschäftsmodell. Der aktuelle Kursdruck spiegelt Makro-Gegenwind und Margensensitivität wider, nicht eine Verschlechterung des Kerngeschäfts. RS-Score -48,55 und Rang 57/100 im NASDAQ-100 bestätigen: kurzfristiger Momentum-Verlust, keine fundamentale Deterioration. Analyst-Konsensziel $312,99 — als Sentiment-Indikator, nicht als Ceiling zu verstehen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>AWS (Amazon Web Services): Cloud-Infrastruktur mit ~35–40% Wachstum, strukturell höchste operative Marge im Konzern (\~40%); primärer Werttreiber und Bewertungsanker</li>
+<li>Advertising Services: Hochmargiges Segment (\~$60 Mrd. annualisiert), wächst mit 25–30% p.a.; Daten-Moat durch E-Commerce-Intent-Signal unschlagbar</li>
+<li>Retail 1P/3P: Volumen-Engine mit niedrigen Margen; liefert AWS und Advertising den Kunden-Funnel und die Infrastruktur-Auslastung</li>
+<li>Prime Membership: Bindungsanker mit ~200 Mio. globalen Abonnenten; Cross-Selling-Hebel für Streaming, Pharmacy, Grocery</li>
+<li>Fulfillment-Netzwerk: Kapitalintensiver Wettbewerbsgraben, der Replikation für Dritte nahezu unmöglich macht</li>
+<li>AI-Investitionen (Trainium, Bedrock, Nova-Modelle): Strategische Wette auf vertikale Integration in der KI-Wertschöpfungskette; noch kein Material Revenue</li>
+<li>Operating Leverage-Kern: Fixkostendegression über AWS und Logistics erzeugt überproportionale Gewinnsteigerung bei Wachstumskontinuität</li>
+<li>Strukturelle Abhängigkeit: Makrosentiment bestimmt AWS-Capex-Budgets der Unternehmenskunden; Konzentration auf US-Markt mit regulatorischem Gegenwind</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AWS-Wachstum beschleunigt auf 40%+ durch AI-Workload-Migration (Inference, Training, RAG-Architekturen); Advertising überholt Googles YouTube-Umsätze; operative Marge konzernweit auf 18–20% durch Mix-Shift zu Hochmargensegmenten. Strukturelle Margennachhaltigkeit: AWS-Pricing-Power durch proprietäre Chip-Technologie (Trainium) und tiefer Kundenintegration reduziert Wechselkosten auf institutionell nicht darstellbarem Niveau. FY2027-EPS-Annahme ~$14 (Annahme, kein Konsens) × 28x Forward-Multiple = $392. Kursziel: $380–$420. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>AWS wächst stabil mit 30–35%, Advertising mit 20–25%, Retail-Margen normalisieren. Konzern-Operating-Margin steigt graduell auf 15–17%. FY2027-EPS-Annahme ~$11 (Annahme, kein Konsens) × 26x Forward-Multiple = $286. Der aktuelle Forward-PE von 24,79x ist bei diesem Szenario leicht komprimiert. Kursziel: $270–$310. Eintrittswahrscheinlichkeit: 55%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Rezession lässt Unternehmensbudgets für Cloud-Services schrumpfen; Azure und GCP gewinnen AI-Workloads durch OpenAI- und Google-Integration systemisch; regulatorische Zerschlagung erzwingt AWS-Abspaltung und destroys Quersubventionierung. Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: AWS-Kundenbasis breit diversifiziert — kein Einzelkunde >5% (aus Daten nicht quantifizierbar, als nicht-kritisch einzustufen)</li>
+<li>Geopolitik/Exportkontrollen: China-Exposure über AWS China begrenzt; Tariff-Risiko auf Retail-Import relevant, aber nicht existenziell</li>
+<li>Lieferketten/Foundry: Trainium-Chips über TSMC — Single-Source-Risiko analog zur Halbleiterindustrie; kurzfristig manageable</li>
+<li>Verwässerung/SBC: Amazon hat historisch erhebliche SBC — Aktienanzahl-Trend auf Datenbasis nicht abschließend beurteilbar</li>
+<li>Regulierung: FTC-Verfahren zu Prime-Kündigung und Marketplace-Praktiken laufen; strukturelle Zerschlagungsrisiken nicht einzupreisen auf aktuellem Evidenzstand</li>
+</ul>
+<p>FY2027-EPS-Annahme ~$7 (Annahme, kein Konsens) × 20x = $140. Kursziel: $130–$160. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 20% + 55% + 25% = 100%**</p>
+<p>**Erwartungswert: $276 — implizites Upside vs. aktuellem Kurs ($244,39): +12,9%.** Der EV liegt positiv, aber ohne ausgeprägte Asymmetrie. Ein High-Conviction-Framing wäre auf diesem Niveau nicht gerechtfertigt — Amazon ist hier ein qualitativ hochwertiges, aber moderat attraktives Setup.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 24,3% ist für ein Unternehmen dieser Größe solide — allerdings getrieben durch AWS-Profitabilität, die das Retail-Ergebnis mehrfach überlagert. Gross Margin 50,6% reflektiert den wachsenden High-Margin-Mix; normalisiert für reines Retail wäre sie deutlich niedriger. Operating Margin 13,1% hat Expansionspotential bei weiterer AWS-Skalierung. Freier Cashflow aus dem Datensatz ($9,8 Mrd.) erscheint auffällig niedrig für Amazons Kapitalstruktur — wahrscheinlich ein yfinance-Artefakt; nicht für Bewertung verwendet. D/E 53,3% ist moderat, keine Bilanzstress-Indikation. Profit Margin 12,2% leicht über Operating Margin — mögliche Steuereffekte oder Einmalposten; aus Daten nicht abschließend auflösbar, Margin-Differenz nicht in Szenario-Herleitung einbezogen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 24,79x ist für ein Unternehmen mit AWS-Qualität im historischen Kontext nicht teuer — AWS allein würde als reines Cloud-Play mit 35–40x gehandelt. Implizite Markterwartung bei $244,39: Forward-EPS ~$9,86 × 24,79x. Das erfordert Margensteigerung auf ~14% bei $742 Mrd. Revenue-Basis — plausibel, nicht ambitioniert. Rückrechnung was der Kurs einpreist: $742 Mrd. Revenue × 16,6% Wachstum = $866 Mrd. FY2026E; bei 14% Operating Margin, 20% Steuerquote → EPS ~$9,80 — konsistent mit Markterwartung. Bewertung ist fair, nicht günstig. P/B 5,95x reflektiert Qualitätsprämie. Eine Normalisierung auf KBV-Basis wäre für Amazon strukturell falsch — buchwertarme Plattform-Ökonomie.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score -48,55 und alle Momentum-Fenster negativ (5T: -0,2%, 10T: -5,7%, 20T: -12,6%, 50T: -16,8%) signalisieren: Institutionelle Rotation weg von Large-Cap-Consumer-Cyclical in spezifischere KI-Plays. Hypothese, nicht datenbasiert: Long-Only-Fonds haben Gewichtung reduziert; Fast-Money fehlt der klare Momentum-Trigger. Neue Käufer brauchen entweder einen AWS-Acceleration-Datenpunkt oder eine Gesamtmarkterholung als Einstiegsrechtfertigung. Enttäuschungsrisiko liegt in einem schwachen Q2-AWS-Wachstum unter 32%.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $244,39 (18.06.2026) — 12,3% unter 52-Wochen-Hoch $278,56 und 24,7% über 52-Wochen-Tief $196. Alle RS-Zeitfenster negativ; kein GWS-Signal aktiv. Trend klar abwärts auf 20T und 50T-Basis. Fundamentales Momentum fehlt als Trigger — technisches Momentum rein reaktiv auf Makro. Warnsignal: Unterschreiten von $220 würde Korrektur Richtung 52-Wochen-Tief einleiten. Beta 1,44 — überproportionale Marktbewegungen in beide Richtungen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($500–$700):** AWS etabliert sich als dominante KI-Infrastruktur-Plattform; Advertising überholt Meta auf Revenue-Basis; Konzern-Marge 22–25%. Entscheidende Variable: AWS AI-Workload-Marktanteil vs. Azure/GCP.</p>
+<p>**Base Case ($320–$450):** Steady-Compounder mit 15–20% EPS-Wachstum p.a.; AWS-Wachstum normalisiert auf 25–30%; Premium-Multiple 25–28x hält durch Qualität. Entscheidende Variable: Margenpfad und Kapitalallokation.</p>
+<p>**Bear Case ($100–$180):** Regulatorische Zerschlagung oder strukturelle AWS-Disruption durch Open-Source-AI reduziert Moat. Historische Plattform-Disruptions-Szenarien als Referenzrahmen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Amazon ist ein struktureller Compounder mit kurzfristigem Momentum-Defizit — kein Trading-Play, kein Hochrisiko-Zykliker, sondern ein Qualitäts-Compounder in einer technischen Konsolidierungsphase. Für Long-Only-Investoren mit 2–3 Jahres-Horizont ist das aktuelle Niveau fair eingepreist ohne ausgeprägte Asymmetrie. Für Momentum-Trader ist die Kasse ohne GWS-Signal leer. Positionsgröße: kernposition-tauglich, kein übergewichtetes Überzeugungsplay auf aktuellem Niveau.</p>
+<p>Direkter Peer-Vergleich: **Microsoft (MSFT)** bietet reineren AI-Cloud-Exposure durch OpenAI-Integration und tiefere Enterprise-Penetration; **Alphabet (GOOGL)** bietet Advertising + Cloud mit niedrigerem Multiple (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). Amazon bleibt das breitest diversifizierte der drei Hyperscaler-Plays — mehr Hebel auf E-Commerce-Erholung, weniger reiner AI-Proxy als MSFT.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
