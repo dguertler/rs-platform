@@ -4,15 +4,6 @@ numpy>=1.24
 Pillow>=10.0
 pyphen>=0.14        # Silbentrennung für deutsche Texte (lang='de_DE')
 # Optional: einfache Reel-MP4 (Ken-Burns-Zoom). Ohne diese Pakete entstehen
-# weiterhin Slides + Reel-Frames + reel_script.txt (nur die MP4 entfällt).
+# weiterhin Slides + Reel-Frames (nur die MP4 entfällt).
 imageio>=2.31
 imageio-ffmpeg>=0.4.9
-
-# Cinematischer Reel-Renderer (cinematic_reel.py)
-# Nur nötig wenn das cinematische Rendering verwendet wird.
-# ffmpeg muss zusätzlich im Systempfad vorhanden sein.
-moviepy>=2.0
-edge-tts>=6.1.9
-openai-whisper>=20231117
-pyyaml>=6.0
-requests>=2.31.0
