@@ -98,7 +98,6 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 
 ## Batch-Empfehlung
 
-Max. **5 Ticker pro Session** für optimale Kontext-Qualität.
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
 ## Wikifolio Wochenrückblick (Feed-Post)

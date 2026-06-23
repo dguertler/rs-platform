@@ -1,112 +1,97 @@
 # PWR — KI-Aktienbewertung
 
-**Quanta Services, Inc.** · Industrials · 17.06.2026 · Signal: GWS Breakout 2/3
+**Quanta Services, Inc.** · Industrials · 23.06.2026 · Signal: kein GWS
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 707.74 |
-| Market Cap | $106.20 Mrd. |
-| Forward PE | 43.0 |
+| Kurs | 702.25 |
+| Market Cap | $105.38 Mrd. |
+| Forward PE | 42.66 |
 | Revenue (TTM) | $30.12 Mrd. |
 | Gross Margin | 15.1% |
 | ROE | 13.5% |
-| RS-Score | 77.7 |
+| RS-Score | 93.6 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✗ Inaktiv
-
----
-
-**Quanta Services, Inc.** · Industrials · 17.06.2026 · Signal: GWS Breakout 2/3
-
-| Kennzahl | Wert |
-|---|---|
-| Kurs | 719.29 |
-| Market Cap | $106.2 Mrd. |
-| Forward PE | 43.00 |
-| Revenue (TTM) | $30.1 Mrd. |
-| Gross Margin | 15.1% |
-| ROE | 13.5% |
-| RS-Score | 77.65 |
-
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✗ Nicht aktiv
-
-**Szenarien (12–18 Monate):** Bull $850–$950 (25 %) · Base $680–$780 (50 %) · Bear $380–$480 (25 %) · EV ~$720
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
+
 
 ## 1. INVESTMENT-CASE
 
-Quanta Services ist der unsichtbare Motor hinter den sichtbarsten Megatrends: Energiewende, Netzmodernisierung, Rechenzentrum-Stromversorgung, und Elektrifizierung des Transportsektors. Mit $30,1 Mrd. Umsatz (+26% YoY) ist Quanta der unbestrittene Marktführer für elektrische Infrastrukturdienstleistungen in Nordamerika — kein Technologieunternehmen, aber das Rückgrat der Energieinfrastruktur, ohne die KI-Rechenzentren und Renewables nicht betrieben werden können. Der strukturelle Kern: Quanta baut und wartet die Hochspannungsleitungen, die Power zu Rechenzentren transportieren, und die Windparks und Solaranlagen, die diesen Power erzeugen. Revenue-Wachstum +26% YoY spiegelt explodierenden Backlog durch IRA-Fördergelder, Utility-Capex-Erhöhungen und Hyperscaler-Direktabnahmekontrakte wider. Was der Markt möglicherweise unterschätzt: Die Marginexpansion-Story ist noch nicht eingepreist — Quanta skaliert operative Effizienz bei wachsender Projektgröße und verbesserter Projektmix (höhermargige Renewables und Offshore-Wind gegenüber klassischem Leitungsbau).
+Quanta Services ist der größte US-Infrastruktur-Spezialdienstleister für Strom- und Kommunikationsnetze — und der kapazitäre Engpass im US-Energienetz-Ausbau. Der strukturelle Kern: KI-Rechenzentren benötigen innerhalb von 5 Jahren 40–80 GW neue Stromkapazität in den USA; dieser Strom muss transportiert werden, und dafür braucht es Quanta. Das Unternehmen baut Hochspannungsleitungen, Umspannwerke, Renewable-Energy-Anschlüsse und Glasfasernetze — mit strukturellen Wettbewerbsvorteilen durch jahrzehntelange Beziehungen mit Utilities, hochspezialisiertes Fachpersonal und proprietäre Projekt-Execution-Methodik. Revenue-Wachstum 26,3% YoY auf einer $30 Mrd.-Basis ist außergewöhnlich für ein EPC-Unternehmen. Das eigentliche Risiko: Forward PE 42,7x und MCap $105 Mrd. preisen viel Perfektion ein — für ein Unternehmen mit 4,2% Operating Margin und erheblichem Festpreis-Projektrisiko. FCF $1,04 Mrd. bei Revenue $30 Mrd. (3,5% FCF-Marge) ist strukturell niedrig. Analyst-Konsensziel $761 (+8% Upside).
 
 ## 2. GESCHÄFTSMODELL
 
-- Electric Power Segment (~75% Revenue): Bau, Wartung und Upgrade von Übertragungs- und Verteilnetzen; direkte Profiteure von IRA-Subventionen und Utility-Investitionsprogrammen
-- Renewable Energy Segment (~25% Revenue): Wind, Solar, Batteriespeicher — wachstumsstarkes Segment mit strukturell höheren Margen als klassischer Netzbau
-- Projektbasiertes Geschäft mit Multijahres-Rahmenverträgen (MSA): höhere Umsatzsichtbarkeit als rein projekt-transaktionales Modell
-- Qualifizierter Arbeitskräftemangel als struktureller Wettbewerbsvorteil: Zehntausende ausgebildete Elektriker und Linemen sind nicht kurzfristig replizierbar
-- Akquisitionsstrategie: Quanta hat in den letzten 5 Jahren >30 Unternehmen übernommen — erhöht Revenue, aber auch Integrationskomplexität und Goodwill
-- Operative Margin 4,2% reflektiert Bausektor-Charakteristika — kein Tech-Business; FCF $1,04 Mrd. ist solid aber nicht außergewöhnlich bei diesem Revenue-Volumen
-- Kundenbasis diversifiziert: große US-Utilities (Duke, NextEra, Xcel), Hyperscaler (für Netzanschlüsse), Öl- und Gasunternehmen als sekundäre Kunden
-- Geografische Konzentration USA/Kanada: Geopolitik-Risiko gering, aber begrenzte internationale Diversifikation
+- Electric Power (~65% Revenue): Hochspannungsübertragungs- und Verteilungsleitungen, Umspannwerke, Netzmodernisierung für Utilities und ISOs
+- Renewable Energy (~20% Revenue): EPC für Wind/Solar-Farms, Energiespeicher-Infrastruktur; IRA als Demand-Katalysator
+- Underground & Industrial (~10% Revenue): Gas-Pipelines, Industrieanlagen; stabil
+- Communications (~5% Revenue): Glasfaser-Deployment, BEAD-Programm; kleines aber wachsendes Segment
+- Workforce als Kernasset: 50.000+ spezialisierte Elektriker, Linemen — knapper Produktionsfaktor (struktureller Burggraben)
+- Backlog >$30 Mrd. — mehrjährige Revenue-Visibilität, aber auch Festpreis-Verlustrisiko bei Kostensteigerungen
+- D/E 69,1x — bei EPC-Unternehmen mit Working-Capital-intensivem Geschäft erklärbar; FCF-Generierung begrenzt Schuldenrisiko
+- ROE 13,5% — moderat; durch hohen Leverage getrieben
 
 ## 3. BULL CASE
 
-IRA-Förderprogramme bleiben politisch stabil oder werden ausgebaut; US-Utility-Capex-Boom hält bis 2030 an; Quanta gewinnt überproportional bei Offshore-Wind-Projekten (strukturell höhere Margen). Strukturelle Margennachhaltigkeit: Verbesserung des Projektmixes (Renewables >35% Revenue) und operative Skaleneffekte bei größeren Projekten ermöglichen Operating Margin-Steigerung von 4,2% auf 6–7%. Annahme (kein Konsens): FY28-EPS ~$22 bei Revenue $40 Mrd. und 5,5% Operating Margin. Kursziel $850–$950 = FY28-EPS $22 × 39–43x Forward — Premium für strukturelle Infrastruktur-Positionierung und Wachstumssicherbarkeit. Eintrittswahrscheinlichkeit: 25%.
+US-Stromnetz als Jahrhundertchance: NERC und DOE-Studien prognostizieren $2–4 Billionen Investitionsbedarf in US-Strom-Infrastruktur bis 2050; Quanta ist primärer Executions-Partner der großen Utilities. KI-Datacenter-Strombedarf: Microsoft, Google, Amazon allein haben 50+ GW Datacenter-Kapazität in Bau/Planung — alles braucht Netzanbindung durch Quanta. Annahme (kein Konsens): FY27-Revenue $38–42 Mrd., Op-Margin auf 6–7% (operative Skalierung), EPS ~$20–26 × 38–44x = Kursziel 760–1.144 USD. Strukturelle Margennachhaltigkeit: Spezialisierter Workforce als Engpass-Asset verbessert Pricing Power strukturell. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-IRA bleibt intakt, aber politische Unsicherheiten verlangsamen einige Renewable-Projekte; Utility-Capex-Wachstum stabil bei 8–12%; Quanta hält Revenue-Wachstum bei 15–20% p.a. Operating Margin steigt moderat auf 4,5–5,5% durch Skaleneffekte. Annahme (kein Konsens): FY28-EPS ~$18 bei Revenue $36 Mrd. Kursziel $680–$780 = FY28-EPS $18 × 38–43x Forward — leichte Prämie für strukturelles Infrastruktur-Wachstum. Eintrittswahrscheinlichkeit: 50%.
+Wahrscheinlichstes Szenario: Electric-Power-Wachstum auf 15–20% normalisiert, Renewables stabil, Communications beschleunigt durch BEAD. Annahme (kein Konsens): FY27-Revenue $34–37 Mrd., Op-Margin 5–6%, EPS ~$16–20 × 32–38x = Kursziel 512–760 USD. Analyst-Konsensziel $761 liegt am oberen Base-Case-Rand. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: IRA-Teilrücknahme durch politischen Kurswechsel oder Haushaltszwang; Hyperscaler reduzieren Rechenzentrum-Neubauten nach AI-ROI-Ernüchterung; Rezession komprimiert Utility-Capex-Budgets. Kundenkonzentration: Abhängigkeit von großen Utilities — Top-10-Kunden schätzungsweise >50% Revenue (auf Datenbasis nicht exakt quantifizierbar). Geopolitik: USA-zentriert, minimal. Lieferketten: Kabelknappheit und Transformatoren als kritische Bottlenecks — bereits heute ein Risikofaktor; kein Single-Source-Risiko erkennbar. Verwässerung: Akquisitions-getriebenes Wachstum erhöht SBC und Goodwill-Amortisation; SBC-Höhe nicht im Datensatz. Regulierung: FERC-Rahmenbedingungen für Netzbauvorhaben; keine materiellen Rechtsrisiken erkennbar. Bei Capex-Kürzung: Revenue-Wachstum auf <5%; Operating Margin unter Druck auf 3%; Annahme (kein Konsens): EPS kollabiert auf $9–$12. Kursziel $380–$480 = EPS $10,50 × 36–46x — Multiple-Kontraktion durch Wachstumsenttäuschung. Eintrittswahrscheinlichkeit: 25%.
+Auslöser: IRA-Kürzungen durch Kongress + Utility-Capex-Bremse durch Zinsanstieg (Utilities finanzieren Capex durch Bonds). Festpreis-Verluste: Stahl-, Kupfer- und Arbeitskostensteigerungen treffen Festpreis-Projekte unmittelbar — jeder 1%-Kostenanstieg auf $30 Mrd. Revenue = $300 Mio. Verlust. Kundenkonzentration: Wenige Utility-Konzerne (Duke, NextEra, Dominion) als Großkunden — Projektverzögerungen direkt durchreichend. Geopolitik: Transformatoren hauptsächlich aus Asien importiert — Zölle erhöhen Projektkosten. SBC/Verwässerung: Nicht quantifizierbar. Annahme (kein Konsens): Revenue stagniert bei $25–27 Mrd., Op-Margin auf 2–3%, EPS $4–7 × 16–20x = Kursziel 64–140 USD. Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 25% + 50% + 25% = 100%**
+**Summe: 25% + 45% + 30% = 100%**
 
-Erwartungswert: $720 — implizites Upside vs. aktuellem Kurs ($719,29): +0,1%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Niveau nicht gerechtfertigt.
+Erwartungswert: $952×0,25 + $636×0,45 + $102×0,30 = $238 + $286,20 + $30,60 = **EV ~$555** — implizites Downside vs. aktuellem Kurs $702,25: **−21%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 13,5% für einen Infrastruktur-Contractor mit projektbasiertem Geschäft ist angemessen — kein struktureller Compounder, aber solide. Gross Margin 15,1% ist für Baudienstleister typisch; entscheidend ist die Operating-Leverage-Fähigkeit bei steigenden Projektvolumina. Operating Margin 4,2% liegt unter dem Niveau, das bei reinem Infrastructure-Play Bewertungsprämien rechtfertigt. FCF $1,04 Mrd. bei $30 Mrd. Revenue (3,5% FCF-Marge) — ausreichend für Dividende ($0,06%) und selektive M&A, aber keine strukturelle FCF-Stärke. Net Margin 3,67% optisch bescheiden; Trailing PE 97x ist Artefakt von noch nicht normalisierten Gewinnen bei beschleunigtem Revenue-Wachstum — Forward PE 43x ist relevante Basis. D/E 69x buchhalterisch — ähnlich wie VRT durch Akquisitions-Goodwill dominiert, kein unmittelbares Solvenz-Signal.
+Gross Margin 15,1% — niedrig aber typisch für EPC (Material-Intensität). Operating Margin 4,2% — gefährlich nah an Break-Even bei Kostenstress. FCF $1,04 Mrd. (3,5% FCF-Marge) — niedrig absolut; Backlog-Finanzierung durch Working Capital erklärt den Gap zu operativer Profitabilität. ROE 13,5% — solid für Industrials. D/E 69,1x — EPC-Typisch, aber bei Festpreis-Verlusten schmerzhaft. Bilanzqualität eingeschränkt — Enterprise Value und Schuldenstruktur-Details nicht verfügbar.
 
 ## 7. BEWERTUNG
 
-Forward PE 43x bei 26% Revenue-Wachstum: PEG-Ratio ~1,7 — teuer für einen Baudienstleister, fair für einen strukturellen Infrastruktur-Compounder. FCF-Rendite: $1,04 Mrd. / $106 Mrd. = 1,0% — sehr niedrig; rechtfertigt sich nur bei deutlicher FCF-Expansion. Rückrechnung: Kurs $719 impliziert bei 4% FCF-Marge und 8% Diskontrate ein Revenue von ~$47 Mrd. in FY30 — entspricht 12% p.a. Wachstum. Das ist plausibel bei IRA-Tailwind, aber ambitioniert wenn Margenexpansion ausbleibt. P/B 11,7x ist für Industriedienstleister eine massive Prämie — ausschließlich durch Wachstumserwartung gerechtfertigt. Peer-Multiples (MYR Group, Aecom, Mastec) nicht im Datensatz — relative Bewertung indikativ; kleinere Konkurrenten handeln strukturell günstiger, aber ohne Quantas Scale-Vorteil.
+Forward PE 42,7x und MCap $105 Mrd. für ein Unternehmen mit 4,2% Op-Margin und 3,5% FCF-Marge — das impliziert enormes Vertrauen in Margin-Expansion und Revenue-Wachstum. Rückrechnung: $702,25 × Shares (~150 Mio.) = $105 Mrd. MCap bei FY27-EPS-Annahme $18 → Forward Multiple 39x — rechtfertigbar nur bei strukturellem Margin-Improvement auf 6%+. Normalized FCF-Basis: $1,04 Mrd. × 40–50x (Infrastructure-Operator-Premium) = $41,6–52 Mrd. vs. MCap $105 Mrd. — erhebliche Prämie auf aktuellem FCF. Das ist ambitioniert.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float nicht im Datensatz — quantitative Aussage nicht möglich. Hypothese, nicht datenbasiert: Quanta zieht ESG-orientierte institutionelle Investoren und Infrastruktur-Long-Only-Fonds an — stabilere Basis als reine Momentum-Fonds, aber anfällig für IRA-Policy-Nachrichtenlage. 50T +16% zeigt starkes mittelfristiges Momentum; 20T -1,4% deutet auf kurzfristige Konsolidierung. Enttäuschungsrisiko: IRA-Gegenwind oder Projektverschiebungen würden Wachstumsnarrative direkt treffen. Beta 1,22 ist für einen Infrastruktur-Contractor überraschend hoch — reflektiert Policy-Abhängigkeit, nicht operatives Risiko.
+52-Wochen-Range $358,38–$788,75: Aktie liegt 11% unter dem Jahreshoch. 6M-RS +65,45% — starkes Infrastruktur-Supercycle-Momentum. Hypothese (nicht datenbasiert): Infrastruktur-Themen-ETFs und Long-Only-Wachstumsfonds als Haupttreiber; kaum Value-Orientierte bei diesem Multiple. Enttäuschungsrisiko: Jedes FCF-Miss oder Projekt-Verlust-Bericht triggert Multiple-Kompression von 42x auf 28–32x — das entspricht 30–35% Kursrückgang.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 2/3 (Weekly + Daily aktiv, 4H inaktiv) — mittlere Momentum-Stärke. RS-Score 77,65 — obere 22% des S&P 500-Universums. 5T +7,1%, 10T +1,1%, 20T -1,4%, 50T +16%, 6M +55% — starkes Halbjahres-Momentum, kurzfristige Konsolidierung. Letzter Schluss $719,29 (Tageshoch $738), 9% unter 52W-Hoch $788,75. Technisches Warnsignal: Wochenschluss unter $650 würde Trendstruktur gefährden; Support bei $660–$680 aus 50T-Bewegung.
+RS 93,62 (Rank 21) — ordentliches Momentum, aber nicht Top-Tier. 50-Tage: +16,82%, 6M: +65,45% — solide Erholungsdynamik nach dem Rückgang vom ATH. 10-Tage: +5,77% — kontinuierliche, nicht überhitzte Erholung. Support bei $620–650, Widerstand bei $788 (52w-High). Fundamental gestütztes Momentum, aber Überbewertungsrisiko begrenzt die Upside.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($1.200–$1.500):** IRA-Megaprojekte beschleunigen, Offshore-Wind-Segment etabliert sich als Hochmargen-Wachstumssäule, Operating Margin steigt auf 7%; FY30-EPS ~$32 × 38–47x = $1.200–$1.500. Entscheidende Variable: Politische Kontinuität der IRA-Förderstruktur.
+- **Bull (3–5 J.):** US-Strom-Infrastruktur-Supercycle vollständig ramped, Margin auf 8%. Revenue $50+ Mrd., EPS $35–50 × 36–42x = Kursziel 1.260–2.100 USD.
+- **Base (3–5 J.):** Strukturelles Wachstum, Margin-Verbesserung auf 6–7%. Revenue $38–48 Mrd., EPS $22–32 × 28–35x = Kursziel 616–1.120 USD.
+- **Bear (3–5 J.):** IRA-Kürzungen, Kostenstress, Margin-Erosion. Revenue $25–32 Mrd., EPS $4–9 × 14–18x = Kursziel 56–162 USD.
 
-**Base Case ($800–$1.050):** Stabiles Wachstum 12–15% p.a., Operating Margin auf 5–6%; FY30-EPS ~$24 × 33–44x = $800–$1.050. Entscheidende Variable: Tempo der US-Netzmodernisierung und Utility-Capex-Budgets.
-
-**Bear Case ($280–$400):** IRA teilweise zurückgenommen, Capex-Zyklus dreht, Revenue-Wachstum <5%; normalisiertes EPS $8–$10 × 35–40x. Entscheidende Variable: Bundesregierung-Policy ab 2026/2027.
+Entscheidende Variable: US-Stromnetz-Investitions-Regulierung (FERC Order 1920) und Utility-Capex-Nachhaltigkeit.
 
 ## 11. PROFI-FAZIT
 
-Quanta Services ist kein klassischer Buy-and-Hold-Compounder im Buffett-Sinne, aber ein überzeugendes strukturelles Wachstumsinstrument auf den US-Infrastruktur-Superzyklus. Die Kombination aus IRA-Rückenwind, Netzmodernisierungs-Zwang und KI-Stromnachfrage schafft einen mehrjährigen Nachfragesockel, der von keinem Konkurrenten in dieser Breite bedient werden kann. Das Kernproblem: Die Bewertung preist viel Wachstum bereits ein — EV der Szenarien liegt am aktuellen Kursniveau, kein asymmetrischer Edge sichtbar. Für geduldige Infrastruktur-Investoren mit 3–5 Jahren Horizont: Quanta bleibt ein Kern-Holding in jedem Energie-/Infrastruktur-Portfolio. Für kurzfristige Trades: Einstieg bei Korrekturen auf $620–$660 schafft attraktiveres Risiko-Rendite-Verhältnis. Positionsgröße: 3–5% eines diversifizierten Portfolios; Beta 1,22 erlaubt moderate Größe. Direkter Peer-Vergleich: **MYR Group (MYRG)** und **MasTec (MTZ)** bieten ähnliche Infrastruktur-Exposition auf günstigeren Multiples (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ), aber ohne Quantas Marktführer-Scale und Backlog-Tiefe. **NextEra Energy** ist alternatives Infrastruktur-Instrument mit defensiverem Profil.
+PWR ist das strukturell überzeugendste Unternehmen im Infrastruktur-Supercycle — aber auf aktuellem Niveau mit Forward PE 42,7x und EV −21% nicht attraktiv für Neueinstiege. Für Langfrist-Investoren ein Kernhalt — für Neueinsteiger ist Geduld bis $580–620 empfehlenswert. Geeignet für: Wachstumsorientierte Infrastruktur-Investoren mit langem Zeithorizont und Toleranz für EPC-Projektrisiken. Direkte Peers: MasTec (ähnliches Profil, niedrigere Profitabilität), AECOM (diversifizierteres Engineering, geringeres Infrastructure-Pure-Play). PWR ist das reinere und qualitätshöhere Instrument für die US-Infrastruktur-These.
 
 - Qualität: 3/5
-- Wachstum: 5/5
+- Wachstum: 4/5
 - Bewertung: 2/5
 - Katalysator: 4/5
+
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 3/5 |
-| Wachstum | 5/5 |
+| Wachstum | 4/5 |
 | Bewertung | 2/5 |
 | Katalysator | 4/5 |
+| EV-Upside | -46.9% |
 
-**Verdict: BUY (70/100)**
+**Verdict: WATCH (52/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

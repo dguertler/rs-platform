@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">23.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MS</h1>
+      <h2>Morgan Stanley</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Capital Markets</span></div>
+        <div class="mi">MCap: <span>$352B</span></div>
+        <div class="mi">Signal: <span>kein GWS</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >25%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">72</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 23.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">65.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$223.17</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$73.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">87.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">179.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">16.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+25.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">360–506 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">238–340 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">84–150 USD</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Morgan Stanley ist die qualitativ hochwertigste Großbank des US-Finanzsystems — mit einem Geschäftsmodell, das strukturell weg von zyklischem Trading und hin zu stabilen, wachsenden Vermögensverwaltungsgebühren gewechselt hat. Der strukturelle Kern: Wealth Management mit $5+ Billionen AUM generiert fee-basierte Recurring Revenue, die Morgan Stanley von reinen Capital-Markets-Banken fundamental unterscheidet. Das 16,3% Revenue-Wachstum YoY spiegelt den Revival der M&A-Aktivität, IPO-Pipeline und Capital Markets nach Jahren der Zinszurückhaltung. Was der Markt richtig einpreist: Forward PE 17,6x und P/B 3,4x sind für eine Top-3-Investmentbank fair. Was möglicherweise unterschätzt wird: Der strukturelle Shift zu Wealth Management (60%+ Revenue-Ziel) macht Morgan Stanley zunehmend zu einem Fintech/Asset-Manager mit Investmentbanking-Option, nicht mehr zu einer klassischen Zyklus-Bank. Analyst-Konsensziel $203,67 liegt unter aktuellem Kurs $223,17 — Sell-Side hinterher.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Wealth Management (~55% Revenue): Beratung und Verwaltung privater Vermögen ($5,5 Billionen AUM), E*Trade als digitales Kanal; fee-basiert, rezessionsresistenter als IB</li>
+<li>Institutional Securities (~35% Revenue): M&A-Beratung, Equity/Fixed-Income-Underwriting, Trading (Equities, FICC) — zyklisch, aber hochmargig in Bull-Phasen</li>
+<li>Investment Management (~10% Revenue): Institutionelle Asset Management, Alternative Investments (Private Credit, Real Assets)</li>
+<li>D/E 502x — typisch für eine Großbank (Kundeneinlagen/Repo als Liabilities); nicht vergleichbar mit Industrie-D/E</li>
+<li>ROE 16,4% — stark für eine Universalbank; besser als JPMorgan-Level auf normalisierter Basis</li>
+<li>Gross Margin 87,4% ist Gross-Profit nach Financial-Services-Konventionen — schematisch anders als Industrie-Unternehmen</li>
+<li>FCF N/A — Banken melden keinen operativen FCF nach Standard-Konvention; Kapitalausschüttung über Dividende + Buybacks</li>
+<li>Dividende 1,79%; zusätzlich signifikante Buyback-Aktivität in starken Jahren</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Capital Markets Super-Cycle: M&A-Pipeline nach 3 Jahren Stagnation normalisiert sich; Unternehmens-IPO-Welle trifft auf günstige Marktbedingungen. Wealth Management: Demografischer Transfer $68 Billionen Privatvermögen über 20 Jahre — Morgan Stanley als primäre Plattform für Boomer-Erben. Private Credit und Alternatives als neue Wachstumssäule mit höheren Gebühren. Annahme (kein Konsens): FY27-EPS $18–22, Premium-Multiple 20–23x = Kursziel 360–506 USD. Strukturelle Margennachhaltigkeit: Wealth-Management-Skalierung verbessert Operating Leverage strukturell. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: M&A und Capital Markets normalisiert auf 10–15% Wachstum p.a., Wealth Management +8–12% p.a. durch Marktperformance und Nettomittelzuflüsse. Annahme (kein Konsens): FY27-EPS $14–17, Bewertungs-Multiple 17–20x = Kursziel 238–340 USD. Bei aktuellem Kurs $223,17 leicht positives Szenario. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: US-Rezession + Kapitalmarkt-Freeze (wie 2022): M&A kollabiert −60%, IPOs auf null, Trading-Revenue volatil. Wealth-Management-AUM fällt durch Marktkorrektur um 25–30% — fee-Revenue direkt betroffen. Kundenkonzentration: Institutionelle Großkunden als Kern der IB-Revenue — ein Verlust weniger Mega-Mandate ist material. Geopolitik: Regulierung unter neuer Administration (Capital Requirements, Trading-Restrictions). Regulierung: Basel III Endgame könnte Kapitalanforderungen erhöhen, ROE drücken. SBC: Bei Banken traditionell hoch im IB-Segment. Verwässerung: Buyback-Intensität schwankt mit Kapital-Position. Annahme (kein Konsens): EPS $7–10, Multiple 12–15x = Kursziel 84–150 USD. Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>Erwartungswert: $433×0,20 + $289×0,45 + $117×0,35 = $86,60 + $130,05 + $40,95 = **EV ~$258** — implizites Upside vs. aktuellem Kurs $223,17: **+16%**.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 16,4% — stark für eine Bank; strukturelle Qualität durch Wealth-Management-Recurring-Revenue. Operating Margin 40,6% — exzellent; spiegelt effiziente Kostenstruktur nach Strategieschwenk. Profit Margin 24,75% — solide für ein diversifiziertes Financial-Services-Haus. Revenue Growth 16,3% YoY — Capital-Markets-Revival-Beweis. Bilanzqualität: Für eine systemrelevante US-Großbank (G-SIB) mit Fed-Oversight als stark einzuschätzen; CET1-Ratio dürfte 15%+ betragen (nicht im Snapshot, aber regulatorische Pflicht). FCF nicht verfügbar — bei Banken irrelevant als Investorenmetrik.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 17,6x für ROE 16,4%+ und Wealth-Management-Recurring ist fair bis leicht günstig. P/B 3,4x — Premium über Buch für Best-in-Class-Asset-Light-Finanzmodell gerechtfertigt. Rückrechnung: $223,17 / Forward-EPS-Annahme ~$15 → 14,9x — billiger als Forward PE 17,6x suggeriert. Konservative EPS-Annahme rechtfertigt aktuellen Kurs leicht. Analyst-Konsensziel $203,67 unter aktuellem Kurs — Sell-Side hinterher nach starker Rally. Insgesamt faire Bewertung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>52-Wochen-Range $130,90–$230,47: Aktie nahe Jahreshoch, stark erholt. 6M-RS +22,43% — moderates Momentum. Hypothese (nicht datenbasiert): Langfristig-orientierte institutionelle Investoren (Pensionsfonds, Sovereign Wealth Funds) als Haupthalter; wenig Fast-Money-Exposure für eine Large-Cap-Bank. FOMO-Dynamik gering — MS ist kein Momentum-Trade sondern Quality-Value. Enttäuschungsrisiko: Rezessionssorgen oder Zinssenkungspause könnten Bankensektor-Rotationsumkehr triggern.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS 65,65 (Rank 42) — leicht unter Median im S&P-500-Universum. 20-Tage: +12,97%, 10-Tage: +6,09% — ordentliche Beschleunigung. 50-Tage: +18,9% — gute mittelfristige Stärke. Support bei $200–205, Widerstand bei $230,47 (52w-High). Technisch solides Bild ohne Überhitzung — fundamental gestütztes, ruhiges Momentum.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>**Bull (3–5 J.):** Wealth-Management-Dominanz + Private-Credit-Boom + M&A-Supercycle. EPS $22–30, Multiple 20–24x = Kursziel 440–720 USD.</li>
+<li>**Base (3–5 J.):** Strukturelles Wachstum, Buybacks reduzieren Shares. EPS $16–22, Multiple 16–20x = Kursziel 256–440 USD.</li>
+<li>**Bear (3–5 J.):** Rezession + erhöhte Regulierung. EPS $8–12, Multiple 10–13x = Kursziel 80–156 USD.</li>
+</ul>
+<p>Entscheidende Variable: Wealth-Management-Wachstum und M&A-Aktivitätsniveau; Basel-III-Kapitalregulierung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Morgan Stanley ist ein strukturell überlegener Finanzdienstleister mit überzeugendem EV (+16%). Kein Momentum-Trade — ein Buy-and-Hold-Compounder für konservative Wachstumsinvestoren, die Bankensektor-Exposition mit Qualitäts-Premium wünschen. Das Wealth-Management-Flywheel ist strukturell selten und langfristig unterschätzt. Geeignet für alle Investorentypen mit 3–5-Jahres-Zeithorizont; Positionsgröße kann normaler Allokation entsprechen ohne extreme Risikopremie. Direkte Peers: Goldman Sachs (stärker IB-exponiert, niedrigeres Wealth-Management-Recurring), Charles Schwab (reiner Retail-Broker ohne IB-Upside). Morgan Stanley ist das ausgereifteste Instrument für die Wealth-Management-These.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

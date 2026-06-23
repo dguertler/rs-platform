@@ -1,176 +1,97 @@
 # TER — KI-Aktienbewertung
 
-**Teradyne, Inc.** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
+**Teradyne, Inc.** · Technology · 23.06.2026 · Signal: kein GWS
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 374.31 |
-| Market Cap | $58.60 Mrd. |
-| Forward PE | 39.35 |
+| Kurs | 437.92 |
+| Market Cap | $68.55 Mrd. |
+| Forward PE | 46.22 |
 | Revenue (TTM) | $3.79 Mrd. |
 | Gross Margin | 58.7% |
 | ROE | 28.7% |
-| RS-Score | 121.7 |
+| RS-Score | 199.8 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+
 ## 1. INVESTMENT-CASE
 
-Teradyne ist einer der wenigen reinen AI-Infrastruktur-Plays jenseits der offensichtlichen Namen wie NVDA oder AVGO. Das Unternehmen verdient an jedem Halbleiter, der getestet wird – egal ob NVIDIA Blackwell, Google TPUs, Broadcom ASICs oder Apple Silicon. Mit 87% Umsatzwachstum YoY explodiert das Geschäft gerade aus dem zyklischen Tief heraus, getrieben durch HBM-Testing, Compute-Komplexität und Custom-Silicon-Boom. Der Markt beginnt zu verstehen, dass Test-Equipment kein Commodity-Geschäft ist, sondern ein strukturelles AI-Capex-Derivat mit hohen Margen. Die Aktie hat sich in 6 Monaten mehr als verdoppelt – institutionelle Investoren positionieren sich als "Picks & Shovels"-Play. Die Story: Test-Intensität pro Chip steigt überproportional zur Compute-Komplexität. Was der Markt unterschätzt: Operating Leverage im nächsten Zyklus. Was er überschätzen könnte: Nachhaltigkeit der aktuellen Run-Rate.
+Teradyne ist das reinste Instrument für den Mega-Cycle in Halbleiter-Testequipment — und gleichzeitig für kollaborative Robotik über Universal Robots. Das 87% YoY Revenue-Wachstum ist kein Normalisierungs-Bounce, sondern der Abdruck einer fundamentalen Nachfragebeschleunigung: KI-Chips (HBM, CoWoS, advanced packaging) erfordern signifikant komplexere und damit teurere Testprozesse als klassische Logic-Chips. Teradynes UltraFlex-Plattform ist der Industriestandard für Mobile-SoC- und zunehmend auch GPU/AI-ASIC-Tests. Was der Markt möglicherweise unterschätzt: Der Anteil an Non-Recurring-Test-Capex für neue Chip-Architekturen ist zyklisch volatil — aber der strukturelle Mix-Shift zu mehr Test-Steps per Chip durch advanced packaging (NVIDIA H-Series, AMD MI-Series) erhöht den adressierbaren Markt pro Chip dauerhaft. Universal Robots wächst eigenständig im Cobots-Markt mit 25–30% p.a. und schafft eine zweite Wachstumssäule jenseits der Semi-Zyklen. Revenue-Wachstum 87% ist zu wesentlichen Teilen durch einen niedrigen Vorjahresbasis-Effekt verzerrt — normalisiertes Wachstum dürfte 20–35% betragen.
 
 ## 2. GESCHÄFTSMODELL
 
-- Semiconductor Test (Kerngeschäft, ~75% Umsatz): Tester für SoC, Memory, HBM
-
-- System-on-Chip-Testing: NVIDIA, AMD, Apple, Qualcomm als Endkunden
-
-- Memory-Test-Segment: massiver Tailwind durch HBM3/HBM4 für AI-GPUs
-
-- Robotics (Universal Robots & MiR): Cobots & autonome mobile Roboter
-
-- Wireless Test (LitePoint): WiFi, Bluetooth, 5G Testing
-
-- Geschäftsmodell: hohes Initial-Ticket + Recurring Service/Software
-
-- Duopol-Struktur mit Advantest – beide profitieren simultan
-
-- Strukturelle Trends: AI-Chips, Custom-ASICs, Chiplet-Komplexität, HBM-Stacks
+- Halbleiter-Testequipment: Automatisierte Testanlagen (ATE) für Mobile-SoC, Memory, Power-Devices; Marktführer im HVM-Segment mit >50% Share
+- Universal Robots (UR): Führender Cobots-Hersteller (51% Marktanteil kollaborative Roboter), Wachstum ~25% p.a.; strategische Diversifikation jenseits Semi-Zyklen
+- Storage-Test: Nischensegment für Enterprise-SSD und NAND-Wafer-Test — profitiert von NAND-Capex-Boom
+- System-Test Group: Defense/Aerospace, Wireless, Industrial — kleineres, stabileres Segment
+- Software-/Service-Revenue als wachsendes Recurring-Element (Wartungsverträge, Software-Lizenzen)
+- Hohe Operating Leverage durch fixkostendominierten Equipmentbau — Margen stark zyklusabhängig
+- FCF $298 Mio. bei Revenue $3,79 Mrd. (7,9% FCF-Marge) — strukturell niedrig durch Capex-Vorab-Investitionen in neue Plattformen
+- D/E 2,6x — moderater Hebel, keine Bilanzsorgen
 
 ## 3. BULL CASE
 
-- HBM-Test-Intensität steigt 3-5x pro Stack-Generation
+KI-Chip-Proliferation treibt Testequipment-Markt auf neue Spitze: AMD, NVIDIA, Google TPU, Custom ASICs der Hyperscaler alle in parallel ramping — TER bedient alle. Advanced Packaging (CoWoS, HBM) multipliziert Test-Zeit-pro-Package um Faktor 3–5 gegenüber monolithischen Chips. Universal Robots: Automatisierungs-Boom durch Arbeitskräftemangel + Re-Shoring USA/Europa treibt Cobots-Adoption beschleunigt. Annahme (kein Konsens): FY27-Revenue $6,5–7 Mrd., Op-Margin stabilisiert bei 30–35%, EPS ~$12–14 × 38–42x = Kursziel 456–588 USD. Eintrittswahrscheinlichkeit: 25%.
 
-- Custom-Silicon-Welle (Hyperscaler-ASICs) verdoppelt SoC-Tester-Nachfrage
+## 4. BASE CASE
 
-- Operating Leverage: bei +20% Umsatz oft +40-50% EPS
+Wahrscheinlichstes Szenario 12–18 Monate: Semi-Test-Zyklus normalisiert nach starkem Run, KI-ASIC-Testnachfrage bleibt auf erhöhtem Niveau. Revenue $4,5–5 Mrd. FY27, Op Margin 28–32%, Annahme (kein Konsens): EPS ~$10 × 32–38x = Kursziel 320–380 USD. Analyst-Konsensziel $374,82 liegt darunter — signalisiert, dass der aktuelle Kurs $437,92 Premium bereits enthält. Eintrittswahrscheinlichkeit: 45%.
 
-- Robotics-Segment ist Optionalität – noch nicht eingepreist
+## 5. BEAR CASE
 
-- Buyback-Programm reduziert Float kontinuierlich
+Auslöser: Semi-Capex-Pause durch Hyperscaler-Budget-Kürzung oder NVIDIA-Cycle-Abschwung; Mobile-SoC-Test-Markt stagniert durch Smartphone-Sättigung. UR verliert Marktanteile an Fanuc und KUKA bei gleichzeitiger Preiserosion. Kundenkonzentration: Apple ca. 30% des Mobile-Test-Revenue — ein iPhone-Zyklus-Down ist signifikanter Risikofaktor (nicht quantifizierbar aus Datensatz). Geopolitik: China-Exportkontrolle für Advanced-Test-Equipment möglich. Verwässerung: SBC-Trend nicht quantifizierbar ohne Aktienanzahl-Snapshot. Annahme (kein Konsens): Revenue fällt auf $3–3,5 Mrd., Margin auf 15–20%, EPS $4–5 × 20–24x = Kursziel 80–120 USD. Eintrittswahrscheinlichkeit: 30%.
 
-- Zyklus-Up-Phase könnte 2026-2027 noch laufen
+**Summe: 25% + 45% + 30% = 100%**
 
-- Forward PE 37 wird bei EPS-Beschleunigung schnell auf 25 fallen
+Erwartungswert: $522×0,25 + $350×0,45 + $100×0,30 = $130,50 + $157,50 + $30,00 = **EV ~$318** — implizites Downside vs. aktuellem Kurs $437,92: **−27%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
-- Mögliches Re-Rating zur "AI-Pure-Play"-Bewertung
+## 6. FUNDAMENTALE QUALITÄT
 
-## 4. BEAR CASE
+Gross Margin 58,7% — strukturell stark, typisch für ATE-Equipment-Monopolisten. Operating Margin 37,6% auf Zyklusspitze — historisch normalisiert bei 25–30%; aktueller Wert spiegelt hohe Auslastung wider. ROE 28,75% — solide, aber nicht nachhaltig auf diesem Niveau ohne Wachstumskontinuität. FCF-Marge 7,9% ist überraschend niedrig bei 37,6% Op-Margin — deutet auf erhebliche Plattform-Investitionen (UltraFlex-Nachfolger, UR-R&D) hin; dies ist strategisch korrekt, kurzfristig jedoch FCF-bremsend. D/E 2,6x — unkritisch, Bilanz solid.
 
-- Brutale Zyklik – historisch -50% Drawdowns sind Standard
+## 7. BEWERTUNG
 
-- Bewertung bereits ambitioniert (PE 67 trailing, P/B 20)
+Forward PE 46,2x für ein Unternehmen mit zyklisch getriebenen 87% Revenue-Wachstum ist aggressiv. Rückrechnung: Aktueller Kurs $437,92 impliziert bei Forward-EPS-Annahme ~$9,47 ein Multiple von 46x. Um das zu rechtfertigen: Revenue muss auf $5,5+ Mrd. skalieren, Op-Margin bei >30% verbleiben, multiple expansion statt compression nötig — ambitioniert auf aktuellem Niveau. Analyst-Konsensziel $374,82 liegt 14% unter Kurs — Sell-Side sieht das Niveau kritisch. Bewertung auf normalisierter FCF-Basis: FCF $298 Mio. × 50x (Software-/Equipment-Premium) = $14,9 Mrd. vs. MCap $68,6 Mrd. — erhebliche Prämie; rechtfertigbar nur bei UR-Cobots-Wachstumsoption.
 
-- Konzentrationsrisiko: wenige Großkunden (TSMC, NVIDIA-Ökosystem)
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Advantest ist im Memory-Test stärker positioniert
+52-Wochen-Range $85,58–$440,75: Aktie hat sich mehr als verfünffacht — nahe am 52w-Hoch. 6M-RS +129,85% spiegelt extremes Momentum. Hypothese (nicht datenbasiert): Fast-Money/Momentum-Fonds dominieren aktuell, Long-Only-Institutionelle dürften selektiv mit Gewinnsicherungen beginnen. Enttäuschungsrisiko: Jede Guidance-Eintrübung bei Q2/Q3-Earnings könnte Multiple-Kompression von 46x auf 32–35x auslösen — das wären −25 bis −30% ohne Fundamentalverschlechterung.
 
-- Robotics-Segment underperformed seit Jahren
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- China-Exposure als geopolitisches Risiko
+RS-Score 199,8 (Rank 3) — außergewöhnlich starkes Momentum über alle Zeitfenster. 20-Tage: +27,51%, 10-Tage: +21,06% — beschleunigende Dynamik kurz vor dem 52w-Hoch. Bei $440,75 liegt ein technisches Widerstandsniveau, das als First-Target gilt. Ein Rückfall unter $380–390 würde das Momentum-Bild eintrüben. RSI bei solcher Acceleration hoch einzuschätzen (nicht quantifiziert) — kurzfristige Überhitzung wahrscheinlich.
 
-- 6-Monats-Performance +116% – mean reversion wahrscheinlich
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- FCF von nur $0,3 Mrd. wirkt schwach relativ zur Marktkapitalisierung
+- **Bull (3–5 J.):** KI-Test-Infrastruktur als strukturelles Segment + UR dominiert Cobots-Markt. Revenue $8–10 Mrd., EPS $16–22 × 35–42x = Kursziel 560–924 USD.
+- **Base (3–5 J.):** Zyklische Normalisierung, UR-Wachstum kompensiert Semi-Volatilität. Revenue $5,5–7 Mrd., EPS $10–14 × 28–34x = Kursziel 280–476 USD.
+- **Bear (3–5 J.):** NVIDIA-Cycle bricht, UR verliert Markt, Bewertung kollabiert. EPS $4–6 × 18–22x = Kursziel 72–132 USD.
 
-## 5. FUNDAMENTALE QUALITÄT
-
-- Umsatzwachstum YoY: 87% (zyklischer Rebound)
-
-- Gross Margin: 58,7% – stabil-hoch
-
-- Operating Margin: 37,6% – exzellent für Hardware
-
-- Net Margin: 22,6% – solide
-
-- ROE: 28,7% – sehr stark
-
-- FCF $0,3 Mrd. – schwach relativ zum Nettogewinn, Working-Capital-Druck
-
-- Debt/Equity 2,62 – höher als erwartet, prüfen
-
-- Bilanz historisch netto-cash-positiv
-
-- Wettbewerbsvorteil: Switching Costs, Software-Stack, Customer-Lock-in
-
-- Duopol-Struktur mit Advantest
-
-- Capex-light Geschäftsmodell
-
-- Hohe Pricing Power bei High-End-Testern
-
-## 6. BEWERTUNG
-
-Mit Forward PE 37,7 und P/B 20 ist Teradyne nicht günstig – aber auch nicht absurd für ein AI-Infrastruktur-Asset mit 28% ROE. EV/Sales von ~14 ist sportlich, reflektiert aber Margenexpansion. Vergleichbar mit Advantest (Japan), die ebenfalls bei ~30x Forward handeln. ASML handelt bei ~28x, KLAC bei ~28x – Teradyne hat hier Bewertungs-Premium ohne klare Outperformance-Begründung. Analysten-Kursziel $369 liegt nahezu am aktuellen Kurs – wenig Upside laut Konsens. Die Bewertung preist 2-3 Jahre Wachstum bereits ein. Bei jedem Wachstums-Wobble droht Multiple Compression von 37x auf 25x.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Crowded Long bei Hedgefonds als "AI-Derivat-Play"
-
-- Momentum stark, aber 6M +116% deutet auf späten Zyklus hin
-
-- Smart Money rotiert teilweise raus, retail steigt ein
-
-- Sentiment hat von "value trap" auf "AI winner" gedreht
-
-- Institutionelles Ownership hoch (~95%)
-
-- Short Interest niedrig – wenig Squeeze-Potenzial
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- RS-Score 121 vs. QQQ zeigt klare Outperformance
-
-- 20T-Performance -15% signalisiert Korrektur nach Parabel
-
-- GWS-Ampel 3/3 AKTIV (Weekly, Daily, 4H gebrochen) – strukturelle Warnung
-
-- Aktie ~15% unter ATH ($422) – erste Schwächephase nach Vertikalbewegung
-
-- Chartbild: nach starker Trendphase aktuell in Distributionszone
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-**Konservatives Szenario:** Zyklus normalisiert, Wachstum auf 10-15% p.a., Multiple Compression auf 22x. Kursziel: $320-360. Wahrscheinlichkeit: 40%
-
-**Bull Case:** AI-Capex hält 3+ Jahre, EPS verdoppelt sich bis 2028, Multiple bleibt bei 28-30x. Kursziel: $550-650. Wahrscheinlichkeit: 40%
-
-**Extrem-Bull-Case:** Robotics-Segment durchbricht, Test-Intensität steigt strukturell, EPS verdreifacht sich. Kursziel: $800-950. Wahrscheinlichkeit: 20%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- Advantest (6857.T): direkter Konkurrent, stärker in HBM, ähnliche Bewertung
-
-- KLAC: höhere Margen, niedrigeres Wachstum, defensiver
-
-- LRCX/AMAT: WFE-Player, größer/diversifizierter, günstiger
-
-- ASML: Premium-Asset im Equipment-Sektor, höhere Moat-Qualität
+Entscheidende Variable: Persistenz der KI-ASIC-Testnachfrage und UR-Marktanteilsentwicklung gegenüber asiatischen Cobots-Anbietern.
 
 ## 11. PROFI-FAZIT
 
-Teradyne ist aktuell ein klassischer "Late-Cycle-Momentum-Trade" verkleidet als AI-Story. Die fundamentale Qualität ist real, die Margen exzellent, das Wachstum spektakulär – aber alles spektakulär eingepreist. Hedgefonds, die früh long waren, beginnen Gewinne mitzunehmen. Die GWS-Ampel-Signalisierung 3/3 AKTIV ist ein klares Warnsignal: Die Struktur ist auf allen Zeitebenen gebrochen, das Risiko einer 20-30% Korrektur ist real. Für Compounder-Investoren ist die Aktie zu teuer für Neueinstieg, für Trader zu spät für Long-Momentum. Ich würde existierende Positionen halten, Trailing Stops setzen, aber keine neuen Long-Einstiege initiieren. Bei Rücksetzern in den Bereich $260-290 (Forward PE ~28) wird die Aktie wieder interessant. Das langfristige Potenzial bleibt intakt – aber Geduld zahlt sich hier mehr aus als FOMO.
-
-**Rating:**
+TER ist ein qualitativ hochwertiges Unternehmen im richtigen Strukturtrend — aber auf aktuellem Niveau zu teuer für einen Neueinstieg. Die eigenen Szenarien ergeben EV −27% vs. Kurs. Ideal für Momentum-Trader, die nahe am ATH mit engem Stop agieren; für Buy-and-Hold-Investoren ist das Risk/Reward aktuell nicht attraktiv. Sinnvoller Entry-Bereich: $310–350 (Base-Case-Mitte). Geeignet für: Wachstumsorientierte Investoren mit hoher Risikobereitschaft. Direkte Peers: Advantest (reiner Semi-Test, keine Robotik), Cohu (kleinerer Pure-Play ATE). Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 4/5
+- Wachstum: 4/5
+- Bewertung: 1/5
+- Katalysator: 4/5
 
-- Wachstum: 5/5
-
-- Bewertung: 2/5
-
-- Langfristiges Potenzial: 4/5
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 5/5 |
-| Bewertung | 2/5 |
-| Katalysator | 3/5 |
+| Wachstum | 4/5 |
+| Bewertung | 1/5 |
+| Katalysator | 4/5 |
+| EV-Upside | -26.0% |
 
-**Verdict: BUY (70/100)**
+**Verdict: WATCH (52/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
