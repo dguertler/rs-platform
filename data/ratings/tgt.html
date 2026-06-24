@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TGT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">24.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TGT</h1>
+      <h2>Target Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Discount Stores</span></div>
+        <div class="mi">MCap: <span>$59B</span></div>
+        <div class="mi">Signal: <span>SP500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">46</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 24.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">57.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$130.74</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$106.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">28.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">355.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$160–$200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$115–$155</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$70–$95</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Target ist kein einfacher Discount-Retailer — es ist ein Markenartikler, der im Handelsformat gefangen ist. Der strukturelle Kern: Target hat in den letzten Jahren durch Eigenmarken-Expansion, In-Store-Shops (Apple, Ulta Beauty) und Same-Day-Fulfillment eine differenzierte Positionierung aufgebaut. Doch der Markt preist 2026 primär das Gegenwind-Szenario ein: Zölle auf chinesische Importgüter belasten die Eigenmarken-Marge direkt; das diskretionäre Konsumklima in der US-Mittelschicht ist fragil. Revenue-Wachstum +6,7% YoY ist positiv, aber die Profitmarge von nur 3,2% zeigt, wie dünn die Luft im Discounthandel ist. Der Markt übersieht möglicherweise: Target Roundel (eigenes Ad-Tech-Netzwerk mit 30%+ Margen) wächst zweistellig und verändert das Margenprofil strukturell — allerdings noch zu klein, um den operativen Hebel material zu bewegen. Forward-PE 14,7x vs. Trailing 17,3x impliziert Erholung — aber der EPS-Pfad ist von Zollpolitik, Konsumlaune und Lohnkosten abhängig.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Omnichannel-Discounthandel: ~2.000 Stores + digitale Kanäle; Same-Day-Delivery (Shipt) als Differenzierungsfaktor gegenüber reinen Online-Retailern</li>
+<li>Eigenmarken (Good & Gather, All in Motion, Threshold): 30%+ der Verkäufe, strukturell höhere Margen als Markenartikel — aber direkte Zoll-Exponierung auf China-Importe</li>
+<li>Target Circle (Loyalitätsprogramm): 100+ Mio. Mitglieder; Daten-Asset für Roundel-Monetarisierung</li>
+<li>Target Roundel (Retail Media Network): hochmargiges Ad-Tech-Segment mit Wachstum >20% — struktureller Margentreiber, aber noch <5% des Revenues</li>
+<li>In-Store-Partnerships (Apple, Ulta Beauty, Disney): Traffic-Generierung und Markenpositionierung im Premium-Segment des Discount-Formats</li>
+<li>Shipt-Same-Day-Delivery: Differenzierungsfaktor, aber kostenintensiv; break-even fraglich bei aktuellen Lohnkosten</li>
+<li>D/E 117x als Bankbilanz-Artefakt nicht interpretierbar bei Handelsunternehmen mit Operating Leases (IFRS 16-Effekt) — eigentliche Schuldentragfähigkeit aus FCF-Kennzahlen ableiten</li>
+<li>Lohnkosten als prozyklischer Hebel: Target hat Mindestlohn auf $15–24/h erhöht; weiterer Lohndruck begrenzt Margenexpansion</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Zollentspannung oder Absorption durch Preiserhöhungen; Konsumlaune US-Mittelschicht stabilisiert sich; Eigenmarken-Mix steigt auf 35%; Roundel verdoppelt Beitrag. Strukturelle Margennachhaltigkeit: Roundel-Wachstum verschiebt Mix zu höhermargigen Werbeumsätzen; Eigenmarken-Skala verbessert Einkaufskonditionen. Forward-EPS-Annahme (eigene Annahme, kein Konsens): ~$10–11/Aktie. Kursziel Bull: $160–200 = ~$10,50 EPS × 15–19x Forward-PE. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Zolleffekte werden 40–60% durch Preiserhöhungen und Lieferkettenumleitung absorbiert; Revenue-Wachstum verlangsamt auf +3–5% YoY; Profitmarge bleibt 3–4%. Forward-EPS-Annahme: ~$8–9/Aktie. Kursziel Base: $115–155 = ~$8,50 EPS × 13–18x Forward-PE. Der aktuelle Kurs $130,74 liegt im unteren Bereich dieser Bandbreite — begrenzte Asymmetrie. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Zölle bleiben auf aktuellem Niveau oder steigen weiter; Konsumklima verschlechtert sich durch Inflation; Amazon Fresh und Walmart+ gewinnen Marktanteile. Profitmarge komprimiert auf 1,5–2,5%; EPS fällt auf $4–6/Aktie. Kursziel Bear: $70–95 = ~$5 EPS × 14–19x Forward-PE (Value-Retailer-Floor).</p>
+<ul class="al">
+<li>Kundenkonzentration: Keine (Endverbraucher-diversifiziert)</li>
+<li>Geopolitik: Direkte Zoll-Exponierung auf chinesische Fertigwaren — größtes akutes Risiko; Anteil China-Imports am Einkauf nicht quantifizierbar aus Datensatz</li>
+<li>Lieferkettenabhängigkeit: Diversifizierung nach Vietnam, Bangladesh läuft — aber 2–3-jähriger Übergangszeitraum</li>
+<li>Verwässerung: Aktienrückkäufe aktiv; kein relevantes Verwässerungsrisiko</li>
+<li>Regulierung: Lebensmittelsicherheit und Arbeitszeitgesetze erhöhen Compliance-Kosten; systemisch kein Hauptrisiko</li>
+</ul>
+<p>Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $180 + 0,45 × $135 + 0,30 × $82,50 = $45 + $60,75 + $24,75 = **$130,50** — implizites Downside vs. aktuellem Kurs $130,74: **−0,2%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen asymmetrischen Edge. Ein High-Conviction-Framing wäre unzulässig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 22,0% auf den ersten Blick stark — aber bei D/E 117x und dünner Profitmarge 3,2% handelt es sich um Leverage-getriebenen ROE, nicht um strukturelle Kapitaleffizienz. Die Operating-Leverage-Struktur des Discounthandels ist bekannt: 5% Umsatzwachstum → 15–20% Gewinnwachstum — und umgekehrt bei Rückgang. Revenue-Wachstum +6,7% ist positiv, aber Earnings-Wachstum nicht verfügbar (potenzielle Anomalie). FCF nicht direkt im Datensatz; für Discounter typischerweise Working-Capital-intensiv. Beta 0,99 — marktkorreliert, kaum Diversifikationsbeitrag.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 14,7x ist für einen Discounter mit 3% Nettomarge neutral bis moderat teuer. Rückrechnung: Kurs $130,74 bei Forward-PE 14,7x impliziert Forward-EPS ~$8,90. Plausibel bei Revenue ~$115 Mrd. und 1,2–1,3% Nettomarge-Verbesserung — ambitioniert im aktuellen Zollumfeld, aber nicht unrealistisch. Normalisierter FCF-Ansatz: Discounter-Cycle-FCF bei 1,5–2% Umsatz (~$1,7–2,3 Mrd.) ergibt implizites FCF-Multiple von 26–36x auf $59 Mrd. Market Cap — für einen stagnierenden Discounter nicht günstig. P/B 3,6x bei ROE 22% ist lever-getrieben fair; strukturell fragil bei Gewinnrückgang. Fazit: Bewertung ist fair, aber asymmetrisch nicht attraktiv.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 57,28, Rang 47 im SP500 — oberes Quartil, aber kein Ausreißer. 6M +31,8% zeigt Erholungsbewegung nach schwacher Phase 2024/2025. Hypothese, nicht datenbasiert: Institutionelle Positionierung vermutlich untergewichtet nach den Gewinnwarnungen 2022–2024; Rerating-Fantasie durch Zollentspannung als Katalysator. Enttäuschungsrisiko: Quartalszahlen unter Konsens in einem Zollumfeld können −15–20% Tageskorrektur auslösen — Target hat dies mehrfach demonstriert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS-Signale alle inaktiv (SP500-Universum). RS-Score 57,28, Rang 47/500 — solides Mittelfeld. 5T +2,5%, 10T +6,2%, 20T +9,0%, 50T +7,9%, 6M +31,8% — Momentum vorhanden, aber nicht beschleunigt. Fundamental partiell gestützt durch Zollentspannungs-Hoffnung und Revenue-Wachstum. Warnsignal: Verlust der 6M-Outperformance-Struktur bei schlechtem Quartalsbericht; Rückfall unter $115 bräche den technischen Erholungstrend.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull Case ($200–280):** Roundel skaliert auf $4–5 Mrd. Umsatz bei 30%+ Margen; Eigenmarken-Anteil >40%; Lieferkettenumleitung vollständig absorbiert. EPS $13–18 × 15x. Entscheidende Variable: Tempo der Roundel-Monetarisierung und Zollpermanenz.</p>
+<p>**Base Case ($120–175):** Moderates Wachstum, Margen leicht verbessert auf 3,5–4,5%; EPS $9–12 × 13–15x. Entscheidende Variable: US-Konsumklima und Walmart-Wettbewerb.</p>
+<p>**Bear Case ($60–100):** Amazon Fresh + Walmart+ erodieren Marktanteile; Zollbelastung strukturell; Margen fallen dauerhaft auf <2%. EPS $4–6 × 12–15x P/B-Floor. Entscheidende Variable: Wettbewerbsdynamik im US-Discountmarkt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Target ist ein defensiver Discounter mit echten Differenzierungsansätzen (Roundel, Eigenmarken, Same-Day), aber im Kerngeschäft strukturell unter Druck. Kein Compounder, kein Momentum-Play — eher ein zyklisch sensitiver Value-Rebound-Kandidat, der aktuell faire Bewertung hat. Der eigene Erwartungswert von $130,50 liegt nahezu exakt am aktuellen Kurs — auf diesem Niveau kein asymmetrischer Edge. Attraktiver wird Target bei $110–115, wo die Bear-Case-Marge of Safety greift.</p>
+<p>Direkter Peer-Vergleich: **Walmart (WMT)** ist das reinere Instrument für US-Discount-Exposure mit stärkerem International- und Ad-Tech-Geschäft (Walmart Connect) — tendenziell höher bewertet, aber mit besserer Qualitäts-Story (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). **Costco (COST)** als höhermargiges Membership-Modell ist strukturell überlegen. Für die Zollentspannungs-Wette ist Target die höher gehebelte, aber riskantere Alternative.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
