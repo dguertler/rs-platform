@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TGT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">24.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TGT</h1>
+      <h2>Target Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Discount Stores</span></div>
+        <div class="mi">MCap: <span>$59B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">54</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 24.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">57.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$130.74</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$106.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">28.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">355.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+5.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">175–210</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–155</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">65–90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $175–$210 (20 %) · Base $130–$155 (50 %) · Bear $65–$90 (30 %) · EV ~$134</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Target ist der klassische US-Discounter mit strukturellem Differenzierungsmerkmal: Eigenmarken, Beauty- und Home-Sortiment mit höheren Margen als reine EDLP-Konkurrenten (Walmart, Costco). Die Erholungsstory nach dem Inventar-Desaster 2022 und den Trade-Down-Trends ist weitgehend vollzogen — der Kurs hat sich von $83 auf $134 erholt. Die Kernfrage lautet jetzt: Was ist das nachhaltige Wachstum einer reifen US-Discounter-Franchise, und was zahlt der Markt dafür? Forward-PE ~15x bei 6,7 % Revenue-Wachstum und 3,55 % Dividendenrendite impliziert moderate Erwartungen. Der Analyst-Konsens ($132,20) liegt leicht unter dem aktuellen Kurs — die Aktie hat ihren Erholungswert weitgehend eingepreist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Disount-Retail mit ca. 1.950 Stores in den USA — kein internationales Exposure; Konzentration auf US-Konsumenten-Zyklus</li>
+<li>Eigenmarken (Cat & Jack, Good & Gather, A New Day) als Margen-Differenzierungsmerkmal gegenüber Walmart; ~33 % Revenue aus Eigenmarken</li>
+<li>Beauty, Home, Apparel: höhermargige Segmente mit stärkerem Differenzierungspotenzial; Frequenz-Anker Lebensmittel ~20 % Revenue</li>
+<li>Same-Day-Services (Drive Up, Order Pickup, Shipt): digitaler Kanal wächst, Fulfillment-Kosten bleiben Herausforderung</li>
+<li>D/E 117,5 % — erhöhte Verschuldung für einen Retailer; operative Leasingverpflichtungen dominant</li>
+<li>ROE 22 %, ROIC 13,1 % — solide für US-Retail; zeigt operativen Hebel auf Eigenkapital</li>
+<li>FCF $3,1 Mrd. bei $106 Mrd. Revenue (2,9 % FCF-Marge) — unterstützt Dividende ($3,55 % Yield)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Konsumausgaben beschleunigen durch Einkommenswachstum; Target gewinnt Marktanteile durch Eigenmarken-Expansion und Drive-Up-Adoption. Same-Day-Services profitabel. Gross Margin expandiert auf 30 %+ durch Mix-Shift zu höhermargigem Sortiment. Strukturelle Margennachhaltigkeit: Eigenmarken-Anteil ~40 % Revenue + Kundenbindung durch Target Circle-Loyalitätsprogramm schützen Margen — auf Datenbasis teilweise belegbar. Annahme (kein Konsens): FY27 EPS $11 × 18x = $198. Bull-Kursziel: $175–$210 (Midpoint $192,50). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Konsumausgaben bleiben moderat; Target hält Marktanteile, Comp-Store-Sales wachsen 2–4 %. Eigenmarken-Strategie unterstützt Gross Margin über 28 %. EPS wächst 6–8 %/Jahr durch Kostendisziplin und Rückkäufe. Annahme (kein Konsens): FY27 EPS $9,50 × 16x = $152. Base-Kursziel: $130–$155 (Midpoint $142,50). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: US-Konsumabkühlung durch Rezession oder Kaufkraftverlust; Handelsstreitigkeiten verteuern chinesisch gefertigte Eigenmarken-Importe; Amazon/Walmart-Wettbewerbsdruck intensiviert. Kundenkonzentration: keine spezifische Kundenabhängigkeit, aber Target ist überproportional von mittlerem US-Einkommenssegment abhängig — Rezessionsrisiko höher als bei Walmart (tiefpreisiger). Geopolitik/Exportkontrollen: ~30 % Sortiment aus China importiert — Strafzölle direkt ergebniswirksam. Lieferkette: Vendor-Diversifikation hat sich verbessert seit 2022, aber China-Abhängigkeit bleibt. Verwässerung: Aktienrückkäufe laufen aktiv — keine Verwässerung. Regulierung: Mindestlohn-Erhöhungen und Ladenschließungskosten. Annahme: FY27 EPS $6 × 13x = $78. Bear-Kursziel: $65–$90 (Midpoint $77,50). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 20 % + 50 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $192,50 + 0,50 × $142,50 + 0,30 × $77,50 = $38,50 + $71,25 + $23,25 = **~$133 — implizites Downside vs. aktuellem Kurs ($134,11): −0,8 %.** EV-Punkte: >−10 %.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 22 % — solide für einen Retailer. ROIC 13,1 % — über Kapitalkosten; operativer Hebel vorhanden. Gross Margin 28,1 % — gut für Discount-Retail (Walmart ~24 %); Eigenmarken-Mix schützt. Operating Margin 4,5 % — niedrig aber typisch für US-Discounter; Hebelwirkung vorhanden. FCF $3,1 Mrd. deckt Dividende und Rückkäufe komfortabel. D/E 117,5 % ist erhöht für einen Retailer — dominiert durch operative Leasing-Verpflichtungen, weniger durch Bankschulden. Revenue +6,7 % YoY — Erholungsmomentum spürbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE ~15x (aktueller Kurs) — moderate Erwartung für stabilen US-Retailer; historisch fair für Target-Profil. Dividendenrendite 3,55 % bietet Downside-Schutz. Was preist der Kurs ein? Bei $134,11 und Revenue $106 Mrd. impliziert P/S ~0,56x — typische Discounter-Bewertung. Rückrechnung: Aktueller Kurs impliziert ~8,9x EPS Forward — plausibel bei 2–4 % Comp-Wachstum und Kosteneffizienz. Analyst-Konsens $132,20 leicht unter aktuellem Kurs — Konsens sieht marginalen Downside.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 57, Rang 47 S&P 500. 6M: +31,8 % — Erholungsmomentum klar. Beta 0,99 — marktkorreliert. Near 52-Wochen-Hoch $137,87. Institutionelle Positionierung: Consumer-Sektorfonds und Dividend-Income-Investoren dominant (Hypothese, nicht datenbasiert). Enttäuschungsrisiko: schwächer als erwartete Same-Store-Sales oder Margendruck durch Tarifsituation.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 57, Rang 47. 5T: +2,5 %, 10T: +6,2 %, 20T: +9,0 %, 50T: +7,9 %, 6M: +31,8 %. Gleichmäßiges Momentum ohne Beschleunigung. Beta 0,99 — niedrige Volatilität. 52-Wochen-Hoch $137,87 in Reichweite. Technisches Warnsignal: Rückfall unter $120 würde Erholungstrend beenden.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($210–$280):** Same-Day-Service profitabel, Eigenmarken 40 % Revenue, Markt-Share-Gewinne, EPS $14 × 18x.</p>
+<p>**Base ($100–$160):** Stabiles Wachstum 4–6 %/Jahr, Margin-Stabilität, EPS $8–$11 × 14x.</p>
+<p>**Bear ($40–$80):** Rezession + Tarif-Schock + Wettbewerbsdruck, Margin-Kollaps, Dividendenkürzung.</p>
+<p>Entscheidende Variable: US-Konsumausgaben-Resilienz und Handelsariffs auf China-Importe.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Target ist ein solider, aber unspektakulärer US-Discounter am Ende seiner Erholungsphase. Auf aktuellem Niveau ($134) ist das Chance-Risiko-Profil ausgeglichen — EV ~$133. Für Dividend-Income-Investoren mit Geduld und US-Konsumexposure geeignet; 3,55 % Dividende ist attraktiv. Für Wachstumsinvestoren uninteressant. Tarif-Risiko ist der wichtigste kurzfristige Katalysator in beide Richtungen. Positionsgröße: max. 2–3 % in defensiven Portfolios. Peer-Vergleich: **Walmart (WMT)** ist operativ stärker positioniert (International, Sam's Club, Healthcare) aber teurer bewertet; **Costco (COST)** hat stärkeren Membership-Moat. Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
