@@ -1087,15 +1087,13 @@ function BacktestApp() {
         <div style={{marginBottom:12}}>
           <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill,minmax(110px,1fr))',gap:6,marginBottom:8}}>
             {[
-              ['Trades',        trades.length,                                                                                          '',  '#94a3b8'],
-              ['Winrate',       kpis.winrate.toFixed(0),                                                                                '%', kpis.winrate >= 50 ? '#4ade80' : '#f87171'],
-              ['Profit Faktor', kpis.profitFactor != null ? kpis.profitFactor.toFixed(2) : '∞',                                        '',  kpis.profitFactor == null || kpis.profitFactor >= 1 ? '#4ade80' : '#f87171'],
-              ['Max Drawdown',  kpis.maxDD.toFixed(1),                                                                                  '%', '#f87171'],
-              ['Ø Win',         '+' + fmtK(kpis.avgWin) + '€',                                                                        '',  '#4ade80'],
-              ['Ø Loss',        '−' + fmtK(kpis.avgLoss) + '€',                                                                       '',  '#f87171'],
-              ['Gesamtgewinn',  (kpis.gesamtGewinn >= 0 ? '+' : '−') + fmtK(kpis.gesamtGewinn) + '€',                                '', kpis.gesamtGewinn >= 0 ? '#4ade80' : '#f87171'],
-              ['Rendite p.a.',  (kpis.annualReturn >= 0 ? '+' : '') + kpis.annualReturn.toFixed(1) + '%',                             '', kpis.annualReturn >= 0 ? '#4ade80' : '#f87171'],
-              ['Ø Gewinn/Jahr', (kpis.avgAnnualPnl >= 0 ? '+' : '−') + fmtK(Math.abs(kpis.avgAnnualPnl)) + '€',                    '', kpis.avgAnnualPnl >= 0 ? '#4ade80' : '#f87171'],
+              ['Trades',        trades.length,                                                              '',  '#94a3b8'],
+              ['Winrate',       kpis.winrate.toFixed(0),                                                    '%', kpis.winrate >= 50 ? '#4ade80' : '#f87171'],
+              ['Profit Faktor', kpis.profitFactor != null ? kpis.profitFactor.toFixed(2) : '∞',             '',  kpis.profitFactor == null || kpis.profitFactor >= 1 ? '#4ade80' : '#f87171'],
+              ['Max Drawdown',  kpis.maxDD.toFixed(1),                                                      '%', '#f87171'],
+              ['Ø Win',         '+' + fmtK(kpis.avgWin) + '€',                                            '',  '#4ade80'],
+              ['Ø Loss',        '−' + fmtK(kpis.avgLoss) + '€',                                           '',  '#f87171'],
+              ['Gesamtgewinn',  (kpis.gesamtGewinn >= 0 ? '+' : '−') + fmtK(kpis.gesamtGewinn) + '€',   '', kpis.gesamtGewinn >= 0 ? '#4ade80' : '#f87171'],
             ].map(([label, val, unit, color]) => (
               <div key={label} style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:8,padding:'8px 10px',fontFamily:'monospace'}}>
                 <div style={{fontSize:9,color:'#475569',marginBottom:3,letterSpacing:'0.04em'}}>{label}</div>
