@@ -679,9 +679,23 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
     new_states = {}
     alerts     = []
 
+    fund_all = {}
+    fund_path = os.path.join(os.path.dirname(json_path) or '.', 'data', 'fundamentals.json')
+    if not os.path.exists(fund_path):
+        fund_path = 'data/fundamentals.json'
+    if os.path.exists(fund_path):
+        with open(fund_path) as _f:
+            fund_all = json.load(_f).get('tickers', {})
+
     for entry in data.get('data', []):
         ticker = entry['ticker']
         score  = entry.get('score', 0)
+
+        market_cap = (fund_all.get(ticker) or {}).get('marketCap') or 0
+        if market_cap < 5_000_000:
+            print(f'  SKIP {ticker}: Zombie-Stock (MCap ${market_cap:,.0f}) — kein Alert.')
+            continue
+
         info   = count_points(entry)
 
         new_states[ticker] = {
