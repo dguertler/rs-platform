@@ -415,12 +415,24 @@ function calcKpis(trades) {
   const grossProfit = wins.reduce((s, t)   => s + t.pnl, 0);
   const grossLoss   = losses.reduce((s, t) => s + t.pnl, 0);
   const openPnl     = openTrade?.pnl ?? 0;
+  const totalPnl    = equity - CAPITAL;
+
+  // Jährliche Metriken: Zeitspanne vom ersten Entry bis zum letzten Exit (oder heute)
+  const firstDate = new Date(trades[0].entryDate);
+  const lastExit  = openTrade
+    ? new Date()
+    : new Date(closed[closed.length - 1].exitDate);
+  const years     = Math.max((lastExit - firstDate) / (365.25 * 86400000), 0.01);
+  // CAGR auf Basis des reinen Strategie-Gewinns (totalPnl relativ zu CAPITAL)
+  const annualReturn  = (Math.pow(equity / CAPITAL, 1 / years) - 1) * 100;
+  const avgAnnualPnl  = totalPnl / years;
+
   return {
     nTrades:      closed.length,
     nLosses:      losses.length,
     nWins:        wins.length,
     winrate:      wins.length / closed.length * 100,
-    totalPnl:     equity - CAPITAL,
+    totalPnl,
     totalReturn:  (equity / CAPITAL - 1) * 100,
     maxDD,
     grossProfit,
@@ -429,8 +441,11 @@ function calcKpis(trades) {
     avgWin:       wins.length   > 0 ? grossProfit / wins.length                             : 0,
     avgWinPct:    wins.length   > 0 ? wins.reduce((s,t) => s + t.pnlPct, 0) / wins.length  : 0,
     avgLoss:      losses.length > 0 ? Math.abs(grossLoss) / losses.length                  : 0,
-    gesamtGewinn: (equity - CAPITAL) + openPnl,
+    gesamtGewinn: totalPnl + openPnl,
     hasOpen:      !!openTrade,
     equityCurve,
+    annualReturn,
+    avgAnnualPnl,
+    years,
   };
 }

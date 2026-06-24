@@ -17,7 +17,7 @@ OUT_DIR = os.path.join(_REPO, "data")
 PAUSE          = 2   # Sekunden zwischen Tickern
 PAUSE_ON_ERROR = 10  # Sekunden nach einem Fehler
 
-CUTOFF_DW = (datetime.now() - timedelta(days=4 * 365)).strftime("%Y-%m-%d")
+CUTOFF_DW = "2018-12-01"  # fester Startpunkt: ~6 Wochen vor 2019 als Weekly-Lookback-Puffer
 CUTOFF_4H = (datetime.now() - timedelta(days=730)).strftime("%Y-%m-%d")
 
 
