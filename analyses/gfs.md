@@ -1,6 +1,6 @@
 # GFS — KI-Aktienbewertung
 
-**GlobalFoundries Inc.** · Technology · 23.06.2026 · Signal: kein GWS
+**GlobalFoundries Inc.** · Technology · 25.06.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
@@ -10,7 +10,7 @@
 | Revenue (TTM) | $6.84 Mrd. |
 | Gross Margin | 26.1% |
 | ROE | 6.8% |
-| RS-Score | 210.7 |
+| RS-Score | 195.9 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
@@ -19,62 +19,64 @@
 
 ## 1. INVESTMENT-CASE
 
-GlobalFoundries ist der einzige US-amerikanische Tier-1-Foundry und damit strategischer Engpass für Halbleiter-Souveränität in der westlichen Welt. Das Geschäftsmodell ist bewusst anders als TSMC oder Samsung: Keine Bleeding-Edge-Nodes unter 12nm — stattdessen Spezialisierung auf Automotive, Aerospace, IoT und Smart Mobile, wo Zyklusstabilität vor Leistungsführerschaft steht. Der strukturelle Kern: Langfristige Multi-Year-Lieferverträge (Take-or-Pay) mit Tier-1-Automotive-OEMs und US-Rüstungsaufträgen liefern eine Umsatzbasis, die deutlich weniger zyklisch ist als klassische Auftragsfertigungen. Revenue-Wachstum 3,1% YoY wirkt auf dem ersten Blick enttäuschend, spiegelt aber die Normalisierung nach Post-COVID-Supercycle wider — nicht strukturellen Verfall. Was der Markt möglicherweise zu wenig einpreist: GFS ist einer der Hauptbegünstigten des US CHIPS Act mit gesicherten $1,5 Mrd. Direktzuschüssen und weiteren Kapitalzugang über das Investment Tax Credit-Programm. Der Analyst-Konsens $79,71 liegt unter dem aktuellen Kurs — ein klassisches Zeichen, dass Sentiment der Fundamentalentwicklung hinterherläuft.
+GlobalFoundries ist das einzige US-amerikanische Foundry-Unternehmen mit echter Skalierung — und der Markt hat das erst in den letzten sechs Monaten vollständig eingepreist (+115% in 6 Monaten). GFS produziert keine Leading-Edge-Chips, sondern differentiated mature nodes: RF-Chips für 5G, embedded Non-Volatile Memory für Automotive/IoT, SiGe-Technologie für Hochfrequenzanwendungen und Sicherheits-ICs für Regierungsanwendungen. Der strukturelle Kern der Investment-These: GFS profitiert von CHIPS-Act-Subventionen, hat Langfristverträge mit IBM, AMD und qualcomm und ist der strategische US-Sourcing-Partner für Defence- und Automotive-Kunden, die nicht von TSMC oder Samsung abhängen wollen. Schwäche: Revenue-Wachstum nur +3% YoY — der Boom war ein Kapitalmarkt-Event, kein Umsatz-Boom.
 
 ## 2. GESCHÄFTSMODELL
 
-- Auftragsfertigung an 5 Fabs (Malta NY, Burlington VT, Essex Junction VT, Dresden DE, Singapur) für externe Kunden auf 130nm–12nm Feature-Size
-- Schwerpunkt Spezialtechnologien: RF-Silicon (5G-Frontend), FD-SOI (Automotive-Radar), Silicon Photonics, embedded Non-Volatile-Memory (Smartcards, MCUs)
-- Revenue-Mix: Automotive/IoT ~40%, Smart Mobile ~35%, Communications Infrastructure ~25%
-- Take-or-Pay-Verträge mit mehrjähriger Laufzeit dämpfen Cyclizität — jedoch keine vollständige Zyklus-Immunität
-- US CHIPS Act Förderung ($1,5 Mrd. Direkt + weitere ITC-Credits) als struktureller CAPEX-Subvention
-- Keine eigene Leading-Edge-Technologie (<7nm) — bewusstes strategisches Positioning außerhalb des KI-Chips-Wettrüstens
-- Free Cashflow $1,19 Mrd. bei Revenue $6,84 Mrd. (17,4% FCF-Marge) — solide Kapitaleffizienz für eine Fab-intensive Industrie
-- Dividend 0,56% YoY — marginal, signalisiert aber Kapitalrückfluss-Bewusstsein im Management
+- Differentiated mature nodes (12–22nm und grösser): RF-SOI (Marktführer für 5G-RF-Switches), SiGe BiCMOS (Radar, 5G mmWave), embedded NVM (Automotive, Smart Cards)
+- Langfristverträge: CHIPS Act Funding + Long-Term Supply Agreements mit IBM, Qualcomm, Broadcom — reduzieren Spot-Markt-Zyklizität
+- Fab-Standorte: USA (Malta NY), Deutschland (Dresden — EU-CHIPS-Act), Singapur — geopolitische Diversifikation als USP
+- Revenue $6.84 Mrd. TTM, +3% YoY — organisches Wachstum langsam; Mix-Shift zu höhermargigen Technologien als echter Hebel
+- Gross Margin 26% — bescheiden; limitiert durch Fab-Fixkostenbasis und Auslastungsgrad
+- FCF $1.2 Mrd. bei $6.84 Mrd. Revenue (17% FCF-Marge) — solider als die Gross-Margin suggeriert
+- ROE 6.8% — niedrig, aber durch hohe Kapitalintensität erklärbar; ROIC-Verbesserung ist der mittelfristige Treiber
+- Keine Dividende; CHIPS-Act-Beihilfen schränken Kapitalrückgaben temporär ein
 
 ## 3. BULL CASE
 
-Automotive-Halbleiter erlebt Mega-Cycle: E-Mobility + ADAS braucht 10–20x mehr Silizium pro Fahrzeug als Verbrenner; GFS bedient dieses Segment mit spezialisierten FD-SOI-Prozessen, die kein anderer westlicher Foundry in dieser Skalierung repliziert. Zusätzlich: CHIPS Act als strategischer CAPEX-Hebel senkt Break-Even bei Fab-Expansionen strukturell — höhere normalisierte Margen möglich als historischer Durchschnitt. Annahme (kein Konsens): Revenue steigt auf $9–10 Mrd. bis FY27 (+10% p.a.), Gross Margin auf 32–34% durch Produktmix-Verschiebung, Forward EPS normalisiert auf $4,50–5,50. Bull-Multiple 25–28x (Specialty-Foundry-Premium) ergibt Kursziel 112–154 USD. Eintrittswahrscheinlichkeit: 25%.
+CHIPS-Act-Rückenwind beschleunigt GFS-Kapazitätsausbau; Automotive-Halbleiterboom (ADAS, EV-Leistungselektronik) treibt embedded-NVM-Revenue. RF-SOI-Marktführerschaft in 5G Advanced sichert Pricing Power. Mix-Shift zu höhermargigen Technologien hebt Gross Margin auf 32–35%. Annahme (kein Konsens): FY27 EPS ~$3.50 × 35x = $122. Kursziel Bull: **$100–$145** (Midpoint $122). Eintrittswahrscheinlichkeit: **20%**.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Revenue-Wachstum auf 5–8% p.a. normalisiert, Take-or-Pay-Verträge halten Auslastung ≥75%, GM stabilisiert bei 27–30%. Annahme (kein Konsens): Normalisiertes Forward EPS ~$3,50 FY27 × 22–26x = Kursziel 77–91 USD. Bei aktuellem Kurs $85,83 ist das ein mäßiges symmetrisches Risk/Reward — kein zwingender Einstieg ohne Korrektur. Eintrittswahrscheinlichkeit: 45%.
+Revenue-Wachstum normalisiert bei 5–8% YoY durch Automotive + RF-SOI-Recovery. Gross Margin verbessert sich auf 28–30% durch bessere Auslastung. CHIPS-Act-Funding fliesst über 5 Jahre. Annahme (kein Konsens): FY27 EPS ~$2.80 × 28x = $78. Kursziel Base: **$65–$92** (Midpoint $78). Eintrittswahrscheinlichkeit: **55%**.
 
 ## 5. BEAR CASE
 
-Auslöser: Automotive-Zyklus dreht durch E-Mobility-Überinvestition, OEMs reduzieren Chip-Bestellungen strukturell (wie 2022–23). Gleichzeitig geopolitische Eskalation: Deutsche Fab in Dresden unter EU-Druck, Singapur-Fab mit China-Exposure. Lieferketten-Risiko: GFS produziert auf Legacy-Nodes mit spezifischen Masken-Sets — Kundenwechsel bei Competitor-Subventionen möglich. SBC-Verwässerung: Anteile konstant ~551 Mio., kein signifikanter Rückkauf erkennbar. Regulierung: CHIPS Act-Auflagen können Subventionen an Bedingungen knüpfen (keine Expansion in China, Lohntarifverpflichtungen). Annahme (kein Konsens): GM kollabiert auf 20–23%, EPS sinkt auf $1,50–2,00, Multiple 15–18x = Kursziel 22–36 USD. Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Automotive-Halbleiter-Überangebot (Renesas, Infineon, On Semi bauen Kapazitäten aus) + 5G-Rollout-Verzögerung in China. CHIPS-Act-Konditionalitäten beschränken Flexibilität. Kundenkonzentration: IBM-Foundry-Abhängigkeit strukturell — ohne IBM-Verträge würde Revenue signifikant sinken; genaue Konzentration nicht aus Daten ableitbar. Geopolitik: Dresden-Fab als EU-strategischer Asset; Exportkontrollen kein primäres Risiko für mature nodes. Foundry-Abhängigkeit: GFS ist selbst Foundry — Risiko liegt in Auslastungsrückgang. Verwässerung: SBC-Trend nicht verfügbar. Regulierung: CHIPS-Act-Compliance-Risiko bei Verstoss gegen Rüstungsexportregeln. Annahme: FY27 EPS ~$1.50 × 20x = $30. Kursziel Bear: **$22–$38** (Midpoint $30). Eintrittswahrscheinlichkeit: **25%**.
 
-**Summe: 25% + 45% + 30% = 100%**
+**Summe: 20% + 55% + 25% = 100%**
 
-Erwartungswert: $133×0,25 + $84×0,45 + $29×0,30 = $33,25 + $37,80 + $8,70 = **EV ~$79,75** — implizites Downside vs. aktuellem Kurs: **−7%**.
+**Erwartungswert:** EV = 0.20 × $122 + 0.55 × $78 + 0.25 × $30 = $24.40 + $42.90 + $7.50 = **~$75 — implizites Downside vs. aktuellem Kurs ($85.83): −12.6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Gross Margin 26,1% ist für Halbleiter-Auftragsfertigung (non-TSMC) typisch — TSMC erzielt 53–56%, aber GFS bedient Nischentechnologien mit höheren Übergangskosten. FCF-Marge 17,4% ist starker Ausdruck der operativen Kapitaleffizienz trotz Fab-Schwerlast. ROE 6,8% erscheint schwach, ist aber bei D/E 14,7x und CAPEX-intensivem Geschäft zyklisch erklärbar — normalisiertes ROIC-Niveau dürfte 10–14% betragen. Bilanzqualität eingeschränkt beurteilbar: Totaldebt und Cash nicht im Snapshot verfügbar. Operating Margin 11% — Aufwärtspotenzial bei Auslastungssteigerung durch operative Hebelwirkung (hohe Fixkosten-Fab-Struktur). Revenue-Wachstum 3,1% reflektiert Normalisierung, nicht strukturelle Schwäche.
+ROE 6.8% — niedrig, aber für einen kapitalintensiven Foundry-Betrieb strukturell: GFS hat Fabs in drei Kontinenten mit hoher Fixkostenbasis. Gross Margin 26% ist die schwache Flanke — TSMC erreicht 56%, Samsung 40%. Op Margin 11%, Net Margin 11% — respektabel für Foundry-Reife. FCF $1.2 Mrd. bei $6.84 Mrd. Revenue (17%) ist überraschend stark — deutet auf geringere Capex als erwartet. D/E 14.7x — manageable. Echte Burggraben-Elemente: RF-SOI-Prozessführerschaft (nur GFS und Tower Semiconductor konkurrieren global) und US-Fab-Standort als regulatorisch nicht replizierbar.
 
 ## 7. BEWERTUNG
 
-Forward PE 34x bei 3,1% Revenue-Wachstum ist auf den ersten Blick ambitioniert. Adjustiert: Specialty-Foundry mit US-CHIPS-Subvention und Take-or-Pay-Verträgen verdient einen strukturellen Premium gegenüber zyklischen Fabless-Alternativ-Vergleichen. Rückrechnung: Aktueller Kurs $85,83 / Forward-EPS-Annahme ~$2,50 = implizites Multiple 34x. Um dieses Multiple zu rechtfertigen: Revenue muss auf $8+ Mrd. steigen (+15% p.a. über 2 Jahre), GM auf ~30%, bei konstantem Multiple → erreichbar, aber nicht sicher. Analyst-Konsensziel $79,71 (unter Kurs) signalisiert, dass Sell-Side das aktuelle Niveau nicht mehr deckt — als Warnzeichen wertbar.
+Forward PE 34x — teuer für ein Unternehmen mit 3% Revenue-Wachstum und 11% Net Margin. P/B 4.0x — moderat. Rückrechnung aktueller Kurs: $85.83 bei $6.84 Mrd. Revenue und 11% Net Margin impliziert $752 Mio. Nettogewinn, MCap $47 Mrd. → PE ~62x trailing. Für 3% Wachstum ist das ambitioniert bis unrealistisch. Analyst-Konsensziel $79.72 — leicht unter aktuellem Kurs, moderate Überbewertung. Der Kapitalmarkt bepreist GFS als geopolitischen Optionswert (US-Foundry-Monopol), nicht als Earnings-Wachstumsaktie.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-52-Wochen-Range $31,51–$92,55: Die Aktie hat sich vom Tief fast verdreifacht — erheblicher Teil des "Easy Money" dürfte bereits eingepreist sein. Hypothese (nicht datenbasiert): CHIPS-Act-Momentum hat institutionelle Long-Only-Flows angezogen; Fast-Money dürfte nach dem Run reduziert sein. Short-Float-Daten nicht verfügbar. Kursziel-Diskrepanz (Analysten unter Kurs) ist Warnsignal für FOMO-Phasen — neue Käufer brauchen entweder Revenue-Überraschung oder weitere CHIPS-Act-Katalysatoren.
+6M +115%, 50T +60%: Massive geopolitische Neubewertung. Der Markt hat GFS als «einzige US-Foundry» repositioniert, unabhängig von kurzfristigen Earnings. Short-Float-Daten nicht verfügbar. Hypothese (nicht datenbasiert): Anleger kaufen geopolitische Optionalität — GFS wird steigen, wenn US-China-Spannungen eskalieren, und korrigieren, wenn sie deeskalieren. Enttäuschungsrisiko: jede Meldung über Automotive-Überangebot oder CHIPS-Act-Verzögerungen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 210,74 (Rank 11 im NASDAQ-100-Universum) zeigt starkes relatives Momentum — die Aktie outperformt über alle Zeitfenster. 50-Tage-Performance +62,4% ist das stärkste Window — momentum-fundamentale Unterstützung durch CHIPS-Act-Bekanntgaben wahrscheinlich. Bei $92,55 (52w-High) liegt erstes technisches Widerstandsniveau. Ein Rückfall unter $70–72 würde das Momentum-Bild eintrüben. RSI-Daten nicht verfügbar — Überhitzung bei solcher 50-Tage-Performance möglich.
+RS-Score 195.88, Rang 11 NASDAQ-100 — top-decile Momentum. 5T +5.5%, 10T +9.5%, 20T +5.8%, 50T +60%, 6M +115%. Kurzfristige Beschleunigung nach längerer Konsolidierung. Kein GWS-Signal. Momentum ist primär geopolitisch-narrativ getrieben, nicht fundamental (3% Revenue-Wachstum stützt keine 200%+ RSI-Bewegung organisch). Technisches Warnsignal: Verlust $70 (50T-Breakout-Niveau) wäre strukturelle Trendwarnung.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- **Bull (3–5 J.):** Automotive-Silizium-Intensivierung + CHIPS-Act-Fabs vollständig ramped + Silicon Photonics für Rechenzentren als neues Segment. Revenue $10–13 Mrd., GM 33–36%, EPS $7–9 × 22–26x = Kursziel 154–234 USD.
-- **Base (3–5 J.):** Stabile Nischenmärkte, Take-or-Pay sichert Auslastung, GM 28–32%, EPS $4–6 × 18–22x = Kursziel 72–132 USD.
-- **Bear (3–5 J.):** Automotive-Stagnation + Leading-Edge-Übernahme von Konkurrenzen mit Subventionen, GFS verliert Marktanteile. GM 22–25%, EPS $1–3 × 12–16x = Kursziel 12–48 USD.
+**Bull ($120–$200):** CHIPS-Act-Kapazitätsausbau + Automotive-Recovery + RF-5G-Boom; Gross Margin 32–35%; EPS $5 × 35x.
 
-Entscheidende Variable: Auslastungsquote der US-Fabs und relative Wettbewerbsfähigkeit bei FD-SOI gegen Samsung und STMicro.
+**Base ($55–$90):** Moderates Wachstum 5–8% p.a.; Margin-Verbesserung durch Mix-Shift; EPS $3 × 25x.
+
+**Bear ($20–$40):** Automotive-Überangebot + RF-Preisverfall; Gross Margin unter 22%; EPS $1 × 20x.
+
+Entscheidende Variable: Langfristige Auslastung der US-/Dresden-Fabs durch CHIPS-Act-geförderte Kunden.
 
 ## 11. PROFI-FAZIT
 
-GFS ist ein strukturell interessanter Geopolitik-Play auf Halbleiter-Souveränität — kein Wachstums-Compounder, kein reiner Zykliker. Die Kombination aus CHIPS-Act-Förderung, Take-or-Pay-Automotive-Contracts und Specialty-Foundry-Positioning rechtfertigt eine Beobachtungsposition. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −7% vs. Kurs). Ein High-Conviction-Einstieg ist auf aktuellem Niveau nicht begründbar. Sinnvoller Entry-Bereich: $68–76 (Base-Case-Mitte). Direkte Peers: TSMC (reineres Instrument für Foundry-Wette, höhere Marge), ON Semiconductor (reineres Automotive-Semiconductor-Play). Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV −12.6%). GFS ist kein klassisches Wachstumsunternehmen, sondern ein geopolitischer Optionswert auf die De-Globalisierung der Halbleiterlieferketten. Die fundamentale Story (3% Revenue-Wachstum, 6.8% ROE) trägt den aktuellen Kurs nicht allein — der Aufschlag kommt aus der strategischen Einzigartigkeit als einzige US-Mainstream-Foundry. Für sicherheitsorientierte Langfristinvestoren und Defence-Sektor-Positionierungen interessant; für Earnings-Momentum-Investoren zu teuer. Peers: **TSMC** (technologisch überlegen, bessere Margen — nicht direkt vergleichbar); **Tower Semiconductor** als RF-Peer — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 2/5
@@ -90,8 +92,8 @@ GFS ist ein strukturell interessanter Geopolitik-Play auf Halbleiter-Souveränit
 | Wachstum | 2/5 |
 | Bewertung | 2/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -4.5% |
+| EV-Upside | N/A |
 
-**Verdict: WATCH (45/100)**
+**Verdict: WATCH (50/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

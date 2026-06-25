@@ -1,96 +1,99 @@
 # LRCX — KI-Aktienbewertung
 
-**Lam Research Corporation** · Technology · 12.06.2026 · Signal: GWS Breakout 3/3
+**Lam Research Corporation** · Technology · 25.06.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 303.28 |
-| Market Cap | $379.27 Mrd. |
-| Forward PE | 38.19 |
+| Kurs | 389.04 |
+| Market Cap | $486.52 Mrd. |
+| Forward PE | 48.58 |
 | Revenue (TTM) | $21.68 Mrd. |
 | Gross Margin | 50.0% |
 | ROE | 66.8% |
-| RS-Score | 197.9 |
+| RS-Score | 159.5 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: Fundamental-Snapshot vom 08.06.2026 (Kursstand 05.06.: $303,28) liegt vor der jüngsten Kursbewegung — der Kurs sprang am 11.06. um +12,7% auf $362,52 (+19,5% über Snapshot). Konfidenz der Bewertungsaussagen reduziert; Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Lam Research ist der Etch- und Deposition-Spezialist der Halbleiterindustrie — und damit das schärfste Equipment-Instrument auf den NAND/DRAM-Ausbau und 3D-Skalierung. Der strukturelle Kern: Je mehr Layer (3D-NAND, Gate-All-Around, Advanced Packaging), desto mehr Ätz- und Abscheidungsschritte pro Wafer — Lams Markt wächst schneller als die Wafer-Starts selbst. Umsatz +23,8% YoY auf $21,7 Mrd., operative Marge 35%, ROE 66,8% — das Geschäft läuft auf Zyklus-Hochtouren. Genau das ist der Punkt: Der Markt extrapoliert einen Memory-Capex-Superzyklus. Mit dem Kurssprung notiert die Aktie über dem Analyst-Konsensziel von $316 — als Sentiment-Indikator zu verstehen, die Coverage hinkt der Bewegung hinterher.
+Lam Research ist nach ASML das zweitmächtigste Werkzeugmonopol in der Halbleiterindustrie — nicht trotz, sondern wegen der technologischen Komplexität. Etch- und Depositions-Equipment für 3D-NAND, HBM-DRAM und Gate-All-Around-Transistoren ist nicht substituierbar. Die Kursverdopplung in sechs Monaten reflektiert das Erwachen des Marktes an einen fundamentalen Strukturbruch: Wafer Fab Equipment wächst nicht mehr zyklisch, sondern wird durch KI-Infrastructure-Capex strukturell angehoben. LRCX profitiert überproportional, weil 3D-NAND-Schichtzahlen und HBM-Lagen-Komplexität direkt in Etch- und Deposition-Intensität übersetzen. Der Markt übersieht die Margennachhaltigkeit: Bei steigendem Technologie-Komplexitätsindex steigt auch der LRCX-Inhalt pro Wafer-Pass. Analyst-Konsensziel $335 liegt 14% unter dem aktuellen Kurs — die Sell-Side hat die Rally nicht modelliert.
 
 ## 2. GESCHÄFTSMODELL
 
-- Weltmarktführer bei Etch (Ätzen) und stark bei Deposition — kritischste Prozessschritte für 3D-NAND-Layer-Stacking und GAA-Transistoren
-- Hohe Memory-Exposure (NAND/DRAM) — historisch der zyklischste Teil des Wafer-Fab-Equipment-Markts (WFE)
-- Installed-Base-Geschäft (Service, Upgrades, Ersatzteile) als wachsender, wiederkehrender Umsatzsockel — dämpft den Zyklus zunehmend
-- NAND-Upgrade-Zyklen (Layer-Migration) laufen über Umrüstung bestehender Fabs — kapitaleffizient für Kunden, planbarer für Lam
-- Kundenkonzentration strukturell: wenige Memory-Hersteller (Samsung, SK Hynix, Micron, Kioxia) und TSMC dominieren Bestellungen
-- Operativer Hebel: 50% Bruttomarge, 35% operative Marge am Zyklushoch
-- D/E 35% moderat; FCF $4,35 Mrd. (20% FCF-Marge)
-- Duopol-/Oligopolstruktur mit Applied Materials und Tokyo Electron je nach Prozessschritt
+- Etch-Equipment: ~50% Revenue — einzige skalierbare Lösung für High-Aspect-Ratio-Strukturen in 3D-NAND (200+ Schichten) und DRAM
+- Deposition-Equipment (CVD, ALD): ~40% Revenue — kritisch für FinFET, Gate-All-Around, HBM-Dielektrika
+- Customer Support Business: ~30% des Revenue — recurring, höhere Margen als Equipment-Sale, Zyklusdämpfer
+- NAND-Exposure: ~40% Revenue — abhängig von Samsung/Micron/SK Hynix Capex-Entscheidungen
+- DRAM-Exposure: ~30% Revenue — HBM-Aufrüstung treibt intensiveren Equipment-Einsatz pro Chip
+- Geopolitik: China-Revenue ~30% — Export-Control-Eskalation ist das grösste Einzelrisiko
+- Revenue TTM $21.7 Mrd., +24% YoY; FCF $4.35 Mrd. (20% FCF-Marge)
+- Gate-All-Around-Transition bei TSMC/Intel erhöht Etch-Steps um ~40% pro Layer — struktureller Rückenwind
 
 ## 3. BULL CASE
 
-KI-Speicherbedarf (HBM, Enterprise-SSD) zwingt Memory-Hersteller in einen mehrjährigen Capex-Ausbau; NAND-Layer-Migration und GAA/Advanced-Packaging erhöhen Etch-Intensität pro Wafer strukturell. Margennachhaltigkeit begründbar: Technologieführerschaft im Etch-Oligopol, wachsender Service-Anteil (Installed Base), Switching Costs durch qualifizierte Prozesse — Margen können über historischen Zyklusmitteln bleiben, aber nicht unbegrenzt. FY28-EPS $11 (Annahme, kein Konsens: ~+38% kumuliert vs. Forward-EPS $7,94) × 42x = $462. Kursziel-Bandbreite 430–500 USD. Eintrittswahrscheinlichkeit: 25%.
+AI-Infrastructure-Capex-Superzyklus hält 2025–2027 an. Samsung/Micron investieren massiv in HBM3E/HBM4; Gate-All-Around-Transition bei TSMC/Intel ab 2025 erhöht Etch-Intensität um ~40%. Strukturelle Margennachhaltigkeit durch Enterprise-Mix-Verschiebung: Service + komplexe Tools dominieren Revenue-Mix. Annahme (kein Konsens): FY27 EPS ~$14 × 35x Forward-Multiple = $490. Kursziel Bull: **$450–$530** (Midpoint $490). Eintrittswahrscheinlichkeit: **25%**.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: Memory-Capex bleibt hoch, aber die zweite Ableitung flacht ab; Umsatzwachstum normalisiert von 24% auf 10–15%. Forward-EPS ~$8,50 (leichte Aufwärtsrevision vs. implizitem Forward-EPS $7,94 aus Snapshot-Forward-PE 38,2) × 38–42x = 325–355; mit Überschießen in der Spanne 320–380 USD — auf aktuellem Niveau ($362) also weitgehend eingepreist. Eintrittswahrscheinlichkeit: 45%.
+WFE-Zyklus läuft durch, Wachstum verlangsamt ab 2H 2026 auf +10-15% YoY. China-Revenue stagniert durch Export-Controls. NAND-Capex normalisiert sich nach Überinvestitionspause. Annahme (kein Konsens): FY26 EPS ~$9.50 × 36x = $342. Kursziel Base: **$300–$390** (Midpoint $345). Eintrittswahrscheinlichkeit: **55%**.
 
 ## 5. BEAR CASE
 
-Auslöser: Memory-Preiszyklus kippt (Samsung-Kapazitätsdisziplin endet, NAND-Überangebot), Hyperscaler pausieren Capex — WFE-Bestellungen fallen mit 2–3 Quartalen Vorlauf. Risikodimensionen: Kundenkonzentration — wenige Memory-Kunden + TSMC; eine einzige Capex-Kürzung bewegt die Guidance zweistellig (Anteile nicht im Datensatz). Geopolitik/China — China war zuletzt großer WFE-Abnehmer; US-Exportkontrollen kappen lieferbares Produktspektrum, weitere Verschärfung ist reales Szenario (China-Anteil nicht im Datensatz). Lieferkette — spezialisierte Komponenten-Zulieferer, aber kein Foundry-Single-Source-Risiko wie bei Fabless-Firmen. Verwässerung — SBC/Aktienanzahl nicht im Datensatz, auf Datenbasis nicht beurteilbar; Lam hat historisch eher zurückgekauft. Regulierung — Exportkontrollregime ist die zentrale regulatorische Flanke. Im Bear-Fall: EPS $6,00 × 25x (Zyklus-Trough-Multiple) = $150. Kursziel-Bandbreite 150–200 USD. Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Eskalation US-Export-Controls auf weitere Etch/CVD-Kategorien trifft 25-30% Revenue direkt. Kundenkonzentration: Top-5 Kunden ~80% Revenue — Synchronized Capex-Cut ist plausibles Risiko. Geopolitik: China-Revenue-Ban würde ~$6 Mrd. Revenue treffen. Foundry-Abhängigkeit: kein Single-Source-Risiko, LRCX beliefert alle Fabs. Verwässerung: SBC-Trend nicht verfügbar. Regulierung: Antitrust-Risiko bei WFE-Konsolidierung möglich. Annahme: FY26 EPS ~$5 × 25x = $125. Kursziel Bear: **$100–$150** (Midpoint $125). Eintrittswahrscheinlichkeit: **20%**.
 
-**Summe: 25% + 45% + 30% = 100%**
+**Summe: 25% + 55% + 20% = 100%**
 
-**Erwartungswert:** EV = 0,25 × 465 + 0,45 × 350 + 0,30 × 175 = $326 — implizites Downside vs. aktuellem Kurs ($362,52): −10%.
+**Erwartungswert:** EV = 0.25 × $490 + 0.55 × $345 + 0.20 × $125 = $122.50 + $189.75 + $25.00 = **~$337 — implizites Downside vs. aktuellem Kurs ($389): −13.4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 66,8% ist herausragend, aber Top-of-Cycle plus Buyback-verkleinerte Eigenkapitalbasis — normalisiert eher 30–40%. Bruttomarge 50%, operative Marge 35%, Nettomarge 30,9% — am oberen Rand der eigenen Historie; im letzten Memory-Abschwung lagen die Margen spürbar tiefer. FCF $4,35 Mrd. = 20% FCF-Marge, solide Konversion. D/E 35% unkritisch. Echter Burggraben: Prozess-Know-how und qualifizierte Installed Base — ein Etch-Tool-Wechsel kostet den Kunden Yield-Risiko. Scheinbarer Burggraben: das aktuelle Margenniveau selbst — es ist Zyklus, nicht Struktur.
+ROE 67% — zyklisch hochgepumpt, aber selbst normalisiert deutlich >20%. Gross Margin 50% — strukturell nachhaltig durch proprietäre Prozesskompetenz und Service-Anteil. Op Margin 35%, Net Margin 31% — Top-Tier im WFE-Sektor. FCF $4.35 Mrd. bei $21.7 Mrd. Revenue (20% FCF-Marge) ist ökonomisch hochwertig; FCF-Yield auf MCap ~0.9% zeigt eingepreistes Wachstum. D/E 35x nach GAAP — bei diesen Cashflows manageable. Burggraben: proprietäre Etch-Chemie-Prozesse und jahrelange Prozess-Qualifikation sind strukturell, nicht zyklisch.
 
 ## 7. BEWERTUNG
 
-Snapshot-Multiples (Forward-PE 38,2x, Trailing 57,4x, P/B 35,8x) sind durch den Kurssprung überholt — auf $362,52 umgerechnet: Forward-PE ~45,7x, Trailing ~68,7x, P/B ~42,8x, Market Cap ~$453 Mrd. Das ist für einen zyklischen Equipment-Hersteller historisch sehr teuer. Normalisierter FCF über den Zyklus (Annahme $3–4 Mrd. statt $4,35 Mrd. Peak): implizites Multiple 113–150x normalisierter FCF — keine Value-Position. Rückrechnung "Was preist der Kurs ein?": $362 bei Exit-Multiple 25x in 5 Jahren erfordert ~$14,50 EPS — fast Verdopplung des Forward-EPS, also dauerhaft >12% EPS-Wachstum p.a. ohne Zyklus-Einbruch. Ambitioniert: möglich im KI-Memory-Superzyklus, aber ohne Sicherheitsmarge. Strukturierte Zyklus-Wette, kein echtes Upside auf Basis aktueller Schätzungen.
+Forward PE 48.6x ist für ein Zyklus-Equipment-Unternehmen historisch teuer. Normalisierter FCF über Vollzyklus (~$2–3 Mrd. p.a. geschätzt): Market Cap $486 Mrd. impliziert 160–240x normalisierten FCF — kein Value-Einstieg. Rückrechnung: $389 rechtfertigt FY27 Revenue ~$28 Mrd. bei 32% Net Margin und ~50x Forward PE — ambitioniert, aber bei Gate-All-Around-Vollanlauf nicht unrealistisch. Analyst-Konsensziel $335.74 — als Orientierungspunkt, nicht als Ceiling zu verstehen; wurde von der Rally überholt.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 198, Rangverbesserung (zuvor Rang 8), alle Zeitfenster positiv (5T +17,8%, 6M +101%). Der +12,7%-Tagessprung am 11.06. mit neuem Allzeithoch deutet auf ein Ereignis hin — Auslöser aus den vorliegenden Daten nicht verifizierbar. Hypothese, nicht datenbasiert: Nach so einem Gap dominiert kurzfristig FOMO/Momentum-Geld; Long-Only-Adressen brauchen bestätigende Zahlen. Enttäuschungsrisiko hoch: Notiert über Konsensziel, jede Memory-Preis-Schwäche trifft auf volle Bewertung.
+6M +99%: Institutionelle Rotation in WFE-Sektor bei AI-Capex-Fantasie. Short-Float-Daten nicht verfügbar. Hypothese (nicht datenbasiert): Fast-Money-Momentum-Käufer dominieren kurzfristig — erkennbar am scharfen Rücksetzer-Risiko bei negativen NAND/DRAM-Capex-Meldungen. Neue Käufer benötigen Guidance-Anhebungen oder WFE-Marktprognosen über $120 Mrd. als Rechtfertigung.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 aktiv. Kurs $362,52 auf Allzeithoch, +28% über SMA50 ($283), +79% über SMA200 ($203). RSI(14) 68,5 — heißgelaufen, noch nicht extrem. 20T +21,6%, 50T +40,6%, 6M +101% — Momentum beschleunigt. Das Gap vom 11.06. ($321,80 → $362,52) ist unaufgefüllt; Gaps dieser Größe werden oft teilgetestet. Warnsignale: Schluss unter $322 (Gap-Füllung) als erstes, Wochenschluss unter $283 (SMA50) als hartes Signal.
+RS-Score 159.52, Rang 7 NASDAQ-100 — solides Momentum, kein Extremwert. 5T +1.7% (Konsolidierung nach Rally), 10T +14%, 20T +20%, 50T +24.5%, 6M +99%. Intakter Aufwärtstrend, keine Überhitzungssignale im RS. Kein GWS-Signal aktiv. Technisches Warnsignal: Wochenschluss unter $320 (50T-Unterstützung) wäre Trendwende-Signal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($550–700):** KI-Memory-Superzyklus hält mehrere Jahre, Etch-Intensität steigt strukturell, EPS läuft Richtung $14–16, Multiple bleibt >40x.
+**Bull ($550–$750):** Gate-All-Around + HBM4 + Advanced Packaging simultan; FCF auf $8–10 Mrd., EPS ~$20 × 35x.
 
-**Base Case ($350–450):** Normaler WFE-Zyklus mit höherem Sockel; EPS ~$10–12, Multiple normalisiert auf 32–38x.
+**Base ($250–$400):** WFE normalisiert bei $100–110 Mrd. Marktvolumen; LRCX ~18% Share; EPS $9–12 × 28–32x.
 
-**Bear Case ($150–220):** Klassischer Memory-Abschwung 2027/28; EPS halbiert sich Richtung $6, Multiple 25–30x.
+**Bear ($80–$150):** China-Export-Ban vollständig + NAND/DRAM-Abschwung simultan; EPS $4–5 × 20x.
 
-Entscheidende Variable: Dauer der Memory-Capex-Disziplin — bleibt das Angebot knapp, trägt es Margen und Multiple; kippt es, wiederholt sich das klassische WFE-Drawdown-Muster (−40–60%).
+Entscheidende Variable: Ausweitung US-Export-Controls auf Etch/CVD-Equipment nach China.
 
 ## 11. PROFI-FAZIT
 
-Lam Research ist fundamental erstklassig — Etch-Oligopol, brutale Cash-Konversion, wachsender Service-Sockel — aber nach +12,7% an einem Tag und +101% in sechs Monaten ist die Aktie kein Einstieg mehr, sondern eine Halteposition mit Stop-Disziplin. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV $326 vs. Kurs $362). Einordnung: zyklischer Momentum-Trade auf den Memory-Capex-Zyklus, kein Buy-and-Hold-Einstiegszeitpunkt — für Bestandshalter laufen lassen mit Trailing-Stop (15–20%), Neueinstieg erst nach Gap-Test/Konsolidierung Richtung $320. Positionsgröße max. 2–3%. Peers: **Applied Materials (AMAT)** ist das breitere, etwas defensivere WFE-Instrument (Snapshot-Forward-PE 28x vs. Lam 38,2x — relative Bewertung dort günstiger, beide Snapshots veraltet); **Tokyo Electron** vergleichbar (Peer-Multiples nicht im Datensatz). Das reinste Instrument für die NAND-Layer-These bleibt Lam selbst.
+Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV −13.4%). LRCX ist kein Compounder, sondern ein hochqualitatives zyklisches Momentum-Instrument auf den WFE-Capex-Zyklus. Die fundamentale Qualität ist unangreifbar — aber bei Forward PE 49x ist das Einstiegsniveau für Neuengagements suboptimal. Bestehende Positionen halten mit Trailing-Stop bei $320. Direkter Peer **AMAT** ist breiter diversifiziert und ähnlich bewertet. **KLAC** hat höheres Service-Revenue und defensivere Margen — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ.
 
-- Qualität: 5/5
+- Qualität: 4/5
 - Wachstum: 4/5
-- Bewertung: 2/5 (vorläufig, Datenstand)
+- Bewertung: 2/5
 - Katalysator: 4/5
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 5/5 |
+| Qualität | 4/5 |
 | Wachstum | 4/5 |
 | Bewertung | 2/5 |
 | Katalysator | 4/5 |
+| EV-Upside | N/A |
 
-**Verdict: BUY (75/100)**
+**Verdict: HOLD (66/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

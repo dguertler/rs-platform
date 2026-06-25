@@ -1,107 +1,99 @@
 # CARR — KI-Aktienbewertung
 
-**Carrier Global Corporation** · Industrials · 19.06.2026 · Signal: Breakout
+**Carrier Global Corporation** · Industrials · 25.06.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 69.91 |
-| Market Cap | $58.07 Mrd. |
-| Forward PE | 21.84 |
+| Kurs | 71.81 |
+| Market Cap | $59.64 Mrd. |
+| Forward PE | 22.43 |
 | Revenue (TTM) | $21.87 Mrd. |
 | Gross Margin | 25.2% |
 | ROE | 9.9% |
-| RS-Score | 55.8 |
+| RS-Score | 74.7 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-# Carrier Global Corporation (CARR)
-
-**Kurs:** $71,81 (15.06.2026) | **RS-Score:** 55,76 | **Rank:** #94 (S&P 500)
-**GWS:** —
-**Szenarien (12–18 Monate):** Bull $90–$100 (25%) · Base $65–$80 (55%) · Bear $40–$52 (20%) · EV ~$73
 
 ## 1. INVESTMENT-CASE
 
-Carrier Global ist nach der Viessmann-Klimaakquisition (2023, €12 Mrd.) und dem Abschluss der Portfolio-Transformation ein anderes Unternehmen als noch 2022. Die These: Carrier hat sich vom diversifizierten HVAC/Kältekonzern zum fokussierten Klimatisierungsanbieter mit europäischer Wärmepumpen-Plattform repositioniert. Was der Markt einpreist: Normalisierung der HVAC-Nachfrage und Viessmann-Synergien. Was er möglicherweise unterschätzt: der strukturelle Rückenwind aus dem europäischen Wärmepumpen-Markt ist langfristiger als zyklisch — EU-Gebäuderichtlinie ist ein gesetzlicher Treiber. 12M-RS-Fenster fehlt. Trailing PE 46,6x vs. Forward PE 21,8x zeigt hohe Earnings-Recovery-Erwartung.
+Carrier Global ist der weltweit führende Anbieter für Heizungs-, Kühl- und Gebäudeautomationslösungen — und seit der Viessmann-Akquisition (2023, ~$14 Mrd.) auch der grösste europäische Wärmepumpen-Spieler. Revenue +2.4% YoY auf $21.9 Mrd. zeigt organisch schwaches Wachstum, aber die Qualität der Strecke hat sich fundamental verändert: Durch Viessmann ist Carrier jetzt im strukturell wachsenden europäischen Dekarbonisierungsmarkt positioniert. Dazu kommt ein unterschätzter Katalysator: KI-Rechenzentren brauchen Präzisionskühlung, und Carrier ist mit seiner DataCenter-Cooling-Sparte (Chiller, Precision Air) ein direkter Nutzniesser. Schwäche: Gross Margin 25% und Op Margin 6.6% sind für einen Premium-Industrial-Konzern mit Markenpreismacht enttäuschend — Viessmann hat erhebliche Integrationskosten verursacht.
 
 ## 2. GESCHÄFTSMODELL
 
-- HVAC: Klimaanlagen (Nordamerika) und Wärmepumpen (Europa via Viessmann)
-- Kältetechnik: Transport-Kühlung — zyklischer, globaler Markt
-- Gebäudeautomation und -sicherheit: nach Portfolio-Bereinigung reduziert
-- Viessmann-Integration: europäischer Wärmepumpen-Marktführer, Synergien €250 Mio. p.a. bis 2027 erwartet (Konsens-Schätzung, kein Konsens-Datenpunkt)
-- Revenue €21,9 Mrd. TTM, Growth +2,4% YoY — Übergangsphase
-- Gross Margin 25,2%, Operating Margin 6,6%, Net Margin 6% — Margen unter Integrationsdruck
-- D/E 91x auf Buchwert — durch Viessmann-Verschuldung erhöht, Schuldenabbau prioritär
-- ROE 9,9% — unter Druck durch Akquisitionsverwässerung
+- HVAC (Heizung, Lüftung, Klimaanlage): ~60% Revenue — Residential und Commercial; Carrier, Bryant, Trane-Partnerschaft
+- Viessmann Climate Solutions: ~20% Revenue (Neu seit 2023) — Wärmepumpen, Heizkessel, Solarintegration für EU-Markt
+- Refrigeration (Kühl-Supply-Chain): ~15% Revenue — Transport-Kühleinheiten (Carrier ThermoKing), Food Retail
+- DataCenter Cooling: wachsendes Subsegment innerhalb HVAC — Präzisions-Chiller für hyperscale Rechenzentren
+- Revenue $21.9 Mrd. TTM, +2.4% YoY — organisch moderat; Viessmann-Integration dominiert Managementkapazität
+- Gross Margin 25%, Op Margin 6.6% — durch Viessmann-Integrationskosten gedrückt
+- FCF $850 Mio. — niedrig bei $21.9 Mrd. Revenue (3.9% FCF-Marge); Integrationskosten schlagen durch
+- Dividende 1.34%, Forward PE 22.4x, D/E 91x (durch Viessmann-Schulden)
 
 ## 3. BULL CASE
 
-Viessmann-Synergien materialisieren sich schneller, europäischer Wärmepumpen-Markt erholt sich. Revenue auf $25–27 Mrd. in FY28 mit Operating Margin Expansion auf 11–12%. Annahme (kein Konsens): FY27-EPS ~$3,80 × 25x Forward = $95 Midpoint; Bandbreite $90–$100. Strukturelle Margennachhaltigkeit: Viessmann-Technologieführerschaft im Wärmepumpen-Segment — auf Datenbasis noch nicht beurteilbar. Eintrittswahrscheinlichkeit: 25%.
+EU-Dekarbonisierungsregulierung beschleunigt Wärmepumpen-Adoption; Viessmann-Synergien liefern $500+ Mio. Einsparungen bis FY27. KI-Rechenzentrum-Cooling-Bedarf verdoppelt sich bis 2027 — Carrier profitiert überproportional. Strukturelle Margennachhaltigkeit: Wärmepumpen haben höhere Margen als Gas-Heizkessel (50%+ Margenprämie); DataCenter-Chiller haben 35%+ Gross Margin vs. 25% Konzern-Durchschnitt. Annahme (kein Konsens): FY27 EPS ~$4.50 × 25x = $112. Kursziel Bull: **$95–$130** (Midpoint $112). Eintrittswahrscheinlichkeit: **20%**.
 
 ## 4. BASE CASE
 
-Moderate Synergieentwicklung, europäischer Markt erholt sich langsam. Revenue +4–6% p.a. Annahme (kein Konsens): FY27-EPS ~$3,10 × 23x Forward = $71 Midpoint; Bandbreite $65–$80. Wahrscheinlichkeit: 55%.
+Viessmann-Integration liefert moderat. Organisches HVAC-Wachstum 4–6% p.a. durch US-Commercial + EU-Wärmepumpen. Annahme (kein Konsens): FY27 EPS ~$3.50 × 22x = $77. Kursziel Base: **$65–$90** (Midpoint $77). Eintrittswahrscheinlichkeit: **55%**.
 
 ## 5. BEAR CASE
 
-Europäischer Wärmepumpen-Markt bleibt strukturell schwach, Viessmann-Integration überschreitet Kostenziele. Annahme (kein Konsens): FY27-EPS ~$1,80 × 25x Forward = $45 Midpoint; Bandbreite $40–$52. Eintrittswahrscheinlichkeit: 20%.
+Auslöser: EU-Wärmepumpen-Förderung wird zurückgefahren (politische Wende in Deutschland/Frankreich — reales Risiko 2025/26). Viessmann-Integration teurer als erwartet, Synergiepotenzial nicht erreichbar. HVAC-Residential-Abschwung in den USA. Kundenkonzentration: diversifiziert über Länder und Segmente — kein Single-Customer-Klumpenrisiko. Geopolitik: EU-HVAC-Regulierungsrisiko ist das primäre Risiko; China-Exposure moderat. Foundry-Abhängigkeit: Elektronik-Komponenten (Kompressoren, Steuerungen) von globalen Lieferanten — Tarif-Risiko bei Trump-Politiken. Verwässerung: SBC-Trend nicht verfügbar. Regulierung: EU-F-Gase-Regulierung (PFAS-Verbot) könnte Kühlmittel-Übergangskosten erhöhen. D/E 91x: Viessmann-Schulden bei FCF-Rückgang belastend. Annahme: FY27 EPS ~$2.00 × 15x = $30. Kursziel Bear: **$22–$38** (Midpoint $30). Eintrittswahrscheinlichkeit: **25%**.
 
-Risiko-Sweep:
-- Kundenkonzentration: Stark fragmentierter HVAC-Markt — kein Single-Customer-Risiko erkennbar
-- Geopolitik/Exportkontrollen: Kein direktes Exportrisiko; EU-Energiepolitikänderung als indirektes Risiko
-- Lieferkette: Abhängigkeit von Kupfer und Kältemittelpreisen; Lieferketten normalisiert
-- Verwässerung: Viessmann cash-finanziert, erhebliche Schuldenaufnahme — Aktienanzahl-Trend nicht aus Daten ableitbar
-- Regulierung: EU-Gebäuderichtlinie als positiver Treiber; Förderkürzungen (Deutschland 2024) als negativer Impuls bereits eingetreten
+**Summe: 20% + 55% + 25% = 100%**
 
-Summe: 25% + 55% + 20% = 100%
-Erwartungswert: (0,25 × 95) + (0,55 × 72,50) + (0,20 × 46) = 23,75 + 39,88 + 9,20 = 72,83 USD — implizites Upside vs. aktuellem Kurs (71,81 USD): +1,4%. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0.20 × $112 + 0.55 × $77 + 0.25 × $30 = $22.40 + $42.35 + $7.50 = **~$72 — implizites Upside vs. aktuellem Kurs ($71.81): +0.3%.** Die eigenen Szenarien ergeben auf aktuellem Niveau keinen erkennbaren asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Gross Margin 25,2% typisch für Industriegüter. Operating Margin 6,6% und Net Margin 6% unter Integrationsdruck. ROE 9,9% durch Akquisitionsverwässerung belastet. D/E 91x auf Buchwert — kritisch; Schuldenabbau Voraussetzung für Multiple-Expansion. Revenue Growth +2,4% spiegelt Übergangsphase.
+ROE 9.9% — niedrig für einen Branded-Industrial-Konzern; Viessmann-Finanzierung drückt Return. Gross Margin 25% ist schwach — historische Carrier-Marge vor Viessmann lag bei 30%+. Op Margin 6.6% durch Integrationskosten gedrückt. FCF $850 Mio. bei $21.9 Mrd. Revenue (3.9% FCF-Marge) — zu niedrig für einen Premium-Industrial. D/E 91x durch Viessmann-Schulden strukturell; Abbau-Zeitplan entscheidend. Burggraben: Carrier-Marke in Commercial-HVAC, ThermoKing in Transport-Refrigeration, Viessmanns europäische Serviceorganisation — funktionale Burggräben, aber nicht technologisch unüberwindbar.
 
 ## 7. BEWERTUNG
 
-Trailing PE 46,6x, Forward PE 21,8x — Konsens erwartet deutliche EPS-Steigerung. Rückrechnung: Kurs $71,81 preist EPS ~$3,10 × 23x Forward ein — bei erfolgreicher Integration realistisch. Normalisierter FCF-Schätzung: Net Margin 9% (Zielkorridor) auf $24 Mrd. = ~$2,2 Mrd. FCF; MarketCap $58 Mrd. → ~26x normalisierter FCF — fair, nicht günstig.
+Forward PE 22.4x für ein 2.4%-Wachstumsunternehmen mit 6.6% Op Margin — teuer relativ zu Fundamentals. Rückrechnung: $71.81 bei $21.9 Mrd. Revenue impliziert P/S 2.7x — für einen Low-Margin-Industrial nicht günstig. Normalisierter FCF über Vollzyklus ($1.5–2.0 Mrd. bei vollständiger Viessmann-Integration): MCap $59.6 Mrd. impliziert 30–40x normalisierten FCF — kein Value. Analyst-Konsensziel $76.25 — leicht über aktuellem Kurs; Coverage setzt auf Viessmann-Synergierealisierung.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Rank #94 im S&P 500 — unterdurchschnittlich, aber +26% in 6 Monaten. Kein FOMO-Momentum. EV praktisch gleich aktuellem Kurs — institutionelle beobachten Integration abwartend.
+RS-Score 74.74, Rang 78 S&P500 — relativer Underperformer. Kurzfristiges Momentum: 5T +7.4%, 10T +7.7%, 20T +17%. 6M +33.3% — moderat positiv, aber nicht spektakulär. Short-Float-Daten nicht verfügbar. Hypothese (nicht datenbasiert): CARR ist ein Themen-Investment für Dekarbonisierungs- und DataCenter-Cooling-Positionierungen — neue Käufer kommen durch Sektor-Rotation, nicht durch Earnings-Momentum.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Kurs $71,81 unter 52W-Hoch $81,09 (–11%). 20T +14,8% kurzer Impuls. 6M +26,5% — solider Mittelfrist-Trend. Technisches Warnsignal: Rückfall unter $60 würde 50T-Struktur brechen.
+RS-Score 74.74, Rang 78 S&P500 — Underperformer. 5T +7.4%, 10T +7.7%, 20T +17.0%, 50T +9.3%, 6M +33.3%. Kurzfristiger Momentum-Schub, aber schwaches 50T-Momentum (+9.3%) suggeriert keine starke Trenddynamik. Kein GWS-Signal. Technisches Warnsignal: Verlust $60 (50T-Unterstützung) wäre Trendumkehr-Signal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- Bull: Wärmepumpen-Boom, vollständige Synergien, Margin 12%+. Annahme EPS ~$6 × 25x = $150. Kursziel $130–$175.
-- Base: Moderate Integration, Margin 9–10%. Annahme EPS ~$4,50 × 22x = $99. Kursziel $85–$115.
-- Bear: Strukturschwäche Europa, Schuldenabbau zieht sich. Annahme EPS ~$2,50 × 18x = $45. Kursziel $35–$55.
+**Bull ($100–$150):** Viessmann-Synergien vollständig; EU-Wärmepumpen-Boom; DataCenter-Cooling-Segment auf $3 Mrd. Revenue; Op Margin 12%; EPS $5.50 × 24x.
 
-Entscheidende Variable: Viessmann-Synergiegeschwindigkeit und europäische Wärmepumpen-Marktentwicklung.
+**Base ($60–$90):** Viessmann moderat integriert; organisches Wachstum 4% p.a.; EPS $3.50 × 22x.
+
+**Bear ($25–$45):** Viessmann-Fehlinvestment; EU-Regulation-Reversal; HVAC-Zyklus-Einbruch; EPS $2 × 14x.
+
+Entscheidende Variable: EU-Wärmepumpen-Regulierung und Viessmann-Synergie-Lieferung bis FY27.
 
 ## 11. PROFI-FAZIT
 
-CARR ist ein Post-Akquisitions-Restrukturierungsfall mit strukturell interessantem Wärmepumpen-Narrativ — auf aktuellem Niveau ohne asymmetrischen Edge. Geeignet für geduldige Value-Investoren mit 3-4 Jahres-Horizont. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (+1,4% EV). Einstieg bei Rücksetzer unter $60 oder nach bestätigter Synergielieferung attraktiver. Direkte Peers: Trane Technologies (TT) — höhere Margen; Lennox International (LII) — US-fokussiert. Peer-Multiples nicht im Datensatz.
+EV nahezu neutral (+0.3%) — kein asymmetrischer Edge auf aktuellem Niveau. CARR ist ein Qualitäts-Industrial mit zwei interessanten strukturellen Themen (Dekarbonisierung + DataCenter-Cooling), aber aktuell durch Viessmann-Integration gebremst. Kein Momentum-Play, kein Deep Value — ein geduldiger Übergangsfall. Einstieg bei Rücksetzern auf $60–$65 würde das Chance-Risiko-Verhältnis verbessern. Geeignet für ESG-orientierte Langfristinvestoren und Industriesektor-Diversifizierung. Peers: **Trane Technologies (TT)** als Premium-HVAC-Compounder mit besseren Margen; **Johnson Controls** für Building-Automation-Exposure — Peer-Multiples nicht im Datensatz.
 
-- Qualität: 2/5
+- Qualität: 3/5
 - Wachstum: 2/5
 - Bewertung: 3/5
 - Katalysator: 3/5
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
+| Qualität | 3/5 |
 | Wachstum | 2/5 |
 | Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -31.1% |
+| EV-Upside | N/A |
 
-**Verdict: WATCH (40/100)**
+**Verdict: WATCH (54/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

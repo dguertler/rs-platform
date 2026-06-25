@@ -1,96 +1,99 @@
 # AMAT — KI-Aktienbewertung
 
-**Applied Materials, Inc.** · Technology · 12.06.2026 · Signal: GWS Breakout 3/3
+**Applied Materials, Inc.** · Technology · 25.06.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 453.01 |
-| Market Cap | $359.67 Mrd. |
-| Forward PE | 28.02 |
+| Kurs | 617.11 |
+| Market Cap | $489.96 Mrd. |
+| Forward PE | 37.87 |
 | Revenue (TTM) | $29.02 Mrd. |
 | Gross Margin | 49.0% |
 | ROE | 39.7% |
-| RS-Score | 192.4 |
+| RS-Score | 199.5 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: Fundamental-Snapshot vom 08.06.2026 (Kursstand 05.06.: $453,01) liegt vor der jüngsten Kursbewegung — der Kurs sprang am 11.06. um +11,2% auf $552,64 (+22% über Snapshot). Konfidenz der Bewertungsaussagen reduziert; Auslöser aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen. Applied Materials ist der breiteste Wafer-Fab-Equipment-Anbieter der Welt — Deposition, Etch, Implant, Inspektion, Packaging. Die Story ist nicht ein einzelner Prozessschritt, sondern die Materialwissenschafts-Plattform: Jede Architektur-Transition (Gate-All-Around, Backside Power, Advanced Packaging/HBM) erhöht die Zahl materialintensiver Schritte — AMATs adressierbarer Markt wächst pro Wafer. Umsatz +11,4% YoY auf $29,0 Mrd. — solide, aber klar langsamer als Lam (+23,8%): weniger Memory-Hebel, mehr Breite. Der Markt hat die Aktie binnen sechs Monaten um +87% neu bepreist; mit dem Sprung über das Analyst-Konsensziel ($511 — Sentiment-Indikator, kein Ceiling) ist die Neubewertung der Plattform-These weitgehend vollzogen.
+Applied Materials ist der grösste Wafer-Fab-Equipment-Anbieter der Welt und profitiert gleichzeitig von drei simultanen Superzyklen: Gate-All-Around-Transistorübergang, HBM-Kapazitätsexpansion und Advanced-Packaging-Skalierung. Im Gegensatz zu LRCX ist AMAT breiter diversifiziert — die Semiconductor Systems Division deckt nahezu jeden Prozessschritt ab. Revenue TTM $29 Mrd. (+11%) und 49% Gross Margin sind Ausdruck struktureller Preismacht. Kritische Beobachtung: Analyst-Konsens $527 liegt 14% unter dem aktuellen Kurs — die Rally wurde fundamental nicht vollständig modelliert. AMAT ist kein teures Momentum-Play, sondern eine fundamentale AI-Infrastruktur-Wette mit starker Bilanzqualität.
 
 ## 2. GESCHÄFTSMODELL
 
-- Breitestes WFE-Portfolio: Deposition (Marktführer), Etch, Ionen-Implantation, CMP, Inspektion, Advanced Packaging — ein Haus für fast jeden Prozessschritt
-- Ausgewogenere Endmarkt-Mischung als reine Memory-Plays: Foundry/Logic dominiert, Memory als zyklischer Verstärker
-- AGS (Applied Global Services): Service, Ersatzteile, Upgrades auf riesiger Installed Base — wiederkehrender, margenstabiler Sockel
-- Architektur-Transitionen (GAA, Backside Power Delivery, HBM-Stacking) erhöhen Materials-Engineering-Intensität pro Wafer — struktureller Volumentreiber
-- Display-Segment als kleines, zyklisches Anhängsel
-- Operativer Hebel: Bruttomarge 49%, operative Marge 31,9% am Zyklushoch
-- Kundenkonzentration: TSMC, Samsung, Intel und große Memory-Hersteller dominieren das Auftragsbuch
-- D/E 30,4%, Dividende 0,47% plus Buybacks — aktionärsfreundliche Kapitalallokation
+- Semiconductor Systems: ~75% Revenue — CVD, Etch, Ion Implant, CMP, Inspection; breiteste Prozessabdeckung im WFE-Sektor
+- Applied Global Services (AGS): ~22% Revenue — Equipment-Upgrades, Spare Parts, Service-Verträge; höchste Margen, stabilster Zyklusdämpfer
+- Display and Adjacent: ~3% Revenue — LCD/OLED-Equipment; Nebengeschäft mit rückläufigem Trend
+- Gate-All-Around: AMAT ist führender CVD/ALD-Anbieter für kritische High-K/Metal-Gate-Schichten — struktureller Rückenwind FY2026–2028
+- Advanced Packaging (Hybrid Bonding, TSV): wachsendes Segment, direkt KI-getrieben
+- China-Revenue: ~28–30% — Export-Control-Eskalation ist Hauptrisiko
+- Revenue TTM $29 Mrd., +11% YoY; FCF $3.0 Mrd.; ROE 40%
+- AGS als Recurring-Revenue-Anker ist echter Differentiator zu reinen Equipment-Playern
 
 ## 3. BULL CASE
 
-GAA- und Backside-Power-Rampen bei TSMC/Samsung/Intel laufen parallel zum HBM/Advanced-Packaging-Ausbau — AMATs Plattformbreite monetarisiert jede dieser Transitions gleichzeitig. Margennachhaltigkeit begründbar: Deposition-Führerschaft, wachsender AGS-Service-Anteil (vertraglich gebunden, wiederkehrend), Switching Costs qualifizierter Prozesse; operative Marge kann strukturell über dem historischen Mittel (~25%) bleiben, Richtung 32–34%. FY28-EPS $22 (Annahme, kein Konsens: +36% kumuliert vs. Forward-EPS $16,17) × 30x = $660. Kursziel-Bandbreite 620–700 USD. Eintrittswahrscheinlichkeit: 20%.
+Gate-All-Around Vollanlauf bei TSMC/Intel/Samsung 2025–2027 erhöht AMAT-Equipment-Inhalt pro Wafer um 25–35%. HBM4-Kapazitätsausbau treibt CVD/ALD-Intensität weiter. AGS wächst auf >$8 Mrd. als Recurring-Revenue-Anker. Strukturelle Margennachhaltigkeit: Service-Mix-Verschiebung auf >25% Revenue bei strukturell höheren Margen als Systems-Segment, begründet durch proprietäre Prozessqualifikation und Switching Costs. Annahme (kein Konsens): FY27 EPS ~$22 × 32x = $704. Kursziel Bull: **$650–$760** (Midpoint $705). Eintrittswahrscheinlichkeit: **25%**.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: WFE-Markt wächst weiter, aber AMATs +11,4% Umsatzwachstum zeigt — die Beschleunigung findet woanders (Memory) statt. EPS wächst Richtung $17 (leichte Aufwärtsrevision vs. Forward-EPS $16,17 aus Snapshot-Forward-PE 28x); Multiple 28–32x ergibt 475–545 USD — unter dem aktuellen Kurs von $552. Der Sprung vom 11.06. hat das Base-Szenario vorweggenommen. Eintrittswahrscheinlichkeit: 45%.
+WFE-Markt wächst moderat auf $115–120 Mrd. FY27. AMAT hält ~22% Share. China-Exposure stabilisiert sich auf aktuellem Niveau. Revenue $32–34 Mrd. FY27 mit moderater Margin-Verbesserung durch AGS-Mix. Annahme (kein Konsens): FY27 EPS ~$18 × 32x = $576. Kursziel Base: **$520–$640** (Midpoint $580). Eintrittswahrscheinlichkeit: **55%**.
 
 ## 5. BEAR CASE
 
-Auslöser: Foundry-Capex-Pause (TSMC verschiebt Fab-Ausrüstung), Memory-Zyklus kippt, China-Bestellungen fallen durch verschärfte Exportkontrollen weg — drei Endmärkte schwächeln gleichzeitig. Risikodimensionen: Kundenkonzentration — wenige Foundry-/Memory-Kunden stellen den Großteil der Bestellungen (Anteile nicht im Datensatz). Geopolitik/China — China war zuletzt größter Einzelmarkt vieler WFE-Anbieter; weitere Exportkontroll-Runden sind das zentrale exogene Risiko (China-Anteil nicht im Datensatz). Lieferkette — breite eigene Fertigung, kein Foundry-Single-Source-Risiko. Verwässerung — SBC/Aktienanzahl nicht im Datensatz, auf Datenbasis nicht beurteilbar; historisch Netto-Käufer eigener Aktien. Regulierung/Recht — Exportkontrollen; dazu in der Vergangenheit aufsichtsrechtliche Untersuchungen zu China-Lieferungen (Status nicht im Datensatz). Im Bear-Fall: EPS $13 × 20x (historisches Zyklus-Trough-Multiple) = $260. Kursziel-Bandbreite 260–320 USD. Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Ausweitung US-Export-Controls auf CVD/ALD-Equipment für China — direkt 28-30% Revenue betroffen. Simultane Hyperscaler-Capex-Pause verzögert Gate-All-Around-Investitionen 12–18 Monate. Kundenkonzentration: TSMC, Samsung, SK Hynix, Intel, Micron als Top-5 — Synchronized Capex-Cut möglich. Geopolitik: China-Revenue-Ban wäre direkter $8 Mrd. Verlust. Foundry-Abhängigkeit: kein Single-Source-Risiko. Verwässerung: SBC-Trend nicht verfügbar. Regulierung: Antitrust-Sensitivität bekannt (DOJ blockierte AMAT/KLAC-Merger 2019). Annahme: FY27 EPS ~$9 × 25x = $225. Kursziel Bear: **$190–$260** (Midpoint $225). Eintrittswahrscheinlichkeit: **20%**.
 
-**Summe: 20% + 45% + 35% = 100%**
+**Summe: 25% + 55% + 20% = 100%**
 
-**Erwartungswert:** EV = 0,20 × 660 + 0,45 × 510 + 0,35 × 290 = $463 — implizites Downside vs. aktuellem Kurs ($552,64): −16%.
+**Erwartungswert:** EV = 0.25 × $705 + 0.55 × $580 + 0.20 × $225 = $176.25 + $319.00 + $45.00 = **~$540 — implizites Downside vs. aktuellem Kurs ($617): −12.5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 39,7% stark, durch Buybacks begünstigt, aber auch normalisiert solide (>25%). Bruttomarge 49%, operative Marge 31,9%, Nettomarge 29,3% — Zyklushoch, historisches Mittel liegt tiefer. Auffällig: FCF nur $3,04 Mrd. bei $29 Mrd. Umsatz (10,5% FCF-Marge) gegenüber 29,3% Nettomarge — Working-Capital-Aufbau oder Capex-Spitze plausibel, aus den Daten nicht abschließend auflösbar; der FCF-Wert fließt daher nicht primär in die Bewertung ein, stattdessen EPS-basierte Betrachtung. D/E 30,4% unkritisch. Echter Burggraben: Plattformbreite + AGS-Installed-Base — Kunden konsolidieren Lieferanten, AMAT ist überall qualifiziert. 
+ROE 40% — strukturell nachhaltig durch AGS-Service-Anteil. Gross Margin 49% — Top-Tier für diversifizierten Equipment-Anbieter. Op Margin 32%, Net Margin 29% — ausgezeichnet. FCF $3.0 Mrd. bei $29 Mrd. Revenue (10% FCF-Marge). D/E 30.4x — Absolute-Debt-Daten nicht verfügbar; bei diesen Cashflows strukturell manageable. Burggraben: Prozessqualifikation bei allen führenden Foundries ist 2–3 Jahre aufzubauen. AGS-Recurring-Revenue ist echter wirtschaftlicher Wertanker.
 
 ## 7. BEWERTUNG
 
-Snapshot-Multiples (Forward-PE 28x, Trailing 42,5x, P/B 15x) sind überholt — auf $552,64 umgerechnet: Forward-PE ~34,2x, Trailing ~51,9x, P/B ~18,4x, Market Cap ~$439 Mrd. Für einen Zykliker mit 11% Umsatzwachstum ist das historisch teuer (AMAT handelte über weite Strecken bei 15–20x Forward). Normalisierter Zyklus-FCF (Annahme $5–6 Mrd. — TTM-Wert verzerrt, siehe Abschnitt 6): implizites Multiple 73–88x normalisierter FCF. Rückrechnung "Was preist der Kurs ein?": $552 bei Exit-Multiple 22x in 5 Jahren erfordert ~$25 EPS — +55% kumuliert vs. Forward-EPS, also ~9–10% EPS-Wachstum p.a. durchgehend ohne Abschwung. Plausibel nur im Superzyklus-Szenario — ambitioniert. Eher strukturierte Wette auf die Plattform-These als echtes Upside.
+Forward PE 37.9x — günstiger als LRCX, aber für diversifizierten WFE-Leader historisch teuer. P/B 20.5x. Was preist der Kurs ein? $617 bei $29 Mrd. Revenue und 32% Op Margin: ~8% Revenue-Wachstum p.a. über 5 Jahre nötig — plausibel, aber ohne Sicherheitspuffer. Normalisierter FCF über Vollzyklus (geschätzt $1.5–2.5 Mrd.): impliziert 195–320x normalisierten FCF-Multiple. Analyst-Konsensziel $527.20 — Rally wurde nicht modelliert; als Sentiment-Indikator verwenden.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 192, alle Fenster positiv (5T +20,3%, 6M +86,8%), Allzeithoch. Der +11,2%-Tagessprung am 11.06. — Auslöser aus den vorliegenden Daten nicht verifizierbar. Kurs über Konsensziel: Analysten müssen nachziehen oder die Aktie ist vorgelaufen. Hypothese, nicht datenbasiert: Sektor-Rotation in Semicap-Werte; Momentum-Fonds dominieren den Grenzkäufer. Enttäuschungsrisiko: RSI 76 + volle Bewertung + überholtes Konsensziel = wenig Puffer für eine schwache Guidance.
+6M +113%: Massive institutionelle Rotation in AI-Infrastructure-Equipment. Short-Float-Daten nicht verfügbar. Hypothese (nicht datenbasiert): AMAT ist Long-Only-Liebling im WFE-Sektor — breite Diversifikation macht es zur defensiveren WFE-Wahl vs. LRCX. Enttäuschungsrisiko: Guidance unter WFE-Markterwartung würde 15–20% Korrektur auslösen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 aktiv. Kurs $552,64 auf Allzeithoch, +31% über SMA50 ($423), +80% über SMA200 ($307). RSI(14) 76 — überkauft. Unaufgefülltes Gap vom 11.06. ($497 → $553). 20T +26%, 50T +33,7%, 6M +86,8% — Momentum stark und breit. Warnsignale: Schluss unter $497 (Gap-Füllung), hartes Signal bei Wochenschluss unter SMA50 $423.
+RS-Score 199.5, Rang 8 NASDAQ-100 — starkes Momentum nahe Peer-Group-Spitze. 5T +0.9% (Konsolidierung), 10T +16%, 20T +34%, 50T +36%, 6M +113%. Gesunde Trendstruktur ohne kurzfristige Überhitzung. Kein GWS-Signal. Momentum fundamental gestützt durch Gate-All-Around + HBM-Narrativ. Technisches Warnsignal: Verlust $520 (vorherige Breakout-Basis) wäre strukturelle Trendwarnung.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($800–950):** Materials-Engineering-Superzyklus; EPS Richtung $28–32, Multiple hält 28–30x.
+**Bull ($800–$1.100):** Gate-All-Around + HBM4 + Hybrid-Bonding simultan; Service-Anteil auf 30%; EPS $28 × 35x.
 
-**Base Case ($550–650):** WFE wächst mit Halbleitermarkt ~mittlere einstellige Raten; EPS ~$22–25, Multiple normalisiert 24–28x — von heute aus kaum Upside.
+**Base ($350–$600):** WFE normalisiert; Marktführerschaft gehalten; EPS $14–18 × 30x.
 
-**Bear Case ($250–350):** Klassischer WFE-Abschwung plus China-Restriktionen; EPS ~$13–15, Multiple 18–22x.
+**Bear ($120–$200):** China-Export-Ban + Capex-Einbruch; normalisiertes EPS $6 × 22x.
 
-Entscheidende Variable: Foundry/Logic-Capex-Kontinuität — AMATs Breite schützt relativ, aber nicht absolut.
+Entscheidende Variable: Timing und Ausmass der Gate-All-Around-Adoption bei TSMC N2-Nachfolge.
 
 ## 11. PROFI-FAZIT
 
-AMAT ist der Qualitäts-Blue-Chip unter den Semicap-Werten — breiteste Plattform, Service-Sockel, sauber finanziert. Aber: Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV $463 vs. Kurs $552, −16%). Nach +22% über Snapshot-Kurs und RSI 76 ist das hier kein Einstieg, sondern ein Fall für Gewinnmitnahme-Disziplin: Bestandspositionen mit Trailing-Stop laufen lassen, Neueinstieg erst nach Konsolidierung Richtung $480–500. Einordnung: zyklischer Qualitäts-Trade, für Buy-and-Hold nur zu deutlich tieferen Multiples. Positionsgröße max. 2–3%. Peers: **Lam Research (LRCX)** ist das schärfere Memory-Instrument mit höherem Wachstum (+23,8% vs. +11,4%), **ASML** das tiefere Monopol (EUV) — auf Snapshot-Basis war AMAT mit 28x Forward der günstigste der drei (LRCX 38,2x, ASML 34,4x); alle drei Snapshots sind durch die Rally überholt, relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV −12.5%). AMAT ist das qualitativste Breitband-Instrument auf den WFE-Superzyklus — diversifizierter als LRCX, defensiver als reine Etch-Player, mit echtem Recurring-Revenue-Anker. Kein Compounder, aber ein Premium-Zyklus-Asset mit langfristiger Marktführerschaft. Einstieg bei Rücksetzern Richtung $520–$550 bietet besseres Risk/Reward. **LRCX** als direkter Peer mit höherem NAND-Hebel; **KLAC** mit defensiverer Service-Lastigkeit — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ.
 
 - Qualität: 4/5
-- Wachstum: 3/5
-- Bewertung: 2/5 (vorläufig, Datenstand)
-- Katalysator: 3/5
+- Wachstum: 4/5
+- Bewertung: 2/5
+- Katalysator: 4/5
+
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 3/5 |
+| Wachstum | 4/5 |
 | Bewertung | 2/5 |
-| Katalysator | 3/5 |
+| Katalysator | 4/5 |
+| EV-Upside | N/A |
 
-**Verdict: HOLD (60/100)**
+**Verdict: HOLD (66/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
