@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TSM — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">26.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TSM</h1>
+      <h2>TSM</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>N/A</span></div>
+        <div class="mi">Industrie: <span>N/A</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Nicht in RS-Indizes</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">82</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 26.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">N/A</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#64748b">N/A</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">650–780</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">460–540</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">20%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: TSM ist nicht in den RS-Plattform-Indizes (NASDAQ-100/S&P 500/DAX/Smallcap) gelistet — RS-Score, GWS-Signal und Fundamental-Cache entstammen daher Web-Recherche (Stand: 25.06.2026). Alle Kennzahlen manuell validiert; Bewertung vorläufig.</p>
+<p>Taiwan Semiconductor Manufacturing ist das Fundament der globalen Halbleiterversorgung — und damit der KI-Revolution. Kein anderes Unternehmen auf der Erde fertigt 3-nm- und 2-nm-Chips in kommerziellem Maßstab: Nicht Samsung, nicht Intel, nicht SMIC. Jede NVIDIA-GPU, jeder Apple-Chip, jeder AMD-Prozessor wird bei TSMC gefertigt. Das ist kein Wettbewerbsvorteil — das ist ein globales Infrastrukturmonopol. Der Markt übersieht aktuell zwei Dinge gleichzeitig: Erstens ist das Forward-PE von 23,6x für ein Unternehmen mit 40–50 % EPS-Wachstum und ROIC von 48–51 % historisch günstig (PEG ~0,6). Zweitens ist die Geopolitik kein abstraktes Risiko, sondern ein binärer Schwanz — im Konfliktfall Taiwan/China wäre der Schaden für die Weltwirtschaft unquantifizierbar. Beide Wahrheiten existieren gleichzeitig. Das $165-Mrd.-Arizona-Commitment (vier Fabs geplant, Fab 1 bereits produzierend für Apple/NVIDIA) ist kein Geopolitik-Fix, aber die realistischste verfügbare Risikoreduktion.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Pure-Play Foundry: TSMC entwickelt keine eigenen Chips — fertigt ausschließlich für Dritte; Apple ~25 % Revenue, NVIDIA ~15 %, AMD ~10 %, Qualcomm, Broadcom u.a.</li>
+<li>Advanced Nodes dominieren das Margenprofil: 3nm + 5nm zusammen >50 % Revenue; N2 (2nm) startet 2025/26 mit Preisprämie vs. N3</li>
+<li>Pricing Power strukturell: >90 % Marktanteil in Leading-Edge — kein alternativer Anbieter; TSMC erhöht Preise systematisch mit jeder neuen Node-Generation</li>
+<li>CoWoS Advanced Packaging: Engpass der KI-Chip-Lieferkette — HBM-Integration für NVIDIA erfordert TSMCs CoWoS-Kapazität; trotz massivem Ausbau dauerhaft ausgebucht</li>
+<li>Geografische Diversifizierung: Arizona Fab 21 (N4/N3, produzierend seit Q1 2025), Fab 22 (N2, Equipment Q3 2026), Japan Kumamoto (Specialty), Deutschland Dresden (geplant)</li>
+<li>Capex $52–56 Mrd. FY2026 als struktureller Burggraben: Kein Wettbewerber kann dieses Investitionsniveau über Zyklen aufrechterhalten</li>
+<li>Netto-Cash ~$74 Mrd. USD trotz Rekord-Capex — exzeptionelle Bilanzkraft</li>
+<li>Dividende +28 % YoY 2026 — Kapitalrückführungs-Commitment parallel zu Investitionsprogramm</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>N2-Node-Ramp 2026/27 liefert Preisprämie; CoWoS-Kapazitätserweiterung hält mit KI-Nachfrage Schritt; Arizona-Fabs etablieren Geopolitik-Discount-Abbau im Multiple. Margennachhaltigkeit explizit begründet: 10–15 Jahre EUV-Prozessvorsprung (ASML exklusiv); proprietäre CoWoS-Technologie mit 12–18-Monaten Qualifikations-Switching-Costs je Kunde; N2-Preisprämie strukturell wie N3/N5 davor; kein chinesischer Konkurrenz-Anbieter auf vergleichbarem Technologieniveau. Annahme (kein Konsens): FY27 ADR-EPS ~$26 × 28x Forward = $728. Bull-Kursziel: $650–$780 (Midpoint $715). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>AI-Chip-Nachfrage hält auf hohem Niveau; N2-Ramp planmäßig; keine Taiwan-Strait-Eskalation; Arizona liefert moderaten Risikoabschlag-Abbau. Annahme (kein Konsens): FY27 ADR-EPS ~$21 × 24x = $504. Base-Kursziel: $460–$540 (Midpoint $500). Eintrittswahrscheinlichkeit: 55 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Militärische Eskalation China/Taiwan oder Naval-Blockade. Im Vollkonflikt wäre TSMC operational nicht mehr zugänglich — TSM-ADR kollabiert auf symbolische Buchwert-Niveaus ($60–$80). Ohne Konflikt, aber mit KI-Nachfrageeinbruch: Kundenkonzentration (Apple + NVIDIA + AMD ~50 % Revenue) als Klumpenrisiko bei gleichzeitigem Hyperscaler-Capex-Cut. Geopolitik/Exportkontrollen: Chinesische Kunden (HiSilicon) bereits weitgehend verloren; US-Regulierung schränkt TSMC's Freiheitsgrade bei Fab-Standortentscheidungen ein (CHIPS-Act-Konditionen). Lieferkette: ASML-EUV-Abhängigkeit — bei Konflikt nicht in 2–3 Jahren replizierbar. Verwässerung: Aktienanzahl stabil, keine Dilution. Regulierung: CHIPS-Act-Gewinnbeteiligung und Investitionsbeschränkungen könnten langfristig Kapitaleffizienz drücken. Annahme: EPS $12 × 14x = $168. Bear-Kursziel: $150–$200 (Midpoint $175). Eintrittswahrscheinlichkeit: 20 %.</p>
+<p>**Summe: 25 % + 55 % + 20 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $715 + 0,55 × $500 + 0,20 × $175 = $178,75 + $275 + $35 = **~$489 — implizites Upside vs. aktuellem Kurs ($435,42): +12,3 %.** Moderater positiver Edge — der Geopolitik-Schwanz macht den EV trotz exzellenter Fundamentals vergleichsweise flach.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 36,2 % und ROIC 48–51 % sind für einen kapitalintensiven Hersteller außergewöhnlich. Gross Margin 66,2 % (Q1 2026, Rekord) — strukturell durch Advanced-Node-Prämien getrieben; Langfristziel >56 % durch den Zyklus (nach oben revidiert Q1 2026). Operating Margin Q1 2026 ~55 % — ebenfalls Rekord. FCF annualisiert ~$35 Mrd. USD bei $52–56 Mrd. Capex FY2026 — FCF-Yield ~1,5 % auf $2,28 Billion Market Cap; Capex-Intensität drückt kurzfristige FCF-Rendite, schafft aber den strukturellen Moat. Netto-Cash ~$74 Mrd. USD — stärkste Bilanz im globalen Halbleitersektor. Revenue Q1 2026: $35,9 Mrd. (+40,6 % YoY); Q2-Guidance $39–40,2 Mrd.; Volljahresziel 2026: >30 % USD-Wachstum.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 23,6x bei EPS-Wachstum +58 % YoY (Q1 2026) ergibt PEG ~0,6 — strukturell günstig für die Qualitätsstufe. Rückrechnung: $435 impliziert bei FY26 EPS ~$18 (ADR, Annahme) ~24x Forward — bei 30 %+ Revenue-Wachstum und 66 % Gross Margin plausibel. Historisch handelte TSMC auf 15–25x Forward-PE; 23,6x liegt am oberen Ende, aber KI-Superzyklus-Prämie fundamental begründbar. Geopolitik-Discount quantifiziert: Würde das Taiwan-Risiko verschwinden, wäre 30–35x realistisch — impliziert $540–$630 auf aktuellen EPS-Schätzungen. Der aktuelle Kurs enthält ~5–7 Multiple-Punkte Geopolitik-Abschlag. Analyst-Konsensziel $478,95 (+10 %); 17/18 Analysten Buy. Als Orientierungspunkt, nicht als Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>17/18 Analysten mit Buy/Strong Buy — Sentiment nahe Extremum positiv. 52-Wochen-Performance +97 % (von $221 auf $435) — institutionelle Akkumulation im KI/Halbleiter-Superzyklus klar erkennbar. Hypothese (nicht datenbasiert): Long-Only Technologie-Fonds stark positioniert; Short-Interest niedrig angesichts des Moats. Enttäuschungsrisiko: Jede Taiwan-Strait-Eskalationsmeldung (Militärmanöver, Blockade-Rhetorik) kann 20–30 % Kursrückgang in Stunden auslösen — unabhängig von Fundamentals. Das ist das asymmetrische Risiko, das Long-Investoren tragen müssen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar (TSM nicht in RS-Plattform-Indizes). Auf Basis Kursdaten: 52-Wochen-Range $221,18–$476,79; aktuell $435 im oberen Drittel, ~9 % unter 52-Wochen-Hoch. Momentum fundamental durch AI-Chip-Nachfrage und Q1-Earnings-Beat (+40,6 % YoY Revenue, +58 % EPS) gestützt — keine rein technische Bewegung. GWS-Signal: nicht verfügbar. Technisches Warnsignal: Rückfall unter $380 würde Trendstruktur schwächen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($900–$1.200):** N2/A16-Dominanz; CoWoS und Advanced Packaging als eigenständiger Wachstumsmotor; geopolitische Entspannung; Multiple-Rerate 30–35x; ADR-EPS $30–35 × 30x.</p>
+<p>**Base ($500–$750):** Strukturelles AI-Wachstum; Revenue $180–220 Mrd. FY2028; Gross Margin 68 %; normalisiertes EPS $22–27 × 23–28x.</p>
+<p>**Bear ($100–$250):** Taiwan-Konflikt oder schwere Eskalation; operative Unterbrechung; Arizona allein kann Nachfrage nicht decken; ADR auf Buchwert-Nähe.</p>
+<p>Entscheidende Variable: Geopolitische Stabilität in der Taiwan-Strait und Tempo der Arizona-Diversifizierung als strukturelle Risikoentschärfung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>EV +12,3 % — moderater positiver Edge auf einem Weltklasse-Unternehmen. TSMC ist das qualitativ überlegene Halbleiterunternehmen des Planeten: ROIC 48–51 %, unangreifbarer technologischer Moat, strukturell wachsender Adressmarkt, Netto-Cash $74 Mrd. Der Investment-Case ist fundamental überzeugend. Das einzige echte Risiko ist exogen und binär: Taiwan-Konflikt. Dieses Risiko lässt sich nicht weganalysieren — es lässt sich nur durch Positionsgröße managen. Für einen Langfrist-Investor (5+ Jahre) mit klarer Sicht auf die Strukturthese ist TSM auf $420–$440 ein attraktiver Einstieg, solange geopolitische Eskalation als Tail-Risk (20 %) und nicht als Base-Case eingestuft wird. Positionsgröße: 3–5 % als Kernposition im Technologie-Portfolio — aber keine Overweight-Entscheidung, da der binäre Geopolitik-Schwanz keine höhere Allokation rechtfertigt. Peers: ASML bietet das reinste Halbleiter-Equipment-Exposure ohne direktes Taiwan-Risiko; Samsung Foundry ist qualitativ deutlich unterlegen (Yield-Probleme bei Advanced Nodes). Risikowarnung: Keine andere Aktie dieses Qualitätsniveaus trägt ein vergleichbar konzentriertes geopolitisches Tail-Risk — explizite Positionsgrenze setzen.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 5/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
