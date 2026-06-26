@@ -10,6 +10,7 @@ from fetch_tickers import fetch_sp500, detect_index_changes
 
 _SP500_FALLBACK_2 = [
     # Technology (nicht im QQQ)
+    "INTC",
     "ORCL","CRM", "IBM", "ACN", "FICO","GLW", "HPQ", "HPE", "STX", "WDC",
     "NTAP","KEYS","TER", "SWKS","QRVO","AKAM","CDW", "GDDY","VRT", "LDOS",
     "TDY", "TRMB","PAYC","IT",  "JNPR","JKHY","ANET","PTC", "EPAM","DXC",
