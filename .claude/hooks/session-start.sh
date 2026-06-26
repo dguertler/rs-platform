@@ -15,8 +15,8 @@ pip install --quiet \
 
 # ── ffmpeg + espeak-ng (für moviepy, Whisper-Untertitel, TTS-Fallback) ─────────
 if ! command -v ffmpeg &>/dev/null || ! command -v espeak-ng &>/dev/null; then
-  sudo apt --fix-broken install -y --quiet
-  sudo apt-get install -y --quiet ffmpeg espeak-ng
+  sudo apt-get update -qq --allow-unauthenticated 2>/dev/null || true
+  sudo apt-get install -y --quiet --fix-missing ffmpeg espeak-ng 2>/dev/null || true
 fi
 
 # ── PYTHONPATH setzen ──────────────────────────────────────────────────────────
