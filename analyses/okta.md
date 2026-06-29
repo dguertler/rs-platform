@@ -1,6 +1,6 @@
 # OKTA — KI-Aktienbewertung
 
-**Okta, Inc.** · Technology · 21.06.2026 · Signal: Triple Breakout
+**Okta, Inc.** · Technology · 29.06.2026 · Signal: None
 
 | Kennzahl | Wert |
 |---|---|
@@ -10,75 +10,94 @@
 | Revenue (TTM) | $3.00 Mrd. |
 | Gross Margin | 77.4% |
 | ROE | 3.7% |
-| RS-Score | 83.0 |
+| RS-Score | 126.1 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+# OKTA — Okta, Inc.
+**Sektor:** Technology · Software - Infrastructure
+**Kurs:** $117,81 · **RS-Score:** 126 · **RS-Rank:** #27
+**GWS-Ampel:** ⚪ kein Signal
+**Szenarien (12–18 Monate):** Bull $155–$185 (25 %) · Base $110–$135 (50 %) · Bear $65–$85 (25 %) · EV ~$127
+
 ## 1. INVESTMENT-CASE
 
-Okta ist der Marktführer im Identity-and-Access-Management (IAM) — und befindet sich in einer kritischen Übergangsphase: vom wachstumsstarken SaaS-Startup zur profitablen Unternehmensplattform. Revenue-Wachstum 11,2% YoY ist eine deutliche Verlangsamung gegenüber den 40–50%-Wachstumsjahren 2020–2022, aber der Trend zeigt erste Stabilisierung. Net-Margin 8,2% GAAP ist ein Durchbruch — Okta war jahrelang tiefrot. Der Kern: Identity ist keine optionale IT-Ausgabe mehr, sondern regulatorische und operative Pflicht. Zero-Trust-Architekturen (jeder User muss jederzeit verifiziert werden) machen IAM zum Fundament moderner Security-Stacks. Forward PE 27,5x ist für 11% Wachstum auf den ersten Blick teuer — die eigentliche Expansionsphase beginnt aber bei Non-GAAP operativen Margen: diese liegen strukturell bei >20%. Was der Markt nach dem Okta-Cyberangriff 2023 (Breach bei Support-System) weiterhin einpreist: Vertrauensschaden und Kundenabwanderung-Risiko — beides hat sich bisher als überschätzt erwiesen, aber die Narbe bleibt. 52W-Hoch $142, aktuell $117,81 — noch 17% unter Hoch, aber GWS 3/3 aktiv.
+Okta ist der Marktführer im Identity-as-a-Service-Segment — einem Infrastruktur-Layer, der durch Zero-Trust-Adoption und KI-getriebene Workload-Proliferation strukturell wächst. Der eigentliche Investment-Case ist nicht das aktuelle Wachstum von +11 % YoY, sondern die Kombination aus nachhaltiger FCF-Generierung ($978 Mio. bei $3 Mrd. Revenue = 33 % FCF-Marge) und einer Bewertungsarbitrage: Das Trailing-PE von 85x klingt teuer, ist aber irreführend — das Forward-PE von 27,5x und der FCF-Yield von ~4,8 % auf den aktuellen Kurs erzählen eine andere Geschichte. Was der Markt gerade unterschätzt: Okta hat nach dem Auth0-Integrations-Chaos 2022/2023 seinen operativen Turnaround weitgehend abgeschlossen. Die Operating Margin ist von negativen Werten auf +7,3 % gestiegen, mit klarer Trajektorie Richtung 15–20 %. Der 20T-Momentum von +30 % und 50T von +67 % signalisieren, dass institutionelle Investoren diesen Re-Rating-Prozess beginnen einzupreisen — aber die Fundamentals rechtfertigen noch weiteren Spielraum.
 
 ## 2. GESCHÄFTSMODELL
 
-- Workforce Identity Cloud: Single-Sign-On, MFA, Lifecycle Management für Mitarbeiter — Kernprodukt, hohe Retention
-- Customer Identity Cloud (CIAM, ehem. Auth0): Entwickler-Plattform für Kunden-Authentifizierung — schnellstes Wachstumssegment
-- Privileged Access Management (PAM): Hochsicherheits-Zugriff für IT-Admins — neues Expansionssegment
-- Identity Governance & Administration (IGA): Compliance-driven Markt, Enterprise-Pflicht
-- Subscription-Modell: >95% wiederkehrender Revenue — hohe Planbarkeit
-- NRR (Net Revenue Retention): >110% historisch — Kunden erweitern Nutzung
-- SBC-Belastung ~20% Revenue: erheblich, GAAP-Margen damit verzerrt; Non-GAAP-Bild deutlich positiver
-- Auth0-Akquisition ($6,5 Mrd., 2021): Goodwill-Last drückt GAAP-Ergebnis, strategisch wertvoll für CIAM
+- SaaS-basiertes Identity-Management: Workforce Identity (SSO, MFA, Lifecycle Mgmt.) und Customer Identity (CIAM via Auth0) — zwei separate Plattformen mit unterschiedlichen Käuferprofilen
+- Revenue-Modell: Subscription (~95 % des Revenue), Pricing pro User/Monat → natürlicher Upsell-Hebel bei Headcount-Wachstum der Kunden
+- Net Revenue Retention strukturell entscheidend: Expansion via neue Use Cases (Governance, Privileged Access, Device Trust) innerhalb bestehender Accounts
+- Gross Margin 77,4 % zeigt klassische Software-Ökonomie; operative Verbesserung von negativen Margen 2022 auf +7,3 % = echter Turnaround, nicht Accounting-Effekt
+- FCF-Marge 33 % deutlich über Operating Margin → SBC-adjustierte Profitabilität muss beobachtet werden, da SBC strukturell erhöht ist
+- Wettbewerbsposition: Microsoft Entra als Hauptkonkurrent im Enterprise-Segment — Okta hält Multi-Cloud-Neutralität als Differenzierungsmerkmal gegenüber MSFT-Lock-in
+- Debt/Equity 5,96x — hauptsächlich Wandelanleihen aus Wachstumsphase; refinanzierbar bei aktuellem FCF, aber Bilanz ist kein Komfortfaktor
+- Internationales Wachstum (<30 % Revenue) als ungenutzte Expansionskarte gegenüber US-gesättigterem Markt
 
 ## 3. BULL CASE
 
-Zero-Trust-Adoption beschleunigt; PAM und IGA-Segmente gewinnen schnell. CIAM durch AI-Agent-Authentication (jeder AI-Agent braucht Identity) neues strukturelles Wachstumsfeld. Annahme (kein Konsens): FY28-EPS Non-GAAP ~$7 × 35x ≈ GAAP-Implikation; vereinfacht Kursziel **$175–$210** auf Basis Revenue $3,5 Mrd. × 6x EV/Sales. Eintrittswahrscheinlichkeit: 25%.
+Zero-Trust-Mandate in Unternehmens-IT beschleunigen; Okta gewinnt Mid-Market gegen Microsoft durch Plattform-Neutralität. Revenue-Wachstum zieht auf 18–22 % an, Operating Margin erreicht 18–20 % bis FY27. Annahme (kein Konsens): FY27 FCF ~$1,5 Mrd. × 40x FCF-Multiple (gerechtfertigt bei 20 %+ Wachstum und Marktführerschaft) = $170. Bull-Kursziel: $155–$185 (Midpoint $170). Eintrittswahrscheinlichkeit: 25 %.
 
 ## 4. BASE CASE
 
-Wachstum stabilisiert bei 12–15% p.a.; Non-GAAP-Margen verbessern sich auf 25%; GAAP-Profitabilität hält. Annahme: FY27-EPS (GAAP) ~$4,50 × 28x = **$115–$140**. Aktuelles Kursniveau gut reflektiert. Eintrittswahrscheinlichkeit: 50%.
+Wachstum stabilisiert sich bei 12–15 % YoY; Operating Margin verbessert sich auf 12–14 % durch operative Hebel. FCF-Marge hält 30–33 %. Annahme (kein Konsens): FY27 FCF ~$1,2 Mrd. × 30x FCF-Multiple (gerechtfertigt bei 12–15 % Wachstum + Marktführerschaft) = $122. Base-Kursziel: $110–$135 (Midpoint $122). Eintrittswahrscheinlichkeit: 50 %.
 
 ## 5. BEAR CASE
 
-Auslöser: Microsoft Entra ID gewinnt massiv Marktanteile durch Office-365-Bündelung; zweiter Security-Breach erschüttert Kundenvertrauen dauerhaft; Wachstum fällt auf 5–8%. Annahme: FY27-EPS $2 × 20x = Kursziel **$38–$55**. Kundenkonzentration: diversifiziertes Kundenbasis (>19.000 Kunden), kein Einzelkunden-Konzentrationsrisiko. Geopolitik: Datensouveränität-Anforderungen in EU/DE erfordern lokale Instanzen — Kostenaufwand. Lieferkette: Cloud-basiert, keine klassische Lieferkette. Verwässerung: SBC 20% Revenue = strukturell bedeutendes Verwässerungsrisiko; Aktienanzahl wächst jährlich. Regulierung: DSGVO/NIS2-Compliance schafft Aufwand, aber auch Nachfrage. Eintrittswahrscheinlichkeit: 25%.
+Auslöser: Microsoft bündelt Entra aggressiver in M365-Enterprise-Agreements und verdrängt Okta aus Cost-Cutting-Wellen bei CIOs. Wachstum fällt auf 5–7 %, Churn steigt, Margenpfad bricht ein. Zusätzlich: SBC-Verwässerung belastet die GAAP-Profitabilität weiter, Wandelanleihen-Refinanzierung unter Druck.
 
-**Summe: 25% + 50% + 25% = 100%**
+- Kundenkonzentration: Kein einzelner Kunde >5 % Revenue (nicht im Datensatz exakt quantifizierbar, aber SMB/Mid-Market-Fokus impliziert niedrige Einzelkonzentration — strukturell positiv)
+- Geopolitik/Exportkontrollen: Kein Material-China-Exposure bekannt; SaaS-Identity-Software nicht unter OFAC/BIS-Kontrollen — geringes Risiko
+- Lieferketten-/Foundry-Abhängigkeit: Nicht relevant für SaaS-Geschäftsmodell
+- Verwässerung: SBC strukturell erhöht (historisch 15–20 % des Revenue) — bei Wachstumsstopp würde SBC-Belastung die GAAP-Marge massiv belasten; Aktienanzahl-Trend nicht im Datensatz
+- Regulierung: Datenschutz-Compliance (DSGVO, CCPA) als laufende Anforderung — Okta selbst Identity-Provider, daher Breach-Risiko mit Reputationsschaden (2022 Lapsus$-Vorfall als Referenz)
 
-**Erwartungswert:** EV = 0,25×$192,5 + 0,50×$127,5 + 0,25×$46,5 = $48,1 + $63,75 + $11,6 = **$123,5** — implizites Upside vs. aktuellem Kurs $117,81: **+4,8%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+Annahme: FY27 FCF ~$600 Mio. × 18x = $75. Bear-Kursziel: $65–$85 (Midpoint $75). Eintrittswahrscheinlichkeit: 25 %.
+
+**Summe: 25 % + 50 % + 25 % = 100 %**
+
+**Erwartungswert:** EV = 0,25 × $170 + 0,50 × $122 + 0,25 × $75 = $42,50 + $61 + $18,75 = **~$122 — implizites Upside vs. aktuellem Kurs ($117,81): +3,6 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrisch positiven Edge — der Erwartungswert liegt nur marginal über dem aktuellen Kurs.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Net-Margin 8,2% GAAP ist struktureller Wendepunkt nach Jahren mit Verlusten. ROE 3,7% durch Goodwill-Last (Auth0) gedrückt. Revenue-Wachstum 11,2% — Verlangsamung von Hochniveaus, aber Boden gefunden. Bilanz: Debt/Equity 6x durch Auth0-Akquisition — manageable. FCF strukturell positiv (Non-GAAP FCF-Marge >20%). Echter Burggraben: IAM ist tief in Enterprise-Prozesse integriert — Wechsel kostet Monate an Migration, Re-Zertifizierung aller User und Compliance-Nachweis. Switching Costs sind real und hoch.
+FCF $978 Mio. bei Revenue $3 Mrd. ist strukturell beeindruckend für ein Unternehmen in dieser Wachstumsphase — 33 % FCF-Marge ist Class-A Software. Operating Margin +7,3 % ist der sichtbare Teil, aber SBC-adjustiert liegt die reale Profitabilität niedriger. ROE 3,68 % und ROIC 3,64 % sind enttäuschend niedrig — Ergebnis der noch nicht vollständig amortisierten Auth0-Akquisitionskosten ($6,5 Mrd. 2021) und erhöhtem Goodwill. Gross Margin 77,4 % ist solide, aber im SaaS-Vergleich kein Ausreißer nach oben. Debt/Equity 5,96x ist das größte Bilanzrisiko — bei steigenden Zinsen oder Nachfrageabschwung könnte Refinanzierungsdruck entstehen. Revenue Growth +11,2 % zeigt Stabilisierung nach dem Post-Hack-Dämpfer, aber noch keine Reakzelerierung. Burggraben: Real vorhanden durch Identity-Sticky-ness (hohe Switching Costs), aber durch Microsoft herausgefordert.
 
 ## 7. BEWERTUNG
 
-Forward PE 27,5x für 11% Wachstum ist auf GAAP-Basis teuer. Non-GAAP bereinigt (~18–20x) ist fair. EV/Revenue: ~$20 Mrd. MCap / ~$2,7 Mrd. Revenue = 7,4x EV/Sales — für SaaS mit >95% Recurring-Revenue und 11% Wachstum vertretbar, kein Discount. Rückrechnung: Kurs $118 rechtfertigt Revenue-Wachstum ~13% für 3 Jahre bei 22% Non-GAAP-Marge und 28x Exit-Multiple — plausibel, knapp. Microsoft-Wettbewerbs-Risiko ist der größte Bewertungs-Abschlag.
+Forward-PE 27,5x auf Konsens-FY26-EPS — für ein SaaS-Unternehmen mit 33 % FCF-Marge und Marktführerschaft in wachsendem Segment nicht teuer. FCF-Yield 4,8 % bei $978 Mio. FCF und $20,5 Mrd. Market Cap ist attraktiver als optischer PE-Wert. Rückrechnung "Was preist der Kurs ein?": Bei $117,81 und Market Cap $20,5 Mrd. impliziert der Kurs bei 30x FCF-Multiple ein FY26-FCF von ~$683 Mio. — das liegt 30 % unter aktuellem TTM-FCF. Der Markt preist also entweder moderaten FCF-Rückgang oder sehr konservativ weiterhin negative GAAP-Ergebnisse ein. Das ist plausibel-konservativ, nicht ambitioniert — und erklärt das Momentum-Signal: erste Investoren erkennen, dass der FCF-Pfad nachhaltiger ist als die GAAP-Zahlen suggerieren. EV/Revenue bei ~6,8x ist fair für 11 % Wachstum + 33 % FCF-Marge.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 83, Rank #19 — mittleres bis starkes Momentum im NASDAQ-Universum. GWS 3/3 aktiv. 5T: -1,37%; 10T: -5,81% — kurzfristige Schwäche! 20T: +28,1%; 50T: +52,5% — starkes mittelfristiges Momentum. Kurs $117,81 vs. 52W-Hoch $142,35 — noch 17% Abstand. Hypothese (nicht datenbasiert): Cybersecurity-Themen-Fonds und Mid-Cap-Growth-Investoren; Short-Float nach 2023-Breach-Vertrauensverlust möglicherweise noch erhöht.
+Der 20T-Sprung von +30 % und 50T von +67 % deutet auf eine Neubewertungs-Rally hin, die von fundamentalen Revisionen (bessere Margen, solider FCF-Ausweis) getrieben wird. Hypothese, nicht datenbasiert: Die Aktie war in den letzten 12–18 Monaten bei vielen Growth-Investoren nach dem Sicherheitsvorfall 2022 und dem Auth0-Integrationschaos auf Vermeidungslisten — die aktuelle Rally dürfte teils durch Repositionierung von Underweight-Portfolios getrieben sein. Enttäuschungsrisiko: jede Guidance-Senkung oder erneuter Sicherheitsvorfall würde die fragile Vertrauensbasis sofort erschüttern. Der Analyst-Konsens ($119,70 Ø bei 43 Analysten) liegt kaum über dem Kurs — das signalisiert, dass die Street wenig Upside sieht und Upgrades nur bei Überraschungen kommen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 — alle Ebenen aktiv. 5T: -1,37%; 10T: -5,81% — kurzfristige Korrektur trotz GWS aktiv. 20T: +28,1%; 50T: +52,5% — strukturell starkes mittelfristiges Bild. 52W-Spanne $62,66–$142,35 zeigt extreme Volatilität; aktuell $117,81 = deutlich über 52W-Tief, 17% unter Hoch. Divergenz 10T schwach aber GWS 3/3 = Konsolidierung im Aufwärtstrend. Warnsignal: Rückfall unter $100 würde GWS-Struktur gefährden.
+RS-Score 126, Rang #27 im NASDAQ-100 — starke relative Stärke. 5T +5,5 %, 10T +3,4 %, 20T +30,1 %, 50T +66,6 % — das kurzfristige Momentum verlangsamt sich (5T < 10T Annualisierung), während das mittelfristige Bild dominant positiv bleibt. 52W-Tief $62,66, aktueller Kurs $117,81 — die Aktie hat sich fast verdoppelt und nähert sich dem 52W-Hoch von $142,35. GWS-Signal fehlt; kein konfirmiertes Breakout-Signal im System. Technisches Warnsignal: Rückfall unter $100 (psychologische Marke + ca. 50T-SMA-Nähe) würde Trendstruktur eintrüben. Wochenschluss unter $90 wäre Trendbruch-Signal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($200–$280):** AI-Agent-Identity wird eigenes Produktsegment; CIAM dominiert; Margen skalieren auf 30%+. Entscheidende Variable: AI-Identity-Adoption und Microsoft-Wettbewerbs-Intensität.
+**Bull ($200–$280):** Zero-Trust wird Pflichtstandard im Enterprise — Okta setzt sich gegen MSFT durch Multi-Cloud-Neutralität durch. Revenue 2029E ~$5 Mrd. bei 15 % CAGR, Operating Margin 22 %, FCF ~$1,8 Mrd. × 40x = $250.
 
-**Base Case ($130–$175):** 12–15% Wachstum p.a.; Non-GAAP-Margen 25%; GAAP-Breakeven hält. Revenue $4 Mrd. FY28.
+**Base ($120–$170):** Solides, aber moderates Wachstum (10–12 % CAGR), Operating Margin 15–17 %, FCF ~$1,3 Mrd. × 35x = $150. Compounder-Charakter bei fairer Bewertung.
 
-**Bear Case ($35–$60):** Microsoft Entra verdrängt Okta im Mid-Market; Wachstum kollabiert; Goodwill-Abschreibung belastet Bilanz.
+**Bear ($40–$70):** Microsoft verdrängt Okta aus dem Enterprise-Kern, Wachstum kollabiert auf <5 %, FCF-Marge schrumpft durch SBC-Belastung. Buchwert-Boden durch Auth0-Goodwill-Abschreibungen tiefer als erwartet.
+
+Entscheidende Variable: Wettbewerbsdynamik gegen Microsoft Entra im nächsten Enterprise-Budgetzyklus (FY27).
 
 ## 11. PROFI-FAZIT
 
-Okta ist kein Compounder und kein reiner Momentum-Trade — es ist ein Turnaround-Play auf dem Weg zur Profitabilität in einem strukturell wachsenden Markt. EV +4,8% bietet keinen asymmetrischen Edge auf aktuellem Niveau; GWS 3/3 zeigt aber intakte Momentum-Struktur mit 17% Luft zum 52W-Hoch. Für Momentum-Trader: kurzfristige Schwäche (10T: -5,8%) als möglichen Einstiegspunkt nutzen wenn Stabilisierung über $115 bestätigt; Stop unter $100. Größtes Risiko ist Microsoft — kein anderer Cloud-Anbieter hat einen vergleichbaren natürlichen Bundle-Vorteil. SBC 20% Revenue ist strukturell der teuerste Aspekt für Aktionäre. Positionsgröße max. 2–3%. Peers: **CyberArk (CYBR)** für reineres PAM-Exposure ohne Microsoft-Direkt-Konkurrenz. **Microsoft Entra ID** selbst ist der größte Wettbewerbs-Faktor — kein Börsen-Peer, aber wichtigster Vergleichspunkt.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau nur marginalen Edge (EV +3,6 % vs. Kurs). Okta ist ein qualitativ solider SaaS-Infrastruktur-Compounder mit realem Burggraben, aber der aktuelle Kurs spiegelt nach der fast-Verdoppelung vom 52W-Tief bereits einen Großteil der Turnaround-Story wider. Für Buy-and-Hold-Investoren mit 3–5 Jahren Horizont ist OKTA bei Kursen unter $105 klar interessant — auf aktuellem Niveau ist das Risk/Reward symmetrisch, nicht asymmetrisch. Für Trading-Strategien: GWS-Konfirmation abwarten. Positionsgröße auf aktuellem Niveau: max. 3–4 % eines diversifizierten Tech-Portfolios.
+
+Direkte Peers: **CrowdStrike (CRWD)** als reineres Cybersecurity-Momentum-Play mit stärkerem Wachstum (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ). **Microsoft (MSFT)** als Hauptrisiko und gleichzeitig das diversifiziertere Instrument. **Ping Identity / ForgeRock** (privat) als Benchmark für Nischen-IAM.
 
 - Qualität: 3/5
 - Wachstum: 3/5
-- Bewertung: 2/5
+- Bewertung: 3/5
 - Katalysator: 3/5
+
 
 ---
 
@@ -86,10 +105,10 @@ Okta ist kein Compounder und kein reiner Momentum-Trade — es ist ein Turnaroun
 |---|---|
 | Qualität | 3/5 |
 | Wachstum | 3/5 |
-| Bewertung | 2/5 |
+| Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | +3.7% |
+| EV-Upside | +4.0% |
 
-**Verdict: WATCH (54/100)**
+**Verdict: HOLD (58/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
