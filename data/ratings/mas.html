@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MAS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MAS</h1>
+      <h2>Masco Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Building Products & Equipment</span></div>
+        <div class="mi">MCap: <span>$15B</span></div>
+        <div class="mi">Signal: <span>n/a</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">76.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$74.38</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">35.7%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">172.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">90–100</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">78–85</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># MAS — Masco Corporation</p>
+<p>**Sektor:** Industrials · Building Products & Equipment</p>
+<p>**Kurs:** $74,38 · **RS-Score:** 76 · **RS-Rank:** #66</p>
+<p>**GWS-Ampel:** ⚪ kein Signal</p>
+<p>**Szenarien (12–18 Monate):** Bull $90–$100 (+21–34%) · Base $78–$85 (+5–14%) · Bear $58–$65 (−13–−22%) · EV ~$81</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Masco ist kein spektakuläres Wachstumsunternehmen — es ist eine Kapitalallokationsmaschine in einem defensiven Nischensegment. Der Kern: 85 % des Umsatzes entfallen auf Repair & Remodel (R&R), nicht auf Neubau. Das schützt das Geschäft vor Immobilienzyklen weit stärker als der Markt einpreist. Delta Faucets und Behr Paint sind Kategorieanführer mit echter Preissetzungsmacht. Der ROIC von 39,23 % signalisiert einen nachhaltigen Burggraben. Das negative Eigenkapital ist ein buchhalterisches Artefakt aggressiver Rückkäufe — finanziell ist MAS kerngesund mit $738 Mio. FCF. Das RS-Signal (+16,8 % in 20T, +21,6 % in 50T) bestätigt, dass institutionelles Geld einströmt. Der Einstiegspunkt unter dem 52W-Hoch bei $79 bietet ein asymmetrisches Risk/Reward-Profil.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>**Plumbing Products (~60 % Umsatz):** Delta, Hansgrohe, Watkins — Armaturen, Whirlpools, Badezimmerausstattung; starke Markenpreissetzungsmacht im mittleren bis gehobenen Segment</li>
+<li>**Decorative Architectural (~40 % Umsatz):** Behr Paint (exklusiv über The Home Depot), Liberty Hardware — strukturell gebundener Vertriebskanal schützt vor Margendruck durch Wettbewerb</li>
+<li>**R&R-Fokus (85 % des Umsatzes):** Renovierungsaktivität reagiert träger auf Zinszyklen als Neubau; alternder US-Wohnungsbestand (Ø Alter >40 Jahre) treibt strukturelle Nachfrage</li>
+<li>**Vertriebsbindung:** Behr-Exklusivvertrieb via Home Depot schafft Klumpenrisiko, aber auch planbare Volumenströme und gemeinsame Marketingmacht</li>
+<li>**FCF-Generierung:** $738 Mio. FCF bei $7,68 Mrd. Umsatz = FCF-Marge 9,6 %; konsistent über Konjunkturzyklen</li>
+<li>**Kapitalrückgabe:** Aggressives Rückkaufprogramm hat das Eigenkapital ins Negative gedrückt — Ausdruck von Managementvertrauen in die Ertragskraft, nicht finanzieller Schwäche</li>
+<li>**Margenstruktur:** Bruttomarge 35,7 %, operative Marge 16,5 % — stabil trotz Materialkostenvolatilität durch Preiserhöhungen und Produktmix</li>
+<li>**Internationale Diversifikation:** Hansgrohe (Deutschland) liefert Europa-Exposure (~15–20 % Umsatz) mit eigenem Premiumsegment-Profil</li>
+</ul>
+<h3>3. BULL CASE — Wahrscheinlichkeit 30 %</h3>
+<p>**Treiber:** Zinswende beschleunigt R&R-Ausgaben; Zölle auf chinesische Importe begünstigen domestic Hersteller; ROIC-Ausdehnung durch Premiumisierung.</p>
+<p>**EPS-Herleitung:** Forward EPS 2026e ~$4,70 × 19–21× Multiple (gerechtfertigt bei ROIC 39 % und Marktführerschaft) = **$89–$99**. Kursziel: **$90–$100**.</p>
+<p>Bei Beschleunigung des organischen Wachstums auf 8–10 % und Margenausdehnung auf 18 % operativ wären $5,00+ EPS 2027 realistisch. Analysten-Konsens-Kursziel von $80,82 würde dabei als Untergrenze wirken.</p>
+<h3>4. BASE CASE — Wahrscheinlichkeit 45 %</h3>
+<p>**Treiber:** Moderates R&R-Wachstum 4–6 % p.a., stabile Margen, Rückkäufe reduzieren Share Count um 3–4 % p.a.</p>
+<p>**EPS-Herleitung:** Forward EPS 2026e ~$4,70 × 17–18× Multiple = **$80–$85**.</p>
+<p>FCF-Yield-Check: $738 Mio. FCF / $15 Mrd. MarketCap = 4,9 % FCF-Yield — fair, kein Schnäppchen, aber solide für eine Qualitätskompanie. Kursziel: **$78–$85**. Analysten-Konsens $80,82 liegt komfortabel im Korridor.</p>
+<h3>5. BEAR CASE — Wahrscheinlichkeit 25 %</h3>
+<p>**Kursziel: $58–$65** (−13 bis −22 % vom aktuellen Kurs)</p>
+<p>**Risikodimensionen:**</p>
+<p>1. **Kundenkonzentration:** Behr Paint läuft exklusiv über The Home Depot. Ein Regalplatzverlust, Konditionendruck oder strategischer Kurswechsel von HD könnte 15–20 % des Konzernumsatzes gefährden — dieses Klumpenrisiko ist real und chronisch unterbewertet.</p>
+<p>2. **Geopolitik / Zölle auf Materialien:** Zink, Kupfer, Harze — Masco bezieht Rohstoffe global. Eskalierte US-China-Handelsspannungen oder Strafzölle auf Vorprodukte könnten die Bruttomarge 2–3 Prozentpunkte komprimieren, was bei 35,7 % Ausgangsbasis spürbar wäre.</p>
+<p>3. **Lieferkette:** Hansgrohe-Produktion in Europa (Deutschland) exponiert MAS gegenüber EUR/USD-Volatilität und europäischer Nachfrageschwäche. Eine Rezession in Deutschland (2025/26 realistisch) belastet den Premiumsegment-Umsatz überproportional.</p>
+<p>4. **Rückkauf-Erschöpfung / Leverage-Risiko:** Das aggressive Rückkaufprogramm hat das Eigenkapital ins Negative gedrückt. Bei einer Kreditrating-Verschlechterung oder steigenden Refinanzierungskosten wird die Rückkaufmaschinerie teurer — oder muss pausieren. Das würde die EPS-Wachstumsstory beschädigen.</p>
+<p>5. **Wohnungsmarkt-Regulierung / R&R-Abschwung:** Anhaltend hohe Zinsen (30J-Hypothek >6,5 %) dämpfen lock-in-Effekte: Hausbesitzer, die sich nicht umziehen können, renovieren weniger. Ein R&R-Umsatzrückgang von 10 % würde den operativen Hebel umkehren — Margen fallen dann auf 13–14 %.</p>
+<p>Bull + Base + Bear = 30% + 45% + 25% = **100%**</p>
+<p>**Erwartungswert:** 0,30 × $95 + 0,45 × $82 + 0,25 × $61 = $28,50 + $36,90 + $15,25 = **~$80,65**</p>
+<p>Erwartungswert: $81 — implizites Upside vs. aktuellem Kurs ($74,38): +8,9%.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Der ROIC von 39,23 % ist die Schlüsselkennzahl. Zum Vergleich: Fortune Brands ~15 %, Leggett & Platt ~8–10 %, S&P-500-Median ~12 %. MAS erzielt auf eingesetztes Kapital mehr als das Dreifache des Marktdurchschnitts — das ist kein Zufall, sondern struktureller Burggraben durch Markenpreissetzungsmacht und Vertriebsbindung.</p>
+<p>Das negative Eigenkapital ist ein bilanztechnisches Artefakt: Masco hat über Jahre mehr Kapital an Aktionäre zurückgeführt als es an buchhalterischem Eigenkapital aufgebaut hat. Das ist bei kapitalleichten, hochprofitablen US-Industrieunternehmen ein bekanntes Muster (vgl. AutoZone, Yum! Brands). Kreditwürdigkeit, operative Performance und Cash-Generierung sind davon unberührt. Alle auf Buchkapital basierenden Kennzahlen (D/E, ROE, P/B) sind für MAS analytisch irrelevant — ROIC und FCF-Marge sind die korrekten Maßstäbe.</p>
+<h3>7. BEWERTUNG</h3>
+<ul class="al">
+<li>**FCF-Yield:** $738 Mio. / $15,0 Mrd. = **4,9 %** — fair für ein Qualitätsunternehmen mit 39 % ROIC; kein Deep Value</li>
+<li>**Forward PE:** 15,81× auf 2026e EPS — unter dem 5-Jahres-Schnitt von ~17–18×; Rabatt ist teilweise zinsniveau-bedingt</li>
+<li>**Was preist der Kurs ein?** Der Markt preist ein: moderates R&R-Wachstum (4–5 %), stabile Margen, keine Beschleunigung. Eine Zinssenkungsserie der Fed ist nicht eingepreist — das ist der zentrale Katalysator für die Bull-Case-Realisierung.</li>
+<li>**Peer-Vergleich:** Auf Forward-PE-Basis handelt MAS mit ~10 % Discount zu Fortune Brands (~17×) trotz deutlich überlegenem ROIC.</li>
+</ul>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>MAS ist kein Momentum-Liebling — es ist ein klassischer Compounder im Schatten. Institutionelle Investoren, die Home-Improvement-Exposure suchen, greifen oft direkt zu Home Depot oder Stanley Black & Decker. MAS fliegt unter dem Radar, obwohl die Kapitalrendite die Peers weit übertrifft. Das RS-Signal (+10,3 % in 5T, +21,6 % in 50T) zeigt, dass Smart Money beginnt, den relativen ROIC-Vorteil zu entdecken. Short Interest ~2,5 %, kein übermäßiges Optionsvolumen. Der Analysten-Konsens (17 Analysten, Ø $80,82) ist konstruktiv ohne euphorisch zu sein.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Das kurzfristige Bild ist bemerkenswert bullisch: +10,3 % in 5 Tagen, +16,8 % in 20 Tagen, +21,6 % in 50 Tagen. Der Kurs bei $74,38 liegt noch 6 % unter dem 52W-Hoch von $79,19 — dort liegt der nächste Widerstand. Ein Ausbruch über $79–$80 würde technisch neues Terrain eröffnen mit Projektionszielen $88–$92. Support: $67–$68 und $58 (52W-Tief). Der RS-Rank #66 im S&P 500 ist solide, aber noch nicht im Top-Quartil. Keine GWS-Ampel schränkt die Signalqualität für aggressive Einträge ein.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 JAHRE)</h3>
+<p>**Bull (30%):** Fed-Zinswende, alternder Wohnungsbestand, Remodeling-Welle. EPS 2030e $6,50+ × 18× = **$117**. CAGR ~9 % p.a.</p>
+<p>**Base (45%):** EPS-Wachstum 7–8 % p.a. durch organisches Wachstum + Rückkäufe. Kurs 2030: **$100–$110**.</p>
+<p>**Bear (25%):** Anhaltend hohes Zinsniveau, R&R-Stagnation, Margendruck durch Rohstoffe. EPS 2030e ~$4,00 × 14× = **$56**.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Masco ist eine unterschätzte Qualitätskompanie mit einem der höchsten ROICs im Industriesektor. Die 39 %-Kapitalrendite ist strukturell vertretbar durch Markenpreissetzungsmacht und Vertriebsbindung — das ist keine Einmalerscheinung. Der R&R-Fokus (85 % Umsatz) schützt vor Neubauzyklen und macht MAS defensiver als der Beta von 1,31 suggeriert.</p>
+<p>Das negative Eigenkapital schreckt quantitative Screener ab und erzeugt damit einen Bewertungsrabatt, der fundamental nicht gerechtfertigt ist — ein klassischer Informationsvorteil für den informierten Investor.</p>
+<p>**Einstieg:** Aktuell attraktiv mit Akkumulationszone $72–$76. Stopp unter $65. Erstes Ziel: Analysten-Konsens $80,82. Zweites Ziel: Bull-Case $90–$100 bei Zinswende. Direkter Peer: Fortune Brands (FBIN) — ähnliches Exposure, deutlich niedrigerer ROIC (Peer-Multiples nicht im Datensatz — relative Bewertung indikativ).</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
