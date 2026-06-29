@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MKC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MKC</h1>
+      <h2>McCormick & Company, Incorporat</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Packaged Foods</span></div>
+        <div class="mi">MCap: <span>$13B</span></div>
+        <div class="mi">Signal: <span>n/a</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">63</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-9.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$46.64</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">38.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">412.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">25.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+15.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">62–70</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">50–58</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–44</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p># MKC — McCormick & Company</p>
+<p>**Sektor:** Consumer Defensive · Packaged Foods</p>
+<p>**Kurs:** $46,64 · **RS-Score:** -9 · **RS-Rank:** #313</p>
+<p>**GWS-Ampel:** ⚪ kein Signal</p>
+<p>**Szenarien (12–18 Monate):** Bull $62–$70 (+33–50%) · Base $50–$58 (+7–24%) · Bear $38–$44 (-16 bis -4%) · EV ~$53</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>McCormick ist der globale Marktführer bei Gewürzen und Geschmacksstoffen — ein Geschäftsmodell mit echter Preismacht, hohem Markenschutz und stabilen Konsumenten-Wiederholungskäufen. Der Kurs ist in sechs Monaten um ~40% gefallen und notiert nahe am 52-Wochen-Tief. Das schafft eine klassische Spannungssituation: Ein qualitativ hochwertiges Franchise zu einem Bewertungsniveau, das entweder einen strukturellen Bruch einpreist — oder eine seltene Einstiegsgelegenheit darstellt. Welches davon zutrifft, hängt vom Ursprung des Kursrückgangs ab, der aus den vorliegenden Daten allein nicht verifizierbar ist. Vor jeder Positionsentscheidung ist eine Klärung der Ursache zwingend erforderlich.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Consumer-Segment (~60% Umsatz): Marken wie McCormick, Lawry's, OLD BAY — hohe Markentreue, Regalhoheit im Gewürzgang</li>
+<li>Flavor-Solutions-Segment (~40%): B2B-Zulieferer für Restaurants, Fast-Food-Ketten und Lebensmittelhersteller — zyklischer, aber volumenstark</li>
+<li>Globales Vertriebsnetz in 150+ Ländern, Produktionsbasis auf mehreren Kontinenten</li>
+<li>Pricing-Power durch Eigenmarken-Abstand und SKU-Dominanz im Einzelhandel</li>
+<li>M&A-Strategie historisch aktiv: French's (2017, $4,2 Mrd.) als letztes großes Kaufobjekt, seither Schuldenabbau</li>
+<li>Dividende seit über 30 Jahren ununterbrochen gezahlt und erhöht — Dividenden-Aristokrat-Status</li>
+<li>Rohstoffabhängigkeit von Vanille, Paprika, Kurkuma — Preisvolatilität mit begrenzter Weiterverrechnung im selben Quartal</li>
+<li>Schulden nach French's-Akquisition erhöht, Debt/Equity 65x signalisiert hohen Verschuldungsgrad — strukturelles Merkmal, kein kurzfristiges Problem</li>
+</ul>
+<h3>3. BULL CASE — Wahrscheinlichkeit: 25%</h3>
+<p>McCormick normalisiert sich zurück auf historische Forward-PE-Multiples von 20–22x. FY2026 Konsens-EPS-Schätzung ~$3,20:</p>
+<ul class="al">
+<li>22x EPS → $70 | 20x EPS → $64</li>
+</ul>
+<p>Bull-Kursziel: **$62–$70** bei Kursrückkehr zu 20–22x Forward PE. Voraussetzungen: Kursrückgang war makro-getrieben und übertrieben, organisches Wachstum stabilisiert sich bei 3–5%, Margenexpansion durch nachlassenden Rohstoffdruck. FCF-Yield-Check: $372 Mio. / $12,5 Mrd. MCap = 3,0%; bei Normalisierung auf 2% Yield impliziert das ~$69 je Aktie — konsistent mit Bull-Range.</p>
+<h3>4. BASE CASE — Wahrscheinlichkeit: 45%</h3>
+<p>Der Markt re-ratet MKC auf 16–18x Forward PE, da Wachstumsverlangsamung und Zinskontext strukturell höhere Abzinsungsraten rechtfertigen. Bei EPS $3,20:</p>
+<ul class="al">
+<li>18x → $57,6 | 16x → $51,2</li>
+</ul>
+<p>Base-Kursziel: **$50–$58** in 12–18 Monaten. Annahme: keine weiteren Makro-Schocks, organisches Wachstum 3%, stabile Margen, kein weiterer Schuldenaufbau. Analysten-Konsens $61,23 liegt am oberen Ende — plausibel, setzt aber voraus, dass der Kursdruck bereits vollständig eingepreist ist.</p>
+<h3>5. BEAR CASE — Wahrscheinlichkeit: 30%</h3>
+<p>Kursziel: **$38–$44** — entspricht Rückgang auf 12–13x Forward PE oder weiterer Erosion des fundamentalen Ausblicks.</p>
+<p>**Risikodimensionen:**</p>
+<ul class="al">
+<li>**Kundenkonzentration:** Flavor-Solutions-Segment ist abhängig von wenigen Großkunden (McDonald's, Yum! Brands). Volumenverluste bei einem Schlüsselkunden schlagen direkt auf Deckungsbeitrag durch.</li>
+<li>**Geopolitik/Rohstoffe:** Vanille (Madagaskar), Paprika (Spanien/Indien), Kurkuma (Indien) — Lieferkettenstörungen oder Ernteausfälle können Rohstoffkosten kurzfristig um 15–25% treiben. Preiserhöhungen folgen mit 6–12 Monaten Verzögerung.</li>
+<li>**Lieferkette:** Keine vollintegrierte Vertikalstruktur — externe Beschaffungsabhängigkeiten bleiben ein latentes Risiko bei geopolitischen Spannungen.</li>
+<li>**Verwässerung:** Debt/Equity 65x schränkt Refinanzierungsflexibilität ein. Bei anhaltend hohen Zinsen oder einer neuen Akquisition ist eine Kapitalerhöhung nicht auszuschließen.</li>
+<li>**Regulierung:** ESG-Regulierungen zur Herkunftssicherung (Forced-Labor-Compliance, Deforestation Acts) können Beschaffungskosten erhöhen und Lieferkettenanpassungen erzwingen.</li>
+</ul>
+<p>Bull + Base + Bear = 25% + 45% + 30% = **100%**</p>
+<p>**Erwartungswert:** 0,25 × $66 + 0,45 × $54 + 0,30 × $41 = $16,5 + $24,3 + $12,3 = **~$53**</p>
+<p>Erwartungswert: $53 — implizites Upside vs. aktuellem Kurs ($46,64): +13,7%.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 25,3% ist stark — relativiert sich aber durch den hohen Verschuldungsgrad (Leverage bläht ROE auf). ROIC 8,9% ist ehrlicher: Kapitalrendite liegt nur moderat über den Kapitalkosten. Gross Margin 38,2% und Operating Margin 14,3% entsprechen dem historischen McCormick-Profil.</p>
+<p>**Anomalie — Net Margin 23,1% > Operating Margin 14,3%:** Diese Kennzahl-Anomalie ist ein klares Warnsignal. Eine Net Margin, die die Operating Margin übersteigt, deutet auf einen Einmaleffekt unterhalb der operativen Ebene hin — wahrscheinlichste Ursachen: Veräußerungsgewinn, steuerlicher Sondereffekt oder Umbewertung von Beteiligungen. Das Trailing PE von 7,65x basiert auf diesen verzerrten Gewinnen und ist als Bewertungsmaßstab **nicht valide**. Aus den vorliegenden Daten ist die genaue Ursache nicht abschließend auflösbar.</p>
+<p>**Anomalie — Revenue Growth +16,7%:** Für einen reifen Gewürzkonzern (organisches Wachstum historisch 3–5% p.a.) auffällig hoch. Wahrscheinliche Ursache: Akquisition oder erhebliche Währungseffekte. Die Daten erlauben keine Trennung von organischem und akquisitionsgetriebenem Wachstum — als möglicherweise nicht nachhaltig zu werten.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward PE 13,99x ist historisch günstig für McCormick — 5-Jahres-Durchschnitt lag bei 24–28x. FCF-Yield 3,0% ($372 Mio. / $12,5 Mrd. MCap) liegt über dem historischen Niveau, aber noch unter US-10-Jahres-Treasuries (~4,3%) — die Qualitätsprämie ist damit fast verschwunden.</p>
+<p>**Was preist der Kurs ein?** Der Markt rechnet entweder mit dauerhafter Margenkompression, einer Wachstumsverlangsamung auf unter 2% oder einem strukturellen Schock — oder kombiniert alle drei als Risikoprämie. Bei Normalisierung wäre MKC auf diesen Niveaus klar unterbewertet. Ohne Kenntnis des Kursrückgang-Auslösers bleibt das Chance-Risiko-Verhältnis asymmetrisch offen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>MKC ist ein klassischer "Safety Trade" — in Phasen erhöhter Marktunsicherheit gut gesucht, in Risk-On-Phasen systematisch gemieden. RS-Rank #313 zeigt, dass der Markt MKC aktiv abgestraft hat. Institutionelle Rotationen weg von Consumer Defensive in Technologie erklären solche Sell-offs, ohne dass sich Fundamentaldaten verschlechtern müssen. Gleichzeitig: Dividendenrendite 4,1% zieht Income-Investoren an — potenzielle Boden-Käufer sind strukturell vorhanden. Hypothese (nicht datenbasiert): Underweight durch Growth-Manager, Übergewicht bei Income-orientierten Long-Only-Fonds.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $46,64 liegt nur 4% über dem 52W-Tief $44,82 — die Aktie klebt am Boden. Das 52W-Hoch bei $78,16 entspricht einem Drawdown von ~40%. Auslöser aus den vorliegenden Daten nicht verifizierbar.</p>
+<p>**Momentum-Divergenz:** +13,2% in 5 Tagen und +10,7% in 20 Tagen stehen gegen -7,8% auf 50 Tage und -30,8% auf 6 Monate. Das kurzfristige Momentum ist technisch positiv — ob dies echte Bodenbildung oder Dead Cat Bounce ist, bleibt ohne Volumenbestätigung offen. GWS-Signal fehlt vollständig. Ein nachhaltiges Trendwende-Signal erfordert den Bruch des 50-Tage-Widerstands mit überdurchschnittlichem Volumen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (25%):** Organisches Wachstum 4–5% p.a., Asien/Emerging-Markets-Expansion, kontinuierliche Dividendenerhöhungen. EPS 2030e ~$4,00 × 22x = **$88**. Kursziel: $80–$95.</p>
+<p>**Base (45%):** Stabiles 3%-Wachstum, leichte Margenverbesserung durch Rohstoffnormalisierung. EPS 2030e ~$3,60 × 17x = **$61**. Kursziel: $55–$70. Solide Total Return durch Dividende.</p>
+<p>**Bear (25%):** Struktureller Marktanteilsverlust an Private Labels, anhaltender Zinsdruck, Schuldenrefinanzierung bei 5%+. EPS 2030e ~$2,80 × 12x = **$34**. Kursziel: $30–$42. Dividendenkürzungsrisiko.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>McCormick besitzt ein dauerhaftes Franchise, das in normalen Marktphasen mit deutlichem Premium bewertet wird. Das aktuelle Preisniveau ist historisch attraktiv — aber nur dann, wenn der Kursrückgang nicht fundamental begründet ist. Das ist die entscheidende offene Frage. Vor Einstieg zwingend klären: Was war der Trigger des 40%-Rückgangs? Die Anomalie (Net Margin > Operating Margin) und das ungewöhnliche Umsatzwachstum (+16,7%) müssen im Quartalsbericht überprüft werden.</p>
+<p>Kurzfristig deutet das Momentum auf eine technische Gegenbewegung hin — ob daraus eine Trendwende wird, ist ohne GWS-Bestätigung nicht belegbar. Für langfristig orientierte Dividendeninvestoren bietet das aktuelle Niveau eine reale Einstiegsoption — mit dem Vorbehalt vollständiger Aufklärung der Datenlage. Maximale Positionsgröße: 3–4% vor Aufklärung, höhere Allokation erst nach Earnings-Bestätigung und GWS-Signal. Direkter Peer: Conagra Brands (CAG) — ähnliche Bewertungssituation, geringere Markenqualität. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
