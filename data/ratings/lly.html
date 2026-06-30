@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LLY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>LLY</h1>
+      <h2>Eli Lilly and Company</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Drug Manufacturers - General</span></div>
+        <div class="mi">MCap: <span>$1077B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">64</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">71.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$1208.12</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">27.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$72.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">82.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">57.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">107.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-78.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1.350–1.600</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">850–1.150</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">300–420</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Eli Lilly ist der globale Marktführer im GLP-1-Markt für Adipositas und Diabetes (Mounjaro/Zepbound) — die eigentliche Story ist nicht "ein weiteres Pharma-Unternehmen", sondern die strukturelle Neudefinition eines milliardenschweren Gesundheitsmarktes, bei dem Lilly aktuell die fortschrittlichste Produktpipeline (Tirzepatid, orale GLP-1-Kandidaten wie Orforglipron) besitzt. Was der Markt bereits stark goutiert: ROE von 107,5% (!) und Revenue-Wachstum von 55,5% YoY sind außergewöhnliche Werte, die das Ausmaß der Mounjaro/Zepbound-Erfolgsgeschichte widerspiegeln. Der Kurs ist von $1.208,12 auf $1.229,93 (29.06.) gestiegen und notiert nahe dem 52-Wochen-Hoch von $1.215,76 — bereits leicht überschritten. RS-Score nur 71,9 (Rang 93 im S&P 500) zeigt jedoch ein relativ schwaches Momentum im Vergleich zu den fundamentalen Wachstumszahlen — die 6-Monats-Performance von nur +7,1% liegt deutlich unter den kurzfristigeren Fenstern, was auf eine jüngste Beschleunigung nach einer Konsolidierungsphase hindeutet. Was der Markt möglicherweise noch nicht vollständig einpreist: die orale GLP-1-Pipeline könnte den adressierbaren Markt nochmals erheblich erweitern, da Spritzenangst und Verabreichungskomplexität wegfallen — gleichzeitig steigt das Wettbewerbsrisiko durch Novo Nordisk und aufkommende Generika-/Biosimilar-Diskussionen mittelfristig.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Diversifizierter Pharma-Konzern mit Schwerpunkt Diabetes/Adipositas (Mounjaro/Zepbound), Onkologie, Immunologie und Neurowissenschaften (Alzheimer)</li>
+<li>GLP-1-Franchise als dominanter Wachstumstreiber: Mounjaro (Diabetes) und Zepbound (Adipositas) adressieren strukturell wachsende, chronische Erkrankungsmärkte</li>
+<li>Patentschutz und Markenexklusivität als zentraler Burggraben — Pricing Power bleibt hoch, solange keine Generika-Konkurrenz besteht</li>
+<li>Hohe F&E-Intensität mit Fokus auf nächste Produktgeneration (orale GLP-1-Kandidaten, Kombinationstherapien) zur Verteidigung der Marktführerschaft</li>
+<li>Strukturelle Abhängigkeit von Erstattungsfähigkeit durch Krankenversicherer/PBMs in den USA — Preisdruck durch Medicare-Verhandlungen (Inflation Reduction Act) ist ein wachsendes Risiko</li>
+<li>Globale Vertriebsinfrastruktur ermöglicht schnelle internationale Skalierung neuer Produkte, aber auch regulatorische Komplexität in jedem Einzelmarkt</li>
+<li>Operating Margin 49,4% ist außergewöhnlich hoch für Pharma und zeigt die Skaleneffekte des GLP-1-Erfolgs</li>
+<li>Revenue TTM $72,25 Mrd., Wachstum +55,5% YoY — fast vollständig getrieben durch Mounjaro/Zepbound-Hochskalierung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Orale GLP-1-Kandidaten (Orforglipron) erhalten Zulassung und erschließen einen deutlich größeren adressierbaren Markt durch einfachere Verabreichung; internationale Expansion (Europa, Asien) beschleunigt sich; Lilly verteidigt Marktführerschaft gegen Novo Nordisk durch überlegene Wirksamkeitsdaten. Annahme (kein Konsens): FY28-EPS ~$38 × 38x Forward-Multiple = $1.444. Bull-Kursziel: $1.350–$1.600 (Midpoint $1.475). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: GLP-1-Wachstum verlangsamt sich von den außergewöhnlichen 55,5% auf nachhaltigere 25-35% YoY bei fortgesetzter Kapazitätsausweitung, Margen bleiben stabil hoch, Forward-PE konsolidiert leicht. Annahme (kein Konsens): FY27-EPS ~$28 × 32x = $896. Base-Kursziel: $850–$1.150 (Midpoint $1.000). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Novo Nordisk oder neue Wettbewerber (orale Konkurrenzprodukte, Biosimilars) erodieren Marktanteile schneller als erwartet, gleichzeitig verschärfen Medicare-Preisverhandlungen unter dem Inflation Reduction Act die Pricing Power im wichtigsten Einzelmarkt USA. Kundenkonzentration: nicht im klassischen Sinne zutreffend (breite Patientenbasis), aber Abhängigkeit von wenigen PBM-/Versicherer-Verhandlungspartnern für Erstattung ist ein strukturelles Konzentrationsrisiko — auf Datenbasis nicht abschließend quantifizierbar. Geopolitik/China-Exposure: moderat, da Lilly auch in China und anderen internationalen Märkten operiert, regulatorische Unsicherheit dort als zusätzliches Risiko. Lieferketten/Single-Source-Risiko: GLP-1-Produktion erfordert spezialisierte Fertigungskapazität — Kapazitätsengpässe waren bereits ein dokumentiertes operatives Thema. Verwässerung: D/E 139,0% ist erhöht, SBC-Trend aus Daten nicht verfügbar. Regulierung: Medicare-Preisverhandlungen, FDA-Zulassungsrisiken bei neuen Indikationen und potenzielle Patentanfechtungen sind alle relevant. Bei Marktanteilsverlust und Preisdruck: Annahme FY27-EPS ~$16 × 22x = $352. Bear-Kursziel: $300–$420 (Midpoint $360). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $1.475 + 0,45 × $1.000 + 0,30 × $360 = $368,75 + $450,00 + $108,00 = **~$926,75 — implizites Downside vs. aktuellem Kurs ($1.229,93): −24,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — ein High-Conviction-Framing im Fazit ist trotz der starken fundamentalen Story bei diesem Kursniveau unzulässig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 107,5% ist außergewöhnlich hoch und sollte im Zykluskontext eingeordnet werden: Dies ist eine Top-of-Cycle-Zahl, getrieben durch die explosive GLP-1-Nachfrage und relativ niedrige Eigenkapitalbasis im Verhältnis zum Gewinn — nicht als nachhaltiges Dauerniveau zu erwarten, da Wettbewerbsdruck und Kapazitätsausweitung mittelfristig Margen normalisieren dürften. ROIC 38,6% ist ebenfalls sehr stark. Gross Margin 82,8% und Operating Margin 49,4% sind außergewöhnlich für Pharma und zeigen die enorme Skalierbarkeit des GLP-1-Geschäfts. FCF $9,16 Mrd. bei $72,25 Mrd. Revenue (12,7% FCF-Marge) wirkt im Verhältnis zur Profitabilität moderat — hohe Capex-Investitionen in zusätzliche Produktionskapazität für die GLP-1-Nachfrage belasten den freien Cashflow strukturell, dies ist jedoch als Wachstumsinvestition einzuordnen, nicht als Qualitätsschwäche. Bilanzqualität: D/E 139,0% ist erhöht, aber bei der aktuellen Cash-Generierungsfähigkeit gut tragbar. Der wirtschaftliche Burggraben ist real und stark: Patentschutz, klinische Überlegenheit und First-/Second-Mover-Vorteil im GLP-1-Markt — aber zeitlich durch Patentablauf und Wettbewerbsdynamik begrenzt.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 42,9x und Forward PE 27,2x — der deutliche Rückgang signalisiert erwartetes starkes Gewinnwachstum, was bei einem Pharma-Wachstumswert mit strukturellem GLP-1-Rückenwind nicht unüblich, aber dennoch ambitioniert ist. Price-to-Book 34,6x ist sehr hoch und reflektiert die außergewöhnliche ROE. Normalisierter Blick: Bei einem Geschäft mit derart hoher Wachstumsdynamik ist die klassische KGV-Betrachtung weniger verzerrend als bei zyklischen Werten, dennoch sollte das aktuelle Op-Margin-Niveau (49,4%) nicht unkritisch fortgeschrieben werden, da Wettbewerbsintensivierung im GLP-1-Markt mittelfristig Preisdruck erzeugen dürfte. Rückrechnung: Bei $1.229,93 und 27,2x Forward-PE preist der Markt ein nachhaltiges EPS-Wachstum im hohen Zwanziger- bis niedrigen Dreißigerprozentbereich über mehrere Jahre ein — angesichts der aktuellen 55,5%-Wachstumsrate plausibel für die nächsten 1-2 Jahre, aber bei mehrjähriger Fortschreibung ambitioniert, da Basiseffekte und Wettbewerb das Wachstum natürlich verlangsamen werden. Analyst-Konsensziel $1.222,62 liegt sehr nahe am aktuellen Kurs $1.229,93 — Coverage sieht aktuell kaum Aufwärtspotenzial, als Orientierungspunkt zu verstehen, nicht als Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score nur 71,9, Rang 93 im S&P 500 — moderates Momentum, deutlich schwächer als die fundamentale Wachstumsdynamik vermuten ließe. Recommendation Key "buy" bei 29 Analysten zeigt breite institutionelle Coverage. Die 6-Monats-Performance von nur +7,1% gegenüber 5T +10,1%, 10T +10,4% und 20T +15,8% zeigt eine klare jüngste Beschleunigung nach einer längeren Konsolidierungsphase — die Aktie hat offenbar erst kürzlich wieder Stärke aufgenommen. Hypothese, nicht datenbasiert: Als Mega-Cap-Pharma-Wert dürfte die institutionelle Basis überwiegend aus Long-Only-Healthcare- und breiten Index-Fonds bestehen, weniger Fast-Money. Enttäuschungsrisiko: Bei jeder negativen Schlagzeile zu Medicare-Preisverhandlungen oder Wettbewerbsdaten von Novo Nordisk könnte die Aktie nahe dem Allzeithoch empfindlich reagieren.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 71,9, Rang 93 S&P 500. 5T: +10,1%, 10T: +10,4%, 20T: +15,8%, 50T: +28,5%, 6M: +7,1% — die Diskrepanz zwischen starkem 50T-Wert (+28,5%) und schwachem 6M-Wert (+7,1%) bestätigt eine längere Konsolidierungsphase mit jüngster deutlicher Beschleunigung. Letzte Wochenkerze: $1.208,12 (22.06.) auf $1.229,93 (29.06.), neues 52-Wochen-Hoch ($1.215,76 bereits überschritten, Wochenhoch $1.238,00). Kein aktives GWS-Setup laut Datenstand. Momentum erscheint fundamental gut gestützt durch die anhaltende GLP-1-Wachstumsstory. Technisches Warnsignal: Rückfall unter $1.080 (20T-Unterstützungsbereich) wäre ein erstes Warnsignal für nachlassende Stärke nach dem jüngsten Hoch.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($1.800–$2.400):** Orale GLP-1-Generation erschließt einen massiv größeren Adipositas-/Diabetes-Markt global, Lilly verteidigt klinische Überlegenheit gegenüber Novo Nordisk und neuen Wettbewerbern, Pipeline-Erfolge in Onkologie/Alzheimer liefern zusätzliche Wachstumstreiber.</p>
+<p>**Base ($1.000–$1.600):** GLP-1-Wachstum normalisiert auf nachhaltigere Raten nach der initialen Explosion, Lilly bleibt Marktführer mit solider, aber nicht dominanter Preissetzungsmacht, Medicare-Preisdruck dämpft Margen graduell.</p>
+<p>**Bear ($500–$850):** Wettbewerbsintensivierung (Generika-Diskussion, neue orale Konkurrenzprodukte) und regulatorischer Preisdruck (IRA-Verhandlungen) erodieren die außergewöhnliche Margenstruktur strukturell, GLP-1-Markt wird zum margenärmeren Commodity-Geschäft.</p>
+<p>Entscheidende Variable: Erfolg und Zulassungstiming der oralen GLP-1-Nachfolgegeneration sowie regulatorische Preisentwicklung unter dem Inflation Reduction Act.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −24,7%). Eli Lilly ist fundamental einer der stärksten Compounder im globalen Pharma-Sektor mit einem realen, aber zeitlich begrenzten Burggraben im GLP-1-Markt — die Bewertung nahe dem Allzeithoch hat die außergewöhnliche Wachstumsstory jedoch bereits weitgehend eingepreist. Geeignet für langfristig orientierte Qualitäts- und Healthcare-Investoren, die die strukturelle GLP-1-Story über Jahre mittragen wollen; weniger geeignet für Schnäppchenjäger angesichts der hohen Bewertungsmultiples. Risikowarnung: Konzentrationsrisiko auf ein einzelnes Therapiefeld (GLP-1 macht den Großteil des Wachstumsbeitrags aus) — Positionsgröße sollte dies berücksichtigen (4-6% eines diversifizierten Portfolios als obere Grenze für Einzelwertkonzentration).</p>
+<p>**Novo Nordisk (NVO)** ist der direkteste und wichtigste Peer im GLP-1-Wettrennen — bei vergleichbarer Wachstumsstory oft mit unterschiedlichem Bewertungsniveau gehandelt. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

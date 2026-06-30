@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VLO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>VLO</h1>
+      <h2>Valero Energy Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Energy</span></div>
+        <div class="mi">Industrie: <span>Oil & Gas Refining & Marketing</span></div>
+        <div class="mi">MCap: <span>$77B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">97.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$259.37</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">12.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$117.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">14.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">185.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">15.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-14.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">320–390</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">200–250</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">65–110</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Valero ist einer der größten unabhängigen Erdölraffinerie-Betreiber der USA — die eigentliche Story ist nicht "Öl-Aktie", sondern eine reine Crack-Spread-Wette: Valero besitzt kein nennenswertes Upstream-Geschäft, sondern verdient an der Marge zwischen Rohöl-Einkaufspreis und Produktverkaufspreis (Benzin, Diesel, Jet Fuel). Was der Markt aktuell goutiert: Raffineriekapazität in den USA ist strukturell verknappt (Schließungen der letzten Jahre, kaum Neubauten), während Nachfrage nach raffinierten Produkten robust bleibt — das stützt Crack Spreads strukturell höher als im historischen Mittel. RS-Score 97,1 (Rang 34 im S&P 500) und ein Kursanstieg von $259,37 auf $266,32 (29.06., neues 52-Wochen-Hoch) zeigen anhaltendes Momentum. Beta von nur 0,553 ist ungewöhnlich niedrig für einen Energiewert — ein Hinweis, dass Valero von Investoren teilweise als defensiverer Cashflow-Generator denn als reiner Öl-Beta-Trade wahrgenommen wird. Was der Markt möglicherweise übersieht: Die strukturelle Kapazitätsverknappung ist ein zeitlich begrenztes Fenster — neue Raffinerieprojekte in Asien und dem Nahen Osten könnten die globale Überkapazitäts-Dynamik mittelfristig wieder umkehren.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Reines Downstream-Geschäft: Rohöl-Einkauf, Raffination zu Benzin/Diesel/Jet Fuel/petrochemischen Produkten, Verkauf über Großhandel und eigene Tankstellenmarken</li>
+<li>Crack Spread als zentraler Ergebnistreiber — Marge zwischen Rohölkosten und Produktverkaufspreisen, nicht der absolute Ölpreis selbst</li>
+<li>Geografische Diversifikation über US-Golfküste, Mittlerer Westen, Westküste und Kanada reduziert regionale Konzentrationsrisiken</li>
+<li>Renewable-Diesel-Segment (Diamond Green Diesel JV) als strukturell wachsendes, durch staatliche Förderprogramme (RFS, LCFS) unterstütztes Zusatzgeschäft</li>
+<li>Operativer Hebel hoch: Fixkostenintensive Raffinerien profitieren überproportional von steigenden Crack Spreads, leiden aber auch überproportional bei deren Kompression</li>
+<li>Strukturelle Abhängigkeit von US-Raffineriekapazitätsauslastung — branchenweite Kapazitätsschließungen der letzten Jahre stützen aktuell die Margen</li>
+<li>Wartungszyklen (Turnarounds) erzeugen periodische Volumenschwankungen, unabhängig von der Marktnachfrage</li>
+<li>Revenue TTM $117,84 Mrd., Wachstum nur +6,6% YoY — Umsatz korreliert stark mit Rohölpreisniveau, weniger mit echtem Volumenwachstum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Anhaltende strukturelle US-Raffineriekapazitätsverknappung (weitere Schließungen, keine signifikanten Neubauten) bei stabiler bis steigender Nachfrage hält Crack Spreads dauerhaft über historischem Mittel. Renewable-Diesel-Segment skaliert weiter und trägt zunehmend zur Marge bei. Annahme (kein Konsens): FY27-EPS ~$22 × 16x Forward-Multiple = $352. Bull-Kursziel: $320–$390 (Midpoint $355). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Crack Spreads normalisieren leicht von aktuellen erhöhten Niveaus, bleiben aber über dem historischen Tiefpunkt-Mittel dank fortgesetzter Kapazitätsdisziplin. EPS bewegt sich im Bereich der aktuellen Konsensschätzungen. Annahme (kein Konsens): FY27-EPS ~$17 × 13x = $221. Base-Kursziel: $200–$250 (Midpoint $225). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Raffineriekapazität wird durch Neubauten in Asien und dem Nahen Osten (Kuwait, Indien, China) ausgeweitet, gleichzeitig schwächt sich die Nachfrage nach raffinierten Produkten durch beschleunigte EV-Adoption und Konjunkturabschwächung ab — Crack Spreads komprimieren auf zyklische Tiefststände wie 2019/2020. Kundenkonzentration: gering, da Großhandel und Tankstellennetz breit diversifiziert — auf Datenbasis nicht abschließend beurteilbar. Geopolitik: Rohölpreisvolatilität durch geopolitische Schocks (OPEC+-Entscheidungen, Sanktionen) kann sowohl Einkaufskosten als auch Margen kurzfristig stark verzerren — strukturell schwer prognostizierbar. Lieferketten/Single-Source-Risiko: Rohölbezug ist diversifiziert über mehrere Quellen, kein erkennbares Einzelrisiko aus den Daten. Verwässerung: D/E 42,7% ist moderat, SBC-Trend aus Daten nicht verfügbar. Regulierung: Verschärfte Emissionsauflagen und CO2-Bepreisung könnten Raffineriebetrieb mittelfristig verteuern; gleichzeitig könnten LCFS-/RFS-Förderprogramme für Renewable Diesel politisch zurückgefahren werden. Bei globaler Kapazitätsausweitung und Margenkompression: Annahme FY27-EPS ~$8 × 10x = $80. Bear-Kursziel: $65–$110 (Midpoint $87,50). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $355 + 0,45 × $225 + 0,35 × $87,50 = $71,00 + $101,25 + $30,63 = **~$202,88 — implizites Downside vs. aktuellem Kurs ($266,32): −23,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing im Fazit ist auf diesem Niveau unzulässig — der Kurs notiert nahe dem 52-Wochen-Hoch in einem zyklischen Geschäft.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 15,9% und ROIC 8,7% sind solide, aber typisch zyklisch — in schwachen Crack-Spread-Phasen (2019/2020) waren diese Werte deutlich niedriger oder negativ. Gross Margin nur 14,6% und Operating Margin 6,1% sind im Branchenvergleich normal für ein margenarmes Raffineriegeschäft. FCF $4,79 Mrd. bei $117,84 Mrd. Revenue (4,1% FCF-Marge) ist solide für den aktuellen Zykluszeitpunkt, aber stark von Crack-Spread-Niveau abhängig — im Zyklustief war Valeros FCF historisch deutlich negativ. Bilanzqualität: D/E 42,7% ist moderat und gibt Spielraum für Aktienrückkäufe und Dividenden auch in schwächeren Phasen. Dividendenrendite 1,85% ist im Energiesektor eher niedrig — Kapitalrückführung erfolgt überwiegend über Rückkäufe. Der wirtschaftliche Burggraben liegt primär in Skaleneffekten und geografischer Logistikvorteilen (Nähe zu Exportterminals an der Golfküste), weniger in echtem Pricing Power — Crack Spreads sind letztlich ein Marktpreis, den kein Einzelunternehmen kontrolliert.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 18,9x und Forward PE 12,3x — der deutliche Rückgang von Trailing zu Forward signalisiert, dass der Markt eine Ergebnisverbesserung erwartet, aber das Forward-Multiple ist im historischen Kontext für Raffinerien am oberen Ende der Bandbreite, da diese Aktien niemals nur anhand des aktuellen KGVs bewertet werden sollten — Crack Spreads sind hochzyklisch. Normalisierter FCF über den vollen Zyklus ist entscheidend: Bei historisch durchschnittlichen Crack Spreads (deutlich unter aktuellem Niveau) dürfte der "Normal-FCF" eher bei $2-3 Mrd. liegen statt der aktuellen $4,79 Mrd. — das ergibt ein normalisiertes FCF-Multiple von 26-39x statt der optisch günstigen ~16x auf TTM-Basis. Price-to-Book 3,2x ist moderat. Rückrechnung: Bei $266,32 und 12,3x Forward-PE preist der Markt eine Fortsetzung der aktuell erhöhten Crack-Spread-Umgebung ein — plausibel im aktuellen Kapazitätsverknappungs-Umfeld, aber nicht über mehrere Jahre garantiert angesichts globaler Raffineriekapazitäts-Pipeline. Analyst-Konsensziel $263,67 liegt knapp unter dem aktuellen Kurs $266,32 — Coverage sieht kaum weiteres Aufwärtspotenzial auf aktuellem Niveau, als Orientierungspunkt zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 97,1, Rang 34 im S&P 500 — solides, aber kein Spitzenmomentum. Recommendation Key "buy" bei 18 Analysten zeigt moderate institutionelle Unterstützung. Beta 0,553 deutet darauf hin, dass die Aktie historisch weniger volatil als der breite Markt gehandelt wird — ungewöhnlich für Energie, möglicherweise weil das Crack-Spread-Geschäft teilweise unkorreliert zu reinen Öl-Beta-Trades läuft. Hypothese, nicht datenbasiert: Energiesektor-Rotationsflüsse (institutionelle Sektorallokation) dürften ein wesentlicher Treiber der jüngsten Stärke sein, weniger Einzeltitel-spezifisches Fast-Money. Enttäuschungsrisiko: Bei jeder Meldung über neue globale Raffineriekapazität (Asien, Naher Osten) oder schwächeren Diesel-/Benzin-Nachfragedaten könnte die Aktie nahe dem 52-Wochen-Hoch scharf korrigieren.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 97,1, Rang 34 S&P 500. 5T: +8,3%, 10T: +9,3%, 20T: +7,6%, 50T: +15,2%, 6M: +56,8% — konsistent positives Momentum über alle Zeitfenster. Letzte Wochenkerze: $259,37 (22.06.) auf $266,32 (29.06.), nahe am 52-Wochen-Hoch $265,61 (bereits leicht überschritten). Kein aktives GWS-Setup laut Datenstand. Momentum erscheint teilweise fundamental gestützt (Crack-Spread-Stärke), aber bei einem zyklischen Geschäft nahe Allzeithoch ist erhöhte Vorsicht angebracht — Reversal-Risiko steigt mit Distanz vom historischen Mittelwert. Technisches Warnsignal: Rückfall unter $233 (20T-Unterstützungsbereich) wäre ein erstes Warnsignal für nachlassende Stärke.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($350–$420):** Strukturelle US-Raffineriekapazitätsknappheit hält über Jahre an, Renewable-Diesel-Segment skaliert deutlich, Crack Spreads bleiben dauerhaft über historischem Mittel.</p>
+<p>**Base ($180–$300):** Crack Spreads pendeln zyklisch um ein leicht erhöhtes historisches Mittel, Renewable-Diesel trägt moderat bei, Raffineriekapazität bleibt global im Gleichgewicht.</p>
+<p>**Bear ($70–$140):** Globale Kapazitätsausweitung plus beschleunigte EV-Adoption komprimieren Crack Spreads strukturell auf zyklische Tiefststände, ähnlich der 2019/2020-Periode.</p>
+<p>Entscheidende Variable: Globale Raffineriekapazitäts-Pipeline (Neubauten Asien/Naher Osten) im Verhältnis zu Nachfrageentwicklung für raffinierte Produkte.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −23,8%) — der größte Abstand unter den hier analysierten Werten. Valero ist ein zyklischer Crack-Spread-Trade, kein Buy-and-Hold-Compounder — die Aktie notiert nahe ihrem 52-Wochen-Hoch in einem Geschäft, dessen Marge strukturell mean-reverting ist. Geeignet für taktische Energiesektor-Trader mit klarer Exit-Disziplin; nicht geeignet für Investoren, die auf nachhaltiges strukturelles Wachstum setzen. Risikowarnung: Bei zyklischen Raffinerie-Aktien nahe Allzeithoch ist die Wahrscheinlichkeit einer Mean-Reversion erhöht — Positionsgröße konservativ halten (max. 2-3% eines diversifizierten Portfolios) und Gewinnmitnahme-Disziplin erwägen.</p>
+<p>**Marathon Petroleum (MPC)** und **Phillips 66 (PSX)** sind die direktesten Peers im US-Raffineriesektor mit ähnlichem Crack-Spread-Exposure — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
