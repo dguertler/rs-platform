@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ORCL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0000;color:#ef4444;border:1px solid #7f1d1d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ORCL</h1>
+      <h2>Oracle Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$428B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">AVOID</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#ef4444;font-size:20px">36</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-114.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$148.53</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$67.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">65.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">135.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">53.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-22.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">160–190</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">45–70</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $160–$190 (20%) · Base $95–$130 (40%) · Bear $45–$70 (40%) · EV ~$103</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Oracle ist der mit Abstand am stärksten angeschlagene Name in diesem Vergleich — -57% vom 52-Wochen-Hoch, negativer TTM-Free-Cashflow (-$24,54 Mrd.) bei $67,36 Mrd. Revenue, und ein Debt/Equity nahe 389%, während der RS-Score bei -114,67 (Rang 241) liegt — das schwächste Momentum-Signal hier. Die OCI-Cloud-Capex-Story ähnelt oberflächlich der von Microsoft, aber anders als bei MSFTs Fortress-Bilanz wird der Datacenter-Ausbau hier substanziell fremdfinanziert, und der FCF ist bereits offen negativ. Auffällig: Forward PE (13,6x) liegt weit unter Trailing PE (25,43x), was implizit eine Verdopplung des EPS unterstellt — angesichts des Kurskollapses und der FCF-Verschlechterung eine Anomalie, die hier nicht unkritisch verwendet wird; sie spiegelt vermutlich noch nicht aktualisierte Analystenschätzungen wider und wird als "aus den Daten nicht abschließend auflösbar" eingestuft.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Übergang vom klassischen On-Premise-Datenbankgeschäft zu Oracle Cloud Infrastructure (OCI) als zentrale Wachstumsstory — kapitalintensiver Umbau in vollem Gange</li>
+<li>OCI positioniert sich als Spezial-Cloud für KI-Trainingsworkloads — hohe Konzentration auf wenige Großkunden-Kapazitätsverträge als strukturelles Risiko</li>
+<li>Datenbank-Kerngeschäft bleibt margenstarker Cashflow-Anker, aber Wachstumsbeitrag strukturell rückläufig</li>
+<li>Massive Fremdfinanzierung des Datacenter-Ausbaus — D/E 388,9% ist das höchste Verschuldungsniveau in diesem Vergleichsset</li>
+<li>FCF -$24,54 Mrd. (TTM) — strukturell negativer Cashflow durch OCI-Capex-Welle, erhebliches Risiko falls Großkunden-Vertragsumsätze sich verzögern</li>
+<li>Operating Margin 36,2% trotz Wachstumsinvestitionen noch robust, aber Net Margin 25,4% zeigt bereits spürbaren Abschreibungs-/Zinsdruck</li>
+<li>Revenue-Wachstum 20,6% YoY weiterhin solide, aber die Frage ist, ob das OCI-Wachstum die massive Fremdkapitalbelastung rechtfertigt</li>
+<li>Dividenden-/PE-Kennzahlen im Datensatz (135,0% Payout-artig, Forward/Trailing-PE-Diskrepanz) wirken wie Datenartefakte — nicht eindeutig interpretierbar, nicht in Bewertung einbezogen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>OCI-Großkundenverträge (KI-Trainingskapazität) materialisieren sich vollständig, Umsatzwachstum beschleunigt auf 25-30%+, FCF dreht innerhalb von 12-18 Monaten wieder ins Positive, Verschuldungsquote stabilisiert sich relativ zum wachsenden EBITDA. Annahme (kein Konsens, da Forward-EPS-Konsens als Anomalie eingestuft): FY27-EPS ~$8,50 (Basis: konservative Trailing-EPS $5,84 + 45% Wachstum durch OCI-Skalierung) × 20x = $170. Bull-Kursziel: $160–$190 (Midpoint $175). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: OCI-Wachstum setzt sich fort, aber FCF bleibt noch mehrere Quartale negativ oder knapp ausgeglichen, Verschuldung bleibt erhöht. Annahme: FY27-EPS ~$6,80 × 16x = $108,80. Base-Kursziel: $95–$130 (Midpoint $112,50). Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: OCI-Großkundenverträge verzögern sich oder werden storniert, FCF bleibt strukturell negativ, Refinanzierung der hohen Schuldenlast wird bei steigenden Zinsen teurer. Kundenkonzentration: OCI-Wachstum ist laut Geschäftsmodell stark auf wenige Großkunden-Kapazitätsverträge konzentriert — aus aktuellen Daten nicht exakt quantifizierbar, aber strukturell zentrales Risiko. Geopolitik/Exportkontrollen: Datacenter-Expansion mit internationalem Footprint, China-Exposure aus Daten nicht quantifizierbar. Lieferketten/Foundry: Abhängigkeit von GPU-Lieferketten (NVIDIA) für OCI-KI-Kapazität — Single-Source-ähnliches Risiko. Verwässerung: Shares Outstanding und SBC nicht im Datensatz — nicht abschließend beurteilbar. Regulierung: keine unmittelbaren branchenspezifischen Risiken erkennbar, Datenschutz-/Cloud-Souveränitätsanforderungen als Nebenrisiko. EPS bricht weiter ein auf ~$4,50, Multiple komprimiert auf 12x bei anhaltenden Bilanzsorgen. Bear-Kursziel: $45–$70 (Midpoint $57,50). Eintrittswahrscheinlichkeit: 40%.</p>
+<p>**Summe: 20% + 40% + 40% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20×$175 + 0,40×$112,5 + 0,40×$57,5 = $35 + $45 + $23 = **~$103 — implizites Downside vs. aktuellem Kurs ($148,53): -30,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, sondern einen klaren Downside-Bias.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 53,4% wirkt stark, ist aber maßgeblich durch die extrem hohe Verschuldung (D/E 388,9%) verzerrt — ein hoher ROE bei gleichzeitig negativem FCF ist eine klassische Anomalie und wird hier nicht als reine Qualitätskennzahl gewertet. Gross Margin 65,8%, Operating Margin 36,2% — operativ noch gesund. Net Margin 25,4% zeigt bereits spürbaren Zins-/Abschreibungsdruck. FCF -$24,54 Mrd. bei $67,36 Mrd. Revenue — strukturell negativ, das mit Abstand größte Warnsignal in diesem Vergleichsset. Bilanzqualität schwach: D/E 388,9% außergewöhnlich hoch selbst im Tech-Sektor-Vergleich. Der Datenbank-Burggraben ist real, aber die OCI-Wette wird zunehmend fremdfinanziert statt aus eigenem Cashflow getragen — ein strukturelles Risiko, kein nur scheinbarer Burggraben-Verlust.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 25,43x, Forward PE 13,6x — die Diskrepanz ist eine Anomalie (siehe Investment-Case) und wird hier nicht unkritisch verwendet; stattdessen wird die konservativere Trailing-EPS-Basis ($5,84) für die Szenario-Herleitung herangezogen. P/B 12,73 weiterhin hoch trotz Kurskollaps. Bewertung über normalisierten FCF ist hier nicht sinnvoll möglich, da FCF aktuell negativ ist — stattdessen EV/Revenue als Hilfsgröße: bei $427,84 Mrd. Market Cap und $67,36 Mrd. Revenue ergibt sich ein EV/Revenue von ~6,4x (vereinfachte Annahme, ohne Netto-Schulden-Bereinigung) — für ein Unternehmen mit negativem FCF und hoher Verschuldung ambitioniert. Rückrechnung: Bei $148,53 preist der Markt trotz des Kollapses noch eine erhebliche FCF-Wende und Schuldenstabilisierung ein — angesichts der Bilanzlage eher ambitioniert als plausibel. Analyst-Konsensziel $252,64 USD (39 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling; Konsens hat den Kollaps womöglich noch nicht vollständig nachvollzogen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score -114,67, Rang 241 — das schwächste Momentum-Signal in diesem Fünfer-Vergleich, mit -57% Kursverlust seit dem 52W-Hoch einer der am stärksten unter Druck stehenden Large-Cap-Tech-Namen aktuell. Durchgängig negative RS-Fenster über alle Zeithorizonte zeigen keinerlei Stabilisierungstendenz. Short Float nicht im Datensatz. Hypothese, nicht datenbasiert: bei derart ausgeprägter, anhaltender Schwäche ist davon auszugehen, dass institutionelle Long-Only-Positionen bereits deutlich reduziert wurden und die verbleibende Positionierung stärker leverage-sensitiv ist. Enttäuschungsrisiko bleibt hoch, solange keine FCF-Stabilisierung oder Bestätigung großer OCI-Vertragsabschlüsse erfolgt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -114,67 (Rang 241). 5T: -13,57%, 10T: -18,29%, 20T: -31,23%, 50T: -21,16%, 6M: -30,42% — durchgängiger, teils sich beschleunigender relativer Abwärtstrend, das schwächste technische Bild aller fünf analysierten Werte. Kein GWS-Signal aktiv. Momentum ist klar fundamental getrieben (FCF-/Bilanzsorgen), keine rein technische Übertreibung erkennbar. Technisches Warnsignal: weiterer Bruch unter das 52-Wochen-Tief $134,57 würde die strukturelle Abwärtsbewegung bestätigen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($220–$300):** OCI etabliert sich als drittgrößter Hyperscaler für KI-Workloads, FCF dreht nachhaltig positiv, Verschuldung wird durch wachsendes EBITDA relativiert.</p>
+<p>**Base ($120–$200):** Moderates OCI-Wachstum, FCF normalisiert sich graduell, Verschuldung bleibt strukturelles Thema, aber kein akutes Risiko.</p>
+<p>**Bear ($40–$90):** OCI-Wachstum enttäuscht strukturell, FCF bleibt dauerhaft negativ, Refinanzierungsdruck zwingt zu Kapitalmaßnahmen (Verwässerung oder Asset-Verkäufe).</p>
+<p>Entscheidende Variable: ob OCI-Großkundenverträge sich in nachhaltig positiven Free Cashflow übersetzen, bevor die Schuldenlast zum limitierenden Faktor wird.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben einen deutlich negativen Erwartungswert (-30,7%) — kein asymmetrischer Edge, im Gegenteil ein klarer Downside-Bias. Oracle ist aktuell kein Buy-and-Hold-Compounder und kein sauberes Momentum-Play, sondern eine hochgehebelte, fremdfinanzierte Wette auf die OCI-Wachstumsstory bei gleichzeitig negativem Free Cashflow und der höchsten Verschuldungsquote in diesem Vergleichsset. Für Long-Only- und konservative Investoren auf aktuellem Niveau ungeeignet; selbst für taktische Trader ist das Chance-Risiko-Verhältnis nach den eigenen Szenarien unattraktiv. Sollte überhaupt eine Position gehalten werden, dann mit strikter Risikobegrenzung (max. 1% eines diversifizierten Portfolios) und engmaschiger Beobachtung der FCF-Entwicklung in den kommenden Quartalsberichten.</p>
+<p>**MSFT** (Azure) und **GOOGL** (Google Cloud) sind die saubereren Cloud-Infrastruktur-Instrumente mit deutlich solideren Bilanzen und positivem FCF. Peer-Multiples nicht im Datensatz, relative Bewertung indikativ, aber die Bilanzqualität allein spricht klar für die Hyperscaler-Peers gegenüber ORCL.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
