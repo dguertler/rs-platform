@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MPWR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.06.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MPWR</h1>
+      <h2>Monolithic Power Systems, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Semiconductors</span></div>
+        <div class="mi">MCap: <span>$65B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.06.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-9.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$1313.32</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">43.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">55.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">61.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">19.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1800–2050</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1200–1450</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">550–700</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $1800–$2050 (20%) · Base $1200–$1450 (45%) · Bear $550–$700 (35%) · EV ~$1200</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>MPWR ist ein hochbewerteter Analog-/Power-Management-Compounder, der nun -23,4% vom 52-Wochen-Hoch entfernt notiert, trotz weiterhin 26,1% YoY-Umsatzwachstum und einer Festungsbilanz (D/E nur 0,54 — die niedrigste Verschuldung in diesem Vergleichsset). RS-Score -9,49 (Rang 52 im erweiterten Smallcap-/Nebenwerte-Universum) zeigt jüngste relative Schwäche (5T -10,1%, 10T -12,5%, 20T -16,82%), überlagert auf weiterhin positivem 6-Monats-Momentum (+34,23%) — ein klassisches Muster eines starken strukturellen Wachsers, der nach einem großen Lauf eine kurzfristige Neubewertung durchläuft. Die Premium-Bewertung (Trailing PE 94,35x, Forward PE 43,3x) bedeutet, der Markt hat MPWR historisch für anhaltendes 25%+-Wachstum und Best-in-Class-Margen bepreist; die zentrale Frage ist, ob der Rücksetzer einen gesunden Reset eines überdehnten Multiples darstellt oder den Beginn einer dauerhafteren Wachstumsverlangsamung im Kerngeschäft (AI-Server-Power, Automotive, Industrial).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Analog-/Mixed-Signal-Halbleiter mit Fokus auf Power-Management — proprietäre integrierte Power-Module statt diskreter Komponenten als Differenzierungsmerkmal</li>
+<li>AI-Server-Power-Delivery (Stromversorgung für GPU-Cluster) als zentraler Wachstumstreiber — direkte Hebelwirkung auf den KI-Infrastruktur-Capex-Zyklus der Hyperscaler</li>
+<li>Automotive-Segment (Elektrifizierung, ADAS-Stromversorgung) als zweite strukturelle Wachstumssäule mit langen Designwin-Zyklen</li>
+<li>Fabless-Modell mit Foundry-Partnerschaften — Lieferketten-Abhängigkeit, aber geringere Kapitalbindung als integrierte Hersteller</li>
+<li>Operating Margin 30,0% solide, aber unter historischem MPWR-Spitzenniveau — Wettbewerbsdruck im AI-Power-Segment nimmt zu (Vicor, Infineon)</li>
+<li>Sehr niedrige Verschuldung (D/E 0,54) — strukturelle Bilanzstärke erlaubt Flexibilität bei M&A oder antizyklischen Investitionen</li>
+<li>FCF $0,49 Mrd. bei $2,96 Mrd. Revenue (16,6% FCF-Marge) — solide, aber nicht außergewöhnlich für die Wachstumsrate</li>
+<li>Analystencoverage mit nur 13 Analysten vergleichsweise gering für ein $64,5-Mrd.-Unternehmen — potenziell geringere institutionelle Durchdringung als bei Mega-Caps</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AI-Server-Power-Nachfrage beschleunigt weiter durch anhaltenden Hyperscaler-Capex-Zyklus, Automotive-Designwins skalieren, Operating Margin erholt sich Richtung 35%+. Annahme (kein Konsens): FY27-EPS ~$38,00 (+25% ggü. Forward-EPS $30,33) × 50x = $1900. Bull-Kursziel: $1800–$2050 (Midpoint $1925). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Wachstum verlangsamt sich moderat auf 18-22% YoY, Margen stabilisieren sich auf aktuellem Niveau, Multiple normalisiert sich leicht. Annahme: FY27-EPS ~$33,00 × 40x = $1320. Base-Kursziel: $1200–$1450 (Midpoint $1325). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: AI-Server-Power-Wachstum verlangsamt sich abrupt durch Hyperscaler-Capex-Pause oder verstärkten Wettbewerbsdruck (Marktanteilsverluste an Vicor/Infineon), Automotive-Endmarkt schwächt zyklisch ab. Kundenkonzentration: AI-Server-Power-Geschäft konzentriert sich strukturell auf wenige Hyperscaler-Großkunden — aus aktuellen Daten nicht exakt quantifizierbar, aber reales Risiko. Geopolitik/China-Exposure: signifikanter Anteil der Fertigung/Lieferkette in Asien — Exportkontrollen und China-Nachfrageschwankungen relevant, aus Daten nicht quantifizierbar. Lieferketten/Foundry: Fabless-Modell macht MPWR strukturell von Foundry-Kapazität (TSMC u.a.) abhängig — Single-Source-ähnliches Risiko bei Kapazitätsengpässen. Verwässerung: Shares Outstanding nicht im Datensatz — nicht abschließend beurteilbar. Regulierung: keine unmittelbaren branchenspezifischen Risiken erkennbar, Exportkontrollen für Halbleitertechnologie als Nebenrisiko. EPS-Wachstum bricht auf ~$22,00 ein, Multiple komprimiert auf 28x angesichts Wachstumsenttäuschung bei einem zuvor premium-bewerteten Namen. Bear-Kursziel: $550–$700 (Midpoint $625). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20×$1.925 + 0,45×$1.325 + 0,35×$625 = $385 + $596,25 + $218,75 = **~$1.200 — implizites Downside vs. aktuellem Kurs ($1.313,32): -8,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 19,6% — solide, aber niedriger als man bei einem Trailing-PE von 94x erwarten würde, ein erstes Anzeichen, dass die Bewertung deutlich vor der fundamentalen Kennzahlqualität läuft. Gross Margin 55,2%, Operating Margin 30,0% — gesund für ein Analog-Halbleiterunternehmen, aber unter historischem MPWR-Spitzenniveau (zuvor häufig >35%). Net Margin 23,0% solide. FCF-Marge 16,6% — angemessen für die Wachstumsphase, aber kein außergewöhnlicher Cash-Generator gemessen an der Bewertung. D/E 0,54 — mit Abstand die stärkste Bilanz in diesem Vergleichsset. Burggraben: proprietäre Power-Modul-Technologie ist real, aber zunehmender Wettbewerb im AI-Power-Segment könnte den Burggraben über Zeit verengen — aus aktuellen Daten nicht abschließend beurteilbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 94,35x extrem hoch, Forward PE 43,3x weiterhin Premium-Bewertung selbst nach der -23,4%-Korrektur. P/B 17,55 ebenfalls hoch. Bewertung über normalisierten FCF: bei $64,52 Mrd. Market Cap und $0,49 Mrd. FCF ergibt sich ein FCF-Multiple von ~132x — selbst bei Berücksichtigung des Wachstumstempos (26,1% YoY) eine ambitionierte Bewertung, eher eine strukturierte Wachstumswette als ein klassisches Value-Argument. Rückrechnung (Annahme): Bei $1.313,32 und Forward-EPS $30,33 (43,3x) preist der Markt ein anhaltend hohes Wachstumstempo (20%+) über mehrere Jahre ein — ambitioniert, aber nicht unplausibel angesichts der AI-Power-Story, sofern der Wettbewerbsdruck moderat bleibt. Analyst-Konsensziel $1.789,23 USD (nur 13 Analysten) — bei geringerer Analystenzahl als Orientierungspunkt mit größerer Unsicherheit zu verstehen, nicht als Kursziel-Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score -9,49, Rang 52 im erweiterten Smallcap-/Nebenwerte-Universum — moderate relative Schwäche nach zuvor starkem Lauf (6M weiterhin +34,23%). Kurzfristige Fenster (5T -10,1%, 10T -12,5%, 20T -16,82%) zeigen spürbare Korrektur, möglicherweise Gewinnmitnahmen nach der starken Rally. Short Float nicht im Datensatz. Hypothese, nicht datenbasiert: bei geringerer Analystenabdeckung (13 Analysten) und hoher Bewertung könnte die Aktie überproportional auf einzelne Datenpunkte (Quartalszahlen, Hyperscaler-Capex-Kommentare) reagieren — Fast-Money-Dominanz wahrscheinlicher als bei breiter gecoverten Mega-Caps.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -9,49 (Rang 52, Smallcap-Universum). 5T: -10,1%, 10T: -12,5%, 20T: -16,82%, 50T: -4,3%, 6M: +34,23% — kurzfristige Schwäche überlagert eine weiterhin positive mittelfristige Trendstruktur. Kein GWS-Signal aktiv (Signal-Typ: Smallcap, keine Ampel-Daten verfügbar). Momentum-Abschwächung in den kurzen Fenstern könnte fundamental (Wachstumssorgen) oder technisch (Gewinnmitnahmen nach starkem Lauf) bedingt sein — aus den Daten nicht eindeutig zu trennen. Technisches Warnsignal: Bruch unter das 50-Tage-Niveau (aktuell -4,3%) ins deutlich Negative würde die mittelfristige Aufwärtsstruktur erstmals ernsthaft in Frage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($2.200–$2.800):** AI-Server-Power-Dominanz festigt sich, Automotive-Elektrifizierung skaliert voll, MPWR etabliert sich als Kern-Lieferant für KI-Infrastruktur-Stromversorgung.</p>
+<p>**Base ($1.300–$1.900):** Solides, aber sich normalisierendes Wachstum, Multiple-Kompression durch zunehmenden Wettbewerb teilweise kompensiert durch Volumenwachstum.</p>
+<p>**Bear ($500–$900):** Wettbewerbsverlust im AI-Power-Segment an größere, besser kapitalisierte Player, Automotive-Zyklusschwäche, Multiple-Kompression auf Sektor-Durchschnitt.</p>
+<p>Entscheidende Variable: Fähigkeit, die Technologieführerschaft im AI-Server-Power-Segment gegen zunehmenden Wettbewerb (Vicor, Infineon, TXN) zu verteidigen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben einen leicht negativen Erwartungswert (-8,6%) — kein asymmetrischer Edge nach der jüngsten kurzfristigen Korrektur. MPWR bleibt ein strukturell hochwertiges Wachstumsunternehmen mit der stärksten Bilanz (D/E 0,54) in diesem Vergleichsset, aber die Bewertung (Forward PE 43x, FCF-Multiple ~132x) lässt wenig Spielraum für Enttäuschungen. Eher ein zyklischer Wachstums-Trade als ein klassischer Buy-and-Hold-Compounder auf aktuellem Bewertungsniveau — geeignet für Wachstumsinvestoren mit höherer Risikotoleranz, weniger für konservative Value-orientierte Portfolios. Positionsgröße: angesichts geringerer Analystenabdeckung und hoher Bewertung max. 2-3% eines diversifizierten Portfolios, mit Beobachtung der kommenden Quartalszahlen als nächstem Katalysator.</p>
+<p>**Vicor (VICR)** als direkter Wettbewerber im Power-Modul-Segment mit niedrigerer Bewertung. **Texas Instruments (TXN)** als breiter diversifizierter, margenstärkerer Analog-Peer mit deutlich niedrigerem Multiple. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
