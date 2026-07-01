@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AVAV — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AVAV</h1>
+      <h2>AeroVironment, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Aerospace & Defense</span></div>
+        <div class="mi">MCap: <span>$8B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-96.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$165.07</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">51.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$1.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">25.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-8.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">210–260</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">145–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">70–110</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $210–$260 (25 %) · Base $145–$185 (50 %) · Bear $70–$110 (25 %) · EV ~$164</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Der Fundamental-Snapshot (Cache-Stand 29.06.2026, Kurs $137,95 = Freitagsschluss 26.06.) liegt vor dem Q4-FY26-Report vom 30.06.2026. Kurs, Market Cap, Forward-PE und Price/Book wurden für diese Analyse manuell auf den verifizierten Post-Earnings-Stand ($165,07) aktualisiert; Margen, ROE, ROIC und Free Cashflow stammen weiterhin aus dem älteren Snapshot und sind entsprechend eingeschränkt zu lesen.</p>
+<p>AVAV meldete am 30.06. Rekordzahlen für Q4 FY26: Umsatz $641,6 Mio. (+133 % YoY, organisch +31 %), Non-GAAP-EPS $1,84 gegen Konsens ~$1,46 (+26 % Überraschung), Adjusted EBITDA $140 Mio. (22 % Marge). Gesamtjahr: Umsatz $1,977 Mrd. (+141 % YoY, organisch +30 %), Non-GAAP-EPS $3,31 — über dem oberen Ende der eigenen Guidance. Die Aktie sprang am Ankündigungstag +18,8 % von $139,00 auf $165,07 (intraday bis $178,50). Kern der Story: Das Wachstum ist kein reines Zyklushoch, sondern strukturell durch die BlueHalo-/Empirical-Zukäufe sowie die Aufrüstung westlicher Verteidigungsbudgets (Loitering Munitions als eigene Kategorie) getragen — Buchungen $2,7 Mrd., Book-to-Bill 1,4x, Funded Backlog $1,2 Mrd. untermauern das. Was der Markt trotz des Sprungs aber bereits einpreist, zeigt die FY27-Guidance: Non-GAAP-EPS $3,02–$3,34 (Mittelwert $3,18) liegt praktisch flach zum FY26-Ergebnis trotz ~10 % Umsatzwachstum — mehrere Analysten (RBC, Stifel u. a.) senkten trotz des Beats ihre Kursziele, weil das SCDE-Segment durch die SCAR-Vertragsbeendigung und Regierungs-Finanzierungsverzögerungen -8 % YoY schrumpfte. Genau dieses Spannungsfeld zwischen Rekord-Backlog und flacher EPS-Guidance ist der eigentliche Investment-Case.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Drei Segmente: Precision Strike & Defensive Systems (AxS, u. a. Switchblade-Loitering-Munitions, Red Dragon, RF Titan Counter-UAS) — $333 Mio. Q4-Umsatz, +80 % YoY, stärkstes Segment</li>
+<li>Uncrewed Aircraft Systems (klassische Drohnen JUMP 20-X, Puma, P550) — +17 % YoY, reifer, solider Kern</li>
+<li>Space, Cyber & Directed Energy (SCDE, aus BlueHalo/Empirical) — $150 Mio. Q4-Umsatz, -8 % YoY durch SCAR-Terminierung und Funding-Delays</li>
+<li>Backlog-Struktur mit Klumpenrisiko: Funded Backlog $1,2 Mrd. (73 % AxS, 27 % SCDE) vs. Unfunded Backlog $1,5 Mrd. (86 % SCDE) — SCDE-Wachstum hängt fast vollständig von künftigen Regierungsbewilligungen ab</li>
+<li>Operativer Hebel primär über AxS-Fertigungsskalierung — laut Management Haupttreiber der FY27-Capex, daher keine positive FCF-Guidance</li>
+<li>Kunde faktisch fast ausschließlich US-Regierung/DoD und verbündete Streitkräfte — strukturelle Abhängigkeit vom US-Bewilligungszyklus</li>
+<li>Buchungen $2,7 Mrd. FY26, Book-to-Bill 1,4x — Nachfrageseite intakt, Umsetzung in Umsatz ist der Flaschenhals</li>
+<li>D/E 19,3x (Datenstand vor Earnings) — deutlich erhöht, plausibel primär M&A-finanziert (BlueHalo/Empirical)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Westliche Verteidigungsbudgets (NATO-Aufrüstung, Indo-Pazifik) beschleunigen weiter, SCDE-Funding-Delays lösen sich schneller als erwartet, FY27-EPS erreicht das obere Guidance-Ende $3,34, Markt zahlt eine strukturelle Defense-Tech-Prämie. Annahme (kein Konsens): $3,34 (FY27-Guidance-Obergrenze) × 70x Forward-Multiple = $233,8. Bull-Kursziel: $210–$260 (Midpoint $235). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird in etwa erfüllt (Mittelwert FY27-EPS $3,18), SCDE bleibt bis Jahresmitte belastet und konvertiert danach wie avisiert. Markt hält das aktuelle implizite Forward-Multiple von ~52x in etwa, gestützt durch Backlog/Book-to-Bill. Annahme (kein Konsens, auf Basis der Unternehmens-Guidance): $3,18 × 52x = $165,4. Base-Kursziel: $145–$185 (Midpoint $165). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: weitere SCDE-Funding-Verzögerungen bzw. neue Programmverluste (Vorbild SCAR-Terminierung), FY27-EPS landet am unteren Guidance-Ende oder darunter, das Premium-Multiple bricht auf historisches Defense-Services-Niveau zurück. Kundenkonzentration: praktisch vollständig US-Regierung/verbündete Streitkräfte — nicht exakt quantifizierbar, aber strukturell die zentrale Bear-Variable (SCDE-Schwäche ist bereits Beweis). Geopolitik: keine China-Exposure, aber ITAR-Exportbeschränkungen limitieren internationale Skalierung. Lieferketten/Foundry: aus den Daten nicht beurteilbar. Verwässerung: SBC/Aktienanzahl-Trend nicht im Datensatz — BlueHalo/Empirical könnten teilweise in Aktien bezahlt worden sein (Hypothese, nicht datenbasiert). Regulierung: Haushalts-Bewilligungs- und Contract-Protest-Risiko. D/E 19,3x (Datenstand vor Earnings) belastet die Bilanz zusätzlich bei EPS-Enttäuschung. Annahme: $3,02 (FY27-Guidance-Untergrenze) × 30x = $90,6. Bear-Kursziel: $70–$110 (Midpoint $90). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 25 % + 50 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $235 + 0,50 × $165 + 0,25 × $90 = $58,75 + $82,50 + $22,50 = **~$163,75 — implizites Downside vs. aktuellem Kurs ($165,07): −0,8 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE -8,7 % und ROIC 4,5 % (beide Datenstand vor Earnings) sind durch M&A-Integrationskosten und Kaufpreis-Abschreibungen aus BlueHalo/Empirical verzerrt — die Anomalie (negative GAAP-Marge trotz Rekord-Non-GAAP-EPS $3,31) ist plausibel M&A-bedingt, aus den Daten aber nicht abschließend auflösbar. Gross Margin 25,0 % (Datenstand vor Earnings) ist für einen Hardware-lastigen Rüstungsproduzenten im branchenüblichen Rahmen. FCF -$304 Mio. (Datenstand vor Earnings) plus die explizite Management-Aussage, wegen Kapazitätsausbau-Capex in FY27 keinen positiven FCF zu erwarten, zeigen: aktuell eine Investitionsphase, kein reifer Cashflow-Compounder. D/E 19,3x ist ein reales Bilanzrisiko, keine Datenverzerrung.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei $165,07 und FY27-Guidance-Mittelwert $3,18 impliziert der Kurs ein Forward-PE von ~52x — deutlich über dem historischen Defense-Services-Durchschnitt (20–30x). Rückrechnung: Der Kurs setzt EPS-Wachstum über FY27 hinaus auf ~$5,50 bis FY29 voraus (Annahme, kein Konsens) — ambitioniert, angesichts Book-to-Bill 1,4x aber nicht unplausibel. Price/Book auf Basis des aktualisierten Kurses ~1,92x (Bilanzbasis: Datenstand vor Earnings) ist moderat. Analysten-Konsensziel $285,99 stammt aus der Zeit vor dem Report und ist bereits überholt: RBC senkte auf $210 (von $250), Stifel auf $220 (von $315), Piper Sandler bestätigte $248 — die Zielbandbreite hat sich nach unten verschoben, obwohl die Ratings mehrheitlich Buy blieben. Weder Value-Falle noch günstiges Upside, sondern eine strukturierte Wette auf anhaltendes Verteidigungsbudget-Wachstum bei bereits hoher Bewertung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>+18,8 % Kurssprung, aber gemischte Analystenreaktion: Mehrere Häuser (RBC, Stifel, Clear Street, KeyBanc, BTIG) senkten trotz Beat die Kursziele mit Verweis auf Programmverluste und Funding-Delays, hielten aber Buy-Ratings — die Coverage bleibt zwischen Backlog-Optimismus und SCDE-Risiko gespalten. RS-Score -96,56 (Rang 325) bleibt tief negativ — die 20T-/50T-/6M-Fenster (-25,6 % / -25,2 % / -54,3 %) zeigen: der Trend bricht erst seit einem Tag, nicht seit Wochen. Enttäuschungsrisiko: hoch, falls sich der Pop als Einmalreaktion erweist statt in anhaltendem RS-Aufbau zu münden (Hypothese, nicht datenbasiert).</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Die Aktie fiel von einem 52-Wochen-Hoch $417,86 auf ein 52-Wochen-Tief $135,20 unmittelbar vor dem Report (-68 %) und sprang danach auf $165,07. RS-Fenster: 5T +13,44 %, 10T -4,93 %, 20T -25,59 %, 50T -25,21 %, 6M -54,27 % — der langfristige Abwärtstrend ist technisch noch nicht gebrochen, nur der letzte Tag zeigt Stärke. GWS-Ampel nicht verfügbar (Smallcap-Klassifizierung, kein Signal). Warnsignal: ein Wochenschluss zurück unter $150 (Gap-Fill-Zone) würde die Post-Earnings-Stärke als gescheitert markieren; Rückfall unter $139 wäre eine vollständige Umkehr des Sprungs.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($300–$450):** Anhaltender globaler Drohnen-/Loitering-Munitions-Hochlauf, internationale Expansion trotz ITAR, FY29/30-EPS ~$6–7 bei fortgesetzter Defense-Tech-Multiple-Prämie.</p>
+<p>**Base ($170–$260):** Backlog konvertiert planmäßig, Verteidigungsbudgets wachsen mid-single-digit, Multiple normalisiert auf 25–30x bei EPS $6–8.</p>
+<p>**Bear ($50–$90):** SCDE-Schwäche verstetigt sich, Haushaltskürzungen, D/E-Last erzwingt dilutive Kapitalmaßnahme, Multiple fällt auf Industrie-Durchschnitt.</p>
+<p>Entscheidende Variable: Tempo der SCDE-Backlog-Konversion in bewilligte Verträge vs. weitere Programmverluste.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV ~-0,8 %). AVAV ist aktuell ein Event-getriebener Momentum-Trade auf strukturell intaktem, aber technisch noch nicht bestätigtem Boden — kein sauberer Compounder, solange GAAP-Profitabilität (M&A-verzerrt), D/E 19,3x und negative FY27-FCF-Guidance nicht adressiert sind. Geeignet für Trading-orientierte Investoren mit Toleranz für Haushalts-Kopfrisiko, nicht für Buy-and-Hold ohne engmaschige Kontrolle. Positionsgröße: max. 1–2 % (Beta 1,361, binäre Abhängigkeit von US-Haushaltsbewilligungen). Kratos Defense (KTOS) ist der reinere, kleinere Peer mit geringerer M&A-Hebelwirkung. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
