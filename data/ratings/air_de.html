@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AIR.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">02.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AIR.DE</h1>
+      <h2>Airbus SE                     A</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Aerospace & Defense</span></div>
+        <div class="mi">MCap: <span>$150B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 02.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">39.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$190.72</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">39.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$72.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">15.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">167.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">19.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-15.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">216–238</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">165–184</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–88</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull €216–€238 (25 %) · Base €165–€184 (45 %) · Bear €75–€88 (30 %) · EV ~€160</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Airbus ist neben Boeing einer von nur zwei globalen Herstellern von Verkehrsflugzeugen im relevanten Segment — ein struktureller Duopol-Burggraben, den kein neuer Wettbewerber in absehbarer Zeit durchbrechen kann. Der Kurs (€190,72) liegt 13,8 % unter dem 52-Wochen-Hoch (€221,25), das Umsatzwachstum ist mit −6,6 % YoY negativ, und der Free Cashflow ist mit −€84,1 Mio. leicht negativ — ungewöhnlich für ein Unternehmen mit einem mehrjährigen Auftragsbestand. Auffällige Kennzahl-Anomalien: Erstens liegt die Net Margin (6,9 %) deutlich über der Operating Margin (1,5 %) — plausibel durch Equity-Erträge aus Beteiligungen/Joint Ventures oder Einmaleffekte erklärbar, aus den Daten aber nicht abschließend auflösbar; diese verzerrte Net Margin wird daher nicht als primäre Bewertungsgrundlage verwendet. Zweitens liegt die Forward PE (39,8x) über der Trailing PE (30,1x) — der Markt erwartet also einen kurzfristigen Ergebnisrückgang, kein -wachstum. Die eigentliche Story bleibt der branchenweit bekannte, aus den Daten nicht quantifizierbare mehrjährige Lieferengpass bei Antrieben und Strukturbauteilen, der die Auslieferungsrate unter der Nachfrage hält — der genaue Zusammenhang mit der aktuellen Kursbewegung ist aus den vorliegenden Daten nicht verifizierbar.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Duopol mit Boeing im Verkehrsflugzeugbau — extrem hohe Eintrittsbarrieren (Zertifizierung, Kapitalintensität, Zulieferer-Ökosystem)</li>
+<li>Mehrjähriger Auftragsbestand (nicht im Datensatz quantifiziert) sichert Umsatzsichtbarkeit weit über den Investitionshorizont hinaus</li>
+<li>Operating Margin nur 1,5 % — deutlich unter dem historischen Normalniveau der Branche (typisch 6–9 %), reflektiert aktuelle Produktions-/Lieferkettenineffizienzen</li>
+<li>Airbus Defence & Space und Airbus Helicopters als Diversifikation außerhalb des zyklischen Verkehrsflugzeuggeschäfts — Rückenwind durch europäische Verteidigungsausgaben</li>
+<li>Zulieferer-Abhängigkeit (Triebwerke, Rumpfsektionen) als strukturelles Single-Source-Risiko in Teilen der Lieferkette</li>
+<li>D/E 55,7 % moderat, aber der negative FCF (−€84,1 Mio.) ist ein Warnsignal für die kurzfristige Kapitaldisziplin</li>
+<li>Revenue TTM €72,53 Mrd., Wachstum −6,6 % YoY — reflektiert primär Auslieferungs-, nicht Nachfrageschwäche</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Lieferkettenengpässe lösen sich auf, Auslieferungsrate normalisiert sich Richtung Zielniveau, FCF dreht deutlich ins Plus, Marge erholt sich auf normalisiertes Niveau durch Skaleneffekte im großen Auftragsbestand. Annahme (kein Konsens): FY27-EPS ~€9,50 × 25x = €237,50; unteres Band EPS ~€9,00 × 24x = €216. Bull-Kursziel: €216–€238 (Midpoint €227). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: graduelle Auslieferungsrampe setzt sich fort, Marge normalisiert moderat. Annahme (kein Konsens): FY27-EPS ~€7,50–€8,00 × 22–23x = €165–€184. Base-Kursziel: €165–€184 (Midpoint €175). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Lieferkettenprobleme (Triebwerke, Strukturbauteile) verschärfen sich weiter, Auslieferungsziele werden verfehlt, Einmaleffekte, die aktuell die Net Margin stützen, kehren sich um. Kundenkonzentration: breite Airline-Kundenbasis global — konkrete Konzentration nicht in den Daten quantifiziert. Geopolitik/Exportkontrollen: Airbus liefert weltweit inkl. China — geopolitische Spannungen (Handelskonflikte, Zolldrohungen) sind ein reales, aus den Daten nicht quantifizierbares Risiko. Lieferketten/Single-Source: zentrale Abhängigkeit von wenigen Triebwerksherstellern (CFM/RTX/Rolls-Royce je nach Modell) — bekanntes strukturelles Risiko, nicht quantifizierbar aus dem Datensatz. Verwässerung: Aktienanzahl-Trend nicht im Datensatz — nicht beurteilbar. Regulierung: Zertifizierungsrisiken bei neuen Modellen (z.B. A320neo-Nachfolger) real, nicht quantifizierbar. Annahme: FY27-EPS ~€5,00–€5,50 × 15–16x = €75–€88. Bear-Kursziel: €75–€88 (Midpoint €82). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 25 % + 45 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × €227 + 0,45 × €175 + 0,30 × €82 = €56,75 + €78,75 + €24,60 = **~€160 — implizites Downside vs. aktuellem Kurs (€190,72): −16,1 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 19,7 % und ROIC 24,2 % wirken auf den ersten Blick stark, sind aber durch die oben beschriebene Net-Margin-Anomalie (Equity-Erträge/Einmaleffekte) nach oben verzerrt — die operative Kapitalrendite ist auf Basis der Operating Margin (1,5 %) deutlich schwächer, als die ROE-Zahl suggeriert. FCF −€84,1 Mio. ist der ehrlichste Indikator der aktuellen operativen Belastung. Gross Margin 15,4 % ist branchentypisch niedrig (Flugzeugbau ist kapital-, nicht margenintensiv). Bilanz mit D/E 55,7 % moderat, P/B 5,75x preist die Duopol-Qualität bereits deutlich ein.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 30,1x und Forward PE 39,8x — die inverse Relation (Forward höher als Trailing) ist selbst eine Warnung: der Markt erwartet einen kurzfristigen Ergebnisrückgang trotz operativer "Erholungs"-Story. Normalisierter FCF über den Zyklus ist auf Basis des aktuell negativen FCF nicht sinnvoll ableitbar — stattdessen P/B (5,75x) als Bewertungsanker heranziehen, was für einen Duopolisten mit Jahrzehnte-Burggraben nicht per se überzogen ist. Rückrechnung: Der aktuelle Kurs von €190,72 impliziert bei Forward-EPS €4,79 eine deutliche Ergebnisverbesserung binnen 2–3 Jahren auf das hier angenommene Base-Case-Niveau — ambitioniert angesichts der laufenden Lieferkettenprobleme, aber nicht unrealistisch angesichts des Auftragsbestands. Analystenziel nicht im Datensatz verfügbar (N/A) — keine Aussage zum Sell-Side-Konsens möglich.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 39,1, Rang 11 im DAX-40 — moderate relative Stärke, nicht Spitzenposition. Short Float/institutionelle Positionierung nicht im Datensatz. Hypothese, nicht datenbasiert: Das niedrige Beta (0,88) und die defensiv-industrielle Positionierung deuten auf eine Long-Only-dominierte Aktionärsbasis hin, die auf den langfristigen Auftragsbestand statt auf kurzfristiges Momentum setzt. Enttäuschungsrisiko: moderat bis hoch, da jede weitere Verzögerung der Auslieferungsrate unmittelbar negativ auf die Forward-Schätzungen wirkt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>5T +1,4 %, 10T +3,3 %, 20T +11,6 %, 50T +16,1 %, 6M −3,0 %, 12M +9,6 % — moderat positives mittelfristiges Momentum bei leicht negativem 6-Monats-Fenster, insgesamt kein eindeutiger Trend. Das Momentum wirkt gemischt fundamental/technisch gestützt — keine klare GWS-Bestätigung (kein Signal aktiv). Warnsignal: Ein weiterer Rückgang der Auslieferungszahlen (nicht im Datensatz, aber quartalsweise berichtet) wäre der klassische fundamentale Auslöser für eine technische Trendwende.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (€260–€320):** Lieferengpässe vollständig gelöst, Auslieferungsrate erreicht Zielniveau, europäische Verteidigungsausgaben treiben Defence-Segment zusätzlich, FCF re-ratet die Aktie.</p>
+<p>**Base (€175–€230):** Solide, aber graduelle Normalisierung entlang des bestehenden Auftragsbestands.</p>
+<p>**Bear (€90–€130):** Anhaltende Lieferkettenprobleme und Zertifizierungsverzögerungen drücken Marge und Multiple dauerhaft.</p>
+<p>Entscheidende Variable: Geschwindigkeit der Lieferketten-Normalisierung (Triebwerke, Strukturbauteile) relativ zum Auftragsbestand-Abbau.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Airbus ist ein struktureller Duopol-Compounder mit einem der stärksten Burggräben im globalen Industriesektor, aktuell aber operativ durch Lieferketten- und Margenprobleme belastet — die eigenen Szenarien ergeben ein implizites Downside von −16,1 % und damit keinen asymmetrischen Edge auf dem aktuellen Niveau. Geeignet für langfristige Buy-and-Hold-Investoren mit europäischem Industrie-Exposure-Wunsch, weniger als kurzfristiger Trading-Trade angesichts der Bewertungsanomalien. Position moderat halten, auf konkrete Auslieferungsdaten in kommenden Quartalsberichten achten. Peer: **Boeing (BA)** als einziger direkter Duopol-Peer, aktuell mit eigenen, tiefergehenden operativen Problemen — Airbus ist relativ das sauberere Instrument für die Duopol-These. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

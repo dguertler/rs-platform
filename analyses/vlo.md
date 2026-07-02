@@ -1,6 +1,6 @@
 # VLO — KI-Aktienbewertung
 
-**Valero Energy Corporation** · Energy · 30.06.2026 · Signal: Kein Signal
+**Valero Energy Corporation** · Energy · 02.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
@@ -10,74 +10,73 @@
 | Revenue (TTM) | $117.84 Mrd. |
 | Gross Margin | 14.6% |
 | ROE | 15.8% |
-| RS-Score | 97.1 |
+| RS-Score | 86.2 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+**Szenarien (12–18 Monate):** Bull $264–$312 (25 %) · Base $209–$230 (45 %) · Bear $64–$90 (30 %) · EV ~$194
+
 ## 1. INVESTMENT-CASE
 
-Valero ist einer der größten unabhängigen Erdölraffinerie-Betreiber der USA — die eigentliche Story ist nicht "Öl-Aktie", sondern eine reine Crack-Spread-Wette: Valero besitzt kein nennenswertes Upstream-Geschäft, sondern verdient an der Marge zwischen Rohöl-Einkaufspreis und Produktverkaufspreis (Benzin, Diesel, Jet Fuel). Was der Markt aktuell goutiert: Raffineriekapazität in den USA ist strukturell verknappt (Schließungen der letzten Jahre, kaum Neubauten), während Nachfrage nach raffinierten Produkten robust bleibt — das stützt Crack Spreads strukturell höher als im historischen Mittel. RS-Score 97,1 (Rang 34 im S&P 500) und ein Kursanstieg von $259,37 auf $266,32 (29.06., neues 52-Wochen-Hoch) zeigen anhaltendes Momentum. Beta von nur 0,553 ist ungewöhnlich niedrig für einen Energiewert — ein Hinweis, dass Valero von Investoren teilweise als defensiverer Cashflow-Generator denn als reiner Öl-Beta-Trade wahrgenommen wird. Was der Markt möglicherweise übersieht: Die strukturelle Kapazitätsverknappung ist ein zeitlich begrenztes Fenster — neue Raffinerieprojekte in Asien und dem Nahen Osten könnten die globale Überkapazitäts-Dynamik mittelfristig wieder umkehren.
+Valero ist einer der größten unabhängigen Raffineriebetreiber der USA — ein klassisches Zyklus-Geschäft, dessen Ertragskraft primär von der Crack-Spread (Differenz zwischen Rohöl- und Produktpreisen), nicht vom Ölpreis selbst, abhängt. Der Kurs notiert mit $259,37 nur 2,3 % unter dem 52-Wochen-Hoch ($265,61) und hat sich seit dem 52-Wochen-Tief ($130,78) fast verdoppelt (+98,3 %) — getrieben von einem branchenweit bekannten, strukturellen Kapazitätsengpass im US-Raffineriesektor nach mehreren Werksschließungen der letzten Jahre; der exakte Zusammenhang mit der spezifischen Kursbewegung von VLO ist aus den vorliegenden Daten nicht verifizierbar. Trailing PE 18,95x wirkt moderat, Forward PE 12,27x deutet auf weiter steigende Konsens-Erwartungen hin. Die zentrale Frage ist nicht, ob Valero heute gut verdient — das FCF von $4,79 Mrd. zeigt das deutlich —, sondern ob die aktuell hohen Crack-Spreads ein neues strukturelles Niveau darstellen oder ein zyklisches Hoch, das mean-revertiert.
 
 ## 2. GESCHÄFTSMODELL
 
-- Reines Downstream-Geschäft: Rohöl-Einkauf, Raffination zu Benzin/Diesel/Jet Fuel/petrochemischen Produkten, Verkauf über Großhandel und eigene Tankstellenmarken
-- Crack Spread als zentraler Ergebnistreiber — Marge zwischen Rohölkosten und Produktverkaufspreisen, nicht der absolute Ölpreis selbst
-- Geografische Diversifikation über US-Golfküste, Mittlerer Westen, Westküste und Kanada reduziert regionale Konzentrationsrisiken
-- Renewable-Diesel-Segment (Diamond Green Diesel JV) als strukturell wachsendes, durch staatliche Förderprogramme (RFS, LCFS) unterstütztes Zusatzgeschäft
-- Operativer Hebel hoch: Fixkostenintensive Raffinerien profitieren überproportional von steigenden Crack Spreads, leiden aber auch überproportional bei deren Kompression
-- Strukturelle Abhängigkeit von US-Raffineriekapazitätsauslastung — branchenweite Kapazitätsschließungen der letzten Jahre stützen aktuell die Margen
-- Wartungszyklen (Turnarounds) erzeugen periodische Volumenschwankungen, unabhängig von der Marktnachfrage
-- Revenue TTM $117,84 Mrd., Wachstum nur +6,6% YoY — Umsatz korreliert stark mit Rohölpreisniveau, weniger mit echtem Volumenwachstum
+- Raffination von Rohöl zu Kraftstoffen (Benzin, Diesel, Jet Fuel) — Ergebnis hängt primär von der Crack-Spread ab, nicht vom absoluten Ölpreis
+- Skalenvorteile durch große, komplexe Raffinerien mit hoher Nelson-Komplexität — kann günstigeres Rohöl verarbeiten als einfachere Konkurrenzanlagen
+- Diamond Green Diesel (Joint Venture, erneuerbare Kraftstoffe) als struktureller Diversifikationsvektor außerhalb des klassischen Rohöl-Zyklus
+- US-Raffineriekapazität ist in den letzten Jahren durch Werksschließungen strukturell geschrumpft — begünstigt die verbliebenen Betreiber wie Valero, solange die Nachfrage stabil bleibt
+- Hohe operative Fixkosten erzeugen starken Operating Leverage in beide Richtungen (Marge steigt/fällt überproportional zur Crack-Spread)
+- D/E 42,7 % moderat, solide Bilanz für ein zyklisches Geschäft
+- Revenue TTM $117,84 Mrd., Wachstum +6,6 % YoY — primär preis-/margengetrieben, nicht volumengetrieben
 
 ## 3. BULL CASE
 
-Anhaltende strukturelle US-Raffineriekapazitätsverknappung (weitere Schließungen, keine signifikanten Neubauten) bei stabiler bis steigender Nachfrage hält Crack Spreads dauerhaft über historischem Mittel. Renewable-Diesel-Segment skaliert weiter und trägt zunehmend zur Marge bei. Annahme (kein Konsens): FY27-EPS ~$22 × 16x Forward-Multiple = $352. Bull-Kursziel: $320–$390 (Midpoint $355). Eintrittswahrscheinlichkeit: 20%.
+Crack-Spreads bleiben strukturell erhöht durch anhaltende Kapazitätsknappheit und starke Destillat-Nachfrage, Diamond Green Diesel skaliert weiter. Annahme (kein Konsens): FY27-EPS ~$24,00 × 13x = $312; unteres Band EPS ~$22,00 × 12x = $264. Bull-Kursziel: $264–$312 (Midpoint $288). Eintrittswahrscheinlichkeit: 25 %.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Crack Spreads normalisieren leicht von aktuellen erhöhten Niveaus, bleiben aber über dem historischen Tiefpunkt-Mittel dank fortgesetzter Kapazitätsdisziplin. EPS bewegt sich im Bereich der aktuellen Konsensschätzungen. Annahme (kein Konsens): FY27-EPS ~$17 × 13x = $221. Base-Kursziel: $200–$250 (Midpoint $225). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Crack-Spreads normalisieren sich leicht, bleiben aber über dem historischen Zyklusmittel. Annahme (kein Konsens): FY27-EPS ~$19,00–$20,00 × 11–11,5x = $209–$230. Base-Kursziel: $209–$230 (Midpoint $220). Eintrittswahrscheinlichkeit: 45 %.
 
 ## 5. BEAR CASE
 
-Auslöser: Globale Raffineriekapazität wird durch Neubauten in Asien und dem Nahen Osten (Kuwait, Indien, China) ausgeweitet, gleichzeitig schwächt sich die Nachfrage nach raffinierten Produkten durch beschleunigte EV-Adoption und Konjunkturabschwächung ab — Crack Spreads komprimieren auf zyklische Tiefststände wie 2019/2020. Kundenkonzentration: gering, da Großhandel und Tankstellennetz breit diversifiziert — auf Datenbasis nicht abschließend beurteilbar. Geopolitik: Rohölpreisvolatilität durch geopolitische Schocks (OPEC+-Entscheidungen, Sanktionen) kann sowohl Einkaufskosten als auch Margen kurzfristig stark verzerren — strukturell schwer prognostizierbar. Lieferketten/Single-Source-Risiko: Rohölbezug ist diversifiziert über mehrere Quellen, kein erkennbares Einzelrisiko aus den Daten. Verwässerung: D/E 42,7% ist moderat, SBC-Trend aus Daten nicht verfügbar. Regulierung: Verschärfte Emissionsauflagen und CO2-Bepreisung könnten Raffineriebetrieb mittelfristig verteuern; gleichzeitig könnten LCFS-/RFS-Förderprogramme für Renewable Diesel politisch zurückgefahren werden. Bei globaler Kapazitätsausweitung und Margenkompression: Annahme FY27-EPS ~$8 × 10x = $80. Bear-Kursziel: $65–$110 (Midpoint $87,50). Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Neue Raffineriekapazität (national oder international, z.B. Nahost/Asien) kommt online und beendet die Angebotsknappheit, gleichzeitig schwächt eine konjunkturelle Abkühlung die Kraftstoffnachfrage — klassischer zyklischer Crack-Spread-Kollaps wie 2019/2020. Kundenkonzentration: breite Kundenbasis über Großhandel/Endmärkte, keine materielle Konzentration erkennbar. Geopolitik/China-Exposure: begrenzt, primär US-Inlandsgeschäft mit gewissem Exportanteil — nicht quantifizierbar aus den Daten. Lieferketten: Rohölbezug diversifiziert über mehrere Quellen, kein erkennbares Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend nicht im Datensatz — nicht beurteilbar. Regulierung: EPA-Emissionsvorschriften und Renewable-Fuel-Standard-Regularien sind ein laufendes, nicht quantifizierbares Risiko für die Raffineriewirtschaftlichkeit. Annahme: FY27-EPS ~$8,00–$10,00 × 8–9x = $64–$90. Bear-Kursziel: $64–$90 (Midpoint $77). Eintrittswahrscheinlichkeit: 30 %.
 
-**Summe: 20% + 45% + 35% = 100%**
+**Summe: 25 % + 45 % + 30 % = 100 %**
 
-**Erwartungswert:** EV = 0,20 × $355 + 0,45 × $225 + 0,35 × $87,50 = $71,00 + $101,25 + $30,63 = **~$202,88 — implizites Downside vs. aktuellem Kurs ($266,32): −23,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing im Fazit ist auf diesem Niveau unzulässig — der Kurs notiert nahe dem 52-Wochen-Hoch in einem zyklischen Geschäft.
+**Erwartungswert:** EV = 0,25 × $288 + 0,45 × $220 + 0,30 × $77 = $72,00 + $99,00 + $23,10 = **~$194 — implizites Downside vs. aktuellem Kurs ($259,37): −25,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, ein deutliches Downside-Risiko, typisch für eine zyklische Aktie nahe einem Margen-/Kurshoch.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 15,9% und ROIC 8,7% sind solide, aber typisch zyklisch — in schwachen Crack-Spread-Phasen (2019/2020) waren diese Werte deutlich niedriger oder negativ. Gross Margin nur 14,6% und Operating Margin 6,1% sind im Branchenvergleich normal für ein margenarmes Raffineriegeschäft. FCF $4,79 Mrd. bei $117,84 Mrd. Revenue (4,1% FCF-Marge) ist solide für den aktuellen Zykluszeitpunkt, aber stark von Crack-Spread-Niveau abhängig — im Zyklustief war Valeros FCF historisch deutlich negativ. Bilanzqualität: D/E 42,7% ist moderat und gibt Spielraum für Aktienrückkäufe und Dividenden auch in schwächeren Phasen. Dividendenrendite 1,85% ist im Energiesektor eher niedrig — Kapitalrückführung erfolgt überwiegend über Rückkäufe. Der wirtschaftliche Burggraben liegt primär in Skaleneffekten und geografischer Logistikvorteilen (Nähe zu Exportterminals an der Golfküste), weniger in echtem Pricing Power — Crack Spreads sind letztlich ein Marktpreis, den kein Einzelunternehmen kontrolliert.
+ROE 15,85 % und ROIC 8,66 % sind für den aktuellen Teil des Raffinerie-Zyklus solide, aber diese Zahlen müssen im Zykluskontext bewertet werden — Top-of-Cycle-Margen (Operating Margin 6,05 %, Gross Margin 14,56 %) sind historisch nicht das strukturelle Normalniveau der Branche. FCF $4,79 Mrd. bei $117,84 Mrd. Revenue (FCF-Marge ~4,1 %) ist stark, reflektiert aber den aktuellen Crack-Spread-Zyklushöhepunkt. D/E 42,7 % ist solide und gibt Puffer für den nächsten Abschwung. Der "Burggraben" ist primär Skalenvorteil und Raffineriekomplexität, kein struktureller Preissetzungsmacht-Burggraben wie bei Markenkonsumgütern.
 
 ## 7. BEWERTUNG
 
-Trailing PE 18,9x und Forward PE 12,3x — der deutliche Rückgang von Trailing zu Forward signalisiert, dass der Markt eine Ergebnisverbesserung erwartet, aber das Forward-Multiple ist im historischen Kontext für Raffinerien am oberen Ende der Bandbreite, da diese Aktien niemals nur anhand des aktuellen KGVs bewertet werden sollten — Crack Spreads sind hochzyklisch. Normalisierter FCF über den vollen Zyklus ist entscheidend: Bei historisch durchschnittlichen Crack Spreads (deutlich unter aktuellem Niveau) dürfte der "Normal-FCF" eher bei $2-3 Mrd. liegen statt der aktuellen $4,79 Mrd. — das ergibt ein normalisiertes FCF-Multiple von 26-39x statt der optisch günstigen ~16x auf TTM-Basis. Price-to-Book 3,2x ist moderat. Rückrechnung: Bei $266,32 und 12,3x Forward-PE preist der Markt eine Fortsetzung der aktuell erhöhten Crack-Spread-Umgebung ein — plausibel im aktuellen Kapazitätsverknappungs-Umfeld, aber nicht über mehrere Jahre garantiert angesichts globaler Raffineriekapazitäts-Pipeline. Analyst-Konsensziel $263,67 liegt knapp unter dem aktuellen Kurs $266,32 — Coverage sieht kaum weiteres Aufwärtspotenzial auf aktuellem Niveau, als Orientierungspunkt zu verstehen.
+Trailing PE 18,95x darf bei einer zyklischen Aktie wie Valero nicht isoliert betrachtet werden — entscheidend ist der normalisierte FCF über den vollen Crack-Spread-Zyklus. Bei einer geschätzten Zyklusmittel-FCF-Marge von 2–3 % (gegenüber aktuell 4,1 %) ergäbe sich ein deutlich höheres normalisiertes FCF-Multiple als die heute optisch günstige Bewertung suggeriert. P/B 3,23x liegt über dem historischen Zyklusmittel für Raffinerien. Rückrechnung: Der aktuelle Kurs impliziert bei Forward-EPS $21,14 eine Fortsetzung der aktuell hohen Crack-Spreads über mehrere Jahre — ambitioniert, da Crack-Spreads historisch stark mean-revertierend sind. Analyst-Konsensziel $263,67 — als Orientierungspunkt, nicht als Kursziel-Ceiling; liegt nahe am aktuellen Kurs und spiegelt damit den gleichen "Fortsetzungs"-Optimismus wider, den auch der Markt einpreist.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 97,1, Rang 34 im S&P 500 — solides, aber kein Spitzenmomentum. Recommendation Key "buy" bei 18 Analysten zeigt moderate institutionelle Unterstützung. Beta 0,553 deutet darauf hin, dass die Aktie historisch weniger volatil als der breite Markt gehandelt wird — ungewöhnlich für Energie, möglicherweise weil das Crack-Spread-Geschäft teilweise unkorreliert zu reinen Öl-Beta-Trades läuft. Hypothese, nicht datenbasiert: Energiesektor-Rotationsflüsse (institutionelle Sektorallokation) dürften ein wesentlicher Treiber der jüngsten Stärke sein, weniger Einzeltitel-spezifisches Fast-Money. Enttäuschungsrisiko: Bei jeder Meldung über neue globale Raffineriekapazität (Asien, Naher Osten) oder schwächeren Diesel-/Benzin-Nachfragedaten könnte die Aktie nahe dem 52-Wochen-Hoch scharf korrigieren.
+RS-Score 86,2, Rang 26 im S&P 500 — solide, aber angesichts der Kursnähe zum 52-Wochen-Hoch kein Top-Rang, was auf eine bereits breit gelaufene Bewegung hindeutet. Short Float/institutionelle Positionierung nicht im Datensatz. Hypothese, nicht datenbasiert: Die Kombination aus Kursnähe zum Hoch und starkem 6-Monats-Momentum (+56,7 %) ist ein klassisches Muster für einen späten Zykluspunkt, an dem Fast-Money-Kapital bereits stark investiert sein könnte. Enttäuschungsrisiko: hoch — Crack-Spread-Daten sind volatil und können sich innerhalb weniger Wochen umkehren.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 97,1, Rang 34 S&P 500. 5T: +8,3%, 10T: +9,3%, 20T: +7,6%, 50T: +15,2%, 6M: +56,8% — konsistent positives Momentum über alle Zeitfenster. Letzte Wochenkerze: $259,37 (22.06.) auf $266,32 (29.06.), nahe am 52-Wochen-Hoch $265,61 (bereits leicht überschritten). Kein aktives GWS-Setup laut Datenstand. Momentum erscheint teilweise fundamental gestützt (Crack-Spread-Stärke), aber bei einem zyklischen Geschäft nahe Allzeithoch ist erhöhte Vorsicht angebracht — Reversal-Risiko steigt mit Distanz vom historischen Mittelwert. Technisches Warnsignal: Rückfall unter $233 (20T-Unterstützungsbereich) wäre ein erstes Warnsignal für nachlassende Stärke.
+5T +3,9 %, 10T +11,5 %, 20T +4,0 %, 50T +10,1 %, 6M +56,7 % — starkes mittelfristiges Momentum, angeführt vom 6-Monats-Fenster, das die außergewöhnliche Rally vom Tief zeigt. Das Momentum ist überwiegend fundamental durch die Crack-Spread-Stärke gestützt, nicht rein technisch/reaktiv — aber genau deshalb hoch sensitiv gegenüber einer Trendumkehr bei den Raffineriemargen. Kein GWS-Signal aktuell aktiv. Warnsignal: Ein plötzlicher Rückgang der Crack-Spread-Daten (nicht im Datensatz, aber wöchentlich verfügbar) wäre der klassische erste fundamentale Auslöser für eine technische Trendwende.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($350–$420):** Strukturelle US-Raffineriekapazitätsknappheit hält über Jahre an, Renewable-Diesel-Segment skaliert deutlich, Crack Spreads bleiben dauerhaft über historischem Mittel.
+**Bull ($290–$360):** Strukturelle US-Raffineriekapazitätsknappheit hält an, Diamond Green Diesel skaliert zu einem bedeutenden zweiten Standbein außerhalb des klassischen Rohöl-Zyklus.
 
-**Base ($180–$300):** Crack Spreads pendeln zyklisch um ein leicht erhöhtes historisches Mittel, Renewable-Diesel trägt moderat bei, Raffineriekapazität bleibt global im Gleichgewicht.
+**Base ($180–$250):** Crack-Spreads normalisieren sich auf ein moderat erhöhtes, aber zyklisches Niveau.
 
-**Bear ($70–$140):** Globale Kapazitätsausweitung plus beschleunigte EV-Adoption komprimieren Crack Spreads strukturell auf zyklische Tiefststände, ähnlich der 2019/2020-Periode.
+**Bear ($90–$140):** Neue globale Raffineriekapazität und/oder Nachfragerückgang (z.B. durch beschleunigte Elektrifizierung) drücken die Marge dauerhaft auf das historische Zyklustief.
 
-Entscheidende Variable: Globale Raffineriekapazitäts-Pipeline (Neubauten Asien/Naher Osten) im Verhältnis zu Nachfrageentwicklung für raffinierte Produkte.
+Entscheidende Variable: Tempo neuer globaler Raffineriekapazität relativ zur Kraftstoffnachfrageentwicklung.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −23,8%) — der größte Abstand unter den hier analysierten Werten. Valero ist ein zyklischer Crack-Spread-Trade, kein Buy-and-Hold-Compounder — die Aktie notiert nahe ihrem 52-Wochen-Hoch in einem Geschäft, dessen Marge strukturell mean-reverting ist. Geeignet für taktische Energiesektor-Trader mit klarer Exit-Disziplin; nicht geeignet für Investoren, die auf nachhaltiges strukturelles Wachstum setzen. Risikowarnung: Bei zyklischen Raffinerie-Aktien nahe Allzeithoch ist die Wahrscheinlichkeit einer Mean-Reversion erhöht — Positionsgröße konservativ halten (max. 2-3% eines diversifizierten Portfolios) und Gewinnmitnahme-Disziplin erwägen.
-
-**Marathon Petroleum (MPC)** und **Phillips 66 (PSX)** sind die direktesten Peers im US-Raffineriesektor mit ähnlichem Crack-Spread-Exposure — Peer-Multiples nicht im Datensatz, relative Bewertung indikativ.
+Valero ist ein klassischer zyklischer Trading-Trade, kein Buy-and-Hold-Compounder — die eigenen Szenarien ergeben mit −25,2 % Downside ein deutlich negatives Chance-Risiko-Verhältnis auf dem aktuellen Niveau, typisch für eine zyklische Aktie nahe einem Margenhoch. Geeignet für taktische, zyklus-bewusste Investoren mit strikter Stop-Loss-Disziplin, ungeeignet für Long-Only-Buy-and-Hold-Positionierung auf dem aktuellen Niveau. Bestehende Positionen mit Trailing-Stops absichern, keine Neueinstiege nahe dem 52-Wochen-Hoch. Peer: **Marathon Petroleum (MPC)** und **Phillips 66 (PSX)** als direkte Raffinerie-Peers mit ähnlicher Crack-Spread-Sensitivität. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 2/5
@@ -93,7 +92,7 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Wachstum | 2/5 |
 | Bewertung | 2/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -14.2% |
+| EV-Upside | -24.9% |
 
 **Verdict: WATCH (40/100)**
 
