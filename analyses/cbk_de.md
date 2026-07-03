@@ -1,83 +1,91 @@
 # CBK.DE — KI-Aktienbewertung
 
-**Commerzbank AG                I** · Financial Services · 21.06.2026 · Signal: Triple Breakout
+**Commerzbank AG                I** · Financial Services · 03.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 38.52 |
-| Market Cap | $42.24 Mrd. |
-| Forward PE | 10.25 |
+| Kurs | 37.53 |
+| Market Cap | $41.15 Mrd. |
+| Forward PE | 9.98 |
 | Revenue (TTM) | $11.60 Mrd. |
 | Gross Margin | 0.0% |
 | ROE | 8.2% |
-| RS-Score | 66.3 |
+| RS-Score | 22.6 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+**Szenarien (12–18 Monate):** Bull €42–€52 (20 %) · Base €33–€42 (50 %) · Bear €18–€24 (30 %) · EV ~€34,45
+
 ## 1. INVESTMENT-CASE
 
-Commerzbank ist seit dem Einstieg von UniCredit (aktuell ~29% Beteiligung) keine gewöhnliche Deutsche Bank mehr — sie ist ein M&A-Zielobjekt mit politischer Dimension. Der strukturelle Kern der These: UniCredit CEO Andrea Orcel will Commerzbank übernehmen und damit die erste echte grenzüberschreitende europäische Bankenfusion der Dekade vollziehen. Forward PE 10,2x bei ROE 8,2% ist für eine Bank in einem normalisierenden Zinsumfeld fair bis günstig. Revenue-Wachstum 4,3% YoY ist für ein Bankgeschäft in einem Niedrigzins-zu-Hochzins-Übergang respektabel. Net-Margin 23,3% zeigt, dass Commerzbank operativ profitabel ist — kein Sanierungsfall, sondern ein funktionierendes Retail/Commercial-Banking-Franchise. 12M-Window +34% zeigt starke Performance. Der Kurs $38,37 nahe 52W-Hoch $38,86 reflektiert M&A-Prämie und Zinsstruktur-Normalisierung.
+Commerzbank bleibt strukturell ein M&A-Zielobjekt mit politischer Dimension — UniCredit hält weiterhin eine signifikante Beteiligung und die Übernahme-Fantasie ist der zentrale Kurstreiber. Seit der letzten Analyse (21.06.2026, Kurs €38,52, RS-Score 66,3, Rang #7 im DAX, GWS 3/3 aktiv) hat sich das Bild jedoch spürbar eingetrübt: Der RS-Score ist auf 22,6 gefallen (Rang 10/38), das GWS-Signal ist auf allen Zeitebenen erloschen, und die kurzfristigen Fenster sind deutlich negativ (5T −4,33%, 10T −5,61%). Der Kurs selbst ist mit −2,6% seit der letzten Analyse vergleichsweise stabil geblieben — die Deutlichkeit des RS-Einbruchs deutet darauf hin, dass Commerzbank relativ zum DAX-Gesamtmarkt an Stärke verloren hat, nicht dass eine fundamentale Neuigkeit eingetreten ist. Was der Markt aktuell einpreist: Forward-PE 9,98x bei ROE 8,2% ist für eine europäische Bank im Normalisierungsumfeld fair, ohne dass eine formelle Übernahmeprämie sichtbar eingepreist wäre — der M&A-Case bleibt ungewiss, nicht abgesagt, aber auch nicht neu befeuert.
 
 ## 2. GESCHÄFTSMODELL
 
-- Privatkundensegment (Retail Banking): 12 Millionen Kunden in Deutschland, stabiler Zinsertrag, hohe Wechselkosten
-- Unternehmenskundensegment (Mittelstandsbank): deutscher Mittelstand-Fokus, Kernkompetenz, internationales Netzwerk
-- Kapitalmarkttransaktionen: DCM/ECM, selektiv, nicht Investment-Banking-Fokus
-- Polnische Tochtergesellschaft (mBank): eigenständige Digitalbank in Polen, starkes Wachstum, Minority-Stake
-- Net Interest Income als Primärtreiber: Zinsumfeld 2023–2026 strukturell vorteilhafter als 2015–2021
-- Cost-to-Income-Ratio: entscheidende Effizienz-Kennzahl für europäische Banken — Kostensenkungspotenzial durch mögliche M&A-Synergien
-- UniCredit-Beteiligung: 29% Stake, formelle Übernahme-Ankündigung ausstehend — Schlüsselkatalysator
+- Privatkundensegment (Retail Banking): rund 12 Millionen Kunden in Deutschland, stabiler Zinsertrag, hohe Wechselkosten
+- Unternehmenskundensegment (Mittelstandsbank): Fokus auf deutschen Mittelstand, Kernkompetenz mit internationalem Netzwerk
+- mBank (Polen): eigenständige, wachstumsstarke Digitalbank-Tochter mit Osteuropa-Exposure — Minderheitsbeteiligung mit eigener Dynamik
+- Net Interest Income als Primärtreiber — strukturell abhängig von EZB-Zinspolitik, aktuell vorteilhafter als im Nullzins-Jahrzehnt zuvor
+- UniCredit-Beteiligung (~29%) als strukturelles Schlüsselelement der Investment-These — formelle Übernahme weiterhin ausstehend
+- Operating Margin 44,1% und Net Margin 23,3% zeigen ein operativ profitables, funktionierendes Bankgeschäft — kein Sanierungsfall
+- Cost-to-Income-Ratio als entscheidende Effizienzgröße — potenzielles M&A-Synergiepotenzial nicht im Datensatz quantifizierbar
+- Revenue-Wachstum +4,3% YoY — für ein Bankgeschäft im Zinsübergang respektabel, aber kein struktureller Wachstumstreiber jenseits des Zinszyklus
 
 ## 3. BULL CASE
 
-UniCredit reicht vollständiges Übernahmeangebot ein; Premium auf aktuellen Kurs 15–25%. Zinsumfeld bleibt 2026–2027 vorteilhaft; NII strukturell höher. Annahme (kein Konsens): M&A-Prämie 20% auf inneren Wert + Organik. Innerer Wert: FY26-EPS ~€3,75 × 13x Forward = €48,75 + M&A-Premium → Kursziel **€46–€56**. Eintrittswahrscheinlichkeit: 30%.
+UniCredit reicht ein formelles Übernahmeangebot ein; Prämie von 15–25% auf den fairen inneren Wert. Annahme (kein Konsens): FY26-EPS ~€3,75 × 12x (M&A-Prämien-Multiple) = €45. Kursziel: €42–€52 (Midpoint €47). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Kein M&A-Deal in den nächsten 12 Monaten; Commerzbank operiert eigenständig; organisches Wachstum 4–6% p.a. Annahme: FY26-EPS €3,75 × 10,5x = **€37–€43**. Aktuelles Kursniveau gut eingepreist. Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Kein M&A-Abschluss innerhalb der nächsten 12 Monate, Commerzbank operiert eigenständig weiter, organisches Wachstum 4–6% p.a. Annahme (kein Konsens): FY26-EPS ~€3,75 × 10x Forward = €37,50. Kursziel: €33–€42 (Midpoint €37,50). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: UniCredit gibt Übernahmeambitionen auf; Zinsumfeld dreht durch EZB-Schnitte auf <2%; Konjunkturabkühlung in Deutschland erhöht Non-Performing-Loans. Annahme: FY27-EPS €2,50 × 8x = Kursziel **€18–€25**. Kundenkonzentration: deutsches Retail-Banking stark auf Inland konzentriert — Rezessionsrisiko für Deutschland direkt relevant. Geopolitik: Russland-Ukraine-Exposures aus 2022 teilweise abgebaut, aber Restrisiken bestehen; mBank hat Osteuropa-Exposure. Lieferkette: nicht relevant für Bankgeschäft. Verwässerung: Kapitalerhöhungen für Basel-IV-Anforderungen möglich. Regulierung: EU-Bankenunion und EZB-Kapitalanforderungen — strukturell stabil, aber 2025 strenger. Eintrittswahrscheinlichkeit: 25%.
+Auslöser: UniCredit zieht sich aus den Übernahmeambitionen zurück, EZB senkt aggressiv unter 2%, deutsche Konjunkturschwäche erhöht Kreditausfälle. Kundenkonzentration: deutsches Retail-/Mittelstandsgeschäft stark auf das Inland konzentriert — direkte Rezessionssensitivität, auf Datenbasis nicht weiter quantifizierbar. Geopolitik: mBank-Exposure in Osteuropa, Russland-Ukraine-Altlasten größtenteils abgebaut, Restrisiko vorhanden. Lieferketten-/Foundry-Abhängigkeit: nicht relevant für Bankgeschäft. Verwässerung: Kapitalerhöhungsrisiko bei verschärften Basel-IV-Kapitalanforderungen möglich, Shares-Outstanding-Trend im Datensatz nicht verfügbar. Regulierung: Basel-IV-Implementierung erhöht RWA-Dichte strukturell — direkter ROE-Druck über die nächsten Jahre. Annahme (kein Konsens): FY27-EPS fällt auf ~€2,50 × 8x = €20. Kursziel: €18–€24 (Midpoint €21). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 30% + 45% + 25% = 100%**
+**Summe: 20% + 50% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,30×€51 + 0,45×€40 + 0,25×€21,5 = €15,3 + €18 + €5,4 = **€38,7** — implizites Upside vs. aktuellem Kurs €38,37: **+0,9%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau nahezu keinen asymmetrischen Edge — die M&A-Prämie ist bereits eingepreist.
+**Erwartungswert:** EV = 0,20 × €47 + 0,50 × €37,50 + 0,30 × €21 = €9,40 + €18,75 + €6,30 = **€34,45 — implizites Downside vs. aktuellem Kurs (€37,53): −8,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der RS-Einbruch seit der letzten Analyse (66,3 → 22,6) bestätigt eine nachlassende relative Stärke, ohne dass sich der M&A-Case fundamental verändert hätte.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 8,2% ist für eine europäische Bank in Normalisierungsphase solide — KfW und Sparkassen als Konkurrenten zeigen ähnliche Niveaus. Net-Margin 23,3% zeigt operative Effizienz. Revenue-Wachstum 4,3% organisch. Bilanz: Debt/Equity N/A — für Banken irrelevant (Banken sind strukturell hochverschuldet durch Kundeneinlagen). Kernkapitalquote (CET1) als Qualitätsmaß — aus Datensatz nicht verfügbar, prüfen. Burggraben: Kundenbeziehungen im deutschen Mittelstand — emotional und rechtlich schwer zu wechseln.
+ROE 8,2% ist für eine europäische Bank in der Normalisierungsphase solide, wenn auch nicht herausragend. Net Margin 23,3% zeigt operative Effizienz. Revenue-Wachstum +4,3% YoY ist überwiegend zinszyklusgetrieben. Gross Margin von 0,0% ist ein für Banken methodisch bedingter Wert (Zinsgeschäft wird nicht als "Gross Margin" im klassischen Sinne abgebildet) — nicht als Qualitätsmangel misszuverstehen. Debt/Equity, ROIC und Free Cashflow sind für Banken strukturell nicht sinnvoll interpretierbar bzw. im Datensatz nicht verfügbar — CET1-Kapitalquote wäre die relevantere Bilanzqualitäts-Kennzahl, ist hier nicht enthalten. Der eigentliche Burggraben liegt in den Kundenbeziehungen des deutschen Mittelstands — rechtlich und emotional wechselkostenintensiv.
 
 ## 7. BEWERTUNG
 
-Forward PE 10,2x für ROE 8% ist für eine europäische Retail/Commercial-Bank fair. KBV: bei Forward-PE 10x und ROE 8% impliziert Gordons-Wachstums-Modell KBV ~0,8–1,0x — nicht teuer, aber kein tiefer Discount. Rückrechnung: Kurs €38,37 rechtfertigt EPS €3,75 × 10x + 0-5% M&A-Prämie — das ist genau das aktuelle Kursniveau. Keine versteckte Bewertungslücke ohne M&A-Materialisation.
+Forward-PE 9,98x bei ROE 8,2% ist für eine europäische Retail-/Commercial-Bank fair bewertet, P/B 1,197x liegt leicht über Buchwert — für eine Bank mit UniCredit-Übernahme-Fantasie ohne exzessive Prämie. Rückrechnung: Der aktuelle Kurs €37,53 rechtfertigt sich bei EPS ~€3,75 × 10x nahezu vollständig aus dem Base Case — es ist praktisch keine M&A-Prämie im aktuellen Kurs sichtbar, was angesichts des ausstehenden formellen Angebots plausibel ist. Das bedeutet umgekehrt: Eine formelle Übernahmeankündigung hätte substanzielles, noch nicht eingepreistes Aufwärtspotenzial — aber die Eintrittswahrscheinlichkeit dafür ist ungewiss und durch den RS-Rückgang eher gesunken als gestiegen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 66,3, Rank #7 (DAX-Universum) — starkes Ranking im DAX. GWS 3/3. 12M: +34% — stärkstes Jahres-Momentum der Batch für eine Bank. Kurs €38,37 nahe 52W-Hoch €38,86 — faktisch Allzeithoch-Bereich für den aktuellen Zyklus. Institutionelle Event-Driven-Fonds und M&A-Arbitrage-Investoren als Primärkäufer bei UniCredit-Engagement.
+Der RS-Score-Einbruch von 66,3 auf 22,6 seit der letzten Analyse (21.06.) bei gleichzeitigem Erlöschen des GWS 3/3-Signals ist das dominante Signal dieser Analyse — die kurzfristige Dynamik hat sich klar gedreht (5T −4,33%, 10T −5,61%), während das 12M-Fenster mit +28,28% weiterhin die starke Jahres-Performance zeigt. Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten — keine belastbare Aussage zu Event-Driven-/M&A-Arbitrage-Fondspositionierung möglich. Hypothese, nicht datenbasiert: Das Nachlassen des kurzfristigen Momentums könnte auf abklingende M&A-Spekulation ohne neue Katalysatoren hindeuten. Enttäuschungsrisiko: Ein offizielles Dementi von UniCredit-Übernahmeplänen wäre der klarste kurzfristige negative Auslöser.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS 3/3 — alle Ebenen aktiv. Kurs €38,37 nahe 52W-Hoch €38,86 — faktisch Ausbruch-Bereich. 5T: +4,54%; 10T: +4,5%; 20T: +2,42%; 50T: +9,46%; 12M: +33,96% — konsistent über alle Zeitrahmen. Fundamental durch Zinsumfeld und M&A gestützt. Warnsignal: Rückfall unter €33 würde M&A-Prämie auflösen.
+GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — deutlicher Rückgang gegenüber dem 3/3-Triple-Breakout vom 21.06.2026. RS-Score 22,6, Rang 10/38 DAX. Kursfenster: 5T −4,33%, 10T −5,61%, 20T −2,04% (klare kurzfristige Schwäche) gegenüber 50T +4,02%, 6M +2,28%, 12M +28,28% (mittelfristig noch positiv, aber deutlich abgeschwächt gegenüber dem 12M-Fenster). Kurs €37,53 gegenüber 52W-Hoch €38,86 — noch nahe am Jahreshoch trotz der kurzfristigen Korrektur. Technisches Warnsignal: Wochenschluss unter €33 (Bereich der letzten signifikanten Konsolidierung) würde die M&A-Prämien-These technisch infrage stellen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case (€55–€75):** UniCredit-Übernahme vollzogen mit Premium; Synergien realisiert; europäisches Banking konsolidiert sich. Entscheidende Variable: Politisches Grünes Licht der Bundesregierung für Übernahme.
+**Bull (€55–€75):** UniCredit-Übernahme vollzogen mit Prämie, Synergien realisiert, europäische Bankenkonsolidierung nimmt Fahrt auf. Entscheidende Variable: politisches Grünes Licht der Bundesregierung.
 
-**Base Case (€32–€48):** Eigenständiger Betrieb; NII normalisiert bei EZB-Zinssenkungen; ROE 7–9%.
+**Base (€32–€48):** Eigenständiger Betrieb, NII normalisiert sich mit EZB-Zinssenkungen, ROE pendelt bei 7–9%.
 
-**Bear Case (€14–€22):** Rezession + EZB-Null-Zins + UniCredit-Exit; NPL-Anstieg; Kapitalerhöhung.
+**Bear (€14–€22):** Rezession, EZB-Nullzins-Rückkehr, UniCredit-Exit, NPL-Anstieg zwingt zu Kapitalerhöhung.
+
+Szenario-Konsistenz: kurzfristiger Bear (€18–€24) liegt innerhalb des langfristigen Bear-Bereichs (€14–€22) — am oberen Rand, im Wesentlichen konsistent; kurzfristiger Bull (€42–€52) unterhalb des langfristigen Bull (€55–€75) — konsistent.
 
 ## 11. PROFI-FAZIT
 
-Commerzbank ist ein Event-Driven-Trade, kein klassischer Compounder: Das Kurs-Potenzial hängt primär an UniCredit-Übernahme (30% Wahrscheinlichkeit), nicht an organischem Wachstum. EV ~€38,7 zeigt nahezu null Upside auf aktuellem Niveau — die M&A-Fantasie ist vollständig eingepreist. Für M&A-Arbitrage-Investoren interessant wenn neue Katalysatoren aufkommen (formelles Angebot, BaFin-Genehmigung). Für Value-Investoren ohne M&A-These bietet Forward PE 10x kaum Fantasie bei 4% organischem Wachstum. Positionsgröße max. 2% als spekulativer M&A-Trade. Peers: **UniCredit (UCG)** selbst als Käufer profitiert von Synergien. **Deutsche Bank (DBK)** als Peer ohne M&A-Prämie — günstiger bei ähnlicher Fundamentaldaten-Qualität (Peer-Multiples nicht im Datensatz — indikativ).
+Commerzbank bleibt ein Event-Driven-Trade, kein klassischer Compounder — der Kurs hängt primär an der UniCredit-Übernahme-Wahrscheinlichkeit (hier mit 20% angesetzt, tendenziell gesunken gegenüber der letzten Analyse), nicht an organischem Wachstum. Der Erwartungswert von €34,45 liegt −8,2% unter dem aktuellen Kurs — der spürbare RS-Einbruch seit der letzten Prüfung (66,3 → 22,6, GWS-Signal erloschen) unterstreicht, dass die M&A-Fantasie an Schwung verloren hat, ohne dass eine formelle Absage vorliegt. Für M&A-Arbitrage-Investoren nur bei neuen Katalysatoren (formelles Angebot, BaFin-Genehmigung) interessant. Für Value-Investoren ohne M&A-These bietet Forward-PE 10x bei 4% organischem Wachstum wenig Fantasie. Positionsgröße: max. 2–3% als spekulativer Event-Driven-Trade, engere Beobachtung nach dem RS-Rückgang geboten.
+
+Peers: **UniCredit (UCG)** selbst als potenzieller Käufer mit Synergie-Fantasie. **Deutsche Bank (DBK)** als Peer ohne M&A-Prämie, aktuell mit noch schwächerem RS-Profil (Rang 12 vs. 10). Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 2/5
 - Bewertung: 4/5
-- Katalysator: 4/5
+- Katalysator: 2/5
+
 
 ---
 
@@ -86,9 +94,9 @@ Commerzbank ist ein Event-Driven-Trade, kein klassischer Compounder: Das Kurs-Po
 | Qualität | 3/5 |
 | Wachstum | 2/5 |
 | Bewertung | 4/5 |
-| Katalysator | 4/5 |
-| EV-Upside | -2.6% |
+| Katalysator | 2/5 |
+| EV-Upside | -6.3% |
 
-**Verdict: HOLD (57/100)**
+**Verdict: WATCH (49/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

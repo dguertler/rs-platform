@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SIRI — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SIRI</h1>
+      <h2>SiriusXM Holdings Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Entertainment</span></div>
+        <div class="mi">MCap: <span>$10B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">54</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">73.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$28.35</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">8.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$8.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">47.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">381.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">7.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+4.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–46</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">28–34</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">14–18</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $38–$46 (20 %) · Base $28–$34 (50 %) · Bear $14–$18 (30 %) · EV ~$28,70</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>SiriusXM ist kein Wachstumswert mehr, sondern ein Cashflow-Compounder mit Monopolstruktur: als einziger lizenzierter Satellitenradio-Anbieter in den USA hat das Unternehmen einen regulatorischen Burggraben, den keine App-basierte Konkurrenz replizieren kann. Der strukturelle Kern der These: Revenue stagniert bei +1,1% YoY, aber Forward-PE 8,4x bei P/B 0,81x zeigt, dass der Markt praktisch kein Wachstum mehr einpreist — die Aktie wird wie eine reine Cash-Return-Maschine bewertet. Was der Markt aktuell honoriert: aggressive, schuldenfinanzierte Aktienrückkäufe (D/E 84,9%) reduzieren die Aktienzahl strukturell und stützen das EPS-Wachstum trotz Umsatzstagnation — sichtbar am RS-Score 73,47 (Rang 34/100 NASDAQ-100) und der Kursbeschleunigung über 5–20 Tage (+6,8% bis +13,5%). Was der Markt möglicherweise übersieht: das Analysten-Kursziel von $28,00 liegt bereits UNTER dem aktuellen Kurs $28,35 — die Coverage hat die jüngste Rally nicht mitgezogen, was auf ein reifes, kaum noch neu bewertetes Sentiment hindeutet, nicht auf unentdecktes Potenzial.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Einziger lizenzierter Satellitenradio-Betreiber in den USA — regulatorischer Monopol-Burggraben, aber strukturell gedeckelter Adressierbarer Markt (US-Autofahrer)</li>
+<li>Subscription-Modell mit hoher Wiederkehr, primär gebündelt in Neuwagen-Werkskonfigurationen — Wachstum hängt strukturell an US-Neuwagenverkäufen, nicht an eigener Vertriebskraft</li>
+<li>Pandora/Werbe-Segment als zweites Standbein — konkurriert direkt mit Spotify/YouTube um Werbebudgets, strukturell margenschwächer als Satelliten-Abo</li>
+<li>Operating Margin 22,0% vs. Net Margin 9,86% — deutliche Lücke primär durch Zinsaufwand auf die hohe Verschuldung (D/E 84,9%) aus der Liberty-Split-off-Kapitalstruktur</li>
+<li>Aggressive Aktienrückkäufe als primärer EPS-Wachstumstreiber bei stagnierender Top-Line — funktioniert nur so lange die Verschuldungskapazität nicht ausgeschöpft ist</li>
+<li>Satelliten-Flotten-Abhängigkeit von wenigen Herstellern (u.a. Maxar) — Single-Source-Risiko bei Launch-Verzögerungen oder Ausfällen</li>
+<li>Statutory Royalty Rates (Copyright Royalty Board) als wiederkehrendes Kostenrisiko — periodische Neufestsetzung außerhalb der Unternehmenskontrolle</li>
+<li>Strukturelle Wettbewerbsbedrohung durch Streaming/CarPlay/Android Auto in Neuwagen — auf Datenbasis nicht quantifizierbar, aber langfristig relevant</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Podcast- und Werbegeschäft reaccelerieren, Subscriber-Churn stabilisiert sich durch Bundling-Strategien, Buybacks laufen bei moderat steigender Verschuldungskapazität weiter. Revenue-Wachstum zieht auf 3–4% an, EPS steigt durch Aktienrückkäufe überproportional auf ~$4,20 (Annahme, kein Konsens). Multiple re-ratet leicht auf 10x bei erneuerter Wachstumsstory: $4,20 × 10x = $42. Kursziel: $38–$46 (Midpoint $42). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatz bleibt nahezu flach (0–2% YoY), EPS wächst primär buyback-getrieben auf ~$3,60 (Annahme, kein Konsens). Multiple bleibt bei reifem Income-Profil stabil bei 8,5–9x: $3,60 × 8,75x = $31,50. Kursziel: $28–$34 (Midpoint $31). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Subscriber-Abflüsse beschleunigen sich durch EV-Transition und native Streaming-Integration in Neuwagen; Buyback-Tempo verlangsamt sich, da D/E bereits bei 84,9% strukturell ausgereizt ist. Kundenkonzentration: nicht relevant (breite Konsumentenbasis), auf Datenbasis nicht weiter quantifizierbar. Geopolitik/China-Exposure: nicht relevant für ein reines US-Inlandsgeschäft. Lieferketten-Abhängigkeit: Satelliten-Flotte von wenigen Herstellern — Ausfall- oder Verzögerungsrisiko bei Ersatzsatelliten. Verwässerung: kein Verwässerungsrisiko, im Gegenteil sinkende Aktienzahl durch Buybacks — aber bei Bear-Szenario Buyback-Stopp durch Verschuldungsgrenze. Regulierung: Copyright Royalty Board kann Statutory Royalty Rates anheben und die Marge strukturell belasten. EPS fällt auf ~$2,60 (Annahme), Multiple komprimiert auf 6x (Ex-Growth-Bewertung): $2,60 × 6x = $15,60. Kursziel: $14–$18 (Midpoint $16). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $42 + 0,50 × $31 + 0,30 × $16 = $8,40 + $15,50 + $4,80 = **$28,70 — implizites Upside vs. aktuellem Kurs ($28,35): +1,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — konsistent mit dem Analysten-Konsensziel von $28,00, das bereits unter dem aktuellen Kurs liegt. Ein High-Conviction-Framing ist auf diesem Niveau nicht vertretbar.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 7,4% und ROIC 5,45% liegen im unteren Mittelfeld — solide, aber kein herausragender Kapitalrendite-Compounder. Gross Margin 47,2% reflektiert das margenstarke Kern-Abo-Geschäft; Operating Margin 22,0% ist für ein reifes Media-Asset akzeptabel. Die Lücke zur Net Margin (9,86%) ist primär zinslastenbedingt — nicht operativ, sondern kapitalstrukturbedingt, ein wichtiger Unterschied für die Bewertung der Kernprofitabilität. FCF $1,00 Mrd. bei $8,58 Mrd. Revenue (11,7% FCF-Marge) — solide und deckt Dividende (3,81%) plus Buybacks. D/E 84,9% ist erhöht, aber für ein stabiles Cashflow-Geschäft mit vorhersehbaren Abo-Erlösen managebar, solange Zinsniveau nicht weiter steigt. Der Burggraben (Lizenz-Monopol) ist real, aber strukturell durch Streaming-Substitution graduell erodierend — nicht kurzfristig, aber als langfristiger Belastungsfaktor sichtbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 8,4x und P/B 0,81x sind für ein Unternehmen mit stagnierender Top-Line konsistent mit einer Value-/Income-Einordnung, nicht mit einer Wachstumsstory. Was preist der aktuelle Kurs $28,35 ein? Bei Trailing-PE 12,0x (TTM-EPS ~$2,36) und Forward-PE 8,4x (impliziertes EPS ~$3,38) rechnet der Markt mit einem EPS-Sprung von rund 43% — plausibel nur, wenn Buybacks im aktuellen Tempo weiterlaufen UND die Marge stabil bleibt. Das ist ambitioniert, aber nicht unrealistisch bei anhaltender Rückkaufdisziplin. Analyst-Konsensziel $28,00 liegt unter dem aktuellen Kurs — ein seltenes Signal, dass die Rally der Coverage vorausgelaufen ist; als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber hier tendenziell eher Warnsignal als Kaufargument.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 73,47, Rang 34 von 100 im NASDAQ-100 — oberes Drittel, aber kein Ausreißer-Momentum. Kursfenster zeigen Beschleunigung: 5T +6,76%, 10T +12,53%, 20T +13,46% nach einer schwächeren 50-Tage-Phase (+0,93%) — ein Reacceleration-Muster. Short Float und institutionelle Positionierungsdetails sind im Datensatz nicht enthalten — keine belastbare Aussage zu Fast-Money- vs. Long-Only-Dominanz möglich. Hypothese, nicht datenbasiert: Die geringe Analystenabdeckung mit Kursziel unter Marktpreis deutet auf eine Value-/Income-Investorenbasis hin, die auf Buyback-Fortsetzung wettet, nicht auf spekulatives Momentum-Kapital. Enttäuschungsrisiko: eine Verlangsamung des Rückkauftempos (Guidance-Kommentar) wäre der erste Auslöser für eine Neubewertung nach unten.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $28,35 nahe 52-Wochen-Hoch $30,11 (52W-Tief $19,77) — oberes Ende der Jahresrange. GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — kein technischer Strukturbruch, das Momentum ist rein aus den RS-Fenstern ablesbar, nicht durch ein Breakout-Signal bestätigt. Die Kombination aus starkem kurzfristigem Momentum (10T/20T) und schwachem mittelfristigem Fenster (50T nur +0,93%) deutet auf eine jüngere Erholungsbewegung nach einer Konsolidierungsphase hin — fundamental teilweise durch Buyback-Ankündigungen gestützt, aber ohne bestätigenden Strukturbruch reaktiver einzuordnen. Technisches Warnsignal: Rückfall unter $26 (Bereich des letzten Konsolidierungstiefs) würde die Reacceleration-These entkräften.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($40–$50):** Werbegeschäft (Pandora/Podcasts) wird zum relevanten zweiten Standbein, Buybacks reduzieren Aktienzahl kumuliert um 25–30%, EPS verdoppelt sich strukturell trotz flacher Umsatzbasis.</p>
+<p>**Base ($26–$36):** Umsatz bleibt strukturell flach, Buybacks liefern moderates EPS-Wachstum, Multiple bleibt im Income-Bereich 8–10x stabil.</p>
+<p>**Bear ($12–$20):** Streaming-Substitution in Neuwagen beschleunigt Subscriber-Erosion, Verschuldungsgrenze stoppt Buybacks, Multiple komprimiert auf Ex-Growth-Niveau.</p>
+<p>Entscheidende Variable: Tempo der Streaming-Substitution in neuen Fahrzeugen vs. Fortsetzungsfähigkeit des Buyback-Programms. Szenario-Konsistenz: kurzfristiger Bear ($14–$18) liegt innerhalb des langfristigen Bear-Bereichs ($12–$20) — konsistent; kurzfristiger Bull ($38–$46) unterhalb des langfristigen Bull ($40–$50) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>SiriusXM ist kein High-Conviction-Momentum-Play und kein klassischer Wachstums-Compounder — es ist ein buyback-getriebener Income-/Value-Titel mit regulatorischem Monopol-Burggraben, dessen Kursverlauf primär von der Fortsetzungsfähigkeit der Aktienrückkäufe abhängt. Der Erwartungswert von $28,70 liegt nur marginal über dem aktuellen Kurs (+1,2%) — kein asymmetrischer Edge, das deckt sich mit dem Analystenkonsens knapp unter Marktpreis. Geeignet für: Dividenden-/Value-Investoren mit Fokus auf Kapitalrückführung, die die strukturelle Streaming-Substitution als langfristiges, aber nicht akutes Risiko akzeptieren. Nicht geeignet für: Wachstumsinvestoren, die auf Top-Line-Beschleunigung setzen — diese ist im Datensatz nicht erkennbar. Positionsgröße: max. 3–5% eines diversifizierten Portfolios, da die Monopolstruktur zwar defensiv wirkt, die Verschuldung aber Sensitivität gegenüber Zinsniveau erzeugt.</p>
+<p>Peers: **Spotify (SPOT)** als reineres Streaming-Wachstumsinstrument, aber ohne Monopol-Burggraben und mit deutlich höherer Bewertung. **iHeartMedia** als Vergleich im klassischen Radio-Werbegeschäft, strukturell schwächere Bilanz. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
