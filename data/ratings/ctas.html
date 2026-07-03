@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CTAS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CTAS</h1>
+      <h2>Cintas Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Specialty Business Services</span></div>
+        <div class="mi">MCap: <span>$69B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-5.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$171.90</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">31.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">50.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">105.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">41.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-5.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">195–225</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–180</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">100–125</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Cintas ist ein struktureller Compounder im unspektakulärsten aller Geschäftsfelder – Uniform- und Facility-Services-Verleih –, dessen eigentlicher Wert in der Routendichte-Ökonomie liegt, nicht im Produkt selbst. Der RS-Score von -5,17 zeigt relative Schwäche gegenüber dem NASDAQ-100 über die letzten 6 Monate (-19,35%), während die operative Qualität (ROE 41,3%, Operating Margin 23,2%) unverändert außergewöhnlich bleibt – das ist der Kern der aktuellen Situation: eine hochqualitative, aber nach Jahren der Outperformance nun konsolidierende Aktie, die relativ zu wachstumsstärkeren Tech-Namen im Index zurückbleibt. Was der Markt hier einpreist, ist eine Verlangsamung des Wachstumstempos (von historisch zweistelligen Raten auf 8,9% YoY), nicht eine strukturelle Verschlechterung des Geschäftsmodells. Die kurzfristige RS-Schwäche ist eher ein relatives Sektorrotationsphänomen (Geld fließt in AI-getriebene Tech-Namen) als ein fundamentales Warnsignal.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Uniform-Rental- und Facility-Services (Reinigungsprodukte, Erste-Hilfe, Feuerlöscher) auf Abonnement-/Vertragsbasis – hochwiederkehrender Umsatz mit sehr niedriger Kundenabwanderung</li>
+<li>Routendichte-Ökonomie ist der zentrale operative Hebel: je dichter das Liefernetzwerk in einer Region, desto niedriger die Grenzkosten pro zusätzlichem Kunden – klassischer lokaler Netzwerkeffekt</li>
+<li>Vertragslaufzeiten von typischerweise 3-5 Jahren erzeugen hohe Umsatzsichtbarkeit und Preissetzungsmacht bei Verlängerung</li>
+<li>Diversifiziertes Kundenportfolio über nahezu alle Branchen (Gesundheitswesen, Gastgewerbe, Industrie) reduziert Zyklizität strukturell im Vergleich zu reinen Industrie-Playern</li>
+<li>M&A-getriebenes Wachstum durch Konsolidierung fragmentierter regionaler Wettbewerber ist historisch ein wichtiger Wachstumstreiber neben organischem Wachstum</li>
+<li>Free Cashflow $1,51 Mrd. bei $11,03 Mrd. Revenue zeigt solide, aber für die Marge (23,2% Operating Margin) vergleichsweise moderate Cash-Konversion – Capex-intensives Geschäftsmodell (Wäscherei-/Verteilinfrastruktur)</li>
+<li>Preissetzungsmacht bei Vertragsverlängerung ist die strukturelle Inflationsschutz-Komponente des Modells</li>
+<li>D/E 60,94 ist für ein Industrials-Unternehmen mit stabilen Cashflows moderat, keine Bilanzsorge</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Beschleunigte M&A-Aktivität konsolidiert weitere regionale Wettbewerber, Preissetzungsmacht bei Vertragsverlängerungen treibt Margenexpansion über 25%, Facility-Services-Cross-Sell in bestehender Kundenbasis beschleunigt sich. Annahme (kein Konsens): FY28 EPS ~$5,80 × 36x Forward = $208,80. Bull-Kursziel: $195–$225 (Midpoint $210). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatzwachstum stabilisiert sich bei 6-9% p.a., Operating Margin hält sich bei 22-24%, moderate M&A-Aktivität setzt sich fort, keine dramatische Neubewertung, aber auch keine strukturelle Verschlechterung. Annahme (kein Konsens): FY28 EPS ~$5,10 × 31x Forward (nahe aktuellem Niveau) = $158,10. Base-Kursziel: $150–$180 (Midpoint $165). Eintrittswahrscheinlichkeit: 55%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Konjunkturabschwung reduziert Beschäftigtenzahlen bei Kunden (direkter Umsatztreiber, da Abrechnung oft pro Mitarbeiter erfolgt), gleichzeitig verschärfter Preiswettbewerb durch regionale Anbieter in einer Rezessionsphase. Kundenkonzentration: diversifiziert, gering (strukturell defensiv, nicht Hauptrisikofaktor). Geopolitik/China-Exposure: auf Datenbasis nicht beurteilbar, strukturell vermutlich minimal (primär US-Inlandsgeschäft). Lieferketten/Foundry: nicht relevant für Dienstleistungsmodell. Verwässerung: SBC nicht quantifiziert, historisch bei Cintas moderat, kein akutes Risiko. Regulierung: Arbeitsrecht-/Mindestlohnänderungen könnten Kostenbasis belasten, nicht quantifizierbar aus vorliegenden Daten. Wachstum fällt auf 2-4%, Margin-Druck durch Lohninflation ohne entsprechende Preisanpassung. Annahme: FY28 EPS ~$4,20 × 26x = $109,20. Bear-Kursziel: $100–$125 (Midpoint $112,50). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 20% + 55% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $210 + 0,55 × $165 + 0,25 × $112,50 = $42 + $90,75 + $28,13 = **~$161 — implizites Downside vs. aktuellem Kurs ($171,90): −6,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, aber die Abweichung ist moderat.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 41,3% ist außergewöhnlich hoch und über den Zyklus stabil (Cintas zeigt historisch selten negative Wachstumsjahre) – kein Top-of-Cycle-Ausreißer, sondern strukturelles Merkmal des kapitaleffizienten Geschäftsmodells. Operating Margin 23,2% und Net Margin 17,6% sind Best-in-Class für ein Dienstleistungs-/Verleihgeschäft. Free Cashflow $1,51 Mrd. ist solide, aber Capex-Intensität (Wäscherei-Infrastruktur, Fuhrpark) begrenzt die FCF-Marge relativ zur Operating Margin. Der Burggraben ist real und strukturell: Routendichte-Ökonomie ist für neue Wettbewerber extrem kapitalintensiv zu replizieren, besonders in bereits dicht bedienten Märkten. Dividende: als "105,0%" ausgewiesener Wert ist ein yfinance-Datenartefakt (Feld liefert vermutlich bereits Prozentwert, Formatierung verdoppelt) – plausibler tatsächlicher Wert liegt bei ca. 1,0-1,1%, aus den Daten nicht abschließend auflösbar, daher nicht in die Bewertung einbezogen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 36,27x und Forward PE 31,63x sind für ein Unternehmen mit 8,9% Wachstum ambitioniert, aber angesichts der Qualität (41,3% ROE) im historischen Kontext nicht ungewöhnlich – Cintas handelt historisch stets mit Qualitätsprämie. Price/Book 14,36x unterstreicht die Premium-Bewertung. Normalisiert über FCF: FCF-Yield von 2,2% ($1,51 Mrd. / $68,78 Mrd. MCap) ist niedrig für ein Industrials-Unternehmen, reflektiert die Compounder-Prämie. Rückrechnung: Aktueller Kurs impliziert bei 31,63x Forward-PE ein FY-EPS von ~$5,43 – das setzt fortgesetztes Wachstum von 7-9% bei stabilen Margen voraus. Plausibel, da historisch konsistent erreicht, aber wenig Raum für Enttäuschung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht in den Daten verfügbar. Analysten-Konsens "buy" bei 16 Analysten (vergleichsweise geringe Coverage-Breite für ein $68,78-Mrd.-Unternehmen), Kursziel $209,62 liegt deutlich über aktuellem Kurs ($171,90) – signifikantes Analysten-Upside-Sentiment trotz der jüngsten relativen Schwäche. Hypothese, nicht datenbasiert: Die RS-Schwäche (-19,35% über 6 Monate relativ) deutet auf Sektorrotation weg von defensiven Qualitäts-Compoundern hin zu Wachstumsnamen – klassisches Long-Only-Rebalancing-Muster, kein fundamentales Warnsignal. Enttäuschungsrisiko: gering bis moderat, primär bei Verfehlen der margenstabilen Wachstumsguidance.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -5,17 (negativ, unteres Ende des NASDAQ-100), aber mit interessanter Divergenz: kurzfristige Fenster positiv (5T +4,65%, 10T +9,84%, 20T +4,46%), mittelfristig negativ (50T -4,77%, 6M -19,35%). Das deutet auf eine beginnende Stabilisierung nach einer längeren relativen Schwächephase hin. GWS-Ampel zeigt dennoch Struktur-Breakout auf allen drei Zeitebenen (3/3) – ein technisches Signal für eine mögliche Trendwende nach der Konsolidierung. Warnsignal: Rückfall unter die jüngsten kurzfristigen Tiefs würde die Stabilisierungsthese widerlegen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($220–$280):** M&A-Konsolidierung beschleunigt sich, Facility-Services-Cross-Sell erschließt neue Margenexpansion, Cintas festigt Marktführerschaft weiter.</p>
+<p>**Base ($160–$215):** Stetiges Wachstum von 6-9% p.a. mit stabilen Margen, klassisches Compounder-Profil ohne dramatische Neubewertung.</p>
+<p>**Bear ($95–$150):** Rezession reduziert Beschäftigtenbasis bei Kunden strukturell, Margendruck durch Lohninflation ohne Preisanpassungsmöglichkeit.</p>
+<p>Entscheidende Variable: US-Beschäftigungsentwicklung und Fähigkeit zur Preisdurchsetzung bei Vertragsverlängerungen in einem inflationären Lohnumfeld.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau nur einen geringen Downside (EV -6,3%) – kein High-Conviction-Edge, aber auch keine überzogene Bewertung. Cintas ist ein klassischer Buy-and-Hold-Compounder mit außergewöhnlicher Kapitaleffizienz (41,3% ROE) und strukturellem Routendichte-Burggraben – geeignet für konservative, langfristig orientierte Investoren, nicht für kurzfristige Momentum-Trader angesichts der aktuellen relativen Schwäche. Die jüngste RS-Underperformance ist eher Rotations- als Fundamentalphänomen. Positionsgröße kann bei diesem Qualitätsprofil höher sein als bei den übrigen Tech-Namen in diesem Batch. Peers: **Unifirst (UNF)** als direkterer, kleinerer Uniform-Rental-Peer mit ähnlichem Modell, **Ecolab (ECL)** als margenstarker Facility-/Hygiene-Services-Vergleich. Peer-Multiples nicht im Datensatz – relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

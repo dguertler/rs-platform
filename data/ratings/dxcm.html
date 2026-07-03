@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DXCM — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>DXCM</h1>
+      <h2>DexCom, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Medical Devices</span></div>
+        <div class="mi">MCap: <span>$27B</span></div>
+        <div class="mi">Signal: <span>Manuell generiert</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">48</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-0.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$70.14</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">22.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$4.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">61.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">35.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-10.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">88–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">52–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">24–38</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DexCom ist der reine Continuous-Glucose-Monitoring-Play (CGM) in einem strukturell wachsenden Markt (Diabetes-Prävalenz, zunehmende Verschreibung auch für Typ-2-Diabetiker ohne Insulin), dessen aktuelle relative Marktschwäche (RS-Score -0,91, 6M -8,92%) primär Wettbewerbssorgen gegenüber Abbotts FreeStyle Libre und zunehmender Preistransparenz im OTC-Segment widerspiegelt. Die fundamentale Story bleibt intakt: 15% Umsatzwachstum bei 61,5% Bruttomarge und 35,6% ROE zeigen ein margenstarkes, kapitaleffizientes MedTech-Geschäft. Was der Markt aktuell einpreist, ist eine Verlangsamung des CGM-Duopol-Wachstumstempos durch verschärften Wettbewerb (Abbott, neue Marktteilnehmer wie Medtronic/Abbott-OTC-Produkte) und Erstattungsdruck von Kostenträgern – strukturell relevant, aber nicht das Ende der Wachstumsstory, da die zugrundeliegende Marktdurchdringung (nur ein Bruchteil der Typ-2-Diabetiker nutzt aktuell CGM) noch früh ist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Razor-Blade-Modell: Sensoren (wiederkehrender Verbrauch, alle 10-15 Tage ersetzt) generieren den Großteil des Umsatzes, Transmitter/Receiver als einmalige Hardware-Anker</li>
+<li>Verschreibungsbasiertes Geschäft mit Krankenversicherungs-Erstattung als zentraler Umsatztreiber – Erstattungspolitik der Kostenträger ist strukturelles Schlüsselrisiko und -chance zugleich</li>
+<li>Wachstumshebel liegt in der Ausweitung der Zielgruppe von Typ-1- auf Typ-2-Diabetiker (deutlich größerer TAM) sowie Prädiabetes/Wellness-Segment (Stelo OTC-Produkt)</li>
+<li>Klinische Differenzierung (Genauigkeit, Formfaktor) als Haupt-Wettbewerbsargument gegenüber Abbott – Duopol-Struktur mit nur zwei relevanten Anbietern in den meisten Märkten</li>
+<li>Internationale Expansion (Europa, Asien) bietet strukturelles Wachstumspotenzial bei niedrigerer aktueller Durchdringung als USA</li>
+<li>Operating Margin 21,4% zeigt profitables Skalierungsmodell trotz fortlaufender R&D-Intensität für nächste Sensorgenerationen</li>
+<li>Strukturelle Abhängigkeit von FDA-Zulassungszyklen für neue Sensorgenerationen – Verzögerungen sind ein wiederkehrendes operatives Risiko</li>
+<li>Free Cashflow $1,06 Mrd. bei $4,82 Mrd. Revenue (22% FCF-Marge) zeigt solide Cash-Konversion</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Stelo (OTC-CGM für Prädiabetiker/Wellness) skaliert schneller als erwartet und erschließt einen komplett neuen, deutlich größeren TAM außerhalb der verschreibungspflichtigen Diabetes-Nische; internationale Expansion beschleunigt sich; G8-Sensorgeneration festigt klinische Differenzierung gegenüber Abbott. Annahme (kein Konsens): FY28 EPS ~$3,20 × 30x Forward = $96. Bull-Kursziel: $88–$105 (Midpoint $96,50). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatzwachstum stabilisiert sich bei 12-16%, Wettbewerbsdruck von Abbott bleibt konstant, aber ohne dramatischen Marktanteilsverlust, Erstattungsumfeld bleibt im Wesentlichen stabil. Annahme (kein Konsens): FY28 EPS ~$2,45 × 23x Forward (nahe aktuellem Niveau) = $56,35. Base-Kursziel: $52–$68 (Midpoint $60). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Abbott gewinnt beschleunigt Marktanteile durch aggressive OTC-Preisstrategie (FreeStyle Libre bereits breiter im OTC-Segment etabliert als DexCom), gleichzeitig verschärfen Kostenträger Erstattungsbedingungen für CGM bei Typ-2-Diabetikern ohne Insulintherapie. Kundenkonzentration: nicht quantifizierbar, aber hohe Abhängigkeit von wenigen großen Versicherern/PBMs als Erstattungsgatekeeper. Geopolitik/China-Exposure: auf Datenbasis nicht beurteilbar, vermutlich begrenzt. Lieferketten/Foundry: Sensorfertigung erfordert spezialisierte Produktionskapazität – Single-Site-Konzentrationsrisiken nicht aus Daten quantifizierbar. Verwässerung: SBC nicht in Daten, historisch moderat bei DexCom. Regulierung: FDA-Zulassungsverzögerungen für neue Sensorgenerationen sowie potenzielle Preisregulierung im US-Gesundheitssystem sind reale, nicht quantifizierbare Risiken. Wachstum fällt unter 8%, Margendruck durch Preiswettbewerb. Annahme: FY28 EPS ~$1,50 × 18x = $27. Bear-Kursziel: $24–$38 (Midpoint $31). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $96,50 + 0,45 × $60 + 0,35 × $31 = $19,30 + $27 + $10,85 = **~$57 — implizites Downside vs. aktuellem Kurs ($70,14): −18,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 35,6% ist hoch und über den Zyklus vergleichsweise stabil für ein MedTech-Unternehmen – kein zyklisches Top-of-Cycle-Phänomen, sondern strukturelles Merkmal des margenstarken Verbrauchsmaterial-Modells. Operating Margin 21,4% und Net Margin 19,3% sind solide für ein weiterhin wachstumsorientiertes MedTech-Unternehmen. Free Cashflow $1,06 Mrd. (22% FCF-Marge) zeigt gesunde Cash-Generierung. D/E 46,83 ist moderat, keine Bilanzsorge. Der Burggraben ist real, aber nicht unangreifbar: Duopol-Struktur mit Abbott bedeutet strukturell geteilte Preissetzungsmacht, klinische Differenzierung wird zunehmend enger.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 30,1x und Forward PE 22,75x sind für ein MedTech-Unternehmen mit 15% Wachstum moderat bewertet, deutlich unter den Multiples von Hypergrowth-Tech-Namen in diesem Batch. Price/Book 9,15x reflektiert Qualitätsprämie, aber nicht exzessiv. Normalisiert über FCF: FCF-Yield von 3,9% ($1,06 Mrd. / $27,07 Mrd. MCap) ist für ein wachstumsstarkes MedTech-Unternehmen attraktiv. Rückrechnung: Aktueller Kurs impliziert bei 22,75x Forward-PE ein FY-EPS von ~$3,08 – das setzt fortgesetztes Wachstum von 12-15% bei stabilen Margen voraus. Plausibel angesichts des historischen Track Records, aber Wettbewerbsdruck von Abbott ist ein reales Risiko für diese Annahme.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht in den Daten verfügbar. Analysten-Konsens "strong_buy" bei 25 Analysten, Kursziel $85,24 liegt deutlich über aktuellem Kurs ($70,14) – signifikantes Analysten-Upside-Sentiment trotz der relativen Marktschwäche. Hypothese, nicht datenbasiert: Die Diskrepanz zwischen starkem Analysten-Konsens und schwacher relativer Kursperformance (6M -8,92%) deutet auf eine Sentiment-Verschiebung bei kurzfristig orientierten Fast-Money-Investoren hin, während Long-Only-Fundamentalinvestoren die Bewertung weiterhin attraktiv finden. Enttäuschungsrisiko: primär bei weiteren Marktanteilsverlusten an Abbott im nächsten Quartalsbericht.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -0,91 (nahezu neutral zum NASDAQ-100), Fenster gemischt: 5T +0,72%, 10T +1,99%, 20T +1,83%, 50T +3,47%, 6M -8,92%. Das zeigt eine beginnende kurzfristige Stabilisierung nach längerer relativer Schwäche. GWS-Ampel zeigt dennoch Struktur-Breakout auf allen drei Zeitebenen (3/3) – ein technisches Signal für eine mögliche Bodenbildung. Momentum ist aktuell weder klar fundamental noch rein reaktiv gestützt – eher eine Konsolidierungsphase. Warnsignal: Erneuter Rückfall unter die jüngsten Tiefs bei $54-60 wäre ein klares technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($100–$140):** Stelo/OTC-Segment erschließt einen deutlich größeren TAM außerhalb der klassischen Diabetes-Nische, internationale Expansion beschleunigt sich, DexCom festigt klinische Führerschaft.</p>
+<p>**Base ($55–$95):** Solides Wachstum von 10-15% p.a. im bestehenden Duopol mit Abbott, moderate Margenexpansion, kein dramatischer struktureller Wandel.</p>
+<p>**Bear ($20–$45):** Abbott gewinnt strukturell Marktanteile im wachstumsstärksten OTC-Segment, Erstattungsdruck komprimiert Margen dauerhaft.</p>
+<p>Entscheidende Variable: Ob DexCom die Stelo-OTC-Strategie erfolgreich skaliert und dabei gegenüber Abbotts bereits etablierter OTC-Präsenz aufholt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −18,7%), aber die Bewertung (Forward PE 22,75x) ist im Vergleich zu den Tech-Namen in diesem Batch moderat. DexCom ist ein struktureller Compounder in einem wachsenden Markt mit realem, aber sich verengendem Burggraben gegenüber Abbott – geeignet für Investoren mit MedTech-/Gesundheitswesen-Fokus und mittelfristigem Zeithorizont, weniger als kurzfristiger Momentum-Trade angesichts der technischen Konsolidierungsphase. Positionsgröße moderat, Wettbewerbsentwicklung gegenüber Abbott engmaschig beobachten. Peers: **Abbott Laboratories (ABT)** als diversifizierterer, aber direkter CGM-Konkurrent mit stärkerer OTC-Positionierung, **Insulet (PODD)** als angrenzender Diabetes-Tech-Peer (Insulinpumpen) mit ähnlichem Wachstumsprofil. Peer-Multiples nicht im Datensatz – relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

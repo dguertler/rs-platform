@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IFF — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>IFF</h1>
+      <h2>International Flavors & Fragran</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Basic Materials</span></div>
+        <div class="mi">Industrie: <span>Specialty Chemicals</span></div>
+        <div class="mi">MCap: <span>$19B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">46</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">64.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$76.35</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$10.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">36.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">210.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">100–122</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">70–92</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">34–44</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $100–$122 (20 %) · Base $70–$92 (45 %) · Bear $34–$44 (35 %) · EV ~$72,30</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>IFF ist ein Spezialchemie-Konzern (Aromen, Duftstoffe, Enzyme, Probiotika) in einer noch nicht abgeschlossenen Post-Merger-Integration nach dem DuPont-Nutrition-&-Biosciences-Zusammenschluss von 2021 — der strukturelle Kern der These ist, ob das Management die versprochenen Synergien endlich realisiert oder ob die Integration ein struktureller Wertvernichter bleibt. Der wichtigste Warnindikator: ROIC liegt bei −0,72% — negativ, ein klares Signal, dass das eingesetzte Kapital aktuell keinen positiven Return erzielt, ein typisches Symptom nicht abgeschlossener Großfusionsintegration mit hohem Goodwill. Revenue schrumpft −3,6% YoY, teilweise durch die 2025 erfolgte Portfoliobereinigung (Verkauf des Pharma-Solutions-Geschäfts) erklärbar, teilweise durch organische Schwäche. Auffällig: FCF von $3,70 Mrd. bei nur 10,1% Operating Margin ist eine massive Diskrepanz (FCF-Marge rechnerisch 34% bei Revenue $10,79 Mrd.) — plausibel durch Einmalerlöse aus der Divestition erklärbar, aus den Daten nicht abschließend verifizierbar; für die Bewertung darf dieser FCF-Wert NICHT als nachhaltige, wiederkehrende Cash-Generierung interpretiert werden. Was der Markt aktuell einpreist: Forward-PE 15,86x ist moderat, aber das Analysten-Kursziel $91,21 (+19,4% Upside) zeigt, dass die Coverage deutlich optimistischer ist als die eigenen konservativen Annahmen zur Integrationsgeschwindigkeit.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Aromen (Flavors) für Lebensmittel- und Getränkeindustrie — stabiles, konsumnahes Kerngeschäft mit hoher Kundenbindung</li>
+<li>Duftstoffe (Fragrances) für Feinparfümerie und Konsumgüter — margenstärkeres Segment mit kreativer Differenzierung als Burggraben</li>
+<li>Nutrition & Biosciences (Enzyme, Probiotika, funktionale Inhaltsstoffe) aus dem DuPont-Zusammenschluss 2021 — strategisch attraktiv, aber Integration bislang nicht wertschaffend abgeschlossen</li>
+<li>2025 erfolgter Verkauf des Pharma-Solutions-Geschäfts als Portfoliobereinigung — reduziert Komplexität, aber auch Umsatzbasis</li>
+<li>Kundenkonzentration bei großen Konsumgüter- und Lebensmittelkonzernen (P&G, Unilever, große Food-&-Beverage-Hersteller) — strukturelles Abhängigkeitsrisiko von wenigen Großkunden</li>
+<li>Operating Margin 10,1% ist für einen Spezialchemie-Konzern mit diesem Portfolio-Mix unterdurchschnittlich — Integrationskosten und Skaleneffekte noch nicht realisiert</li>
+<li>Debt/Equity 45,7% ist moderat, aber der hohe Goodwill aus der DuPont-Fusion bleibt ein Bilanzrisiko bei weiteren Wertminderungen</li>
+<li>Rohstoffbasis (ätherische Öle, landwirtschaftliche Inputs) unterliegt Wetter- und Ernteschwankungen — strukturelles Kostenrisiko</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Post-Merger-Integration liefert endlich die versprochenen Synergien, Margenexpansion durch Skaleneffekte und Portfoliobereinigung nach der Pharma-Solutions-Devestition, Schuldenabbau setzt sich fort. Annahme (kein Konsens): FY27-EPS ~$6,20 × 18x Forward = $111,60. Kursziel: $100–$122 (Midpoint $111). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatzbasis stabilisiert sich nach der Portfoliobereinigung, Margenverbesserung erfolgt graduell, aber ohne durchschlagenden Integrationserfolg. Annahme (kein Konsens): FY27-EPS ~$5,00 × 16x Forward = $80. Kursziel: $70–$92 (Midpoint $81). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Organischer Umsatzrückgang setzt sich fort, Integrationsprobleme bleiben ungelöst, eine weitere Goodwill-Wertminderung wird notwendig — der bereits negative ROIC (−0,72%) verschlechtert sich weiter. Kundenkonzentration: Abhängigkeit von wenigen Großkunden in Konsumgüter-/Lebensmittelindustrie ist real, auf Datenbasis nicht exakt quantifizierbar. Geopolitik/China-Exposure: globales Fertigungsnetz mit Schwellenländer-Exposure, im Datensatz nicht separat ausgewiesen, kein dominantes Einzelrisiko. Lieferketten-/Foundry-Abhängigkeit: Rohstoffbasis aus ätherischen Ölen und Agrarrohstoffen ist wetter- und ernteabhängig — reales, aber nicht Single-Source-Risiko im klassischen Sinn. Verwässerung: kein signifikantes Risiko erkennbar, primäres Risiko liegt in der Bilanzqualität (Goodwill), nicht in Aktienverwässerung. Regulierung: Lebensmittel- und Duftstoff-Inhaltsstoffregulierung (FDA, EU) als laufender, aber kein akut eskalierendes Risiko. Annahme (kein Konsens): FY27-EPS stagniert bei ~$3,20 × 12x = $38,40. Kursziel: $34–$44 (Midpoint $39). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $111 + 0,45 × $81 + 0,35 × $39 = $22,20 + $36,45 + $13,65 = **$72,30 — implizites Downside vs. aktuellem Kurs ($76,35): −5,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — die negative ROIC rechtfertigt eine höhere Bear-Gewichtung als bei einem klassischen Qualitätstitel.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROIC von −0,72% ist das zentrale Warnsignal — es zeigt, dass das im DuPont-Zusammenschluss investierte Kapital aktuell keinen positiven ökonomischen Return erwirtschaftet. ROE 6,05% ist entsprechend schwach für einen Spezialchemie-Konzern. Gross Margin 36,4% ist solide, aber Operating Margin 10,1% zeigt, dass zwischen Rohmarge und operativem Ergebnis erhebliche Integrations- und Strukturkosten verbleiben. Die FCF-Kennzahl ($3,70 Mrd.) ist eine Anomalie im Verhältnis zur Operating Margin — höchstwahrscheinlich durch Einmalerlöse aus der Pharma-Solutions-Devestition verzerrt und NICHT als nachhaltige operative Cash-Generierung zu interpretieren; für Bewertungszwecke wird diese Kennzahl daher nicht herangezogen. Revenue-Rückgang −3,6% YoY ist teilweise portfoliobedingt (Divestition), teilweise organisch — der Datensatz erlaubt keine exakte Trennung. Der Burggraben (kreative Rezeptur-Expertise, Kundenbindung in Aromen/Duftstoffen) ist real, wird aber durch die ungelöste Integrationsproblematik überlagert.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 15,86x wirkt moderat, aber angesichts der negativen ROIC und der Unsicherheit über die nachhaltige Ergebnisbasis (verzerrter FCF, Portfoliobereinigung) mit reduzierter Konfidenz zu bewerten. P/B 1,38x ist niedrig für einen Spezialchemie-Konzern und reflektiert die Marktskepsis gegenüber der Integrationsstory. Rückrechnung: Der aktuelle Kurs $76,35 impliziert bei Forward-PE 15,86x ein FY-EPS von ~$4,81 — das setzt eine spürbare Margenverbesserung gegenüber der aktuellen Operating-Margin-Basis (10,1%) voraus. Das ist plausibel, aber nicht gesichert, solange der ROIC negativ bleibt. Analyst-Konsensziel $91,21 impliziert +19,4% Upside — deutlich optimistischer als der eigene Base Case; als Orientierungspunkt zu verstehen, nicht als gesicherte Kursziel-Untergrenze, da die Coverage möglicherweise eine schnellere Integrationserholung unterstellt als in den eigenen Annahmen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 64,0, aber Rang 208 von 500 im S&P 500 — ein vergleichsweise niedriger Rang trotz eines auf den ersten Blick soliden Scores, was auf eine dichte Verteilung vergleichbarer Scores im mittleren Marktsegment hindeutet. Kursfenster zeigen konsistentes Momentum über mehrere Zeitfenster: 5T +8,04%, 10T +9,5%, 20T +16,41%, 50T +13,57%, 6M +16,48%. Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Das robuste kurzfristige Momentum bei gleichzeitig negativem ROIC könnte auf eine beginnende Neubewertung der Integrationsfortschritte hindeuten oder auf allgemeine Sektorrotation in Spezialchemie zurückgehen — beides aus den Daten nicht abschließend unterscheidbar. Enttäuschungsrisiko: eine weitere Guidance-Senkung oder zusätzliche Wertminderung würde das aktuelle Momentum schnell umkehren.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — das Momentum ist rein aus den RS-Fenstern ablesbar, nicht durch einen technischen Strukturbruch bestätigt. Kurs $76,35 gegenüber 52W-Hoch $84,45 und 52W-Tief $59,14 — im oberen mittleren Bereich der Jahresrange, mit Abstand zum Hoch. Die Konsistenz des Momentums über alle Zeitfenster spricht für einen intakten, aber nicht euphorischen Aufwärtstrend. Technisches Warnsignal: Rückfall unter $68 (Bereich der letzten Konsolidierung) wäre ein erstes Zeichen für nachlassende Dynamik; Verlust von $62 signalisiert eine Trendwende Richtung Jahrestief.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($110–$140):** DuPont-Integration wird endlich vollständig abgeschlossen, ROIC dreht deutlich ins Positive, Portfoliobereinigung (Pharma-Solutions-Verkauf) schafft einen fokussierteren, margenstärkeren Konzern.</p>
+<p>**Base ($75–$100):** Graduelle, aber unvollständige Integrationsfortschritte, Margen verbessern sich langsam, Umsatzbasis stabilisiert sich nach der Portfoliobereinigung.</p>
+<p>**Bear ($30–$45):** Integration bleibt strukturell wertvernichtend, weitere Goodwill-Abschreibungen, organischer Umsatzrückgang setzt sich fort.</p>
+<p>Entscheidende Variable: Ob das Management die DuPont-N&B-Integration tatsächlich in eine positive ROIC-Story verwandeln kann. Szenario-Konsistenz: kurzfristiger Bear ($34–$44) liegt innerhalb des langfristigen Bear-Bereichs ($30–$45) — konsistent; kurzfristiger Bull ($100–$122) unterhalb des langfristigen Bull ($110–$140) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>IFF ist weder ein Buy-and-Hold-Compounder noch ein High-Conviction-Momentum-Play — es ist eine spekulative Turnaround-Wette auf eine noch nicht abgeschlossene Post-Merger-Integration, deren zentraler Warnindikator (ROIC −0,72%) gegen ein vorschnelles Engagement spricht. Der Erwartungswert von $72,30 liegt −5,3% unter dem aktuellen Kurs — kein asymmetrischer Edge, solange der ROIC nicht ins Positive dreht. Geeignet für: spekulative Value-/Turnaround-Investoren, die bereit sind, auf eine mehrjährige Integrationserholung zu warten und die Unsicherheit über die FCF-Nachhaltigkeit zu akzeptieren. Nicht geeignet für: konservative Qualitätsinvestoren, die auf positiven ROIC und klare, wiederkehrende Cashflow-Generierung angewiesen sind — beides ist hier aktuell nicht gegeben. Positionsgröße: max. 2–3% eines diversifizierten Portfolios angesichts der ungelösten Integrationsproblematik.</p>
+<p>Peers: **Givaudan** und **Symrise** als direkte europäische Aromen-/Duftstoff-Peers mit historisch stabilerer Integrationshistorie und höherer operativer Marge. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
