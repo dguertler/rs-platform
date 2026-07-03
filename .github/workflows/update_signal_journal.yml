@@ -1,0 +1,47 @@
+name: Signal-Journal aktualisieren
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 2 * * 2-6'   # Di-Sa 04:00 MESZ (02:00 UTC) — nach allen vier Markt-Updates (spätestens 01:30 UTC)
+  workflow_dispatch:
+
+jobs:
+  update-signal-journal:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Skript ausführen
+        run: python update_signal_journal.py
+
+      - name: Signal-Journal committen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/signal_journal.json
+          git diff --staged --quiet || git commit -m "Signal-Journal aktualisiert"
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Signal-Journal (update_signal_journal.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
