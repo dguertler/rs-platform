@@ -278,14 +278,12 @@
     $('tabs').innerHTML = marketTabs + backtestTab;
     $('tabs').querySelectorAll('.tab[data-m]').forEach(b =>
       b.onclick = () => { view = 'funnel'; market = b.dataset.m; load(); });
-    $('tabs').querySelector('.tab[data-bt]').onclick = () => { view = 'backtest'; showBacktestPlaceholder(); };
+    $('tabs').querySelector('.tab[data-bt]').onclick = () => { view = 'backtest'; loadBacktest(); };
   }
 
-  function showBacktestPlaceholder() {
-    renderTabs();
-    $('loading').style.display = 'none';
-    $('error').style.display = 'none';
-    $('content').style.display = 'none';
+  let btMarket = 'nasdaq';
+
+  function backtestPanel() {
     let panel = $('backtestPanel');
     if (!panel) {
       panel = document.createElement('div');
@@ -293,27 +291,80 @@
       $('content').insertAdjacentElement('afterend', panel);
     }
     panel.style.display = '';
-    panel.innerHTML = `
+    return panel;
+  }
+
+  function backtestPlaceholderHtml(market, reason) {
+    return `
       <div class="bt-placeholder">
-        <h2>Backtest 2.0 — noch nicht angelegt</h2>
-        <p>Dieser Bereich ist als eigener Tab vorgesehen, sobald die Portfolio-Backtest-Engine aus
-        <b>STRATEGIEPLAN.md</b> Abschnitt 5 (Phase B der Roadmap) gebaut ist. Aktuell zeigt v2.html
-        nur den regelbasierten Funnel live — es gibt noch keine rückwirkende Simulation.</p>
-        <p><b>Geplanter Umfang</b> (siehe <code>PROMPT_V2_UMSETZUNG.md</code>, Punkte 5–8):</p>
-        <ul>
-          <li>Python-Portfolio-Engine (<code>backtest_v2/engine.py</code>), die dieselben Signal-Funktionen
-          wie der Live-Funnel wiederverwendet (Regel B10 — eine Quelle der Wahrheit)</li>
-          <li>Kein Look-Ahead (B1), Kosten/Slippage (B2), historische Indexmitgliedschaft (B3)</li>
-          <li>Out-of-Sample-Validierung inkl. Bärenmarkt 2022 (B4) + Sensitivitätsanalyse (B5)</li>
-          <li>Kennzahlen CAGR, Sharpe, Calmar, Max-DD, Exposure-Zeit, Profit-Factor — je Regime
-          (🟢/🟡/🔴) getrennt ausgewiesen (B7)</li>
-          <li>Vergleich gegen Buy-and-Hold Benchmark und eine simple 200d-Regel (B8)</li>
-        </ul>
-        <p>Ergebnisse werden dann hier je Lauf abrufbar sein (<code>backtest_v2/results/</code>).
+        <h2>Backtest 2.0 — kein Report für ${esc(market)}</h2>
+        <p>${esc(reason)}</p>
+        <p>Report erzeugen: <code>python3 backtest_v2/run.py ${esc(market)}</code> (siehe
+        <code>STRATEGIEPLAN.md</code> Abschnitt 5 / <code>backtest_v2/results/README.md</code>).
         Bis dahin bleiben <a href="backtest.html" style="color:#93c5fd">B-DETAILS</a> und
-        <a href="backtest_overview.html" style="color:#93c5fd">B-ÜBERSICHT</a> aus der bisherigen
-        Plattform (v1) die verfügbaren, einzeltitelbasierten Backtests.</p>
+        <a href="backtest_overview.html" style="color:#93c5fd">B-ÜBERSICHT</a> aus v1 die
+        verfügbaren, einzeltitelbasierten Backtests.</p>
       </div>`;
+  }
+
+  function fmtSigned(v) {
+    if (v == null) return '–';
+    return (v > 0 ? '+' : '') + v;
+  }
+
+  function renderBacktestRun(market, data) {
+    const r = data.runs['cost_0.001'];
+    if (!r) return backtestPlaceholderHtml(market, 'Report vorhanden, aber ohne 0,1%-Kosten-Lauf.');
+    const r2 = data.runs['cost_0.002'];
+    const regimeRows = Object.entries(r.by_regime || {}).map(([k, v]) =>
+      `<tr><td>${REGIME_TXT[k]?.icon || '❓'} ${k}</td><td style="text-align:right">${v.days}</td><td style="text-align:right">${fmtSigned(v.return_pct_while_active)}%</td></tr>`).join('');
+    const exitRows = Object.entries(r.exit_reasons || {}).map(([k, v]) =>
+      `<span class="dim">${esc(k)}:</span> <b>${v}</b>`).join(' &nbsp;·&nbsp; ');
+    return `
+      <div class="bt-placeholder" style="max-width:960px">
+        <h2>Backtest 2.0 — ${esc(market)} · Lauf vom ${esc(data.generated_at)}</h2>
+        <div class="warn" style="margin-top:0">⚠️ Erster Validierungslauf, KEINE abgeschlossene Kalibrierung.
+        ${esc(data.disclaimer.split('\n')[0])} Details siehe <code>backtest_v2/results/README.md</code>
+        im Repo — dort steht auch die ehrliche Einordnung der Ergebnisse.</div>
+        <div class="cards" style="margin-top:10px">
+          <div class="card"><h3>Zeitraum</h3><div class="kv">${esc(r.period.from)} – ${esc(r.period.to)}<br>${r.n_trading_days} Handelstage · ${r.n_universe} Ticker</div></div>
+          <div class="card"><h3>Rendite (0,1% / 0,2% Kosten)</h3><div class="kv">Strategie: <b>${fmtSigned(r.equity.total_return_pct)}%</b> / ${fmtSigned(r2?.equity?.total_return_pct)}%<br>CAGR: ${fmtSigned(r.equity.cagr_pct)}% · Sharpe: ${r.equity.sharpe}</div></div>
+          <div class="card"><h3>vs. Benchmark</h3><div class="kv">Buy&amp;Hold: ${fmtSigned(r.vs_benchmark?.benchmark_buyhold_return_pct)}%<br>Alpha: <b class="${r.vs_benchmark?.alpha_pct >= 0 ? 'pos' : 'neg'}">${fmtSigned(r.vs_benchmark?.alpha_pct)}pp</b><br>vs. 200d-Regel: ${fmtSigned(r.vs_sma200_rule_pct)}%</div></div>
+          <div class="card"><h3>Risiko</h3><div class="kv">Max-DD: <b>${r.equity.max_dd_pct}%</b> (${r.equity.max_dd_days} Tage)<br>Calmar: ${r.equity.calmar} · Exposure: ${r.exposure_pct}%</div></div>
+          <div class="card"><h3>Trades</h3><div class="kv">Anzahl: <b>${r.trades.n_trades}</b> · Winrate: ${r.trades.win_rate_pct}%<br>Profit-Factor: ${r.trades.profit_factor}</div></div>
+        </div>
+        <p><b>Regime-Aufschlüsselung</b> (Rendite während aktivem Regime, nicht annualisiert):</p>
+        <table style="max-width:400px"><thead><tr><th>Regime</th><th style="text-align:right">Tage</th><th style="text-align:right">Rendite</th></tr></thead><tbody>${regimeRows}</tbody></table>
+        <p style="margin-top:14px"><b>Exit-Gründe:</b> ${exitRows}</p>
+        <p class="dim" style="margin-top:14px">Vollständiger Report inkl. Einordnung: <code>backtest_v2/results/README.md</code> im Repo.</p>
+      </div>`;
+  }
+
+  async function loadBacktest() {
+    renderTabs();
+    $('loading').style.display = 'none';
+    $('error').style.display = 'none';
+    $('content').style.display = 'none';
+    const panel = backtestPanel();
+
+    const subtabs = MARKETS.map(m =>
+      `<button class="tab ${m.id === btMarket ? 'on' : ''}" data-btm="${m.id}">${m.label}</button>`).join('');
+    panel.innerHTML = `<div class="tabs" style="margin-top:0">${subtabs}</div><div id="btBody">Lade Backtest-Report …</div>`;
+    panel.querySelectorAll('.tab[data-btm]').forEach(b =>
+      b.onclick = () => { btMarket = b.dataset.btm; loadBacktest(); });
+
+    try {
+      const r = await window.apiFetch(`/api/v2/backtest/${btMarket}`);
+      if (r.status === 404) {
+        $('btBody').innerHTML = backtestPlaceholderHtml(btMarket, 'Für diesen Markt wurde noch kein Backtest-2.0-Report erzeugt.');
+        return;
+      }
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const data = await r.json();
+      $('btBody').innerHTML = renderBacktestRun(btMarket, data);
+    } catch (e) {
+      $('btBody').innerHTML = backtestPlaceholderHtml(btMarket, 'Fehler beim Laden: ' + e.message);
+    }
   }
 
   function pill(status) {

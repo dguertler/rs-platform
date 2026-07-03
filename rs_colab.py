@@ -151,21 +151,28 @@ def _ohlcv_from_raw(ticker, raw_data, n_candles, date_fmt="%Y-%m-%d"):
             o = raw_data["Open"][ticker].reindex(c.index)
             h = raw_data["High"][ticker].reindex(c.index)
             l = raw_data["Low"][ticker].reindex(c.index)
+            v = raw_data["Volume"][ticker].reindex(c.index) if "Volume" in raw_data.columns.get_level_values(0) else None
         else:
             c = raw_data["Close"].dropna()
             o = raw_data["Open"].reindex(c.index)
             h = raw_data["High"].reindex(c.index)
             l = raw_data["Low"].reindex(c.index)
+            v = raw_data["Volume"].reindex(c.index) if "Volume" in raw_data.columns else None
+        if v is None:
+            v = pd.Series([None] * len(c), index=c.index)
         result = []
-        for date, ov, hv, lv, cv in zip(c.index, o, h, l, c):
+        for date, ov, hv, lv, cv, vv in zip(c.index, o, h, l, c, v):
             if pd.isna(cv): continue
-            result.append({
+            row = {
                 "d": date.strftime(date_fmt),
                 "o": round(float(ov), 2),
                 "h": round(float(hv), 2),
                 "l": round(float(lv), 2),
                 "c": round(float(cv), 2)
-            })
+            }
+            if vv is not None and not pd.isna(vv):
+                row["v"] = round(float(vv), 0)
+            result.append(row)
         return result[-n_candles:]
     except:
         return []
@@ -179,17 +186,20 @@ def _ohlcv_individual(ticker, start_str, end_str, interval, n_candles, date_fmt=
             return []
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-        df = df[["Open", "High", "Low", "Close"]].dropna(subset=["Close"])
+        df = df[["Open", "High", "Low", "Close", "Volume"]].dropna(subset=["Close"])
         result = []
         for date, row in df.iterrows():
             if pd.isna(row["Close"]): continue
-            result.append({
+            entry = {
                 "d": date.strftime(date_fmt),
                 "o": round(float(row["Open"]), 2),
                 "h": round(float(row["High"]), 2),
                 "l": round(float(row["Low"]),  2),
                 "c": round(float(row["Close"]), 2)
-            })
+            }
+            if pd.notna(row.get("Volume")):
+                entry["v"] = round(float(row["Volume"]), 0)
+            result.append(entry)
         return result[-n_candles:]
     except Exception as e:
         print(f"    Einzeldownload {ticker} ({interval}): Fehler – {e}")

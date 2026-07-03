@@ -140,25 +140,47 @@ getestet. Ab sofort gilt ein einziges, schriftliches Regelwerk:
 ## 5. Backtesting 2.0
 
 ### Architektur
-Neuer Python-Portfolio-Backtester (`backtest/engine.py`) statt (bzw. zusätzlich zu)
+Neuer Python-Portfolio-Backtester (`backtest_v2/engine.py`) statt (bzw. zusätzlich zu)
 der Einzel-Ticker-JS-Logik. Das Frontend-Backtesting bleibt als Anschauung; die
 Strategie-Validierung läuft in Python (gleiche Signal-Module wie Live:
 `backend/gws_analysis.py` importieren, nicht duplizieren).
 
 ### Verbindliche Backtesting-Regeln
 
-| # | Regel |
-|---|---|
-| B1 | **Kein Look-Ahead:** Jedes Signal darf nur Daten verwenden, die am Signaltag verfügbar waren. Swing-Punkte gelten erst 2 Bars nach Auftreten als bestätigt. Entry immer zum Open des Folgetags. |
-| B2 | **Kosten:** 0,1 % Slippage + Gebühren je Seite (wikifolio-Realität eher 0,2 % — beide Varianten rechnen). |
-| B3 | **Survivorship:** Historische Indexmitgliedschaft verwenden. Phase 1: Wikipedia-Änderungshistorie der Indizes rekonstruieren (kostenlos); delistete Titel fehlen weiterhin in yfinance → Ergebnis konservativ interpretieren und dokumentieren. Phase 2 (nach Validierung): EODHD/Norgate. |
-| B4 | **Out-of-Sample:** Kalibrierung nur auf Trainingsfenster (z.B. 2016–2021), Validierung auf 2022–2026 (enthält echten Bärenmarkt 2022 — Pflicht-Testfall für das Regime-Modul). Danach Walk-Forward: je 3 Jahre Training, 1 Jahr Test, rollierend. |
-| B5 | **Parameter-Disziplin:** Jeder Parameter (Fenster-Gewichte, Perzentil-Schwellen, ATR-Faktoren, Zeit-Stopp) bekommt eine Sensitivitätsanalyse (±30 %). Regeln, deren Ergebnis bei kleinen Parameteränderungen kippt, gelten als überfittet und fliegen raus. |
-| B6 | **Portfolio-Ebene:** Simuliert wird das Gesamtportfolio inkl. Positionslimits, Cash-Quote, Regime-Budget — nicht Einzeltrades mit fixem Kapital. |
-| B7 | **Kennzahlen-Pflicht:** CAGR, Sharpe, Calmar, Max-DD, längste DD-Dauer, Exposure-Zeit, Profit-Factor, Trade-Anzahl, Alpha vs. Benchmark bei gleichem Beta — je Regime getrennt ausgewiesen. |
-| B8 | **Benchmark-Fairness:** Vergleich gegen Buy-and-Hold QQQ **und** gegen simple 200d-Regel auf QQQ. Die Strategie muss beide risikoadjustiert schlagen, sonst rechtfertigt sie ihre Komplexität nicht. |
-| B9 | **Keine 4H-Abhängigkeit im Langfrist-Backtest:** Da Intraday-Historie fehlt, wird der Kern (Regime + RS 2.0 + Daily-GWS + Exits) auf Daily/Weekly validiert. 4H bleibt Timing-Verfeinerung, deren Zusatznutzen nur auf den letzten 730 Tagen gemessen wird. |
-| B10 | **Eine Quelle der Wahrheit:** Live-Signal-Code und Backtest-Code teilen sich dieselben Funktionen. Jede Regeländerung → Backtest neu → Ergebnis im Repo versionieren (`backtest/results/`). |
+| # | Regel | Status (Juli 2026) |
+|---|---|---|
+| B1 | **Kein Look-Ahead:** Jedes Signal darf nur Daten verwenden, die am Signaltag verfügbar waren. Swing-Punkte gelten erst 2 Bars nach Auftreten als bestätigt. Entry immer zum Open des Folgetags. | ✅ umgesetzt |
+| B2 | **Kosten:** 0,1 % Slippage + Gebühren je Seite (wikifolio-Realität eher 0,2 % — beide Varianten rechnen). | ✅ umgesetzt |
+| B3 | **Survivorship:** Historische Indexmitgliedschaft verwenden. Phase 1: Wikipedia-Änderungshistorie der Indizes rekonstruieren (kostenlos); delistete Titel fehlen weiterhin in yfinance → Ergebnis konservativ interpretieren und dokumentieren. Phase 2 (nach Validierung): EODHD/Norgate. | ❌ offen |
+| B4 | **Out-of-Sample:** Kalibrierung nur auf Trainingsfenster (z.B. 2016–2021), Validierung auf 2022–2026 (enthält echten Bärenmarkt 2022 — Pflicht-Testfall für das Regime-Modul). Danach Walk-Forward: je 3 Jahre Training, 1 Jahr Test, rollierend. | ❌ nicht möglich — siehe Datenbefund unten |
+| B5 | **Parameter-Disziplin:** Jeder Parameter (Fenster-Gewichte, Perzentil-Schwellen, ATR-Faktoren, Zeit-Stopp) bekommt eine Sensitivitätsanalyse (±30 %). Regeln, deren Ergebnis bei kleinen Parameteränderungen kippt, gelten als überfittet und fliegen raus. | ❌ offen (erst nach B3/B4 sinnvoll) |
+| B6 | **Portfolio-Ebene:** Simuliert wird das Gesamtportfolio inkl. Positionslimits, Cash-Quote, Regime-Budget — nicht Einzeltrades mit fixem Kapital. | ✅ umgesetzt |
+| B7 | **Kennzahlen-Pflicht:** CAGR, Sharpe, Calmar, Max-DD, längste DD-Dauer, Exposure-Zeit, Profit-Factor, Trade-Anzahl, Alpha vs. Benchmark bei gleichem Beta — je Regime getrennt ausgewiesen. | ✅ umgesetzt |
+| B8 | **Benchmark-Fairness:** Vergleich gegen Buy-and-Hold QQQ **und** gegen simple 200d-Regel auf QQQ. Die Strategie muss beide risikoadjustiert schlagen, sonst rechtfertigt sie ihre Komplexität nicht. | ✅ umgesetzt — bisher NICHT geschlagen (s. u.) |
+| B9 | **Keine 4H-Abhängigkeit im Langfrist-Backtest:** Da Intraday-Historie fehlt, wird der Kern (Regime + RS 2.0 + Daily-GWS + Exits) auf Daily/Weekly validiert. 4H bleibt Timing-Verfeinerung, deren Zusatznutzen nur auf den letzten 730 Tagen gemessen wird. | ✅ umgesetzt (Entry verlangt Weekly+Daily 2/2 statt 3/3) |
+| B10 | **Eine Quelle der Wahrheit:** Live-Signal-Code und Backtest-Code teilen sich dieselben Funktionen. Jede Regeländerung → Backtest neu → Ergebnis im Repo versionieren (`backtest_v2/results/`). | ✅ umgesetzt |
+
+### Datenbefund (Juli 2026) — B3/B4 aktuell nicht durchführbar
+
+In der Entwicklungsumgebung besteht kein Netzwerkzugriff auf Yahoo Finance
+(Proxy blockiert `query1.finance.yahoo.com`). Die im Repo committeten
+Markt-JSONs (`data/rs_full.json` etc.) decken nur **~2 Jahre synchronisierte
+Ticker+Benchmark-Historie** ab (2024-06/07 bis heute) — nicht die für B4
+geforderte Trainingsperiode 2016–2021, und keinen echten Bärenmarkt (2022
+fehlt komplett). B3/B4/B5 bleiben deshalb offen, bis entweder Netzwerkzugriff
+zum Nachladen längerer Historie besteht oder eine bezahlte Datenquelle
+angebunden wird (siehe Abschnitt 8, Phase B).
+
+**Erster Validierungslauf auf dem verfügbaren ~2-Jahres-Fenster** (siehe
+`backtest_v2/results/README.md` für die volle Auswertung): Die Strategie
+unterliegt in allen vier Märkten (Nasdaq-100, S&P 500, DAX-40, Smallcap) dem
+Buy-and-Hold-Vergleich (Alpha −29,6pp bis −42,3pp), und in drei von vier
+Fällen auch der simplen 200d-Regel. Das ist plausibel für ein Fenster ohne
+echte Korrektur — genau die Marktphase, in der das System laut Konzept
+NICHT seinen Vorteil ausspielen kann (Kapitalschutz in Korrekturen). Es ist
+aber ein echter, unbeschönigter Befund und kein Beleg dafür, dass die
+Strategie funktioniert — das kann erst ein Testfenster mit echtem
+Bärenmarkt (B4) zeigen.
 
 ### Was der Backtest bewusst NICHT abdeckt
 Der LLM-Veto-Layer (Stufe 4) ist nicht rückwirkend simulierbar. Er wird
@@ -202,29 +224,29 @@ Neues `data/signal_journal.json`, automatisch gepflegt:
 
 ## 8. Umsetzungs-Roadmap
 
-### Phase A — Fundament (sofort, ~1–2 Wochen Aufwand)
-1. `backend/regime.py`: Regime-Ampel (Trend/Breite/Vola) aus vorhandenen JSONs; Anzeige im Frontend-Header aller Index-Seiten
-2. RS 2.0 in `rs_colab.py` & Geschwister: vola-adjustierte gewichtete Fenster + Perzentil-Rang (alter Score läuft übergangsweise parallel mit)
-3. Investierbarkeits-Filter ins Screening (`check_hidden_alpha.py`, RS-Seiten)
-4. Volumen in OHLCV-Exporte aufnehmen
-5. Exit-Regelwerk (Abschnitt 3) schriftlich fixieren — gilt ab sofort fürs wikifolio; jeder Trade bekommt beim Entry Stop, 2R-Ziel und Zeit-Stopp dokumentiert
+### Phase A — Fundament — ✅ abgeschlossen (Juli 2026)
+1. ✅ Regime-Ampel (Trend/Breite/Vola) — `backend/v2_analysis.py`, Anzeige in `frontend/v2.html`
+2. ✅ RS 2.0 — vola-adjustierte gewichtete Fenster + Perzentil-Rang, alter Score läuft parallel als `score_v1`
+3. ✅ Investierbarkeits-Filter im Funnel (`build_v2_payload()`), inkl. Ø-Dollar-Volumen 20T und Earnings-Sperre (fail-safe)
+4. ✅ Volumen in OHLCV-Exporte aufgenommen (alle `*_colab*.py`) — greift ab dem nächsten Workflow-Lauf
+5. ⚠️ Exit-Regelwerk (Abschnitt 3) ist schriftlich fixiert (in `v2.html` + hier) — **Anwendung im echten wikifolio noch nicht verankert** (offener Punkt 5 in `PROMPT_V2_UMSETZUNG.md` Phase C, braucht Rücksprache)
 
-### Phase B — Backtesting 2.0 (~2–4 Wochen)
-6. Python-Portfolio-Engine mit Regeln B1–B10; Signal-Funktionen aus `backend/` wiederverwenden
-7. Historische Indexmitgliedschaft aus Wikipedia-Änderungslisten rekonstruieren (`data/index_history.json`)
-8. Kalibrierungslauf (Training bis 2021, Validierung 2022–2026) für: Fenster-Gewichte, Perzentil-Schwelle, ATR-Faktoren, Zeit-Stopp, Regime-Schwellen
-9. Ergebnisbericht nach B7 in `backtest/results/` versionieren; Regeln einfrieren
+### Phase B — Backtesting 2.0 — teilweise abgeschlossen
+6. ✅ Python-Portfolio-Engine (`backtest_v2/`) mit Regeln B1/B2/B6/B7/B8/B9/B10; Signal-Funktionen aus `backend/` wiederverwendet
+7. ❌ Historische Indexmitgliedschaft (`data/index_history.json`) — offen, braucht Netzwerkzugriff
+8. ❌ Kalibrierungslauf (Training bis 2021, Validierung 2022–2026) — **nicht möglich**, nur ~2 Jahre Historie im Repo verfügbar (siehe Datenbefund oben). Stattdessen: erster Validierungslauf auf dem verfügbaren Fenster durchgeführt, Ergebnis in `backtest_v2/results/README.md`
+9. ✅ Ergebnisbericht nach B7 in `backtest_v2/results/` versioniert (vier Märkte, zwei Kostenvarianten je Markt)
 
-### Phase C — Hybrid-Betrieb & Feedback (laufend)
-10. LLM-Veto-Format (PASS/REDUCE/VETO) in `analyses/PROMPT.md` + `generate_rating.py` integrieren
-11. `signal_journal.json` + automatische Folgerendite-Messung (wöchentlicher Workflow)
-12. Quartalsweise Kalibrierung: Verdict-Schwellen, Veto-Nutzen, Regime-Parameter
-13. Nach 2 Quartalen positiver Validierung: Datenupgrade (EODHD/Norgate) und Neu-Backtest auf sauberen Daten
+### Phase C — Hybrid-Betrieb & Feedback — teilweise abgeschlossen
+10. ✅ LLM-Veto-Format (PASS/REDUCE/VETO) in `analyses/PROMPT.md` + `generate_rating.py` integriert
+11. ✅ `data/signal_journal.json` + `update_signal_journal.py` (automatische Folgerendite-Messung aus eigener OHLCV-Historie) — **läuft noch nicht automatisiert** (kein Workflow angelegt, siehe `PROMPT_V2_UMSETZUNG.md`)
+12. ❌ Quartalsweise Kalibrierung — zu früh, Journal hat erst einen Tages-Snapshot
+13. ❌ Datenupgrade (EODHD/Norgate) — nicht begonnen
 
 ### Definition of Done je Phase
-- A: Regime-Ampel live sichtbar, neuer RS-Score in allen JSONs, Exit-Regeln im Repo dokumentiert und im wikifolio angewendet
-- B: Backtest-Report mit allen B7-Kennzahlen, OOS-Zeitraum inkl. 2022, Sensitivitätsanalyse ohne Kipp-Parameter
-- C: Erstes Quartals-Review mit messbarem LLM-Veto-Effekt
+- A: ✅ erreicht (Anwendung im wikifolio als einziger offener Teilpunkt)
+- B: ⚠️ Engine + Kennzahlen stehen, aber OOS-Zeitraum inkl. 2022 und Sensitivitätsanalyse sind mangels Datentiefe noch offen
+- C: LLM-Veto-Format + Signal-Journal-Infrastruktur stehen; erstes Quartals-Review erst möglich, sobald über Wochen/Monate Journal-Daten vorliegen
 
 ---
 

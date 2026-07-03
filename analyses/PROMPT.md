@@ -102,6 +102,24 @@ Produktzyklus, Sektorrotation oder Makro-Tailwind.
 5 = starker, nachhaltiger fundamentaler Treiber.
 1 = kein erkennbarer fundamentaler Katalysator — rein technisches Momentum.
 
+**Funnel-Entscheidung (PFLICHT, exakt dieses Format, eine Zeile):**
+```
+**Funnel-Entscheidung:** PASS|REDUCE|VETO — Kategorie: <Kategorie> — <ein Satz Begründung>
+```
+Die Analyse ist in der RS-Platform 2.0 (siehe `STRATEGIEPLAN.md` Abschnitt 6)
+ein reiner Qualitäts-/Veto-Layer über dem regelbasierten Funnel — sie darf
+Kandidaten aus der Kaufliste streichen oder verkleinern, aber NIE Kandidaten
+hinzufügen, die der Funnel (RS 2.0 + Regime + GWS) nicht bereits geliefert hat.
+- **PASS** — volle im Funnel berechnete Positionsgröße, keine fundamentalen Einwände.
+- **REDUCE** — halbe Positionsgröße; Bewertung/Katalysator tragen die volle Größe nicht,
+  die technische These bleibt aber intakt.
+- **VETO** — kein Trade trotz Funnel-Signal; ein fundamentaler Risikofaktor überwiegt
+  das technische Setup.
+Kategorie (genau eine, exakt so schreiben): `Bewertung` · `Verwässerung` ·
+`Kundenkonzentration` · `Bilanz` · `Katalysator fehlt` · `Sonstiges`.
+Die Begründung muss sich auf einen bereits in den Abschnitten 1–11 genannten
+Fakt beziehen — keine neuen, dort nicht belegten Behauptungen.
+
 ---
 
 ## VERDICT & SCORE (automatisch — NICHT selbst schreiben)

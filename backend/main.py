@@ -593,15 +593,35 @@ async def get_v2(market: str, email: str = Depends(require_auth)):
     if not path.exists():
         raise HTTPException(503, "Datendatei noch nicht vorhanden")
     fund_path = DATA_DIR / "fundamentals.json"
+    earnings_path = DATA_DIR / "earnings_calendar.json"
     cache_key = (path.stat().st_mtime,
-                 fund_path.stat().st_mtime if fund_path.exists() else 0)
+                 fund_path.stat().st_mtime if fund_path.exists() else 0,
+                 earnings_path.stat().st_mtime if earnings_path.exists() else 0)
     cached = _v2_cache.get(market)
     if not cached or cached["cache_key"] != cache_key:
         raw = _load(path)
         fund = _load(fund_path).get("tickers", {}) if fund_path.exists() else {}
-        payload = build_v2_payload(raw, fund, market)
+        earnings_map = _load(earnings_path).get("next_earnings", {}) if earnings_path.exists() else {}
+        payload = build_v2_payload(raw, fund, market, earnings_map=earnings_map)
         _v2_cache[market] = {"cache_key": cache_key, "payload": payload}
     return JSONResponse(content=_v2_cache[market]["payload"])
+
+
+_BACKTEST_V2_RESULTS = Path(__file__).parent.parent / "backtest_v2" / "results"
+
+
+@app.get("/api/v2/backtest/{market}")
+async def get_v2_backtest(market: str, email: str = Depends(require_auth)):
+    """Liefert den neuesten Backtest-2.0-Report für market (Phase B,
+    STRATEGIEPLAN.md Abschnitt 5) — 404 wenn noch keiner erzeugt wurde."""
+    if market not in MARKET_FILES:
+        raise HTTPException(404, f"Unbekannter Markt '{market}'")
+    if not _BACKTEST_V2_RESULTS.exists():
+        raise HTTPException(404, "Noch kein Backtest-2.0-Lauf vorhanden")
+    candidates = sorted(_BACKTEST_V2_RESULTS.glob(f"{market}_*.json"), reverse=True)
+    if not candidates:
+        raise HTTPException(404, f"Noch kein Backtest-2.0-Lauf für '{market}' vorhanden")
+    return JSONResponse(content=_load(candidates[0]))
 
 
 @app.get("/api/ratings")

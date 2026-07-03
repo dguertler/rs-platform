@@ -28,8 +28,14 @@ MIN_MCAP_SMALLCAP = 100e6
 MIN_PRICE         = 5.0
 MIN_HISTORY_DAYS  = 130
 
+MIN_DOLLAR_VOL_DEFAULT   = 5e6   # Ø-Dollar-Volumen 20T (STRATEGIEPLAN.md Stufe 1)
+MIN_DOLLAR_VOL_SMALLCAP  = 1e6
+VOLUME_CONFIRM_MULT      = 1.5   # Breakout-Volumen ≥ 1,5× 20T-Ø
+
 ATR_PERIOD        = 14
 MAX_STOP_ATR      = 1.5          # Entry−Stop ≤ 1,5×ATR = enges Setup
+
+EARNINGS_BLACKOUT_CALENDAR_DAYS = 7   # Näherung für "< 5 Handelstage" — kein Handelskalender verfügbar
 
 REGIME_THRESHOLDS = {"green": 85, "yellow": 90, "red": 90}   # RS2-Perzentil-Schwelle
 REGIME_BUDGET     = {"green": 100, "yellow": 60, "red": 30}  # Exposure-Budget %
@@ -71,6 +77,52 @@ def _atr(ohlcv, period=ATR_PERIOD):
         h, l, pc = ohlcv[i]["h"], ohlcv[i]["l"], ohlcv[i - 1]["c"]
         trs.append(max(h - l, abs(h - pc), abs(l - pc)))
     return sum(trs) / period
+
+
+def _in_earnings_blackout(ticker, earnings_map, today=None):
+    """True, wenn earnings_map einen zukünftigen Termin für ticker innerhalb
+    EARNINGS_BLACKOUT_CALENDAR_DAYS enthält. earnings_map=None oder Ticker
+    fehlt → False (fail-safe: Sperre nie aktiv, wenn keine Daten vorliegen)."""
+    if not earnings_map:
+        return False
+    date_str = earnings_map.get(ticker)
+    if not date_str:
+        return False
+    try:
+        from datetime import date as _date
+        target = _date.fromisoformat(date_str)
+        today = today or _date.today()
+        delta = (target - today).days
+        return 0 <= delta <= EARNINGS_BLACKOUT_CALENDAR_DAYS
+    except Exception:
+        return False
+
+
+def _dollar_volume_20d(ohlcv):
+    """Ø-Dollar-Volumen der letzten 20 Handelstage, oder None wenn kein
+    Volumen-Feld vorhanden ist (ältere JSON-Exporte vor dem Volumen-Rollout)."""
+    tail = ohlcv[-20:]
+    pairs = [(row["c"], row["v"]) for row in tail if row.get("v") is not None]
+    if len(pairs) < 10:
+        return None
+    return sum(c * v for c, v in pairs) / len(pairs)
+
+
+def _volume_confirmed_breakout(ohlcv):
+    """True, wenn das Volumen am letzten Handelstag ≥ VOLUME_CONFIRM_MULT ×
+    Ø-Volumen der vorherigen 20 Tage liegt. None (nicht False!) wenn Volumen
+    fehlt — Aufrufer muss None von False unterscheiden, um das Kriterium bei
+    fehlenden Daten neutral zu behandeln statt Setups fälschlich abzuwerten."""
+    if len(ohlcv) < 21:
+        return None
+    last_v = ohlcv[-1].get("v")
+    prior = [row["v"] for row in ohlcv[-21:-1] if row.get("v") is not None]
+    if last_v is None or len(prior) < 10:
+        return None
+    avg_prior = sum(prior) / len(prior)
+    if avg_prior <= 0:
+        return None
+    return last_v >= VOLUME_CONFIRM_MULT * avg_prior
 
 
 def _last_confirmed_swing_low(ohlcv):
@@ -197,7 +249,7 @@ def compute_regime(bench_ohlcv, ticker_close_lists):
 
 # ── Funnel / Payload ──────────────────────────────────────────────────────────
 
-def build_v2_payload(raw, fundamentals, market):
+def build_v2_payload(raw, fundamentals, market, earnings_map=None):
     arr = raw.get("data", []) if isinstance(raw, dict) else raw
     bench_ohlcv = raw.get("benchmark_ohlcv", []) if isinstance(raw, dict) else []
     bench_closes = _closes(bench_ohlcv)
@@ -239,6 +291,9 @@ def build_v2_payload(raw, fundamentals, market):
         close = closes[-1]
         mcap = _num(f.get("marketCap"))
 
+        min_dollar_vol = MIN_DOLLAR_VOL_SMALLCAP if market == "smallcap" else MIN_DOLLAR_VOL_DEFAULT
+        dollar_vol = _dollar_volume_20d(entry.get("ohlcv", []))
+
         reasons = []
         if mcap is not None and mcap < min_mcap:
             reasons.append(f"MCap < ${min_mcap / 1e6:.0f}M")
@@ -246,6 +301,8 @@ def build_v2_payload(raw, fundamentals, market):
             reasons.append(f"Kurs < ${MIN_PRICE:.0f}")
         if len(closes) < MIN_HISTORY_DAYS:
             reasons.append(f"Historie < {MIN_HISTORY_DAYS}T")
+        if dollar_vol is not None and dollar_vol < min_dollar_vol:
+            reasons.append(f"Ø-$-Vol 20T < ${min_dollar_vol / 1e6:.0f}M")
         investable = not reasons
 
         struct = struct_for_entry(entry)
@@ -265,17 +322,24 @@ def build_v2_payload(raw, fundamentals, market):
         trend = round(pct - prev, 1) if pct is not None and prev is not None else None
         sector = f.get("sector")
 
+        volume_confirmed = _volume_confirmed_breakout(entry.get("ohlcv", []))
+        has_volume_data = volume_confirmed is not None
+
         setup_pts = sum([
             gws_pts == 3,
             bool(tight_stop),
             trend is not None and trend > 0,
             sector in top_sectors,
+            bool(volume_confirmed),
         ])
+        setup_max = 5 if has_volume_data else 4
+
+        earnings_blackout = _in_earnings_blackout(ticker, earnings_map)
 
         if not investable:
             status = "GEFILTERT"
         elif pct is not None and pct >= threshold and gws_pts == 3:
-            status = "KAUFLISTE"
+            status = "EARNINGS-SPERRE" if earnings_blackout else "KAUFLISTE"
         elif pct is not None and pct >= threshold:
             status = "KANDIDAT"
         else:
@@ -297,7 +361,12 @@ def build_v2_payload(raw, fundamentals, market):
             "atr": round(atr, 2) if atr else None,
             "stop": stop,
             "tight_stop": tight_stop,
+            "dollar_vol_20d": round(dollar_vol, 0) if dollar_vol is not None else None,
+            "volume_confirmed": volume_confirmed,
             "setup_pts": setup_pts,
+            "setup_max": setup_max,
+            "next_earnings": (earnings_map or {}).get(ticker),
+            "earnings_blackout": earnings_blackout,
             "status": status,
         })
 

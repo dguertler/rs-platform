@@ -1,0 +1,121 @@
+{
+  "market": "smallcap",
+  "generated_at": "2026-07-03 13:41",
+  "disclaimer": "BEKANNTE EINSCHRÄNKUNGEN DIESES LAUFS (siehe backtest_v2/engine.py Docstring):\n- Survivorship-Bias: aktuelles Universum rückwirkend gehandelt (Regel B3 offen)\n- Nur ~2 Jahre synchronisierte Historie verfügbar — keine 2016-2021-Trainings-\n  periode, kein echter Bärenmarkt-Test wie 2022 (Regeln B4/B5 offen)\n- Kein 4H im historischen Walk (Regel B9) — Entry verlangt Weekly+Daily (2/2)\n- Fundamentaldaten sind ein aktueller Snapshot, nicht point-in-time\nDieser Report ist ein Smoke-/Validierungslauf der Engine-Architektur,\nKEINE abgeschlossene Strategie-Kalibrierung.",
+  "runs": {
+    "cost_0.001": {
+      "cost_pct": 0.001,
+      "n_universe": 351,
+      "n_trading_days": 501,
+      "period": {
+        "from": "2024-07-03",
+        "to": "2026-07-02"
+      },
+      "equity": {
+        "total_return_pct": -4.41,
+        "cagr_pct": -2.24,
+        "sharpe": -0.04,
+        "calmar": -0.12,
+        "max_dd_pct": 18.92,
+        "max_dd_days": 242
+      },
+      "trades": {
+        "n_trades": 222,
+        "n_wins": 93,
+        "n_losses": 129,
+        "win_rate_pct": 41.9,
+        "profit_factor": 0.88,
+        "avg_win_pct": 13.59,
+        "avg_loss_pct": -5.23
+      },
+      "exposure_pct": 92.8,
+      "vs_benchmark": {
+        "strategy_return_pct": -4.41,
+        "benchmark_buyhold_return_pct": 37.9,
+        "alpha_pct": -42.31
+      },
+      "vs_sma200_rule_pct": 8.23,
+      "by_regime": {
+        "unknown": {
+          "days": 197,
+          "return_pct_while_active": -15.61
+        },
+        "red": {
+          "days": 72,
+          "return_pct_while_active": -1.22
+        },
+        "green": {
+          "days": 167,
+          "return_pct_while_active": 12.8
+        },
+        "yellow": {
+          "days": 63,
+          "return_pct_while_active": 2.11
+        }
+      },
+      "exit_reasons": {
+        "trailing": 84,
+        "partial_2R": 40,
+        "stop": 75,
+        "time_stop": 23
+      }
+    },
+    "cost_0.002": {
+      "cost_pct": 0.002,
+      "n_universe": 351,
+      "n_trading_days": 501,
+      "period": {
+        "from": "2024-07-03",
+        "to": "2026-07-02"
+      },
+      "equity": {
+        "total_return_pct": -9.68,
+        "cagr_pct": -4.99,
+        "sharpe": -0.2,
+        "calmar": -0.25,
+        "max_dd_pct": 20.14,
+        "max_dd_days": 242
+      },
+      "trades": {
+        "n_trades": 223,
+        "n_wins": 90,
+        "n_losses": 133,
+        "win_rate_pct": 40.4,
+        "profit_factor": 0.84,
+        "avg_win_pct": 13.99,
+        "avg_loss_pct": -5.42
+      },
+      "exposure_pct": 92.8,
+      "vs_benchmark": {
+        "strategy_return_pct": -9.68,
+        "benchmark_buyhold_return_pct": 37.9,
+        "alpha_pct": -47.57
+      },
+      "vs_sma200_rule_pct": 8.23,
+      "by_regime": {
+        "unknown": {
+          "days": 197,
+          "return_pct_while_active": -16.73
+        },
+        "red": {
+          "days": 72,
+          "return_pct_while_active": -1.49
+        },
+        "green": {
+          "days": 167,
+          "return_pct_while_active": 8.21
+        },
+        "yellow": {
+          "days": 63,
+          "return_pct_while_active": 5.31
+        }
+      },
+      "exit_reasons": {
+        "trailing": 83,
+        "stop": 80,
+        "partial_2R": 39,
+        "time_stop": 21
+      }
+    }
+  }
+}

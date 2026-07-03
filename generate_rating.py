@@ -309,6 +309,34 @@ def _extract_ratings(text: str) -> dict:
     return out
 
 
+_VETO_DECISIONS = {"PASS", "REDUCE", "VETO"}
+_VETO_CATEGORIES = {"Bewertung", "Verwässerung", "Kundenkonzentration", "Bilanz",
+                     "Katalysator fehlt", "Sonstiges"}
+
+
+def _extract_funnel_veto(text: str) -> dict | None:
+    """Parst die Pflichtzeile '**Funnel-Entscheidung:** PASS|REDUCE|VETO —
+    Kategorie: <Kategorie> — <Begründung>' aus analyses/PROMPT.md.
+    Reiner Qualitäts-Layer (STRATEGIEPLAN.md Abschnitt 6) — None wenn die
+    Analyse (noch) keine solche Zeile enthält, z.B. bei älteren Analysen
+    aus der Zeit vor diesem Format."""
+    m = re.search(
+        r'\*\*Funnel-Entscheidung:\*\*\s*(PASS|REDUCE|VETO)\s*—\s*Kategorie:\s*([^—\n]+?)\s*—\s*(.+)',
+        text)
+    if not m:
+        return None
+    decision = m.group(1)
+    category = m.group(2).strip()
+    reason = m.group(3).strip()
+    if decision not in _VETO_DECISIONS:
+        return None
+    return {
+        "decision": decision,
+        "category": category if category in _VETO_CATEGORIES else "Sonstiges",
+        "reason": reason,
+    }
+
+
 def _parse_price_range_midpoint(price_str: str) -> float | None:
     """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900') und gibt den Mittelpunkt zurück."""
     s = price_str.replace(",", "").replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
@@ -804,6 +832,7 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
     ev_pts, upside_pct = _compute_ev_score(analysis_text, fund.get("currentPrice"))
     score, verd = _calc_score_and_verdict(rt, ev_pts)
     asymm_edge = upside_pct is not None and upside_pct > 20
+    funnel_veto = _extract_funnel_veto(analysis_text)
 
     html = build_html(ticker, fund, analysis_text, rs_score, gws)
 
@@ -826,6 +855,7 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
         "verdict":         verd,
         "score":           score,
         "asymmetric_edge": asymm_edge,
+        "funnel_veto":     funnel_veto,
         "created_at":      datetime.now().isoformat(),
     })
     save_index(idx)
