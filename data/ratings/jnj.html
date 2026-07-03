@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JNJ — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>JNJ</h1>
+      <h2>Johnson & Johnson</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Drug Manufacturers - General</span></div>
+        <div class="mi">MCap: <span>$613B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">64.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$254.66</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">20.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$96.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">68.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">210.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">26.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-3.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">300–355</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">225–270</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">145–180</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $300–$355 (20 %) · Base $225–$270 (50 %) · Bear $145–$180 (30 %) · EV ~$238</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Johnson & Johnson ist seit der Kenvue-Abspaltung (Konsumgütersparte) ein fokussierter Pharma-/MedTech-Konzern mit deutlich höherer Margenqualität als zuvor — sichtbar an Gross Margin 68,0% und Operating Margin 27,4%. Der Kurs hat sich über die letzten 52 Wochen dramatisch entwickelt (52W-Tief $151,52 auf aktuell $254,66, nahe 52W-Hoch $255,11) — eine Bandbreite von +68%, die auf eine signifikante Neubewertung hindeutet, deren genauer Auslöser aus den vorliegenden Daten nicht verifizierbar ist. Der strukturelle Kern der These: Revenue-Wachstum +9,9% YoY bei ROE 26,4% und ROIC 25,2% zeigt ein Pharma-/MedTech-Portfolio, das trotz laufender Patentklippen (u.a. Stelara-Biosimilar-Erosion) solide wächst. Was der Markt einpreist: Forward-PE 20,0x ist für einen Healthcare-Blue-Chip mit diesem Wachstumsprofil fair bis leicht ambitioniert, insbesondere angesichts des Kursniveaus nahe dem Allzeithoch. Was strukturell im Hintergrund bleibt: die Talkum-Rechtsstreitigkeiten (Baby-Powder-Klagen) sind ein bekannter, langjähriger Überhang, dessen finanzielle Endauswirkung im Datensatz nicht quantifizierbar ist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Innovative Medicine (Pharma): Onkologie, Immunologie, Neurowissenschaft als Kernwachstumssegmente nach der Kenvue-Abspaltung</li>
+<li>MedTech: Orthopädie, Chirurgie, Sehkraft, Kardiovaskulär — diversifizierter als reine Pharma-Konzerne, geringere Einzelprodukt-Abhängigkeit</li>
+<li>Stelara (Immunologie) unterliegt seit dem Patentablauf zunehmendem Biosimilar-Wettbewerb — struktureller Erosionsfaktor, der durch neue Pipeline-Produkte kompensiert werden muss</li>
+<li>Breite geografische und Produktdiversifikation reduziert Einzelrisiko im Vergleich zu fokussierteren Pharma-Wetten</li>
+<li>Operating Margin 27,4% und Gross Margin 68,0% zeigen starke Preissetzungsmacht bei patentgeschützten Produkten</li>
+<li>FCF $12,51 Mrd. bei $96,36 Mrd. Revenue (13% FCF-Marge) — solide, finanziert Dividende (2,1%) und F&E</li>
+<li>Debt/Equity 67,7% — moderat für einen Healthcare-Konzern dieser Größe</li>
+<li>Talkum-Rechtsstreitigkeiten (Baby-Powder-Klagen) als struktureller, seit Jahren laufender Rechtsrisiko-Overhang — finanzielle Gesamtauswirkung im Datensatz nicht quantifizierbar</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Onkologie- und Immunologie-Pipeline liefert über Konsens hinausgehende Wachstumsbeiträge, MedTech-Segment gewinnt Marktanteile, Talkum-Rechtsstreitigkeiten werden zu überschaubaren Konditionen final beigelegt und der Überhang entfällt. Annahme (kein Konsens): FY27-EPS ~$15,00 × 22x Forward = $330. Kursziel: $300–$355 (Midpoint $327,50). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Pharma- und MedTech-Wachstum setzt sich im aktuellen Tempo fort, Stelara-Erosion wird durch neue Produkte weitgehend kompensiert, Rechtsstreitigkeiten bleiben ein bekannter, aber eingepreister Hintergrundfaktor. Annahme (kein Konsens): FY27-EPS ~$13,20 × 19x Forward = $250,80. Kursziel: $225–$270 (Midpoint $247,50). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Ungünstiges Gerichtsurteil oder signifikant höhere Vergleichssumme in den Talkum-Verfahren als eingepreist, gleichzeitig beschleunigt sich die Stelara-Biosimilar-Erosion stärker als erwartet, MedTech gerät unter Wettbewerbsdruck. Kundenkonzentration: breite Diversifikation über Pharma/MedTech und Geografien, auf Datenbasis nicht konzentriert quantifizierbar. Geopolitik/China-Exposure: globales Fertigungs- und Vertriebsnetz mit moderatem China-MedTech-Exposure, im Datensatz nicht separat ausgewiesen. Lieferketten-/Foundry-Abhängigkeit: komplexe Biologika- und Medizintechnik-Fertigung an spezialisierten Standorten — Ausfallrisiko nicht quantifizierbar. Verwässerung: kein signifikantes Risiko erkennbar. Regulierung/Rechtsrisiken: Talkum-Rechtsstreitigkeiten sind das materiellste Einzelrisiko — eine ungünstige Wendung (höhere Vergleichssummen, gescheiterte Verfahrensstrategie) könnte signifikante Einmalbelastungen auslösen. Annahme (kein Konsens): FY27-EPS fällt auf ~$10,00 × 16x = $160. Kursziel: $145–$180 (Midpoint $162,50). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $327,50 + 0,50 × $247,50 + 0,30 × $162,50 = $65,50 + $123,75 + $48,75 = **$238 — implizites Downside vs. aktuellem Kurs ($254,66): −6,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Bei einem Kurs nahe dem 52-Wochen-Hoch nach einer außergewöhnlichen Jahresbewegung (+68% vom Tief) ist ein High-Conviction-Framing nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 26,4% und ROIC 25,2% sind stark und zeigen eine echte Verbesserung der Kapitaleffizienz seit der Fokussierung auf Pharma/MedTech nach der Kenvue-Abspaltung. Gross Margin 68,0% und Operating Margin 27,4% sind für einen diversifizierten Healthcare-Konzern dieser Größe herausragend. FCF $12,51 Mrd. (13% FCF-Marge) ist solide, wenn auch nicht außergewöhnlich hoch im Verhältnis zur Marktkapitalisierung. Revenue-Wachstum +9,9% YoY ist für einen Konzern dieser Größenordnung stark. Der Burggraben liegt in der Breite des Portfolios (Pharma + MedTech) und der langjährigen Vertriebs-/Regulierungsexpertise — strukturell tief, aber durch die Talkum-Rechtsstreitigkeiten mit einem realen Reputations- und Kapitalrisiko belastet.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 20,0x und Trailing-PE 29,5x sind für einen Healthcare-Blue-Chip mit 9,9% Umsatzwachstum am oberen Ende einer fairen Bewertung, aber nicht exzessiv. P/B 7,55x ist hoch, aber für ein margenstarkes Pharma-/MedTech-Portfolio mit starkem ROE nachvollziehbar. Rückrechnung: Der aktuelle Kurs $254,66 impliziert bei Forward-PE 20,0x ein FY-EPS von ~$12,73 — das setzt eine anhaltende Wachstumsdynamik ohne größere Rechtsrisiko-Belastung voraus. Angesichts der ungewöhnlichen 52-Wochen-Kursbewegung (+68% vom Tief) ist unklar, ob diese Bewertung bereits eine vollständige Auflösung des Talkum-Überhangs einpreist oder noch Risikoabschlag enthält — aus den Daten nicht abschließend auflösbar. Analyst-Konsensziel $257,50 liegt knapp über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling, aber ohne signifikantes zusätzliches Potenzial laut Coverage.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 64,92, Rang 56 von 500 im S&P 500 — solides oberes Segment für einen defensiven Large Cap. Kursfenster zeigen breit angelegtes, aber leicht abflachendes Momentum: 10T +15,4%, 20T +16,62%, 50T +12,17%, 6M +19,2%, aber 5T nur +1,53% — ein Zeichen für nachlassende kurzfristige Dynamik nach starkem Lauf. Beta 0,256 ist außergewöhnlich niedrig — typisch defensiver Healthcare-Blue-Chip-Charakter. Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die extreme 52-Wochen-Bandbreite deutet auf einen bedeutenden Sentimentwandel hin (möglicherweise Fortschritte bei der Talkum-Rechtsstreitigkeit oder starke Pipeline-Daten) — Auslöser aus den vorliegenden Daten nicht verifizierbar, vor einer Positionsentscheidung zwingend zu prüfen. Enttäuschungsrisiko: Ein Rückschlag in den Talkum-Verfahren wäre der plausibelste kurzfristige negative Katalysator.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $254,66 nahe 52-Wochen-Hoch $255,11 (52W-Tief $151,52) — eine außergewöhnliche Jahresbewegung von +68% vom Tief. GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — kein technisch bestätigter Strukturbruch trotz der starken RS-Fenster. Die Verlangsamung im 5-Tage-Fenster (+1,53% gegenüber +15,4% über 10 Tage) deutet auf eine erste Konsolidierungsphase nach dem starken Lauf hin. Technisches Warnsignal: Wochenschluss unter $235 (Bereich der letzten Konsolidierung) wäre ein erstes Zeichen für nachlassende Dynamik.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($330–$400):** Onkologie-/Immunologie-Pipeline liefert nachhaltiges Wachstum, MedTech gewinnt strukturell Marktanteile, Talkum-Überhang wird final und überschaubar beigelegt.</p>
+<p>**Base ($260–$310):** Solides, diversifiziertes Wachstum aus Pharma und MedTech, Stelara-Erosion wird durch neue Produkte kompensiert, Rechtsrisiken bleiben Hintergrundfaktor.</p>
+<p>**Bear ($155–$200):** Ungünstige Wendung in den Talkum-Verfahren belastet Kapital und Reputation signifikant, Patentklippen-Erosion beschleunigt sich stärker als erwartet.</p>
+<p>Entscheidende Variable: Endgültiger Ausgang der Talkum-Rechtsstreitigkeiten und Tempo der Pipeline-Erneuerung gegen die Stelara-Erosion. Szenario-Konsistenz: kurzfristiger Bear ($145–$180) liegt innerhalb des langfristigen Bear-Bereichs ($155–$200) — im Wesentlichen konsistent; kurzfristiger Bull ($300–$355) unterhalb des langfristigen Bull ($330–$400) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Johnson & Johnson ist ein klassischer Buy-and-Hold-Compounder mit defensivem Charakter (Beta 0,256) und deutlich verbesserter Margenqualität seit der Kenvue-Fokussierung — kein zyklischer Trade. Der Erwartungswert von $238 liegt −6,5% unter dem aktuellen Kurs — nach der außergewöhnlichen 52-Wochen-Rally (+68% vom Tief) besteht auf aktuellem Niveau kein asymmetrischer Edge für Neueinsteiger. Geeignet für: defensive Qualitäts- und Dividendeninvestoren mit langem Anlagehorizont, die den Talkum-Rechtsrisiko-Overhang als bekannten, aber nicht vollständig quantifizierbaren Faktor akzeptieren. Nicht geeignet für: Investoren, die eine vollständige rechtliche Klarheit vor dem Einstieg benötigen — diese liegt aktuell nicht vor. Positionsgröße: reguläre Kernposition (bis 5–6%) für defensive Portfolios vertretbar, idealerweise mit Beobachtung der Rechtsstreitigkeiten als Katalysator für Nachkäufe bei Rücksetzern.</p>
+<p>Peers: **AbbVie (ABBV)** als Pharma-Vergleich mit höherem Wachstum, aber konzentrierterem Produktrisiko. **Abbott Laboratories** als diversifizierterer MedTech-/Diagnostik-Vergleich ohne vergleichbaren Rechtsrisiko-Overhang. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ABBV — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ABBV</h1>
+      <h2>AbbVie Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Drug Manufacturers - General</span></div>
+        <div class="mi">MCap: <span>$448B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">71.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$253.35</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$62.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">72.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">273.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">310–370</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">240–285</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $310–$370 (20 %) · Base $240–$285 (50 %) · Bear $150–$185 (30 %) · EV ~$249,25</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>AbbVie hat den Humira-Patentklippen-Übergang bemerkenswert gut gemeistert: Die Nachfolgeprodukte im Immunologie-Franchise (Skyrizi, Rinvoq) haben den Erlösausfall aus dem Biosimilar-Wettbewerb bei Humira nicht nur kompensiert, sondern überkompensiert — sichtbar an Revenue-Wachstum von +12,4% YoY bei einem Konzern dieser Größenordnung. Der Kurs $253,35 notiert exakt auf dem 52-Wochen-Hoch — der Markt honoriert diese Transition bereits vollständig. Auffällig: Trailing-PE 123,6x steht in starkem Kontrast zu Forward-PE 15,55x — diese Diskrepanz ist eine Anomalie, die primär durch Einmalbelastungen (z.B. Rechtsstreitigkeiten, IPR&D-Abschreibungen aus Akquisitionen) in den TTM-Zahlen erklärbar ist, nicht durch einen strukturellen Ergebniseinbruch; aus den Daten nicht abschließend auflösbar, daher wird Forward-PE als primäre Bewertungsbasis verwendet. Ebenso auffällig: Price/Book von −67,3 reflektiert negatives Eigenkapital — eine direkte Folge der fremdfinanzierten Allergan-Übernahme (Goodwill/Abschreibungsstruktur), kein Zeichen operativer Schwäche. Was der Markt aktuell einpreist: nahezu perfekte Ausführung der Immunologie-Transition plus Pipeline-Optionalität (Neurowissenschaften, Onkologie) — wenig Puffer für Enttäuschungen bei einem Kurs am Allzeithoch.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Immunologie-Franchise (Skyrizi, Rinvoq) als primärer Wachstumstreiber nach dem Humira-Patentablauf — strukturell tragfähig für die nächsten Jahre, aber selbst irgendwann Biosimilar-/Patentrisiko ausgesetzt</li>
+<li>Rest-Humira-Umsatz erodiert weiter durch Biosimilar-Wettbewerb — bekannter, eingepreister Rückgangspfad</li>
+<li>Ästhetik-Segment (Botox/Allergan-Portfolio) als margenstarkes, konsumnahes Zusatzgeschäft mit eigener Zyklik</li>
+<li>Onkologie- und Neurowissenschafts-Pipeline (u.a. aus Akquisitionen wie ImmunoGen/Cerevel) als Optionalität für die nächste Wachstumswelle</li>
+<li>Gross Margin 72,0% zeigt die typische Pharma-Preissetzungsmacht bei patentgeschützten Produkten</li>
+<li>Operating Margin 32,2% ist stark, Net Margin 5,79% ist durch Einmaleffekte verzerrt — nicht die operative Kernprofitabilität widerspiegelnd</li>
+<li>FCF $20,81 Mrd. bei $62,82 Mrd. Revenue (33% FCF-Marge) — außergewöhnlich stark, finanziert Dividende und Pipeline-Investitionen</li>
+<li>Negatives Eigenkapital aus der Allergan-Akquisition — strukturelles Merkmal der Bilanz, kein akutes Solvenzrisiko angesichts der starken Cashflows</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Immunologie-Franchise wächst weiter über Konsens, Onkologie-Pipeline (ImmunoGen-Assets) und Neurowissenschafts-Pipeline (Cerevel-Assets) liefern positive Phase-3-Daten und frühe kommerzielle Erfolge. Annahme (kein Konsens): FY27-EPS ~$20,00 × 17x Forward = $340. Kursziel: $310–$370 (Midpoint $340). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Skyrizi/Rinvoq-Wachstum moderiert sich auf 8–10% p.a., Rest-Humira-Erosion setzt sich planmäßig fort, Pipeline liefert inkrementelle, aber keine transformativen Beiträge. Annahme (kein Konsens): FY27-EPS ~$17,50 × 15x Forward = $262,50. Kursziel: $240–$285 (Midpoint $262,50). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Frühzeitiger Wettbewerbsdruck auf Skyrizi/Rinvoq (neue Konkurrenzpräparate oder schnellere Preiserosion), Pipeline-Rückschläge in Onkologie/Neurowissenschaft, verschärfte US-Arzneimittelpreispolitik (Medicare-Preisverhandlungen im Rahmen des Inflation Reduction Act). Kundenkonzentration: PBM-/Versicherer-Konzentration im US-Markt als strukturelles Preisdruckrisiko, auf Datenbasis nicht quantifizierbar. Geopolitik/Regulierung: IRA-Medicare-Preisverhandlungen sind das materiellste regulatorische Risiko für großkapitalisierte US-Pharmakonzerne — direkter Ergebnisdruck auf Kernprodukte in den kommenden Jahren. Lieferketten-/Foundry-Abhängigkeit: komplexe Biologika-Fertigung mit spezialisierten Produktionsstätten — Ausfallrisiko bei Kapazitätsproblemen, im Datensatz nicht quantifizierbar. Verwässerung: kein signifikantes Verwässerungsrisiko erkennbar, AbbVie finanziert primär über Cashflow und Fremdkapital. Annahme (kein Konsens): FY27-EPS stagniert bei ~$14,00 × 12x = $168. Kursziel: $150–$185 (Midpoint $167,50). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $340 + 0,50 × $262,50 + 0,30 × $167,50 = $68,00 + $131,25 + $50,25 = **$249,50 — implizites Downside vs. aktuellem Kurs ($253,35): −1,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Bei einem Kurs exakt am 52-Wochen-Hoch ist ein High-Conviction-Framing für Neueinsteiger nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Operating Margin 32,2% ist stark und die belastbarere Kernprofitabilitäts-Kennzahl gegenüber der durch Einmaleffekte verzerrten Net Margin (5,79%). ROIC 10,3% ist solide für einen Pharmakonzern dieser Größe. ROE ist im Datensatz als "N/A" markiert — konsistent mit dem negativen Eigenkapital, wo die Kennzahl methodisch nicht sinnvoll interpretierbar ist. FCF $20,81 Mrd. (33% FCF-Marge) ist außergewöhnlich stark und die aussagekräftigste Qualitätskennzahl — sie zeigt, dass die Einmalbelastungen in der GAAP-Nettomarge die operative Cash-Generierung nicht widerspiegeln. Der Burggraben liegt im Patentschutz der Immunologie-Franchise sowie in Vertriebs-/Verordnungsbeziehungen zu Ärzten — strukturell stark, aber zeitlich begrenzt bis zum nächsten Patentablauf-Zyklus.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 15,55x ist für ein Pharma-Unternehmen mit 12,4% Umsatzwachstum moderat bis günstig bewertet — die auf den ersten Blick alarmierende Trailing-PE 123,6x ist ein Artefakt von Einmalbelastungen und sollte NICHT zur Bewertung herangezogen werden. P/B ist wegen negativen Eigenkapitals nicht aussagekräftig; stattdessen ist der FCF-Multiple (Market Cap $447,62 Mrd. / FCF $20,81 Mrd. = ~21,5x) die relevantere Bewertungsbasis und liegt im moderaten Bereich für ein Pharma-Unternehmen mit dieser Wachstums- und Cash-Qualität. Rückrechnung: Der aktuelle Kurs $253,35 impliziert bei Forward-PE 15,55x ein FY-EPS von ~$16,29 — plausibel angesichts des laufenden Immunologie-Wachstums, aber mit wenig Puffer für Enttäuschungen bei einem Kurs am Allzeithoch. Analyst-Konsensziel $254,38 liegt praktisch auf dem aktuellen Kurs — die Coverage sieht kaum zusätzliches Kurspotenzial auf Sicht der nächsten 12 Monate.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 71,69, Rang 71 von 500 im S&P 500 — solides oberes Segment. Kurs $253,35 exakt auf 52-Wochen-Hoch ($253,35) — keine Distanz zum Jahreshoch, volles Vertrauen des Marktes eingepreist. Kursfenster zeigen starkes, aber leicht abflachendes Momentum: 10T +20,82%, 20T +17,39%, 50T +25,37%, aber 5T nur +1,29% — ein Zeichen für eine Verlangsamung nach starkem Lauf. Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die niedrige Beta (0,31) und Dividendenrendite (2,73%) deuten auf breite Long-Only-/Institutional-Ownership hin, die von der defensiven Healthcare-Rotation profitiert haben könnte. Enttäuschungsrisiko: Bei einem Kurs am Allzeithoch würde jede negative Pipeline-Nachricht oder IRA-Preisverhandlungs-Schlagzeile überproportional stark auf den Kurs wirken.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $253,35 exakt auf 52-Wochen-Hoch, 52W-Tief $181,75 — Aktie hat sich seit dem Jahrestief um +39,4% erholt. GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — kein technisch bestätigter Strukturbruch, das Momentum basiert auf den RS-Fenstern. Die Abschwächung im 5-Tage-Fenster (+1,29% gegenüber +20,82% über 10 Tage) deutet auf eine erste Verlangsamungsphase nach dem starken Lauf hin — nicht zwingend eine Trendwende, aber ein Beobachtungspunkt. Technisches Warnsignal: Ein Wochenschluss unter $235 (Bereich der letzten Konsolidierung) wäre das erste Anzeichen einer ernsthafteren Korrektur.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($340–$420):** Immunologie-Franchise verteidigt Marktanteile erfolgreich gegen neue Konkurrenz, Onkologie- und Neurowissenschafts-Pipeline liefern transformative neue Wachstumssäulen.</p>
+<p>**Base ($260–$320):** Solides, aber verlangsamtes Wachstum nach vollständigem Humira-Übergang, Pipeline liefert inkrementelle Beiträge, Dividende bleibt zentraler Rendite-Baustein.</p>
+<p>**Bear ($160–$210):** Vorzeitiger Wettbewerbsdruck auf Kernprodukte, regulatorischer Preisdruck durch IRA-Medicare-Verhandlungen belastet Marge strukturell.</p>
+<p>Entscheidende Variable: Wettbewerbsfähigkeit und Patentlaufzeit von Skyrizi/Rinvoq sowie regulatorischer Preisdruck durch IRA-Verhandlungen. Szenario-Konsistenz: kurzfristiger Bear ($150–$185) liegt innerhalb des langfristigen Bear-Bereichs ($160–$210) — im Wesentlichen konsistent; kurzfristiger Bull ($310–$370) unterhalb des langfristigen Bull ($340–$420) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>AbbVie ist ein Buy-and-Hold-Compounder mit starker Cash-Generierung und erfolgreich gemeisterter Patentklippen-Transition — kein zyklischer Trade und kein reines Momentum-Play. Der Erwartungswert von $249,50 liegt marginal unter dem aktuellen Kurs (−1,5%) — bei einem Kurs exakt am 52-Wochen-Hoch besteht kein asymmetrischer Edge für Neueinsteiger. Geeignet für: langfristig orientierte Qualitäts- und Dividendeninvestoren, die die Immunologie-Transition als bewährte Story akzeptieren und Pipeline-Optionalität als Zusatzfaktor sehen. Nicht geeignet für: kurzfristige Momentum-Trader — das Chance-Risiko-Verhältnis am Allzeithoch ist ungünstig für neue Positionen. Positionsgröße: reguläre Kernposition (bis 5–6%) für Qualitäts-/Dividendenportfolios vertretbar, idealerweise Nachkäufe auf Rücksetzern statt am Hoch.</p>
+<p>Peers: **Eli Lilly (LLY)** als wachstumsstärkerer, aber deutlich teurer bewerteter Pharma-Peer mit Fokus auf Diabetes/Adipositas. **Johnson & Johnson (JNJ)** als diversifizierterer, defensiverer Vergleichstitel mit geringerem Einzelprodukt-Risiko. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

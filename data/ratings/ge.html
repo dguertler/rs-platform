@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>GE</h1>
+      <h2>GE Aerospace</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Aerospace & Defense</span></div>
+        <div class="mi">MCap: <span>$386B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">68.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$369.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">42.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$48.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">31.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">51.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">45.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-2.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">470–560</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">340–410</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">175–215</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $470–$560 (20 %) · Base $340–$410 (50 %) · Bear $175–$215 (30 %) · EV ~$349</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>GE Aerospace ist nach der Aufspaltung in GE Vernova (Energie) und GE HealthCare ein reiner Triebwerksbauer mit einem der besten Geschäftsmodelle im gesamten Industrials-Sektor: Das "Razor-and-Blades"-Prinzip — Triebwerke (CFM LEAP, GE9X, GEnx) werden mit geringer Marge verkauft, während das margenstarke Ersatzteil- und Wartungsgeschäft über die 20–30-jährige Nutzungsdauer der Flotte den eigentlichen Gewinn liefert. Der strukturelle Kern: ROE 45,4% und ROIC 34,8% sind außergewöhnlich stark — teilweise durch die verkleinerte Eigenkapitalbasis nach den Spin-offs verstärkt, aber auch Ausdruck echter Kapitaleffizienz im Aftermarket-Geschäft. Revenue-Wachstum +24,7% YoY reflektiert die anhaltende Erholung der globalen Luftfahrtnachfrage und den Nachholbedarf bei Triebwerksauslieferungen nach Lieferkettenengpässen der letzten Jahre. Was der Markt aktuell einpreist: Kurs $369 nahe 52W-Hoch $379,67 bei Forward-PE 42,5x — eine Premium-Bewertung, die bereits eine anhaltend hohe Ausführungsgüte voraussetzt. Auffällig: Das Analysten-Kursziel $350,95 liegt unter dem aktuellen Kurs — die Rally ist der Coverage vorausgelaufen, trotz "Strong Buy"-Einstufung.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Kommerzielle Triebwerke (CFM LEAP über CFM-International-Joint-Venture mit Safran, GE9X für Boeing 777X, GEnx) — dominante Position bei Narrowbody- und Widebody-Antrieben</li>
+<li>Aftermarket-Services (Ersatzteile, Wartung, Überholung) als margenstärkstes Segment — strukturell wiederkehrend über die gesamte Flottenlebensdauer, unabhängig von neuen Auslieferungen</li>
+<li>Militärische Triebwerke als Diversifikationssegment mit langfristigen Regierungsverträgen</li>
+<li>Operating Margin 20,2%, Net Margin 17,9% — stark für einen Hersteller mit signifikantem Neugeschäfts-Anteil, getragen vom Aftermarket-Mix</li>
+<li>Rekord-Auftragsbestand bei Narrowbody-Flugzeugen (Boeing/Airbus) sichert mehrjährige Sichtbarkeit der Triebwerksauslieferungen</li>
+<li>CFM-Joint-Venture mit Safran als strukturelle Abhängigkeit — Gewinnbeteiligung und operative Kontrolle geteilt, kein vollständig eigenständiges Geschäft</li>
+<li>Debt/Equity 116,5% — erhöht, aber angesichts starker FCF-Generierung ($5,67 Mrd.) gut bedienbar</li>
+<li>P/B 21,3x ist strukturell durch die stark verkleinerte Eigenkapitalbasis nach den Spin-offs verzerrt und für die Bewertung praktisch nicht aussagekräftig</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Lieferkettenengpässe bei Titan- und Spezialleichtlegierungskomponenten lösen sich schneller als erwartet, LEAP-Auslieferungsrate beschleunigt sich, Aftermarket-Preissetzungsmacht steigt weiter durch strukturell knappes Ersatzteilangebot. Annahme (kein Konsens): FY27-EPS ~$11,50 × 45x Forward = $517,50. Kursziel: $470–$560 (Midpoint $515). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Aftermarket-Wachstum setzt sich fort, Auslieferungsrampe bleibt durch anhaltende, aber sich graduell entspannende Lieferkettenengpässe gebremst. Annahme (kein Konsens): FY27-EPS ~$9,50 × 40x Forward = $380. Kursziel: $340–$410 (Midpoint $375). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Luftfahrtnachfrage schwächt sich rezessionsbedingt ab, Lieferkettenengpässe verschärfen sich erneut (Titan-/Legierungsversorgung), Verteidigungsbudgets werden gekürzt. Kundenkonzentration: strukturelle Abhängigkeit von den beiden Großkunden Boeing und Airbus als Flugzeughersteller — ein Nachfrageeinbruch bei einem der beiden trifft überproportional, auf Datenbasis nicht exakt quantifizierbar. Geopolitik/China-Exposure: China-Narrowbody-Markt (COMAC-Konkurrenz) und Exportkontrollen bei Militärtriebwerken als reales, aber im Datensatz nicht quantifizierbares Risiko. Lieferketten-/Foundry-Abhängigkeit: CFM-Joint-Venture mit Safran als struktureller Single-Source-Faktor bei Kernkomponenten; Titan- und Speziallegierungs-Lieferketten waren 2023–2025 wiederholt Engpassquelle. Verwässerung: kein signifikantes Risiko, Aktienzahl nach Spin-offs eher rückläufig. Regulierung: FAA-/EASA-Zertifizierungsrisiken bei neuen Triebwerksprogrammen sowie Emissionsregulierung in der Luftfahrt als langfristiger Kostenfaktor. Annahme (kein Konsens): FY27-EPS fällt auf ~$6,50 × 30x = $195. Kursziel: $175–$215 (Midpoint $195). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $515 + 0,50 × $375 + 0,30 × $195 = $103,00 + $187,50 + $58,50 = **$349 — implizites Downside vs. aktuellem Kurs ($369): −5,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — konsistent mit dem Analysten-Konsensziel, das bereits unter dem aktuellen Kurs liegt. Ein High-Conviction-Framing ist auf diesem Bewertungsniveau nicht vertretbar.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 45,4% und ROIC 34,8% sind außergewöhnlich stark — im Zykluskontext zu bewerten: Ein Teil dieser Werte resultiert aus der verkleinerten Eigenkapitalbasis nach den Spin-offs von GE Vernova und GE HealthCare, ein weiterer echter Teil aus der hohen strukturellen Profitabilität des Aftermarket-Geschäfts. Operating Margin 20,2% und Gross Margin 31,2% sind solide für einen Hersteller mit signifikantem margenschwächerem Neugeschäftsanteil. FCF $5,67 Mrd. bei $48,31 Mrd. Revenue (11,7% FCF-Marge) ist angemessen, wenn auch nicht außergewöhnlich hoch angesichts der Bewertung. Der Burggraben ist real und strukturell tief: die installierte Triebwerksbasis erzeugt jahrzehntelange, wiederkehrende Aftermarket-Erlöse — eines der stärksten Geschäftsmodelle im Industrials-Sektor.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 42,5x ist hoch für Industrials, aber nicht ungewöhnlich für einen strukturellen Aftermarket-Compounder mit Rekord-Auftragsbestand. P/B 21,3x ist wegen der Spin-off-bedingt verkleinerten Eigenkapitalbasis NICHT aussagekräftig und sollte nicht zur Bewertung herangezogen werden — stattdessen ist der FCF-Multiple relevanter: Market Cap $385,54 Mrd. / FCF $5,67 Mrd. = ~68x, ein sehr hoher Wert, der eine anhaltend starke FCF-Wachstumsrate voraussetzt. Rückrechnung: Der aktuelle Kurs $369 impliziert bei Forward-PE 42,5x ein FY-EPS von ~$8,69 — das setzt eine kontinuierliche Aftermarket-Margenexpansion und eine ungestörte Auslieferungsrampe voraus. Das ist ambitioniert, aber angesichts des Rekord-Auftragsbestands nicht unrealistisch. Analyst-Konsensziel $350,95 liegt unter dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber hier ein Warnsignal, dass selbst die "Strong Buy"-Coverage der Rally nicht ganz gefolgt ist.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 68,11, Rang 35 von 500 im S&P 500 — solides oberes Segment. Kursfenster zeigen ein Verlangsamungsmuster: 50T +31,8% (starkes mittelfristiges Momentum), aber 5T nur +0,55% und 10T +5,79% — die Dynamik hat sich zuletzt deutlich abgeschwächt. Kurs $369 nahe 52W-Hoch $379,67. Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: "Strong Buy"-Konsens bei 21 Analysten deutet auf breite institutionelle Unterstützung hin, aber das unter dem Kurs liegende Konsensziel könnte beginnende Zurückhaltung bei weiterer Multiple-Expansion signalisieren. Enttäuschungsrisiko: Jede Nachricht zu neuen Lieferkettenproblemen bei Titan-/Legierungskomponenten würde bei dieser Bewertung überproportional negativ wirken.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $369 nahe 52-Wochen-Hoch $379,67 (52W-Tief $243,34) — Aktie hat sich seit dem Jahrestief um über 50% erholt. GWS-Ampel aktuell ohne aktives Signal auf allen Zeitebenen (Weekly/Daily/4H inaktiv) — kein technisch bestätigter Strukturbruch. Die Verlangsamung von 50T (+31,8%) auf 5T (+0,55%) zeigt ein klares Abflachen der Dynamik nach starkem Lauf — konsolidierungstypisch, nicht zwingend eine Trendwende. Technisches Warnsignal: Wochenschluss unter $335 (Bereich der letzten Konsolidierung) wäre ein erstes Zeichen für nachlassende Dynamik; Verlust von $300 signalisiert eine ernsthaftere Korrektur.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($550–$700):** Lieferkettenengpässe lösen sich vollständig, Auslieferungsrampe erreicht historische Höchstraten, Aftermarket-Preissetzungsmacht bleibt strukturell hoch bei wachsender installierter Flottenbasis.</p>
+<p>**Base ($380–$500):** Solides, aber durch anhaltende Lieferkettenbeschränkungen gebremstes Wachstum, Aftermarket bleibt primärer Ergebnistreiber.</p>
+<p>**Bear ($200–$280):** Globale Luftfahrtnachfrage schwächt sich strukturell ab, Lieferkettenprobleme verschärfen sich erneut, Verteidigungsbudgets werden gekürzt.</p>
+<p>Entscheidende Variable: Tempo der Auflösung der Lieferkettenengpässe bei Titan-/Legierungskomponenten und Nachhaltigkeit der globalen Luftfahrtnachfrage. Szenario-Konsistenz: kurzfristiger Bear ($175–$215) liegt innerhalb des langfristigen Bear-Bereichs ($200–$280) — am unteren Rand, im Wesentlichen konsistent; kurzfristiger Bull ($470–$560) unterhalb des langfristigen Bull ($550–$700) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>GE Aerospace ist ein Buy-and-Hold-Compounder mit einem der stärksten strukturellen Geschäftsmodelle im Industrials-Sektor (Aftermarket-Razor-and-Blades-Ökonomie), aber der Erwartungswert von $349 liegt −5,4% unter dem aktuellen Kurs — bei Forward-PE 42,5x und Kurs nahe Allzeithoch besteht kein asymmetrischer Edge für Neueinsteiger. Geeignet für: langfristig orientierte Qualitätsinvestoren, die die strukturelle Aftermarket-Story über mehrere Jahre verfolgen und die aktuelle Premium-Bewertung als Preis für Qualität akzeptieren. Nicht geeignet für: Value-Investoren, die auf klassische Bewertungssicherheitsmargen angewiesen sind — diese bestehen aktuell nicht. Positionsgröße: reguläre Position (bis 5%), Nachkäufe idealerweise nach Rücksetzern statt am 52W-Hoch, da selbst der Analystenkonsens der Rally nicht mehr folgt.</p>
+<p>Peers: **RTX (Raytheon Technologies)** als diversifizierterer Aerospace/Defense-Vergleich mit Pratt & Whitney-Triebwerken, historisch günstiger bewertet. **Safran** als CFM-Joint-Venture-Partner mit direkter Beteiligung am gleichen Triebwerksgeschäft. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
