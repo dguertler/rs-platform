@@ -97,8 +97,8 @@ def run_backtest(raw, fundamentals, market, cost_pct=0.001, initial_capital=100_
     if not tickers_data or not bench_ohlcv or not bench_ohlcv_w:
         return None
 
-    week_dates = [row["d"] for row in bench_ohlcv_w]
-    weekly_cache = weekly_signal_cache(tickers_data, bench_ohlcv, week_dates)
+    weekly_cache = weekly_signal_cache(tickers_data, bench_ohlcv, bench_ohlcv_w)
+    week_dates = sorted(weekly_cache.keys())   # effektive Wochenenden (Freitage)
 
     trading_days = [row["d"] for row in bench_ohlcv]
     bench_close_by_date = {row["d"]: row["c"] for row in bench_ohlcv}
@@ -151,7 +151,8 @@ def run_backtest(raw, fundamentals, market, cost_pct=0.001, initial_capital=100_
             if not pos.partial_taken and bar["h"] >= pos.entry_price + PARTIAL_AT_R * pos.risk_per_share:
                 target = pos.entry_price + PARTIAL_AT_R * pos.risk_per_share
                 sell_shares = max(1, int(pos.shares * PARTIAL_FRACTION))
-                fill = target * (1 - cost_pct)
+                # Gap über das Ziel → Fill zum besseren Open, sonst zum Zielkurs
+                fill = max(target, bar["o"]) * (1 - cost_pct)
                 pnl = (fill - pos.entry_price) * sell_shares
                 cash += sell_shares * fill
                 trades.append({

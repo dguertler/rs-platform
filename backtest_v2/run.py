@@ -54,7 +54,7 @@ def regime_breakdown(result):
     return out
 
 
-def run_for_cost(market, cost_pct, raw, fundamentals):
+def run_for_cost(market, cost_pct, raw, fundamentals, include_charts=False):
     result = run_backtest(raw, fundamentals, market, cost_pct=cost_pct)
     if result is None:
         return None
@@ -64,7 +64,7 @@ def run_for_cost(market, cost_pct, raw, fundamentals):
     alpha = benchmark_alpha(result["equity_curve"], result["benchmark_closes"])
     sma_rule = sma_rule_return(result["benchmark_closes"], result["benchmark_dates"])
     regimes = regime_breakdown(result)
-    return {
+    out = {
         "cost_pct": cost_pct,
         "n_universe": result["n_universe"],
         "n_trading_days": len(result["equity_curve"]),
@@ -77,6 +77,27 @@ def run_for_cost(market, cost_pct, raw, fundamentals):
         "by_regime": regimes,
         "exit_reasons": _exit_reason_counts(result["trades"]),
     }
+    if include_charts:
+        # Chart-Daten nur für den Haupt-Lauf, um die Report-Größe klein zu halten
+        out["equity_curve"] = [[d, round(v, 2)] for d, v in result["equity_curve"]]
+        cap = result["initial_capital"]
+        b0 = result["benchmark_closes"][0]
+        out["benchmark_curve"] = [
+            [d, round(c / b0 * cap, 2)]
+            for d, c in zip(result["benchmark_dates"], result["benchmark_closes"])
+        ]
+        out["regime_by_day"] = [[d, label] for d, label, _n in result["regime_by_day"]]
+        out["trade_list"] = [
+            {
+                "ticker": t["ticker"], "entry_date": t["entry_date"],
+                "exit_date": t["exit_date"], "entry_price": round(t["entry_price"], 2),
+                "exit_price": round(t["exit_price"], 2), "shares": t["shares"],
+                "pnl": round(t["pnl"], 0), "pnl_pct": round(t["pnl_pct"], 1),
+                "reason": t["reason"], "is_open": t.get("is_open", False),
+            }
+            for t in sorted(result["trades"], key=lambda x: x["entry_date"])
+        ]
+    return out
 
 
 def _exit_reason_counts(trades):
@@ -102,7 +123,9 @@ def main():
     runs = {}
     for cost_pct in (0.001, 0.002):
         print(f"  Lauf mit {cost_pct*100:.1f}% Kosten je Seite …")
-        runs[f"cost_{cost_pct}"] = run_for_cost(market, cost_pct, raw, fundamentals)
+        runs[f"cost_{cost_pct}"] = run_for_cost(
+            market, cost_pct, raw, fundamentals,
+            include_charts=(cost_pct == 0.001))
 
     out = {
         "market": market,

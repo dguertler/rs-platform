@@ -58,6 +58,18 @@
   .bt-placeholder h2 { font-size:15px; color:#94a3b8; margin:0 0 10px; }
   .bt-placeholder code { background:#1e293b; padding:0 5px; border-radius:4px; }
   .bt-placeholder ul { margin:8px 0; padding-left:20px; }
+  #tbody tr { cursor:pointer; }
+  .modal-backdrop { position:fixed; inset:0; background:#000000bb; z-index:10000; display:flex; align-items:flex-start; justify-content:center; overflow-y:auto; padding:24px 12px; }
+  .modal { background:#0f172a; border:1px solid #334155; border-radius:12px; max-width:960px; width:100%; padding:16px 20px 24px; box-shadow:0 12px 48px #000000cc; }
+  .modal-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+  .modal-head h2 { font-size:16px; color:#e2e8f0; margin:0; }
+  .modal-close { background:#1e293b; border:1px solid #334155; color:#94a3b8; font-size:14px; padding:3px 12px; border-radius:6px; cursor:pointer; font-family:monospace; }
+  .modal-close:hover { border-color:#f87171; color:#f87171; }
+  .modal .chart-block { margin-top:14px; }
+  .modal .chart-block h3 { font-size:12px; color:#93c5fd; margin:0 0 4px; text-transform:uppercase; letter-spacing:.05em; }
+  .modal .chart-block svg { display:block; width:100%; height:auto; background:#111c31; border:1px solid #27354d; border-radius:8px; }
+  .bt-chart svg { display:block; width:100%; height:auto; background:#111c31; border:1px solid #27354d; border-radius:8px; }
+  .trade-table-wrap { max-height:420px; overflow-y:auto; border:1px solid #27354d; border-radius:8px; margin-top:8px; }
 </style>
 </head>
 <body>
@@ -180,6 +192,7 @@
     </details>
 
     <h1 style="font-size:15px;color:#e2e8f0">Funnel-Tabelle</h1>
+    <div class="sub" style="margin-bottom:6px">💡 Klick auf eine Zeile öffnet die drei Charts (Weekly / Daily / 4H) mit eingezeichnetem Stop.</div>
     <div class="filters" id="filters"></div>
     <div style="overflow-x:auto">
       <table>
@@ -263,6 +276,121 @@
   const fmt = (v, d = 1) => v == null ? '–' : v.toFixed(d);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+  // ── SVG-Chart-Renderer (ohne externe Libraries) ─────────────────────────
+
+  function candleChart(ohlcv, opts = {}) {
+    const { width = 900, height = 280, hlines = [], maxBars = 999 } = opts;
+    const data = (ohlcv || []).slice(-maxBars);
+    if (data.length < 2) return '<div class="dim" style="padding:20px">Keine Daten</div>';
+    const padL = 6, padR = 58, padT = 10, padB = 22;
+    let lo = Math.min(...data.map(b => b.l)), hi = Math.max(...data.map(b => b.h));
+    for (const hl of hlines) { if (hl.y != null) { lo = Math.min(lo, hl.y); hi = Math.max(hi, hl.y); } }
+    const span = (hi - lo) || 1; lo -= span * 0.04; hi += span * 0.04;
+    const y = v => padT + (hi - v) / (hi - lo) * (height - padT - padB);
+    const innerW = width - padL - padR, step = innerW / data.length, bw = Math.max(1.5, step * 0.62);
+    let s = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+    for (let t = 0; t <= 3; t++) {
+      const v = lo + (hi - lo) * t / 3, yy = y(v);
+      s += `<line x1="${padL}" y1="${yy}" x2="${width - padR}" y2="${yy}" stroke="#1e293b" stroke-width="1"/>`;
+      s += `<text x="${width - padR + 5}" y="${yy + 4}" fill="#64748b" font-size="10" font-family="monospace">${v >= 1000 ? v.toFixed(0) : v.toFixed(2)}</text>`;
+    }
+    data.forEach((b, i) => {
+      const x = padL + i * step + step / 2, up = b.c >= b.o, col = up ? '#4ade80' : '#f87171';
+      s += `<line x1="${x}" y1="${y(b.h)}" x2="${x}" y2="${y(b.l)}" stroke="${col}" stroke-width="1"/>`;
+      const top = y(Math.max(b.o, b.c)), bh = Math.max(1, Math.abs(y(b.o) - y(b.c)));
+      s += `<rect x="${x - bw / 2}" y="${top}" width="${bw}" height="${bh}" fill="${col}"/>`;
+    });
+    const nLab = Math.min(5, data.length);
+    for (let k = 0; k < nLab; k++) {
+      const i = Math.round(k * (data.length - 1) / (nLab - 1));
+      const x = padL + i * step + step / 2;
+      s += `<text x="${x}" y="${height - 6}" fill="#64748b" font-size="10" font-family="monospace" text-anchor="middle">${esc(String(data[i].d).slice(0, 10))}</text>`;
+    }
+    for (const hl of hlines) {
+      if (hl.y == null || hl.y < lo || hl.y > hi) continue;
+      const yy = y(hl.y);
+      s += `<line x1="${padL}" y1="${yy}" x2="${width - padR}" y2="${yy}" stroke="${hl.color || '#facc15'}" stroke-width="1" stroke-dasharray="5,4"/>`;
+      s += `<text x="${padL + 4}" y="${yy - 4}" fill="${hl.color || '#facc15'}" font-size="10" font-family="monospace">${esc(hl.label || '')} ${hl.y.toFixed(2)}</text>`;
+    }
+    return s + '</svg>';
+  }
+
+  function lineChart(series, opts = {}) {
+    const { width = 900, height = 300, bands = [] } = opts;
+    const all = series.flatMap(sr => sr.points.map(p => p[1]));
+    if (all.length < 2) return '<div class="dim" style="padding:20px">Keine Daten</div>';
+    const padL = 6, padR = 62, padT = 26, padB = 22;
+    let lo = Math.min(...all), hi = Math.max(...all);
+    const span = (hi - lo) || 1; lo -= span * 0.04; hi += span * 0.04;
+    const n = Math.max(...series.map(sr => sr.points.length));
+    const y = v => padT + (hi - v) / (hi - lo) * (height - padT - padB);
+    const x = i => padL + i / (n - 1) * (width - padL - padR);
+    let s = `<svg viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+    const BAND_COL = { green: '#22c55e', yellow: '#eab308', red: '#ef4444', unknown: '#64748b' };
+    for (const b of bands) {
+      s += `<rect x="${x(b.from)}" y="${padT}" width="${Math.max(0.5, x(b.to) - x(b.from))}" height="${height - padT - padB}" fill="${BAND_COL[b.label] || '#64748b'}" opacity="0.07"/>`;
+    }
+    for (let t = 0; t <= 3; t++) {
+      const v = lo + (hi - lo) * t / 3, yy = y(v);
+      s += `<line x1="${padL}" y1="${yy}" x2="${width - padR}" y2="${yy}" stroke="#1e293b"/>`;
+      s += `<text x="${width - padR + 5}" y="${yy + 4}" fill="#64748b" font-size="10" font-family="monospace">${(v / 1000).toFixed(1)}k</text>`;
+    }
+    series.forEach((sr, si) => {
+      const pts = sr.points.map((p, i) => `${x(i)},${y(p[1])}`).join(' ');
+      s += `<polyline points="${pts}" fill="none" stroke="${sr.color}" stroke-width="1.6"/>`;
+      s += `<text x="${padL + 6 + si * 220}" y="16" fill="${sr.color}" font-size="11" font-family="monospace" font-weight="bold">— ${esc(sr.name)}</text>`;
+    });
+    const ref = series[0].points;
+    const nLab = Math.min(5, ref.length);
+    for (let k = 0; k < nLab; k++) {
+      const i = Math.round(k * (ref.length - 1) / (nLab - 1));
+      s += `<text x="${x(i)}" y="${height - 6}" fill="#64748b" font-size="10" font-family="monospace" text-anchor="middle">${esc(ref[i][0])}</text>`;
+    }
+    return s + '</svg>';
+  }
+
+  // ── Ticker-Chart-Modal (Weekly / Daily / 4H) ─────────────────────────────
+
+  function closeModal() {
+    const m = document.getElementById('tickerModal');
+    if (m) m.remove();
+    document.removeEventListener('keydown', escClose);
+  }
+  function escClose(e) { if (e.key === 'Escape') closeModal(); }
+
+  async function openTickerModal(mkt, ticker, extra = {}) {
+    closeModal();
+    const wrap = document.createElement('div');
+    wrap.id = 'tickerModal';
+    wrap.className = 'modal-backdrop';
+    wrap.innerHTML = `<div class="modal">
+      <div class="modal-head"><h2>${esc(ticker)} — Weekly / Daily / 4H</h2>
+      <button class="modal-close">✕ schließen</button></div>
+      <div class="dim" id="modalBody">Lade Charts …</div></div>`;
+    document.body.appendChild(wrap);
+    wrap.onclick = e => { if (e.target === wrap) closeModal(); };
+    wrap.querySelector('.modal-close').onclick = closeModal;
+    document.addEventListener('keydown', escClose);
+    try {
+      const r = await window.apiFetch(`/api/rs/${mkt}/${encodeURIComponent(ticker)}`);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      const d = await r.json();
+      const dailyLines = [];
+      if (extra.stop != null) dailyLines.push({ y: extra.stop, label: 'Stop', color: '#facc15' });
+      if (extra.entry != null) dailyLines.push({ y: extra.entry, label: 'Entry', color: '#4ade80' });
+      if (extra.exit != null) dailyLines.push({ y: extra.exit, label: 'Exit', color: '#f87171' });
+      const body = wrap.querySelector('#modalBody');
+      body.classList.remove('dim');
+      body.innerHTML = `
+        <div class="chart-block"><h3>Weekly (${(d.ohlcv_w || []).length} Kerzen)</h3>${candleChart(d.ohlcv_w, { maxBars: 104, height: 240 })}</div>
+        <div class="chart-block"><h3>Daily (letzte 180 Kerzen)</h3>${candleChart(d.ohlcv, { maxBars: 180, height: 280, hlines: dailyLines })}</div>
+        <div class="chart-block"><h3>4H (letzte 180 Kerzen)</h3>${candleChart(d.ohlcv_4h, { maxBars: 180, height: 240 })}</div>`;
+    } catch (e) {
+      const body = wrap.querySelector('#modalBody');
+      if (body) body.textContent = 'Fehler beim Laden der Charts: ' + e.message;
+    }
+  }
+
   function renderRegimeLegend(activeLabel) {
     $('regimeLegend').innerHTML = REGIME_DEFS.map(r => `
       <div class="regime-row ${r.key === activeLabel ? 'active' : ''}">
@@ -312,6 +440,42 @@
     return (v > 0 ? '+' : '') + v;
   }
 
+  let btSort = 'date';
+
+  function regimeBands(regimeByDay) {
+    if (!regimeByDay || !regimeByDay.length) return [];
+    const bands = [];
+    let start = 0, cur = regimeByDay[0][1];
+    for (let i = 1; i <= regimeByDay.length; i++) {
+      const label = i < regimeByDay.length ? regimeByDay[i][1] : null;
+      if (label !== cur) {
+        if (cur) bands.push({ from: start, to: i - 1, label: cur });
+        start = i; cur = label;
+      }
+    }
+    return bands;
+  }
+
+  function tradeRowsHtml(trades) {
+    const sorted = [...trades];
+    if (btSort === 'pnl') sorted.sort((a, b) => a.pnl - b.pnl);
+    else if (btSort === 'pnl_desc') sorted.sort((a, b) => b.pnl - a.pnl);
+    return sorted.map(t => {
+      const cls = t.pnl > 0 ? 'pos' : 'neg';
+      return `<tr data-trade-ticker="${esc(t.ticker)}" data-entry="${t.entry_price}" data-exit="${t.exit_price}" title="Klick: Charts mit Entry/Exit-Linien" style="cursor:pointer">
+        <td><b>${esc(t.ticker)}</b></td>
+        <td class="dim">${esc(t.entry_date)}</td>
+        <td style="text-align:right">${t.entry_price}</td>
+        <td class="dim">${esc(t.exit_date)}</td>
+        <td style="text-align:right">${t.exit_price}</td>
+        <td style="text-align:right" class="dim">${t.shares}</td>
+        <td style="text-align:right" class="${cls}">${t.pnl > 0 ? '+' : ''}${t.pnl}</td>
+        <td style="text-align:right" class="${cls}">${t.pnl_pct > 0 ? '+' : ''}${t.pnl_pct}%</td>
+        <td class="dim">${esc(t.reason)}${t.is_open ? ' (offen)' : ''}</td>
+      </tr>`;
+    }).join('');
+  }
+
   function renderBacktestRun(market, data) {
     const r = data.runs['cost_0.001'];
     if (!r) return backtestPlaceholderHtml(market, 'Report vorhanden, aber ohne 0,1%-Kosten-Lauf.');
@@ -320,23 +484,49 @@
       `<tr><td>${REGIME_TXT[k]?.icon || '❓'} ${k}</td><td style="text-align:right">${v.days}</td><td style="text-align:right">${fmtSigned(v.return_pct_while_active)}%</td></tr>`).join('');
     const exitRows = Object.entries(r.exit_reasons || {}).map(([k, v]) =>
       `<span class="dim">${esc(k)}:</span> <b>${v}</b>`).join(' &nbsp;·&nbsp; ');
+
+    let chartHtml = '';
+    if (r.equity_curve && r.benchmark_curve) {
+      chartHtml = `
+        <p style="margin-top:16px"><b>Equity-Kurve</b> — Strategie vs. Buy&amp;Hold Benchmark (Hintergrund: Regime-Phasen 🟢/🟡/🔴/grau=unknown):</p>
+        <div class="bt-chart">${lineChart([
+          { name: 'Strategie', color: '#4ade80', points: r.equity_curve },
+          { name: 'Benchmark Buy&Hold', color: '#64748b', points: r.benchmark_curve },
+        ], { bands: regimeBands(r.regime_by_day), height: 320 })}</div>`;
+    }
+
+    let tradesHtml = '';
+    if (r.trade_list && r.trade_list.length) {
+      tradesHtml = `
+        <p style="margin-top:16px"><b>Alle Trades (${r.trade_list.length})</b> — Klick auf eine Zeile öffnet die Charts mit Entry/Exit-Linien:</p>
+        <div class="filters">
+          <button class="fbtn ${btSort === 'date' ? 'on' : ''}" data-btsort="date">Nach Datum</button>
+          <button class="fbtn ${btSort === 'pnl' ? 'on' : ''}" data-btsort="pnl">Größte Verlierer zuerst</button>
+          <button class="fbtn ${btSort === 'pnl_desc' ? 'on' : ''}" data-btsort="pnl_desc">Größte Gewinner zuerst</button>
+        </div>
+        <div class="trade-table-wrap"><table>
+          <thead><tr><th>Ticker</th><th>Entry</th><th style="text-align:right">Kurs</th><th>Exit</th><th style="text-align:right">Kurs</th><th style="text-align:right">Stück</th><th style="text-align:right">PnL $</th><th style="text-align:right">PnL %</th><th>Grund</th></tr></thead>
+          <tbody id="btTradeBody">${tradeRowsHtml(r.trade_list)}</tbody>
+        </table></div>`;
+    }
+
     return `
-      <div class="bt-placeholder" style="max-width:960px">
+      <div class="bt-placeholder" style="max-width:1100px">
         <h2>Backtest 2.0 — ${esc(market)} · Lauf vom ${esc(data.generated_at)}</h2>
-        <div class="warn" style="margin-top:0">⚠️ Erster Validierungslauf, KEINE abgeschlossene Kalibrierung.
-        ${esc(data.disclaimer.split('\n')[0])} Details siehe <code>backtest_v2/results/README.md</code>
-        im Repo — dort steht auch die ehrliche Einordnung der Ergebnisse.</div>
+        <div class="warn" style="margin-top:0">⚠️ Validierungslauf auf ~2 Jahren Historie (kein Bärenmarkt enthalten), KEINE abgeschlossene Kalibrierung.
+        Details und ehrliche Einordnung: <code>backtest_v2/results/README.md</code> im Repo.</div>
         <div class="cards" style="margin-top:10px">
           <div class="card"><h3>Zeitraum</h3><div class="kv">${esc(r.period.from)} – ${esc(r.period.to)}<br>${r.n_trading_days} Handelstage · ${r.n_universe} Ticker</div></div>
           <div class="card"><h3>Rendite (0,1% / 0,2% Kosten)</h3><div class="kv">Strategie: <b>${fmtSigned(r.equity.total_return_pct)}%</b> / ${fmtSigned(r2?.equity?.total_return_pct)}%<br>CAGR: ${fmtSigned(r.equity.cagr_pct)}% · Sharpe: ${r.equity.sharpe}</div></div>
           <div class="card"><h3>vs. Benchmark</h3><div class="kv">Buy&amp;Hold: ${fmtSigned(r.vs_benchmark?.benchmark_buyhold_return_pct)}%<br>Alpha: <b class="${r.vs_benchmark?.alpha_pct >= 0 ? 'pos' : 'neg'}">${fmtSigned(r.vs_benchmark?.alpha_pct)}pp</b><br>vs. 200d-Regel: ${fmtSigned(r.vs_sma200_rule_pct)}%</div></div>
           <div class="card"><h3>Risiko</h3><div class="kv">Max-DD: <b>${r.equity.max_dd_pct}%</b> (${r.equity.max_dd_days} Tage)<br>Calmar: ${r.equity.calmar} · Exposure: ${r.exposure_pct}%</div></div>
-          <div class="card"><h3>Trades</h3><div class="kv">Anzahl: <b>${r.trades.n_trades}</b> · Winrate: ${r.trades.win_rate_pct}%<br>Profit-Factor: ${r.trades.profit_factor}</div></div>
+          <div class="card"><h3>Trades</h3><div class="kv">Anzahl: <b>${r.trades.n_trades}</b> · Winrate: ${r.trades.win_rate_pct}%<br>Profit-Factor: <b>${r.trades.profit_factor}</b> <span class="dim">(Ziel: 2,0)</span></div></div>
         </div>
-        <p><b>Regime-Aufschlüsselung</b> (Rendite während aktivem Regime, nicht annualisiert):</p>
+        ${chartHtml}
+        <p style="margin-top:14px"><b>Regime-Aufschlüsselung</b> (Rendite während aktivem Regime, nicht annualisiert):</p>
         <table style="max-width:400px"><thead><tr><th>Regime</th><th style="text-align:right">Tage</th><th style="text-align:right">Rendite</th></tr></thead><tbody>${regimeRows}</tbody></table>
         <p style="margin-top:14px"><b>Exit-Gründe:</b> ${exitRows}</p>
-        <p class="dim" style="margin-top:14px">Vollständiger Report inkl. Einordnung: <code>backtest_v2/results/README.md</code> im Repo.</p>
+        ${tradesHtml}
       </div>`;
   }
 
@@ -362,8 +552,31 @@
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       const data = await r.json();
       $('btBody').innerHTML = renderBacktestRun(btMarket, data);
+      wireBacktestEvents(data);
     } catch (e) {
       $('btBody').innerHTML = backtestPlaceholderHtml(btMarket, 'Fehler beim Laden: ' + e.message);
+    }
+  }
+
+  function wireBacktestEvents(data) {
+    const body = $('btBody');
+    body.querySelectorAll('.fbtn[data-btsort]').forEach(b => {
+      b.onclick = () => {
+        btSort = b.dataset.btsort;
+        body.innerHTML = renderBacktestRun(btMarket, data);
+        wireBacktestEvents(data);
+      };
+    });
+    const tbody = document.getElementById('btTradeBody');
+    if (tbody) {
+      tbody.addEventListener('click', e => {
+        const tr = e.target.closest('tr[data-trade-ticker]');
+        if (!tr) return;
+        openTickerModal(btMarket, tr.dataset.tradeTicker, {
+          entry: parseFloat(tr.dataset.entry),
+          exit: parseFloat(tr.dataset.exit),
+        });
+      });
     }
   }
 
@@ -420,7 +633,8 @@
     const shown = statusFilter === 'ALLE' ? rows : rows.filter(x => x.status === statusFilter);
     $('tbody').innerHTML = shown.map((x, i) => {
       const trendCls = x.rs2_trend > 0 ? 'pos' : x.rs2_trend < 0 ? 'neg' : 'dim';
-      const reasons = x.filter_reasons.length ? ` title="${esc(x.filter_reasons.join(' · '))}"` : '';
+      const hover = 'Klick: Weekly/Daily/4H-Charts' + (x.filter_reasons.length ? ' · ' + x.filter_reasons.join(' · ') : '');
+      const reasons = ` title="${esc(hover)}" data-ticker="${esc(x.ticker)}" data-stop="${x.stop != null ? x.stop : ''}"`;
       return `<tr${reasons}>
         <td class="dim">${i + 1}</td>
         <td><b>${esc(x.ticker)}</b></td>
@@ -446,6 +660,14 @@
     $('cmpV2').innerHTML = byV2.map((x, i) =>
       `<tr><td class="dim">${i + 1}</td><td><b>${esc(x.ticker)}</b>${!v1set.has(x.ticker) ? ' <span class="pos" title="neu in den Top 20 (vol-adjustiert)">▲</span>' : ''}</td><td style="text-align:right" class="dim">${fmt(x.rs2_pct)}</td></tr>`).join('');
   }
+
+  // Delegierter Klick-Handler: Zeile → Chart-Modal (Weekly/Daily/4H)
+  $('tbody').addEventListener('click', e => {
+    const tr = e.target.closest('tr[data-ticker]');
+    if (!tr) return;
+    const stop = tr.dataset.stop ? parseFloat(tr.dataset.stop) : null;
+    openTickerModal(market, tr.dataset.ticker, { stop });
+  });
 
   async function load() {
     renderTabs();

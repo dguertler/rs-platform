@@ -1,84 +1,101 @@
-# Backtest 2.0 — Ergebnisse (erster Validierungslauf)
+# Backtest 2.0 — Ergebnisse (Validierungslauf, Engine-Stand v3)
 
-**Stand:** 03.07.2026 · Engine-Version: erster funktionsfähiger Stand nach Bugfix
-(siehe unten). Rohdaten je Markt: `{market}_{datum}.json` in diesem Verzeichnis.
+**Stand:** 03.07.2026 · Rohdaten je Markt: `{market}_{datum}.json` in diesem
+Verzeichnis (enthalten seit v3 auch Equity-Kurve, Benchmark-Verlauf und die
+vollständige Trade-Liste für die Chart-Ansicht im Backtest-Tab von `v2.html`).
 
-## Wichtigste Erkenntnis: In diesem Zeitraum unterliegt die Strategie Buy-and-Hold
+## Ergebnisse (je 0,1 % Kosten pro Seite)
 
-| Markt | Zeitraum | Strategie (0,1% Kosten) | Buy&Hold Benchmark | Alpha | 200d-Regel | Max-DD Strategie | Sharpe |
-|---|---|---|---|---|---|---|---|
-| Nasdaq-100 | 2024-06 – 2026-07 | +22,8% | +55,6% | **−32,8pp** | +41,5% | 14,7% | 0,82 |
-| S&P 500 | 2024-07 – 2026-07 | +2,9% | +35,2% | **−32,3pp** | +16,2% | 15,9% | 0,17 |
-| DAX-40 | 2024-07 – 2026-07 | +9,6% | +39,2% | **−29,6pp** | +25,6% | 4,0% | 0,83 |
-| Smallcap SC600 | 2024-07 – 2026-07 | −4,4% | +37,9% | **−42,3pp** | +8,2% | 18,9% | −0,04 |
+| Markt | Zeitraum | Strategie | Buy&Hold | Alpha | 200d-Regel | Max-DD | Sharpe | Profit-Factor | Trades |
+|---|---|---|---|---|---|---|---|---|---|
+| Nasdaq-100 | 2024-06 – 2026-07 | +31,4% | +55,6% | −24,2pp | +41,5% | 14,6% | 1,07 | **1,66** | 123 |
+| S&P 500 | 2024-07 – 2026-07 | +14,2% | +35,2% | −21,0pp | +16,2% | 17,7% | 0,49 | 1,16 | 218 |
+| DAX-40 | 2024-07 – 2026-07 | −1,6% | +39,2% | −40,8pp | +25,6% | 7,6% | −0,06 | 0,89 | 55 |
+| Smallcap SC600 | 2024-07 – 2026-07 | **+53,9%** | +37,9% | **+16,0pp** | +8,2% | **41,6%** ⚠️ | 0,74 | 1,51 | 229 |
 
-In allen vier Märkten liegt die Strategie deutlich hinter Buy-and-Hold — und in
-drei von vier Fällen auch hinter der trivialen "Nur bei Close > 200d-Linie
-investiert"-Regel. Das ist **kein gutes Ergebnis für die Strategie**, aber ein
-ehrliches: dieser Befund wird hier unverändert berichtet, nicht wegkalibriert.
+## Zwei Engine-Bugs wurden im Zuge der Validierung gefunden und behoben
 
-## Warum das plausibel ist — und warum es (noch) keine Verwerfung der Strategie ist
+Die Bugs wurden durch kritisches Nachfragen des Nutzers ("sicher, dass da
+alles richtig eingestellt ist?") bzw. durch Plausibilitätsprüfung der ersten
+Läufe entdeckt — beide sind ein Beleg dafür, warum Regel B5
+(Plausibilitäts-/Sensitivitätsprüfung) existiert:
 
-1. **Der Testzeitraum enthält keinen echten Bärenmarkt.** Das Regime war laut
-   Aufschlüsselung überwiegend "unknown" (SMA200 noch nicht verfügbar, s.u.)
-   oder "green"/"yellow"; "red" kam nur kurz vor. Das System ist explizit dafür
-   gebaut, in **Korrekturen** Kapital zu schützen (Exposure-Drosselung, Stops,
-   Trailing) — dieser Vorteil kann sich in einem fast durchgehenden
-   Aufwärtsmarkt gar nicht zeigen. Stattdessen kostet er in einer solchen Phase
-   Rendite (Cash-Drag, Teilverkäufe bei +2R kappen Gewinner, die einfach
-   weitergelaufen wären).
-2. **SMA200-Anlaufzeit frisst ~35–40 % des verfügbaren Fensters.** Mit nur
-   ~2 Jahren Historie steht die Regime-Ampel für die ersten ~40 Wochen auf
-   "unknown" (SMA200 braucht 200 Handelstage Vorlauf) — das ist fast die
-   Hälfte des Testzeitraums ohne funktionierende Regime-Steuerung.
-3. **Kleine Stichprobe.** 54–223 Trades je Markt über nur ~2 Jahre — zu wenig,
-   um von einer statistisch belastbaren Aussage zu sprechen (Regel B5 fordert
-   deshalb explizit eine Sensitivitätsanalyse, die hier noch aussteht).
-4. **Exposure 76–93 %**, nie 100 % — ein Teil der Differenz ist reiner
-   Cash-Drag in einem Markt, der fast nur steigt.
+1. **Positionsgrößen-Bug (v1→v2):** Die Entry-Größenberechnung verwendete den
+   **Benchmark**-Schlusskurs statt des Ticker-Schlusskurses für den
+   Portfolio-Wert — einzelne Positionen erreichten bis zu 54 % statt max.
+   15 % des Portfolios. Nach Fix sank der Max-DD im S&P-500-Lauf von 33,9 %
+   auf ~16 %.
+2. **Weekly-Look-Ahead-Bug (v2→v3):** yfinance stempelt Weekly-Kerzen mit dem
+   **Montag**, die Kerze enthält aber die ganze Woche bis Freitag. Die Engine
+   wertete Signale am Montag aus und sah dabei bereits Freitags-Schlusskurse
+   (Verstoß gegen Regel B1); zusätzlich fielen 8 Feiertags-Montage komplett
+   aus der Signal-Auswertung. Fix: Auswertung am letzten Handelstag der Woche
+   (Freitag), Entry am nächsten Handelstag zum Open — exakt wie es die
+   v1-Logik in `backtest_logic.js` (getWeekEnd) schon immer machte.
+   Effekt des Fixes: Nasdaq +22,8 % → +31,4 %, Smallcap −4,4 % → +53,9 %
+   (der Look-Ahead hatte paradoxerweise geschadet: Entries feuerten dienstags
+   auf Basis unvollständiger Wochensignale und produzierten Fehltrades).
 
-**Das ändert nichts an der Kernaussage:** Diese Zahlen sind reale
-Backtest-Ergebnisse, keine Kalibrierungs-Vorlage. Ob das System langfristig
-sein Ziel erfüllt (risikoadjustierte Outperformance + stabiler Track-Record),
-lässt sich erst mit einem Testfenster beurteilen, das einen echten Bärenmarkt
-enthält (z. B. 2022) — genau das, was Regel B4 verlangt und in dieser Umgebung
-mangels Netzwerkzugriff nicht nachladbar war.
+## Einordnung der Ergebnisse
 
-## Ein echter Engine-Bug wurde im Zuge dieses Laufs gefunden und behoben
+**Positiv:**
+- Smallcap schlägt Buy&Hold deutlich (+16pp Alpha) — konsistent mit der
+  Theorie, dass RS-Momentum-Strategien in breiten, ineffizienteren Universen
+  am besten funktionieren.
+- Nasdaq-PF von 1,66 bei Sharpe 1,07 ist eine solide Basis.
+- Die Regime-Aufschlüsselung zeigt das erwartete Muster: bester Ertrag in
+  green/yellow-Phasen; das lange "unknown"-Fenster (SMA200-Anlauf, ~40 % des
+  Zeitraums) verwässert alles.
 
-Der erste Testlauf zeigte für S&P 500 ein Alpha von −64 %. Untersuchung ergab:
-Die Positionsgrößen-Berechnung beim Entry verwendete versehentlich den
-**Benchmark**-Schlusskurs (QQQ) statt des Schlusskurses der jeweiligen Aktie
-zur Berechnung des Portfolio-Werts (`equity_now`) — dadurch griff die
-15 %-Gewichtungsgrenze nicht korrekt, einzelne Positionen erreichten bis zu
-54 % des Portfolios (z. B. TER). Nach dem Fix (`backtest_v2/engine.py`,
-Funktion `bar_close()` konsequent statt der fehlerhaften `date_idx`-Variable
-verwendet) sank der Max-Drawdown im S&P-500-Lauf von 33,9 % auf 15,9 % und
-die Ergebnisse wurden über alle vier Märkte hinweg konsistent plausibel.
-Alle oben gezeigten Zahlen sind bereits die **korrigierten** Werte.
+**Negativ / offene Probleme:**
+- **DAX funktioniert nicht** (PF 0,89): 38 investierbare Titel sind zu wenig
+  für einen RS-Perzentil-Funnel — die Schwelle ≥85 lässt nur ~5 Kandidaten zu,
+  Zufallsrauschen dominiert. Möglicher Schluss: DAX als eigenes Handels-
+  universum streichen und nur als Anzeige-Universum behalten.
+- **Smallcap-Max-DD von 41,6 % ist inakzeptabel** für das erklärte Ziel
+  (Max-DD 15–20 %). Haupttreiber: die 197 "unknown"-Tage liefen ohne
+  Regime-Bremse voll investiert, und Smallcap-Gaps reißen Stops (realisiertes
+  Risiko > geplantes 1 %). Vor Live-Einsatz zwingend zu lösen (z. B.
+  konservatives Verhalten bei "unknown": Budget 50 % statt 100 %).
+- Nasdaq/S&P 500 bleiben hinter Buy&Hold — in einem fast durchgehenden
+  Bullenmarkt erwartbar (das System zahlt eine Versicherungsprämie in Form
+  von Cash-Drag und Stops, deren Nutzen sich erst in einem Bärenmarkt zeigen
+  kann), aber unbewiesen bleibt eben genau dieser Nutzen: **das verfügbare
+  Datenfenster (~2 Jahre) enthält keinen echten Bärenmarkt.**
 
-## Bekannte Einschränkungen dieses Laufs (siehe auch `engine.py`-Docstring)
+## Zum Ziel "Profit-Faktor 2"
 
-| Regel | Status | Grund |
-|---|---|---|
-| B1 Kein Look-Ahead | ✅ umgesetzt | Swing-Punkte erst nach Bestätigung nutzbar, Entry zum Open des Folgetags |
-| B2 Kosten | ✅ umgesetzt | 0,1 % und 0,2 % je Seite parallel gerechnet |
-| B3 Survivorship-frei | ❌ offen | Aktuelles Universum rückwirkend gehandelt — Survivorship-Bias bleibt bestehen |
-| B4 Out-of-Sample 2016–2021/2022–2026 | ❌ nicht möglich | Nur ~2 Jahre synchronisierte Historie im Repo, kein Netzwerkzugriff zum Nachladen in dieser Umgebung |
-| B5 Sensitivitätsanalyse ±30 % | ❌ offen | Folgt, sobald längere Historie verfügbar ist (sonst nicht aussagekräftig) |
-| B6 Portfolio-Ebene | ✅ umgesetzt | Positionslimits, Sektor-Caps, Cash-Quote, Regime-Budget |
-| B7 Kennzahlen-Pflicht | ✅ umgesetzt | CAGR, Sharpe, Calmar, Max-DD, DD-Dauer, Exposure, Profit-Factor — je Regime |
-| B8 Benchmark-Fairness | ✅ umgesetzt | Vergleich vs. Buy&Hold und vs. simple 200d-Regel |
-| B9 Kein 4H im Walk | ✅ dokumentierte Einschränkung | Markt-JSONs halten nur 60-Tage-Rolling-Window an 4H-Daten — Entry verlangt hier Weekly+Daily (2/2) statt 3/3 |
-| B10 Eine Quelle der Wahrheit | ✅ umgesetzt | `backtest_v2/signals.py` importiert `gws_analysis.struct_daily/struct_weekly` und `v2_analysis`-Funktionen direkt, keine Duplikate |
+Aktueller Stand: 0,89 (DAX) bis 1,66 (Nasdaq). Der Weg zu PF 2 führt über
+Selektivität (weniger, bessere Trades), z. B.: Entry nur bei Setup-Qualität
+≥ 3 Punkte, Volumen-Bestätigung (Daten ab dem nächsten Collector-Lauf
+verfügbar), höhere RS-Schwelle, konservativeres "unknown"-Verhalten.
+**Bewusste Entscheidung, das JETZT NICHT zu tun:** Jede dieser Stellschrauben
+auf dem vorhandenen 2-Jahres-Fenster zu drehen, bis PF 2 erscheint, wäre
+Overfitting im Lehrbuchsinn (Regel B5) — das Ergebnis wäre eine Strategie,
+die genau ein historisches Fenster auswendig gelernt hat. Kalibrierung
+erst nach Datenerweiterung (B3/B4: längere Historie inkl. 2022, historische
+Indexmitgliedschaft), dann Training/Validierung getrennt.
 
-## Nächste Schritte (siehe PROMPT_V2_UMSETZUNG.md)
+## Regel-Status (B1–B10)
 
-1. Sobald Netzwerkzugriff oder eine bezahlte Datenquelle verfügbar ist: längere
-   Historie laden (mind. 2016–2026), damit B4/B5 tatsächlich durchführbar sind
-   und ein echter Bärenmarkt (2022) im Test enthalten ist.
-2. Historische Indexmitgliedschaft (B3) rekonstruieren, um Survivorship-Bias
-   zu beseitigen.
-3. Erst nach 1+2: Parameter-Kalibrierung (RS2-Fenstergewichte, Regime-Schwellen,
-   ATR-Faktor, Zeit-Stopp) mit Sensitivitätsanalyse — nicht vorher, sonst
-   Overfitting auf ein zu kurzes, nicht-repräsentatives Fenster.
+| Regel | Status |
+|---|---|
+| B1 Kein Look-Ahead | ✅ umgesetzt (nach Bugfix v3 — Weekly-Auswertung am Wochenschluss) |
+| B2 Kosten 0,1 %/0,2 % | ✅ umgesetzt |
+| B3 Survivorship-frei | ❌ offen (aktuelles Universum rückwirkend gehandelt) |
+| B4 Out-of-Sample inkl. 2022 | ❌ nicht möglich (~2 Jahre Daten, kein Netzwerkzugriff zum Nachladen) |
+| B5 Sensitivitätsanalyse | ❌ offen (erst nach B3/B4 sinnvoll) |
+| B6 Portfolio-Ebene | ✅ umgesetzt |
+| B7 Kennzahlen-Pflicht | ✅ umgesetzt (je Regime getrennt) |
+| B8 Benchmark-Fairness | ✅ umgesetzt — nur Smallcap schlägt bisher beide Vergleiche |
+| B9 Kein 4H im Langfrist-Walk | ✅ dokumentiert (Entry = Weekly+Daily 2/2) |
+| B10 Eine Quelle der Wahrheit | ✅ umgesetzt (`signals.py` importiert Live-Funktionen) |
+
+## Nächste Schritte
+
+1. Längere Historie beschaffen (Netzwerkzugriff oder EODHD/Norgate) → B4-
+   Kalibrierung mit Bärenmarkt 2022, erst dann Parameter-Tuning Richtung PF 2.
+2. Historische Indexmitgliedschaft (B3) rekonstruieren.
+3. "unknown"-Regime-Verhalten entscheiden (konservativ vs. voll investiert) —
+   Backtest beider Varianten nach Datenerweiterung.
+4. DAX-Universum-Entscheidung (Handels- vs. reines Anzeige-Universum).

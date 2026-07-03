@@ -171,16 +171,18 @@ fehlt komplett). B3/B4/B5 bleiben deshalb offen, bis entweder Netzwerkzugriff
 zum Nachladen längerer Historie besteht oder eine bezahlte Datenquelle
 angebunden wird (siehe Abschnitt 8, Phase B).
 
-**Erster Validierungslauf auf dem verfügbaren ~2-Jahres-Fenster** (siehe
-`backtest_v2/results/README.md` für die volle Auswertung): Die Strategie
-unterliegt in allen vier Märkten (Nasdaq-100, S&P 500, DAX-40, Smallcap) dem
-Buy-and-Hold-Vergleich (Alpha −29,6pp bis −42,3pp), und in drei von vier
-Fällen auch der simplen 200d-Regel. Das ist plausibel für ein Fenster ohne
-echte Korrektur — genau die Marktphase, in der das System laut Konzept
-NICHT seinen Vorteil ausspielen kann (Kapitalschutz in Korrekturen). Es ist
-aber ein echter, unbeschönigter Befund und kein Beleg dafür, dass die
-Strategie funktioniert — das kann erst ein Testfenster mit echtem
-Bärenmarkt (B4) zeigen.
+**Validierungslauf auf dem verfügbaren ~2-Jahres-Fenster** (Engine-Stand v3
+nach zwei behobenen Bugs — Positionsgrößen-Berechnung und Weekly-Look-Ahead;
+volle Auswertung und Bug-Beschreibung in `backtest_v2/results/README.md`):
+Smallcap schlägt Buy-and-Hold deutlich (+16pp Alpha, PF 1,51 — aber Max-DD
+41,6 % wegen fehlender Regime-Bremse im "unknown"-Anlauffenster), Nasdaq
+erreicht PF 1,66 bei Sharpe 1,07, S&P 500 PF 1,16, DAX funktioniert nicht
+(PF 0,89 — Universum mit 38 Titeln zu klein für einen Perzentil-Funnel).
+Nasdaq/S&P 500 bleiben hinter Buy-and-Hold — plausibel für ein Fenster ohne
+echte Korrektur, aber unbewiesen bleibt genau der Kapitalschutz-Nutzen, den
+das System verspricht. Das Ziel Profit-Faktor 2 wird NICHT durch Tuning auf
+diesem kurzen Fenster angestrebt (Overfitting-Falle, Regel B5), sondern erst
+nach Datenerweiterung (B3/B4) kalibriert.
 
 ### Was der Backtest bewusst NICHT abdeckt
 Der LLM-Veto-Layer (Stufe 4) ist nicht rückwirkend simulierbar. Er wird

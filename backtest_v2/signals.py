@@ -22,21 +22,36 @@ from v2_analysis import (                                      # noqa: E402
 )
 
 
-def weekly_signal_cache(tickers_data, bench_ohlcv, week_dates):
-    """Berechnet für jede Woche (week_dates, aufsteigend) und jeden Ticker:
-    RS2-Perzentil, Regime, GWS-Weekly/Daily-Status — jeweils NUR mit Daten
-    bis einschließlich diesem Wochendatum (kein Look-Ahead).
+def weekly_signal_cache(tickers_data, bench_ohlcv, bench_ohlcv_w):
+    """Berechnet je Handelswoche und Ticker: RS2-Perzentil, Regime,
+    GWS-Weekly/Daily-Status — jeweils NUR mit Daten, die am Auswertungstag
+    bekannt waren (Regel B1, kein Look-Ahead).
+
+    WICHTIG zur Kerzen-Konvention: yfinance stempelt Weekly-Kerzen mit dem
+    MONTAG der Woche, die Kerze enthält aber OHLC der gesamten Woche (bis
+    Freitag). Ausgewertet wird deshalb am EFFEKTIVEN WOCHENENDE = letzter
+    Benchmark-Handelstag der Woche (i.d.R. Freitag; berücksichtigt auch
+    Feiertags-Montage, die in den Handelstagen fehlen). Erst zu diesem
+    Zeitpunkt ist die Weekly-Kerze der Woche abgeschlossen — sie darf dann
+    in die Struktur-Analyse einfließen; der Entry erfolgt am nächsten
+    Handelstag zum Open.
 
     tickers_data: {ticker: {"ohlcv": [...], "ohlcv_w": [...]}}
-    Rückgabe: {week_date: {"regime": {...}, "rs2_pct": {ticker: float|None},
-                            "struct": {ticker: {"w": bool, "d": bool}}}}
+    Rückgabe: {week_end_handelstag: {"regime": {...},
+                                      "rs2_pct": {ticker: float|None},
+                                      "struct": {ticker: {...}}}}
     """
     bench_dates = [row["d"] for row in bench_ohlcv]
-    bench_closes = [row["c"] for row in bench_ohlcv]
+    week_stamps = [row["d"] for row in bench_ohlcv_w]
 
     cache = {}
-    for week_end in week_dates:
-        # Wie viele Benchmark-Handelstage liegen <= week_end?
+    for i, stamp in enumerate(week_stamps):
+        next_stamp = week_stamps[i + 1] if i + 1 < len(week_stamps) else "9999-12-31"
+        days_in_week = [d for d in bench_dates if stamp <= d < next_stamp]
+        if not days_in_week:
+            continue
+        week_end = days_in_week[-1]   # letzter Handelstag der Woche (i.d.R. Freitag)
+
         b_cut = sum(1 for d in bench_dates if d <= week_end)
         bench_trunc = bench_ohlcv[:b_cut]
 
@@ -47,7 +62,9 @@ def weekly_signal_cache(tickers_data, bench_ohlcv, week_dates):
             daily = d["ohlcv"]
             weekly = d["ohlcv_w"]
             d_cut = sum(1 for row in daily if row["d"] <= week_end)
-            w_cut = sum(1 for row in weekly if row["d"] <= week_end)
+            # Weekly: Kerzen bis einschließlich der Kerze dieser Woche (Stempel
+            # <= Montag-Stempel) — am week_end ist genau diese Kerze abgeschlossen.
+            w_cut = sum(1 for row in weekly if row["d"] <= stamp)
             daily_trunc = daily[:d_cut]
             weekly_trunc = weekly[:w_cut]
             if not daily_trunc:
