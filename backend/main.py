@@ -579,6 +579,31 @@ async def get_signals(email: str = Depends(require_auth)):
     return JSONResponse(content=_load(path))
 
 
+# ── RS-Platform 2.0 (additiv — v1-Endpoints und -Daten bleiben unberührt) ────
+from v2_analysis import build_v2_payload
+
+_v2_cache: dict = {}
+
+
+@app.get("/api/v2/{market}")
+async def get_v2(market: str, email: str = Depends(require_auth)):
+    if market not in MARKET_FILES:
+        raise HTTPException(404, f"Unbekannter Markt '{market}'")
+    path = DATA_DIR / MARKET_FILES[market]
+    if not path.exists():
+        raise HTTPException(503, "Datendatei noch nicht vorhanden")
+    fund_path = DATA_DIR / "fundamentals.json"
+    cache_key = (path.stat().st_mtime,
+                 fund_path.stat().st_mtime if fund_path.exists() else 0)
+    cached = _v2_cache.get(market)
+    if not cached or cached["cache_key"] != cache_key:
+        raw = _load(path)
+        fund = _load(fund_path).get("tickers", {}) if fund_path.exists() else {}
+        payload = build_v2_payload(raw, fund, market)
+        _v2_cache[market] = {"cache_key": cache_key, "payload": payload}
+    return JSONResponse(content=_v2_cache[market]["payload"])
+
+
 @app.get("/api/ratings")
 async def get_ratings(email: str = Depends(require_auth)):
     path = DATA_DIR / "ratings" / "index.json"

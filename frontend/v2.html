@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RS-Platform 2.0</title>
+<script src="api.js"></script>
+<style>
+  body { margin:0; background:#0f172a; color:#e2e8f0; font-family:monospace; }
+  .nav-bar { display:inline-flex; align-items:center; gap:5px; padding:12px 12px 0; flex-wrap:wrap; }
+  .nav-switch { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:6px 13px; font-size:12px; font-weight:700; color:#94a3b8; text-decoration:none; font-family:monospace; white-space:nowrap; box-shadow:0 2px 8px #00000066; transition:border-color .15s, color .15s; }
+  .nav-switch:hover { border-color:#3b82f6; color:#e2e8f0; }
+  .nav-switch.active { border-color:#22c55e; color:#4ade80; background:#0a1f12; }
+  .wrap { padding:14px 16px 60px; max-width:1500px; }
+  h1 { font-size:18px; margin:14px 0 2px; color:#4ade80; }
+  .sub { font-size:11px; color:#64748b; margin-bottom:14px; }
+  .tabs { display:flex; gap:6px; margin:10px 0 14px; flex-wrap:wrap; }
+  .tab { background:#1e293b; border:1px solid #334155; color:#94a3b8; padding:5px 14px; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; font-family:monospace; }
+  .tab.on { border-color:#22c55e; color:#4ade80; background:#0a1f12; }
+  .cards { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+  .card { background:#1e293b; border:1px solid #334155; border-radius:10px; padding:12px 16px; min-width:210px; }
+  .card h3 { margin:0 0 8px; font-size:12px; color:#94a3b8; text-transform:uppercase; letter-spacing:.05em; }
+  .big { font-size:22px; font-weight:800; }
+  .kv { font-size:11.5px; color:#94a3b8; line-height:1.7; }
+  .kv b { color:#e2e8f0; }
+  table { border-collapse:collapse; width:100%; font-size:12px; }
+  th { text-align:left; color:#64748b; font-size:10.5px; text-transform:uppercase; letter-spacing:.04em; padding:6px 8px; border-bottom:1px solid #334155; position:sticky; top:0; background:#0f172a; cursor:default; }
+  td { padding:5px 8px; border-bottom:1px solid #1e293b; white-space:nowrap; }
+  tr:hover td { background:#16233b; }
+  .pill { display:inline-block; padding:1px 8px; border-radius:10px; font-size:10.5px; font-weight:700; }
+  .pill.kauf { background:#052e16; color:#4ade80; border:1px solid #166534; }
+  .pill.kand { background:#1e2a06; color:#facc15; border:1px solid #713f12; }
+  .pill.gef  { background:#2a0a0a; color:#f87171; border:1px solid #7f1d1d; }
+  .pos { color:#4ade80; } .neg { color:#f87171; } .dim { color:#475569; }
+  .filters { display:flex; gap:6px; margin:6px 0 10px; flex-wrap:wrap; }
+  .fbtn { background:#1e293b; border:1px solid #334155; color:#94a3b8; padding:3px 11px; border-radius:6px; font-size:11px; cursor:pointer; font-family:monospace; }
+  .fbtn.on { border-color:#3b82f6; color:#e2e8f0; }
+  details { background:#111c31; border:1px solid #27354d; border-radius:10px; margin:10px 0; padding:10px 16px; }
+  summary { cursor:pointer; font-weight:700; font-size:13px; color:#93c5fd; }
+  details .doc { font-size:12px; color:#cbd5e1; line-height:1.75; max-width:960px; }
+  details .doc code { background:#1e293b; padding:0 5px; border-radius:4px; }
+  .warn { background:#221a03; border:1px solid #713f12; color:#fcd34d; border-radius:8px; padding:8px 14px; font-size:11.5px; margin:8px 0 14px; max-width:960px; line-height:1.6; }
+  .cols2 { display:flex; gap:24px; flex-wrap:wrap; }
+  .err { color:#f87171; padding:30px 10px; font-size:13px; }
+  #loading { color:#64748b; padding:30px 10px; font-size:13px; }
+</style>
+</head>
+<body>
+<script>
+/* RS Auth (identisch zu v1-Seiten) */
+(function () {
+  function getToken() { return localStorage.getItem('rs_token'); }
+  function logout() {
+    localStorage.removeItem('rs_token');
+    localStorage.removeItem('rs_email');
+    window.location.href = '/login.html';
+  }
+  window.rsLogout = logout;
+  window.apiFetch = async function (url, opts) {
+    opts = opts || {};
+    var token = getToken();
+    if (!token) { logout(); return new Response('{}', { status: 401 }); }
+    var r = await fetch(url, Object.assign({}, opts, {
+      headers: Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token })
+    }));
+    if (r.status === 401) { logout(); }
+    return r;
+  };
+  if (!getToken()) { window.location.href = '/login.html'; return; }
+  document.addEventListener('DOMContentLoaded', function () {
+    var email = localStorage.getItem('rs_email') || '';
+    var btn = document.createElement('button');
+    btn.textContent = 'Logout' + (email ? ' · ' + email : '');
+    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
+    btn.onclick = function () { window.rsLogout(); };
+    document.body.appendChild(btn);
+  });
+})()
+</script>
+
+<div class="nav-bar">
+  <a href="index.html" class="nav-switch">Nasdaq</a>
+  <a href="dax.html" class="nav-switch">DAX</a>
+  <a href="sp500.html" class="nav-switch">S&amp;P500</a>
+  <a href="smallcap.html" class="nav-switch">SC600</a>
+  <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
+  <a href="backtest.html" class="nav-switch">B-DETAILS</a>
+  <a href="alpha.html" class="nav-switch" style="border-color:#f59e0b;color:#fbbf24;">ALPHA</a>
+  <a href="watchlist.html" class="nav-switch" style="border-color:#7c3aed;color:#a78bfa;">★ WATCHLIST</a>
+  <a href="v2.html" class="nav-switch active">RS-Platform 2.0</a>
+</div>
+
+<div class="wrap">
+  <h1>RS-Platform 2.0 — Auswahl-Funnel (Vorschau)</h1>
+  <div class="sub">Parallelbetrieb: Diese Ansicht berechnet Regime-Ampel, RS 2.0 und Funnel-Status aus denselben Daten wie v1 — die bisherige Plattform bleibt vollständig unverändert. Regelwerk: STRATEGIEPLAN.md.</div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="loading">Lade /api/v2 …</div>
+  <div id="content" style="display:none">
+
+    <div class="cards">
+      <div class="card">
+        <h3>Regime-Ampel (Stufe 0)</h3>
+        <div class="big" id="regimeLabel">–</div>
+        <div class="kv" id="regimeDetail"></div>
+      </div>
+      <div class="card">
+        <h3>Funnel-Ergebnis</h3>
+        <div class="kv" id="funnelStats"></div>
+      </div>
+      <div class="card">
+        <h3>Top-Sektoren (Sektor-RS)</h3>
+        <div class="kv" id="sectorBox"></div>
+      </div>
+    </div>
+
+    <div class="warn" id="regimeWarn" style="display:none"></div>
+
+    <details>
+      <summary>Was ist hier neu? (Funnel-Stufen, RS 2.0, Umsetzungsstand)</summary>
+      <div class="doc">
+        <p><b>Auswahl-Funnel:</b> Stufe 0 Regime-Ampel (Trend vs. 200d-Linie + Marktbreite + Volatilität → Exposure-Budget) → Stufe 1 Investierbarkeit (MCap, Kurs ≥ $5, Historie) → Stufe 2 RS 2.0 → Stufe 3 GWS-Setup (3/3) → Kaufliste.</p>
+        <p><b>RS 2.0</b> ersetzt die v1-Rohsumme: Überrendite vs. Benchmark je Fenster (20/50/126/252 T), <b>geteilt durch die Volatilität des Titels</b> (High-Beta wird nicht mehr systematisch bevorzugt), gewichtet (0,2/0,3/0,3/0,2), als <b>Perzentil-Rang 0–100</b> im Universum. <b>Trend Δ</b> = Perzentil heute vs. vor 10 Handelstagen.</p>
+        <p><b>Setup-Punkte (0–4):</b> GWS 3/3 · enger Stop (Entry−Stop ≤ 1,5×ATR14) · RS-Trend steigend · Titel in Top-3-Sektor. Stop = letztes <i>bestätigtes</i> Daily-Swing-Low −1 % (kein Look-Ahead).</p>
+        <p><b>Noch nicht enthalten</b> (siehe PROMPT_V2_UMSETZUNG.md): Volumen-Bestätigung (Volumen fehlt in den Daten-Exporten), Earnings-Sperre, Dollar-Volumen-Filter, Portfolio-Backtest-Engine, Signal-Journal, LLM-Veto-Integration.</p>
+      </div>
+    </details>
+
+    <details>
+      <summary>Exit-Regelwerk 2.0 (gilt für Live UND Backtest)</summary>
+      <div class="doc">
+        <ol>
+          <li><b>Initial-Stop:</b> unter letztem bestätigten Daily-Swing-Low −1 %, max. 2×ATR(14) unter Entry. Risiko pro Trade 0,75–1 % des Portfolios.</li>
+          <li><b>Teilverkauf:</b> 1/3 bei +2R, Stop des Rests auf Einstand.</li>
+          <li><b>Trailing:</b> Close unter letztem bestätigten Daily-Swing-Low → Exit Folgetag Open. Im 🔴-Regime: Trailing auf 4H-Swing-Low verengt.</li>
+          <li><b>RS-Decay:</b> RS-Perzentil &lt; 60 <b>und</b> Kurs &lt; 50d-Linie → Exit.</li>
+          <li><b>Zeit-Stopp:</b> nach 15 Handelstagen weder +1R noch Stop → Exit.</li>
+          <li><b>Stop-Prüfung täglich</b>, nicht wöchentlich.</li>
+          <li>Kein diskretionäres „Gewinn mitnehmen" außerhalb dieser Regeln.</li>
+        </ol>
+      </div>
+    </details>
+
+    <details>
+      <summary>Backtesting-Regeln (B1–B10)</summary>
+      <div class="doc">
+        <ol>
+          <li><b>B1</b> Kein Look-Ahead: Swing-Punkte gelten erst 2 Bars nach Auftreten; Entry zum Open des Folgetags.</li>
+          <li><b>B2</b> Kosten: 0,1 % / 0,2 % Slippage+Gebühren je Seite (beide Varianten).</li>
+          <li><b>B3</b> Survivorship: historische Indexmitgliedschaft (Wikipedia-Historie, später EODHD/Norgate).</li>
+          <li><b>B4</b> Out-of-Sample: Training bis 2021, Validierung 2022–2026 (inkl. Bärenmarkt 2022); danach Walk-Forward.</li>
+          <li><b>B5</b> Sensitivitätsanalyse ±30 % je Parameter — kippende Parameter = überfittet.</li>
+          <li><b>B6</b> Portfolio-Ebene: Positionslimits, Cash-Quote, Regime-Budget.</li>
+          <li><b>B7</b> Kennzahlen-Pflicht: CAGR, Sharpe, Calmar, Max-DD, DD-Dauer, Exposure, Profit-Factor, Alpha — je Regime getrennt.</li>
+          <li><b>B8</b> Benchmark-Fairness: vs. Buy-and-Hold QQQ und vs. simple 200d-Regel.</li>
+          <li><b>B9</b> Langfrist-Validierung ohne 4H (Intraday-Historie fehlt); 4H nur als Timing-Zusatz auf 730 Tagen messen.</li>
+          <li><b>B10</b> Live- und Backtest-Code teilen dieselben Signal-Funktionen; Ergebnisse versioniert in <code>backtest/results/</code>.</li>
+        </ol>
+      </div>
+    </details>
+
+    <h1 style="font-size:15px;color:#e2e8f0">Funnel-Tabelle</h1>
+    <div class="filters" id="filters"></div>
+    <div style="overflow-x:auto">
+      <table>
+        <thead><tr>
+          <th>#</th><th>Ticker</th><th>Name</th><th>Sektor</th><th style="text-align:right">Kurs</th>
+          <th style="text-align:right" title="RS 2.0 Perzentil (vol-adjustiert, gewichtet)">RS 2.0</th>
+          <th style="text-align:right" title="Perzentil-Änderung vs. vor 10 Handelstagen">Δ Trend</th>
+          <th style="text-align:right" title="v1-Score (alte Rohsumme) zum Vergleich">v1-Score</th>
+          <th title="GWS Weekly / Daily / 4H">GWS</th>
+          <th style="text-align:right" title="Setup-Punkte 0–4">Setup</th>
+          <th style="text-align:right" title="Letztes bestätigtes Daily-Swing-Low −1%">Stop</th>
+          <th>Status</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <h1 style="font-size:15px;color:#e2e8f0;margin-top:26px">Top 20 — Ranking-Vergleich v1 vs. 2.0</h1>
+    <div class="cols2">
+      <div style="min-width:280px"><h3 style="font-size:12px;color:#94a3b8">v1 (Rohsumme Überrenditen)</h3><div style="overflow-x:auto"><table><tbody id="cmpV1"></tbody></table></div></div>
+      <div style="min-width:280px"><h3 style="font-size:12px;color:#4ade80">2.0 (vol-adjustiertes Perzentil)</h3><div style="overflow-x:auto"><table><tbody id="cmpV2"></tbody></table></div></div>
+    </div>
+  </div>
+  <div id="error" class="err" style="display:none"></div>
+</div>
+
+<script>
+(function () {
+  const MARKETS = [
+    { id: 'nasdaq',   label: 'Nasdaq' },
+    { id: 'dax',      label: 'DAX' },
+    { id: 'sp500',    label: 'S&P500' },
+    { id: 'smallcap', label: 'SC600' },
+  ];
+  const REGIME_TXT = {
+    green:   { icon: '🟢', name: 'Risk-On',  color: '#4ade80' },
+    yellow:  { icon: '🟡', name: 'Neutral',  color: '#facc15' },
+    red:     { icon: '🔴', name: 'Risk-Off', color: '#f87171' },
+    unknown: { icon: '❓', name: 'Unbekannt', color: '#94a3b8' },
+  };
+  let market = 'nasdaq';
+  let statusFilter = 'ALLE';
+  let payload = null;
+
+  const $ = id => document.getElementById(id);
+  const fmt = (v, d = 1) => v == null ? '–' : v.toFixed(d);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function renderTabs() {
+    $('tabs').innerHTML = MARKETS.map(m =>
+      `<button class="tab ${m.id === market ? 'on' : ''}" data-m="${m.id}">${m.label}</button>`).join('');
+    $('tabs').querySelectorAll('.tab').forEach(b =>
+      b.onclick = () => { market = b.dataset.m; load(); });
+  }
+
+  function pill(status) {
+    if (status === 'KAUFLISTE') return '<span class="pill kauf">KAUFLISTE</span>';
+    if (status === 'KANDIDAT')  return '<span class="pill kand">KANDIDAT</span>';
+    if (status === 'GEFILTERT') return '<span class="pill gef">GEFILTERT</span>';
+    return '';
+  }
+
+  function gwsDots(g) {
+    const dot = ok => `<span style="color:${ok ? '#4ade80' : '#f87171'}">●</span>`;
+    return `${dot(g.w)}${dot(g.d)}${dot(g.h4)} <span class="dim">${g.pts}/3</span>`;
+  }
+
+  function render() {
+    const p = payload, r = p.regime, rt = REGIME_TXT[r.label] || REGIME_TXT.unknown;
+    $('regimeLabel').innerHTML = `${rt.icon} <span style="color:${rt.color}">${rt.name}</span>`;
+    $('regimeDetail').innerHTML =
+      `Exposure-Budget: <b>${r.budget != null ? r.budget + ' %' : '–'}</b><br>` +
+      `RS2-Schwelle: <b>≥ ${p.rs2_threshold}</b><br>` +
+      `${esc(p.benchmark || 'Benchmark')} vs. 200d: <b>${r.trend_ok ? 'darüber ✓' : 'darunter ✗'}</b> · 50d ${r.sma50_rising ? 'steigend' : 'fallend'}<br>` +
+      `Breite &gt;50d: <b>${fmt(r.breadth50)} %</b> · &gt;200d: <b>${fmt(r.breadth200)} %</b><br>` +
+      `Vola 20d: <b>${fmt(r.vol20_annualized)} %</b> (1J-Median ${fmt(r.vol_median_1y)} %)`;
+
+    const rows = p.data;
+    const nKauf = rows.filter(x => x.status === 'KAUFLISTE').length;
+    const nKand = rows.filter(x => x.status === 'KANDIDAT').length;
+    const nGef  = rows.filter(x => x.status === 'GEFILTERT').length;
+    $('funnelStats').innerHTML =
+      `Universum: <b>${rows.length}</b> Titel<br>` +
+      `Gefiltert (Stufe 1): <b class="neg">${nGef}</b><br>` +
+      `RS ≥ ${p.rs2_threshold} (Kandidaten): <b style="color:#facc15">${nKand + nKauf}</b><br>` +
+      `+ GWS 3/3 → <b class="pos">Kaufliste: ${nKauf}</b><br>` +
+      `<span class="dim">Stand: ${esc(p.timestamp || '–')}</span>`;
+
+    $('sectorBox').innerHTML = (p.top_sectors || []).map((s, i) =>
+      `${i + 1}. <b>${esc(s)}</b> <span class="dim">(Ø RS2 ${fmt(p.sector_rs[s])})</span>`).join('<br>') || '–';
+
+    const warn = $('regimeWarn');
+    if (r.label === 'red') {
+      warn.style.display = ''; warn.textContent = '🔴 Risk-Off: Keine neuen Entries laut Regelwerk — Kaufliste dient nur der Beobachtung. Trailing-Stops verengen, Cash aufbauen.';
+    } else if (r.label === 'yellow') {
+      warn.style.display = ''; warn.textContent = '🟡 Neutral: Nur A-Setups (RS ≥ 90), neue Positionen mit halber Größe.';
+    } else warn.style.display = 'none';
+
+    const F = ['ALLE', 'KAUFLISTE', 'KANDIDAT', 'GEFILTERT'];
+    $('filters').innerHTML = F.map(f =>
+      `<button class="fbtn ${statusFilter === f ? 'on' : ''}" data-f="${f}">${f}</button>`).join('');
+    $('filters').querySelectorAll('.fbtn').forEach(b =>
+      b.onclick = () => { statusFilter = b.dataset.f; render(); });
+
+    const shown = statusFilter === 'ALLE' ? rows : rows.filter(x => x.status === statusFilter);
+    $('tbody').innerHTML = shown.map((x, i) => {
+      const trendCls = x.rs2_trend > 0 ? 'pos' : x.rs2_trend < 0 ? 'neg' : 'dim';
+      const reasons = x.filter_reasons.length ? ` title="${esc(x.filter_reasons.join(' · '))}"` : '';
+      return `<tr${reasons}>
+        <td class="dim">${i + 1}</td>
+        <td><b>${esc(x.ticker)}</b></td>
+        <td class="dim" style="max-width:180px;overflow:hidden;text-overflow:ellipsis">${esc(x.name || '')}</td>
+        <td class="dim">${esc(x.sector || '–')}</td>
+        <td style="text-align:right">${fmt(x.close, 2)}</td>
+        <td style="text-align:right"><b>${fmt(x.rs2_pct)}</b></td>
+        <td style="text-align:right" class="${trendCls}">${x.rs2_trend == null ? '–' : (x.rs2_trend > 0 ? '+' : '') + fmt(x.rs2_trend)}</td>
+        <td style="text-align:right" class="dim">${fmt(x.score_v1, 0)}${x.rank_v1 ? ' (#' + x.rank_v1 + ')' : ''}</td>
+        <td>${gwsDots(x.gws)}</td>
+        <td style="text-align:right">${x.setup_pts}/4${x.tight_stop ? ' <span class="pos" title="Entry−Stop ≤ 1,5×ATR">◆</span>' : ''}</td>
+        <td style="text-align:right" class="dim">${fmt(x.stop, 2)}</td>
+        <td>${pill(x.status)}</td>
+      </tr>`;
+    }).join('');
+
+    const byV1 = [...rows].filter(x => x.score_v1 != null).sort((a, b) => b.score_v1 - a.score_v1).slice(0, 20);
+    const byV2 = rows.filter(x => x.rs2_pct != null).slice(0, 20);
+    const v2set = new Set(byV2.map(x => x.ticker));
+    const v1set = new Set(byV1.map(x => x.ticker));
+    $('cmpV1').innerHTML = byV1.map((x, i) =>
+      `<tr><td class="dim">${i + 1}</td><td><b>${esc(x.ticker)}</b>${!v2set.has(x.ticker) ? ' <span class="neg" title="fällt im 2.0-Ranking aus den Top 20">▼</span>' : ''}</td><td style="text-align:right" class="dim">${fmt(x.score_v1, 0)}</td></tr>`).join('');
+    $('cmpV2').innerHTML = byV2.map((x, i) =>
+      `<tr><td class="dim">${i + 1}</td><td><b>${esc(x.ticker)}</b>${!v1set.has(x.ticker) ? ' <span class="pos" title="neu in den Top 20 (vol-adjustiert)">▲</span>' : ''}</td><td style="text-align:right" class="dim">${fmt(x.rs2_pct)}</td></tr>`).join('');
+  }
+
+  async function load() {
+    renderTabs();
+    $('content').style.display = 'none';
+    $('error').style.display = 'none';
+    $('loading').style.display = '';
+    try {
+      const r = await window.apiFetch(`/api/v2/${market}`);
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      payload = await r.json();
+      $('loading').style.display = 'none';
+      $('content').style.display = '';
+      render();
+    } catch (e) {
+      $('loading').style.display = 'none';
+      $('error').style.display = '';
+      $('error').textContent = 'Fehler beim Laden von /api/v2/' + market + ': ' + e.message;
+    }
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>
