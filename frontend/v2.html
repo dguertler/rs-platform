@@ -43,6 +43,21 @@
   .cols2 { display:flex; gap:24px; flex-wrap:wrap; }
   .err { color:#f87171; padding:30px 10px; font-size:13px; }
   #loading { color:#64748b; padding:30px 10px; font-size:13px; }
+  .regime-box { background:#111c31; border:1px solid #27354d; border-radius:10px; padding:12px 16px; margin:0 0 14px; }
+  .regime-box h3 { margin:0 0 8px; font-size:12px; color:#93c5fd; text-transform:uppercase; letter-spacing:.05em; }
+  .regime-row { display:flex; gap:10px; align-items:flex-start; padding:5px 0; font-size:12px; line-height:1.55; border-top:1px solid #1e293b; }
+  .regime-row:first-of-type { border-top:none; }
+  .regime-row .rtag { flex:0 0 150px; font-weight:700; }
+  .regime-row .rcond { color:#94a3b8; }
+  .regime-row.active { background:#0a1f12; margin:0 -8px; padding:5px 8px; border-radius:6px; border-top:none; }
+  .tab.backtest { border-style:dashed; }
+  .legend { margin-top:14px; }
+  .legend-grid { display:grid; grid-template-columns:120px 1fr; gap:4px 14px; font-size:11.5px; color:#94a3b8; line-height:1.6; }
+  .legend-grid b { color:#e2e8f0; }
+  .bt-placeholder { background:#111c31; border:1px dashed #334155; border-radius:10px; padding:22px 24px; max-width:760px; font-size:12.5px; color:#cbd5e1; line-height:1.75; }
+  .bt-placeholder h2 { font-size:15px; color:#94a3b8; margin:0 0 10px; }
+  .bt-placeholder code { background:#1e293b; padding:0 5px; border-radius:4px; }
+  .bt-placeholder ul { margin:8px 0; padding-left:20px; }
 </style>
 </head>
 <body>
@@ -116,6 +131,11 @@
 
     <div class="warn" id="regimeWarn" style="display:none"></div>
 
+    <div class="regime-box">
+      <h3>Regime-Ampel — was 🟢/🟡/🔴 genau bedeuten</h3>
+      <div id="regimeLegend"></div>
+    </div>
+
     <details>
       <summary>Was ist hier neu? (Funnel-Stufen, RS 2.0, Umsetzungsstand)</summary>
       <div class="doc">
@@ -132,7 +152,7 @@
         <ol>
           <li><b>Initial-Stop:</b> unter letztem bestätigten Daily-Swing-Low −1 %, max. 2×ATR(14) unter Entry. Risiko pro Trade 0,75–1 % des Portfolios.</li>
           <li><b>Teilverkauf:</b> 1/3 bei +2R, Stop des Rests auf Einstand.</li>
-          <li><b>Trailing:</b> Close unter letztem bestätigten Daily-Swing-Low → Exit Folgetag Open. Im 🔴-Regime: Trailing auf 4H-Swing-Low verengt.</li>
+          <li><b>Trailing:</b> Close unter letztem bestätigten Daily-Swing-Low → Exit Folgetag Open. Im 🔴-Regime (Risk-Off, siehe Regime-Ampel-Box oben): Trailing auf 4H-Swing-Low verengt.</li>
           <li><b>RS-Decay:</b> RS-Perzentil &lt; 60 <b>und</b> Kurs &lt; 50d-Linie → Exit.</li>
           <li><b>Zeit-Stopp:</b> nach 15 Handelstagen weder +1R noch Stop → Exit.</li>
           <li><b>Stop-Prüfung täglich</b>, nicht wöchentlich.</li>
@@ -177,6 +197,24 @@
       </table>
     </div>
 
+    <details class="legend" open>
+      <summary>Legende — was bedeuten die Spalten?</summary>
+      <div class="doc legend-grid">
+        <b>RS 2.0</b><span>Volatilitätsadjustierter Perzentil-Rang 0–100 <i>innerhalb des aktuellen Universums</i> (100 = relativ stärkster Titel). Berechnung je Fenster (20/50/126/252 Handelstage): (Rendite Titel − Rendite Benchmark) ÷ Volatilität des Titels in diesem Fenster, gewichtet 20 %/30 %/30 %/20 %, danach in einen Rang 0–100 umgerechnet. Anders als der alte v1-Score wird ein Titel dafür nicht mehr belohnt, nur weil er volatiler ist.</span>
+        <b>Δ Trend</b><span>RS-2.0-Perzentil heute minus Perzentil vor 10 Handelstagen. <span class="pos">Grün/positiv</span> = relative Stärke nimmt zu, <span class="neg">rot/negativ</span> = nimmt ab (Frühwarnung für RS-Decay-Exit).</span>
+        <b>v1-Score</b><span>Alter RS-Score aus der bisherigen Plattform (Rohsumme der Überrenditen über 6 Fenster, <i>nicht</i> volatilitätsadjustiert) plus alter Rang „(#…)" — nur zum direkten Vergleich, hat keinen Einfluss auf Status/Kaufliste.</span>
+        <b>GWS</b><span>Drei Punkte für die Struktur-Ampel Weekly/Daily/4H (in dieser Reihenfolge): <span class="pos">●</span> grün = Struktur gebrochen/bullisch, <span class="neg">●</span> rot = nicht gebrochen. „x/3" = Anzahl grüner Punkte. Kaufliste erfordert 3/3.</span>
+        <b>Setup</b><span>Setup-Punkte 0–4: (1) GWS 3/3 · (2) enger Stop — <span class="pos">◆</span> erscheint, wenn Entry−Stop ≤ 1,5×ATR(14), also günstiges Chance-Risiko-Verhältnis · (3) Δ Trend positiv · (4) Titel liegt in einem der Top-3-Sektoren (siehe Karte „Top-Sektoren"). Rein informativ — beeinflusst NICHT den Status, nur GWS 3/3 tut das.</span>
+        <b>Stop</b><span>Vorgeschlagener Stop-Loss: letztes <i>bestätigtes</i> Daily-Swing-Low (2 Bars nach dem Tief liegen bereits vor — kein Blick in die Zukunft) minus 1 % Puffer. „–" = in der vorliegenden Historie kein bestätigtes Swing-Low gefunden.</span>
+        <b>Status</b><span>
+          <span class="pill kauf">KAUFLISTE</span> investierbar, RS 2.0 ≥ Regime-Schwelle <b>und</b> GWS 3/3 — erfüllt aktuell alle Funnel-Stufen.<br>
+          <span class="pill kand">KANDIDAT</span> investierbar, RS 2.0 ≥ Schwelle, aber GWS noch nicht 3/3 — Beobachtungsliste, Setup fehlt noch.<br>
+          <span class="pill gef">GEFILTERT</span> nicht investierbar (MarketCap, Mindestkurs $5 oder Historie-Filter aus Stufe 1 — Grund per Mouseover auf die Zeile). Wird nie in die Kaufliste aufgenommen, unabhängig vom RS-Wert.<br>
+          <i>(leer)</i> RS 2.0 liegt unter der aktuellen Regime-Schwelle — aktuell kein Kandidat.
+        </span>
+      </div>
+    </details>
+
     <h1 style="font-size:15px;color:#e2e8f0;margin-top:26px">Top 20 — Ranking-Vergleich v1 vs. 2.0</h1>
     <div class="cols2">
       <div style="min-width:280px"><h3 style="font-size:12px;color:#94a3b8">v1 (Rohsumme Überrenditen)</h3><div style="overflow-x:auto"><table><tbody id="cmpV1"></tbody></table></div></div>
@@ -200,7 +238,24 @@
     red:     { icon: '🔴', name: 'Risk-Off', color: '#f87171' },
     unknown: { icon: '❓', name: 'Unbekannt', color: '#94a3b8' },
   };
+  // Vollständige Definition je Regime — Bedingung (wie berechnet) + Konsequenz (was es fürs Handeln bedeutet).
+  // Muss exakt zur Logik in backend/v2_analysis.py compute_regime() passen.
+  const REGIME_DEFS = [
+    { key: 'green', icon: '🟢', name: 'Risk-On',
+      cond: 'Benchmark-Kurs über 200-Tage-Linie UND Marktbreite (Anteil Titel über ihrer 50-Tage-Linie) ≥ 50 % UND 50-Tage-Linie des Benchmarks steigt (vs. vor 10 Handelstagen).',
+      cons: 'Exposure-Budget 100 % · RS2-Schwelle ≥ 85 · volle Entry-Aktivität laut Exit-Regelwerk.' },
+    { key: 'yellow', icon: '🟡', name: 'Neutral',
+      cond: 'Benchmark-Kurs über 200-Tage-Linie, aber Marktbreite &lt; 50 % ODER die 50-Tage-Linie fällt gerade (Trend schwächt sich ab).',
+      cons: 'Exposure-Budget 60 % · RS2-Schwelle ≥ 90 (nur A-Setups) · neue Positionen nur mit halber Größe.' },
+    { key: 'red', icon: '🔴', name: 'Risk-Off',
+      cond: 'Benchmark-Kurs liegt unter der 200-Tage-Linie — der langfristige Aufwärtstrend ist gebrochen.',
+      cons: 'Exposure-Budget 30 % · keine neuen Entries laut Exit-Regelwerk · Trailing-Stops verengen sich auf das letzte 4H-Swing-Low statt Daily · Kaufliste dient nur der Beobachtung, Cash-Quote steigt.' },
+    { key: 'unknown', icon: '❓', name: 'Unbekannt',
+      cond: 'Weniger als 60 Handelstage Benchmark-Historie vorhanden — Ampel kann (noch) nicht berechnet werden.',
+      cons: 'Kein Exposure-Budget ableitbar; Funnel-Ergebnis mit Vorsicht behandeln.' },
+  ];
   let market = 'nasdaq';
+  let view = 'funnel';   // 'funnel' | 'backtest'
   let statusFilter = 'ALLE';
   let payload = null;
 
@@ -208,11 +263,57 @@
   const fmt = (v, d = 1) => v == null ? '–' : v.toFixed(d);
   const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
+  function renderRegimeLegend(activeLabel) {
+    $('regimeLegend').innerHTML = REGIME_DEFS.map(r => `
+      <div class="regime-row ${r.key === activeLabel ? 'active' : ''}">
+        <div class="rtag">${r.icon} ${r.name}${r.key === activeLabel ? ' <span class="dim">(aktuell)</span>' : ''}</div>
+        <div><span class="rcond">${r.cond}</span><br><b>${r.cons}</b></div>
+      </div>`).join('');
+  }
+
   function renderTabs() {
-    $('tabs').innerHTML = MARKETS.map(m =>
-      `<button class="tab ${m.id === market ? 'on' : ''}" data-m="${m.id}">${m.label}</button>`).join('');
-    $('tabs').querySelectorAll('.tab').forEach(b =>
-      b.onclick = () => { market = b.dataset.m; load(); });
+    const marketTabs = MARKETS.map(m =>
+      `<button class="tab ${view === 'funnel' && m.id === market ? 'on' : ''}" data-m="${m.id}">${m.label}</button>`).join('');
+    const backtestTab = `<button class="tab backtest ${view === 'backtest' ? 'on' : ''}" data-bt="1" title="Portfolio-Backtest-Engine — noch nicht implementiert, siehe Platzhalter">Backtest (geplant)</button>`;
+    $('tabs').innerHTML = marketTabs + backtestTab;
+    $('tabs').querySelectorAll('.tab[data-m]').forEach(b =>
+      b.onclick = () => { view = 'funnel'; market = b.dataset.m; load(); });
+    $('tabs').querySelector('.tab[data-bt]').onclick = () => { view = 'backtest'; showBacktestPlaceholder(); };
+  }
+
+  function showBacktestPlaceholder() {
+    renderTabs();
+    $('loading').style.display = 'none';
+    $('error').style.display = 'none';
+    $('content').style.display = 'none';
+    let panel = $('backtestPanel');
+    if (!panel) {
+      panel = document.createElement('div');
+      panel.id = 'backtestPanel';
+      $('content').insertAdjacentElement('afterend', panel);
+    }
+    panel.style.display = '';
+    panel.innerHTML = `
+      <div class="bt-placeholder">
+        <h2>Backtest 2.0 — noch nicht angelegt</h2>
+        <p>Dieser Bereich ist als eigener Tab vorgesehen, sobald die Portfolio-Backtest-Engine aus
+        <b>STRATEGIEPLAN.md</b> Abschnitt 5 (Phase B der Roadmap) gebaut ist. Aktuell zeigt v2.html
+        nur den regelbasierten Funnel live — es gibt noch keine rückwirkende Simulation.</p>
+        <p><b>Geplanter Umfang</b> (siehe <code>PROMPT_V2_UMSETZUNG.md</code>, Punkte 5–8):</p>
+        <ul>
+          <li>Python-Portfolio-Engine (<code>backtest_v2/engine.py</code>), die dieselben Signal-Funktionen
+          wie der Live-Funnel wiederverwendet (Regel B10 — eine Quelle der Wahrheit)</li>
+          <li>Kein Look-Ahead (B1), Kosten/Slippage (B2), historische Indexmitgliedschaft (B3)</li>
+          <li>Out-of-Sample-Validierung inkl. Bärenmarkt 2022 (B4) + Sensitivitätsanalyse (B5)</li>
+          <li>Kennzahlen CAGR, Sharpe, Calmar, Max-DD, Exposure-Zeit, Profit-Factor — je Regime
+          (🟢/🟡/🔴) getrennt ausgewiesen (B7)</li>
+          <li>Vergleich gegen Buy-and-Hold Benchmark und eine simple 200d-Regel (B8)</li>
+        </ul>
+        <p>Ergebnisse werden dann hier je Lauf abrufbar sein (<code>backtest_v2/results/</code>).
+        Bis dahin bleiben <a href="backtest.html" style="color:#93c5fd">B-DETAILS</a> und
+        <a href="backtest_overview.html" style="color:#93c5fd">B-ÜBERSICHT</a> aus der bisherigen
+        Plattform (v1) die verfügbaren, einzeltitelbasierten Backtests.</p>
+      </div>`;
   }
 
   function pill(status) {
@@ -230,6 +331,7 @@
   function render() {
     const p = payload, r = p.regime, rt = REGIME_TXT[r.label] || REGIME_TXT.unknown;
     $('regimeLabel').innerHTML = `${rt.icon} <span style="color:${rt.color}">${rt.name}</span>`;
+    renderRegimeLegend(r.label);
     $('regimeDetail').innerHTML =
       `Exposure-Budget: <b>${r.budget != null ? r.budget + ' %' : '–'}</b><br>` +
       `RS2-Schwelle: <b>≥ ${p.rs2_threshold}</b><br>` +
@@ -299,6 +401,8 @@
     $('content').style.display = 'none';
     $('error').style.display = 'none';
     $('loading').style.display = '';
+    const btPanel = $('backtestPanel');
+    if (btPanel) btPanel.style.display = 'none';
     try {
       const r = await window.apiFetch(`/api/v2/${market}`);
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
