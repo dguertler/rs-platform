@@ -550,14 +550,6 @@ async def get_rs_ticker(market: str, ticker: str, email: str = Depends(require_a
     raise HTTPException(404, f"Ticker '{ticker}' nicht gefunden")
 
 
-@app.get("/api/alpha/candidates")
-async def get_alpha_candidates(email: str = Depends(require_auth)):
-    path = DATA_DIR / "alpha_candidates.json"
-    if not path.exists():
-        return JSONResponse(content={"updated_at": None, "profiles": {}})
-    return JSONResponse(content=_load(path))
-
-
 @app.get("/api/backtest/{ticker}")
 async def get_backtest(ticker: str, email: str = Depends(require_auth)):
     if get_user_plan(email) != "pro":
