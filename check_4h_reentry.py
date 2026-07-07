@@ -188,13 +188,6 @@ def check_one_ticker(ticker, source, entries, top20_set, signals, alerted,
         print(f'  {ticker}: heute bereits gemeldet – übersprungen')
         return None
 
-    if ticker not in top20_set:
-        if test_mode:
-            print(f'  [TEST] {ticker}: nicht in Top 20 – trotzdem fortfahren')
-        else:
-            print(f'  {ticker}: nicht in Top 20 von {source} – übersprungen')
-            return None
-
     print(f'  {ticker} ({source}): hole frische 4H-Daten …')
     fresh_4h = fetch_fresh_4h(ticker)
 
@@ -357,6 +350,9 @@ def main():
         print('Keine neuen 4H-Wiederkehren.')
         return
 
+    # Top-20-Aktien zuerst, danach alle weiteren Breakouts (stabile Sortierung)
+    alerts.sort(key=lambda a: 0 if a.get('in_top20') else 1)
+
     # Mail senden
     is_test     = any(a.get('_test_mode') for a in alerts)
     date_label  = datetime.now().strftime('%d.%m.%Y')
@@ -371,10 +367,17 @@ def main():
     tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
     tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
     if tg_token:
-        from telegram_handler import send_breakout_telegram, resolve_recipients
+        from telegram_handler import send_breakout_telegram, resolve_recipients, send_section_divider
         tg_recipients = resolve_recipients(tg_chat_id)
         if tg_recipients:
+            has_top20 = any(a.get('in_top20') for a in alerts)
+            has_other = any(not a.get('in_top20') for a in alerts)
+            divider_sent = False
             for a in alerts:
+                if has_top20 and has_other and not a.get('in_top20') and not divider_sent:
+                    send_section_divider(tg_token, tg_recipients,
+                                         'Weitere Breakouts – außerhalb Top 20')
+                    divider_sent = True
                 send_breakout_telegram(tg_token, tg_recipients, a)
 
     # Im Testmodus: State NICHT verändern

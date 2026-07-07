@@ -223,6 +223,21 @@ def _send_charts(token, chat_id, charts):
                         files)
 
 
+def send_section_divider(token, chat_id, label):
+    """Schickt eine einfache Trenn-Nachricht zwischen zwei Alert-Blöcken
+    (z. B. Top-20-Aktien vs. weitere Breakouts außerhalb der Top 20)."""
+    recipients = _parse_chat_ids(chat_id)
+    if not token or not recipients:
+        return
+    text = f'⸻⸻⸻ <b>{_esc(label)}</b> ⸻⸻⸻'
+    for cid in recipients:
+        _post_json(token, 'sendMessage', {
+            'chat_id':    cid,
+            'text':       text,
+            'parse_mode': 'HTML',
+        })
+
+
 # ── Öffentliche API ───────────────────────────────────────────────────────────
 
 def send_breakout_telegram(token, chat_id, alert):

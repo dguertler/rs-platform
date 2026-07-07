@@ -376,6 +376,10 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
     cid_counter  = 0
     inline_imgs  = []
 
+    has_top20 = any(a.get('in_top20') for a in alerts)
+    has_other = any(not a.get('in_top20') for a in alerts)
+    divider_inserted = False
+
     def dot_html(active, is_new=False):
         # Gleiche Farblogik wie auf der HTML-Seite:
         # gelb (#eab308) = neu aktiv, grün (#4ade80) = aktiv, grau = inaktiv
@@ -390,6 +394,19 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                 f'vertical-align:middle;margin:0 1px"></span>')
 
     for alert in alerts:
+        if has_top20 and has_other and not alert.get('in_top20') and not divider_inserted:
+            html_parts.append("""
+  <div style="margin:32px 0 20px;text-align:center;color:#64748b;
+              font-size:11px;letter-spacing:2px;font-family:monospace">
+    <span style="display:inline-block;width:40px;height:1px;
+                 background:#334155;vertical-align:middle;margin-right:10px"></span>
+    WEITERE BREAKOUTS &middot; AUSSERHALB TOP 20
+    <span style="display:inline-block;width:40px;height:1px;
+                 background:#334155;vertical-align:middle;margin-left:10px"></span>
+  </div>
+""")
+            divider_inserted = True
+
         ticker         = alert['ticker']
         display_ticker = ticker.replace('.DE', '') if ticker.endswith('.DE') else ticker
         score    = alert['score']
@@ -695,7 +712,7 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
         prev = prev_states.get(ticker, {})
         prev_points = prev.get('points', 0)
 
-        if info['points'] == 3 and ticker in top20_set:
+        if info['points'] == 3:
             # Breakout-Daten der aktuellen Timeframes
             cur_w_date  = _breakout_date(entry.get('ohlcv_w',  []), info['struct_w'])
             cur_d_date  = _breakout_date(entry.get('ohlcv',    []), info['struct_d'])
@@ -929,6 +946,8 @@ def main():
     # Bereits heute gemeldete Ticker herausfiltern
     fresh_alerts = [a for a in all_alerts
                     if alerted.get(a['ticker']) != today_str]
+    # Top-20-Aktien zuerst, danach alle weiteren Breakouts (stabile Sortierung)
+    fresh_alerts.sort(key=lambda a: 0 if a.get('in_top20') else 1)
 
     print(f'\nAlertes gesamt: {len(all_alerts)}  '
           f'(davon neu heute: {len(fresh_alerts)})')
@@ -940,11 +959,18 @@ def main():
         send_alert_email(fresh_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
         if tg_token:
-            from telegram_handler import send_breakout_telegram, resolve_recipients
+            from telegram_handler import send_breakout_telegram, resolve_recipients, send_section_divider
             tg_recipients = resolve_recipients(tg_chat_id)
             if tg_recipients:
                 print(f'Telegram-Empfaenger: {len(tg_recipients)}')
+                has_top20 = any(a.get('in_top20') for a in fresh_alerts)
+                has_other = any(not a.get('in_top20') for a in fresh_alerts)
+                divider_sent = False
                 for a in fresh_alerts:
+                    if has_top20 and has_other and not a.get('in_top20') and not divider_sent:
+                        send_section_divider(tg_token, tg_recipients,
+                                             'Weitere Breakouts – außerhalb Top 20')
+                        divider_sent = True
                     send_breakout_telegram(tg_token, tg_recipients, a)
         # Letzte verschickte Charge persistieren (für Willkommens-Nachreichung)
         save_last_breakout_batch(fresh_alerts)
