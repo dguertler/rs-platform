@@ -1,177 +1,98 @@
 # CON.DE — KI-Aktienbewertung
 
-**CONTINENTAL AG                I** · Consumer Cyclical · 01.06.2026 · Signal: GWS Breakout 3/3
+**CONTINENTAL AG                I** · Consumer Cyclical · 07.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 72.3 |
-| Market Cap | $14.46 Mrd. |
-| Forward PE | 9.74 |
+| Kurs | 74.92 |
+| Market Cap | $14.98 Mrd. |
+| Forward PE | 10.1 |
 | Revenue (TTM) | $19.17 Mrd. |
 | Gross Margin | 26.7% |
 | ROE | -4.4% |
-| RS-Score | 33.7 |
+| RS-Score | 68.7 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-# CONTINENTAL AG (CON.DE) – Institutionelle Analyse
+**Szenarien (12–18 Monate):** Bull €92–€112 (20 %) · Base €68–€82 (50 %) · Bear €38–€52 (30 %) · EV ~€71
 
 ## 1. INVESTMENT-CASE
 
-Continental ist klassisches "Sum-of-the-Parts"-Spiel mit Restrukturierungs-Trigger. Die Abspaltung von Aumovio (Automotive) im September 2025 und die geplante Trennung von ContiTech sollen den Konzern auf das margenstarke Reifengeschäft fokussieren. Der Markt preist Continental aktuell wie einen zyklischen Auto-Zulieferer – übersieht aber, dass das verbleibende Reifengeschäft strukturell eher mit Michelin und Bridgestone vergleichbar ist (höhere Multiples, stabilere Margen). Forward-PE von 9,2 reflektiert Skepsis bzgl. europäischer Autoindustrie und China-Schwäche. Das ist ein Deep-Value- und Special-Situation-Play – kein Compounder. Aktuell allerdings mit gebrochener Chartstruktur auf allen Zeitebenen (GWS 3/3 aktiv), was institutionelle Distribution signalisiert.
+Continental hat sich nach der Abspaltung der Automotive-Elektroniksparte (Aumovio, 2025) zu einem fokussierten Reifen- und Industriegummi-Konzern gewandelt. DATENLAGE: Die TTM-Kennzahlen sind spinoff-verzerrt — Umsatzrückgang von -10,4 % YoY spiegelt primär die kleinere Konzernstruktur nach der Abspaltung wider, nicht organische Schwäche. Der Markt handelt die Aktie nahe dem Analystenkonsensziel (€74,79 vs. Kurs €74,92) — praktisch ohne eingepreiste Neubewertung der schlankeren, margenstärkeren Struktur. Die eigentliche Story: Ohne die kapitalintensive, margenschwache Automotive-Elektronik kann sich Continental auf das margenstärkere Premium-Reifengeschäft und ContiTech konzentrieren — strukturell ein Entschuldungs- und Dividendenkompounder, kein Wachstumswert. Was der Markt möglicherweise noch nicht vollständig einpreist: die Kombination aus operativer Marge von 9,4 % trotz Umsatzrückgang und einer Dividendenrendite von 3,55 % bei moderater Bewertung (KBV 3,43x, Forward-KGV 10,1x).
 
 ## 2. GESCHÄFTSMODELL
 
-- Tires (Reifen) – Kernsegment nach Spin-offs, ~50% Umsatz, OEM + Replacement (Aftermarket margenstärker)
-
-- ContiTech – Industriegummi, Förderbänder, Schläuche; soll abgespalten/verkauft werden
-
-- Aumovio (ehem. Automotive) – seit Sept. 2025 separat gelistet, ADAS, Software, Display
-
-- Replacement-Geschäft als Cashflow-Anker mit Pricing-Power über Premium-Marke "Continental"
-
-- Hohe Exposure zu europäischer OEM-Produktion (VW, BMW, Mercedes, Stellantis)
-
-- China-Geschäft unter Druck durch lokale Wettbewerber (Sailun, Linglong)
-
-- Rohstoffabhängigkeit: Naturkautschuk, Synthesekautschuk, Stahlcord
-
-- Strukturwandel zu EV reduziert Bremskomponenten-Geschäft, erhöht aber Reifenverschleiß (EV = höheres Gewicht)
+- Reifensegment: Premium-Pkw-, Lkw- und Spezialreifen mit globaler Markenstärke — Preissetzungsmacht im Premium-Segment als Kernhebel
+- ContiTech: Industriegummi/-kunststoffe für Automotive, Bergbau, Bahn — diversifiziert weg von reiner Pkw-Zyklik
+- Nach Aumovio-Spinoff (2025) deutlich geringere Kapitalintensität als zuvor als integrierter Automotive-Zulieferer
+- Operativer Hebel liegt im Reifenvolumen (Fixkostendeckung Werke) und im Rohstoffpreis-Pass-through (Kautschuk, Öl-Derivate)
+- Strukturelle Abhängigkeit: europäische Pkw-Produktion und Ersatzreifen-Nachfrage bleiben Kern-Nachfragetreiber
+- Konkurrenzdruck durch chinesische Reifenhersteller (Preiswettbewerb im Einstiegssegment) als strukturelles Risiko
+- Umsatz TTM €19,17 Mrd., Wachstum -10,4 % YoY — spinoff-bedingt, kein Vergleich zur Vorjahresbasis möglich
+- Dividendenrendite 3,55 % bei D/E 143,78 % — Kapitalrückführung bei gleichzeitig noch spürbarer Verschuldung aus der Konzernumstrukturierung
 
 ## 3. BULL CASE
 
-- Re-Rating durch Fokussierung auf Pure-Play Reifenhersteller (Multiple-Expansion Richtung Michelin: ~13x PE)
+Reifengeschäft profitiert von anhaltender ASP-Disziplin im Premiumsegment, ContiTech-Restrukturierung zeigt Margengewinne, Entschuldung schreitet schneller voran als erwartet. Annahme (kein Konsens): Forward-EPS ~€8,50 (Wachstum ggü. Konsens-implizit €7,42 = 74,92/10,10) × 12x (Rerating auf Dividenden-Compounder-Multiple) = €102. Bull-Kursziel: €92–€112. Eintrittswahrscheinlichkeit: 20 %.
 
-- ContiTech-Verkauf könnte 3-5 Mrd. EUR freisetzen für Buybacks/Sonderdividende
+## 4. BASE CASE
 
-- Replacement-Reifen-Zyklus 2025/26 dürfte anziehen (gealterter Fahrzeugbestand)
+Wahrscheinlichstes Szenario: Konsens-implizite Forward-EPS von ~€7,40 (74,92/10,10) bestätigt sich, Multiple bleibt bei ~10,5x (typisch für Auto-Zulieferer/Reifensektor). Annahme: €7,40 × 10,5x = €77,7. Base-Kursziel: €68–€82. Eintrittswahrscheinlichkeit: 50 %.
 
-- EV-Trend strukturell positiv für Reifenabsatz (höherer Verschleiß)
+## 5. BEAR CASE
 
-- Cash-Flow-Stärke bereits sichtbar (FCF deutlich über Net Income)
+Auslöser: Anhaltende Schwäche der europäischen Pkw-Produktion trifft auf verschärften Preiswettbewerb durch chinesische Billigreifen-Importe, ASP-Erosion im Einstiegssegment. Kundenkonzentration: aus Daten nicht ableitbar — OEM-Erstausrüstung vs. Ersatzmarkt-Split nicht im Datensatz. Geopolitik/Exportkontrollen: EU-Anti-Dumping-Zölle auf chinesische Reifen könnten kurzfristig schützen, aber Umgehungsrisiko über Drittländer besteht. Lieferketten: Kautschuk-Rohstoffabhängigkeit als Margenschwankungsfaktor, kein Single-Source-Risiko erkennbar. Verwässerung: Aktienanzahl-Trend nicht im Datensatz. Regulierung: EU-CO2-Flottengrenzwerte könnten Pkw-Produktionsvolumina weiter dämpfen. EPS fällt auf ~€5,50, Multiple komprimiert auf 8x (zyklische Abwertung). Bear-Kursziel: €38–€52. Eintrittswahrscheinlichkeit: 30 %.
 
-- Dividendenrendite attraktiv nach Restrukturierung
+**Summe: 20 % + 50 % + 30 % = 100 %**
 
-- Sehr niedrige Erwartungshaltung – jeder positive Newsflow wirkt überproportional
+**Erwartungswert:** EV = 0,20 × €102 + 0,50 × €75 + 0,30 × €45 = €20,4 + €37,5 + €13,5 = **~€71 — implizites Downside vs. aktuellem Kurs (€74,92): −5,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
-- Aktivisten-Druck (Schaeffler-Familie) als Katalysator
+## 6. FUNDAMENTALE QUALITÄT
 
-## 4. BEAR CASE
+Operative Marge 9,37 % solide für einen Reifen-/Industriegummi-Konzern, Nettomarge nahezu ausgeglichen (-0,17 %) — noch Restlast aus Spinoff-Einmaleffekten wahrscheinlich. ROE (-4,44 %) negativ, primär spinoff-bedingt. Auffällige Anomalie: ROIC von 46,19 % ist im Verhältnis zu ROE und operativer Marge unplausibel hoch — wahrscheinlich durch die reduzierte Kapitalbasis nach der Aumovio-Abspaltung verzerrt; aus den Daten nicht abschließend auflösbar, daher nicht in die Bewertung einbezogen. Ebenso ist der ausgewiesene freie Cashflow von €10,49 Mrd. (54,7 % Marge auf Umsatz) für einen Reifenhersteller unplausibel hoch — mit hoher Wahrscheinlichkeit durch Einmalerlöse aus der Abspaltung verzerrt und daher nicht als nachhaltiger operativer FCF zu interpretieren. Bilanz: D/E 143,78 % ist erhöht, aber im Rahmen für einen frisch restrukturierten Industriekonzern.
 
-- Europäische Autoproduktion strukturell rückläufig, deutscher OEM-Sektor verliert Marktanteile
+## 7. BEWERTUNG
 
-- Chinesische Reifenhersteller drücken global Preise (besonders im Mid-Tier)
+Forward-KGV 10,1x ist moderat für einen Dividendenkompounder mit 3,55 % Rendite. KBV 3,43x reflektiert die Neubewertung nach Spinoff, nicht mehr direkt mit historischen Automotive-Multiples vergleichbar. Rückrechnung: Aktueller Kurs €74,92 impliziert bei 10,1x Forward-KGV eine Forward-EPS von ~€7,42 — plausibel angesichts der schlankeren, margenstärkeren Struktur, aber abhängig von einer stabilen europäischen Automobilkonjunktur. Analyst-Konsensziel €74,79 liegt praktisch auf Kursniveau — die Coverage sieht aktuell keine Neubewertung, was die Bull-Case-These (Rerating auf Compounder-Multiple) noch nicht bestätigt.
 
-- Debt/Equity von 143% ist hoch – Refinanzierungsrisiko bei steigenden Zinsen
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Net Margin negativ (-0,2%) und ROE bei -4,4% – operativ schwach
+RS-Score 68,7, Rang 13 im DAX-40 — solides, aber kein Spitzenmomentum. Hypothese, nicht datenbasiert: Nach der Aumovio-Abspaltung dürfte ein Teil der institutionellen Basis noch in der Neubewertungsphase sein (Value-/Dividenden-Investoren vs. ehemalige Auto-Zulieferer-Halter, die abverkauft haben). Enttäuschungsrisiko: moderat — bei ausbleibender Margenausweitung könnte die Aktie in der Bewertungs-Range verharren.
 
-- Restrukturierungskosten und Spin-off-Komplexität belasten kurzfristig
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- US-Zölle auf Reifenimporte unklar (Trump-Politik)
+RS-Score 68,7 (Rang 13/38 im DAX). Fenster: 5T +4,03 %, 10T -0,28 %, 20T +5,06 %, 50T +13,63 %, 6M +13,8 %, 12M +32,46 % — solide mittelfristige Aufwärtsstruktur, kurzfristig leicht konsolidierend. GWS-Signal aktuell nicht verfügbar. Momentum ist teilweise fundamental gestützt (Margenverbesserung nach Spinoff), teilweise Value-Rotation. Warnsignal: Rückfall unter €65 würde die mittelfristige Aufwärtsstruktur brechen.
 
-- GWS-Ampel 3/3 aktiv – charttechnischer Bruch auf allen Zeitebenen
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- Revenue-Wachstum von -10,4% YoY zeigt fundamentale Schwäche
-
-## 5. FUNDAMENTALE QUALITÄT
-
-- Umsatz TTM: 19,2 Mrd. EUR, YoY -10,4% (post Aumovio-Abspaltung verzerrt)
-
-- Gross Margin: 26,7% – akzeptabel, aber unter Michelin (~25-27%) trotz Skala
-
-- Operating Margin: 9,4% – im Branchenmittel
-
-- Net Margin: -0,2% – durch Sondereffekte und Restrukturierung
-
-- ROE: -4,4% – ungenügend, klares Qualitätsproblem
-
-- FCF: 10,5 Mrd. EUR (wahrscheinlich inkl. Spin-off-Effekten – mit Vorsicht zu interpretieren)
-
-- Debt/Equity: 143,8% – hoher Leverage
-
-- Price/Book: 3,14 – nicht günstig auf Buchwertbasis
-
-- Forward PE: 9,25 – günstig, falls Earnings-Schätzungen halten
-
-- Kein klarer Moat außerhalb der Reifenmarke
-
-- Pricing-Power im Premium-Replacement-Segment vorhanden
-
-- Bilanzqualität durch Spin-offs in Transformation
-
-## 6. BEWERTUNG
-
-Forward-PE von 9,25 wirkt auf den ersten Blick günstig, ist aber für einen zyklischen Auto-Zulieferer mit negativer Top-Line nicht extrem billig. Michelin handelt bei ~10-11x, Bridgestone bei ~11x – Continental hat also nur geringen Bewertungsabschlag. Price/Book von 3,14 ist eher hoch für einen Industriewert mit negativem ROE. Das Kursziel von 74,50 EUR impliziert ~9% Upside – Analysten sind verhalten konstruktiv. Die eigentliche Bewertungs-Story liegt in der Sum-of-the-Parts-Logik: Reifen-Segment isoliert betrachtet könnte 50-60 EUR rechtfertigen, ContiTech-Erlös 10-15 EUR on top. Aktuell preist der Markt also weder Best- noch Worst-Case ein – fairer Bewertungskorridor.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Under-owned bei US-Hedgefonds, klassisches "European Industrial Special Situation"
-
-- Schaeffler-Familie hält Mehrheit – Free Float begrenzt, geringe Trading-Liquidität
-
-- Sentiment negativ wegen deutscher Autoindustrie-Krise (VW, Bosch Layoffs)
-
-- Kein Hype, kein Momentum – klassisches "Show-me"-Investment
-
-- Smart Money wartet auf ContiTech-Deal-Klarheit
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- GWS-Ampel 3/3 AKTIV – Struktur auf Wochen-, Tages- und 4H-Ebene gebrochen, klares Verkaufssignal
-
-- RS-Score -20,58 vs. QQQ – massive relative Schwäche
-
-- 5T- und 10T-Performance stark negativ (-5,2%/-8,9%) – akute Distribution
-
-- Vom 52W-Hoch (78,68) ca. 13% entfernt, aber Momentum klar nach unten
-
-- Aktuell KEIN Kauf-Setup – abwarten bis GWS-Ampel grün wird
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-Konservatives Szenario: Reifen-Margen stabil, ContiTech zu fairem Preis veräußert, EU-Auto bleibt schwach. Kursziel: 75-85 EUR. Wahrscheinlichkeit: 50%
-
-Bull Case: Erfolgreiche Pure-Play-Transformation, Re-Rating auf Michelin-Niveau, Sonderdividende. Kursziel: 100-115 EUR. Wahrscheinlichkeit: 30%
-
-Extrem-Bull-Case: Übernahmeangebot durch strategischen Investor oder PE, vollständige Zerschlagung. Kursziel: 130-150 EUR. Wahrscheinlichkeit: 10%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- Michelin (ML.PA) – qualitativ besser, stabilere Margen, fairer Multiple-Benchmark
-
-- Bridgestone (5108.T) – globaler Marktführer, defensiver, höhere Bewertung
-
-- Pirelli (PIRC.MI) – Premium-Fokus, höhere Margen, weniger zyklisch
-
-- Goodyear (GT) – US-Vergleich, schwächere Bilanz, ähnliche Probleme
-
-- Schaeffler (SHA.DE) – verwandte Eigentümerstruktur, ähnliche Restrukturierungsthematik
+**Bull (€110–€140):** Vollständige Entschuldung, Premium-Reifen-Preismacht setzt sich durch, ContiTech-Diversifikation zahlt sich aus, Aktienrückkäufe zusätzlich zur Dividende.
+**Base (€70–€100):** Stetiger Dividendenkompounder mit moderatem Margenwachstum.
+**Bear (€30–€50):** Strukturelle Verdrängung durch chinesische Billigreifen-Hersteller, anhaltende europäische Auto-Produktionsschwäche.
+Entscheidende Variable: Preissetzungsmacht im Premium-Reifensegment gegenüber chinesischer Importkonkurrenz.
 
 ## 11. PROFI-FAZIT
 
-Continental ist ein Special-Situation- und Sum-of-the-Parts-Play, kein Qualitäts-Compounder. Die strategische Logik der Aufspaltung ist plausibel und kann erhebliches Re-Rating-Potenzial freisetzen – aber Timing ist entscheidend. Aktuell sendet der Chart auf allen Zeitebenen Verkaufssignale (GWS 3/3), und die fundamentalen Daten (negative Marge, schwacher ROE, hoher Leverage) bestätigen die institutionelle Skepsis. Aus Hedgefonds-Perspektive: interessant für Event-Driven-Strategien rund um ContiTech-Verkauf, ungeeignet als Buy-and-Hold-Investment. Kauf erst sinnvoll, wenn GWS-Ampel auf grün dreht ODER Klarheit über ContiTech-Verkauf besteht. Bis dahin Beobachten, nicht kaufen. Stop-Loss bei klarem Durchbruch unter 60 EUR zwingend. Position-Sizing klein halten – das ist kein Tier-1-Compounder, sondern taktischer Trade.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −5,2 %). Continental ist nach dem Spinoff ein Dividenden-/Value-Compounder, kein Wachstums- oder Momentum-Play — geeignet für einkommensorientierte, geduldige Investoren, nicht für Trader auf kurzfristige Kurskatalysatoren. Die hohe Verschuldung (D/E 143,78 %) und die daten-anomalen FCF-/ROIC-Werte rechtfertigen eine vorsichtige Positionsgröße, bis die spinoff-bereinigten Zahlen über 2–3 Quartale Klarheit bringen. Peer-Vergleich: **Michelin** ist das reinere Pure-Play-Reifeninstrument mit stabilerer Bilanz, **Pirelli** adressiert stärker das Ultra-Premium-Segment. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-Rating:
-
-- Qualität: 2/5
-
-- Wachstum: 1/5
-
+- Qualität: 3/5
+- Wachstum: 2/5
 - Bewertung: 3/5
+- Katalysator: 2/5
 
-- Langfristiges Potenzial: 3/5
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — D/E von 143,78 % und die spinoff-verzerrten ROIC-/FCF-Werte rechtfertigen trotz solidem RS-Rang 13 keine volle Positionsgröße.
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
-| Wachstum | 1/5 |
+| Qualität | 3/5 |
+| Wachstum | 2/5 |
 | Bewertung | 3/5 |
-| Katalysator | 3/5 |
+| Katalysator | 2/5 |
+| EV-Upside | -1.2% |
 
 **Verdict: WATCH (45/100)**
 

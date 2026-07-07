@@ -22,20 +22,6 @@
       "asymmetric_edge": true
     },
     {
-      "ticker": "BNR.DE",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-01T20:38:52.220090",
-      "asymmetric_edge": true
-    },
-    {
-      "ticker": "CON.DE",
-      "verdict": "WATCH",
-      "score": 45,
-      "created_at": "2026-06-01T20:38:52.232685",
-      "asymmetric_edge": true
-    },
-    {
       "ticker": "DB1.DE",
       "verdict": "BUY",
       "score": 75,
@@ -71,13 +57,6 @@
       "asymmetric_edge": true
     },
     {
-      "ticker": "EOAN.DE",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-01T20:38:52.276316",
-      "asymmetric_edge": true
-    },
-    {
       "ticker": "F",
       "verdict": "WATCH",
       "score": 45,
@@ -97,13 +76,6 @@
       "score": 65,
       "created_at": "2026-06-01T20:38:52.354083",
       "asymmetric_edge": false
-    },
-    {
-      "ticker": "RWE.DE",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-01T20:38:52.359307",
-      "asymmetric_edge": true
     },
     {
       "ticker": "SRT3.DE",
@@ -862,13 +834,6 @@
       "created_at": "2026-07-03T10:10:50.660852"
     },
     {
-      "ticker": "CRWD",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.668087"
-    },
-    {
       "ticker": "CTAS",
       "verdict": "WATCH",
       "score": 53,
@@ -916,6 +881,78 @@
       "score": 53,
       "asymmetric_edge": false,
       "created_at": "2026-07-03T10:10:50.721476"
+    },
+    {
+      "ticker": "CRWD",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV 124x und EV von \u221212,7 % lassen trotz starkem RS-Rang 18 keinen vollen Positionsaufbau zu."
+      },
+      "created_at": "2026-07-07T06:46:18.820962"
+    },
+    {
+      "ticker": "CON.DE",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E von 143,78 % und die spinoff-verzerrten ROIC-/FCF-Werte rechtfertigen trotz solidem RS-Rang 13 keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-07T06:47:18.028116"
+    },
+    {
+      "ticker": "RWE.DE",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die ungekl\u00e4rte Anomalie zwischen operativer Marge (-28,78 %) und Nettomarge (+14,51 %) sowie der stark negative FCF rechtfertigen trotz RS-Rang 4 nur eine reduzierte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-07T06:48:12.743884"
+    },
+    {
+      "ticker": "EOAN.DE",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E von 150,02 % rechtfertigt trotz solider ROE/ROIC-Qualit\u00e4t und Rang 15 im DAX nur eine reduzierte Positionsgr\u00f6\u00dfe, zumal der EV nahezu neutral ist."
+      },
+      "created_at": "2026-07-07T06:49:05.839007"
+    },
+    {
+      "ticker": "BNR.DE",
+      "verdict": "AVOID",
+      "score": 33,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "RS-Score von 3,12 (Rang 23/38) und negative 12-Monats-Performance zeigen fehlendes fundamentales und technisches Momentum trotz solider FCF-Rendite."
+      },
+      "created_at": "2026-07-07T06:50:02.353547"
+    },
+    {
+      "ticker": "BAX",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E von 161,02 % und die ungekl\u00e4rte Diskrepanz zwischen operativer Marge (+6,03 %) und Nettomarge (-9,70 %) rechtfertigen trotz solider technischer Erholung nur eine reduzierte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-07T06:50:57.122219"
     }
   ]
 }
