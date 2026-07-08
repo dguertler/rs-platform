@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VRTX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">08.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>VRTX</h1>
+      <h2>Vertex Pharmaceuticals Incorpor</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Biotechnology</span></div>
+        <div class="mi">MCap: <span>$134B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">69</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 08.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">55.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$528.04</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">24.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$12.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">54.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">24.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">650–760</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">500–580</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">280–340</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $650–$760 (25 %) · Base $500–$580 (50 %) · Bear $280–$340 (25 %) · EV ~$523,75</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Vertex wird meist als "CF-Monopol mit begrenztem TAM" abgetan – eine These, die zunehmend überholt ist. CASGEVY (Gentherapie bei Sichelzellkrankheit/Beta-Thalassämie) und JOURNAVX (nicht-opioides Schmerzmittel, NaV1.8-Inhibitor) lieferten in Q1 2026 bereits über 25% des Wachstums, obwohl beide Produkte erst am Anfang ihrer kommerziellen Kurve stehen. JOURNAVX erreichte per Januar 2026 über 200 Mio. versicherte Leben (zwei Drittel der US-Coverage), Management erwartet eine Verdreifachung der Verschreibungen 2026 gegenüber 2025. CASGEVY-Umsatz soll sich 2026 fast verdreifachen, und am 1. Juli 2026 – vor nur einer Woche – erweiterte die FDA die Zulassung auf Patienten ab 2 Jahren, was den adressierbaren Patientenpool spürbar vergrößert. Zusätzlich akzeptierte die FDA am 1. Juni 2026 den BLA-Antrag für Povetacicept (IgA-Nephropathie) mit PDUFA-Termin 30.11.2026 – ein naher, im Markt noch wenig diskutierter Katalysator. Strukturell verändert sich das Geschäftsmodell damit real: von einer Ein-Krankheit-Franchise (Mukoviszidose/CF) zu einer Mehr-Modalitäten-Plattform (Gentherapie, Schmerzmedizin, Nierenerkrankungen) – jeweils mit potenziell monopolartigen Nischenpositionen, gestützt durch qualifizierte Behandlungszentren (CASGEVY) als strukturelle Vertriebsbarriere für Wettbewerber.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>CF-Franchise (Trikafta/Kaftrio-Familie) mit nahezu vollständiger Penetration der berechtigten Patientenpopulation – strukturelles Nahmonopol</li>
+<li>CASGEVY: CRISPR-basierte Gentherapie bei Sichelzellkrankheit/Beta-Thalassämie, Vertrieb über ein begrenztes Netz qualifizierter Behandlungszentren als natürliche Zugangsbarriere</li>
+<li>JOURNAVX (Suzetrigin): erstes zugelassenes nicht-opioides Schmerzmittel dieser Wirkstoffklasse – First-Mover-Vorteil in einem großen, unterversorgten Markt</li>
+<li>Pipeline-Diversifikation: Povetacicept (IgA-Nephropathie, PDUFA 30.11.2026), Inaxaplin (APOL1-Nierenerkrankung), Zimislecel (Zelltherapie Typ-1-Diabetes)</li>
+<li>Next-Gen-CF-Kombination (Vanzacaftor) verlängert die Patentlaufzeit der Kernfranchise strukturell</li>
+<li>Sehr niedrige Verschuldung (D/E 10,26) gibt finanziellen Spielraum für weitere Pipeline-Investitionen ohne Kapitalmarktdruck</li>
+<li>Operativer Hebel: hohe Bruttomarge (54,4%) bei wachsendem Nicht-CF-Umsatzanteil verbessert die Konzernmarge strukturell</li>
+<li>Kein Dividendenprogramm – vollständige Kapitalallokation in Pipeline und Wachstum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Povetacicept erhält am 30.11.2026 die Zulassung, CASGEVY-Umsatz verdreifacht sich wie geplant, JOURNAVX-Skripte verdreifachen sich, die CF-Franchise bleibt dank Vanzacaftor-Launch stabil. Strukturelle Margen-Nachhaltigkeit: Technologieführerschaft in Gentherapie (CRISPR-Partnerschaft) und nicht-opioider Schmerztherapie, kombiniert mit den strukturellen Zugangsbarrieren der CASGEVY-Behandlungszentren, rechtfertigen ein dauerhaft hohes Multiple; die CF-Kundenbindung (praktisch keine Alternative für die meisten Patienten) ist der stärkste Switching-Cost-Faktor im gesamten Portfolio. Annahme (kein Konsens): EPS $25,00 × 28x = $700. Bull-Kursziel: $650–$760 (Mittelpunkt $705). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance-nahes Wachstum, moderate Diversifikation setzt sich fort. Impliziter Forward-EPS (aus Datensatz abgeleitet: Kurs $528,04 ÷ Forward-PE 24,59) ≈ $21,47 × 25x (leichte Prämie durch Wachstumsdiversifikation) = $536,75. Base-Kursziel: $500–$580 (Mittelpunkt $540). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Povetacicept-Zulassung verzögert sich oder scheitert am PDUFA-Termin, CASGEVY-Uptake enttäuscht durch begrenzte Zentrumskapazität und komplexe Behandlungslogistik, CF-Franchise gerät durch neue Wettbewerber-Kombinationen unter Druck. Kundenkonzentration: strukturell hoch auf die CF-Franchise konzentriert (Kernumsatztreiber), aber auf Patientenebene breit diversifiziert – moderates Risiko. Geopolitik/China-Exposure: nicht separat quantifizierbar aus den Daten. Lieferketten: CRISPR-Partnerschaft (CRISPR Therapeutics) für CASGEVY ist ein Abhängigkeitsfaktor, kein reines Single-Source-Fertigungsrisiko. Verwässerung: Aktienanzahl-Trend nicht im Datensatz verfügbar. Regulierung: US-Preisverhandlungen (IRA/Medicare) sind ein branchenweites, noch nicht vollständig quantifizierbares Risiko für die CF-Kernfranchise. EPS-Annahme $17,00 × 18x = $306. Bear-Kursziel: $280–$340 (Mittelpunkt $310). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 25 % + 50 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $705 + 0,50 × $540 + 0,25 × $310 = $176,25 + $270,00 + $77,50 = **~$523,75 — implizites Downside vs. aktuellem Kurs ($528,04): -0,8 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 24,2% und ROIC 25,4% sind hoch und konsistent (kein Anomalie-Muster wie bei buyback-getriebenen Verzerrungen). Gross Margin 54,4%, Operating Margin 38,1%, Net Margin 35,5% sind für ein Biotech-Unternehmen dieser Größe außergewöhnlich stark und spiegeln die CF-Preissetzungsmacht. Freier Cashflow $2,78 Mrd. bei $12,22 Mrd. Umsatz (~22,8% FCF-Marge) ist solide. D/E 10,26 ist niedrig – eine der stärksten Bilanzen im Large-Cap-Biotech-Sektor. Der Burggraben ist real und strukturell: nahezu vollständige Penetration der CF-Zielpopulation plus patentgeschützte Next-Gen-Kombinationen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 24,59x ist für ein Biotech mit 25%+ ROIC fair bis leicht anspruchsvoll bewertet, nicht günstig – der Markt zahlt bereits eine Qualitätsprämie. Rückrechnung: Der Kurs impliziert bei Forward-PE 24,59x einen Forward-EPS von $21,47 – leicht über der reinen CF-Trendlinie, was auf eine bereits teilweise eingepreiste Diversifikationsprämie (CASGEVY/JOURNAVX) hindeutet; plausibel, aber nicht mehr konservativ. P/B 6,93x ist hoch, aber für ein margenstarkes Biotech mit geringer Verschuldung einordbar. Analyst-Konsensziel $548,69 – als Orientierungspunkt, nicht als Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 55,29 (Rang 33 NASDAQ-100), Kurs nahe 52W-Hoch ($529,14), niedriges Beta (0,292) – klassisches defensives Compounder-Profil. Short Float nicht im Datensatz. Hypothese, nicht datenbasiert: Long-Only-/Gesundheitssektor-Investoren dürften die dominante Käuferbasis sein, Fast-Money-Anteil eher gering angesichts der niedrigen Beta. Neue Käufer benötigen eine positive Povetacicept-Entscheidung (30.11.2026) als nächsten sichtbaren Auslöser. Enttäuschungsrisiko: ein negativer PDUFA-Ausgang oder ein enttäuschender CASGEVY-Uptake-Bericht.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Breite Stärke über alle Fenster (5T +8,8%, 10T +12,08%, 20T +18,72%, 50T +14,39%), aber deutlich schwächeres 6-Monats-Fenster (+1,3%) – die jüngste Beschleunigung ist relativ neu. GWS-Ampel aktuell ohne aktives Signal. Momentum ist fundamental gestützt durch die CASGEVY-Zulassungserweiterung (01.07.2026) und die Q1-Zahlen. Warnsignal: eine negative Povetacicept-Nachricht vor dem PDUFA-Termin oder ein Rückfall unter die 50-Tage-Basis.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($800–$1.000):** Vollständige Multi-Franchise-Transformation gelingt – Gentherapie-Folgeindikationen, Schmerzportfolio-Erweiterung und Nierenerkrankungs-Pipeline (Povetacicept, Inaxaplin) etablieren drei bis vier unabhängige Wachstumssäulen neben CF.</p>
+<p>**Base ($540–$720):** CF-Franchise bleibt Cash-Kuh, neue Modalitäten wachsen graduell, moderate Diversifikation.</p>
+<p>**Bear ($250–$380):** Pipeline-Rückschläge häufen sich, CF-Patentschutz nähert sich dem Ende ohne ausreichenden Nachfolge-Umsatz, IRA-/Medicare-Preisdruck belastet die Kernfranchise strukturell.</p>
+<p>Entscheidende Variable: Erfolgstempo der Nicht-CF-Pipeline (Povetacicept, Inaxaplin, Zimislecel) relativ zur CF-Patentlaufzeit.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>VRTX ist ein Buy-and-Hold-Compounder mit außergewöhnlicher Bilanzqualität und einer inzwischen glaubwürdigen Diversifikationsstory jenseits der CF-Franchise – kein zyklischer Trade und kein reines Momentum-Play. Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen Edge (EV -0,8%), was bei einem Kurs nahe dem 52W-Hoch konsistent ist. Geeignet für Long-Only-/Qualitäts-Investoren mit langem Zeithorizont; der Povetacicept-PDUFA-Termin (30.11.2026) ist der nächste konkrete Prüfstein. Positionsgröße: halbe Standardgröße angesichts fehlendem kurzfristigem Bewertungs-Edge, trotz hoher fundamentaler Qualität. Peer-Vergleich: **Regeneron (REGN)** als vergleichbarer margenstarker Biotech-Peer mit breiterer, aber weniger konzentrierter Pipeline; **CRISPR Therapeutics (CRSP)** als reineres, aber deutlich kleineres Gentherapie-Investment mit direktem CASGEVY-Bezug. Peer-Multiples nicht im Datensatz – relative Bewertung indikativ.</p>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — EV nahe Null (-0,8%) trotz starker fundamentaler Qualität und naher Katalysatoren (Povetacicept-PDUFA) – Bewertung nahe Allzeithoch trägt keine volle Positionsgröße.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

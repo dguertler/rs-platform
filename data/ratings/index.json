@@ -232,13 +232,6 @@
       "asymmetric_edge": false
     },
     {
-      "ticker": "NTAP",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-17T06:46:24.698536",
-      "asymmetric_edge": false
-    },
-    {
       "ticker": "RS",
       "verdict": "HOLD",
       "score": 60,
@@ -496,13 +489,6 @@
       "score": 63,
       "asymmetric_edge": false,
       "created_at": "2026-06-24T11:17:32.485795"
-    },
-    {
-      "ticker": "STT",
-      "verdict": "WATCH",
-      "score": 50,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-24T11:17:32.502383"
     },
     {
       "ticker": "TGT",
@@ -799,13 +785,6 @@
       "created_at": "2026-07-03T06:04:37.841457"
     },
     {
-      "ticker": "CBK.DE",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T06:05:54.923206"
-    },
-    {
       "ticker": "DBK.DE",
       "verdict": "AVOID",
       "score": 37,
@@ -916,6 +895,66 @@
       "score": 53,
       "asymmetric_edge": false,
       "created_at": "2026-07-03T10:10:50.721476"
+    },
+    {
+      "ticker": "VTRS",
+      "verdict": "HOLD",
+      "score": 59,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die hohe Verschuldung (D/E ~99,7%) und die anomalie-bedingt negative ROE mindern die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe trotz intaktem technischen Setup."
+      },
+      "created_at": "2026-07-08T06:00:01.718599"
+    },
+    {
+      "ticker": "STT",
+      "verdict": "BUY",
+      "score": 70,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Rekord-AUC/A, angehobene Guidance und ein unmittelbarer Q2-Katalysator st\u00fctzen die volle Funnel-Positionsgr\u00f6\u00dfe ohne fundamentale Einw\u00e4nde."
+      },
+      "created_at": "2026-07-08T06:00:02.717419"
+    },
+    {
+      "ticker": "NTAP",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV nahe Null (-0,3%) bedeutet keinen bewertungsseitigen Edge trotz starkem RS-Score und intaktem AI-Narrativ."
+      },
+      "created_at": "2026-07-08T06:00:03.010842"
+    },
+    {
+      "ticker": "CBK.DE",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die ungel\u00f6ste UniCredit-\u00dcbernahmesituation (Ergebnis wird just heute ver\u00f6ffentlicht) erzeugt beidseitiges Ereignisrisiko trotz fundamental g\u00fcnstiger Bewertung \u2013 halbe Positionsgr\u00f6\u00dfe bis zur Kl\u00e4rung."
+      },
+      "created_at": "2026-07-08T06:00:03.104180"
+    },
+    {
+      "ticker": "VRTX",
+      "verdict": "HOLD",
+      "score": 69,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV nahe Null (-0,8%) trotz starker fundamentaler Qualit\u00e4t und naher Katalysatoren (Povetacicept-PDUFA) \u2013 Bewertung nahe Allzeithoch tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-08T06:00:03.185340"
     }
   ]
 }
