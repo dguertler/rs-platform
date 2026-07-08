@@ -470,13 +470,6 @@
       "created_at": "2026-06-23T11:50:58.358428"
     },
     {
-      "ticker": "MS",
-      "verdict": "BUY",
-      "score": 72,
-      "asymmetric_edge": true,
-      "created_at": "2026-06-23T11:53:04.236437"
-    },
-    {
       "ticker": "SNDK",
       "verdict": "HOLD",
       "score": 56,
@@ -897,6 +890,42 @@
       "created_at": "2026-07-03T10:10:50.721476"
     },
     {
+      "ticker": "STT",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Rein technischer Dreifach-Ausbruch ohne fundamentale St\u00fctze bei gleichzeitig r\u00fcckl\u00e4ufigem Umsatz (-2,8% YoY) tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-08T05:58:48.631248"
+    },
+    {
+      "ticker": "INCY",
+      "verdict": "BUY",
+      "score": 71,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Edge von nur +3,8% bei Kurs nahe dem 52-Wochen-Hoch tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe trotz starker fundamentaler Qualit\u00e4t."
+      },
+      "created_at": "2026-07-08T05:58:48.639787"
+    },
+    {
+      "ticker": "MS",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "EV zeigt -17,0% Downside bei Kurs nahe dem 52-Wochen-Hoch und schw\u00e4chstem RS-Rang (83) der drei Ausbr\u00fcche \u2014 Chance-Risiko-Verh\u00e4ltnis rechtfertigt keinen Einstieg trotz technischem Signal."
+      },
+      "created_at": "2026-07-08T05:58:48.647807"
+    },
+    {
       "ticker": "VTRS",
       "verdict": "HOLD",
       "score": 59,
@@ -907,18 +936,6 @@
         "reason": "Die hohe Verschuldung (D/E ~99,7%) und die anomalie-bedingt negative ROE mindern die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe trotz intaktem technischen Setup."
       },
       "created_at": "2026-07-08T06:00:01.718599"
-    },
-    {
-      "ticker": "STT",
-      "verdict": "BUY",
-      "score": 70,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Rekord-AUC/A, angehobene Guidance und ein unmittelbarer Q2-Katalysator st\u00fctzen die volle Funnel-Positionsgr\u00f6\u00dfe ohne fundamentale Einw\u00e4nde."
-      },
-      "created_at": "2026-07-08T06:00:02.717419"
     },
     {
       "ticker": "NTAP",

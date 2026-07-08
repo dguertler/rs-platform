@@ -718,15 +718,30 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             cur_d_date  = _breakout_date(entry.get('ohlcv',    []), info['struct_d'])
             cur_h4_date = _breakout_date(entry.get('ohlcv_4h', []), info['struct_4h'])
 
-            # Letztes gespeichertes Signal für Vergleich der Breakout-Daten
-            last_sig = (signals.get(ticker) or [{}])[-1]
+            # Letztes gespeichertes Signal für Vergleich der Breakout-Daten.
+            # Ohne vorherige Signal-Historie für diesen Ticker gibt es keine
+            # Vergleichsbasis — dann NICHT als "frisch" werten (sonst würde
+            # jeder Ticker, der zum ersten Mal betrachtet wird, fälschlich
+            # als frischer Re-Entry gelten, nur weil last_sig leer ist).
+            ticker_signals = signals.get(ticker) or []
+            last_sig = ticker_signals[-1] if ticker_signals else {}
+            has_history = bool(ticker_signals)
 
             # Ein Teilsignal ist "frisch", wenn sein Breakout-Datum sich geändert hat
             # (Signal war weg und ist neu zurückgekommen – auch ohne messbaren 2→3-Übergang)
-            # Zusätzlich: 4H-Breakout muss aktuell sein (≤ 3 Kalendertage), sonst kein Alert.
-            w_is_fresh  = bool(info['weekly'] and cur_w_date  and cur_w_date  != last_sig.get('weekly_bar_date'))
-            d_is_fresh  = bool(info['daily']  and cur_d_date  and cur_d_date  != last_sig.get('daily_bar_date'))
-            h4_is_fresh = bool(info['h4']     and cur_h4_date and cur_h4_date != last_sig.get('h4_bar_date')
+            # Das neu erkannte Breakout-Datum muss zusätzlich aktuell sein — sonst wird
+            # jede Verschiebung des GWS-Musters durch neue Kerzen (Swing-Neuberechnung,
+            # ohne echten frischen Bruch) fälschlich als "frisch" gewertet. Weekly-Kerzen
+            # decken eine ganze Woche ab, daher dort ein größeres Zeitfenster als bei
+            # Daily/4H.
+            w_is_fresh  = bool(has_history and info['weekly'] and cur_w_date
+                               and cur_w_date  != last_sig.get('weekly_bar_date')
+                               and _is_recent(cur_w_date, max_days=7))
+            d_is_fresh  = bool(has_history and info['daily']  and cur_d_date
+                               and cur_d_date  != last_sig.get('daily_bar_date')
+                               and _is_recent(cur_d_date))
+            h4_is_fresh = bool(has_history and info['h4']     and cur_h4_date
+                               and cur_h4_date != last_sig.get('h4_bar_date')
                                and _is_recent(cur_h4_date))
 
             # Welcher Punkt ist neu hinzugekommen?
