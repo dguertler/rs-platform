@@ -1,87 +1,92 @@
 # STT — KI-Aktienbewertung
 
-**State Street Corporation** · Financial Services · 24.06.2026 · Signal: Kein GWS-Signal
+**State Street Corporation** · Financial Services · 08.07.2026 · Signal: Erstmaliger Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 168.31 |
-| Market Cap | $46.58 Mrd. |
-| Forward PE | 12.18 |
+| Kurs | 170.69 |
+| Market Cap | $47.24 Mrd. |
+| Forward PE | 12.03 |
 | Revenue (TTM) | $14.39 Mrd. |
 | Gross Margin | 0.0% |
 | ROE | 11.3% |
-| RS-Score | 66.7 |
+| RS-Score | 62.6 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
+**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $220–$260 (20 %) · Base $175–$215 (45 %) · Bear $85–$120 (35 %) · EV ~$172
+**Szenarien (12–18 Monate):** Bull $210–$250 (20 %) · Base $175–$200 (50 %) · Bear $110–$140 (30 %) · EV ~$177
 
 ## 1. INVESTMENT-CASE
 
-State Street ist der zweitgrößte globale Vermögensverwahrer der Welt (nach BNY Mellon) — ein strukturell defensives, aber wachstumslimitiertes Geschäftsmodell. Der Investment-Case dreht sich nicht um Wachstum, sondern um Kapitalrückführung und Bewertungsnormalisierung: State Street handelt bei Forward-PE ~12,6x und P/B ~1,9x in einem Umfeld, in dem das Zinsniveau die NIM-Ausweitung ermöglicht, Ausschüttungen attraktiv sind und AUM-Volumina durch Marktperformance steigen. Der kritische Punkt: Revenue fiel -2,8 % YoY, der Analyst-Konsens $161,18 liegt deutlich unter dem aktuellen Kurs $173,73. Der Markt preist aktuell einen optimistischeren Ausblick als die Coverage — das ist ein Warnzeichen.
+DATENLAGE: Fundamental-Snapshot vom 06.07.2026 (Kurs $170,69) liegt vor der jüngsten Kursbewegung — der zuletzt gehandelte Kurs (4H-Kerze, 07.07.2026) steht bei $182,48, eine Abweichung von +6,9%. Konfidenz der Bewertungsaussagen reduziert. State Street hat gestern alle drei GWS-Signale (Weekly, Daily, 4H) gebrochen und schiebt sich mit RS-Score 62,6 (Rang 32 im S&P 500) in ein technisches Momentum-Setup, das fundamental nicht eindeutig gedeckt ist: Revenue TTM $14,39 Mrd. ist YoY leicht rückläufig (-2,8%). Der eigentliche Kern der Story ist nicht Wachstum, sondern Bilanz-Hebel und Kapitalrückführung — Buybacks und die schrittweise Skalierung der State-Street-Alpha-Plattform (Front-to-Back-Technologie für institutionelle Asset Owner) sollen EPS auch bei stagnierendem Umsatz steigern. Der Markt preist aktuell primär den technischen Ausbruch, nicht eine fundamentale Trendwende. Was der Markt womöglich übersieht: Ein Nettozinsertrag (NII), der bei sinkenden Leitzinsen strukturell unter Druck gerät, während Gebühreneinnahmen aus Custody/AUC-A vom passiven ETF-Trend (SPDR/SPY) weiter komprimiert werden.
 
 ## 2. GESCHÄFTSMODELL
 
-- Custody & Administration: ~45 % Revenue — Verwahrung und Settlement globaler Wertpapiere; $44+ Billionen AUC (Assets under Custody) als Skala-Moat; extreme Switching Costs
-- Investment Management (SSGA): ~20 % Revenue — drittgrößter ETF-Anbieter weltweit (SPDR-ETFs, S&P 500-ETF); strukturell wachsendes Segment durch Passiv-Megatrend
-- Fee Income: Transaktions- und Verwaltungsgebühren; relativ stabil, kaum konjunkturabhängig
-- Net Interest Income: Kurzfristig von Zinsniveau abhängig — bei Zinssenkungen Gegenwind
-- Revenue -2,8 % YoY: wahrscheinlich NIM-Kompression durch Einlagemix-Verschiebung; keine positive Entwicklung
-- ROE 11,3 % — angemessen für einen Custody-Bank-Typ, aber unter Peer-Spitzenwerten
-- Kein FCF verfügbar (Bank-Struktur); Kapitaladäquanz und CET1-Ratio relevanter als FCF
+- Custody- und Asset-Servicing-Gebühren (AUC/A) als Kerngeschäft — Skaleneffekt, aber strukturell sinkende Basis-Punkte durch Wettbewerb (BNY, Northern Trust, JPMorgan)
+- Asset Management über State Street Global Advisors (SPDR-ETF-Familie inkl. SPY) — Gebühren pro AUM sinken sekulär, Volumen kompensiert nur teilweise
+- Nettozinsertrag (NII) aus Einlagen-/Wertpapierbuch — größter Ergebnistreiber, direkt sensitiv auf den Fed-Zinspfad
+- State Street Alpha: Front-to-Back-Plattform für institutionelle Investoren — struktureller Wachstums- und Margenhebel, aber noch früher Skalierungsstatus
+- FX-Handel und Wertpapierleihe als margenstarke Nebenerträge, volatil mit Marktaktivität
+- Kostendisziplin/Personalabbau als kurzfristiger Margentreiber bei stagnierendem Umsatz
+- Als G-SIB (Global Systemically Important Bank) strengeren Kapitalanforderungen unterworfen — begrenzt Kapitalrückführungs-Spielraum je nach CCAR-Ergebnis
+- Dividendenrendite 1,97% mit Buyback-Programm als Kapitalrückführungs-Hebel
 
 ## 3. BULL CASE
 
-Federal Reserve pausiert Zinssenkungen länger als erwartet — NIM bleibt erhöht. SSGA-ETF-Flüsse beschleunigen durch globale Passiv-Allokation. Aktienrückkaufprogramm wird ausgedehnt. Strukturelle Margennachhaltigkeit: SSGA-ETF-Skalierung + Custody-Sticky-Deposits erzeugen langfristig stabile Fee-Ströme — auf Datenbasis gut belegbar. Annahme (kein Konsens): FY27 EPS $18 × 14x = $252. Bull-Kursziel: $220–$260 (Midpoint $240). Eintrittswahrscheinlichkeit: 20 %.
+Fed-Zinspfad stabilisiert sich auf erhöhtem Niveau, NII hält sich besser als vom Markt erwartet; State Street Alpha gewinnt mehrere Großmandate und beschleunigt das Servicing-Fee-Wachstum; aggressive Buybacks reduzieren die Aktienzahl weiter. Annahme (kein Konsens): FY27-EPS ~$16,50 × 14x Forward-Multiple (Re-Rating durch Wachstumsrückkehr) = $231. Kursziel: $210–$250 (Midpoint $230). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Revenue stabilisiert sich auf NIM-Normalisierungsebene; AUM-Wachstum durch Marktperformance +5–8 %. Aktienrückkäufe reduzieren Aktienanzahl ~3 %/Jahr. EPS wächst moderat. Annahme (kein Konsens): FY27 EPS $15 × 13x = $195. Base-Kursziel: $175–$215 (Midpoint $195). Eintrittswahrscheinlichkeit: 45 %.
+Wahrscheinlichstes Szenario: Umsatz stabilisiert sich nahe der Nulllinie, EPS-Wachstum kommt fast ausschließlich aus Buybacks und Kostendisziplin, nicht aus organischem Wachstum. Multiple hält sich nahe dem aktuellen Forward-PE-Niveau. Annahme (kein Konsens): FY27-EPS ~$15,00 × 12,5x = $187,50. Kursziel: $175–$200 (Midpoint $187,50). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Zinssenkungszyklus beschleunigt sich, NIM bricht ein; gleichzeitig AUM-Rückgang durch Marktkorrektur -20 %+. Revenue fällt weiter -5 bis -10 % YoY. Kundenkonzentration: Top-Custody-Kunden (Staatsfonds, große Pensionskassen) nicht quantifizierbar aus vorliegenden Daten — Kundenverlust an Konkurrenz (BNY Mellon) nicht ausgeschlossen. Geopolitik/Exportkontrollen: State Street operiert global — geopolitische Spannungen können Transaktionsvolumina dämpfen. Lieferkette: Technologie-Infrastruktur-Abhängigkeiten; Core-Banking-System-Migrationen historisch kostspielig. Verwässerung: Aktienanzahl-Trend nicht im Datensatz; Aktienrückkäufe sind die wahrscheinlichere Richtung. Regulierung: Basel IV / Eigenkapitalanforderungen könnten Kapitalpuffer erhöhen, Rendite senken. Annahme: FY27 EPS $10 × 10x = $100. Bear-Kursziel: $85–$120 (Midpoint $102,50). Eintrittswahrscheinlichkeit: 35 %.
+Auslöser: Leitzinssenkungen beschleunigen sich, NII bricht stärker ein als modelliert, gleichzeitig setzt sich der AUC/A-Gebühren-Kompressionstrend fort und die State-Street-Alpha-Skalierung enttäuscht. Kundenkonzentration: auf Datenbasis nicht beurteilbar — die Custody-Kundenbasis ist laut Geschäftsmodell breit über institutionelle Asset Owner gestreut, konkrete Konzentrationszahlen liegen nicht vor. Geopolitik/China-Exposure: global agierende Custody-Bank mit Verwahrstellen-Präsenz auch in Asien — auf Datenbasis nicht quantifizierbar, Einschätzung: moderat, kein Kernrisiko. Lieferketten-/Foundry-Abhängigkeit: nicht anwendbar (Finanzdienstleister). Verwässerung: SBC/Aktienanzahl-Trend nicht im Datensatz — historisch nettoreduzierend durch Buybacks, hier nicht verifiziert. Regulierung: G-SIB-Status mit CCAR-Stresstests und potenziell verschärften Basel-III-Endgame-Kapitalanforderungen ist ein reales, quantifizierbares Risiko für die Kapitalrückführung. Annahme: FY27-EPS ~$12,50 × 10x = $125. Kursziel: $110–$140 (Midpoint $125). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 20 % + 45 % + 35 % = 100 %**
+**Summe: 20% + 50% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,20 × $240 + 0,45 × $195 + 0,35 × $102,50 = $48 + $87,75 + $35,88 = **~$171,63 — implizites Downside vs. aktuellem Kurs ($173,73): −1,2 %.** EV-Punkte: >−10 %.
+**Erwartungswert:** EV = 0,20 × $230 + 0,50 × $187,50 + 0,30 × $125 = $46 + $93,75 + $37,50 = **~$177 — implizites Downside vs. aktuellem Kurs ($182,48): −3,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 11,3 % — akzeptabel für Custody-Bank, unter Investment-Banking-Peers. Operating Margin 27,8 % — solide. Net Margin 21,3 % — stabil. FCF nicht verfügbar (bankspezifisch). Revenue -2,8 % YoY ist ein echter Qualitätsmangel — Topline-Momentum fehlt. Bilanz: D/E nicht verfügbar; für Banken sind CET1 und LCR die relevanten Kennzahlen (nicht im Datensatz). Dividende 2,0 % — gesunde Ausschüttung bei solider Kapitalstruktur.
+ROE 11,3% ist für eine Verwahrstellen-Bank solide, aber nicht herausragend im Bankensektor-Vergleich. Operating Margin 27,8%, Profit Margin 21,3% — stabil, aber nicht expandierend bei rückläufigem Umsatz. Gross Margin wird mit 0,0% ausgewiesen — Datenanomalie: Banken/Verwahrstellen weisen keine klassische COGS-Struktur aus, die Kennzahl ist für dieses Geschäftsmodell nicht aussagekräftig und wird hier nicht weiter verwendet. Free Cashflow nicht verfügbar (N/A) — die Bewertung stützt sich stattdessen auf EPS/Gewinnqualität. Der eigentliche Burggraben liegt in Skaleneffekten und Wechselkosten institutioneller Custody-Mandate (hohe Umstellungskosten) — strukturell real, aber durch sinkende Gebührensätze pro AUC/A-Einheit zunehmend erodiert.
 
-## 7. BEWERTUNG
+## 7. BEWERTUNG (vorläufig, Datenstand)
 
-Forward-PE ~12,6x (aktueller Kurs $173,73) — fair für eine Custody-Bank ohne Wachstum. P/B 1,93x — leicht über 2x würde historisch teuer signalisieren; aktuell noch fair. Was preist der Kurs ein? Bei $173,73 und Revenue $14,4 Mrd. impliziert der Kurs P/S ~3,2x — für einen Fee-basierten Finanzdienstleister angemessen. Analyst-Konsensziel $161,18 liegt -7 % unter aktuellem Kurs — Konsens ist skeptischer als der Markt. Rückrechnung: Aktueller Kurs impliziert EPS ~$13,80 Forward — erreichbar bei Margenstabilität, aber Revenue-Rückgang macht dies ambitioniert.
+Forward-PE 12,0x (Snapshot-Basis) ist im historischen Bankensektor-Kontext moderat, nicht günstig genug um eine reine Value-Position angesichts des Umsatzrückgangs zu rechtfertigen. Price-to-Book 1,96x liegt über dem Bankensektor-Median — der Markt zahlt eine Prämie für Custody-Skalierung, nicht für Wachstum. Rückrechnung: Bei $182,48 und impliziertem Forward-EPS ~$14,19 (Snapshot-Basis) preist der Kurs ein Forward-PE von ~12,9x ein — plausibel bei stabilen Zinsen, ambitioniert falls NII unter Druck gerät. Analyst-Konsensziel $171,32 liegt unter dem aktuellen Kurs — Coverage hat den jüngsten technischen Ausbruch noch nicht nachvollzogen; als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 67, Rang 27 S&P 500. 6M: +29,2 % — gutes Momentum. Near 52-Wochen-Hoch ($174,66). Über Analyst-Konsens — der Markt ist bullisher als Coverage. Hypothese, nicht datenbasiert: institutionelle Positionierung durch Finanz-Sektorfonds und Zinsnormalisierungs-Plays hat STT nach oben getragen. Enttäuschungsrisiko: Revenue-Wachstum bleibt aus, Analystenrevision nach unten.
+RS-Score 62,6 (Rang 32 von ~500) zeigt einen soliden, aber nicht außergewöhnlichen relativen Momentum-Status — kein Top-20-Titel. 5T +6,6%, 10T +2,2%: kurzfristige Beschleunigung nach dem GWS-Ausbruch. Hypothese, nicht datenbasiert: Der Ausbruch wirkt wie ein technischer Nachzieheffekt im Finanzsektor, nicht wie eine fundamentale Neubewertung — institutionelles Interesse dürfte zunächst abwartend bleiben, bis NII-Trends im nächsten Quartalsbericht Klarheit bringen. Enttäuschungsrisiko: hoch, falls der nächste Zinsentscheid NII-Druck bestätigt.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 67, Rang 27. 5T: +3,4 %, 10T: +6,7 %, 20T: +11,6 %, 50T: +15,7 %, 6M: +29,2 %. Momentum vorhanden aber nicht beschleunigend. Beta 1,45 — überdurchschnittliche Marktvolatilität. 52-Wochen-Hoch $174,66 praktisch erreicht — technischer Widerstand unmittelbar. Technisches Warnsignal: Rückfall unter $155 würde Trend infrage stellen.
+Alle drei GWS-Ebenen aktiv: Weekly-GWS bei $132,45 (deutlich überwunden), Daily-GWS bei $174,59, 4H-GWS bei $172,32 — Kurs $182,48 klar darüber, sauberer Dreifach-Ausbruch. 20T +10,4%, 50T +15,2% zeigen eine breite Aufwärtsstruktur, nicht nur einen Tagesspike. Momentum wirkt technisch sauber, fundamental aber nicht eindeutig gestützt (siehe Investment-Case). Warnsignal: Rückfall unter Daily-GWS $174,59 würde den Ausbruch technisch invalidieren.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($280–$380):** SSGA-ETF-Marktanteil wächst weiter; AI-gestützte Custody-Effizienz; NIM normalisiert auf höherem Niveau. EPS $22+ × 14x.
+**Bull ($260–$320):** State Street Alpha erreicht kritische Skalierung, gewinnt Marktanteile von BNY/Northern Trust, Buybacks reduzieren die Aktienzahl kumulativ deutlich, das NII-Umfeld bleibt günstig.
 
-**Base ($120–$200):** Stabile aber wachstumsschwache Custody-Franchise; EPS $12–$15 × 12x.
+**Base ($190–$230):** Umsatz wächst niedrig-einstellig, EPS-Wachstum bleibt buyback-getrieben, das Multiple bleibt stabil.
 
-**Bear ($55–$90):** Zinssenkungszyklus + AUM-Einbruch + Regulierungskosten. EPS <$8 × 9x.
+**Bear ($90–$130):** Strukturelle Gebührenkompression setzt sich fort, NII bricht in einem Niedrigzins-Regime ein, Marktanteilsverluste an Wettbewerber.
 
-Entscheidende Variable: Zinspfad der Federal Reserve und globale Aktienmarkt-Bewertungsniveaus.
+Entscheidende Variable: Erfolg der State-Street-Alpha-Skalierung und der Zinspfad der Fed.
 
 ## 11. PROFI-FAZIT
 
-State Street ist ein qualitativ solides Custody-Bank-Franchise mit überschaubarem Wachstum und auskömmlicher Dividende — kein Wachstumstitel. Auf aktuellem Niveau ($173,73) notiert die Aktie über dem Analyst-Konsens und am 52-Wochen-Hoch. Der eigene Erwartungswert (~$172) impliziert minimales Downside, aber auch kaum Upside. Für einkommensorientierte Investoren mit Zinssensitivität ist das Profil unattrattiv geworden. Für zyklische Bankenrotaltion interessant, wenn Revenue wieder wächst — aktuell kein klarer fundamentaler Treiber sichtbar. Peer-Vergleich: **BNY Mellon (BK)** und **Northern Trust (NTRS)** sind direkte Custody-Konkurrenten; **BlackRock (BLK)** für den ETF-/Asset-Management-Aspekt. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+STT ist kein High-Conviction-Momentum-Play und kein klassischer Compounder — der technische Dreifach-Ausbruch trifft auf eine Aktie mit rückläufigem Umsatz und einer EV-Rechnung ohne asymmetrischen Edge (−3,0%). Am ehesten ein zyklischer Trading-Trade für Investoren, die auf NII-Stabilisierung und Alpha-Plattform-Fortschritt setzen — mit strikter Stop-Disziplin unterhalb des Daily-GWS ($174,59). Für Buy-and-Hold-Investoren ohne klaren fundamentalen Trigger nicht überzeugend. Positionsgröße: max. 2% eines diversifizierten Portfolios angesichts der reduzierten Datenkonfidenz.
+
+**Bank of New York Mellon (BK)** und **Northern Trust (NTRS)** sind die reineren Custody-Peers — Peer-Multiples nicht im Datensatz enthalten, relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 2/5
 - Bewertung: 3/5
 - Katalysator: 2/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Rein technischer Dreifach-Ausbruch ohne fundamentale Stütze bei gleichzeitig rückläufigem Umsatz (-2,8% YoY) trägt keine volle Positionsgröße.
 
 
 ---
@@ -92,7 +97,7 @@ State Street ist ein qualitativ solides Custody-Bank-Franchise mit überschaubar
 | Wachstum | 2/5 |
 | Bewertung | 3/5 |
 | Katalysator | 2/5 |
-| EV-Upside | +6.5% |
+| EV-Upside | +5.9% |
 
 **Verdict: WATCH (50/100)**
 
