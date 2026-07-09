@@ -736,13 +736,6 @@
       "created_at": "2026-07-02T06:39:12.922663"
     },
     {
-      "ticker": "VLO",
-      "verdict": "WATCH",
-      "score": 40,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.931019"
-    },
-    {
       "ticker": "BEN",
       "verdict": "WATCH",
       "score": 41,
@@ -972,6 +965,42 @@
         "reason": "EV nahe Null (-0,8%) trotz starker fundamentaler Qualit\u00e4t und naher Katalysatoren (Povetacicept-PDUFA) \u2013 Bewertung nahe Allzeithoch tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-08T06:00:03.185340"
+    },
+    {
+      "ticker": "MPC",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Rechnung zeigt nach dem Kurssprung \u00fcber das alte 52-Wochen-Hoch keinen Edge mehr, die technische St\u00e4rke bleibt aber intakt."
+      },
+      "created_at": "2026-07-09T14:14:01.103143"
+    },
+    {
+      "ticker": "VLO",
+      "verdict": "WATCH",
+      "score": 41,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "EV-Rechnung ergibt nach dem j\u00fcngsten Kurssprung \u00fcber das alte 52-Wochen-Hoch ein negatives Chance-Risiko-Verh\u00e4ltnis, zus\u00e4tzlich best\u00e4tigt durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-07-09T14:14:01.113914"
+    },
+    {
+      "ticker": "FME.DE",
+      "verdict": "HOLD",
+      "score": 59,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die FME27-Margenerholung ist real und im Trend, aber ohne akutes GWS-Signal fehlt der unmittelbare technische Ausl\u00f6ser f\u00fcr volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-09T14:14:01.123971"
     }
   ]
 }
