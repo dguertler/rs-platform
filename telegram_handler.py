@@ -4,7 +4,7 @@ telegram_handler.py – Telegram-Benachrichtigungen für RS-Platform
 Wird von check_alerts.py, check_4h_reentry.py und check_earnings.py
 importiert. Sendet:
   - Foto-Album mit Charts (Weekly, Daily, 4H) — zuerst
-  - Textnachricht (HTML-formatiert) mit Ticker-Info, Dots, Links, News, Analyse-Link
+  - Textnachricht (HTML-formatiert) mit Ticker-Info, Dots, Links, Analyse-Link
 """
 
 import base64
@@ -179,22 +179,6 @@ def fetch_recipient_tokens():
     return _recipient_tokens_cache
 
 
-def _news_lines(news, max_specific=3, max_general=2):
-    """Formatiert News-Links als HTML-Zeilen."""
-    if not isinstance(news, dict):
-        return ''
-    specific = (news.get('specific') or [])[:max_specific]
-    general  = (news.get('general')  or [])[:max_general]
-    lines = []
-    for n in specific:
-        title = _esc(n.get('title', '')[:80])
-        lines.append(f'📰 <a href="{n["url"]}">{title}</a>')
-    for n in general:
-        title = _esc(n.get('title', '')[:80])
-        lines.append(f'📄 <a href="{n["url"]}">{title}</a>')
-    return ('\n' + '\n'.join(lines)) if lines else ''
-
-
 def _analyse_link(display_ticker, auth=None):
     """Gibt einen HTML-Link zur KI-Analyse zurück, oder ''."""
     if not _base_url():
@@ -274,7 +258,6 @@ def send_breakout_telegram(token, chat_id, alert):
         f'RS-Score: <b>{score_str}</b>\n'
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
     )
-    news = _news_lines(alert.get('news'))
 
     tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
@@ -283,7 +266,6 @@ def send_breakout_telegram(token, chat_id, alert):
         text = (
             header
             + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
-            + news
             + _analyse_link(display, auth)
         )
         _send_charts(token, cid, charts)
@@ -336,7 +318,6 @@ def send_earnings_telegram(token, chat_id, alert):
         f'{rev_line}{eps_line}\n'
         f'RS-Score: <b>{score_str}</b>\n'
     )
-    news = _news_lines(alert.get('news'))
 
     tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
@@ -345,7 +326,6 @@ def send_earnings_telegram(token, chat_id, alert):
         text = (
             header
             + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
-            + news
             + _analyse_link(display, auth)
         )
         _send_charts(token, cid, charts)
