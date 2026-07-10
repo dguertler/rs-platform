@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>JPM — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>JPM</h1>
+      <h2>JP Morgan Chase & Co.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Banks - Diversified</span></div>
+        <div class="mi">MCap: <span>$896B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">61</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">0.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$334.47</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$173.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">179.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">16.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-2.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">400–450</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">320–355</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">195–235</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $400–$450 (20 %) · Base $320–$355 (45 %) · Bear $195–$235 (35 %) · EV ~$312</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>JPMorgan Chase ist die größte US-Bank nach Bilanzsumme, diversifiziert über Konsumbanking, Investmentbanking, Asset-/Wealth-Management und Firmenkundengeschäft. Das Umsatzwachstum von 12,7 % YoY ist für eine Großbank dieser Größenordnung stark und reflektiert sowohl Nettozinserträge im aktuellen Zinsumfeld als auch solides Gebührengeschäft (Trading, Investmentbanking, Asset Management). Der Kurs notiert nahe den 52-Wochen-Hochs (−2,6 %), das 6-Monats-Fenster ist jedoch mit −5,41 % negativ — dies spiegelt sektorweite Volatilität um Zinspfad-Unsicherheit und Kreditzyklus-Sorgen wider, nicht eine JPM-spezifische Schwäche. Wichtig: Bruttomarge, Free Cashflow und Debt/Equity sind für Banken strukturell nicht aussagekräftig im klassischen Sinne — diese Felder werden hier bewusst nicht interpretiert, sondern als für das Geschäftsmodell nicht anwendbar gekennzeichnet.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Diversifiziertes Großbank-Modell über Konsumbanking, Investmentbanking, Handel, Vermögensverwaltung und Firmenkunden</li>
+<li>Nettozinserträge als Kernertragsquelle, direkt zinsumfeldabhängig</li>
+<li>Gebührenbasierte Erträge (Trading, M&A-Beratung, Underwriting, Asset Management) diversifizieren die Ertragsbasis gegenüber reinen Zinserträgen</li>
+<li>Skalenvorteile und Markenvertrauen als struktureller Moat gegenüber kleineren Regionalbanken</li>
+<li>G-SIB-Status (Systemrelevanz) bedeutet strengere Kapitalanforderungen, aber auch strukturellen Vertrauensvorteil bei Kunden</li>
+<li>Umsatz TTM $173,56 Mrd., Wachstum +12,7 % YoY — stark für eine Bank dieser Größenordnung</li>
+<li>Historisch aktienrückkauf-intensives Kapitalrückführungsmodell reduziert die Aktienanzahl strukturell</li>
+<li>Regulatorischer Rahmen (Basel-III-Endgame, CCAR-Stresstests) als struktureller, dauerhafter Kostenfaktor</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Nettozinserträge profitieren von einer steileren Zinsstrukturkurve, Investmentbanking-/Handelserträge beschleunigen sich durch Kapitalmarktbelebung, Kreditkosten bleiben moderat. Annahme (kein Konsens): FY27-EPS ~$27,50 × 15,5x = $426. Bull-Kursziel: $400–$450 (Mittelpunkt $425). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Stetige Nettozinserträge, moderates Gebührenwachstum, Kreditkosten normalisieren sich leicht. Annahme (kein Konsens): FY27-EPS ~$25,00 × 13,5x = $337,50. Base-Kursziel: $320–$355 (Mittelpunkt $337,50). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der Kreditzyklus dreht (Verschlechterung bei Konsumenten-/Firmenkrediten), die Nettozinsmarge komprimiert sich, da die Zinsen schneller fallen als erwartet, Kapitalmarktaktivität verlangsamt sich. Kundenkonzentration: hochdiversifiziert über Millionen Retail-/Firmenkunden, geringes direktes Konzentrationsrisiko, wenn auch großes institutionelles Kontrahentenrisiko besteht (aus den Daten nicht quantifizierbar). Geopolitik: globale Markt-Exposure bedeutet, dass Makro-/geopolitische Schocks Handelserträge und Kreditrisiko breit beeinflussen. Lieferketten: nicht anwendbar (Finanzdienstleistungen, keine physische Lieferkette). Verwässerung: nicht gegeben, Großbanken kaufen historisch Aktien zurück statt zu verwässern. Regulierung: sehr erheblich — Basel-III-Endgame-Kapitalanforderungen, CCAR-Stresstests und laufende regulatorische Aufsicht als systemrelevante Bank sind ein strukturelles, dauerhaftes Risiko speziell für JPM als größte US-Bank. Annahme: FY27-EPS ~$19,50 × 11x = $214,50. Bear-Kursziel: $195–$235 (Mittelpunkt $215). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $425 + 0,45 × $337,50 + 0,35 × $215 = $85 + $151,875 + $75,25 = **~$312,1 — implizites Downside vs. aktuellem Kurs ($334,47): −6,7 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 16,47 % — stark und konsistent für eine Bank dieser Größenordnung, spiegelt echte operative Exzellenz und diversifizierte Ertragsströme wider (Nettozinserträge plus Gebührenerträge über mehrere Geschäftsbereiche) — ein echter struktureller Moat (Skalierung, Markenvertrauen, Diversifikation), wenn auch inhärent zins-/kreditzyklussensitiv. Operative Marge 43,7 %, Nettomarge 33,9 % beide stark für den Sektor. Bruttomarge, FCF und Debt/Equity sind für Banken strukturell nicht aussagekräftig und werden hier bewusst nicht bewertet.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 14,1x, Trailing-PE 16,0x, Price/Book 2,61x — alle moderat für die qualitativ hochwertigste Großbank der USA, mit einer Prämie gegenüber Peers (eine vom Markt historisch für JPM gewährte Qualitätsprämie), aber in absoluten Zahlen nicht überdehnt. Rückrechnung: Bei $334,47 und einem banksektor-typischen Multiple von 13x müsste das Forward-EPS bei $25,73 liegen — moderat (~8 %) über der aktuellen Konsensschätzung von $23,77. Das deutet darauf hin, dass der aktuelle Kurs eine moderate Prämie für anhaltende Ausführungsstärke einpreist — plausibel angesichts JPMs Erfolgsbilanz, aber nicht risikofrei angesichts der Zins-/Kreditzyklus-Sensitivität.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score praktisch neutral (0,29, Rang 145 von 500), Kurs nahe den 52-Wochen-Hochs, aber 6-Monats-Rendite negativ (−5,41 %) — dies spiegelt eher breite Bankensektor-Volatilität um Zinserwartungen und Kreditzyklus-Sorgen wider als JPM-spezifische Schwäche. Der Analysten-Konsens ($344,71, Buy) liegt moderat über dem aktuellen Kurs und bietet etwas Sell-Side-Unterstützung. Short-Float-Daten nicht verfügbar.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Gemischte kurzfristige Signale (5T −0,06 %, 10T −1,97 %, aber 20T +5,2 %) deuten auf eine wechselhafte Konsolidierung knapp unter den 52-Wochen-Hochs hin, statt auf einen klaren Trend in eine Richtung. Ein Rückfall unter die $300-Zone (~−10 %) wäre die erste technische Warnung; ein nachhaltiger Anstieg über $343 (nahe Allzeithoch) würde erneuerte Stärke bestätigen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($400–$470):** Anhaltende Nettozinsmargenstärke plus Investmentbanking-/Handelsertragswachstum plus fortgesetzte Marktanteilsgewinne im Wealth Management treiben das EPS Richtung $32–35 bei einem Prämien-Multiple von 14–15x.</p>
+<p>**Base ($300–$380):** Stetiges Wachstum im mittleren einstelligen bis niedrigen zweistelligen Bereich über einen normalen Zins-/Kreditzyklus, Multiple bleibt bei 12–14x.</p>
+<p>**Bear ($200–$280):** Der Kreditzyklus verschlechtert sich deutlich (Rezessionsszenario), die Nettozinsmarge komprimiert sich, Rückstellungen für Kreditverluste steigen stark, Multiple komprimiert auf 9–11x.</p>
+<p>Entscheidende Variable: Verlauf des Zins-/Kreditzyklus und Kapitalmarktaktivität.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>JPMorgan ist der Qualitäts-Maßstab unter den Großbanken — ein Buy-and-Hold-Compounder für konservative, diversifizierte Portfolios, kein Momentum- oder Trading-Play. Die Bewertung ist moderat, aber nicht spektakulär günstig; der EV zeigt ein leichtes Downside (−6,7 %), was für Geduld statt Eile bei Neupositionen spricht. Für langfristig orientierte Qualitäts- und Dividendeninvestoren gut geeignet; die Positionsgröße kann für einen defensiven Kernwert überdurchschnittlich sein. Peers: **Bank of America (BAC)** mit ähnlicher Skalierung, oft günstiger bewertet, **Goldman Sachs (GS)** stärker kapitalmarktfokussiert mit höherer Volatilität. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Hohe fundamentale Qualität und moderate Bewertung stützen die volle Positionsgröße als defensiven Kernwert.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EBAY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>EBAY</h1>
+      <h2>eBay Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Internet Retail</span></div>
+        <div class="mi">MCap: <span>$51B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">36.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$114.84</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">71.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">108.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">42.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">140–165</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">105–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">65–85</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $140–$165 (20 %) · Base $105–$130 (45 %) · Bear $65–$85 (35 %) · EV ~$109</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>eBay galt lange als Ex-Growth-Compounder mit Umsatzwachstum im niedrigen einstelligen Bereich — die aktuellen +19,5 % YoY sind daher eine echte Anomalie, die im Investment-Case benannt werden muss: Die Ursache (Werbegeschäft/Promoted Listings, Fokuskategorien wie Sammlerstücke/Luxus, oder Reklassifizierungseffekte) lässt sich aus den vorliegenden Daten nicht abschließend auflösen. Die zentrale Frage für die nächsten 2–3 Quartale ist, ob diese Beschleunigung strukturell (Ads-Mix-Shift) oder temporär ist. Der Kurs ist in 6 Monaten um 14,8 % gestiegen und notiert nur 3,7 % unter dem 52-Wochen-Hoch — der Analysten-Konsens (Hold, $108,20) liegt jedoch unter dem aktuellen Kurs, die Sell-Side hat die Reakzeleration noch nicht vollständig eingepreist oder hält sie für nicht nachhaltig.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Marktplatz-Kernmodell (Gebühren auf GMV) ergänzt um schnell wachsendes Werbegeschäft (Promoted Listings) mit strukturell höherer Marge</li>
+<li>Fokuskategorien (Sammlerstücke, Teile & Zubehör, Luxusgüter) als Differenzierung gegenüber generischen Marktplätzen</li>
+<li>Authentifizierungsdienste (z. B. für Luxusgüter/Sneaker) als Vertrauens- und Differenzierungshebel</li>
+<li>Aggressive Aktienrückkäufe reduzieren die Eigenkapitalbasis strukturell (siehe Bewertungskennzahlen unten)</li>
+<li>Umsatz TTM $11,60 Mrd., Wachstum +19,5 % YoY — deutlich über dem historischen eBay-Trend, Ursache nicht abschließend auflösbar</li>
+<li>Cross-Border-Handel bringt FX- und Zollrisiken mit sich</li>
+<li>Free Cashflow $1,20 Mrd. bei 10,3 % FCF-Marge — moderat für ein Plattformgeschäft</li>
+<li>Kein physisches Lieferketten-Risiko, da reines Plattformmodell ohne eigene Lagerhaltung</li>
+</ul>
+<p>**Kennzahl-Anomalie:** ROE (42,9 %), Debt/Equity (163,3x) und Price/Book (11,6x) sind primär Folge der aggressiven Aktienrückkäufe, die die Eigenkapitalbasis reduziert haben — nicht Ausdruck außergewöhnlicher operativer Kapitalrendite. Diese Kennzahlen werden hier nicht als alleinige Qualitätsindikatoren verwendet; stattdessen dient die FCF-Marge als unverzerrte Referenz.</p>
+<h3>3. BULL CASE</h3>
+<p>Werbegeschäft skaliert weiter, GMV stabilisiert sich über Fokuskategorien, die Wachstumsbeschleunigung erweist sich als strukturell. Annahme (kein Konsens): FY27-EPS ~$8,00 × 19x = $152. Bull-Kursziel: $140–$165 (Mittelpunkt $152,50). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum normalisiert graduell Richtung historischer Trendrate, Ads-Mix stützt die Marge. Annahme (kein Konsens): FY27-EPS ~$7,30 × 16x = $116,80. Base-Kursziel: $105–$130 (Mittelpunkt $117,50). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Wachstumsbeschleunigung erweist sich als temporär/einmalig, GMV-Wachstum stagniert erneut im Wettbewerb mit Temu/Shein/Amazon-Marktplatz. Kundenkonzentration: breite Käufer-/Verkäuferbasis, geringes Einzelkundenrisiko. Geopolitik: grenzüberschreitender Handel ist Zoll- und Wechselkursrisiken ausgesetzt (relevant angesichts globaler Handelsspannungen). Lieferketten: nicht anwendbar (reines Plattformmodell). Verwässerung: nicht gegeben, Rückkäufe reduzieren die Aktienanzahl. Regulierung: EU-Plattformregulierung (DMA/DSA), Verbraucherschutz- und Fälschungshaftungsrisiken sind real. Annahme: FY27-EPS ~$5,80 × 13x = $75,40. Bear-Kursziel: $65–$85 (Mittelpunkt $75). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $152,50 + 0,45 × $117,50 + 0,35 × $75 = $30,50 + $52,875 + $26,25 = **~$109,6 — implizites Downside vs. aktuellem Kurs ($114,84): −4,6 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge 71,8 %, operative Marge 23,1 % — solide für einen reifen Marktplatz. ROE (42,9 %) ist wie beschrieben buyback-verzerrt und wird hier nicht als Kapitaleffizienz-Beweis gewertet; die FCF-Marge von 10,3 % (FCF $1,20 Mrd. / Umsatz $11,60 Mrd.) ist die belastbarere Referenz und zeigt solide, aber nicht außergewöhnliche Kapitaleffizienz. Debt/Equity 163x ist hoch, aber angesichts der stabilen FCF-Generierung tragbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 17,0x ist für einen Titel mit niedrigem zweistelligem Wachstum angemessen; Trailing-PE 26,5x spiegelt die bereits laufende Neubewertung wider. Rückrechnung: Bei $114,84 und einem Multiple von 15x für einen reifen Marktplatz müsste das Forward-EPS bei $7,66 liegen — 13 % über der aktuellen Schätzung ($6,76). Das ist plausibel, wenn die Wachstumsbeschleunigung anhält, ambitioniert, falls das Wachstum auf das historische Mittel zurückfällt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 36,1 (Rang 30 im NASDAQ-100), Kurs +14,8 % über 6 Monate, nahe dem 52-Wochen-Hoch. Der Analysten-Konsens (Hold, $108,20) liegt unter dem aktuellen Kurs — entweder hat die Sell-Side die Reakzeleration noch nicht eingepreist, oder sie hält sie für nicht nachhaltig (Hypothese, nicht datenbasiert). Short-Float-Daten nicht verfügbar.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>5T +0,67 %, 10T +7,68 %, 20T +5,88 %, 50T +7,12 %, 6M +14,77 % — ein stetiger, gleichmäßiger Aufwärtstrend ohne parabolische Spitzen, deutlich weniger überhitzt als andere Titel dieses Screenings. Ein Rückfall unter die $105–108-Zone (~−7–8 %) wäre die erste technische Warnung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($150–$190):** Werbe-/Marktplatz-Dienstleistungs-Mix verschiebt sich strukturell zugunsten höherer Margen, GMV-Wachstum hält sich über Fokuskategorien und internationale Expansion im mittleren Zehnerbereich.</p>
+<p>**Base ($95–$135):** Wachstum normalisiert auf niedrigen einstelligen Bereich, Multiple pendelt sich im reifen Marktplatz-Band (14–16x) ein.</p>
+<p>**Bear ($55–$85):** Wettbewerbsdruck durch Temu/Shein/Amazon-Marktplatz erodiert GMV-Anteil, Wachstum fällt auf niedrigen einstelligen oder negativen Bereich zurück, Multiple komprimiert auf 10–12x.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der aktuellen Wachstumsbeschleunigung über die nächsten 2–3 Quartale.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>eBay ist aktuell ein Reakzelerations-/Turnaround-Trade, kein klassischer defensiver Compounder mehr — die Wachstumsbeschleunigung auf 19,5 % ist der zentrale Beobachtungspunkt für die kommenden Quartale; hält sie nicht an, korrigiert der Kurs. Für wachstumsorientierte Value-Investoren mit Geduld auf Bestätigung geeignet; keine aggressive Positionsgröße vor Bestätigung der Nachhaltigkeit. Peers: **Etsy (ETSY)** als kleinere Nischen-Alternative mit ähnlicher Marktplatz-Dynamik, **Amazon (AMZN)** als deutlich breiter diversifizierter, aber kein reines Marktplatz-Pure-Play mehr. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die Nachhaltigkeit der Wachstumsbeschleunigung auf 19,5 % ist aus den Daten nicht abschließend bestätigt; halbe Positionsgröße bis zur Bestätigung über weitere Quartale.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

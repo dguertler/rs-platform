@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>QIA.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>QIA.DE</h1>
+      <h2>Qiagen N.V.                   A</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Diagnostics & Research</span></div>
+        <div class="mi">MCap: <span>$7B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-30.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$34.92</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">66.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">86.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">41–48</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">32–39</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">20–26</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull €41–€48 (20 %) · Base €32–€39 (45 %) · Bear €20–€26 (35 %) · EV ~€32,9</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Qiagen ist ein Molekulardiagnostik-/Genomics-Tools-Anbieter (QuantiFERON-TB-Test, QIAstat, Bioinformatik), dessen Umsatzwachstum mit nur 1,8 % YoY praktisch stagniert — eine Folge der vollständigen Normalisierung der COVID-Test-Umsätze und einer schwachen Ausgabendynamik bei akademischen/Biopharma-Forschungskunden (Budgetunsicherheit). Der Kurs ist über 12 Monate um 23,0 % und über 6 Monate um 17,6 % gefallen, der RS-Score ist mit −30,6 (Rang 28 von 40 im DAX) klar negativ — ein echter fundamentaler Underperformer, keine reine Sentiment-Geschichte. Gleichzeitig bleibt das Unternehmen mit 23,8 % operativer Marge und 9,55 % ROIC profitabel, und das niedrige Beta (0,64) markiert Qiagen als defensiven, nicht-zyklischen Titel relativ zum breiten Markt. Der Analysten-Konsens (Buy, €38,87) liegt 11,3 % über dem aktuellen Kurs — die dünne Coverage (nur 7 Analysten) begrenzt jedoch die Aussagekraft dieses Konsens.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Molekulardiagnostik-Kerngeschäft (QuantiFERON-TB, Sample-Prep) mit strukturell wiederkehrenden Verbrauchsmaterial-Umsätzen</li>
+<li>Companion-Diagnostics-Partnerschaften mit Pharma-Unternehmen als Wachstumshebel für Präzisionsonkologie</li>
+<li>QIAstat-Syndromic-Testing-Plattform als Diversifizierung über COVID-Testing hinaus</li>
+<li>Bioinformatik-Segment (QIAGEN Digital Insights) als margenstarker, aber noch kleiner Wachstumstreiber</li>
+<li>Akademische und Biopharma-Forschungskunden als Hauptabnehmerbasis — direkt exponiert gegenüber Förder-/F&E-Budgetzyklen</li>
+<li>Umsatz TTM €2,10 Mrd., Wachstum nur +1,8 % YoY — post-COVID-Normalisierung vollständig durchlaufen</li>
+<li>Free Cashflow €238,9 Mio. bei 11,4 % FCF-Marge — solide, aber wachstumsbedingt limitiertes Re-Rating-Potenzial</li>
+<li>IVDR-Compliance (EU-Diagnostikaregulierung) als struktureller Kostenfaktor</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>QuantiFERON und Companion-Diagnostics-Partnerschaften beschleunigen das Wachstum auf den mittleren einstelligen Bereich, operative Hebelwirkung expandiert die Marge. Annahme (kein Konsens): FY27-EPS ~€2,60 × 17x = €44,20. Bull-Kursziel: €41–€48 (Mittelpunkt €44,50). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum stabilisiert sich im niedrigen einstelligen Bereich (2–4 %), Margen halten das aktuelle Niveau. Annahme (kein Konsens): FY27-EPS ~€2,35 × 15x = €35,25. Base-Kursziel: €32–€39 (Mittelpunkt €35,50). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Anhaltend schwache Forschungstools-Ausgaben (akademische/Biopharma-Budgetkürzungen), weiterer Erosion der COVID-Legacy-Umsätze, Margendruck. Kundenkonzentration: breite akademische/Pharma-/Biotech-Kundenbasis, aber sektorweite Exposure gegenüber F&E-Förderzyklen (NIH-Budgetunsicherheit) — real. Geopolitik: China-Exposure im Life-Sciences-Tools-Sektor ist relevant angesichts lokaler Substitutionspolitik für Biotech-Instrumente. Lieferketten: Reagenzien-/Verbrauchsmaterial-Fertigung mit moderatem, aber nicht extremem Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend nicht im Datensatz verfügbar — auf Datenbasis nicht beurteilbar. Regulierung: IVDR-Compliance-Kosten und FDA-/EMA-Zulassungsanforderungen sind ein reales strukturelles Risiko für europäische Diagnostikunternehmen. Annahme: FY27-EPS ~€1,90 × 12x = €22,80. Bear-Kursziel: €20–€26 (Mittelpunkt €23). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × €44,50 + 0,45 × €35,50 + 0,35 × €23 = €8,90 + €15,975 + €8,05 = **~€32,9 — implizites Downside vs. aktuellem Kurs (€34,92): −5,7 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 11,93 %, ROIC 9,55 % — moderat, aber gesund für ein Diagnostik-/Tools-Unternehmen in einer Wachstumsflaute. Operative Marge 23,8 % ist solide; Free Cashflow €238,9 Mio. / Umsatz €2,10 Mrd. = 11,4 % FCF-Marge zeigt eine gesunde, wenn auch nicht spektakuläre Cash-Generierung. Debt/Equity 50,0x ist moderat.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 15,5x, Trailing-PE 20,3x — beide moderat für ein Diagnostikunternehmen mit nur 1,8 % Wachstum; Price/Book 2,47x erscheint angemessen. Rückrechnung: Bei €34,92 und einem defensiven Gesundheits-Multiple von 16x müsste das Forward-EPS bei €2,18 liegen — nahe an bzw. leicht unter der aktuellen Konsensschätzung von €2,25. Das deutet darauf hin, dass die Aktie auf aktuellem Niveau fair bis leicht günstig bewertet ist, vorausgesetzt das Wachstum verschlechtert sich nicht weiter — eher eine faire Bewertung als eine klare Value-Falle.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score −30,57 (Rang 28 von 40 im DAX), Kurs klar underperformend (−23,0 % über 12 Monate, −17,6 % über 6 Monate) — spiegelt echte fundamentale Enttäuschung (Wachstumsstagnation) wider, keine reine Sentiment-Bewegung. Niedriges Beta (0,64) und dünne Analysten-Coverage (7 Analysten) deuten auf begrenztes institutionelles Interesse in beide Richtungen hin. Short-Float-Daten nicht verfügbar. Enttäuschungsrisiko: anhaltend schwaches Wachstum ohne Erholungssignal könnte den Kurs weiter belasten.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Jüngste kurzfristige Schwäche (5T −1,68 %, 10T −4,78 %) innerhalb eines längeren Abwärtstrends (6M −17,63 %, 12M −23,04 %), wobei das 50T-Fenster einen Erholungsversuch zeigt (+14,08 %). Ein Rückfall unter das 52-Wochen-Tief (€27,56, ca. −21 %) würde die Trendfortsetzung bestätigen; ein Rückstieg über €40 (+14,5 %) wäre das erste echte Umkehrsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (€45–€60):** Companion-Diagnostics-Pipeline (Pharma-Partnerschaften für Präzisionsonkologie) und Bioinformatik (QIAGEN Digital Insights) skalieren deutlich, Wachstum beschleunigt sich auf hohen einstelligen Bereich, Multiple re-ratet auf 18–20x.</p>
+<p>**Base (€28–€42):** Wachstum stabilisiert sich im niedrigen einstelligen Bereich, defensives Diagnostik-Multiple von 14–16x hält.</p>
+<p>**Bear (€15–€25):** Strukturelle Erosion im Kern-Testing-/Verbrauchsmaterialgeschäft, Biopharma-Forschungstools-Ausgaben bleiben über Jahre gedrückt, Multiple komprimiert auf 10–12x.</p>
+<p>Entscheidende Variable: Tempo der Wachstumsreakzeleration bei Companion Diagnostics und Bioinformatik.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Qiagen ist ein defensiver, aber aktuell wachstumsschwacher Diagnostik-Titel — kein Momentum-Play, sondern allenfalls ein Value-/Turnaround-Kandidat für geduldige Investoren, die auf eine Wachstumsreakzeleration bei Companion Diagnostics warten. Die Bewertung ist moderat, aber der EV zeigt keinen klaren Edge (−5,7 %) — Neupositionen sollten auf ein bestätigtes Wachstumssignal warten. Für defensive, dividendenorientierte Value-Investoren mit Geduld geeignet; nicht für Momentum-orientierte Portfolios. Peers: **Roche Diagnostics** (breiter diversifiziert, kein Pure-Play), **Illumina (ILMN)** (Sequencing-fokussiert, andere Wachstumsdynamik), **Thermo Fisher (TMO)** (deutlich breiter). Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Katalysator fehlt — Kein erkennbarer fundamentaler Auslöser trotz moderater Bewertung; Wachstumsstagnation bei 1,8 % rechtfertigt kein Momentum-Investment.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

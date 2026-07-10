@@ -218,13 +218,6 @@
       "asymmetric_edge": false
     },
     {
-      "ticker": "AMG",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-17T06:45:57.856145",
-      "asymmetric_edge": false
-    },
-    {
       "ticker": "VRT",
       "verdict": "BUY",
       "score": 75,
@@ -400,13 +393,6 @@
       "created_at": "2026-06-21T07:57:54.116968"
     },
     {
-      "ticker": "AMD",
-      "verdict": "HOLD",
-      "score": 65,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-21T10:12:54.712726"
-    },
-    {
       "ticker": "MRNA",
       "verdict": "WATCH",
       "score": 46,
@@ -419,13 +405,6 @@
       "score": 72,
       "asymmetric_edge": true,
       "created_at": "2026-06-21T10:15:53.020642"
-    },
-    {
-      "ticker": "FTNT",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-21T10:16:50.778179"
     },
     {
       "ticker": "PANW",
@@ -1001,6 +980,162 @@
         "reason": "Die FME27-Margenerholung ist real und im Trend, aber ohne akutes GWS-Signal fehlt der unmittelbare technische Ausl\u00f6ser f\u00fcr volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-09T14:14:01.123971"
+    },
+    {
+      "ticker": "AMD",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 39,3x und ein negativer EV von \u22124,8 % tragen an diesem Kursniveau keine volle Positionsgr\u00f6\u00dfe trotz intaktem AI-Wachstumsnarrativ."
+      },
+      "created_at": "2026-07-10T10:08:15.519679"
+    },
+    {
+      "ticker": "FTNT",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 45,6x bei nur 20,1 % Wachstum und ein EV von \u221214,9 % rechtfertigen keine volle Positionsgr\u00f6\u00dfe trotz intakter Franchise-Qualit\u00e4t."
+      },
+      "created_at": "2026-07-10T10:09:09.982607"
+    },
+    {
+      "ticker": "PSX",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Negativer Free Cashflow (\u2212$1,13 Mrd.) belastet die Dividendendeckung trotz moderater Bewertung und intakter Erholungsstory."
+      },
+      "created_at": "2026-07-10T10:09:55.375823"
+    },
+    {
+      "ticker": "EBAY",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die Nachhaltigkeit der Wachstumsbeschleunigung auf 19,5 % ist aus den Daten nicht abschlie\u00dfend best\u00e4tigt; halbe Positionsgr\u00f6\u00dfe bis zur Best\u00e4tigung \u00fcber weitere Quartale."
+      },
+      "created_at": "2026-07-10T10:10:41.036466"
+    },
+    {
+      "ticker": "META",
+      "verdict": "BUY",
+      "score": 74,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "G\u00fcnstige Bewertung (Forward-PE 15,8x) und intaktes Werbewachstum st\u00fctzen die volle Positionsgr\u00f6\u00dfe trotz Kapex-bedingter Sentiment-Schw\u00e4che."
+      },
+      "created_at": "2026-07-10T10:11:30.860884"
+    },
+    {
+      "ticker": "QIA.DE",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "Kein erkennbarer fundamentaler Ausl\u00f6ser trotz moderater Bewertung; Wachstumsstagnation bei 1,8 % rechtfertigt kein Momentum-Investment."
+      },
+      "created_at": "2026-07-10T10:12:16.076802"
+    },
+    {
+      "ticker": "BBY",
+      "verdict": "WATCH",
+      "score": 42,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "Die Rallye der letzten 50 Tage ist nicht durch fundamentales Wachstum gedeckt; das Kerngesch\u00e4ft stagniert bei nur 1,9 % Umsatzwachstum."
+      },
+      "created_at": "2026-07-10T10:13:06.163932"
+    },
+    {
+      "ticker": "AMG",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die starke 50-Tage-Rallye (+19 %) erh\u00f6ht das kurzfristige R\u00fccksetzer-Risiko trotz strukturell g\u00fcnstiger Bewertung."
+      },
+      "created_at": "2026-07-10T10:13:49.886365"
+    },
+    {
+      "ticker": "CSX",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die Bewertung nahe dem Allzeithoch impliziert bereits einen M&A-/Erholungs-Katalysator, der auf Standalone-Basis fundamental nicht gedeckt ist."
+      },
+      "created_at": "2026-07-10T10:14:35.276514"
+    },
+    {
+      "ticker": "EXPD",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertung impliziert Wachstum deutlich \u00fcber der aktuellen 4,4 %-Rate; der Analysten-Konsens liegt 12 % unter dem aktuellen Kurs."
+      },
+      "created_at": "2026-07-10T10:15:21.669133"
+    },
+    {
+      "ticker": "WAT",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Sonstiges",
+        "reason": "Post-Merger-Integrationsverzerrung (operative Marge 2,8 %, FCF negativ) macht die Fundamentaldaten aktuell nicht verl\u00e4sslich bewertbar."
+      },
+      "created_at": "2026-07-10T10:16:10.392370"
+    },
+    {
+      "ticker": "JPM",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Hohe fundamentale Qualit\u00e4t und moderate Bewertung st\u00fctzen die volle Positionsgr\u00f6\u00dfe als defensiven Kernwert."
+      },
+      "created_at": "2026-07-10T10:16:56.525661"
+    },
+    {
+      "ticker": "AES",
+      "verdict": "AVOID",
+      "score": 37,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "Extreme Verschuldung (D/E 260 %) und negativer Free Cashflow (\u22123,0 Mrd. USD) \u00fcberwiegen die statistisch g\u00fcnstige Bewertung; die Dividendendeckung ist gef\u00e4hrdet."
+      },
+      "created_at": "2026-07-10T10:20:48.516152"
     }
   ]
 }

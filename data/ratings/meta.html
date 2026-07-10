@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>META — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>META</h1>
+      <h2>Meta Platforms, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Internet Content & Information</span></div>
+        <div class="mi">MCap: <span>$1480B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">74</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-6.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$582.90</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$215.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">81.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">36.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">32.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+9.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">850–950</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">600–680</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">340–400</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $850–$950 (30 %) · Base $600–$680 (45 %) · Bear $340–$400 (25 %) · EV ~$651</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Meta ist trotz eines Kernwerbegeschäfts mit 33 % Umsatzwachstum und 40,6 % operativer Marge um 18,7 % über 6 Monate gefallen — ein deutliches Auseinanderlaufen von Fundamentaldaten und Kursverlauf. Der RS-Score ist negativ (−6,1, Rang 68 im NASDAQ-100), was auf eine relative Schwäche gegenüber dem breiten Index hindeutet. Was der Markt hier einpreist: Sorgen um die Kapitalrendite der massiven AI-Infrastruktur-Investitionen (GPU-Capex für Llama/Superintelligence Lab) belasten das Sentiment, obwohl das Werbegeschäft selbst intakt und stark wachsend bleibt. Bemerkenswert: Der Analysten-Konsens (Strong Buy, $828,17) liegt 42 % über dem aktuellen Kurs ($582,90) — eine ungewöhnlich große Diskrepanz, die entweder eine verzögerte Sell-Side-Reaktion oder eine echte Fehlbewertung signalisiert. Die jüngsten kurzfristigen Fenster (5T +6,8 %, 10T +15,4 %) deuten auf eine beginnende Erholung nach der Korrektur hin.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Werbegeschäft (Facebook, Instagram) bleibt der dominante Ergebnistreiber mit strukturellem Netzwerkeffekt-Moat</li>
+<li>AI-getriebenes Ad-Targeting (Advantage+) verbessert ROAS für Werbetreibende und stützt Preissetzungsmacht</li>
+<li>Massive Capex-Ausweitung für AI-Infrastruktur (Llama, Superintelligence Lab) belastet kurzfristig FCF und Abschreibungen</li>
+<li>Reality Labs bleibt ein strukturelles Verlustsegment ohne klaren Monetarisierungspfad</li>
+<li>WhatsApp/Messaging-Plattformen als noch unter-monetarisierter struktureller Optionswert</li>
+<li>Umsatz TTM $214,96 Mrd., Wachstum +33,1 % YoY — breit getragen über Nutzerengagement und Preissteigerung pro Anzeige</li>
+<li>Free Cashflow $25,56 Mrd. trotz massivem Capex-Programm — weiterhin robust</li>
+<li>Debt/Equity 35,6x — moderate Verschuldung, solide Bilanz</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Werbegeschäft beschleunigt weiter durch verbesserte AI-Targeting-Effizienz, Capex-Intensität moderiert sich, da erste Infrastruktur-Investitionen operative Effizienzgewinne liefern. Strukturelle Margennachhaltigkeit: Netzwerkeffekt-Skalierung (3+ Mrd. Nutzer) und proprietäre AI-Ranking-Technologie stützen dauerhaft hohe Margen gegenüber kleineren Wettbewerbern. Annahme (kein Konsens): FY27-EPS ~$45,00 × 20x (Re-Rating bei nachlassenden Capex-Sorgen) = $900. Bull-Kursziel: $850–$950 (Mittelpunkt $900). Eintrittswahrscheinlichkeit: 30 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Werbewachstum bleibt solide, Capex bleibt hoch und belastet FCF/Marge kurzfristig weiter. Annahme (kein Konsens): FY27-EPS ~$40,00 × 16x = $640. Base-Kursziel: $600–$680 (Mittelpunkt $640). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: AI-Capex-Rendite enttäuscht, Abschreibungen aus dem massiven Rechenzentrenausbau belasten die Marge ohne proportionalen Werbeumsatzbeitrag, gleichzeitig makrogetriebene Werbebudget-Schwäche. Kundenkonzentration: Werbeumsatz ist über Millionen Werbetreibende diversifiziert, geringes Einzelkundenrisiko. Geopolitik/Exportkontrollen: EU-Regulierung (DMA/DSA) und geopolitisch bedingte Werbebudget-Risiken bei chinesischen Werbetreibenden sind real. Lieferketten: GPU-/Rechenzentren-Hardware hängt strukturell an Nvidia/TSMC — ein reales Abhängigkeitsrisiko für die AI-Infrastruktur. Verwässerung: Aktienanzahl-Trend nicht im Datensatz, aber hohe SBC für AI-Talent ist ein bekannter Kostenfaktor. Regulierung: FTC-Kartellverfahren und Datenschutzregulierung (GDPR, State Privacy Laws) sind reale, laufende Risiken. Annahme: FY27-EPS ~$28,00 × 13x = $364. Bear-Kursziel: $340–$400 (Mittelpunkt $370). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 30 % + 45 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,30 × $900 + 0,45 × $640 + 0,25 × $370 = $270 + $288 + $92,50 = **~$650,5 — impliziertes Upside vs. aktuellem Kurs ($582,90): +11,6 %.** Ein moderat asymmetrischer Edge ist erkennbar, primär getrieben durch den Kapex-bedingten Sentiment-Abschlag — dies ersetzt aber keine bestätigte Kapex-ROI-Sichtbarkeit.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 32,9 %, ROIC 23,1 % — beide auf Weltklasse-Niveau. Bruttomarge 81,9 %, operative Marge 40,6 % zeigen einen echten, strukturellen Burggraben (Netzwerkeffekte, AI-Targeting-Technologie), keine zyklische Illusion. Free Cashflow $25,56 Mrd. bleibt trotz massivem Capex-Programm robust — ein Zeichen dafür, dass die Kerngeschäfts-Cashflow-Generierung die Investitionen weiterhin trägt.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 15,8x ist für ein Unternehmen mit 33 % Umsatzwachstum und 40 %+ operativer Marge günstig (PEG deutlich unter 1 bei anhaltendem Wachstum). Rückrechnung: Bei $582,90 und einem konservativen Qualitäts-Wachstums-Multiple von 20x müsste das Forward-EPS bei $29,15 liegen — bereits UNTER der aktuellen Konsensschätzung von $36,82. Das bedeutet, der Markt bewertet Meta faktisch mit einem Abschlag selbst gegenüber einem konservativen Multiple — ein Hinweis auf eine echte Sentiment-getriebene Fehlbewertung, die aber durch das reale Kapex-ROI-Risiko zumindest teilweise gerechtfertigt sein könnte.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score negativ (−6,1, Rang 68 im NASDAQ-100), Kurs −18,7 % über 6 Monate — ein klares Zeichen für kapex-getriebene Sentiment-Schwäche, trotz sehr jüngster Stabilisierung (10T +15,4 %). Der Analysten-Konsens (Strong Buy, $828,17) liegt deutlich über dem aktuellen Kurs — entweder hinkt die Sell-Side hinterher, oder es besteht eine echte Bewertungslücke (Hypothese, nicht datenbasiert). Institutionelle Positionierungsdaten (Short-Float) nicht verfügbar.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Klarer mittelfristiger Abwärtstrend (50T −16,0 %, 6M −18,7 %), aber deutliche kurzfristige Stabilisierung (5T +6,8 %, 10T +15,4 %) — dies sieht eher nach einem beginnenden Boden aus als nach reinem reaktivem Rauschen, muss aber bestätigt werden. Ein Rückfall unter das 52-Wochen-Tief ($520,26, ca. −10,7 %) wäre das zentrale technische Warnsignal, das die Erholungsthese entkräften würde.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($900–$1.200):** AI-getriebene Werbemonetarisierung und neue Erlösquellen (AI-Assistent-Abos, Llama-Enterprise-Lizenzierung) heben das EPS auf $55–65 bei Multiple-Re-Rating auf 20–22x.</p>
+<p>**Base ($550–$800):** Kernwerbegeschäft wächst mit mittlerem Zehnerprozentsatz weiter, Capex normalisiert sich als Anteil am Umsatz, Multiple pendelt sich bei 16–18x ein.</p>
+<p>**Bear ($300–$450):** AI-Kapex-Überinvestition zerstört über mehrere Jahre FCF ohne proportionale Monetarisierung, Reality-Labs-Verluste bleiben eine strukturelle Last, Multiple komprimiert auf 12–14x.</p>
+<p>Entscheidende Variable: Kapex-ROI-Sichtbarkeit — wann und wie stark sich die AI-Infrastruktur-Investitionen in Werbeumsatz/neue Erlösquellen niederschlagen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Meta ist trotz der jüngsten Korrektur eher ein Compounder mit temporärer Sentiment-Delle als ein zyklischer Trade — die Kernwerbe-Ökonomie bleibt intakt (33 % Wachstum, 40 %+ operative Marge), und die aktuelle Bewertung (Forward-PE 15,8x) impliziert bereits einen deutlichen Abschlag gegenüber dem Wachstumsprofil. Der EV zeigt einen moderat asymmetrischen Edge (+11,6 %), primär getrieben durch die Kapex-Sorge, die den Kurs stärker gedrückt hat als die Fundamentaldaten allein rechtfertigen — dies ist aber kein risikofreier Einstieg, da die Kapex-ROI-Frage real und noch unbeantwortet ist. Für langfristig orientierte Qualitätsinvestoren geeignet, die die Kapex-Volatilität aussitzen können. Peers: **Alphabet/Google (GOOGL)** mit ähnlichem Werbe-Geschäftsmodell, aber diversifizierter durch Cloud/Search, **Amazon (AMZN)** mit kleinerem, aber schnell wachsendem Ads-Segment. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 5/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Günstige Bewertung (Forward-PE 15,8x) und intaktes Werbewachstum stützen die volle Positionsgröße trotz Kapex-bedingter Sentiment-Schwäche.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
