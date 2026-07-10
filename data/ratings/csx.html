@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CSX</h1>
+      <h2>CSX Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Railroads</span></div>
+        <div class="mi">MCap: <span>$91B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">40.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$48.89</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">22.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$14.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">46.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">115.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">23.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">42–50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">24–32</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>CSX ist einer von nur zwei Class-I-Eisenbahnbetreibern östlich des Mississippi — ein regulatorisch geschütztes Duopol mit Norfolk Southern, das faktisch keine neuen Wettbewerber zulässt (der Bau eines konkurrierenden Schienennetzes ist ökonomisch und regulatorisch praktisch ausgeschlossen). Die eigentliche Story ist die fortgesetzte Umsetzung des Precision-Scheduled-Railroading-Betriebsmodells, das Umlaufzeiten von Wagen verkürzt und die operative Marge strukturell auf 36,2% gehoben hat. Was der Markt aktuell einpreist, ist mehr als nur operative Exzellenz: Mit einem Trailing-KGV von 29,99x — historisch liegen Class-I-Bahnen eher bei 15–20x — bezahlt der Markt eine deutliche Prämie, die zumindest teilweise mit der branchenweiten Konsolidierungsspekulation (Union-Pacific-Norfolk-Southern-Fusionsgespräche 2025) zusammenhängt. Hypothese, nicht datenbasiert: CSX gilt in dieser Spekulation als möglicher nächster Konsolidierungskandidat im Osten — dies ist keine bestätigte Tatsache aus den vorliegenden Daten, sondern Marktnarrativ. Das RS-Signal (Score 40,63, Rang 39 im S&P 500) ist moderat, das Momentum konzentriert sich fast vollständig auf das 6-Monats-Fenster (+32,7%), während die letzten Handelstage nahezu flach verlaufen (5T +0,13%).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Frachttransport auf eigenem Schienennetz im Osten der USA — Kohle, Industriegüter, Intermodal-Container, Agrarprodukte</li>
+<li>Precision Scheduled Railroading (PSR): kürzere Zugumlaufzeiten, weniger Rangierbahnhöfe, höhere Zugauslastung als operativer Kernhebel</li>
+<li>Regulatorischer Burggraben: Neubau konkurrierender Schienenwege ist praktisch ausgeschlossen — echtes Duopol mit Norfolk Southern im Osten</li>
+<li>Operativer Hebel ist hoch: Ein Großteil der Kosten ist fix (Infrastruktur, Personal), zusätzliches Frachtvolumen fällt fast vollständig in die Marge durch</li>
+<li>Strukturelle Abhängigkeit von Industrieproduktion, Kohleverstromung (rückläufig) und intermodalem Containerverkehr</li>
+<li>Preissetzungsmacht ist real, aber regulatorisch begrenzt (Surface Transportation Board überwacht Frachtraten bei fehlendem Wettbewerb)</li>
+<li>Kapitalintensität ist hoch: laufende Instandhaltung von Gleisnetz und Rollmaterial bindet einen erheblichen Teil des operativen Cashflows</li>
+<li>Kapitalrückführung über Dividende und Aktienrückkäufe bei begrenztem organischem Volumenwachstum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>PSR-Effizienzgewinne setzen sich fort, Reshoring/Nearshoring-Trends erhöhen intermodale Frachtvolumina, ein Multiple-Re-Rating durch die Konsolidierungsspekulation in der Branche hält an. Annahme (kein Konsens): FY27E EPS ~$2,60 × 22–26x Forward = $57–$68. Kursziel Bull: $58–$68 (Mittelwert $63). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Moderates Frachtvolumenwachstum, Margen bleiben auf hohem Niveau stabil, keine M&A-Prämie realisiert sich. Forward-EPS ~$2,19 (aus Forward-PE 22,4x auf Snapshot-Basis) leicht steigend auf ~$2,30 als Ausgangspunkt × 18–22x = $41–$51. Kursziel Base: $42–$50 (Mittelwert $46). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Industrielle Frachtrezession (Nachfrageschwäche bei Industriegütern und Kohle), gleichzeitig verschärfter Wettbewerb durch LKW-Transport bei sinkenden Dieselpreisen. Kundenkonzentration: Diversifizierte Frachtkundenbasis über mehrere Industrien — aus Datenbasis nicht weiter quantifizierbar, aber strukturell geringeres Konzentrationsrisiko als bei Einzelkunden-Geschäftsmodellen. Geopolitik/Exportkontrollen: Kein direktes China-Exposure, aber Handelskonflikte/Zölle können intermodale Importvolumina (Häfen-Anbindung) belasten. Lieferketten/Foundry: Nicht relevant für ein Schienennetz-Geschäftsmodell. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; historisch nettoreduzierend durch Buybacks. Regulierung: Verschärfte STB-Frachtratenregulierung oder eine gescheiterte/blockierte Branchenkonsolidierung könnte die Bewertungsprämie der Aktie eliminieren. EPS fällt auf ~$1,70 bei Volumenrückgang. Annahme: FY27E EPS ~$1,70 × 14–18x = $24–$31. Kursziel Bear: $24–$32 (Mittelwert $28). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>Summe Bull + Base + Bear: 20% + 50% + 30% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $63 + 0,50 × $46 + 0,30 × $28 = $12,60 + $23,00 + $8,40 = **~$44,00 — implizites Downside vs. aktuellem Kurs ($48,89): −10,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 23,7% und Operating Margin von 36,2% sind für ein Industrieunternehmen außergewöhnlich stark — das ist der reale wirtschaftliche Burggraben eines regulatorisch geschützten Duopols, nicht nur ein scheinbarer. Net Margin von 21,6% bestätigt die strukturelle Ertragskraft. Free Cashflow von $1,13 Mrd. bei $14,15 Mrd. Umsatz wirkt im Verhältnis zum Nettoergebnis (ca. $3,06 Mrd. impliziert aus Net Margin × Revenue) niedrig — das ist branchentypisch, da Class-I-Bahnen einen erheblichen Teil des operativen Cashflows in laufende Gleisnetz-Instandhaltung reinvestieren müssen. Debt/Equity von 143,1% ist für die kapitalintensive Infrastrukturbranche vertretbar, aber nicht niedrig.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 30,0x, Forward PE 22,4x, P/B 6,69x — historisch teuer für eine Class-I-Bahn (langjähriger Sektor-Durchschnitt eher 15–20x Forward). Rückrechnung "Was preist der Kurs ein?": $48,89 bei Forward-EPS $2,19 impliziert entweder eine deutliche Margenausweitung über das aktuelle Rekordniveau hinaus oder eine M&A-Prämie durch die Konsolidierungsspekulation — beides ambitioniert, nicht das plausibelste Szenario. Das Analysten-Konsensziel ($47,20, 22 Analysten, "buy") liegt leicht unter dem aktuellen Kurs — ein Indiz, dass die Street der aktuellen Prämie bereits skeptisch gegenübersteht.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Ein Teil der Bewertungsprämie dürfte auf spekulativen M&A-Flows beruhen (Fast-Money-Wetten auf eine mögliche Fusion oder Übernahme), nicht auf fundamentalem Long-Only-Interesse an operativer Verbesserung allein. Für neue Käufer müsste entweder eine konkrete M&A-Ankündigung oder ein überzeugender Volumen-Beat im nächsten Quartalsbericht erfolgen. Enttäuschungsrisiko: Sollte sich die Konsolidierungsspekulation als verfrüht erweisen oder regulatorisch blockiert werden, droht eine schnelle Multiple-Kompression Richtung historischer Sektor-Bewertung.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 40,63, Rang 39 im S&P 500 — moderat. 5T +0,13%, 10T +1,5%, 20T +2,53%, 50T +3,77%, 6M +32,7% — die große Bewegung liegt vollständig im 6-Monats-Fenster, die kurzfristige Dynamik ist nahezu zum Stillstand gekommen. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt nur teilweise fundamental gestützt (PSR-Story ist real, die M&A-Spekulation ist es nicht zwangsläufig). Warnsignal: Die Aktie notiert nahe dem 52-Wochen-Hoch ($49,21) bei abflachendem kurzfristigem Momentum — ein Rückfall unter die 50-Tage-Basis wäre das erste technische Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Branchenkonsolidierung realisiert sich, CSX wird Übernahmeziel oder profitiert von einem sektorweiten Multiple-Re-Rating, PSR-Effizienz erreicht neue Rekordmargen. Kursziel: $70–$95.</p>
+<p>Base: Kein M&A, stabile Margen, moderates Volumenwachstum mit US-Industrieproduktion. Kursziel: $48–$62.</p>
+<p>Bear: Frachtrezession über mehrere Jahre, LKW-Konkurrenz gewinnt Marktanteile, regulatorischer Gegenwind bei Frachtraten. Kursziel: $22–$35.</p>
+<p>Entscheidende Variable: Ob sich die branchenweite Konsolidierungsspekulation materialisiert oder als reines Marktnarrativ verpufft.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −10,0%). CSX ist ein qualitativ hochwertiger Compounder mit echtem regulatorischem Burggraben, aber auf dem aktuellen Bewertungsniveau kein günstiger Einstieg — ein erheblicher Teil der Prämie beruht auf unbestätigter M&A-Spekulation. Geeignet für geduldige, qualitätsorientierte Investoren, die die Duopol-Story langfristig spielen wollen — weniger für kurzfristige Trader auf dem aktuellen Niveau. Explizite Risikowarnung: Sollte die Konsolidierungsspekulation ausbleiben, ist eine Multiple-Kompression Richtung historischer 18–20x Forward-PE ein reales Szenario. Bestehende Positionen mit Trailing-Stop (10%) führen, Neueinstiege auf diesem Niveau nur in kleiner Positionsgröße (max. 1–2%). Direkter Peer: **Norfolk Southern (NSC)** ist das reinere Instrument für eine mögliche Konsolidierung im Osten, nicht im Datensatz enthalten — relative Bewertung indikativ, Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Die EV-Rechnung zeigt bei einem historisch teuren KGV (30x Trailing gegenüber sektortypisch 15–20x) ein negatives Chance-Risiko-Verhältnis (−10,0%), ein erheblicher Teil der aktuellen Prämie beruht auf unbestätigter M&A-Spekulation.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

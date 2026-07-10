@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PSX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>PSX</h1>
+      <h2>Phillips 66</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Energy</span></div>
+        <div class="mi">Industrie: <span>Oil & Gas Refining & Marketing</span></div>
+        <div class="mi">MCap: <span>$71B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">50</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">56.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$176.42</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$134.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">12.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">288.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">14.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">240–280</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">184–210</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">72–90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 06.07.2026 liegt vor der jüngsten Kursbewegung (Schlusskurs 09.07.2026: $189,82, +7,6% ggü. Snapshot). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $189,82 neu gerechnet.</p>
+<p>Phillips 66 ist kein reiner Raffineriebetreiber mehr, sondern ein integriertes Downstream-Portfolio aus Refining, Midstream (seit 2023 vollständig konsolidierte DCP Midstream) und Chemicals (50%-JV CPChem mit Chevron). Die eigentliche Story der letzten Jahre war der Elliott-Management-Aktivismus, der eine stärkere Trennung von Midstream- und Refining-Cashflows sowie mehr Kapitaldisziplin erzwungen hat — der Markt bewertet das Unternehmen zunehmend als Summe zweier unterschiedlich zyklischer Geschäfte, nicht mehr als reinen Refiner. Was der Markt hier übersieht: Trotz des Kurssprungs auf ein neues 52-Wochen-Hoch ($190,61) bleibt das operative Bild gemischt — das ausgewiesene Operating-Margin von 0,6% ist zwar branchentypisch dünn für Refining (hohe Umsatzbasis, geringe Marge je Barrel), aber der negative Free Cashflow von -$1,13 Mrd. bei $134,49 Mrd. Umsatz ist aus den vorliegenden Daten nicht abschließend auflösbar — mögliche Ursachen sind Capex-Spitzen im Midstream-Ausbau oder Working-Capital-Effekte, beides nicht separat ausgewiesen. Das RS-Signal (Score 56,35, Rang 41 im S&P 500) ist nur mittelmäßig — kein Top-Momentum-Kandidat trotz des Ausbruchs.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Refining: Verarbeitung von Rohöl zu Produkten (Benzin, Diesel, Jet Fuel) — Marge hängt an Crack-Spreads, nicht am Ölpreis selbst</li>
+<li>Midstream (DCP Midstream, vollständig integriert): Pipelines, Terminals, NGL-Verarbeitung — stabilere, gebührenbasierte Cashflows</li>
+<li>Chemicals (CPChem, 50% JV mit Chevron): Petrochemikalien, Polyethylen — eigener Zyklus, unabhängig von Refining-Margen</li>
+<li>Marketing & Specialties: Vertriebsnetz, Schmierstoffe — margenstärker, aber kleinerer Umsatzanteil</li>
+<li>Operativer Hebel: Bei steigenden Crack-Spreads schlägt jeder zusätzliche Dollar fast vollständig auf das Ergebnis durch — Fixkostenbasis der Raffinerien ist hoch</li>
+<li>Strukturelle Abhängigkeit: Nachfrage nach Raffinerieprodukten korreliert mit globalem BIP-Wachstum und Mobilität — zyklisch, nicht strukturell wachsend</li>
+<li>Portfolio-Diversifikation über Midstream/Chemicals reduziert die reine Refining-Zyklizität, ersetzt sie aber nicht vollständig</li>
+<li>Kapitalrückführung: Aktienrückkäufe und Dividende als zentrales Element der Elliott-getriebenen Kapitaldisziplin-Story</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Crack-Spreads bleiben strukturell erhöht durch unterinvestierte globale Raffineriekapazität und starke US-Exportnachfrage; Midstream-EBITDA-Mix wächst weiter und stützt eine höhere Bewertungsbasis. Annahme (kein Konsens): FY27E EPS ~$20 × 12–14x Forward = $240–$280. Kursziel Bull: $240–$280 (Mittelwert $260). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Crack-Spreads normalisieren leicht vom aktuellen Niveau, bleiben aber über dem historischen Mittel; Midstream-Wachstum kompensiert einen Teil der Refining-Normalisierung. Forward-EPS ~$17,50 (aus adjustierter Forward-PE 10,9x auf aktuellem Kursniveau) als Ausgangspunkt × 10,5–12x = $184–$210. Kursziel Base: $184–$210 (Mittelwert $197). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Raffineriekapazität (China, Naher Osten) kommt schneller online als erwartet, gleichzeitig bremst eine Nachfrageschwäche die Crack-Spreads auf zyklische Tiefstände. Kundenkonzentration: Produkte werden im Großhandel/Spotmarkt vertrieben, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik: Kein direktes China-Fertigungsrisiko, aber Rohölimport- und Exportlogistik bleibt sensitiv gegenüber OPEC+-Entscheidungen und Sanktionsregimen. Lieferketten/Foundry: Kein Single-Source-Risiko im klassischen Sinn, aber einzelne Großraffinerien sind Klumpenrisiken bei ungeplanten Ausfällen. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar — historisch nettoreduzierend durch Buybacks. Regulierung: Verschärfte Emissionsvorgaben oder CO2-Bepreisung könnten Compliance-Kosten strukturell erhöhen. EPS fällt auf ~$9 (Zyklustief, vgl. negativer FCF bereits heute als Frühindikator). Annahme: FY27E EPS ~$9 × 8–10x = $72–$90. Kursziel Bear: $72–$90 (Mittelwert $81). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $260 + 0,45 × $197 + 0,35 × $81 = $52,00 + $88,65 + $28,35 = **~$169 — implizites Downside vs. aktuellem Kurs ($189,82): −11,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 14,5% ist solide, aber nicht herausragend für ein Downstream-Geschäft im Zyklushoch. Operating Margin von 0,6% muss im Zykluskontext bewertet werden — bei Refinern ist dies keine Anomalie, sondern die typische Größenordnung eines margenschwachen, umsatzstarken Geschäfts. Der negative Free Cashflow (-$1,13 Mrd.) trotz positivem Nettoergebnis ist die auffälligste Kennzahl-Anomalie und aus den Daten nicht abschließend auflösbar — dies sollte vor einer Positionsentscheidung zwingend im Quartalsbericht geprüft werden. Debt/Equity von 91,4% ist moderat für die Branche. Der echte wirtschaftliche Burggraben liegt in der Midstream-Infrastruktur (Pipelines, Terminals) mit langfristigen Verträgen — die Refining-Sparte selbst hat keinen strukturellen Burggraben, nur Skalenvorteile.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Snapshot-Multiples (Trailing PE 17,4x, Forward PE 10,1x, P/B 2,48x) vor dem Kurssprung. Auf aktuellem Niveau ($189,82): Trailing PE ~18,7x, Forward PE ~10,9x, P/B ~2,67x. Eine zyklische Aktie nie nur am aktuellen KGV bewerten — 10,9x Forward wirkt moderat, spiegelt aber Zyklusspitzen-Erwartungen bei Crack-Spreads. Rückrechnung "Was preist der Kurs ein?": $189,82 bei Forward-EPS $17,40 impliziert eine Fortsetzung der aktuell starken Margenumgebung mindestens bis FY27 — ambitioniert, da Crack-Spreads historisch mean-reverting sind. Das Analysten-Konsensziel ($194,50, 18 Analysten, "buy") liegt nur 2,5% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Indiz für begrenzten Street-Optimismus auf diesem Niveau.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der Ausbruch auf ein neues 52-Wochen-Hoch bei nur mittelmäßigem RS-Score (56,35, Rang 41) deutet eher auf eine breite Sektorrotation in Energie/Refining als auf einen idiosynkratischen Katalysator hin. Für neue Käufer müsste entweder eine erneute Crack-Spread-Ausweitung oder eine konkrete Midstream-Bewertungsaufwertung (Multiple-Re-Rating) sichtbar werden. Enttäuschungsrisiko: Der negative Free Cashflow bei gleichzeitigem Allzeithoch ist ein klassisches Setup für eine Korrektur, sollte der nächste Quartalsbericht dies nicht auflösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 56,35, Rang 41 im S&P 500 — solides, aber kein Spitzenmomentum. 5T +6,79%, 10T +7,98%, 20T +0,65%, 50T +10,12%, 6M +30,81% — die Bewegung hat sich in den letzten 20 Handelstagen deutlich verlangsamt, der jüngste Sprung (5T/10T) wirkt wie ein isolierter Ausbruch statt einer breiten Trendbeschleunigung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt den Ausbruch nicht zusätzlich. Warnsignal: Ein Rückfall unter $176 (Snapshot-Niveau) würde den gesamten jüngsten Sprung negieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Midstream wächst auf >40% des EBITDA-Mix, Multiple-Re-Rating Richtung Pipeline-Peers (12–15x). Kursziel: $300–$380. Entscheidende Variable: erfolgreiche Portfolio-Transformation weg von reinem Refining.</p>
+<p>Base: Refining bleibt Kernsegment, Midstream wächst moderat, Crack-Spreads pendeln um historisches Mittel. Kursziel: $200–$260.</p>
+<p>Bear: Strukturelle Nachfrageerosion durch EV-Durchdringung im Straßenverkehr trifft Refining-Volumina, Midstream-Wachstum kann dies nicht kompensieren. Kursziel: $90–$150.</p>
+<p>Entscheidende Variable über alle Szenarien: Tempo und Erfolg der Midstream-Diversifikation relativ zur strukturellen Nachfrageentwicklung bei Raffinerieprodukten.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −11,0%). PSX ist kein Compounder, sondern ein zyklischer Trade auf Crack-Spreads mit einer wachsenden, stabilisierenden Midstream-Komponente. Nach dem Sprung auf ein neues 52-Wochen-Hoch bei nur mittelmäßigem RS-Rang und negativem Free Cashflow ist die Aktie für Neueinstiege kein High-Conviction-Setup — der negative FCF sollte vor jeder Positionsentscheidung im nächsten Quartalsbericht geklärt werden. Bestehende Positionen mit Trailing-Stop (10%) führen. Positionsgröße bei Neueinstieg klein halten (max. 1–2%) angesichts der negativen EV-Rechnung. Direkte Peers: **VLO** (Valero) ist bilanziell konservativer (D/E 42,7% vs. PSX 91,4%) bei vergleichbarer Crack-Spread-Exposure; **MPC** (Marathon Petroleum) hat das höhere D/E (146,5%), aber eine ähnliche Elliott-getriebene Kapitaldisziplin-Story. Peer-Multiples nicht vollständig im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — EV-Rechnung zeigt nach dem Ausbruch auf ein neues 52-Wochen-Hoch ein negatives Chance-Risiko-Verhältnis (−11,0%) bei nur mittelmäßigem RS-Rang (41) und ungeklärtem negativem Free Cashflow.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

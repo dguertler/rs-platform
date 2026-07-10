@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BBY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">10.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BBY</h1>
+      <h2>Best Buy Co., Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Specialty Retail</span></div>
+        <div class="mi">MCap: <span>$16B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">50</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 10.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">48.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$77.99</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$41.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">22.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">492.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">39.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+2.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">105–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">72–88</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">35–48</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Best Buy ist der letzte verbliebene große Flächen-Elektronikhändler in den USA und hat sein Geschäftsmodell in den letzten Jahren von reinem Produktverkauf zu einem Service-/Membership-Hybrid umgebaut (Total Tech Membership, In-Store-Shops mit Apple und Samsung). Die eigentliche Story ist nicht Wachstum, sondern Verteidigung von Marktanteilen gegen Amazon und Walmart bei gleichzeitig sich abzeichnendem PC-Ersatzzyklus: Das Windows-10-Support-Ende treibt einen mehrjährigen Hardware-Refresh, von dem Best Buy als größter Nicht-Amazon-Elektronikhändler überproportional profitieren könnte. Was der Markt aktuell einpreist: Die Aktie notiert nahe dem 52-Wochen-Hoch ($84,99), aber das RS-Signal ist mit Rang 93 im S&P 500 nur mittelmäßig — kein breiter institutioneller Zustrom, eher ein selektives Comeback nach Jahren der Underperformance. Auffällig ist die Diskrepanz zwischen dem starken 50-Tage-Fenster (+31,45%) und der deutlich schwächeren kurzfristigen Dynamik (5T +1,76%, 10T +1,5%) — die Rally hat sich in den letzten Handelstagen spürbar verlangsamt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Kernumsatz aus Elektronikeinzelhandel (Computing, Mobile, Appliances, Entertainment) über ~1.000 US-Filialen</li>
+<li>Total-Tech-Membership-Programm monetarisiert Support/Reparatur-Dienstleistungen als margenstärkeren Recurring-Umsatz</li>
+<li>Store-in-Store-Partnerschaften (Apple, Samsung) binden Fußgängerverkehr und Vendor-Marketingzuschüsse</li>
+<li>Filialnetz dient zunehmend als Fulfillment-Hub für Same-Day-Delivery — Omnichannel-Logistikvorteil gegenüber reinen Online-Händlern</li>
+<li>Operativer Hebel ist gering: Gross Margin 22,5%, Operating Margin nur 4,0% — Fixkosten des Filialnetzes drücken auf die Marge</li>
+<li>Strukturelle Abhängigkeit vom Konsumentenzyklus bei diskretionären Elektronikausgaben — kein defensives Geschäftsmodell</li>
+<li>Preistransparenz durch Online-Vergleichsportale limitiert Pricing Power strukturell</li>
+<li>Kapitalrückführung über Dividende und Buybacks als zentrales Element der Aktionärsrendite bei begrenztem organischem Wachstum</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Windows-10-Support-Ende (Oktober 2025) löst einen mehrjährigen PC-Ersatzzyklus aus, Comps stabilisieren sich, Total-Tech-Membership verbessert den Margenmix strukturell. Annahme (kein Konsens): FY27E EPS ~$8,50 × 14x Forward = $119. Kursziel Bull: $105–$130 (Mittelwert $118). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Moderates Comp-Wachstum, Margen bleiben stabil um 4% Operating Margin. Forward-EPS ~$7,07 (aus Forward-PE 11,0x auf Snapshot-Basis) leicht steigend auf ~$7,30 als Ausgangspunkt × 10,5–12x = $77–$88. Kursziel Base: $72–$88 (Mittelwert $80). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Konsumausgaben für diskretionäre Elektronik schwächen sich ab (Rezessionsdruck oder Zollbelastung auf importierte Hardware), gleichzeitig verschärft sich der Preiswettbewerb mit Amazon/Walmart. Kundenkonzentration: Kein relevantes Einzelkundenrisiko im B2C-Retail — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Erhebliche China-Lieferkettenabhängigkeit bei Consumer Electronics — Zollrisiko ist der konkreteste Makro-Auslöser für dieses Segment. Lieferketten: Diversifizierte Lieferantenbasis (Vendor-Modell), aber keine eigene Fertigung — Preisschwankungen werden nur teilweise weitergegeben. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; historisch nettoreduzierend durch Buybacks. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$4,50 bei Margendruck. Annahme: FY27E EPS ~$4,50 × 8–9x = $36–$41. Kursziel Bear: $35–$48 (Mittelwert $41,50). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $118 + 0,45 × $80 + 0,35 × $41,50 = $23,60 + $36,00 + $14,53 = **~$74,10 — implizites Downside vs. aktuellem Kurs ($77,99): −5,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 39,1% wirkt auf den ersten Blick stark, ist aber vor allem ein Hebel-Effekt: Debt/Equity von 134,1% und ein durch Buybacks verkleinertes Eigenkapital treiben die Kennzahl, nicht überlegene operative Kapitalrenditen. Die eigentliche Ertragskraft zeigt sich in Gross Margin 22,5% und Operating Margin 4,0% — beides typisch für margenschwachen Elektronikeinzelhandel ohne strukturellen Burggraben. Free Cashflow von $1,14 Mrd. bei $41,86 Mrd. Umsatz ist solide und stützt Dividende plus Buybacks. Der wirtschaftliche Burggraben ist überwiegend scheinbar: Skalenvorteile im Einkauf und das Fulfillment-Netzwerk sind real, aber keine Preissetzungsmacht gegenüber Amazon.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 14,4x, Forward PE 11,0x, P/B 5,3x — keine zyklische Rohstoffaktie, aber ein konsumzyklisches Geschäft, das über den Zyklus und nicht nur am aktuellen KGV bewertet werden sollte. Rückrechnung "Was preist der Kurs ein?": $77,99 bei Forward-EPS $7,07 impliziert, dass der Markt eine leichte Margenverbesserung und stabile bis leicht wachsende Umsätze für plausibel hält — konsistent mit dem Base Case dieser Analyse, nicht mit einer aggressiven Turnaround-These. Das ist plausibel, nicht übertrieben. Analyst-Konsensziel $79,15 (20 Analysten, "hold") liegt nur 1,5% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Indiz für begrenzten Street-Optimismus.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der starke 50-Tage-Trend bei gleichzeitig abflachender kurzfristiger Dynamik (5T/10T nahe null) deutet auf eine Konsolidierungsphase nach der eigentlichen Rally hin — Fast-Money-Positionen könnten bereits teilweise realisiert worden sein. Für neue institutionelle Käufer müsste ein konkreter Comp-Beat oder eine Guidance-Anhebung zum PC-Zyklus sichtbar werden. Enttäuschungsrisiko: Schwache Feiertagssaison-Kommentare oder ein verhaltener Ausblick zum PC-Refresh-Tempo.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 48,62, Rang 93 im S&P 500 — nur mittelmäßig. 5T +1,76%, 10T +1,5%, 20T +3,35%, 50T +31,45%, 6M +10,56% — die große Bewegung liegt im 50-Tage-Fenster, seither deutliche Abkühlung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt aktuell keinen neuen Ausbruch. Momentum wirkt teilweise fundamental gestützt (PC-Zyklus-Narrativ), aber die jüngste Seitwärtsbewegung ist ein erstes Warnsignal für nachlassende Dynamik. Ein Rückfall unter die 50-Tage-Basis wäre ein klareres technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Total-Tech-Membership skaliert auf einen zweistelligen Umsatzanteil, Margenmix verbessert sich strukturell, PC- und KI-Hardware-Zyklen liefern mehrjährigen Rückenwind. Kursziel: $130–$170.</p>
+<p>Base: Moderates Comp-Wachstum, stabile Marge um 4–5%, Marktanteilserhalt gegen Amazon/Walmart. Kursziel: $85–$115.</p>
+<p>Bear: Strukturelle Marktanteilsverluste an Online-Handel beschleunigen sich, Filialnetz wird zur Kostenlast. Kursziel: $30–$50.</p>
+<p>Entscheidende Variable: Ob Total-Tech-Membership und Store-in-Store-Partnerschaften die Marge strukturell heben können, bevor der Online-Preisdruck weiter zunimmt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −5,0%). BBY ist kein Compounder und kein High-Conviction-Momentum-Play, sondern ein zyklischer Trade auf den PC-Ersatzzyklus mit einem strukturell margenschwachen Grundgeschäft. Nahe dem 52-Wochen-Hoch bei nur mittelmäßigem RS-Rang ist das Chance-Risiko-Verhältnis für Neueinstiege unattraktiv. Bestehende Positionen mit Trailing-Stop (10–12%) führen. Positionsgröße bei Neueinstieg klein halten (max. 1–2%) angesichts der leicht negativen EV-Rechnung und der Konsumzyklus-Abhängigkeit. Direkte Peers: Kein anderer reiner US-Elektronikhändler dieser Größe mehr im Markt (Circuit City, RadioShack ausgeschieden) — nächstliegende Vergleichsgrößen wären Amazon (Segment) oder Walmart Electronics, beide nicht als reines Instrument für diese These handelbar. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Der PC-Ersatzzyklus ist real, aber die zuletzt abflachende kurzfristige Dynamik (5T/10T nahe null) liefert derzeit keinen akuten technischen Auslöser für die volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

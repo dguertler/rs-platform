@@ -1,164 +1,85 @@
 # EOAN.DE — KI-Aktienbewertung
 
-**E.ON SE                       N** · Utilities · 01.06.2026 · Signal: GWS Breakout 3/3
+**E.ON SE                       N** · Utilities · 10.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 18.16 |
-| Market Cap | $47.45 Mrd. |
-| Forward PE | 14.6 |
+| Kurs | 19.2 |
+| Market Cap | $50.18 Mrd. |
+| Forward PE | 15.43 |
 | Revenue (TTM) | $77.04 Mrd. |
 | Gross Margin | 27.8% |
 | ROE | 15.4% |
-| RS-Score | 11.7 |
+| RS-Score | 55.2 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-# E.ON SE (EOAN.DE) – Institutionelle Analyse
-
 ## 1. INVESTMENT-CASE
 
-E.ON ist kein Wachstums-Play, sondern ein regulierter Infrastruktur-Compounder mit massivem Rückenwind aus der europäischen Energiewende. Die Story dreht sich primär um den Netzausbau: rund 42 Mrd. EUR Capex bis 2028, größtenteils in regulierte Stromnetze, deren RAB (Regulatory Asset Base) jährlich im hohen einstelligen Bereich wächst. Der Markt unterschätzt häufig, dass E.ON faktisch eine Wette auf Elektrifizierung, Netzregulierung und ein steigendes deutsches Zinsumfeld bei den Eigenkapitalverzinsungen ist. Mit 6M-Outperformance von +17% gegenüber QQQ läuft hier ein klassisches Re-Rating regulierter Utilities. Gleichzeitig drücken negativer FCF und hohe Verschuldung auf die Qualität. Die GWS-Ampel mit 3/3 zeigt strukturelle Bruchpunkte – kurzfristig Vorsicht, aber Trend intakt.
+E.ON ist seit dem Asset-Tausch mit RWE (2019, Übertragung der Erzeugungs-/Erneuerbaren-Sparte gegen Innogys Netz- und Vertriebsgeschäft) ein reiner Netz- und Endkundenversorger ohne eigene Stromerzeugung. Die eigentliche Story ist nicht Energiehandel oder Erzeugungsmargen, sondern regulierter Netzausbau: E.ON betreibt eines der größten Verteilnetze Europas und profitiert strukturell vom Elektrifizierungs-Trend (Wärmepumpen, E-Mobilität, dezentrale Erzeugung), der die regulierte Vermögensbasis (RAB) über Jahre hinweg wachsen lässt. Was der Markt aktuell einpreist: Der Umsatzrückgang von -13,4% YoY ist auf den ersten Blick alarmierend, dürfte aber überwiegend die Normalisierung der Energiepreise nach der Energiekrise 2022 widerspiegeln (niedrigere Pass-Through-Preise im Endkundenvertrieb) und nicht das regulierte Netzgeschäft betreffen — dies ist aus den vorliegenden Daten nicht abschließend auflösbar, da keine Segmentaufschlüsselung vorliegt. Der negative Free Cashflow von -€3,41 Mrd. ist Ausdruck des laufenden Capex-Superzyklus in die Netzmodernisierung, nicht eines operativen Problems. Das RS-Signal (Score 55,16, Rang 18 im DAX-40) ist moderat, mit einer klaren Reaktualisierung der Dynamik in den letzten fünf Handelstagen (+7,11%) nach einer langen Konsolidierungsphase (50T nur +0,89%).
 
 ## 2. GESCHÄFTSMODELL
 
-- Größter Stromnetzbetreiber Europas (Deutschland, Schweden, Osteuropa) – ca. 70% des EBITDA
-
-- Regulierte Erlöse über Anreizregulierung, planbare Cashflows über Jahrzehnte
-
-- Customer Solutions: Strom-/Gasvertrieb an 47 Mio. Kunden, dünne Margen, hohes Volumen
-
-- Energy Infrastructure Solutions: dezentrale Lösungen, Wärme, B2B
-
-- Wachstum primär durch RAB-Expansion (Netzausbau für EE-Integration)
-
-- Kein nennenswertes Erzeugungsgeschäft mehr (nach Uniper-Tausch mit RWE)
-
-- Profiteur höherer regulatorischer EK-Renditen ab 2024 (Bundesnetzagentur)
-
-- Strukturell defensiv, zyklisch nur in der Vertriebssparte
+- Energy Networks: regulierte Strom- und Gasverteilnetze in Deutschland, Schweden, weiteren europäischen Ländern — größter Ergebnistreiber
+- Customer Solutions: Energievertrieb an Endkunden (Strom, Gas, Energiedienstleistungen) — margenschwächer, preisvolatiler
+- Kein eigenes Erzeugungsportfolio mehr seit dem RWE-Innogy-Asset-Tausch 2019 — reines Netz-/Vertriebsmodell
+- Operativer Hebel: Regulierte Netzerlöse sind an genehmigte Eigenkapitalverzinsung (WACC) gekoppelt — Ergebniswachstum folgt direkt aus Investitionsvolumen in die RAB
+- Strukturelle Abhängigkeit von der Regulierungsperiode und den durch die Bundesnetzagentur festgelegten Erlösobergrenzen
+- Elektrifizierung (Wärmepumpen, E-Mobilität, dezentrale PV-Einspeisung) treibt strukturellen Netzausbaubedarf über Jahrzehnte
+- Hohe Kapitalintensität: Der laufende Investitionszyklus bindet mehr Kapital als der operative Cashflow aktuell deckt
+- Kapitalrückführung (Dividende) bleibt Priorität, aber die Fremdfinanzierung des Netzausbaus erhöht den Verschuldungsgrad strukturell
 
 ## 3. BULL CASE
 
-- Elektrifizierungs-Supercycle: EU-Stromverbrauch +40-60% bis 2040
+Die Regulierungsbehörde genehmigt höhere Eigenkapitalverzinsungen für den beschleunigten Netzausbau im Rahmen der europäischen Elektrifizierungsagenda, RAB-Wachstum beschleunigt sich über den Planungshorizont hinaus. Annahme (kein Konsens): FY27E EPS ~€1,60 × 16–18x Forward = €25,60–€28,80. Kursziel Bull: €24–€30 (Mittelwert €27). Eintrittswahrscheinlichkeit: 20%.
 
-- Regulatorische Eigenkapitalverzinsung in DE steigt deutlich (ab 2024er Regulierungsperiode)
+## 4. BASE CASE
 
-- RAB-Wachstum >8% p.a. → fast mechanisches Ergebniswachstum
+Wahrscheinlichstes Szenario: Stetiges reguliertes Netzwachstum gemäß aktuellem Investitionsplan, Vertriebsmargen stabilisieren sich nach der Preisnormalisierung. Forward-EPS ~€1,24 (aus Forward-PE 15,4x auf Snapshot-Basis) leicht steigend auf ~€1,35 als Ausgangspunkt × 14–15x = €19–€20. Kursziel Base: €18–€21 (Mittelwert €19,50). Eintrittswahrscheinlichkeit: 50%.
 
-- Re-Rating von 14x KGV Richtung 16-18x bei sinkenden Zinsen denkbar
+## 5. BEAR CASE
 
-- Dividendenwachstum bis 2028 mit mindestens +5% p.a. kommuniziert
+Auslöser: Die Regulierungsbehörde senkt die genehmigte Eigenkapitalverzinsung in der nächsten Regulierungsperiode, gleichzeitig belasten steigende Zinskosten auf die bereits erhöhte Verschuldung das Ergebnis. Kundenkonzentration: Breite Endkundenbasis im Vertrieb, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein direktes China-Exposure, aber Energiepreisvolatilität durch geopolitische Ereignisse (Gasversorgungssicherheit) bleibt ein Makrofaktor. Lieferketten/Foundry: Nicht klassisch relevant für ein Netzgeschäft, aber Materialengpässe (Transformatoren, Kabel) könnten Capex-Umsetzung verzögern. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; eine Kapitalerhöhung zur Finanzierung des Netzausbaus ist bei anhaltend negativem FCF ein reales Risiko. Regulierung: Das zentrale Risiko — jede Regulierungsperiode kann die Erlösobergrenzen und WACC-Vorgaben verändern. EPS fällt auf ~€0,90 bei Zinskostendruck. Annahme: FY27E EPS ~€0,90 × 11–12x = €9,90–€10,80. Kursziel Bear: €9–€12 (Mittelwert €10,50). Eintrittswahrscheinlichkeit: 30%.
 
-- Geopolitik: Energie-Souveränität Europas treibt Investitionen
+Summe Bull + Base + Bear: 20% + 50% + 30% = 100%.
 
-- KI-/Rechenzentrumsboom in Europa erhöht Netzlast und Capex-Bedarf
+**Erwartungswert:** EV = 0,20 × €27 + 0,50 × €19,50 + 0,30 × €10,50 = €5,40 + €9,75 + €3,15 = **~€18,30 — implizites Downside vs. aktuellem Kurs (€19,21): −4,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
-## 4. BEAR CASE
+## 6. FUNDAMENTALE QUALITÄT
 
-- Negativer FCF (-3,4 Mrd.) durch massive Capex – Finanzierung über Schulden
+ROE von 15,4% ist solide für einen regulierten Netzbetreiber. Operating Margin von 17,9% und Net Margin von 4,5% spiegeln die Mischung aus margenstarkem Netzgeschäft und margenschwachem, umsatzstarkem Vertriebsgeschäft wider. Der negative Free Cashflow von -€3,41 Mrd. muss im Zykluskontext des laufenden Netzausbau-Investitionsprogramms bewertet werden — bei regulierten Versorgern ist dies in Ausbauphasen normal und kein Zeichen operativer Schwäche, solange die regulierte Verzinsung die Kapitalkosten deckt. Debt/Equity von 150,0% ist erhöht und die zentrale Kennzahl, die im Auge zu behalten ist. Der wirtschaftliche Burggraben ist real und strukturell: Ein Verteilnetz ist ein natürliches regionales Monopol mit regulatorisch garantierter Verzinsung.
 
-- Debt/Equity 150% – sensitiv gegenüber Zinsanstieg
+## 7. BEWERTUNG
 
-- Regulatorisches Risiko: politische Eingriffe in Renditeparameter
+Trailing PE 14,7x, Forward PE 15,4x, P/B 2,30x — für einen Versorger mit sichtbarem strukturellem Wachstum (Elektrifizierung) im moderaten bis leicht erhöhten Bereich. Rückrechnung "Was preist der Kurs ein?": €19,21 bei Forward-EPS €1,24 impliziert eine Fortsetzung des aktuellen regulierten Ergebniswachstums ohne größere regulatorische Rückschläge — plausibel, aber nicht konservativ, da die nächste Regulierungsperiode nicht aus den Daten prognostizierbar ist. Das Analysten-Konsensziel (€19,93, 17 Analysten, "buy") liegt nur 3,7% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, deutet aber auf begrenzten Street-Optimismus hin.
 
-- Verwässerungsrisiko durch mögliche Kapitalerhöhung
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Bewertung relativ zu historischem Schnitt nicht mehr günstig
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Versorger wie E.ON gelten typischerweise als defensive Long-Only-Positionen (Dividendenrendite, regulierte Cashflows) — die jüngste Beschleunigung im 5-Tage-Fenster (+7,11%) nach langer Seitwärtsphase könnte auf eine Rotation in defensive Sektoren bei allgemeiner Marktunsicherheit hindeuten. Für nachhaltige neue Käufer müsste eine positive Nachricht zur nächsten Regulierungsperiode oder zum WACC-Niveau erfolgen. Enttäuschungsrisiko: Eine unerwartet niedrige WACC-Festsetzung durch die Bundesnetzagentur wäre der klarste negative Katalysator.
 
-- Vertriebsmargen unter Druck durch Wettbewerb und sinkende Großhandelspreise
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- Umsatz YoY -13% zeigt Normalisierung nach Energiekrise
+RS-Score 55,16, Rang 18 im DAX-40 — moderat. 5T +7,11%, 10T +4,91%, 20T +2,47%, 50T +0,89%, 6M +18,66%, 12M +21,12% — nach einer langen Konsolidierung (50-Tage-Fenster nahezu flach) hat sich die Dynamik in der letzten Woche deutlich reaktiviert. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt eher makro-/sektorgetrieben (defensive Rotation) als durch einen konkreten unternehmensspezifischen Katalysator gestützt. Warnsignal: Ein Rückfall unter die 20-Tage-Basis würde die jüngste Beschleunigung als kurzfristigen Ausreißer entlarven.
 
-- Politisches Risiko in Deutschland (Ampel-Nachfolger, Energiepolitik)
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-## 5. FUNDAMENTALE QUALITÄT
-
-- Umsatz 77 Mrd., aber rückläufig durch Preisnormalisierung
-
-- Operating Margin 17,9% – solide für Utility
-
-- Net Margin nur 4,5% – typisch durchgereichtes Geschäft
-
-- ROE 15,4% – ordentlich, aber durch Leverage gehebelt
-
-- Free Cashflow negativ – Capex-Schwerpunkt, kein Warnsignal per se
-
-- Debt/Equity 150% – hoch, aber für regulierte Utility tragbar
-
-- Beta 0,82 – defensives Profil
-
-- Dividendenrendite ca. 4,5-5% (gemeldete 311% irreführend)
-
-- Gross Margin 27,8% – stabil
-
-- Bilanzqualität: Investment Grade, BBB+ Niveau
-
-- Keine echten Wettbewerbsvorteile außer regulatorischem Moat
-
-- Compounder-Charakter über RAB-Wachstum, nicht über organisches Wachstum
-
-## 6. BEWERTUNG
-
-Mit Forward-KGV von 14,8x und P/B 2,2 liegt E.ON leicht über dem 10-Jahres-Schnitt, aber unter europäischen Peers wie Iberdrola (16x) oder National Grid (15x). EV/EBITDA dürfte bei ca. 8-9x liegen – fair, aber nicht billig. Das Kursziel von 19,79 EUR signalisiert wenig Aufwärtspotenzial auf 12 Monate. Der Markt preist bereits höhere regulatorische Renditen und RAB-Wachstum ein. Für ein echtes Re-Rating bräuchte es entweder fallende Bundrenditen oder positive Überraschungen aus der Regulierungsperiode. Die Dividendenrendite von rund 4,5% stützt den Boden. Insgesamt: faire Bewertung, kein Schnäppchen mehr nach dem 18%-Lauf.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Institutionell solide besetzt, aber nicht "crowded" wie US-Tech
-
-- Klassisches "Defensive-Rotation"-Vehikel bei Risk-Off
-
-- Smart Money kauft regulierte Netzbetreiber als Bond-Proxy mit Wachstum
-
-- Retail-Interesse in DE hoch wegen Dividende und Markenname
-
-- Sentiment neutral-positiv, kein Hype
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- 12M-RS +18% stark, aber 20T/50T-RS negativ → kurzfristige Korrektur
-
-- GWS-Ampel 3/3 aktiv – strukturelle Brüche auf allen Zeitebenen, Vorsicht
-
-- Kurs nahe 52W-Hoch, aber Konsolidierungsphase
-
-- Setup spricht für Pullback in den Bereich 17-17,50 EUR
-
-- Zyklus-Phase: späte Trendphase, kein Frühzykliker-Einstieg mehr
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-Konservativ: RAB-Wachstum 6%, KGV stabil 14x → Kursziel 22-24 EUR | Wahrscheinlichkeit 50%
-
-Bull Case: Höhere Regulierungsrenditen, KGV 16x, EPS +8% p.a. → Kursziel 28-30 EUR | Wahrscheinlichkeit 30%
-
-Extrem-Bull: Massive Elektrifizierung, Zinsen fallen, Re-Rating auf 18x → Kursziel 34-36 EUR | Wahrscheinlichkeit 12%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- Iberdrola (IBE): qualitativ stärker, globaler, teurer bewertet
-
-- National Grid (NG): reineres Netzgeschäft, aber UK-Regulierungsrisiko
-
-- Enel (ENEL): höhere Dividendenrendite, mehr Schwellenländer-Exposure
-
-- RWE: komplementär, Erzeugungsfokus, höheres Beta
+Bull (3–5 Jahre): Beschleunigter europäischer Netzausbau durch Elektrifizierungspolitik, höhere genehmigte WACC-Sätze, RAB wächst deutlich über Plan. Kursziel: €28–€38.
+Base: Stetiges reguliertes Wachstum gemäß aktuellem Investitionsplan, moderate Entschuldung über Zeit. Kursziel: €19–€26.
+Bear: Regulatorische WACC-Kürzungen über mehrere Perioden, anhaltend negativer FCF erzwingt Kapitalerhöhung. Kursziel: €8–€14.
+Entscheidende Variable: Die Festlegung der genehmigten Eigenkapitalverzinsung in den kommenden Regulierungsperioden bestimmt das Ergebniswachstum nahezu vollständig.
 
 ## 11. PROFI-FAZIT
 
-E.ON ist ein klassischer "Bond-Proxy mit Wachstumsoption" – kein Trading-Vehikel, sondern ein Compounder für institutionelle Portfolios mit 3-5 Jahres-Horizont. Die Qualität ist solide, aber nicht erstklassig: hohe Verschuldung, negativer FCF und politische Abhängigkeit limitieren das Rating. Das Risiko/Rendite-Profil ist asymmetrisch positiv, solange Zinsen nicht weiter steigen und die Regulierung berechenbar bleibt. Mit 18% YTD-Outperformance ist der einfache Trade gelaufen – jetzt ist es eine Halten-Position für Dividendenjäger, kein aggressiver Neukauf. Die GWS-Ampel signalisiert mit 3/3 aktivem Bruchstatus, dass kurzfristig Vorsicht angebracht ist: ich würde Rücksetzer in den Bereich 17-17,50 EUR abwarten, bevor neu aufgebaut wird. Bei Bruch unter 17 EUR wäre die mittelfristige Trendstruktur gefährdet. Für Hedgefonds eher Pair-Trade-Vehikel (long EOAN / short zyklische Utilities) als Single-Name-Bet. Verkaufen würde ich bei KGV über 17x oder einer politischen Verschlechterung des Regulierungsrahmens.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −4,7%), die Bandbreite ist aber deutlich enger als bei zyklischen Werten — typisch für ein reguliertes Versorgungsunternehmen. E.ON ist ein Buy-and-Hold-Compounder für dividendenorientierte, defensive Investoren, kein Momentum- oder Trading-Vehikel — die Investment-These hängt fast vollständig an der regulatorischen Verzinsung des Netzausbaus, nicht an kurzfristigem operativem Momentum. Explizite Risikowarnung: Der erhöhte Verschuldungsgrad (D/E 150,0%) macht die Aktie sensitiv gegenüber Zinsänderungen — bei einer Positionsgröße sollte dies berücksichtigt werden, auch wenn das regulierte Geschäftsmodell grundsätzlich defensiv ist. Direkter Peer: **RWE** ist nach dem Asset-Tausch das komplementäre Erzeugungs-/Erneuerbaren-Investment und kein direktes Substitut für die reine Netz-These von E.ON — beide zusammen bilden das ehemalige Innogy-Geschäft ab. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-Rating:
-
-- Qualität: 3,5/5
-
+- Qualität: 3/5
 - Wachstum: 3/5
-
 - Bewertung: 3/5
+- Katalysator: 3/5
 
-- Langfristiges Potenzial: 3,5/5
+**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Solides reguliertes Geschäftsmodell mit strukturellem Elektrifizierungs-Rückenwind, aber ohne aktives GWS-Signal und ohne konkreten kurzfristigen Auslöser bleibt die volle Positionsgröße nicht gerechtfertigt.
 
 ---
 
@@ -168,7 +89,8 @@ Rating:
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
 | Katalysator | 3/5 |
+| EV-Upside | -1.1% |
 
-**Verdict: HOLD (60/100)**
+**Verdict: WATCH (53/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
