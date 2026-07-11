@@ -1124,18 +1124,6 @@
       "created_at": "2026-07-10T10:20:48.516152"
     },
     {
-      "ticker": "CSCO",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Die EV-Berechnung ergibt auf aktuellem Niveau keinen asymmetrischen Edge (-0,7% vs. Kurs), daher halbe Positionsgr\u00f6\u00dfe trotz intakter mittelfristiger RS-St\u00e4rke."
-      },
-      "created_at": "2026-07-11T08:40:09.596581"
-    },
-    {
       "ticker": "DDOG",
       "verdict": "WATCH",
       "score": 44,
@@ -1146,18 +1134,6 @@
         "reason": "Die Szenarien ergeben einen EV von \u221216,4% ohne asymmetrischen Edge, w\u00e4hrend Operating Margin (0,8%) und die Trailing-/Forward-PE-Anomalie eine strukturierte Long-Position auf aktuellem Niveau nicht rechtfertigen."
       },
       "created_at": "2026-07-11T08:40:51.207963"
-    },
-    {
-      "ticker": "PYPL",
-      "verdict": "HOLD",
-      "score": 55,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Katalysator fehlt",
-        "reason": "RS-Score -40,47 (Rang 83/100) und inaktive GWS-Ampel auf allen Zeitebenen belegen den fehlenden fundamentalen und technischen Ausl\u00f6ser trotz statistisch g\u00fcnstiger Bewertung."
-      },
-      "created_at": "2026-07-11T08:41:23.106502"
     },
     {
       "ticker": "CDW",
@@ -1181,7 +1157,55 @@
         "category": "Katalysator fehlt",
         "reason": "Die GWS-Ampel ist auf allen drei Zeitebenen inaktiv (Abschnitt 9) und der Kurs preist bei 23,64x Forward-PE trotz 0,2% Umsatzwachstum bereits eine ambitionierte EPS-Beschleunigung ein (Abschnitt 7), sodass ohne technischen Ausl\u00f6ser kein tragf\u00e4higes Chance-Risiko-Verh\u00e4ltnis besteht."
       },
-      "created_at": "2026-07-11T08:41:49.820281"
+      "created_at": "2026-07-11T08:43:12.562941"
+    },
+    {
+      "ticker": "PYPL",
+      "verdict": "HOLD",
+      "score": 55,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "RS-Score -40,47 (Rang 83/100) und inaktive GWS-Ampel auf allen Zeitebenen belegen den fehlenden fundamentalen und technischen Ausl\u00f6ser trotz statistisch g\u00fcnstiger Bewertung."
+      },
+      "created_at": "2026-07-11T08:43:20.033004"
+    },
+    {
+      "ticker": "CSCO",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die EV-Berechnung ergibt auf aktuellem Niveau keinen asymmetrischen Edge (-0,7% vs. Kurs), daher halbe Positionsgr\u00f6\u00dfe trotz intakter mittelfristiger RS-St\u00e4rke."
+      },
+      "created_at": "2026-07-11T08:43:22.908618"
+    },
+    {
+      "ticker": "RF",
+      "verdict": "AVOID",
+      "score": 37,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "Kein aktives GWS-Signal (Weekly/Daily/4H alle inaktiv, 0 Punkte) bei gleichzeitig negativem Erwartungswert (\u22126,2 %) liefert keinen Ausl\u00f6ser, der eine Position rechtfertigt."
+      },
+      "created_at": "2026-07-11T08:43:23.342647"
+    },
+    {
+      "ticker": "OVV",
+      "verdict": "AVOID",
+      "score": 28,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die eigene Szenario-Herleitung ergibt ein EV von -22,7%, getragen von einer nicht plausibel gest\u00fctzten Forward-PE-Pr\u00e4mie (6,78x vs. 17,42x Trailing) ohne aktives GWS-Signal."
+      },
+      "created_at": "2026-07-11T08:43:33.839492"
     }
   ]
 }

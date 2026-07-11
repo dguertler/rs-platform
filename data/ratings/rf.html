@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RF — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0000;color:#ef4444;border:1px solid #7f1d1d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>RF</h1>
+      <h2>Regions Financial Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Banks - Regional</span></div>
+        <div class="mi">MCap: <span>$26B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">AVOID</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#ef4444;font-size:20px">37</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">12.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$30.28</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">350.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-4.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">36–39</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">29–33</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–19</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $36–$39 (20 %) · Base $29–$33 (50 %) · Bear $17–$19 (30 %) · EV ~$28,4</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Regions Financial ist keine Wachstumsstory, sondern eine Zinskurven- und Kreditzyklus-Wette mit Sunbelt-Fußabdruck. Der Markt preist RF fast exakt am Analystenkonsens ($30,95 Ziel vs. $30,28 Kurs) — Hold von 20 Analysten signalisiert: kaum jemand erwartet eine große Neubewertung. Die eigentliche Frage ist nicht "wächst RF", sondern ob die erwartete Fed-Zinssenkungs-Phase die Kurve so versteilt, dass sich die Nettozinsmarge (NIM) strukturell erholt, während das Gewerbeimmobilien-Kreditbuch im Südosten (Atlanta, Nashville, Florida) nicht kippt. RS-Score 12,2 (Rang 104/500) ist Mittelmaß, kein Momentum-Ausreißer. Aus den Daten nicht beurteilbar: wie weit die Zinskurven-Normalisierung bereits eingepreist ist, da NIM-/Zinssensitivitätsdaten fehlen. Die Aktie notiert nur ~4 % unter dem 52-Wochen-Hoch ($31,53) — der einfache Teil der Erholung seit dem Regionalbanken-Stress 2023 ist bereits gelaufen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Klassisches Spread-Banking: Zinserträge aus Gewerbe-/Konsumentenkrediten minus Einlagenkosten — NIM ist der zentrale, aber nicht im Datensatz verfügbare Ergebnistreiber</li>
+<li>Regionaler Fußabdruck Südosten/Texas (Sunbelt) — strukturell von Bevölkerungs-/Unternehmensmigration begünstigt, aber nicht quantifiziert</li>
+<li>Fee-Income (Wealth Management, Treasury/Capital Markets) als Diversifizierung gegen reine Zins-Abhängigkeit — Anteil am Umsatz nicht im Datensatz</li>
+<li>Operating Margin 40,1 % und Net Margin 31,0 % sind bankentypisch strukturiert (Zinsergebnis abzüglich Risikovorsorge/Kosten) — nicht mit Industrieunternehmen vergleichbar</li>
+<li>Gewerbeimmobilien-Exposure (CRE) als konzentriertes Klumpenrisiko im Kreditbuch — Anteil nicht im Datensatz, sektortypisch relevant</li>
+<li>Kapitalrückführung über Dividende/Buybacks als Kernbestandteil der Aktionärsrendite — Ausschüttungsquote nicht bestimmbar, da der Dividendenrohwert fehlerhaft ist (siehe Abschnitt 6)</li>
+<li>Regulatorisches Kapitalregime (CET1, Basel III) begrenzt strukturell die Skalierbarkeit — CET1-Quote nicht im Datensatz</li>
+<li>Kreditqualität/Charge-off-Raten sind der eigentliche Frühindikator für die These — nicht im Datensatz verfügbar</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Fed-Zinssenkungen versteilen die Kurve, Einlagenkosten fallen schneller als Kreditrenditen, NIM expandiert. Kreditqualität bleibt stabil, Loan-Growth im Sunbelt zieht an. Annahme (kein Konsens): FY27-EPS ~$3,10 (+8 % ggü. Forward-EPS-Implikation $2,86 = Kurs/Forward-PE) × 11,5–12,5x (Rerating Richtung oberes Ende der Regionalbanken-Bandbreite) = $35,65–$38,75. Bull-Kursziel: $36–$39. Eintrittswahrscheinlichkeit: 20 %.</p>
+<p>Margennachhaltigkeit: Technologieführerschaft/IP nicht anwendbar — strukturelle Differenzierung hier nicht beurteilbar. Fee-Income-Mixverschiebung könnte NIM-Abhängigkeit senken, Anteil nicht quantifizierbar. Sunbelt-Filialdichte als potenzieller Einlagenkosten-Vorteil — qualitativ, nicht datenbasiert. Kundenbindung über Beziehungsbanking branchentypisch moderat, kein Alleinstellungsmerkmal. Operativer Hebel bei steigenden Volumina vorhanden, aber regulatorisch durch CET1-Anforderungen gedeckelt.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: moderate NIM-Stabilisierung, Kreditwachstum im niedrigen einstelligen Bereich, Kreditqualität leicht unter Druck aber ohne Krise. Annahme: FY27-EPS ~$2,90 (nahe der Forward-PE-implizierten Schätzung) × 10,0–11,5x (in Linie mit aktuellem Forward-PE 10,6x) = $29,00–$33,35. Base-Kursziel: $29–$33. Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der Gewerbeimmobilien-Kreditzyklus (insbesondere Büro-CRE) dreht spürbar, Risikovorsorge steigt sprunghaft, während die Fed langsamer senkt als erwartet und Einlagenkosten sticky bleiben — NIM-Kompression trifft auf höhere Charge-offs. Annahme: FY27-EPS fällt auf ~$2,00 (−30 % ggü. Forward-Schätzung) × 8,5–9,5x (Multiple-Kompression bei Kreditsorgen, historisch üblich in Stressphasen) = $17,00–$19,00. Bear-Kursziel: $17–$19. Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>Risiko-Sweep: Kundenkonzentration — auf Datenbasis nicht beurteilbar. Geopolitik/China-Exposure — nicht anwendbar; RF ist rein US-national ausgerichtet, strukturelles Exposure minimal. Lieferketten-/Foundry-Abhängigkeit — nicht anwendbar auf ein Bankgeschäftsmodell. Verwässerung (SBC, Aktienanzahl-Trend) — nicht verfügbar, nicht beurteilbar. Regulierung/Rechtsrisiken — real relevant (Basel-III-Endgame, CFPB-Gebührenaufsicht, CRE-Konzentrationsprüfung), aber CET1-Quote fehlt im Datensatz — Ausmaß nicht abschließend quantifizierbar.</p>
+<p>**Summe: 20 % + 50 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $37,5 + 0,50 × $31 + 0,30 × $18 = $7,50 + $15,50 + $5,40 = **~$28,4 — implizites Downside vs. aktuellem Kurs ($30,28): −6,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 11,9 % liegt im soliden Mittelfeld für Regionalbanken (Peer-Bandbreite typischerweise 10–14 %) — keine Top-of-Cycle-Verzerrung erkennbar, wirkt normalisiert. Net Margin 31,0 % ist für ein Zinsgeschäft plausibel und nicht anomal. Gross Margin 0,0 % ist bei einer Bank methodisch nicht aussagekräftig — Banken haben kein klassisches COGS-/Gross-Margin-Konzept; die Kennzahl wird nicht interpretiert. Free Cashflow und Debt/Equity sind nicht verfügbar; bei einer Bank wären NIM, Efficiency Ratio, CET1-Quote und Kreditqualitäts-Kennzahlen (Charge-off-Rate, NPL-Quote) die relevanten Ersatzgrößen — nicht im Datensatz, werden nicht geschätzt. Der gemeldete Dividendenrohwert (350,0 %) ist ein eindeutiger yfinance-Datenfehler (Skalierungsartefakt) — UNGÜLTIG, wird nicht verwendet. Bei plausiblem Skalierungsfaktor läge der reale Wert bei ca. 3,5 % — plausibel für eine Regionalbank, aber eigene Schätzung, kein Konsenswert. Der Burggraben liegt — soweit beurteilbar — in Einlagenbasis/Filialdichte im Sunbelt, nicht in einem strukturellen Kostenvorteil; ohne Efficiency-Ratio bleibt das Hypothese.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 12,56x, Forward PE 10,6x, P/B 1,48x. Bankenmethodik statt FCF-Multiple: vereinfachter P/B-ROE-Ansatz (Gordon-Growth) — gerechtfertigtes P/B ≈ (ROE − g) / (Eigenkapitalkosten − g). Mit ROE 11,9 %, Annahme (kein Konsens) Eigenkapitalkosten ~10,5 %, g ~3 %: gerechtfertigtes P/B ≈ (0,119−0,03)/(0,105−0,03) ≈ 1,19x. Der tatsächliche P/B von 1,48x liegt rund 24 % über dem modellierten Fair Value — moderate Prämie, keine Value-Falle, aber kein Schnäppchen. Rückrechnung "was preist der Kurs ein": Bei $30,28 und Forward-PE 10,6x impliziert der Kurs ein Forward-EPS von ~$2,86 bei einem Multiple nahe dem historischen Regionalbanken-Durchschnitt (9–12x) — der Markt preist weder Krise noch Neubewertung, sondern Kontinuität. Plausibel, aber nicht ambitioniert — Aufwärtspotenzial ohne externe Neubewertung (z. B. Zinskurven-Versteilung) begrenzt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Ownership-Daten liegen nicht im Datensatz vor — keine belastbare Aussage zu Fast-Money- vs. Long-Only-Positionierung möglich. Datenbasiert: 20 Analysten mit Hold-Konsens und Kursziel ($30,95), nur ~2 % über dem aktuellen Kurs, signalisieren eine bereits ausgereizte Erwartungshaltung der Coverage — wenig Raum für positive Überraschungen ohne fundamentale Neubewertung. Hypothese, nicht datenbasiert: Nähe zum 52-Wochen-Hoch könnte moderates FOMO-Interesse erzeugen, aus den Daten nicht verifizierbar. Enttäuschungsrisiko liegt vor allem in einer Verschlechterung der Kreditqualität, aktuell aus den Daten nicht beobachtbar.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 12,2, Rang 104 von 500 — Mittelfeld, kein Ausreißer. Fenster: 5T +1,27 %, 10T +0,18 %, 20T +4,92 %, 50T +5,65 %, 6M +0,18 %. Die Diskrepanz zwischen starkem 20T/50T-Momentum und nahezu flachem 6M-Fenster zeigt: der jüngste Anstieg ist eine kurzfristige Erholung, kein etablierter Sechsmonatstrend — Momentum wirkt eher reaktiv (Zinssenkungs-Erwartungen) als fundamental neu gestützt. GWS-Ampel zeigt kein aktives Signal auf Weekly/Daily/4H ("Kein GWS-Signal", 0 Punkte) — technische Bestätigung fehlt. Warnsignal: ein Wochenschluss unter der 20T-Unterstützungszone (~$28,50) würde die Erholung technisch invalidieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($42–$52):** Nachhaltig steilere Zinskurve plus Fee-Income-Mixverschiebung heben das normalisierte ROE auf ~13–14 %; Multiple-Rerating auf 12–13x bei EPS $3,70–$4,00.</p>
+<p>**Base ($32–$40):** Moderates Kreditwachstum, NIM pendelt sich im historischen Mittel ein, EPS wächst niedrig-einstellig, Multiple bleibt bei 10–11x.</p>
+<p>**Bear ($14–$22):** Anhaltende CRE-Kreditverschlechterung im Südosten belastet Kapitalquoten strukturell, ggf. Kapitalmaßnahmen nötig, Multiple-Kompression auf 7–8x.</p>
+<p>Entscheidende Variable: Verlauf der Zinskurve (Fed-Pfad) in Kombination mit der Entwicklung der CRE-Kreditqualität im Sunbelt-Kreditbuch.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −6,2 %). RF ist kein Compounder und kein Momentum-Play, sondern ein zyklisches Zins-/Kredit-Instrument, das aktuell fair bis leicht teuer bewertet ist (P/B-Prämie ~24 % ggü. modelliertem Fair Value) und ohne aktives GWS-Signal dasteht. Geeignet allenfalls für Value-/Dividenden-orientierte Investoren mit Geduld für einen vollen Zinszyklus — nicht für Trading-orientierte oder High-Conviction-Positionen. Positionsgröße: falls überhaupt gehalten, klein und mit Fokus auf Kreditqualitäts-Updates als Frühindikator. Peers: **Truist Financial (TFC)** und **Fifth Third Bancorp (FITB)** als vergleichbare Südstaaten-/Regionalbanken-Instrumente mit ähnlichem Zins-/Kreditzyklus-Exposure. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ, keine konkrete Vorteilhaftigkeit ableitbar.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 1/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Katalysator fehlt — Kein aktives GWS-Signal (Weekly/Daily/4H alle inaktiv, 0 Punkte) bei gleichzeitig negativem Erwartungswert (−6,2 %) liefert keinen Auslöser, der eine Position rechtfertigt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
