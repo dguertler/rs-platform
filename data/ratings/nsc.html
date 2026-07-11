@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NSC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NSC</h1>
+      <h2>Norfolk Southern Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Railroads</span></div>
+        <div class="mi">MCap: <span>$72B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">45</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">9.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$322.71</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">23.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$12.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">45.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">167.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">17.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-4.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">360–410</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">300–345</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">200–240</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $360–$410 (20 %) · Base $300–$345 (55 %) · Bear $200–$240 (25 %) · EV ~$309</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Norfolk Southern notiert bei $322,71 nur $3,29 unter dem 52-Wochen-Hoch von $326 — während das Umsatzwachstum mit +0,2% YoY faktisch bei null liegt. Diese Diskrepanz ist der eigentliche Kern der Story: Der Markt bezahlt 27,16x Trailing- und 23,64x Forward-Gewinn für ein Unternehmen, dessen Top-Line seit Jahren strukturell stagniert. Was hier eingepreist wird, ist nicht Volumenwachstum, sondern eine Wette auf anhaltende Margenexpansion durch Precision-Scheduled-Railroading-Disziplin (Operating Margin bereits bei 32,3%) sowie ein spekulatives Sektor-Thema: Class-I-Eisenbahnkonsolidierung in den USA. Eine mögliche Fusion oder Übernahme im Class-I-Segment ist ein bekanntes strukturelles Marktthema — in den vorliegenden Daten aber nicht belegt: Hypothese, nicht datenbasiert. Ohne diese Fantasie ist die Bewertung bei stagnierendem Umsatz schwer zu rechtfertigen. Das GWS-Signal ist auf allen drei Zeitebenen inaktiv — es gibt aktuell keinen technischen Auslöser, der die Nähe zum Allzeithoch fundamental untermauert. NSC ist damit ein reifer Compounder mit Bewertungsrisiko, kein Wachstumsstory.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Class-I-Eisenbahn im Osten der USA — Duopol-/Oligopolstruktur mit extrem hohen Markteintrittsbarrieren (Streckennetz physisch nicht replizierbar) als struktureller Burggraben</li>
+<li>Ertragstreiber: Fracht-Volumen (Kohle, Intermodal, Chemie, Agrar) × Preis/Yield minus Operating Ratio — bei 0,2% Umsatzwachstum kommt die Marge fast ausschließlich aus Kostendisziplin (PSR), nicht aus Nachfrage</li>
+<li>Operating Margin 32,3% zeigt fortgeschrittene PSR-Umsetzung; weiterer Hebel primär über Netzwerkauslastung und Overhead-Abbau, nicht über freie Preissetzung (regulierte Tarifstruktur)</li>
+<li>Kapitalintensität strukturell hoch: Gleisnetz, Rollmaterial, Terminals erfordern laufende Erhaltungs-Capex — begrenzt freien Cashflow trotz hoher operativer Marge (FCF-Marge nur ~10,7% von Revenue)</li>
+<li>STB (Surface Transportation Board) reguliert Tarife, Sicherheitsstandards und M&A-Genehmigungen — jede Konsolidierungsfantasie im Sektor hängt an dieser Behörde</li>
+<li>Intermodal-/Chemie-Fracht steht in Substitutionskonkurrenz zum LKW — Preissetzungsmacht ist real, aber nicht unbegrenzt</li>
+<li>Dividende (bereinigt ~1,67% p.a. — Rohwert 167,0% im Datensatz ist ein yfinance-Artefakt, vermutlich doppelt mit 100 skaliert) als Kapitalrückführungskanal neben Buybacks</li>
+<li>D/E 111,6% (~1,1x) spiegelt eine kapitalintensive Infrastruktur-Bilanzstruktur — moderat, aber kein großer Sicherheitspuffer</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Weitere Operating-Margin-Expansion Richtung 34% durch PSR-Netzwerkeffizienz plus aktive Aktienrückkäufe reduzieren die Share-Count-Basis; zusätzlich sorgt Konsolidierungsfantasie (Class-I-M&A-Spekulation, s.o. — Hypothese, nicht datenbasiert) für ein Multiple-Re-Rating. Annahme (kein Konsens): FY27-EPS ~$15,00 × 26x Forward-Multiple (M&A-Prämie) = $390. Bull-Kursziel: $360–$410 (Mittelpunkt $385). Eintrittswahrscheinlichkeit: 20%. Strukturelle Margennachhaltigkeit: Wettbewerbsposition vs. CSX/Union Pacific bleibt regional differenziert (Ost- vs. West-Netz, kaum direkter Overlap), Switching Costs für Großkunden mit Gleisanschluss (Kohle-/Chemie-Verlader) sind hoch — das stützt Preissetzung, beruht aber auf physischer Infrastruktur, nicht auf Technologieführerschaft oder IP.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatz bleibt nahe Stagnation (0–2% YoY), Operating Margin hält sich bei 32–33%, moderate buyback-getriebene EPS-Progression. Annahme (kein Konsens): FY27-EPS ~$14,20 (ausgehend vom forward-PE-implizitem EPS von $13,65 plus leichtem Buyback-Effekt) × 23x Forward-Multiple (aktuelles Niveau) = $326,60. Base-Kursziel: $300–$345 (Mittelpunkt $322,50). Eintrittswahrscheinlichkeit: 55%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: US-Industrieproduktion/Frachtvolumen schwächt sich zyklisch ab, während gleichzeitig regulatorischer Gegenwind zunimmt — die STB-Aufsicht über Class-I-Bahnen ist strukturell hoch, und Sicherheits-/Umweltvorfälle haben in der Branchenhistorie wiederholt zu verschärfter Kontrolle und höheren Compliance-Capex geführt (konkrete aktuelle Rückstellungen oder Rechtsrisiken sind im vorliegenden Datensatz nicht enthalten — auf Datenbasis nicht abschließend quantifizierbar). Kundenkonzentration: im Datensatz nicht ausgewiesen — auf Datenbasis nicht beurteilbar. Geopolitik/Exportkontrollen: als US-Binnenbahn kaum direkte China-Exposure, Frachtvolumen aber indirekt an globalen Handel (Hafen-Intermodal) gekoppelt — nicht quantifizierbar aus den Daten. Lieferketten-/Single-Source-Risiko: für ein Bahnnetz strukturell gering (kein Foundry-/Zulieferer-Analogon) — nicht relevant. Verwässerung: Shares Outstanding und SBC-Trend nicht im Datensatz (implizit aus Market Cap/Kurs ~224,6 Mio. Aktien, aber ohne Historie) — auf Datenbasis nicht beurteilbar. Regulierung: STB-Tarifaufsicht und M&A-Genehmigungspflicht sind ein zentraler struktureller Risikofaktor bei jeder Class-I-Bahn. Annahme (kein Konsens): FY27-EPS ~$11,50 (Margendruck aus Capex/Volumen) × 19x (Multiple-Kontraktion) = $218,50. Bear-Kursziel: $200–$240 (Mittelpunkt $220). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 20% + 55% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $385 + 0,55 × $322,50 + 0,25 × $220 = $77,00 + $177,38 + $55,00 = **~$309 — implizites Downside vs. aktuellem Kurs ($322,71): −4,1%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 17,6% ist solide, aber nicht Top-of-Cycle-verzerrt — plausibler Ausdruck einer margenstarken, aber kapitalintensiven Infrastruktur-Bilanz. Gross Margin 45,9%, Operating Margin 32,3%, Net Margin 21,9% sind intern konsistent (keine Anomalie), typisch für einen PSR-optimierten Class-I-Carrier nahe der Zyklusspitze der Effizienzgewinne. FCF $1,30 Mrd. bei $12,18 Mrd. Revenue (FCF-Marge ~10,7%) — moderat, durch hohe laufende Instandhaltungs-Capex gedeckelt. D/E 111,6% ist vertretbar für ein Infrastruktur-Asset mit stabilen Cashflows, aber kein Sicherheitspuffer bei einem zyklischen Frachtvolumen-Einbruch. Anomalie: Die im Rohdatensatz ausgewiesene Dividendenrendite von 167,0% ist klar unplausibel (yfinance-Artefakt, vermutlich doppelte Prozent-Skalierung) — plausibler Wert ~1,67%, dieser wird hier verwendet, der Rohwert fließt nicht in die Bewertung ein. Der echte Burggraben liegt im physischen Streckennetz (nicht replizierbar), nicht in Marke oder Technologie — ein klassischer regulierter Infrastruktur-Moat.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 27,16x und Forward PE 23,64x liegen über historischen Rail-Durchschnittswerten (üblicherweise 15–20x) — bei 0,2% Umsatzwachstum ist das ambitioniert. Price/Book 4,59 unterstreicht die Aufwertung gegenüber dem Buchwert einer eigentlich kapitalintensiven Old-Economy-Branche. Was preist der aktuelle Kurs ein? Forward PE 23,64x bei Kurs $322,71 impliziert FY-EPS ~$13,65 — gegenüber TTM-EPS von ~$11,87 (implizit aus Net Margin 21,9% × Revenue $12,18 Mrd. / geschätzt ~224,6 Mio. Aktien) ein EPS-Wachstum von ~15% innerhalb eines Jahres, obwohl der Umsatz nahezu stillsteht. Das ist nur über weitere Margenexpansion plus Buybacks erreichbar — bei bereits hoher Operating Margin (32,3%) ambitioniert, nicht unrealistisch, aber auch kein Value-Fall. Analyst-Konsensziel $334,18 (17 Analysten, Konsens "hold") liegt nur 3,6% über dem aktuellen Kurs — als Sentiment-Orientierung, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Positionierungsdaten sind im Datensatz nicht enthalten — jede Aussage zu Long-Only vs. Fast Money bleibt Hypothese, nicht datenbasiert. Der Analysten-Konsens "hold" bei einem Kursziel nur knapp über dem aktuellen Niveau signalisiert eine ausgereizte Sell-Side-Meinung — kaum Raum für positive Zielkorrekturen ohne neue fundamentale Impulse. Enttäuschungsrisiko: Bleibt die Konsolidierungsfantasie unbestätigt oder enttäuscht der nächste Quartalsbericht beim Wachstum, ist die Nähe zum 52-Wochen-Hoch der klarste Schwachpunkt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 9,70 (Rang 118 im S&P-500-Universum) — moderat positiv, aber kein Top-Signal. RS-Fenster: 5T +1,23%, 10T +1,68%, 20T +3,01%, 50T −0,79%, 6M +4,57%, 12M nicht verfügbar. Das Bild ist gemischt: kurzfristig leicht positiv, mittelfristig (50T) leicht negativ — kein klarer Trend. GWS-Ampel komplett inaktiv (Weekly/Daily/4H) — kein technischer Katalysator bestätigt die Nähe zum Allzeithoch. Das Momentum wirkt eher reaktiv/seitwärts als fundamental gestützt. Technisches Warnsignal: Ein Tagesschluss unter $310 (unter dem kurzfristigen Aufwärtstrend) wäre ein erstes Warnsignal, ein Bruch unter $290 würde die 20-Wochen-Struktur ernsthaft gefährden.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($420–$520):** Erfolgreiche Class-I-Konsolidierung (Hypothese, nicht datenbasiert) plus strukturelle Operating-Ratio-Verbesserung unter 60% treiben EPS Richtung $18–20 bei 24–26x Multiple.</p>
+<p>**Base ($330–$400):** Moderates Umsatzwachstum (1–3% p.a.) durch US-Reindustrialisierung/Nearshoring-Fracht, stabile Marge, EPS $15–17 bei 22–23x.</p>
+<p>**Bear ($180–$260):** Anhaltender regulatorischer Gegenwind (STB-Auflagen, Sicherheits-Capex) plus Frachtvolumen-Rezession drücken EPS auf $10–12 bei 17–19x.</p>
+<p>Entscheidende Variable: Ausgang der Class-I-Konsolidierungsdebatte und die STB-Regulierungslinie — beides außerhalb der Kontrolle des Managements.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV ~$309, −4,1% Downside). NSC ist kein High-Conviction-Momentum-Play — GWS-Ampel komplett inaktiv, RS-Rang nur 118 im S&P 500 — sondern ein reifer Infrastruktur-Compounder mit intaktem, aber teuer bezahltem Burggraben. Für Buy-and-Hold-Investoren mit Fokus auf Dividende (~1,67%) und regulierte Cashflows ist die Aktie ein Halten, kein Neukauf auf diesem Niveau; für Trading-orientierte Anleger fehlt der Katalysator. Positionsgröße bei Neuaufbau begrenzen, solange keine GWS-Bestätigung vorliegt. **Union Pacific (UNP)** und **CSX** sind die direkten Class-I-Peers — beide potenziell reinere Instrumente für eine Konsolidierungs- oder Frachtvolumen-These, je nach Netzregion. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Katalysator fehlt — Die GWS-Ampel ist auf allen drei Zeitebenen inaktiv (Abschnitt 9) und der Kurs preist bei 23,64x Forward-PE trotz 0,2% Umsatzwachstum bereits eine ambitionierte EPS-Beschleunigung ein (Abschnitt 7), sodass ohne technischen Auslöser kein tragfähiges Chance-Risiko-Verhältnis besteht.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
