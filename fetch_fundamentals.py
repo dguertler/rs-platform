@@ -24,6 +24,8 @@ PLAUSIBILITY = {
     "debtToEquity":            (0.0, 2000.0),
     "trailingPE":              (0.0, 2000.0),
     "forwardPE":               (0.0, 500.0),
+    "trailingEps":             (-500.0, 2000.0),
+    "forwardEps":              (-500.0, 2000.0),
     "revenueGrowth":           (-1.0, 50.0),
     "beta":                    (-3.0, 10.0),
 }
@@ -98,6 +100,8 @@ def _fetch_one(ticker: str) -> dict:
         "currentPrice":            info.get("currentPrice") or info.get("regularMarketPrice"),
         "trailingPE":              info.get("trailingPE"),
         "forwardPE":               info.get("forwardPE"),
+        "trailingEps":             info.get("trailingEps"),
+        "forwardEps":              info.get("forwardEps"),
         "grossMargins":            info.get("grossMargins"),
         "operatingMargins":        info.get("operatingMargins"),
         "profitMargins":           info.get("profitMargins"),

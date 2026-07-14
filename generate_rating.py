@@ -40,6 +40,8 @@ PLAUSIBILITY = {
     "debtToEquity":     (0.0, 2000.0),
     "trailingPE":       (0.0, 2000.0),
     "forwardPE":        (0.0, 500.0),
+    "trailingEps":      (-500.0, 2000.0),
+    "forwardEps":       (-500.0, 2000.0),
     "revenueGrowth":    (-1.0, 50.0),
     "beta":             (-3.0, 10.0),
 }
@@ -75,6 +77,8 @@ def fetch_fundamentals(ticker: str) -> dict:
             "currentPrice":          info.get("currentPrice") or info.get("regularMarketPrice"),
             "trailingPE":            info.get("trailingPE"),
             "forwardPE":             info.get("forwardPE"),
+            "trailingEps":           info.get("trailingEps"),
+            "forwardEps":            info.get("forwardEps"),
             "grossMargins":          info.get("grossMargins"),
             "operatingMargins":      info.get("operatingMargins"),
             "profitMargins":         info.get("profitMargins"),
@@ -231,6 +235,7 @@ Beta: {_fmt(fund.get('beta'))}
 
 Bewertung:
 - Trailing PE: {_fmt(fund.get('trailingPE'))} | Forward PE: {_fmt(fund.get('forwardPE'))}
+- Trailing EPS: {_fmt(fund.get('trailingEps'))} | Forward EPS: {_fmt(fund.get('forwardEps'))}
 - Price/Book: {_fmt(fund.get('priceToBook'))}
 - Analysten-Konsens: {fund.get('recommendationKey', 'N/A')} | Kursziel: ${_fmt(fund.get('targetMeanPrice'))}
 {analysts_line}
