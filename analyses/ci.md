@@ -4,9 +4,9 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 293.46 |
-| Market Cap | $77.63 Mrd. |
-| Forward PE | 8.76 |
+| Kurs | 301.25 |
+| Market Cap | $79.69 Mrd. |
+| Forward PE | 9.0 |
 | Revenue (TTM) | $277.89 Mrd. |
 | Gross Margin | 9.1% |
 | ROE | 16.3% |
@@ -19,7 +19,7 @@
 **Szenarien (12–18 Monate):** Bull $350–$400 (25 %) · Base $270–$320 (50 %) · Bear $150–$190 (25 %) · EV ~$284
 
 ## 1. INVESTMENT-CASE
-Cigna ist heute primär ein Health-Services-Konzern, kein klassischer Versicherer: Evernorth (inkl. Express Scripts als PBM/Pharmacy-Benefit-Manager) trägt einen erheblichen Teil von Umsatz und Profit, während das klassische Cigna-Healthcare-Segment (Employer-/Commercial-Gruppenversicherung) daneben steht. Die eigentliche Story ist die branchenweite Medical-Loss-Ratio-Belastung (erhöhte Behandlungs-/Leistungsauslastung), die die gesamte Managed-Care-Branche seit 2024/2025 belastet hat und die Bewertungen sektorweit komprimiert hat — Trailing PE 12,4x und Forward PE 8,8x sind für einen Gesundheitskonzern dieser Größe historisch günstig. Kurzfristig zeigt die Aktie kräftiges Momentum (5T +6,1 %, 10T +8,2 %), während das 6-Monats-Fenster (+2,5 %) noch verhalten ist — ein erstes Anzeichen, dass der Markt beginnt, eine MLR-Normalisierung vorwegzunehmen, ohne dass diese in den vorliegenden Daten bereits vollständig bestätigt ist. Kernfrage: Ist die aktuelle Konsensschätzung einer deutlichen Ergebniserholung (Forward-EPS impliziert +42 % ggü. Trailing) realistisch, oder preist der Markt eine Normalisierung ein, die die Branche insgesamt noch nicht sicher liefert?
+Cigna ist heute primär ein Health-Services-Konzern, kein klassischer Versicherer: Evernorth (inkl. Express Scripts als PBM/Pharmacy-Benefit-Manager) trägt einen erheblichen Teil von Umsatz und Profit, während das klassische Cigna-Healthcare-Segment (Employer-/Commercial-Gruppenversicherung) daneben steht. Die eigentliche Story ist die branchenweite Medical-Loss-Ratio-Belastung (erhöhte Behandlungs-/Leistungsauslastung), die die gesamte Managed-Care-Branche seit 2024/2025 belastet hat und die Bewertungen sektorweit komprimiert hat — Trailing PE 12,8x und Forward PE 9,0x sind für einen Gesundheitskonzern dieser Größe historisch günstig. Kurzfristig zeigt die Aktie kräftiges Momentum (5T +6,1 %, 10T +8,2 %), während das 6-Monats-Fenster (+2,5 %) noch verhalten ist — ein erstes Anzeichen, dass der Markt beginnt, eine MLR-Normalisierung vorwegzunehmen, ohne dass diese in den vorliegenden Daten bereits vollständig bestätigt ist. Kernfrage: Ist die aktuelle Konsensschätzung einer deutlichen Ergebniserholung (Forward-EPS impliziert +42 % ggü. Trailing) realistisch, oder preist der Markt eine Normalisierung ein, die die Branche insgesamt noch nicht sicher liefert?
 
 ## 2. GESCHÄFTSMODELL
 - Zwei Kernsegmente: Cigna Healthcare (Employer-/Commercial-Krankenversicherung) und Evernorth (PBM/Express Scripts, Spezialpharmazie, Care-Solutions)
@@ -42,13 +42,13 @@ Auslöser: Medical Loss Ratio bleibt erhöht oder verschlechtert sich weiter, PB
 
 **Summe: 25 % + 50 % + 25 % = 100 %**
 
-**Erwartungswert:** EV = 0,25 × $375 + 0,50 × $295 + 0,25 × $170 = $93,75 + $147,50 + $42,50 = **~$284 — implizites Downside vs. aktuellem Kurs ($293,46): −3,3 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25 × $375 + 0,50 × $295 + 0,25 × $170 = $93,75 + $147,50 + $42,50 = **~$284 — implizites Downside vs. aktuellem Kurs ($301,25): −5,7 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
-ROE 16,3 % — solide für einen Managed-Care-Konzern. Gross Margin 9,1 %, Operating Margin 5,5 %, Net Margin 2,3 % — strukturell dünn, typisch für das PBM-lastige Geschäftsmodell mit hohem Durchleitungsvolumen; nicht direkt mit klassischen Industriemargen vergleichbar. FCF $6,92 Mrd. bei $277,9 Mrd. Revenue (2,5 % FCF-Marge) — in absoluten Zahlen substanziell trotz dünner Prozentmarge. Debt/Equity 72,8 — moderate Verschuldung für einen Konzern dieser Größe, kein akutes Bilanzrisiko erkennbar, ROIC nicht im Datensatz verfügbar. Der wirtschaftliche Burggraben liegt in der Skalengröße von Evernorth/Express Scripts (Verhandlungsmacht gegenüber Pharmaherstellern) — real, aber regulatorisch angreifbar, wie die PBM-Reformdiskussion zeigt.
+ROE 16,3 % — solide für einen Managed-Care-Konzern. Gross Margin 9,1 %, Operating Margin 5,5 %, Net Margin 2,3 % — strukturell dünn, typisch für das PBM-lastige Geschäftsmodell mit hohem Durchleitungsvolumen; nicht direkt mit klassischen Industriemargen vergleichbar. FCF $6,92 Mrd. bei $277,9 Mrd. Revenue (2,5 % FCF-Marge) — in absoluten Zahlen substanziell trotz dünner Prozentmarge. Debt/Equity 72,8 — moderate Verschuldung für einen Konzern dieser Größe, kein akutes Bilanzrisiko erkennbar. ROIC 11,3 % — für einen kapitalintensiven Managed-Care-/PBM-Konzern solide, klar über den Kapitalkosten. Der wirtschaftliche Burggraben liegt in der Skalengröße von Evernorth/Express Scripts (Verhandlungsmacht gegenüber Pharmaherstellern) — real, aber regulatorisch angreifbar, wie die PBM-Reformdiskussion zeigt.
 
 ## 7. BEWERTUNG
-Auffällige Kennzahl: Trailing-KGV 12,4x vs. Forward-KGV 8,8x impliziert eine EPS-Steigerung von rechnerisch ~$23,6 auf ~$33,5 (+42 %) binnen eines Jahres (aus Kurs und KGV-Werten zurückgerechnet, kein Konsens-EPS im Datensatz). Plausible Erklärung: branchenweite MLR-Normalisierung nach der Belastungsphase 2024/2025 — ein bekanntes sektorweites Muster bei Managed-Care-Werten, aber Tempo und Ausmaß der Normalisierung sind aus den vorliegenden Daten nicht abschließend verifizierbar. Price/Book 1,84x ist für einen profitablen Gesundheitskonzern moderat bis günstig. Rückrechnung "Was preist der Kurs ein?": Bei $293,46 und 8,8x Forward-Multiple impliziert der Kurs bereits einen erheblichen Teil der MLR-Erholung — plausibel, aber nicht garantiert, sollte sich die Auslastung branchenweit nicht wie erwartet normalisieren. Analyst-Konsensziel $340,92 (24 Analysten, Rating "Buy") liegt ~16 % über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
+Auffällige Kennzahl (direkt aus dem Datensatz, nicht mehr zurückgerechnet): Trailing-EPS $23,60 vs. Forward-Konsens-EPS $33,48 (+42 %; KGV 12,8x/9,0x). Plausible Erklärung: branchenweite MLR-Normalisierung nach der Belastungsphase 2024/2025 — ein bekanntes sektorweites Muster bei Managed-Care-Werten, aber Tempo und Ausmaß der Normalisierung sind aus den vorliegenden Daten nicht abschließend verifizierbar. Price/Book 1,89x ist für einen profitablen Gesundheitskonzern moderat bis günstig. Rückrechnung "Was preist der Kurs ein?": Bei $301,25 und 9,0x Forward-Multiple impliziert der Kurs bereits einen erheblichen Teil der MLR-Erholung — plausibel, aber nicht garantiert, sollte sich die Auslastung branchenweit nicht wie erwartet normalisieren. Analyst-Konsensziel $340,92 (24 Analysten, Rating "Buy") liegt ~13 % über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 RS-Score 19,0 gegenüber QQQ, Rang 254 von 336 im S&P-500-Vergleichsuniversum — trotz starkem jüngstem Momentum insgesamt nur unterdurchschnittliches relatives Ranking, was auf einen noch frühen Erholungsprozess hindeutet. Short-Float- und Ownership-Daten liegen nicht vor — keine belastbare Aussage zur institutionellen Positionierung möglich. Hypothese, nicht datenbasiert: Die scharfe 5T/10T-Bewegung bei mäßigem 6M-Trend deutet auf einen jüngsten sektorweiten Sentiment-Umschwung im Managed-Care-Bereich hin, nicht auf eine breite, etablierte Akkumulation. Neue Käufer benötigen voraussichtlich belastbare quartalsweise MLR-Daten als Bestätigung. Enttäuschungsrisiko: hoch, falls die nächsten Quartalszahlen die MLR-Verbesserung nicht liefern.
@@ -63,7 +63,7 @@ RS-Fenster: 5T +6,1 %, 10T +8,2 %, 20T +1,1 %, 50T +1,2 %, 6M +2,5 %, 12M nicht 
 Entscheidende Variable: Tempo der MLR-Normalisierung und Ausgang der PBM-Regulierungsdebatte.
 
 ## 11. PROFI-FAZIT
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -3,3 %). CI ist statistisch günstig bewertet (Forward PE 8,8x, P/B 1,84x) für einen Gesundheitskonzern dieser Größe, aber die These hängt an einer noch unbestätigten MLR-Normalisierung und einem realen regulatorischen Risiko im PBM-Geschäft. Am ehesten geeignet für wertorientierte Investoren mit Toleranz für Sektor-/Regulierungsrisiko, die auf eine mehrquartalige Bestätigung warten können — kein kurzfristiger High-Conviction-Momentum-Trade auf aktuellem Niveau, da das RS-Ranking (254/336) die jüngste Kursstärke noch nicht branchenweit bestätigt. Positionsgröße konservativ halten, bis MLR-Daten und RS-Rang sich verbessern. **UnitedHealth (UNH)** und **Elevance Health (ELV)** sind die direkteren Managed-Care-Vergleichswerte mit ähnlicher MLR-Sensitivität; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -5,7 %). CI ist statistisch günstig bewertet (Forward PE 8,8x, P/B 1,84x) für einen Gesundheitskonzern dieser Größe, aber die These hängt an einer noch unbestätigten MLR-Normalisierung und einem realen regulatorischen Risiko im PBM-Geschäft. Am ehesten geeignet für wertorientierte Investoren mit Toleranz für Sektor-/Regulierungsrisiko, die auf eine mehrquartalige Bestätigung warten können — kein kurzfristiger High-Conviction-Momentum-Trade auf aktuellem Niveau, da das RS-Ranking (254/336) die jüngste Kursstärke noch nicht branchenweit bestätigt. Positionsgröße konservativ halten, bis MLR-Daten und RS-Rang sich verbessern. **UnitedHealth (UNH)** und **Elevance Health (ELV)** sind die direkteren Managed-Care-Vergleichswerte mit ähnlicher MLR-Sensitivität; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 3/5
@@ -81,7 +81,7 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -4.6% |
+| EV-Upside | -7.1% |
 
 **Verdict: WATCH (53/100)**
 

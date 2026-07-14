@@ -4,9 +4,9 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 227.62 |
-| Market Cap | $47.34 Mrd. |
-| Forward PE | 35.33 |
+| Kurs | 227.21 |
+| Market Cap | $47.25 Mrd. |
+| Forward PE | 35.25 |
 | Revenue (TTM) | $5.46 Mrd. |
 | Gross Margin | 38.9% |
 | ROE | 23.3% |
@@ -42,13 +42,13 @@ Auslöser: Fracht-Rezession verlängert sich, Industrieproduktion bleibt schwach
 
 **Summe: 25 % + 50 % + 25 % = 100 %**
 
-**Erwartungswert:** EV = 0,25 × $275 + 0,50 × $222,50 + 0,25 × $125 = $68,75 + $111,25 + $31,25 = **~$211 — implizites Downside vs. aktuellem Kurs ($227,63): −7,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25 × $275 + 0,50 × $222,50 + 0,25 × $125 = $68,75 + $111,25 + $31,25 = **~$211 — implizites Downside vs. aktuellem Kurs ($227,21): −7,1 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 ROE 23,3 %, ROIC 24,2 % — Spitzenwerte für ein Trucking-Unternehmen, deutlich über dem Branchendurchschnitt. Gross Margin 38,9 %, Operating Margin 23,8 %, Net Margin 18,5 % — außergewöhnlich für LTL-Trucking, wo Wettbewerber oft einstellige bis niedrige zweistellige Margen zeigen. FCF $862 Mio. bei $5,46 Mrd. Revenue (15,8 % FCF-Marge) — solide trotz Umsatzrückgang. Debt/Equity 0,91 — moderat, kein akutes Bilanzrisiko, aber höher als ODFLs historisch sehr konservatives Profil. Der wirtschaftliche Burggraben ist real: Servicequalität und Netzwerkdichte sind über Jahre aufgebaut und kurzfristig nicht replizierbar — aber zyklisch überlagert, da die Margen im aktuellen Abschwung bereits unter das historische Top gerutscht sind.
 
 ## 7. BEWERTUNG
-Trailing PE 47,6x, Forward PE 35,3x — für ein Trucking-Unternehmen strukturell hoch, auch nach ODFLs eigenem historischem Premium-Maßstab. Rückrechnung "Was preist der Kurs ein?": Bei $227,63 und 35x Forward-Multiple impliziert der Kurs ein EPS von ~$6,50 — das setzt eine spürbare Tonnage-Erholung binnen der nächsten 12 Monate voraus, während die aktuellen Daten (-2,9 % Revenue YoY) noch keine Trendwende zeigen. Ambitioniert, nicht unplausibel bei Zyklus-Wende, aber noch nicht bestätigt. Price/Book 10,8x ist hoch, nur bei anhaltend hoher Eigenkapitalrendite zu rechtfertigen. Analyst-Konsensziel $227,73 (22 Analysten, Rating "Hold") liegt praktisch exakt auf dem aktuellen Kurs — die Street sieht aktuell ebenfalls kein signifikantes Aufwärtspotenzial, ein Signal, das mit der eigenen EV-Rechnung übereinstimmt.
+Trailing-EPS $4,80, Forward-Konsens-EPS $6,44 (direkt aus dem Datensatz; KGV 47,3x/35,3x) — ein Ergebnisplus von +34 %, deutlich moderater als bei anderen Zyklikern und im Rahmen dessen, was operativer Hebel bei einer Tonnage-Erholung plausibel hergeben kann. Für ein Trucking-Unternehmen ist das Multiple-Niveau dennoch strukturell hoch, auch nach ODFLs eigenem historischem Premium-Maßstab. Rückrechnung "Was preist der Kurs ein?": Bei $227,21 und 35,3x Forward-Multiple impliziert der Kurs praktisch das volle Forward-Konsens-EPS — das setzt eine spürbare Tonnage-Erholung binnen der nächsten 12 Monate voraus, während die aktuellen Daten (-2,9 % Revenue YoY) noch keine Trendwende zeigen. Ambitioniert, nicht unplausibel bei Zyklus-Wende, aber noch nicht bestätigt. Price/Book 10,7x ist hoch, nur bei anhaltend hoher Eigenkapitalrendite zu rechtfertigen. Analyst-Konsensziel $228,50 (22 Analysten, Rating "Hold") liegt praktisch exakt auf dem aktuellen Kurs — die Street sieht aktuell ebenfalls kein signifikantes Aufwärtspotenzial, ein Signal, das mit der eigenen EV-Rechnung übereinstimmt.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 RS-Score 35,6 gegenüber QQQ, Rang 45 — überdurchschnittliches relatives Momentum trotz negativem Umsatzwachstum, ein Hinweis auf beginnende Vorwegnahme der Zyklus-Wende durch den Markt. Short-Float- und Ownership-Daten liegen nicht vor — keine belastbare Aussage zur institutionellen Positionierung möglich. Hypothese, nicht datenbasiert: Die Kombination aus starkem 5T/10T-Momentum bei schwachen fundamentalen Wachstumszahlen deutet auf frühzyklisches Fast-Money-Interesse hin, nicht auf breite Long-Only-Akkumulation. Enttäuschungsrisiko: hoch, falls sich die Tonnage-Erholung in den kommenden Quartalsberichten nicht bestätigt.
@@ -63,7 +63,7 @@ RS-Fenster: 5T +7,7 %, 10T +7,7 %, 20T -4,0 %, 50T +3,1 %, 6M +21,0 %, 12M nicht
 Entscheidende Variable: Timing und Stärke der nächsten Fracht-/Industriezyklus-Erholung.
 
 ## 11. PROFI-FAZIT
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -7,2 %). ODFL ist ein hochqualitativer, zyklischer Trucking-Compounder — kein Momentum-Play im engeren Sinne, sondern eine Wette auf den Zeitpunkt der nächsten Fracht-Erholung, gehandelt zu einer bereits leicht optimistischen Bewertung. Für Buy-and-Hold-Qualitätsinvestoren mit langem Anlagehorizont geeignet, die Zyklusschwankungen aussitzen können; für kurzfristige Trader ungünstig, solange sich das fundamentale Wachstum noch nicht dreht. Positionsgröße bei Neueinstieg moderat halten, bis Revenue-YoY wieder positiv wird. **XPO** und **Saia (SAIA)** sind die direkteren Momentum-Vergleichswerte im LTL-Segment mit teils niedrigerer Bewertung; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -7,1 %). ODFL ist ein hochqualitativer, zyklischer Trucking-Compounder — kein Momentum-Play im engeren Sinne, sondern eine Wette auf den Zeitpunkt der nächsten Fracht-Erholung, gehandelt zu einer bereits leicht optimistischen Bewertung. Für Buy-and-Hold-Qualitätsinvestoren mit langem Anlagehorizont geeignet, die Zyklusschwankungen aussitzen können; für kurzfristige Trader ungünstig, solange sich das fundamentale Wachstum noch nicht dreht. Positionsgröße bei Neueinstieg moderat halten, bis Revenue-YoY wieder positiv wird. **XPO** und **Saia (SAIA)** sind die direkteren Momentum-Vergleichswerte im LTL-Segment mit teils niedrigerer Bewertung; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 5/5
 - Wachstum: 2/5
@@ -81,7 +81,7 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Wachstum | 2/5 |
 | Bewertung | 2/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -8.8% |
+| EV-Upside | -8.7% |
 
 **Verdict: WATCH (53/100)**
 

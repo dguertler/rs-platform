@@ -4,9 +4,9 @@
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 1352.74 |
-| Market Cap | $66.46 Mrd. |
-| Forward PE | 44.6 |
+| Kurs | 1387.94 |
+| Market Cap | $68.19 Mrd. |
+| Forward PE | 45.76 |
 | Revenue (TTM) | $2.96 Mrd. |
 | Gross Margin | 55.2% |
 | ROE | 19.6% |
@@ -19,7 +19,7 @@
 **Szenarien (12–18 Monate):** Bull $1.500–$1.800 (20 %) · Base $1.150–$1.400 (55 %) · Bear $500–$750 (25 %) · EV ~$1.188
 
 ## 1. INVESTMENT-CASE
-MPWR ist einer der margenstärksten Fabless-Anbieter für Power-Management-Halbleiter und über die letzten Jahre zum bevorzugten Partner für Spannungswandlung in KI-Servern avanciert — Power Delivery wird mit steigender GPU-Leistungsdichte zum eigenständigen Engpass, nicht mehr zur Commodity. Die eigentliche Story ist aber nicht mehr das Wachstumsnarrativ selbst, sondern die Frage, ob der Markt die zuletzt kräftige Kurskorrektur (-21 % vom 52-Wochen-Hoch, RS-Score -21,6 gegenüber QQQ, Rang 120) als Einstiegschance oder als berechtigtes Warnsignal lesen sollte. Revenue wächst mit +26,1 % YoY, Operating Margin liegt bei knapp 30 % — solide Zahlen für ein zyklisches Halbleiterunternehmen. Gleichzeitig klafft eine auffällige Lücke zwischen Trailing- und Forward-KGV (97,1x vs. 44,6x), die eine EPS-Verdopplung binnen eines Jahres impliziert — deutlich aggressiver als das historische Normalisierungstempo der Branche. Der Markt preist aktuell also bereits eine kräftige Ergebniserholung ein, während die technischen Daten (20T -19 %, 50T -25 %) noch keine Bestätigung liefern. Das strukturelle AI-Power-Delivery-Argument bleibt intakt, ist auf dem aktuellen Kursniveau aber kein übersehenes Thema mehr, sondern weitgehend im Preis.
+MPWR ist einer der margenstärksten Fabless-Anbieter für Power-Management-Halbleiter und über die letzten Jahre zum bevorzugten Partner für Spannungswandlung in KI-Servern avanciert — Power Delivery wird mit steigender GPU-Leistungsdichte zum eigenständigen Engpass, nicht mehr zur Commodity. Die eigentliche Story ist aber nicht mehr das Wachstumsnarrativ selbst, sondern die Frage, ob der Markt die zuletzt kräftige Kurskorrektur (-21 % vom 52-Wochen-Hoch, RS-Score -21,6 gegenüber QQQ, Rang 120) als Einstiegschance oder als berechtigtes Warnsignal lesen sollte. Revenue wächst mit +26,1 % YoY, Operating Margin liegt bei knapp 30 % — solide Zahlen für ein zyklisches Halbleiterunternehmen. Gleichzeitig klafft eine auffällige Lücke zwischen Trailing-EPS ($13,95) und Forward-Konsens-EPS ($30,33) — ein Ergebnisplus von +117 %, deutlich über dem historischen Normalisierungstempo der Branche. Der Markt preist aktuell also bereits eine kräftige Ergebniserholung ein, während die technischen Daten (20T -19 %, 50T -25 %) noch keine Bestätigung liefern. Das strukturelle AI-Power-Delivery-Argument bleibt intakt, ist auf dem aktuellen Kursniveau aber kein übersehenes Thema mehr, sondern weitgehend im Preis.
 
 ## 2. GESCHÄFTSMODELL
 - Fabless-Analoghalbleiter-Design (DC/DC-Wandler, Power-Module, Motion-Control-ICs) — Fertigung extern bei Foundry-Partnern, kein eigenes Fab
@@ -42,16 +42,16 @@ Auslöser: Ein Großkunde verlagert Power-Delivery-Referenzdesign intern oder zu
 
 **Summe: 20 % + 55 % + 25 % = 100 %**
 
-**Erwartungswert:** EV = 0,20 × $1.650 + 0,55 × $1.275 + 0,25 × $625 = $330 + $701 + $156 = **~$1.188 — implizites Downside vs. aktuellem Kurs ($1.352,74): −12,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $1.650 + 0,55 × $1.275 + 0,25 × $625 = $330 + $701 + $156 = **~$1.188 — implizites Downside vs. aktuellem Kurs ($1.387,94): −14,4 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 ROE 19,6 %, ROIC 24,1 % — solide, für ein Analog-Halbleiterunternehmen im mittleren bis oberen Bereich der Peer-Group. Gross Margin 55,2 %, Operating Margin 30,0 %, Net Margin 23,0 % — konsistent mit einem margenstarken Analog-/Power-IC-Geschäft, aber nicht am zyklischen Top wie reine Speicherhersteller. FCF $491,7 Mio. bei $2,96 Mrd. Revenue (16,6 % FCF-Marge) — solide, aber nicht außergewöhnlich gemessen an der Bewertung, die das Unternehmen aktuell trägt. Bilanzqualität gut: Debt/Equity 0,54 — niedrige Verschuldung, kein Bilanzrisiko erkennbar. Der wirtschaftliche Burggraben liegt im Referenzdesign-Status bei Tier-1-Kunden (Design-Wins sind klebrig über Produktzyklen) — echt, aber nicht unüberwindbar, wie das Insourcing-Risiko zeigt.
 
 ## 7. BEWERTUNG
-Auffällige Anomalie: Trailing-KGV 97,1x vs. Forward-KGV 44,6x impliziert eine EPS-Verdopplung von rechnerisch ~$13,9 auf ~$30,3 binnen eines Jahres (aus Kurs und den KGV-Werten zurückgerechnet, kein Konsens-EPS im Datensatz). Aus den Daten nicht abschließend auflösbar — möglich sind ein temporärer Ergebnistrog in der Trailing-Periode oder eine optimistische Konsensschätzung. Beide Werte fließen daher nur als Orientierungsrahmen, nicht direkt in die Szenario-EPS ein. Price/Book 18,1x ist hoch und nur bei anhaltend hoher Eigenkapitalrendite zu rechtfertigen. Rückrechnung "Was preist der Kurs ein?": Bei $1.352,74 und 44x Forward-Multiple impliziert der Kurs ein EPS von ~$30 — das setzt Umsatz-YoY deutlich über 25 % plus weitere Margenausweitung voraus. Ambitioniert, aber nicht unrealistisch bei anhaltendem AI-Datacenter-Zyklus — bei zyklischer Abkühlung fehlt der Puffer. Analyst-Konsensziel $1.789,23 (13 Analysten) liegt ~32 % über dem aktuellen Kurs — Orientierungspunkt, kein Kursziel-Ceiling; Kursziele hinken der Kursbewegung erfahrungsgemäß hinterher.
+Auffällige Kennzahl (direkt aus dem Datensatz): Trailing-EPS $13,95 vs. Forward-Konsens-EPS $30,33 (KGV 104,4x/45,8x) — ein Ergebnissprung von +117 %. Aus den Daten nicht abschließend auflösbar, ob realer Margen-Turnaround oder zu optimistische Konsensschätzung — dafür fehlt eine Quartalshistorie. Der Konsenswert fließt daher nur als Orientierungsrahmen, nicht ungeprüft in die Szenario-EPS ein (eigene Annahmen: $16/$29/$32 für Bear/Base/Bull). Price/Book 18,5x ist hoch und nur bei anhaltend hoher Eigenkapitalrendite zu rechtfertigen. Rückrechnung "Was preist der Kurs ein?": Bei $1.387,94 und 45,8x Forward-Multiple impliziert der Kurs praktisch das volle Forward-Konsens-EPS — das setzt Umsatz-YoY deutlich über 25 % plus weitere Margenausweitung voraus. Ambitioniert, aber nicht unrealistisch bei anhaltendem AI-Datacenter-Zyklus — bei zyklischer Abkühlung fehlt der Puffer. Analyst-Konsensziel $1.789,23 (13 Analysten) liegt ~29 % über dem aktuellen Kurs — Orientierungspunkt, kein Kursziel-Ceiling; Kursziele hinken der Kursbewegung erfahrungsgemäß hinterher.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
-RS-Score -21,6 gegenüber QQQ, Rang 120 im Vergleichsuniversum — klar unterdurchschnittliches relatives Momentum, kein Zeichen institutioneller Akkumulation aktuell. Short-Float- und Ownership-Daten liegen nicht vor — keine belastbare Aussage zur Fast-Money- vs. Long-Only-Positionierung möglich (Hypothese, nicht datenbasiert: nach einem -21%-Rückschlag vom Hoch dürfte ein Teil der schnellen Käufer bereits ausgestiegen sein). Neue Käufer benötigen voraussichtlich eine RS-Wende ins Positive und/oder eine positive Guidance-Überraschung als Auslöser. Enttäuschungsrisiko bleibt hoch, solange die Forward-KGV-Anomalie ungeklärt ist.
+RS-Score -21,6 gegenüber QQQ, Rang 120 im Vergleichsuniversum — klar unterdurchschnittliches relatives Momentum, kein Zeichen institutioneller Akkumulation aktuell. Short-Float- und Ownership-Daten liegen nicht vor — keine belastbare Aussage zur Fast-Money- vs. Long-Only-Positionierung möglich (Hypothese, nicht datenbasiert: nach einem -21%-Rückschlag vom Hoch dürfte ein Teil der schnellen Käufer bereits ausgestiegen sein). Neue Käufer benötigen voraussichtlich eine RS-Wende ins Positive und/oder eine positive Guidance-Überraschung als Auslöser. Enttäuschungsrisiko bleibt hoch, solange der EPS-Sprung aus Abschnitt 7 fundamental ungeklärt ist.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 RS-Fenster: 5T +1,8 %, 10T +0,2 %, 20T -19,0 %, 50T -25,5 %, 6M +20,9 %, 12M nicht verfügbar. Bild: mittelfristig klarer Abwärtstrend (20T/50T), kurzfristig erste Stabilisierung (5T/10T nahe Null), 6-Monats-Fenster noch positiv — die Aktie befindet sich in einer technischen Bodenbildungsphase, aber ohne Bestätigung. GWS-Ampel aktuell komplett inaktiv (Weekly/Daily/4H), kein aktives Signal. Kurs liegt 21 % unter dem 52-Wochen-Hoch ($1.714,09), aber 97 % über dem 52-Wochen-Tief ($686,87) — der Long-Term-Aufwärtstrend ist intakt, der mittelfristige ist gebrochen. Warnsignal: eine erneute Verschlechterung des 20T-Fensters oder ein Bruch unter die letzten Verlaufstiefs würde die Bodenbildungs-These entkräften.
@@ -63,14 +63,14 @@ RS-Fenster: 5T +1,8 %, 10T +0,2 %, 20T -19,0 %, 50T -25,5 %, 6M +20,9 %, 12M nic
 Entscheidende Variable: Ob MPWR den Content-Share bei Power-Delivery für die nächste GPU-Generation verteidigt oder an Insourcing-Initiativen der Großkunden verliert.
 
 ## 11. PROFI-FAZIT
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -12,2 %). MPWR ist ein fundamental hochwertiges Analog-/Power-Halbleiterunternehmen mit echtem strukturellem AI-Rückenwind — aber aktuell kein High-Conviction-Momentum-Trade: RS-Score und GWS-Ampel liefern derzeit kein Bestätigungssignal, und die Forward-KGV-Anomalie erschwert eine saubere Bewertungsbasis. Am ehesten ein Buy-and-Hold-Kandidat für langfristig orientierte Qualitätsinvestoren, die eine technische Bodenbildungsphase aussitzen können — nicht geeignet für kurzfristige Trading-Positionierung auf aktuellem Niveau. Positionsgröße bei Neueinstieg konservativ halten, bis RS-Score und GWS-Ampel eine Trendbestätigung liefern. **Texas Instruments (TXN)** und **Analog Devices (ADI)** sind die reineren Diversified-Analog-Instrumente mit geringerer Datacenter-Konzentration; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -14,4 %). MPWR ist ein fundamental hochwertiges Analog-/Power-Halbleiterunternehmen mit echtem strukturellem AI-Rückenwind — aber aktuell kein High-Conviction-Momentum-Trade: RS-Score und GWS-Ampel liefern derzeit kein Bestätigungssignal, und die Forward-KGV-Anomalie erschwert eine saubere Bewertungsbasis. Am ehesten ein Buy-and-Hold-Kandidat für langfristig orientierte Qualitätsinvestoren, die eine technische Bodenbildungsphase aussitzen können — nicht geeignet für kurzfristige Trading-Positionierung auf aktuellem Niveau. Positionsgröße bei Neueinstieg konservativ halten, bis RS-Score und GWS-Ampel eine Trendbestätigung liefern. **Texas Instruments (TXN)** und **Analog Devices (ADI)** sind die reineren Diversified-Analog-Instrumente mit geringerer Datacenter-Konzentration; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 4/5
 - Wachstum: 4/5
 - Bewertung: 2/5
 - Katalysator: 2/5
 
-**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Der Erwartungswert liegt bei -12,2 % trotz solider Fundamentaldaten, gestützt durch die ungeklärte Trailing/Forward-KGV-Anomalie aus Abschnitt 7.
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Der Erwartungswert liegt bei -14,4 % trotz solider Fundamentaldaten, gestützt durch den ungeklärten EPS-Sprung (Trailing $13,95 → Forward $30,33) aus Abschnitt 7.
 
 
 ---
@@ -81,7 +81,7 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Wachstum | 4/5 |
 | Bewertung | 2/5 |
 | Katalysator | 2/5 |
-| EV-Upside | -84.5% |
+| EV-Upside | -84.9% |
 
 **Verdict: WATCH (48/100)**
 
