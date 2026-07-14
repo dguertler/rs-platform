@@ -31,6 +31,16 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
    fund = json.load(open('data/fundamentals.json'))['tickers']['TICKER']
    ```
 
+   **Earnings-Check (PFLICHT, autark vor jeder Analyse):** Prüfen, ob TICKER
+   in den letzten 7 Tagen einen Earnings-Termin hatte (z. B. via
+   `yfinance.Ticker(TICKER).calendar` oder bekanntes Berichtsdatum). Falls ja:
+   Wochen-Cache aus `data/fundamentals.json` NICHT verwenden — stattdessen
+   `fetch_fundamentals(TICKER)` aus `generate_rating.py` für einen erzwungenen
+   Live-Fetch dieses einen Tickers aufrufen. Grund: Der automatische 5 %-Preis-
+   Gap-Trigger in `load_fundamentals()` greift nur bei starker Kursreaktion —
+   ein Earnings-Beat/-Miss kann Fundamentaldaten (Revenue, Margen, EPS)
+   spürbar verändern, ohne dass der Kurs um mehr als 5 % reagiert.
+
 2. **RS-Daten laden** aus dem passenden RS-JSON:
    ```python
    # NASDAQ-100 → data/rs_full.json
