@@ -1,88 +1,76 @@
 # MPWR — KI-Aktienbewertung
 
-**Monolithic Power Systems, Inc.** · Technology · 30.06.2026 · Signal: Smallcap
+**Monolithic Power Systems, Inc.** · Technology · 14.07.2026 · Signal: Smallcap
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 1313.32 |
-| Market Cap | $64.52 Mrd. |
-| Forward PE | 43.3 |
+| Kurs | 1352.74 |
+| Market Cap | $66.46 Mrd. |
+| Forward PE | 44.6 |
 | Revenue (TTM) | $2.96 Mrd. |
 | Gross Margin | 55.2% |
 | ROE | 19.6% |
-| RS-Score | -55.2 |
+| RS-Score | -21.6 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-## 1. INVESTMENT-CASE
+**Szenarien (12–18 Monate):** Bull $1.500–$1.800 (20 %) · Base $1.150–$1.400 (55 %) · Bear $500–$750 (25 %) · EV ~$1.188
 
-Monolithic Power Systems ist ein Analog-/Mixed-Signal-Halbleiterhersteller mit Fokus auf hocheffiziente Stromversorgungslösungen — die eigentliche Story ist die strukturelle Position als kritischer Power-Management-Zulieferer für KI-Rechenzentren: Jede GPU-Generation (insbesondere Nvidia) benötigt immer komplexere Spannungswandler-Architekturen, und MPWR hat sich hier als einer der führenden Anbieter für Power-Delivery-Lösungen bei Hyperscalern positioniert. Was den Markt aktuell beschäftigt: Die Aktie ist von ihrem Hoch deutlich zurückgekommen — RS-Score nur -55,2 (Rang 50 im Smallcap-Universum), mit kurzfristigen Verlusten von -11% (5T), -23% (10T) und -22% (20T), während das 6-Monats-Fenster mit +20% noch positiv bleibt. Der Kurs ist von $1.563,70 (15.06.) über $1.313,32 auf zuletzt $1.312,77 (29.06.) gefallen — ein scharfer Drawdown von rund 16% binnen zwei Wochen. Was der Markt möglicherweise einpreist: entweder eine kundenspezifische Verzögerung bei einem Großkunden (Auslöser aus den Daten nicht verifizierbar) oder eine breitere Sektorrotation aus Halbleiter-Werten. Die fundamentale Qualität (ROE 19,6%, Operating Margin 30,0%) bleibt jedoch intakt — der Kursrückgang scheint primär sentiment-/positionierungsgetrieben, nicht durch eine erkennbare fundamentale Verschlechterung in den vorliegenden Daten begründet.
+## 1. INVESTMENT-CASE
+MPWR ist einer der margenstärksten Fabless-Anbieter für Power-Management-Halbleiter und über die letzten Jahre zum bevorzugten Partner für Spannungswandlung in KI-Servern avanciert — Power Delivery wird mit steigender GPU-Leistungsdichte zum eigenständigen Engpass, nicht mehr zur Commodity. Die eigentliche Story ist aber nicht mehr das Wachstumsnarrativ selbst, sondern die Frage, ob der Markt die zuletzt kräftige Kurskorrektur (-21 % vom 52-Wochen-Hoch, RS-Score -21,6 gegenüber QQQ, Rang 120) als Einstiegschance oder als berechtigtes Warnsignal lesen sollte. Revenue wächst mit +26,1 % YoY, Operating Margin liegt bei knapp 30 % — solide Zahlen für ein zyklisches Halbleiterunternehmen. Gleichzeitig klafft eine auffällige Lücke zwischen Trailing- und Forward-KGV (97,1x vs. 44,6x), die eine EPS-Verdopplung binnen eines Jahres impliziert — deutlich aggressiver als das historische Normalisierungstempo der Branche. Der Markt preist aktuell also bereits eine kräftige Ergebniserholung ein, während die technischen Daten (20T -19 %, 50T -25 %) noch keine Bestätigung liefern. Das strukturelle AI-Power-Delivery-Argument bleibt intakt, ist auf dem aktuellen Kursniveau aber kein übersehenes Thema mehr, sondern weitgehend im Preis.
 
 ## 2. GESCHÄFTSMODELL
-
-- Fabless-Analog-/Mixed-Signal-Halbleiterhersteller mit Fokus auf Power-Management-ICs (DC-DC-Wandler, Spannungsregler) für Rechenzentren, Automotive, Industrie und Consumer
-- Power-Delivery-Lösungen für KI-Server/GPU-Racks als strukturell schnell wachsendes Segment — direkte Kopplung an Hyperscaler-Capex-Zyklen und GPU-Generationswechsel
-- Fabless-Modell überträgt Fertigungsrisiko auf Foundry-Partner, ermöglicht aber auch geringere Kapitalintensität und höhere Bruttomargen
-- Strukturelle Kundenkonzentration bei wenigen Großkunden im Rechenzentrums-/GPU-Segment — ein einzelner Designwin-Verlust oder eine Kundenverzögerung kann überproportional auf Umsatz und Kurs wirken
-- Automotive- und Industriesegmente bieten Diversifikation außerhalb des volatileren Rechenzentrumsgeschäfts, mit längeren, stabileren Designzyklen
-- Operativer Hebel hoch: Hohe Bruttomarge (55,2%) bei wachsendem Umsatz führt zu überproportionalem Gewinnwachstum, aber auch zu schneller Margenkompression bei Nachfrageschwäche
-- Technologische Differenzierung durch firmeneigene Prozesstechnologie (proprietäre IC-Designs) als Burggraben gegenüber Generalisten-Wettbewerbern
-- Revenue TTM $2,96 Mrd., Wachstum +26,1% YoY — solide, aber deutlich unter den Spitzenwachstumsraten vorheriger KI-Hype-Phasen
+- Fabless-Analoghalbleiter-Design (DC/DC-Wandler, Power-Module, Motion-Control-ICs) — Fertigung extern bei Foundry-Partnern, kein eigenes Fab
+- Vier Endmärkte: Computing & Storage/Datacenter, Automotive, Industrial, Consumer/Communications — Diversifikation dämpft Einzelmarkt-Zyklik teilweise
+- Wachstumshebel Datacenter/AI: steigende Leistungsdichte bei GPU-Beschleunigern erfordert Multi-Phase-Vertical-Power-Delivery — höherer Dollar-Content pro Server als in Vorgängergenerationen
+- Operativer Hebel: Bruttomarge 55,2 % bei relativ fixem F&E-/SG&A-Block — Skaleneffekte bei Volumenwachstum, aber auch überproportionaler Margendruck bei Nachfrageschwäche
+- Automotive/Industrial als margenstabilisierender Anker gegen die volatilere Datacenter-Nachfrage
+- Wettbewerb: Analog Devices, Texas Instruments, Infineon sowie potenzielles Insourcing von Power-Delivery-Lösungen durch große Hyperscaler-/GPU-Kunden — strukturelles Konkurrenzrisiko am oberen Ende des Marktes
+- Kundenkonzentration im Datacenter-Segment vermutlich hoch (Großkunden-Charakter des Geschäfts) — exakte Prozentwerte nicht im Datensatz verfügbar
+- Revenue TTM $2,96 Mrd., +26,1 % YoY — Wachstum sowohl volumen- als auch mixgetrieben (höherwertige Datacenter-Power-Lösungen)
 
 ## 3. BULL CASE
-
-KI-Rechenzentrums-Capex bei Hyperscalern beschleunigt sich erneut, MPWR gewinnt zusätzliche Designwins bei der nächsten GPU-Generation und erweitert seinen Anteil am Power-Delivery-Budget pro Server-Rack. Margenexpansion durch höhermargigen Rechenzentrums-Mix. Annahme (kein Konsens): FY28-EPS ~$38 × 48x Forward-Multiple = $1.824. Bull-Kursziel: $1.650–$2.000 (Midpoint $1.825). Eintrittswahrscheinlichkeit: 20%.
+Voraussetzung: AI-Server-Refresh-Zyklus beschleunigt sich weiter, MPWR gewinnt zusätzlichen Content-Share bei Power-Delivery-Referenzdesigns großer GPU-Plattformen, Automotive/Industrial stabilisieren sich parallel. EPS erreicht den vom Forward-KGV implizierten Konsensbereich nahezu vollständig: Annahme (kein Konsens) FY-EPS ~$32 × 50x Forward-Multiple (Prämie für re-akzelerierendes Wachstum) = $1.600. Bull-Kursziel: $1.500–$1.800. Eintrittswahrscheinlichkeit: 20 %.
 
 ## 4. BASE CASE
-
-Wahrscheinlichstes Szenario: Der jüngste Kursrückgang stabilisiert sich, Wachstum normalisiert auf 18-25% YoY entlang der bestehenden Designwins, ohne dramatische Beschleunigung oder Verlangsamung. Forward-PE konsolidiert um aktuelle Niveaus. Annahme (kein Konsens): FY27-EPS ~$26 × 38x = $988. Base-Kursziel: $900–$1.150 (Midpoint $1.025). Eintrittswahrscheinlichkeit: 40%.
+Wahrscheinlichstes Szenario: moderate Erholung der EPS-Basis, aber nicht die volle vom Forward-KGV implizierte Verdopplung — Annahme (kein Konsens) FY-EPS ~$29 × 44x Forward-Multiple (nahe aktuellem Niveau) = $1.276. Base-Kursziel: $1.150–$1.400. Eintrittswahrscheinlichkeit: 55 %.
 
 ## 5. BEAR CASE
+Auslöser: Ein Großkunde verlagert Power-Delivery-Referenzdesign intern oder zu einem Wettbewerber, kombiniert mit zyklischer Abschwächung in Automotive/Industrial. Kundenkonzentration: strukturell hoch im Datacenter-Segment, quantitativ nicht beurteilbar. Geopolitik/Exportkontrollen: kein direktes China-Fertigungsrisiko erkennbar, als KI-Infrastruktur-Zulieferer aber indirekt exportkontroll-sensitiv — nicht abschließend beurteilbar. Foundry: Fabless-Modell schafft externe Fertigungsabhängigkeit — Partner nicht im Datensatz verifizierbar, Single-Source-Risiko nicht auszuschließen. Verwässerung/SBC: nicht im Datensatz — nicht beurteilbar. Regulierung: keine akuten Risiken aus den Daten ersichtlich. EPS fällt auf ~$16 (nahe Trailing-Run-Rate) × 35x (Multiple-Kompression) = $560. Bear-Kursziel: $500–$750. Eintrittswahrscheinlichkeit: 25 %.
 
-Auslöser: Ein Großkunde im Rechenzentrumssegment verzögert oder reduziert Bestellungen (z. B. durch GPU-Generationswechsel-Timing oder eigene Inhouse-Power-Lösungen), gleichzeitig schwächt sich die Automotive-/Industrienachfrage zyklisch ab. Kundenkonzentration: hoch — der jüngste scharfe Kursrückgang (-23% binnen 10 Handelstagen) deutet auf genau dieses Risiko hin, exakte Kundenanteile aus den Daten nicht verfügbar, aber als zentrales Risiko zu werten. Geopolitik/Exportkontrollen: relevant, da Rechenzentrums-/KI-Halbleiterkomponenten zunehmend von US-Exportkontrollen gegenüber China betroffen sein können — direkte China-Umsatzquote aus Daten nicht verfügbar. Lieferketten/Foundry-Abhängigkeit: als Fabless-Hersteller vollständig von Foundry-Partnern (vermutlich TSMC/Partner) abhängig — Single-Source-Risiko bei Kapazitätsengpässen. Verwässerung: D/E nur 0,54 ist sehr niedrig, SBC-Trend aus Daten nicht verfügbar. Regulierung: Halbleiter-Exportkontrollen sind das relevanteste regulatorische Risiko. Bei Kundenverlust und zyklischem Abschwung: Annahme FY27-EPS ~$14 × 25x = $350. Bear-Kursziel: $300–$450 (Midpoint $375). Eintrittswahrscheinlichkeit: 40%.
+**Summe: 20 % + 55 % + 25 % = 100 %**
 
-**Summe: 20% + 40% + 40% = 100%**
-
-**Erwartungswert:** EV = 0,20 × $1.825 + 0,40 × $1.025 + 0,40 × $375 = $365,00 + $410,00 + $150,00 = **~$925,00 — implizites Downside vs. aktuellem Kurs ($1.312,77): −29,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Die hohe Bear-Wahrscheinlichkeit (40%) spiegelt das jüngste scharfe Momentum-Versagen wider — ein High-Conviction-Framing wäre auf Basis der eigenen Szenarien nicht vertretbar.
+**Erwartungswert:** EV = 0,20 × $1.650 + 0,55 × $1.275 + 0,25 × $625 = $330 + $701 + $156 = **~$1.188 — implizites Downside vs. aktuellem Kurs ($1.352,74): −12,2 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
-
-ROE 19,6% und ROIC 24,1% sind solide, wenn auch nicht außergewöhnlich für einen High-Margin-Analog-Halbleiterhersteller. Gross Margin 55,2% ist stark und typisch für differenzierte Analog-ICs. Operating Margin 30,0% zeigt gute operative Disziplin. FCF $491,7 Mio. bei $2,96 Mrd. Revenue (16,6% FCF-Marge) ist solide, aber nicht außergewöhnlich. Bilanzqualität ist exzellent: D/E nur 0,54 ist sehr niedrig und gibt MPWR erhebliche finanzielle Flexibilität, auch in einem zyklischen Abschwung. Diese geringe Verschuldung im Zykluskontext bewertet ist ein klarer Qualitätsvorteil gegenüber stärker fremdfinanzierten Halbleiterherstellern. Der wirtschaftliche Burggraben liegt in proprietärem IC-Design-Know-how und etablierten Designwins bei Großkunden — real, aber durch die Kundenkonzentration im Rechenzentrumssegment auch verwundbar, wie der jüngste Kursrückgang andeutet.
+ROE 19,6 %, ROIC 24,1 % — solide, für ein Analog-Halbleiterunternehmen im mittleren bis oberen Bereich der Peer-Group. Gross Margin 55,2 %, Operating Margin 30,0 %, Net Margin 23,0 % — konsistent mit einem margenstarken Analog-/Power-IC-Geschäft, aber nicht am zyklischen Top wie reine Speicherhersteller. FCF $491,7 Mio. bei $2,96 Mrd. Revenue (16,6 % FCF-Marge) — solide, aber nicht außergewöhnlich gemessen an der Bewertung, die das Unternehmen aktuell trägt. Bilanzqualität gut: Debt/Equity 0,54 — niedrige Verschuldung, kein Bilanzrisiko erkennbar. Der wirtschaftliche Burggraben liegt im Referenzdesign-Status bei Tier-1-Kunden (Design-Wins sind klebrig über Produktzyklen) — echt, aber nicht unüberwindbar, wie das Insourcing-Risiko zeigt.
 
 ## 7. BEWERTUNG
-
-Trailing PE 94,3x und Forward PE 43,3x — der starke Rückgang signalisiert hohe erwartete Gewinnsteigerung, aber selbst das Forward-Multiple bleibt für einen zyklischen Halbleiterhersteller hoch. Price-to-Book 17,5x bestätigt die Premium-Bewertung. Normalisierter FCF über den Zyklus: Bei aktuell $491,7 Mio. FCF und $64,5 Mrd. Market Cap ergibt sich ein FCF-Multiple von ~131x — sehr hoch, selbst unter Berücksichtigung des KI-Rechenzentrums-Wachstumstreibers. Rückrechnung: Bei $1.312,77 und 43,3x Forward-PE preist der Markt weiterhin ein nachhaltiges EPS-Wachstum im Bereich 25-30% p.a. über mehrere Jahre ein — nach dem jüngsten Kursrückgang von -16% binnen zwei Wochen ist fraglich, ob der Markt diese Annahme noch vollständig trägt oder bereits Zweifel an der Wachstumskontinuität einpreist. Das wirkt ambitioniert angesichts des jüngsten Momentum-Bruchs. Analyst-Konsensziel $1.789,23 liegt deutlich über dem aktuellen Kurs $1.312,77 — als Orientierungspunkt zu verstehen, nicht als Kursziel-Ceiling; Coverage hat den jüngsten Rückgang noch nicht vollständig nachvollzogen, was sowohl auf eine Übertreibung des Kursrückgangs als auch auf nachlaufende Analystenschätzungen hindeuten kann.
+Auffällige Anomalie: Trailing-KGV 97,1x vs. Forward-KGV 44,6x impliziert eine EPS-Verdopplung von rechnerisch ~$13,9 auf ~$30,3 binnen eines Jahres (aus Kurs und den KGV-Werten zurückgerechnet, kein Konsens-EPS im Datensatz). Aus den Daten nicht abschließend auflösbar — möglich sind ein temporärer Ergebnistrog in der Trailing-Periode oder eine optimistische Konsensschätzung. Beide Werte fließen daher nur als Orientierungsrahmen, nicht direkt in die Szenario-EPS ein. Price/Book 18,1x ist hoch und nur bei anhaltend hoher Eigenkapitalrendite zu rechtfertigen. Rückrechnung "Was preist der Kurs ein?": Bei $1.352,74 und 44x Forward-Multiple impliziert der Kurs ein EPS von ~$30 — das setzt Umsatz-YoY deutlich über 25 % plus weitere Margenausweitung voraus. Ambitioniert, aber nicht unrealistisch bei anhaltendem AI-Datacenter-Zyklus — bei zyklischer Abkühlung fehlt der Puffer. Analyst-Konsensziel $1.789,23 (13 Analysten) liegt ~32 % über dem aktuellen Kurs — Orientierungspunkt, kein Kursziel-Ceiling; Kursziele hinken der Kursbewegung erfahrungsgemäß hinterher.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-RS-Score nur -55,2, Rang 50 im Smallcap-Universum — deutlich negatives relatives Momentum nach einem scharfen Drawdown. Recommendation Key "strong_buy" bei 13 Analysten zeigt, dass die fundamentale Analysten-Einschätzung (noch) nicht mit der jüngsten Kursschwäche übereinstimmt — ein Signal für mögliche Divergenz zwischen technischem und fundamentalem Bild. Hypothese, nicht datenbasiert: Der scharfe, schnelle Kursrückgang (-23% in 10 Handelstagen) deutet auf Fast-Money-/Momentum-Kapital hin, das bei ersten Anzeichen von Schwäche aggressiv Positionen abbaut — typisch für stark gehebelte KI-Infrastruktur-Themen-Trades. Enttäuschungsrisiko: Bei fortgesetzter Schwäche könnten weitere Long-Only-Positionen kapitulieren und den Abwärtstrend verstärken; umgekehrt könnte eine Stabilisierung schnelle Short-Covering-Rallyes auslösen.
+RS-Score -21,6 gegenüber QQQ, Rang 120 im Vergleichsuniversum — klar unterdurchschnittliches relatives Momentum, kein Zeichen institutioneller Akkumulation aktuell. Short-Float- und Ownership-Daten liegen nicht vor — keine belastbare Aussage zur Fast-Money- vs. Long-Only-Positionierung möglich (Hypothese, nicht datenbasiert: nach einem -21%-Rückschlag vom Hoch dürfte ein Teil der schnellen Käufer bereits ausgestiegen sein). Neue Käufer benötigen voraussichtlich eine RS-Wende ins Positive und/oder eine positive Guidance-Überraschung als Auslöser. Enttäuschungsrisiko bleibt hoch, solange die Forward-KGV-Anomalie ungeklärt ist.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-RS-Score -55,2, Rang 50 Smallcap-Universum. 5T: -11,0%, 10T: -23,3%, 20T: -21,5%, 50T: -19,4%, 6M: +20,0% — durchgehend negatives Momentum über alle kurz- bis mittelfristigen Zeitfenster, nur das 6-Monats-Fenster bleibt noch positiv. Letzte Wochenkerzen: $1.563,70 (15.06.) → $1.313,32 (22.06., Wochentief $1.301,44) → $1.312,77 (29.06.) — der Kurs hat sich in der letzten Woche stabilisiert, aber auf deutlich niedrigerem Niveau. Kein aktives GWS-Setup (Smallcap-Signal-Typ, keine GWS-Ampel verfügbar). Das Momentum wirkt reaktiv/technisch getrieben, nicht durch erkennbare fundamentale Verschlechterung gestützt — die Daten zeigen keinen klaren fundamentalen Auslöser. Technisches Warnsignal: Ein weiterer Bruch unter $1.270 (jüngstes Wochentief) würde die Stabilisierungsthese in Frage stellen und auf fortgesetzte Schwäche hindeuten.
+RS-Fenster: 5T +1,8 %, 10T +0,2 %, 20T -19,0 %, 50T -25,5 %, 6M +20,9 %, 12M nicht verfügbar. Bild: mittelfristig klarer Abwärtstrend (20T/50T), kurzfristig erste Stabilisierung (5T/10T nahe Null), 6-Monats-Fenster noch positiv — die Aktie befindet sich in einer technischen Bodenbildungsphase, aber ohne Bestätigung. GWS-Ampel aktuell komplett inaktiv (Weekly/Daily/4H), kein aktives Signal. Kurs liegt 21 % unter dem 52-Wochen-Hoch ($1.714,09), aber 97 % über dem 52-Wochen-Tief ($686,87) — der Long-Term-Aufwärtstrend ist intakt, der mittelfristige ist gebrochen. Warnsignal: eine erneute Verschlechterung des 20T-Fensters oder ein Bruch unter die letzten Verlaufstiefs würde die Bodenbildungs-These entkräften.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
-
-**Bull ($2.200–$2.800):** MPWR etabliert sich als unverzichtbarer Power-Delivery-Partner für mehrere GPU-Generationen, Rechenzentrumsanteil am Umsatzmix steigt strukturell, Margenexpansion durch Skaleneffekte.
-
-**Base ($1.100–$1.800):** Solides, aber zyklisches Wachstum entlang der Designwin-Zyklen bei Hyperscalern und Automotive-Kunden, Bewertung normalisiert auf moderatere Multiples nach der aktuellen Korrektur.
-
-**Bear ($400–$700):** Kundenkonzentrationsrisiko materialisiert sich (Designwin-Verlust bei Schlüsselkunde), Wettbewerb durch größere Analog-Hersteller oder Inhouse-Lösungen der Hyperscaler erodiert Marktanteile strukturell.
-
-Entscheidende Variable: Verteidigung und Ausbau der Designwins bei den führenden GPU-/KI-Server-Herstellern gegenüber Wettbewerbern und potenziellen Inhouse-Lösungen der Hyperscaler.
+**Bull ($2.200–$3.200):** AI-Power-Delivery wird zum strukturellen Multi-Jahres-Wachstumstreiber, MPWR verteidigt und erweitert Content-Share bei Referenzdesigns, Automotive/Industrial erholen sich zyklisch mit. Normalisiertes EPS $45–55 × 50–55x.
+**Base ($1.300–$2.000):** Stetiges Wachstum im mittleren Zehner- bis niedrigen Zwanzigerprozentbereich, Margen stabil auf aktuellem Niveau, keine großen Marktanteilsverschiebungen. Normalisiertes EPS $35–40 × 35–40x.
+**Bear ($400–$700):** Insourcing-Trend bei Großkunden setzt sich durch, zyklische Abschwächung in Automotive/Industrial überlagert Datacenter-Wachstum, Multiple komprimiert dauerhaft auf Peer-Niveau.
+Entscheidende Variable: Ob MPWR den Content-Share bei Power-Delivery für die nächste GPU-Generation verteidigt oder an Insourcing-Initiativen der Großkunden verliert.
 
 ## 11. PROFI-FAZIT
-
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −29,5%) — der größte Abstand unter den zuletzt analysierten Werten, getrieben durch die hohe Bear-Wahrscheinlichkeit nach dem scharfen Drawdown. MPWR bleibt fundamental ein qualitativ hochwertiges Analog-Halbleiterunternehmen mit starker Bilanz (D/E 0,54) und echtem KI-Infrastruktur-Rückenwind, aber der jüngste Kurseinbruch (-23% in 10 Tagen) signalisiert ein erhöhtes, noch nicht vollständig aufgeklärtes Risiko — möglicherweise Kundenkonzentration oder Sektorrotation. Geeignet für risikobereite Wachstumsinvestoren, die bereit sind, Volatilität auszusitzen und den Auslöser des Rückgangs vor einer Position aktiv zu recherchieren; nicht geeignet für konservative oder kurzfristig orientierte Momentum-Trader angesichts des negativen RS-Scores. Risikowarnung: Vor einer Positionsentscheidung den Auslöser des jüngsten -23%-Rückgangs zwingend verifizieren — Positionsgröße bis zur Klärung konservativ halten (max. 2% eines diversifizierten Portfolios).
-
-**Texas Instruments (TXN)** und **Analog Devices (ADI)** sind die relevantesten Analog-Halbleiter-Peers, beide diversifizierter und mit geringerer Rechenzentrums-Konzentration. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -12,2 %). MPWR ist ein fundamental hochwertiges Analog-/Power-Halbleiterunternehmen mit echtem strukturellem AI-Rückenwind — aber aktuell kein High-Conviction-Momentum-Trade: RS-Score und GWS-Ampel liefern derzeit kein Bestätigungssignal, und die Forward-KGV-Anomalie erschwert eine saubere Bewertungsbasis. Am ehesten ein Buy-and-Hold-Kandidat für langfristig orientierte Qualitätsinvestoren, die eine technische Bodenbildungsphase aussitzen können — nicht geeignet für kurzfristige Trading-Positionierung auf aktuellem Niveau. Positionsgröße bei Neueinstieg konservativ halten, bis RS-Score und GWS-Ampel eine Trendbestätigung liefern. **Texas Instruments (TXN)** und **Analog Devices (ADI)** sind die reineren Diversified-Analog-Instrumente mit geringerer Datacenter-Konzentration; Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 4/5
-- Wachstum: 3/5
+- Wachstum: 4/5
 - Bewertung: 2/5
 - Katalysator: 2/5
+
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Der Erwartungswert liegt bei -12,2 % trotz solider Fundamentaldaten, gestützt durch die ungeklärte Trailing/Forward-KGV-Anomalie aus Abschnitt 7.
 
 
 ---
@@ -90,11 +78,11 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 3/5 |
+| Wachstum | 4/5 |
 | Bewertung | 2/5 |
 | Katalysator | 2/5 |
-| EV-Upside | -79.0% |
+| EV-Upside | -84.5% |
 
-**Verdict: WATCH (44/100)**
+**Verdict: WATCH (48/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
