@@ -3,8 +3,9 @@
 ## Git-Regeln
 
 - Alle Änderungen direkt auf `master` pushen (kein Feature-Branch, kein PR, außer explizit gewünscht)
-- **Ausnahme Cloud-/Web-Sessions:** Gibt die Session-Umgebung einen Arbeits-Branch
-  vor (z. B. `claude/...`), gilt dieser Branch — nicht eigenmächtig auf `master` pushen
+- **Cloud-/Web-Sessions mit vorgegebenem Arbeits-Branch** (z. B. `claude/...`):
+  auf den Arbeits-Branch **und zusätzlich direkt auf `master`** pushen (Fast-Forward,
+  kein PR nötig) — beide Refs bleiben synchron
 - **Bei jedem Commit den Git-Hash im Chat ausgeben**, z.B.: `[a3f92c1] Commit-Nachricht`
 - Commit-Messages auf Deutsch oder Englisch, klar und beschreibend
 
