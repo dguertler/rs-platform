@@ -1,0 +1,36 @@
+name: EV-Screening-Score wöchentlich berechnen
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 4 * * 1'   # Jeden Montag 04:00 UTC (nach Fundamentaldaten-Fetch um 03:30)
+  workflow_dispatch:         # Manuell auslösbar
+
+jobs:
+  compute:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: EV-Scores berechnen
+        run: python compute_ev_scores.py
+
+      - name: Ergebnisse committen und pushen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/ev_scores.json
+          git diff --staged --quiet || git commit -m "EV-Screening-Scores aktualisiert ($(date -u '+%Y-%m-%d'))"
+          git pull --rebase origin master
+          git push origin master

@@ -624,6 +624,17 @@ async def get_ratings(email: str = Depends(require_auth)):
     return JSONResponse(content=_load(path))
 
 
+@app.get("/api/ev-scores")
+async def get_ev_scores(email: str = Depends(require_auth)):
+    """Automatisierter EV-Screening-Score (kein LLM) — grobe Orientierung für Ticker
+    ohne manuelle Analyse. Wird von compute_ev_scores.py erzeugt; nicht mit /api/ratings
+    vermengt, damit der Wochen-Lauf nie manuelle Analyse-Werte überschreiben kann."""
+    path = DATA_DIR / "ev_scores.json"
+    if not path.exists():
+        return JSONResponse(content={"scores": {}})
+    return JSONResponse(content=_load(path))
+
+
 @app.get("/api/ratings/{ticker}/html")
 async def get_rating_html(ticker: str, email: str = Depends(require_auth)):
     from fastapi.responses import HTMLResponse

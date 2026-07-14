@@ -860,6 +860,7 @@ def write_rating(ticker: str, analysis_text: str, rs_score: float, windows: dict
         "verdict":         verd,
         "score":           score,
         "asymmetric_edge": asymm_edge,
+        "ev_upside_pct":   upside_pct,
         "funnel_veto":     funnel_veto,
         "created_at":      datetime.now().isoformat(),
     })
