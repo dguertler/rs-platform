@@ -38,17 +38,25 @@ Max. 6–8 Sätze. Was ist die eigentliche Story hinter der Aktie — nicht das 
 ### ## 2. GESCHÄFTSMODELL
 Max. 8 Bullet Points mit -. Keine Selbstverständlichkeiten. Fokus auf: Wie verdient das Unternehmen wirklich Geld? Wo liegt der operative Hebel? Wo liegt die strukturelle Abhängigkeit?
 
+### MULTIPLE-HERLEITUNG (PFLICHT für Abschnitte 3–5, Bull/Base/Bear)
+Das Multiple pro Szenario darf **nicht frei geschätzt** werden — es muss an echten Peer-Daten verankert sein:
+1. 2–3 direkte Peers (gleiche Branche/Geschäftsmodell) benennen und deren Forward-KGV nachschlagen — bevorzugt aus `data/fundamentals.json` (Peers sind bei NASDAQ-100/S&P-500/DAX-Titeln meist schon im Datensatz getrackt). Sind Peers dort nicht vorhanden, explizit vermerken: "Peer-Multiples nicht verifizierbar."
+2. **Bear-Multiple:** nahe dem niedrigsten genannten Peer-Multiple oder darunter (Kompression bei brechender These).
+3. **Bull-Multiple:** nahe dem höchsten genannten Peer-Multiple oder leicht darüber bei bestätigter Outperformance ggü. Peers — NICHT einfach das eigene aktuelle Forward-KGV weiter nach oben schätzen, wenn dieses bereits über allen genannten Peers liegt.
+4. **Base-Multiple:** nahe dem eigenen aktuellen Forward-KGV, sofern dieses innerhalb oder nahe der Peer-Bandbreite liegt. Liegt das eigene Forward-KGV deutlich außerhalb der Peer-Bandbreite (über oder unter allen Peers), im Abschnitt 7 explizit benennen, ob und warum diese Prämie/dieser Abschlag strukturell gerechtfertigt ist.
+Das eigene aktuelle Forward-KGV ist kein Beweis für die Angemessenheit eines Szenario-Multiples, nur ein Datenpunkt — reines Verankern am eigenen Multiple ohne Peer-Abgleich ist unzulässig.
+
 ### ## 3. BULL CASE
 Konkret und quantifiziert wo möglich. Welche spezifischen Faktoren müssen eintreten? Nenne reale Datenpunkte, Analystenziele oder strukturelle Argumente. Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
-Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Beispiel: "Base $340 = FY28-EPS ~$8,50 × 40x Forward." Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites, peer-verankertes Multiple (siehe MULTIPLE-HERLEITUNG oben), beide nennen. Beispiel: "Base $340 = FY28-EPS ~$8,50 × 40x Forward (Peer-Bandbreite 35–44x)." Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
 
 ### ## 4. BASE CASE
 Wahrscheinlichstes Szenario auf Sicht 12–18 Monate unter aktuellen Marktbedingungen — nicht das rechnerische Mittel zwischen Bull und Bear. Kursziel-Bandbreite angeben. Eintrittswahrscheinlichkeit in Prozent nennen.
-Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites, peer-verankertes Multiple (siehe MULTIPLE-HERLEITUNG oben), beide nennen. Bandbreiten ohne Herleitung sind unzulässig. Sind die nötigen Schätzungen nicht in den Daten enthalten, eigene Annahme klar als solche kennzeichnen ("Annahme, kein Konsens").
 
 ### ## 5. BEAR CASE
 Gleiche Tiefe wie Bull Case. Welches Szenario zerstört die These? Nenne den konkreten Auslöser — nicht nur "Zyklus dreht". Was passiert mit der Bewertung in diesem Fall? Kursziel-Bandbreite und Eintrittswahrscheinlichkeit in Prozent nennen.
-Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites Multiple, beide nennen. Bandbreiten ohne Herleitung sind unzulässig.
+Jedes Kursziel muss hergeleitet sein: explizite EPS- oder FCF-Annahme × explizites, peer-verankertes Multiple (siehe MULTIPLE-HERLEITUNG oben), beide nennen. Bandbreiten ohne Herleitung sind unzulässig.
 
 Der Bear Case muss folgende Risikodimensionen jeweils adressieren oder explizit als "auf Datenbasis nicht beurteilbar" kennzeichnen:
 - Kundenkonzentration (quantifizieren falls Daten vorhanden)
@@ -72,7 +80,9 @@ Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig:
 ### ## 7. BEWERTUNG
 Niemals eine zyklische Aktie nur anhand des aktuellen KGVs bewerten. Pflicht: Bewertung über normalisierten FCF über den vollen Zyklus oder KBV. Zusätzlich Forward-Multiples und was der Markt damit implizit aussagt. Ist die aktuelle Bewertung eine Value-Falle, eine strukturierte Wette oder echtes Upside?
 
-Zusätzlich Pflicht: Rückrechnung "Was preist der Kurs ein?" — welches Umsatzwachstum, welche Marge und welches Exit-Multiple rechtfertigen den AKTUELLEN Kurs (vereinfachte Rechnung genügt, Annahmen nennen). Danach ein Satz: Ist das plausibel, ambitioniert oder unrealistisch?
+Zusätzlich Pflicht: Rückrechnung "Was preist der Kurs ein?" — welches Umsatzwachstum, welche Marge und welches Exit-Multiple rechtfertigen den AKTUELLEN Kurs (vereinfachte Rechnung genügt, Annahmen nennen). Danach ein Satz: Ist das plausibel, ambitioniert oder unrealistisch? Dies ist die primäre Bewertungsgrundlage des Abschnitts, keine Randnotiz.
+
+PFLICHT-Ergänzung: Das eigene aktuelle Forward-Multiple explizit gegen die in Abschnitt 3–5 genannten Peers einordnen — liegt es darüber, darunter oder im Rahmen der Peer-Bandbreite? Eine Prämie oder ein Abschlag gegenüber Peers muss benannt und, soweit möglich, strukturell begründet werden (z. B. höheres Wachstum, Konzentrationsrisiko, Sektor-Sentiment) — sonst als "aus den Daten nicht erklärbar" kennzeichnen.
 
 ### ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 Wie ist die institutionelle Positionierung aktuell? Short Float, Fast Money vs. Long Only, FOMO-Dynamik. Was muss künftig passieren, damit neue Käufer anziehen? Wo liegt das Enttäuschungsrisiko?
