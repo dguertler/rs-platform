@@ -1372,7 +1372,7 @@ function App() {
         }}>
           <span>Ø EV-Upside ({evAverage.n} Ticker):</span>
           <span style={{fontWeight:700, color: evAverage.avg >= 0 ? "#4ade80" : "#f87171"}}>
-            {evAverage.avg>0?"+":""}{evAverage.avg.toFixed(1)}%
+            {evAverage.avg>0?"+":""}{Math.round(evAverage.avg)}%
           </span>
         </div>
       )}
@@ -1383,7 +1383,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+            gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1392,6 +1392,7 @@ function App() {
             <span style={{textAlign:"center",color:"#334155"}}>Δ</span>
             <span>Ticker</span>
             <span style={{textAlign:"center"}}>Analyse</span>
+            <span style={{textAlign:"center"}}>EV</span>
             <span>Score</span>
             <span style={{textAlign:"center",color:"#f59e0b"}}>W</span>
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
@@ -1421,7 +1422,7 @@ function App() {
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+                  gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${showFlame?"#ef444422":"#0a0f1e"}`,
                   background: showFlame
@@ -1475,18 +1476,14 @@ function App() {
                         border:`1px solid ${rating.verdict==="BUY"?"#639922":rating.verdict==="HOLD"?"#b45309":"#A32D2D"}`,
                       }}>{rating.verdict}</span>
                   )}
-                  {evPct != null && (
-                    <span
-                      title={rating
-                        ? `EV-Upside (Analyse) ${evPct>0?"+":""}${evPct}%`
-                        : `EV-Screening (automatisch, kein LLM) ${evPct>0?"+":""}${evPct}% · nur grobe Orientierung`}
-                      style={{
-                        fontSize:10, fontWeight:700, letterSpacing:0.3, lineHeight:1.4,
-                        color: evPct >= 0 ? "#4ade80" : "#f87171",
-                        cursor: "default", userSelect:"none",
-                      }}>{evPct>0?"+":""}{evPct}%</span>
-                  )}
                   {rating?.asymmetric_edge && <span style={{color:"#ef4444",fontSize:11,fontWeight:900,marginLeft:2,cursor:"default",lineHeight:1}} title="Kursziel-Luft >20% — Momentum-Einstieg">!</span>}
+                </span>
+                <span style={{textAlign:"center",fontFamily:"monospace",fontSize:10,fontWeight:700,
+                  color: evPct == null ? "#334155" : evPct >= 0 ? "#4ade80" : "#f87171"}}
+                  title={evPct == null ? "" : rating
+                    ? `EV-Upside (Analyse) ${evPct>0?"+":""}${Math.round(evPct)}%`
+                    : `EV-Screening (automatisch, kein LLM) ${evPct>0?"+":""}${Math.round(evPct)}% · nur grobe Orientierung`}>
+                  {evPct != null ? `${evPct>0?"+":""}${Math.round(evPct)}%` : "–"}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
                   {item.s>0?"+":""}{Math.round(item.s)}

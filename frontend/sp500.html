@@ -1079,6 +1079,7 @@ function App() {
   const [liveBench, setLiveBench] = useState({ w: null, d: null });
   const [signals, setSignals] = useState({});
   const [ratings, setRatings] = useState({});
+  const [evScores, setEvScores] = useState({});
   const [ratingModal, setRatingModal] = useState(null);
   const [ratingHtml, setRatingHtml] = useState('');
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
@@ -1194,6 +1195,24 @@ function App() {
       .catch(() => { setRatingsLoaded(true); });
   }, []);
 
+  // Automatisierter EV-Screening-Score (kein LLM) — nur Orientierung für Ticker ohne
+  // manuelle Analyse; überschreibt nie einen vorhandenen `rating`-Wert (siehe evPct unten).
+  useEffect(() => {
+    apiFetch("/api/ev-scores")
+      .then(r => r.ok ? r.json() : { scores: {} })
+      .then(json => {
+        const map = {};
+        Object.entries(json.scores || {}).forEach(([ticker, s]) => {
+          const k = ticker.toUpperCase();
+          map[k] = s;
+          const base = k.replace(/\.[^.]+$/, '');
+          if (base !== k) map[base] = s;
+        });
+        setEvScores(map);
+      })
+      .catch(() => {});
+  }, []);
+
   useEffect(() => {
     if (!ratingModal) { setRatingHtml(''); return; }
     const r = ratings[ratingModal.toUpperCase()];
@@ -1228,6 +1247,18 @@ function App() {
     ), [rsData]);
 
   const rows = showAll ? sorted : sorted.slice(0, 20);
+
+  // Ø EV-Upside über alle aktuell angezeigten Ticker (manuelle Analyse geht vor Auto-Score)
+  const evAverage = useMemo(() => {
+    const values = rows.map(item => {
+      const r = ratings[item.t.toUpperCase()] || ratings[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
+      if (r) return r.ev_upside_pct;
+      const a = evScores[item.t.toUpperCase()] || evScores[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
+      return a?.available ? a.upside_pct : null;
+    }).filter(v => v != null);
+    if (values.length === 0) return null;
+    return { avg: values.reduce((a,b) => a+b, 0) / values.length, n: values.length };
+  }, [rows, ratings, evScores]);
 
   // Weekly OHLCV (lazy-loaded)
   const ohlcvW = useMemo(() => {
@@ -1313,6 +1344,18 @@ function App() {
 
       <div className="desktop-layout">
       <div className="desktop-left">
+      {evAverage && (
+        <div style={{
+          display:"flex", alignItems:"center", gap:6, marginBottom:8,
+          padding:"6px 12px", background:"#0f172a", borderRadius:8, border:"1px solid #1e293b",
+          fontSize:11, color:"#94a3b8",
+        }}>
+          <span>Ø EV-Upside ({evAverage.n} Ticker):</span>
+          <span style={{fontWeight:700, color: evAverage.avg >= 0 ? "#4ade80" : "#f87171"}}>
+            {evAverage.avg>0?"+":""}{Math.round(evAverage.avg)}%
+          </span>
+        </div>
+      )}
       {/* RS-Tabelle */}
       {/* Spalten: # | Ticker | Score | W D 4H (3 Punkte-Spalten eng) | 5T 10T 20T 50T 6M */}
       <div style={{background:"#0f172a",borderRadius:10,border:"1px solid #1e293b",marginBottom:12,overflowX:"auto"}}>
@@ -1320,7 +1363,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+            gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1329,6 +1372,7 @@ function App() {
             <span style={{textAlign:"center",color:"#334155"}}>Δ</span>
             <span>Ticker</span>
             <span style={{textAlign:"center"}}>Analyse</span>
+            <span style={{textAlign:"center"}}>EV</span>
             <span>Score</span>
             <span style={{textAlign:"center",color:"#f59e0b"}}>W</span>
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
@@ -1349,13 +1393,16 @@ function App() {
             const isNew      = !!_newSince && (Date.now() - new Date(_newSince).getTime()) < 7*24*3600*1000;
             const rating     = ratings[item.t.toUpperCase()] || ratings[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
             const showFlame  = isBOC && hasRecent && rating?.verdict === "BUY";
+            // Manuelle Analyse überschreibt immer den automatischen Score (nie umgekehrt)
+            const evAuto     = evScores[item.t.toUpperCase()] || evScores[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
+            const evPct      = rating ? rating.ev_upside_pct : (evAuto?.available ? evAuto.upside_pct : null);
 
             return (
               <div key={item.t}
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+                  gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${showFlame?"#ef444422":"#0a0f1e"}`,
                   background: showFlame
@@ -1410,6 +1457,13 @@ function App() {
                       }}>{rating.verdict}</span>
                   )}
                   {rating?.asymmetric_edge && <span style={{color:"#ef4444",fontSize:11,fontWeight:900,marginLeft:2,cursor:"default",lineHeight:1}} title="Kursziel-Luft >20% — Momentum-Einstieg">!</span>}
+                </span>
+                <span style={{textAlign:"center",fontFamily:"monospace",fontSize:10,fontWeight:700,
+                  color: evPct == null ? "#334155" : evPct >= 0 ? "#4ade80" : "#f87171"}}
+                  title={evPct == null ? "" : rating
+                    ? `EV-Upside (Analyse) ${evPct>0?"+":""}${Math.round(evPct)}%`
+                    : `EV-Screening (automatisch, kein LLM) ${evPct>0?"+":""}${Math.round(evPct)}% · nur grobe Orientierung`}>
+                  {evPct != null ? `${evPct>0?"+":""}${Math.round(evPct)}%` : "–"}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
                   {item.s>0?"+":""}{Math.round(item.s)}
