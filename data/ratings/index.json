@@ -1131,30 +1131,6 @@
       "created_at": "2026-07-10T10:20:48.516152"
     },
     {
-      "ticker": "ODFL",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Das RS-Momentum ist real, aber die fundamentale Tonnage-Erholung aus Abschnitt 1 ist in den Umsatzzahlen (-2,9 % YoY) noch nicht best\u00e4tigt."
-      },
-      "created_at": "2026-07-14T17:45:45.001273"
-    },
-    {
-      "ticker": "CI",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Die statistisch g\u00fcnstige Bewertung aus Abschnitt 7 ist real, aber die MLR-Normalisierung als Kernkatalysator ist gem\u00e4\u00df Abschnitt 1 in den Daten noch nicht best\u00e4tigt."
-      },
-      "created_at": "2026-07-14T17:45:46.988120"
-    },
-    {
       "ticker": "MPWR",
       "verdict": "WATCH",
       "score": 48,
@@ -1162,9 +1138,33 @@
       "funnel_veto": {
         "decision": "VETO",
         "category": "Bewertung",
-        "reason": "Der Erwartungswert liegt bei -14,4 % trotz solider Fundamentaldaten, gest\u00fctzt durch den ungekl\u00e4rten EPS-Sprung (Trailing $13,95 \u2192 Forward $30,33) aus Abschnitt 7."
+        "reason": "Peer-verankert liegt der Erwartungswert bei -20,2 % (schlechter als die -14,4 % ohne Peer-Bezug), gest\u00fctzt durch die bereits hohe Pr\u00e4mie gg\u00fc. TXN/ADI und den ungekl\u00e4rten EPS-Sprung aus Abschnitt 7."
       },
-      "created_at": "2026-07-14T17:50:03.336422"
+      "created_at": "2026-07-14T19:35:27.989208"
+    },
+    {
+      "ticker": "ODFL",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Das RS-Momentum ist real und die Bewertung ist peer-konsistent (Abschnitt 7), aber die fundamentale Tonnage-Erholung aus Abschnitt 1 ist in den Umsatzzahlen (-2,9 % YoY) noch nicht best\u00e4tigt."
+      },
+      "created_at": "2026-07-14T19:35:28.939937"
+    },
+    {
+      "ticker": "CI",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Der peer-verankerte EV ist positiv (+7,9 %) und die Bewertungsl\u00fccke zu ELV/UNH aus Abschnitt 7 ist real, aber die MLR-Normalisierung als Kernkatalysator ist gem\u00e4\u00df Abschnitt 1 in den Daten weiterhin nicht best\u00e4tigt \u2014 volle Positionsgr\u00f6\u00dfe w\u00e4re verfr\u00fcht."
+      },
+      "created_at": "2026-07-14T19:35:31.271088"
     }
   ]
 }
