@@ -343,8 +343,11 @@ def _extract_funnel_veto(text: str) -> dict | None:
 
 
 def _parse_price_range_midpoint(price_str: str) -> float | None:
-    """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900') und gibt den Mittelpunkt zurück."""
+    """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900', '1.050–1.400') und gibt den Mittelpunkt
+    zurück. '.' wird als Tausender-Trennzeichen entfernt, wenn exakt 3 Ziffern folgen (Plattform-Konvention,
+    z.B. '1.050' = 1050) — sonst würde float() es fälschlich als Dezimalpunkt lesen (1.050 -> 1.05)."""
     s = price_str.replace(",", "").replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
+    s = re.sub(r'\.(?=\d{3}(\D|$))', '', s)
     m = re.search(r'([\d.]+)\s*[–—-]+\s*([\d.]+)', s)
     if m:
         try:
@@ -460,7 +463,8 @@ def _extract_scenarios(text: str) -> dict:
         return p.rstrip('.,').strip() if p != "N/A" else "N/A"
 
     def _prob(s: str) -> str:
-        m = re.search(r'(?:Eintrittswahrscheinlichkeit|Wahrscheinlichkeit)[:\s]*(\d+)\s*%', s, re.IGNORECASE)
+        # \**\s* toleriert Markdown-Fettung vor der Zahl, z.B. "Eintrittswahrscheinlichkeit: **25%**"
+        m = re.search(r'(?:Eintrittswahrscheinlichkeit|Wahrscheinlichkeit)[:\s]*\**\s*(\d+)\s*%', s, re.IGNORECASE)
         return f"{m.group(1)}%" if m else "N/A"
 
     # ── Neue Struktur: BULL/BASE/BEAR CASE Abschnitte ────────────────────────
