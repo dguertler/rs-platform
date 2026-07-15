@@ -912,14 +912,6 @@
       "ev_upside_pct": -30.3
     },
     {
-      "ticker": "CRWD",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.668087",
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "CTAS",
       "verdict": "WATCH",
       "score": 53,
@@ -1312,6 +1304,19 @@
       },
       "created_at": "2026-07-14T19:35:31.271088",
       "ev_upside_pct": 9.5
+    },
+    {
+      "ticker": "CRWD",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.8,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertungspr\u00e4mie von 56 % gg\u00fc. dem teuersten Peer (Abschnitt 7) ist durch das Wachstum nicht gedeckt (PANW w\u00e4chst schneller bei niedrigerem Multiple), und der EV liegt bei -17,7 % trotz starkem operativem Fundament."
+      },
+      "created_at": "2026-07-15T04:55:38.705466"
     }
   ]
 }
