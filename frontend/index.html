@@ -1383,7 +1383,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
+            gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1391,8 +1391,9 @@ function App() {
             <span>#</span>
             <span style={{textAlign:"center",color:"#334155"}}>Δ</span>
             <span>Ticker</span>
-            <span style={{textAlign:"center"}}>Analyse</span>
             <span style={{textAlign:"center"}}>EV</span>
+            <span style={{textAlign:"center"}}>Risiko</span>
+            <span style={{textAlign:"center"}}>Analyse</span>
             <span>Score</span>
             <span style={{textAlign:"center",color:"#f59e0b"}}>W</span>
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
@@ -1416,13 +1417,25 @@ function App() {
             // Manuelle Analyse überschreibt immer den automatischen Score (nie umgekehrt)
             const evAuto     = evScores[item.t.toUpperCase()] || evScores[item.t.replace(/\.[^.]+$/,'').toUpperCase()];
             const evPct      = rating ? rating.ev_upside_pct : (evAuto?.available ? evAuto.upside_pct : null);
+            // Risiko-Staffel (STRATEGIEPLAN Abschnitt 6): max. Verlust je Trade in % des Invests.
+            // Manuelle Analyse hat Vorrang; der Auto-EV wirkt nur als Daempfer, nie als Verstaerker.
+            const fvDec      = rating?.funnel_veto?.decision;
+            const riskPct    = (fvDec === "VETO" || rating?.verdict === "AVOID") ? 0
+              : fvDec === "REDUCE" ? 5
+              : rating ? ((evPct != null && evPct < -20) ? 5
+                : (evPct != null && evPct > 20 && (fvDec === "PASS" || rating.verdict === "BUY")) ? 15 : 10)
+              : (evAuto?.available && evAuto.upside_pct < -20) ? 5 : 10;
+            const riskTitle  = riskPct === 0 ? "Kein Trade — VETO/AVOID aus der Analyse"
+              : riskPct === 5 ? "Halbes Risiko (5% Stop-Budget) — REDUCE bzw. EV < -20%"
+              : riskPct === 15 ? "Erhöhtes Risiko-Budget (15%) — PASS/BUY mit asymmetrischem Edge (EV > +20%)"
+              : "Normales Risiko — 10% Stop-Budget je Trade";
 
             return (
               <div key={item.t}
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 62px 36px 56px 18px 18px 18px repeat(5,1fr) 24px",
+                  gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${showFlame?"#ef444422":"#0a0f1e"}`,
                   background: showFlame
@@ -1463,6 +1476,18 @@ function App() {
                   {item.t}
                   {hasChart && <span style={{fontSize:8,color:"#334155",marginLeft:2}}>▸</span>}
                 </span>
+                <span style={{textAlign:"center",fontFamily:"monospace",fontSize:10,fontWeight:700,
+                  color: evPct == null ? "#334155" : evPct >= 0 ? "#4ade80" : "#f87171"}}
+                  title={evPct == null ? "" : rating
+                    ? `EV-Upside (Analyse) ${evPct>0?"+":""}${Math.round(evPct)}%`
+                    : `EV-Screening (automatisch, kein LLM) ${evPct>0?"+":""}${Math.round(evPct)}% · nur grobe Orientierung`}>
+                  {evPct != null ? `${evPct>0?"+":""}${Math.round(evPct)}%` : "–"}
+                </span>
+                <span style={{textAlign:"center",fontFamily:"monospace",fontSize:10,fontWeight:700,
+                  color: riskPct === 0 ? "#f87171" : riskPct === 5 ? "#f59e0b" : riskPct === 15 ? "#4ade80" : "#94a3b8"}}
+                  title={riskTitle}>
+                  {riskPct}%
+                </span>
                 <span style={{display:"flex",alignItems:"center",justifyContent:"center",gap:3}}>
                   {rating && (
                     <span onClick={e => { e.stopPropagation(); setRatingModal(item.t); }}
@@ -1477,13 +1502,6 @@ function App() {
                       }}>{rating.verdict}</span>
                   )}
                   {rating?.asymmetric_edge && <span style={{color:"#ef4444",fontSize:11,fontWeight:900,marginLeft:2,cursor:"default",lineHeight:1}} title="Kursziel-Luft >20% — Momentum-Einstieg">!</span>}
-                </span>
-                <span style={{textAlign:"center",fontFamily:"monospace",fontSize:10,fontWeight:700,
-                  color: evPct == null ? "#334155" : evPct >= 0 ? "#4ade80" : "#f87171"}}
-                  title={evPct == null ? "" : rating
-                    ? `EV-Upside (Analyse) ${evPct>0?"+":""}${Math.round(evPct)}%`
-                    : `EV-Screening (automatisch, kein LLM) ${evPct>0?"+":""}${Math.round(evPct)}% · nur grobe Orientierung`}>
-                  {evPct != null ? `${evPct>0?"+":""}${Math.round(evPct)}%` : "–"}
                 </span>
                 <span style={{fontFamily:"monospace",fontSize:11,fontWeight:600,color:item.s>0?"#4ade80":"#f87171"}}>
                   {item.s>0?"+":""}{Math.round(item.s)}

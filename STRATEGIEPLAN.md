@@ -206,6 +206,51 @@ LLM-Beitrag.
 - Neue Pflichtsektion im Analyse-Kopf: Regime-Ampel + RS-Perzentil + Setup-Punkte
   aus dem Funnel, damit jede Analyse ihren quantitativen Kontext dokumentiert.
 
+### Rollen im Trade-Prozess (Breakout · EV · Analyse · Exit)
+
+Klare Arbeitsteilung — die Signale ersetzen sich nicht gegenseitig:
+
+1. **Einstieg:** ausschließlich der Funnel (Regime + RS 2.0 + GWS-Breakout W/D/4H).
+   Weder EV noch Verdict sind Entry-Filter. EV misst Fair-Value-Konvergenz auf
+   12–18 Monate — der Breakout-Trade lebt von Momentum-Fortsetzung über Tage bis
+   Wochen; das sind verschiedene Renditequellen. Ein Positiv-EV-Filter würde die
+   stärksten Momentum-Namen systematisch wegfiltern (Beispiel SNDK: RS-Rang 1
+   bei klar negativem EV, trotzdem Ausnahme-Run).
+2. **Auto-EV (ohne manuelle Analyse):** grobe Orientierung + Gap-Risiko-Indikator.
+   Wirkt in der Risiko-Staffel nur als Dämpfer, nie als Verstärker.
+3. **Manuelle Analyse:** liefert das belastbare, peer-verankerte EV, die
+   Funnel-Entscheidung (PASS/REDUCE/VETO) und den Katalysator-Check. Ihr Gewicht
+   wächst mit der Haltedauer: Wer Wochen bis Monate hält, läuft durch
+   Earnings-Termine — dort entscheiden Katalysator und Fundamentaldaten, nicht
+   das Chartbild.
+4. **Exit:** Daily-Signal — immer. EV oder Verdict rechtfertigen nie das
+   Überreiten eines Exit-Signals; sonst wird der Momentum-Trade zum
+   unfreiwilligen Value-Investment.
+
+**Verdict richtig lesen:** BUY vs. WATCH ist keine Kurzfrist-Steigungswahrschein-
+lichkeit, sondern Halte-Qualität auf 12–18 Monate. BUY = längeres Halten ist
+fundamental gedeckt (volle Größe, dem Daily-Signal mehr Raum geben). WATCH mit
+starkem Breakout = reiner Momentum-Trade an kurzer Leine. Ob PASS-Titel die
+VETO-Titel tatsächlich schlagen, misst das Signal-Journal (Abschnitt 7) — die
+Schwellen sind kalibrierbar, nicht Dogma.
+
+### Risiko-Staffel (max. Verlust je Trade, % des eingesetzten Kapitals)
+
+Normalfall **10 %** Risiko auf das Invest je Trade; Skalierung nach Analyse-/EV-Lage.
+Wird auf der Plattform als Spalte „Risiko" zwischen EV und Analyse angezeigt:
+
+| Risiko | Bedingung |
+|---|---|
+| **0 %** (kein Trade) | Funnel-Entscheidung VETO oder Verdict AVOID |
+| **5 %** (halb) | REDUCE · oder EV < −20 % (manuell wie Auto-Score) |
+| **10 %** (normal) | Standard — auch ohne Analyse-/EV-Daten |
+| **15 %** (erhöht) | PASS bzw. BUY **und** EV > +20 % (asymmetrischer Edge) — nur mit manueller Analyse, nie aus dem Auto-Score |
+
+Verhältnis zu Abschnitt 3/4: Die Staffel ersetzt nicht den strukturbasierten
+Stop (Abschnitt 3) — sie deckelt ihn. Liegt der Struktur-Stop weiter entfernt
+als das Risiko-Budget, wird die Positionsgröße entsprechend reduziert
+(Formel Abschnitt 4) oder der Trade ausgelassen.
+
 ---
 
 ## 7. Forward-Tracking (Signal-Journal) — die fehlende Feedback-Schleife
