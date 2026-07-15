@@ -113,14 +113,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "RWE.DE",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-01T20:38:52.359307",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "SRT3.DE",
       "verdict": "HOLD",
       "score": 55,
@@ -896,14 +888,6 @@
       "ev_upside_pct": 2.2
     },
     {
-      "ticker": "OKTA",
-      "verdict": "WATCH",
-      "score": 44,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.653308",
-      "ev_upside_pct": -31.7
-    },
-    {
       "ticker": "DDOG",
       "verdict": "WATCH",
       "score": 52,
@@ -1293,19 +1277,6 @@
       "ev_upside_pct": -9.8
     },
     {
-      "ticker": "CI",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Der peer-verankerte EV ist positiv (+7,9 %) und die Bewertungsl\u00fccke zu ELV/UNH aus Abschnitt 7 ist real, aber die MLR-Normalisierung als Kernkatalysator ist gem\u00e4\u00df Abschnitt 1 in den Daten weiterhin nicht best\u00e4tigt \u2014 volle Positionsgr\u00f6\u00dfe w\u00e4re verfr\u00fcht."
-      },
-      "created_at": "2026-07-14T19:35:31.271088",
-      "ev_upside_pct": 9.5
-    },
-    {
       "ticker": "CRWD",
       "verdict": "WATCH",
       "score": 40,
@@ -1330,6 +1301,97 @@
         "reason": "kein aktives GWS-Signal und RS-Rang 84/100 best\u00e4tigen die g\u00fcnstige Bewertung aktuell nicht technisch."
       },
       "created_at": "2026-07-15T05:33:10.871177"
+    },
+    {
+      "ticker": "OKTA",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "trotz RS-Rang 10/100 liegt der Erwartungswert unter dem aktuellen Kurs, Analystenkonsens 21 % darunter."
+      },
+      "created_at": "2026-07-15T12:06:39.275014"
+    },
+    {
+      "ticker": "CI",
+      "verdict": "HOLD",
+      "score": 59,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 11.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "kein aktives GWS-Signal, RS-Rang 257/337, EV-Edge unter der 10 %-Schwelle."
+      },
+      "created_at": "2026-07-15T12:06:39.572374"
+    },
+    {
+      "ticker": "RWE.DE",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 3.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "strukturell negativer FCF (schwere Capex-Phase) und die ungekl\u00e4rte Margen-Anomalie reduzieren die Datenqualit\u00e4t f\u00fcr eine volle Position, trotz starkem RS-Rang 6/37."
+      },
+      "created_at": "2026-07-15T12:06:39.609379"
+    },
+    {
+      "ticker": "ALL",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "kein aktives GWS-Signal, EV-Edge unter der 10 %-Schwelle trotz stabilem RS-Trend."
+      },
+      "created_at": "2026-07-15T12:06:39.909214"
+    },
+    {
+      "ticker": "HPQ",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 7.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "negatives Eigenkapital durch aggressive R\u00fcckk\u00e4ufe macht ROE/D-E nicht aussagekr\u00e4ftig, Bilanzqualit\u00e4t aus Daten nicht vollst\u00e4ndig beurteilbar."
+      },
+      "created_at": "2026-07-15T12:06:40.200514"
+    },
+    {
+      "ticker": "EIX",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 5.4,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "D/E 226 % und strukturelles kalifornisches Wildfire-Haftungsrisiko bei negativem FCF \u00fcberwiegen das technische Setup trotz stabilem RS-Trend."
+      },
+      "created_at": "2026-07-15T12:06:40.493091"
+    },
+    {
+      "ticker": "EQR",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.0,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Verw\u00e4sserung",
+        "reason": "das fixierte AVB-Merger-Umtauschverh\u00e4ltnis f\u00fchrt zu einer Verdopplung der Aktienzahl und Integrationsrisiko, das den negativen Erwartungswert und das schwache technische Setup \u00fcberwiegt."
+      },
+      "created_at": "2026-07-15T12:06:40.794534"
     }
   ]
 }
