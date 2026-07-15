@@ -343,11 +343,15 @@ def _extract_funnel_veto(text: str) -> dict | None:
 
 
 def _parse_price_range_midpoint(price_str: str) -> float | None:
-    """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900', '1.050–1.400') und gibt den Mittelpunkt
-    zurück. '.' wird als Tausender-Trennzeichen entfernt, wenn exakt 3 Ziffern folgen (Plattform-Konvention,
-    z.B. '1.050' = 1050) — sonst würde float() es fälschlich als Dezimalpunkt lesen (1.050 -> 1.05)."""
-    s = price_str.replace(",", "").replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
-    s = re.sub(r'\.(?=\d{3}(\D|$))', '', s)
+    """Parst einen Kursstring ('1.400–2.100 USD', '$500–$900', '€5,00', '1.050–1.400') und gibt den
+    Mittelpunkt zurück. Trennzeichen-Konventionen:
+    - '.' vor exakt 3 Ziffern = Tausender-Trennzeichen ('1.050' = 1050), sonst Dezimalpunkt
+    - ',' vor exakt 1-2 Ziffern am Zahlenende = deutsches Dezimalkomma ('5,00' = 5.0),
+      ',' vor 3 Ziffern = US-Tausender-Trennzeichen ('1,050' = 1050)"""
+    s = price_str.replace("USD", "").replace("EUR", "").replace("€", "").replace("$", "").strip()
+    s = re.sub(r'(?<=\d),(?=\d{1,2}(\D|$))', '.', s)   # deutsches Dezimalkomma -> Punkt
+    s = s.replace(",", "")                              # verbleibende Kommas = US-Tausender
+    s = re.sub(r'\.(?=\d{3}(\D|$))', '', s)             # Punkt-Tausender entfernen
     m = re.search(r'([\d.]+)\s*[–—-]+\s*([\d.]+)', s)
     if m:
         try:
@@ -367,25 +371,37 @@ def _parse_price_range_midpoint(price_str: str) -> float | None:
 def _compute_ev_score(analysis_text: str, current_price) -> tuple:
     """
     Berechnet EV-Score (0–20 Punkte) aus Bull/Base/Bear-Kurszielen.
-    EV = Mittelwert der Szenario-Mittelpunkte (mind. 2 Szenarien nötig).
+    EV = Mittelwert der Szenario-Mittelpunkte (alle 3 Szenarien nötig).
     Gibt (ev_punkte, upside_pct_oder_None) zurück.
+
+    Zwei Plausibilitäts-Guards (Fable-5-Review der Badge-Werte):
+    1. Nur neues 11-Abschnitte-Format (## 3-5 BULL/BASE/BEAR CASE, 12-18 Monate).
+       Der Fallback auf den alten LANGFRISTIGES-POTENZIAL-Block liefert 3-5-Jahres-
+       Ziele ohne echten Bear Case ("Konservativ" ist kein Bear) — strukturell
+       aufgeblähte EVs, nicht vergleichbar. Diese Analysen bekommen kein EV-Badge.
+    2. Szenario-Ordnung muss Bear < Base < Bull sein — sonst hat die Text-
+       Extraktion falsche Zahlen gegriffen (z.B. EPS-Annahmen statt Kursziele).
     """
     if not isinstance(current_price, (int, float)) or current_price <= 0:
         return 10, None
 
     sc = _extract_scenarios(analysis_text)
-    mids = []
+    if sc.get("_source") != "cases":
+        return 10, None
+    mids = {}
     for key in ("bull", "base", "bear"):
         price_str = sc[key].get("price", "N/A")
         if price_str and price_str != "N/A":
             mid = _parse_price_range_midpoint(price_str)
             if mid:
-                mids.append(mid)
+                mids[key] = mid
 
-    if len(mids) < 2:
+    if len(mids) < 3:
+        return 10, None
+    if not (mids["bear"] < mids["base"] < mids["bull"]):
         return 10, None
 
-    ev = sum(mids) / len(mids)
+    ev = sum(mids.values()) / len(mids)
     upside = (ev / current_price - 1) * 100
 
     if upside > 20:
@@ -424,6 +440,10 @@ def _extract_scenarios(text: str) -> dict:
 
     def _price(s: str) -> str:
         def _from(txt: str) -> str:
+            # Geldbeträge mit Mio./Mrd. sind Umsatz-/Bilanzzahlen, nie Kursziele —
+            # vor der Extraktion entfernen (sonst greift z.B. "Revenue auf $350–380 Mio."
+            # vor dem eigentlichen "Bull $90–110")
+            txt = re.sub(r'[€$]?\s*[\d.,]+(\s*[–—-]+\s*[€$]?\s*[\d.,]+)?\s*(Mio|Mrd)\b\.?', ' ', txt)
             # "€X–€Y" or "$X–$Y" — currency symbol precedes each number (European format)
             m = re.search(r'[€$]\s*(\d[\d.,]+)\s*[–—-]+\s*[€$]\s*(\d[\d.,]+)', txt)
             if m:
@@ -479,6 +499,10 @@ def _extract_scenarios(text: str) -> dict:
         prob = _prob(section)
         if prob != "N/A":
             result[key] = {"price": _price(section), "prob": prob}
+            # Marker: Szenarien stammen aus den 12-18-Monats-CASE-Abschnitten (neues Format).
+            # Nur diese sind als EV-Badge verwertbar — der LANGFRISTIG-Fallback unten liefert
+            # 3-5-Jahres-Ziele ohne echten Bear Case und würde den EV strukturell aufblähen.
+            result["_source"] = "cases"
 
     # ── Alte Struktur: LANGFRISTIGES POTENZIAL Abschnitt ─────────────────────
     if all(result[k]["prob"] == "N/A" for k in ["bull", "base", "bear"]):
