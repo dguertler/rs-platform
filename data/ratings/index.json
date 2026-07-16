@@ -744,14 +744,6 @@
       "ev_upside_pct": -18.4
     },
     {
-      "ticker": "ASML",
-      "verdict": "HOLD",
-      "score": 60,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-30T06:15:22.880474",
-      "ev_upside_pct": -9.7
-    },
-    {
       "ticker": "AXON",
       "verdict": "WATCH",
       "score": 53,
@@ -1392,6 +1384,19 @@
         "reason": "das fixierte AVB-Merger-Umtauschverh\u00e4ltnis f\u00fchrt zu einer Verdopplung der Aktienzahl und Integrationsrisiko, das den negativen Erwartungswert und das schwache technische Setup \u00fcberwiegt."
       },
       "created_at": "2026-07-15T12:06:40.794534"
+    },
+    {
+      "ticker": "ASML",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-Multiple liegt trotz Beat und angehobener Guidance \u00fcber der Peer-Bandbreite (~46x vs. 36\u201345x), kein aktives GWS-Signal vorhanden."
+      },
+      "created_at": "2026-07-16T10:00:47.316449"
     }
   ]
 }

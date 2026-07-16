@@ -1,88 +1,92 @@
 # ASML — KI-Aktienbewertung
 
-**ASML Holding N.V. - New York Re** · Technology · 30.06.2026 · Signal: Kein Signal
+**ASML Holding N.V. - New York Re** · Technology · 16.07.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 1794.62 |
-| Market Cap | $691.68 Mrd. |
-| Forward PE | 37.45 |
+| Kurs | 1787.53 |
+| Market Cap | $688.95 Mrd. |
+| Forward PE | 35.6 |
 | Revenue (TTM) | $33.69 Mrd. |
 | Gross Margin | 52.6% |
 | ROE | 52.2% |
-| RS-Score | 101.9 |
+| RS-Score | 55.8 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+**Szenarien (12–18 Monate):** Bull $2.100–$2.350 (30%) · Base $1.800–$2.000 (45%) · Bear $450–$650 (25%) · EV ~$1.660
+
 ## 1. INVESTMENT-CASE
 
-ASML ist der einzige Hersteller von EUV-Lithographiesystemen weltweit — die eigentliche Story ist nicht "ein Halbleiterausrüster", sondern ein echtes, technologisch nicht umgehbares Monopol: Ohne ASML-Maschinen kann kein Chiphersteller der Welt die fortschrittlichsten Logik- oder Speicherchips fertigen. Was der Markt aktuell goutiert: Die KI-getriebene Capex-Welle bei TSMC, Samsung und Intel treibt strukturell hohe Nachfrage nach High-NA-EUV- und EUV-Systemen für die nächsten Prozessknoten. ROE 52,2% und ROIC 85,6% sind außergewöhnlich und bestätigen die Monopolstellung — Price-to-Book von 1.624x ist allerdings ein klarer yfinance-Datenartefakt (UNGÜLTIG) und wird in dieser Analyse nicht verwendet. RS-Score 101,9 (Rang 12 im NASDAQ-100) zeigt solides Momentum, der Kurs hat sich von $1.794,62 auf $1.883,11 (29.06.) erholt, nachdem die Wochenkerze zuvor mit einem Tief bei $1.730,29 deutliche Volatilität zeigte. Was der Markt möglicherweise unterschätzt: Exportkontrollen gegen China sind keine einmalige Episode, sondern ein strukturelles, sich wiederholt verschärfendes Risiko, das einen relevanten historischen Umsatzanteil dauerhaft kappen könnte — gleichzeitig ist das verbleibende Wachstum bei westlichen/asiatischen (Nicht-China-)Kunden so stark, dass der Nettoeffekt schwer prognostizierbar bleibt.
+DATENLAGE: yfinance ist in der Cloud blockiert — die Q2-Zahlen (Bericht 15.07.2026) stammen aus Web-Recherche, nicht Live-yfinance. Die Kennzahlen-Tabelle oben nutzt den fundamentals.json-Snapshot vom 14.07. (vor den Zahlen), der Text rechnet mit frischen Q2-Ist-Werten. ASML hat Q2 mit €9,3 Mrd. Umsatz (+21,3% YoY), 54,0% Rohmarge und EPS $8,32 vs. $7,98 erwartet (+4,3%) übertroffen und die FY26-Guidance auf €43–45 Mrd. / 54–56% Marge angehoben. Die eigentliche Story ist aber eine Aussage aus dem Call: Das 2027er-Orderbuch ist "nahezu vollständig gesichert" trotz geplanter +30% EUV-Kapazität ggü. 2026 — für 2028 laufen bereits umfangreiche Bestellungen ein. Das ist ungewöhnlich lange Visibilität für einen zyklischen Kapitalgüterhersteller und stützt einen strukturell verlängerten, nicht rein KI-hypebasierten Investitionszyklus. Der Kurs reagierte trotz Beat nur mit +2,2% — deutlich unter der vom Optionsmarkt vorab eingepreisten ~8%-Schwankung, ein Zeichen, dass viel Gutes bereits im Kurs war. China bleibt mit ca. 20% des Umsatzes (Management-Aussage, primär inlandsgetriebene Logic-Nachfrage) das zentrale Risiko.
 
 ## 2. GESCHÄFTSMODELL
 
-- Monopolist für EUV-Lithographiesysteme (Extreme Ultraviolet) — einzige Technologie, die Fertigung der fortschrittlichsten Chip-Knoten (3nm, 2nm und darunter) ermöglicht
-- Hochpreisige Kapitalgüter (EUV-Systeme kosten teils über $300 Mio. pro Einheit) mit jahrelangen Vorlaufzeiten und Bestelllisten bei Großkunden (TSMC, Samsung, Intel, SK Hynix)
-- Service- und Upgrade-Geschäft (installierte Basis) liefert wiederkehrenden, margenstarken Umsatzanteil zusätzlich zum zyklischen Neumaschinenverkauf
-- Strukturelle Eintrittsbarriere durch Jahrzehnte an kumuliertem Photonik-/Optik-Know-how (Carl Zeiss SMT als exklusiver Optik-Partner) — praktisch nicht replizierbar für Wettbewerber
-- High-NA-EUV als nächste Technologiegeneration sichert Technologieführerschaft für die kommende Dekade, erfordert aber enorme F&E- und Capex-Vorleistungen
-- Strukturelle Abhängigkeit von wenigen Großkunden (TSMC, Samsung, Intel) — Kapazitätsentscheidungen dieser drei Foundries bestimmen den Bestellzyklus maßgeblich
-- China-Exportkontrollen (US-/niederländische Regierungsauflagen) begrenzen den Verkauf der fortschrittlichsten Systeme nach China strukturell und dauerhaft
-- Revenue TTM $33,69 Mrd., Wachstum +13,2% YoY — zyklisch, aber durch KI-Capex-Welle aktuell strukturell gestützt
+- Monopolist für EUV-Lithographiesysteme — einzige Technologie für die fortschrittlichsten Chip-Knoten
+- Hochpreisige Kapitalgüter ($300 Mio.+/Einheit) mit jahrelangen Vorlaufzeiten und mehrjährig gefüllten Auftragsbüchern
+- Neu aus dem Q2-Call: 2027er-Orderbuch nahezu vollständig gesichert — Umsatzsichtbarkeit weit über den üblichen 12-Monats-Horizont hinaus
+- Service-/Upgrade-Geschäft liefert wiederkehrenden, margenstarken Umsatz zusätzlich zum zyklischen Neumaschinenverkauf
+- Eintrittsbarriere durch jahrzehntelanges Optik-Know-how (Carl Zeiss SMT als exklusiver Partner) — praktisch nicht replizierbar
+- High-NA-EUV sichert Technologieführerschaft, erfordert aber hohe F&E-/Capex-Vorleistungen
+- Kundenkonzentration auf TSMC, Samsung, Intel — deren Capex bestimmt den Bestellzyklus maßgeblich
+- China-Exportkontrollen begrenzen Verkauf der fortschrittlichsten Systeme dauerhaft — ca. 20% Umsatzanteil, primär reiferes Logic-Segment
 
 ## 3. BULL CASE
 
-KI-Infrastruktur-Investitionen bei TSMC, Samsung und Intel beschleunigen sich weiter, High-NA-EUV-Adoption läuft schneller als erwartet an, und die Auftragsbücher (Backlog) wachsen über mehrere Jahre. Strukturell nachhaltigere Margen durch Technologieführerschaft ohne ernstzunehmenden Wettbewerber (Canon/Nikon erreichen EUV-Niveau nicht) und durch steigenden Service-/Upgrade-Umsatzanteil. Annahme (kein Konsens): FY28-EPS ~€38 (~$41) × 42x Forward-Multiple = $1.722. Bull-Kursziel: $2.300–$2.800 (Midpoint $2.550). Eintrittswahrscheinlichkeit: 25%.
+2027er-Orderbuch bestätigt sich, High-NA-Ramp beschleunigt, 2028er-Bestellungen weiten sich auf die geprüfte weitere +30%-Kapazität aus, Rohmarge hält sich am oberen Guidance-Rand (56%+). Annahme (kein Konsens): FY27-EPS ~$48 (ggü. eigener FY26-Schätzung ~$39, siehe Abschnitt 7) × 46x (Peer-Bandbreite AMAT 35,9x/LRCX 43,0x/KLAC 45,4x — leicht darüber, gerechtfertigt durch Monopol plus Mehrjahres-Visibilität ohne Peer-Äquivalent) = ~$2.208. Bull-Kursziel: $2.100–$2.350 (Mid $2.225). Wahrscheinlichkeit: 30%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Solides, aber nicht explosives Wachstum (10-15% p.a.) setzt sich fort, getragen von High-NA-EUV-Hochlauf und stabiler Foundry-Capex-Nachfrage außerhalb Chinas, während China-Exportbeschränkungen einen Teil des potenziellen Wachstums dauerhaft kappen. Annahme (kein Konsens): FY27-EPS ~$28 × 38x = $1.064. Base-Kursziel: $1.700–$2.150 (Midpoint $1.925). Eintrittswahrscheinlichkeit: 45%.
+Guidance-Mittelpunkt (€44 Mrd. FY26) wird erreicht, moderates Wachstum 2027, China-Beschränkungen bleiben dauerhafter, aber begrenzter Bremsfaktor. Annahme (kein Konsens): FY27-EPS ~$43 × 44x (nahe KLAC-Niveau, moderate Prämie, konsistent mit der Analysten-Zielanhebung nach dem Beat) = ~$1.892. Base-Kursziel: $1.800–$2.000 (Mid $1.900) — deckt sich mit dem Analysten-Konsensziel $1.997,48 (44 Analysten, "Strong Buy") als oberem Rand. Wahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Globaler Halbleiterzyklus dreht scharf nach unten (Nachfrageeinbruch bei Endkundenelektronik trifft KI-Capex-Boom zeitlich zusammen), gleichzeitig verschärfen sich China-Exportkontrollen weiter und betreffen zunehmend auch reifere DUV-Systeme. Kundenkonzentration: hoch — TSMC, Samsung und Intel dürften gemeinsam einen sehr hohen Anteil des Systemumsatzes ausmachen (genaue Aufteilung aus Daten nicht verfügbar) — ein Bestellstopp eines Großkunden trifft überproportional. Geopolitik/Exportkontrollen: das zentrale strukturelle Risiko — die niederländische Regierung hat bereits mehrfach unter US-Druck Exportlizenzen für China verschärft, weitere Eskalation ist historisch wahrscheinlich, nicht unwahrscheinlich. Lieferketten/Single-Source-Risiko: ASML selbst ist Single-Source für EUV, aber auch ASML ist abhängig von Carl Zeiss SMT als exklusivem Optik-Lieferanten — ein eigenes Konzentrationsrisiko in der Lieferkette. Verwässerung: D/E 13,0% niedrig, SBC-Trend aus Daten nicht verfügbar. Regulierung: Exportkontrollen sind bereits Realität, weitere regulatorische Eingriffe (z. B. EU-Reaktionen auf US-Druck) sind ein laufendes Risiko. Bei Zyklusabschwung und weiterer Exportverschärfung: Annahme FY27-EPS ~$14 × 24x = $336. Bear-Kursziel: $280–$450 (Midpoint $365). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: globaler Halbleiterzyklus dreht scharf, Endkundennachfrage bricht zeitgleich mit dem KI-Capex-Boom ein, China-Exportkontrollen eskalieren weiter und erfassen zunehmend reifere DUV-Systeme (schrumpft den 20%-China-Anteil strukturell). Kundenkonzentration: hoch — TSMC/Samsung/Intel stellen vermutlich den Großteil des Systemumsatzes (Aufteilung aus Daten nicht verfügbar); ein Bestellstopp trifft überproportional, auch ein "gesichertes" Orderbuch schützt nicht vor Stornierungen. Geopolitik: das zentrale, real aktive Risiko (20% Umsatzanteil betroffen). Lieferkette: Single-Source bei Carl Zeiss SMT als Optik-Partner — eigenes Konzentrationsrisiko. Verwässerung: D/E 13,0% niedrig, SBC-Trend nicht in den Daten. Regulierung: laufendes Risiko, keine neue Eskalation über die bekannten 20% hinaus erkennbar. Annahme (kein Konsens): FY27-EPS ~$22 (Margen-/Auftragseinbruch) × 24x (Kompression unter Peer-Tief) = ~$528. Bear-Kursziel: $450–$650 (Mid $550). Wahrscheinlichkeit: 25%.
 
-**Summe: 25% + 45% + 30% = 100%**
+**Summe: 30% + 45% + 25% = 100%**
 
-**Erwartungswert:** EV = 0,25 × $2.550 + 0,45 × $1.925 + 0,30 × $365 = $637,50 + $866,25 + $109,50 = **~$1.613,25 — implizites Downside vs. aktuellem Kurs ($1.883,11): −14,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing im Fazit ist auf diesem Niveau unzulässig.
+**Erwartungswert:** EV = 0,30×$2.225 + 0,45×$1.900 + 0,25×$550 = $667,50+$855,00+$137,50 = **~$1.660 — implizites Downside vs. aktuellem Kurs ($1.815,27): −8,6%.** Die eigenen Szenarien ergeben trotz Beat keinen asymmetrischen Edge. High-Conviction-Framing im Fazit ist auf diesem Niveau unzulässig.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 52,2% und ROIC 85,6% sind außergewöhnlich und gehören zu den stärksten Werten im gesamten Halbleiter-Sektor — diese Werte sollten im Zykluskontext bewertet werden: Sie reflektieren die aktuelle starke Nachfragephase, sind aber durch die echte Monopolstellung (kein Wettbewerber kann EUV liefern) strukturell nachhaltiger als bei zyklischen Halbleiterherstellern ohne vergleichbaren Burggraben. Gross Margin 52,6% und Operating Margin 36,0% sind exzellent und zeigen die Pricing Power des Monopolisten. FCF $8,24 Mrd. bei $33,69 Mrd. Revenue (24,5% FCF-Marge) ist stark. Bilanzqualität: D/E nur 13,0% ist sehr niedrig — ASML verfügt über erhebliche finanzielle Flexibilität für F&E-Investitionen in die nächste Technologiegeneration (High-NA-EUV) ohne Verschuldungsdruck. Der wirtschaftliche Burggraben ist real und außergewöhnlich tief — Jahrzehnte an kumuliertem Optik-/Photonik-Know-how lassen sich nicht durch Kapital allein replizieren, was ASML von praktisch jedem anderen Halbleiterausrüster unterscheidet.
+Q2 bestätigt die Qualität: 54,0% Rohmarge (über alter Guidance), €2,9 Mrd. Nettogewinn bei €9,3 Mrd. Umsatz. ROE 52,2% und ROIC 85,6% (Stand vor Q2, Bilanzkennzahlen ändern sich pro Quartal nur graduell) gehören weiter zu den stärksten Werten im Sektor — im Zykluskontext zu lesen, aber durch das echte Monopol strukturell nachhaltiger als bei zyklischen Peers. FCF ($8,24 Mrd. TTM vor Q2) dürfte durch den Beat weiter gestiegen sein, ein aktualisierter Wert liegt nicht vor. D/E 13,0% niedrig — erhebliche Flexibilität für High-NA-Investitionen ohne Verschuldungsdruck. Der Burggraben bleibt real und tief — durch die 2027/2028-Orderbuchsichtbarkeit sogar sichtbarer als zuvor.
 
 ## 7. BEWERTUNG
 
-Trailing PE 61,0x und Forward PE 37,5x sind hoch, aber für ein echtes Technologie-Monopol mit derart hoher ROIC nicht ungewöhnlich teuer im historischen Kontext von ASML selbst. Price-to-Book von 1.624x ist ein klarer yfinance-Datenartefakt (UNGÜLTIG) — nicht verwendet, nicht in die Bewertung einbezogen; stattdessen FCF-Multiple als Bewertungsanker: Bei $8,24 Mrd. FCF und $691,68 Mrd. Market Cap ergibt sich ein FCF-Multiple von ~83,9x — ambitioniert, aber für ein Monopol mit jahrzehntelangem Burggraben in einem strukturell wachsenden Markt (KI-Chip-Nachfrage) nicht per se eine Value-Falle. Rückrechnung: Bei $1.883,11 und 37,5x Forward-PE preist der Markt ein nachhaltiges EPS-Wachstum im Bereich 15-20% p.a. über mehrere Jahre ein, getragen von High-NA-EUV-Adoption und KI-Capex — plausibel angesichts der Foundry-Investitionspläne, aber abhängig von ungestörter China-Handelspolitik und keinem scharfen Zyklusabschwung. Analyst-Konsensziel $1.748,75 liegt unter dem aktuellen Kurs $1.883,11 — Coverage hat die jüngste Erholung von $1.730 (Wochentief) noch nicht vollständig nachgezogen, als Orientierungspunkt zu verstehen, nicht als Ceiling.
+Eigene FY26-EPS-Schätzung aus der Guidance (Annahme, kein Konsens): €44 Mrd. Umsatz-Mittelpunkt × EUR/USD 1,1468 ≈ $50,5 Mrd., bei ca. 30% Nettomarge (Cache-Niveau, Q2 lag mit 31,1% leicht darüber) ≈ $15,15 Mrd. Nettogewinn ÷ ca. 385,4 Mio. Aktien ≈ **$39,3 EPS FY26**. Bei $1.815,27 ergibt das ein Forward-Multiple von ~46,2x — **über** der Peer-Bandbreite (AMAT 35,9x/LRCX 43,0x/KLAC 45,4x). Die Prämie ist teils strukturell gerechtfertigt (Monopol, Orderbuchsichtbarkeit ohne Peer-Äquivalent), aber nicht vollständig belegbar — ein Teil ist reines Beat-Sentiment. Rückrechnung: Bei einem Peer-Durchschnitt von ~41x müsste der Markt EPS von ~$44,3 einpreisen — rund 13% über meiner FY26-Schätzung, plausibel bei vorweggenommenem FY27-Wachstum, aber abhängig von ungestörter Ausführung und keiner China-Eskalation — ambitioniert, kein günstiger Einstieg. Analystenziel jetzt $1.997,48 (44 Analysten, vorher 15) als Orientierung, nicht Ceiling; mehrere Häuser (Bernstein $2.623, BofA $2.345, Wells Fargo/JPMorgan $2.200) liegen deutlich darüber.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 101,9, Rang 12 im NASDAQ-100 — solides oberes Momentum-Segment. Recommendation Key "strong_buy" bei 15 Analysten zeigt starke, wenn auch zahlenmäßig begrenzte institutionelle Coverage (niedrigere Analystenzahl als bei US-Mega-Caps üblich, da ASML primär in Amsterdam notiert ist und die US-ADR-Coverage geringer ausfällt). Die jüngste Wochenkerze mit Tief $1.730,29 und Erholung auf $1.883,11 zeigt erhebliche Volatilität — ein Hinweis auf Sensitivität gegenüber geopolitischen Schlagzeilen (China-Exportkontrollen) oder Foundry-Capex-Kommentaren. Hypothese, nicht datenbasiert: Als europäischer Halbleiter-Monopolist mit hoher strategischer Bedeutung dürfte die institutionelle Basis stark aus Long-Only-Tech- und Halbleiter-Themenfonds bestehen. Enttäuschungsrisiko: Jede Eskalation bei China-Exportkontrollen oder Foundry-Capex-Kürzung kann die Aktie kurzfristig stark bewegen.
+Nach dem Beat folgte eine breite Welle an Kurszielanhebungen (Bernstein $1.971→$2.623, BofA $2.268→$2.345) und Ausweitung der Coverage von 15 auf 44 Analysten. Die Kursreaktion (+2,2%) fiel dennoch deutlich moderater aus als die vorab eingepreiste ~8%-Schwankung — Hinweis auf "Sell-the-News": viel war bereits im Kurs. Hypothese, nicht datenbasiert: Als europäischer Monopolist dürfte die institutionelle Basis stark aus Long-Only-Tech-Fonds bestehen, die auf die Orderbuch-Aussage eher mit Nachkäufen auf Rücksetzern reagieren. Enttäuschungsrisiko: China-Eskalation oder Stornierungen im "gesicherten" 2027er-Orderbuch könnten die Euphorie schnell dämpfen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 101,9, Rang 12 NASDAQ-100. 5T: +4,4%, 10T: +2,1%, 20T: +18,0%, 50T: +17,6%, 6M: +59,8% — starkes mittelfristiges Momentum mit kurzfristiger Abschwächung/Konsolidierung in den letzten ein bis zwei Wochen. Letzte Wochenkerze: $1.794,62 (22.06., Wochentief $1.730,29) auf $1.883,11 (29.06., Wochenhoch $1.886,12) — deutliche V-förmige Erholung innerhalb der Woche. Kein aktives GWS-Setup laut Datenstand. Momentum erscheint fundamental gut gestützt durch die KI-Capex-Story, aber die hohe Intra-Wochen-Volatilität deutet auf Schlagzeilen-Sensitivität hin. Technisches Warnsignal: Rückfall unter $1.700 (jüngstes Wochentief) wäre ein erstes Warnsignal für nachlassende Stärke.
+RS-Score 55,79 (Rang 17 NASDAQ-100) — deutlich niedriger als vor vier Wochen (~102, Rang 12): Trotz Beat hat sich die relative Stärke abgeschwächt. Windows: 5T +1,4%, 10T −0,5%, 20T +2,2%, 50T +24,2%, 6M +28,5% — mittelfristig stark, kurzfristig Konsolidierung statt frischer Führung. Kein aktives GWS-Setup (Weekly/Daily/4H inaktiv) — kein technischer Breakout-Trigger trotz der News. Wochenkerzen 13.–15.07. zeigen ein Tief bei $1.717,31 und Erholung auf $1.815,27 am Meldetag — Volumen 15.07. mit 4,18 Mio. deutlich über dem Schnitt (~1,5–2,7 Mio.), echte Positionierungsaktivität. Warnsignal: Rückfall unter $1.717 wäre ein Zeichen, dass der Markt den Beat doch nicht goutiert.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($2.800–$3.500):** High-NA-EUV wird globaler Standard für fortschrittlichste Chipfertigung, KI-Infrastruktur-Capex bei Foundries bleibt über Jahre strukturell erhöht, ASML verteidigt Monopolstellung ohne ernsthafte Konkurrenz.
+**Bull ($3.000–$3.800):** High-NA-EUV wird globaler Standard, das 2027/28-Orderbuch materialisiert sich vollständig und verlängert sich, Monopolstellung unangefochten.
 
-**Base ($1.600–$2.400):** Solides, zyklisch schwankendes Wachstum entlang der Foundry-Investitionszyklen, China-Exportbeschränkungen bleiben ein dauerhafter, aber begrenzter Bremsfaktor, Monopolstellung bleibt unangefochten.
+**Base ($1.700–$2.500):** Solides, zyklisches Wachstum entlang bestätigter Foundry-Investitionszyklen, China bleibt dauerhafter, begrenzter Bremsfaktor (~20% Umsatzanteil).
 
-**Bear ($600–$1.100):** Scharfer globaler Halbleiterzyklus-Abschwung trifft auf weiter eskalierende China-Exportkontrollen, Foundry-Capex wird über mehrere Jahre zurückgefahren, EPS fällt deutlich von aktuellem Niveau.
+**Bear ($650–$1.150):** Scharfer Zyklusabschwung trifft eskalierende China-Kontrollen, Teile des "gesicherten" 2027er-Orderbuchs werden storniert, Foundry-Capex mehrjährig zurückgefahren.
 
-Entscheidende Variable: Trajektorie der China-Exportkontrollen im Verhältnis zur globalen KI-Capex-Dynamik bei TSMC, Samsung und Intel.
+Entscheidende Variable: Ob sich das 2027/28-Orderbuch materialisiert oder China-Eskalation plus Zyklusabschwung Stornierungen auslösen.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −14,3%). ASML ist der reinste Buy-and-Hold-Compounder unter den hier analysierten Werten — ein echtes, technologisch fundiertes Monopol mit jahrzehntelangem Burggraben, keine Trading-Spekulation. Geeignet für langfristig orientierte Qualitätsinvestoren mit hoher Überzeugung in die strukturelle KI-/Halbleiter-Nachfragewelle; das aktuelle Kursniveau bietet jedoch nach der starken 6-Monats-Rallye (+59,8%) keinen besonders günstigen Einstiegspunkt. Risikowarnung: Geopolitisches Konzentrationsrisiko (China-Exportkontrollen) ist real und nicht diversifizierbar innerhalb der Position — Positionsgröße entsprechend mit Bewusstsein für dieses spezifische Tail-Risiko wählen (5-7% eines diversifizierten Tech-Portfolios als sinnvolle Obergrenze).
+Die eigenen Szenarien ergeben trotz klarem Q2-Beat keinen asymmetrischen Edge (EV −8,6%) — besser als vor den Zahlen (−14,3%), aber weiterhin kein günstiger Einstieg. ASML bleibt der reinste Buy-and-Hold-Compounder unter den Halbleiterausrüstern — ein technologisch fundiertes Monopol, dessen Orderbuchsichtbarkeit die These strukturell untermauert, keine Trading-Spekulation. Geeignet für langfristig überzeugte Qualitätsinvestoren; die moderate Kursreaktion trotz Beat spricht für Halten statt aggressives Nachkaufen auf diesem Niveau. Risikowarnung: China-Konzentrationsrisiko (ca. 20% Umsatz) ist real, quantifiziert und nicht diversifizierbar innerhalb der Position — Positionsgröße entsprechend wählen (5–7% eines diversifizierten Tech-Portfolios als Obergrenze).
 
-**Applied Materials (AMAT)** und **Lam Research (LRCX)** sind die relevantesten Halbleiterausrüster-Peers, jedoch ohne ASMLs Monopolstellung im EUV-Segment — beide diversifizierter, aber mit geringerer Pricing Power. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+**Applied Materials (AMAT)** und **Lam Research (LRCX)** sind die relevantesten Peers, jedoch ohne ASMLs Monopolstellung und Orderbuchsichtbarkeit — beide diversifizierter, niedrigeres Forward-Multiple (AMAT 35,9x, LRCX 43,0x vs. ASML ~46x), aber geringere Pricing Power.
 
 - Qualität: 5/5
-- Wachstum: 4/5
+- Wachstum: 5/5
 - Bewertung: 2/5
-- Katalysator: 4/5
+- Katalysator: 5/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-Multiple liegt trotz Beat und angehobener Guidance über der Peer-Bandbreite (~46x vs. 36–45x), kein aktives GWS-Signal vorhanden.
 
 
 ---
@@ -90,11 +94,11 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 | Rating | Score |
 |---|---|
 | Qualität | 5/5 |
-| Wachstum | 4/5 |
+| Wachstum | 5/5 |
 | Bewertung | 2/5 |
-| Katalysator | 4/5 |
-| EV-Upside | -93.1% |
+| Katalysator | 5/5 |
+| EV-Upside | -12.8% |
 
-**Verdict: HOLD (60/100)**
+**Verdict: HOLD (68/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
