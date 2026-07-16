@@ -49,14 +49,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "DHL.DE",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-01T20:38:52.259429",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "DTE.DE",
       "verdict": "HOLD",
       "score": 65,
@@ -800,14 +792,6 @@
       "ev_upside_pct": -8.0
     },
     {
-      "ticker": "CVS",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.947681",
-      "ev_upside_pct": -9.0
-    },
-    {
       "ticker": "SIRI",
       "verdict": "WATCH",
       "score": 54,
@@ -830,14 +814,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-07-03T06:04:37.841457",
       "ev_upside_pct": -7.5
-    },
-    {
-      "ticker": "DBK.DE",
-      "verdict": "AVOID",
-      "score": 37,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T06:07:14.156553",
-      "ev_upside_pct": -13.1
     },
     {
       "ticker": "SON",
@@ -886,14 +862,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-07-03T10:10:50.660852",
       "ev_upside_pct": -30.3
-    },
-    {
-      "ticker": "CTAS",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.675685",
-      "ev_upside_pct": -10.8
     },
     {
       "ticker": "DXCM",
@@ -1165,19 +1133,6 @@
       "ev_upside_pct": -5.7
     },
     {
-      "ticker": "AMG",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Sonstiges",
-        "reason": "Die starke 50-Tage-Rallye (+19 %) erh\u00f6ht das kurzfristige R\u00fccksetzer-Risiko trotz strukturell g\u00fcnstiger Bewertung."
-      },
-      "created_at": "2026-07-10T10:13:49.886365",
-      "ev_upside_pct": -8.9
-    },
-    {
       "ticker": "CSX",
       "verdict": "WATCH",
       "score": 49,
@@ -1397,6 +1352,240 @@
         "reason": "Forward-Multiple liegt trotz Beat und angehobener Guidance \u00fcber der Peer-Bandbreite (~46x vs. 36\u201345x), kein aktives GWS-Signal vorhanden."
       },
       "created_at": "2026-07-16T10:00:47.316449"
+    },
+    {
+      "ticker": "DHL.DE",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.7,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Technisches Setup (3/3 GWS-Punkte) intakt, aber EV-Edge von nur +2,5% rechtfertigt keine erh\u00f6hte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:30:27.320249"
+    },
+    {
+      "ticker": "MRK",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Kundenkonzentration",
+        "reason": "Keytruda-Abh\u00e4ngigkeit (>45% Umsatz) und 2028er-Patentklippe rechtfertigen nur halbe Positionsgr\u00f6\u00dfe trotz technischem Signal."
+      },
+      "created_at": "2026-07-16T10:31:57.947167"
+    },
+    {
+      "ticker": "DBK.DE",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.3,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Solides technisches Setup (3/3 GWS-Punkte) und Bewertung unter Buchwert, aber begrenzter Peer-Vergleich mindert die Konviktion auf normale Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:33:03.092094"
+    },
+    {
+      "ticker": "AMG",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 5.2,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes technisches Setup (3/3 GWS-Punkte) und \u00fcberdurchschnittliche Kapitalrendite, volle Positionsgr\u00f6\u00dfe trotz moderatem EV-Edge vertretbar."
+      },
+      "created_at": "2026-07-16T10:34:01.603505"
+    },
+    {
+      "ticker": "CVS",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes technisches Signal (3/3 GWS-Punkte) und best\u00e4tigte Stabilisierung, volle Positionsgr\u00f6\u00dfe vertretbar trotz moderatem EV-Edge."
+      },
+      "created_at": "2026-07-16T10:34:54.856245"
+    },
+    {
+      "ticker": "CTAS",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz technischer Bodenbildung (3/3 GWS-Punkte) rechtfertigt das hohe Forward-KGV (33,5x) bei negativem EV-Edge nur halbe Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:35:59.318625"
+    },
+    {
+      "ticker": "ABNB",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV liegt ~70% \u00fcber dem n\u00e4chstliegenden Peer (BKNG) bei negativem EV-Edge \u2014 halbe Positionsgr\u00f6\u00dfe trotz intaktem technischem Setup."
+      },
+      "created_at": "2026-07-16T10:36:57.464805"
+    },
+    {
+      "ticker": "VRSK",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -4.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Wachstumsverlangsamung ohne best\u00e4tigten Reaccelerierungs-Katalysator trotz technischer Bodenbildung (3/3 GWS-Punkte) rechtfertigt nur halbe Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:38:04.491268"
+    },
+    {
+      "ticker": "MTB",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.9,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Solides technisches Setup (3/3 GWS-Punkte) und konservative Kreditqualit\u00e4t, normale Positionsgr\u00f6\u00dfe trotz zur\u00fcckhaltendem Analystenkonsens vertretbar."
+      },
+      "created_at": "2026-07-16T10:38:56.863335"
+    },
+    {
+      "ticker": "ZION",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.7,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes technisches Setup (3/3 GWS-Punkte) und \u00fcberdurchschnittliches Wachstum, volle Positionsgr\u00f6\u00dfe vertretbar."
+      },
+      "created_at": "2026-07-16T10:39:47.701630"
+    },
+    {
+      "ticker": "IVZ",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.3,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes technisches Setup (3/3 GWS-Punkte) und g\u00fcnstige Bewertung, volle Positionsgr\u00f6\u00dfe vertretbar."
+      },
+      "created_at": "2026-07-16T10:40:40.947839"
+    },
+    {
+      "ticker": "CHRW",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Nach Kursverdopplung und Forward-KGV am oberen Rand der Peer-Bandbreite rechtfertigt der leicht negative EV-Edge nur halbe Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:41:36.879449"
+    },
+    {
+      "ticker": "HRL",
+      "verdict": "AVOID",
+      "score": 28,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -11.7,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Forward-KGV liegt deutlich \u00fcber Peers bei schw\u00e4cherem Wachstum (-2,9% Umsatz) und negativem EV-Edge (-10,3%) \u2014 kein Trade trotz technischem Setup."
+      },
+      "created_at": "2026-07-16T10:42:48.435932"
+    },
+    {
+      "ticker": "NWSA",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Solides technisches Setup (3/3 GWS-Punkte), moderat negativer EV-Edge rechtfertigt normale statt erh\u00f6hte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:43:46.476437"
+    },
+    {
+      "ticker": "BLK",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 3.9,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Strukturelle Transformation mit starkem Katalysator und intaktem technischem Setup (3/3 GWS-Punkte) rechtfertigt volle Positionsgr\u00f6\u00dfe trotz hoher Bewertung."
+      },
+      "created_at": "2026-07-16T10:44:44.576071"
+    },
+    {
+      "ticker": "MCO",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.4,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Erstklassiger struktureller Burggraben (3/3 GWS-Punkte) rechtfertigt normale Positionsgr\u00f6\u00dfe trotz Bewertungspr\u00e4mie gg\u00fc. SPGI."
+      },
+      "created_at": "2026-07-16T10:45:38.257063"
+    },
+    {
+      "ticker": "DHR",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.9,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Technische Bodenbildung (3/3 GWS-Punkte) bei fairer Bewertung nahe TMO, normale Positionsgr\u00f6\u00dfe vertretbar trotz noch unbest\u00e4tigter fundamentaler Trendwende."
+      },
+      "created_at": "2026-07-16T10:46:34.716557"
+    },
+    {
+      "ticker": "SPGI",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.4,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Mehrfach abgesicherter Burggraben und relative Value gg\u00fc. MCO bei intaktem technischem Setup (3/3 GWS-Punkte) rechtfertigen volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-16T10:47:33.153795"
     }
   ]
 }

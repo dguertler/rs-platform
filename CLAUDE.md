@@ -111,6 +111,35 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
+Nach einem Analyse-Batch (mehrere Ticker in einem Rutsch) zusätzlich zur
+Zusammenfassungs-Tabelle (Schritt 8 oben) eine **EV/Risiko-Tabelle** ausgeben —
+exakt dieselben Werte, die danach auch in den Index-Tabellen der Platform
+(`frontend/index.html`, `sp500.html`, `dax.html`) erscheinen:
+
+```
+| Ticker | EV      | Risiko |
+|--------|---------|--------|
+| TICKER | ±X%     | Y%     |
+```
+
+Werte aus `data/ratings/index.json` nach dem Schreiben aller Analysen des
+Batches auslesen (`ev_upside_pct`, `verdict`, `funnel_veto.decision`) —
+**nicht** aus dem selbst geschriebenen Analysetext neu berechnen, da
+`write_rating()` den EV mechanisch aus den Bull/Base/Bear-Mittelpunkten
+ermittelt (einfacher Durchschnitt, nicht wahrscheinlichkeitsgewichtet) und
+das die im Frontend tatsächlich angezeigte Zahl ist.
+
+Risiko-Staffel identisch zur Frontend-Logik (`frontend/index.html`,
+Abschnitt "Risiko-Staffel"): max. Verlust je Trade in % des Invests.
+- `funnel_veto.decision == "VETO"` oder `verdict == "AVOID"` → **0%**
+- `funnel_veto.decision == "REDUCE"` → **5%**
+- `ev_upside_pct < -20` → **5%**
+- `ev_upside_pct > 20` und (`funnel_veto.decision == "PASS"` oder `verdict == "BUY"`) → **15%**
+- sonst → **10%**
+
+Am Ende zusätzlich die Ø EV-Upside über alle Batch-Ticker ausgeben (wie die
+"Ø EV-Upside"-Kennzahl oben in der Platform-Tabelle).
+
 ## Wikifolio Wochenrückblick (Feed-Post)
 
 Wenn der Nutzer schreibt `Wochenrückblick KW<NN>` oder `Feed-Post KW<NN>`:

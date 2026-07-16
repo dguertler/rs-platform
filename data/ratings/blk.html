@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BLK — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BLK</h1>
+      <h2>BlackRock, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Asset Management</span></div>
+        <div class="mi">MCap: <span>$167B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">12.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$1026.82</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$25.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">46.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">221.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+3.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1.350–1.530</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1.010–1.105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">660–745</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $1.350–$1.530 (25%) · Base $1.010–$1.105 (50%) · Bear $660–$745 (25%) · EV ~$1.065</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>BlackRock befindet sich in der größten strukturellen Transformation seiner Geschichte: Mit den Übernahmen von Global Infrastructure Partners (GIP), HPS Investment Partners (Private Credit) und Preqin (Private-Markets-Daten) wandelt sich der weltgrößte Vermögensverwalter von einem primär passiven/traditionellen Asset Manager zu einer "Total Portfolio Solutions"-Plattform mit signifikanter Private-Markets-Exposition. Das schlägt sich in einem Umsatzwachstum von 27% YoY und einer erwarteten Forward-EPS-Steigerung von über 50% nieder. Die Kernfrage: Rechtfertigt diese Transformation das bereits deutlich über der Asset-Management-Vergleichsgruppe liegende Forward-KGV von 16,5x, oder trägt der Markt bereits einen erheblichen Teil des Integrationserfolgs vor, bevor er sich in stabilen, wiederkehrenden Erträgen bestätigt?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>iShares ETF-Plattform als weltweit größte und margenstärkste Indexfonds-Franchise — strukturelles Skalenwachstum</li>
+<li>Aladdin-Technologieplattform (Risikomanagement-Software für institutionelle Investoren) als hochmargiges, SaaS-artiges Zusatzgeschäft mit wiederkehrenden Lizenzerlösen</li>
+<li>Neue Private-Markets-Sparte (Infrastruktur über GIP, Private Credit über HPS) erschließt deutlich höhere Gebührenstrukturen als das klassische passive Geschäft</li>
+<li>Preqin-Datengeschäft ergänzt die Aladdin-Plattform um Private-Markets-Analytics — Cross-Selling-Potenzial in die institutionelle Kundenbasis</li>
+<li>Operativer Hebel über AUM-Skalierung bei gleichzeitig steigendem Anteil höhermargiger Segmente am Ertragsmix</li>
+<li>Integrationsrisiko aus drei großen, zeitgleichen Akquisitionen ist der zentrale kurzfristige Unsicherheitsfaktor</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: AMG 9,0x, IVZ 9,0x, AMP 10,4x, BEN 10,5x, PFG 11,0x, TROW 11,2x — allesamt traditionelle Asset Manager ohne vergleichbare Private-Markets-/Technologie-Diversifikation. Bull-Multiple 20x (deutliche Prämie ggü. Peer-Gruppe, gerechtfertigt bei bestätigter erfolgreicher Private-Markets-Integration). Bull-EPS FY27: $72,00 (Annahme) — GIP/HPS-Integration liefert schneller als erwartet akkretive Erträge, Aladdin-Cross-Selling beschleunigt sich. Kursziel: 72,00 × 20x ≈ $1.440 → Bandbreite $1.350–$1.530. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 17x (nahe eigenem Forward-KGV 16,5x — bereits deutlich über der Peer-Bandbreite). Base-EPS: Konsens $62,24. Kursziel: 62,24 × 17x ≈ $1.058 → Bandbreite $1.010–$1.105. Wahrscheinlichstes Szenario: Integration verläuft planmäßig, aber ohne zusätzlichen Rerating-Katalysator. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 13x (Kompression Richtung traditioneller Asset-Manager-Multiples — Kompression bei brechender Integrations-These). Bear-EPS FY27: $54,00 (Annahme) — Integrationskosten übersteigen Erwartungen, Gebührenkompression im Kerngeschäft (passive ETFs) beschleunigt sich. Kursziel: 54,00 × 13x ≈ $702 → Bandbreite $660–$745. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: gering — breit diversifizierte institutionelle und Retail-Kundenbasis, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/China-Exposure: moderat über globale institutionelle Mandate, auf Datenbasis nicht quantifizierbar</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Asset-Management-Geschäft</li>
+<li>Verwässerung: möglich durch aktienbasierte Akquisitionskomponenten bei GIP/HPS — exakte Höhe auf Datenbasis nicht quantifizierbar</li>
+<li>Regulierung: verschärfte Aufsicht über "systemrelevante" Asset Manager (SIFI-Debatte) und Private-Markets-Transparenzvorgaben als strukturelles, latentes Risiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $1.065 — implizites Upside/Downside vs. aktuellem Kurs ($1.026,82): +3,7%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 11,9%, Nettomarge 24,4%, operative Marge 35,6% — solide, aber im Übergang: Das Umsatzwachstum von 27% YoY ist primär akquisitionsgetrieben, nicht organisch, was die Nachhaltigkeit der Marge kurzfristig weniger klar macht (aus den Daten nicht abschließend auflösbar, wie viel organisches Wachstum beigetragen hat). FCF von 7,08 Mrd. $ bei 25,64 Mrd. $ Umsatz zeigt weiterhin robuste Cash-Generierung. Der Burggraben liegt in der Aladdin-Plattform (hohe Wechselkosten für institutionelle Kunden) und der iShares-Skalengröße — beide strukturell stark, jetzt ergänzt um Private-Markets-Zugang.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das eigene Forward-Multiple (16,5x) liegt deutlich über der traditionellen Asset-Management-Vergleichsgruppe (9,0–11,2x) — dieser Abstand ist strukturell durch die Aladdin-Technologieplattform und die neue, höhermargige Private-Markets-Sparte erklärbar, wird aber auch durch den akquisitionsgetriebenen Charakter des aktuellen Wachstums relativiert. Rückrechnung "Was preist der Kurs ein?": Bei $1.026,82 und Forward-EPS $62,24 impliziert der Markt ein KGV von 16,5x — das setzt eine erfolgreiche, margensteigernde Integration der drei großen Akquisitionen voraus. Ambitioniert, aber bei BlackRocks Integrations-Track-Record nicht unrealistisch.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 16 Analysten, Kursziel $1.259 deutlich über aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Kurs 15,8% unter dem 52-Wochen-Hoch — Hypothese, nicht datenbasiert: Integrationsunsicherheit bei den drei großen Akquisitionen dämpft aktuell die institutionelle Risikobereitschaft trotz positiver Analystenerwartungen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score nur 12,4 (Rang #279 im S&P 500 — unteres Mittelfeld), 6M-Fenster negativ (-7,3%) trotz kurzfristig positiver Fenster (5T +6,9%, 10T +10,3%) — deutet auf eine beginnende Erholung nach einer schwächeren Phase hin. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine überraschende Integrationskosten-Guidance-Erhöhung im nächsten Quartalsbericht.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $1.600–$1.950 — Private-Markets-Plattform wird zum zweiten großen Ertragspfeiler neben iShares, Aladdin-Cross-Selling erreicht neue Kundenschichten</li>
+<li>Base: $1.150–$1.400 — solide Integration, moderates organisches Wachstum ergänzt die Akquisitionseffekte</li>
+<li>Bear: $650–$800 — Integrationsprobleme bei einer der drei großen Akquisitionen, Gebührenkompression im ETF-Kerngeschäft beschleunigt sich strukturell</li>
+</ul>
+<p>Entscheidende Variable: Erfolgreiche Integration von GIP/HPS/Preqin und Tempo des Cross-Sellings über die Aladdin-Plattform.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>BlackRock ist ein struktureller Transformations-Compounder, kein reiner zyklischer Trade — geeignet für langfristig orientierte Investoren, die der Private-Markets-Strategie Vertrauen schenken, mit Toleranz für kurzfristiges Integrationsrisiko aus drei großen, zeitgleichen Akquisitionen. Explizite Risikowarnung: Bei einem bereits erhöhten Multiple (16,5x) und akquisitionsgetriebenem statt organischem Wachstum sollte die Positionsgröße die Integrationsunsicherheit berücksichtigen. Peers: TROW (deutlich günstiger mit 11,2x, aber ohne Private-Markets-/Technologie-Diversifikation), AMP (günstiger mit 10,4x, reineres Retail-Wealth-Modell) — BlackRock bleibt das strukturell am breitesten diversifizierte Instrument der Gruppe.</p>
+<p>Qualität: 4/5</p>
+<p>Wachstum: 4/5</p>
+<p>Bewertung: 2/5</p>
+<p>Katalysator: 4/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Strukturelle Transformation mit starkem Katalysator und intaktem technischem Setup (3/3 GWS-Punkte) rechtfertigt volle Positionsgröße trotz hoher Bewertung.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

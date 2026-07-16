@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HRL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0000;color:#ef4444;border:1px solid #7f1d1d}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>HRL</h1>
+      <h2>Hormel Foods Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Packaged Foods</span></div>
+        <div class="mi">MCap: <span>$13B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">AVOID</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#ef4444;font-size:20px">28</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">26.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$24.53</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$12.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">15.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">473.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">5.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-11.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">27–31</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">21–24</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">12–15</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $27–$31 (25%) · Base $21–$24 (50%) · Bear $12–$15 (25%) · EV ~$22</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Hormel ist ein "Dividend King" (55+ Jahre in Folge steigende Dividende) mit einer strukturell schwächeren fundamentalen Ausgangslage, als der Ruf vermuten lässt: Umsatz schrumpft um 2,9% YoY, ROE liegt bei nur 5,83% — deutlich unter dem, was der Markt für ein Forward-KGV von 15,7x (nahe dem Premium-Markennamen McCormick mit 16,2x, deutlich über CAG/SJM/GIS mit 9–11x) honorieren müsste. Die Kernfrage: Rechtfertigt allein die Dividendenhistorie und Markenqualität (Spam, Skippy, Planters, Applegate) diese Bewertungsprämie gegenüber Peers mit vergleichbaren oder besseren operativen Kennzahlen, oder ist der Titel schlicht überbewertet für seine aktuelle Wachstumsschwäche?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Diversifiziertes Markenportfolio in verarbeiteten Lebensmitteln (Fleischwaren, Nussbutter, Bio-Marken) mit teils führenden Kategorie-Positionen</li>
+<li>Vertikale Integration in der Fleischverarbeitung (Truthahn, Schwein) — direkte Abhängigkeit von Rohstoffpreiszyklen</li>
+<li>Planters/Applegate-Akquisitionen als Diversifikationsversuch jenseits klassischer Fleischwaren, bislang ohne durchschlagenden Wachstumserfolg</li>
+<li>Operativer Hebel begrenzt: niedrige Bruttomarge (15,8%) typisch für Grundnahrungsmittelhersteller mit hohem Rohstoffkostenanteil</li>
+<li>Foodservice-Segment (Gastronomie/Großküchen) strukturell konjunktursensitiver als der Einzelhandelskanal</li>
+<li>Extrem niedrige Verschuldung (D/E 4,2%) gibt finanzielle Flexibilität, kompensiert aber nicht die Wachstumsschwäche</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: CAG 9,0x, SJM 10,3x, CPB 11,2x, GIS 11,3x, MKC 16,2x. Bull-Multiple 16,5x (nahe MKC — nur gerechtfertigt bei bestätigter Rückkehr zu Markenpreissetzungsmacht). Bull-EPS FY27: $1,75 (Annahme) — Rohstoffkosten (Truthahn/Schwein) entspannen sich, Planters/Applegate liefern erstmals sichtbares Wachstum. Kursziel: 1,75 × 16,5x ≈ $28,9 → Bandbreite $27–$31. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 14,5x (leicht unter eigenem Forward-KGV 15,7x — Datenkonsistenz-Korrektur angesichts der schwachen Wachstumskennzahlen ggü. Peers). Base-EPS: Konsens $1,56. Kursziel: 1,56 × 14,5x ≈ $22,6 → Bandbreite $21–$24. Wahrscheinlichstes Szenario: anhaltend flaches bis leicht rückläufiges Wachstum, Multiple normalisiert sich moderat Richtung Peer-Mitte. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 10,5x (Kompression auf CPB/GIS-Niveau — vollständiger Verlust der Markenprämie). Bear-EPS FY27: $1,30 (Annahme) — Rohstoffkosteninflation kehrt zurück, Umsatzrückgang setzt sich fort, Foodservice-Nachfrage schwächelt weiter. Kursziel: 1,30 × 10,5x ≈ $13,65 → Bandbreite $12–$15. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: strukturell relevant über Großhandelsketten (Walmart u.a.), exakter Anteil auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/China-Exposure: gering, primär US-Inlandsgeschäft</li>
+<li>Lieferketten/Rohstoffabhängigkeit: hoch — Truthahn- und Schweinefleischpreise sind direkte, volatile Kostentreiber ohne Diversifikationspuffer</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung: Lebensmittelsicherheits- und Kennzeichnungsvorschriften als latentes, im Datensatz nicht quantifizierbares Risiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $22 — implizites Upside/Downside vs. aktuellem Kurs ($24,53): -10,3%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — die Bewertung liegt sogar über dem, was die eigenen Szenarien stützen. Ein High-Conviction-Framing im Fazit ist damit klar unzulässig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von nur 5,83% ist Top-of-Cycle-untypisch niedrig für einen etablierten Markenkonzern — kein zyklischer Einmaleffekt, sondern Ausdruck struktureller Margenschwäche durch Rohstoffkosten und schwaches Umsatzwachstum. Operative Marge 11,1%, Nettomarge nur 3,82% — beide unterdurchschnittlich für die Peer-Gruppe. FCF von 471 Mio. $ bei 12,22 Mrd. $ Umsatz (FCF-Marge ~3,9%) ist dünn. Der Burggraben liegt in der Markenbekanntheit (Spam, Skippy) — real, aber zunehmend durch Handelsmarken-Konkurrenz und stagnierende Kategorie-Nachfrage unter Druck.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Rückrechnung "Was preist der Kurs ein?": Bei $24,53 und Forward-EPS $1,56 impliziert der Markt ein KGV von 15,7x — das liegt deutlich über CAG (9,0x), SJM (10,3x), CPB (11,2x) und GIS (11,3x), obwohl Hormels Umsatzwachstum (-2,9%) schwächer ist als bei diesen Peers. Diese Prämie ist primär mit der Dividendenhistorie und Markenqualität erklärbar, nicht mit überlegenen operativen Kennzahlen — aus den vorliegenden Daten ist die volle Prämienhöhe nicht abschließend rechtfertigbar. Das eigene Forward-Multiple liegt über der Peer-Bandbreite bei gleichzeitig unterdurchschnittlichem Wachstum — unzureichend strukturell begründet.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens auffällig "Hold" (nicht "Buy") bei nur 8 Analysten (geringe Coverage), Kursziel $26,75 — als Sentiment-Indikator, nicht als Ceiling. Hypothese, nicht datenbasiert: Die kurzfristige Kursstärke (50T +18,0%) könnte eine defensive Rotation in Dividenden-/Staples-Titel bei Marktunsicherheit widerspiegeln, nicht eine fundamentale Neubewertung.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 26,9 (Rang #227 im S&P 500 — Mittelfeld), 50T-Fenster stark positiv (+18,0%), aber 6M nur +1,1% — kurzfristiges Momentum wirkt reaktiv (defensive Rotation), nicht fundamental gestützt angesichts der schwachen operativen Kennzahlen. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein technisches Warnsignal wäre ein Rückfall unter die 50-Tage-Struktur bei gleichzeitig enttäuschender Guidance.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $32–$38 — Planters/Applegate liefern nachhaltiges Wachstum, Markenprämie wird durch operative Verbesserung bestätigt</li>
+<li>Base: $23–$28 — anhaltend flaches Wachstum, Dividende bleibt Hauptattraktivität</li>
+<li>Bear: $14–$19 — strukturelle Kategorien-Schwäche setzt sich fort, Dividendenwachstum verlangsamt sich erstmals seit Jahrzehnten</li>
+</ul>
+<p>Entscheidende Variable: Ob Planters/Applegate zu echten Wachstumstreibern werden oder Nebenprodukte bleiben, und die Entwicklung der Rohstoffkosten.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Hormel ist ein defensiver Dividenden-Titel für einkommensorientierte Investoren, aber auf dem aktuellen Bewertungsniveau kein überzeugender Compounder-Einstieg — die eigenen Szenarien deuten auf eine Überbewertung relativ zu Peers hin. Explizite Risikowarnung zur Positionsgröße: Bei negativem EV-Edge und einer Bewertungsprämie ohne klare operative Rechtfertigung ist Zurückhaltung angebracht, trotz der Dividendenhistorie. Peers: GIS (günstiger bewertet mit 11,3x, vergleichbares Wachstumsprofil), CAG (deutlich günstiger mit 9,0x) — beide sind die günstigeren Instrumente für die reine Packaged-Foods-These ohne die Hormel-spezifische Bewertungsprämie.</p>
+<p>Qualität: 3/5</p>
+<p>Wachstum: 1/5</p>
+<p>Bewertung: 2/5</p>
+<p>Katalysator: 1/5</p>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Forward-KGV liegt deutlich über Peers bei schwächerem Wachstum (-2,9% Umsatz) und negativem EV-Edge (-10,3%) — kein Trade trotz technischem Setup.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

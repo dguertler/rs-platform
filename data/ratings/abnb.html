@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ABNB — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ABNB</h1>
+      <h2>Airbnb, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Travel Services</span></div>
+        <div class="mi">MCap: <span>$87B</span></div>
+        <div class="mi">Signal: <span>NASDAQ-100</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">1.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$146.88</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">24.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$12.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">82.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">32.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-2.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">188–215</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">138–153</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">76–90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $188–$215 (25%) · Base $138–$153 (50%) · Bear $76–$90 (25%) · EV ~$144</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Airbnb ist längst kein reines Wachstumsstory mehr, sondern ein margenstarker, kapitalleichter Marktplatz mit außergewöhnlicher FCF-Generierung (3,19 Mrd. $ FCF bei nur 3,2% operativer Marge — die Differenz zeigt, wie viel Marketing-/SBC-Aufwand die GAAP-Marge drückt, ohne den Cashflow zu belasten). Der Markt preist mit einem Forward-KGV von 24,2x einen strukturellen Wachstumsaufschlag gegenüber klassischen OTA-Peers ein. Die eigentliche These für die nächsten 12–18 Monate: Kann die "Experiences"-Neuausrichtung (Aktivitäten/Dienstleistungen jenseits der reinen Unterkunftsvermittlung) die nächste Wachstumswelle liefern, oder bleibt Airbnb ein reifes Kernprodukt mit verlangsamtem Wachstum bei weiterhin hoher Bewertung?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zweiseitiger Marktplatz (Gastgeber/Gäste) mit Netzwerkeffekten — mehr Angebot zieht mehr Nachfrage an und umgekehrt</li>
+<li>Extrem kapitalleicht: kein eigenes Immobilienportfolio, Take-Rate-Modell auf Buchungsvolumen</li>
+<li>Hohe Bruttomarge (82,9%) typisch für Plattformgeschäfte, operativer Hebel wird durch hohe Marketingausgaben (Performance-/Brand-Marketing) noch nicht voll sichtbar</li>
+<li>"Experiences"-Vertical als neuer Wachstumshebel — noch früh in der Skalierung</li>
+<li>Aktienrückkäufe als primärer Kapitalrückführungskanal (keine Dividende)</li>
+<li>Strukturelle Abhängigkeit von diskretionären Reiseausgaben — konjunktursensitiv</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: NCLH 9,5x, CCL 10,1x, EXPE 11,7x, BKNG 14,3x, RCL 14,3x — BKNG ist der nächstliegende Marktplatz-Vergleich, Kreuzfahrtlinien (NCLH/CCL/RCL) sind Geschäftsmodell-fremd. Bull-Multiple 28x (moderate Ausweitung ggü. eigenem Forward-KGV bei bestätigter Experiences-Skalierung — bereits deutlich über der Peer-Bandbreite, nur bei voll bestätigtem zusätzlichem Wachstumshebel gerechtfertigt). Bull-EPS FY27: $7,20 (Annahme) — Experiences-Vertical skaliert, Take-Rate verbessert sich. Kursziel: 7,20 × 28x ≈ $201,6 → Bandbreite $188–$215. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 24x (nahe eigenem Forward-KGV 24,2x — deutlich über der Peer-Bandbreite, siehe Bewertungsabschnitt). Base-EPS: Konsens $6,06. Kursziel: 6,06 × 24x ≈ $145,4 → Bandbreite $138–$153. Wahrscheinlichstes Szenario: solides, aber kein beschleunigtes Kernwachstum, Experiences bleibt Nebenprodukt. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 16x (Kompression Richtung BKNG/RCL-Niveau — Kompression bei brechender Wachstumsprämien-These). Bear-EPS FY27: $5,20 (Annahme) — Reisenachfrage kühlt konjunkturell ab, Wettbewerbsdruck von Booking/Vrbo komprimiert die Take-Rate. Kursziel: 5,20 × 16x ≈ $83,2 → Bandbreite $76–$90. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: gering — breit diversifizierte Gastgeber-/Gästebasis, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/Regulierung Kurzzeitvermietung: hoch — lokale Regulierungen (Städte wie New York, Barcelona) schränken das Angebot zunehmend ein, direktes strukturelles Risiko</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Marktplatzmodell</li>
+<li>Verwässerung: SBC-Daten nicht im Datensatz verfügbar — potenzielles Risiko bei tech-typisch hoher aktienbasierter Vergütung, auf Datenbasis nicht quantifizierbar</li>
+<li>Regulierung: kommunale Kurzzeitvermietungsverbote/-beschränkungen sind das strukturell relevanteste Einzelrisiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $144 — implizites Upside/Downside vs. aktuellem Kurs ($146,89): -2,0%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 32,3%, Nettomarge 19,9% (durch Zinserträge auf hohe Cash-Reserven und Steuereffekte begünstigt — die operative Marge von nur 3,2% ist die konservativere Qualitätskennzahl). FCF-Marge von ~25% (3,19 Mrd. $ FCF auf 12,65 Mrd. $ Umsatz) zeigt die eigentliche wirtschaftliche Stärke des Marktplatzmodells jenseits der GAAP-Marge. Der Burggraben liegt im Netzwerkeffekt der zweiseitigen Plattform — real, aber durch aggressive Konkurrenz (Booking.com/Vrbo) angreifbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das eigene Forward-Multiple (24,2x) liegt deutlich über der gesamten Peer-Bandbreite im Datensatz (9,5x–14,3x) — dieser Abstand ist teilweise strukturell durch das höhere Umsatzwachstum (17,9% YoY vs. typischerweise niedrigeres OTA-Wachstum) und die überlegene FCF-Marge erklärbar, aber nicht vollständig: Eine ~70%-Prämie ggü. dem nächstliegenden Peer BKNG (14,3x) bei "nur" moderat höherem Wachstum ist ambitioniert. Rückrechnung "Was preist der Kurs ein?": Bei $146,89 und Forward-EPS $6,06 impliziert der Markt ein KGV von 24,2x — das setzt anhaltend zweistelliges Wachstum plus Margenexpansion über mehrere Jahre voraus. Ambitioniert, nicht unplausibel, aber mit wenig Spielraum für Enttäuschungen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 37 Analysten (breite Coverage), Kursziel $156,47 — als Sentiment-Indikator, nicht als Ceiling. Kurs nahe 52-Wochen-Hoch ($146,89 vs. $150,19) — Hypothese, nicht datenbasiert: FOMO-Dynamik durch Retail- und Growth-Fonds bei einer der bekanntesten Consumer-Tech-Marken.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score nur 1,3 (Rang #59 im NASDAQ-100) — schwächer als der Kursverlauf vermuten lässt, 6M-Fenster negativ (-9,0%) trotz Nähe zum 52-Wochen-Hoch. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte) — technisches Signal vorhanden, aber die relative Stärke gegenüber dem Gesamtmarkt ist schwächer als der Charteindruck. Ein Warnsignal wäre eine Guidance-Senkung im Kernbuchungsvolumen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $220–$270 — Experiences wird zum zweiten Wachstumspfeiler, internationale Expansion (Asien) beschleunigt sich</li>
+<li>Base: $160–$200 — solides, aber verlangsamtes Kernwachstum, Multiple bleibt erhöht</li>
+<li>Bear: $70–$100 — regulatorische Beschränkungen in Kernmärkten häufen sich, Wettbewerbsdruck komprimiert die Take-Rate strukturell</li>
+</ul>
+<p>Entscheidende Variable: Erfolg der Experiences-Diversifikation und regulatorische Entwicklung in Großstädten.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Airbnb ist ein High-Conviction-Momentum-/Growth-Play mit spekulativer Bewertungsprämie, kein klassischer Value-Compounder — geeignet für wachstumsorientierte Investoren mit Toleranz für Multiple-Kompressionsrisiko, weniger für konservative Value-Anleger. Explizite Risikowarnung: Bei einem Forward-KGV von 24,2x und negativem EV-Edge ist die Positionsgröße bei enttäuschenden Quartalszahlen besonders exponiert. Peers: BKNG (günstiger bewertet mit 14,3x, etabliertere Diversifikation über Flug/Hotel/Auto), EXPE (deutlich günstiger mit 11,7x, aber schwächeres Markenprofil) — beide sind die reineren, günstigeren Instrumente für die reine Reise-Marktplatz-These.</p>
+<p>Qualität: 4/5</p>
+<p>Wachstum: 4/5</p>
+<p>Bewertung: 2/5</p>
+<p>Katalysator: 3/5</p>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-KGV liegt ~70% über dem nächstliegenden Peer (BKNG) bei negativem EV-Edge — halbe Positionsgröße trotz intaktem technischem Setup.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

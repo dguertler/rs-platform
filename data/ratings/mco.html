@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MCO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MCO</h1>
+      <h2>Moody's Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Financial Data & Stock Exchanges</span></div>
+        <div class="mi">MCap: <span>$86B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">9.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$493.12</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">26.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">74.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">85.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">71.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">605–685</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">473–514</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">296–344</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $605–$685 (25%) · Base $473–$514 (50%) · Bear $296–$344 (25%) · EV ~$488</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Moody's ist Teil eines der stärksten strukturellen Duopole der Finanzwirtschaft — gemeinsam mit S&P Global kontrolliert das Unternehmen den Großteil des globalen Kreditrating-Marktes, ergänzt um das wachsende Moody's-Analytics-Datengeschäft (Research, KYC/Compliance-Daten). ROE von 71,4% (verstärkt durch hohe Verschuldung, D/E 235,5%) und operative Marge von 45,7% zeigen die außergewöhnliche Kapitaleffizienz dieses Modells. Das Forward-KGV von 26,5x liegt bereits über dem direkten Duopol-Partner S&P Global (21,5x) — die Kernfrage ist, ob Moody's diese Prämie über ein überlegenes Analytics-Wachstum dauerhaft rechtfertigen kann.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Moody's Investors Service: Kreditratings für Unternehmens- und Staatsanleihen — Erträge direkt an Anleiheemissionsvolumina gekoppelt, damit zyklisch</li>
+<li>Moody's Analytics: Research-, Daten- und Compliance-Lösungen (u.a. KYC/AML) — strukturell wachsendes, abonnementbasiertes Segment mit geringerer Zyklizität</li>
+<li>Duopol-Struktur mit S&P Global schafft strukturelle Preissetzungsmacht — regulatorisch verankerte Markteintrittsbarrieren (NRSRO-Zulassung)</li>
+<li>Operativer Hebel: zusätzliches Ratingvolumen bei bestehender Infrastruktur nahezu ohne Grenzkosten</li>
+<li>Hohe Verschuldung (D/E 235,5%) ist bewusste Kapitalstruktur-Entscheidung bei minimalem Investitionsbedarf, kein Bonitätsrisiko im klassischen Sinn</li>
+<li>Strukturelles Rechtsrisiko-Erbe aus der Finanzkrise 2008 (Rating-Qualität strukturierter Produkte) bleibt ein latenter Belastungsfaktor</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: ICE 15,8x, CBOE 18,4x, CME 19,0x, DB1.DE 19,2x, NDAQ 19,6x, SPGI 21,5x (direkter Duopol-Partner, engster Vergleich). Bull-Multiple 30x (Prämie ggü. SPGI, gerechtfertigt bei bestätigter Analytics-Wachstumsbeschleunigung). Bull-EPS FY27: $21,50 (Annahme) — Anleiheemissionsvolumina boomen, Moody's Analytics Cross-Selling beschleunigt sich. Kursziel: 21,50 × 30x ≈ $645 → Bandbreite $605–$685. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 26,5x (nahe eigenem Forward-KGV 26,5x, bereits über SPGI). Base-EPS: Konsens $18,63. Kursziel: 18,63 × 26,5x ≈ $493,7 → Bandbreite $473–$514. Wahrscheinlichstes Szenario: stabile Fortsetzung des aktuellen Bewertungsniveaus, moderates Analytics-Wachstum. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 20x (Kompression auf SPGI-Niveau — Kompression bei brechender Prämien-These). Bear-EPS FY27: $16,00 (Annahme) — Anleiheemissionsvolumina brechen bei Kreditmarktstress ein, neues Rechtsrisiko materialisiert sich. Kursziel: 16,00 × 20x ≈ $320 → Bandbreite $296–$344. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: strukturell moderat — Emittenten sind breit diversifiziert über Sektoren, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik: moderat über globale Ratingaktivität, insb. Schwellenländer-Staatsanleihen</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Ratings-/Datengeschäft</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz — Rückkäufe wirken tendenziell entgegengesetzt</li>
+<li>Regulierung/Rechtsrisiken: historisch das bedeutendste Einzelrisiko — regulatorische Reformen des NRSRO-Systems oder neue Sammelklagen aus Rating-Fehleinschätzungen sind ein direktes Ertragsrisiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $488 — implizites Upside/Downside vs. aktuellem Kurs ($493,12): -1,0%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 71,4% ist außergewöhnlich, aber durch die hohe Verschuldung (D/E 235,5%) verstärkt — bei Betrachtung der operativen Marge (45,7%) und Bruttomarge (74,4%) bleibt die zugrundeliegende Geschäftsqualität dennoch erstklassig. FCF von 2,27 Mrd. $ bei 7,87 Mrd. $ Umsatz (FCF-Marge ~29%) bestätigt die Kapitaleffizienz. Der Burggraben ist strukturell und regulatorisch verankert (NRSRO-Duopol) — einer der stärksten im gesamten Datensatz.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das eigene Forward-Multiple (26,5x) liegt über dem direkten Duopol-Partner SPGI (21,5x) — dieser Abstand ist teilweise durch ein leicht höheres Analytics-Wachstum erklärbar, aber ohne vollständige Datentransparenz zu den Segment-Wachstumsraten nicht abschließend verifizierbar. Rückrechnung "Was preist der Kurs ein?": Bei $493,12 und Forward-EPS $18,63 impliziert der Markt ein KGV von 26,5x — das setzt anhaltend starkes Anleiheemissionswachstum und Analytics-Expansion voraus. Ambitioniert, aber bei der strukturellen Duopol-Position nicht unrealistisch.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 20 Analysten, Kursziel $541 über aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Kurs 9,8% unter dem 52-Wochen-Hoch — Hypothese, nicht datenbasiert: leichte Zinserwartungs-Unsicherheit dämpft aktuell die Emissionsvolumina-Erwartungen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score nur 9,9 (Rang #198 im S&P 500 — Mittelfeld), 6M-Fenster negativ (-14,0%) trotz kurzfristig positiver Fenster (5T +3,2%, 10T +6,5%) — deutet auf eine beginnende Erholung nach schwächerer Phase hin. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine überraschende Verlangsamung der globalen Anleiheemissionsaktivität im nächsten Quartal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $700–$850 — Moody's Analytics wird zum gleichwertigen zweiten Ertragspfeiler neben den Ratings, strukturelles Duopol bleibt unangetastet</li>
+<li>Base: $530–$650 — stabiles, moderates Wachstum im Rahmen des Duopols</li>
+<li>Bear: $280–$370 — regulatorische Reform des Ratingsystems oder neue systemische Rechtsrisiken schwächen die Duopol-Position strukturell</li>
+</ul>
+<p>Entscheidende Variable: Wachstumstempo von Moody's Analytics relativ zum zyklischen Ratings-Kerngeschäft.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Moody's ist ein struktureller Buy-and-Hold-Compounder mit Duopol-Burggraben, aktuell aber ohne asymmetrischen Bewertungs-Edge — geeignet für langfristig orientierte Qualitätsinvestoren, die die Bewertungsprämie ggü. SPGI als gerechtfertigt akzeptieren. Kein aktuelles High-Conviction-Momentum-Play angesichts des negativen EV-Edge. Peers: SPGI (günstiger bewertet mit 21,5x, praktisch identisches Duopol-Geschäftsmodell — die relativ attraktivere Bewertung innerhalb desselben strukturellen Burggrabens), ICE (deutlich günstiger mit 15,8x, aber ohne Ratings-Exposition).</p>
+<p>Qualität: 5/5</p>
+<p>Wachstum: 3/5</p>
+<p>Bewertung: 2/5</p>
+<p>Katalysator: 3/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Erstklassiger struktureller Burggraben (3/3 GWS-Punkte) rechtfertigt normale Positionsgröße trotz Bewertungsprämie ggü. SPGI.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

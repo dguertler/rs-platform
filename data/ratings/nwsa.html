@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NWSA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NWSA</h1>
+      <h2>News Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Entertainment</span></div>
+        <div class="mi">MCap: <span>$15B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">15.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$27.64</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">21.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$8.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">57.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">73.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">6.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-3.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">35–40</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">26–29</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">13–17</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $35–$40 (25%) · Base $26–$29 (50%) · Bear $13–$17 (25%) · EV ~$27</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>News Corp wird vom Markt strukturell teurer bewertet (Forward-KGV 21,4x) als seine nächsten Verwandten FOX/FOXA (~9x) — der Grund liegt in einer Sum-of-the-Parts-Story, die über klassisches Verlagsgeschäft hinausgeht: REA Group (dominanter australischer Immobilien-Anzeigenportal-Betreiber, mehrheitlich konsolidiert) und Dow Jones' digitales B2B-Datengeschäft (Factiva, Risk & Compliance) sind margenstarke, strukturell wachsende Geschäfte, die im klassischen "Zeitungsverlag"-Label untergehen. Die Kernfrage: Erkennt der Markt diese Diversifikation bereits ausreichend an, oder bleibt ein struktureller Konglomeratsabschlag bestehen, solange Print- und traditionelle Nachrichtensegmente das Gesamtbild verwässern?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Dow Jones: Wall Street Journal (Digital-Abo-Wachstum), Factiva/Risk & Compliance-Datengeschäft — margenstarkes B2B-Datengeschäft mit struktureller Preissetzungsmacht</li>
+<li>Digital Real Estate Services (REA Group, Move/Realtor.com): Immobilien-Anzeigenportale mit Netzwerkeffekten und hoher Skalierbarkeit</li>
+<li>News Media: traditionelle Zeitungen (New York Post, The Times UK, The Australian) — strukturell rückläufiges Printgeschäft, teilweise durch Digital-Abos kompensiert</li>
+<li>Book Publishing (HarperCollins): stabiler, konjunkturunabhängiger Cashflow-Beitrag</li>
+<li>Operativer Hebel primär im digitalen Datengeschäft (Dow Jones) und bei REA Group, nicht im Printgeschäft</li>
+<li>Governance-Struktur mit dualer Aktienklassen-Struktur (Murdoch-Familienkontrolle) — strukturelles Element, nicht per se ein Ertragsrisiko</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: SIRI 9,0x, FOX 9,1x, FOXA 9,6x (nächste Verwandte, aber reines Broadcast/Cable-Modell — geringere Vergleichbarkeit), DIS 12,9x, NFLX 19,3x. Bull-Multiple 25x (moderate Ausweitung ggü. eigenem Forward-KGV bei bestätigter Sum-of-the-Parts-Anerkennung durch den Markt). Bull-EPS FY27: $1,50 (Annahme) — Dow-Jones-Digitalabos beschleunigen sich, REA-Group-Wachstum hält an. Kursziel: 1,50 × 25x ≈ $37,5 → Bandbreite $35–$40. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 21x (nahe eigenem Forward-KGV 21,4x — bereits deutlich über der Broadcast/Cable-Vergleichsgruppe, siehe Bewertungsabschnitt). Base-EPS: Konsens $1,29. Kursziel: 1,29 × 21x ≈ $27,1 → Bandbreite $26–$29. Wahrscheinlichstes Szenario: stabile Fortsetzung des aktuellen Bewertungsniveaus ohne weiteres Rerating. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 14x (Kompression Richtung DIS-Niveau — Konglomeratsabschlag weitet sich wieder aus). Bear-EPS FY27: $1,05 (Annahme) — Printgeschäft-Erosion beschleunigt sich, australischer Immobilienmarkt kühlt ab und bremst REA-Group-Wachstum. Kursziel: 1,05 × 14x ≈ $14,7 → Bandbreite $13–$17. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: gering — breite Werbe-/Abonnentenbasis über mehrere Geschäftsbereiche, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/China-Exposure: gering, primär US/UK/Australien-Fokus</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Medien-/Datengeschäft</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung: Werbe-/Datenschutzregulierung und mögliche Kartellprüfungen bei REA Groups Marktdominanz in Australien als latentes Risiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $27 — implizites Upside/Downside vs. aktuellem Kurs ($27,65): -3,8%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 6,52%, Nettomarge 12,92%, operative Marge 10,11% — solide, aber nicht außergewöhnliche Konzernqualität, verzerrt durch die Mischung aus margenstarken digitalen Segmenten (Dow Jones Data, REA Group) und margenschwachem Printgeschäft. FCF von 1,744 Mrd. $ bei 8,8 Mrd. $ Umsatz (FCF-Marge ~19,8%) ist solide. Der Burggraben liegt primär in REA Group (Netzwerkeffekt im australischen Immobilienmarkt) und Dow Jones' Markenwert (WSJ) — beide real, aber im Konzernkontext teilweise verdeckt.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das eigene Forward-Multiple (21,4x) liegt deutlich über den nächsten Verwandten FOX/FOXA (9,1x/9,6x) — dieser Abstand ist strukturell teilweise durch die höherwertigen digitalen Segmente (REA Group, Dow Jones Data) erklärbar, aber angesichts des weiterhin bedeutenden Printgeschäft-Anteils nicht vollständig. Rückrechnung "Was preist der Kurs ein?": Bei $27,65 und Forward-EPS $1,29 impliziert der Markt ein KGV von 21,4x — das setzt eine anhaltende Anerkennung der Sum-of-the-Parts-Story voraus. Ambitioniert, aber bei fortgesetztem REA-Group- und Dow-Jones-Digital-Wachstum nicht unplausibel.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Auffällig: kein klarer Analystenkonsens im Datensatz ("none") trotz 8 Analysten — Hypothese, nicht datenbasiert: die Konglomeratsstruktur erschwert eine einheitliche Coverage-Einordnung. Kursziel $35,175 deutlich über aktuellem Kurs — als Orientierungspunkt, nicht als Ceiling zu verstehen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 15,9 (Rang #232 im S&P 500 — Mittelfeld), 10T-Fenster positiv (+7,3%), aber 6M negativ (-3,2%) — gemischtes Bild. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte) — technisches Signal vorhanden trotz mittelmäßiger RS-Kennzahl. Ein Warnsignal wäre eine Guidance-Senkung bei REA Group oder eine Beschleunigung des Print-Umsatzrückgangs.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $42–$52 — Sum-of-the-Parts wird vom Markt vollständig anerkannt, REA Group und Dow Jones Data werden zu dominanten Ertragstreibern, Printgeschäft wird margin-neutral abgewickelt</li>
+<li>Base: $30–$38 — moderates digitales Wachstum kompensiert weiterhin schrumpfendes Printgeschäft</li>
+<li>Bear: $12–$18 — australischer Immobilienmarkt kühlt strukturell ab, Print-Erosion beschleunigt sich, Konglomeratsabschlag bleibt dauerhaft bestehen</li>
+</ul>
+<p>Entscheidende Variable: Wachstumstempo von REA Group und Dow Jones Digital relativ zur Print-Erosionsrate.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>News Corp ist ein Sum-of-the-Parts-Value-Trade, kein klassischer Buy-and-Hold-Compounder solange das Printgeschäft einen strukturellen Bewertungsabschlag rechtfertigt. Geeignet für Value-Investoren, die die REA-Group-/Dow-Jones-Digital-These verstehen und den Konglomeratsabschlag als temporär einschätzen. Peers: FOX/FOXA (deutlich günstiger mit ~9x, aber reines Broadcast-Modell ohne die digitalen Wachstumssegmente), DIS (moderat teurer bewertet mit 12,9x, aber ohne REA-Group-Exposition) — News Corp bleibt der reinste Zugang zur REA-Group-/Dow-Jones-Data-These innerhalb der Vergleichsgruppe.</p>
+<p>Qualität: 3/5</p>
+<p>Wachstum: 3/5</p>
+<p>Bewertung: 3/5</p>
+<p>Katalysator: 2/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Solides technisches Setup (3/3 GWS-Punkte), moderat negativer EV-Edge rechtfertigt normale statt erhöhte Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

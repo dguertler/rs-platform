@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IVZ — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>IVZ</h1>
+      <h2>Invesco Ltd</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Asset Management</span></div>
+        <div class="mi">MCap: <span>$13B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">32.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$28.70</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">28.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">297.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-1.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">40–45</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">29–32</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $40–$45 (25%) · Base $29–$32 (50%) · Bear $17–$20 (25%) · EV ~$30</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Invesco ist vor allem für ein Produkt bekannt, das den größten Teil seines Markenwerts trägt: die Invesco QQQ Trust — einer der größten und liquidesten ETFs der Welt auf den NASDAQ-100. Die trailing Ergebnisse zeigen einen Verlust (Nettomarge -3,7%, ROE -1,5%), verzerrt durch Einmaleffekte (vermutlich Wertminderungen/Restrukturierungskosten), während das Forward-KGV von 9,0x eine deutliche Ergebnisnormalisierung unterstellt (Forward-EPS $3,18 vs. Trailing -$1,47). Der Kurs hat sich vom 52-Wochen-Tief (16,49 $) auf nahe dem Hoch (28,70 $ vs. 29,82 $) fast verdoppelt — die zentrale Frage ist, ob die branchenweite Rotation von aktiv gemanagten Fonds zu passiven ETF-Strukturen (wo Invesco über QQQ und die wachsende ETF-Palette strukturell profitiert) das aktive Fondsgeschäft-Ausflussrisiko dauerhaft kompensiert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Diversifizierter Asset Manager mit Mix aus aktiven Fonds (unter strukturellem Ausflussdruck) und passiven ETFs (strukturelles Wachstum, angeführt von QQQ)</li>
+<li>QQQ als margenstarker, hochskalierbarer Cash-Cow-Baustein — ein einzelnes Produkt mit außergewöhnlicher Markenbekanntheit</li>
+<li>Operativer Hebel: ETF-AUM-Wachstum skaliert praktisch ohne proportionalen Kostenanstieg</li>
+<li>Aktive Fondssparte strukturell unter Gebührenkompressionsdruck durch passive Konkurrenz — konzernweiter Ergebnismix verschiebt sich zugunsten ETFs</li>
+<li>Trailing-Verlust deutet auf Einmaleffekte hin (aus den Daten nicht abschließend auflösbar, welcher Art)</li>
+<li>Dividendenrendite von ~3,0% als Kapitalrückführungssignal trotz volatiler GAAP-Ergebnisse</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: AMG 9,0x, AMP 10,4x, BEN 10,5x, PFG 11,0x, TROW 11,2x, SAMG 11,7x. Bull-Multiple 11,5x (nahe SAMG/TROW, Rerating bei bestätigter ETF-getriebener Ergebnisnormalisierung). Bull-EPS FY27: $3,70 (Annahme) — QQQ-AUM-Wachstum beschleunigt sich, aktive Ausflüsse stabilisieren sich. Kursziel: 3,70 × 11,5x ≈ $42,55 → Bandbreite $40–$45. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 9,5x (nahe eigenem Forward-KGV 9,0x, unteres Ende der Peer-Bandbreite). Base-EPS: Konsens $3,18. Kursziel: 3,18 × 9,5x ≈ $30,2 → Bandbreite $29–$32. Wahrscheinlichstes Szenario: ETF-Wachstum kompensiert aktive Ausflüsse in etwa, moderate Ergebnisstabilisierung. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 7x (Kompression unter Peer-Bandbreite — Kompression bei brechender Stabilisierungs-These). Bear-EPS FY27: $2,60 (Annahme) — aktive Fondsausflüsse beschleunigen sich erneut, Gebührenkompression trifft auch das ETF-Geschäft stärker als erwartet. Kursziel: 2,60 × 7x ≈ $18,2 → Bandbreite $17–$20. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: strukturell hoch — starke Abhängigkeit vom QQQ-Franchise für die Ertragsqualität, quantifizierbar über AUM-Mix (nicht im Datensatz)</li>
+<li>Geopolitik/China-Exposure: moderat über globale institutionelle Kundenbasis, auf Datenbasis nicht quantifizierbar</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Asset-Management-Geschäft</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung: ETF-/Fondsregulierung (SEC) und branchenweite Gebührenkompression sind strukturelle, direkte Ertragsrisiken</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $30 — implizites Upside/Downside vs. aktuellem Kurs ($28,70): +5,4%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Der trailing ROE von -1,5% und die negative Nettomarge sind Einmaleffekt-verzerrt, nicht repräsentativ für die operative Qualität — die operative Marge von 19,1% zeigt ein grundsätzlich funktionierendes Geschäft. FCF von 861,9 Mio. $ bei 6,59 Mrd. $ Umsatz (FCF-Marge ~13%) bestätigt trotz GAAP-Verlust eine solide Cash-Generierung. Der Burggraben liegt fast ausschließlich im QQQ-Markenwert und der First-Mover-Position im NASDAQ-100-ETF-Segment — außerhalb davon ist die Wettbewerbsposition im aktiven Fondsgeschäft strukturell schwächer.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Die Trailing-KGV-Kennzahl ist wegen des Einmaleffekt-Verlusts unbrauchbar — Forward-KGV (9,0x) ist die relevante Bewertungsbasis. Rückrechnung "Was preist der Kurs ein?": Bei $28,70 und Forward-EPS $3,18 impliziert der Markt ein KGV von 9,0x — am unteren Ende der Asset-Management-Vergleichsgruppe (9,0–11,7x), was eine anhaltende Skepsis gegenüber der aktiven Fondssparte widerspiegelt, trotz der QQQ-Qualität. Plausibel, nicht überzogen pessimistisch. Das eigene Forward-Multiple liegt am unteren Rand der Peer-Bandbreite — der Abschlag ist strukturell durch die Mischung aus margenstarkem ETF- und margenschwachem aktivem Geschäft erklärbar.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 12 Analysten, Kursziel $30,83 nahe aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Die starke Kurserholung vom 52-Wochen-Tief deutet auf eine Neubewertung der ETF-Sparte hin — Hypothese, nicht datenbasiert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 32,4 (Rang #74 im S&P 500), alle kurzfristigen Fenster stark positiv (5T +5,5%, 10T +11,7%, 50T +12,1%) — starkes, breites Momentum. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine überraschende Beschleunigung der Nettoabflüsse im aktiven Fondsgeschäft im nächsten Quartalsbericht.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $48–$60 — QQQ-Franchise und ETF-Palette wachsen strukturell weiter, aktive Sparte stabilisiert sich vollständig</li>
+<li>Base: $33–$42 — moderates ETF-Wachstum kompensiert weiterhin schrumpfende aktive Sparte</li>
+<li>Bear: $15–$22 — Gebührenkompression erreicht auch das ETF-Geschäft, strukturelle Konsolidierung der Branche zulasten kleinerer Anbieter wie Invesco</li>
+</ul>
+<p>Entscheidende Variable: Tempo des ETF-/QQQ-AUM-Wachstums relativ zu den Ausflüssen aus dem aktiven Fondsgeschäft.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Invesco ist ein zyklischer Value-/Turnaround-Trade auf die ETF-Transformation, kein reiner Buy-and-Hold-Compounder solange die aktive Fondssparte strukturell schrumpft. Geeignet für Value-Investoren mit Vertrauen in die QQQ-Franchise-Qualität; nach der starken Kurserholung Positionsgröße diszipliniert halten. Peers: AMG (vergleichbares Multiple, aber ohne ETF-Skalierbarkeit), TROW (teurer bewertet mit 11,2x, aber ohne die QQQ-Alleinstellung) — Invesco bleibt das reinste "passive Transformation"-Instrument der Gruppe.</p>
+<p>Qualität: 3/5</p>
+<p>Wachstum: 3/5</p>
+<p>Bewertung: 4/5</p>
+<p>Katalysator: 3/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Starkes technisches Setup (3/3 GWS-Punkte) und günstige Bewertung, volle Positionsgröße vertretbar.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

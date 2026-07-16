@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CHRW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CHRW</h1>
+      <h2>C.H. Robinson Worldwide, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Integrated Freight & Logistics</span></div>
+        <div class="mi">MCap: <span>$23B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">31.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$199.32</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">26.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$16.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">8.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">130.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">34.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">248–285</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">192–208</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">114–134</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $248–$285 (25%) · Base $192–$208 (50%) · Bear $114–$134 (25%) · EV ~$198</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>C.H. Robinson ist der größte Frachtmakler Nordamerikas — ein kapitalleichtes, technologiegetriebenes Vermittlungsgeschäft mit außergewöhnlicher Kapitalrendite (ROE 34,8%) trotz strukturell niedriger Bruttomarge (8,6%, typisch für Brokerage-Modelle mit Bruttofracht-Durchleitung). Der Kurs hat sich vom 52-Wochen-Tief (96,27 $) auf nahe dem Hoch (199,33 $ vs. 203,34 $) mehr als verdoppelt — die schwerste Frachtrezession der letzten Dekade (Trucking-Überkapazität 2023–2024) scheint überstanden. Die zentrale Frage: Ist die Kurserholung eine Vorwegnahme eines beginnenden Fracht-Zyklusaufschwungs (steigende Spot-Raten, höhere Take-Rate-Spreads) oder bereits eine Übertreibung, die eine erneute Verschlechterung der Frachtmärkte nicht mehr einpreist?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Frachtmakler-Modell: vermittelt Ladungen zwischen Verladern und Spediteuren, verdient die Spanne (Take-Rate) zwischen Fracht-Einkaufs- und -Verkaufspreis</li>
+<li>Kapitalleicht — kein eigener Lkw-Fuhrpark, dadurch außergewöhnlich hohe Kapitalrendite (ROE 34,8%) trotz dünner Marge</li>
+<li>Take-Rate-Spread ist hochzyklisch: expandiert bei knappem Frachtraum (Angebotsverknappung), komprimiert bei Trucking-Überkapazität</li>
+<li>Technologieplattform (Navisphere) als Effizienz- und Differenzierungshebel gegenüber kleineren Brokern</li>
+<li>Umsatzrückgang von -0,8% YoY spiegelt die anhaltend schwache Fracht-Ratenumgebung, nicht Marktanteilsverluste</li>
+<li>Hoher D/E (96,5%) bei negativem Buchwert-Multiple (P/B 13,8) zeigt ein bewusst schlankes Bilanzmodell mit signifikanter Fremdfinanzierung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: GXO 14,0x, UPS 14,1x, FDX 15,2x, DHL.DE 15,3x (asset-schwere Carrier — geringere Vergleichbarkeit), EXPD 25,7x, LSTR 28,9x, JBHT 29,4x (asset-leichte Broker — direktere Vergleichsgruppe). Bull-Multiple 31x (nahe JBHT, moderate Prämie bei bestätigtem Fracht-Zyklusaufschwung). Bull-EPS FY27: $8,60 (Annahme) — Frachtraten erholen sich, Take-Rate-Spread weitet sich deutlich aus. Kursziel: 8,60 × 31x ≈ $266,6 → Bandbreite $248–$285. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 27x (nahe eigenem Forward-KGV 26,9x, innerhalb der asset-leichten Broker-Vergleichsgruppe). Base-EPS: Konsens $7,41. Kursziel: 7,41 × 27x ≈ $200,1 → Bandbreite $192–$208. Wahrscheinlichstes Szenario: graduelle Stabilisierung der Frachtraten ohne starken Zyklusaufschwung. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 20x (Kompression Richtung GXO/UPS/FDX-Niveau — Kompression bei erneuter Frachtrezession). Bear-EPS FY27: $6,20 (Annahme) — Trucking-Überkapazität hält länger an als erwartet, Take-Rate-Spread bleibt strukturell komprimiert. Kursziel: 6,20 × 20x ≈ $124 → Bandbreite $114–$134. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: auf Datenbasis nicht beurteilbar (breite Verladerbasis vermutet, kein Detail im Datensatz)</li>
+<li>Geopolitik/Handelsvolumina: hohe Exposition — grenzüberschreitender Frachtverkehr (insb. US-Mexiko-Kanada) direkt betroffen von Handelspolitik</li>
+<li>Lieferketten/Single-Source: gering — Frachtmakler-Modell ist per Definition diversifiziert über viele Spediteure</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung: geringes direktes regulatorisches Risiko, indirekt über Emissionsvorgaben für Trucking-Partner</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $198 — implizites Upside/Downside vs. aktuellem Kurs ($199,33): -0,8%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 34,8% ist außergewöhnlich hoch — allerdings am oberen Ende des Frachtzyklus zu relativieren, da die Take-Rate-Spread-Kompression in Rezessionsphasen die Kapitalrendite deutlich drücken kann (Top-of-Cycle-Betrachtung nötig). Operative Marge 4,9% wirkt niedrig, ist aber im Kontext des Bruttofracht-Durchleitungsmodells (nicht Nettoumsatz) zu verstehen. FCF von 642 Mio. $ bei 16,2 Mrd. $ Umsatz zeigt solide, aber nicht überragende Cash-Generierung im aktuellen Zyklustief. Der Burggraben liegt in der Netzwerkgröße und Technologieplattform — real, aber im Frachtmakler-Geschäft grundsätzlich durch Wettbewerb angreifbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei einem hochzyklischen Frachtmakler ist das aktuelle KGV nur im Zykluskontext zu interpretieren — Forward-KGV 26,9x liegt bereits im oberen Bereich der asset-leichten Peer-Gruppe (EXPD 25,7x, LSTR 28,9x, JBHT 29,4x). Rückrechnung "Was preist der Kurs ein?": Bei $199,33 und Forward-EPS $7,41 impliziert der Markt ein KGV von 26,9x — das setzt bereits eine spürbare Fracht-Zyklus-Erholung voraus. Ambitioniert nach der bereits erfolgten Kursverdopplung, nicht unrealistisch bei fortgesetzter Erholung. Das eigene Forward-Multiple liegt im Rahmen der asset-leichten Broker-Vergleichsgruppe — keine unerklärte Prämie oder Abschlag.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 24 Analysten, Kursziel $198,17 nahezu exakt am aktuellen Kurs — deutet auf eine bereits weitgehend faire Bewertung nach Sell-Side-Einschätzung hin. Hypothese, nicht datenbasiert: Die starke Kurserholung deutet auf eine Repositionierung zyklischer Value-Fonds in Fracht-/Logistiktitel hin.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 31,3 (Rang #27 im S&P 500), 50T-Fenster stark positiv (+17,8%), aber 6M nur +5,9% — Momentum hat sich zuletzt beschleunigt. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine erneute Verschlechterung der Spot-Frachtraten-Indizes (z.B. DAT-Index) im nächsten Quartal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $290–$350 — voller Fracht-Zyklusaufschwung, Take-Rate-Spread erreicht neue Höchststände, Marktanteilsgewinne über Technologieplattform</li>
+<li>Base: $210–$260 — normalisierter Fracht-Zyklus mit durchschnittlichen Take-Rates</li>
+<li>Bear: $110–$145 — strukturelle Überkapazität im Trucking-Sektor hält mehrjährig an, Konsolidierungsdruck auf Broker-Margen</li>
+</ul>
+<p>Entscheidende Variable: Tempo und Nachhaltigkeit der Trucking-Kapazitätsbereinigung und der Fracht-Spot-Raten-Erholung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>C.H. Robinson ist ein zyklischer Trading-Trade auf den Fracht-Zyklusaufschwung, kein Buy-and-Hold-Compounder angesichts der hohen Zyklizität des Take-Rate-Spreads. Geeignet für taktische Investoren mit Überzeugung zum Fracht-Zyklus-Timing; nach der Kursverdopplung ist ein Großteil der Erholungsstory bereits eingepreist — Positionsgröße diszipliniert halten. Peers: JBHT (vergleichbares Multiple, stärkerer Intermodal-Fokus), EXPD (leicht günstiger mit 25,7x, reinerer internationaler Speditions-Fokus) — CHRW bleibt der reinste nordamerikanische Trucking-Broker-Play der Gruppe.</p>
+<p>Qualität: 4/5</p>
+<p>Wachstum: 2/5</p>
+<p>Bewertung: 2/5</p>
+<p>Katalysator: 4/5</p>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Nach Kursverdopplung und Forward-KGV am oberen Rand der Peer-Bandbreite rechtfertigt der leicht negative EV-Edge nur halbe Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

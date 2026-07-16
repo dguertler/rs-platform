@@ -3,9 +3,9 @@ name: Analyse-Alterscheck (Top-20 / 3 Punkte)
 permissions:
   contents: write
 
+# Täglicher Cron deaktiviert (Nutzerwunsch, 2026-07-16) — Skript bleibt über
+# workflow_dispatch manuell auslösbar.
 on:
-  schedule:
-    - cron: '0 5 * * *'
   workflow_dispatch:
 
 jobs:

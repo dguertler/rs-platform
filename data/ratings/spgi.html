@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SPGI — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SPGI</h1>
+      <h2>S&P Global Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Financial Data & Stock Exchanges</span></div>
+        <div class="mi">MCap: <span>$129B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-0.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$437.36</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">21.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$15.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">70.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">90.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">13.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">545–620</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">419–455</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">275–320</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $545–$620 (25%) · Base $419–$455 (50%) · Bear $275–$320 (25%) · EV ~$438</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>S&P Global ist der diversifiziertere der beiden Ratings-Duopolisten: Neben S&P Global Ratings (Kreditratings, gemeinsam mit Moody's) umfasst der Konzern Market Intelligence (Daten/Analytics, verstärkt durch die IHS-Markit-Fusion), Commodity Insights (Platts-Preisdaten für Energie/Rohstoffe), Mobility (Automotive-Daten) und die Indices-Sparte (S&P Dow Jones Indices, u.a. Eigentümer des S&P-500-Markennamens selbst). Bemerkenswert: SPGI handelt mit einem Forward-KGV von 21,5x günstiger als der direkte Duopol-Partner Moody's (26,5x), obwohl SPGI über die Indices-Sparte einen strukturell wachsenden, AUM-gekoppelten Ertragsstrom besitzt, den Moody's nicht hat. Die Kernfrage: Ist dieser Bewertungsabstand durch Integrationsrisiken aus der IHS-Markit-Fusion erklärbar, oder bietet SPGI relative Value innerhalb desselben strukturellen Burggrabens?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>S&P Global Ratings: Kreditratings für Unternehmens-/Staatsanleihen — an Emissionsvolumina gekoppelt, zyklisch, aber duopolistisch geschützt</li>
+<li>Market Intelligence: Daten-/Analytics-Plattform, deutlich erweitert durch die IHS-Markit-Fusion — abonnementbasiert, margenstark</li>
+<li>Commodity Insights (Platts): Referenzpreisdaten für Energie-/Rohstoffmärkte — strukturell nachgefragt, unabhängig vom Kreditzyklus</li>
+<li>Indices (S&P Dow Jones Indices): Lizenzgebühren gekoppelt an AUM in Indexprodukten (ETFs, Futures) — strukturell wachsend mit dem globalen Trend zu passivem Investieren, praktisch ohne Grenzkosten</li>
+<li>Operativer Hebel besonders stark in der Indices-Sparte: Umsatz wächst mit AUM-Zuflüssen in Indexprodukte, nahezu ohne zusätzlichen Kostenaufwand</li>
+<li>Diversifikation über fünf Segmente reduziert die Abhängigkeit vom zyklischen Ratings-Geschäft stärker als bei Moody's</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: ICE 15,8x, CBOE 18,4x, CME 19,0x, DB1.DE 19,2x, NDAQ 19,6x, MCO 26,5x (direkter Duopol-Partner). Bull-Multiple 25x (Rerating Richtung MCO-Niveau bei bestätigter Anerkennung der Diversifikationsvorteile). Bull-EPS FY27: $23,30 (Annahme) — Indices-Sparte profitiert von anhaltenden ETF-Zuflüssen, Market-Intelligence-Cross-Selling nach IHS-Markit-Integration beschleunigt sich. Kursziel: 23,30 × 25x ≈ $582,5 → Bandbreite $545–$620. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 21,5x (nahe eigenem Forward-KGV 21,5x). Base-EPS: Konsens $20,31. Kursziel: 20,31 × 21,5x ≈ $436,7 → Bandbreite $419–$455. Wahrscheinlichstes Szenario: stabile Fortsetzung des aktuellen Bewertungsabstands zu MCO, moderates Wachstum über alle Segmente. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 17x (Kompression Richtung NDAQ/CME-Niveau — Kompression bei brechender Diversifikations-These). Bear-EPS FY27: $17,50 (Annahme) — Anleiheemissionsvolumina schwächen sich ab, Commodity Insights leidet unter niedrigerer Energiepreisvolatilität, IHS-Markit-Integration enttäuscht. Kursziel: 17,50 × 17x ≈ $297,5 → Bandbreite $275–$320. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: strukturell moderat — breite Diversifikation über fünf Segmente reduziert Einzelkunden-Abhängigkeit, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik: moderat über globale Ratingaktivität und Commodity-Insights-Energiemärkte</li>
+<li>Lieferketten/Single-Source: nicht anwendbar für Daten-/Ratings-Geschäft</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung/Rechtsrisiken: gleiches strukturelles NRSRO-Regulierungsrisiko wie bei Moody's, zusätzlich Kartellrisiko bei der marktdominanten Indices-Sparte (S&P 500 als Referenzindex)</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $438 — implizites Upside/Downside vs. aktuellem Kurs ($437,36): +0,2%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 13,94%, Nettomarge 30,36%, operative Marge 44,28% — solide Qualität, wenn auch niedriger als Moody's stärker gehebelte Kennzahlen. FCF von 5,30 Mrd. $ bei 15,73 Mrd. $ Umsatz (FCF-Marge ~33,7%) ist stark. Der Burggraben ist mehrfach abgesichert: NRSRO-Duopol bei Ratings, Referenzstatus bei Platts-Preisdaten und die praktisch konkurrenzlose Markenstellung der S&P-Indexfamilie.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das eigene Forward-Multiple (21,5x) liegt unter dem direkten Duopol-Partner MCO (26,5x) — bei vergleichbarer struktureller Burggraben-Qualität und zusätzlicher Diversifikation über die Indices-Sparte ist dieser Abstand nicht vollständig durch Fundamentaldaten erklärbar; ein Teil dürfte auf verbleibende IHS-Markit-Integrationsskepsis zurückzuführen sein (aus den Daten nicht abschließend auflösbar). Rückrechnung "Was preist der Kurs ein?": Bei $437,36 und Forward-EPS $20,31 impliziert der Markt ein KGV von 21,5x — konservativer als bei MCO, was auf relative Value hindeutet, wenn die Diversifikationsvorteile sich bestätigen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Strong Buy" bei 15 Analysten, Kursziel $513,47 deutlich über aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Kurs 20,2% unter dem 52-Wochen-Hoch — Hypothese, nicht datenbasiert: verbleibende Integrationsskepsis zur IHS-Markit-Fusion dämpft die institutionelle Risikobereitschaft trotz starker Analystenerwartungen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score nahezu neutral bei -0,14 (Rang #221 im S&P 500 — Mittelfeld), 6M-Fenster stark negativ (-21,7%) trotz kurzfristig positiver Fenster (10T +5,9%, 20T +7,6%) — deutet auf eine beginnende technische Bodenbildung nach einer schweren Korrektur hin. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine überraschende Guidance-Senkung bei der Indices-Sparte im nächsten Quartalsbericht.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $620–$760 — Indices-Sparte wird zunehmend als eigenständiger, strukturell wachsender Wert anerkannt, IHS-Markit-Integration liefert vollständig</li>
+<li>Base: $470–$580 — solide, moderate Fortsetzung des aktuellen Wachstumstrends über alle fünf Segmente</li>
+<li>Bear: $260–$340 — regulatorische Reform des Ratingsystems oder Kartellrisiko bei der Indices-Dominanz materialisiert sich</li>
+</ul>
+<p>Entscheidende Variable: Vollständige Realisierung der IHS-Markit-Synergien und AUM-Wachstum in S&P-Indexprodukten.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>S&P Global ist ein struktureller Buy-and-Hold-Compounder mit mehrfach abgesichertem Burggraben (Ratings-Duopol plus Indices-Franchise), aktuell mit minimal positivem, aber nicht asymmetrischem EV-Edge. Geeignet für langfristig orientierte Qualitätsinvestoren; die relative Bewertung gegenüber MCO spricht für eine leicht attraktivere Einstiegsbasis innerhalb desselben strukturellen Sektors. Peers: MCO (teurer bewertet mit 26,5x, konzentrierteres Ratings-/Analytics-Modell ohne Indices-Exposition) — SPGI ist das diversifiziertere und aktuell relativ günstigere Instrument der beiden Duopolisten.</p>
+<p>Qualität: 5/5</p>
+<p>Wachstum: 3/5</p>
+<p>Bewertung: 3/5</p>
+<p>Katalysator: 3/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Mehrfach abgesicherter Burggraben und relative Value ggü. MCO bei intaktem technischem Setup (3/3 GWS-Punkte) rechtfertigen volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DHR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">16.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>DHR</h1>
+      <h2>Danaher Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Diagnostics & Research</span></div>
+        <div class="mi">MCap: <span>$141B</span></div>
+        <div class="mi">Signal: <span>S&P 500</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 16.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">2.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$199.30</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">21.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$24.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">59.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">80.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">7.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-0.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">237–272</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">190–207</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">129–150</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $237–$272 (25%) · Base $190–$207 (50%) · Bear $129–$150 (25%) · EV ~$198</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Danaher ist ein Life-Sciences-/Diagnostik-Konzern (Bioprocessing über Cytiva/Pall, Diagnostik über Beckman Coulter/Cepheid/Radiometer), der seit 2023 unter der Post-COVID-Lagerbestandskorrektur im Bioprocessing-Segment leidet: Kunden hatten während des COVID-Impfstoff-/Biologika-Booms deutlich überbestellt und bauen diese Bestände seither ab. Das drückt ROE (nur 7,08%) und Umsatzwachstum (3,7% YoY) auf historisch niedrige Niveaus bei einem Konzern, der strukturell für zweistelliges Wachstum bekannt war. Die zentrale Frage: Ist die Destocking-Phase weitgehend durchlaufen, oder verlängert eine anhaltend schwache Biotech-Finanzierungsumgebung die Normalisierung weiter?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Bioprocessing (Cytiva, Pall): Ausrüstung und Verbrauchsmaterialien für die biopharmazeutische Herstellung — margenstark, aber aktuell von Lagerbestandskorrektur betroffen</li>
+<li>Life Sciences (Leica Microsystems, Beckman Coulter Life Sciences): Forschungsinstrumente mit stabilerer Nachfrage</li>
+<li>Diagnostics (Beckman Coulter Diagnostics, Cepheid, Radiometer): klinische Diagnostik mit hoher Wiederkaufsrate über Verbrauchsmaterialien</li>
+<li>Danaher Business System (DBS) als operative Exzellenz-Methodik — struktureller Effizienzhebel bei jeder Akquisition</li>
+<li>Serieller Akquisitionsansatz mit anschließender Margenoptimierung über DBS — Wachstum kombiniert organisch und anorganisch</li>
+<li>Hohe Goodwill-/Intangibles-Last aus jahrzehntelanger M&A-Strategie belastet die bilanzielle ROE-Kennzahl strukturell</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: LH 14,2x, IQV 14,7x, QGEN 15,8x, DGX 17,7x, CRL 19,0x, TMO 19,6x (nächster direkter Vergleich, ähnliches Bioprocessing-/Life-Sciences-Tools-Geschäft), A 20,3x, WAT 22,8x. Bull-Multiple 24x (moderate Ausweitung ggü. eigenem Forward-KGV bei bestätigtem Ende der Destocking-Phase). Bull-EPS FY27: $10,60 (Annahme) — Bioprocessing-Auftragseingänge reaccelerieren, Biotech-Finanzierungsumfeld erholt sich. Kursziel: 10,60 × 24x ≈ $254,4 → Bandbreite $237–$272. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Base-Multiple 21,5x (nahe eigenem Forward-KGV 21,6x, nahe TMO). Base-EPS: Konsens $9,24. Kursziel: 9,24 × 21,5x ≈ $198,7 → Bandbreite $190–$207. Wahrscheinlichstes Szenario: graduelle Destocking-Normalisierung ohne starken Nachfrageschub. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Bear-Multiple 17x (Kompression Richtung LH/IQV-Niveau — Kompression bei anhaltender Nachfrageschwäche). Bear-EPS FY27: $8,20 (Annahme) — Destocking hält länger an als erwartet, Krankenhaus-Investitionszurückhaltung dämpft zusätzlich das Diagnostik-Segment. Kursziel: 8,20 × 17x ≈ $139,4 → Bandbreite $129–$150. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: strukturell moderat — breite Kundenbasis über Pharma-/Biotech-Unternehmen, auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik/China-Exposure: relevant — China ist ein bedeutender Absatzmarkt für Life-Sciences-Ausrüstung, Exportkontrollen bei hochentwickelten Instrumenten ein latentes Risiko</li>
+<li>Lieferketten/Single-Source: moderat — spezialisierte Bioprocessing-Komponenten teilweise mit begrenzten Zulieferern</li>
+<li>Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz</li>
+<li>Regulierung: FDA-Zulassungsverfahren für Diagnostik-Produkte als strukturelles, aber im Datensatz nicht quantifizierbares Risiko</li>
+</ul>
+<p>**Bull 25% + Base 50% + Bear 25% = 100%**</p>
+<p>**Erwartungswert: $198 — implizites Upside/Downside vs. aktuellem Kurs ($199,30): -0,8%.**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von nur 7,08% ist deutlich unter dem historischen Danaher-Niveau — hier ist der Top-of-Cycle-Kontext entscheidend: Die Kennzahl ist aktuell durch die Bioprocessing-Destocking-Phase gedrückt, nicht repräsentativ für die strukturelle Ertragskraft. Operative Marge 22,9%, Bruttomarge 59,0% bleiben auf solidem Niveau. FCF von 4,57 Mrd. $ bei 24,78 Mrd. $ Umsatz (FCF-Marge ~18,4%) bestätigt weiterhin robuste Cash-Generierung trotz der Nachfrageschwäche. Der Burggraben liegt im DBS-Operationsmodell und den hohen Wechselkosten bei Bioprocessing-Verbrauchsmaterialien (validierte Herstellungsprozesse binden Kunden langfristig an Lieferanten).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei einem zyklisch gedrückten Life-Sciences-Tools-Anbieter ist das Forward-KGV (21,6x) im Kontext der Destocking-Normalisierung zu sehen, nicht isoliert. Rückrechnung "Was preist der Kurs ein?": Bei $199,30 und Forward-EPS $9,24 impliziert der Markt ein KGV von 21,6x — nahe dem direkten Peer TMO (19,6x), leicht darüber. Plausibel, setzt eine Fortsetzung der graduellen Erholung voraus, ohne bereits eine vollständige Reaccelerierung einzupreisen. Das eigene Forward-Multiple liegt im Rahmen der Peer-Bandbreite — keine unerklärte Prämie oder Abschlag.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten nicht verfügbar. Analystenkonsens "Strong Buy" bei 23 Analysten, Kursziel $242,26 deutlich über aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Kurs 17,9% unter dem 52-Wochen-Hoch — Hypothese, nicht datenbasiert: institutionelle Geduld mit der Destocking-Normalisierung nimmt ab, was zusätzlichen Verkaufsdruck erzeugen könnte, falls sich die Erholung weiter verzögert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score nur 1,98 (Rang #250 im S&P 500 — Mittelfeld), 6M-Fenster stark negativ (-23,1%) trotz kurzfristig positiver Fenster (20T +10,1%, 50T +10,5%) — deutet auf eine beginnende technische Bodenbildung nach einer schweren Korrektur hin. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine erneute Guidance-Senkung im Bioprocessing-Segment.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull: $270–$330 — Bioprocessing kehrt zu strukturellem zweistelligem Wachstum zurück, Biotech-Finanzierungszyklus erholt sich vollständig</li>
+<li>Base: $210–$260 — moderate Normalisierung, Rückkehr zu mittlerem einstelligem bis niedrigem zweistelligem Wachstum</li>
+<li>Bear: $115–$150 — Biotech-Finanzierungswinter hält mehrjährig an, strukturelle Nachfrageverschiebung durch Überkapazitäten in der Branche</li>
+</ul>
+<p>Entscheidende Variable: Tempo der Bioprocessing-Bestandsnormalisierung und Erholung der Biotech-Venture-Finanzierung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Danaher ist ein zyklisch gedrückter Qualitäts-Compounder — geeignet für langfristig orientierte Investoren mit Geduld für die Destocking-Normalisierung, kein kurzfristiges Momentum-Play trotz technischer Bodenbildungssignale. Explizite Risikowarnung: Die schwache 6-Monats-Performance (-23,1%) zeigt, dass der Markt die Erholung noch nicht vollständig goutiert — Positionsgröße kann bei bestätigter Trendwende erhöht werden. Peers: TMO (nahezu identisches Multiple bei ähnlichem Geschäftsmodell — der direkteste Vergleich), A/WAT (teurer bewertet, aber ohne Danahers DBS-Effizienzhebel).</p>
+<p>Qualität: 4/5</p>
+<p>Wachstum: 2/5</p>
+<p>Bewertung: 3/5</p>
+<p>Katalysator: 2/5</p>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Technische Bodenbildung (3/3 GWS-Punkte) bei fairer Bewertung nahe TMO, normale Positionsgröße vertretbar trotz noch unbestätigter fundamentaler Trendwende.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
