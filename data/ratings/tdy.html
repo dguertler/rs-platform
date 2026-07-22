@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TDY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">22.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TDY</h1>
+      <h2>Teledyne Technologies Incorpora</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Scientific & Technical Instruments</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 22.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">15.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$635.52</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">24.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">42.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">9.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">750–870</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">550–640</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">340–410</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Teledyne veröffentlicht die Q2-2026-Zahlen genau heute (22.07.2026) vor Börsenöffnung der NYSE — der verwendete Fundamental-Snapshot vom 20.07.2026 liegt damit vor der Veröffentlichung. Ein Live-Fetch aktualisierter Daten war aufgrund einer Netzwerk-Restriktion (kein Zugriff auf Yahoo-Finance-Infrastruktur in dieser Sitzung) nicht möglich. Konfidenz der Bewertungsaussagen ist entsprechend reduziert; die tatsächlichen Q2-Zahlen sind in dieser Analyse NICHT enthalten. Konsens erwartete vor der Veröffentlichung ein EPS von 5,77 $ (+11 % YoY) — Teledyne hat in den letzten vier Quartalen die Konsensschätzung jeweils übertroffen (öffentlich bekannte Historie), ob dies auch heute gilt, ist zum Zeitpunkt dieser Analyse nicht verifizierbar und wird nicht unterstellt.</p>
+<p>Teledyne ist ein diversifizierter Hersteller von Präzisionsinstrumenten, digitaler Bildgebung (Sensoren für Verteidigung, Raumfahrt, Industrie) und Testsystemen — ein klassischer "Compounder durch Akquisition"-Case mit stabiler Marge und disziplinierter Kapitalallokation. RS-Score 15,73 (Rang #187 im S&P 500) zeigt moderates, kein herausragendes relatives Momentum. Der Kern der Story unabhängig vom heutigen Ergebnis: Forward-KGV 24,4x preist bereits eine deutliche EPS-Beschleunigung ein (Forward-EPS 26,03 $ vs. Trailing 19,76 $, +32 %) — die Frage ist, ob der heutige Bericht diese Erwartung bestätigt oder das Chance-Risiko-Verhältnis neu justiert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Digital Imaging (Sensoren, Kameras für Verteidigung/Raumfahrt/Industrie) als margenstärkstes und am schnellsten wachsendes Segment</li>
+<li>Instrumentation (Test- und Messsysteme) mit breiter industrieller Endkundenbasis — konjunktursensitiver als das Verteidigungsgeschäft</li>
+<li>Aerospace & Defense Electronics: langfristige Regierungsverträge schaffen Umsatzsichtbarkeit, aber auch Budgetabhängigkeit</li>
+<li>Wachstumsstrategie primär über disziplinierte Akquisitionen (Bolt-on-M&A) statt organisches Hochwachstum — Kapitalallokation als zentraler Werttreiber</li>
+<li>D/E 23,13 % — moderate Verschuldung, gibt weiteren M&A-Spielraum</li>
+<li>Umsatzwachstum +7,6 % YoY solide für ein reifes Industrieunternehmen dieser Größe</li>
+<li>Keine Dividende — Kapital wird vollständig in Wachstum/M&A reinvestiert, kein Einkommens-Case</li>
+<li>ROE 9,05 % / ROIC 7,38 % — moderat, nicht auf Compounder-Spitzenniveau, aber stabil über Zyklen</li>
+</ul>
+<p>**MULTIPLE-HERLEITUNG:** Peers im Datensatz: Roper Technologies (ROP, Forward-KGV 15,2x), Fortive (FTV, 19,2x), Agilent (A, 19,9x), Keysight (KEYS, 26,6x), Ametek (AME, 26,9x). Bear-Multiple nahe ROP (17x), Base zwischen FTV/A und eigenem Niveau (22x), Bull nahe AME/KEYS (27x).</p>
+<h3>3. BULL CASE</h3>
+<p>Q2-Bericht bestätigt oder übertrifft die Konsenserwartung, Digital-Imaging-Segment beschleunigt durch Verteidigungs-/Raumfahrt-Nachfrage weiter, M&A-Pipeline liefert zusätzliche Akquisitionen. Annahme (kein Konsens): FY27-EPS ~30,00 $ × 27x (nahe AME/KEYS-Niveau) = 810 $. Bull-Kursziel: 750–870 $ (Midpoint 810 $). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Q2-Zahlen im Rahmen der Erwartung, Instrumentation-Segment bleibt konjunktursensitiv gedämpft, Digital Imaging trägt den Großteil des Wachstums. Annahme (nahe Forward-EPS 26,03 $): FY27-EPS ~27,00 $ × 22x (zwischen FTV/A und eigenem aktuellem Niveau) = 594 $. Base-Kursziel: 550–640 $ (Midpoint 595 $). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Q2-Bericht verfehlt die Konsenserwartung oder liefert schwache Guidance für H2, Instrumentation-Nachfrage schwächt sich konjunkturbedingt weiter ab. Kundenkonzentration: Verteidigungs-/Regierungsaufträge bilden einen relevanten Umsatzblock — Budgetkürzungen oder -verzögerungen sind ein konkretes, aber aus den Daten nicht quantifizierbares Risiko. Geopolitik/Exportkontrollen: als Verteidigungs-/Dual-Use-Technologie-Anbieter mit direkter Exportkontroll-Exposure (ITAR), Risiko struktureller, aber nicht akut eskalierender Natur. Lieferketten: Halbleiter-/Elektronikkomponenten-Abhängigkeit typisch für Sensorhersteller, kein spezifisches Single-Source-Risiko aus den Daten ableitbar. Verwässerung: SBC-Daten nicht verfügbar, nicht beurteilbar. Bilanz: D/E 23 % ist moderat, Bilanzrisiko begrenzt. Annahme: FY27-EPS ~22,00 $ × 17x (nahe ROP, Bewertungskompression bei Wachstumsenttäuschung) = 374 $. Bear-Kursziel: 340–410 $ (Midpoint 375 $). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 25 % + 45 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × 810 $ + 0,45 × 595 $ + 0,30 × 375 $ = 202,5 $ + 267,75 $ + 112,5 $ = **~582,75 $ — implizites Downside vs. aktuellem Kurs (635,52 $): −8,3 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — verstärkt durch die ungeklärte Q2-Ergebnislage.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 9,05 % und ROIC 7,38 % sind solide, aber nicht herausragend — typisch für ein M&A-getriebenes Industrieunternehmen mit hohem Goodwill-Anteil in der Bilanz. Gross Margin 42,87 % und Operating Margin 19,03 % zeigen ein gesundes, margenstarkes Geschäftsmodell im oberen Mittelfeld der Industrie-Peers. FCF 760,6 Mio. $ bei 6,23 Mrd. $ Umsatz (12,2 % FCF-Marge) ist solide, aber nicht außergewöhnlich. Der Burggraben liegt in der Nischenpositionierung bei Präzisionssensorik für Verteidigung/Raumfahrt (hohe Zertifizierungshürden für Wettbewerber) — strukturell real, aber die aktuelle Bewertung setzt bereits eine Fortsetzung dieser Stärke voraus.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 24,41x liegt im oberen Mittelfeld der Peer-Bandbreite (ROP 15,2x, FTV 19,2x, A 19,9x, KEYS 26,6x, AME 26,9x) — nahe den margenstärksten Peers KEYS und AME, ohne dass TDY deren Margenprofil vollständig erreicht. Rückrechnung "Was preist der Kurs ein?": Bei 635,52 $ und Forward-EPS 26,03 $ impliziert der Kurs bereits eine deutliche EPS-Beschleunigung (+32 % ggü. Trailing) — ambitioniert, aber im Rahmen der historischen Beat-Historie des Unternehmens nicht unrealistisch. Wichtig: PFLICHT-Hinweis gemäß Datenlage — diese Bewertung basiert auf dem Snapshot vor dem heutigen Q2-Bericht und kann durch das tatsächliche Ergebnis überholt sein.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analysten-Konsens "Buy" bei 13 Analysten mit Kursziel 741,31 $ — rund 17 % über dem aktuellen Kurs, eine spürbar optimistischere Einschätzung der Coverage als die eigene EV-Rechnung. Short-Float-Daten liegen nicht vor. Die moderate RS-Beschleunigung (5T +4,57 %) unmittelbar vor dem Earnings-Termin deutet auf leichte Vorpositionierung hin (Hypothese, nicht datenbasiert). Enttäuschungsrisiko ist heute maximal: Der Bericht ist bereits veröffentlicht oder wird im Tagesverlauf veröffentlicht — die Marktreaktion ist zum Zeitpunkt dieser Analyse nicht bekannt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Fenster: 5T +4,57 %, 10T +0,89 %, 20T +3,69 %, 50T +2,71 %, 6M +3,87 % — ein moderater, relativ gleichmäßiger Aufwärtstrend ohne extreme Beschleunigung. Kein GWS-Ampel-Signal aktiv. Das Momentum wirkt eher graduell fundamental gestützt als spekulativ getrieben. Warnsignal: Eine negative Kursreaktion auf die heutigen Zahlen trotz solider RS-Historie wäre ein klares Zeichen, dass der Markt die Bewertung neu kalibriert.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (850–1050 $):** Digital-Imaging-Segment wird durch anhaltenden Verteidigungs-/Raumfahrt-Ausbau strukturell größer, M&A-Pipeline liefert weitere margenstarke Akquisitionen — Rerating auf KEYS/AME-Niveau.</p>
+<p>**Base (550–750 $):** Stetiges, M&A-getriebenes Wachstum im Rahmen der historischen Trajektorie, Bewertung bleibt im oberen Peer-Mittelfeld.</p>
+<p>**Bear (280–400 $):** Verteidigungsbudget-Kürzungen, konjunkturelle Schwäche in Instrumentation, M&A-Pipeline trocknet aus, Bewertungskompression auf ROP-Niveau oder darunter.</p>
+<p>Entscheidende Variable: Tempo des Digital-Imaging-Wachstums und Fortsetzung der disziplinierten M&A-Strategie.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Teledyne ist ein solider industrieller Compounder mit M&A-getriebenem Wachstumsmodell, aber die eigene EV-Rechnung zeigt aktuell Downside (-8,3 %) — verstärkt durch die zum Analysezeitpunkt ungeklärte Q2-Ergebnislage. Für langfristige, geduldige Investoren mit Vertrauen in die Kapitalallokations-Historie des Managements grundsätzlich geeignet, aber der heutige Bericht sollte vor jeder Positionsentscheidung abgewartet werden. Positionsgröße bis zur Bestätigung der Zahlen konservativ halten. **Roper Technologies (ROP)** ist auf Forward-Basis (15,2x) das günstigere Instrument für eine ähnliche M&A-Compounder-These, **Ametek (AME)** und **Keysight (KEYS)** bieten vergleichbare Bewertungsniveaus (26,9x bzw. 26,6x) bei teils höherer Marge.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Der Ausgang des heutigen Q2-Berichts ist zum Zeitpunkt der Analyse nicht bekannt, die Position sollte bis zur Bestätigung keine volle Größe tragen.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

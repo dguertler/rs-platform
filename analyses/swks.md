@@ -1,176 +1,103 @@
 # SWKS — KI-Aktienbewertung
 
-**Skyworks Solutions, Inc.** · Technology · 01.06.2026 · Signal: GWS Breakout 3/3
+**Skyworks Solutions, Inc.** · Technology · 22.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 77.85 |
-| Market Cap | $11.71 Mrd. |
-| Forward PE | 15.13 |
+| Kurs | 59.35 |
+| Market Cap | $8.93 Mrd. |
+| Forward PE | 11.56 |
 | Revenue (TTM) | $4.04 Mrd. |
 | Gross Margin | 41.1% |
 | ROE | 6.2% |
-| RS-Score | 55.1 |
+| RS-Score | -3.6 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-Skyworks ist ein klassischer RF-Halbleiter-Zykliker mit massiver Apple-Abhängigkeit (~65-70% Revenue), der seit zwei Jahren in einer Schmerzphase steckt: stagnierender iPhone-Markt, Marktanteilsverlust an Qualcomm bei kommenden iPhone-Generationen und schwache Broad-Markets-Erholung. Der Markt hat das Worst-Case-Szenario weitgehend eingepreist – die Aktie notierte vor wenigen Monaten noch bei 52$. Jetzt läuft ein klassisches Cyclical-Rebound-Play mit 38% RS-Outperformance in 50 Tagen und gebrochener GWS-Struktur auf allen Zeitebenen. Die Story ist nicht "Quality Compounder", sondern "Down-and-out Semi mit Mean-Reversion-Potenzial". Bei 16x Forward PE und 5%+ FCF-Yield ist viel Pessimismus bereits eingepreist, aber strukturelle Risiken bei Apple-Sockets bleiben das zentrale Damoklesschwert.
+DATENLAGE: Fundamental-Snapshot vom 20.07.2026 (Kurs 59,35 $) liegt vor der jüngsten Kursbewegung — der letzte verfügbare Schlusskurs (21.07.2026) notiert bei 62,95 $, eine Abweichung von +6,1 %. Ein Live-Fetch war aufgrund einer Netzwerk-Restriktion nicht möglich; der Auslöser der Bewegung ist aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend zu prüfen. Alle Multiples werden zusätzlich auf das aktuelle Kursniveau (62,95 $) umgerechnet und dieses als primäre Bewertungsbasis verwendet.
+
+Skyworks ist der Erwerber im angekündigten 22-Mrd.-$-Zusammenschluss mit Qorvo (0,960 SWKS-Aktien + 32,50 $ Cash je QRVO-Aktie; Aktionärszustimmung Februar 2026, FTC-Second-Request seit 05.02.2026, erwartetes Closing Anfang 2027). Anders als bei Qorvo bleibt SWKS als Rechtsträger bestehen — CEO Phil Brace führt die kombinierte Einheit, ehemalige QRVO-Aktionäre erhalten ~37 % des Pro-forma-Unternehmens. Die Standalone-Story bleibt jedoch parallel relevant: SWKS ist strukturell stark von Apple als Großkunde abhängig (öffentlich bekanntes Branchenmerkmal des RF-Frontend-Geschäfts), was sowohl Konzentrationsrisiko als auch Bewertungsdiskont erklärt (Forward-KGV 11,6x, deutlich unter Qualcomm 15,5x, Broadcom 19,1x, ON Semi 20,1x). RS-Rang #324 (fast letzter Platz im S&P 500, Score -3,64) zeigt schwaches mittelfristiges Momentum trotz starker jüngster 5-Tages-Erholung (+10,29 %).
 
 ## 2. GESCHÄFTSMODELL
 
-- RF-Front-End-Module (Power Amplifier, Filter, Switches) für Smartphones – Kern-Cashcow
+- RF-Frontend-Module für Mobilfunk — hohe Umsatzkonzentration auf wenige Großkunden, strukturell dominiert von Apple-Exposure (Branchenwissen, nicht aus dem Datensatz quantifizierbar)
+- Als Erwerber im Qorvo-Deal: Übernahme eines direkten Wettbewerbers zur Konsolidierung des RF-Analog-Marktes, Ziel >500 Mio. $ jährliche Synergien innerhalb von drei Jahren
+- Cash-Anteil der Akquisition (32,50 $ je QRVO-Aktie) wird voraussichtlich teilweise fremdfinanziert — zusätzlicher Verschuldungsgrad nach Closing zu erwarten, aktuell D/E noch moderat (20,63 %)
+- Aktienanteil der Transaktion (0,960 SWKS je QRVO-Aktie) führt zu spürbarer Verwässerung der bestehenden SWKS-Aktionäre (~63 % Pro-forma-Anteil ggü. 100 % heute)
+- Dividendenrendite 4,79 % ist im Halbleitersektor ungewöhnlich hoch — signalisiert entweder Unterbewertung oder eingepreiste strukturelle Wachstumsschwäche
+- Operating Margin nur 7,7 % — dünn für ein Halbleiterunternehmen, Ausdruck des zyklischen Abschwungs im Smartphone-RF-Markt
+- Umsatzrückgang -1,0 % YoY moderat, aber Forward-EPS-Schätzung (5,13 $) mehr als doppelt so hoch wie Trailing-EPS (2,40 $) — eine sehr aggressive implizite Erholungserwartung, die kritisch zu hinterfragen ist
 
-- Mobile-Segment ~65% Umsatz, dominiert von Apple als Single-Customer-Risiko
-
-- Broad Markets ~35%: WiFi, IoT, Automotive, Industrial, Infrastructure
-
-- Hochkomplexe BAW/SAW-Filter-Technologie als wesentlicher Burggraben
-
-- Vertikale Integration durch eigene Wafer-Fabs (TC-SAW, BAW in Mexiko/USA)
-
-- Design-Wins im 18-24 Monats-Zyklus mit OEMs – sehr sticky
-
-- Strukturelle Treiber: 5G-Content-Per-Device, WiFi 7, Edge-IoT
-
-- Margenstruktur stark von Mix abhängig (Broad Markets margenstärker als Mobile)
+**MULTIPLE-HERLEITUNG:** Peers im Datensatz: Qualcomm (QCOM, Forward-KGV 15,5x), Broadcom (AVGO, 19,1x), ON Semiconductor (ON, 20,1x), Microchip (MCHP, 19,5x), Qorvo (QRVO, 10,9x — Fusionspartner, kein unabhängiger Peer). Bear-Multiple nahe/unter eigenem aktuellem Niveau (10x), Base zwischen eigenem Niveau und QCOM (13x), Bull nahe QCOM (16x).
 
 ## 3. BULL CASE
 
-- iPhone 17/18-Zyklus könnte Content-Verluste teilweise kompensieren
+Deal schließt wie geplant, Synergien werden realisiert, gleichzeitig erholt sich der zyklische Smartphone-RF-Markt (Android-Refresh-Zyklus, Content-Wachstum pro Gerät). Annahme (kein Konsens): FY27-EPS ~6,50 $ (inkl. anteiliger Synergie-Wirkung) × 16x (Annäherung an QCOM-Multiple als konsolidierter Marktführer) = 104,00 $. Bull-Kursziel: 92–118 $ (Midpoint 105 $). Eintrittswahrscheinlichkeit: 30 %.
 
-- Broad Markets-Erholung nach langer Inventory-Korrektur sichtbar
+## 4. BASE CASE
 
-- WiFi 7-Upgrade-Zyklus startet 2025/2026
+Wahrscheinlichstes Szenario: Deal schließt mit Verzögerung (Anfang 2027) bei moderater, noch nicht vollständig realisierter Synergie-Wirkung, Kerngeschäft stabilisiert sich nahe aktuellem Margenniveau. Annahme (nahe Konsens-Forward-EPS 5,13 $): FY27-EPS ~5,50 $ × 13x (zwischen eigenem Niveau und QCOM) = 71,50 $. Base-Kursziel: 65–80 $ (Midpoint 72,5 $). Eintrittswahrscheinlichkeit: 45 %.
 
-- Aggressive Capital-Returns: hohe Dividende plus Buybacks, FCF-Yield ~5,5%
+## 5. BEAR CASE
 
-- Bewertung bei 16x Forward PE deutlich unter Semi-Sektor-Schnitt
+Auslöser: FTC blockiert den Deal, gleichzeitig hält die strukturelle Apple-Konzentration an oder verschärft sich (Insourcing-Tendenzen bei RF-/Modem-Komponenten sind ein bekanntes langfristiges Branchenrisiko). Kundenkonzentration: Apple als dominanter Einzelkunde — konkretes, strukturelles Risiko, aus dem Datensatz nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: China-Android-Lieferkette als sekundäres Risiko. Lieferketten: Foundry-Abhängigkeit (TSMC u.a.) als Branchenstandardrisiko, kein akutes Single-Source-Problem erkennbar. Verwässerung: Bei Deal-Vollzug strukturell real (~37 % neue Aktien an ehemalige QRVO-Aktionäre) — bei Deal-Bruch entfällt dieses Risiko, dafür bleibt die Synergie-Chance ungenutzt. Regulierung: FTC-Verfahren ist das zentrale, unmittelbare Risiko. Bilanz: D/E aktuell moderat (20,63 %), würde bei Cash-finanziertem Deal-Abschluss aber spürbar steigen. Annahme: FY27-EPS ~3,50 $ (Deal bricht, zyklische Schwäche hält an, Apple-Konzentrationsrisiko bleibt ungelöst) × 10x (unter eigenem aktuellem Niveau, Bewertungskompression) = 35,00 $. Bear-Kursziel: 30–42 $ (Midpoint 36 $). Eintrittswahrscheinlichkeit: 25 %.
 
-- Edge-AI in Smartphones erhöht RF-Komplexität langfristig
+**Summe: 30 % + 45 % + 25 % = 100 %**
 
-- Short Interest und Underowning bei Institutionellen
+**Erwartungswert:** EV = 0,30 × 105 $ + 0,45 × 72,5 $ + 0,25 × 36 $ = 31,5 $ + 32,625 $ + 9 $ = **~73,1 $ — implizites Upside vs. aktuellem Kurs (62,95 $): +16,2 %.** Der EV liegt über 10 %, aber unter der 20 %-Schwelle für einen asymmetrischen Edge — ein High-Conviction-Framing ist auf dieser Basis nicht gerechtfertigt, das Chance-Risiko-Profil ist jedoch überdurchschnittlich attraktiv im Vergleich zu QRVO selbst.
 
-- Mean-Reversion-Potenzial nach 2 Jahren Underperformance
+## 6. FUNDAMENTALE QUALITÄT
 
-## 4. BEAR CASE
+ROE 6,17 % und ROIC 8,65 % sind schwach bis moderat — Ausdruck der dünnen operativen Marge (7,7 %) im aktuellen Zyklustief. Gross Margin 41,08 % zeigt, dass die Bruttomarge strukturell intakt ist — der Margendruck entsteht unterhalb der Bruttomarge (F&E, SG&A auf niedrigerer Umsatzbasis). FCF 687,8 Mio. $ bei 4,04 Mrd. $ Umsatz (17,0 % FCF-Marge) ist solide und deckt die hohe Dividende. Der Burggraben liegt in tiefen, langjährigen Design-Win-Beziehungen mit Smartphone-OEMs — real, aber durch die Kundenkonzentration (Apple) strukturell fragil, kein breiter diversifizierter Burggraben.
 
-- Apple-Sockets-Verlust an Qualcomm bei kommenden iPhones bestätigt
+## 7. BEWERTUNG
 
-- Apple entwickelt eigene RF-Komponenten (langfristige Existenzfrage)
+Forward-KGV 11,56x (auf Basis Snapshot-Kurs) bzw. ~12,25x (auf Basis aktuellem Kurs 62,95 $) liegt deutlich unter allen vier Halbleiter-Peers (QCOM 15,5x, MCHP 19,5x, AVGO 19,1x, ON 20,1x) — ein struktureller Abschlag, der teils durch die Apple-Konzentration, teils durch die Fusionsunsicherheit erklärbar ist. Rückrechnung "Was preist der Kurs ein?": Bei 62,95 $ und Forward-EPS 5,13 $ impliziert der Kurs eine deutliche Ergebnisverdopplung ggü. Trailing-EPS (2,40 $) — ambitioniert, aber im Rahmen einer zyklischen zzgl. deal-getriebenen Erholung nicht unrealistisch. Die Dividendenrendite von 4,79 % bietet zusätzlich eine strukturelle Bewertungsstütze, die bei den Peers in dieser Form nicht vorhanden ist.
 
-- Revenue seit 2022 strukturell rückläufig (-1% YoY weiterhin negativ)
+## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-- Operating Margin von 30%+ auf 7,7% kollabiert – Hebel funktioniert auch nach unten
+Analysten-Konsens "Hold" bei 16 Analysten mit Kursziel 72,94 $ — rund 16 % über dem aktuellen Kurs (62,95 $) und praktisch deckungsgleich mit dem eigenen Base-Case-Kursziel (72,5 $), was die eigene Herleitung stützt. Short-Float-Daten liegen nicht vor. Die scharfe Diskrepanz zwischen 5T (+10,29 %) und 20T (-16,24 %) zeigt hohe Volatilität und deutet auf eine jüngere Stimmungsverschiebung hin (Hypothese, nicht datenbasiert) — angesichts des Preis-Gaps zum Snapshot-Datum ist der genaue Auslöser nicht verifizierbar. Enttäuschungsrisiko: sowohl eine FTC-Blockade als auch eine schwache Standalone-Guidance könnten die jüngste Erholung schnell umkehren.
 
-- ROE nur 6,2% – Kapitaleffizienz dramatisch gefallen
+## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-- China-Smartphone-Exposure und geopolitische Risiken
+RS-Fenster: 5T +10,29 %, 10T +7,27 %, 20T -16,24 %, 50T -6,41 %, 6M +1,45 % — die Aktie zeigt eine V-förmige Erholung nach einer deutlichen Schwächephase (RS-Rang #324, nahe Indexende). Kein GWS-Ampel-Signal aktiv. Das Momentum wirkt aktuell primär reaktiv/nachrichtengetrieben (Preis-Gap zum Snapshot), nicht klar fundamental gestützt. Warnsignal: Ein Rückfall unter das 50T-Tief würde die V-Erholung als reine Gegenbewegung entlarven statt als Trendwende.
 
-- Qorvo als direkter Konkurrent mit ähnlichem Druck → Preiskampf
+## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-- Trailing PE 34 zeigt: Earnings-Basis fragil, "billig" ist relativ
+**Bull (110–140 $):** Deal schließt erfolgreich, Synergien (>500 Mio. $ p.a.) werden vollständig realisiert, kombinierte Einheit erreicht Skaleneffekte nahe QCOM-Bewertungsniveau, Apple-Konzentrationsrisiko wird durch breiteren Kundenmix relativiert.
 
-## 5. FUNDAMENTALE QUALITÄT
+**Base (65–95 $):** Deal schließt mit moderater Synergie-Realisierung, Standalone-Zyklus erholt sich graduell.
 
-- Revenue TTM 4,04 Mrd. $, YoY -1% – immer noch im Abwärtstrend
+**Bear (25–45 $):** Deal wird von der FTC blockiert, Apple-Konzentrationsrisiko bleibt ungelöst (mögliche Insourcing-Tendenzen), zyklische Schwäche hält an.
 
-- Gross Margin 41,1% – historisch waren 50%+ Standard
-
-- Operating Margin 7,7% – massive Kompression vs. 30%+ in Hochzeiten
-
-- FCF 690 Mio. $ – solide trotz Down-Cycle, ~5,5% FCF-Yield
-
-- Debt/Equity 20,6 – konservative Bilanz, kein Stress
-
-- ROE 6,2% – schwach, zeigt strukturelles Problem
-
-- Net Margin 8,9% vs. ~25% in 2021
-
-- Dividende attraktiv, gut gedeckt durch FCF
-
-- Capex-diszipliniert, aber Fab-intensiv
-
-- Burggraben (Filter-IP) noch intakt, aber bröckelt bei Apple
-
-- Bilanz erlaubt opportunistische M&A
-
-- Qualität ist heute klar zyklisch, nicht compounding
-
-## 6. BEWERTUNG
-
-Forward PE 16 wirkt günstig, aber Konsens-EPS unterstellt bereits Recovery – Earnings-Revisions-Risiko bleibt. EV/Sales ~3x ist im Semi-Kontext moderat, EV/EBITDA ~10-11x angemessen für einen zyklischen RF-Player. Im Peer-Vergleich notiert Qorvo ähnlich, Qualcomm bei 14-15x Forward PE mit besserem Wachstumsprofil. Der Markt preist eine moderate Erholung ein, aber keinen vollen Cycle-Turn. Analysten-Kursziel 74$ liegt unter dem aktuellen Kurs – die Aktie ist also bereits über Konsens gelaufen, was Momentum-getriebenes Trading bestätigt. Bewertung ist nicht teuer, aber auch nicht das offensichtliche Schnäppchen, da Earnings-Power-Frage offen bleibt. Echtes Re-Rating erfordert Margenerholung Richtung 20%+ Op-Margin.
-
-## 7. MARKTPSYCHOLOGIE & POSITIONIERUNG
-
-- Underowned bei großen Tech-Funds, Sentiment lange negativ
-
-- Short-Cover-Rally läuft aktiv – 16% in 5 Tagen spricht Bände
-
-- Hedgefonds beginnen Cyclical-Rotation in zurückgebliebene Semis
-
-- Analysten-Konsens "Hold" – Upgrades wären zusätzlicher Treiber
-
-- Smart Money positioniert sich vor möglichem H2-Cycle-Turn
-
-- Sentiment-Wende noch nicht abgeschlossen, Skepsis dominiert
-
-## 8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-
-- GWS-Ampel 3/3 aktiv – Strukturbruch auf Weekly/Daily/4H = stärkstes Setup
-
-- RS-Score 122 vs. QQQ zeigt klare Outperformance
-
-- 50T-RS +38% – kurzfristig überhitzt, Pullback wahrscheinlich
-
-- Charttechnisch Ausbruch über mehrjährige Range bei ~75-78$
-
-- Zyklus-Phase: frühes Stage-2-Setup, aber mit Erschöpfungsrisiko nach Spike
-
-## 9. LANGFRISTIGES POTENZIAL (3-5 Jahre)
-
-Konservatives Szenario: Apple-Content verliert weiter, Margen bei 10-12%, EPS ~5$ → Kursziel 70-80$ → Wahrscheinlichkeit 40%
-
-Bull Case: Broad Markets erholt, Margen Richtung 18%, EPS 7$, Re-Rating auf 18x → Kursziel 125$ → Wahrscheinlichkeit 35%
-
-Extrem-Bull-Case: Voller Semi-Cycle plus Marktanteilsstabilisierung, EPS 9$+, 20x Multiple → Kursziel 170-180$ → Wahrscheinlichkeit 15%
-
-## 10. VERGLEICH MIT ÄHNLICHEN AKTIEN
-
-- QRVO: direkter Peer, ähnliche Apple-Dependency, schwächere Bilanz
-
-- QCOM: bessere Diversifikation, Auto/AI-Exposure, qualitativ überlegen
-
-- AVGO: Premium-Compounder mit Software, andere Liga
-
-- NXPI: Auto/Industrial-Fokus, stabileres Geschäftsmodell, höher bewertet
+Entscheidende Variable: Ausgang der FTC-Kartellprüfung und Tempo der zyklischen Erholung im Smartphone-RF-Markt.
 
 ## 11. PROFI-FAZIT
 
-SWKS ist heute kein Compounder, sondern ein taktischer Cyclical-Trade mit klarem Setup. Die GWS-Ampel auf 3/3 plus RS-Outperformance signalisiert institutionelles Buying nach langer Akkumulationsphase. Wer jetzt einsteigt, spielt Mean Reversion und Sentiment-Wende – nicht Qualität. Das fundamentale Bild bleibt fragil: Apple-Risiko ist real und nicht gelöst. Für Hedgefonds-Style ist das ein 12-18 Monats-Play mit Stop unter 72$. Long-Term-Investoren sollten Qualität wie AVGO oder NXPI vorziehen. Bei Pullback auf 75-78$ Zone interessant für Re-Entry – aktuell nach +38% in 50T kurzfristig überdehnt. Verkaufen bei klarem GWS-Bruch nach unten oder enttäuschenden Apple-Design-Win-News. Risiko/Rendite bleibt asymmetrisch positiv, solange Strukturbruch hält.
+Skyworks ist ein zyklischer Value-Trade mit Merger-Optionalität, kein klassischer Compounder — die eigene EV-Rechnung zeigt attraktives, aber nicht exzessives Upside (+16,2 %), gestützt durch eine hohe Dividendenrendite (4,79 %) als Sicherheitsnetz. Für Value- und einkommensorientierte Investoren mit Tolerenz für das FTC-Event-Risiko geeigneter als für reine Momentum-Trader (RS-Rang #324 spricht gegen ein Momentum-Framing). Explizite Risikowarnung: Die jüngste Kursbewegung (+6,1 % ggü. Snapshot) ist nicht verifiziert erklärbar — vor Positionsaufbau aktuelle Nachrichtenlage zum FTC-Verfahren prüfen. **Qualcomm (QCOM)** ist der qualitativ stärkere, aber teurere Weg ins RF-/Analog-Segment (15,5x vs. 11,6x); **Qorvo (QRVO)** selbst bietet die reinere, aber riskantere Merger-Arb-Exposure zum gleichen Deal.
 
-Rating:
-
-- Qualität: 2/5
-
+- Qualität: 3/5
 - Wachstum: 2/5
+- Bewertung: 4/5
+- Katalysator: 3/5
 
-- Bewertung: 3/5
+**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — Die Bewertung ist attraktiv, aber das ungelöste FTC-Kartellverfahren und der unverifizierte Preis-Gap zum Snapshot rechtfertigen keine volle Positionsgröße.
 
-- Langfristiges Potenzial: 3/5
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
+| Qualität | 3/5 |
 | Wachstum | 2/5 |
-| Bewertung | 3/5 |
+| Bewertung | 4/5 |
 | Katalysator | 3/5 |
+| EV-Upside | +19.9% |
 
-**Verdict: HOLD (50/100)**
+**Verdict: HOLD (63/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

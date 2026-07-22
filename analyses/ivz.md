@@ -1,81 +1,90 @@
 # IVZ — KI-Aktienbewertung
 
-**Invesco Ltd** · Financial Services · 16.07.2026 · Signal: S&P 500
+**Invesco Ltd** · Financial Services · 22.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 28.7 |
-| Market Cap | $12.72 Mrd. |
-| Forward PE | 9.03 |
+| Kurs | 29.63 |
+| Market Cap | $13.13 Mrd. |
+| Forward PE | 9.27 |
 | Revenue (TTM) | $6.59 Mrd. |
 | Gross Margin | 28.9% |
 | ROE | -1.5% |
-| RS-Score | 32.4 |
+| RS-Score | 28.2 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $40–$45 (25%) · Base $29–$32 (50%) · Bear $17–$20 (25%) · EV ~$30
-
 ## 1. INVESTMENT-CASE
-Invesco ist vor allem für ein Produkt bekannt, das den größten Teil seines Markenwerts trägt: die Invesco QQQ Trust — einer der größten und liquidesten ETFs der Welt auf den NASDAQ-100. Die trailing Ergebnisse zeigen einen Verlust (Nettomarge -3,7%, ROE -1,5%), verzerrt durch Einmaleffekte (vermutlich Wertminderungen/Restrukturierungskosten), während das Forward-KGV von 9,0x eine deutliche Ergebnisnormalisierung unterstellt (Forward-EPS $3,18 vs. Trailing -$1,47). Der Kurs hat sich vom 52-Wochen-Tief (16,49 $) auf nahe dem Hoch (28,70 $ vs. 29,82 $) fast verdoppelt — die zentrale Frage ist, ob die branchenweite Rotation von aktiv gemanagten Fonds zu passiven ETF-Strukturen (wo Invesco über QQQ und die wachsende ETF-Palette strukturell profitiert) das aktive Fondsgeschäft-Ausflussrisiko dauerhaft kompensiert.
+
+Invesco ist ein globaler Vermögensverwalter (~1,8 Bio. $ AUM) mit einer der stärksten ETF-Franchisen im Markt — Invesco QQQ als eines der liquidesten und meistgehandelten ETFs weltweit ist der strukturelle Kern des Burggrabens. Die Aktie zeigt starkes kurzfristiges Momentum (10T +11,0 %, 20T +9,45 %) vor dem Q2-Earnings-Termin am 28.07.2026, RS-Score 28,17 (Rang #43 im S&P 500). Der Datensatz zeigt eine auffällige Anomalie: Trailing-EPS -1,47 $ und negative Nettomarge (-3,69 %) bei gleichzeitig positiver operativer Marge (19,1 %) — ein klares Zeichen für einen Einmaleffekt (vermutlich Wertminderung/Restrukturierungsaufwand), nicht für ein strukturelles Ertragsproblem. Diese verzerrte Kennzahl wird für die Bewertung nicht herangezogen. Der eigentliche Treiber: Umsatzwachstum von +14,1 % YoY bei einem Forward-KGV von nur 9,27x — am unteren Rand der Asset-Management-Peer-Bandbreite (AMG 9,1x, Franklin Resources 10,5x, BlackRock 16,7x) — signalisiert, dass der Markt die operative Erholung noch nicht voll anerkennt.
 
 ## 2. GESCHÄFTSMODELL
-- Diversifizierter Asset Manager mit Mix aus aktiven Fonds (unter strukturellem Ausflussdruck) und passiven ETFs (strukturelles Wachstum, angeführt von QQQ)
-- QQQ als margenstarker, hochskalierbarer Cash-Cow-Baustein — ein einzelnes Produkt mit außergewöhnlicher Markenbekanntheit
-- Operativer Hebel: ETF-AUM-Wachstum skaliert praktisch ohne proportionalen Kostenanstieg
-- Aktive Fondssparte strukturell unter Gebührenkompressionsdruck durch passive Konkurrenz — konzernweiter Ergebnismix verschiebt sich zugunsten ETFs
-- Trailing-Verlust deutet auf Einmaleffekte hin (aus den Daten nicht abschließend auflösbar, welcher Art)
-- Dividendenrendite von ~3,0% als Kapitalrückführungssignal trotz volatiler GAAP-Ergebnisse
+
+- Diversifizierte AUM-Basis: aktive Fonds, passive ETFs (QQQ als Flaggschiff), institutionelles und Retail-Geschäft
+- Gebührenmodell direkt an AUM-Entwicklung gekoppelt — Marktbewegungen wirken als natürlicher operativer Hebel in beide Richtungen
+- ETF-Segment (v.a. QQQ) strukturell margenstärker skalierbar als aktives Fondsgeschäft, das unter anhaltendem Gebührendruck steht
+- Trailing-EPS-Verlust vermutlich einmaliger Sondereffekt (Wertminderung/Restrukturierung) — aus den Daten nicht abschließend verifizierbar, aber operative Marge (19,1 %) bleibt intakt
+- D/E 14,83 % — sehr moderate Verschuldung für einen Finanzdienstleister, gibt Bilanzflexibilität
+- Umsatzwachstum +14,1 % YoY deutlich über dem Sektortrend — teilweise marktgetrieben (AUM-Wertsteigerung), teilweise Nettomittelzuflüsse in ETF-Produkte
+- Dividendenrendite 2,9 % bei aktuell negativer ROE (-1,54 %, durch Sondereffekt verzerrt) — Ausschüttung operativ durch FCF gedeckt
+- FCF 861,9 Mio. $ bei 6,59 Mrd. $ Umsatz — solide Cash-Generierung trotz der GAAP-Verlust-Anomalie
+
+**MULTIPLE-HERLEITUNG:** Peers im Datensatz: Affiliated Managers Group (AMG, Forward-KGV 9,1x), Franklin Resources (BEN, 10,5x), BlackRock (BLK, 16,7x — Premium-Mega-Cap, kein direkter Größenvergleich). Bear-Multiple unter AMG (8x), Base nahe AMG/BEN-Niveau (10x), Bull mit moderater Prämie (12x) — deutlich unter BLK, da IVZ strukturell kleiner und margenschwächer ist.
 
 ## 3. BULL CASE
-Peers: AMG 9,0x, AMP 10,4x, BEN 10,5x, PFG 11,0x, TROW 11,2x, SAMG 11,7x. Bull-Multiple 11,5x (nahe SAMG/TROW, Rerating bei bestätigter ETF-getriebener Ergebnisnormalisierung). Bull-EPS FY27: $3,70 (Annahme) — QQQ-AUM-Wachstum beschleunigt sich, aktive Ausflüsse stabilisieren sich. Kursziel: 3,70 × 11,5x ≈ $42,55 → Bandbreite $40–$45. Eintrittswahrscheinlichkeit: 25%.
+
+AUM-Wachstum beschleunigt durch anhaltende Marktstärke und Nettomittelzuflüsse in ETF-Produkte, Gebührenmix verbessert sich zugunsten margenstärkerer Segmente. Annahme: FY27-EPS ~3,50 $ × 12x (moderate Prämie ggü. Peer-Median, aber deutlich unter BLK) = 42,00 $. Bull-Kursziel: 38–46 $ (Midpoint 42 $). Eintrittswahrscheinlichkeit: 25 %.
 
 ## 4. BASE CASE
-Base-Multiple 9,5x (nahe eigenem Forward-KGV 9,0x, unteres Ende der Peer-Bandbreite). Base-EPS: Konsens $3,18. Kursziel: 3,18 × 9,5x ≈ $30,2 → Bandbreite $29–$32. Wahrscheinlichstes Szenario: ETF-Wachstum kompensiert aktive Ausflüsse in etwa, moderate Ergebnisstabilisierung. Eintrittswahrscheinlichkeit: 50%.
+
+Wahrscheinlichstes Szenario: AUM-Wachstum normalisiert sich, operative Marge bleibt stabil bei anhaltendem Gebührendruck im aktiven Geschäft. Annahme (nahe Konsens-Forward-EPS 3,20 $): FY27-EPS ~3,20 $ × 10x (Peer-Median AMG/BEN) = 32,00 $. Base-Kursziel: 29–35 $ (Midpoint 32 $). Eintrittswahrscheinlichkeit: 50 %.
 
 ## 5. BEAR CASE
-Bear-Multiple 7x (Kompression unter Peer-Bandbreite — Kompression bei brechender Stabilisierungs-These). Bear-EPS FY27: $2,60 (Annahme) — aktive Fondsausflüsse beschleunigen sich erneut, Gebührenkompression trifft auch das ETF-Geschäft stärker als erwartet. Kursziel: 2,60 × 7x ≈ $18,2 → Bandbreite $17–$20. Eintrittswahrscheinlichkeit: 25%.
 
-Risikodimensionen:
-- Kundenkonzentration: strukturell hoch — starke Abhängigkeit vom QQQ-Franchise für die Ertragsqualität, quantifizierbar über AUM-Mix (nicht im Datensatz)
-- Geopolitik/China-Exposure: moderat über globale institutionelle Kundenbasis, auf Datenbasis nicht quantifizierbar
-- Lieferketten/Single-Source: nicht anwendbar für Asset-Management-Geschäft
-- Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz
-- Regulierung: ETF-/Fondsregulierung (SEC) und branchenweite Gebührenkompression sind strukturelle, direkte Ertragsrisiken
+Auslöser: Marktkorrektur reduziert AUM-Basis direkt, Nettomittelabflüsse aus aktiven Fonds beschleunigen sich, Gebührenkompression setzt sich fort. Kundenkonzentration: aus Daten nicht quantifizierbar, aber institutionelles Geschäft mit Konzentrationsrisiko auf Großkunden typisch für die Branche. Geopolitik/Exportkontrollen: gering, primär US/Global-Asset-Management ohne direkte Exportkontroll-Exposure. Lieferketten: nicht relevant für Finanzdienstleister. Verwässerung: SBC-Daten nicht verfügbar, nicht beurteilbar. Bilanz: D/E 14,83 % ist niedrig, Bilanzrisiko daher begrenzt — Kernrisiko liegt im Ertragsmodell, nicht in der Verschuldung. Annahme: FY27-EPS ~2,50 $ × 8x (unter AMG, Bewertungskompression bei brechender AUM-These) = 20,00 $. Bear-Kursziel: 18–23 $ (Midpoint 20,5 $). Eintrittswahrscheinlichkeit: 25 %.
 
-**Bull 25% + Base 50% + Bear 25% = 100%**
-**Erwartungswert: $30 — implizites Upside/Downside vs. aktuellem Kurs ($28,70): +5,4%.**
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.
+**Summe: 25 % + 50 % + 25 % = 100 %**
+
+**Erwartungswert:** EV = 0,25 × 42 $ + 0,50 × 32 $ + 0,25 × 20,5 $ = 10,5 $ + 16 $ + 5,125 $ = **~31,63 $ — implizites Upside vs. aktuellem Kurs (29,63 $): +6,7 %.** Der EV liegt unter 10 % über dem aktuellen Kurs — die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, ein High-Conviction-Framing ist nicht gerechtfertigt.
 
 ## 6. FUNDAMENTALE QUALITÄT
-Der trailing ROE von -1,5% und die negative Nettomarge sind Einmaleffekt-verzerrt, nicht repräsentativ für die operative Qualität — die operative Marge von 19,1% zeigt ein grundsätzlich funktionierendes Geschäft. FCF von 861,9 Mio. $ bei 6,59 Mrd. $ Umsatz (FCF-Marge ~13%) bestätigt trotz GAAP-Verlust eine solide Cash-Generierung. Der Burggraben liegt fast ausschließlich im QQQ-Markenwert und der First-Mover-Position im NASDAQ-100-ETF-Segment — außerhalb davon ist die Wettbewerbsposition im aktiven Fondsgeschäft strukturell schwächer.
+
+Die GAAP-Kennzahlen (ROE -1,54 %, ROIC -1,17 %, Nettomarge -3,69 %) sind durch den vermuteten Einmaleffekt verzerrt und werden hier NICHT für die Qualitätsbeurteilung herangezogen — stattdessen die unverzerrte operative Marge (19,1 %), die für einen Asset Manager im soliden Mittelfeld liegt. Gross Margin 28,92 % ist für die Branche moderat. FCF-Marge (861,9 Mio. $ / 6,59 Mrd. $ ≈ 13,1 %) zeigt eine gesunde Cash-Konversion trotz der GAAP-Anomalie. Der Burggraben liegt im ETF-Geschäft (QQQ-Skaleneffekte, Netzwerkeffekt durch Liquidität), während das aktive Fondsgeschäft strukturell unter Gebührendruck bleibt — ein gemischtes, aber nicht schwaches Qualitätsprofil.
 
 ## 7. BEWERTUNG
-Die Trailing-KGV-Kennzahl ist wegen des Einmaleffekt-Verlusts unbrauchbar — Forward-KGV (9,0x) ist die relevante Bewertungsbasis. Rückrechnung "Was preist der Kurs ein?": Bei $28,70 und Forward-EPS $3,18 impliziert der Markt ein KGV von 9,0x — am unteren Ende der Asset-Management-Vergleichsgruppe (9,0–11,7x), was eine anhaltende Skepsis gegenüber der aktiven Fondssparte widerspiegelt, trotz der QQQ-Qualität. Plausibel, nicht überzogen pessimistisch. Das eigene Forward-Multiple liegt am unteren Rand der Peer-Bandbreite — der Abschlag ist strukturell durch die Mischung aus margenstarkem ETF- und margenschwachem aktivem Geschäft erklärbar.
+
+Forward-KGV 9,27x liegt am unteren Rand der Peer-Bandbreite (AMG 9,1x, BEN 10,5x, BLK 16,7x) — nahezu identisch mit AMG, dem kleinsten und margenschwächsten Peer im Datensatz. Rückrechnung "Was preist der Kurs ein?": Bei 29,63 $ und Forward-EPS 3,20 $ impliziert der Kurs praktisch keine Wachstumsprämie ggü. dem AUM-Wachstum der letzten Quartale — plausibel, eher konservativ als ambitioniert. Der Abschlag ggü. BEN und BLK ist strukturell durch geringere Skalierung und die jüngste GAAP-Verlust-Anomalie erklärbar, nicht vollständig durch fundamentale Schwäche. Das lässt Bewertungsspielraum, wenn die Q2-Zahlen am 28.07. die operative Stärke bestätigen — allerdings zeigt die eigene EV-Rechnung selbst im Erfolgsfall nur begrenztes Upside.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
-Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 12 Analysten, Kursziel $30,83 nahe aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Die starke Kurserholung vom 52-Wochen-Tief deutet auf eine Neubewertung der ETF-Sparte hin — Hypothese, nicht datenbasiert.
+
+Analysten-Konsens "Buy" bei 12 Analysten mit Kursziel 31,42 $ — nahe am aktuellen Kurs, keine große Diskrepanz zur Marktmeinung. Short-Float-Daten liegen nicht vor. Die starke 10T/20T-Performance (+11,0 % / +9,45 %) bei neutralem 6M-Fenster (-0,91 %) deutet auf eine Positionierung im Vorfeld des Q2-Termins hin (Hypothese, nicht datenbasiert) — der Markt scheint eine Bestätigung der operativen Stärke bereits vorwegzunehmen. Enttäuschungsrisiko konzentriert sich auf den 28.07.-Termin: Ein erneuter GAAP-Sondereffekt oder schwächere Nettomittelflüsse könnten das jüngste Momentum schnell umkehren.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-RS-Score 32,4 (Rang #74 im S&P 500), alle kurzfristigen Fenster stark positiv (5T +5,5%, 10T +11,7%, 50T +12,1%) — starkes, breites Momentum. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte). Ein Warnsignal wäre eine überraschende Beschleunigung der Nettoabflüsse im aktiven Fondsgeschäft im nächsten Quartalsbericht.
+
+RS-Fenster: 5T +0,17 %, 10T +11,0 %, 20T +9,45 %, 50T +8,46 %, 6M -0,91 % — die Beschleunigung über 10T/20T bei neutralem 6M-Fenster zeigt einen jüngeren, noch jungen Aufwärtsimpuls. Kein GWS-Ampel-Signal aktiv. Das Momentum wirkt teilweise fundamental gestützt (AUM-Erholung), teilweise vorwegnehmend auf den Earnings-Termin. Warnsignal: Ein Rückfall unter das 50T-Unterstützungsniveau vor dem 28.07. wäre ein Zeichen, dass der Markt die Erwartungen bereits zurücknimmt.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
-- Bull: $48–$60 — QQQ-Franchise und ETF-Palette wachsen strukturell weiter, aktive Sparte stabilisiert sich vollständig
-- Base: $33–$42 — moderates ETF-Wachstum kompensiert weiterhin schrumpfende aktive Sparte
-- Bear: $15–$22 — Gebührenkompression erreicht auch das ETF-Geschäft, strukturelle Konsolidierung der Branche zulasten kleinerer Anbieter wie Invesco
-Entscheidende Variable: Tempo des ETF-/QQQ-AUM-Wachstums relativ zu den Ausflüssen aus dem aktiven Fondsgeschäft.
+
+**Bull (45–60 $):** ETF-Franchise (QQQ) wächst strukturell weiter, AUM-Basis expandiert durch anhaltende Marktstärke, Gebührenmix verschiebt sich zugunsten passiver Produkte — Rerating näher an BLK-Niveau.
+
+**Base (28–40 $):** Stabiles AUM-Wachstum im Rahmen des Marktes, Bewertung bleibt in der aktuellen Peer-Bandbreite.
+
+**Bear (12–20 $):** Anhaltende Nettomittelabflüsse aus aktiven Fonds, Marktkorrektur reduziert AUM-Basis strukturell, Gebührenkompression beschleunigt sich.
+
+Entscheidende Variable: Nettomittelflüsse in ETF- vs. aktive Produkte und die allgemeine Marktentwicklung als AUM-Treiber.
 
 ## 11. PROFI-FAZIT
-Invesco ist ein zyklischer Value-/Turnaround-Trade auf die ETF-Transformation, kein reiner Buy-and-Hold-Compounder solange die aktive Fondssparte strukturell schrumpft. Geeignet für Value-Investoren mit Vertrauen in die QQQ-Franchise-Qualität; nach der starken Kurserholung Positionsgröße diszipliniert halten. Peers: AMG (vergleichbares Multiple, aber ohne ETF-Skalierbarkeit), TROW (teurer bewertet mit 11,2x, aber ohne die QQQ-Alleinstellung) — Invesco bleibt das reinste "passive Transformation"-Instrument der Gruppe.
 
-Qualität: 3/5
-Wachstum: 3/5
-Bewertung: 4/5
-Katalysator: 3/5
+Invesco ist kein High-Conviction-Momentum-Play, sondern ein moderat bewerteter Asset Manager mit einem echten strukturellen Burggraben (QQQ-Franchise) — die eigene EV-Rechnung zeigt nur begrenztes Upside (+6,7 %), keinen asymmetrischen Edge. Für Dividenden-orientierte Investoren mit Fokus auf die ETF-Story akzeptabel, für kurzfristige Trader ist der bevorstehende Earnings-Termin (28.07.) das entscheidende Risiko/Chance-Ereignis. Positionsgröße moderat halten bis zur Bestätigung der operativen Trends. **Franklin Resources (BEN)** und **Affiliated Managers Group (AMG)** sind die relevantesten reinen Peers — beide mit ähnlichem oder etwas höherem Forward-KGV (10,5x bzw. 9,1x), **BlackRock (BLK)** ist die Premium-Referenz mit deutlich höherer Bewertung (16,7x).
 
-**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Starkes technisches Setup (3/3 GWS-Punkte) und günstige Bewertung, volle Positionsgröße vertretbar.
+- Qualität: 3/5
+- Wachstum: 4/5
+- Bewertung: 3/5
+- Katalysator: 3/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der EV-Upside von nur +6,7 % bietet trotz solider operativer Trends und starkem AUM-Wachstum keinen asymmetrischen Edge auf aktuellem Kursniveau.
 
 
 ---
@@ -83,8 +92,8 @@ Katalysator: 3/5
 | Rating | Score |
 |---|---|
 | Qualität | 3/5 |
-| Wachstum | 3/5 |
-| Bewertung | 4/5 |
+| Wachstum | 4/5 |
+| Bewertung | 3/5 |
 | Katalysator | 3/5 |
 | EV-Upside | +6.3% |
 

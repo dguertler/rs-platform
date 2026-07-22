@@ -113,14 +113,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "SWKS",
-      "verdict": "HOLD",
-      "score": 50,
-      "created_at": "2026-06-01T20:38:52.382339",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "AKAM",
       "verdict": "HOLD",
       "score": 55,
@@ -768,14 +760,6 @@
       "ev_upside_pct": -17.8
     },
     {
-      "ticker": "FRE.DE",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.914314",
-      "ev_upside_pct": 2.8
-    },
-    {
       "ticker": "CNC",
       "verdict": "WATCH",
       "score": 44,
@@ -1029,19 +1013,6 @@
       "ev_upside_pct": -15.0
     },
     {
-      "ticker": "FME.DE",
-      "verdict": "HOLD",
-      "score": 59,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Die FME27-Margenerholung ist real und im Trend, aber ohne akutes GWS-Signal fehlt der unmittelbare technische Ausl\u00f6ser f\u00fcr volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-07-09T14:14:01.123971",
-      "ev_upside_pct": 7.7
-    },
-    {
       "ticker": "AMD",
       "verdict": "HOLD",
       "score": 61,
@@ -1276,19 +1247,6 @@
       "created_at": "2026-07-15T12:06:39.572374"
     },
     {
-      "ticker": "RWE.DE",
-      "verdict": "WATCH",
-      "score": 54,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 3.9,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "strukturell negativer FCF (schwere Capex-Phase) und die ungekl\u00e4rte Margen-Anomalie reduzieren die Datenqualit\u00e4t f\u00fcr eine volle Position, trotz starkem RS-Rang 6/37."
-      },
-      "created_at": "2026-07-15T12:06:39.609379"
-    },
-    {
       "ticker": "ALL",
       "verdict": "HOLD",
       "score": 58,
@@ -1484,19 +1442,6 @@
       "created_at": "2026-07-16T10:39:47.701630"
     },
     {
-      "ticker": "IVZ",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 6.3,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Starkes technisches Setup (3/3 GWS-Punkte) und g\u00fcnstige Bewertung, volle Positionsgr\u00f6\u00dfe vertretbar."
-      },
-      "created_at": "2026-07-16T10:40:40.947839"
-    },
-    {
       "ticker": "CHRW",
       "verdict": "WATCH",
       "score": 53,
@@ -1599,6 +1544,123 @@
         "reason": "Der EV impliziert nach dem Gap \u22128,4 % Downside, und das KBV von 2,45x kapitalisiert bereits die zyklisch beg\u00fcnstigte Top-of-Cycle-ROE ohne Sicherheitsmarge."
       },
       "created_at": "2026-07-18T06:33:25.467753"
+    },
+    {
+      "ticker": "RWE.DE",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV impliziert -10,9 % Downside bei einer Forward-KGV-Pr\u00e4mie gg\u00fc. dem einzigen verifizierbaren Peer E.ON, die technische St\u00e4rke allein tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-22T06:12:43.227361"
+    },
+    {
+      "ticker": "FME.DE",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Der entscheidende Beweis f\u00fcr das Kostenprogramm steht mit dem Q2-Bericht am 04.08. noch aus, die kurzfristige RS-Abk\u00fchlung best\u00e4tigt fehlende Best\u00e4tigung."
+      },
+      "created_at": "2026-07-22T06:14:59.908049"
+    },
+    {
+      "ticker": "FRE.DE",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -16.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV impliziert -14,9 % Downside, da die Konsens-EPS-Prognose das schwache Umsatzwachstum von nur +2,0 % nicht widerspiegelt."
+      },
+      "created_at": "2026-07-22T06:16:54.796125"
+    },
+    {
+      "ticker": "IVZ",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV-Upside von nur +6,7 % bietet trotz solider operativer Trends und starkem AUM-Wachstum keinen asymmetrischen Edge auf aktuellem Kursniveau."
+      },
+      "created_at": "2026-07-22T06:18:24.762765"
+    },
+    {
+      "ticker": "ESS",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -4.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV liegt \u00fcber allen drei verifizierbaren Peers, der EV impliziert -5,5 % Downside ohne asymmetrischen Edge."
+      },
+      "created_at": "2026-07-22T06:20:00.192445"
+    },
+    {
+      "ticker": "HIG",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 3.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV-Upside von nur +2,1 % bietet trotz Top-Tier-ROE keinen asymmetrischen Edge, der morgige Earnings-Termin bleibt unbest\u00e4tigt."
+      },
+      "created_at": "2026-07-22T06:21:27.226364"
+    },
+    {
+      "ticker": "TDY",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Der Ausgang des heutigen Q2-Berichts ist zum Zeitpunkt der Analyse nicht bekannt, die Position sollte bis zur Best\u00e4tigung keine volle Gr\u00f6\u00dfe tragen."
+      },
+      "created_at": "2026-07-22T06:23:32.712614"
+    },
+    {
+      "ticker": "QRVO",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -14.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die Aktie ist eine Merger-Arbitrage-Sondersituation mit ungel\u00f6stem FTC-Kartellverfahren, das regul\u00e4re Fundamental-/Momentum-Framework tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-22T06:26:00.683080"
+    },
+    {
+      "ticker": "SWKS",
+      "verdict": "HOLD",
+      "score": 63,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 19.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die Bewertung ist attraktiv, aber das ungel\u00f6ste FTC-Kartellverfahren und der unverifizierte Preis-Gap zum Snapshot rechtfertigen keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-22T06:27:17.446928"
     }
   ]
 }
