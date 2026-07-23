@@ -35,12 +35,20 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
    **Earnings-Check (PFLICHT, autark vor jeder Analyse):** Prüfen, ob TICKER
    in den letzten 7 Tagen einen Earnings-Termin hatte (z. B. via
    `yfinance.Ticker(TICKER).calendar` oder bekanntes Berichtsdatum). Falls ja:
-   Wochen-Cache aus `data/fundamentals.json` NICHT verwenden — stattdessen
-   `fetch_fundamentals(TICKER)` aus `generate_rating.py` für einen erzwungenen
-   Live-Fetch dieses einen Tickers aufrufen. Grund: Der automatische 5 %-Preis-
-   Gap-Trigger in `load_fundamentals()` greift nur bei starker Kursreaktion —
-   ein Earnings-Beat/-Miss kann Fundamentaldaten (Revenue, Margen, EPS)
-   spürbar verändern, ohne dass der Kurs um mehr als 5 % reagiert.
+   Wochen-Cache aus `data/fundamentals.json` NICHT unverändert verwenden.
+   - **Bevorzugt:** `fetch_fundamentals(TICKER)` aus `generate_rating.py` für
+     einen erzwungenen Live-Fetch dieses einen Tickers aufrufen.
+   - **Fallback, falls yfinance/Yahoo Finance netzwerkseitig blockiert ist**
+     (z. B. 403 auf Proxy-Ebene in Cloud-Sessions): Per WebSearch die
+     Earnings-Kennzahlen recherchieren (EPS actual/estimate/surprise,
+     Umsatz YoY, Guidance) und diese **Key Facts zuerst im Chat ausgeben**,
+     bevor die Aktienanalyse folgt. Die recherchierten Werte fließen
+     qualitativ in die Analyse ein (Cache-Fundamentaldaten gelten dafür als
+     ggf. veraltet).
+   Grund: Der automatische 5 %-Preis-Gap-Trigger in `load_fundamentals()`
+   greift nur bei starker Kursreaktion — ein Earnings-Beat/-Miss kann
+   Fundamentaldaten (Revenue, Margen, EPS) spürbar verändern, ohne dass der
+   Kurs um mehr als 5 % reagiert.
 
 2. **RS-Daten laden** aus dem passenden RS-JSON:
    ```python

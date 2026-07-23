@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">23.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>GS</h1>
+      <h2>Goldman Sachs Group, Inc. (The)</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Capital Markets</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 23.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">28.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$1065.22</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$67.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">82.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">188.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">17.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1.250–1.400</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1.000–1.150</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">500–650</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $1.250–$1.400 (20 %) · Base $1.000–$1.150 (45 %) · Bear $500–$650 (35 %) · EV ~$950</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Goldman Sachs hat im Q2-2026-Bericht (14. Juli) mit EPS $20,98 und einer annualisierten Eigenkapitalrendite von 23,5 % deutlich überdurchschnittlich abgeschnitten, getragen von starken Handels- und Investmentbanking-Erträgen — Revenue-Wachstum von 42,5 % YoY (Cache-Basis) bestätigt den zyklischen Kapitalmarktboom. Bemerkenswert: Trotz des starken Berichts notiert die Aktie rund 7,7 % unter ihrem 52-Wochen-Hoch ($1.153,99), und der Analystenkonsens bleibt bei "Hold" — der Markt scheint die aktuelle Ertragsstärke als zyklischen Höhepunkt statt als neues nachhaltiges Niveau einzuordnen. Goldman ist im Gegensatz zu JPM deutlich konzentrierter auf Kapitalmarktgeschäft (Trading, Investmentbanking, Asset Management) und damit strukturell volatiler über den Zyklus. Die zentrale Frage: Ist die aktuelle Ertragsdynamik (u.a. potenziell getrieben durch ein starkes IPO-/M&A-Pipeline-Umfeld) nachhaltig, oder handelt es sich um einen zyklischen Peak vor einer Normalisierung?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Investmentbanking (M&A-Beratung, Kapitalmarkt-Emissionen/IPOs) als margenstärkster, aber am stärksten zyklischer Ertragstreiber</li>
+<li>Global Markets (Trading/Market-Making) als volumenabhängiger Ertragsbaustein mit hoher Volatilitätssensitivität</li>
+<li>Asset & Wealth Management als diversifizierender, weniger zyklischer Ertragsbaustein mit wachsender strategischer Bedeutung</li>
+<li>Extrem hohe Bilanzintensität (D/E 647 %) typisch für ein Market-Making-/Trading-Geschäftsmodell — strukturell anders zu bewerten als klassische Kreditbanken</li>
+<li>Geringere Diversifikation als JPM (kein großes Konsumentenbanking-Standbein) — höhere Ergebnisvolatilität über den Zyklus</li>
+<li>Aktienrückkäufe und Dividende (Rendite 1,88 %) als Kapitalrückführungsmechanismus bei überschüssigem regulatorischen Kapital</li>
+<li>Potenzielle Großtransaktionen (u.a. spekulierte Mega-IPO-Mandate) als kurzfristiger Ergebnis-Hebel, aber nicht wiederkehrend</li>
+<li>Regulatorische Kapitalanforderungen für Investmentbanken (Basel-III-Endgame) als struktureller Kostenfaktor</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Die aktuelle IPO-/M&A-Pipeline materialisiert sich vollständig (inklusive potenzieller Großmandate), Handelserträge bleiben auf erhöhtem Niveau, Aktienrückkäufe laufen in vollem Umfang weiter. Peers: MS (Morgan Stanley, direktester Kapitalmarkt-Peer, 16,01x) als obere Referenz; JPM (13,89x) und SCHW (13,50x) als diversifiziertere, weniger vergleichbare Randwerte. Annahme (kein Konsens): FY-EPS ~$78 × 17,0x (Rerating über MS-Niveau bei bestätigter Zyklus-Fortsetzung) = $1.326. Bull-Kursziel: $1.250–$1.400 (Midpoint $1.325). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Kapitalmarktaktivität bleibt solide, aber normalisiert sich graduell von den aktuellen Spitzenwerten, EPS-Wachstum setzt sich moderat fort. Annahme (kein Konsens): FY-EPS ~$73 × 15,0x (nahe eigenem aktuellen Forward-Multiple) = $1.095. Base-Kursziel: $1.000–$1.150 (Midpoint $1.075). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Kapitalmarktaktivität (IPOs, M&A) friert bei einem makroökonomischen Schock oder einer Risikoaversions-Phase abrupt ein, Handelserträge normalisieren sich deutlich nach unten von den zyklischen Höchstständen. Kundenkonzentration: Investmentbanking-Mandate sind projektbezogen und episodisch — der Wegfall einzelner Großmandate hat spürbaren quartalsweisen Effekt, quantitativ aber nicht bezifferbar. Geopolitik: globale Kapitalmarkt-Exposure macht GS sensitiv gegenüber internationalen Finanzmarktschocks, Handelskonflikten und Zinsvolatilität. Lieferketten: nicht anwendbar für ein Investmentbanking-Geschäftsmodell. Verwässerung: keine akute Indikation aus den Daten — auf Datenbasis nicht beurteilbar. Regulierung: Basel-III-Endgame-Kapitalanforderungen könnten bei ungünstiger Ausgestaltung die Handelsbuch-Kapitalkosten strukturell erhöhen — das materiellste regulatorische Risiko für das Geschäftsmodell. Annahme: FY-EPS ~$48 × 12,0x (Kompression bei zyklischem Ergebniseinbruch, historisch typisches Muster für Kapitalmarktbanken) = $576. Bear-Kursziel: $500–$650 (Midpoint $575). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $1.325 + 0,45 × $1.075 + 0,35 × $575 = $265,00 + $483,75 + $201,25 = **~$950 — implizites Downside vs. aktuellem Kurs ($1.065,22): −10,8 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist auf diesem Niveau nicht vertretbar.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Q2-ROE von annualisiert 23,5 % ist außergewöhnlich stark, aber typisch für einen zyklischen Kapitalmarkt-Peak — die Cache-Trailing-ROE von 16,95 % zeigt die normalisiertere Sicht über einen längeren Zeitraum. Operative Marge 42,32 % und Nettomarge 31,04 % sind solide, aber stark quartalsweise schwankungsanfällig je nach Handels-/Emissionsvolumen. Bilanzqualität: D/E 647 % ist für ein Trading-/Market-Making-Geschäftsmodell strukturell normal, aber nicht direkt mit Kreditbanken vergleichbar — erfordert eigene Risikobetrachtung über Handelsbuch-Value-at-Risk statt klassischer Verschuldungskennzahlen. Der Burggraben liegt in Reputation, Kundenbeziehungen im Top-Tier-M&A-Geschäft und globaler Kapitalmarkt-Infrastruktur.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 14,73x liegt unter dem direktesten Peer MS (16,01x) und über den diversifizierteren JPM (13,89x) und SCHW (13,50x) — eine moderate Position innerhalb der Kapitalmarkt-Peer-Bandbreite. Rückrechnung "Was preist der Kurs ein?": Bei $1.065,22 und Forward-EPS $72,34 impliziert der Markt eine gewisse Normalisierung der aktuellen Rekord-Ertragskraft — konsistent mit dem "Hold"-Analystenrating und dem Kursabstand zum 52-Wochen-Hoch trotz des starken Q2-Berichts. Diese Einpreisung wirkt plausibel: Der Markt scheint die zyklische Natur der aktuellen Ergebnisstärke korrekt zu antizipieren, statt sie naiv fortzuschreiben.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 28,23, aber Rang 17 im S&P 500 — ein vergleichsweise starker relativer Rang trotz moderatem absoluten Score, was auf ein insgesamt schwächeres Vergleichsfeld hindeuten könnte. Analystenkonsens "Hold" trotz des Q2-Beats — ungewöhnlich zurückhaltend und ein Signal, dass die Coverage die aktuelle Ertragsstärke skeptisch bewertet. Hypothese, nicht datenbasiert: Institutionelle Positionierung dürfte gemischt sein zwischen Momentum-Käufern (getrieben vom starken Q2) und Value-/Zyklus-Skeptikern, die einen Peak einpreisen — der Kursabstand zum Hoch trotz guter Zahlen stützt diese Lesart. Enttäuschungsrisiko konzentriert sich auf jede Verlangsamung der IPO-/M&A-Pipeline.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $1.065,22, rund 7,7 % unter dem 52-Wochen-Hoch ($1.153,99), deutlich über dem Tief ($691,88). Momentum: 5T +0,71 %, 10T +4,59 %, 20T +0,06 %, 50T +15,58 %, 6M +7,29 % — der nahezu neutrale 20-Tage-Wert bei solider 50-Tage-Stärke deutet auf eine jüngste Konsolidierung nach dem Q2-Beat hin. Kein GWS-Signal aktiv (Weekly/Daily/4H inaktiv). Warnsignal: Ein weiterer Rückgang unter $950 würde eine tiefergehende Korrektur der Post-Earnings-Bewegung signalisieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($1.300–$1.700):** Nachhaltiger Kapitalmarktboom über mehrere Jahre (IPO-Welle, M&A-Superzyklus), Goldman festigt Marktführerschaft im Top-Tier-Beratungsgeschäft.</p>
+<p>**Base ($900–$1.300):** Normale zyklische Schwankungen zwischen starken und schwächeren Kapitalmarktjahren, Goldman bleibt Qualitätsführer im Segment.</p>
+<p>**Bear ($450–$800):** Mehrjährige Kapitalmarktflaute (IPO-/M&A-Dürre) wie 2022/2023, strukturell niedrigere Handelserträge.</p>
+<p>Entscheidende Variable: Nachhaltigkeit des aktuellen IPO-/M&A-Zyklus über mehrere Jahre statt eines einzelnen starken Quartals.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>GS ist ein zyklischer Qualitätstitel im Kapitalmarktsegment — kein defensiver Buy-and-Hold-Compounder wie JPM, sondern ein High-Beta-Play auf den globalen Kapitalmarktzyklus. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -10,8 %) — der Markt scheint den aktuellen Ertrags-Peak bereits korrekt als zyklisch statt strukturell einzuordnen, konsistent mit dem "Hold"-Rating und dem Kursabstand zum Hoch. Geeignet für zyklisch orientierte Investoren mit Überzeugung zu einem anhaltenden Kapitalmarktboom; nicht geeignet für defensive oder Value-Mandate angesichts der Bewertungsprämie zum zyklischen Peak. Positionsgröße moderat halten angesichts der hohen Ergebnisvolatilität. Peer-Vergleich: **MS** (16,01x) ist der direkteste Kapitalmarkt-Peer, aktuell etwas teurer bewertet; **JPM** (13,89x) bietet die diversifiziertere, defensivere Alternative für ähnliche Finanzsektor-Exposure mit geringerer zyklischer Schwankungsbreite.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Kurs preist einen zyklischen Ertrags-Peak, der EV zeigt -10,8 % Downside und der Analystenkonsens bleibt trotz Q2-Beat bei Hold.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

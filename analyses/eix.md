@@ -1,101 +1,102 @@
 # EIX — KI-Aktienbewertung
 
-**Edison International** · Utilities · 15.07.2026 · Signal: Kein GWS-Signal
+**Edison International** · Utilities · 23.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 76.23 |
-| Market Cap | $29.33 Mrd. |
-| Forward PE | 11.71 |
+| Kurs | 77.63 |
+| Market Cap | N/A |
+| Forward PE | 11.92 |
 | Revenue (TTM) | $19.61 Mrd. |
 | Gross Margin | 58.7% |
 | ROE | 18.9% |
-| RS-Score | 31.3 |
+| RS-Score | 60.6 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $105–$130 (20 %) · Base $75–$92 (45 %) · Bear $32–$48 (35 %) · EV ~$75,1
+**Szenarien (12–18 Monate):** Bull $105–$120 (20 %) · Base $75–$90 (50 %) · Bear $35–$50 (30 %) · EV ~$77
 
 ## 1. INVESTMENT-CASE
 
-EIX notiert bei $76,23, nahe dem 52-Wochen-Hoch ($77,95). Auffällig: Trailing-EPS ($9,20) liegt deutlich über dem Forward-EPS ($6,51) — ein Rückgang von -29 %, der aus den Daten nicht abschließend auflösbar ist (mögliche Ursachen: Sondereffekte im Trailing-Zeitraum wie Versicherungserstattungen oder Wildfire-Fund-bezogene Bilanzeffekte). Die Bewertung stützt sich daher primär auf das bereits normalisierte Forward-EPS. Strukturell zentral für EIX ist das kalifornische Wildfire-Haftungsrisiko (bekannter Marktkontext, in den Daten nicht separat quantifizierbar) sowie eine sehr hohe Verschuldung (D/E 226,1 %) bei negativem FCF (-$1,13 Mrd.) durch Grid-Hardening-Investitionen. RS-Score 31,31 (Rang 37/337) zeigt solides, stabiles Momentum. Kein GWS-Signal aktiv.
+Edison International ist der klassische "regulatorisches Risiko vs. Rate-Base-Wachstum"-Trade unter den kalifornischen Versorgern. Southern California Edison (SCE) sieht sich seit dem Eaton-Fire (Januar 2025 in Altadena) erheblichen Haftungsansprüchen ausgesetzt — das strukturelle Grundproblem kalifornischer Stromversorger, deren Freileitungen in Trockenperioden Waldbrände auslösen können. Kaliforniens AB-1054-Wildfire-Fonds soll Versorger vor existenzbedrohenden Haftungssummen schützen, deckt aber nicht jedes Szenario ab. Der Markt preist dieses Risiko mit einem Forward-KGV von nur 11,92x — deutlich unter dem breiten US-Versorger-Durchschnitt (15–20x) und nahe dem ebenfalls wildfire-exponierten PCG (9,61x). Die Trailing-Forward-EPS-Diskrepanz (Trailing $9,20 vs. Forward $6,51) ist auffällig und deutet auf einen Einmaleffekt im Trailing-Ergebnis hin (z.B. regulatorische Kostenerstattung oder Versicherungserlös) — nicht als nachhaltiges Ertragsniveau zu interpretieren. Die eigentliche Investment-Frage: Ist die Wildfire-Haftung durch den AB-1054-Fonds und die Grid-Hardening-Investitionen ausreichend eingedämmt, oder bleibt SCE strukturell dem gleichen Katastrophenrisiko ausgesetzt wie PCG vor seiner Insolvenz 2019?
 
 ## 2. GESCHÄFTSMODELL
 
-- Regulierter Stromversorger für Südkalifornien (Southern California Edison) — Erlöse primär über CPUC-genehmigte Ratenbasis
-- Grid-Hardening-Investitionsprogramm (Wildfire-Prävention: Verkabelung, Vegetation-Management) treibt Rate-Base-Wachstum, aber aktuell negativen FCF
-- Kalifornisches Wildfire-Fund (AB 1054) reduziert Haftungsexposure teilweise, ersetzt aber nicht das strukturelle Grundrisiko
-- Hohe strukturelle Verschuldung (D/E 226,1 %) ist sektortypisch für kapitalintensive Versorger, hier aber überdurchschnittlich hoch
-- Regulatorische Rate-Case-Zyklen bestimmen die mittelfristige Ertragsvisibilität — Genehmigungsverzögerungen sind ein wiederkehrendes Risiko
-- Gross Margin 58,68 % — typisch hoch für ein reguliertes Versorgungsunternehmen
-- Klimawandel-getriebene Wildfire-Häufigkeit ist ein strukturell zunehmendes, nicht zyklisches Risiko
-- Revenue TTM $19,61 Mrd., Wachstum +7,7 % YoY — solide für einen regulierten Versorger, Rate-Base-getrieben
+- Regulierter Stromversorger für Südkalifornien (SCE) — Rate-Base-Wachstum durch von der CPUC genehmigte Kapitalinvestitionen als Kernertragstreiber
+- Grid-Hardening-Capex (Untergrundverkabelung, Vegetationsmanagement, Wetterstationen) als regulatorisch anerkannte Investitionsbasis, aber auch Eingeständnis des strukturellen Wildfire-Risikos
+- AB-1054-Wildfire-Fonds als staatlicher Haftungspuffer — zentraler regulatorischer Schutzmechanismus, dessen Ausreichung im Ernstfall nicht garantiert ist
+- Negativer Free Cashflow (-$1,13 Mrd.) strukturell typisch für kapitalintensive Versorger im Capex-Hochlauf — Fremdfinanzierung zentral für das Geschäftsmodell
+- D/E 226 % — für regulierte Versorger üblich hoch, aber bei zusätzlichem Haftungsdruck ein Belastungsfaktor für die Kreditwürdigkeit
+- Dividendenrendite 4,52 % als Kernattraktivität für Einkommens-orientierte Investoren — Nachhaltigkeit hängt an der Litigation-Entwicklung
+- Revenue-Wachstum 7,7 % YoY überdurchschnittlich für einen reifen Versorger — reflektiert Rate-Base-Erhöhungen und Nachfragewachstum (Elektrifizierung, Rechenzentren)
+- Regulatorische Abhängigkeit von der California Public Utilities Commission (CPUC) für Tarifgenehmigungen — politischer Prozess mit Timing-Risiko
 
 ## 3. BULL CASE
 
-Wildfire-Haftungsüberhang klärt sich weiter (günstige Regulierung, Fortschritte bei anhängigen Klagen/Subrogationsforderungen), Rate-Case-Entscheide fallen günstig aus, Capex konvertiert effizient in Rate-Base-Ertrag. Annahme (kein Konsens): FY27-EPS ~$7,80 (+20 % ggü. Forward-EPS $6,51) × 15x (Re-Rating Richtung AEP/DUK-Niveau bei verbessertem Risikoprofil) = $117. Bull-Kursziel: $105–$130 (Midpoint $117,5). Eintrittswahrscheinlichkeit: 20 %.
+Wildfire-Haftung aus dem Eaton-Fire wird überwiegend vom AB-1054-Fonds absorbiert, Rechtsstreitigkeiten werden ohne materielle Zusatzbelastung beigelegt, Grid-Hardening-Investitionen liefern weiterhin genehmigtes Rate-Base-Wachstum. Peers: PCG (9,61x, gleiches Wildfire-Profil) und breiterer Versorger-Durchschnitt (SRE 16,66x, DUK 17,44x, AEP 19,26x) als Bandbreite. Annahme (kein Konsens): FY-EPS ~$7,50 × 15,0x (Rerating Richtung SRE-Niveau bei entfernter Haftungsprämie, aber unterhalb der Top-Peers) = $112,50. Bull-Kursziel: $105–$120 (Midpoint $112,50). Eintrittswahrscheinlichkeit: 20 %.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Stetiges Rate-Base-Wachstum aus dem Grid-Hardening-Programm, Wildfire-Risiko bleibt gemanagt, aber ungelöst. Annahme (kein Konsens): FY27-EPS ~$6,90 (+6 % ggü. Forward-EPS) × 12x (nahe aktuellem Multiple 11,71x) = $82,8. Base-Kursziel: $75–$92 (Midpoint $83,5). Eintrittswahrscheinlichkeit: 45 %.
+Wahrscheinlichstes Szenario: Litigation-Kosten bleiben handhabbar, aber der regulatorische Überhang besteht fort; Rate-Base wächst planmäßig über Grid-Hardening-Capex, Bewertung bleibt nahe aktuellem Discount zum breiten Sektor. Annahme (kein Konsens): FY-EPS ~$6,80 × 12,0x (nahe eigenem aktuellen Forward-Multiple) = $81,60. Base-Kursziel: $75–$90 (Midpoint $82,50). Eintrittswahrscheinlichkeit: 50 %.
 
 ## 5. BEAR CASE
 
-Auslöser: Ein neues Wildfire-Ereignis löst frische Haftungsexposition aus — ein strukturelles, wiederkehrendes kalifornisches Risiko. Kundenkonzentration: nicht anwendbar, breite Wohn-/Gewerbekundenbasis. Geopolitik: nicht relevant, reines kalifornisches Geschäft. Lieferketten/Foundry: kein klassisches Fertigungsrisiko; Abhängigkeit von Grid-Hardening-Ausrüstung (Transformatoren, Kabel) real, nicht quantifizierbar. Verwässerung: bei negativem FCF und D/E 226,1 % besteht reales Kapitalerhöhungsrisiko — Aktienzahl-Trend nicht im Datensatz verfügbar. Regulierung: kalifornisches Wildfire-Haftungsrecht (AB 1054 Fund) und CPUC-Ratenentscheide sind der zentrale, real existierende und nicht vollständig quantifizierbare Risikofaktor — dies ist der Haupttreiber dieses Bear Case. Annahme (kein Konsens): FY27-EPS ~$4,50 (-31 % ggü. Forward-EPS) × 9x (De-Rating Richtung PCG-Krisenniveau) = $40,5. Bear-Kursziel: $32–$48 (Midpoint $40). Eintrittswahrscheinlichkeit: 35 %.
+Auslöser: Eaton-Fire-Haftungsansprüche übersteigen die AB-1054-Fondsdeckung deutlich, zusätzliche Eigenkapitalaufnahme zur Deckung von Vergleichszahlungen wird nötig, Ratingagenturen reagieren mit Herabstufungen angesichts des bereits hohen D/E von 226 %. Kundenkonzentration: nicht relevant (breite Endkundenbasis), aber regulatorische Konzentration auf eine einzige Aufsichtsbehörde (CPUC) ist ein analoges Risiko. Geopolitik: nicht relevant. Lieferketten: Grid-Hardening-Material (Kabel, Trafos) unterliegt allgemeinem Lieferkettenrisiko, kein Single-Source-Fall bekannt. Verwässerung: Bei eskalierender Haftung ist eine Kapitalerhöhung ein reales Szenario (wie bei PCG 2019 vor der Insolvenz) — konkretes Ausmaß auf Datenbasis nicht quantifizierbar. Regulierung/Rechtsrisiko: das materiellste Einzelrisiko der These — Ausgang der Eaton-Fire-Verfahren ist die Kernvariable. Annahme: FY-EPS ~$4,50 × 9,0x (PCG-Niveau unter Stress) = $40,50. Bear-Kursziel: $35–$50 (Midpoint $42,50). Eintrittswahrscheinlichkeit: 30 %.
 
-**Summe: 20 % + 45 % + 35 % = 100 %**
+**Summe: 20 % + 50 % + 30 % = 100 %**
 
-**Erwartungswert:** EV = 0,20 × $117,5 + 0,45 × $83,5 + 0,35 × $40 = $23,50 + $37,58 + $14,00 = **~$75,08 — implizites Downside vs. aktuellem Kurs ($76,23): −1,5 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $112,50 + 0,50 × $82,50 + 0,30 × $42,50 = $22,50 + $41,25 + $12,75 = **~$77 — implizites Downside vs. aktuellem Kurs ($77,63): −0,8 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 18,86 % ist solide für einen regulierten Versorger. Die Verschuldung (D/E 226,1 %) liegt jedoch am oberen Ende selbst für einen kapitalintensiven Sektor — höher als AEP, DUK oder SRE im Peer-Vergleich. FCF ist mit -$1,13 Mrd. negativ (Grid-Hardening-Capex). Der Burggraben (regionales Versorgungsmonopol) ist strukturell stark, wird aber durch das strukturelle Wildfire-Haftungsrisiko konterkariert — ein Risiko, das über die reine Zyklizität hinausgeht und die Bilanzqualität real belastet.
+ROE 18,86 % ist für einen regulierten Versorger überdurchschnittlich, aber teilweise durch den erwähnten Trailing-Einmaleffekt verzerrt — ROIC 10,02 % ist die belastbarere Kennzahl und liegt im für regulierte Versorger typischen Bereich. Negativer Free Cashflow (-$1,13 Mrd.) ist im Kontext des Grid-Hardening-Investitionszyklus zu bewerten, nicht als operative Schwäche. Bilanzqualität ist der kritischste Punkt: D/E 226 % lässt bei eskalierender Litigation wenig Puffer. Der eigentliche "Burggraben" ist das regulierte Gebietsmonopol — real, aber durch das Wildfire-Haftungsrisiko strukturell überlagert.
 
 ## 7. BEWERTUNG
 
-Forward-PE 11,71x liegt unter AEP (19,63x), DUK (17,58x) und SRE (16,93x), aber über PCG (9,62x) — dem nächsten Vergleichswert, da beide kalifornische Versorger mit Wildfire-Historie sind. Die Prämie ggü. PCG (das eine Insolvenz durchlaufen hat) und der Abschlag ggü. AEP/DUK/SRE (Versorger ohne vergleichbares Wildfire-Risiko) sind strukturell konsistent erklärbar. Rückrechnung "Was preist der Kurs ein?": Bei $76,23 und Forward-EPS $6,51 (11,71x) preist der Markt ein moderates, aber nicht risikofreies Rate-Base-Wachstum ein — plausibel, sofern kein neues Wildfire-Ereignis eintritt. Analyst-Konsensziel $75,18 (14 Analysten) — praktisch identisch mit dem Kurs, als Orientierungspunkt zu verstehen.
+Forward-PE 11,92x liegt deutlich unter dem breiten Versorger-Peer-Feld (SRE 16,66x, DUK 17,44x, AEP 19,26x, NEE 20,17x) und nahe dem einzigen wirklich vergleichbaren Peer PCG (9,61x) — beide kalifornische, wildfire-exponierte Versorger. Diese Prämie/dieser Abschlag ist strukturell klar erklärbar: die Wildfire-Haftungsunsicherheit rechtfertigt einen Bewertungsabschlag gegenüber Versorgern ohne dieses Risiko. Rückrechnung "Was preist der Kurs ein?": Bei $77,63 und Forward-EPS $6,51 impliziert der Markt weder eine vollständige Entwarnung bei der Litigation noch ein Katastrophenszenario — eine mittlere, unsichere Risikoeinpreisung, die angesichts der ungeklärten Haftungslage plausibel erscheint. Buchwert-Bewertung (KBV 1,73x) liegt im normalen Bereich für regulierte Versorger und stützt die Einschätzung, dass der Markt kein Insolvenzrisiko à la PCG 2019 einpreist.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float / Positionierungsdaten nicht im Datensatz verfügbar. RS-Score 31,31, Rang 37/337 — solides, stabiles Momentum (Hypothese, nicht datenbasiert: defensive Rotation in regulierte Versorger). Enttäuschungsrisiko: strukturell hoch, da ein einzelnes Wildfire-Ereignis (saisonal wiederkehrendes Tail-Risiko) den Kurs abrupt neu bewerten kann, unabhängig vom fundamentalen Trend.
+RS-Score 60,65, Rang 30 im S&P 500 — solides, aber nicht überhitztes Momentum. Analystenkonsens "Hold", Kursziel $75,96 nahezu deckungsgleich mit dem aktuellen Kurs ($77,63) — die Coverage sieht aktuell weder deutliches Upside noch Downside. Hypothese, nicht datenbasiert: Institutionelle Positionierung dürfte gemischt sein zwischen Dividenden-/Value-Investoren, die den Discount als Kaufgelegenheit werten, und Risikoaversen, die das Litigation-Tail-Risiko meiden. Enttäuschungsrisiko konzentriert sich auf Gerichtsentscheidungen und CPUC-Tarifentscheidungen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Fenster: 5T +0,15 %, 10T +0,86 %, 20T +4,25 %, 50T +6,37 %, 6M +19,68 % — stetiger, wenig volatiler Aufwärtstrend. GWS-Ampel: Weekly ✗ · Daily ✗ · 4H ✗ — kein aktives Signal. Das Momentum wirkt fundamental gestützt (Rate-Base-Wachstumsstory), nicht rein reaktiv. Warnsignal: jede Nachricht zu einem neuen kalifornischen Wildfire-Ereignis wäre ein sofortiges, nicht-technisches Warnsignal unabhängig vom Chartbild.
+Kurs $77,63 nahe 52-Wochen-Hoch ($79,88), deutlich über dem Tief ($50,86). Momentum: 5T +3,45 %, 10T +8,28 %, 20T +7,67 %, 50T +14,08 %, 6M +27,17 % — breit positiv über alle Zeitfenster, ohne Anzeichen von Übertreibung wie bei BBY. Kein GWS-Signal aktiv (Weekly/Daily/4H inaktiv) — Momentum wirkt fundamental getragen durch die Rate-Base-Wachstumsstory, nicht spekulativ. Nächster Katalysator: Q2-Earnings-Call am 30. Juli 2026. Warnsignal: Neue negative Gerichtsentscheidung zum Eaton-Fire-Verfahren oder Rückfall unter $70 als erstes technisches Warnsignal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($100–$140):** Wildfire-Risiko wird strukturell de-risked (Versicherungs-/Fund-Mechanismen greifen zuverlässig), Rate-Base wächst im hohen einstelligen Bereich. EPS $8–10 × 12–14x.
+**Bull ($100–$140):** Wildfire-Haftung wird strukturell gelöst (Fondsreform, erfolgreiche Vergleiche), Rate-Base wächst über Jahre durch Elektrifizierungs- und Rechenzentrums-Nachfrage, Re-Rating auf breites Versorger-Niveau (16–19x).
 
-**Base ($70–$100):** Stetiges reguliertes Rate-Base-Wachstum, Wildfire-Risiko bleibt gemanagt, aber ungelöst. EPS $6,5–8 × 10–12x.
+**Base ($65–$100):** Litigation bleibt ein laufender, aber handhabbarer Kostenfaktor; Rate-Base-Wachstum kompensiert die Bewertungsprämie für das Restrisiko.
 
-**Bear ($25–$45):** Neues schweres Wildfire-Ereignis löst Kreditherabstufung und potenzielle Kapitalerhöhung aus — PG&E-artiges Krisenszenario. EPS $3–4,5 × 6–8x.
+**Bear ($20–$45):** Eskalierende Haftung erzwingt Kapitalerhöhung oder Rating-Herabstufung, strukturelle Wiederholung des PCG-2019-Musters.
 
-Entscheidende Variable: Ob Kaliforniens Wildfire-Haftungsmechanismen (AB 1054 Fund) im nächsten Extremwetterereignis tatsächlich ausreichenden Schutz bieten.
+Entscheidende Variable: Ausgang und finanzielle Deckung der Eaton-Fire-Haftungsverfahren über den AB-1054-Fonds.
 
 ## 11. PROFI-FAZIT
 
-EIX ist ein struktureller Sondersituations-Versorger mit realem Tail-Risiko, kein klassischer defensiver Utility-Compounder — die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −1,5 %). Die hohe Verschuldung (D/E 226 %) in Kombination mit negativem FCF und dem strukturellen Wildfire-Risiko überwiegt aus fundamentaler Sicht das technische Setup. Nur für Investoren mit expliziter Toleranz für binäres Katastrophenrisiko geeignet — Positionsgröße entsprechend klein halten. **American Electric Power (AEP)** und **Duke Energy (DUK)** sind die risikoärmeren, aber teureren Alternativen (17,6–19,6x) ohne vergleichbares Wildfire-Exposure; **PG&E (PCG)** ist der günstigere, aber risikoreichere kalifornische Vergleichswert (9,6x).
+EIX ist ein Dividenden-/Value-Titel mit einem klar identifizierbaren, aber nicht quantifizierbar abgeschlossenen Rechtsrisiko. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −0,8 %) — der Markt preist den Discount fair gegen das Litigation-Risiko. Geeignet für Dividenden-Investoren, die das Wildfire-Tail-Risiko bewusst tragen wollen; nicht geeignet für konservative Einkommensmandate mit geringer Risikotoleranz für Rechtsstreitigkeiten. Positionsgröße moderat halten, da eine negative Gerichtsentscheidung kurzfristig zweistellige Kursverluste auslösen kann. Peer-Vergleich: **PCG** (9,61x) ist noch günstiger bei vergleichbarem Wildfire-Risiko — die reinere, aber auch riskantere Wette auf eine California-Wildfire-Entspannung; **SRE** (16,66x) bietet ähnliche geografische Exposition mit geringerem SCE-spezifischem Litigation-Risiko, aber höherer Bewertung.
 
-- Qualität: 2/5
+- Qualität: 3/5
 - Wachstum: 3/5
 - Bewertung: 3/5
 - Katalysator: 2/5
 
-**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — D/E 226 % und strukturelles kalifornisches Wildfire-Haftungsrisiko bei negativem FCF überwiegen das technische Setup trotz stabilem RS-Trend.
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — D/E 226 % lässt bei eskalierender Eaton-Fire-Haftung wenig Puffer, das ungeklärte Litigation-Ausmaß rechtfertigt nur die halbe Positionsgröße.
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
+| Qualität | 3/5 |
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
 | Katalysator | 2/5 |
-| EV-Upside | +5.4% |
+| EV-Upside | +2.0% |
 
-**Verdict: WATCH (50/100)**
+**Verdict: WATCH (54/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

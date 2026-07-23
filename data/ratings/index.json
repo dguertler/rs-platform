@@ -752,14 +752,6 @@
       "ev_upside_pct": 1.5
     },
     {
-      "ticker": "AIR.DE",
-      "verdict": "WATCH",
-      "score": 40,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.905267",
-      "ev_upside_pct": -17.8
-    },
-    {
       "ticker": "CNC",
       "verdict": "WATCH",
       "score": 44,
@@ -1091,32 +1083,6 @@
       "ev_upside_pct": -5.2
     },
     {
-      "ticker": "BBY",
-      "verdict": "WATCH",
-      "score": 42,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Katalysator fehlt",
-        "reason": "Die Rallye der letzten 50 Tage ist nicht durch fundamentales Wachstum gedeckt; das Kerngesch\u00e4ft stagniert bei nur 1,9 % Umsatzwachstum."
-      },
-      "created_at": "2026-07-10T10:13:06.163932",
-      "ev_upside_pct": -5.7
-    },
-    {
-      "ticker": "CSX",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Die Bewertung nahe dem Allzeithoch impliziert bereits einen M&A-/Erholungs-Katalysator, der auf Standalone-Basis fundamental nicht gedeckt ist."
-      },
-      "created_at": "2026-07-10T10:14:35.276514",
-      "ev_upside_pct": -6.7
-    },
-    {
       "ticker": "EXPD",
       "verdict": "WATCH",
       "score": 45,
@@ -1141,19 +1107,6 @@
       },
       "created_at": "2026-07-10T10:16:10.392370",
       "ev_upside_pct": -6.2
-    },
-    {
-      "ticker": "JPM",
-      "verdict": "HOLD",
-      "score": 61,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Hohe fundamentale Qualit\u00e4t und moderate Bewertung st\u00fctzen die volle Positionsgr\u00f6\u00dfe als defensiven Kernwert."
-      },
-      "created_at": "2026-07-10T10:16:56.525661",
-      "ev_upside_pct": -4.4
     },
     {
       "ticker": "AES",
@@ -1273,19 +1226,6 @@
       "created_at": "2026-07-15T12:06:40.200514"
     },
     {
-      "ticker": "EIX",
-      "verdict": "WATCH",
-      "score": 50,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 5.4,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bilanz",
-        "reason": "D/E 226 % und strukturelles kalifornisches Wildfire-Haftungsrisiko bei negativem FCF \u00fcberwiegen das technische Setup trotz stabilem RS-Trend."
-      },
-      "created_at": "2026-07-15T12:06:40.493091"
-    },
-    {
       "ticker": "EQR",
       "verdict": "WATCH",
       "score": 45,
@@ -1323,19 +1263,6 @@
         "reason": "Technisches Setup (3/3 GWS-Punkte) intakt, aber EV-Edge von nur +2,5% rechtfertigt keine erh\u00f6hte Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-16T10:30:27.320249"
-    },
-    {
-      "ticker": "MRK",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -0.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Kundenkonzentration",
-        "reason": "Keytruda-Abh\u00e4ngigkeit (>45% Umsatz) und 2028er-Patentklippe rechtfertigen nur halbe Positionsgr\u00f6\u00dfe trotz technischem Signal."
-      },
-      "created_at": "2026-07-16T10:31:57.947167"
     },
     {
       "ticker": "DBK.DE",
@@ -1661,6 +1588,149 @@
         "reason": "Die Bewertung ist attraktiv, aber das ungel\u00f6ste FTC-Kartellverfahren und der unverifizierte Preis-Gap zum Snapshot rechtfertigen keine volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-22T06:27:17.446928"
+    },
+    {
+      "ticker": "MRK",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Kein GWS-Signal aktiv und EV nahe null, das technische Setup liefert aktuell keinen best\u00e4tigten Trigger f\u00fcr volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-23T06:56:43.846103"
+    },
+    {
+      "ticker": "BBY",
+      "verdict": "WATCH",
+      "score": 46,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Kurs bereits +52 % \u00fcber 50 Tage gelaufen, Analystenkonsens-Kursziel liegt unter dem aktuellen Kurs und der EV zeigt kein Upside."
+      },
+      "created_at": "2026-07-23T06:58:30.834482"
+    },
+    {
+      "ticker": "EIX",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E 226 % l\u00e4sst bei eskalierender Eaton-Fire-Haftung wenig Puffer, das ungekl\u00e4rte Litigation-Ausma\u00df rechtfertigt nur die halbe Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-23T07:00:10.469259"
+    },
+    {
+      "ticker": "PCAR",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Kurs preist bereits eine Zyklus-Erholung ein, w\u00e4hrend der EV auf dem aktuellen Niveau ein Downside von -9,3 % zeigt."
+      },
+      "created_at": "2026-07-23T07:01:29.928607"
+    },
+    {
+      "ticker": "AIR.DE",
+      "verdict": "AVOID",
+      "score": 36,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -18.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV liegt \u00fcber dem Trailing-KGV und der EV zeigt -20,5 % Downside, das aktuelle Kursniveau nimmt eine Margenerholung vorweg, die operativ noch nicht best\u00e4tigt ist."
+      },
+      "created_at": "2026-07-23T07:03:16.468658"
+    },
+    {
+      "ticker": "CSX",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Q2-Earnings-Beat mit Margenexpansion best\u00e4tigt die fundamentale These, kein Risikofaktor \u00fcberwiegt aktuell das intakte Setup."
+      },
+      "created_at": "2026-07-23T07:05:05.454399"
+    },
+    {
+      "ticker": "PCG",
+      "verdict": "HOLD",
+      "score": 59,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 14.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E 187,9 % und stark negativer Free Cashflow bei noch laufendem Q2-Bericht ohne verifizierte Zahlen rechtfertigen nur die halbe Positionsgr\u00f6\u00dfe bis zur Best\u00e4tigung."
+      },
+      "created_at": "2026-07-23T07:06:41.399814"
+    },
+    {
+      "ticker": "JPM",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.0,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "H\u00f6chste Qualit\u00e4tsbewertung im Sektor bei intaktem technischem Setup, kein einzelner Risikofaktor \u00fcberwiegt aktuell trotz anspruchsvoller Bewertung."
+      },
+      "created_at": "2026-07-23T07:08:00.515042"
+    },
+    {
+      "ticker": "PNC",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.4,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes Q2-Momentum und neutrale Peer-Bewertung, kein einzelner fundamentaler Risikofaktor \u00fcberwiegt aktuell das intakte Setup."
+      },
+      "created_at": "2026-07-23T07:09:09.430670"
+    },
+    {
+      "ticker": "GS",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Kurs preist einen zyklischen Ertrags-Peak, der EV zeigt -10,8 % Downside und der Analystenkonsens bleibt trotz Q2-Beat bei Hold."
+      },
+      "created_at": "2026-07-23T07:10:26.201403"
+    },
+    {
+      "ticker": "EQT",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV liegt deutlich \u00fcber den direkten Appalachia-Gas-Peers und der EV zeigt trotz Guidance-Anhebung -5,5 % Downside nach dem EPS-Miss."
+      },
+      "created_at": "2026-07-23T07:12:02.845881"
     }
   ]
 }

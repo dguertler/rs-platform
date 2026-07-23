@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PCG — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">23.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>PCG</h1>
+      <h2>Pacific Gas & Electric Co.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Utilities</span></div>
+        <div class="mi">Industrie: <span>Utilities - Regulated Electric</span></div>
+        <div class="mi">MCap: <span>$38B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">59</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 23.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">35.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$17.32</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$25.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">39.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">115.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">8.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+14.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">24–30</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–22</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$13</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $24–$30 (25 %) · Base $17–$22 (50 %) · Bear $7–$13 (25 %) · EV ~$19</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: PG&E berichtet Q2-2026-Zahlen heute (23.07.2026) vor Marktöffnung. Da yfinance/Yahoo Finance in dieser Umgebung netzwerkseitig blockiert ist und die Ergebnisse zum Zeitpunkt der Recherche noch nicht im Web indexiert waren, basiert diese Analyse auf dem Fundamentaldaten-Cache (Stand 20.07.2026) sowie dem Analystenkonsens (EPS $0,36, Umsatz ~$6,20 Mrd. für Q2) — die tatsächlichen Zahlen sind zum Zeitpunkt dieser Analyse nicht verifizierbar und sollten vor einer Positionsentscheidung geprüft werden. PG&E ist der Post-Insolvenz-Turnaround-Fall unter den kalifornischen Versorgern: Nach dem Chapter-11-Verfahren 2019/2020 infolge der Camp-Fire-/Tubbs-Fire-Haftung investiert das Unternehmen massiv in ein mehrjähriges Undergrounding-Programm (Verkabelung unter die Erde) zur strukturellen Wildfire-Risikominderung. Der Markt bewertet PG&E mit einem Forward-KGV von nur 9,61x — sogar unter dem ebenfalls wildfire-exponierten EIX (11,92x) — während der Analystenkonsens mit einem Kursziel von $22,84 ein Upside von +32 % gegenüber dem aktuellen Kurs signalisiert. Die zentrale Frage: Ist das Undergrounding-Programm ausreichend, um das Wiederholungsrisiko einer Insolvenz-auslösenden Katastrophe strukturell zu bannen, oder bleibt PG&E dauerhaft ein "ein-Ereignis-von-der-Krise-entfernt"-Titel?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Regulierter Strom-/Gasversorger für Nordkalifornien — Rate-Base-Wachstum durch CPUC-genehmigte Infrastrukturinvestitionen als Kernertragstreiber</li>
+<li>Undergrounding-Programm (Verkabelung unter die Erde) als eines der größten Infrastrukturprogramme im US-Versorgersektor — strukturelle Risikominderung, aber enorme Kapitalbindung</li>
+<li>AB-1054-Wildfire-Fonds als regulatorischer Haftungspuffer, analog zu EIX — Ausreichung im Extremfall nicht garantiert</li>
+<li>Extrem negativer Free Cashflow (-$5,57 Mrd.) reflektiert den laufenden Undergrounding-Investitionszyklus, nicht operative Schwäche</li>
+<li>Post-Insolvenz-Kapitalstruktur mit staatlich mitgestalteten Auflagen zur Sicherheits-/Compliance-Überwachung</li>
+<li>Revenue-Wachstum von 15 % YoY überdurchschnittlich stark für einen reifen Versorger — reflektiert Rate-Base-Erhöhungen aus dem Investitionsprogramm</li>
+<li>D/E 187,9 % ist hoch, aber angesichts des Post-Insolvenz-Deleveraging-Ziels im Rahmen regulatorischer Erwartungen</li>
+<li>Dividendenrendite nur 1,15 % — Kapitalallokation vollständig auf Bilanzreparatur und Infrastrukturinvestition fokussiert, kaum auf Ausschüttung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Das Undergrounding-Programm de-risikiert die Wildfire-Haftung strukturell und nachweisbar, Ratingagenturen reagieren mit Hochstufungen, Rate-Base-Wachstum setzt sich fort und rechtfertigt eine Neubewertung Richtung EIX-Niveau. Peers: EIX (kalifornischer Wildfire-Peer, 11,92x) als nächstliegende Referenz, SRE (16,66x) und breiterer Versorger-Durchschnitt (DUK 17,44x, SO 19,39x) als obere Bandbreite. Annahme (kein Konsens): FY-EPS ~$2,10 × 13,0x (Rerating über EIX-Niveau bei erfolgreicher De-Risking-Story) = $27,30. Bull-Kursziel: $24–$30 (Midpoint $27). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Der Turnaround setzt sich graduell fort, das Undergrounding-Programm verläuft planmäßig, aber der Wildfire-Risikoabschlag bleibt strukturell bestehen. Annahme (kein Konsens): FY-EPS ~$1,85 × 10,5x (leicht über eigenem aktuellen Forward-Multiple) = $19,43. Base-Kursziel: $17–$22 (Midpoint $19,50). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Ein neues Wildfire-Ereignis wird trotz Undergrounding-Maßnahmen mit PG&E-Infrastruktur in Verbindung gebracht, was das 2019er-Krisenmuster (Rechtsstreitigkeiten, Rating-Druck, potenzielle erneute Insolvenzdiskussion) wieder aufleben lässt. Kundenkonzentration: breite Endkundenbasis, aber regulatorische Konzentration auf eine einzige Aufsichtsbehörde (CPUC) als analoges Konzentrationsrisiko. Geopolitik: nicht relevant. Lieferketten: Undergrounding-Material (Kabel, Tiefbau-Kapazitäten) unterliegt allgemeinem Lieferkettenrisiko, kein bekanntes Single-Source-Problem. Verwässerung: Nach der Post-Insolvenz-Restrukturierung 2020 mit signifikanter Aktienausgabe ist weitere Verwässerung bei erneuter Kapitalnot ein reales Risiko — quantitatives Ausmaß auf Datenbasis nicht bezifferbar. Regulierung/Rechtsrisiko: das materiellste Einzelrisiko — ein erneuter Wildfire-Vorfall wäre für die Bewertung der These fatal. Annahme: FY-EPS ~$1,20 × 8,0x (weitere Kompression unter aktuellem Niveau bei Krisen-Wiederholung) = $9,60. Bear-Kursziel: $7–$13 (Midpoint $10). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 25 % + 50 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $27 + 0,50 × $19,50 + 0,25 × $10 = $6,75 + $9,75 + $2,50 = **~$19 — implizites Upside vs. aktuellem Kurs ($17,32): +9,7 %.** Der EV liegt unter der 20-%-Schwelle für einen klaren asymmetrischen Edge — moderat konstruktiv, aber kein High-Conviction-Signal.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 8,83 %, ROIC 4,62 % — für einen regulierten Versorger unterdurchschnittlich, reflektiert die Post-Insolvenz-Kapitalstruktur und laufende Deleveraging-Phase. Der stark negative Free Cashflow (-$5,57 Mrd.) ist im Kontext des Undergrounding-Investitionszyklus zu bewerten, nicht als operative Schwäche — muss aber weiterhin über Fremd-/Eigenkapitalaufnahme finanziert werden, was Verwässerungs-/Zinsrisiko erzeugt. Bilanzqualität ist der kritischste Punkt: D/E 187,9 % bei gleichzeitig hoher Kapitalbindung lässt wenig Spielraum für weitere Schocks. KBV nur 1,20x zeigt, dass der Markt trotz Turnaround-Fortschritt weiterhin einen deutlichen Risikoabschlag zum Buchwert einpreist.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 9,61x liegt UNTER dem bereits wildfire-diskontierten EIX (11,92x) und deutlich unter dem breiten Versorger-Durchschnitt (SRE 16,66x, DUK 17,44x, SO 19,39x) — der größte Bewertungsabschlag im gesamten Utility-Vergleichsfeld dieser Analyse. Dieser Abschlag ist strukturell durch die Post-Insolvenz-Historie und das anhaltende Wildfire-Risiko erklärbar. Rückrechnung "Was preist der Kurs ein?": Bei $17,32 und Forward-EPS $1,80 impliziert der Markt eine sehr konservative Fortschreibung ohne nennenswerte Neubewertung des Turnarounds — angesichts des Analystenkonsens-Kursziels von $22,84 (+32 % Upside) erscheint diese Einpreisung eher pessimistisch als der breitere Analystenkonsens. Analyst-Konsensziel $22,84 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein deutliches Signal, dass die Coverage den Turnaround optimistischer sieht als der aktuelle Kurs reflektiert.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 35,85, aber Rang nur 82 im S&P 500 — trotz moderat positiver Kursentwicklung (6M +11,01 %) relativ schwaches Ranking gegenüber stärkeren Sektorbewegungen anderswo im Index. Analystenkonsens "Buy" mit deutlichem Kurszielabstand (+32 %) — ungewöhnlich optimistisch für einen Titel mit noch laufender Post-Insolvenz-Reputationsbelastung. Hypothese, nicht datenbasiert: Institutionelle Positionierung dürfte weiterhin vorsichtig sein angesichts der Insolvenzhistorie, was den Abstand zwischen Analystenziel und Kurs erklären könnte (strukturelles Vertrauensdefizit trotz verbesserter Fundamentaldaten). Enttäuschungsrisiko: jede neue Wildfire-Meldung in Kalifornien während der Trockenperiode ist ein potenzieller Sofort-Auslöser für Kursverluste.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $17,32 im oberen Bereich der 52-Wochen-Spanne ($13,32–$19,16). Momentum: 5T +3,77 %, 10T +6,01 %, 20T +4,18 %, 50T +10,88 %, 6M +11,01 % — durchgehend positiv, aber moderat. Kein GWS-Signal aktiv (Weekly/Daily/4H inaktiv). Heutiger Q2-Bericht (23.07.2026) ist der unmittelbare Katalysator — Ergebnis und insbesondere Kommentare zum Undergrounding-Fortschritt und zur Wildfire-Saison 2026 werden entscheidend sein. Warnsignal: Jede Meldung zu einem neuen Brandereignis mit PG&E-Bezug wäre ein sofortiges technisches und fundamentales Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($25–$35):** Undergrounding-Programm gelingt vollständig, Wildfire-Risiko wird strukturell auf Branchen-Normalniveau reduziert, Rerating auf breites Versorger-Multiple.</p>
+<p>**Base ($15–$25):** Graduelle Verbesserung, Wildfire-Risikoabschlag bleibt aber dauerhaft Teil der Bewertung.</p>
+<p>**Bear ($5–$14):** Wiederholung des 2019er-Krisenmusters durch ein neues Großereignis, erneute Kapitalnot und Verwässerung.</p>
+<p>Entscheidende Variable: Nachweisbare Wirksamkeit des Undergrounding-Programms über mehrere aufeinanderfolgende Wildfire-Saisons ohne größere Vorfälle.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>PG&E ist ein spekulativer Turnaround-Titel mit deutlichem Bewertungsabschlag gegenüber der gesamten Versorger-Peer-Gruppe — der Analystenkonsens sieht mehr Upside (+32 %) als die eigenen, konservativer kalibrierten Szenarien (EV +9,7 %). Die eigenen Szenarien liegen unter der Schwelle für ein High-Conviction-Framing, aber das Chance-Risiko-Profil ist konstruktiver als bei EIX, da der Bewertungsabschlag bereits größer ist. Geeignet für risikofreudige Value-/Turnaround-Investoren, die das Wiederholungsrisiko eines Wildfire-Ereignisses bewusst tragen; ungeeignet für konservative Einkommensmandate (Dividendenrendite nur 1,15 %). Positionsgröße klein bis moderat halten und den heutigen Q2-Bericht als unmittelbaren Test beobachten — die tatsächlichen Zahlen sind zum Zeitpunkt dieser Analyse noch nicht verifiziert. Peer-Vergleich: **EIX** (11,92x) ist der nächstliegende Vergleichswert mit ähnlichem Wildfire-Risiko, aber ohne Insolvenzhistorie — die "sicherere" Variante derselben These; PG&E bietet dafür den größeren Bewertungsabschlag und damit potenziell mehr Rerating-Spielraum bei erfolgreichem Turnaround.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — D/E 187,9 % und stark negativer Free Cashflow bei noch laufendem Q2-Bericht ohne verifizierte Zahlen rechtfertigen nur die halbe Positionsgröße bis zur Bestätigung.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
