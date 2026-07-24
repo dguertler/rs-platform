@@ -115,11 +115,27 @@ def _fmp_fetch(endpoint: str) -> list | None:
         return None
 
 
+_WIKI_HEADERS = {
+    "User-Agent": "rs-platform/1.0 (+https://github.com/dguertler/rs-platform; "
+                  "index-ticker-fetch; contact via GitHub) python-requests"
+}
+
+
+def _fetch_wiki_html(url: str):
+    """Lädt eine Wikipedia-Seite mit User-Agent-Header (Wikipedia blockt
+    Requests ohne — oder mit generischem — User-Agent mit HTTP 403;
+    pd.read_html(url) setzt keinen, daher hier selbst laden und HTML
+    an pd.read_html() übergeben statt die URL direkt zu fetchen)."""
+    req = urllib.request.Request(url, headers=_WIKI_HEADERS)
+    with urllib.request.urlopen(req, timeout=15) as r:
+        return r.read()
+
+
 def _wikipedia_table(url: str, col_names: tuple, min_count: int,
                      transform=None) -> list | None:
     try:
         import pandas as pd
-        tables = pd.read_html(url)
+        tables = pd.read_html(_fetch_wiki_html(url))
         for t in tables:
             for col in t.columns:
                 if str(col).lower() in col_names:
@@ -197,7 +213,7 @@ def fetch_sp500(fallback: list) -> tuple[list | None, list]:
         try:
             import pandas as pd
             df = pd.read_html(
-                "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies"
+                _fetch_wiki_html("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
             )[0]
             ts = (df["Symbol"].dropna().astype(str).str.strip()
                   .str.replace(".", "-", regex=False).tolist())
@@ -245,7 +261,7 @@ def fetch_sp600(fallback: list) -> tuple[list, list]:
         try:
             import pandas as pd
             tables = pd.read_html(
-                "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies"
+                _fetch_wiki_html("https://en.wikipedia.org/wiki/List_of_S%26P_600_companies")
             )
             for t in tables:
                 for col in t.columns:
