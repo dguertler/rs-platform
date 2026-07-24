@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DGX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">24.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>DGX</h1>
+      <h2>Quest Diagnostics Incorporated</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Diagnostics & Research</span></div>
+        <div class="mi">MCap: <span>$23B</span></div>
+        <div class="mi">Signal: <span>Earnings-Überraschung</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">61</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 24.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">70.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$227.90</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">33.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">163.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">14.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-7.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">250–290</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">205–230</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–155</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 20.07.2026 liegt vor dem Earnings-Beat am 23.07.2026 — Kurs wurde auf den aktuellen Schlusskurs $227,90 aktualisiert, übrige Kennzahlen stammen noch aus dem Vor-Earnings-Snapshot, Konfidenz entsprechend reduziert. Quest Diagnostics ist kein zyklischer Trade, sondern ein struktureller Volumen-Compounder im US-Laborwesen — der Kern der aktuellen Story ist nicht ein einmaliger Beat, sondern die zweistellige Requisition-Volumenbeschleunigung (+13,1% Anforderungsvolumen, +13,0% organisch), die zeigt, dass die jahrelange M&A-Konsolidierungsstrategie (Zukauf von Krankenhaus-Laboren und regionalen Anbietern) jetzt sichtbar Marktanteil gewinnt. Q2 2026: Adjusted EPS $3,12 (+19,1% YoY), Konsens um 11% übertroffen; Umsatz $3,04 Mrd. (+10,2% YoY). Management hob die Jahresprognose an: Umsatz auf $11,95-12,05 Mrd., Adjusted EPS auf $11,05-11,25. Was der Markt noch nicht vollständig einpreist: die Bruttomarge kontrahierte trotz des Beats leicht (-40 Bp auf 33,7%) — das M&A-getriebene Volumenwachstum verwässert kurzfristig die Marge, bevor Skaleneffekte greifen. Das ist der zentrale Spannungspunkt der These.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Größter unabhängiger klinischer Laborbetreiber in den USA — Skalenvorteil bei Logistik (Probentransport) und Laborauslastung als Kernwaffe im Wettbewerb</li>
+<li>Umsatz primär aus Diagnostic Information Services (Routine- und Spezialtests), abhängig von Verordnungsvolumen niedergelassener Ärzte und Krankenhäuser</li>
+<li>Operativer Hebel: hohe Fixkosten in Laborinfrastruktur — steigendes Testvolumen verbessert die Marge überproportional, sinkendes Volumen belastet überproportional</li>
+<li>M&A-getriebenes Wachstum: laufender Zukauf von Krankenhaus-Outreach-Laboren und regionalen Wettbewerbern treibt Volumen, aber auch Integrationskosten und kurzfristigen Margendruck</li>
+<li>Strukturelle Abhängigkeit von Erstattungssätzen (Medicare/Medicaid PAMA-Preisregeln, Private-Payer-Verträge) — Preis pro Test ist politisch/regulatorisch beeinflussbar, nicht frei am Markt</li>
+<li>Spezialtest-Segment (Genomik, Autoimmun, Toxikologie) wächst schneller und margenstärker als Routine-Tests</li>
+<li>Dividendenausschüttung (1,63% Rendite, Cache-Stand) signalisiert reifes, cashflow-stabiles Geschäftsmodell mit begrenztem organischem Wachstumsspielraum</li>
+<li>Kapitalintensität moderat (kein Fab- oder Anlagenbau-Niveau), aber laufende IT-/Automatisierungsinvestitionen zur Effizienzsteigerung nötig</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: LabCorp (LH, Forward-PE 14,6x) und IQVIA (IQV, 14,6x) als direkte Diagnostik-/Life-Science-Services-Untergrenze, Thermo Fisher (TMO, 19,5x) und Danaher (DHR, 22,1x) als margenstärkere Life-Science-Tools-Obergrenze. Requisition-Volumenwachstum bleibt zweistellig, M&A-Integration verläuft schneller als geplant, Spezialtest-Mix verbessert die Marge zurück auf Vor-Verwässerungs-Niveau. Annahme (kein Konsens): FY27-EPS ~$12,20 (Wachstum ab der bereits angehobenen FY26-Guidance-Mitte $11,15) × 22x (Annäherung an DHR-Niveau bei bestätigter Margenverbesserung) = $268,40. Bull-Kursziel: $250–$290 (Midpoint $270). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Volumenwachstum normalisiert auf hohe einstellige Raten, Margendruck aus M&A-Integration bleibt vorübergehend. Annahme (kein Konsens): FY26-EPS ~$11,15 (Mitte der eigenen, bereits angehobenen Guidance) × 19,5x (nahe dem eigenen aktuellen Forward-Multiple von 19,5x auf $227,90 und nahe TMO-Niveau) = $217,50. Base-Kursziel: $205–$230 (Midpoint $217,50). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Erstattungskürzungen bei Medicare/Medicaid-Labortests (PAMA-Neuverhandlung) oder Nachlassen des Requisition-Volumenwachstums bei M&A-Integrationsproblemen. Kundenkonzentration: breite Verordnerbasis, aber hohe Abhängigkeit von wenigen großen Payer-Verträgen — auf Datenbasis nicht abschließend quantifizierbar. Geopolitik/Exportkontrollen: nicht relevant, reines US-Inlandsgeschäft. Lieferketten: Reagenzien-/Testkit-Lieferantenabhängigkeit vorhanden, aber diversifiziert — kein Single-Source-Risiko erkennbar. Verwässerung: kein auffälliger Trend aus dem Snapshot ablesbar. Regulierung: PAMA-Preisregeln und mögliche künftige Preistransparenz-Vorgaben sind das zentrale strukturelle Risiko des Geschäftsmodells. Annahme: FY27-EPS ~$9,50 (Erstattungsdruck, Integrationskosten) × 15x (Rückfall auf LH/IQV-Niveau bei Vertrauensverlust) = $142,50. Bear-Kursziel: $130–$155 (Midpoint $142,50). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $270 + 0,45 × $217,50 + 0,30 × $142,50 = $67,50 + $97,88 + $42,75 = **~$208,13 — implizites Downside vs. aktuellem Kurs ($227,90): −8,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 14,5% (Cache) solide, aber nicht herausragend für ein Geschäftsmodell mit diesem Skalenvorteil — reflektiert die goodwill-lastige Bilanz aus Jahren der M&A-Konsolidierung. Gross Margin 33,3% (Cache, Vor-Earnings) liegt strukturell unter reinen Life-Science-Tools-Anbietern wie DHR (59,0%) oder TMO (40,9%) — Laborservices sind margenstrukturell dünner als Instrumenten-/Reagenzienverkauf. Operating Margin 14,2% (Cache) im Rahmen für den Sektor. FCF $948 Mio. (Cache) auf $11,3 Mrd. Revenue TTM (~8,4% FCF-Marge) — moderat, konsistent mit laufenden Integrationsinvestitionen. Bilanzqualität: D/E 82,7% (Cache) moderat erhöht durch M&A-Fremdfinanzierung, kein Alarmsignal.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE auf aktuellem Kurs: $227,90 / $11,67 (Cache-Forward-EPS) = 19,5x — liegt am oberen Rand der reinen Diagnostik-Peers (LH/IQV je 14,6x) und nahe TMO (19,5x), unter DHR (22,1x). Was preist der aktuelle Kurs ein? Bei $227,90 und der bereits angehobenen FY26-Guidance-Mitte $11,15 preist der Markt eine Fortsetzung des zweistelligen Volumenwachstums bei stabiler bis leicht verbesserter Marge ein — ambitioniert angesichts der beobachteten Margenkontraktion im Berichtsquartal, aber nicht unrealistisch bei erfolgreicher M&A-Integration. Rückrechnung: Eine Multiple-Prämie gegenüber LH/IQV von rund 5 Punkten ist strukturell durch das höhere Volumenwachstum (+13,1% vs. LH +5,8% Umsatzwachstum) gerechtfertigt — die Diskrepanz zu DHR/TMO erklärt sich durch das margenschwächere Service- statt Tools-Geschäftsmodell.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 70,4 (Rang 113 im S&P 500) — überdurchschnittliche relative Stärke bereits vor dem Report (50T-Fenster +20,2%, 6M +19,0%), der Earnings-Beat bestätigt und verstärkt einen bereits laufenden Aufwärtstrend statt ihn neu auszulösen. Das deutet auf bereits aufgebautes institutionelles Interesse hin (Hypothese, nicht datenbasiert) — DGX ist damit weniger ein reiner Überraschungs-Pop als ein Katalysator innerhalb einer bestehenden Neubewertungsgeschichte im Diagnostik-Sektor. Enttäuschungsrisiko: eine Verlangsamung des Requisition-Volumenwachstums im nächsten Quartal würde die Bewertungsprämie gegenüber LH/IQV schnell in Frage stellen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 70,4, Rang 113/500. Fenster: 5T +8,84%, 10T +12,07%, 20T +10,26%, 50T +20,22%, 6M +19,01%. Die konsistent positive Fensterstruktur über alle Zeiträume (kein Ausreißer nur im 5T-Fenster) zeigt einen bereits etablierten, breiten Aufwärtstrend — Momentum ist damit fundamental gestützt und technisch bereits vor dem Report bestätigt gewesen. Technisches Warnsignal: Rückfall unter die 50-Tage-Trendlinie (~$205-210) wäre das erste Zeichen einer Trendabschwächung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($290–$340):** M&A-Konsolidierung treibt Marktanteilsgewinne strukturell weiter, Spezialtest-Mix (Genomik, Autoimmun) verbessert Marge dauerhaft über historisches Niveau. Normalisiertes EPS $14+ × 22x.</p>
+<p>**Base ($210–$260):** Stabiles hoch-einstelliges Volumenwachstum, Marge normalisiert nach Integrationsphase, Multiple hält Diagnostik-Peer-Prämie. Normalisiertes EPS $11,50-12,50 × 19-20x.</p>
+<p>**Bear ($130–$165):** Erstattungskürzungen (PAMA-Neuverhandlung), Volumenwachstum flacht ab, Multiple-Kompression auf LH/IQV-Niveau. Normalisiertes EPS $9-9,50 × 14-15x.</p>
+<p>Entscheidende Variable: Tempo und Erfolg der M&A-Integration sowie regulatorische Entwicklung der Labortest-Erstattungssätze.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>DGX ist ein struktureller Volumen-Compounder mit M&A-getriebenem Wachstumshebel — kein spekulatives Momentum-Play, sondern ein Geschäftsmodell, dessen Bewertungsprämie gegenüber LH/IQV durch nachweisbar höheres Volumenwachstum gedeckt ist. Der Q2-Beat bestätigt einen bereits laufenden Trend, die EV-Rechnung zeigt aber, dass auf aktuellem Niveau kein zusätzlicher Edge mehr vorhanden ist (EV −8,7%). Für Buy-and-Hold-Investoren mit Fokus auf defensives Gesundheitswesen-Wachstum und Dividende bleibt DGX geeignet, für kurzfristige Trades fehlt nach dem Sprung die Asymmetrie. Positionsgröße moderat, Nachkäufe eher auf Rücksetzer Richtung Base-Case-Untergrenze. **LabCorp (LH)** ist mit 14,6x Forward-PE das günstigere reine Instrument für die Labordiagnostik-These, bietet aber geringeres Volumenwachstum — DGX bleibt das relativ teurere, aber operativ stärkere der beiden Duopol-Unternehmen im US-Labormarkt.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Volumenwachstum und Guidance-Anhebung bestätigen die bereits laufende technische These und rechtfertigen die reguläre Funnel-Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

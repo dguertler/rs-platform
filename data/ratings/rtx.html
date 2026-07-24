@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RTX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">24.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>RTX</h1>
+      <h2>RTX Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Aerospace & Defense</span></div>
+        <div class="mi">MCap: <span>$261B</span></div>
+        <div class="mi">Signal: <span>Earnings-Überraschung</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 24.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">46.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$209.16</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">25.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$90.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">20.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">151.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-7.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">240–270</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">195–220</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">110–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 20.07.2026 liegt vor dem Earnings-Beat am 22.07.2026 — Kurs wurde auf den aktuellen Schlusskurs $209,16 aktualisiert, übrige Kennzahlen stammen noch aus dem Vor-Earnings-Snapshot, Konfidenz entsprechend reduziert. RTX ist der einzige der drei großen US-Defense-Namen mit signifikanter kommerzieller Luftfahrt-Exposure (Pratt & Whitney Triebwerke, Collins Aerospace Kabinen-/Avionik-Systeme) neben dem klassischen Raytheon-Rüstungsgeschäft — diese Doppelstruktur ist der eigentliche Kern der Story, nicht nur "noch ein Defense-Name". Q2 2026: Adjusted EPS $1,89 vs. $1,66 Konsens (+13,9%), Umsatz $24,7 Mrd. (+14% YoY, +16% organisch), Rekord-Backlog $289 Mrd. ($20 Mrd. neue Commercial-, $20 Mrd. neue Defense-Bookings). Management hob die Jahresprognose deutlich an: Umsatz auf $95-96 Mrd. (von $92,5-93,5 Mrd.), organisches Wachstum auf 8-9% (von 5-6%), Adjusted EPS auf $7,10-7,25 (von $6,70-6,90). Was der Markt bereits einpreist: die kommerzielle Nachholnachfrage bei Flottenauslastung und Ersatzteilgeschäft (Aftermarket) ist strukturell margenstärker als das klassische Defense-Geschäft — dieser Mix-Effekt rechtfertigt tendenziell ein höheres Multiple als bei reinen Defense-Peers.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Drei Segmente: Collins Aerospace (Kabinen-, Avionik-, Triebwerksysteme), Pratt & Whitney (Triebwerke, GTF-Programm), Raytheon (Raketen, Radar, Verteidigungselektronik)</li>
+<li>Aftermarket-Geschäft (Ersatzteile, Wartung für installierte Triebwerksflotte) ist strukturell margenstärker als Erstausrüstung — mit steigender Flugstunden-Auslastung wächst dieser Umsatzanteil überproportional</li>
+<li>Operativer Hebel: GTF-Triebwerksflotte wächst weiter in den Wartungszyklus hinein — mehrjähriger, planbarer Cashflow-Treiber</li>
+<li>Strukturelle Abhängigkeit: Pratt & Whitney GTF-Programm ist Single-Source für mehrere Airbus/Embraer-Flugzeugfamilien — historisch bereits Ursache eines milliardenschweren Rückrufs (Pulverwerkstoff-Defekt 2023)</li>
+<li>Defense-Segment (Raytheon) liefert Umsatzstabilität und Diversifikation gegenüber dem zyklischeren Kommerzgeschäft</li>
+<li>Rekord-Backlog $289 Mrd. gibt hohe Umsatzsichtbarkeit für mehrere Jahre</li>
+<li>Internationale Nachfrage (NATO-Aufrüstung, Flottenerneuerung in Asien) als Zusatztreiber auf beiden Segmentseiten</li>
+<li>Kapitalintensives Geschäft mit langen Entwicklungszyklen bei neuen Triebwerksgenerationen — hohe Vorlaufinvestitionen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Northrop Grumman (NOC, Forward-PE 17,3x) und General Dynamics (GD, 20,2x) als reine Defense-Untergrenze, GE Aerospace (GE, Forward-PE 39,3x) als kommerzielle Triebwerks-/Aftermarket-Obergrenze — RTX liegt strukturell zwischen beiden Polen. Aftermarket-Wachstum beschleunigt weiter, Backlog-Konversion übertrifft Plan, keine neuen GTF-Qualitätsprobleme. Annahme (kein Konsens): FY27-EPS ~$8,50 (Wachstum aus der bereits angehobenen FY26-Guidance-Basis $7,10-7,25) × 30x (Annäherung an GE-Aerospace-Prämie bei bestätigtem Commercial-Mix-Shift) = $255. Bull-Kursziel: $240–$270 (Midpoint $255). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Backlog konvertiert planmäßig, kein neuer Triebwerks-Zwischenfall. Annahme (kein Konsens): FY27-EPS ~$7,90 (moderates Wachstum ab FY26-Guidance-Mitte $7,18) × 26,3x (nahe dem eigenen aktuellen Forward-Multiple von 27,6x auf $209,16 und zwischen Defense- und Commercial-Peer-Bandbreite) = $207,50. Base-Kursziel: $195–$220 (Midpoint $207,50). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Neuer Qualitäts-/Rückrufvorfall bei der Pratt & Whitney GTF-Flotte (historisch bereits eingetreten) oder Nachlassen der kommerziellen Aftermarket-Nachfrage bei Airline-Capex-Pause. Kundenkonzentration: Airbus/Embraer-Triebwerksverträge konzentriert — ein Flottenproblem trifft überproportional. Geopolitik: Exportkontrollen bei Raytheon-Raketensystemen ins Ausland politisch sensitiv, aber aktuell eher Rückenwind (NATO-Aufrüstung) als Risiko. Lieferketten: GTF-Single-Source-Risiko ist das zentrale, bereits materialisierte Risiko der letzten Jahre. Verwässerung: gering, kein auffälliger Trend aus dem Snapshot ablesbar. Bilanz: D/E moderat (Cache 57%), keine akute Belastung erkennbar. Annahme: FY27-EPS ~$6,20 (Rückstellungen, Margendruck) × 19x (Rückfall auf Defense-Peer-Niveau NOC/GD bei Vertrauensverlust) = $117,80. Bear-Kursziel: $110–$130 (Midpoint $120). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $255 + 0,45 × $207,50 + 0,30 × $120 = $63,75 + $93,38 + $36,00 = **~$193,13 — implizites Downside vs. aktuellem Kurs ($209,16): −7,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 11,6% (Cache) ist für ein Industrials-Unternehmen mit diesem Burggraben eher moderat — reflektiert die goodwill-lastige Bilanz aus dem UTC-Raytheon-Merger 2020. Gross Margin 20,2% (Cache) niedriger als reine Defense-Peers (NOC ~20,5%, GD-Bandbreite ähnlich) — Aftermarket-Mix sollte dies strukturell nach oben ziehen, aus dem aktuellen Snapshot aber noch nicht sichtbar. FCF $7,23 Mrd. (Cache) auf $90,4 Mrd. Revenue TTM (~8% FCF-Marge) — moderat, typisch für kapitalintensives Triebwerksgeschäft mit hohen Entwicklungsinvestitionen. Bilanzqualität: D/E 57% (Cache) im Rahmen für den Sektor, kein Alarmsignal.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE auf aktuellem Kurs: $209,16 / $7,59 (Cache-Forward-EPS, vor Guidance-Anhebung) = 27,6x — bereits über der reinen Defense-Peer-Bandbreite (NOC 17,3x, GD 20,2x, LHX 20,7x), aber deutlich unter der Commercial-Aerospace-Prämie von GE (39,3x). Das eigene Forward-Multiple liegt damit im mittleren Bereich der beiden Referenzpunkte — strukturell plausibel angesichts des gemischten Defense-/Commercial-Aftermarket-Geschäftsmodells, nicht als Value- oder Überbewertungs-Fall zu lesen. Rückrechnung: Der aktuelle Kurs preist bereits eine deutliche Fortsetzung des Aftermarket-Wachstums und der Margenexpansion ein — bei reiner Guidance-Erfüllung ohne zusätzliche Beschleunigung ist die Bewertung ambitioniert, aber nicht unrealistisch, wenn der Backlog wie kommuniziert konvertiert. Eine Prämie gegenüber den reinen Defense-Peers ist durch den höhermargigen Commercial-Mix strukturell begründet.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 46,6 (Rang 140 im S&P 500) — moderate relative Stärke. 6M-Fenster nahezu flach (+0,17%) trotz des Kurssprungs — die Aktie war vor dem Report ein Seitwärtsläufer, keine vorlaufende FOMO-Dynamik erkennbar. Der Sprung wirkt damit klar katalysator- statt sentimentgetrieben. Für neue Käufer ist entscheidend, ob die zweite Guidance-Anhebung in Folge (nach bereits starkem Q1) eine anhaltende operative Verbesserung signalisiert oder das obere Ende der kurzfristig erreichbaren Erwartungen markiert (Hypothese, nicht datenbasiert) — Enttäuschungsrisiko bei der nächsten Guidance-Runde ist entsprechend real.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 46,6, Rang 140/500. Fenster: 5T +8,75%, 10T +8,96%, 20T +11,41%, 50T +17,31%, 6M +0,17%. Die 50T-Stärke (+17,3%) bei nahezu flachem 6M-Fenster deutet auf einen bereits vor dem Report laufenden, aber noch jungen Aufwärtstrend hin, der durch den Earnings-Beat bestätigt und beschleunigt wurde. Momentum ist damit sowohl fundamental gestützt als auch technisch intakt. Technisches Warnsignal: Rückfall unter das 50-Tage-Ausbruchsniveau (~$180-185) würde die Bestätigung des Trends widerlegen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($280–$330):** Aftermarket-Zyklus erreicht strukturell höheres Margenniveau, GTF-Flotte wächst ungestört in die Wartungsphase, Backlog konvertiert überplanmäßig. Normalisiertes EPS $9,50+ × 30x.</p>
+<p>**Base ($200–$250):** Stabiles zweistelliges Backlog-Wachstum, Margen normalisieren im Rahmen der Guidance, Multiple hält sich zwischen Defense- und Commercial-Peer-Niveau. Normalisiertes EPS $8-8,50 × 25-27x.</p>
+<p>**Bear ($100–$140):** Erneuter Triebwerks-Zwischenfall, Airline-Capex-Pause, Multiple-Kompression auf reines Defense-Niveau. Normalisiertes EPS $6-6,50 × 17-19x.</p>
+<p>Entscheidende Variable: Verlässlichkeit der GTF-Triebwerksflotte (keine weiteren Rückrufe) und Tempo der Aftermarket-Margenexpansion.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>RTX ist ein struktureller Compounder mit zyklischer Beschleunigungskomponente — die Kombination aus Defense-Stabilität und kommerziellem Aftermarket-Wachstum ist die eigentliche Qualität der Aktie, nicht reines Momentum. Der Q2-Beat und die zweite Guidance-Anhebung des Jahres bestätigen die These, aber die EV-Rechnung zeigt, dass der Kurs diese Bestätigung bereits weitgehend vorweggenommen hat (EV −7,7%). Für Buy-and-Hold-Investoren mit Fokus auf strukturelles Luftfahrt-Wachstum bleibt RTX ein Kern-Holding, für kurzfristig orientierte Trader fehlt nach dem Sprung der unmittelbare Edge — Nachkäufe eher auf Rücksetzer als auf aktuellem Niveau. **Northrop Grumman (NOC)** ist mit 17,3x Forward-PE das günstigere reine Defense-Instrument ohne Commercial-Aerospace-Risiko, **GE Aerospace (GE)** bietet die reinere Wette auf den Triebwerks-Aftermarket-Zyklus, allerdings zu einer deutlich höheren Prämie (39,3x).</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Backlog-Sichtbarkeit und zweite Guidance-Anhebung bestätigen die technische These und rechtfertigen die reguläre Funnel-Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

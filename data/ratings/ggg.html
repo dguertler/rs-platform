@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GGG — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">24.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>GGG</h1>
+      <h2>Graco Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Specialty Industrial Machinery</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Earnings-Überraschung</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 24.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-1.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$77.75</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">22.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">52.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">158.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">19.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-1.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">92–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–86</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">45–55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 20.07.2026 liegt vor dem Earnings-Beat am 22.07.2026 — Kurs wurde auf den aktuellen Schlusskurs $77,75 aktualisiert, übrige Kennzahlen stammen noch aus dem Vor-Earnings-Snapshot, Konfidenz entsprechend reduziert. GGG ist der Sonderfall in diesem Batch: Der Kurssprung (+5,2%) ist ein EPS-Beat-Sprung trotz eines Umsatz-Misses — Adjusted EPS $0,91 vs. $0,81 Konsens (+12,3%), aber Umsatz $590,6 Mio. vs. $613,6 Mio. Konsens verfehlt (~-3,8%), YoY-Wachstum nur +3,0-3,3%. Der Markt reagierte positiv, weil Management die Jahresprognose bestätigte und mittelfristig steigende Auftragseingänge (organisch mittlerer einstelliger Bereich) als Frühindikator für eine Nachfragebelebung präsentierte — die Aktie war zuvor sechs Monate lang klar underperformer (RS-Score -1,39, Rang 279, 6M-Fenster -17,7%). Was der Markt hier tatsächlich einpreist, ist eine Bodenbildungs-These nach einem längeren Abwärtstrend, nicht eine neue Wachstumsbeschleunigung — der Umsatz-Miss relativiert die Qualität des Beats deutlich.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Hersteller von Flüssigkeitsfördersystemen (Pumpen, Sprühsysteme) für Bau-, Industrie- und Kontraktormärkte — drei Segmente: Contractor, Industrial, Process</li>
+<li>Umsatz stark abhängig von Bau- und Industrie-Capex-Zyklen — klassisches spätzyklisches Industriegeschäft</li>
+<li>Operativer Hebel: hohe Bruttomarge (52,3% Cache) bei moderatem Fixkostenanteil — Skaleneffekte bei Volumenwachstum, aber auch überproportionaler Margendruck bei Nachfrageschwäche</li>
+<li>Starke Marktposition/Burggraben im Nischensegment Sprüh-/Fördertechnik, aber ohne strukturelle Preissetzungsmacht gegenüber breiterem Industriezyklus</li>
+<li>Internationales Geschäft (Europa, Asien) als Zusatztreiber, aber auch zusätzliche Zyklizität und Währungsrisiko</li>
+<li>Kontinuierliche Produktinnovation (elektrische Sprühsysteme, Digitalisierung) als margensicherndes Differenzierungsmerkmal</li>
+<li>Dividendenaristokrat-Charakter (1,58% Rendite, Cache-Stand) mit langer Historie kontinuierlicher Erhöhungen — signalisiert Kapitaldisziplin, aber auch reifes, nicht mehr stark wachsendes Geschäft</li>
+<li>Tarif-/Zollexposure bei importierten Komponenten als aktueller strukturell relevanter Kostenfaktor (allgemeiner Sektortrend 2026)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Emerson Electric (EMR, Forward-PE 19,4x), Xylem (XYL, 20,1x), AMETEK (AME, 26,9x) als Spezial-Industrieausrüster-Bandbreite, Roper Technologies (ROP, 15,2x) als Untergrenze. Auftragseingangs-Momentum setzt sich fort, Baukonjunktur erholt sich schneller als erwartet, Zollkosten werden vollständig weitergegeben. Annahme (kein Konsens): FY27-EPS ~$3,90 (Erholung nach schwachem FY26-Quartal) × 25x (Annäherung an AME-Niveau bei bestätigter Nachfragewende) = $97,50. Bull-Kursziel: $92–$105 (Midpoint $98,50). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Auftragseingänge verbessern sich moderat wie in Q2 signalisiert, aber Umsatzwachstum bleibt im niedrigen bis mittleren einstelligen Bereich, Marge stabilisiert sich auf aktuellem Niveau. Annahme (kein Konsens): FY27-EPS ~$3,65 (moderates Wachstum ab Cache-Forward-EPS $3,38) × 22x (nahe dem eigenen aktuellen Forward-Multiple von 23,0x auf $77,75 und innerhalb EMR/XYL-Bandbreite) = $80,30. Base-Kursziel: $75–$86 (Midpoint $80,50). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Fortgesetzte Umsatz-Misses bei anhaltend schwacher Bau-/Industrie-Nachfrage, Zollkosten können nicht vollständig weitergegeben werden, Margendruck setzt sich fort. Kundenkonzentration: breite Kunden-/Distributorenbasis, kein akutes Konzentrationsrisiko erkennbar. Geopolitik/China-Exposure: Zoll-/Handelspolitik auf importierte Komponenten ist das zentrale aktuelle Makrorisiko für das Geschäftsmodell. Lieferketten: diversifizierte Zulieferbasis, kein Single-Source-Risiko identifiziert. Verwässerung: kein auffälliger Trend aus dem Snapshot ablesbar. Regulierung: keine materiellen sektorspezifischen Risiken erkennbar. Annahme: FY27-EPS ~$2,90 (Margendruck, weitere Umsatz-Misses) × 17x (Rückfall auf ROP-nahes Niveau bei fortgesetzter Wachstumsschwäche) = $49,30. Bear-Kursziel: $45–$55 (Midpoint $50). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $98,50 + 0,45 × $80,50 + 0,35 × $50 = $19,70 + $36,23 + $17,50 = **~$73,43 — implizites Downside vs. aktuellem Kurs ($77,75): −5,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der Umsatz-Miss relativiert den EPS-getriebenen Kurssprung.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 19,8% (Cache) und ROIC 25,2% (Cache) sind solide bis stark — typisch für Grocos historisch disziplinierte Kapitalallokation. Gross Margin 52,3% (Cache) ist hoch für einen Industrieausrüster und spricht für echte Produktdifferenzierung im Nischensegment. Operating Margin 25,5% (Cache) ebenfalls stark. FCF $517 Mio. (Cache) auf $2,25 Mrd. Revenue TTM (~23% FCF-Marge) — sehr solide Cash-Generierung. Bilanzqualität: D/E 1,93x (Cache) moderat, kein Alarmsignal für ein Unternehmen dieser Cashflow-Stärke. Die fundamentale Qualität bleibt insgesamt intakt — der aktuelle Umsatz-Miss ist ein zyklisches Nachfrageproblem, kein strukturelles Qualitätsproblem.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE auf aktuellem Kurs: $77,75 / $3,38 (Cache-Forward-EPS) = 23,0x — liegt innerhalb der Peer-Bandbreite EMR (19,4x) bis AME (26,9x), über XYL (20,1x) und deutlich über ROP (15,2x). Was preist der aktuelle Kurs ein? Bei $77,75 preist der Markt trotz des jüngsten Umsatz-Misses eine Rückkehr zu solidem einstelligen Wachstum und stabilen Margen ein — angesichts des sechsmonatigen Abwärtstrends (-17,7%) und der verfehlten Umsatzschätzung ist dieses Multiple eher ambitioniert als konservativ. Rückrechnung: Der aktuelle Kurs setzt implizit voraus, dass sich das Auftragseingangs-Momentum aus Q2 in tatsächliches Umsatzwachstum übersetzt — bestätigt sich das nicht in den kommenden ein bis zwei Quartalen, ist eine Multiple-Korrektur Richtung XYL/ROP-Niveau plausibel. Die eigene Multiple-Prämie gegenüber XYL/ROP ist aus den Daten nicht vollständig erklärbar angesichts der aktuellen Wachstumsschwäche.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score -1,39 (Rang 279 im S&P 500) — negative relative Stärke trotz des Kurssprungs, ein seltener Fall in diesem Batch. Das 6M-Fenster (-17,7%) zeigt, dass institutionelle Positionierung vermutlich stark reduziert war (Hypothese, nicht datenbasiert) und der aktuelle Sprung eher eine Kurzeindeckung/Erleichterungsrally als der Beginn einer neuen Aufwärtsbewegung sein könnte. Für nachhaltige neue Käufer ist die Bestätigung der Auftragseingangs-Wende über mindestens ein weiteres Quartal entscheidend — das Enttäuschungsrisiko bei einem erneuten Umsatz-Miss ist hoch, da die fundamentale Vertrauensbasis nach dem 6-Monats-Abwärtstrend noch fragil ist.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -1,39, Rang 279/500. Fenster: 5T +5,31%, 10T +7,69%, 20T +2,10%, 50T +1,20%, 6M -17,69%. Die Fensterstruktur zeigt klar: Das gesamte positive Momentum stammt aus dem Earnings-Sprung der letzten Woche, während die mittel- und langfristigen Fenster (20T, 50T, 6M) noch negativ bis flach sind — GGG befindet sich technisch noch in einem übergeordneten Abwärtstrend, nicht in einem bestätigten neuen Aufwärtstrend. Das Momentum ist damit fundamental angestoßen, aber technisch noch nicht bestätigt. Technisches Warnsignal: Rückfall unter $72-73 (nahe 52-Wochen-Tief $72,51) würde die Bodenbildungs-These unmittelbar widerlegen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($105–$125):** Bau- und Industriezyklus dreht strukturell, Auftragseingangs-Momentum hält an, internationale Expansion beschleunigt Wachstum zurück auf historische Mittelwerte. Normalisiertes EPS $4,50+ × 25x.</p>
+<p>**Base ($78–$98):** Moderate zyklische Erholung, Marge hält sich auf aktuellem Niveau, Multiple bleibt im mittleren Peer-Band. Normalisiertes EPS $3,60-4,00 × 21-23x.</p>
+<p>**Bear ($45–$60):** Anhaltende Industrie-Nachfrageschwäche, Zollkosten belasten dauerhaft, Multiple-Kompression auf ROP-nahes Niveau. Normalisiertes EPS $2,70-3,00 × 16-18x.</p>
+<p>Entscheidende Variable: Ob sich die in Q2 signalisierte Auftragseingangs-Wende in den kommenden Quartalen in tatsächlichem Umsatzwachstum bestätigt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>GGG ist kein klarer High-Conviction-Trade, sondern ein fundamental solides, aber aktuell zyklisch schwaches Compounder-Unternehmen mit einem gemischten Quartalsergebnis (EPS-Beat, Umsatz-Miss) nach sechs Monaten relativer Schwäche. Die EV-Rechnung zeigt kein zusätzliches Upside (-5,6%), und die technische Struktur (negativer RS-Score, negatives 6M-Fenster) bestätigt den Aufwärtssprung noch nicht als nachhaltigen Trendwechsel. Für Buy-and-Hold-Dividendeninvestoren mit langem Horizont bleibt die fundamentale Qualität (hohe Margen, starker FCF, Dividendenhistorie) attraktiv; für Trading-orientierte Positionen ist der Einstieg nach dem Sprung ohne bestätigten Trend riskant — kleine Position, klare Stop-Disziplin unter dem 52-Wochen-Tief. **Emerson Electric (EMR)** und **Xylem (XYL)** sind mit 19,4x bzw. 20,1x Forward-PE die relativ günstigeren Instrumente im Spezial-Industrieausrüster-Segment mit stabilerer jüngerer Umsatzentwicklung.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Umsatz-Miss trotz EPS-Beat und weiterhin negativer 6-Monats-Trend relativieren die Nachhaltigkeit des Auslösers; halbe Positionsgröße bis Bestätigung durch ein weiteres Quartal.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
