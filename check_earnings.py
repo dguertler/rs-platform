@@ -291,9 +291,9 @@ def get_gws_price(ohlcv, window=2):
 
 # ── E-Mail versenden ──────────────────────────────────────────────────────────
 
-def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr):
+def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr, subject_prefix=''):
     today_str = datetime.now().strftime('%d.%m.%Y')
-    subject   = f'Earnings-Überraschung {today_str}: {len(alerts)} Aktie(n) mit starkem Beat'
+    subject   = f'{subject_prefix}Earnings-Überraschung {today_str}: {len(alerts)} Aktie(n) mit starkem Beat'
 
     msg = MIMEMultipart('related')
     msg['Subject'] = subject

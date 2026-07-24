@@ -1,0 +1,66 @@
+name: Earnings-Überraschung Global (US + Europa, ≥5% Sprung + ≥10% EPS-Beat)
+
+# Sendet nur Mail/Telegram, committet nichts → Lese-Rechte genügen.
+permissions:
+  contents: read
+
+on:
+  schedule:
+    - cron: '45 2 * * 2-6'   # 15 Min nach dem RS-getrackten Earnings-Alert
+  workflow_dispatch:
+    inputs:
+      test_date:
+        description: 'Test-Datum (YYYY-MM-DD) – leer = gestern'
+        required: false
+        default: ''
+      universe_limit:
+        description: 'Nur die ersten N Ticker je Quelle scannen (Testmodus, leer = voller Scan)'
+        required: false
+        default: ''
+
+jobs:
+  check-earnings-global:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas matplotlib lxml deep-translator requests
+
+      - name: Globales Earnings-Skript ausführen
+        env:
+          SMTP_HOST:        ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:        ${{ secrets.SMTP_PORT }}
+          SMTP_USER:        ${{ secrets.SMTP_USER }}
+          SMTP_PASS:        ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:   ${{ secrets.ALERT_EMAIL_TO }}
+          TEST_DATE:        ${{ github.event.inputs.test_date }}
+          UNIVERSE_LIMIT:   ${{ github.event.inputs.universe_limit }}
+          FRONTEND_URL:     ${{ secrets.FRONTEND_URL }}
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RS_API_URL:       ${{ secrets.RS_API_URL }}
+          ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
+        run: python check_earnings_global.py
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Earnings-Alert Global (earnings_alert_global.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
