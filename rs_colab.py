@@ -15,12 +15,13 @@ _NASDAQ100_FALLBACK = [
     "PANW", "KLAC", "SNPS", "CDNS", "MRVL", "ORLY", "CTAS", "ASML", "FTNT", "MDLZ",
     "ABNB", "MNST", "PYPL", "MELI", "NXPI", "WDAY", "CPRT", "ROST", "KDP", "AEP",
     "PCAR", "DDOG", "IDXX", "ODFL", "FAST", "BIIB", "TEAM", "EA", "ZS", "SIRI",
-    "VRSK", "GEHC", "ON", "ANSS", "CTSH", "DLTR", "XEL", "FANG", "CRWD", "TTWO",
+    "VRSK", "GEHC", "ON", "INTC", "CTSH", "DLTR", "XEL", "FANG", "CRWD", "TTWO",
     "ILMN", "MRNA", "SMCI", "ARM", "MCHP", "ADSK", "CHTR", "PAYX", "DXCM", "CEG",
     "CCEP", "COIN", "APP", "AXON", "WELL", "HUBS", "TTD", "OKTA", "SNDK", "MSTR",
     "PLTR", "RXRX", "GFS", "LULU", "EBAY", "LITE", "FSLR", "DASH",
     "ROP", "CDW", "NTRA",
 ]
+# ANSS entfernt: Synopsys hat Ansys 2025 übernommen, Ticker delisted (yfinance liefert keine Daten mehr)
 
 tickers, _official = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
 
