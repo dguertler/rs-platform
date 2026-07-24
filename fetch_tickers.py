@@ -162,6 +162,7 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
     try:
         import pandas as pd
         tables = pd.read_html(_fetch_wiki_html(url))
+        best_match = None  # (col, len(ts)) für Diagnose falls kein Treffer min_count erreicht
         for t in tables:
             for col in t.columns:
                 if _col_matches(col, col_names):
@@ -171,6 +172,16 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
                     if len(ts) >= min_count:
                         print(f"  Wikipedia: {len(ts)} Ticker geladen")
                         return ts
+                    if best_match is None or len(ts) > best_match[1]:
+                        best_match = (col, len(ts))
+        # Kein Treffer: Diagnose loggen statt still None zurückzugeben
+        if best_match:
+            print(f"  Wikipedia: bester Spalten-Treffer {best_match[0]!r} "
+                  f"lieferte nur {best_match[1]} Einträge (benötigt {min_count})")
+        else:
+            all_cols = [str(c) for t in tables for c in t.columns]
+            print(f"  Wikipedia: keine Spalte matcht {col_names} — "
+                  f"{len(tables)} Tabelle(n) gefunden, Spalten: {all_cols[:20]}")
     except Exception as e:
         print(f"  Wikipedia: Fehler – {e}")
     return None
