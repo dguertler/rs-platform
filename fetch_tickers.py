@@ -25,6 +25,7 @@ Registrierung:   https://financialmodelingprep.com/developer/docs  (kostenlos)
 import io
 import os
 import json
+import re
 import urllib.request
 from pathlib import Path
 
@@ -136,6 +137,26 @@ def _fetch_wiki_html(url: str):
     return io.BytesIO(html)
 
 
+def _normalize_col(col) -> str:
+    """MultiIndex-Spalten ('Company', 'Ticker') zu 'company ticker' flachklopfen,
+    Fußnoten-Marker wie '[a]'/'[1]' entfernen, whitespace normalisieren."""
+    if isinstance(col, tuple):
+        col = " ".join(str(c) for c in col)
+    s = re.sub(r'\[.*?\]', '', str(col).lower())
+    return re.sub(r'\s+', ' ', s).strip()
+
+
+def _col_matches(col, col_names: tuple) -> bool:
+    """Exakter Treffer ODER eines der Suchwörter als eigenständiges Token
+    in der normalisierten Spalte (z.B. 'ticker symbol' matcht 'ticker').
+    Robuster als exakte Gleichheit gegen Wikipedia-Formatänderungen
+    (MultiIndex-Header, Fußnoten, umbenannte Spalten wie 'Ticker symbol')."""
+    norm = _normalize_col(col)
+    if norm in col_names:
+        return True
+    return any(name in norm.split() for name in col_names)
+
+
 def _wikipedia_table(url: str, col_names: tuple, min_count: int,
                      transform=None) -> list | None:
     try:
@@ -143,7 +164,7 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
         tables = pd.read_html(_fetch_wiki_html(url))
         for t in tables:
             for col in t.columns:
-                if str(col).lower() in col_names:
+                if _col_matches(col, col_names):
                     ts = t[col].dropna().astype(str).str.strip().tolist()
                     if transform:
                         ts = transform(ts)
@@ -215,21 +236,15 @@ def fetch_sp500(fallback: list) -> tuple[list | None, list]:
 
     # 2) Wikipedia
     if primary is None:
-        try:
-            import pandas as pd
-            df = pd.read_html(
-                _fetch_wiki_html("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies")
-            )[0]
-            ts = (df["Symbol"].dropna().astype(str).str.strip()
-                  .str.replace(".", "-", regex=False).tolist())
-            ts = sorted([x for x in ts if x and len(x) <= 6])
-            if len(ts) >= 490:
-                print(f"  Wikipedia: {len(ts)} Ticker geladen")
-                primary = ts
-            else:
-                print(f"  Wikipedia: nur {len(ts)} Ticker – zu wenig")
-        except Exception as e:
-            print(f"  Wikipedia: Fehler – {e}")
+        def _clean_sp(ts):
+            ts = [x.replace(".", "-") for x in ts]
+            return sorted([x for x in ts if x and len(x) <= 6])
+        ts = _wikipedia_table(
+            "https://en.wikipedia.org/wiki/List_of_S%26P_500_companies",
+            ("ticker", "symbol"), 490, _clean_sp
+        )
+        if ts:
+            primary = ts
 
     # 3) Beide Quellen fehlgeschlagen
     if primary is None:
@@ -263,27 +278,15 @@ def fetch_sp600(fallback: list) -> tuple[list, list]:
 
     # 2) Wikipedia
     if primary is None:
-        try:
-            import pandas as pd
-            tables = pd.read_html(
-                _fetch_wiki_html("https://en.wikipedia.org/wiki/List_of_S%26P_600_companies")
-            )
-            for t in tables:
-                for col in t.columns:
-                    if str(col).lower() in ("ticker", "symbol"):
-                        ts = (t[col].dropna().astype(str).str.strip()
-                              .str.replace(".", "-", regex=False).tolist())
-                        ts = sorted([x for x in ts if x and len(x) <= 6])
-                        if len(ts) >= 550:
-                            print(f"  Wikipedia: {len(ts)} Ticker geladen")
-                            primary = ts
-                            break
-                if primary:
-                    break
-            if primary is None:
-                print("  Wikipedia: Keine passende Tabelle gefunden")
-        except Exception as e:
-            print(f"  Wikipedia: Fehler – {e}")
+        def _clean_sp(ts):
+            ts = [x.replace(".", "-") for x in ts]
+            return sorted([x for x in ts if x and len(x) <= 6])
+        ts = _wikipedia_table(
+            "https://en.wikipedia.org/wiki/List_of_S%26P_600_companies",
+            ("ticker", "symbol"), 550, _clean_sp
+        )
+        if ts:
+            primary = ts
 
     if primary is None:
         print(f"  Fallback: {len(fallback)} Ticker")
