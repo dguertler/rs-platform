@@ -174,14 +174,20 @@ def _wikipedia_table(url: str, col_names: tuple, min_count: int,
                         return ts
                     if best_match is None or len(ts) > best_match[1]:
                         best_match = (col, len(ts))
-        # Kein Treffer: Diagnose loggen statt still None zurückzugeben
+        # Kein Treffer: Diagnose loggen statt still None zurückzugeben.
+        # Nur Tabellen mit genug Zeilen zeigen (Nav-/Footer-Tabellen mit
+        # wenigen Zeilen sind für die Konstituentenliste irrelevant und
+        # verstopfen sonst die abgeschnittene Ausgabe).
         if best_match:
             print(f"  Wikipedia: bester Spalten-Treffer {best_match[0]!r} "
                   f"lieferte nur {best_match[1]} Einträge (benötigt {min_count})")
         else:
-            all_cols = [str(c) for t in tables for c in t.columns]
+            candidates = [(i, len(t), list(t.columns)) for i, t in enumerate(tables)
+                          if len(t) >= min_count // 2]
             print(f"  Wikipedia: keine Spalte matcht {col_names} — "
-                  f"{len(tables)} Tabelle(n) gefunden, Spalten: {all_cols[:20]}")
+                  f"{len(tables)} Tabelle(n) gesamt, {len(candidates)} mit >= {min_count // 2} Zeilen:")
+            for i, n_rows, cols in candidates[:5]:
+                print(f"    Tabelle {i} ({n_rows} Zeilen): {[str(c) for c in cols]}")
     except Exception as e:
         print(f"  Wikipedia: Fehler – {e}")
     return None
