@@ -22,6 +22,7 @@ API-Key setzen:  .env  →  FMP_API_KEY=dein_key_hier
 Registrierung:   https://financialmodelingprep.com/developer/docs  (kostenlos)
 """
 
+import io
 import os
 import json
 import urllib.request
@@ -128,7 +129,11 @@ def _fetch_wiki_html(url: str):
     an pd.read_html() übergeben statt die URL direkt zu fetchen)."""
     req = urllib.request.Request(url, headers=_WIKI_HEADERS)
     with urllib.request.urlopen(req, timeout=15) as r:
-        return r.read()
+        html = r.read()
+    # pd.read_html() interpretiert rohe bytes als Dateipfad statt als HTML-
+    # Inhalt ("No such file or directory") — als file-like Objekt übergeben,
+    # damit es eindeutig als Puffer statt als Pfad-String erkannt wird.
+    return io.BytesIO(html)
 
 
 def _wikipedia_table(url: str, col_names: tuple, min_count: int,
