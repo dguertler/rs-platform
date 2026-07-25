@@ -26783,13 +26783,13 @@
       "verdict_score": 65,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": -1.12,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": -0.51,
         "4w": null,
         "13w": null,
         "26w": null
@@ -26808,13 +26808,13 @@
       "verdict_score": 75,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": 1.14,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": 1.75,
         "4w": null,
         "13w": null,
         "26w": null
@@ -26833,13 +26833,13 @@
       "verdict_score": 65,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": -3.19,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": -2.58,
         "4w": null,
         "13w": null,
         "26w": null
@@ -26858,13 +26858,13 @@
       "verdict_score": 70,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": 0.94,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": 1.55,
         "4w": null,
         "13w": null,
         "26w": null
@@ -26883,13 +26883,13 @@
       "verdict_score": 62,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": 1.21,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": 1.82,
         "4w": null,
         "13w": null,
         "26w": null
@@ -26908,13 +26908,13 @@
       "verdict_score": 54,
       "funnel_veto": null,
       "fwd_returns": {
-        "1w": null,
+        "1w": -4.32,
         "4w": null,
         "13w": null,
         "26w": null
       },
       "fwd_alpha": {
-        "1w": null,
+        "1w": -3.71,
         "4w": null,
         "13w": null,
         "26w": null
@@ -44408,8 +44408,12 @@
       "setup_pts": 4,
       "gws_pts": 3,
       "status": "KAUFLISTE",
-      "verdict_score": null,
-      "funnel_veto": null,
+      "verdict_score": 61,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Volumenwachstum und Guidance-Anhebung bestätigen die bereits laufende technische These und rechtfertigen die reguläre Funnel-Positionsgröße."
+      },
       "fwd_returns": {
         "1w": null,
         "4w": null,
@@ -45007,8 +45011,12 @@
       "setup_pts": 3,
       "gws_pts": 3,
       "status": "KAUFLISTE",
-      "verdict_score": null,
-      "funnel_veto": null,
+      "verdict_score": 65,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Backlog-Sichtbarkeit und zweite Guidance-Anhebung bestätigen die technische These und rechtfertigen die reguläre Funnel-Positionsgröße."
+      },
       "fwd_returns": {
         "1w": null,
         "4w": null,
@@ -45419,8 +45427,12 @@
       "setup_pts": 4,
       "gws_pts": 3,
       "status": "KAUFLISTE",
-      "verdict_score": null,
-      "funnel_veto": null,
+      "verdict_score": 36,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-Multiple liegt weit über jeder plausiblen Peer-Referenz und wird von der dünnen operativen Marge sowie dem negativen FCF nicht gestützt; halbe Positionsgröße trotz intaktem technischen Setups."
+      },
       "fwd_returns": {
         "1w": null,
         "4w": null,
@@ -46033,7 +46045,5677 @@
         "13w": null,
         "26w": null
       }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "SNDK",
+      "close_at_log": 1610.33,
+      "rs2_pct": 100.0,
+      "regime": "yellow",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 56,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "MU",
+      "close_at_log": 990.21,
+      "rs2_pct": 99.0,
+      "regime": "yellow",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 74,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "LITE",
+      "close_at_log": 833.64,
+      "rs2_pct": 98.0,
+      "regime": "yellow",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 65,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "PANW",
+      "close_at_log": 325.63,
+      "rs2_pct": 97.0,
+      "regime": "yellow",
+      "setup_pts": 3,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 53,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "EA",
+      "close_at_log": 209.0,
+      "rs2_pct": 96.0,
+      "regime": "yellow",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "WELL",
+      "close_at_log": 247.05,
+      "rs2_pct": 95.0,
+      "regime": "yellow",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 53,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "FTNT",
+      "close_at_log": 151.54,
+      "rs2_pct": 94.0,
+      "regime": "yellow",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 48,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 45,6x bei nur 20,1 % Wachstum und ein EV von −14,9 % rechtfertigen keine volle Positionsgröße trotz intakter Franchise-Qualität."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "AMD",
+      "close_at_log": 539.69,
+      "rs2_pct": 93.0,
+      "regime": "yellow",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 61,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 39,3x und ein negativer EV von −4,8 % tragen an diesem Kursniveau keine volle Positionsgröße trotz intaktem AI-Wachstumsnarrativ."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "ILMN",
+      "close_at_log": 196.86,
+      "rs2_pct": 92.0,
+      "regime": "yellow",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 57,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "AMAT",
+      "close_at_log": 562.8,
+      "rs2_pct": 91.0,
+      "regime": "yellow",
+      "setup_pts": 3,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 66,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "nasdaq",
+      "ticker": "SIRI",
+      "close_at_log": 29.87,
+      "rs2_pct": 90.0,
+      "regime": "yellow",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 54,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "SNDK",
+      "close_at_log": 1610.33,
+      "rs2_pct": 100.0,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 56,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MU",
+      "close_at_log": 990.21,
+      "rs2_pct": 99.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 74,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "DELL",
+      "close_at_log": 439.34,
+      "rs2_pct": 99.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "WDC",
+      "close_at_log": 558.3,
+      "rs2_pct": 99.4,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 58,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "STX",
+      "close_at_log": 913.36,
+      "rs2_pct": 99.2,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 54,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MPC",
+      "close_at_log": 312.27,
+      "rs2_pct": 99.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 49,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Rechnung zeigt nach dem Kurssprung über das alte 52-Wochen-Hoch keinen Edge mehr, die technische Stärke bleibt aber intakt."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "STT",
+      "close_at_log": 184.21,
+      "rs2_pct": 98.8,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 50,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Rein technischer Dreifach-Ausbruch ohne fundamentale Stütze bei gleichzeitig rückläufigem Umsatz (-2,8% YoY) trägt keine volle Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "VLO",
+      "close_at_log": 305.26,
+      "rs2_pct": 98.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 41,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "EV-Rechnung ergibt nach dem jüngsten Kurssprung über das alte 52-Wochen-Hoch ein negatives Chance-Risiko-Verhältnis, zusätzlich bestätigt durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "LITE",
+      "close_at_log": 833.64,
+      "rs2_pct": 98.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 65,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "DVA",
+      "close_at_log": 234.27,
+      "rs2_pct": 98.3,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CSX",
+      "close_at_log": 52.81,
+      "rs2_pct": 98.1,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 66,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Q2-Earnings-Beat mit Margenexpansion bestätigt die fundamentale These, kein Risikofaktor überwiegt aktuell das intakte Setup."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "BNY",
+      "close_at_log": 160.11,
+      "rs2_pct": 97.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "TRV",
+      "close_at_log": 376.37,
+      "rs2_pct": 97.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 53,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV impliziert nach dem Gap −8,4 % Downside, und das KBV von 2,45x kapitalisiert bereits die zyklisch begünstigte Top-of-Cycle-ROE ohne Sicherheitsmarge."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "PSX",
+      "close_at_log": 206.98,
+      "rs2_pct": 97.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 54,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Negativer Free Cashflow (−$1,13 Mrd.) belastet die Dividendendeckung trotz moderater Bewertung und intakter Erholungsstory."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "HPE",
+      "close_at_log": 47.64,
+      "rs2_pct": 97.3,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 62,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "TRGP",
+      "close_at_log": 285.58,
+      "rs2_pct": 97.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "PANW",
+      "close_at_log": 325.63,
+      "rs2_pct": 96.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 53,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "EIX",
+      "close_at_log": 79.64,
+      "rs2_pct": 96.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 54,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "D/E 226 % lässt bei eskalierender Eaton-Fire-Haftung wenig Puffer, das ungeklärte Litigation-Ausmaß rechtfertigt nur die halbe Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "WELL",
+      "close_at_log": 247.05,
+      "rs2_pct": 96.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 53,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "FTNT",
+      "close_at_log": 151.54,
+      "rs2_pct": 96.3,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 48,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 45,6x bei nur 20,1 % Wachstum und ein EV von −14,9 % rechtfertigen keine volle Positionsgröße trotz intakter Franchise-Qualität."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "UNP",
+      "close_at_log": 304.33,
+      "rs2_pct": 96.1,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "VTR",
+      "close_at_log": 97.92,
+      "rs2_pct": 96.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "HUM",
+      "close_at_log": 394.5,
+      "rs2_pct": 95.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 45,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "AMD",
+      "close_at_log": 539.69,
+      "rs2_pct": 95.6,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 61,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-PE von 39,3x und ein negativer EV von −4,8 % tragen an diesem Kursniveau keine volle Positionsgröße trotz intaktem AI-Wachstumsnarrativ."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CHRW",
+      "close_at_log": 205.51,
+      "rs2_pct": 95.4,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 53,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Nach Kursverdopplung und Forward-KGV am oberen Rand der Peer-Bandbreite rechtfertigt der leicht negative EV-Edge nur halbe Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "ADM",
+      "close_at_log": 86.35,
+      "rs2_pct": 95.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "JNJ",
+      "close_at_log": 259.27,
+      "rs2_pct": 95.0,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 53,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CVS",
+      "close_at_log": 106.89,
+      "rs2_pct": 94.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 62,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes technisches Signal (3/3 GWS-Punkte) und bestätigte Stabilisierung, volle Positionsgröße vertretbar trotz moderatem EV-Edge."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "BAC",
+      "close_at_log": 61.28,
+      "rs2_pct": 94.6,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "JBHT",
+      "close_at_log": 289.37,
+      "rs2_pct": 94.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "HST",
+      "close_at_log": 23.96,
+      "rs2_pct": 94.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "AMAT",
+      "close_at_log": 562.8,
+      "rs2_pct": 94.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 66,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "ABBV",
+      "close_at_log": 256.92,
+      "rs2_pct": 93.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 66,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "BBY",
+      "close_at_log": 84.43,
+      "rs2_pct": 93.6,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 46,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Kurs bereits +52 % über 50 Tage gelaufen, Analystenkonsens-Kursziel liegt unter dem aktuellen Kurs und der EV zeigt kein Upside."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "ALL",
+      "close_at_log": 254.52,
+      "rs2_pct": 93.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 58,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "kein aktives GWS-Signal, EV-Edge unter der 10 %-Schwelle trotz stabilem RS-Trend."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "NTAP",
+      "close_at_log": 164.64,
+      "rs2_pct": 93.3,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 66,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV nahe Null (-0,3%) bedeutet keinen bewertungsseitigen Edge trotz starkem RS-Score und intaktem AI-Narrativ."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MET",
+      "close_at_log": 92.54,
+      "rs2_pct": 93.1,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CRWD",
+      "close_at_log": 183.42,
+      "rs2_pct": 92.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 40,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertungsprämie von 56 % ggü. dem teuersten Peer (Abschnitt 7) ist durch das Wachstum nicht gedeckt (PANW wächst schneller bei niedrigerem Multiple), und der EV liegt bei -17,7 % trotz starkem operativem Fundament."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "DGX",
+      "close_at_log": 227.9,
+      "rs2_pct": 92.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 61,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Volumenwachstum und Guidance-Anhebung bestätigen die bereits laufende technische These und rechtfertigen die reguläre Funnel-Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "NSC",
+      "close_at_log": 348.55,
+      "rs2_pct": 92.5,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "DDOG",
+      "close_at_log": 244.39,
+      "rs2_pct": 92.3,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 52,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MRK",
+      "close_at_log": 130.48,
+      "rs2_pct": 92.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 49,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Kein GWS-Signal aktiv und EV nahe null, das technische Setup liefert aktuell keinen bestätigten Trigger für volle Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MRVL",
+      "close_at_log": 209.32,
+      "rs2_pct": 91.9,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 65,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "VTRS",
+      "close_at_log": 17.28,
+      "rs2_pct": 91.7,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 59,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die hohe Verschuldung (D/E ~99,7%) und die anomalie-bedingt negative ROE mindern die fundamentale Tragfähigkeit der vollen Positionsgröße trotz intaktem technischen Setup."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "AAPL",
+      "close_at_log": 321.66,
+      "rs2_pct": 91.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "USB",
+      "close_at_log": 63.33,
+      "rs2_pct": 91.3,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "WST",
+      "close_at_log": 355.48,
+      "rs2_pct": 91.1,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "SPG",
+      "close_at_log": 225.2,
+      "rs2_pct": 90.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CIEN",
+      "close_at_log": 407.53,
+      "rs2_pct": 90.8,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "FRT",
+      "close_at_log": 124.83,
+      "rs2_pct": 90.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CF",
+      "close_at_log": 126.71,
+      "rs2_pct": 90.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "EXPD",
+      "close_at_log": 176.18,
+      "rs2_pct": 90.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 45,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertung impliziert Wachstum deutlich über der aktuellen 4,4 %-Rate; der Analysten-Konsens liegt 12 % unter dem aktuellen Kurs."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "AIZ",
+      "close_at_log": 273.8,
+      "rs2_pct": 90.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "FIX",
+      "close_at_log": 1831.15,
+      "rs2_pct": 89.8,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "PRU",
+      "close_at_log": 117.84,
+      "rs2_pct": 89.6,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "MTB",
+      "close_at_log": 245.97,
+      "rs2_pct": 89.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 49,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Solides technisches Setup (3/3 GWS-Punkte) und konservative Kreditqualität, normale Positionsgröße trotz zurückhaltendem Analystenkonsens vertretbar."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "TER",
+      "close_at_log": 373.75,
+      "rs2_pct": 89.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 56,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CTVA",
+      "close_at_log": 88.78,
+      "rs2_pct": 89.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "PRI",
+      "close_at_log": 308.18,
+      "rs2_pct": 88.8,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "XOM",
+      "close_at_log": 156.89,
+      "rs2_pct": 88.6,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "EOG",
+      "close_at_log": 145.49,
+      "rs2_pct": 88.4,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CNC",
+      "close_at_log": 63.74,
+      "rs2_pct": 88.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 44,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "GWW",
+      "close_at_log": 1367.46,
+      "rs2_pct": 88.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "FANG",
+      "close_at_log": 205.49,
+      "rs2_pct": 87.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "JPM",
+      "close_at_log": 349.9,
+      "rs2_pct": 87.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 57,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Höchste Qualitätsbewertung im Sektor bei intaktem technischem Setup, kein einzelner Risikofaktor überwiegt aktuell trotz anspruchsvoller Bewertung."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CSCO",
+      "close_at_log": 112.76,
+      "rs2_pct": 87.5,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 65,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "PNC",
+      "close_at_log": 249.26,
+      "rs2_pct": 87.3,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 57,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starkes Q2-Momentum und neutrale Peer-Bewertung, kein einzelner fundamentaler Risikofaktor überwiegt aktuell das intakte Setup."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "EA",
+      "close_at_log": 209.0,
+      "rs2_pct": 87.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "DOC",
+      "close_at_log": 22.08,
+      "rs2_pct": 86.9,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "CVX",
+      "close_at_log": 194.42,
+      "rs2_pct": 86.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "TECH",
+      "close_at_log": 71.77,
+      "rs2_pct": 86.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "NTRS",
+      "close_at_log": 177.95,
+      "rs2_pct": 86.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "LRCX",
+      "close_at_log": 319.78,
+      "rs2_pct": 86.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 66,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "APA",
+      "close_at_log": 36.42,
+      "rs2_pct": 85.9,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "LSTR",
+      "close_at_log": 207.97,
+      "rs2_pct": 85.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "RTX",
+      "close_at_log": 209.16,
+      "rs2_pct": 85.5,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 65,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "EV-Rechnung zeigt kein zusätzliches kurzfristiges Upside, aber Backlog-Sichtbarkeit und zweite Guidance-Anhebung bestätigen die technische These und rechtfertigen die reguläre Funnel-Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "INCY",
+      "close_at_log": 116.69,
+      "rs2_pct": 85.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 71,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Edge von nur +3,8% bei Kurs nahe dem 52-Wochen-Hoch trägt keine volle Positionsgröße trotz starker fundamentaler Qualität."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "NTRA",
+      "close_at_log": 264.69,
+      "rs2_pct": 85.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 50,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "sp500",
+      "ticker": "WAB",
+      "close_at_log": 297.99,
+      "rs2_pct": 85.0,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "ALV.DE",
+      "close_at_log": 424.4,
+      "rs2_pct": 100.0,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 75,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "DHL.DE",
+      "close_at_log": 56.34,
+      "rs2_pct": 97.6,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 53,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Technisches Setup (3/3 GWS-Punkte) intakt, aber EV-Edge von nur +2,5% rechtfertigt keine erhöhte Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "RWE.DE",
+      "close_at_log": 58.92,
+      "rs2_pct": 95.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 49,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV impliziert -10,9 % Downside bei einer Forward-KGV-Prämie ggü. dem einzigen verifizierbaren Peer E.ON, die technische Stärke allein trägt keine volle Positionsgröße."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "FME.DE",
+      "close_at_log": 42.99,
+      "rs2_pct": 92.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 49,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Der entscheidende Beweis für das Kostenprogramm steht mit dem Q2-Bericht am 04.08. noch aus, die kurzfristige RS-Abkühlung bestätigt fehlende Bestätigung."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "EOAN.DE",
+      "close_at_log": 19.59,
+      "rs2_pct": 90.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 60,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "ZAL.DE",
+      "close_at_log": 27.07,
+      "rs2_pct": 87.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "dax",
+      "ticker": "HEN3.DE",
+      "close_at_log": 73.7,
+      "rs2_pct": 85.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AXTI",
+      "close_at_log": 52.93,
+      "rs2_pct": 100.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CORT",
+      "close_at_log": 96.66,
+      "rs2_pct": 99.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BTSG",
+      "close_at_log": 69.84,
+      "rs2_pct": 99.8,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VSTS",
+      "close_at_log": 15.59,
+      "rs2_pct": 99.7,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BAND",
+      "close_at_log": 58.74,
+      "rs2_pct": 99.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 44,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PARR",
+      "close_at_log": 77.61,
+      "rs2_pct": 99.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "DAVE",
+      "close_at_log": 408.59,
+      "rs2_pct": 99.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ACHC",
+      "close_at_log": 34.01,
+      "rs2_pct": 99.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "OII",
+      "close_at_log": 48.02,
+      "rs2_pct": 99.1,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ATEN",
+      "close_at_log": 34.66,
+      "rs2_pct": 99.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NWPX",
+      "close_at_log": 132.76,
+      "rs2_pct": 98.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 56,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CXW",
+      "close_at_log": 31.65,
+      "rs2_pct": 98.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "MXL",
+      "close_at_log": 91.24,
+      "rs2_pct": 98.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "WKC",
+      "close_at_log": 36.27,
+      "rs2_pct": 98.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ARWR",
+      "close_at_log": 86.78,
+      "rs2_pct": 98.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NHC",
+      "close_at_log": 221.51,
+      "rs2_pct": 98.3,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CON",
+      "close_at_log": 31.53,
+      "rs2_pct": 98.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BJRI",
+      "close_at_log": 65.09,
+      "rs2_pct": 98.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ALKS",
+      "close_at_log": 52.97,
+      "rs2_pct": 97.9,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CDNA",
+      "close_at_log": 37.61,
+      "rs2_pct": 97.8,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AMRX",
+      "close_at_log": 17.97,
+      "rs2_pct": 97.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ICHR",
+      "close_at_log": 94.02,
+      "rs2_pct": 97.6,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NBTX",
+      "close_at_log": 39.55,
+      "rs2_pct": 97.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "XHR",
+      "close_at_log": 21.03,
+      "rs2_pct": 97.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PTGX",
+      "close_at_log": 135.43,
+      "rs2_pct": 97.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "INSW",
+      "close_at_log": 91.35,
+      "rs2_pct": 97.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "GEO",
+      "close_at_log": 31.07,
+      "rs2_pct": 97.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KOP",
+      "close_at_log": 49.96,
+      "rs2_pct": 96.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PEB",
+      "close_at_log": 18.97,
+      "rs2_pct": 96.8,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PKOH",
+      "close_at_log": 38.17,
+      "rs2_pct": 96.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CNXN",
+      "close_at_log": 80.03,
+      "rs2_pct": 96.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RELL",
+      "close_at_log": 21.82,
+      "rs2_pct": 96.4,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 36,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-Multiple liegt weit über jeder plausiblen Peer-Referenz und wird von der dünnen operativen Marge sowie dem negativen FCF nicht gestützt; halbe Positionsgröße trotz intaktem technischen Setups."
+      },
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PLSE",
+      "close_at_log": 31.0,
+      "rs2_pct": 96.3,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ARCB",
+      "close_at_log": 156.99,
+      "rs2_pct": 96.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "XNCR",
+      "close_at_log": 19.53,
+      "rs2_pct": 96.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "FBP",
+      "close_at_log": 28.85,
+      "rs2_pct": 95.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "DRH",
+      "close_at_log": 12.67,
+      "rs2_pct": 95.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VSAT",
+      "close_at_log": 74.27,
+      "rs2_pct": 95.7,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SCHL",
+      "close_at_log": 46.44,
+      "rs2_pct": 95.6,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "UNF",
+      "close_at_log": 289.72,
+      "rs2_pct": 95.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VSXY",
+      "close_at_log": 82.79,
+      "rs2_pct": 95.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PENG",
+      "close_at_log": 58.41,
+      "rs2_pct": 95.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "UCTT",
+      "close_at_log": 100.56,
+      "rs2_pct": 95.1,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "MSGS",
+      "close_at_log": 394.3,
+      "rs2_pct": 95.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NATL",
+      "close_at_log": 47.55,
+      "rs2_pct": 94.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "MTRN",
+      "close_at_log": 248.61,
+      "rs2_pct": 94.8,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CAKE",
+      "close_at_log": 84.46,
+      "rs2_pct": 94.7,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "HIW",
+      "close_at_log": 32.78,
+      "rs2_pct": 94.6,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "FTRE",
+      "close_at_log": 19.5,
+      "rs2_pct": 94.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NEO",
+      "close_at_log": 14.24,
+      "rs2_pct": 94.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VCYT",
+      "close_at_log": 57.88,
+      "rs2_pct": 94.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "APLE",
+      "close_at_log": 16.61,
+      "rs2_pct": 94.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "WLY",
+      "close_at_log": 49.55,
+      "rs2_pct": 94.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PRSU",
+      "close_at_log": 51.58,
+      "rs2_pct": 93.7,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "TRST",
+      "close_at_log": 56.45,
+      "rs2_pct": 93.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PBI",
+      "close_at_log": 17.85,
+      "rs2_pct": 93.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PGNY",
+      "close_at_log": 30.7,
+      "rs2_pct": 93.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "TGTX",
+      "close_at_log": 55.5,
+      "rs2_pct": 93.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KFRC",
+      "close_at_log": 56.69,
+      "rs2_pct": 93.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PSNL",
+      "close_at_log": 12.22,
+      "rs2_pct": 93.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ENVA",
+      "close_at_log": 217.8,
+      "rs2_pct": 92.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AAMI",
+      "close_at_log": 80.23,
+      "rs2_pct": 92.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SM",
+      "close_at_log": 33.51,
+      "rs2_pct": 92.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": 65,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ECPG",
+      "close_at_log": 85.63,
+      "rs2_pct": 92.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PNTG",
+      "close_at_log": 39.81,
+      "rs2_pct": 92.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BNL",
+      "close_at_log": 22.36,
+      "rs2_pct": 92.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SEZL",
+      "close_at_log": 159.01,
+      "rs2_pct": 92.1,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ANDE",
+      "close_at_log": 78.25,
+      "rs2_pct": 92.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SAH",
+      "close_at_log": 99.11,
+      "rs2_pct": 91.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RSI",
+      "close_at_log": 31.32,
+      "rs2_pct": 91.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RCUS",
+      "close_at_log": 29.73,
+      "rs2_pct": 91.5,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "MKSI",
+      "close_at_log": 345.3,
+      "rs2_pct": 91.4,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BLFS",
+      "close_at_log": 30.77,
+      "rs2_pct": 91.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KLIC",
+      "close_at_log": 106.08,
+      "rs2_pct": 91.2,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": 64,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VCTR",
+      "close_at_log": 96.49,
+      "rs2_pct": 91.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RXO",
+      "close_at_log": 27.77,
+      "rs2_pct": 91.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "DDOG",
+      "close_at_log": 244.39,
+      "rs2_pct": 90.8,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 52,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PEBO",
+      "close_at_log": 39.8,
+      "rs2_pct": 90.7,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "IRDM",
+      "close_at_log": 47.64,
+      "rs2_pct": 90.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PSMT",
+      "close_at_log": 186.67,
+      "rs2_pct": 90.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "OSCR",
+      "close_at_log": 28.92,
+      "rs2_pct": 90.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PFIS",
+      "close_at_log": 68.01,
+      "rs2_pct": 90.3,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PLBC",
+      "close_at_log": 60.66,
+      "rs2_pct": 90.2,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RHP",
+      "close_at_log": 128.89,
+      "rs2_pct": 90.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "EXTR",
+      "close_at_log": 29.73,
+      "rs2_pct": 89.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "IPAR",
+      "close_at_log": 119.75,
+      "rs2_pct": 89.8,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SCSC",
+      "close_at_log": 53.88,
+      "rs2_pct": 89.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "BFH",
+      "close_at_log": 103.58,
+      "rs2_pct": 89.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ACIW",
+      "close_at_log": 54.53,
+      "rs2_pct": 89.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "STBA",
+      "close_at_log": 50.98,
+      "rs2_pct": 89.2,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "CBRL",
+      "close_at_log": 51.82,
+      "rs2_pct": 89.1,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "COHU",
+      "close_at_log": 54.51,
+      "rs2_pct": 89.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 60,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KN",
+      "close_at_log": 38.81,
+      "rs2_pct": 88.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VSH",
+      "close_at_log": 40.8,
+      "rs2_pct": 88.8,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "WERN",
+      "close_at_log": 43.91,
+      "rs2_pct": 88.6,
+      "regime": "green",
+      "setup_pts": 4,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AXSM",
+      "close_at_log": 241.53,
+      "rs2_pct": 88.5,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AVAH",
+      "close_at_log": 9.08,
+      "rs2_pct": 88.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "IART",
+      "close_at_log": 18.56,
+      "rs2_pct": 88.3,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "IVT",
+      "close_at_log": 35.81,
+      "rs2_pct": 88.2,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "THRM",
+      "close_at_log": 45.61,
+      "rs2_pct": 88.1,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VIRT",
+      "close_at_log": 59.67,
+      "rs2_pct": 87.9,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "AAT",
+      "close_at_log": 24.24,
+      "rs2_pct": 87.8,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "WSFS",
+      "close_at_log": 78.96,
+      "rs2_pct": 87.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KMX",
+      "close_at_log": 58.39,
+      "rs2_pct": 87.6,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "HTLD",
+      "close_at_log": 14.83,
+      "rs2_pct": 87.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SNDR",
+      "close_at_log": 37.75,
+      "rs2_pct": 87.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "DGII",
+      "close_at_log": 65.8,
+      "rs2_pct": 87.3,
+      "regime": "green",
+      "setup_pts": 0,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ACMR",
+      "close_at_log": 88.42,
+      "rs2_pct": 87.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RHI",
+      "close_at_log": 37.85,
+      "rs2_pct": 87.0,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "VCEL",
+      "close_at_log": 45.05,
+      "rs2_pct": 86.9,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ZD",
+      "close_at_log": 51.81,
+      "rs2_pct": 86.8,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "OFG",
+      "close_at_log": 52.43,
+      "rs2_pct": 86.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NFBK",
+      "close_at_log": 15.31,
+      "rs2_pct": 86.6,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "SMBC",
+      "close_at_log": 77.72,
+      "rs2_pct": 86.4,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ESE",
+      "close_at_log": 331.41,
+      "rs2_pct": 86.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RBCAA",
+      "close_at_log": 90.76,
+      "rs2_pct": 86.2,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ANET",
+      "close_at_log": 176.61,
+      "rs2_pct": 86.1,
+      "regime": "green",
+      "setup_pts": 3,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": 78,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "KGS",
+      "close_at_log": 65.28,
+      "rs2_pct": 86.0,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "RLMD",
+      "close_at_log": 5.2,
+      "rs2_pct": 85.9,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 0,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "ETSY",
+      "close_at_log": 80.91,
+      "rs2_pct": 85.7,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NSP",
+      "close_at_log": 47.98,
+      "rs2_pct": 85.6,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "MLKN",
+      "close_at_log": 21.46,
+      "rs2_pct": 85.5,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 3,
+      "status": "KAUFLISTE",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "HTO",
+      "close_at_log": 63.92,
+      "rs2_pct": 85.4,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 2,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "NTRA",
+      "close_at_log": 264.69,
+      "rs2_pct": 85.3,
+      "regime": "green",
+      "setup_pts": 2,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": 50,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
+    },
+    {
+      "date": "2026-07-25",
+      "market": "smallcap",
+      "ticker": "PUBM",
+      "close_at_log": 12.3,
+      "rs2_pct": 85.1,
+      "regime": "green",
+      "setup_pts": 1,
+      "gws_pts": 1,
+      "status": "KANDIDAT",
+      "verdict_score": null,
+      "funnel_veto": null,
+      "fwd_returns": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      },
+      "fwd_alpha": {
+        "1w": null,
+        "4w": null,
+        "13w": null,
+        "26w": null
+      }
     }
   ],
-  "updated_at": "2026-07-24 05:20"
+  "updated_at": "2026-07-25 05:15"
 }
