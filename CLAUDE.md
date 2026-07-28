@@ -148,6 +148,57 @@ Abschnitt "Risiko-Staffel"): max. Verlust je Trade in % des Invests.
 Am Ende zusätzlich die Ø EV-Upside über alle Batch-Ticker ausgeben (wie die
 "Ø EV-Upside"-Kennzahl oben in der Platform-Tabelle).
 
+## Turnaround-Kandidaten-Check (Earnings)
+
+Wenn der Nutzer schreibt `Earningsanalyse TICKER1 TICKER2 ...` (Screening
+nach frischen Quartalszahlen, VOR einer vollständigen `Analysiere TICKER`):
+Kein `write_rating()`, keine 11-Abschnitte-Analyse — nur die Kennzahlen-
+Recherche plus eine Turnaround-Einstufung je Ticker.
+
+**Referenzmuster: CNC Q1 2026** (`analyses/cnc.md`,
+`instagram/data/earnings/CNC.json`) — Verlustquartale (Q4 25 EPS −1,16 $)
+kippen in einen Blowout-Beat (Q1 26 EPS 3,37 $, +62 % Surprise), die
+Kern-Kennzahl der Krise (Health Benefits Ratio) normalisiert sich sichtbar,
+und das Management hebt die Jahresprognose an statt sie erneut zu kappen.
+Genau diese Kombination — nicht der Beat allein — macht einen echten
+Turnaround-Kandidaten aus.
+
+1. **Je Ticker Earnings-Kennzahlen ermitteln** — gleiche Quelle/Fallback wie
+   im Earnings-Check des Analyse-Workflows (Schritt 1 oben): bevorzugt
+   `fetch_fundamentals(TICKER)`, sonst WebSearch. Ermitteln: EPS
+   actual/estimate/surprise %, Revenue YoY, Guidance-Richtung (angehoben /
+   bestätigt / gesenkt), Kursreaktion, sowie — falls vorhanden — die
+   Kern-Kennzahl, die eine vorherige Krise erklärt hätte (Marge, Quote,
+   Segment-Kennzahl).
+2. **RS-Score/Momentum** aus dem passenden RS-JSON ziehen (siehe Schritt 2
+   des Analyse-Workflows). Ist der Ticker in keinem RS-JSON getrackt (z. B.
+   Micro-Cap-Bank), das explizit als "RS-Daten nicht verfügbar" ausweisen —
+   nicht schätzen oder auslassen.
+3. **Turnaround-Kriterien prüfen** (alle vier nötig für "Ja"):
+   - Klares Verlust→Gewinn- oder Krisen→Erholungs-Muster in der jüngsten
+     Historie (mind. 1 Verlust-/Krisenquartal in den letzten 12 Monaten) —
+     ein Beat bei einem bereits gesunden, stetig wachsenden Geschäft erfüllt
+     dies NICHT, unabhängig von der Surprise-Höhe
+   - Eine identifizierbare Kern-Kennzahl normalisiert sich sichtbar
+     (analog MCR bei CNC) — sonst als "kein klarer Normalisierungs-Beleg"
+     kennzeichnen
+   - Guidance wird angehoben statt (wie in Vorperioden) gesenkt
+   - EPS-Surprise ≥ 10 % (Schwelle analog `check_earnings.py`,
+     `MIN_EPS_SURPRISE`)
+4. **Einstufung ausgeben** — kurze Tabelle, keine Volltext-Analyse:
+
+   ```
+   | Ticker | EPS Surprise | Guidance | Kern-Kennzahl | Turnaround? |
+   |--------|--------------|----------|---------------|-------------|
+   | TICKER | +X %         | ↑/→/↓    | Kurzbefund    | Ja/Nein/Grenzfall |
+   ```
+
+   Danach je Ticker 1–2 Sätze Begründung, mit explizitem Verweis, welches
+   der vier Kriterien fehlt (falls "Nein"/"Grenzfall").
+5. **Nur für bestätigte Kandidaten** ("Ja") auf Wunsch des Nutzers mit
+   `Analysiere TICKER` in die volle 11-Abschnitte-Analyse inkl.
+   `write_rating()` übergehen — nicht automatisch im selben Schritt.
+
 ## Wikifolio Wochenrückblick (Feed-Post)
 
 Wenn der Nutzer schreibt `Wochenrückblick KW<NN>` oder `Feed-Post KW<NN>`:
