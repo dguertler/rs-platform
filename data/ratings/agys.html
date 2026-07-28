@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AGYS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">28.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AGYS</h1>
+      <h2>Agilysys, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 28.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">25.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$103.24</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">32.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">62.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">13.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">128–140</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">52–60</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $128–$140 (25 %) · Base $95–$105 (50 %) · Bear $52–$60 (25 %) · EV ~$98</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Agilysys ist ein Nischen-Compounder für Hospitality-Software (Property-Management, POS, Payments für Hotels/Resorts/Casinos), kein Turnaround-Fall — es gibt keine Verlust- oder Krisenperiode in der jüngeren Historie. Q1 FY27 (27.07.2026) lieferte Rekordumsatz von $87,7 Mio. (+14,3 % YoY) und einen Adj.-EPS-Beat ($0,49 vs. $0,40 Konsens, +21,7 %), getragen von einer Verschiebung des Umsatzmix hin zu Subscription (69,7 % des wiederkehrenden Umsatzes, +26,1 % YoY). Das Management hob die FY27-Umsatzguidance auf $368–373 Mio. an (von $365–370 Mio.). Was der Markt einpreist: dass die SaaS-Transformation (höhere Subscription-Quote, planbarere Erlöse) sich in einer strukturell höheren Bewertungsprämie niederschlägt — der Kurs handelt bereits mit einem deutlichen Aufschlag zu vergleichbaren vertikalen Software-Anbietern.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Vertikale Nischensoftware für Hospitality: Property-Management-Systeme, Point-of-Sale, Zahlungsabwicklung für Hotels/Resorts/Casinos</li>
+<li>Umstellung von Lizenz-/Wartungsmodell auf Subscription treibt Marge und Planbarkeit — Kern-Werttreiber der letzten Jahre</li>
+<li>Kleine, fokussierte Kundenbasis mit hohen Switching Costs (tief integrierte Betriebssysteme im Hotelbetrieb)</li>
+<li>Bruttomarge 62,6 %, operative Marge 15,0 % — Marge steigt mit Subscription-Mix strukturell</li>
+<li>D/E 5,8 % niedrig, FCF $49 Mio. auf $319 Mio. TTM-Umsatz solide</li>
+<li>Wachstumshebel: Cross-Sell von Zahlungsmodulen in die bestehende PMS-Kundenbasis</li>
+<li>Beta 0,36 sehr niedrig — ungewöhnlich für einen Small-Cap-Wachstumswert, deutet auf spezialisierte, wenig liquide Halterbasis hin</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Subscription-Mix-Shift beschleunigt sich weiter über die 30 %-Guidance hinaus, Margenhebel setzt sichtbar ein, M&A-Optionalität in angrenzende Hospitality-Software-Nischen. Annahme (kein Konsens): FY28-EPS ~$2,30 × 58x (Peer-Bandbreite AppFolio 19,6x / Paycom 11,8x deutlich überschritten — gerechtfertigt nur bei bestätigter Wachstumsbeschleunigung über 30 % Subscription hinaus). Bull-Kursziel: $128–$140 (Midpoint $134). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Fortsetzung des aktuellen ~20 %-EPS-Wachstumspfads im Rahmen der eigenen Guidance. Annahme (kein Konsens): FY28-EPS ~$2,00 × 50x (nahe dem eigenen aktuellen Bewertungsniveau, deutlich über AppFolio/Paycom — siehe Abschnitt 7 zur Prämienbegründung). Base-Kursziel: $95–$105 (Midpoint $100). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Hospitality-Capex-Zyklus (Hotelbau/-renovierung) kühlt ab, Subscription-Wachstum fällt unter 20 %, größere Plattformanbieter (Oracle Hospitality) drängen mit Bundling in die Nische. Kundenkonzentration: nicht quantifiziert im Datensatz, strukturell auf Hospitality-Sektor konzentriert — Zyklusrisiko statt Einzelkunden-Risiko. Geopolitik/China-Exposure: gering, überwiegend US-/globales Hospitality-Geschäft, nicht quantifizierbar. Lieferketten/Foundry: nicht anwendbar. Verwässerung: Aktienanzahl-Trend nicht im Datensatz — nicht beurteilbar. Regulierung: gering. Annahme: FY28-EPS ~$1,60 × 35x (Kompression Richtung AppFolio, aber noch mit Wachstumsprämie). Bear-Kursziel: $52–$60 (Midpoint $56). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 25 % + 50 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $134 + 0,50 × $100 + 0,25 × $56 = $33,50 + $50,00 + $14,00 = **~$98 — implizites Downside vs. aktuellem Kurs ($103,24): −5,1 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 13,1 %, ROIC 17,1 % — solide für einen Nischenanbieter, aber kein außergewöhnlicher Burggraben-Beleg. FCF $49 Mio. (FCF-Marge ~15,4 % auf TTM-Umsatz) unterstreicht die Qualität des Subscription-Modells. Auffällige Kennzahl-Anomalie: Der im Datensatz hinterlegte Forward-EPS-Wert ($3,19, daraus abgeleitete Forward-PE 32,4x) impliziert mehr als eine Verdopplung gegenüber dem Trailing-EPS ($1,37) binnen eines Jahres — bei einem Umsatzwachstum von 14–17 % und moderater Margenausweitung ist das nicht plausibel und wird als yfinance-Artefakt gewertet, nicht als Bewertungsgrundlage verwendet. Stattdessen wird in Abschnitt 3–5 eine eigene, aus FY26-Actual ($1,39 EPS) und der Guidance abgeleitete Wachstumsannahme (~20 %/Jahr) verwendet.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 75,4x, die (unplausible) Forward-PE aus dem Datensatz wird gemäß Abschnitt 6 nicht verwendet. Auf Basis der eigenen Base-Case-Annahme (FY28-EPS $2,00) impliziert der aktuelle Kurs ein Multiple von ~52x — deutlich über den Software-Peers AppFolio (19,6x Forward) und Paycom (11,8x Forward). Diese Prämie ist teilweise strukturell begründet (Subscription-Wachstum 26 % YoY, Nischen-Moat im Hospitality-Betrieb, sehr niedriges Beta 0,36 deutet auf konzentrierte, überzeugte Halterbasis hin), aber nicht vollständig — echte reinrassige Hospitality-Software-Peers (Toast, PAR Technology) sind nicht im Datensatz verifizierbar, die relative Bewertung bleibt daher indikativ. P/B 8,47x ist für einen Software-Anbieter mit dieser Größe hoch, aber bei diesem ROIC/ROE-Profil nicht ungewöhnlich. Analyst-Konsensziel $127,33 — als Orientierungspunkt, nicht als Kursziel-Ceiling, liegt deutlich über dem aktuellen Kurs und spiegelt eine optimistischere Sell-Side-Einschätzung wider als die eigene Base-Case-Herleitung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score nur 25,4 (Smallcap-Rang 367) trotz des starken Quartals — 6-Monats-Performance −17,3 % zeigt, dass der Titel vor dem Beat in einem Abwärtstrend war; der jüngste 50-Tage-Sprung (+49,9 %) deutet auf einen beginnenden, aber noch nicht breit bestätigten Reversal hin. Short Float/institutionelle Positionierung nicht im Datensatz. Hypothese, nicht datenbasiert: Das niedrige Beta (0,36) und die schwache RS-Rangierung trotz Rekordzahlen sprechen für eine dünne, wenig von Fast-Money getriebene Handelsbasis — Kursbewegungen sind eher fundamental- als momentumgetrieben.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>5T −3,2 %, 10T −6,3 %, 20T +2,2 %, 50T +49,9 %, 6M −17,3 % — die kurzfristigen Fenster (vor der Kursreaktion vom 27.07.) waren negativ, was zur vorherigen 6-Monats-Schwäche passt. Das Momentum ist fundamental durch den Beat gestützt, aber die RS-Rangierung bestätigt noch keinen nachhaltigen Trendwechsel. Kein GWS-Signal aktiv. Warnsignal: Ein erneuter Rückfall unter das 20-Tage-Fenster ohne neue fundamentale Impulse würde den jüngsten Bounce als reine Ein-Tages-Reaktion entlarven.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($140–$170):** Subscription-Mix übersteigt 80 %, Margenexpansion setzt sich fort, Agilysys wird als eigenständige Konsolidierungsplattform in der Hospitality-Software aktiv.</p>
+<p>**Base ($100–$130):** Solide Fortsetzung des aktuellen Wachstumspfads im Rahmen der eigenen Guidance.</p>
+<p>**Bear ($55–$75):** Hospitality-Capex-Zyklus dreht, größere Plattformanbieter erodieren die Nischenposition.</p>
+<p>Entscheidende Variable: Ob die Subscription-Quote nachhaltig über 30 % YoY wächst oder sich normalisiert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Agilysys ist ein solider Nischen-Compounder, kein Turnaround-Trade — die Verlust-/Krisenhistorie, die einen Turnaround-Fall auszeichnen würde, fehlt vollständig. Trotz eines sauberen Beat-and-Raise ergibt die eigene Szenario-Rechnung mit −5,1 % keinen asymmetrischen Edge, da der Markt die Qualität bereits mit einer erheblichen Prämie zu Software-Peers einpreist. Geeignet für Investoren mit Überzeugung in die Hospitality-SaaS-Transformation und Toleranz für hohe Bewertungsmultiples; ungeeignet als kurzfristiger Value- oder Turnaround-Trade. Position an die hohe Bewertungsprämie anpassen (kleiner dimensionieren als bei einem Peer-nahen Multiple). Peer: **AppFolio (APPF)** als günstigerer vertikaler SaaS-Vergleichswert, **Paycom (PAYC)** als reifere, niedriger bewertete Alternative mit geringerem Wachstum. Peer-Multiples für reinrassige Hospitality-Tech-Konkurrenten (Toast, PAR) nicht im Datensatz verifizierbar — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Die Forward-PE-Anomalie im Datensatz und die eigene Bewertung von ~52x FY28-EPS gegenüber Peers von 12–20x rechtfertigen trotz starkem Quartal keine volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
