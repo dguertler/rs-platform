@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AXTA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AXTA</h1>
+      <h2>Axalta Coating Systems Ltd.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Basic Materials</span></div>
+        <div class="mi">Industrie: <span>Specialty Chemicals</span></div>
+        <div class="mi">MCap: <span>$8B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$35.44</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$5.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">34.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-3.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–44</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">33–38</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">23–30</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $38–$44 (25 %) · Base $33–$38 (50 %) · Bear $23–$30 (25 %) · EV ~$34,63</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: AXTA ist in keinem RS-Platform-Universum getrackt — kein RS-Score verfügbar. Fundamentaldaten wurden mangels yfinance-Zugriff manuell per WebSearch zum 29.07.2026 recherchiert. AXTA meldete am 28.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung): Adj. EPS $0,72 vs. $0,65 erwartet (+10,8%), Umsatz $1,35 Mrd. (+3% YoY), FY26-Guidance bei $2,55–2,70 EPS bestätigt. Diese Zahlen sind aber zweitrangig gegenüber der entscheidenden strukturellen Tatsache: Axalta befindet sich in einem angekündigten All-Share-"Merger of Equals" mit AkzoNobel (Umtauschverhältnis 0,6539 AkzoNobel-Aktien je Axalta-Aktie, impliziter Dealwert "im mittleren $30er-Bereich", €2,5-Mrd.-Sonderdividende an AkzoNobel-Aktionäre, Axalta-Aktionäre erhalten ~45% des kombinierten Unternehmens). Die Aktionärsabstimmung beider Unternehmen ist für den 05.08.2026 angesetzt — in wenigen Tagen. Das ist strukturell entscheidend: AXTA ist aktuell primär eine M&A-Arbitrage-Situation, keine klassische Standalone-Bewertungsstory. Der aktuelle Kurs ($35,44) liegt bereits nahe am impliziten Dealwert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Spezialchemie/Industrielacke: Automotive-Refinish (Karosserie-Reparaturlacke) und Industrial-Coatings-Segmente</li>
+<li>Bruttomarge ~34%, Operating Margin ~14,4% — solide, aber unterdurchschnittlich ggü. Sherwin-Williams' Premium-Coatings-Margenprofil</li>
+<li>Bevorstehende AkzoNobel-Fusion verändert das Geschäftsmodell strukturell: aus zwei getrennten Coatings-Portfolios entsteht ein diversifizierterer, global aufgestellter Konzern mit Synergiepotenzial (Einkauf, F&E, Vertriebsnetz)</li>
+<li>D/E 136,5% — nennenswerte Verschuldung, die sich durch die Fusion neu zusammensetzen wird (kombinierte Bilanz inkl. AkzoNobel-Sonderdividende)</li>
+<li>Revenue-Wachstum nur +3% YoY — reifes, zyklisches Industriegeschäft ohne strukturellen Wachstumstreiber im Kernsegment</li>
+<li>Automotive-Refinish-Segment ist strukturell an Fahrzeugbestand/Unfallhäufigkeit gekoppelt — stabiler, aber nicht wachstumsstark</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Fusion wird wie geplant vollzogen (HV-Abstimmung 05.08.2026 erfolgreich), AkzoNobel-Aktie legt nach Closing durch realisierte Synergien zu, der implizite Wert der erhaltenen AkzoNobel-Aktien steigt. Annahme (kein Konsens): impliziter Wert je Axalta-Aktie steigt auf $38–44 durch Synergie-Realisierung und Neubewertung des kombinierten Konzerns. Bull-Kursziel: $38–$44 (Mittelpunkt $41). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Fusion wird wie angekündigt vollzogen, impliziter Wert bleibt nahe dem aktuellen Umtauschverhältnis-Niveau. Annahme: Kurs bewegt sich im Bereich des aktuellen Dealwerts. Base-Kursziel: $33–$38 (Mittelpunkt $35,5). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Aktionärsabstimmung am 05.08.2026 scheitert, Regulierungsbehörden blockieren die Fusion (Kartellrecht in Coatings-Kernmärkten), oder die AkzoNobel-Aktie verliert deutlich an Wert vor Closing. AXTA würde dann auf eine Standalone-Bewertung ohne Deal-Prämie zurückfallen. Kundenkonzentration: Automotive-OEM-/Refinish-Kunden auf Datenbasis nicht quantifizierbar. Geopolitik: globale Coatings-Lieferketten mit gewissem China-Exposure — nicht quantifizierbar. Lieferketten/Single-Source: Rohstoff-Abhängigkeit (Harze, Pigmente) als branchentypisches Risiko. Verwässerung: die Fusion selbst ist strukturell eine massive Verwässerung/Neustrukturierung des Aktionariats (Axalta-Aktionäre erhalten nur ~45% des kombinierten Unternehmens) — zentral zu berücksichtigen. Regulierung: Kartellrechtliche Prüfung ist der Hauptrisikofaktor für das Bear-Szenario. Annahme: Standalone-EPS $2,40 × 11x (nahe eigenem aktuellen Multiple ohne Deal-Prämie) = $26,40. Bear-Kursziel: $23–$30 (Mittelpunkt $26,5). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $41 + 0,50 × $35,5 + 0,25 × $26,5 = $10,25 + $17,75 + $6,625 = **~$34,63 — implizites Downside vs. aktuellem Kurs ($35,44): −2,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der Kurs liegt bereits nahe dem fairen Wert der M&A-Arbitrage-Situation.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Operating Margin 14,4%, Gross Margin ~34% — solide, aber nicht herausragend im Coatings-Sektor. D/E 136,5% ist nennenswert, wird sich durch die Fusion neu strukturieren. Der eigentliche "Burggraben" ist hier weniger operativ als transaktionsgetrieben — die Fusion selbst schafft potenziell einen größeren, diversifizierteren Wettbewerber, aber die Integrationskomplexität eines Merger-of-Equals ist ein reales Risiko, das in Standard-Qualitätskennzahlen nicht abgebildet wird.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Standalone-Forward-KGV 10,57x liegt unter allen drei genannten Peers: PPG Industries 12,87x, RPM International 17,41x, Sherwin-Williams 30,94x — ein Abschlag von 18% bis 66%. Dieser Abschlag lässt sich strukturell durch die M&A-Unsicherheit erklären: der Markt bewertet AXTA nicht rein fundamental, sondern über die erwartete Deal-Konsumierung. Was preist der Kurs ein? Bei $35,44 preist der Markt eine hohe Wahrscheinlichkeit für den erfolgreichen Fusionsabschluss zu den angekündigten Konditionen ein (vereinfachte Rechnung, Annahme) — plausibel angesichts der fortgeschrittenen Deal-Phase (Abstimmung bereits terminiert), aber mit echtem Restrisiko.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Buy", Kursziel $35,71 — praktisch identisch mit dem aktuellen Kurs, was die Deal-Arbitrage-Natur der Situation unterstreicht; "Analyst-Konsensziel $35,71 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen", zumal dieses Ziel wahrscheinlich noch nicht die volle Post-Earnings-Reaktion reflektiert. Short-Float-Daten nicht verfügbar. In M&A-Arbitrage-Situationen dominieren typischerweise spezialisierte Merger-Arb-Fonds statt klassischer Long-Only-Investoren (Hypothese, nicht datenbasiert) — Volatilität rund um den 05.08.-Abstimmungstermin ist zu erwarten.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kein RS-Score verfügbar (nicht getrackt). Kurs nahe dem 52-Wochen-Hoch ($35,72) nach dem Post-Earnings-Sprung (+5,0%). Kein GWS-Signal aus der RS-Platform verfügbar. Das "Momentum" hier ist primär M&A-getrieben, nicht fundamental oder technisch im klassischen Sinne. Warnsignal: jede Nachricht zu Verzögerungen oder Widerstand bei der Aktionärsabstimmung am 05.08.2026 wäre ein unmittelbares Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($45–$60):** Fusion schließt erfolgreich, kombinierter AkzoNobel-Axalta-Konzern realisiert Synergien und wird als globaler Top-3-Coatings-Anbieter neu bewertet.</p>
+<p>**Base ($30–$42):** Fusion schließt zu den angekündigten Konditionen, kombiniertes Unternehmen entwickelt sich in Linie mit dem Coatings-Sektor.</p>
+<p>**Bear ($18–$28):** Fusion scheitert an Regulierung oder Aktionärsabstimmung, AXTA fällt auf Standalone-Bewertung ohne Deal-Prämie zurück.</p>
+<p>Entscheidende Variable: Erfolgreicher Abschluss der AkzoNobel-Fusion (Aktionärsabstimmung 05.08.2026, danach regulatorische Freigaben).</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −2,3%, praktisch neutral). AXTA ist aktuell keine klassische Compounder- oder Momentum-Aktie, sondern eine M&A-Arbitrage-Situation mit einer entscheidenden bevorstehenden Aktionärsabstimmung (05.08.2026). Für Investoren ohne spezifische Merger-Arb-Strategie ist das Chance-Risiko-Verhältnis unattraktiv, da das Aufwärtspotenzial durch die Deal-Konditionen gedeckelt ist, während ein Scheitern der Fusion zu einem spürbaren Rückschlag führen würde. Positionsgröße: max. 2–3%, nur für Investoren, die die M&A-Situation aktiv verfolgen. Peers: **PPG Industries (PPG)** ist die reinere Standalone-Coatings-Alternative ohne Deal-Unsicherheit (12,87x); **Sherwin-Williams (SHW)** ist die Premium-Alternative bei deutlich höherer Bewertung (30,94x).</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Sonstiges — Bevorstehende AkzoNobel-Fusion (Aktionärsabstimmung 05.08.2026) macht dies zu einer M&A-Arbitrage-Situation statt einem klassischen Fundamental-/Momentum-Trade; kein RS-Signal getrackt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

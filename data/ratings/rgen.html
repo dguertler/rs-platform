@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RGEN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>RGEN</h1>
+      <h2>Repligen Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Life Sciences Tools & Services</span></div>
+        <div class="mi">MCap: <span>$7B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$150.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">72.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">53.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">2.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-26.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–175</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">105–125</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">45–58</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $150–$175 (20 %) · Base $105–$125 (50 %) · Bear $45–$58 (30 %) · EV ~$105,45</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: RGEN ist in keinem RS-Platform-Universum getrackt — kein RS-Score, kein GWS-Signal verfügbar. Fundamentaldaten wurden mangels yfinance-Zugriff manuell per WebSearch zum 29.07.2026 recherchiert. RGEN meldete am 28.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung) mit einem klaren Beat (Non-GAAP EPS $0,54 vs. $0,45–0,46, +18–20%; Umsatz $204,1 Mio., +11,9% YoY/+13% organisch) und einer angehobenen FY26-Guidance ($813–835 Mio. Umsatz, $2,03–2,09 EPS). Zusätzlich kündigte Repligen die Übernahme von BioLife Solutions an — eine Erweiterung ins Zelltherapie-Portfolio. Kurs sprang binnen zwei Sitzungen um ca. 14–16% auf ~$150 (einzelne Quellen nannten fälschlich +75%, unglaubwürdig und verworfen). Die eigentliche Frage: RGEN handelt nach dem Sprung zu einem Forward-KGV von ~73x — weit über selbst den teuersten genannten Life-Science-Tools-Peers (Bio-Techne 30,4x, Danaher 23,1x). Die operative Qualität ist real, aber die Bewertung preist bereits eine außergewöhnliche, mehrjährige Wachstumsfortsetzung ein.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Bioprocessing-Tools (Filtration, Chromatographie-Systeme) für die Biopharma-Produktion — strukturell profitiert von wachsendem Biologika-/Zelltherapie-Markt</li>
+<li>Segmente Proteine (~+50% YoY) und Analytics (>+30% YoY) wachsen deutlich schneller als der Konzernschnitt — Produktmix-Verschiebung zu höherwertigen Nischen</li>
+<li>BioLife-Solutions-Übernahme erweitert das Portfolio in Richtung Zelltherapie-Lagerung/-Logistik — laut Unternehmensangabe finanziell akkretiv</li>
+<li>Bruttomarge 53,9% (adjustiert) reflektiert das Premium-Tools-Geschäftsmodell, deutlich über generischen Life-Science-Distributoren</li>
+<li>GAAP-Kennzahlen (z. B. Q2 GAAP-EPS $0,09) liegen strukturell weit unter den Non-GAAP-Werten — M&A-/Integrationskosten und Abschreibungen verzerren die GAAP-Sicht erheblich</li>
+<li>D/E 26% — moderate Verschuldung, ausreichend Spielraum für die BioLife-Akquisition</li>
+<li>Konzentriertes Endmarkt-Exposure auf Biopharma-Produktions-Capex — zyklisch sensitiv bei Pharma-F&E-Budgetkürzungen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>BioLife-Integration gelingt reibungslos, Bioprocessing-Nachfrage beschleunigt sich weiter (Zelltherapie-Boom), Multiple bleibt nahe dem aktuellen erhöhten Niveau. Annahme (kein Konsens): FY27-EPS erreicht ~$2,35 (moderates Wachstum plus M&A-Akkretion) × 68x (nahe aktuellem Multiple, sofern Wachstum bestätigt) = $159,80. Bull-Kursziel: $150–$175 (Mittelpunkt $162,5). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Wachstum bleibt stark, aber das extreme Multiple normalisiert sich graduell. Annahme: EPS $2,10 (nahe Guidance-Mitte) × 55x (weiterhin deutliche Prämie ggü. Bio-Techne 30,4x, aber Kompression vom aktuellen 73x) = $115,50. Base-Kursziel: $105–$125 (Mittelpunkt $115). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Bioprocessing-Nachfrage schwächt sich ab (Pharma-Kunden reduzieren Capex), BioLife-Integration stockt, Multiple komprimiert vollständig Richtung Peer-Bandbreite. Kundenkonzentration: Biopharma-Großkunden als Abnehmerbasis — auf Datenbasis nicht quantifizierbar, aber strukturell konzentriert. Geopolitik: keine materielle China-Exposure erkennbar aus den Daten. Lieferketten: Spezialkomponenten für Filtrations-/Chromatographiesysteme als potenzielles Single-Source-Risiko, nicht quantifizierbar. Verwässerung: BioLife-Übernahme könnte teilweise aktienfinanziert sein — Aktienanzahl-Trend aus den Daten nicht verfügbar. Regulierung: Biopharma-Regulierung als indirektes Endmarktrisiko, nicht quantifizierbar. Annahme: EPS fällt auf $1,80 × 28x (Kompression Richtung Bio-Techne-Niveau) = $50,40. Bear-Kursziel: $45–$58 (Mittelpunkt $51,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $162,5 + 0,50 × $115 + 0,30 × $51,5 = $32,50 + $57,50 + $15,45 = **~$105,45 — implizites Downside vs. aktuellem Kurs ($150): −29,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, die Bewertung erscheint nach dem Sprung sehr anspruchsvoll.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Operating Margin (adjusted) 15,3%, Gross Margin 53,9% — solide, aber die GAAP-Kennzahlen (Operating Margin GAAP 6,8%, Net Margin GAAP 2,5% laut Recherche) liegen strukturell weit darunter. Diese Anomalie (Non-GAAP deutlich über GAAP) erklärt sich durch Abschreibungen und M&A-/Integrationskosten — aus den Daten nicht abschließend in der Höhe auflösbar, aber die Richtung ist klar. ROE 2,5% (GAAP-Basis) wirkt niedrig, ist aber durch die GAAP/Non-GAAP-Lücke verzerrt und kein verlässliches Qualitätsmaß in diesem Fall. Der Burggraben liegt in der technischen Nischenposition bei Bioprocessing-Filtration — real, aber nicht immun gegen Pharma-Capex-Zyklen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV ~73x liegt weit über allen genannten Peers: Danaher 23,1x, Bio-Techne 30,4x, Sartorius (nur trailing verfügbar, ~59,3x). Diese Prämie lässt sich aus den Daten nicht vollständig strukturell begründen — selbst Bio-Techne als am nächsten vergleichbarer Bioprocessing-Tools-Peer liegt mehr als 50% unter RGEN's Multiple. Was preist der Kurs ein? Bei $150 und Forward-EPS $2,06 preist der Markt ein außergewöhnliches, mehrjähriges Wachstum weit über dem aktuellen 12%-Trend ein (vereinfachte Rechnung, Annahme) — ambitioniert, nicht konservativ.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Buy", Kursziel $176 (22 Analysten, breite Coverage) — "Analyst-Konsensziel $176 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Mehrere unzuverlässige Quellen meldeten eine implausible +75%-Kursreaktion — ein Beispiel dafür, wie schnell fehlerhafte Daten in Sekundärquellen zirkulieren; die verlässlicheren Preispunkte deuten auf +14–16% über zwei Sitzungen hin. Institutionelle Positionierung: Hypothese, nicht datenbasiert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kein RS-Score verfügbar (nicht getrackt). Der Kurs bewegt sich nach dem Sprung im oberen Bereich der 52-Wochen-Spanne ($107,12–$175,77). Kein GWS-Signal aus der RS-Platform verfügbar. Warnsignal: ein Rückfall unter $130–135 (Konsolidierungszone vor dem vollen Sprung) wäre ein erstes technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($175–$220):** Zelltherapie-Boom treibt Bioprocessing-Nachfrage strukturell, BioLife-Integration liefert echte Synergien, Multiple bleibt erhöht.</p>
+<p>**Base ($95–$140):** Solides, aber sich normalisierendes Wachstum, Multiple-Kompression Richtung Bio-Techne-Niveau.</p>
+<p>**Bear ($40–$65):** Pharma-Capex-Kürzungen, Integrationsprobleme, deutliche Multiple-Kompression.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der Bioprocessing-Nachfrage und Erfolg der BioLife-Integration.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, EV zeigt −29,7% Downside. RGEN ist ein qualitativ hochwertiges Bioprocessing-Tools-Unternehmen mit einer echten Wachstumsstory, aber nach dem Post-Earnings-Sprung ist die Bewertung selbst im Vergleich zu Premium-Peers extrem gestreckt. Kein Einstiegspunkt für Neuengagements, eher ein Beobachtungskandidat für einen Rücksetzer. Für bestehende Positionen: Gewinnmitnahme-Disziplin erwägen. Positionsgröße bei Neueinstieg: max. 1–2% angesichts der extremen Bewertungsprämie. Peers: **Danaher (DHR)** und **Bio-Techne (TECH)** sind die deutlich günstigeren Life-Science-Tools-Alternativen (23,1x bzw. 30,4x) mit vergleichbarer struktureller Endmarkt-Exposure.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Forward-KGV ~73x liegt weit über den genannten Life-Science-Tools-Peers (Danaher 23,1x, Bio-Techne 30,4x); kein RS-Signal getrackt, der Funnel liefert keinen Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

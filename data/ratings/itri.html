@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ITRI — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ITRI</h1>
+      <h2>Itron, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Scientific & Technical Instruments</span></div>
+        <div class="mi">MCap: <span>$5B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal (Smallcap)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-26.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$107.02</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">38.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">18.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">125–145</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">98–112</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">55–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $125–$145 (20 %) · Base $98–$112 (50 %) · Bear $55–$68 (30 %) · EV ~$97,95</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: ITRI meldete am 28.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung) mit einer außergewöhnlichen Kursreaktion von +26,1% auf $107,02 — der Fundamental-Snapshot wurde entsprechend aktualisiert (zuvor $84,22). Itron ist der reinste börsennotierte Pure-Play auf Smart-Grid/Advanced-Metering-Infrastructure (AMI) in den USA. Die Q2-Zahlen sind widersprüchlich auf den ersten Blick: EPS $1,59 vs. $1,29–1,31 erwartet (+21–24% Beat), aber Umsatz $562,9 Mio. vs. $577,4 Mio. erwartet (-2,5% Miss) und -7% YoY-Rückgang. Der Markt ignorierte den Umsatzrückgang komplett und reagierte fast ausschließlich auf die Margen-Story und die angehobene FY26-EPS-Guidance ($6,30–6,50, +7% am Mittelpunkt). Das ist die eigentliche Frage: Ist die Margenexpansion strukturell (Software-/Analytics-Mix-Verschiebung) oder Kostendisziplin, die bei wieder anziehendem Umsatz nicht linear skaliert? Nach dem +26%-Sprung ist die Bewertung von einem Discount- auf ein Fair-Value-Niveau gegenüber AMI-Peers gerückt — der leichte Teil des Re-Ratings ist bereits erfolgt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Smart-Grid/AMI-Hardware (Stromzähler, Wasserzähler, Gaszähler) plus wachsendes Software-/Analytics-Segment für Versorger</li>
+<li>Umsatz ist stark projektbasiert (Versorger-Capex-Zyklen) — daher volatil und schwer linear zu prognostizieren</li>
+<li>Margenexpansion in Q2 (impliziert durch EPS-Beat trotz Umsatzrückgang) deutet auf verbesserten Produktmix oder Kostendisziplin hin — Ursache aus den Daten nicht abschließend auflösbar</li>
+<li>D/E 98,4% relativ hoch für ein Industrials/Tech-Hybridunternehmen — begrenzt finanziellen Spielraum bei erneuter Nachfrageschwäche</li>
+<li>Wettbewerb mit Badger Meter (Wasserzähler-Fokus) und Xylem/Sensus (breiter aufgestellt) — Itron hat die breiteste Multi-Commodity-Produktpalette (Strom/Gas/Wasser)</li>
+<li>FCF $300,8 Mio. bei $2,35 Mrd. Umsatz (12,8% FCF-Marge) — solide Cash-Generierung trotz Umsatzschwäche</li>
+<li>Revenue-Rückgang (-7% YoY) bei gleichzeitigem EPS-Beat ist strukturell zu beobachten — kein nachhaltiges Modell, wenn der Umsatz dauerhaft schrumpft</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Versorger-Capex-Zyklus dreht wieder nach oben (Netzmodernisierung, KI-getriebene Nachfrage nach Grid-Daten), Margenexpansion erweist sich als strukturell (Software-Mix). Annahme (kein Konsens): FY27-EPS erreicht ~$6,80 (moderates Wachstum von der FY26-Guidance-Mitte $6,40) × 20x (teilweise Annäherung an Peer Xylem 26,7x, konservativ) = $136,00. Bull-Kursziel: $125–$145 (Mittelpunkt $135). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, aber ohne weitere Dynamik, Umsatz stabilisiert sich auf niedrigerem Niveau. Annahme: EPS $6,40 (Guidance-Mitte) × 16,3x (eigenes aktuelles Forward-KGV nach dem Sprung) = $104,32. Base-Kursziel: $98–$112 (Mittelpunkt $105). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Umsatzrückgang setzt sich fort (Versorger schieben Capex weiter auf), die Margenexpansion erweist sich als einmalig/nicht nachhaltig. Kundenkonzentration: Versorgerkunden sind typischerweise groß und wenige — auf Datenbasis nicht quantifizierbar, aber strukturell konzentriert. Geopolitik: keine materielle China-Exposure erkennbar. Lieferketten: Halbleiterkomponenten für Zähler-Elektronik als potenzielles Single-Source-Risiko — aus den Daten nicht quantifizierbar. Verwässerung: Aktienanzahl-Trend nicht verfügbar. Regulierung: Versorgerregulierung (Rate-Cases) kann Capex-Zyklen indirekt beeinflussen — nicht quantifizierbar. Annahme: EPS fällt auf $5,00 × 12x (Abschlag ggü. eigenem aktuellen Multiple, gebrochene Wachstumsthese) = $60,00. Bear-Kursziel: $55–$68 (Mittelpunkt $61,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $135 + 0,50 × $105 + 0,30 × $61,5 = $27,00 + $52,50 + $18,45 = **~$97,95 — implizites Downside vs. aktuellem Kurs ($107,02): −8,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem +26%-Sprung ist ein Großteil der guten Nachrichten bereits eingepreist.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 18,6%, Operating Margin 11,5%, Gross Margin 38,8% — solide, aber nicht herausragend im Vergleich zu Software-lastigeren Peers. FCF-Marge 12,8% zeigt echte Cash-Generierung. D/E 98,4% ist der kritische Schwachpunkt — deutlich höher als bei den meisten Industrials-Peers, reduziert die Fähigkeit, einen erneuten Umsatzrückgang abzufedern. Der Burggraben liegt in der Multi-Commodity-Produktbreite (Strom/Gas/Wasser aus einer Hand) — ein echter, aber nicht unüberwindbarer Vorteil ggü. spezialisierteren Peers wie Badger Meter (reiner Wasserzähler-Fokus).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 16,3x (nach dem Kurssprung) liegt deutlich unter beiden genannten Peers: Xylem/Sensus ~26,7x und Badger Meter ~30–45x (weite Quellenstreuung). Diese Prämie der Peers lässt sich teilweise strukturell erklären (Xylem breiter diversifiziert über Wassermanagement hinaus, Badger Meter höhere Software-/Recurring-Revenue-Quote) — ITRI bleibt aber der günstigste Multi-Commodity-AMI-Wert. Was preist der aktuelle Kurs ein? Bei $107,02 und FY26-Guidance-Mitte $6,40 impliziert der Kurs ein Halten der aktuellen Marge bei moderiertem Umsatzwachstum (vereinfachte Rechnung, Annahme) — plausibel, aber nicht konservativ angesichts des laufenden Umsatzrückgangs.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Buy", Kursziel $126,70 (10 Analysten) — "Analyst-Konsensziel $126,70 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen", zumal dieses Ziel vor dem +26%-Sprung modelliert wurde und mittlerweile näher am aktuellen Kurs liegt als üblich. Short-Float-Daten nicht verfügbar. Der außergewöhnliche Ein-Tages-Sprung deutet auf kurzfristige Fast-Money-Reaktion hin (Hypothese, nicht datenbasiert) — Enttäuschungsrisiko ist hoch, falls die Margenexpansion in den kommenden Quartalen nicht bestätigt wird.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -26,67 (Rang 726 im Smallcap-Universum), Windows 5T +0,2%, 10T +1,3%, 20T +2,65%, 50T -4,45%, 6M -26,37% — diese Werte stammen aus der Zeit VOR dem Earnings-Sprung und sind damit veraltet; die massive Ein-Tages-Bewegung ist im RS-Score noch nicht reflektiert. Kein GWS-Signal getrackt. Ein technisches Warnsignal wäre ein Rückfall unter $95–98 (Konsolidierungszone vor dem Sprung plus Puffer).</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($140–$180):** KI-getriebene Nachfrage nach granularen Netzdaten treibt strukturelles Umsatzwachstum, Software-Anteil steigt deutlich, Multiple nähert sich Xylem-Niveau.</p>
+<p>**Base ($90–$130):** Zyklisches AMI-Geschäft mit stabilen, aber nicht wachsenden Margen.</p>
+<p>**Bear ($45–$70):** Anhaltender Versorger-Capex-Rückgang, Margenexpansion erweist sich als einmalig, D/E-Belastung wird zum Problem.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der Margenexpansion bei gleichzeitiger Rückkehr zu Umsatzwachstum.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,5%). ITRI ist ein zyklisches Industrials-Play auf Versorger-Capex, kein reiner Compounder — der jüngste EPS-Beat ist ein realer, aber noch unbestätigter Katalysator, während der Umsatzrückgang eine offene Frage bleibt. Nach dem +26%-Sprung ist das Chance-Risiko-Verhältnis für Neueinstiege verschlechtert; bestehende Positionen sollten die nächsten 1–2 Quartale auf Bestätigung der Margenexpansion beobachten. Positionsgröße: max. 2–3% angesichts der D/E-Belastung und der Bewertungs-Neubewertung nach dem Sprung. Peers: **Xylem (XYL)** ist die diversifiziertere, aber teurere Alternative (26,7x); **Badger Meter (BMI)** ist noch teurer (30–45x), aber mit höherem Software-/Recurring-Revenue-Anteil.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Nach dem +26%-Kurssprung ist die Bewertung nicht mehr günstig, der (vor dem Sprung gemessene) RS-Score zeigte zudem kein Momentum-Signal; der Funnel selbst hat noch keinen Kandidaten geliefert.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

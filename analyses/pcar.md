@@ -1,102 +1,100 @@
 # PCAR — KI-Aktienbewertung
 
-**PACCAR Inc.** · Industrials · 23.07.2026 · Signal: Kein GWS-Signal
+**PACCAR Inc.** · Industrials · 29.07.2026 · Signal: 4H-Breakout (QQQ & SPX)
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 126.2 |
-| Market Cap | $66.42 Mrd. |
-| Forward PE | 18.41 |
+| Kurs | 137.5 |
+| Market Cap | $72.36 Mrd. |
+| Forward PE | 20.06 |
 | Revenue (TTM) | $27.78 Mrd. |
 | Gross Margin | 13.6% |
 | ROE | 13.1% |
-| RS-Score | 34.9 |
+| RS-Score | 65.3 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✓ Aktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $150–$175 (20 %) · Base $115–$135 (50 %) · Bear $55–$75 (30 %) · EV ~$115
+**Szenarien (12–18 Monate):** Bull $148–$168 (20 %) · Base $128–$148 (50 %) · Bear $52–$65 (30 %) · EV ~$118,15
 
 ## 1. INVESTMENT-CASE
 
-PACCAR notiert nahe dem 52-Wochen-Hoch ($131,88), obwohl der Umsatz um 8,9 % YoY gefallen ist — ein klassisches Muster für zyklische Industrietitel, bei dem der Markt beginnt, den Zyklustiefpunkt vorwegzunehmen, bevor die Daten selbst drehen. Die Class-8-Truck-Nachfrage befindet sich seit 2023 in einer Fracht-/Bestellrezession; PACCAR (Kenworth, Peterbilt, DAF) ist über die Erstausrüstung direkt exponiert. Die RS-Struktur bestätigt diese Wende: 6-Monats-Momentum ist noch negativ (-7,75 %), aber die kürzeren Fenster (50T +17,43 %, 20T +12,77 %) zeigen eine klare Beschleunigung nach oben — der Markt preist eine Zyklus-Erholung ein, während die Trailing-Fundamentaldaten noch die Talsohle zeigen. Zusätzlicher struktureller Faktor: Die EPA-2027-Emissionsvorschriften erzeugen historisch ein Pre-Buy-Muster (Vorzieheffekte vor Regelwechsel), gefolgt von einem Nachfrage-Luftloch danach — diese Dynamik muss in jede Bewertung der nächsten 12–18 Monate eingepreist werden.
+DATENLAGE: PCAR meldete am 28.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung), Kurs reagierte mit +2,7% auf ~$137,50 nahe einem neuen 52-Wochen-Hoch — der Fundamental-Snapshot wurde entsprechend aktualisiert (zuvor $132,24). PACCAR profitiert von einem klaren Beat (EPS $1,43 vs. ~$1,32–1,35 erwartet, +6–8%; Umsatz $7,55 Mrd. über Konsens) und einer optimistischeren Auslieferungsprognose für Q3 (~42.000 Einheiten, von 38.700 in Q2). Zusätzlich hat die EPA die NOx-Emissionsregel entschärft/zeitlich gestreckt, was Produktplanungsunsicherheit reduziert. Die eigentliche Spannung: der TTM-Umsatz ist mit -8,9% weiterhin rückläufig (klassischer Class-8-Truck-Zyklusabschwung), während die Aktie gleichzeitig ein neues 52-Wochen-Hoch erreicht — ein Signal, dass der Markt bereits eine Zykluswende einpreist, bevor sie sich in den Top-Line-Zahlen zeigt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Hersteller schwerer Nutzfahrzeuge (Kenworth, Peterbilt, DAF) — Class-8-Truck-Zyklus ist der dominante Ergebnistreiber
-- PACCAR Parts (Ersatzteile) als margenstärkeres, weniger zyklisches Gegengewicht zur Neufahrzeug-Erstausrüstung
-- PACCAR Financial Services (Finanzierung/Leasing für Flottenkunden) als zusätzlicher, aber kreditzyklus-abhängiger Ertragsbaustein
-- Eigene Motorenfertigung (PACCAR MX) reduziert Abhängigkeit von externen Motorenlieferanten wie Cummins, aber erhöht Kapitalintensität
-- Gross Margin nur 13,6 % — typisch dünn für Schwerlast-Fahrzeugfertigung, Gewinnhebel liegt im Volumenzyklus
-- EPA-2027-Emissionsvorschriften als zweischneidiger Katalysator: kurzfristiger Pre-Buy-Boost, danach strukturelles Nachfrage-Luftloch
-- Internationale Diversifikation über DAF (Europa) mindert US-spezifisches Zyklusrisiko teilweise
-- Dividendenrendite nur 1,11 % — Kapitalallokation stärker auf Reinvestition/Buybacks als auf laufende Ausschüttung ausgerichtet
+- Hersteller schwerer Nutzfahrzeuge (Kenworth, Peterbilt, DAF) plus margenstarkes Ersatzteilgeschäft (Rekordumsatz $1,75 Mrd. in Q2)
+- Zyklisches Kerngeschäft folgt dem Class-8-Truck-Orderzyklus — aktuell in einer Übergangsphase vom Zyklustief zur Erholung
+- Ersatzteile-/Servicegeschäft wirkt als Stabilisator gegen die Zyklizität des Neufahrzeuggeschäfts
+- Lokale Produktion mildert Tarifbelastungen — strukturell vorteilhaft ggü. stärker importabhängigen Wettbewerbern
+- EPA-Regulierungsklarheit (NOx-Regel entschärft) reduziert eine wichtige Investitionsunsicherheit für Flottenkunden
+- D/E 76,2% — moderate Verschuldung für einen zyklischen Industriewert, aber real bei einem Abschwung
+- Einige hundert Trucks in Q2 wegen Lieferengpässen nicht ausgeliefert — Nachholpotenzial für kommende Quartale
 
 ## 3. BULL CASE
 
-Frachtzyklus erreicht 2026 die Talsohle und dreht 2027 kräftig nach oben, EPA-2027-Pre-Buy erzeugt zusätzlichen Bestellschub in der zweiten Jahreshälfte 2026, PACCAR Parts und Financial Services stützen die Marge während der Erholung. Peers: CMI (Cummins, direkter Motoren-/Antriebsstrang-Peer im Trucking-Ökosystem, 19,03x) als engster Vergleich; CAT (28,92x) und DE (26,17x) als breitere Schwerausrüstungs-Zykliker mit abweichenden Endmärkten (Bau/Landwirtschaft statt Trucking) zur oberen Bandbreite. Annahme (kein Konsens): FY-EPS ~$8,20 × 20,0x (Rerating über CMI hinaus bei bestätigtem Zyklusumschwung) = $164. Bull-Kursziel: $150–$175 (Midpoint $162,50). Eintrittswahrscheinlichkeit: 20 %.
+Frachtzyklus erholt sich beschleunigt, Class-8-Auftragseingänge springen deutlich an, die EPA-Klarheit setzt aufgeschobene Flottenerneuerungen frei. Annahme (kein Konsens): FY27-EPS erreicht ~$7,20 (Zykluserholung) × 22x (leichte Prämie innerhalb der Cummins-Bandbreite) = $158,40. Bull-Kursziel: $148–$168 (Mittelpunkt $158). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Der Zyklus bleibt 2026 schwach, mit graduellem Übergang in eine moderate Erholung 2027; EPS bewegt sich seitwärts bis leicht positiv. Annahme (kein Konsens): FY-EPS ~$7,00 × 18,0x (nahe eigenem aktuellen Forward-Multiple) = $126. Base-Kursziel: $115–$135 (Midpoint $125). Eintrittswahrscheinlichkeit: 50 %.
+Wahrscheinlichstes Szenario: der Konsens-Forward-EPS ($6,86) wird erreicht, moderate, aber nicht beschleunigte Zykluserholung. Annahme: EPS $6,86 × 20x (eigenes aktuelles Forward-KGV) = $137,20. Base-Kursziel: $128–$148 (Mittelpunkt $138, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Die Frachtrezession vertieft sich, ein Gebrauchttruck-Überangebot drückt zusätzlich auf Neufahrzeugpreise, und nach dem EPA-2027-Pre-Buy folgt das erwartete Nachfrage-Luftloch mit voller Wucht 2027. Kundenkonzentration: Großflottenkunden (Trucking-Unternehmen) sind konzentriert und reagieren stark prozyklisch auf Frachtraten — Auftragsstornierungen bei anhaltender Fracht-Schwäche real. Geopolitik: DAF-Europa-Geschäft unterliegt EU-Emissionsregulierung und Handelsspannungen, keine akute China-Exposure erkennbar. Lieferketten: eigene Motorenfertigung reduziert externe Abhängigkeit, aber Halbleiter-/Elektronikkomponenten bleiben ein generisches Lieferkettenrisiko. Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar — auf Datenbasis nicht beurteilbar. Regulierung: EPA-2027-Vorschriften sind zugleich Chance und Risiko — ein regulatorisch verursachtes Nachfrage-Luftloch ist das materiellste Einzelrisiko. Annahme: FY-EPS ~$4,50 × 14,0x (Kompression unter CMI-Niveau bei brechender Zyklus-These) = $63. Bear-Kursziel: $55–$75 (Midpoint $65). Eintrittswahrscheinlichkeit: 30 %.
+Auslöser: die Frachtrezession vertieft sich, Class-8-Auftragseingänge kollabieren erneut (klassisches Zyklustief), Multiple komprimiert Richtung europäischer Truck-OEM-Bewertungen. Kundenkonzentration: große Flottenbetreiber als Kernkunden — auf Datenbasis nicht quantifizierbar, aber strukturell konzentriert. Geopolitik/Exportkontrollen: Tarifrisiken bei importierten Komponenten trotz lokaler Endproduktion — teilweise gemildert, nicht vollständig eliminiert. Lieferketten: Halbleiter-/Komponentenengpässe haben bereits in Q2 Auslieferungen verzögert — reales, wiederkehrendes Risiko. Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar. Regulierung: EPA-Regelklarheit könnte sich bei einem Regierungswechsel wieder verschärfen — Restrisiko. Annahme: EPS fällt auf $4,50 (zyklisches Tief) × 13x (Kompression Richtung Daimler Truck 13,9x) = $58,50. Bear-Kursziel: $52–$65 (Mittelpunkt $58,5). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 20 % + 50 % + 30 % = 100 %**
+**Summe: 20% + 50% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,20 × $162,50 + 0,50 × $125 + 0,30 × $65 = $32,50 + $62,50 + $19,50 = **~$115 — implizites Downside vs. aktuellem Kurs ($126,20): −9,3 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $158 + 0,50 × $138 + 0,30 × $58,5 = $31,60 + $69,00 + $17,55 = **~$118,15 — implizites Downside vs. aktuellem Kurs ($137,50): −14,1%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 13,11 %, ROIC 8,14 % — solide, aber klar zyklusgedrückt gegenüber früheren Boom-Jahren. Free Cashflow $1,48 Mrd. bei $27,78 Mrd. Revenue (5,3 % FCF-Marge) bleibt trotz Umsatzrückgang positiv — zeigt operative Widerstandsfähigkeit im Abschwung. Bilanzqualität gut: D/E 76,2 % ist moderat für einen Industriekonzern mit eigener Finanzierungssparte. Der Burggraben liegt in Markenstärke (Kenworth/Peterbilt-Premium-Positionierung) und der PACCAR-Parts-Aftermarket-Infrastruktur — strukturell real, aber im Neufahrzeuggeschäft dem vollen Zyklusrisiko ausgesetzt.
+ROE 13,1%, Operating Margin 10,4% — solide für einen zyklischen Nutzfahrzeughersteller, aber im Zykluskontext zu bewerten: diese Margen könnten nahe dem Zyklusdurchschnitt statt am Tief liegen, was die aktuelle Bewertung anspruchsvoller macht. FCF $1,48 Mrd. bei $27,8 Mrd. Umsatz (5,3% FCF-Marge) — moderat für die Branche. Der Burggraben liegt im Ersatzteile-/Servicenetzwerk und der Markenstärke (Kenworth/Peterbilt) — real, aber nicht immun gegen den Class-8-Zyklus.
 
 ## 7. BEWERTUNG
 
-Forward-PE 18,41x liegt knapp unter dem direktesten Peer CMI (19,03x) und deutlich unter CAT (28,92x) / DE (26,17x) — letztere sind aber andere Endmärkte (Bau/Landwirtschaft) und nur bedingt vergleichbar, was PACCARs Bewertung relativ konservativ erscheinen lässt. Rückrechnung "Was preist der Kurs ein?": Bei $126,20 und Forward-EPS $6,85 impliziert der Markt bereits eine spürbare Ergebniserholung von der aktuellen Talsohle — ambitioniert angesichts noch fallender Trailing-Umsätze (-8,9 % YoY), aber nicht unplausibel bei einem klassischen Zyklustief-Kauf. Das eigene Forward-Multiple liegt innerhalb der Peer-Bandbreite (19–29x), am unteren Ende — strukturell durch die dünnere Marge (13,6 % Gross Margin vs. Industriedurchschnitt) erklärbar.
+Forward-KGV ~20,1x liegt in der Mitte der Cummins-Bandbreite (19,9–24,7x), aber deutlich über den europäischen Truck-OEMs Daimler Truck (13,9x) und Volvo AB (11,1x, Datenstand möglicherweise veraltet). Diese Prämie ggü. den europäischen Peers lässt sich teilweise durch PACCARs stärkere US-Marktposition und Margenqualität erklären, ist aber angesichts des rückläufigen TTM-Umsatzes (-8,9%) nicht vollständig unbedenklich. Was preist der Kurs ein? Bei $137,50 nahe dem 52-Wochen-Hoch preist der Markt eine bereits laufende Zykluserholung ein, die sich in den Top-Line-Zahlen noch nicht zeigt (vereinfachte Rechnung, Annahme) — ambitioniert, solange der Umsatz noch rückläufig ist.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 34,87, Rang 41 im NASDAQ-100 — moderates, aber klar beschleunigendes Momentum (50T +17,43 % nach 6M -7,75 %) deutet auf einen Sentiment-Umschwung hin, typisch für frühzyklische Positionierung. Analystenkonsens "Buy", Kursziel $128,44 — knapp über dem aktuellen Kurs, verhalten optimistisch. Hypothese, nicht datenbasiert: Die Bewegung wirkt wie früher Long-Only-Einstieg in Erwartung eines Zyklustiefs, nicht wie eine Fast-Money-Spekulation. Enttäuschungsrisiko: Jede Verzögerung der Fracht-Erholung oder schwächere Auftragseingänge im Q2-Call (28. Juli 2026) könnten die Vorwegnahme korrigieren.
+Analystenkonsens "Buy", cached Kursziel $128,44 (16 Analysten) — liegt bereits unter dem aktuellen Kurs, dürfte nach dem Beat und der verbesserten Q3-Auslieferungsprognose nach oben revidiert werden; "Analyst-Konsensziel $128,44 (vor dem Report) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Die Rally auf ein neues 52-Wochen-Hoch trotz rückläufigem Umsatz deutet auf vorwegnehmende Zyklus-Positionierung institutioneller Investoren hin (Hypothese, nicht datenbasiert).
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Kurs $126,20 nahe 52-Wochen-Hoch ($131,88). Momentum: 5T +3,59 %, 10T +8,83 %, 20T +12,77 %, 50T +17,43 %, 6M -7,75 % — die Beschleunigung in den kürzeren Fenstern bei noch negativem 6-Monats-Wert ist das Kernsignal einer möglichen Zyklus-Wende. Kein GWS-Signal aktiv (Weekly/Daily/4H inaktiv). Nächster Katalysator: Q2-Earnings am 28. Juli 2026 — Auftragseingänge und Guidance für 2027 werden entscheidend sein. Warnsignal: Rückfall unter $110 würde die jüngste Erholungsbewegung technisch invalidieren.
+RS-Score +65,29 (Rang 35 im NASDAQ-100) — starkes relatives Momentum. Windows: 5T +11,11%, 10T +12,61%, 20T +16,37%, 50T +24,51%, 6M +0,69% — konsistent starke kurz- bis mittelfristige Rally, während das 6M-Fenster noch die vorherige Konsolidierung reflektiert. GWS-Signal: aktiver 4H-Breakout (29.07.2026, QQQ- und SPX-Referenz), Weekly-Signal historisch (23.07.2026, nicht mehr aktuell aktiv). Warnsignal: ein Rückfall unter $125–128 wäre ein erstes technisches Warnsignal nach der starken Rally.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($140–$190):** Mehrjähriger Ersatzzyklus nach der Fracht-Rezession, EPA-2027-Vorschriften treiben nachhaltige Flottenerneuerung, PACCAR gewinnt Marktanteile über Premium-Marken.
+**Bull ($165–$210):** Vollständige Class-8-Zykluserholung, EPA-Regulierungsklarheit setzt aufgeschobene Flottenerneuerungen strukturell frei, Marktanteilsgewinne ggü. europäischen Peers.
 
-**Base ($90–$140):** Normaler zyklischer Auf-und-Ab-Verlauf ohne strukturelle Neubewertung, PACCAR bleibt profitabler, aber volatiler Zyklustitel.
+**Base ($120–$160):** Normaler zyklischer Verlauf mit moderater Erholung nach dem aktuellen Abschwung.
 
-**Bear ($50–$85):** Strukturelle Nachfrageschwäche durch Elektrifizierungs-Unsicherheit und verlängerte Frachtrezession, EPA-Luftloch trifft härter als erwartet.
+**Bear ($55–$85):** Verlängerte Frachtrezession, erneuter Zyklusabschwung, Lieferkettenprobleme belasten Auslieferungen weiter.
 
-Entscheidende Variable: Timing und Stärke der Class-8-Truck-Zykluserholung sowie Netto-Effekt der EPA-2027-Regulierung (Pre-Buy vs. Luftloch).
+Entscheidende Variable: Tempo und Nachhaltigkeit der Class-8-Truck-Zykluserholung.
 
 ## 11. PROFI-FAZIT
 
-PCAR ist ein zyklischer Trading-Trade auf eine Frachtzyklus-Erholung, kein Buy-and-Hold-Compounder. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -9,3 %) — der Kurs hat die Erholungserwartung bereits weitgehend vorweggenommen, während die Trailing-Zahlen noch die Talsohle zeigen. Geeignet für zyklisch orientierte Trader mit Timing-Überzeugung zur Frachtwende; für konservative Value-Investoren aktuell kein klarer Einstiegspunkt angesichts des negativen EV. Positionsgröße moderat halten und Auftragseingangsdaten aus dem Q2-Call als nächsten Belastungstest beobachten. Peer-Vergleich: **CMI** (19,03x) ist der nächstliegende Trucking-Ökosystem-Peer mit vergleichbarem Zyklusrisiko, aktuell ähnlich bewertet; für eine reinere Wette auf den Frachtzyklus selbst wären Transportunternehmen (z.B. Eisenbahnen wie CSX/UNP) das direktere Instrument.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −14,1%). PCAR ist ein zyklischer Trading-Titel, kein Compounder — die aktuelle Rally auf ein 52-Wochen-Hoch bei gleichzeitig rückläufigem Umsatz ist ein Warnsignal für eine bereits vorweggenommene Zykluswende. Das starke RS-Signal (Rang 35) und der aktive 4H-Breakout bestätigen das kurzfristige Momentum, aber die Bewertung ggü. europäischen Peers (Daimler Truck, Volvo) ist anspruchsvoll. Positionsgröße: 3–4%, mit Trailing-Stop-Disziplin angesichts der Zyklizität. Peers: **Daimler Truck** und **Volvo AB** sind die günstigeren europäischen Alternativen (13,9x bzw. 11,1x, Datenstand teils älter) mit vergleichbarer Zyklus-Exposure; **Cummins** ist der nächstliegende US-Peer bei ähnlicher Bewertung.
 
-- Qualität: 3/5
+- Qualität: 4/5
 - Wachstum: 2/5
-- Bewertung: 3/5
+- Bewertung: 2/5
 - Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Kurs preist bereits eine Zyklus-Erholung ein, während der EV auf dem aktuellen Niveau ein Downside von -9,3 % zeigt.
-
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz starkem RS-Signal (Rang 35) und aktivem 4H-Breakout handelt PCAR nahe einem 52-Wochen-Hoch bei rückläufigem Umsatz (-8,9% TTM) und einem KGV über den europäischen Peers (Daimler Truck 13,9x, Volvo 11,1x); Reduzierung der Positionsgröße angemessen.
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 3/5 |
+| Qualität | 4/5 |
 | Wachstum | 2/5 |
-| Bewertung | 3/5 |
+| Bewertung | 2/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -6.9% |
+| EV-Upside | -14.1% |
 
-**Verdict: WATCH (49/100)**
+**Verdict: WATCH (44/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

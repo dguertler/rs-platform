@@ -1,12 +1,12 @@
 # AGYS — KI-Aktienbewertung
 
-**Agilysys, Inc.** · Technology · 28.07.2026 · Signal: Smallcap
+**Agilysys, Inc.** · Technology · 29.07.2026 · Signal: Kein GWS-Signal (Smallcap)
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 103.24 |
-| Market Cap | $2.91 Mrd. |
-| Forward PE | 32.39 |
+| Kurs | 118.0 |
+| Market Cap | $3.33 Mrd. |
+| Forward PE | 37.02 |
 | Revenue (TTM) | $0.32 Mrd. |
 | Gross Margin | 62.6% |
 | ROE | 13.1% |
@@ -16,75 +16,75 @@
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $128–$140 (25 %) · Base $95–$105 (50 %) · Bear $52–$60 (25 %) · EV ~$98
+**Szenarien (12–18 Monate):** Bull $120–$140 (20 %) · Base $92–$110 (50 %) · Bear $55–$68 (30 %) · EV ~$94,95
 
 ## 1. INVESTMENT-CASE
 
-Agilysys ist ein Nischen-Compounder für Hospitality-Software (Property-Management, POS, Payments für Hotels/Resorts/Casinos), kein Turnaround-Fall — es gibt keine Verlust- oder Krisenperiode in der jüngeren Historie. Q1 FY27 (27.07.2026) lieferte Rekordumsatz von $87,7 Mio. (+14,3 % YoY) und einen Adj.-EPS-Beat ($0,49 vs. $0,40 Konsens, +21,7 %), getragen von einer Verschiebung des Umsatzmix hin zu Subscription (69,7 % des wiederkehrenden Umsatzes, +26,1 % YoY). Das Management hob die FY27-Umsatzguidance auf $368–373 Mio. an (von $365–370 Mio.). Was der Markt einpreist: dass die SaaS-Transformation (höhere Subscription-Quote, planbarere Erlöse) sich in einer strukturell höheren Bewertungsprämie niederschlägt — der Kurs handelt bereits mit einem deutlichen Aufschlag zu vergleichbaren vertikalen Software-Anbietern.
+DATENLAGE: AGYS meldete am 27.07.2026 Q1-FY27-Zahlen (innerhalb der 7-Tage-Pflichtprüfung), Kurs sprang intraday um ~11,6% auf ein Niveau um $118 — der Fundamental-Snapshot wurde entsprechend aktualisiert (zuvor $103,24). Agilysys ist vertikale Hospitality-Software (Property-Management, POS, Inventory für Hotels/Resorts/Casinos) mit einer beeindruckenden operativen Historie: 18 aufeinanderfolgende Rekordquartale. Q1 FY27 zeigte erneut einen klaren Beat (Adj. EPS $0,49 vs. $0,40, +21,7%; Rekordumsatz $87,7 Mio., +14,3% YoY) und eine angehobene FY27-Guidance ($368–373 Mio., Subscription-Wachstum ≥32%). Die eigentliche Frage ist nicht die operative Qualität — die ist ausgezeichnet —, sondern ob nach einer Verdopplung vom 52-Wochen-Tief ($61,50) auf aktuell ~$118 und einem Forward-KGV von ~37x (weit über dem SaaS-Sektor-Median ~17,4x) noch Bewertungsspielraum besteht. Der Markt preist bereits eine sehr hohe Wachstumsprämie ein.
 
 ## 2. GESCHÄFTSMODELL
 
-- Vertikale Nischensoftware für Hospitality: Property-Management-Systeme, Point-of-Sale, Zahlungsabwicklung für Hotels/Resorts/Casinos
-- Umstellung von Lizenz-/Wartungsmodell auf Subscription treibt Marge und Planbarkeit — Kern-Werttreiber der letzten Jahre
-- Kleine, fokussierte Kundenbasis mit hohen Switching Costs (tief integrierte Betriebssysteme im Hotelbetrieb)
-- Bruttomarge 62,6 %, operative Marge 15,0 % — Marge steigt mit Subscription-Mix strukturell
-- D/E 5,8 % niedrig, FCF $49 Mio. auf $319 Mio. TTM-Umsatz solide
-- Wachstumshebel: Cross-Sell von Zahlungsmodulen in die bestehende PMS-Kundenbasis
-- Beta 0,36 sehr niedrig — ungewöhnlich für einen Small-Cap-Wachstumswert, deutet auf spezialisierte, wenig liquide Halterbasis hin
+- Vertikale SaaS für Hospitality: Property-Management-Systeme, Point-of-Sale, Inventory-Management für Hotels, Resorts, Casinos
+- Bruttomarge 62,6% — typisches Software-Margenprofil, deutlich über generischen Payments-/Hardware-Peers
+- Subscription-Umsatzanteil wächst strukturell (Guidance: ≥32% Wachstum) — höhere Vorhersagbarkeit und Bewertungsprämie gerechtfertigt, aber nicht unbegrenzt
+- Sehr niedrige Verschuldung (D/E 5,8%) — praktisch schuldenfreie Bilanz, hohe finanzielle Flexibilität
+- FCF $49,0 Mio. bei $319,3 Mio. Umsatz (15,4% FCF-Marge) — solide Cash-Generierung
+- Operativer Hebel: 18 Rekordquartale in Folge deuten auf strukturelle Skaleneffekte im SaaS-Modell hin
+- Konzentriertes Endmarkt-Exposure (Hospitality/Gaming) — zyklisch sensitiv bei Reise-/Freizeitausgabenrückgang
+- Wettbewerb mit größeren, diversifizierteren Anbietern (Oracle Hospitality/MICROS) — Agilysys ist der reine Nischen-Player
 
 ## 3. BULL CASE
 
-Subscription-Mix-Shift beschleunigt sich weiter über die 30 %-Guidance hinaus, Margenhebel setzt sichtbar ein, M&A-Optionalität in angrenzende Hospitality-Software-Nischen. Annahme (kein Konsens): FY28-EPS ~$2,30 × 58x (Peer-Bandbreite AppFolio 19,6x / Paycom 11,8x deutlich überschritten — gerechtfertigt nur bei bestätigter Wachstumsbeschleunigung über 30 % Subscription hinaus). Bull-Kursziel: $128–$140 (Midpoint $134). Eintrittswahrscheinlichkeit: 25 %.
+18-Rekordquartale-Serie setzt sich fort, Subscription-Mix steigt weiter, internationale Expansion beschleunigt. Annahme (kein Konsens): EPS erreicht ~$3,70 (FY28, moderates Wachstum vom Konsens-Forward-EPS $3,19) × 35x (nahe dem aktuellen erhöhten Multiple, sofern Wachstum bestätigt) = $129,50. Bull-Kursziel: $120–$140 (Mittelpunkt $130). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Fortsetzung des aktuellen ~20 %-EPS-Wachstumspfads im Rahmen der eigenen Guidance. Annahme (kein Konsens): FY28-EPS ~$2,00 × 50x (nahe dem eigenen aktuellen Bewertungsniveau, deutlich über AppFolio/Paycom — siehe Abschnitt 7 zur Prämienbegründung). Base-Kursziel: $95–$105 (Midpoint $100). Eintrittswahrscheinlichkeit: 50 %.
+Wahrscheinlichstes Szenario: Wachstum bleibt stark, aber das Multiple normalisiert sich graduell aus der aktuellen Spitze. Annahme: EPS $3,35 × 30x (Kompression von 37x, aber weiterhin deutliche Prämie ggü. SaaS-Median 17,4x) = $100,50. Base-Kursziel: $92–$110 (Mittelpunkt $101). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Hospitality-Capex-Zyklus (Hotelbau/-renovierung) kühlt ab, Subscription-Wachstum fällt unter 20 %, größere Plattformanbieter (Oracle Hospitality) drängen mit Bundling in die Nische. Kundenkonzentration: nicht quantifiziert im Datensatz, strukturell auf Hospitality-Sektor konzentriert — Zyklusrisiko statt Einzelkunden-Risiko. Geopolitik/China-Exposure: gering, überwiegend US-/globales Hospitality-Geschäft, nicht quantifizierbar. Lieferketten/Foundry: nicht anwendbar. Verwässerung: Aktienanzahl-Trend nicht im Datensatz — nicht beurteilbar. Regulierung: gering. Annahme: FY28-EPS ~$1,60 × 35x (Kompression Richtung AppFolio, aber noch mit Wachstumsprämie). Bear-Kursziel: $52–$60 (Midpoint $56). Eintrittswahrscheinlichkeit: 25 %.
+Auslöser: Wachstumsverlangsamung im Hospitality-Endmarkt (Reise-/Freizeitausgaben schwächeln), die Rekordquartale-Serie bricht. Kundenkonzentration: auf Datenbasis nicht quantifizierbar, aber Nischenmarkt-Exposure ist strukturell konzentriert. Geopolitik: keine materielle China-Exposure erkennbar. Lieferketten: als Software-Anbieter kein Foundry-/Hardware-Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar, SBC bei Software-Unternehmen typischerweise ein Faktor — nicht quantifizierbar. Regulierung: Gaming-/Casino-Regulierung als indirektes Endmarktrisiko, nicht quantifizierbar. Annahme: EPS fällt auf $3,00 × 20x (Kompression Richtung breiterem SaaS-Median 17,4x) = $60,00. Bear-Kursziel: $55–$68 (Mittelpunkt $61,5). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 25 % + 50 % + 25 % = 100 %**
+**Summe: 20% + 50% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,25 × $134 + 0,50 × $100 + 0,25 × $56 = $33,50 + $50,00 + $14,00 = **~$98 — implizites Downside vs. aktuellem Kurs ($103,24): −5,1 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $130 + 0,50 × $101 + 0,30 × $61,5 = $26,00 + $50,50 + $18,45 = **~$94,95 — implizites Downside vs. aktuellem Kurs ($118): −19,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, die Bewertung nach der Rally erscheint anspruchsvoll.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 13,1 %, ROIC 17,1 % — solide für einen Nischenanbieter, aber kein außergewöhnlicher Burggraben-Beleg. FCF $49 Mio. (FCF-Marge ~15,4 % auf TTM-Umsatz) unterstreicht die Qualität des Subscription-Modells. Auffällige Kennzahl-Anomalie: Der im Datensatz hinterlegte Forward-EPS-Wert ($3,19, daraus abgeleitete Forward-PE 32,4x) impliziert mehr als eine Verdopplung gegenüber dem Trailing-EPS ($1,37) binnen eines Jahres — bei einem Umsatzwachstum von 14–17 % und moderater Margenausweitung ist das nicht plausibel und wird als yfinance-Artefakt gewertet, nicht als Bewertungsgrundlage verwendet. Stattdessen wird in Abschnitt 3–5 eine eigene, aus FY26-Actual ($1,39 EPS) und der Guidance abgeleitete Wachstumsannahme (~20 %/Jahr) verwendet.
+ROE 13,1%, Bruttomarge 62,6%, Operating Margin 15,0% — solides, aber nicht Best-in-Class-SaaS-Margenprofil (viele reife SaaS-Anbieter erreichen 25%+ operative Marge). FCF-Marge 15,4% ist gesund. Bilanzqualität exzellent (D/E 5,8%, praktisch schuldenfrei). Der Burggraben liegt in der Nischenspezialisierung (Hospitality-Vertikale, tiefe Produktintegration bei Hotelketten) — real, aber klein im Vergleich zu diversifizierteren Enterprise-Software-Anbietern.
 
 ## 7. BEWERTUNG
 
-Trailing PE 75,4x, die (unplausible) Forward-PE aus dem Datensatz wird gemäß Abschnitt 6 nicht verwendet. Auf Basis der eigenen Base-Case-Annahme (FY28-EPS $2,00) impliziert der aktuelle Kurs ein Multiple von ~52x — deutlich über den Software-Peers AppFolio (19,6x Forward) und Paycom (11,8x Forward). Diese Prämie ist teilweise strukturell begründet (Subscription-Wachstum 26 % YoY, Nischen-Moat im Hospitality-Betrieb, sehr niedriges Beta 0,36 deutet auf konzentrierte, überzeugte Halterbasis hin), aber nicht vollständig — echte reinrassige Hospitality-Software-Peers (Toast, PAR Technology) sind nicht im Datensatz verifizierbar, die relative Bewertung bleibt daher indikativ. P/B 8,47x ist für einen Software-Anbieter mit dieser Größe hoch, aber bei diesem ROIC/ROE-Profil nicht ungewöhnlich. Analyst-Konsensziel $127,33 — als Orientierungspunkt, nicht als Kursziel-Ceiling, liegt deutlich über dem aktuellen Kurs und spiegelt eine optimistischere Sell-Side-Einschätzung wider als die eigene Base-Case-Herleitung.
+Forward-KGV ~37x liegt weit über dem breiteren Software-Sektor-Median (~17,4x, referenziert über den Payments-Peer Shift4). Diese Prämie lässt sich teilweise strukturell begründen (14,3% Umsatzwachstum, ≥32% Subscription-Wachstum, 18 Rekordquartale, schuldenfreie Bilanz), aber nicht vollständig aus den Daten verifizieren — Peer-Multiples für reine Hospitality-Vertikal-SaaS sind im Datensatz nicht vorhanden; Shift4 (Payments, 8,6x) und PAR Technology (unprofitabel, KGV nicht aussagekräftig) sind keine sauberen Vergleichswerte für das Geschäftsmodell. Was preist der Kurs ein? Bei $118 und Forward-EPS $3,19 preist der Markt ein anhaltendes Wachstum von 15%+ p.a. über mehrere Jahre ein (vereinfachte Rechnung, Annahme) — ambitioniert, aber angesichts der Historie nicht unplausibel.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score nur 25,4 (Smallcap-Rang 367) trotz des starken Quartals — 6-Monats-Performance −17,3 % zeigt, dass der Titel vor dem Beat in einem Abwärtstrend war; der jüngste 50-Tage-Sprung (+49,9 %) deutet auf einen beginnenden, aber noch nicht breit bestätigten Reversal hin. Short Float/institutionelle Positionierung nicht im Datensatz. Hypothese, nicht datenbasiert: Das niedrige Beta (0,36) und die schwache RS-Rangierung trotz Rekordzahlen sprechen für eine dünne, wenig von Fast-Money getriebene Handelsbasis — Kursbewegungen sind eher fundamental- als momentumgetrieben.
+Analystenkonsens "Buy", Kursziel $128,50 (8 Analysten, mehrere Kurszielanhebungen nach dem Report: Needham $120→$130, Piper Sandler $110→$120) — "Analyst-Konsensziel $128,50 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Beta 0,363 (sehr niedrig) deutet auf geringe Marktkorrelation hin — ungewöhnlich für eine Aktie mit derart hoher Bewertungsprämie, aus den Daten nicht abschließend erklärbar.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-5T −3,2 %, 10T −6,3 %, 20T +2,2 %, 50T +49,9 %, 6M −17,3 % — die kurzfristigen Fenster (vor der Kursreaktion vom 27.07.) waren negativ, was zur vorherigen 6-Monats-Schwäche passt. Das Momentum ist fundamental durch den Beat gestützt, aber die RS-Rangierung bestätigt noch keinen nachhaltigen Trendwechsel. Kein GWS-Signal aktiv. Warnsignal: Ein erneuter Rückfall unter das 20-Tage-Fenster ohne neue fundamentale Impulse würde den jüngsten Bounce als reine Ein-Tages-Reaktion entlarven.
+RS-Score +25,42 (Rang 532 im Smallcap-Universum) — positives relatives Momentum, real und nicht nur fundamental getrieben. Windows: 5T -3,15%, 10T -6,3%, 20T +2,21%, 50T +49,91%, 6M -17,25% — der 50T-Wert (+49,9%) zeigt die massive Rally der letzten ~10 Wochen, während 5T/10T bereits eine leichte Konsolidierung andeuten. Kein GWS-Signal getrackt. Warnsignal: Rückfall unter $100–105 (vorheriges Konsolidierungsniveau) wäre ein erstes technisches Warnsignal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($140–$170):** Subscription-Mix übersteigt 80 %, Margenexpansion setzt sich fort, Agilysys wird als eigenständige Konsolidierungsplattform in der Hospitality-Software aktiv.
+**Bull ($140–$180):** Subscription-Mix erreicht Mehrheitsanteil, internationale Expansion gelingt, Multiple bleibt bei anhaltendem 15%+-Wachstum erhöht.
 
-**Base ($100–$130):** Solide Fortsetzung des aktuellen Wachstumspfads im Rahmen der eigenen Guidance.
+**Base ($85–$130):** Solides, aber sich normalisierendes Wachstum, Multiple pendelt sich näher am SaaS-Median ein.
 
-**Bear ($55–$75):** Hospitality-Capex-Zyklus dreht, größere Plattformanbieter erodieren die Nischenposition.
+**Bear ($45–$70):** Hospitality-Endmarktschwäche, Wachstumsserie bricht, Multiple-Kompression auf breiteren Software-Median.
 
-Entscheidende Variable: Ob die Subscription-Quote nachhaltig über 30 % YoY wächst oder sich normalisiert.
+Entscheidende Variable: Nachhaltigkeit des Subscription-Wachstums und Fortsetzung der Rekordquartale-Serie.
 
 ## 11. PROFI-FAZIT
 
-Agilysys ist ein solider Nischen-Compounder, kein Turnaround-Trade — die Verlust-/Krisenhistorie, die einen Turnaround-Fall auszeichnen würde, fehlt vollständig. Trotz eines sauberen Beat-and-Raise ergibt die eigene Szenario-Rechnung mit −5,1 % keinen asymmetrischen Edge, da der Markt die Qualität bereits mit einer erheblichen Prämie zu Software-Peers einpreist. Geeignet für Investoren mit Überzeugung in die Hospitality-SaaS-Transformation und Toleranz für hohe Bewertungsmultiples; ungeeignet als kurzfristiger Value- oder Turnaround-Trade. Position an die hohe Bewertungsprämie anpassen (kleiner dimensionieren als bei einem Peer-nahen Multiple). Peer: **AppFolio (APPF)** als günstigerer vertikaler SaaS-Vergleichswert, **Paycom (PAYC)** als reifere, niedriger bewertete Alternative mit geringerem Wachstum. Peer-Multiples für reinrassige Hospitality-Tech-Konkurrenten (Toast, PAR) nicht im Datensatz verifizierbar — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, EV zeigt −19,5% Downside. AGYS ist ein qualitativ hochwertiger, schuldenfreier SaaS-Compounder mit einer beeindruckenden operativen Historie, aber nach der Rally kein günstiger Einstiegspunkt mehr. Für bestehende Long-Only-Positionen: halten und Gewinne laufen lassen, Trailing-Stop-Disziplin empfohlen. Für Neueinstiege: das Chance-Risiko-Verhältnis ist nach dem Sprung ungünstig. Positionsgröße bei Neueinstieg: max. 2–3% angesichts der hohen Bewertung. Peers: **Oracle Hospitality/MICROS** ist kein eigenständig gehandeltes Instrument; unter den börsennotierten Vertical-SaaS-Namen ist AGYS die reinste Hospitality-Wette, allerdings ohne direkten, sauber vergleichbaren Peer im Datensatz — Peer-Multiples nicht vollständig verifizierbar.
 
 - Qualität: 4/5
 - Wachstum: 4/5
-- Bewertung: 2/5
-- Katalysator: 3/5
+- Bewertung: 1/5
+- Katalysator: 4/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Die Forward-PE-Anomalie im Datensatz und die eigene Bewertung von ~52x FY28-EPS gegenüber Peers von 12–20x rechtfertigen trotz starkem Quartal keine volle Positionsgröße.
-
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-KGV ~37x liegt weit über dem SaaS-Sektor-Median (~17,4x); RS-Score +25,4 (Rang 532) bestätigt aber ein reales Momentum-Signal, daher Reduzierung statt vollständigem Veto.
 
 ---
 
@@ -92,10 +92,10 @@ Agilysys ist ein solider Nischen-Compounder, kein Turnaround-Trade — die Verlu
 |---|---|
 | Qualität | 4/5 |
 | Wachstum | 4/5 |
-| Bewertung | 2/5 |
-| Katalysator | 3/5 |
-| EV-Upside | -6.4% |
+| Bewertung | 1/5 |
+| Katalysator | 4/5 |
+| EV-Upside | -17.4% |
 
-**Verdict: HOLD (57/100)**
+**Verdict: WATCH (52/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CTS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CTS</h1>
+      <h2>CTS Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Electronic Components</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal (Smallcap)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-7.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$63.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">22.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">39.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">27.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">12.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-12.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">65–75</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">59–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">29–36</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $65–$75 (20 %) · Base $59–$68 (50 %) · Bear $29–$36 (30 %) · EV ~$55,50</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: CTS meldete am 28.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung), Kurs reagierte mit +5,8% auf ~$63,50 — der Fundamental-Snapshot wurde entsprechend aktualisiert (zuvor $59,99). CTS Corporation stellt Sensoren, Aktuatoren und elektronische Komponenten primär für Automotive-, Industrial- und Defense-Endmärkte her. Q2 bestätigte den soliden operativen Trend: Adj. EPS $0,74 vs. $0,61 Konsens (+21% Beat), Umsatz $144,78 Mio. (weitgehend in-line, +7,0% YoY, +8,8% YTD), FY26-Guidance auf $565–585 Mio. Umsatz und $2,55–2,70 Adj. EPS angehoben. Die eigentliche Frage: CTS handelt mit einem Forward-KGV von ~22x, deutlich über dem direkten Sensoren-Peer Sensata Technologies (~11,6–12x) — eine Prämie, die sich aus den vorliegenden Daten nur teilweise erklären lässt (bessere Margenqualität, aber Sensata hat eigene strukturelle Probleme, die den Vergleich verzerren können).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Sensoren/Aktuatoren/elektronische Komponenten für Automotive (größtes Segment), Industrial und Defense/Aerospace</li>
+<li>Bruttomarge 39,0% (adjustiert Q2 41,5%) — Margenexpansion sichtbar, deutet auf Produktmix-Verschiebung zu höhermargigen Segmenten hin</li>
+<li>Operating Margin 16,1% liegt bereits über dem eigenen 10-Jahres-Median laut Recherche — Zykluskontext wichtig, aktuelle Marge könnte Top-of-Cycle sein</li>
+<li>Diversifizierte Endmarktexposure (Auto/Industrial/Defense) reduziert Einzelmarktrisiko im Vergleich zu reinen Automotive-Sensor-Anbietern</li>
+<li>D/E 17,0% — konservative Bilanz, viel finanzieller Spielraum</li>
+<li>Dividende (0,27% Rendite) signalisiert Kapitaldisziplin, aber kein Income-Titel</li>
+<li>FCF $68,6 Mio. bei $554,8 Mio. Umsatz (12,4% FCF-Marge) — solide Cash-Generierung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Guidance-Beat setzt sich fort, Defense/Industrial-Mix wächst überproportional, Margenexpansion hält an. Annahme (kein Konsens): FY27-EPS erreicht ~$2,90 × 24x (leichte Prämie zum aktuellen Multiple bei bestätigter Ausführung) = $69,60. Bull-Kursziel: $65–$75 (Mittelpunkt $70). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Multiple hält sich auf aktuellem Niveau. Annahme: EPS $2,89 (Konsens-Forward) × 22x (eigenes aktuelles Forward-KGV) = $63,58. Base-Kursziel: $59–$68 (Mittelpunkt $63,5, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Automotive-Endmarktschwäche (Produktionsrückgang bei OEMs), Sensordemand schwächt sich ab, Multiple komprimiert Richtung Peer-Niveau. Kundenkonzentration: Automotive-OEM-Kunden typischerweise wenige, große Abnehmer — auf Datenbasis nicht quantifizierbar, aber strukturell vorhanden. Geopolitik: Automotive-Lieferketten haben China-Exposure — aus den Daten nicht quantifizierbar. Lieferketten/Single-Source: Halbleiterkomponenten-Abhängigkeit als typisches Sensor-Industrie-Risiko. Verwässerung: Aktienanzahl-Trend nicht verfügbar. Regulierung: keine spezifische Eskalation erkennbar. Annahme: EPS fällt auf $2,30 × 14x (teilweise Kompression Richtung Sensata 11,6–12x, nicht vollständig wegen diversifizierterer Endmärkte) = $32,20. Bear-Kursziel: $29–$36 (Mittelpunkt $32,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $70 + 0,50 × $63,5 + 0,30 × $32,5 = $14,00 + $31,75 + $9,75 = **~$55,50 — implizites Downside vs. aktuellem Kurs ($63,50): −12,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 12,6%, Operating Margin 16,1% — solide, aber die aktuelle Marge liegt laut Recherche bereits über dem eigenen 10-Jahres-Median, was auf ein Top-of-Cycle-Niveau hindeutet und bei der Bewertung entsprechend konservativ zu behandeln ist. FCF-Marge 12,4% ist gesund. Bilanzqualität stark (D/E 17,0%). Der Burggraben liegt in der diversifizierten Endmarktpräsenz und langjährigen OEM-Designwins — real, aber nicht einzigartig ggü. größeren Sensor-Peers wie Sensata oder TE Connectivity.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV ~22x liegt deutlich über dem direkten Peer Sensata Technologies (~11,6–12x) — eine Prämie von rund 85–90%, die sich aus den Daten nur teilweise strukturell begründen lässt (CTS zeigt höhere operative Marge und diversifiziertere Endmärkte, aber Sensata hatte zuletzt eigene Sondersituationen, die den direkten Vergleich erschweren). Littelfuse (LFUS) ist aktuell unprofitabel und daher kein aussagekräftiger KGV-Vergleich. Was preist der Kurs ein? Bei $63,50 und Forward-EPS $2,89 preist der Markt eine Fortsetzung des aktuellen, potenziell zyklisch erhöhten Margenniveaus ein (vereinfachte Rechnung, Annahme) — ambitioniert angesichts der Top-of-Cycle-Signale bei der operativen Marge.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Strong Buy", cached Kursziel $58,00 — dieses Ziel datiert vor dem Q2-Report und dürfte nach dem Beat/der Guidance-Anhebung nach oben revidiert werden; "Analyst-Konsensziel $58,00 (vor dem Report) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, Aktualisierung ausstehend". Short-Float-Daten nicht verfügbar. Institutionelle Positionierung: Hypothese, nicht datenbasiert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score -7,94 (Rang 302 im Smallcap-Universum) — leicht negatives, aber nicht schwaches relatives Momentum. Windows: 5T -1,75%, 10T +0,24%, 20T -4,88%, 50T -8,94%, 6M +7,39% — der 6M-Wert zeigt einen soliden mittelfristigen Aufwärtstrend, während die kürzeren Fenster eine leichte Konsolidierung vor dem Earnings-Beat andeuten. Kein GWS-Signal getrackt. Warnsignal: Rückfall unter $55–57 wäre ein erstes technisches Warnsignal nach dem Post-Earnings-Sprung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($75–$95):** Defense/Industrial-Mix wächst strukturell, Margenexpansion erweist sich als nachhaltig, nicht nur zyklisch.</p>
+<p>**Base ($55–$75):** Solides, zyklisches Sensoren-/Komponentengeschäft mit stabilen, aber nicht dauerhaft erhöhten Margen.</p>
+<p>**Bear ($28–$40):** Automotive-Zyklusabschwung, Margenkompression auf historischen Median, Multiple-Kompression Richtung Sensata-Niveau.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der aktuellen Margenexpansion über den Automotive-Zyklus hinweg.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −12,6%). CTS ist ein solide geführtes, diversifiziertes Sensoren-/Komponentenunternehmen mit einer bestätigten operativen Verbesserung, aber die Bewertung ist nach dem Beat gegenüber dem direkten Peer Sensata anspruchsvoll. Kein High-Conviction-Momentum-Play, eher ein zyklischer Qualitätstitel für geduldige Investoren, die einen Rücksetzer abwarten können. Positionsgröße: max. 3–4% angesichts der Zykluskontext-Risiken bei der aktuellen Margenspitze. Peers: **Sensata Technologies (ST)** ist deutlich günstiger (~11,6–12x) und ein direkterer Sensoren-Pure-Play, sofern die eigene Sondersituation dort abklingt.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-KGV ~22x liegt deutlich über Peer Sensata (~11,6–12x); RS-Score leicht negativ (-7,9, Rang 302) liefert kein klares Gegenargument, daher Reduzierung statt voller Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

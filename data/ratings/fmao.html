@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FMAO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>FMAO</h1>
+      <h2>Farmers & Merchants Bancorp, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Banks - Regional</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$31.20</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">330.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">9.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-8.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">34–38</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">29–33</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–21</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $34–$38 (20 %) · Base $29–$33 (55 %) · Bear $17–$21 (25 %) · EV ~$28,45</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: FMAO ist in keinem RS-Platform-Universum (NASDAQ-100/S&P-500/DAX/Smallcap) getrackt — kein RS-Score, kein GWS-Signal verfügbar. Fundamentaldaten wurden mangels yfinance-Zugriff manuell per WebSearch zum 29.07.2026 recherchiert (Q2-Earnings vom 27.-28.07.2026 liegen innerhalb der 7-Tage-Pflichtprüfung). Farmers & Merchants Bancorp (Archbold, Ohio) ist eine solide, aber unauffällige Community-Bank im Nordwesten Ohios mit $5,8 Mrd. Bilanzsumme. Q2 zeigte einen klaren Beat: EPS $0,86 vs. $0,67 erwartet (+28%), Nettogewinn $11,8 Mio. (+53% YoY), NIM-Expansion um 26 Bp auf 3,48%, Effizienzquote verbessert auf 56,08%. Der Markt reagierte aber nur verhalten (+0,8% auf ein neues 52-Wochen-Hoch $31,20) — der Beat war teilweise bereits im Kurs, der seit Monaten anzieht. Die eigentliche Frage ist nicht die operative Qualität (die ist gut), sondern ob nach dem Lauf auf ein Allzeithoch noch Bewertungsspielraum bleibt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Klassisches Community-Bank-Modell: Einlagen ($2,87 Mrd., +5,9% YoY) refinanzieren Kreditbuch ($2,70 Mrd., +3,0% YoY) in Nordwest-Ohio/Nordost-Indiana/Südost-Michigan</li>
+<li>Zinsmarge (NIM 3,48%, +26 Bp YoY) ist der zentrale Ergebnistreiber — Ausweitung reflektiert höhere Neugeschäftsrenditen bei disziplinierter Einlagenverzinsung</li>
+<li>Effizienzquote 56,08% — überdurchschnittlich gut für eine Bank dieser Größe, deutet auf Skaleneffekte im Backoffice</li>
+<li>Keine Fee-Income-Diversifikation ersichtlich aus den Daten — Ergebnis bleibt primär zinsabhängig, daher Zinszyklus-sensitiv</li>
+<li>Dividendenhistorie: laut Recherche kontinuierliche Ausschüttung, aktuell ~3,3% Rendite — klassisches Income-Profil, kein Wachstumsprofil</li>
+<li>Bilanzqualität strukturell konservativ: D/E 13,2%, deutlich niedriger als viele Bankpeers — Risikopuffer vorhanden</li>
+<li>Regionale Konzentration (Ohio/Indiana/Michigan) ist zugleich Stärke (lokale Marktkenntnis) und Schwäche (Klumpenrisiko bei regionaler Wirtschaftsschwäche)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>NIM-Expansion setzt sich fort, Kreditwachstum beschleunigt auf mittleres einstelliges Niveau, Effizienzquote fällt weiter. Annahme (kein Konsens): EPS steigt auf ~$3,00 (von TTM $2,60) × 12,0x (nahe eigenem aktuellen KGV, leicht über Top-Peer German American Bancorp 12,68x) = $36,00. Bull-Kursziel: $34–$38 (Mittelpunkt $36). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: moderates Ergebniswachstum, NIM stabilisiert sich auf erhöhtem Niveau, aber ohne weitere Dynamik. Annahme: EPS ~$2,90 × 10,7x (Peer-Durchschnitt aus GABC 12,68x und FMNB 8,79x) = $31,03. Base-Kursziel: $29–$33 (Mittelpunkt $31). Eintrittswahrscheinlichkeit: 55%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: regionale Kreditqualität verschlechtert sich (Gewerbeimmobilien-Exposure im Mittleren Westen), NIM-Kompression durch Einlagenkonkurrenz. Kundenkonzentration: auf Datenbasis nicht quantifizierbar, aber regionale Klumpenrisiko strukturell vorhanden. Geopolitik: nicht materiell relevant für eine lokale Community-Bank. Lieferketten/Single-Source: nicht anwendbar auf das Bankgeschäft. Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar. Regulierung: Community-Banks unterliegen laufend steigenden Compliance-Kosten — auf Datenbasis nicht quantifizierbar. Annahme: EPS fällt auf $2,20 × 8,5x (Abschlag ggü. schwächstem Peer FMNB 8,79x) = $18,70. Bear-Kursziel: $17–$21 (Mittelpunkt $19). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 20% + 55% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $36,00 + 0,55 × $31,00 + 0,25 × $19,00 = $7,20 + $17,05 + $4,75 = **~$28,45... implizites Downside vs. aktuellem Kurs ($31,20): −8,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem Lauf auf ein neues 52-Wochen-Hoch ist die Bewertung nicht mehr günstig.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 9,85%, ROA 1,71% — solide für eine Community-Bank dieser Größe, aber kein Ausreißer nach oben. Net Margin 28,6% ist bankentypisch (kein klassischer Umsatz-Margen-Vergleich möglich). D/E 13,2% zeigt eine konservative Kapitalstruktur. Der Burggraben ist rein regional/reputationsbasiert (lokale Kundenbeziehungen, 5,8 Mrd. Bilanzsumme) — kein struktureller Wettbewerbsvorteil ggü. größeren Banken außerhalb des Kernmarkts.</p>
+<h3>7. BEWERTUNG</h3>
+<p>KGV 12,0x (trailing) liegt über dem Peer-Durchschnitt (GABC 12,68x, FMNB 8,79x → Mittel 10,7x) — eine moderate Prämie von ca. 12%, die sich aus den Daten nicht eindeutig strukturell begründen lässt (der Beat allein rechtfertigt keine dauerhafte Prämie). Was preist der Kurs ein? Bei $31,20 und TTM-EPS $2,60 preist der Markt implizit ein EPS-Wachstum auf ~$2,90–3,00 binnen 12 Monaten ein (vereinfachte Rechnung, Annahme) — plausibel, aber nicht konservativ, da bereits am 52-Wochen-Hoch. Kurs-Buchwert-Daten aus dem Datensatz nicht verfügbar (priceToBook N/A) — Bewertung stützt sich daher primär auf KGV und Peer-Vergleich.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Institutionelle Positionierungsdaten (Short Float, Coverage-Tiefe) nicht verfügbar — Hypothese, nicht datenbasiert: dünne Analystenabdeckung bei Community-Banken dieser Größe ist typisch, was Kursbewegungen anfälliger für Nachrichtenüberreaktionen macht. Die verhaltene Kursreaktion (+0,8%) trotz eines klaren Beats deutet darauf hin, dass ein Teil der guten Nachrichten bereits vorab eingepreist war.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kein RS-Score verfügbar (nicht getrackt). Der Kurs erreichte am Earnings-Tag ein neues 52-Wochen-Hoch ($31,20) — rein aus den Fundamentaldaten ableitbar, keine RS-Platform-Signaldaten vorhanden. Ein Warnsignal wäre ein Rückfall unter das vorherige Konsolidierungsniveau um $28–29.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($38–$46):** Anhaltende NIM-Expansion, Filialexpansion oder kleinere Zukäufe in Nachbarmärkten, EPS-Wachstum im hohen einstelligen Bereich.</p>
+<p>**Base ($28–$36):** Stabiles, margenstabiles Community-Banking-Geschäft ohne strukturelle Neubewertung.</p>
+<p>**Bear ($16–$24):** Regionale Rezession im Mittleren Westen, Kreditqualitätsverschlechterung, NIM-Kompression durch Zinssenkungszyklus.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der NIM-Expansion und regionale Kreditqualität.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,8%). FMAO ist ein solides, konservativ finanziertes Community-Bank-Dividendeninvestment — kein Compounder mit struktureller Neubewertungsstory, sondern ein Income-Titel für geduldige Investoren. Nach dem Lauf auf ein neues Allzeithoch ist das Chance-Risiko-Verhältnis für Neueinstiege unattraktiv; bestehende Positionen können wegen der Dividendenrendite (~3,3%) gehalten werden. Positionsgröße: max. 3–5% in einem diversifizierten Dividendenportfolio, nicht als Kernposition. Peers: **German American Bancorp (GABC)** und **Farmers National Banc Corp (FMNB)** sind vergleichbare Midwest-Community-Banken; FMNB (8,79x) ist die günstigere Alternative, sofern die Kreditqualität vergleichbar ist — Peer-Multiples aus WebSearch, nicht im internen Datensatz verifizierbar.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Aktie handelt nach dem Beat auf einem neuen 52-Wochen-Hoch bei einer Prämie von ca. 12% zum Peer-KGV-Schnitt (10,7x); zudem kein RS-Signal getrackt, der Funnel selbst liefert keinen Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

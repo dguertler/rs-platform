@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FSUN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>FSUN</h1>
+      <h2>FirstSun Capital Bancorp</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Financial Services</span></div>
+        <div class="mi">Industrie: <span>Banks - Regional</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$38.42</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">0.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">8.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">46–53</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">39–45</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">22–27</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $46–$53 (20 %) · Base $39–$45 (50 %) · Bear $22–$27 (30 %) · EV ~$38,25</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: FSUN ist in keinem RS-Platform-Universum getrackt — kein RS-Score, kein GWS-Signal verfügbar. Fundamentaldaten wurden mangels yfinance-Zugriff manuell per WebSearch zum 29.07.2026 recherchiert (Q2-Earnings, Berichtsdatum innerhalb der letzten 7 Tage, exaktes Datum zwischen Quellen leicht uneinheitlich — 24.-27.07.2026). FirstSun Capital Bancorp (Sunflower Bank, Denver) hat am 1. April 2026 First Foundation übernommen und damit die Bilanzsumme auf $15,7 Mrd. nahezu verdoppelt. Q2 zeigt einen GAAP-Nettoverlust von $23 Mio. (-$0,49/Aktie) durch Fusionskosten und Kreditrisikovorsorge — auf den ersten Blick ein Warnsignal. Der Markt sah es anders: +10,4% Kursreaktion nachbörslich, getrieben von der Ankündigung eines $150-Mio.-Rückkaufprogramms und schnelleren Kostensynergien als erwartet. Die eigentliche Story: Der GAAP-Verlust ist Integrationsrauschen, nicht ein Zeichen struktureller Schwäche — aber die gleichzeitig steigenden notleidenden/kritisierten Kredite sind ein echtes, noch ungelöstes Risiko, das der Markt in der Kursrally möglicherweise unterschätzt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Regionalbank im Südwesten der USA (TX, KS, CO, NM, AZ) — nach First-Foundation-Übernahme deutlich größere geografische Diversifikation</li>
+<li>Zinsmarge (NIM) fiel von 4,25% (Q1) auf 3,58% (Q2) — klassische Verwässerung durch Fusion, muss sich erst normalisieren</li>
+<li>Nettozinsertrag sprang von $82,8 Mio. auf $143,2 Mio. — Skaleneffekt der Übernahme, aber noch nicht vollständig in Effizienz übersetzt</li>
+<li>$150-Mio.-Aktienrückkaufprogramm signalisiert Managementvertrauen trotz GAAP-Verlust — Kapitalallokationssignal</li>
+<li>Kreditqualität verschlechtert sich sichtbar (steigende notleidende/kritisierte Kredite) — zentrales Risiko der Integrationsphase</li>
+<li>Keine Dividende — Kapital wird vollständig in Wachstum/Rückkauf reinvestiert, kein Income-Profil</li>
+<li>Bilanzverdopplung durch M&A erhöht Integrationsrisiko strukturell für die nächsten 12–18 Monate</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Integration verläuft reibungslos, NIM stabilisiert sich über 3,7%, Kostensynergien übertreffen Ziele. Annahme (kein Konsens): normalisiertes EPS erreicht ~$3,80 (von TTM $3,40) × 13,0x (Peer-Obergrenze Prosperity Bancshares/Cullen Frost, beide ~13,09x) = $49,40. Bull-Kursziel: $46–$53 (Mittelpunkt $49,5). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: graduelle, aber nicht reibungslose Integration, NIM erholt sich moderat. Annahme: EPS $3,50 × 12,1x (konservativster Peer BOK Financial) = $42,35. Base-Kursziel: $39–$45 (Mittelpunkt $42). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Integration stockt, die bereits sichtbare Verschlechterung der Kreditqualität (steigende notleidende/kritisierte Kredite) eskaliert zu höheren Rückstellungen. Kundenkonzentration: durch die Fusion diversifizierter, aber auf Datenbasis nicht quantifizierbar. Geopolitik: nicht materiell relevant. Lieferketten/Single-Source: nicht anwendbar. Verwässerung: Aktienanzahl-Angaben zwischen Quellen uneinheitlich (44,1–49,4 Mio., vermutlich Pre-/Post-Merger-Differenz) — Integrationsrisiko für Kapitalstruktur vorhanden. Regulierung: laufende Bankenregulierung, keine spezifische Eskalation erkennbar. Annahme: EPS fällt auf $2,60 × 9,5x (Abschlag ggü. Peers wegen Kreditrisiko) = $24,70. Bear-Kursziel: $22–$27 (Mittelpunkt $24,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $49,50 + 0,50 × $42,00 + 0,30 × $24,50 = $9,90 + $21,00 + $7,35 = **~$38,25 — praktisch unverändert vs. aktuellem Kurs ($38,42): −0,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der Markt hat den Buyback/Synergie-Optimismus bereits weitgehend eingepreist.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE ~8,55% (TTM) — moderat, durch Fusionskosten dieses Quartal belastet. NIM-Kompression (4,25%→3,58%) ist die zentrale Kennzahl, die im Auge zu behalten ist — eine Stabilisierung darüber wäre das erste Zeichen erfolgreicher Integration. Bilanzqualität aktuell nicht abschließend beurteilbar: Eigenkapital $1,837 Mrd. bei $15,7 Mrd. Bilanzsumme, aber die Datenlage zu notleidenden Krediten ist qualitativ (steigend), nicht quantifiziert verfügbar. Kein etablierter Burggraben über die regionale Präsenz hinaus — die These ist explizit eine M&A-Integrationswette, kein Compounder.</p>
+<h3>7. BEWERTUNG</h3>
+<p>KGV 11,4x (trailing, TTM-EPS $3,40) liegt leicht unter dem Peer-Schnitt (BOKF 12,1x, PB/CFR je 13,1x) — ein Abschlag von ca. 6–13%, der sich strukturell durch das laufende Integrationsrisiko und den GAAP-Verlust dieses Quartals erklären lässt. Was preist der Kurs ein? Bei $38,42 und normalisiertem EPS-Pfad Richtung $3,50–3,80 preist der Markt eine erfolgreiche, aber nicht perfekte Integration ein (vereinfachte Rechnung, Annahme) — plausibel angesichts des Analysten-Kurszielabschlags (Raymond James senkte am 10.07. von $47 auf $44 wegen Integrationsbedenken, behielt aber Strong Buy).</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Strong Buy" mit Kursziel ~$44,50 — "Analyst-Konsensziel $44,50 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen", zumal ein Analyst das Ziel jüngst wegen Integrationsbedenken gesenkt hat. Short-Float-Daten nicht verfügbar. Die positive Kursreaktion trotz GAAP-Verlust deutet auf überwiegend fundamental orientierte, geduldige Investoren hin (Hypothese, nicht datenbasiert) — Fast-Money-Reaktionen auf einen nominalen Verlust hätten eher negativ reagiert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kein RS-Score verfügbar (nicht getrackt). Kurs bewegt sich innerhalb der 52-Wochen-Spanne $29,95–$42,34, aktuell im oberen Drittel nach der Post-Earnings-Rally. Kein GWS-Signal aus der RS-Platform verfügbar. Warnsignal: ein Rückfall unter $34–35 würde die positive Post-Earnings-Reaktion technisch infrage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($50–$60):** First-Foundation-Integration vollständig abgeschlossen, Cross-Selling zwischen den kombinierten Kundenbasen liefert nachhaltiges Ertragswachstum, NIM auf über 4%.</p>
+<p>**Base ($36–$46):** Solide, aber unspektakuläre Integration, Regionalbank-typisches Ertragsprofil.</p>
+<p>**Bear ($18–$26):** Integrationsprobleme eskalieren, Kreditqualität verschlechtert sich weiter, ggf. Kapitalerhöhung nötig.</p>
+<p>Entscheidende Variable: Tempo und Erfolg der First-Foundation-Integration, insbesondere Kreditqualitätstrend.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −0,4%, praktisch neutral). FSUN ist eine M&A-Integrationswette, kein Compounder und kein reines Momentum-Play — der GAAP-Verlust ist Rauschen, aber die steigenden notleidenden Kredite sind ein echtes, zu beobachtendes Risiko. Geeignet für Investoren mit Bank-M&A-Erfahrung und Geduld für die Integrationsphase, nicht für konservative Income-Investoren (keine Dividende). Positionsgröße: max. 2–3% angesichts des Integrationsrisikos. Peers: **Prosperity Bancshares (PB)** und **Cullen/Frost Bankers (CFR)** sind die saubereren, unfusionierten Südwest-Bank-Alternativen bei vergleichbarem KGV (~13,1x) ohne das aktuelle Integrationsrisiko.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — Steigende notleidende/kritisierte Kredite im Zuge der First-Foundation-Integration belasten die Bilanzqualität; zudem kein RS-Signal getrackt, der Funnel liefert keinen Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

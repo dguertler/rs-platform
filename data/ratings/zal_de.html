@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ZAL.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ZAL.DE</h1>
+      <h2>Zalando SE                    I</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Internet Retail</span></div>
+        <div class="mi">MCap: <span>$8B</span></div>
+        <div class="mi">Signal: <span>4H-Breakout (DAX)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">69.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$29.85</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$12.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">39.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">4.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-5.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">37–43</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">27–33</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">12–17</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull €37–€43 (20 %) · Base €27–€33 (50 %) · Bear €12–€17 (30 %) · EV ~€27,35</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: ZAL.DE hatte in den letzten 7 Tagen keinen Earnings-Termin (nächster Bericht: 04.08.2026, in wenigen Tagen). Der Kurs ist seit dem Fundamental-Snapshot (27,44€) auf 29,85€ gestiegen (+8,8%, kein Earnings-Auslöser, organische Kursdrift) — Preisdaten entsprechend aktualisiert. Zalando hat mit der Übernahme von ABOUT YOU eine strukturelle Konsolidierung im europäischen Online-Modehandel vollzogen: Q1 2026 zeigte Umsatz +23,8% reported (+3,4% pro-forma bereinigt um die Konsolidierung) und GMV +21,7% reported, aber einen GAAP-Nettoverlust von 87,6 Mio. € (vs. Gewinn 9,9 Mio. € im Vorjahr) durch Akquisitions-/Integrationskosten. Der Trailing-KGV (67,8x) ist durch diesen Einmaleffekt stark verzerrt und für die Bewertung nicht aussagekräftig — das Forward-KGV (16,1x, basierend auf dem Konsens-EPS nach erwarteter Normalisierung) ist die relevantere Kennzahl. Die eigentliche Frage: Gelingt die ABOUT-YOU-Integration wie geplant (Synergie-Ziel 100 Mio. € p.a. EBIT langfristig), oder belasten Integrationskosten das Ergebnis länger als erwartet?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Paneuropäischer Online-Modehändler, nach ABOUT-YOU-Übernahme deutlich größerer Marktanteil im DACH-Raum und darüber hinaus</li>
+<li>Bruttomarge 39,9% — solide für E-Commerce-Fashion, Skaleneffekte aus der Konsolidierung noch nicht vollständig realisiert</li>
+<li>Adj. EBIT-Marge nur 2,2% (Q1) — strukturell dünnes Margenprofil, typisch für margenschwachen Fashion-E-Commerce mit hohen Logistik-/Retourenkosten</li>
+<li>ABOUT-YOU-Synergien: 10 Mio. € bereits in Q1 realisiert, Ziel 40 Mio. € FY26, langfristig 100 Mio. € p.a. EBIT-Synergien — der zentrale Werttreiber der nächsten Jahre</li>
+<li>KI-Einsatz als Wachstums-/Effizienztreiber vom Management explizit hervorgehoben — Umsetzung noch nicht quantifizierbar</li>
+<li>FCF 1,18 Mrd. € bei 12,9 Mrd. € Umsatz (9,1% FCF-Marge) — solide trotz des GAAP-Nettoverlusts, zeigt operative Cash-Stärke unabhängig von Einmaleffekten</li>
+<li>D/E 52,2% — moderate Verschuldung, durch die Akquisition leicht erhöht</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>ABOUT-YOU-Synergien werden schneller realisiert als geplant, GMV-Wachstum beschleunigt sich, Margenexpansion über die Guidance hinaus. Annahme (kein Konsens): Forward-EPS erreicht ~€2,20 (Synergie-Realisierung) × 18x (leichte Prämie zum aktuellen Multiple bei bestätigter Integration) = €39,60. Bull-Kursziel: €37–€43 (Mittelpunkt €40). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance (12–17% GMV-/Umsatzwachstum, 660–740 Mio. € Adj. EBIT) wird erreicht, Synergien realisieren sich planmäßig. Annahme: Forward-EPS €1,86 (Konsens) × 16x (eigenes aktuelles Forward-KGV) = €29,76. Base-Kursziel: €27–€33 (Mittelpunkt €30, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Integrationskosten bleiben länger hoch als geplant, europäischer Konsum schwächelt (Fashion-E-Commerce ist diskretionär), Synergien verzögern sich. Kundenkonzentration: nicht anwendbar (breite B2C-Kundenbasis). Geopolitik: EU-Binnenmarkt-Fokus, begrenzte geopolitische Exposure außerhalb üblicher Handelsrisiken. Lieferketten: Fashion-Lieferketten mit Asien-Exposure (Produktionsländer) — nicht quantifizierbar. Verwässerung: ABOUT-YOU-Übernahme könnte teilweise aktienfinanziert gewesen sein — Aktienanzahl-Trend aus den Daten nicht klar isolierbar. Regulierung: EU-Verbraucherschutz-/Retouren-Regulierung als Hintergrundrisiko für das Margenprofil. Annahme: EPS fällt auf €1,20 × 12x (Kompression bei enttäuschender Integration) = €14,40. Bear-Kursziel: €12–€17 (Mittelpunkt €14,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × €40 + 0,50 × €30 + 0,30 × €14,5 = €8,00 + €15,00 + €4,35 = **~€27,35 — implizites Downside vs. aktuellem Kurs (€29,85): −8,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 4,3%, Net Margin 0,91% (TTM) — strukturell dünn, zusätzlich durch den Q1-Einmalverlust belastet. Anomalie: Adj. EBIT-Marge (2,2%, Q1) liegt über der TTM-Net-Margin (0,91%) bei gleichzeitigem GAAP-Nettoverlust im selben Quartal — diese Diskrepanz erklärt sich durch die Akquisitions-/Integrationskosten, die im GAAP-Ergebnis, aber nicht in der Adj.-EBIT-Kennzahl erscheinen; aus den vorliegenden Daten nicht vollständig in der genauen Höhe auflösbar. FCF-Marge 9,1% zeigt aber echte operative Cash-Stärke. Der Burggraben liegt in der jetzt deutlich größeren Marktposition nach der ABOUT-YOU-Konsolidierung — real, aber die Integration ist noch nicht abgeschlossen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 16,1x liegt etwa doppelt so hoch wie der Peer ASOS (~7,6x), wobei ASOS sich noch in einer Verlustverkleinerungsphase befindet (EPS-Prognose −£0,47 statt −£2,50 im Vorjahr) und damit kein voll vergleichbarer, bereits profitabler Peer ist. Boohoo/Debenhams Group ist aktuell unprofitabel, KGV nicht aussagekräftig. ABOUT YOU selbst ist kein unabhängiger Peer mehr (übernommen). Was preist der Kurs ein? Bei €29,85 und Forward-EPS €1,86 preist der Markt eine erfolgreiche Synergie-Realisierung und Rückkehr zu profitablem Wachstum ein (vereinfachte Rechnung, Annahme) — plausibel angesichts der bestätigten Guidance, aber abhängig von der Integrationsgeschwindigkeit.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Buy", Kursziel €35,36 (22 Analysten) — impliziert spürbares Upside vom aktuellen Kurs; "Analyst-Konsensziel €35,36 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Institutionelle Positionierung: Hypothese, nicht datenbasiert — der GAAP-Nettoverlust könnte kurzfristig orientierte Investoren abschrecken, während strukturell orientierte Investoren die Synergie-These verfolgen dürften.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score +69,1 (Rang 5 im DAX-40) — sehr starkes relatives Momentum, eines der stärksten Signale in diesem Analyse-Batch. Windows: 5T -0,87%, 10T +1,97%, 20T +9,63%, 50T +40,91%, 6M +16,62%, 12M +0,84% — der 50T-Wert (+40,9%) zeigt eine kräftige mittelfristige Rally. GWS-Signal: aktiver 4H-Breakout (29.07.2026, DAX-Referenz). Das Momentum ist hier sowohl fundamental (Wachstum, Synergie-These) als auch technisch bestätigt — ein seltener Fall voller Übereinstimmung in diesem Batch. Warnsignal: ein Rückfall unter €26–27 wäre ein erstes technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (€42–€55):** ABOUT-YOU-Synergien erreichen das langfristige 100-Mio.-€-Ziel vollständig, KI-getriebene Effizienzgewinne skalieren, Zalando etabliert sich als klarer paneuropäischer Fashion-E-Commerce-Marktführer.</p>
+<p>**Base (€25–€38):** Solide, aber margenmäßig strukturell dünne Fortsetzung des Fashion-E-Commerce-Geschäfts mit graduellen Synergiegewinnen.</p>
+<p>**Bear (€10–€18):** Integration scheitert teilweise, europäischer Konsum schwächelt strukturell, Wettbewerbsdruck durch Amazon Fashion/Shein/Temu verschärft sich.</p>
+<p>Entscheidende Variable: Tempo und Vollständigkeit der ABOUT-YOU-Synergie-Realisierung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,4%). ZAL.DE zeigt eine seltene Kombination aus starkem RS-Signal (Rang 5 im DAX), aktivem technischem Breakout und einer realen, bestätigten Wachstums-/Synergie-These — aber der GAAP-Nettoverlust und die noch laufende Integration rechtfertigen kein High-Conviction-Framing ohne weitere Bestätigung in den kommenden Quartalsberichten (nächster Termin bereits 04.08.2026). Geeignet als taktische Position für Investoren, die sowohl das Momentum als auch die Synergie-These verfolgen. Positionsgröße: 4–6%, mit Fokus auf den kommenden Quartalsbericht als nächsten Bestätigungspunkt. Peers: **ASOS** ist die günstigere, aber noch nicht durchgehend profitable britische Alternative (~7,6x); ein direkter, vollständig vergleichbarer paneuropäischer Fashion-E-Commerce-Peer fehlt im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Sehr starkes RS-Signal (Rang 5 im DAX) plus aktiver 4H-Breakout, gestützt durch bestätigtes Umsatzwachstum und Guidance; der GAAP-Verlust ist integrationsbedingt und einmalig, kein struktureller Einwand gegen die volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

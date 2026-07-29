@@ -721,14 +721,6 @@
       "ev_upside_pct": -18.4
     },
     {
-      "ticker": "AXON",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.879496",
-      "ev_upside_pct": -19.9
-    },
-    {
       "ticker": "ILMN",
       "verdict": "HOLD",
       "score": 57,
@@ -1141,19 +1133,6 @@
       "created_at": "2026-07-15T04:55:38.705466"
     },
     {
-      "ticker": "PYPL",
-      "verdict": "HOLD",
-      "score": 68,
-      "asymmetric_edge": true,
-      "ev_upside_pct": 20.5,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "kein aktives GWS-Signal und RS-Rang 84/100 best\u00e4tigen die g\u00fcnstige Bewertung aktuell nicht technisch."
-      },
-      "created_at": "2026-07-15T05:33:10.871177"
-    },
-    {
       "ticker": "OKTA",
       "verdict": "WATCH",
       "score": 49,
@@ -1295,19 +1274,6 @@
         "reason": "Trotz technischer Bodenbildung (3/3 GWS-Punkte) rechtfertigt das hohe Forward-KGV (33,5x) bei negativem EV-Edge nur halbe Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-16T10:35:59.318625"
-    },
-    {
-      "ticker": "ABNB",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -2.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV liegt ~70% \u00fcber dem n\u00e4chstliegenden Peer (BKNG) bei negativem EV-Edge \u2014 halbe Positionsgr\u00f6\u00dfe trotz intaktem technischem Setup."
-      },
-      "created_at": "2026-07-16T10:36:57.464805"
     },
     {
       "ticker": "VRSK",
@@ -1609,19 +1575,6 @@
       "created_at": "2026-07-23T07:00:10.469259"
     },
     {
-      "ticker": "PCAR",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -6.9,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Kurs preist bereits eine Zyklus-Erholung ein, w\u00e4hrend der EV auf dem aktuellen Niveau ein Downside von -9,3 % zeigt."
-      },
-      "created_at": "2026-07-23T07:01:29.928607"
-    },
-    {
       "ticker": "AIR.DE",
       "verdict": "AVOID",
       "score": 36,
@@ -1804,19 +1757,6 @@
       "created_at": "2026-07-28T07:24:51.607955"
     },
     {
-      "ticker": "AGYS",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -6.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Die Forward-PE-Anomalie im Datensatz und die eigene Bewertung von ~52x FY28-EPS gegen\u00fcber Peers von 12\u201320x rechtfertigen trotz starkem Quartal keine volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-07-28T07:24:51.628362"
-    },
-    {
       "ticker": "BKR",
       "verdict": "WATCH",
       "score": 44,
@@ -1919,6 +1859,240 @@
         "reason": "Die heute ver\u00f6ffentlichten Q2-Zahlen sind der entscheidende Katalysator, aber auf Datenbasis nicht verifizierbar \u2014 halbe Positionsgr\u00f6\u00dfe bis zur Pr\u00fcfung der tats\u00e4chlichen Ergebnisse."
       },
       "created_at": "2026-07-29T08:54:36.823266"
+    },
+    {
+      "ticker": "OPK",
+      "verdict": "HOLD",
+      "score": 59,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 10.3,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "RS-Score -28,97 (Rang 717) zeigt trotz Earnings-Beat kein technisches Momentum, der Funnel selbst liefert keinen Kandidaten."
+      },
+      "created_at": "2026-07-29T11:44:05.210120"
+    },
+    {
+      "ticker": "FMAO",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -8.1,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Aktie handelt nach dem Beat auf einem neuen 52-Wochen-Hoch bei einer Pr\u00e4mie von ca. 12% zum Peer-KGV-Schnitt (10,7x); zudem kein RS-Signal getrackt, der Funnel selbst liefert keinen Kandidaten."
+      },
+      "created_at": "2026-07-29T11:46:16.844967"
+    },
+    {
+      "ticker": "FSUN",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.6,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "Steigende notleidende/kritisierte Kredite im Zuge der First-Foundation-Integration belasten die Bilanzqualit\u00e4t; zudem kein RS-Signal getrackt, der Funnel liefert keinen Kandidaten."
+      },
+      "created_at": "2026-07-29T11:47:39.863299"
+    },
+    {
+      "ticker": "ITRI",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.1,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Nach dem +26%-Kurssprung ist die Bewertung nicht mehr g\u00fcnstig, der (vor dem Sprung gemessene) RS-Score zeigte zudem kein Momentum-Signal; der Funnel selbst hat noch keinen Kandidaten geliefert."
+      },
+      "created_at": "2026-07-29T11:48:33.258985"
+    },
+    {
+      "ticker": "AGYS",
+      "verdict": "WATCH",
+      "score": 52,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -17.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV ~37x liegt weit \u00fcber dem SaaS-Sektor-Median (~17,4x); RS-Score +25,4 (Rang 532) best\u00e4tigt aber ein reales Momentum-Signal, daher Reduzierung statt vollst\u00e4ndigem Veto."
+      },
+      "created_at": "2026-07-29T11:50:02.697210"
+    },
+    {
+      "ticker": "CTS",
+      "verdict": "WATCH",
+      "score": 52,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV ~22x liegt deutlich \u00fcber Peer Sensata (~11,6\u201312x); RS-Score leicht negativ (-7,9, Rang 302) liefert kein klares Gegenargument, daher Reduzierung statt voller Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-29T11:51:11.412529"
+    },
+    {
+      "ticker": "RITM",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.2,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Sonstiges",
+        "reason": "RS-Score deutlich negativ (-35,0, Rang 705) trotz Bewertung unter Buchwert; der Funnel selbst liefert aktuell keinen Kandidaten trotz fundamentaler Attraktivit\u00e4t."
+      },
+      "created_at": "2026-07-29T11:52:27.124637"
+    },
+    {
+      "ticker": "RGEN",
+      "verdict": "WATCH",
+      "score": 52,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -26.9,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Forward-KGV ~73x liegt weit \u00fcber den genannten Life-Science-Tools-Peers (Danaher 23,1x, Bio-Techne 30,4x); kein RS-Signal getrackt, der Funnel liefert keinen Kandidaten."
+      },
+      "created_at": "2026-07-29T11:53:38.398306"
+    },
+    {
+      "ticker": "PRK",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -14.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV 14,8x liegt deutlich \u00fcber den Peer-Banken (8,8\u201311,2x); RS-Score positiv (+20,3, Rang 386) best\u00e4tigt reales Momentum, daher Reduzierung statt vollem Veto."
+      },
+      "created_at": "2026-07-29T11:54:44.892440"
+    },
+    {
+      "ticker": "AXTA",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.1,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Sonstiges",
+        "reason": "Bevorstehende AkzoNobel-Fusion (Aktion\u00e4rsabstimmung 05.08.2026) macht dies zu einer M&A-Arbitrage-Situation statt einem klassischen Fundamental-/Momentum-Trade; kein RS-Signal getrackt."
+      },
+      "created_at": "2026-07-29T11:55:59.417981"
+    },
+    {
+      "ticker": "CLS",
+      "verdict": "HOLD",
+      "score": 65,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.4,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Sonstiges",
+        "reason": "Kein RS-Signal getrackt (Ticker nicht im RS-Platform-Universum); trotz starker fundamentaler Dynamik liefert der Funnel selbst keinen Kandidaten."
+      },
+      "created_at": "2026-07-29T11:57:16.301367"
+    },
+    {
+      "ticker": "PYPL",
+      "verdict": "BUY",
+      "score": 70,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.0,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Kein fundamentaler Einwand: Earnings-Beat, Guidance-Anhebung und eine reale M&A-Situation (Stripe/Advent-Gebot) st\u00fctzen das starke RS-Signal (Rang 33) und den aktiven 4H-Breakout; volle Positionsgr\u00f6\u00dfe gerechtfertigt."
+      },
+      "created_at": "2026-07-29T11:58:51.372719"
+    },
+    {
+      "ticker": "PCAR",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -14.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz starkem RS-Signal (Rang 35) und aktivem 4H-Breakout handelt PCAR nahe einem 52-Wochen-Hoch bei r\u00fcckl\u00e4ufigem Umsatz (-8,9% TTM) und einem KGV \u00fcber den europ\u00e4ischen Peers (Daimler Truck 13,9x, Volvo 11,1x); Reduzierung der Positionsgr\u00f6\u00dfe angemessen."
+      },
+      "created_at": "2026-07-29T12:00:11.369978"
+    },
+    {
+      "ticker": "ZAL.DE",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.6,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Sehr starkes RS-Signal (Rang 5 im DAX) plus aktiver 4H-Breakout, gest\u00fctzt durch best\u00e4tigtes Umsatzwachstum und Guidance; der GAAP-Verlust ist integrationsbedingt und einmalig, kein struktureller Einwand gegen die volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-29T12:01:34.805218"
+    },
+    {
+      "ticker": "CCEP",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Starkes RS-Signal (Rang 39) und aktiver Daily-Breakout, aber kein aktueller fundamentaler Katalysator vor dem n\u00e4chsten Bericht (04.08.2026); Reduzierung bis zur Best\u00e4tigung."
+      },
+      "created_at": "2026-07-29T12:02:42.325368"
+    },
+    {
+      "ticker": "AXON",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV ~52x liegt weit \u00fcber dem n\u00e4chstliegenden Peer Motorola Solutions (~24\u201327x); RS-Signal (Rang 78) und aktiver 4H-Breakout best\u00e4tigen reales Momentum, daher Reduzierung statt vollem Veto."
+      },
+      "created_at": "2026-07-29T12:03:57.227180"
+    },
+    {
+      "ticker": "ROP",
+      "verdict": "BUY",
+      "score": 78,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.8,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Exzellente Qualit\u00e4t (Margen, ROE, FCF) bei einem Bewertungsabschlag von 22\u201351% zu allen genannten Peers (Danaher, Ametek, Fortive); RS-Signal (Rang 82) und aktiver Weekly-Breakout best\u00e4tigen das Momentum nach dem Q2-Beat-and-Raise; kein fundamentaler Einwand."
+      },
+      "created_at": "2026-07-29T12:05:12.080322"
+    },
+    {
+      "ticker": "ABNB",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV ~23,4x liegt deutlich \u00fcber Booking Holdings (~15,7\u201317,7x) und Expedia (~9,8\u201316x); zunehmender regulatorischer Gegenwind verst\u00e4rkt das Risiko, RS-Signal (Rang 54) und aktiver Weekly-Breakout best\u00e4tigen aber ein reales Momentum."
+      },
+      "created_at": "2026-07-29T12:06:27.146466"
     }
   ]
 }

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CLS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CLS</h1>
+      <h2>Celestica Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Electronic Components</span></div>
+        <div class="mi">MCap: <span>$37B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$318.24</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">29.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$13.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">12.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">52.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-5.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">400–460</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">295–345</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">135–172</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $400–$460 (25 %) · Base $295–$345 (50 %) · Bear $135–$172 (25 %) · EV ~$305,88</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: CLS ist in keinem RS-Platform-Universum getrackt — kein RS-Score verfügbar. Fundamentaldaten wurden mangels yfinance-Zugriff manuell per WebSearch zum 29.07.2026 recherchiert (USD/NYSE-Linie; 52-Wochen-Spanne und Analystenziel waren nur über die TSX/CAD-Notierung auffindbar und daher nicht direkt übertragbar — als N/A gekennzeichnet). Celestica meldete am 27.07.2026 Q2-Zahlen (innerhalb der 7-Tage-Pflichtprüfung) mit außergewöhnlichen Werten: Adj. EPS $2,54 vs. $2,29 Konsens (+10,9%), Umsatz $4,70 Mrd. (+62% YoY!), FY26-Guidance auf $20,5 Mrd. Umsatz (+65% Wachstum) und $11,30 Adj. EPS angehoben. Kurs reagierte mit +7–9% auf ~$318. Die eigentliche Story: Celestica hat sich von einem klassischen margenschwachen EMS-Auftragsfertiger zu einem zentralen Hardware-Zulieferer für KI-Rechenzentren (Networking-/Server-Infrastruktur für Hyperscaler) gewandelt. Das ist strukturell relevant, weil diese Transformation die operative Hebelwirkung massiv erhöht — aber auch die Kundenkonzentration auf wenige Hyperscaler, was ein reales, noch nicht vollständig eingepreistes Risiko darstellt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Electronics Manufacturing Services (EMS) mit strukturellem Shift hin zu KI-Infrastruktur-Hardware (Server, Networking-Equipment) für Hyperscaler</li>
+<li>Bruttomarge nur 12,0% — branchentypisch niedrig für EMS, operative Hebelwirkung entsteht über Volumen und Skalierung, nicht über Preissetzungsmacht</li>
+<li>ROE 52,5% ist außergewöhnlich hoch — reflektiert das asset-leichte, umsatzstarke Geschäftsmodell mit hoher Kapitalumschlagsgeschwindigkeit</li>
+<li>Kundenkonzentration auf wenige Hyperscaler ist die zentrale strukturelle Abhängigkeit — ein einzelner Auftragsrückgang wirkt überproportional auf das Ergebnis</li>
+<li>D/E 36,8% — moderate Verschuldung, ausreichend Bilanzspielraum für das aktuelle Wachstumstempo</li>
+<li>FY26-Guidance von +65% Umsatzwachstum ist außergewöhnlich für eine EMS-Firma dieser Größe ($13,8 Mrd. TTM-Basis) — die Frage ist die Nachhaltigkeit über den aktuellen KI-Capex-Superzyklus hinaus</li>
+<li>Multi-Year-Abnahmevereinbarungen mit Hyperscalern (soweit vorhanden) würden das Risikoprofil strukturell verbessern — aus den öffentlich verfügbaren Daten nicht im Detail verifizierbar</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>KI-Infrastruktur-Capex-Superzyklus setzt sich fort, Hyperscaler-Aufträge wachsen weiter, Celestica etabliert sich als bevorzugter AI-EMS-Partner. Annahme (kein Konsens): FY27-EPS erreicht ~$13,50 × 32x (Annäherung an Flex' Premium-Multiple, reflektiert fortgesetztes Re-Rating als AI-EMS-Marktführer) = $432,00. Bull-Kursziel: $400–$460 (Mittelpunkt $430). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Wachstum moderiert sich von +65% auf ein nachhaltigeres Niveau. Annahme: EPS $11,80 (leicht über Guidance-Mitte $11,30) × 27x (leichte Kompression vom aktuellen 29,6x) = $318,60. Base-Kursziel: $295–$345 (Mittelpunkt $320, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: KI-Capex-Verdauungspause bei Hyperscalern (nach Jahren aggressiver Investitionen), ein großer Kunde reduziert oder verliert Aufträge. Kundenkonzentration: strukturell zentrales Risiko — wenige Hyperscaler-Kunden dominieren das AI-Infrastruktur-Segment, Einzelkundenabhängigkeit aus den öffentlichen Daten nicht exakt quantifizierbar, aber strukturell hoch. Geopolitik/Exportkontrollen: KI-Hardware-Lieferketten unterliegen zunehmenden Exportkontrollen (insbesondere Richtung China) — reales, nicht quantifizierbares Risiko. Lieferketten/Single-Source: Abhängigkeit von Halbleiter-/Komponentenverfügbarkeit (GPUs, Netzwerkchips) als branchentypisches Risiko. Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar. Regulierung: Exportkontrollen als Hauptregulierungsrisiko. Annahme: EPS fällt auf $8,50 × 18x (Kompression Richtung traditioneller EMS-Peers Jabil/Sanmina) = $153,00. Bear-Kursziel: $135–$172 (Mittelpunkt $153,5). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $430 + 0,50 × $320 + 0,25 × $153,5 = $107,50 + $160,00 + $38,375 = **~$305,88 — implizites Downside vs. aktuellem Kurs ($318,24): −3,9%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der Kurs preist die starke Dynamik bereits weitgehend ein.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 52,5% ist außergewöhnlich, reflektiert aber primär das asset-leichte EMS-Modell mit hohem Kapitalumschlag, nicht klassische Preissetzungsmacht. Bruttomarge 12,0% und Operating Margin 8,7% sind strukturell niedrig — typisch für Auftragsfertiger, aber im Zykluskontext (aktueller KI-Boom) möglicherweise am oberen Ende des historischen Bereichs. FCF-Daten nicht verfügbar. Der Burggraben liegt in der technischen Fähigkeit, komplexe KI-Infrastruktur-Hardware in großem Maßstab zu fertigen — real, aber ein Wettbewerbsvorteil, den auch Jabil, Flex und Sanmina grundsätzlich replizieren können.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV ~29,6x liegt deutlich über zwei der drei genannten Peers (Jabil ~18,2–19,2x, Sanmina 17,3x), aber nahe an Flex (30,1x) — die Prämie ggü. Jabil/Sanmina lässt sich teilweise strukturell begründen (Celestica wächst mit +62% YoY, weit über dem branchenüblichen EMS-Wachstum), während die Parität mit Flex darauf hindeutet, dass beide Unternehmen ähnlich stark vom AI-Infrastruktur-Thema profitieren. Was preist der Kurs ein? Bei $318,24 und Forward-EPS $11,30 preist der Markt eine Fortsetzung des außergewöhnlichen Wachstumstempos auf hohem, aber nicht dem aktuellen +65%-Niveau ein (vereinfachte Rechnung, Annahme) — ambitioniert, aber angesichts der jüngsten Guidance-Anhebung nicht unplausibel.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens gemäß Recherche "Strong Buy/Buy" (Analystenzahl je Quelle uneinheitlich, 8–21 genannt) — belastbares Kursziel in USD nicht auffindbar (nur CAD/TSX-Notierung verfügbar, nicht direkt vergleichbar). Short-Float-Daten nicht verfügbar. Die starke Kursreaktion (+7–9%) nach einem bereits erwarteten Wachstumsprofil deutet auf fortgesetztes institutionelles Interesse am KI-Infrastruktur-Thema hin (Hypothese, nicht datenbasiert) — Enttäuschungsrisiko bei jeder Anzeichen einer Hyperscaler-Capex-Verlangsamung ist entsprechend hoch.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kein RS-Score verfügbar (nicht getrackt). Kein GWS-Signal aus der RS-Platform verfügbar. Die Kursbewegung ist klar fundamental (Earnings-Beat plus Guidance-Anhebung) getrieben, nicht technisch. Warnsignal: jede Anzeichen einer Verlangsamung bei Hyperscaler-Capex-Ankündigungen (Quartalsberichte der Kunden) wäre ein Frühindikator für ein mögliches Ende des aktuellen Zyklus.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($450–$600):** KI-Infrastruktur-Nachfrage bleibt strukturell hoch (nicht nur zyklisch), Celestica erweitert Marktanteil bei Hyperscaler-Hardware weiter, Margen expandieren durch höherwertigen Produktmix.</p>
+<p>**Base ($280–$400):** KI-Capex normalisiert sich auf ein nachhaltiges, aber niedrigeres Wachstumsniveau, EMS-typische Margen bleiben strukturell niedrig.</p>
+<p>**Bear ($120–$180):** KI-Capex-Zyklus dreht deutlich, Kundenkonzentrationsrisiko materialisiert sich, Rückkehr zu traditionellen EMS-Bewertungsmultiples.</p>
+<p>Entscheidende Variable: Nachhaltigkeit des Hyperscaler-KI-Capex-Zyklus und Grad der Kundenkonzentration.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −3,9%, praktisch neutral). CLS ist ein hochgehebeltes KI-Infrastruktur-Momentum-Play mit außergewöhnlichem Wachstum, aber echter Kundenkonzentrationsabhängigkeit — kein klassischer Compounder, sondern eine strukturelle Wette auf den anhaltenden KI-Capex-Superzyklus. Für Investoren mit hoher Risikotoleranz und AI-Infrastruktur-Überzeugung geeignet, nicht für konservative Value- oder Income-Investoren. Positionsgröße: max. 2–3% angesichts der Kundenkonzentration und der bereits eingepreisten hohen Erwartungen. Peers: **Jabil (JBL)** und **Sanmina (SANM)** sind die günstigeren, traditionelleren EMS-Alternativen (17–19x) mit geringerer AI-Exposure; **Flex (FLEX)** ist der direkteste Vergleichswert mit ähnlicher Bewertung (30,1x) und vergleichbarer AI-Infrastruktur-Dynamik.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Sonstiges — Kein RS-Signal getrackt (Ticker nicht im RS-Platform-Universum); trotz starker fundamentaler Dynamik liefert der Funnel selbst keinen Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

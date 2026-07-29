@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CCEP — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CCEP</h1>
+      <h2>Coca-Cola Europacific Partners </h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Beverages - Non-Alcoholic</span></div>
+        <div class="mi">MCap: <span>$46B</span></div>
+        <div class="mi">Signal: <span>Daily-Breakout (QQQ)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">65.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$105.11</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$20.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">35.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">229.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-7.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">112–125</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">98–112</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">63–76</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $112–$125 (20 %) · Base $98–$112 (50 %) · Bear $63–$76 (30 %) · EV ~$97,05</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: CCEP hatte in den letzten 7 Tagen keinen Earnings-Termin (nächster Bericht: 04.08.2026). Coca-Cola Europacific Partners ist der exklusive Abfüll-/Vertriebspartner für Coca-Cola-Produkte in weiten Teilen Europas und im pazifischen Raum (Australien, Indonesien, Neuseeland, Papua-Neuguinea). Der letzte Trading-Update (Q1 2026, 28.04.2026) zeigte solide operative Dynamik: Umsatz +6,7% reported/+9,4% währungsbereinigt, Volumen +8,5% auf 970 Mio. Unit Cases, FY26-Guidance (3–4% vergleichbares Umsatzwachstum, ~7% operatives Gewinnwachstum, FCF ≥1,7 Mrd. €) bestätigt. Ein aktives 1-Mrd.-€-Aktienrückkaufprogramm (zweite Tranche seit 06.07.2026) unterstreicht die Kapitaldisziplin. Die eigentliche Story ist eher strukturell als ereignisgetrieben: CCEP ist ein stabiles, dividendenstarkes Abfüller-Geschäft mit territorialer Exklusivität, das aktuell mittig innerhalb der Coca-Cola-Bottler-Bewertungsbandbreite handelt — kein akuter Katalysator, aber solide operative Kontinuität.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Exklusiver Abfüll-/Vertriebspartner für Coca-Cola-Markenprodukte in Europa und dem pazifischen Raum — territoriale Exklusivität als struktureller Burggraben</li>
+<li>Zweisegment-Struktur: Europa (größter Umsatzträger, +9,1% Q1) und APS (Australien/Pazifik/Südostasien, +1,1% reported/+8,6% fx-neutral)</li>
+<li>Kosten-pro-Unit-Case-Disziplin (Guidance +1,5%) ist der zentrale operative Hebel gegen Rohstoffkosteninflation</li>
+<li>Aktives Aktienrückkaufprogramm (1 Mrd. €, zweite Tranche seit Juli 2026) reduziert Aktienzahl und stützt EPS-Wachstum unabhängig vom operativen Geschäft</li>
+<li>Dividendenausschüttungsquote-Ziel ~50%, H1-Zwischendividende 0,82 €/Aktie (~40% der FY25-Dividende) — verlässliches Income-Profil</li>
+<li>D/E 130% ist für ein Abfüllunternehmen mit stabilen, vorhersagbaren Cashflows tragbar, aber strukturell nennenswert</li>
+<li>Wachstum ist strukturell moderat (3–4% Guidance) — kein Hochwachstumsprofil, sondern ein Cash-Compounder</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Volumenwachstum beschleunigt sich über die Guidance hinaus, Kosten-pro-Unit-Case-Disziplin hält, das Rückkaufprogramm reduziert die Aktienzahl weiter. Annahme (kein Konsens): EPS $5,90 (moderate Beschleunigung) × 20x (leichte Prämie innerhalb der Bottler-Bandbreite, Annäherung an KO 24,5x) = $118,00. Bull-Kursziel: $112–$125 (Mittelpunkt $118,5). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: FY26-Guidance wird erreicht, Multiple hält sich auf aktuellem Niveau. Annahme: EPS $5,58 (Konsens-Forward) × 18,8x (eigenes aktuelles Forward-KGV) = $104,90. Base-Kursziel: $98–$112 (Mittelpunkt $105, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: europäischer Konsum schwächelt (diskretionäre Getränkeausgaben unter Druck), Währungsgegenwind (Euro/Pfund vs. USD-Berichtswährung) belastet reported Zahlen, Rohstoffkosten (Zucker, Aluminium, PET) steigen wieder an. Kundenkonzentration: breite Endkundenbasis (Einzelhandel/Gastronomie), auf Datenbasis nicht als kritisches Risiko einzustufen. Geopolitik: begrenzte, primär handelsbezogene Exposure in Europa/Pazifik. Lieferketten: Rohstoffabhängigkeit (Zucker, Verpackung) als branchentypisches Risiko. Verwässerung: das Rückkaufprogramm wirkt aktuell aktienzahlreduzierend (positiv) — kein Verwässerungsrisiko erkennbar. Regulierung: Zuckersteuer-/Verpackungsregulierung in mehreren europäischen Märkten als laufendes Hintergrundrisiko. Annahme: EPS fällt auf $4,60 × 15x (Kompression Richtung Coca-Cola HBC/FEMSA-Niveau) = $69,00. Bear-Kursziel: $63–$76 (Mittelpunkt $69,5). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $118,5 + 0,50 × $105 + 0,30 × $69,5 = $23,70 + $52,50 + $20,85 = **~$97,05 — implizites Downside vs. aktuellem Kurs ($105,11): −7,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 22,9%, Operating Margin 13,7% — solide für ein Abfüllunternehmen. FCF $1,75 Mrd. bei $20,9 Mrd. Umsatz (8,4% FCF-Marge) deckt die Dividende und das Rückkaufprogramm strukturell. Anzumerken: der TTM-Umsatzwachstumswert im Datensatz (+0,2%) kontrastiert mit dem deutlich stärkeren jüngsten Quartalswachstum (+6,7% reported/+9,4% fx-neutral) — dies dürfte einen Basiseffekt aus früheren, schwächeren Quartalen reflektieren und ist kein Widerspruch zur aktuellen positiven Dynamik. Der Burggraben liegt in der territorialen Exklusivität als Coca-Cola-Abfüllpartner — strukturell stark und schwer replizierbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 18,8x liegt zwischen den günstigeren Bottler-Peers Coca-Cola HBC (~14,6x, Datenstand möglicherweise älter) und Coca-Cola FEMSA (~15,6x) einerseits und den teureren Comps Coca-Cola Consolidated (~28,1x) und Konzernmutter Coca-Cola (~24,5x) andererseits — eine mittige, nicht extreme Positionierung. Was preist der Kurs ein? Bei $105,11 und Forward-EPS $5,58 preist der Markt eine Fortsetzung des moderaten, aber stabilen Wachstumsprofils gemäß Guidance ein (vereinfachte Rechnung, Annahme) — plausibel und nicht übertrieben ambitioniert.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens "Buy", Kursziel $108,07 (11 Analysten) — nahe am aktuellen Kurs, deutet auf einen bereits weitgehend eingepreisten, stabilen Ausblick hin; "Analyst-Konsensziel $108,07 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Niedriges Beta (0,467) und Dividendenprofil deuten auf überwiegend defensiv orientierte, langfristige institutionelle Investoren hin (Hypothese, nicht datenbasiert) — geringe Enttäuschungsdynamik zu erwarten, da wenig spekulatives Fast-Money-Kapital involviert sein dürfte.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score +65,02 (Rang 39 im NASDAQ-100) — starkes relatives Momentum trotz des defensiven Geschäftsprofils. Windows: 5T +6,2%, 10T +7,77%, 20T +12,79%, 50T +25,3%, 6M +12,96% — konsistent positiver Trend über alle Zeitfenster. GWS-Signal: aktiver Daily-Breakout (29.07.2026, QQQ-Referenz), kein Weekly- oder 4H-Signal aktuell aktiv. Warnsignal: Rückfall unter $98–100 wäre ein erstes technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($120–$145):** Volumenwachstum übertrifft strukturell die Guidance, Kostendisziplin liefert Margenexpansion, kontinuierliche Rückkäufe treiben EPS-Wachstum über das operative Geschäft hinaus.</p>
+<p>**Base ($90–$115):** Stabiles, moderates Abfüller-Geschäft mit verlässlicher Dividende ohne strukturelle Neubewertung.</p>
+<p>**Bear ($55–$78):** Europäischer Konsumrückgang, Rohstoffkosteninflation kehrt zurück, Währungsgegenwind belastet reported Ergebnisse dauerhaft.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der Kosten-pro-Unit-Case-Disziplin und Volumenentwicklung in Europa.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −7,7%). CCEP ist ein solider Cash-Compounder mit territorialer Exklusivität und verlässlicher Dividende — kein Momentum-Play trotz des starken RS-Signals, das hier primär die defensive Sektorrotation reflektiert. Für Dividenden-/Qualitätsinvestoren geeignet, weniger für Wachstums- oder Momentum-orientierte Portfolios. Positionsgröße: solide Kernposition (4–6%) in einem diversifizierten Dividendenportfolio. Peers: **Coca-Cola HBC** und **Coca-Cola FEMSA** sind die günstigeren Bottler-Alternativen (~14,6–15,6x) mit unterschiedlicher geografischer Exposure (Osteuropa/Afrika bzw. Lateinamerika).</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Starkes RS-Signal (Rang 39) und aktiver Daily-Breakout, aber kein aktueller fundamentaler Katalysator vor dem nächsten Bericht (04.08.2026); Reduzierung bis zur Bestätigung.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
