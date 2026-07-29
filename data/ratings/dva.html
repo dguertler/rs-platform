@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DVA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>DVA</h1>
+      <h2>DaVita Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Medical Care Facilities</span></div>
+        <div class="mi">MCap: <span>$15B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">157.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$235.44</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$13.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">32.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">81.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-7.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">280–315</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">220–250</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">110–135</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $280–$315 (20 %) · Base $220–$250 (50 %) · Bear $110–$135 (30 %) · EV ~$214</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DaVita hat seit dem Q1-2026-Beat (adj. EPS $2,87, +43,5 % YoY, FY26-Guidance auf $13,60–15,00 angehoben) einen Lauf von +120 % über 6 Monate hingelegt und notiert bei $235,44 nur knapp unter dem 52-Wochen-Hoch ($239,64). Die Story: DaVita ist neben Fresenius Medical Care eines von zwei relevanten Playern im US-Dialysemarkt — ein strukturell margenstabiles, regulatorisch abgeschottetes Duopol mit chronischer, nicht-diskretionärer Nachfrage. Was der Markt nach dem Kurssprung übersieht: Der aktuelle Kurs preist die Guidance-Anhebung bereits vollständig ein und geht sogar leicht darüber hinaus — bei $235,44 und dem eigenen Guidance-Mittelpunkt ($14,30) impliziert der Kurs bereits ein effektives Forward-KGV von ~16,5x, deutlich über dem in den Kennzahlen ausgewiesenen 13,7x (siehe Anomalie unten). Anomalie: Der Cache-Wert Forward-EPS $17,22 liegt ÜBER der eigenen oberen Guidance-Grenze ($15,00) — aus den Daten nicht abschließend auflösbar, daher für die Szenario-Herleitung stattdessen die eigene Unternehmens-Guidance ($13,60–15,00, Mittelpunkt $14,30) verwendet. Nächster Katalysator: Q2-Zahlen am 04.08. — sechs Tage entfernt, unmittelbares Event-Risiko nach einem +120 %-Lauf.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Dialysebehandlungen für Nieren-Endstadium-Patienten — nicht-diskretionäre, chronische Nachfrage unabhängig vom Konjunkturzyklus</li>
+<li>US-Duopol mit Fresenius Medical Care — hohe strukturelle Eintrittsbarrieren (Zulassung, Kapitalintensität, Reimbursement-Verträge)</li>
+<li>Integrated-Kidney-Care-Modell (Value-Based-Care-Verträge) als margensteigernder Hebel gegenüber reiner Fee-for-Service-Abrechnung</li>
+<li>Hohe Medicare/Medicaid-Abhängigkeit — Reimbursement-Politik ist der zentrale externe Risikofaktor</li>
+<li>Kapitalstruktur: aggressive Aktienrückkäufe seit Jahren, daher NEGATIVES Buchvermögen (Price/Book −20,6) und D/E 1.261 % — bewusste Financial-Engineering-Strategie, kein Distress-Signal, aber strukturelle Fragilität in einer Stressphase</li>
+<li>Internationale Expansion (u. a. Lateinamerika) als sekundärer, noch kleiner Wachstumsbaustein</li>
+<li>FCF-stark: $1,0 Mrd. bei $13,8 Mrd. Revenue — finanziert Buybacks direkt aus dem operativen Geschäft</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Guidance wird erneut übertroffen (DaVita hat eine Historie konsistenter Beats), Integrated-Care-Verträge skalieren schneller, internationale Segmente tragen erstmals sichtbar bei. Strukturelle Margennachhaltigkeit: Value-Based-Care-Verträge verschieben den Mix zu höhermargigen Kontrakten, Duopol-Preissetzungsmacht bleibt intakt, Skaleneffekte im bestehenden Klinik-Netzwerk ohne große Neuinvestitionen. Annahme: FY27-EPS ~$17,50 (Guidance-Fortschreibung + Beat) × 17x (moderate Prämie auf eigenes effektives Multiple, kein reiner Peer-Vergleich möglich, siehe Abschnitt 7) = $297,5. Bull-Kursziel: $280–$315 (Mid $297,5). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Q2-Zahlen (04.08.) bestätigen die Guidance ohne große Überraschung, Wachstum verläuft entlang des bereits kommunizierten Pfads. Annahme: FY27-EPS ~$15,70 (Guidance-Mittelpunkt + moderates Wachstum) × 15x (nahe eigenem effektivem Multiple von ~16,5x auf Guidance-Basis) = $235,5. Base-Kursziel: $220–$250 (Mid $235). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Medicare-Reimbursement-Kürzung oder 340B-Drug-Pricing-Politikänderung trifft die Dialysebranche direkt — ein sektorspezifisches Regulierungsrisiko, das bei DaVitas Geschäftsmodell überproportional wirkt. Kundenkonzentration: keine Einzelkunden-Konzentration, aber extreme Zahler-Konzentration auf Medicare/Medicaid — auf Datenbasis nicht exakt quantifizierbar, aber strukturell zentral. Geopolitik/Exportkontrollen: nicht relevant, reines US-Inlandsgeschäft. Lieferketten: kein Single-Source-Risiko erkennbar. Verwässerung: Gegenteil — aggressive Buybacks, aber genau das erzeugt das Bilanzrisiko: D/E 1.261 % und negatives Buchvermögen bedeuten, dass die Aktie in einer Stressphase keinen Kapitalpuffer hat. Regulierung: das zentrale Risiko (siehe oben). EPS fällt auf $11,00 (nahe Trailing-Niveau) × 11x (Multiple-Kompression durch Leverage-Diskont) = $121. Bear-Kursziel: $110–$135 (Mid $122,5). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 20 % + 50 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $297,5 + 0,50 × $235 + 0,30 × $122,5 = $59,5 + $117,5 + $36,75 = **~$214 — implizites Downside vs. aktuellem Kurs ($235,44): −9,1 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach +120 % in 6 Monaten ist der Optimismus bereits mehr als eingepreist.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 81,0 % ist ein Buchwert-Artefakt (negatives Eigenkapital durch Buybacks) — nicht als klassische Qualitätskennzahl interpretierbar, aus den Daten nicht anders auflösbar. Aussagekräftiger: ROIC 13,1 %, solide für ein margenstabiles Gesundheitsdienstleistungsgeschäft. Gross Margin 32,5 %, Operating Margin 13,9 %, Profit Margin nur 5,6 % — die Lücke zwischen Operating- und Profit-Margin deutet auf hohe Zinslast durch die Verschuldung hin. FCF $1,0 Mrd. solide. Der Burggraben (Duopol-Struktur) ist real, aber die Bilanzqualität ist strukturell fragil — kein klassischer "sicherer Hafen" trotz defensivem Endmarkt.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Cache-Forward-PE 13,67x basiert auf dem anomalen Forward-EPS $17,22 (über der eigenen Guidance) — nicht verwendbar. Auf Basis der eigenen FY26-Guidance (Mittelpunkt $14,30) ergibt sich ein reales effektives Forward-KGV von ~16,5x. Peer-Vergleich: kein reiner Dialyse-Peer im Datensatz getrackt (Fresenius Medical Care nicht verfügbar) — HCA Healthcare (11,7x fwd) als lose Referenz für margenstabile US-Gesundheitsdienstleister, aber kein direktes Geschäftsmodell-Pendant, daher nur indikativ. Rückrechnung "Was preist der Kurs ein?": Bei $235,44 und Guidance-EPS $14,30 verlangt der Markt entweder deutlich über der Guidance liegendes Wachstum oder eine dauerhafte Multiple-Prämie — ambitioniert, nicht unplausibel angesichts der Historie, aber ohne Sicherheitsabstand.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analyst-Konsensziel $208,57 (7 Analysten) liegt ~11,4 % UNTER dem aktuellen Kurs — ungewöhnlich große Lücke, die Coverage hat den +120 %-Lauf nicht vollständig nachvollzogen (Orientierungspunkt, kein Ceiling). RecommendationKey: "hold" — bezeichnend, dass selbst nach dem starken Beat keine offizielle Kaufempfehlung vorliegt. Short-Float/institutionelle Daten nicht im Datensatz. Enttäuschungsrisiko: hoch, da der Markt nach einem derartigen Lauf jede Q2-Abweichung überproportional bestrafen dürfte.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 157,9, Rang 21 im S&P 500 — Top-Momentum-Titel. Windows: 5T +4,1 %, 10T +5,3 %, 20T +8,6 %, 50T +19,6 %, 6M +120,3 %. Kein GWS-Signal aktiv (Datensatz enthält für S&P-500-Titel aktuell keine GWS-Berechnung). Momentum ist ursprünglich fundamental ausgelöst (Q1-Beat), inzwischen aber weit über die fundamentale Neubewertung hinausgelaufen — das 6M-Fenster ist ein Extremwert. Warnsignal: ein Rückfall unter das 20-Tage-Niveau vor dem Q2-Print (04.08.) wäre ein erstes Zeichen, dass der Markt vorsichtiger wird.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($300–$400):** Integrated-Care-Modell und internationale Expansion etablieren einen zweiten Wachstumsmotor neben dem US-Kerngeschäft, Reimbursement-Umfeld bleibt stabil.</p>
+<p>**Base ($200–$290):** Duopol-Struktur bleibt intakt, moderates Wachstum, Bewertung pendelt um die aktuelle Guidance-Bandbreite.</p>
+<p>**Bear ($90–$150):** Regulatorischer Eingriff in die Dialyse-Reimbursement-Struktur trifft die margenschwache, hochverschuldete Bilanz hart.</p>
+<p>Entscheidende Variable: Medicare/Medicaid-Reimbursement-Politik für Dialyseleistungen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −9,1 %) — High-Conviction-Framing ist nach einem +120 %-6-Monats-Lauf und sechs Tage vor dem nächsten Print nicht vertretbar. DaVita ist strukturell ein Qualitäts-Duopol mit chronischer Nachfrage, aber die Bilanz (negatives Buchvermögen, D/E 1.261 %) macht es zu keinem klassischen Buy-and-Hold-Compounder für konservative Investoren — eher ein zyklisches Momentum-Play auf ein defensives Geschäftsmodell. Für Neueinstiege: kein Chasing vor dem 04.08.-Print, Bestätigung abwarten. Bestehende Positionen: engen Stop unter dem 20-Tage-Niveau setzen. Positionsgröße: klein bis zum nächsten Quartalsbericht.</p>
+<p>Kein reiner Peer im Datensatz — **HCA Healthcare** als breitere, weniger konzentrierte US-Gesundheitsdienstleister-Alternative (11,7x Forward-KGV vs. DVA effektiv ~16,5x), aber ohne Duopol-Charakteristik. Peer-Multiples für Dialyse-Spezialisten nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Nach +120 % in 6 Monaten und negativem EV (−9,1 %) sechs Tage vor dem nächsten Quartalsbericht trägt die Bewertung keine volle Positionsgröße trotz intaktem Duopol-Geschäftsmodell.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

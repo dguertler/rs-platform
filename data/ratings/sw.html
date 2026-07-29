@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">29.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SW</h1>
+      <h2>Smurfit WestRock plc</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Packaging & Containers</span></div>
+        <div class="mi">MCap: <span>$25B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">54</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 29.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">93.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$48.56</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$31.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">19.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">414.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">2.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">70–82</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">47–57</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">18–23</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $70–$82 (20 %) · Base $47–$57 (50 %) · Bear $18–$23 (30 %) · EV ~$47</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Smurfit Westrock hat die Q2-2026-Zahlen HEUTE (29.07., 6:30 Uhr ET) veröffentlicht — die tatsächlichen Ergebnisse sind zum Zeitpunkt dieser Analyse per WebSearch NICHT verifizierbar (zu aktuell, noch nicht indexiert). Der Fundamental-Snapshot ($48,56, 27.07.) und diese Analyse basieren daher auf der VOR dem heutigen Print zuletzt bekannten Datenlage inkl. der vom Unternehmen selbst vorab kommunizierten Q2-Guidance (adj. EBITDA $1,1–1,2 Mrd., FY26-Ausblick $5,0–5,3 Mrd. bestätigt). Der Auslöser der heutigen Kursbewegung ist damit NICHT verifizierbar — vor einer Positionsentscheidung zwingend die tatsächlich veröffentlichten Zahlen prüfen. Die Story unabhängig vom heutigen Print: Smurfit Westrock ist der weltgrößte Verpackungshersteller nach der Fusion Smurfit Kappa/WestRock (2024) — noch in der Synergie-Realisierungsphase, aktuell mit dünnen Margen (Profit Margin nur 1,2 %), aber mit einer glaubwürdigen mittelfristigen Guidance zur Margenexpansion.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Weltgrößter integrierter Verpackungshersteller (Containerboard, Wellpappe, Konsumverpackungen) nach der Smurfit-Kappa/WestRock-Fusion</li>
+<li>Fusion befindet sich in der Synergie-Realisierungsphase — Kostensenkungen und Netzwerkoptimierung sind der zentrale Werttreiber der nächsten 1–2 Jahre</li>
+<li>Vertikale Integration (eigene Papierfabriken plus Verpackungswerke) reduziert Rohstoffabhängigkeit gegenüber reinen Verpackern</li>
+<li>Globalere Fußabdruck als der reine US-Peer International Paper (siehe separate Analyse) — Lateinamerika- und Europa-Exponierung als Diversifikation</li>
+<li>Operativer Hebel: Gross Margin nur 19,0 %, Operating Margin 6,8 % — deutlich unter Peer PKG (Operating Margin ~11,9 %), zeigt frühe Integrationsphase</li>
+<li>Dividendenrendite 4,14 % — attraktiv, aber bei aktuell dünner Marge (Profit Margin 1,2 %) mit begrenztem Puffer</li>
+<li>Containerboard-Preiszyklus bleibt trotz Diversifikation der zentrale externe Ergebnistreiber</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Fusionssynergien materialisieren sich schneller als geplant, Containerboard-Preiszyklus inflektiert positiv (sektorweiter Rückenwind, siehe auch IP-Analyse), Margen nähern sich dem PKG-Niveau an. Strukturelle Margennachhaltigkeit: Netzwerkoptimierung nach der Fusion (Werksschließungen, Logistikbündelung) ist ein einmaliger, aber realer struktureller Hebel — nicht nur zyklisch. Annahme (kein Konsens, VORBEHALTLICH der heute veröffentlichten, noch nicht verifizierten Zahlen): FY27-EPS ~$4,20 × 18x (nahe PKG mit 20,2x, Prämie für erfolgreiche Integration) = $75,6. Bull-Kursziel: $70–$82 (Mid $76). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Synergie-Ramp verläuft wie zuletzt kommuniziert (FY26-EBITDA-Guidance $5,0–5,3 Mrd. bestätigt), keine großen Überraschungen. Annahme: FY27-EPS ~$3,70 (nahe cache-Forward-EPS $3,36, moderates Wachstum) × 14x (nahe eigenem aktuellem Forward-Multiple 14,45x, Mitte der Peer-Bandbreite) = $51,8. Base-Kursziel: $47–$57 (Mid $52). Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Integrationsprobleme (Kulturunterschiede, Werksschließungs-Verzögerungen), Verpackungsnachfrage schwächt sich sektorweit ab, Synergieziele werden verfehlt. Kundenkonzentration: breite Kundenbasis über Konsumgüter-/E-Commerce-Kunden, keine Einzelkonzentration erkennbar. Geopolitik/Exportkontrollen: globaler Fußabdruck inkl. Lateinamerika/Europa — Währungs- und Regulierungsrisiken auf Datenbasis nicht quantifizierbar. Lieferketten: eigene vertikale Integration reduziert Fremdbezugsrisiko, aber Energiekosten in Europa sind ein bekannter Kostenfaktor. Verwässerung: SBC-/Aktienanzahl-Trend nicht im Datensatz — nach einer Fusion dieser Größenordnung aber ein plausibles Risiko, nicht beurteilbar. Regulierung: Umweltauflagen für Papier-/Zellstofffabriken laufend, nicht quantifizierbar. EPS bleibt schwach bei $2,20 × 9x (Sonoco-Niveau, unteres Peer-Band) = $19,8. Bear-Kursziel: $18–$23 (Mid $20,5). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 20 % + 50 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $76 + 0,50 × $52 + 0,30 × $20,5 = $15,2 + $26,0 + $6,15 = **~$47,35 — implizites Downside vs. Snapshot-Kurs ($48,56): −2,5 %.** Nahezu ausgeglichen — angesichts der fehlenden Verifizierbarkeit der heutigen Zahlen ist dieser EV mit erhöhter Unsicherheit behaftet und keine belastbare Handlungsgrundlage vor Prüfung der tatsächlichen Ergebnisse.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE nur 2,1 %, ROIC 4,2 % — schwach, typisch für die frühe Post-Merger-Integrationsphase, nicht strukturell aussagekräftig für das Zielbild. Gross Margin 19,0 %, Operating Margin 6,8 %, Profit Margin 1,2 % — alle drei deutlich unter Peer-Niveau (PKG Operating Margin ~11,9 %), bestätigt den frühen Integrationsstatus. FCF trotzdem solide positiv: $1,36 Mrd. bei $31,2 Mrd. Revenue. D/E 78,8 % moderat für eine gerade vollzogene Großfusion. Der Burggraben liegt in globaler Skalengröße nach der Fusion — real, aber noch nicht in der Marge sichtbar, muss sich erst über mehrere Quartale beweisen.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Forward-PE 14,45x auf Basis des cache-Forward-EPS $3,36 — intern konsistent mit dem Snapshot-Kurs, keine Anomalie erkennbar wie bei DVA/IQV. Peer-Vergleich (`data/fundamentals.json`): Packaging Corp of America (PKG) 20,2x, Sonoco (SON) 9,2x, sowie International Paper (IP) 15,0x als nächster direkter Vergleichswert innerhalb desselben Analyse-Batches. SW liegt mit 14,45x knapp unter IP und in der Mitte der PKG/SON-Bandbreite — keine auffällige Prämie oder Abschlag. Rückrechnung "Was preist der Kurs ein?": Bei $48,56 verlangt der Markt eine erfolgreiche, aber noch nicht in der Marge bestätigte Fusionsintegration — plausibel angesichts der bestätigten Guidance, aber ohne die heutigen Zahlen nicht abschließend beurteilbar.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analyst-Konsensziel $55,17 (15 Analysten, Datenstand vor dem heutigen Print) liegt ~13,6 % ÜBER dem Snapshot-Kurs — deutlich optimistischer als der Markt zum Snapshot-Zeitpunkt, als Orientierungspunkt zu verstehen. RecommendationKey: "strong_buy" — die stärkste Einstufung im gesamten Batch. Short-Float/institutionelle Daten nicht im Datensatz. Enttäuschungsrisiko: aktuell nicht seriös einschätzbar, da die entscheidenden heutigen Zahlen fehlen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 93,8, Rang 352 im S&P 500 (Datenstand 27.07., vor dem heutigen Print). Windows: 5T +15,1 %, 10T +18,4 %, 20T +10,8 %, 50T +35,3 %, 6M +14,2 % — eine bereits vor dem heutigen Print laufende, breit angelegte Rallye, ähnlich wie bei IP, was auf einen sektorweiten Verpackungs-Rückenwind (Containerboard-Preiszyklus) statt eines einzeltitel-spezifischen Sondereffekts hindeutet. Kein GWS-Signal aktiv. Warnsignal: eine negative Kursreaktion auf die heutigen Zahlen (sobald verifizierbar) wäre das erste Signal, dass die sektorweite Hoffnungsrallye an ihre Grenzen stößt.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($85–$120):** Fusionssynergien realisieren sich vollständig, SW etabliert sich als margenführender globaler Verpackungskonsolidierer, Multiple re-ratet Richtung PKG-Niveau.</p>
+<p>**Base ($45–$70):** Graduelle Margenverbesserung entlang der Guidance, Bewertung bleibt in der aktuellen Peer-Bandbreite.</p>
+<p>**Bear ($15–$28):** Integration scheitert an Kosten/Kultur, Containerboard-Zyklus dreht negativ, Dividendendeckung gerät unter Druck.</p>
+<p>Entscheidende Variable: Tempo und Vollständigkeit der Fusionssynergie-Realisierung, überlagert vom Containerboard-Preiszyklus.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>WICHTIGSTER HINWEIS: Die heutigen Q2-Zahlen sind Grundlage der aktuellen Kursbildung, aber auf Datenbasis nicht verifizierbar — diese Analyse basiert auf dem Snapshot vor der Veröffentlichung und der zuvor kommunizierten Guidance. Der berechnete Erwartungswert (−2,5 %) ist unter dieser Einschränkung zu lesen und KEINE belastbare Handlungsgrundlage, bevor die tatsächlichen Zahlen geprüft wurden. Strukturell ist Smurfit Westrock ein Post-Merger-Integrationsstory mit realer, aber noch nicht in der Marge bestätigter Synergie-These — weder Compounder noch reiner Trading-Trade. Für Neueinstiege: zwingend erst die heute veröffentlichten Zahlen und die Kursreaktion darauf prüfen. Bestehende Positionen: unverändert, bis die tatsächlichen Ergebnisse vorliegen. Positionsgröße: keine Neuentscheidung auf Basis dieser Analyse allein.</p>
+<p>**Packaging Corp of America (PKG)** ist das margenstärkere, aber teurere Instrument (20,2x vs. SW 14,45x) ohne Post-Merger-Unsicherheit. **International Paper (IP)**, im selben Batch analysiert, zeigt ein vergleichbares technisches Muster, aber mit klar schwächerer Fundamentallage (TTM-Verlust vs. SW knapp profitabel).</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die heute veröffentlichten Q2-Zahlen sind der entscheidende Katalysator, aber auf Datenbasis nicht verifizierbar — halbe Positionsgröße bis zur Prüfung der tatsächlichen Ergebnisse.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
