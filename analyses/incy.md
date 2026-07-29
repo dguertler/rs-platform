@@ -1,92 +1,92 @@
 # INCY — KI-Aktienbewertung
 
-**Incyte Corporation** · Healthcare · 08.07.2026 · Signal: Erstmaliger Breakout
+**Incyte Corporation** · Healthcare · 29.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 116.86 |
-| Market Cap | $23.35 Mrd. |
-| Forward PE | 12.65 |
+| Kurs | 131.4 |
+| Market Cap | $26.25 Mrd. |
+| Forward PE | 14.58 |
 | Revenue (TTM) | $5.36 Mrd. |
 | Gross Margin | 52.8% |
 | ROE | 30.8% |
-| RS-Score | 58.5 |
+| RS-Score | 42.4 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $170–$220 (20 %) · Base $120–$150 (45 %) · Bear $50–$75 (35 %) · EV ~$122
+**Szenarien (12–18 Monate):** Bull $205–$230 (20 %) · Base $128–$148 (50 %) · Bear $60–$75 (30 %) · EV ~$133
 
 ## 1. INVESTMENT-CASE
 
-Incyte bricht mit RS-Score 58,5 (Rang 28 im S&P 500) technisch auf allen drei GWS-Ebenen aus und notiert bei $117,21 nur knapp unter dem 52-Wochen-Hoch ($118,69). Die eigentliche Story ist nicht der kurzfristige Ausbruch, sondern die Frage, ob Opzelura (topisches Ruxolitinib bei Vitiligo/atopischer Dermatitis) das strukturelle Nachfolgeprodukt für die alternde Jakafi-Franchise werden kann, bevor die Patent-Klippe (Verlust der Exklusivität auf Ruxolitinib in den USA, historisch gegen Ende der 2020er-Jahre erwartet) wirksam wird. Revenue TTM $5,36 Mrd. wächst +20,9% YoY, ROIC 61,1% ist außergewöhnlich hoch für ein Biotech dieser Größe. Was der Markt womöglich übersieht: Die Aktie nähert sich bereits einer Bewertung, die einen erfolgreichen Übergang über die Patent-Klippe hinweg teilweise einpreist — der Ausbruch ist damit weniger ein Frühindikator als eine Bestätigung einer bereits laufenden Neubewertung.
+DATENLAGE: Fundamental-Snapshot vom 27.07.2026 liegt vor der jüngsten Kursbewegung (Q2-Earnings 28.07.). Konfidenz der Bewertungsaussagen reduziert. Auslöser verifiziert (WebSearch-Earnings-Check): adj. EPS $3,09 vs. $2,12 erw. (+45,8 % Surprise), Umsatz $1,67 Mrd. (+38 % YoY), Gesamtjahres-Nettoumsatz-Guidance auf $5,13–5,26 Mrd. angehoben (vorher $4,77–4,94 Mrd.). Kurs sprang intraday +10,6 % auf neues 52-Wochen-Hoch (~$131,40). Die eigentliche Story: Nach Jahren, in denen der Markt INCY fast nur über die Jakafi-Patentklippe bepreist hat, liefert das Unternehmen den Beleg, dass Diversifikation trägt — Opzelura (CMS-Einigung zur Line-Extension abgesichert), Niktimvo, Monjuvi/Minjuvi (Phase-3 im Lancet, US-Launch Q1 2027) und die frische Vega-Therapeutics-Übernahme (latarcibart) verschieben das Modell weg vom Single-Asset-Risiko. Was der Markt übersieht: Der Sprung preist einen Großteil dieser Neubewertung bereits ein — der EV-Edge ist auf dem neuen Niveau gering (Abschnitt 5), kein Einstieg mit großem Sicherheitsabstand mehr.
 
 ## 2. GESCHÄFTSMODELL
 
-- Jakafi/Jakavi (Ruxolitinib) — Kernprodukt für Myelofibrose, Polycythaemia vera und Graft-versus-Host-Disease; historisch der weit überwiegende Teil des Konzernumsatzes
-- Opzelura (topisches Ruxolitinib) — Wachstumsträger bei Vitiligo und atopischer Dermatitis, zentral für die Diversifizierung weg von Jakafi
-- Onkologie-Pipeline (u.a. Pemazyre, Monjuvi) als ergänzende, aber bislang umsatzmäßig untergeordnete Segmente
-- Hohe operative Marge (25,6%) durch Fokussierung auf wenige, aber hochmargige Spezialpräparate statt breiter Primary-Care-Produkte
-- Lizenz- und Kollaborationseinnahmen als Nebenertragsquelle, Volatilität durch Meilenstein-Zahlungen
-- Strukturelle Abhängigkeit von einem einzigen Wirkstoff-Molekül (Ruxolitinib) über mehrere Indikationen und Marken hinweg
-- F&E-Intensität zur Pipeline-Erneuerung vor der Patent-Klippe — zentrale Kapitalallokations-Entscheidung der kommenden Jahre
-- ROIC 61,1% deutet auf einen ungewöhnlich kapitaleffizienten Kern, der sich aber auf ein alterndes Molekül konzentriert
+- Kernumsatz aus Jakafi (Myelofibrose, Polycythemia vera, GvHD) — Q2: $817 Mio., ~55 % des Gesamtumsatzes, weiterhin wachsend (+7 % YoY), strukturelle Abhängigkeit bleibt hoch
+- Opzelura (Atopische Dermatitis/Vitiligo) als zweite Säule — Guidance $1,05–1,10 Mrd. FY26, abgesichert durch CMS-Einigung zur Erstattungsfähigkeit
+- Hämatologie/Onkologie-Wachstumsprodukte (Niktimvo, Monjuvi/Minjuvi, Zynyz) — Guidance $860–890 Mio. FY26, am schnellsten wachsender Block
+- Lizenz-/Royalty-Erträge aus Partnerschaften (u. a. Novartis für Jakafi-Auslandsrechte) als margenstarker Nebenertrag
+- Operativer Hebel: F&E-intensives Modell, Gross Margin 52,8 % bei Operating Margin 25,6 %
+- Zukäufe als Wachstumshebel: Vega-Therapeutics-Übernahme (latarcibart, Phase 3) statt reinem Warten auf internes F&E
+- Jakafi-Patentklippe bleibt entscheidender Mittelfrist-Risikofaktor — Diversifikation muss das Wachstum kompensieren, bevor Erosion einsetzt
+- Reine Spezialpharma ohne Massenfertigungs-Exponierung — Vertrieb auf Fachärzte/Hämatologen fokussiert
 
 ## 3. BULL CASE
 
-Opzelura skaliert über neue Indikationen (breitere Dermatologie-Zulassungen) deutlich, mindestens ein Onkologie-Pipeline-Kandidat erreicht eine kommerziell relevante Zulassung und beginnt, die absehbare Jakafi-Erosion strukturell zu kompensieren. Annahme (kein Konsens): FY27-EPS ~$12,00 × 17x Forward-Multiple (Re-Rating Richtung Wachstums-Biotech) = $204. Kursziel: $170–$220 (Midpoint $195). Eintrittswahrscheinlichkeit: 20%.
+Monjuvi/Minjuvi-Launch (Q1 2027) übertrifft Erwartungen, Niktimvo/Zynyz skalieren schneller als geplant, Jakafi hält Wachstum trotz Patentdruck. Strukturelle Margennachhaltigkeit: IP-geschützte Nachfolgegeneration (Jakafi XR seit Mai zugelassen) verlängert den Patentschutz-Zyklus, Produktmix verschiebt sich zu margenstärkeren Onkologie-Produkten, geringe Fixkosten erlauben Skalierung ohne proportionalen Kostenanstieg. Annahme (kein Konsens): FY27-EPS ~$12,00 × 18x Forward (Peer-Bandbreite 12–22x, VRTX als Obergrenze bei 22,4x, ohne volle CF-Franchise-Prämie) = $216. Bull-Kursziel: $205–$230 (Mid $217,5). Eintrittswahrscheinlichkeit: 20 %.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Jakafi hält sich stabil bis leicht wachsend, Opzelura wächst weiter zweistellig, aber die Patent-Klippen-Diskussion belastet zunehmend das Multiple, da der Markt den Übergang vorwegnimmt. Annahme (kein Konsens): FY27-EPS ~$10,50 × 13x = $136,50. Kursziel: $120–$150 (Midpoint $135). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Diversifikation trägt moderat, Jakafi wächst einstellig weiter, Guidance-Anhebung bestätigt sich im Jahresverlauf ohne weitere Überraschung. Annahme (kein Konsens, da aktualisierter Straßenkonsens nach dem Beat noch nicht im Datensatz verfügbar ist): FY27-EPS ~$10,55 (von $9,01 Forward-Konsens vor Earnings, +17 % durch Guidance-Raise-Flow-Through) × 13x (nahe eigenem aktuellem Forward-Multiple, innerhalb Peer-Bandbreite 12–22x) = $137. Base-Kursziel: $128–$148 (Mid $138). Eintrittswahrscheinlichkeit: 50 %.
 
 ## 5. BEAR CASE
 
-Auslöser: Vorgezogene Generika-/Biosimilar-Signale zur Ruxolitinib-Exklusivität oder ein enttäuschender Pipeline-Readout (Onkologie oder Dermatologie) lassen den Markt die Patent-Klippe vorzeitig einpreisen. Kundenkonzentration/Produktkonzentration: Jakafi macht laut öffentlich bekannten Segmentangaben historisch den weit überwiegenden Teil des Konzernumsatzes aus — im vorliegenden Datensatz nicht exakt quantifiziert, aber strukturell das zentrale Risiko dieser Aktie. Geopolitik/China-Exposure: primär US-/EU-fokussiertes Absatzmodell, China-Exposure auf Datenbasis nicht quantifizierbar, Einschätzung: gering. Lieferketten-/Foundry-Abhängigkeit: nicht anwendbar (Pharma-Fertigung, keine Foundry-Struktur). Verwässerung: SBC/Aktienanzahl-Trend nicht im Datensatz enthalten — auf Datenbasis nicht beurteilbar. Regulierung: FDA-Zulassungsrisiko für Pipeline-Kandidaten sowie potenzielle US-Arzneimittelpreis-Regulierung (Medicare-Preisverhandlungen) für etablierte Marken wie Jakafi sind reale, im Datensatz nicht quantifizierte Risiken. Annahme: FY27-EPS ~$7,00 × 8,5x (Multiple-Kompression durch Klippen-Sorge) = $59,50. Kursziel: $50–$75 (Midpoint $62,50). Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Jakafi-Biosimilar-/Wettbewerbsdruck setzt früher ein als erwartet, während Monjuvi/Niktimvo/Zynyz kommerziell enttäuschen. Kundenkonzentration: Jakafi allein ~55 % des Q2-Nettoumsatzes ($817 Mio. von $1,49 Mrd.) — ein Erosionsschub trifft überproportional. Geopolitik/Exportkontrollen: minimal, keine relevante China-Exponierung erkennbar. Lieferketten/Fertigung: kein Foundry-Single-Source-Risiko wie bei Halbleitern, Auftragsfertiger-Abhängigkeit für Biologics auf Datenbasis nicht beurteilbar. Verwässerung: SBC-/Aktienanzahl-Trend nicht im Datensatz — nicht beurteilbar. Regulierung: FDA-Zulassungsrisiko für Monjuvi/latarcibart sowie Patentlitigation um Jakafi sind die konkretesten Rechtsrisiken. EPS fällt Richtung Trailing-Niveau $7,50 bei Multiple-Kompression auf 9x (unteres Peer-Band) = $67,5. Bear-Kursziel: $60–$75 (Mid $67,5). Eintrittswahrscheinlichkeit: 30 %.
 
-**Summe: 20% + 45% + 35% = 100%**
+**Summe: 20 % + 50 % + 30 % = 100 %**
 
-**Erwartungswert:** EV = 0,20 × $195 + 0,45 × $135 + 0,35 × $62,50 = $39 + $60,75 + $21,88 = **~$122 — implizites Upside vs. aktuellem Kurs ($117,21): +3,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $217,5 + 0,50 × $138 + 0,30 × $67,5 = $43,5 + $69 + $20,25 = **~$133 — implizites Upside vs. aktuellem Kurs (~$131,40): +1,0 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem +10,6 %-Tagessprung ist der Großteil der guten Nachricht bereits eingepreist.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 30,8% und ROIC 61,1% sind exzellent und zeigen einen kapitaleffizienten Kern. Gross Margin 52,8%, Operating Margin 25,6%, Profit Margin 26,7% — solide Spezialpharma-Profitabilität. Free Cashflow $558,9 Mio. bei $5,36 Mrd. Revenue (FCF-Marge ~10,4%) — moderat für ein etabliertes Biotech, reflektiert weiterhin hohe F&E-Reinvestition. Debt/Equity 0,70x — konservative Bilanz mit ausreichend Spielraum für M&A zur Pipeline-Ergänzung. Der wirtschaftliche Burggraben ist real (patentgeschützte Nischenindikationen mit begrenztem direktem Wettbewerb), aber zeitlich begrenzt durch die absehbare Exklusivitäts-Grenze.
+ROE 30,8 %, ROIC 61,1 % — für Spezialpharma stark, spiegelt margenstarkes Lizenz-/Patentgeschäft ohne hohe Kapitalintensität. Gross Margin 52,8 %, Operating Margin 25,6 %, Profit Margin 26,7 % — solide, strukturell stabiler als Halbleiter-Zyklusmargen. FCF $558,9 Mio. bei Revenue $5,36 Mrd. (TTM, Snapshot vor Q2) — ~10,4 % FCF-Marge, moderat. Bilanz solide: D/E 0,70, keine akute Verschuldungssorge. Der Burggraben ist real (Jakafi-Patentschutz, Nischenindikationen mit hohen Eintrittsbarrieren), aber konzentriert auf ein alterndes Kern-Asset — die Diversifikation muss ihn erst auf mehrere Beine stellen.
 
-## 7. BEWERTUNG
+## 7. BEWERTUNG (vorläufig, Datenstand)
 
-Forward-PE 12,6x wirkt für ein Biotech mit +20,9% Umsatzwachstum günstig — die Kompression relativ zum Wachstum spiegelt die Patent-Klippen-Sorge des Marktes wider, nicht fehlende Qualität. Price-to-Book 4,16x ist für Pharma moderat. Rückrechnung: Bei $117,21 und Forward-EPS ~$9,24 (Snapshot-Basis) preist der Kurs ein Forward-PE von ~12,7x ein — plausibel für ein reifendes, aber noch wachsendes Spezialpharma-Unternehmen, nicht ambitioniert. Analyst-Konsensziel $111,27 liegt unter dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; Coverage bewertet die Aktie tendenziell vorsichtiger als der Markt aktuell handelt.
+Forward-PE Snapshot-Basis 13,05x, auf aktuellem Kurs (~$131,40) und unrevidiertem Forward-EPS $9,01 bereits ~14,6x. Peer-Vergleich (`data/fundamentals.json`): REGN 12,0x, GILD 13,4x, BIIB 12,3x, ALNY 20,2x, VRTX 22,4x — INCY liegt im mittleren Bereich der Peer-Bandbreite (12–22x), leicht über REGN/GILD/BIIB, deutlich unter VRTX. Mit plausibler EPS-Anhebung nach dem Beat (eigene Schätzung ~$9,60–10,00) sinkt das effektive Forward-KGV auf ~13,1–13,7x — Mitte der Peer-Range, keine auffällige Prämie. Rückrechnung "Was preist der Kurs ein?": Bei $131,40 und Forward-EPS $9,01 impliziert der Markt bereits einen Großteil der Guidance-Anhebung — plausibel, aber nicht mehr günstig, kaum Puffer für Enttäuschungen. FCF-Marge ~10 % bei stabilen Margen ist kein Value-Fall, aber auch keine überzogene Bewertung — eine strukturierte Wette auf erfolgreiche Diversifikation, kein Compounder-Schnäppchen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 58,5 (Rang 28) und ein Kurs nahe dem 52-Wochen-Hoch zeigen intaktes relatives Momentum. 10T +11,2%, 20T +16,0% — breite, nicht nur eintägige Stärke. Hypothese, nicht datenbasiert: Bei Spezialpharma-Titeln mit Patent-Klippen-Risiko sind Long-Only-Investoren historisch zurückhaltender als Fast-Money-Trader, die auf kurzfristige Pipeline-Katalysatoren setzen — neue strukturelle Käufer dürften einen konkreten Pipeline-Erfolg (nicht nur Kursstärke) als Bestätigung verlangen. Enttäuschungsrisiko: hoch bei jedem negativen regulatorischen Signal zur Ruxolitinib-Exklusivität.
+Analyst-Konsensziel $114,55 (22 Analysten, Datenstand vor Earnings) liegt ~12,8 % UNTER dem Kurs — Orientierungspunkt, nicht Kursziel-Ceiling: Sell-Side-Coverage hinkt der Kursbewegung erfahrungsgemäß hinterher und wird nach einem Beat dieser Größe typischerweise nach oben revidiert. RecommendationKey: "buy". Short-Float/institutionelle Positionierung nicht im Datensatz — keine belastbare Aussage zu Fast-Money vs. Long-Only (Hypothese, nicht datenbasiert: ein Beat dieser Größe zieht kurzfristig Momentum-Käufer an, die bei ausbleibender Anschlussnews schnell wieder aussteigen). Enttäuschungsrisiko erhöht, da die eigene Guidance-Anhebung die Latte fürs nächste Quartal höher legt.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Alle drei GWS-Ebenen aktiv: Weekly-GWS $107,61, Daily-GWS $98,85, 4H-GWS $118,47 — bemerkenswert liegt der Kurs ($117,21) knapp unter dem 4H-GWS-Niveau trotz aktivem 4H-Signal, was auf einen sehr frischen, noch ungetesteten Ausbruch hindeutet. 5T +4,1%, 50T +20,0% zeigen eine breite Aufwärtsdynamik über mehrere Zeitfenster. Momentum ist teilweise fundamental gestützt (Umsatzwachstum), aber die Nähe zum 52-Wochen-Hoch erhöht das Rückschlagrisiko bei jeder Enttäuschung. Warnsignal: Rückfall unter Daily-GWS $98,85 würde die mittelfristige Struktur brechen.
+RS-Score 42,4, Rang 58 im S&P 500 (Datenstand 27.07., VOR dem Earnings-Sprung). Windows bereits durchweg positiv: 5T +3,2 %, 10T +5,4 %, 20T +3,7 %, 50T +20,7 %, 6M +9,4 % — die Aktie lief bereits vor dem Beat in einem soliden Aufwärtstrend, der Sprung verstärkt also ein bestehendes Momentum statt eine Baisse zu drehen. Kein GWS-Signal aktiv (Datensatz für S&P-500-Titel enthält aktuell keine GWS-Berechnung). Momentum ist fundamental gestützt (echter Beat + Guidance-Raise), nicht rein reaktiv. Warnsignal: ein Rückfall unter das 20-Tage-Niveau (vor dem Sprung ca. $113–115) würde signalisieren, dass der Markt die Diversifikations-These wieder verwirft.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($230–$300):** Opzelura wird zum echten Blockbuster über mehrere Dermatologie-Indikationen, mindestens ein Onkologie-Asset erreicht Marktreife und ersetzt strukturell einen wesentlichen Teil der Jakafi-Erosion.
+**Bull ($220–$320):** Jakafi-Franchise erfolgreich diversifiziert, Monjuvi/Niktimvo/Zynyz + Vega-Pipeline (latarcibart) skalieren zu einem mehrsäuligen Onkologie-Portfolio, Multiple re-ratet Richtung oberer Peer-Bandbreite (18–20x) auf deutlich höherer Ergebnisbasis.
 
-**Base ($130–$180):** Jakafi-Erosion setzt moderat ein, Opzelura und Pipeline kompensieren nur teilweise, das Multiple bleibt unter Druck.
+**Base ($150–$210):** Diversifikation gelingt graduell, Jakafi-Patentklippe wird durch neue Produkte teilweise kompensiert, moderates Multiple 13–15x auf wachsender EPS-Basis.
 
-**Bear ($40–$80):** Ruxolitinib-Exklusivität endet ohne adäquaten Pipeline-Ersatz, Umsatz- und Margenerosion beschleunigt sich deutlich.
+**Bear ($60–$100):** Jakafi-Erosion überholt den Ramp der neuen Produkte, Pipeline-Rückschläge (Zulassungsverzögerungen), Multiple-Kompression auf 8–9x.
 
-Entscheidende Variable: Tempo und Ausmaß der Ruxolitinib-Patent-Klippe versus Erfolgsgeschwindigkeit von Opzelura und der Onkologie-Pipeline.
+Entscheidende Variable: Tempo der Jakafi-Erosion (Biosimilar-/Wettbewerbsdruck) relativ zum Umsatzbeitrag der neuen Produkte (Monjuvi, Niktimvo, Zynyz, latarcibart).
 
 ## 11. PROFI-FAZIT
 
-INCY zeigt hohe fundamentale Qualität (ROE 30,8%, ROIC 61,1%) und intaktes Wachstum, aber die eigene EV-Rechnung liefert bei aktuellem Kurs nahe dem 52-Wochen-Hoch nur +3,8% — keinen belastbaren asymmetrischen Edge. Am ehesten ein Trading-orientiertes Momentum-Play für Investoren, die kurzfristig auf die technische Stärke setzen, mit Stop-Disziplin unterhalb des Daily-GWS ($98,85). Für Buy-and-Hold-Investoren mit langem Zeithorizont bleibt die Ruxolitinib-Patent-Klippe ein ungelöstes strukturelles Risiko, das eine volle Position nicht rechtfertigt. Positionsgröße: max. 2–3% eines diversifizierten Portfolios.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV +1,0 %) — High-Conviction-Framing ist auf diesem Kursniveau nicht vertretbar, auch wenn der fundamentale Katalysator (echter Beat, substanzielle Guidance-Anhebung, glaubwürdige Diversifikation weg von Jakafi) real und nachhaltig wirkt, kein Bilanzartefakt. INCY ist weder reiner Trading-Trade noch klassischer Buy-and-Hold-Compounder, sondern ein qualitativ verbessertes Wachstumsprofil, das nach dem Tagessprung fair bis leicht ambitioniert bepreist ist. Für Neueinstiege: kein Chasing auf diesem Niveau, besser Rücksetzer Richtung $115–120 abwarten. Bestehende Positionen: laufen lassen, Stop unter dem 20-Tage-Niveau. Positionsgröße bei Neueinstieg: klein (max. 1–2 % eines diversifizierten Portfolios).
 
-**Vertex Pharmaceuticals (VRTX)** und **Jazz Pharmaceuticals (JAZZ)** sind vergleichbare Spezialpharma-Peers mit ähnlicher Konzentrations-/Diversifizierungsproblematik — Peer-Multiples nicht im Datensatz enthalten, relative Bewertung indikativ.
+**REGN** und **GILD** sind die reineren, günstiger bewerteten Instrumente für eine allgemeine Spezialpharma-These (12,0x bzw. 13,4x Forward-KGV vs. INCY ~14,6x auf aktuellem Kurs), bieten aber nicht dieselbe Diversifikations-Story. **VRTX** ist das Premium-Instrument der Peer-Gruppe (22,4x), aber mit anderem Risikoprofil (Cystic-Fibrosis-Franchise-Dominanz statt Turnaround-Diversifikation).
 
 - Qualität: 4/5
 - Wachstum: 4/5
-- Bewertung: 3/5
-- Katalysator: 3/5
+- Bewertung: 3/5 (vorläufig, Datenstand)
+- Katalysator: 4/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — EV-Edge von nur +3,8% bei Kurs nahe dem 52-Wochen-Hoch trägt keine volle Positionsgröße trotz starker fundamentaler Qualität.
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der EV-Edge liegt nach dem +10,6%-Tagessprung nur noch bei +1,0%, der Großteil der Guidance-Anhebung ist im neuen Kursniveau bereits eingepreist — halbe Positionsgröße trotz intaktem fundamentalem Katalysator.
 
 
 ---
@@ -96,9 +96,9 @@ INCY zeigt hohe fundamentale Qualität (ROE 30,8%, ROIC 61,1%) und intaktes Wach
 | Qualität | 4/5 |
 | Wachstum | 4/5 |
 | Bewertung | 3/5 |
-| Katalysator | 3/5 |
-| EV-Upside | +12.0% |
+| Katalysator | 4/5 |
+| EV-Upside | +7.3% |
 
-**Verdict: BUY (71/100)**
+**Verdict: BUY (70/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
