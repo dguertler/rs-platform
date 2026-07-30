@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HURN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>HURN</h1>
+      <h2>Huron Consulting Group Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Consulting Services</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">60</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">218.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$170.37</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.0×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$1.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">32.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">23.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-30.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–175</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">115–135</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">55–80</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $150–$175 (20 %) · Base $115–$135 (45 %) · Bear $55–$80 (35 %) · EV ~$112,4</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 27.07.2026 ($112,30) liegt vor dem Q2-Earnings-Report vom 28.07.2026 (Adj. EPS $2,46 vs. $2,17 Konsens, Guidance-Anhebung FY26 auf Adj. EPS $9,00-$9,40). Der Kurs sprang daraufhin an einem einzigen Handelstag um +40% auf $170,37 — eine der größten Einzeltages-Bewegungen im Analyseuniversum. Konfidenz der Bewertungsaussagen stark reduziert. Die eigentliche Story: Huron liefert organisches Wachstum von 10,8% bei einer für Consulting-Unternehmen exzellenten ROIC von 13,87% — ein AI-getriebener Beratungszyklus (Digital-/Technology-Transformation) treibt die Nachfrage. Was der Markt nach dem Sprung möglicherweise übersieht: Selbst das peer-verankerte Bull-Szenario dieser Analyse liegt unter dem aktuellen Kurs — der Markt preist bereits mehr ein, als eine bestätigte Outperformance gegenüber Beratungspeers rechtfertigt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Reines People-Business: Umsatz = Billable Hours × Stundensatz, kein Produktionskapital, Auslastung (Utilization) ist der zentrale Hebel</li>
+<li>Drei Kernsegmente: Healthcare-, Higher-Education- und Commercial/Financial-Consulting — diversifiziert über regulierte Endmärkte</li>
+<li>Operative Marge 9,26% TTM, moderat für Consulting — Hebel entsteht über höhere Auslastung und Preis pro Senior-Berater-Stunde, nicht über klassische Skaleneffekte</li>
+<li>Wachstumstreiber aktuell: AI-/Digital-Transformationsberatung als margenstärkeres, schnell wachsendes Teilsegment</li>
+<li>Kundenbindung über Multi-Year-Transformationsprogramme (Wechselkosten für Klienten hoch, sobald ein Programm läuft)</li>
+<li>Abhängigkeit von öffentlicher Förderpolitik im Gesundheits-/Hochschulsektor (Medicare/Medicaid, Hochschulbudgets)</li>
+<li>ROIC 13,87% deutlich über Kapitalkosten — einer der besseren Werte im Consulting-Sektor</li>
+<li>D/E 223,87% moderat gehebelt, durch ROIC komfortabel gedeckt, aber kein Netto-Cash-Polster</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>AI-Consulting-Nachfrage beschleunigt weiter, Huron gewinnt Marktanteile gegenüber größeren, langsameren Peers, weitere Guidance-Anhebungen folgen. Peer-Vergleich (Forward-KGV): Accenture 10,0x, ICF International 10,4x, Cognizant 7,3x, EPAM 6,4x. Bull-Multiple leicht über Peer-Spitze bei bestätigter Outperformance: 14x. Annahme (kein Konsens): FY27-EPS ~$11,50 × 14x = $161. Bull-Kursziel: $150–$175 (Midpoint $162,5). Eintrittswahrscheinlichkeit: 20%. Strukturelle Margennachhaltigkeit: Produktmix-Verschiebung zu höhermargiger AI-/Digital-Beratung plausibel, ROIC-Spitzenposition unter Peers spricht für Wettbewerbsvorteil, Kundenbindung über Mehrjahresprogramme gegeben — Technologieführerschaft/IP im klassischen Sinn nicht belegbar, da People-Business.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum normalisiert von der Q2-Spitzenrate (organisch +10,8%) auf ein nachhaltigeres, weiterhin überdurchschnittliches Niveau. Base-Multiple mit moderater Qualitätsprämie über Peer-Spitze: 12,5x (deutlich unter dem eigenen aktuellen Post-Rally-Multiple von ~18,5x — dieses liegt weit außerhalb der Peer-Bandbreite und ist nur teilweise strukturell gerechtfertigt, siehe Abschnitt 7). Annahme (kein Konsens): FY27-EPS ~$10,00 × 12,5x = $125. Base-Kursziel: $115–$135 (Midpoint $125). Eintrittswahrscheinlichkeit: 45%. Das liegt ~27% unter dem aktuellen Kurs — knapp innerhalb der Base-Case-Definition (Grenzwert 30%), spiegelt aber, wie weit der Einzeltages-Sprung der fundamentalen Neubewertung vorausgelaufen ist.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Wachstumsverlangsamung nach dem Q2-Ausreißer, da ein Teil des Beats aus Timing-Effekten (Projektabschlüsse) statt struktureller Nachfrage stammen kann; zusätzlich Reversion des +40%-Tagessprungs, wie bei extremen Einzeltages-Bewegungen historisch häufig. Kundenkonzentration: Segmentkonzentration auf Healthcare/Higher-Education als strukturelles Cluster-Risiko erkennbar, Einzelkunden-Daten auf Datenbasis nicht quantifizierbar. Geopolitik/China: kein materielles Exposure, reines US-Beratungsgeschäft. Lieferketten/Foundry: nicht klassisch anwendbar (People-Business) — Verfügbarkeit von Senior-Beratern als funktionales Äquivalent, kein Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend nicht in den Daten — auf Datenbasis nicht beurteilbar; D/E 223,87% ist ein eigenständiges, wenn auch durch ROIC gedecktes Bilanzrisiko. Regulierung: Abhängigkeit von Gesundheits-/Hochschul-Förderpolitik (Medicare/Medicaid, Bundeshaushalt) als konkretes Risiko für margenstarke Segmente. Bear-Multiple unter Peer-Tief (9x). Annahme: FY27-EPS ~$7,50 × 9x = $67,5. Bear-Kursziel: $55–$80 (Midpoint $67,5). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $162,5 + 0,45 × $125 + 0,35 × $67,5 = $32,5 + $56,25 + $23,625 = **~$112,4 — implizites Downside vs. aktuellem Kurs ($170,37): −34,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — selbst der Bull Case liegt unter dem aktuellen Kurs.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 23,27% und ROIC 13,87% sind für ein Consulting-Unternehmen überdurchschnittlich und deuten auf einen echten wirtschaftlichen Vorsprung hin (Preissetzungsmacht bei Senior-Beratern, Auslastungsdisziplin). Operating Margin 9,26% TTM solide im Sektorvergleich. FCF $97,4 Mio. bei $1,71 Mrd. Revenue TTM (~5,7% FCF-Marge) angemessen für ein people-intensives Geschäft. Im Zykluskontext: Q2 zeigt eine deutliche Beschleunigung (organisch +10,8% vs. historisch niedrigerem einstelligem Wachstum) — ein starkes, aber noch nicht über mehrere Quartale bestätigtes Muster.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV nach dem Kurssprung liegt bei ~18,5x (Kurs $170,37 / FY26-Guidance-Mitte $9,20) — fast doppelt so hoch wie der höchste genannte Peer (ICF International 10,4x) und weit über Accenture (10,0x), Cognizant (7,3x) und EPAM (6,4x). Rückrechnung: Der aktuelle Kurs impliziert bei einem angenommenen Exit-Multiple von 12x ein FY27-EPS von ~$14,20 — ein Gewinnsprung von ~54% ggü. der bereits angehobenen FY26-Guidance-Mitte $9,20. Das ist unrealistisch bei linearer Fortschreibung des aktuellen Wachstumstrends und nur unter einer aggressiven AI-Superzyklus-Annahme denkbar — spekulativ, nicht der wahrscheinlichste Pfad. Die eigene Bewertung liegt massiv über der Peer-Bandbreite; die Prämie ist durch überlegenes Wachstum (organisch +10,8% vs. Peers im niedrigen einstelligen Bereich) und Spitzen-ROIC nur teilweise strukturell gerechtfertigt — der Rest ist aus den Daten nicht erklärbar und spricht für eine Einzeltages-Übertreibung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Truist erhöhte das Kursziel auf $175 von $155, Benchmark auf $215 von $180 (beide Buy) — beide PTs liegen nur nahe am oder leicht über dem aktuellen Kurs, kein breiter Analystenkonsens für signifikantes weiteres Upside. Hypothese, nicht datenbasiert: Ein +40%-Tagessprung nach einem Beat, der die Konsensschätzung "nur" um 13,4% schlug, deutet stark auf Short-Covering, Optionsgamma-Dynamik und Retail-Momentum hin, nicht auf fundamentale Neubewertung durch Long-Only-Investoren. Enttäuschungsrisiko sehr hoch: Der Titel notierte vor Kurzem nahe dem 52-Wochen-Tief ($84,88) — die Erholung ist bereits ein Extremereignis, jede Konsolidierung könnte scharf ausfallen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 218,28 (Smallcap-Universum), aber nur Rang 696 — ein auffälliger Widerspruch, der darauf hindeutet, dass die RS-Rangliste den Kurssprung noch nicht vollständig verarbeitet hat. Windows: 5T +56,4%, 10T +45,33%, 20T +78,95%, 50T +50,13%, 6M −12,53% — die negative 6-Monats-Performance zeigt, dass der Titel vor dem Q2-Beat in einem länger andauernden Abwärtstrend steckte (52-Wochen-Tief $84,88 vs. -Hoch $186,78). GWS-Signal aktuell inaktiv (Weekly/Daily/4H). Das Momentum ist fundamental ausgelöst (verifizierter Earnings-Beat), aber die Größe der Bewegung übersteigt historische Erfahrungswerte für Beat-Reaktionen deutlich. Technisches Warnsignal: Rückfall unter $140-150 (Gap-Fill-Zone) würde signalisieren, dass der Sprung überzogen war.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($220–$320):** AI-Consulting-Superzyklus hält mehrere Jahre an, Huron etabliert sich als Marktführer in Digital-Transformationsberatung für Healthcare/Higher-Ed, EPS $16-18 bei 15-18x.</p>
+<p>**Base ($140–$200):** Wachstum normalisiert auf 8-10%, Multiple pendelt auf höherer EPS-Basis Richtung 12-14x zurück.</p>
+<p>**Bear ($55–$90):** Strukturelle Nachfrageschwäche in regulierten Endmärkten, AI-Disruption verändert das Billable-Hours-Modell selbst, Multiple-Kompression auf Peer-Niveau 7-8x.</p>
+<p>Entscheidende Variable: Nachhaltigkeit des organischen Wachstums jenseits des Q2-Ausreißers und Persistenz der AI-Beratungsnachfrage.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>HURN ist nach dem +40%-Einzeltages-Sprung kein Einstiegskandidat, sondern ein High-Conviction-Momentum-Play auf einem Bewertungsniveau, das selbst im eigenen Bull-Szenario nicht erreicht wird (EV −34,0%). Kein Buy-and-Hold-Compounder auf diesem Niveau trotz echter fundamentaler Qualität (ROIC 13,87%, organisch +10,8%). Für Neueinsteiger: kein Trade — das Chance-Risiko-Verhältnis ist nach dem Sprung invertiert. Bestehende Positionen (falls vor dem Beat aufgebaut) mit Teilgewinnmitnahme und engem Stop unter $140-150 absichern. Peers: Accenture (ACN, 10,0x) und ICF International (ICFI, 10,4x) sind die reineren, deutlich günstiger bewerteten Instrumente für eine Consulting-Wachstumsthese ohne die Einzeltages-Übertreibung.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 1/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Der Kurs hat sich an einem Tag um +40% von der Peer-Bewertung gelöst; selbst das Bull-Szenario dieser Analyse liegt unter dem aktuellen Kurs, ein Trade auf diesem Niveau ist trotz starkem fundamentalen Katalysator nicht vertretbar.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
