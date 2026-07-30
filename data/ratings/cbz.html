@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CBZ — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CBZ</h1>
+      <h2>CBIZ, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Specialty Business Services</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt (außerhalb RS-Universum)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$54.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">8.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-8.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–62</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">12%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">54–55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">70%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">30–40</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">18%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $58–$62 (12%) · Base $54–$55 (70%) · Bear $30–$40 (18%) · EV ~$51,65</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>CBZ ist aktuell keine klassische Fundamentalstory mehr, sondern ein Merger-Arbitrage-Fall: Grant Thornton Advisors (unterstützt von New Mountain Capital) hat sich am 28.07.2026 zur Übernahme für $55,00 je Aktie cash verpflichtet (~$5 Mrd. Transaktionswert), was einer 54%-Prämie zum 30-Tage-VWAP entspricht. Der Kurs sprang daraufhin ~17% und notiert jetzt mit nur ~1% Spread zum Angebotspreis — der Markt preist eine sehr hohe Abschlusswahrscheinlichkeit ein. Bemerkenswert: Nur zwölf Tage vor der Deal-Ankündigung forderte der Aktivist Reference Equity öffentlich einen Buyback-Stopp und eine Rückkehr zu akquisitionsgetriebenem Wachstum — der Verkauf des gesamten Unternehmens ist die radikalste denkbare Antwort darauf. RS-Daten nicht verfügbar (Ticker außerhalb des RS-Platform-Trackings) — es existiert kein technisches Funnel-Signal, das diese Analyse überlagern könnte. Was der Markt hier tatsächlich einpreist, ist nicht organisches Wachstum, sondern reine Deal-Vollzugswahrscheinlichkeit bis zum erwarteten Closing in Q4 2026 — inklusive Kartellrechts-, Aktionärsvotums- und Go-Shop-Risiko (Frist 27.08.2026).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Diversifizierter Prof.-Services-Anbieter für SMBs: Financial Services (Steuer, Wirtschaftsprüfung, Advisory) plus Benefits & Insurance Services — Cross-Selling zwischen Segmenten als Kernhebel</li>
+<li>Stark saisonales Ergebnis: Q1 (Steuersaison) trägt überproportional zum Gewinn bei, Q2 strukturell margenschwächer (GAAP-EPS -53% YoY im Q2 spiegelt dies plus Dealkosten)</li>
+<li>Wachstum historisch über Zukäufe kleinerer Buchhaltungs-/Beratungspraxen (Roll-up-Modell) — Integrations- und Goodwill-Risiko</li>
+<li>Aktivistischer Druck (Reference Equity, 16.07.2026) forderte Buyback-Stopp und M&A-Rückkehr — wenige Tage vor der Übernahmeofferte</li>
+<li>Kapitalstruktur fremdkapitallastig: Debt/Equity ~1,05x, Cash nur $29 Mio. — typisch für Roll-up-Bilanzen</li>
+<li>Übernahmeangebot macht die organische Geschäftsmodell-Frage vorübergehend zweitrangig: Kurstreiber ist jetzt Deal-Vollzug, nicht operative Entwicklung</li>
+<li>Go-Shop-Klausel bis 27.08.2026 erlaubt aktive Suche nach Konkurrenzangeboten — reale, aber bereits teilweise eingepreiste Bull-Optionalität</li>
+<li>Reines People-Business ohne Halbleiter-/Hyperscaler-Bezug oder Lieferkettenabhängigkeit; Kundenbindung über wiederkehrende Mandatsverträge</li>
+</ul>
+<p>Strukturelle Geschäftsmodell-Prüfung: Keine Hyperscaler-Partnerschaften oder Multi-Year-Abnahmeverträge einschlägig — das Geschäftsmodell basiert auf wiederkehrenden, aber jährlich kündbaren Mandaten.</p>
+<h3>3. BULL CASE</h3>
+<p>Auslöser: Ein Konkurrenzbieter meldet sich innerhalb der Go-Shop-Frist (bis 27.08.2026), oder das Closing verläuft reibungslos mit zusätzlichem Sentiment-Rückenwind. Peer-Herleitung: direkte Peers Robert Half (RHI, Forward-PE ~18,6x) und TriNet (TNET, ~17,1x); der Deal selbst impliziert nur 13,6x ($55 / FY26-Adj.-EPS-Mitte $4,05). Ein Topping-Bid müsste über dem aktuellen Angebot liegen, aber PE-Käufer zahlen selten volle Peer-Multiples. Annahme (kein Konsens): FY26-Adj.-EPS $4,05 × 15x (Kompromiss zwischen Deal-Multiple und Peer-Untergrenze) = $60,75. Bull-Kursziel: $58–$62 (Midpoint $60). Eintrittswahrscheinlichkeit: 12%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Der Deal wird wie vereinbart bei $55,00 je Aktie in cash vollzogen, Closing erwartet Q4 2026. Der Kurs konvergiert graduell zum Angebotspreis, abzüglich Restrisiko-Diskont. Kursziel leitet sich direkt vom Deal-Preis ab, nicht von einer EPS-Multiple-Rechnung — Annahme: Konvergenz auf $54–$55 bei fortschreitender Regulierungsfreigabe. Base-Kursziel: $54–$55 (Midpoint $54,5). Eintrittswahrscheinlichkeit: 70%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Deal bricht — Kartellrechtsprüfung (Grant Thornton würde zur Top-5-Prüfungsgesellschaft), Scheitern der Aktionärsabstimmung, Finanzierungsproblem bei New Mountain Capital oder Rechtsstreitigkeiten (bei US-Take-Privates nahezu Standard). Kundenkonzentration: auf Datenbasis nicht beurteilbar — keine belastbaren Zahlen zur Mandatskonzentration recherchiert. Geopolitik/China-Exposure: nicht einschlägig, CBIZ ist reines US-Inlandsgeschäft. Lieferketten/Foundry: nicht relevant für das Dienstleistungsmodell. Verwässerung: SBC-Trend nicht verifizierbar; Aktienrückkäufe (5 Mio. Aktien autorisiert bis März 2027) wirken tendenziell anti-dilutiv, werden im Deal-Bruch-Fall aber ausgesetzt. Regulierung/Rechtsrisiken: zentrales Bear-Risiko — Kartellprüfung plus übliche M&A-Klagen. Bei Deal-Bruch fällt der Kurs auf den eigenständigen fairen Wert zurück: Annahme FY26-Adj.-EPS $4,05 × 9x (deutlicher Abschlag zu RHI/TNET wegen Deal-Break-Overhang und Sentiment-Schock, nahe der Vor-Deal-Analystenziele $31–$45) = $36,45. Bear-Kursziel: $30–$40 (Midpoint $35). Eintrittswahrscheinlichkeit: 18%.</p>
+<p>**Summe: 12% + 70% + 18% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,12 × $60 + 0,70 × $54,5 + 0,18 × $35 = $7,20 + $38,15 + $6,30 = **~$51,65 — implizites Downside vs. aktuellem Kurs ($54,50): −5,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 8,10% — unterdurchschnittlich für ein People-Business, reflektiert dünne Nettomarge (5,57%) bei arbeitsintensivem Geschäftsmodell. Bilanzqualität mittelmäßig: Debt/Equity 1,05x, Cash nur $29 Mio. — dünnes Liquiditätspolster, typisch für eine buyback-finanzierte Roll-up-Bilanz. FCF: Management bestätigt "robuste" FCF-Guidance, eine konkrete Zahl war in der Recherche nicht verifizierbar — nicht in die Bewertung eingeflossen. Burggraben eher scheinbar als tief: Mandatsbindung im Steuer-/Prüfungsgeschäft ist jährlich, Wechsel möglich — der eigentliche Vorteil liegt in Skalen- und Cross-Sell-Effekten, nicht in strukturellen Switching Costs.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Klassische Multiple-Betrachtung ist hier zweitrangig — der Kurs ist an den Deal-Preis $55 verankert. Was preist der Kurs ein? Bei $54,50 preist der Markt eine sehr hohe (aber nicht 100%ige) Abschlusswahrscheinlichkeit bis Q4 2026 ein; der annualisierte Arb-Ertrag beträgt bei ~5 Monaten Restlaufzeit und 1% Spread nur rund 2,4% p.a. — mager im Verhältnis zum binären Restrisiko. Plausibilitätscheck: angemessen für ein Near-Certainty-Szenario, aber wenig Puffer gegen einen Deal-Bruch. Peer-Einordnung: Der implizite Deal-Forward-Multiple (13,6x) liegt UNTER Robert Half (18,6x) und TriNet (17,1x) — üblich bei PE-Take-Privates, zeigt aber auch, dass der Markt kaum noch auf Upside über den Deal-Preis hinaus wettet.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Die Aktionärsbasis hat sich seit Deal-Ankündigung strukturell verschoben: Event-driven-/Arb-Fonds dominieren jetzt vermutlich das Orderbuch (Hypothese, nicht datenbasiert — kein Short-Float-Wert recherchiert). Long-only-Investoren haben nach der 54%-Prämie überwiegend realisiert oder halten zur Auszahlung. FOMO-Dynamik ist irrelevant, das Enttäuschungsrisiko liegt vollständig im Deal-Bruch-Szenario (Kartellrecht, Aktionärsvotum, ausbleibender Topping-Bid).</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score/GWS-Signal der Platform nicht verfügbar (Ticker außerhalb des Trackings) — die technische Einschätzung basiert ausschließlich auf recherchierten Kursdaten, kein Platform-Momentum-Signal vorhanden. Der Kursverlauf ist seit dem 52-Wochen-Tief ($24,29) rein event-getrieben: 52W-Hoch $77,91, dann Verfall, dann +16–17% Gap am Deal-Tag. Kein klassisches Trendsignal anwendbar. Technisches Warnsignal wäre ein Rückfall unter ~$50 (Spread-Ausweitung >9%) als frühes Zeichen für Zweifel am Deal-Vollzug.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Der 3–5-Jahres-Horizont ist für Aktionäre im Base-Fall faktisch irrelevant, da das Unternehmen bei Deal-Vollzug (erwartet Q4 2026) von der Börse genommen wird und Cash von $55 realisiert wird. Die folgenden Szenarien gelten nur für den Fall eines Deal-Bruchs:</p>
+<p>**Bull ($70–$90):** Eigenständige Neuausrichtung nach Aktivisten-Vorgaben (M&A-Rückkehr statt Buybacks), erfolgreiche Skalierung, Multiple-Re-Rating Richtung Peer-Obergrenze.</p>
+<p>**Base ($45–$60):** Stabiles, aber niedrig wachsendes Geschäft (2–5% p.a.), Bewertung nahe historischem Niveau vor der Deal-Ankündigung, leicht angehoben durch die während des Prozesses sichtbar gewordene Guidance-Stärke.</p>
+<p>**Bear ($20–$30):** Deal-Bruch löst Vertrauensverlust und Governance-Fragen aus, Rückkehr zu Vor-Deal-Tiefständen ($24–$33).</p>
+<p>Entscheidende Variable: Ob der Grant-Thornton-Deal überhaupt vollzogen wird — alles andere ist nachgelagert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>CBZ ist aktuell kein Compounder- und kein Momentum-Play, sondern eine klassische Merger-Arbitrage-Position mit engem Spread (~1%) und begrenztem Aufwärtspotenzial über den Deal-Preis hinaus. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −5,2%). Geeignet ausschließlich für Event-driven-/Arb-orientierte Investoren mit Verständnis für Kartellrechts- und Abstimmungsrisiko — nicht für Buy-and-Hold- oder klassische Growth-Investoren. Positionsgröße explizit begrenzen: Das Bear-Szenario impliziert ein Downside von rund 35% vom aktuellen Kurs bei Deal-Bruch. Reinere Instrumente für die zugrundeliegende People-Services-These ohne Übernahme-Overhang: Robert Half (RHI, Forward-PE ~18,6x) und TriNet (TNET, ~17,1x) — beide Peer-Multiples extern recherchiert, nicht aus `data/fundamentals.json` (CBZ selbst ist dort nicht getrackt).</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — Der Arb-Spread von nur ~1% zum Cash-Angebot bietet kaum Reward gegenüber dem binären Downside-Risiko eines Deal-Bruchs (Bear-Range $30–$40), zudem existiert für diesen nicht getrackten Ticker kein RS-Platform-Funnel-Signal, das diese Einschätzung überlagern würde.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
