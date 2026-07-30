@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SHEN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SHEN</h1>
+      <h2>Shenandoah Telecommunications C</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Telecom Services</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">51</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-21.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$12.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">64.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">96.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-4.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+12.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">18–26</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$13</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">6,3–7,8</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $18–$26 (20 %) · Base $9–$13 (45 %) · Bear $6–$8 (35 %) · EV ~$11,80</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 24.07.2026 liegt vor dem Q2-Earnings-Beat und der Kursreaktion (+9,7 %, geschätzt $12,50; exakter Schlusskurs nicht verifizierbar). Konfidenz reduziert; Multiples auf geschätztem aktuellem Kursniveau gerechnet. SHEN ist ein rurales Telecom im Umbau: das Kupfer-/RLEC-Geschäft schrumpft, während Glo Fiber (51 % des Umsatzes, +21,4 % YoY) das strukturelle Wachstumssegment ist. Management guidet erstmals konkret auf positiven Free Cashflow ab 2027, da der Netzausbau-Capex 2026 mit $220-250 Mio. seinen Höhepunkt erreicht; EBITDA-Marge-Ziel 40 % "in ein paar Jahren" (aktuell 34 %). Was der Markt bereits einpreist: P/B von 0,73 zeigt, dass SHEN unter Buchwert handelt – der Markt bezweifelt entweder die Kapitalrendite des Fiber-Ausbaus oder preist Verwässerungsrisiko ein. Die RS-Daten (Score -21,04, Rang 778, 20T -10,8 %, 50T -28,7 %) zeigen: der fundamentale Turnaround ist im Kursverlauf noch nicht bestätigt, der Earnings-Pop ist ein singuläres Ereignis, kein etablierter Trend.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei-Segment-Struktur: schrumpfendes Incumbent-Broadband/RLEC vs. wachsendes Glo-Fiber-Segment – Faserumsatz kompensiert Legacy-Erosion nur teilweise (Konzernwachstum nur +5,5 %)</li>
+<li>Capex-intensives Modell: 2026 Netto-Capex $220-250 Mio. bei $373,5 Mio. Umsatz-Guidance-Mitte – klassischer Fiber-Overbuilder-Zyklus</li>
+<li>Operativer Hebel erst nach Bauabschluss: EBITDA-Marge soll von 34 % auf 40 % steigen, sobald Penetration auf verlegten Passings statt Neubau dominiert</li>
+<li>Wahrscheinlich Abhängigkeit von ruralen Breitband-Förderprogrammen – Hypothese, nicht datenbasiert, aber branchentypisch</li>
+<li>D/E ~74 % (moderat) – Fremdkapitalhebel bei noch negativem FCF ist das zentrale Bilanzrisiko bis zum Cashflow-Wendepunkt</li>
+<li>Dividende 0,96 % trotz negativem FCF – Kapitalallokationsfrage vor abgeschlossenem Ausbau</li>
+<li>Kundenbasis granular (Privat-/Geschäftskunden ländlicher Raum), keine Einzelkunden-Konzentration erkennbar</li>
+<li>Netzwerkausrüstungs-Lieferkette im Detail nicht bekannt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers (Forward-KGV): ATNI 21,5x (gesunder ruraler Fiber-Telecom), T 9,4x / VZ 8,8x (reife Großtelcos), CABO 2,0x (Distress-Referenz). Annahme (eigen, kein Konsens): Glo-Fiber-Penetration übertrifft Ziele, EBITDA-Marge erreicht 42 % bereits FY28, Capex fällt rascher auf $90 Mio. FCF FY28E $61 Mio. (EBITDA $189 Mio. auf $450 Mio. Umsatz − Capex $90 Mio. − Zins $33 Mio. − Steuern $5 Mio.), FCF/Aktie $1,10 (55,3 Mio. Aktien) × 20x (nahe ATNI, oberer Peer-Rand) = $22,0. Kursziel: $18–$26 (Mid $22). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird in etwas langsamerem Tempo erreicht. FY29E Annahme: Umsatz $440 Mio., EBITDA-Marge 40 % (Ziel erreicht) = $176 Mio., Erhalt-Capex $90 Mio., Zins $32 Mio., Steuern $5 Mio. → FCF $49 Mio., FCF/Aktie $0,89 × 12x (nahe T/VZ-Niveau für reife, moderat verschuldete Telecoms – konservativer als ATNI, da Fiber-Story noch nicht bewiesen) = $10,68. Kursziel: $9–$13 (Mid $11). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Glo-Fiber-Penetration bleibt hinter Zielen zurück, Legacy-Erosion beschleunigt sich, EBITDA-Marge stagniert bei 30-32 %, Capex bleibt strukturell erhöht. Kundenkonzentration: granular, kein Einzelrisiko. Geopolitik/China: Förderprogramm-Abhängigkeit mit "Buy American"-Auflagen – auf Datenbasis nicht abschließend beurteilbar, aber plausibles Kostenrisiko. Lieferketten: Netzwerkausrüstungs-Single-Source-Risiko auf Datenbasis nicht beurteilbar. Verwässerung: bei anhaltend negativem FCF und D/E ~74 % ist eine dilutive Kapitalerhöhung ein konkretes Risiko. Regulierung: Abhängigkeit von ruralen Breitbandsubventionen/FCC. FCF bleibt nahe Null/negativ – Multiple-Ansatz nicht sinnvoll anwendbar, daher Bewertungsanker über Buchwert: Book Equity ≈ $865,5 Mio. / 55,3 Mio. Aktien = $15,65/Aktie; Bear-Szenario 0,4-0,5x Buchwert (Distress-Niveau, vergleichbar CABO-P/B von 0,14x) = $6,3–$7,8. Kursziel: $6–$8 (Mid $7). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $22 + 0,45 × $11 + 0,35 × $7 = $4,40 + $4,95 + $2,45 = **~$11,80 – implizites Downside vs. aktuellem Kurs (~$12,50): −5,6 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE -4,05 %, ROIC -0,87 % – schwach, aber deutlich weniger negativ als bei klassischen Turnaround-Kandidaten; Q2-Zahlen (Nettoverlust $7,7 Mio. vs. $9,0 Mio. Vj.) zeigen reale Verbesserungstendenz. FCF TTM -$261,3 Mio. – deutlich negativ, primär Capex-getrieben (Glo-Fiber-Ausbau), nicht operativ (Adj. EBITDA-Marge bereits 34 % und wachsend). Gross Margin 64,4 % – solide für Telecom-Infrastruktur. Bilanz: D/E ~74 % (moderat) – belastbar, aber ohne FCF-Wendepunkt 2027 zunehmend eng. P/B 0,73 – Markt bewertet SHEN unter Buchwert; auf Datenbasis nicht abschließend zu trennen, ob Unterbewertung oder berechtigtes Misstrauen ggü. Kapitalrendite.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV ist als "UNGÜLTIG (-11,31)" gekennzeichnet (yfinance-Artefakt bei negativem Forward-EPS) und wird nicht verwendet. Primäre Bewertungsbasis: P/B 0,73 und normalisierter FCF ab dem von Management genannten Wendepunkt 2027. Rückrechnung "Was preist der Kurs ein?": bei ~$12,50 und Book Equity/Aktie $15,65 preist der Markt einen Abschlag von ~20 % auf Buchwert ein – plausibel für ein Unternehmen mit noch negativem FCF und Verwässerungsrisiko, nicht übertrieben pessimistisch. Das eigene Forward-Multiple ist wegen negativem EPS nicht direkt in die Peer-Bandbreite (ATNI 21,5x / T 9,4x / VZ 8,8x) einordenbar; auf FCF-Basis liegt das Base-Multiple (12x) im unteren Bereich der Peer-Bandbreite – konsistent mit dem noch unbewiesenen Fiber-Turnaround, aus den Daten erklärbar (geringere Kapitalrendite-Sichtbarkeit als bei ATNI).</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score -21,04, Rang 778 – klar negatives Momentum über die letzten Monate (20T -10,8 %, 50T -28,7 %), trotz kurzfristigem Earnings-Pop (5T +11,1 %). GWS-Ampel komplett inaktiv. Dividendenrendite 0,96 % deutet auf gewissen einkommensorientierten Anlegeranteil hin (Hypothese, nicht datenbasiert). Enttäuschungsrisiko hoch: der Markt hat der Turnaround-Story bislang nicht geglaubt (P/B <1), ein weiteres schwaches Quartal würde die 5T-Erholung schnell auslöschen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>5T +11,08 % (Earnings-Pop), 10T +5,46 %, 20T -10,77 %, 50T -28,73 %, 6M +1,92 % – das mittelfristige Bild bleibt trotz Kurzfrist-Pop klar negativ. Momentum ist rein reaktiv (Earnings-getrieben), nicht fundamental etabliert. Warnsignal: Rückfall unter $11 (Vor-Earnings-Niveau) würde den Beat vollständig ausradieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($28-40):** Glo Fiber erreicht Skalierung, EBITDA-Marge >40 %, FCF compoundet, Re-Rating Richtung ATNI-Niveau oder M&A-Übernahmeprämie.</p>
+<p>**Base ($10-20):** Stetige Faser-Konversion, moderates FCF-Wachstum, Bewertung nahe Buchwert.</p>
+<p>**Bear ($3-6):** Strukturelle Legacy-Erosion überwiegt Faser-Gewinne, dilutive Refinanzierung nötig.</p>
+<p>Entscheidende Variable: Tempo der EBITDA-Margen-Expansion und Capex-Normalisierung ab 2027.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>SHEN ist weder Compounder noch Momentum-Play, sondern ein früher, unbewiesener Turnaround-Trade mit realem, aber kursbestätigt noch fehlendem Fortschritt (EPS-Beat, EBITDA-Margenausweitung, FCF-Pfad 2027). Analyst-Konsensziel $27,50 (2 Analysten, +120 % ggü. aktuellem Kurs) wirkt stark veraltet und unrealistisch – als Orientierungspunkt ungeeignet, nicht als Ceiling zu verwenden; die dünne Coverage mindert die Aussagekraft zusätzlich. Bei EV von nur -5,6 % kein asymmetrischer Edge – dies ist kein klarer Kaufkandidat auf aktuellem Niveau, eher ein Beobachtungsfall bis zur nächsten Bestätigung der Margen-/FCF-Trendwende. Für Long-Only-Value-Investoren mit hoher Risikotoleranz evtl. auf Buchwert-Basis interessant, für Momentum-/Growth-Investoren ungeeignet. Peers: **ATNI** (21,5x Forward-KGV, gesündere Fiber-Story) ist das reinere Instrument für einen bewiesenen ruralen Fiber-Turnaround; **CABO** zeigt, wie stark ein Multiple bei anhaltendem Legacy-Zerfall komprimieren kann. Positionsgröße: max. 1 % eines diversifizierten Portfolios, falls überhaupt.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Katalysator fehlt — RS-Score -21,04 (Rang 778) und negative Mittelfrist-Fenster (20T -10,8 %, 50T -28,7 %) zeigen kein tragfähiges technisches Setup trotz Earnings-Beat; der fundamentale Turnaround ist zu früh, um ein aktives Signal zu rechtfertigen.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
