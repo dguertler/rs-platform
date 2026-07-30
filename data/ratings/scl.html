@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SCL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SCL</h1>
+      <h2>Stepan Company</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Basic Materials</span></div>
+        <div class="mi">Industrie: <span>Specialty Chemicals</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">82.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$57.57</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">11.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">274.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-1.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#64748b">N/A</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">100–118</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$4,20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">15–21</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $100–$118 (20 %) · Base $64–$70 (45 %) · Bear $15–$21 (35 %) · EV ~$58</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 27.07.2026 liegt vor der jüngsten Kursbewegung (Q2-Earnings-Beat vom 29.07.2026). Konfidenz der Bewertungsaussagen reduziert.</p>
+<p>SCL ist eine zyklische Spezialchemie-Aktie (Tenside/Surfactants + Polymere) mitten in einer operativen Erholung: Q2 2026 EPS $1,18 vs. $0,61 Konsens (+93,4% Surprise), Adjusted EBITDA $74,4 Mio. (+45% YoY), Umsatz $684,1 Mio. Der Kurs reagierte mit +8,7% auf $63,05 — nach bereits +20,7% im 20-Tage- und +26,4% im 50-Tage-Fenster (RS-Score 82,2, Rang 355) war die Vorlaufbewegung bereits stark. Der eigentliche strukturelle Treiber ist Project Catalyst: Kostensenkung plus Volumenerholung normalisiert eine Margenstruktur, die zuletzt durch Netto-Margen von −0,61% und ein negatives Trailing-EPS (−$0,62) belastet war — eine Anomalie (Net Margin < Operating Margin 2,62%), plausibel auf Einmalbelastungen zurückzuführen, aus den Daten aber nicht abschließend auflösbar. Was der Markt eventuell übersieht: Management bestätigt erstmals seit Quartalen eine klare Richtung — FY26-Ausblick auf Adjusted-EBITDA-Wachstum UND positiven Free Cashflow —, das ist ein Signal für nachhaltige Bilanzentlastung bei einem D/E von 59,8%, nicht nur ein einmaliger Beat. Gross Margin von nur 11,1% bleibt strukturell dünn — das ist Basis-Chemie-Charakteristik; die Frage ist, ob Project Catalyst die Marge dauerhaft anhebt oder nur den Zyklustiefpunkt glättet. Dividendenrendite 2,74% bei erhöhter Verschuldung bedeutet: Der FCF-Turn ist bilanziell relevant, nicht kosmetisch. Strukturell gibt es aus den Daten keine Multi-Year-Abnahmeverträge, aber die Diversifikation über Konsumgüter- und Bauindustrie-Endmärkte dämpft die reine Rohstoffzyklus-These teilweise.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Segmente: Surfactants ($483,9 Mio. Q2-Umsatz, Tenside für Reinigungsmittel/Konsumgüter) und Polymers ($178,0 Mio., Polyole für Dämmstoffe/Bauindustrie) — unterschiedliche Zyklizität</li>
+<li>Operativer Hebel über Project Catalyst: EBITDA (+45%) wuchs deutlich schneller als Umsatz (Surfactants +18%, Polymers +9%)</li>
+<li>Rohstoffbasis: natürliche Öle (Kokos-/Palmkernöl-Derivate) und petrochemische Vorprodukte (Ethylenoxid) — Preisvolatilität ist zentraler Margentreiber, nicht direkt quantifizierbar</li>
+<li>Globale Produktionsbasis (Amerika, Europa, Asien) diversifiziert regionale Nachfrageschocks, erhöht aber Kostenkomplexität</li>
+<li>Endmärkte breit diversifiziert (Konsumgüter, Bauwesen, Agrochemie, Öl&Gas) — strukturell weniger konzentriert als reine Commodity-Chemie-Peers</li>
+<li>Kontinuierliche Dividendenhistorie (Dividend-Aristocrat-Profil) — Kapitalallokationsdisziplin trotz zyklischer Ergebnisse</li>
+<li>Bilanz: D/E 59,8% bereits erhöht — der schwache Zyklus hat die Verschuldung strukturell belastet, FCF-Erholung ist bilanziell nötig</li>
+<li>Bruttomarge 11,1% strukturell dünn (Commodity-nahe Preissetzung) — Ergebnis-Hebel entsteht fast nur über Fixkosten-/Volumeneffekte, nicht über Preissetzungsmacht</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Innospec (IOSP, Trailing-KGV ~18,7x, Forward-Wert nicht separat verifizierbar), Huntsman (HUN, Forward-KGV ~23,4x) und Ashland (ASH, implizites Forward-KGV ~16,6x laut Analystenmodell) — Peer-Bandbreite Forward-KGV ca. 16,6x–23,4x (Ø ~19–20x). Bull-Szenario: Project Catalyst liefert nachhaltige strukturelle Kostenvorteile (Skalierungseffekt), Surfactants-/Polymers-Volumen wachsen weiter mittel-einstellig, Margenerholung setzt sich über FY27 fort. Strukturelle Margennachhaltigkeit ist nur teilweise beurteilbar auf Datenbasis: Kostenvorteile durch Project Catalyst ja, echte Preissetzungsmacht/IP-Vorteil gegenüber margenstärkeren Peers nein. FY27-EPS-Annahme (kein Konsens) ~$5,20 × 21x (nahe Peer-Top Huntsman 23,4x, Abschlag mangels voller struktureller Differenzierung) = $109,20. Kursziel: $100–$118 (Midpoint $109). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: FY26-Guidance (Adjusted-EBITDA-Wachstum, positiver FCF) wird erreicht, FY26-EPS-Schätzung steigt moderat von der Cache-Basis $3,915 auf ~$4,20 (Annahme, kein Konsens, reflektiert den Q2-Beat-Carryover). Base-Kursziel: EPS $4,20 × 16x (nahe eigenem aktuellen Forward-Multiple von 16,1x bei $63,05, unterer Rand der Peer-Bandbreite) = $67,20. Kursziel: $64–$70 (Midpoint $67). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Globale Tensid-Nachfrage schwächt sich durch Konsumgüter-Destocking ab, gleichzeitig steigen Rohstoffkosten (Kokos-/Palmkernöl-Preisspitzen) — Margenerholung kehrt sich um. Kundenkonzentration: aus den Daten nicht quantifizierbar, auf Datenbasis nicht beurteilbar. Geopolitik/Exportkontrollen: globale Produktionsbasis reduziert Einzelländerrisiko, Rohstoffbezug aus Südostasien bleibt handelspolitisch sensitiv — moderates, nicht quantifizierbares Risiko. Lieferketten: Abhängigkeit von Ethylenoxid-Zulieferern (petrochemische Kette) ist Single-Source-artig, aus den Daten nicht quantifizierbar. Verwässerung: Aktienanzahl-Trend nicht in den Daten — auf Datenbasis nicht beurteilbar. Regulierung: Umwelt-/PFAS-Regulierung ist branchenweites, nicht unternehmensspezifisch quantifizierbares Risiko. Polymers (Bauindustrie-Exposure) leidet zusätzlich unter anhaltend hohen Zinsen; D/E 59,8% erschwert Spielraum bei erneutem Ergebnisdruck, Dividende könnte unter Druck geraten. EPS-Annahme (kein Konsens) ~$1,50 × 12x (unterhalb der Peer-Bandbreite, Distress-Multiple) = $18,00. Kursziel: $15–$21 (Midpoint $18). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $109 + 0,45 × $67 + 0,35 × $18 = $21,80 + $30,15 + $6,30 = **~$58,25 — implizites Downside vs. aktuellem Kurs ($63,05): −7,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE −1,19% und ROIC 3,77% (TTM) sind Zyklustief-Zahlen, verzerrt durch die negative Net Margin (−0,61%) bei positiver Operating Margin (2,62%) — diese Anomalie ist plausibel auf Einmalbelastungen zurückzuführen, aus den Daten aber nicht abschließend auflösbar; für die Bewertung wird daher die unverzerrtere Operating-/EBITDA-Basis verwendet. FCF TTM $44,4 Mio. auf $2,34 Mrd. Umsatz (1,9% FCF-Marge) ist dünn, laut Guidance in FY26 steigend. Bilanzqualität: D/E 59,8% erhöht, aber bei laufender Dividendenzahlung nicht kritisch. Der Burggraben ist operativ (Skaleneffekte, breite Endmarkt-Diversifikation, Dividend-Historie), nicht technologisch — bei 11,1% Bruttomarge gibt es keine Preissetzungsmacht wie bei margenstärkeren Spezialchemie-Peers.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Cached Forward-KGV 14,70x (Forward-EPS $3,915) bei $57,57 entspricht auf dem aktuellen Kurs $63,05 einem Forward-KGV von 16,1x — unterer Rand der Peer-Bandbreite (16,6x–23,4x), knapp unter Ashland (~16,6x). Der leichte Abschlag ist strukturell nachvollziehbar: SCL hat die dünnste Bruttomarge (11,1%) und die volatilste Ergebnishistorie (negatives Trailing-EPS) der genannten Peer-Gruppe. Rückrechnung "Was preist der Kurs ein?": Bei $63,05 und ~22,8 Mio. Aktien (implizit aus MCap/Kurs) impliziert der Markt ein FY26-EPS von ~$3,90–4,00 bei 16x — nahe der Cache-Konsens-Basis und nach dem Q2-Beat plausibel, nicht überzogen. Normalisierter FCF über den vollen Zyklus (Pflicht bei Zyklikern): Bei 2–3% FCF-Marge auf $2,3–2,4 Mrd. Umsatz ergeben sich $46–72 Mio. FCF, bei ~$1,44 Mrd. Marktkapitalisierung ein P/FCF von ~20–31x — moderat, keine Value-Falle, aber auch kein Schnäppchen. P/B 1,10 stützt das: Die Aktie handelt nahe Buchwert trotz Ergebniserholung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 82,2 (Rang 355) mit starkem Momentum (20T +20,7%, 50T +26,4%) zeigt, dass institutionelles Geld bereits vor dem Q2-Print zugekauft hat. Short-Float-/Ownership-Daten liegen nicht vor — Positionierungsaussagen sind Hypothese, nicht datenbasiert: Bei $1,3–1,4 Mrd. Marktkapitalisierung und nur 1 Analysten-Coverage ist SCL für viele Long-Only-Mandate dünn gecovert, was FOMO bei positiven Überraschungen verstärken kann. Neue Käufer benötigen Bestätigung des FCF-Turns in Q3/Q4; Enttäuschungsrisiko besteht vor allem bei erneutem Rohstoffkosten-Druck.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 82,24, Rang 355. Fenster: 5T +15,19%, 10T +13,52%, 20T +20,69%, 50T +26,38%, 6M +6,46% — die Beschleunigung über alle kurzen Zeitfenster ist deutlich stärker als die 6-Monats-Basis, was auf einen jüngeren, earnings-getriebenen Trendwechsel hindeutet. GWS-Ampel inaktiv auf allen Zeitebenen (0 Punkte, Signal-Typ Smallcap) — kein technisches Zusatzsignal. Momentum ist fundamental gestützt, nicht rein reaktiv. Warnsignal: Rückfall unter $58 würde die Post-Earnings-Reaktion negieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($95–$125):** Project Catalyst liefert dauerhafte strukturelle Margenexpansion, Surfactants- und Polymers-Volumina wachsen mit der globalen Konsumgüter-/Bauzyklus-Erholung, Bilanz entschuldet sich über positiven FCF.</p>
+<p>**Base ($65–$85):** Zyklische Erholung setzt sich moderat fort, EPS pendelt sich bei $4,50–5,50 ein, Multiple bleibt nahe 15–16x.</p>
+<p>**Bear ($30–$45):** Neuer Chemie-Abschwung (Rohstoffkosten-Spitze, Bauindustrie-Rezession), Project-Catalyst-Effekte verpuffen, Dividende gerät unter Druck.</p>
+<p>Entscheidende Variable: Ob Project Catalyst eine strukturelle Kostenbasis-Verschiebung ist oder nur zyklische Erholung glättet.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>SCL ist ein zyklischer Trading-Trade mit Dividendenschutz, kein reiner Momentum-Play und (noch) kein bewiesener Compounder. Der Q2-Beat ist real (EBITDA +45%, EPS-Surprise +93%), aber die eigenen Szenarien ergeben beim aktuellen Kurs $63,05 keinen asymmetrischen Edge (EV ~$58, −7,6%) — High-Conviction-Framing ist nicht gerechtfertigt, auch wenn die fundamentale Verbesserung unbestreitbar ist. Geeignet für zyklisch orientierte Value-/Dividendeninvestoren mit Geduld für den vollen Zyklus, nicht für reine Momentum-Trader ohne Bewertungsdisziplin. Positionsgröße angesichts D/E 59,8% und dünner 1-Analysten-Coverage moderat halten. Reinere Instrumente: Ashland (ASH, implizites Forward-KGV ~16,6x) ist ähnlich bewertet, aber diversifizierter; Innospec (IOSP, Trailing-KGV ~18,7x) bietet höhere Ergebnisqualität bei höherer Bewertung — Forward-Wert für IOSP indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der EBITDA-Beat und die FCF-Guidance sind real, aber die eigenen Szenarien ergeben beim aktuellen Kurs von $63,05 keinen positiven Erwartungswert (EV ~$58, −7,6%), weshalb keine volle Positionsgröße gerechtfertigt ist.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
