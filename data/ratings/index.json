@@ -481,14 +481,6 @@
       "ev_upside_pct": -13.9
     },
     {
-      "ticker": "SNDK",
-      "verdict": "HOLD",
-      "score": 56,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-24T11:17:32.468110",
-      "ev_upside_pct": 16.6
-    },
-    {
       "ticker": "IRM",
       "verdict": "HOLD",
       "score": 63,
@@ -543,14 +535,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-06-25T07:12:04.272482",
       "ev_upside_pct": 20.7
-    },
-    {
-      "ticker": "WDC",
-      "verdict": "HOLD",
-      "score": 58,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:13:59.985538",
-      "ev_upside_pct": -1.6
     },
     {
       "ticker": "STX",
@@ -1196,19 +1180,6 @@
         "reason": "das fixierte AVB-Merger-Umtauschverh\u00e4ltnis f\u00fchrt zu einer Verdopplung der Aktienzahl und Integrationsrisiko, das den negativen Erwartungswert und das schwache technische Setup \u00fcberwiegt."
       },
       "created_at": "2026-07-15T12:06:40.794534"
-    },
-    {
-      "ticker": "ASML",
-      "verdict": "HOLD",
-      "score": 68,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -12.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-Multiple liegt trotz Beat und angehobener Guidance \u00fcber der Peer-Bandbreite (~46x vs. 36\u201345x), kein aktives GWS-Signal vorhanden."
-      },
-      "created_at": "2026-07-16T10:00:47.316449"
     },
     {
       "ticker": "DHL.DE",
@@ -2275,6 +2246,45 @@
         "reason": "RS-Score -21,04 (Rang 778) und negative Mittelfrist-Fenster (20T -10,8 %, 50T -28,7 %) zeigen kein tragf\u00e4higes technisches Setup trotz Earnings-Beat; der fundamentale Turnaround ist zu fr\u00fch, um ein aktives Signal zu rechtfertigen."
       },
       "created_at": "2026-07-30T06:55:03.473893"
+    },
+    {
+      "ticker": "SNDK",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz Crash ergeben die eigenen Szenarien keinen asymmetrischen Edge (EV \u221216,4%), RS-Score ist von Rang 1 auf \u221225,4 eingebrochen, und die Aug.-5-Earnings sind ein ungel\u00f6ster Katalysator in beide Richtungen."
+      },
+      "created_at": "2026-07-30T14:00:15.903594"
+    },
+    {
+      "ticker": "ASML",
+      "verdict": "BUY",
+      "score": 75,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 13.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz starkem Q2-Beat und angehobener Guidance liegt das Forward-Multiple erstmals unter der gesamten Peer-Bandbreite und die eigenen Szenarien ergeben keinen asymmetrischen Edge (EV +6,2%), solange die DUV-Konkurrenzfrage ungekl\u00e4rt bleibt."
+      },
+      "created_at": "2026-07-30T14:03:37.351838"
+    },
+    {
+      "ticker": "WDC",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 8.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "RS-Rang 3 im S&P500 st\u00fctzt die technische These, aber D/E 17,81x aus der Spin-off-Struktur begrenzt die Fehlertoleranz bei einem Nachfrage-Digestion-Szenario, weshalb trotz intaktem AI-Storage-Katalysator keine volle Positionsgr\u00f6\u00dfe gerechtfertigt ist."
+      },
+      "created_at": "2026-07-30T14:03:37.374451"
     }
   ]
 }
