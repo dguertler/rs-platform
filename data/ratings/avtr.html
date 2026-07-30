@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AVTR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AVTR</h1>
+      <h2>Avantor, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Diagnostics & Research</span></div>
+        <div class="mi">MCap: <span>$8B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt (außerhalb RS-Universum)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">50</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$12.42</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">32.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-9.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+3.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">12–15</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$6,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $17–$20 (20 %) · Base $12–$15 (45 %) · Bear $5–$8 (35 %) · EV ~$12</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Avantor hat gerade einen Beat-and-Raise geliefert, der den Kurs um 14–15 % nach oben katapultiert hat — aber die eigentliche Story ist nicht der Beat, sondern die Frage, ob ein Unternehmen mit 0,7x Zinsdeckungsgrad und 3,3x adjustierter Nettoverschuldung/EBITDA ein Comeback-Case oder eine Bilanz-Zeitbombe ist. Strukturell zeigt sich ein Silberstreif: langfristige Lieferverträge mit Großkunden im Biopharma-Segment (62 % der Kundenumsätze) und die NuSil-Partnerschaft im Medizintechnik-Spezialsilikon-Bereich deuten auf gewisse Kundenbindung — aber das organische Wachstum war im Q2 weiterhin leicht negativ (−0,4 %), der Beat kam primär aus Kostenmaßnahmen, nicht aus Volumen. Was der Markt nach dem Pop übersieht: Der Zinsdeckungsgrad von nur 0,7x ist ein echtes strukturelles Risiko, das eine klassische Value-Falle von einem echten Turnaround unterscheidet — bei anhaltend schwacher operativer Cashgenerierung wird Refinanzierung/Covenant-Druck zum zentralen Thema, nicht die Bewertungsdiskussion allein.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Segmente: Laboratory Solutions (67 % Umsatz, Distribution + Eigenmarken) und Bioscience Production (33 %, höhermargige spezifikationsgetriebene Produkte)</li>
+<li>Proprietäre Produkte 53 % der Umsätze (höhere Marge) vs. Drittanbieter-Distribution 47 % (niedrigere Marge, aber Skalenvorteil im Vertriebsnetz)</li>
+<li>Biopharma & Healthcare als Kernkundengruppe (62 % der Kundenumsätze) — strukturelle Abhängigkeit vom Biopharma-Capex-Zyklus</li>
+<li>Switching Costs bei validierten Bioprozess-Rohstoffen real, aber aus aktuellen Daten nicht quantifizierbar — Requalifizierung ist für Kunden regulatorisch aufwändig</li>
+<li>Operativer Hebel begrenzt: 15 % Adj.-EBITDA-Marge ist moderat für ein Life-Science-Tools-Unternehmen, deutlich unter TMO/DHR-Niveau</li>
+<li>Hochverschuldete Bilanz aus vorheriger Buyout-/Übernahmehistorie: Bruttoschulden $3,7 Mrd. bei $306,8 Mio. Cash — Kapitalallokation ist primär Entschuldung, nicht Wachstumsinvestition oder Ausschüttung</li>
+<li>Umsatzwachstum strukturell schwach: Q2 organisch −0,4 % YoY trotz EPS-Beat — Beat ist kostengetrieben, nicht nachfragegetrieben</li>
+<li>Aktienanzahl stabil (680,6 Mio., 0 % YoY) — aktuell keine Verwässerung, aber Bilanzstress könnte künftig dilutive Kapitalmaßnahmen erzwingen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Biopharma-Capex-Zyklus dreht nachhaltig, organisches Wachstum kehrt in den positiven Bereich zurück (+3–4 %), Entschuldung senkt Leverage unter 3x, Zinsdeckung verbessert sich strukturell. Strukturelle Margen-Nachhaltigkeit: NuSil-Spezialsilikon-IP und der 53 %-Anteil proprietärer Produkte könnten Produktmix-Verschiebung zu höhermargigen Segmenten treiben, Kundenbindung über regulatorische Requalifizierungskosten ist plausibel — aber auf Basis der aktuellen Daten (organisch weiterhin negativ) ist diese Differenzierung noch nicht belegt, eher eine Chance als ein bestätigter Trend. Annahme (kein Konsens): FY27-EPS ~$1,00 (beschleunigtes Wachstum + Margenexpansion) × 18x (Annäherung an, aber nicht Erreichen der Peer-Bandbreite TMO/DHR 20,7x, da Leverage-Diskont teilweise bestehen bleibt) = $18,00. Bull-Kursziel: $17–$20 (Midpoint $18,50). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Organisches Wachstum pendelt weiter um die Nulllinie (Guidance −0,5 % bis +0,5 %), Adj.-EPS erreicht Konsens $0,87 (FY27), Multiple bleibt nahe dem aktuellen Niveau von ~15x — strukturell unter Peers, da Bilanzrisiko fortbesteht. Annahme: FY27-EPS $0,87 × 15x = $13,05. Base-Kursziel: $12–$15 (Midpoint $13,50). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Biopharma-Kunden-Capex bleibt schwach, organisches Wachstum rutscht erneut deutlich negativ, der Zinsdeckungsgrad von 0,7x wird bei anhaltend schwacher operativer Cashgenerierung zum akuten Covenant-/Refinanzierungsrisiko, das eine dilutive Kapitalerhöhung erzwingt. Kundenkonzentration: Biopharma & Healthcare 62 % der Kundenumsätze — ein Nachfrageeinbruch in diesem Segment trifft überproportional. Geopolitik/China: Advanced-Technologies-Segment hat vermutlich Halbleiter-/China-Bezug, konkrete %-Exposure auf Datenbasis nicht quantifizierbar. Lieferketten/Foundry: 47 % Drittanbieter-Produktanteil ist ein reales Abhängigkeitsrisiko von externen Herstellern, kein Single-Source-Beleg auf Datenbasis. Verwässerung: Aktienanzahl aktuell stabil, aber bei anhaltendem Bilanzstress ist eine künftige dilutive Kapitalmaßnahme ein reales Risiko — direkt an das Leverage-Szenario gekoppelt. Regulierung/Recht: keine spezifischen Rechtsrisiken in den recherchierten Daten identifiziert. Annahme: FY27-EPS ~$0,55 (Guidance-Verfehlung + Zinslast) × 11x (deutlich unter Peer-Tief, Distressed-Multiple wegen Bilanzrisiko) = $6,05. Bear-Kursziel: $5–$8 (Midpoint $6,50). Eintrittswahrscheinlichkeit: 35 %.</p>
+<p>**Summe: 20 % + 45 % + 35 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $18,50 + 0,45 × $13,50 + 0,35 × $6,50 = $3,70 + $6,08 + $2,28 = **~$12,05 — implizites Downside vs. aktuellem Kurs ($12,42): −3,0 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE −9,2 % und Profit Margin −8,1 % (TTM, GAAP) sind durch den Q3-2025-Goodwill-Impairment verzerrt und werden hier nicht als operative Kennzahl verwendet — die unverzerrtere Adj.-EBITDA-Marge von 15 % ist die bessere Bewertungsbasis. Diese 15 % liegen deutlich unter dem, was man von einem Life-Science-Tools-Unternehmen mit Burggraben erwarten würde (TMO/DHR deutlich höher). Bilanzqualität ist die zentrale Schwachstelle: adj. Nettoverschuldung/EBITDA 3,3x, Zinsdeckungsgrad nur 0,7x — das ist ein strukturelles Risiko, kein Randthema. Der wirtschaftliche Burggraben (Kundenbindung über regulatorische Requalifizierung) ist plausibel, aber angesichts der operativen Schwäche (organisch negativ) noch nicht empirisch bestätigt.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE FY26 ~15,2x, FY27 ~14,3x — ein Abschlag von ~25–30 % ggü. TMO/DHR (beide 20,7x). Rückrechnung "Was preist der Kurs ein?": Bei $12,42 und FY26-Guidance-Midpoint $0,815 preist der Markt effektiv ein, dass das organische Wachstum mittelfristig nahe null bleibt und das Leverage-Risiko eine Re-Rating-Prämie verhindert. Um auch nur die Hälfte des Bewertungsabstands zu TMO/DHR zu schließen, bräuchte AVTR zwei aufeinanderfolgende Jahre mit positivem organischem Wachstum (+2–3 %) plus sichtbarer Entschuldung unter 3x — plausibel als Ziel, aber der Q2-Ausweis (organisch weiterhin −0,4 %) liegt noch nicht auf diesem Pfad. Der Abschlag ggü. Peers ist strukturell teilweise erklärbar (Leverage, schwächeres Wachstumsprofil), teilweise aber auch eine Chance, falls die Entschuldung Fortschritte macht. Analyst-Konsensziel $12,54–$12,89 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; liegt nur knapp über dem aktuellen Kurs.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens vor Q2 mehrheitlich Hold (57 %), nur 21 % Buy — nach dem Beat mehrere Kurszielanhebungen (BofA $10→$12), Sentiment-Wende einsetzend. Kurs trotz 14–15 %-Pop noch deutlich unter dem 52-Wochen-Hoch $15,93 — Spielraum für weitere Re-Rating-Fantasie, falls Momentum anhält (Hypothese, nicht datenbasiert). Short-Float-Daten nicht recherchiert, keine belastbare Aussage zur institutionellen Positionierung möglich. Enttäuschungsrisiko hoch: Das organische Wachstum bleibt der Knackpunkt — ein weiteres Quartal mit negativem organischem Wachstum würde die frische Sentiment-Wende schnell zunichtemachen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score/GWS-Ampel der Platform nicht verfügbar — AVTR wird von keinem RS-JSON getrackt. Technische Einschätzung stützt sich ausschließlich auf recherchierte Chartdaten: 14–15 % Kurssprung am Earnings-Tag, Kurs bewegt sich nach der Rally im oberen Drittel der 52-Wochen-Range ($7,27–$15,93), aber noch unter dem Hoch. Das Momentum ist fundamental gestützt (Beat + Guidance-Raise + Analystenupgrades), aber angesichts der schwachen Bilanz fragil. Technisches Warnsignal: Rückfall unter $10,50 (Vor-Earnings-Niveau) würde den Beat-Effekt vollständig auslöschen und als Warnsignal gelten.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($22–$30):** Vollständige Entschuldung, organisches Wachstum reaccelerated auf Mid-Single-Digits, Multiple nähert sich Peer-Niveau (18–20x) auf EPS $1,30–1,50.</p>
+<p>**Base ($14–$20):** Graduelle Entschuldung, moderates Wachstum, EPS $1,00–1,10 × 15–17x.</p>
+<p>**Bear ($4–$9):** Leverage-Krise hält an, Biopharma-Capex-Zyklus bleibt schwach, potenziell dilutive Rekapitalisierung.</p>
+<p>Entscheidende Variable: Tempo der Entschuldung und Rückkehr zu nachhaltig positivem organischem Wachstum.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>AVTR ist nach dem Q2-Beat kein klarer Buy-and-Hold-Compounder und kein reiner Momentum-Trade, sondern ein Bilanz-getriebener Turnaround-Kandidat mit echtem, aber noch unbestätigtem Silberstreif — der 0,7x-Zinsdeckungsgrad ist das entscheidende Risiko, das jede Bewertungsdiskussion überlagert. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −3,0 %) — High-Conviction-Framing ist hier nicht vertretbar, trotz des positiven Nachrichtenflusses. **Thermo Fisher** und **Danaher** sind die bilanziell saubereren, aber auch deutlich teureren Instrumente für die Life-Science-Tools-These (Forward PE je 20,7x vs. AVTR ~15x) — die relative Bewertung ist bei AVTR günstiger, aber der Abschlag ist überwiegend durch das Bilanzrisiko erklärbar, nicht durch eine reine Unterbewertung. Für spekulative, engmaschig überwachte Positionen mit strikter Stop-Disziplin geeignet, nicht für Kernpositionen in einem Long-Only-Portfolio.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — Zinsdeckungsgrad von nur 0,7x bei $3,7 Mrd. Bruttoschulden ist ein akutes Bilanzrisiko, das den Q2-Beat und die Guidance-Anhebung überwiegt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
