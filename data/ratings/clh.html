@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CLH — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">30.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CLH</h1>
+      <h2>Clean Harbors, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Waste Management</span></div>
+        <div class="mi">MCap: <span>$18B</span></div>
+        <div class="mi">Signal: <span>Nicht getrackt (außerhalb RS-Universum)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 30.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$328.94</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">37.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">31.7%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">14.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-14.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">330–365</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">295–325</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">165–200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $330–$365 (25 %) · Base $295–$325 (45 %) · Bear $165–$200 (30 %) · EV ~$281</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Clean Harbors ist gerade aus einem Rekordquartal in eine Bewertungs-Zwickmühle gelaufen: EBITDA-Marge 23,6 % (Firmenrekord), Guidance-Anhebung um $110 Mio., Nettoverschuldung auf dem niedrigsten Stand seit einem Jahrzehnt — und der Kurs hat binnen eines Tages 8,3 % zugelegt, nahe am 52-Wochen-Hoch. Die eigentliche Story ist nicht der Quartalsbeat, sondern die strukturelle Marktkonsolidierung: Mit Veolias $3-Mrd.-Übernahme von Clean Earth (Juni 2026) verdichtet sich der US-Hazmat-Markt auf ein Oligopol aus Clean Harbors, Veolia, GES und Republic Services Environmental Solutions — PFAS-Sanierung ist dabei ein regulatorisch getriebener Mehrjahres-Nachfragestrom (EPA-/DoD-Vorgaben), kein klassischer Industriezyklus. Was der Markt nach dem Kurssprung übersieht: Das Forward-KGV liegt jetzt bei ~35–38x, deutlich über der Peer-Bandbreite von Abfallentsorgern (WM 25,9x, RSG 26,9x, WCN ~30,6x) — die Prämie für das Hazmat-Oligopol ist bereits sehr ambitioniert eingepreist, während die Kern-Hazmat-Volumina weiterhin industriezyklisch bleiben (Öl&Gas, Chemie als Endmärkte).</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Umweltdienstleister mit eigenen Hochtemperatur-Verbrennungsanlagen und Deponien — Genehmigungen als hohe Markteintrittsbarriere, nicht austauschbar</li>
+<li>PFAS-Sanierung (EPA/DoD-validiert) als margenstärkstes Wachstumssegment mit Managementziel 25–35 % p.a. Wachstum — regulatorisch, nicht konjunkturell getrieben</li>
+<li>Safety-Kleen Sustainability Solutions (Altöl-Recycling) als margenstärkeres Zweitbein neben klassischem Environmental-Services-Kerngeschäft</li>
+<li>Operativer Hebel über Anlagenauslastung: Fixkostenintensität der Verbrennungs-/Deponie-Infrastruktur treibt Rekordmargen bei steigendem Volumen — Kehrseite bei Nachfrageeinbruch</li>
+<li>Kapitalallokation ROIC-diszipliniert: organisches Wachstum, M&A, Buybacks (kein Dividendenanspruch) statt Ausschüttung</li>
+<li>Kundenbasis diversifiziert über Industrie, Chemie, Öl&Gas, Regierung — Einzelkundenkonzentration aus recherchierten Daten nicht quantifizierbar</li>
+<li>Net Debt/EBITDA 1,8x — stärkste Bilanz seit fast einem Jahrzehnt, schafft M&A-Optionalität in einer konsolidierenden Branche</li>
+<li>Umsatzwachstum Q2 +12 % YoY, deutlich über dem historischen Mid-Single-Digit-Trend des Sektors — auch preis-/mixgetrieben durch PFAS-Mix-Shift</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>PFAS-Sanierungsvolumen wächst am oberen Ende der 25–35 %-Guidance, Segmentmargen erreichen die vom Management genannten 30 %+, weitere Konsolidierung (Nach-Veolia-Landschaft) stärkt Preissetzungsmacht. Strukturelle Margen-Nachhaltigkeit: proprietäre Genehmigungen für Hochtemperatur-PFAS-Verbrennung sind eine echte technologische/regulatorische Eintrittsbarriere (nur eine Handvoll lizenzierter Betreiber), das Oligopol reduziert Wettbewerbsintensität, und der Fixkosten-Hebel der eigenen Anlagen verstärkt Skaleneffekte bei weiterem Volumenwachstum — das ist eine belastbare Grundlage für strukturell höhere Margen. Annahme (kein Konsens): FY27-EPS ~$10,30 (+18 % ggü. FY26-Konsens $8,74) × 33x (nahe/leicht über Peer-Hoch WCN 30,6x, gerechtfertigt durch Oligopol-Position) = $339,90. Bull-Kursziel: $330–$365 (Midpoint $347,50). Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: EPS wächst gemäß Konsens auf $9,40 (FY27, +10,6 % YoY), das Forward-Multiple normalisiert sich moderat von aktuell ~37x Richtung 31–32x (weiterhin über Peer-Schnitt, aber weniger extrem als direkt nach dem Ein-Tages-Pop). Annahme: FY27-EPS $9,40 × 31x = $291,40 bis $325 am oberen Rand bei anhaltendem Momentum. Base-Kursziel: $295–$325 (Midpoint $310). Eintrittswahrscheinlichkeit: 45 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Kern-Hazmat-Volumina (Öl&Gas, Chemie) schwächen sich zyklisch ab, PFAS-Bundesfinanzierung verzögert sich durch Haushaltsstreit, die Rekordmarge 23,6 % erweist sich als Zyklusspitze statt neues Normal. Kundenkonzentration: auf Datenbasis nicht beurteilbar (keine %-Angabe recherchiert). Geopolitik/China: gering relevant — CLH ist ein US/Kanada-fokussierter Inlandsdienstleister ohne wesentliches China-Exposure. Lieferketten/Foundry: klassisches Single-Source-Risiko nicht anwendbar (eigene Infrastruktur), aber Kapazitätsauslastung der eigenen Verbrennungsanlagen ist ein Engpassrisiko bei Ausfällen. Verwässerung: gering — Aktienrückkäufe ($250 Mio. 2025, $600 Mio. Autorisierung) wirken anti-dilutiv. Regulierung/Recht: PFAS ist ein zweischneidiges Schwert — treibt Nachfrage, schafft aber auch potenzielle CERCLA-/Haftungsrisiken für Handler von Gefahrstoffen; konkrete Streitwerte auf Datenbasis nicht verifizierbar. Annahme: FY27-EPS ~$7,20 (Margenrückgang + Volumenschwäche) × 24x (nahe/unter Peer-Tief WM 25,9x) = $172,80. Bear-Kursziel: $165–$200 (Midpoint $182,50). Eintrittswahrscheinlichkeit: 30 %.</p>
+<p>**Summe: 25 % + 45 % + 30 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,25 × $347,50 + 0,45 × $310 + 0,30 × $182,50 = $86,88 + $139,50 + $54,75 = **~$281 — implizites Downside vs. aktuellem Kurs ($328,94): −14,6 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 14,8 %, ROIC 9,6 % — solide, aber nicht spektakulär für ein Premium-Multiple. Adj. EBITDA-Marge 23,6 % ist ein Rekordwert und sollte im Zykluskontext als Spitzenwert behandelt werden, nicht als neues Normalniveau — historisch lag CLH eher im höheren Teens-/niedrigen 20er-Bereich. Bilanzqualität stark: Net Debt/EBITDA 1,8x, niedrigster Stand seit fast zehn Jahren, FCF-Guidance $520–580 Mio. Der wirtschaftliche Burggraben ist teilweise real (Genehmigungsinfrastruktur, PFAS-Lizenzierung, Oligopol-Konsolidierung), teilweise aber auch zyklusabhängig überlagert — Kern-Hazmat-Volumina bleiben industriekonjunkturabhängig.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE FY26 ~37,6x, FY27 ~35,0x — beides deutlich über der Peer-Bandbreite (WM 25,9x, RSG 26,9x, WCN ~30,6x): eine Prämie von rund 25–45 %. Rückrechnung "Was preist der Kurs ein?": Bei $328,94 und FY26-Konsens-EPS $8,74 impliziert der Markt, dass CLH die 25–35 %-PFAS-Wachstumsguidance über mehrere Jahre hält und daraus ein konsolidiertes EPS-CAGR von ~15–18 % (vs. Peer-Wachstum ~8–10 %) resultiert — ambitioniert, aber nicht unrealistisch angesichts des regulatorischen Rückenwinds; es lässt jedoch keinen Puffer für einen normalen zyklischen Rückschlag im Kerngeschäft. Die Prämie ggü. Peers ist strukturell teilweise begründbar (Oligopol-Position, Rekordmargen, PFAS-Regulierungshebel), aber nach dem 8,3 %-Ein-Tages-Sprung wirkt sie überzogen kalibriert. Analyst-Konsensziel $316,67–$330 (vor Q2-Zahlen) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; die Zahlen dürften nach dem Beat noch nach oben revidiert werden.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analystenkonsens mehrheitlich Buy (~81 % Buy-Quote vor Q2, Hypothese: dürfte nach Beat/Raise weiter steigen — nicht datenbasiert für den exakten Post-Earnings-Stand). Kurs nahe 52-Wochen-Hoch nach starkem Beat — klassisches FOMO-Setup nach guten Zahlen. Short-Float-Daten nicht recherchiert — keine belastbare Aussage zur Fast-Money- vs. Long-Only-Positionierung möglich. Enttäuschungsrisiko: hoch, da die Messlatte durch die Guidance-Anhebung selbst gestiegen ist — ein durchschnittliches Q3 würde nach diesem Sprung als Enttäuschung interpretiert.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score/GWS-Ampel der Platform nicht verfügbar — CLH wird von keinem RS-JSON getrackt. Technische Einschätzung stützt sich ausschließlich auf recherchierte Chartdaten: Kurs nahe 52-Wochen-Hoch ($335,94), +8,3 % am Earnings-Tag bei erhöhtem Volumen (630k vs. Ø 513k Aktien). Das Momentum ist fundamental gestützt (Beat + Guidance-Raise), aber die Reaktionsgröße lässt wenig Puffer für Rückschläge. Technisches Warnsignal: Wochenschluss unter $300 wäre ein erstes Warnsignal, Verlust der $270er-Marke signalisiert Trendbruch.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($400–$500):** PFAS-Sanierung wird strukturelles Kerngeschäft, Oligopol-Konsolidierung treibt Preissetzungsmacht weiter, EPS $14–15 (2029/30) × 30–33x.</p>
+<p>**Base ($280–$380):** Normalisiertes Wachstum, Multiple pendelt sich näher am Peer-Durchschnitt (~28x) ein, EPS $11–13.</p>
+<p>**Bear ($150–$220):** Zyklischer Abschwung im Kern-Hazmat-Geschäft, PFAS-Bundesfinanzierung stockt, Multiple-Kompression auf Peer-Niveau oder darunter.</p>
+<p>Entscheidende Variable: Tempo und Verlässlichkeit der PFAS-Bundesfinanzierung sowie Konjunkturabhängigkeit der Kern-Hazmat-Volumina.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>CLH ist ein Qualitätsunternehmen in einer strukturell konsolidierenden Nische — kein Zombie-Trade, aber nach dem Q2-Beat und dem Kurssprung auf ein Bewertungsniveau gelaufen, das keinen asymmetrischen Edge mehr bietet (EV −14,6 %). Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — ein High-Conviction-Framing ist hier nicht vertretbar. Für Buy-and-Hold-Compounder-Investoren ist die Bilanzqualität (1,8x Leverage) und die regulatorische Nachfragebasis attraktiv, aber der Einstiegspunkt ist ungünstig; für Trading-orientierte Investoren ist das Chance-Risiko-Verhältnis nach dem Pop asymmetrisch nach unten. **Republic Services** und **Waste Management** sind die reineren, günstiger bewerteten Instrumente für eine breitere Abfallentsorgungs-These (Forward PE 26,9x/25,9x vs. CLH ~37x), bieten aber kein reines PFAS/Hazmat-Exposure. Positionsgröße bei Neueinstieg: reduziert, da Bewertung die volle Größe nicht trägt.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-KGV von ~35–38x liegt nach dem 8,3%-Kurssprung deutlich über der Peer-Bandbreite (WM 25,9x/RSG 26,9x/WCN ~30,6x), und der EV impliziert −14,6 % Downside.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
