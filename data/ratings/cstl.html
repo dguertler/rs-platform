@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CSTL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">31.07.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CSTL</h1>
+      <h2>Castle Biosciences, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Diagnostics & Research</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Earnings-Screening</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >30%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">76</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 31.07.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">16.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$24.68</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">77.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-2.8%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+29.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$46–$62</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$25–$33</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$11–$15</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 27.07. (Kurs $24,685) liegt vor den Q2-Zahlen vom 30.07. — der aktuelle RS-Signal-Kurs $26,79 impliziert eine Bewegung von +8,5%, die sich mit der berichteten Reaktion (+~9,5% auf $26,79) exakt deckt — eine der zuverlässigsten Preisbestätigungen in diesem Screening. Castle Biosciences ist ein Dermatologie-/Onkologie-Diagnostikunternehmen, dessen 2025er-Jahr von einem harten regulatorischen Rückschlag geprägt war: Eine Medicare-Coverage-Änderung für den DecisionDx-SCC-Test (wirksam April 2025) plus die Einstellung von IDgenetix drückten das Wachstum auf nur 4% und das Unternehmen zurück in Verluste. Q2 2026 zeigt eine klare Erholung: Der Verlust je Aktie fiel von einem erwarteten −$0,44 auf nur −$0,07, das TissueCypher-Testvolumen wuchs 63% YoY, und die FY26-Umsatzguidance wurde bereits zum dritten Mal in diesem Zyklus angehoben. Der Markt preist die Erholung von der Medicare-Delle zunehmend ein — die Kernfrage ist, ob CMS-Erstattungsrisiken für Nischendiagnostik-Tests ein wiederkehrendes strukturelles Risiko bleiben.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Molekulare Diagnostiktests für Hautkrebs (DecisionDx-Melanoma, -SCC), gastrointestinale und weitere Krebsindikationen — Ergebnis beeinflusst Behandlungsentscheidung des Arztes</li>
+<li>TissueCypher (Speiseröhren-/Barrett-Ösophagus-Diagnostik) ist der aktuelle Wachstumstreiber: +63% Volumenwachstum YoY, FY26-Volumenguidance auf ~50–52% angehoben</li>
+<li>Erstattung primär über Medicare/CMS — strukturelle Abhängigkeit von einzelnen Coverage-Entscheidungen, wie die 2025er-SCC-Krise gezeigt hat</li>
+<li>Bruttomarge 77,9% (Snapshot) ist außergewöhnlich hoch für ein Labor-/Diagnostikgeschäft — der operative Verlust (op. Marge −22,0%, Snapshot) resultiert primär aus hohen Vertriebs-/Kommerzialisierungskosten für neue Testindikationen, nicht aus schwacher Bruttorentabilität</li>
+<li>Bilanz mit niedriger Verschuldung (D/E ~8%, Snapshot) — der Turnaround wird nicht durch Finanzierungsdruck erschwert</li>
+<li>Analystenkonsens bereits vor dem Beat "Strong Buy" bei 9 Analysten — hohe Erwartungshaltung, entsprechend geringer Überraschungsspielraum bei Enttäuschung</li>
+<li>FCF $12,9 Mio. bei $339,9 Mio. TTM-Umsatz (Snapshot) bereits leicht positiv trotz GAAP-Verlusten</li>
+<li>Produktpipeline (weitere Testindikationen in Entwicklung) als struktureller Wachstumshebel jenseits von TissueCypher</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Veracyte (VCYT, Fwd-PE 30,0x) und Bio-Rad (BIO, Fwd-PE 32,3x) als Diagnostik-Vergleichsgruppe (identisch zu CDNA in diesem Screening); Natera (NTRA) wegen negativem Forward-EPS ausgeschlossen. Bull-These: TissueCypher-Volumenwachstum bleibt oberhalb 50%, die Medicare-SCC-Problematik ist vollständig verarbeitet, operative Marge dreht schneller als erwartet ins Positive. Annahme (kein Konsens): FY27-EPS ~$1,80 × 30x (nahe VCYT als Peer-Referenzpunkt, Prämie für beschleunigtes Volumenwachstum) = $54,00. Bull-Kursziel: $46–62. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: TissueCypher wächst gemäß Guidance weiter, das Unternehmen erreicht im Laufe von FY27 nachhaltige Profitabilität, Bewertung nähert sich graduell der Diagnostik-Peer-Bandbreite an, bleibt aber wegen der kürzeren Profitabilitätshistorie darunter. Annahme (kein Konsens): FY27-EPS ~$1,30 × 22x (unterhalb der Peer-Bandbreite VCYT/BIO, Abschlag für noch junge Profitabilität) = $28,60. Base-Kursziel: $25–33. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Eine erneute CMS-Coverage-Entscheidung trifft einen weiteren Kerntest (das exakte 2025er-Muster wiederholt sich bei einem anderen Produkt, z. B. DecisionDx-Melanoma), oder TissueCypher-Volumenwachstum verlangsamt sich deutlich unter die Guidance. Kundenkonzentration: aus den Daten nicht quantifizierbar, aber die Abhängigkeit von wenigen Testprodukten (Konzentration auf Produktebene statt Kundenebene) ist ein reales, vergleichbares Risiko. Geopolitik/China-Exposure: nicht relevant für dieses US-fokussierte Diagnostikgeschäft. Lieferketten: nicht anwendbar (Laborservice, kein Hardware-Hersteller). Verwässerung: SBC-Daten nicht im Datensatz verfügbar, aber bei einem noch nicht durchgehend profitablen Unternehmen ein latentes Risiko. Regulierung: das zentrale, bereits einmal materialisierte Risiko — CMS-Erstattungsentscheidungen sind für Castle Biosciences kein hypothetisches, sondern ein wiederkehrendes Risiko. Bei anhaltenden Verlusten ist eine KGV-Bewertung nicht sinnvoll — Bewertung auf Price/Book-Basis: Snapshot-Buchwert ~$15,23 je Aktie × 0,85x (Abschlag) = $12,95. Bear-Kursziel: $11–15. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $54 + 0,50 × $29 + 0,30 × $13 = $10,80 + $14,50 + $3,90 = **~$29,20 — implizites Upside vs. aktuellem Kurs ($26,79): +9,0%.** Die eigenen Szenarien ergeben einen moderaten positiven Edge, kein extremes Asymmetrie-Signal.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge 77,9% (Snapshot) ist herausragend hoch und zeigt, dass das Kerngeschäft strukturell sehr profitabel ist — der operative Verlust ist ein Kommerzialisierungs-/Investitionsphänomen, kein Zeichen eines schwachen Geschäftsmodells. Operative Marge −22,0% (Snapshot, vor dem Q2-Fortschritt) spiegelt die 2025er-Krisenphase; die Verlustverengung in Q2 26 (−$0,07 vs. −$0,44 erwartet) zeigt beginnenden operativen Hebel. ROE −2,8% (Snapshot) noch negativ, aber nahe der Nulllinie. FCF $12,9 Mio. bereits positiv trotz GAAP-Verlusten — die Differenz stammt vermutlich aus Non-Cash-Posten (Abschreibungen, SBC), ein Qualitätssignal für die zugrunde liegende Cash-Generierung. D/E ~8% ist niedrig — solide Bilanz ohne Refinanzierungsdruck während der Erholungsphase.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE im Snapshot als "UNGÜLTIG" markiert (negative Forward-EPS-Schätzung vor dem Beat) — nach der deutlichen Verlustverengung in Q2 26 dürften Analysten die Schätzung nach oben revidieren, im Datensatz aber noch nicht abgebildet. Was preist der aktuelle Kurs ein? Bei $26,79 und ~30,3 Mio. Aktien (implizit aus Snapshot-MCap/-Kurs) ergibt sich eine Marktkapitalisierung von ~$812 Mio. — bei der neuen FY26-Umsatzguidance (Mitte $370 Mio.) entspricht das einem EV/Revenue von ~2,2x forward. Für ein Diagnostikunternehmen mit 77,9% Bruttomarge und beschleunigtem Volumenwachstum (+63% YoY) ist das nicht teuer im Branchenvergleich — der Markt scheint die Medicare-Krise noch nicht vollständig als überwunden anzuerkennen. Eigenes Forward-Multiple ist wegen der negativen historischen EPS-Basis nicht direkt mit VCYT (30,0x)/BIO (32,3x) vergleichbar — sobald Profitabilität erreicht ist, dürfte sich eine Neubewertung Richtung dieser Bandbreite ergeben, sofern das Wachstum hält. Analyst-Konsensziel $42,78 (Snapshot-Basis, 9 Analysten, "Strong Buy") liegt deutlich über dem aktuellen Kurs — als optimistischen, aber nicht als garantierten Orientierungspunkt einordnen, nicht als Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 16,18 (Rang 241 im Smallcap-Universum). Windows: 5T +8,0%, 10T +11,2%, 20T +11,8%, 50T +30,2%, 6M −45,0% — das 6M-Fenster zeigt das Ausmaß der 2025er-Krise (Medicare-Rückschlag), während die kürzeren Fenster eine klare, sich beschleunigende Erholung zeigen. Analystenkonsens bereits vor dem Beat "Strong Buy" — hohe Erwartungshaltung war schon eingepreist, was die moderate (nicht explosive) Kursreaktion trotz eines starken Beats erklären könnte. Short-Daten nicht im Datensatz verfügbar. Hypothese, nicht datenbasiert: Nach der 45%igen 6-Monats-Korrektur dürfte ein Teil der ursprünglichen Long-Basis bereits ausgestiegen sein — die aktuelle Erholung könnte neue, erholungsorientierte Käufer anziehen. Enttäuschungsrisiko: Eine weitere CMS-Entscheidung wäre nach der 2025er-Erfahrung ein besonders empfindlicher Auslöser für erneute Verkäufe.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 16,18, Rang 241 Smallcap-Universum. Windows: 5T +8,0%, 10T +11,2%, 20T +11,8%, 50T +30,2%, 6M −45,0% — die kurz- bis mittelfristigen Fenster zeigen eine konsistente Erholungsbewegung, das negative 6M-Fenster ist der Nachhall der Medicare-Krise. GWS-Signale liegen für diesen Screening-Lauf nicht vor (Earnings-Trigger, kein Breakout-Signal). Momentum ist fundamental gestützt durch die Verlustverengung und die dritte Guidance-Anhebung in Folge. Technisches Warnsignal: Ein Rückfall unter $22–23 (Zone vor dem jüngsten Aufwärtsimpuls) würde signalisieren, dass der Markt der Erholung noch nicht traut.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($55–75):** TissueCypher wird zum dominanten Umsatztreiber, weitere Testindikationen erreichen kommerzielle Reife, das Unternehmen etabliert nachhaltige zweistellige Nettomargen. Normalisiertes EPS $2,20–2,80 × 25–30x.</p>
+<p>**Base ($28–48):** Solides, aber nicht beschleunigendes Wachstum, Profitabilität wird erreicht und gehalten, gelegentliche Reimbursement-Rückschläge bleiben ein Risiko. Normalisiertes EPS $1,40–1,90 × 20–25x.</p>
+<p>**Bear ($10–18):** Eine weitere Medicare-Coverage-Krise bei einem zweiten Kerntest wiederholt das 2025er-Muster, Wachstum stagniert, Unternehmen bleibt strukturell defizitär.</p>
+<p>Entscheidende Variable: Diversifikation der Erstattungsbasis über mehrere Tests hinweg, um das Konzentrationsrisiko auf einzelne CMS-Entscheidungen zu reduzieren.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Castle Biosciences erfüllt alle vier Turnaround-Kriterien: ein dokumentiertes Krisenjahr (FY2025, Medicare-bedingter Rückfall in Verluste bei nur 4% Wachstum), eine klar normalisierende Kern-Kennzahl (TissueCypher-Volumen +63% YoY), eine bereits dreifach angehobene Guidance und eine deutliche Verlustverengung. Die eigenen Szenarien ergeben einen moderaten positiven Erwartungswert (+9,0%) — nicht spektakulär, aber plausibel angesichts der noch nicht vollständig abgeschlossenen Neubewertung nach der Krise. Dies ist ein spekulativer Diagnostik-Turnaround mit einem sehr realen, wiederkehrenden regulatorischen Risiko (CMS-Erstattung) — geeignet für Investoren mit Sektorerfahrung und Toleranz für Reimbursement-Volatilität, weniger für konservative Positionen. Positionsgröße wegen des demonstrierten Regulierungsrisikos begrenzen. **Veracyte (VCYT)** ist mit Fwd-PE 30,0x teurer, aber ohne die spezifische, bereits einmal materialisierte CMS-SCC-Historie von Castle — die defensivere Diagnostik-Alternative. **Bio-Rad (BIO)** ist breiter diversifiziert (Life-Science-Tools) und weniger reimbursement-exponiert.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — Der fundamentale Katalysator ist real (Beat, dritte Guidance-Anhebung), aber das demonstrierte, wiederkehrende CMS-Reimbursement-Risiko (2025er-SCC-Präzedenzfall) rechtfertigt eine reduzierte statt volle Positionsgröße trotz erfüllter Turnaround-Kriterien.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

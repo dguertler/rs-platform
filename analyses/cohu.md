@@ -1,16 +1,16 @@
 # COHU — KI-Aktienbewertung
 
-**Cohu, Inc.** · Technology · 19.06.2026 · Signal: Smallcap
+**Cohu, Inc.** · Technology · 31.07.2026 · Signal: Earnings-Screening
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 69.4 |
-| Market Cap | $3.27 Mrd. |
-| Forward PE | 46.94 |
+| Kurs | 50.7 |
+| Market Cap | $2.39 Mrd. |
+| Forward PE | 34.31 |
 | Revenue (TTM) | $0.48 Mrd. |
 | Gross Margin | 43.5% |
 | ROE | -7.0% |
-| RS-Score | 319.9 |
+| RS-Score | 5.2 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
@@ -18,89 +18,83 @@
 
 ## 1. INVESTMENT-CASE
 
-Cohu ist ein führender Anbieter von Semiconductor-Test-Handling-Equipment — einem zyklischen Nischensegment, das direkt von Halbleiter-CapEx-Zyklen abhängt. Der strukturelle Kern: Wenn Chipwerke investieren, kaufen sie Cohu-Handler; wenn sie pausieren, bricht Cohu-Revenue ein. Revenue $481 Mio. mit +29,3% Wachstum YoY signalisiert die Erholung aus dem Zyklustief. Die Aktie hat sich von $17,71 auf $70,47 vervierfacht — nahe dem 52w-Hoch. Das Problem: 7 Analysten sehen Konsensziel $60,29 — 13% unter dem aktuellen Kurs. Gross Margin 43,5% ist solide für Equipment, aber Operating Margin −8,3% zeigt, dass das Unternehmen noch nicht profitabel operiert — Fixkostenbasis übersteigt den Umsatz, noch. Forward PE 46,9x ist für ein zyklisches Unternehmen im Erholungsmodus teuer. Die These: Entweder beschleunigt sich der Halbleiter-Test-Zyklus und rechtfertigt das Bewertungsniveau, oder die Aktie korrigiert auf Analyst-Niveau.
+DATENLAGE: Für COHU liegen widersprüchliche Kursangaben vor. Der RS-Signal-Datensatz weist einen Schlusskurs von $46,45 aus, während sowohl die Web-Recherche zu den Q2-Zahlen (Handelsspanne ca. $41,20–$57,79, Schlusskurs nahe $54,80) als auch eine unabhängige Live-Kursabfrage übereinstimmend ~$54,51 zeigen. Da zwei unabhängige Quellen sich auf ein Niveau um $54,5 einigen, wird **$54,51** als primäre Bewertungsbasis verwendet; der RS-Signal-Kurs dürfte noch nicht auf den Post-Earnings-Stand aktualisiert sein. Alle Multiples in dieser Analyse basieren auf $54,51 — RS-Score und Momentum-Fenster (Abschnitt 9) stammen dagegen unverändert aus dem Signal-Datensatz und können daher zeitlich leicht hinter der Kursbasis dieser Analyse zurückliegen. Auslöser der Bewegung ist verifiziert: Q2-Zahlen vom 30.07. mit einem EPS-Beat von ~86% und einer Q3-Umsatzguidance deutlich über dem Konsens. Cohu ist ein Halbleiter-Testequipment-Hersteller, der 2025 ein komplettes Verlustjahr durchlief ($74,3 Mio. GAAP-Verlust), als die Testauslastung branchenweit einbrach. Q2 2026 markiert den klarsten Beleg einer Trendwende: Die Testzellenauslastung stieg von 76% auf 80%, angetrieben von KI-getriebener Halbleiter-Testnachfrage — dieselbe Dynamik, die aktuell breite Teile der Halbleiterausrüstungsbranche treibt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Entwicklung und Vertrieb von Semiconductor-Test-Handler-Systemen (Gravity, Turret, Pick-and-Place), Thermal-Test-Systemen und Burn-in-Equipment
-- Kunden: IDMs (Texas Instruments, ON Semi) und OSATs (ASE, Amkor) — strukturelle Abhängigkeit von deren CapEx-Zyklen
-- Gross Margin 43,5% — typisch für Equipment-Nischen mit proprietären Lösungen; ausbaufähig bei Skalierung
-- FCF $69,2 Mio. bei Revenue $481 Mio. (14,4% FCF-Marge) — positiv, aber zyklisch volatil
-- Operating Margin noch negativ (−8,3%): Fixkostenbasis für R&D und SG&A belastet aktuell; Operating Leverage tritt bei weiterer Revenue-Steigerung ein
-- Debt/Equity 42,9 — moderate Verschuldung, manageable im Aufschwung
-- Revenue-Wachstum $481 Mio. aus tiefem Zyklustief ~$300 Mio. belegt starke Erholung, aber Peak-of-Cycle-Niveau unklar
-- Keine Analystenkonsens-EPS im Datensatz verfügbar — Forward PE auf Basis yfinance-Schätzung
+- Hersteller von Testsystemen und Handling-Equipment für die Halbleiterfertigung (Endtest von Chips vor Auslieferung)
+- Umsatz folgt direkt der Testkapazitätsnachfrage der Chiphersteller — stark zyklisch, aktuell getrieben von KI-Beschleuniger- und Speicherchip-Testvolumen
+- Testzellenauslastung ist die zentrale operative Kennzahl: 80% (Ende Juni 2026) vs. 76% (Dez. 2025) — der unmittelbare Frühindikator für künftige Umsatzentwicklung
+- Q3-Guidance von ~$170 Mio. (±$7 Mio.) impliziert eine sequenzielle Beschleunigung von ~14% gegenüber dem bereits starken Q2 — ungewöhnlich kräftiges Signal für einen Ausrüstungshersteller
+- Bruttomarge 43,5% (Snapshot) ist branchentypisch, operative Marge war zuletzt negativ (−8,3%, Snapshot) — der Hebel zwischen Auslastung und Marge ist der Kern der Turnaround-These
+- Bilanz mit moderater Verschuldung (D/E ~43%, Snapshot) — kein akutes Finanzierungsrisiko während der Erholungsphase
+- Kundenkonzentration: Halbleiterhersteller/OSAT-Partner als Kundenbasis — konkrete Einzelkundenanteile aus den Daten nicht ersichtlich, branchentypisch aber konzentriert auf wenige Großkunden
+- Analystenkonsens bereits vor dem Beat "Strong Buy" bei 8 Analysten — hohe Vorab-Erwartung an die KI-Testnachfrage-Story
 
 ## 3. BULL CASE
 
-Semiconductor-Test-Kapazitäten werden durch AI-Chip-Komplexität strukturell ausgebaut: HBM-Testing, Advanced-Packaging-Testing, SoC-Testing für AI-Inferenz-Chips erfordern hochspezialisiertes Equipment. Revenue steigt auf $650–700 Mio.; Gross Margin auf 47%; Operating Margin auf 12–15%. EPS-Normalisierung auf $4,00 (Annahme, kein Konsens) × 22x Forward = $88–95. Bull $88–95. Eintrittswahrscheinlichkeit: 25%.
-
-Strukturelle Margennachhaltigkeit: Advanced-Testing-Equipment für AI-Chips bietet höhere ASPs (Average Selling Prices) als Standard-Handler — strukturelle Differenzierung möglich, aber proprietäres IP-Niveau vs. Peers (Teradyne, Advantest) nicht aus Datensatz ableitbar.
+Peers: Teradyne (TER, Fwd-PE 34,0x) und KLA Corporation (KLAC, Fwd-PE 41,0x) als direkte Halbleiterausrüstungs-Vergleichsgruppe. Bull-These: Die Testzellenauslastung erreicht historische Höchststände (>85%), der KI-Testkapazitäts-Zyklus verlängert sich über mehrere Jahre, Cohu gewinnt zusätzlich Marktanteile im Speicher-Testsegment. Annahme (kein Konsens): FY27-EPS ~$2,40 × 36x (nahe KLAC als oberer Peer-Referenzpunkt, Prämie für beschleunigte KI-Nachfrage) = $86,40. Bull-Kursziel: $75–98. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: Revenue-Wachstum verlangsamt auf 10–15%; Operating Margin erreicht Breakeven bis leicht positiv. FCF stabil bei $60–80 Mio. Analystenkonsens $60,29 als Leitgröße — impliziert Korrektur vom aktuellen Niveau. Kursziel Base: $52–65. Eintrittswahrscheinlichkeit: 40%.
+Wahrscheinlichstes Szenario: Die Q3-Guidance wird im Kern erfüllt, Testzellenauslastung verbessert sich weiter graduell, Bewertung bleibt nahe dem aktuellen Niveau innerhalb der Halbleiterausrüstungs-Peer-Bandbreite. Annahme (kein Konsens): FY27-EPS ~$1,80 × 30x (nahe eigenem aktuellen Forward-Multiple 34,3x, leicht darunter zur Berücksichtigung der erst kurzen Erholungshistorie) = $54,00. Base-Kursziel: $47–62. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Halbleiter-CapEx-Pause — IDMs und OSATs verschieben Equipment-Investitionen; AI-Nachfrage konsolidiert. Revenue fällt auf $320–380 Mio.; FCF wird negativ; Operating Leverage wirkt negativ. Schulden von $43 Mio. (relativ zu Eigenkapital) vertretbar, aber FCF-Druck erhöht Refinanzierungsrisiko. Bear $25–40 (Annahme: 0,8–1,2x Book Value als Zyklus-Boden, Buchwert nicht direkt verfügbar, kein EPS auf negativer Basis). Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Der KI-/Speicherchip-Testkapazitätszyklus rollt schneller über als erwartet (historisches Muster in der Halbleiterausrüstung: scharfe Boom-Bust-Zyklen), Testzellenauslastung stagniert oder fällt zurück Richtung der 2025er-Krisenwerte. Kundenkonzentration: aus den Daten nicht quantifizierbar, aber die Ausrüstungsbranche ist strukturell auf wenige Großkunden (Hyperscaler-nahe Chiphersteller, große OSATs) konzentriert — reales, nicht quantifizierbares Risiko. Geopolitik/China-Exposure: Halbleiterausrüstung ist strukturell exportkontroll-exponiert (US-China-Chipexportregeln) — ein reales Risiko, aus den Daten nicht quantifizierbar. Lieferketten/Foundry: als Ausrüstungshersteller selbst kein Foundry-Abhängigkeitsrisiko, aber Kundenkonzentration auf zyklische Fertigungskapazitätsentscheidungen. Verwässerung: Aktienanzahl-Trend nicht im Datensatz verfügbar. Regulierung: Exportkontrollen sind das relevanteste Regulierungsrisiko für den Sektor. Annahme (kein Konsens): FY27-EPS ~$0,60 (Rückfall Richtung 2025er-Verlustniveau) × 20x (deutlich unterhalb des Peer-Floors TER 34,0x, Kompression bei brechendem Zyklus) = $12,00. Bear-Kursziel: $10–16. Eintrittswahrscheinlichkeit: 30%.
 
-Risiko-Sweep:
-- Kundenkonzentration: Wahrscheinlich hoch (wenige große IDMs/OSATs) — Auf Datenbasis nicht quantifizierbar
-- Geopolitik/China: Relevant — China-Exportkontrollen betreffen Test-Equipment; Verlust von China-Revenue möglich (nicht aus Datensatz quantifizierbar)
-- Lieferkette/Foundry: Komponentenabhängigkeiten bei Elektronik-Supplies; Single-Source-Risiko auf Datenbasis nicht beurteilbar
-- Verwässerung: ROE −7% im aktuellen Verlustmodus; Aktienanzahl-Trend nicht im Datensatz — moderate SBC wahrscheinlich
-- Regulierung: US-Exportkontrollregime (BIS) als materielles Risiko für China-Exposure
+**Summe: 25% + 45% + 30% = 100%**
 
-**Summe: 25% + 40% + 35% = 100%**
-
-**Erwartungswert:** EV = 0,25 × $91,50 + 0,40 × $58,50 + 0,35 × $32,50 = $22,875 + $23,40 + $11,375 = **$57,65** — implizites Downside vs. aktuellem Kurs $69,40: **−17%**. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25 × $86,50 + 0,45 × $54,50 + 0,30 × $13,00 = $21,63 + $24,53 + $3,90 = **~$50,05 — implizites Downside vs. aktuellem Kurs ($54,51): −8,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem kräftigen Kurssprung ist ein Großteil der guten Nachrichten bereits eingepreist.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Gross Margin 43,5% — für Equipment-Nischen solide. Operating Margin −8,3%: noch verlustmachend, aber zyklisch im Erholungsmodus. FCF $69,2 Mio. positiv — Operating-Leverage-Effekt sollte FCF überproportional steigern bei Revenue-Anstieg. ROE −7% reflektiert laufende Verluste, nicht strukturelle Schwäche. Debt/Equity 42,9 — moderate Verschuldung. Wirtschaftlicher Burggraben: moderat — proprietary Handler-Designs und Kunden-Integration, aber Teradyne und Advantest als stärker kapitalisierte Wettbewerber mit breiterer Plattform.
+Operative Marge war im Snapshot noch negativ (−8,3%), ROE −7,0% — beide Kennzahlen spiegeln das volle Verlustjahr 2025 ($74,3 Mio. GAAP-Verlust) und sind im Zykluskontext zu lesen: Cohu kommt aus einem der schärfsten Halbleiterausrüstungs-Abschwünge der letzten Jahre. Der Sprung auf einen deutlich positiven Non-GAAP-EPS-Beat in Q2 26 zeigt den vollen operativen Hebel des Geschäftsmodells in beide Richtungen. Bruttomarge 43,5% (Snapshot) ist solide für die Branche. FCF $69,2 Mio. bei $481,3 Mio. TTM-Umsatz (14,4% FCF-Marge, Snapshot) ist bemerkenswert stark angesichts der GAAP-Verlustlage — deutet auf hohe Non-Cash-Abschreibungen/Bestandsanpassungen aus der 2025er-Krise hin, kein strukturelles Cash-Problem. D/E ~43% ist moderat, keine Bilanzsorge.
 
 ## 7. BEWERTUNG
 
-Forward PE 46,9x ist für ein zyklisches Equipment-Unternehmen mit noch negativer Operating Margin aggressiv. Normalisierter FCF-Ansatz: FCF $69 Mio. × 15–18x = $1,04–1,24 Mrd. → ~$22–26 je Aktie (Annahme: ~47 Mio. Aktien, kein Konsens). Hinweis: Market Cap $3,27 Mrd. / $69 Mio. FCF = 47x FCF-Multiple — teuer für Zykliker. Rückrechnung: Was preist $69,40 ein? Revenue $650 Mio. × 12% Operating Margin × 20x PE = ~$1,56 Mrd. Operating Income-basierter Wert — das setzt starke Margenverbesserung voraus, die aktuell nicht im Lauf ist. Analyst-Konsensziel $60,29 als Orientierungspunkt; Kurs liegt 15% darüber.
+Forward-PE im Snapshot 34,3x liegt nahe bei Teradyne (34,0x) und unter KLA (41,0x) — plausibel positioniert, allerdings basierend auf einer Forward-EPS-Schätzung, die vermutlich noch nicht die volle Post-Q2-Dynamik reflektiert. Was preist der aktuelle Kurs ein? Bei $54,51 und ~47,2 Mio. Aktien (implizit aus Snapshot-MCap/-Kurs) ergibt sich eine Marktkapitalisierung von ~$2,57 Mrd. — bei einer Jahreshochrechnung auf Basis der Q3-Guidance-Mitte ($170 Mio. × 4 ≈ $680 Mio., vereinfachte Annahme fortgesetzter Sequenzialdynamik) entspricht das einem EV/Revenue von ~3,8x forward. Für ein Ausrüstungsunternehmen mitten in einer KI-getriebenen Nachfragebeschleunigung ist das nicht unplausibel, aber ambitioniert — die Rechnung unterstellt, dass sich das Q3-Tempo fortsetzt, statt sich (wie in der Branche historisch üblich) wieder zu normalisieren. Eigenes Forward-Multiple bewegt sich im Peer-Rahmen (TER 34,0x–KLAC 41,0x), keine auffällige Prämie. Analyst-Konsensziel $64,00 (Snapshot-Basis, 8 Analysten, vor dem Q2-Beat) liegt über dem aktuellen Kurs — als Orientierungspunkt mit wahrscheinlicher weiterer Aufwärtsrevision zu verstehen, nicht als Ceiling.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-4x-Move von $17,71 auf $70,47 in 12 Monaten: Momentum-getrieben durch Halbleiter-Zykluserholung. Hypothese, nicht datenbasiert: Institutionelle Fonds, die Semiconductor-Equipment als Zykluserholung spielen (AMAT, LRCX als größere Brüder). Short Float nicht im Datensatz. Enttäuschungsrisiko: hoch — Aktie handelt 15% über Analystenkonsens; bei Revenue-Miss oder Guidance-Senkung sind −20–30% Korrekturen möglich.
+RS-Score 5,25 (Rang 42 im Smallcap-Universum) laut Signal-Datensatz — dieser Wert dürfte den Post-Earnings-Sprung noch nicht vollständig reflektieren (siehe DATENLAGE). Windows: 5T −8,9%, 10T −8,9%, 20T −21,0%, 50T −0,8%, 6M +44,8% — die kurzfristigen Fenster zeigen noch die Schwächephase vor dem Katalysator, während 6M bereits eine kräftige Erholung von den 2025er-Tiefs zeigt. Analystenkonsens bereits vor dem Beat "Strong Buy" — eine bereits etablierte Bullen-Fangemeinde rund um die KI-Testnachfrage-Story. Short-Daten nicht im Datensatz verfügbar. Hypothese, nicht datenbasiert: Der beschriebene Handelsspannen-Umfang ($41,20–$57,79 an einem Tag) deutet auf starke Fast-Money-/Momentum-Beteiligung hin, nicht auf ruhige Long-Only-Akkumulation. Enttäuschungsrisiko entsprechend hoch bei einer Verlangsamung der Q3-Dynamik.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Kurs $69,40 — 1,5% unter 52w-Hoch $70,47. RS-Fenster: 5T +12,67%, 10T +16,56%, 20T +41,82%, 50T +81,80%, 6M +167,05% — starkes Momentum über mittlere Zeitrahmen. GWS-Signal nicht verfügbar (Smallcap-Universum). Momentum fundamental durch Zyklus-Erholung gestützt, aber nahe 52w-Hoch mit Analystenkonsens darunter erhöht Korrekturrisiko. Technische Warnsignale: Unterschreiten $60 bestätigt Analyst-Resistenzlevel als neue Decke.
+RS-Score 5,25, Rang 42 Smallcap-Universum (Datenstand vor dem vollen Post-Earnings-Kurssprung, siehe DATENLAGE). Windows: 5T −8,9%, 10T −8,9%, 20T −21,0%, 50T −0,8%, 6M +44,8% — die kurzfristige Schwäche vor dem Katalysator kontrastiert mit der Q2-Kursreaktion; nach Datenaktualisierung ist ein deutlich stärkeres RS-Signal zu erwarten. GWS-Signale liegen für diesen Screening-Lauf nicht vor (Earnings-Trigger, kein Breakout-Signal). Die extreme Tagesspanne ($41,20–$57,79) ist ein Warnsignal für hohe Volatilität — Momentum ist fundamental gestützt (Beat, starke Guidance), aber technisch noch nicht konsolidiert. Technisches Warnsignal: Ein Rückfall unter $45 (unteres Ende der Post-Earnings-Handelsspanne) würde auf nachlassende Überzeugung hindeuten.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull Case ($90–130):** AI-Chip-Testing-Strukturwachstum; Cohu gewinnt Marktanteile bei Advanced-Package-Testing; Operating Leverage schlägt durch. Entscheidende Variable: Beibehaltung von Kunden-Walletshare bei HBM-/SoC-Generationen.
+**Bull ($90–130):** Der KI-Testkapazitätszyklus hält mehrjährig an, Testzellenauslastung erreicht neue Höchststände, Cohu profitiert strukturell von steigender Testkomplexität bei KI-Beschleunigern. Normalisiertes EPS $2,80–3,50 × 32–37x.
 
-**Base Case ($40–65):** Zyklischer Normalbetrieb; Operating Margin normalisiert auf 5–10%; FCF stabil. Bewertungskompressionauf 15–20x FCF.
+**Base ($48–75):** Solide, aber zyklische Erholung mit gelegentlichen Nachfrage-Schwankungen, Auslastung pendelt zwischen 75–85%. Normalisiertes EPS $1,80–2,30 × 27–32x.
 
-**Bear Case ($12–25):** Zyklus dreht, Revenue collapsiert; FCF negativ; Buchwert als Boden.
+**Bear ($15–28):** Der Testkapazitätszyklus rollt über, Auslastung fällt zurück Richtung 2025er-Niveau, Verlustjahre wiederholen sich.
+
+Entscheidende Variable: Dauer und Amplitude des aktuellen KI-getriebenen Halbleiter-Testkapazitätszyklus.
 
 ## 11. PROFI-FAZIT
 
-Cohu ist ein zyklischer Trading-Trade, kein Compounder. Der Einstieg war bei $17–25 überzeugend — bei $69 liegt der Kurs 15% über dem Analystenkonsens und der EV der eigenen Szenarien impliziert −17% Downside. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Für Momentum-Trader mit einem klaren Katalysator (nächste Earnings-Überraschung): Trailing-Stop bei $60 als Risikosteuerung. Für Buy-and-Hold und Value-Investoren: zu teuer für das Risikoprofil. Positionsgröße: maximal 1–2% mit definiertem Exit.
+Cohu erfüllt alle vier Turnaround-Kriterien: ein vollständiges Verlustjahr 2025 ($74,3 Mio. GAAP-Verlust über mehrere Quartale), eine klar normalisierende Kern-Kennzahl (Testzellenauslastung 76%→80%), eine Q3-Guidance deutlich über Konsens (De-facto-Anhebung) und einen kräftigen EPS-Beat (~86%). Die eigenen Szenarien ergeben auf dem aktuellen, bereits kräftig gestiegenen Kursniveau einen leicht negativen Erwartungswert (−8,2%) — nach dem Sprung ist ein erheblicher Teil der KI-Testnachfrage-Story eingepreist. Dies ist ein zyklisches Momentum-Play, kein Buy-and-Hold-Compounder: Halbleiterausrüstung ist historisch eine der volatilsten Branchen überhaupt, und die extreme Tagesspanne nach den Zahlen unterstreicht das. Geeignet für zyklus-erfahrene Trader, die den KI-Testkapazitäts-Zyklus aktiv timen wollen — Neueinstiege nach dem Sprung sollten mit kleiner Positionsgröße und enger Stop-Disziplin erfolgen. **Teradyne (TER)** ist bei nahezu identischem Forward-PE (34,0x) die liquidere, breiter diversifizierte Alternative im selben Zyklus. **KLA Corporation (KLAC)** ist mit Fwd-PE 41,0x teurer, aber mit stärkerer struktureller Marktposition in der Waferinspektion.
 
-Peers: **Teradyne (TER)** als breiteres, stärker kapitalisiertes Semiconductor-Equipment-Instrument; **Advantest** für AI-Chip-Testing-Exposure. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
-
-- Qualität: 2/5
-- Wachstum: 3/5
+- Qualität: 3/5
+- Wachstum: 4/5
 - Bewertung: 2/5
-- Katalysator: 3/5
+- Katalysator: 4/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Nach dem kräftigen Post-Earnings-Kurssprung zeigt die EV-Rechnung keinen asymmetrischen Edge mehr (−8,2%), und die zugrunde liegende Kursbasis weicht zwischen Signal-Datensatz und Web-Quellen ab — zusätzliche Vorsicht bis zur Datenkonsistenz-Bestätigung angezeigt.
+
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
-| Wachstum | 3/5 |
+| Qualität | 3/5 |
+| Wachstum | 4/5 |
 | Bewertung | 2/5 |
-| Katalysator | 3/5 |
-| EV-Upside | +420.4% |
+| Katalysator | 4/5 |
+| EV-Upside | +1.2% |
 
-**Verdict: HOLD (60/100)**
+**Verdict: HOLD (62/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

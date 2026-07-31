@@ -345,14 +345,6 @@
       "ev_upside_pct": -33.8
     },
     {
-      "ticker": "COHU",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-19T11:50:21.312382",
-      "asymmetric_edge": true,
-      "ev_upside_pct": 9.7
-    },
-    {
       "ticker": "QMCO",
       "verdict": "WATCH",
       "score": 52,
@@ -1806,19 +1798,6 @@
       "created_at": "2026-07-29T08:54:36.786866"
     },
     {
-      "ticker": "BAX",
-      "verdict": "WATCH",
-      "score": 51,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 16.1,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Q2-Print mit unklarem Ausgang steht morgen fr\u00fch an, die 5T-Rallye ist der Best\u00e4tigung vorausgelaufen \u2014 halbe Positionsgr\u00f6\u00dfe bis zur Zahlen-Best\u00e4tigung."
-      },
-      "created_at": "2026-07-29T08:54:36.805433"
-    },
-    {
       "ticker": "SW",
       "verdict": "WATCH",
       "score": 54,
@@ -2144,19 +2123,6 @@
       "created_at": "2026-07-30T06:53:16.140661"
     },
     {
-      "ticker": "ANIK",
-      "verdict": "WATCH",
-      "score": 52,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -94.0,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Der Q2-Beat und die Guidance-Anhebung sind real, aber die eigenen peer-verankerten Szenarien ergeben beim aktuellen Kurs von $16,89 einen negativen Erwartungswert (EV ~$10, \u221240,8%), weshalb die Bewertung keine volle Positionsgr\u00f6\u00dfe tr\u00e4gt."
-      },
-      "created_at": "2026-07-30T06:53:16.158448"
-    },
-    {
       "ticker": "SCL",
       "verdict": "HOLD",
       "score": 62,
@@ -2285,6 +2251,97 @@
         "reason": "RS-Rang 3 im S&P500 st\u00fctzt die technische These, aber D/E 17,81x aus der Spin-off-Struktur begrenzt die Fehlertoleranz bei einem Nachfrage-Digestion-Szenario, weshalb trotz intaktem AI-Storage-Katalysator keine volle Positionsgr\u00f6\u00dfe gerechtfertigt ist."
       },
       "created_at": "2026-07-30T14:03:37.374451"
+    },
+    {
+      "ticker": "CDNA",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV-Rechnung zufolge liegt kein asymmetrischer Edge mehr vor (\u22128,1%), das Forward-Multiple notiert bereits am oberen Rand der Diagnostik-Peer-Bandbreite (30,0\u201332,3x), obwohl der fundamentale Katalysator (Beat-and-Raise) intakt ist."
+      },
+      "created_at": "2026-07-31T07:31:20.756603"
+    },
+    {
+      "ticker": "ANIK",
+      "verdict": "BUY",
+      "score": 71,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 19.3,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Alle vier Turnaround-Kriterien (Krisenquartal, normalisierende Kern-Kennzahl, angehobene Guidance, EPS-Beat) sind erf\u00fcllt und die EV-Rechnung zeigt keinen \u00fcberzogenen Bewertungsaufschlag; einziger Vorbehalt ist die kurze Best\u00e4tigungshistorie von nur einem Quartal."
+      },
+      "created_at": "2026-07-31T07:33:07.906271"
+    },
+    {
+      "ticker": "BAX",
+      "verdict": "HOLD",
+      "score": 63,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 11.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die erh\u00f6hte Verschuldung (D/E ~161%, deutlich \u00fcber der Medtech-Peer-Gruppe) und die Historie wiederholter Sonderbelastungen (Q4-2025-Impairment) rechtfertigen trotz des best\u00e4tigten Beat-and-Raise nur eine reduzierte Positionsgr\u00f6\u00dfe, zumal die EV-Rechnung keinen asymmetrischen Edge mehr zeigt."
+      },
+      "created_at": "2026-07-31T07:34:36.147602"
+    },
+    {
+      "ticker": "PRCH",
+      "verdict": "BUY",
+      "score": 76,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 30.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die durch die Reciprocal-Struktur bedingte Bilanzanomalie (negatives Buchwert-Verh\u00e4ltnis, extrem hohe D/E-Kennzahl) und die fehlende Peer-Verankerung der Bewertung rechtfertigen trotz erf\u00fcllter Turnaround-Kriterien nur eine reduzierte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-31T07:36:23.210866"
+    },
+    {
+      "ticker": "MHK",
+      "verdict": "BUY",
+      "score": 75,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 15.7,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Alle vier Turnaround-Kriterien sind erf\u00fcllt, die Bilanz ist solide (D/E ~30%), die Aktie handelt unter Buchwert, und die EV-Rechnung zeigt einen moderaten positiven Edge \u2014 keiner der f\u00fcnf Risikodimensionen liefert einen Veto-w\u00fcrdigen Einwand."
+      },
+      "created_at": "2026-07-31T07:38:02.012737"
+    },
+    {
+      "ticker": "CSTL",
+      "verdict": "BUY",
+      "score": 76,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 29.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Der fundamentale Katalysator ist real (Beat, dritte Guidance-Anhebung), aber das demonstrierte, wiederkehrende CMS-Reimbursement-Risiko (2025er-SCC-Pr\u00e4zedenzfall) rechtfertigt eine reduzierte statt volle Positionsgr\u00f6\u00dfe trotz erf\u00fcllter Turnaround-Kriterien."
+      },
+      "created_at": "2026-07-31T07:39:45.020244"
+    },
+    {
+      "ticker": "COHU",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Nach dem kr\u00e4ftigen Post-Earnings-Kurssprung zeigt die EV-Rechnung keinen asymmetrischen Edge mehr (\u22128,2%), und die zugrunde liegende Kursbasis weicht zwischen Signal-Datensatz und Web-Quellen ab \u2014 zus\u00e4tzliche Vorsicht bis zur Datenkonsistenz-Best\u00e4tigung angezeigt."
+      },
+      "created_at": "2026-07-31T07:41:30.489981"
     }
   ]
 }
