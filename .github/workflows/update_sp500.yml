@@ -5,7 +5,10 @@ permissions:
 
 on:
   schedule:
-    - cron: '15 1 * * 2-6'   # Di-Sa 03:15 MESZ (01:15 UTC) – 15 Min nach NASDAQ
+    # Stündlicher Retry 03:15–11:15 MESZ (01:15–09:15 UTC) – siehe update_rs.yml
+    # für den Hintergrund. Freshness-Check unten überspringt alle Läufe nach
+    # dem ersten erfolgreichen des Tages.
+    - cron: '15 1-9 * * 2-6'
   workflow_dispatch:
 
 jobs:
@@ -22,23 +25,32 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Datenfrische prüfen
+        id: freshness
+        run: python3 check_data_freshness.py --files data/rs_sp500.json >> "$GITHUB_OUTPUT"
+
       - name: Abhängigkeiten installieren
+        if: steps.freshness.outputs.fresh != 'true'
         run: pip install yfinance pandas lxml
 
       - name: Teil 1 laden (Financials, Healthcare, Consumer, Energy, Industrials)
+        if: steps.freshness.outputs.fresh != 'true'
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_1.py
 
       - name: Teil 2 laden (Tech, Comm, Utilities, Real Estate, Materials)
+        if: steps.freshness.outputs.fresh != 'true'
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_2.py
 
       - name: Daten zusammenführen
+        if: steps.freshness.outputs.fresh != 'true'
         run: python sp500_merge.py
 
       - name: JSON nach data/ verschieben und committen
+        if: steps.freshness.outputs.fresh != 'true'
         run: |
           mv rs_sp500.json data/rs_sp500.json
           git config user.name "github-actions"

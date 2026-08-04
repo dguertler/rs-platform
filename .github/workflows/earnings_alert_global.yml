@@ -6,7 +6,13 @@ permissions:
 
 on:
   schedule:
-    - cron: '45 2 * * 2-6'   # 15 Min nach dem RS-getrackten Earnings-Alert
+    # Stündlicher Retry 04:50–12:50 MESZ (02:50–10:50 UTC), 30 Min nach dem
+    # RS-getrackten Earnings-Alert. Vor dem teuren Voll-Scan (mehrere tausend
+    # Ticker) prüft ein Live-Sample (siehe check_data_freshness.py --live),
+    # ob Yahoo den Vortags-Close überhaupt schon liefert – sonst macht der
+    # Scan nur einen leeren Lauf. Dedupe-Cache verhindert Mehrfach-Mails,
+    # sobald für das Zieldatum einmal erfolgreich geprüft wurde.
+    - cron: '50 2-10 * * 2-6'
   workflow_dispatch:
     inputs:
       test_date:
@@ -34,10 +40,39 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Zieldatum bestimmen
+        id: target
+        run: |
+          if [ -n "${{ github.event.inputs.test_date }}" ]; then
+            echo "date=${{ github.event.inputs.test_date }}" >> "$GITHUB_OUTPUT"
+          else
+            Y=$(date -u -d "yesterday" +%Y-%m-%d)
+            WD=$(date -u -d "$Y" +%u)
+            if [ "$WD" = "7" ]; then Y=$(date -u -d "$Y -2 days" +%Y-%m-%d); fi
+            if [ "$WD" = "6" ]; then Y=$(date -u -d "$Y -1 days" +%Y-%m-%d); fi
+            echo "date=$Y" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Bereits geprüft? (Dedupe-Cache)
+        id: done_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .earnings_state
+          key: earnings-alert-global-done-${{ steps.target.outputs.date }}
+
       - name: Abhängigkeiten installieren
+        if: steps.done_cache.outputs.cache-hit != 'true'
         run: pip install yfinance pandas matplotlib lxml deep-translator requests
 
+      - name: Datenfrische prüfen (Live-Sample)
+        id: freshness
+        if: steps.done_cache.outputs.cache-hit != 'true'
+        run: |
+          python3 check_data_freshness.py --target "${{ steps.target.outputs.date }}" \
+            --live "SPY,QQQ,^GDAXI" >> "$GITHUB_OUTPUT"
+
       - name: Globales Earnings-Skript ausführen
+        if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
         env:
           SMTP_HOST:        ${{ secrets.SMTP_HOST }}
           SMTP_PORT:        ${{ secrets.SMTP_PORT }}
@@ -52,6 +87,19 @@ jobs:
           RS_API_URL:       ${{ secrets.RS_API_URL }}
           ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
         run: python check_earnings_global.py
+
+      - name: Als geprüft markieren
+        if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
+        run: |
+          mkdir -p .earnings_state
+          echo "${{ steps.target.outputs.date }}" > .earnings_state/done
+
+      - name: Dedupe-Cache speichern
+        if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .earnings_state
+          key: earnings-alert-global-done-${{ steps.target.outputs.date }}
 
       - name: Fehler-Mail senden
         if: failure()

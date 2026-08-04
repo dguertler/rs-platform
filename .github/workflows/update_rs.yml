@@ -5,7 +5,12 @@ permissions:
 
 on:
   schedule:
-    - cron: '0 1 * * 2-6'    # Di-Sa 03:00 MESZ (01:00 UTC)
+    # Stündlicher Retry 03:00–11:00 MESZ (01:00–09:00 UTC), da Yahoo Finance
+    # den Vortags-Close nicht garantiert sofort nach Handelsschluss liefert
+    # (siehe PLTR-Vorfall 04.08.2026). Der Freshness-Check unten sorgt dafür,
+    # dass nach dem ersten erfolgreichen Lauf des Tages alle weiteren
+    # Versuche sofort überspringen.
+    - cron: '0 1-9 * * 2-6'
   workflow_dispatch:
 
 jobs:
@@ -22,15 +27,22 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Datenfrische prüfen
+        id: freshness
+        run: python3 check_data_freshness.py --files data/rs_full.json >> "$GITHUB_OUTPUT"
+
       - name: Abhängigkeiten installieren
+        if: steps.freshness.outputs.fresh != 'true'
         run: pip install yfinance pandas lxml
 
       - name: Skript ausführen
+        if: steps.freshness.outputs.fresh != 'true'
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python rs_colab.py
 
       - name: JSON nach data/ verschieben und committen
+        if: steps.freshness.outputs.fresh != 'true'
         run: |
           mv rs_full.json data/rs_full.json
           git config user.name "github-actions"

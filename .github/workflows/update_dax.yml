@@ -5,7 +5,11 @@ permissions:
 
 on:
   schedule:
-    - cron: '30 1 * * 2-6'   # Di-Sa 03:30 MESZ (01:30 UTC)
+    # Stündlicher Retry 03:30–11:30 MESZ (01:30–09:30 UTC) – siehe update_rs.yml
+    # für den Hintergrund (Yahoo liefert den Vortags-Close nicht garantiert
+    # sofort). Freshness-Check unten überspringt alle Läufe nach dem ersten
+    # erfolgreichen des Tages.
+    - cron: '30 1-9 * * 2-6'
   workflow_dispatch:
 
 jobs:
@@ -22,13 +26,20 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Datenfrische prüfen
+        id: freshness
+        run: python3 check_data_freshness.py --files data/rs_dax.json >> "$GITHUB_OUTPUT"
+
       - name: Abhängigkeiten installieren
+        if: steps.freshness.outputs.fresh != 'true'
         run: pip install yfinance pandas lxml
 
       - name: DAX Skript ausführen
+        if: steps.freshness.outputs.fresh != 'true'
         run: python dax_colab.py
 
       - name: JSON nach data/ verschieben und committen
+        if: steps.freshness.outputs.fresh != 'true'
         run: |
           mv rs_dax.json data/rs_dax.json
           git config user.name "github-actions"
