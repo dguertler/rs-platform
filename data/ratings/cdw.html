@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CDW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">04.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CDW</h1>
+      <h2>CDW Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Information Technology Services</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">40</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 04.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">86.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$147.81</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">12.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$22.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">21.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">170.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">44.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-16.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">155–175</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">120–140</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">65–85</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $155–$175 (30 %) · Base $120–$140 (45 %) · Bear $65–$85 (25 %) · EV ~$126,75</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>CDW ist der größte reine IT-Value-Added-Reseller (VAR) im US-Markt — kein Hardware-Hersteller, sondern Distributions-, Beschaffungs- und Beratungs-Layer zwischen OEMs (Dell, Cisco, Microsoft, HPE, Lenovo) und Firmenkunden sowie der öffentlichen Hand. RS-Score 86,79 (Rang 46 im NASDAQ-100) und ein Kurssprung von $133,82 auf $147,81 in der letzten Handelswoche (27.07.) signalisieren starkes Momentum unmittelbar vor den Q2-Zahlen am 5.8.2026 (morgen) — der reale Auslöser ist aus den Daten nicht verifizierbar. Was der Markt einpreist: Ein Forward-KGV von 12,55x auf Basis eines Konsens-Forward-EPS von $11,78 setzt eine Margenerholung von +43,7% ggü. Trailing-EPS $8,20 voraus — aggressiver, als 9,2% Umsatzwachstum und 6,6% Operating Margin hergeben. Strukturell verschiebt CDW den Mix graduell Richtung höhermargiger Software-/Cloud-Vermittlung, was die Hardware-Zyklik dämpfen sollte — der Recurring-Revenue-Anteil ist aus den Daten aber nicht ablesbar. Auf Trailing-Basis (18,03x) handelt CDW bereits deutlich über der VAR-Peer-Bandbreite (NSIT 10,43x / SCSC 12,83x forward) — der Markt zahlt heute schon für die erwartete Erholung. Kern der These: Ist diese Margenerholung plausibel genug, um die Prämie zu rechtfertigen, bevor sie morgen bestätigt oder widerlegt wird?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Reiner VAR/Distributor ohne eigene Fertigung — Umsatz aus Hardware-Weiterverkauf (Dell, Cisco, HPE, Lenovo, Microsoft) plus Beratungs-/Integrationsdienstleistungen</li>
+<li>Gross Margin nur 21,6% — operativer Hebel entsteht über Skaleneffekte in Logistik/Vertrieb, nicht über Produktmarge</li>
+<li>Kundenbasis breit über Corporate, Small Business und Public Sector diversifiziert — Einzelkundenkonzentration aus den Daten nicht quantifizierbar</li>
+<li>Umsatzwachstum +9,2% YoY bei Operating Margin 6,6% — thin-margin, volumengetriebenes Modell</li>
+<li>D/E 240,5% — hohe Verschuldung typisch für Distributoren mit working-capital-intensivem Geschäft</li>
+<li>ROE 44,2% deutlich über ROIC 15,9% — Differenz reflektiert den Leverage-Effekt, kein operativer Widerspruch</li>
+<li>Wachstumshebel: Mix-Shift Richtung Software-/Cloud-Brokerage und Managed Services — strukturell plausibel, laut Datenlage nicht quantifizierbar</li>
+<li>Vendor-Konzentrationsrisiko als Kehrseite: Abhängigkeit von Konditionen/Rabatten großer OEMs statt eigenem IP</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Insight Enterprises (NSIT, IT-VAR-Peer, Fwd-PE 10,43x), ScanSource (SCSC, IT-Distributions-Peer, Fwd-PE 12,83x), Accenture (ACN, IT-Dienstleistungs-Peer, Fwd-PE 11,30x) — Peer-Bandbreite 10,4x–12,8x. Konsens-Forward-EPS $11,78 (+43,7% ggü. Trailing $8,20) materialisiert vollständig — die Margenerholung bestätigt sich in den Q2-Zahlen morgen und den Folgequartalen, getragen von einem wiederanziehenden Enterprise-Hardware-Refresh-Zyklus (KI-getriebene Modernisierung) und fortgesetztem Mix-Shift zu Software/Cloud-Brokerage. Multiple expandiert leicht über die Peer-Bandbreite auf 14x (Qualitätsprämie, oberhalb SCSC 12,83x) = Kursziel $164,92. Bull-Kursziel: $155–$175. Eintrittswahrscheinlichkeit: 30%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: partielle statt vollständige Margenerholung. Annahme (kein Konsens, konservativer als der volle Analysten-Sprung): FY27-EPS $10,00 (+22% ggü. Trailing-EPS $8,20) × 13x (oberes Ende der Peer-Bandbreite 10,4x–12,8x, moderate Prämie für Skalenvorteil ggü. NSIT/SCSC) = Kursziel $130,00. Base-Kursziel: $120–$140. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: IT-Spending-Verlangsamung setzt sich fort — Unternehmen und Public-Sector-Budgets schieben Hardware-Refreshzyklen weiter auf, Operating Margin bleibt nahe dem Zyklustief. Kundenkonzentration: nicht quantifizierbar, breite Diversifizierung über Corporate/Public/SMB begrenzt das Risiko strukturell. Geopolitik: Importzölle auf IT-Hardware könnten Margen belasten — Makrorisiko, für CDW nicht verifizierbar. Lieferkette: kein Foundry-Risiko, da kein Hersteller — stattdessen Vendor-Konzentration bei Dell/Cisco/Microsoft/HPE. Verwässerung: SBC/Aktienanzahl aus der Datenbasis nicht verfügbar. Regulierung: Public-Sector-Geschäft unterliegt Vergaberecht-Compliance — nicht quantifizierbar. Annahme: EPS $7,50 (leicht unter Trailing) × 9x (unter NSIT-Boden 10,43x) = Kursziel $67,50. Bear-Kursziel: $65–$85. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 30% + 45% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,30 × $165 + 0,45 × $130 + 0,25 × $75 = $49,50 + $58,50 + $18,75 = **~$126,75 — implizites Downside vs. aktuellem Kurs ($147,81): −14,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 44,2% ist stark leverage-getrieben (D/E 240,5%) — ROIC 15,9% ist die unverzerrtere Kapitalrenditekennzahl, solide, aber nicht außergewöhnlich für einen VAR. Gross Margin 21,6% und Operating Margin 6,6% sind strukturtypisch dünn — der Burggraben liegt nicht in der Marge, sondern in Skalenlogistik, Vendor-Beziehungen und Cross-Sell-Kompetenz über Tausende SKUs. FCF $884,1 Mio. bei $22,9 Mrd. Revenue (3,9% FCF-Marge) ist mager, typisch für ein working-capital-intensives Modell. Net Margin 4,7% liegt konsistent unter Operating Margin — keine Anomalie. Dividendenrendite 1,7% als Kapitalrückführungs-Baustein.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing-PE 18,03x liegt deutlich über der Peer-Bandbreite (NSIT 10,43x, SCSC 12,83x, ACN 11,30x). Forward-PE 12,55x rutscht in die obere Peer-Bandbreite, aber nur unter der Annahme, dass Forward-EPS $11,78 (+43,7% ggü. Trailing) eintritt — eine hohe implizite Wachstumsrate für 9,2% Umsatzwachstum; plausibel über Margenerholung vom Zyklustief plus Buybacks, aus den Daten aber nicht abschließend verifizierbar. Was preist der Kurs ein? Bei $147,81 und den Konsens-Annahmen impliziert der Markt eine fast vollständige Rückkehr zu Vor-Abschwung-Margen binnen 12 Monaten — ambitioniert, nicht unrealistisch, aber ohne Sicherheitsmarge. Price/Book 7,40 ist für ein dünnmargiges Distributionsgeschäft hoch — reflektiert die hohe Verschuldung, nicht Asset-Qualität. Analyst-Konsensziel $152,56 (9 Analysten) — nur 3,2% über dem Kurs, als Orientierungspunkt, nicht als Ceiling. Market Cap ist im Datensatz nicht verfügbar — als Datenlücke ausgewiesen, nicht geschätzt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 86,79 (Rang 46 NASDAQ-100) zeigt kräftiges Momentum, getrieben v.a. vom jüngsten Wochensprung (+10,4% in der Woche zum 27.07., von $133,82 auf $147,81) — der Auslöser ist aus den Daten nicht verifizierbar. Hypothese, nicht datenbasiert: positionierungsgetriebenes Pre-Earnings-Momentum vor dem morgigen Report. Short-Float/Ownership-Daten liegen nicht vor — keine belastbare Aussage zu Fast-Money- vs. Long-Only-Positionierung möglich. Enttäuschungsrisiko ist hoch: ein Kurs, der binnen einer Woche +10% zulegt und direkt vor dem Quartalsbericht steht, hat wenig Puffer für einen Guidance-Fehltritt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $147,81 liegt 14,7% unter dem 52W-Hoch ($173,38) und 52,2% über dem 52W-Tief ($97,12). Windows: 5T +6,2%, 10T +14,9%, 20T +15,0%, 50T +43,4%, 6M +7,3% — die Diskrepanz zwischen 50T und 6M zeigt, dass der Großteil der Jahresperformance außerhalb der letzten sechs Monate erfolgte, gefolgt von einer jüngeren Konsolidierungs-/Ausbruchsphase. Wochenkerzen: 13.07. Close $133,24, 20.07. Close $133,82 (Konsolidierung), 27.07. Close $147,81 (Ausbruch, +10,4% w/w). Kein GWS-Signal aktiv (Weekly/Daily/4H inaktiv) — Momentum ist RS-basiert, nicht durch einen bestätigten Struktur-Breakout untermauert. Warnsignal: Rückfall unter $135 würde den jüngsten Ausbruch technisch invalidieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($190–$230):** Nachhaltiger Mix-Shift zu Software-/Cloud-Brokerage und Managed Services hebt die strukturelle Marge dauerhaft, ein KI-getriebener Hardware-Refresh-Superzyklus (Server, Edge-Devices) treibt Volumen, Marktanteilsgewinne ggü. kleineren Resellern. Normalisiertes EPS $13–15 × 15–16x.</p>
+<p>**Base ($140–$180):** Stetiges, aber moderates Umsatzwachstum (mittleres bis hohes einstelliges Prozent), graduelle Margenverbesserung ohne Sprung, Multiple stabil in der Peer-Bandbreite. Normalisiertes EPS $11–13 × 12–14x.</p>
+<p>**Bear ($70–$110):** OEMs (Dell, Microsoft, Cisco) bauen Direktvertrieb und Cloud-Marktplätze aus und umgehen den VAR-Kanal zunehmend — strukturelle Disintermediation komprimiert Marge und Multiple dauerhaft.</p>
+<p>Entscheidende Variable: Tempo und Nachhaltigkeit des Margen-Mix-Shifts weg vom reinen Hardware-Resale.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −14,2%). CDW ist weder ein klarer Momentum-Trade noch ein überzeugender Compounder auf aktuellem Niveau — ein solides, aber margenschwaches Distributionsgeschäft mit erheblicher Bewertungsprämie zur direkten VAR-Peer-Gruppe (NSIT, SCSC), gestützt auf eine noch unbestätigte Margenerholungs-These. Die Q2-Zahlen morgen (5.8.) sind der Test: Bestätigt das Management die Konsens-Erholung, ist der Kurs fair bis leicht teuer; verfehlt sie die hohen Erwartungen, fehlt der Puffer nach dem jüngsten +10%-Wochensprung. Für Long-Only-/Buy-and-Hold-Investoren: kein zwingender Einstiegspunkt vor der Zahlenvorlage. Für Trader: das RS-Momentum ist real, aber das Chance-Risiko-Profil vor einem binären Event ungünstig. Positionsgröße: falls überhaupt, deutlich reduziert, Stop unter der $135-Konsolidierungszone.</p>
+<p>**Insight Enterprises (NSIT)** handelt mit Fwd-PE 10,43x deutlich günstiger für ein vergleichbares VAR-Geschäftsmodell — das reinere Value-Instrument für die Sektor-These, ohne CDWs Prämie zu zahlen. **ScanSource (SCSC)** (Fwd-PE 12,83x) ist die näher an CDW liegende Alternative mit geringerem Erwartungsdruck vor der eigenen Berichtssaison.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Trailing-KGV (18,03x) liegt deutlich über der VAR-Peer-Bandbreite (10,4x–12,8x), die eigenen Szenarien ergeben ein negatives EV (−14,2%), und die unbestätigten Q2-Zahlen morgen (5.8.) treffen auf einen Kurs, der bereits +10,4% in der Vorwoche gelaufen ist.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
