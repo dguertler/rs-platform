@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>G24.DE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">04.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>G24.DE</h1>
+      <h2>Scout24 SE                    N</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Internet Content & Information</span></div>
+        <div class="mi">MCap: <span>$5B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">63</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 04.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">19.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$74.35</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">75.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">202.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">17.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+15.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">118–138</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">78–87</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">40–52</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Scout24 ist die dominante deutsche Immobilien-Marktplatz-Plattform (ImmoScout24) mit einem strukturell asset-leichten, margenstarken Abo-Modell: Makler, Verwalter und Entwickler zahlen wiederkehrende Mitgliedschaftsgebühren für Inseratskontingente, Marketingtools und Datenzugänge (Q1 2026: Abo-Erlöse Deutschland +14% auf €89,5 Mio., ⌀ 24.383 professionelle Kunden, +3,7%). Der Markt fokussiert sich aktuell auf den bevorstehenden Q2-Bericht (laut Marktquellen erste Augustwoche 2026) und die Frage, ob das Momentum aus Q1 (zweistelliges Wachstum, Margenexpansion) sich fortsetzt. Auffällig: Die Aktie ist in der letzten Woche von rund €67 auf €77–79 gesprungen (+11,7% im 5-Tage-Fenster) – der konkrete Auslöser dieser Bewegung ist aus den vorliegenden Daten nicht verifizierbar und sollte vor einer Positionsentscheidung geklärt werden. Gleichzeitig liegt der RS-Score bei nur 19,8 (Rang 39 von 42 im DAX-40), und das 6-Monats-Fenster ist mit -9,77% klar negativ – die Aktie war bis vor Kurzem ein relativer Nachzügler. Was der Markt womöglich übersieht: Ein strukturell stabiles, wiederkehrendes Abo-Geschäft mit hoher Bruttomarge (75,5%) trifft auf eine Bewertung nahe dem unteren Ende der internationalen Immobilienportal-Peer-Gruppe – aber die unmittelbar bevorstehenden Zahlen sind ein binäres Ereignisrisiko, das die kurzfristige technische Lage dominiert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Kernprodukt ImmoScout24: Marktführer-Plattform für Wohn- und Gewerbeimmobilien-Inserate in Deutschland</li>
+<li>Haupterlösquelle: wiederkehrende Abo-Gebühren professioneller Kunden (Makler/Verwalter/Entwickler) – Q1 2026 +14% YoY</li>
+<li>Operativer Hebel: Grenzkosten pro zusätzlichem Kunden/Inserat sind niedrig, Operating Margin 55,2% spiegelt das Plattform-Skalenmodell</li>
+<li>Zusatzerlöse: Bewertungstools, Reichweiten-Boosts für Inserate, Datenprodukte für gewerbliche Kunden</li>
+<li>Strukturelle Abhängigkeit: Umsatz korreliert mit Transaktions-/Inseratsvolumen im deutschen Immobilienmarkt – Zinsniveau und Bautätigkeit sind mittelbare Treiber</li>
+<li>Netzwerkeffekt als Burggraben: mehr Inserate ziehen mehr Suchende an, mehr Suchende rechtfertigen höhere Maklerpreise</li>
+<li>Kapitalallokation: laufendes, 2026 aufgestocktes Aktienrückkaufprogramm (Unternehmensmeldung Juli 2026) plus Dividende (Rendite 2,0%)</li>
+<li>Kein signifikantes Auslandsgeschäft/China-Exposure – reines DACH-/Deutschland-Play</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Deutscher Immobilienmarkt belebt sich (Zinssenkungszyklus, steigende Transaktionsvolumina), professionelle Kundenbasis wächst über die Q1-Rate hinaus, zusätzliche Preiserhöhungen bei Premium-Paketen gelingen ohne Kundenabwanderung. Peers: Rightmove (UK, Fwd-KGV ~15,2x), REA Group (Australien, Fwd-KGV ~27,1x) – beide Web-Recherche, nicht im internen Datensatz –, sowie CoStar Group (Fwd-KGV 16,75x, aus data/fundamentals.json). Bull-Multiple 22x (Teil-Re-Rating Richtung REA-Group-Bandbreite bei bestätigter Wachstumsbeschleunigung, aber nicht volle Angleichung). Annahme (kein Konsens): FY27-EPS ~€5,80 × 22x = €127,60. Bull-Kursziel: €118–€138. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Q1-Trend (zweistelliges Abo-Wachstum, stabile bis leicht steigende Marge) setzt sich moderat fort, ohne zusätzliche Beschleunigung. Base-Multiple 15,5x (nahe eigenem aktuellem Forward-KGV, das nahe der Peer-Untergrenze/Rightmove liegt). Annahme (kein Konsens): FY27-EPS ~€5,30 × 15,5x = €82,15. Base-Kursziel: €78–€87. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Q2-Zahlen (unmittelbar bevorstehend) enttäuschen bei Kundenwachstum oder Guidance, deutscher Immobilienmarkt kühlt durch anhaltend hohe Finanzierungskosten erneut ab, professionelle Kunden reduzieren Paketgrößen. Bear-Multiple 11x (unter Rightmove-Boden, Multiple-Kompression bei brechender Wachstumsthese). Annahme: FY27-EPS ~€4,10 × 11x = €45,10. Bear-Kursziel: €40–€52. Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Risikodimensionen: Kundenkonzentration gering (⌀ 24.383 professionelle Kunden, breite Streuung – kein Einzelkunden-Klumpenrisiko erkennbar). Geopolitik/China-Exposure: nicht relevant, reines Deutschland-Geschäft. Lieferketten/Foundry: nicht anwendbar (Software-Plattform ohne Hardware-Fertigung). Verwässerung: Aktienanzahl-Trend nicht im Datensatz; öffentlich bekanntes, 2026 aufgestocktes Rückkaufprogramm wirkt strukturell eher entgegen einer Verwässerung, SBC-Volumen selbst nicht verifizierbar. Regulierung: potenzielle Eingriffe in Mietrecht/Portal-Transparenzpflichten in Deutschland sind ein reales, aber aus den Daten nicht quantifizierbares Risiko.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × €128 + 0,45 × €82,5 + 0,35 × €46 = €25,60 + €37,13 + €16,10 = **~€78,80 — implizites Upside vs. aktuellem Kurs (€74,35): +6,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 17,66% und ROIC 15,43% sind für ein Plattformgeschäft solide und konsistent zueinander (keine Anomalie). Gross Margin 75,5% und Operating Margin 55,2% bestätigen das strukturelle Skalenmodell – im Immobilienportal-Geschäft nahe dem Zyklushoch, aber nicht ungewöhnlich für einen Marktführer mit Netzwerkeffekt. Free Cashflow ist im Datensatz nicht verfügbar – auf Basis der Margenstruktur ist von einem strukturell hohen FCF-Konversionsgrad auszugehen, dies bleibt jedoch unbelegt und wird nicht in die Bewertung eingerechnet. Debt/Equity 25,2% ist niedrig – solide Bilanz, kein Verschuldungsrisiko. Der reale Burggraben liegt im Netzwerkeffekt (größte Reichweite für Makler = höchste Zahlungsbereitschaft), nicht in Technologie an sich.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 15,52x liegt am unteren Rand der Peer-Bandbreite (Rightmove ~15,2x bis REA Group ~27,1x; CoStar 16,75x) – nahe Rightmove, deutlicher Abschlag zu REA Group. Was preist der aktuelle Kurs ein? Bei €74,35 und Trailing-EPS €3,61 (Trailing-KGV 20,6x) sowie Forward-EPS €4,79 impliziert das aktuelle Niveau ein für die kommenden Jahre fortgesetztes zweistelliges EPS-Wachstum nahe der Q1-Rate – plausibel, wenn sich der Q1-Trend bestätigt, aber ambitioniert angesichts der schwachen mittelfristigen RS-Reihe (6M -9,77%). Der Abschlag zu REA Group ist strukturell teilweise erklärbar (kleinerer, stärker gesättigter deutscher Heimmarkt vs. REAs Wachstumsmärkte), aber nicht vollständig – aus den Daten nicht abschließend auflösbar. Analyst-Konsensziel €105,28 (18 Analysten, "Buy") liegt deutlich über allen eigenen Szenario-Kurszielen außer dem Bull Case – als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; die Diskrepanz spricht dafür, dass die Coverage optimistischer kalibriert ist als die hier verankerten Peer-Multiples.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 19,8 bei Rang 39/42 im DAX-40 signalisiert trotz des jüngsten 5-Tage-Sprungs (+11,7%) eine im Index-Vergleich schwache Positionierung – die meisten DAX-Titel weisen aktuell noch niedrigere oder negative Scores auf, absolut betrachtet ist G24 damit moderat positiv, relativ aber ein Nachzügler. Short-Float-Daten sind im Datensatz nicht verfügbar. Hypothese, nicht datenbasiert: Der Kurssprung Ende Juli ohne verifizierbaren fundamentalen Auslöser könnte auf Repositionierung vor den Q2-Zahlen (Fast Money) oder eine sektorweite Bewegung zurückzuführen sein – beides bleibt unbestätigt. Enttäuschungsrisiko: Ein Guidance-Verfehlen bei den unmittelbar bevorstehenden Zahlen könnte den gesamten jüngsten Kursgewinn schnell wieder auflösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS-Breakout-Daten liegen für diesen Titel im aktuellen Datensatz nicht vor (kein aktives Signal auf Weekly/Daily/4H verzeichenbar) – keine belastbare Aussage zum Breakout-Status möglich. Kursverlauf: von €62,70 (52-Wochen-Tief) über eine mehrwöchige Schwächephase (Kurstief €66,35 am 23.7.) zu einer scharfen Erholung auf €77–79 Ende Juli, aktuell knapp unter dem 200-Tage-Durchschnitt (laut externen Quellen) und deutlich unter dem 52-Wochen-Hoch (€121,60, -39%). Das Momentum wirkt eher reaktiv/technisch als fundamental gestützt, da kein bestätigter Katalysator vorliegt. Technisches Warnsignal: ein Rückfall unter €69–70 (Ausbruchsniveau) würde die jüngste Erholung als Fehlsignal entlarven.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull: €160–€200 – Marktführerschaft verfestigt sich, Preissetzungsmacht bei professionellen Kunden steigt strukturell, Rückkaufprogramm reduziert Aktienzahl kontinuierlich, Multiple nähert sich REA-Group-Niveau. Base: €100–€130 – Abo-Wachstum verlangsamt sich auf hohem Niveau (reifer Heimmarkt), Marge bleibt stabil, moderate Multiple-Ausweitung. Bear: €55–€75 – strukturelle Konkurrenz durch neue digitale Anbieter oder anhaltende Immobilienmarkt-Schwäche erodiert Preissetzungsmacht, Multiple bleibt am Peer-Boden. Entscheidende Variable: ob Scout24 seine Preissetzungsmacht bei professionellen Kunden gegen Konkurrenzdruck und Marktzyklen verteidigen kann.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>G24 ist kein High-Conviction-Momentum-Play (RS-Rang 39/42, kein bestätigtes technisches Signal) und aktuell auch kein klarer Value-Case (EV-Szenario zeigt nur +6% Upside, kein asymmetrischer Edge) – am ehesten ein Buy-and-Hold-Compounder-Kandidat für Investoren, die das strukturelle Abo-Modell und die Netzwerkeffekt-These über einen 3–5-Jahres-Horizont spielen wollen, nicht für kurzfristige Trader. Die unmittelbar bevorstehenden Q2-Zahlen sind ein akutes Event-Risiko – eine Positionierung unmittelbar davor sollte entsprechend klein dimensioniert sein. Peers: Rightmove ist über ein ähnliches Forward-KGV (~15,2x) das reinere internationale Vergleichsinstrument für die Bewertungs-These; REA Group zeigt, wohin sich das Multiple bei bestätigtem strukturellem Wachstum entwickeln könnte, ist aber aktuell deutlich teurer bewertet.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Der jüngste Kurssprung ist ohne verifizierbaren fundamentalen Auslöser, und die unmittelbar bevorstehenden Q2-Zahlen schaffen ein binäres Event-Risiko ohne bestätigten Trend.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
