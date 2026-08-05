@@ -186,11 +186,16 @@
     },
     {
       "ticker": "MRVL",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-10T12:47:20.038860",
+      "verdict": "WATCH",
+      "score": 48,
       "asymmetric_edge": false,
-      "ev_upside_pct": 22.2
+      "ev_upside_pct": -23.6,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "EV von \u221224,8% und ein Forward-KGV rund 50% \u00fcber der Peer-Bandbreite negieren das technische Momentum-Signal trotz starkem RS-Score."
+      },
+      "created_at": "2026-08-05T10:40:29.877202"
     },
     {
       "ticker": "ARM",
@@ -274,11 +279,16 @@
     },
     {
       "ticker": "MTX.DE",
-      "verdict": "HOLD",
-      "score": 62,
-      "created_at": "2026-06-19T08:38:44.669494",
+      "verdict": "WATCH",
+      "score": 53,
       "asymmetric_edge": false,
-      "ev_upside_pct": 1.7
+      "ev_upside_pct": -3.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die H1-Margenkompression (14,8% gg\u00fc. 15,9%) ist der zentrale, ungel\u00f6ste Belastungsfaktor; solange sich die Trajektorie nicht stabilisiert, rechtfertigt weder der RS-Score (nahe Null) noch der EV (\u22126,2%) die volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-05T10:55:14.893912"
     },
     {
       "ticker": "IFX.DE",
@@ -538,11 +548,16 @@
     },
     {
       "ticker": "HPE",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:15:49.288129",
-      "ev_upside_pct": 9.7
+      "verdict": "BUY",
+      "score": 72,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 29.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Trotz rechnerisch asymmetrischem EV (+25,5%) rechtfertigt die Kombination aus schwacher ROIC (3,02%) und akquisitionsbedingter Verschuldung (D/E 84%) keine volle Positionsgr\u00f6\u00dfe, solange die Juniper-Synergien nicht sichtbar in verbesserter Kapitalrendite m\u00fcnden."
+      },
+      "created_at": "2026-08-05T10:47:39.150798"
     },
     {
       "ticker": "NTRA",
@@ -650,11 +665,16 @@
     },
     {
       "ticker": "MSFT",
-      "verdict": "HOLD",
-      "score": 67,
+      "verdict": "BUY",
+      "score": 74,
       "asymmetric_edge": false,
-      "created_at": "2026-06-30T05:16:03.605323",
-      "ev_upside_pct": 11.7
+      "ev_upside_pct": 8.0,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Starker, best\u00e4tigter Earnings-Beat mit Azure-Beschleunigung und intakter fundamentaler Qualit\u00e4t rechtfertigen die volle Positionsgr\u00f6\u00dfe, auch wenn der EV von +8,7% keinen zus\u00e4tzlichen kurzfristigen Bewertungs-Edge liefert."
+      },
+      "created_at": "2026-08-05T10:43:12.759077"
     },
     {
       "ticker": "TXN",
@@ -747,10 +767,15 @@
     {
       "ticker": "SIE.DE",
       "verdict": "WATCH",
-      "score": 45,
+      "score": 49,
       "asymmetric_edge": false,
-      "created_at": "2026-07-03T06:04:37.841457",
-      "ev_upside_pct": -7.5
+      "ev_upside_pct": -5.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Der negative Free Cashflow (-\u20ac312 Mio.) bei stagnierendem Umsatzwachstum und die N\u00e4he zum 52W-Hoch rechtfertigen angesichts des unmittelbar bevorstehenden Q3-Berichts keine volle Positionsgr\u00f6\u00dfe, trotz intakter langfristiger Digital-Industries-These."
+      },
+      "created_at": "2026-08-05T10:52:18.288603"
     },
     {
       "ticker": "SON",
@@ -795,10 +820,15 @@
     {
       "ticker": "DDOG",
       "verdict": "WATCH",
-      "score": 52,
+      "score": 53,
       "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.660852",
-      "ev_upside_pct": -30.3
+      "ev_upside_pct": -4.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV 93,19x und ein EV von \u22127,0% tragen keine volle Positionsgr\u00f6\u00dfe, obwohl RS-Score und Momentum-Struktur intakt bleiben."
+      },
+      "created_at": "2026-08-05T10:41:10.725829"
     },
     {
       "ticker": "DXCM",
@@ -902,16 +932,16 @@
     },
     {
       "ticker": "CBK.DE",
-      "verdict": "HOLD",
-      "score": 58,
+      "verdict": "WATCH",
+      "score": 53,
       "asymmetric_edge": false,
+      "ev_upside_pct": -1.8,
       "funnel_veto": {
         "decision": "REDUCE",
         "category": "Sonstiges",
-        "reason": "Die ungel\u00f6ste UniCredit-\u00dcbernahmesituation (Ergebnis wird just heute ver\u00f6ffentlicht) erzeugt beidseitiges Ereignisrisiko trotz fundamental g\u00fcnstiger Bewertung \u2013 halbe Positionsgr\u00f6\u00dfe bis zur Kl\u00e4rung."
+        "reason": "Der unmittelbar bevorstehende Q2-Bericht (morgen) und die ungel\u00f6ste UniCredit-Beteiligungssituation schaffen ein doppeltes Ereignisrisiko, das trotz solider operativer Basis keine volle Positionsgr\u00f6\u00dfe vor dem Termin rechtfertigt."
       },
-      "created_at": "2026-07-08T06:00:03.104180",
-      "ev_upside_pct": -1.8
+      "created_at": "2026-08-05T10:54:13.262577"
     },
     {
       "ticker": "VRTX",
@@ -1113,13 +1143,13 @@
       "verdict": "WATCH",
       "score": 49,
       "asymmetric_edge": false,
-      "ev_upside_pct": -2.6,
+      "ev_upside_pct": -8.9,
       "funnel_veto": {
         "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "trotz RS-Rang 10/100 liegt der Erwartungswert unter dem aktuellen Kurs, Analystenkonsens 21 % darunter."
+        "category": "Katalysator fehlt",
+        "reason": "Kein frischer fundamentaler Ausl\u00f6ser (n\u00e4chste Zahlen erst 26.08.), EV von \u221213,2% und ein Analystenkonsens unter dem aktuellen Kurs sprechen gegen die volle Positionsgr\u00f6\u00dfe trotz intaktem RS-Rang."
       },
-      "created_at": "2026-07-15T12:06:39.275014"
+      "created_at": "2026-08-05T10:42:10.848996"
     },
     {
       "ticker": "CI",
@@ -1539,16 +1569,16 @@
     },
     {
       "ticker": "AIR.DE",
-      "verdict": "AVOID",
-      "score": 36,
+      "verdict": "WATCH",
+      "score": 52,
       "asymmetric_edge": false,
-      "ev_upside_pct": -18.5,
+      "ev_upside_pct": -18.4,
       "funnel_veto": {
         "decision": "REDUCE",
         "category": "Bewertung",
-        "reason": "Forward-KGV liegt \u00fcber dem Trailing-KGV und der EV zeigt -20,5 % Downside, das aktuelle Kursniveau nimmt eine Margenerholung vorweg, die operativ noch nicht best\u00e4tigt ist."
+        "reason": "Trotz starker H1-Zahlen und au\u00dfergew\u00f6hnlicher ROE/ROIC liegt das Trailing-KGV bereits an der Spitze der Peer-Bandbreite nahe dem 52W-Hoch, und der EV von \u221216,5% rechtfertigt keine volle Positionsgr\u00f6\u00dfe."
       },
-      "created_at": "2026-07-23T07:03:16.468658"
+      "created_at": "2026-08-05T10:53:17.981039"
     },
     {
       "ticker": "CSX",
@@ -2368,6 +2398,84 @@
         "reason": "Trailing-KGV (18,03x) liegt deutlich \u00fcber der VAR-Peer-Bandbreite (10,4x\u201312,8x), die eigenen Szenarien ergeben ein negatives EV (\u221214,2%), und die unbest\u00e4tigten Q2-Zahlen morgen (5.8.) treffen auf einen Kurs, der bereits +10,4% in der Vorwoche gelaufen ist."
       },
       "created_at": "2026-08-04T06:06:40.793190"
+    },
+    {
+      "ticker": "BLZE",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz starkem operativem Turnaround-Katalysator liegt der EV-Upside nur bei +6,6% nach der bereits erfolgten Kursreaktion, unterhalb der Schwelle f\u00fcr einen echten asymmetrischen Edge."
+      },
+      "created_at": "2026-08-05T10:36:46.596030"
+    },
+    {
+      "ticker": "DORM",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die gemischte Guidance (Umsatzwachstum gesenkt trotz EPS-Anhebung) und der leicht negative EV (\u22124,5%) sprechen gegen die volle Positionsgr\u00f6\u00dfe trotz des starken Margenerholungssignals."
+      },
+      "created_at": "2026-08-05T10:39:04.775398"
+    },
+    {
+      "ticker": "SNAP",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 5.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die Nettoschuldenposition (~$1,4 Mrd.) und die \u00fcber erst ein Quartal bewiesene EBITDA-Erholung rechtfertigen trotz des starken Katalysators nur eine reduzierte Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-05T10:41:16.138050"
+    },
+    {
+      "ticker": "INSP",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 3.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Die entscheidende Wachstums-KPI (Umsatz) ist trotz der kostenseitigen Normalisierung noch nicht ins Positive gedreht, und die CMS-Entscheidung zur WISeR-Erstattung (erwartet November 2026) bleibt ein ungel\u00f6ster, bin\u00e4rer Katalysator."
+      },
+      "created_at": "2026-08-05T10:43:57.722801"
+    },
+    {
+      "ticker": "DELL",
+      "verdict": "BUY",
+      "score": 70,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz starkem fundamentalem Katalysator (AI-Server-Wachstum) ergibt der EV von \u22121,8% keinen Edge nach einer 289%-6-Monats-Rally; die volle Positionsgr\u00f6\u00dfe ist angesichts der bereits eingepreisten Erwartungen nicht gerechtfertigt."
+      },
+      "created_at": "2026-08-05T10:46:41.409730"
+    },
+    {
+      "ticker": "IT",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 24.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Der EPS-Beat vom 04.08. ist ein realer, aber gemischter Katalysator (Umsatz weiterhin YoY r\u00fcckl\u00e4ufig), der Fundamental-Snapshot bildet den Print noch nicht vollst\u00e4ndig ab, und der EV von +9,3% liegt unter der Edge-Schwelle trotz starkem RS-Momentum."
+      },
+      "created_at": "2026-08-05T10:48:41.787195"
     }
   ]
 }
