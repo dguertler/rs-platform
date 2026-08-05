@@ -1,0 +1,96 @@
+name: Earnings-Live-Alert (Vorbörse/Intraday, ≥5% Sprung + ≥10% EPS-Beat)
+
+# Sendet nur Mail/Telegram, committet nichts → Lese-Rechte genügen.
+permissions:
+  contents: read
+
+on:
+  schedule:
+    # Alle 15 Min. 08:00–20:45 UTC (10:00–22:45 MESZ), Mo–Fr — deckt US-Vorbörse
+    # bis Handelsschluss ab. Ergänzt earnings_alert.yml (Schlusskurs, Folgetag)
+    # um eine schnelle Live-Meldung direkt am Earnings-Tag: AMC-Meldungen vom
+    # Vorabend zeigen sich oft schon Stunden vor dem regulären Handelsstart
+    # deutlich in der Vorbörse (siehe PLTR 04.08.2026: +16–17% vorbörslich,
+    # lange bevor der Tagesschluss verfügbar war).
+    - cron: '*/15 8-20 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      test_tickers:
+        description: 'Test: kommagetrennte Ticker (leer = Kalender-Kandidaten)'
+        required: false
+        default: ''
+
+jobs:
+  check-earnings-premarket:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Kandidaten ermitteln (billiges Gate, keine Abhängigkeiten)
+        id: gate
+        run: |
+          python3 check_earnings_premarket_gate.py >> "$GITHUB_OUTPUT"
+          echo "date=$(date -u +%F)" >> "$GITHUB_OUTPUT"
+          if [ -n "${{ github.event.inputs.test_tickers }}" ]; then
+            {
+              echo "has_candidates=true"
+              echo "tickers=${{ github.event.inputs.test_tickers }}"
+            } >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Tages-State laden (rollierender Cache)
+        id: state_cache
+        if: steps.gate.outputs.has_candidates == 'true'
+        uses: actions/cache/restore@v4
+        with:
+          path: .earnings_premarket_state
+          key: earnings-premarket-state-${{ steps.gate.outputs.date }}-${{ github.run_id }}
+          restore-keys: |
+            earnings-premarket-state-${{ steps.gate.outputs.date }}-
+
+      - name: Abhängigkeiten installieren
+        if: steps.gate.outputs.has_candidates == 'true'
+        run: pip install yfinance pandas requests
+
+      - name: Live-Check ausführen
+        if: steps.gate.outputs.has_candidates == 'true'
+        env:
+          SMTP_HOST:        ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:        ${{ secrets.SMTP_PORT }}
+          SMTP_USER:        ${{ secrets.SMTP_USER }}
+          SMTP_PASS:        ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:   ${{ secrets.ALERT_EMAIL_TO }}
+          FRONTEND_URL:     ${{ secrets.FRONTEND_URL }}
+          TELEGRAM_TOKEN:   ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          RS_API_URL:       ${{ secrets.RS_API_URL }}
+          ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
+        run: python check_earnings_premarket.py --tickers "${{ steps.gate.outputs.tickers }}"
+
+      - name: Tages-State speichern (rollierender Cache)
+        if: steps.gate.outputs.has_candidates == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .earnings_premarket_state
+          key: earnings-premarket-state-${{ steps.gate.outputs.date }}-${{ github.run_id }}
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Earnings-Live-Alert (earnings_alert_premarket.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

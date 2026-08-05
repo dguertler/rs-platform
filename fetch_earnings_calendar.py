@@ -6,14 +6,13 @@ nur zukünftige Termine, ältere/vergangene werden nicht aufgenommen.
 
 backend/v2_analysis.py liest diese Datei optional — fehlt sie oder ist ein
 Ticker nicht enthalten, wird die Earnings-Sperre für diesen Ticker einfach
-übersprungen (fail-safe, nie fail-blocking).
+übersprungen (fail-safe, nie fail-blocking). check_earnings_premarket_gate.py
+nutzt sie zusätzlich, um Kandidaten für den Live-Vorbörsen-Check zu finden.
 
-Läuft NICHT automatisch (kein GitHub-Actions-Workflow angelegt) — bewusste
-Entscheidung, siehe PROMPT_V2_UMSETZUNG.md Punkt 3: Aktivierung eines
-Scheduled-Workflows ist eine Produktions-Infrastruktur-Änderung und obliegt
-dem Nutzer.
+Läuft automatisch wöchentlich sonntags via
+.github/workflows/fetch_earnings_calendar.yml (02:00 UTC).
 
-Nutzung: python3 fetch_earnings_calendar.py
+Nutzung (manuell): python3 fetch_earnings_calendar.py
 """
 import subprocess
 subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
@@ -21,10 +20,13 @@ subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
 import json
 import os
 import sys
+import time
 from datetime import date, datetime
 from pathlib import Path
 
 import yfinance as yf
+
+REQUEST_PAUSE = 0.5   # Sekunden zwischen Tickern — vermeidet Yahoo-Rate-Limiting
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
 OUT_PATH = DATA_DIR / "earnings_calendar.json"
@@ -50,23 +52,29 @@ def collect_universe() -> list[str]:
 
 
 def next_earnings_date(ticker: str) -> str | None:
-    """Nächster zukünftiger Earnings-Termin (YYYY-MM-DD) oder None."""
-    try:
-        tk = yf.Ticker(ticker)
+    """Nächster zukünftiger Earnings-Termin (YYYY-MM-DD) oder None.
+    Ein Retry nach kurzer Pause fängt einzelne Rate-Limit-Treffer ab, ohne
+    den ganzen Lauf zu verlangsamen (nur bei tatsächlichem Fehler)."""
+    for attempt in (1, 2):
         try:
-            df = tk.get_earnings_dates(limit=12)
-        except Exception:
-            df = tk.earnings_dates
-        if df is None or df.empty:
+            tk = yf.Ticker(ticker)
+            try:
+                df = tk.get_earnings_dates(limit=12)
+            except Exception:
+                df = tk.earnings_dates
+            if df is None or df.empty:
+                return None
+            today = date.today()
+            future = [idx.date() for idx in df.index if idx.date() >= today]
+            if not future:
+                return None
+            return min(future).isoformat()
+        except Exception as e:
+            if attempt == 1:
+                time.sleep(3)
+                continue
+            print(f"  {ticker}: Fehler — {e}")
             return None
-        today = date.today()
-        future = [idx.date() for idx in df.index if idx.date() >= today]
-        if not future:
-            return None
-        return min(future).isoformat()
-    except Exception as e:
-        print(f"  {ticker}: Fehler — {e}")
-        return None
 
 
 def main():
@@ -78,7 +86,8 @@ def main():
         if d:
             result[ticker] = d
         if (i + 1) % 50 == 0:
-            print(f"  [{i + 1}/{len(tickers)}] …")
+            print(f"  [{i + 1}/{len(tickers)}] … ({len(result)} mit Termin)")
+        time.sleep(REQUEST_PAUSE)
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(
