@@ -24,7 +24,7 @@ jobs:
           python-version: '3.11'
 
       - name: Abhängigkeiten installieren
-        run: pip install yfinance pandas
+        run: pip install yfinance pandas lxml
 
       - name: Skript ausführen
         run: python fetch_earnings_calendar.py
@@ -34,8 +34,21 @@ jobs:
           git config user.name  "github-actions"
           git config user.email "actions@github.com"
           git add data/earnings_calendar.json
-          git diff --staged --quiet || git commit -m "Earnings-Kalender aktualisiert"
-          git push origin master
+          git diff --staged --quiet && exit 0
+          git commit -m "Earnings-Kalender aktualisiert"
+          # Der Scan dauert lange genug, dass währenddessen andere Workflows
+          # auf master pushen können — vor dem Push rebasen und bei einem
+          # erneuten Konflikt (weiterer Push in der Zwischenzeit) retryen,
+          # statt die komplette Scan-Arbeit wegzuwerfen (siehe Vorfall 05.08.2026).
+          for i in 1 2 3; do
+            if git pull --rebase origin master && git push origin master; then
+              exit 0
+            fi
+            echo "Push-Versuch $i fehlgeschlagen, retry…"
+            sleep 5
+          done
+          echo "Alle Push-Versuche fehlgeschlagen." >&2
+          exit 1
 
       - name: Fehler-Mail senden
         if: failure()

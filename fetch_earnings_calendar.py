@@ -15,7 +15,7 @@ Läuft automatisch wöchentlich sonntags via
 Nutzung (manuell): python3 fetch_earnings_calendar.py
 """
 import subprocess
-subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
+subprocess.run(["pip", "install", "yfinance", "pandas", "lxml", "-q"])
 
 import json
 import os
