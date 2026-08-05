@@ -71,6 +71,14 @@ jobs:
           python3 check_data_freshness.py --target "${{ steps.target.outputs.date }}" \
             --live "SPY,QQQ,^GDAXI" >> "$GITHUB_OUTPUT"
 
+      - name: RS-Datendateien bereitstellen (Dedupe gegen check_earnings.py)
+        if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
+        run: |
+          cp data/rs_full.json     . 2>/dev/null || true
+          cp data/rs_dax.json      . 2>/dev/null || true
+          cp data/rs_sp500.json    . 2>/dev/null || true
+          cp data/rs_smallcap.json . 2>/dev/null || true
+
       - name: Globales Earnings-Skript ausführen
         if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
         env:

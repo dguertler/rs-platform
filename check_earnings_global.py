@@ -34,11 +34,26 @@ import yfinance as yf
 
 from earnings_universe import fetch_us_universe, fetch_europe_universe
 from check_earnings import (
-    MIN_PRICE_JUMP, MIN_EPS_SURPRISE,
+    MIN_PRICE_JUMP, MIN_EPS_SURPRISE, SOURCES,
     get_earnings_surprise, get_gws_price, render_chart, fetch_news,
     send_earnings_email,
 )
 import telegram_handler
+import json
+
+
+def load_rs_tracked_tickers() -> set[str]:
+    """Ticker aus den vier RS-Indizes (siehe check_earnings.SOURCES) — die
+    prüft bereits check_earnings.py separat, hier ausschließen um doppelte
+    Alerts (zwei Mails für denselben Ticker) zu vermeiden."""
+    tracked = set()
+    for json_path, _source_label in SOURCES:
+        if not os.path.exists(json_path):
+            continue
+        with open(json_path) as f:
+            data = json.load(f)
+        tracked.update(entry['ticker'] for entry in data.get('data', []))
+    return tracked
 
 
 # ── Kurs-Scan: nur letzte ~10 Tage, keine volle Historie ─────────────────────
@@ -207,6 +222,16 @@ def main():
     us_tickers = fetch_us_universe()
     eu_tickers = fetch_europe_universe()
     print(f"US: {len(us_tickers)} Ticker, EU: {len(eu_tickers)} Ticker gesamt")
+
+    rs_tracked = load_rs_tracked_tickers()
+    if rs_tracked:
+        us_before, eu_before = len(us_tickers), len(eu_tickers)
+        us_tickers = [t for t in us_tickers if t not in rs_tracked]
+        eu_tickers = [t for t in eu_tickers if t not in rs_tracked]
+        print(f"RS-getrackte Ticker ausgeschlossen (bereits von check_earnings.py "
+              f"geprüft): US {us_before}→{len(us_tickers)}, EU {eu_before}→{len(eu_tickers)}")
+    else:
+        print("RS-Indexdateien nicht gefunden — kein Ausschluss möglich")
 
     limit = os.environ.get('UNIVERSE_LIMIT', '').strip()
     if limit:
