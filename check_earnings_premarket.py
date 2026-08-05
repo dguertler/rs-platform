@@ -33,6 +33,7 @@ from check_earnings import (
     MIN_PRICE_JUMP, MIN_EPS_SURPRISE,
     get_earnings_surprise, send_earnings_email,
 )
+from check_earnings_premarket_gate import prev_trading_day
 
 STATE_PATH = Path(".earnings_premarket_state/alerted.json")
 
@@ -131,8 +132,23 @@ def main():
         if abs(jump) < MIN_PRICE_JUMP:
             continue
 
-        target_date = next_earnings.get(ticker, today_str)
-        earnings = get_earnings_surprise(ticker, target_date)
+        # Kalender-Termin zuerst, sonst beide Kandidaten-Tage durchprobieren
+        # (z.B. im manuellen Testmodus, wenn der Ticker noch nicht im
+        # Kalender steht, oder wenn der Kalender-Eintrag veraltet ist).
+        candidate_dates = []
+        cal_date = next_earnings.get(ticker)
+        if cal_date:
+            candidate_dates.append(cal_date)
+        for d in (today_str, prev_trading_day(date.today()).isoformat()):
+            if d not in candidate_dates:
+                candidate_dates.append(d)
+
+        earnings = None
+        for target_date in candidate_dates:
+            earnings = get_earnings_surprise(ticker, target_date)
+            if earnings is not None:
+                break
+
         if earnings is None:
             print(f"    → keine Earnings-Kennzahlen gefunden (noch nicht bei Yahoo?)")
             continue
