@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SNAP — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">05.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SNAP</h1>
+      <h2>Snap Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Internet Content & Information</span></div>
+        <div class="mi">MCap: <span>$10B</span></div>
+        <div class="mi">Signal: <span>Keine RS-Daten (nicht im RS-Platform-Universum getrackt)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">58</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 05.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$5.71</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">58.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+5.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">9,00–10,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">5,50–6,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">2,00–2,75</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Snap liefert im Q2 FY2026 (berichtet 03.08.) das klarste Krisen→Erholungs-Muster der vier untersuchten Ticker: Nach einem 2025 mit sich ausweitenden GAAP-Verlusten ($140 Mio. Q1'25, $263 Mio. Q2'25) und einem Kurs, der YTD vor dem Report rund 41% verloren hatte, zeigt das Quartal Umsatz +19% YoY ($1,60 Mrd., über Konsens), Adjusted EBITDA versechsfacht auf $250 Mio. (von $41 Mio.), Free Cashflow verfünffacht auf $121 Mio. und einen auf $164 Mio. verengten Nettoverlust (von $263 Mio.). Die Q3-Guidance ($1,70–1,74 Mrd. Umsatz, $300–350 Mio. EBITDA) liegt über Konsens. Der Kurs sprang 8–17% (je nach Quelle). Zwei Einschränkungen relativieren das Bild: Die EPS-Surprise liegt je nach verwendetem Konsenswert (-$0,11 vs. -$0,12) knapp unter oder über der 10%-Schwelle, und die kommerziell wertvollste Nutzerbasis — Nordamerika-DAU — ist nur bei 92 Mio. stabilisiert (von 99 Mio. zuvor gefallen), nicht wieder wachsend. Kernfrage: Ist dies eine echte Profitabilitäts-Wende oder primär eine Kostendisziplin-Story auf einem stagnierenden, nicht wachsenden Kernmarkt?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Werbeerlös-getriebenes Modell, ergänzt um Snapchat+-Abonnements als margenstärkeren Nebenstrang</li>
+<li>Globale DAU 493 Mio. (+5% YoY), aber Nordamerika (höchste ARPU-Region) nur stabilisiert bei 92 Mio. — Wachstum kommt strukturell aus internationalen, niedrigmargigeren Regionen</li>
+<li>ARPU-Hebel: Nordamerika-ARPU $10,26 (+23% YoY) zeigt starke Monetarisierung je Nutzer trotz stagnierender Nutzerzahl — Preis-/Mix-Effekt, kein Volumeneffekt</li>
+<li>Dual-Class-Aktienstruktur mit hoher Gründerkontrolle — Governance-Implikationen aus den Daten nicht vertieft beurteilbar</li>
+<li>Bewusst hochgefahrene KI/ML-Infrastrukturinvestitionen (FY26-Kosten-Guidance auf $1,65–1,70 Mrd. angehoben) als Wettbewerbsantwort auf Meta/TikTok bei Ad-Targeting</li>
+<li>Strukturell hohe Verwässerung: FY26-SBC-Guidance ~$1,05 Mrd.; ein Dilution-Management-Programm zur Stabilisierung der Aktienzahl ist erst für 2027 angekündigt</li>
+<li>Kleinster der großen werbefinanzierten Plattformen im Vergleich zu Meta, strukturell abhängig vom Ad-Marktzyklus und der Differenzierung über AR/Kamera-Funktionen</li>
+<li>Bilanz: Cash + Wertpapiere ~$2,7 Mrd. gegen Gesamtschulden ~$4,1 Mrd. — Nettoschuldenposition, ein Risikofaktor, sollte sich die EBITDA-Erholung nicht fortsetzen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Nordamerika-DAU kehrt zu Wachstum zurück, Ad-Targeting-Investitionen zahlen sich aus, EBITDA-Erholung beschleunigt weiter. Peers (EV/EBITDA, da SNAP auf KGV-Basis nicht aussagekräftig ist): Meta (META, EV/EBITDA 13,1x), Match Group (MTCH, EV/EBITDA ~9,2–10,9x), Reddit (RDDT, EV/EBITDA ~29–43x). Annahme (kein Konsens): NTM-Adj.-EBITDA ~$1,6 Mrd. × 11x (zwischen MTCH und RDDT, Wachstumsprämie für Reacceleration) = EV $17,6 Mrd. → Eigenkapitalwert (EV − Nettoschuld $1,44 Mrd.) $16,16 Mrd. ÷ 1,6875 Mrd. Aktien ≈ $9,58. Kursziel: $9,00–$10,50. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: EBITDA-Erholung hält an, aber Nordamerika-Nutzerbasis bleibt stagnierend statt wachsend. Annahme: NTM-Adj.-EBITDA ~$1,35 Mrd. × 8,5x (nahe MTCH-Bandbreite, Abschlag für noch unbewiesene mehrquartalige Kontinuität) = EV $11,48 Mrd. → Eigenkapitalwert $10,04 Mrd. ÷ 1,6875 Mrd. Aktien ≈ $5,95. Kursziel: $5,50–$6,50. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Ad-Marktzyklus dreht, TikTok/Meta-Konkurrenzdruck verschärft sich, Nordamerika-DAU fällt erneut, die KI/ML-Investitionen zahlen sich nicht in Ad-Preisen aus. Kundenkonzentration: keine Einzelkunden-Abhängigkeit, aber strukturelle Abhängigkeit vom gesamten Ad-Budget-Zyklus. Geopolitik: aus Daten nicht beurteilbar, keine spezifische China-Exposure erkennbar. Lieferketten/Foundry: nicht relevant für dieses Geschäftsmodell. Verwässerung: aktives, belegtes Risiko — SBC ~$1,05 Mrd. FY26, Dilution-Management erst ab 2027 geplant. Bilanz: Nettoschuldenposition (~$1,4 Mrd.) wird bei sinkendem EBITDA schnell zum Belastungsfaktor. Regulierung: Social-Media-Regulierungsrisiken (Jugendschutz, Datenschutz) aus den Daten nicht quantifizierbar, aber branchentypisch vorhanden. Annahme: NTM-Adj.-EBITDA fällt auf ~$900 Mio. × 6x (unter MTCH-Untergrenze, erneuerte Profitabilitätszweifel) = EV $5,4 Mrd. → Eigenkapitalwert $3,96 Mrd. ÷ 1,6875 Mrd. Aktien ≈ $2,35. Kursziel: $2,00–$2,75. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $9,75 + 0,50 × $6,00 + 0,25 × $2,375 = $2,4375 + $3,00 + $0,594 = **~$6,03 — implizites Upside vs. aktuellem Kurs ($5,71): +5,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE/ROIC: N/A — historisch GAAP-verlustreich, Kennzahlen nicht aussagekräftig. Gross Margin 58% GAAP (+7pp YoY) — solide und sich verbessernd. Net Margin weiterhin negativ (Q2-Verlust $164 Mio.), aber deutlich verengt gegenüber Vorjahr. Free Cashflow $121 Mio. im Quartal (von $24 Mio.) — echte, aber erst ein Quartal alte Verbesserung. Bilanz: Cash + Wertpapiere $2,7 Mrd. gegen Gesamtschulden $4,1 Mrd. — Nettoschuldenposition von rund $1,4 Mrd., ein Risikofaktor bei einem noch nicht GAAP-profitablen Geschäft. Burggraben: moderat — AR/Kamera-Plattformidentität und junge Nutzerbasis als Differenzierung, aber strukturell kleinere Skalierung als Meta und volle Exposure gegenüber TikTok-/Reels-Konkurrenz.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Auf KGV-Basis nicht aussagekräftig (GAAP-Verlust). Auf EV/EBITDA-Basis liegt SNAP historisch/trailing im negativen bzw. nicht aussagekräftigen Bereich, aber auf Basis des Q2/Q3-Run-Rate liegt das implizite Forward-Multiple am unteren Ende der Peer-Bandbreite (META 13,1x, MTCH 9,2–10,9x, RDDT 29–43x) — günstig, sofern sich die EBITDA-Erholung fortsetzt, aber noch nicht über mehrere Quartale bewiesen. Was preist der aktuelle Kurs ein? Bei ~$9,6 Mrd. Market Cap und ~$6,1 Mrd. TTM-Umsatz (P/S ~1,6x) bei weiterhin negativer TTM-Nettomarge preist der Markt eine fortgesetzte EBITDA-Margenexpansion von derzeit niedrigen einstelligen Prozentpunkten Richtung Mitte-/Ende-Zehnprozentbereich der Umsatzrendite ein — ambitioniert, aber angesichts der gerade gelieferten Versechsfachung nicht unrealistisch. Analyst-Konsensziel ~$7,60 (Vor-Earnings-Snapshot) liegt deutlich über dem aktuellen Kurs, ist aber vor dem Beat entstanden und wird absehbar angepasst — als Sentiment-Indikator, nicht als Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float mit ~13,2% des Floats (Datenstand teils unklar) weiterhin erhöht — signifikante bärische Positionierung trotz der operativen Verbesserung, was auf anhaltende Skepsis zur Nachhaltigkeit hindeutet. Die Aktie hatte vor dem Report YTD rund 41% verloren — ein Großteil des Long-Only-De-Riskings dürfte bereits erfolgt sein. Hypothese, nicht datenbasiert: Ein Teil der 8–17%-Kursreaktion dürfte Short-Covering widerspiegeln, gestützt durch den hohen Short-Anteil. Enttäuschungsrisiko: Jede Verlangsamung der EBITDA-/FCF-Trajektorie oder ein erneuter Nordamerika-DAU-Rückgang dürfte den Kurs angesichts der noch wachen Shortseller-Basis schnell zurückwerfen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar — SNAP wird im RS-Platform-Universum (NASDAQ-100/S&P500/DAX/Smallcap) nicht getrackt. Die Aktie befand sich vor dem Report in einem monatelangen Abwärtstrend (~-41% YTD), gefolgt von einer scharfen Gap-up-Reaktion. 50-/200-Tage-Durchschnitte aus den verfügbaren Daten nicht verlässlich ermittelbar — keine belastbare Aussage zur gleitenden-Durchschnitts-Positionierung möglich. Technisches Warnsignal: Ein Rückfall unter das Vor-Earnings-Niveau (~$4,78) würde die gesamte Beat-Reaktion negieren und die Bear-These bestätigen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($11–$16):** Ad-Erholung setzt sich fort, Nordamerika-DAU kehrt zu Wachstum zurück, EBITDA-Marge nähert sich Meta-ähnlicher Effizienz, Multiple re-ratet auf Peer-Durchschnitt.</p>
+<p>**Base ($6–$9):** EBITDA-Wachstum hält an, aber die nordamerikanische Nutzerbasis bleibt stagnierend, Multiple verbleibt am unteren Ende der Ad-Peer-Gruppe.</p>
+<p>**Bear ($2–$4):** Ad-Marktzyklus dreht, TikTok-/Meta-Konkurrenzdruck verschärft sich weiter, die EBITDA-Erholung erweist sich als temporär, die Nettoschuldenposition wird zum Belastungsfaktor.</p>
+<p>Entscheidende Variable: Ob Nordamerika-DAU — die margenstärkste Nutzerbasis — zu Wachstum zurückkehrt oder dauerhaft stagniert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Snap zeigt das klarste Krisen→Erholungs-Muster der vier hier untersuchten Ticker (2025er-Verlustausweitung → Q2'26-EBITDA-Versechsfachung), aber die EPS-Surprise-Schwelle ist je nach Konsensquelle nicht eindeutig über 10%, und die entscheidende Kern-Kennzahl (Nordamerika-DAU) ist nur stabilisiert, nicht wachsend. Der EV zeigt ein moderates, nicht eindeutig asymmetrisches Upside (+5,6%). Das ist ein spekulativer Turnaround-Trade für Investoren, die auf die Nachhaltigkeit der EBITDA-/FCF-Verbesserung wetten — kein Compounder, da Nettoverschuldung und fortlaufende Verwässerung strukturelle Gegenwinde bleiben. Explizite Risikowarnung: kleine bis moderate Positionsgröße angesichts hoher Volatilität und einer erst einquartaligen Bestätigung. Meta (META, Fwd-PE 17,3x) ist das reinere, bereits profitable Instrument für die Digital-Ad-These mit deutlich geringerem Risiko; Pinterest (PINS, Fwd-PE ~9,7–12,8x) ist die günstigere Alternative mit einer ähnlich frühen Profitabilitäts-Story.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Die Nettoschuldenposition (~$1,4 Mrd.) und die über erst ein Quartal bewiesene EBITDA-Erholung rechtfertigen trotz des starken Katalysators nur eine reduzierte Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

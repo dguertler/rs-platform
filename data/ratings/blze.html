@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BLZE — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">05.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BLZE</h1>
+      <h2>Backblaze, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Keine RS-Daten (nicht im RS-Platform-Universum getrackt)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 05.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$19.79</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">63.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">27–31</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">21–25</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$11</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Backblaze hat nach fünf Verlustquartalen in Folge (Q1'25 bis Q1'26) im Q2 FY2026 (berichtet 03.08.) den Turn geschafft: EPS $0,08 gegen $0,02 Konsens (+300% Surprise), Umsatz $42,7 Mio. (+18% YoY), und das margenstärkere B2-Cloud-Storage-Segment beschleunigte auf +34% YoY — das schnellste Wachstum seit sieben Quartalen. Die Adjusted-EBITDA-Marge stieg strukturell von 18% (Q1'25) auf 28% (Q4'25) und wird für FY26 auf 27–29% angehoben, der Gesamtumsatz-Ausblick auf $172–174 Mio. Der Markt honorierte dies mit einem Kurssprung von 13–17%. Die eigentliche Story: B2 positioniert sich als glaubwürdige, günstigere Alternative zu AWS-S3-Egress-Gebühren — ein strukturelles Argument, kein reiner Zyklus-Bounce. Was der Markt nach dem Beat bereits einpreist, aber noch nicht vollständig verifiziert ist: ob die Margenexpansion nachhaltig ist oder nur das Ergebnis eines bewusst niedrig gehaltenen eigenen Guidance-Bandes war (Beat von über $0,06 auf eine Guidance-Range von nur $0,02–0,03 für Q2/Q3). Verwässerung (Aktienzahl +30% YoY) bleibt ein ungelöster Gegenpunkt zur operativen Story.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Segmente: B2 Cloud Storage (nutzungsbasiert, S3-kompatibel, jetzt +34% YoY) und Computer Backup (reifes Abo-Geschäft, margenstark, wächst langsamer)</li>
+<li>Kernhebel: B2 positioniert sich strukturell günstiger als AWS S3 bei Egress-/Speicherkosten — Migration erfolgt primär aus Kostenlogik, nicht aus Funktionsüberlegenheit</li>
+<li>Operativer Hebel: Fixkosten-lastige Infrastruktur bedeutet überproportionalen Margendurchschlag pro inkrementellem GB — daher 18%→28% EBITDA-Margenexpansion bei nur 18% Umsatzwachstum</li>
+<li>Kundenbasis SMB-/Entwickler-lastig, geringe Einzelkonzentration, aber auch geringere Preissetzungsmacht als Hyperscaler</li>
+<li>Wachstum wird strukturell durch Aktienverwässerung mitfinanziert: Aktienzahl +30% YoY (53,4 → 61,9 Mio. in zwei Jahren), SBC-lastiges Vergütungsmodell</li>
+<li>Bilanz konservativ: kein klassisches Fremdkapital, nur Finance-Leases für Hardware (~$46,7 Mio.), Cash $49,9 Mio.</li>
+<li>Wechselkosten moderat — Storage-/Backup-Daten sind "sticky", aber Multi-Cloud-Strategien größerer Kunden erlauben graduelle Abwanderung</li>
+<li>Strukturelle Abhängigkeit von Hyperscaler-Preispolitik: aggressive Egress-Preissenkungen bei AWS/Cloudflare R2 würden Kern-Differenzierung untergraben</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>B2-Beschleunigung hält an, EBITDA-Marge normalisiert weiter Richtung 35%+. Peers (P/S, da BLZE noch nicht nachhaltig GAAP-profitabel ist): Dropbox (DBX, P/S 2,3–3,3x), NetApp (NTAP, P/S ~3,45x), Pure Storage (PSTG, P/S ~6,1x). Annahme (kein Konsens): FY27-Umsatz ~$206 Mio. (+19% ggü. FY26-Guidance-Mitte) × 8,5x P/S (leichte Ausweitung über das eigene aktuelle ~7,5x-P/S hinaus, gestützt durch anhaltend höheres Wachstum als alle genannten Peers) = Market Cap $1,75 Mrd. ÷ 61,9 Mio. Aktien ≈ $28. Kursziel: $27–$31. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Wachstum bleibt stark, aber die Post-Beat-Bewertung normalisiert leicht von der Spitzenreaktion. Annahme: FY27-Umsatz ~$206 Mio. × 7,0x P/S (nahe eigenem aktuellem Multiple, moderat unter dem Spike-Niveau) = Market Cap $1,44 Mrd. ÷ 61,9 Mio. Aktien ≈ $23. Kursziel: $21–$25. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Hyperscaler (AWS, Cloudflare R2) reagieren mit aggressiveren Egress-Preissenkungen auf Backblazes Wachstumsstory, B2-Wachstum dekomprimiert auf einstellige Raten, Multiple komprimiert auf Peer-Niveau. Kundenkonzentration: gering, kein Einzelrisiko identifizierbar — Datenbasis dafür nicht vorhanden. Geopolitik/China-Exposure: aus Daten nicht beurteilbar, Infrastruktur primär US-/EU-basiert. Lieferketten/Foundry: kein Single-Source-Risiko wie bei Hardware-Herstellern, aber Abhängigkeit von Rechenzentrums-Partnern nicht quantifizierbar. Verwässerung: SBC-getriebene Aktienzahl-Zunahme von 30% YoY ist ein aktives, belegtes Risiko — setzt sich bei anhaltend hohem SBC-Niveau fort. Regulierung: keine spezifischen Rechtsrisiken aus den Daten erkennbar. Annahme: FY27-Umsatz $185 Mio. (Wachstum verlangsamt auf ~7%) × 3,0x P/S (nahe NTAP/DBX-Untergrenze) = Market Cap $555 Mio. ÷ 61,9 Mio. Aktien ≈ $9. Kursziel: $8–$11. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $29 + 0,50 × $23 + 0,25 × $9,5 = $7,25 + $11,50 + $2,375 = **~$21,1 — implizites Upside vs. aktuellem Kurs ($19,79): +6,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE/ROIC: N/A — Unternehmen erst seit Q2'26 knapp GAAP-profitabel, historische Kennzahlen nicht aussagekräftig. Gross Margin 63% GAAP (B2-Segment intern höher). Adjusted-EBITDA-Marge 30% im Q2, FY26-Guidance 27–29% — der eigentliche Qualitätsindikator, da GAAP-Nettomarge durch SBC verzerrt ist. Adjusted Free Cashflow H1'26 $1,4 Mio. gegenüber -$6,0 Mio. H1'25 — echte, aber noch dünne Wende. Bilanz konservativ: kein Fremdkapital, $49,9 Mio. Cash, nur Finance-Leases. Burggraben: moderat — B2 ist technologisch S3-kompatibel und damit teilweise kommoditisiert; der eigentliche Vorteil liegt in Kostenstruktur und Preisexekution, nicht in proprietärer IP.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Da BLZE noch nicht nachhaltig GAAP-profitabel ist, ist ein KGV nicht aussagekräftig — Bewertung erfolgt über P/S. Aktuelles P/S (~$1,22 Mrd. Market Cap ÷ $163 Mio. TTM-Umsatz) liegt bei ~7,5x und damit über der gesamten genannten Peer-Bandbreite (DBX 2,3–3,3x, NTAP ~3,45x, PSTG ~6,1x). Das ist teilweise durch das höhere Wachstum (18–34% vs. Peers im mittleren einstelligen bis niedrigen zweistelligen Bereich) erklärbar, aber nicht vollständig — ein Teil der Prämie ist reine Post-Beat-Euphorie. Was preist der aktuelle Kurs ein? Bei $1,22 Mrd. Market Cap und $163 Mio. TTM-Umsatz (EV/Revenue ~7,5x) verlangt der Markt mehrjährig anhaltendes Umsatzwachstum von 20%+ bei gleichzeitiger Margenexpansion Richtung 30%+ EBITDA-Marge (vereinfachte Rechnung, Annahmen wie oben) — ambitioniert, aber angesichts der jüngsten Beschleunigung nicht unplausibel. Analyst-Konsensziel $22 (6 Analysten, nach dem Beat mehrfach angehoben: Citizens $16→$21, B. Riley $16→$24, Lake Street $14→$21) — als Sentiment-Indikator zu verstehen, nicht als Kursziel-Ceiling, da die Anhebungen erst reaktiv auf den Beat erfolgten.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float niedrig (~2%, Days-to-Cover ~1,0) — kein Short-Squeeze-Setup, sondern eine klassische Wachstums-Neubewertung nach dem Beat. Auffällig hohes Optionsvolumen am 04.08. registriert (Hypothese, nicht datenbasiert: spekulatives Fast-Money-Interesse nach dem Gap-up). Institutionelle Positionierungsdaten liegen nicht vor — keine belastbare Aussage zu Long-Only- vs. Fast-Money-Anteil möglich. Enttäuschungsrisiko: Nächstes Quartal muss die B2-Beschleunigung (+34% YoY) mindestens halten, sonst droht eine scharfe Korrektur der gerade erst gewonnenen Bewertungsprämie.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar — BLZE wird im RS-Platform-Universum (NASDAQ-100/S&P500/DAX/Smallcap) nicht getrackt. Kurs notiert klar über dem 50-Tage- (~$11,81) und 200-Tage-Durchschnitt (~$7,13–7,31) — intakter, fundamental gestützter Aufwärtstrend, kein rein technisches Muster. Kurs nahe dem 52-Wochen-Hoch ($23,98, erreicht 04.08. intraday), aktuell $19,79 nach leichtem Pullback von der ersten Gap-up-Spitze. Technisches Warnsignal: Rückfall unter die Vorwochen-Gap-Zone (~$15–16) würde das Beat-Momentum technisch in Frage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($35–$50):** B2 etabliert sich als Standard-Alternative zu S3-Egress-Gebühren, Umsatzwachstum bleibt nachhaltig bei 25%+, EBITDA-Marge erreicht 35–40%, Multiple hält Wachstumsprämie (6–8x P/S) bei dann $400 Mio.+ Umsatz.</p>
+<p>**Base ($20–$30):** Wachstum normalisiert auf 12–15%, Marge stabilisiert bei ~30%, Multiple komprimiert leicht auf 4–5x P/S bei dann ~$280 Mio. Umsatz.</p>
+<p>**Bear ($8–$15):** Hyperscaler-Preisdruck (AWS/Cloudflare R2) erodiert die Kostendifferenzierung, Wachstum fällt unter 10%, Multiple komprimiert auf 2–3x P/S Peer-Niveau.</p>
+<p>Entscheidende Variable: Tempo und Nachhaltigkeit der B2-Segment-Beschleunigung gegen eine mögliche Hyperscaler-Preisreaktion.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>BLZE ist nach diesem Quartal ein technisch bestätigter Turnaround-Kandidat — echtes Verlust→Gewinn-Muster, sichtbare Kern-Kennzahl-Normalisierung (Adj.-EBITDA-Marge 18%→28%) und angehobene Guidance. Aber: Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV +6,6%) — die Bewertung hat den Beat bereits weitgehend eingepreist. Das ist ein zyklischer Momentum-/Turnaround-Trade für Investoren, die Volatilität und laufende Verwässerung akzeptieren, kein Buy-and-Hold-Compounder auf aktuellem Niveau. Explizite Risikowarnung: Small-Cap-Liquidität und Beta 1,28 rechtfertigen eine kleine Positionsgröße (max. 1–3% eines diversifizierten Portfolios). Dropbox (DBX, Fwd-P/E ~10,9x) ist die günstigere, aber langsamer wachsende Alternative im selben Themenfeld; NetApp (NTAP) bietet defensivere, dividendenzahlende Storage-Exposure ohne BLZE's Verwässerungs- und Ausführungsrisiko.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz starkem operativem Turnaround-Katalysator liegt der EV-Upside nur bei +6,6% nach der bereits erfolgten Kursreaktion, unterhalb der Schwelle für einen echten asymmetrischen Edge.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
