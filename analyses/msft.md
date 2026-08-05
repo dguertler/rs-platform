@@ -1,102 +1,99 @@
 # MSFT — KI-Aktienbewertung
 
-**Microsoft Corporation** · Technology · 30.06.2026 · Signal: Kein GWS-Signal
+**Microsoft Corporation** · Technology · 05.08.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 372.97 |
-| Market Cap | $2770.58 Mrd. |
-| Forward PE | 19.26 |
-| Revenue (TTM) | $318.27 Mrd. |
-| Gross Margin | 68.3% |
+| Kurs | 464.72 |
+| Market Cap | $3450.80 Mrd. |
+| Forward PE | 19.96 |
+| Revenue (TTM) | $331.84 Mrd. |
+| Gross Margin | 67.9% |
 | ROE | 34.0% |
-| RS-Score | -88.7 |
+| RS-Score | 86.7 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $580–$650 (20%) · Base $380–$450 (50%) · Bear $230–$300 (30%) · EV ~$410
+**Szenarien (12–18 Monate):** Bull $650–$750 (25%) · Base $480–$550 (50%) · Bear $260–$320 (25%) · EV ~$505
 
 ## 1. INVESTMENT-CASE
 
-MSFT ist von $555,45 (52W-Hoch) auf $372,97 gefallen (-32,8%), trotz weiterhin starker Fundamentaldaten (Revenue-Wachstum 18,3% YoY, ROE 34,0%). RS-Score -88,73 (Rang 77/100 im NASDAQ-100) zeigt eine tiefe Kapitalrotation weg vom Namen. Der eigentliche Treiber der Korrektur: Free Cashflow ist mit $37,01 Mrd. bei $318,27 Mrd. Revenue (11,6% FCF-Marge) deutlich unter dem historischen Microsoft-Niveau (üblicherweise 25-35%) — die GPU-/Datacenter-Capex-Welle für Azure-AI und die OpenAI-Partnerschaft frisst aktuell mehr Cash als das Umsatzwachstum kompensiert. Der Markt straft das ab, obwohl die operative Substanz (Operating Margin 46,3%) intakt bleibt. Die zentrale Frage: zyklische Investitionsphase eines intakten Compounders oder beginnende strukturelle Margenerosion durch ein Capex-Wettrüsten ohne proportionalen Ertrag?
+MSFT hat am 29.07.2026 Q4-FY2026-Zahlen mit klarem Beat geliefert: EPS $4,74 vs. $4,24 erwartet (+11,8%), Umsatz $90,01 Mrd. vs. $87,63 Mrd. erwartet, Azure +43% und erstmals über $100 Mrd. Lauf-Rate, Intelligent Cloud +32% auf $39,31 Mrd. Der Kurs sprang nachbörslich rund 8%. Die eigentliche Story ist aber nicht der Beat selbst, sondern das Spannungsfeld, das die FY2027-Capex-Guidance von $255–260 Mrd. (+35% ggü. FY2026) aufmacht: Der Markt feiert das Azure-Wachstum, muss aber gleichzeitig eine massive Investitionswelle verdauen, die den Free Cashflow bereits jetzt stark komprimiert (FCF-Marge nur 4,9% trotz 45,1% Operating Margin). Genau diese Kluft zwischen operativer Profitabilität und tatsächlicher Cash-Generierung übersieht der Markt in der Post-Earnings-Euphorie teilweise — die Bewertungsfrage lautet nicht mehr "wächst Azure schnell genug", sondern "wandelt sich der Capex-Berg rechtzeitig in freien Cashflow um". RS-Score 86,68 bei Rang 81 von 100 im NASDAQ-100 (6M nur +2,69%) zeigt zudem, dass die aktuelle Stärke (5T +16,8%, 20T +26,8%) eine frische Post-Earnings-Aufholbewegung ist, kein bestätigter langfristiger Trend.
 
 ## 2. GESCHÄFTSMODELL
 
-- Drei-Säulen-Modell: Productivity (Office/LinkedIn), Intelligent Cloud (Azure), More Personal Computing — Cloud treibt operative Hebelwirkung
-- Azure-Wachstum bleibt Kern-Werttreiber, aber zunehmend kapitalintensiv durch GPU-Cluster für OpenAI-Partnerschaft und Copilot-Infrastruktur
-- M365 Copilot als Aufpreis-Modell auf bestehende Office-Basis — Adoptionsgeschwindigkeit aus Daten nicht ableitbar
-- Strukturelle Abhängigkeit von OpenAI-Partnerschaft als zentraler AI-Differenzierungsfaktor — Konzentrationsrisiko auf einen externen Partner
-- Operating Margin 46,3% zeigt weiterhin hohe Profitabilität trotz Capex-Welle
-- FCF-Marge von 11,6% (TTM) deutlich unter historischem Niveau — GPU-Capex-Zyklus drückt auf Cash-Conversion
-- Dividend-Kennzahl im Datensatz (98,0%) wirkt wie Payout-Ratio statt Dividendenrendite — nicht eindeutig interpretierbar, nicht in Bewertung einbezogen
-- D/E 30,3% weiterhin moderat — Bilanzstärke bleibt strukturell intakt trotz Capex-Welle
+- Drei-Säulen-Modell: Productivity &amp; Business Processes (M365/Copilot), Intelligent Cloud (Azure), More Personal Computing (Windows/Gaming)
+- Azure als Hauptwachstumstreiber (+43% im jüngsten Quartal, >$100 Mrd. Lauf-Rate) — zentraler Kapitalallokationsschwerpunkt
+- Copilot/AI-Integration in M365 als Cross-Sell-/Upsell-Hebel auf installierter Basis mit hohen Switching Costs
+- Operativer Hebel strukturell stark (Op-Margin 45,1%), aber FCF-Marge nur 4,9% — massive Capex-Absorption (FY27-Guidance $255–260 Mrd.) drückt die tatsächliche Cash-Konversion aktuell auf einen Zyklustiefpunkt
+- Dividendenrendite 0,78% bei ROE 34,0%/ROIC 28,5% — Kapitalallokation mischt Wachstumsinvestition, Dividende und historisch Buybacks
+- Bruttomarge 67,9% reflektiert Cloud-Infrastrukturkosten-Skalierung
+- Strukturelle Kundenbindung über Enterprise-Lizenzverträge (M365 E5, Azure-Commitments) mit Multi-Year-Charakter
+- GPU-/Beschleuniger-Lieferkette (v.a. Nvidia) als externe Abhängigkeit für das gesamte Azure-AI-Wachstum
 
 ## 3. BULL CASE
 
-Azure-Wachstum beschleunigt durch Copilot-Monetarisierung und KI-Workload-Nachfrage; GPU-Capex-Zyklus erreicht 2027 seinen Höhepunkt, FCF-Marge normalisiert sich Richtung 20%+, Multiple re-ratet zurück Richtung historischer Prämie. Annahme (kein Konsens): FY27-EPS ~$22,50 (+16% ggü. Forward-EPS $19,37) × 27x Forward = $607,50. Bull-Kursziel: $580–$650 (Midpoint $615). Eintrittswahrscheinlichkeit: 20%.
+Azure-Wachstum bleibt über 35–40%, Copilot-Monetarisierung beschleunigt sichtbar, der Capex-Zyklus beginnt bereits in FY2027 in höhere FCF-Konversion umzuschlagen. Peers: Alphabet (GOOGL, Fwd-PE 24,17x), Amazon (AMZN, 26,45x), Apple (AAPL, 32,48x), Oracle (ORCL, 11,93x) — Peer-Bandbreite 11,9x–32,5x. Annahme (kein Konsens): EPS ~$26,00 (über Konsens $23,28) × 27x (nahe AAPL-Spitze, Prämie für Cloud-Marktführerschaft) = $702. Bull-Kursziel: $650–$750. Wahrscheinlichkeit: 25%.
+Strukturelle Margennachhaltigkeit: (1) proprietäres Copilot-/Azure-AI-Stack-IP als Differenzierung; (2) Mixverschiebung zu höhermargigen AI-Diensten innerhalb Azure; (3) gegenüber GOOGL/AMZN führende Enterprise-Softwareposition; (4) M365-Vertragsstrukturen erzeugen hohe Wechselkosten; (5) Skaleneffekte im Rechenzentrumsnetz plausibel, sobald Capex-Wachstum sich verlangsamt.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Azure-Wachstum stabilisiert sich im niedrigen-/mittleren-Zwanzigerprozentbereich, Capex bleibt erhöht aber kontrolliert, Multiple normalisiert auf historischen Mittelwert. Annahme (kein Konsens): FY27-EPS ~$20,50 × 20x = $410. Base-Kursziel: $380–$450 (Midpoint $415). Eintrittswahrscheinlichkeit: 50%.
+Azure wächst weiterhin stark (~30–35%), Capex bleibt hoch, FCF-Konversion verbessert sich nur graduell. Eigenes Forward-KGV (19,96x) liegt in der unteren Hälfte der Peer-Bandbreite (11,9x–32,5x) — moderate Prämie ggü. dem eigenen Multiple ist angesichts der Azure-Beschleunigung gerechtfertigt. Annahme: EPS ~$23,28 (Konsens) × 22x (leichte Prämie über dem aktuellen Forward-Multiple) = $512. Base-Kursziel: $480–$550. Wahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Azure-Wachstum verlangsamt sich weiter, OpenAI-Partnerschaft liefert nicht die erwartete Monetarisierung, GPU-Capex bleibt strukturell hoch ohne proportionalen Revenue-Beitrag. Kundenkonzentration: aus Daten nicht quantifizierbar — auf Datenbasis nicht beurteilbar. Geopolitik/Exportkontrollen: Cloud-Datacenter-Bau in mehreren Jurisdiktionen, Exportkontrollen bei High-End-GPUs ein indirektes Risiko. Lieferketten/Foundry: strukturelle Abhängigkeit von NVIDIA/AMD-GPU-Lieferketten — Single-Source-ähnliches Risiko bei Advanced-Node-Kapazität. Verwässerung: Shares Outstanding nicht im Datensatz — SBC-Trend nicht beurteilbar. Regulierung: kartellrechtliche Prüfungen zu Cloud-Bundling und KI-Marktmacht in EU/USA als laufendes Risiko. EPS fällt auf ~$17,50, Multiple komprimiert auf 15x. Bear-Kursziel: $230–$300 (Midpoint $265). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Der AI-Capex-Superzyklus ($255–260 Mrd. FY27) übertrifft die tatsächliche Monetarisierung, FCF bleibt strukturell komprimiert (bereits jetzt nur 4,9% Marge), Azure-Wachstum verlangsamt sich von der aktuellen Basis (schwierigere Vergleichswerte), Markt re-ratet das Multiple in Richtung ORCL-Niveau. Kundenkonzentration: Enterprise-/Cloud-Kundenbasis strukturell breit diversifiziert, konkrete Einzelkundenanteile nicht im Datensatz — quantitativ nicht beurteilbar. Geopolitik/Exportkontrollen: China-Cloud-Exposure historisch limitiert, spezifische aktuelle Zahlen nicht im Datensatz — auf Datenbasis nicht beurteilbar. Lieferkette/Foundry: strukturelle Abhängigkeit von GPU-/Beschleuniger-Lieferanten (v.a. Nvidia) für den gesamten Azure-AI-Ausbau — reales Konzentrationsrisiko auf der Beschaffungsseite. Verwässerung: Aktienanzahl-/SBC-Trend nicht im Datensatz, historisch durch Buybacks tendenziell ausgeglichen — nicht quantifizierbar. Regulierung: generisches Big-Tech-/KI-Kartellrisiko, spezifische Verfahren nicht im Datensatz — auf Datenbasis nicht beurteilbar. Annahme: EPS ~$19,00 × 15x (nahe ORCL-Niveau, Multiple-Kompression bei brechender Capex-ROI-These) = $285. Bear-Kursziel: $260–$320. Wahrscheinlichkeit: 25%.
 
-**Summe: 20% + 50% + 30% = 100%**
+**Summe: 25% + 50% + 25% = 100%**
 
-**Erwartungswert:** EV = 0,20×$615 + 0,50×$415 + 0,30×$265 = $123 + $207,5 + $79,5 = **~$410 — implizites Upside vs. aktuellem Kurs ($372,97): +9,9%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25×$700 + 0,50×$515 + 0,25×$290 = $175 + $257,50 + $72,50 = **~$505 — implizites Upside vs. aktuellem Kurs ($464,72): +8,7%.** Der EV liegt unter der 10%-Schwelle — die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge; ein Großteil des Beat-Optimismus ist nach der Post-Earnings-Rally bereits eingepreist.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 34,0% — stark trotz Capex-Belastung. Gross Margin 68,3%, Operating Margin 46,3% — beide weiterhin Best-in-Class für Big-Tech. Net Margin 39,3% zeigt strukturelle Profitabilität. FCF $37,01 Mrd. bei $318,27 Mrd. Revenue (11,6% FCF-Marge) — deutlich unter historischem Microsoft-Niveau, reflektiert GPU/Datacenter-Capex-Zyklus, nicht operative Schwäche. D/E 30,3% — moderate Verschuldung, Bilanz bleibt Investment-Grade-Qualität. Burggraben: Enterprise-Software-Lock-in (Office/Windows/Azure-Ökosystem) bleibt strukturell intakt, aber Capex-Intensität verändert das Cash-Profil temporär.
+ROE 34,0% und ROIC 28,5% sind exzellent und bestätigen eine echte Qualitätsbilanz. Gross Margin 67,9% und Operating Margin 45,1% liegen auf Best-in-Class-Niveau für ein Unternehmen dieser Größe. Die FCF-Marge von nur 4,9% ist im Zykluskontext zu bewerten: Sie reflektiert keinen strukturellen Qualitätsverlust, sondern den Top-of-Capex-Zyklus der FY27-Guidance — historisch lag MSFTs FCF-Konversion deutlich höher; die aktuelle Kompression ist eine bewusste Investitionsentscheidung, keine operative Schwäche. Der Burggraben (M365-/Azure-Ökosystem-Lock-in) ist strukturell real und einer der stärksten im gesamten Tech-Sektor.
 
 ## 7. BEWERTUNG
 
-Forward PE 19,26x — deutlich unter historischem 5-Jahres-Mittel (~28-30x), reflektiert die -33%-Korrektur seit dem 52W-Hoch. P/B 6,69 ebenfalls komprimiert. Rückrechnung (Annahme): Bei $372,97 und Forward-EPS $19,37 (19,26x) preist der Markt im Wesentlichen ein Status-quo-Szenario ohne Multiple-Expansion ein — plausibel angesichts der Capex-Unsicherheit, aber nicht zwingend gerechtfertigt für ein Unternehmen mit 34% ROE und 46% Operating Margin. Analyst-Konsensziel $561,11 USD (55 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; die Korrektur könnte von der Coverage noch nicht vollständig nachvollzogen sein.
+Forward-PE 19,96x liegt am unteren Ende der Peer-Bandbreite (ORCL 11,93x–AAPL 32,48x), unter GOOGL (24,17x), AMZN (26,45x) und AAPL (32,48x) — ein Abschlag ggü. den meisten Mega-Cap-Peers trotz überlegener Margen und Cloud-Wachstumsrate, aus den Daten nicht vollständig erklärbar, plausibel aber teilweise durch die Marktsorge um die Capex-/FCF-Kompression begründbar. Rückrechnung: Bei $464,72 und Konsens-EPS $23,28 (19,96x) impliziert das aktuelle Niveau moderates, aber nicht aggressives weiteres EPS-Wachstum (~10–15% p.a.) bei stabilem Multiple — angesichts Azure +43% plausibel, vorausgesetzt die Capex-Welle konvertiert wie geplant in FCF-Wachstum ab FY2027/28. Analyst-Konsensziel $563,05 (54 Analysten, strong buy) liegt deutlich über dem aktuellen Kurs und dem eigenen EV (~$505) — Sentiment-Indikator mit 6–12 Monaten Verzögerung, kein Ceiling, aber auch keine unmittelbare Bestätigung des eigenen konservativeren EV.
 
-## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
+## 8. MARKTPSYCHOLOGIE &amp; POSITIONIERUNG
 
-RS-Score -88,73, Rang 77 von 100 im NASDAQ-100 — tiefe relative Schwäche trotz fundamentaler Stärke, klassisches Zeichen einer Kapitalrotation weg von Mega-Cap-AI-Capex-Storys. Short Float nicht im Datensatz — institutionelle Positionierung nicht quantifizierbar. Hypothese, nicht datenbasiert: Long-Only-Investoren könnten die Schwäche als Einstiegsgelegenheit nutzen, Fast Money hat sich bereits positioniert verlassen. Für neue Käufer müsste eine Stabilisierung der Azure-Wachstumsraten oder ein erkennbarer FCF-Margen-Boden als Auslöser dienen. Enttäuschungsrisiko: ein weiterer schwacher Quartalsausblick zu Capex/FCF könnte die Aktie weiter unter Druck setzen.
+RS-Score 86,68 bei Rang 81 von rund 100 NASDAQ-100-Werten ist für eine Mega-Cap nach einem Blowout-Quartal überraschend schwach — die 6M-Performance (+2,69%) zeigt, dass MSFT vor dem Earnings-Print den Großteil des Jahres underperformt hat; die aktuelle Stärke (5T +16,8%, 10T +23,6%, 20T +26,8%) ist eine frische Aufholbewegung, kein bestätigter längerer Trend. Short-Float-/Ownership-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Der Post-Earnings-Pop dürfte zu einem erheblichen Teil Institutionelle/Long-Only-Nachkäufe reflektieren, die auf den bestätigten Azure-Trend reagieren, nicht primär Fast-Money. Enttäuschungsrisiko: Sollte die FQ1-Guidance ($89,85–90,95 Mrd.) oder die nächste Capex-Kommunikation Zweifel an der FCF-Erholung säen, ist der Rang-81-Kontext ein Warnsignal für nachlassende relative Stärke.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score -88,73 (Rang 77/100). 5T: -2,74%, 10T: -7,66%, 20T: -13,17%, 50T: -24,45%, 6M: -40,71% — durchgängig negative relative Performance über alle Zeitfenster. Kein GWS-Signal aktiv (Weekly/Daily/4H alle inaktiv) — keine technische Trendwende-Bestätigung erkennbar. Momentum ist klar fundamental getrieben (Capex-/FCF-Sorgen), nicht rein technisch. Technisches Warnsignal: weiterer Bruch unter das 52-Wochen-Tief $349,20 würde die Abwärtsstruktur bestätigen.
+Windows zeigen eine klare Post-Earnings-Beschleunigung (5T +16,8%, 10T +23,6%, 20T +26,8%) nach einer schwachen 6-Monats-Basis (+2,69%) — granulare SMA-/RSI-Daten fehlen im Datensatz. Kurs bei $464,72 rund 16% unter dem 52W-Hoch ($553,72) und 33% über dem 52W-Tief ($349,20) — noch deutlicher Abstand zum Allzeithoch trotz der Rally. GWS-Ampel durchgehend inaktiv — kein technisch bestätigtes Signal, das Momentum ist fundamental (Earnings) ausgelöst, nicht rein technisch. Warnsignal: Ein Rückfall unter das Vor-Earnings-Niveau (~$400–410) würde die Post-Earnings-Bewegung als reine Eintagesreaktion entlarven.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($700–$900):** AI-Infrastruktur-Investitionen zahlen sich aus, Copilot wird zum Multi-Milliarden-Dollar-Segment, Azure behält Marktanteilsgewinne gegenüber AWS/GCP.
-
-**Base ($450–$650):** Moderates, stetiges Wachstum, Capex normalisiert sich graduell, Multiple kehrt Richtung historischem Mittel zurück.
-
-**Bear ($200–$280):** AI-Capex-Überinvestition ohne ausreichende Monetarisierung, strukturelle Margenerosion durch Abschreibungen, Cloud-Preiskrieg mit AWS/GCP.
-
-Entscheidende Variable: ob sich die GPU-/Datacenter-Investitionen in proportionales Azure-/Copilot-Umsatzwachstum übersetzen oder ob die FCF-Marge dauerhaft komprimiert bleibt.
+**Bull ($750–$1.000):** Azure/Copilot-Monetarisierung skaliert vollständig, der Capex-Berg konvertiert in dauerhaftes FCF-Wachstum; EPS $35–40 × 25–28x.
+**Base ($520–$750):** Azure wächst stetig (~25–30%), Capex normalisiert sich graduell ab FY2028; EPS $28–32 × 20–24x.
+**Bear ($280–$450):** AI-Capex generiert über Jahre keine proportionale Rendite, FCF bleibt strukturell komprimiert, Multiple de-ratet dauerhaft; EPS $20–24 × 14–18x.
+Entscheidende Variable: Tempo der FCF-Konversion aus dem laufenden AI-Capex-Superzyklus.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV-Upside +9,9%, knapp unter der 10%-Schwelle). MSFT bleibt fundamental ein Buy-and-Hold-Compounder mit intaktem Burggraben (ROE 34%, Operating Margin 46%), aber die laufende Capex-/FCF-Belastung sowie die anhaltende relative Schwäche (RS-Rang 77/100) sprechen gegen ein High-Conviction-Timing auf aktuellem Niveau. Für Buy-and-Hold-Investoren mit langem Horizont ist die Korrektur eine mögliche Nachkaufgelegenheit, sofern man die FCF-Kompression als zyklisch statt strukturell einordnet — diese Einschätzung ist auf Basis der verfügbaren Daten nicht abschließend zu verifizieren. Positionsgröße: Kernposition vertretbar, aber kein aggressiver Nachkauf ohne Stabilisierungssignal.
-
-**GOOGL** (Alphabet) bietet vergleichbare Cloud-/AI-Exposure mit niedrigerem Forward-Multiple. **AMZN** als reinste Cloud-Infrastruktur-Wette über AWS, aber geringere Margenqualität als MSFT. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+MSFT bleibt ein Buy-and-Hold-Compounder mit intakten strukturellen Wettbewerbsvorteilen (M365-/Azure-Lock-in, ROE 34%), aber der jüngste Beat und die Post-Earnings-Rally haben einen Großteil des kurzfristigen Edge bereits eingepreist — der EV von +8,7% liegt unter der 10%-Schwelle, die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, ein High-Conviction-Framing ist entsprechend nicht gerechtfertigt trotz starker fundamentaler Zahlen. Geeignet als Kernposition für Long-Only-/Buy-and-Hold-Investoren mit langem Horizont, die die aktuelle Capex-/FCF-Kompression als temporären Zyklusfaktor akzeptieren; für taktische Trader nach dem 8%-Pop wenig attraktives Chance-Risiko-Verhältnis auf Sicht 12 Monate. Oracle (ORCL, 11,93x) ist deutlich günstiger, aber mit geringerem Cloud-Wachstumsprofil; Alphabet (GOOGL, 24,17x) bietet vergleichbare Cloud-/AI-Exposure zu ähnlicher, leicht höherer Bewertung.
 
 - Qualität: 5/5
-- Wachstum: 3/5
+- Wachstum: 4/5
 - Bewertung: 3/5
-- Katalysator: 2/5
+- Katalysator: 4/5
 
+**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Starker, bestätigter Earnings-Beat mit Azure-Beschleunigung und intakter fundamentaler Qualität rechtfertigen die volle Positionsgröße, auch wenn der EV von +8,7% keinen zusätzlichen kurzfristigen Bewertungs-Edge liefert.
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 5/5 |
-| Wachstum | 3/5 |
+| Wachstum | 4/5 |
 | Bewertung | 3/5 |
-| Katalysator | 2/5 |
-| EV-Upside | +15.7% |
+| Katalysator | 4/5 |
+| EV-Upside | +8.0% |
 
-**Verdict: HOLD (67/100)**
+**Verdict: BUY (74/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>IT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">05.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>IT</h1>
+      <h2>Gartner, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Information Technology Services</span></div>
+        <div class="mi">MCap: <span>$10B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >25%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">68</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 05.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">95.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$151.02</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">69.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">94.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+24.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">270–340</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">155–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $270–$340 (20%) · Base $155–$185 (40%) · Bear $75–$105 (40%) · EV ~$165</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 03.08.2026 liegt vor der Q2-2026-Veröffentlichung vom 04.08.2026 (EPS $4,14 vs. $3,55 erwartet, +16,6% Überraschung, eine Quelle nennt "adjusted EPS +24% YoY"; Umsatz $1,68 Mrd. — YoY rückläufig). Cache-Kennzahlen (EPS, Margen) gelten für dieses Quartal als noch nicht aktualisiert; die frischen Eckdaten fließen qualitativ ein, Bewertungsaussagen mit reduzierter Konfidenz.</p>
+<p>Gartners eigentliche Story ist ein Geschäft mit rückläufigem Umsatz (TTM-Wachstum -1,5%, Q2-Umsatz erneut YoY gesunken), das trotzdem deutlich über den Erwartungen verdient — klassisches Muster von Kostendisziplin/Rückkäufen statt echter operativer Beschleunigung. Der Markt hat die Aktie im Vorfeld drastisch abgestraft (52W-Hoch $337,29 vs. aktuell $151,02, ein Rückgang von 55%) — die Kernsorge ist strukturell: Können KI-native Recherche-/Synthese-Tools Gartners kostenpflichtiges Analysten-Abo-Modell perspektivisch disintermediieren? Der EPS-Beat vom 04.08. beantwortet diese Frage nicht, er zeigt nur Kostendisziplin. Auffällig: ROE (94,9%) und KBV (161,7x) sind durch eine extrem kleine/negative Eigenkapitalbasis (vermutlich aggressive historische Aktienrückkäufe) verzerrte Kennzahlen und werden hier nicht zur Bewertung herangezogen — ROIC (42,3%) zeigt: das Kern-Subscription-Geschäft bleibt trotz Umsatzschwäche kapitaleffizient und cash-generativ.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Abo-basiertes IT-Research/Advisory (Gartner for IT, Consulting, Conferences) mit hoher Bruttomarge (69,0%)</li>
+<li>Umsatz TTM rückläufig (-1,5%), Q2-Print vom 04.08. bestätigt fortgesetzten YoY-Rückgang — zentrales Warnsignal, nicht wegdiskutierbar</li>
+<li>ROE (94,9%) und Price-to-Book (161,7x) sind Anomalien durch eine sehr kleine/negative Eigenkapitalbasis — aus den Daten nicht abschließend auflösbar, welcher Anteil Rückkauf-Artefakt ist; für Qualitätsbeurteilung wird stattdessen ROIC (42,3%) genutzt</li>
+<li>D/E als "UNGÜLTIG" markiert (yfinance-Artefakt) — nicht verwendet</li>
+<li>FCF-Marge ~16,4% ($1,06 Mrd./$6,47 Mrd.) gesund und zeigt reale Cash-Generierung trotz Umsatzschwäche</li>
+<li>Operating Margin 20,5% solide für ein Research-/Advisory-Geschäft, aber ohne Wachstumsunterstützung</li>
+<li>Strukturelles Risiko: LLM-/KI-native Recherchetools könnten Teile des Abo-Werteversprechens ersetzen</li>
+<li>Keine Dividende (N/A) — Kapitalallokation historisch stark rückkauf-fokussiert (siehe verzerrte ROE/KBV-Basis)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Der Umsatzrückgang stabilisiert sich, Contract-Value-Wachstum (laut Berichten zum Q2-Print beschleunigt) setzt sich fort, der Markt erkennt die Kostendisziplin als nachhaltige Margenbasis an. Peers: Accenture (ACN, Fwd-PE 11,30x), S&P Global (SPGI, 20,37x), Equifax (EFX, 17,00x), Moody's (MCO, 25,35x) — Peer-Bandbreite 11,3x–25,4x. Annahme (kein Konsens): EPS ~$17,00 (über Konsens $15,31) × 18x (mittlere Peer-Position, Abschlag zu MCO/SPGI angesichts noch ungelöster KI-Disruptionsfrage) = $306. Bull-Kursziel: $270–$340. Wahrscheinlichkeit: 20%.</p>
+<p>Strukturelle Margennachhaltigkeit: (1) proprietäre Research-Datenbasis und Analysten-Netzwerk als IP-Burggraben, aber zunehmend durch generative KI angreifbar; (2) Mixverschiebung zu höhermargigen Consulting-/Conference-Segmenten möglich; (3) Wettbewerbsposition ggü. Accenture (breiter, margenschwächer) strukturell stärker margenseitig, ggü. KI-nativen Alternativen ungewiss; (4) vertragliche Abo-Bindung erzeugt Wechselkosten, aber sinkende Zahlungsbereitschaft bei Kunden ist das eigentliche Risiko; (5) Skaleneffekte im bestehenden Geschäft vorhanden, aber kein Wachstumshebel ohne Umsatzstabilisierung.</p>
+<h3>4. BASE CASE</h3>
+<p>Umsatz stabilisiert sich nahe der Nulllinie, EPS-Wachstum kommt weiter primär aus Kostendisziplin/Rückkäufen statt Top-Line. Eigenes Forward-KGV (9,87x) liegt unter der gesamten Peer-Bandbreite (11,3x–25,4x) — moderate, nicht vollständige Konvergenz wird angesetzt. Annahme: EPS ~$15,31 (Konsens) × 11x (leichte Prämie über eigenem Multiple, unterhalb ACN als günstigstem Peer) = $168. Base-Kursziel: $155–$185. Wahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: KI-native Recherche-/Synthese-Tools erodieren strukturell die Zahlungsbereitschaft für klassische Analysten-Abos, der Umsatzrückgang beschleunigt sich über die aktuellen -1,5% hinaus, Contract-Value-Wachstum bricht ein. Kundenkonzentration: breite Enterprise-/IT-Buyer-Kundenbasis über Branchen und Unternehmensgrößen hinweg, keine Einzelkundenkonzentration aus den Daten ableitbar. Geopolitik/Exportkontrollen: als reines Research-/Advisory-Geschäft strukturell minimal exponiert, spezifisch nicht im Datensatz quantifizierbar. Lieferkette/Foundry: nicht anwendbar — Informationsdienstleistung ohne physische Fertigungskette. Verwässerung: Aktienanzahl-/SBC-Trend nicht im Datensatz; die extreme ROE/KBV-Verzerrung deutet eher auf historische Netto-Rückkäufe (Gegenteil von Verwässerung) hin, erhöht aber die bilanzielle Fragilität durch die dünne Eigenkapitalbasis. Regulierung: auf Datenbasis nicht beurteilbar, keine spezifischen Rechtsrisiken im Datensatz. Annahme: EPS ~$11,00 × 8x (unter eigenem aktuellem Multiple, weitere Kompression bei struktureller KI-Disruption) = $88. Bear-Kursziel: $75–$105. Wahrscheinlichkeit: 40%.</p>
+<p>**Summe: 20% + 40% + 40% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20×$305 + 0,40×$170 + 0,40×$90 = $61 + $68 + $36 = **~$165 — implizites Upside vs. aktuellem Kurs ($151,02): +9,3%.** Der EV liegt unter der 10%-Schwelle — die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge; die unveränderte "Hold"-Einstufung des Analystenkonsens bestätigt die Zurückhaltung.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE (94,9%) ist eine Anomalie: Bei einer derart kleinen/negativen Eigenkapitalbasis (vermutlich Folge aggressiver historischer Aktienrückkäufe) verliert die Kennzahl ihre Aussagekraft für die operative Rendite — aus den Daten nicht abschließend auflösbar, welcher Anteil Rückkauf-Artefakt vs. echte operative Stärke ist. Stattdessen wird ROIC (42,3%) als unverzerrtere Kennzahl herangezogen (vorläufig, Datenstand) — weiterhin sehr stark und bestätigt ein kapitalleichtes, margenstarkes Subscription-Geschäftsmodell. Gross Margin 69,0% und Operating Margin 20,5% sind solide, aber ohne Umsatzwachstum als Unterstützung. FCF-Marge ~16,4% ist gesund und zeigt reale Cash-Generierung trotz der Umsatzschwäche. P/B (161,7x) ist durch dieselbe verzerrte Eigenkapitalbasis wie ROE unbrauchbar und wird in der Bewertung nicht verwendet.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Forward-PE 9,87x liegt UNTER allen genannten Peers (ACN 11,30x–MCO 25,35x) — ein deutlicher Abschlag selbst zum günstigsten Comp Accenture. Teilweise durch das negative Umsatzwachstum erklärbar, angesichts der starken FCF-Marge (16,4%) und hohen ROIC (42,3%) erscheint der volle Abschlag aus den Daten aber nicht vollständig gerechtfertigt — "teilweise, nicht abschließend erklärbar." Rückrechnung: Bei $151,02 und Konsens-EPS $15,31 (9,87x) preist der Markt im Kern kein weiteres Wachstum ein — angesichts der negativen TTM-Umsatzentwicklung und der frischen, aber noch unbestätigten Stabilisierungssignale eher konservativ als übertrieben. Analyst-Konsensziel $160,38 (13 Analysten, hold) liegt nur ~6% über dem Kurs — ein Sentiment-Indikator mit begrenztem Aufwärtsvertrauen, der zur eigenen Base-Case-Range passt, kein Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 95,21, aber Rang 464 von rund 500 im S&P 500 — einer der schwächsten relativen Werte im gesamten Index über die längere Historie, sichtbar am 52W-Bereich ($124,25–$337,29; aktuell nur 21,6% über dem Tief, 55% unter dem Hoch). Die jüngste Erholung (10T +37,5%, 20T +34,6%) ist eine scharfe Gegenbewegung nach dem Q2-Beat vom 04.08., aber angesichts der schwachen 6M-Bilanz (+4,2%) noch keine bestätigte Trendumkehr. Short-Float-/Ownership-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Der Kurssprung dürfte primär Short-Covering/Fast-Money nach dem EPS-Beat reflektieren, nicht breite Long-Only-Akkumulation — der weiterhin nur "hold"-lautende Analystenkonsens stützt diese Einschätzung.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Windows zeigen eine ausgeprägte Divergenz: starke kurz-/mittelfristige Erholung (10T +37,5%, 20T +34,6%) bei schwacher längerfristiger Basis (50T +12,6%, 6M +4,2%) — klassisches Muster einer scharfen Gegenbewegung nach anhaltender Schwäche, granulare SMA-/RSI-Daten fehlen im Datensatz. GWS-Ampel durchgehend inaktiv — kein technisch bestätigtes Signal. Warnsignal: Ein Rückfall unter das Vor-Earnings-Kursniveau würde die Erholung als reine Einmalreaktion auf den EPS-Beat entlarven, ohne dass sich am strukturellen Umsatzproblem etwas geändert hätte.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($320–$450):** KI-gestützte (nicht ersetzte) Gartner-Research-Produkte setzen sich durch, Umsatzwachstum kehrt auf mittleres einstelliges Niveau zurück, Multiple re-ratet Richtung historischer Prämie; EPS $20–24 × 16–19x.</p>
+<p>**Base ($180–$320):** Umsatz stabilisiert sich nahe Null, Kostendisziplin trägt weiterhin EPS-Wachstum, Multiple bleibt angesichts der KI-Disruptionssorge moderat; EPS $16–19 × 11–14x.</p>
+<p>**Bear ($70–$150):** KI-native Recherchetools erodieren strukturell das Abo-Wertversprechen, mehrjähriger Umsatzrückgang, weitere Multiple-Kompression; EPS $10–13 × 7–10x.</p>
+<p>Entscheidende Variable: Ob Gartner KI als Ergänzung (Produktintegration) statt als Substitut positionieren kann.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Gartner ist weder ein klarer Buy-and-Hold-Compounder noch ein reiner Momentum-Trade, sondern eine ungelöste strukturelle Wette: starke Kapitaleffizienz (ROIC 42,3%, FCF-Marge 16,4%) trifft auf anhaltend rückläufigen Umsatz und eine ungeklärte KI-Disruptionsfrage. Die eigenen Szenarien ergeben keinen asymmetrischen Edge (EV +9,3%, unter der 10%-Schwelle) — ein High-Conviction-Framing ist trotz des jüngsten EPS-Beats nicht gerechtfertigt, zumal der Fundamental-Snapshot den Q2-Print noch nicht vollständig abbildet. Geeignet allenfalls für Value-orientierte Investoren, die eine Stabilisierung der Contract-Value-Trends als Trigger abwarten; nicht geeignet als Kernposition angesichts des ungelösten strukturellen Risikos. Accenture (ACN, 11,30x) ist der nächstliegende, diversifiziertere und günstigere Peer ohne dieselbe reine Abo-Modell-Exponiertheit gegenüber KI-Disruption; S&P Global (SPGI, 20,37x) ist deutlich teurer, aber mit stabilerem Wachstumsprofil.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — Der EPS-Beat vom 04.08. ist ein realer, aber gemischter Katalysator (Umsatz weiterhin YoY rückläufig), der Fundamental-Snapshot bildet den Print noch nicht vollständig ab, und der EV von +9,3% liegt unter der Edge-Schwelle trotz starkem RS-Momentum.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
