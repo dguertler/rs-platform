@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DNOW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">07.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>DNOW</h1>
+      <h2>DNOW Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Industrial Distribution</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 07.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">19.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$14.41</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">20.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-9.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">25–32</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">15–19</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$0,55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DNOW (vormals NOW Inc.) hat 2025 mit der Fusion mit MRC Global ein Sprungbrett zur Marktführerschaft in der Öl-/Gas-Distribution gewählt — und genau diese Integration hat den Konzern zwei Quartale in Folge (Q4 2025: -$147 Mio., Q1 2026: -$44 Mio.) in die Verlustzone gedrückt, ausgelöst durch Fusionskosten, Lagerbestand-Step-up-Effekte und einen problematischen US-ERP-Go-Live in Q3 2025. Q2 2026 zeigt die erste klare Kehrtwende: Adj. EBITDA sprang um 54% QoQ auf $60 Mio., die Fusionssynergien liegen mit ~$23 Mio. bereits ~35% vor Plan, und Management hat die FY26-Guidance angehoben (Umsatz auf ~$5,0-5,1 Mrd., EBITDA-Marge Richtung 4,5%). Der Markt hat mit +9,4% Kursreaktion am Reporting-Tag honoriert. Was der Markt aktuell einpreist: eine erfolgreiche, aber noch nicht abgeschlossene Integration — die entscheidende Frage für die nächsten 2-3 Quartale ist, ob die Synergie-Beschleunigung anhält oder ob weitere ERP-/Integrationsprobleme auftauchen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Distribution von Rohrleitungen, Ventilen, Fittings (PVF) für Öl-/Gas- und Industriekunden — margenschwaches, volumengetriebenes Distributionsgeschäft</li>
+<li>MRC-Global-Fusion (2025) verdoppelte den Umsatz (TTM +97,5% YoY) und positioniert DNOW als einen der größten PVF-Distributoren Nordamerikas</li>
+<li>Operativer Hebel liegt in Einkaufsmacht/Skaleneffekten nach der Fusion — Synergien laufen über Lagerkonsolidierung, IT-Systeme, Einkaufskonditionen</li>
+<li>Strukturelle Abhängigkeit von Öl-/Gas-Capex-Zyklen (Kundenbasis: E&P-Betreiber, Midstream) — kein wiederkehrendes Abo-Geschäft</li>
+<li>ERP-Integration (US-System-Go-Live) war 2025 der konkrete operative Stolperstein — Beleg dafür, wie exekutionsabhängig der Turnaround ist</li>
+<li>Working-Capital-intensiv (Lagerbestand für Kundenprojekte) — FCF TTM negativ (-$723 Mio.), stark durch Fusions-Sondereffekte verzerrt</li>
+<li>D/E ~0,34x — moderate Verschuldung nach der Fusion, kein Bilanznotstand</li>
+<li>Analystenabdeckung dünn (4 Analysten), Konsensziel $16,25 (Snapshot vor Q2-Zahlen)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: WESCO International (WCC, Fwd-PE ~21,2x) und Applied Industrial Technologies (AIT, Fwd-PE ~24-25x) als Industrial-Distribution-Comps. Bull-These: Synergien werden vollständig und schneller als geplant realisiert, EBITDA-Marge übertrifft das 4,5%-Ziel Richtung 5-5,5%, Öl-/Gas-Capex-Zyklus bleibt stabil. Annahme (kein Konsens): FY27-EPS ~$1,30 × 22x (nahe WCC-Bandbreitenende). Bull-Kursziel: $25–$32 (Midpoint $28,5). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Synergie-Realisierung setzt sich graduell fort, FY26-Guidance wird erreicht, Bewertung bleibt aber wegen Integrationsrisiko unter der Peer-Bandbreite. Annahme (kein Konsens): FY27-EPS ~$1,00 × 17x (leichte Prämie zum eigenen aktuellen Forward-PE 16,7x für den bestätigten positiven Trend). Base-Kursziel: $15–$19 (Midpoint $17). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Öl-/Gas-Capex-Zyklus dreht bei fallenden Energiepreisen, weitere Integrationsprobleme (ERP, Lagerkonsolidierung) treten erneut auf, Synergie-Ziele werden verfehlt. Kundenkonzentration: aus Daten nicht quantifizierbar, aber strukturelle Abhängigkeit von zyklischem E&P-Capex ist real. Geopolitik: Öl-Preis-Exposure indirekt geopolitisch getrieben, aus Daten nicht direkt quantifizierbar. Lieferkette: Distributionsgeschäft mit vielen Lieferanten, kein Single-Source-Risiko erkennbar. Verwässerung: Aktienanzahl-Trend aus Daten nicht verfügbar, MRC-Fusion erfolgte über Aktientausch (bekanntes strukturelles Verwässerungsmoment, nicht weiter quantifizierbar). Regulierung: sektortypisch gering. Annahme: FY27-EPS ~$0,55 × 12x (unter Peer-Floor, Kompression bei Integrationsscheitern). Bear-Kursziel: $5–$9 (Midpoint $7). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $28,5 + 0,45 × $17 + 0,35 × $7 = $5,70 + $7,65 + $2,45 = **~$15,80 — implizites Upside vs. aktuellem Kurs ($14,41): +9,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE -9,4% und Nettomarge -4,5% (TTM) spiegeln noch die Verlustquartale der Integration wider — beide Kennzahlen sind fusionsbedingt verzerrt und nicht repräsentativ für den laufenden Q2-Trend (Adj. EBITDA +54% QoQ). ROIC -2,4% konsistent mit der noch integrationsbelasteten Bilanz. Gross Margin 20,8% ist typisch niedrig für ein Distributionsgeschäft — der Hebel liegt in Skaleneffekten, nicht in der Bruttomarge selbst. FCF TTM -$723 Mio. ist stark durch Fusions-Sondereffekte (Working-Capital-Aufbau, Integrationskosten) verzerrt und aus den Daten nicht abschließend auf eine wiederkehrende operative Cashflow-Schwäche zurückzuführen. D/E ~0,34x — moderate Verschuldung, kein akutes Bilanzrisiko.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 16,7x liegt deutlich unter der Peer-Bandbreite (WCC ~21,2x – AIT ~24-25x) — ein Abschlag, der sich strukturell durch das noch unbewiesene Integrationsrisiko erklären lässt, nicht durch eine grundsätzlich schwächere Geschäftsqualität. Was preist der aktuelle Kurs ein? Bei $14,41 und $2,58 Mrd. Market Cap impliziert das aktuelle Niveau gegen die FY26-Guidance (EBITDA-Marge Richtung 4,5% auf ~$5,05 Mrd. Umsatz, also ~$227 Mio. EBITDA) ein EV/EBITDA von grob 11-12x — plausibel für einen Industrial-Distributor mitten in der Synergie-Realisierung, nicht überzogen. Normalisierter FCF ist wegen der Fusions-Verzerrung aktuell nicht sinnvoll bestimmbar — die Bewertung stützt sich daher primär auf die EBITDA-Guidance-Rechnung. Eigenes Forward-PE unter der Peer-Bandbreite — aus den Daten erklärbar durch das Integrationsrisiko, stellt aber auch die Chance dar, falls die Synergie-Story sich bestätigt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 19,75 (Rang 657 von 860 im Smallcap-Universum) ist trotz des starken Q2-Beats vergleichsweise schwach — der breite Markt hat den Turnaround noch nicht in eine Top-Momentum-Position übersetzt. Windows: 50T +11,4%, 20T +16,4% zeigen aber eine klare kurz-/mittelfristige Wende. Hypothese, nicht datenbasiert: Die dünne Analystenabdeckung (4 Analysten) und die noch junge, komplexe Post-Merger-Bilanz dürften institutionelle Positionierung bremsen — viele Long-Only-Mandate warten vermutlich auf mehr saubere Quartale vor einer Aufstockung. Enttäuschungsrisiko: Ein weiterer integrationsbedingter Belastungsposten würde den fragilen Vertrauensaufbau zurückwerfen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 19,75, Rang 657/860 (Smallcap) — moderat trotz starkem fundamentalem Katalysator. Windows: 5T +7,4%, 10T +4,8%, 20T +16,4%, 50T +11,4%, 6M -20,2% — die 6-Monats-Zahl zeigt, dass der Titel erst aus einem tieferen Tal herausarbeitet, aktuelles Momentum ist aber klar positiv und fundamental gestützt (Synergie-Beat). Technisches Warnsignal: Rückfall in Richtung des 52-Wochen-Tiefs ($10,94) wäre ein Bruch der jüngsten Erholungsstruktur.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($22–$34):** MRC-Integration wird Blaupause für weitere Konsolidierung im PVF-Distributionsmarkt, EBITDA-Marge erreicht nachhaltig 5%+, Öl-/Gas-Capex-Zyklus bleibt unterstützend. Normalisiertes EPS $1,50-2,00 × 15-18x.</p>
+<p>**Base ($13–$21):** Synergien werden vollständig realisiert, Bewertung normalisiert sich näher an die Peer-Bandbreite. Normalisiertes EPS $1,00-1,30 × 13-16x.</p>
+<p>**Bear ($4–$10):** Öl-/Gas-Zyklus dreht, Integration bleibt fehleranfällig, Marktanteilsverluste an schlankere Wettbewerber. Normalisiertes EPS $0,40-0,70 × 10-12x.</p>
+<p>Entscheidende Variable: Tempo und Vollständigkeit der Synergie-Realisierung aus der MRC-Fusion.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>DNOW ist ein zyklischer Merger-Integration-Trade, kein Compounder — die operative Wende ist real (Adj. EBITDA +54% QoQ, Synergien vor Plan), aber die eigenen Szenarien liefern mit +9,6% EV-Upside knapp keinen asymmetrischen Edge, und die Bilanz trägt noch sichtbare Integrationsnarben (ROE -9,4%). Geeignet für taktisch orientierte Investoren, die den Öl-/Gas-Distributionszyklus und die Synergie-Story aktiv verfolgen — nicht für Buy-and-Hold ohne laufende Kontrolle der Quartalszahlen. Positionsgröße: max. 3-4% eines diversifizierten Portfolios bei enger Beobachtung der EBITDA-Marge. **WESCO International (WCC)** ist das etabliertere, weniger integrationsrisikobehaftete Instrument für die Industrial-Distribution-These, allerdings ohne DNOWs spezifischen Synergie-Hebel und zu einem höheren Multiple (~21,2x vs. 16,7x).</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Trotz starkem Beat und Guidance-Raise bleibt die Bilanz nach der MRC-Fusion integrationsbelastet (ROE -9,4%), und der EV-Edge liegt mit +9,6% unter der 10%-Schwelle für eine klare Kaufthese.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

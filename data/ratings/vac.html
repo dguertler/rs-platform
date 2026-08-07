@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VAC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">07.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>VAC</h1>
+      <h2>Marriott Vacations Worldwide Co</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Resorts & Casinos</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">44</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 07.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">242.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$124.75</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">52.7%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">328.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-15.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-23.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">118–142</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–115</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">42–62</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Marriott Vacations Worldwide kam mit einem schwachen Q1 2026 ins Jahr — Adj. EPS $1,24 verfehlte die Schätzung $1,60 um 22,5%, Adj. EBITDA fiel 16% YoY (Marge -370 Bp) wegen höherer Marketing-/Produktkosten und Restrukturierung im Asien-Geschäft. Q2 2026 lieferte die Kehrtwende in geradezu dramatischer Form: Adj. EPS $2,31 schlug die Schätzung $1,97 deutlich, Volume Per Guest (VPG) — die zentrale Produktivitätskennzahl im Timeshare-Vertrieb — sprang 23% YoY auf $4.477, Contract Sales wuchsen 22% YoY auf $545 Mio., und Management hob die FY26-Guidance kräftig an (Adj. EPS auf $8,25-9,05 von $7,05-7,80, Contract Sales auf $2,08-2,115 Mrd.). Der Kurs reagierte mit +22,6% auf ein neues 52-Wochen-Hoch von $124,75 — eine der stärksten Einzeltag-Bewegungen im gesamten Screening. Was hier entscheidend ist: Der fundamentale Turnaround ist real und gut belegt (VPG, Contract Sales, Guidance), aber die Kursreaktion war so kräftig, dass die Bewertung inzwischen deutlich über die Peer-Bandbreite hinausgeschossen ist — die zentrale Frage ist nicht mehr, ob der Turnaround echt ist, sondern ob er bereits mehr als vollständig eingepreist ist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Timeshare-/Vacation-Ownership-Vertrieb (Marriott-, Sheraton-, Westin-Marken plus Bluegreen nach Übernahme) — Umsatz aus Erstverkäufen (VPG-getrieben) und wiederkehrenden Resort-/Finanzierungsgebühren</li>
+<li>VPG (Volume Per Guest) ist die zentrale operative Steuerungsgröße — jede Verbesserung fließt fast direkt in Marge und Contract Sales</li>
+<li>Hochgradig Consumer-Discretionary-exponiert — Timeshare-Erstverkäufe reagieren stark auf Konsumklima und Reisebereitschaft</li>
+<li>Finanzierungsgeschäft (Notes Receivable an Timeshare-Käufer) erklärt die strukturell sehr hohe Verschuldung (D/E ~2,83x) — bilanzintensives Geschäftsmodell, nicht per se Bilanznotstand</li>
+<li>Q1-2026-Schwäche (Marketing-/Restrukturierungskosten, Asien) zeigt, wie schnell Kosten die Marge belasten können, wenn Vertriebsproduktivität nicht mitzieht</li>
+<li>Dividendenrendite 3,28% — für ein Turnaround-/Zyklus-Investment ungewöhnlich hoch, signalisiert Kapitaldisziplin trotz Verschuldung</li>
+<li>Analystenabdeckung breiter (10 Analysten), Konsensziel $90,30 (Snapshot vor Q2, weit unter dem aktuellen Kurs $124,75)</li>
+<li>trailingEps -$9,80 (TTM) vs. FY26-Guidance $8,25-9,05 zeigt das Ausmaß der Ergebnis-Inflektion — die TTM-Kennzahl schleppt noch historische Sonderbelastungen mit</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Hilton Grand Vacations (HGV, Fwd-PE ~9,6-10,9x) und Travel + Leisure (TNL, Fwd-PE ~7,3-10,8x) — Bandbreite ~7-11x für Timeshare-Pure-Plays. Bull-These: VPG-Momentum hält an, Contract-Sales-Wachstum bleibt zweistellig, Bluegreen-Integration liefert weitere Synergien. Annahme (kein Konsens): FY27-EPS ~$10,00 × 13x (über Peer-Bandbreite hinaus, Prämie für nachgewiesenes Momentum). Bull-Kursziel: $118–$142 (Midpoint $130). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Die operative Verbesserung bestätigt sich, aber das Multiple normalisiert sich graduell in Richtung der Peer-Bandbreite, da der aktuelle Kurs bereits eine deutliche Prämie einpreist. Annahme: FY26-Guidance-EPS $8,65 (Mitte) × 12x (moderate Prämie über Peer-Obergrenze HGV ~11x für die VPG-Dynamik). Base-Kursziel: $95–$115 (Midpoint $105). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Q1-Margenschwäche kehrt zurück (Marketing-/Vertriebskosten steigen erneut), Konsumklima für Timeshare-Erstverkäufe verschlechtert sich, VPG-Rebound erweist sich als temporär. Kundenkonzentration: aus Daten nicht quantifizierbar, strukturell aber breit gestreutes Konsumentengeschäft. Geopolitik: gering relevant, indirekt über internationale Reisebereitschaft. Lieferkette: nicht primär relevant für ein Dienstleistungs-/Vertriebsgeschäft. Verwässerung: Aktienanzahl-Trend aus Daten nicht verfügbar. Regulierung: Timeshare-Vertrieb unterliegt Verbraucherschutzregulierung in mehreren US-Bundesstaaten — strukturelles Hintergrundrisiko. Bilanzrisiko explizit: D/E ~2,83x ist das höchste im gesamten Screening — bei einem Nachfrageeinbruch trifft die Fixkostenlast überproportional. Annahme: FY27-EPS ~$6,50 × 8x (nahe Peer-Floor TNL). Bear-Kursziel: $42–$62 (Midpoint $52). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $130 + 0,45 × $105 + 0,35 × $52 = $26,00 + $47,25 + $18,20 = **~$91,45 — implizites Downside vs. aktuellem Kurs ($124,75): -26,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, einen deutlich negativen.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE -15,5% und Nettomarge -10,3% (TTM) sind noch stark von den historischen Sonderbelastungen (u.a. Q1-Schwäche, Bluegreen-Integrationskosten) geprägt und bilden die Q2-Wende noch nicht ab — diese Kennzahlen sind auf Basis der aktuellen Datenlage vorläufig zu werten. Operating Margin TTM 14,3% zeigt, dass das operative Geschäft trotz der GAAP-Verluste grundsätzlich funktioniert — die TTM-Nettomarge wird primär durch Sonderposten unterhalb der operativen Linie belastet. Gross Margin 52,7% ist strukturell hoch (typisch für Timeshare-Erstverkauf). D/E ~2,83x ist mit Abstand die höchste Verschuldung im Screening — bilanzintensives Geschäftsmodell, aber ein echter struktureller Risikofaktor bei jedem Nachfrage- oder Zinsschock. FCF $207,6 Mio. TTM bei $3,33 Mrd. Revenue (6,2% FCF-Marge) — moderat, stützt die Dividende (3,28% Rendite).</p>
+<h3>7. BEWERTUNG</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom letzten wöchentlichen Update lag deutlich vor der jüngsten Kursbewegung — Kurs wurde für diese Analyse auf $124,75 (bestätigter Schlusskurs nach den Q2-Zahlen, +22,6% Tagesbewegung) aktualisiert, eine Abweichung von +27,9% gegenüber dem vorherigen Snapshot-Kurs $97,51. Alle Multiples unten sind auf das aktuelle Niveau umgerechnet; die Bewertungsaussage trägt entsprechend reduzierte Konfidenz aufgrund der extremen Kursbewegung. Forward-PE auf aktuellem Kursniveau: $124,75 / $8,54 (Konsens-Forward-EPS, nahe der neuen Guidance-Mitte) ≈ 14,6x — liegt damit DEUTLICH ÜBER der Peer-Bandbreite (HGV ~9,6-10,9x, TNL ~7,3-10,8x). Das ist die zentrale Bewertungsaussage dieser Analyse: Selbst nach Berücksichtigung der kräftig angehobenen Guidance zahlt der Markt für VAC eine Prämie von rund 30-50% gegenüber den nächsten Timeshare-Peers. Was preist der aktuelle Kurs ein? Bei $124,75 gegen die FY26-Guidance-Mitte impliziert das aktuelle Niveau, dass die VPG-/Contract-Sales-Dynamik aus Q2 nicht nur anhält, sondern sich noch beschleunigt — ambitioniert, denn genau ein Quartal zuvor (Q1) lag eine Margenenttäuschung vor. Diese Prämie ist aus den vorliegenden Daten nicht strukturell begründbar (kein überlegenes Wachstum oder Burggraben gegenüber HGV/TNL erkennbar) — sie dürfte primär Momentum-/Kurzfrist-Nachfrage nach dem Beat widerspiegeln.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 242,1 (Rang 116 von 860, mit Abstand der höchste Score der fünf Turnaround-Kandidaten in diesem Screening) und Windows durchgehend extrem stark (5T +26,3%, 10T +30,1%, 20T +25,3%, 50T +42,3%, 6M +118,0%) zeigen ein Fast-Money-/Momentum-Setup in Reinform. Hypothese, nicht datenbasiert: Ein Teil der +22,6%-Tagesbewegung dürfte auf Short-Covering und Momentum-Zuflüsse zurückzuführen sein, nicht allein auf die fundamentale Neubewertung — die Diskrepanz zur Peer-Bewertung stützt diese Einordnung. Enttäuschungsrisiko ist entsprechend hoch: Jede Verlangsamung des VPG-Wachstums in Q3 würde eine überproportionale Korrektur auslösen, da die Bewertung bereits eine Fortsetzung der Beschleunigung einpreist.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 242,1, Rang 116/860 (Smallcap) — der stärkste Score im gesamten Fünfer-Screening. Kurs markiert mit $124,75 ein neues 52-Wochen-Hoch (bisheriges Hoch $105,97) nach einer der stärksten Einzeltag-Bewegungen (+22,6%) im Datensatz. Momentum ist teilweise fundamental gestützt (echte VPG-/Guidance-Verbesserung), aber das Ausmaß der Kursreaktion übersteigt die fundamentale Neubewertung (Peer-Prämie 30-50%) deutlich — überwiegend reaktiv/Momentum-getrieben. Technisches Warnsignal: Ein Rückfall unter das alte 52-Wochen-Hoch ($105,97) wäre ein klares Signal, dass die Reporting-Tag-Bewegung überzogen war.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($100–$155):** VPG-/Contract-Sales-Momentum wird strukturell, Bluegreen-Synergien tragen voll, Timeshare-Nachfrage bleibt robust. Normalisiertes EPS $10-13 × 10-12x.</p>
+<p>**Base ($55–$105):** Bewertung normalisiert sich Richtung Peer-Bandbreite, operative Verbesserung bestätigt sich graduell ohne weitere Beschleunigung. Normalisiertes EPS $7-9,5 × 8-10x.</p>
+<p>**Bear ($30–$55):** Konsumklima für Timeshare-Erstverkäufe schwächt sich ab, hohe Verschuldung (D/E ~2,83x) wird bei Nachfrageeinbruch zur echten Belastung. Normalisiertes EPS $4-6 × 7-9x.</p>
+<p>Entscheidende Variable: Ob sich die Peer-Bewertungsprämie (aktuell +30-50% ggü. HGV/TNL) durch nachhaltig überlegenes VPG-Wachstum rechtfertigen lässt oder zurückbildet.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>VAC ist der fundamental überzeugendste, aber gleichzeitig am schlechtesten bewertete Fall in diesem Screening: Der operative Turnaround (VPG +23%, Contract Sales +22%, kräftige Guidance-Anhebung) ist real, aber der Markt hat mit +22,6% an einem Tag eine Bewertung geschaffen, die rund 30-50% über der Peer-Bandbreite (HGV, TNL) liegt, und die eigenen Szenarien liefern ein deutlich negatives EV von -26,7%. Das ist kein Compounder-Einstieg und kein sauberer High-Conviction-Trade, sondern ein Fall, bei dem der Katalysator bereits mehr als vollständig eingepreist scheint. Kein Neueinstieg auf aktuellem Niveau; bestehende Positionen mit engem Stop sichern angesichts des Bewertungsrisikos plus der strukturell hohen Verschuldung (D/E ~2,83x). Positionsgröße bei Neueinstieg: 0%, auf einen Rücksetzer Richtung Peer-Bandbreite warten. **Hilton Grand Vacations (HGV)** und **Travel + Leisure (TNL)** bieten zu deutlich niedrigeren Forward-Multiples (~9,6-10,9x bzw. ~7,3-10,8x vs. VACs ~14,6x) das reinere, günstiger bewertete Instrument für die Timeshare-Erholungsthese.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Nach dem 22,6%-Sprung notiert VAC mit ~14,6x Forward-KGV deutlich über der Peer-Bandbreite (HGV/TNL ~7-11x), die eigenen Szenarien implizieren ein EV von -26,7%, und die strukturell hohe Verschuldung (D/E ~2,83x) verschärft das Risiko bei jeder Wachstumsenttäuschung.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

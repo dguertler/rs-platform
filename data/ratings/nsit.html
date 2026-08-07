@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NSIT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">07.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NSIT</h1>
+      <h2>Insight Enterprises, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Electronics & Computer Distribution</span></div>
+        <div class="mi">MCap: <span>$4B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 07.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">167.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$140.89</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$8.3B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">22.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">175–215</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–155</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–100</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Insight Enterprises litt 2025 unter einer stillen Margenerosion: Nettogewinn brach in drei aufeinanderfolgenden Quartalen ein (Q1 -89% YoY, Q2 -46% YoY, Q3 -12% YoY), während der Umsatz weiterwuchs — ein klassisches Kosten-/Mix-Problem im IT-Reseller-Geschäft, keine Nachfrage-Krise. Q2 2026 zeigt die Kehrtwende: Operating Margin kletterte von 4,1% auf 5,5% YoY, Nettogewinn sprang +65% YoY, und Management hob die FY26-Adj.-EPS-Guidance kräftig von $11,00-11,50 auf $12,20-12,70 an. Der Markt reagierte mit +9,3% am Reporting-Tag auf ein bereits sehr starkes Vorlauf-Momentum (+66,6% über 6 Monate) — die Aktie markiert nach dem Sprung ein neues 52-Wochen-Hoch ($140,89 vs. bisherigem Hoch $135,89). Was der Markt hier tun muss: abwägen, ob die Margen-Normalisierung strukturell nachhaltig ist oder ob nach dem kräftigen Lauf ins Reporting hinein der Großteil der guten Nachricht bereits eingepreist ist.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>IT-Hardware-/Software-Reseller und Managed-Services-Anbieter für Unternehmenskunden — Distributionsgeschäft mit dünnen Margen (Gross Margin 22,0%)</li>
+<li>Operativer Hebel liegt im Services-/Cloud-Mix (höhermargig) vs. reinem Hardware-Reselling (niedrigmargig) — genau dieser Mix-Shift erklärt die Q2-Margenverbesserung</li>
+<li>2025er Margenerosion (Kosten-/Mix-Druck trotz Umsatzwachstum) deutet auf Wettbewerbsdruck im Hardware-Segment hin, den Insight teilweise durch Services kompensiert</li>
+<li>Umsatzwachstum TTM nur +1,2% — die Turnaround-Story ist margen-, nicht volumengetrieben</li>
+<li>D/E ~1,08x — moderat-hohe Verschuldung für ein Distributionsgeschäft, kein akutes Risiko</li>
+<li>ROE 11,3% / ROIC 7,5% — solide, aber nicht herausragende Kapitalrendite</li>
+<li>Analystenabdeckung dünn (4 Analysten), Konsensziel $107,50 (Snapshot-Basis, deutlich unter dem aktuellen Kurs $140,89 — vor der Q2-Anhebung)</li>
+<li>FCF $165,6 Mio. TTM — moderat, konsistent mit dem margenschwachen Distributionsmodell</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: CDW Corporation (Fwd-PE 12,55x), ScanSource (Fwd-PE 12,83x), PC Connection (Fwd-PE 18,75x) — Bandbreite ~12,5-18,75x für IT-Distribution/-Reseller. Bull-These: Margen-Normalisierung setzt sich über die Guidance hinaus fort, Services-Mix wächst weiter, Bewertung nähert sich der CNXN-Prämie. Annahme (kein Konsens): FY27-EPS ~$14,00 × 14x (Mitte der Peer-Bandbreite). Bull-Kursziel: $175–$215 (Midpoint $195). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: FY26-Guidance (Mitte $12,45) wird erreicht, Multiple bleibt nahe dem eigenen aktuellen Niveau, da Umsatzwachstum weiterhin schwach bleibt. Annahme: FY26-Guidance-EPS $12,45 × 11,5x (nahe eigenem aktuellen Forward-PE, leicht unter Peer-Floor wegen schwacher Top-Line). Base-Kursziel: $130–$155 (Midpoint $142,5). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: IT-Hardware-Nachfrage schwächt sich in einem Enterprise-Capex-Abschwung ab, die 2025er Margenerosion kehrt zurück (Wettbewerbsdruck, Preisdruck im Hardware-Segment). Kundenkonzentration: aus Daten nicht quantifizierbar. Geopolitik/China-Exposure: Hardware-Lieferketten teilweise China-exponiert, aus Daten nicht quantifizierbar. Lieferkette: Distributionsgeschäft mit diversifizierten Lieferanten, kein Single-Source-Risiko erkennbar. Verwässerung: Aktienanzahl-Trend aus Daten nicht verfügbar. Regulierung: sektortypisch gering. Annahme: FY27-EPS ~$9,50 × 9x (unter CDW-Floor, Kompression bei erneuter Margenerosion). Bear-Kursziel: $75–$100 (Midpoint $87,5). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $195 + 0,45 × $142,5 + 0,35 × $87,5 = $39,00 + $64,125 + $30,625 = **~$133,75 — implizites Downside vs. aktuellem Kurs ($140,89): -5,1%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 11,3% und ROIC 7,5% sind solide für ein margenschwaches Distributionsgeschäft, aber kein Burggraben-Niveau. Gross Margin 22,0% und Operating Margin 5,2% (TTM) reflektieren noch nicht vollständig die Q2-Verbesserung auf 5,5% — die TTM-Kennzahlen hinken der jüngsten Quartalsdynamik hinterher. Net Margin nur 2,2% zeigt, wie dünn der Puffer im Reseller-Geschäft strukturell bleibt. FCF $165,6 Mio. bei $8,27 Mrd. Revenue TTM (2,0% FCF-Marge) — typisch niedrig für das Geschäftsmodell, kein Warnsignal. D/E ~1,08x — moderat-hohe, aber verkraftbare Verschuldung.</p>
+<h3>7. BEWERTUNG</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom letzten wöchentlichen Update lag vor der jüngsten Kursbewegung — Kurs wurde für diese Analyse auf $140,89 (Schlusskurs nach den Q2-Zahlen) aktualisiert; PE-Kennzahlen unten entsprechend umgerechnet, andere Kennzahlen (Margen, ROE) stammen noch aus dem Snapshot vor dem Earnings-Report. Konfidenz der Bewertungsaussagen reduziert. Forward-PE auf aktuellem Kursniveau: $140,89 / $12,37 (Konsens-Forward-EPS, noch vor der Q2-Anhebung) ≈ 11,4x — liegt damit weiterhin UNTER der Peer-Bandbreite (CDW/SCSC ~12,5-12,8x, CNXN 18,75x), trotz des starken Kurslaufs. Was preist der aktuelle Kurs ein? Bei $140,89 gegen die eigene FY26-Guidance-Mitte ($12,45) impliziert das aktuelle Niveau ein Forward-Multiple von ~11,3x auf die bereits angehobene Guidance — ambitioniert für ein Unternehmen mit nur 1,2% TTM-Umsatzwachstum, aber nicht unplausibel, falls die Margen-Normalisierung nachhaltig ist. Normalisierter FCF (~$150-180 Mio.) auf die aktuelle Marktkapitalisierung ergibt ein FCF-Multiple deutlich über dem PE-Bild — teurer als das reine Multiple suggeriert. Die eigene Bewertung liegt trotz der starken Kursbewegung noch unter der Peer-Bandbreite — aus den Daten teilweise erklärbar durch die schwache Top-Line, aber auch ein Hinweis, dass der Markt die Nachhaltigkeit der Margenverbesserung noch nicht voll goutiert.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 167,6 (Rang 173 von 860 im Smallcap-Universum) und die Windows (5T +14,1%, 10T +24,8%, 20T +23,0%, 50T +39,1%, 6M +66,6%) zeigen ein außergewöhnlich starkes, über alle Zeitfenster konsistentes Momentum. Hypothese, nicht datenbasiert: Ein Teil des Laufs dürfte Fast-Money-/Momentum-Kapital reflektieren, das auf die Margen-Turnaround-Story aufgesprungen ist, bevor die Zahlen bestätigt wurden — das Q2-Ergebnis hat diese Wette nachträglich validiert. Enttäuschungsrisiko: Nach einem derart konsistenten Lauf reicht schon ein "nur" durchschnittliches Q3 (ohne weitere Guidance-Anhebung), um Gewinnmitnahmen auszulösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 167,6, Rang 173/860 (Smallcap) — starkes, breites Momentum über alle Fenster. Kurs markiert mit $140,89 ein neues 52-Wochen-Hoch (vorheriges Hoch $135,89). Momentum ist überwiegend fundamental gestützt (drei aufeinanderfolgende starke Quartale), aber der Reporting-Tag-Sprung von +9,3% auf ein bereits stark gelaufenes Setup erhöht das Rückschlagsrisiko bei jeder Enttäuschung. Technisches Warnsignal: Rückfall unter das alte 52-Wochen-Hoch ($135,89) wäre ein erstes Warnsignal für eine Topbildung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($160–$230):** Services-/Cloud-Mix-Shift setzt sich strukturell fort, Margen erreichen nachhaltig 6%+, Bewertung nähert sich CNXN-Prämie. Normalisiertes EPS $15-18 × 13-16x.</p>
+<p>**Base ($115–$170):** Margen-Normalisierung hält an, Umsatzwachstum bleibt niedrig einstellig, Bewertung pendelt nahe der Peer-Bandbreite. Normalisiertes EPS $11-13,5 × 11-13x.</p>
+<p>**Bear ($65–$105):** Erneute Margenerosion durch Hardware-Preisdruck, Enterprise-IT-Capex-Abschwung. Normalisiertes EPS $7-9,5 × 9-11x.</p>
+<p>Entscheidende Variable: Nachhaltigkeit des Services-/Cloud-Mix-Shifts über den aktuellen Guidance-Zyklus hinaus.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>NSIT ist ein bestätigter operativer Turnaround (Margen-Erholung von 4,1% auf 5,5% Operating Margin, +65% Nettogewinn-Sprung, kräftige Guidance-Anhebung), aber nach +9,3% am Reporting-Tag und +66,6% über 6 Monate liefern die eigenen Szenarien ein leicht NEGATIVES EV (-5,1%) — der Turnaround ist bereits weitgehend eingepreist. Kein Einstieg auf aktuellem Niveau ohne Rücksetzer; bestehende Positionen mit Stop-Disziplin halten. Für Buy-and-Hold-Investoren attraktiv erst bei einem Rücksetzer Richtung Base-Case-Bandbreite. Positionsgröße bei Neueinstieg: max. 2% eines diversifizierten Portfolios angesichts des negativen EV. **CDW Corporation (CDW)** ist zu einem ähnlichen Forward-Multiple (12,6x vs. 11,4x) das etabliertere, margenstärkere Instrument für die IT-Distribution-These mit geringerem Turnaround-Risiko.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Nach dem starken Q2-Pop (+9,3% am Reporting-Tag, +66,6% über 6 Monate) ergeben die eigenen Szenarien ein leicht negatives EV (-5,1%) — der Turnaround ist bereits weitgehend eingepreist.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
