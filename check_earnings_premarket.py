@@ -197,6 +197,10 @@ def main():
             if tg_recipients:
                 for a in new_alerts:
                     send_earnings_telegram(tg_token, tg_recipients, a)
+
+        from earnings_alert_log import append_alerts
+        report_dates = {a["ticker"]: next_earnings.get(a["ticker"], today_str) for a in new_alerts}
+        append_alerts(new_alerts, source="premarket-live", report_dates=report_dates)
     else:
         print("Keine neuen Live-Alerts.")
 

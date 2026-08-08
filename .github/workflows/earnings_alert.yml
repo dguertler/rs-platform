@@ -5,13 +5,11 @@ permissions:
   contents: read
 
 on:
-  schedule:
-    # Stündlicher Retry 04:20–12:20 MESZ (02:20–10:20 UTC), 20 Min nach dem
-    # jeweiligen RS-Update-Fenster. Yahoo liefert den Vortags-Close nicht
-    # garantiert sofort (siehe PLTR-Vorfall 04.08.2026) – der Freshness- und
-    # Dedupe-Check unten sorgt dafür, dass pro Zieldatum nur einmal geprüft
-    # und höchstens einmal gemailt wird.
-    - cron: '20 2-10 * * 2-6'
+  # Automatischer Schedule deaktiviert (08.08.2026, auf Nutzerwunsch): dieser
+  # Digest prüft exakt dasselbe RS-Universum wie earnings_alert_premarket.yml
+  # (Live-Vorbörse/Intraday) — die Live-Mails + Telegram-Nachrichten während
+  # des Tages decken das bereits ab, der Morgen-Digest war redundant. Bleibt
+  # als workflow_dispatch für manuelle/Test-Läufe erhalten.
   workflow_dispatch:
     inputs:
       test_date:

@@ -1,8 +1,9 @@
 name: Earnings-Überraschung Global (US + Europa, ≥5% Sprung + ≥10% EPS-Beat)
 
-# Sendet nur Mail/Telegram, committet nichts → Lese-Rechte genügen.
+# Sendet Mail/Telegram und committet den Alert-Log (data/earnings_alerts_log.json)
+# → Schreibrechte nötig.
 permissions:
-  contents: read
+  contents: write
 
 on:
   schedule:
@@ -95,6 +96,24 @@ jobs:
           RS_API_URL:       ${{ secrets.RS_API_URL }}
           ALERT_API_KEY:    ${{ secrets.ALERT_API_KEY }}
         run: python check_earnings_global.py
+
+      - name: Alert-Log committen
+        if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/earnings_alerts_log.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Earnings-Alert-Log aktualisiert (Global)"
+          for i in 1 2 3; do
+            if git pull --rebase origin master && git push origin master; then
+              exit 0
+            fi
+            echo "Push-Versuch $i fehlgeschlagen, retry…"
+            sleep 5
+          done
+          echo "Alle Push-Versuche fehlgeschlagen." >&2
+          exit 1
 
       - name: Als geprüft markieren
         if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'

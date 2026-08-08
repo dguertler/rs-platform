@@ -285,6 +285,10 @@ def main():
             if tg_recipients:
                 for a in all_alerts:
                     send_earnings_telegram(tg_token, tg_recipients, a)
+
+        from earnings_alert_log import append_alerts
+        append_alerts(all_alerts, source='global',
+                       report_dates={a['ticker']: yesterday_str for a in all_alerts})
     else:
         print('Keine globalen Earnings-Überraschungen gefunden.')
 

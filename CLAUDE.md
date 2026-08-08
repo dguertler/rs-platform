@@ -113,6 +113,7 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 | `data/rs_full.json` | NASDAQ-100 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_dax.json` | DAX-40 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_sp500.json` | S&P 500 RS-Scores + OHLCV | Täglich automatisch |
+| `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket) — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 
 ## Batch-Empfehlung
@@ -154,6 +155,41 @@ Wenn der Nutzer schreibt `Earningsanalyse TICKER1 TICKER2 ...` (Screening
 nach frischen Quartalszahlen, VOR einer vollständigen `Analysiere TICKER`):
 Kein `write_rating()`, keine 11-Abschnitte-Analyse — nur die Kennzahlen-
 Recherche plus eine Turnaround-Einstufung je Ticker.
+
+### Automatik-Modus: `earning` / `earningsanalyse` ohne Ticker
+
+Schreibt der Nutzer nur `earning` oder `earningsanalyse` (ohne Ticker-Liste),
+werden die Ticker automatisch ermittelt statt manuell übergeben:
+
+1. **Ticker-Pool ermitteln** aus `data/earnings_alerts_log.json`
+   (`alerts`-Liste; wird laufend von `earnings_alert_global.yml` und
+   `earnings_alert_premarket.yml` befüllt — der frühere RS-Morgen-Digest
+   `earnings_alert.yml` läuft seit 08.08.2026 nicht mehr automatisch und
+   schreibt hier nicht rein, siehe „Datenquellen"). Enthält also sowohl
+   RS-getrackte Ticker (Live-Vorbörse) als auch Ticker aus dem breiten
+   Global-Universum (US/EU, nicht RS-getrackt).
+2. **Letzten Scan-Zeitpunkt** aus `analyses/earnings_screening/.last_scan`
+   lesen (ISO-Timestamp UTC). Fehlt die Datei (erster Lauf): stattdessen alle
+   Log-Einträge der letzten 7 Tage verwenden.
+3. Nur `alerts`-Einträge mit `detected_at` > letztem Scan-Zeitpunkt nehmen,
+   nach Ticker deduplizieren (ein Ticker kann mehrfach auftauchen, z. B.
+   Live-Alert + späterer Global-Scan-Treffer). Keine neuen Einträge → kurze
+   Chat-Meldung „Keine neuen Earnings-Meldungen seit TIMESTAMP." und STOP,
+   kein Dateizugriff/Commit.
+4. Für jeden gefundenen Ticker die Schritte 1–4 des manuellen Modus unten
+   durchführen (Kennzahlen, RS-Score, Turnaround-Kriterien, Einstufung).
+5. **Ergebnis abspeichern statt nur im Chat zeigen:** Einstufungstabelle +
+   Begründungen als Markdown nach `analyses/earnings_screening/<DATUM>.md`
+   schreiben (DATUM = heutiges Datum, `YYYY-MM-DD`). Davor: alle Dateien in
+   `analyses/earnings_screening/` löschen, deren Datum im Dateinamen älter
+   als 7 Tage ist (Aufbewahrungsfrist — ältere Screenings werden automatisch
+   entfernt, keine manuelle Pflege nötig).
+6. `analyses/earnings_screening/.last_scan` mit dem aktuellen UTC-Zeitstempel
+   überschreiben.
+7. `analyses/earnings_screening/` committen und auf `master` pushen,
+   Git-Hash im Chat ausgeben.
+8. Wie im manuellen Modus: nur für bestätigte Kandidaten ("Ja") auf Wunsch
+   des Nutzers mit `Analysiere TICKER` in die volle Analyse übergehen.
 
 **Referenzmuster: CNC Q1 2026** (`analyses/cnc.md`,
 `instagram/data/earnings/CNC.json`) — Verlustquartale (Q4 25 EPS −1,16 $)
