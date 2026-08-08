@@ -7,13 +7,20 @@ permissions:
 
 on:
   schedule:
-    # Alle 15 Min. 08:00–20:45 UTC (10:00–22:45 MESZ), Mo–Fr — deckt US-Vorbörse
-    # bis Handelsschluss ab. Ergänzt earnings_alert.yml (Schlusskurs, Folgetag)
-    # um eine schnelle Live-Meldung direkt am Earnings-Tag: AMC-Meldungen vom
-    # Vorabend zeigen sich oft schon Stunden vor dem regulären Handelsstart
-    # deutlich in der Vorbörse (siehe PLTR 04.08.2026: +16–17% vorbörslich,
-    # lange bevor der Tagesschluss verfügbar war).
-    - cron: '*/15 8-20 * * 1-5'
+    # Alle 15 Min. 07:00–23:45 UTC (09:00–01:45 MESZ), Mo–Fr — deckt den
+    # europäischen Handelsstart (DAX ab 07:00 UTC) bis weit in die
+    # US-Nachbörse hinein ab (08.08.2026 erweitert: die alte 08–20-UTC-Grenze
+    # ließ sowohl die erste DAX-Handelsstunde als auch die unmittelbare
+    # Kursreaktion auf AMC-Meldungen direkt nach US-Handelsschluss unentdeckt
+    # bis zum nächsten globalen Digest am Folgetag). Ergänzt
+    # earnings_alert_global.yml (Schlusskurs, Folgetag) um eine schnelle
+    # Live-Meldung direkt am Earnings-Tag: AMC-Meldungen vom Vorabend zeigen
+    # sich oft schon Stunden vor dem regulären Handelsstart deutlich in der
+    # Vorbörse (siehe PLTR 04.08.2026: +16–17% vorbörslich, lange bevor der
+    # Tagesschluss verfügbar war). Keine Wochenend-/Nacht-Läufe (00:00–07:00
+    # UTC): in dem Fenster ist weder in den USA noch in Europa ein
+    # getrackter Markt geöffnet, ein Live-Check liefe ins Leere.
+    - cron: '*/15 7-23 * * 1-5'
   workflow_dispatch:
     inputs:
       test_tickers:
