@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AAOI — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">09.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AAOI</h1>
+      <h2>Applied Optoelectronics, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Communication Equipment</span></div>
+        <div class="mi">MCap: <span>$11B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 09.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">244.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$135.63</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">19.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">29.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-6.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-12.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">190–250</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">12–35</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Der Fundamental-Snapshot (Stand 03.08.2026, vor dem Q2-Bericht) zeigt einen Kurs von $94,32; der reale Schlusskurs nach den Zahlen liegt bei $135,63 (07.08.2026) — eine Kursbewegung von +43,8%, ausgelöst durch die am 06.08.2026 veröffentlichten Q2-Zahlen (öffentlich verifizierbar über mehrere Quellen). Multiples werden nachfolgend primär auf Basis des aktuellen Kurses gerechnet, der Snapshot dient nur als Referenz. AAOI hat den Sprung von der lossmaking Turnaround-Story zum bestätigten AI-Infrastruktur-Profiteur vollzogen: Q2 non-GAAP-EPS $0,06 gegen Guidance von −$0,03 bis +$0,03, Data-Center-Umsatz +140% auf $107,7 Mio. (56% des Konzernumsatzes), 800G-Volumen sequenziell verdoppelt, Q3-Guidance auf $255–290 Mio. angehoben. Strukturell entscheidend ist die im März 2025 geschlossene Transaction- und Warrant-Vereinbarung mit Amazon: Warrants über bis zu 7,95 Mio. Aktien (Strike $23,70) vesten proportional zu tatsächlichen Amazon-Käufen bis zu $4 Mrd. über zehn Jahre — ein starkes Alignment-Signal, aber **kein** Festabnahmevertrag, da die Käufe diskretionär bleiben. Der Markt preist inzwischen einen langfristig gesicherten Hyperscaler-Kunden ein; die eigentliche Frage ist, ob diese Erwartung durch feste Volumina gedeckt ist oder auf Fortsetzung des aktuellen Bestell-Momentums beruht ($124 Mio. kumulierte 800G-Orders eines einzelnen Hyperscale-Kunden seit März 2026). Nach dem Kurs-Vervielfacher (52-Wochen-Range $18,50–$233,67) ist die eigentliche Frage nicht mehr, ob AAOI am AI-Zyklus teilnimmt, sondern ob der aktuelle Kurs das Ausführungsrisiko einer noch jungen, kapitalintensiven Skalierungsphase angemessen abbildet.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Optische Transceiver/Komponenten (100G–1,6T) für zwei strukturell getrennte Endmärkte: Rechenzentren (Hyperscaler) und CATV/Breitband</li>
+<li>Data-Center-Segment inzwischen Wachstumsmotor (+140% YoY), CATV-Segment reifer, aber mit extremer Einzelkundenabhängigkeit</li>
+<li>Vertikale Integration (eigene Laser-/Fotonik-Fertigung in Sugar Land TX, Ningbo/China, Taiwan) als Differenzierung ggü. reinen Modul-Assemblern — zugleich hohe Fixkosten- und Capex-Last</li>
+<li>Amazon-Warrant-Struktur bindet Management-Incentives an Kundenumsatz, ersetzt aber keinen Festabnahmevertrag</li>
+<li>Operativer Hebel deutlich sichtbar: non-GAAP-Nettomarge stieg von ~0% (Q1) auf ~2,5% (Q2) und wird für Q3 auf ~4–8% geguidet — noch weit unter reifen Peer-Margen</li>
+<li>Umsatzbasis stark konzentriert: Top-10-Kunden = 99% des Umsatzes, ein einzelner CATV-Kunde allein 42% des Gesamtumsatzes</li>
+<li>Aktienanzahl seit 2024 stark gestiegen (+45% 2024→2025, +52% YoY in Q1/26) — Kapitalbedarf für Kapazitätsausbau wird überwiegend über Equity/Warrants gedeckt, nicht über FCF</li>
+<li>Kein Fab-Monopol wie bei Speicherchips, aber Single-Site-Konzentration in Taiwan/China birgt geopolitisches Restrisiko</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Der AI-Datacenter-Zyklus beschleunigt sich weiter, 800G/1,6T-Volumina wachsen wie in Q3 avisiert (~5x sequenziell), Amazon und weitere Hyperscaler erhöhen Bestellvolumen strukturell, Bruttomarge skaliert über Fixkostendeckung auf 33–35%. Peers zur Multiple-Verankerung: Lumentum (LITE, Fwd-PE ~52x), Coherent (COHR, Fwd-PE ~32x), Fabrinet (FN, Fwd-PE ~44x). Annahme (kein Konsens): FY27-EPS ~$4,75 (nahe Analysten-Konsens $4,77 aus dem Snapshot; Annahme: Umsatz ~$1,8 Mrd., Nettomarge ~12% durch fortgesetzte 800G-Skalierung) × 45x (obere Peer-Bandbreite, nahe LITE) = Kursziel $214. Bull-Kursziel: $190–$250. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Wachstum bleibt stark, aber verlangsamt sich von der aktuellen Triple-Digit-Rate; Margenexpansion setzt sich fort, erreicht aber noch nicht das Peer-Reifeniveau. Annahme (kein Konsens): FY27-EPS ~$3,00 (Umsatz ~$1,5 Mrd., Nettomarge ~8–9%) × 32x (Mitte der Peer-Bandbreite, nahe COHR) = Kursziel $96. Base-Kursziel: $95–$130. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Konkreter Auslöser: Der CATV-Großkunde (42% des Konzernumsatzes) reduziert oder verlagert Bestellungen, während gleichzeitig der Amazon-Bestelltakt (nicht fest kontrahiert) abflacht — beide Effekte träfen AAOI gleichzeitig, da Top-10-Kunden 99% des Umsatzes stellen. Kundenkonzentration: quantifiziert wie oben — strukturell das größte Einzelrisiko der These. Geopolitik/China-Exposure: Fertigungsstandorte in Taiwan und Ningbo/China schaffen Exportkontroll- und Zollrisiko bei einer China-Eskalation — konkretes Ausmaß auf Datenbasis nicht beurteilbar. Lieferkette: eigene Laser-Fertigung reduziert Fremdbezugsrisiko, aber Konzentration auf wenige Fertigungsstandorte bleibt ein Single-Site-Risiko. Verwässerung: Aktienanzahl +45–52% YoY in den letzten zwei Jahren, zusätzlich bis zu 7,95 Mio. Amazon-Warrant-Aktien potenziell verwässernd — ein reales, bereits historisch belegtes Risiko. Regulierung: sektortypisch gering, auf Datenbasis nicht beurteilbar. FCF bleibt bei −$445,6 Mio. (TTM) deutlich negativ — bei Wachstumsdelle wird externe Finanzierung nötig, was die Verwässerung weiter beschleunigen würde. Annahme: FY27-EPS ~$0,80 (Wachstum bricht auf ~15–20% YoY ein, Marge bleibt bei ~4–5%) × 18x (unterhalb COHR, Risikoabschlag) = Kursziel $14. Bear-Kursziel: $12–$35. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $220 + 0,45 × $112,50 + 0,30 × $23,50 = $55 + $50,63 + $7,05 = **~$112,68 — implizites Downside vs. aktuellem Kurs ($135,63): −16,9%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE −6,1%, ROIC −4,4% (Snapshot, TTM vor Q2) — beide noch negativ, da das TTM-Fenster überwiegend Verlustquartale 2025 enthält; die Q2-Wende zur Profitabilität ist darin noch nicht abgebildet. Bruttomarge 29,6% (Snapshot) deckt sich mit dem Q2-Ist (GAAP 27,7%/non-GAAP 29,8%) — kein Zykluspeak, sondern ein Unternehmen mitten in der Margenskalierung, deutlich unter reifen Peer-Niveaus (LITE/COHR typischerweise 35%+). FCF −$445,6 Mio. TTM ist der zentrale Schwachpunkt: Der Kapazitätsausbau (Sugar Land, Ningbo, Taiwan) wird nicht aus dem operativen Geschäft finanziert, sondern über Kapitalmarktzugang und die Amazon-Warrant-Struktur. D/E ~25% ist moderat, aber ohne belastbaren FCF-Puffer. Der wirtschaftliche Burggraben — vertikale Fotonik-Integration — ist real, aber noch nicht in Marge und Cashflow monetarisiert; ein "scheinbarer" Burggraben wäre die reine Umsatzgröße, die durch die Kundenkonzentration relativiert wird.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Eigenes Forward-KGV (Snapshot-Basis $94,32): 19,8x; auf aktuellem Kurs ($135,63) umgerechnet: 28,4x — damit **unterhalb** der gesamten Peer-Bandbreite (COHR 32x – FN 44x – LITE 52x). Das ist ungewöhnlich für den am schnellsten wachsenden Namen der Gruppe (+86% Revenue YoY vs. deutlich niedrigere Peer-Wachstumsraten) und aus den Daten teilweise erklärbar: kürzere Profitabilitäts-Historie, extreme Kundenkonzentration und negativer FCF rechtfertigen einen strukturellen Abschlag ggü. etablierten, cashflow-positiven Peers. Was preist der aktuelle Kurs ein? Vereinfachte Rückrechnung: Market Cap ~$10,9 Mrd. bei FY26-Umsatzguidance ~$1,1 Mrd. ergibt EV/Revenue ~9,9x — das impliziert für mehrere Jahre fortgesetztes Wachstum von 40–60%+ p.a. kombiniert mit einer Margenexpansion Richtung 12–15% Nettomarge. Das ist ambitioniert, aber nicht unrealistisch für einen AI-Infrastruktur-Namen im Hypergrowth — vorausgesetzt, die Kundenbasis verbreitert sich und die aktuelle Bestelldynamik hält an. Der Analysten-Konsens ($150,30 Kursziel, Snapshot-Basis vor dem Earnings-Beat, 5 Analysten) liegt als Sentiment-Orientierung über dem aktuellen Kurs, ist aber 6–12 Monate hinter der Bewegung und nicht als Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 244,3, Rang 16 im Smallcap-Universum — ein außergewöhnlich starkes technisches Signal, das die fundamentale Wende bestätigt. 5T +22,3%, 10T +36,3%, 6M +193,7% zeigen eine Fast-Money-typische Beschleunigung nach dem Earnings-Katalysator. Hypothese, nicht datenbasiert: Ein erheblicher Teil des Volumens dürfte aus kurzfristig orientierten Momentum-/Retail-Flows stammen (Beta 3,69 begünstigt das), nicht aus Long-Only-Neuaufbau — dafür fehlen Ownership-/Short-Float-Daten im Datensatz. Enttäuschungsrisiko: Die Q3-Zahlen (nächster Termin nicht im Datensatz) sind der nächste Trigger; jede Guidance-Enttäuschung nach dem +35%-Earnings-Pop hätte bei diesem Beta überproportionalen Abwärtsdruck.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>50T-Fenster −26,5% zeigt, dass die Aktie vor dem Earnings-Sprung in einer Korrektur steckte (Juli-Tief $76,01) — das aktuelle Momentum ist somit ein technischer Trendbruch nach oben, fundamental gestützt durch den Q2-Beat und die Guidance-Anhebung, nicht rein reaktiv. Wochenkerze 03.–07.08.: Eröffnung $89,80, Hoch $149,35, Schluss $135,63, Volumen 108,9 Mio. — Kapitulations-artiger Umschwung mit deutlich erhöhtem Volumen, typisch für einen Regimewechsel. GWS-Ampel: Weekly/Daily/4H inaktiv (Smallcap-Universum ohne GWS-Tracking). Technisches Warnsignal: Rückfall unter $110 (Konsolidierungszone der Post-Earnings-Woche) würde die Anschlusskäufer-These schwächen; Halten über $130 wäre Bestätigung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($280–$450):** AI-Photonik-Supercycle hält bis 2029–2030 an, AAOI diversifiziert die Kundenbasis über Amazon hinaus, Bruttomarge re-ratet strukturell auf 35%+. Normalisiertes EPS $7–10 × 40–45x.</p>
+<p>**Base ($120–$220):** Zyklus normalisiert nach dem 2027er-Capex-Peak, AAOI hält einen kleineren, aber profitablen Nischenanteil am Optik-Markt. Normalisiertes EPS $4–6 × 25–30x.</p>
+<p>**Bear ($20–$70):** Kundenkonzentration realisiert sich (CATV- oder Hyperscaler-Kunde fällt weg), chinesische/taiwanesische Wettbewerber kommoditisieren das Segment, negativer FCF erzwingt weitere dilutive Kapitalmaßnahmen.</p>
+<p>Entscheidende Variable: Verbreiterung der Kundenbasis jenseits der beiden Konzentrationsrisiken (CATV-Großkunde, Amazon).</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −16,9%). AAOI ist kein Compounder und aktuell auch kein reiner Trading-Trade auf Basis der Zahlen — es ist ein High-Conviction-Momentum-Play, dessen technisches Signal (RS-Score 244,3) der fundamentalen Wende vorauseilt, während die Bewertung bereits einen Großteil des Hypergrowth-Szenarios einpreist. Die Kombination aus extremer Kundenkonzentration (99% Top-10, 42% Einzelkunde CATV), negativem FCF und hoher historischer Verwässerung (+45–52% Aktienanzahl YoY) macht Positionsgröße zur zentralen Risikovariable — max. 1–2% eines diversifizierten Portfolios, engmaschiges Stop-Management angesichts Beta 3,69. **Coherent (COHR)** ist mit Fwd-PE ~32x das ausgewogenere, margenreifere Instrument für dieselbe AI-Photonik-These bei geringerer Kundenkonzentration. **Lumentum (LITE)** bietet über Fwd-PE ~52x mehr etablierte Hyperscaler-Diversifikation, aber zu einem spürbaren Bewertungsaufschlag ggü. AAOI.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Die eigenen Szenarien ergeben trotz starkem Katalysator ein negatives EV (−16,9%) bei extremer Kundenkonzentration (99% Top-10) und hoher historischer Verwässerung, das technische RS-Setup bleibt jedoch intakt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

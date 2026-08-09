@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MTW — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">09.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MTW</h1>
+      <h2>The Manitowoc Company, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Farm & Heavy Construction Machinery</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">58</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 09.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$18.67</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">18.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">1.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">28–34</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">17–22</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$9</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Aggregatoren (stockanalysis.com, WallStreetZen) zeigen noch den Vor-Earnings-Snapshot ($14,33, Market Cap $513,9 Mio., Forward-KGV 20,56x) vor dem +32,4%-Sprung am 07.08.2026. Diese Analyse nutzt den verifizierten Schlusskurs vom 07.08.2026 ($18,67, Nachbörse bis $18,82, nahe 52-Wochen-Hoch $19,15); ein aktuellerer Print für 08./09.08. war nicht verifizierbar.</p>
+<p>MTW war 2025 ein Krisenfall — Verlustquartale (Q1/25 −$0,18, Q1/26 −$0,17), Backlog-Tief $729 Mio. Der Q2/26-Report ist ein Wendepunkt mit Substanz: EPS $0,46 vs. $0,11 Konsens (+318%), FY26-Guidance kräftig angehoben (EPS $0,80–$1,20 vs. zuvor $0,45–$0,90), Auftragsbestand erholt auf $1,05 Mrd. (+44% YoY, Book-to-Bill 1,2). Struktureller Kern: Ein Teil der Order-Beschleunigung koppelt an den US-Rechenzentrumsbau (Bauausgaben ~4x YoY), der Kran-Nachfrage für Stahlbau, Kühltürme, Substationen erzeugt — potenziell strukturell neben dem Nichtwohnbau-Zyklus. Sell-Side-Kursziele (Ø $10,33, "Strong Sell") liegen deutlich unter dem Kurs, erkennbar nicht aktualisiert. Kernfrage: Anfang eines mehrjährigen Zyklus oder Einmaleffekt aus vorgezogenen Bestellungen?</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Reiner Kranhersteller: Grove (mobile Allrad-/Teleskopkrane), Potain (Turmdrehkrane), Manitowoc-Marke (Raupenkrane) — kapitalintensive OEM-Fertigung, hoher Fixkostenanteil</li>
+<li>CRANES+50-Strategie: Aftermarket erreichte TTM-Rekord $696 Mio., >32% des Umsatzes — höhermargig, zyklusresistenter als Neumaschinen</li>
+<li>Operativer Hebel in beide Richtungen: verstärkte 2025 die Verlustquartale, verstärkt jetzt den Aufschwung überproportional (Q2 Umsatz +10% YoY, EPS-Sprung stärker)</li>
+<li>3 geografische Segmente (Americas, EURAF, MEAP) — Nordamerika/Europa-lastig, Nachfrage folgt Nichtwohnbau-/Infrastrukturzyklen</li>
+<li>Neuer Nachfragetreiber Rechenzentrumsbau (Stahlbau, Kühltürme, Substationen) — kein eigenes Segment, Beitrag nicht quantifizierbar</li>
+<li>Orders volatil: Q2/26 +56% YoY auf $709 Mio., Book-to-Bill 1,2 — Vorlaufindikator, kein garantierter Trend</li>
+<li>Zölle als direkter Kostenfaktor (Q4/25: $4 Mio. Belastung) — Abhängigkeit von globalen Stahllieferketten</li>
+<li>Bilanz mit Verschuldungsgrad: Schulden ~$499 Mio., Cash dünn (~$78 Mio.)</li>
+</ul>
+<p>Peer-Multiples (WebSearch, nicht in fundamentals.json): Terex (TEX) 11,53x, Astec (ASTE) 13,25x, Caterpillar (CAT) 28,39x Forward-KGV, CAT als größerer Referenzpunkt.</p>
+<h3>3. BULL CASE</h3>
+<p>Backlog-Rekord ist Anfang eines mehrjährigen Zyklus: Rechenzentrumsbau-Nachfrage bleibt zusätzlich zum klassischen Infrastrukturzyklus bestehen, Orders >$650 Mio./Quartal, Aftermarket-Anteil steigt weiter. Strukturelle Marge über Zyklusmittel wäre nur über diesen Mix-Shift erklärbar — technologischer Burggraben/Wechselkosten sind bei Kranen nicht ausgeprägt, strukturelle Differenzierung bleibt Mix-, keine IP-Frage. Annahme (kein Konsens, keine FY27-Schätzung verfügbar): FY27-EPS ~$1,60 × 19x Forward (nahe oberem Rand der Peer-Bandbreite, unterhalb CAT) = $30,40. Bull-Kursziel: $28–$34. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Beat und Guidance-Anhebung bestätigen eine echte, noch nicht mehrjährig bewiesene Erholung — Backlog-Konversion treibt 2026/27 Umsatz/Marge, das Orders-Tempo normalisiert sich, da ein Teil vorgezogene Nachfrage sein dürfte. Annahme (kein Konsens): FY27-EPS ~$1,20 × 16x Forward (nahe eigenem Forward-KGV ~18,7x, leicht konservativer, innerhalb Peer-Bandbreite) = $19,20. Base-Kursziel: $17–$22. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Order-Beschleunigung erweist sich als Vorzieheffekt statt Rückenwind, Book-to-Bill fällt 2027 unter 1,0. Kundenkonzentration: nicht beurteilbar. Geopolitik/Zölle: $4 Mio. Belastung Q4/25 real, weitere Eskalation konkretes Risiko; China-Exposure nicht verifizierbar. Lieferkette: keine Foundry-Abhängigkeit, aber zollsensitive Stahllieferketten, Zulieferer-Konzentration nicht beurteilbar. Verwässerung: SBC-Trend nicht in den Daten, nicht beurteilbar. Regulierung: keine akuten Risiken erkennbar, nicht beurteilbar über Sektorstandard hinaus. Schwachpunkt: Schulden ~$499 Mio. bei dünnem Cash (~$78 Mio.), D/E ~65% — Abschwung träfe auf Bilanz ohne Reserve. Annahme: FY27-EPS ~$0,60 × 12x (nahe TEX-Untergrenze 11,53x) = $7,20. Bear-Kursziel: $6–$9. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $31 + 0,45 × $19,50 + 0,30 × $7,50 = $7,75 + $8,78 + $2,25 = **~$18,80 — implizites Upside vs. aktuellem Kurs ($18,67): +0,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE (TTM) 1,12% und Nettomarge (TTM) 0,3% spiegeln überwiegend die Verlustquartale 2025 wider, nicht die Q2/26-Dynamik — Trough-Werte, kein Beweis für erreichte strukturelle Verbesserung. Rohmarge 18,11% (TTM) ist für einen Kapitalgüterhersteller mit hohem Aftermarket-Anteil moderat. Operative Marge TTM ~1,9% liegt weit unter gesundem Zyklus-Mittel. Free Cashflow bleibt negativ (Q2: −$6 Mio., FY26-Guidance $50–70 Mio. positiv) — Wendepunkt für H2/26 avisiert, nicht erreicht. Bilanz: Schulden ~$499 Mio., D/E ~65%, Cash ~$78 Mio. — solide, ohne große Reserve. Der einzige echte Burggraben: installierte Basis plus Aftermarket-Ökosystem (CRANES+50, Rekord $696 Mio., >32% Umsatzanteil) — ein scheinbarer Burggraben wäre reine Markenstärke ohne Wechselkosten, da Krane ausgeschrieben werden.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV auf Basis Kurs + FY26-Guidance-Mitte (EPS $1,00): rund 18,7x — die von Aggregatoren gezeigten 20,56x basieren auf dem veralteten Vor-Earnings-Kurs $14,33, nicht mehr aussagekräftig. Gegen die Peer-Bandbreite (TEX 11,53x, ASTE 13,25x, CAT 28,39x) liegt MTW über TEX/ASTE, unter CAT — Prämie erklärbar durch Guidance-Anhebung/Backlog-Rekord, mit Risiko einer Überreaktion auf einen Quartalsbericht. Zyklische Bewertung darf nicht am KGV allein hängen: EV (Market Cap ~$670 Mio. + Nettoverschuldung ~$420 Mio. ≈ $1,09 Mrd.) / FY26-Umsatzmitte $2,35 Mrd. ergibt EV/Sales ~0,46x — für 32%+ margenstarken Aftermarket nicht teuer, aber die dünne TTM-Nettomarge (0,3%) macht das Multiple ohne Normalisierung wenig aussagekräftig. Was preist der Kurs ein? Bei ~0,46x EV/Sales und Exit-Multiple 14–16x impliziert der Kurs eine Nettomarge-Erholung von 0,3% auf ca. 3–4% binnen 2–3 Jahren (Annahmen: Umsatz $2,3–2,5 Mrd., 35,9 Mio. Aktien) — plausibel, aber unbewiesen; ambitioniert, nicht unrealistisch.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Interest 1,1 Mio. Aktien (3,4% des Streubesitzes), −13,3% ggü. Vorperiode — geringe bearishe Positionierung, kein Squeeze-Setup, aber auch kein Hinweis auf institutionelle Skepsis. Auffälligstes Signal: Analysten-Konsens "Strong Sell", Ø-Kursziel $10,33–10,50 (Barclays zuletzt $11, Underweight) — signifikant unter dem Kurs, erkennbar nicht aktualisiert; ein Extremfall hinterherlaufender Sell-Side-Ziele. Hypothese, nicht datenbasiert: Der Tagessprung dürfte überwiegend Fast-Money/Short-Covering/Retail widerspiegeln, Long-Only braucht bei $670 Mio. Market Cap i. d. R. Wochen zum Aufbau. Enttäuschungsrisiko: Fällt Q3/26 hinter die Guidance zurück, dürfte die Reaktion überproportional negativ ausfallen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar (nicht im getrackten Universum). Aus WebSearch verifizierbar: Kurs sprang am 07.08.2026 um +32,4% auf $18,67 (Nachbörse bis $18,82), nahe 52-Wochen-Hoch $19,15 (Tief $9,09) — mehr als eine Verdopplung vom Jahrestief. Handelsvolumen nicht verifizierbar — keine Aussage zu Kapitulations-/Distributionscharakter möglich. Das Momentum ist fundamental gestützt (Beat + Guidance + Backlog-Rekord), nicht rein reaktiv, aber die Bewegung lief an einem Tag, Nachhaltigkeit ungetestet. Warnsignal: Rückfall unter das Gap-Niveau (grob $16–17) wäre ein früher Fehlschlag-Indikator.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($35–$50):** Rechenzentrumsbauboom wird mehrjährige, teils strukturelle Nachfragekomponente, Backlog >$1,2 Mrd. dauerhaft, Aftermarket-Anteil >35%, Marge nähert sich Peer-Mitte.</p>
+<p>**Base ($18–$28):** Normaler Zyklus mit moderatem Rechenzentrums-Zusatzeffekt, Backlog $800 Mio.–1 Mrd., EPS normalisiert $1,00–1,50.</p>
+<p>**Bear ($6–$12):** Erneuter mehrjähriger Abschwung (Zinsen, Zölle, nachlassendes Data-Center-Capex), Backlog zurück Richtung 2025er-Tief, Bilanz ohne Reserve zwingt zu defensiver Kapitalallokation.</p>
+<p>Entscheidende Variable: Ob der Rechenzentrums-Nachfrageschub struktureller Natur ist oder 2026 ein Einmaleffekt bleibt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV +0,7%) — der Markt hat Beat und Guidance-Anhebung binnen eines Handelstages weitgehend eingepreist. MTW ist kein Buy-and-Hold-Compounder (fehlende Marge, ROE, Bilanzreserve), sondern ein hochvolatiler zyklischer Trade mit unbewiesenem strukturellem Zusatzargument. Für Long-Only-Investoren ungeeignet; für taktische, zyklus-affine Trader mit strikter Stop-Disziplin ein legitimes, binäres Setup — Bestätigung kommt frühestens mit Q3/26. Positionsgröße: max. 1–2% eines Portfolios angesichts Market Cap ~$670 Mio. und Bilanzdünnheit. Analyst-Konsensziel $10,33 (Strong Sell) — erkennbar veraltet, kein Ceiling/Floor, sondern Beleg für die Trägheit der Sell-Side.</p>
+<p>**Terex (TEX)** (Forward-KGV 11,53x) ist das günstigere, breiter diversifizierte Baumaschinen-Instrument mit ähnlicher Zyklizität, aber ohne frischen Katalysator. **Astec (ASTE)** (13,25x) bietet über Infrastruktur-/Straßenbaugeräte verwandtes, weniger krankonzentriertes Exposure. Für die reinste Wette auf einen kranspezifischen Rechenzentrums-/Backlog-Zyklus bleibt MTW das konzentrierteste, aber riskanteste Instrument.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz starkem Beat und Guidance-Anhebung ergeben die eigenen Szenarien nach dem +32%-Sprung keinen asymmetrischen Edge (EV +0,7% ggü. aktuellem Kurs $18,67).</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

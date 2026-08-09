@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>FNKO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">09.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>FNKO</h1>
+      <h2>Funko, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Leisure Products</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">49</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 09.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$5.78</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">10.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">39.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-30.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-0.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">9,00–11,00</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">5,00–6,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">1,00–2,00</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">20%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Datenbasis: yfinance-Livefetch war netzwerkseitig blockiert (403 auf Proxy-Ebene) — alle Kennzahlen unten stammen aus WebSearch-Recherche, Stand Schlusskurs 07.08.2026: **$5,78**. Funko war über Jahre ein Lehrbuchbeispiel für ein brechendes Konsumgütergeschäft: FY2023-Nettoverlust von -154,1 Mio.$ (inkl. 132,5 Mio.$ Steuerwertberichtigung nach dem Arizona-Lager-Debakel), Umsatzrückgang von 1,32 Mrd.$ (FY2022) auf 908,2 Mio.$ (FY2025), Q2/25-Verlust von -40,5 Mio.$. Am 06.08.2026 kippte das Bild abrupt: Q2/26-Umsatz $207,7 Mio. (+7% YoY, über Guidance), Bruttomarge Rekord 56,6% (getrieben von einem 25,4 Mio.$ Einmaleffekt aus Zollrückerstattungen; normalisiert ~44,4%), adjustiertes Nettoergebnis $15,0 Mio. vs. -26,7 Mio.$ im Vorjahr, EPS-Surprise +240,5%. Die FY2026-Adj.-EBITDA-Guidance wurde von 70-80 Mio.$ auf 100-110 Mio.$ angehoben, die Umsatzguidance (flat bis +3%) bestätigt. Der Markt hat den Sprung bereits mit +11,4% am Earnings-Tag honoriert — die eigentliche Frage ist, ob dies der Anfang einer strukturellen Margenerholung ist oder ein durch einen Einmaleffekt aufgeblähtes Quartal in einem strukturell schrumpfenden Geschäft. Strukturell verändert hat sich real: die im Februar 2026 verhandelte Fünfte Kreditvertrags-Änderung (Laufzeitverlängerung bis Dez. 2027, Covenant-Erleichterung) kauft Zeit, löst aber die Verschuldung nicht.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Lizenzmodell: Funko zahlt Royalties an IP-Inhaber (Disney, Marvel, Star Wars etc.) für Pop!-Figuren — kein eigenes IP, strukturelle Abhängigkeit von Lizenzgebern</li>
+<li>Umsatztreiber ist Produktzyklus/Neuheiten-Frequenz, nicht wiederkehrende Abo-Erlöse — volatiler als klassische Konsumgütermarken</li>
+<li>Operativer Hebel ist hoch: Fixkosten in Lager/Logistik verstärken Margenschwankungen in beide Richtungen (2022er Arizona-Lagerkrise war genau dieser Hebel invertiert)</li>
+<li>Q2/26-Bruttomarge von 56,6% ist teilweise ein Einmaleffekt (Zollrückerstattung), nicht die neue Normalität — normalisiert 44,4%</li>
+<li>Europa wächst mit +19% YoY deutlich stärker als der US-Kernmarkt — geografische Diversifikation als Stabilisator</li>
+<li>Working-Capital-Disziplin (Lagerbestand) ist seit der 2022er Krise die zentrale operative Stellschraube</li>
+<li>D/E ~1,65x, Gesamtverschuldung $201,1 Mio. (Q2/26, von 225,3 Mio.$ YE2025) — Fünfte Kreditvertrags-Änderung erzwingt Pflichttilgungen oberhalb 50 Mio.$ Cash-Bestand</li>
+<li>Direct-to-Consumer/Retail-Expansion als margenstärkerer Kanal, aber im Datensatz nicht separat quantifizierbar</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Hasbro (HAS, Fwd-PE 13,59x), JAKKS Pacific (JAKK, Fwd-PE 12,45x), Mattel (MAT, Fwd-PE 10,41x); Industrieschnitt 9,82x. Bull-These: Der Q2-Turn ist keine Eintagsfliege — Kostendisziplin, europäisches Wachstum und diversifizierte Sourcing-Strategie (Zollmitigation wird strukturell statt einmalig) halten die Marge nahe 45-46%, Adj.-EBITDA erreicht FY27 $130-140 Mio., das Multiple re-ratet Richtung Peer-Oberkante bei bestätigter Konsistenz. Annahme (kein Konsens): FY27-EPS ~$0,75 × 13,5x Forward (nahe HAS-Bandbreitenende) = $10,13. Bull-Kursziel: $9,00–$11,00. Eintrittswahrscheinlichkeit: 30%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Der Turnaround ist real, aber der Q2-Einmaleffekt fällt weg, Bruttomarge pendelt sich near 44-45% ein, Umsatzwachstum bleibt niedrig (Guidance-Mitte), Verschuldung sinkt graduell. Konsens-Forward-KGV FY27 liegt bei 10,18x (Seeking Alpha) — nahe dem eigenen aktuellen Multiple und nahe MAT (10,41x). Annahme: FY27-EPS ~$0,58 (Konsens-Implikat aus 10,18x-Multiple auf aktuellem Kurs) × 10x Forward = $5,80. Base-Kursziel: $5,00–$6,50. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der Zoll-Einmaleffekt verschwindet vollständig, US-Retailer-Destocking (das Kernproblem 2023-2025) kehrt zurück, Guidance wird erneut gesenkt wie in den Vorjahren üblich. Kundenkonzentration: Auf Datenbasis nicht quantifizierbar (Einzelhandelspartner nicht offengelegt). Geopolitik/China-Exposure: Fertigung stark China-abhängig, Zollrisiko strukturell ungelöst trotz aktueller Rückerstattung. Lieferkette: Konzentriertes Sourcing in Asien — Single-Source-Risiko auf Datenbasis nicht abschließend quantifizierbar. Verwässerung/Bilanzqualität: Trotz Schuldenabbau (Gesamtverschuldung $201,1 Mio., -16 Mio.$ ggü. Vorquartal via Zollforderungsverkauf) bleibt D/E bei 1,65x hoch; die Fünfte Kreditvertrags-Änderung erzwingt Pflichttilgungen und wurde erst nötig, weil Covenants 2026 gerissen worden wären — ein wiederkehrender Deleveraging-Zwang bei erneuter Schwäche ist real, ebenso eine offengelegte Material Weakness in der internen Kontrolle (FY2025-10-K) als Governance-Warnsignal. Regulierung: sektortypisch gering. Annahme: FY27-EPS ~$0,15 (Marge fällt auf Vorkrisenniveau zurück) × 7x (unter Industrieschnitt, Kompression bei brechender These) = $1,05. Bear-Kursziel: $1,00–$2,00. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>**Summe: 30% + 50% + 20% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,30 × $10,00 + 0,50 × $5,75 + 0,20 × $1,50 = $3,00 + $2,875 + $0,30 = **~$6,18 — implizites Upside vs. aktuellem Kurs ($5,78): +6,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen klaren asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE TTM -30,43% und Nettomarge TTM -6,30% sind rückwärtsgewandt verzerrt — sie enthalten die Verlustquartale vor dem Q2/26-Turn und bilden die aktuelle Ertragslage nicht ab; eine belastbare positive ROE-Zahl liegt noch nicht vor. Bruttomarge TTM 39,55%, Q2/26 56,6% (inkl. Einmaleffekt), normalisiert ~44,4% — echte, aber noch nicht über mehrere Quartale bestätigte Verbesserung. Operativer Cashflow H1/26 +$23,6 Mio. vs. -$44,4 Mio. H1/25 — der stärkste Qualitätsindikator im Datensatz, zeigt reale Working-Capital-Disziplin statt nur GAAP-Kosmetik. ROIC nicht verfügbar. Bilanz: Verschuldung $201,1 Mio., Cash ~$34 Mio., D/E 1,65x — mittlere bis schwache Bilanzqualität, durch Kreditvertrags-Änderung stabilisiert, nicht gelöst. Der wirtschaftliche Burggraben (Lizenzportfolio, Marktführerschaft in Pop!-Figuren) ist real, aber kein Preissetzungsschutz — er schützt vor Marktzutritt, nicht vor Nachfrageschwäche.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der Kurs ein? Market Cap ~$323 Mio. + Nettoverschuldung ~$167 Mio. (Debt $201,1 Mio. − Cash ~$34 Mio.) ergibt EV ~$490 Mio. Bei Adj.-EBITDA-Guidance-Mitte $105 Mio. entspricht das EV/EBITDA ~4,7x — bei normalisiertem EBITDA (ohne 25,4 Mio.$ Zolleffekt, ~$80 Mio.) ~6,1x. Peers wie HAS/MAT handeln typischerweise deutlich höher (EV/EBITDA meist zweistellig) — der Markt preist damit weiterhin erhebliche Ausführungs- und Nachhaltigkeitszweifel am Q2-Beat ein, nicht schon einen bestätigten Turnaround. Das ist plausibel, kein Overshoot: ein einzelnes starkes Quartal nach Jahren struktureller Verluste rechtfertigt noch keine volle Peer-Bewertung. Eigenes Forward-KGV (10,18x, 2027e) liegt nahe MAT (10,41x), deutlich unter HAS (13,59x) und JAKK (12,45x) — der Abschlag ist strukturell erklärbar durch die höhere Verschuldung und die kürzere Nachweishistorie des Turnarounds. Analystenkonsens-Kursziel $6,50 (2 Analysten, S&P Global), DA Davidson zuletzt $8 (Buy, von zuvor $7) — als Orientierungspunkt, nicht als Ceiling zu verstehen, und mit nur zwei abdeckenden Analysten statistisch dünn abgesichert.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Hypothese, nicht datenbasiert: Institutionelle Ownership-Zahlen streuen je nach Quelle stark (77-87%) und wirken teils veraltet — belastbar ist nur, dass Vanguard/BlackRock als passive Halter rund 5 Mio. Aktien kontrollieren. Short Interest lag laut Feb./März-2026-Daten im hohen einstelligen bis niedrigen zweistelligen Prozentbereich des Streubesitzes — vor dem Q2-Beat, daher potenziell veraltet; ein Short-Squeeze-Element beim Kurssprung ist möglich, aber nicht verifizierbar. Enttäuschungsrisiko: Bei nur zwei Analysten mit Coverage kann ein einziges schwaches Q3 die fragile positive Story schnell wieder kippen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar (nicht im getrackten Universum). Kurs $5,78 notiert oberhalb 5-, 20- und 50-Tage-EMA (bullisher Trend), RSI 61,3 (moderat, kein Overbought-Extrem). 52-Wochen-Range $2,22–$6,35, Beta 3,47 (sehr hohe Volatilität), Ø Tagesvolumen ~1,02 Mio. Aktien. Der Sprung von +11,4% am Earnings-Tag war eindeutig fundamental (Guidance-Anhebung), nicht rein technisch getrieben. Warnsignal: Rückfall unter die $5,00-Marke (psychologische Unterstützung, unterhalb der Post-Earnings-Konsolidierungszone) würde die Bull-These technisch entwerten.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($12–$18):** Margenerholung wird strukturell (Sourcing-Diversifikation, DTC-Mix), Verschuldung sinkt unter 1x EBITDA, Multiple re-ratet auf Peer-Niveau. Normalisiertes EPS $1,20–$1,50 × 12–14x.</p>
+<p>**Base ($6–$10):** Stabilisierung bei niedrigem Wachstum, Verschuldung bleibt Belastung, Multiple bleibt am unteren Peer-Rand. Normalisiertes EPS $0,60–$0,80 × 10x.</p>
+<p>**Bear ($1–$3):** Turnaround erweist sich als Einmaleffekt, Retailer-Destocking kehrt zurück, Dez.-2027-Kreditfälligkeit erzwingt dilutive Refinanzierung.</p>
+<p>Entscheidende Variable: Ob die Bruttomarge ohne Zolleffekt dauerhaft über 44% bleibt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben nur einen moderaten Edge (EV +6,8%) — kein High-Conviction-Setup. FNKO ist weder Compounder noch klassischer Momentum-Trade, sondern eine hochvolatile (Beta 3,47), fremdfinanzierte Turnaround-Wette: Ein einzelnes starkes Quartal nach Jahren struktureller Verluste, mit einem 25,4 Mio.$ Einmaleffekt im margenentscheidenden Quartal und einer erst im Februar 2026 unter Zwang verhandelten Kreditvertrags-Verlängerung im Hintergrund. Geeignet ausschließlich für spekulative, risikobereite Investoren mit enger Positionsgrößen-Disziplin (max. 1-2% eines Portfolios) und engem Stopp unter $5,00. **Mattel (MAT)** ist mit Fwd-PE 10,41x das relativ günstigere, deutlich bilanzstärkere reinere Instrument für eine Erholung im Collectibles-/Toy-Sektor ohne das Verschuldungsrisiko von FNKO. **Hasbro (HAS)** bietet mit Fwd-PE 13,59x die Qualitätsprämie für Anleger, die den Turnaround-Nachweis nicht vorwegnehmen wollen.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Trotz starkem Earnings-Katalysator (EPS-Surprise +240,5%, EBITDA-Guidance-Anhebung) bleibt die Verschuldung von $201,1 Mio. bei D/E 1,65x und der erst im Februar 2026 unter Covenant-Druck verlängerte Kreditvertrag ein ungelöstes Bilanzrisiko, das die volle Positionsgröße nicht trägt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
