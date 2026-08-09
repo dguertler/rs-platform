@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>OMDA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">09.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>OMDA</h1>
+      <h2>OMDA</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>N/A</span></div>
+        <div class="mi">Industrie: <span>N/A</span></div>
+        <div class="mi">MCap: <span>N/A</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 09.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">N/A</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#64748b">N/A</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">26–32</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">19–24</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$12</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Omada Health lieferte am 06.08.2026 das zweite GAAP-profitable Quartal in Folge (Nettogewinn >$5 Mio., EPS $0,08 vs. $0,06 erwartet) bei $88 Mio. Umsatz (+43% YoY) und hob die FY2026-Guidance kräftig an (Umsatz auf $334–340 Mio., Adj. EBITDA auf $21–27 Mio.). Das offensichtliche Narrativ ist "digitaler Gesundheits-IPO liefert Beat" — der eigentliche strukturelle Kern liegt tiefer: Die Bruttomarge kletterte um 700 Basispunkte auf 73% GAAP, weil die "Cost to Serve" (Kosten je Mitglied) dank AI/ML-gestützter Coach-Automatisierung um über 10% YoY gefallen ist. Das ist kein reiner Skalierungseffekt, sondern ein sich verbessernder Grenzkosten-Mechanismus — genau die Kennzahl, die eine vorherige Verlustserie erklärt (Omada war vor diesen zwei Quartalen strukturell defizitär). Der Markt reagierte gemischt: Intraday-Spitze $20,78 am 06.08., Schlusskurs $19,54 am 07.08. — ein Teil-Give-back trotz des Beats, was auf Vorsicht bei der Nachhaltigkeit des Momentums hindeutet. OMDA ist nicht im RS-getrackten Universum (IPO 2025, Small-Cap $1,16 Mrd.), daher fehlt hier jedes technische Signal als Bestätigung — die These muss rein fundamental tragen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>B2B2C: Umsatz kommt von Arbeitgebern/Krankenversicherern, die Omada als Benefit einkaufen — nicht direkt vom Endnutzer bezahlt</li>
+<li>Kern: App-Coaching (Diabetes-Prävention, Hypertonie, muskuloskelettal) kombiniert mit vernetzten Geräten und menschlichen Health-Coaches</li>
+<li>Operativer Hebel: "Cost to Serve" sank >10% YoY durch AI/ML-Automatisierung — treibt die 700-Bp-Bruttomargenexpansion, nicht nur Volumen</li>
+<li>Erlösmodell teils PMPM, teils Outcomes-/Value-Based-gebunden — Interessenausgleich mit Payern, aber Abrechnungskomplexität</li>
+<li>Mehrjährige Arbeitgeber-/Health-Plan-Verträge reduzieren kurzfristige Volatilität, jährliche Open-Enrollment-Zyklen bleiben Erneuerungsrisiko</li>
+<li>Mitgliederwachstum (+45% YoY, ~1,1 Mio.) ist der primäre Umsatztreiber, nicht Preissetzung</li>
+<li>GLP-1-Medikamente sind zweischneidig: Substitutionsdruck aufs Coaching versus Cross-Sell als Adhärenzprogramm</li>
+<li>Netto-Cash-Bilanz (~$200 Mio., praktisch schuldenfrei) erlaubt Kondition-Expansion ohne Fremdkapitalbedarf</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers (EV/Revenue, da P/E bei derart früher Profitabilität kaum aussagekräftig ist): Hims & Hers (HIMS) ~2,7–2,9x, Teladoc (TDOC) ~0,55–0,6x, Evolent Health (EVH) ~0,55–0,6x. Bull-Annahme (kein Konsens): FY27E-Umsatz $455 Mio. (+35% ggü. FY26-Guidance-Midpoint $337 Mio.) durch beschleunigtes Cross-Selling in Hypertonie/MSK und Enterprise-Land-and-Expand. Strukturelle Marginnachhaltigkeit: proprietäre AI/ML-Kosten-Engine (Technologieführerschaft), Produktmix-Verschiebung zu margenstärkeren Zusatzkonditionen, First-Mover-Skalenvorteil ggü. Virta/Included Health, mehrjährige Vertragsbindung mit Wechselkosten für Arbeitgeber, operative Hebelwirkung durch AI-Coach-Automatisierung. Multiple 3,2x EV/Revenue (oberhalb der HIMS-Bandbreite, Prämie für Wachstum + Profitabilitätsinflektion) = EV $1.456 Mio. + Netto-Cash $220 Mio. = $1.676 Mio. / 59,4 Mio. Aktien. Bull-Kursziel: $26–$32. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Annahme (kein Konsens): FY27E-Umsatz $421 Mio. (+25% ggü. Midpoint), Mitgliederwachstum verlangsamt auf ~30%, aber weiter über Peer-Schnitt. Multiple 2,5x EV/Revenue (nahe eigenem aktuellem Niveau, mittig zwischen HIMS-Prämie und TDOC/EVH-Abschlag) = EV $1.053 Mio. + Netto-Cash $210 Mio. = $1.263 Mio. / 59,4 Mio. Aktien. Base-Kursziel: $19–$24. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: GLP-1-Medikamentensubstitution ersetzt statt ergänzt das Coaching-Modell, kombiniert mit Arbeitgeber-Benefit-Budgetkürzungen in einem makroökonomischen Abschwung. Kundenkonzentration: aus den vorliegenden Daten nicht quantifizierbar — keine Einzelkundenangaben verfügbar. Geopolitik/China-Exposure: nicht relevant (reines US-Gesundheitsgeschäft). Lieferkette/Foundry: nicht relevant, Software-/Service-Modell ohne Single-Source-Hardwareabhängigkeit. Verwässerung: SBC-Quote nicht im Datensatz verfügbar, aber bei jungen Tech-IPOs typischerweise erhöht — strukturelles Risiko vorhanden, nicht quantifiziert. Regulierung: CMS-Erstattungspolitik für virtuelle Chronic-Care-Codes und HIPAA-Datenschutzauflagen sind reale, nicht auszuschließende Belastungsfaktoren. Annahme: FY27E-Umsatz $377 Mio. (+12%, deutliche Wachstumsverlangsamung) × 0,9x EV/Revenue (nahe TDOC/EVH-Floor, Re-Rating bei brechender Wachstumsthese) = EV $339 Mio. + Netto-Cash $190 Mio. = $529 Mio. / 59,4 Mio. Aktien. Bear-Kursziel: $7–$12. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $29 + 0,45 × $21,5 + 0,30 × $9,5 = $7,25 + $9,675 + $2,85 = **~$19,78 — implizites Upside vs. aktuellem Kurs ($19,54): +1,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE (TTM) ist mit rund -5,9% noch negativ (TTM-Nettoverlust -$12,78 Mio. auf Eigenkapital $217,3 Mio.) — reflektiert primär die Verlustquartale vor der jüngsten Profitabilitätswende, nicht den aktuellen Zustand; die letzten zwei Quartale waren bereits GAAP-profitabel. Gross Margin 73% (Rekord) und Adj.-EBITDA-Guidance $21–27 Mio. zeigen eine klare Trendwende. Bilanz ist stark: praktisch schuldenfrei, Netto-Cash ~$190–220 Mio. (Quellenabweichung: teils $0, teils ~$30 Mio. Bruttoschulden ausgewiesen — Nettoposition in beiden Fällen deutlich positiv). Exakter FCF-Wert für Q2 nicht öffentlich verifiziert; Sekundärquellen berichten bereits positive Free Cashflows (Cash-Runway >3 Jahre). Der ökonomische Burggraben ist teilweise scheinbar: die AI/ML-Kosten-Engine ist ein echter, messbarer Vorteil, aber Wechselkosten für Arbeitgeberkunden sind bei jährlichen Benefit-RFPs strukturell niedriger als bei Enterprise-Software — Wettbewerber (Virta, Included Health) können ähnliche Modelle replizieren.</p>
+<h3>7. BEWERTUNG</h3>
+<p>TTM-Umsatz $260,21 Mio. ist IPO-/Skalierungs-verzerrt (Omada wuchs in den letzten Quartalen stark), daher primäre Bewertungsbasis: annualisierter Run-Rate aus Q2 ($88 Mio. × 4 = $352 Mio.), nahe der FY26-Guidance-Mitte $337 Mio. Konsens-Forward-PE (~88x, auf aktuellen Kurs umgerechnet) ist bei einem derart jungen, gerade erst GAAP-profitablen EPS-Niveau kaum belastbar — EV/Revenue ist die robustere Kennzahl. Aktuell: EV ~$960 Mio. (Market Cap $1,16 Mrd. − Netto-Cash ~$200 Mio.) / Guidance-Midpoint $337 Mio. = 2,85x. Rückrechnung "Was preist der Kurs ein?": Bei 2,85x EV/Revenue und der Annahme eines langfristig fairen Reifezustand-Multiples von ~3x bei ~20% FCF-Marge preist der Markt bereits mehrere Jahre fortgesetztes 25–30%-Wachstum plus anhaltende Margenexpansion ein — ambitioniert, aber angesichts der jüngsten Guidance-Anhebung nicht unplausibel. Peer-Einordnung: OMDA (2,85x) liegt deutlich über TDOC (~0,55–0,6x) und EVH (~0,55–0,6x), aber unter/nahe HIMS (~2,7–2,9x) — die Prämie gegenüber den Legacy-Telehealth-Peers ist durch höheres Wachstum (43% vs. TDOC-Stagnation) und die Profitabilitätsinflektion strukturell erklärbar, nicht aus den Daten unerklärbar. Analystenziele wurden nach dem Beat angehoben (Barclays $25, Citizens $21) — als Sentiment-Indikator, nicht als Kursziel-Ceiling zu verstehen, da sie der Kursbewegung typischerweise 6–12 Monate hinterherlaufen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Interest liegt bei 15,1% des Streubesitzes, +438,4% YoY — ein deutlicher Anstieg spekulativer Short-Positionen, der bei anhaltenden Beats Short-Squeeze-Dynamik erzeugen kann. Institutionelle Eigentümerquote ~51% (136 institutionelle Halter) zeigt bereits solide institutionelle Verankerung für einen Titel mit gut einem Jahr Börsenhistorie. Hypothese, nicht datenbasiert: Der Teil-Give-back von $20,78 (Intraday-Hoch 06.08.) auf $19,54 (Schluss 07.08.) trotz Beat könnte auf Gewinnmitnahmen nach der vorangegangenen 12-Monats-Rally (+33,6%) hindeuten. Enttäuschungsrisiko: Ein bevorstehender CEO-Wechsel (Sean Duffy wird zum 01.01.2027 Executive Chair, Wei-Li Shao übernimmt CEO) ist ein zusätzlicher Unsicherheitsfaktor, den der Markt bislang offenbar nicht stark eingepreist hat.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar (nicht im getrackten Universum). Auf Basis der recherchierten Kursdaten: 12-Monats-Performance +33,6%, Earnings-Reaktion zeigt ein Muster von Initial-Spike gefolgt von Teil-Rückgabe (Intraday-Hoch $20,78 → Schluss $19,54), was auf fehlende Kaufkraft zur vollständigen Bestätigung des Beats hindeutet. Als jüngst gelisteter Titel (IPO 2025) fehlt eine mehrjährige technische Historie mit verlässlichen Unterstützungs-/Widerstandszonen. Ein technisches Warnsignal wäre ein Rückfall unter das Vor-Earnings-Niveau (~$18) — das würde die fundamentale Verbesserung technisch komplett negieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($40–$60):** Omada wird zur führenden AI-gestützten Multi-Kondition-Plattform, GLP-1 wirkt als Cross-Sell- statt Substitutionstreiber, FY29E-Umsatz ~$750–850 Mio. bei 3,0–3,5x EV/Revenue und nachhaltigen Adj.-EBITDA-Margen >20%.</p>
+<p>**Base ($22–$38):** Solides 20–25%-CAGR-Wachstum, Multiple normalisiert moderat auf 2,0–2,5x neben Wettbewerbern wie Virta und Included Health, keine Marktdominanz.</p>
+<p>**Bear ($8–$15):** GLP-1-Substitution und Payer-Konsolidierung komprimieren das adressierbare Marktvolumen, Wachstum fällt auf High-Single-Digits, Multiple kompromiert auf Legacy-Telehealth-Niveau (TDOC/EVH ~0,5–0,7x).</p>
+<p>Entscheidende Variable: Ob GLP-1-Medikamente Omadas Coaching-Modell strukturell ergänzen (Adhärenz-Support) oder ersetzen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV +1,2%). OMDA ist kein Buy-and-Hold-Compounder auf diesem Bewertungsniveau, sondern ein spekulatives Wachstums-/Momentum-Play mit einem echten, datenbasierten fundamentalen Katalysator (zweites GAAP-profitables Quartal, Guidance-Anhebung, sinkende Cost-to-Serve) — aber bereits weitgehend im Kurs reflektiert, verstärkt durch hohe Short-Interest-Volatilität und einen bevorstehenden CEO-Wechsel. Geeignet ausschließlich für risikobereite, spekulative Investoren mit kleiner Positionsgröße (max. 1–2% eines diversifizierten Portfolios); für Long-Only-/Income-Investoren falsche Risikostruktur. **Hims & Hers (HIMS)** ist bei ähnlichem EV/Revenue (~2,7–2,9x) die reinere Wette auf ein bereits skaliertes, profitables Consumer-Health-Modell mit vergleichbarer GLP-1-Exposition. **Teladoc (TDOC)** ist mit 0,55–0,6x EV/Revenue deutlich günstiger, aber strukturell schrumpfend — die relative Bewertung ist indikativ attraktiver, nicht die fundamentale Qualität.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Die Erwartungswert-Rechnung zeigt trotz starkem Beat und Guidance-Anhebung keinen asymmetrischen Edge (+1,2% Upside), während die Bewertung bereits nahe der Peer-Bandbreitenspitze (HIMS) liegt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

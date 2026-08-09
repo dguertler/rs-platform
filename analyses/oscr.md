@@ -1,16 +1,16 @@
 # OSCR — KI-Aktienbewertung
 
-**Oscar Health, Inc.** · Healthcare · 07.08.2026 · Signal: Smallcap
+**Oscar Health, Inc.** · Healthcare · 09.08.2026 · Signal: Smallcap
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 26.51 |
-| Market Cap | $9.41 Mrd. |
+| Kurs | 27.9 |
+| Market Cap | $9.91 Mrd. |
 | Forward PE | 19.94 |
 | Revenue (TTM) | $13.30 Mrd. |
 | Gross Margin | 17.4% |
 | ROE | -2.6% |
-| RS-Score | 73.0 |
+| RS-Score | 105.4 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
@@ -18,83 +18,77 @@
 
 ## 1. INVESTMENT-CASE
 
-Oscar Health durchlief 2025 eine handfeste Krise: FY2025-Nettoverlust von $443,2 Mio. (Vorjahr: +$25,4 Mio. Gewinn), allein Q4 2025 mit -$352,6 Mio., getrieben von einer auf 95,4% explodierten Medical Loss Ratio (MLR) — eine Folge von Marktmorbidität und Risikoadjustierungs-Effekten im ACA-Marketplace-Geschäft. Q2 2026 zeigt eine der stärksten Normalisierungen im gesamten Screening: MLR fiel auf 79,2% (rund 12pp besser YoY), operatives Ergebnis drehte von -$230,5 Mio. auf +$388,6 Mio., EPS-Surprise lag bei +175-197%, und Management hob die FY26-Operating-Income-Guidance von $250-450 Mio. auf $500-700 Mio. an (+71% am Midpoint). Bemerkenswert: Der Kurs sprang zunächst premarket, drehte im Tagesverlauf aber ins Minus und schloss bei $26,51 — deutlich unter dem Tageshoch $32,80. Recherchierte Marktkommentare führen dies auf eine im Ausblick implizierte Verlust-Möglichkeit im zweiten Halbjahr 2026 zurück, die die Begeisterung über den Q2-Beat dämpfte. Was der Markt hier bewertet: ob die MLR-Normalisierung strukturell ist oder ob die für ACA-Insurer typische Volatilität im H2 erneut zuschlägt.
+DATENLAGE: Der wöchentliche Fundamental-Cache (Snapshot vor dem Q2/26-Bericht) liegt vor der jüngsten, gut dokumentierten Kursbewegung — Kurs im Cache $26,51 vs. aktueller RS-Platform-Schlusskurs $27,90 (07.08.2026, Abweichung 5,2%). Auslöser ist verifizierbar: Q2/26-Zahlen (06.08.) plus Guidance-Update. Alle Multiples wurden auf den aktuellen Kurs umgerechnet. Oscar Health hat in einem Quartal den kompletten Krisen-Case von Q2/25 (Nettoverlust -228,4 Mio.$, MLR 91,1%) gedreht: Nettogewinn +361,8 Mio.$, EPS +1,10$ (Surprise +189,2%), MLR 79,2%, Umsatz +70% auf 4,88 Mrd.$. FY26-Guidance wurde massiv angehoben (operatives Ergebnis 500-700 statt 250-450 Mio.$). Der Markt übersieht nicht den Beat, sondern rechnet die implizite H2-Kehrtwende korrekt: Die Guidance impliziert einen operativen H2-Verlust von 393-593 Mio.$, ausgelöst durch erwartete Mitgliederabgänge infolge verschärfter CMS-Program-Integrity-Prüfungen im ACA-Einzelmarkt. Die eigentliche Frage ist nicht "Turnaround ja/nein", sondern ob die Q2-Normalisierung strukturell oder teils reserve-getrieben war ("favorable prior period development" laut Management) — und ob der Markt mit der aktuellen Bewertung bereits mehr Nachhaltigkeit einpreist, als die eigene Guidance hergibt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Technologiegetriebener Krankenversicherer, primär im ACA-Individualmarkt (Marketplace) positioniert — Prämieneinnahmen gegen Risikoadjustierungs- und Rückversicherungsmechanismen
-- MLR (Medical Loss Ratio) ist die zentrale operative Kennzahl — jeder Prozentpunkt Verbesserung fließt fast direkt in die operative Marge
-- Umsatzwachstum TTM +52,6% YoY — stark, aber ACA-Marketplace-Wachstum ist auch regulatorisch/politisch exponiert (Subventionsstruktur, Enrollment-Regeln)
-- Tech-Plattform (Behandlungsnavigation, Virtual-Care) als differenzierender Kostenhebel gegenüber traditionellen Versicherern — Wirkung zeigt sich erst in der jüngsten MLR-Verbesserung
-- Hochvolatiles Geschäftsmodell (Beta 2,34) — Risikoadjustierungs-Zahlungen und Morbiditäts-Schwankungen können Quartalsergebnisse stark verzerren
-- D/E ~0,29x — moderate Verschuldung, kein Bilanzrisiko
-- FCF $1,63 Mrd. TTM bei $13,3 Mrd. Revenue — stark, spiegelt aber auch Prämienfloat-Dynamik eines Versicherers wider, nicht reinen Free Cashflow im klassischen Sinn
-- Analystenabdeckung breiter (10 Analysten), Konsens "hold", Kursziel $25,20 (Snapshot vor Q2, unter dem aktuellen Kurs)
+- Reiner ACA-Einzelmarkt-Player (Individual Exchange) — praktisch 100% Konzentration auf ein einziges, politisch exponiertes Segment, keine Diversifikation über Medicaid/Medicare/Commercial wie CNC, ELV, MOH oder UNH
+- ~2,96 Mio. Mitglieder, Umsatz fast vollständig prämienbasiert, MLR ist die zentrale Ergebnis-Stellschraube
+- Operativer Hebel extrem: Wechsel von -230,5 Mio.$ auf +388,6 Mio.$ operativem Ergebnis binnen eines Jahres bei "nur" 70% Umsatzwachstum — MLR-Normalisierung wirkt überproportional auf das Ergebnis
+- Digital-first-Technologieplattform (proprietäres Tech-Stack, KI-gestütztes Underwriting/Care-Management) als differenzierender Faktor gegenüber traditionellen Payern
+- Strukturelle Abhängigkeit: ACA-Subventionsniveau (IRA-Enhanced-Subsidies) und CMS-Zulassungsregeln bestimmen Mitgliederzahl direkt — Regulierung ist kein Rand-, sondern Kernrisiko
+- Skalennachteil gegenüber CNC (~140 Mrd.$ Umsatz), ELV (~180 Mrd.$) und UNH — geringere Verhandlungsmacht gegenüber Leistungserbringern begrenzt strukturell das Margenpotenzial
+- SG&A-Ratio-Ziel 15,6-16,1% (FY26) zeigt beginnende Skaleneffekte, aber von einer im Branchenvergleich noch kleinen Basis aus
+- Wachstum bislang fast ausschließlich preis-/mitgliedergetrieben, nicht durch Produktdiversifikation (ICHRA-Kanal noch früh)
 
 ## 3. BULL CASE
 
-Peers: Centene (CNC, Fwd-PE 12,05x), Elevance Health (ELV, Fwd-PE 12,68x), UnitedHealth (UNH, Fwd-PE 18,47x) — Bandbreite ~12-18,5x für Managed-Care/Health-Insurer. Bull-These: MLR-Normalisierung hält an, ACA-Marketplace stabilisiert sich regulatorisch, Oscar gewinnt weiter Marktanteile über die Tech-Plattform. Annahme (kein Konsens): FY27-EPS ~$2,20 × 18x (nahe UNH-Bandbreitenende, Prämie für Wachstum). Bull-Kursziel: $34–$45 (Midpoint $39,5). Eintrittswahrscheinlichkeit: 20%.
+Peers (Forward-KGV): Centene (CNC) 11,7x, Elevance (ELV) 15,15x, Molina (MOH) 15,2x, UnitedHealth (UNH) 21,84x als diversifizierter Premium-Anker. Bull-Multiple 20x — nahe UNH, gerechtfertigt nur bei bestätigtem, mehrjährigem Wachstumsvorsprung ggü. den reifen Peers. Annahme (kein Konsens): FY27-EPS $1,70 (Guidance-Momentum hält an, H2-Churn erweist sich als überschaubar, Marge expandiert weiter) × 20x = $34,00. Bull-Kursziel: $32-$38 (deckt sich mit Barclays' neuem PT $39, Overweight). Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: MLR-Verbesserung setzt sich fort, aber gedämpft durch die selbst kommunizierte H2-Unsicherheit; Guidance-Mitte wird ungefähr erreicht. Annahme (kein Konsens): FY27-EPS ~$1,70 × 15x (Mitte der Peer-Bandbreite). Base-Kursziel: $22–$29 (Midpoint $25,5). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Q2-Stärke bestätigt sich operativ, aber die H2-Guidance-Kehrtwende (Verlust 393-593 Mio.$) validiert sich real, Wachstumsprämie ggü. Peers schmilzt. Annahme: FY27-EPS $1,40 (Analysten-Konsens, angehoben von $0,55 vor dem Report) × 15x (nahe ELV/MOH, keine strukturelle Prämie mehr) = $21,00. Base-Kursziel: $19-$24 (Midpoint $21,50), Downside vs. aktuellem Kurs ca. -23% — innerhalb der Base-Grenze, kein Bear-Fall. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Die vom Management selbst angedeutete H2-2026-Verlustmöglichkeit materialisiert sich, MLR verschlechtert sich erneut durch Risikoadjustierungs-Nachbuchungen oder höhere Morbidität im Bestand — ein strukturelles, für ACA-Insurer wiederkehrendes Muster (siehe FY2025-Krise). Kundenkonzentration: aus Daten nicht quantifizierbar, aber Konzentration auf den ACA-Individualmarkt ist ein bekanntes strukturelles Risiko. Geopolitik: nicht relevant. Regulierung: ACA-Subventionspolitik und Risikoadjustierungsregeln sind ein zentrales, politisch beeinflussbares Risiko. Lieferkette: nicht relevant für Versicherer. Verwässerung: Aktienanzahl-Trend aus Daten nicht verfügbar. Annahme: FY27-EPS ~$0,70 × 12x (nahe CNC/ELV-Floor). Bear-Kursziel: $6–$11 (Midpoint $8,5). Eintrittswahrscheinlichkeit: 35%.
+Auslöser: CMS-Program-Integrity-Prüfungen entziehen mehr Mitglieder als von Oscar selbst modelliert, ACA-Subventionsniveau wird politisch beschnitten, MLR reißt über die 82,5%-Guidance-Obergrenze — H2-Verlust setzt sich 2027 fort. Kundenkonzentration: 100% ACA-Einzelmarkt, keine Diversifikationspuffer (quantifiziert). Geopolitik/China: nicht anwendbar auf das Geschäftsmodell. Lieferkette/Foundry: nicht anwendbar (kein Hardware-Hersteller). Verwässerung: SBC-Trend im Datensatz nicht verfügbar — nicht beurteilbar. Regulierung: zentrales Risiko, bereits quantifiziert über den H2-Verlustausblick. Annahme: FY27-EPS $0,70 × 11x (unter CNC-Floor, Stress-Abschlag für gebrochene Wachstumsthese) = $7,70. Bear-Kursziel: $7-$12 (Midpoint $9,50, nahe/unter 52-Wochen-Tief $10,69). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 20% + 45% + 35% = 100%**
+**Summe: 25% + 45% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,20 × $39,5 + 0,45 × $25,5 + 0,35 × $8,5 = $7,90 + $11,475 + $2,975 = **~$22,35 — implizites Downside vs. aktuellem Kurs ($26,51): -15,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25×$35,00 + 0,45×$21,50 + 0,30×$9,50 = $8,75 + $9,675 + $2,85 = **$21,28 — implizites Downside vs. aktuellem Kurs ($27,90): -23,7%.**
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE -2,6% und Nettomarge -0,3% (TTM) sind noch von der FY2025-Krise geprägt und bilden die Q2-Verbesserung noch nicht ab. Operating Margin TTM 15,2% wirkt hoch, dürfte aber durch die Kombination aus starkem Q2 und schwachen Vorquartalen verzerrt sein — im Zykluskontext sind ACA-Insurer-Margen grundsätzlich volatiler zu bewerten als bei etablierten Managed-Care-Playern. FCF $1,63 Mrd. ist bei einem Versicherer stark von Prämienfloat-Timing beeinflusst, nicht 1:1 mit klassischem operativem FCF vergleichbar — dies kann aus den vorliegenden Daten nicht abschließend aufgelöst werden. D/E ~0,29x — solide Bilanz.
+ROE (TTM, Cache) -2,6% — noch durch die Verlustquartale bis Q1/26 belastet, wird sich mit den Q2/26-Zahlen normalisieren, ist aber aktuell nicht repräsentativ für den Post-Turnaround-Zustand. Gross Margin 17,4%, Operating Margin 15,2% (Cache-Basis, vor Q2/26) — die Einzelquartals-Nettomarge Q2/26 lag bei 7,4% (361,8 Mio.$ / 4,88 Mrd.$), deutlich über dem TTM-Bild; diese Diskrepanz ist der Turnaround selbst, keine Anomalie. FCF (Cache) 1,63 Mrd.$ auf 13,3 Mrd.$ TTM-Revenue — solide, aber TTM-Basis vor der Guidance-Anhebung, daher nur indikativ. D/E 28,9% — niedrige Verschuldung, typisch für Payer-Modelle ohne Fabrik-Capex. Der "Burggraben" ist teils scheinbar: Die MLR-Verbesserung wurde vom Management selbst auch auf günstige Reserveauflösungen ("favorable prior period development") zurückgeführt — nicht ausschließlich auf strukturelle operative Exzellenz. Echter Burggraben bislang nur ansatzweise: Tech-Plattform, aber keine Skalenvorteile ggü. CNC/ELV.
 
 ## 7. BEWERTUNG
 
-DATENLAGE: Fundamental-Snapshot vom letzten wöchentlichen Update lag vor der jüngsten Kursbewegung — Kurs wurde für diese Analyse auf $26,51 (Schlusskurs nach den Q2-Zahlen, nach einer Intraday-Umkehr vom Tageshoch $32,80) aktualisiert. Konfidenz der Bewertungsaussagen reduziert. Forward-PE auf aktuellem Kursniveau: $26,51 / $1,57 (Konsens-Forward-EPS, noch vor der Q2-Anhebung) ≈ 16,9x — liegt damit INNERHALB der Peer-Bandbreite (CNC/ELV ~12-12,7x, UNH 18,5x), leicht über der Mitte. Was preist der aktuelle Kurs ein? Bei $26,51 gegen die eigene FY26-Operating-Income-Guidance-Mitte ($600 Mio.) impliziert das aktuelle Niveau eine anhaltende MLR-Verbesserung ohne substanzielles H2-Rückschlagsrisiko — ambitioniert angesichts der vom Management selbst genannten H2-Unsicherheit, nicht unplausibel, falls die Tech-Plattform-Kostenersparnisse strukturell sind. Normalisierter FCF ist bei einem wachsenden ACA-Insurer schwer im Vollzyklus zu isolieren — die Bewertung stützt sich daher primär auf die Forward-PE-Peer-Einordnung. Eigenes Forward-Multiple liegt innerhalb der Peer-Bandbreite, aber nahe deren Mitte trotz der zuletzt volatilen operativen Historie — aus den Daten nicht vollständig erklärbar, ob dies eine angemessene Wachstumsprämie oder ein noch nicht abgebautes Risikopolster darstellt.
+Forward-PE auf FY26-Basis (EPS-Konsens ~$0,77 laut Post-Earnings-Schätzung) liegt bei ~36x — verzerrt durch das H1/H2-Ungleichgewicht, keine sinnvolle Bewertungsbasis. Auf FY27-Basis (Konsens $1,40-$1,46) ergibt sich bei $27,90 ein Forward-PE von ~19-20x. Was preist der aktuelle Kurs ein? Rückrechnung: $27,90 / 15x (Base-Multiple) = impliziertes EPS $1,86 — rund 33% über dem aktuellen FY27-Konsens von $1,40. Der Markt preist also bereits nahe des eigenen Bull-Szenarios ein, nicht des Base Case — ambitioniert angesichts der eigenen H2-Verlust-Guidance. Peer-Einordnung: Eigenes Forward-PE (~19-20x) liegt über CNC (11,7x), ELV (15,15x) und MOH (15,2x), nahe aber unter UNH (21,84x) — eine Prämie von rund 30% ggü. dem ACA-nahen Peer-Median, strukturell nur teilweise erklärbar (höheres Wachstum ja, aber ohne UNH-Skalenvorteile). Analyst-Konsensziel (pre-Earnings, Cache) $25,20 vs. Barclays' neuer Post-Earnings-PT $39 — als Sentiment-Indikatoren, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 73,0 (Rang 31 von 860 im Smallcap-Universum) bleibt trotz des jüngsten Rücksetzers hoch — ein Hinweis darauf, dass der Score noch das starke mittelfristige Bild (6M +97,5%) reflektiert, während die kurzfristigen Fenster bereits drehen (5T -16,6%, 10T -7,9%, 20T -14,7%). Diese Divergenz ist wichtig: Der RS-Score dürfte bei anhaltender Schwäche in den kommenden Updates spürbar nachgeben. Hypothese, nicht datenbasiert: Die Intraday-Umkehr am Reporting-Tag deutet auf Fast-Money-Positionen hin, die auf die erste positive Reaktion aufgesprungen sind und beim Bekanntwerden der H2-Unsicherheit wieder ausgestiegen sind. Enttäuschungsrisiko bleibt hoch — Beta 2,34 verstärkt jede weitere Nachricht in beide Richtungen.
+Der -10%-Reflex am Earnings-Tag trotz massivem Beat ist ein klares Signal, dass der Markt kurzfristig auf die H2-Verlust-Guidance stärker reagiert als auf die Q2-Stärke — Fast-Money-Positionen dürften hier dominiert haben. Hypothese, nicht datenbasiert: Long-Only-Investoren dürften auf Bestätigung der H2-Zahlen warten, bevor sie nachkaufen. RS-Score 105,38 (Rang 32 im SC600) bleibt trotz jüngster Schwäche in einem positiven Bereich — das technische Bild ist widersprüchlicher als das fundamentale. Enttäuschungsrisiko: ein weiterer Guidance-Cut zu CMS-Churn im Q3-Call würde den Bear-Case schnell erreichbar machen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 73,0, Rang 31/860 (Smallcap) — noch stark, aber mit erkennbarer kurzfristiger Umkehr. Windows: 5T -16,6%, 10T -7,9%, 20T -14,7%, 50T +14,7%, 6M +97,5% — der Titel befindet sich in einer Korrektur innerhalb eines intakten mittelfristigen Aufwärtstrends. Momentum ist fundamental gestützt (echte MLR-Verbesserung), die jüngste Preisreaktion aber reaktiv auf die H2-Guidance-Unsicherheit. Technisches Warnsignal: Ein Rutsch unter $25 würde die Korrektur bestätigen und den RS-Rang weiter belasten.
+RS-Score 105,38, Rang 32 SC600. Windows: 5T -9,96%, 10T -3,93%, 20T -14,45%, 50T +18,25%, 6M +115,47% — kurzfristig klar angeschlagen, mittelfristig weiterhin außergewöhnlich stark. Tageskerze 06.08. (Earnings) zeigt Open $27,53, Tief $25,80, Close $26,54 bei Volumen 16,2 Mio. (deutlich über Schnitt) — echte Verkaufswelle trotz Beat; 07.08. Erholung auf $27,90. GWS-Signale (Weekly/Daily/4H) inaktiv — kein aktives Momentum-Signal. Aktuelles Momentum ist reaktiv (Earnings-Repricing), nicht rein fundamental gestützt. Warnsignal: Bruch unter $25,37 (Tagestief 07.08.) würde die Erholung negieren; Rückeroberung von $31 wäre ein Stabilisierungssignal.
 
-## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
+## 10. LANGFRISTIGES POTENZIAL (3-5 Jahre)
 
-**Bull ($40–$60):** MLR-Normalisierung wird strukturell, ACA-Marketplace-Regulatorik bleibt stabil, Oscar skaliert die Tech-Plattform profitabel weiter. Normalisiertes EPS $2,50-3,50 × 16-18x.
-
-**Base ($20–$35):** MLR bleibt volatil im ACA-typischen Muster, Wachstum hält an, Bewertung pendelt um Peer-Mitte. Normalisiertes EPS $1,50-2,20 × 13-16x.
-
-**Bear ($6–$15):** Erneute MLR-Krise durch Risikoadjustierung/Regulierungsänderung an der ACA-Subventionspolitik, Verlustrückkehr. Normalisiertes EPS $0,30-0,80 × 10-12x.
-
-Entscheidende Variable: Regulatorische Stabilität der ACA-Subventionsstruktur und Nachhaltigkeit der MLR-Verbesserung über H2 2026 hinaus.
+**Bull ($45-$70):** ACA-Marktwachstum hält an, OSCR skaliert profitabel über 5 Mio.+ Mitglieder, Tech-Plattform wird echter Kostenvorteil. Normalisiertes EPS $3,00-$3,50 × 18-20x. **Base ($22-$35):** Profitabilität etabliert sich zyklisch schwankend, MLR pendelt um 82%, Bewertung konvergiert zu ELV/MOH-Niveau. Normalisiertes EPS ~$2,00 × 13-15x. **Bear ($8-$15):** ACA-Subventionsstruktur wird politisch beschnitten, strukturelle Mitgliederabgänge, Marge bricht dauerhaft ein. Entscheidende Variable: Ausgang der CMS-Program-Integrity-Debatte und die politische Zukunft der ACA-Subventionen.
 
 ## 11. PROFI-FAZIT
 
-OSCR liefert das textbuchartigste MLR-Turnaround-Muster im gesamten Screening (95,4% → 79,2%, operatives Ergebnis von -$230,5 Mio. auf +$388,6 Mio.), aber die eigenen Szenarien ergeben trotzdem ein deutlich negatives EV (-15,7%) — der Markt hat mit der Intraday-Umkehr von $32,80 auf $26,51 die vom Management selbst skizzierte H2-Verlustmöglichkeit bereits teilweise eingepreist, und die strukturelle Volatilität von ACA-Insurern (Beta 2,34) bleibt ein Kernrisiko. Ein zyklischer Trading-Trade für Investoren, die die H2-Entwicklung aktiv verfolgen — kein Buy-and-Hold-Compounder angesichts der regulatorischen Exponiertheit. Positionsgröße: max. 2% eines diversifizierten Portfolios, engmaschige Kontrolle der MLR-Entwicklung im Q3. **Centene (CNC)** bietet zu einem niedrigeren Forward-Multiple (12,0x vs. 16,9x) ein diversifizierteres, weniger ACA-konzentriertes Managed-Care-Exposure mit ähnlicher Turnaround-Dynamik.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV -23,7%). Oscar Health ist kein Buy-and-Hold-Compounder und kein sauberer Momentum-Trade, sondern eine binäre regulatorische Wette: Der operative Turnaround ist real und beeindruckend, aber der Kurs preist bereits nahe des Bull-Szenarios ein, während die eigene Guidance einen H2-Verlust signalisiert. Für Long-Only-Investoren aktuell die falsche Einstiegsbewertung; für taktische Positionen nur mit strikter Stop-Disziplin um die $25-Marke. Positionsgröße: max. 2-3% eines diversifizierten Portfolios. **Centene (CNC)** (Fwd-PE 11,7x) ist über Medicaid/Marketplace-Mix diversifizierter und günstiger bewertet — das reinere Value-Instrument im Managed-Care-Turnaround-Thema. **Elevance (ELV)** (Fwd-PE 15,15x) bietet Skalenvorteile ohne OSCRs ACA-Konzentrationsrisiko.
 
-- Qualität: 2/5
+- Qualität: 3/5
 - Wachstum: 4/5
-- Bewertung: 3/5
-- Katalysator: 5/5
+- Bewertung: 2/5 (vorläufig, Datenstand)
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz textbuchartiger MLR-Normalisierung und kräftiger Guidance-Anhebung implizieren die eigenen Szenarien ein EV von -15,7%, nachdem der Markt die selbst kommunizierte H2-Verlustmöglichkeit bereits mit einer Intraday-Umkehr von $32,80 auf $26,51 quittiert hat.
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der EV zeigt -23,7% Downside und das aktuelle Forward-PE preist bereits nahe des Bull-Szenarios ein, obwohl die eigene H2-Guidance einen operativen Verlust signalisiert; das technische RS-Signal bleibt trotz kurzfristiger Schwäche intakt.
 
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
+| Qualität | 3/5 |
 | Wachstum | 4/5 |
-| Bewertung | 3/5 |
-| Katalysator | 5/5 |
-| EV-Upside | -4.4% |
+| Bewertung | 2/5 |
+| Katalysator | 3/5 |
+| EV-Upside | -18.2% |
 
-**Verdict: HOLD (61/100)**
+**Verdict: WATCH (48/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

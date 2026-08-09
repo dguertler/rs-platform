@@ -905,19 +905,6 @@
       "ev_upside_pct": -14.1
     },
     {
-      "ticker": "VTRS",
-      "verdict": "HOLD",
-      "score": 59,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "Die hohe Verschuldung (D/E ~99,7%) und die anomalie-bedingt negative ROE mindern die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe trotz intaktem technischen Setup."
-      },
-      "created_at": "2026-07-08T06:00:01.718599",
-      "ev_upside_pct": 17.5
-    },
-    {
       "ticker": "NTAP",
       "verdict": "HOLD",
       "score": 66,
@@ -2478,19 +2465,6 @@
       "created_at": "2026-08-05T10:48:41.787195"
     },
     {
-      "ticker": "CRSR",
-      "verdict": "HOLD",
-      "score": 63,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 17.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz Margen-Turnaround und doppelter Guidance-Anhebung liefern die eigenen Szenarien nur +7,9% EV-Upside, w\u00e4hrend der Umsatz auf TTM-Basis weiter r\u00fcckl\u00e4ufig ist (-4,1%)."
-      },
-      "created_at": "2026-08-07T15:04:22.431484"
-    },
-    {
       "ticker": "DNOW",
       "verdict": "HOLD",
       "score": 62,
@@ -2517,19 +2491,6 @@
       "created_at": "2026-08-07T15:04:22.561592"
     },
     {
-      "ticker": "OSCR",
-      "verdict": "HOLD",
-      "score": 61,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -4.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz textbuchartiger MLR-Normalisierung und kr\u00e4ftiger Guidance-Anhebung implizieren die eigenen Szenarien ein EV von -15,7%, nachdem der Markt die selbst kommunizierte H2-Verlustm\u00f6glichkeit bereits mit einer Intraday-Umkehr von $32,80 auf $26,51 quittiert hat."
-      },
-      "created_at": "2026-08-07T15:04:22.586608"
-    },
-    {
       "ticker": "VAC",
       "verdict": "WATCH",
       "score": 44,
@@ -2554,6 +2515,58 @@
         "reason": "Die eigenen Szenarien ergeben trotz des Beats keinen asymmetrischen Edge (EV ca. -8 %), und der P/FCF von 15,92x liegt bereits \u00fcber der Peer-Bandbreite (TTD 14,90x, DV 13,14x)."
       },
       "created_at": "2026-08-07T14:46:50.959707"
+    },
+    {
+      "ticker": "OMDA",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": null,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die Erwartungswert-Rechnung zeigt trotz starkem Beat und Guidance-Anhebung keinen asymmetrischen Edge (+1,2% Upside), w\u00e4hrend die Bewertung bereits nahe der Peer-Bandbreitenspitze (HIMS) liegt."
+      },
+      "created_at": "2026-08-09T07:27:56.020579"
+    },
+    {
+      "ticker": "OSCR",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -18.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV zeigt -23,7% Downside und das aktuelle Forward-PE preist bereits nahe des Bull-Szenarios ein, obwohl die eigene H2-Guidance einen operativen Verlust signalisiert; das technische RS-Signal bleibt trotz kurzfristiger Schw\u00e4che intakt."
+      },
+      "created_at": "2026-08-09T07:29:09.487574"
+    },
+    {
+      "ticker": "VTRS",
+      "verdict": "HOLD",
+      "score": 56,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 24.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Trotz EPS-Beat (+15,0%) und angehobener FY26-Guidance fiel der Kurs -7,6 bis -7,8% und der RS-Score brach auf -21,4 ein; das wiederkehrende Werksrisiko-Muster (Indore 2025, Nashik 2026) entwertet den fundamentalen Ausl\u00f6ser."
+      },
+      "created_at": "2026-08-09T07:29:09.507684"
+    },
+    {
+      "ticker": "CRSR",
+      "verdict": "HOLD",
+      "score": 64,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 22.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "ROE 1,3%/ROIC -0,47% bleiben trotz des Q2-Beats auf TTM-Basis nahe Null, und der Margensprung auf 33,2% ist bislang ein Einzelquartal-Beleg ohne zweite Best\u00e4tigung, w\u00e4hrend der Umsatz weiterhin YoY schrumpft (-2%)."
+      },
+      "created_at": "2026-08-09T07:29:09.529116"
     }
   ]
 }
