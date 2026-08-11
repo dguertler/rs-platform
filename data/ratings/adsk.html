@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ADSK — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ADSK</h1>
+      <h2>Autodesk, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$53B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">34.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$249.08</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">92.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">50.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+6.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">340–380</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">260–295</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">140–175</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $340–$380 (20 %) · Base $260–$295 (50 %) · Bear $140–$175 (30 %) · EV ~$258</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Autodesk hat den Übergang von perpetual Licenses zu einem vollständigen Subscription-Modell längst abgeschlossen und befindet sich jetzt in einer zweiten Transformation: dem Wechsel auf ein transaktionsbasiertes „Flex"-Lizenzmodell, das Umsatz stärker an tatsächliche Nutzung koppelt. Der Markt reagiert darauf zwiespältig — die Aktie liegt trotz +18,4 % Umsatzwachstum rund 24 % unter ihrem 52-Wochen-Hoch ($329,09), und der RS-Score von nur 34,63 (Rang 76 von 100 im NASDAQ-100) signalisiert schwaches relatives Momentum. Anomalie: Die im Datensatz hinterlegte Forward-EPS von $14,24 (impliziert Forward-KGV 17,49x) weicht deutlich von der eigenen Unternehmens-Guidance für FY27 (Non-GAAP-EPS $12,40–$12,65) und dem Analystenkonsens (~$12,42) ab — vermutlich ein Datenartefakt. Diese Analyse verwendet daher die Guidance-basierte EPS als primäre Grundlage, nicht den gecachten Wert. Strukturell bleibt das Geschäftsmodell intakt: 92,4 % Bruttomarge, 29,5 % operative Marge, und die mehrjährigen Subscription-Verträge dämpfen den Konjunkturzyklus strukturell ab, verglichen mit einem reinen Transaktionsgeschäft. Was der Markt übersieht: AEC- und Manufacturing-Kunden zeigen erste Anzeichen von Capex-Vorsicht — das erklärt das schwache RS-Signal, aber die Subscription-Struktur (hohe Bruttoretention) puffert diesen Zyklus strukturell ab.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Subscription-Erlöse (nahezu 100 % des Neugeschäfts) mit mehrjährigen Vertragslaufzeiten glätten den Konjunkturzyklus strukturell ab</li>
+<li>AutoCAD/Revit als Quasi-Standard in Architektur/Bauwesen (AEC) — hohe Switching Costs durch Dateiformate und Workflows</li>
+<li>Fusion 360 und Manufacturing-Suite als zweites Standbein — direkter Wettbewerb mit PTC/Dassault Systèmes</li>
+<li>Übergang zum „Flex"-Konsummodell verändert Umsatz-Timing — operativer Hebel mittelfristig unklar, da neu</li>
+<li>Operative Marge 29,5 % bei Bruttomarge 92,4 % zeigt erhebliches Skalierungspotenzial, aktuell durch Vertriebskosten gedämpft</li>
+<li>FCF $3,06 Mrd. bei $7,51 Mrd. Umsatz (41 % FCF-Marge) — sehr kapitaleffizientes Geschäftsmodell</li>
+<li>ROE 50,4 % und ROIC 35,64 % zeigen einen strukturell hochprofitablen Kern trotz Verschuldung (Debt/Equity 85,4 %)</li>
+<li>Strukturelle Abhängigkeit: Nachfrage folgt Bau- und Fertigungsindustrie-Zyklen, obwohl das Produkt selbst Software ist</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>KI-gestützte Design-Tools (Autodesk AI) beschleunigen Seat-Expansion und Cross-Sell in Manufacturing, der Flex-Übergang verläuft reibungslos, Bau-Kapex erholt sich mit sinkenden Zinsen. Strukturelle Margennachhaltigkeit: Technologieführerschaft in AEC-Workflows (proprietäre Dateiformate als Switching-Cost-Burggraben) und Skalierungseffekte bei 92 % Bruttomarge sprechen für nachhaltig höhere Margen; eine Produktmix-Verschiebung zu höhermargigen KI-Add-ons ist plausibel, aber noch nicht in harten Zahlen bestätigt. Annahme (kein Konsens): FY28-EPS ~$15,00 (rund 20 % über FY27-Guidance-Midpoint $12,53) × 24x Forward (gedämpfte Annäherung an CDNS-Prämie 35,57x) = $360. Kursziel: $340–$380 (Midpoint $360). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Umsatzwachstum normalisiert sich auf 12–15 %, der Flex-Übergang verläuft neutral, Margenexpansion setzt sich moderat fort. Annahme (kein Konsens): FY28-EPS ~$13,80 (10 % Wachstum ggü. FY27-Guidance-Midpoint) × 20x Forward (nahe eigenem aktuellem Multiple, innerhalb der Peer-Bandbreite) = $276. Kursziel: $260–$295 (Midpoint $277,50). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Bau- und Fertigungs-Capex-Schwäche hält an, der Flex-Übergang verursacht Umsatz-Timing-Verwerfungen, KI-native CAD-Startups erodieren graduell Nischen-Marktanteile. Kundenkonzentration: breite Kundenbasis (SMB bis Enterprise), auf Datenbasis nicht quantifizierbar, strukturell geringes Einzelkundenrisiko. Geopolitik/China: moderate Exponierung über chinesische Bau-/Fertigungskunden, Exportkontroll-Risiko für CAD-Software gering, aber nicht null. Lieferketten/Foundry: nicht anwendbar (Software-Geschäftsmodell ohne Fertigungs-Lieferkette). Verwässerung: auf Datenbasis nicht quantifizierbar, Debt/Equity 85,4 % deutet auf fremdfinanzierte Rückkäufe statt Aktienausgabe hin — eher Entlastung als Verwässerungsrisiko. Regulierung: gering, allenfalls Datenschutz-/Exportauflagen bei Ingenieursdaten. Annahme (kein Konsens): FY28-EPS stagniert bei ~$10,50 × 14x (Kompression Richtung ADBE-Niveau 9,65x) = $147. Kursziel: $140–$175 (Midpoint $157,50). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $360 + 0,50 × $277,50 + 0,30 × $157,50 = $72,00 + $138,75 + $47,25 = **$258,00 — implizites Upside vs. aktuellem Kurs ($249,08): +3,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Ein High-Conviction-Framing ist bei schwachem RS-Rang (76/100) und diesem marginalen EV nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 50,4 % und ROIC 35,64 % sind exzellent, auch im Zykluskontext (keine extreme Top-of-Cycle-Verzerrung erkennbar). Die FCF-Marge von 41 % ist die aussagekräftigste Qualitätskennzahl und bestätigt die operative Stärke unabhängig von der Forward-EPS-Diskrepanz im Datensatz. Bilanzqualität: Debt/Equity 85,4 % ist moderat erhöht, primär rückkaufgetrieben, kein Solvenzrisiko angesichts der Cash-Generierung. Der Burggraben liegt in proprietären Dateiformaten und tief verankerten Workflows in AEC — strukturell real, aber nicht unbegrenzt, da KI-native Neueinsteiger langfristig Workflow-Lock-in umgehen könnten.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Eigenes Forward-KGV (guidance-korrigiert, ~20x auf FY27-EPS-Midpoint $12,53) liegt innerhalb der Peer-Bandbreite: PTC ~15x (direktester CAD/PLM-Peer), ADBE ~9,65x (deutlich abgeschlagen, eigene KI-Disruptions-Sorge), CDNS 35,57x (EDA-Software, Premium durch AI-Infrastruktur-Nähe). ADSK notiert über PTC, aber deutlich unter CDNS — die Prämie ggü. PTC ist durch höhere Bruttomarge und AEC-Marktführerschaft strukturell erklärbar. Rückrechnung: Der aktuelle Kurs $249,08 impliziert bei 20x Forward-KGV ein FY-EPS von ~$12,45 — nahe der eigenen Guidance, also plausibel, nicht ambitioniert. ANSS ist als Peer nicht mehr nutzbar (durch Synopsys übernommen, Juli 2025, nicht mehr eigenständig gelistet). Analyst-Konsensziel $313,74 (33 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; liegt deutlich über dem eigenen Base Case.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 34,63, Rang 76 von 100 im NASDAQ-100 — unteres Segment, schwaches relatives Momentum. Kursfenster: 5T +8,36 %, 20T +24,19 %, aber 6M −12,04 % — kurzfristige Erholung nach längerer Schwächephase, kein bestätigter Trendwechsel. Short-Float-/institutionelle Positionierungsdaten liegen nicht vor. Hypothese, nicht datenbasiert: Die Kombination aus „Strong Buy"-Konsens (33 Analysten) bei gleichzeitig schwachem RS-Rang deutet auf eine Diskrepanz zwischen Sell-Side-Optimismus und tatsächlichem Fund-Flow hin. Enttäuschungsrisiko: Der nächste Katalysator (Q2-FY27-Zahlen, 27.08.2026) liegt außerhalb dieses Analysefensters — bis dahin bleibt die Aktie ohne bestätigten fundamentalen Auslöser.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $249,08 liegt rund 24 % unter dem 52-Wochen-Hoch ($329,09) und rund 34 % über dem 52-Wochen-Tief ($185,50). Die jüngste 20-Tage-Stärke (+24,19 %) bei gleichzeitig negativem 6-Monats-Fenster (−12,04 %) deutet auf eine technische Gegenbewegung nach einer längeren Korrektur hin, nicht auf einen bestätigten neuen Aufwärtstrend. Kein GWS-Signal aktuell aktiv. Technisches Warnsignal: Ein Rückfall unter die 50-Tage-Zone (grob $220–225) würde die jüngste Erholung als reinen Bounce entlarven.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($400–$480):** KI-native Design-Tools treiben eine mehrjährige Nutzer- und Preis-Expansion, der Flex-Übergang erweist sich als struktureller Wachstumsbeschleuniger.</p>
+<p>**Base ($300–$360):** Stetiges Wachstum im mittleren Zehnerbereich, Marge expandiert moderat weiter, Multiple bleibt etwa auf aktuellem Niveau.</p>
+<p>**Bear ($160–$200):** Anhaltende Bau-/Fertigungs-Capex-Schwäche, KI-native Wettbewerber erodieren Nischen-Marktanteile strukturell.</p>
+<p>Entscheidende Variable: Erfolg des Flex-Konsummodell-Übergangs und Nachhaltigkeit der Bau-/Fertigungsnachfrage. Szenario-Konsistenz: kurzfristiger Bear ($140–$175) liegt unter dem langfristigen Base ($300–$360) — konsistent; kurzfristiger Bull ($340–$380) unter langfristigem Bull ($400–$480) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Autodesk ist ein Qualitäts-Compounder mit strukturell starkem Geschäftsmodell (ROIC 35,6 %, FCF-Marge 41 %), aber aktuell kein High-Conviction-Setup: Der Erwartungswert von $258 liegt nur +3,6 % über dem aktuellen Kurs, der RS-Rang (76/100) ist schwach, und der nächste fundamentale Katalysator liegt außerhalb des Analysefensters. Kein zyklischer Trading-Trade und kein Momentum-Play — am ehesten ein Buy-and-Hold-Kandidat für geduldige Qualitätsinvestoren, die den Flex-Übergang als Transformationsrisiko akzeptieren. Nicht geeignet für Momentum-orientierte Trader angesichts des schwachen RS-Signals. Positionsgröße: bei fehlendem Katalysator eher reduzierte Einstiegsgröße, Nachkauf idealerweise nach Bestätigung der Q2-FY27-Zahlen (27.08.). Peers: **PTC** (Forward-KGV ~15x) ist der reinere, günstiger bewertete CAD/PLM-Vergleichstitel, allerdings mit geringerer Marge und Marktführerschaft. **Cadence (CDNS)** (35,57x) ist strukturell teurer, aber mit direkterer AI-Infrastruktur-Anbindung.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — RS-Rang 76/100 und ein marginaler EV von +3,6% ohne fundamentalen Nahauslöser (nächste Zahlen erst 27.08.) tragen keine volle Positionsgröße trotz solider Qualitätskennzahlen.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
