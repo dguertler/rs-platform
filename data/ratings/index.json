@@ -206,14 +206,6 @@
       "ev_upside_pct": 9.2
     },
     {
-      "ticker": "CSCO",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-12T07:27:53.962234",
-      "asymmetric_edge": false,
-      "ev_upside_pct": 0.1
-    },
-    {
       "ticker": "STLD",
       "verdict": "HOLD",
       "score": 60,
@@ -419,28 +411,12 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "MRNA",
-      "verdict": "WATCH",
-      "score": 46,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-21T10:14:54.046230",
-      "ev_upside_pct": 2.8
-    },
-    {
       "ticker": "ON",
       "verdict": "BUY",
       "score": 72,
       "asymmetric_edge": true,
       "created_at": "2026-06-21T10:15:53.020642",
       "ev_upside_pct": null
-    },
-    {
-      "ticker": "PANW",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-21T10:18:42.477152",
-      "ev_upside_pct": -24.3
     },
     {
       "ticker": "ANET",
@@ -662,19 +638,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-06-29T05:51:50.507576",
       "ev_upside_pct": 0.5
-    },
-    {
-      "ticker": "MSFT",
-      "verdict": "BUY",
-      "score": 74,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 8.0,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Starker, best\u00e4tigter Earnings-Beat mit Azure-Beschleunigung und intakter fundamentaler Qualit\u00e4t rechtfertigen die volle Positionsgr\u00f6\u00dfe, auch wenn der EV von +8,7% keinen zus\u00e4tzlichen kurzfristigen Bewertungs-Edge liefert."
-      },
-      "created_at": "2026-08-05T10:43:12.759077"
     },
     {
       "ticker": "TXN",
@@ -931,45 +894,6 @@
       "created_at": "2026-08-05T10:54:13.262577"
     },
     {
-      "ticker": "VRTX",
-      "verdict": "HOLD",
-      "score": 69,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "EV nahe Null (-0,8%) trotz starker fundamentaler Qualit\u00e4t und naher Katalysatoren (Povetacicept-PDUFA) \u2013 Bewertung nahe Allzeithoch tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-07-08T06:00:03.185340",
-      "ev_upside_pct": 8.7
-    },
-    {
-      "ticker": "MPC",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "EV-Rechnung zeigt nach dem Kurssprung \u00fcber das alte 52-Wochen-Hoch keinen Edge mehr, die technische St\u00e4rke bleibt aber intakt."
-      },
-      "created_at": "2026-07-09T14:14:01.103143",
-      "ev_upside_pct": -12.3
-    },
-    {
-      "ticker": "VLO",
-      "verdict": "WATCH",
-      "score": 41,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "EV-Rechnung ergibt nach dem j\u00fcngsten Kurssprung \u00fcber das alte 52-Wochen-Hoch ein negatives Chance-Risiko-Verh\u00e4ltnis, zus\u00e4tzlich best\u00e4tigt durch ein Analystenziel unterhalb des aktuellen Kurses."
-      },
-      "created_at": "2026-07-09T14:14:01.113914",
-      "ev_upside_pct": -15.0
-    },
-    {
       "ticker": "AMD",
       "verdict": "HOLD",
       "score": 61,
@@ -1111,19 +1035,6 @@
       },
       "created_at": "2026-07-14T19:35:28.939937",
       "ev_upside_pct": -9.8
-    },
-    {
-      "ticker": "CRWD",
-      "verdict": "WATCH",
-      "score": 40,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -12.8,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "Die Bewertungspr\u00e4mie von 56 % gg\u00fc. dem teuersten Peer (Abschnitt 7) ist durch das Wachstum nicht gedeckt (PANW w\u00e4chst schneller bei niedrigerem Multiple), und der EV liegt bei -17,7 % trotz starkem operativem Fundament."
-      },
-      "created_at": "2026-07-15T04:55:38.705466"
     },
     {
       "ticker": "OKTA",
@@ -2619,6 +2530,162 @@
         "reason": "Trotz starkem fundamentalem Katalysator (zwei FY26-Guidance-Anhebungen in Folge, 96% Utilization) ergibt der eigene Szenario-EV keinen asymmetrischen Edge (\u22128,2%), und das implizite Forward-Multiple (~37x) liegt bereits mitten in der Peer-Bandbreite statt am g\u00fcnstigen Rand."
       },
       "created_at": "2026-08-11T09:12:13.690411"
+    },
+    {
+      "ticker": "PANW",
+      "verdict": "HOLD",
+      "score": 60,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -11.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV 88,3x liegt weit au\u00dferhalb der Peer-Bandbreite (34,6\u201342,7x) und der Erwartungswert ist mit \u22129,8% negativ, das RS-Momentum (Rang 9, alle Zeitfenster positiv) bleibt aber intakt."
+      },
+      "created_at": "2026-08-11T09:53:02.484551"
+    },
+    {
+      "ticker": "CRWD",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -11.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV 137,2x liegt weit \u00fcber allen genannten Peers (inkl. PANW 88,3x) und der Erwartungswert ist mit \u221210,2% negativ, das RS-Momentum (Rang 11) bleibt aber technisch intakt."
+      },
+      "created_at": "2026-08-11T09:53:02.503577"
+    },
+    {
+      "ticker": "MSFT",
+      "verdict": "BUY",
+      "score": 83,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 10.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Forward-KGV 21,3x liegt innerhalb der Peer-Bandbreite und der Erwartungswert ist mit +10,8% positiv, gest\u00fctzt durch starkes 20T-Momentum (Rang 26) und ein drei Ebenen des AI-Stacks abdeckendes Gesch\u00e4ftsmodell."
+      },
+      "created_at": "2026-08-11T09:53:02.516062"
+    },
+    {
+      "ticker": "REGN",
+      "verdict": "HOLD",
+      "score": 65,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der Erwartungswert liegt trotz starkem Q2-Beat 5,4 % unter dem aktuellen Kurs und das Forward-KGV notiert bereits am oberen Rand der direkten Peer-Bandbreite (nahe AMGN) \u2014 kein voller R\u00fcckenwind f\u00fcr die volle Positionsgr\u00f6\u00dfe trotz robustem RS-Signal."
+      },
+      "created_at": "2026-08-11T09:53:02.528638"
+    },
+    {
+      "ticker": "MRNA",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -8.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "MRNA notiert mit P/S ~10,6x deutlich \u00fcber dem Peer BioNTech (7,6x), obwohl der Verlust pro Umsatz-Dollar strukturell tiefer ausf\u00e4llt \u2014 der Erwartungswert liegt trotz frischer mFLUSIVA-Zulassung rund 14 % unter dem Kurs."
+      },
+      "created_at": "2026-08-11T09:53:02.540207"
+    },
+    {
+      "ticker": "VRTX",
+      "verdict": "HOLD",
+      "score": 69,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Das Forward-KGV notiert am oberen Rand der Peer-Bandbreite bei einem Erwartungswert nahe null, zus\u00e4tzlich steht mit dem povetacicept-PDUFA-Termin (30.11.2026) ein bin\u00e4res regulatorisches Ereignis im Analysehorizont \u2014 volle Positionsgr\u00f6\u00dfe trotz starker operativer Execution nicht gerechtfertigt."
+      },
+      "created_at": "2026-08-11T09:53:02.552327"
+    },
+    {
+      "ticker": "ADSK",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "RS-Rang 76/100 und ein marginaler EV von +3,6% ohne fundamentalen Nahausl\u00f6ser (n\u00e4chste Zahlen erst 27.08.) tragen keine volle Positionsgr\u00f6\u00dfe trotz solider Qualit\u00e4tskennzahlen."
+      },
+      "created_at": "2026-08-11T09:53:02.563342"
+    },
+    {
+      "ticker": "CSCO",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Q4-FY26-Zahlen fallen exakt auf morgen (12.08.), das Ergebnis ist in dieser Analyse nicht enthalten, und der eigene EV ist mit \u22123,0% bereits vor dem Report neutral bis leicht negativ."
+      },
+      "created_at": "2026-08-11T09:53:02.574717"
+    },
+    {
+      "ticker": "TTWO",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 8.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Forward-KGV von ~37\u201338x auf FY27-Basis liegt deutlich \u00fcber dem einzigen sauberen Peer EA (21,78x); trotz des st\u00e4rksten Katalysators aller vier Titel (GTA VI, 19.11.2026 best\u00e4tigt) tr\u00e4gt die Bewertung nicht die volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-11T09:53:02.585759"
+    },
+    {
+      "ticker": "CTSH",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 4.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "der j\u00fcngste Kursanstieg (+35,35% \u00fcber 20 Tage) ist \u00fcberwiegend ein Post-Earnings-Bounce nach starkem Ausverkauf, kein best\u00e4tigter struktureller Beleg, dass die GenAI-Disruptionsthese widerlegt ist; RS-Score bleibt mit 17,15 der schw\u00e4chste der vier analysierten Titel."
+      },
+      "created_at": "2026-08-11T09:53:02.596710"
+    },
+    {
+      "ticker": "MPC",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -9.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV zeigt \u221210,4 % Downside nach der Post-Earnings-Rally, das technische Setup (RS-Score 78,72) bleibt intakt, aber die Bewertung tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-11T09:53:02.608138"
+    },
+    {
+      "ticker": "VLO",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -20.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV zeigt \u221219,9 % Downside nach einem +31 %-Lauf in 30 Tagen und einem frischen 52-Wochen-Hoch, das technische Momentum (RS-Score 78,62) bleibt intakt, aber die Bewertung tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-11T09:53:02.619711"
     }
   ]
 }
