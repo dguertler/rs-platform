@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CTSH — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CTSH</h1>
+      <h2>Cognizant Technology Solutions </h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Information Technology Services</span></div>
+        <div class="mi">MCap: <span>$27B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">58</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">17.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$57.67</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">9.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">33.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">229.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">14.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+4.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–88</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">55–65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">35–45</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $75–$88 (20 %) · Base $55–$65 (45 %) · Bear $35–$45 (35 %) · EV ~$57,30</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Cognizant steckt mitten im zentralen Strukturbruch der IT-Dienstleistungsbranche: Generative-KI-Tools senken die Zahl der pro Projekt abrechenbaren Stunden, das klassische Staff-Augmentation-/Time-and-Material-Modell steht strukturell unter Druck — sichtbar an einem Kursrückgang von rund 40 % seit Jahresbeginn trotz eines Umsatzwachstums von nur 4,5 %. Die Q2-2026-Zahlen (veröffentlicht 29./30.07.2026, außerhalb des 7-Tage-Fensters, aber jüngster verfügbarer Datenpunkt) zeigten ein gemischtes Bild: Adjusted-EPS $1,37 knapp unter Konsens ($1,38, −0,73 %), aber Umsatz leicht über Konsens, sieben Großverträge über je $100 Mio. TCV signiert, und die Jahres-EPS-Guidance wurde auf $5,70–$5,82 angehoben. Der Kurs $57,67 liegt weit unter dem 52-Wochen-Hoch ($87,03), das 20-Tage-Fenster zeigt aber eine kräftige Erholung von +35,35 % — ein Muster aus scharfem Ausverkauf gefolgt von einer Gegenbewegung nach dem Ergebnis. Der Markt preist eine fortgesetzte Wachstumsverlangsamung durch KI-Disruption ein — was Guidance-Anhebung und starke Financial-Services-Vertikale (+12 % YoY) teilweise widerlegen, aber nicht vollständig entkräften.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Klassisches IT-Dienstleistungs-/Staff-Augmentation-Modell mit Übergang zu KI-gestützten, ergebnisbasierten Verträgen</li>
+<li>Financial-Services-Vertikale als aktuell stärkster Wachstumstreiber (+12 % YoY in Q2 2026)</li>
+<li>Mehrjährige Großverträge (7 Deals >$100 Mio. TCV allein in Q2) reduzieren kurzfristige Umsatzvolatilität</li>
+<li>Indische Offshore-Delivery-Basis — Kostenvorteil, aber strukturelles Visa-/Geopolitik-Risiko</li>
+<li>Bruttomarge nur 33,4 % — typisch dünn für arbeitsintensive IT-Services, deutlich unter Software-Peers</li>
+<li>Operative Marge 17,5 %, adjusted Operating Margin zuletzt 16 % (+40 Bp YoY) — leichte Verbesserung</li>
+<li>Debt/Equity nur 14,5 % — sehr konservative Bilanz, hohe finanzielle Flexibilität</li>
+<li>$1,15 Mrd. Aktienrückkauf allein in Q2 2026 — aggressive Kapitalrückführung trotz Kursschwäche</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Die GenAI-Disruptions-Sorge erweist sich als überzogen, Cognizant positioniert sich als KI-Implementierungspartner statt als Automatisierungs-Opfer, Financial-Services-Stärke breitet sich auf weitere Vertikalen aus, Guidance wird erneut angehoben. Strukturelle Margennachhaltigkeit: keine klare Technologieführerschaft oder proprietäres IP, aber Kundenbindung durch mehrjährige Großverträge (Switching Costs) ist real; darüber hinaus auf Datenbasis nicht abschließend beurteilbar. Annahme (kein Konsens): FY27-EPS ~$6,80 (+18 % ggü. FY26-Guidance-Midpoint $5,76) × 12x Forward (Annäherung an ACN 11,97x bei bestätigter Reakzeleration) = $81,60. Kursziel: $75–$88 (Midpoint $81,50). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Niedriges einstelliges organisches Wachstum hält an, Guidance wird erfüllt, aber nicht deutlich übertroffen, Rückkäufe stützen EPS-Wachstum überproportional zum Umsatzwachstum. Annahme (kein Konsens): FY27-EPS ~$6,31 (gecachte Forward-EPS-Schätzung) × 9,5x Forward (nahe eigenem aktuellem Multiple 9,13x, innerhalb Peer-Bandbreite) = $59,95. Kursziel: $55–$65 (Midpoint $60). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die GenAI-getriebene Deflation abrechenbarer Stunden setzt sich strukturell fort und beschleunigt sich, konstante-Währungs-Wachstum fällt Richtung 0–2 %, Großkunden verhandeln Preise angesichts KI-Produktivitätsgewinne aggressiv nach unten — genau das Muster, das die gesamte IT-Services-Peergroup (ACN, EPAM, DXC) bereits belastet hat. Kundenkonzentration: Financial-Services-Vertikale trägt überproportional zum Wachstum bei — sektorale statt Einzelkunden-Konzentration, auf Einzelkundenbasis nicht quantifizierbar. Geopolitik: strukturellstes Risiko dieser Analyse — hohe Abhängigkeit von indischer Offshore-Delivery-Belegschaft, US-Visa-Politik (H-1B) ist ein direktes, materielles Kostenrisiko. Lieferketten/Foundry: nicht anwendbar (Dienstleistungsunternehmen ohne Fertigungs-Lieferkette). Verwässerung: kein Risiko erkennbar — $1,15 Mrd. Rückkauf allein in Q2 wirkt anti-dilutiv und stützt EPS. Regulierung: H-1B-Visa-Politik und Datenschutzregulierung (GDPR u.ä.) sind die materiellsten regulatorischen Risiken. Annahme (kein Konsens): FY27-EPS fällt auf ~$5,40 × 7x (Kompression Richtung EPAM 6,93x/DXC 3,67x) = $37,80. Kursziel: $35–$45 (Midpoint $40). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 20% + 45% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $81,50 + 0,45 × $60 + 0,35 × $40 = $16,30 + $27,00 + $14,00 = **$57,30 — implizites Downside vs. aktuellem Kurs ($57,67): −0,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Die hohe Bear-Wahrscheinlichkeit (35 %) spiegelt die reale strukturelle Unsicherheit der gesamten IT-Services-Branche wider, nicht nur ein Cognizant-spezifisches Risiko.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 14,9 % und ROIC 15,73 % sind solide, aber nicht herausragend — im Zykluskontext angemessen bei nur 4,5 % Wachstum, keine Top-of-Cycle-Verzerrung erkennbar. Bruttomarge 33,4 % ist strukturell dünn (arbeitsintensives Geschäftsmodell), operative Marge 17,5 % zeigt solide Kostendisziplin. FCF $2,22 Mrd. bei $21,64 Mrd. Umsatz (10,2 % FCF-Marge) deckt Dividende (2,29 %) plus aggressive Rückkäufe. Bilanzqualität ist die stärkste Einzelkennzahl: Debt/Equity nur 14,5 % — sehr konservativ. Der Burggraben ist strukturell schwach: kein proprietäres IP-Monopol wie bei Software-Unternehmen, der Wettbewerbsvorteil liegt primär in Skalierung und Offshore-Kostenstruktur — genau die Elemente, die durch GenAI am stärksten unter Druck geraten.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Eigenes Forward-KGV 9,13x ist das günstigste der Peer-Gruppe: ACN 11,97x, EPAM 6,93x, DXC 3,67x, INFY ~15x. CTSH notiert unter ACN und INFY, aber über EPAM und deutlich über DXC. Die relative Günstigkeit ggü. ACN/INFY ist durch geringeres Wachstum (4,5 %) und die Wahrnehmung als GenAI-Disruptionskandidat erklärbar. Rückrechnung: Der aktuelle Kurs $57,67 impliziert bei 9,13x Forward-KGV ein FY-EPS von ~$6,32 — nahe der Forward-Schätzung, also konsistent, aber mit impliziter Annahme, dass die Guidance-Anhebung anhält. Analyst-Konsensziel $63,94 (25 Analysten) — als Orientierungspunkt, nicht als Ceiling; nach Q2 gemischt revidiert (JPMorgan hoch auf $67, Mizuho runter auf $64) — deutliche Uneinigkeit über die GenAI-These.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 17,15, Rang 54 von 100 im NASDAQ-100 — der schwächste Wert aller vier analysierten Titel trotz starker jüngster Kursbewegung. Kursfenster: 20T +35,35 %, 10T +9,18 %, 5T +4,3 %, aber 6M −38,51 % — ein extremer Kontrast aus tiefem mehrmonatigem Ausverkauf und scharfer kurzfristiger Gegenbewegung. Short-Float-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Die gespaltene Analysten-Reaktion nach Q2 deutet auf Uneinigkeit zwischen Fast-Money (das den Bounce spielt) und Long-Only-Investoren (die auf strukturelle Klarheit warten) hin. Enttäuschungsrisiko: Bleibt das Wachstum bei 4–5 % stecken, dürfte der Bounce als reiner Überverkauft-Effekt ohne fundamentale Wende gelten.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $57,67 liegt rund 34 % unter dem 52-Wochen-Hoch ($87,03) und rund 56 % über dem 52-Wochen-Tief ($37,08) — die Aktie hat sich von den Tiefs deutlich erholt, bleibt aber weit unter altem Niveau. Die extrem starke 20-Tage-Bewegung (+35,35 %) bei gleichzeitig tief negativem 6-Monats-Fenster (−38,51 %) ist überwiegend reaktiv (Post-Earnings-Repricing nach Ausverkauf), noch nicht eindeutig fundamental bestätigt. Kein GWS-Signal aktuell aktiv. Technisches Warnsignal: Ein Rückfall unter $50 (unterhalb der jüngsten Erholungszone) würde signalisieren, dass der Bounce bereits ausgelaufen ist und der Abwärtstrend dominiert.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($85–$100):** GenAI-Sorgen erweisen sich als überzogen, Cognizant etabliert sich als KI-Implementierungspartner, Multiple re-ratet Richtung ACN-Niveau.</p>
+<p>**Base ($60–$75):** Niedriges einstelliges organisches Wachstum hält an, Multiple bleibt strukturell gedrückt, Rückkäufe stützen EPS-Wachstum.</p>
+<p>**Bear ($30–$42):** GenAI-getriebene Deflation abrechenbarer Stunden intensiviert sich strukturell, Umsatzwachstum dreht negativ, Multiple komprimiert weiter Richtung DXC-Niveau.</p>
+<p>Entscheidende Variable: Ob Cognizant sich als GenAI-Profiteur oder GenAI-Opfer positionieren kann. Szenario-Konsistenz: kurzfristiger Bear ($35–$45) unter langfristigem Base ($60–$75) — konsistent; kurzfristiger Bull ($75–$88) unter langfristigem Bull ($85–$100) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Cognizant ist aktuell kein Buy-and-Hold-Compounder im klassischen Sinne, sondern eine Value-/Turnaround-Wette auf die Frage, ob die IT-Services-Branche die GenAI-Disruption strukturell übersteht — mit dem schwächsten RS-Score (17,15) aller vier analysierten Titel trotz starkem kurzfristigem Bounce. Der Erwartungswert von $57,30 liegt praktisch auf dem aktuellen Kurs (−0,6 %) — kein statistischer Edge, die Entscheidung ist eine reine These über die Zukunftsfähigkeit des Geschäftsmodells. Geeignet für: Value-orientierte, geduldige Investoren, die eine Gegenposition zur GenAI-Disruptionsthese eingehen und die günstige Bewertung (9,13x Forward-KGV) sowie die Kapitalrückführung als Sicherheitsnetz akzeptieren. Nicht geeignet für: Investoren, die eine bestätigte fundamentale Trendwende statt eines technischen Bounces suchen. Positionsgröße: bei fehlendem Katalysator und struktureller Branchenunsicherheit eher kleine, explorative Position statt Kernposition. Peers: **Accenture (ACN)** (11,97x) ist der diversifiziertere, etwas teurer bewertete Branchenführer mit geringerem Konzentrationsrisiko. **EPAM** (6,93x) ist noch günstiger, aber mit höherer Wachstumsvolatilität und stärkerer GenAI-Exponierung.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — der jüngste Kursanstieg (+35,35% über 20 Tage) ist überwiegend ein Post-Earnings-Bounce nach starkem Ausverkauf, kein bestätigter struktureller Beleg, dass die GenAI-Disruptionsthese widerlegt ist; RS-Score bleibt mit 17,15 der schwächste der vier analysierten Titel.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
