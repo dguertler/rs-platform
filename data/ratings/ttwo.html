@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TTWO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TTWO</h1>
+      <h2>Take-Two Interactive Software, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Electronic Gaming & Multimedia</span></div>
+        <div class="mi">MCap: <span>$47B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">29.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$253.57</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">37.3×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">58.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-9.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+8.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">360–410</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">32%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">250–290</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">43%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $360–$410 (32 %) · Base $250–$290 (43 %) · Bear $150–$185 (25 %) · EV ~$281,18</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Take-Two ist die reinste verfügbare Wette auf einen einzelnen Produktzyklus im gesamten Software-/Media-Sektor: Grand Theft Auto VI, mit bestätigtem Launch-Termin 19.11.2026, ist der mit Abstand größte Einzelkatalysator der kommenden 12–18 Monate. Die Q1-FY27-Zahlen (veröffentlicht 07.08.2026, innerhalb der letzten 7 Tage) bestätigten das Momentum: EPS $0,35 ggü. Konsens −$0,16 (Überraschung +318,75 %), Net Bookings ~$1,39 Mrd. leicht über Guidance, FY27-Bookings-Guidance von $8,0–8,2 Mrd. bestätigt. Der Kurs reagierte mit einem Sprung auf $253,57 (10.08., +2,87 %) und liegt nahe am 52-Wochen-Hoch ($265,65). DATENLAGE: TTWO fehlt im Fundamentaldaten-Cache des Systems — diese Analyse basiert vollständig auf eigener Web-Recherche (Stand 10./11.08.2026), Konfidenz einzelner Kennzahlen entsprechend geringer als bei gecachten Titeln. GTA V mit über 230 Mio. verkauften Einheiten ist der bewiesene Vorlage-Case dafür, wie stark GTA VI Recurrent-Consumer-Spending über Jahre monetarisieren kann — genau diese mehrjährige Nachlaufrendite, nicht der Launch-Tag selbst, ist der Bull-Case-Kern, den kurzfristig fokussierte Trader unterschätzen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Drei Studio-Labels (Rockstar, 2K, Zynga), stark konzentriertes Franchise-Portfolio — GTA, NBA 2K, Red Dead als Kernwerttreiber</li>
+<li>GTA Online als Vorlage für Recurrent-Consumer-Spending: Mikrotransaktionen treiben Jahre nach Launch noch signifikante Margen</li>
+<li>NBA 2K mit Rekord-Engagement (Spiele/Nutzer +35 %) — Live-Service-Modell zunehmend wichtiger als Einzelverkauf</li>
+<li>GTA VI (19.11.2026) als größter Einzelkatalysator der Firmengeschichte — Erwartungen extrem hoch, entsprechendes Ausführungsrisiko</li>
+<li>Bruttomarge ~58 % (Q4 FY26), operative Marge erst in Q4 FY26 erstmals positiv (+2 %) — Wendepunkt, aber fragil</li>
+<li>FCF TTM ~$298,7 Mio. — positiv, aber ggü. Marktkapitalisierung (~$47 Mrd.) klein, hohe GTA-VI-Entwicklungskosten belasten</li>
+<li>Kein Dividenden-Zahler — Kapital fließt vollständig in Content-/Entwicklungsinvestitionen</li>
+<li>Strukturelle Abhängigkeit von einem Blockbuster-Release-Zyklus — atypisch hohe Ergebnis-Konzentration</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>GTA VI trifft den Launch-Termin ohne weitere Verschiebung, Kritiken und Verkaufszahlen übertreffen die bereits hohen Erwartungen, der GTA-Online-Nachfolger monetarisiert mindestens auf GTA-V-Niveau, das NBA-2K-Live-Service-Momentum hält an. Strukturelle Margennachhaltigkeit: Technologieführerschaft (Rockstar-Engine) und Kundenbindung durch jahrelange Live-Service-Zyklen sprechen für strukturell höhere Margen; die Produktmix-Verschiebung zu höhermargigem Recurrent-Spending ist der zentrale Werttreiber. Annahme (kein Konsens): FY28-EPS (erstes volles GTA-VI-Jahr) ~$13,00 × 32x Forward (Prämie ggü. EA 21,78x, gerechtfertigt durch bestätigten Supercycle-Katalysator) = $416, konservativ begrenzt auf die Analystenziel-Spanne (bis $368). Kursziel: $360–$410 (Midpoint $385). Eintrittswahrscheinlichkeit: 32%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: GTA VI erscheint wie geplant, Verkäufe sind stark, aber im Rahmen der bereits im Kurs eingepreisten hohen Erwartungen — kein zusätzlicher Überraschungseffekt. Annahme (kein Konsens): FY28-EPS ~$10,51 (Analystenkonsens für das erste GTA-VI-Jahr) × 25x Forward (nahe implizitem aktuellem FY28-Multiple) = $262,75. Kursziel: $250–$290 (Midpoint $270). Eintrittswahrscheinlichkeit: 43%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: weitere Verschiebung von GTA VI (bereits mehrfach verschoben, ursprünglich für 2025 angekündigt), technische Probleme beim Launch, oder Verkaufs-/Monetarisierungszahlen bleiben hinter den extrem hohen Erwartungen zurück. Kundenkonzentration: keine klassische Kundenkonzentration, aber extreme Produkt-/Franchise-Konzentration (GTA dominiert den Ergebnisbeitrag) — quantifizierbares Strukturrisiko, auf Einzelkundenbasis nicht anwendbar. Geopolitik/China: begrenzte China-Exponierung (Konsolen-/PC-Lizenzierungsregime, nachrangig ggü. US/EU-Kernmärkten). Lieferketten/Foundry: nicht direkt anwendbar (digitale Distribution dominant, Konsolen-Hardware-Risiko liegt bei Sony/Microsoft). Verwässerung: auf Datenbasis nicht quantifizierbar, SBC-intensive Spieleentwicklung erhöht typischerweise den Verwässerungsdruck bei Publishern. Regulierung: Mikrotransaktions-/Lootbox-Regulierung (v.a. EU/UK) ist ein materielles Risiko für das im Bull Case zentrale Online-Monetarisierungsmodell. Annahme (kein Konsens): FY28-EPS enttäuscht bei ~$8,50 × 18x (Kompression Richtung/unter EA-Niveau 21,78x) = $153. Kursziel: $150–$185 (Midpoint $167,50). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 32% + 43% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,32 × $385 + 0,43 × $270 + 0,25 × $167,50 = $123,20 + $116,10 + $41,88 = **$281,18 — implizites Upside vs. aktuellem Kurs ($253,57): +10,9%.** Das ist der einzige der vier analysierten Titel mit einem klar positiven, wenn auch moderaten Edge — getragen primär durch den bestätigten GTA-VI-Termin, nicht durch eine statistische Bewertungsmarge. Ein High-Conviction-Framing ist angesichts der extremen Franchise-Konzentration trotzdem nur mit reduzierter Positionsgröße vertretbar.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE −9,04 % und negative TTM-Nettomarge (−4,48 %) sind auf den ersten Blick schwach — im Zykluskontext aber normal für ein Publisher-Jahr vor einem Mega-Release: Hohe Entwicklungs-/Marketingkosten für GTA VI belasten die GAAP-Ergebnisse, während sich die operative Marge bereits verbessert (Q4 FY26 erstmals positiv, +2 %). Der FCF von $298,7 Mio. TTM zeigt, dass das Geschäft trotz GAAP-Verlusten Cash generiert. Debt/Equity ~0,8x ist moderat, keine akute Solvenzsorge. Der Burggraben liegt in den etablierten Franchise-IPs (GTA, NBA 2K, Red Dead) — strukturell stark, aber extrem konzentriert auf wenige Titel statt breit diversifiziert wie bei EA.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Eigenes Forward-KGV auf FY27-Konsens-EPS (~$6,60) liegt bei ~37–38x — deutlich über dem einzigen sauberen direkten Peer EA (21,78x). Roblox (RBLX) ist als Peer nicht sinnvoll nutzbar, da aktuell GAAP-unprofitabel. Die Prämie ggü. EA ist durch den bestätigten, einmaligen GTA-VI-Katalysator erklärbar, aber nicht durch aktuelle Fundamentaldaten gedeckt — TTWO handelt faktisch auf FY28-Basis (25x auf $10,51 Konsens-EPS). Rückrechnung: Der aktuelle Kurs $253,57 impliziert bei 25x auf FY28-EPS ein EPS von ~$10,14 — nahe am Konsens, also plausibel, aber mit wenig Puffer bei Enttäuschung. Analystenkonsensziel ~$284–286 (27–29 Analysten, "Strong Buy") — als Orientierungspunkt, nicht als Ceiling; die Spanne ist mit $170–$368 extrem breit.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 29,88, Rang 58 von 100 im NASDAQ-100 — mittleres Segment trotz starkem Earnings-Beat. Kursfenster: 5T +5,97 %, aber 10T −4,32 % — die Post-Earnings-Reaktion war positiv, davor gab es Schwäche, netto ein gemischtes kurzfristiges Bild. Short-Float-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Die Kombination aus "Strong Buy"-Konsens (27 von 29 Analysten) und einer sehr breiten Kursziel-Spanne deutet auf hohe Uneinigkeit selbst unter Bullen hin — typisch für Fast-Money-Positionierung vor einem binären Katalysator. Enttäuschungsrisiko: Jede weitere Verschiebungsmeldung zu GTA VI wäre angesichts der extremen Erwartungshaltung ein überproportionaler negativer Kursauslöser.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $253,57 nahe 52-Wochen-Hoch ($265,65), deutlich über 52-Wochen-Tief ($187,63). Der Kurssprung nach den Q1-Zahlen (+2,87 % am 10.08.) bestätigt fundamental gestütztes Momentum, nicht rein reaktives Trading. Kein GWS-Signal aktuell aktiv. Technisches Warnsignal: Ein Rückfall unter $220 (Bereich vor dem Earnings-Sprung) würde signalisieren, dass der Markt den Beat bereits wieder relativiert.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($450–$550):** GTA VI wird zum meistverkauften Entertainment-Produkt der Geschichte, der GTA-Online-Nachfolger repliziert oder übertrifft das Vorgänger-Monetarisierungsniveau über mehrere Jahre.</p>
+<p>**Base ($320–$390):** GTA VI performt stark, aber im Rahmen der bereits hohen Erwartungen, Multiple normalisiert sich nach dem Launch-Hype.</p>
+<p>**Bear ($180–$230):** GTA VI wird erneut verschoben oder enttäuscht relativ zu den extremen Erwartungen, Lootbox-/Mikrotransaktions-Regulierung bremst die Online-Monetarisierung strukturell.</p>
+<p>Entscheidende Variable: Timing und Monetarisierungsausmaß von GTA VI. Szenario-Konsistenz: kurzfristiger Bear ($150–$185) unter langfristigem Base ($320–$390) — konsistent; kurzfristiger Bull ($360–$410) unter langfristigem Bull ($450–$550) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Take-Two ist ein High-Conviction-Katalysator-Play, kein klassischer Buy-and-Hold-Compounder und kein reiner zyklischer Trade — die Investment-These hängt an einem einzigen, bestätigten Termin (19.11.2026). Der Erwartungswert von $281,18 (+10,9 %) ist der stärkste der vier analysierten Titel, aber die extreme Franchise-Konzentration und die Vorgeschichte wiederholter Verschiebungen rechtfertigen keine übergroße Positionsgröße. Geeignet für: Investoren mit hoher Risikotoleranz, die den GTA-VI-Katalysator gezielt spielen wollen. Nicht geeignet für: konservative, diversifikationsorientierte Investoren — das Konzentrationsrisiko auf ein Produkt ist außergewöhnlich hoch. Positionsgröße: explizite Risikowarnung — angesichts der Franchise-Konzentration und Verschiebungshistorie maximal reduzierte Positionsgröße, nicht als Kernposition. Peers: **Electronic Arts (EA)** (21,78x Forward-KGV) ist das diversifiziertere, günstiger bewertete Instrument ohne vergleichbaren Einzelkatalysator. **Roblox (RBLX)** ist thematisch näher an Live-Service/UGC, aber aktuell unprofitabel und daher kein bewertungstechnisch vergleichbarer Peer.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Forward-KGV von ~37–38x auf FY27-Basis liegt deutlich über dem einzigen sauberen Peer EA (21,78x); trotz des stärksten Katalysators aller vier Titel (GTA VI, 19.11.2026 bestätigt) trägt die Bewertung nicht die volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
