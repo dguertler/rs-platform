@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>REGN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>REGN</h1>
+      <h2>Regeneron Pharmaceuticals, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Biotechnology</span></div>
+        <div class="mi">MCap: <span>$73B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">65</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">59.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$784.36</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">17.5×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$15.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">44.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">14.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-5.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">970–1.080</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">740–830</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">55%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">395–445</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $970–$1.080 (20 %) · Base $740–$830 (55 %) · Bear $395–$445 (25 %) · EV ~$742</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Regeneron ist kein reines Wachstumsstory mehr, sondern ein Übergangsfall: Der historisch zweitgrößte Umsatztreiber Eylea verliert in den USA durch Biosimilar-Konkurrenz (Amgens Pavblu, Samsung Bioepis' Opuviz) rund ein Viertel des Vorjahresumsatzes pro Quartal, während Dupixent (mit Sanofi) mit +38 % Wachstum (konstante Währung) im Q2 2026 diesen Ausfall überkompensiert und die Gruppe auf +17 % Umsatzwachstum hebt. Der Markt honorierte das jüngst: Non-GAAP-EPS $14,29 schlug den Konsens von $10,58 um ~35 % — ein außergewöhnlicher Beat, der den Kurs vom Jahrestief deutlich erholen ließ (52W-Range $541–$821, aktuell $784). Was der Markt noch unterschätzt: Die Sanofi-Kollaborationserlöse erreichten mit $2,2 Mrd. im Quartal ein Allzeithoch — Dupixent ist wirtschaftlich zur tragenden Säule geworden, aber strukturell an einen einzigen Partner gebunden. Die Frage für die nächsten 12–18 Monate: reicht das Dupixent-Tempo, um die Eylea-Erosion dauerhaft zu überkompensieren, bevor bei itepekimab (COPD) und der Obesity-Pipeline Klarheit entsteht.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Dupixent (Sanofi-50/50-Kollaboration, IL-4/IL-13-Blocker) ist der zentrale Wachstumstreiber über wachsende Indikationen (atopische Dermatitis, Asthma, COPD, CRSwNP)</li>
+<li>Sanofi-Kollaborationserlöse erreichten in Q2 2026 mit $2,2 Mrd. ein Allzeithoch — strukturelle Abhängigkeit von einem einzigen Partner für den größten Werttreiber</li>
+<li>Eylea/Eylea HD (Anti-VEGF) verliert US-Marktanteile an Biosimilars — struktureller Gegenwind beim einst größten Einzelprodukt</li>
+<li>Libtayo (PD-1-Onkologie) wächst zweistellig (+29 % cc) als dritte, aber deutlich kleinere Ertragssäule</li>
+<li>Eigene, vollständig integrierte Biologika-Fertigung (u. a. Rensselaer, NY) als operativer Hebel und zugleich Konzentrationsrisiko</li>
+<li>Pipeline-Optionalität: itepekimab (COPD, gemischte Phase-3-Daten, möglicherweise dritte Studie nötig) und Obesity-Kombinationen (mit Semaglutid) als nächste Wachstumswelle, aber unbewiesen</li>
+<li>Sehr geringe Verschuldung (D/E 0,06) und $15,1 Mrd. Netto-Cash erlauben M&A/Rückkäufe ohne Fremdkapitaldruck</li>
+<li>Kapitalrückführung primär über Aktienrückkäufe (Shares outstanding −5,65 % YoY) statt Dividende</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Dupixent-Wachstum bleibt zweistellig, Eylea-Erosion stabilisiert sich schneller als erwartet, itepekimab erhält trotz gemischter Daten eine Zulassung, erste positive Obesity-Kombinationsdaten (Semaglutid + Trevogrumab/Garetosmab) liefern neue Story. Peer-Bandbreite (BIIB 12,53x, GILD 13,49x, AMGN 17,03x Forward-KGV) — Bull-Multiple leicht über dem Top-Peer AMGN, da bestätigte Outperformance eine moderate Prämie rechtfertigt. Annahme (kein Konsens): FY27-EPS ~$54 (ggü. FY26-Konsens $44,78, +21 %) × 19x Forward = $1.026. Kursziel: $970–$1.080 (Midpoint $1.025). Eintrittswahrscheinlichkeit: 20 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Dupixent wächst weiter solide, Eylea-Erosion setzt sich planmäßig fort, itepekimab-Entscheidung verzögert sich (dritte Studie), keine transformativen Pipeline-Katalysatoren im Horizont. Base-Multiple nahe der Mitte der Peer-Bandbreite (16x, zwischen AMGN 17,03x und dem eigenen aktuellen Niveau). Annahme (kein Konsens): FY27-EPS ~$49 (moderates Wachstum ggü. FY26-Konsens $44,78) × 16x = $784. Kursziel: $740–$830 (Midpoint $785). Eintrittswahrscheinlichkeit: 55 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Eylea-Erosion beschleunigt sich über die aktuellen ~25 % YoY hinaus, itepekimab scheitert an der dritten Phase-3-Studie, Dupixent-Wachstum verlangsamt sich durch Wettbewerb (z. B. neue IL-13-Antikörper). Kundenkonzentration: Sanofi-Kollaborationserlöse ($2,2 Mrd./Quartal, ~51 % des Konzernumsatzes) sind eine harte Abhängigkeit von einem einzigen Partner — quantifizierbares, materielles Risiko. Geopolitik/China: kein signifikantes China-Exposure aus den Daten erkennbar — auf Datenbasis nicht beurteilbar. Lieferketten: eigene, konzentrierte Biologika-Fertigung (Rensselaer) — Single-Site-Risiko bei Kapazitätsausfällen, nicht quantifizierbar. Verwässerung: kein Risiko erkennbar, Shares outstanding rückläufig (Rückkäufe). Regulierung: IRA-Medicare-Preisverhandlungen betreffen Eylea bereits und könnten mittelfristig auch Dupixent erfassen — das materiellste regulatorische Risiko für die Franchise. Bear-Multiple nahe/unter dem niedrigsten Peer (BIIB 12,53x) bei 11x. Annahme (kein Konsens): FY27-EPS fällt auf ~$38 (Kompression ggü. FY26-Konsens) × 11x = $418. Kursziel: $395–$445 (Midpoint $420). Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>**Summe: 20 % + 55 % + 25 % = 100 %**</p>
+<p>**Erwartungswert:** EV = 0,20 × $1.025 + 0,55 × $785 + 0,25 × $420 = $205,00 + $431,75 + $105,00 = **$741,75 — implizites Downside vs. aktuellem Kurs ($784,36): −5,4 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem starken Post-Earnings-Lauf ist ein High-Conviction-Framing für Neueinsteiger nicht gerechtfertigt.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 14,87 % und ROIC im Bereich 9–12 % (Quellen streuen leicht) sind solide. Operating Margin 25,81 % ist die belastbarere Kernkennzahl; die Net Margin (31,41 %) liegt darüber — eine Anomalie (Net Margin > Operating Margin), plausibel durch Kapitalerträge aus der Cash-Position sowie Steuereffekte erklärbar, aus den Daten aber nicht abschließend auflösbar. FCF lag in H1 2026 bei $1,4 Mrd. (Q2 $572,8 Mio., 13,3 % Marge) — Jahreswert hier auf ca. $2,8 Mrd. hochgerechnet (Annahme, kein Konsenswert). Bilanzqualität ist exzellent: D/E 0,06, $15,1 Mrd. Netto-Cash. Der Burggraben liegt im Dupixent-Patentschutz und der Sanofi-Vertriebsinfrastruktur — strukturell stark, aber zeitlich begrenzt; Eylea zeigt bereits, wie schnell ein Burggraben bei Biosimilar-Eintritt erodiert.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV ca. 17,5x (Kurs $784,36 / FY26-Konsens-EPS $44,78) liegt oberhalb von BIIB (12,53x) und GILD (13,49x), nahe AMGN (17,03x) und deutlich unter JNJ (21,06x)/LLY (25,62x). Die Prämie ggü. BIIB/GILD ist durch das höhere Dupixent-Tempo und die stärkere ROE erklärbar; der Abschlag ggü. LLY resultiert aus fehlender GLP-1-Hypergrowth-Optionalität und dem Eylea-Gegenwind. Rückrechnung: Der Kurs impliziert bei 17,5x Forward-KGV grob ein FY27-EPS von $46–48 — nahe Analystenkonsens, also weder ambitioniert noch günstig. Trailing-KGV (~18,9x auf $41,48) bestätigt das. Analyst-Konsensziel liegt je nach Quelle zwischen $825 und $967 (Ø ca. $833, 29 Analysten) — Orientierungspunkt, kein Kursziel-Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 59,06, Rang 24 im NASDAQ-100 — solides, aber nicht Top-Segment. Momentum: klassische V-Erholung — 5T +6,64 %, 10T +9,52 %, 20T +22,99 %, 50T +33,69 %, aber 6M weiterhin −13,78 % — der Kurs holte den Jahres-Drawdown aus der Eylea-Angst erst nach dem Q2-Beat auf. Short-Float-/Positionierungsdaten liegen nicht vor. Hypothese, nicht datenbasiert: Die niedrige Beta (0,40) deutet auf Long-Only-/Qualitäts-Ownership hin. Enttäuschungsrisiko: Nach dem Kurssprung würde jede weitere Eylea-Enttäuschung oder ein itepekimab-Rückschlag überproportional wirken.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Kurs $784,36 liegt rund 4,5 % unter dem 52W-Hoch ($821,11) und 45 % über dem 52W-Tief ($541,00). Momentum über 5T–50T ist durchgängig positiv und beschleunigt — fundamental gestützt durch den EPS-Beat, nicht rein reaktiv. GWS-Ampel ohne aktives Signal auf allen Zeitebenen. Warnsignal: ein Wochenschluss unter der Post-Earnings-Kurslücke (grob $720–$740) würde die Erholung technisch in Frage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($1.100–$1.400):** Dupixent verteidigt die Führung über den Patentzyklus hinaus durch neue Indikationen, itepekimab und die Obesity-Kombinationen liefern eine neue Blockbuster-Klasse, Eylea HD stabilisiert die Augenheilkunde-Franchise.</p>
+<p>**Base ($850–$1.050):** Solides zweistelliges Dupixent-Wachstum kompensiert die vollständige Eylea-Erosion, Pipeline liefert inkrementelle, keine transformativen Beiträge.</p>
+<p>**Bear ($550–$700):** Eylea-Erosion fällt stärker aus als erwartet, itepekimab scheitert endgültig, IRA-Preisverhandlungen erfassen auch Dupixent, keine neue Blockbuster-Säule entsteht.</p>
+<p>Entscheidende Variable: Tempo der Dupixent-Indikationsausweitung vs. Tempo der Eylea-Biosimilar-Erosion. Szenario-Konsistenz: kurzfristiger Bear (Midpoint $420) liegt klar unter dem langfristigen Base ($850–$1.050); kurzfristiger Bull (Midpoint $1.025) liegt unter dem langfristigen Bull ($1.100–$1.400) — konsistent.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Regeneron ist ein fundamental gestützter, aber kein High-Conviction-Trade: ein Qualitätscompounder in einer echten Übergangsphase, dessen EPS-Beat die Aktie bereits deutlich vom Jahrestief zurückgeholt hat. Der Erwartungswert von $741,75 liegt 5,4 % unter dem Kurs — kein asymmetrischer Edge für Neueinsteiger, auch wenn die Dupixent-Story intakt bleibt. Geeignet für: langfristige Qualitätsinvestoren, die Sanofi-Abhängigkeit und Eylea-Erosion akzeptieren. Weniger geeignet für: Momentum-Trader nach dem Post-Earnings-Run. Positionsgröße: reguläre bis reduzierte Kernposition, idealerweise Nachkäufe unter $740. Peers: **Amgen (AMGN)** als ähnlich bewerteter, diversifizierterer Peer (17,03x vs. REGNs ~17,5x); **Biogen (BIIB)** als günstigerer, wachstumsschwächerer Vergleichstitel (12,53x) — REGN bietet das bessere Wachstumsprofil, BIIB die günstigere Bewertung.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der Erwartungswert liegt trotz starkem Q2-Beat 5,4 % unter dem aktuellen Kurs und das Forward-KGV notiert bereits am oberen Rand der direkten Peer-Bandbreite (nahe AMGN) — kein voller Rückenwind für die volle Positionsgröße trotz robustem RS-Signal.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
