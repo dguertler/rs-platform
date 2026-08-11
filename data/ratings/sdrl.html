@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>SDRL — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>SDRL</h1>
+      <h2>Seadrill Limited</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Energy</span></div>
+        <div class="mi">Industrie: <span>Oil & Gas Drilling</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Nicht RS-getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">56</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$46.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">27.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-2.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-12.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">60–75</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">30%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">40–48</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">7,0–14,0</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: SDRL ist weder in `data/fundamentals.json` noch in einem RS-JSON getrackt — Fundamentaldaten stammen aus WebSearch-Recherche (yfinance netzwerkseitig blockiert), Konfidenz entsprechend reduziert, kein RS-Momentum-Signal verfügbar. Seadrill ist der reinste unabhängige Ultra-Deepwater-Driller ohne M&A-Overhang, während die beiden größten Peers (Transocean/Valaris) gerade fusionieren. Die Story: Nach der Chapter-11-Restrukturierung 2022 hat SDRL am 10.08. zum zweiten Mal in Folge die FY26-Guidance angehoben (Revenue $1,50–1,55 Mrd., EBITDA $420–450 Mio.), bei 96% Economic Utilization und wachsendem Backlog ($2,9 Mrd.) — der Markt quittiert mit +8,1%. Was der Markt eventuell übersieht: Management verweist auf eine Tender-Pipeline, die 2027 einen strukturell knapperen Ultra-Deepwater-Markt andeutet, bei praktisch keinen neuen Newbuilds seit dem letzten Zyklus. Die Kehrseite: Free Cashflow ist trotz EBITDA-Erholung weiterhin negativ, und das eigene, aus Marktdaten rekonstruierte Bewertungsmultiple liegt bereits mitten in der Peer-Bandbreite — der einfache "billige Turnaround"-Case ist nach dem Pop nicht mehr offensichtlich.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Vermietung von Ultra-Deepwater-Bohrschiffen/Halbtaucher-Rigs an Öl-/Gas-Majors gegen Tagesraten (Dayrates) plus Auslastung (Utilization) als Kernvariablen</li>
+<li>Operativer Hebel: hohe Fixkosten pro Rig — Marge reagiert überproportional auf Dayrate-/Utilization-Änderungen in beide Richtungen</li>
+<li>Umsatzsichtbarkeit über Backlog ($2,9 Mrd.) — mehrjährige Verträge glätten kurzfristige Volatilität, ändern nichts am Zyklus-Charakter</li>
+<li>Kein Burggraben im klassischen Sinn: Flottenmoderne (Ultra-Deepwater-fähig) ist der zentrale Wettbewerbsfaktor, kein Pricing-Power</li>
+<li>Strukturelle Abhängigkeit von Öl-Explorationsbudgets der Supermajors — zyklisch an Öl-Capex gekoppelt</li>
+<li>Refinanzierung 2026: Fälligkeit von 2030 auf 2034 verschoben, Revolver auf $300 Mio. erhöht und bis 2031 verlängert</li>
+<li>Kapitalallokation: Aktienrückkäufe statt Dividende (0% Yield) seit Chapter-11-Emergence</li>
+<li>Wachstumshebel 2026/27: Tender-Pipeline für Ultra-Deepwater bei strukturell knappem Newbuild-Angebot seit 2015</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Utilization bleibt bei/über 96%, die 2027er-Tender-Pipeline konvertiert schneller als erwartet in feste Verträge, Dayrates erreichen neue Zyklushochs — dritte Guidance-Anhebung in Folge. Peers: Transocean (RIG, Fwd-PE 35,6x, fusioniert mit Valaris), Valaris (VAL, Fwd-PE 29,1x, Übernahmeziel), Noble Corp (NE, Fwd-PE 44,1x). Annahme (kein Konsens): FY26E-EPS $1,60 (Fortsetzung Q2-Trend + zusätzliche Vertragswins) × 42x (nahe NE) = Kursziel $67. Bull-Kursziel: $60–$75. Eintrittswahrscheinlichkeit: 30%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Zyklus bleibt konstruktiv, aber ohne weitere Beschleunigung — Guidance wird bestätigt, nicht erneut angehoben. Annahme (kein Konsens): FY26E-EPS $1,25 (H1 realisiert −0,11+0,47=0,36; H2-Annahme Fortsetzung Q2-Runrate ~$0,45/Quartal) × 35x (implizites Multiple aus MarketCap/EPS: $46,50/$1,25≈37x, gerundet auf Peer-Bandmitte nahe RIG) = Kursziel $44. Base-Kursziel: $40–$48. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Newbuild-Zulauf 2027/28 (auch aus chinesischen Werften) kippt die Angebots-Nachfrage-Balance erneut, Dayrates fallen Richtung 2023er-Niveau zurück, oder eine Off-Hire/Vertragskündigung eines Großkunden reißt kurzfristig ein Umsatzloch. Zusätzlich könnte die RIG-VAL-Konsolidierung über Skaleneffekte Preisdruck auf kleinere Player wie SDRL ausüben. Kundenkonzentration: auf Datenbasis nicht beurteilbar. Geopolitik: Exposure ggü. lokalen Content-Vorgaben (z. B. Brasilien) — Ausmaß nicht quantifizierbar. Lieferkette: Newbuild-Kapazität strukturell an wenige asiatische Werften gebunden — Single-Source-Risiko für Flottenerweiterung, nicht für laufenden Betrieb. Verwässerung: Unternehmen kauft aktuell eigene Aktien zurück, SBC-Daten nicht verfügbar. Regulierung: sektortypisches Moratoriums-/Umweltauflagenrisiko, akut nichts Bekanntes. Annahme: FY26E-EPS $0,55 (Rückfall Richtung 2025er-Verlustmuster) × 15x (Kompression unter Peer-Floor UND eigenem Base-Multiple, da die Bear-These das unterstellte Multiple bricht) = Kursziel $8,3. Bear-Kursziel: $7,0–$14,0 (Midpoint $10,5). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 30% + 45% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,30 × $67,5 + 0,45 × $44 + 0,25 × $10,5 = $20,25 + $19,80 + $2,63 = **~$42,68 — implizites Downside vs. aktuellem Kurs ($46,50): −8,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE (TTM) −2,4% ist zyklisch verzerrt durch die Verlustquartale Q2–Q4 2025 (−$42/−$11/−$10 Mio.) — Q2 2026 mit $29 Mio. Nettogewinn zeigt die Trendwende, ein TTM-Wert hinkt naturgemäß hinterher. Gross Margin 27,2%, Operating Margin 5,1% (TTM) — Q1 2026 lag die operative Marge bereits bei 6,7% (Vorjahr 5,4%), Verbesserungstrend intakt aber noch früh. Free Cashflow weiterhin negativ (Q1 2026 −$35 Mio., Q4 2025 −$63 Mio.) — trotz EBITDA-Erholung frisst die hohe Capex-Guidance ($200–240 Mio.) den operativen Cashflow noch auf. Bilanz nach Refinanzierung 2026 spürbar entlastet: D/E 21,5% (moderat), Cash ~$360 Mio., Current Ratio ~2,03. Kein struktureller Burggraben; der einzige belastbare Vorteil ist Flottenmoderne plus Backlog-Sichtbarkeit ($2,9 Mrd.), kein Pricing-Power im klassischen Sinn.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Kennzahl-Anomalie: Ein Aggregator-Trailing-PE von 6,41 impliziert bei $46,50 ein TTM-EPS von $7,26 — widerspricht eklatant der Summe der vier letzten Quartals-EPS (−0,64/−0,17/−0,16/−0,11/+0,47, nahe Break-even), konsistent mit ROE −2,4%. Als Anomalie gekennzeichnet, aus den Daten nicht abschließend auflösbar — nicht in die Bewertung einbezogen. Auch der gemeldete Forward-PE (19,4x) wird nicht direkt verwendet, da unklar auf welcher EPS-Basis er beruht. Stattdessen: eigenes implizites Multiple aus MarketCap ($3,05 Mrd.) / eigener FY26E-EPS-Schätzung ($1,25) ≈ 37,2x — liegt innerhalb der Peer-Bandbreite (VAL 29,1x – NE 44,1x), nahe Transocean (35,6x), kein größerer Abschlag/Prämie erkennbar. Rückrechnung "Was preist der Kurs ein?": Bei ~37x FY26E-EPS preist der Markt entweder eine über die aktuelle Guidance hinausgehende 2027er-Ergebnisverbesserung ein (konsistent mit der Management-Aussage zu einem "materiell knapperen Markt 2027") oder ein dauerhaftes Re-Rating auf Peer-Niveau — nach zwei Guidance-Anhebungen ambitioniert, aber nicht unplausibel. Normalisierter FCF ist aktuell negativ (Capex-Phase) — keine sinnvolle FCF-Multiple-Bewertung möglich. P/B 0,92x ist ein Value-Signal, aber typisch für einen noch nicht FCF-bestätigten Turnaround. Analystenkonsens $52,88 (9 Analysten, Quellen streuen $42–$80) — 6–12 Monate hinter der Kursbewegung, kein Kursziel-Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Kein RS-Score/Momentum-Datensatz verfügbar (SDRL nicht getrackt) — keine belastbare Aussage zu institutioneller Positionierung möglich. Short-Interest-Daten nicht zuverlässig auffindbar. Hypothese, nicht datenbasiert: Der parallele RIG-VAL-Merger-Newsflow lenkt Sektor-Aufmerksamkeit verstärkt auf Offshore-Driller, was SDRL zusätzlichen Rückenwind verschafft haben könnte. Enttäuschungsrisiko: Der nächste Quartalsbericht (Termin nicht exakt bekannt, historisch früh-/Mitte November) ist der nächste Trigger — nach zwei Guidance-Anhebungen in Folge könnte bereits eine bloße Bestätigung als relative Enttäuschung interpretiert werden.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Keine RS-Score-/SMA-/RSI-Zeitreihe verfügbar (nicht RS-getrackt) — technische Einschätzung stützt sich nur auf recherchierte Eckdaten: 52-Wochen-Range $27,40–$55,45, aktueller Kurs $46,50 nahe oberem Rand (~84% der Range), +8,1% Kurssprung am Earnings-Tag (10.08.). Volumen-/Trendstruktur auf Datenbasis nicht abschließend beurteilbar. Das Momentum ist fundamental gestützt, nicht rein reaktiv — der Sprung ist an einen konkreten Katalysator (EPS-Beat +68%, zweite Guidance-Anhebung, 96% Utilization) gekoppelt. Technisches Warnsignal (indikativ, ohne Chartdaten): ein Rückfall unter das Vor-Earnings-Niveau (~$43) würde die positive Reaktion in Frage stellen.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($80–$140):** 2027er-Tender-Pipeline konvertiert vollständig, Newbuild-Angebot bleibt strukturell knapp, Dayrates erreichen neue Zyklushochs, RIG-VAL-Konsolidierung reduziert sektorweite Wettbewerbsintensität. Normalisiertes EPS $2,50–$3,50 × 30–40x.</p>
+<p>**Base ($40–$70):** Zyklus normalisiert graduell, Utilization pendelt sich bei 85–90% ein, Dayrates konsolidieren auf verbessertem, aber nicht weiter eskalierendem Niveau. Normalisiertes EPS $1,50–$2,00 × 22–30x.</p>
+<p>**Bear ($10–$25):** Neubauten aus 2027/28 drücken erneut Überkapazität in den Markt, Dayrates fallen Richtung 2023er-Niveau zurück, die kombinierte RIG-VAL-Einheit nutzt Skalenvorteile gegen kleinere Player wie SDRL. Normalisiertes EPS $0,50–$0,80 × 15–20x.</p>
+<p>Entscheidende Variable: Tempo und Ausmaß der 2027er-Tender-Konversion im Ultra-Deepwater-Segment.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,2%). SDRL ist kein Buy-and-Hold-Compounder — ohne Burggraben, mit weiterhin negativem FCF und Beta 1,55 ist das ein zyklischer Turnaround-/Trading-Trade, gestützt durch einen echten fundamentalen Katalysator (zwei Guidance-Anhebungen in Folge, 96% Utilization). Nach dem +8,1%-Pop ist ein Großteil der guten Nachrichten eingepreist — das eigene implizite Multiple (~37x) liegt mitten in der Peer-Bandbreite, kein klarer Bewertungsabschlag mehr. Für zyklus-affine Trader/Sektor-Investoren geeignet, nicht für defensive oder dividendenorientierte Anleger (0% Yield). Positionsgröße: max. 2–3% eines diversifizierten Portfolios; Nachkauf-Disziplin auf Rücksetzer sinnvoller als Chasing.</p>
+<p>**Transocean (RIG, Fwd-PE 35,6x)** bietet über die laufende Valaris-Übernahme das größte, liquideste Flotten-Exposure mit Konsolidierungsfantasie. **Valaris (VAL, Fwd-PE 29,1x)** ist die günstigste Peer-Bewertung im Sample, aber als Übernahmeziel bereits in eine Merger-Arb-Sondersituation eingepreist statt einer reinen operativen These. SDRL bleibt der reinste unabhängige Play auf die 2027er-Tender-These ohne M&A-Overhang.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz starkem fundamentalem Katalysator (zwei FY26-Guidance-Anhebungen in Folge, 96% Utilization) ergibt der eigene Szenario-EV keinen asymmetrischen Edge (−8,2%), und das implizite Forward-Multiple (~37x) liegt bereits mitten in der Peer-Bandbreite statt am günstigen Rand.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
