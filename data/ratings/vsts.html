@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VSTS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">11.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>VSTS</h1>
+      <h2>Vestis Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Specialty Business Services</span></div>
+        <div class="mi">MCap: <span>$2B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">54</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 11.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">58.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$14.21</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">35.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$2.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">26.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.70%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+2.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">22–28</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">12–17</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">3,00–5,00</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $22–$28 (25 %) · Base $12–$17 (45 %) · Bear $3–$5 (30 %) · EV ~$13,98</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Vestis (Uniform-/Workplace-Supplies-Vermietung, 2023 als Spin-off von Aramark gelistet) meldete am 11.08. das zweite profitable Quartal in Folge: Q3-FY26-Nettogewinn 11,0 Mio.$ (0,08 $/Aktie) vs. Nettoverlust −0,7 Mio.$ im Vorjahr, Adj. EBITDA 80,9 Mio.$ vs. 64,0 Mio.$ (+26,4% YoY), FY26-Guidance erneut angehoben (Adj. EBITDA auf 310–315 Mio.$, FCF zuvor bereits auf 120–150 Mio.$ mehr als verdoppelt). Die Aktie fiel im September 2025 im Zuge der Ankündigung einer "Strategic Business Transformation" auf ein 52-Wochen-Tief von 3,98 $ und hat sich seither auf 14,21 $ (+2,6% heute, nach anfänglichem Vorbörsen-Dip von −5,2%) mehr als verdreifacht. Die eigentliche Story ist nicht der Beat selbst, sondern die Marktstruktur dahinter: Cintas übernimmt UniFirst für 5,5 Mrd.$ (Closing H2 2026) und verengt den Uniform-Rental-Markt von drei auf faktisch zwei relevante Anbieter — Vestis wird dadurch der einzige verbliebene Cintas-Herausforderer mit nennenswerter Skalierung. Was der Markt übersieht bzw. schon vorwegnimmt: Nach +257% seit dem Tief handelt die Aktie auf einem Forward-KGV über dem einzigen verifizierbaren Peer (Details Abschnitt 7) — der Turnaround ist real, die Bewertung lässt aber kaum noch Sicherheitsmarge.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Vermietung von Berufsbekleidung, Reinigungstextilien und Workplace-Supplies an B2B-Kunden in Nordamerika, inkl. Wäscherei-/Logistiknetzwerk</li>
+<li>Umsatz größtenteils vertraglich wiederkehrend (Mehrjahresverträge), aber Kundenbindung wurde durch die Post-Spin-off-Restrukturierung (Lagernetzwerk-Konsolidierung) beschädigt — Kernursache der Krise 2024/2025</li>
+<li>Operativer Hebel über Routendichte und Anlagenauslastung der Wäschereien — laufender Verbesserungshebel (75 Mio.$ Run-Rate-Kosteneinsparungen ab FY27)</li>
+<li>Strukturelle Abhängigkeit von Lohnkosten und Energie/Wasser für den Wäscherei-Betrieb — margensensibel bei Inflation</li>
+<li>Wettbewerbslandschaft verengt sich: Cintas/UniFirst-Fusion lässt Vestis als zweitgrößten Player mit potenziell verbesserter Preissetzungsmacht zurück</li>
+<li>TTM-Umsatz 2,71 Mrd.$ (−0,84% YoY); annualisierter Q3-Run-Rate (661,7 Mio.$ × 4 = 2,65 Mrd.$) nahe TTM — keine materielle Verzerrung durch die Transformation</li>
+<li>Bruttomarge 26,5%, operative Marge nur 2,36% — zentraler Value-Hebel bei anhaltender Kostendisziplin</li>
+<li>Nettoverschuldung ca. 1,29 Mrd.$ bei 344,5 Mio.$ verfügbarer Liquidität — Bilanz bleibt der Wackelpunkt der These</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Cintas (CTAS, Forward-KGV 33,22x) als einziger direkt verifizierbarer Vergleichswert im Datensatz; UniFirst (Übernahmeziel, kein eigenständiges Marktmultiple mehr) und Aramark Uniform (nicht separat notiert) nicht verifizierbar. Bull-Multiple bewusst nicht über CTAS' Niveau angesetzt, da VSTS' eigenes Forward-KGV (35x) bereits über dem einzigen Peer liegt. Struktureller Margentreiber: $75-Mio.-Run-Rate-Einsparungen ab FY27 plus operativer Hebel aus höherer Routendichte, sofern das für Q4 FY26 avisierte Umsatzwachstum eintritt — Skalierungseffekt, nicht nur Kostenkürzung. Zusätzlicher Trigger: Cintas-UniFirst-Deal schließt, mehr Preissetzungsmacht im Duopol. Annahme (kein Konsens): FY27-EPS $0,75 (Kostenziel übertroffen, Umsatzwachstum kehrt zurück) × 33x (volle Peer-Angleichung bei bestätigtem Turnaround) = $24,75. Bull-Kursziel: $22–$28. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Q4-FY26-Rückkehr zu Umsatzwachstum bestätigt sich moderat, Management-Ziel FY27-EPS 0,55 $ wird getroffen. Multiple: 26x — Abschlag zu CTAS (33,22x) für die anhaltende Margen-/Leverage-Lücke, unterstellt aber eine Normalisierung vom heute EPS-bedingt verzerrten 35x-Niveau. Annahme (kein Konsens): FY27-EPS $0,55 (Management-Guidance) × 26x = $14,30. Base-Kursziel: $12–$17. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Das für Q4 FY26 avisierte Umsatzwachstum bleibt aus, Kundenabwanderung aus der Transformationsphase 2024/2025 setzt sich fort, während die Nettoverschuldung (~1,29 Mrd.$, ~4,1x EBITDA) bei stagnierendem EBITDA Refinanzierungs-/Covenant-Sorgen weckt — insbesondere falls ein gestärktes Cintas nach dem UniFirst-Closing aggressiver um Vestis-Kunden konkurriert. Kundenkonzentration: nicht quantifizierbar, aber die dokumentierte Kunden-Churn-Historie 2024/2025 ist das relevantere Risiko. Geopolitik/China: nicht relevant — reines nordamerikanisches B2B-Geschäft. Lieferketten: kein Foundry-/Single-Source-Risiko; Textil-/Energiekosten als Vorleistungsrisiko, nicht quantifizierbar. Verwässerung: SBC-Daten nicht verfügbar; Aktienanzahl seit Spin-off stabil bei ~132 Mio. — kein erkennbarer Trend, nicht abschließend beurteilbar. Regulierung: gering, sektortypische Arbeits-/Umweltauflagen, kein Sonderrisiko erkennbar. Annahme: FY27-EPS $0,22 (Kostensenkung verfehlt, Umsatz weiter rückläufig) × 15x (Kompression bei brechender These) = $3,30. Bear-Kursziel: $3,00–$5,00. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $25,00 + 0,45 × $14,50 + 0,30 × $4,00 = $6,25 + $6,525 + $1,20 = **~$13,98 — implizites Downside vs. aktuellem Kurs ($14,21): −1,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE/ROIC nicht verfügbar (keine belastbaren Daten im Datensatz — FY25-Nettoverlust und die gerade erst einsetzende Profitabilität machen historische ROE-Werte ohnehin wenig aussagekräftig). Bruttomarge 26,5%, operative Marge 2,36% — im Q3-YoY-Vergleich klar verbessert (Adj.-EBITDA-Marge von ~9,5% auf ~12,2%). FCF-Guidance FY26 wurde von 50–60 Mio.$ auf 120–150 Mio.$ mehr als verdoppelt — der stärkste Qualitätsindikator im Datensatz, deutet auf reale, nicht nur bilanzielle Verbesserung hin. Bilanzqualität ist der Schwachpunkt: Nettoverschuldung ~1,29 Mrd.$ bei FY26E-EBITDA von 312,5 Mio.$ (Mittelwert) ergibt ~4,1x Leverage — hoch für ein Unternehmen mit erst zwei profitablen Quartalen in Folge. Liquiditätspuffer (344,5 Mio.$) mildert das kurzfristige Risiko.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der aktuelle Kurs ein? Bei 14,21 $ und Forward-KGV 35x auf Konsens-FY26-EPS (0,405 $) preist der Markt bereits nahezu das Erreichen des eigenen FY27-Managementziels (0,55 $, +36% YoY) ein — ambitioniert bei erst zwei profitablen Quartalen, ohne mehrjährigen Track Record. Das eigene Forward-KGV (35x) liegt damit über dem einzigen verifizierbaren Peer Cintas (33,22x) — eine Prämie, die sich nicht durch überlegene Qualität rechtfertigt (operative Marge 2,36% vs. ~23,7%), sondern primär durch die noch sehr kleine, mechanisch verzerrende EPS-Basis erklärbar ist. Ergänzend, robuster bei dieser EPS-Basis: EV ≈ Marktkap. 1,88 Mrd.$ + Nettoschulden 1,29 Mrd.$ = 3,17 Mrd.$, bei FY26E-Adj.-EBITDA (Mittelwert 312,5 Mio.$) ≈ 10,1x — deutlicher Abschlag zu Cintas' ~20x EV/EBITDA, der die reale Qualitätslücke besser abbildet als das PE. Keine Value-Falle, aber auch kein eindeutiges Upside — eine Turnaround-Wette, deren PE-Bewertung bereits vorauseilt, während EV/EBITDA noch Spielraum zeigt.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 58,38 (Rang 44 im Smallcap-Universum) signalisiert intaktes, aber kein Top-Momentum. Hypothese, nicht datenbasiert: William Blairs Hochstufung auf Outperform nach den Q2-Zahlen dürfte Sell-Side-Aufmerksamkeit erhöht haben, während der Analysten-Konsens (7-8 Analysten, "Hold"/"Neutral", Kursziel-Ø 7,81–10,30 $) weiterhin deutlich unter dem aktuellen Kurs liegt — Nachlauf-Indikator, kein Bewertungs-Ceiling. Enttäuschungsrisiko: Verfehlt Q4 FY26 die avisierte Rückkehr zu Umsatzwachstum, dürfte die aktuelle PE-Prämie schnell abschmelzen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Nach dem Tief bei 3,98 $ (09/2025) lief die Aktie bis zum 52-Wochen-Hoch 16,90 $ (16.07.2026, +77,77% auf 6M-Basis) und korrigiert seither (10T −10,79%, 20T −8,66%) auf zuletzt 13,87 $ (Wochenschluss 10.08.). Der heutige Earnings-Pop auf 14,21 $ (+2,6%, nach initialem Vorbörsen-Dip von −5,2%) ist ein erster Stabilisierungsversuch, fundamental gestützt durch EBITDA-Beat und Guidance-Anhebung — kein rein reaktives Momentum. Warnsignal: Rückfall unter ~13,66 $ (Wochentief 03.08.) verlängert die Korrektur; Rückeroberung von 15,60–16,00 $ bestätigt den Aufwärtstrend. GWS-Signale für diesen Smallcap nicht getrackt.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($35–$50):** Vestis etabliert sich als klare Nr. 2 im Duopol nach der Cintas-UniFirst-Integration, operative Marge nähert sich schrittweise 10–15% (Routendichte, Skalierung), Verschuldung wird spürbar zurückgeführt.</p>
+<p>**Base ($16–$26):** Turnaround gefestigt, operative Marge normalisiert auf 5–7%, Umsatzwachstum niedriger einstelliger Bereich, Verschuldung bleibt handhabbar.</p>
+<p>**Bear ($5–$10):** Turnaround stockt, Marktanteilsverluste an ein durch die UniFirst-Integration gestärktes Cintas, Verschuldung wird zum strukturellen Refinanzierungsrisiko.</p>
+<p>Entscheidende Variable: Ob die Margenverbesserung strukturell trägt oder nach Auslaufen der Einmaleffekte auf FY25-Krisenniveau zurückfällt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −1,6%). VSTS ist ein zyklischer Turnaround-Trade, kein Buy-and-Hold-Compounder: Der operative Umschwung (2 profitable Quartale, EBITDA +26% YoY, FCF-Guidance mehr als verdoppelt) ist real und durch die Cintas-UniFirst-Konsolidierung strukturell unterstützt — aber die Aktie hat davon nach +257% seit dem Tief bereits viel eingepreist, das eigene Forward-KGV liegt sogar über dem einzigen Peer. Geeignet für Trading-orientierte Investoren mit Fokus auf Turnaround-Situationen, nicht für Long-Only-/Compounder-Mandate. Position wegen hoher Verschuldung (~4,1x Netto-EBITDA) und kurzer Track-Record-Historie auf max. 2–3% eines diversifizierten Portfolios begrenzen.</p>
+<p>**Cintas (CTAS)** bleibt das qualitativ überlegene, auf Forward-KGV-Basis (33,22x) aber kaum günstigere Marktführer-Instrument. Peer-Multiples für UniFirst/Aramark Uniform nicht im Datensatz — relative Bewertung dort indikativ, nicht quantifizierbar.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Eigenes Forward-KGV (35x) liegt über dem einzigen verifizierbaren Peer (CTAS 33,22x) trotz deutlich schwächerer operativer Marge und hoher Verschuldung, EV zeigt keinen asymmetrischen Edge (−1,6%).</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
