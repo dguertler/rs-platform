@@ -849,6 +849,19 @@ def main():
     all_new_states.update(new_sp500)
     all_alerts.extend(alerts_sp500)
 
+    # Ticker, die in mehreren Quellen vorkommen (z.B. NASDAQ-100 + S&P 500),
+    # deduplizieren – nur der erste Treffer (Reihenfolge QQQ > DAX > SPX) bleibt,
+    # sonst würde derselbe Ticker mehrfach in derselben Mail auftauchen.
+    seen_tickers = set()
+    deduped_alerts = []
+    for a in all_alerts:
+        if a['ticker'] in seen_tickers:
+            print(f'  DEDUP: {a["ticker"]} ({a["source"]}) – bereits aus anderer Quelle gemeldet.')
+            continue
+        seen_tickers.add(a['ticker'])
+        deduped_alerts.append(a)
+    all_alerts = deduped_alerts
+
     # Bereits heute gemeldete Ticker herausfiltern
     fresh_alerts = [a for a in all_alerts
                     if alerted.get(a['ticker']) != today_str]
