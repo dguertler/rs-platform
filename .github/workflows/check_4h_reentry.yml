@@ -8,13 +8,9 @@ permissions:
   contents: write
 
 on:
-  schedule:
-    # Mo-Fr jeweils 5 Min nach der vollen Stunde → 4H-Kerze sicher abgeschlossen
-    # 10:05 UTC (12:05 MESZ) – nach DAX-Mittag-4H-Schluss
-    # 14:05 UTC (16:05 MESZ) – nach DAX-Börsenschluss (~15:30 UTC)
-    # 18:05 UTC (20:05 MESZ) – nach erstem US-4H-Schluss (~17:30 UTC = 13:30 ET)
-    # 22:05 UTC (00:05 MESZ) – nach US-Börsenschluss (~21:30 UTC = 17:30 ET)
-    - cron: '5 10,14,18,22 * * 1-5'
+  # Automatischer Schedule deaktiviert (11.08.2026, auf Nutzerwunsch): löste
+  # zu viele Telegram-Push-Nachrichten pro Lauf aus. Bleibt als
+  # workflow_dispatch für manuelle/Test-Läufe erhalten.
   workflow_dispatch:
     inputs:
       test_ticker:
