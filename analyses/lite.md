@@ -1,84 +1,95 @@
 # LITE — KI-Aktienbewertung
 
-**Lumentum Holdings Inc.** · Technology · 04.06.2026 · Signal: Manuell generiert
+**Lumentum Holdings Inc.** · Technology · 12.08.2026 · Signal: Breakout
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 854.96 |
-| Market Cap | $66.52 Mrd. |
-| Forward PE | 47.23 |
-| Revenue (TTM) | $2.49 Mrd. |
-| Gross Margin | 40.8% |
-| ROE | 22.8% |
-| RS-Score | 183.2 |
+| Kurs | 951.17 |
+| Market Cap | $96.15 Mrd. |
+| Forward PE | N/A |
+| Revenue (TTM) | $3.01 Mrd. |
+| Gross Margin | 50.4% |
+| ROE | N/A |
+| RS-Score | 58.1 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
+**Szenarien (12–18 Monate):** Bull $900–$990 (25 %) · Base $610–$690 (45 %) · Bear $140–$180 (30 %) · EV ~$576,75
+
 ## 1. INVESTMENT-CASE
 
-Lumentum ist das Picks-and-Shovels-Instrument auf die optische Vernetzung von AI-Rechenzentren. Der strukturelle Kern: AI-Cluster brauchen exponentiell mehr optische Konnektivität — 800G/1.6T-Transceiver, EML- und Indiumphosphid-Laser und perspektivisch Co-Packaged Optics (CPO). Lumentum liefert die kritischen optischen Komponenten, nicht die Module selbst. Das erklärt den Umsatzsprung von +90% YoY — eine echte AI-getriebene Inflexion, nicht zyklisches Rauschen. Die Aktie ist von $72 auf $855 explodiert (~12x in 12 Monaten). Was der Markt jetzt austesten muss: Ob der Hochlauf in echten, nachhaltigen Free Cashflow durchschlägt — der TTM-FCF von nur $93 Mio. bei $66,5 Mrd. Market Cap ist die zentrale Schwachstelle der These. Das Cloud-/Datacenter-Segment trägt das Wachstum, während das Legacy-Telekom- und Industrielaser-Geschäft stagniert. Analyst-Konsensziel $1.105 liegt über dem Kurs $855 — als Orientierung, nicht als Kursziel-Ceiling zu verstehen.
+DATENLAGE: Der Fundamental-Snapshot vom 10.08. lag vor dem Q4-FY26-Report (11.08., nach Börsenschluss) und dem anschließenden +14,19%-Kurssprung am 12.08. (820,59 $ → 951,17 $, Preis-Gap &gt;5%) — hier verwendetes aktuelles Preisniveau (951,17 $) ist die primäre Bewertungsbasis, Snapshot-Multiples nur historische Referenz. Zusätzliche Anomalie: FY26-**GAAP**-EPS von −92,96 $ (Nettoverlust 6,9 Mrd.$) resultiert praktisch vollständig aus einem einmaligen, nicht-cash-wirksamen 7,8-Mrd.$-Verlust aus der Wandlung großer Teile der 2026/2028/2029-Wandelanleihen in Aktien (Aktienzahl ~77,8 auf ~101,1 Mio. gestiegen) — diese Kennzahl fließt NICHT in Bewertung/Scoring ein, stattdessen Non-GAAP-Basis (FY26-EPS 8,67 $). Operativ ist die Story außergewöhnlich: Q4-Umsatz 1,01 Mrd.$ (+109% YoY), Non-GAAP-Bruttomarge erstmals über 50% (50,4%), Q1-FY27-Guidance (EPS 4,05–4,35 $, Umsatz 1,225–1,275 Mrd.$) weit über Konsens — "Zielbetriebsmodell mehr als ein Quartal früher erreicht". Der Markt preist das bereits stark ein: Aktie +108% YTD, jetzt nach dem Pop auf einem Non-GAAP-Trailing-KGV von ~110x. Was der Markt evtl. übersieht: Die InP-Laser-Kapazität ist strukturell knapp (Unterversorgung der Nachfrage um 25–30%), was Preissetzungsmacht stützt — aber die eigene, disziplinierte Peer-Multiple-Rechnung unten zeigt trotzdem erhebliches Bewertungsrisiko.
 
 ## 2. GESCHÄFTSMODELL
 
-- Zwei Segmente: Cloud & Networking (optische Komponenten/Transceiver für Datacenter — der Wachstumsmotor) und Industrial Tech (Laser für Fertigung/3D-Sensing — zyklisch, stagnierend)
-- Kernkompetenz: Indiumphosphid-Laser (EML, DFB) — knappes, vertikal-integriertes Material-Know-how und reale Engpass-Position in der Transceiver-Lieferkette
-- Verdient an optischem Content pro AI-Cluster: mehr GPUs = mehr optische Verbindungen = mehr Laser/Transceiver
-- Kundenkonzentration hoch: Hyperscaler und Transceiver-Modulhersteller (Coherent, Innolight) — Abhängigkeit von wenigen Großabnehmern
-- Operativer Hebel vorhanden, aber kapitalintensiv: Wafer-Fab-Ausbau für InP-Laser bindet Cash (erklärt schwachen FCF)
-- Strukturelle Option CPO/Optical Circuit Switching — Content-Erweiterung, falls Lumentum Design-Wins sichert
-- D/E 111 — erhöhte Verschuldung, im Hochlauf tragbar, bei Nachfragepause belastend
-- Margenmix: optischer Content margenstärker als Legacy-Laser; Mix-Verschiebung hebt die Gruppen-Marge
+- Optische Komponenten (Transceiver, InP-Laser) für AI-Rechenzentrums-Interconnects — Cloud & Networking ~86–88% des Umsatzes
+- Ein Vertragsfertigungskunde 25,1% des FY25-Umsatzes (von 30,3% FY24 gesunken) — konkretes Klumpenrisiko, Endkunden (Google/Amazon/Microsoft/Meta) namentlich genannt, aber ohne Einzel-%-Angabe
+- Kapazitätsengpass als Kernthema: InP-Nachfrage +85% YoY, Unternehmen liefert 25–30% unter Nachfrage
+- Ausbau: EML-Laserkapazität +50% bis Ende 2026, neues Werk in Greensboro (NC) ab 2028, Ziel +5 Mrd.$ Umsatzkapazität
+- Operativer Hebel enorm: Non-GAAP-Bruttomarge 39,4%→50,4% und Operating-Marge 18,7%→36,6% binnen einem Geschäftsjahr
+- Massive Verwässerung 2026: Wandelanleihen-Konversionen erhöhten die Aktienzahl um ~30% (77,8→101,1 Mio.)
+- Bilanz nach den Konversionen strukturell verändert (Schulden reduziert, Eigenkapital erhöht) — exakte Post-Conversion-Zahlen nicht verifizierbar
+- SBC ca. 177 Mio.$ FY25 (~9–10% des damaligen Umsatzes, eigene Schätzung)
 
 ## 3. BULL CASE
 
-1.6T-Transceiver-Zyklus und CPO-Adoption beschleunigen, Lumentum sichert Laser-Design-Wins bei mehreren Hyperscalern, InP-Kapazitätsausbau zahlt sich aus und FCF normalisiert sich deutlich. Strukturelle Margennachhaltigkeit ist teilweise begründbar: vertikal-integriertes InP-Laser-IP, Engpass-Position in der Lieferkette und Mix-Verschiebung zu hochmargigem Datacenter-Content — Switching Costs sind aber moderat und die Komponentenpreise stehen unter Commoditisierungsdruck. Umsatz wächst weiter zweistellig hoch, Operating Margin steigt über 25%. Kursziel 1.200–1.500 USD. Eintrittswahrscheinlichkeit: 25%.
+Kapazitätsausbau gelingt schneller als geplant, Nachfrage bleibt strukturell knapp, Marge expandiert weiter Richtung 55%+, Multiple nähert sich Ciena. Peers: Ciena (CIEN, Fwd-PE ~45,3x), Coherent (COHR, Fwd-PE ~33–45x, Quellen uneins). Annahme (kein Konsens): FY27E Non-GAAP-EPS 21,00 $ (Fortsetzung der Q1-Guidance-Dynamik mit weiterer sequenzieller Beschleunigung) × 45x (nahe CIEN, gerechtfertigt durch überlegenes Wachstum) = Kursziel 945 $. Bull-Kursziel: 900–990 $. Eintrittswahrscheinlichkeit: 25 %.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario 12–18 Monate: Datacenter-Optik wächst kräftig weiter, aber das Wachstumstempo normalisiert von +90% auf 30–50%, FCF verbessert sich graduell. Margen ziehen moderat an. Bewertung bleibt hoch, konsolidiert seitwärts bis moderat aufwärts. Kursziel 850–1.100 USD. Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Q1-FY27-Guidance wird ungefähr erreicht, Wachstum verlangsamt sich danach moderat (Kapazitätsgrenzen), Multiple normalisiert sich in die obere Peer-Bandbreite statt der aktuell impliziten Prämie. Annahme (kein Konsens): FY27E Non-GAAP-EPS 18,00 $ × 36x (obere COHR/FN-Bandbreite, kein voller CIEN-Aufschlag) = Kursziel 648 $. Base-Kursziel: 610–690 $. Eintrittswahrscheinlichkeit: 45 %.
 
 ## 5. BEAR CASE
 
-Auslöser: Hyperscaler-Capex-Pause oder Optik-Bestellverschiebung, Commoditisierung der Transceiver-Komponenten drückt Preise, oder ein Großkunde insourct/wechselt Lieferanten. Bei FCF von nur $93 Mio., D/E 111 und P/B 72 ist keinerlei Enttäuschungspuffer eingepreist. Multiple kollabiert. Kursziel 450–600 USD (−30% bis −47%). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Ein Hyperscaler-Großkunde verlangsamt AI-Capex oder wechselt Lieferanten (COHR/Fabrinet/AAOI als Alternativen), Kapazitätsausbau verzögert sich, Wachstum bricht deutlich unter Guidance ein. Peer-Anker: eigenes Multiple komprimiert unter die Peer-Bandbreite (Wachstumsstory-Bruch-Abschlag). Annahme (kein Konsens): FY27E Non-GAAP-EPS 8,00 $ (Wachstum stoppt nahe FY26-Endniveau) × 20x = Kursziel 160 $. Bear-Kursziel: 140–180 $. Eintrittswahrscheinlichkeit: 30 %.
 
-**Summe: 25% + 45% + 30% = 100%**
+Risikodimensionen:
+- Kundenkonzentration: Ein Vertragsfertiger 25,1% FY25-Umsatz, Cloud & Networking-Segment 86–88% — hohe, konkrete Konzentration.
+- Geopolitik/China: kein direkter China-Absatz im Fokus der Berichterstattung erkennbar — auf Datenbasis nicht abschließend beurteilbar.
+- Lieferketten/Foundry: strukturelle InP-Kapazitätsknappheit ist zugleich Chance (Pricing Power) und Risiko (Wachstumsdeckel bis neue Werke 2028 online sind).
+- Verwässerung: ~30% Aktienzahl-Anstieg 2026 durch Wandelanleihen-Konversion — real und bereits eingetreten, nicht nur Zukunftsrisiko.
+- Regulierung: keine akuten Rechtsrisiken identifiziert.
+
+**Summe: 25 % + 45 % + 30 % = 100 %.**
+
+**Erwartungswert:** EV = 0,25×945 + 0,45×650 + 0,30×160 = 576,75 $ — Downside vs. aktuellem Kurs (951,17 $): −39,4 %. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, sie implizieren nach disziplinierter Peer-Multiple-Logik ein erhebliches Bewertungsrisiko trotz exzellenter operativer Entwicklung. High-Conviction-Framing ist damit unzulässig.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Gemischt — Wachstum top, Bilanz und Cash-Generierung schwach. Gross Margin 40,8%, Operating Margin 21,8%, Net Margin 17,7%, ROE 22,8%. Der kritische Punkt: FCF nur $93 Mio. bei $2,49 Mrd. Umsatz (FCF-Marge ~4%) — der margenstarke Buchgewinn schlägt nicht in Cash durch, weil der Kapazitätsausbau Cash bindet. D/E 111 ist erhöht. P/B 72 ist extrem und reflektiert reine Momentum-Prämie. Echter Burggraben liegt im InP-Laser-Know-how und der vertikalen Integration — real, aber nicht so tief wie ein Monopol. Top-of-Cycle-Charakteristik: Das Umsatzwachstum von 90% ist nicht extrapolierbar.
+ROE/Free Cashflow/Verschuldung auf Datenbasis nicht verlässlich aktuell verfügbar — alle vorliegenden Quellen stammen von vor der großen Wandelanleihen-Konversion (Bilanz strukturell verändert), daher als N/A markiert statt mit veralteten Werten zu rechnen. Operativ jedoch eindeutig: Non-GAAP-Bruttomarge 50,4% und Operating-Marge 36,6% (Q4) sind Bestwerte der Firmengeschichte, getragen durch Produktmix (InP-Laser statt Commodity-Transceiver) und Skaleneffekte. Der GAAP-Nettoverlust (−6,9 Mrd.$) ist ein reiner Bilanzierungseffekt der Anleihen-Konversion, keine operative Schwäche — muss aber bei Bilanzkennzahlen-Interpretation ausgewiesen bleiben, nicht verschwiegen werden.
 
 ## 7. BEWERTUNG
 
-Trailing-PE 152x und P/B 72x sind nur über eine fortgesetzte Hyperscaler-Optik-Nachfrage zu rechtfertigen. Forward-PE 47,2x preist anhaltend hohes Wachstum plus FCF-Normalisierung ein. Da der FCF heute minimal ist, ist eine normalisierte FCF-Bewertung wenig belastbar — die Aktie ist eine strukturierte Wette auf den AI-Optik-Aufbau, keine Value- und keine Cashflow-Position. Bei diesem Multiple ist die Fehlertoleranz nach unten gering. Analyst-Konsensziel $1.105 über Kurs — Coverage optimistisch, als Sentiment zu lesen.
+Rückrechnung "Was preist der Kurs ein?": Bei Kurs 951,17 $ und einem Multiple nahe dem Bull-Case-Ansatz (45x) impliziert der Markt FY27E-EPS von ca. 21,10 $ — praktisch identisch mit der eigenen Bull-Annahme. Der Markt preist also nicht den Base-, sondern nahezu den Bull-Case ein. Ambitioniert: Das setzt voraus, dass die aktuelle Kapazitäts-/Margendynamik ohne Dämpfer anhält. Eigenes Forward-Multiple liegt klar über der Peer-Bandbreite (COHR ~33–45x, FN ~38–44x, CIEN ~45,3x) — eine Prämie, die durch das überlegene Wachstum (+109% vs. einstellige/niedrige zweistellige Peer-Raten) teilweise erklärbar ist, aber beim aktuellen Kursniveau bereits vollständig eingepreist scheint, nicht mehr als Sicherheitsmarge verfügbar.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 183, 6M +190% — aber jüngst kühlt das Momentum ab (20T −7,6%, 50T −10,5%): Die Aktie konsolidiert nach dem Vertikalanstieg. Institutionell ein AI-Optik-Thementreffer, Momentum-Fonds dominant, hoher Beta-Charakter. Neue Käufer brauchen jetzt Bestätigung über FCF-Durchschlag und Design-Win-Newsflow. Enttäuschungsrisiko hoch — nach +12x ist viel eingepreist, und die FCF-Schwäche ist die offene Flanke.
+Analysten mehrheitlich bullish (20 von 25 Buy/Strong Buy), Kursziele aber uneinheitlich (986–1.130 $ je nach Snapshot) und nach den Zahlen gespalten: Rosenblatt bekräftigt Buy mit 1.300 $, JPMorgan hebt auf 1.165 $ — aber TD Cowen bleibt trotz Zielanhebung (800→820 $) bei Hold, deutlich unter dem aktuellen Kurs. Hypothese, nicht datenbasiert: Die TD-Cowen-Positionierung (Hold, Ziel unter Kurs) deutet auf beginnende Bewertungsskepsis im sonst euphorischen Analystenfeld hin.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Übergeordneter Aufwärtstrend intakt (Kurs über SMA200 ~471), aber kurzfristig angeschlagen: Der Kurs handelt um/unter dem SMA20 (~937), 20T- und 50T-Performance negativ — das Momentum ist reaktiv und konsolidierend, nicht mehr beschleunigend. Hohe Volatilität (Beta 1,5, faktisch höher). Technisches Warnsignal: Wochenschluss unter SMA50 (~879) würde die Korrektur ausweiten; Reclaim über $1.030 bestätigt den Trend.
+RS-Score 58,14 (Rang 3, NASDAQ-100) — sehr stark, aber Windows-Daten (5T −0,85%, 10T +27,7%, 20T +9,0%, 6M +28,5%) datieren vor dem Aug-12-Pop. GWS-Ampel inaktiv auf allen Zeitebenen. Kurs 951,17 $ nahe dem 52-Wochen-Hoch (1.085,68 $, ~78% der Range vom Tief 111,20 $). Momentum ist fundamental gestützt (echter Beat+Raise), aber nach +108% YTD und +14% an einem Tag ist die Luft nach oben technisch wie fundamental dünn.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($1.800–2.500):** Lumentum wird unverzichtbarer Laser-Lieferant für CPO; optischer Content pro AI-Cluster vervielfacht sich. Entscheidende Variable: CPO-Design-Wins und FCF-Durchschlag.
+**Bull ($1.400–$2.000):** AI-Interconnect-Nachfrage bleibt strukturell knapp, Greensboro-Werk liefert ab 2028 zusätzliche 5 Mrd.$ Kapazität, Marktführerschaft bei InP-Lasern festigt sich. Normalisiertes EPS 35–45 $ × 35–45x.
+**Base ($700–$1.100):** Solides, sich normalisierendes Wachstum, Marge pendelt bei 40–45% ein, Wettbewerb durch COHR/AAOI nimmt zu. Normalisiertes EPS 20–28 $ × 30–38x.
+**Bear ($200–$400):** AI-Capex-Zyklus dreht, Kundenverlust oder Preisdruck durch Überkapazität ab 2028. Normalisiertes EPS 8–12 $ × 20–28x.
 
-**Base ($900–1.400):** Solider Datacenter-Optik-Zulieferer, Wachstum normalisiert, FCF verbessert sich.
-
-**Bear ($350–550):** Commoditisierung der Komponenten und Capex-Zyklus drehen; FCF-Schwäche plus Leverage erzwingen Bewertungskorrektur.
-
-Entscheidende Variable: Verwandelt Lumentum den Umsatzhochlauf in nachhaltigen Free Cashflow?
+Entscheidende Variable: Ob die AI-Interconnect-Nachfrage bis zur Kapazitätserweiterung 2028 strukturell knapp bleibt oder sich normalisiert.
 
 ## 11. PROFI-FAZIT
 
-Lumentum ist ein zyklisch überlagertes AI-Optik-Momentum-Play — fundamental von einem echten Strukturtrend getragen, aber mit schwacher Cash-Generierung, hoher Bewertung und kurzfristig abkühlendem Momentum. Aktuell eher HOLD als Nachkauf: Die Story ist intakt, aber Bewertung (P/B 72) und FCF-Lücke verlangen einen besseren Einstieg oder Bestätigung des FCF-Durchschlags. Für Momentum-Trader nur mit enger Stop-Disziplin; für Buy-and-Hold ist das Cash-Profil zu dünn. Explizite Risikowarnung: nach +12x sind 40–50%-Korrekturen realistisch — Positionsgröße max. 1–2%. Peers: **Coherent (COHR)** ist breiter aufgestellt und das robustere Optik-Instrument; **Astera Labs / Credo** sind die reineren Wetten auf AI-Konnektivität auf der Connectivity-Silicon-Seite. Lumentum ist das schärfste InP-Laser-Instrument, aber das mit der dünnsten Cash-Basis.
+Kein klassischer Buy-and-Hold-Compounder auf diesem Kursniveau — operativ einer der stärksten AI-Infrastruktur-Namen überhaupt (Marge, Wachstum, Kapazitätsknappheit als Burggraben), aber die eigenen, peer-verankerten Szenarien zeigen ein erhebliches Bewertungsrisiko (EV −39,4%) nach einem Kurs, der bereits nahezu den Bull-Case einpreist. Kein High-Conviction-Kauf auf aktuellem Niveau — eher ein Halten-oder-Trimmen-Fall für bestehende Positionen, kein Neueinstieg ohne deutlichen Rücksetzer. Für sehr risikofreudige Momentum-Trader mit engem Stop denkbar, nicht für wertorientierte oder konservative Investoren. **Coherent (COHR, Fwd-PE ~33–45x)** und **Fabrinet (FN, Fwd-PE ~38–44x)** sind die günstigeren reinen Instrumente für dieselbe AI-Optik-These, ohne die frische Verwässerung und das extreme Bewertungsniveau von LITE.
 
 - Qualität: 3/5
 - Wachstum: 5/5
-- Bewertung: 2/5
-- Katalysator: 3/5
+- Bewertung: 1/5 (vorläufig, Datenstand)
+- Katalysator: 4/5
+
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Trotz Top-RS-Signal (Rang 3) und exzellentem operativem Katalysator überwiegt das Bewertungsrisiko: Die eigenen Szenarien zeigen ein EV von −39,4%, das eigene Forward-Multiple liegt klar über der gesamten Peer-Bandbreite, und der Kurs preist bereits nahezu den eigenen Bull-Case ein — kein Trade trotz starkem technischem Setup.
 
 
 ---
@@ -87,9 +98,10 @@ Lumentum ist ein zyklisch überlagertes AI-Optik-Momentum-Play — fundamental v
 |---|---|
 | Qualität | 3/5 |
 | Wachstum | 5/5 |
-| Bewertung | 2/5 |
-| Katalysator | 3/5 |
+| Bewertung | 1/5 |
+| Katalysator | 4/5 |
+| EV-Upside | -38.5% |
 
-**Verdict: HOLD (65/100)**
+**Verdict: WATCH (52/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
