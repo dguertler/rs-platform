@@ -34,6 +34,7 @@ from check_earnings import (
     get_earnings_surprise, send_earnings_email,
 )
 from check_earnings_premarket_gate import prev_trading_day
+from earnings_alert_log import already_logged
 
 STATE_PATH = Path(".earnings_premarket_state/alerted.json")
 
@@ -116,9 +117,14 @@ def main():
 
     new_alerts = []
     for ticker in tickers:
-        state_key = f"{ticker}|{next_earnings.get(ticker, today_str)}"
+        report_date = next_earnings.get(ticker, today_str)
+        state_key = f"{ticker}|{report_date}"
         if state_key in already_alerted:
             print(f"  {ticker}: bereits heute gemeldet — übersprungen")
+            continue
+        if already_logged(ticker, report_date, "premarket-live"):
+            print(f"  {ticker}: bereits im Alert-Log gemeldet (persistente Dedupe) — übersprungen")
+            already_alerted.add(state_key)
             continue
 
         jump, live_price, prev_close = live_jump(ticker)

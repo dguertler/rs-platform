@@ -14,6 +14,23 @@ from pathlib import Path
 LOG_PATH = Path("data/earnings_alerts_log.json")
 
 
+def already_logged(ticker: str, report_date: str, source: str) -> bool:
+    """True, wenn (ticker, report_date, source) bereits im persistenten Log steht.
+
+    Dient als tagesübergreifende Dedupe-Quelle für die Live-Alert-Workflows,
+    deren rollierender Tages-Cache um Mitternacht UTC zurückgesetzt wird und
+    daher allein keine verlässliche Auskunft über bereits gesendete Alerts
+    für ältere Earnings-Termine geben kann."""
+    try:
+        existing = json.loads(LOG_PATH.read_text(encoding="utf-8"))
+    except Exception:
+        return False
+    return any(
+        e["ticker"] == ticker and e["date"] == report_date and e["source"] == source
+        for e in existing["alerts"]
+    )
+
+
 def append_alerts(alerts: list[dict], source: str, report_dates: dict[str, str]) -> bool:
     """Hängt neue Alert-Events an data/earnings_alerts_log.json an.
 
