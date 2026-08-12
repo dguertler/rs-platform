@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TLS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">12.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TLS</h1>
+      <h2>Telos Corp</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Information Technology Services (Federal Cybersecurity/Identity)</span></div>
+        <div class="mi">MCap: <span>$0B</span></div>
+        <div class="mi">Signal: <span>Nicht RS-getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">52</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 12.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$4.78</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">36.4%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-16.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">7,20–8,20</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">3,30–3,90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">0,60–0,90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $7,20–$8,20 (25 %) · Base $3,30–$3,90 (50 %) · Bear $0,60–$0,90 (25 %) · EV ~$3,91</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: TLS ist weder in `data/fundamentals.json` noch in einem RS-JSON getrackt, yfinance ist proxyseitig blockiert (auch WebFetch auf sec.gov/globenewswire/finance.yahoo scheiterte mit EGRESS_BLOCKED) — Fundamentaldaten stammen aus WebSearch-Snippets mehrerer Quellen, die sich bei Nettomarge, Free Cashflow, Verschuldung und Analysten-Konsens widersprechen. Konfidenz reduziert, Konflikte unten ausgewiesen statt geglättet. Telos ist ein Bundes-Cybersecurity-/Identitätsdienstleister (TSA-PreCheck-Enrollment), der nach Jahren GAAP-Verlusten und Impairments (Secure-Networks-Segment) am 10.08. mit EPS 0,04 $ vs. 0,02 $ Konsens und angehobener FY26-Adj.-EBITDA-Guidance (23,6–28,6 Mio. $) reagierte — Kurs +6,45 % auf 4,78 $. Die Story: Die Adj.-EBITDA-Marge versechsfachte sich von 1,1 % (Q2'25) auf 14,4 % (Q2'26), gestützt durch bewussten Ausstieg aus margenschwachem Reseller-Geschäft — ein struktureller Mix-Shift, kein Zufallsquartal. Was der Markt womöglich vorwegnimmt: B. Riley hob das Kursziel post-Earnings von 5,25 $ auf 8,50 $ (Buy), Begründung: Wechsel "von der Turnaround-Story zur Investment-These" — das eigene, peer-verankerte Szenario-Set unten zeigt, dass ein gutes Stück davon bereits im Kurs steckt.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>~91 % des Umsatzes von US-Bundesbehörden — wenige große Federal-Verträge statt breiter Kundenbasis</li>
+<li>Security Solutions (~90,8 % des Umsatzes) dominiert; Secure Networks ist das margenschwache, schrumpfende Altsegment</li>
+<li>Wachstumshebel: Ausbau der TSA-PreCheck-Enrollment-Center — Umsatz skaliert mit fixer Software-/Ops-Kostenbasis, operativer Hebel auf Adj.-EBITDA</li>
+<li>Bewusster Ausstieg aus margenschwachem Reseller-Umsatz (~2,5 Mio. $ Gegenwind 2026, ~33 Mio. $/Jahr danach) zugunsten Cash-Bruttomarge (Ziel 39–40 %)</li>
+<li>Umsatzsichtbarkeit über mehrjährige Bundesverträge, aber Abhängigkeit von Haushaltsprozessen/Shutdown-Risiko</li>
+<li>Bilanz historisch durch Impairments belastet (Secure-Networks-Goodwill 2025) — Cash ca. 53 Mio. $, Verschuldung niedrig (Quellen uneins: 0 vs. 9,6 Mio. $)</li>
+<li>LTIP-Overhang ca. 20,5 % der ausstehenden Aktien (März 2026) — strukturell hohe SBC</li>
+<li>Kein IP-Burggraben — Wettbewerbsvorteil liegt in Sicherheitsfreigaben und Behörden-Beziehungen</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Marge-Expansion setzt sich fort (Adj.-EBITDA-Marge Richtung 19–20 %), Umsatzwachstum hält bei 20 %+ (weitere PreCheck-Center, Diversifizierung über TSA hinaus), dritte Guidance-Anhebung in Folge. Peers: CACI International (CACI, Fwd-PE ~17–18,5x, größter Federal-Cyber-/Intel-Prime), Parsons (PSN, Fwd-PE bis 23x bei kleinerer, wachstumsnäherer Größenordnung). Annahme (kein Konsens): FY27E Adj. EPS 0,38 $ (Adj. EBITDA ~46 Mio. $ auf ~230 Mio. $ Umsatz, Konversion ~55 % nach Steuern/Zinsen) × 20x (leicht über CACI, gestützt durch TLS' Wachstumsvorsprung ggü. allen genannten Peers) = Kursziel 7,60 $. Bull-Kursziel: 7,20–8,20 $. Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird ungefähr erreicht, keine weitere Beschleunigung über den aktuellen Trend hinaus, TSA-Rollout läuft planmäßig weiter. Annahme (kein Konsens): FY27E Adj. EPS 0,24 $ (Adj. EBITDA ~30 Mio. $ auf ~205 Mio. $ Umsatz, Marge ~15 %) × 15x (unterer bis mittlerer Peer-Bereich — Abschlag ggü. Leidos/Booz Allen [Fwd-PE 9,5x/10,6x] gerechtfertigt durch Small-Cap-Status und Kundenkonzentration, teilweise ausgeglichen durch überdurchschnittliches Wachstum) = Kursziel 3,60 $. Base-Kursziel: 3,30–3,90 $. Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Government-Shutdown, verzögerte Bundeshaushalte oder Verlust/Nicht-Verlängerung eines großen TSA-/Bundesvertrags bremsen das Wachstum auf niedrigen einstelligen Bereich, Adj.-EBITDA-Marge fällt auf das Q1'25-Niveau (~8–9 %) zurück. Peers: Leidos (LDOS, Fwd-PE ~9,5x) als Anker für Multiple-Kompression bei enttäuschter Wachstumsthese. Annahme (kein Konsens): FY27E Adj. EPS 0,08 $ (Adj. EBITDA ~15 Mio. $ auf stagnierendem Umsatz) × 9x = Kursziel 0,72 $. Bear-Kursziel: 0,60–0,90 $. Eintrittswahrscheinlichkeit: 25 %.</p>
+<p>Risikodimensionen:</p>
+<ul class="al">
+<li>Kundenkonzentration: ~91 % Bundesregierung — Klumpenrisiko auf einen "Kunden" (US-Föderalhaushalt), hohe Shutdown-Exposure.</li>
+<li>Geopolitik/China: nicht anwendbar — reines US-Inlandsgeschäft, keine China-Exposure.</li>
+<li>Lieferketten/Foundry: nicht anwendbar — Software-/Dienstleistungsmodell.</li>
+<li>Verwässerung: Aktienzahl +2,6 % in H1'26 (72,8→74,7 Mio.), LTIP-Overhang ~20,5 % (März 2026) — real, nicht nur Datenlärm.</li>
+<li>Regulierung: Bundes-Vergaberecht, Sicherheitsfreigaben, Re-Compete-Risiko bei Vertragsverlängerungen.</li>
+</ul>
+<p>**Summe: 25 % + 50 % + 25 % = 100 %.**</p>
+<p>**Erwartungswert:** EV = 0,25×7,70 + 0,50×3,60 + 0,25×0,75 = 3,91 $ — implizites Downside vs. aktuellem Kurs (4,78 $): −18,2 %. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, sie implizieren nach eigener Peer-Multiple-Logik eher ein leichtes Downside.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE (TTM): −23 % bis −33 % je nach Quelle (Datenkonflikt, kein Punktwert verwendbar) — klar negativ, aber Trendrichtung (Q1'26 +0,06 $, Q2'26 +0,04 $ nach Jahren GAAP-Verlusten) zeigt beginnende Normalisierung. Bruttomarge TTM 36,4 %, Cash-Bruttomarge-Ziel FY26 39–40 % — relevanterer, vom Management gesteuerter Maßstab. Operative Marge TTM −39,1 % ist noch stark durch 2025er-Impairments verzerrt, nicht repräsentativ; die Adj.-EBITDA-Marge (1,1 %→14,4 % YoY) ist die belastbarere Zykluskennzahl. Free Cashflow widersprüchlich (+25 Mio. $ TTM vs. −32 Mio. $) — auf Datenbasis nicht auflösbar, daher nicht in die Bewertung eingeflossen. Bilanz ist der stärkste Pluspunkt: ~53 Mio. $ Cash bei niedriger bis vernachlässigbarer Verschuldung.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Rückrechnung "Was preist der Kurs ein?": Bei Kurs 4,78 $ und mittlerem Peer-Multiple 15x impliziert der Markt FY27E Adj. EPS von ca. 0,32 $ (4,78/15) — zwischen eigenem Base- (0,24 $) und Bull-Fall (0,38 $), also schon Richtung optimistischer Annahme. Plausibel, aber ambitioniert: Der Markt preist die nahtlose Fortsetzung der Q2-Margenexpansion ein, ohne Klumpenrisiken (Shutdown, Vertragsverlängerung) abzuschlagen. Eigenes implizites Forward-Multiple (MCap 357 Mio. $ / FY26E-Adj.-EBITDA-Mittelwert 26,1 Mio. $ ≈ 13,7x EV/EBITDA) liegt zwischen Leidos/Booz Allen (unten) und CACI/Parsons (oben) — keine klare Prämie trotz deutlich höherem Wachstum, neutralisiert durch Konzentrations- und Datenqualitäts-Unsicherheit.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Interest ca. 2,4 % der Aktien — kein Short-Squeeze-Setup. Hypothese, nicht datenbasiert: Der Analysten-Konsens ist selbst uneinheitlich (eine Quelle "Hold", eine andere "Buy" 4/6) — noch kein gefestigter Sell-Side-Konsens nach dem Wechsel Verlust→Gewinn. B.-Riley-Zielerhöhung auf 8,50 $ (Buy) ist der klarste Datenpunkt für institutionelles Momentum.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>Keine RS-Score-/SMA-/RSI-Zeitreihe verfügbar (nicht RS-getrackt). 52-Wochen-Range 2,37–8,36 $, Kurs 4,78 $ liegt bei ca. 40 % der Range. Momentum ist an einen konkreten fundamentalen Katalysator gekoppelt (EPS-Beat, Guidance-Anhebung), nicht rein technisch. Warnsignal (indikativ): Rückfall unter Vor-Earnings-Niveau (~4,50 $) würde die Reaktion relativieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($12–$18):** TSA-PreCheck-Modell skaliert über zusätzliche Bundesprogramme hinaus, Adj.-EBITDA-Marge erreicht 25 %+, Diversifizierung reduziert Klumpenrisiko. Normalisiertes EPS 0,60–0,80 $ × 20–25x.</p>
+<p>**Base ($5–$9):** Stetiges, aber nicht beschleunigendes Wachstum, Marge pendelt bei 16–18 % ein, Bundeshaushalt bleibt Belastungsfaktor ohne Krise. Normalisiertes EPS 0,30–0,45 $ × 15–20x.</p>
+<p>**Bear ($1–$3):** Wiederkehrende Shutdown-/Budget-Störungen, Vertragsverlust bei TSA-Rollout, Rückfall in Verlustzone. Normalisiertes EPS 0,05–0,15 $ × 10–15x.</p>
+<p>Entscheidende Variable: Tempo der Diversifizierung weg von der TSA-Kernabhängigkeit bei gleichzeitig fortgesetzter Margenexpansion.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Kein Buy-and-Hold-Compounder, und trotz erfülltem Turnaround-Screening (alle vier Kriterien) auf dieser Bewertung kein High-Conviction-Trade — Screening prüft nur das Muster (Verlust→Gewinn, Guidance-Anhebung, Normalisierung), nicht die Bewertung. Die eigenen peer-verankerten Szenarien implizieren beim aktuellen Kurs kein positives EV (−18,2 %), obwohl der Katalysator real ist (Marge-Sextuplierung YoY). Am ehesten ein zyklischer, event-getriebener Trade für Investoren, die die TSA-Rollout-These aktiv verfolgen — nicht für konservative/Value-Investoren angesichts Datenunsicherheit und Konzentrationsrisiko. Positionsgröße klein halten (max. 1–2 %), da FCF, Nettomarge und Verschuldung quellenseitig widersprüchlich sind. **Leidos (LDOS, Fwd-PE ~9,5x)** ist das reinere, stabilere Instrument für die Federal-IT-These mit geringerem Konzentrationsrisiko. **CACI (Fwd-PE ~17–18,5x)** bietet mehr Cyber-/Intel-Exposure bei diversifizierterer Kundenbasis — beide auf Peer-Multiple-Basis nicht eindeutig teurer als TLS trotz geringerem Einzelrisiko.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — TLS ist nicht im RS-2.0-Funnel getrackt (kein aktives Signal), daher rein informativ: Der reale Katalysator (Marge-Sextuplierung, Guidance-Anhebung) rechtfertigt keine volle Positionsgröße, da die eigenen peer-verankerten Szenarien beim aktuellen Kurs ein negatives EV (−18,2 %) ergeben.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
