@@ -188,8 +188,11 @@ werden die Ticker automatisch ermittelt statt manuell übergeben:
    überschreiben.
 7. `analyses/earnings_screening/` committen und auf `master` pushen,
    Git-Hash im Chat ausgeben.
-8. Wie im manuellen Modus: nur für bestätigte Kandidaten ("Ja") auf Wunsch
-   des Nutzers mit `Analysiere TICKER` in die volle Analyse übergehen.
+8. **Für jeden bestätigten Kandidaten ("Ja") automatisch, ohne Rückfrage,
+   direkt im selben Lauf mit `Analysiere TICKER` in die volle
+   11-Abschnitte-Analyse inkl. `write_rating()` übergehen** — keine
+   Bestätigung durch den Nutzer abwarten. "Grenzfall"/"Nein" lösen keine
+   automatische Vollanalyse aus.
 
 **Referenzmuster: CNC Q1 2026** (`analyses/cnc.md`,
 `instagram/data/earnings/CNC.json`) — Verlustquartale (Q4 25 EPS −1,16 $)
@@ -231,9 +234,11 @@ Turnaround-Kandidaten aus.
 
    Danach je Ticker 1–2 Sätze Begründung, mit explizitem Verweis, welches
    der vier Kriterien fehlt (falls "Nein"/"Grenzfall").
-5. **Nur für bestätigte Kandidaten** ("Ja") auf Wunsch des Nutzers mit
-   `Analysiere TICKER` in die volle 11-Abschnitte-Analyse inkl.
-   `write_rating()` übergehen — nicht automatisch im selben Schritt.
+5. **Für jeden bestätigten Kandidaten ("Ja") automatisch, ohne Rückfrage,
+   direkt im selben Lauf** mit `Analysiere TICKER` in die volle
+   11-Abschnitte-Analyse inkl. `write_rating()` übergehen — keine
+   Bestätigung durch den Nutzer abwarten. "Grenzfall"/"Nein" lösen keine
+   automatische Vollanalyse aus.
 
 ## Wikifolio Wochenrückblick (Feed-Post)
 
