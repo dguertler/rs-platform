@@ -65,14 +65,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "ENR.DE",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-01T20:38:52.272169",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "EOAN.DE",
       "verdict": "HOLD",
       "score": 60,
@@ -411,14 +403,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "ANET",
-      "verdict": "BUY",
-      "score": 78,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-21T10:22:33.033897",
-      "ev_upside_pct": -3.5
-    },
-    {
       "ticker": "FLR",
       "verdict": "HOLD",
       "score": 64,
@@ -566,14 +550,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-06-26T06:22:32.005103",
       "ev_upside_pct": 9.0
-    },
-    {
-      "ticker": "HUM",
-      "verdict": "WATCH",
-      "score": 45,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-26T06:23:32.994786",
-      "ev_upside_pct": -19.4
     },
     {
       "ticker": "CAT",
@@ -871,19 +847,6 @@
       },
       "created_at": "2026-07-08T06:00:03.010842",
       "ev_upside_pct": -9.8
-    },
-    {
-      "ticker": "CBK.DE",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -1.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Sonstiges",
-        "reason": "Der unmittelbar bevorstehende Q2-Bericht (morgen) und die ungel\u00f6ste UniCredit-Beteiligungssituation schaffen ein doppeltes Ereignisrisiko, das trotz solider operativer Basis keine volle Positionsgr\u00f6\u00dfe vor dem Termin rechtfertigt."
-      },
-      "created_at": "2026-08-05T10:54:13.262577"
     },
     {
       "ticker": "AMD",
@@ -2756,6 +2719,58 @@
         "reason": "Forward-KGV (55x) liegt \u00fcber der gesamten Peer-Bandbreite (SPT 9x bis AMPL ~44\u201392x), mechanisch durch die d\u00fcnne EPS-Basis verzerrt, w\u00e4hrend r\u00fcckl\u00e4ufige Gesamtkundenzahl und Verw\u00e4sserung (+5% Aktienanzahl YoY) das Momentum relativieren."
       },
       "created_at": "2026-08-13T07:45:36.435500"
+    },
+    {
+      "ticker": "ANET",
+      "verdict": "BUY",
+      "score": 74,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 9.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die eigenen Szenarien ergeben auf dem aktuellen Kursniveau nach der Post-Earnings-Rally keinen asymmetrischen Edge (EV \u22120,7%), obwohl die fundamentale Qualit\u00e4t und der Katalysator (Q2-Beat) intakt bleiben."
+      },
+      "created_at": "2026-08-13T08:16:20.006316"
+    },
+    {
+      "ticker": "CBK.DE",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Trotz starkem Q2-Beat ergeben die eigenen Szenarien keinen asymmetrischen Edge (EV \u22123,8%), und der Kurs wird prim\u00e4r von der ungel\u00f6sten UniCredit-\u00dcbernahmesituation getrieben, nicht von einem klaren fundamentalen Katalysator."
+      },
+      "created_at": "2026-08-13T08:16:20.018344"
+    },
+    {
+      "ticker": "HUM",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Das eigene Forward-Multiple (23,4x) liegt deutlich \u00fcber der gesamten Peer-Bandbreite (8,4x\u201313,3x), die eigenen Szenarien ergeben ein EV von \u221213,1% gg\u00fc. dem aktuellen Kurs, und die erneute Guidance-Senkung relativiert den Katalysator-Wert des Q2-Beats."
+      },
+      "created_at": "2026-08-13T08:16:20.029323"
+    },
+    {
+      "ticker": "ENR.DE",
+      "verdict": "BUY",
+      "score": 84,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 27.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Der Q3-Rekordbeat inklusive R\u00fcckkehr Siemens Gamesas in die Profitabilit\u00e4t liefert einen starken, datengest\u00fctzten Katalysator, die eigenen Szenarien ergeben einen asymmetrischen Edge von +23,8%, und die technische Struktur (RS-Rang 14, Post-Earnings-Erholung) st\u00fctzt die Position."
+      },
+      "created_at": "2026-08-13T08:16:20.039951"
     }
   ]
 }
