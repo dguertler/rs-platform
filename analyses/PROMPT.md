@@ -77,6 +77,21 @@ Liegt der EV unter oder weniger als 10% über dem aktuellen Kurs, muss dies im P
 ### ## 6. FUNDAMENTALE QUALITÄT
 Konkrete Kennzahlen: ROE, ROIC, Margen, Bilanzqualität, Free Cashflow. Wichtig: Bewerte die Kennzahlen im Zykluskontext — Top-of-Cycle-Zahlen anders gewichten als normalisierte Werte. Wo liegt der echte wirtschaftliche Burggraben, wo ist er nur scheinbar?
 
+**Bei Subscription-/SaaS-Geschäftsmodellen zusätzlich PFLICHT:** RPO (Remaining
+Performance Obligations) und Deferred Revenue als Vorlaufindikator prüfen und
+einordnen, falls im Quartalsbericht/Earnings-Call verfügbar (per WebSearch
+verifizieren, nie ungeprüft aus einer Sekundärquelle übernehmen). Besonders
+relevant, wenn das RPO-Wachstum spürbar vom verbuchten Umsatzwachstum
+abweicht — das ist ein Hinweis auf beschleunigte oder verzögerte
+Backlog-Konversion und gehört sowohl in den Investment-Case (Abschnitt 1) als
+auch in die Base-Case-Herleitung (Abschnitt 4) eingeordnet: höhere
+RPO-Sichtbarkeit rechtfertigt eine begründete Anpassung der
+Szenario-Wahrscheinlichkeiten (nicht der Kursziele selbst, die bleiben
+peer-multiple-verankert), niedrigere RPO-Dynamik relativ zum Umsatzwachstum
+ist ein Warnsignal und gehört in den Bear Case. Nicht verfügbar (z. B. bei
+Nicht-Subscription-Geschäftsmodellen) → explizit als "RPO nicht anwendbar"
+kennzeichnen, nicht stillschweigend weglassen.
+
 ### ## 7. BEWERTUNG
 Niemals eine zyklische Aktie nur anhand des aktuellen KGVs bewerten. Pflicht: Bewertung über normalisierten FCF über den vollen Zyklus oder KBV. Zusätzlich Forward-Multiples und was der Markt damit implizit aussagt. Ist die aktuelle Bewertung eine Value-Falle, eine strukturierte Wette oder echtes Upside?
 
