@@ -101,9 +101,23 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 
 8. **Chat-Ausgabe:** Nur die Zusammenfassungs-Tabelle ausgeben — KEINE vollständige Analyse im Chat. Format:
 
-   | Ticker | Name | Kurs | RS | Verdict | Ratings |
-   |--------|------|------|-----|---------|---------|
-   | TICKER | Name | $X | Score (Rank) | **VERDICT** | Q· G· V· K· · EV ±X% |
+   | Ticker | Name | Kurs | RS | Verdict | Ratings | Handlungsempfehlung |
+   |--------|------|------|-----|---------|---------|----------------------|
+   | TICKER | Name | $X | Score (Rank) | **VERDICT** | Q· G· V· K· · EV ±X% | **Empfehlung** |
+
+   **Handlungsempfehlung (PFLICHT bei jeder Analyse-Ausgabe im Chat)** — klare
+   Kauf-/Nicht-Kauf-Aussage, mechanisch aus `verdict` und `funnel_veto.decision`
+   (`data/ratings/index.json`) abgeleitet, nicht neu interpretiert:
+   - `funnel_veto.decision == "VETO"` → **Nicht kaufen**
+   - `verdict == "AVOID"` → **Nicht kaufen**
+   - `verdict == "WATCH"` → **Nicht kaufen (nur beobachten)**
+   - `verdict == "HOLD"` → **Halten, kein Neukauf**
+   - `verdict == "BUY"` und `funnel_veto.decision == "REDUCE"` → **Kaufen (reduzierte Position)**
+   - `verdict == "BUY"` und `funnel_veto.decision` in (`"PASS"`, fehlt) → **Kaufen (volle Position)**
+
+   Bei REDUCE/VETO den Grund aus `funnel_veto.reason` in einem Halbsatz
+   ergänzen (z. B. „wegen Kundenkonzentration"). Gilt für Einzelanalysen
+   genauso wie für Batch-Ausgaben (siehe „Batch-Empfehlung" unten).
 
 ## Datenquellen
 
@@ -121,9 +135,10 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 Beispiel: `Analysiere MU ARM AMD MRVL ON`
 
 Nach einem Analyse-Batch (mehrere Ticker in einem Rutsch) zusätzlich zur
-Zusammenfassungs-Tabelle (Schritt 8 oben) eine **EV/Risiko-Tabelle** ausgeben —
-exakt dieselben Werte, die danach auch in den Index-Tabellen der Platform
-(`frontend/index.html`, `sp500.html`, `dax.html`) erscheinen:
+Zusammenfassungs-Tabelle (Schritt 8 oben, inkl. Handlungsempfehlung-Spalte)
+eine **EV/Risiko-Tabelle** ausgeben — exakt dieselben Werte, die danach auch
+in den Index-Tabellen der Platform (`frontend/index.html`, `sp500.html`,
+`dax.html`) erscheinen:
 
 ```
 | Ticker | EV      | Risiko |
