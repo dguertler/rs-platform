@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ATRO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">13.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ATRO</h1>
+      <h2>Astronics Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Aerospace & Defense</span></div>
+        <div class="mi">MCap: <span>$4B</span></div>
+        <div class="mi">Signal: <span>Nicht RS-getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 13.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$87.89</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">31.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">33.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">21.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+4.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–155</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">88–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">32–42</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $130–$155 (25 %) · Base $88–$105 (45 %) · Bear $32–$42 (30 %) · EV ~$90</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Astronics meldete am 11.08. Rekordumsatz $260 Mio. (+27% YoY, +6% über Konsens), Rekord-Operating-Income $40,5 Mio., Adj.-EBITDA-Marge 19,8% (Mehrjahreshoch). Non-GAAP-EPS $0,70 schlug Konsens ($0,61) um +15,15%, GAAP-EPS sprang von $0,03 im Vorjahresquartal auf $0,75. FY26-Guidance auf $1,02–1,04 Mrd. angehoben, Q3-Guidance ($265–275 Mio.) klar über bisherigem Konsens (~$253 Mio.). Die Aktie sprang mehrtägig von ~$67 auf $87,89 (+9% bis +18% verteilt über mehrere Handelstage). Die eigentliche Story ist der reale Margen-Turnaround: 2022/23 hatten Lieferketten-/Arbeitskräfteprobleme die Marge nahe Null gedrückt — jetzt liefert dieselbe Aerospace-Sparte 20,3% operative Marge, und die vormals defizitäre Test-Systems-Sparte ist erstmals profitabel (Umsatz +105,1% YoY). Was der Markt nach dem Pop noch nicht vollständig einpreist: Zwei Wandelanleihen-Tranchen sind nach dem Sprung nahe oder im Geld (Abschnitt 5) — ein struktureller Verwässerungsgegenwind zur reinen EPS-Story, den die meisten Sell-Side-Modelle noch nicht sauber abbilden.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Segmente: Aerospace (Strom-/Beleuchtungs-/Konnektivitätssysteme für Kabinen, ~88% Konzernumsatz 2025), Test Systems (Avionik-/Wehrtechnik-Tests)</li>
+<li>Designed-in-Content auf zertifizierten Flugzeugprogrammen = Switching-Cost-Burggraben, zugleich Programm-Klumpenrisiko</li>
+<li>Kundenkonzentration: Boeing 12,0% Q2-Umsatz, Boeing+Airbus zusammen fast 40% — OEM-Raten dominieren</li>
+<li>Fixkostenlastige Fertigung: operativer Hebel in beide Richtungen — 19,8%-Marge ist Erholung vom Krisentief, kein Normalwert</li>
+<li>Rekordbacklog $780,6 Mio., Book-to-Bill 1,26, Rekordbuchungen $306,2 Mio. — hohe Sichtbarkeit</li>
+<li>Test Systems wandelt sich von Verlustbringer zu Margentreiber — noch früher Beweis, nicht mehrjährig belegt</li>
+<li>Zwei Wandelanleihen-Tranchen (2030: ~$33 Mio. @ $22,89, tief im Geld; 2031: $225 Mio. @ effektiv $83,41 nach Capped Call, nach dem Sprung auf $87,89 jetzt ebenfalls im Geld)</li>
+<li>Duale Aktienstruktur, 43,0 Mio. Aktien gesamt (Common+Class B, 10-Q Stand 06.08.2026)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers (Aerospace-Zulieferer, nicht im Datensatz getrackt, per WebSearch verifiziert): Curtiss-Wright (CW, Fwd-KGV ~46–48x), HEICO (HEI-A, ~38x), Ducommun (DCO, ~42x). Bull-Multiple nahe oberem Peer-Ende, gerechtfertigt bei bestätigter Margen-Story. Strukturelle Margen-Nachhaltigkeit: (1) Switching-Cost-Burggraben durch zertifizierten Designed-in-Content, (2) Mixverschiebung zu höhermargigen Konnektivitäts-/Stromsystemen, (3) Test-Systems-Skalierung als operativer Hebel auf Fixkosten, (4) Backlog erlaubt Fixkostenabsorption über mehrere Quartale. Annahme (kein Konsens): FY27-EPS ~$3,40 (oberes Ende Analystenspanne $2,95–3,41) × 42x (nahe CW/HEI-Bandbreitenende) = $142,80. Bull-Kursziel: $130–$155. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Guidance wird erreicht, Margen bleiben nahe dem neuen 19,8%-Niveau, Wandelanleihen-Verwässerung beginnt graduell zu greifen. Annahme (kein Konsens, konservativer als Konsens): FY27-EPS ~$3,00 (Konsens $3,19, Abschlag für beginnende Verwässerung) × 32x (nahe eigenem aktuellen Forward-KGV 31,8x, leicht unter Peer-Bandbreite 38–48x) = $96,00. Base-Kursziel: $88–$105. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Q3/Q4-Guidance wird verfehlt, weil eine der beiden großen OEM-Raten (Boeing/Airbus) stockt, während die Wandelanleihen-Verwässerung materiell wird. Kundenkonzentration: Boeing 12% Q2-Umsatz, Boeing+Airbus kombiniert knapp 40% — quantifizierbar, ein Ratenrückschlag trifft überproportional. Geopolitik/China: kein signifikantes direktes China-Exposure erkennbar; ITAR-Exportkontrollen im Test-Systems-Wehrtechnikgeschäft strukturell vorhanden, auf Datenbasis nicht quantifizierbar. Lieferketten/Single-Source: die 2022/23-Krise war selbst eine Lieferketten-/Arbeitskräftekrise — historisch belegtes Risiko, aktuelle Einzelkomponenten-Abhängigkeiten aus Daten nicht abschließend auflösbar. Verwässerung: konkret belegt — 2030-Notes (~$33 Mio. @ $22,89) tief im Geld, 2031-Notes ($225 Mio. @ effektiv $83,41) nach dem Sprung auf $87,89 ebenfalls im Geld; laut 10-Q wurde der Wandlungs-Trigger für die 2030-Notes im laufenden Quartal bereits erreicht — reale, nicht hypothetische Aktienzahl-Zunahme. Regulierung: sektortypische FAA-/Zertifizierungsrisiken, auf Datenbasis nicht weiter quantifizierbar. Annahme: FY27-EPS ~$2,20 (Guidance-Rückschlag, Margendruck, höhere verwässerte Aktienzahl) × 17x (nahe/unter Peer-Tief, Re-Rating-Kompression) = $37,40. Bear-Kursziel: $32–$42. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $142,50 + 0,45 × $96,50 + 0,30 × $37,00 = $35,63 + $43,43 + $11,10 = **~$90,15 — implizites Upside vs. aktuellem Kurs ($87,89): +2,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 21,18%/ROIC 19,24% sind Zykluserholungswerte — der 5-Jahres-ROIC lag historisch nahe 1%, unter Kapitalkosten. Bruttomarge 33,0% (H1 2026) zeigt deutliche Verbesserung ggü. Krisenniveau. Operative Marge TTM nur 6,2% (schwache Vorquartale noch in der 12-Monats-Basis), Q2 2026 allein lieferte 15,6%, Aerospace-Sparte 20,3%. FCF: Q2 2026 $24,4 Mio. (nach FCF-Breakeven in Q1), Management guidet für den Rest des Jahres FCF-positiv — TTM-FCF aus Daten nicht sauber rekonstruierbar. Bilanz bleibt Schwachpunkt: Debt/Equity ~2,34x, Nettoschulden ~$367 Mio. bei ~2,6x Netto-EBITDA — tragbar bei fortgesetztem Wachstum, ohne Sicherheitsmarge bei Nachfrageeinbruch. Der echte Burggraben liegt im Designed-in-Content (Switching Costs), nicht in Skalenvorteilen — die Bilanzqualität relativiert die operative Verbesserung.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der Kurs ein? Bei $87,89 und Forward-KGV 31,8x (Konsens-FY26-EPS $2,76) verlangt der Markt eine mehrjährige Fortsetzung des Margen-Turnarounds plus zweistelliges Umsatzwachstum — ambitioniert nach erst zwei starken Quartalen, aber nicht unplausibel bei intaktem Backlog. Trailing-KGV 86,2x ist wegen der extrem niedrigen TTM-EPS-Basis ($1,02) nicht aussagekräftig und dient bewusst nicht als primäre Bewertungsgrundlage. Das eigene Forward-KGV (31,8x) liegt unterhalb der Peer-Bandbreite (CW 46–48x, HEI 38x, DCO 42x) — teils strukturell erklärbar (höhere Verschuldung, kürzerer Track Record, bevorstehende Verwässerung), teils Chance, falls der Turnaround nachhaltig ist. P/B 17,3x bestätigt: kein Value-Titel. Keine Value-Falle, aber auch kein eindeutiges Upside. Analyst-Konsensziel $102,33 (TD Cowen $100, Truist $107) — 6–12 Monate hinter der Kursbewegung entstanden, kein Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float ca. 7–9% des Streubesitzes, seit Mitte 2025 rückläufig (−28% seit Juli 2025). TD Cowen (PT $85→$100) und Truist (PT $75→$107) hoben ihre Ziele nach den Zahlen kräftig an. Hypothese, nicht datenbasiert: Der gestaffelte, mehrtägige Kursanstieg deutet auf sukzessives Nachziehen von Sell-Side-Modellen und Momentum-Käufern hin, nicht auf ein einmaliges Repricing. Enttäuschungsrisiko: Nach der Kursverdreifachung seit dem 52-Wochen-Tief ($25,97) ist die Messlatte für Q3 hoch — ein Verfehlen dürfte überproportional abgestraft werden.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score/RS-Signal-Daten sind für diesen Ticker nicht verfügbar (nicht im RS-Tracking-Universum — ATRO ist weder im NASDAQ-100 noch im DAX-40, S&P-500- oder Smallcap-RS-Datensatz getrackt). Qualitative Einordnung: Die Aktie handelt bei $87,89 nahe ihrem 52-Wochen-Hoch ($92,50) nach mehrtägigem Gap-up seit den Zahlen, ausgehend vom 52-Wochen-Tief $25,97 — mehr als eine Verdreifachung binnen 12 Monaten. Verfügbare gleitende Durchschnitte (Datenlage je Quelle uneinheitlich) zeigten vor dem Print überwiegend Kaufsignale bei teils überkauftem MACD — hier bewusst nicht als präzise Zahl zitiert. Volumen am Reporting-Tag lag deutlich über Durchschnitt, was für zumindest teilweise fundamental gestütztes Momentum spricht. Warnsignal: Rückfall unter ~$75 würde das Momentum brechen; Stabilisierung über $90 bestätigt das neue Regime.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($200–$280):** Margen-Turnaround strukturell, Test Systems als zweiter margenstarker Wachstumsmotor, anhaltend zweistelliges Umsatzwachstum, Verschuldung sinkt spürbar.</p>
+<p>**Base ($130–$180):** Wachstum normalisiert auf hohe einstellige/niedrige zweistellige Raten, Margen verharren nahe neuem Niveau, Wandelanleihen-Verwässerung wird schrittweise verdaut.</p>
+<p>**Bear ($45–$70):** OEM-Ratenrückschlag oder neuer Lieferketten-Schock lässt Margen auf Vor-Turnaround-Niveau zurückfallen, plus volle Wandelanleihen-Verwässerung.</p>
+<p>Entscheidende Variable: Ob 19,8% Adj.-EBITDA-Marge ein neues strukturelles Niveau markiert oder ein zyklischer Höhepunkt ist, der bei der nächsten OEM-Ratenschwankung wieder komprimiert.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf aktuellem Niveau keinen asymmetrischen Edge (EV +2,6%). ATRO ist nach dem Kurssprung kein Compounder-Einstieg mehr, sondern ein zyklischer Turnaround-Trade mit realem, gut dokumentiertem Katalysator (Rekordmarge, Guidance-Anhebung, profitabel gewordenes Test-Systems-Segment) — die Bewertung hat davon bereits viel vorweggenommen, und zwei nahezu im Geld befindliche Wandelanleihen sind ein konkretes, im Konsens noch unterbelichtetes Verwässerungsrisiko. Geeignet für taktisch orientierte, zyklus-/turnaround-affine Investoren, nicht für Long-Only-Mandate ohne aktive Risikosteuerung. Wegen Verschuldung (~2,6x Netto-EBITDA), Kundenkonzentration (Boeing+Airbus ~40%) und Verwässerungsrisiko Position auf max. 2–3% eines diversifizierten Portfolios begrenzen.</p>
+<p>**Curtiss-Wright (CW)** und **HEICO (HEI)** sind die qualitativ saubereren, weniger verschuldeten Instrumente für dieselbe Aerospace-Content-These, handeln mit 46–48x bzw. ~38x Fwd-KGV aber deutlich teurer als ATRO (31,8x) — relative Bewertung spricht für ATRO bei deutlich höherem Bilanz-/Verwässerungsrisiko.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Nach dem Kurssprung auf $87,89 ergeben die Bull/Base/Bear-Szenarien nur +2,6% EV ohne asymmetrischen Edge, während zwei nahe/im Geld befindliche Wandelanleihen-Tranchen ein zusätzliches, konkretes Verwässerungsrisiko darstellen.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
