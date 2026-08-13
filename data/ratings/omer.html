@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>OMER — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">13.08.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>OMER</h1>
+      <h2>Omeros Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Biotechnology</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >76%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">84</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 13.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">99.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★★</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$13.25</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">34.9×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+76.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–48</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">19–24</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">$5,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Omeros ist der klarste Turnaround-Fall im aktuellen Screening-Batch: Nach Jahren klinischen Verlust-Brennens (H1 2025 Nettoverlust −$58,9 Mio.) erhielt narsoplimab (Markenname YARTEMLEA) im Dezember 2025 die FDA-Zulassung für TA-TMA (Thrombotische Mikroangiopathie nach Stammzelltransplantation) und startete im Januar 2026 die US-Kommerzialisierung. Der Produktumsatz rampt seither in Lehrbuchform: $9,9 Mio. (Q1 2026) → $28,5 Mio. Nettoumsatz (Q2 2026), +190% QoQ und deutlich über Konsens ($12,67 Mio.). Das ist keine Margenverbesserung eines bestehenden Geschäfts, sondern der klassische Übergang von Pre-Revenue-Biotech zu kommerziellem Wachstum — die Kern-Kennzahl (Produktumsatz) normalisiert sich nicht graduell, sondern beschleunigt. Was der Markt trotz des RS-Scores von 99,7 (Rang 34 im Smallcap-Universum) noch nicht vollständig verarbeitet: Ein negatives EU-CHMP-Votum zu Narsoplimab bei TA-TMA begrenzt die Story vorerst auf den US-Markt, während die Steilheit der Launch-Kurve (Q3/Q4 2026) der entscheidende nächste Datenpunkt ist, um zu bestätigen, ob $28,5 Mio. der Anfang eines Plateaus oder einer fortgesetzten Rampe war.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Single-Product-Commercial-Stage-Biopharma: nahezu 100% des Produktumsatzes entfallen aktuell auf YARTEMLEA (Narsoplimab) — extreme Produktkonzentration</li>
+<li>Orphan-Drug-Ökonomie: TA-TMA ist eine ultraseltene, lebensbedrohliche Komplikation nach Stammzelltransplantation — kleine Patientenpopulation, hoher Preis pro Patient, Klinik-/Spezialapotheken-Vertriebskanal</li>
+<li>Aktuell reiner US-Launch — EU-Zulassung nach negativem CHMP-Votum ausgesetzt, Management verfolgt Re-Examination-Verfahren</li>
+<li>Negatives Buchvermögen (P/B −15,06) ist ein Überbleibsel der jahrelangen klinischen Verlustphase vor der Kommerzialisierung — Bilanz spiegelt noch nicht die neue Ertragskraft</li>
+<li>Weitere Pipeline-Programme laut Unternehmensangaben vorhanden, aus den bereitgestellten Daten nicht quantifizierbar</li>
+<li>Operativer Hebel ist enorm: jeder inkrementelle Umsatzdollar aus dem Launch trifft auf eine bereits aufgebaute Kommerzialisierungsinfrastruktur</li>
+<li>Beta 2,538 — für Biotech typisch hohe Volatilität, aktuell durch die Unsicherheit der Launch-Kurve zusätzlich verstärkt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Acadia Pharmaceuticals (ACAD, Forward-KGV ~63,9x) und PTC Therapeutics (PTCT, Trailing-KGV ~8,2x, Forward-Wert nicht verfügbar — als konservativer unterer Anker verwendet) — beide kommerzielle Seltenheitskrankheiten-Biopharmas mit unterschiedlicher Reifephase. Bull-These: Die Launch-Kurve setzt sich mit ähnlichem Tempo fort, Label-Awareness bei Transplantationszentren wächst schneller als erwartet, und die EU-Re-Examination kippt zugunsten von Narsoplimab. Annahme (kein Konsens): FY27-Umsatz ~$220 Mio. annualisiert bei ~28% Nettomarge (Skaleneffekt auf bestehender Kommerzialisierungsbasis) → NI ~$61,6 Mio. / ~72,4 Mio. Aktien = EPS ~$0,85 × 50x Forward (Prämie nahe ACAD-Bewertung für einen der stärksten Orphan-Drug-Launches im Screening) = Kursziel $42,50. Bull-Kursziel: $38–$48. Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Die Launch-Kurve verlangsamt sich graduell Richtung eines nachhaltigen Wachstumspfads statt des Q1→Q2-Tempos von +190%, EU bleibt vorerst ausgesetzt. Annahme (kein Konsens): FY27-Umsatz ~$180 Mio. annualisiert bei ~25% Nettomarge → NI ~$45 Mio. / ~72,4 Mio. Aktien = EPS ~$0,62 × 35x Forward (nahe eigenem aktuellen Forward-KGV 34,87x) = Kursziel $21,70. Base-Kursziel: $19–$24. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Launch-Kurve flacht deutlich ab (Erstattungshürden bei Kostenträgern, langsamere Zentrumsadoption als in Q1/Q2), die EU-Re-Examination bestätigt das negative CHMP-Votum dauerhaft, und die extreme Produktkonzentration trifft die Aktie hart. Kundenkonzentration: faktisch 100% des Produktumsatzes hängt an einem einzigen Medikament (YARTEMLEA/Narsoplimab) für eine ultraseltene Indikation — das zentrale, konkret quantifizierbare Risiko. Geopolitik/China-Exposure: kein erkennbares Risiko aus den Daten. Lieferketten-/Fertigungsrisiko: Single-Source-Fertigungsrisiko aus den Daten nicht verifizierbar, bei spezialisierten biologischen Wirkstoffen aber sektortypisch relevant. Verwässerung: SBC-Daten nicht im Datensatz; das stark negative Buchvermögen deutet auf historisch dilutive Finanzierungsrunden während der Verlustphase hin — nicht abschließend beurteilbar, aber ein Warnsignal. Regulierung: bereits materialisiertes Risiko — das negative EU-CHMP-Votum ist kein hypothetisches Szenario, sondern eingetreten. Annahme: Launch plateaut bei ~$90 Mio. annualisiertem Umsatz, Kommerzialisierungs-Fixkosten drücken die Marge nahe Breakeven, Bewertung kompromiert auf EV/Sales ~3x → Kursziel $5,50. Bear-Kursziel: $4–$7. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 20% + 50% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,20 × $43 + 0,50 × $21,50 + 0,30 × $5,50 = $8,60 + $10,75 + $1,65 = **~$21 — implizites Upside vs. aktuellem Kurs ($13,25): +58,5%.** Deutlicher asymmetrischer Edge — getragen durch die verifizierte QoQ-Beschleunigung des Produktumsatzes, aber mit entsprechend hoher Unsicherheit einer noch jungen, ein Quartal alten Launch-Historie.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Auffällige Kennzahl-Anomalien: Gross-/Operating-Margin sind laut Datenvalidierung als "UNGÜLTIG" markiert (extreme Negativwerte), Profit-Margin mit +871% ebenfalls ein offensichtliches yfinance-Artefakt aus der kleinen TTM-Revenue-Basis kombiniert mit einem vermutlich einmaligen Ergebniseffekt — diese Kennzahlen fließen NICHT in die Bewertung ein. Trailing-EPS $1,14 (Trailing-KGV 11,62x) wirkt für ein Unternehmen, das gerade erst aus jahrelangen Verlusten kommt, ungewöhnlich hoch — vermutlich ein einmaliger Bilanzeffekt (z. B. Fair-Value-Anpassung), aus den Daten nicht abschließend auflösbar; für die Bewertung wird stattdessen das Forward-EPS ($0,38) herangezogen. TTM-Revenue von nur $9,89 Mio. ist durch die gerade erst gestartete Kommerzialisierung strukturell verzerrt und nicht repräsentativ — annualisierter Run-Rate auf Basis des Q2-Nettoumsatzes ($28,5 Mio. × 4 = ~$114 Mio.) ist die relevantere Bewertungsbasis. Free Cashflow mit $181 Mio. ausgewiesen — bei einem Unternehmen mit $9,89 Mio. TTM-Revenue ein weiteres Datenanomalie-Signal (vermutlich Finanzierungs-/Bilanzeffekt, nicht operativer Cashflow) — nicht als Qualitätsindikator verwendet. RPO nicht anwendbar (kein Subscription-/SaaS-Geschäftsmodell).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 34,87x ist der einzige verlässliche Bewertungsanker, da Trailing-Kennzahlen anomaliebehaftet sind. Was preist der aktuelle Kurs ein? Bei $13,25 und Market Cap $958,97 Mio. gegen den annualisierten Q2-Run-Rate von ~$114 Mio. ergibt sich ein EV/Sales von rund 8,4x — für ein Orphan-Drug-Launch-Produkt mit hoher Bruttomarge (branchentypisch 85–90%+) und QoQ-Beschleunigung ambitioniert, aber nicht unplausibel, wenn sich die Rampe fortsetzt; unrealistisch würde es erst bei einem Abflachen der Kurve. Das eigene Forward-KGV (34,87x) liegt UNTER der ACAD-Bandbreite (63,9x) und deutlich ÜBER dem PTCT-Trailing-Wert (8,2x, andere Reifephase) — die Positionierung erscheint strukturell plausibel: teurer als ein reiferes Rare-Disease-Programm (PTCT), aber noch mit Bewertungsspielraum gegenüber einem etablierten Launch-Compounder wie ACAD. Analyst-Konsensziel $33,00 (nur 1 Analyst im internen Datensatz, WebSearch bestätigt eine Bandbreite $13,16–$33 je nach Quelle/Zeitpunkt) — als Orientierungspunkt, nicht als Kursziel-Ceiling; die große Diskrepanz zwischen den Quellen unterstreicht die Unreife der Analystenmodelle so kurz nach dem Launch-Start.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 99,7, Rang 34 im Smallcap-Universum — eines der stärksten Momentum-Signale im gesamten Screening-Batch, konsistent mit der fundamentalen Story. Short Float/institutionelle Positionierungsdaten nicht im Datensatz — keine belastbare Aussage möglich. Hypothese, nicht datenbasiert: Die Kursbewegung von $3,89 (52W-Tief) auf $13,25 dürfte zunächst von Spezial-Situations-/Event-Investoren getrieben worden sein, die die FDA-Zulassung antizipierten, mit zunehmender Fast-Money-Beteiligung nach dem Q2-Beat. Enttäuschungsrisiko: Nach zwei Quartalen mit +190% QoQ-Wachstum ist die Messlatte für Q3 hoch — jede sichtbare Abflachung der Launch-Kurve würde die Bewertung schnell in Richtung Bear Case drücken.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>52W-Range $3,89–$17,65, aktueller Kurs $13,25 — deutlich über dem 52W-Tief, aber rund 25% unter dem 52W-Hoch, was auf eine gewisse Konsolidierung nach der initialen Zulassungs-/Launch-Euphorie hindeutet. RS-Score 99,7 (Rang 34) bestätigt starkes, fundamental gestütztes Momentum — kein rein reaktives Signal, da direkt an die verifizierte Umsatzbeschleunigung gekoppelt. Ein technisches Warnsignal wäre ein Bruch unter $10 (psychologische Marke deutlich unter dem aktuellen Konsolidierungsbereich), was auf eine grundlegende Neubewertung der Launch-These hindeuten würde.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($55–$85):** Narsoplimab etabliert sich als Standardtherapie für TA-TMA in den USA und Europa (EU-Re-Examination erfolgreich), Pipeline-Programme liefern zusätzliche Zulassungen. Normalisiertes EPS $1,50–$2,20 × 35–40x.</p>
+<p>**Base ($25–$45):** US-Launch erreicht ein stabiles Umsatzplateau von $200–300 Mio., EU bleibt vorerst ausgesetzt, kein wesentlicher Pipeline-Beitrag. Normalisiertes EPS $0,80–$1,10 × 30–35x.</p>
+<p>**Bear ($5–$12):** Launch-Kurve plateaut deutlich unter Erwartungen, EU-Zulassung bleibt dauerhaft versagt, Produktkonzentrationsrisiko materialisiert sich in Form von Wettbewerbs- oder Erstattungsdruck. Normalisiertes EPS $0,10–$0,30, EV/Sales-basierte Bewertung statt KGV.</p>
+<p>Entscheidende Variable: Ob die Launch-Kurve ($9,9 Mio. → $28,5 Mio. QoQ) sich in Q3/Q4 2026 fortsetzt oder abflacht — das ist der zentrale Unterscheidungsfaktor zwischen allen drei Szenarien.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Omeros ist der eindeutigste Turnaround-Kandidat im aktuellen Screening: Verlust→Launch-Übergang nach FDA-Zulassung, Kern-Kennzahl (Produktumsatz) rampt mit +190% QoQ, keine Guidance-Senkung, EPS-Surprise deutlich über 10%. Der EV von +58,5% signalisiert einen erheblichen asymmetrischen Edge, aber die Datenbasis ist erst zwei Quartale alt — das ist kein Buy-and-Hold-Compounder, sondern ein High-Conviction-Momentum-Play auf eine noch unbestätigte Launch-Kurve mit extremer Produktkonzentration (faktisch 100% auf ein Medikament). Für spekulative, event-getriebene Investoren mit hoher Risikotoleranz geeignet — Positionsgröße wegen Beta 2,538, negativem Buchvermögen und der ungelösten EU-Regulierungsfrage strikt begrenzt halten. **Acadia Pharmaceuticals (ACAD)** ist das reifere, aber teurere Instrument für dieselbe Rare-Disease-Launch-These (Forward-KGV 63,9x); **PTC Therapeutics (PTCT)** bietet eine deutlich günstigere, aber strukturell andere Bewertung (Trailing-KGV 8,2x) — Peer-Multiples aus WebSearch, nicht aus dem internen Datensatz, daher indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 5/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Kundenkonzentration — Faktisch 100% des Produktumsatzes hängen an einem einzigen, erst zwei Quartale alten Launch (YARTEMLEA/Narsoplimab) bei zusätzlich ungelöster EU-Regulierungsfrage, weshalb trotz starkem Katalysator und RS-Score 99,7 nur die halbe Positionsgröße gerechtfertigt ist.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
