@@ -7,20 +7,23 @@ permissions:
 
 on:
   schedule:
-    # Alle 15 Min. 07:00–23:45 UTC (09:00–01:45 MESZ), Mo–Fr — deckt den
-    # europäischen Handelsstart (DAX ab 07:00 UTC) bis weit in die
-    # US-Nachbörse hinein ab (08.08.2026 erweitert: die alte 08–20-UTC-Grenze
-    # ließ sowohl die erste DAX-Handelsstunde als auch die unmittelbare
-    # Kursreaktion auf AMC-Meldungen direkt nach US-Handelsschluss unentdeckt
-    # bis zum nächsten globalen Digest am Folgetag). Ergänzt
-    # earnings_alert_global.yml (Schlusskurs, Folgetag) um eine schnelle
-    # Live-Meldung direkt am Earnings-Tag: AMC-Meldungen vom Vorabend zeigen
-    # sich oft schon Stunden vor dem regulären Handelsstart deutlich in der
-    # Vorbörse (siehe PLTR 04.08.2026: +16–17% vorbörslich, lange bevor der
-    # Tagesschluss verfügbar war). Keine Wochenend-/Nacht-Läufe (00:00–07:00
-    # UTC): in dem Fenster ist weder in den USA noch in Europa ein
-    # getrackter Markt geöffnet, ein Live-Check liefe ins Leere.
-    - cron: '*/15 7-23 * * 1-5'
+    # Alle 30 Min. 07:00–20:00 UTC (09:00–22:00 MESZ), Mo–Fr — deckt den
+    # europäischen Handelsstart (DAX ab 07:00 UTC) bis in die erste US-Nachbörsen-
+    # Stunde ab (18.08.2026 auf Nutzerwunsch von 15-Min-Takt/07-23 UTC auf
+    # 30-Min-Takt/07-20 UTC reduziert, um GitHub-Actions-Minutenverbrauch zu
+    # senken — Trade-off: bis zu 30 statt 15 Min. Erkennungsverzögerung, und
+    # AMC-Meldungen nach 22 Uhr MESZ werden erst vom nächsten globalen Digest
+    # (earnings_alert_global.yml, Schlusskurs Folgetag) erfasst). Ergänzt
+    # earnings_alert_global.yml um eine schnelle Live-Meldung direkt am
+    # Earnings-Tag: AMC-Meldungen vom Vorabend zeigen sich oft schon Stunden
+    # vor dem regulären Handelsstart deutlich in der Vorbörse (siehe PLTR
+    # 04.08.2026: +16–17% vorbörslich, lange bevor der Tagesschluss verfügbar
+    # war). Keine Wochenend-/Nacht-Läufe: in dem Fenster ist weder in den USA
+    # noch in Europa ein getrackter Markt geöffnet, ein Live-Check liefe ins
+    # Leere. Hinweis: UTC-Grenzen sind auf MESZ (Sommerzeit) kalibriert — in
+    # der Winterzeit (MEZ, UTC+1) verschiebt sich das reale Fenster um eine
+    # Stunde nach vorn (08:00–21:00 MEZ statt 09:00–22:00).
+    - cron: '*/30 7-20 * * 1-5'
   workflow_dispatch:
     inputs:
       test_tickers:
@@ -36,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: master
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Python einrichten
         uses: actions/setup-python@v5
