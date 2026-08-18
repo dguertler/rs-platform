@@ -41,14 +41,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "DB1.DE",
-      "verdict": "BUY",
-      "score": 75,
-      "created_at": "2026-06-01T20:38:52.246234",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "DTE.DE",
       "verdict": "HOLD",
       "score": 65,
@@ -2797,6 +2789,32 @@
         "reason": "Solide Qualit\u00e4t, konservative Bilanz und ein realer, mehrj\u00e4hriger struktureller Katalysator (ECC-2027-Migrationszwang) rechtfertigen die regul\u00e4re Positionsgr\u00f6\u00dfe trotz fehlendem asymmetrischem EV-Edge und moderatem (nicht Top-)RS-Rang."
       },
       "created_at": "2026-08-16T17:30:10.190713"
+    },
+    {
+      "ticker": "DB1.DE",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Kurs nur rund 1,5% unter dem 52-Wochen-Hoch, Forward-PE am oberen Rand der Peer-Bandbreite, EV-Rechnung liefert keinen asymmetrischen Edge (+2,8%) trotz starkem RS-Rang 4."
+      },
+      "created_at": "2026-08-18T05:12:33.575565"
+    },
+    {
+      "ticker": "HNR1.DE",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 3.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Guidance wurde im Q2-Bericht nur best\u00e4tigt statt angehoben, RS-Rang 27/40 zeigt kein technisches St\u00e4rkesignal, und die beginnende Preis-Softening im R\u00fcckversicherungszyklus liefert aktuell keinen klaren fundamentalen Ausl\u00f6ser trotz solider Bilanzqualit\u00e4t."
+      },
+      "created_at": "2026-08-18T05:12:33.611622"
     }
   ]
 }

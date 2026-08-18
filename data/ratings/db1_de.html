@@ -19,7 +19,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 .meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
 .mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
 .vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
-  background:#3B6D11;color:#86c429;border:1px solid #639922}
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
 @media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
 .card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
@@ -57,7 +57,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
 <div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
   font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
   <span>KI-Aktienbewertung &middot; RS-Platform</span>
-  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">01.06.2026</strong></span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">18.08.2026</strong></span>
 </div>
 <div class="w">
   <div class="hdr">
@@ -67,17 +67,20 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
       <div class="meta">
         <div class="mi">Sektor: <span>Financial Services</span></div>
         <div class="mi">Industrie: <span>Financial Data & Stock Exchanges</span></div>
-        <div class="mi">MCap: <span>$45B</span></div>
-        <div class="mi">Signal: <span>GWS Breakout 3/3</span></div>
+        <div class="mi">MCap: <span>$49B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
-      <div class="vb">BUY</div>
-      <div style="font-size:12px;color:var(--mu);text-align:right">
-        Score: <strong style="color:#86c429;font-size:20px">75</strong><span style="color:var(--mu)">/100</span>
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
       </div>
-      <div style="font-size:11px;color:var(--mu)">Erstellt: 01.06.2026</div>
-      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 18.08.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">23.5</span></div>
     </div>
   </div>
 
@@ -85,15 +88,15 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
     <div class="st">Gesamteinschätzung</div>
     <div class="sg">
       <div class="sr">
-        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★★</span>
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
         <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
       </div>
       <div class="sr">
-        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
         <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
       </div>
       <div class="sr">
-        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
         <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
       </div>
       <div class="sr">
@@ -104,224 +107,80 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-ser
   </div>
 
   <div class="g3">
-    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$246.80</div></div>
-    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.6×</div></div>
-    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.5B</div></div>
-    <div class="card"><div class="cl">Gross Margin</div><div class="cv">81.2%</div></div>
-    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">170.00%</div></div>
-    <div class="card"><div class="cl">ROE</div><div class="cv">19.2%</div></div>
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$272.90</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">20.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$7.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">80.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">154.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">20.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.7%</div></div>
   </div>
 
   <div class="sec">
     <div class="st">Szenarien — 12–18 Monate</div>
     <div class="sz">
-      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">480-520</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">15%</div></div>
-      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">380-420</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">35%</div></div>
-      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">310-330</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">50%</div></div>
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">300–340</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">270–310</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">200–245</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
     </div>
   </div>
 
   <div class="sec">
     <div class="st">GWS-Ampel — Breakout-Status</div>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
-      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
-      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
-      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
     </div>
   </div>
 
   <div class="sec">
     <div class="st">Professionelle Analyse</div>
-    <div class="ac"><p># DB1.DE — Deutsche Börse AG: Professionelle Analyse</p>
-<h3>1. INVESTMENT-CASE</h3>
-<p>Die Deutsche Börse ist eines der qualitativ hochwertigsten Geschäftsmodelle Europas: ein vertikal integrierter Marktinfrastruktur-Konzern mit Quasi-Monopolen in Clearing (Eurex), Settlement (Clearstream) und Index-Daten (Qontigo/STOXX). Der Markt unterschätzt regelmäßig den strukturellen Shift weg von zyklischen Trading-Erlösen hin zu wiederkehrenden Data-, ISS- und Fund-Services-Umsätzen — heute über 60% recurring revenue. Die jüngste relative Schwäche (-12% auf 12M vs. starke 6M-Performance von +21%) reflektiert eher Rotation aus europäischen Defensives als operative Probleme. Mit Forward-PE 19 ist die Aktie für einen Compounder mit 8-10% Umsatzwachstum, 44% Op-Marge und Beta 0,28 fair bis leicht günstig bepreist. Institutionelle sehen DB1 als "Bond Proxy mit Wachstum" — und genau das funktioniert in einem Umfeld struktureller Volatilität.</p>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Deutsche Börse ist keine zyklische Wette auf Handelsvolumina, sondern eine strukturell wachsende Infrastruktur-Company mit Quasi-Monopolstellung in Clearing (Eurex), Verwahrung (Clearstream) und Marktdaten — der Markt unterschätzt regelmäßig, wie sehr das Geschäftsmodell inzwischen von wiederkehrenden, volumenunabhängigen Erlösen getragen wird statt von reinem Transaktionsvolumen. Der Q2-Report vom 23.07. mit 6 von 8 wachsenden Segmenten und einer angehobenen Jahresprognose bestätigt genau dieses Bild: breit abgestütztes, nicht auf ein Segment konzentriertes Wachstum. RS-Rang 4 von 40 im DAX signalisiert, dass der Markt die Story bereits goutiert — der Kurs notiert nur rund 1,5% unter dem 52-Wochen-Hoch. Was der Markt möglicherweise noch nicht vollständig einpreist: Der Treasury-Ergebnisbeitrag (Zinserträge auf Kundenmargin-Guthaben bei Eurex/Clearstream) bleibt bei fallenden Leitzinsen ein struktureller Gegenwind, der zunehmend durch nicht-zinsgetriebenes Wachstum kompensiert werden muss. Die eigentliche Frage für die nächsten 12–18 Monate ist nicht, ob das Geschäft wächst, sondern ob die Bewertung nach der Rally noch Raum für positive Überraschungen lässt.</p>
 <h3>2. GESCHÄFTSMODELL</h3>
 <ul class="al">
-<li>Eurex (Derivate-Clearing): Quasi-Monopol bei europäischen Zinsfutures, hochmargig</li>
+<li>Eurex-Derivateclearing: Skalenvorteile durch Netzwerkeffekt — je mehr Marktteilnehmer, desto tiefere Liquidität, desto schwerer zu verdrängen</li>
+<li>Clearstream (Verwahrung/Abwicklung): wiederkehrende, volumenunabhängige Verwahrgebühren — strukturell stabilster Ergebnisbeitrag</li>
+<li>Xetra-Kassahandel: klassisches, aber margenschwächeres Transaktionsgeschäft, stark korreliert mit Marktvolatilität</li>
+<li>Marktdaten & Indizes (Qontigo/STOXX/DAX-Lizenzen): hochmargiges, wachstumsstarkes Lizenzgeschäft mit Preissetzungsmacht</li>
+<li>Treasury-Ergebnis (Zinserträge auf Kundeneinlagen): erheblicher, aber zinssensitiver Ergebnistreiber — fällt bei EZB-Lockerung</li>
+<li>Operativer Hebel: 42% Operating Margin bei 80% Gross Margin zeigt hohe Skalierbarkeit der Fixkosteninfrastruktur</li>
+<li>Regulatorische Eintrittsbarriere: Clearing-Pflichten (EMIR) zementieren die Marktposition strukturell</li>
+<li>D/E 57,6% primär aus Kundenmargin-Refinanzierung, nicht operativer Verschuldung — Bilanzstruktur eines Finanzinfrastruktur-Betreibers</li>
 </ul>
-<ul class="al">
-<li>Clearstream (Post-Trade/Settlement): Verwahrt €18+ Bio. Assets, Zinsabhängige Erträge</li>
-</ul>
-<ul class="al">
-<li>Xetra (Cash Equities): Klassisches Handelsgeschäft, eher zyklisch</li>
-</ul>
-<ul class="al">
-<li>Data & Analytics: STOXX-Indizes, ISS (Governance/ESG-Daten) — strukturelles Wachstum</li>
-</ul>
-<ul class="al">
-<li>Fund Services: Wachstumssegment via Kaiser Partner / SimCorp-Akquisition</li>
-</ul>
-<ul class="al">
-<li>SimCorp: Investment-Management-Software, SaaS-Transformation läuft</li>
-</ul>
-<ul class="al">
-<li>360T: Globale FX-Trading-Plattform</li>
-</ul>
-<ul class="al">
-<li>Recurring Revenue inzwischen >60% — strukturelle De-Risking-Story</li>
-</ul>
-<ul class="al">
-<li>Zinssensitiv: Höhere Zinsen = höhere Net Interest Income bei Clearstream</li>
-</ul>
-<ul class="al">
-<li>Regulatorische Burggräben durch EMIR, MiFID</li>
-</ul>
+<p>Peers für die Multiple-Herleitung: ICE (Fwd-PE 17,6x), CME (Fwd-PE 20,9x), NDAQ (Fwd-PE 20,8x) — Peer-Bandbreite 17,6–20,9x. DB1s eigenes Forward-PE (20,1x) liegt am oberen Rand, nahe CME/NDAQ.</p>
 <h3>3. BULL CASE</h3>
-<ul class="al">
-<li>Strukturelle Volatilität (Geopolitik, Zinsen) treibt Eurex-Volumina</li>
-</ul>
-<ul class="al">
-<li>SimCorp-Integration entfaltet Cross-Selling-Potenzial ab 2025/26</li>
-</ul>
-<ul class="al">
-<li>Data-Geschäft skaliert mit hohen Inkrementalmargen (>70%)</li>
-</ul>
-<ul class="al">
-<li>Quasi-Monopolposition in EU-Clearing wird durch Brexit weiter zementiert</li>
-</ul>
-<ul class="al">
-<li>Höhere Zinsen für längere Zeit = strukturell höhere NII bei Clearstream</li>
-</ul>
-<ul class="al">
-<li>Dividendenwachstum + Buybacks stützen Total Return</li>
-</ul>
-<ul class="al">
-<li>Defensive Eigenschaften (Beta 0,28) gefragt in Late-Cycle-Umfeld</li>
-</ul>
-<ul class="al">
-<li>GWS-Ampel 3/3 aktiv — strukturelle Trendwende technisch bestätigt</li>
-</ul>
-<h3>4. BEAR CASE</h3>
-<ul class="al">
-<li>Konkurrenz durch CBOE, ICE, LSEG nimmt im Datengeschäft zu</li>
-</ul>
-<ul class="al">
-<li>Zinssenkungen der EZB drücken Clearstream-NII (2025-Risiko)</li>
-</ul>
-<ul class="al">
-<li>SimCorp-Akquisition (€3,9 Mrd.) muss sich erst rechnen — Integrationsrisiko</li>
-</ul>
-<ul class="al">
-<li>D/E von 65 zeigt höhere Verschuldung post-SimCorp</li>
-</ul>
-<ul class="al">
-<li>Regulatorische Eingriffe (EU-Gebührenregulierung) möglich</li>
-</ul>
-<ul class="al">
-<li>Europäische Equity-Volumina strukturell schwach vs. US</li>
-</ul>
-<ul class="al">
-<li>12M-Underperformance vs. QQQ zeigt Kapitalrotation in US-Tech</li>
-</ul>
-<ul class="al">
-<li>Bewertung bietet wenig Margin of Safety bei Wachstumsenttäuschung</li>
-</ul>
-<h3>5. FUNDAMENTALE QUALITÄT</h3>
-<ul class="al">
-<li>Umsatz TTM €7,54 Mrd., Wachstum +8,5% YoY — solide, nicht spektakulär</li>
-</ul>
-<ul class="al">
-<li>Gross Margin 81% — strukturell hervorragend</li>
-</ul>
-<ul class="al">
-<li>Operating Margin 43,6% — Weltklasse-Niveau</li>
-</ul>
-<ul class="al">
-<li>Net Margin 27,3% — sehr profitabel</li>
-</ul>
-<ul class="al">
-<li>ROE 19% — solide, durch Leverage gestützt</li>
-</ul>
-<ul class="al">
-<li>Beta 0,28 — defensiver Charakter</li>
-</ul>
-<ul class="al">
-<li>Recurring Revenue >60% — De-Risking erfolgreich</li>
-</ul>
-<ul class="al">
-<li>D/E 65% — erhöht durch SimCorp, aber Cashflow-gedeckt</li>
-</ul>
-<ul class="al">
-<li>Dividendenpolitik stabil und wachsend</li>
-</ul>
-<ul class="al">
-<li>Burggraben durch Regulierung + Netzwerkeffekte extrem tief</li>
-</ul>
-<ul class="al">
-<li>Capex-light Geschäftsmodell mit hoher Cash-Konversion</li>
-</ul>
-<ul class="al">
-<li>Wenig zyklisch im Vergleich zu Investmentbanken</li>
-</ul>
-<h3>6. BEWERTUNG</h3>
-<p>Mit Forward-PE 19,3 und Trailing 22,9 handelt DB1 leicht unter dem 5-Jahres-Durchschnitt (~21x). Vergleichbare Exchange-Peers: ICE bei 22x, CME bei 23x, LSEG bei 24x — DB1 ist relativ zur Peer-Group der günstigste Top-Tier-Compounder. Price/Book von 4,5 ist für 19% ROE angemessen. Das Analystenkursziel von €288 impliziert ~12% Upside. Der Markt preist moderates Wachstum + stabile Margen ein, aber kein SimCorp-Synergie-Upside. Bei EV/EBITDA ~14x liegt DB1 etwa 10-15% unter LSEG — diese Lücke ist historisch unüblich und bietet Re-Rating-Potenzial.</p>
-<h3>7. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
-<ul class="al">
-<li>Klassischer "Bond Proxy mit Wachstum" — beliebt bei europäischen Pensionskassen</li>
-</ul>
-<ul class="al">
-<li>Under-owned bei US-Hedgefonds, dominant in europäischen Long-Only-Books</li>
-</ul>
-<ul class="al">
-<li>Kein Hype, kein Retail-Interest — pure institutionelle Story</li>
-</ul>
-<ul class="al">
-<li>Smart Money sieht SimCorp-Story noch nicht eingepreist</li>
-</ul>
-<ul class="al">
-<li>Momentum durchwachsen: stark auf 6M, schwach auf 12M vs. QQQ</li>
-</ul>
-<ul class="al">
-<li>RS-Score +18 zeigt einsetzende relative Stärke</li>
-</ul>
-<h3>8. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
-<ul class="al">
-<li>GWS-Ampel 3/3 aktiv (Weekly, Daily, 4H gebrochen) — sehr starkes Setup</li>
-</ul>
-<ul class="al">
-<li>Kurs €256 vs. 52W-Hoch €292 = 12% Distanz, Raum nach oben</li>
-</ul>
-<ul class="al">
-<li>6M +21% relativ zeigt frische Outperformance-Phase</li>
-</ul>
-<ul class="al">
-<li>20-Tage RS -4% deutet kurzfristige Konsolidierung an — gesund</li>
-</ul>
-<ul class="al">
-<li>Zyklus-Phase: frühe Trendfortsetzung nach Akkumulation</li>
-</ul>
-<h3>9. LANGFRISTIGES POTENZIAL (3-5 Jahre)</h3>
-<p>**Konservatives Szenario:** 6% Umsatz-CAGR, stabile Margen, kein Multiple-Re-Rating → Kursziel €310-330 / Wahrscheinlichkeit 50%</p>
-<p>**Bull Case:** 9% CAGR, SimCorp-Synergien voll wirksam, Margin-Expansion auf 46% → Kursziel €380-420 / Wahrscheinlichkeit 35%</p>
-<p>**Extrem-Bull-Case:** Strukturelle EU-Kapitalmarktunion + Vola-Boom + Data-Re-Rating auf LSEG-Niveau → Kursziel €480-520 / Wahrscheinlichkeit 15%</p>
-<h3>10. VERGLEICH MIT ÄHNLICHEN AKTIEN</h3>
-<ul class="al">
-<li>LSEG.L: Höhere Data-Quote, aber teurer (24x) und volatiler nach Refinitiv-Deal</li>
-</ul>
-<ul class="al">
-<li>ICE: Stärkere US-Exponierung, höheres Wachstum, aber zyklischer</li>
-</ul>
-<ul class="al">
-<li>CME: Reines Derivate-Play, höhere Margen, weniger Diversifikation</li>
-</ul>
-<ul class="al">
-<li>Euronext: Günstiger (14x), aber niedrigere Qualität und weniger Burggraben</li>
-</ul>
+<p>Alle 8 Segmente wachsen weiter zweistellig, das Datengeschäft (Qontigo/STOXX) beschleunigt, ein weiterer Guidance-Raise folgt im Q3. Annahme (kein Konsens): FY27e-EPS ~€15,50 (vs. Forward-EPS €13,57, ca. +14% durch operativen Hebel) × 20,9x (CME-Niveau, oberes Peer-Bandende) = €324. Bull-Kursziel: €300–€340 (Midpoint €320). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wachstum setzt sich mit der aus Q2 bekannten Breite fort, das Treasury-Ergebnis normalisiert leicht nach unten, das Datengeschäft kompensiert. Annahme (kein Konsens, Extrapolation über den aktuellen Forward-Konsens hinaus): FY27e-EPS ~€14,60 (+7,6% ggü. Forward-EPS €13,57) × 20,1x (eigenes aktuelles Forward-PE, innerhalb Peer-Bandbreite) = €293. Base-Kursziel: €270–€310 (Midpoint €290). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der EZB-Zinssenkungszyklus beschleunigt sich, das Treasury-Ergebnis bricht deutlicher ein als eingepreist, gleichzeitig kühlt sich das Handelsvolumen bei nachlassender Marktvolatilität ab. Kundenkonzentration: keine — die Erlösbasis ist über Tausende Clearing-Mitglieder und Datenkunden diversifiziert, strukturell gering. Geopolitik: EU-Marktinfrastruktur-Regulierung (EMIR 3.0, Verlagerung von Euro-Clearing aus London) ist eher Rückenwind als Risiko; kein materielles China-/Exportkontroll-Exposure. Lieferkette/Foundry: nicht anwendbar (Infrastrukturbetreiber ohne Fertigungs-Footprint). Verwässerung: Aktienanzahl-Trend aus den Daten nicht verfügbar, historisch stabil, kein akutes Risiko erkennbar. Regulierung: EU-Finanzmarktregulierung (MiFID-Überarbeitungen) könnte Handelsgebühren strukturell drücken. Annahme: FY27e-EPS ~€12,50 (Stagnation ggü. Forward-EPS, Zinsgegenwind) × 17,6x (ICE-Niveau, unteres Peer-Bandende) = €220. Bear-Kursziel: €200–€245 (Midpoint €222,5). Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × €320 + 0,50 × €290 + 0,25 × €222,5 = €80 + €145 + €55,6 = **~€280,6 — implizites Upside vs. aktuellem Kurs (€272,90): +2,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 20,4%, ROIC 12,9% — beide deutlich über den Kapitalkosten, aber mit Top-of-Cycle-Charakter: der hohe Treasury-Ergebnisbeitrag beim aktuell noch erhöhten Zinsniveau verzerrt beide Kennzahlen nach oben ggü. einem normalisierten Zinsszenario. Gross Margin 80,5%, Operating Margin 42,0% — strukturell hoch und nicht primär zyklusgetrieben (Infrastruktur-/Lizenzcharakter). FCF €2,18 Mrd. bei €7,75 Mrd. Revenue (28% FCF-Marge) — sehr solide Cash-Generierung. D/E 57,6% ist auf den ersten Blick hoch, resultiert aber überwiegend aus der Refinanzierung von Kundenmargin-Guthaben, nicht aus operativer Verschuldung — der echte wirtschaftliche Burggraben liegt im Netzwerkeffekt des Eurex-Clearings und den regulatorischen Zugangsbarrieren. RPO nicht anwendbar (kein Subscription-/SaaS-Geschäftsmodell).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der aktuelle Kurs ein? Bei €272,90 und Forward-EPS €13,57 impliziert das aktuelle Forward-PE von 20,1x (vereinfachte Rechnung) ein für eine Finanzmarktinfrastruktur ambitioniertes, aber angesichts der Q2-Breite nicht unplausibles Szenario von fortgesetzt hohem einstelligem bis niedrigem zweistelligem EPS-Wachstum über mehrere Jahre bei stabiler Marge. Trailing-PE 23,5x liegt spürbar über dem Forward-PE — reflektiert erwartete EPS-Beschleunigung, keine Bewertungsanomalie. Eigenes Forward-PE (20,1x) liegt am oberen Rand der Peer-Bandbreite (ICE 17,6x–CME 20,9x–NDAQ 20,8x), nahe CME/NDAQ. Die Prämie ggü. ICE ist strukturell erklärbar: höheres Datengeschäfts-/Lizenzgeschäftsgewicht und die Q2-bestätigte breitere Wachstumsdynamik. Analyst-Konsensziel €289,83 (12 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, liegt nur 6,2% über dem aktuellen Kurs und damit nahe am eigenen Base Case.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 23,48, DAX-Rang 4 von 40 — starkes technisches Bild, der Markt hat die Story bereits breit goutiert. Die Windows zeigen aber ein Abflachen der kurzfristigen Dynamik nach dem Earnings-Pop: 5T −1,42%, 10T +0,52%, während 6M mit +20,92% die grundlegende Stärke zeigt. Hypothese, nicht datenbasiert: Bei einem Kurs nur 1,5% unter dem 52-Wochen-Hoch dürfte ein Großteil der Guidance-Anhebung bereits in institutionellen Portfolios eingepreist sein — neue Käufer benötigen einen weiteren positiven Katalysator statt reiner Fortschreibung. Enttäuschungsrisiko: jede Guidance-Stagnation oder ein sichtbarer Treasury-Ergebnisrückgang würde bei der aktuell hohen Bewertung überproportional negativ aufgenommen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 23,48 (DAX-Rang 4/40) — oberes Dezil. Windows: 5T −1,42%, 10T +0,52%, 20T −1,16%, 50T +4,62%, 6M +20,92% — Konsolidierung nach starkem 6-Monats-Trend, kein Momentum-Bruch. GWS-Signale werden für DAX-Titel in diesem Datensatz nicht getrackt — daher keine Ampel-Aussage möglich. Das Momentum ist fundamental gestützt (Q2-Beat + Guidance-Raise als realer Auslöser), nicht rein reaktiv. Technisches Warnsignal: ein Rückfall unter die €260-Marke (rund 5% unter dem aktuellen Niveau) wäre erstes Anzeichen einer Trendabschwächung.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull (€340–€420):** Secular Growth in Clearing/Daten/Index-Lizenzgeschäft setzt sich beschleunigt fort, das Multiple expandiert Richtung CME-Niveau bei nachhaltig zweistelligem EPS-Wachstum. Normalisiertes EPS €18–20 × 20–22x.</p>
+<p>**Base (€280–€360):** Stetiges hohes einstelliges EPS-Wachstum, das Multiple bleibt nahe der aktuellen Peer-Mitte. Normalisiertes EPS €15–17 × 19–21x.</p>
+<p>**Bear (€200–€260):** Strukturell niedrigeres Zinsniveau drückt das Treasury-Ergebnis dauerhaft, das Handelsvolumen normalisiert sich, das Multiple komprimiert Richtung ICE-Niveau. Normalisiertes EPS €12–14 × 16–18x.</p>
+<p>Entscheidende Variable: Tempo und Ausmaß der EZB-Zinsnormalisierung und deren Effekt auf das Treasury-Ergebnis.</p>
 <h3>11. PROFI-FAZIT</h3>
-<p>Deutsche Börse ist ein klassischer Compounder mit defensivem Charakter und unterschätztem Wachstumsprofil — kein Trading-Vehikel, sondern eine 3-5-Jahres-Position. Die Qualität rechtfertigt das Multiple klar, und die SimCorp-Story bietet asymmetrisches Upside, das der Markt noch nicht voll eingepreist hat. Hedgefonds-Perspektive: Long-Position mit Sizing 2-4% in einem europäischen Quality-Book, idealerweise gepaart mit Short auf zyklische Investmentbanken. Mit GWS-Ampel 3/3 aktiv ist der technische Einstieg jetzt optimal — strukturell gebrochener Widerstand auf allen Zeitebenen signalisiert nachhaltige Trendfortsetzung. Risiko/Rendite ist asymmetrisch positiv: max. 15% Downside vs. 25-40% Upside auf 18-24 Monate. Kaufen auf aktuelle Konsolidierung (€250-260), Stop unter €230. Reduzieren bei Annäherung an €350 oder bei klarer EZB-Zinssenkungsspirale. Nicht die Aktie für Verzehnfacher-Träume — aber eine der besten risikoadjustierten Compounder-Geschichten Europas.</p>
-<p>**Rating:**</p>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV +2,8%). Deutsche Börse ist ein Qualitäts-Compounder mit strukturellem, diversifiziertem Wachstum — aber nach der Rally auf RS-Rang 4 und nahe dem 52-Wochen-Hoch kein Setup mit klarer Kurs-Luft nach oben auf 12–18-Monats-Sicht. Für Buy-and-Hold-/Long-Only-Investoren mit langem Horizont bleibt die Story intakt, für taktische Neupositionen fehlt aktuell der Margin of Safety. Bestehende Positionen halten, Neueinstiege auf Rücksetzer unter €260 attraktiver.</p>
+<p>**CME Group (CME)** und **ICE** sind über den US-Markt vergleichbare, teils günstigere (ICE 17,6x) Infrastruktur-Instrumente mit ähnlichem Geschäftsmodell, aber ohne DB1s Datengeschäfts-Konzentration im STOXX/DAX-Indexbereich.</p>
 <ul class="al">
-<li>Qualität: 5/5</li>
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 3/5</li>
 </ul>
-<ul class="al">
-<li>Wachstum: 3/5</li>
-</ul>
-<ul class="al">
-<li>Bewertung: 4/5</li>
-</ul>
-<ul class="al">
-<li>Langfristiges Potenzial: 4/5</li>
-</ul></div>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Kurs nur rund 1,5% unter dem 52-Wochen-Hoch, Forward-PE am oberen Rand der Peer-Bandbreite, EV-Rechnung liefert keinen asymmetrischen Edge (+2,8%) trotz starkem RS-Rang 4.</p></div>
   </div>
 
   <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
