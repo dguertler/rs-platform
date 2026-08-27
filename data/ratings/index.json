@@ -451,14 +451,6 @@
       "ev_upside_pct": 13.9
     },
     {
-      "ticker": "MU",
-      "verdict": "BUY",
-      "score": 74,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-24T11:20:32.987454",
-      "ev_upside_pct": 20.0
-    },
-    {
       "ticker": "LRCX",
       "verdict": "HOLD",
       "score": 66,
@@ -481,14 +473,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-06-25T07:12:04.272482",
       "ev_upside_pct": 20.7
-    },
-    {
-      "ticker": "STX",
-      "verdict": "WATCH",
-      "score": 54,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:14:54.710340",
-      "ev_upside_pct": -14.0
     },
     {
       "ticker": "HPE",
@@ -2089,32 +2073,6 @@
       "created_at": "2026-07-30T06:55:03.473893"
     },
     {
-      "ticker": "SNDK",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 0.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz Crash ergeben die eigenen Szenarien keinen asymmetrischen Edge (EV \u221216,4%), RS-Score ist von Rang 1 auf \u221225,4 eingebrochen, und die Aug.-5-Earnings sind ein ungel\u00f6ster Katalysator in beide Richtungen."
-      },
-      "created_at": "2026-07-30T14:00:15.903594"
-    },
-    {
-      "ticker": "ASML",
-      "verdict": "BUY",
-      "score": 75,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 13.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz starkem Q2-Beat und angehobener Guidance liegt das Forward-Multiple erstmals unter der gesamten Peer-Bandbreite und die eigenen Szenarien ergeben keinen asymmetrischen Edge (EV +6,2%), solange die DUV-Konkurrenzfrage ungekl\u00e4rt bleibt."
-      },
-      "created_at": "2026-07-30T14:03:37.351838"
-    },
-    {
       "ticker": "WDC",
       "verdict": "HOLD",
       "score": 62,
@@ -2815,6 +2773,58 @@
         "reason": "Guidance wurde im Q2-Bericht nur best\u00e4tigt statt angehoben, RS-Rang 27/40 zeigt kein technisches St\u00e4rkesignal, und die beginnende Preis-Softening im R\u00fcckversicherungszyklus liefert aktuell keinen klaren fundamentalen Ausl\u00f6ser trotz solider Bilanzqualit\u00e4t."
       },
       "created_at": "2026-08-18T05:12:33.611622"
+    },
+    {
+      "ticker": "ASML",
+      "verdict": "HOLD",
+      "score": 69,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Szenarien zeigen keinen asymmetrischen Edge (\u22122,4%) bei einem Snapshot-Preisgap von 5,3%, die Bewertung liegt fair im Peer-Band ohne Sicherheitsabstand."
+      },
+      "created_at": "2026-08-27T09:28:37.423811"
+    },
+    {
+      "ticker": "MU",
+      "verdict": "BUY",
+      "score": 87,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 15.3,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Kein fundamentaler Einwand, EV-Edge (+14,6%) und die durch NVDA-Zahlen extern best\u00e4tigte HBM-Katalysator-Story st\u00fctzen die volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-27T09:28:37.428530"
+    },
+    {
+      "ticker": "STX",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Hohe Verschuldung (D/E ~1,80x) ohne Netto-Cash-Puffer, EV-Szenarien zeigen keinen asymmetrischen Edge (\u22126,8%) nach der scharfen -7,9%-Korrektur vom 24.08."
+      },
+      "created_at": "2026-08-27T09:28:37.433116"
+    },
+    {
+      "ticker": "SNDK",
+      "verdict": "HOLD",
+      "score": 66,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 9.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "EV-Edge ist trotz der strukturellen NBM-Story minimal (+0,9%), die YMTC-Konkurrenzsorge und die extreme Volatilit\u00e4t rechtfertigen keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-08-27T09:29:51.494614"
     }
   ]
 }
