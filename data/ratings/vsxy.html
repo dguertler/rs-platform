@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>VSXY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">03.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>VSXY</h1>
+      <h2>Victorias Secret & Co.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Apparel Retail</span></div>
+        <div class="mi">MCap: <span>$6B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">44</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 03.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">288.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$74.00</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">37.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">32.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-31.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">70–87</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">35%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">44–55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">21–29</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">20%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 02.09.2026 liegt vor der jüngsten Kursbewegung — Snapshot-Kurs $84,17 vs. aktuelles Niveau nach dem Earnings-Gap vom 03.09.2026 (Auslöser verifiziert: Q2-FY26-Report, EPS-Beat +22,7% bei verfehlter Umsatz- und FY26-EPS-Guidance-Erwartung, Kursreaktion laut Marktberichten −10,6% bis −13,4%). $74 wird als approximiertes aktuelles Kursniveau verwendet (nicht live verifizierbar, yfinance blockiert) — vor jeder Positionsentscheidung zwingend gegen einen Live-Kurs prüfen. Alle Multiples wurden auf $74 umgerechnet.</p>
+<p>VSXY (vormals VSCO) ist der laufende Turnaround unter CEO Hillary Super (seit 2023): Q1 FY26 drehte von einem Vorjahresverlust auf 47,7 Mio. $ Nettogewinn, Q2 FY26 liefert das beste Comp-Sales-Wachstum seit vier Jahren (+9%) und Adjusted Operating Income von 124 Mio. $ (+125% YoY, über eigener Guidance von 90–100 Mio. $). Der Markt bestraft den heutigen Report trotzdem, weil Umsatz knapp unter Konsens blieb und die neue FY26-Adjusted-EPS-Guidance (Mittelwert ~4,58 $) den Konsens um ~2% verfehlte — bei angehobener Umsatzguidance ein Signal, dass die Margen-Erholung stockt, während die Top-Line hält. Kernfrage: Ist der Turnaround strukturell, oder war Q1 nur ein Vorjahresbasis-Effekt, der jetzt an eine Margengrenze stößt? Der Markt preist mit ~13,2x Forward-KGV bereits einen deutlichen Aufschlag zu Specialty-Retail-Peers ein — die heutige Reaktion ist eine Neubewertung dieses Aufschlags, kein Zusammenbruch der These.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Intimates/Lingerie-Spezialist (Bra-Kerngeschäft) plus Pink (jüngere Zielgruppe) — zwei Marken, ein Store-Footprint</li>
+<li>2021 von L Brands abgespalten (Schwester: Bath & Body Works/BBWI), 2026 Ticker-Wechsel VSCO→VSXY</li>
+<li>Umsatztreiber: US-Filialnetz plus wachsendes internationales/Digital-Geschäft (China +45% YoY, stärkster Einzelmarkt)</li>
+<li>Operativer Hebel: Comp-Sales-Wachstum trägt die Fixkosten der Filialen — Q2 zeigte das (Op. Income +125% bei nur +10% Umsatz)</li>
+<li>Margenschwäche strukturell: Operating Margin TTM nur 5,2%, Gross Margin 37,0% — unter margenstärkeren Peers wie BBWI</li>
+<li>Bilanz post-Spin-off stark fremdfinanziert (siehe Abschnitt 6) — Zinslast begrenzt Wiederinvestitionsspielraum</li>
+<li>Q3-Guidance (Adjusted EPS −0,09 $ bis 0,01 $) signalisiert saisonale Schwäche im margenschwächsten Quartal</li>
+<li>RPO nicht anwendbar (kein Subscription-Modell)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: American Eagle (AEO, Fwd-PE 8,5x), Urban Outfitters (URBN, Fwd-PE 11,5x) — Bandbreite 8,5x–11,5x (aus data/fundamentals.json). Bath & Body Works (BBWI, Fwd-PE ~7,4x laut WebSearch, nicht im Datensatz) bestätigt die Bandbreite nach unten, kein harter Anker. Bull: Der Turnaround beschleunigt sich weiter — Comp-Sales bleiben hoch einstellig, die Margen-Erholung setzt sich in FY27 fort, China skaliert. Annahme (kein Konsens): FY27-Adjusted-EPS ~5,80 $ (Cache-Konsenswert forwardEps 5,60 $ als Orientierung, leicht darüber bei bestätigter Outperformance) × 13x (leicht über URBNs 11,5x, Prämie für die bestätigte relative Outperformance: VSXY 12M +246% vs. deutlich schwächere Peers) = $75,40. Bull-Kursziel: $70–$87. Eintrittswahrscheinlichkeit: 35%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Der Turnaround bleibt intakt, aber das heutige Guidance-Signal (Margen-Erholung stockt trotz Umsatzwachstum) wiederholt sich — moderates Comp-Wachstum ohne weitere Margen-Beschleunigung über die FY26-Guidance hinaus. Annahme: FY27-Adjusted-EPS ~4,90 $ (leichtes Wachstum ggü. FY26-Mittelwert 4,58 $) × 10x (oberer Peer-Bereich, nahe URBN, ohne Prämie) = $49,00. Base-Kursziel: $44–$55. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die heutige Margen-Enttäuschung ist kein Ausrutscher, sondern der Beginn einer erneuten Verlangsamung — das schwache Q3-Guidance-Fenster (EPS −0,09 $ bis 0,01 $) setzt sich in einem enttäuschenden Weihnachtsquartal fort, der Bra-Zyklus-Boom normalisiert sich, internationale Skalierung bleibt klein relativ zum US-Kerngeschäft. Kundenkonzentration: auf Datenbasis nicht beurteilbar (kein B2B-Modell, Konsumentenkonzentration auf preissensitive US-Mall-Kundschaft strukturell relevant, nicht quantifizierbar). Geopolitik/China-Exposure: Asien-Sourcing branchentypisch bei Apparel, aus den Daten nicht quantifizierbar — qualitatives Risiko. Lieferkette: kein Single-Source-Risiko wie bei Halbleitern, Apparel-Lieferketten i. d. R. diversifiziert, nicht weiter belegbar. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz — nicht beurteilbar. Regulierung: sektortypisch gering. EPS bricht auf ~3,70 $ ein (Marge auf Vor-Turnaround-Niveau) × 6,5x (unter BBWI als Floor) = $24,05. Bear-Kursziel: $21–$29. Eintrittswahrscheinlichkeit: 20%.</p>
+<p>**Summe: 35% + 45% + 20% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,35 × $78,50 + 0,45 × $49,50 + 0,20 × $25,00 = $27,48 + $22,28 + $5,00 = **~$54,75 — implizites Downside vs. approximiertem aktuellem Kurs ($74): −26,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — im Gegenteil, sie deuten auf ein Bewertungsrisiko hin, selbst nach dem heutigen Kurseinbruch.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 32,0% steht im Widerspruch zu ROIC 7,9% — aus den Daten nicht abschließend auflösbar, typisch für eine Post-Spin-off-Bilanz mit dünner Eigenkapitalbasis (D/E 337,4% ist eher ein Bilanzierungsartefakt als operative Überschuldung im klassischen Sinn). Für die Qualitätsbeurteilung wird ROIC (7,9%, mittelmäßig) als unverzerrtes Signal herangezogen. Gross Margin 37,0% und Operating Margin 5,2% liegen klar unter margenstärkeren Specialty-Peers wie BBWI. FCF 241,9 Mio. $ bei 6,76 Mrd. $ Revenue (TTM, vor dem heutigen Report) ergibt nur 3,6% FCF-Marge — dünn bei hoher Zinslast. RPO nicht anwendbar (kein Subscription-Modell).</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE (auf $74 umgerechnet) 13,2x liegt deutlich über der Peer-Bandbreite (8,5x–11,5x) — eine Prämie von ~15% ggü. URBN. Strukturell begründbar durch die überlegene relative Kursperformance (12M +246%), aber nicht vollständig durch die heutigen Zahlen gedeckt, da die Margen-Erholung stockt. Was preist der Kurs ein? 13,2x auf die FY26-Guidance-Mitte (4,58 $) preist implizit ein Fortsetzen des zweistelligen Op.-Income-Wachstums über mehrere Jahre ein — ambitioniert nach der heute sichtbaren Margen-Bremse. Normalisierter FCF (3,6% Marge auf 6,76 Mrd. $ Revenue) gegen die Marktkapitalisierung (~5,88 Mrd. $) ergibt ~24x FCF-Multiple — kein Value-Level, eine strukturierte Wette. Analyst-Konsensziel 94,60 $ (Snapshot-Basis, wird nach der Guidance-Verfehlung voraussichtlich gesenkt) — Sentiment-Indikator, kein Ceiling.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>RS-Score 288,77, Rang 23 im Smallcap-Universum. Windows: 5T −3,7%, 10T −0,8%, 20T −6,8%, 50T +5,5%, 6M +48,3%, 12M +246,2%. Der kurzfristige Rückgang (5T/20T negativ) reflektiert bereits den heutigen Gap. Hypothese, nicht datenbasiert: Ein Titel mit +246% 12M-Performance und "buy"-Konsens von 10 Analysten dürfte einen relevanten Fast-Money-Anteil tragen, der auf Guidance-Enttäuschungen überproportional reagiert — genau das zeigt die heutige zweistellige Tagesbewegung trotz EPS-Beat. Short-Float nicht im Datensatz. Enttäuschungsrisiko bleibt hoch, solange die Bewertung über der Peer-Bandbreite liegt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS-Signale inaktiv (Smallcap-Universum, keine GWS-Ampel getrackt). RS-Score 288,77 bleibt trotz des heutigen Gaps hoch (Rang 23), getragen vom starken 6M/12M-Trend, nicht vom kurzfristigen Momentum (5T/20T negativ). Das Momentum ist teils fundamental gestützt (realer Turnaround, drei Quartale Comp-Wachstum), teils reaktiv auf Schlagzeilen (heutiger Guidance-Miss trotz EPS-Beat). Warnsignal: ein nachhaltiger Bruch unter die 50T-Marke würde die Turnaround-These technisch infrage stellen; eine Stabilisierung über $80 wäre ein positives Gegensignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($95–$140):** Der Turnaround wird strukturell — China trägt wachsenden Umsatzanteil, Margen erreichen schrittweise BBWI-nahes Niveau. Normalisiertes EPS $7–9 × 14–16x.</p>
+<p>**Base ($55–$80):** Der Turnaround hält an, aber moderat, mit wiederkehrenden Margen-Schwankungen wie heute. Normalisiertes EPS $5,5–7 × 10–11x.</p>
+<p>**Bear ($15–$30):** Die Margen-Erholung war ein Vorjahresbasis-Effekt, das Bra-Zyklus-Hoch normalisiert sich, internationale Skalierung bleibt klein. Normalisiertes EPS $2,5–4 × 6–7x.</p>
+<p>Entscheidende Variable: Ob die Margen-Erholung (+125% Op. Income in Q2) struktureller Trend oder Einmaleffekt war — die heutige EPS-Guidance-Verfehlung sät erste Zweifel.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem approximierten aktuellen Niveau ($74) trotz bestätigtem Turnaround keinen asymmetrischen Edge — im Gegenteil, EV −26,0% deutet auf ein Bewertungsrisiko hin. VSXY ist kein Buy-and-Hold-Compounder in der aktuellen Bilanz-/Margenstruktur, sondern eine binäre Wette darauf, ob die Margen-Erholung nach dem heutigen Dämpfer wieder anzieht. Für Long-Only-Investoren zu früh; für taktische Trader nur mit strikter Stop-Disziplin und kleiner Position, da das heutige Gap zeigt, wie scharf der Markt auf Guidance-Enttäuschungen reagiert. Positionsgröße: max. 1–2% eines diversifizierten Portfolios, falls überhaupt.</p>
+<p>Peers: **Urban Outfitters (URBN)** bietet ein ähnliches Comp-Wachstumsprofil bei niedrigerem Multiple (11,5x vs. VSXYs 13,2x) — das relativ günstigere Instrument für die Specialty-Retail-Turnaround-These; **Bath & Body Works (BBWI)** ist die margenstärkere, konservativere Alternative in derselben Unternehmensfamilie (~7,4x Fwd-PE, indikativ, nicht im Datensatz).</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Der EV-Edge ist trotz bestätigtem Turnaround und EPS-Beat deutlich negativ (−26,0%), da das Forward-KGV (13,2x) klar über der Peer-Bandbreite (8,5x–11,5x) liegt und die heutige Guidance-Verfehlung beim Adjusted EPS die Margen-Erholung erstmals infrage stellt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
