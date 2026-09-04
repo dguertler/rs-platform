@@ -871,28 +871,26 @@ def main():
     print(f'\nAlertes gesamt: {len(all_alerts)}  '
           f'(davon neu heute: {len(fresh_alerts)})')
 
+    # Nur Top-20-Aktien der Indizes werden per Mail/Telegram gemeldet.
+    report_alerts = [a for a in fresh_alerts if a.get('in_top20')]
+    print(f'Davon Top-20 (werden gemeldet): {len(report_alerts)}')
+
     tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
     tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
 
-    if fresh_alerts:
-        send_alert_email(fresh_alerts, smtp_host, smtp_port,
+    if report_alerts:
+        send_alert_email(report_alerts, smtp_host, smtp_port,
                          smtp_user, smtp_pass, to_addr)
         if tg_token:
-            from telegram_handler import send_breakout_telegram, resolve_recipients, send_section_divider
+            from telegram_handler import send_breakout_telegram, resolve_recipients
             tg_recipients = resolve_recipients(tg_chat_id)
             if tg_recipients:
                 print(f'Telegram-Empfaenger: {len(tg_recipients)}')
-                has_top20 = any(a.get('in_top20') for a in fresh_alerts)
-                has_other = any(not a.get('in_top20') for a in fresh_alerts)
-                divider_sent = False
-                for a in fresh_alerts:
-                    if has_top20 and has_other and not a.get('in_top20') and not divider_sent:
-                        send_section_divider(tg_token, tg_recipients,
-                                             'Weitere Breakouts – außerhalb Top 20')
-                        divider_sent = True
+                for a in report_alerts:
                     send_breakout_telegram(tg_token, tg_recipients, a)
         # Letzte verschickte Charge persistieren (für Willkommens-Nachreichung)
-        save_last_breakout_batch(fresh_alerts)
+        save_last_breakout_batch(report_alerts)
+    if fresh_alerts:
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
             trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')

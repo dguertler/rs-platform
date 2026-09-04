@@ -351,32 +351,33 @@ def main():
     # Top-20-Aktien zuerst, danach alle weiteren Breakouts (stabile Sortierung)
     alerts.sort(key=lambda a: 0 if a.get('in_top20') else 1)
 
-    # Mail senden
-    is_test     = any(a.get('_test_mode') for a in alerts)
-    date_label  = datetime.now().strftime('%d.%m.%Y')
-    subject = (
-        f'[TEST] 4H-Wiederkehr {date_label} – {alerts[0]["_real_ticker"] if is_test else ""}'
-        if is_test else
-        f'4H-Wiederkehr {date_label}: {len(alerts)} Aktie(n) – 4H-Signal zurückgekehrt'
-    )
-    send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr,
-                     subject_override=subject)
+    is_test = any(a.get('_test_mode') for a in alerts)
 
-    tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
-    tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
-    if tg_token:
-        from telegram_handler import send_breakout_telegram, resolve_recipients, send_section_divider
-        tg_recipients = resolve_recipients(tg_chat_id)
-        if tg_recipients:
-            has_top20 = any(a.get('in_top20') for a in alerts)
-            has_other = any(not a.get('in_top20') for a in alerts)
-            divider_sent = False
-            for a in alerts:
-                if has_top20 and has_other and not a.get('in_top20') and not divider_sent:
-                    send_section_divider(tg_token, tg_recipients,
-                                         'Weitere Breakouts – außerhalb Top 20')
-                    divider_sent = True
-                send_breakout_telegram(tg_token, tg_recipients, a)
+    # Nur Top-20-Aktien der Indizes werden per Mail/Telegram gemeldet
+    # (ein expliziter --test-Lauf ist davon ausgenommen).
+    report_alerts = alerts if is_test else [a for a in alerts if a.get('in_top20')]
+
+    if not report_alerts:
+        print(f'{len(alerts)} Wiederkehr(en) gefunden, aber keine davon in Top 20 – keine Meldung.')
+    else:
+        # Mail senden
+        date_label  = datetime.now().strftime('%d.%m.%Y')
+        subject = (
+            f'[TEST] 4H-Wiederkehr {date_label} – {report_alerts[0]["_real_ticker"] if is_test else ""}'
+            if is_test else
+            f'4H-Wiederkehr {date_label}: {len(report_alerts)} Aktie(n) – 4H-Signal zurückgekehrt'
+        )
+        send_alert_email(report_alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr,
+                         subject_override=subject)
+
+        tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
+        tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+        if tg_token:
+            from telegram_handler import send_breakout_telegram, resolve_recipients
+            tg_recipients = resolve_recipients(tg_chat_id)
+            if tg_recipients:
+                for a in report_alerts:
+                    send_breakout_telegram(tg_token, tg_recipients, a)
 
     # Im Testmodus: State NICHT verändern
     if is_test:
