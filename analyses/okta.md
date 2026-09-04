@@ -1,88 +1,91 @@
 # OKTA — KI-Aktienbewertung
 
-**Okta, Inc.** · Technology · 05.08.2026 · Signal: Kein Signal
+**Okta, Inc.** · Technology · 04.09.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 141.93 |
-| Market Cap | $24.67 Mrd. |
-| Forward PE | 33.15 |
-| Revenue (TTM) | $3.00 Mrd. |
-| Gross Margin | 77.4% |
-| ROE | 3.7% |
-| RS-Score | 124.2 |
+| Kurs | 166.43 |
+| Market Cap | $29.10 Mrd. |
+| Forward PE | 38.01 |
+| Revenue (TTM) | $3.07 Mrd. |
+| Gross Margin | 78.1% |
+| ROE | 4.3% |
+| RS-Score | 241.9 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $180–$215 (20%) · Base $120–$145 (50%) · Bear $48–$68 (30%) · EV ~$123
-
 ## 1. INVESTMENT-CASE
 
-OKTAs eigentliche Story ist der Übergang von "Wachstums-Cybersecurity-SaaS" zu kritischer Identitätsinfrastruktur mit struktureller Zusatzoption: Identity-Management für nicht-menschliche/agentische KI-Systeme. Umsatzwachstum verlangsamt sich planmäßig auf 11,2% — klassisches Reifesignal —, während der Forward-EPS-Sprung auf $4,28 (vs. $1,38 Trailing) eine Margengeschichte erzählt, keine Wachstumsgeschichte mehr. Genau das übersieht der Markt teilweise: Das eigene Forward-KGV (33,2x) liegt praktisch auf Höhe des reinsten Zero-Trust-Peers Zscaler (32,9x) und weit unter CrowdStrike (122,1x) oder Palo Alto Networks (80,4x) — für ein Unternehmen mit stabiler Bilanz (D/E 5,96%) und hoher Bruttomarge (77,4%) eine eher konservative Einstufung. Der Analysten-Kurszielkonsens ($129,02) liegt jedoch UNTER dem aktuellen Kurs ($141,93) — ein seltenes Signal, dass die Sell-Side der jüngsten technischen Stärke (50T +59,3%) nicht traut. Die 5T/20T-Konsolidierung (-1,4%/-1,0%) nach der starken 50T-Rally bestätigt diese Skepsis kurzfristig.
+Der Markt behandelt OKTA weiterhin als "gebrochenes Growth-Story"-SaaS mit Multiple-Kompressions-Risiko durch Microsoft Entra ID — übersieht dabei, dass sich das Bookings-Momentum gerade beschleunigt: cRPO wuchs in Q2 FY27 um 14% (Q1: 12%), RPO um 17% (Q1: 16%), beides über dem Umsatzwachstum von 11%. Das ist ein Vorlaufindikator für eine Reaccelerierung, nicht für eine fortschreitende Verlangsamung. Der Q2-Beat (EPS $1,05 vs. $0,97 erwartet, +8,2% Surprise; Umsatz $805 Mio. vs. $795 Mio.) am 26.08.2026 samt angehobener Jahresprognose ($3,22–3,23 Mrd. vs. zuvor $3,19–3,21 Mrd.) bestätigt das. Strukturell bleibt OKTA aber ein Nischenspieler gegenüber Microsoft, das Identity zunehmend kostenlos in Entra/M365 bündelt — die eigentliche Frage ist, ob Best-of-Breed-IAM (Multi-Cloud, Non-Microsoft-Stacks) ein dauerhaft verteidigbares Segment bleibt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Identity-as-a-Service (SSO, MFA, Zero-Trust-Zugriffskontrolle) als Kern — hohe Wechselkosten nach Integration in Enterprise-IT-Stack
-- Bruttomarge 77,4% typisch für reifes SaaS, operativer Hebel bislang nur teilweise gehoben (Op-Margin 7,3%)
-- Anomalie: Profit Margin (8,2%) > Operating Margin (7,3%) — auf Datenbasis nicht abschließend auflösbar (vermutlich Zinserträge auf Cash-Bestand)
-- FCF-Marge ~32,6% ($977,8 Mio./$3,0 Mrd.) weit über GAAP-Op-Margin — deutliches SBC-Add-back-Signal
-- Praktisch schuldenfrei (D/E 5,96%) — sehr konservative Bilanzstruktur für ein SaaS-Unternehmen dieser Größe
-- Strukturelle Zusatzoption: Machine-/Agenten-Identität als neues TAM-Segment neben klassischem Human-IAM
-- ROE 3,7%/ROIC 3,6% niedrig — Kapitaleffizienz noch nicht auf Zielniveau
-- Wettbewerbsdruck durch Microsoft Entra ID (im M365-Bundle mitgeliefert) strukturelles Pricing-Risiko im Mid-Market
+- Workforce Identity Cloud (B2E) + Customer Identity Cloud/Auth0 (B2C/B2B) als zwei SaaS-Subscription-Segmente
+- Subscription-Umsatz $793 Mio. von $805 Mio. Gesamt (98,5%) — nahezu reines Abo-Modell
+- Operativer Hebel: Skalierung über Vertriebs-/CS-Kostenquote, Non-GAAP-Marge deutlich über GAAP
+- Net Revenue Retention 107% (TTM) — Expansion innerhalb der Bestandskunden trägt einen relevanten Teil des Wachstums
+- Strukturelle Abhängigkeit: Enterprise-Multi-Year-Contracts, Renewal-Zyklen konzentriert bei Großkunden
+- FedRAMP-/Regulated-Industries-Zertifizierung als Differenzierung ggü. reinen Consumer-IAM-Anbietern
+- Auth0-Integration (2021-Akquisition) treibt weiterhin Goodwill/Amortisation, operativ inzwischen verzahnt
+- Strukturelle Bedrohung: Microsoft bündelt Entra ID kostenlos/günstig in M365-Lizenzen — Preisdruck im Commodity-Segment der Belegschafts-Identität
 
 ## 3. BULL CASE
 
-Wachstum reaktiviert sich über den 11,2%-Trend durch Agenten-/Maschinen-Identität als neue Nachfragequelle, Margenexpansion setzt sich fort. Peers: Zscaler (ZS, Fwd-PE 32,9x, engster Vergleichswert), Palo Alto Networks (PANW, 80,4x), CrowdStrike (CRWD, 122,1x — deutlich höheres Wachstumsprofil, nur bedingt vergleichbar). Annahme (kein Konsens): EPS ~$5,20 (über Konsens $4,28) × 38x (moderate Prämie über ZS, deutlich unter CRWD/PANW mangels vergleichbarer Wachstumsrate) = $198. Bull-Kursziel: $180–$215. Wahrscheinlichkeit: 20%.
-Strukturelle Margennachhaltigkeit: (1) proprietäre Integrationstiefe in Tausenden Enterprise-Stacks als Switching-Cost-Burggraben; (2) Mixverschiebung zu höhermargigen Identity-Governance-/Privileged-Access-Modulen; (3) Wettbewerbsposition ggü. ZS ähnlich, ggü. Microsoft strukturell schwächer im Mid-Market; (4) Vertragslaufzeiten stützen Bindung; (5) Skaleneffekte im Vertrieb bei stabilisierter Sales-Effizienz plausibel.
+Peers: Zscaler (ZS, Fwd-PE 38,8x), SailPoint (SAIL, Fwd-PE 48,1x) — Bandbreite 38,8x–48,1x (CrowdStrike bei 134,7x als extremer Cybersecurity-Ausreißer, nicht peer-nah genug für IAM). cRPO-Reaccelerierung setzt sich fort, Enterprise-Multi-Cloud-Nachfrage stärkt Best-of-Breed-Positionierung gegenüber Microsoft. Annahme (kein Konsens): FY28-EPS ~$5,30 × 44x (nahe SAIL, Prämie für Wachstumsbeschleunigung) = $233. Bull-Kursziel: $210–$260. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wachstum stabilisiert sich um 10–13%, keine materielle Margenüberraschung. Eigenes Forward-KGV (33,2x) liegt in der Peer-Bandbreite (32,9x–122,1x, unterste Nähe zu ZS) — Ankerung nahe eigenem Multiple ist zulässig. Annahme: EPS ~$4,28 (Konsens) × 30x (leicht unter aktuellem Multiple, konsistent mit dem unter dem Kurs liegenden Analystenziel) = $128. Base-Kursziel: $120–$145. Wahrscheinlichkeit: 50%.
+Wahrscheinlichstes Szenario: Wachstum stabilisiert sich bei 10–12%, RPO-Dynamik bleibt intakt, aber keine sichtbare Reaccelerierung im Kernumsatz. FY27-EPS $4,38 (Konsens-nah) × 38x (nahe eigenem aktuellen Forward-KGV, im Rahmen von ZS) = $166. Base-Kursziel: $155–$190. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Microsoft bündelt Entra ID aggressiver kostenlos/günstig in M365-E5-Lizenzen, OKTA verliert Mid-Market-Neugeschäft, Wachstum fällt unter 5%. Kundenkonzentration: keine Einzelkundenkonzentration aus den Daten ableitbar, Enterprise-Kundenbasis strukturell breit gestreut — "auf Datenbasis nicht beurteilbar" im quantitativen Sinne. Geopolitik/Exportkontrollen: als reines SaaS-Geschäft ohne Hardware-Exportabhängigkeit strukturell gering, spezifisch nicht im Datensatz. Lieferkette/Foundry: nicht anwendbar (Software ohne physische Fertigungskette). Verwässerung: Aktienanzahl-/SBC-Trend nicht im Datensatz, aber die Lücke FCF-Marge (32,6%) vs. Op-Margin (7,3%) deutet auf laufende SBC-Verwässerung hin. Regulierung: Datenschutz-/Identitätsregulierung (z.B. DSGVO-Analoga) generisches Risiko, spezifisch auf Datenbasis nicht beurteilbar. Annahme: EPS ~$3,00 × 18x (deutlich unter ZS-Floor, Multiple-Kompression bei brechender Wachstumsthese) = $54. Bear-Kursziel: $48–$68. Wahrscheinlichkeit: 30%.
+Auslöser: Microsoft beschleunigt die Bundling-Strategie, Enterprise-Neukundenwachstum verlangsamt sich sichtbar, Multiple kompensiert Richtung Legacy-Software-Bewertung. Kundenkonzentration: aus den Daten nicht quantifizierbar, Enterprise-Konzentration strukturell vorhanden. Geopolitik/Exportkontrollen: kaum relevant für ein US-zentriertes SaaS-Modell, auf Datenbasis nicht beurteilbar. Lieferkette: nicht anwendbar (Software, kein Hardware-Lieferkettenrisiko). Verwässerung: Shares Outstanding nicht im Datensatz — SBC-Trend nicht quantifizierbar, aber historisch für SaaS-Unternehmen dieser Größe relevant. Regulierung: Datenschutz-/Identity-Compliance-Anforderungen könnten Kosten erhöhen, aber auch Eintrittsbarrieren stützen — ambivalent. FY27-EPS bricht auf ~$3,60 × 20x (unter beiden Peers, Growth-Scare-Abschlag) = $72. Bear-Kursziel: $65–$95. Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 20% + 50% + 30% = 100%**
+**Summe: 25% + 45% + 30% = 100%**
 
-**Erwartungswert:** EV = 0,20×$197,50 + 0,50×$132,50 + 0,30×$58 = $39,50 + $66,25 + $17,40 = **~$123 — implizites Downside vs. aktuellem Kurs ($141,93): −13,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,25 × $235 + 0,45 × $172,5 + 0,30 × $80 = $58,75 + $77,63 + $24,00 = **~$160,4 — implizites Upside/Downside vs. aktuellem Kurs ($166,43): −3,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 3,7%/ROIC 3,6% sind niedrig für ein Unternehmen mit 77,4% Bruttomarge — Kapitaleffizienz hinkt der operativen Qualität hinterher, plausibel erklärbar durch hohe kumulierte SBC-Historie im Eigenkapital. Gross Margin 77,4% ist ein echtes Qualitätssignal und im Zykluskontext stabil. Operating Margin 7,3% wirkt dünn, FCF-Marge 32,6% zeigt die reale Cash-Substanz deutlich besser. Bilanzqualität ist Best-in-Class (D/E 5,96%, praktisch schuldenfrei). Der Burggraben (Integrationstiefe, Zertifizierungsaufwand für Wechsel) ist real, aber im Mid-Market durch Microsoft-Bundling zunehmend angreifbar.
+ROE 4,3% ist für ein Software-Unternehmen mit 78,1% Bruttomarge niedrig — Folge von hoher kumulierter SBC/Goodwill-Historie (Auth0), nicht operativer Schwäche. FCF $1,04 Mrd. bei $3,07 Mrd. Umsatz (FCF-Marge ~34%) ist stark und zeigt, dass das Geschäftsmodell trotz GAAP-Nettomarge von 9,6% bereits substanziellen Cash generiert. RPO PFLICHT-Check: RPO $4,86 Mrd. (+17% YoY), cRPO $2,59 Mrd. (+14% YoY) — beide Kennzahlen wachsen deutlich schneller als der verbuchte Umsatz (+11%), ein klares Vorlaufsignal für Backlog-Beschleunigung. Das stützt die Base-Case-Wahrscheinlichkeit (Abschnitt 4) nach oben, ändert aber nicht die peer-verankerten Kursziele.
 
 ## 7. BEWERTUNG
 
-Forward-PE 33,2x liegt nahezu deckungsgleich mit dem engsten Peer Zscaler (32,9x) und damit am unteren Rand der Peer-Bandbreite (32,9x–122,1x) — kein Bewertungsabschlag oder -aufschlag ggü. dem direktesten Vergleichswert, deutlicher Abschlag ggü. CRWD/PANW, was angesichts OKTAs strukturell niedrigerem Wachstum (11,2% vs. deutlich höher bei CRWD) sachlich nachvollziehbar ist. Rückrechnung: Bei $141,93 und Konsens-EPS $4,28 (33,2x) müsste das EPS auf ~$5,05 wachsen (+18%), damit sich das Multiple ohne Kursverlust auf ein konservativeres Software-Niveau (~28x) normalisiert — angesichts des 11,2%-Trendwachstums ambitioniert, nicht unplausibel bei erfolgreicher Agenten-Identity-Monetarisierung. Trailing-PE 102,8x ist wegen des noch niedrigen Trailing-EPS wenig aussagekräftig für die Vorwärtsbewertung. Analyst-Konsensziel $129,02 (42 Analysten, buy) liegt UNTER dem aktuellen Kurs — seltenes Warnsignal, das die eigene Base-Case-Range (120–145) stützt, nicht als Ceiling, aber als deutlicher Sentiment-Hinweis zu verstehen.
+Forward-PE 38,01x liegt innerhalb der Peer-Bandbreite (38,8x–48,1x), nahe am unteren Rand bei ZS — keine Prämie trotz besserer RPO-Dynamik, aus den Daten nicht vollständig erklärbar (evtl. Diskontierung des Microsoft-Wettbewerbsrisikos). Was preist der Kurs ein? Bei $166,43 und Forward-PE 38x preist der Markt ein nachhaltiges EPS-Wachstum von grob 15–20% p.a. über mehrere Jahre ein — ambitioniert angesichts des aktuellen 11%-Umsatzwachstums, aber durch Operating-Leverage (Non-GAAP-Margen-Expansion) teilweise plausibel. Trailing PE 104x ist irreführend (GAAP-Ergebnis noch margenschwach) und wird hier bewusst nicht als Bewertungsbasis verwendet.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 124,24 (Rang 12 NASDAQ-100), getragen von einer starken 50T-Rally (+59,3%) und 6M (+61,9%), die sich zuletzt abflacht (5T -1,4%, 20T -1,0%). Short-Float-/Ownership-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Die Diskrepanz zwischen starkem technischem Aufwärtstrend und einem Analystenziel unter dem Kurs deutet auf eine Mischung aus Fast-Money-Nachlauf-Käufen und zurückhaltender fundamentaler Sell-Side hin. Enttäuschungsrisiko: Ein weiteres Quartal mit Wachstum unter 10% dürfte angesichts der bereits skeptischen Analystenlage überproportional abgestraft werden.
+Short Interest ~3,9–4,0% des Float (Ende August 2026), deutlich unter dem Peer-Gruppen-Durchschnitt von 8,7% — geringe strukturelle Short-Spannung. RS-Score 241,94, Rang 9 im NASDAQ-100. Windows: 5T +2,4%, 10T +25,5%, 20T +15,6%, 50T +42,7% — die 10T/20T-Zahlen reflektieren die Post-Earnings-Rally nach dem 26.08.-Beat. Hypothese, nicht datenbasiert: Die geringe Short-Quote und die begrenzte 5T-Dynamik deuten auf eine bereits weitgehend eingepreiste Reaktion hin — wenig frisches FOMO-Kapital.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Windows zeigen eine ausgeprägte mittelfristige Rally (50T +59,3%, 6M +61,9%) bei kurzfristiger Konsolidierung (5T -1,4%, 10T +5,5%, 20T -1,0%) — klassisches Pausieren nach starkem Trend, granulare SMA-/RSI-Daten fehlen im Datensatz. Kurs bei $141,93 rund 9,6% unter dem 52W-Hoch ($157,00) und 126% über dem 52W-Tief ($62,66). GWS-Ampel durchgehend inaktiv — kein technisch bestätigtes Signal. Warnsignal: Ein Bruch unter das 50-Tage-Ausgangsniveau würde die Rally technisch infrage stellen.
+GWS-Signale inaktiv (Weekly/Daily/4H). RS-Score 241,94 zeigt solides, aber kein Spitzenmomentum. Die Windows-Struktur (5T +2,4% nach starkem 10T/20T) deutet auf eine Konsolidierung nach dem Post-Earnings-Pop hin — fundamental gestützt durch den Beat, aber ohne aktives technisches Kaufsignal. Warnsignal: Ein Rückfall unter das 20T-Ausgangsniveau (vor dem Earnings-Gap) würde die Nachhaltigkeit der Reaktion infrage stellen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($220–$320):** Machine-/Agenten-Identität wird eigenständige Kategorie, OKTA verteidigt Enterprise-Position gegen Microsoft-Bundling; EPS $8–10 × 28–32x.
-**Base ($130–$220):** Moderates Wachstum (~10–15%), Multiple stabil nahe ZS-Niveau; EPS $5–7 × 26–30x.
-**Bear ($50–$110):** Microsoft Entra ID kannibalisiert Mid-Market strukturell, Wachstum stagniert unter 5%; EPS $3–4 × 15–20x.
-Entscheidende Variable: Verteidigung der Enterprise-/Mid-Market-Position gegen kostenloses Microsoft-Bundling.
+**Bull ($260–$340):** Best-of-Breed-IAM behauptet sich strukturell gegenüber Microsoft-Bundling, cRPO-Beschleunigung setzt sich fort, Margin-Expansion Richtung 25%+ Non-GAAP-Op-Margin. Normalisiertes EPS $6,50–8,00 × 38–44x.
+
+**Base ($170–$230):** Stabiles Mid-Teens-Wachstum, Marktanteilserosion im Commodity-Segment durch Bündelungsdruck kompensiert durch Enterprise-/Regulated-Industries-Fokus. Normalisiertes EPS $5,00–6,20 × 34–38x.
+
+**Bear ($70–$110):** Microsoft-Bundling verdrängt OKTA aus dem Mid-Market, Wachstum fällt unter 8%, Multiple kompensiert auf Legacy-Software-Niveau. Normalisiertes EPS $3,20–4,00 × 20–24x.
+
+Entscheidende Variable: Ob OKTA seinen Best-of-Breed-Graben im Enterprise-/Multi-Cloud-Segment gegen Microsofts Bundling-Druck verteidigen kann.
 
 ## 11. PROFI-FAZIT
 
-OKTA ist kein reiner Momentum-Trade mehr, sondern ein margenorientierter SaaS-Compounder-Kandidat mit ungelöstem Wettbewerbsrisiko durch Microsoft. Die eigenen Szenarien ergeben keinen asymmetrischen Edge (EV −13,2%) — High-Conviction-Framing ist trotz starker 50T-/6M-Rally nicht gerechtfertigt, zumal der Analystenkonsens selbst unter dem Kurs liegt. Geeignet für Investoren mit mittlerem Horizont, die eine Bewertung nahe dem direktesten Peer (ZS) und eine sehr solide Bilanz gegen strukturellen Microsoft-Wettbewerbsdruck abwägen; weniger geeignet für reine Momentum-Trader nach der jüngsten Konsolidierung. Positionsgröße moderat halten angesichts fehlendem EV-Edge. Zscaler (ZS, 32,9x) ist der reinste vergleichbare Zero-Trust-Peer zu ähnlicher Bewertung; CrowdStrike (CRWD, 122,1x) ist deutlich teurer, aber wachstumsstärker und kein direkter Bewertungsvergleich.
+OKTA ist kein High-Conviction-Momentum-Play (EV −3,6%, GWS inaktiv), sondern ein fundamental solider, aber fair bis leicht ambitioniert bewerteter SaaS-Compounder mit einem echten, aber nicht dominanten Wachstumskatalysator (RPO-Reaccelerierung). Für Buy-and-Hold-Investoren mit Fokus auf Cybersecurity-/Identity-Exposure vertretbar, aber ohne aktuellen asymmetrischen Einstiegspunkt. Kein Trading-Setup auf Basis der RS-Platform-Signale (GWS inaktiv). Positionsgröße: max. 3–4% eines diversifizierten Portfolios, kein Neukauf auf aktuellem Niveau.
+
+Peers: **SailPoint (SAIL)** bietet über die höhere Bewertung (48,1x) eine reinere IAM-Wachstumswette, **Zscaler (ZS)** ist bei ähnlichem Multiple (38,8x) breiter im Zero-Trust-/SASE-Segment diversifiziert.
 
 - Qualität: 3/5
 - Wachstum: 3/5
-- Bewertung: 3/5
-- Katalysator: 2/5
+- Bewertung: 2/5
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Kein frischer fundamentaler Auslöser (nächste Zahlen erst 26.08.), EV von −13,2% und ein Analystenkonsens unter dem aktuellen Kurs sprechen gegen die volle Positionsgröße trotz intaktem RS-Rang.
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — der EV-Edge ist trotz starker RPO-Dynamik negativ (−3,6%), das Forward-KGV bietet keine Sicherheitsmarge gegenüber dem Microsoft-Bundling-Risiko.
+
 
 ---
 
@@ -90,9 +93,9 @@ OKTA ist kein reiner Momentum-Trade mehr, sondern ein margenorientierter SaaS-Co
 |---|---|
 | Qualität | 3/5 |
 | Wachstum | 3/5 |
-| Bewertung | 3/5 |
-| Katalysator | 2/5 |
-| EV-Upside | -8.9% |
+| Bewertung | 2/5 |
+| Katalysator | 3/5 |
+| EV-Upside | -2.4% |
 
 **Verdict: WATCH (49/100)**
 

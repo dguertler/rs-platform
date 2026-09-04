@@ -475,19 +475,6 @@
       "ev_upside_pct": 20.7
     },
     {
-      "ticker": "HPE",
-      "verdict": "BUY",
-      "score": 72,
-      "asymmetric_edge": true,
-      "ev_upside_pct": 29.1,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "Trotz rechnerisch asymmetrischem EV (+25,5%) rechtfertigt die Kombination aus schwacher ROIC (3,02%) und akquisitionsbedingter Verschuldung (D/E 84%) keine volle Positionsgr\u00f6\u00dfe, solange die Juniper-Synergien nicht sichtbar in verbesserter Kapitalrendite m\u00fcnden."
-      },
-      "created_at": "2026-08-05T10:47:39.150798"
-    },
-    {
       "ticker": "NTRA",
       "verdict": "WATCH",
       "score": 50,
@@ -968,19 +955,6 @@
       "ev_upside_pct": -9.8
     },
     {
-      "ticker": "OKTA",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -8.9,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Kein frischer fundamentaler Ausl\u00f6ser (n\u00e4chste Zahlen erst 26.08.), EV von \u221213,2% und ein Analystenkonsens unter dem aktuellen Kurs sprechen gegen die volle Positionsgr\u00f6\u00dfe trotz intaktem RS-Rang."
-      },
-      "created_at": "2026-08-05T10:42:10.848996"
-    },
-    {
       "ticker": "CI",
       "verdict": "HOLD",
       "score": 59,
@@ -1044,19 +1018,6 @@
         "reason": "Technisches Setup (3/3 GWS-Punkte) intakt, aber EV-Edge von nur +2,5% rechtfertigt keine erh\u00f6hte Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-16T10:30:27.320249"
-    },
-    {
-      "ticker": "DBK.DE",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 2.3,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Solides technisches Setup (3/3 GWS-Punkte) und Bewertung unter Buchwert, aber begrenzter Peer-Vergleich mindert die Konviktion auf normale Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-07-16T10:33:03.092094"
     },
     {
       "ticker": "AMG",
@@ -1629,19 +1590,6 @@
         "reason": "Nach +120 % in 6 Monaten und negativem EV (\u22129,1 %) sechs Tage vor dem n\u00e4chsten Quartalsbericht tr\u00e4gt die Bewertung keine volle Positionsgr\u00f6\u00dfe trotz intaktem Duopol-Gesch\u00e4ftsmodell."
       },
       "created_at": "2026-07-29T08:54:36.747063"
-    },
-    {
-      "ticker": "IQV",
-      "verdict": "HOLD",
-      "score": 65,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -4.3,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Nach dem +13,9%-Tagessprung liegt der EV-Edge bei \u22127,0%, der Markt hat die Guidance-Anhebung bereits eingepreist \u2014 halbe Positionsgr\u00f6\u00dfe trotz des st\u00e4rksten fundamentalen Katalysators im aktuellen Batch."
-      },
-      "created_at": "2026-07-29T08:54:36.767118"
     },
     {
       "ticker": "IP",
@@ -2255,19 +2203,6 @@
       "created_at": "2026-08-05T10:43:57.722801"
     },
     {
-      "ticker": "DELL",
-      "verdict": "BUY",
-      "score": 70,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 0.3,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz starkem fundamentalem Katalysator (AI-Server-Wachstum) ergibt der EV von \u22121,8% keinen Edge nach einer 289%-6-Monats-Rally; die volle Positionsgr\u00f6\u00dfe ist angesichts der bereits eingepreisten Erwartungen nicht gerechtfertigt."
-      },
-      "created_at": "2026-08-05T10:46:41.409730"
-    },
-    {
       "ticker": "IT",
       "verdict": "HOLD",
       "score": 68,
@@ -2697,19 +2632,6 @@
       "created_at": "2026-08-13T08:16:20.018344"
     },
     {
-      "ticker": "HUM",
-      "verdict": "WATCH",
-      "score": 40,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -12.6,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Das eigene Forward-Multiple (23,4x) liegt deutlich \u00fcber der gesamten Peer-Bandbreite (8,4x\u201313,3x), die eigenen Szenarien ergeben ein EV von \u221213,1% gg\u00fc. dem aktuellen Kurs, und die erneute Guidance-Senkung relativiert den Katalysator-Wert des Q2-Beats."
-      },
-      "created_at": "2026-08-13T08:16:20.029323"
-    },
-    {
       "ticker": "ENR.DE",
       "verdict": "BUY",
       "score": 84,
@@ -2838,6 +2760,84 @@
         "reason": "Der EV-Edge ist trotz best\u00e4tigtem Turnaround und EPS-Beat deutlich negativ (\u221226,0%), da das Forward-KGV (13,2x) klar \u00fcber der Peer-Bandbreite (8,5x\u201311,5x) liegt und die heutige Guidance-Verfehlung beim Adjusted EPS die Margen-Erholung erstmals infrage stellt."
       },
       "created_at": "2026-09-03T19:02:41.741250"
+    },
+    {
+      "ticker": "OKTA",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "der EV-Edge ist trotz starker RPO-Dynamik negativ (\u22123,6%), das Forward-KGV bietet keine Sicherheitsmarge gegen\u00fcber dem Microsoft-Bundling-Risiko."
+      },
+      "created_at": "2026-09-04T11:51:38.206323"
+    },
+    {
+      "ticker": "DBK.DE",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "der EV-Edge ist mit +0,3% praktisch neutral, die solide Kapitalstory rechtfertigt keine volle Positionsgr\u00f6\u00dfe ohne klaren kurzfristigen Katalysator."
+      },
+      "created_at": "2026-09-04T11:51:38.241270"
+    },
+    {
+      "ticker": "DELL",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -18.8,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "das aktuelle Forward-KGV (~30x) liegt weit au\u00dferhalb der Peer-Bandbreite (6,9x\u201318,2x) bei strukturell d\u00fcnnen Integrator-Margen, der EV-Edge ist mit \u221236,9% stark negativ trotz starkem technischen Signal."
+      },
+      "created_at": "2026-09-04T11:51:38.261502"
+    },
+    {
+      "ticker": "HUM",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -30.1,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "das Forward-KGV (23,8x) liegt rund 35% \u00fcber dem teuersten der vier genannten Peers, der EV-Edge ist mit \u221234,3% stark negativ trotz starker RS-Dynamik."
+      },
+      "created_at": "2026-09-04T11:51:38.282377"
+    },
+    {
+      "ticker": "HPE",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 5.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "trotz Beat-and-Raise verkauft der Markt die Aktie wegen dokumentierter Shipment-Conversion-Zweifel (Speicher-/NAND-Engp\u00e4sse), der EV-Edge bleibt mit +4,0% unter der Asymmetrie-Schwelle."
+      },
+      "created_at": "2026-09-04T11:51:38.301850"
+    },
+    {
+      "ticker": "IQV",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "die hohe Verschuldung (D/E 257,98) begrenzt die Flexibilit\u00e4t, der EV-Edge ist mit \u22123,4% leicht negativ und bietet keine Kompensation f\u00fcr das Bilanzrisiko."
+      },
+      "created_at": "2026-09-04T11:51:38.321000"
     }
   ]
 }

@@ -1,81 +1,90 @@
 # DBK.DE — KI-Aktienbewertung
 
-**DEUTSCHE BANK AG              N** · Financial Services · 16.07.2026 · Signal: DAX-40
+**DEUTSCHE BANK AG              N** · Financial Services · 04.09.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 31.45 |
-| Market Cap | $60.16 Mrd. |
-| Forward PE | 8.21 |
-| Revenue (TTM) | $29.82 Mrd. |
+| Kurs | 34.51 |
+| Market Cap | $64.84 Mrd. |
+| Forward PE | 9.02 |
+| Revenue (TTM) | $30.46 Mrd. |
 | Gross Margin | 0.0% |
-| ROE | 8.7% |
-| RS-Score | 53.7 |
+| ROE | 8.9% |
+| RS-Score | 61.1 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull €39–€47 (25%) · Base €31–€34 (50%) · Bear €19–€23 (25%) · EV ~€32,3
-
 ## 1. INVESTMENT-CASE
-Deutsche Bank handelt weiterhin unter Buchwert (P/B 0,76) — der Markt traut der mehrjährigen Restrukturierung ("Global Hausbank"-Strategie) trotz sichtbarer Fortschritte (ROE 8,65%, Nettomarge 22,65%) noch nicht vollständig. Die eigentliche Story ist kein Wachstums-, sondern ein Rerating-Case: Wenn die Bank ihre Kapitalkosten (~10%+ Eigenkapitalkosten für europäische Banken) nachhaltig verdient, rechtfertigt das eine Bewertung nahe oder über Buchwert — aktuell wird das strukturell verneint. RS-Rang #10 im DAX bei Score 53,7 zeigt, dass der Markt beginnt, diese Neubewertung einzupreisen, bevor sie in der Bewertung vollständig ankommt.
+
+Deutsche Bank befindet sich in einer strukturellen Ergebniswende, die der Markt erst teilweise einpreist: Nach über einem Jahrzehnt ROTE-Werten unter den Kapitalkosten liegt die ROTE nun nachhaltig über 10%, das CET1-Verhältnis von 14,5% erlaubt aktive Kapitalrückführung — zuletzt ein neues 500-Mio.-€-Buyback nach Abschluss des vorherigen 1-Mrd.-€-Programms. Q2 2026 zeigte Nettoerträge von 8,5 Mrd. € (+9% YoY) und Nettogewinn von 1.850 Mio. € (Vorjahr 1.687 Mio. €). Das eigentliche Investment-Case ist nicht ein zyklischer Zinsgewinn, sondern die Frage, ob die Cost/Income-Ratio von 63% strukturell Richtung Best-in-Class-Niveau (50–55% bei Top-europäischen Banken) sinkt — das ist der entscheidende Werttreiber für die nächsten Jahre, nicht die Zinskurve allein.
 
 ## 2. GESCHÄFTSMODELL
-- Vier Kernsegmente: Corporate Bank, Investment Bank, Private Bank, Asset Management (DWS) — diversifizierter als reine Regionalbanken
-- Investment Bank (v.a. Fixed Income Trading) liefert den größten Ergebnisbeitrag, aber auch die höchste Zyklizität
-- Operativer Hebel: jeder Basispunkt Kostenquoten-Verbesserung wirkt überproportional auf das Eigenkapitalrendite-Ziel
-- Kapitalrückführung (Dividende ~3,2% Rendite plus Rückkäufe) als Vertrauenssignal an den Markt
-- Strukturelle Abhängigkeit von europäischen Zinsniveaus für das Zinsergebnis im Corporate/Private Bank
-- Historisches Rechtsrisiko-Erbe (Altfälle) als wiederkehrender Belastungsfaktor für die Ergebnisqualität
+
+- Universalbank-Struktur: Corporate Bank, Investment Bank, Private Bank, Asset Management (DWS-Beteiligung)
+- Nettozinsertrag sensitiv zum EZB-Zinspfad — "higher for longer" stützt Margen, treibt aber auch Refinanzierungskosten
+- CET1 14,5% — solider Kapitalpuffer, ermöglicht Dividenden + Buybacks parallel
+- Cost/Income-Ratio 63% — weiterhin über Best-in-Class-Niveau, Postbank-Integrationssynergien als laufender Effizienzhebel
+- ROTE >10% erstmals seit der Finanzkrise nachhaltig über Kapitalkosten — struktureller Wendepunkt, nicht nur Zyklus-Hoch
+- DWS als gebührenbasierter, kapitalleichter Diversifikator gegenüber dem zinssensitiven Kerngeschäft
+- Regulatorisches Umfeld: Basel-IV/CRR3-Phase-in beeinflusst RWA-Dichte und Kapitalbedarf
+- Rechtsrisiko-Historie (u. a. Postbank-Übernahme-Rechtsstreit, frühere Sanktionsfälle) als strukturelles Tail-Risiko
 
 ## 3. BULL CASE
-Peer-Hinweis: Die im Datensatz verfügbaren Peers (US-Regionalbanken wie HBAN 9,4x, PFBC 9,4x, SBSI 10,0x — SBNY mit 0,06x als Datenartefakt ausgeschlossen) sind nur bedingt vergleichbar, da Deutsche Bank eine global tätige Universalbank mit Investment-Banking-Sparte ist, keine US-Regionalbank — Peer-Multiples nur eingeschränkt verifizierbar. Bull-Multiple 10x (oberes Ende der verfügbaren Vergleichsgruppe). Bull-EPS FY27: €4,30 (Annahme) — IB-Erträge ziehen an, Kostenziel wird übertroffen. Kursziel: 4,30 × 10x ≈ €43,0 → Bandbreite €39–€47. Eintrittswahrscheinlichkeit: 25%.
+
+Peers: Commerzbank (CBK.DE, Fwd-PE 10,5x), BNP Paribas (Fwd-PE ~9,1x), UniCredit (Fwd-PE ~8x) — Bandbreite ca. 8x–11,3x (Branchen-Median lt. Marktdaten ~11,3x). Cost/Income sinkt schneller als erwartet Richtung 58%, NII bleibt stabil trotz erster EZB-Zinssenkungen, Buyback-Tempo beschleunigt sich. Annahme (kein Konsens): FY27-EPS ~$4,60 × 10,5x (nahe Commerzbank, oberes Ende der Bandbreite) = $48,3. Bull-Kursziel: $44–$53. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
-Base-Multiple 8,5x (nahe eigenem Forward-KGV 8,2x). Base-EPS: Konsens €3,83. Kursziel: 3,83 × 8,5x ≈ €32,6 → Bandbreite €31–€34. Wahrscheinlichstes Szenario: Restrukturierung schreitet planmäßig voran, moderate Rerating-Prämie, kein Katalysator für einen großen Sprung. Eintrittswahrscheinlichkeit: 50%.
+
+Wahrscheinlichstes Szenario: Moderate NII-Resilienz, graduelle Cost/Income-Verbesserung, Buyback-Fortsetzung ohne Beschleunigung. FY27-EPS ~$3,90 (nahe Konsens-Forward-EPS $3,83) × 9,2x (nahe eigenem aktuellen Forward-KGV 9,02x, im Rahmen der Peer-Bandbreite) = $35,9. Base-Kursziel: $33–$39. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
-Bear-Multiple 6,5x (unter der Vergleichsgruppe — Kompression bei brechender Restrukturierungs-These). Bear-EPS FY27: €3,20 (Annahme) — Handelserträge brechen zyklisch ein, neue Rechtsrisiko-Rückstellung belastet. Kursziel: 3,20 × 6,5x ≈ €20,8 → Bandbreite €19–€23. Eintrittswahrscheinlichkeit: 25%.
 
-Risikodimensionen:
-- Kundenkonzentration: auf Datenbasis nicht beurteilbar
-- Geopolitik: europäische Zinspolitik und globale Kapitalmarktvolatilität wirken direkt auf IB-Erträge
-- Lieferketten/Single-Source: nicht anwendbar für Bankgeschäft
-- Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz
-- Regulierung/Rechtsrisiken: historisch das größte Einzelrisiko der Aktie — wiederkehrende Altfälle und regulatorisches Kapitalregime (Basel-Endgame) können Kapitalrückführung einschränken
+Auslöser: Schnellere EZB-Zinssenkungen drücken NII, ein neuer Rechtsstreit oder Trading-Book-Verlust belastet das Ergebnis, Cost/Income-Verbesserung stagniert. Kundenkonzentration: für eine Universalbank diversifiziert, aus den Daten nicht weiter quantifizierbar. Geopolitik: Exposure zu europäischer Regulierung und globalen Kapitalmärkten, kein spezifisches Exportkontroll-Risiko — auf Datenbasis nicht weiter beurteilbar. Lieferkette: nicht anwendbar (Finanzdienstleister). Verwässerung: Shares Outstanding nicht im Datensatz, D/E N/A — aus den Daten nicht abschließend beurteilbar; Buyback-Programme wirken tendenziell antidilutiv. Regulierung: Basel-IV/CRR3-Kapitalanforderungen könnten RWA-Dichte und Kapitalbedarf erhöhen — reales, aber gut antizipierbares Risiko. FY27-EPS bricht auf ~$2,70 × 7,5x (unter Commerzbank und UniCredit, Stress-Abschlag) = $20,3. Bear-Kursziel: $18–$24. Eintrittswahrscheinlichkeit: 30%.
 
-**Bull 25% + Base 50% + Bear 25% = 100%**
-**Erwartungswert: €32,3 — implizites Upside/Downside vs. aktuellem Kurs (€31,45): +2,6%.**
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.
+**Summe: 25% + 45% + 30% = 100%**
+
+**Erwartungswert:** EV = 0,25 × $48,5 + 0,45 × $36,0 + 0,30 × $21,0 = $12,13 + $16,20 + $6,30 = **~$34,6 — implizites Upside/Downside vs. aktuellem Kurs ($34,51): +0,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
-ROE 8,65% — verbessert gegenüber der Restrukturierungsphase, aber noch unter den Eigenkapitalkosten europäischer Banken (~10%+). Operative Marge 37,3%, Nettomarge 22,65% zeigen eine bereits deutlich profitablere Bank als noch vor einigen Jahren. Der Burggraben liegt in der globalen Kundenbasis im Corporate/Investment Banking — schwer replizierbar, aber auch kapitalintensiv zu verteidigen.
+
+ROE 8,9% und ROTE >10% (Q2-Bericht) zeigen eine Bank, die erstmals seit langem strukturell über den Kapitalkosten verdient — kein reines Zyklushoch, sondern Ergebnis von Postbank-Synergien und Kapitaldisziplin. Kritisch: die in den Daten ausgewiesene Dividendenrendite von "289,0%" ist offensichtlich ein Datenfeld-Artefakt (vermutlich Verwechslung von absoluter Dividende mit Rendite oder Skalierungsfehler) — aus den Daten nicht abschließend auflösbar, wird für die Bewertung nicht verwendet. Gross Margin "0,0%" ist für ein Bankgeschäftsmodell methodisch nicht aussagekräftig (keine klassische COGS-Struktur) — stattdessen Operating Margin (33,4%) und Net Margin (22,7%) als Qualitätsindikatoren herangezogen. FCF nicht verfügbar (bankentypisch, da klassische FCF-Definition auf Bankbilanzen kaum anwendbar ist). RPO nicht anwendbar (kein Subscription-Geschäftsmodell).
 
 ## 7. BEWERTUNG
-Bei Bankaktien ist P/B relativ zum ROE die primäre Bewertungsbasis, nicht das reine KGV. P/B von 0,76 bei ROE 8,65% impliziert, dass der Markt der Bank keine nachhaltige Rendite über Eigenkapitalkosten zutraut. Rückrechnung "Was preist der Kurs ein?": Bei einem impliziten Kapitalkostensatz von ~10% und aktuellem ROE 8,65% wäre ein "fairer" P/B von ~0,87 (ROE/Kapitalkosten) zu erwarten — der aktuelle P/B von 0,76 liegt leicht darunter, was auf eine anhaltende, aber leicht abklingende Skepsis gegenüber der Nachhaltigkeit der Ergebnisverbesserung hindeutet. Plausibel, nicht überzogen. Das eigene Forward-KGV (8,2x) liegt im unteren Bereich der (eingeschränkt vergleichbaren) Peer-Bandbreite — der Abschlag ist teilweise durch das Universalbank-/IB-Rechtsrisikoprofil erklärbar.
+
+Forward-PE 9,02x liegt innerhalb der Peer-Bandbreite (8x–11,3x), nahe der Mitte zwischen UniCredit und Commerzbank — keine auffällige Prämie oder Abschlag. Was preist der Kurs ein? Bei $34,51 und P/B 0,82 (unter Buchwert) preist der Markt weiterhin eine strukturelle Ertragsschwäche relativ zu US-Banken ein, trotz ROTE >10% — teilweise durch das europäische Bankensektor-Sentiment (regulatorische Kapitalanforderungen, niedrigeres strukturelles ROE-Niveau als US-Peers) erklärbar, teilweise ambitioniert skeptisch angesichts der nachweisbaren Ergebniswende. Ein P/B unter 1,0 bei ROTE über Kapitalkosten ist historisch eher ungewöhnlich und deutet auf eine noch nicht vollständig vom Markt anerkannte Bewertungslücke hin — allerdings ohne klaren kurzfristigen Katalysator, der das schließt. Analyst-Konsensziel $33,43 liegt unter dem aktuellen Kurs — ein seltener Fall, in dem der Konsens dem Kurs hinterherhinkt oder die jüngste Rally (12M +9,3%) noch nicht eingepreist hat; als Sentiment-Indikator, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
-Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy", Kursziel €32,23 nahe aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling zu verstehen. Hypothese, nicht datenbasiert: Europäische Bankaktien profitieren aktuell von einer Sektorrotation weg von überteuerten US-Tech-Multiples hin zu Value.
+
+RS-Score 61,14, Rang 8 im DAX-40 — solide, aber kein Spitzenmomentum. Windows: 5T +3,4%, 10T +8,5%, 20T +7,8%, 50T +9,0%, 6M +23,2%, 12M +9,3% — eine stetige, keine explosive Aufwärtsbewegung. Short Float: N/A. Hypothese, nicht datenbasiert: Die Tatsache, dass das Analystenkursziel ($33,43) unter dem aktuellen Kurs liegt, deutet auf eine Positionierung hin, in der der Markt der fundamentalen Wende bereits leicht voraus ist — begrenztes zusätzliches FOMO-Potenzial ohne neue Katalysatoren.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-RS-Fenster gemischt: 50T +18,2%, 12M +24,9%, aber 6M -2,15% — mittelfristiges Momentum stark, kurzfristig konsolidierend. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte) — technisch intaktes Signal trotz der 6-Monats-Delle. Ein Warnsignal wäre ein erneuter Kursrückgang unter die 50-Tage-Struktur bei gleichzeitig schwachen IB-Handelserträgen im nächsten Quartalsbericht.
+
+GWS-Signale inaktiv (Weekly/Daily/4H). RS-Score 61,14 zeigt moderates, stetiges Momentum ohne Übertreibungscharakter — die Windows-Struktur (5T bis 50T alle im mittleren einstelligen bis niedrigen zweistelligen Prozentbereich) ist fundamental gestützt durch die Ergebniswende, nicht rein reaktiv. Warnsignal: Ein Rückfall unter das 50T-Ausgangsniveau würde die Wende-These infrage stellen, insbesondere falls begleitet von einer EZB-Zinssenkungs-Beschleunigung.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
-- Bull: €50–€60 — nachhaltiges ROE >10%, Rerating auf/über Buchwert, Kapitalrückführung beschleunigt sich
-- Base: €35–€45 — graduelle Verbesserung, P/B nähert sich 1,0x an
-- Bear: €18–€25 — neue Rechtsrisiken oder ein Kapitalmarkt-Abschwung zwingen zur Kapitalerhöhung oder Dividendenkürzung
-Entscheidende Variable: Nachhaltigkeit des ROE über die Eigenkapitalkosten hinaus und Ausbleiben neuer Rechtsrisiko-Schocks.
+
+**Bull ($50–$65):** Cost/Income sinkt nachhaltig unter 55%, ROTE etabliert sich bei 12–14%, Kapitalrückführung beschleunigt sich strukturell. Normalisiertes EPS $5,00–6,20 × 10–11x.
+
+**Base ($34–$45):** Graduelle Effizienzverbesserung, ROTE stabilisiert sich bei 10–11%, Buyback-Fortsetzung ohne Beschleunigung. Normalisiertes EPS $3,80–4,80 × 9–9,5x.
+
+**Bear ($16–$26):** EZB-Zinssenkungszyklus belastet NII strukturell, Cost/Income-Verbesserung stagniert, neue Rechtsrisiken materialisieren sich. Normalisiertes EPS $2,20–3,00 × 7–8x.
+
+Entscheidende Variable: Ob die Cost/Income-Ratio strukturell unter 58–60% fällt oder bei ~63% stagniert.
 
 ## 11. PROFI-FAZIT
-Deutsche Bank ist ein zyklischer Value-/Rerating-Trade auf europäische Bankenbewertungen, kein Buy-and-Hold-Compounder im klassischen Sinn. Geeignet für Value-orientierte Investoren mit Toleranz für regulatorische und Rechtsrisiken, weniger für defensive Positionierung. Peers: Innerhalb des Datensatzes fehlen echte globale Universalbank-Vergleiche — Peer-Multiples nicht im Datensatz in ausreichender Qualität, relative Bewertung daher indikativ, nicht zahlenbasiert einzuordnen.
 
-Qualität: 3/5
-Wachstum: 3/5
-Bewertung: 4/5
-Katalysator: 3/5
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen asymmetrischen Edge (EV +0,3%). Deutsche Bank ist kein Momentum-Trade, sondern ein langsamer, aber realer Turnaround-Compounder mit der saubersten Kapitalstory seit der Finanzkrise (CET1 14,5%, ROTE >10%, aktive Buybacks) — die Bewertung (P/B 0,82, Forward-KGV im Peer-Rahmen) bietet aber aktuell keine zusätzliche Sicherheitsmarge. Für konservative, dividenden-/kapitalrückführungsorientierte Investoren mit europäischem Banken-Exposure geeignet, kein High-Conviction-Neukauf auf aktuellem Niveau. Positionsgröße: max. 3–5% eines diversifizierten Portfolios.
 
-**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — Solides technisches Setup (3/3 GWS-Punkte) und Bewertung unter Buchwert, aber begrenzter Peer-Vergleich mindert die Konviktion auf normale Positionsgröße.
+Peers: **Commerzbank (CBK.DE)** ist die reinere deutsche Bankenwette bei leicht höherem Multiple (10,5x); **UniCredit** bietet über das niedrigere Multiple (~8x) eine günstigere, aber italien-konzentriertere Alternative.
+
+- Qualität: 3/5
+- Wachstum: 2/5
+- Bewertung: 3/5
+- Katalysator: 2/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — der EV-Edge ist mit +0,3% praktisch neutral, die solide Kapitalstory rechtfertigt keine volle Positionsgröße ohne klaren kurzfristigen Katalysator.
 
 
 ---
@@ -83,11 +92,11 @@ Katalysator: 3/5
 | Rating | Score |
 |---|---|
 | Qualität | 3/5 |
-| Wachstum | 3/5 |
-| Bewertung | 4/5 |
-| Katalysator | 3/5 |
-| EV-Upside | +2.3% |
+| Wachstum | 2/5 |
+| Bewertung | 3/5 |
+| Katalysator | 2/5 |
+| EV-Upside | +1.9% |
 
-**Verdict: HOLD (62/100)**
+**Verdict: WATCH (50/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
