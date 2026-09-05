@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BBCP — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">05.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BBCP</h1>
+      <h2>Concrete Pumping Holdings, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Industrials</span></div>
+        <div class="mi">Industrie: <span>Engineering & Construction</span></div>
+        <div class="mi">MCap: <span>$1B</span></div>
+        <div class="mi">Signal: <span>Nicht RS-getrackt</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">67</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 05.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">0.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$10.50</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">80.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">38.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">495.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+10.3%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">18–24</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">8,50–11,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">3,00–4,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamentaldaten für BBCP stammen aus WebSearch-Recherche (yfinance/Yahoo Finance netzwerkseitig blockiert, 403 auf Proxy-Ebene), kein Live-yfinance-Snapshot — Konfidenz der Multiples reduziert. BBCP ist zudem in keinem RS-JSON (NDX/DAX/S&P 500/Smallcap) getrackt — die "RS-Score"-Zeile oben (0,0) ist ein Platzhalter, kein Momentum-Signal.</p>
+<p>Concrete Pumping Holdings zeigt ein klares Verlust-zu-Gewinn-Muster: Q1 FY26 Nettoverlust (EPS −0,06 $), Q2 FY26 Rückkehr in die Gewinnzone (+0,04 $), Q3 FY26 EPS-Beat +38,1% (0,12 $ vs. 0,09 $) bei 13% Umsatzwachstum und 26% Adj.-EBITDA-Marge. Management hebt die FY26-Guidance auf allen drei Ebenen an (Umsatz, EBITDA, FCF) und initiiert erstmals eine Quartalsdividende — ein Vertrauenssignal über den reinen Beat hinaus. Der Markt reagierte bereits stark: +16% am 04.09., am 05.09. nochmals deutlich höher (Tageshoch 10,97 $). Die eigentliche Frage: ob nach zwei starken Handelstagen noch Bewertungsspielraum bleibt — die hohe operative Hebelwirkung (1,65% Nettomarge bei 10,72% operativer Marge) bedeutet, kleine Umsatzschwankungen schlagen überproportional aufs EPS durch, in beide Richtungen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Größte Beton-Pump-Flotte der USA (Brundage-Bone) plus UK-Segment (Camfaud) — kapitalintensives Verleihgeschäft, kein Bauunternehmen selbst</li>
+<li>Eco-Pan-Segment: Betonrest-Entsorgung — margenstärkeres, wiederkehrendes Zusatzgeschäft neben dem zyklischen Kerngeschäft</li>
+<li>Umsatz strukturell an nicht-Wohn-/Gewerbebau und Infrastrukturausgaben gekoppelt — zinssensitiv (Baustart-Zyklus)</li>
+<li>Operativer Hebel ist hoch: Flotte ist ein Fixkostenblock (Abschreibung), daher schwanken Margen stark mit der Auslastung</li>
+<li>FY25 war ein Abschwungjahr (Umsatz −7,75%, Gewinn −67,7%) durch hohe Zinsen/schwache Gewerbebau-Pipeline — genau dieses Muster kehrt sich seit Q2 FY26 um</li>
+<li>Neue Quartalsdividende (0,13 $, ~4,9% Rendite auf aktuellem Kurs) verändert das Kapitalallokations-Signal — Management sieht den FCF als nachhaltig genug für eine Ausschüttung</li>
+<li>Konsolidierungslogik: fragmentierte Branche mit vielen kleinen Regionalanbietern — strukturelle M&A-Roll-up-Option, bisher aber nicht die Kern-These</li>
+<li>Bilanz: D/E ca. 153% (Recherchewert, nicht verifiziert) — für ein Verleihgeschäft mit Flottenfinanzierung nicht ungewöhnlich, aber ein Risikofaktor bei erneutem Abschwung</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Sterling Infrastructure (STRL, Forward-KGV ~49,6x), IES Holdings (IESC, Forward-KGV ~23,4x) — Bandbreite 23,4x–49,6x. Bull-Szenario: Non-Residential-/Data-Center-Bauboom hält an, Margenerholung setzt sich auf Vor-2025-Niveau fort, evtl. erste M&A-Zukäufe in der fragmentierten Branche. Annahme (kein Konsens): FY27-EPS ~0,42 $ × 50x (nahe STRL als Premium-Multiple bei bestätigtem Wachstumsprofil) = $21,00. Bull-Kursziel: $18–$24. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Der Turnaround bestätigt sich weiter, aber organisch (kein M&A), Margen normalisieren sich graduell statt sprunghaft. Annahme: FY27-EPS ~0,30 $ × 33x (Mitte der Peer-Bandbreite, Abschlag zum eigenen aktuellen — noch nicht auf den Beat angepassten — Forward-KGV von ~80,8x, da dieses auf veralteten Vor-Report-Schätzungen beruht) = $9,90. Base-Kursziel: $8,50–$11,50. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Zinsschock oder Abkühlung der Gewerbebau-Pipeline stoppt die Erholung nach nur zwei guten Quartalen — bei der hohen operativen Hebelwirkung reicht ein moderater Umsatzrückgang, um zurück in Verlustquartale wie Q1 FY26 zu rutschen. Kundenkonzentration: nicht quantifizierbar, breite Bauunternehmen-Kundenbasis strukturell diversifiziert — kein bekanntes Klumpenrisiko. Geopolitik/China: primär US/UK-Geschäft, kein materielles Exportkontrollrisiko erkennbar. Lieferketten: Pumpausrüstung von wenigen spezialisierten Herstellern (Putzmeister/Schwing) — moderates Single-/Dual-Source-Risiko bei Flottenerneuerung. Verwässerung: Aktienanzahl-Trend und SBC nicht verifizierbar. Regulierung: Umweltauflagen (Eco-Pan-Entsorgung) und Baustellen-Sicherheit (OSHA) — sektortypisch, kein Sonderrisiko erkennbar. FY27-EPS bricht auf ~0,20 $ ein × 18x (unter IESC als Floor, Rückkehr zu Krisenwahrnehmung) = $3,60. Bear-Kursziel: $3,00–$4,50. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $21,00 + 0,50 × $10,00 + 0,25 × $3,75 = $5,25 + $5,00 + $0,9375 = **~$11,19 — implizites Upside vs. aktuellem Kurs ($10,50): +6,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der Großteil der Turnaround-Story ist nach den zwei starken Handelstagen bereits im Kurs.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge 38,25%, operative Marge 10,72%, Nettomarge nur 1,65% — die Lücke zeigt hohe Zins-/Abschreibungslast auf die fremdfinanzierte Flotte, kein Buchhaltungsfehler, aber Beleg für die zyklische Fragilität der Bottom-Line. Adj.-EBITDA-Marge Q3 bei 26% (stabiler als die GAAP-Nettomarge) ist die aussagekräftigere Kennzahl. ROE/ROIC nicht verifizierbar. FCF: FY26-Guidance ~50 Mio. $ (angehoben von ≥45 Mio. $) bei 425–435 Mio. $ Umsatz ergibt FCF-Marge ~11–12% — solide Basis für die neue Dividende. RPO nicht anwendbar (kein SaaS-Modell). Der Burggraben ist Flottengröße/Regionalabdeckung (Skaleneffekte), kein IP-/Netzwerkeffekt — bei erneutem Nachfrageeinbruch kein Schutz vor Margendruck.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der Kurs ein? Bei $10,50 (~50,4 Mio. Aktien, Market Cap ~529 Mio. $) und FY26-Adj.-EBITDA-Guidance 103–108 Mio. $ (Mittelpunkt ~105,5 Mio. $) ergibt sich ein EV/EBITDA von grob 5–6x (vor Schuldenabzug, Netto-Debt nicht verifizierbar) — für frisch bestätigtes Wachstumsmomentum moderat bis günstig. Das eigene Forward-KGV ~80,8x (Analysten-EPS-Konsens 0,13 $, vorläufig noch nicht auf Beat/Guidance-Raise angepasst) liegt weit über der Peer-Bandbreite (23,4x–49,6x) — keine reale Prämie, sondern Timing-Verzerrung: Der Konsens dürfte nach dem 04.09.-Report zeitnah revidiert werden. Die EBITDA-Bewertung ist daher primäre Grundlage, nicht das verzerrte KGV. Rückrechnung: Der Kurs impliziert bereits anhaltendes zweistelliges Umsatzwachstum plus Margenexpansion Richtung 27–28% Adj.-EBITDA über 4–6 Quartale — ambitioniert nach nur zwei Erholungsquartalen, aber nicht unrealistisch. Analyst-Konsensziel 8,25 $ (vor Q3-Report) liegt unter dem aktuellen Kurs — veralteter Sentiment-Indikator, keine Ceiling, Revision nach oben wahrscheinlich.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Hypothese, nicht datenbasiert: Zwei starke Handelstage in Folge (+16%, dann nochmals deutlich höher, Volumen 860K vs. Ø 305K am 05.09.) deuten auf hohen Fast-Money-Anteil hin, keine Ownership-Daten zur Verifikation verfügbar. Enttäuschungsrisiko: Verfehlt Q4 FY26 (meldet vsl. Anfang 2027) die hohen impliziten Erwartungen, ist ein scharfer Rücksetzer wahrscheinlich — der Großteil des Anstiegs erfolgte binnen 48 Stunden, noch nicht über mehrere Quartale bestätigt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Daten nicht verfügbar (kein RS-Platform-Tracking). Preisstruktur aus öffentlichen Daten: 52-Wochen-Tief 5,55 $, neues 52-Wochen-Hoch heute bei 10,97 $ (Tageshoch) nach zwei Gap-up-Tagen — ein klarer Ausbruch aus der vorherigen Handelsspanne (vorheriges 52W-Hoch 8,13 $). Das Momentum ist fundamental gestützt (Beat + Guidance-Raise + neue Dividende), nicht rein technisch getrieben. Warnsignal: Ein Rückfall unter das alte 52W-Hoch von 8,13 $ würde signalisieren, dass der Ausbruch fehlgeschlagen ist und der Großteil der Reaktion bereits verpufft.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($16–$28):** Fragmentierte Branche konsolidiert sich um BBCP als Flottenführer (M&A-Roll-up), Data-Center-/Reshoring-Bauzyklus verlängert die Nachfrage strukturell, Margen dauerhaft über 27% Adj.-EBITDA. Normalisiertes EPS $0,35–0,55 × 45–50x.</p>
+<p>**Base ($8–$14):** Zyklische Erholung setzt sich mit normalem Auf und Ab fort, keine strukturelle Neubewertung, Dividende wird zum festen Bestandteil der Kapitalallokation. Normalisiertes EPS $0,22–0,32 × 33–38x.</p>
+<p>**Bear ($2,50–$5):** Nächster Zinszyklus/Baurezession trifft die dünne Nettomarge erneut hart, Verlustquartale kehren zurück, Dividende wird ausgesetzt. Normalisiertes EPS $0,08–0,15 × 20–25x.</p>
+<p>Entscheidende Variable: Ob sich die Margenerholung (Q2→Q3 FY26) über mindestens 4–6 weitere Quartale fortsetzt, bevor der nächste Zinszyklus greift.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>BBCP ist kein Buy-and-Hold-Compounder, sondern ein zyklischer Turnaround-Trade mit hoher operativer Hebelwirkung — nach zwei extrem starken Handelstagen (EV-Upside nur noch +6,6%) ist der einfache Teil der Neubewertung bereits gelaufen. Beat, Guidance-Raise und neue Dividende bestätigen einen echten Turnaround, aber ohne RS-Tracking und mit erst zwei Erholungsquartalen bleibt das Vertrauensintervall dünn. Geeignet allenfalls für taktisch orientierte Investoren mit Volatilitätstoleranz — nicht für konservative Dividendenjäger, da die operative Hebelwirkung die Dividendensicherheit bei erneutem Abschwung infrage stellt. Positionsgröße: max. 1–2% eines diversifizierten Portfolios, engmaschiger Stop empfohlen.</p>
+<p>Peers: **IES Holdings (IESC)** bietet bei niedrigerem Forward-KGV (23,4x) ein diversifizierteres Geschäftsmodell (Elektro-/Baudienstleistungen) mit ähnlichem Non-Residential-Exposure — Peer-Multiples indikativ, nicht abschließend vergleichbar (unterschiedliches Geschäftsmodell); **Sterling Infrastructure (STRL)** ist die reinere Data-Center-/Infrastruktur-Wette, aber bei deutlich höherem Multiple (49,6x) bereits teurer bewertet.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — BBCP ist nicht RS-Platform-getrackt (kein technisches Funnel-Signal), und der EV-Edge ist nach dem zweitägigen Kurssprung mit +6,6% zu gering für eine volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
