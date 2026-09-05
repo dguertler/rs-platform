@@ -2710,32 +2710,6 @@
       "created_at": "2026-08-27T09:28:37.423811"
     },
     {
-      "ticker": "MU",
-      "verdict": "BUY",
-      "score": 87,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 15.3,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Kein fundamentaler Einwand, EV-Edge (+14,6%) und die durch NVDA-Zahlen extern best\u00e4tigte HBM-Katalysator-Story st\u00fctzen die volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-08-27T09:28:37.428530"
-    },
-    {
-      "ticker": "STX",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -1.0,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "Hohe Verschuldung (D/E ~1,80x) ohne Netto-Cash-Puffer, EV-Szenarien zeigen keinen asymmetrischen Edge (\u22126,8%) nach der scharfen -7,9%-Korrektur vom 24.08."
-      },
-      "created_at": "2026-08-27T09:28:37.433116"
-    },
-    {
       "ticker": "SNDK",
       "verdict": "HOLD",
       "score": 66,
@@ -2788,19 +2762,6 @@
       "created_at": "2026-09-04T11:51:38.241270"
     },
     {
-      "ticker": "DELL",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -18.8,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "das aktuelle Forward-KGV (~30x) liegt weit au\u00dferhalb der Peer-Bandbreite (6,9x\u201318,2x) bei strukturell d\u00fcnnen Integrator-Margen, der EV-Edge ist mit \u221236,9% stark negativ trotz starkem technischen Signal."
-      },
-      "created_at": "2026-09-04T11:51:38.261502"
-    },
-    {
       "ticker": "HUM",
       "verdict": "WATCH",
       "score": 44,
@@ -2838,6 +2799,45 @@
         "reason": "die hohe Verschuldung (D/E 257,98) begrenzt die Flexibilit\u00e4t, der EV-Edge ist mit \u22123,4% leicht negativ und bietet keine Kompensation f\u00fcr das Bilanzrisiko."
       },
       "created_at": "2026-09-04T11:51:38.321000"
+    },
+    {
+      "ticker": "MU",
+      "verdict": "BUY",
+      "score": 70,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV-Edge von +9,8% ist moderat, nicht asymmetrisch, und das Forward-KGV preist bereits implizit einen R\u00fcckgang vom aktuellen Zyklusspitzen-EPS ein, was die volle Positionsgr\u00f6\u00dfe nicht tr\u00e4gt."
+      },
+      "created_at": "2026-09-05T08:14:29.615331"
+    },
+    {
+      "ticker": "DELL",
+      "verdict": "HOLD",
+      "score": 60,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -11.3,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Der Erwartungswert ist nach dem +23%-Kurssprung leicht negativ (\u22127,3%), und das Forward-KGV liegt weit au\u00dferhalb der Peer-Bandbreite; das fundamentale Bewertungsrisiko \u00fcberwiegt das technische Momentum-Signal."
+      },
+      "created_at": "2026-09-05T08:14:29.636451"
+    },
+    {
+      "ticker": "STX",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.9,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "Die Kombination aus negativem Erwartungswert (\u221214,2%) und einer strukturell hohen Verschuldung (Debt/Equity 179,9%) bei d\u00fcnner Eigenkapitalbasis \u00fcberwiegt das technische Funnel-Signal."
+      },
+      "created_at": "2026-09-05T08:14:29.656382"
     }
   ]
 }
