@@ -238,14 +238,6 @@
       "ev_upside_pct": 13.5
     },
     {
-      "ticker": "KLAC",
-      "verdict": "BUY",
-      "score": 79,
-      "created_at": "2026-06-19T08:35:55.775491",
-      "asymmetric_edge": false,
-      "ev_upside_pct": 20.4
-    },
-    {
       "ticker": "MTX.DE",
       "verdict": "WATCH",
       "score": 53,
@@ -449,22 +441,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-06-24T11:17:32.518848",
       "ev_upside_pct": 13.9
-    },
-    {
-      "ticker": "LRCX",
-      "verdict": "HOLD",
-      "score": 66,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:10:15.170298",
-      "ev_upside_pct": -7.9
-    },
-    {
-      "ticker": "AMAT",
-      "verdict": "HOLD",
-      "score": 66,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:11:08.999981",
-      "ev_upside_pct": -15.9
     },
     {
       "ticker": "GFS",
@@ -2851,6 +2827,45 @@
         "reason": "BBCP ist nicht RS-Platform-getrackt (kein technisches Funnel-Signal), und der EV-Edge ist nach dem zweit\u00e4gigen Kurssprung mit +6,6% zu gering f\u00fcr eine volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-09-05T08:10:13.715801"
+    },
+    {
+      "ticker": "KLAC",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 2.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV-Edge ist mit +1,2% praktisch neutral, die implizite Forward-EPS-Erholung von +87% ist ambitioniert und nicht vollst\u00e4ndig datenseitig gedeckt."
+      },
+      "created_at": "2026-09-05T08:38:14.270391"
+    },
+    {
+      "ticker": "LRCX",
+      "verdict": "HOLD",
+      "score": 65,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV liegt mit \u22124,7% leicht im Minus, die technische Memory-Erholungsthese bleibt aber intakt, sodass die volle Positionsgr\u00f6\u00dfe nicht gerechtfertigt ist."
+      },
+      "created_at": "2026-09-05T08:39:43.389784"
+    },
+    {
+      "ticker": "AMAT",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -4.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der EV liegt mit \u22125,0% im Minus, verst\u00e4rkt durch den bereits von Management quantifizierten $600-Mio.-China-Exportkontroll-Gegenwind f\u00fcr FY2026, der die volle Positionsgr\u00f6\u00dfe nicht rechtfertigt."
+      },
+      "created_at": "2026-09-05T08:41:34.509244"
     }
   ]
 }
