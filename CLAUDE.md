@@ -119,6 +119,39 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
    ergänzen (z. B. „wegen Kundenkonzentration"). Gilt für Einzelanalysen
    genauso wie für Batch-Ausgaben (siehe „Batch-Empfehlung" unten).
 
+### Automatik-Modus: `aktienanalyse` ohne Ticker
+
+Schreibt der Nutzer nur `aktienanalyse` (ohne Ticker-Liste), werden die zu
+analysierenden Ticker automatisch aus dem zuletzt per Mail/Telegram
+versendeten Breakout-Alert ermittelt statt manuell übergeben:
+
+1. **Letzten Alert-Batch laden** aus `data/last_breakout_alerts.json`
+   (`sent_at`, `alerts`-Liste mit `ticker`/`source`; wird von
+   `stock_alerts.yml` — Breakout-Alarm 2→3 Punkte, Di–Sa 02:00 UTC via
+   `check_alerts.py` — bei jedem Lauf überschrieben und enthält daher immer
+   nur die zuletzt an Mail+Telegram verschickte Charge, keinen Verlauf).
+2. **Letzten Scan-Zeitpunkt** aus `analyses/.last_stock_alert_scan` lesen
+   (ISO-Timestamp). Fehlt die Datei (erster Lauf): den aktuellen Batch trotzdem
+   verarbeiten.
+3. `sent_at` des Batches <= gespeichertem Scan-Zeitpunkt → kurze Chat-Meldung
+   „Keine neuen Breakout-Alerts seit TIMESTAMP." und STOP, kein
+   Dateizugriff/Commit.
+4. Ticker aus `alerts` extrahieren (Feld `ticker`), nach Ticker
+   deduplizieren. Feld `source` gibt direkt die passende RS-Quelle vor
+   (`QQQ`→`data/rs_full.json`, `DAX`→`data/rs_dax.json`,
+   `SPX`→`data/rs_sp500.json` — siehe Schritt 2 oben).
+5. **Für jeden Ticker automatisch, ohne Rückfrage, direkt im selben Lauf**
+   den vollständigen Analyse-Workflow oben (Schritte 1–8: Fundamentaldaten,
+   Earnings-Check, RS-Daten, Zombie-Stock-Filter, Prompt, Analyse
+   generieren, `write_rating()`, committen) durchführen — inkl.
+   Git-Hash-Ausgabe je Ticker.
+6. `analyses/.last_stock_alert_scan` mit dem `sent_at` des verarbeiteten
+   Batches überschreiben, committen und auf `master` pushen.
+7. **Am Ende** die Zusammenfassungstabelle (Schritt 8 oben) für alle Ticker
+   des Batches zusammen ausgeben, plus die EV/Risiko-Tabelle wie im
+   Abschnitt „Batch-Empfehlung" unten beschrieben (gilt automatisch, sobald
+   mehr als ein Ticker im Batch war).
+
 ## Datenquellen
 
 | Datei | Inhalt | Aktualisierung |
@@ -128,6 +161,7 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 | `data/rs_dax.json` | DAX-40 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_sp500.json` | S&P 500 RS-Scores + OHLCV | Täglich automatisch |
 | `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket) — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
+| `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 
 ## Batch-Empfehlung
