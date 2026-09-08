@@ -160,7 +160,7 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/rs_full.json` | NASDAQ-100 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_dax.json` | DAX-40 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_sp500.json` | S&P 500 RS-Scores + OHLCV | Täglich automatisch |
-| `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket) — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
+| `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket), je Eintrag mit `trigger` (`eps-beat` / `kursreaktion`) und `eps_distorted` — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 
@@ -198,12 +198,25 @@ Abschnitt "Risiko-Staffel"): max. Verlust je Trade in % des Invests.
 Am Ende zusätzlich die Ø EV-Upside über alle Batch-Ticker ausgeben (wie die
 "Ø EV-Upside"-Kennzahl oben in der Platform-Tabelle).
 
-## Turnaround-Kandidaten-Check (Earnings)
+## Earnings-Kandidaten-Check (Turnaround & Momentum-Beat)
 
 Wenn der Nutzer schreibt `Earningsanalyse TICKER1 TICKER2 ...` (Screening
 nach frischen Quartalszahlen, VOR einer vollständigen `Analysiere TICKER`):
 Kein `write_rating()`, keine 11-Abschnitte-Analyse — nur die Kennzahlen-
-Recherche plus eine Turnaround-Einstufung je Ticker.
+Recherche plus eine Einstufung je Ticker.
+
+**Zwei sich gegenseitig ausschließende Kandidaten-Typen** (Kriterien in
+Schritt 3 unten):
+
+- **Turnaround** — Verlust/Krise kippt in Erholung (Referenzmuster CNC)
+- **Momentum-Beat** — gesundes, stark wachsendes Geschäft übertrifft die
+  Erwartungen deutlich (Referenzmuster PLTR/MSFT/AMZN Q2 2026)
+
+Beide lösen automatisch die Vollanalyse aus. **Ein Momentum-Beat wird
+niemals als Turnaround ausgewiesen** — weder in der Tabelle, noch in der
+Begründung, noch in der Analyse selbst. Die Kategorien gehören in getrennte
+Zeilen der Einstufungsspalte; „Turnaround" bleibt dem Verlust→Gewinn-Muster
+vorbehalten.
 
 ### Automatik-Modus: `earning` / `earningsanalyse` ohne Ticker
 
@@ -214,9 +227,10 @@ werden die Ticker automatisch ermittelt statt manuell übergeben:
    (`alerts`-Liste; wird laufend von `earnings_alert_global.yml` und
    `earnings_alert_premarket.yml` befüllt — der frühere RS-Morgen-Digest
    `earnings_alert.yml` läuft seit 08.08.2026 nicht mehr automatisch und
-   schreibt hier nicht rein, siehe „Datenquellen"). Enthält also sowohl
-   RS-getrackte Ticker (Live-Vorbörse) als auch Ticker aus dem breiten
-   Global-Universum (US/EU, nicht RS-getrackt).
+   schreibt hier nicht rein, siehe „Datenquellen"). Enthält RS-getrackte
+   Ticker (Live-Vorbörse **und** Global-Scan — der schließt RS-Titel seit
+   08.09.2026 nicht mehr aus, sondern dedupliziert nur noch gegen den Log)
+   ebenso wie Ticker aus dem breiten Global-Universum (US/EU).
 2. **Letzten Scan-Zeitpunkt** aus `analyses/earnings_screening/.last_scan`
    lesen (ISO-Timestamp UTC). Fehlt die Datei (erster Lauf): stattdessen alle
    Log-Einträge der letzten 7 Tage verwenden.
@@ -226,7 +240,13 @@ werden die Ticker automatisch ermittelt statt manuell übergeben:
    Chat-Meldung „Keine neuen Earnings-Meldungen seit TIMESTAMP." und STOP,
    kein Dateizugriff/Commit.
 4. Für jeden gefundenen Ticker die Schritte 1–4 des manuellen Modus unten
-   durchführen (Kennzahlen, RS-Score, Turnaround-Kriterien, Einstufung).
+   durchführen (Kennzahlen, RS-Score, Turnaround-/Momentum-Beat-Kriterien,
+   Einstufung). Das Feld `trigger` des Log-Eintrags mitlesen:
+   `"kursreaktion"` heißt, der Alert kam über die Marktreaktion und nicht über
+   die EPS-Surprise — die Surprise ist dann als Signal wertlos, die
+   Einstufung stützt sich auf Umsatz, Guidance und Kursreaktion.
+   `eps_distorted: true` heißt, die gemeldete EPS enthält einen bilanziellen
+   Einmaleffekt und darf nicht als operativer Beat zitiert werden.
 5. **Ergebnis abspeichern statt nur im Chat zeigen:** Einstufungstabelle +
    Begründungen als Markdown nach `analyses/earnings_screening/<DATUM>.md`
    schreiben (DATUM = heutiges Datum, `YYYY-MM-DD`). Davor: alle Dateien in
@@ -237,19 +257,29 @@ werden die Ticker automatisch ermittelt statt manuell übergeben:
    überschreiben.
 7. `analyses/earnings_screening/` committen und auf `master` pushen,
    Git-Hash im Chat ausgeben.
-8. **Für jeden bestätigten Kandidaten ("Ja") automatisch, ohne Rückfrage,
-   direkt im selben Lauf mit `Analysiere TICKER` in die volle
-   11-Abschnitte-Analyse inkl. `write_rating()` übergehen** — keine
-   Bestätigung durch den Nutzer abwarten. "Grenzfall"/"Nein" lösen keine
-   automatische Vollanalyse aus.
+8. **Für jeden bestätigten Kandidaten ("Turnaround" oder "Momentum-Beat")
+   automatisch, ohne Rückfrage, direkt im selben Lauf mit `Analysiere TICKER`
+   in die volle 11-Abschnitte-Analyse inkl. `write_rating()` übergehen** —
+   keine Bestätigung durch den Nutzer abwarten. "Grenzfall"/"Nein" lösen
+   keine automatische Vollanalyse aus.
 
-**Referenzmuster: CNC Q1 2026** (`analyses/cnc.md`,
+**Referenzmuster Turnaround: CNC Q1 2026** (`analyses/cnc.md`,
 `instagram/data/earnings/CNC.json`) — Verlustquartale (Q4 25 EPS −1,16 $)
 kippen in einen Blowout-Beat (Q1 26 EPS 3,37 $, +62 % Surprise), die
 Kern-Kennzahl der Krise (Health Benefits Ratio) normalisiert sich sichtbar,
 und das Management hebt die Jahresprognose an statt sie erneut zu kappen.
 Genau diese Kombination — nicht der Beat allein — macht einen echten
 Turnaround-Kandidaten aus.
+
+**Referenzmuster Momentum-Beat: PLTR/MSFT/AMZN Q2 2026** — kerngesunde,
+stark wachsende Geschäfte (Umsatz +93 % / +18 % / +20 % YoY) übertreffen die
+Erwartungen und werden vom Markt mit +29,5 % / +15,5 % / +15,3 % quittiert.
+Kein Verlustquartal, keine Krisen-Kennzahl, die sich normalisiert — also
+ausdrücklich **kein** Turnaround, aber ein Analyse-Anlass. AMZN zeigt
+zusätzlich, warum die EPS-Surprise hier nicht das Maß sein kann: bereinigt
+nur +6 % (Mega-Caps steuern ihre Guidance eng), GAAP +200 % durch die
+Anthropic-Neubewertung — beide Zahlen taugen nicht als Signal, die
+Kursreaktion schon.
 
 1. **Je Ticker Earnings-Kennzahlen ermitteln** — gleiche Quelle/Fallback wie
    im Earnings-Check des Analyse-Workflows (Schritt 1 oben): bevorzugt
@@ -262,32 +292,56 @@ Turnaround-Kandidaten aus.
    des Analyse-Workflows). Ist der Ticker in keinem RS-JSON getrackt (z. B.
    Micro-Cap-Bank), das explizit als "RS-Daten nicht verfügbar" ausweisen —
    nicht schätzen oder auslassen.
-3. **Turnaround-Kriterien prüfen** (alle vier nötig für "Ja"):
+3. **Einstufung prüfen** — zuerst Turnaround, dann Momentum-Beat. Ein Ticker
+   kann nur eines von beidem sein: Kriterium 1 der Turnaround-Prüfung und
+   Kriterium 1 der Momentum-Beat-Prüfung schließen sich gegenseitig aus.
+
+   **A) Turnaround** (alle vier nötig):
    - Klares Verlust→Gewinn- oder Krisen→Erholungs-Muster in der jüngsten
      Historie (mind. 1 Verlust-/Krisenquartal in den letzten 12 Monaten) —
      ein Beat bei einem bereits gesunden, stetig wachsenden Geschäft erfüllt
-     dies NICHT, unabhängig von der Surprise-Höhe
+     dies NICHT, unabhängig von der Surprise-Höhe (→ Momentum-Beat prüfen)
    - Eine identifizierbare Kern-Kennzahl normalisiert sich sichtbar
      (analog MCR bei CNC) — sonst als "kein klarer Normalisierungs-Beleg"
      kennzeichnen
    - Guidance wird angehoben statt (wie in Vorperioden) gesenkt
-   - EPS-Surprise ≥ 10 % (Schwelle analog `check_earnings.py`,
+   - EPS-Surprise ≥ 10 % (Schwelle analog `earnings_gate.py`,
      `MIN_EPS_SURPRISE`)
+
+   **B) Momentum-Beat** (alle vier nötig, nur wenn A) an Kriterium 1
+   scheitert):
+   - **Kein** Verlust-/Krisenquartal in den letzten 12 Monaten — das
+     Geschäft war schon vorher gesund
+   - Umsatzwachstum ≥ 15 % YoY im gemeldeten Quartal
+   - Guidance wird angehoben (bloße Bestätigung reicht nicht)
+   - Marktbestätigung: EPS-Surprise ≥ 10 % **oder** Kursreaktion ≥ 8 % am
+     ersten Handelstag nach der Meldung (Schwelle `MIN_REACTION_JUMP` in
+     `earnings_gate.py`). Bei Mega-Caps ist die Kursreaktion das belastbarere
+     Signal — eine bereinigte Surprise von +6 % bei +15 % Kursreaktion (AMZN)
+     ist ein Treffer, kein Fehlschlag.
+
+   Zusätzlich für B): Der Ticker muss in einem RS-JSON getrackt sein — ohne
+   RS-Score fehlt der Momentum-Beleg, dann höchstens "Grenzfall".
+
 4. **Einstufung ausgeben** — kurze Tabelle, keine Volltext-Analyse:
 
    ```
-   | Ticker | EPS Surprise | Guidance | Kern-Kennzahl | Turnaround? |
-   |--------|--------------|----------|---------------|-------------|
-   | TICKER | +X %         | ↑/→/↓    | Kurzbefund    | Ja/Nein/Grenzfall |
+   | Ticker | EPS Surprise | Kursreaktion | Guidance | Kern-Kennzahl / Wachstum | Einstufung |
+   |--------|--------------|--------------|----------|--------------------------|------------|
+   | TICKER | +X %         | +Y %         | ↑/→/↓    | Kurzbefund               | Turnaround / Momentum-Beat / Grenzfall / Nein |
    ```
 
    Danach je Ticker 1–2 Sätze Begründung, mit explizitem Verweis, welches
-   der vier Kriterien fehlt (falls "Nein"/"Grenzfall").
-5. **Für jeden bestätigten Kandidaten ("Ja") automatisch, ohne Rückfrage,
-   direkt im selben Lauf** mit `Analysiere TICKER` in die volle
-   11-Abschnitte-Analyse inkl. `write_rating()` übergehen — keine
-   Bestätigung durch den Nutzer abwarten. "Grenzfall"/"Nein" lösen keine
-   automatische Vollanalyse aus.
+   Kriterium fehlt (falls "Nein"/"Grenzfall"). Bei "Momentum-Beat" den
+   Begriff "Turnaround" nicht verwenden — auch nicht abschwächend
+   ("Turnaround-artig", "kleiner Turnaround"). Ist die EPS-Surprise als
+   `eps_distorted` markiert oder kam der Alert über `trigger: "kursreaktion"`,
+   das in der Begründung benennen statt die Surprise-Zahl zu zitieren.
+5. **Für jeden bestätigten Kandidaten ("Turnaround" oder "Momentum-Beat")
+   automatisch, ohne Rückfrage, direkt im selben Lauf** mit
+   `Analysiere TICKER` in die volle 11-Abschnitte-Analyse inkl.
+   `write_rating()` übergehen — keine Bestätigung durch den Nutzer abwarten.
+   "Grenzfall"/"Nein" lösen keine automatische Vollanalyse aus.
 
 ## Wikifolio Wochenrückblick (Feed-Post)
 

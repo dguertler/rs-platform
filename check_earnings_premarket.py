@@ -7,9 +7,10 @@ schnellen Live-Kurs-Check: für Ticker, die laut data/earnings_calendar.json HEU
 aktuelle Vorbörsen-/Session-Kurs gegen den letzten regulären Schlusskurs verglichen —
 nicht erst der fertige Tagesschluss vom Folgetag.
 
-Kriterien identisch zu check_earnings.py:
-  - |Kurssprung| >= MIN_PRICE_JUMP (5%)
-  - EPS-Surprise >= MIN_EPS_SURPRISE (10%)
+Kriterien identisch zu check_earnings.py (Gate-Logik in earnings_gate.py):
+  - |Kurssprung| >= MIN_PRICE_JUMP (5%) als Vorfilter
+  - EPS-Surprise >= MIN_EPS_SURPRISE (10%), ODER — bei RS-getrackten Tickern —
+    Kursreaktion >= MIN_REACTION_JUMP (8%) nach oben
   - Umsatz YoY nicht stark negativ (< -5%)
 
 Wird von earnings_alert_premarket.yml nur aufgerufen, wenn
@@ -29,10 +30,8 @@ from pathlib import Path
 
 import yfinance as yf
 
-from check_earnings import (
-    MIN_PRICE_JUMP, MIN_EPS_SURPRISE,
-    get_earnings_surprise, send_earnings_email,
-)
+from earnings_gate import MIN_PRICE_JUMP, MIN_EPS_SURPRISE, evaluate_gate
+from check_earnings import get_earnings_surprise, send_earnings_email
 from check_earnings_premarket_gate import prev_trading_day
 from earnings_alert_log import already_logged
 
@@ -163,15 +162,16 @@ def main():
         rev_yoy  = earnings.get("revenue_growth_yoy")
         print(f"    → Surprise: {surprise:.1f}%")
 
-        if surprise < MIN_EPS_SURPRISE:
-            print(f"    → unter EPS-Schwelle ({MIN_EPS_SURPRISE}%) — übersprungen")
-            continue
-        if rev_yoy is not None and rev_yoy < -0.05:
-            print(f"    → Umsatz YoY stark negativ ({rev_yoy*100:.1f}%) — übersprungen")
+        source, score = find_ticker_meta(ticker)
+        gate = evaluate_gate(jump, surprise, rev_yoy,
+                             eps_distorted=earnings.get("eps_distorted", False),
+                             rs_tracked=source is not None)
+        if not gate.passed:
+            print(f"    → {gate.reason} — übersprungen")
             continue
 
-        source, score = find_ticker_meta(ticker)
-        print(f"  ✓ LIVE-ALERT: {ticker} ({source})  Sprung={jump*100:.1f}%  Surprise={surprise:.1f}%")
+        print(f"  ✓ LIVE-ALERT [{gate.trigger}]: {ticker} ({source})  "
+              f"Sprung={jump*100:.1f}%  Surprise={surprise:.1f}%")
 
         alert = {
             "ticker":             ticker,
@@ -182,6 +182,8 @@ def main():
             "eps_estimate":       earnings["eps_estimate"],
             "eps_actual":         earnings["eps_actual"],
             "revenue_growth_yoy": rev_yoy,
+            "trigger":            gate.trigger,
+            "eps_distorted":      earnings.get("eps_distorted", False),
             "charts":             [],
             "news":               {"specific": [], "general": []},
         }

@@ -22,15 +22,16 @@ verfehlt wird, weist aber darauf hin.
 """
 import json
 import os
+import sys
 
 from . import analysis as ana
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EARNINGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "earnings")
 
-# Earnings-Schwellen (identisch zu check_earnings.py)
-MIN_PRICE_JUMP   = 0.05   # ≥ 5 % Close-zu-Close
-MIN_EPS_SURPRISE = 10.0   # ≥ 10 % EPS-Surprise
+# Earnings-Schwellen — Single Source of Truth ist earnings_gate.py im Repo-Root
+sys.path.insert(0, ROOT)
+from earnings_gate import MIN_PRICE_JUMP, MIN_EPS_SURPRISE  # noqa: E402
 
 # RS-JSON je Quelle (source-Label in der Earnings-JSON)
 _SOURCE_JSON = {

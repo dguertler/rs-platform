@@ -2,7 +2,7 @@
 
 Wird von check_earnings_global.py und check_earnings_premarket.py nach jedem
 Mailversand aufgerufen. Der Chat-Trigger `earning`/`earningsanalyse` (siehe
-CLAUDE.md, Abschnitt "Turnaround-Kandidaten-Check") liest diese Datei, um
+CLAUDE.md, Abschnitt "Earnings-Kandidaten-Check") liest diese Datei, um
 ohne manuelle Ticker-Angabe zu wissen, welche Ticker seit dem letzten Lauf
 gemeldet wurden. Der normale RS-Digest (check_earnings.py) läuft nicht mehr
 automatisch (siehe earnings_alert.yml) und schreibt hier nicht mehr rein.
@@ -60,6 +60,10 @@ def append_alerts(alerts: list[dict], source: str, report_dates: dict[str, str])
             "surprise_pct": alert.get("surprise_pct"),
             "eps_actual":   alert.get("eps_actual"),
             "eps_estimate": alert.get("eps_estimate"),
+            # "eps-beat" | "kursreaktion" — steuert im Screening, ob die
+            # EPS-Surprise überhaupt als Signal taugt (siehe earnings_gate.py)
+            "trigger":      alert.get("trigger"),
+            "eps_distorted": alert.get("eps_distorted", False),
             "detected_at":  now,
         })
         seen.add(key)

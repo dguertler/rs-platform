@@ -296,11 +296,20 @@ def send_earnings_telegram(token, chat_id, alert):
     if eps_est is not None and eps_act is not None:
         eps_line = f'\nEPS: Schätzung <b>{eps_est:.2f}</b> → Ist <b>{eps_act:.2f}</b>'
 
+    # Auslöser: Bei Mega-Caps trägt die Kursreaktion den Alert, nicht die
+    # EPS-Surprise (siehe earnings_gate.py).
+    if alert.get('trigger') == 'kursreaktion':
+        trigger_line = '\nAuslöser: <b>Kursreaktion</b> (EPS-Surprise unter Schwelle)'
+    else:
+        trigger_line = ''
+    if alert.get('eps_distorted'):
+        trigger_line += '\n⚠️ EPS durch bilanziellen Einmaleffekt verzerrt'
+
     header = (
         f'📈 <b>{_esc(display)}</b> · {_esc(source)}\n'
         f'<b>{today}</b>\n'
-        f'Kurssprung: <b>+{jump:.1f}%</b>  EPS-Surprise: <b>+{surprise:.1f}%</b>'
-        f'{rev_line}{eps_line}\n'
+        f'Kurssprung: <b>{jump:+.1f}%</b>  EPS-Surprise: <b>{surprise:+.1f}%</b>'
+        f'{rev_line}{eps_line}{trigger_line}\n'
         f'RS-Score: <b>{score_str}</b>\n'
     )
 

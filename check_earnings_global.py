@@ -12,10 +12,16 @@ Tage Schlusskurse (Batch-Download), um den Kurssprung zu berechnen. Historische
 OHLCV (für Chart-Rendering) wird erst für die wenigen finalen Kandidaten
 individuell nachgeladen.
 
-Kriterien identisch zu check_earnings.py:
-  - Kurssprung gestern >= MIN_PRICE_JUMP (5%)
-  - EPS-Surprise >= MIN_EPS_SURPRISE (10%)
+Kriterien identisch zu check_earnings.py (Gate-Logik in earnings_gate.py):
+  - Kurssprung gestern >= MIN_PRICE_JUMP (5%) als Vorfilter
+  - EPS-Surprise >= MIN_EPS_SURPRISE (10%), ODER — nur bei RS-getrackten
+    Tickern — Kursreaktion >= MIN_REACTION_JUMP (8%)
   - Umsatz YoY nicht stark negativ (< -5%)
+
+RS-getrackte Ticker werden mitgescannt (nicht mehr ausgeschlossen): Der
+RS-Morgen-Digest earnings_alert.yml läuft seit 08.08.2026 nicht mehr
+automatisch, damit war die Live-Vorbörse der einzige Erkennungspfad für
+Mega-Caps. Doppelmeldungen verhindert der persistente Alert-Log.
 
 Testmodus: UNIVERSE_LIMIT=N env var begrenzt US-/EU-Universum auf die ersten
 N Ticker je Quelle (schneller Testlauf statt vollem Scan).
@@ -33,8 +39,10 @@ import pandas as pd
 import yfinance as yf
 
 from earnings_universe import fetch_us_universe, fetch_europe_universe
+from earnings_gate import MIN_PRICE_JUMP, MIN_EPS_SURPRISE, evaluate_gate
+from earnings_alert_log import already_logged
 from check_earnings import (
-    MIN_PRICE_JUMP, MIN_EPS_SURPRISE, SOURCES,
+    SOURCES,
     get_earnings_surprise, get_gws_price, render_chart, fetch_news,
     send_earnings_email,
 )
@@ -43,9 +51,11 @@ import json
 
 
 def load_rs_tracked_tickers() -> set[str]:
-    """Ticker aus den vier RS-Indizes (siehe check_earnings.SOURCES) — die
-    prüft bereits check_earnings.py separat, hier ausschließen um doppelte
-    Alerts (zwei Mails für denselben Ticker) zu vermeiden."""
+    """Ticker aus den vier RS-Indizes (siehe check_earnings.SOURCES).
+
+    Diese Titel werden mitgescannt, aber markiert: nur für sie greift der
+    Kursreaktions-Trigger (>= 8 % Sprung ohne EPS-Surprise-Schwelle). Im
+    breiten Universum würde derselbe Trigger jeden 8-%-Sprung melden."""
     tracked = set()
     for json_path, _source_label in SOURCES:
         if not os.path.exists(json_path):
@@ -158,7 +168,8 @@ def _individual_ohlcv_4h(ticker: str, days: int = 60, n_candles: int = 60) -> li
         return []
 
 
-def build_alert(ticker: str, source: str, jump: float, earnings: dict) -> dict:
+def build_alert(ticker: str, source: str, jump: float, earnings: dict,
+                trigger: str | None = None) -> dict:
     ohlcv_w = _individual_ohlcv(ticker, "2y", "1wk", 30)
     ohlcv_d = _individual_ohlcv(ticker, "2y", "1d", 40)
     ohlcv_4h = _individual_ohlcv_4h(ticker)
@@ -188,6 +199,9 @@ def build_alert(ticker: str, source: str, jump: float, earnings: dict) -> dict:
         "eps_estimate": earnings["eps_estimate"],
         "eps_actual": earnings["eps_actual"],
         "revenue_growth_yoy": earnings.get("revenue_growth_yoy"),
+        "report_date": earnings.get("date"),
+        "trigger": trigger,
+        "eps_distorted": earnings.get("eps_distorted", False),
         "charts": charts,
         "news": fetch_news(ticker),
     }
@@ -225,13 +239,19 @@ def main():
 
     rs_tracked = load_rs_tracked_tickers()
     if rs_tracked:
-        us_before, eu_before = len(us_tickers), len(eu_tickers)
-        us_tickers = [t for t in us_tickers if t not in rs_tracked]
-        eu_tickers = [t for t in eu_tickers if t not in rs_tracked]
-        print(f"RS-getrackte Ticker ausgeschlossen (bereits von check_earnings.py "
-              f"geprüft): US {us_before}→{len(us_tickers)}, EU {eu_before}→{len(eu_tickers)}")
+        # Die RS-Ticker fehlen im NASDAQ-Trader-Directory nicht, sind aber als
+        # Menge nötig, um den Kursreaktions-Trigger auf sie zu beschränken.
+        # Zusätzlich sicherstellen, dass alle RS-Titel im Scan landen (EU-Ticker
+        # mit .DE-Suffix stehen nicht im US-Directory).
+        missing = sorted(rs_tracked - set(us_tickers) - set(eu_tickers))
+        us_extra = [t for t in missing if not t.endswith('.DE')]
+        eu_extra = [t for t in missing if t.endswith('.DE')]
+        us_tickers = us_tickers + us_extra
+        eu_tickers = eu_tickers + eu_extra
+        print(f"RS-getrackte Ticker: {len(rs_tracked)} (Kursreaktions-Trigger aktiv), "
+              f"davon {len(missing)} ergänzt: US +{len(us_extra)}, EU +{len(eu_extra)}")
     else:
-        print("RS-Indexdateien nicht gefunden — kein Ausschluss möglich")
+        print("RS-Indexdateien nicht gefunden — Kursreaktions-Trigger inaktiv")
 
     limit = os.environ.get('UNIVERSE_LIMIT', '').strip()
     if limit:
@@ -257,19 +277,30 @@ def main():
                 print(f"    → keine Earnings gefunden")
                 continue
 
+            # Live-Vorbörse hat denselben Termin womöglich schon gemeldet. Sie
+            # schlüsselt auf das Meldedatum, der Global-Scan auf den Tag der
+            # Kursreaktion (bei AMC-Meldungen der Folgetag) — daher beide prüfen.
+            report_date = earnings.get('date') or yesterday_str
+            if any(already_logged(ticker, d, "premarket-live")
+                   for d in {report_date, yesterday_str}):
+                print(f"    → bereits als Live-Alert gemeldet – übersprungen")
+                continue
+
             surprise = earnings['surprise_pct']
             rev_yoy = earnings.get('revenue_growth_yoy')
             print(f"    → Surprise: {surprise:.1f}%")
 
-            if surprise < MIN_EPS_SURPRISE:
-                print(f"    → unter EPS-Schwelle ({MIN_EPS_SURPRISE}%) – übersprungen")
-                continue
-            if rev_yoy is not None and rev_yoy < -0.05:
-                print(f"    → Umsatz YoY stark negativ ({rev_yoy * 100:.1f}%) – übersprungen")
+            gate = evaluate_gate(jump, surprise, rev_yoy,
+                                 eps_distorted=earnings.get('eps_distorted', False),
+                                 rs_tracked=ticker in rs_tracked)
+            if not gate.passed:
+                print(f"    → {gate.reason} – übersprungen")
                 continue
 
-            print(f"  ✓ ALERT: {ticker} ({source_label})  Sprung={jump * 100:.1f}%  Surprise={surprise:.1f}%")
-            all_alerts.append(build_alert(ticker, source_label, jump, earnings))
+            print(f"  ✓ ALERT [{gate.trigger}]: {ticker} ({source_label})  "
+                  f"Sprung={jump * 100:.1f}%  Surprise={surprise:.1f}%")
+            all_alerts.append(build_alert(ticker, source_label, jump, earnings,
+                                          trigger=gate.trigger))
 
     all_alerts.sort(key=lambda a: a['surprise_pct'], reverse=True)
     print(f"\nGlobale Earnings-Alerts gesamt: {len(all_alerts)}")
@@ -288,7 +319,8 @@ def main():
 
         from earnings_alert_log import append_alerts
         append_alerts(all_alerts, source='global',
-                       report_dates={a['ticker']: yesterday_str for a in all_alerts})
+                       report_dates={a['ticker']: a.get('report_date') or yesterday_str
+                                     for a in all_alerts})
     else:
         print('Keine globalen Earnings-Überraschungen gefunden.')
 

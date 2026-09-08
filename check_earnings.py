@@ -22,8 +22,13 @@ from deep_translator import GoogleTranslator
 
 # ── Konfiguration ─────────────────────────────────────────────────────────────
 
-MIN_PRICE_JUMP   = 0.05   # ≥5 % Close-zu-Close
-MIN_EPS_SURPRISE = 10.0   # ≥10 % EPS-Surprise
+# Schwellen und Gate-Logik liegen in earnings_gate.py (Single Source of Truth
+# für alle drei Scanner). Re-Export, damit bestehende Importe weiter greifen.
+from earnings_gate import (          # noqa: E402  (nach dem pip-install-Block)
+    MIN_PRICE_JUMP, MIN_EPS_SURPRISE, MIN_REACTION_JUMP,
+    TRIGGER_EPS_BEAT, TRIGGER_PRICE_REACTION,
+    detect_eps_oneoff, evaluate_gate,
+)
 
 # ── News-Abruf ────────────────────────────────────────────────────────────────
 
@@ -212,6 +217,17 @@ def get_earnings_surprise(ticker, target_date_str):
         if pd.isna(surprise):
             return None
 
+        # EPS-Historie der Vorquartale (jüngstes zuerst) für die
+        # Einmaleffekt-Prüfung — alles, was älter ist als der Treffer.
+        prior_eps = []
+        try:
+            older = ed[ed.index < hits.index[0]].sort_index(ascending=False)
+            for val in older.get('Reported EPS', pd.Series(dtype=float)):
+                if not pd.isna(val):
+                    prior_eps.append(float(val))
+        except Exception as he:
+            print(f'  EPS-Historie-Fehler {ticker}: {he}')
+
         # YoY-Umsatzvergleich: letztes Quartal vs. Vorjahresquartal
         revenue_growth_yoy = None
         _rev_labels = ('Total Revenue', 'Revenue', 'Operating Revenue',
@@ -247,12 +263,19 @@ def get_earnings_surprise(ticker, target_date_str):
         except Exception as re:
             print(f'  revenue-Fehler {ticker}: {re}')
 
+        eps_actual_val = float(eps_actual) if not pd.isna(eps_actual) else None
+        eps_distorted = detect_eps_oneoff(eps_actual_val, prior_eps, revenue_growth_yoy)
+        if eps_distorted:
+            print(f'  Hinweis {ticker}: EPS {eps_actual_val} weicht stark von der '
+                  f'Quartalshistorie {prior_eps[:4]} ab — Surprise gilt als verzerrt')
+
         return {
             'date':               str(hits.index[0].date()),
             'eps_estimate':       float(eps_est)    if not pd.isna(eps_est)    else None,
-            'eps_actual':         float(eps_actual) if not pd.isna(eps_actual) else None,
+            'eps_actual':         eps_actual_val,
             'surprise_pct':       float(surprise),
             'revenue_growth_yoy': revenue_growth_yoy,
+            'eps_distorted':      eps_distorted,
         }
 
     except Exception as e:
@@ -309,7 +332,8 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
     Earnings-Überraschung &mdash; {today_str}
   </h2>
   <p style="color:#64748b;margin:0 0 24px;font-size:12px">
-    Aktien mit &ge;5&nbsp;% Kurssprung gestern und &ge;10&nbsp;% EPS-Surprise:
+    Aktien mit &ge;{MIN_EPS_SURPRISE:.0f}&nbsp;% EPS-Surprise &ndash; oder
+    &ge;{MIN_REACTION_JUMP*100:.0f}&nbsp;% Kursreaktion bei einem RS-getrackten Titel:
   </p>
 """]
 
@@ -347,6 +371,19 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
         else:
             rev_str     = '<span style="color:#64748b">Umsatz YoY: n/a</span>'
 
+        # Auslöser-Badge: macht sichtbar, warum der Alert kam — bei
+        # Mega-Caps trägt die Kursreaktion, nicht die EPS-Surprise.
+        if a.get('trigger') == TRIGGER_PRICE_REACTION:
+            trigger_str = ('<span style="font-size:10px;padding:2px 8px;border-radius:10px;'
+                           'background:#1e3a5f;color:#93c5fd">Kursreaktion</span>')
+        else:
+            trigger_str = ('<span style="font-size:10px;padding:2px 8px;border-radius:10px;'
+                           'background:#3f2d0a;color:#fbbf24">EPS-Beat</span>')
+        if a.get('eps_distorted'):
+            trigger_str += ('&nbsp;<span style="font-size:10px;padding:2px 8px;'
+                            'border-radius:10px;background:#3f1d1d;color:#fca5a5">'
+                            'EPS durch Einmaleffekt verzerrt</span>')
+
         html_parts.append(f"""
   <div style="margin:0 0 28px;padding:16px;
               background:#061a0e;border:1px solid #22c55e;
@@ -355,15 +392,16 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
       <span style="font-size:18px">&#128200;</span>
       <span style="font-size:16px;font-weight:bold;color:#86efac">{display}</span>
       <span style="font-size:11px;color:#64748b">({source})</span>
+      {trigger_str}
       <span style="margin-left:auto;font-size:11px;color:#94a3b8">
         RS-Score:&nbsp;<strong style="color:#f1f5f9">{score_str}</strong>
       </span>
     </div>
     <div style="font-size:12px;margin-bottom:8px;display:flex;gap:24px">
       <span><span style="color:#64748b">Kurssprung:</span>&nbsp;
-        <strong style="color:#4ade80">+{jump_pct:.1f}&nbsp;%</strong></span>
+        <strong style="color:#4ade80">{jump_pct:+.1f}&nbsp;%</strong></span>
       <span><span style="color:#64748b">EPS-Surprise:</span>&nbsp;
-        <strong style="color:#fbbf24">+{surprise:.1f}&nbsp;%</strong></span>
+        <strong style="color:#fbbf24">{surprise:+.1f}&nbsp;%</strong></span>
       {rev_str}
     </div>
     <div style="font-size:11px;margin-bottom:10px;color:#94a3b8">
@@ -514,15 +552,16 @@ def main():
             rev_yoy  = earnings.get('revenue_growth_yoy')
             print(f'    → Surprise: {surprise:.1f}%  |  Revenue YoY: {rev_yoy*100:.1f}%' if rev_yoy is not None else f'    → Surprise: {surprise:.1f}%  |  Revenue YoY: n/a')
 
-            if surprise < MIN_EPS_SURPRISE:
-                print(f'    → unter EPS-Schwelle ({MIN_EPS_SURPRISE}%) – übersprungen')
+            # RS-Ticker: Kursreaktions-Trigger zulässig (siehe earnings_gate.py)
+            gate = evaluate_gate(jump, surprise, rev_yoy,
+                                 eps_distorted=earnings.get('eps_distorted', False),
+                                 rs_tracked=True)
+            if not gate.passed:
+                print(f'    → {gate.reason} – übersprungen')
                 continue
 
-            if rev_yoy is not None and rev_yoy < -0.05:
-                print(f'    → Umsatz YoY stark negativ ({rev_yoy*100:.1f}%) – übersprungen')
-                continue
-
-            print(f'  ✓ ALERT: {ticker} ({source_label})  Sprung={jump*100:.1f}%  Surprise={surprise:.1f}%')
+            print(f'  ✓ ALERT [{gate.trigger}]: {ticker} ({source_label})  '
+                  f'Sprung={jump*100:.1f}%  Surprise={surprise:.1f}%')
 
             gws_d  = get_gws_price(ohlcv)
             gws_w  = get_gws_price(entry.get('ohlcv_w', []), window=1)
@@ -551,6 +590,8 @@ def main():
                 'eps_estimate':       earnings['eps_estimate'],
                 'eps_actual':         earnings['eps_actual'],
                 'revenue_growth_yoy': rev_yoy,
+                'trigger':            gate.trigger,
+                'eps_distorted':      earnings.get('eps_distorted', False),
                 'charts':             charts,
                 'news':               news,
             })
