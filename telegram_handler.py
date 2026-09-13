@@ -35,35 +35,9 @@ def _parse_chat_ids(raw):
     return out
 
 
-def fetch_registered_chat_ids():
-    """Holt zusätzlich die von registrierten Usern hinterlegten Chat-IDs vom
-    Backend. Nur aktiv, wenn RS_API_URL und ALERT_API_KEY gesetzt sind —
-    sonst leere Liste (voll abwärtskompatibel)."""
-    base = (os.environ.get('RS_API_URL') or os.environ.get('FRONTEND_URL') or '').rstrip('/')
-    key  = os.environ.get('ALERT_API_KEY', '')
-    if not base or not key:
-        return []
-    try:
-        req = urllib.request.Request(
-            f'{base}/api/telegram/recipients',
-            headers={'X-Alert-Key': key},
-        )
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            data = json.loads(resp.read())
-        return [str(c) for c in data.get('chat_ids', []) if c]
-    except Exception as e:
-        print(f'  [Telegram] Empfaenger-Abruf vom Backend fehlgeschlagen: {e}')
-        return []
-
-
 def resolve_recipients(chat_id_env):
-    """Kombiniert die env-Chat-IDs (kommagetrennt) mit den im Backend
-    registrierten Empfängern. Doppelte werden entfernt."""
-    ids = _parse_chat_ids(chat_id_env)
-    for cid in fetch_registered_chat_ids():
-        if cid not in ids:
-            ids.append(cid)
-    return ids
+    """Chat-IDs aus TELEGRAM_CHAT_ID (kommagetrennt)."""
+    return _parse_chat_ids(chat_id_env)
 
 
 # ── Interne Hilfsfunktionen ───────────────────────────────────────────────────
@@ -115,10 +89,7 @@ def _dot(active, is_new=False):
 
 
 def _base_url():
-    """Kanonische Origin der Plattform (Login + Dashboards + Analyse werden
-    alle von hier ausgeliefert). Identisch zu check_alerts.py, damit Dashboard-
-    und Analyse-Links dieselbe Origin und damit denselben localStorage-Login
-    teilen — sonst muss man sich beim Wechsel neu anmelden."""
+    """Kanonische Origin der Plattform (GitHub-Pages-Seite, statisch)."""
     return os.environ.get(
         'FRONTEND_URL',
         os.environ.get('APP_URL', 'https://dguertler.github.io/rs-platform'),
@@ -134,57 +105,18 @@ def _dashboard_path(source):
     return '/', 'Nasdaq-Dashboard'
 
 
-def _magic(path, auth=None):
-    """Absolute URL zum Ziel `path` (z. B. '/dax.html' oder '/?openRating=NVDA').
-    Mit `auth`-Token läuft der Link über login.html und loggt den Empfänger im
-    (In-App-)Browser automatisch ein, bevor er zum Ziel weitergeleitet wird —
-    sonst der normale Pfad (manueller Login)."""
+def _magic(path):
+    """Absolute URL zum Ziel `path` (z. B. '/dax.html' oder '/?openRating=NVDA')."""
     base = _base_url()
-    if not base:
-        return path
-    if auth:
-        return (f'{base}/login.html?auth={urllib.parse.quote(auth)}'
-                f'&next={urllib.parse.quote(path, safe="")}')
-    return f'{base}{path}'
+    return f'{base}{path}' if base else path
 
 
-_recipient_tokens_cache = None
-
-
-def fetch_recipient_tokens():
-    """{chat_id: auth_token} der registrierten User für die Auto-Login-Links.
-    Nutzt denselben Endpoint wie die Empfänger-Auflösung; das Ergebnis wird
-    prozessweit gecacht (ein Alert-Lauf = ein Abruf)."""
-    global _recipient_tokens_cache
-    if _recipient_tokens_cache is not None:
-        return _recipient_tokens_cache
-    base = (os.environ.get('RS_API_URL') or os.environ.get('FRONTEND_URL') or '').rstrip('/')
-    key  = os.environ.get('ALERT_API_KEY', '')
-    if not base or not key:
-        _recipient_tokens_cache = {}
-        return _recipient_tokens_cache
-    try:
-        req = urllib.request.Request(
-            f'{base}/api/telegram/recipients',
-            headers={'X-Alert-Key': key},
-        )
-        with urllib.request.urlopen(req, timeout=20) as resp:
-            data = json.loads(resp.read())
-        _recipient_tokens_cache = {
-            str(k): v for k, v in (data.get('tokens') or {}).items() if v
-        }
-    except Exception as e:
-        print(f'  [Telegram] Token-Abruf fehlgeschlagen: {e}')
-        _recipient_tokens_cache = {}
-    return _recipient_tokens_cache
-
-
-def _analyse_link(display_ticker, auth=None):
+def _analyse_link(display_ticker):
     """Gibt einen HTML-Link zur KI-Analyse zurück, oder ''."""
     if not _base_url():
         return ''
     ticker_param = urllib.parse.quote(display_ticker.replace('[TEST] ', '').strip())
-    url = _magic(f'/?openRating={ticker_param}', auth)
+    url = _magic(f'/?openRating={ticker_param}')
     return f'\n📊 <a href="{url}">Zur {_esc(display_ticker)}-Analyse</a>'
 
 
@@ -244,14 +176,12 @@ def send_breakout_telegram(token, chat_id, alert):
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
     )
 
-    tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
     for cid in recipients:
-        auth = tokens.get(str(cid))
         text = (
             header
-            + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
-            + _analyse_link(display, auth)
+            + f'<a href="{_magic(dash_path)}">Zum {_esc(dash_label)}</a>'
+            + _analyse_link(display)
         )
         _send_charts(token, cid, charts)
         _post_json(token, 'sendMessage', {
@@ -313,14 +243,12 @@ def send_earnings_telegram(token, chat_id, alert):
         f'RS-Score: <b>{score_str}</b>\n'
     )
 
-    tokens = fetch_recipient_tokens()
     charts = alert.get('charts', [])
     for cid in recipients:
-        auth = tokens.get(str(cid))
         text = (
             header
-            + f'<a href="{_magic(dash_path, auth)}">Zum {_esc(dash_label)}</a>'
-            + _analyse_link(display, auth)
+            + f'<a href="{_magic(dash_path)}">Zum {_esc(dash_label)}</a>'
+            + _analyse_link(display)
         )
         _send_charts(token, cid, charts)
         _post_json(token, 'sendMessage', {
