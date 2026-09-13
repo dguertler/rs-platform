@@ -161,19 +161,6 @@
       "ev_upside_pct": -1.4
     },
     {
-      "ticker": "MRVL",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -23.6,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "EV von \u221224,8% und ein Forward-KGV rund 50% \u00fcber der Peer-Bandbreite negieren das technische Momentum-Signal trotz starkem RS-Score."
-      },
-      "created_at": "2026-08-05T10:40:29.877202"
-    },
-    {
       "ticker": "ARM",
       "verdict": "HOLD",
       "score": 60,
@@ -2400,19 +2387,6 @@
       "created_at": "2026-08-11T09:53:02.528638"
     },
     {
-      "ticker": "MRNA",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -8.7,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "MRNA notiert mit P/S ~10,6x deutlich \u00fcber dem Peer BioNTech (7,6x), obwohl der Verlust pro Umsatz-Dollar strukturell tiefer ausf\u00e4llt \u2014 der Erwartungswert liegt trotz frischer mFLUSIVA-Zulassung rund 14 % unter dem Kurs."
-      },
-      "created_at": "2026-08-11T09:53:02.540207"
-    },
-    {
       "ticker": "VRTX",
       "verdict": "HOLD",
       "score": 69,
@@ -2879,6 +2853,45 @@
         "reason": "Bei ~58x der eigenen FY27-Guidance-EPS und einem Erwartungswert von nur +10,2 % \u00fcber dem aktuellen Kurs tr\u00e4gt die Bewertung die volle Positionsgr\u00f6\u00dfe nicht, w\u00e4hrend RPO-Beschleunigung und angehobene ARR-Guidance die technische These intakt lassen."
       },
       "created_at": "2026-09-10T15:48:13.730568"
+    },
+    {
+      "ticker": "MRNA",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -13.5,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Der Erwartungswert liegt trotz echter FDA-/Pipeline-Katalysatoren bei -19,9% unter dem aktuellen Kurs, die Bewertung ist der operativen Entwicklung weit vorausgeeilt."
+      },
+      "created_at": "2026-09-13T13:57:53.431969"
+    },
+    {
+      "ticker": "MRVL",
+      "verdict": "HOLD",
+      "score": 60,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -16.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Das Forward-KGV liegt \u00fcber der gesamten Peer-Bandbreite und der Erwartungswert der eigenen Szenarien ist mit -13,9% negativ, die fundamentale Story (Guidance-Anhebung) bleibt aber intakt."
+      },
+      "created_at": "2026-09-13T13:57:53.457955"
+    },
+    {
+      "ticker": "TEAM",
+      "verdict": "HOLD",
+      "score": 61,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.7,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Der Erwartungswert der eigenen Szenarien liegt bei nur +0,8%, der Kurs notiert nahe dem 52-Wochen-Hoch am oberen Rand der Peer-Bandbreite, trotz intakter RPO-/Rovo-Fundamentaldaten."
+      },
+      "created_at": "2026-09-13T13:57:53.474621"
     }
   ]
 }
