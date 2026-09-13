@@ -3,8 +3,8 @@ backtest_v2/engine.py — Portfolio-Backtest-Engine für RS-Platform 2.0.
 
 Implementiert die Regeln B1–B10 aus STRATEGIEPLAN.md Abschnitt 5, so weit wie
 mit den im Repo vorhandenen Daten möglich (siehe Einschränkungen unten).
-Wiederverwendet die LIVE-Signal-Funktionen aus backend/gws_analysis.py und
-backend/v2_analysis.py über backtest_v2/signals.py (Regel B10).
+Wiederverwendet die LIVE-Signal-Funktionen aus gws_analysis.py und
+v2_analysis.py über backtest_v2/signals.py (Regel B10).
 
 BEKANNTE EINSCHRÄNKUNGEN dieses Laufs (in jedem Report erneut ausgewiesen):
   - B3 (survivorship-bias-freie historische Indexmitgliedschaft): NICHT
@@ -27,9 +27,9 @@ BEKANNTE EINSCHRÄNKUNGEN dieses Laufs (in jedem Report erneut ausgewiesen):
 import sys
 from pathlib import Path
 
-_BACKEND = Path(__file__).parent.parent / "backend"
-if str(_BACKEND) not in sys.path:
-    sys.path.insert(0, str(_BACKEND))
+_ROOT = Path(__file__).parent.parent
+if str(_ROOT) not in sys.path:
+    sys.path.insert(0, str(_ROOT))
 
 from v2_analysis import (                                      # noqa: E402
     MIN_MCAP_DEFAULT, MIN_MCAP_SMALLCAP, MIN_PRICE, MIN_HISTORY_DAYS,

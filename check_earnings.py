@@ -353,7 +353,7 @@ def send_earnings_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_a
 
         # Kanonische App-Origin (gleiche Origin wie Login + Analyse), damit der
         # Login beim Klick aufs Dashboard erhalten bleibt — identisch zu check_alerts.py.
-        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app')).rstrip('/')
+        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://dguertler.github.io/rs-platform')).rstrip('/')
         if source == 'DAX':
             dash_url, dash_label = f'{_base_url}/dax.html', 'DAX-Dashboard'
         elif source == 'SPX':

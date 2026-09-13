@@ -7,7 +7,7 @@
   <script src="/api.js"></script>
   <style>
     *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
-    body { background:#060b14; color:#e2e8f0; font-family:'Inter',system-ui,sans-serif; min-height:100vh; padding-top:34px; }
+    body { background:#060b14; color:#e2e8f0; font-family:'Inter',system-ui,sans-serif; min-height:100vh; }
     ::-webkit-scrollbar { width:6px; }
     ::-webkit-scrollbar-track { background:#0a0f1e; }
     ::-webkit-scrollbar-thumb { background:#1e293b; border-radius:3px; }
@@ -70,8 +70,6 @@
   </style>
 </head>
 <body>
-  <div id="plan-bar" style="position:fixed;top:0;left:0;right:0;height:34px;background:#060b14;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
-
   <div class="nav-bar">
     <a href="index.html" class="nav-switch">Nasdaq</a>
     <a href="dax.html" class="nav-switch">DAX</a>
@@ -86,28 +84,7 @@
   <div id="app" style="display:none"></div>
 
 <script>
-(function(){
-  function getToken(){ return localStorage.getItem('rs_token'); }
-  function logout(){ localStorage.removeItem('rs_token'); localStorage.removeItem('rs_email'); window.location.href='/login.html'; }
-  window.rsLogout = logout;
-  window.apiFetch = async function(url, opts){
-    opts = opts||{};
-    var token = getToken();
-    if(!token){ logout(); return new Response('{}',{status:401}); }
-    var r = await fetch(url, Object.assign({},opts,{headers:Object.assign({},opts.headers||{},{'Authorization':'Bearer '+token})}));
-    if(r.status===401){ logout(); }
-    return r;
-  };
-  if(!getToken()){ window.location.href='/login.html'; return; }
-  document.addEventListener('DOMContentLoaded', function(){
-    var email = localStorage.getItem('rs_email')||'';
-    var btn = document.createElement('button');
-    btn.textContent = 'Logout'+(email?' · '+email:'');
-    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
-    btn.onclick = function(){ window.rsLogout(); };
-    document.body.appendChild(btn);
-  });
-})();
+  window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
 
 <script>
@@ -425,26 +402,8 @@ function resetAll(){
   render();
 }
 
-(async function(){
-  try {
-    var r = await window.apiFetch('/api/user/me');
-    if(!r || r.status !== 200){ window.location.href='/index.html'; return; }
-    var u = await r.json();
-    if(!u.is_admin){ window.location.href='/index.html'; return; }
-
-    var bar = document.getElementById('plan-bar');
-    if(bar){
-      bar.innerHTML = '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
-        + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
-        + '&nbsp;&nbsp;<a href="/admin.html" style="color:#fbbf24;font-size:12px;text-decoration:none">Admin</a>';
-    }
-
-    document.getElementById('app').style.display = 'block';
-    render();
-  } catch(e) {
-    window.location.href='/index.html';
-  }
-})();
+document.getElementById('app').style.display = 'block';
+render();
 </script>
 </body>
 </html>

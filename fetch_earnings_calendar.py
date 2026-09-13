@@ -4,7 +4,7 @@ fetch_earnings_calendar.py — Earnings-Termin-Cache für die Entry-Sperre (v2).
 Schreibt data/earnings_calendar.json: {ticker: naechster_earnings_termin (YYYY-MM-DD)}
 nur zukünftige Termine, ältere/vergangene werden nicht aufgenommen.
 
-backend/v2_analysis.py liest diese Datei optional — fehlt sie oder ist ein
+v2_analysis.py liest diese Datei optional — fehlt sie oder ist ein
 Ticker nicht enthalten, wird die Earnings-Sperre für diesen Ticker einfach
 übersprungen (fail-safe, nie fail-blocking). check_earnings_premarket_gate.py
 nutzt sie zusätzlich, um Kandidaten für den Live-Vorbörsen-Check zu finden.

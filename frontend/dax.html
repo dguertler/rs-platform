@@ -10,7 +10,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; padding-top: 34px; }
+    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0a0f1e; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -38,8 +38,6 @@
   </style>
 </head>
 <body>
-  <div id="plan-bar" style="position:fixed;top:0;left:0;right:0;height:34px;background:#060b14;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
-
 <div class="nav-bar">
   <a href="index.html" class="nav-switch">Nasdaq</a>
   <a href="dax.html" class="nav-switch active">DAX</a>
@@ -47,65 +45,11 @@
   <a href="smallcap.html" class="nav-switch">SC600</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
-  <a href="watchlist.html" class="nav-switch" style="border-color:#7c3aed;color:#a78bfa;">★ WATCHLIST</a>
   <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
 </div>
 <div id="root"></div>
 <script>
-/* RS Auth */
-(function () {
-  function getToken() { return localStorage.getItem('rs_token'); }
-  function logout() {
-    localStorage.removeItem('rs_token');
-    localStorage.removeItem('rs_email');
-    window.location.href = '/login.html';
-  }
-  window.rsLogout = logout;
-  window.apiFetch = async function (url, opts) {
-    opts = opts || {};
-    var token = getToken();
-    if (!token) { logout(); return new Response('{}', { status: 401 }); }
-    var r = await fetch(url, Object.assign({}, opts, {
-      headers: Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token })
-    }));
-    if (r.status === 401) { logout(); }
-    return r;
-  };
-  if (!getToken()) { window.location.href = '/login.html'; return; }
-  /* Logout-Button */
-  document.addEventListener('DOMContentLoaded', function () {
-    var email = localStorage.getItem('rs_email') || '';
-    var btn = document.createElement('button');
-    btn.textContent = 'Logout' + (email ? ' · ' + email : '');
-    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
-    btn.onclick = function () { window.rsLogout(); };
-    document.body.appendChild(btn);
-  });
-})()
-</script>
-<script>
-  (async function() {
-    try {
-      var r = await window.apiFetch('/api/user/me');
-      if (!r || r.status !== 200) return;
-      var u = await r.json();
-      var bar = document.getElementById('plan-bar');
-      if (!bar) return;
-      var planHtml = u.plan === 'pro'
-        ? '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
-        : 'Free&nbsp;<button onclick="(async function(){var x=await window.apiFetch(\'/api/stripe/checkout\');var d=await x.json();if(d.url)window.location.href=d.url;})()" style="background:#2563eb;color:#fff;border:none;padding:2px 10px;border-radius:4px;font-size:12px;cursor:pointer">Upgrade</button>';
-      var adminLink = u.is_admin
-        ? '&nbsp;&nbsp;<a href="/admin.html" style="color:#fbbf24;font-size:12px;text-decoration:none">Admin</a>'
-        : '';
-      bar.innerHTML = planHtml
-        + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
-        + adminLink;
-      if (u.is_admin) {
-        var nb = document.querySelector('.nav-bar');
-        if (nb) { var ra=document.createElement('a'); ra.href='/roadmap.html'; ra.className='nav-switch'; ra.style.cssText='border-color:#7c3aed;color:#a78bfa;'; ra.textContent='ROADMAP'; nb.appendChild(ra); }
-      }
-    } catch(e) {}
-  })();
+  window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
@@ -1089,53 +1033,7 @@ function App() {
   const [ratingModal, setRatingModal] = useState(null);
   const [ratingHtml, setRatingHtml] = useState('');
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
-  const [wlTickers, setWlTickers] = useState(new Set());
-  const [wlErr,     setWlErr]     = useState({});
   const [ohlcvCache, setOhlcvCache] = useState({});
-  const [ohlcvLoading, setOhlcvLoading] = useState(false);
-
-  useEffect(() => {
-    apiFetch("/api/watchlist")
-      .then(r => r.ok ? r.json() : { items: [] })
-      .then(json => setWlTickers(new Set((json.items || []).map(it => it.ticker))))
-      .catch(() => {});
-  }, []);
-
-  const addToWatchlist = useCallback(async (ticker, e) => {
-    e.stopPropagation();
-    try {
-      const r = await apiFetch("/api/watchlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ticker }),
-      });
-      if (r.ok) {
-        setWlTickers(prev => new Set([...prev, ticker]));
-      } else {
-        setWlErr(prev => ({ ...prev, [ticker]: true }));
-        setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
-      }
-    } catch {
-      setWlErr(prev => ({ ...prev, [ticker]: true }));
-      setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
-    }
-  }, []);
-
-  const removeFromWatchlist = useCallback(async (ticker, e) => {
-    e.stopPropagation();
-    try {
-      const r = await apiFetch(`/api/watchlist/${ticker}`, { method: "DELETE" });
-      if (r.ok) {
-        setWlTickers(prev => { const n = new Set(prev); n.delete(ticker); return n; });
-      } else {
-        setWlErr(prev => ({ ...prev, [ticker]: true }));
-        setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
-      }
-    } catch {
-      setWlErr(prev => ({ ...prev, [ticker]: true }));
-      setTimeout(() => setWlErr(prev => { const n={...prev}; delete n[ticker]; return n; }), 1800);
-    }
-  }, []);
 
   // Live-Fetch Benchmark OHLCV (^GDAXI) von Yahoo Finance als Fallback
   useEffect(() => {
@@ -1148,7 +1046,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    apiFetch("/api/rs/dax")
+    apiFetch("data/rs_dax.json")
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(json => {
         const arr = Array.isArray(json) ? json : json.data;
@@ -1161,31 +1059,21 @@ function App() {
           benchmark_ohlcv:   Array.isArray(json) ? [] : (json.benchmark_ohlcv   || []),
         };
         setData(normalized);
-        const first = normalized.data.find(d => d.has_ohlcv);
+        const first = normalized.data.find(d => d.ohlcv?.length);
         if (first) setSelected(first.ticker);
-        const map = {};
-        arr.forEach(e => {
-          if (e.rating) {
-            const k = e.rating.ticker.toUpperCase();
-            map[k] = e.rating;
-            const base = k.replace(/\.[^.]+$/, '');
-            if (base !== k) map[base] = e.rating;
-          }
-        });
-        if (Object.keys(map).length > 0) setRatings(prev => ({ ...map, ...prev }));
       })
       .catch(e => setError(e.message));
   }, []);
 
   useEffect(() => {
-    apiFetch("/api/signals")
+    apiFetch("data/signals.json")
       .then(r => r.ok ? r.json() : {})
       .then(json => setSignals(json))
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    apiFetch("/api/ratings")
+    apiFetch("data/ratings/index.json")
       .then(r => r.ok ? r.json() : { ratings: [] })
       .then(json => {
         const map = {};
@@ -1204,7 +1092,7 @@ function App() {
   // Automatisierter EV-Screening-Score (kein LLM) — nur Orientierung für Ticker ohne
   // manuelle Analyse; überschreibt nie einen vorhandenen `rating`-Wert (siehe evPct unten).
   useEffect(() => {
-    apiFetch("/api/ev-scores")
+    apiFetch("data/ev_scores.json")
       .then(r => r.ok ? r.json() : { scores: {} })
       .then(json => {
         const map = {};
@@ -1219,25 +1107,23 @@ function App() {
       .catch(() => {});
   }, []);
 
-  // Lazy-load OHLCV für ausgewählten Ticker
+  // OHLCV für ausgewählten Ticker liegt bereits im geladenen Marktdatensatz
   useEffect(() => {
     if (!selected || ohlcvCache[selected]) return;
     const entry = data?.data.find(d => d.ticker === selected);
-    if (!entry?.has_ohlcv) return;
-    setOhlcvLoading(true);
-    apiFetch(`/api/rs/dax/${selected}`)
-      .then(r => r.ok ? r.json() : null)
-      .then(d => { if (d) setOhlcvCache(prev => ({ ...prev, [selected]: d })); })
-      .catch(() => {})
-      .finally(() => setOhlcvLoading(false));
+    if (!entry?.ohlcv?.length) return;
+    setOhlcvCache(prev => ({ ...prev, [selected]: {
+      ohlcv_w: entry.ohlcv_w || [], ohlcv: entry.ohlcv || [], ohlcv_4h: entry.ohlcv_4h || [],
+    }}));
   }, [selected, data]);
 
   useEffect(() => {
     if (!ratingModal) { setRatingHtml(''); return; }
     const r = ratings[ratingModal.toUpperCase()] || ratings[ratingModal.replace(/\.[^.]+$/, '').toUpperCase()];
     const ticker = r ? r.ticker.toLowerCase() : ratingModal.replace(/\.[^.]+$/, '').toLowerCase();
+    const slug = ticker.replace(/[^a-z0-9]/g, '_');
     setRatingHtml('');
-    apiFetch(`/api/ratings/${ticker}/html`)
+    apiFetch(`data/ratings/${slug}.html`)
       .then(res => res.ok ? res.text() : null)
       .then(html => setRatingHtml(html || '<p style="color:#64748b;padding:24px;font-family:monospace">Keine Analyse vorhanden.</p>'))
       .catch(() => setRatingHtml('<p style="color:#f87171;padding:24px;font-family:monospace">Fehler beim Laden.</p>'));
@@ -1313,7 +1199,13 @@ function App() {
   const structureMap = useMemo(() => {
     if (!data) return {};
     const map = {};
-    data.data.forEach(entry => { map[entry.ticker] = entry.struct || {}; });
+    data.data.forEach(entry => {
+      map[entry.ticker] = {
+        weekly: analyzeWeeklyStructure(entry.ohlcv_w) || {},
+        daily:  analyzeStructure(entry.ohlcv) || {},
+        h4:     analyze4HStructure(entry.ohlcv_4h) || {},
+      };
+    });
     return map;
   }, [data]);
 
@@ -1370,7 +1262,7 @@ function App() {
           {/* Header-Zeile */}
           <div style={{
             display:"grid",
-            gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+            gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr)",
             padding:"6px 10px", background:"#1e293b", gap:2,
             fontSize:9, color:"#475569", textTransform:"uppercase", letterSpacing:0.5,
             alignItems:"center"
@@ -1386,14 +1278,13 @@ function App() {
             <span style={{textAlign:"center",color:"#ef4444"}}>D</span>
             <span style={{textAlign:"center",color:"#a78bfa"}}>4H</span>
             {WINDOWS.map(w => <span key={w} style={{textAlign:"center"}}>{w}</span>)}
-            <span style={{textAlign:"center",color:"#7c3aed"}}>WL</span>
           </div>
 
           {rows.map(item => {
             const rank       = sorted.indexOf(item);
             const isTop      = rank < 20;
             const _entry     = data.data.find(d=>d.ticker===item.t);
-            const hasChart   = !!_entry?.has_ohlcv;
+            const hasChart   = !!_entry?.ohlcv?.length;
             const structs    = structureMap[item.t] || {};
             const isBOC      = structs.weekly?.broken && structs.daily?.broken && structs.h4?.broken4h;
             const hasRecent  = structs.weekly?.recentBreakout || structs.daily?.recentBreakout || structs.h4?.recentBreakout;
@@ -1422,7 +1313,7 @@ function App() {
                 onClick={() => hasChart && handleSelect(item.t)}
                 style={{
                   display:"grid",
-                  gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr) 24px",
+                  gridTemplateColumns:"22px 36px 58px 36px 40px 62px 56px 18px 18px 18px repeat(5,1fr)",
                   padding:"6px 10px", gap:2,
                   borderTop:`1px solid ${showFlame?"#ef444422":"#0a0f1e"}`,
                   background: showFlame
@@ -1529,19 +1420,6 @@ function App() {
                 {WINDOWS.map(w => (
                   <div key={w} style={{textAlign:"center"}}><Cell v={item.w[w]}/></div>
                 ))}
-                <button
-                  onClick={e => wlTickers.has(item.t) ? removeFromWatchlist(item.t, e) : addToWatchlist(item.t, e)}
-                  title={wlTickers.has(item.t) ? "Aus Watchlist entfernen" : "Zur Watchlist hinzufügen"}
-                  style={{
-                    background: wlTickers.has(item.t) ? "#0a2a0a" : "none",
-                    border:`1px solid ${wlTickers.has(item.t)?"#22c55e":wlErr[item.t]?"#ef4444":"#334155"}`,
-                    color: wlTickers.has(item.t) ? "#22c55e" : wlErr[item.t] ? "#ef4444" : "#475569",
-                    borderRadius:4,padding:"1px 4px",fontSize:11,
-                    cursor: "pointer",
-                    lineHeight:1, transition:"border-color .15s,color .15s",
-                  }}>
-                  {wlTickers.has(item.t) ? "✓" : wlErr[item.t] ? "✗" : "+"}
-                </button>
               </div>
             );
           })}
@@ -1600,10 +1478,6 @@ function App() {
                 <Chart4H ohlcv4h={ohlcv4hDisplay} structure4h={structure4h} chartId={selected+"_4h"} signals={tickerSignals}/>
               </div>
             )}
-          </div>
-        ) : ohlcvLoading ? (
-          <div style={{color:"#475569",fontSize:12,textAlign:"center",padding:"20px 0"}}>
-            ⟳ Chart wird geladen…
           </div>
         ) : (
           <div style={{color:"#475569",fontSize:12,textAlign:"center",padding:"20px 0"}}>

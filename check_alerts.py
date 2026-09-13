@@ -348,7 +348,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                        'border-radius:10px;font-size:10px;font-weight:bold">TOP&nbsp;20</span>&nbsp;'
                        if alert.get('in_top20') else '')
 
-        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app')).rstrip('/')
+        _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://dguertler.github.io/rs-platform')).rstrip('/')
         if source == 'DAX':
             dashboard_url   = _base_url
             dashboard_label = 'DAX-Dashboard'

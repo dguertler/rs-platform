@@ -11,7 +11,7 @@
   <script src="/backtest_logic.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; padding-top: 34px; }
+    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0a0f1e; }
     ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
@@ -38,18 +38,6 @@
   </style>
 </head>
 <body>
-  <div id="pro-gate" style="display:none;position:fixed;inset:0;background:rgba(10,15,30,0.97);z-index:10000;align-items:center;justify-content:center">
-    <div style="text-align:center;padding:40px;background:#0f172a;border:1px solid #1e293b;border-radius:16px;max-width:380px;width:90%">
-      <div style="font-size:40px;margin-bottom:16px">&#128274;</div>
-      <h2 style="color:#f1f5f9;font-size:20px;font-weight:600;margin-bottom:10px">Pro-Account erforderlich</h2>
-      <p style="color:#64748b;font-size:14px;line-height:1.6;margin-bottom:24px">Backtests sind exklusiv fuer Pro-Nutzer verfuegbar.<br>Upgrade jetzt und erhalte Zugriff auf alle Analysen.</p>
-      <button onclick="(async function(){var x=await window.apiFetch('/api/stripe/checkout');var d=await x.json();if(d.url)window.location.href=d.url;})()" style="background:#2563eb;color:#fff;border:none;border-radius:8px;padding:12px 0;font-size:15px;font-weight:600;cursor:pointer;width:100%;margin-bottom:12px">Jetzt upgraden</button>
-      <a href="/" style="display:block;color:#64748b;font-size:13px;text-decoration:none">&#8592; Zurueck zum Dashboard</a>
-    </div>
-  </div>
-
-  <div id="plan-bar" style="position:fixed;top:0;left:0;right:0;height:34px;background:#060b14;border-bottom:1px solid #1e293b;display:flex;align-items:center;justify-content:flex-end;padding:0 14px;font-size:13px;color:#94a3b8;z-index:9999"></div>
-
 <div class="nav-bar">
   <a href="index.html"  class="nav-switch">Nasdaq</a>
   <a href="dax.html"    class="nav-switch">DAX</a>
@@ -61,62 +49,7 @@
 </div>
 <div id="root"></div>
 <script>
-/* RS Auth */
-(function () {
-  function getToken() { return localStorage.getItem('rs_token'); }
-  function logout() {
-    localStorage.removeItem('rs_token');
-    localStorage.removeItem('rs_email');
-    window.location.href = '/login.html';
-  }
-  window.rsLogout = logout;
-  window.apiFetch = async function (url, opts) {
-    opts = opts || {};
-    var token = getToken();
-    if (!token) { logout(); return new Response('{}', { status: 401 }); }
-    var r = await fetch(url, Object.assign({}, opts, {
-      headers: Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token })
-    }));
-    if (r.status === 401) { logout(); }
-    return r;
-  };
-  if (!getToken()) { window.location.href = '/login.html'; return; }
-  /* Logout-Button */
-  document.addEventListener('DOMContentLoaded', function () {
-    var email = localStorage.getItem('rs_email') || '';
-    var btn = document.createElement('button');
-    btn.textContent = 'Logout' + (email ? ' · ' + email : '');
-    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
-    btn.onclick = function () { window.rsLogout(); };
-    document.body.appendChild(btn);
-  });
-})()
-</script>
-<script>
-  (async function() {
-    try {
-      var r = await window.apiFetch('/api/user/me');
-      if (!r || r.status !== 200) return;
-      var u = await r.json();
-      if (u.plan !== 'pro') {
-        var gate = document.getElementById('pro-gate');
-        if (gate) gate.style.display = 'flex';
-        return;
-      }
-      var bar = document.getElementById('plan-bar');
-      if (!bar) return;
-      var adminLink = u.is_admin
-        ? '&nbsp;&nbsp;<a href="/admin.html" style="color:#fbbf24;font-size:12px;text-decoration:none">Admin</a>'
-        : '';
-      bar.innerHTML = '<span style="color:#22c55e;font-weight:600">&#10003; Pro</span>'
-        + '&nbsp;&nbsp;<a href="/account.html" style="color:#94a3b8;font-size:12px;text-decoration:none">Konto</a>'
-        + adminLink;
-      if (u.is_admin) {
-        var nb = document.querySelector('.nav-bar');
-        if (nb) { var ra=document.createElement('a'); ra.href='/roadmap.html'; ra.className='nav-switch'; ra.style.cssText='border-color:#7c3aed;color:#a78bfa;'; ra.textContent='ROADMAP'; nb.appendChild(ra); }
-      }
-    } catch(e) {}
-  })();
+  window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
@@ -907,7 +840,8 @@ function BacktestApp() {
     localStorage.setItem('bt_last_ticker', t);
     setTicker(t);
     document.title    = `RS · Backtest ${t}`;
-    const jsonFile    = `/api/backtest/${t}`;
+    const slug        = t.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const jsonFile    = `data/backtest_${slug}.json`;
 
     window.apiFetch(jsonFile)
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
@@ -924,7 +858,7 @@ function BacktestApp() {
       })
       .catch(() => {
         // Fallback: Daten aus den RS-JSON-Dateien laden
-        const sources = ['/api/rs/nasdaq', '/api/rs/sp500', '/api/rs/dax'];
+        const sources = ['data/rs_full.json', 'data/rs_sp500.json', 'data/rs_dax.json'];
         Promise.any(
           sources.map(src =>
             window.apiFetch(src)
@@ -946,7 +880,7 @@ function BacktestApp() {
     });
 
     // Benchmark (QQQ) OHLCV für Chart-Hintergrundlinie laden
-    window.apiFetch('/api/rs/nasdaq')
+    window.apiFetch('data/rs_full.json')
       .then(r => r.ok ? r.json() : null)
       .then(d => {
         if (d) setBenchData({
@@ -958,7 +892,7 @@ function BacktestApp() {
       .catch(() => {});
 
     // top20_history immer laden – unabhängig ob backtest-JSON oder rs-JSON
-    const rsFiles = ['/api/rs/nasdaq', '/api/rs/sp500', '/api/rs/dax'];
+    const rsFiles = ['data/rs_full.json', 'data/rs_sp500.json', 'data/rs_dax.json'];
     Promise.any(rsFiles.map(f =>
       window.apiFetch(f).then(r => r.ok ? r.json() : Promise.reject())
         .then(d => {

@@ -74,35 +74,7 @@
 </head>
 <body>
 <script>
-/* RS Auth (identisch zu v1-Seiten) */
-(function () {
-  function getToken() { return localStorage.getItem('rs_token'); }
-  function logout() {
-    localStorage.removeItem('rs_token');
-    localStorage.removeItem('rs_email');
-    window.location.href = '/login.html';
-  }
-  window.rsLogout = logout;
-  window.apiFetch = async function (url, opts) {
-    opts = opts || {};
-    var token = getToken();
-    if (!token) { logout(); return new Response('{}', { status: 401 }); }
-    var r = await fetch(url, Object.assign({}, opts, {
-      headers: Object.assign({}, opts.headers || {}, { 'Authorization': 'Bearer ' + token })
-    }));
-    if (r.status === 401) { logout(); }
-    return r;
-  };
-  if (!getToken()) { window.location.href = '/login.html'; return; }
-  document.addEventListener('DOMContentLoaded', function () {
-    var email = localStorage.getItem('rs_email') || '';
-    var btn = document.createElement('button');
-    btn.textContent = 'Logout' + (email ? ' · ' + email : '');
-    btn.style.cssText = 'position:fixed;bottom:10px;right:10px;background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:11px;padding:4px 10px;border-radius:4px;cursor:pointer;z-index:9999;font-family:monospace';
-    btn.onclick = function () { window.rsLogout(); };
-    document.body.appendChild(btn);
-  });
-})()
+  window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
 
 <div class="nav-bar">
@@ -112,7 +84,6 @@
   <a href="smallcap.html" class="nav-switch">SC600</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
-  <a href="watchlist.html" class="nav-switch" style="border-color:#7c3aed;color:#a78bfa;">★ WATCHLIST</a>
   <a href="v2.html" class="nav-switch active">RS-Platform 2.0</a>
 </div>
 
@@ -121,7 +92,7 @@
   <div class="sub">Parallelbetrieb: Diese Ansicht berechnet Regime-Ampel, RS 2.0 und Funnel-Status aus denselben Daten wie v1 — die bisherige Plattform bleibt vollständig unverändert. Regelwerk: STRATEGIEPLAN.md.</div>
 
   <div class="tabs" id="tabs"></div>
-  <div id="loading">Lade /api/v2 …</div>
+  <div id="loading">Lade Daten …</div>
   <div id="content" style="display:none">
 
     <div class="cards">
@@ -244,6 +215,21 @@
     { id: 'sp500',    label: 'S&P500' },
     { id: 'smallcap', label: 'SC600' },
   ];
+  const RS_FILES = {
+    nasdaq: 'data/rs_full.json', dax: 'data/rs_dax.json',
+    sp500: 'data/rs_sp500.json', smallcap: 'data/rs_smallcap.json',
+  };
+  const _rsFileCache = {};
+  async function fetchTickerOhlcv(mkt, ticker) {
+    if (!_rsFileCache[mkt]) {
+      _rsFileCache[mkt] = window.apiFetch(RS_FILES[mkt]).then(r => r.json());
+    }
+    const json = await _rsFileCache[mkt];
+    const arr = Array.isArray(json) ? json : json.data;
+    const entry = arr.find(e => e.ticker === ticker);
+    if (!entry) throw new Error(`Ticker ${ticker} nicht gefunden`);
+    return { ohlcv_w: entry.ohlcv_w || [], ohlcv: entry.ohlcv || [], ohlcv_4h: entry.ohlcv_4h || [] };
+  }
   const REGIME_TXT = {
     green:   { icon: '🟢', name: 'Risk-On',  color: '#4ade80' },
     yellow:  { icon: '🟡', name: 'Neutral',  color: '#facc15' },
@@ -371,9 +357,7 @@
     wrap.querySelector('.modal-close').onclick = closeModal;
     document.addEventListener('keydown', escClose);
     try {
-      const r = await window.apiFetch(`/api/rs/${mkt}/${encodeURIComponent(ticker)}`);
-      if (!r.ok) throw new Error(`HTTP ${r.status}`);
-      const d = await r.json();
+      const d = await fetchTickerOhlcv(mkt, ticker);
       const dailyLines = [];
       if (extra.stop != null) dailyLines.push({ y: extra.stop, label: 'Stop', color: '#facc15' });
       if (extra.entry != null) dailyLines.push({ y: extra.entry, label: 'Entry', color: '#4ade80' });
@@ -543,7 +527,7 @@
       b.onclick = () => { btMarket = b.dataset.btm; loadBacktest(); });
 
     try {
-      const r = await window.apiFetch(`/api/v2/backtest/${btMarket}`);
+      const r = await window.apiFetch(`data/v2_backtest_${btMarket}.json`);
       if (r.status === 404) {
         $('btBody').innerHTML = backtestPlaceholderHtml(btMarket, 'Für diesen Markt wurde noch kein Backtest-2.0-Report erzeugt.');
         return;
@@ -676,7 +660,7 @@
     const btPanel = $('backtestPanel');
     if (btPanel) btPanel.style.display = 'none';
     try {
-      const r = await window.apiFetch(`/api/v2/${market}`);
+      const r = await window.apiFetch(`data/v2_${market}.json`);
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       payload = await r.json();
       $('loading').style.display = 'none';
@@ -685,7 +669,7 @@
     } catch (e) {
       $('loading').style.display = 'none';
       $('error').style.display = '';
-      $('error').textContent = 'Fehler beim Laden von /api/v2/' + market + ': ' + e.message;
+      $('error').textContent = 'Fehler beim Laden von data/v2_' + market + '.json: ' + e.message;
     }
   }
 

@@ -28,8 +28,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent / "backend"))
-from v2_analysis import build_v2_payload  # noqa: E402
+from v2_analysis import build_v2_payload
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
 JOURNAL_PATH = DATA_DIR / "signal_journal.json"

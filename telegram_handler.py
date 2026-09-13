@@ -121,7 +121,7 @@ def _base_url():
     teilen — sonst muss man sich beim Wechsel neu anmelden."""
     return os.environ.get(
         'FRONTEND_URL',
-        os.environ.get('APP_URL', 'https://rs-platform-production.up.railway.app'),
+        os.environ.get('APP_URL', 'https://dguertler.github.io/rs-platform'),
     ).rstrip('/')
 
 
