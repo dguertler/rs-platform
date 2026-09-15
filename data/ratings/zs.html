@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ZS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">15.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ZS</h1>
+      <h2>Zscaler, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Infrastructure</span></div>
+        <div class="mi">MCap: <span>$27B</span></div>
+        <div class="mi">Signal: <span>Breakout (3/3)</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 15.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">65.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$164.54</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">29.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">76.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-2.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+7.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">270–330</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">155–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">50–70</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Zscaler ist die reinste Wette auf die These, dass Zero-Trust-Architektur den klassischen Perimeter-Firewall-Ansatz strukturell ablöst. Der Q4-FY26-Report (03.09.) mit adj. EPS $1,19 vs. $1,09 Konsens und Revenue $898 Mio. (+25% YoY, deutlich über den erwarteten $877 Mio.) bestätigte, dass das Wachstum trotz der Unternehmensgröße nicht strukturell abbricht. Was der Markt aktuell einpreist: fortgesetztes 20%+-Wachstum bei verbessernder Profitabilität. Was er möglicherweise übersieht: ZS bleibt GAAP-unprofitabel (Net Margin −1,9%, trailing EPS −$0,39) — die Non-GAAP-Beat-Story überdeckt, dass der Weg zu nachhaltiger GAAP-Profitabilität noch nicht abgeschlossen ist, während CRWD und PANW diesen Übergang bereits vollzogen haben. Der Kurs liegt zudem noch 51% unter dem 52-Wochen-Hoch von $336,99 — ein struktureller Vertrauensverlust aus der vorherigen Korrekturphase, der erst graduell repariert wird.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zero-Trust-Exchange-Plattform (SSE/SASE) — Cloud-native, kein Hardware-Anteil, 100% Subscription-Umsatz</li>
+<li>Bruttomarge 76,9% ist software-typisch stark, aber Operating Margin −1,0% zeigt, dass Vertriebs- und F&E-Investitionen die Bruttomarge-Vorteile noch vollständig aufzehren</li>
+<li>Strukturelle Abhängigkeit vom fortgesetzten Wechsel von On-Premise-Security zu Cloud-nativen Architekturen — ein Nachfrage-Rückgang bei diesem Trend würde das Wachstumsprofil direkt treffen</li>
+<li>Operativer Hebel vorhanden, aber noch nicht realisiert: FCF-Marge 32,1% ($1,07 Mrd. FCF auf $3,35 Mrd. Revenue) zeigt, dass das Geschäft cash-generativ ist, obwohl GAAP-Verluste ausgewiesen werden — SBC-Differenz ist der Haupttreiber</li>
+<li>Wettbewerbsintensität hoch: Palo Alto, CrowdStrike, Cloudflare und Netskope drängen alle in dasselbe SASE/SSE-Segment</li>
+<li>ROE −2,9% und Net Margin −1,9% spiegeln GAAP-Verluste wider, primär SBC-getrieben, nicht operativ-strukturell</li>
+<li>D/E 71,9 ist im Peer-Vergleich hoch — Kapitalstruktur stärker fremdfinanziert als bei OKTA (D/E 0,76) oder FTNT</li>
+<li>Wachstum von 24,9% YoY ist für die Unternehmensgröße stark, aber verlangsamt sich graduell gegenüber früheren Hypergrowth-Raten</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Check Point (CHKP, Fwd-PE 11,7x), Palo Alto Networks (PANW, Fwd-PE 67,8x), CrowdStrike (CRWD, Fwd-PE 128,7x) — Bandbreite 11,7x–128,7x. Der Übergang zu GAAP-Profitabilität gelingt schneller als erwartet, Wachstum hält sich über 22%, Zero-Trust-Adoption beschleunigt sich durch AI-getriebene Threat-Landscape-Sorgen. Annahme (kein Konsens): FY28-EPS $7,20 × 42x (Re-Rating Richtung PANW-Bereich bei nachgewiesener Profitabilitätswende) = $302. Bull-Kursziel: $270–$330. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Wachstum normalisiert sich Richtung 18–22%, GAAP-Profitabilität nähert sich langsam der Breakeven-Linie, Wettbewerbsdruck bleibt intensiv, aber beherrschbar. Annahme: FY28-EPS $5,60 (Konsens-Forward-EPS) × 30x (nahe eigenem aktuellen Forward-KGV 29,4x, innerhalb der Peer-Bandbreite) = $168. Base-Kursziel: $155–$185. Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Wachstum fällt unter 15%, da PANW und CRWD über Plattform-Konsolidierung SASE-Budgets abziehen, gleichzeitig bleibt der Weg zu GAAP-Profitabilität stecken. Kundenkonzentration: aus den Daten nicht quantifizierbar — Enterprise-Kundenbasis breit diversifiziert, auf Datenbasis nicht abschließend beurteilbar. Geopolitik/China-Exposure: strukturell gering, primär US-/EU-/Enterprise-fokussiertes Cloud-Geschäft. Lieferketten-/Foundry-Abhängigkeit: nicht anwendbar (reines Cloud-Software-Geschäft ohne eigene Hardware-Fertigung). Verwässerung: D/E von 71,9 und anhaltende GAAP-Verluste erhöhen das Risiko fortgesetzter SBC-getriebener Aktienausgabe — Shares Outstanding in den Daten nicht verfügbar (N/A), quantitativ nicht auflösbar, aber qualitativ als reales Risiko zu werten. Regulierung: sektortypisch moderat. EPS bricht auf $4,20 × 14x (nahe CHKP als Floor, deutlicher Qualitätsabschlag bei brechender Wachstumsthese und anhaltenden Verlusten) = $58,80. Bear-Kursziel: $50–$70. Eintrittswahrscheinlichkeit: 35%.</p>
+<p>**Summe: 25% + 40% + 35% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $300 + 0,40 × $170 + 0,35 × $60 = $75,00 + $68,00 + $21,00 = **~$164,00 — implizites Upside/Downside vs. aktuellem Kurs ($164,54): −0,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen asymmetrischen Edge, trotz des starken Q4-Beats.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Klarer Bruch zwischen GAAP- und Cash-Qualität: Net Margin −1,9%, ROE −2,9%, trailing EPS −$0,39 zeigen GAAP-Verluste, während FCF-Marge 32,1% eine solide Cash-Generierung belegt — die Differenz ist überwiegend SBC-getrieben (typisch für wachstumsstarke SaaS-Unternehmen in dieser Phase), muss aber als reales Qualitätsdefizit gewertet werden, nicht nur als Bilanzierungsartefakt, da SBC eine ökonomische Kosten darstellt. Bruttomarge 76,9% ist solide, aber niedriger als bei OKTA (78,1%) oder FTNT (80,2%). RPO/Deferred Revenue: PFLICHT-Prüfung für dieses SaaS-Modell — aus den vorliegenden Daten nicht verifizierbar (keine aktuellen Earnings-Call-Details vorliegend), daher explizit als "RPO-Daten nicht verifiziert, nicht in die Analyse eingeflossen" zu kennzeichnen. Der Burggraben (Zero-Trust-Pionier-Status, hohe Switching Costs bei Enterprise-Netzwerkarchitektur-Entscheidungen) ist real, aber die fehlende GAAP-Profitabilität nach so langer Unternehmenshistorie relativiert die Qualitätseinschätzung gegenüber FTNT und OKTA.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 29,4x liegt innerhalb der Peer-Bandbreite (11,7x–128,7x), am unteren Ende ggü. OKTA (38,0x) und FTNT (41,3x) trotz höherem Umsatzwachstum (24,9% vs. 10,6%/25,6%) — die relative Bewertungslücke ist strukturell erklärbar durch die anhaltende GAAP-Unprofitabilität und die stärker fremdfinanzierte Bilanz (D/E 71,9). Was preist der Kurs ein? Bei $164,54 und EV/Revenue ~7,7x (Trailing) preist der Markt weiterhin solides, aber kein extremes Wachstum ein — realistisch, wenn auch mit dem GAAP-Profitabilitätsrisiko als Kehrseite. Normalisierter FCF ($1,07 Mrd. aktuell) auf $26,8 Mrd. Market Cap ergibt ein FCF-Multiple von ~25x — im Vergleich zu OKTA (~28x) und FTNT (~50–64x) das günstigste FCF-Multiple im Batch, was die relative Attraktivität bei ähnlichem operativem Cashflow-Profil unterstreicht.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short-Float-Daten in den vorliegenden Datensätzen nicht verfügbar (N/A). RS-Score 64,99, Rang 75 im NASDAQ-100 — das schwächste RS-Ranking im gesamten Alert-Batch trotz des starken Q4-Beats. Windows: 5T +19,7%, 10T +2,8%, 20T +6,8%, 50T +29,4%, 6M +6,4% — das 6M-Fenster von nur +6,4% zeigt, dass der Titel den Großteil des Jahres seitwärts bis schwächer lief und erst der jüngste Post-Earnings-Sprung (5T +19,7%) das aktuelle Momentum treibt. Hypothese, nicht datenbasiert: Nach einem derart langen Underperformance-Zeitraum (Kurs 51% unter dem 52-Wochen-Hoch) dürfte ein erheblicher Teil der jüngsten Käufer kurzfristig orientiertes Post-Earnings-Momentum-Geld sein, nicht etablierte Long-Only-Positionen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>GWS-Ampel voll aktiv (Weekly, Daily, 4H — 3/3 Punkte), Breakout nach dem Q4-Beat. Kurs $164,54 liegt aber weiterhin 51,2% unter dem 52-Wochen-Hoch von $336,99 und 43,5% über dem 52-Wochen-Tief von $114,63 — technisch handelt es sich eher um eine Erholung innerhalb eines langfristigen Abwärtstrends als um einen Ausbruch auf neue Hochs. Das Momentum ist fundamental gestützt (echter Beat), die Ausgangslage bleibt aber technisch angeschlagen. Warnsignal: Ein Rückfall unter $145 (unter das Vor-Earnings-Niveau) würde den jüngsten Bounce als reine Short-Covering-Bewegung entlarven.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($260–$340):** Zscaler erreicht nachhaltige GAAP-Profitabilität, Zero-Trust wird zum Enterprise-Security-Standard, Marktanteilsgewinne ggü. Legacy-VPN-Anbietern beschleunigen sich. Normalisiertes EPS $7,50–9,50 × 32–38x.</p>
+<p>**Base ($165–$225):** Solides Wachstum um 18–22%, graduelle Annäherung an GAAP-Breakeven, Wettbewerbsdruck bleibt intensiv, aber beherrschbar. Normalisiertes EPS $6,00–7,50 × 27–31x.</p>
+<p>**Bear ($60–$100):** Wachstum fällt strukturell unter 15%, GAAP-Profitabilität bleibt aus, Konsolidierung des Security-Stacks bei Wettbewerbern (PANW, CRWD) auf Kosten von ZS. Normalisiertes EPS $3,50–4,80 × 17–21x.</p>
+<p>Entscheidende Variable: Ob Zscaler den Übergang zu nachhaltiger GAAP-Profitabilität vollzieht, bevor der Wettbewerbsdruck durch Plattform-Konsolidierung bei PANW/CRWD strukturell zunimmt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen Erwartungswert-Edge (−0,3%), trotz eines starken Q4-Beats und der relativ günstigsten FCF-Bewertung im Cybersecurity-Batch. Zscaler ist kein Buy-and-Hold-Compounder im klassischen Sinn (anhaltende GAAP-Verluste), sondern ein zyklisches Erholungs-Play innerhalb eines längerfristig angeschlagenen Charts — die Zero-Trust-These ist strukturell intakt, aber die fehlende GAAP-Profitabilität nach dieser Unternehmensreife ist ein echtes Qualitätsproblem, kein reines Bilanzierungsartefakt. Für Investoren, die auf eine Profitabilitätswende wetten wollen, ist die relative Bewertung (FCF-Multiple ~25x, das günstigste im Batch) interessant; für konservative Compounder-Investoren fehlt der Nachweis nachhaltiger GAAP-Profitabilität. Positionsgröße: unterdurchschnittlich bis das Profitabilitätsprofil sich verbessert.</p>
+<p>Peers: **CrowdStrike (CRWD)** hat den Übergang zu GAAP-Profitabilität bereits vollzogen, ist dafür mit 128,7x Forward-KGV extrem teuer; **Palo Alto Networks (PANW)** bietet die breitere, bereits profitable Plattform-Story bei moderaterem Multiple (67,8x) — beide sind die "saubereren" Instrumente für die Zero-Trust-/SASE-These, ZS bleibt die günstigere, aber risikoreichere Wette.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — anhaltende GAAP-Unprofitabilität (Net Margin −1,9%, ROE −2,9%) bei gleichzeitig überdurchschnittlicher Verschuldung (D/E 71,9) rechtfertigt trotz starkem Q4-Beat keine volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
