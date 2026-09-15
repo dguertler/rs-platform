@@ -2686,19 +2686,6 @@
       "created_at": "2026-09-03T19:02:41.741250"
     },
     {
-      "ticker": "OKTA",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -2.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "der EV-Edge ist trotz starker RPO-Dynamik negativ (\u22123,6%), das Forward-KGV bietet keine Sicherheitsmarge gegen\u00fcber dem Microsoft-Bundling-Risiko."
-      },
-      "created_at": "2026-09-04T11:51:38.206323"
-    },
-    {
       "ticker": "DBK.DE",
       "verdict": "WATCH",
       "score": 50,
@@ -2892,6 +2879,19 @@
         "reason": "Der Erwartungswert der eigenen Szenarien liegt bei nur +0,8%, der Kurs notiert nahe dem 52-Wochen-Hoch am oberen Rand der Peer-Bandbreite, trotz intakter RPO-/Rovo-Fundamentaldaten."
       },
       "created_at": "2026-09-13T13:57:53.474621"
+    },
+    {
+      "ticker": "OKTA",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "der EV-Edge ist trotz starkem Q2-Beat und Guidance-Anhebung leicht negativ (\u22121,8%), die Pr\u00e4mie gg\u00fc. dem g\u00fcnstigeren Peer CHKP ist bei nur 10,6% Wachstum nicht vollst\u00e4ndig gerechtfertigt."
+      },
+      "created_at": "2026-09-15T07:37:15.952910"
     }
   ]
 }
