@@ -788,19 +788,6 @@
       "ev_upside_pct": -9.9
     },
     {
-      "ticker": "FTNT",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-PE von 45,6x bei nur 20,1 % Wachstum und ein EV von \u221214,9 % rechtfertigen keine volle Positionsgr\u00f6\u00dfe trotz intakter Franchise-Qualit\u00e4t."
-      },
-      "created_at": "2026-07-10T10:09:09.982607",
-      "ev_upside_pct": -15.9
-    },
-    {
       "ticker": "PSX",
       "verdict": "WATCH",
       "score": 54,
@@ -2892,6 +2879,19 @@
         "reason": "der EV-Edge ist trotz starkem Q2-Beat und Guidance-Anhebung leicht negativ (\u22121,8%), die Pr\u00e4mie gg\u00fc. dem g\u00fcnstigeren Peer CHKP ist bei nur 10,6% Wachstum nicht vollst\u00e4ndig gerechtfertigt."
       },
       "created_at": "2026-09-15T07:37:15.952910"
+    },
+    {
+      "ticker": "FTNT",
+      "verdict": "HOLD",
+      "score": 56,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -10.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "der Erwartungswert ist trotz starker operativer Qualit\u00e4t und Guidance-Anhebung klar negativ (\u221210,8%), die 6-Monats-Rally von +83% hat die Bewertung bereits \u00fcber ein nachhaltiges Niveau hinausgetrieben."
+      },
+      "created_at": "2026-09-15T07:39:04.140661"
     }
   ]
 }
