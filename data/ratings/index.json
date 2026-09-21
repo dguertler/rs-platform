@@ -438,14 +438,6 @@
       "ev_upside_pct": 20.7
     },
     {
-      "ticker": "NTRA",
-      "verdict": "WATCH",
-      "score": 50,
-      "asymmetric_edge": false,
-      "created_at": "2026-06-25T07:16:48.038852",
-      "ev_upside_pct": -38.2
-    },
-    {
       "ticker": "SWK",
       "verdict": "WATCH",
       "score": 46,
@@ -765,19 +757,6 @@
       },
       "created_at": "2026-07-08T06:00:03.010842",
       "ev_upside_pct": -9.8
-    },
-    {
-      "ticker": "AMD",
-      "verdict": "HOLD",
-      "score": 61,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-PE von 39,3x und ein negativer EV von \u22124,8 % tragen an diesem Kursniveau keine volle Positionsgr\u00f6\u00dfe trotz intaktem AI-Wachstumsnarrativ."
-      },
-      "created_at": "2026-07-10T10:08:15.519679",
-      "ev_upside_pct": -9.9
     },
     {
       "ticker": "PSX",
@@ -2314,19 +2293,6 @@
       "created_at": "2026-08-11T09:53:02.484551"
     },
     {
-      "ticker": "CRWD",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -11.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV 137,2x liegt weit \u00fcber allen genannten Peers (inkl. PANW 88,3x) und der Erwartungswert ist mit \u221210,2% negativ, das RS-Momentum (Rang 11) bleibt aber technisch intakt."
-      },
-      "created_at": "2026-08-11T09:53:02.503577"
-    },
-    {
       "ticker": "MSFT",
       "verdict": "BUY",
       "score": 83,
@@ -2626,19 +2592,6 @@
       "created_at": "2026-08-27T09:28:37.423811"
     },
     {
-      "ticker": "SNDK",
-      "verdict": "HOLD",
-      "score": 66,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 9.0,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "EV-Edge ist trotz der strukturellen NBM-Story minimal (+0,9%), die YMTC-Konkurrenzsorge und die extreme Volatilit\u00e4t rechtfertigen keine volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-08-27T09:29:51.494614"
-    },
-    {
       "ticker": "VSXY",
       "verdict": "WATCH",
       "score": 44,
@@ -2702,19 +2655,6 @@
         "reason": "die hohe Verschuldung (D/E 257,98) begrenzt die Flexibilit\u00e4t, der EV-Edge ist mit \u22123,4% leicht negativ und bietet keine Kompensation f\u00fcr das Bilanzrisiko."
       },
       "created_at": "2026-09-04T11:51:38.321000"
-    },
-    {
-      "ticker": "MU",
-      "verdict": "BUY",
-      "score": 70,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 6.6,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Der EV-Edge von +9,8% ist moderat, nicht asymmetrisch, und das Forward-KGV preist bereits implizit einen R\u00fcckgang vom aktuellen Zyklusspitzen-EPS ein, was die volle Positionsgr\u00f6\u00dfe nicht tr\u00e4gt."
-      },
-      "created_at": "2026-09-05T08:14:29.615331"
     },
     {
       "ticker": "DELL",
@@ -2808,58 +2748,6 @@
       "created_at": "2026-09-10T15:48:13.730568"
     },
     {
-      "ticker": "MRNA",
-      "verdict": "WATCH",
-      "score": 40,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -13.5,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "Der Erwartungswert liegt trotz echter FDA-/Pipeline-Katalysatoren bei -19,9% unter dem aktuellen Kurs, die Bewertung ist der operativen Entwicklung weit vorausgeeilt."
-      },
-      "created_at": "2026-09-13T13:57:53.431969"
-    },
-    {
-      "ticker": "MRVL",
-      "verdict": "HOLD",
-      "score": 60,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -16.9,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Das Forward-KGV liegt \u00fcber der gesamten Peer-Bandbreite und der Erwartungswert der eigenen Szenarien ist mit -13,9% negativ, die fundamentale Story (Guidance-Anhebung) bleibt aber intakt."
-      },
-      "created_at": "2026-09-13T13:57:53.457955"
-    },
-    {
-      "ticker": "TEAM",
-      "verdict": "HOLD",
-      "score": 61,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -3.7,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Der Erwartungswert der eigenen Szenarien liegt bei nur +0,8%, der Kurs notiert nahe dem 52-Wochen-Hoch am oberen Rand der Peer-Bandbreite, trotz intakter RPO-/Rovo-Fundamentaldaten."
-      },
-      "created_at": "2026-09-13T13:57:53.474621"
-    },
-    {
-      "ticker": "OKTA",
-      "verdict": "HOLD",
-      "score": 58,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 1.6,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "der EV-Edge ist trotz starkem Q2-Beat und Guidance-Anhebung leicht negativ (\u22121,8%), die Pr\u00e4mie gg\u00fc. dem g\u00fcnstigeren Peer CHKP ist bei nur 10,6% Wachstum nicht vollst\u00e4ndig gerechtfertigt."
-      },
-      "created_at": "2026-09-15T07:37:15.952910"
-    },
-    {
       "ticker": "FTNT",
       "verdict": "HOLD",
       "score": 56,
@@ -2910,6 +2798,136 @@
         "reason": "der Q2-Beat war teilweise durch eine nicht wiederholbare Zollr\u00fcckerstattung getrieben, der Kurs notiert bereits nahe dem 52-Wochen-Hoch, der Erwartungswert bleibt trotz g\u00fcnstiger relativer Bewertung negativ."
       },
       "created_at": "2026-09-15T07:44:10.928115"
+    },
+    {
+      "ticker": "MRNA",
+      "verdict": "WATCH",
+      "score": 54,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.6,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "27,6x Umsatz bei negativem Ergebnis, ROIC \u221238,2 % und ein Konsensziel von $119,56 unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-09-21T16:50:35.668709"
+    },
+    {
+      "ticker": "TEAM",
+      "verdict": "BUY",
+      "score": 80,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 28.9,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "RPO-Wachstum von +44 % gegen +27,6 % Umsatzwachstum st\u00fctzt die technische These fundamental, bei 28,5x Forward im Rahmen der Peer-Bandbreite."
+      },
+      "created_at": "2026-09-21T16:50:35.683551"
+    },
+    {
+      "ticker": "AMD",
+      "verdict": "BUY",
+      "score": 70,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 9.6,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "35,95x Forward liegt \u00fcber NVIDIA (14,2x) und Broadcom (18,4x) bei 17,2 % Betriebsmarge gegen deren 54\u201366 %, und der EV-Upside von +6,9 % tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T16:50:35.697780"
+    },
+    {
+      "ticker": "MRVL",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Kundenkonzentration",
+        "reason": "das Custom-Gesch\u00e4ft h\u00e4ngt an einer einstelligen Zahl von Hyperscaler-Kunden, und der Verlust eines Ankerprogramms wirkt stufenf\u00f6rmig statt graduell; das tr\u00e4gt bei einem EV von \u22121,6 % keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T16:55:45.396895"
+    },
+    {
+      "ticker": "OKTA",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 9.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "41,65x Forward bei 10,6 % Umsatzwachstum ist wachstumsnormiert der teuerste Titel des Security-Peervergleichs, und der EV-Upside von +3,8 % tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T16:55:45.412772"
+    },
+    {
+      "ticker": "CRWD",
+      "verdict": "WATCH",
+      "score": 52,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.7,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "147,98x Forward ist das Doppelte des teuersten Peers bei nicht h\u00f6herem Wachstum, das Konsensziel von $235,35 liegt unter dem Kurs, und der EV liegt 14,7 % darunter."
+      },
+      "created_at": "2026-09-21T16:55:45.427631"
+    },
+    {
+      "ticker": "INTC",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -3.3,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Verw\u00e4sserung",
+        "reason": "die Platzierung von rund 210,5 Mio. Aktien zu $95 verw\u00e4ssert um etwa 4 % und liegt 13 % unter dem aktuellen Kurs, w\u00e4hrend das darauf aufsetzende Forward-Multiple von 52,67x \u00fcber allen genannten Peers liegt."
+      },
+      "created_at": "2026-09-21T16:55:45.442878"
+    },
+    {
+      "ticker": "SNDK",
+      "verdict": "HOLD",
+      "score": 65,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "das optisch g\u00fcnstige Forward-KGV von 6,77x basiert auf Zyklusspitzen-EPS und entspricht normalisiert einem FCF-Multiple von 75\u2013131x, bei einem EV 8,7 % unter dem Kurs."
+      },
+      "created_at": "2026-09-21T16:59:43.779548"
+    },
+    {
+      "ticker": "MU",
+      "verdict": "BUY",
+      "score": 88,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 25.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "16 Take-or-Pay-Vertr\u00e4ge \u00fcber rund $100 Mrd. bis 2030 plus $24,4 Mrd. Nettoliquidit\u00e4t st\u00fctzen das niedrigste Forward-Multiple der Gruppe (6,49x) bei einem EV-Upside von +27,5 %."
+      },
+      "created_at": "2026-09-21T16:59:43.794292"
+    },
+    {
+      "ticker": "NTRA",
+      "verdict": "BUY",
+      "score": 75,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 12.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "19,7x Umsatz bei \u221210,3 % Betriebsmarge ist das 2,4-Fache des teuersten Diagnostik-Peers, das Konsensziel von $344,33 liegt unter dem Kurs, und die FCF-Marge von 3,7 % l\u00e4sst keinen Puffer."
+      },
+      "created_at": "2026-09-21T16:59:43.808469"
     }
   ]
 }
