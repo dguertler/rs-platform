@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>APP — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>APP</h1>
+      <h2>Applovin Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Advertising Agencies</span></div>
+        <div class="mi">MCap: <span>$103B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >49%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">80</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-107.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★★</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$308.06</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$6.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">88.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">203.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+49.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">690–840</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">400–510</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">130–185</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $690–$840 (25 %) · Base $400–$510 (45 %) · Bear $130–$185 (30 %) · EV ~$443,25</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>AppLovin hat die außergewöhnlichsten Kennzahlen dieser gesamten Analyseserie: Umsatzwachstum +52,8 %, Betriebsmarge 77,7 %, Nettomarge 64,6 %, ROIC 113,2 %. Ein Unternehmen, das zwei Drittel jedes Umsatzdollars als Nettogewinn ausweist und dabei über 50 % wächst, gibt es im NASDAQ-100 kein zweites Mal. Trotzdem steht die Aktie auf Rang 97 von 100 und notiert mit $308,06 rund 59 % unter dem 52-Wochen-Hoch von $745,61.</p>
+<p>Die Erklärung ist keine Geschäftsschwäche, sondern eine Vertrauensfrage. Nach einer Kursvervielfachung folgten 2026 mehrere Leerverkäufer-Berichte — unter anderem mit Vorwürfen zu Geldwäschekontrollen — und eine SEC-Untersuchung zu den Werbedatenpraktiken der AXON-Engine. Die Untersuchung wurde im August ohne Maßnahmen eingestellt. Übrig bleibt die eigentliche Schwachstelle, und die ist real: Das Wachstum hängt an der Kadenz der Modell-Releases einer einzigen KI-Engine, nicht an einer breiten Basis selbstbedienender Werbetreibender. Im zweiten Quartal lag das bereinigte EBITDA knapp unter der Guidance-Mitte — eine Abweichung von rund $16 Mio. kostete etwa $40 Mrd. Marktwert. Das ist die Bewertung eines Titels, der auf fehlerfreie Ausführung gepreist war.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>AXON-Engine: ein maschinelles Lernsystem, das Werbung in mobilen Anwendungen aussteuert — der gesamte Ertrag hängt an der Qualität dieses einen Modells</li>
+<li>Umsatz entsteht als Anteil am vermittelten Werbebudget; die extrem hohe Marge folgt daraus, dass die Engine ohne proportionalen Personalaufbau skaliert</li>
+<li>Ursprung im Mobile Gaming, Ausweitung auf E-Commerce- und Marken-Werbung ist der eigentliche Wachstumshebel</li>
+<li>Bruttomarge 88,5 % bei Betriebsmarge 77,7 % — nur 10,8 Punkte Abstand, der schlankste Kostenapparat der gesamten Analyseserie</li>
+<li>Strukturelle Abhängigkeit: Wachstumssprünge kommen mit neuen Modellversionen, nicht kontinuierlich — das macht die Quartalsentwicklung schwer prognostizierbar</li>
+<li>Aggressive Kapitalstruktur: Debt/Equity 111,13, Price/Book 32,65, ROE 203,7 % — die hohe Eigenkapitalrendite ist zu einem erheblichen Teil Hebelwirkung, nicht nur operative Leistung</li>
+<li>FCF $3,18 Mrd. bei $6,83 Mrd. Umsatz = 46,6 % FCF-Marge, aber nur 3,1 % Rendite auf den Marktwert</li>
+<li>Anomalie: keine erkennbar — Brutto-, Betriebs- und Nettomarge sind konsistent gestaffelt, trailing und forward EPS plausibel</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Alphabet (GOOGL, Fwd-KGV 23,5x), Meta (META, 19,0x), PubMatic (PUBM, 21,6x), The Trade Desk (TTD, 13,8x), Pinterest (PINS, 7,8x) — Bandbreite 7,8x–23,5x.</p>
+<p>Die AXON-Engine skaliert über das Gaming hinaus in E-Commerce und vernetztes Fernsehen, die eingestellte SEC-Untersuchung nimmt das Regulierungsthema vom Tisch, und das Wachstum hält über 35 %. Strukturelle Margennachhaltigkeit ist hier ungewöhnlich gut belegt: 88,5 % Bruttomarge bei nur 10,8 Punkten Abstand zur Betriebsmarge bedeutet, dass zusätzliche Werbebudgets fast vollständig als Gewinn durchschlagen — dieser Hebel ist bereits bewiesen, nicht versprochen. Der Wettbewerbsvorteil liegt in der Datenrückkopplung: Mehr ausgesteuertes Volumen verbessert das Modell, ein besseres Modell zieht mehr Volumen. Annahme (kein Konsens): FY28-EPS ~$38,00 × 20x (nahe META 19,0x, leichte Prämie für die mehr als doppelte Betriebsmarge) = $760. Bull-Kursziel: $690–$840. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Das Wachstum verlangsamt sich von 52,8 % auf 25–30 %, die Modell-Release-Kadenz bleibt der Taktgeber, und das Multiple bleibt wegen des Konzentrationsrisikos unter dem der breiten Plattformen. Die Margen halten. Annahme (kein Konsens): FY28-EPS ~$30,00 × 15x (nahe dem eigenen aktuellen Niveau von 14,7x, unter META 19,0x) = $450. Base-Kursziel: $400–$510. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Eine Modellversion liefert nicht. Das ist der konkrete Mechanismus, nicht "der Werbemarkt dreht" — wenn das Wachstum an Release-Zyklen hängt, ist ein enttäuschendes Release ein unmittelbarer Wachstumsstopp. Verstärkend kommt hinzu, dass die Werbetreibenden-Basis im Gaming konzentriert ist und Gaming-Werbebudgets selbst zyklisch sind. Bei Debt/Equity 111,13 verengt ein Gewinnrückgang zusätzlich den finanziellen Spielraum.</p>
+<p>Kundenkonzentration: das materiellste Risiko dieses Falls. Die Werbetreibenden stammen überwiegend aus dem Mobile-Gaming-Segment; die genaue Verteilung ist aus dem Datensatz nicht quantifizierbar, die strukturelle Konzentration auf eine Branche ist aber belegt und der Grund, warum der Bewertungsabschlag gegenüber GOOGL und META gerechtfertigt bleibt. Geopolitik/Exportkontrollen: nicht materiell. Lieferkette/Single-Source: keine physische Lieferkette, aber ein echtes Single-Source-Risiko auf Systemebene — das gesamte Geschäft hängt an einer einzigen Engine, es gibt keine zweite Ertragssäule. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; AppLovin kauft aktiv Aktien zurück, was Price/Book 32,65 und Debt/Equity 111,13 mit erklärt — die Rückkäufe sind teilweise fremdfinanziert, was den Hebel erhöht statt ihn zu senken. Regulierung/Rechtsrisiken: die SEC-Untersuchung zu den AXON-Werbedaten wurde ohne Maßnahmen eingestellt, Datenschutzregulierung im mobilen Werbe-Tracking bleibt aber ein Dauerrisiko.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$16,00 × 9x (zwischen PINS 7,8x und TTD 13,8x, De-Rating bei gebrochener Wachstumsthese) = $144. Bear-Kursziel: $130–$185. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $765 + 0,45 × $455 + 0,30 × $157,50 = **~$443,25 — implizites Upside vs. aktuellem Kurs ($308,06): +43,9%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Operativ die stärksten Kennzahlen der gesamten Analyseserie, bilanziell die aggressivsten. Betriebsmarge 77,7 % und Nettomarge 64,6 % sind keine Zyklusspitzen im Halbleitersinn, sondern Ausdruck eines Software-Modells ohne Grenzkosten — sie können bei Wachstumsverlust fallen, aber nicht durch einen Preiszyklus. ROIC 113,2 % ist der höchste Wert dieser Gruppe und im Gegensatz zu ROE nicht hebelverzerrt; das ist der belastbarste einzelne Qualitätsbeleg.</p>
+<p>Die Gegenseite ist ebenso deutlich. ROE 203,7 % ist wegen Debt/Equity 111,13 und Price/Book 32,65 nur eingeschränkt aussagekräftig — ein erheblicher Teil stammt aus der Hebelwirkung fremdfinanzierter Rückkäufe, nicht aus operativer Leistung; für die Qualitätsbeurteilung wird daher ROIC verwendet, nicht ROE. FCF $3,18 Mrd. entspricht zwar 46,6 % FCF-Marge, aber nur 3,1 % Rendite auf den Marktwert — die niedrigste FCF-Rendite dieser zehn Titel. Der Markt zahlt also weiterhin einen Wachstumspreis, trotz des Kursrückgangs von 59 %.</p>
+<p>RPO nicht anwendbar (kein Subscription-Modell); Werbebudgets werden kurzfristig allokiert, ein Auftragsbestand existiert nicht. Das ist dieselbe strukturelle Schwäche wie bei The Trade Desk: Es gibt keinen Backlog, der einen Nachfrageeinbruch dämpft. Der Burggraben ist echt und liegt in der Datenrückkopplung der Engine — er ist aber an ein einziges System gebunden, und genau das macht ihn zerbrechlich.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 14,69x bei Forward-EPS $20,98. Da es sich nicht um ein zyklisches Geschäft handelt, ist die FCF-Bewertung die aussagekräftigere Basis — und sie fällt deutlich weniger günstig aus: 3,1 % FCF-Rendite auf $103,09 Mrd. Marktwert. Der Grund für die Diskrepanz zwischen niedrigem KGV und niedriger FCF-Rendite liegt im Umsatzmultiple: 15,10x Sales. Price/Book 32,65 ist als Bewertungsmaß bei einem Unternehmen mit fremdfinanzierten Rückkäufen nicht aussagekräftig.</p>
+<p>Peer-Einordnung: 14,69x Forward liegt im **unteren Mittelfeld** der Bandbreite — unter GOOGL (23,5x), PUBM (21,6x) und META (19,0x), knapp über TTD (13,8x), über PINS (7,8x). Auf Umsatzbasis kehrt sich das Bild vollständig um: 15,10x Sales gegenüber GOOGL 9,59x, META 7,43x, PUBM 2,76x und TTD 2,20x — AppLovin ist auf Umsatzbasis der mit Abstand teuerste Wert der Gruppe. Beide Aussagen sind richtig und der Widerspruch ist erklärbar: Die Nettomarge von 64,6 % ist annähernd doppelt so hoch wie bei GOOGL (34,0 %) und META (34,8 %). Wer die Marge für nachhaltig hält, sieht einen günstigen Titel; wer sie für angreifbar hält, sieht einen sehr teuren. Das ist die eigentliche Entscheidung in diesem Fall.</p>
+<p>Was preist der Kurs ein? Bei $103,09 Mrd. und einem unterstellten reifen Plattform-Multiple von 18x müsste AppLovin dauerhaft ~$5,7 Mrd. Nettogewinn erzielen — bei 64,6 % Nettomarge entspricht das ~$8,9 Mrd. Umsatz gegenüber heute $6,83 Mrd., also 30 % Wachstum. Bei +52,8 % im laufenden Jahr wäre das in unter einem Jahr erreicht. Der Kurs unterstellt damit implizit, dass entweder das Wachstum abrupt endet **oder** die Nettomarge deutlich fällt. Angesichts der Modellabhängigkeit ist das nicht unplausibel, aber es ist eine harte Annahme. Analyst-Konsensziel $501,94 bei 31 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich, obwohl die öffentlich gewordenen Leerverkäufer-Berichte nahelegen, dass es eine aktive Gegenseite gibt. Ableitbar ist die Reaktionsempfindlichkeit: Eine EBITDA-Abweichung von rund $16 Mio. — etwa 0,2 % des Jahresumsatzes — löste einen Marktwertverlust von etwa $40 Mrd. aus. Das ist das Verhalten eines Titels ohne Bewertungspuffer und mit einer Halterbasis, die auf perfekte Ausführung setzt. Ableitbar ist außerdem Beta 2,49, der höchste Wert dieser Analysegruppe. Hypothese, nicht datenbasiert: Die Kombination aus Leerverkäufer-Berichten, abgeschlossener SEC-Untersuchung und Momentum-Abbau deutet auf eine Halterstruktur hin, die stark von kurzfristig orientierten Adressen geprägt ist. Was neue Käufer anziehen würde, ist ein Quartal, in dem das Wachstum aus Nicht-Gaming-Werbung stammt — also der Beleg für die Diversifizierungsthese.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −107,46, Rang 97 von 100. Fenster: 5T −9,56 %, 10T −4,25 %, 20T −0,37 %, 50T −38,68 %, 6M −54,60 %. Die Struktur zeigt einen massiven Einbruch im 50-Tage-Fenster mit anschließender Stabilisierung — der 20-Tage-Wert von −0,37 % ist praktisch neutral. Der Kurs bei $308,06 liegt nur 3,6 % über dem 52-Wochen-Tief von $297,50, was die Bodenbildung fragil macht. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist rein reaktiv und folgt Vertrauensereignissen, nicht der Ertragsentwicklung. Warnsignal: Ein Bruch unter $297,50 markiert ein neues Verlaufstief und würde die Stabilisierung der letzten vier Wochen entwerten; ein Einstiegssignal wäre die Rückeroberung von $380.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($950–$1.300):** Die Engine wird zur Standardschicht für performanceorientierte Werbung über Gaming hinaus, Wachstum über 30 %, Marge gehalten. Normalisiertes EPS $50–65 × 19–20x.</p>
+<p>**Base ($450–$700):** Wachstum 20–25 %, Nettomarge sinkt Richtung 55 %, Multiple bei 15–16x. Normalisiertes EPS $30–44 × 15–16x.</p>
+<p>**Bear ($100–$220):** Ein Modellzyklus enttäuscht, Gaming-Budgets schwächeln, die Margen normalisieren sich auf Plattform-Niveau um 35 %.</p>
+<p>Entscheidende Variable: ob der Umsatzanteil außerhalb des Mobile Gaming substanziell wird. Daran hängt, ob die 64,6 % Nettomarge verteidigbar sind.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Der höchste EV-Upside dieser Analysegruppe (+43,9 %) bei gleichzeitig dem konzentriertesten Geschäftsrisiko. Beides gehört zusammen: AppLovin verdient außergewöhnlich — ROIC 113,2 %, Betriebsmarge 77,7 % —, aber der gesamte Ertrag hängt an einem einzigen KI-System und einer überwiegend aus einer Branche stammenden Werbetreibenden-Basis. Die eingestellte SEC-Untersuchung hat ein Risiko beseitigt, das Konzentrationsrisiko bleibt.</p>
+<p>Einordnung: High-Conviction-Momentum-Play ohne aktuelles Momentum — RS-Score −107,46, Rang 97, GWS 0/3, und der Funnel liefert diesen Titel nicht. Wer hier einsteigt, wettet gegen die eigene Signalsystematik dieser Plattform auf die Rückkehr eines gebrochenen Trends. Ausdrückliche Warnung zur Positionsgröße: Beta 2,49 ist der höchste Wert der gesamten Analyseserie, und eine Abweichung von 0,2 % des Jahresumsatzes hat einen Marktwertverlust von rund 28 % ausgelöst. Maximal 1–2 % eines diversifizierten Portfolios, mit hartem Stopp unter dem 52-Wochen-Tief von $297,50.</p>
+<p>Peers: **Meta (META)** ist bei 19,0x Forward und 7,43x Sales auf Umsatzbasis halb so teuer, wächst mit 28,0 % solide und hat eine breit diversifizierte Werbetreibenden-Basis — das strukturell robustere Instrument für dieselbe These. **Alphabet (GOOGL)** bietet bei 23,5x Forward die breiteste Werbe-Exponierung ohne Einzelsystem-Risiko. Gegenüber beiden ist AppLovin auf Umsatzbasis deutlich teurer, auf Gewinnbasis günstiger — die relative Bewertung hängt vollständig an der Nachhaltigkeit der 64,6-%-Nettomarge.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 5/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Kundenkonzentration — die Werbetreibenden-Basis stammt überwiegend aus dem Mobile Gaming und der gesamte Ertrag hängt an einer einzigen Engine, deren Release-Kadenz das Wachstum taktet; das trägt trotz +43,9 % EV keine volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CHTR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CHTR</h1>
+      <h2>Charter Communications, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Telecom Services</span></div>
+        <div class="mi">MCap: <span>$17B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >44%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">56</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-109.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$128.17</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">3.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$54.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">55.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">27.2%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+43.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">270–340</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">22%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">155–200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">55–85</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">33%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $270–$340 (22 %) · Base $155–$200 (45 %) · Bear $55–$85 (33 %) · EV ~$170,08</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Charter ist der am stärksten gehebelte Fall dieser Analyseserie, und jede Bewertungsaussage muss mit dieser Einordnung beginnen: Rund $94 Mrd. Schulden stehen einem Eigenkapitalwert von nur $16,66 Mrd. gegenüber. Das Eigenkapital ist damit ein schmaler Rest über einer sehr großen Verbindlichkeit — mathematisch ein Optionsschein auf das operative Geschäft, kein klassischer Aktienanteil. Debt/Equity 441,58 ist mit Abstand der höchste Wert aller zwanzig in dieser Serie analysierten Titel.</p>
+<p>Das operative Bild rechtfertigt die Skepsis. Im ersten Quartal 2026 verlor Charter 120.000 Breitbandkunden gegenüber 59.000 im Vorjahresquartal, verfehlte die Gewinnerwartung um 9 %, und die Aktie brach um über 21 % ein. Das zweite Quartal zeigte einen noch steileren Kundenrückgang, niedrigeren Umsatz und schwächeres EBITDA; der EBITDA-Ausblick wurde gesenkt. Charter hat die Gewinnerwartung in jedem der letzten vier Quartale verfehlt. Dagegen stehen drei konkrete Positiva: Spectrum Mobile gewann im zweiten Quartal 406.000 Leitungen bei +16 % Wachstum auf Zwölfmonatssicht, die Investitionen erreichen 2026 ihren Höhepunkt, und das Management hat Rückkäufe pausiert, um Schulden zu tilgen. Der Kurs von $128,17 entspricht 3,06x erwartetem Gewinn und 0,90x Buchwert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Kabelbasiertes Breitband als Ertragskern, gebündelt mit TV und Festnetz — ein Infrastrukturgeschäft mit hohen Fixkosten und regionalen Quasi-Monopolen</li>
+<li>Spectrum Mobile als Wachstumssegment: Charter mietet Funkkapazität ein und verkauft Mobilfunk gebündelt zum Breitband — geringe Marge, aber starke Kundenbindung</li>
+<li>Der strukturelle Angriff kommt von zwei Seiten: Glasfaserausbau der Telekomanbieter und Festnetz-Mobilfunk-Ersatz, beide preisaggressiv</li>
+<li>Kapitalintensität ist der Kern des Falls: Der Investitionszyklus für Netzaufrüstung erreicht 2026 seinen Höhepunkt, danach sollte der freie Cashflow strukturell steigen</li>
+<li>Betriebsmarge 23,5 % gegenüber Nettomarge 9,1 % — die Differenz von 14 Punkten ist im Wesentlichen Zinsaufwand und damit die direkte Folge der $94 Mrd. Schulden; keine Anomalie, aber die zentrale Ertragsbremse</li>
+<li>Der ausstehende Zusammenschluss mit Cox soll Skalierung bringen; das Leverage-Ziel nach Abschluss wurde auf 3,5x gesenkt</li>
+<li>Rückkäufe im dritten Quartal pausiert zugunsten der Schuldentilgung — eine Prioritätsverschiebung mit Signalwirkung</li>
+<li>FCF $2,20 Mrd. bei $54,40 Mrd. Umsatz = 4,0 % FCF-Marge</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Comcast (CMCSA, Fwd-KGV 6,4x), T-Mobile (TMUS, 11,6x), AT&T (T, 9,9x), Verizon (VZ, 9,1x) — Bandbreite 6,4x–11,6x. Comcast ist der einzige echte Kabel-Vergleich und daher der primäre Anker.</p>
+<p>Die Investitionsspitze ist überschritten, der freie Cashflow steigt strukturell, der Cox-Zusammenschluss bringt Skalierung, und das Mobilfunkgeschäft kompensiert die Breitbandverluste im Umsatz. Bei einem derart gehebelten Eigenkapital wirkt jede EBITDA-Stabilisierung überproportional auf den Aktienwert. Strukturelle Margennachhaltigkeit ist begrenzt begründbar: Das Kabelnetz ist ein bereits bezahltes Anlagevermögen mit niedrigen Grenzkosten je Zusatzkunde, und regional existiert in vielen Gebieten weiterhin kein gleichwertiger Wettbewerber. Nicht beurteilbar auf Basis der verfügbaren Daten ist, ob dieser Vorteil dem Glasfaserausbau standhält. Annahme (kein Konsens): FY28-EPS ~$50,00 × 6x (auf Comcast-Niveau 6,4x, dem direkten Kabel-Peer) = $300. Bull-Kursziel: $270–$340. Eintrittswahrscheinlichkeit: 22%.</p>
+<h3>4. BASE CASE</h3>
+<p>Die Breitbandverluste flachen ab, ohne zu enden, Mobilfunk trägt das Umsatzwachstum, und der freie Cashflow steigt mit sinkenden Investitionen. Das Multiple bleibt jedoch wegen der Verschuldung deutlich unter dem der Peers. Annahme (kein Konsens): FY28-EPS ~$44,00 × 4x (über dem eigenen aktuellen Niveau von 3,06x, klar unter CMCSA 6,4x wegen Debt/Equity 441,58) = $176. Base-Kursziel: $155–$200. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Breitbandverluste beschleunigen weiter. Der Mechanismus ist bereits sichtbar — von 59.000 auf 120.000 verlorene Kunden im Jahresvergleich, mit weiterer Verschlechterung im zweiten Quartal. Bei einem Fixkostengeschäft übersetzt sich Kundenverlust fast vollständig in EBITDA-Verlust. Und hier wirkt der Hebel gegen den Aktionär: Bei $94 Mrd. Schulden und $16,66 Mrd. Eigenkapitalwert genügt ein EBITDA-Rückgang von rund 15 %, um den Unternehmenswert so weit zu senken, dass sich der Eigenkapitalwert halbiert. Refinanzierungen zu höheren Zinsen verschärfen das zusätzlich.</p>
+<p>Bilanz: das mit Abstand materiellste Risiko. $94 Mrd. Schulden, Debt/Equity 441,58, ROIC 8,58 % — die Kapitalrendite liegt damit nur knapp über plausiblen Fremdkapitalkosten, das heißt Charter verdient auf das eingesetzte Kapital kaum mehr, als es dafür zahlt. Kundenkonzentration: keine, breites Privatkundengeschäft. Geopolitik/Exportkontrollen: nicht materiell. Lieferkette/Single-Source: Netzausrüstung ist von mehreren Anbietern beziehbar; die Mobilfunkkapazität wird dagegen von einem Netzbetreiber eingemietet, was ein echtes Abhängigkeitsverhältnis im Wachstumssegment darstellt. Verwässerung: derzeit kein Thema, aber die Rückkäufe wurden pausiert — der Aktionär verliert damit die Stütze, die das Ergebnis je Aktie jahrelang getragen hat. Regulierung/Rechtsrisiken: erhöht — der Cox-Zusammenschluss steht unter Genehmigungsvorbehalt, und die Breitbandregulierung ist politisch volatil.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$25,00 × 2,5x (unter dem eigenen aktuellen Multiple und weit unter allen Peers — bei anhaltendem Kundenverlust und steigender Refinanzierungslast) = $62,50. Bear-Kursziel: $55–$85. Eintrittswahrscheinlichkeit: 33%.</p>
+<p>**Summe: 22% + 45% + 33% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,22 × $305 + 0,45 × $177,50 + 0,33 × $70 = **~$170,08 — implizites Upside vs. aktuellem Kurs ($128,17): +32,7%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Die schwächste Fundamentalqualität dieser Analysegruppe, und die Kennzahlen sind dabei doppelt zu lesen. ROE 27,2 % sieht stark aus, ist aber bei Debt/Equity 441,58 fast vollständig Hebelwirkung — die Eigenkapitalbasis ist so klein, dass jeder Gewinn eine hohe Rendite darauf ergibt. Die ehrliche Kennzahl ist ROIC 8,58 %: Auf das gesamte eingesetzte Kapital verdient Charter einstellig, bei einem Schuldenstand von $94 Mrd. Für die Qualitätsbeurteilung wird daher ausschließlich ROIC verwendet, nicht ROE.</p>
+<p>Betriebsmarge 23,5 % ist für ein Infrastrukturgeschäft solide, die Nettomarge von 9,1 % zeigt, wie viel davon der Zinsaufwand aufzehrt. Umsatz −1,7 % bei beschleunigten Kundenverlusten ist das eigentliche Problem: Ein Fixkostengeschäft mit schrumpfender Kundenbasis hat keinen Weg zur Margenexpansion außer Preiserhöhungen, und die beschleunigen den Kundenverlust.</p>
+<p>Der wichtigste Bewertungsfehler, den man hier machen kann, betrifft den Cashflow. $2,20 Mrd. FCF auf $16,66 Mrd. Marktwert ergeben optisch 13,2 % FCF-Rendite — der höchste Wert dieser Analysegruppe. Diese Zahl ist irreführend: Auf den Unternehmenswert von rund $110 Mrd. (Marktwert plus Nettoschulden) gerechnet, sind es 2,0 %. Das ist die relevante Größe, denn die Schulden haben Vorrang vor dem Aktionär. Die Investitionsspitze 2026 drückt den aktuellen FCF zusätzlich, weshalb die Erholung nach der Spitze der zentrale Bull-Punkt bleibt. RPO nicht anwendbar (kein Vertrags-Backlog im Unternehmenssinn); das funktionale Äquivalent ist die Breitband-Kundenentwicklung, und die ist der wichtigste Vorlaufindikator des Falls: −120.000 im ersten Quartal mit weiterer Verschlechterung danach.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei einem derart gehebelten Geschäft ist das Eigenkapital-KGV die am wenigsten aussagekräftige Kennzahl. Trotzdem der Befund: 3,06x Forward — das niedrigste Multiple aller zwanzig Titel dieser Serie. Price/Book 0,90 bedeutet, dass Charter unter Buchwert gehandelt wird, ebenfalls einmalig in dieser Gruppe. Auf Umsatzbasis liegt CHTR bei 0,31x Sales gegenüber CMCSA 0,65x, T 1,37x, VZ 1,44x und TMUS 1,96x.</p>
+<p>Peer-Einordnung: 3,06x Forward liegt **unter allen Peers** — bei weniger als der Hälfte von Comcast (6,4x), einem Drittel von Verizon (9,1x) und einem Viertel von T-Mobile (11,6x). Dieser Abschlag ist strukturell begründbar und nicht unerklärt: Comcast hat mit 0,90x denselben Price/Book, aber nur einen Bruchteil der relativen Verschuldung, und alle genannten Peers verlieren nicht in diesem Tempo Breitbandkunden. Der Abschlag ist also ein Verschuldungs- und Schrumpfungsabschlag, kein übersehener Wert.</p>
+<p>Was preist der Kurs ein? Die aussagekräftige Rechnung läuft über den Unternehmenswert: Bei rund $110 Mrd. Unternehmenswert und einem unterstellten reifen Kabel-Multiple von 6x EBITDA müsste Charter dauerhaft ~$18,3 Mrd. EBITDA erwirtschaften. Bei 23,5 % Betriebsmarge auf $54,40 Mrd. Umsatz liegt das operative Ergebnis bei rund $12,8 Mrd., das EBITDA entsprechend darüber — der Markt bewertet Charter also ungefähr fair auf Unternehmenswertbasis und preist auf Eigenkapitalebene lediglich das Risiko, dass das EBITDA weiter fällt. Das ist eine plausible, keine übertriebene Annahme. Analyst-Konsensziel $179,11 bei 19 Analysten und Rating "hold" — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Konsenslage: 19 Analysten, Rating "hold", mittleres Ziel 39,7 % über dem Kurs. Die Kombination aus "hold" und einem derart hohen Kursziel ist ungewöhnlich und beschreibt eine Sell-Side, die den rechnerischen Wert sieht, das Risiko aber nicht empfehlen will. Ableitbar ist außerdem Beta 0,69, der niedrigste Wert dieser Analysegruppe — Charter fällt unabhängig vom Markt, es ist ein reines Unternehmensproblem. Die pausierten Rückkäufe sind das aussagekräftigste Signal des Managements: Wer bei 0,90x Buchwert keine eigenen Aktien kauft, priorisiert die Bilanz über den Aktienkurs — betriebswirtschaftlich richtig, für den Aktionär kurzfristig nachteilig. Was neue Käufer anziehen würde, ist ein Quartal mit stabilen oder wachsenden Breitbandkunden. Bis dahin bleibt jeder Bewertungsvorteil hypothetisch.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −109,58, der schwächste Wert des gesamten NASDAQ-100, Rang 100 von 100. Fenster: 5T −12,32 %, 10T −16,02 %, 20T −15,77 %, 50T −1,40 %, 6M −64,07 %. Die kurzen Fenster zeigen eine klare Beschleunigung nach unten — der Abverkauf läuft gerade, er ist nicht abgeschlossen. Der Kurs bei $128,17 liegt 14,9 % über dem 52-Wochen-Tief von $111,55 und 55,2 % unter dem Hoch. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist fundamental erklärbar und folgt den Kundenverlusten und der gesenkten EBITDA-Prognose. Warnsignal: Bei dieser Dynamik ist ein Test des 52-Wochen-Tiefs von $111,55 wahrscheinlicher als eine Erholung; ein erstes Stabilisierungssignal wäre die Rückeroberung von $150.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($400–$600):** Investitionsspitze überschritten, freier Cashflow steigt deutlich, Cox-Integration gelingt, Verschuldung sinkt auf 3,5x. Normalisiertes EPS $60–80 × 6–8x.</p>
+<p>**Base ($160–$280):** Breitbandverluste flachen ab, Mobilfunk trägt, Verschuldung sinkt langsam, Multiple bleibt bei 4–5x. Normalisiertes EPS $40–55 × 4–5x.</p>
+<p>**Bear ($30–$90):** Kundenverluste beschleunigen, EBITDA fällt, die Refinanzierung wird teuer — bei diesem Hebel ist ein Eigenkapitalwert nahe null nicht ausgeschlossen.</p>
+<p>Entscheidende Variable: die Breitband-Kundenentwicklung. Bei $94 Mrd. Schulden entscheidet allein sie darüber, ob das Eigenkapital ein Optionsschein mit Wert ist oder einer ohne.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Der rechnerisch höchste Erwartungswert braucht hier die deutlichste Einordnung. Der EV-Upside von +32,7 % entsteht nicht aus operativer Stärke, sondern aus dem Hebel: Bei $94 Mrd. Schulden und $16,66 Mrd. Eigenkapitalwert bewegt jede EBITDA-Veränderung den Aktienkurs überproportional — in beide Richtungen. Genau deshalb ist die Spanne zwischen Bull ($305) und Bear ($70) so extrem. Die scheinbar attraktive FCF-Rendite von 13,2 % schrumpft auf Unternehmenswertbasis auf 2,0 %; das ist die ehrliche Zahl.</p>
+<p>Operativ verschlechtert sich das Geschäft messbar: Breitbandverluste von 59.000 auf 120.000 verdoppelt, danach weiter verschlechtert, Gewinnverfehlung in vier aufeinanderfolgenden Quartalen, gesenkter EBITDA-Ausblick. Die Positiva — Mobilfunkwachstum, überschrittene Investitionsspitze, Schuldenpriorität — sind real, aber alle in der Zukunft.</p>
+<p>Einordnung: spekulative, gehebelte Turnaround-Wette, weder Value-Fall noch Qualitätswert und definitiv kein Momentum-Play. RS-Score −109,58 ist der schwächste des gesamten Index, GWS 0/3, der Funnel liefert diesen Titel nicht. Für die meisten Investorentypen ungeeignet. Wer die Cashflow-Inflexion spielen will, sollte auf ein Quartal mit stabilen Breitbandkunden warten statt zu antizipieren, und dann maximal 1 % einsetzen — mit der ausdrücklichen Bereitschaft, die Position vollständig abzuschreiben.</p>
+<p>Peers: **Comcast (CMCSA)** ist bei 6,4x Forward und identischem Price/Book von 0,90 der direkte Kabel-Vergleich mit weit geringerer relativer Verschuldung und stabilerer Kundenbasis — für dieselbe These das deutlich sicherere Instrument. **T-Mobile (TMUS)** ist bei 11,6x Forward das Dreifache wert, wächst mit +7,9 % und steht auf der Gewinnerseite genau der Substitution, die Charter Kunden kostet.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — $94 Mrd. Schulden bei Debt/Equity 441,58 und ROIC 8,58 % treffen auf beschleunigte Breitbandverluste von 59.000 auf 120.000 je Quartal; auf Unternehmenswertbasis beträgt die FCF-Rendite nur 2,0 %.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

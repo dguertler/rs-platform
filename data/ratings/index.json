@@ -863,19 +863,6 @@
       "ev_upside_pct": -23.1
     },
     {
-      "ticker": "ODFL",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Das RS-Momentum ist real und die Bewertung ist peer-konsistent (Abschnitt 7), aber die fundamentale Tonnage-Erholung aus Abschnitt 1 ist in den Umsatzzahlen (-2,9 % YoY) noch nicht best\u00e4tigt."
-      },
-      "created_at": "2026-07-14T19:35:28.939937",
-      "ev_upside_pct": -9.8
-    },
-    {
       "ticker": "CI",
       "verdict": "HOLD",
       "score": 59,
@@ -1719,19 +1706,6 @@
         "reason": "Starkes RS-Signal (Rang 39) und aktiver Daily-Breakout, aber kein aktueller fundamentaler Katalysator vor dem n\u00e4chsten Bericht (04.08.2026); Reduzierung bis zur Best\u00e4tigung."
       },
       "created_at": "2026-07-29T12:02:42.325368"
-    },
-    {
-      "ticker": "AXON",
-      "verdict": "HOLD",
-      "score": 61,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -6.0,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV ~52x liegt weit \u00fcber dem n\u00e4chstliegenden Peer Motorola Solutions (~24\u201327x); RS-Signal (Rang 78) und aktiver 4H-Breakout best\u00e4tigen reales Momentum, daher Reduzierung statt vollem Veto."
-      },
-      "created_at": "2026-07-29T12:03:57.227180"
     },
     {
       "ticker": "ROP",
@@ -2928,6 +2902,136 @@
         "reason": "19,7x Umsatz bei \u221210,3 % Betriebsmarge ist das 2,4-Fache des teuersten Diagnostik-Peers, das Konsensziel von $344,33 liegt unter dem Kurs, und die FCF-Marge von 3,7 % l\u00e4sst keinen Puffer."
       },
       "created_at": "2026-09-21T16:59:43.808469"
+    },
+    {
+      "ticker": "BKNG",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 28.5,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "keine fundamentalen Einw\u00e4nde bei 5,9 % FCF-Rendite, 34,4 % Betriebsmarge und einem Multiple im unteren Drittel der Peer-Bandbreite; der Funnel liefert diesen Titel mangels RS- und GWS-Signal ohnehin nicht als Kandidaten."
+      },
+      "created_at": "2026-09-21T19:20:38.813352"
+    },
+    {
+      "ticker": "HUBS",
+      "verdict": "BUY",
+      "score": 72,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 23.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "die Bewertung von 3,12x Sales bei 19,8 % Wachstum ist attraktiv, es existiert aber kein fundamentaler Ausl\u00f6ser, und RS \u221275,65 bei GWS 0/3 bedeutet, dass der Funnel diesen Titel gar nicht erst liefert."
+      },
+      "created_at": "2026-09-21T19:20:38.843750"
+    },
+    {
+      "ticker": "NFLX",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 23.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "18,80x Forward und 6,18x Sales liegen \u00fcber allen belastbaren Medien-Peers, und die zentrale Cashflow-Kennzahl ist im Datensatz nicht verwendbar; das tr\u00e4gt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T19:23:04.945105"
+    },
+    {
+      "ticker": "ODFL",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -0.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "26,01x Forward am oberen Rand der Peer-Bandbreite und 6,40x Sales beim Zweieinhalbfachen der LTL-Peers, bei einem EV von +0,1 % gegen\u00fcber dem aktuellen Kurs."
+      },
+      "created_at": "2026-09-21T19:23:04.966904"
+    },
+    {
+      "ticker": "INTU",
+      "verdict": "BUY",
+      "score": 72,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 33.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "11,20x Forward bei 7,8 % FCF-Rendite und 81,0 % Bruttomarge ist attraktiv, aber die eigene FY27-Prognose (Umsatz +9\u201310 %, TurboTax-Einheiten +2\u20133 %) liefert keinen positiven Ausl\u00f6ser, und RS \u221286,42 bei GWS 0/3 bedeutet keinen Funnel-Kandidaten."
+      },
+      "created_at": "2026-09-21T19:25:34.264980"
+    },
+    {
+      "ticker": "TTD",
+      "verdict": "WATCH",
+      "score": 42,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 1.2,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Katalysator fehlt",
+        "reason": "Umsatzwachstum von +3 % mit prognostiziertem R\u00fcckgang, 15 % Stellenabbau und ein Konsensziel von $13,60 unterhalb des Kurses; es existiert kein fundamentaler Ausl\u00f6ser, und der EV liegt 7,6 % unter dem Einstiegsniveau."
+      },
+      "created_at": "2026-09-21T19:25:34.281288"
+    },
+    {
+      "ticker": "APP",
+      "verdict": "BUY",
+      "score": 80,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 49.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Kundenkonzentration",
+        "reason": "die Werbetreibenden-Basis stammt \u00fcberwiegend aus dem Mobile Gaming und der gesamte Ertrag h\u00e4ngt an einer einzigen Engine, deren Release-Kadenz das Wachstum taktet; das tr\u00e4gt trotz +43,9 % EV keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T19:28:13.254021"
+    },
+    {
+      "ticker": "AXON",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -9.9,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "42,35x Forward und 11,30x Sales liegen beim 1,7- bis 4-Fachen der R\u00fcstungs-Peers bei einer Betriebsmarge von 5,2 % und 0,6 % FCF-Rendite, und der EV liegt 12,5 % unter dem Kurs."
+      },
+      "created_at": "2026-09-21T19:28:13.271498"
+    },
+    {
+      "ticker": "LULU",
+      "verdict": "HOLD",
+      "score": 55,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 19.8,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "0,98x Umsatz bei 10,6 % FCF-Rendite und ROIC 31,5 % ist substanziell attraktiv, aber vergleichbare Ums\u00e4tze von \u22129 % und eine gesenkte Jahresprognose liefern keinen fundamentalen Ausl\u00f6ser."
+      },
+      "created_at": "2026-09-21T19:30:50.227926"
+    },
+    {
+      "ticker": "CHTR",
+      "verdict": "HOLD",
+      "score": 56,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 43.7,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "$94 Mrd. Schulden bei Debt/Equity 441,58 und ROIC 8,58 % treffen auf beschleunigte Breitbandverluste von 59.000 auf 120.000 je Quartal; auf Unternehmenswertbasis betr\u00e4gt die FCF-Rendite nur 2,0 %."
+      },
+      "created_at": "2026-09-21T19:30:50.245438"
     }
   ]
 }

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>TTD — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>TTD</h1>
+      <h2>The Trade Desk, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Advertising Agencies</span></div>
+        <div class="mi">MCap: <span>$7B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">42</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-102.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$13.92</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$3.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">76.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">15.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+1.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">21–27</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">22%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">11–15</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">4,00–6,50</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">33%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $21–$27 (22 %) · Base $11–$15 (45 %) · Bear $4,00–$6,50 (33 %) · EV ~$12,86</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>The Trade Desk ist der schwerste Fall dieser Analysegruppe, weil hier nicht eine Angstprämie abgebaut wurde, sondern ein Geschäftsmodell angegriffen wird. Der Kurs ist von $56,39 auf $13,92 gefallen und liegt rund 90 % unter dem Höchststand von $141,53 aus dem Dezember 2024. Das zweite Quartal 2026 brachte $715 Mio. Umsatz — nur noch +3 % nach +12 % im ersten Quartal — und bereinigte $0,34 je Aktie gegenüber $0,40 Erwartung. Am 4. September folgte der Abbau von rund 575 Stellen, 15 % der Belegschaft, vor dem ersten prognostizierten Umsatzrückgang der Firmengeschichte.</p>
+<p>Der Auslöser ist konkret und hat einen Namen: Amazon betreibt seine Demand-Side-Plattform mit deutlich niedrigeren Plattformgebühren und bringt gleichzeitig eigenes Premium-Inventar mit — Roku-Partnerschaft und NBA-Programme auf Prime Video. Damit wird die Gebühr, die The Trade Desk für die unabhängige Aussteuerung verlangt, zum Verhandlungsgegenstand. Entscheidend für die Einordnung: Das mittlere Analystenziel liegt mit $13,60 **unter** dem aktuellen Kurs, bei Rating "hold" über 30 Analysten. Kein anderer der zwanzig in dieser Serie analysierten Titel hat eine so negative Konsenslage. Die Fundamentaldaten sind dabei nicht zusammengebrochen: 76,9 % Bruttomarge, ROIC 17,5 %, 8,8 % FCF-Rendite.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Unabhängige Demand-Side-Plattform: Werbetreibende und Agenturen steuern über The Trade Desk Budgets über das offene Internet aus, außerhalb der Walled Gardens von Google, Meta und Amazon</li>
+<li>Der Umsatz ist eine Gebühr auf das ausgesteuerte Volumen — ein Take-Rate-Modell, und damit direkt angreifbar über den Preis</li>
+<li>Connected TV ist das Wachstumssegment und zugleich die Front, an der Amazon mit eigenem Inventar antritt</li>
+<li>UID2 als Identitätsstandard war der strategische Burggraben — er verliert an Bedeutung, wenn große Inventaranbieter eigene Identitätslösungen durchsetzen</li>
+<li>Vertikalkonzentration: Lebensmittel/Getränke und Haus/Garten zeigen anhaltende Schwäche, Konsumgüter und Automobil machen zusammen rund 25 % des Geschäfts aus</li>
+<li>Bruttomarge 76,9 % bei Betriebsmarge 14,2 % — der Stellenabbau von 15 % zielt genau auf diese Lücke</li>
+<li>Bilanz unauffällig: Debt/Equity 16,86, Price/Book 2,54, FCF $0,58 Mrd. bei 19,4 % FCF-Marge</li>
+<li>Anomalie: keine erkennbar — Brutto-, Betriebs- und Nettomarge sind konsistent gestaffelt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Alphabet (GOOGL, Fwd-KGV 23,5x), Meta (META, 19,0x), PubMatic (PUBM, 21,6x), AppLovin (APP, 14,7x), Pinterest (PINS, 7,8x) — Bandbreite 7,8x–23,5x.</p>
+<p>Der Stellenabbau senkt die Kostenbasis dauerhaft, das CTV-Wachstum kehrt zurück, und die Agenturen halten aus Prinzip an einer unabhängigen Alternative zu den Walled Gardens fest — kein Werbetreibender will seine gesamte Aussteuerung an Amazon abgeben, das zugleich Wettbewerber im Handel ist. Strukturelle Margennachhaltigkeit ist hier nur eingeschränkt begründbar: Die Bruttomarge von 76,9 % ist stabil, und der Interessenkonflikt von Amazon ist ein echtes Verkaufsargument. Nicht beurteilbar auf Basis der verfügbaren Daten ist dagegen, ob The Trade Desk seine Take-Rate gegen einen Anbieter halten kann, der die Plattform quersubventionieren kann. Annahme (kein Konsens): FY28-EPS ~$1,30 × 18x (nahe META 19,0x) = $23,40. Bull-Kursziel: $21–$27. Eintrittswahrscheinlichkeit: 22%.</p>
+<h3>4. BASE CASE</h3>
+<p>Der Umsatz stagniert oder schrumpft leicht, Amazon drückt die Take-Rate dauerhaft, und The Trade Desk bleibt ein profitables, aber wachstumsloses Geschäft. Der Kostenabbau stabilisiert die Marge, ohne den Trend zu drehen. Annahme (kein Konsens): FY28-EPS ~$1,00 × 12x (zwischen PINS 7,8x und APP 14,7x) = $12,00. Base-Kursziel: $11–$15. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Amazon gewinnt strukturell Marktanteil, weil es drei Dinge gleichzeitig bietet, die The Trade Desk nicht bieten kann — niedrigere Gebühren, exklusives Premium-Inventar und Kaufdaten aus dem eigenen Handelsgeschäft. Bei einem Take-Rate-Modell ist das kein gradueller, sondern ein sich selbst verstärkender Prozess: Weniger Volumen bedeutet weniger Daten, weniger Daten bedeutet schlechtere Aussteuerung, schlechtere Aussteuerung bedeutet weniger Volumen. Der erste prognostizierte Umsatzrückgang der Firmengeschichte ist der Beleg, dass dieser Prozess begonnen hat. Bei 14,2 % Betriebsmarge dreht der operative Hebel dann ins Negative.</p>
+<p>Kundenkonzentration: keine Einzelkundenabhängigkeit, wohl aber Agenturkonzentration — Budgets werden von wenigen Holdinggesellschaften gesteuert; aus den Daten nicht quantifizierbar. Vertikalkonzentration ist dagegen belegt: Konsumgüter und Automobil zusammen rund 25 % des Geschäfts, beide derzeit schwach. Geopolitik/Exportkontrollen: nicht materiell. Lieferkette/Single-Source: keine physische Lieferkette; das Äquivalent ist der Zugang zu Premium-Inventar, und genau dort liegt der Angriff — Amazon bindet Inventar exklusiv. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; The Trade Desk hatte historisch eine hohe aktienbasierte Vergütung, eine abschließende Beurteilung ist auf Datenbasis nicht möglich. Regulierung/Rechtsrisiken: zweischneidig — Kartellverfahren gegen die Walled Gardens könnten unabhängigen Plattformen nützen, Datenschutzverschärfungen treffen die Identitätsauflösung dagegen direkt.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$0,45 × 11x (zwischen PINS 7,8x und APP 14,7x, De-Rating auf ein schrumpfendes Geschäft) = $4,95. Bear-Kursziel: $4,00–$6,50. Eintrittswahrscheinlichkeit: 33%.</p>
+<p>**Summe: 22% + 45% + 33% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,22 × $24,00 + 0,45 × $13,00 + 0,33 × $5,25 = **~$12,86 — implizites Downside vs. aktuellem Kurs ($13,92): −7,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Die Kennzahlen sind besser, als der Kurs vermuten lässt — und genau das ist die Falle. Bruttomarge 76,9 % ist stabil und strukturell. ROIC 17,5 % und ROE 15,4 % sind solide und liegen über HubSpot, Axon und Charter. Debt/Equity 16,86 und Price/Book 2,54 zeigen eine unauffällige, schuldenarme Bilanz. FCF $0,58 Mrd. auf $2,99 Mrd. Umsatz ergeben 19,4 % FCF-Marge und 8,8 % Rendite auf den Marktwert — nach Charter und lululemon der dritthöchste Wert dieser Gruppe.</p>
+<p>Der Haken liegt im Zykluskontext, und er ist hier kein Zyklus, sondern ein Trend. Betriebsmarge 14,2 % bei 76,9 % Bruttomarge bedeutet, dass 62 Punkte in Vertrieb, Technik und Verwaltung fließen — eine Struktur, die nur bei wachsendem Volumen funktioniert. Bei +3 % Umsatzwachstum und einem prognostizierten Rückgang ist diese Kostenbasis zu groß; der Abbau von 15 % der Stellen ist die notwendige, aber nachlaufende Reaktion. Kennzahlen, die auf einer schrumpfenden Umsatzbasis berechnet werden, sind nach vorn gerichtet weniger wert, als sie aussehen — das gilt hier für ROIC und FCF-Marge gleichermaßen.</p>
+<p>RPO nicht anwendbar (kein Subscription-Modell); The Trade Desk hat keine Vertragslaufzeiten im Sinne eines Auftragsbestands, Werbebudgets werden kurzfristig allokiert. Genau das ist die strukturelle Schwäche: Es gibt keinen Backlog, der einen Abschwung dämpft. Der Burggraben war die Unabhängigkeit plus UID2 — beides verliert an Wert, wenn Inventaranbieter eigene Identitätslösungen und eigene Plattformen durchsetzen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 13,79x bei Forward-EPS $1,01. Da das Geschäft nicht zyklisch, sondern potenziell strukturell rückläufig ist, ist die entscheidende Frage nicht die Höhe des Multiples, sondern die Haltbarkeit des Nenners. Auf FCF-Basis: 8,8 % Rendite auf den Marktwert — optisch attraktiv, aber auf einem Gewinn, für den das Unternehmen selbst einen Rückgang prognostiziert. Price/Book 2,54 ist unauffällig.</p>
+<p>Peer-Einordnung: 13,79x Forward liegt in der **Mitte** der Bandbreite — unter GOOGL (23,5x), META (19,0x) und PUBM (21,6x), knapp unter APP (14,7x), über PINS (7,8x). Auf Umsatzbasis liegt TTD bei 2,20x Sales gegenüber GOOGL 9,59x, META 7,43x, PUBM 2,76x und PINS 2,29x. Die Einordnung ist damit eindeutig: The Trade Desk wird bereits wie ein strukturell bedrohter Anbieter gehandelt, nicht wie eine Wachstumsplattform. Der Abschlag gegenüber GOOGL und META ist vollständig gerechtfertigt — beide wachsen mit 24,2 % bzw. 28,0 % und haben mit 34,0 % bzw. 34,8 % mehr als die doppelte Betriebsmarge.</p>
+<p>Was preist der Kurs ein? Bei $6,58 Mrd. Marktwert und einer unterstellten reifen FCF-Marge von 20 % müsste The Trade Desk ~$0,46 Mrd. FCF erzielen, um auf 7 % FCF-Rendite zu kommen — das entspricht ~$2,3 Mrd. Umsatz gegenüber heute $2,99 Mrd. Der Kurs unterstellt also bereits einen Umsatzrückgang um rund 23 % und dann Stabilisierung. Das ist nicht ambitioniert, sondern realistisch bis vorsichtig — und genau deshalb ergibt sich hier kein Bewertungsvorteil wie bei Intuit oder HubSpot: Die schlechte Nachricht ist im Kurs. Analyst-Konsensziel $13,60 bei 30 Analysten und Rating "hold" — es liegt **unter** dem Kurs; als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Konsenslage, und sie ist eindeutig: 30 Analysten, Rating "hold", mittleres Ziel $13,60 und damit 2,3 % unter dem Kurs. Das ist die einzige Kapitulation der Sell-Side in dieser gesamten Analysegruppe — bei allen anderen neun Titeln liegt das Konsensziel teils weit über dem Kurs. Wenn selbst die strukturell optimistische Sell-Side kein Aufwärtspotenzial mehr sieht, ist das ein belastbares Signal. Hypothese, nicht datenbasiert: Nach einem Rückgang von 90 % dürfte die institutionelle Basis weitgehend ausgetauscht sein; die verbleibenden Halter sind entweder Value-orientiert oder indexgebunden. Was neue Käufer anziehen würde, ist ein einziges Quartal mit wieder zweistelligem Umsatzwachstum — also der Beweis, dass der Amazon-Effekt einmalig war und nicht strukturell.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −102,80, Rang 96 von 100. Fenster: 5T −8,74 %, 10T −3,88 %, 20T +4,49 %, 50T −28,17 %, 6M −66,50 %. Der positive 20-Tage-Wert ist der einzige Lichtblick und zeigt einen Stabilisierungsversuch nach dem Einbruch im Sommer — die letzten fünf Tage haben ihn aber wieder angegriffen. Der Kurs bei $13,92 liegt nur 8,5 % über dem 52-Wochen-Tief von $12,83. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist fundamental erklärbar und folgt der Wachstumsverlangsamung. Warnsignal: Ein Bruch unter $12,83 markiert ein neues Verlaufstief; ein erstes Stabilisierungssignal wäre die Rückeroberung von $17.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($30–$45):** Die Agenturen etablieren die unabhängige Plattform dauerhaft als Gegengewicht zu Amazon, CTV-Wachstum kehrt zurück, Betriebsmarge über 22 %. Normalisiertes EPS $1,80–2,40 × 17–19x.</p>
+<p>**Base ($12–$20):** Umsatz stagniert, Marge stabilisiert sich nach dem Kostenabbau, Multiple bleibt bei 11–13x. Normalisiertes EPS $1,10–1,50 × 11–13x.</p>
+<p>**Bear ($3–$8):** Amazon setzt sich durch, der Umsatz schrumpft mehrjährig, der operative Hebel dreht.</p>
+<p>Entscheidende Variable: die Take-Rate. Volumen lässt sich zurückgewinnen, eine einmal gesenkte Gebühr nicht.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Der einzige Titel dieser Analysegruppe, bei dem die schlechte Nachricht bereits vollständig im Kurs steht — und deshalb kein Bewertungsvorteil mehr existiert. Die Rechnung in Abschnitt 7 zeigt es: Der Kurs unterstellt einen Umsatzrückgang von 23 % mit anschließender Stabilisierung, was der eigenen Unternehmensprognose ungefähr entspricht. Der Erwartungswert liegt mit ~$12,86 unter dem Kurs von $13,92; die eigenen Szenarien ergeben keinen asymmetrischen Edge, und ein High-Conviction-Framing wäre unzulässig.</p>
+<p>Der Unterschied zu Intuit und HubSpot ist entscheidend und sollte nicht verwischt werden: Dort preist der Markt eine Bedrohung ein, die noch nicht in den Zahlen steht. Hier steht sie bereits in den Zahlen — +3 % Umsatzwachstum, prognostizierter Rückgang, 15 % Stellenabbau. Das ist kein überverkaufter Qualitätswert, sondern ein Geschäft mit einem ungelösten Wettbewerbsproblem.</p>
+<p>Einordnung: weder Momentum-Play noch Value-Fall, sondern eine Turnaround-Spekulation ohne erkennbaren Wendepunkt. RS-Score −102,80, Rang 96, GWS 0/3 — der Funnel liefert diesen Titel nicht. Für die meisten Investorentypen ungeeignet; wer die Unabhängigkeitsthese spielen will, sollte auf ein Quartal mit zweistelligem Wachstum warten statt zu antizipieren. Bei Einstieg maximal 1 % und mit der Bereitschaft, den Totalverlust der Position zu akzeptieren.</p>
+<p>Peers: **Alphabet (GOOGL)** ist bei 23,5x Forward teurer, wächst mit 24,2 % aber achtmal schneller bei mehr als doppelter Betriebsmarge — für die Werbe-These das klar überlegene Instrument. **AppLovin (APP)** bietet bei 14,7x Forward ein praktisch identisches Multiple bei +52,8 % Wachstum; auf relativer Basis ist The Trade Desk gegenüber beiden trotz des Kursverfalls nicht attraktiv bewertet.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 1/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Katalysator fehlt — Umsatzwachstum von +3 % mit prognostiziertem Rückgang, 15 % Stellenabbau und ein Konsensziel von $13,60 unterhalb des Kurses; es existiert kein fundamentaler Auslöser, und der EV liegt 7,6 % unter dem Einstiegsniveau.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
