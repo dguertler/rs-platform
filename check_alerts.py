@@ -21,43 +21,7 @@ import matplotlib.patches as mpatches
 # Exakte Portierung der analyzeStructure / analyzeWeeklyStructure / analyze4HStructure
 # Funktionen aus index.html
 
-def _find_swing_points(highs, lows, n, window=2):
-    """Swing-Hochs und Swing-Tiefs mit konfigurierbarem Fenster (±window Bars)."""
-    swing_highs = []
-    swing_lows  = []
-    for i in range(window, n - window):
-        if all(highs[i] >= highs[i-k] and highs[i] >= highs[i+k] for k in range(1, window+1)):
-            swing_highs.append({'idx': i, 'price': highs[i]})
-        if all(lows[i] <= lows[i-k] and lows[i] <= lows[i+k] for k in range(1, window+1)):
-            swing_lows.append({'idx': i, 'price': lows[i]})
-    return swing_highs, swing_lows
-
-
-def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
-    """Kernlogik: tiefere Tiefs erkennen → GWS = höchstes Hoch dazwischen.
-    min_margin: Close muss mindestens diesen Bruchteil über GWS liegen (Standard 0.1%)."""
-    candidates = []
-    for j in range(1, len(swing_lows)):
-        tief_neu = swing_lows[j]
-        tief_alt = swing_lows[j - 1]
-        if tief_neu['price'] < tief_alt['price']:
-            hochs = [h for h in swing_highs
-                     if tief_alt['idx'] < h['idx'] < tief_neu['idx']]
-            if hochs:
-                gws_hoch = max(hochs, key=lambda h: h['price'])
-                candidates.append(gws_hoch)
-
-    gws_high = candidates[-1] if candidates else None
-
-    breakout_idx = None
-    if gws_high:
-        threshold = gws_high['price'] * (1 + min_margin)
-        for i in range(gws_high['idx'] + 1, n):
-            if closes[i] > threshold:
-                breakout_idx = i
-                break
-
-    return gws_high, breakout_idx
+from gws_core import _find_swing_points, _gws_core, swing_low_stop
 
 
 def analyze_daily_structure(ohlcv):
@@ -394,6 +358,18 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                     f'margin:6px 0;border-radius:6px">\n'
                 )
 
+        # Einstieg und Stopp nach der Backtest-Regel: Kauf zur Eröffnung des
+        # Folgetages, Stopp beim letzten Swing-Tief minus Puffer.
+        stop_price = alert.get('stop_price')
+        if stop_price:
+            html_parts.append(
+                f'    <div style="margin-top:10px;padding:8px 10px;background:#0b1220;'
+                f'border:1px solid #1e293b;border-radius:6px;font-size:12px;color:#94a3b8">'
+                f'Einstieg: Eröffnung des nächsten Handelstages&nbsp;&middot;&nbsp;'
+                f'Stopp: <strong style="color:#fca5a5">{stop_price:.2f}</strong>'
+                f'</div>\n'
+            )
+
         # "Analyse ansehen"-Button — öffnet die Bewertungsseite im Dashboard
         frontend_url = _base_url
         url_ticker   = display_ticker.replace('[TEST] ', '').strip()
@@ -530,6 +506,7 @@ def _build_alert(entry, source_label, top20_set, trigger_tf=None):
         'daily_bar_date':  cur_d_date,
         'h4_bar_date':     cur_h4_date,
         'in_top20':        ticker in top20_set,
+        'stop_price':      swing_low_stop(entry.get('ohlcv', [])),
     }
 
 
@@ -659,6 +636,13 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             if not trigger:
                 continue
 
+            # Nur 4H-Auslöser melden. Die Auswertung über beide Zeitfenster zeigt:
+            # Einstiege, bei denen der Tages- oder Wochenpunkt zuletzt kippt, liefern
+            # rund die halbe Kapitaleffizienz und den doppelten Drawdown-Beitrag.
+            if not new_h4:
+                print(f'  SKIP {ticker}: 3 Punkte erreicht, aber Auslöser war nicht 4H.')
+                continue
+
             print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte'
                   + (' [Wiederkehr]' if prev_points == 3 else ''))
 
@@ -697,6 +681,7 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
                 'daily_bar_date':  cur_d_date,
                 'h4_bar_date':     cur_h4_date,
                 'in_top20':        ticker in top20_set,
+                'stop_price':      swing_low_stop(entry.get('ohlcv', [])),
             })
 
     return new_states, alerts

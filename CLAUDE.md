@@ -162,6 +162,8 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/rs_sp500.json` | S&P 500 RS-Scores + OHLCV | Täglich automatisch |
 | `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket), je Eintrag mit `trigger` (`eps-beat` / `kursreaktion`) und `eps_distorted` — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
+| `data/watchlist.json` | Beobachtete Ticker — Grundlage der Verkaufssignale. Im Browser über die Watchlist-Seite gepflegt (localStorage), von dort als Datei exportiert und hier abgelegt | Manuell (Export aus `frontend/watchlist.html`) |
+| `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg und Stopp, plus bereits abgeschlossene Signale | Di–Sa 02:30 UTC automatisch (`check_exits.yml`) |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 
 ## Batch-Empfehlung

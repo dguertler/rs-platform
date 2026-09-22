@@ -1,0 +1,56 @@
+name: Verkaufssignale prüfen
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    # Di–Sa 02:30 UTC — nach dem Breakout-Alarm (02:00), damit neue 4H-Signale
+    # desselben Laufs direkt mit erfasst werden.
+    - cron: '30 2 * * 2-6'
+  workflow_dispatch:
+
+jobs:
+  check-exits:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Verkaufssignale prüfen und melden
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+        run: python check_exits.py
+
+      - name: Zustand committen und pushen
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/open_signals.json
+          git diff --staged --quiet || git commit -m "Offene Signale aktualisiert"
+          git pull --rebase origin master
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Verkaufssignale (check_exits.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
