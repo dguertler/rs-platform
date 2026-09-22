@@ -27,6 +27,14 @@ jobs:
       - name: Abhängigkeiten installieren
         run: pip install yfinance pandas
 
+      # Dauerwache gegen unbereinigte Splits. update_backtest_daily.py erkennt einen
+      # Split nur am Ende der Reihe; liegt der Bruch weiter hinten (weil die neuen
+      # Kerzen schon bereinigt ankamen), findet ihn erst dieser Abgleich gegen die
+      # täglich frisch geladenen rs_*.json. Läuft VOR dem Update, damit derselbe
+      # Lauf die dabei geleerte 4H-Reihe gleich wieder aufbaut. Ohne Fund passiert nichts.
+      - name: Unbereinigte Splits prüfen und betroffene Ticker neu laden
+        run: python repair_backtest_splits.py --refetch
+
       - name: Backtest inkrementell aktualisieren
         run: python update_backtest_daily.py
 
