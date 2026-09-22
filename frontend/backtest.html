@@ -829,8 +829,6 @@ function BacktestApp() {
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [top20Hist,   setTop20Hist]   = useState(null);
   const [useTop20,    setUseTop20]    = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
-  // Voreinstellung AN: dieselbe Regel, die die Breakout-Mails melden.
-  const [only4H,      setOnly4H]      = useState(() => localStorage.getItem('bt_only_4h') !== 'false');
   const [benchData,   setBenchData]   = useState(null);
   const chartRef     = useRef(null);
   const weekTableRef = useRef(null);
@@ -919,8 +917,8 @@ function BacktestApp() {
 
   const trades = useMemo(() => {
     if (!data) return [];
-    return simulateTrades(weekRows, data.ohlcv_d, ticker, top20Hist, useTop20, only4H);
-  }, [weekRows, data, top20Hist, useTop20, only4H]);
+    return simulateTrades(weekRows, data.ohlcv_d, ticker, top20Hist, useTop20);
+  }, [weekRows, data, top20Hist, useTop20]);
 
   // Eine einzige KPI-Definition für Detail- und Übersichtsseite (backtest_logic.js),
   // damit insbesondere der Profitfaktor überall gleich gerechnet wird.
@@ -984,13 +982,6 @@ function BacktestApp() {
             borderRadius: 6, padding: '5px 14px', color: useTop20 ? '#4ade80' : '#475569',
             fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
           TOP 20 {useTop20 ? 'AN' : 'AUS'}
-        </button>
-        <button onClick={() => { const v = !only4H; setOnly4H(v); localStorage.setItem('bt_only_4h', v); }}
-          style={{ background: only4H ? '#14532d' : 'transparent',
-            border: `1px solid ${only4H ? '#4ade80' : '#334155'}`,
-            borderRadius: 6, padding: '5px 14px', color: only4H ? '#4ade80' : '#475569',
-            fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
-          NUR 4H {only4H ? 'AN' : 'AUS'}
         </button>
         <div style={{marginLeft:'auto',fontSize:11,color:'#334155',fontFamily:'monospace'}}>
           {weekRows.length} Wochen · Stand {data.generated}
