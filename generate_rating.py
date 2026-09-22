@@ -915,7 +915,6 @@ if __name__ == "__main__":
     # RS-Daten aller verfügbaren Dateien laden (Score + Windows)
     rs_data = {}
     for fname in ("rs_full.json", "data/rs_full.json",
-                  "rs_dax.json",  "data/rs_dax.json",
                   "rs_sp500.json","data/rs_sp500.json"):
         if Path(fname).exists():
             with open(fname) as f:

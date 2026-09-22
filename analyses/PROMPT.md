@@ -40,7 +40,7 @@ Max. 8 Bullet Points mit -. Keine Selbstverständlichkeiten. Fokus auf: Wie verd
 
 ### MULTIPLE-HERLEITUNG (PFLICHT für Abschnitte 3–5, Bull/Base/Bear)
 Das Multiple pro Szenario darf **nicht frei geschätzt** werden — es muss an echten Peer-Daten verankert sein:
-1. 2–3 direkte Peers (gleiche Branche/Geschäftsmodell) benennen und deren Forward-KGV nachschlagen — bevorzugt aus `data/fundamentals.json` (Peers sind bei NASDAQ-100/S&P-500/DAX-Titeln meist schon im Datensatz getrackt). Sind Peers dort nicht vorhanden, explizit vermerken: "Peer-Multiples nicht verifizierbar."
+1. 2–3 direkte Peers (gleiche Branche/Geschäftsmodell) benennen und deren Forward-KGV nachschlagen — bevorzugt aus `data/fundamentals.json` (Peers sind bei NASDAQ-100/S&P-500/Smallcap-Titeln meist schon im Datensatz getrackt). Sind Peers dort nicht vorhanden, explizit vermerken: "Peer-Multiples nicht verifizierbar."
 2. **Bear-Multiple:** nahe dem niedrigsten genannten Peer-Multiple oder darunter (Kompression bei brechender These).
 3. **Bull-Multiple:** nahe dem höchsten genannten Peer-Multiple oder leicht darüber bei bestätigter Outperformance ggü. Peers — NICHT einfach das eigene aktuelle Forward-KGV weiter nach oben schätzen, wenn dieses bereits über allen genannten Peers liegt.
 4. **Base-Multiple:** nahe dem eigenen aktuellen Forward-KGV, sofern dieses innerhalb oder nahe der Peer-Bandbreite liegt. Liegt das eigene Forward-KGV deutlich außerhalb der Peer-Bandbreite (über oder unter allen Peers), im Abschnitt 7 explizit benennen, ob und warum diese Prämie/dieser Abschlag strukturell gerechtfertigt ist.

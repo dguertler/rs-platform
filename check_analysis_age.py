@@ -35,10 +35,9 @@ def load_json(path):
 
 
 def get_top20_tickers():
-    """Collect top-20 stocks with 3 points across all three indices, sorted by RS score."""
+    """Collect top-20 stocks with 3 points across both indices, sorted by RS score."""
     sources = [
         "data/rs_full.json",
-        "data/rs_dax.json",
         "data/rs_sp500.json",
     ]
     seen = set()

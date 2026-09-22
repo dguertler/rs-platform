@@ -1,7 +1,7 @@
 // ── Gemeinsame Chart- und Struktur-Bausteine für alle Index-Seiten ──────────────
-// Vorher lag dieser Block als Kopie in index.html, dax.html, sp500.html und
+// Vorher lag dieser Block als Kopie in index.html, sp500.html und
 // smallcap.html — die Kopien waren bereits auseinandergedriftet (die Signal-Pfeile
-// im Weekly-Chart gab es nur in dax.html in der robusten Fassung). Hier steht er
+// im Weekly-Chart gab es nur in einer Kopie in der robusten Fassung). Hier steht er
 // einmal; die Seiten binden ihn per <script type="text/babel" src="rs_charts.js"> ein.
 
 function analyzeStructure(ohlcv) {

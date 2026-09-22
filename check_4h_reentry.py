@@ -52,7 +52,6 @@ from zoneinfo import ZoneInfo
 
 SOURCES = {
     'QQQ': 'rs_full.json',
-    'DAX': 'rs_dax.json',
     'SPX': 'rs_sp500.json',
 }
 

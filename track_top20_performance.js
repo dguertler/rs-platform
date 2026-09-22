@@ -24,7 +24,6 @@ const OUT_FILE = path.join(ROOT, 'data', 'top20_performance.json');
 const INDICES = [
   { key: 'QQQ', name: 'NASDAQ-100', rsFile: 'data/rs_full.json' },
   { key: 'SPX', name: 'S&P 500', rsFile: 'data/rs_sp500.json' },
-  { key: 'DAX', name: 'DAX-40', rsFile: 'data/rs_dax.json' },
 ];
 
 // ── Backtest-Engine laden (Single Source of Truth: frontend/backtest_logic.js) ──

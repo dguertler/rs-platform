@@ -34,7 +34,7 @@ DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
 JOURNAL_PATH = DATA_DIR / "signal_journal.json"
 RATINGS_PATH = DATA_DIR / "ratings" / "index.json"
 MARKET_FILES = {"nasdaq": "rs_full.json", "sp500": "rs_sp500.json",
-                "dax": "rs_dax.json", "smallcap": "rs_smallcap.json"}
+                "smallcap": "rs_smallcap.json"}
 LOGGED_STATUSES = {"KAUFLISTE", "KANDIDAT", "EARNINGS-SPERRE"}
 
 # Handelstage-Näherung je Fenster (kein Handelskalender verfügbar)

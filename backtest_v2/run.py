@@ -20,7 +20,7 @@ from metrics import (                               # noqa: E402
 
 MARKET_FILES = {
     "nasdaq": "rs_full.json", "sp500": "rs_sp500.json",
-    "dax": "rs_dax.json", "smallcap": "rs_smallcap.json",
+    "smallcap": "rs_smallcap.json",
 }
 
 DISCLAIMER = """\

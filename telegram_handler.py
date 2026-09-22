@@ -98,15 +98,13 @@ def _base_url():
 
 def _dashboard_path(source):
     """Relativer Pfad + Label des passenden Dashboards (App-intern)."""
-    if source == 'DAX':
-        return '/dax.html', 'DAX-Dashboard'
     if source == 'SPX':
         return '/sp500.html', 'S&amp;P 500-Dashboard'
     return '/', 'Nasdaq-Dashboard'
 
 
 def _magic(path):
-    """Absolute URL zum Ziel `path` (z. B. '/dax.html' oder '/?openRating=NVDA')."""
+    """Absolute URL zum Ziel `path` (z. B. '/sp500.html' oder '/?openRating=NVDA')."""
     base = _base_url()
     return f'{base}{path}' if base else path
 

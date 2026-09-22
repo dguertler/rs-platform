@@ -102,7 +102,7 @@ def backfill():
 
     # Daten laden
     data_by_ticker = {}
-    for json_path, source_label in [('rs_full.json', 'QQQ'), ('rs_dax.json', 'DAX')]:
+    for json_path, source_label in [('rs_full.json', 'QQQ')]:
         if not os.path.exists(json_path):
             continue
         with open(json_path) as f:

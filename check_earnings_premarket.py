@@ -39,7 +39,6 @@ STATE_PATH = Path(".earnings_premarket_state/alerted.json")
 
 MARKET_SOURCES = [
     ("data/rs_full.json",     "QQQ"),
-    ("data/rs_dax.json",      "DAX"),
     ("data/rs_sp500.json",    "SPX"),
     ("data/rs_smallcap.json", "SC600"),
 ]

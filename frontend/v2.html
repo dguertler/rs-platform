@@ -79,7 +79,6 @@
 
 <div class="nav-bar">
   <a href="index.html" class="nav-switch">Nasdaq</a>
-  <a href="dax.html" class="nav-switch">DAX</a>
   <a href="sp500.html" class="nav-switch">S&amp;P500</a>
   <a href="smallcap.html" class="nav-switch">SC600</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
@@ -211,12 +210,11 @@
 (function () {
   const MARKETS = [
     { id: 'nasdaq',   label: 'Nasdaq' },
-    { id: 'dax',      label: 'DAX' },
     { id: 'sp500',    label: 'S&P500' },
     { id: 'smallcap', label: 'SC600' },
   ];
   const RS_FILES = {
-    nasdaq: 'data/rs_full.json', dax: 'data/rs_dax.json',
+    nasdaq: 'data/rs_full.json',
     sp500: 'data/rs_sp500.json', smallcap: 'data/rs_smallcap.json',
   };
   const _rsFileCache = {};

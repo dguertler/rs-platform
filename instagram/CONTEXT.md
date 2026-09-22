@@ -283,11 +283,11 @@ Logo-Reproduktion via `make_logo.py` (durch echtes `assets/Logo.png` ersetzt).
 - **Trades der Woche:** ALLE Verkäufe der KW erhalten je einen eigenen Trade-Slide
   (Kauf grün + Verkauf rot), sortiert nach Rendite absteigend. Store gibt `"trades"`
   als Liste zurück (nicht mehr einzelnes `"trade"`). → `store.py` + `generate.py`.
-- **Ticker-Aliase (EUR-Kurse):** US-Tickerbezeichnungen ohne eigenes RS-Dataset
-  werden automatisch auf den DAX/europäischen Kurs gemappt:
-  `SIEGY → ENR.DE` (Siemens Energy AG, DAX, EUR-Preise). Mapping in `data.py`.
+- **Ticker ohne RS-Dataset (EUR-Kurse):** stehen in `instagram/data/custom_ohlcv.json`
+  — z. B. `SIEGY` (Siemens Energy, Kursreihe von ENR.DE in EUR, eingefroren seit
+  der DAX-Streichung 09/2026).
 - **Kurswährung — exakte EUR-Renditen:** `rs_full.json`/`rs_sp500.json`
-  enthalten USD-Preise, `rs_dax.json` + `custom_ohlcv.json` EUR. USD-Renditen
+  enthalten USD-Preise, `custom_ohlcv.json` EUR. USD-Renditen
   werden in `store._ret_since()` über die tägliche **EUR/USD-Serie**
   (`eurusd_ohlcv` in `rs_full.json`, geladen von `rs_colab.py`) in echte
   EUR-Renditen umgerechnet: `ret_eur = (P1/P0) · (fx0/fx1) − 1`. Fehlt die

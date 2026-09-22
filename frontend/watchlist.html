@@ -41,7 +41,6 @@
 <body>
 <div class="nav-bar">
   <a href="index.html" class="nav-switch">Nasdaq</a>
-  <a href="dax.html" class="nav-switch">DAX</a>
   <a href="sp500.html" class="nav-switch">S&amp;P500</a>
   <a href="smallcap.html" class="nav-switch">SC600</a>
   <a href="watchlist.html"            class="nav-switch active">Watchlist</a>
@@ -97,13 +96,12 @@ function App() {
     });
   }, []);
 
-  // Alle vier Universen laden — die Watchlist darf Titel aus jedem Index enthalten.
+  // Alle drei Universen laden — die Watchlist darf Titel aus jedem Index enthalten.
   // Der Benchmark bleibt der NASDAQ-100, damit die Charts eine Referenzlinie haben.
   useEffect(() => {
     const SOURCES = [
       { file: "data/rs_full.json",     index: "QQQ" },
       { file: "data/rs_sp500.json",    index: "SPX" },
-      { file: "data/rs_dax.json",      index: "DAX" },
       { file: "data/rs_smallcap.json", index: "SC600" },
     ];
     Promise.allSettled(SOURCES.map(s =>

@@ -37,7 +37,6 @@ from earnings_gate import MIN_PRICE_JUMP, MIN_EPS_SURPRISE  # noqa: E402
 _SOURCE_JSON = {
     "QQQ":  "rs_full.json",
     "NDX":  "rs_full.json",
-    "DAX":  "rs_dax.json",
     "SPX":  "rs_sp500.json",
     "SP500": "rs_sp500.json",
 }
@@ -58,17 +57,17 @@ def earnings_path(ticker_or_path):
 
 
 def _rs_ticker(ticker):
-    """RS-JSON führt DAX-Titel mit .DE-Suffix; Earnings-JSON ohne."""
+    """Ticker unverändert — RS-JSON und Earnings-JSON nutzen dasselbe Kürzel."""
     return ticker
 
 
 def _load_rs_entry(ticker, source):
     """Lädt den OHLCV-Eintrag aus der passenden RS-JSON. Probiert Ticker direkt
-    und mit .DE-Suffix (DAX). Gibt (entry, json_name) oder (None, json_name)."""
+    und mit/ohne .DE-Suffix. Gibt (entry, json_name) oder (None, json_name)."""
     json_name = _SOURCE_JSON.get((source or "").upper())
     candidates = [json_name] if json_name else []
-    # Fallback: alle drei durchsuchen, falls source fehlt/falsch
-    for jn in ("rs_full.json", "rs_sp500.json", "rs_dax.json"):
+    # Fallback: beide durchsuchen, falls source fehlt/falsch
+    for jn in ("rs_full.json", "rs_sp500.json"):
         if jn not in candidates:
             candidates.append(jn)
 

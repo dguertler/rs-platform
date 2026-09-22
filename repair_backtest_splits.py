@@ -29,7 +29,7 @@ from datetime import datetime
 _REPO = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(_REPO, "data")
 
-RS_FILES = ["rs_full.json", "rs_sp500.json", "rs_dax.json", "rs_smallcap.json"]
+RS_FILES = ["rs_full.json", "rs_sp500.json", "rs_smallcap.json"]
 STATE_FILE = os.path.join(DATA_DIR, "split_check_state.json")
 JUMP_LOW, JUMP_HIGH = 0.55, 1.8   # Verdachtsschwelle für einen Split
 GENUINE_TOL = 0.10                # Referenz zeigt denselben Sprung (±10 %) → echt

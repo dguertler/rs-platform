@@ -39,7 +39,6 @@ SIGNALS_FILE = os.path.join(DATA_DIR, "signals.json")
 SOURCE_FILES = {
     "QQQ": "rs_full.json",
     "SPX": "rs_sp500.json",
-    "DAX": "rs_dax.json",
     "SC600": "rs_smallcap.json",
 }
 

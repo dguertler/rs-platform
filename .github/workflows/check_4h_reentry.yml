@@ -40,7 +40,6 @@ jobs:
       - name: RS-Datendateien und signals.json bereitstellen
         run: |
           cp data/rs_full.json  . 2>/dev/null || true
-          cp data/rs_dax.json   . 2>/dev/null || true
           cp data/rs_sp500.json . 2>/dev/null || true
           cp data/signals.json  . 2>/dev/null || true
 

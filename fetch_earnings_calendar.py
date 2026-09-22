@@ -30,7 +30,7 @@ REQUEST_PAUSE = 0.5   # Sekunden zwischen Tickern — vermeidet Yahoo-Rate-Limit
 
 DATA_DIR = Path(os.environ.get("DATA_DIR", "data"))
 OUT_PATH = DATA_DIR / "earnings_calendar.json"
-MARKET_FILES = ["rs_full.json", "rs_dax.json", "rs_sp500.json", "rs_smallcap.json"]
+MARKET_FILES = ["rs_full.json", "rs_sp500.json", "rs_smallcap.json"]
 
 
 def collect_universe() -> list[str]:

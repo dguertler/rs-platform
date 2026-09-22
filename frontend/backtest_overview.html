@@ -30,7 +30,6 @@
 <body>
 <div class="nav-bar">
   <a href="index.html"            class="nav-switch">Nasdaq</a>
-  <a href="dax.html"              class="nav-switch">DAX</a>
   <a href="sp500.html"            class="nav-switch">S&amp;P500</a>
   <a href="smallcap.html"        class="nav-switch">SC600</a>
   <a href="backtest_overview.html" class="nav-switch active">B-ÜBERSICHT</a>
@@ -51,7 +50,7 @@ const pnlColor = v => v > 0 ? green : v < 0 ? red : neutral;
 const wr = v => v >= 60 ? green : v >= 45 ? '#fbbf24' : red;
 const fmt  = (v, d = 1) => (v >= 0 ? '+' : '') + v.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
 const fmtK = v => Math.round(Math.abs(v)).toLocaleString('de-DE');
-const IDX_COLOR = { QQQ: '#38bdf8', SPX: '#a78bfa', DAX: '#fb923c' };
+const IDX_COLOR = { QQQ: '#38bdf8', SPX: '#a78bfa' };
 
 // ── Equity-Kurve ──────────────────────────────────────────────────────────────
 function EquityCurve({ curve }) {
@@ -98,7 +97,7 @@ function OverviewApp() {
   const [loadingRs,     setLoadingRs]     = useState(true);
   const [loadingTrades, setLoadingTrades] = useState(false);
   const [errors,        setErrors]        = useState([]);
-  const [filter,        setFilter]        = useState(() => localStorage.getItem('bt_last_filter') || 'QQQ');
+  const [filter,        setFilter]        = useState(() => { const f = localStorage.getItem('bt_last_filter'); return f && f !== 'DAX' ? f : 'QQQ'; });
   const [top20HistMap,  setTop20HistMap]  = useState({});
   const [useTop20,      setUseTop20]      = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
   const [sortKey,       setSortKey]       = useState('totalPnl');
@@ -110,7 +109,6 @@ function OverviewApp() {
     const sources = [
       { file: 'data/rs_full.json',  index: 'QQQ' },
       { file: 'data/rs_sp500.json', index: 'SPX' },
-      { file: 'data/rs_dax.json',   index: 'DAX' },
     ];
     const errs = [];
     const map  = {};
@@ -256,7 +254,7 @@ function OverviewApp() {
 
       <div style={{ marginBottom: 20, display: 'flex', flexWrap: 'wrap', gap: 10, alignItems: 'center' }}>
         <span style={{ fontSize: 18, fontWeight: 700, color: '#f1f5f9', marginRight: 8 }}>Backtest Übersicht</span>
-        {['ALL', 'QQQ', 'SPX', 'DAX'].map(k => (
+        {['ALL', 'QQQ', 'SPX'].map(k => (
           <button key={k} onClick={() => { setFilter(k); localStorage.setItem('bt_last_filter', k); }}
             style={{ background: filter === k ? (k === 'ALL' ? '#1e293b' : IDX_COLOR[k] + '22') : 'transparent',
               border: `1px solid ${filter === k ? (k === 'ALL' ? '#475569' : IDX_COLOR[k]) : '#1e293b'}`,

@@ -4,7 +4,6 @@ Daten-Lader für die Instagram-Grafiken.
 Quellen (alle bereits im Repo, außer Wikifolio-Kurve):
   - data/signals.json        – historische Trade-Signale je Ticker
   - data/rs_full.json        – NASDAQ-100 RS + OHLCV  (+ QQQ-Benchmark)
-  - data/rs_dax.json         – DAX-40   RS + OHLCV
   - data/rs_sp500.json       – S&P 500  RS + OHLCV
   - data/wikifolio_performance.json – Equity-Kurve des wikifolios
         Format: {"name": "...", "currency": "EUR",
@@ -18,7 +17,7 @@ from datetime import datetime, timedelta
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(ROOT, "data")
 
-_RS_FILES = ["rs_full.json", "rs_dax.json", "rs_sp500.json"]
+_RS_FILES = ["rs_full.json", "rs_sp500.json"]
 
 # Manuelle OHLCV-Daten für Ticker ohne RS-Repo-Abdeckung (z.B. OTC-Aktien)
 _INSTAGRAM_DATA = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
@@ -30,9 +29,9 @@ def _load(path):
         return json.load(f)
 
 
-# Kurswährung je Quelle: NASDAQ-100/S&P-500-Kurse sind USD, DAX-Kurse EUR.
+# Kurswährung je Quelle: NASDAQ-100/S&P-500-Kurse sind USD.
 # custom_ohlcv.json wird per Konvention in EUR gepflegt (siehe CONTEXT.md).
-_FILE_CCY = {"rs_full.json": "USD", "rs_sp500.json": "USD", "rs_dax.json": "EUR"}
+_FILE_CCY = {"rs_full.json": "USD", "rs_sp500.json": "USD"}
 
 
 def load_fx():
@@ -81,12 +80,6 @@ def load_universe():
                 "windows": e.get("windows", {}),
                 "ccy": e.get("ccy", "EUR"),
             }
-    # Ticker-Aliase: US-ADRs/Handelsnamen → DAX/europäische Kürzel mit EUR-Preisen
-    # SIEGY (US OTC/ADR für Siemens Energy) → ENR.DE (DAX, EUR-Preise)
-    _ALIASES = {"SIEGY": "ENR.DE"}
-    for alias, target in _ALIASES.items():
-        if target in universe and alias not in universe:
-            universe[alias] = universe[target]
     return universe, benchmark
 
 

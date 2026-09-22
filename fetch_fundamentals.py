@@ -128,8 +128,7 @@ def _fetch_one(ticker: str) -> dict:
 
 def _load_tickers() -> list:
     tickers = set()
-    for path in ("data/rs_full.json", "data/rs_dax.json", "data/rs_sp500.json",
-                 "data/rs_smallcap.json"):
+    for path in ("data/rs_full.json", "data/rs_sp500.json", "data/rs_smallcap.json"):
         p = Path(path)
         if p.exists():
             with open(p, encoding="utf-8") as f:

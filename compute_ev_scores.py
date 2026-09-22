@@ -11,8 +11,8 @@ sector+industry (Fallback: nur sector, wenn <3 Peers). Bear/Bull-Multiple
 aus dem 25./75. Perzentil des Peer-Forward-KGV, Base aus dem eigenen
 aktuellen Forward-KGV. Gewichtung 25/50/25 wie in den manuellen Analysen.
 
-Schreibt data/ev_scores.json für alle vier Indizes (NASDAQ-100, DAX-40,
-S&P 500, Smallcap) — nach erfolgreichem NASDAQ-100-Pilot und Sanity-Check
+Schreibt data/ev_scores.json für alle drei Indizes (NASDAQ-100, S&P 500,
+Smallcap) — nach erfolgreichem NASDAQ-100-Pilot und Sanity-Check
 (MPWR/ODFL/CI) freigegeben.
 """
 
@@ -40,7 +40,7 @@ def _load_universe() -> dict:
         return json.load(f)["tickers"]
 
 
-RS_FILES = ["data/rs_full.json", "data/rs_dax.json", "data/rs_sp500.json", "data/rs_smallcap.json"]
+RS_FILES = ["data/rs_full.json", "data/rs_sp500.json", "data/rs_smallcap.json"]
 
 
 def _load_target_tickers() -> list:
@@ -146,7 +146,7 @@ def main():
     output = {
         "computed_at": datetime.now(timezone.utc).isoformat(),
         "method": "peer-multiple (25./75. Perzentil sector+industry) + reverse-engineering, 25/50/25-Gewichtung",
-        "universe": "nasdaq100+dax+sp500+smallcap",
+        "universe": "nasdaq100+sp500+smallcap",
         "count": len(scores),
         "scores": scores,
     }

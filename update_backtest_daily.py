@@ -199,7 +199,7 @@ def update_ticker(ticker):
 
 def main():
     # Ticker aus allen RS-Quellen sammeln
-    sources = ["rs_full.json", "rs_sp500.json", "rs_dax.json"]
+    sources = ["rs_full.json", "rs_sp500.json"]
     tickers = []
     seen = set()
     for src in sources:

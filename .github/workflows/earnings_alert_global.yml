@@ -76,7 +76,6 @@ jobs:
         if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
         run: |
           cp data/rs_full.json     . 2>/dev/null || true
-          cp data/rs_dax.json      . 2>/dev/null || true
           cp data/rs_sp500.json    . 2>/dev/null || true
           cp data/rs_smallcap.json . 2>/dev/null || true
 

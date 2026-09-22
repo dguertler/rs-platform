@@ -53,7 +53,6 @@ Wenn der Nutzer schreibt `Analysiere TICKER`:
 2. **RS-Daten laden** aus dem passenden RS-JSON:
    ```python
    # NASDAQ-100 → data/rs_full.json
-   # DAX-40    → data/rs_dax.json
    # S&P 500   → data/rs_sp500.json
    # Smallcap  → data/rs_smallcap.json
    rs = next(e for e in json.load(open('data/rs_full.json'))['data'] if e['ticker']=='TICKER')
@@ -138,8 +137,8 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
    Dateizugriff/Commit.
 4. Ticker aus `alerts` extrahieren (Feld `ticker`), nach Ticker
    deduplizieren. Feld `source` gibt direkt die passende RS-Quelle vor
-   (`QQQ`→`data/rs_full.json`, `DAX`→`data/rs_dax.json`,
-   `SPX`→`data/rs_sp500.json` — siehe Schritt 2 oben).
+   (`QQQ`→`data/rs_full.json`, `SPX`→`data/rs_sp500.json` — siehe
+   Schritt 2 oben).
 5. **Für jeden Ticker automatisch, ohne Rückfrage, direkt im selben Lauf**
    den vollständigen Analyse-Workflow oben (Schritte 1–8: Fundamentaldaten,
    Earnings-Check, RS-Daten, Zombie-Stock-Filter, Prompt, Analyse
@@ -158,7 +157,6 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 |---|---|---|
 | `data/fundamentals.json` | yfinance-Fundamentals (476+ Ticker) | Jeden Montag automatisch |
 | `data/rs_full.json` | NASDAQ-100 RS-Scores + OHLCV | Täglich automatisch |
-| `data/rs_dax.json` | DAX-40 RS-Scores + OHLCV | Täglich automatisch |
 | `data/rs_sp500.json` | S&P 500 RS-Scores + OHLCV | Täglich automatisch |
 | `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket), je Eintrag mit `trigger` (`eps-beat` / `kursreaktion`) und `eps_distorted` — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
@@ -174,7 +172,7 @@ Nach einem Analyse-Batch (mehrere Ticker in einem Rutsch) zusätzlich zur
 Zusammenfassungs-Tabelle (Schritt 8 oben, inkl. Handlungsempfehlung-Spalte)
 eine **EV/Risiko-Tabelle** ausgeben — exakt dieselben Werte, die danach auch
 in den Index-Tabellen der Platform (`frontend/index.html`, `sp500.html`,
-`dax.html`) erscheinen:
+`smallcap.html`) erscheinen:
 
 ```
 | Ticker | EV      | Risiko |

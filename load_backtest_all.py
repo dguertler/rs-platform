@@ -1,5 +1,5 @@
 """
-Lädt backtest_*.json für alle Ticker aus rs_full.json, rs_sp500.json, rs_dax.json.
+Lädt backtest_*.json für alle Ticker aus rs_full.json und rs_sp500.json.
 Bereits vorhandene Dateien werden übersprungen (Resume-fähig).
 Aufruf: python3 load_backtest_all.py
 """
@@ -113,8 +113,8 @@ def load_ticker(ticker):
         return f"error: {e}"
 
 
-# ── Ticker aus allen drei Indizes sammeln ─────────────────────────────────────
-sources = ["rs_full.json", "rs_sp500.json", "rs_dax.json"]
+# ── Ticker aus beiden Indizes sammeln ─────────────────────────────────────
+sources = ["rs_full.json", "rs_sp500.json"]
 tickers = []
 seen = set()
 for src in sources:

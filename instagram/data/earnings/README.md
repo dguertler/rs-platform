@@ -10,7 +10,7 @@ Vollständiges Schema + Workflow: `instagram/PROMPT.md`, Abschnitt
 „Dritter Post-Typ: EARNINGS-ANALYSE".
 
 Pflichtfelder: `ticker`, `quarter`, `report_date`, `source`
-(`QQQ`/`DAX`/`SPX`), `eps_actual`, `eps_estimate`, `eps_surprise_pct`.
+(`QQQ`/`SPX`), `eps_actual`, `eps_estimate`, `eps_surprise_pct`.
 
 Schnelltest der Datenschicht (zeigt Kurssprung + geladene Basis-Analyse):
 ```bash

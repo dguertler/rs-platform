@@ -313,10 +313,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                        if alert.get('in_top20') else '')
 
         _base_url = os.environ.get('FRONTEND_URL', os.environ.get('APP_URL', 'https://dguertler.github.io/rs-platform')).rstrip('/')
-        if source == 'DAX':
-            dashboard_url   = _base_url
-            dashboard_label = 'DAX-Dashboard'
-        elif source == 'SPX':
+        if source == 'SPX':
             dashboard_url   = _base_url
             dashboard_label = 'S&P 500-Dashboard'
         else:
@@ -464,7 +461,7 @@ def save_last_breakout_batch(alerts):
 
 
 # Quelle → RS-JSON-Datei (im Actions-Lauf liegen die Dateien im Root)
-_SOURCE_FILE = {'QQQ': 'rs_full.json', 'DAX': 'rs_dax.json', 'SPX': 'rs_sp500.json'}
+_SOURCE_FILE = {'QQQ': 'rs_full.json', 'SPX': 'rs_sp500.json'}
 
 
 def _build_alert(entry, source_label, top20_set, trigger_tf=None):
@@ -822,12 +819,6 @@ def main():
     all_new_states.update(new_us)
     all_alerts.extend(alerts_us)
 
-    # DAX-Aktien
-    print('\n── DAX-Aktien (rs_dax.json) ──')
-    new_dax, alerts_dax = process_json('rs_dax.json', 'DAX', prev_states, today_str, signals)
-    all_new_states.update(new_dax)
-    all_alerts.extend(alerts_dax)
-
     # S&P 500 Aktien
     print('\n── S&P 500 (rs_sp500.json) ──')
     new_sp500, alerts_sp500 = process_json('rs_sp500.json', 'SPX', prev_states, today_str, signals)
@@ -835,7 +826,7 @@ def main():
     all_alerts.extend(alerts_sp500)
 
     # Ticker, die in mehreren Quellen vorkommen (z.B. NASDAQ-100 + S&P 500),
-    # deduplizieren – nur der erste Treffer (Reihenfolge QQQ > DAX > SPX) bleibt,
+    # deduplizieren – nur der erste Treffer (Reihenfolge QQQ > SPX) bleibt,
     # sonst würde derselbe Ticker mehrfach in derselben Mail auftauchen.
     seen_tickers = set()
     deduped_alerts = []

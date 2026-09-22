@@ -450,7 +450,7 @@ Claude befüllt die dynamischen Felder aus dem Web. Pflicht: `ticker`, `quarter`
   "ticker": "CNC",
   "quarter": "Q1 2026",
   "report_date": "2026-04-28",        // Handelstag des Kurssprungs (für RS-JSON-Lookup)
-  "source": "SPX",                     // QQQ→rs_full · DAX→rs_dax · SPX→rs_sp500
+  "source": "SPX",                     // QQQ→rs_full · SPX→rs_sp500
   "currency": "$",
   "eps_actual": 3.37, "eps_estimate": 2.08, "eps_surprise_pct": 62.0,
   "eps_gaap": 3.11,                    // optional

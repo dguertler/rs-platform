@@ -21,7 +21,6 @@ from v2_analysis import build_v2_payload
 MARKET_FILES = {
     "nasdaq": "rs_full.json",
     "sp500": "rs_sp500.json",
-    "dax": "rs_dax.json",
     "smallcap": "rs_smallcap.json",
 }
 

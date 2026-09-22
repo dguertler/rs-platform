@@ -28,7 +28,7 @@ Auf dem Branch `claude/rs-platform-stock-selection-utpupd` (bzw. bereits nach
    mit Markt-Auswahl und ehrlicher Einordnung der Ergebnisse).
 5. Alle bestehenden Frontend-Seiten haben einen zusätzlichen Nav-Button
    `RS-Platform 2.0` — sonst unverändert.
-6. **Volumen-Export**: `rs_colab.py`, `dax_colab.py`, `sp500_colab_1/2.py`,
+6. **Volumen-Export**: `rs_colab.py`, `sp500_colab_1/2.py`,
    `smallcap_colab_1/2.py` schreiben jetzt zusätzlich `"v"` (Volumen) in die
    OHLCV-Arrays — additiv, mit synthetischen Pandas-DataFrames getestet.
    **Wichtig:** Die aktuell im Repo liegenden `data/rs_*.json` wurden noch
@@ -105,8 +105,7 @@ größte verbleibende Lücke zu einer belastbaren Strategie-Validierung sind.
 ### Phase B — Rest (höchste Priorität, sobald Netzwerkzugriff verfügbar ist)
 
 1. **Historische Indexmitgliedschaft** (Regel B3): `data/index_history.json`
-   aus der Wikipedia-Änderungshistorie rekonstruieren (NASDAQ-100, S&P 500,
-   DAX). Neues Skript `fetch_index_history.py`.
+   aus der Wikipedia-Änderungshistorie rekonstruieren (NASDAQ-100, S&P 500). Neues Skript `fetch_index_history.py`.
 
 2. **Längere, netzwerk-nachgeladene Historie + Out-of-Sample-Kalibrierung**
    (B4/B5): Trainingsfenster bis 2021, Validierung 2022–2026 (Pflicht: enthält

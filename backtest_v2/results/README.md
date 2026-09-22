@@ -10,7 +10,6 @@ vollständige Trade-Liste für die Chart-Ansicht im Backtest-Tab von `v2.html`).
 |---|---|---|---|---|---|---|---|---|---|
 | Nasdaq-100 | 2024-06 – 2026-07 | +31,4% | +55,6% | −24,2pp | +41,5% | 14,6% | 1,07 | **1,66** | 123 |
 | S&P 500 | 2024-07 – 2026-07 | +14,2% | +35,2% | −21,0pp | +16,2% | 17,7% | 0,49 | 1,16 | 218 |
-| DAX-40 | 2024-07 – 2026-07 | −1,6% | +39,2% | −40,8pp | +25,6% | 7,6% | −0,06 | 0,89 | 55 |
 | Smallcap SC600 | 2024-07 – 2026-07 | **+53,9%** | +37,9% | **+16,0pp** | +8,2% | **41,6%** ⚠️ | 0,74 | 1,51 | 229 |
 
 ## Zwei Engine-Bugs wurden im Zuge der Validierung gefunden und behoben
@@ -48,10 +47,10 @@ Läufe entdeckt — beide sind ein Beleg dafür, warum Regel B5
   Zeitraums) verwässert alles.
 
 **Negativ / offene Probleme:**
-- **DAX funktioniert nicht** (PF 0,89): 38 investierbare Titel sind zu wenig
-  für einen RS-Perzentil-Funnel — die Schwelle ≥85 lässt nur ~5 Kandidaten zu,
-  Zufallsrauschen dominiert. Möglicher Schluss: DAX als eigenes Handels-
-  universum streichen und nur als Anzeige-Universum behalten.
+- **DAX funktionierte nicht** (PF 0,89): 38 investierbare Titel sind zu wenig
+  für einen RS-Perzentil-Funnel — die Schwelle ≥85 ließ nur ~5 Kandidaten zu,
+  Zufallsrauschen dominierte. Konsequenz: DAX im September 2026 komplett aus
+  der Plattform entfernt (Tabelle, Workflow, Daten, Backtest-Ergebnisse).
 - **Smallcap-Max-DD von 41,6 % ist inakzeptabel** für das erklärte Ziel
   (Max-DD 15–20 %). Haupttreiber: die 197 "unknown"-Tage liefen ohne
   Regime-Bremse voll investiert, und Smallcap-Gaps reißen Stops (realisiertes
@@ -65,7 +64,7 @@ Läufe entdeckt — beide sind ein Beleg dafür, warum Regel B5
 
 ## Zum Ziel "Profit-Faktor 2"
 
-Aktueller Stand: 0,89 (DAX) bis 1,66 (Nasdaq). Der Weg zu PF 2 führt über
+Aktueller Stand: 1,16 (S&P 500) bis 1,66 (Nasdaq). Der Weg zu PF 2 führt über
 Selektivität (weniger, bessere Trades), z. B.: Entry nur bei Setup-Qualität
 ≥ 3 Punkte, Volumen-Bestätigung (Daten ab dem nächsten Collector-Lauf
 verfügbar), höhere RS-Schwelle, konservativeres "unknown"-Verhalten.
@@ -98,4 +97,3 @@ Indexmitgliedschaft), dann Training/Validierung getrennt.
 2. Historische Indexmitgliedschaft (B3) rekonstruieren.
 3. "unknown"-Regime-Verhalten entscheiden (konservativ vs. voll investiert) —
    Backtest beider Varianten nach Datenerweiterung.
-4. DAX-Universum-Entscheidung (Handels- vs. reines Anzeige-Universum).

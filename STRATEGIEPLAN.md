@@ -13,7 +13,7 @@ Upgrade auf bezahlte survivorship-bias-freie Daten erst nach bestandener Validie
 ## 1. Ist-Zustand — Bewertung der heutigen Vorgehensweise
 
 ### Was bereits gut ist
-- Mehrere Universen (NDX, S&P 500, DAX, Smallcap) mit täglicher RS-Berechnung
+- Mehrere Universen (NDX, S&P 500, Smallcap) mit täglicher RS-Berechnung
 - Multi-Timeframe-Struktursignal (GWS Weekly/Daily/4H) als Ampel — konsistent in
   Frontend, Alerts und Backtest portiert
 - Analyse-Prompt mit Szenario-EV, Pflicht-Herleitung der Kursziele und
@@ -58,7 +58,7 @@ LLM-Beitrag separat auswertbar (siehe Abschnitt 7).
 
 ### Stufe 0 — Marktphasen-Modul (neu, höchste Priorität)
 
-Tägliche Regime-Ampel je Universum (Benchmark: QQQ/SPY/DAX):
+Tägliche Regime-Ampel je Universum (Benchmark: QQQ/SPY/^SP600):
 
 - **Trend:** Benchmark-Close vs. 200-Tage-Linie und Steigung der 50-Tage-Linie
 - **Breite:** Anteil der Universums-Titel über ihrer 50d- und 200d-Linie
@@ -177,8 +177,9 @@ nach zwei behobenen Bugs — Positionsgrößen-Berechnung und Weekly-Look-Ahead;
 volle Auswertung und Bug-Beschreibung in `backtest_v2/results/README.md`):
 Smallcap schlägt Buy-and-Hold deutlich (+16pp Alpha, PF 1,51 — aber Max-DD
 41,6 % wegen fehlender Regime-Bremse im "unknown"-Anlauffenster), Nasdaq
-erreicht PF 1,66 bei Sharpe 1,07, S&P 500 PF 1,16, DAX funktioniert nicht
-(PF 0,89 — Universum mit 38 Titeln zu klein für einen Perzentil-Funnel).
+erreicht PF 1,66 bei Sharpe 1,07, S&P 500 PF 1,16. Der DAX ist seit 09/2026
+kein Universum der Plattform mehr (Backtest PF 0,89, Signal-Journal 4 Wochen
+Ø −3,7 % Alpha — 40 Titel sind zu wenig für einen Perzentil-Funnel).
 Nasdaq/S&P 500 bleiben hinter Buy-and-Hold — plausibel für ein Fenster ohne
 echte Korrektur, aber unbewiesen bleibt genau der Kapitalschutz-Nutzen, den
 das System verspricht. Das Ziel Profit-Faktor 2 wird NICHT durch Tuning auf

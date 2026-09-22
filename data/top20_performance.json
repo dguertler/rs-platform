@@ -1,5 +1,5 @@
 {
- "generated": "2026-09-22 04:00",
+ "generated": "2026-09-22 20:19",
  "capital": 10000,
  "maxRisk": 1000,
  "note": "Backtest-Engine frontend/backtest_logic.js, TOP 20 = AN, nur 4H-Auslöser, Trades ab erstem Live-Signal des Index.",
@@ -7,50 +7,50 @@
   "QQQ": {
    "name": "NASDAQ-100",
    "start": "2026-04-13",
-   "lastBar": "2026-09-18",
+   "lastBar": "2026-09-21",
    "universe": 100,
    "withoutFullHistory": 4,
    "benchmark": "QQQ",
-   "benchmarkPct": 16.983671417684153,
+   "benchmarkPct": 20.35482980830099,
    "kpis": {
     "nTrades": 23,
     "nClosed": 14,
     "nOpen": 9,
     "nTickers": 20,
     "winrate": 35.714285714285715,
-    "totalPnl": 19420.130000000005,
+    "totalPnl": 26228.87,
     "realizedPnl": 2134.9500000000025,
-    "openPnl": 17285.18,
-    "invested": 188459.28999999998,
-    "returnOnInvested": 10.304681716672077,
-    "avgPnlPerTrade": 844.3534782608698,
-    "avgReturnPerTrade": 14.123992226842656,
-    "avgInvested": 8193.882173913042,
-    "avgRisk": 851.2811652173915,
+    "openPnl": 24093.920000000002,
+    "invested": 182242.72999999998,
+    "returnOnInvested": 14.392272328229499,
+    "avgPnlPerTrade": 1140.385652173913,
+    "avgReturnPerTrade": 18.39722376789472,
+    "avgInvested": 7923.596956521738,
+    "avgRisk": 839.9799478260873,
     "avgWin": 1506.4680000000003,
     "avgWinPct": 22.76710988573947,
     "avgLoss": -599.7099999999997,
     "avgLossPct": -7.4277677822711485,
-    "profitFactor": 3.881068450879745,
+    "profitFactor": 5.754957751023822,
     "profitFactorClosed": 1.3955522947202268,
-    "avgHoldingWeeks": 6.826086956521739,
+    "avgHoldingWeeks": 7.217391304347826,
     "maxDD": 17.685846926925628,
     "best": [
      {
       "ticker": "MRNA",
       "entryDate": "2026-05-11",
-      "exitDate": "2026-09-14",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": 5937,
-      "pnlPct": 152.6
+      "pnl": 7696,
+      "pnlPct": 197.8
      },
      {
       "ticker": "OKTA",
       "entryDate": "2026-06-26",
-      "exitDate": "2026-09-14",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": 4966,
-      "pnlPct": 56.2
+      "pnl": 5327,
+      "pnlPct": 60.3
      },
      {
       "ticker": "AMD",
@@ -61,20 +61,20 @@
       "pnlPct": 77.5
      },
      {
-      "ticker": "PANW",
-      "entryDate": "2026-06-16",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": 2541,
-      "pnlPct": 32
-     },
-     {
       "ticker": "NTRA",
       "entryDate": "2026-08-05",
-      "exitDate": "2026-09-14",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": 2398,
-      "pnlPct": 24.2
+      "pnl": 3436,
+      "pnlPct": 34.7
+     },
+     {
+      "ticker": "PANW",
+      "entryDate": "2026-06-16",
+      "exitDate": "2026-09-21",
+      "isOpen": true,
+      "pnl": 2480,
+      "pnlPct": 31.3
      }
     ],
     "worst": [
@@ -103,19 +103,19 @@
       "pnlPct": -8.9
      },
      {
-      "ticker": "MU",
-      "entryDate": "2026-09-08",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": -787,
-      "pnlPct": -10.8
-     },
-     {
       "ticker": "LRCX",
       "entryDate": "2026-08-11",
       "exitDate": "2026-09-02",
       "isOpen": false,
       "pnl": -735,
+      "pnlPct": -7.5
+     },
+     {
+      "ticker": "TXN",
+      "entryDate": "2026-06-16",
+      "exitDate": "2026-07-20",
+      "isOpen": false,
+      "pnl": -558,
       "pnlPct": -7.5
      }
     ]
@@ -124,34 +124,34 @@
   "SPX": {
    "name": "S&P 500",
    "start": "2026-05-05",
-   "lastBar": "2026-09-18",
+   "lastBar": "2026-09-21",
    "universe": 524,
    "withoutFullHistory": 130,
    "benchmark": "SPX",
-   "benchmarkPct": 5.3901107832522,
+   "benchmarkPct": 6.9632825565281165,
    "kpis": {
     "nTrades": 18,
-    "nClosed": 6,
-    "nOpen": 12,
-    "nTickers": 17,
-    "winrate": 33.33333333333333,
-    "totalPnl": 2968.279999999997,
-    "realizedPnl": 1552.6400000000003,
-    "openPnl": 1415.6399999999962,
-    "invested": 146538.97000000003,
-    "returnOnInvested": 2.025590871834295,
-    "avgPnlPerTrade": 164.90444444444427,
-    "avgReturnPerTrade": 2.1814066241061383,
-    "avgInvested": 8141.0538888888905,
-    "avgRisk": 893.7335888888891,
+    "nClosed": 5,
+    "nOpen": 13,
+    "nTickers": 18,
+    "winrate": 40,
+    "totalPnl": 9200.279999999997,
+    "realizedPnl": 2287.6499999999996,
+    "openPnl": 6912.629999999998,
+    "invested": 136403.45,
+    "returnOnInvested": 6.744902713237823,
+    "avgPnlPerTrade": 511.1266666666665,
+    "avgReturnPerTrade": 6.041419288827397,
+    "avgInvested": 7577.969444444445,
+    "avgRisk": 890.6646444444445,
     "avgWin": 1772.0349999999999,
     "avgWinPct": 25.970473137105987,
-    "avgLoss": -497.85749999999985,
-    "avgLossPct": -6.691365990090528,
-    "profitFactor": 1.688016021287543,
-    "profitFactorClosed": 1.7796608467282309,
-    "avgHoldingWeeks": 4.444444444444445,
-    "maxDD": 14.703335112709844,
+    "avgLoss": -418.8066666666667,
+    "avgLossPct": -6.414498159899477,
+    "profitFactor": 6.4285663710548215,
+    "profitFactorClosed": 2.8207685328154595,
+    "avgHoldingWeeks": 4.722222222222222,
+    "maxDD": 9.276532091166098,
     "best": [
      {
       "ticker": "MRVL",
@@ -162,36 +162,36 @@
       "pnlPct": 37.6
      },
      {
-      "ticker": "DELL",
-      "entryDate": "2026-08-05",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": 1218,
-      "pnlPct": 21.7
-     },
-     {
       "ticker": "CRWD",
       "entryDate": "2026-08-27",
-      "exitDate": "2026-09-14",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": 1167,
-      "pnlPct": 13
+      "pnl": 1767,
+      "pnlPct": 19.7
      },
      {
-      "ticker": "LRCX",
-      "entryDate": "2026-05-06",
-      "exitDate": "2026-07-21",
-      "isOpen": false,
-      "pnl": 823,
-      "pnlPct": 14.3
+      "ticker": "MRNA",
+      "entryDate": "2026-09-02",
+      "exitDate": "2026-09-21",
+      "isOpen": true,
+      "pnl": 1099,
+      "pnlPct": 14.2
      },
      {
-      "ticker": "VLO",
-      "entryDate": "2026-09-01",
-      "exitDate": "2026-09-14",
+      "ticker": "HPE",
+      "entryDate": "2026-08-27",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": 514,
-      "pnlPct": 5.2
+      "pnl": 1074,
+      "pnlPct": 10.8
+     },
+     {
+      "ticker": "NTAP",
+      "entryDate": "2026-08-03",
+      "exitDate": "2026-09-21",
+      "isOpen": true,
+      "pnl": 1031,
+      "pnlPct": 10.5
      }
     ],
     "worst": [
@@ -204,197 +204,80 @@
       "pnlPct": -15.1
      },
      {
-      "ticker": "MU",
-      "entryDate": "2026-09-08",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": -787,
-      "pnlPct": -10.8
-     },
-     {
-      "ticker": "LRCX",
-      "entryDate": "2026-08-11",
-      "exitDate": "2026-09-02",
-      "isOpen": false,
-      "pnl": -735,
-      "pnlPct": -7.5
-     },
-     {
       "ticker": "STX",
       "entryDate": "2026-08-14",
-      "exitDate": "2026-09-14",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": -679,
-      "pnlPct": -14.4
+      "pnl": -320,
+      "pnlPct": -6.8
+     },
+     {
+      "ticker": "AMD",
+      "entryDate": "2026-05-22",
+      "exitDate": "2026-07-29",
+      "isOpen": false,
+      "pnl": -206,
+      "pnlPct": -3.7
      },
      {
       "ticker": "SNDK",
-      "entryDate": "2026-09-18",
-      "exitDate": "2026-09-14",
+      "entryDate": "2026-09-21",
+      "exitDate": "2026-09-21",
       "isOpen": true,
-      "pnl": -557,
-      "pnlPct": -5.6
-     }
-    ]
-   }
-  },
-  "DAX": {
-   "name": "DAX-40",
-   "start": "2026-04-08",
-   "lastBar": "2026-09-18",
-   "universe": 42,
-   "withoutFullHistory": 4,
-   "benchmark": "DAX",
-   "benchmarkPct": 5.080556447235818,
-   "kpis": {
-    "nTrades": 21,
-    "nClosed": 13,
-    "nOpen": 8,
-    "nTickers": 16,
-    "winrate": 38.46153846153847,
-    "totalPnl": -934.4699999999976,
-    "realizedPnl": -3251.1700000000005,
-    "openPnl": 2316.7000000000025,
-    "invested": 207975.25,
-    "returnOnInvested": -0.4493178875851803,
-    "avgPnlPerTrade": -44.49857142857132,
-    "avgReturnPerTrade": -0.5175113418313025,
-    "avgInvested": 9903.583333333334,
-    "avgRisk": 603.7755476190474,
-    "avgWin": 482.6039999999997,
-    "avgWinPct": 4.8490386406412025,
-    "avgLoss": -708.0237499999997,
-    "avgLossPct": -7.286551550031852,
-    "profitFactor": 0.8384027558013463,
-    "profitFactorClosed": 0.42601325167411397,
-    "avgHoldingWeeks": 6.857142857142857,
-    "maxDD": 40.740300000000005,
-    "best": [
-     {
-      "ticker": "CBK.DE",
-      "entryDate": "2026-06-15",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": 1386,
-      "pnlPct": 13.9
+      "pnl": -119,
+      "pnlPct": -3.3
      },
      {
-      "ticker": "MRK.DE",
-      "entryDate": "2026-05-13",
-      "exitDate": "2026-09-09",
+      "ticker": "ROST",
+      "entryDate": "2026-07-28",
+      "exitDate": "2026-08-21",
       "isOpen": false,
-      "pnl": 1112,
-      "pnlPct": 11.2
-     },
-     {
-      "ticker": "DBK.DE",
-      "entryDate": "2026-07-30",
-      "exitDate": "2026-09-14",
-      "isOpen": true,
-      "pnl": 657,
-      "pnlPct": 6.6
-     },
-     {
-      "ticker": "SY1.DE",
-      "entryDate": "2026-06-10",
-      "exitDate": "2026-07-24",
-      "isOpen": false,
-      "pnl": 447,
-      "pnlPct": 4.5
-     },
-     {
-      "ticker": "DHL.DE",
-      "entryDate": "2026-06-17",
-      "exitDate": "2026-08-18",
-      "isOpen": false,
-      "pnl": 422,
-      "pnlPct": 4.2
-     }
-    ],
-    "worst": [
-     {
-      "ticker": "ZAL.DE",
-      "entryDate": "2026-07-29",
-      "exitDate": "2026-08-05",
-      "isOpen": false,
-      "pnl": -1414,
-      "pnlPct": -15.6
-     },
-     {
-      "ticker": "IFX.DE",
-      "entryDate": "2026-06-19",
-      "exitDate": "2026-07-08",
-      "isOpen": false,
-      "pnl": -1361,
-      "pnlPct": -13.7
-     },
-     {
-      "ticker": "BNR.DE",
-      "entryDate": "2026-08-07",
-      "exitDate": "2026-09-18",
-      "isOpen": false,
-      "pnl": -774,
-      "pnlPct": -7.8
-     },
-     {
-      "ticker": "BAS.DE",
-      "entryDate": "2026-04-08",
-      "exitDate": "2026-06-09",
-      "isOpen": false,
-      "pnl": -705,
-      "pnlPct": -7.1
-     },
-     {
-      "ticker": "DBK.DE",
-      "entryDate": "2026-07-03",
-      "exitDate": "2026-07-24",
-      "isOpen": false,
-      "pnl": -570,
-      "pnlPct": -5.7
+      "pnl": -52,
+      "pnlPct": -0.5
      }
     ]
    }
   }
  },
  "total": {
-  "nTrades": 62,
-  "nClosed": 33,
-  "nOpen": 29,
-  "nTickers": 45,
-  "winrate": 36.36363636363637,
-  "totalPnl": 21453.940000000013,
-  "realizedPnl": 436.42000000000235,
-  "openPnl": 21017.520000000004,
-  "invested": 542973.51,
-  "returnOnInvested": 3.9511945987935975,
-  "avgPnlPerTrade": 346.03129032258084,
-  "avgReturnPerTrade": 5.697571004400551,
-  "avgInvested": 8757.637258064517,
-  "avgRisk": 779.7735145161289,
-  "avgWin": 1124.1191666666666,
-  "avgWinPct": 15.835140742176277,
-  "avgLoss": -621.5719047619045,
-  "avgLossPct": -7.233704114336061,
-  "profitFactor": 2.274170797805147,
-  "profitFactorClosed": 1.0334344338968564,
-  "avgHoldingWeeks": 6.145161290322581,
-  "maxDD": 33.21118648406502,
+  "nTrades": 41,
+  "nClosed": 19,
+  "nOpen": 22,
+  "nTickers": 29,
+  "winrate": 36.84210526315789,
+  "totalPnl": 35429.15,
+  "realizedPnl": 4422.600000000002,
+  "openPnl": 31006.549999999996,
+  "invested": 318646.17999999993,
+  "returnOnInvested": 11.118648903934767,
+  "avgPnlPerTrade": 864.1256097560976,
+  "avgReturnPerTrade": 12.972724240499307,
+  "avgInvested": 7771.858048780487,
+  "avgRisk": 862.2317658536589,
+  "avgWin": 1582.344285714286,
+  "avgWinPct": 23.682356528987043,
+  "avgLoss": -554.4841666666665,
+  "avgLossPct": -7.174450376678231,
+  "profitFactor": 5.91327712213455,
+  "profitFactorClosed": 1.6646718196041073,
+  "avgHoldingWeeks": 6.121951219512195,
+  "maxDD": 21.12897572008784,
   "best": [
    {
     "ticker": "MRNA",
     "entryDate": "2026-05-11",
-    "exitDate": "2026-09-14",
+    "exitDate": "2026-09-21",
     "isOpen": true,
-    "pnl": 5937,
-    "pnlPct": 152.6
+    "pnl": 7696,
+    "pnlPct": 197.8
    },
    {
     "ticker": "OKTA",
     "entryDate": "2026-06-26",
-    "exitDate": "2026-09-14",
+    "exitDate": "2026-09-21",
     "isOpen": true,
-    "pnl": 4966,
-    "pnlPct": 56.2
+    "pnl": 5327,
+    "pnlPct": 60.3
    },
    {
     "ticker": "AMD",
@@ -405,39 +288,23 @@
     "pnlPct": 77.5
    },
    {
+    "ticker": "NTRA",
+    "entryDate": "2026-08-05",
+    "exitDate": "2026-09-21",
+    "isOpen": true,
+    "pnl": 3436,
+    "pnlPct": 34.7
+   },
+   {
     "ticker": "MRVL",
     "entryDate": "2026-05-05",
     "exitDate": "2026-07-14",
     "isOpen": false,
     "pnl": 2721,
     "pnlPct": 37.6
-   },
-   {
-    "ticker": "PANW",
-    "entryDate": "2026-06-16",
-    "exitDate": "2026-09-14",
-    "isOpen": true,
-    "pnl": 2541,
-    "pnlPct": 32
    }
   ],
   "worst": [
-   {
-    "ticker": "ZAL.DE",
-    "entryDate": "2026-07-29",
-    "exitDate": "2026-08-05",
-    "isOpen": false,
-    "pnl": -1414,
-    "pnlPct": -15.6
-   },
-   {
-    "ticker": "IFX.DE",
-    "entryDate": "2026-06-19",
-    "exitDate": "2026-07-08",
-    "isOpen": false,
-    "pnl": -1361,
-    "pnlPct": -13.7
-   },
    {
     "ticker": "ARM",
     "entryDate": "2026-06-12",
@@ -461,6 +328,22 @@
     "isOpen": false,
     "pnl": -998,
     "pnlPct": -15.1
+   },
+   {
+    "ticker": "ASML",
+    "entryDate": "2026-09-08",
+    "exitDate": "2026-09-15",
+    "isOpen": false,
+    "pnl": -794,
+    "pnlPct": -8.9
+   },
+   {
+    "ticker": "LRCX",
+    "entryDate": "2026-08-11",
+    "exitDate": "2026-09-02",
+    "isOpen": false,
+    "pnl": -735,
+    "pnlPct": -7.5
    }
   ]
  }

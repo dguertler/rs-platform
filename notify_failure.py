@@ -32,7 +32,6 @@ müssen ebenfalls manuell angestossen werden:
 
   01:00 UTC  → NASDAQ-Update       (update_rs.yml)
   01:15 UTC  → S&P-500-Update      (update_sp500.yml)
-  01:30 UTC  → DAX-Update          (update_dax.yml)
   01:45 UTC  → Backtest-Update     (update_backtest_daily.yml)
   02:00 UTC  → Breakout-Alert      (stock_alerts.yml)
   02:15 UTC  → Earnings-Alert      (earnings_alert.yml)

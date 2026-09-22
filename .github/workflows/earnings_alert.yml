@@ -57,7 +57,7 @@ jobs:
         if: steps.done_cache.outputs.cache-hit != 'true'
         run: |
           python3 check_data_freshness.py --target "${{ steps.target.outputs.date }}" \
-            --files data/rs_full.json data/rs_dax.json data/rs_sp500.json data/rs_smallcap.json \
+            --files data/rs_full.json data/rs_sp500.json data/rs_smallcap.json \
             >> "$GITHUB_OUTPUT"
 
       - name: Abhängigkeiten installieren
@@ -68,7 +68,6 @@ jobs:
         if: steps.done_cache.outputs.cache-hit != 'true' && steps.freshness.outputs.fresh == 'true'
         run: |
           cp data/rs_full.json     . 2>/dev/null || true
-          cp data/rs_dax.json      . 2>/dev/null || true
           cp data/rs_sp500.json    . 2>/dev/null || true
           cp data/rs_smallcap.json . 2>/dev/null || true
 
