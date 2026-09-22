@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>INTU — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>INTU</h1>
+      <h2>Intuit Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$81B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >33%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">72</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-86.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$303.19</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">81.0%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">182.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">23.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+33.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">540–680</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">350–440</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">175–235</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $540–$680 (25 %) · Base $350–$440 (45 %) · Bear $175–$235 (30 %) · EV ~$391,75</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Intuit ist der Testfall dafür, ob KI-Agenten Software-Franchises zerstören oder nur ihre Oberfläche ersetzen. Der Kurs ist von $705,08 auf $303,19 gefallen — auf Sechsmonatssicht 57,2 % schlechter als der QQQ, der drittschwächste Wert im NASDAQ-100. Der Auslöser war kein Geschäftseinbruch, sondern eine Abfolge von Ereignissen: Im April 2026 verlor die Aktie an einem einzigen Tag 8,5 %, nachdem Anthropic verwaltete KI-Agenten für Finanz- und Steueraufgaben vorstellte — also exakt die Arbeitsabläufe, die TurboTax und QuickBooks besetzen. Im August folgten weitere 12 %, als die Angst von TurboTax auf QuickBooks übersprang.</p>
+<p>Das Unternehmen hat die These teilweise selbst bestätigt: Die FY27-Prognose sieht nur noch 9–10 % Umsatzwachstum vor nach 14 % im FY26, TurboTax-Einheiten werden mit +2–3 % geführt, und 17 % der Belegschaft — über 3.000 Stellen — werden abgebaut. Was in der Panik untergeht: Intuit kooperiert mit demselben Anbieter, dessen Ankündigung den Kurs brach, um eigene Agenten in TurboTax und QuickBooks zu bringen. Und die Bewertung hat sich vollständig umgekehrt — 11,20x Forward, 3,78x Umsatz und 7,8 % FCF-Rendite bei 81,0 % Bruttomarge. Intuit ist heute günstiger als Adobe.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Franchises: TurboTax (Verbraucher-Steuererklärung, stark saisonal) und QuickBooks (Buchhaltung für kleine Unternehmen, wiederkehrend)</li>
+<li>Credit Karma und Mailchimp als Ergänzungen mit deutlich schwächerer Wettbewerbsstellung</li>
+<li>Der eigentliche Burggraben ist nicht die Software, sondern die regulatorische Haftung: Wer eine Steuererklärung einreicht, trägt Verantwortung gegenüber der Finanzbehörde — ein Agent ohne Haftungsträger kann das nicht übernehmen</li>
+<li>QuickBooks ist die Datenbasis des Kunden: Kontenrahmen, Belege, Historie, Bankanbindung — ein Wechsel bedeutet Datenmigration, nicht Toolwechsel</li>
+<li>Bruttomarge 81,0 % bei Betriebsmarge 17,6 % — der Abstand von 63 Punkten ist ungewöhnlich hoch und zeigt eine sehr schwere Vertriebs- und Marketingstruktur, genau dort setzt der Stellenabbau an</li>
+<li>Anomalie: Nettomarge 21,3 % **über** der Betriebsmarge von 17,6 %. Die Differenz liegt unterhalb der Betriebsebene (Zinserträge, Steuereffekte oder Einmalerträge) und ist aus den Daten nicht abschließend auflösbar — die Nettomarge wird weder in Bewertung noch Scoring verwendet, stattdessen dienen Betriebsmarge und FCF</li>
+<li>Zweite Anomalie: Die ausgewiesene Dividendenrendite von 182,0 % ist ein Datenartefakt und bleibt unberücksichtigt</li>
+<li>FCF $6,35 Mrd. bei $21,45 Mrd. Umsatz = 29,6 % FCF-Marge, Debt/Equity 44,34</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Adobe (ADBE, Fwd-KGV 9,0x), Oracle (ORCL, 13,4x), Workday (WDAY, 14,7x), Salesforce (CRM, 14,9x), ServiceNow (NOW, 27,1x) — Bandbreite 9,0x–27,1x.</p>
+<p>Die Partnerschaft mit Anthropic dreht die Erzählung: Intuit wird zum Haftungs- und Datenträger hinter dem Agenten, nicht zu seinem Opfer. Die Steuerbehörden akzeptieren weiterhin nur zugelassene Einreicher, und QuickBooks bleibt die Datenschicht, auf der jeder Agent aufsetzen muss. Gleichzeitig hebt der 17-%-Stellenabbau die Betriebsmarge deutlich. Strukturelle Margennachhaltigkeit ist gut begründbar: 81,0 % Bruttomarge, regulatorisch geschützte Einreichungslizenzen, jährlich wiederkehrende Nutzung mit extrem hoher Verlängerungsquote, und ein Kostenblock, der gerade dauerhaft gesenkt wird. Annahme (kein Konsens): FY29-EPS ~$38,00 × 16x (zwischen ORCL 13,4x und CRM 14,9x, leichte Prämie für 81 % Bruttomarge) = $608. Bull-Kursziel: $540–$680. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Das Wachstum bleibt bei den geführten 9–10 %, TurboTax-Einheiten stagnieren wie prognostiziert, QuickBooks trägt das Geschäft. Der Stellenabbau hebt die Marge, aber das Multiple bleibt gedrückt, weil die Disruptionsfrage offen bleibt. Annahme (kein Konsens): FY29-EPS ~$33,00 × 12x (nahe dem eigenen aktuellen Niveau, über ADBE 9,0x) = $396. Base-Kursziel: $350–$440. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Agenten übernehmen die einfache Verbrauchersteuererklärung. Der Mechanismus ist konkret — das Einstiegssegment von TurboTax ist standardisiert, preissensibel und genau die Arbeit, die ein Sprachmodell zuverlässig erledigen kann. Die geführten +2–3 % Einheitenwachstum sind bereits das Signal. Parallel verlieren QuickBooks-Kunden an KI-native Buchhaltungsanbieter, die direkt aus Bankdaten buchen. Bei 63 Punkten Abstand zwischen Brutto- und Betriebsmarge schlägt ein Umsatzrückgang sofort und überproportional auf den Gewinn durch.</p>
+<p>Kundenkonzentration: breit über Millionen Verbraucher und kleine Unternehmen gestreut — strukturell gering, aus den Daten nicht quantifizierbar. Geopolitik/Exportkontrollen: nicht materiell, Intuit ist im Kern ein US-Geschäft. Lieferkette/Single-Source: keine physische Lieferkette; die KI-Funktionen setzen jedoch auf einem externen Modellanbieter auf, was die Kostenbasis und einen Teil der Produktentwicklung an fremde Entscheidungen koppelt — ein reales, in dieser Form neues Abhängigkeitsrisiko. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; Intuit kauft regelmäßig Aktien zurück, eine abschließende Beurteilung ist auf Datenbasis nicht möglich. Regulierung/Rechtsrisiken: erhöht und zweischneidig — kostenlose staatliche Steuererklärungsangebote bedrohen TurboTax, dieselbe Regulierung schützt Intuit aber auch vor nicht zugelassenen Agenten.</p>
+<p>Annahme (kein Konsens): FY29-EPS ~$22,00 × 9x (auf ADBE-Niveau, dem De-Rating-Anker für disruptionsbedrohte Software) = $198. Bear-Kursziel: $175–$235. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $610 + 0,45 × $395 + 0,30 × $205 = **~$391,75 — implizites Upside vs. aktuellem Kurs ($303,19): +29,2%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Hohe Qualität, die der Kurs nicht mehr abbildet. Bruttomarge 81,0 % ist ein stabiler Strukturwert, keine Zyklusspitze. ROE 23,6 % und ROIC 20,96 % liegen nahe beieinander und sind beide solide — deutlich über HubSpot (3,2 %) und im Bereich gesunder Software-Franchises. Betriebsmarge 17,6 % wirkt niedrig für 81 % Bruttomarge; genau das ist der Ansatzpunkt des Stellenabbaus und zugleich die größte Hebelchance des Falls.</p>
+<p>Der aussagekräftigste Wert ist der Cashflow: $6,35 Mrd. FCF auf $21,45 Mrd. Umsatz ergeben 29,6 % FCF-Marge und 7,8 % Rendite auf den Marktwert. Ein Unternehmen mit 81 % Bruttomarge, das fast 30 % seines Umsatzes als freien Cashflow ausweist und dabei zu 7,8 % Rendite gehandelt wird, ist im Software-Sektor eine Seltenheit. Die Nettomarge bleibt wegen der in Abschnitt 2 benannten Anomalie außen vor. Debt/Equity 44,34 ist moderat und vom Cashflow leicht gedeckt.</p>
+<p>RPO-Analyse (Pflicht bei Subscription-Modellen): Intuit weist Deferred Revenue aus, die aktuellen Werte sind im Datensatz jedoch nicht enthalten und über die vorliegenden Quellen nicht verifizierbar — sie werden daher nicht als Vorlaufindikator verwendet. Der beste verfügbare Ersatz ist die eigene Prognose: 9–10 % Umsatzwachstum bei nur 2–3 % TurboTax-Einheitenwachstum. Das bedeutet, dass das Wachstum künftig fast vollständig aus Preis und QuickBooks kommt, nicht aus Nutzerzuwachs — ein Warnsignal, das in den Bear Case gehört. Der Burggraben ist echt und liegt in der regulatorischen Haftung plus der Datenhistorie. Nur scheinbar ist er in der Benutzerführung — dort ist ein Agent überlegen.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 11,20x bei Forward-EPS $27,08. Da das Geschäft nicht zyklisch ist, ist die FCF-Rendite die primäre Basis: 7,8 % auf den Marktwert. Zum Vergleich — ein reifes Software-Geschäft wird typischerweise bei 4–5 % FCF-Rendite gehandelt; Intuit müsste also um 55–95 % steigen, um dort anzukommen. Price/Book 4,28 ist für ein Unternehmen mit ROE 23,6 % unauffällig.</p>
+<p>Peer-Einordnung: 11,20x Forward liegt im **unteren Drittel** der Bandbreite — über Adobe (9,0x), unter Oracle (13,4x), Workday (14,7x), Salesforce (14,9x) und weit unter ServiceNow (27,1x). Auf Umsatzbasis ist der Befund noch schärfer: 3,78x Sales gegenüber ADBE 3,81x, CRM 4,46x, WDAY 4,60x und NOW 9,51x. Intuit ist damit praktisch so günstig wie Adobe und günstiger als alle anderen genannten Peers — bei einer Bruttomarge, die über Salesforce (77,3 %) und Workday (75,8 %) liegt, und einem Wachstum von 13,7 % TTM, das über CRM (10,8 %) und WDAY (12,8 %) liegt. Dieser Abschlag ist aus Wachstum und Marge nicht erklärbar und damit ausschließlich ein Disruptionsabschlag.</p>
+<p>Was preist der Kurs ein? Bei $81,02 Mrd. Marktwert und einer unterstellten reifen FCF-Marge von 32 % müsste Intuit ~$4,05 Mrd. FCF erzielen, um auf 5 % FCF-Rendite zu kommen — das entspricht ~$12,7 Mrd. Umsatz gegenüber heute $21,45 Mrd. Der Kurs unterstellt also nicht nur kein Wachstum, sondern einen **Umsatzrückgang um 41 %**. Das ist keine vorsichtige Annahme mehr, sondern die Einpreisung eines Franchise-Verlusts. Analyst-Konsensziel $405,60 bei 31 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Reaktionsfunktion: −8,5 % an einem Tag auf die Produktankündigung eines Dritten, −12 % an einem weiteren Tag ohne eigene Unternehmensnachricht. Ein Titel, der zweistellig auf fremde Ankündigungen reagiert, wird nicht mehr über Zahlen gehandelt, sondern über eine Erzählung. Ableitbar ist außerdem der Konsensabstand: 31 Analysten, Rating "buy", mittleres Ziel 34 % über dem Kurs. Beta 0,98 — Intuit bewegt sich trotz des Absturzes im Gleichlauf mit dem Markt, was für einen ordentlichen, nicht panikartigen Abbau spricht. Hypothese, nicht datenbasiert: Intuit war eine der meistgehaltenen Qualitäts-Softwarepositionen; ein solcher Bestandsabbau läuft über Quartale und erzeugt anhaltenden Angebotsdruck ohne Schlagzeilen. Was neue Käufer anziehen würde, ist ein Quartal mit TurboTax-Einheitenwachstum über 5 % — der direkte Gegenbeweis zur Agenten-These.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −86,42, Rang 95 von 100. Fenster: 5T −12,33 %, 10T −9,22 %, 20T −18,51 %, 50T +10,83 %, 6M −57,19 %. Die Struktur ist aufschlussreich: Der positive 50-Tage-Wert zeigt, dass es im Sommer eine deutliche Gegenbewegung gab, die in den letzten vier Wochen vollständig zunichtegemacht wurde. Der Kurs bei $303,19 liegt 19,9 % über dem 52-Wochen-Tief von $252,84 und 57,0 % unter dem Hoch. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist rein reaktiv und folgt dem Nachrichtenfluss zur KI-Frage. Warnsignal: Ein Bruch unter $252,84 markiert ein neues Verlaufstief; ein Einstiegssignal wäre die Rückeroberung von $360.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($700–$950):** Intuit wird zur Haftungs- und Datenschicht für Finanz-Agenten, Marge steigt durch den Kostenumbau über 30 %. Normalisiertes EPS $45–55 × 16–17x.</p>
+<p>**Base ($380–$580):** Wachstum 9–10 %, Betriebsmarge steigt Richtung 25 %, Multiple normalisiert bei 13–14x. Normalisiertes EPS $30–42 × 13–14x.</p>
+<p>**Bear ($140–$260):** Agenten übernehmen die Verbrauchersteuererklärung, QuickBooks verliert SMB-Kunden, das Multiple bleibt bei 9x auf sinkendem Gewinn.</p>
+<p>Entscheidende Variable: ob die regulatorische Einreichungsverantwortung ein dauerhafter Burggraben ist oder nur eine Verzögerung. Daran hängt die gesamte Differenz zwischen Bull und Bear.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die Rechnung in Abschnitt 7 ist der ganze Fall: Bei $303,19 preist der Markt einen Umsatzrückgang von 41 % ein — für ein Unternehmen, das im laufenden Jahr 13,7 % gewachsen ist, 81,0 % Bruttomarge erzielt und 7,8 % FCF-Rendite liefert. Selbst wenn die KI-These teilweise aufgeht, ist das eine extreme Annahme. Der EV-Upside von +29,2 % ist der höchste dieser Analysegruppe und entsteht nicht aus einer Wachstumsfantasie, sondern aus dem Abbau einer Angstprämie.</p>
+<p>Klare Einordnung: antizyklische Qualitätswette, kein Momentum-Play. RS-Score −86,42, Rang 95, GWS 0/3 — der regelbasierte Funnel liefert diesen Titel nicht, und wer hier kauft, handelt bewusst gegen das Momentum-System dieser Plattform. Das Risiko ist real und nicht theoretisch: Die eigene Prognose des Unternehmens (TurboTax-Einheiten +2–3 %) stützt die Bär-These teilweise. Geeignet für Value- und Qualitätsinvestoren mit Dreijahreshorizont. Positionsgröße maximal 3 %, gestaffelter Aufbau, und das TurboTax-Einheitenwachstum als hartes, quartalsweise überprüfbares Abbruchkriterium.</p>
+<p>Peers: **Adobe (ADBE)** ist bei 9,0x Forward und 3,81x Sales praktisch identisch bewertet und steht unter derselben KI-Frage — wächst aber mit 12,9 % ähnlich und hat mit 34,8 % die doppelte Betriebsmarge; auf Margenbasis ist Adobe das robustere Instrument. **Oracle (ORCL)** ist bei 13,4x Forward teurer, wächst mit 29,6 % aber deutlich schneller und profitiert von der KI-Welle, statt von ihr bedroht zu sein.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — 11,20x Forward bei 7,8 % FCF-Rendite und 81,0 % Bruttomarge ist attraktiv, aber die eigene FY27-Prognose (Umsatz +9–10 %, TurboTax-Einheiten +2–3 %) liefert keinen positiven Auslöser, und RS −86,42 bei GWS 0/3 bedeutet keinen Funnel-Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LULU — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>LULU</h1>
+      <h2>lululemon athletica inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Apparel Retail</span></div>
+        <div class="mi">MCap: <span>$11B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-108.2</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$98.06</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">11.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$11.1B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">54.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">30.9%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+19.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">170–210</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">22%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–120</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">45–65</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">33%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $170–$210 (22 %) · Base $95–$120 (45 %) · Bear $45–$65 (33 %) · EV ~$108,33</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>lululemon ist der einzige Titel dieser Analysegruppe, dessen Geschäft tatsächlich schrumpft — und zwar nicht wegen einer technologischen Bedrohung, sondern weil die Marke in ihrem Kernmarkt an Zugkraft verliert. Das zweite Quartal (berichtet am 3. September) brachte $2,415 Mrd. Umsatz, −4 % gegenüber Vorjahr, einen Nettogewinnrückgang von 11 % und vergleichbare Umsätze von −9 %. Die Aktie verlor an diesem Tag 18 %.</p>
+<p>Entscheidend ist die Prognosesenkung. Für das dritte Quartal erwartet das Unternehmen $2,29 bis $2,32 Mrd., also −10 bis −11 % gegenüber Vorjahr. Die Jahresprognose wurde von $11,0–11,15 Mrd. auf $10,35–10,5 Mrd. gekürzt, das Ergebnis je Aktie von $10,95–11,15 auf $9,48–9,73. Als Gründe nennt das Management negative Kommentare in sozialen Medien, Zolldruck auf die Marge, Abschriften und eine schwächere Nachfrage in Nordamerika. Was der Markt dabei richtig sieht: Das ist eine Markenfrage, und Markenprobleme lösen sich nicht durch Kostenmanagement. Was er möglicherweise übersieht: Die Kapitalrenditen sind trotz der Krise intakt — ROE 30,9 %, ROIC 31,5 %, FCF-Rendite 10,6 % bei 0,98x Umsatz und 2,29x Buchwert.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Vertikal integrierter Markenhersteller: eigene Läden und eigener Onlinehandel, kein Großhandel als Puffer — Nachfrageschwäche schlägt unmittelbar durch</li>
+<li>Bruttomarge 54,9 % ist Ausdruck der Direktvertriebsstruktur, nicht überlegener Produktionskosten</li>
+<li>Preissetzungsmacht basiert auf Markenstatus, nicht auf Funktionalität — Wettbewerber wie Alo und Vuori greifen genau dort an</li>
+<li>Abschriften sind das gefährlichste Signal: Sie senken die Marge und beschädigen gleichzeitig die Preiswahrnehmung der Marke</li>
+<li>Internationales Geschäft, insbesondere China, ist der verbliebene Wachstumshebel gegen ein schwaches Nordamerika</li>
+<li>Zölle belasten die Bruttomarge direkt, da die Produktion überwiegend in Asien liegt</li>
+<li>Anomalie mit Erklärung: Trailing PE 8,07 liegt **unter** Forward PE 11,16 — die Ursache ist kein Bewertungsvorteil, sondern ein fallendes Ergebnis (trailing EPS $12,15 gegenüber forward $8,78, also −28 %). Bei einem schrumpfenden Gewinn ist das trailing KGV die irreführende Kennzahl; die Analyse verwendet das Forward-Multiple</li>
+<li>Bilanz belastbar: Debt/Equity 44,69, FCF $1,15 Mrd. bei 10,4 % FCF-Marge</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Under Armour (UAA, Fwd-KGV 24,9x), Ralph Lauren (RL, 16,0x), Nike (NKE, 15,6x), Deckers (DECK, 9,4x) — Bandbreite 9,4x–24,9x.</p>
+<p>Der Produktzyklus dreht: Neue Kollektionen treffen wieder den Geschmack, die Abschriften laufen aus, China und der Rest der internationalen Geschäfte tragen das Wachstum, und der Zolldruck lässt nach. Strukturelle Margennachhaltigkeit ist hier nur eingeschränkt begründbar: Die vertikale Integration und der Direktvertrieb sichern 54,9 % Bruttomarge, solange die Marke Preise durchsetzt — und genau diese Voraussetzung steht derzeit infrage. Belastbar ist dagegen die Kostendisziplin: Bei 13,2 % Betriebsmarge trotz −9 % vergleichbarer Umsätze arbeitet lululemon effizienter als die meisten Bekleidungshändler. Annahme (kein Konsens): FY28-EPS ~$12,50 × 15x (auf Nike-Niveau 15,6x, also Rückkehr zur Bewertung einer intakten Sportmarke) = $188. Bull-Kursziel: $170–$210. Eintrittswahrscheinlichkeit: 22%.</p>
+<h3>4. BASE CASE</h3>
+<p>Nordamerika bleibt schwach wie prognostiziert, das internationale Geschäft kompensiert teilweise, und die Marge stabilisiert sich auf niedrigerem Niveau. Der Umsatz findet 2027 einen Boden, ohne dass das alte Wachstum zurückkehrt. Annahme (kein Konsens): FY28-EPS ~$9,50 × 11x (zwischen DECK 9,4x und NKE 15,6x, näher am unteren Rand wegen des Umsatzrückgangs) = $105. Base-Kursziel: $95–$120. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der Markenschaden ist strukturell, nicht zyklisch. Der konkrete Mechanismus ist die Kombination aus negativer Produktresonanz in sozialen Medien und einem Wettbewerbsumfeld, in dem mehrere Marken dasselbe Segment mit ähnlicher Qualität besetzen. Wenn Abschriften zur Regel werden, sinkt die Zahlungsbereitschaft dauerhaft — und bei einem Geschäft, dessen Bruttomarge von 54,9 % auf Vollpreisverkäufen beruht, ist das keine Margendelle, sondern eine Neubewertung des gesamten Ertragspotenzials. Die eigene Prognose von −10 bis −11 % für das dritte Quartal zeigt, dass der Prozess läuft.</p>
+<p>Kundenkonzentration: keine Einzelkundenabhängigkeit, aber eine ausgeprägte Konzentration auf ein demografisches Segment und auf Nordamerika — aus den Daten nicht quantifizierbar, die Regionenabhängigkeit ist über die Guidance aber belegt. Geopolitik/Exportkontrollen: unmittelbar materiell — Zölle werden vom Unternehmen ausdrücklich als Margenbelastung genannt, und die Produktion liegt überwiegend in Asien. Lieferkette/Single-Source: Auftragsfertigung in Asien ohne einzelnen kritischen Zulieferer; das Risiko ist die Zoll- und Transportkostenseite, nicht die Verfügbarkeit. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; lululemon kauft historisch Aktien zurück, eine abschließende Beurteilung ist auf Datenbasis nicht möglich. Regulierung/Rechtsrisiken: sektortypisch gering, Lieferkettensorgfaltspflichten als Dauerthema.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$6,00 × 8x (unter DECK 9,4x, dem günstigsten Peer — De-Rating auf eine beschädigte Marke) = $48. Bear-Kursziel: $45–$65. Eintrittswahrscheinlichkeit: 33%.</p>
+<p>**Summe: 22% + 45% + 33% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,22 × $190 + 0,45 × $107,50 + 0,33 × $55 = **~$108,33 — implizites Upside vs. aktuellem Kurs ($98,06): +10,5%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Der auffälligste Befund dieser Analyse: Ein Unternehmen mitten in einer Umsatzkrise weist ROE 30,9 % und ROIC 31,5 % aus — die zweithöchste Kapitalrendite dieser Analysegruppe nach Netflix. Im Zykluskontext gelesen heißt das etwas anderes als bei einem Halbleiterwert: Das sind **keine** Spitzenwerte, sondern Kennzahlen aus einem Jahr mit −4 % Umsatz, −9 % vergleichbaren Umsätzen und erhöhten Abschriften. In einem normalisierten Jahr lagen sie höher. Das unterscheidet lululemon fundamental von Titeln wie Axon oder HubSpot, deren Kapitalrenditen auch im guten Jahr niedrig sind.</p>
+<p>Bruttomarge 54,9 % und Betriebsmarge 13,2 % sind für einen Bekleidungshändler stark — Nike erzielt 12,7 %, Ralph Lauren 18,4 %, Under Armour −1,6 %. FCF $1,15 Mrd. auf $11,09 Mrd. Umsatz ergeben 10,4 % FCF-Marge und, entscheidend, 10,6 % Rendite auf den Marktwert — der zweithöchste Wert dieser zehn Titel. Debt/Equity 44,69 enthält im Wesentlichen Leasingverbindlichkeiten aus dem Filialnetz und ist für einen Einzelhändler unauffällig.</p>
+<p>RPO nicht anwendbar (kein Subscription-Modell); das funktionale Äquivalent wären vergleichbare Umsätze und Lagerbestände. Die vergleichbaren Umsätze von −9 % sind dabei der ehrlichste Vorlaufindikator und deutlich schlechter als der Gesamtumsatz von −4 % — die Differenz stammt aus Neueröffnungen, die den Rückgang kaschieren. Das gehört ausdrücklich in den Bear Case. Der Burggraben ist die Marke, und Marken sind der einzige Burggraben, der ohne äußere Ursache erodieren kann.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 11,16x bei Forward-EPS $8,78. Da der Gewinn fällt, ist das Multiple allein wenig aussagekräftig — die belastbareren Maßstäbe sind Substanz und Cashflow. Price/Book 2,29 bei ROE 30,9 % ist die bemerkenswerteste Relation dieser Analysegruppe: Der Markt zahlt gut das Doppelte des Buchwerts für eine Eigenkapitalrendite von über 30 %. Auf Umsatzbasis notiert lululemon bei 0,98x Sales — unter dem eigenen Jahresumsatz.</p>
+<p>Peer-Einordnung: 11,16x Forward liegt im **unteren Drittel** der Bandbreite — über Deckers (9,4x), unter Nike (15,6x), Ralph Lauren (16,0x) und Under Armour (24,9x). Auf Umsatzbasis liegt LULU bei 0,98x gegenüber NKE 1,14x, DECK 1,93x und RL 2,39x. Der Abschlag ist teilweise gerechtfertigt: lululemon schrumpft mit −4,3 %, während Deckers +5,7 % und Ralph Lauren +14,0 % wachsen. Er ist aber **nicht** durch Profitabilität gerechtfertigt — mit 13,2 % Betriebsmarge liegt lululemon über Nike (12,7 %) und weit über Under Armour, das mit 24,9x das höchste Multiple der Gruppe trägt und operativ Verlust schreibt.</p>
+<p>Was preist der Kurs ein? Bei $10,86 Mrd. Marktwert und $1,15 Mrd. FCF beträgt die FCF-Rendite 10,6 %. Für eine marktübliche 7-%-Rendite bei einem stabilen Markenhersteller müsste der freie Cashflow auf ~$0,76 Mrd. **fallen** — also um ein Drittel. Der Kurs unterstellt damit einen dauerhaften Ertragsrückgang um rund 34 % gegenüber dem heutigen, bereits gedrückten Niveau. Das ist bei einer Marke in der Krise nicht unplausibel, aber es ist eine pessimistische Annahme. Analyst-Konsensziel $105,65 bei 27 Analysten und Rating "hold" — es liegt nur 7,7 % über dem Kurs; als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Konsenslage: 27 Analysten, Rating "hold", mittleres Ziel nur 7,7 % über dem Kurs. Zusammen mit The Trade Desk ist lululemon damit einer von nur zwei Titeln dieser Analysegruppe, bei denen die Sell-Side kein nennenswertes Aufwärtspotenzial mehr sieht — bei allen anderen liegt das Ziel 15 bis 58 % darüber. Ableitbar ist außerdem Beta 0,86: Der Titel fällt, aber ohne Marktkorrelation — das ist ein unternehmensspezifisches Problem, kein Sektorthema. Hypothese, nicht datenbasiert: Nach einem Rückgang von 57 % vom Hoch und einer gesenkten Jahresprognose dürfte die Wachstumsfonds-Basis weitgehend ausgestiegen sein; die 10,6 % FCF-Rendite zieht Value-Käufer an, die aber typischerweise auf einen Umsatzboden warten. Was neue Käufer anziehen würde, ist ein Quartal mit vergleichbaren Umsätzen besser als −3 %.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −108,20, Rang 99 von 100 nach zuvor Rang 100. Fenster: 5T −3,96 %, 10T −2,88 %, 20T −20,13 %, 50T −17,22 %, 6M −64,01 %. Der Einbruch im 20-Tage-Fenster deckt sich mit dem Quartalsbericht vom 3. September; die letzten zwei Wochen zeigen mit −3,96 % und −2,88 % eine deutliche Verlangsamung des Abwärtsdrucks. Der Kurs bei $98,06 liegt nur 2,8 % über dem 52-Wochen-Tief von $95,35 — die Bodenbildung ist also noch nicht bestätigt, aber der Abverkauf verliert an Tempo. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist fundamental erklärbar und folgt der Prognosesenkung. Warnsignal: Ein Bruch unter $95,35 markiert ein neues Verlaufstief; ein erstes Stabilisierungssignal wäre die Rückeroberung von $115.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($240–$330):** Produktzyklus dreht, China wird zur zweiten Säule, Betriebsmarge kehrt über 18 % zurück. Normalisiertes EPS $16–21 × 15–16x.</p>
+<p>**Base ($120–$190):** Umsatz findet einen Boden bei $10–11 Mrd., Marge stabil bei 13–14 %, Multiple bei 11–13x. Normalisiertes EPS $10–14 × 11–13x.</p>
+<p>**Bear ($40–$80):** Die Marke verliert dauerhaft Preissetzungsmacht, Abschriften werden zur Regel, die Betriebsmarge fällt einstellig.</p>
+<p>Entscheidende Variable: die Bruttomarge bei Vollpreisverkäufen. Sie misst die Markenkraft direkter als jede Umsatzzahl — solange sie über 54 % bleibt, ist die Marke intakt.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die günstigste Substanzbewertung dieser Analysegruppe bei gleichzeitig dem einzigen tatsächlich schrumpfenden Geschäft. Beides ist wahr: 0,98x Umsatz, 2,29x Buchwert, 10,6 % FCF-Rendite und ROIC 31,5 % auf der einen Seite; −9 % vergleichbare Umsätze, eine zweimal gesenkte Jahresprognose und ein Markenproblem ohne Lösungsfahrplan auf der anderen. Der EV-Upside von +10,5 % ist real, aber der schmalste unter den Titeln mit positivem Erwartungswert.</p>
+<p>Der entscheidende Unterschied zu Intuit oder HubSpot: Dort preist der Markt eine Bedrohung ein, die in den Zahlen noch nicht sichtbar ist. Hier ist sie sichtbar — im Umsatz, in den vergleichbaren Umsätzen und in der eigenen Prognose. lululemon ist damit kein überverkaufter Qualitätswert, sondern ein Substanzwert mit laufendem operativem Problem.</p>
+<p>Einordnung: Value-Ansatz mit Markenrisiko, kein Momentum-Play und kein Compounder. RS-Score −108,20, Rang 99, GWS 0/3 — der Funnel liefert diesen Titel nicht. Geeignet für Value-Investoren, die Markenkrisen bewusst spielen und mehrere Quartale Geduld mitbringen. Positionsgröße maximal 2 %, gestaffelter Aufbau, und die vergleichbaren Umsätze als hartes, quartalsweise überprüfbares Abbruchkriterium — nicht der Gesamtumsatz, der durch Neueröffnungen geschönt wird.</p>
+<p>Peers: **Deckers (DECK)** ist bei 9,4x Forward nochmals günstiger, wächst mit +5,7 % statt zu schrumpfen und hat mit 15,2 % die höhere Betriebsmarge — auf relativer Basis das klar attraktivere Instrument im selben Segment. **Nike (NKE)** ist bei 15,6x Forward teurer und schrumpft mit −1,1 % ebenfalls leicht, bietet aber die breitere Marken- und Regionendiversifikation.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 1/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — 0,98x Umsatz bei 10,6 % FCF-Rendite und ROIC 31,5 % ist substanziell attraktiv, aber vergleichbare Umsätze von −9 % und eine gesenkte Jahresprognose liefern keinen fundamentalen Auslöser.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

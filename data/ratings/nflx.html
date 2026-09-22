@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>NFLX — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>NFLX</h1>
+      <h2>Netflix, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Entertainment</span></div>
+        <div class="mi">MCap: <span>$299B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >23%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">68</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-79.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$71.79</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.8×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$48.4B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">49.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">49.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+23.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">120–150</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–95</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">35–55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $120–$150 (25 %) · Base $75–$95 (45 %) · Bear $35–$55 (30 %) · EV ~$85,50</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Netflix hat 2026 den Übergang vom Wachstums- zum Ertragswert vollzogen — und der Markt hat den Preis dafür sofort eingefordert. Nach dem Q2-Bericht brach die Aktie ein: Die Q3-Umsatzprognose von $12,86 Mrd. verfehlte die Konsenserwartung von $13,01 Mrd., die Margenprognose wurde gesenkt, und das Unternehmen kündigte an, Sehstunden-Daten seltener zu veröffentlichen. Hinzu kam das gescheiterte Gebot für Warner Bros. Der Kurs steht bei $71,79 und damit 42,5 % unter dem 52-Wochen-Hoch von $124,86; der 10:1-Split vom November 2025 erklärt das optisch niedrige Kursniveau.</p>
+<p>Was in der Erzählung untergeht: Die Ertragsqualität ist die beste dieser Analysegruppe. Betriebsmarge 33,4 %, Nettomarge 28,2 %, Eigenkapitalrendite 49,5 %, ROIC 36,4 % — Netflix verdient auf das eingesetzte Kapital mehr als jeder andere der zehn analysierten Titel. Das Umsatzwachstum liegt weiter bei +13,4 %. Die Neubewertung findet also nicht statt, weil das Geschäft schlechter wird, sondern weil der Markt aufhört, für Wachstum eine Prämie zu zahlen — und genau hier liegt das Problem: Mit 18,80x Forward ist Netflix immer noch teurer als jeder klassische Medien-Peer.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Abonnement-Streaming mit gestaffelten Preisstufen — der Umsatz skaliert über Preis und Mitgliederzahl, nicht über Werbereichweite allein</li>
+<li>Werbefinanziertes Einstiegs-Abo als jüngster Wachstumshebel: höherer Umsatz je Mitglied bei niedrigerem Einstiegspreis</li>
+<li>Content ist Investition, nicht Aufwand: Produktionskosten werden aktiviert und über Jahre abgeschrieben — deshalb weichen Cashflow und Gewinn strukturell voneinander ab</li>
+<li>Bruttomarge 49,1 % ist deutlich niedriger als bei Software, weil die Content-Abschreibung in den Herstellungskosten steckt</li>
+<li>Operativer Hebel funktioniert: 33,4 % Betriebsmarge bei 49,1 % Bruttomarge — nur 15,7 Punkte Abstand, ein außergewöhnlich schlanker Kostenapparat</li>
+<li>Live-Sport und Gaming sind Engagement-Investitionen mit bislang unklarem Ertragsbeitrag</li>
+<li>Anomalie: Ausgewiesener FCF von $25,39 Mrd. entspricht 52,5 % des Umsatzes und dem 1,9-Fachen des Nettogewinns. Für ein Geschäft mit aktivierter Content-Produktion ist ein FCF über dem Gewinn grundsätzlich möglich, diese Größenordnung ist jedoch nicht plausibel und aus den Daten nicht auflösbar — der Wert wird in Bewertung und Scoring nicht verwendet, stattdessen dienen Netto- und Betriebsmarge</li>
+<li>Debt/Equity 55,24 ist moderat und durch den Cashflow gedeckt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Disney (DIS, Fwd-KGV 13,7x), Fox (FOXA, 11,0x), Comcast (CMCSA, 6,4x) — Bandbreite 6,4x–13,7x. Warner Bros. Discovery (397x) und Live Nation (88,5x) werden wegen verzerrter Ergebnisbasis nicht als Anker verwendet.</p>
+<p>Das Werbe-Abo skaliert auf eine relevante Größe, die Preiserhöhungen in reifen Märkten setzen sich ohne Abwanderung durch, und Live-Sport erhöht die Zahlungsbereitschaft. Strukturelle Margennachhaltigkeit ist hier belastbar: Netflix produziert global und amortisiert dieselben Inhalte über alle Märkte — ein Kostenvorteil, den kein regionaler Anbieter erreicht —, und die Betriebsmarge von 33,4 % liegt bereits beim Dreifachen von Disney (19,3 %). Annahme (kein Konsens): FY28-EPS ~$6,00 × 22x (klar über DIS 13,7x, Prämie für die dreifache Betriebsmarge und globale Skalierung) = $132. Bull-Kursziel: $120–$150. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Das Wachstum normalisiert sich auf 10–11 %, die Marge bleibt stabil, aber der Markt zahlt für ein reifes Abo-Geschäft keine Wachstumsprämie mehr. Das Multiple komprimiert in Richtung des oberen Medien-Bereichs. Annahme (kein Konsens): FY28-EPS ~$5,20 × 16x (über DIS 13,7x, unter dem eigenen aktuellen Multiple von 18,8x) = $83. Base-Kursziel: $75–$95. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Sättigung in Nordamerika und Europa trifft auf Content-Kosteninflation durch Live-Sportrechte. Sportrechte sind der gefährlichste Posten, weil sie im Gegensatz zu Serien nicht aktiviert und über Jahre amortisiert werden können — sie belasten die Marge sofort und vollständig. Gleichzeitig schwächt sich der Werbemarkt ab, womit der zweite Wachstumshebel ausfällt. Die Entscheidung, Sehstunden seltener zu berichten, verschärft das: Sie reduziert die Transparenz genau dann, wenn der Markt sie am meisten braucht.</p>
+<p>Kundenkonzentration: keine — über 300 Millionen Haushalte, das geringste Konzentrationsrisiko der gesamten Analysegruppe. Geopolitik/Exportkontrollen: begrenzt materiell; lokale Inhaltsquoten und Digitalsteuern in einzelnen Märkten sind der relevantere Politikfaktor. Lieferkette/Single-Source: keine physische Lieferkette; das Äquivalent ist die Abhängigkeit von Produktionskapazitäten und Talentkosten, die zyklisch steigen. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; Netflix kauft seit Jahren Aktien zurück, eine abschließende Beurteilung ist auf Datenbasis aber nicht möglich. Regulierung/Rechtsrisiken: erhöht im Bereich Kartellrecht bei Großübernahmen — das gescheiterte Warner-Bros-Gebot ist ein konkreter Beleg dafür, dass anorganisches Wachstum blockiert sein kann.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$3,60 × 11x (auf FOXA-Niveau 11,0x) = $40. Bear-Kursziel: $35–$55. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $135 + 0,45 × $85 + 0,30 × $45 = **~$85,50 — implizites Upside vs. aktuellem Kurs ($71,79): +19,1%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Die höchsten Kapitalrenditen dieser Analysegruppe. ROE 49,5 % und ROIC 36,4 % sind keine Zyklusspitzen, sondern das Ergebnis eines Geschäfts, das seine Content-Bibliothek global mehrfach verwertet. Betriebsmarge 33,4 % ist der zweitbeste Wert des Feldes nach Booking und mehr als das Anderthalbfache von Disney. Nettomarge 28,2 % ist konsistent darunter. Bruttomarge 49,1 % wirkt im Vergleich zu Software niedrig, ist aber für ein Geschäft mit aktivierter Produktion der falsche Vergleichsmaßstab — entscheidend ist der Abstand zwischen Brutto- und Betriebsmarge von nur 15,7 Punkten, und der ist außergewöhnlich schlank.</p>
+<p>Der ausgewiesene FCF von $25,39 Mrd. wird wegen der in Abschnitt 2 benannten Anomalie nicht verwendet. Das ist eine spürbare Einschränkung: Bei einem Geschäftsmodell, dessen Kernfrage lautet, ob die Content-Investitionen die Abschreibungen übersteigen, ist der Cashflow die wichtigste Einzelgröße — sie steht hier nicht belastbar zur Verfügung, und die Konfidenz der Bewertungsaussagen ist entsprechend reduziert. Debt/Equity 55,24 ist im Medienvergleich moderat. RPO nicht anwendbar (kein Vertrags-Backlog im Unternehmenssinn); das funktionale Äquivalent wären Mitgliederzahl und Umsatz je Mitglied, die im Datensatz nicht enthalten sind. Der Burggraben ist echt und liegt in der globalen Amortisation: Dieselbe Produktion bedient 300 Millionen Haushalte in 190 Ländern. Nur scheinbar ist er im Katalog — Inhalte sind mietbar, die Verwertungsstruktur nicht.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Netflix ist kein Zykliker, aber ein Geschäft mit aktivierten Investitionen — deshalb wäre eine normalisierte FCF-Betrachtung der richtige Maßstab. Da der ausgewiesene FCF nicht verwendbar ist, tritt die Ertragsbewertung an ihre Stelle, was hier ausdrücklich als methodische Einschränkung gekennzeichnet wird. Price/Book 9,91 bei ROE 49,5 % ist rechnerisch konsistent: Der Markt zahlt das Zehnfache des Buchwerts für eine Eigenkapitalrendite von knapp 50 %.</p>
+<p>Peer-Einordnung: 18,80x Forward liegt **über allen belastbaren Peers** — über Disney (13,7x), Fox (11,0x) und Comcast (6,4x). Auf Umsatzbasis ist der Abstand noch deutlicher: 6,18x Sales gegenüber DIS 1,79x, FOXA 1,59x und CMCSA 0,65x. Netflix ist also selbst nach einem Rückgang von 42,5 % immer noch der mit Abstand teuerste Medienwert. Diese Prämie ist teilweise strukturell gerechtfertigt — 33,4 % Betriebsmarge gegen 19,3 % bei Disney und 17,2 % bei Comcast, plus +13,4 % Wachstum gegen +6,8 % und −1,2 %. Vollständig erklärt sie den Aufschlag von Faktor 3 bis 9 auf Umsatzbasis aber nicht.</p>
+<p>Was preist der Kurs ein? Bei $298,93 Mrd. Marktwert und einem unterstellten reifen Multiple von 15x müsste Netflix dauerhaft ~$19,9 Mrd. Nettogewinn erwirtschaften — bei 28,2 % Nettomarge entspricht das ~$70,6 Mrd. Umsatz gegenüber heute $48,37 Mrd., also 46 % Wachstum. Bei 11 % jährlich sind das knapp vier Jahre. Das ist plausibel, aber es lässt keinen Margenrückgang zu: Fiele die Nettomarge auf 22 %, wären ~$90 Mrd. Umsatz nötig. Analyst-Konsensziel $93,37 bei 45 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Konsensstruktur: 45 Analysten, Rating "buy", mittleres Ziel 30 % über dem Kurs. Ableitbar ist außerdem eine seltene Managemententscheidung mit Signalwirkung: Wer die Häufigkeit der Sehstunden-Berichterstattung reduziert, rechnet nicht mit Zahlen, die die Erzählung stützen. Der Markt hat das erkennbar so gelesen. Hypothese, nicht datenbasiert: Netflix war über Jahre eine Kernposition von Wachstumsfonds; ein Übergang zum Ertragswert erzwingt einen Halterwechsel, und solche Wechsel dauern typischerweise mehrere Quartale. Was neue Käufer anziehen würde, ist ein Quartal mit Margenexpansion trotz Sportrechte-Investitionen — der Beweis, dass beides gleichzeitig geht. Das Enttäuschungsrisiko liegt spiegelbildlich bei der nächsten Margenprognose.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −79,51, Rang 93 von 100. Fenster: 5T −12,35 %, 10T −8,60 %, 20T −10,92 %, 50T −1,59 %, 6M −46,05 %. Durchgehend negativ über alle Fenster, mit einer erneuten Beschleunigung nach unten in der letzten Woche. Der Kurs bei $71,79 liegt nur 10,3 % über dem 52-Wochen-Tief von $65,08. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist rein reaktiv und folgt der Guidance-Enttäuschung, nicht der Ertragslage. Warnsignal: Ein Bruch unter $65,08 markiert ein neues Verlaufstief; ein Einstiegssignal wäre erst die Rückeroberung von $85.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($170–$230):** Werbe-Abo wird zur zweiten Ertragssäule, Live-Sport steigert die Zahlungsbereitschaft, Betriebsmarge über 38 %. Normalisiertes EPS $8–10 × 21–23x.</p>
+<p>**Base ($95–$140):** Wachstum 9–11 %, Marge stabil bei 33 %, Multiple normalisiert Richtung 16x. Normalisiertes EPS $6–8 × 16–18x.</p>
+<p>**Bear ($30–$60):** Sättigung plus Sportrechte-Inflation drücken die Marge, das Multiple fällt auf klassisches Medienniveau von 11–13x.</p>
+<p>Entscheidende Variable: ob Live-Sport die Zahlungsbereitschaft stärker hebt als er die Marge belastet. Alles andere im Modell ist gut prognostizierbar, das nicht.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Das qualitativ stärkste Geschäft dieser Analysegruppe — ROE 49,5 %, ROIC 36,4 %, Betriebsmarge 33,4 % — zu einer Bewertung, die trotz eines Kursrückgangs von 42,5 % immer noch über allen Medien-Peers liegt. Der EV-Upside von +19,1 % ist real, aber er stammt aus der Erholung eines überverkauften Kurses, nicht aus einer Bewertungsdiskrepanz.</p>
+<p>Einordnung: Buy-and-Hold-Qualitätswert im Übergang zum Ertragswert, kein Momentum-Play. RS-Score −79,51, Rang 93, GWS 0/3 — der Funnel liefert diesen Titel nicht als Kandidaten, und die technische Struktur ist ungebrochen abwärts gerichtet. Wer einsteigt, kauft Qualität in einem laufenden Abwärtstrend und braucht Geduld über mehrere Quartale. Ausdrücklich einschränkend: Die Konfidenz der Bewertungsaussagen ist reduziert, weil die zentrale Cashflow-Größe im Datensatz nicht verwendbar ist — vor einer Positionsentscheidung ist der tatsächliche freie Cashflow aus dem Originalbericht zu verifizieren. Positionsgröße bei Einstieg maximal 3 %, gestaffelt.</p>
+<p>Peers: **Disney (DIS)** ist bei 13,7x Forward und 1,79x Sales deutlich günstiger und bietet mit Parks und Lizenzgeschäft eine diversifiziertere, weniger content-kostenabhängige Struktur. **Comcast (CMCSA)** ist bei 6,4x Forward und 0,65x Sales der Value-Extrempunkt desselben Sektors, allerdings mit schrumpfendem Umsatz. Auf relativer Bewertungsbasis ist Netflix gegenüber beiden weiterhin teuer — der Aufpreis kauft Wachstum und Marge, keinen Bewertungsvorteil.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — 18,80x Forward und 6,18x Sales liegen über allen belastbaren Medien-Peers, und die zentrale Cashflow-Kennzahl ist im Datensatz nicht verwendbar; das trägt keine volle Positionsgröße.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

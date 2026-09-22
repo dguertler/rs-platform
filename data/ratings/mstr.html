@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MSTR — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MSTR</h1>
+      <h2>Strategy Inc</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$61B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >23%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">68</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">98.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$153.92</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">3.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.5B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">67.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-63.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+22.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">280–350</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">155–200</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">60–90</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $280–$350 (25 %) · Base $155–$200 (45 %) · Bear $60–$90 (30 %) · EV ~$181,13</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Strategy ist kein Softwareunternehmen mehr, und jede Analyse, die bei den Fundamentaldaten ansetzt, geht in die Irre. Der Umsatz beträgt $0,50 Mrd. bei 6,9 % Wachstum — das ist bei einer Marktkapitalisierung von $61,15 Mrd. praktisch bedeutungslos. Was den Wert bestimmt: 845.050 Bitcoin, erworben für $63,73 Mrd. zu durchschnittlich $75.412 je Stück, was rund 4,00 % des gesamten Bitcoin-Angebots entspricht, plus $6,69 Mrd. an USD-Vermögenswerten.</p>
+<p>Der entscheidende Datenpunkt ist das Verhältnis von Marktwert zu Nettovermögen: Der mNAV liegt bei rund **0,94x** — die Aktie notiert also unter dem Wert ihres Bitcoin-Bestands. Das ist historisch ungewöhnlich; über Jahre wurde Strategy mit einer erheblichen Prämie gehandelt, weil sie regulierten Bitcoin-Zugang über ein Wertpapierdepot bot. Diese Prämie ist verschwunden, seit Spot-ETFs denselben Zugang direkter anbieten.</p>
+<p>Zugleich läuft der operative Hebel wieder an: Bitcoin hat mit rund $85.000 ein Siebenmonatshoch erreicht, die Aktie legte im Monatsvergleich 48 % zu und führt damit den NASDAQ-100 an, der RS-Rang sprang von 66 auf 16 — der größte Sprung aller hundert Indexwerte. Die Strategie, eigene Aktien zugunsten von Vorzugsrückkäufen einzusetzen und die USD-Reserven zu erhöhen, hat den Kurs seit Juni um 85 % getragen.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Faktisch ein börsennotiertes Bitcoin-Treasury-Vehikel mit einem kleinen Software-Restgeschäft von $0,50 Mrd. Umsatz</li>
+<li>Bestand: 845.050 BTC für $63,73 Mrd. Anschaffungskosten, Durchschnittspreis $75.412, rund 4,00 % des Gesamtangebots, plus $6,69 Mrd. USD-Assets</li>
+<li>Der Werthebel ist die Finanzierungsstruktur: Wandelanleihen und Vorzugsaktien finanzieren Bitcoin-Käufe, solange die Aktie über dem Nettovermögen notiert — bei einem mNAV unter 1,0 kehrt sich dieser Mechanismus um und wird wertvernichtend</li>
+<li>Deshalb die jüngste Kursänderung: Statt neue Aktien auszugeben, werden Vorzugsaktien zurückgekauft und USD-Reserven aufgebaut</li>
+<li>Anomalie 1: Ausgewiesene Operating Margin als UNGÜLTIG (−68,08) markiert, Nettomarge 0,0 %, trailing EPS −$99,16 gegen Forward-EPS +$49,49. Diese Werte sind Folge der Fair-Value-Bilanzierung des Bitcoin-Bestands, nicht operativer Entwicklung — sie werden weder in Bewertung noch Scoring verwendet</li>
+<li>Anomalie 2: Forward-PE 3,11 ist damit ebenfalls ein Bilanzierungsartefakt und kein Bewertungsmaßstab; die Analyse verankert ausschließlich am Nettovermögen</li>
+<li>Freier Cashflow −$22,59 Mrd. ist keine operative Größe, sondern spiegelt Bitcoin-Käufe</li>
+<li>Price/Book 1,85 und mNAV 0,94x sind die einzigen belastbaren Bewertungsanker</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Coinbase (COIN, Fwd-KGV 68,6x) und Robinhood (HOOD, 35,4x) sind die nächstliegenden börsennotierten Krypto-Adressen im Datensatz, aber operative Handelsplattformen und damit keine belastbaren Vergleichswerte für ein Treasury-Vehikel. **Peer-Multiples für Bitcoin-Treasury-Vehikel sind im Datensatz nicht verifizierbar** — die Kursziele werden daher nicht über ein Gewinnmultiple, sondern über Nettovermögen mal mNAV hergeleitet, was bei diesem Geschäftsmodell die methodisch richtige Verankerung ist.</p>
+<p>Bitcoin steigt auf rund $130.000, und der mNAV kehrt auf 1,3x zurück, weil Strategy über Vorzugsaktien Renditeprodukte anbietet, die ein Spot-ETF nicht liefern kann. Strukturelle Margennachhaltigkeit ist hier nicht anwendbar — es gibt keine operative Marge, die verteidigt werden müsste; der einzige dauerhafte Vorteil ist die Größe des Bestands und der Zugang zu Fremdkapitalmärkten. Annahme (kein Konsens): Beim heutigen Kurs von $153,92 und mNAV 0,94x liegt das Nettovermögen bei rund $163,74 je Aktie, davon etwa 91,5 % Bitcoin. Ein Bitcoin-Anstieg um 52,9 % hebt es auf ~$242,90; multipliziert mit mNAV 1,3x ergibt das $316. Bull-Kursziel: $280–$350. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Bitcoin bewegt sich seitwärts im Bereich von $85.000 bis $95.000, und der mNAV bleibt bei rund 1,0x, weil der Spot-ETF-Wettbewerb eine dauerhafte Prämie verhindert, der Vorzugsaktien-Mechanismus aber einen Abschlag ebenso verhindert. Annahme (kein Konsens): Nettovermögen steigt leicht auf ~$175 je Aktie, mNAV 1,0x = $175. Base-Kursziel: $155–$200. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Bitcoin fällt auf rund $50.000, und der mNAV rutscht auf 0,7x. Der zweite Effekt ist dabei der gefährlichere und speziell für dieses Vehikel: Bei fallendem Bitcoin-Preis und einem Bestand, dessen Durchschnittskosten bei $75.412 liegen, entsteht ein nicht realisierter Verlust — und der Markt beginnt einzupreisen, dass Vorzugsdividenden und Wandelanleihen bedient werden müssen, ohne dass operativer Cashflow existiert. Dann droht die Wahrnehmung eines Zwangsverkäufers, und genau diese Wahrnehmung drückt den mNAV zusätzlich unter 1,0.</p>
+<p>Bilanz: das materiellste Risiko. Debt/Equity 14,94 erfasst die Wandelanleihen, nicht aber die Vorzugsaktien vollständig; das Restgeschäft mit $0,50 Mrd. Umsatz kann die Kapitaldienstlasten nicht tragen. Kundenkonzentration: im Restgeschäft nicht materiell; die eigentliche Konzentration ist eine Vermögenskonzentration — über 90 % des Nettovermögens in einem einzigen Vermögenswert. Geopolitik/Exportkontrollen: nicht direkt, aber regulatorische Eingriffe in Krypto-Verwahrung oder -Besteuerung wirken unmittelbar. Lieferkette/Single-Source: nicht anwendbar; funktional entspricht ihr die Abhängigkeit vom Zugang zu Fremd- und Vorzugskapitalmärkten. Verwässerung: historisch der zentrale Mechanismus — Bitcoin-Käufe wurden über Aktienausgabe finanziert; bei mNAV unter 1,0 wäre weitere Aktienausgabe wertvernichtend, weshalb das Management aktuell den umgekehrten Weg geht. Regulierung/Rechtsrisiken: erhöht, insbesondere bei bilanzieller Behandlung und möglicher Besteuerung nicht realisierter Gewinne.</p>
+<p>Annahme (kein Konsens): Nettovermögen fällt auf ~$102 je Aktie, mNAV 0,7x = $71. Bear-Kursziel: $60–$90. Eintrittswahrscheinlichkeit: 30%.</p>
+<p>**Summe: 25% + 45% + 30% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $315 + 0,45 × $177,50 + 0,30 × $75 = **~$181,13 — implizites Upside vs. aktuellem Kurs ($153,92): +17,7%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Die klassische Fundamentalanalyse ist hier nicht anwendbar, und das muss offen gesagt werden statt kaschiert. ROE −63,6 % und ROIC −7,57 % sind Ergebnisse der Bitcoin-Fair-Value-Bilanzierung über einen Zeitraum fallender Kurse, keine Aussage über operative Leistung. Die Operating Margin ist als UNGÜLTIG markiert und wird nicht verwendet. Der freie Cashflow von −$22,59 Mrd. ist der Bitcoin-Kaufbetrag, kein operativer Abfluss. Bruttomarge 67,6 % bezieht sich auf ein Restgeschäft, das 0,8 % der Marktkapitalisierung ausmacht.</p>
+<p>Was bleibt und belastbar ist: Price/Book 1,85 und der mNAV von rund 0,94x. Letzterer ist die eigentliche Qualitätsaussage dieses Falls — er besagt, dass ein Anleger heute Bitcoin über diese Aktie mit einem Abschlag von rund 6 % auf den Nettobestand erwirbt, allerdings mit einer Kapitalstruktur darüber, die einen Hebel in beide Richtungen erzeugt. Der Bestand selbst ist außergewöhnlich: 845.050 BTC, rund 4,00 % des jemals existierenden Angebots, zu Durchschnittskosten von $75.412 — bei Bitcoin um $85.000 liegt die Position im Gewinn.</p>
+<p>RPO nicht anwendbar (kein Subscription-Geschäftsmodell von Bedeutung). Ein Burggraben im wirtschaftlichen Sinn existiert nicht: Bitcoin zu halten ist nicht geschützt. Der einzige strukturelle Vorteil ist die Größe — Strategy kann Kapitalmarktinstrumente auflegen, die kleinere Vehikel nicht platzieren können.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Das Forward-KGV von 3,11 ist wertlos und darf nicht verwendet werden — es beruht auf einem Forward-EPS von $49,49, das die erwartete Fair-Value-Aufwertung des Bitcoin-Bestands abbildet, nicht operatives Ergebnis. Das Umsatzmultiple von 122,7x ist aus demselben Grund bedeutungslos.</p>
+<p>Die belastbare Bewertung läuft über das Nettovermögen. Bei rund $153,92 Kurs und einem gemeldeten mNAV von 0,94x liegt das Nettovermögen je Aktie bei etwa $163,74. Der Bitcoin-Anteil daran beträgt rund 91,5 % (845.050 BTC zu $85.000 entsprechen $71,83 Mrd. gegenüber $6,69 Mrd. USD-Assets). Jede Bewertungsaussage reduziert sich damit auf zwei Variablen: den Bitcoin-Preis und das mNAV-Multiple.</p>
+<p>Peer-Einordnung: Ein direkter Vergleich ist nicht möglich — Coinbase (68,6x Forward) und Robinhood (35,4x) sind operative Handelsplattformen mit Gebührenerlösen, Strategy ist ein Bestandshalter. Die relevante Vergleichsgröße ist der Spot-ETF, der Bitcoin zu einem mNAV von definitionsgemäß 1,0x abbildet und nur eine Verwaltungsgebühr kostet. Gegenüber diesem Maßstab bietet Strategy aktuell einen Abschlag von rund 6 %, erkauft mit Kapitalstrukturrisiko.</p>
+<p>Was preist der Kurs ein? Bei mNAV 0,94x preist der Markt ein, dass die Kapitalstruktur über dem Bitcoin-Bestand einen negativen Wert hat — also dass Vorzugsdividenden und Wandelanleihen den Aktionär mehr kosten, als die Hebelwirkung einbringt. Das ist eine vertretbare Annahme, aber keine extreme. Analyst-Konsensziel $228,53 bei 15 Analysten und Rating "strong_buy"; Marktkommentare nennen $400 bis $450 auf 12 bis 18 Monate — beides als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, und beides setzt implizit deutlich höhere Bitcoin-Preise voraus.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich, obwohl Strategy traditionell hohe Leerverkaufsquoten aufweist. Ableitbar ist Beta 3,60, der zweithöchste Wert der gesamten Serie nach Arm — der Titel ist ein gehebeltes Bitcoin-Instrument, und der Markt behandelt ihn so. Ableitbar ist außerdem der größte Rangsprung des gesamten Index: von Platz 66 auf Platz 16, mit +63,20 % im 50-Tage-Fenster und +27,95 % auf 20 Tage. Das ist eine ausgeprägte Momentum-Rückkehr.</p>
+<p>Bemerkenswert ist der Kontrast zum Sechsmonatswert von −10,78 %: Der Titel hat über das Halbjahr gegen den QQQ verloren und den gesamten Rückstand in den letzten zwei Monaten aufgeholt. Hypothese, nicht datenbasiert: Die Halterbasis dürfte von Privatanlegern und krypto-orientierten Fonds geprägt sein, die auf Bitcoin-Bewegungen mit Hebel reagieren; die Andeutung des Vorstandsvorsitzenden zu einem neuen Bitcoin-Kauf, ohne dass eine Transaktion gemeldet wurde, zeigt, wie stark der Titel auf Kommunikation statt auf Zahlen reagiert. Was neue Käufer anziehen würde, ist eine Rückkehr des mNAV über 1,0 — das wäre das Signal, dass der Markt die Kapitalstruktur wieder als wertsteigernd einstuft.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 98,48, Rang 16 im NASDAQ-100 nach zuvor Rang 66 — der größte Rangsprung aller hundert Indexwerte. Fenster: 5T +10,67 %, 10T +7,44 %, 20T +27,95 %, 50T +63,20 %, 6M −10,78 %. Die Struktur ist eindeutig: explosive Erholung über zwei Monate aus einer schwachen Halbjahresbasis. Der Kurs bei $153,92 liegt 88,1 % über dem 52-Wochen-Tief von $81,81 und 57,9 % unter dem Hoch von $365,21. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein formales Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist vollständig durch den Bitcoin-Preis erklärbar und damit weder fundamental gestützt noch rein reaktiv — es ist abgeleitet. Warnsignal: Da der Kurs faktisch ein gehebelter Bitcoin-Proxy ist, ist die relevante Beobachtungsgröße der Bitcoin-Chart, nicht der Aktienchart; ein Bitcoin-Rückfall unter $70.000 würde die gesamte Bewegung negieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($600–$900):** Bitcoin etabliert sich deutlich über $150.000, der mNAV kehrt dauerhaft über 1,2x zurück, weil Strategy Renditeprodukte auf den Bestand anbietet.</p>
+<p>**Base ($200–$400):** Bitcoin wächst moderat, mNAV pendelt um 1,0x, die Aktie bildet den Bestand weitgehend eins zu eins ab.</p>
+<p>**Bear ($40–$110):** Bitcoin fällt nachhaltig unter die Durchschnittskosten von $75.412, der mNAV bleibt dauerhaft unter 0,8x, die Kapitalstruktur wird zur Belastung.</p>
+<p>Entscheidende Variable: der Bitcoin-Preis — alles andere ist Verstärkung. Die zweite, eigenständige Variable ist der mNAV: Er entscheidet, ob die Aktie besser oder schlechter läuft als der Vermögenswert selbst.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Das ist ein gehebelter Bitcoin-Proxy mit einem Software-Etikett, und genau so sollte er behandelt werden. Wer Bitcoin-Exponierung will, hat mit einem Spot-ETF das direktere und risikoärmere Instrument — Strategy bietet dagegen einen Abschlag von rund 6 % auf den Nettobestand plus einen Kapitalstrukturhebel, der in beide Richtungen wirkt. Der EV-Upside von +17,7 % ist rechnerisch korrekt, aber er ist keine Aussage über das Unternehmen, sondern über eine unterstellte Bitcoin-Entwicklung.</p>
+<p>Ausdrücklich klarzustellen: Die Rating-Zeilen unten bewerten ein Vehikel, für das die üblichen Kategorien nur eingeschränkt passen. "Bewertung: 4/5" bezieht sich allein auf den mNAV von 0,94x gegenüber einem historisch meist deutlich höheren Niveau, nicht auf ein Gewinnmultiple — das Forward-KGV von 3,11 ist ein Bilanzierungsartefakt und fließt nicht ein.</p>
+<p>Einordnung: spekulatives Momentum-Instrument, kein Compounder und kein Value-Fall. RS-Rang 16 nach einem Sprung von Platz 66 zeigt die stärkste Momentum-Rückkehr des Index, GWS 0/3 liefert aber kein Signal, und der Funnel führt diesen Titel nicht als Kandidaten. Beta 3,60 bedeutet, dass eine Standardposition sich wie eine dreieinhalbfach gehebelte Marktposition verhält. Geeignet ausschließlich für Anleger, die Bitcoin-Exponierung bewusst mit Hebel suchen und die Kapitalstruktur verstanden haben. Positionsgröße maximal 1–2 %, und die Beobachtungsgröße ist der Bitcoin-Preis in Relation zu den Durchschnittskosten von $75.412.</p>
+<p>Peers: **Coinbase (COIN)** ist bei 68,6x Forward das operative Instrument auf Kryptoaktivität — Gebührenerlöse statt Bestandshaltung, also ein anderes Risiko, aber mit echtem Geschäftsmodell. Ein direkter Bitcoin-Spot-ETF ist der eigentliche Vergleichsmaßstab und bildet den Vermögenswert ohne Kapitalstrukturrisiko ab. Peer-Multiples für vergleichbare Treasury-Vehikel sind nicht im Datensatz — die relative Bewertung bleibt insoweit indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — die Aktie ist faktisch ein gehebelter Bitcoin-Proxy mit Beta 3,60 und über 90 % des Nettovermögens in einem einzigen Vermögenswert; der mNAV-Abschlag von rund 6 % rechtfertigt eine Position, aber keine volle Größe.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>BKNG — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>BKNG</h1>
+      <h2>Booking Holdings Inc. Common St</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Travel Services</span></div>
+        <div class="mi">MCap: <span>$130B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >28%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">68</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#f87171;font-weight:700">-71.9</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$167.90</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">13.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$28.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">87.2%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">100.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+28.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">310–380</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">28%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">185–235</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">75–110</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">27%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $310–$380 (28 %) · Base $185–$235 (45 %) · Bear $75–$110 (27 %) · EV ~$216,08</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Booking ist kein operatives Problem, sondern eine Erzählung. Umsatz +8,1 % auf $28,24 Mrd., Bruttomarge 87,2 %, Betriebsmarge 34,4 %, freier Cashflow $7,73 Mrd. — das sind auf einer Marktkapitalisierung von $130,10 Mrd. 5,9 % FCF-Rendite. Trotzdem steht der Titel auf Rang 91 von 100 im RS-Ranking und hat auf Sechsmonatssicht 26,7 % gegen den QQQ verloren.</p>
+<p>Der Grund ist eine einzige Frage: Schneiden agentische KI-Systeme die Online-Reisebüros heraus? Wenn ChatGPT oder Gemini direkt beim Hotel bucht, entfällt die Provision, die Bookings gesamtes Geschäftsmodell trägt. Genau das preist der Kurs seit Monaten ein. Was der Markt dabei bislang übersieht: OpenAI hat die Pläne für nativen Checkout im eigenen Produkt zurückgefahren und leitet Transaktionen stattdessen über Drittanbieter-Apps — das ist der erste konkrete Beleg dafür, dass Agenten die Buchungsinfrastruktur nutzen statt sie zu ersetzen. Morgan Stanley hat mit derselben Begründung auf Overweight hochgestuft: Wer die Kundenbeziehung und die Reisedaten besitzt, bleibt auch in einer Agentenwelt der Abwickler. Der 25:1-Aktiensplit vom April 2026 erklärt im Übrigen den optisch niedrigen Kurs von $167,90 — er hat mit der Kursentwicklung nichts zu tun.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Provisionsmodell über Booking.com, Priceline, Agoda, Kayak und OpenTable — der Umsatz ist ein Anteil am vermittelten Buchungsvolumen, nicht am eigenen Warenbestand</li>
+<li>Kein Lagerrisiko, kein Anlagevermögen: Bruttomarge 87,2 % bei Betriebsmarge 34,4 % — die Differenz ist fast vollständig Marketing</li>
+<li>Marketingausgaben sind der operative Hebel **und** die strukturelle Abhängigkeit: Ein großer Teil fließt an Google; agentische Suche verändert genau diesen Kanal</li>
+<li>Direktgeschäft und das Genius-Treueprogramm sind die Gegenwehr — jede Buchung, die ohne bezahlten Klick zustande kommt, ist doppelt wertvoll</li>
+<li>Anomalie: Price/Book −11,80 bedeutet negatives Eigenkapital. Ursache sind jahrelange Aktienrückkäufe über dem Buchwert, nicht operative Verluste; ROE und Debt/Equity sind deshalb als N/A ausgewiesen und werden nicht verwendet</li>
+<li>Zweite Anomalie: Die ausgewiesene Dividendenrendite von 100,0 % ist ein Datenartefakt und bleibt unberücksichtigt</li>
+<li>FCF $7,73 Mrd. bei $28,24 Mrd. Umsatz = 27,4 % FCF-Marge — die Substanz des Falls</li>
+<li>Wachstum von +8,1 % ist im Vergleich zur eigenen Historie deutlich verlangsamt</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Expedia (EXPE, Fwd-KGV 11,4x), Airbnb (ABNB, 26,9x), Marriott (MAR, 25,8x), Hilton (HLT, 29,2x), TripAdvisor (TRIP, 8,2x) — Bandbreite 8,2x–29,2x.</p>
+<p>Agenten routen über bestehende Buchungsschnittstellen, weil Verfügbarkeit, Zahlungsabwicklung und Stornierungsrecht nirgendwo sonst gebündelt liegen. Die Take-Rate bleibt stabil, das Direktgeschäft wächst überproportional, und der Markt bewertet Booking wieder als Plattform statt als Disruptionsopfer. Strukturelle Margennachhaltigkeit ist gut begründbar: 87,2 % Bruttomarge bei null Lagerrisiko, eine Angebotsseite mit Millionen von Einzelunterkünften, die kein Agent direkt kontrahieren kann, und Skaleneffekte im Marketing, die kleinere Plattformen nicht erreichen. Annahme (kein Konsens): FY28-EPS ~$17,00 × 20x (zwischen EXPE 11,4x und ABNB 26,9x, Prämie für 34,4 % Betriebsmarge) = $340. Bull-Kursziel: $310–$380. Eintrittswahrscheinlichkeit: 28%.</p>
+<h3>4. BASE CASE</h3>
+<p>Das Wachstum verlangsamt sich weiter auf 5–6 %, die Take-Rate gerät durch agentische Vermittlung leicht unter Druck, und das Multiple bleibt wegen der ungeklärten Disruptionsfrage gedrückt. Die Ertragskraft bleibt intakt, die Neubewertung bleibt aus. Annahme (kein Konsens): FY28-EPS ~$15,00 × 14x (leicht über EXPE 11,4x, Aufschlag für den Margenvorsprung) = $210. Base-Kursziel: $185–$235. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Ein großer Hotelkonzern schließt einen Direktvertrag mit einem Agenten-Anbieter und umgeht die Provision. Das ist der konkrete Mechanismus, nicht die abstrakte Disruption — und es wäre für die Hotellerie rational, weil sie seit zwei Jahrzehnten gegen die OTA-Provision kämpft. Fällt die Take-Rate um zwei Prozentpunkte, bricht bei 34,4 % Betriebsmarge der Gewinn überproportional ein.</p>
+<p>Kundenkonzentration: keine Einzelkundenabhängigkeit auf Nachfrageseite; auf Angebotsseite sind große Hotelketten aber verhandlungsstark — aus den Daten nicht quantifizierbar. Geopolitik/Exportkontrollen: begrenzt, Reisenachfrage reagiert jedoch empfindlich auf Konflikte und Visabestimmungen. Lieferkette/Single-Source: keine physische Lieferkette; das Äquivalent ist die Abhängigkeit vom Google-Suchkanal für bezahlten Traffic, und genau der wird gerade umgebaut. Verwässerung: das Gegenteil ist der Fall — die Rückkäufe waren so umfangreich, dass das Eigenkapital negativ wurde (Price/Book −11,80); SBC ist nicht im Datensatz, das Nettobild bleibt aktionärsfreundlich. Regulierung/Rechtsrisiken: erhöht — europäische Wettbewerbsverfahren gegen OTA-Preisparitätsklauseln laufen seit Jahren.</p>
+<p>Annahme (kein Konsens): FY28-EPS ~$9,00 × 9x (nahe TRIP 8,2x, dem strukturell bedrohten Peer der Bandbreite) = $81. Bear-Kursziel: $75–$110. Eintrittswahrscheinlichkeit: 27%.</p>
+<p>**Summe: 28% + 45% + 27% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,28 × $345 + 0,45 × $210 + 0,27 × $92,50 = **~$216,08 — implizites Upside vs. aktuellem Kurs ($167,90): +28,7%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Die Ertragsqualität ist die zweitbeste dieser Analysegruppe. Bruttomarge 87,2 % und Betriebsmarge 34,4 % sind keine Zyklusspitzen, sondern Strukturwerte eines Vermittlungsgeschäfts ohne Anlagevermögen. Nettomarge 25,5 % ist konsistent darunter. Der entscheidende Wert ist der freie Cashflow: $7,73 Mrd. entsprechen 27,4 % FCF-Marge und 5,9 % Rendite auf den Marktwert — bei einem Unternehmen, das immer noch wächst.</p>
+<p>ROE und Debt/Equity sind wegen des negativen Eigenkapitals nicht aussagekräftig und werden nicht verwendet; das ist eine Folge der Rückkaufpolitik und kein Bilanzrisiko, solange der Cashflow die Verbindlichkeiten trägt. Für die Qualitätsbeurteilung dienen daher Betriebsmarge und FCF-Rendite. RPO nicht anwendbar (kein Subscription-Modell); ein belastbarer Vorlaufindikator wie Buchungsvolumen nach Abreisedatum ist im Datensatz nicht enthalten und wird daher nicht herangezogen. Der Burggraben ist echt und liegt auf der Angebotsseite: Millionen einzeln kontrahierter Unterkünfte, die kein Agenten-Anbieter kurzfristig replizieren kann. Nur scheinbar ist er auf der Nachfrageseite — dort kauft Booking seine Kunden über bezahlte Suche ein, und dieser Kanal ist genau der, der sich gerade verändert.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Booking ist kein Zykliker im Halbleitersinn, aber reisenachfrageabhängig — deshalb ist die FCF-Bewertung die primäre Basis. Bei $7,73 Mrd. FCF auf $130,10 Mrd. Marktwert ergibt sich eine FCF-Rendite von 5,9 %. Selbst wenn der Cashflow in einer Reiseschwäche um ein Drittel fiele, läge sie noch bei 4,0 % — für ein Geschäft mit 87,2 % Bruttomarge ist das eine belastbare Bewertungsuntergrenze. Price/Book ist wegen des negativen Eigenkapitals als Bewertungsmaß unbrauchbar.</p>
+<p>Peer-Einordnung: 13,57x Forward liegt im **unteren Drittel** der Bandbreite — knapp über Expedia (11,4x), weit unter Airbnb (26,9x), Marriott (25,8x) und Hilton (29,2x). Das ist bemerkenswert, weil Booking mit 34,4 % Betriebsmarge deutlich profitabler ist als Expedia (19,0 %) und Airbnb (21,0 %). Der Abschlag gegenüber ABNB, MAR und HLT ist damit nicht durch Ertragsqualität erklärbar, sondern ausschließlich durch die Disruptionsprämie, die der Markt Booking aufschlägt.</p>
+<p>Was preist der Kurs ein? Bei $130,10 Mrd. und einem unterstellten reifen Plattform-Multiple von 18x müsste Booking dauerhaft ~$7,2 Mrd. Nettogewinn erwirtschaften — das entspricht bei 25,5 % Nettomarge $28,3 Mrd. Umsatz, also exakt dem heutigen Niveau. Der Kurs unterstellt damit **null** künftiges Wachstum bei unveränderter Marge. Für ein Unternehmen, das gerade +8,1 % geliefert hat, ist das nicht ambitioniert, sondern ausgesprochen konservativ — es ist die Bewertung eines Geschäfts in der Abwicklung. Analyst-Konsensziel $238,78 bei 37 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Diskrepanz zwischen Konsens und Kurs: 37 Analysten, Rating "buy", mittleres Ziel $238,78 und damit 42 % über dem Kurs — die größte Lücke in dieser Analysegruppe nach Axon. Wenn die Sell-Side derart weit über dem Markt liegt, handelt der Markt eine These, die in keinem Modell steht: das Ende des Provisionsmodells. Hypothese, nicht datenbasiert: Die Halterstruktur dürfte sich von Qualitäts- zu Value-Investoren verschieben, was typischerweise mit langen Seitwärtsphasen einhergeht. Was neue Käufer anziehen würde, ist keine Quartalszahl, sondern ein belastbarer Beleg zur Take-Rate in agentisch vermittelten Buchungen — der OpenAI-Rückzug beim Checkout ist ein erster, aber noch kein quantifizierter.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score −71,86, Rang 91 von 100. Fenster: 5T −5,98 %, 10T −13,27 %, 20T −20,83 %, 50T −5,09 %, 6M −26,69 %. Die Struktur ist eindeutig negativ, mit einer klaren Beschleunigung nach unten im 20-Tage-Fenster. Der Kurs bei $167,90 liegt nur 11,8 % über dem 52-Wochen-Tief von $150,14 und 25,4 % unter dem Hoch. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — es liegt kein Breakout-Signal vor, und der Funnel hat diesen Titel nicht als Kandidat geliefert. Das Momentum ist rein reaktiv und folgt dem Nachrichtenfluss zur KI-Frage, nicht den Fundamentaldaten. Ein Einstiegssignal wäre erst die Rückeroberung von $190; ein Bruch unter $150,14 würde ein neues Verlaufstief markieren.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($420–$550):** Booking wird zur Abwicklungsschicht agentischer Reisebuchung, Take-Rate stabil, Direktanteil steigt. Normalisiertes EPS $22–27 × 19–20x.</p>
+<p>**Base ($220–$330):** Wachstum 4–6 %, Take-Rate leicht rückläufig, Multiple bleibt bei 13–15x. Normalisiertes EPS $16–21 × 14–16x.</p>
+<p>**Bear ($60–$130):** Direktverträge zwischen Hotellerie und Agenten-Anbietern erodieren die Provision strukturell.</p>
+<p>Entscheidende Variable: die Take-Rate in agentisch vermittelten Buchungen. Alles andere — Volumen, Marketing, Regionenmix — ist zweitrangig.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Ein Qualitätsgeschäft zu einem Preis, der das Ende dieses Geschäfts unterstellt. Die Rechnung in Abschnitt 7 ist der Kern: Bei $167,90 preist der Markt null künftiges Wachstum ein, bei 5,9 % FCF-Rendite und 34,4 % Betriebsmarge. Der EV-Upside von +28,7 % ist der zweithöchste dieser Analysegruppe und beruht nicht auf einer Wachstumsannahme, sondern auf dem Wegfall einer Angstprämie.</p>
+<p>Wichtige Einordnung: Das ist ein antizyklischer Value-Ansatz, kein Momentum-Trade — RS-Score −71,86, Rang 91, GWS 0/3, und der regelbasierte Funnel liefert diesen Titel nicht als Kaufkandidat. Wer hier einsteigt, tut das bewusst gegen das Momentum-System dieser Plattform und muss eine mehrquartalige Seitwärts- oder Abwärtsphase aushalten können. Geeignet für Value- und Qualitätsinvestoren mit Dreijahreshorizont, nicht für signalgetriebene Umsetzung. Positionsgröße: gestaffelter Aufbau, maximal 3 %, kein Stopp-Handel — bei diesem Setup würde ein technischer Stopp systematisch am Tief ausgelöst.</p>
+<p>Peers: **Expedia (EXPE)** ist bei 11,4x Forward nochmals günstiger, hat aber mit 19,0 % Betriebsmarge nur gut die Hälfte von Bookings Profitabilität und dieselbe Disruptionsfrage. **Airbnb (ABNB)** ist mit 26,9x Forward doppelt so teuer und trägt mit dem Direktvermieter-Netzwerk das strukturell agentenresistentere Angebot — relativ ist Booking hier klar attraktiver bewertet.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Sonstiges — keine fundamentalen Einwände bei 5,9 % FCF-Rendite, 34,4 % Betriebsmarge und einem Multiple im unteren Drittel der Peer-Bandbreite; der Funnel liefert diesen Titel mangels RS- und GWS-Signal ohnehin nicht als Kandidaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

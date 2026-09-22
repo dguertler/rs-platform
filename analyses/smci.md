@@ -1,107 +1,125 @@
 # SMCI — KI-Aktienbewertung
 
-**Super Micro Computer** · Technology · 12.08.2026 · Signal: Breakout
+**Super Micro Computer, Inc.** · Technology · 21.09.2026 · Signal: Kein Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 33.99 |
-| Market Cap | $21.99 Mrd. |
-| Forward PE | 9.15 |
-| Revenue (TTM) | $39.10 Mrd. |
-| Gross Margin | 17.5% |
-| ROE | N/A |
-| RS-Score | -16.5 |
+| Kurs | 39.09 |
+| Market Cap | $25.29 Mrd. |
+| Forward PE | 7.34 |
+| Revenue (TTM) | $39.06 Mrd. |
+| Gross Margin | 10.8% |
+| ROE | 21.5% |
+| RS-Score | 111.7 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
+**⚡ ASYMMETRISCHER EDGE** — EV-Upside +21.9% (>20%)
+
 ---
 
-**Szenarien (12–18 Monate):** Bull $65–$75 (20 %) · Base $35–$41 (50 %) · Bear $11–$16 (30 %) · EV ~$37,05
+**Szenarien (12–18 Monate):** Bull $72–$95 (22 %) · Base $38–$52 (45 %) · Bear $11–$18 (33 %) · EV ~$43,41
 
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: SMCI ist nicht in `data/fundamentals.json` gecacht, yfinance ist proxyseitig blockiert — Daten stammen aus WebSearch, mit Quellenkonflikten (u. a. Trailing-P/E, ROE, Analysten-Konsens-Zählung). Eigene Berechnung aus den offiziellen FY26-Zahlen (EPS 3,26 $ GAAP) ergibt Trailing-P/E 10,4x — unter dem drittquellig gemeldeten 15,93x, das vor der Q4-Zahl stehen geblieben sein dürfte; hier wird der aktuellere eigene Wert verwendet. Supermicro lieferte am 11.08. FY26-Zahlen, die die Erzählung drehen: Umsatz 39,1 Mrd.$ (+78 % YoY), Q4-Bruttomarge auf 17,5 % fast verdoppelt (9,5 % Vorjahr, 9,9 % Vorquartal), EPS 1,70 $ vs. 0,96 $ Konsens (+77,55 %), FY27-Guidance 65–72 Mrd.$ bei Rekord-Backlog (&gt;60 Mrd.$ Neuaufträge in Q4 allein). Die Story ist zweigeteilt: Die operative Erholung nach der 2024er-Bilanzkrise (verspäteter 10-K, EY-Rücktritt, BDO-„Adverse Opinion") ist real — aber seit März 2026 läuft parallel ein **neues, ungelöstes** DOJ-Strafverfahren gegen Mitgründer Wally Liaw wegen mutmaßlicher Export-Umgehung von Nvidia-GPU-Servern nach China (2,5 Mrd.$), plus Taiwan-Festnahmen und eine Sammelklage. Der Markt preist das ein: SMCI handelt bei 9x Forward-KGV, Dell (25x) und HPE (14x) deutlich teurer — eine Risikoprämie für ein offenes Strafverfahren, nicht irrational.
+Super Micro ist der einzige Titel dieser Serie, bei dem Umsatzwachstum und Cashflow in entgegengesetzte Richtungen laufen — und zwar extrem. Der Umsatz stieg um 93,2 % auf $39,06 Mrd. TTM, der freie Cashflow beträgt **minus $8,25 Mrd.** Im Geschäftsjahr 2026 lag der operative Cashflow bei rund −$6,8 Mrd., getrieben von einem Lageraufbau um $12,9 Mrd. Der Lagerbestand schloss das dritte Quartal bei $11,1 Mrd., der Bargeldumschlagszyklus stieg von 54 auf 106 Tage.
+
+Das ist keine Bilanzkosmetik, sondern das Geschäftsmodell in Reinform: Super Micro kauft GPUs und Komponenten auf eigene Rechnung, baut daraus Serverracks und liefert sie an Hyperscaler und Neoclouds. Bei einer Bruttomarge von 10,8 % ist der Zwischenschritt kapitalintensiv und margenschwach. Das Management hält dagegen: über $60 Mrd. neue Aufträge im Quartal und ein Rekord-Auftragsbestand beim Eintritt ins Geschäftsjahr 2027.
+
+Die Bewertung spiegelt die Skepsis: 7,34x erwarteter Gewinn und 0,65x Umsatz — das niedrigste Gewinnmultiple der gesamten Analyseserie. Der Konsens steht bei "hold" mit einem Ziel von $42,38, nur 8,4 % über dem Kurs. Die Frage ist nicht, ob die Nachfrage da ist, sondern ob sich Lager in Cash verwandelt, bevor die nächste GPU-Generation den Bestand entwertet.
 
 ## 2. GESCHÄFTSMODELL
 
-- AI-Server-/Rack-Hersteller für Hyperscaler/Enterprise-Rechenzentren, direkt an Nvidia-GPU-Zyklen gekoppelt
-- Zwei Kunden je &gt;10 % des FY26-Umsatzes (27 % und 10 %) — echte Klumpenkunden, keine Namen offengelegt
-- 9 Kunden mit je &gt;1 Mrd.$ Umsatz in FY26 (vs. 4 in FY25) — breitere Basis, Top-2-Konzentration bleibt
-- Operativer Hebel: Bruttomarge schwankt extrem — 9,9 % (Q3) auf 17,5 % (Q4) binnen einem Quartal
-- Working-Capital-intensiv — TTM-FCF −6,85 Mrd.$ trotz +747 Mio.$ Op-Cashflow allein in Q4 (Vorratsaufbau)
-- Bilanz: Cash 7,5 Mrd.$, Schulden 8,7 Mrd.$, zusätzlich 7-Mrd.$-Kapitalerhöhung zur Wachstumsfinanzierung
-- Fertigung/Vertrieb mit Taiwan-Exposure — dieselbe Landesgesellschaft im DOJ-/Taiwan-Verfahren
-- Aktienzahl strukturell steigend (559,7→602,1→628,4→646,9 Mio. seit 2023)
+- Integration statt Fertigung: Super Micro baut Serversysteme und Racks aus zugekauften Komponenten — GPUs, CPUs, Speicher, Netzteile
+- Der Wettbewerbsvorteil ist Geschwindigkeit: Building-Block-Architektur und Direktflüssigkeitskühlung erlauben schnellere Auslieferung neuer GPU-Generationen als Dell oder HPE
+- Bruttomarge 10,8 % — die mit Abstand niedrigste der gesamten Analyseserie; Dell liegt bei 19,9 %, HPE bei 36,6 %, NetApp bei 70,6 %
+- Das Modell ist working-capital-getrieben: Komponenten müssen vorfinanziert werden, bevor der Kunde zahlt — daraus entsteht der Lageraufbau von $12,9 Mrd.
+- Bargeldumschlagszyklus 106 Tage gegenüber 54 Tagen im Vorquartal: Das Kapital ist doppelt so lange gebunden
+- Bruttomarge im dritten Quartal 9,9 % nach 6,3 % im zweiten Quartal — die Rückkehr aus einem Margentief, nicht ein Margenaufbau
+- Anomalie: Ausgewiesene Operating Margin 13,4 % **über** der Gross Margin von 10,8 % — operativ unmöglich und aus den Daten nicht auflösbar. Die Betriebsmarge wird weder in Bewertung noch Scoring verwendet; herangezogen werden Brutto- und Nettomarge (5,7 %), die zueinander konsistent sind
+- Debt/Equity 63,95 bei negativem freiem Cashflow: Der Lageraufbau wird teilweise fremdfinanziert
 
 ## 3. BULL CASE
 
-Bruttomarge hält sich über mehrere Quartale nahe 14–16 % (Beweis, dass Q4 kein Einmaleffekt war), Umsatz erreicht die obere Guidance-Hälfte, DOJ-/Taiwan-Verfahren bleiben ohne Konsequenzen für SMCI selbst. Peers: Dell Technologies (DELL, Fwd-PE 25,2x, größter Server-Diversifiziert-Peer), HPE (Fwd-PE ~13,8x). Annahme (kein Konsens): FY27E EPS 5,80 $ (Nettomarge ~6 % auf 68 Mrd.$ Umsatz, ~655 Mio. Aktien) × 12x (deutlich unter DELL, da selbst im Bull-Fall ein Rechtsrisiko-Abschlag bleibt) = Kursziel 69,60 $. Bull-Kursziel: 65–75 $. Eintrittswahrscheinlichkeit: 20 %.
+Peers: HP (HPQ, Fwd-KGV 11,0x), HPE (13,2x), Western Digital (WDC, 13,9x), Seagate (STX, 15,5x), NetApp (NTAP, 17,8x), Dell (19,5x), Arista (ANET, 38,6x) — Bandbreite 11,0x–38,6x.
+
+Der Auftragsbestand von über $60 Mrd. wird abgearbeitet, das Lager verwandelt sich in Umsatz und Cash, der freie Cashflow dreht kräftig ins Positive, und die Bruttomarge normalisiert sich Richtung 12 %. Strukturelle Margennachhaltigkeit ist hier nur eingeschränkt begründbar: Der Zeitvorteil beim Hochlauf neuer GPU-Generationen ist real und hat Super Micro Marktanteile gebracht, er ist aber kein dauerhafter Preishebel — die Komponenten kommen von denselben Zulieferern wie bei Dell und HPE. Belastbar ist allein der operative Hebel: Bei 10,8 % Bruttomarge schlägt jeder zusätzliche Umsatzdollar bei weitgehend fixen Strukturkosten überproportional durch. Annahme (kein Konsens): FY29-EPS ~$7,50 × 11x (auf HPQ/HPE-Niveau, dem unteren Rand der Bandbreite) = $82,50. Bull-Kursziel: $72–$95. Eintrittswahrscheinlichkeit: 22%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Umsatz am unteren Ende der Guidance (Glaubwürdigkeitsabschlag angesichts der Bilanz-Historie), Bruttomarge normalisiert sich Richtung 12 % (zwischen Krisen-Tief 9,5 % und Q4-Spitze 17,5 %) statt den Spitzenwert zu halten. Annahme (kein Konsens): FY27E EPS 4,20 $ (Nettomarge ~4,3 % auf 65 Mrd.$ Umsatz) × 9x (nahe eigenem aktuellem Forward-Multiple, kein Peer-Aufschlag solange DOJ-Verfahren offen ist) = Kursziel 37,80 $. Base-Kursziel: 35–41 $. Eintrittswahrscheinlichkeit: 50 %.
+Das Wachstum verlangsamt sich vom 93-%-Niveau deutlich, die Bruttomarge bleibt bei rund 10 %, und der freie Cashflow dreht leicht ins Positive, ohne den Bestandsaufbau vollständig aufzulösen. Der Markt zahlt weiterhin ein niedriges Multiple, weil das Bilanzrisiko bestehen bleibt. Annahme (kein Konsens): FY29-EPS ~$5,50 × 8x (unter HPQ 11,0x — Abschlag für die niedrigste Bruttomarge und den Kapitalbedarf der Peer-Gruppe) = $44. Base-Kursziel: $38–$52. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: DOJ-/Taiwan-Verfahren weiten sich aus (z. B. Anklage gegen SMCI selbst statt nur Einzelpersonen), ein Großkunde zieht sich zurück, Bruttomarge fällt zurück auf Krisen-Niveau (~9–10 %) — bewusst als härterer Fall als die bereits durchlebte 2024er-Krise gerechnet (damaliger Tiefstkurs 19,48 $), da eine SMCI-Anklage selbst noch nicht eingepreist ist. Peer-Anker: eigenes aktuelles Multiple (9x) als Ausgangspunkt, mit weiterer Kompression bei eskalierendem Rechtsrisiko. Annahme (kein Konsens): FY27E EPS 1,80 $ (Nettomarge ~3 % auf 50 Mrd.$ Umsatz, Wachstum bricht deutlich unter Guidance ein) × 7,5x = Kursziel 13,50 $. Bear-Kursziel: 11–16 $. Eintrittswahrscheinlichkeit: 30 %.
+Auslöser: Der Lagerbestand von $11,1 Mrd. erweist sich als Fehlallokation. Der Mechanismus ist konkret und in diesem Markt nicht theoretisch — wenn NVIDIA eine neue Beschleunigergeneration in den Hochlauf bringt, verliert die vorherige Generation binnen Monaten an Wert. Bei einer Bruttomarge von 10,8 % genügt eine Abwertung von wenigen Prozentpunkten auf $11,1 Mrd. Lager, um den gesamten Jahresgewinn auszulöschen. Kommt eine Kapitalerhöhung hinzu, trifft sie auf einen Kurs, der bereits gefallen ist.
 
-Risikodimensionen:
-- Kundenkonzentration: 2 Kunden mit 27 % bzw. 10 % des FY26-Umsatzes — hohes Klumpenrisiko.
-- Geopolitik/China: zentral — DOJ-Anklage wegen mutmaßlicher Export-Umgehung (2,5 Mrd.$ Nvidia-GPU-Server nach China), Taiwan-Festnahmen, Sammelklage bis März 2026.
-- Lieferketten/Foundry: Nvidia-GPU-Abhängigkeit, Taiwan-Fertigung/Vertrieb — dieselbe Landesgesellschaft, die im Strafverfahren involviert ist.
-- Verwässerung: Aktienzahl seit 2023 strukturell steigend, zusätzlich 7-Mrd.$-Kapitalerhöhung 2026.
-- Regulierung: SEC-Altfall (2020, abgeschlossen) plus neues DOJ-Verfahren und Sammelklage — beide offen.
+Bilanz: das materiellste Risiko dieses Falls. Freier Cashflow −$8,25 Mrd., Lager $11,1 Mrd., Bargeldumschlagszyklus 106 Tage, Debt/Equity 63,95. Kundenkonzentration: Hyperscaler und Neocloud-Betreiber dominieren den Umsatz; die genaue Verteilung ist aus dem Datensatz nicht quantifizierbar, die strukturelle Konzentration ist aber hoch — wenige Käufer entscheiden über Milliardenaufträge, und sie haben die Verhandlungsmacht, was die 10,8 % Bruttomarge erklärt. Geopolitik/Exportkontrollen: unmittelbar materiell — KI-Serverexporte nach China unterliegen US-Kontrollen. Lieferkette/Single-Source: die zentrale Abhängigkeit ist NVIDIA; Verfügbarkeit und Allokation von Beschleunigern bestimmen Umsatz und Lagerwert gleichermaßen. Verwässerung: SBC und Aktienanzahl sind im Datensatz nicht verfügbar; bei negativem freiem Cashflow von $8,25 Mrd. ist eine Eigenkapitalfinanzierung jedoch ein reales Szenario und wird als Risiko geführt. Regulierung/Rechtsrisiken: erhöht — das Unternehmen hat eine Phase verzögerter Abschlusstestate und Wirtschaftsprüferwechsel hinter sich, was die Anforderungen an die Berichtsqualität dauerhaft erhöht.
 
-**Summe: 20 % + 50 % + 30 % = 100 %.**
+Annahme (kein Konsens): FY29-EPS ~$1,80 × 7x (unter allen genannten Peers, De-Rating bei Lagerabwertung) = $12,60. Bear-Kursziel: $11–$18. Eintrittswahrscheinlichkeit: 33%.
 
-**Erwartungswert:** EV = 0,20×70,00 + 0,50×38,00 + 0,30×13,50 = 37,05 $ — Upside vs. aktuellem Kurs (33,99 $): +9,0 %. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der reale operative Katalysator wird durch die 30%ige Bear-Gewichtung (ungelöstes Strafverfahren) fast vollständig neutralisiert.
+**Summe: 22% + 45% + 33% = 100%**
+
+**Erwartungswert:** EV = 0,22 × $83,50 + 0,45 × $45 + 0,33 × $14,50 = **~$43,41 — implizites Upside vs. aktuellem Kurs ($39,09): +11,0%.**
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE quellenseitig widersprüchlich (17,88 % vs. 26,55 %) — kein Punktwert verwendbar, aber klar positiv nach den Krisenquartalen. ROIC 10,43 %. Nettomarge FY26 ca. 5,6 % (eigene Berechnung: 2,2 Mrd.$ / 39,1 Mrd.$ Umsatz) — Q4 allein ca. 10,6 %, zeigt die Beschleunigung. Free Cashflow TTM klar negativ (−6,85 Mrd.$) trotz positivem Q4-Op-Cashflow (+747 Mio.$) — größter Bilanz-Schwachpunkt, typisch für Working-Capital-Aufbau bei Hypergrowth, aber real. Verschuldung (D/E ~1,18) bei 7,5 Mrd.$ Cash — kein akutes Liquiditätsrisiko, aber keine Festungsbilanz.
+Die schwächste Fundamentalqualität dieser Zehnergruppe, und die Kennzahlen müssen gegen den Cashflow gelesen werden. ROE 21,5 % und ROIC 15,2 % sehen ordentlich aus — sie beruhen aber auf einem Gewinn, der nicht in Cash umgewandelt wird. Ein Unternehmen mit 21,5 % Eigenkapitalrendite und −$8,25 Mrd. freiem Cashflow verdient buchhalterisch und verbrennt tatsächlich; für die Qualitätsbeurteilung ist daher der Cashflow maßgeblich, nicht die Kapitalrendite.
+
+Bruttomarge 10,8 % ist der strukturelle Kern des Problems. Im Zykluskontext ist das kein Tiefpunkt, der sich normalisiert, sondern die Normallage eines Integrationsgeschäfts ohne eigene Komponentenfertigung: Der Wertbeitrag liegt in Montage, Kühlung und Lieferzeit, nicht in Technologie, für die ein Kunde einen Aufpreis zahlt. Die Verbesserung von 6,3 % auf 9,9 % zwischen zweitem und drittem Quartal ist eine Erholung aus einem Ausnahmetief, kein Trend nach oben. Die Betriebsmarge bleibt wegen der in Abschnitt 2 benannten Anomalie außen vor.
+
+RPO nicht anwendbar (kein Subscription-Modell); das funktionale Äquivalent ist der Auftragsbestand, und der ist hier die stärkste Einzelaussage: über $60 Mrd. neue Aufträge in einem Quartal und ein Rekordbestand beim Eintritt ins Geschäftsjahr 2027. Das stützt die Bull-Wahrscheinlichkeit, löst das Cashflow-Problem aber nicht — Aufträge müssen vorfinanziert werden, bevor sie bezahlt werden. Ein Burggraben im engeren Sinn ist nicht erkennbar: Der Zeitvorteil beim Generationswechsel ist real, aber nicht rechtlich oder technologisch geschützt.
 
 ## 7. BEWERTUNG
 
-Rückrechnung "Was preist der Kurs ein?": Bei Kurs 33,99 $ und Forward-P/E ~9x impliziert der Markt FY27E-EPS von ca. 3,80 $ — nahe dem FY26-Non-GAAP-Ist (3,63 $), praktisch **keine** Wachstumsprämie trotz 66–84 % Umsatzwachstums-Guidance. Plausibel: Der Markt traut der Guidance nicht voll, sondern preist die DOJ-/Taiwan-Risiken ein. Eigenes Forward-Multiple (9x) liegt klar unter beiden Peers (DELL 25,2x, HPE 13,8x) — strukturell erklärbar, keine unerklärte Anomalie.
+Bei einem Geschäft, das Working Capital in dieser Größenordnung bindet, ist das Gewinnmultiple die am wenigsten aussagekräftige Kennzahl. Trotzdem der Befund: 7,34x Forward und 0,65x Umsatz sind die niedrigsten Werte der gesamten zwanzigteiligen Serie. Eine FCF-Bewertung ist nicht möglich, weil der freie Cashflow negativ ist — das ist keine methodische Lücke, sondern die Kernaussage. Price/Book 2,50 ist die belastbarste Bewertungsgröße und zeigt, dass der Markt für die Substanz einen moderaten Aufschlag zahlt.
+
+Peer-Einordnung: 7,34x Forward liegt **unter allen genannten Peers** — unter HPQ (11,0x), HPE (13,2x), Dell (19,5x) und weit unter Arista (38,6x). Auf Umsatzbasis liegt SMCI bei 0,65x gegenüber HPQ 0,52x, HPE 1,93x und Dell 2,39x. Der Abschlag ist strukturell begründet und kein übersehener Wert: Super Micro hat die niedrigste Bruttomarge der Gruppe (10,8 % gegenüber Dell 19,9 % und HPE 36,6 %) und als einziger einen stark negativen freien Cashflow. Dell wächst mit 57,7 % ähnlich dynamisch, bei fast doppelter Bruttomarge, und wird mit dem 2,7-Fachen bewertet — das ist eine konsistente Preisbildung, keine Fehlbewertung.
+
+Was preist der Kurs ein? Bei $25,29 Mrd. Marktwert und einem unterstellten reifen Hardware-Multiple von 12x müsste Super Micro dauerhaft ~$2,1 Mrd. Nettogewinn erzielen — bei 5,7 % Nettomarge entspricht das ~$37 Mrd. Umsatz, also praktisch dem heutigen Niveau. Der Kurs unterstellt damit kein weiteres Wachstum, aber auch keinen Einbruch. Das ist plausibel und erklärt, warum hier kein großer Bewertungsvorteil entsteht: Das Risiko liegt nicht in der Gewinnhöhe, sondern darin, ob der Gewinn jemals als Cash ankommt. Analyst-Konsensziel $42,38 bei 16 Analysten und Rating "hold" — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short-Interest ca. 13–15 % des Streubesitzes — erhöht, Short-Squeeze-Potenzial, aber auch echte Skepsis. Sell-Side gespalten: Needham hob Kursziel 40→46 $ (Buy), Barclays 38→39 $ — Wedbush senkte 42→34 $, BofA hält Underperform, Goldman warnt vor Margen-Nachhaltigkeit. Hypothese, nicht datenbasiert: kein gefestigter Konsens, wie strukturell der Q4-Margensprung ist.
+Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist die Konsenslage: 16 Analysten, Rating "hold", mittleres Ziel nur 8,4 % über dem Kurs — die geringste Analystenabdeckung dieser Zehnergruppe und ein zurückhaltendes Votum. Ableitbar ist außerdem Beta 2,00 und eine 52-Wochen-Spanne von $19,48 bis $58,78, also ein Faktor 3 binnen zwölf Monaten. Hypothese, nicht datenbasiert: Nach der Phase verzögerter Abschlusstestate dürfte ein Teil der institutionellen Basis dauerhaft ferngeblieben sein; die Halterstruktur ist wahrscheinlich stark von kurzfristig orientierten Adressen geprägt, was die Ausschläge erklärt. Was neue Käufer anziehen würde, ist ein einziges Quartal mit positivem freiem Cashflow — das ist der Beweis, dass sich Aufträge in Geld verwandeln, und der einzige Datenpunkt, der die Bewertung strukturell ändert.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score −16,52 (Rang 70, NASDAQ-100) — trotz Kurspop weiterhin negativ, da 50T (−29,4 %) und 6M (−22,96 %) den Crash seit dem 52-Wochen-Hoch (58,78 $) dominieren; kurzfristig klar positiv (5T +4,1 %, 10T +14,4 %, 20T +17,4 %). GWS-Ampel inaktiv auf allen Zeitebenen. Kurs 33,99 $ liegt bei ca. 37 % der 52-Wochen-Range. Momentum ist fundamental gestützt, aber die negative Medium-Term-RS zeigt: der Vertrauensverlust ist noch nicht aufgeholt.
+RS-Score 111,71, Rang 13 im NASDAQ-100 nach zuvor Rang 27 — der zweitgrößte Rangsprung dieser Zehnergruppe. Fenster: 5T +4,67 %, 10T −1,61 %, 20T +3,85 %, 50T +38,64 %, 6M +66,16 %. Die Struktur zeigt eine kräftige Sommerbewegung (50T +38,64 %) mit anschließender Seitwärtskonsolidierung. Der Kurs bei $39,09 liegt 100,7 % über dem 52-Wochen-Tief von $19,48 und 33,5 % unter dem Hoch. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein formales Breakout-Signal. Das Momentum ist teilweise fundamental gestützt: Der Auftragsbestand ist real, der Cashflow widerspricht ihm. Warnsignal: Ein Rückfall unter $33 würde die Sommerbewegung zur Hälfte zurücknehmen; ein Ausbruch über $45 wäre das Fortsetzungssignal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($150–$220):** AI-Infrastruktur-Nachfrage bleibt strukturell hoch, Margen stabilisieren sich dauerhaft im mittleren Zehnprozentbereich, DOJ-Verfahren endet ohne SMCI-Konsequenzen. Normalisiertes EPS 10–14 $ × 15–18x.
-**Base ($50–$90):** Solides, aber zyklisches Wachstum, Marge pendelt bei 10–12 %, Rechtsrisiko bleibt Bewertungsabschlag. Normalisiertes EPS 5–7 $ × 10–13x.
-**Bear ($10–$25):** Erneute Governance-/Rechtskrise, Kundenabwanderung, Margen-Rückfall auf Krisen-Niveau. Normalisiertes EPS 1–2 $ × 8–12x.
+**Bull ($110–$160):** Der Auftragsbestand wird abgearbeitet, der freie Cashflow dreht dauerhaft positiv, die Bruttomarge erreicht 13 %. Normalisiertes EPS $10–14 × 11–12x.
 
-Entscheidende Variable: Ausgang des DOJ-/Taiwan-Verfahrens — nicht die operative Nachfrage, die bereits jetzt strukturell stark ist.
+**Base ($45–$75):** Wachstum normalisiert auf 20–25 %, Bruttomarge 10–11 %, Cashflow ausgeglichen, Multiple bei 8–9x. Normalisiertes EPS $6–8 × 8–9x.
+
+**Bear ($8–$22):** Lagerabwertung bei einem GPU-Generationswechsel, Kapitalerhöhung aus der Schwäche, Bruttomarge unter 9 %.
+
+Entscheidende Variable: der freie Cashflow. Umsatz und Auftragsbestand sind bereits bewiesen — ob daraus Geld wird, ist die einzige offene Frage und entscheidet über die gesamte Spanne.
 
 ## 11. PROFI-FAZIT
 
-Kein Buy-and-Hold-Compounder — ein zyklischer, event-getriebener Trade mit echtem fundamentalem Rückenwind (Beat, Guidance-Anhebung, Rekord-Backlog), aber überlagert von einem ungelösten Strafverfahren. Der Turnaround-Screening-Treffer (alle vier Kriterien erfüllt) betrifft nur die operative Erholung — die DOJ-/Taiwan-Rechtsproblematik ist ein separates, nicht im Screening erfasstes Risiko, das die Bewertung dämpft. Die eigenen Szenarien ergeben keinen asymmetrischen Edge (EV +9,0 %) — High-Conviction-Framing ist damit unzulässig. Nur für risikofreudige, aktiv verfolgende Trader geeignet — nicht für konservative/Compliance-sensible Investoren. Positionsgröße klein halten (max. 1–2 %), DOJ-Nachrichtenlage aktiv verfolgen. **Dell (DELL, Fwd-PE 25,2x)** und **HPE (~13,8x)** sind die saubereren Instrumente für die AI-Server-These ohne akutes Rechtsrisiko — beide handeln dennoch mit Aufschlag zu SMCI, was den Bewertungsabschlag relativ zur operativen Stärke unterstreicht.
+Das höchste Umsatzwachstum dieser Zehnergruppe (+93,2 %) trifft auf die schwächste Bilanzqualität der gesamten Serie. Beides gehört zusammen: Super Micro finanziert das Wachstum der KI-Serverwelle mit dem eigenen Working Capital, und bei 10,8 % Bruttomarge ist das ein schmaler Puffer. Der EV-Upside von +11,0 % ist real, entsteht aber aus einer sehr breiten Szenariospanne — Bull $83,50, Bear $14,50 — und nicht aus einer verlässlichen Bewertungsdiskrepanz.
 
-- Qualität: 2/5
+Einordnung: hochriskanter zyklischer Trade, kein Compounder und kein Qualitätswert. RS-Rang 13 mit einem Sprung von Platz 27 zeigt wiederkehrendes Momentum, GWS 0/3 liefert aber kein Signal, und der Funnel führt diesen Titel nicht als Kandidaten. Geeignet ausschließlich für risikobewusste Investoren, die die KI-Infrastrukturwelle über den margenschwächsten Teil der Kette spielen wollen. Ausdrückliche Warnung zur Positionsgröße: Bei Beta 2,00, einer 52-Wochen-Spanne von Faktor 3 und negativem freiem Cashflow gehört die Position auf maximal 1–2 % mit hartem Stopp. Das harte Abbruchkriterium ist quartalsweise überprüfbar: bleibt der freie Cashflow negativ, ist die These nicht bestätigt.
+
+Peers: **Dell (DELL)** ist bei 19,5x Forward zwar teurer, wächst mit 57,7 % ähnlich dynamisch bei nahezu doppelter Bruttomarge (19,9 %) und ist damit das qualitativ deutlich überlegene Instrument für dieselbe KI-Server-These. **Arista (ANET)** bietet bei 38,6x Forward und 45,4 % Betriebsmarge die margenstarke Netzwerkseite derselben Rechenzentrumsnachfrage — teurer, aber ohne Working-Capital-Risiko.
+
+- Qualität: 1/5
 - Wachstum: 5/5
 - Bewertung: 3/5
 - Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Negativer TTM-Free-Cashflow (−6,85 Mrd.$) und die parallele, ungelöste DOJ-/Taiwan-Rechtslage rechtfertigen trotz starkem operativem Katalysator keine volle Positionsgröße; GWS-Ampel zudem inaktiv, kein bestätigter Breakout.
-
+**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — freier Cashflow von −$8,25 Mrd. bei $11,1 Mrd. Lagerbestand, einem Bargeldumschlagszyklus von 106 Tagen und nur 10,8 % Bruttomarge; das optisch niedrige Multiple von 7,34x beruht auf einem Gewinn, der bislang nicht in Cash ankommt.
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 2/5 |
+| Qualität | 1/5 |
 | Wachstum | 5/5 |
 | Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | +19.2% |
+| EV-Upside | +21.9% |
 
-**Verdict: HOLD (67/100)**
+**Verdict: HOLD (68/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
