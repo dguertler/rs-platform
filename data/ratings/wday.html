@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WDAY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#3B6D11;color:#86c429;border:1px solid #639922}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">22.09.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>WDAY</h1>
+      <h2>Workday, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Technology</span></div>
+        <div class="mi">Industrie: <span>Software - Application</span></div>
+        <div class="mi">MCap: <span>$47B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">BUY</div>
+        <span style="color:#ef4444;font-size:18px;font-weight:900;line-height:1" title="Asymmetrischer Edge: EV-Upside >26%">!</span>
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#86c429;font-size:20px">72</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 22.09.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">51.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$193.87</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">14.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$10.2B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">75.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">—</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">16.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+25.5%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">340–420</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">22%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">210–260</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">95–135</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">33%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $340–$420 (22 %) · Base $210–$260 (45 %) · Bear $95–$135 (33 %) · EV ~$227,30</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Workday ist der unauffälligste Wert dieser Zehnergruppe — und genau darin liegt der Fall. Bei $193,87 notiert die Aktie zu 14,66x erwartetem Gewinn und 4,60x Umsatz, bei einer freien Cashflow-Rendite von 6,5 % auf den Marktwert. Das ist die höchste FCF-Rendite aller Software-Werte dieser Serie und ein Wert, den man im Unternehmenssoftware-Sektor praktisch nicht findet: Datadog liegt bei 1,27 %, Palo Alto bei 1,43 %, Fortinet bei 1,82 %, Zscaler bei 3,3 %.</p>
+<p>Das Wachstum ist dabei moderat: 12,8 % Umsatzplus auf $10,15 Mrd. TTM. Workday sitzt damit in derselben Kategorie wie Intuit und HubSpot aus der vorangegangenen Analysegruppe — reifende Unternehmenssoftware, deren Bewertung auf die Frage reduziert wurde, ob KI-Agenten die Arbeitsabläufe hohl machen, die die Software bisher organisiert hat. Bei Workday betrifft das Personalverwaltung und Finanzbuchhaltung: Prozesse mit hoher regulatorischer und prüfungsrelevanter Dokumentationslast.</p>
+<p>Der Unterschied zu den KI-Verlierern dieser Serie: Workday hat keine Prognosesenkung geliefert und keine Wachstumswarnung ausgegeben. Der RS-Rang stieg von 41 auf 19, der 50-Tage-Wert liegt bei +40,08 %. Was fehlt, ist ein positiver Auslöser — die kurzen Zeitfenster sind alle leicht negativ.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Zwei Kernanwendungen: Human Capital Management (Personalverwaltung, Gehaltsabrechnung, Talentmanagement) und Financial Management (Buchhaltung, Planung, Beschaffung)</li>
+<li>Abonnementmodell mit mehrjährigen Verträgen und sehr hohen Verlängerungsquoten — der Umsatz ist außergewöhnlich planbar</li>
+<li>Der Burggraben ist die Prüfungsrelevanz: In Workday liegen Gehaltsdaten, Buchungssätze und Genehmigungsketten eines Unternehmens; ein Systemwechsel ist ein mehrjähriges Projekt mit Prüferbeteiligung, kein Toolwechsel</li>
+<li>Implementierungsaufwand als zweite Barriere: Eine Workday-Einführung kostet Großunternehmen typischerweise mehr als die Lizenz selbst</li>
+<li>Bruttomarge 75,8 % bei GAAP-Betriebsmarge 11,8 % — 64 Punkte Abstand, überwiegend Vertrieb und aktienbasierte Vergütung</li>
+<li>FCF $3,05 Mrd. bei $10,15 Mrd. Umsatz = 30,0 % FCF-Marge — der belastbarste Qualitätsbeleg dieses Falls</li>
+<li>Debt/Equity 58,39 spiegelt überwiegend Wandelanleihen</li>
+<li>Anomalie: Nettomarge 12,3 % **über** der Betriebsmarge von 11,8 %. Die Differenz liegt unterhalb der Betriebsebene — Zinserträge auf den Liquiditätsbestand sind plausibel, aus den Daten aber nicht abschließend auflösbar; die Nettomarge wird weder in Bewertung noch Scoring verwendet</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Adobe (ADBE, Fwd-KGV 9,0x), Oracle (ORCL, 13,4x), Salesforce (CRM, 14,9x), ServiceNow (NOW, 27,1x), Atlassian (TEAM, 28,5x) — Bandbreite 9,0x–28,5x.</p>
+<p>KI-Agenten werden in Workday integriert statt gegen Workday gestellt: Wer eine Gehaltsabrechnung automatisiert, braucht das System, das die Daten hält und die Prüfspur erzeugt. Der ARPU steigt über Agenten-Module, das Wachstum stabilisiert sich über 13 %, und die GAAP-Betriebsmarge steigt Richtung 20 %. Strukturelle Margennachhaltigkeit ist gut begründbar: 75,8 % Bruttomarge, eine bereits gebaute Vertriebsorganisation für Großunternehmen, und Wechselkosten, die aus Prüfungsanforderungen statt aus Vertragsbindung entstehen — das ist die härtere Variante. Annahme (kein Konsens): FY29-EPS ~$19,00 × 20x (zwischen CRM 14,9x und NOW 27,1x) = $380. Bull-Kursziel: $340–$420. Eintrittswahrscheinlichkeit: 22%.</p>
+<h3>4. BASE CASE</h3>
+<p>Das Wachstum bleibt bei 12 bis 13 %, die Marge steigt langsam, und das Multiple bleibt bei rund 15x, weil der Markt die KI-Frage offen lässt. Die hohe Planbarkeit der Abonnementbasis stützt dabei die Wahrscheinlichkeit dieses Szenarios, nicht das Multiple. Annahme (kein Konsens): FY29-EPS ~$16,50 × 14x (praktisch auf CRM-Niveau 14,9x) = $231. Base-Kursziel: $210–$260. Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: KI-native Anbieter besetzen die Personalverwaltung im Mittelstand und arbeiten sich nach oben. Der Mechanismus ist bei Workday nicht Kündigung — die Verträge laufen und die Migrationskosten schützen — sondern ausbleibende Neukundengewinnung und stagnierende Modulerweiterung bei Bestandskunden. Bei 12,8 % Wachstum ist der Puffer dünn: Fällt es in den einstelligen Bereich, verliert Workday auch das moderate Multiple von 14,66x und fällt auf Adobe-Niveau, das unter derselben Frage bei 9,0x gehandelt wird.</p>
+<p>Kundenkonzentration: breit über Großunternehmen gestreut, kein Einzelkunde materiell — strukturell gering, aus den Daten nicht quantifizierbar. Geopolitik/Exportkontrollen: für Unternehmenssoftware nicht materiell; Datenhaltungsvorschriften in einzelnen Ländern erzeugen Aufwand, kein Umsatzrisiko. Lieferkette/Single-Source: Hosting teils eigen, teils bei Hyperscalern — beherrschbar, kein kritisches Single-Source-Risiko. Verwässerung: das materiellste laufende Aktionärsrisiko — die Lücke von 64 Punkten zwischen Brutto- und GAAP-Betriebsmarge enthält einen erheblichen Anteil aktienbasierter Vergütung; SBC und Aktienanzahl sind im Datensatz nicht verfügbar, eine Quantifizierung ist auf Datenbasis nicht möglich. Regulierung/Rechtsrisiken: erhöht, aber zweischneidig — Datenschutz- und Prüfungsanforderungen erzeugen Compliance-Aufwand, schützen Workday aber gleichzeitig vor nicht zertifizierten Anbietern.</p>
+<p>Annahme (kein Konsens): FY29-EPS ~$12,00 × 9x (auf ADBE-Niveau, dem De-Rating-Anker für disruptionsbedrohte Unternehmenssoftware) = $108. Bear-Kursziel: $95–$135. Eintrittswahrscheinlichkeit: 33%.</p>
+<p>**Summe: 22% + 45% + 33% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,22 × $380 + 0,45 × $235 + 0,33 × $115 = **~$227,30 — implizites Upside vs. aktuellem Kurs ($193,87): +17,2%.**</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Solide und ausgewogen — das gilt für keinen anderen Wachstumssoftware-Wert dieser Serie in dieser Form. Bruttomarge 75,8 % ist ein stabiler Strukturwert. GAAP-Betriebsmarge 11,8 % ist zwar niedrig, aber positiv — Workday ist neben Fortinet einer von nur wenigen Software-Werten der Serie, die auf GAAP-Basis überhaupt Gewinn ausweisen. ROE 16,0 % ist ordentlich; ROIC 7,62 % ist der schwächere Wert und spiegelt die durch Übernahmen und Wandelanleihen erweiterte Kapitalbasis.</p>
+<p>Der aussagekräftigste Wert ist der Cashflow: $3,05 Mrd. FCF auf $10,15 Mrd. Umsatz ergeben 30,0 % FCF-Marge und 6,5 % Rendite auf den Marktwert. Zur Einordnung innerhalb dieser Serie: Das ist mehr als das Fünffache von Datadog (1,27 %) und das Doppelte von Zscaler (3,3 %). Für die Qualitätsbeurteilung wird daher die FCF-Marge herangezogen, nicht ROIC; die Nettomarge bleibt wegen der in Abschnitt 2 benannten Anomalie außen vor.</p>
+<p>RPO-Analyse (Pflicht bei Subscription-Modellen): Workday weist Remaining Performance Obligations und Subscription Revenue Backlog aus — die aktuellen Werte sind im Datensatz nicht enthalten und über die vorliegenden Quellen nicht verifizierbar, sie werden daher nicht als Vorlaufindikator verwendet. Das ist bei diesem Geschäftsmodell eine relevante Lücke, denn bei mehrjährigen Verträgen ist der Auftragsbestand der belastbarste Frühindikator für die Neukundendynamik und damit für die Bear-These. Die Analyse stützt sich stattdessen auf die ausgewiesene Umsatzwachstumsrate von 12,8 %. Der Burggraben ist echt und liegt in der Prüfungsrelevanz der gehaltenen Daten — nur scheinbar liegt er in der Benutzeroberfläche, wo ein Agent überlegen sein kann.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-PE 14,66x bei Forward-EPS $13,22. Da das Geschäft nicht zyklisch ist, ist die FCF-Rendite die primäre Basis: 6,5 %. Ein reifes Unternehmenssoftware-Geschäft wird typischerweise bei 4 bis 5 % gehandelt — Workday müsste also um 30 bis 63 % steigen, um dort anzukommen. Price/Book 7,22 ist für Software unauffällig.</p>
+<p>Peer-Einordnung: 14,66x Forward liegt im **unteren Drittel** der Bandbreite — über Adobe (9,0x) und Oracle (13,4x), praktisch gleichauf mit Salesforce (14,9x), deutlich unter ServiceNow (27,1x) und Atlassian (28,5x). Auf Umsatzbasis: 4,60x Sales gegenüber ADBE 3,81x, CRM 4,46x, ORCL 6,22x, TEAM 7,40x und NOW 9,51x. Die Einordnung ist damit konsistent: Workday wird wie Salesforce bewertet und wächst mit 12,8 % auch ähnlich (CRM: 10,8 %). Gegenüber ServiceNow und Atlassian ist der Abschlag durch das langsamere Wachstum begründet — NOW liefert 24,0 %, TEAM 27,6 %.</p>
+<p>Was preist der Kurs ein? Bei $46,72 Mrd. Marktwert und einer unterstellten reifen FCF-Marge von 32 % müsste Workday ~$2,34 Mrd. freien Cashflow erzielen, um auf 5 % FCF-Rendite zu kommen — das entspricht ~$7,3 Mrd. Umsatz gegenüber heute $10,15 Mrd. Der Kurs unterstellt damit einen **Umsatzrückgang um rund 28 %**. Für ein Unternehmen, das gerade 12,8 % gewachsen ist und mehrjährige, prüfungsrelevante Verträge hält, ist das eine defensive Annahme — sie trifft nur zu, wenn die KI-Disruptionsthese vollständig aufgeht. Analyst-Konsensziel $208,68 bei 38 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist Beta 1,08: praktisch Marktgleichlauf, was für eine stabile institutionelle Halterbasis ohne spekulativen Anteil spricht — der ruhigste Risikoprofil dieser Zehnergruppe nach Fortinet. Ableitbar ist außerdem die enge Konsenslage: 38 Analysten, Rating "buy", mittleres Ziel nur 7,6 % über dem Kurs. Die Sell-Side sieht also weder Aufwärtspotenzial noch Gefahr — eine Einschätzung, die zu einem Titel ohne Katalysator passt.</p>
+<p>Der Rangsprung von Platz 41 auf Platz 19 bei einem 50-Tage-Wert von +40,08 % zeigt, dass es im Sommer eine deutliche Aufwärtsbewegung gab. Die kurzen Fenster sind seither alle leicht negativ. Hypothese, nicht datenbasiert: Workday dürfte als defensiver Software-Wert in Kernportfolios liegen; solche Positionen bewegen sich in Schüben, wenn Sektorrotation stattfindet, nicht kontinuierlich. Was neue Käufer anziehen würde, ist ein Quartal mit beschleunigendem Auftragsbestand — der Beleg, dass die KI-Frage im Neugeschäft nicht durchschlägt.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 51,00, Rang 19 im NASDAQ-100 nach zuvor Rang 41. Fenster: 5T −1,91 %, 10T −1,33 %, 20T −4,19 %, 50T +40,08 %, 6M +18,35 %. Die Struktur zeigt eine kräftige Sommerbewegung mit anschließender Konsolidierung — alle Fenster bis 20 Tage sind leicht negativ. Der Kurs bei $193,87 liegt 22,4 % unter dem 52-Wochen-Hoch von $249,85 und 75,7 % über dem Tief von $110,36. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein formales Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist derzeit weder fundamental getragen noch stark reaktiv — es fehlt einfach ein Anlass. Warnsignal: Ein Bruch unter $175 würde die Sommerbewegung zur Hälfte zurücknehmen; ein Ausbruch über $215 wäre das erste Fortsetzungssignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($480–$650):** Agenten-Module heben den ARPU deutlich, GAAP-Betriebsmarge über 22 %, Wachstum stabilisiert über 14 %. Normalisiertes EPS $26–34 × 19–20x.</p>
+<p>**Base ($250–$400):** Wachstum 11–13 %, Marge steigt Richtung 17 %, Multiple normalisiert bei 15–17x. Normalisiertes EPS $18–24 × 15–17x.</p>
+<p>**Bear ($80–$150):** KI-native Anbieter besetzen HR und Finance im Mittelstand, Neugeschäft versiegt, Multiple fällt auf 9x.</p>
+<p>Entscheidende Variable: die Neukundenzahl im Großkundensegment. Bestandskunden sind durch Migrationskosten geschützt — ob Workday noch gewinnt, zeigt sich nur im Neugeschäft.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Der solideste Wert dieser Zehnergruppe, und der einzige mit einem zweistelligen Erwartungswert bei gleichzeitig moderatem Risikoprofil. Die Rechnung in Abschnitt 7 ist der Kern: Bei $193,87 preist der Markt einen Umsatzrückgang von rund 28 % ein — für ein Unternehmen mit 12,8 % Wachstum, 30,0 % FCF-Marge, positiver GAAP-Betriebsmarge und prüfungsrelevanten Mehrjahresverträgen. Der EV-Upside von +17,2 % entsteht nicht aus einer Wachstumsfantasie, sondern aus dem Abbau einer Disruptionsprämie.</p>
+<p>Einordnung: Buy-and-Hold-Qualitätswert mit moderater Bewertung, kein Momentum-Play. RS-Rang 19 mit Sprung von Platz 41 zeigt Sektorrotation, GWS 0/3 liefert aber kein Signal, und der Funnel führt diesen Titel nicht als Kandidaten. Bei Beta 1,08 ist die Schwankungsbreite normal — die Positionsgröße kann regulär ausfallen, was innerhalb dieser Zehnergruppe eine Ausnahme ist. Das harte, quartalsweise überprüfbare Abbruchkriterium ist der Auftragsbestand: Wächst er langsamer als der Umsatz, ist die These beschädigt, bevor es die Umsatzzeile zeigt.</p>
+<p>Peers: **Salesforce (CRM)** ist bei 14,9x Forward und 4,46x Umsatz praktisch identisch bewertet, wächst mit 10,8 % zwei Punkte langsamer und steht unter derselben KI-Frage — die relative Bewertung ist neutral, Workday hat den leichten Wachstumsvorteil. **Adobe (ADBE)** ist bei 9,0x Forward der Value-Punkt des Sektors mit 34,8 % Betriebsmarge — margenstärker, aber ohne Workdays Prüfungsrelevanz als Burggraben.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — 14,66x Forward bei 6,5 % FCF-Rendite und positiver GAAP-Marge ist attraktiv, es existiert aber kein fundamentaler Auslöser, und alle Zeitfenster bis 20 Tage sind negativ.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

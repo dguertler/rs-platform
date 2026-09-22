@@ -161,14 +161,6 @@
       "ev_upside_pct": -1.4
     },
     {
-      "ticker": "ARM",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-12T07:23:32.590111",
-      "asymmetric_edge": false,
-      "ev_upside_pct": 9.2
-    },
-    {
       "ticker": "STLD",
       "verdict": "HOLD",
       "score": 60,
@@ -566,14 +558,6 @@
       "ev_upside_pct": -18.4
     },
     {
-      "ticker": "ILMN",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-02T06:39:12.888783",
-      "ev_upside_pct": -13.2
-    },
-    {
       "ticker": "SY1.DE",
       "verdict": "WATCH",
       "score": 54,
@@ -657,19 +641,6 @@
       "asymmetric_edge": false,
       "created_at": "2026-07-03T06:14:15.874124",
       "ev_upside_pct": 2.2
-    },
-    {
-      "ticker": "DDOG",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -4.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV 93,19x und ein EV von \u22127,0% tragen keine volle Positionsgr\u00f6\u00dfe, obwohl RS-Score und Momentum-Struktur intakt bleiben."
-      },
-      "created_at": "2026-08-05T10:41:10.725829"
     },
     {
       "ticker": "DXCM",
@@ -2254,19 +2225,6 @@
       "created_at": "2026-08-11T09:12:13.690411"
     },
     {
-      "ticker": "PANW",
-      "verdict": "HOLD",
-      "score": 60,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -11.8,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV 88,3x liegt weit au\u00dferhalb der Peer-Bandbreite (34,6\u201342,7x) und der Erwartungswert ist mit \u22129,8% negativ, das RS-Momentum (Rang 9, alle Zeitfenster positiv) bleibt aber intakt."
-      },
-      "created_at": "2026-08-11T09:53:02.484551"
-    },
-    {
       "ticker": "MSFT",
       "verdict": "BUY",
       "score": 83,
@@ -2408,32 +2366,6 @@
         "reason": "TLS ist nicht im RS-2.0-Funnel getrackt (kein aktives Signal), daher rein informativ: Der reale Katalysator (Marge-Sextuplierung, Guidance-Anhebung) rechtfertigt keine volle Positionsgr\u00f6\u00dfe, da die eigenen peer-verankerten Szenarien beim aktuellen Kurs ein negatives EV (\u221218,2 %) ergeben."
       },
       "created_at": "2026-08-12T09:20:55.627198"
-    },
-    {
-      "ticker": "SMCI",
-      "verdict": "HOLD",
-      "score": 67,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 19.2,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "Negativer TTM-Free-Cashflow (\u22126,85 Mrd.$) und die parallele, ungel\u00f6ste DOJ-/Taiwan-Rechtslage rechtfertigen trotz starkem operativem Katalysator keine volle Positionsgr\u00f6\u00dfe; GWS-Ampel zudem inaktiv, kein best\u00e4tigter Breakout."
-      },
-      "created_at": "2026-08-12T13:26:24.741330"
-    },
-    {
-      "ticker": "LITE",
-      "verdict": "WATCH",
-      "score": 52,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -38.5,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "Trotz Top-RS-Signal (Rang 3) und exzellentem operativem Katalysator \u00fcberwiegt das Bewertungsrisiko: Die eigenen Szenarien zeigen ein EV von \u221239,4%, das eigene Forward-Multiple liegt klar \u00fcber der gesamten Peer-Bandbreite, und der Kurs preist bereits nahezu den eigenen Bull-Case ein \u2014 kein Trade trotz starkem technischem Setup."
-      },
-      "created_at": "2026-08-12T17:43:33.578227"
     },
     {
       "ticker": "ATRO",
@@ -2722,32 +2654,6 @@
       "created_at": "2026-09-10T15:48:13.730568"
     },
     {
-      "ticker": "FTNT",
-      "verdict": "HOLD",
-      "score": 56,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -10.3,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "der Erwartungswert ist trotz starker operativer Qualit\u00e4t und Guidance-Anhebung klar negativ (\u221210,8%), die 6-Monats-Rally von +83% hat die Bewertung bereits \u00fcber ein nachhaltiges Niveau hinausgetrieben."
-      },
-      "created_at": "2026-09-15T07:39:04.140661"
-    },
-    {
-      "ticker": "ZS",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 7.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "anhaltende GAAP-Unprofitabilit\u00e4t (Net Margin \u22121,9%, ROE \u22122,9%) bei gleichzeitig \u00fcberdurchschnittlicher Verschuldung (D/E 71,9) rechtfertigt trotz starkem Q4-Beat keine volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-09-15T07:40:20.402937"
-    },
-    {
       "ticker": "CNC",
       "verdict": "HOLD",
       "score": 57,
@@ -3032,6 +2938,136 @@
         "reason": "$94 Mrd. Schulden bei Debt/Equity 441,58 und ROIC 8,58 % treffen auf beschleunigte Breitbandverluste von 59.000 auf 120.000 je Quartal; auf Unternehmenswertbasis betr\u00e4gt die FCF-Rendite nur 2,0 %."
       },
       "created_at": "2026-09-21T19:30:50.245438"
+    },
+    {
+      "ticker": "ILMN",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -16.2,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "39,25x Forward und 8,05x Umsatz liegen \u00fcber allen genannten Laborausr\u00fcster-Peers bei 9,4 % Wachstum, das Konsensziel von $202,65 liegt unter dem Kurs, und der EV liegt 18,5 % darunter."
+      },
+      "created_at": "2026-09-21T20:06:57.788131"
+    },
+    {
+      "ticker": "PANW",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 9.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Verw\u00e4sserung",
+        "reason": "112 Mio. neue Aktien f\u00fcr CyberArk entsprechen rund 13,7 % der ausstehenden Aktien, und vom berichteten NGS-ARR-Wachstum von +60 % bleiben organisch rund +28,5 %; das tr\u00e4gt bei 74,52x Forward und +6,5 % EV keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T20:06:57.804868"
+    },
+    {
+      "ticker": "SMCI",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 21.9,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "freier Cashflow von \u2212$8,25 Mrd. bei $11,1 Mrd. Lagerbestand, einem Bargeldumschlagszyklus von 106 Tagen und nur 10,8 % Bruttomarge; das optisch niedrige Multiple von 7,34x beruht auf einem Gewinn, der bislang nicht in Cash ankommt."
+      },
+      "created_at": "2026-09-21T20:09:28.156808"
+    },
+    {
+      "ticker": "FTNT",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 6.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "44,96x Forward bei 1,82 % FCF-Rendite und einem Konsensziel von $164,32 unterhalb des Kurses; die operative Qualit\u00e4t ist unbestritten, tr\u00e4gt bei +4,1 % EV aber keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T20:09:28.173899"
+    },
+    {
+      "ticker": "ARM",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -12.0,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "90,22x Forward und 57,09x Umsatz liegen beim 2,5- bis 6-Fachen der Halbleiter-Peers bei einer Betriebsmarge von 7,6 % und 0,45 % FCF-Rendite; der EV liegt 15,0 % unter dem Kurs."
+      },
+      "created_at": "2026-09-21T20:12:11.773248"
+    },
+    {
+      "ticker": "MSTR",
+      "verdict": "HOLD",
+      "score": 68,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 22.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "die Aktie ist faktisch ein gehebelter Bitcoin-Proxy mit Beta 3,60 und \u00fcber 90 % des Nettoverm\u00f6gens in einem einzigen Verm\u00f6genswert; der mNAV-Abschlag von rund 6 % rechtfertigt eine Position, aber keine volle Gr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-21T20:12:11.790276"
+    },
+    {
+      "ticker": "ZS",
+      "verdict": "HOLD",
+      "score": 58,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 7.3,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "35,24x Forward ist zwar das niedrigste Multiple der Security-Gruppe, beruht aber auf einer selbst gef\u00fchrten Wachstumsverlangsamung von 25 % auf rund 17 %; bei +3,7 % EV tr\u00e4gt das keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-22T02:05:43.086844"
+    },
+    {
+      "ticker": "DDOG",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.6,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "77,32x Forward und 20,81x Umsatz liegen beim 2,7-Fachen des teuersten Anwendungssoftware-Peers bei nur acht Punkten Wachstumsvorsprung, die FCF-Rendite betr\u00e4gt 1,27 %, und der EV liegt 10,7 % unter dem Kurs."
+      },
+      "created_at": "2026-09-22T02:05:43.105503"
+    },
+    {
+      "ticker": "WDAY",
+      "verdict": "BUY",
+      "score": 72,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 25.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "14,66x Forward bei 6,5 % FCF-Rendite und positiver GAAP-Marge ist attraktiv, es existiert aber kein fundamentaler Ausl\u00f6ser, und alle Zeitfenster bis 20 Tage sind negativ."
+      },
+      "created_at": "2026-09-22T02:08:55.308973"
+    },
+    {
+      "ticker": "LITE",
+      "verdict": "BUY",
+      "score": 76,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 20.5,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "27,70x Umsatz liegt beim Dreifachen der direkten optischen Wettbewerber, die FCF-Rendite betr\u00e4gt 0,26 %, und die Kapitalrenditekennzahlen sind im Datensatz unbrauchbar; das tr\u00e4gt trotz +16,2 % EV keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-09-22T02:08:55.326145"
     }
   ]
 }
