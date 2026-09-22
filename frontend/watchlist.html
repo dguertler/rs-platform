@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RS · Nasdaq Dashboard</title>
+  <title>RS · Watchlist</title>
   <script src="api.js"></script>
   <script src="watchlist.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
@@ -40,11 +40,11 @@
 </head>
 <body>
 <div class="nav-bar">
-  <a href="index.html" class="nav-switch active">Nasdaq</a>
+  <a href="index.html" class="nav-switch">Nasdaq</a>
   <a href="dax.html" class="nav-switch">DAX</a>
   <a href="sp500.html" class="nav-switch">S&amp;P500</a>
   <a href="smallcap.html" class="nav-switch">SC600</a>
-  <a href="watchlist.html"            class="nav-switch">Watchlist</a>
+  <a href="watchlist.html"            class="nav-switch active">Watchlist</a>
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html" class="nav-switch">B-DETAILS</a>
   <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
@@ -97,25 +97,53 @@ function App() {
     });
   }, []);
 
+  // Alle vier Universen laden — die Watchlist darf Titel aus jedem Index enthalten.
+  // Der Benchmark bleibt der NASDAQ-100, damit die Charts eine Referenzlinie haben.
   useEffect(() => {
-    apiFetch("data/rs_full.json")
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-      .then(json => {
-        const arr = Array.isArray(json) ? json : json.data;
-        const normalized = {
-          timestamp: Array.isArray(json) ? "–" : (json.timestamp || "–"),
-          benchmark: "QQQ",
-          top20: arr.slice(0, 20).map(d => d.ticker),
-          data: arr,
-          benchmark_ohlcv_w: Array.isArray(json) ? [] : (json.benchmark_ohlcv_w || []),
-          benchmark_ohlcv:   Array.isArray(json) ? [] : (json.benchmark_ohlcv   || []),
-        };
-        setData(normalized);
-        const first = normalized.data.find(d => d.ohlcv?.length);
-        if (first) setSelected(first.ticker);
-      })
-      .catch(e => setError(e.message));
+    const SOURCES = [
+      { file: "data/rs_full.json",     index: "QQQ" },
+      { file: "data/rs_sp500.json",    index: "SPX" },
+      { file: "data/rs_dax.json",      index: "DAX" },
+      { file: "data/rs_smallcap.json", index: "SC600" },
+    ];
+    Promise.allSettled(SOURCES.map(s =>
+      apiFetch(s.file)
+        .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+        .then(json => ({ json, index: s.index }))
+    )).then(results => {
+      const merged = [];
+      const seen = new Set();
+      let bench_w = [], bench_d = [], stamp = "–";
+      results.forEach(res => {
+        if (res.status !== "fulfilled") return;
+        const { json, index } = res.value;
+        const arr = Array.isArray(json) ? json : (json.data || []);
+        if (index === "QQQ" && !Array.isArray(json)) {
+          bench_w = json.benchmark_ohlcv_w || [];
+          bench_d = json.benchmark_ohlcv   || [];
+          stamp   = json.timestamp || "–";
+        }
+        arr.forEach(entry => {
+          if (seen.has(entry.ticker)) return;   // Doppelmitgliedschaften (z. B. QQQ + SPX)
+          seen.add(entry.ticker);
+          merged.push({ ...entry, _index: index });
+        });
+      });
+      if (merged.length === 0) { setError("Keine RS-Daten geladen."); return; }
+      setData({ timestamp: stamp, benchmark: "QQQ", top20: [], data: merged,
+                benchmark_ohlcv_w: bench_w, benchmark_ohlcv: bench_d });
+    });
   }, []);
+
+  // Watchlist-Zustand: Änderungen an anderer Stelle sollen die Tabelle nachziehen
+  const [watched, setWatched] = useState(() => RSWatchlist.list());
+  useEffect(() => {
+    const sync = () => setWatched(RSWatchlist.list());
+    window.addEventListener(RSWatchlist.EVENT, sync);
+    return () => window.removeEventListener(RSWatchlist.EVENT, sync);
+  }, []);
+
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     apiFetch("data/signals.json")
@@ -195,15 +223,35 @@ function App() {
 
   const rsData = useMemo(() => {
     if (!data) return [];
-    return data.data.map(d => ({ t: d.ticker, s: d.score, w: d.windows, pr: d.prev_rank ?? null }));
-  }, [data]);
+    const onList = new Set(watched);
+    return data.data
+      .filter(d => onList.has(d.ticker.toUpperCase()))
+      .map(d => ({ t: d.ticker, s: d.score, w: d.windows, pr: d.prev_rank ?? null }));
+  }, [data, watched]);
+
+  // Suchtreffer über alle vier Universen, ohne bereits gelistete Titel
+  const matches = useMemo(() => {
+    const q = query.trim().toUpperCase();
+    if (!data || q.length < 1) return [];
+    const onList = new Set(watched);
+    return data.data
+      .filter(d => d.ticker.toUpperCase().includes(q) && !onList.has(d.ticker.toUpperCase()))
+      .slice(0, 12);
+  }, [data, query, watched]);
+
+  // Ohne Auswahl den ersten Watchlist-Titel zeigen
+  useEffect(() => {
+    if (selected || !data) return;
+    const first = rsData.find(r => data.data.find(d => d.ticker === r.t && d.ohlcv?.length));
+    if (first) setSelected(first.t);
+  }, [data, rsData, selected]);
 
   const sorted = useMemo(() =>
     [...rsData].sort((a, b) =>
       b.s - a.s
     ), [rsData]);
 
-  const rows = showAll ? sorted : sorted.slice(0, 20);
+  const rows = sorted;   // Watchlist ist immer vollständig
 
   // Ø EV-Upside über alle aktuell angezeigten Ticker (manuelle Analyse geht vor Auto-Score)
   const evAverage = useMemo(() => {
@@ -319,6 +367,68 @@ function App() {
           </span>
         </div>
       )}
+      {/* Suche: Ticker aus allen vier Universen finden und aufnehmen */}
+      <div style={{marginBottom:10, position:"relative", maxWidth:420}}>
+        <input
+          type="search"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          placeholder="Aktie suchen und hinzufügen …"
+          aria-label="Aktie suchen und zur Watchlist hinzufügen"
+          style={{
+            width:"100%", padding:"8px 12px", borderRadius:8, fontSize:13,
+            background:"#0f172a", border:"1px solid #1e293b", color:"#e2e8f0",
+            fontFamily:"monospace",
+          }}
+        />
+        {matches.length > 0 && (
+          <div style={{
+            position:"absolute", zIndex:40, left:0, right:0, marginTop:4,
+            background:"#0f172a", border:"1px solid #334155", borderRadius:8,
+            maxHeight:280, overflowY:"auto", boxShadow:"0 8px 24px #000000aa",
+          }}>
+            {matches.map(m => (
+              <button key={m.ticker}
+                onClick={() => { RSWatchlist.add(m.ticker); setQuery(""); }}
+                style={{
+                  display:"flex", width:"100%", alignItems:"center", gap:8, cursor:"pointer",
+                  padding:"7px 12px", background:"transparent", border:"none", textAlign:"left",
+                  color:"#e2e8f0", fontSize:12, fontFamily:"monospace",
+                }}>
+                <span style={{fontWeight:700, minWidth:70}}>{m.ticker}</span>
+                <span style={{fontSize:10, color:"#64748b", minWidth:44}}>{m._index}</span>
+                <span style={{fontSize:11, color:"#94a3b8"}}>Score {Math.round(m.score ?? 0)}</span>
+                <span style={{marginLeft:"auto", color:"#4ade80", fontWeight:700}}>+</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {rows.length > 0 && (
+        <div style={{display:"flex", alignItems:"center", gap:8, marginBottom:10, fontSize:11, color:"#64748b"}}>
+          <span>{rows.length} Titel auf der Watchlist</span>
+          <button onClick={() => RSWatchlist.download()}
+            title="watchlist.json herunterladen — für die Exit-Mails als data/watchlist.json ins Repo legen"
+            style={{
+              marginLeft:"auto", cursor:"pointer", borderRadius:6, padding:"4px 10px",
+              background:"transparent", border:"1px solid #334155", color:"#94a3b8",
+              fontSize:11, fontFamily:"monospace",
+            }}>watchlist.json exportieren</button>
+        </div>
+      )}
+
+      {rows.length === 0 && (
+        <div style={{
+          padding:"18px 14px", marginBottom:12, borderRadius:10,
+          background:"#0f172a", border:"1px dashed #334155",
+          fontSize:12, color:"#64748b", lineHeight:1.6,
+        }}>
+          Die Watchlist ist leer. Titel über die Suche oben aufnehmen — oder in den
+          Index-Tabellen rechts auf <strong style={{color:"#4ade80"}}>+</strong> klicken.
+        </div>
+      )}
+
       {/* RS-Tabelle */}
       {/* Spalten: # | Ticker | Score | W D 4H (3 Punkte-Spalten eng) | 5T 10T 20T 50T 6M */}
       <div style={{background:"#0f172a",borderRadius:10,border:"1px solid #1e293b",marginBottom:12,overflowX:"auto"}}>

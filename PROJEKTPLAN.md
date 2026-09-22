@@ -213,8 +213,10 @@ Der 4H-Chart ist als systematische Validierungsschicht implementiert — verhind
 ### Phase 1.5 — Launch-Vorbereitung (Monat 2–3)
 
 **Entwicklung**
-- [ ] Watchlist-Feature (Markierung + DB-Tabelle)
-- [ ] Wöchentliche personalisierte Watchlist-E-Mail
+- [x] Watchlist-Feature (Markierung in den Index-Tabellen + eigene Seite `watchlist.html`
+      mit Suche; Zustand im localStorage, Export als `data/watchlist.json` — keine DB,
+      da das Frontend statisch ist)
+- [ ] Watchlist-E-Mails (Breakout mit SL/Invest + Exit-Meldung, gefiltert auf die Watchlist)
 - [ ] Earnings-Kalender in Watchlist-E-Mail integrieren
 - [ ] Landing Page EN + i18n Frontend
 - [ ] Performance-Kennzahlen Section (nach Rechtscheck freischalten)
