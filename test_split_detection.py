@@ -10,7 +10,7 @@ Kursbewegung, die nicht als Split behandelt werden darf.
 
 import unittest
 
-from repair_backtest_splits import find_jumps, is_genuine_move
+from repair_backtest_splits import find_jumps, inspect_file, is_genuine_move
 from update_backtest_daily import scale_drift
 
 
@@ -74,6 +74,33 @@ class TestJumpKlassifizierung(unittest.TestCase):
     def test_ohne_referenz_nicht_entscheidbar(self):
         jump = {"date": "2023-07-12", "prev_date": "2023-07-11", "ratio": 2.164}
         self.assertIsNone(is_genuine_move(jump, {}))
+
+
+class TestBestaetigteBewegungen(unittest.TestCase):
+    """Ein Sprung, den ein Neuladen bestätigt hat, wird nicht erneut angefasst —
+    sonst lüde der nächtliche Lauf RXRX und SRPT endlos neu."""
+
+    def setUp(self):
+        import json, tempfile, os
+        self.dir = tempfile.mkdtemp()
+        self.path = os.path.join(self.dir, "backtest_rxrx.json")
+        rows = [bar("2023-07-10", 6.70), bar("2023-07-11", 6.78),
+                bar("2023-07-12", 12.08, open_=14.67)]
+        with open(self.path, "w") as f:
+            json.dump({"ticker": "RXRX", "ohlcv_d": rows}, f)
+
+    def test_unbestaetigt_wird_gemeldet(self):
+        finding = inspect_file(self.path, {}, {}, {"RXRX"})
+        self.assertIsNotNone(finding)
+        self.assertEqual(len(finding["unverifiable"]), 1)
+
+    def test_bestaetigter_sprung_wird_uebersprungen(self):
+        finding = inspect_file(self.path, {}, {"RXRX": ["2023-07-12"]}, {"RXRX"})
+        self.assertIsNone(finding)
+
+    def test_verwaiste_datei_wird_nicht_angefasst(self):
+        # Ticker steht in keiner RS-Datei mehr (z. B. EXAS)
+        self.assertIsNone(inspect_file(self.path, {}, {}, set()))
 
 
 if __name__ == "__main__":

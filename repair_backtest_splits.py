@@ -30,6 +30,7 @@ _REPO = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.join(_REPO, "data")
 
 RS_FILES = ["rs_full.json", "rs_sp500.json", "rs_dax.json", "rs_smallcap.json"]
+STATE_FILE = os.path.join(DATA_DIR, "split_check_state.json")
 JUMP_LOW, JUMP_HIGH = 0.55, 1.8   # Verdachtsschwelle für einen Split
 GENUINE_TOL = 0.10                # Referenz zeigt denselben Sprung (±10 %) → echt
 SERIES_KEYS = ["ohlcv_d", "ohlcv_w", "ohlcv_4h"]
@@ -51,6 +52,32 @@ def load_reference():
                     {r["d"]: {"o": r["o"], "c": r["c"]} for r in rows}
                 )
     return ref
+
+
+def load_state():
+    """Sprünge, die ein Neuladen bereits als echte Kursbewegung bestätigt hat.
+
+    Ohne diesen Merker würde der nächtliche Lauf Ticker wie RXRX (+116 % am
+    12.07.2023) oder SRPT (−46 % am 31.10.2023) endlos neu laden: Die frisch
+    geladene, split-bereinigte Reihe zeigt den Sprung ja weiterhin.
+    """
+    try:
+        with open(STATE_FILE) as f:
+            return json.load(f).get("verified_genuine", {})
+    except (OSError, ValueError):
+        return {}
+
+
+def save_state(verified):
+    with open(STATE_FILE, "w") as f:
+        json.dump({"updated_at": datetime.now().strftime("%Y-%m-%d %H:%M"),
+                   "verified_genuine": verified}, f, indent=1, ensure_ascii=False)
+
+
+def rs_universe(reference):
+    """Ticker, die in mindestens einer RS-Datei stehen. Verwaiste Backtest-Dateien
+    (z. B. EXAS) werden von der Platform nicht mehr simuliert und nicht angefasst."""
+    return set(reference.keys())
 
 
 def find_jumps(rows):
@@ -77,7 +104,7 @@ def is_genuine_move(jump, ref_prices):
     return abs(ref_ratio - jump["ratio"]) <= GENUINE_TOL * max(1.0, jump["ratio"])
 
 
-def inspect_file(path, reference):
+def inspect_file(path, reference, verified, universe):
     """Klassifiziert auf Ticker-Ebene anhand der TAGESREIHE — nur sie lässt sich
     Kerze für Kerze gegen die Referenz prüfen. Ein Split zeigt sich ohnehin in
     allen drei Reihen; Weekly und 4H werden nur nachrichtlich mitgeführt, weil
@@ -88,10 +115,17 @@ def inspect_file(path, reference):
     if not ticker:
         return None
 
+    if ticker not in universe:
+        return None      # verwaiste Datei, wird nirgends mehr simuliert
+
     ref_prices = reference.get(ticker, {})
+    known_genuine = verified.get(ticker, [])
     broken, genuine, unverifiable = [], [], []
     for jump in find_jumps(data.get("ohlcv_d") or []):
         label = f"{jump['date']} (Faktor {jump['ratio']:.3f})"
+        if jump["date"] in known_genuine:
+            genuine.append(label + " — durch Neuladen bestätigt")
+            continue
         verdict = is_genuine_move(jump, ref_prices)
         if verdict is True:
             genuine.append(label)
@@ -153,15 +187,29 @@ def refetch(ticker, path):
     return f"neu geladen {ticker}: W={len(data['ohlcv_w'])} D={len(data['ohlcv_d'])} 4H=0 (wird nachgezogen)"
 
 
+def confirm_after_refetch(path, verified, ticker):
+    """Zeigt die frisch geladene Reihe denselben Sprung noch, war es keine
+    unbereinigte Abspaltung, sondern eine echte Kursbewegung. Das wird gemerkt,
+    damit der nächtliche Lauf den Ticker nicht endlos neu lädt."""
+    with open(path) as f:
+        data = json.load(f)
+    dates = [j["date"] for j in find_jumps(data.get("ohlcv_d") or [])]
+    if dates:
+        verified[ticker] = sorted(set(verified.get(ticker, [])) | set(dates))
+    return dates
+
+
 def main():
     do_refetch = "--refetch" in sys.argv
     reference = load_reference()
+    verified = load_state()
+    universe = rs_universe(reference)
     print(f"Referenzkurse für {len(reference)} Ticker geladen.\n")
 
     affected = []
     for path in sorted(glob.glob(os.path.join(DATA_DIR, "backtest_*.json"))):
         try:
-            finding = inspect_file(path, reference)
+            finding = inspect_file(path, reference, verified, universe)
         except Exception as exc:
             print(f"  FEHLER {os.path.basename(path)}: {exc}")
             continue
@@ -189,8 +237,14 @@ def main():
     if not do_refetch:
         print("Mit --refetch neu laden (benötigt Netzzugang zu Yahoo Finance).")
         return
+
     for f in needs_fix:
         print("  " + refetch(f["ticker"], f["path"]))
+        still = confirm_after_refetch(f["path"], verified, f["ticker"])
+        if still:
+            print(f"    Sprung bleibt nach dem Neuladen ({', '.join(still)}) "
+                  f"→ echte Kursbewegung, wird künftig übersprungen.")
+    save_state(verified)
 
 
 if __name__ == "__main__":
