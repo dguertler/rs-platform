@@ -282,7 +282,7 @@ function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h) {
 // ── Trade-Simulation ──────────────────────────────────────────────────────────────
 function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
   const result = [];
-  let inTrade = false, entry = null;
+  let inTrade = false, entry = null, lastCheckedDay = null;
 
   for (let i = 1; i < weekRows.length; i++) {
     const prev = weekRows[i - 1], curr = weekRows[i];
@@ -360,30 +360,35 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
         entry = { signalDate: curr.week.d, weeklyDate: curr.week.d, entryDate, trigger, entryPrice, stopPrice, shares, invested: shares * entryPrice, riskAmount: shares * riskPerShare, entryWeekIdx: i };
       }
     } else {
-      if (curr.pD === 0) {
-        const searchFrom = prev.week.d.slice(0, 10);
-        const searchDays = curr.dHistory.filter(d => d.d >= searchFrom);
-        const prevSLs    = prev.structDFull?.swingLows ?? [];
-        const lastSL     = prevSLs.length > 0 ? prevSLs[prevSLs.length - 1] : null;
-        let sigDay = null;
-        for (const day of searchDays) {
-          if (lastSL != null && day.c < lastSL.price) { sigDay = day; break; }
+      // Ausstieg wird TÄGLICH geprüft, jeder Tag nur einmal und nur mit Daten,
+      // die an diesem Tag schon vorlagen. Signal = Tagesschluss, Ausführung =
+      // Eröffnung des Folgetages. (Die frühere Wochenprüfung hat rückwirkend
+      // einen Tag der Vorwoche als Ausstieg gebucht — im Median 6 Tage vor dem
+      // Zeitpunkt, an dem das Signal überhaupt erkennbar war.)
+      for (let k = 0; k < curr.dHistory.length; k++) {
+        const day = curr.dHistory[k];
+        if (day.d < entry.entryDate) continue;
+        if (lastCheckedDay != null && day.d <= lastCheckedDay) continue;
+
+        const structBefore = analyzeStructure(curr.dHistory.slice(0, k));
+        let exitSignal = false;
+        if (structBefore && !structBefore.broken) {
+          const swingLows = structBefore.swingLows ?? [];
+          const lastSL    = swingLows.length > 0 ? swingLows[swingLows.length - 1] : null;
+          if (lastSL != null && day.c < lastSL.price) exitSignal = true;
         }
-        const hardStop = entry.stopPrice != null && curr.week.c < entry.stopPrice;
-        if (sigDay) {
-          const nextDay = ohlcv_d.find(d => d.d > sigDay.d);
-          const exitPrice = nextDay ? nextDay.o : sigDay.c;
-          const exitDate  = nextDay ? nextDay.d : sigDay.d;
-          const pnl = (exitPrice - entry.entryPrice) * entry.shares;
-          result.push({ ...entry, exitDate, exitPrice, pnl, pnlPct: (exitPrice / entry.entryPrice - 1) * 100, isWin: pnl > 0, holdingWeeks: i - entry.entryWeekIdx, isOpen: false });
-          inTrade = false; entry = null;
-        } else if (hardStop) {
-          const pnl = (curr.week.c - entry.entryPrice) * entry.shares;
-          result.push({ ...entry, exitDate: curr.week.d, exitPrice: curr.week.c, pnl, pnlPct: (curr.week.c / entry.entryPrice - 1) * 100, isWin: pnl > 0, holdingWeeks: i - entry.entryWeekIdx, isOpen: false });
-          inTrade = false; entry = null;
-        }
-        // Kein sigDay und kein hardStop → Trade läuft weiter (pD-Signal war Artefakt)
+        if (!exitSignal && entry.stopPrice != null && day.c < entry.stopPrice) exitSignal = true;
+        if (!exitSignal) continue;
+
+        const nextDay   = ohlcv_d.find(d => d.d > day.d);
+        const exitPrice = nextDay ? nextDay.o : day.c;
+        const exitDate  = nextDay ? nextDay.d : day.d;
+        const pnl = (exitPrice - entry.entryPrice) * entry.shares;
+        result.push({ ...entry, exitDate, exitPrice, pnl, pnlPct: (exitPrice / entry.entryPrice - 1) * 100, isWin: pnl > 0, holdingWeeks: i - entry.entryWeekIdx, isOpen: false });
+        inTrade = false; entry = null; lastCheckedDay = null;
+        break;
       }
+      if (inTrade) lastCheckedDay = curr.weekEnd;
     }
   }
 
