@@ -143,6 +143,18 @@ function App() {
     return () => window.removeEventListener(RSWatchlist.EVENT, sync);
   }, []);
 
+  // Stand aus dem Repository holen — das ist die Liste, die der Verkaufssignal-Job
+  // liest, und sie ist geräteübergreifend dieselbe.
+  const [sync, setSync] = useState({ state: 'idle', message: '' });
+  const [showToken, setShowToken] = useState(false);
+  const [tokenInput, setTokenInput] = useState(() => RSWatchlist.getToken());
+  useEffect(() => {
+    const onSync = e => setSync(e.detail);
+    window.addEventListener(RSWatchlist.SYNC_EVENT, onSync);
+    RSWatchlist.pull();
+    return () => window.removeEventListener(RSWatchlist.SYNC_EVENT, onSync);
+  }, []);
+
   const [query, setQuery] = useState("");
 
   useEffect(() => {
@@ -405,16 +417,61 @@ function App() {
         )}
       </div>
 
-      {rows.length > 0 && (
-        <div style={{display:"flex", alignItems:"center", gap:8, marginBottom:10, fontSize:11, color:"#64748b"}}>
-          <span>{rows.length} Titel auf der Watchlist</span>
-          <button onClick={() => RSWatchlist.download()}
-            title="watchlist.json herunterladen — für die Exit-Mails als data/watchlist.json ins Repo legen"
-            style={{
-              marginLeft:"auto", cursor:"pointer", borderRadius:6, padding:"4px 10px",
-              background:"transparent", border:"1px solid #334155", color:"#94a3b8",
-              fontSize:11, fontFamily:"monospace",
-            }}>watchlist.json exportieren</button>
+      {/* Speicherstand: Die Liste im Repository ist die, die der nächtliche
+          Verkaufssignal-Job liest. Ohne Token bleibt sie nur auf diesem Gerät. */}
+      <div style={{display:"flex", alignItems:"center", gap:8, marginBottom:10, fontSize:11, color:"#64748b", flexWrap:"wrap"}}>
+        <span>{rows.length} Titel auf der Watchlist</span>
+        <span style={{
+          padding:"2px 8px", borderRadius:10, fontFamily:"monospace",
+          color:   sync.state === 'ok' ? "#4ade80" : sync.state === 'error' ? "#f87171" : "#94a3b8",
+          background: sync.state === 'ok' ? "#0d2818" : sync.state === 'error' ? "#2a0f0f" : "#0f172a",
+          border: `1px solid ${sync.state === 'ok' ? "#166534" : sync.state === 'error' ? "#7f1d1d" : "#1e293b"}`,
+        }}>{sync.message || "…"}</span>
+        <button onClick={() => setShowToken(v => !v)}
+          title="Zugang zum Repository einrichten"
+          style={{marginLeft:"auto", cursor:"pointer", borderRadius:6, padding:"4px 10px",
+            background:"transparent", border:"1px solid #334155", color:"#94a3b8",
+            fontSize:11, fontFamily:"monospace"}}>Zugang</button>
+        <button onClick={() => RSWatchlist.download()}
+          title="watchlist.json herunterladen — Notausgang, wenn kein Token hinterlegt ist"
+          style={{cursor:"pointer", borderRadius:6, padding:"4px 10px",
+            background:"transparent", border:"1px solid #334155", color:"#94a3b8",
+            fontSize:11, fontFamily:"monospace"}}>exportieren</button>
+      </div>
+
+      {showToken && (
+        <div style={{
+          padding:"14px", marginBottom:12, borderRadius:10,
+          background:"#0f172a", border:"1px solid #334155", fontSize:11, color:"#94a3b8", lineHeight:1.7,
+        }}>
+          <div style={{marginBottom:8, color:"#e2e8f0", fontWeight:700, fontSize:12}}>
+            Watchlist direkt ins Repository schreiben
+          </div>
+          <div style={{marginBottom:10}}>
+            Auf GitHub unter <em>Settings → Developer settings → Personal access tokens →
+            Fine-grained tokens</em> einen Token anlegen: nur für das Repository
+            <strong style={{color:"#e2e8f0"}}> dguertler/rs-platform</strong>, Berechtigung
+            <strong style={{color:"#e2e8f0"}}> Contents: Read and write</strong>, mit Ablaufdatum.
+            Der Token wird nur in diesem Browser gespeichert und steht in keiner Datei der Seite.
+            Wer Zugriff auf dieses Gerät hat, kann ihn auslesen — mehr als Dateien in diesem
+            einen Repository ändern lässt sich damit aber nicht.
+          </div>
+          <div style={{display:"flex", gap:8, flexWrap:"wrap"}}>
+            <input type="password" value={tokenInput} onChange={e => setTokenInput(e.target.value)}
+              placeholder="github_pat_…" aria-label="GitHub-Token"
+              style={{flex:"1 1 260px", padding:"6px 10px", borderRadius:6, background:"#060b14",
+                border:"1px solid #1e293b", color:"#e2e8f0", fontFamily:"monospace", fontSize:11}}/>
+            <button onClick={() => { RSWatchlist.setToken(tokenInput); RSWatchlist.push(); }}
+              style={{cursor:"pointer", borderRadius:6, padding:"6px 14px", background:"#14532d",
+                border:"1px solid #4ade80", color:"#4ade80", fontSize:11, fontFamily:"monospace"}}>
+              speichern
+            </button>
+            <button onClick={() => { setTokenInput(""); RSWatchlist.setToken(""); }}
+              style={{cursor:"pointer", borderRadius:6, padding:"6px 14px", background:"transparent",
+                border:"1px solid #334155", color:"#94a3b8", fontSize:11, fontFamily:"monospace"}}>
+              entfernen
+            </button>
+          </div>
         </div>
       )}
 
