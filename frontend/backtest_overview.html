@@ -101,6 +101,8 @@ function OverviewApp() {
   const [filter,        setFilter]        = useState(() => localStorage.getItem('bt_last_filter') || 'QQQ');
   const [top20HistMap,  setTop20HistMap]  = useState({});
   const [useTop20,      setUseTop20]      = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
+  // Voreinstellung AN: Die Seite zeigt damit dieselbe Regel, die die Alerts melden.
+  const [only4H,        setOnly4H]        = useState(() => localStorage.getItem('bt_only_4h') !== 'false');
   const [sortKey,       setSortKey]       = useState('totalPnl');
   const [sortAsc,       setSortAsc]       = useState(false);
   const [search,        setSearch]        = useState('');
@@ -140,11 +142,12 @@ function OverviewApp() {
     });
   }, []);
 
-  useEffect(() => { cache.current = {}; }, [top20HistMap, useTop20]);
+  useEffect(() => { cache.current = {}; }, [top20HistMap, useTop20, only4H]);
 
   useEffect(() => {
     if (!rsMap) return;
-    if (cache.current[filter + (useTop20 ? '1' : '0')]) { setStocks(cache.current[filter + (useTop20 ? '1' : '0')]); return; }
+    const cacheKey = `${filter}|${useTop20 ? 1 : 0}|${only4H ? 1 : 0}`;
+    if (cache.current[cacheKey]) { setStocks(cache.current[cacheKey]); return; }
 
     const sources = filter === 'ALL'
       ? Object.values(rsMap).flat()
@@ -177,17 +180,17 @@ function OverviewApp() {
         if (res.status !== 'fulfilled') continue;
         const s      = res.value;
         const weekRows = buildWeekRows(s.ohlcv_w, s.ohlcv_d, s.ohlcv_4h);
-        const trades = simulateTrades(weekRows, s.ohlcv_d, s.ticker, top20HistMap[s.index] ?? null, useTop20);
+        const trades = simulateTrades(weekRows, s.ohlcv_d, s.ticker, top20HistMap[s.index] ?? null, useTop20, only4H);
         if (trades.length === 0) continue;
         const kpis      = calcKpis(trades);
         const openTrade = trades.find(t => t.isOpen) ?? null;
         all.push({ ticker: s.ticker, index: s.index, score: s.score, kpis, trades, hasOpen: !!openTrade, openTrade, hasFull: s.hasFull });
       }
-      cache.current[filter + (useTop20 ? '1' : '0')] = all;
+      cache.current[cacheKey] = all;
       setStocks(all);
       setLoadingTrades(false);
     });
-  }, [rsMap, filter, useTop20, top20HistMap]);
+  }, [rsMap, filter, useTop20, only4H, top20HistMap]);
 
   const filtered = useMemo(() => {
     let s = stocks;
@@ -270,6 +273,13 @@ function OverviewApp() {
             borderRadius: 6, padding: '5px 14px', color: useTop20 ? '#4ade80' : '#475569',
             fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
           TOP 20 {useTop20 ? 'AN' : 'AUS'}
+        </button>
+        <button onClick={() => { const v = !only4H; setOnly4H(v); localStorage.setItem('bt_only_4h', v); }}
+          style={{ marginLeft: 8, background: only4H ? '#14532d' : 'transparent',
+            border: `1px solid ${only4H ? '#4ade80' : '#334155'}`,
+            borderRadius: 6, padding: '5px 14px', color: only4H ? '#4ade80' : '#475569',
+            fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+          NUR 4H {only4H ? 'AN' : 'AUS'}
         </button>
         <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Suche Ticker…"
           style={{ marginLeft: 'auto', background: '#1e293b', border: '1px solid #334155', borderRadius: 6,

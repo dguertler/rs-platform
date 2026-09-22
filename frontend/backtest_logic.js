@@ -280,7 +280,11 @@ function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h) {
 }
 
 // ── Trade-Simulation ──────────────────────────────────────────────────────────────
-function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
+// only4H: nur Einstiege werten, bei denen die 4H-Ebene den dritten Punkt liefert.
+// Über beide Testfenster schlägt dieser Auslöser die Tages- und Wochen-Variante
+// klar (höherer Profitfaktor, etwa halber Drawdown-Beitrag), deshalb melden auch
+// die Breakout-Mails nur noch diesen Fall.
+function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, only4H = false) {
   const result = [];
   let inTrade = false, entry = null, lastCheckedDay = null;
 
@@ -347,6 +351,7 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
         }
         const stopPrice = recentSwingLow != null ? recentSwingLow * 0.99 : null;
 
+        if (only4H && trigger !== '4H') continue;
         if (!entryPrice || !stopPrice || entryPrice <= stopPrice) continue;
         if (useTop20 && top20Hist) {
           const dayList = top20Hist[entryDate] ?? top20Hist[curr.week.d.slice(0,10)];

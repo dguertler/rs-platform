@@ -84,7 +84,9 @@ function collectTrades(index, startDate) {
     if (!series) continue;
     if (!series.hasFullHistory) withoutFullHistory++;
     const weekRows = buildWeekRows(series.ohlcvW, series.ohlcvD, series.ohlcv4h);
-    const simulated = simulateTrades(weekRows, series.ohlcvD, entry.ticker, top20Hist, true);
+    // only4H: Seit 09/2026 melden die Breakout-Mails nur noch 4H-Auslöser —
+    // das Tracking misst dieselbe Regel, sonst driften Auswertung und Praxis auseinander.
+    const simulated = simulateTrades(weekRows, series.ohlcvD, entry.ticker, top20Hist, true, true);
     for (const t of simulated) {
       if (t.entryDate >= startDate) trades.push({ ...t, ticker: entry.ticker, index: index.key });
     }
@@ -178,7 +180,7 @@ function main() {
     generated: new Date().toISOString().slice(0, 16).replace('T', ' '),
     capital: CAPITAL,
     maxRisk: MAX_RISK,
-    note: 'Backtest-Engine frontend/backtest_logic.js, TOP 20 = AN, Trades ab erstem Live-Signal des Index.',
+    note: 'Backtest-Engine frontend/backtest_logic.js, TOP 20 = AN, nur 4H-Auslöser, Trades ab erstem Live-Signal des Index.',
     indices: {},
   };
   const allTrades = [];
