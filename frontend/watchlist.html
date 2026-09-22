@@ -4,8 +4,8 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RS · Watchlist</title>
-  <script src="api.js"></script>
-  <script src="watchlist.js"></script>
+  <script src="api.js?v=20260922"></script>
+  <script src="watchlist.js?v=20260922"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
@@ -53,7 +53,7 @@
 <script>
   window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
-<script type="text/babel" src="rs_charts.js"></script>
+<script type="text/babel" src="rs_charts.js?v=20260922"></script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
 
@@ -145,7 +145,7 @@ function App() {
 
   // Stand aus dem Repository holen — das ist die Liste, die der Verkaufssignal-Job
   // liest, und sie ist geräteübergreifend dieselbe.
-  const [sync, setSync] = useState({ state: 'idle', message: '' });
+  const [sync, setSync] = useState({ state: 'idle', message: '', pending: RSWatchlist.pending() });
   const [showToken, setShowToken] = useState(false);
   const [tokenInput, setTokenInput] = useState(() => RSWatchlist.getToken());
   useEffect(() => {
@@ -438,6 +438,24 @@ function App() {
             background:"transparent", border:"1px solid #334155", color:"#94a3b8",
             fontSize:11, fontFamily:"monospace"}}>exportieren</button>
       </div>
+
+      {/* Offene Änderung: Lokal steht etwas, das der nächtliche Verkaufssignal-Job
+          noch nicht sieht. Ohne diesen Hinweis stünde nur ein grüner Haken da. */}
+      {sync.pending && (
+        <div style={{
+          padding:"12px 14px", marginBottom:12, borderRadius:10,
+          background:"#2a1a05", border:"1px solid #a16207",
+          fontSize:12, color:"#fbbf24", lineHeight:1.6,
+        }}>
+          <strong>Noch nicht im Repository gespeichert.</strong> Die Liste unten gilt
+          nur auf diesem Gerät — der nächtliche Verkaufssignal-Job liest weiter den
+          alten Stand. {sync.state === 'error' ? sync.message.replace(/^nicht gespeichert: /, '') : 'Wird beim nächsten Aufruf erneut versucht.'}
+          <button onClick={() => RSWatchlist.push()}
+            style={{marginLeft:10, cursor:"pointer", borderRadius:6, padding:"3px 10px",
+              background:"transparent", border:"1px solid #a16207", color:"#fbbf24",
+              fontSize:11, fontFamily:"monospace"}}>erneut versuchen</button>
+        </div>
+      )}
 
       {showToken && (
         <div style={{

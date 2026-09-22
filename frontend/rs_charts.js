@@ -961,28 +961,42 @@ function BreachDots({ structW, structD, struct4H, changedW, changedD, changed4H 
 // damit alle Knöpfe gleichzeitig umspringen.
 function WatchButton({ ticker }) {
   const [on, setOn] = React.useState(() => window.RSWatchlist.has(ticker));
+  // Solange der Schreibvorgang nicht bestätigt ist, darf der Haken nicht grün
+  // aussehen: sonst signalisiert er einen Stand, den der nächtliche
+  // Verkaufssignal-Job gar nicht kennt.
+  const [pending, setPending] = React.useState(() => window.RSWatchlist.pending());
 
   React.useEffect(() => {
-    const sync = () => setOn(window.RSWatchlist.has(ticker));
+    const sync = () => { setOn(window.RSWatchlist.has(ticker)); setPending(window.RSWatchlist.pending()); };
+    const syncState = e => setPending(e.detail.pending);
     window.addEventListener(window.RSWatchlist.EVENT, sync);
-    return () => window.removeEventListener(window.RSWatchlist.EVENT, sync);
+    window.addEventListener(window.RSWatchlist.SYNC_EVENT, syncState);
+    return () => {
+      window.removeEventListener(window.RSWatchlist.EVENT, sync);
+      window.removeEventListener(window.RSWatchlist.SYNC_EVENT, syncState);
+    };
   }, [ticker]);
+
+  const open = on && pending;
+  const label = on
+    ? `${ticker} von der Watchlist entfernen`
+    : `${ticker} zur Watchlist hinzufügen`;
 
   return (
     <div style={{display:"flex", justifyContent:"center"}}>
       <button
         onClick={e => { e.stopPropagation(); window.RSWatchlist.toggle(ticker); }}
-        title={on ? `${ticker} von der Watchlist entfernen` : `${ticker} zur Watchlist hinzufügen`}
-        aria-label={on ? `${ticker} von der Watchlist entfernen` : `${ticker} zur Watchlist hinzufügen`}
+        title={open ? `${ticker} aufgenommen — noch nicht im Repository gespeichert` : label}
+        aria-label={label}
         aria-pressed={on}
         style={{
           width:18, height:18, lineHeight:"16px", padding:0, cursor:"pointer",
           borderRadius:4, fontSize:12, fontWeight:700, fontFamily:"monospace",
-          background: on ? "#14532d" : "transparent",
-          border: `1px solid ${on ? "#4ade80" : "#334155"}`,
-          color: on ? "#4ade80" : "#475569",
+          background: on ? (open ? "#2a1a05" : "#14532d") : "transparent",
+          border: `1px solid ${on ? (open ? "#a16207" : "#4ade80") : "#334155"}`,
+          color: on ? (open ? "#fbbf24" : "#4ade80") : "#475569",
         }}
-      >{on ? "✓" : "+"}</button>
+      >{on ? (open ? "!" : "✓") : "+"}</button>
     </div>
   );
 }

@@ -54,14 +54,22 @@
       // die Oberfläche soll trotzdem weiterlaufen.
     }
     global.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: unique }));
-    if (!(opts && opts.silent)) { setPending(true); doPush(); }
+    if (!(opts && opts.silent)) {
+      // Ohne Token ist "nur auf diesem Gerät" der gewollte Betrieb (Notausgang
+      // "exportieren") — dann ist nichts offen. Mit Token ist die Änderung so
+      // lange offen, bis GitHub den Commit bestätigt hat.
+      if (api.getToken()) setPending(true);
+      doPush();
+    }
     return unique;
   }
 
   // ── Abgleich mit dem Repository ────────────────────────────────────────────
 
   function status(state, message) {
-    global.dispatchEvent(new CustomEvent(SYNC_EVENT, { detail: { state: state, message: message } }));
+    global.dispatchEvent(new CustomEvent(SYNC_EVENT, {
+      detail: { state: state, message: message, pending: isPending() },
+    }));
   }
 
   function toBase64(text) {
@@ -107,6 +115,25 @@
 
   var pushing = false;
 
+  /** Aus der GitHub-Antwort eine Meldung machen, die sagt, was zu tun ist.
+   *  "HTTP 403 Resource not accessible by personal access token" allein hilft
+   *  niemandem weiter — der Token ist da, nur darf er nicht schreiben. */
+  function describeError(httpStatus, body) {
+    if (httpStatus === 403 || httpStatus === 404) {
+      return 'Token darf nicht schreiben. Auf GitHub beim Token unter '
+           + '"Repository access" dguertler/rs-platform auswählen und unter '
+           + '"Permissions → Repository permissions" Contents auf '
+           + '"Read and write" stellen (Read allein reicht nicht).';
+    }
+    if (httpStatus === 401) {
+      return 'Token ungültig oder abgelaufen — bitte neu anlegen und hinterlegen.';
+    }
+    if (httpStatus === 409 || httpStatus === 422) {
+      return 'Stand im Repository hat sich zwischenzeitlich geändert — wird beim nächsten Aufruf erneut versucht.';
+    }
+    return 'HTTP ' + httpStatus + ' ' + String(body || '').slice(0, 120);
+  }
+
   /** Offene Änderung: gesetzt beim Klick, gelöscht erst nach bestätigtem Schreiben.
    *  Liegt im localStorage, damit sie einen Seitenwechsel übersteht — sonst ginge
    *  ein Klick verloren, auf den sofort ein Navigieren folgt. */
@@ -142,7 +169,7 @@
             branch: REPO.branch,
           }),
         }).then(function (r) {
-          if (!r.ok) return r.text().then(function (t) { throw new Error('HTTP ' + r.status + ' ' + t.slice(0, 120)); });
+          if (!r.ok) return r.text().then(function (t) { throw new Error(describeError(r.status, t)); });
           return r.json();
         });
       })
@@ -179,6 +206,11 @@
     },
 
     replaceAll: function (list, opts) { return write(list || [], opts); },
+
+    /** True, solange eine Änderung noch nicht bestätigt im Repository steht.
+     *  Die Seiten zeigen das an — sonst stünde lokal ein grüner Haken, während
+     *  der nächtliche Verkaufssignal-Job weiter die alte Liste liest. */
+    pending: function () { return isPending(); },
 
     getToken: function () {
       try { return global.localStorage.getItem(TOKEN_KEY) || ''; } catch (e) { return ''; }
