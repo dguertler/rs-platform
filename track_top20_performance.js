@@ -119,6 +119,12 @@ function kpis(trades) {
   const totalPnl = sum(trades, (t) => t.pnl);
   const invested = sum(trades, (t) => t.invested);
 
+  // Profitfaktor inklusive offener Positionen zum aktuellen Stand — nur über
+  // geschlossene Trades gerechnet zeigt er in jungen Zeiträumen fast nur die
+  // schnell geschlossenen Verlierer, während die Gewinner noch laufen.
+  const pfProfit = sum(trades.filter((t) => t.pnl > 0), (t) => t.pnl);
+  const pfLoss = sum(trades.filter((t) => t.pnl <= 0), (t) => t.pnl);
+
   let equity = CAPITAL;
   let peak = CAPITAL;
   let maxDD = 0;
@@ -157,7 +163,8 @@ function kpis(trades) {
     avgWinPct: wins.length ? sum(wins, (t) => t.pnlPct) / wins.length : 0,
     avgLoss: losses.length ? grossLoss / losses.length : 0,
     avgLossPct: losses.length ? sum(losses, (t) => t.pnlPct) / losses.length : 0,
-    profitFactor: grossLoss < 0 ? Math.abs(grossProfit / grossLoss) : null,
+    profitFactor: pfLoss < 0 ? Math.abs(pfProfit / pfLoss) : null,
+    profitFactorClosed: grossLoss < 0 ? Math.abs(grossProfit / grossLoss) : null,
     avgHoldingWeeks: sum(trades, (t) => t.holdingWeeks) / trades.length,
     maxDD,
     best: byPnl.slice(0, 5).map(slim),

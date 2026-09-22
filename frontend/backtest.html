@@ -4,11 +4,11 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RS · Backtest</title>
-  <script src="/api.js"></script>
+  <script src="api.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="/backtest_logic.js"></script>
+  <script src="backtest_logic.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
@@ -920,30 +920,9 @@ function BacktestApp() {
     return simulateTrades(weekRows, data.ohlcv_d, ticker, top20Hist, useTop20);
   }, [weekRows, data, top20Hist, useTop20]);
 
-  const kpis = useMemo(() => {
-    const closed = trades.filter(t => !t.isOpen);
-    if (closed.length === 0) return null;
-    const wins   = closed.filter(t =>  t.isWin);
-    const losses = closed.filter(t => !t.isWin);
-    const grossWin  = wins.reduce((s, t) => s + t.pnl, 0);
-    const grossLoss = Math.abs(losses.reduce((s, t) => s + t.pnl, 0));
-    let equity = CAPITAL, peak = CAPITAL, maxDD = 0;
-    const equityCurve = [{ equity: CAPITAL }];
-    for (const t of closed) {
-      equity += t.pnl; peak = Math.max(peak, equity);
-      maxDD = Math.max(maxDD, (peak - equity) / peak * 100);
-      equityCurve.push({ date: t.exitDate, equity });
-    }
-    const gesamtGewinn = trades.reduce((s, t) => s + t.pnl, 0);
-    return {
-      nTrades: closed.length, nWins: wins.length, nLosses: losses.length,
-      winrate: wins.length / closed.length * 100,
-      profitFactor: grossLoss > 0 ? grossWin / grossLoss : null,
-      maxDD, avgWin: wins.length > 0 ? grossWin / wins.length : 0,
-      avgLoss: losses.length > 0 ? grossLoss / losses.length : 0,
-      gesamtGewinn, equityCurve,
-    };
-  }, [trades]);
+  // Eine einzige KPI-Definition für Detail- und Übersichtsseite (backtest_logic.js),
+  // damit insbesondere der Profitfaktor überall gleich gerechnet wird.
+  const kpis = useMemo(() => calcKpis(trades), [trades]);
 
   const tradeMarkers = useMemo(() =>
     trades.flatMap(t => [

@@ -420,6 +420,13 @@ function calcKpis(trades) {
   const grossProfit = wins.reduce((s, t)   => s + t.pnl, 0);
   const grossLoss   = losses.reduce((s, t) => s + t.pnl, 0);
   const openPnl     = openTrade?.pnl ?? 0;
+
+  // Profitfaktor inklusive offener Positionen zum aktuellen Stand. Nur über
+  // geschlossene Trades gerechnet verzerrt er systematisch: Die Exit-Regel hält
+  // Gewinner deutlich länger als Verlierer, in einem jungen Zeitraum sind die
+  // Verluste daher schon abgerechnet, während die Gewinner noch laufen.
+  const pfWins   = trades.filter(t => t.pnl >  0).reduce((s, t) => s + t.pnl, 0);
+  const pfLosses = trades.filter(t => t.pnl <= 0).reduce((s, t) => s + t.pnl, 0);
   return {
     nTrades:      closed.length,
     nLosses:      losses.length,
@@ -430,7 +437,9 @@ function calcKpis(trades) {
     maxDD,
     grossProfit,
     grossLoss,
-    profitFactor: grossLoss < 0 ? Math.abs(grossProfit / grossLoss) : null,
+    grossProfitAll: pfWins,
+    grossLossAll:   pfLosses,
+    profitFactor: pfLosses < 0 ? Math.abs(pfWins / pfLosses) : null,
     avgWin:       wins.length   > 0 ? grossProfit / wins.length                             : 0,
     avgWinPct:    wins.length   > 0 ? wins.reduce((s,t) => s + t.pnlPct, 0) / wins.length  : 0,
     avgLoss:      losses.length > 0 ? Math.abs(grossLoss) / losses.length                  : 0,

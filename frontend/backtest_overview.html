@@ -4,11 +4,11 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RS · Backtest Übersicht</title>
-  <script src="/api.js"></script>
+  <script src="api.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="/backtest_logic.js"></script>
+  <script src="backtest_logic.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
@@ -209,8 +209,12 @@ function OverviewApp() {
     const withKpis = filtered.filter(x => x.kpis);
     const openOnly = filtered.filter(x => !x.kpis && x.openTrade);
     if (!withKpis.length && !openOnly.length) return null;
-    const gp = withKpis.reduce((s, x) => s + (x.kpis.grossProfit ?? 0), 0);
-    const gl = withKpis.reduce((s, x) => s + (x.kpis.grossLoss   ?? 0), 0);
+    // Profitfaktor inkl. offener Positionen — auch die Ticker, die NUR eine
+    // offene Position haben (dort liefert calcKpis mangels Abschluss kein KPI).
+    const gp = withKpis.reduce((s, x) => s + (x.kpis.grossProfitAll ?? 0), 0)
+             + openOnly.reduce((s, x) => s + Math.max(x.openTrade.pnl, 0), 0);
+    const gl = withKpis.reduce((s, x) => s + (x.kpis.grossLossAll   ?? 0), 0)
+             + openOnly.reduce((s, x) => s + Math.min(x.openTrade.pnl, 0), 0);
     return {
       total:        withKpis.length + openOnly.length,
       trades:       withKpis.reduce((s, x) => s + x.kpis.nTrades + (x.openTrade ? 1 : 0), 0) + openOnly.length,
