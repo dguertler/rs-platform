@@ -17,6 +17,7 @@
 
   var STORAGE_KEY = 'rs_watchlist';
   var TOKEN_KEY = 'rs_watchlist_token';
+  var PENDING_KEY = 'rs_watchlist_pending';
   var EVENT_NAME = 'rs-watchlist-changed';
   var SYNC_EVENT = 'rs-watchlist-sync';
 
@@ -53,7 +54,7 @@
       // die Oberfläche soll trotzdem weiterlaufen.
     }
     global.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: unique }));
-    if (!(opts && opts.silent)) api.push();
+    if (!(opts && opts.silent)) { setPending(true); doPush(); }
     return unique;
   }
 
@@ -104,10 +105,21 @@
       });
   }
 
-  var pushTimer = null;
   var pushing = false;
-  var dirty = false;          // lokale Änderung, die noch nicht im Repo steht
-  var pulledBeforeChange = false;
+
+  /** Offene Änderung: gesetzt beim Klick, gelöscht erst nach bestätigtem Schreiben.
+   *  Liegt im localStorage, damit sie einen Seitenwechsel übersteht — sonst ginge
+   *  ein Klick verloren, auf den sofort ein Navigieren folgt. */
+  function isPending() {
+    try { return global.localStorage.getItem(PENDING_KEY) === '1'; } catch (e) { return false; }
+  }
+
+  function setPending(on) {
+    try {
+      if (on) global.localStorage.setItem(PENDING_KEY, '1');
+      else global.localStorage.removeItem(PENDING_KEY);
+    } catch (e) { /* privater Modus */ }
+  }
 
   function doPush() {
     var token = api.getToken();
@@ -119,11 +131,6 @@
     var list = read();
     return fetchRemote()
       .then(function (remote) {
-        // Wurde geklickt, bevor der Stand aus dem Repository da war, ist die
-        // lokale Liste womöglich veraltet — dann vereinigen statt ersetzen,
-        // damit Einträge anderer Geräte nicht verloren gehen. Eine Löschung
-        // greift in diesem Fall erst beim nächsten Klick.
-        if (!pulledBeforeChange) list = normalize(remote.tickers.concat(list));
         if (remote.tickers.join(',') === list.join(',')) return null;   // nichts zu tun
         return fetch(API, {
           method: 'PUT',
@@ -140,8 +147,7 @@
         });
       })
       .then(function () {
-        if (list.join(',') !== read().join(',')) write(list, { silent: true });
-        dirty = false;
+        setPending(false);
         status('ok', 'im Repository gespeichert');
         return true;
       })
@@ -161,10 +167,9 @@
       return read().indexOf(String(ticker).toUpperCase().trim()) !== -1;
     },
 
-    add: function (ticker) { dirty = true; return write(read().concat([ticker])); },
+    add: function (ticker) { return write(read().concat([ticker])); },
 
     remove: function (ticker) {
-      dirty = true;
       var t = String(ticker).toUpperCase().trim();
       return write(read().filter(function (x) { return x !== t; }));
     },
@@ -187,20 +192,22 @@
       status(token ? 'idle' : 'local', token ? 'Token hinterlegt' : 'nur auf diesem Gerät');
     },
 
-    /** Schreibt den lokalen Stand ins Repository (gebündelt, damit schnelle
-     *  Klickfolgen nur einen Commit erzeugen). */
-    push: function () {
-      if (pushTimer) clearTimeout(pushTimer);
-      pushTimer = setTimeout(doPush, 800);
-    },
+    /** Schreibt den lokalen Stand sofort ins Repository. Bewusst ohne
+     *  Verzögerung: Ein verzögerter Schreibvorgang geht verloren, wenn direkt
+     *  nach dem Klick die Seite gewechselt wird. */
+    push: function () { setPending(true); return doPush(); },
 
     /** Holt den Stand aus dem Repository — damit alle Geräte dieselbe Liste
      *  sehen. Das Repository gewinnt, lokale Änderungen sind ja gepusht. */
     pull: function () {
+      if (isPending()) {
+        // Lokal steht etwas, das noch nicht im Repository ist — den Stand von
+        // dort NICHT übernehmen, sondern den offenen Schreibvorgang nachholen.
+        return doPush().then(function () { return read(); });
+      }
       return fetchRemote()
         .then(function (remote) {
-          if (!dirty) {
-            pulledBeforeChange = true;
+          {
             if (remote.tickers.join(',') !== read().join(',')) {
               write(remote.tickers, { silent: true });
             }
@@ -228,8 +235,17 @@
     },
   };
 
+  // Änderungen aus einem anderen Tab kommen nur als natives storage-Event an —
+  // ohne diese Brücke bliebe eine offene Watchlist-Seite auf altem Stand stehen.
+  global.addEventListener('storage', function (e) {
+    if (e.key === STORAGE_KEY) {
+      global.dispatchEvent(new CustomEvent(EVENT_NAME, { detail: read() }));
+    }
+  });
+
   // Jede Seite, die dieses Skript lädt, gleicht einmal mit dem Repository ab —
   // sonst schriebe ein Klick in einer Index-Tabelle gegen einen veralteten Stand.
+  // Steht noch ein Schreibvorgang offen, wird er dabei nachgeholt.
   api.pull();
 
   global.RSWatchlist = api;
