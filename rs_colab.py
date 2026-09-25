@@ -7,6 +7,7 @@ import json
 import math
 from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100, detect_index_changes
+from rs_core import RS_WINDOWS, rank_by_day
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
@@ -46,7 +47,7 @@ for _t in _new_stocks:
     _new_since_map.setdefault(_t, _today)
 
 benchmark = "QQQ"
-rs_windows = {"5T": 5, "10T": 10, "20T": 20, "50T": 50, "6M": 126, "12M": 252}
+rs_windows = RS_WINDOWS
 
 def sanitize_nan(obj):
     if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
@@ -308,38 +309,15 @@ try:
     d_close = raw_daily["Close"] if isinstance(raw_daily.columns, pd.MultiIndex) else raw_daily
     if benchmark not in d_close.columns:
         raise KeyError(f"Benchmark {benchmark} nicht in Tagesdaten")
-    bench_s = d_close[benchmark]
-    avail   = [t for t in all_tickers_list if t in d_close.columns]
     top20_history = {}
     prev_rank_map = {}
-    n = len(d_close)
-    prev_week_i = max(0, n - 6)
-    for i in range(n):
-        date_str = d_close.index[i].strftime("%Y-%m-%d")
-        b_now = bench_s.iloc[i]
-        if pd.isna(b_now) or b_now == 0:
-            continue
-        scores = []
-        for t in avail:
-            s_now = d_close[t].iloc[i]
-            if pd.isna(s_now) or s_now == 0:
-                continue
-            total, cnt = 0, 0
-            for days in rs_windows.values():
-                if i >= days:
-                    s_prev = d_close[t].iloc[i - days]
-                    b_prev = bench_s.iloc[i - days]
-                    if not pd.isna(s_prev) and not pd.isna(b_prev) and s_prev != 0 and b_prev != 0:
-                        total += (s_now / s_prev - 1) * 100 - (b_now / b_prev - 1) * 100
-                        cnt   += 1
-            if cnt > 0:
-                scores.append((t, total))
-        if len(scores) >= 20:
-            scores.sort(key=lambda x: x[1], reverse=True)
-            top20_history[date_str] = [t for t, _ in scores[:20]]
-            if i == prev_week_i:
-                prev_rank_map = {t: r + 1 for r, (t, _) in enumerate(scores)}
-                print(f"  Vorwoche-Ranking: {len(prev_rank_map)} Ticker (Stand: {date_str})")
+    prev_week_i = max(0, len(d_close) - 6)
+    # Formel liegt in rs_core.py — dieselbe nutzt der historische Backtest
+    for i, date_str, scores in rank_by_day(d_close, benchmark, all_tickers_list, windows=rs_windows):
+        top20_history[date_str] = [t for t, _ in scores[:20]]
+        if i == prev_week_i:
+            prev_rank_map = {t: r + 1 for r, (t, _) in enumerate(scores)}
+            print(f"  Vorwoche-Ranking: {len(prev_rank_map)} Ticker (Stand: {date_str})")
     print(f"  {len(top20_history)} Tage berechnet")
 except Exception as e:
     top20_history = {}

@@ -162,6 +162,8 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `data/watchlist.json` | Beobachtete Ticker — Grundlage der Verkaufssignale. Führende Quelle; die Watchlist-Seite liest sie beim Laden und schreibt Änderungen direkt zurück (GitHub-Contents-API, Token pro Gerät im localStorage). Ohne Token bleibt die Liste lokal und lässt sich über „exportieren" als Datei ablegen | Laufend über `frontend/watchlist.html` |
 | `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg und Stopp, plus bereits abgeschlossene Signale | Di–Sa 02:30 UTC automatisch (`check_exits.yml`) |
+| `data/backtest_history/ndx_membership.json` | Tagesgenaue NASDAQ-100-Zusammensetzung ab 01.02.2007 (Quelle: github.com/jmccarrell/n100tickers, MIT) — Grundlage des historischen Backtests | Bei jedem Lauf von `backtest_history.yml` |
+| `data/backtest_history/ndx_results.json` | Historischer Backtest NASDAQ-100 ab 2007 (Grundsystem W+D ohne 4H, Top 20 point-in-time), je Jahr inkl. NASDAQ-Performance, Varianten inkl./exkl. nicht mehr gehandelter Aktien, plus Abgleich W+D gegen 4H auf den Live-Daten — Anzeige in `frontend/backtest_history.html` | Manuell über `backtest_history.yml` (Yahoo ist aus Cloud-Sessions gesperrt); Abgleich lokal via `node backtest_history/run_backtest.js --calibration-only` |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 
 ## Batch-Empfehlung

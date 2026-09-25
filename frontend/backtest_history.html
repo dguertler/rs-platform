@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RS · Backtest Historie</title>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1e; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    .nav-bar { display:inline-flex; flex-wrap:wrap; align-items:center; gap:5px; padding:12px 12px 0; }
+    .nav-switch { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:6px 13px; font-size:12px; font-weight:700; color:#94a3b8; text-decoration:none; font-family:monospace; white-space:nowrap; box-shadow:0 2px 8px #00000066; transition:border-color .15s,color .15s; }
+    .nav-switch:hover  { border-color:#3b82f6; color:#e2e8f0; }
+    .nav-switch.active { border-color:#f59e0b; color:#fbbf24; background:#1a1a0a; }
+    table { border-collapse: collapse; width: 100%; }
+    th { position: sticky; top: 0; background: #0d1526; z-index: 10; padding: 10px 12px; text-align: right; color: #64748b; font-size: 11px; font-family: monospace; border-bottom: 1px solid #1e293b; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    td { padding: 8px 12px; text-align: right; font-family: monospace; font-size: 12px; white-space: nowrap; }
+    tr.data-row { cursor: pointer; transition: background .1s; }
+    tr.data-row:hover { background: #1a2540 !important; }
+    tr.data-row:nth-child(even) { background: #080e1c; }
+    tr.data-row:nth-child(odd)  { background: #060b14; }
+    tr.data-row.bear td:first-child { box-shadow: inset 3px 0 0 #f87171; }
+    tr.data-row.selected { background: #172033 !important; }
+    .card { background: #0d1526; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 18px; }
+    .note { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+    .note b { color: #e2e8f0; }
+  </style>
+</head>
+<body>
+<div class="nav-bar">
+  <a href="index.html"            class="nav-switch">Nasdaq</a>
+  <a href="sp500.html"            class="nav-switch">S&amp;P500</a>
+  <a href="smallcap.html"        class="nav-switch">SC600</a>
+  <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
+  <a href="backtest.html"         class="nav-switch">B-DETAILS</a>
+  <a href="backtest_history.html" class="nav-switch active">B-HISTORIE</a>
+  <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
+</div>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+const green = '#4ade80', red = '#f87171', amber = '#fbbf24', neutral = '#64748b';
+const pnlColor = v => v > 0 ? green : v < 0 ? red : neutral;
+const pfColor  = v => v == null ? neutral : v >= 1.5 ? green : v >= 1 ? amber : red;
+const num = (v, d = 1) => v == null ? '–' : v.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + ' %';
+const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
+const VARIANTS = {
+  inkl: 'inkl. nicht mehr gehandelter Aktien',
+  exkl: 'nur heute noch gehandelte Aktien',
+};
+
+function Tile({ label, value, color, sub }) {
+  return (
+    <div className="card" style={{ flex: '1 1 150px', minWidth: 140 }}>
+      <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 20, fontWeight: 700, color: color || '#e2e8f0', fontFamily: 'monospace' }}>{value}</div>
+      {sub && <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginTop: 4 }}>{sub}</div>}
+    </div>
+  );
+}
+
+function Calibration({ cal }) {
+  if (!cal) return null;
+  const a = cal.modes['4H']?.total, b = cal.modes.WD?.total;
+  const row = (label, k, fmt, colorFn) => (
+    <tr key={label}>
+      <td style={{ color: '#94a3b8' }}>{label}</td>
+      <td style={{ color: colorFn ? colorFn(a?.[k]) : '#e2e8f0' }}>{fmt(a?.[k])}</td>
+      <td style={{ color: colorFn ? colorFn(b?.[k]) : '#e2e8f0' }}>{fmt(b?.[k])}</td>
+    </tr>
+  );
+  return (
+    <div className="card" style={{ marginBottom: 20 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>Abgleich W+D gegen 4H (Live-Daten)</div>
+      <div className="note" style={{ marginBottom: 10 }}>
+        Dieselben Kerzen, dieselbe Top-20-Historie, derselbe Zeitraum ({cal.start} – {cal.end}) —
+        einmal mit der Live-Logik (Einstieg nur über 4H), einmal wie im historischen Test ohne 4H.
+        Der Abstand zeigt, wie viel die 4H-Ebene beiträgt, und ist die Messlatte für die Jahre davor.
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table style={{ maxWidth: 520 }}>
+          <thead><tr><th></th><th>Live (W+D+4H)</th><th>Historisch (W+D)</th></tr></thead>
+          <tbody>
+            {row('Profit-Faktor', 'profitFactor', v => num(v, 2), pfColor)}
+            {row('Trades', 'nTrades', v => v ?? '–')}
+            {row('Trefferquote', 'winrate', v => v == null ? '–' : num(v) + ' %')}
+            {row('Ø Rendite je Trade', 'avgReturnPerTrade', v => pct(v), pnlColor)}
+            {row('Σ P&L', 'totalPnl', eur, pnlColor)}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function TradeList({ trades }) {
+  return (
+    <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 420, marginBottom: 20 }}>
+      <table>
+        <thead><tr><th>Ticker</th><th>Auslöser</th><th>Einstieg</th><th>Ausstieg</th><th>Wochen</th><th>Rendite</th><th>P&L</th></tr></thead>
+        <tbody>
+          {trades.map((t, i) => (
+            <tr key={i} className="data-row">
+              <td style={{ fontWeight: 700 }}>{t.ticker}</td>
+              <td style={{ color: '#94a3b8' }}>{t.trigger}</td>
+              <td>{t.entryDate}</td>
+              <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>
+                {t.isOpen ? 'offen' : t.exitDate}{t.dataEnded ? ' · Datenende' : ''}
+              </td>
+              <td>{t.holdingWeeks}</td>
+              <td style={{ color: pnlColor(t.pnlPct) }}>{pct(t.pnlPct)}</td>
+              <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+function App() {
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [variant, setVariant] = useState('inkl');
+  const [year, setYear] = useState(null);
+
+  useEffect(() => {
+    fetch('data/backtest_history/ndx_results.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(setData)
+      .catch(e => setError(e.message));
+  }, []);
+
+  const v = data?.variants?.[variant];
+  const yearTrades = useMemo(
+    () => (v && year ? v.trades.filter(t => t.entryDate.startsWith(year)) : []),
+    [v, year]
+  );
+
+  if (error) return <div style={{ padding: 60, color: red, fontFamily: 'monospace' }}>Fehler beim Laden: {error}</div>;
+  if (!data) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Lade Ergebnisse…</div>;
+
+  const years = data.ndx ? Object.keys(data.ndx).sort() : [];
+  const t = v?.total;
+
+  return (
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 16px' }}>
+      <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · NASDAQ-100</div>
+      <div className="note" style={{ marginBottom: 20 }}>
+        Grundsystem ohne 4H: Einstieg, sobald Weekly und Daily GWS gebrochen sind (2 von 2 Punkten) und die
+        Aktie am Einstiegstag in den <b>Top 20</b> des Index steht. Das Ranking wird für jeden Handelstag nur unter
+        den <b>damaligen Indexmitgliedern</b> berechnet, mit derselben Formel wie live. Stopp, täglicher Ausstieg,
+        10.000 € je Signal und 1.000 € Risiko wie in der Live-Engine. Trades werden dem Jahr ihres Einstiegs zugeordnet.
+      </div>
+
+      <Calibration cal={data.calibration} />
+
+      {!data.variants && (
+        <div className="card note" style={{ borderColor: '#92400e', marginBottom: 20 }}>
+          Die historischen Jahre sind noch nicht berechnet. In GitHub Actions den Workflow
+          <b> „Historischer NASDAQ-100-Backtest (ab 2007)"</b> starten — er lädt die Kurse, rankt die
+          Top 20 und schreibt die Ergebnisse hierher.
+        </div>
+      )}
+
+      {data.variants && (<>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+          {Object.entries(VARIANTS).map(([k, label]) => (
+            <button key={k} onClick={() => { setVariant(k); setYear(null); }}
+              style={{ background: variant === k ? '#1e293b' : 'transparent',
+                border: `1px solid ${variant === k ? '#f59e0b' : '#1e293b'}`, borderRadius: 6, padding: '5px 14px',
+                color: variant === k ? amber : '#64748b', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {t && (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
+            <Tile label={`Profit-Faktor ${data.period.start.slice(0, 4)}–${data.period.end.slice(0, 4)}`}
+              value={num(t.profitFactor, 2)} color={pfColor(t.profitFactor)} />
+            <Tile label="PF in NDX-Minusjahren" value={num(v.ndxDown?.profitFactor, 2)}
+              color={pfColor(v.ndxDown?.profitFactor)} sub={`${v.ndxDown?.nTrades ?? 0} Trades`} />
+            <Tile label="PF in NDX-Plusjahren" value={num(v.ndxUp?.profitFactor, 2)}
+              color={pfColor(v.ndxUp?.profitFactor)} sub={`${v.ndxUp?.nTrades ?? 0} Trades`} />
+            <Tile label="Trades" value={t.nTrades} sub={`${t.nOpen} offen`} />
+            <Tile label="Trefferquote" value={num(t.winrate) + ' %'} />
+            <Tile label="Ø Rendite je Trade" value={pct(t.avgReturnPerTrade)} color={pnlColor(t.avgReturnPerTrade)} />
+          </div>
+        )}
+
+        <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', marginBottom: 12 }}>
+          <table>
+            <thead>
+              <tr>
+                <th>Jahr</th><th>NASDAQ-100</th><th>NDX max. DD</th><th>Trades</th><th>Trefferquote</th>
+                <th>Profit-Faktor</th><th>Ø Rendite/Trade</th><th>Σ P&L</th><th>Mitglieder mit Kursdaten</th>
+              </tr>
+            </thead>
+            <tbody>
+              {years.map(y => {
+                const n = data.ndx[y], k = v.years[y], cov = data.coverage?.[y];
+                return (
+                  <tr key={y} className={`data-row${n.pct < 0 ? ' bear' : ''}${year === y ? ' selected' : ''}`}
+                    onClick={() => setYear(year === y ? null : y)}>
+                    <td style={{ fontWeight: 700 }}>{y}{n.partial ? '*' : ''}</td>
+                    <td style={{ color: pnlColor(n.pct) }}>{pct(n.pct)}</td>
+                    <td style={{ color: red }}>{num(n.max_dd)} %</td>
+                    <td>{k?.nTrades ?? 0}</td>
+                    <td>{k ? num(k.winrate) + ' %' : '–'}</td>
+                    <td style={{ color: pfColor(k?.profitFactor), fontWeight: 700 }}>{num(k?.profitFactor, 2)}</td>
+                    <td style={{ color: pnlColor(k?.avgReturnPerTrade) }}>{pct(k?.avgReturnPerTrade)}</td>
+                    <td style={{ color: pnlColor(k?.totalPnl) }}>{eur(k?.totalPnl)}</td>
+                    <td style={{ color: cov && cov.missing.length / cov.members > 0.1 ? amber : '#94a3b8' }}
+                      title={cov?.missing.join(', ')}>
+                      {cov ? `${cov.members - cov.missing.length} / ${cov.members}` : '–'}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div className="note" style={{ marginBottom: 20 }}>
+          Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. Zeile anklicken für die Trades des Jahres.
+          Profit-Faktor inkl. offener Positionen (wie in der B-Übersicht). Gelb bei „Mitglieder mit Kursdaten": mehr als 10 %
+          der damaligen Mitglieder ohne Kurse bei Yahoo — dort fehlen vor allem übernommene und insolvente Firmen.
+        </div>
+
+        {year && (<>
+          <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Trades {year} · {VARIANTS[variant]}</div>
+          <TradeList trades={yearTrades} />
+        </>)}
+
+        <div className="card note">
+          <div style={{ fontWeight: 700, color: '#e2e8f0', marginBottom: 6 }}>Datengrundlage</div>
+          Indexzusammensetzung: <a href={data.membershipSource} style={{ color: '#93c5fd' }}>n100tickers</a> (tagesgenau ab {data.period.start}).
+          Kurse: Yahoo Finance, split- und dividendenbereinigt, Stand {data.period.end}.
+          {' '}{data.symbols.total} Symbole waren im Zeitraum im Index: {data.symbols.aktiv} heute noch gehandelt,
+          {' '}{data.symbols.delistedMitDaten} nicht mehr gehandelt mit Kursdaten, {data.symbols.keineDaten} ohne Kursdaten.
+          {' '}Die Variante „inkl." enthält alle Aktien mit Kursdaten, „nur heute noch gehandelt" lässt die nicht mehr
+          gehandelten auch im Ranking weg.
+          {data.symbols.withJumps.length > 0 && (
+            <div style={{ marginTop: 6 }}>
+              Kurssprünge über Faktor 1,8 bzw. unter 0,55 (mögliche Split-Fehler, zur Prüfung):{' '}
+              {data.symbols.withJumps.map(j => `${j.ticker} (${j.dates.join(', ')})`).join(' · ')}
+            </div>
+          )}
+        </div>
+      </>)}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

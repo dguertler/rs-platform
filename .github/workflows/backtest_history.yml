@@ -1,0 +1,66 @@
+name: Historischer NASDAQ-100-Backtest (ab 2007)
+
+permissions:
+  contents: write
+
+# Nur manuell: lädt ~20 Jahre Kurse für alle ehemaligen und aktuellen
+# NASDAQ-100-Mitglieder und simuliert das Grundsystem (W + D, ohne 4H).
+on:
+  workflow_dispatch:
+
+jobs:
+  backtest-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas pyyaml
+
+      # Point-in-time-Zusammensetzung (MIT, github.com/jmccarrell/n100tickers)
+      - name: Historische Indexzusammensetzung aktualisieren
+        run: |
+          git clone --depth 1 https://github.com/jmccarrell/n100tickers.git /tmp/n100tickers
+          python backtest_history/build_membership.py /tmp/n100tickers
+
+      - name: Kurse laden und Top 20 historisch ranken
+        run: python backtest_history/prepare_data.py
+
+      - name: Trades simulieren und je Jahr auswerten
+        run: node backtest_history/run_backtest.js
+
+      - name: Ergebnisse committen und pushen
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/backtest_history/
+          git diff --staged --quiet || git commit -m "Historischer NASDAQ-100-Backtest aktualisiert"
+          git pull --rebase origin master
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Historischer Backtest (backtest_history.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

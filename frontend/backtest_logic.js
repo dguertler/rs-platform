@@ -284,15 +284,21 @@ function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h) {
 // Über beide Testfenster schlägt dieser Auslöser die Tages- und Wochen-Variante
 // klar (höherer Profitfaktor, etwa halber Drawdown-Beitrag); die Breakout-Mails
 // melden ebenfalls nur diesen Fall. Andere Auslöser werden nicht mehr simuliert.
-function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
+//
+// mode 'WD' nur für den historischen Backtest (backtest_history/), wo es keine
+// 4H-Kerzen gibt: Einstieg beim Sprung auf 2 von 2 Punkten (W + D), Auslöser
+// ist der zuletzt hinzugekommene D- oder W-Punkt. weekRows dafür ohne 4H-Daten
+// bauen. Stopp, Ausstieg und Top-20-Filter bleiben identisch.
+function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '4H') {
   const result = [];
   let inTrade = false, entry = null, lastCheckedDay = null;
+  const fullPts = mode === 'WD' ? 2 : 3;
 
   for (let i = 1; i < weekRows.length; i++) {
     const prev = weekRows[i - 1], curr = weekRows[i];
 
     if (!inTrade) {
-      if (prev.pts < 3 && curr.pts === 3) {
+      if (prev.pts < fullPts && curr.pts === fullPts) {
         const new4H = curr.has4h && prev.has4h && prev.p4H === 0 && curr.p4H === 1;
         const newD  = prev.pD === 0 && curr.pD === 1;
         const newW  = prev.pW === 0 && curr.pW === 1;
@@ -351,7 +357,7 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20) {
         }
         const stopPrice = recentSwingLow != null ? recentSwingLow * 0.99 : null;
 
-        if (trigger !== '4H') continue;
+        if (mode === 'WD' ? (trigger !== 'D' && trigger !== 'W') : trigger !== '4H') continue;
         if (!entryPrice || !stopPrice || entryPrice <= stopPrice) continue;
         if (useTop20 && top20Hist) {
           const dayList = top20Hist[entryDate] ?? top20Hist[curr.week.d.slice(0,10)];

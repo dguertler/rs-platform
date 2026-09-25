@@ -33,3 +33,6 @@ rawTEMP_MPY_wvf_snd.mp4
 # Earnings-Alert Dedupe-State (nur lokal/CI-Cache, nie committen)
 .earnings_state/
 .earnings_premarket_state/
+
+# Historischer Backtest: Kurs-Cache (~20 Jahre, nur in GitHub Actions erzeugt)
+backtest_history/cache/
