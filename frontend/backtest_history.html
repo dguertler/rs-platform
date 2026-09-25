@@ -54,7 +54,7 @@ const pfColor  = v => v == null ? neutral : v >= 1.5 ? green : v >= 1 ? amber : 
 const num = (v, d = 1) => v == null ? '–' : v.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
 const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + ' %';
 const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
-const capital = v => v == null ? '–' : Math.round(v / 1000).toLocaleString('de-DE') + ' Tsd. €';
+const eurAbs = v => v == null ? '–' : Math.round(v).toLocaleString('de-DE') + ' €';
 const VARIANTS = {
   inkl: 'inkl. nicht mehr gehandelter Aktien',
   exkl: 'nur heute noch gehandelte Aktien',
@@ -108,19 +108,21 @@ function TradeList({ trades }) {
   return (
     <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 420, marginBottom: 20 }}>
       <table>
-        <thead><tr><th>Ticker</th><th>Auslöser</th><th>Einstieg</th><th>Ausstieg</th><th>Wochen</th><th>Rendite</th><th>P&L</th></tr></thead>
+        <thead><tr><th>Ticker</th><th>RS-Rang</th><th>Einstieg</th><th>Ausstieg</th><th>Wochen</th><th>Rendite</th><th>Im Depot</th><th>Einsatz Depot</th><th>P&L Depot</th></tr></thead>
         <tbody>
           {trades.map((t, i) => (
             <tr key={i} className="data-row">
               <td style={{ fontWeight: 700 }}>{t.ticker}</td>
-              <td style={{ color: '#94a3b8' }}>{t.trigger}</td>
+              <td style={{ color: '#94a3b8' }}>{t.rank <= 20 ? t.rank : '–'}</td>
               <td>{t.entryDate}</td>
               <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>
                 {t.isOpen ? 'offen' : t.exitDate}{t.dataEnded ? ' · Datenende' : ''}
               </td>
               <td>{t.holdingWeeks}</td>
               <td style={{ color: pnlColor(t.pnlPct) }}>{pct(t.pnlPct)}</td>
-              <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
+              <td style={{ color: t.taken ? green : '#64748b' }}>{t.taken ? 'ja' : 'ausgelassen'}</td>
+              <td>{t.taken ? eurAbs(t.depotInvested) : '–'}</td>
+              <td style={{ color: pnlColor(t.depotPnl) }}>{t.taken ? eur(t.depotPnl) : '–'}</td>
             </tr>
           ))}
         </tbody>
@@ -152,9 +154,11 @@ function App() {
   if (!data) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Lade Ergebnisse…</div>;
 
   const years = data.ndx ? Object.keys(data.ndx).sort() : [];
-  const t = v?.total;
   const ndxTotal = years.length
     ? (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100 : null;
+  const pf = v?.portfolio;
+  const spanYears = data.period ? (new Date(data.period.end) - new Date(data.period.start)) / (365.25 * 864e5) : 0;
+  const ndxCagr = ndxTotal != null && spanYears > 0 ? ((1 + ndxTotal / 100) ** (1 / spanYears) - 1) * 100 : null;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 16px' }}>
@@ -188,17 +192,17 @@ function App() {
           ))}
         </div>
 
-        {t && (
+        {pf && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
-            <Tile label={`Profit-Faktor ${data.period.start.slice(0, 4)}–${data.period.end.slice(0, 4)}`}
-              value={num(t.profitFactor, 2)} color={pfColor(t.profitFactor)} />
-            <Tile label="PF in NDX-Minusjahren" value={num(v.ndxDown?.profitFactor, 2)}
-              color={pfColor(v.ndxDown?.profitFactor)} sub={`${v.ndxDown?.nTrades ?? 0} Trades`} />
-            <Tile label="PF in NDX-Plusjahren" value={num(v.ndxUp?.profitFactor, 2)}
-              color={pfColor(v.ndxUp?.profitFactor)} sub={`${v.ndxUp?.nTrades ?? 0} Trades`} />
-            <Tile label="Trades" value={t.nTrades} sub={`${t.nOpen} offen`} />
-            <Tile label="Trefferquote" value={num(t.winrate) + ' %'} />
-            <Tile label="Ø Rendite je Trade" value={pct(t.avgReturnPerTrade)} color={pnlColor(t.avgReturnPerTrade)} />
+            <Tile label="Depotwert heute" value={eurAbs(pf.endEquity)} color={pnlColor(pf.returnPct)}
+              sub={`Start ${eurAbs(pf.startCapital)} am ${data.period.start}`} />
+            <Tile label="Depot p. a." value={pct(pf.cagr)} color={pnlColor(pf.cagr)} sub={`gesamt ${pct(pf.returnPct, 0)}`} />
+            <Tile label="NASDAQ-100 p. a." value={pct(ndxCagr)} color={pnlColor(ndxCagr)} sub={`gesamt ${pct(ndxTotal, 0)}`} />
+            <Tile label="Depot max. Rückgang" value={num(pf.maxDD) + ' %'} color={red} />
+            <Tile label="Profit-Faktor (genommene Trades)" value={num(pf.profitFactor, 2)} color={pfColor(pf.profitFactor)}
+              sub={`${pf.taken} Trades · ${pf.skipped} ausgelassen`} />
+            <Tile label="PF NDX-Minus- / Plusjahre" value={`${num(v.ndxDown?.profitFactor, 2)} / ${num(v.ndxUp?.profitFactor, 2)}`}
+              sub="alle Signale" />
           </div>
         )}
 
@@ -206,27 +210,28 @@ function App() {
           <table>
             <thead>
               <tr>
-                <th>Jahr</th><th>NASDAQ-100</th><th>Rendite Trades</th><th>Kapitalbedarf</th><th>Σ P&L</th>
+                <th>Jahr</th><th>NASDAQ-100</th><th>Depot</th><th>Depotwert Jahresende</th>
+                <th title="Größter Rückgang des Depots vom Höchststand innerhalb des Jahres">Depot max. Rückgang</th>
                 <th title="Größter Rückgang des NASDAQ-100 vom Höchststand innerhalb des Jahres">NDX max. Rückgang</th>
-                <th>Trades</th><th>Trefferquote</th><th>Profit-Faktor</th><th>Ø Rendite/Trade</th><th>Mitglieder mit Kursdaten</th>
+                <th>Trades</th><th>ausgelassen</th><th>Trefferquote</th><th>Profit-Faktor</th><th>Mitglieder mit Kursdaten</th>
               </tr>
             </thead>
             <tbody>
               {years.map(y => {
-                const n = data.ndx[y], k = v.years[y], cov = data.coverage?.[y];
+                const n = data.ndx[y], k = pf?.years?.[y], cov = data.coverage?.[y];
                 return (
                   <tr key={y} className={`data-row${n.pct < 0 ? ' bear' : ''}${year === y ? ' selected' : ''}`}
                     onClick={() => setYear(year === y ? null : y)}>
                     <td style={{ fontWeight: 700 }}>{y}{n.partial ? '*' : ''}</td>
                     <td style={{ color: pnlColor(n.pct) }}>{pct(n.pct)}</td>
-                    <td style={{ color: pnlColor(k?.returnOnCapital), fontWeight: 700 }}>{pct(k?.returnOnCapital)}</td>
-                    <td style={{ color: '#94a3b8' }}>{capital(k?.capitalPeak)}</td>
-                    <td style={{ color: pnlColor(k?.totalPnl) }}>{eur(k?.totalPnl)}</td>
+                    <td style={{ color: pnlColor(k?.returnPct), fontWeight: 700 }}>{pct(k?.returnPct)}</td>
+                    <td>{eurAbs(k?.endEquity)}</td>
+                    <td style={{ color: red }}>{k ? num(k.maxDD) + ' %' : '–'}</td>
                     <td style={{ color: red }}>{num(n.max_dd)} %</td>
-                    <td>{k?.nTrades ?? 0}</td>
-                    <td>{k ? num(k.winrate) + ' %' : '–'}</td>
+                    <td>{k?.taken ?? 0}</td>
+                    <td style={{ color: '#64748b' }}>{k?.skipped ?? 0}</td>
+                    <td>{k?.winrate != null ? num(k.winrate) + ' %' : '–'}</td>
                     <td style={{ color: pfColor(k?.profitFactor), fontWeight: 700 }}>{num(k?.profitFactor, 2)}</td>
-                    <td style={{ color: pnlColor(k?.avgReturnPerTrade) }}>{pct(k?.avgReturnPerTrade)}</td>
                     <td style={{ color: cov && cov.missing.length / cov.members > 0.1 ? amber : '#94a3b8' }}
                       title={cov?.missing.join(', ')}>
                       {cov ? `${cov.members - cov.missing.length} / ${cov.members}` : '–'}
@@ -235,19 +240,19 @@ function App() {
                 );
               })}
             </tbody>
-            {t && (
+            {pf && (
               <tfoot>
                 <tr className="sum-row">
                   <td>Gesamt</td>
                   <td style={{ color: pnlColor(ndxTotal) }}>{pct(ndxTotal)}</td>
-                  <td style={{ color: pnlColor(t.returnOnCapital) }}>{pct(t.returnOnCapital)}</td>
-                  <td>{capital(t.capitalPeak)}</td>
-                  <td style={{ color: pnlColor(t.totalPnl) }}>{eur(t.totalPnl)}</td>
+                  <td style={{ color: pnlColor(pf.returnPct) }}>{pct(pf.returnPct)}</td>
+                  <td>{eurAbs(pf.endEquity)}</td>
+                  <td style={{ color: red }}>{num(pf.maxDD)} %</td>
                   <td>–</td>
-                  <td>{t.nTrades}</td>
-                  <td>{num(t.winrate)} %</td>
-                  <td style={{ color: pfColor(t.profitFactor) }}>{num(t.profitFactor, 2)}</td>
-                  <td style={{ color: pnlColor(t.avgReturnPerTrade) }}>{pct(t.avgReturnPerTrade)}</td>
+                  <td>{pf.taken}</td>
+                  <td style={{ color: '#64748b' }}>{pf.skipped}</td>
+                  <td>{num(pf.winrate)} %</td>
+                  <td style={{ color: pfColor(pf.profitFactor) }}>{num(pf.profitFactor, 2)}</td>
                   <td>–</td>
                 </tr>
               </tfoot>
@@ -255,14 +260,15 @@ function App() {
           </table>
         </div>
         <div className="note" style={{ marginBottom: 20 }}>
-          Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. Zeile anklicken für die Trades des Jahres.
-          <b>Rendite Trades</b> = Σ P&L ÷ Kapitalbedarf. <b>Kapitalbedarf</b> = höchster Betrag, der gleichzeitig in offenen
-          Trades des Jahres gebunden war (10.000 € je Signal, alle Signale werden genommen) — also das Depot, das man
-          gebraucht hätte. Ohne Zinseszins, ohne Kosten. <b>NDX max. Rückgang</b> = größter Rückgang des NASDAQ-100 vom
-          zwischenzeitlichen Höchststand innerhalb des Jahres. NASDAQ-100 in der Gesamtzeile = Kursentwicklung über den
-          ganzen Zeitraum, Rendite Trades dort = Σ P&L ÷ höchster Kapitalbedarf im gesamten Zeitraum.
-          Profit-Faktor inkl. offener Positionen (wie in der B-Übersicht). Gelb bei „Mitglieder mit Kursdaten": mehr als 10 %
-          der damaligen Mitglieder ohne Kurse bei Yahoo — dort fehlen vor allem übernommene und insolvente Firmen.
+          <b>Depot</b>: Start mit {eurAbs(pf?.startCapital)}, höchstens {pf?.maxPositions} Positionen gleichzeitig. Jede
+          Position bekommt ein Zehntel des aktuellen Depotwerts — Gewinne erhöhen also den Einsatz (Zinseszins), Verluste
+          senken ihn. Wie live wird je Trade höchstens 10 % der Position riskiert; bei weitem Stopp wird entsprechend weniger
+          gekauft. Sind alle Plätze belegt, wird das Signal <b>ausgelassen</b>; bei mehreren Signalen am selben Tag gewinnt
+          der bessere RS-Rang. Ohne Kosten und Steuern, Depotwert zum Jahresende inkl. offener Positionen.
+          Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. <b>max. Rückgang</b> = größter Rückgang
+          vom zwischenzeitlichen Höchststand innerhalb des Jahres. Trades, Trefferquote und Profit-Faktor beziehen sich auf die
+          im Jahr eröffneten, tatsächlich genommenen Trades. Zeile anklicken für die Trades des Jahres. Gelb bei „Mitglieder
+          mit Kursdaten": mehr als 10 % der damaligen Mitglieder ohne Kurse bei Yahoo.
         </div>
 
         {year && (<>

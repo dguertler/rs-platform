@@ -28,6 +28,7 @@ const engineCode = fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.j
 vm.runInThisContext(engineCode + '\n;globalThis.__engine = { buildWeekRows, simulateTrades, CAPITAL, MAX_RISK };');
 const { buildWeekRows, simulateTrades, CAPITAL, MAX_RISK } = globalThis.__engine;
 const { kpis: kpisFor } = require(path.join(ROOT, 'backtest_kpis'));
+const { simulatePortfolio, portfolioStats } = require('./portfolio');
 const kpis = (trades) => kpisFor(trades, CAPITAL);
 
 const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
@@ -94,6 +95,20 @@ function byYear(trades) {
   return Object.fromEntries(Object.entries(out).sort().map(([y, ts]) => [y, summary(ts)]));
 }
 
+/**
+ * RS-Rang (1–20) am Einstiegstag. Die Engine prüft zuerst den Einstiegstag,
+ * sonst den Wochenstempel — hier ersatzweise die sieben Tage davor.
+ */
+function rankAt(hist, day, sym) {
+  const d = new Date(day + 'T12:00:00Z');
+  for (let k = 0; k <= 7; k++) {
+    const key = new Date(d - k * 864e5).toISOString().slice(0, 10);
+    const pos = hist[key] ? hist[key].indexOf(sym) : -1;
+    if (pos >= 0) return pos + 1;
+  }
+  return 21;
+}
+
 // ── Historischer Lauf ─────────────────────────────────────────────────────────
 function runHistory() {
   const meta = readJson(path.join(CACHE, 'meta.json'));
@@ -107,6 +122,7 @@ function runHistory() {
   }
 
   const trades = { inkl: [], exkl: [] };
+  const closesBySymbol = {};
   const symbols = Object.keys(meta.symbols).sort();
   let done = 0;
   for (const sym of symbols) {
@@ -117,12 +133,14 @@ function runHistory() {
     const daily = readJson(path.join(CACHE, 'daily', `${sym}.json`));
     const weekly = readJson(path.join(CACHE, 'weekly', `${sym}.json`));
     const rows = buildWeekRows(weekly, daily, []);
+    closesBySymbol[sym] = new Map(daily.map((r) => [r.d, r.c]));
     for (const variant of needed) {
       for (const t of simulateTrades(rows, daily, sym, top20[variant], true, 'WD')) {
         // Kursreihe endet vor dem Datenende (Übernahme, Delisting): der Trade ist
         // nicht mehr offen, sondern zum letzten verfügbaren Kurs beendet.
         const dataEnded = t.isOpen && !info.active;
-        trades[variant].push({ ...t, ticker: sym, isOpen: t.isOpen && !dataEnded, dataEnded });
+        const rank = rankAt(top20[variant], t.entryDate, sym);
+        trades[variant].push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
       }
     }
     if (done % 25 === 0) console.error(`  ${done}/${symbols.length} Symbole`);
@@ -132,12 +150,18 @@ function runHistory() {
   for (const [variant, list] of Object.entries(trades)) {
     list.sort((a, b) => (a.entryDate < b.entryDate ? -1 : 1));
     const negYears = new Set(Object.entries(meta.ndx).filter(([, v]) => v.pct < 0).map(([y]) => y));
+    const sim = simulatePortfolio(list, closesBySymbol, { start: meta.membership_start });
     variants[variant] = {
       total: summary(list),
       years: byYear(list),
       ndxDown: summary(list.filter((t) => negYears.has(year(t.entryDate)))),
       ndxUp: summary(list.filter((t) => !negYears.has(year(t.entryDate)))),
-      trades: list.map(slim),
+      portfolio: portfolioStats(sim, list),
+      trades: list.map((t) => {
+        const r = sim.results.get(t) || { taken: false };
+        return { ...slim(t), rank: t.rank, taken: r.taken,
+          ...(r.taken ? { depotInvested: Math.round(r.depotInvested), depotPnl: Math.round(r.depotPnl) } : {}) };
+      }),
     };
   }
 
