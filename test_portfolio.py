@@ -1,6 +1,7 @@
 """
 Prüft die Depot-Simulation backtest_history/portfolio.js an einem von Hand
-nachgerechneten Beispiel (2 Slots, Zinseszins, ausgelassenes Signal).
+nachgerechneten Beispiel (2 Slots, Zinseszins, ausgelassenes Signal) und die
+Positionsgrößen-Staffel (erst mehr Plätze bis 20, dann größerer Einsatz).
 
 Aufruf: python3 -m pytest test_portfolio.py -q
 """
@@ -26,7 +27,7 @@ const trades = [
   t('C', 3, '2020-01-02', 5, '2020-01-03', 5, 10000),
   t('D', 4, '2020-01-06', 10, '2020-01-07', 11, 10000, true),
 ];
-const sim = simulatePortfolio(trades, closes, { maxPositions: 2 });
+const sim = simulatePortfolio(trades, closes, { maxPositions: 2, baseSlot: 50000 });
 const stats = portfolioStats(sim, trades);
 console.log(JSON.stringify({
   equity: sim.equityByDay,
@@ -66,3 +67,22 @@ def test_stats():
     assert s["endEquity"] == 112875
     assert s["taken"] == 3 and s["skipped"] == 1
     assert s["maxDD"] == 0
+
+
+SIZING = r"""
+const { sizing } = require(process.argv[1]);
+console.log(JSON.stringify([90000, 100000, 155000, 199999, 200000, 300000].map((e) => sizing(e, 10000, 20))));
+"""
+
+
+def test_sizing_grows_positions_before_slot_size():
+    out = subprocess.run(["node", "-e", SIZING, os.path.join(_REPO, "backtest_history", "portfolio.js")],
+                         check=True, capture_output=True, text=True).stdout
+    assert json.loads(out) == [
+        {"limit": 9, "slot": 10000},       # nach Verlusten: weniger Plätze, Einsatz bleibt 10.000 €
+        {"limit": 10, "slot": 10000},
+        {"limit": 15, "slot": 10000},
+        {"limit": 19, "slot": 10000},
+        {"limit": 20, "slot": 10000},      # ab 200.000 €: alle 20 Plätze
+        {"limit": 20, "slot": 15000},      # danach wächst der Einsatz je Trade
+    ]

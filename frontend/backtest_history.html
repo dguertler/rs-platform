@@ -260,9 +260,12 @@ function App() {
           </table>
         </div>
         <div className="note" style={{ marginBottom: 20 }}>
-          <b>Depot</b>: Start mit {eurAbs(pf?.startCapital)}, höchstens {pf?.maxPositions} Positionen gleichzeitig. Jede
-          Position bekommt ein Zehntel des aktuellen Depotwerts — Gewinne erhöhen also den Einsatz (Zinseszins), Verluste
-          senken ihn. Wie live wird je Trade höchstens 10 % der Position riskiert; bei weitem Stopp wird entsprechend weniger
+          <b>Depot</b>: Start mit {eurAbs(pf?.startCapital)}, {eurAbs(pf?.baseSlot)} je Trade. Mit wachsendem Depot kommen
+          zuerst weitere Plätze dazu (Depotwert ÷ {eurAbs(pf?.baseSlot)}, also 10 Plätze bei 100.000 €, 15 bei 150.000 €),
+          bis {pf?.maxPositions} Trades gleichzeitig möglich sind. Erst ab {eurAbs((pf?.baseSlot ?? 0) * (pf?.maxPositions ?? 0))}
+          {pf?.fullFrom ? ` (erreicht am ${pf.fullFrom})` : ''} wächst der Einsatz je Trade mit dem Depot (Depotwert ÷
+          {' '}{pf?.maxPositions}, Zinseszins). Fällt das Depot unter 100.000 €, stehen entsprechend weniger Plätze zur
+          Verfügung. Wie live wird je Trade höchstens 10 % des Einsatzes riskiert; bei weitem Stopp wird entsprechend weniger
           gekauft. Sind alle Plätze belegt, wird das Signal <b>ausgelassen</b>; bei mehreren Signalen am selben Tag gewinnt
           der bessere RS-Rang. Ohne Kosten und Steuern, Depotwert zum Jahresende inkl. offener Positionen.
           Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. <b>max. Rückgang</b> = größter Rückgang

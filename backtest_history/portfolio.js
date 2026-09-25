@@ -4,7 +4,10 @@
  *
  * Die Trades (Einstieg, Ausstieg, Kurse) kommen unverändert aus der Engine
  * (frontend/backtest_logic.js). Nur die Positionsgröße wird skaliert:
- *   Slot     = aktueller Depotwert / MAX_POSITIONS   (live 10.000 € bei 100.000 €)
+ *   Unter BASE_SLOT × MAX_POSITIONS (200.000 €): Slot fest 10.000 €, Anzahl
+ *     Plätze = Depotwert / 10.000 € (100.000 € → 10, 150.000 € → 15, 90.000 € → 9)
+ *   Ab 200.000 €: 20 Plätze, Slot = Depotwert / 20 — erst jetzt wächst der
+ *     Einsatz je Trade mit (Zinseszins)
  *   Position = Slot × (Einsatz der Engine / 10.000 €)
  * Die Engine kauft höchstens für 10.000 € und riskiert höchstens 1.000 €, bei
  * weitem Stopp also weniger Stück — dieses Verhältnis bleibt erhalten, das
@@ -15,7 +18,8 @@
  * Sind alle Slots belegt, wird ein Signal ausgelassen.
  */
 const START_CAPITAL = 100000;
-const MAX_POSITIONS = 10;
+const BASE_SLOT = 10000;
+const MAX_POSITIONS = 20;
 const ENGINE_CAPITAL = 10000;
 
 /** Handelstage aus allen Kursreihen der gehandelten Symbole. */
@@ -27,7 +31,14 @@ function tradingCalendar(closesBySymbol, from) {
   return [...days].sort();
 }
 
-function simulatePortfolio(trades, closesBySymbol, { start, startCapital = START_CAPITAL, maxPositions = MAX_POSITIONS } = {}) {
+/** Plätze und Slotgröße bei gegebenem Depotwert. */
+function sizing(equity, baseSlot, maxPositions) {
+  if (equity >= baseSlot * maxPositions) return { limit: maxPositions, slot: equity / maxPositions };
+  return { limit: Math.floor(equity / baseSlot), slot: baseSlot };
+}
+
+function simulatePortfolio(trades, closesBySymbol,
+  { start, startCapital = START_CAPITAL, baseSlot = BASE_SLOT, maxPositions = MAX_POSITIONS } = {}) {
   const ordered = [...trades].sort((a, b) =>
     a.entryDate !== b.entryDate ? (a.entryDate < b.entryDate ? -1 : 1)
       : a.rank !== b.rank ? a.rank - b.rank
@@ -57,11 +68,11 @@ function simulatePortfolio(trades, closesBySymbol, { start, startCapital = START
     // 2. Einstiege zur Eröffnung, bester RS-Rang zuerst
     while (next < ordered.length && ordered[next].entryDate <= day) {
       const t = ordered[next++];
-      if (open.length >= maxPositions) {
+      const { limit, slot } = sizing(cash + markValue(), baseSlot, maxPositions);
+      if (open.length >= limit) {
         results.set(t, { taken: false });
         continue;
       }
-      const slot = (cash + markValue()) / maxPositions;
       const fraction = Math.min(1, t.invested / ENGINE_CAPITAL);
       const cost = Math.min(slot * fraction, cash);
       if (cost <= 0 || !(t.entryPrice > 0)) {
@@ -85,11 +96,11 @@ function simulatePortfolio(trades, closesBySymbol, { start, startCapital = START
     const value = p.shares * p.lastClose;
     results.set(p.trade, { taken: true, depotInvested: p.cost, depotPnl: value - p.cost, stillOpen: true });
   }
-  return { equityByDay, results, startCapital, maxPositions };
+  return { equityByDay, results, startCapital, baseSlot, maxPositions };
 }
 
 /** Jahreswerte, maximaler Rückgang und Kennzahlen der genommenen Trades. */
-function portfolioStats({ equityByDay, results, startCapital, maxPositions }, trades) {
+function portfolioStats({ equityByDay, results, startCapital, baseSlot, maxPositions }, trades) {
   const years = {};
   let prevEnd = startCapital;
   let peakAll = startCapital, maxDDAll = 0;
@@ -146,7 +157,9 @@ function portfolioStats({ equityByDay, results, startCapital, maxPositions }, tr
   }
   return {
     startCapital,
+    baseSlot,
     maxPositions,
+    fullFrom: equityByDay.find(([, eq]) => eq >= baseSlot * maxPositions)?.[0] ?? null,
     endEquity,
     returnPct: (endEquity / startCapital - 1) * 100,
     cagr: yearsSpan > 0 ? ((endEquity / startCapital) ** (1 / yearsSpan) - 1) * 100 : null,
@@ -157,4 +170,4 @@ function portfolioStats({ equityByDay, results, startCapital, maxPositions }, tr
   };
 }
 
-module.exports = { simulatePortfolio, portfolioStats, START_CAPITAL, MAX_POSITIONS };
+module.exports = { simulatePortfolio, portfolioStats, sizing, START_CAPITAL, BASE_SLOT, MAX_POSITIONS };
