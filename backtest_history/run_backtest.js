@@ -40,6 +40,7 @@ const slim = (t) => ({
   exitDate: t.exitDate,
   entryPrice: +t.entryPrice.toFixed(4),
   exitPrice: +t.exitPrice.toFixed(4),
+  invested: Math.round(t.invested),
   pnl: Math.round(t.pnl),
   pnlPct: +t.pnlPct.toFixed(1),
   holdingWeeks: t.holdingWeeks,
@@ -47,11 +48,35 @@ const slim = (t) => ({
   ...(t.dataEnded ? { dataEnded: true } : {}),
 });
 
+/**
+ * Kapitalbedarf = höchste Summe des gleichzeitig gebundenen Einsatzes, wenn man
+ * alle übergebenen Trades wie simuliert parallel hält (10.000 € je Signal).
+ * Am selben Tag wird erst Kapital frei (Ausstieg), dann neu gebunden (Einstieg).
+ */
+function capitalPeak(trades) {
+  const events = [];
+  for (const t of trades) {
+    events.push([t.entryDate, 1, t.invested]);
+    events.push([t.exitDate, 0, -t.invested]);
+  }
+  events.sort((a, b) => (a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : a[1] - b[1]));
+  let open = 0, peak = 0;
+  for (const [, , amount] of events) {
+    open += amount;
+    peak = Math.max(peak, open);
+  }
+  return peak;
+}
+
 /** Kennzahlen ohne die Top/Flop-Listen (die stehen in der Trade-Liste). */
 function summary(trades) {
   const k = kpis(trades);
   if (!k) return null;
   const { best, worst, ...rest } = k;
+  const peak = capitalPeak(trades);
+  rest.capitalPeak = peak;
+  // Rendite auf das Kapital, das man für alle Trades gleichzeitig gebraucht hätte
+  rest.returnOnCapital = peak > 0 ? (k.totalPnl / peak) * 100 : null;
   const byTrigger = {};
   for (const trig of ['D', 'W', '4H']) {
     const sub = trades.filter((t) => t.trigger === trig);
