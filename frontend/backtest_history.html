@@ -27,6 +27,7 @@
     tr.data-row:nth-child(odd)  { background: #060b14; }
     tr.data-row.bear td:first-child { box-shadow: inset 3px 0 0 #f87171; }
     tr.data-row.selected { background: #172033 !important; }
+    tr.sum-row td { border-top: 2px solid #334155; background: #0d1526; font-weight: 700; color: #e2e8f0; }
     .card { background: #0d1526; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 18px; }
     .note { font-size: 12px; color: #94a3b8; line-height: 1.6; }
     .note b { color: #e2e8f0; }
@@ -151,6 +152,12 @@ function App() {
 
   const years = data.ndx ? Object.keys(data.ndx).sort() : [];
   const t = v?.total;
+  // Σ Rendite = Summe der Einzelrenditen (%) aller Trades mit Einstieg im Jahr
+  const sumPct = trades => trades.reduce((s, x) => s + x.pnlPct, 0);
+  const pctByYear = {};
+  for (const x of v?.trades ?? []) pctByYear[x.entryDate.slice(0, 4)] = (pctByYear[x.entryDate.slice(0, 4)] ?? 0) + x.pnlPct;
+  const ndxTotal = years.length
+    ? (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100 : null;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 16px' }}>
@@ -203,7 +210,7 @@ function App() {
             <thead>
               <tr>
                 <th>Jahr</th><th>NASDAQ-100</th><th>NDX max. DD</th><th>Trades</th><th>Trefferquote</th>
-                <th>Profit-Faktor</th><th>Ø Rendite/Trade</th><th>Σ P&L</th><th>Mitglieder mit Kursdaten</th>
+                <th>Profit-Faktor</th><th>Ø Rendite/Trade</th><th>Σ Rendite</th><th>Σ P&L</th><th>Mitglieder mit Kursdaten</th>
               </tr>
             </thead>
             <tbody>
@@ -219,6 +226,7 @@ function App() {
                     <td>{k ? num(k.winrate) + ' %' : '–'}</td>
                     <td style={{ color: pfColor(k?.profitFactor), fontWeight: 700 }}>{num(k?.profitFactor, 2)}</td>
                     <td style={{ color: pnlColor(k?.avgReturnPerTrade) }}>{pct(k?.avgReturnPerTrade)}</td>
+                    <td style={{ color: pnlColor(pctByYear[y]) }}>{pct(pctByYear[y] ?? null)}</td>
                     <td style={{ color: pnlColor(k?.totalPnl) }}>{eur(k?.totalPnl)}</td>
                     <td style={{ color: cov && cov.missing.length / cov.members > 0.1 ? amber : '#94a3b8' }}
                       title={cov?.missing.join(', ')}>
@@ -228,10 +236,28 @@ function App() {
                 );
               })}
             </tbody>
+            {t && (
+              <tfoot>
+                <tr className="sum-row">
+                  <td>Gesamt</td>
+                  <td style={{ color: pnlColor(ndxTotal) }}>{pct(ndxTotal)}</td>
+                  <td>–</td>
+                  <td>{t.nTrades}</td>
+                  <td>{num(t.winrate)} %</td>
+                  <td style={{ color: pfColor(t.profitFactor) }}>{num(t.profitFactor, 2)}</td>
+                  <td style={{ color: pnlColor(t.avgReturnPerTrade) }}>{pct(t.avgReturnPerTrade)}</td>
+                  <td style={{ color: pnlColor(sumPct(v.trades)) }}>{pct(sumPct(v.trades))}</td>
+                  <td style={{ color: pnlColor(t.totalPnl) }}>{eur(t.totalPnl)}</td>
+                  <td>–</td>
+                </tr>
+              </tfoot>
+            )}
           </table>
         </div>
         <div className="note" style={{ marginBottom: 20 }}>
           Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. Zeile anklicken für die Trades des Jahres.
+          Σ Rendite = Summe der prozentualen Einzelrenditen aller Trades des Jahres. NASDAQ-100 in der Gesamtzeile =
+          Kursentwicklung über den ganzen Zeitraum.
           Profit-Faktor inkl. offener Positionen (wie in der B-Übersicht). Gelb bei „Mitglieder mit Kursdaten": mehr als 10 %
           der damaligen Mitglieder ohne Kurse bei Yahoo — dort fehlen vor allem übernommene und insolvente Firmen.
         </div>
