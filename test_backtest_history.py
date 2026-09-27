@@ -23,6 +23,7 @@ import prepare_data  # noqa: E402
 MEMBER_START = "2024-10-01"
 DELISTED = "CTSH"          # Kursreihe wird im Test am 2025-06-30 abgeschnitten
 LEFT_INDEX = "EBAY"        # Mitgliedschaft endet 2025-03-17
+H4_START = "2024-10-01"
 
 
 def _frame(rows, cols=("o", "h", "l", "c")):
@@ -86,6 +87,19 @@ def pipeline(tmp_path_factory):
     finally:
         prepare_data.MEMBERSHIP_FILE, prepare_data.CACHE_DIR, prepare_data.yf.download = orig
 
+    # 4H-Kerzen wie aus fetch_alpaca_4h.py: hier die Live-4H-Reihen aus dem Repo
+    h4_dir = tmp / "cache" / "h4"
+    h4_dir.mkdir()
+    h4_syms = {}
+    for t in tickers:
+        path = os.path.join(_REPO, "data", f"backtest_{t.lower()}.json")
+        rows = json.load(open(path)).get("ohlcv_4h") or []
+        if rows:
+            (h4_dir / f"{t}.json").write_text(json.dumps(rows))
+            h4_syms[t] = {"first": rows[0]["d"][:10], "last": rows[-1]["d"][:10], "bars": len(rows)}
+    (tmp / "cache" / "h4_meta.json").write_text(json.dumps(
+        {"source": "test", "feed": "test", "start": H4_START, "symbols": h4_syms, "missing": []}))
+
     out = tmp / "results.json"
     env = {**os.environ, "BACKTEST_HISTORY_CACHE": str(tmp / "cache"), "BACKTEST_HISTORY_OUT": str(out)}
     subprocess.run(["node", os.path.join(_REPO, "backtest_history", "run_backtest.js")],
@@ -125,7 +139,7 @@ def test_meta_membership_for_renamed_symbol(pipeline):
 
 def test_results_per_year_and_variants(pipeline):
     r = pipeline["results"]
-    assert set(r["variants"]) == {"inkl", "exkl"}
+    assert {"inkl", "exkl"} <= set(r["variants"])
     inkl = r["variants"]["inkl"]
     assert inkl["trades"], "keine Trades simuliert"
     for t in inkl["trades"]:
@@ -141,3 +155,16 @@ def test_results_per_year_and_variants(pipeline):
     assert r["symbols"]["keineDaten"] == 1
     assert "ZZZZ" in r["coverage"]["2025"]["missing"]
     assert r["calibration"]["modes"]["4H"]["total"]["nTrades"] > 0
+
+
+def test_live_4h_variant(pipeline):
+    r = pipeline["results"]
+    live = r["variants"]["live4h"]
+    assert live["start"] == H4_START
+    assert live["trades"], "keine 4H-Trades simuliert"
+    assert all(t["trigger"] == "4H" for t in live["trades"])
+    assert all(t["entryDate"] >= H4_START for t in live["trades"])
+    base = r["variants"]["wd4hStart"]
+    assert base["start"] == H4_START
+    assert all(t["entryDate"] >= H4_START and t["trigger"] in ("D", "W") for t in base["trades"])
+    assert r["h4"]["symbols"] > 0 and live["portfolio"]["endEquity"] > 0

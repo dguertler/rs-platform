@@ -121,13 +121,16 @@ function runHistory() {
     everTop[variant] = new Set(Object.values(hist).flat());
   }
 
-  const trades = { inkl: [], exkl: [] };
+  // 4H-Kerzen ab 2016 (fetch_alpaca_4h.py) — fehlen sie, gibt es nur W+D
+  const h4Meta = fs.existsSync(path.join(CACHE, 'h4_meta.json')) ? readJson(path.join(CACHE, 'h4_meta.json')) : null;
+  const wdVariants = ['inkl', 'exkl'];
+  const trades = { inkl: [], exkl: [], ...(h4Meta ? { live4h: [] } : {}) };
   const closesBySymbol = {};
   const symbols = Object.keys(meta.symbols).sort();
   let done = 0;
   for (const sym of symbols) {
     const info = meta.symbols[sym];
-    const needed = Object.keys(trades).filter((v) => everTop[v].has(sym));
+    const needed = wdVariants.filter((v) => everTop[v].has(sym));
     done++;
     if (!needed.length || !info.has_weekly) continue;       // nie in den Top 20 → kein Trade möglich
     const daily = readJson(path.join(CACHE, 'daily', `${sym}.json`));
@@ -143,15 +146,31 @@ function runHistory() {
         trades[variant].push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
       }
     }
+    // Live-Logik mit 4H (3 von 3 Punkten, Einstieg über 4H) — unveränderte Engine
+    const h4File = path.join(CACHE, 'h4', `${sym}.json`);
+    if (h4Meta && needed.includes('inkl') && fs.existsSync(h4File)) {
+      const rows4h = buildWeekRows(weekly, daily, readJson(h4File));
+      for (const t of simulateTrades(rows4h, daily, sym, top20.inkl, true)) {
+        const dataEnded = t.isOpen && !info.active;
+        const rank = rankAt(top20.inkl, t.entryDate, sym);
+        trades.live4h.push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
+      }
+    }
     if (done % 25 === 0) console.error(`  ${done}/${symbols.length} Symbole`);
   }
+
+  // Vergleichsbasis zur 4H-Variante: W+D ab demselben Startdatum
+  if (h4Meta) trades.wd4hStart = trades.inkl.filter((t) => t.entryDate >= h4Meta.start);
+  const startOf = { live4h: h4Meta?.start, wd4hStart: h4Meta?.start };
 
   const variants = {};
   for (const [variant, list] of Object.entries(trades)) {
     list.sort((a, b) => (a.entryDate < b.entryDate ? -1 : 1));
     const negYears = new Set(Object.entries(meta.ndx).filter(([, v]) => v.pct < 0).map(([y]) => y));
-    const sim = simulatePortfolio(list, closesBySymbol, { start: meta.membership_start });
+    const start = startOf[variant] || meta.membership_start;
+    const sim = simulatePortfolio(list, closesBySymbol, { start });
     variants[variant] = {
+      start,
       total: summary(list),
       years: byYear(list),
       ndxDown: summary(list.filter((t) => negYears.has(year(t.entryDate)))),
@@ -183,6 +202,13 @@ function runHistory() {
       aliases: Object.entries(resolution).filter(([t, r]) => r.yahoo && r.yahoo !== t).map(([t, r]) => ({ ticker: t, yahoo: r.yahoo })),
     },
     variants,
+    h4: h4Meta ? {
+      source: h4Meta.source,
+      feed: h4Meta.feed,
+      start: h4Meta.start,
+      symbols: Object.keys(h4Meta.symbols).length,
+      missing: h4Meta.missing,
+    } : null,
   };
 }
 

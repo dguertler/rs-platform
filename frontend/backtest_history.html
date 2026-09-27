@@ -56,8 +56,10 @@ const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + 
 const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
 const eurAbs = v => v == null ? '–' : Math.round(v).toLocaleString('de-DE') + ' €';
 const VARIANTS = {
-  inkl: 'inkl. nicht mehr gehandelter Aktien',
-  exkl: 'nur heute noch gehandelte Aktien',
+  inkl: 'W+D ab 2007 · inkl. nicht mehr gehandelter Aktien',
+  exkl: 'W+D ab 2007 · nur heute noch gehandelte Aktien',
+  wd4hStart: 'W+D ab 2016',
+  live4h: 'Live-Logik mit 4H ab 2016',
 };
 
 function Tile({ label, value, color, sub }) {
@@ -98,6 +100,77 @@ function Calibration({ cal }) {
             {row('Ø Rendite je Trade', 'avgReturnPerTrade', v => pct(v), pnlColor)}
             {row('Σ P&L', 'totalPnl', eur, pnlColor)}
           </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function Comparison({ data, before, after }) {
+  const years = Object.keys(data.ndx).sort().filter(y => y >= after.start.slice(0, 4));
+  const a = before.portfolio, b = after.portfolio;
+  const diff = (x, y) => (x == null || y == null ? null : y - x);
+  const pp = v => v == null ? '–' : (v >= 0 ? '+' : '') + num(v) + ' pp';
+  const ndxTotal = (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100;
+  const cell = (v, fmt, color) => <td style={{ color: color ? color(v) : '#e2e8f0' }}>{fmt(v)}</td>;
+  return (
+    <div className="card" style={{ marginBottom: 20 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
+        Vorher / Nachher: W+D ohne 4H gegen Live-Logik mit 4H (ab {after.start})
+      </div>
+      <div className="note" style={{ marginBottom: 10 }}>
+        Gleicher Zeitraum, gleiche Top-20-Historie, gleiches Depot (Start {eurAbs(a?.startCapital)}, 10.000 € je Trade,
+        bis 20 Plätze, ab 200.000 € Zinseszins). „Vorher" = Einstieg bei 2 von 2 Punkten (W+D), „Nachher" = Live-Logik:
+        3 von 3 Punkten, Einstieg über den 4H-Ausbruch. Trades und Profit-Faktor = im Jahr eröffnete, genommene Trades.
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table>
+          <thead>
+            <tr>
+              <th>Jahr</th><th>NASDAQ-100</th><th>Rendite vorher</th><th>Rendite nachher</th><th>Δ Rendite</th>
+              <th>Trades vorher</th><th>Trades nachher</th><th>PF vorher</th><th>PF nachher</th>
+            </tr>
+          </thead>
+          <tbody>
+            {years.map(y => {
+              const x = a?.years?.[y], z = b?.years?.[y];
+              return (
+                <tr key={y} className="data-row">
+                  <td style={{ fontWeight: 700 }}>{y}{data.ndx[y].partial ? '*' : ''}</td>
+                  {cell(data.ndx[y].pct, pct, pnlColor)}
+                  {cell(x?.returnPct, pct, pnlColor)}
+                  <td style={{ color: pnlColor(z?.returnPct), fontWeight: 700 }}>{pct(z?.returnPct)}</td>
+                  {cell(diff(x?.returnPct, z?.returnPct), pp, pnlColor)}
+                  <td>{x?.taken ?? 0}</td>
+                  <td>{z?.taken ?? 0}</td>
+                  {cell(x?.profitFactor, v => num(v, 2), pfColor)}
+                  <td style={{ color: pfColor(z?.profitFactor), fontWeight: 700 }}>{num(z?.profitFactor, 2)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+          <tfoot>
+            <tr className="sum-row">
+              <td>Gesamt</td>
+              {cell(ndxTotal, pct, pnlColor)}
+              {cell(a?.returnPct, pct, pnlColor)}
+              {cell(b?.returnPct, pct, pnlColor)}
+              {cell(diff(a?.returnPct, b?.returnPct), pp, pnlColor)}
+              <td>{a?.taken}</td>
+              <td>{b?.taken}</td>
+              {cell(a?.profitFactor, v => num(v, 2), pfColor)}
+              {cell(b?.profitFactor, v => num(v, 2), pfColor)}
+            </tr>
+            <tr className="sum-row">
+              <td>p. a.</td><td>–</td>
+              {cell(a?.cagr, pct, pnlColor)}
+              {cell(b?.cagr, pct, pnlColor)}
+              {cell(diff(a?.cagr, b?.cagr), pp, pnlColor)}
+              <td colSpan="2" style={{ color: '#94a3b8' }}>max. Rückgang</td>
+              <td style={{ color: red }}>{num(a?.maxDD)} %</td>
+              <td style={{ color: red }}>{num(b?.maxDD)} %</td>
+            </tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -153,7 +226,8 @@ function App() {
   if (error) return <div style={{ padding: 60, color: red, fontFamily: 'monospace' }}>Fehler beim Laden: {error}</div>;
   if (!data) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Lade Ergebnisse…</div>;
 
-  const years = data.ndx ? Object.keys(data.ndx).sort() : [];
+  const startYear = v?.start ? v.start.slice(0, 4) : '0000';
+  const years = data.ndx ? Object.keys(data.ndx).sort().filter(y => y >= startYear) : [];
   const ndxTotal = years.length
     ? (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100 : null;
   const pf = v?.portfolio;
@@ -180,9 +254,13 @@ function App() {
         </div>
       )}
 
+      {data.variants?.live4h && data.variants?.wd4hStart && (
+        <Comparison data={data} before={data.variants.wd4hStart} after={data.variants.live4h} />
+      )}
+
       {data.variants && (<>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-          {Object.entries(VARIANTS).map(([k, label]) => (
+          {Object.entries(VARIANTS).filter(([k]) => data.variants[k]).map(([k, label]) => (
             <button key={k} onClick={() => { setVariant(k); setYear(null); }}
               style={{ background: variant === k ? '#1e293b' : 'transparent',
                 border: `1px solid ${variant === k ? '#f59e0b' : '#1e293b'}`, borderRadius: 6, padding: '5px 14px',

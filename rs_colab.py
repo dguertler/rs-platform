@@ -7,7 +7,7 @@ import json
 import math
 from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100, detect_index_changes
-from rs_core import RS_WINDOWS, rank_by_day
+from rs_core import RS_WINDOWS, hourly_to_4h_rows, rank_by_day
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
@@ -253,45 +253,7 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
             return []
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-        df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
-        df.index = pd.to_datetime(df.index)
-        df.dropna(subset=["Close"], inplace=True)
-
-        from zoneinfo import ZoneInfo
-        _et     = ZoneInfo("America/New_York")
-        _berlin = ZoneInfo("Europe/Berlin")
-
-        extended = pd.Series(
-            [ts.astimezone(_et).hour < 9 or
-             (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
-             ts.astimezone(_et).hour >= 16
-             for ts in df.index],
-            index=df.index, dtype=bool
-        )
-        prev_low = df["Low"].shift(1)
-        next_low = df["Low"].shift(-1)
-        bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
-        df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open", "Close"]].min(axis=1)
-
-        df_4h = df[["Open", "High", "Low", "Close"]].resample("4h").agg({
-            "Open":  "first",
-            "High":  "max",
-            "Low":   "min",
-            "Close": "last"
-        }).dropna()
-
-        result = []
-        for dt, row in df_4h.iterrows():
-            if pd.isna(row["Close"]): continue
-            dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
-            result.append({
-                "d": dt_local.strftime("%Y-%m-%d %H:%M"),
-                "o": round(float(row["Open"]),  2),
-                "h": round(float(row["High"]),  2),
-                "l": round(float(row["Low"]),   2),
-                "c": round(float(row["Close"]), 2)
-            })
-        return result[-n_candles:]
+        return hourly_to_4h_rows(df)[-n_candles:]
     except Exception as e:
         print(f"  Fehler 4H {ticker}: {e}")
         return []

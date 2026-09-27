@@ -65,3 +65,53 @@ def rank_by_day(d_close, benchmark, tickers, member_mask=None, windows=RS_WINDOW
         scores = [(tickers[c], float(total[i, c])) for c in cols]
         scores.sort(key=lambda x: x[1], reverse=True)
         yield i, index[i].strftime("%Y-%m-%d"), scores
+
+
+def hourly_to_4h_rows(df, decimals=2):
+    """Stundenkerzen (inkl. Vor-/Nachbörse, Index mit Zeitzone) → 4H-Kerzen.
+
+    Live-Logik aus rs_colab.py: Ausreißer-Tiefs außerhalb der Handelszeit
+    glätten, dann 4-Stunden-Blöcke ab Mitternacht Börsenzeit, Zeitstempel in
+    Berliner Zeit. Der historische Backtest baut seine 4H-Kerzen hierüber.
+    """
+    import pandas as pd
+
+    df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
+    df.index = pd.to_datetime(df.index)
+    df.dropna(subset=["Close"], inplace=True)
+
+    from zoneinfo import ZoneInfo
+    _et     = ZoneInfo("America/New_York")
+    _berlin = ZoneInfo("Europe/Berlin")
+
+    extended = pd.Series(
+        [ts.astimezone(_et).hour < 9 or
+         (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
+         ts.astimezone(_et).hour >= 16
+         for ts in df.index],
+        index=df.index, dtype=bool
+    )
+    prev_low = df["Low"].shift(1)
+    next_low = df["Low"].shift(-1)
+    bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
+    df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open", "Close"]].min(axis=1)
+
+    df_4h = df[["Open", "High", "Low", "Close"]].resample("4h").agg({
+        "Open":  "first",
+        "High":  "max",
+        "Low":   "min",
+        "Close": "last"
+    }).dropna()
+
+    result = []
+    for dt, row in df_4h.iterrows():
+        if pd.isna(row["Close"]): continue
+        dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
+        result.append({
+            "d": dt_local.strftime("%Y-%m-%d %H:%M"),
+            "o": round(float(row["Open"]),  decimals),
+            "h": round(float(row["High"]),  decimals),
+            "l": round(float(row["Low"]),   decimals),
+            "c": round(float(row["Close"]), decimals)
+        })
+    return result
