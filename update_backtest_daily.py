@@ -107,14 +107,18 @@ def refetch_full(ticker, data):
 def update_ticker(ticker):
     fname = f"backtest_{ticker.lower().replace('.', '_')}.json"
     fpath = os.path.join(OUT_DIR, fname)
-    if not os.path.exists(fpath):
-        return "skip"
-
-    with open(fpath) as f:
-        data = json.load(f)
-
     changed = False
     note = None
+    if os.path.exists(fpath):
+        with open(fpath) as f:
+            data = json.load(f)
+    else:
+        # Neues Indexmitglied ohne Datei: komplett anlegen (4H wird unten aufgebaut)
+        data = {"ticker": ticker, "ohlcv_w": [], "ohlcv_d": [], "ohlcv_4h": []}
+        if not refetch_full(ticker, data):
+            return "no_data (neu anlegen fehlgeschlagen)"
+        changed = True
+        note = "neu angelegt"
 
     # Daily: mit Überlappung laden, damit ein Split auffällt, bevor angehängt wird
     if data.get("ohlcv_d"):
@@ -210,9 +214,14 @@ def main():
                 tickers.append(t)
                 seen.add(t)
 
-    # Nur Ticker mit vorhandener JSON verarbeiten
+    # Vorhandene Dateien aktualisieren; für NASDAQ-100-Titel (rs_full.json)
+    # fehlende Dateien anlegen, damit B-Übersicht/B-Details die volle 4H-Historie haben
+    ndx = set()
+    ndx_path = os.path.join(_REPO, "data", "rs_full.json")
+    if os.path.exists(ndx_path):
+        ndx = {e["ticker"] for e in json.load(open(ndx_path)).get("data", [])}
     to_update = [t for t in tickers
-                 if os.path.exists(os.path.join(OUT_DIR,
+                 if t in ndx or os.path.exists(os.path.join(OUT_DIR,
                     f"backtest_{t.lower().replace('.', '_')}.json"))]
 
     print(f"\nBacktest-Update: {len(to_update)} / {len(tickers)} Ticker haben JSON-Dateien\n")
