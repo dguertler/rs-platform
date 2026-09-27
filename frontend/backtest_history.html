@@ -106,6 +106,60 @@ function Calibration({ cal }) {
   );
 }
 
+function BeforeAfter({ ba }) {
+  const first = ba.steps[0], last = ba.steps[ba.steps.length - 1];
+  const years = [...new Set([...Object.keys(first.years), ...Object.keys(last.years)])].sort();
+  const row = (k, key) => (
+    <>
+      <td>{k?.nTrades ?? 0}</td>
+      <td style={{ color: pfColor(k?.profitFactor), fontWeight: 700 }}>{num(k?.profitFactor, 2)}</td>
+      <td>{k ? num(k.winrate) + ' %' : '–'}</td>
+      <td style={{ color: pnlColor(k?.avgReturnPerTrade) }}>{pct(k?.avgReturnPerTrade)}</td>
+      <td style={{ color: pnlColor(k?.returnOnInvested) }}>{pct(k?.returnOnInvested)}</td>
+      <td style={{ color: pnlColor(k?.totalPnl) }}>{eur(k?.totalPnl)}</td>
+    </>
+  );
+  return (
+    <div className="card" style={{ marginBottom: 20 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
+        Vorher / Nachher: bisheriger Backtest gegen neue Rechnung ({ba.start} – {ba.end})
+      </div>
+      <div className="note" style={{ marginBottom: 10 }}>
+        Gleiche Engine und Live-Logik mit 4H, 10.000 € je Signal, alle Signale (ohne Depot-Grenze). „Vorher" = die Trades
+        aus B-Übersicht/B-Details, „Nachher" = die neue historische Rechnung. Die Schritte darunter schalten die
+        Unterschiede einzeln zu, damit sichtbar wird, was welche Änderung bewirkt.
+        Ø gemeinsame Titel in den beiden Top-20-Listen: <b>{num(ba.top20Overlap)} von 20</b> je Tag.
+      </div>
+      <div style={{ overflowX: 'auto', marginBottom: 14 }}>
+        <table>
+          <thead><tr><th>Jahr</th><th colSpan="6" style={{ textAlign: 'center' }}>Vorher</th><th colSpan="6" style={{ textAlign: 'center' }}>Nachher</th></tr>
+            <tr><th></th>{[0, 1].map(i => <React.Fragment key={i}><th>Trades</th><th>PF</th><th>Treffer</th><th>Ø/Trade</th><th>Rendite auf Einsatz</th><th>Σ P&L</th></React.Fragment>)}</tr></thead>
+          <tbody>
+            {years.map(y => (
+              <tr key={y} className="data-row"><td style={{ fontWeight: 700 }}>{y}</td>{row(first.years[y])}{row(last.years[y])}</tr>
+            ))}
+          </tbody>
+          <tfoot><tr className="sum-row"><td>Gesamt</td>{row(first.total)}{row(last.total)}</tr></tfoot>
+        </table>
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table>
+          <thead><tr><th>Schritt</th><th>Trades</th><th>PF</th><th>Treffer</th><th>Ø/Trade</th><th>Rendite auf Einsatz</th><th>Σ P&L</th><th>gleich wie vorher</th></tr></thead>
+          <tbody>
+            {ba.steps.map((st, i) => (
+              <tr key={st.id} className="data-row">
+                <td style={{ whiteSpace: 'normal', minWidth: 260, color: i === 0 || i === ba.steps.length - 1 ? '#e2e8f0' : '#94a3b8' }}>{st.label}</td>
+                {row(st.total)}
+                <td style={{ color: '#94a3b8' }}>{st.sameAsBefore} / {st.total?.nTrades ?? 0}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 function Comparison({ data, before, after }) {
   const years = Object.keys(data.ndx).sort().filter(y => y >= after.start.slice(0, 4));
   const a = before.portfolio, b = after.portfolio;
@@ -116,7 +170,7 @@ function Comparison({ data, before, after }) {
   return (
     <div className="card" style={{ marginBottom: 20 }}>
       <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
-        Vorher / Nachher: W+D ohne 4H gegen Live-Logik mit 4H (ab {after.start})
+        W+D ohne 4H gegen Live-Logik mit 4H (ab {after.start})
       </div>
       <div className="note" style={{ marginBottom: 10 }}>
         Gleicher Zeitraum, gleiche Top-20-Historie, gleiches Depot (Start {eurAbs(a?.startCapital)}, 10.000 € je Trade,
@@ -253,6 +307,8 @@ function App() {
           Top 20 und schreibt die Ergebnisse hierher.
         </div>
       )}
+
+      {data.beforeAfter && <BeforeAfter ba={data.beforeAfter} />}
 
       {data.variants?.live4h && data.variants?.wd4hStart && (
         <Comparison data={data} before={data.variants.wd4hStart} after={data.variants.live4h} />

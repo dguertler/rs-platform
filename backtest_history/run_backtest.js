@@ -259,6 +259,107 @@ function runCalibration() {
   return result;
 }
 
+// ── Vorher/Nachher für den Zeitraum des bisherigen Backtests ────────────────
+/**
+ * Zerlegt den Unterschied zwischen bisherigem Backtest (B-Übersicht, Live-Daten)
+ * und neuer historischer Rechnung für dasselbe Zeitfenster in Einzelschritte.
+ * Jeder Schritt ändert genau eine Sache gegenüber dem vorigen.
+ */
+function runBeforeAfter(calStart) {
+  const h4MetaPath = path.join(CACHE, 'h4_meta.json');
+  if (!fs.existsSync(h4MetaPath)) return null;
+  const meta = readJson(path.join(CACHE, 'meta.json'));
+  const histTop = readJson(path.join(CACHE, 'top20_inkl.json'));
+  const rs = readJson(path.join(ROOT, 'data', 'rs_full.json'));
+  const liveTop = rs.top20_history || {};
+  const end = (rs.benchmark_ohlcv || []).slice(-1)[0]?.d ?? meta.data_end;
+  const inWindow = (t) => t.entryDate >= calStart && t.entryDate <= end;
+  const repo = (sym) => {
+    try {
+      return readJson(path.join(ROOT, 'data', `backtest_${sym.toLowerCase().replace(/[^a-z0-9]/g, '_')}.json`));
+    } catch (e) {
+      return null;
+    }
+  };
+  const clean4h = (rows) => rows.filter((d) => !d.d.endsWith(':30'));   // doppeltes Raster entfernen
+
+  const liveSyms = (rs.data || []).map((e) => e.ticker);
+  const histSyms = Object.keys(meta.symbols).filter((s) => fs.existsSync(path.join(CACHE, 'daily', `${s}.json`)));
+  const run = (syms, series, top) => {
+    const out = [];
+    for (const sym of syms) {
+      const s = series(sym);
+      if (!s || !s.w.length || !s.d.length) continue;
+      for (const t of simulateTrades(buildWeekRows(s.w, s.d, s.h), s.d, sym, top, true)) {
+        if (inWindow(t)) out.push({ ...t, ticker: sym });
+      }
+    }
+    return out;
+  };
+  const repoSeries = (full, cleaned) => (sym) => {
+    const bt = repo(sym);
+    if (!bt || !bt.ohlcv_w || !bt.ohlcv_d) return null;
+    const w = full ? bt.ohlcv_w : bt.ohlcv_w.slice(-104);
+    const cut = w[0]?.d ?? '0000';
+    const h = (bt.ohlcv_4h || []).filter((d) => d.d.slice(0, 10) >= cut);
+    return { w, d: bt.ohlcv_d.filter((d) => d.d >= cut), h: cleaned ? clean4h(h) : h };
+  };
+  const cacheSeries = (alpaca) => (sym) => {
+    const wf = path.join(CACHE, 'weekly', `${sym}.json`);
+    if (!fs.existsSync(wf)) return null;
+    let h = [];
+    if (alpaca) {
+      const hf = path.join(CACHE, 'h4', `${sym}.json`);
+      h = fs.existsSync(hf) ? readJson(hf) : [];
+    } else {
+      const bt = repo(sym);
+      h = bt ? clean4h(bt.ohlcv_4h || []) : [];
+    }
+    return { w: readJson(wf), d: readJson(path.join(CACHE, 'daily', `${sym}.json`)), h };
+  };
+
+  const steps = [
+    ['bisher', 'Bisheriger Backtest (B-Übersicht): 104 Wochen, Yahoo-4H, heutiges Top-20-Ranking',
+      () => run(liveSyms, repoSeries(false, false), liveTop)],
+    ['clean4h', '+ doppelte 4H-Kerzen entfernt',
+      () => run(liveSyms, repoSeries(false, true), liveTop)],
+    ['fullHistory', '+ volle Kurshistorie (ab 2022 statt 104 Wochen)',
+      () => run(liveSyms, repoSeries(true, true), liveTop)],
+    ['histRanking', '+ Top 20 nur unter den damaligen Indexmitgliedern',
+      () => run(liveSyms, repoSeries(true, true), histTop)],
+    ['histPrices', '+ Kurse und Universum aus dem historischen Lauf (ab 2005)',
+      () => run(histSyms, cacheSeries(false), histTop)],
+    ['alpaca4h', '+ 4H-Kerzen von Alpaca statt Yahoo (= neue Rechnung)',
+      () => run(histSyms, cacheSeries(true), histTop)],
+  ];
+  const key = (t) => `${t.ticker}|${t.entryDate}`;
+  const results = steps.map(([id, label, fn]) => ({ id, label, trades: fn() }));
+  const first = new Set(results[0].trades.map(key));
+  const last = new Set(results[results.length - 1].trades.map(key));
+
+  // Wie stark weichen die beiden Top-20-Listen voneinander ab?
+  const days = Object.keys(liveTop).filter((d) => d >= calStart && histTop[d]);
+  const overlap = days.length
+    ? days.reduce((s, d) => s + liveTop[d].filter((t) => histTop[d].includes(t)).length, 0) / days.length : null;
+
+  return {
+    start: calStart,
+    end,
+    top20Overlap: overlap,        // Ø gemeinsame Titel je Tag (von 20)
+    top20Days: days.length,
+    steps: results.map((r) => ({
+      id: r.id,
+      label: r.label,
+      total: summary(r.trades),
+      years: byYear(r.trades),
+      sameAsBefore: r.trades.filter((t) => first.has(key(t))).length,
+      sameAsNew: r.trades.filter((t) => last.has(key(t))).length,
+    })),
+    before: results[0].trades.map(slim),
+    after: results[results.length - 1].trades.map(slim),
+  };
+}
+
 function main() {
   const calibrationOnly = process.argv.includes('--calibration-only');
   let previous = {};
@@ -275,7 +376,10 @@ function main() {
     maxRisk: MAX_RISK,
     calibration: runCalibration(),
   };
-  if (!calibrationOnly) Object.assign(result, runHistory());
+  if (!calibrationOnly) {
+    Object.assign(result, runHistory());
+    result.beforeAfter = runBeforeAfter(result.calibration.start);
+  }
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(result));
 

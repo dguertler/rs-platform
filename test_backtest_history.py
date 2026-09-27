@@ -168,3 +168,14 @@ def test_live_4h_variant(pipeline):
     assert base["start"] == H4_START
     assert all(t["entryDate"] >= H4_START and t["trigger"] in ("D", "W") for t in base["trades"])
     assert r["h4"]["symbols"] > 0 and live["portfolio"]["endEquity"] > 0
+
+
+def test_before_after_steps(pipeline):
+    ba = pipeline["results"]["beforeAfter"]
+    ids = [s["id"] for s in ba["steps"]]
+    assert ids == ["bisher", "clean4h", "fullHistory", "histRanking", "histPrices", "alpaca4h"]
+    first, last = ba["steps"][0], ba["steps"][-1]
+    assert first["total"]["nTrades"] == first["sameAsBefore"] == len(ba["before"])
+    assert last["total"]["nTrades"] == last["sameAsNew"] == len(ba["after"])
+    assert all(t["entryDate"] >= ba["start"] for t in ba["before"] + ba["after"])
+    assert 0 <= ba["top20Overlap"] <= 20
