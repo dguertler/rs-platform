@@ -3,6 +3,7 @@ subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
 
 import yfinance as yf
 import pandas as pd
+from rs_core import hourly_to_4h_rows
 import json
 import math
 from datetime import datetime, timedelta
@@ -180,35 +181,7 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         if df.empty: return []
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-        df = df[["Open","High","Low","Close"]].copy()
-        df.index = pd.to_datetime(df.index)
-        df.dropna(subset=["Close"], inplace=True)
-        from zoneinfo import ZoneInfo
-        _et     = ZoneInfo("America/New_York")
-        _berlin = ZoneInfo("Europe/Berlin")
-        extended = pd.Series(
-            [ts.astimezone(_et).hour < 9 or
-             (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
-             ts.astimezone(_et).hour >= 16
-             for ts in df.index],
-            index=df.index, dtype=bool
-        )
-        prev_low = df["Low"].shift(1)
-        next_low = df["Low"].shift(-1)
-        bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
-        df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open","Close"]].min(axis=1)
-        df_4h = df[["Open","High","Low","Close"]].resample("4h").agg(
-            {"Open":"first","High":"max","Low":"min","Close":"last"}).dropna()
-        result = []
-        for dt, row in df_4h.iterrows():
-            if pd.isna(row["Close"]): continue
-            dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
-            result.append({"d": dt_local.strftime("%Y-%m-%d %H:%M"),
-                           "o": round(float(row["Open"]),  2),
-                           "h": round(float(row["High"]),  2),
-                           "l": round(float(row["Low"]),   2),
-                           "c": round(float(row["Close"]), 2)})
-        return result[-n_candles:]
+        return hourly_to_4h_rows(df)[-n_candles:]   # gemeinsame 4H-Bildung (rs_core)
     except Exception as e:
         print(f"  4H Fehler {ticker}: {e}")
         return []

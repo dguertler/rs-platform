@@ -56,7 +56,9 @@ def _load_repo_prices():
 def pipeline(tmp_path_factory):
     tmp = tmp_path_factory.mktemp("bth")
     daily, weekly = _load_repo_prices()
-    tickers = sorted(t for t in daily if t not in ("QQQ", "^NDX", "META"))[:45]
+    # nur Titel, deren Kurse vor Mitgliedsbeginn einsetzen (sonst „keine Daten")
+    tickers = sorted(t for t in daily if t not in ("QQQ", "^NDX", "META")
+                     and daily[t].index[0] <= pd.Timestamp(MEMBER_START) - pd.Timedelta(days=30))[:45]
     tickers = sorted(set(tickers) | {DELISTED, LEFT_INDEX})
     intervals = {t: [[MEMBER_START, None]] for t in tickers}
     intervals[LEFT_INDEX] = [[MEMBER_START, "2025-03-17"]]

@@ -10,6 +10,11 @@ on:
     # dem ersten erfolgreichen des Tages.
     - cron: '15 1-9 * * 2-6'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Auch laufen, wenn die Daten schon aktuell sind'
+        type: boolean
+        default: false
 
 jobs:
   update:
@@ -30,32 +35,41 @@ jobs:
         run: python3 check_data_freshness.py --files data/rs_sp500.json >> "$GITHUB_OUTPUT"
 
       - name: Abhängigkeiten installieren
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         run: pip install yfinance pandas lxml
 
+      # Point-in-time-Zusammensetzung (fja05680/sp500, MIT) für das rückwirkende
+      # Top-20-Ranking. Schlägt der Abruf fehl, bleibt die gespeicherte Datei.
+      - name: S&P-500-Zusammensetzung aktualisieren
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
+        continue-on-error: true
+        run: |
+          git clone --depth 1 https://github.com/fja05680/sp500.git /tmp/sp500
+          python backtest_history/build_sp500_membership.py /tmp/sp500
+
       - name: Teil 1 laden (Financials, Healthcare, Consumer, Energy, Industrials)
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_1.py
 
       - name: Teil 2 laden (Tech, Comm, Utilities, Real Estate, Materials)
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python sp500_colab_2.py
 
       - name: Daten zusammenführen
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         run: python sp500_merge.py
 
       - name: JSON nach data/ verschieben und committen
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         run: |
           mv rs_sp500.json data/rs_sp500.json
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/rs_sp500.json
+          git add data/rs_sp500.json data/backtest_history/sp500_membership.json
           git diff --staged --quiet || git commit -m "S&P 500 Daten aktualisiert"
           git pull --rebase origin master
           git push origin master

@@ -85,12 +85,12 @@ def hourly_to_4h_rows(df, decimals=2):
     """Stundenkerzen (inkl. Vor-/Nachbörse, Index mit Zeitzone) → 4H-Kerzen.
 
     Live-Logik aus rs_colab.py: Ausreißer-Tiefs außerhalb der Handelszeit
-    glätten, dann 4-Stunden-Blöcke ab Mitternacht Börsenzeit, Zeitstempel in
+    glätten, dann 4-Stunden-Blöcke ab Mitternacht New Yorker Zeit, Zeitstempel in
     Berliner Zeit. Der historische Backtest baut seine 4H-Kerzen hierüber.
     """
     import pandas as pd
 
-    df = df[["Open", "High", "Low", "Close", "Volume"]].copy()
+    df = df[[c for c in ("Open", "High", "Low", "Close", "Volume") if c in df.columns]].copy()
     df.index = pd.to_datetime(df.index)
     df.dropna(subset=["Close"], inplace=True)
 
@@ -110,17 +110,27 @@ def hourly_to_4h_rows(df, decimals=2):
     bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
     df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open", "Close"]].min(axis=1)
 
-    df_4h = df[["Open", "High", "Low", "Close"]].resample("4h").agg({
+    # 4H-Blöcke fest an Mitternacht New Yorker Zeit: 0–4, 4–8, 8–12, 12–16,
+    # 16–20, 20–24 Uhr ET — unabhängig von Sommer-/Winterzeit und vom ersten
+    # Tag des Abrufs. Ein Resample direkt auf dem zeitzonenbehafteten Index
+    # verschiebt die Blöcke nach jeder Zeitumstellung um eine Stunde, sodass
+    # Live, Backtest und historische Rechnung verschiedene Kerzen bekamen.
+    if df.index.tz is None:
+        df.index = df.index.tz_localize("UTC")
+    local = df[["Open", "High", "Low", "Close"]].copy()
+    local.index = df.index.tz_convert(_et).tz_localize(None)
+    df_4h = local.resample("4h", origin="start_day").agg({
         "Open":  "first",
         "High":  "max",
         "Low":   "min",
         "Close": "last"
     }).dropna()
+    df_4h.index = df_4h.index.tz_localize(_et, ambiguous=True, nonexistent="shift_forward")
 
     result = []
     for dt, row in df_4h.iterrows():
         if pd.isna(row["Close"]): continue
-        dt_local = dt.astimezone(_berlin) if dt.tzinfo else dt.replace(tzinfo=ZoneInfo("UTC")).astimezone(_berlin)
+        dt_local = dt.astimezone(_berlin)
         result.append({
             "d": dt_local.strftime("%Y-%m-%d %H:%M"),
             "o": round(float(row["Open"]),  decimals),

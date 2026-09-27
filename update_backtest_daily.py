@@ -214,17 +214,13 @@ def main():
                 tickers.append(t)
                 seen.add(t)
 
-    # Vorhandene Dateien aktualisieren; für NASDAQ-100-Titel (rs_full.json)
-    # fehlende Dateien anlegen, damit B-Übersicht/B-Details die volle 4H-Historie haben
-    ndx = set()
-    ndx_path = os.path.join(_REPO, "data", "rs_full.json")
-    if os.path.exists(ndx_path):
-        ndx = {e["ticker"] for e in json.load(open(ndx_path)).get("data", [])}
-    to_update = [t for t in tickers
-                 if t in ndx or os.path.exists(os.path.join(OUT_DIR,
-                    f"backtest_{t.lower().replace('.', '_')}.json"))]
-
-    print(f"\nBacktest-Update: {len(to_update)} / {len(tickers)} Ticker haben JSON-Dateien\n")
+    # Vorhandene Dateien aktualisieren; für alle Indextitel (tickers aus
+    # rs_full.json + rs_sp500.json) fehlende Dateien anlegen, damit
+    # B-Übersicht/B-Details die volle 4H-Historie haben
+    to_update = list(tickers)
+    missing = [t for t in tickers if not os.path.exists(
+        os.path.join(OUT_DIR, f"backtest_{t.lower().replace('.', '_')}.json"))]
+    print(f"\nBacktest-Update: {len(to_update)} Ticker, davon {len(missing)} neu anzulegen\n")
 
     errors = []
     for i, ticker in enumerate(to_update, 1):

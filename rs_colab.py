@@ -8,7 +8,7 @@ import math
 from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100, detect_index_changes
 from rs_core import RS_WINDOWS, hourly_to_4h_rows, membership_mask, rank_by_day
-from backtest_history.symbols import candidates as ndx_symbol_candidates
+from index_membership import NDX_FILE, current_members, load_intervals
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
@@ -33,28 +33,21 @@ tickers, _official = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
 # Aktien, die an diesem Tag wirklich im NASDAQ-100 waren — inkl. inzwischen
 # ausgeschiedener Titel. Aktuelle Mitglieder, die in der Ticker-Liste fehlen,
 # werden ergänzt.
-_MEMBERSHIP_FILE = "data/backtest_history/ndx_membership.json"
-try:
-    with open(_MEMBERSHIP_FILE, encoding="utf-8") as _f:
-        _raw_intervals = json.load(_f)["intervals"]
-    _ndx_intervals = {}
-    for _t, _ivs in _raw_intervals.items():
-        _cands = ndx_symbol_candidates(_t)       # historisches Symbol → Yahoo (FB → META)
-        if _cands:
-            _ndx_intervals.setdefault(_cands[0], []).extend(_ivs)
-except Exception as _e:
-    print(f"Indexzusammensetzung nicht lesbar ({_e}) – Ranking ohne Mitgliedsprüfung")
-    _ndx_intervals = None
+_ndx_intervals = load_intervals(NDX_FILE)
 
 if _ndx_intervals:
-    _members_today = sorted(s for s, ivs in _ndx_intervals.items() if any(e is None for _, e in ivs))
-    _missing_members = [t for t in _members_today if t not in tickers]
-    if _missing_members:
-        print(f"Aktuelle NASDAQ-100-Mitglieder ergänzt ({len(_missing_members)}): {', '.join(_missing_members)}")
-        tickers = list(tickers) + _missing_members
-    _non_members = sorted(t for t in tickers if t not in _members_today)
-    if _non_members:
-        print(f"Nicht im Index (bleiben in der Tabelle, aber ohne Ranking): {', '.join(_non_members)}")
+    # Universum = heutige Indexmitglieder laut Zusammensetzung. Die FMP-/
+    # Wikipedia-/Fallback-Liste dient nur noch als Rückfall ohne Datei (die
+    # Fallback-Liste enthielt Nicht-Mitglieder wie MRNA/OKTA und verfälschte
+    # damit Tabelle und Top-20-Ranking).
+    _members_today = current_members(_ndx_intervals)
+    _dropped = sorted(t for t in tickers if t not in _members_today)
+    _added = sorted(t for t in _members_today if t not in tickers)
+    if _dropped:
+        print(f"Nicht im Index, entfernt ({len(_dropped)}): {', '.join(_dropped)}")
+    if _added:
+        print(f"Indexmitglieder ergänzt ({len(_added)}): {', '.join(_added)}")
+    tickers, _official = list(_members_today), list(_members_today)
 
 # IC vs. EDC: neue Aktien im Index erkennen (nur offizielle FMP/Wikipedia-Liste)
 print("\nPrüfe Indexänderungen (IC vs. EDC)...")

@@ -4,6 +4,7 @@ subprocess.run(["pip", "install", "yfinance", "pandas", "-q"])
 import os
 import yfinance as yf
 import pandas as pd
+from rs_core import hourly_to_4h_rows
 import json
 from datetime import datetime
 
@@ -72,28 +73,7 @@ try:
     if not raw_1h.empty:
         if isinstance(raw_1h.columns, pd.MultiIndex):
             raw_1h.columns = raw_1h.columns.get_level_values(0)
-        raw_1h = raw_1h[["Open", "High", "Low", "Close", "Volume"]].copy()
-        raw_1h.index = pd.to_datetime(raw_1h.index)
-        raw_1h.dropna(subset=["Close"], inplace=True)
-        _et = ZoneInfo("America/New_York")
-        _ext = pd.Series(
-            [ts.astimezone(_et).hour < 9 or
-             (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
-             ts.astimezone(_et).hour >= 16
-             for ts in raw_1h.index],
-            index=raw_1h.index, dtype=bool
-        )
-        _prev_low = raw_1h["Low"].shift(1)
-        _next_low = raw_1h["Low"].shift(-1)
-        _bad_low  = _ext & (raw_1h["Low"] < _prev_low * 0.70) & (raw_1h["Low"] < _next_low * 0.70)
-        raw_1h.loc[_bad_low, "Low"] = raw_1h.loc[_bad_low, ["Open","Close"]].min(axis=1)
-        raw_4h = raw_1h[["Open","High","Low","Close"]].resample("4h").agg({
-            "Open":  "first",
-            "High":  "max",
-            "Low":   "min",
-            "Close": "last"
-        }).dropna()
-        ohlcv_4h = df_to_ohlcv(raw_4h, fmt="%Y-%m-%d %H:%M")
+        ohlcv_4h = hourly_to_4h_rows(raw_1h)   # gemeinsame 4H-Bildung (rs_core)
         print(f"    {len(ohlcv_4h)} Kerzen  "
               f"({ohlcv_4h[0]['d'] if ohlcv_4h else 'N/A'} – "
               f"{ohlcv_4h[-1]['d'] if ohlcv_4h else 'N/A'})")

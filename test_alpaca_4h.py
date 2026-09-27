@@ -53,3 +53,13 @@ def test_four_hour_blocks_like_live():
     assert [r["d"] for r in rows] == ["2020-03-04 10:00", "2020-03-04 14:00",
                                       "2020-03-04 18:00", "2020-03-04 22:00"]
     assert rows[0]["o"] == 100 and rows[-1]["c"] == 100.25 + 31
+
+
+def test_four_hour_blocks_fixed_across_dst():
+    # Abruf über die US-Zeitumstellung (08.03.2020) hinweg: die Blöcke bleiben
+    # bei 4/8/12/16 Uhr ET. In Berlin (noch Winterzeit) also 9/13/17/21 Uhr.
+    bars = _bars("2020-03-05") + _bars("2020-03-09")
+    rows = hourly_to_4h_rows(yahoo_like_hourly(bars), decimals=4)
+    labels = [r["d"] for r in rows]
+    assert labels[:4] == ["2020-03-05 10:00", "2020-03-05 14:00", "2020-03-05 18:00", "2020-03-05 22:00"]
+    assert labels[4:] == ["2020-03-09 09:00", "2020-03-09 13:00", "2020-03-09 17:00", "2020-03-09 21:00"]
