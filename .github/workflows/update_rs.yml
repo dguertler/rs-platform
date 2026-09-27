@@ -12,6 +12,11 @@ on:
     # Versuche sofort überspringen.
     - cron: '0 1-9 * * 2-6'
   workflow_dispatch:
+    inputs:
+      force:
+        description: 'Auch laufen, wenn die Daten schon aktuell sind'
+        type: boolean
+        default: false
 
 jobs:
   update:
@@ -32,22 +37,32 @@ jobs:
         run: python3 check_data_freshness.py --files data/rs_full.json >> "$GITHUB_OUTPUT"
 
       - name: Abhängigkeiten installieren
-        if: steps.freshness.outputs.fresh != 'true'
-        run: pip install yfinance pandas lxml
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
+        run: pip install yfinance pandas lxml pyyaml
+
+      # Point-in-time-Zusammensetzung (n100tickers, MIT) für das rückwirkende
+      # Top-20-Ranking in rs_colab.py. Schlägt der Abruf fehl, bleibt die
+      # zuletzt gespeicherte Datei in Gebrauch.
+      - name: NASDAQ-100-Zusammensetzung aktualisieren
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
+        continue-on-error: true
+        run: |
+          git clone --depth 1 https://github.com/jmccarrell/n100tickers.git /tmp/n100tickers
+          python backtest_history/build_membership.py /tmp/n100tickers
 
       - name: Skript ausführen
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
         run: python rs_colab.py
 
       - name: JSON nach data/ verschieben und committen
-        if: steps.freshness.outputs.fresh != 'true'
+        if: steps.freshness.outputs.fresh != 'true' || inputs.force
         run: |
           mv rs_full.json data/rs_full.json
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/rs_full.json
+          git add data/rs_full.json data/backtest_history/ndx_membership.json
           git diff --staged --quiet || git commit -m "RS Daten aktualisiert"
           git pull --rebase origin master
           git push origin master

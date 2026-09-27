@@ -7,7 +7,8 @@ import json
 import math
 from datetime import datetime, timedelta
 from fetch_tickers import fetch_nasdaq100, detect_index_changes
-from rs_core import RS_WINDOWS, hourly_to_4h_rows, rank_by_day
+from rs_core import RS_WINDOWS, hourly_to_4h_rows, membership_mask, rank_by_day
+from backtest_history.symbols import candidates as ndx_symbol_candidates
 
 _NASDAQ100_FALLBACK = [
     "AAPL", "MSFT", "NVDA", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "AVGO", "COST",
@@ -25,6 +26,35 @@ _NASDAQ100_FALLBACK = [
 # ANSS entfernt: Synopsys hat Ansys 2025 übernommen, Ticker delisted (yfinance liefert keine Daten mehr)
 
 tickers, _official = fetch_nasdaq100(fallback=_NASDAQ100_FALLBACK)
+
+# ── Historische Indexzusammensetzung (point-in-time) ─────────────────────────
+# Quelle: data/backtest_history/ndx_membership.json (n100tickers, täglich per
+# update_rs.yml aktualisiert). Damit rankt Schritt 5 an jedem Tag nur die
+# Aktien, die an diesem Tag wirklich im NASDAQ-100 waren — inkl. inzwischen
+# ausgeschiedener Titel. Aktuelle Mitglieder, die in der Ticker-Liste fehlen,
+# werden ergänzt.
+_MEMBERSHIP_FILE = "data/backtest_history/ndx_membership.json"
+try:
+    with open(_MEMBERSHIP_FILE, encoding="utf-8") as _f:
+        _raw_intervals = json.load(_f)["intervals"]
+    _ndx_intervals = {}
+    for _t, _ivs in _raw_intervals.items():
+        _cands = ndx_symbol_candidates(_t)       # historisches Symbol → Yahoo (FB → META)
+        if _cands:
+            _ndx_intervals.setdefault(_cands[0], []).extend(_ivs)
+except Exception as _e:
+    print(f"Indexzusammensetzung nicht lesbar ({_e}) – Ranking ohne Mitgliedsprüfung")
+    _ndx_intervals = None
+
+if _ndx_intervals:
+    _members_today = sorted(s for s, ivs in _ndx_intervals.items() if any(e is None for _, e in ivs))
+    _missing_members = [t for t in _members_today if t not in tickers]
+    if _missing_members:
+        print(f"Aktuelle NASDAQ-100-Mitglieder ergänzt ({len(_missing_members)}): {', '.join(_missing_members)}")
+        tickers = list(tickers) + _missing_members
+    _non_members = sorted(t for t in tickers if t not in _members_today)
+    if _non_members:
+        print(f"Nicht im Index (bleiben in der Tabelle, aber ohne Ranking): {', '.join(_non_members)}")
 
 # IC vs. EDC: neue Aktien im Index erkennen (nur offizielle FMP/Wikipedia-Liste)
 print("\nPrüfe Indexänderungen (IC vs. EDC)...")
@@ -274,13 +304,32 @@ try:
     top20_history = {}
     prev_rank_map = {}
     prev_week_i = max(0, len(d_close) - 6)
+    rank_close, rank_tickers, rank_mask = d_close, list(all_tickers_list), None
+    if _ndx_intervals:
+        # Frühere Mitglieder im Zeitfenster nachladen (nur Schlusskurse fürs Ranking)
+        _win0 = d_close.index[0].strftime("%Y-%m-%d")
+        _former = sorted(s for s, ivs in _ndx_intervals.items()
+                         if s not in d_close.columns and any(e is None or e > _win0 for _, e in ivs))
+        if _former:
+            print(f"  Frühere Mitglieder fürs Ranking ({len(_former)}): {', '.join(_former)}")
+            _extra = yf.download(_former, start=start_daily.strftime("%Y-%m-%d"), end=end_str,
+                                 auto_adjust=True, progress=False)["Close"]
+            if isinstance(_extra, pd.Series):
+                _extra = _extra.to_frame(_former[0])
+            _extra = _extra.dropna(axis=1, how="all")
+            rank_close = d_close.join(_extra, how="left")
+            rank_tickers += [c for c in _extra.columns if c not in rank_tickers]
+        rank_mask = membership_mask(rank_close.index, rank_tickers, _ndx_intervals)
     # Formel liegt in rs_core.py — dieselbe nutzt der historische Backtest
-    for i, date_str, scores in rank_by_day(d_close, benchmark, all_tickers_list, windows=rs_windows):
+    for i, date_str, scores in rank_by_day(rank_close, benchmark, rank_tickers, rank_mask, windows=rs_windows):
         top20_history[date_str] = [t for t, _ in scores[:20]]
         if i == prev_week_i:
             prev_rank_map = {t: r + 1 for r, (t, _) in enumerate(scores)}
             print(f"  Vorwoche-Ranking: {len(prev_rank_map)} Ticker (Stand: {date_str})")
     print(f"  {len(top20_history)} Tage berechnet")
+    if top20_history and _ndx_intervals:
+        top20 = top20_history[max(top20_history)]          # aktuelle Top 20 nur aus Mitgliedern
+        print(f"  Top 20 (nur Indexmitglieder): {', '.join(top20)}")
 except Exception as e:
     top20_history = {}
     prev_rank_map = {}

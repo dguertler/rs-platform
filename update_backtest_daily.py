@@ -10,6 +10,7 @@ das 60-Wochen-Lookback in backtest_logic.js, identisch zu trim_backtest.py),
 import os, json, time
 import yfinance as yf
 import pandas as pd
+from rs_core import hourly_to_4h_rows
 from datetime import datetime, timedelta
 
 _REPO   = os.path.dirname(os.path.abspath(__file__))
@@ -55,6 +56,18 @@ def df_to_ohlcv(df, fmt="%Y-%m-%d"):
         except Exception:
             continue
     return result
+
+
+def merge_4h(old_rows, new_rows):
+    """Neu geladenes 4H-Fenster ersetzt den überlappenden Bestand komplett.
+
+    Ältere Kerzen vor dem Fenster bleiben nur, wenn sie auf dem heutigen Raster
+    (volle Stunde) liegen — Reste des verschobenen Rasters enden auf :30.
+    """
+    if not new_rows:
+        return old_rows
+    start = new_rows[0]["d"]
+    return [r for r in old_rows if r["d"] < start and not r["d"].endswith(":30")] + new_rows
 
 
 OVERLAP_DAYS = 15    # Tage Überlappung beim Daily-Abruf, um Splits zu erkennen
@@ -140,40 +153,23 @@ def update_ticker(ticker):
                 data["ohlcv_w"].extend(added)
                 changed = True
 
-    # 4H: yfinance liefert max. 730 Tage → re-fetch und neue Einträge mergen
+    # 4H: yfinance liefert max. 730 Tage → komplett neu laden und Fenster ersetzen
     try:
         raw_1h = yf.download(ticker, period="730d", interval="1h",
                               prepost=True, auto_adjust=True, progress=False)
         if not raw_1h.empty:
             if isinstance(raw_1h.columns, pd.MultiIndex):
                 raw_1h.columns = raw_1h.columns.get_level_values(0)
-            raw_1h = raw_1h[["Open", "High", "Low", "Close", "Volume"]].copy()
-            raw_1h.index = pd.to_datetime(raw_1h.index)
-            raw_1h.dropna(subset=["Close"], inplace=True)
-            _et = ZoneInfo("America/New_York")
-            _ext = pd.Series(
-                [ts.astimezone(_et).hour < 9 or
-                 (ts.astimezone(_et).hour == 9 and ts.astimezone(_et).minute < 30) or
-                 ts.astimezone(_et).hour >= 16
-                 for ts in raw_1h.index],
-                index=raw_1h.index, dtype=bool
-            )
-            _prev_low = raw_1h["Low"].shift(1)
-            _next_low = raw_1h["Low"].shift(-1)
-            _bad_low  = _ext & (raw_1h["Low"] < _prev_low * 0.70) & (raw_1h["Low"] < _next_low * 0.70)
-            raw_1h.loc[_bad_low, "Low"] = raw_1h.loc[_bad_low, ["Open","Close"]].min(axis=1)
-            raw_4h = raw_1h[["Open","High","Low","Close"]].resample("4h").agg(
-                {"Open": "first", "High": "max", "Low": "min", "Close": "last"}
-            ).dropna()
-            new_rows = df_to_ohlcv(raw_4h, fmt="%Y-%m-%d %H:%M")
+            # 4H-Bildung wie live (rs_core.hourly_to_4h_rows). Der Abruf deckt das
+            # ganze 730-Tage-Fenster ab — daher ersetzen statt über den Zeitstempel
+            # zu mischen: Verschiebt Yahoo das Stundenraster, lagen sonst zwei
+            # 4H-Raster übereinander (Sept. 2024 – Mai 2026 in fast allen Dateien).
+            new_rows = hourly_to_4h_rows(raw_1h)
             if new_rows:
-                known = {r["d"] for r in data.get("ohlcv_4h", [])}
-                added = [r for r in new_rows if r["d"] not in known]
-                if added:
-                    data["ohlcv_4h"] = sorted(
-                        data.get("ohlcv_4h", []) + added,
-                        key=lambda x: x["d"]
-                    )
+                old_rows = data.get("ohlcv_4h", [])
+                merged = merge_4h(old_rows, new_rows)
+                if merged != old_rows:
+                    data["ohlcv_4h"] = merged
                     changed = True
     except Exception:
         pass  # 4H-Fehler nicht kritisch

@@ -30,7 +30,7 @@ _REPO = os.path.dirname(_HERE)
 sys.path.insert(0, _REPO)
 sys.path.insert(0, _HERE)
 
-from rs_core import rank_by_day                          # noqa: E402
+from rs_core import membership_mask, rank_by_day         # noqa: E402
 from repair_backtest_splits import find_jumps            # noqa: E402
 from symbols import MAX_START_GAP_DAYS, candidates       # noqa: E402
 
@@ -116,15 +116,6 @@ def resolve_symbols(intervals, daily):
                               "rejected": [iv for iv in ivs if iv not in ok]}
         yahoo_intervals.setdefault(sym, []).extend(ok)
     return resolution, yahoo_intervals
-
-
-def member_mask(index, symbols, yahoo_intervals):
-    days = np.array([d.strftime("%Y-%m-%d") for d in index])
-    mask = np.zeros((len(days), len(symbols)), dtype=bool)
-    for c, sym in enumerate(symbols):
-        for start, end in yahoo_intervals[sym]:
-            mask[:, c] |= (days >= start) & ((days < end) if end else True)
-    return mask
 
 
 def top20_history(d_close, symbols, mask):
@@ -216,7 +207,7 @@ def main():
     d_close = pd.DataFrame({sym: daily[sym]["Close"] for sym in used + [BENCHMARK]}).sort_index()
     variants = {"inkl": used, "exkl": [s for s in used if symbol_info[s]["active"]]}
     for name, syms in variants.items():
-        mask = member_mask(d_close.index, syms, yahoo_intervals)
+        mask = membership_mask(d_close.index, syms, yahoo_intervals)
         hist = top20_history(d_close, syms, mask)
         hist = {d: v for d, v in hist.items() if d >= membership["start"]}
         _write(os.path.join(CACHE_DIR, f"top20_{name}.json"), hist)

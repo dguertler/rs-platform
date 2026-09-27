@@ -105,3 +105,15 @@ def test_member_mask_excludes_non_members_but_keeps_their_prices():
     for _, d, r in ranked:
         for t, s in r:
             assert full[d][t] == s
+
+
+def test_membership_mask_intervals():
+    from rs_core import membership_mask
+    idx = pd.to_datetime(["2024-01-02", "2024-06-03", "2025-03-17", "2025-03-18"])
+    mask = membership_mask(idx, ["A", "B", "C"], {
+        "A": [["2024-01-01", None]],
+        "B": [["2024-03-01", "2025-03-17"]],        # am Abgangstag nicht mehr Mitglied
+    })
+    assert mask[:, 0].tolist() == [True, True, True, True]
+    assert mask[:, 1].tolist() == [False, True, False, False]
+    assert mask[:, 2].tolist() == [False, False, False, False]  # nie Mitglied

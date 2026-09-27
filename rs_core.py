@@ -67,6 +67,20 @@ def rank_by_day(d_close, benchmark, tickers, member_mask=None, windows=RS_WINDOW
         yield i, index[i].strftime("%Y-%m-%d"), scores
 
 
+def membership_mask(index, tickers, intervals):
+    """Mitgliedschafts-Maske (Zeilen = Handelstage aus index, Spalten = tickers).
+
+    intervals: {ticker: [[von, bis], ...]} mit bis = None für „noch Mitglied";
+    Mitglied ist, wer von <= Tag < bis erfüllt (am Abgangstag nicht mehr).
+    """
+    days = np.array([d.strftime("%Y-%m-%d") for d in index])
+    mask = np.zeros((len(days), len(tickers)), dtype=bool)
+    for c, t in enumerate(tickers):
+        for start, end in intervals.get(t, []):
+            mask[:, c] |= (days >= start) & ((days < end) if end else True)
+    return mask
+
+
 def hourly_to_4h_rows(df, decimals=2):
     """Stundenkerzen (inkl. Vor-/Nachbörse, Index mit Zeitzone) → 4H-Kerzen.
 
