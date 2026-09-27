@@ -19,6 +19,7 @@ import json
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -36,6 +37,7 @@ CACHE_DIR = os.path.join(_HERE, "cache")
 H4_START = "2016-01-01"          # Alpaca-Historie beginnt 2016
 FETCH_START = "2015-12-01"       # etwas Vorlauf für die 60 Kerzen der 4H-Struktur
 SYMBOLS_PER_REQUEST = 10
+PARALLEL_REQUESTS = 4          # Basic-Plan: 200 Anfragen/Minute, 429 wird abgewartet
 MAX_RETRIES = 6
 ET = "America/New_York"
 
@@ -123,24 +125,32 @@ def main():
 
     os.makedirs(os.path.join(CACHE_DIR, "h4"), exist_ok=True)
     info, missing = {}, []
-    for k in range(0, len(symbols), SYMBOLS_PER_REQUEST):
-        chunk = symbols[k:k + SYMBOLS_PER_REQUEST]
+    chunks = [symbols[k:k + SYMBOLS_PER_REQUEST] for k in range(0, len(symbols), SYMBOLS_PER_REQUEST)]
+
+    def load(chunk):
         try:
-            bars = fetch_bars(chunk, f"{FETCH_START}T00:00:00Z", end, feed, key, secret)
+            return chunk, fetch_bars(chunk, f"{FETCH_START}T00:00:00Z", end, feed, key, secret), None
         except RuntimeError as e:
-            print(f"  {','.join(chunk)}: {e}")
-            missing.extend(chunk)
-            continue
-        for sym in chunk:
-            hourly = yahoo_like_hourly(bars.get(sym) or [])
-            rows = hourly_to_4h_rows(hourly, decimals=4) if len(hourly) else []
-            if not rows:
-                missing.append(sym)
+            return chunk, None, e
+
+    done = 0
+    with ThreadPoolExecutor(max_workers=PARALLEL_REQUESTS) as pool:
+        for chunk, bars, err in pool.map(load, chunks):
+            done += len(chunk)
+            if err:
+                print(f"  {','.join(chunk)}: {err}")
+                missing.extend(chunk)
                 continue
-            with open(os.path.join(CACHE_DIR, "h4", f"{sym}.json"), "w", encoding="utf-8") as f:
-                json.dump(rows, f, separators=(",", ":"))
-            info[sym] = {"first": rows[0]["d"][:10], "last": rows[-1]["d"][:10], "bars": len(rows)}
-        print(f"  {min(k + SYMBOLS_PER_REQUEST, len(symbols))}/{len(symbols)}")
+            for sym in chunk:
+                hourly = yahoo_like_hourly(bars.get(sym) or [])
+                rows = hourly_to_4h_rows(hourly, decimals=4) if len(hourly) else []
+                if not rows:
+                    missing.append(sym)
+                    continue
+                with open(os.path.join(CACHE_DIR, "h4", f"{sym}.json"), "w", encoding="utf-8") as f:
+                    json.dump(rows, f, separators=(",", ":"))
+                info[sym] = {"first": rows[0]["d"][:10], "last": rows[-1]["d"][:10], "bars": len(rows)}
+            print(f"  {done}/{len(symbols)}", flush=True)
 
     meta = {"source": "Alpaca Market Data API (30Min → Yahoo-Stundenraster → 4H wie live)",
             "feed": feed, "start": H4_START, "symbols": info, "missing": sorted(missing)}
