@@ -90,7 +90,7 @@ def sanitize_nan(obj):
 
 print(f"Teil 2: RS-Berechnung für {len(tickers)} S&P 500-Aktien (ohne QQQ-Werte)...")
 all_tickers = tickers + [benchmark]
-raw   = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
+raw   = yf.download(all_tickers, period="2y", auto_adjust=True, progress=False)  # 2 Jahre, sonst fehlt das 12M-Fenster (252 Handelstage)
 close = raw["Close"]
 spx   = close[benchmark].dropna()
 if len(spx) < 60:

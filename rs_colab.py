@@ -84,7 +84,7 @@ def sanitize_nan(obj):
 # ── Schritt 1: RS-Score Batch-Download ──────────────────────────────────────
 print(f"Schritt 1: RS-Berechnung für alle {len(tickers)} Aktien...")
 all_tickers = tickers + [benchmark]
-raw = yf.download(all_tickers, period="1y", auto_adjust=True, progress=False)
+raw = yf.download(all_tickers, period="2y", auto_adjust=True, progress=False)  # 2 Jahre, sonst fehlt das 12M-Fenster (252 Handelstage)
 close = raw["Close"]
 qqq = close[benchmark].dropna()
 if len(qqq) < 60:
