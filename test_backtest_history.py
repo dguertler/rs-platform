@@ -36,13 +36,15 @@ def _frame(rows, cols=("o", "h", "l", "c")):
 def _load_repo_prices():
     rs = json.load(open(os.path.join(_REPO, "data", "rs_full.json")))
     daily, weekly = {}, {}
-    for entry in rs["data"]:
-        path = os.path.join(_REPO, "data", f"backtest_{entry['ticker'].lower()}.json")
+    # Universum der RS-Datei plus die beiden Testfälle (unabhängig davon, ob
+    # sie gerade im Index stehen — die Backtest-Dateien bleiben erhalten)
+    for ticker in sorted({e["ticker"] for e in rs["data"]} | {DELISTED, LEFT_INDEX}):
+        path = os.path.join(_REPO, "data", f"backtest_{ticker.lower()}.json")
         if not os.path.exists(path):
             continue
         bt = json.load(open(path))
-        daily[entry["ticker"]] = _frame(bt["ohlcv_d"])
-        weekly[entry["ticker"]] = _frame(bt["ohlcv_w"])
+        daily[ticker] = _frame(bt["ohlcv_d"])
+        weekly[ticker] = _frame(bt["ohlcv_w"])
     daily["QQQ"] = _frame(rs["benchmark_ohlcv"])
     weekly["QQQ"] = _frame(rs["benchmark_ohlcv_w"])
     daily["^NDX"] = _frame(rs["ndx_ohlcv"], cols=("c",))
