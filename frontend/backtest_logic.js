@@ -279,6 +279,61 @@ function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h) {
   });
 }
 
+// ── Stopp und Ausstieg (gemeinsam für simulateTrades und simulateFromEntry) ────
+// Letztes Swing-Tief (von beiden Nachbartagen nicht unterboten) der Tageskerzen
+// vor dem Einstieg; sonst das Minimum der letzten fünf Kerzen.
+function recentSwingLowOf(barsBeforeEntry) {
+  for (let k = barsBeforeEntry.length - 2; k >= 1; k--) {
+    if (barsBeforeEntry[k].l <= barsBeforeEntry[k-1].l && barsBeforeEntry[k].l <= barsBeforeEntry[k+1].l)
+      return barsBeforeEntry[k].l;
+  }
+  return barsBeforeEntry.length > 0 ? Math.min(...barsBeforeEntry.slice(-5).map(d => d.l)) : null;
+}
+
+// Ausstiegssignal am Tagesschluss von dHistory[k]: GWS-D-Struktur (aus den
+// Kerzen davor) intakt und Schluss unter dem letzten Swing-Tief, oder Schluss
+// unter dem Stopp. Ausführung am nächsten Handelstag zur Eröffnung.
+function isExitDay(dHistory, k, stopPrice) {
+  const day = dHistory[k];
+  const structBefore = analyzeStructure(dHistory.slice(0, k));
+  if (structBefore && !structBefore.broken) {
+    const swingLows = structBefore.swingLows ?? [];
+    const lastSL    = swingLows.length > 0 ? swingLows[swingLows.length - 1] : null;
+    if (lastSL != null && day.c < lastSL.price) return true;
+  }
+  return stopPrice != null && day.c < stopPrice;
+}
+
+// Ein Trade ab festem Einstiegstag (z. B. ein verschickter Live-Alert): Kauf zur
+// Eröffnung, Stopp und Ausstieg exakt wie in simulateTrades, gleiche
+// Positionsgröße (CAPITAL, max. MAX_RISK Risiko). null, wenn kein gültiger Einstieg.
+function simulateFromEntry(ohlcv_d, entryDate) {
+  const entryIdx = ohlcv_d.findIndex(d => d.d >= entryDate);
+  if (entryIdx < 0) return null;
+  const entryBar = ohlcv_d[entryIdx];
+  const swingLow = recentSwingLowOf(ohlcv_d.slice(0, entryIdx));
+  const stopPrice = swingLow != null ? swingLow * 0.99 : null;
+  const entryPrice = entryBar.o;
+  if (!entryPrice || !stopPrice || entryPrice <= stopPrice) return null;
+  let shares = Math.floor(MAX_RISK / (entryPrice - stopPrice));
+  if (shares * entryPrice > CAPITAL) shares = Math.floor(CAPITAL / entryPrice);
+  if (shares <= 0) return null;
+  const entry = { entryDate: entryBar.d, entryPrice, stopPrice, shares,
+                  invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
+  for (let k = entryIdx; k < ohlcv_d.length; k++) {
+    if (!isExitDay(ohlcv_d, k, stopPrice)) continue;
+    const next = ohlcv_d[k + 1];
+    const exitPrice = next ? next.o : ohlcv_d[k].c;
+    const pnl = (exitPrice - entryPrice) * shares;
+    return { ...entry, exitDate: next ? next.d : ohlcv_d[k].d, exitPrice, pnl,
+             pnlPct: (exitPrice / entryPrice - 1) * 100, isWin: pnl > 0, isOpen: false };
+  }
+  const last = ohlcv_d[ohlcv_d.length - 1];
+  const pnl = (last.c - entryPrice) * shares;
+  return { ...entry, exitDate: last.d, exitPrice: last.c, pnl,
+           pnlPct: (last.c / entryPrice - 1) * 100, isWin: pnl > 0, isOpen: true };
+}
+
 // ── Trade-Simulation ──────────────────────────────────────────────────────────────
 // Gewertet werden nur Einstiege, bei denen die 4H-Ebene den dritten Punkt liefert.
 // Über beide Testfenster schlägt dieser Auslöser die Tages- und Wochen-Variante
@@ -337,14 +392,7 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '
         }
 
         const barsBeforeEntry = curr.dHistory.filter(d => d.d < entryDate);
-        let recentSwingLow = null;
-        for (let k = barsBeforeEntry.length - 2; k >= 1; k--) {
-          if (barsBeforeEntry[k].l <= barsBeforeEntry[k-1].l && barsBeforeEntry[k].l <= barsBeforeEntry[k+1].l) {
-            recentSwingLow = barsBeforeEntry[k].l; break;
-          }
-        }
-        if (recentSwingLow == null && barsBeforeEntry.length > 0)
-          recentSwingLow = Math.min(...barsBeforeEntry.slice(-5).map(d => d.l));
+        let recentSwingLow = recentSwingLowOf(barsBeforeEntry);
         if (recentSwingLow == null && curr.h4Slice.length > 0) {
           const h4Before = curr.h4Slice.filter(d => d.d.slice(0,10) < entryDate);
           for (let k = h4Before.length - 2; k >= 1; k--) {
@@ -381,15 +429,7 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '
         if (day.d < entry.entryDate) continue;
         if (lastCheckedDay != null && day.d <= lastCheckedDay) continue;
 
-        const structBefore = analyzeStructure(curr.dHistory.slice(0, k));
-        let exitSignal = false;
-        if (structBefore && !structBefore.broken) {
-          const swingLows = structBefore.swingLows ?? [];
-          const lastSL    = swingLows.length > 0 ? swingLows[swingLows.length - 1] : null;
-          if (lastSL != null && day.c < lastSL.price) exitSignal = true;
-        }
-        if (!exitSignal && entry.stopPrice != null && day.c < entry.stopPrice) exitSignal = true;
-        if (!exitSignal) continue;
+        if (!isExitDay(curr.dHistory, k, entry.stopPrice)) continue;
 
         const nextDay   = ohlcv_d.find(d => d.d > day.d);
         const exitPrice = nextDay ? nextDay.o : day.c;

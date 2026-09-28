@@ -877,6 +877,9 @@ def main():
                 'daily_bar_date':  a.get('daily_bar_date'),
                 'h4_bar_date':     a.get('h4_bar_date'),
                 'source':          a['source'],
+                # verschickt wurde nur, was in den Top 20 stand (Grundlage der
+                # echten Live-Bilanz, live_alerts/)
+                'in_top20':        bool(a.get('in_top20')),
             })
         save_signals(signals)
 

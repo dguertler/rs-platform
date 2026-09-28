@@ -106,6 +106,76 @@ function Calibration({ cal }) {
   );
 }
 
+const LIVE_GROUPS = {
+  QQQ: 'NASDAQ-100', SPX: 'S&P 500', alle: 'Beide Indizes', nur4H: 'nur 4H-Auslöser (Backtest-Regel)',
+  ohneNaeherung: 'nur exakt belegte Alerts (ab Mitte Mai)',
+};
+
+function LiveAlerts({ live }) {
+  const [show, setShow] = useState(false);
+  if (!live) return null;
+  const row = (k) => {
+    const g = live.groups[k];
+    if (!g) return null;
+    return (
+      <tr key={k} className="data-row">
+        <td style={{ fontWeight: k === 'QQQ' || k === 'SPX' ? 700 : 400 }}>{LIVE_GROUPS[k]}</td>
+        <td>{g.nTrades} ({g.nOpen})</td>
+        <td>{num(g.winrate)} %</td>
+        <td style={{ color: pfColor(g.profitFactor), fontWeight: 700 }}>{num(g.profitFactor, 2)}</td>
+        <td style={{ color: pfColor(g.profitFactorClosed) }}>{num(g.profitFactorClosed, 2)}</td>
+        <td style={{ color: pnlColor(g.avgReturnPerTrade) }}>{pct(g.avgReturnPerTrade)}</td>
+        <td style={{ color: pnlColor(g.returnOnInvested) }}>{pct(g.returnOnInvested)}</td>
+        <td style={{ color: pnlColor(g.totalPnl) }}>{eur(g.totalPnl)}</td>
+      </tr>
+    );
+  };
+  return (
+    <div className="card" style={{ marginBottom: 20, borderColor: '#1d4ed8' }}>
+      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>Echte Live-Alerts seit {live.firstAlert}</div>
+      <div className="note" style={{ marginBottom: 10 }}>
+        Jeder tatsächlich per Mail/Telegram verschickte Breakout-Alert ({live.alertsSent} Alerts) als Trade: Kauf zur
+        Eröffnung am Alert-Tag, Stopp und Ausstieg wie in der Backtest-Engine, 10.000 € je Signal, max. 1.000 € Risiko,
+        eine Position je Titel ({live.skipped.position_offen} Alerts fielen in eine laufende Position). Welche Alerts
+        verschickt wurden, stammt aus der Git-Historie (Top 20 zum Versandzeitpunkt); vor Mitte Mai 2026 angenähert.
+        PF inkl. offener Positionen, daneben nur abgeschlossene.
+      </div>
+      <div style={{ overflowX: 'auto' }}>
+        <table>
+          <thead><tr><th>Gruppe</th><th>Trades (offen)</th><th>Treffer</th><th>PF</th><th>PF abgeschl.</th>
+            <th>Ø/Trade</th><th>Rendite auf Einsatz</th><th>Σ P&L</th></tr></thead>
+          <tbody>{Object.keys(LIVE_GROUPS).map(row)}</tbody>
+        </table>
+      </div>
+      <button onClick={() => setShow(!show)}
+        style={{ marginTop: 10, background: 'transparent', border: '1px solid #334155', borderRadius: 6,
+          padding: '4px 12px', color: '#94a3b8', fontFamily: 'monospace', fontSize: 12, cursor: 'pointer' }}>
+        {show ? 'Trades ausblenden' : `Alle ${live.trades.length} Trades zeigen`}
+      </button>
+      {show && (
+        <div style={{ overflow: 'auto', maxHeight: 420, marginTop: 10 }}>
+          <table>
+            <thead><tr><th>Ticker</th><th>Index</th><th>Auslöser</th><th>Alert</th><th>Ausstieg</th><th>Rendite</th><th>P&L</th></tr></thead>
+            <tbody>
+              {[...live.trades].reverse().map((t, i) => (
+                <tr key={i} className="data-row">
+                  <td style={{ fontWeight: 700 }}>{t.ticker}</td>
+                  <td style={{ color: '#94a3b8' }}>{t.source === 'QQQ' ? 'NDX' : 'SPX'}</td>
+                  <td style={{ color: '#94a3b8' }}>{t.trigger}</td>
+                  <td>{t.alertDate}{t.basis === 'naeherung' ? '*' : ''}</td>
+                  <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}</td>
+                  <td style={{ color: pnlColor(t.pnlPct) }}>{pct(t.pnlPct)}</td>
+                  <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function BeforeAfter({ ba }) {
   const first = ba.steps[0], last = ba.steps[ba.steps.length - 1];
   const years = [...new Set([...Object.keys(first.years), ...Object.keys(last.years)])].sort();
@@ -264,6 +334,12 @@ function App() {
   const [variant, setVariant] = useState('inkl');
   const [year, setYear] = useState(null);
 
+  const [live, setLive] = useState(null);
+  useEffect(() => {
+    fetch('data/live_alerts_performance.json', { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null)).then(setLive).catch(() => setLive(null));
+  }, []);
+
   useEffect(() => {
     fetch('data/backtest_history/ndx_results.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
@@ -297,6 +373,8 @@ function App() {
         den <b>damaligen Indexmitgliedern</b> berechnet, mit derselben Formel wie live. Stopp, täglicher Ausstieg,
         10.000 € je Signal und 1.000 € Risiko wie in der Live-Engine. Trades werden dem Jahr ihres Einstiegs zugeordnet.
       </div>
+
+      <LiveAlerts live={live} />
 
       <Calibration cal={data.calibration} />
 
