@@ -2,21 +2,22 @@
 /**
  * Top-20-Performance-Tracking seit Start der Live-Signale.
  *
- * Nutzt die identische Backtest-Engine wie frontend/backtest.html und
- * frontend/backtest_overview.html (frontend/backtest_logic.js, TOP 20 = AN):
- * 10.000 EUR Kapital je Signal, max. 1.000 EUR Risiko (10 %), Stopp = letztes
- * Swing-Tief * 0,99, Ausstieg bei Bruch der GWS-D-Struktur.
+ * Die Einstiege sind die tatsächlich per Mail/Telegram verschickten
+ * Breakout-Alerts (data/live_alerts.json, live_alerts/alert_trades.js): Kauf
+ * zur Eröffnung des Alert-Tags. Stopp und Ausstieg wie in der Backtest-Engine
+ * (frontend/backtest_logic.js): 10.000 EUR je Signal, max. 1.000 EUR Risiko,
+ * Stopp = letztes Swing-Tief * 0,99, Ausstieg bei Bruch der GWS-D-Struktur.
  *
- * Gewertet werden nur Trades, deren Einstieg ab dem ersten live versendeten
- * Signal des jeweiligen Index liegt (data/signals.json) und bei denen der
- * Ticker am Einstiegstag in den Top 20 des Index stand (top20_history).
+ * Früher simulierte das Skript die Einstiege selbst (Wochenlauf, nur
+ * 4H-Auslöser, Kauf am Folgetag, Top 20 aus top20_history) — das traf andere
+ * Tage und andere Titel als die echten Alerts (z. B. AMD 15.04. statt 17.04.)
+ * und unterschätzte die Live-Bilanz deutlich.
  *
  * Aufruf:  node track_top20_performance.js
  * Schreibt data/top20_performance.json und gibt eine Zusammenfassung aus.
  */
 const fs = require('fs');
 const path = require('path');
-const vm = require('vm');
 
 const ROOT = __dirname;
 const OUT_FILE = path.join(ROOT, 'data', 'top20_performance.json');
@@ -26,119 +27,45 @@ const INDICES = [
   { key: 'SPX', name: 'S&P 500', rsFile: 'data/rs_sp500.json' },
 ];
 
-// ── Backtest-Engine laden (Single Source of Truth: frontend/backtest_logic.js) ──
-const engineCode = fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8');
-vm.runInThisContext(
-  engineCode + '\n;globalThis.__engine = { buildWeekRows, simulateTrades, CAPITAL, MAX_RISK };'
-);
-const { buildWeekRows, simulateTrades, CAPITAL, MAX_RISK } = globalThis.__engine;
+const { alertTrades, readJson, CAPITAL, MAX_RISK } = require('./live_alerts/alert_trades');
 const { kpis: kpisFor } = require('./backtest_kpis');
 const kpis = (trades) => kpisFor(trades, CAPITAL);
 
-const readJson = (rel) => JSON.parse(fs.readFileSync(path.join(ROOT, rel), 'utf8'));
-const slugify = (ticker) => ticker.toLowerCase().replace(/[^a-z0-9]/g, '_');
-
-/** Erstes live versendetes Signal je Index-Quelle aus data/signals.json. */
-function firstSignalDates() {
-  const signals = readJson('data/signals.json');
-  const first = {};
-  for (const list of Object.values(signals)) {
-    for (const s of list) {
-      const src = s.source || 'QQQ';
-      if (!first[src] || s.signal_date < first[src]) first[src] = s.signal_date;
-    }
-  }
-  return first;
-}
-
-/** OHLCV-Aufbereitung exakt wie in frontend/backtest_overview.html. */
-function prepareSeries(entry) {
-  let bt = null;
-  try {
-    bt = readJson(`data/backtest_${slugify(entry.ticker)}.json`);
-  } catch (e) {
-    bt = null;
-  }
-  const full = bt && bt.ohlcv_w && bt.ohlcv_d ? bt : null;
-  const rawW = full ? full.ohlcv_w : entry.ohlcv_w || [];
-  const rawD = full ? full.ohlcv_d : entry.ohlcv || [];
-  const raw4h = full ? full.ohlcv_4h || [] : entry.ohlcv_4h || [];
-  if (!rawW.length || !rawD.length) return null;
-  const ohlcvW = rawW.slice(-104);
-  const cutDate = ohlcvW[0] ? ohlcvW[0].d : '2000-01-01';
-  return {
-    hasFullHistory: !!full,
-    ohlcvW,
-    ohlcvD: rawD.filter((d) => d.d >= cutDate),
-    ohlcv4h: raw4h.filter((d) => d.d.slice(0, 10) >= cutDate),
-  };
-}
-
-function collectTrades(index, startDate) {
+function indexStats(index, trades) {
   const rs = readJson(index.rsFile);
-  const top20Hist = rs.top20_history || null;
-  const trades = [];
-  let withoutFullHistory = 0;
-
-  for (const entry of rs.data || []) {
-    const series = prepareSeries(entry);
-    if (!series) continue;
-    if (!series.hasFullHistory) withoutFullHistory++;
-    const weekRows = buildWeekRows(series.ohlcvW, series.ohlcvD, series.ohlcv4h);
-    const simulated = simulateTrades(weekRows, series.ohlcvD, entry.ticker, top20Hist, true);
-    for (const t of simulated) {
-      if (t.entryDate >= startDate) trades.push({ ...t, ticker: entry.ticker, index: index.key });
-    }
-  }
-
-  const bench = rs.benchmark_ohlcv || [];
-  const benchSlice = bench.filter((b) => b.d >= startDate);
-  const benchmarkPct =
-    benchSlice.length > 1
-      ? (benchSlice[benchSlice.length - 1].c / benchSlice[0].c - 1) * 100
-      : null;
-
+  const startDate = trades.reduce((m, t) => (!m || t.alertDate < m ? t.alertDate : m), null);
+  const benchSlice = (rs.benchmark_ohlcv || []).filter((b) => startDate && b.d >= startDate);
   return {
-    trades,
-    universe: (rs.data || []).length,
-    withoutFullHistory,
-    benchmark: rs.benchmark || index.key,
-    benchmarkPct,
+    name: index.name,
+    start: startDate,
     lastBar: benchSlice.length ? benchSlice[benchSlice.length - 1].d : null,
+    benchmark: rs.benchmark || index.key,
+    benchmarkPct: benchSlice.length > 1
+      ? (benchSlice[benchSlice.length - 1].c / benchSlice[0].c - 1) * 100
+      : null,
+    kpis: kpis(trades),
   };
 }
 
 function main() {
-  const starts = firstSignalDates();
+  const { trades: allTrades, sent } = alertTrades();
   const result = {
     generated: new Date().toISOString().slice(0, 16).replace('T', ' '),
     capital: CAPITAL,
     maxRisk: MAX_RISK,
-    note: 'Backtest-Engine frontend/backtest_logic.js, TOP 20 = AN, nur 4H-Auslöser, Trades ab erstem Live-Signal des Index.',
+    note: 'Einstiege = tatsächlich verschickte Alerts (Kauf zur Eröffnung am Alert-Tag), '
+      + 'Stopp/Ausstieg wie frontend/backtest_logic.js, eine Position je Titel.',
+    alertsSent: sent.length,
     indices: {},
   };
-  const allTrades = [];
-
   for (const index of INDICES) {
-    const startDate = starts[index.key];
-    if (!startDate) {
-      console.error(`${index.key}: kein Live-Signal in data/signals.json – übersprungen.`);
+    const trades = allTrades.filter((t) => t.source === index.key);
+    if (!trades.length) {
+      console.error(`${index.key}: keine verschickten Alerts – übersprungen.`);
       continue;
     }
-    const { trades, universe, withoutFullHistory, benchmark, benchmarkPct, lastBar } =
-      collectTrades(index, startDate);
-    allTrades.push(...trades);
-    result.indices[index.key] = {
-      name: index.name,
-      start: startDate,
-      lastBar,
-      universe,
-      withoutFullHistory,
-      benchmark,
-      benchmarkPct,
-      kpis: kpis(trades),
-    };
-    console.error(`${index.key}: ${trades.length} Trades seit ${startDate}`);
+    result.indices[index.key] = indexStats(index, trades);
+    console.error(`${index.key}: ${trades.length} Trades seit ${result.indices[index.key].start}`);
   }
 
   result.total = kpis(allTrades);

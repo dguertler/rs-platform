@@ -49,3 +49,16 @@ def test_entry_stop_and_exit():
 def test_entry_uses_next_trading_day():
     _, t, _ = run()
     assert t["entryDate"] == "2026-01-08"
+
+
+def test_top20_tracking_uses_sent_alerts():
+    """Top-20-Performance seit Live-Start = Bilanz der verschickten Alerts."""
+    for cmd in (["node", "live_alerts/evaluate_alerts.js"], ["node", "track_top20_performance.js"]):
+        subprocess.run(cmd, cwd=_REPO, check=True, capture_output=True)
+    live = json.load(open(os.path.join(_REPO, "data", "live_alerts_performance.json")))
+    top = json.load(open(os.path.join(_REPO, "data", "top20_performance.json")))
+    for src in ("QQQ", "SPX"):
+        a, b = live["groups"][src], top["indices"][src]["kpis"]
+        assert a["nTrades"] == b["nTrades"] and a["totalPnl"] == b["totalPnl"]
+        assert abs(a["profitFactor"] - b["profitFactor"]) < 1e-9
+    assert top["total"]["nTrades"] == live["groups"]["alle"]["nTrades"]
