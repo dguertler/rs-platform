@@ -2563,19 +2563,6 @@
       "created_at": "2026-09-04T11:51:38.321000"
     },
     {
-      "ticker": "DELL",
-      "verdict": "HOLD",
-      "score": 60,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -11.3,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "Der Erwartungswert ist nach dem +23%-Kurssprung leicht negativ (\u22127,3%), und das Forward-KGV liegt weit au\u00dferhalb der Peer-Bandbreite; das fundamentale Bewertungsrisiko \u00fcberwiegt das technische Momentum-Signal."
-      },
-      "created_at": "2026-09-05T08:14:29.636451"
-    },
-    {
       "ticker": "STX",
       "verdict": "WATCH",
       "score": 48,
@@ -2782,19 +2769,6 @@
         "reason": "das optisch g\u00fcnstige Forward-KGV von 6,77x basiert auf Zyklusspitzen-EPS und entspricht normalisiert einem FCF-Multiple von 75\u2013131x, bei einem EV 8,7 % unter dem Kurs."
       },
       "created_at": "2026-09-21T16:59:43.779548"
-    },
-    {
-      "ticker": "MU",
-      "verdict": "BUY",
-      "score": 88,
-      "asymmetric_edge": true,
-      "ev_upside_pct": 25.5,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "16 Take-or-Pay-Vertr\u00e4ge \u00fcber rund $100 Mrd. bis 2030 plus $24,4 Mrd. Nettoliquidit\u00e4t st\u00fctzen das niedrigste Forward-Multiple der Gruppe (6,49x) bei einem EV-Upside von +27,5 %."
-      },
-      "created_at": "2026-09-21T16:59:43.794292"
     },
     {
       "ticker": "NTRA",
@@ -3094,6 +3068,32 @@
         "reason": "Der EV von $66,80 liegt auf dem Post-Earnings-Kurs von ~$67,50, der Beat stammt aus dem zyklischen Integrated-Memory-Segment bei negativem FCF; das technische Setup bleibt intakt, tr\u00e4gt aber keine volle Position."
       },
       "created_at": "2026-10-07T06:27:06.800235"
+    },
+    {
+      "ticker": "MU",
+      "verdict": "BUY",
+      "score": 88,
+      "asymmetric_edge": true,
+      "ev_upside_pct": 26.4,
+      "funnel_veto": {
+        "decision": "PASS",
+        "category": "Sonstiges",
+        "reason": "Beat plus Q1-Guidance von $61,5 Mrd. \u00fcber Konsens, $33,2 Mrd. Quartals-FCF und das niedrigste Forward-Multiple der Speichergruppe (5,2x) tragen einen EV-Upside von +23,6 %."
+      },
+      "created_at": "2026-10-08T18:43:53.207596"
+    },
+    {
+      "ticker": "DELL",
+      "verdict": "HOLD",
+      "score": 56,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -19.7,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "der Erwartungswert liegt 16,8 % unter dem Kurs und das Forward-KGV von 19,3x deutlich \u00fcber der Peer-Bandbreite von 8,2x\u201314,8x, w\u00e4hrend steigende Speicherkosten die Marge des $95-Mrd.-Backlogs bedrohen."
+      },
+      "created_at": "2026-10-08T18:43:54.478429"
     }
   ]
 }
