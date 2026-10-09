@@ -177,6 +177,14 @@ function Candles({ bars, trades, selected, onSelect, levels, height = 320, title
   );
 }
 
+/** Montag der Handelswoche einer Wochenzeile (Yahoo stempelt die historischen
+    Wochenkerzen teils auf den Samstag davor). */
+function mondayOf(row) {
+  const d = new Date(row.week.d.slice(0, 10) + 'T12:00:00Z');
+  for (let k = 0; k < 7 && d.getUTCDay() !== 1; k++) d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
+
 /** Woche (Index in w), in der der Trade ausgelöst wurde: Signalwoche der Engine, sonst die Woche vor dem Einstieg. */
 function signalWeekIdx(w, t) {
   if (t.weeklyDate) { const i = w.findIndex(b => b.d.slice(0, 10) === t.weeklyDate.slice(0, 10)); if (i >= 0) return i; }
@@ -353,7 +361,7 @@ function App() {
           <div style={{ background: '#0a0f1e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'hidden' }}>
             <div style={{ display: 'grid', gridTemplateColumns: '78px 92px 72px 36px 36px 36px 40px 1fr', padding: '7px 12px',
               background: '#0f172a', borderBottom: '1px solid #1e293b', fontSize: 10, fontWeight: 700, color: '#475569', fontFamily: 'monospace' }}>
-              <span>KW</span><span>Datum</span><span style={{ textAlign: 'right' }}>Close</span>
+              <span>KW</span><span>Woche ab</span><span style={{ textAlign: 'right' }}>Close</span>
               <span style={{ textAlign: 'center' }}>W</span><span style={{ textAlign: 'center' }}>D</span>
               <span style={{ textAlign: 'center' }}>4H</span><span style={{ textAlign: 'center' }}>T20</span><span></span>
             </div>
@@ -373,7 +381,7 @@ function App() {
                       alignItems: 'center', borderBottom: '1px solid #0f172a',
                       background: isSel ? '#1a2f4a' : bg, borderLeft: isSel ? '3px solid #3b82f6' : bl }}>
                     <span style={{ fontFamily: 'monospace', fontSize: 11, color: isSel ? '#93c5fd' : '#64748b' }}>KW {row.kw}/{String(row.year).slice(2)}</span>
-                    <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#94a3b8' }}>{row.week.d}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#94a3b8' }}>{mondayOf(row)}</span>
                     <span style={{ fontFamily: 'monospace', fontSize: 11, textAlign: 'right', color: '#cbd5e1', fontWeight: 600 }}>{price(row.week.c)}</span>
                     <span style={{ textAlign: 'center' }}><PktDot val={row.pW} has={true}/></span>
                     <span style={{ textAlign: 'center' }}><PktDot val={row.pD} has={row.dSlice.length >= 10}/></span>
@@ -397,7 +405,7 @@ function App() {
               <div style={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: 10, padding: '10px 14px', marginBottom: 12,
                 display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                 <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 800, color: '#f1f5f9' }}>{active} · KW {sel.kw} / {sel.year}</span>
-                <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#64748b' }}>{sel.week.d}</span>
+                <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#64748b' }}>{mondayOf(sel)} – {sel.weekEnd}</span>
                 {sel.i === entryWeek && <span style={{ fontFamily: 'monospace', fontSize: 11, color: blue }}>Signalwoche · Einstieg {selected.entryDate} zu {price(selected.entryPrice)}</span>}
                 <span style={{ fontFamily: 'monospace', fontSize: 12, color: '#cbd5e1', marginLeft: 'auto' }}>Close: <strong>{price(sel.week.c)}</strong></span>
                 {[['W', sel.pW, true], ['D', sel.pD, sel.dSlice.length >= 10], ['4H', sel.p4H, sel.has4h]].map(([lbl, val, has]) => (
