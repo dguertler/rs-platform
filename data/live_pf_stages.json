@@ -1,0 +1,17 @@
+{
+ "note": "Frühere Stände der Top-20-Performance seit Live-Start (data/top20_performance.json aus der Git-Historie). Die Zeile „jetzt“ liest die Seite laufend aus data/live_alerts_performance.json.",
+ "stages": [
+  {"label": "22.09.2026 · vor Alpaca (alte Nachsimulation)", "commit": "5f7a4966b",
+   "QQQ": {"nTrades": 23, "nOpen": 9, "profitFactor": 5.75, "profitFactorClosed": 1.40, "totalPnl": 26229},
+   "SPX": {"nTrades": 18, "nOpen": 13, "profitFactor": 6.43, "profitFactorClosed": 2.82, "totalPnl": 9200},
+   "alle": {"nTrades": 41, "nOpen": 22, "profitFactor": 5.91, "profitFactorClosed": 1.66, "totalPnl": 35429}},
+  {"label": "27.09.2026 · 4H-Daten bereinigt, Top 20 rückwirkend", "commit": "66b21f15f",
+   "QQQ": {"nTrades": 21, "nOpen": 8, "profitFactor": 1.42, "profitFactorClosed": 0.20, "totalPnl": 2683},
+   "SPX": {"nTrades": 20, "nOpen": 14, "profitFactor": 3.78, "profitFactorClosed": 0.64, "totalPnl": 7719},
+   "alle": {"nTrades": 41, "nOpen": 22, "profitFactor": 2.14, "profitFactorClosed": 0.33, "totalPnl": 10403}},
+  {"label": "27.09.2026 · festes 4H-Raster, S&P rückwirkend", "commit": "83c3c6320",
+   "QQQ": {"nTrades": 21, "nOpen": 7, "profitFactor": 1.31, "profitFactorClosed": 0.35, "totalPnl": 2000},
+   "SPX": {"nTrades": 22, "nOpen": 14, "profitFactor": 2.12, "profitFactorClosed": 0.04, "totalPnl": 6244},
+   "alle": {"nTrades": 43, "nOpen": 21, "profitFactor": 1.69, "profitFactorClosed": 0.21, "totalPnl": 8244}}
+ ]
+}
