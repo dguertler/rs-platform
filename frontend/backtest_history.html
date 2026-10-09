@@ -510,6 +510,8 @@ function App() {
           Kurse: Yahoo Finance, split- und dividendenbereinigt, Stand {data.period.end}.
           {' '}{data.symbols.total} Symbole waren im Zeitraum im Index: {data.symbols.aktiv} heute noch gehandelt,
           {' '}{data.symbols.delistedMitDaten} nicht mehr gehandelt mit Kursdaten, {data.symbols.keineDaten} ohne Kursdaten.
+          {data.symbols.alpaca?.length > 0 && <>{' '}Tageskurse von Alpaca (ab 2016) für {data.symbols.alpaca.length} Mitglieder,
+            die Yahoo nicht mehr führt: {data.symbols.alpaca.map(a => a.ticker).join(', ')}.</>}
           {' '}4H-Kerzen ab {data.h4?.start}: Alpaca ({data.h4?.feed}), {data.h4?.symbols} Symbole. Gerankt werden alle
           damaligen Mitglieder mit Kursdaten, auch heute nicht mehr gehandelte.
           {data.symbols.withJumps.length > 0 && (

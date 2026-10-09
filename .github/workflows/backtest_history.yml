@@ -39,7 +39,11 @@ jobs:
           git clone --depth 1 https://github.com/jmccarrell/n100tickers.git /tmp/n100tickers
           python backtest_history/build_membership.py /tmp/n100tickers
 
+      # Yahoo für alle Mitglieder; wen Yahoo nicht mehr führt, laden wir ab 2016 von Alpaca
       - name: Kurse laden und Top 20 historisch ranken
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
         run: python backtest_history/prepare_data.py
 
       # 4H-Kerzen ab 2016 für die Live-Logik (Pflicht — ohne 4H kein Backtest)

@@ -226,6 +226,7 @@ function runHistory() {
       total: Object.keys(resolution).length,
       aktiv: count('aktiv'),
       delistedMitDaten: count('delisted_mit_daten'),
+      alpaca: Object.entries(resolution).filter(([, r]) => r.source === 'alpaca').map(([t, r]) => ({ ticker: t, symbol: r.yahoo })),
       keineDaten: count('keine_daten'),
       withJumps: Object.entries(meta.symbols).filter(([, v]) => v.jumps.length).map(([k, v]) => ({ ticker: k, dates: v.jumps })),
       delistedMitDatenList: Object.entries(resolution).filter(([, r]) => r.status === 'delisted_mit_daten').map(([t, r]) => ({ ticker: t, yahoo: r.yahoo })),

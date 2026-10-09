@@ -8,7 +8,9 @@ die Yahoo liefert: in der Handelszeit ab 9:30 ET je volle Stunde (9:30,
 10:30 … 15:30), außerhalb zur vollen Stunde (4:00 … 9:00, 16:00 … 19:00).
 
 Geladen werden nur Symbole, die ab 2016 mindestens einmal in den Top 20
-standen (backtest_history/cache/top20_inkl.json aus prepare_data.py).
+standen (backtest_history/cache/top20_inkl.json aus prepare_data.py). Für
+Aktien, deren Tageskerzen schon von Alpaca stammen (Yahoo führt sie nicht
+mehr), gilt das dort hinterlegte Alpaca-Symbol und dessen Zeitraum.
 
 Zugang: Secrets ALPACA_API_KEY / ALPACA_API_SECRET (kostenloser Basic-Plan).
 Fehlen sie, überspringt das Skript den Schritt ohne Fehler.
@@ -18,62 +20,24 @@ Aufruf: python3 backtest_history/fetch_alpaca_4h.py
 import json
 import os
 import sys
-import time
 from concurrent.futures import ThreadPoolExecutor
-import urllib.error
-import urllib.parse
-import urllib.request
 from datetime import datetime, timedelta, timezone
 
 import pandas as pd
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.dirname(_HERE))
+sys.path.insert(0, _HERE)
 
 from rs_core import hourly_to_4h_rows          # noqa: E402
+from alpaca import HISTORY_START, choose_feed, credentials, fetch_bars   # noqa: E402
 
-API = "https://data.alpaca.markets/v2/stocks/bars"
 CACHE_DIR = os.path.join(_HERE, "cache")
-H4_START = "2016-01-01"          # Alpaca-Historie beginnt 2016
+H4_START = HISTORY_START         # Alpaca-Historie beginnt 2016
 FETCH_START = "2015-12-01"       # etwas Vorlauf für die 60 Kerzen der 4H-Struktur
 SYMBOLS_PER_REQUEST = 10
 PARALLEL_REQUESTS = 4          # Basic-Plan: 200 Anfragen/Minute, 429 wird abgewartet
-MAX_RETRIES = 6
 ET = "America/New_York"
-
-
-def _request(params, key, secret):
-    url = f"{API}?{urllib.parse.urlencode(params)}"
-    req = urllib.request.Request(url, headers={
-        "APCA-API-KEY-ID": key, "APCA-API-SECRET-KEY": secret, "Accept": "application/json"})
-    for attempt in range(MAX_RETRIES):
-        try:
-            with urllib.request.urlopen(req, timeout=60) as r:
-                return json.loads(r.read().decode("utf-8"))
-        except urllib.error.HTTPError as e:
-            body = e.read().decode("utf-8", "replace")[:200]
-            if e.code == 429 or e.code >= 500:           # Limit / Serverfehler → warten
-                time.sleep(2 ** attempt * 3)
-                continue
-            raise RuntimeError(f"HTTP {e.code}: {body}") from None
-        except urllib.error.URLError:
-            time.sleep(2 ** attempt * 3)
-    raise RuntimeError("Alpaca nicht erreichbar (zu viele Wiederholungen)")
-
-
-def fetch_bars(symbols, start, end, feed, key, secret):
-    """30-Minuten-Kerzen (split- und dividendenbereinigt) je Symbol."""
-    out = {s: [] for s in symbols}
-    params = {"symbols": ",".join(symbols), "timeframe": "30Min", "start": start, "end": end,
-              "adjustment": "all", "feed": feed, "limit": 10000, "sort": "asc"}
-    while True:
-        data = _request(params, key, secret)
-        for sym, bars in (data.get("bars") or {}).items():
-            out.setdefault(sym, []).extend(bars)
-        token = data.get("next_page_token")
-        if not token:
-            return out
-        params["page_token"] = token
 
 
 def yahoo_like_hourly(bars):
@@ -101,26 +65,22 @@ def symbols_needed():
     return sorted({t for d, top in hist.items() if d >= H4_START for t in top})
 
 
-def _choose_feed(probe_symbol, end, key, secret):
-    """SIP (alle Börsen) bevorzugt; ohne Berechtigung auf IEX ausweichen."""
-    for feed in ("sip", "iex"):
-        try:
-            fetch_bars([probe_symbol], "2016-01-04T00:00:00Z", "2016-01-06T00:00:00Z", feed, key, secret)
-            return feed
-        except RuntimeError as e:
-            print(f"  Feed {feed}: {e}")
-    raise SystemExit("Kein Alpaca-Feed verfügbar — Zugangsdaten prüfen.")
+def alpaca_sources():
+    """Cache-Symbol → {query, from, to} für Aktien mit Alpaca-Tageskerzen."""
+    meta = json.load(open(os.path.join(CACHE_DIR, "meta.json")))
+    return {sym: info["alpaca"] for sym, info in meta.get("symbols", {}).items() if info.get("alpaca")}
 
 
 def main():
-    key = os.environ.get("ALPACA_API_KEY", "").strip()
-    secret = os.environ.get("ALPACA_API_SECRET", "").strip()
-    if not key or not secret:
+    key, secret = credentials()
+    if not key:
         print("ALPACA_API_KEY / ALPACA_API_SECRET fehlen — 4H-Historie wird übersprungen.")
         return
     symbols = symbols_needed()
+    sources = alpaca_sources()
+    query = {s: sources.get(s, {}).get("query", s) for s in symbols}
     end = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
-    feed = _choose_feed(symbols[0] if symbols else "AAPL", end, key, secret)
+    feed = choose_feed(symbols[0] if symbols else "AAPL", key, secret)
     print(f"4H-Kerzen für {len(symbols)} Symbole ab {FETCH_START} (Feed {feed}) ...")
 
     os.makedirs(os.path.join(CACHE_DIR, "h4"), exist_ok=True)
@@ -129,7 +89,8 @@ def main():
 
     def load(chunk):
         try:
-            return chunk, fetch_bars(chunk, f"{FETCH_START}T00:00:00Z", end, feed, key, secret), None
+            names = sorted({query[s] for s in chunk})
+            return chunk, fetch_bars(names, f"{FETCH_START}T00:00:00Z", end, feed, key, secret), None
         except RuntimeError as e:
             return chunk, None, e
 
@@ -142,8 +103,11 @@ def main():
                 missing.extend(chunk)
                 continue
             for sym in chunk:
-                hourly = yahoo_like_hourly(bars.get(sym) or [])
+                hourly = yahoo_like_hourly(bars.get(query[sym]) or [])
                 rows = hourly_to_4h_rows(hourly, decimals=4) if len(hourly) else []
+                src = sources.get(sym)
+                if src:                    # nur der Zeitraum, für den das Symbol gilt
+                    rows = [r for r in rows if src["from"] <= r["d"][:10] <= src["to"]]
                 if not rows:
                     missing.append(sym)
                     continue
