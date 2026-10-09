@@ -41,6 +41,7 @@
   <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
   <a href="backtest.html"         class="nav-switch">B-DETAILS</a>
   <a href="backtest_history.html" class="nav-switch active">B-HISTORIE</a>
+  <a href="backtest_history_details.html" class="nav-switch">B-DETAILS 2</a>
   <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
 </div>
 <div id="root"></div>
@@ -339,7 +340,103 @@ function Comparison({ data, before, after }) {
   );
 }
 
-function TradeList({ trades }) {
+const detailsUrl = (ticker, variant) => `backtest_history_details.html?t=${encodeURIComponent(ticker)}&v=${variant}`;
+
+/** Kennzahlen je Aktie über alle Signale einer Variante. */
+function stockStats(trades) {
+  const by = {};
+  for (const t of trades) (by[t.ticker] ||= []).push(t);
+  return Object.entries(by).map(([ticker, ts]) => {
+    const closed = ts.filter(t => !t.isOpen);
+    const gain = ts.filter(t => t.pnl > 0).reduce((s, t) => s + t.pnl, 0);
+    const loss = -ts.filter(t => t.pnl < 0).reduce((s, t) => s + t.pnl, 0);
+    const taken = ts.filter(t => t.taken);
+    return {
+      ticker,
+      nTrades: ts.length,
+      nOpen: ts.length - closed.length,
+      winrate: closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null,
+      profitFactor: loss > 0 ? gain / loss : gain > 0 ? Infinity : null,
+      avgPct: ts.reduce((s, t) => s + t.pnlPct, 0) / ts.length,
+      sumPct: ts.reduce((s, t) => s + t.pnlPct, 0),
+      pnl: ts.reduce((s, t) => s + t.pnl, 0),
+      best: Math.max(...ts.map(t => t.pnlPct)),
+      worst: Math.min(...ts.map(t => t.pnlPct)),
+      avgWeeks: ts.reduce((s, t) => s + (t.holdingWeeks || 0), 0) / ts.length,
+      taken: taken.length,
+      depotPnl: taken.reduce((s, t) => s + (t.depotPnl || 0), 0),
+    };
+  });
+}
+
+const STOCK_COLS = [
+  ['ticker', 'Aktie'], ['nTrades', 'Trades'], ['nOpen', 'offen'], ['winrate', 'Treffer'], ['profitFactor', 'PF'],
+  ['avgPct', 'Ø Rendite'], ['sumPct', 'Σ Rendite'], ['pnl', 'Σ P&L'], ['best', 'Bester'], ['worst', 'Schlechtester'],
+  ['avgWeeks', 'Ø Wochen'], ['taken', 'im Depot'], ['depotPnl', 'P&L Depot'],
+];
+
+function StockTable({ trades, variant }) {
+  const [sort, setSort] = useState({ key: 'sumPct', dir: -1 });
+  const rows = useMemo(() => {
+    const list = stockStats(trades);
+    const val = r => (r[sort.key] == null ? -Infinity : r[sort.key]);
+    return list.sort((a, b) => sort.key === 'ticker'
+      ? sort.dir * a.ticker.localeCompare(b.ticker)
+      : sort.dir * (val(a) - val(b)) || a.ticker.localeCompare(b.ticker));
+  }, [trades, sort]);
+  const total = useMemo(() => stockStats(trades.map(t => ({ ...t, ticker: 'Σ' })))[0], [trades]);
+  const click = key => setSort(s => ({ key, dir: s.key === key ? -s.dir : key === 'ticker' ? 1 : -1 }));
+  const pf = v => (v === Infinity ? '∞' : num(v, 2));
+  const cells = (r) => (<>
+    <td>{r.nTrades}</td>
+    <td style={{ color: r.nOpen ? amber : '#64748b' }}>{r.nOpen}</td>
+    <td>{r.winrate != null ? num(r.winrate) + ' %' : '–'}</td>
+    <td style={{ color: pfColor(r.profitFactor), fontWeight: 700 }}>{pf(r.profitFactor)}</td>
+    <td style={{ color: pnlColor(r.avgPct) }}>{pct(r.avgPct)}</td>
+    <td style={{ color: pnlColor(r.sumPct), fontWeight: 700 }}>{pct(r.sumPct)}</td>
+    <td style={{ color: pnlColor(r.pnl) }}>{eur(r.pnl)}</td>
+    <td style={{ color: pnlColor(r.best) }}>{pct(r.best)}</td>
+    <td style={{ color: pnlColor(r.worst) }}>{pct(r.worst)}</td>
+    <td>{num(r.avgWeeks)}</td>
+    <td>{r.taken} / {r.nTrades}</td>
+    <td style={{ color: pnlColor(r.depotPnl) }}>{eur(r.depotPnl)}</td>
+  </>);
+  if (!trades.length) return null;
+  return (
+    <div style={{ marginTop: 24 }}>
+      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>Trades je Aktie · {VARIANTS[variant]}</div>
+      <div className="note" style={{ marginBottom: 8 }}>
+        Alle Signale der Variante je Aktie ({rows.length} Aktien, {trades.length} Trades), 10.000 € je Signal.
+        Spaltenkopf anklicken zum Sortieren, Aktie anklicken für alle Trades mit Chart auf <b>B-DETAILS 2</b>.
+        „im Depot" = davon in der Depot-Simulation genommen, „P&L Depot" = deren Ergebnis im Depot.
+      </div>
+      <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 640, marginBottom: 20 }}>
+        <table>
+          <thead><tr>
+            {STOCK_COLS.map(([k, label]) => (
+              <th key={k} onClick={() => click(k)} style={{ cursor: 'pointer', color: sort.key === k ? amber : undefined }}>
+                {label}{sort.key === k ? (sort.dir < 0 ? ' ▼' : ' ▲') : ''}
+              </th>
+            ))}
+          </tr></thead>
+          <tbody>
+            {rows.map(r => (
+              <tr key={r.ticker} className="data-row" onClick={() => { window.location.href = detailsUrl(r.ticker, variant); }}>
+                <td style={{ fontWeight: 700 }}>
+                  <a href={detailsUrl(r.ticker, variant)} style={{ color: '#93c5fd', textDecoration: 'none' }}>{r.ticker}</a>
+                </td>
+                {cells(r)}
+              </tr>
+            ))}
+          </tbody>
+          <tfoot><tr className="sum-row"><td>Gesamt</td>{cells(total)}</tr></tfoot>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function TradeList({ trades, variant }) {
   return (
     <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 420, marginBottom: 20 }}>
       <table>
@@ -347,7 +444,9 @@ function TradeList({ trades }) {
         <tbody>
           {trades.map((t, i) => (
             <tr key={i} className="data-row">
-              <td style={{ fontWeight: 700 }}>{t.ticker}</td>
+              <td style={{ fontWeight: 700 }}>
+                <a href={detailsUrl(t.ticker, variant)} style={{ color: '#93c5fd', textDecoration: 'none' }}>{t.ticker}</a>
+              </td>
               <td style={{ color: '#94a3b8' }}>{t.rank <= 20 ? t.rank : '–'}</td>
               <td>{t.entryDate}</td>
               <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>
@@ -529,7 +628,7 @@ function App() {
 
         {year && (<>
           <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 8 }}>Trades {year} · {VARIANTS[variant]}</div>
-          <TradeList trades={yearTrades} />
+          <TradeList trades={yearTrades} variant={variant} />
         </>)}
 
         <div className="card note">
@@ -547,6 +646,8 @@ function App() {
             </div>
           )}
         </div>
+
+        <StockTable trades={v?.trades || []} variant={variant} />
       </>)}
     </div>
   );

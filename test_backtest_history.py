@@ -115,6 +115,7 @@ def pipeline(tmp_path_factory):
         "top20_exkl": json.loads((cache / "top20_exkl.json").read_text()),
         "results": json.loads(out.read_text()),
         "intervals": intervals,
+        "charts": tmp / "charts",
     }
 
 
@@ -183,3 +184,16 @@ def test_before_after_steps(pipeline):
     assert last["total"]["nTrades"] == last["sameAsNew"] == len(ba["after"])
     assert all(t["entryDate"] >= ba["start"] for t in ba["before"] + ba["after"])
     assert 0 <= ba["top20Overlap"] <= 20
+
+
+def test_chart_files_cover_every_trade(pipeline):
+    """B-DETAILS 2: je Aktie Wochenkerzen und Tageskerzen rund um jeden Trade."""
+    trades = [t for v in pipeline["results"]["variants"].values() for t in v["trades"]]
+    for ticker in {t["ticker"] for t in trades}:
+        chart = json.loads((pipeline["charts"] / f"{ticker}.json").read_text())
+        days = {b[0] for b in chart["d"]}
+        assert chart["w"] and all(len(b) == 5 for b in chart["w"] + chart["d"])
+        for t in (t for t in trades if t["ticker"] == ticker):
+            assert t["entryDate"] in days
+            assert t["isOpen"] or t["exitDate"] in days
+            assert t["stopPrice"] is None or t["stopPrice"] < t["entryPrice"]

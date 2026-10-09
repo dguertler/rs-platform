@@ -23,6 +23,10 @@ const ROOT = path.join(__dirname, '..');
 // Überschreibbar für den Offline-Test (test_backtest_history.py)
 const CACHE = process.env.BACKTEST_HISTORY_CACHE || path.join(__dirname, 'cache');
 const OUT_FILE = process.env.BACKTEST_HISTORY_OUT || path.join(ROOT, 'data', 'backtest_history', 'ndx_results.json');
+// Kursausschnitte je Aktie für die Seite B-DETAILS 2 (frontend/backtest_history_details.html)
+const CHART_DIR = path.join(path.dirname(OUT_FILE), 'charts');
+const DAILY_BEFORE = 130;      // Handelstage vor dem Einstieg (Swing-Tief, Ausbruch)
+const DAILY_AFTER = 20;        // Handelstage nach dem Ausstieg
 
 const engineCode = fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8');
 vm.runInThisContext(engineCode + '\n;globalThis.__engine = { buildWeekRows, simulateTrades, CAPITAL, MAX_RISK };');
@@ -40,6 +44,7 @@ const slim = (t) => ({
   entryDate: t.entryDate,
   exitDate: t.exitDate,
   entryPrice: +t.entryPrice.toFixed(4),
+  stopPrice: t.stopPrice != null ? +t.stopPrice.toFixed(4) : null,
   exitPrice: +t.exitPrice.toFixed(4),
   invested: Math.round(t.invested),
   pnl: Math.round(t.pnl),
@@ -109,6 +114,33 @@ function rankAt(hist, day, sym) {
   return 21;
 }
 
+const px = (v) => (v >= 1 ? Math.round(v * 100) / 100 : Math.round(v * 10000) / 10000);
+const bar = (r) => [r.d, px(r.o), px(r.h), px(r.l), px(r.c)];
+
+/**
+ * Kurse einer Aktie für die Trade-Prüfung: Wochenkerzen ab zwei Jahre vor dem
+ * ersten Trade, Tageskerzen nur rund um die Trades (sonst würde die Datei je
+ * Aktie mehrere hundert KB groß).
+ */
+function writeChart(sym, weekly, daily, trades) {
+  if (!trades.length) return;
+  const first = trades.reduce((m, t) => (t.entryDate < m ? t.entryDate : m), trades[0].entryDate);
+  const from = `${+first.slice(0, 4) - 2}${first.slice(4)}`;
+  const keep = new Uint8Array(daily.length);
+  const idx = (d) => { let i = daily.findIndex((r) => r.d >= d); return i < 0 ? daily.length - 1 : i; };
+  for (const t of trades) {
+    const a = Math.max(0, idx(t.entryDate) - DAILY_BEFORE);
+    const b = Math.min(daily.length - 1, idx(t.exitDate) + DAILY_AFTER);
+    keep.fill(1, a, b + 1);
+  }
+  fs.mkdirSync(CHART_DIR, { recursive: true });
+  fs.writeFileSync(path.join(CHART_DIR, `${sym}.json`), JSON.stringify({
+    ticker: sym,
+    w: weekly.filter((r) => r.d >= from).map(bar),
+    d: daily.filter((_, i) => keep[i]).map(bar),
+  }));
+}
+
 // ── Historischer Lauf ─────────────────────────────────────────────────────────
 function runHistory() {
   const meta = readJson(path.join(CACHE, 'meta.json'));
@@ -137,6 +169,7 @@ function runHistory() {
     const weekly = readJson(path.join(CACHE, 'weekly', `${sym}.json`));
     const rows = buildWeekRows(weekly, daily, []);
     closesBySymbol[sym] = new Map(daily.map((r) => [r.d, r.c]));
+    const before = Object.fromEntries(Object.entries(trades).map(([k, v]) => [k, v.length]));
     for (const variant of needed) {
       for (const t of simulateTrades(rows, daily, sym, top20[variant], true, 'WD')) {
         // Kursreihe endet vor dem Datenende (Übernahme, Delisting): der Trade ist
@@ -156,6 +189,7 @@ function runHistory() {
         trades.live4h.push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
       }
     }
+    writeChart(sym, weekly, daily, Object.entries(trades).flatMap(([k, v]) => v.slice(before[k])));
     if (done % 25 === 0) console.error(`  ${done}/${symbols.length} Symbole`);
   }
 

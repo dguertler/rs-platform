@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RS · Backtest Historie Details</title>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+  <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0f1e; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    .nav-bar { display:inline-flex; flex-wrap:wrap; align-items:center; gap:5px; padding:12px 12px 0; }
+    .nav-switch { display:inline-flex; align-items:center; gap:6px; background:#1e293b; border:1px solid #334155; border-radius:8px; padding:6px 13px; font-size:12px; font-weight:700; color:#94a3b8; text-decoration:none; font-family:monospace; white-space:nowrap; box-shadow:0 2px 8px #00000066; transition:border-color .15s,color .15s; }
+    .nav-switch:hover  { border-color:#3b82f6; color:#e2e8f0; }
+    .nav-switch.active { border-color:#f59e0b; color:#fbbf24; background:#1a1a0a; }
+    table { border-collapse: collapse; width: 100%; }
+    th { position: sticky; top: 0; background: #0d1526; z-index: 10; padding: 10px 12px; text-align: right; color: #64748b; font-size: 11px; font-family: monospace; border-bottom: 1px solid #1e293b; white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    td { padding: 8px 12px; text-align: right; font-family: monospace; font-size: 12px; white-space: nowrap; }
+    tr.data-row { cursor: pointer; transition: background .1s; }
+    tr.data-row:hover { background: #1a2540 !important; }
+    tr.data-row:nth-child(even) { background: #080e1c; }
+    tr.data-row:nth-child(odd)  { background: #060b14; }
+    tr.data-row.selected { background: #172033 !important; box-shadow: inset 3px 0 0 #f59e0b; }
+    .card { background: #0d1526; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 18px; }
+    .note { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+    .note b { color: #e2e8f0; }
+    .btn { background: transparent; border: 1px solid #1e293b; border-radius: 6px; padding: 5px 12px; color: #64748b; font-family: monospace; font-size: 12px; font-weight: 700; cursor: pointer; }
+    .btn.on { background: #1e293b; border-color: #f59e0b; color: #fbbf24; }
+    select { background: #0d1526; color: #e2e8f0; border: 1px solid #334155; border-radius: 6px; padding: 5px 10px; font-family: monospace; font-size: 13px; font-weight: 700; }
+  </style>
+</head>
+<body>
+<div class="nav-bar">
+  <a href="index.html"            class="nav-switch">Nasdaq</a>
+  <a href="sp500.html"            class="nav-switch">S&amp;P500</a>
+  <a href="smallcap.html"        class="nav-switch">SC600</a>
+  <a href="backtest_overview.html" class="nav-switch">B-ÜBERSICHT</a>
+  <a href="backtest.html"         class="nav-switch">B-DETAILS</a>
+  <a href="backtest_history.html" class="nav-switch">B-HISTORIE</a>
+  <a href="backtest_history_details.html" class="nav-switch active">B-DETAILS 2</a>
+  <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
+</div>
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo } = React;
+
+const green = '#4ade80', red = '#f87171', amber = '#fbbf24', blue = '#60a5fa', neutral = '#64748b';
+const pnlColor = v => v > 0 ? green : v < 0 ? red : neutral;
+const pfColor  = v => v == null ? neutral : v >= 1.5 ? green : v >= 1 ? amber : red;
+const num = (v, d = 1) => v == null ? '–' : v === Infinity ? '∞' : v.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + ' %';
+const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
+const price = v => v == null ? '–' : num(v, v >= 1 ? 2 : 4);
+const VARIANTS = {
+  inkl: 'W+D ab 2007 · inkl. nicht mehr gehandelter Aktien',
+  exkl: 'W+D ab 2007 · nur heute noch gehandelte',
+  wd4hStart: 'W+D ab 2016',
+  live4h: 'Live-Logik mit 4H ab 2016',
+};
+const TRIGGER = { D: 'Daily', W: 'Weekly', '4H': '4H' };
+
+/** Kursreihen einer Aktie: Ausschnitte aus dem historischen Lauf, sonst die Live-Backtest-Datei (ab 2022). */
+async function loadPrices(ticker) {
+  const toBar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
+  try {
+    const r = await fetch(`data/backtest_history/charts/${ticker}.json`, { cache: 'no-store' });
+    if (r.ok) { const j = await r.json(); return { source: 'historie', w: j.w.map(toBar), d: j.d.map(toBar) }; }
+  } catch (e) { /* weiter mit Fallback */ }
+  try {
+    const slug = ticker.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const r = await fetch(`data/backtest_${slug}.json`, { cache: 'no-store' });
+    if (r.ok) { const j = await r.json(); return { source: 'live', w: j.ohlcv_w || [], d: j.ohlcv_d || [] }; }
+  } catch (e) { /* keine Kurse */ }
+  return { source: null, w: [], d: [] };
+}
+
+function Tile({ label, value, color, sub }) {
+  return (
+    <div className="card" style={{ flex: '1 1 130px', minWidth: 120 }}>
+      <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 18, fontWeight: 700, color: color || '#e2e8f0', fontFamily: 'monospace' }}>{value}</div>
+      {sub && <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginTop: 4 }}>{sub}</div>}
+    </div>
+  );
+}
+
+/** Kerzenchart mit Einstieg/Ausstieg-Markern; optional Linien für Einstieg, Stopp und Ausstieg eines Trades. */
+function Candles({ bars, trades, selected, onSelect, levels, height = 320, title }) {
+  const W = 1000, H = height, PL = 8, PR = 64, PT = 12, PB = 24;
+  if (!bars.length) return null;
+  const lo = Math.min(...bars.map(b => b.l), ...(levels || []).map(l => l.v).filter(v => v != null));
+  const hi = Math.max(...bars.map(b => b.h), ...(levels || []).map(l => l.v).filter(v => v != null));
+  const useLog = hi / lo > 4;
+  const f = v => (useLog ? Math.log(v) : v);
+  const y = v => PT + (f(hi) - f(v)) / ((f(hi) - f(lo)) || 1) * (H - PT - PB);
+  const cw = (W - PL - PR) / bars.length;
+  const x = i => PL + (i + 0.5) * cw;
+  const idxOf = d => (d < bars[0].d ? -1 : bars.findIndex(b => b.d >= d));
+  const ticks = Array.from({ length: 5 }, (_, k) => (useLog ? Math.exp(f(lo) + (f(hi) - f(lo)) * k / 4) : lo + (hi - lo) * k / 4));
+  const years = [];
+  bars.forEach((b, i) => { if (i && b.d.slice(0, 4) !== bars[i - 1].d.slice(0, 4)) years.push([i, b.d.slice(0, 4)]); });
+  const months = bars.length < 400 ? bars.map((b, i) => (i && b.d.slice(5, 7) !== bars[i - 1].d.slice(5, 7) ? [i, b.d.slice(0, 7)] : null)).filter(Boolean) : [];
+  const gridX = months.length && months.length < 16 ? months : years;
+  return (
+    <div style={{ background: '#07090f', border: '1px solid #1e293b', borderRadius: 8, overflow: 'hidden', marginBottom: 14 }}>
+      {title && <div style={{ fontSize: 11, color: '#94a3b8', fontFamily: 'monospace', padding: '8px 12px 0' }}>{title}{useLog ? ' · log. Skala' : ''}</div>}
+      <svg width="100%" viewBox={`0 0 ${W} ${H}`} style={{ display: 'block' }}>
+        {ticks.map((v, k) => (
+          <g key={k}>
+            <line x1={PL} x2={W - PR} y1={y(v)} y2={y(v)} stroke="#1e293b" strokeWidth="0.6"/>
+            <text x={W - PR + 6} y={y(v) + 4} fill="#475569" fontSize="11" fontFamily="monospace">{price(v)}</text>
+          </g>
+        ))}
+        {gridX.map(([i, label]) => (
+          <g key={i}>
+            <line x1={x(i)} x2={x(i)} y1={PT} y2={H - PB} stroke="#1e293b" strokeWidth="0.6"/>
+            <text x={x(i) + 3} y={H - 8} fill="#475569" fontSize="10" fontFamily="monospace">{label}</text>
+          </g>
+        ))}
+        {(trades || []).map((t, k) => {
+          const a = idxOf(t.entryDate), b = t.isOpen ? bars.length - 1 : idxOf(t.exitDate);
+          if (a < 0) return null;
+          const sel = selected === t;
+          return <rect key={'s' + k} x={x(a) - cw / 2} y={PT} width={Math.max(cw, ((b < 0 ? bars.length - 1 : b) - a + 1) * cw)}
+            height={H - PT - PB} fill={t.pnl > 0 ? green : red} opacity={sel ? 0.16 : 0.06}
+            style={{ cursor: 'pointer' }} onClick={() => onSelect && onSelect(t)}/>;
+        })}
+        {bars.map((b, i) => {
+          const up = b.c >= b.o;
+          return (
+            <g key={i}>
+              <line x1={x(i)} x2={x(i)} y1={y(b.h)} y2={y(b.l)} stroke={up ? '#22c55e' : '#ef4444'} strokeWidth={Math.max(0.6, Math.min(1.2, cw / 3))}/>
+              {cw > 2.5 && <rect x={x(i) - cw * 0.35} width={cw * 0.7} y={y(Math.max(b.o, b.c))}
+                height={Math.max(0.8, Math.abs(y(b.o) - y(b.c)))} fill={up ? '#22c55e' : '#ef4444'}/>}
+            </g>
+          );
+        })}
+        {(levels || []).filter(l => l.v != null).map((l, k) => (
+          <g key={'l' + k}>
+            <line x1={PL} x2={W - PR} y1={y(l.v)} y2={y(l.v)} stroke={l.color} strokeWidth="1.2" strokeDasharray={l.dash || ''}/>
+            <text x={PL + 4} y={y(l.v) - 4} fill={l.color} fontSize="11" fontFamily="monospace">{l.label} {price(l.v)}</text>
+          </g>
+        ))}
+        {(trades || []).map((t, k) => {
+          const a = idxOf(t.entryDate), b = t.isOpen ? -1 : idxOf(t.exitDate);
+          return (
+            <g key={'m' + k} style={{ cursor: 'pointer' }} onClick={() => onSelect && onSelect(t)}>
+              {a >= 0 && <polygon points={`${x(a)},${y(bars[a].l) + 4} ${x(a) - 5},${y(bars[a].l) + 13} ${x(a) + 5},${y(bars[a].l) + 13}`} fill={blue}/>}
+              {b >= 0 && <polygon points={`${x(b)},${y(bars[b].h) - 4} ${x(b) - 5},${y(bars[b].h) - 13} ${x(b) + 5},${y(bars[b].h) - 13}`} fill={t.pnl > 0 ? green : red}/>}
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
+function App() {
+  const params = new URLSearchParams(window.location.search);
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [variant, setVariant] = useState(VARIANTS[params.get('v')] ? params.get('v') : 'inkl');
+  const [ticker, setTicker] = useState((params.get('t') || '').toUpperCase());
+  const [prices, setPrices] = useState(null);
+  const [selected, setSelected] = useState(null);
+
+  useEffect(() => {
+    fetch('data/backtest_history/ndx_results.json', { cache: 'no-store' })
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(setData).catch(e => setError(e.message));
+  }, []);
+
+  const v = data?.variants?.[variant];
+  const tickers = useMemo(() => (v ? [...new Set(v.trades.map(t => t.ticker))].sort() : []), [v]);
+  const active = tickers.includes(ticker) ? ticker : tickers[0];
+  const trades = useMemo(() => (v && active ? v.trades.filter(t => t.ticker === active) : []), [v, active]);
+
+  useEffect(() => {
+    if (!active) return;
+    const url = `?t=${encodeURIComponent(active)}&v=${variant}`;
+    if (window.location.search !== url) window.history.replaceState(null, '', url);
+    setPrices(null);
+    loadPrices(active).then(setPrices);
+  }, [active, variant]);
+  useEffect(() => { setSelected(trades.length ? trades[trades.length - 1] : null); }, [trades]);
+
+  if (error) return <div style={{ padding: 60, color: red, fontFamily: 'monospace' }}>Fehler beim Laden: {error}</div>;
+  if (!data) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Lade Ergebnisse…</div>;
+  if (!v) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Variante nicht vorhanden.</div>;
+
+  const pos = tickers.indexOf(active);
+  const closed = trades.filter(t => !t.isOpen);
+  const gain = trades.filter(t => t.pnl > 0).reduce((s, t) => s + t.pnl, 0);
+  const loss = -trades.filter(t => t.pnl < 0).reduce((s, t) => s + t.pnl, 0);
+  const pf = loss > 0 ? gain / loss : gain > 0 ? Infinity : null;
+  const sumPnl = trades.reduce((s, t) => s + t.pnl, 0);
+  const sumPct = trades.reduce((s, t) => s + t.pnlPct, 0);
+  const winrate = closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null;
+  const taken = trades.filter(t => t.taken);
+
+  // Tagesausschnitt um den gewählten Trade
+  let dayBars = [], dayNote = null;
+  if (prices && selected) {
+    const d = prices.d;
+    const a = d.findIndex(b => b.d >= selected.entryDate);
+    const bIdx = selected.isOpen ? d.length - 1 : d.findIndex(b => b.d >= selected.exitDate);
+    if (a < 0 || d[a].d > selected.entryDate) {
+      dayNote = 'Für diesen Trade liegen noch keine Tageskerzen vor.';
+    } else {
+      const from = Math.max(0, a - 80), to = Math.min(d.length - 1, (bIdx < 0 ? d.length - 1 : bIdx) + 15);
+      dayBars = d.slice(from, to + 1);
+      // Lücken im Ausschnitt (getrennte Trade-Fenster) abschneiden
+      for (let i = a - from; i > 0; i--) {
+        if ((new Date(dayBars[i].d) - new Date(dayBars[i - 1].d)) / 864e5 > 6) { dayBars = dayBars.slice(i); break; }
+      }
+    }
+  }
+  const weekBars = prices ? prices.w : [];
+
+  return (
+    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 16px' }}>
+      <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · Trades je Aktie</div>
+      <div className="note" style={{ marginBottom: 16 }}>
+        Alle Trades einer Aktie aus <a href="backtest_history.html" style={{ color: '#93c5fd' }}>B-HISTORIE</a> zum
+        Nachprüfen: Einstieg zur Eröffnung nach dem Signal, Stopp am letzten Swing-Tief × 0,99, Ausstieg zur Eröffnung nach
+        einem Tagesschluss unter dem Stopp bzw. dem letzten Swing-Tief. 10.000 € je Signal, max. 1.000 € Risiko.
+        Trade in der Liste oder im Chart anklicken für den Tageschart.
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+        <button className="btn" disabled={pos <= 0} onClick={() => setTicker(tickers[pos - 1])}>◀</button>
+        <select value={active || ''} onChange={e => setTicker(e.target.value)}>
+          {tickers.map(t => <option key={t} value={t}>{t}</option>)}
+        </select>
+        <button className="btn" disabled={pos >= tickers.length - 1} onClick={() => setTicker(tickers[pos + 1])}>▶</button>
+        <span className="note">{pos + 1} von {tickers.length} Aktien</span>
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+        {Object.entries(VARIANTS).filter(([k]) => data.variants[k]).map(([k, label]) => (
+          <button key={k} className={`btn${variant === k ? ' on' : ''}`} onClick={() => setVariant(k)}>{label}</button>
+        ))}
+      </div>
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
+        <Tile label="Trades" value={trades.length} sub={`${trades.length - closed.length} offen`} />
+        <Tile label="Trefferquote" value={winrate != null ? num(winrate) + ' %' : '–'} sub="abgeschlossene" />
+        <Tile label="Profit-Faktor" value={num(pf, 2)} color={pfColor(pf)} sub="inkl. offener" />
+        <Tile label="Σ Rendite" value={pct(sumPct)} color={pnlColor(sumPct)} sub={`Ø ${pct(trades.length ? sumPct / trades.length : null)}`} />
+        <Tile label="Σ P&L" value={eur(sumPnl)} color={pnlColor(sumPnl)} sub="10.000 € je Signal" />
+        <Tile label="im Depot" value={`${taken.length} / ${trades.length}`}
+          sub={`P&L Depot ${eur(taken.reduce((s, t) => s + (t.depotPnl || 0), 0))}`} />
+      </div>
+
+      {!prices && <div className="note" style={{ marginBottom: 14 }}>Lade Kurse…</div>}
+      {prices && !prices.source && (
+        <div className="card note" style={{ borderColor: '#92400e', marginBottom: 14 }}>Keine Kursdaten für {active} vorhanden.</div>
+      )}
+      {prices?.source === 'live' && (
+        <div className="card note" style={{ borderColor: '#92400e', marginBottom: 14 }}>
+          Die historischen Kursausschnitte fehlen noch — angezeigt werden die Live-Backtest-Kurse ab {prices.d[0]?.d ?? '–'}.
+          Ältere Trades erscheinen nach dem nächsten Lauf des Workflows <b>„Historischer NASDAQ-100-Backtest (ab 2007)"</b>.
+        </div>
+      )}
+      {weekBars.length > 0 && (
+        <Candles bars={weekBars} trades={trades} selected={selected} onSelect={setSelected} height={300}
+          title={`${active} · Wochenkerzen · ▲ Einstieg · ▼ Ausstieg (grün Gewinn, rot Verlust)`} />
+      )}
+      {selected && dayBars.length > 0 && (
+        <Candles bars={dayBars} trades={[selected]} selected={selected} height={340}
+          title={`Tageskerzen · Trade ${selected.entryDate} → ${selected.isOpen ? 'offen' : selected.exitDate} · ${pct(selected.pnlPct)}`}
+          levels={[
+            { v: selected.entryPrice, color: blue, label: 'Einstieg' },
+            { v: selected.stopPrice, color: red, label: 'Stopp', dash: '5,4' },
+            ...(selected.isOpen ? [] : [{ v: selected.exitPrice, color: amber, label: 'Ausstieg', dash: '2,3' }]),
+          ]} />
+      )}
+      {selected && dayNote && <div className="note" style={{ marginBottom: 14 }}>{dayNote}</div>}
+
+      <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 520, marginBottom: 20 }}>
+        <table>
+          <thead><tr>
+            <th>#</th><th>Auslöser</th><th>RS-Rang</th><th>Einstieg</th><th>Kurs</th><th>Stopp</th><th>Risiko</th>
+            <th>Ausstieg</th><th>Kurs</th><th>Wochen</th><th>Rendite</th><th>P&L</th><th>Im Depot</th><th>P&L Depot</th>
+          </tr></thead>
+          <tbody>
+            {trades.map((t, i) => (
+              <tr key={i} className={`data-row${selected === t ? ' selected' : ''}`} onClick={() => setSelected(t)}>
+                <td style={{ color: '#64748b' }}>{i + 1}</td>
+                <td style={{ color: '#94a3b8' }}>{TRIGGER[t.trigger] || t.trigger}</td>
+                <td style={{ color: '#94a3b8' }}>{t.rank <= 20 ? t.rank : '–'}</td>
+                <td>{t.entryDate}</td>
+                <td>{price(t.entryPrice)}</td>
+                <td style={{ color: red }}>{price(t.stopPrice)}</td>
+                <td style={{ color: '#94a3b8' }}>{t.stopPrice ? pct((t.stopPrice / t.entryPrice - 1) * 100) : '–'}</td>
+                <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}{t.dataEnded ? ' · Datenende' : ''}</td>
+                <td>{price(t.exitPrice)}</td>
+                <td>{t.holdingWeeks}</td>
+                <td style={{ color: pnlColor(t.pnlPct), fontWeight: 700 }}>{pct(t.pnlPct)}</td>
+                <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
+                <td style={{ color: t.taken ? green : '#64748b' }}>{t.taken ? 'ja' : 'ausgelassen'}</td>
+                <td style={{ color: pnlColor(t.depotPnl) }}>{t.taken ? eur(t.depotPnl) : '–'}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="note">
+        Kurse split- und dividendenbereinigt (Yahoo Finance). RS-Rang = Platz in den Top 20 des NASDAQ-100 am
+        Einstiegstag (nur unter den damaligen Mitgliedern gerankt). „Im Depot" = in der Depot-Simulation genommen;
+        ausgelassen, wenn alle Plätze belegt waren. Datenende = Kursreihe endet (Übernahme, Delisting).
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
