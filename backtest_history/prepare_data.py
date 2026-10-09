@@ -178,12 +178,16 @@ def _alpaca_daily(symbols):
     out = {}
     for k in range(0, len(symbols), 20):
         chunk = symbols[k:k + 20]
+        start = f"{alpaca.HISTORY_START}T00:00:00Z"
         try:
-            bars = alpaca.fetch_bars(chunk, f"{alpaca.HISTORY_START}T00:00:00Z", end, feed, key, secret,
-                                     timeframe="1Day")
-        except RuntimeError as e:
-            print(f"  Alpaca {','.join(chunk)}: {e}")
-            continue
+            bars = alpaca.fetch_bars(chunk, start, end, feed, key, secret, timeframe="1Day")
+        except RuntimeError:                      # einzeln nachladen, ein Symbol soll nicht alle kosten
+            bars = {}
+            for sym in chunk:
+                try:
+                    bars.update(alpaca.fetch_bars([sym], start, end, feed, key, secret, timeframe="1Day"))
+                except RuntimeError as e:
+                    print(f"  Alpaca {sym}: {e}")
         for sym, rows in bars.items():
             df = alpaca.daily_frame(rows)
             if len(df):

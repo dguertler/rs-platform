@@ -84,24 +84,32 @@ def main():
     print(f"4H-Kerzen für {len(symbols)} Symbole ab {FETCH_START} (Feed {feed}) ...")
 
     os.makedirs(os.path.join(CACHE_DIR, "h4"), exist_ok=True)
-    info, missing = {}, []
+    info, missing, errors = {}, [], {}
     chunks = [symbols[k:k + SYMBOLS_PER_REQUEST] for k in range(0, len(symbols), SYMBOLS_PER_REQUEST)]
 
     def load(chunk):
+        """Ein Fehler (z. B. ein Symbol, das Alpaca ablehnt) soll nicht die ganze
+        Anfrage kosten: dann jedes Symbol einzeln nachladen."""
+        names = sorted({query[s] for s in chunk})
+        start = f"{FETCH_START}T00:00:00Z"
         try:
-            names = sorted({query[s] for s in chunk})
-            return chunk, fetch_bars(names, f"{FETCH_START}T00:00:00Z", end, feed, key, secret), None
-        except RuntimeError as e:
-            return chunk, None, e
+            return chunk, fetch_bars(names, start, end, feed, key, secret), {}
+        except RuntimeError:
+            bars, failed = {}, {}
+            for name in names:
+                try:
+                    bars.update(fetch_bars([name], start, end, feed, key, secret))
+                except RuntimeError as e:
+                    failed[name] = str(e)[:160]
+            return chunk, bars, failed
 
     done = 0
     with ThreadPoolExecutor(max_workers=PARALLEL_REQUESTS) as pool:
-        for chunk, bars, err in pool.map(load, chunks):
+        for chunk, bars, failed in pool.map(load, chunks):
             done += len(chunk)
-            if err:
-                print(f"  {','.join(chunk)}: {err}")
-                missing.extend(chunk)
-                continue
+            for name, msg in failed.items():
+                print(f"  {name}: {msg}")
+            errors.update(failed)
             for sym in chunk:
                 hourly = yahoo_like_hourly(bars.get(query[sym]) or [])
                 rows = hourly_to_4h_rows(hourly, decimals=4) if len(hourly) else []
@@ -117,7 +125,7 @@ def main():
             print(f"  {done}/{len(symbols)}", flush=True)
 
     meta = {"source": "Alpaca Market Data API (30Min → Yahoo-Stundenraster → 4H wie live)",
-            "feed": feed, "start": H4_START, "symbols": info, "missing": sorted(missing)}
+            "feed": feed, "start": H4_START, "symbols": info, "missing": sorted(missing), "errors": errors}
     with open(os.path.join(CACHE_DIR, "h4_meta.json"), "w", encoding="utf-8") as f:
         json.dump(meta, f, indent=1)
     print(f"Fertig: {len(info)} Symbole mit 4H-Kerzen, {len(missing)} ohne: {' '.join(sorted(missing))}")

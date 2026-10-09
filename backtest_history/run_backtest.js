@@ -239,6 +239,7 @@ function runHistory() {
       start: h4Meta.start,
       symbols: Object.keys(h4Meta.symbols).length,
       missing: h4Meta.missing,
+      errors: h4Meta.errors || {},
     },
   };
 }

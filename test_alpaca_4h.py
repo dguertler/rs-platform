@@ -63,3 +63,30 @@ def test_four_hour_blocks_fixed_across_dst():
     labels = [r["d"] for r in rows]
     assert labels[:4] == ["2020-03-05 10:00", "2020-03-05 14:00", "2020-03-05 18:00", "2020-03-05 22:00"]
     assert labels[4:] == ["2020-03-09 09:00", "2020-03-09 13:00", "2020-03-09 17:00", "2020-03-09 21:00"]
+
+
+def test_failed_request_falls_back_to_single_symbols(tmp_path, monkeypatch):
+    """Lehnt Alpaca ein Symbol ab, dürfen die anderen der Anfrage nicht verloren gehen."""
+    import json
+    import fetch_alpaca_4h as f4
+
+    (tmp_path / "top20_inkl.json").write_text(json.dumps({"2020-03-04": ["AMD", "BAD", "WBD_2022"]}))
+    (tmp_path / "meta.json").write_text(json.dumps({"symbols": {
+        "WBD_2022": {"alpaca": {"query": "WBD", "from": "2020-01-01", "to": "2026-10-08"}}}}))
+    monkeypatch.setattr(f4, "CACHE_DIR", str(tmp_path))
+    monkeypatch.setattr(f4, "credentials", lambda: ("k", "s"))
+    monkeypatch.setattr(f4, "choose_feed", lambda *a: "sip")
+    calls = []
+
+    def fake_fetch(names, *a, **kw):
+        calls.append(list(names))
+        if "BAD" in names:
+            raise RuntimeError("HTTP 422: invalid symbol")
+        return {n: _bars("2020-03-04") for n in names}
+
+    monkeypatch.setattr(f4, "fetch_bars", fake_fetch)
+    f4.main()
+    meta = json.loads((tmp_path / "h4_meta.json").read_text())
+    assert set(meta["symbols"]) == {"AMD", "WBD_2022"}             # WBD_2022 über Alpaca-Symbol WBD
+    assert meta["missing"] == ["BAD"] and "BAD" in meta["errors"]
+    assert ["AMD", "BAD", "WBD"] in calls and ["AMD"] in calls       # erst gemeinsam, dann einzeln
