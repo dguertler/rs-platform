@@ -108,8 +108,8 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   for (let j = 1; j < swingLows.length; j++) {
     const tiefNeu = swingLows[j];
     const tiefAlt = swingLows[j - 1];
-    if (tiefNeu.price < tiefAlt.price &&
-        (lastGwswDefLow === null || tiefNeu.price < lastGwswDefLow.price)) {
+    // Wie live (gws_core.py, rs_charts.js): jedes tiefere Tief bildet eine neue Marke
+    if (tiefNeu.price < tiefAlt.price) {
       const hochsDazwischen = swingHighs.filter(
         sh => sh.idx > tiefAlt.idx && sh.idx < tiefNeu.idx
       );
@@ -188,8 +188,8 @@ function analyze4HStructure(ohlcv4h) {
   for (let j = 1; j < swingLows.length; j++) {
     const tiefNeu = swingLows[j];
     const tiefAlt = swingLows[j - 1];
-    if (tiefNeu.price < tiefAlt.price &&
-        (lastGws4hDefLow === null || tiefNeu.price < lastGws4hDefLow.price)) {
+    // Wie live (gws_core.py, rs_charts.js): jedes tiefere Tief bildet eine neue Marke
+    if (tiefNeu.price < tiefAlt.price) {
       const hochsDazwischen = swingHighs.filter(
         sh => sh.idx > tiefAlt.idx && sh.idx < tiefNeu.idx
       );
