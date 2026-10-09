@@ -53,10 +53,15 @@ def test_entry_uses_next_trading_day():
 
 def test_top20_tracking_uses_sent_alerts():
     """Top-20-Performance seit Live-Start = Bilanz der verschickten Alerts."""
-    for cmd in (["node", "live_alerts/evaluate_alerts.js"], ["node", "track_top20_performance.js"]):
-        subprocess.run(cmd, cwd=_REPO, check=True, capture_output=True)
-    live = json.load(open(os.path.join(_REPO, "data", "live_alerts_performance.json")))
-    top = json.load(open(os.path.join(_REPO, "data", "top20_performance.json")))
+    files = [os.path.join(_REPO, "data", f) for f in ("live_alerts_performance.json", "top20_performance.json")]
+    saved = {f: open(f, "rb").read() for f in files}       # Skripte schreiben in data/ — danach zurücksetzen
+    try:
+        for cmd in (["node", "live_alerts/evaluate_alerts.js"], ["node", "track_top20_performance.js"]):
+            subprocess.run(cmd, cwd=_REPO, check=True, capture_output=True)
+        live, top = (json.load(open(f)) for f in files)
+    finally:
+        for f, data in saved.items():
+            open(f, "wb").write(data)
     for src in ("QQQ", "SPX"):
         a, b = live["groups"][src], top["indices"][src]["kpis"]
         assert a["nTrades"] == b["nTrades"] and a["totalPnl"] == b["totalPnl"]
