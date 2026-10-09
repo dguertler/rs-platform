@@ -117,19 +117,29 @@ function rankAt(hist, day, sym) {
 const bar = (r) => [r.d, r.o, r.h, r.l, r.c];
 
 /**
- * 4H-Kerzen (Alpaca) auf die Skala der Tageskerzen (Yahoo) bringen. Weichen sie
- * an einem Tag um mehr als 10 % ab, ist eine Bereinigung nur in einer Quelle
- * angekommen (AZN: Yahoo hat die ADR-Umstellung rückwirkend eingerechnet, Alpaca
- * nicht → Faktor 2). Dann werden die 4H-Kerzen des Tages auf den Tagesschluss skaliert.
+ * 4H-Kerzen (Alpaca) auf die Skala der Tageskerzen (Yahoo) bringen. Liegt an
+ * einem Tag kein einziger 4H-Schluss in der Tagesspanne (±10 %), ist eine
+ * Bereinigung nur in einer Quelle angekommen (AZN: Yahoo hat die ADR-Umstellung
+ * rückwirkend eingerechnet, Alpaca nicht → Faktor 2). Dann werden die 4H-Kerzen
+ * des Tages auf den Tagesschluss skaliert (Verhältnis zur letzten Kerze).
+ * Ein Kurssprung nachbörslich (Quartalszahlen) ist kein Skalenfehler: die
+ * Kerzen der regulären Sitzung liegen dann in der Tagesspanne.
  */
 function alignToDaily(h4, daily) {
-  const close = new Map(daily.map((r) => [r.d, r.c]));
-  const lastOfDay = new Map();
-  for (const r of h4) lastOfDay.set(r.d.slice(0, 10), r);          // letzte Kerze des Tages
+  const dayBar = new Map(daily.map((r) => [r.d, r]));
+  const byDay = new Map();
+  for (const r of h4) {
+    const day = r.d.slice(0, 10);
+    if (!byDay.has(day)) byDay.set(day, []);
+    byDay.get(day).push(r);
+  }
   const factor = new Map();
-  for (const [day, r] of lastOfDay) {
-    const c = close.get(day);
-    if (c && r.c > 0 && Math.abs(c / r.c - 1) > 0.1) factor.set(day, c / r.c);
+  for (const [day, bars] of byDay) {
+    const D = dayBar.get(day);
+    if (!D || !(D.c > 0)) continue;
+    if (bars.some((r) => r.c >= D.l * 0.9 && r.c <= D.h * 1.1)) continue;
+    const last = bars[bars.length - 1];
+    if (last.c > 0) factor.set(day, D.c / last.c);
   }
   if (!factor.size) return h4;
   return h4.map((r) => {
