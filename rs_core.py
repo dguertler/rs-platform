@@ -81,11 +81,14 @@ def membership_mask(index, tickers, intervals):
     return mask
 
 
+SPIKE = 0.10   # Fehlkurs-Schwelle vor/nach Börse (Anteil über/unter Körper und Nachbarn)
+
+
 def hourly_to_4h_rows(df, decimals=2):
     """Stundenkerzen (inkl. Vor-/Nachbörse, Index mit Zeitzone) → 4H-Kerzen.
 
-    Live-Logik aus rs_colab.py: Ausreißer-Tiefs außerhalb der Handelszeit
-    glätten, dann 4-Stunden-Blöcke ab Mitternacht New Yorker Zeit, Zeitstempel in
+    Live-Logik aus rs_colab.py: Ausreißer-Hochs und -Tiefs außerhalb der
+    Handelszeit glätten, dann 4-Stunden-Blöcke ab Mitternacht New Yorker Zeit, Zeitstempel in
     Berliner Zeit. Der historische Backtest baut seine 4H-Kerzen hierüber.
     """
     import pandas as pd
@@ -105,10 +108,20 @@ def hourly_to_4h_rows(df, decimals=2):
          for ts in df.index],
         index=df.index, dtype=bool
     )
-    prev_low = df["Low"].shift(1)
-    next_low = df["Low"].shift(-1)
-    bad_low  = extended & (df["Low"] < prev_low * 0.70) & (df["Low"] < next_low * 0.70)
-    df.loc[bad_low, "Low"] = df.loc[bad_low, ["Open", "Close"]].min(axis=1)
+    # Fehlkurse vor/nach Börse glätten: eine Lunte, die mehr als SPIKE über bzw.
+    # unter dem Kerzenkörper UND den Extremen beider Nachbarstunden liegt, ist ein
+    # Einzelprint (z. B. MU 05.06.2026: Hoch 1.688 bei Kurs 860). Echte
+    # Bewegungen (Earnings) laufen in den Folgestunden weiter und bleiben stehen.
+    body_hi = df[["Open", "Close"]].max(axis=1)
+    body_lo = df[["Open", "Close"]].min(axis=1)
+    bad_high = (extended & (df["High"] > body_hi * (1 + SPIKE))
+                & (df["High"] > df["High"].shift(1) * (1 + SPIKE))
+                & (df["High"] > df["High"].shift(-1) * (1 + SPIKE)))
+    bad_low = (extended & (df["Low"] < body_lo * (1 - SPIKE))
+               & (df["Low"] < df["Low"].shift(1) * (1 - SPIKE))
+               & (df["Low"] < df["Low"].shift(-1) * (1 - SPIKE)))
+    df.loc[bad_high, "High"] = body_hi[bad_high]
+    df.loc[bad_low, "Low"] = body_lo[bad_low]
 
     # 4H-Blöcke fest an Mitternacht New Yorker Zeit: 0–4, 4–8, 8–12, 12–16,
     # 16–20, 20–24 Uhr ET — unabhängig von Sommer-/Winterzeit und vom ersten

@@ -117,3 +117,31 @@ def test_membership_mask_intervals():
     assert mask[:, 0].tolist() == [True, True, True, True]
     assert mask[:, 1].tolist() == [False, True, False, False]
     assert mask[:, 2].tolist() == [False, False, False, False]  # nie Mitglied
+
+
+def _hourly(rows):
+    idx = pd.to_datetime([r[0] for r in rows]).tz_localize("UTC")
+    return pd.DataFrame([r[1:] for r in rows], index=idx, columns=["Open", "High", "Low", "Close"])
+
+
+def test_4h_smooths_extended_hours_spikes_but_keeps_real_moves():
+    from rs_core import hourly_to_4h_rows
+    # 05.06.2026 (Sommerzeit, ET = UTC-4): 16–20 Uhr ET = 20–24 Uhr UTC
+    day = [(f"2026-06-05 {h:02d}:00", 860, 865, 855, 860) for h in range(14, 20)]
+    day[2] = ("2026-06-05 16:00", 860, 990, 700, 860)          # Handelszeit: unverändert
+    after = [("2026-06-05 20:00", 860, 866, 856, 861),
+             ("2026-06-05 21:00", 861, 1688, 858, 859),          # Fehl-Hoch nachbörslich
+             ("2026-06-05 22:00", 859, 864, 600, 858),           # Fehl-Tief nachbörslich
+             ("2026-06-05 23:00", 858, 863, 855, 860)]
+    rows = hourly_to_4h_rows(_hourly(day + after))
+    post = next(r for r in rows if r["d"] == "2026-06-05 22:00")   # Block 16–20 Uhr ET, Berliner Zeit
+    assert post["h"] == 866 and post["l"] == 855
+    regular = next(r for r in rows if r["d"] == "2026-06-05 18:00")
+    assert regular["h"] == 990 and regular["l"] == 700
+
+    # Echter Sprung nach Zahlen: Folgestunden bleiben oben → kein Glätten
+    jump = [("2026-06-05 20:00", 860, 1000, 858, 990),
+            ("2026-06-05 21:00", 990, 1010, 980, 1000),
+            ("2026-06-05 22:00", 1000, 1005, 985, 995)]
+    post = next(r for r in hourly_to_4h_rows(_hourly(day + jump)) if r["d"] == "2026-06-05 22:00")
+    assert post["h"] == 1010
