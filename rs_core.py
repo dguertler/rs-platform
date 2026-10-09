@@ -84,6 +84,25 @@ def membership_mask(index, tickers, intervals):
 SPIKE = 0.10   # Fehlkurs-Schwelle vor/nach Börse (Anteil über/unter Körper und Nachbarn)
 
 
+def _smooth_spikes(df, extended):
+    """Lunten außerhalb der Handelszeit auf den Kerzenkörper setzen, wenn sie
+    mehr als SPIKE über bzw. unter dem eigenen Körper UND den Körpern beider
+    Nachbarkerzen liegen — ein Einzelprint, der sofort wieder verschwindet.
+    Verglichen wird mit den Körpern (Eröffnung/Schluss), nicht mit den Lunten
+    der Nachbarn: ein Fehlkurs über zwei Stunden würde sich sonst gegenseitig
+    decken. Echte Bewegungen (Earnings) verschieben auch die Körper der
+    Folgekerzen und bleiben stehen."""
+    body_hi = df[["Open", "Close"]].max(axis=1)
+    body_lo = df[["Open", "Close"]].min(axis=1)
+    up, down = 1 + SPIKE, 1 - SPIKE
+    bad_high = (extended & (df["High"] > body_hi * up)
+                & (df["High"] > body_hi.shift(1) * up) & (df["High"] > body_hi.shift(-1) * up))
+    bad_low = (extended & (df["Low"] < body_lo * down)
+               & (df["Low"] < body_lo.shift(1) * down) & (df["Low"] < body_lo.shift(-1) * down))
+    df.loc[bad_high, "High"] = body_hi[bad_high]
+    df.loc[bad_low, "Low"] = body_lo[bad_low]
+
+
 def hourly_to_4h_rows(df, decimals=2):
     """Stundenkerzen (inkl. Vor-/Nachbörse, Index mit Zeitzone) → 4H-Kerzen.
 
@@ -108,20 +127,8 @@ def hourly_to_4h_rows(df, decimals=2):
          for ts in df.index],
         index=df.index, dtype=bool
     )
-    # Fehlkurse vor/nach Börse glätten: eine Lunte, die mehr als SPIKE über bzw.
-    # unter dem Kerzenkörper UND den Extremen beider Nachbarstunden liegt, ist ein
-    # Einzelprint (z. B. MU 05.06.2026: Hoch 1.688 bei Kurs 860). Echte
-    # Bewegungen (Earnings) laufen in den Folgestunden weiter und bleiben stehen.
-    body_hi = df[["Open", "Close"]].max(axis=1)
-    body_lo = df[["Open", "Close"]].min(axis=1)
-    bad_high = (extended & (df["High"] > body_hi * (1 + SPIKE))
-                & (df["High"] > df["High"].shift(1) * (1 + SPIKE))
-                & (df["High"] > df["High"].shift(-1) * (1 + SPIKE)))
-    bad_low = (extended & (df["Low"] < body_lo * (1 - SPIKE))
-               & (df["Low"] < df["Low"].shift(1) * (1 - SPIKE))
-               & (df["Low"] < df["Low"].shift(-1) * (1 - SPIKE)))
-    df.loc[bad_high, "High"] = body_hi[bad_high]
-    df.loc[bad_low, "Low"] = body_lo[bad_low]
+    # Fehlkurse vor/nach Börse glätten (z. B. MU 05.06.2026: Hoch 1.688 bei Kurs 860)
+    _smooth_spikes(df, extended)
 
     # 4H-Blöcke fest an Mitternacht New Yorker Zeit: 0–4, 4–8, 8–12, 12–16,
     # 16–20, 20–24 Uhr ET — unabhängig von Sommer-/Winterzeit und vom ersten
@@ -138,6 +145,9 @@ def hourly_to_4h_rows(df, decimals=2):
         "Low":   "min",
         "Close": "last"
     }).dropna()
+    # Zweiter Durchgang auf den reinen Vor-/Nachbörsen-Blöcken (0–8 und 16–24 Uhr
+    # ET): erwischt Fehlkurse, die sich über mehrere Stunden ziehen
+    _smooth_spikes(df_4h, pd.Series(df_4h.index.hour.isin([0, 4, 16, 20]), index=df_4h.index))
     df_4h.index = df_4h.index.tz_localize(_et, ambiguous=True, nonexistent="shift_forward")
 
     result = []

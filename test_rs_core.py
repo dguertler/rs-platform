@@ -145,3 +145,14 @@ def test_4h_smooths_extended_hours_spikes_but_keeps_real_moves():
             ("2026-06-05 22:00", 1000, 1005, 985, 995)]
     post = next(r for r in hourly_to_4h_rows(_hourly(day + jump)) if r["d"] == "2026-06-05 22:00")
     assert post["h"] == 1010
+
+
+def test_4h_smooths_spike_spanning_two_hours():
+    from rs_core import hourly_to_4h_rows
+    day = [(f"2026-05-20 {h:02d}:00", 730, 734, 726, 731) for h in range(14, 20)]
+    after = [("2026-05-20 20:00", 731, 736, 443, 728),          # Fehl-Tief über zwei Stunden
+             ("2026-05-20 21:00", 728, 733, 450, 727),
+             ("2026-05-20 22:00", 727, 731, 724, 726),
+             ("2026-05-20 23:00", 726, 730, 722, 726)]
+    post = next(r for r in hourly_to_4h_rows(_hourly(day + after)) if r["d"] == "2026-05-20 22:00")
+    assert post["l"] >= 720
