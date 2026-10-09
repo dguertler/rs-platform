@@ -258,8 +258,11 @@ function getWeekEnd(weekStartStr) {
 }
 
 // ── Wochen-Rows vorberechnen ──────────────────────────────────────────────────────
-function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h) {
-  return ohlcv_w.map((week, i) => {
+// from/to (optional): nur die Wochen mit diesem Index berechnen — die Schnitte
+// davor bleiben vollständig (B-DETAILS 2 rechnet so nur die Wochen um einen Trade).
+function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h, from = 0, to = ohlcv_w.length - 1) {
+  return ohlcv_w.slice(from, to + 1).map((week, k) => {
+    const i = from + k;
     const weekEnd  = getWeekEnd(week.d);
     const wSlice   = ohlcv_w.slice(Math.max(0, i - 59), i + 1);
     const dHistory = ohlcv_d.filter(d => d.d <= weekEnd);

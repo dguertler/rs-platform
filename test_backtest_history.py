@@ -186,14 +186,42 @@ def test_before_after_steps(pipeline):
     assert 0 <= ba["top20Overlap"] <= 20
 
 
-def test_chart_files_cover_every_trade(pipeline):
-    """B-DETAILS 2: je Aktie Wochenkerzen und Tageskerzen rund um jeden Trade."""
-    trades = [t for v in pipeline["results"]["variants"].values() for t in v["trades"]]
-    for ticker in {t["ticker"] for t in trades}:
-        chart = json.loads((pipeline["charts"] / f"{ticker}.json").read_text())
-        days = {b[0] for b in chart["d"]}
-        assert chart["w"] and all(len(b) == 5 for b in chart["w"] + chart["d"])
-        for t in (t for t in trades if t["ticker"] == ticker):
-            assert t["entryDate"] in days
-            assert t["isOpen"] or t["exitDate"] in days
-            assert t["stopPrice"] is None or t["stopPrice"] < t["entryPrice"]
+REPLAY = r"""
+const fs = require('fs'), vm = require('vm'), path = require('path');
+const [logic, results, charts] = process.argv.slice(1);
+vm.runInThisContext(fs.readFileSync(logic, 'utf8') + ';globalThis.E={buildWeekRows,simulateTrades};');
+const r = JSON.parse(fs.readFileSync(results, 'utf8'));
+const toBar = (a) => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
+const out = {};
+for (const [variant, mode] of [['inkl', 'WD'], ['exkl', 'WD'], ['live4h', '4H']]) {
+  const tickers = [...new Set(r.variants[variant].trades.map((t) => t.ticker))];
+  out[variant] = [];
+  for (const t of tickers) {
+    const c = JSON.parse(fs.readFileSync(path.join(charts, t + '.json'), 'utf8'));
+    // Top-20-Historie wie auf der Seite: je Handelstag ab Mitgliedsbeginn [Titel] oder []
+    const ranges = c.top20[variant === 'live4h' ? 'inkl' : variant];
+    const hist = {};
+    for (const b of c.d) if (b[0] >= r.period.start) hist[b[0]] = ranges.some(([a, z]) => b[0] >= a && b[0] <= z) ? [t] : [];
+    const rows = E.buildWeekRows(c.w.map(toBar), c.d.map(toBar), mode === '4H' ? c.h.map(toBar) : []);
+    for (const x of E.simulateTrades(rows, c.d.map(toBar), t, hist, true, mode)) out[variant].push(t + '|' + x.entryDate + '|' + x.exitDate);
+  }
+}
+console.log(JSON.stringify(out));
+"""
+
+
+def test_chart_files_replay_engine_trades(pipeline, tmp_path):
+    """B-DETAILS 2 rechnet die Wochen im Browser nach: aus den Chart-Dateien
+    müssen exakt dieselben Trades entstehen wie im Backtest-Lauf."""
+    res = pipeline["results"]
+    out = tmp_path / "results.json"
+    out.write_text(json.dumps(res))
+    replay = json.loads(subprocess.run(
+        ["node", "-e", REPLAY, os.path.join(_REPO, "frontend", "backtest_logic.js"), str(out), str(pipeline["charts"])],
+        check=True, capture_output=True, text=True).stdout)
+    for variant in ("inkl", "exkl", "live4h"):
+        expected = sorted(f"{t['ticker']}|{t['entryDate']}|{t['exitDate']}" for t in res["variants"][variant]["trades"])
+        assert sorted(replay[variant]) == expected, variant
+    bench = json.loads((pipeline["charts"] / "_benchmark.json").read_text())
+    assert bench["ticker"] == "QQQ" and bench["d"]
+    assert all(t.get("weeklyDate") for t in res["variants"]["inkl"]["trades"])

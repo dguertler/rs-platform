@@ -7,6 +7,8 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
+  <script src="backtest_logic.js?v=20261009"></script>
+  <script type="text/babel" src="backtest_charts.js?v=20261009"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
@@ -31,6 +33,22 @@
     .note b { color: #e2e8f0; }
     .btn { background: transparent; border: 1px solid #1e293b; border-radius: 6px; padding: 5px 12px; color: #64748b; font-family: monospace; font-size: 12px; font-weight: 700; cursor: pointer; }
     .btn.on { background: #1e293b; border-color: #f59e0b; color: #fbbf24; }
+    .chart-wrap { position: relative; }
+    .chart-wrap svg { display: block; }
+    .charts-grid { display:flex; flex-direction:column; gap:10px; }
+    @media (min-width:768px) {
+      .charts-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+      .chart-full-width { grid-column:1/-1; }
+    }
+    .desktop-layout { display:flex; flex-direction:column; gap:14px; }
+    @media (min-width:1100px) {
+      .desktop-layout { flex-direction:row; align-items:flex-start; gap:16px; }
+      .desktop-left  { width:520px; flex-shrink:0; }
+      .desktop-right { flex:1; min-width:0; position:sticky; top:16px; align-self:flex-start; }
+    }
+    .tbl-row { cursor:pointer; transition:background .1s; }
+    .tbl-row:hover { background:#1e293b !important; }
+    .dot { display:inline-block; width:9px; height:9px; border-radius:50%; }
     select { background: #0d1526; color: #e2e8f0; border: 1px solid #334155; border-radius: 6px; padding: 5px 10px; font-family: monospace; font-size: 13px; font-weight: 700; }
   </style>
 </head>
@@ -48,7 +66,7 @@
 <div id="root"></div>
 
 <script type="text/babel">
-const { useState, useEffect, useMemo } = React;
+const { useState, useEffect, useMemo, useRef, useCallback } = React;
 
 const green = '#4ade80', red = '#f87171', amber = '#fbbf24', blue = '#60a5fa', neutral = '#64748b';
 const pnlColor = v => v > 0 ? green : v < 0 ? red : neutral;
@@ -63,21 +81,26 @@ const VARIANTS = {
   wd4hStart: 'W+D ab 2016',
   live4h: 'Live-Logik mit 4H ab 2016',
 };
-const TRIGGER = { D: 'Daily', W: 'Weekly', '4H': '4H' };
+const TOP20_OF = { inkl: 'inkl', exkl: 'exkl', wd4hStart: 'inkl', live4h: 'inkl' };
+const IS_4H = v => v === 'live4h';
+const WEEKS_BEFORE = 26, WEEKS_AFTER = 6;     // Wochentabelle rund um den gewählten Trade
+const toBar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
 
-/** Kursreihen einer Aktie: Ausschnitte aus dem historischen Lauf, sonst die Live-Backtest-Datei (ab 2022). */
+/** Kurse aus dem historischen Lauf (vollständig, wie die Engine sie sieht), sonst Live-Backtest-Datei ab 2022. */
 async function loadPrices(ticker) {
-  const toBar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
   try {
     const r = await fetch(`data/backtest_history/charts/${ticker}.json`, { cache: 'no-store' });
-    if (r.ok) { const j = await r.json(); return { source: 'historie', w: j.w.map(toBar), d: j.d.map(toBar) }; }
+    if (r.ok) {
+      const j = await r.json();
+      return { source: 'historie', w: j.w.map(toBar), d: j.d.map(toBar), h: (j.h || []).map(toBar), top20: j.top20 || null };
+    }
   } catch (e) { /* weiter mit Fallback */ }
   try {
     const slug = ticker.toLowerCase().replace(/[^a-z0-9]/g, '_');
     const r = await fetch(`data/backtest_${slug}.json`, { cache: 'no-store' });
-    if (r.ok) { const j = await r.json(); return { source: 'live', w: j.ohlcv_w || [], d: j.ohlcv_d || [] }; }
+    if (r.ok) { const j = await r.json(); return { source: 'live', w: j.ohlcv_w || [], d: j.ohlcv_d || [], h: j.ohlcv_4h || [], top20: null }; }
   } catch (e) { /* keine Kurse */ }
-  return { source: null, w: [], d: [] };
+  return { source: null, w: [], d: [], h: [], top20: null };
 }
 
 function Tile({ label, value, color, sub }) {
@@ -161,6 +184,14 @@ function Candles({ bars, trades, selected, onSelect, levels, height = 320, title
   );
 }
 
+/** Woche (Index in w), in der der Trade ausgelöst wurde: Signalwoche der Engine, sonst die Woche vor dem Einstieg. */
+function signalWeekIdx(w, t) {
+  if (t.weeklyDate) { const i = w.findIndex(b => b.d.slice(0, 10) === t.weeklyDate.slice(0, 10)); if (i >= 0) return i; }
+  let i = w.findIndex(b => b.d > t.entryDate);
+  i = i < 0 ? w.length - 1 : i - 1;
+  return Math.max(0, i);
+}
+
 function App() {
   const params = new URLSearchParams(window.location.search);
   const [data, setData] = useState(null);
@@ -168,12 +199,19 @@ function App() {
   const [variant, setVariant] = useState(VARIANTS[params.get('v')] ? params.get('v') : 'inkl');
   const [ticker, setTicker] = useState((params.get('t') || '').toUpperCase());
   const [prices, setPrices] = useState(null);
+  const [bench, setBench] = useState(null);
   const [selected, setSelected] = useState(null);
+  const [selWeek, setSelWeek] = useState(null);
+  const chartRef = useRef(null);
+  const weekRowRefs = useRef({});
 
   useEffect(() => {
     fetch('data/backtest_history/ndx_results.json', { cache: 'no-store' })
       .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(setData).catch(e => setError(e.message));
+    fetch('data/backtest_history/charts/_benchmark.json', { cache: 'no-store' })
+      .then(r => (r.ok ? r.json() : null))
+      .then(j => j && setBench({ label: j.ticker, w: j.w.map(toBar), d: j.d.map(toBar) })).catch(() => {});
   }, []);
 
   const v = data?.variants?.[variant];
@@ -185,10 +223,42 @@ function App() {
     if (!active) return;
     const url = `?t=${encodeURIComponent(active)}&v=${variant}`;
     if (window.location.search !== url) window.history.replaceState(null, '', url);
+    document.title = `RS · Historie ${active}`;
     setPrices(null);
     loadPrices(active).then(setPrices);
   }, [active, variant]);
   useEffect(() => { setSelected(trades.length ? trades[trades.length - 1] : null); }, [trades]);
+
+  // Top-20-Historie dieses Titels (Engine-Format: Tag → [Ticker] oder [])
+  const top20Hist = useMemo(() => {
+    const ranges = prices?.top20?.[TOP20_OF[variant]];
+    if (!ranges || !data) return null;
+    const hist = {};
+    for (const b of prices.d) if (b.d >= data.period.start) hist[b.d] = ranges.some(([a, z]) => b.d >= a && b.d <= z) ? [active] : [];
+    return hist;
+  }, [prices, variant, data, active]);
+
+  // Wochen rund um den gewählten Trade, exakt wie in der Engine berechnet
+  const weekRows = useMemo(() => {
+    if (!prices || !prices.w.length || !selected) return [];
+    const a = signalWeekIdx(prices.w, selected);
+    let b = selected.isOpen ? prices.w.length - 1 : prices.w.findIndex(x => x.d > selected.exitDate);
+    b = b < 0 ? prices.w.length - 1 : b;
+    return buildWeekRows(prices.w, prices.d, prices.h, Math.max(0, a - WEEKS_BEFORE), Math.min(prices.w.length - 1, b + WEEKS_AFTER));
+  }, [prices, selected, variant]);
+
+  useEffect(() => {
+    if (!selected || !prices?.w.length) return;
+    const i = signalWeekIdx(prices.w, selected);
+    setSelWeek(i);
+    setTimeout(() => weekRowRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
+  }, [selected, prices]);
+
+  const sel = weekRows.find(r => r.i === selWeek) || null;
+  const tradeMarkers = useMemo(() => trades.flatMap(t => [
+    { date: t.entryDate, weeklyDate: t.weeklyDate, type: 'entry', stopPrice: t.stopPrice },
+    ...(!t.isOpen ? [{ date: t.exitDate, type: 'exit', price: t.exitPrice }] : []),
+  ]), [trades]);
 
   if (error) return <div style={{ padding: 60, color: red, fontFamily: 'monospace' }}>Fehler beim Laden: {error}</div>;
   if (!data) return <div style={{ padding: 60, color: '#475569', fontFamily: 'monospace' }}>Lade Ergebnisse…</div>;
@@ -203,37 +273,32 @@ function App() {
   const sumPct = trades.reduce((s, t) => s + t.pnlPct, 0);
   const winrate = closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null;
   const taken = trades.filter(t => t.taken);
-
-  // Tagesausschnitt um den gewählten Trade
-  let dayBars = [], dayNote = null;
-  if (prices && selected) {
-    const d = prices.d;
-    const a = d.findIndex(b => b.d >= selected.entryDate);
-    const bIdx = selected.isOpen ? d.length - 1 : d.findIndex(b => b.d >= selected.exitDate);
-    if (a < 0 || d[a].d > selected.entryDate) {
-      dayNote = 'Für diesen Trade liegen noch keine Tageskerzen vor.';
-    } else {
-      const from = Math.max(0, a - 80), to = Math.min(d.length - 1, (bIdx < 0 ? d.length - 1 : bIdx) + 15);
-      dayBars = d.slice(from, to + 1);
-      // Lücken im Ausschnitt (getrennte Trade-Fenster) abschneiden
-      for (let i = a - from; i > 0; i--) {
-        if ((new Date(dayBars[i].d) - new Date(dayBars[i - 1].d)) / 864e5 > 6) { dayBars = dayBars.slice(i); break; }
-      }
+  const isT20 = (row) => {
+    if (!top20Hist) return null;
+    const fri = new Date(row.weekEnd + 'T12:00:00Z');
+    fri.setUTCDate(fri.getUTCDate() - 1);
+    for (let k = 0; k < 7; k++) {          // letzter Handelstag der Woche
+      const day = new Date(fri - k * 864e5).toISOString().slice(0, 10);
+      if (top20Hist[day]) return top20Hist[day].length > 0;
     }
-  }
-  const weekBars = prices ? prices.w : [];
+    return null;
+  };
+  const entryWeek = selected && prices?.w.length ? signalWeekIdx(prices.w, selected) : null;
 
   return (
-    <div style={{ maxWidth: 1100, margin: '0 auto', padding: '32px 16px' }}>
-      <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · Trades je Aktie</div>
-      <div className="note" style={{ marginBottom: 16 }}>
-        Alle Trades einer Aktie aus <a href="backtest_history.html" style={{ color: '#93c5fd' }}>B-HISTORIE</a> zum
-        Nachprüfen: Einstieg zur Eröffnung nach dem Signal, Stopp am letzten Swing-Tief × 0,99, Ausstieg zur Eröffnung nach
-        einem Tagesschluss unter dem Stopp bzw. dem letzten Swing-Tief. 10.000 € je Signal, max. 1.000 € Risiko.
-        Trade in der Liste oder im Chart anklicken für den Tageschart.
+    <div style={{ maxWidth: 1500, margin: '0 auto', padding: '28px 12px' }}>
+      <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · Trades je Aktie prüfen</div>
+      <div className="note" style={{ marginBottom: 14 }}>
+        Alle Trades einer Aktie aus <a href="backtest_history.html" style={{ color: '#93c5fd' }}>B-HISTORIE</a>. Trade anklicken:
+        die Wochentabelle zeigt die Wochen rund um den Trade mit den GWS-Punkten W / D / 4H, so wie die Engine sie zu
+        diesem Zeitpunkt sah; Woche anklicken für Weekly-, Daily- und 4H-Chart mit Struktur. Einstieg zur Eröffnung nach
+        dem Signal, Stopp am letzten Swing-Tief × 0,99.
+        {IS_4H(variant)
+          ? <> Variante <b>Live-Logik</b>: Einstieg bei 3 von 3 Punkten, ausgelöst über 4H.</>
+          : <> Variante <b>W+D</b>: Einstieg bei 2 von 2 Punkten (Weekly + Daily); 4H wird nur zur Ansicht gezeigt.</>}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 12 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 10 }}>
         <button className="btn" disabled={pos <= 0} onClick={() => setTicker(tickers[pos - 1])}>◀</button>
         <select value={active || ''} onChange={e => setTicker(e.target.value)}>
           {tickers.map(t => <option key={t} value={t}>{t}</option>)}
@@ -241,13 +306,13 @@ function App() {
         <button className="btn" disabled={pos >= tickers.length - 1} onClick={() => setTicker(tickers[pos + 1])}>▶</button>
         <span className="note">{pos + 1} von {tickers.length} Aktien</span>
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
         {Object.entries(VARIANTS).filter(([k]) => data.variants[k]).map(([k, label]) => (
           <button key={k} className={`btn${variant === k ? ' on' : ''}`} onClick={() => setVariant(k)}>{label}</button>
         ))}
       </div>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 14 }}>
         <Tile label="Trades" value={trades.length} sub={`${trades.length - closed.length} offen`} />
         <Tile label="Trefferquote" value={winrate != null ? num(winrate) + ' %' : '–'} sub="abgeschlossene" />
         <Tile label="Profit-Faktor" value={num(pf, 2)} color={pfColor(pf)} sub="inkl. offener" />
@@ -263,57 +328,133 @@ function App() {
       )}
       {prices?.source === 'live' && (
         <div className="card note" style={{ borderColor: '#92400e', marginBottom: 14 }}>
-          Die historischen Kursausschnitte fehlen noch — angezeigt werden die Live-Backtest-Kurse ab {prices.d[0]?.d ?? '–'}.
-          Ältere Trades erscheinen nach dem nächsten Lauf des Workflows <b>„Historischer NASDAQ-100-Backtest (ab 2007)"</b>.
+          Die historischen Kurse fehlen noch — angezeigt werden die Live-Backtest-Kurse ab {prices.d[0]?.d ?? '–'}, die
+          Punkte älterer Wochen sind daher nicht aussagekräftig. Vollständig nach dem nächsten Lauf des Workflows
+          <b> „Historischer NASDAQ-100-Backtest (ab 2007)"</b>.
         </div>
       )}
-      {weekBars.length > 0 && (
-        <Candles bars={weekBars} trades={trades} selected={selected} onSelect={setSelected} height={300}
-          title={`${active} · Wochenkerzen · ▲ Einstieg · ▼ Ausstieg (grün Gewinn, rot Verlust)`} />
+      {prices?.w.length > 0 && (
+        <Candles bars={prices.w} trades={trades} selected={selected} onSelect={setSelected} height={260}
+          title={`${active} · alle Trades · ▲ Einstieg · ▼ Ausstieg (grün Gewinn, rot Verlust) · Bereich anklicken`} />
       )}
-      {selected && dayBars.length > 0 && (
-        <Candles bars={dayBars} trades={[selected]} selected={selected} height={340}
-          title={`Tageskerzen · Trade ${selected.entryDate} → ${selected.isOpen ? 'offen' : selected.exitDate} · ${pct(selected.pnlPct)}`}
-          levels={[
-            { v: selected.entryPrice, color: blue, label: 'Einstieg' },
-            { v: selected.stopPrice, color: red, label: 'Stopp', dash: '5,4' },
-            ...(selected.isOpen ? [] : [{ v: selected.exitPrice, color: amber, label: 'Ausstieg', dash: '2,3' }]),
-          ]} />
-      )}
-      {selected && dayNote && <div className="note" style={{ marginBottom: 14 }}>{dayNote}</div>}
 
-      <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 520, marginBottom: 20 }}>
-        <table>
-          <thead><tr>
-            <th>#</th><th>Auslöser</th><th>RS-Rang</th><th>Einstieg</th><th>Kurs</th><th>Stopp</th><th>Risiko</th>
-            <th>Ausstieg</th><th>Kurs</th><th>Wochen</th><th>Rendite</th><th>P&L</th><th>Im Depot</th><th>P&L Depot</th>
-          </tr></thead>
-          <tbody>
-            {trades.map((t, i) => (
-              <tr key={i} className={`data-row${selected === t ? ' selected' : ''}`} onClick={() => setSelected(t)}>
-                <td style={{ color: '#64748b' }}>{i + 1}</td>
-                <td style={{ color: '#94a3b8' }}>{TRIGGER[t.trigger] || t.trigger}</td>
-                <td style={{ color: '#94a3b8' }}>{t.rank <= 20 ? t.rank : '–'}</td>
-                <td>{t.entryDate}</td>
-                <td>{price(t.entryPrice)}</td>
-                <td style={{ color: red }}>{price(t.stopPrice)}</td>
-                <td style={{ color: '#94a3b8' }}>{t.stopPrice ? pct((t.stopPrice / t.entryPrice - 1) * 100) : '–'}</td>
-                <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}{t.dataEnded ? ' · Datenende' : ''}</td>
-                <td>{price(t.exitPrice)}</td>
-                <td>{t.holdingWeeks}</td>
-                <td style={{ color: pnlColor(t.pnlPct), fontWeight: 700 }}>{pct(t.pnlPct)}</td>
-                <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
-                <td style={{ color: t.taken ? green : '#64748b' }}>{t.taken ? 'ja' : 'ausgelassen'}</td>
-                <td style={{ color: pnlColor(t.depotPnl) }}>{t.taken ? eur(t.depotPnl) : '–'}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="desktop-layout">
+        <div className="desktop-left">
+          <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', maxHeight: 320, marginBottom: 10 }}>
+            <table>
+              <thead><tr>
+                <th>Einstieg</th><th>TF</th><th>Rang</th><th>Kurs</th><th>Stopp</th><th>Ausstieg</th><th>Kurs</th><th>W</th><th>Rendite</th><th>Depot</th>
+              </tr></thead>
+              <tbody>
+                {[...trades].reverse().map((t, i) => (
+                  <tr key={i} className={`data-row${selected === t ? ' selected' : ''}`} onClick={() => setSelected(t)}>
+                    <td>{t.entryDate}</td>
+                    <td style={{ color: t.trigger === '4H' ? '#a78bfa' : t.trigger === 'D' ? '#38bdf8' : amber, fontWeight: 700 }}>{t.trigger}</td>
+                    <td style={{ color: '#94a3b8' }}>{t.rank <= 20 ? t.rank : '–'}</td>
+                    <td>{price(t.entryPrice)}</td>
+                    <td style={{ color: red }}>{price(t.stopPrice)}</td>
+                    <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}{t.dataEnded ? ' ·DE' : ''}</td>
+                    <td>{price(t.exitPrice)}</td>
+                    <td>{t.holdingWeeks}</td>
+                    <td style={{ color: pnlColor(t.pnlPct), fontWeight: 700 }}>{pct(t.pnlPct)}</td>
+                    <td style={{ color: t.taken ? green : '#64748b' }}>{t.taken ? eur(t.depotPnl) : 'ausgel.'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div style={{ background: '#0a0f1e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'hidden' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '78px 92px 72px 36px 36px 36px 40px 1fr', padding: '7px 12px',
+              background: '#0f172a', borderBottom: '1px solid #1e293b', fontSize: 10, fontWeight: 700, color: '#475569', fontFamily: 'monospace' }}>
+              <span>KW</span><span>Datum</span><span style={{ textAlign: 'right' }}>Close</span>
+              <span style={{ textAlign: 'center' }}>W</span><span style={{ textAlign: 'center' }}>D</span>
+              <span style={{ textAlign: 'center' }}>4H</span><span style={{ textAlign: 'center' }}>T20</span><span></span>
+            </div>
+            <div style={{ maxHeight: '62vh', overflowY: 'auto' }}>
+              {!weekRows.length && <div className="note" style={{ padding: 14 }}>{prices ? 'Trade wählen.' : 'Lade …'}</div>}
+              {[...weekRows].reverse().map(row => {
+                const isSel = selWeek === row.i;
+                const t20 = isT20(row);
+                const entryHere = trades.some(t => signalWeekIdx(prices.w, t) === row.i);
+                const exitHere = trades.some(t => !t.isOpen && row.week.d <= t.exitDate && t.exitDate <= row.weekEnd);
+                const bg = row.pts >= 3 ? '#0a1a0a' : row.pts >= 2 ? '#1a1200' : row.pts === 1 ? '#0f0f0f' : '#060b14';
+                const bl = row.pts >= 3 ? '3px solid #4ade80' : row.pts >= 2 ? '3px solid #fbbf24' : row.pts >= 1 ? '3px solid #334155' : '3px solid transparent';
+                return (
+                  <div key={row.i} ref={el => (weekRowRefs.current[row.i] = el)} className="tbl-row"
+                    onClick={() => { setSelWeek(row.i); setTimeout(() => chartRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50); }}
+                    style={{ display: 'grid', gridTemplateColumns: '78px 92px 72px 36px 36px 36px 40px 1fr', padding: '5px 12px',
+                      alignItems: 'center', borderBottom: '1px solid #0f172a',
+                      background: isSel ? '#1a2f4a' : bg, borderLeft: isSel ? '3px solid #3b82f6' : bl }}>
+                    <span style={{ fontFamily: 'monospace', fontSize: 11, color: isSel ? '#93c5fd' : '#64748b' }}>KW {row.kw}/{String(row.year).slice(2)}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#94a3b8' }}>{row.week.d}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 11, textAlign: 'right', color: '#cbd5e1', fontWeight: 600 }}>{price(row.week.c)}</span>
+                    <span style={{ textAlign: 'center' }}><PktDot val={row.pW} has={true}/></span>
+                    <span style={{ textAlign: 'center' }}><PktDot val={row.pD} has={row.dSlice.length >= 10}/></span>
+                    <span style={{ textAlign: 'center' }}><PktDot val={row.p4H} has={row.has4h}/></span>
+                    <span style={{ textAlign: 'center', fontFamily: 'monospace', fontSize: 9, fontWeight: 700,
+                      color: t20 ? green : '#334155' }}>{t20 == null ? '–' : t20 ? 'T20' : '·'}</span>
+                    <span style={{ fontFamily: 'monospace', fontSize: 10, textAlign: 'right' }}>
+                      {entryHere && <span style={{ color: blue }}>▲ Signal </span>}
+                      {exitHere && <span style={{ color: amber }}>▼ Ausstieg</span>}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        <div className="desktop-right" ref={chartRef}>
+          {sel ? (
+            <div>
+              <div style={{ background: '#0f172a', border: '1px solid #1e293b', borderRadius: 10, padding: '10px 14px', marginBottom: 12,
+                display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <span style={{ fontFamily: 'monospace', fontSize: 14, fontWeight: 800, color: '#f1f5f9' }}>{active} · KW {sel.kw} / {sel.year}</span>
+                <span style={{ fontFamily: 'monospace', fontSize: 11, color: '#64748b' }}>{sel.week.d}</span>
+                {sel.i === entryWeek && <span style={{ fontFamily: 'monospace', fontSize: 11, color: blue }}>Signalwoche · Einstieg {selected.entryDate} zu {price(selected.entryPrice)}</span>}
+                <span style={{ fontFamily: 'monospace', fontSize: 12, color: '#cbd5e1', marginLeft: 'auto' }}>Close: <strong>{price(sel.week.c)}</strong></span>
+                {[['W', sel.pW, true], ['D', sel.pD, sel.dSlice.length >= 10], ['4H', sel.p4H, sel.has4h]].map(([lbl, val, has]) => (
+                  <span key={lbl} style={{ fontFamily: 'monospace', fontSize: 11, color: !has ? '#334155' : val ? '#4ade80' : '#ef4444' }}>
+                    {lbl}: {!has ? '–' : val ? '✓' : '✗'}
+                  </span>
+                ))}
+                <PktBadge pts={sel.pts} has4h={sel.has4h}/>
+              </div>
+              <div className="charts-grid">
+                {sel.wSlice.length >= 8 ? (
+                  <ChartWeekly ohlcvW={sel.wSlice} structureW={sel.structW} chartId={`h_w_${sel.i}`}
+                    benchOhlcv={bench?.w} benchLabel={bench?.label} tradeMarkers={tradeMarkers}/>
+                ) : <div className="note card">Zu wenig Weekly-Daten</div>}
+                {sel.dSlice.length >= 10 ? (
+                  <CandleChart ohlcv={sel.dSlice} structure={sel.structD} chartId={`h_d_${sel.i}`}
+                    benchOhlcv={bench?.d} benchLabel={bench?.label} tradeMarkers={tradeMarkers}/>
+                ) : <div className="note card">Keine Daily-Daten für diese Woche</div>}
+                {sel.has4h && sel.struct4H ? (
+                  <div className="chart-full-width">
+                    <Chart4H ohlcv4h={sel.h4Slice} structure4h={sel.struct4H} chartId={`h_4h_${sel.i}`}
+                      tradeMarkers={tradeMarkers.filter(m => m.type === 'entry')}/>
+                  </div>
+                ) : (
+                  <div className="chart-full-width card note" style={{ textAlign: 'center' }}>
+                    Keine 4H-Kerzen für diese Woche (4H über Alpaca erst ab 2016)
+                  </div>
+                )}
+              </div>
+              <p style={{ fontSize: 10, color: '#334155', marginTop: 8, fontFamily: 'monospace', textAlign: 'center' }}>
+                Daten geschnitten auf KW {sel.kw}/{sel.year} ({sel.weekEnd}) · W: {sel.wSlice.length} · D: {sel.dSlice.length} · 4H: {sel.h4Slice.length} Kerzen
+              </p>
+            </div>
+          ) : (
+            <div className="card note" style={{ padding: '40px 24px', textAlign: 'center' }}>← Trade oder Woche anklicken</div>
+          )}
+        </div>
       </div>
-      <div className="note">
-        Kurse split- und dividendenbereinigt (Yahoo Finance). RS-Rang = Platz in den Top 20 des NASDAQ-100 am
-        Einstiegstag (nur unter den damaligen Mitgliedern gerankt). „Im Depot" = in der Depot-Simulation genommen;
-        ausgelassen, wenn alle Plätze belegt waren. Datenende = Kursreihe endet (Übernahme, Delisting).
+
+      <div className="note" style={{ marginTop: 16 }}>
+        Kurse split- und dividendenbereinigt (Yahoo Finance), 4H über Alpaca. Rang = Platz in den Top 20 des NASDAQ-100
+        am Einstiegstag (nur unter den damaligen Mitgliedern gerankt). T20 = am letzten Handelstag der Woche in den Top 20.
+        Depot = Ergebnis in der Depot-Simulation, „ausgel." wenn alle Plätze belegt waren. DE = Datenende (Übernahme, Delisting).
       </div>
     </div>
   );

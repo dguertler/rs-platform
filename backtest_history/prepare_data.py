@@ -184,7 +184,7 @@ def main():
     print(f"  {len(used)} Yahoo-Symbole decken Mitgliedszeiträume ab")
 
     print("Wochenkerzen ...")
-    weekly = _download(used, "1wk")
+    weekly = _download(used + [BENCHMARK], "1wk")
     ndx = _download([INDEX], "1d")[INDEX]["Close"]
 
     data_end = max(df.index[-1] for df in daily.values()).strftime("%Y-%m-%d")
@@ -199,6 +199,10 @@ def main():
         _write(os.path.join(CACHE_DIR, "daily", f"{sym}.json"), rows)
         if sym in weekly:
             _write(os.path.join(CACHE_DIR, "weekly", f"{sym}.json"), _rows(weekly[sym]))
+    # Benchmark für die Chart-Hintergrundlinie auf B-DETAILS 2
+    _write(os.path.join(CACHE_DIR, "daily", f"{BENCHMARK}.json"), _rows(daily[BENCHMARK]))
+    if BENCHMARK in weekly:
+        _write(os.path.join(CACHE_DIR, "weekly", f"{BENCHMARK}.json"), _rows(weekly[BENCHMARK]))
     for res in resolution.values():
         if res["yahoo"]:
             res["status"] = "aktiv" if symbol_info[res["yahoo"]]["active"] else "delisted_mit_daten"
