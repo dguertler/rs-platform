@@ -869,10 +869,15 @@ def main():
     if fresh_alerts:
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
-            trigger_tf = 'weekly' if a['new_weekly'] else ('daily' if a['new_daily'] else '4h')
+            # Gemeldet wird nur mit neuem bzw. frischem 4H-Bruch (siehe process_json) —
+            # der Auslöser ist dann 4H, auch wenn W oder D am selben Tag mit grün wurden
+            trigger_tf = '4h' if a['new_h4'] else ('weekly' if a['new_weekly'] else 'daily')
+            also_new = [tf for tf, flag in (('weekly', a['new_weekly']), ('daily', a['new_daily']))
+                        if flag and tf != trigger_tf]
             signals.setdefault(a['ticker'], []).append({
                 'signal_date':     today_str,
                 'trigger_tf':      trigger_tf,
+                **({'also_new': also_new} if also_new else {}),
                 'weekly_bar_date': a.get('weekly_bar_date'),
                 'daily_bar_date':  a.get('daily_bar_date'),
                 'h4_bar_date':     a.get('h4_bar_date'),
