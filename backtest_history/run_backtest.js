@@ -1,19 +1,18 @@
 #!/usr/bin/env node
 /**
- * Historischer NASDAQ-100-Backtest, Schritt 2: Trades simulieren und je Jahr
- * auswerten. Voraussetzung: backtest_history/prepare_data.py hat den Cache
- * unter backtest_history/cache/ gefüllt.
+ * Historischer NASDAQ-100-Backtest, Schritt 3: Trades simulieren und je Jahr
+ * auswerten. Voraussetzung: prepare_data.py (Kurse, Top-20-Ranking) und
+ * fetch_alpaca_4h.py (4H-Kerzen ab 2016) haben den Cache unter
+ * backtest_history/cache/ gefüllt.
  *
- * Engine: frontend/backtest_logic.js unverändert, nur ohne 4H-Kerzen im
- * Modus 'WD' (Einstieg bei 2 von 2 Punkten W + D). Stopp, täglicher Ausstieg,
- * Top-20-Filter am Einstiegstag, 10.000 € je Signal und 1.000 € Risiko wie live.
+ * Engine: frontend/backtest_logic.js unverändert (Live-Logik, 3 von 3 Punkten,
+ * Einstieg über 4H), Top-20-Filter am Einstiegstag, 10.000 € je Signal und
+ * 1.000 € Risiko wie live. Gerechnet wird ab Beginn der 4H-Kerzen (2016) —
+ * ohne 4H gibt es keinen Backtest.
  *
- * Zusätzlich der Abgleich W+D gegen 4H auf den vorhandenen Live-Daten
- * (data/rs_full.json + data/backtest_*.json): gleiche Kerzen, gleicher
- * Zeitraum, gleiche Top-20-Historie — einmal mit, einmal ohne 4H-Auslöser.
- *
- * Aufruf:  node backtest_history/run_backtest.js [--calibration-only]
- * Schreibt data/backtest_history/ndx_results.json
+ * Aufruf:  node backtest_history/run_backtest.js
+ * Schreibt data/backtest_history/ndx_results.json und die Kursdateien für
+ * B-DETAILS 2 (data/backtest_history/charts/).
  */
 const fs = require('fs');
 const path = require('path');
@@ -149,74 +148,56 @@ function writeChart(sym, weekly, daily, h4, top20) {
 // ── Historischer Lauf ─────────────────────────────────────────────────────────
 function runHistory() {
   const meta = readJson(path.join(CACHE, 'meta.json'));
-  const top20 = {
-    inkl: readJson(path.join(CACHE, 'top20_inkl.json')),
-    exkl: readJson(path.join(CACHE, 'top20_exkl.json')),
-  };
-  const top20Days = Object.fromEntries(Object.entries(top20).map(([v, hist]) => [v, { hist, days: Object.keys(hist).sort() }]));
-  const everTop = {};
-  for (const [variant, hist] of Object.entries(top20)) {
-    everTop[variant] = new Set(Object.values(hist).flat());
-  }
+  const h4MetaPath = path.join(CACHE, 'h4_meta.json');
+  if (!fs.existsSync(h4MetaPath)) throw new Error('4H-Kerzen fehlen (fetch_alpaca_4h.py) — ohne 4H kein Backtest');
+  const h4Meta = readJson(h4MetaPath);
+  const top20 = readJson(path.join(CACHE, 'top20_inkl.json'));
+  const top20Days = { inkl: { hist: top20, days: Object.keys(top20).sort() } };
+  // Nur Titel, die ab Beginn der 4H-Kerzen mindestens einmal in den Top 20 standen
+  const everTop = new Set(Object.entries(top20).filter(([d]) => d >= h4Meta.start).flatMap(([, v]) => v));
 
-  // 4H-Kerzen ab 2016 (fetch_alpaca_4h.py) — fehlen sie, gibt es nur W+D
-  const h4Meta = fs.existsSync(path.join(CACHE, 'h4_meta.json')) ? readJson(path.join(CACHE, 'h4_meta.json')) : null;
-  const wdVariants = ['inkl', 'exkl'];
-  const trades = { inkl: [], exkl: [], ...(h4Meta ? { live4h: [] } : {}) };
+  const trades = { live4h: [] };
   const closesBySymbol = {};
   const symbols = Object.keys(meta.symbols).sort();
   let done = 0;
   for (const sym of symbols) {
     const info = meta.symbols[sym];
-    const needed = wdVariants.filter((v) => everTop[v].has(sym));
+    const h4File = path.join(CACHE, 'h4', `${sym}.json`);
     done++;
-    if (!needed.length || !info.has_weekly) continue;       // nie in den Top 20 → kein Trade möglich
+    if (!everTop.has(sym) || !info.has_weekly || !fs.existsSync(h4File)) continue;
     const daily = readJson(path.join(CACHE, 'daily', `${sym}.json`));
     const weekly = readJson(path.join(CACHE, 'weekly', `${sym}.json`));
-    const rows = buildWeekRows(weekly, daily, []);
+    const h4 = readJson(h4File);
     closesBySymbol[sym] = new Map(daily.map((r) => [r.d, r.c]));
-    for (const variant of needed) {
-      for (const t of simulateTrades(rows, daily, sym, top20[variant], true, 'WD')) {
-        // Kursreihe endet vor dem Datenende (Übernahme, Delisting): der Trade ist
-        // nicht mehr offen, sondern zum letzten verfügbaren Kurs beendet.
-        const dataEnded = t.isOpen && !info.active;
-        const rank = rankAt(top20[variant], t.entryDate, sym);
-        trades[variant].push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
-      }
-    }
     // Live-Logik mit 4H (3 von 3 Punkten, Einstieg über 4H) — unveränderte Engine
-    const h4File = path.join(CACHE, 'h4', `${sym}.json`);
-    if (h4Meta && needed.includes('inkl') && fs.existsSync(h4File)) {
-      const rows4h = buildWeekRows(weekly, daily, readJson(h4File));
-      for (const t of simulateTrades(rows4h, daily, sym, top20.inkl, true)) {
-        const dataEnded = t.isOpen && !info.active;
-        const rank = rankAt(top20.inkl, t.entryDate, sym);
-        trades.live4h.push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
-      }
+    for (const t of simulateTrades(buildWeekRows(weekly, daily, h4), daily, sym, top20, true)) {
+      // Kursreihe endet vor dem Datenende (Übernahme, Delisting): der Trade ist
+      // nicht mehr offen, sondern zum letzten verfügbaren Kurs beendet.
+      const dataEnded = t.isOpen && !info.active;
+      const rank = rankAt(top20, t.entryDate, sym);
+      trades.live4h.push({ ...t, ticker: sym, rank, isOpen: t.isOpen && !dataEnded, dataEnded });
     }
-    writeChart(sym, weekly, daily, fs.existsSync(h4File) ? readJson(h4File) : null, top20Days);
+    writeChart(sym, weekly, daily, h4, top20Days);
     if (done % 25 === 0) console.error(`  ${done}/${symbols.length} Symbole`);
   }
 
   const benchDaily = path.join(CACHE, 'daily', `${meta.benchmark}.json`);
   if (meta.benchmark && fs.existsSync(benchDaily)) {
     const benchWeekly = path.join(CACHE, 'weekly', `${meta.benchmark}.json`);
+    fs.mkdirSync(CHART_DIR, { recursive: true });
     fs.writeFileSync(path.join(CHART_DIR, '_benchmark.json'), JSON.stringify({
       ticker: meta.benchmark,
       w: fs.existsSync(benchWeekly) ? readJson(benchWeekly).map(bar) : [],
       d: readJson(benchDaily).map(bar),
     }));
   }
-
-  // Vergleichsbasis zur 4H-Variante: W+D ab demselben Startdatum
-  if (h4Meta) trades.wd4hStart = trades.inkl.filter((t) => t.entryDate >= h4Meta.start);
-  const startOf = { live4h: h4Meta?.start, wd4hStart: h4Meta?.start };
+  const startOf = { live4h: h4Meta.start };
 
   const variants = {};
   for (const [variant, list] of Object.entries(trades)) {
     list.sort((a, b) => (a.entryDate < b.entryDate ? -1 : 1));
     const negYears = new Set(Object.entries(meta.ndx).filter(([, v]) => v.pct < 0).map(([y]) => y));
-    const start = startOf[variant] || meta.membership_start;
+    const start = startOf[variant];
     const sim = simulatePortfolio(list, closesBySymbol, { start });
     variants[variant] = {
       start,
@@ -251,61 +232,30 @@ function runHistory() {
       aliases: Object.entries(resolution).filter(([t, r]) => r.yahoo && r.yahoo !== t).map(([t, r]) => ({ ticker: t, yahoo: r.yahoo })),
     },
     variants,
-    h4: h4Meta ? {
+    h4: {
       source: h4Meta.source,
       feed: h4Meta.feed,
       start: h4Meta.start,
       symbols: Object.keys(h4Meta.symbols).length,
       missing: h4Meta.missing,
-    } : null,
+    },
   };
 }
 
-// ── Abgleich W+D gegen 4H auf den Live-Daten ─────────────────────────────────
-/** OHLCV-Aufbereitung exakt wie frontend/backtest_overview.html (letzte 104 Wochen). */
-function liveSeries(entry) {
-  let bt = null;
-  try {
-    bt = readJson(path.join(ROOT, 'data', `backtest_${entry.ticker.toLowerCase().replace(/[^a-z0-9]/g, '_')}.json`));
-  } catch (e) {
-    bt = null;
-  }
-  const full = bt && bt.ohlcv_w && bt.ohlcv_d ? bt : null;
-  const rawW = full ? full.ohlcv_w : entry.ohlcv_w || [];
-  const rawD = full ? full.ohlcv_d : entry.ohlcv || [];
-  const raw4h = full ? full.ohlcv_4h || [] : entry.ohlcv_4h || [];
-  if (!rawW.length || !rawD.length) return null;
-  const ohlcvW = rawW.slice(-104);
-  const cutDate = ohlcvW[0].d;
-  return {
-    ohlcvW,
-    ohlcvD: rawD.filter((d) => d.d >= cutDate),
-    ohlcv4h: raw4h.filter((d) => d.d.slice(0, 10) >= cutDate),
-  };
-}
-
-function runCalibration() {
+// ── Fenster der Live-Daten (B-Übersicht) ────────────────────────────────────
+/** Erster Tag mit Yahoo-4H-Kerzen in den Live-Backtest-Dateien (letzte 104 Wochen). */
+function liveWindowStart() {
   const rs = readJson(path.join(ROOT, 'data', 'rs_full.json'));
-  const hist = rs.top20_history || {};
-  const out = { '4H': [], WD: [] };
-  let first4h = null;
-  for (const entry of rs.data || []) {
-    const s = liveSeries(entry);
-    if (!s) continue;
-    if (s.ohlcv4h.length && (!first4h || s.ohlcv4h[0].d < first4h)) first4h = s.ohlcv4h[0].d.slice(0, 10);
-    const rows4h = buildWeekRows(s.ohlcvW, s.ohlcvD, s.ohlcv4h);
-    const rowsWD = buildWeekRows(s.ohlcvW, s.ohlcvD, []);
-    for (const t of simulateTrades(rows4h, s.ohlcvD, entry.ticker, hist, true)) out['4H'].push({ ...t, ticker: entry.ticker });
-    for (const t of simulateTrades(rowsWD, s.ohlcvD, entry.ticker, hist, true, 'WD')) out.WD.push({ ...t, ticker: entry.ticker });
+  let first = null;
+  for (const e of rs.data || []) {
+    const f = path.join(ROOT, 'data', `backtest_${e.ticker.toLowerCase().replace(/[^a-z0-9]/g, '_')}.json`);
+    if (!fs.existsSync(f)) continue;
+    const bt = readJson(f);
+    const cut = (bt.ohlcv_w || []).slice(-104)[0]?.d;
+    const h = (bt.ohlcv_4h || []).find((d) => !cut || d.d.slice(0, 10) >= cut);
+    if (h && (!first || h.d.slice(0, 10) < first)) first = h.d.slice(0, 10);
   }
-  // Gleiches Fenster für beide: ab dem ersten Tag, an dem 4H-Kerzen vorliegen
-  const start = first4h || Object.keys(hist).sort()[0];
-  const result = { start, end: (rs.benchmark_ohlcv || []).slice(-1)[0]?.d ?? null, modes: {} };
-  for (const [mode, list] of Object.entries(out)) {
-    const inWindow = list.filter((t) => t.entryDate >= start);
-    result.modes[mode] = { total: summary(inWindow), years: byYear(inWindow) };
-  }
-  return result;
+  return first || Object.keys(rs.top20_history || {}).sort()[0];
 }
 
 // ── Vorher/Nachher für den Zeitraum des bisherigen Backtests ────────────────
@@ -410,40 +360,25 @@ function runBeforeAfter(calStart) {
 }
 
 function main() {
-  const calibrationOnly = process.argv.includes('--calibration-only');
-  let previous = {};
-  try {
-    previous = readJson(OUT_FILE);
-  } catch (e) {
-    previous = {};
-  }
   const result = {
-    ...previous,
     generated: new Date().toISOString().slice(0, 16).replace('T', ' '),
-    engine: 'frontend/backtest_logic.js, Modus WD (W + D, ohne 4H), TOP 20 = AN',
+    engine: 'frontend/backtest_logic.js, Live-Logik mit 4H (3 von 3 Punkten), TOP 20 = AN',
     capital: CAPITAL,
     maxRisk: MAX_RISK,
-    calibration: runCalibration(),
+    ...runHistory(),
   };
-  if (!calibrationOnly) {
-    Object.assign(result, runHistory());
-    result.beforeAfter = runBeforeAfter(result.calibration.start);
-  }
+  result.beforeAfter = runBeforeAfter(liveWindowStart());
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(result));
 
   const fmt = (n, d = 2) => (n == null ? '–' : n.toLocaleString('de-DE', { minimumFractionDigits: d, maximumFractionDigits: d }));
-  const c = result.calibration.modes;
-  console.log(`Abgleich ab ${result.calibration.start}: PF 4H ${fmt(c['4H'].total?.profitFactor)} ` +
-    `(${c['4H'].total?.nTrades ?? 0} Trades) · PF W+D ${fmt(c.WD.total?.profitFactor)} (${c.WD.total?.nTrades ?? 0} Trades)`);
-  if (result.variants) {
-    console.log('\n| Jahr | NDX | Trades | PF inkl. | PF exkl. |');
-    console.log('|---|---|---|---|---|');
-    for (const [y, n] of Object.entries(result.ndx)) {
-      const a = result.variants.inkl.years[y];
-      const b = result.variants.exkl.years[y];
-      console.log(`| ${y} | ${fmt(n.pct, 1)} % | ${a?.nTrades ?? 0} | ${fmt(a?.profitFactor)} | ${fmt(b?.profitFactor)} |`);
-    }
+  const v = result.variants.live4h;
+  console.log(`Live-Logik mit 4H ab ${v.start}: ${v.total?.nTrades ?? 0} Trades, PF ${fmt(v.total?.profitFactor)}, `
+    + `Depot ${fmt(v.portfolio.endEquity, 0)} €`);
+  console.log('\n| Jahr | NDX | Trades | PF |');
+  console.log('|---|---|---|---|');
+  for (const [y, k] of Object.entries(v.years)) {
+    console.log(`| ${y} | ${fmt(result.ndx[y]?.pct, 1)} % | ${k.nTrades} | ${fmt(k.profitFactor)} |`);
   }
   console.log(`\n→ ${OUT_FILE}`);
 }

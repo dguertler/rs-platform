@@ -56,12 +56,7 @@ const num = (v, d = 1) => v == null ? '–' : v.toLocaleString('de-DE', { minimu
 const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + ' %';
 const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
 const eurAbs = v => v == null ? '–' : Math.round(v).toLocaleString('de-DE') + ' €';
-const VARIANTS = {
-  inkl: 'W+D ab 2007 · inkl. nicht mehr gehandelter Aktien',
-  exkl: 'W+D ab 2007 · nur heute noch gehandelte Aktien',
-  wd4hStart: 'W+D ab 2016',
-  live4h: 'Live-Logik mit 4H ab 2016',
-};
+const VARIANTS = { live4h: 'Live-Logik mit 4H ab 2016' };
 
 function Tile({ label, value, color, sub }) {
   return (
@@ -69,40 +64,6 @@ function Tile({ label, value, color, sub }) {
       <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginBottom: 4 }}>{label}</div>
       <div style={{ fontSize: 20, fontWeight: 700, color: color || '#e2e8f0', fontFamily: 'monospace' }}>{value}</div>
       {sub && <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginTop: 4 }}>{sub}</div>}
-    </div>
-  );
-}
-
-function Calibration({ cal }) {
-  if (!cal) return null;
-  const a = cal.modes['4H']?.total, b = cal.modes.WD?.total;
-  const row = (label, k, fmt, colorFn) => (
-    <tr key={label}>
-      <td style={{ color: '#94a3b8' }}>{label}</td>
-      <td style={{ color: colorFn ? colorFn(a?.[k]) : '#e2e8f0' }}>{fmt(a?.[k])}</td>
-      <td style={{ color: colorFn ? colorFn(b?.[k]) : '#e2e8f0' }}>{fmt(b?.[k])}</td>
-    </tr>
-  );
-  return (
-    <div className="card" style={{ marginBottom: 20 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>Abgleich W+D gegen 4H (Live-Daten)</div>
-      <div className="note" style={{ marginBottom: 10 }}>
-        Dieselben Kerzen, dieselbe Top-20-Historie, derselbe Zeitraum ({cal.start} – {cal.end}) —
-        einmal mit der Live-Logik (Einstieg nur über 4H), einmal wie im historischen Test ohne 4H.
-        Der Abstand zeigt, wie viel die 4H-Ebene beiträgt, und ist die Messlatte für die Jahre davor.
-      </div>
-      <div style={{ overflowX: 'auto' }}>
-        <table style={{ maxWidth: 520 }}>
-          <thead><tr><th></th><th>Live (W+D+4H)</th><th>Historisch (W+D)</th></tr></thead>
-          <tbody>
-            {row('Profit-Faktor', 'profitFactor', v => num(v, 2), pfColor)}
-            {row('Trades', 'nTrades', v => v ?? '–')}
-            {row('Trefferquote', 'winrate', v => v == null ? '–' : num(v) + ' %')}
-            {row('Ø Rendite je Trade', 'avgReturnPerTrade', v => pct(v), pnlColor)}
-            {row('Σ P&L', 'totalPnl', eur, pnlColor)}
-          </tbody>
-        </table>
-      </div>
     </div>
   );
 }
@@ -269,77 +230,6 @@ function BeforeAfter({ ba }) {
   );
 }
 
-function Comparison({ data, before, after }) {
-  const years = Object.keys(data.ndx).sort().filter(y => y >= after.start.slice(0, 4));
-  const a = before.portfolio, b = after.portfolio;
-  const diff = (x, y) => (x == null || y == null ? null : y - x);
-  const pp = v => v == null ? '–' : (v >= 0 ? '+' : '') + num(v) + ' pp';
-  const ndxTotal = (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100;
-  const cell = (v, fmt, color) => <td style={{ color: color ? color(v) : '#e2e8f0' }}>{fmt(v)}</td>;
-  return (
-    <div className="card" style={{ marginBottom: 20 }}>
-      <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6 }}>
-        W+D ohne 4H gegen Live-Logik mit 4H (ab {after.start})
-      </div>
-      <div className="note" style={{ marginBottom: 10 }}>
-        Gleicher Zeitraum, gleiche Top-20-Historie, gleiches Depot (Start {eurAbs(a?.startCapital)}, 10.000 € je Trade,
-        bis 20 Plätze, ab 200.000 € Zinseszins). „Vorher" = Einstieg bei 2 von 2 Punkten (W+D), „Nachher" = Live-Logik:
-        3 von 3 Punkten, Einstieg über den 4H-Ausbruch. Trades und Profit-Faktor = im Jahr eröffnete, genommene Trades.
-      </div>
-      <div style={{ overflowX: 'auto' }}>
-        <table>
-          <thead>
-            <tr>
-              <th>Jahr</th><th>NASDAQ-100</th><th>Rendite vorher</th><th>Rendite nachher</th><th>Δ Rendite</th>
-              <th>Trades vorher</th><th>Trades nachher</th><th>PF vorher</th><th>PF nachher</th>
-            </tr>
-          </thead>
-          <tbody>
-            {years.map(y => {
-              const x = a?.years?.[y], z = b?.years?.[y];
-              return (
-                <tr key={y} className="data-row">
-                  <td style={{ fontWeight: 700 }}>{y}{data.ndx[y].partial ? '*' : ''}</td>
-                  {cell(data.ndx[y].pct, pct, pnlColor)}
-                  {cell(x?.returnPct, pct, pnlColor)}
-                  <td style={{ color: pnlColor(z?.returnPct), fontWeight: 700 }}>{pct(z?.returnPct)}</td>
-                  {cell(diff(x?.returnPct, z?.returnPct), pp, pnlColor)}
-                  <td>{x?.taken ?? 0}</td>
-                  <td>{z?.taken ?? 0}</td>
-                  {cell(x?.profitFactor, v => num(v, 2), pfColor)}
-                  <td style={{ color: pfColor(z?.profitFactor), fontWeight: 700 }}>{num(z?.profitFactor, 2)}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-          <tfoot>
-            <tr className="sum-row">
-              <td>Gesamt</td>
-              {cell(ndxTotal, pct, pnlColor)}
-              {cell(a?.returnPct, pct, pnlColor)}
-              {cell(b?.returnPct, pct, pnlColor)}
-              {cell(diff(a?.returnPct, b?.returnPct), pp, pnlColor)}
-              <td>{a?.taken}</td>
-              <td>{b?.taken}</td>
-              {cell(a?.profitFactor, v => num(v, 2), pfColor)}
-              {cell(b?.profitFactor, v => num(v, 2), pfColor)}
-            </tr>
-            <tr className="sum-row">
-              <td>p. a.</td><td>–</td>
-              {cell(a?.cagr, pct, pnlColor)}
-              {cell(b?.cagr, pct, pnlColor)}
-              {cell(diff(a?.cagr, b?.cagr), pp, pnlColor)}
-              <td colSpan="2" style={{ color: '#94a3b8' }}>max. Rückgang</td>
-              <td style={{ color: red }}>{num(a?.maxDD)} %</td>
-              <td style={{ color: red }}>{num(b?.maxDD)} %</td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-    </div>
-  );
-}
-
 const detailsUrl = (ticker, variant) => `backtest_history_details.html?t=${encodeURIComponent(ticker)}&v=${variant}`;
 
 /** Kennzahlen je Aktie über alle Signale einer Variante. */
@@ -468,7 +358,7 @@ function TradeList({ trades, variant }) {
 function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [variant, setVariant] = useState('inkl');
+  const variant = 'live4h';
   const [year, setYear] = useState(null);
 
   const [live, setLive] = useState(null);
@@ -501,53 +391,36 @@ function App() {
   const ndxTotal = years.length
     ? (years.reduce((f, y) => f * (1 + data.ndx[y].pct / 100), 1) - 1) * 100 : null;
   const pf = v?.portfolio;
-  const spanYears = data.period ? (new Date(data.period.end) - new Date(data.period.start)) / (365.25 * 864e5) : 0;
+  const spanYears = v?.start && data.period ? (new Date(data.period.end) - new Date(v.start)) / (365.25 * 864e5) : 0;
   const ndxCagr = ndxTotal != null && spanYears > 0 ? ((1 + ndxTotal / 100) ** (1 / spanYears) - 1) * 100 : null;
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', padding: '40px 16px' }}>
       <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · NASDAQ-100</div>
       <div className="note" style={{ marginBottom: 20 }}>
-        Grundsystem ohne 4H: Einstieg, sobald Weekly und Daily GWS gebrochen sind (2 von 2 Punkten) und die
-        Aktie am Einstiegstag in den <b>Top 20</b> des Index steht. Das Ranking wird für jeden Handelstag nur unter
+        Live-Logik ab 2016 (4H-Kerzen über Alpaca): Einstieg, sobald Weekly, Daily und 4H GWS gebrochen sind (3 von 3
+        Punkten, ausgelöst über 4H) und die Aktie am Einstiegstag in den <b>Top 20</b> des Index steht. Das Ranking wird für jeden Handelstag nur unter
         den <b>damaligen Indexmitgliedern</b> berechnet, mit derselben Formel wie live. Stopp, täglicher Ausstieg,
         10.000 € je Signal und 1.000 € Risiko wie in der Live-Engine. Trades werden dem Jahr ihres Einstiegs zugeordnet.
       </div>
 
       <LiveAlerts live={live} stages={stages} />
 
-      <Calibration cal={data.calibration} />
-
       {!data.variants && (
         <div className="card note" style={{ borderColor: '#92400e', marginBottom: 20 }}>
           Die historischen Jahre sind noch nicht berechnet. In GitHub Actions den Workflow
-          <b> „Historischer NASDAQ-100-Backtest (ab 2007)"</b> starten — er lädt die Kurse, rankt die
+          <b> „Historischer NASDAQ-100-Backtest (4H ab 2016)"</b> starten — er lädt die Kurse, rankt die
           Top 20 und schreibt die Ergebnisse hierher.
         </div>
       )}
 
       {data.beforeAfter && <BeforeAfter ba={data.beforeAfter} />}
 
-      {data.variants?.live4h && data.variants?.wd4hStart && (
-        <Comparison data={data} before={data.variants.wd4hStart} after={data.variants.live4h} />
-      )}
-
       {data.variants && (<>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
-          {Object.entries(VARIANTS).filter(([k]) => data.variants[k]).map(([k, label]) => (
-            <button key={k} onClick={() => { setVariant(k); setYear(null); }}
-              style={{ background: variant === k ? '#1e293b' : 'transparent',
-                border: `1px solid ${variant === k ? '#f59e0b' : '#1e293b'}`, borderRadius: 6, padding: '5px 14px',
-                color: variant === k ? amber : '#64748b', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
-              {label}
-            </button>
-          ))}
-        </div>
-
         {pf && (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 20 }}>
             <Tile label="Depotwert heute" value={eurAbs(pf.endEquity)} color={pnlColor(pf.returnPct)}
-              sub={`Start ${eurAbs(pf.startCapital)} am ${data.period.start}`} />
+              sub={`Start ${eurAbs(pf.startCapital)} am ${v.start}`} />
             <Tile label="Depot p. a." value={pct(pf.cagr)} color={pnlColor(pf.cagr)} sub={`gesamt ${pct(pf.returnPct, 0)}`} />
             <Tile label="NASDAQ-100 p. a." value={pct(ndxCagr)} color={pnlColor(ndxCagr)} sub={`gesamt ${pct(ndxTotal, 0)}`} />
             <Tile label="Depot max. Rückgang" value={num(pf.maxDD) + ' %'} color={red} />
@@ -637,8 +510,8 @@ function App() {
           Kurse: Yahoo Finance, split- und dividendenbereinigt, Stand {data.period.end}.
           {' '}{data.symbols.total} Symbole waren im Zeitraum im Index: {data.symbols.aktiv} heute noch gehandelt,
           {' '}{data.symbols.delistedMitDaten} nicht mehr gehandelt mit Kursdaten, {data.symbols.keineDaten} ohne Kursdaten.
-          {' '}Die Variante „inkl." enthält alle Aktien mit Kursdaten, „nur heute noch gehandelt" lässt die nicht mehr
-          gehandelten auch im Ranking weg.
+          {' '}4H-Kerzen ab {data.h4?.start}: Alpaca ({data.h4?.feed}), {data.h4?.symbols} Symbole. Gerankt werden alle
+          damaligen Mitglieder mit Kursdaten, auch heute nicht mehr gehandelte.
           {data.symbols.withJumps.length > 0 && (
             <div style={{ marginTop: 6 }}>
               Kurssprünge über Faktor 1,8 bzw. unter 0,55 (mögliche Split-Fehler, zur Prüfung):{' '}

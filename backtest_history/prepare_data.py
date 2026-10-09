@@ -9,9 +9,9 @@ Cloud-Sessions heraus gesperrt. Ablauf:
  3. Historische Symbole auf Yahoo-Symbole abbilden (symbols.py) und prüfen,
     ob die Kursreihe den Mitgliedszeitraum wirklich abdeckt
  4. Tägliches Top-20-Ranking unter den an diesem Tag gelisteten Mitgliedern —
-    Formel aus rs_core.py, identisch mit rs_colab.py — in zwei Varianten:
-      inkl: alle Mitglieder mit Kursdaten
-      exkl: nur Aktien, die heute noch gehandelt werden
+    Formel aus rs_core.py, identisch mit rs_colab.py — über alle Mitglieder
+    mit Kursdaten, auch nicht mehr gehandelte (gerechnet wird ab 2016, wenn die
+    4H-Kerzen beginnen; die Jahre davor liefern Kurshistorie und Ranking-Fenster)
  5. Alles für run_backtest.js nach backtest_history/cache/ (nicht versioniert)
 
 Aufruf: python3 backtest_history/prepare_data.py
@@ -209,13 +209,11 @@ def main():
 
     # Ranking-Matrix wie in rs_colab.py: Batch-Schlusskurse, Index = alle Handelstage
     d_close = pd.DataFrame({sym: daily[sym]["Close"] for sym in used + [BENCHMARK]}).sort_index()
-    variants = {"inkl": used, "exkl": [s for s in used if symbol_info[s]["active"]]}
-    for name, syms in variants.items():
-        mask = membership_mask(d_close.index, syms, yahoo_intervals)
-        hist = top20_history(d_close, syms, mask)
-        hist = {d: v for d, v in hist.items() if d >= membership["start"]}
-        _write(os.path.join(CACHE_DIR, f"top20_{name}.json"), hist)
-        print(f"  Top 20 ({name}): {len(hist)} Handelstage, {len(syms)} Symbole")
+    mask = membership_mask(d_close.index, used, yahoo_intervals)
+    hist = top20_history(d_close, used, mask)
+    hist = {d: v for d, v in hist.items() if d >= membership["start"]}
+    _write(os.path.join(CACHE_DIR, "top20_inkl.json"), hist)
+    print(f"  Top 20: {len(hist)} Handelstage, {len(used)} Symbole")
 
     first_year = int(membership["start"][:4])
     meta = {

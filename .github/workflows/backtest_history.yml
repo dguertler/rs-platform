@@ -1,10 +1,11 @@
-name: Historischer NASDAQ-100-Backtest (ab 2007)
+name: Historischer NASDAQ-100-Backtest (4H ab 2016)
 
 permissions:
   contents: write
 
-# Nur manuell: lädt ~20 Jahre Kurse für alle ehemaligen und aktuellen
-# NASDAQ-100-Mitglieder und simuliert das Grundsystem (W + D, ohne 4H).
+# Nur manuell: lädt die Kurse aller ehemaligen und aktuellen NASDAQ-100-
+# Mitglieder (Tag/Woche ab 2005 für Ranking und Struktur, 4H über Alpaca ab
+# 2016) und simuliert die Live-Logik ab 2016.
 on:
   workflow_dispatch:
 
@@ -41,7 +42,7 @@ jobs:
       - name: Kurse laden und Top 20 historisch ranken
         run: python backtest_history/prepare_data.py
 
-      # 4H-Kerzen ab 2016 für die Live-Logik (ohne Secrets wird der Schritt übersprungen)
+      # 4H-Kerzen ab 2016 für die Live-Logik (Pflicht — ohne 4H kein Backtest)
       - name: 4H-Kerzen über Alpaca laden
         env:
           ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}

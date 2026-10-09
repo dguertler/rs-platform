@@ -2,7 +2,7 @@
 Offline-Durchlauf des historischen Backtests (backtest_history/) ohne Yahoo:
 yf.download wird durch die Kurse aus data/backtest_*.json und data/rs_full.json
 ersetzt, die Mitgliedschaft ist künstlich. Geprüft wird die Verdrahtung —
-Symbolauflösung, Ranking nur unter Mitgliedern, Varianten inkl./exkl.,
+Symbolauflösung, Ranking nur unter Mitgliedern, Live-Logik mit 4H,
 Jahresauswertung —, nicht das Ergebnis.
 
 Aufruf: python3 -m pytest test_backtest_history.py -q
@@ -112,7 +112,6 @@ def pipeline(tmp_path_factory):
     return {
         "meta": json.loads((cache / "meta.json").read_text()),
         "top20_inkl": json.loads((cache / "top20_inkl.json").read_text()),
-        "top20_exkl": json.loads((cache / "top20_exkl.json").read_text()),
         "results": json.loads(out.read_text()),
         "intervals": intervals,
         "charts": tmp / "charts",
@@ -133,7 +132,6 @@ def test_ranking_only_among_members(pipeline):
         assert len(top) == 20
         if day >= "2025-03-17":
             assert LEFT_INDEX not in top
-    assert all(DELISTED not in top for top in pipeline["top20_exkl"].values())
 
 
 def test_meta_membership_for_renamed_symbol(pipeline):
@@ -142,36 +140,23 @@ def test_meta_membership_for_renamed_symbol(pipeline):
     assert all(d >= MEMBER_START for d in days)
 
 
-def test_results_per_year_and_variants(pipeline):
+def test_results_per_year_live4h_only(pipeline):
     r = pipeline["results"]
-    assert {"inkl", "exkl"} <= set(r["variants"])
-    inkl = r["variants"]["inkl"]
-    assert inkl["trades"], "keine Trades simuliert"
-    for t in inkl["trades"]:
-        assert t["trigger"] in ("D", "W")
-        top = pipeline["top20_inkl"].get(t["entryDate"])
-        if top is not None:                  # Engine prüft zuerst den Einstiegstag
-            assert t["ticker"] in top
-    years = {t["entryDate"][:4] for t in inkl["trades"]}
-    assert years == set(inkl["years"])
-    assert sum(v["nTrades"] for v in inkl["years"].values()) == len(inkl["trades"])
-    assert all(t["ticker"] != DELISTED for t in r["variants"]["exkl"]["trades"])
-    assert "2025" in r["ndx"] and "pct" in r["ndx"]["2025"]
-    assert r["symbols"]["keineDaten"] == 1
-    assert "ZZZZ" in r["coverage"]["2025"]["missing"]
-    assert r["calibration"]["modes"]["4H"]["total"]["nTrades"] > 0
-
-
-def test_live_4h_variant(pipeline):
-    r = pipeline["results"]
+    assert set(r["variants"]) == {"live4h"} and "calibration" not in r
     live = r["variants"]["live4h"]
     assert live["start"] == H4_START
     assert live["trades"], "keine 4H-Trades simuliert"
-    assert all(t["trigger"] == "4H" for t in live["trades"])
-    assert all(t["entryDate"] >= H4_START for t in live["trades"])
-    base = r["variants"]["wd4hStart"]
-    assert base["start"] == H4_START
-    assert all(t["entryDate"] >= H4_START and t["trigger"] in ("D", "W") for t in base["trades"])
+    for t in live["trades"]:
+        assert t["trigger"] == "4H" and t["entryDate"] >= H4_START
+        top = pipeline["top20_inkl"].get(t["entryDate"])
+        if top is not None:                  # Engine prüft zuerst den Einstiegstag
+            assert t["ticker"] in top
+    years = {t["entryDate"][:4] for t in live["trades"]}
+    assert years == set(live["years"])
+    assert sum(v["nTrades"] for v in live["years"].values()) == len(live["trades"])
+    assert "2025" in r["ndx"] and "pct" in r["ndx"]["2025"]
+    assert r["symbols"]["keineDaten"] == 1
+    assert "ZZZZ" in r["coverage"]["2025"]["missing"]
     assert r["h4"]["symbols"] > 0 and live["portfolio"]["endEquity"] > 0
 
 
@@ -193,13 +178,13 @@ vm.runInThisContext(fs.readFileSync(logic, 'utf8') + ';globalThis.E={buildWeekRo
 const r = JSON.parse(fs.readFileSync(results, 'utf8'));
 const toBar = (a) => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
 const out = {};
-for (const [variant, mode] of [['inkl', 'WD'], ['exkl', 'WD'], ['live4h', '4H']]) {
+for (const [variant, mode] of [['live4h', '4H']]) {
   const tickers = [...new Set(r.variants[variant].trades.map((t) => t.ticker))];
   out[variant] = [];
   for (const t of tickers) {
     const c = JSON.parse(fs.readFileSync(path.join(charts, t + '.json'), 'utf8'));
     // Top-20-Historie wie auf der Seite: je Handelstag ab Mitgliedsbeginn [Titel] oder []
-    const ranges = c.top20[variant === 'live4h' ? 'inkl' : variant];
+    const ranges = c.top20.inkl;
     const hist = {};
     for (const b of c.d) if (b[0] >= r.period.start) hist[b[0]] = ranges.some(([a, z]) => b[0] >= a && b[0] <= z) ? [t] : [];
     const rows = E.buildWeekRows(c.w.map(toBar), c.d.map(toBar), mode === '4H' ? c.h.map(toBar) : []);
@@ -219,9 +204,9 @@ def test_chart_files_replay_engine_trades(pipeline, tmp_path):
     replay = json.loads(subprocess.run(
         ["node", "-e", REPLAY, os.path.join(_REPO, "frontend", "backtest_logic.js"), str(out), str(pipeline["charts"])],
         check=True, capture_output=True, text=True).stdout)
-    for variant in ("inkl", "exkl", "live4h"):
+    for variant in ("live4h",):
         expected = sorted(f"{t['ticker']}|{t['entryDate']}|{t['exitDate']}" for t in res["variants"][variant]["trades"])
         assert sorted(replay[variant]) == expected, variant
     bench = json.loads((pipeline["charts"] / "_benchmark.json").read_text())
     assert bench["ticker"] == "QQQ" and bench["d"]
-    assert all(t.get("weeklyDate") for t in res["variants"]["inkl"]["trades"])
+    assert all(t.get("weeklyDate") for t in res["variants"]["live4h"]["trades"])

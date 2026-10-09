@@ -75,14 +75,7 @@ const num = (v, d = 1) => v == null ? '–' : v === Infinity ? '∞' : v.toLocal
 const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + ' %';
 const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
 const price = v => v == null ? '–' : num(v, v >= 1 ? 2 : 4);
-const VARIANTS = {
-  inkl: 'W+D ab 2007 · inkl. nicht mehr gehandelter Aktien',
-  exkl: 'W+D ab 2007 · nur heute noch gehandelte',
-  wd4hStart: 'W+D ab 2016',
-  live4h: 'Live-Logik mit 4H ab 2016',
-};
-const TOP20_OF = { inkl: 'inkl', exkl: 'exkl', wd4hStart: 'inkl', live4h: 'inkl' };
-const IS_4H = v => v === 'live4h';
+const VARIANT = 'live4h';                      // Live-Logik mit 4H ab 2016
 const WEEKS_BEFORE = 26, WEEKS_AFTER = 6;     // Wochentabelle rund um den gewählten Trade
 const toBar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
 
@@ -196,7 +189,7 @@ function App() {
   const params = new URLSearchParams(window.location.search);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [variant, setVariant] = useState(VARIANTS[params.get('v')] ? params.get('v') : 'inkl');
+  const variant = VARIANT;
   const [ticker, setTicker] = useState((params.get('t') || '').toUpperCase());
   const [prices, setPrices] = useState(null);
   const [bench, setBench] = useState(null);
@@ -231,7 +224,7 @@ function App() {
 
   // Top-20-Historie dieses Titels (Engine-Format: Tag → [Ticker] oder [])
   const top20Hist = useMemo(() => {
-    const ranges = prices?.top20?.[TOP20_OF[variant]];
+    const ranges = prices?.top20?.inkl;
     if (!ranges || !data) return null;
     const hist = {};
     for (const b of prices.d) if (b.d >= data.period.start) hist[b.d] = ranges.some(([a, z]) => b.d >= a && b.d <= z) ? [active] : [];
@@ -293,9 +286,7 @@ function App() {
         die Wochentabelle zeigt die Wochen rund um den Trade mit den GWS-Punkten W / D / 4H, so wie die Engine sie zu
         diesem Zeitpunkt sah; Woche anklicken für Weekly-, Daily- und 4H-Chart mit Struktur. Einstieg zur Eröffnung nach
         dem Signal, Stopp am letzten Swing-Tief × 0,99.
-        {IS_4H(variant)
-          ? <> Variante <b>Live-Logik</b>: Einstieg bei 3 von 3 Punkten, ausgelöst über 4H.</>
-          : <> Variante <b>W+D</b>: Einstieg bei 2 von 2 Punkten (Weekly + Daily); 4H wird nur zur Ansicht gezeigt.</>}
+        {' '}Live-Logik: Einstieg bei 3 von 3 Punkten (Weekly, Daily, 4H), ausgelöst über 4H.
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, alignItems: 'center', marginBottom: 10 }}>
@@ -305,11 +296,6 @@ function App() {
         </select>
         <button className="btn" disabled={pos >= tickers.length - 1} onClick={() => setTicker(tickers[pos + 1])}>▶</button>
         <span className="note">{pos + 1} von {tickers.length} Aktien</span>
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 14 }}>
-        {Object.entries(VARIANTS).filter(([k]) => data.variants[k]).map(([k, label]) => (
-          <button key={k} className={`btn${variant === k ? ' on' : ''}`} onClick={() => setVariant(k)}>{label}</button>
-        ))}
       </div>
 
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 14 }}>
@@ -330,7 +316,7 @@ function App() {
         <div className="card note" style={{ borderColor: '#92400e', marginBottom: 14 }}>
           Die historischen Kurse fehlen noch — angezeigt werden die Live-Backtest-Kurse ab {prices.d[0]?.d ?? '–'}, die
           Punkte älterer Wochen sind daher nicht aussagekräftig. Vollständig nach dem nächsten Lauf des Workflows
-          <b> „Historischer NASDAQ-100-Backtest (ab 2007)"</b>.
+          <b> „Historischer NASDAQ-100-Backtest (4H ab 2016)"</b>.
         </div>
       )}
       {prices?.w.length > 0 && (
