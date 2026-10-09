@@ -210,3 +210,18 @@ def test_chart_files_replay_engine_trades(pipeline, tmp_path):
     bench = json.loads((pipeline["charts"] / "_benchmark.json").read_text())
     assert bench["ticker"] == "QQQ" and bench["d"]
     assert all(t.get("weeklyDate") for t in res["variants"]["live4h"]["trades"])
+
+
+def test_align_4h_to_daily_scale():
+    """AZN: Alpaca-4H auf halber Skala der Yahoo-Tageskerzen → auf den Tagesschluss skalieren."""
+    script = r"""
+const { alignToDaily } = require(process.argv[1]);
+const d = [{ d: '2023-01-20', o: 129, h: 129.4, l: 127.4, c: 128.46 }, { d: '2023-01-23', o: 127.6, h: 128.4, l: 125.5, c: 125.6 }];
+const h = [{ d: '2023-01-20 18:00', o: 64, h: 64.5, l: 63.5, c: 63.9 }, { d: '2023-01-20 22:00', o: 63.9, h: 64.3, l: 63.8, c: 64.23 },
+           { d: '2023-01-23 18:00', o: 125.0, h: 126, l: 124.9, c: 125.5 }];
+console.log(JSON.stringify(alignToDaily(h, d)));
+"""
+    out = json.loads(subprocess.run(["node", "-e", script, os.path.join(_REPO, "backtest_history", "run_backtest.js")],
+                                    check=True, capture_output=True, text=True).stdout)
+    assert abs(out[1]["c"] - 128.46) < 1e-9 and abs(out[0]["h"] - 64.5 * 128.46 / 64.23) < 1e-9
+    assert out[2]["c"] == 125.5                      # passende Skala bleibt unverändert

@@ -114,6 +114,28 @@ function rankAt(hist, day, sym) {
 
 const bar = (r) => [r.d, r.o, r.h, r.l, r.c];
 
+/**
+ * 4H-Kerzen (Alpaca) auf die Skala der Tageskerzen (Yahoo) bringen. Weichen sie
+ * an einem Tag um mehr als 10 % ab, ist eine Bereinigung nur in einer Quelle
+ * angekommen (AZN: Yahoo hat die ADR-Umstellung rückwirkend eingerechnet, Alpaca
+ * nicht → Faktor 2). Dann werden die 4H-Kerzen des Tages auf den Tagesschluss skaliert.
+ */
+function alignToDaily(h4, daily) {
+  const close = new Map(daily.map((r) => [r.d, r.c]));
+  const lastOfDay = new Map();
+  for (const r of h4) lastOfDay.set(r.d.slice(0, 10), r);          // letzte Kerze des Tages
+  const factor = new Map();
+  for (const [day, r] of lastOfDay) {
+    const c = close.get(day);
+    if (c && r.c > 0 && Math.abs(c / r.c - 1) > 0.1) factor.set(day, c / r.c);
+  }
+  if (!factor.size) return h4;
+  return h4.map((r) => {
+    const f = factor.get(r.d.slice(0, 10));
+    return f ? { ...r, o: r.o * f, h: r.h * f, l: r.l * f, c: r.c * f } : r;
+  });
+}
+
 /** Tage, an denen sym in den Top 20 stand, als Zeiträume [von, bis] aufeinanderfolgender Handelstage. */
 function top20Ranges(hist, days, sym) {
   const out = [];
@@ -167,7 +189,7 @@ function runHistory() {
     if (!everTop.has(sym) || !info.has_weekly || !fs.existsSync(h4File)) continue;
     const daily = readJson(path.join(CACHE, 'daily', `${sym}.json`));
     const weekly = readJson(path.join(CACHE, 'weekly', `${sym}.json`));
-    const h4 = readJson(h4File);
+    const h4 = alignToDaily(readJson(h4File), daily);
     closesBySymbol[sym] = new Map(daily.map((r) => [r.d, r.c]));
     // Live-Logik mit 4H (3 von 3 Punkten, Einstieg über 4H) — unveränderte Engine
     for (const t of simulateTrades(buildWeekRows(weekly, daily, h4), daily, sym, top20, true)) {
@@ -385,4 +407,5 @@ function main() {
   console.log(`\n→ ${OUT_FILE}`);
 }
 
-main();
+if (require.main === module) main();
+module.exports = { alignToDaily };
