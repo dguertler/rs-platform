@@ -34,6 +34,8 @@ const kpis = (trades) => kpisFor(trades, CAPITAL);
 
 const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const year = (d) => d.slice(0, 4);
+// Ein Trade zählt zum Jahr seines Verkaufs (offene Trades: Bewertungstag = Datenende)
+const tradeYear = (t) => year(t.exitDate || t.entryDate);
 
 const slim = (t) => ({
   ticker: t.ticker,
@@ -94,7 +96,7 @@ function summary(trades) {
 
 function byYear(trades) {
   const out = {};
-  for (const t of trades) (out[year(t.entryDate)] ||= []).push(t);
+  for (const t of trades) (out[tradeYear(t)] ||= []).push(t);
   return Object.fromEntries(Object.entries(out).sort().map(([y, ts]) => [y, summary(ts)]));
 }
 
@@ -225,8 +227,8 @@ function runHistory() {
       start,
       total: summary(list),
       years: byYear(list),
-      ndxDown: summary(list.filter((t) => negYears.has(year(t.entryDate)))),
-      ndxUp: summary(list.filter((t) => !negYears.has(year(t.entryDate)))),
+      ndxDown: summary(list.filter((t) => negYears.has(tradeYear(t)))),
+      ndxUp: summary(list.filter((t) => !negYears.has(tradeYear(t)))),
       portfolio: portfolioStats(sim, list),
       trades: list.map((t) => {
         const r = sim.results.get(t) || { taken: false };
@@ -408,4 +410,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { alignToDaily };
+module.exports = { alignToDaily, byYear, summary, tradeYear };

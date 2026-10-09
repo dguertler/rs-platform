@@ -379,7 +379,7 @@ function App() {
 
   const v = data?.variants?.[variant];
   const yearTrades = useMemo(
-    () => (v && year ? v.trades.filter(t => t.entryDate.startsWith(year)) : []),
+    () => (v && year ? v.trades.filter(t => (t.exitDate || t.entryDate).startsWith(year)) : []),
     [v, year]
   );
 
@@ -401,7 +401,7 @@ function App() {
         Live-Logik ab 2016 (4H-Kerzen über Alpaca): Einstieg, sobald Weekly, Daily und 4H GWS gebrochen sind (3 von 3
         Punkten, ausgelöst über 4H) und die Aktie am Einstiegstag in den <b>Top 20</b> des Index steht. Das Ranking wird für jeden Handelstag nur unter
         den <b>damaligen Indexmitgliedern</b> berechnet, mit derselben Formel wie live. Stopp, täglicher Ausstieg,
-        10.000 € je Signal und 1.000 € Risiko wie in der Live-Engine. Trades werden dem Jahr ihres Einstiegs zugeordnet.
+        10.000 € je Signal und 1.000 € Risiko wie in der Live-Engine. Trades werden dem Jahr ihres Verkaufs zugeordnet (noch offene dem laufenden Jahr).
       </div>
 
       <LiveAlerts live={live} stages={stages} />
@@ -495,7 +495,7 @@ function App() {
           der bessere RS-Rang. Ohne Kosten und Steuern, Depotwert zum Jahresende inkl. offener Positionen.
           Rot markiert: Jahre, in denen der NASDAQ-100 gefallen ist. * = Teiljahr. <b>max. Rückgang</b> = größter Rückgang
           vom zwischenzeitlichen Höchststand innerhalb des Jahres. Trades, Trefferquote und Profit-Faktor beziehen sich auf die
-          im Jahr eröffneten, tatsächlich genommenen Trades. Zeile anklicken für die Trades des Jahres. Gelb bei „Mitglieder
+          im Jahr verkauften (bzw. noch offenen), tatsächlich genommenen Trades. Zeile anklicken für die Trades des Jahres. Gelb bei „Mitglieder
           mit Kursdaten": mehr als 10 % der damaligen Mitglieder ohne Kurse bei Yahoo.
         </div>
 

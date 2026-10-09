@@ -132,8 +132,9 @@ function portfolioStats({ equityByDay, results, startCapital, baseSlot, maxPosit
     };
   };
 
-  const byEntryYear = {};
-  for (const t of trades) (byEntryYear[t.entryDate.slice(0, 4)] ||= []).push(t);
+  // Trades zählen zum Jahr ihres Verkaufs (offene: Bewertungstag = Datenende)
+  const byExitYear = {};
+  for (const t of trades) (byExitYear[(t.exitDate || t.entryDate).slice(0, 4)] ||= []).push(t);
   const out = {};
   for (const [y, v] of Object.entries(years)) {
     out[y] = {
@@ -141,7 +142,7 @@ function portfolioStats({ equityByDay, results, startCapital, baseSlot, maxPosit
       endEquity: v.endEquity,
       returnPct: (v.endEquity / v.startEquity - 1) * 100,
       maxDD: v.maxDD,
-      ...tradeStats(byEntryYear[y] || []),
+      ...tradeStats(byExitYear[y] || []),
     };
   }
 
