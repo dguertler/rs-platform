@@ -447,10 +447,13 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '
   }
 
   if (inTrade && entry) {
+    // Offene Position: Bewertung zum letzten Tagesschluss. Der Wochenstempel
+    // (Montag) läge bei einem Einstieg mitten in der laufenden Woche vor dem Einstieg.
     const last = weekRows[weekRows.length - 1];
-    const exitPrice = last.week.c;
+    const lastDay = ohlcv_d[ohlcv_d.length - 1];
+    const exitPrice = lastDay ? lastDay.c : last.week.c;
     const pnl = (exitPrice - entry.entryPrice) * entry.shares;
-    result.push({ ...entry, exitDate: last.week.d, exitPrice, pnl, pnlPct: (exitPrice / entry.entryPrice - 1) * 100, isWin: pnl > 0, holdingWeeks: weekRows.length - 1 - entry.entryWeekIdx, isOpen: true });
+    result.push({ ...entry, exitDate: lastDay ? lastDay.d : last.week.d, exitPrice, pnl, pnlPct: (exitPrice / entry.entryPrice - 1) * 100, isWin: pnl > 0, holdingWeeks: weekRows.length - 1 - entry.entryWeekIdx, isOpen: true });
   }
 
   return result;
