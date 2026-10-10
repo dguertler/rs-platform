@@ -37,11 +37,21 @@ from repair_backtest_splits import find_jumps            # noqa: E402
 from symbols import MAX_START_GAP_DAYS, candidates       # noqa: E402
 import alpaca                                             # noqa: E402
 
-MEMBERSHIP_FILE = os.path.join(_REPO, "data", "backtest_history", "ndx_membership.json")
-CACHE_DIR = os.path.join(_HERE, "cache")
-PRICE_START = "2005-01-01"      # 12M-Fenster + GWS-Vorlauf vor dem ersten Mitgliedstag
-BENCHMARK = "QQQ"               # wie rs_colab.py
-INDEX = "^NDX"                  # Jahresperformance NASDAQ-100 auf der Testseite
+# BACKTEST_INDEX=sp500 rechnet denselben Ablauf für den S&P 500 (Benchmark wie
+# sp500_colab_1.py). Dort reichen Kurse ab 2013: gerechnet wird ab 2016, davor
+# liegen nur 12M-Ranking-Fenster und GWS-Vorlauf.
+INDEX_KEY = os.environ.get("BACKTEST_INDEX", "ndx")
+_CONFIG = {
+    "ndx":   {"membership": "ndx_membership.json",   "price_start": "2005-01-01",
+              "benchmark": "QQQ",   "index": "^NDX",  "members_from": None},
+    "sp500": {"membership": "sp500_membership.json", "price_start": "2013-01-01",
+              "benchmark": "^GSPC", "index": "^GSPC", "members_from": "2015-01-01"},
+}[INDEX_KEY]
+MEMBERSHIP_FILE = os.path.join(_REPO, "data", "backtest_history", _CONFIG["membership"])
+CACHE_DIR = os.environ.get("BACKTEST_HISTORY_CACHE") or os.path.join(_HERE, "cache")
+PRICE_START = _CONFIG["price_start"]   # 12M-Fenster + GWS-Vorlauf vor dem ersten Mitgliedstag
+BENCHMARK = _CONFIG["benchmark"]       # wie rs_colab.py bzw. sp500_colab_1.py
+INDEX = _CONFIG["index"]               # Jahresperformance des Index auf der Testseite
 ACTIVE_TOLERANCE_DAYS = 10      # letzte Kerze so nah am Datenende → heute gehandelt
 BATCH_SIZE = 60
 
@@ -250,6 +260,12 @@ def _write(path, payload):
 def main():
     membership = json.load(open(MEMBERSHIP_FILE, encoding="utf-8"))
     intervals = membership["intervals"]
+    since = _CONFIG["members_from"]
+    if since:                       # nur Mitgliedschaften, die in den Rechenzeitraum reichen
+        intervals = {t: [[max(a, since), b] for a, b in ivs if b is None or b > since]
+                     for t, ivs in intervals.items()}
+        intervals = {t: ivs for t, ivs in intervals.items() if ivs}
+        membership = {**membership, "start": since}
     symbols = sorted({s for t in intervals for s in candidates(t)} | {BENCHMARK})
 
     print(f"Tageskerzen für {len(symbols)} Symbole ab {PRICE_START} ...")

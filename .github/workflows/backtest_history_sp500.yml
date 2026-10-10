@@ -1,0 +1,77 @@
+name: Historischer S&P-500-Backtest (4H ab 2016)
+
+permissions:
+  contents: write
+
+# Nur manuell: dieselbe Pipeline wie backtest_history.yml, aber für alle
+# S&P-500-Mitglieder ab 2015 (point-in-time, data/backtest_history/sp500_membership.json).
+# Ergebnis und Kursdateien sind zu groß für master und landen auf dem eigenen
+# Branch backtest-data-sp500 (wird bei jedem Lauf neu geschrieben).
+on:
+  workflow_dispatch:
+
+jobs:
+  backtest-sp500:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    env:
+      BACKTEST_INDEX: sp500
+      BACKTEST_HISTORY_CACHE: ${{ github.workspace }}/backtest_history/cache_sp500
+      BACKTEST_HISTORY_OUT: ${{ github.workspace }}/out_sp500/sp500_results.json
+      BACKTEST_SKIP_BEFORE_AFTER: '1'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Node einrichten
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas pyyaml
+
+      - name: Kurse laden und Top 20 historisch ranken
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+        run: python backtest_history/prepare_data.py
+
+      - name: 4H-Kerzen über Alpaca laden
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+        run: python backtest_history/fetch_alpaca_4h.py
+
+      - name: Trades simulieren und je Jahr auswerten
+        run: node backtest_history/run_backtest.js
+
+      - name: Ergebnis auf Branch backtest-data-sp500 schreiben
+        run: |
+          cp backtest_history/cache_sp500/meta.json backtest_history/cache_sp500/h4_meta.json out_sp500/ 2>/dev/null || true
+          cd out_sp500
+          git init -q -b backtest-data-sp500
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -q -m "S&P-500-Backtest $(date -u +%Y-%m-%d)"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" backtest-data-sp500
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Historischer S&P-500-Backtest (backtest_history_sp500.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

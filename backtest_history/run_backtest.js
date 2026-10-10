@@ -403,7 +403,8 @@ function main() {
     maxRisk: MAX_RISK,
     ...runHistory(),
   };
-  result.beforeAfter = runBeforeAfter(liveWindowStart());
+  // Vorher/Nachher-Vergleich mit B-ÜBERSICHT gibt es nur für den NASDAQ-100
+  if (!process.env.BACKTEST_SKIP_BEFORE_AFTER) result.beforeAfter = runBeforeAfter(liveWindowStart());
   fs.mkdirSync(path.dirname(OUT_FILE), { recursive: true });
   fs.writeFileSync(OUT_FILE, JSON.stringify(result));
 

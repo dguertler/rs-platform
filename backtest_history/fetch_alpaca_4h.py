@@ -32,7 +32,7 @@ sys.path.insert(0, _HERE)
 from rs_core import hourly_to_4h_rows          # noqa: E402
 from alpaca import HISTORY_START, choose_feed, credentials, fetch_bars   # noqa: E402
 
-CACHE_DIR = os.path.join(_HERE, "cache")
+CACHE_DIR = os.environ.get("BACKTEST_HISTORY_CACHE") or os.path.join(_HERE, "cache")
 H4_START = HISTORY_START         # Alpaca-Historie beginnt 2016
 FETCH_START = "2015-12-01"       # etwas Vorlauf für die 60 Kerzen der 4H-Struktur
 SYMBOLS_PER_REQUEST = 10
@@ -78,7 +78,8 @@ def main():
         return
     symbols = symbols_needed()
     sources = alpaca_sources()
-    query = {s: sources.get(s, {}).get("query", s) for s in symbols}
+    # Alpaca schreibt Aktienklassen mit Punkt (BRK.B statt BRK-B)
+    query = {s: sources.get(s, {}).get("query", s).replace("-", ".") for s in symbols}
     end = (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%dT00:00:00Z")
     feed = choose_feed(symbols[0] if symbols else "AAPL", key, secret)
     print(f"4H-Kerzen für {len(symbols)} Symbole ab {FETCH_START} (Feed {feed}) ...")
