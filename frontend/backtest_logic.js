@@ -476,6 +476,181 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '
   return result;
 }
 
+// ── Zeitpunktgenaue Simulation (Live-Ablauf seit 10/2026) ─────────────────────────
+// Geprüft wird an jedem 4H-Kerzenschluss, nur mit Daten, die da schon vorlagen:
+// 4H-Punkt springt mit dieser Kerze von 0 auf 1, Wochen- und Tagespunkt sind zu
+// diesem Zeitpunkt grün (Tages- und Wochenkerze enthalten nur den Handel bis
+// jetzt). Kauf wie live: Kerzen 10–14 und 14–18 Uhr (Berlin) → Eröffnung der
+// nächsten 4H-Kerze am selben Tag (4H-Prüfjob), spätere Kerzen → 10-Uhr-Kerze des
+// nächsten Handelstages (Nachtlauf). Stopp, Ausstieg und Zeitstopp wie oben.
+// simulateTrades (Wochenzeilen) prüfte die Punkte nur zum Wochenschluss und
+// buchte den Kauf rückwirkend — gut ein Fünftel der Trades war live unmöglich
+// (Studie 10/2026: PF 3,23 → 1,90 zeitpunktgenau).
+const PIT_START = '2016-01-01';
+
+function addDaysISO(d, n) {
+  const t = new Date(d.slice(0, 10) + 'T12:00:00Z');
+  t.setUTCDate(t.getUTCDate() + n);
+  return t.toISOString().slice(0, 10);
+}
+function mondayOf(d) {
+  const t = new Date(d.slice(0, 10) + 'T12:00:00Z');
+  t.setUTCDate(t.getUTCDate() - (t.getUTCDay() + 6) % 7);
+  return t.toISOString().slice(0, 10);
+}
+// Wochenkerzen tragen je nach Quelle den Montag oder den Samstag davor
+const weekOfBar = d => mondayOf(addDaysISO(d, 2));
+
+// 4H-Kerzenbeginn (Berliner Zeit) → Block 0–3 (10, 14, 18, 22 Uhr; bei
+// verschobener Zeitumstellung 9, 13, 17, 21 Uhr)
+function h4Block(label) {
+  const h = +label.slice(11, 13);
+  return h <= 10 ? 0 : h <= 14 ? 1 : h <= 18 ? 2 : 3;
+}
+
+// Wochenkerzen bis zur Woche von dHistory.at(-1); die laufende Woche nur aus
+// den Tageskerzen bis jetzt
+function weeklyUpTo(ohlcv_w, dHistory) {
+  const last = dHistory[dHistory.length - 1];
+  const wk = mondayOf(last.d);
+  const out = [];
+  for (const b of ohlcv_w) if (weekOfBar(b.d) < wk) out.push(b);
+  const days = [];
+  for (let i = dHistory.length - 1; i >= 0 && mondayOf(dHistory[i].d) === wk; i--) days.unshift(dHistory[i]);
+  out.push({ d: wk, o: days[0].o, h: Math.max(...days.map(x => x.h)), l: Math.min(...days.map(x => x.l)), c: last.c });
+  return out.slice(-60);
+}
+
+// Ein Trade ab Einstieg (Tag + Kurs): Stopp, Ausstieg und Zeitstopp wie simulateTrades
+function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra) {
+  const idx = ohlcv_d.findIndex(b => b.d >= entryDate);
+  if (idx < 0) return null;
+  const swingLow = recentSwingLowOf(ohlcv_d.slice(0, idx));
+  const stopPrice = swingLow != null ? swingLow * 0.99 : null;
+  if (!entryPrice || !stopPrice || entryPrice <= stopPrice) return null;
+  let shares = Math.floor(MAX_RISK / (entryPrice - stopPrice));
+  if (shares * entryPrice > CAPITAL) shares = Math.floor(CAPITAL / entryPrice);
+  if (shares <= 0) return null;
+  const entry = { ...extra, trigger: '4H', entryDate: ohlcv_d[idx].d, entryPrice, stopPrice, shares,
+                  invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
+  const weeks = d => Math.round((new Date(d) - new Date(entry.entryDate)) / (7 * 864e5));
+  for (let k = idx; k < ohlcv_d.length; k++) {
+    if (!isExitDay(ohlcv_d, k, stopPrice, entry)) continue;
+    const next = ohlcv_d[k + 1];
+    const exitPrice = next ? next.o : ohlcv_d[k].c;
+    const exitDate = next ? next.d : ohlcv_d[k].d;
+    const pnl = (exitPrice - entryPrice) * shares;
+    return { ...entry, exitDate, exitPrice, pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
+             isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
+  }
+  const last = ohlcv_d[ohlcv_d.length - 1];
+  const pnl = (last.c - entryPrice) * shares;
+  return { ...entry, exitDate: last.d, exitPrice: last.c, pnl, pnlPct: (last.c / entryPrice - 1) * 100,
+           isWin: pnl > 0, isOpen: true, holdingWeeks: weeks(last.d) };
+}
+
+// inTop(day) → true/false (Top 20 am Signaltag); null = ohne Top-20-Filter
+function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT_START) {
+  const trades = [];
+  const dIdx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
+  const h = ohlcv_4h;
+  const first = Math.max(8, h.findIndex(b => b.d.slice(0, 10) >= start) - 1);
+  if (first < 8 || h.length < 10) return trades;
+  const p4 = new Array(h.length).fill(null);
+  for (let j = first; j < h.length; j++) {
+    p4[j] = analyze4HStructure(h.slice(Math.max(0, j - 59), j + 1))?.broken4h ? 1 : 0;
+  }
+  let busyUntil = '';
+  for (let j = first + 1; j < h.length; j++) {
+    if (p4[j - 1] !== 0 || p4[j] !== 1) continue;
+    const bar = h[j], day = bar.d.slice(0, 10);
+    if (day < start || day < busyUntil || (inTop && !inTop(day))) continue;
+    const i = dIdx.get(day);
+    if (i == null) continue;
+    const blk = h4Block(bar.d);
+    let dHistory;
+    if (blk === 0) dHistory = ohlcv_d.slice(0, i);                     // vor Börsenbeginn
+    else if (blk === 1) {                                                // Handel bis 12 Uhr New York
+      const db = ohlcv_d[i];
+      dHistory = ohlcv_d.slice(0, i).concat([{ d: day, o: db.o, h: Math.max(db.o, bar.h), l: Math.min(db.o, bar.l), c: bar.c }]);
+    } else dHistory = ohlcv_d.slice(0, i + 1);                          // Tageskerze komplett
+    if (dHistory.length < 30) continue;
+    if (!analyzeStructure(dHistory)?.broken) continue;
+    if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
+
+    let k = j + 1;
+    if (!(blk <= 1 && h[k] && h[k].d.slice(0, 10) === day)) {
+      while (k < h.length && h[k].d.slice(0, 10) <= day) k++;
+    }
+    if (k >= h.length) continue;
+    const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
+    const t = tradeFromEntry(ohlcv_d, h[k].d.slice(0, 10), h[k].o,
+      { signalBar: bar.d, entryTime: h[k].d.slice(11, 16), signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) });
+    if (!t) continue;
+    trades.push(t);
+    busyUntil = t.exitDate;
+  }
+  return trades;
+}
+
+// Historische Kurse (data/backtest_history/charts, ab 2005/2016) mit den täglich
+// aktualisierten Kursen (backtest_TICKER.json) zusammenführen. Weicht der
+// Schlusskurs am Übergang um mehr als 2 % ab (Split seit dem historischen Lauf),
+// wird die Historie auf den aktuellen Stand skaliert.
+// Wochenkerzen auf den Montag normieren; doppelte Einträge derselben Woche (Yahoo
+// liefert gelegentlich eine zweite Zeile, z. B. 21.09. und 22.09.) zusammenfassen
+function normalizeWeekly(arr) {
+  const out = [];
+  for (const b of arr) {
+    const d = weekOfBar(b.d), last = out[out.length - 1];
+    if (last && last.d === d) Object.assign(last, { h: Math.max(last.h, b.h), l: Math.min(last.l, b.l), c: b.c });
+    else out.push({ ...b, d });
+  }
+  return out;
+}
+
+function mergeSeries(hist, live) {
+  if (!hist && !live) return null;
+  if (!hist || !live || !live.ohlcv_d?.length) {
+    const only = hist || live;
+    return { ...only, ohlcv_w: normalizeWeekly(only.ohlcv_w || []) };
+  }
+  const liveD = new Map(live.ohlcv_d.map(b => [b.d, b.c]));
+  const anchor = [...hist.ohlcv_d].reverse().find(b => liveD.has(b.d));
+  const ratio = anchor ? liveD.get(anchor.d) / anchor.c : 1;
+  const scale = Math.abs(ratio - 1) > 0.02
+    ? arr => arr.map(b => ({ ...b, o: b.o * ratio, h: b.h * ratio, l: b.l * ratio, c: b.c * ratio }))
+    : arr => arr;
+  const join = (a, b, key) => {
+    if (!a.length) return b;
+    const lastKey = key(a[a.length - 1]);
+    const tail = b.filter(x => key(x) >= lastKey);
+    const head = tail.length && key(tail[0]) === lastKey ? a.slice(0, -1) : a;
+    return head.concat(tail);
+  };
+  return {
+    ohlcv_w:  join(normalizeWeekly(scale(hist.ohlcv_w)), normalizeWeekly(live.ohlcv_w || []), b => b.d),
+    ohlcv_d:  join(scale(hist.ohlcv_d), live.ohlcv_d, b => b.d),
+    ohlcv_4h: join(scale(hist.ohlcv_4h), live.ohlcv_4h || [], b => b.d),
+  };
+}
+
+// Kursdatei aus data/backtest_history/charts → Engine-Format
+function chartToSeries(c) {
+  const bar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
+  return { ohlcv_w: c.w.map(bar), ohlcv_d: c.d.map(bar), ohlcv_4h: c.h.map(bar) };
+}
+
+// Top 20 am Tag: bis zum Ende des historischen Laufs dessen Ranking, danach die
+// tägliche Top-20-Historie der RS-Datei
+function top20Lookup(ticker, histIntervals, histEnd, liveHistory) {
+  return day => {
+    if (histIntervals && day <= histEnd) return histIntervals.some(([a, z]) => day >= a && day <= z);
+    const list = liveHistory?.[day];
+    return !!list && list.includes(ticker);
+  };
+}
+
 // ── KPI-Berechnung ────────────────────────────────────────────────────────────────
 function calcKpis(trades) {
   const closed    = trades.filter(t => !t.isOpen);

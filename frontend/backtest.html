@@ -8,7 +8,7 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261010"></script>
+  <script src="backtest_logic.js?v=20261011"></script>
   <script type="text/babel" src="backtest_charts.js?v=20261009"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -88,43 +88,28 @@ function BacktestApp() {
     setTicker(t);
     document.title    = `RS · Backtest ${t}`;
     const slug        = t.toLowerCase().replace(/[^a-z0-9]/g, '_');
-    const jsonFile    = `data/backtest_${slug}.json`;
+    const getJson     = f => window.apiFetch(f).then(r => r.ok ? r.json() : null).catch(() => null);
 
-    window.apiFetch(jsonFile)
-      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
-      .then(d => {
-        const ohlcv_w = (d.ohlcv_w || []).slice(-104);
-        const cutDate = ohlcv_w[0]?.d ?? '2000-01-01';
-        setData({
-          ...d,
-          ohlcv_w,
-          ohlcv_d:  (d.ohlcv_d  || []).filter(x => x.d >= cutDate),
-          ohlcv_4h: (d.ohlcv_4h || []).filter(x => x.d.slice(0,10) >= cutDate),
-        });
-        setLoading(false);
-      })
-      .catch(() => {
-        // Fallback: Daten aus den RS-JSON-Dateien laden
-        const sources = ['data/rs_full.json', 'data/rs_sp500.json'];
-        Promise.any(
-          sources.map(src =>
-            window.apiFetch(src)
-              .then(r => r.ok ? r.json() : Promise.reject(new Error('HTTP error')))
-              .then(d => {
-                const entry = (d.data || []).find(e => e.ticker === t);
-                if (!entry) throw new Error('not found');
-                return {
-                  ohlcv_w:   entry.ohlcv_w  || [],
-                  ohlcv_d:   entry.ohlcv    || [],
-                  ohlcv_4h:  entry.ohlcv_4h || [],
-                  generated: d.generated    || '–',
-                };
-              })
-          )
-        )
-        .then(d => { setData(d); setLoading(false); })
-        .catch(e => { setLoadError(e.message); setLoading(false); });
-    });
+    // Kurse seit 2016: historischer Lauf (data/backtest_history/charts) + tägliche
+    // Kurse (backtest_TICKER.json bzw. RS-Datei) — genau wie data/backtest_ndx.json
+    Promise.all([
+      getJson(`data/backtest_history/charts/${t}.json`),
+      getJson(`data/backtest_${slug}.json`),
+      getJson('data/rs_full.json'),
+      getJson('data/rs_sp500.json'),
+    ]).then(([chart, live, rsNdx, rsSpx]) => {
+      const rs = [rsNdx, rsSpx].find(d => d && (d.data || []).some(e => e.ticker === t)) || null;
+      const entry = rs ? rs.data.find(e => e.ticker === t) : null;
+      const liveSeries = live && live.ohlcv_d ? { ohlcv_w: live.ohlcv_w || [], ohlcv_d: live.ohlcv_d, ohlcv_4h: live.ohlcv_4h || [] }
+        : entry ? { ohlcv_w: entry.ohlcv_w || [], ohlcv_d: entry.ohlcv || [], ohlcv_4h: entry.ohlcv_4h || [] } : null;
+      const hist = chart ? chartToSeries(chart) : null;
+      const merged = mergeSeries(hist, liveSeries);
+      if (!merged || !merged.ohlcv_d.length) throw new Error('keine Kurse');
+      const histEnd = hist ? hist.ohlcv_d[hist.ohlcv_d.length - 1].d : '0000';
+      setTop20Hist(() => top20Lookup(t, chart?.top20?.inkl ?? null, histEnd, rs?.top20_history ?? (rsNdx?.top20_history)));
+      setData({ ...merged, generated: live?.generated || rs?.timestamp || '–', fromHistory: !!chart });
+      setLoading(false);
+    }).catch(e => { setLoadError(e.message); setLoading(false); });
 
     // Benchmark (QQQ) OHLCV für Chart-Hintergrundlinie laden
     window.apiFetch('data/rs_full.json')
@@ -137,23 +122,14 @@ function BacktestApp() {
         });
       })
       .catch(() => {});
-
-    // top20_history immer laden – unabhängig ob backtest-JSON oder rs-JSON
-    const rsFiles = ['data/rs_full.json', 'data/rs_sp500.json'];
-    Promise.any(rsFiles.map(f =>
-      window.apiFetch(f).then(r => r.ok ? r.json() : Promise.reject())
-        .then(d => {
-          if (!(d.data || []).find(e => e.ticker === t)) throw new Error('not found');
-          if (!d.top20_history) throw new Error('no history');
-          return d.top20_history;
-        })
-    )).then(h => setTop20Hist(h)).catch(() => setTop20Hist(null));
   }, []);
 
   // ── Pre-Compute aller Wochen mit historisch korrekt geschnittenen Daten ──
   const weekRows = useMemo(() => {
     if (!data) return [];
-    return buildWeekRows(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h);
+    // Wochentabelle ab Ende 2015 (Strukturen weiter mit der vollen Historie)
+    const from = Math.max(0, data.ohlcv_w.findIndex(w => w.d >= '2015-12-01'));
+    return buildWeekRows(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h, from).map((r, k) => ({ ...r, i: k }));
   }, [data]);
 
   const sel = selectedIdx !== null ? weekRows[selectedIdx] : null;
@@ -164,8 +140,9 @@ function BacktestApp() {
 
   const trades = useMemo(() => {
     if (!data) return [];
-    return simulateTrades(weekRows, data.ohlcv_d, ticker, top20Hist, useTop20);
-  }, [weekRows, data, top20Hist, useTop20]);
+    // Zeitpunktgenau wie live (simulateTradesPIT) — dieselben Trades wie B-ÜBERSICHT
+    return simulateTradesPIT(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h, useTop20 ? top20Hist : null);
+  }, [data, top20Hist, useTop20]);
 
   // Eine einzige KPI-Definition für Detail- und Übersichtsseite (backtest_logic.js),
   // damit insbesondere der Profitfaktor überall gleich gerechnet wird.
@@ -221,7 +198,7 @@ function BacktestApp() {
       <div style={{marginBottom:14,display:'flex',alignItems:'center',gap:16,flexWrap:'wrap'}}>
         <div>
           <span style={{fontSize:20,fontWeight:800,color:'#f1f5f9',fontFamily:'monospace'}}>{ticker}</span>
-          <span style={{fontSize:12,color:'#475569',marginLeft:10,fontFamily:'monospace'}}>Backtest · historische GWS-Punkte</span>
+          <span style={{fontSize:12,color:'#475569',marginLeft:10,fontFamily:'monospace'}}>Backtest seit 2016 · zeitpunktgenau wie live</span>
         </div>
         <button onClick={() => { const v = !useTop20; setUseTop20(v); localStorage.setItem('bt_use_top20', v); }}
           style={{ background: useTop20 ? '#14532d' : 'transparent',
@@ -282,8 +259,8 @@ function BacktestApp() {
           {trades.length > 0 && (
             <div style={{marginBottom:10}}>
               <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,overflowX:'auto'}}>
-                <div style={{minWidth:540}}>
-                  <div style={{display:'grid',gridTemplateColumns:'80px 24px 72px 84px 72px 72px 62px 52px',
+                <div style={{minWidth:572}}>
+                  <div style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 72px 62px 52px',
                     gap:0,background:'#0f172a',borderBottom:'1px solid #1e293b',padding:'6px 12px',
                     fontSize:10,fontWeight:700,color:'#475569',fontFamily:'monospace',letterSpacing:'0.04em'}}>
                     <span>Entry</span><span>TF</span>
@@ -296,11 +273,11 @@ function BacktestApp() {
                   </div>
                   {[...trades].reverse().map((t, i) => (
                     <div key={i} onClick={() => handleTradeClick(t)}
-                      style={{display:'grid',gridTemplateColumns:'80px 24px 72px 84px 72px 72px 62px 52px',
+                      style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 72px 62px 52px',
                       gap:0,padding:'5px 12px',borderBottom:'1px solid #0f172a',alignItems:'center',
                       cursor:'pointer',
                       background: t.isOpen ? '#0a1520' : t.isWin ? '#061206' : '#120606'}}>
-                      <span style={{fontFamily:'monospace',fontSize:11,color:'#94a3b8'}}>{t.entryDate}</span>
+                      <span style={{fontFamily:'monospace',fontSize:11,color:'#94a3b8'}} title={t.signalBar ? `Signal 4H-Kerze ${t.signalBar}, Kauf ${t.entryTime} Uhr` : ''}>{t.entryDate}{t.entryTime && <span style={{color:'#475569',fontSize:9}}> {t.entryTime}</span>}</span>
                       <span style={{fontFamily:'monospace',fontSize:10,fontWeight:700,
                         color: t.trigger==='4H'?'#a78bfa':t.trigger==='D'?'#38bdf8':'#fbbf24'}}>{t.trigger}</span>
                       <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:'#cbd5e1'}}>{t.entryPrice.toFixed(2)}</span>
@@ -353,7 +330,7 @@ function BacktestApp() {
                 const fri = new Date(row.weekEnd + 'T12:00:00Z');
                 fri.setUTCDate(fri.getUTCDate() - 1);
                 const friStr = fri.toISOString().slice(0,10);
-                const isT20 = top20Hist ? (top20Hist[friStr] || []).includes(ticker) : null;
+                const isT20 = top20Hist ? top20Hist(addDaysISO(row.week.d, 4)) : null;
                 return (
                   <div key={row.i}
                     ref={el => weekRowRefs.current[row.i] = el}

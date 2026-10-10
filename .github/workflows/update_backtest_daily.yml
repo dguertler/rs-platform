@@ -48,11 +48,15 @@ jobs:
           node live_alerts/evaluate_alerts.js
           node track_top20_performance.js
 
+      # B-ÜBERSICHT: NASDAQ-100 seit 2016, zeitpunktgenau wie live (historische + tägliche Kurse)
+      - name: NASDAQ-Backtest seit 2016 rechnen
+        run: node backtest_ndx.js
+
       - name: Geänderte JSONs committen und pushen
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/backtest_*.json data/live_alerts.json data/live_alerts_performance.json data/top20_performance.json
+          git add data/backtest_*.json data/live_alerts.json data/live_alerts_performance.json data/top20_performance.json data/backtest_ndx.json
           git diff --staged --quiet || git commit -m "Backtest-Daten täglich aktualisiert"
           git pull --rebase origin master
           git push origin master
