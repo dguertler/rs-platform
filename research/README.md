@@ -176,3 +176,9 @@ Robust sind nur die beiden **Rücksetzer-Setups (S2 Bollinger, D5 RSI-2)**. Sie
 kaufen, wenn ein starker Titel kurz überverkauft ist, also genau dann, wenn keine
 Breakouts kommen. So füllen sie die freien Plätze mit einem anderen Ertragsmuster.
 D5 hält den Rückgang dabei niedriger (Median 2016–21: −24 % gegenüber −33 % bei S2).
+
+## Ergänzung: Gewinner- und Verlierer-Muster (`TRADE_PATTERNS.md`)
+
+Welche Chartlage teilen Gewinner bzw. Verlierer der 4H-Breakouts? Ergebnisse, Diskussion und
+Depot-Test stehen in `TRADE_PATTERNS.md`. Aufruf: `python3 research/trade_patterns.py`, danach
+`python3 research/trade_patterns_depot.py`.

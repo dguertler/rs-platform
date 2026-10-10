@@ -191,8 +191,9 @@ Die offenen Streitpunkte:
 
 - **Frühausstieg.** Der Quant-Skeptiker hält „Tag 2 / 0 %“ für eine Spitze im Parameterraum:
   Tag 1 und Tag 3 bringen je Trade kaum etwas, Tag 5 schadet. Der Risk-Manager hält dagegen,
-  dass im Depot auch „Tag 2 < −1 %“ und „Tag 1 < 0 %“ ähnlich gut sind. Gelöst wird das über
-  die Nachbarvarianten in Abschnitt 7.
+  dass im Depot auch „Tag 2 < −1 %“ und „Tag 1 < 0 %“ ähnlich gut sind. Die Nachbarvarianten
+  in Abschnitt 7 klären das: Die Schwelle ist unkritisch, der Tag nicht. Tag 3 verliert den
+  größten Teil des Vorteils.
 - **Klimax-Sperre und Ausreißer.** Die Sperre schneidet 2022–26 neun große Gewinner ab, unter
   anderem ARM +92 %, META +63 % und INTC +50 %. Bei einer Strategie, die von ihren Ausreißern
   lebt, ist das ein ernstes Gegenargument. Mit dem Frühausstieg werden die Klimax-Trades
@@ -219,13 +220,34 @@ Variante die Basis bei CAGR / Sharpe / MaxDD schlägt.
 | E + K½ + Q½ | 16,4 % | 0,93 | −18,5 % | 1,92 | 25,9 % | 1,00 | −20,4 % | 3,04 |
 | **E + K + Q½ (Empfehlung)** | **17,4 %** | **1,00** | **−17,8 %** | 2,08 | **26,2 %** | **1,08** | **−18,4 %** | **3,27** |
 
-<!-- MC_TABLE -->
+Robustheit: In wie vielen der 30 Läufe schlägt die Variante die Basis bei CAGR / Sharpe / MaxDD?
+
+| Variante | 2016–21 | 2022–26 |
+|---|---|---|
+| E Frühausstieg Tag 2 | 30 / 30 / 27 | 20 / 24 / 29 |
+| E2−1 Tag 2 < −1 % | 30 / 30 / 29 | 19 / 24 / 29 |
+| E3 Frühausstieg Tag 3 | 15 / 18 / 27 | 5 / 9 / 23 |
+| K Klimax-Sperre | 18 / 28 / 27 | 6 / 28 / 30 |
+| K½ Klimax halbe Position | 10 / 30 / 27 | 5 / 29 / 30 |
+| Q½ Markt heiß halbe Position | 11 / 30 / 30 | 25 / 30 / 18 |
+| E+K | 30 / 30 / 30 | 10 / 30 / 30 |
+| E + K½ + Q½ | 30 / 30 / 30 | 18 / 29 / 30 |
+| **E + K + Q½** | **30 / 30 / 30** | 13 / **30 / 30** |
+
+Lesart:
+- **Frühausstieg (E):** Tag 2 ist robust, auch mit Schwelle −1 %. Tag 3 ist deutlich schwächer.
+  Die Regel muss früh greifen. Die Warnung des Quant-Skeptikers vor einer Parameterspitze gilt
+  also für den Tag, nicht für die Schwelle.
+- **Klimax-Sperre (K) und halbe Position bei heißem Markt (Q½):** Beide verbessern Sharpe und
+  Drawdown fast immer, die CAGR aber nicht verlässlich.
+- **Gesamtpaket E + K + Q½:** Es verbessert Sharpe und Drawdown in 60 von 60 Läufen. Die CAGR
+  2022–26 liegt im Median etwa auf dem Niveau der Basis (13 von 30 Läufen besser).
 
 ## 8. Empfehlung
 
 | # | Maßnahme | Wirkung | Risiko der Überanpassung | Ort |
 |---|---|---|---|---|
-| 1 | **Frühausstieg:** Schluss am 2. Handelstag nach dem Einstieg unter dem Einstiegskurs → Verkauf zur nächsten Eröffnung | Sharpe und Drawdown in beiden Zeiträumen besser; Kapital wird ~18 % früher frei | gering bis mittel (ein Parameter, Nachbarvarianten ähnlich) | `isExitDay` in `frontend/backtest_logic.js`, Verkaufsmeldung in `check_exits.py` |
+| 1 | **Frühausstieg:** Schluss am 2. Handelstag nach dem Einstieg unter dem Einstiegskurs → Verkauf zur nächsten Eröffnung | Sharpe und Drawdown in beiden Zeiträumen besser; Kapital wird ~18 % früher frei | gering bis mittel (Schwelle 0 / −1 % gleich gut, Tag 3 deutlich schwächer) | `isExitDay` in `frontend/backtest_logic.js`, Verkaufsmeldung in `check_exits.py` |
 | 2 | **Markt-Thermometer:** QQQ 63 Tage > +11 % → neue Positionen nur zur Hälfte | weniger Drawdown in beiden Zeiträumen, Rendite 2016–21 neutral | mittel (wenige unabhängige Phasen) | Breakout-Mail und `live_depot.json` (Hinweis „halbe Position“) |
 | 3 | **Klimax-Sperre:** letztes Wochen-Swing-Hoch > 12,7 % über dem vorherigen → kein Kauf (alternativ halbe Position) | stärkste Drawdown-Bremse; mit #1 kaum Renditeverlust | mittel (kostet einzelne Ausreißer) | Signalprüfung in `check_alerts.py` / `check_alerts_4h.py` und `simulateTradesPIT` |
 | 4 | Im Signal-Journal mitschreiben: Klimax, Markt heiß, Schluss Tag 2 | Vorwärtstest mit echten Daten, bevor #2/#3 hart werden | – | `update_signal_journal.py` |
