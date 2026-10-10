@@ -182,3 +182,9 @@ D5 hält den Rückgang dabei niedriger (Median 2016–21: −24 % gegenüber −
 Welche Chartlage teilen Gewinner bzw. Verlierer der 4H-Breakouts? Ergebnisse, Diskussion und
 Depot-Test stehen in `TRADE_PATTERNS.md`. Aufruf: `python3 research/trade_patterns.py`, danach
 `python3 research/trade_patterns_depot.py`.
+
+## Ergänzung: Kauf am Doppelboden (`DOUBLE_BOTTOM.md`)
+
+Funktioniert ein Doppelboden-Einstieg als Alternative zum Breakout, und welche Bedingungen bringen
+die Trefferquote Richtung 60 %? Ergebnisse und Regelsätze stehen in `DOUBLE_BOTTOM.md`.
+Aufruf: `python3 research/double_bottom.py`.
