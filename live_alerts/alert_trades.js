@@ -52,7 +52,7 @@ function alertTrades() {
     if (openUntil[a.ticker] && a.signal_date <= openUntil[a.ticker]) { skipped.position_offen++; continue; }
     const daily = series(a.ticker);
     if (!daily.length) { skipped.keine_kurse++; continue; }
-    const t = simulateFromEntry(daily, a.signal_date);
+    const t = simulateFromEntry(daily, a.signal_date, a.entry_price);
     if (!t) { skipped.kein_gueltiger_einstieg++; continue; }
     openUntil[a.ticker] = t.isOpen ? '9999-12-31' : t.exitDate;
     trades.push({

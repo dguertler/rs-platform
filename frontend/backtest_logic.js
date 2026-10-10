@@ -326,13 +326,14 @@ function isTimeStop(dHistory, k, entry) {
 // Ein Trade ab festem Einstiegstag (z. B. ein verschickter Live-Alert): Kauf zur
 // Eröffnung, Stopp und Ausstieg exakt wie in simulateTrades, gleiche
 // Positionsgröße (CAPITAL, max. MAX_RISK Risiko). null, wenn kein gültiger Einstieg.
-function simulateFromEntry(ohlcv_d, entryDate) {
+// entryPriceOverride: Kauf im Tagesverlauf (4H-Prüfjob) statt zur Eröffnung.
+function simulateFromEntry(ohlcv_d, entryDate, entryPriceOverride = null) {
   const entryIdx = ohlcv_d.findIndex(d => d.d >= entryDate);
   if (entryIdx < 0) return null;
   const entryBar = ohlcv_d[entryIdx];
   const swingLow = recentSwingLowOf(ohlcv_d.slice(0, entryIdx));
   const stopPrice = swingLow != null ? swingLow * 0.99 : null;
-  const entryPrice = entryBar.o;
+  const entryPrice = entryPriceOverride || entryBar.o;
   if (!entryPrice || !stopPrice || entryPrice <= stopPrice) return null;
   let shares = Math.floor(MAX_RISK / (entryPrice - stopPrice));
   if (shares * entryPrice > CAPITAL) shares = Math.floor(CAPITAL / entryPrice);
