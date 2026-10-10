@@ -125,3 +125,29 @@ Variante eine höhere CAGR als A2 mit denselben Signalen.
 - Der RSI(2)-Ansatz wurde nicht optimiert, es gelten die Lehrbuchwerte (Connors).
   Vor einer Umsetzung sollte er noch einmal mit festen Parametern auf den neu
   hinzukommenden Daten laufen (Forward-Test über das Signal-Journal).
+
+## Ergänzung: Rücksetzer im QQQ kaufen (`qqq_dips.py`)
+
+Klassische Dip-Kauf-Regeln direkt auf QQQ, 2006–2026, 0,1 % Kosten je Seite. Gekauft wird
+zum Schluss des Signaltags. Kauf zur nächsten Eröffnung ist meist 0,5–2 Punkte schlechter.
+Aufruf: `python3 research/qqq_dips.py`.
+
+| Regel | 2006–2015 CAGR | 2016–2026 CAGR | Max-DD 2006–26 | investiert | Treffer |
+|---|---|---|---|---|---|
+| QQQ Buy & Hold | 11,7 % | 20,2 % | −53,4 % | 100 % | – |
+| QQQ 200-Tage-Timing | 7,6 % | 15,7 % | −27,8 % | 81 % | – |
+| RSI(2) < 10 über 200T (Connors) | 2,2 % | 2,9 % | −14,6 % | 16 % | 66 % |
+| RSI(2) < 10 ohne Trendfilter | 6,7 % | 4,7 % | −19,6 % | 21 % | 68 % |
+| Double 7s | 3,5 % | 5,2 % | −26,9 % | 34 % | 74 % |
+| IBS < 0,2 über 200T | 0,0 % | 6,4 % | −23,0 % | 33 % | 64 % |
+| 3 rote Tage über 200T | 4,2 % | 3,6 % | −11,6 % | 14 % | 72 % |
+| Drawdown ≥ 10 % → halten bis neues 52W-Hoch | 6,2 % | 14,8 % | −51,2 % | 39 % | 90 % |
+
+Befund: Die Regeln treffen oft (64–90 % Gewinner), sind aber nur 14–39 % der Zeit
+investiert. Rechnet man die Rendite auf volle Investition hoch, liegt keine Regel über
+Buy & Hold. Den Index schlägt keine. Ihr Nutzen ist der kleinere Rückgang, also eine
+Verwendung für freies Cash, kein Ersatz für Halten. Derselbe RSI(2)-Ansatz auf
+**Einzeltitel der Top 20** liefert pro investiertem Euro deutlich mehr (2016–2026:
+10,6 % CAGR bei 18 % Investitionsgrad, siehe D5 oben). Einzelaktien prallen nach
+Rücksetzern stärker zurück als der Index. Der Drawdown-Kauf ab −10 % hat 2008
+nicht geschützt (−51 %).
