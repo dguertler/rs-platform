@@ -27,9 +27,9 @@ def rising(n, start=100.0, step=1.0, first_day=1):
 class TestDeriveEntry(unittest.TestCase):
     """Einstieg = Eröffnung des Folgetages, Stopp = letztes Swing-Tief × 0,99."""
 
-    def test_einstieg_ist_die_eroeffnung_des_folgetages(self):
+    def test_einstieg_ist_die_eroeffnung_am_alert_tag(self):
         rows = rising(40)
-        entry = derive_entry(rows, "2026-01-20")
+        entry = derive_entry(rows, "2026-01-21")       # Mail vor Börsenbeginn am 21.
         self.assertEqual(entry["entry_date"], "2026-01-21")
         self.assertAlmostEqual(entry["entry_price"], rows[20]["o"])
 
@@ -37,9 +37,9 @@ class TestDeriveEntry(unittest.TestCase):
         entry = derive_entry(rising(40), "2026-01-20")
         self.assertLess(entry["stop_price"], entry["entry_price"])
 
-    def test_ohne_folgetag_kein_einstieg(self):
+    def test_ohne_kerze_am_alert_tag_kein_einstieg(self):
         rows = rising(40)
-        self.assertIsNone(derive_entry(rows, rows[-1]["d"]))
+        self.assertIsNone(derive_entry(rows, "2026-02-28"))
 
 
 class TestFindExit(unittest.TestCase):
@@ -119,8 +119,8 @@ class TestCollectNewPositions(unittest.TestCase):
                                           {"MU": "2026-01-20"})
         self.assertEqual(opened, [])
 
-    def test_meldet_signal_ohne_folgetag_als_wartend(self):
-        signals = {"MU": [{"signal_date": self.market["MU"]["ohlcv"][-1]["d"],
+    def test_meldet_signal_ohne_kerze_am_alert_tag_als_wartend(self):
+        signals = {"MU": [{"signal_date": "2026-03-31",
                            "trigger_tf": "4h", "source": "QQQ"}]}
         positions = {}
         opened, pending = collect_new_positions({"MU"}, self.market, signals, positions, {})

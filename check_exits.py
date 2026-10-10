@@ -116,9 +116,13 @@ def save_state(state):
 # ── Einstieg aus dem gemeldeten Signal ableiten ───────────────────────────────
 
 def derive_entry(ohlcv, signal_date):
-    """Einstieg = Eröffnung des Folgetages, Stopp = letztes Swing-Tief × 0,99.
-    Beides genau so wie im Backtest, damit die Mail zum getesteten Verhalten passt."""
-    entry_bar = next((b for b in ohlcv if b["d"] > signal_date), None)
+    """Einstieg = Eröffnung am Alert-Tag, Stopp = letztes Swing-Tief × 0,99.
+
+    signal_date ist der Versandtag (signals.json): Die Mail geht vor Börsenbeginn
+    raus und beruht auf dem Schluss des Vortages — gekauft wird also zur
+    Eröffnung genau dieses Tages, wie in der Live-Bilanz (live_alerts/) und im
+    Backtest (Eröffnung nach dem Signaltag)."""
+    entry_bar = next((b for b in ohlcv if b["d"] >= signal_date), None)
     if not entry_bar:
         return None
 
@@ -282,8 +286,8 @@ def collect_new_positions(watchlist, market, signals, positions, closed):
     """Neue 4H-Breakouts für Watchlist-Titel als offene Position aufnehmen.
 
     Übersprungen wird ein Signal, wenn es bereits abgeschlossen wurde (`closed`)
-    oder wenn es noch keinen Folgetag gibt — der Einstiegskurs ist die Eröffnung
-    des Folgetages, den liefert erst der nächste Datenlauf.
+    oder wenn der Alert-Tag noch keine Kerze hat — der Einstiegskurs ist die
+    Eröffnung des Alert-Tages, die liefert erst der nächste Datenlauf.
     """
     opened, pending = [], []
     for ticker, entries in signals.items():
@@ -400,6 +404,9 @@ def _close_finished(positions, market, until=None):
         if p.get("entry_price") is None:
             entry = derive_entry(data["ohlcv"], p["signal_date"])
             if not entry:
+                if any(b["d"] >= p["signal_date"] for b in data["ohlcv"]):
+                    # Folgetag da, aber kein gültiger Einstieg (Stopp über dem Kurs) — kein Trade
+                    positions.pop(key)
                 continue
             p.update(entry)
         hit = find_exit(data["ohlcv"], p, None)
@@ -421,6 +428,8 @@ def rebuild_depot(signals, market):
             continue
         entry = derive_entry(data["ohlcv"], date)
         _close_finished(positions, market, until=entry["entry_date"] if entry else date)
+        if not entry and any(b["d"] >= date for b in data["ohlcv"]):
+            continue          # kein gültiger Einstieg (Stopp über dem Kurs)
         if len(positions) < MAX_POSITIONS:
             positions[ticker.upper()] = {"ticker": ticker, "source": data["source"], "signal_date": date,
                                          **(entry or {"entry_price": None})}
