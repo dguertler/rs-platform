@@ -130,3 +130,44 @@ class TestCollectNewPositions(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestZeitstoppUndSL(unittest.TestCase):
+    """Zeitstopp (10 Handelstage, mind. +5 %), wirksamer SL und Modell-Depot (10 Plätze)."""
+
+    def test_zeitstopp_wenn_nach_10_tagen_unter_plus_5_prozent(self):
+        rows = rising(31) + [bar(f"2026-02-{d:02d}", 131.0, 132.0, 130.0, 131.0) for d in range(1, 13)]
+        pos = {"entry_date": rows[30]["d"], "entry_price": rows[30]["o"], "stop_price": 90.0}
+        hit = find_exit(rows, pos, None)
+        self.assertEqual(hit["reason"], "Zeitstopp")
+        self.assertEqual(hit["signal_date"], rows[40]["d"])      # 10. Handelstag nach dem Einstieg
+        self.assertEqual(hit["exit_date"], rows[41]["d"])        # Verkauf zur nächsten Eröffnung
+
+    def test_kein_zeitstopp_bei_mehr_als_plus_5_prozent(self):
+        rows = rising(31) + [bar(f"2026-02-{d:02d}", 131.0 + 2 * d, 132.0 + 2 * d, 130.0 + 2 * d,
+                                 131.5 + 2 * d) for d in range(1, 13)]
+        pos = {"entry_date": rows[30]["d"], "entry_price": rows[30]["o"], "stop_price": 90.0}
+        self.assertIsNone(find_exit(rows, pos, None))
+
+    def test_sl_ist_mindestens_der_stopp(self):
+        from check_exits import exit_level
+        level, kind = exit_level(rising(45), 90.0)
+        self.assertGreaterEqual(level, 90.0)
+        self.assertIn(kind, ("Stopp", "letztes Swing-Tief"))
+
+    def test_depot_hoechstens_10_kaeufe(self):
+        import os
+        import tempfile
+        import check_exits
+        rows = rising(40)
+        market = {f"T{i}": {"ohlcv": rows, "source": "QQQ"} for i in range(12)}
+        alerts = [{"ticker": f"T{i}", "rank": i + 1, "stop_price": 120.0, "source": "QQQ"} for i in range(12)]
+        old = check_exits.DEPOT_FILE
+        with tempfile.TemporaryDirectory() as tmp:
+            check_exits.DEPOT_FILE = os.path.join(tmp, "live_depot.json")
+            try:
+                check_exits.depot_decisions(alerts, {}, market, rows[-1]["d"])
+            finally:
+                check_exits.DEPOT_FILE = old
+        self.assertEqual(sum(a["decision"] == "Kauf" for a in alerts), 10)
+        self.assertTrue(alerts[-1]["decision"].startswith("Kein Kauf"))

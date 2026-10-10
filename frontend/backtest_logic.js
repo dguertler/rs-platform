@@ -2,6 +2,11 @@
 
 const CAPITAL  = 10000;
 const MAX_RISK = 1000;
+// Zeitstopp: Liegt der Schlusskurs 10 Handelstage nach dem Einstieg nicht
+// mindestens 5 % über dem Einstiegskurs, wird zur nächsten Eröffnung verkauft
+// (Studie 10/2026 über alle Alpaca-Signale seit 2016: PF 2,60 → 3,23).
+const TIME_STOP_DAYS = 10;
+const TIME_STOP_MIN  = 0.05;
 
 // ── GWS-D Analyse ────────────────────────────────────────────────────────────────
 function analyzeStructure(ohlcv) {
@@ -259,7 +264,7 @@ function getWeekEnd(weekStartStr) {
 
 // ── Wochen-Rows vorberechnen ──────────────────────────────────────────────────────
 // from/to (optional): nur die Wochen mit diesem Index berechnen — die Schnitte
-// davor bleiben vollständig (B-DETAILS 2 rechnet so nur die Wochen um einen Trade).
+// davor bleiben vollständig (so lassen sich nur die Wochen um einen Trade rechnen).
 function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h, from = 0, to = ohlcv_w.length - 1) {
   return ohlcv_w.slice(from, to + 1).map((week, k) => {
     const i = from + k;
@@ -296,8 +301,9 @@ function recentSwingLowOf(barsBeforeEntry) {
 // Ausstiegssignal am Tagesschluss von dHistory[k]: GWS-D-Struktur (aus den
 // Kerzen davor) intakt und Schluss unter dem letzten Swing-Tief, oder Schluss
 // unter dem Stopp. Ausführung am nächsten Handelstag zur Eröffnung.
-function isExitDay(dHistory, k, stopPrice) {
+function isExitDay(dHistory, k, stopPrice, entry = null) {
   const day = dHistory[k];
+  if (entry && isTimeStop(dHistory, k, entry)) return true;
   const structBefore = analyzeStructure(dHistory.slice(0, k));
   if (structBefore && !structBefore.broken) {
     const swingLows = structBefore.swingLows ?? [];
@@ -305,6 +311,16 @@ function isExitDay(dHistory, k, stopPrice) {
     if (lastSL != null && day.c < lastSL.price) return true;
   }
   return stopPrice != null && day.c < stopPrice;
+}
+
+// Zeitstopp am Tagesschluss von dHistory[k] (Handelstage ab dem Einstiegstag gezählt)
+const _entryIdxCache = new WeakMap();
+function isTimeStop(dHistory, k, entry) {
+  // dHistory beginnt immer mit derselben ersten Tageskerze — der Index bleibt gleich
+  if (!_entryIdxCache.has(entry)) _entryIdxCache.set(entry, dHistory.findIndex(d => d.d >= entry.entryDate));
+  const idx = _entryIdxCache.get(entry);
+  return idx >= 0 && k - idx === TIME_STOP_DAYS
+    && dHistory[k].c < entry.entryPrice * (1 + TIME_STOP_MIN);
 }
 
 // Ein Trade ab festem Einstiegstag (z. B. ein verschickter Live-Alert): Kauf zur
@@ -324,7 +340,7 @@ function simulateFromEntry(ohlcv_d, entryDate) {
   const entry = { entryDate: entryBar.d, entryPrice, stopPrice, shares,
                   invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
   for (let k = entryIdx; k < ohlcv_d.length; k++) {
-    if (!isExitDay(ohlcv_d, k, stopPrice)) continue;
+    if (!isExitDay(ohlcv_d, k, stopPrice, entry)) continue;
     const next = ohlcv_d[k + 1];
     const exitPrice = next ? next.o : ohlcv_d[k].c;
     const pnl = (exitPrice - entryPrice) * shares;
@@ -432,7 +448,7 @@ function simulateTrades(weekRows, ohlcv_d, ticker, top20Hist, useTop20, mode = '
         if (day.d < entry.entryDate) continue;
         if (lastCheckedDay != null && day.d <= lastCheckedDay) continue;
 
-        if (!isExitDay(curr.dHistory, k, entry.stopPrice)) continue;
+        if (!isExitDay(curr.dHistory, k, entry.stopPrice, entry)) continue;
 
         const nextDay   = ohlcv_d.find(d => d.d > day.d);
         const exitPrice = nextDay ? nextDay.o : day.c;

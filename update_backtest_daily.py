@@ -11,6 +11,7 @@ import os, json, time
 import yfinance as yf
 import pandas as pd
 from rs_core import hourly_to_4h_rows
+from alpaca_live import fetch_4h_map
 from datetime import datetime, timedelta
 
 _REPO   = os.path.dirname(os.path.abspath(__file__))
@@ -157,26 +158,33 @@ def update_ticker(ticker):
                 data["ohlcv_w"].extend(added)
                 changed = True
 
-    # 4H: yfinance liefert max. 730 Tage → komplett neu laden und Fenster ersetzen
-    try:
-        raw_1h = yf.download(ticker, period="730d", interval="1h",
-                              prepost=True, auto_adjust=True, progress=False)
-        if not raw_1h.empty:
-            if isinstance(raw_1h.columns, pd.MultiIndex):
-                raw_1h.columns = raw_1h.columns.get_level_values(0)
-            # 4H-Bildung wie live (rs_core.hourly_to_4h_rows). Der Abruf deckt das
-            # ganze 730-Tage-Fenster ab — daher ersetzen statt über den Zeitstempel
-            # zu mischen: Verschiebt Yahoo das Stundenraster, lagen sonst zwei
-            # 4H-Raster übereinander (Sept. 2024 – Mai 2026 in fast allen Dateien).
-            new_rows = hourly_to_4h_rows(raw_1h)
-            if new_rows:
-                old_rows = data.get("ohlcv_4h", [])
-                merged = merge_4h(old_rows, new_rows)
-                if merged != old_rows:
-                    data["ohlcv_4h"] = merged
-                    changed = True
-    except Exception:
-        pass  # 4H-Fehler nicht kritisch
+    # 4H: bevorzugt Alpaca (wie Live und historischer Backtest) — das ganze
+    # 730-Tage-Fenster wird ersetzen. Nur ohne Alpaca-Daten weiter über Yahoo.
+    alpaca_rows = fetch_4h_map([ticker], days=730).get(ticker)
+    if alpaca_rows:
+        if alpaca_rows != data.get("ohlcv_4h"):
+            data["ohlcv_4h"] = alpaca_rows
+            changed = True
+    else:
+        try:
+            raw_1h = yf.download(ticker, period="730d", interval="1h",
+                                  prepost=True, auto_adjust=True, progress=False)
+            if not raw_1h.empty:
+                if isinstance(raw_1h.columns, pd.MultiIndex):
+                    raw_1h.columns = raw_1h.columns.get_level_values(0)
+                # 4H-Bildung wie live (rs_core.hourly_to_4h_rows). Der Abruf deckt das
+                # ganze 730-Tage-Fenster ab — daher ersetzen statt über den Zeitstempel
+                # zu mischen: Verschiebt Yahoo das Stundenraster, lagen sonst zwei
+                # 4H-Raster übereinander (Sept. 2024 – Mai 2026 in fast allen Dateien).
+                new_rows = hourly_to_4h_rows(raw_1h)
+                if new_rows:
+                    old_rows = data.get("ohlcv_4h", [])
+                    merged = merge_4h(old_rows, new_rows)
+                    if merged != old_rows:
+                        data["ohlcv_4h"] = merged
+                        changed = True
+        except Exception:
+            pass  # 4H-Fehler nicht kritisch
 
     # Rolling Window: älteste Kerzen jenseits des Fensters entfernen,
     # damit der Datenbestand trotz täglicher neuer Kerzen konstant bleibt.

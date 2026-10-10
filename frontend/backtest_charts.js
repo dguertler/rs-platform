@@ -1,5 +1,5 @@
-// Gemeinsame Chart-Bausteine für B-DETAILS (backtest.html) und B-DETAILS 2
-// (backtest_history_details.html). Wird als <script type="text/babel" src>
+// Gemeinsame Chart-Bausteine für B-DETAILS (backtest.html).
+// Wird als <script type="text/babel" src>
 // geladen; die React-Hooks (useState, useRef, …) deklariert die jeweilige Seite.
 
 function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {

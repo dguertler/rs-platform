@@ -19,7 +19,7 @@
  */
 const START_CAPITAL = 100000;
 const BASE_SLOT = 10000;
-const MAX_POSITIONS = 20;
+const MAX_POSITIONS = 10;            // höchstens 10 Positionen gleichzeitig (Studie 10/2026)
 const ENGINE_CAPITAL = 10000;
 
 /** Handelstage aus allen Kursreihen der gehandelten Symbole. */

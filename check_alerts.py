@@ -169,7 +169,7 @@ GRID_CLR  = '#1e293b'
 TEXT_CLR  = '#e2e8f0'
 
 
-def render_chart(ohlcv, ticker, timeframe, gws_price=None, n_candles=40):
+def render_chart(ohlcv, ticker, timeframe, gws_price=None, n_candles=40, stop_price=None):
     """Zeichnet einen Kerzenchart und gibt ihn als base64-PNG zurück."""
     if not ohlcv:
         return None
@@ -200,9 +200,14 @@ def render_chart(ohlcv, ticker, timeframe, gws_price=None, n_candles=40):
         ax.axhline(gws_price, color=GWS_CLR, linewidth=1.2, linestyle='--',
                    label=f'GWS  {gws_price:.2f}', zorder=3)
 
+    # Stopp-Linie (SL)
+    if stop_price:
+        ax.axhline(stop_price, color='#ef4444', linewidth=1.2, linestyle=':',
+                   label=f'SL  {stop_price:.2f}', zorder=3)
+
     # Achsen & Styling
-    all_h = [c['h'] for c in candles]
-    all_l = [c['l'] for c in candles]
+    all_h = [c['h'] for c in candles] + ([stop_price] if stop_price else [])
+    all_l = [c['l'] for c in candles] + ([stop_price] if stop_price else [])
     price_range = max(all_h) - min(all_l)
     pad = price_range * 0.06
     ax.set_xlim(-1, n)
@@ -225,9 +230,9 @@ def render_chart(ohlcv, ticker, timeframe, gws_price=None, n_candles=40):
                  color=TEXT_CLR, fontsize=10, pad=6, loc='left',
                  fontfamily='monospace')
 
-    if gws_price:
+    if gws_price or stop_price:
         legend = ax.legend(loc='upper left', facecolor=BG_PANEL,
-                           edgecolor=GRID_CLR, labelcolor=GWS_CLR, fontsize=8)
+                           edgecolor=GRID_CLR, labelcolor=TEXT_CLR, fontsize=8)
 
     buf = io.BytesIO()
     fig.tight_layout(pad=0.5)
@@ -241,10 +246,15 @@ def render_chart(ohlcv, ticker, timeframe, gws_price=None, n_candles=40):
 # ── E-Mail versenden ──────────────────────────────────────────────
 
 def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr,
-                     subject_override=None):
-    """Versendet eine HTML-E-Mail mit Alarmen und eingebetteten Charts."""
+                     subject_override=None, exits=(), sl_moves=()):
+    """Versendet eine HTML-E-Mail mit Breakouts (inkl. Charts), Verkäufen und
+    SL-Verschiebungen — alles untereinander in einer Mail."""
+    from check_exits import exit_rows_html, sl_rows_html
     today_str = datetime.now().strftime('%d.%m.%Y')
-    subject   = subject_override or f'Breakout-Alarm {today_str}: {len(alerts)} Aktie(n) auf 3 Punkte'
+    parts = ([f'{len(alerts)} Breakout(s)'] if alerts else []) \
+        + ([f'{len(exits)} Verkauf/Verkäufe'] if exits else []) \
+        + ([f'{len(sl_moves)} SL-Verschiebung(en)'] if sl_moves else [])
+    subject   = subject_override or f'Breakout-Alarm {today_str}: {", ".join(parts)}'
 
     msg = MIMEMultipart('related')
     msg['Subject'] = subject
@@ -260,7 +270,8 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
     Breakout-Alarm &mdash; {today_str}
   </h2>
   <p style="color:#64748b;margin:0 0 24px;font-size:12px">
-    Folgende Aktien haben heute den 3.&nbsp;GWS-Punkt erreicht (2&nbsp;&rarr;&nbsp;3):
+    {'Folgende Aktien haben heute den 3.&nbsp;GWS-Punkt erreicht (2&nbsp;&rarr;&nbsp;3):'
+     if alerts else 'Heute keine neuen Breakouts.'}
   </p>
 """]
 
@@ -355,16 +366,26 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                     f'margin:6px 0;border-radius:6px">\n'
                 )
 
-        # Einstieg und Stopp nach der Backtest-Regel: Kauf zur Eröffnung des
-        # Folgetages, Stopp beim letzten Swing-Tief minus Puffer.
+        # Kauf-Entscheidung (Modell-Depot, höchstens 10 Positionen), Einstieg und
+        # Stopp nach der Backtest-Regel: Kauf zur Eröffnung des Folgetages, Stopp
+        # beim letzten Swing-Tief minus Puffer, Zeitstopp nach 10 Handelstagen.
         stop_price = alert.get('stop_price')
-        if stop_price:
+        decision = alert.get('decision')
+        if decision or stop_price:
+            buy = decision == 'Kauf'
+            d_color = '#4ade80' if buy else ('#fbbf24' if decision else '#94a3b8')
+            d_text = (f'KAUF zur Eröffnung des nächsten Handelstages'
+                      f' ({alert.get("depot_count", "?")}/10 Plätze belegt)' if buy
+                      else (decision or 'Einstieg: Eröffnung des nächsten Handelstages'))
             html_parts.append(
                 f'    <div style="margin-top:10px;padding:8px 10px;background:#0b1220;'
-                f'border:1px solid #1e293b;border-radius:6px;font-size:12px;color:#94a3b8">'
-                f'Einstieg: Eröffnung des nächsten Handelstages&nbsp;&middot;&nbsp;'
-                f'Stopp: <strong style="color:#fca5a5">{stop_price:.2f}</strong>'
-                f'</div>\n'
+                f'border:1px solid #1e293b;border-left:3px solid {d_color};border-radius:6px;'
+                f'font-size:12px;color:#94a3b8;line-height:1.7">'
+                f'<strong style="color:{d_color}">{d_text}</strong><br>'
+                + (f'SL: <strong style="color:#fca5a5">{stop_price:.2f}</strong> (rote Linie im Chart)'
+                   f'&nbsp;&middot;&nbsp;Zeitstopp: nach 10 Handelstagen Schluss mind. +5 % über Einstieg'
+                   if stop_price else '')
+                + '</div>\n'
             )
 
         # "Analyse ansehen"-Button — öffnet die Bewertungsseite im Dashboard
@@ -381,6 +402,11 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
             )
 
         html_parts.append('  </div>\n')
+
+    if exits or sl_moves:
+        html_parts.append('  <h3 style="color:#fbbf24;margin:28px 0 12px">'
+                          'Watchlist: Verkäufe &amp; SL-Verschiebungen</h3>\n')
+        html_parts.append(exit_rows_html(exits) + sl_rows_html(sl_moves))
 
     html_parts.append("""
   <p style="font-size:10px;color:#334155;margin-top:24px">
@@ -643,7 +669,9 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte'
                   + (' [Wiederkehr]' if prev_points == 3 else ''))
 
-            # Charts: Weekly → Daily → 4H
+            stop_price = swing_low_stop(entry.get('ohlcv', []))
+
+            # Charts: Weekly → Daily → 4H (Daily und 4H mit SL-Linie)
             w_b64  = render_chart(
                 entry.get('ohlcv_w', []), ticker, 'Weekly (letzten 60 Kerzen)',
                 gws_price=info['struct_w']['gws_price'] if info['struct_w'] else None,
@@ -652,12 +680,12 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             d_b64  = render_chart(
                 entry.get('ohlcv', []), ticker, 'Daily (letzten 60 Kerzen)',
                 gws_price=info['struct_d']['gws_price'] if info['struct_d'] else None,
-                n_candles=60
+                n_candles=60, stop_price=stop_price
             )
             h4_b64 = render_chart(
                 entry.get('ohlcv_4h', []), ticker, '4H (letzten 60 Kerzen)',
                 gws_price=info['struct_4h']['gws_price'] if info['struct_4h'] else None,
-                n_candles=60
+                n_candles=60, stop_price=stop_price
             )
             charts = []
             if w_b64:  charts.append((w_b64,  'Weekly'))
@@ -678,7 +706,8 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
                 'daily_bar_date':  cur_d_date,
                 'h4_bar_date':     cur_h4_date,
                 'in_top20':        ticker in top20_set,
-                'stop_price':      swing_low_stop(entry.get('ohlcv', [])),
+                'stop_price':      stop_price,
+                'rank':            entry.get('prev_rank'),
             })
 
     return new_states, alerts
@@ -854,18 +883,14 @@ def main():
     tg_token   = os.environ.get('TELEGRAM_TOKEN', '')
     tg_chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
 
+    # Modell-Depot (höchstens 10 Positionen): Kauf oder kein Kauf je Breakout
+    import check_exits
+    market = check_exits.load_market_data()
     if report_alerts:
-        send_alert_email(report_alerts, smtp_host, smtp_port,
-                         smtp_user, smtp_pass, to_addr)
-        if tg_token:
-            from telegram_handler import send_breakout_telegram, resolve_recipients
-            tg_recipients = resolve_recipients(tg_chat_id)
-            if tg_recipients:
-                print(f'Telegram-Empfaenger: {len(tg_recipients)}')
-                for a in report_alerts:
-                    send_breakout_telegram(tg_token, tg_recipients, a)
-        # Letzte verschickte Charge persistieren (für Willkommens-Nachreichung)
-        save_last_breakout_batch(report_alerts)
+        check_exits.depot_decisions(report_alerts, signals, market, today_str)
+        for a in report_alerts:
+            print(f"  {a['ticker']}: {a.get('decision')}  SL {a.get('stop_price')}")
+
     if fresh_alerts:
         for a in fresh_alerts:
             alerted[a['ticker']] = today_str
@@ -907,6 +932,23 @@ def main():
             print(f'Rating-Generierung fehlgeschlagen (nicht kritisch): {_e}')
     else:
         print('Keine neuen 2→3-Übergänge heute.')
+
+    # Watchlist: Verkäufe und SL-Verschiebungen (inkl. neuer 4H-Signale von heute)
+    exits, sl_moves = check_exits.process_watchlist(market, signals)
+
+    if report_alerts or exits or sl_moves:
+        send_alert_email(report_alerts, smtp_host, smtp_port,
+                         smtp_user, smtp_pass, to_addr, exits=exits, sl_moves=sl_moves)
+    if report_alerts:
+        if tg_token:
+            from telegram_handler import send_breakout_telegram, resolve_recipients
+            tg_recipients = resolve_recipients(tg_chat_id)
+            if tg_recipients:
+                print(f'Telegram-Empfaenger: {len(tg_recipients)}')
+                for a in report_alerts:
+                    send_breakout_telegram(tg_token, tg_recipients, a)
+        # Letzte verschickte Charge persistieren (für Willkommens-Nachreichung)
+        save_last_breakout_batch(report_alerts)
 
     # Zustand speichern
     state['states']  = all_new_states

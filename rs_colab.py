@@ -281,10 +281,13 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         print(f"  Fehler 4H {ticker}: {e}")
         return []
 
+# 4H aus Alpaca (wie der Backtest); Yahoo nur, wo Alpaca nichts liefert
+from alpaca_live import fetch_4h_map
+_alpaca_4h = fetch_4h_map(all_tickers_list, days=60)
 ohlcv_4h_map = {}
 for i, ticker in enumerate(all_tickers_list):
     print(f"  4H [{i+1}/{len(all_tickers_list)}] {ticker}...", end=" ")
-    data_4h = extract_ohlcv_4h(ticker)
+    data_4h = _alpaca_4h.get(ticker) or extract_ohlcv_4h(ticker)
     ohlcv_4h_map[ticker] = data_4h
     print(f"{len(data_4h)} Kerzen")
 

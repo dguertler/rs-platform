@@ -8,7 +8,8 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261009c"></script>
+  <script src="backtest_logic.js?v=20261010"></script>
+  <script type="text/babel" src="live_alerts_panel.js?v=20261010"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; min-height: 100vh; }
@@ -21,6 +22,9 @@
     .nav-switch.active { border-color:#f59e0b; color:#fbbf24; background:#1a1a0a; }
     table { border-collapse: collapse; width: 100%; }
     th { position: sticky; top: 0; background: #0d1526; z-index: 10; }
+    .card { background: #0d1526; border: 1px solid #1e293b; border-radius: 8px; padding: 12px 18px; }
+    .note { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+    .note b { color: #e2e8f0; }
     tr.data-row { cursor: pointer; transition: background .1s; }
     tr.data-row:hover { background: #1a2540 !important; }
     tr.data-row:nth-child(even) { background: #080e1c; }
@@ -34,10 +38,9 @@
   <a href="smallcap.html"        class="nav-switch">SC600</a>
   <a href="backtest_overview.html" class="nav-switch active">B-ÜBERSICHT</a>
   <a href="backtest.html"         class="nav-switch">B-DETAILS</a>
-  <a href="backtest_history.html" class="nav-switch">B-HISTORIE</a>
-  <a href="backtest_history_details.html" class="nav-switch">B-DETAILS 2</a>
   <a href="v2.html" class="nav-switch" style="border-color:#22c55e;color:#4ade80;">RS-Platform 2.0</a>
 </div>
+<div id="live-root"></div>
 <div id="root"></div>
 
 <script>

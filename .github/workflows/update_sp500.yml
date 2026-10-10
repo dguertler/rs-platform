@@ -51,12 +51,16 @@ jobs:
         if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
         run: python sp500_colab_1.py
 
       - name: Teil 2 laden (Tech, Comm, Utilities, Real Estate, Materials)
         if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
         run: python sp500_colab_2.py
 
       - name: Daten zusammenführen

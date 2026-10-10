@@ -198,10 +198,13 @@ def extract_ohlcv_4h(ticker, n_candles=3000):
         return []
 
 print(f"\n4H OHLCV ({len(all_tickers_list)} Ticker)...")
+# 4H aus Alpaca (wie der Backtest); Yahoo nur, wo Alpaca nichts liefert
+from alpaca_live import fetch_4h_map
+_alpaca_4h = fetch_4h_map(all_tickers_list, days=60)
 ohlcv_4h_map = {}
 for i, ticker in enumerate(all_tickers_list):
     print(f"  4H [{i+1}/{len(all_tickers_list)}] {ticker}...", end=" ", flush=True)
-    ohlcv_4h_map[ticker] = extract_ohlcv_4h(ticker)
+    ohlcv_4h_map[ticker] = _alpaca_4h.get(ticker) or extract_ohlcv_4h(ticker)
     print(f"{len(ohlcv_4h_map[ticker])} Kerzen")
 
 print("\nHistorisches tägliches Ranking (Teil 1)...")

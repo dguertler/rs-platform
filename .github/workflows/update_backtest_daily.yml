@@ -36,6 +36,9 @@ jobs:
         run: python repair_backtest_splits.py --refetch
 
       - name: Backtest inkrementell aktualisieren
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
         run: python update_backtest_daily.py
 
       # Echte Live-Bilanz aus den verschickten Alerts (braucht die volle Git-Historie)

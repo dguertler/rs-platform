@@ -173,6 +173,10 @@ def send_breakout_telegram(token, chat_id, alert):
         f'RS-Score: <b>{score_str}</b>\n'
         f'W {w_dot}  D {d_dot}  4H {h4_dot}\n'
     )
+    if alert.get('decision'):
+        stop = alert.get('stop_price')
+        header += (f'<b>{_esc(alert["decision"])}</b>'
+                   + (f' · SL <b>{stop:.2f}</b>' if stop else '') + '\n')
 
     charts = alert.get('charts', [])
     for cid in recipients:

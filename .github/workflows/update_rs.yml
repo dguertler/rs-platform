@@ -54,6 +54,8 @@ jobs:
         if: steps.freshness.outputs.fresh != 'true' || inputs.force
         env:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
         run: python rs_colab.py
 
       - name: JSON nach data/ verschieben und committen
