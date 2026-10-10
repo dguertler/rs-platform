@@ -76,7 +76,7 @@ const pct = (v, d = 1) => v == null ? '–' : (v >= 0 ? '+' : '') + num(v, d) + 
 const eur = v => v == null ? '–' : (v >= 0 ? '+' : '−') + Math.round(Math.abs(v)).toLocaleString('de-DE') + ' €';
 const price = v => v == null ? '–' : num(v, v >= 1 ? 2 : 4);
 const VARIANT = 'live4h';                      // Live-Logik mit 4H ab 2016
-const WEEKS_BEFORE = 26, WEEKS_AFTER = 6;     // Wochentabelle: ab 26 Wochen vor dem Trade bis zum nächsten Trade (beim letzten bis heute)
+const WEEKS_BEFORE = 26, WEEKS_AFTER = 6;     // Wochentabelle: ab Januar des Vorjahres (mind. 26 Wochen vor dem Trade) bis zum nächsten Trade (beim letzten bis heute)
 const toBar = a => ({ d: a[0], o: a[1], h: a[2], l: a[3], c: a[4] });
 
 /** Kurse aus dem historischen Lauf (vollständig, wie die Engine sie sieht), sonst Live-Backtest-Datei ab 2022. */
@@ -248,7 +248,11 @@ function App() {
     // bis kurz vor den nächsten Trade, beim letzten Trade bis zum Datenende
     const later = trades.filter(t => t.entryDate > selected.entryDate);
     const end = later.length ? Math.max(b, signalWeekIdx(prices.w, later[0]) - 1) : prices.w.length - 1;
-    return buildWeekRows(prices.w, prices.d, prices.h, Math.max(0, a - WEEKS_BEFORE), Math.min(prices.w.length - 1, end, b + 156));
+    // Beginn: Januar des Vorjahres, mindestens aber 26 Wochen vor dem Signal
+    const prevYear = String(Number(selected.entryDate.slice(0, 4)) - 1);
+    const jan = prices.w.findIndex(x => x.d.slice(0, 4) >= prevYear);
+    const from = Math.max(0, Math.min(a - WEEKS_BEFORE, jan < 0 ? a - WEEKS_BEFORE : jan));
+    return buildWeekRows(prices.w, prices.d, prices.h, from, Math.min(prices.w.length - 1, end, b + 156));
   }, [prices, selected, variant, trades]);
 
   useEffect(() => {
@@ -294,7 +298,7 @@ function App() {
       <div style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Historischer Backtest · Trades je Aktie prüfen</div>
       <div className="note" style={{ marginBottom: 14 }}>
         Alle Trades einer Aktie aus <a href="backtest_history.html" style={{ color: '#93c5fd' }}>B-HISTORIE</a>. Trade anklicken:
-        die Wochentabelle zeigt die Wochen ab einem halben Jahr vor dem Trade bis zum nächsten Trade (beim letzten bis heute) mit den GWS-Punkten W / D / 4H, so wie die Engine sie zu
+        die Wochentabelle zeigt die Wochen ab Januar des Vorjahres (mindestens ein halbes Jahr vor dem Trade) bis zum nächsten Trade (beim letzten bis heute) mit den GWS-Punkten W / D / 4H, so wie die Engine sie zu
         diesem Zeitpunkt sah; Woche anklicken für Weekly-, Daily- und 4H-Chart mit Struktur. Einstieg zur Eröffnung nach
         dem Signal, Stopp am letzten Swing-Tief × 0,99.
         {' '}Live-Logik: Einstieg bei 3 von 3 Punkten (Weekly, Daily, 4H), ausgelöst über 4H.
