@@ -301,6 +301,8 @@ def collect_new_positions(watchlist, market, signals, positions, closed):
         if closed.get(key) == latest["signal_date"]:
             continue
         entry = derive_entry(market[ticker]["ohlcv"], latest["signal_date"])
+        if entry and latest.get("entry_price"):     # 4H-Prüfjob: Kauf im Tagesverlauf
+            entry["entry_price"] = latest["entry_price"]
         if not entry:
             pending.append(f"{key} ({latest['signal_date']})")
             continue
@@ -451,6 +453,9 @@ def depot_decisions(alerts, signals, market, today):
             a["decision"] = "Kauf"
             positions[key] = {"ticker": a["ticker"], "source": a.get("source", ""), "signal_date": today,
                               "entry_price": None, "stop_price": a.get("stop_price")}
+            if a.get("entry_price"):      # 4H-Prüfjob: Kauf sofort, nicht erst zur Tageseröffnung
+                positions[key].update(entry_date=today, entry_price=a["entry_price"],
+                                      entry_time=a.get("entry_time"))
         else:
             a["decision"] = f"Kein Kauf – {MAX_POSITIONS} von {MAX_POSITIONS} Plätzen belegt"
         a["depot_count"] = len(positions)

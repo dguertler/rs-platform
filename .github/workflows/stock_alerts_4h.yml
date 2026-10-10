@@ -1,0 +1,76 @@
+name: 4H-Breakout-Alarm (nach Kerzenschluss 14 und 18 Uhr)
+
+permissions:
+  contents: write
+
+# Die 4H-Kerzen laufen wie bei TradingView ab 10, 14, 18 und 22 Uhr Berliner
+# Zeit. Dieser Job prüft 20 Minuten nach dem Schluss der Kerzen 10–14 und
+# 14–18 Uhr (Alpaca-SIP ist 16 Minuten verzögert) und schickt bei einem neuen
+# Breakout sofort die Kaufmail. Die Kerzen schließen um 12/16 Uhr UTC
+# (US-Sommerzeit) bzw. 13/17 Uhr UTC (US-Winterzeit) — beide Zeiten laufen,
+# das Skript erkennt selbst, ob gerade eine Kerze geschlossen hat.
+# Kerzen, die um 22 bzw. 2 Uhr schließen, meldet der Nachtlauf (stock_alerts.yml).
+on:
+  schedule:
+    - cron: '20 12,13,16,17 * * 1-5'
+  workflow_dispatch:
+
+concurrency:
+  group: breakout-alerts
+  cancel-in-progress: false
+
+jobs:
+  check-alerts-4h:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas matplotlib deep-translator requests
+
+      - name: Zustandsdateien bereitstellen
+        run: cp data/signals.json . 2>/dev/null || true
+
+      - name: 4H-Prüfung
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+          SMTP_HOST:         ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:         ${{ secrets.SMTP_PORT }}
+          SMTP_USER:         ${{ secrets.SMTP_USER }}
+          SMTP_PASS:         ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO:    ${{ secrets.ALERT_EMAIL_TO }}
+          FRONTEND_URL:      ${{ secrets.FRONTEND_URL }}
+          TELEGRAM_TOKEN:    ${{ secrets.TELEGRAM_TOKEN }}
+          TELEGRAM_CHAT_ID:  ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python check_alerts_4h.py
+
+      - name: Zustand committen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          [ -f signals.json ] && mv signals.json data/signals.json || true
+          for f in alerts_state.json data/signals.json data/live_depot.json data/intraday_alert_state.json; do [ -f "$f" ] && git add "$f"; done; true
+          git diff --staged --quiet || git commit -m "4H-Breakout: Alert-Zustand und Depot aktualisiert"
+          git pull --rebase origin master
+          git push origin master
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "4H-Breakout-Alarm (stock_alerts_4h.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py

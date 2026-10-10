@@ -20,6 +20,11 @@ on:
         default: ''
         type: string
 
+# gemeinsam mit stock_alerts_4h.yml: nie zwei Alert-Läufe gleichzeitig (Zustand, Depot)
+concurrency:
+  group: breakout-alerts
+  cancel-in-progress: false
+
 jobs:
   check-alerts:
     runs-on: ubuntu-latest
@@ -71,6 +76,7 @@ jobs:
           [ -d data/ratings ] && git add data/ratings/ || true
           for f in data/open_signals.json data/live_depot.json; do [ -f "$f" ] && git add "$f"; done; true
           git diff --staged --quiet || git commit -m "Alert-Zustand, Depot, offene Signale + KI-Ratings aktualisiert"
+          git pull --rebase origin master
           git push origin master
 
       - name: Fehler-Mail senden

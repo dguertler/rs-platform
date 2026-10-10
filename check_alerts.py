@@ -374,7 +374,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
         if decision or stop_price:
             buy = decision == 'Kauf'
             d_color = '#4ade80' if buy else ('#fbbf24' if decision else '#94a3b8')
-            d_text = (f'KAUF zur Eröffnung des nächsten Handelstages'
+            d_text = (f'{alert.get("buy_text") or "KAUF zur Eröffnung des nächsten Handelstages"}'
                       f' ({alert.get("depot_count", "?")}/10 Plätze belegt)' if buy
                       else (decision or 'Einstieg: Eröffnung des nächsten Handelstages'))
             html_parts.append(
