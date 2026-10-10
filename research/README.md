@@ -151,3 +151,28 @@ Verwendung für freies Cash, kein Ersatz für Halten. Derselbe RSI(2)-Ansatz auf
 10,6 % CAGR bei 18 % Investitionsgrad, siehe D5 oben). Einzelaktien prallen nach
 Rücksetzern stärker zurück als der Index. Der Drawdown-Kauf ab −10 % hat 2008
 nicht geschützt (−51 %).
+
+## Ergänzung: klassische Swing-Setups (`swing_setups.py`)
+
+Sechs gängige Swing-Setups auf den Top-20-Titeln, gleiche Depot-Simulation wie oben.
+Jedes Setup läuft allein (10 Plätze) und auf den freien Plätzen des Breakout-Depots
+(A2, Breakouts haben Vorrang). Aufruf: `cd research && python3 swing_setups.py`.
+
+| Setup | allein 2016–26 | allein 2008–15 | + Breakout 2016–21 | + Breakout 2022–26 | robust? |
+|---|---|---|---|---|---|
+| A2 Breakout heute (Referenz) | 15,1 % | – | 11,0 % | 21,0 % | – |
+| S1 Pullback an die 21-EMA + Umkehrkerze, Ziel 2R | 8,7 % | 1,3 % | 13,0 % | 18,8 % | nein |
+| S2 Schluss unter unterem Bollinger-Band (über 200T), Verkauf über 20T-Linie | 4,4 % | 5,0 % | 14,1 % | **29,8 %** | **ja** (93 % / 97 % der Läufe besser als A2) |
+| S3 NR7-/Inside-Day-Ausbruch, Ziel 3R | 7,7 % | 2,2 % | 14,9 % | 10,2 % | nein |
+| S4 Momentum-Burst ≥ 4 %, 5 Tage halten | 1,3 % | 0,6 % | 16,0 % | 19,8 % | nein |
+| S5 EMA-9/21-Kreuzung, Verkauf unter 21-EMA | 8,5 % | 6,7 % | 14,2 % | 21,8 % | nein (Test: nur 17 % der Läufe besser) |
+| S6 3 rote Tage + Ausbruch über Vortageshoch, Ziel 2R | 7,8 % | −0,4 % | 14,4 % | 19,9 % | nein |
+| D5 RSI(2) < 10 (Referenz) | 10,6 % | 8,1 % | 13,4 % | 28,5 % | **ja** (100 % / 87 %) |
+
+Befund: Allein schlägt kein Swing-Setup den Index. Die trendfolgenden Setups (S1, S3,
+S4, S6) kaufen fast dieselben Situationen wie der 4H-Breakout. Sie bringen als
+Ergänzung wenig, und ihr Vorteil verschwindet in mindestens einem Zeitraum.
+Robust sind nur die beiden **Rücksetzer-Setups (S2 Bollinger, D5 RSI-2)**. Sie
+kaufen, wenn ein starker Titel kurz überverkauft ist, also genau dann, wenn keine
+Breakouts kommen. So füllen sie die freien Plätze mit einem anderen Ertragsmuster.
+D5 hält den Rückgang dabei niedriger (Median 2016–21: −24 % gegenüber −33 % bei S2).
