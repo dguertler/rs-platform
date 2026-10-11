@@ -188,3 +188,9 @@ Depot-Test stehen in `TRADE_PATTERNS.md`. Aufruf: `python3 research/trade_patter
 Funktioniert ein Doppelboden-Einstieg als Alternative zum Breakout, und welche Bedingungen bringen
 die Trefferquote Richtung 60 %? Ergebnisse und Regelsätze stehen in `DOUBLE_BOTTOM.md`.
 Aufruf: `python3 research/double_bottom.py`.
+
+## Ergänzung: Strategie-Loops „Nasdaq schlagen“ (`STRATEGY_LOOPS.md`)
+
+Gesucht war in vier Loops eine Variante mit PF ≥ 3, die den Nasdaq-100 schlägt. Das Ziel ist nur
+für 2016–26 erreicht, für 2008–15 nicht; die ehrlich beste Variante ist R4B (`loops/r4b.py`).
+Prüfstand: `loop_harness.py`.
