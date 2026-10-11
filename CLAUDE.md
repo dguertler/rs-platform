@@ -171,6 +171,29 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/backtest_ndx.json` | NASDAQ-100-Backtest seit 2016 für B-ÜBERSICHT (Jahrestabelle NASDAQ-100 / Rendite / Gewinn / PF, Depot 100.000 €, 10 Plätze) und Grundlage der Trades auf B-DETAILS: **zeitpunktgenau wie live** (`simulateTradesPIT` in `frontend/backtest_logic.js`: Signal an jedem 4H-Kerzenschluss mit Wochen-/Tageskerze nur bis jetzt, Kauf zur nächsten 4H-Kerze bzw. 10 Uhr am nächsten Handelstag). Kurse = historischer Lauf (`backtest_history/charts`) + tägliche `backtest_TICKER.json`, Top 20 danach aus `rs_full.json`. Die frühere Wochenzeilen-Rechnung (`simulateTrades`) prüfte die Punkte erst zum Wochenschluss und buchte den Kauf rückwirkend (Vorgriff) — nicht mehr für die Seiten verwenden | Täglich mit `update_backtest_daily.yml` (`node backtest_ndx.js`) |
 | `data/live_alerts.json` / `data/live_alerts_performance.json` | Echte Live-Bilanz: alle protokollierten Breakout-Alerts mit Kennzeichen, ob sie verschickt wurden (Top 20 zum Versandzeitpunkt, aus der Git-Historie bzw. seit 09/2026 aus `in_top20` in `signals.json`), und jeder verschickte Alert als Trade (Kauf zur Eröffnung am Alert-Tag, Stopp/Ausstieg wie Backtest-Engine) — Anzeige oben auf `frontend/backtest_overview.html` (B-ÜBERSICHT, `frontend/live_alerts_panel.js`) | Täglich mit `update_backtest_daily.yml` (`live_alerts/reconstruct_alerts.py` + `live_alerts/evaluate_alerts.js`) |
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
+| `data/reference_trades.json` | Freigegebene Referenz-Trades (Signal-Kerze, Kauf, Ausstiegstag + Begründung) — Regressionsschutz für Logik-Änderungen, siehe „Referenz-Trades“ | Manuell, nur auf Freigabe des Nutzers |
+
+## Referenz-Trades (Regressionsschutz)
+
+`data/reference_trades.json` enthält vom Nutzer freigegebene, „perfekte“ Trades.
+Anpassungen an der Logik dürfen an diesen Trades nichts ändern.
+
+- **Prüfen — PFLICHT** vor und nach jeder Änderung an Signal-/Ausstiegslogik
+  (`frontend/backtest_logic.js`, `check_exits.py`, `check_alerts*.py`, `gws_core.py`,
+  `backtest_ndx.js`) und bei jedem Berechnungslauf für mögliche Anpassungen
+  (Studien, Parameter-Varianten):
+  ```bash
+  python3 -m unittest test_reference_trades   # Backtest-Engine + Live-Verkaufsprüfung
+  node check_reference_trades.js              # nur Backtest-Engine, mit Klartext je Trade
+  ```
+  Eine Variante, die einen Referenz-Trade verändert, gilt als abgelehnt bzw. muss
+  dem Nutzer mit genau dieser Abweichung vorgelegt werden.
+- **Geprüft wird:** Signal in derselben 4H-Kerze, Kauf zur selben Kerze, Ausstieg am
+  freigegebenen Tag (Verkauf am Signaltag oder zur Eröffnung des nächsten
+  Handelstages) — in der Engine und in `check_exits.find_exit`.
+- **Neue Referenz-Trades** nur auf ausdrückliche Freigabe des Nutzers eintragen
+  (`id`, `ticker`, `approved`, `setup`, `entry.signal_bar/date/time`,
+  `exit.signal_date/reason`); Kurse nicht eintragen (Splits verschieben sie).
 
 ## Batch-Empfehlung
 
