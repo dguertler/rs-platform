@@ -79,6 +79,35 @@ darunter liegt. Die übrigen Käufe kommen spät (Median gut zwei Wochen nach de
 mit weitem Stopp (6–8 %) und schwächerem PF. Die Trefferquote steigt zwar auf rund 50 %,
 die Gewinner fallen aber kleiner aus (Ø +8,6 bis +9,6 %).
 
+## Variante Muster AVGO 05.06.2024 (`MODE=re`)
+
+Beispiel AVGO KW20/2024: Weekly bricht aus, alles grün. Danach läuft 4H zurück (4H rot),
+das Tief des Retracements (127,21, splitbereinigt) bleibt über dem Daily-Swing-Tief vor dem
+Daily-Ausbruch (125,8). Am 05.06.2024 schließt die 14-Uhr-Kerze über dem letzten Hoch des
+Retracements. **Diesen Einstieg liefert die heutige Engine bereits:** Signal 05.06. 14:00,
+Kauf 18:00 zu 136,34. Im Depot fiel er nur weg, weil alle 10 Plätze belegt waren. In KW20
+gab es kein Signal, weil 4H damals nicht neu auf grün sprang.
+
+Aufteilung der heutigen Signale: **Muster** = vorher 3/3 grün, dann 4H rot, Retracement-Tief
+über dem Daily-Swing-Tief vor dem Daily-Ausbruch, dann 4H wieder grün. **Rest** = alle
+übrigen 4H-Sprünge auf grün (z. B. 4H war schon rot, bevor Woche und Tag grün wurden).
+
+| Signale | Stopp | Anzahl | PF je Signal | PF ohne Top 1 % | Ø Trade | PF 2016–20 | PF 2021–26 | Depot | 2016–25 |
+|---|---|---|---|---|---|---|---|---|---|
+| alle (heute) | Tag | 1341 | 1,90 | 1,20 | +2,4 % | 1,95 | 1,86 | 464.413 € | ×2,32 |
+| nur Muster | Tag | 1213 | 1,93 | 1,20 | +2,4 % | 1,99 | 1,89 | 515.173 € | ×2,46 |
+| nur Rest | Tag | 233 | 2,37 | 1,53 | +4,1 % | 1,35 | 3,04 | 191.936 € | ×1,42 |
+| alle | 4H | 1383 | 1,92 | 1,22 | +2,3 % | 1,88 | 1,95 | 540.013 € | ×2,53 |
+| nur Muster | 4H (Retracement-Tief) | 1243 | 1,91 | 1,20 | +2,3 % | 1,92 | 1,91 | 594.448 € | ×2,88 |
+| nur Rest | 4H | 245 | 2,55 | 1,69 | +4,0 % | 1,52 | 3,39 | 220.105 € | ×1,59 |
+
+- Rund 85 % der heutigen Signale sind schon dieses Muster. Je Trade sind sie **nicht besser**
+  als der Durchschnitt (PF 1,93 zu 1,90). Der Rest ist je Trade sogar stärker, aber selten.
+- Die höheren Depotwerte für „nur Muster“ sind Zufall der Platzvergabe: Mit der Grenze von
+  60 4H-Kerzen Retracement-Dauer sinkt der Wert auf 325.539 €, weil ein einzelner MU-Trade
+  (+702 %) keinen Platz bekommt. Die Kennzahlen je Signal ändern sich dabei kaum.
+- Den Rest wegzulassen bringt also nichts. Die Engine handelt das Muster bereits.
+
 **Kandidat:** pb 2 %, 40 Kerzen Wartezeit. Vor einer Umstellung offen:
 - Robustheitslauf mit zufällig weggelassenen Signalen (wie in `README.md`)
 - Prüfen, ob Weekly und Daily beim Kauf noch grün sein müssen

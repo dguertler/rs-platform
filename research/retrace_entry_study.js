@@ -9,6 +9,11 @@
 //               kein 4H-Tief unter dem Daily-Low des Bruchs (DL=signal: Tageskerze des
 //               Signaltags, DL=breakout: Tageskerze des Daily-Ausbruchs); Kauf, wenn ein
 //               4H-Schluss über dem letzten Hoch des Retracements (neue 4H-Marke) liegt
+//   MODE=re     Signal wie live, aufgeteilt nach Muster (AVGO 05.06.2024): vorher 3/3 grün,
+//               dann 4H rot (Retracement, höchstens MAXRED 4H-Kerzen), Tief des Retracements
+//               über dem Daily-Swing-Tief vor dem Daily-Ausbruch, dann 4H wieder grün.
+//               FILTER=re (nur Muster) | other (nur der Rest) | all; STOP=d (Engine) | h4
+//               (Retracement-Tief × 0,99, 4H-Prüfung)
 //   MODE=pb     Schluss mind. PB % unter dem höchsten Schluss seit dem Signal, danach
 //               4H-Schluss über dem Hoch der Vorkerze → Kauf zur nächsten 4H-Kerze
 // Stopp: tiefstes 4H-Tief seit dem Signal × 0,99 (now: letztes 4H-Swing-Tief × 0,99),
@@ -21,7 +26,9 @@ const MODE = process.env.MODE || 'now';
 const PB = +(process.env.PB || 3) / 100;
 const WAIT = +(process.env.WAIT || 20);
 const DL = process.env.DL || 'signal';
-const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0, noRetrace: 0 };
+const FILTER = process.env.FILTER || 'all', STOP = process.env.STOP || 'd';
+const MAXRED = +(process.env.MAXRED || 60);
+const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0, noRetrace: 0, re: 0, other: 0 };
 
 const src = fs.readFileSync(path.join(ROOT, 'backtest_ndx.js'), 'utf8')
   .replace("const ROOT = __dirname;", `const ROOT = ${JSON.stringify(ROOT)};`)
@@ -39,6 +46,33 @@ function buyBar(h, j) {
     while (k < h.length && h[k].d.slice(0, 10) <= day) k++;
   }
   return k < h.length ? k : -1;
+}
+
+// Tageskerzen, wie sie zum Schluss der 4H-Kerze j vorlagen (wie simulateTradesPIT)
+function dHistoryAt(h, j, ohlcv_d, dIdx) {
+  const bar = h[j], day = bar.d.slice(0, 10), i = dIdx.get(day);
+  if (i == null) return null;
+  const blk = h4Block(bar.d);
+  if (blk === 0) return ohlcv_d.slice(0, i);
+  if (blk === 1) {
+    const db = ohlcv_d[i];
+    return ohlcv_d.slice(0, i).concat([{ d: day, o: db.o, h: Math.max(db.o, bar.h), l: Math.min(db.o, bar.l), c: bar.c }]);
+  }
+  return ohlcv_d.slice(0, i + 1);
+}
+
+// Muster: 3/3 grün → 4H rot (Retracement) über dem Daily-Swing-Tief → 4H grün in Kerze j.
+// Liefert die erste rote Kerze r oder -1
+function retraceStart(h, j, { p4, ohlcv_w, ohlcv_d, dIdx }) {
+  let r = j - 1;
+  while (r > 0 && p4[r - 1] === 0) r--;
+  if (p4[r - 1] !== 1 || j - r > MAXRED) return -1;
+  const dh = dHistoryAt(h, r - 1, ohlcv_d, dIdx);
+  if (!dh || dh.length < 30) return -1;
+  const sd = analyzeStructure(dh);
+  if (!sd?.broken || !analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dh), dh)?.broken) return -1;
+  const dailyLow = recentSwingLowOf(dh.slice(0, sd.breakoutIdx));
+  return dailyLow != null && lowest(h, r, j) >= dailyLow ? r : -1;
 }
 
 function lowest(h, a, b) {
@@ -84,6 +118,14 @@ function findEntry(h, j, ctx) {
   const k0 = buyBar(h, j);
   if (k0 < 0) return null;
   if (MODE === 'tw') return findTrendChangeEntry(h, j, ctx);
+  if (MODE === 're') {
+    const r = retraceStart(h, j, ctx);
+    stats[r >= 0 ? 're' : 'other']++;
+    if ((FILTER === 're' && r < 0) || (FILTER === 'other' && r >= 0)) return null;
+    if (STOP === 'd') return { hStart: k0, entryPrice: h[k0].o, daily: true };
+    const sl = r >= 0 ? lowest(h, r, j) : recentSwingLowOf(h.slice(0, k0));
+    return sl == null ? null : { hStart: k0, entryPrice: h[k0].o, stopPrice: sl * 0.99 };
+  }
   if (MODE === 'now') {
     const sl = recentSwingLowOf(h.slice(0, k0));
     return sl == null ? null : { hStart: k0, entryPrice: h[k0].o, stopPrice: sl * 0.99 };
@@ -172,12 +214,14 @@ globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
     if (!analyzeStructure(dHistory)?.broken) continue;
     if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
     stats.signals++;
-    const e = findEntry(h, j, { p4, ohlcv_d, dIdx, dHistory });
+    const e = findEntry(h, j, { p4, ohlcv_w, ohlcv_d, dIdx, dHistory });
     if (e?.resolved != null) pendingUntil = e.resolved;
     if (!e || e.hStart == null) continue;
     const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
-    const t = tradeH4(ohlcv_d, h, e.hStart, e.entryPrice, e.stopPrice,
-      { signalBar: bar.d, signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) });
+    const extra = { signalBar: bar.d, signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) };
+    const t = e.daily
+      ? tradeFromEntry(ohlcv_d, h[e.hStart].d.slice(0, 10), e.entryPrice, { ...extra, entryTime: h[e.hStart].d.slice(11, 16) })
+      : tradeH4(ohlcv_d, h, e.hStart, e.entryPrice, e.stopPrice, extra);
     if (!t) continue;
     stats.entered++;
     trades.push(t);
@@ -192,7 +236,7 @@ globalThis.__report = () => {
   const avg = (a, f) => a.reduce((s, t) => s + f(t), 0) / (a.length || 1);
   const dist = T.map(t => (t.entryPrice - t.stopPrice) / t.entryPrice * 100).sort((a, b) => a - b);
   const grow = (a, b) => { let f = 1; for (let y = a; y <= b; y++) f *= 1 + (r.years[y]?.returnPct ?? 0) / 100; return f.toFixed(2); };
-  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT, dl: MODE === 'tw' ? DL : undefined,
+  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT, dl: MODE === 'tw' ? DL : undefined, filter: MODE === 're' ? FILTER : undefined, stop: MODE === 're' ? STOP : undefined, maxRed: MODE === 're' ? MAXRED : undefined,
     ...stats, depot: r.depot.endEquity, cagr: r.depot.cagr, pf: r.depot.profitFactor, maxDD: r.depot.maxDD,
     depotTrades: T.filter(t => t.depot).length, winrate: +(w.length / cl.length * 100).toFixed(1),
     avgWin: +avg(w, t => t.pnlPct).toFixed(1), avgLoss: +avg(l, t => t.pnlPct).toFixed(1),
@@ -201,5 +245,5 @@ globalThis.__report = () => {
 };
 
 process.env.BACKTEST_NDX_OUT = process.env.BACKTEST_NDX_OUT
-  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}.json`);
+  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}_${FILTER}_${STOP}_${MAXRED}.json`);
 eval(src.replace(/^#!.*\n/, ''));
