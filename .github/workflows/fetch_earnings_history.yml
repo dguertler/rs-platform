@@ -1,0 +1,64 @@
+name: Earnings-Historie aktualisieren
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 3 * * 0'   # Sonntag 03:00 UTC, nach dem Earnings-Kalender
+  workflow_dispatch:
+
+jobs:
+  fetch-earnings-history:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+          fetch-depth: 0
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install yfinance pandas lxml
+
+      - name: Skript ausführen
+        run: python fetch_earnings_history.py
+
+      - name: Earnings-Historie committen
+        run: |
+          git config user.name  "github-actions"
+          git config user.email "actions@github.com"
+          git add data/earnings_history.json
+          git diff --staged --quiet && exit 0
+          git commit -m "Earnings-Historie aktualisiert"
+          # Der Scan dauert lange genug, dass währenddessen andere Workflows
+          # auf master pushen können — vor dem Push rebasen und bei einem
+          # erneuten Konflikt (weiterer Push in der Zwischenzeit) retryen,
+          # statt die komplette Scan-Arbeit wegzuwerfen (siehe Vorfall 05.08.2026).
+          for i in 1 2 3; do
+            if git pull --rebase origin master && git push origin master; then
+              exit 0
+            fi
+            echo "Push-Versuch $i fehlgeschlagen, retry…"
+            sleep 5
+          done
+          echo "Alle Push-Versuche fehlgeschlagen." >&2
+          exit 1
+
+      - name: Fehler-Mail senden
+        if: failure()
+        env:
+          SMTP_HOST:      ${{ secrets.SMTP_HOST }}
+          SMTP_PORT:      ${{ secrets.SMTP_PORT }}
+          SMTP_USER:      ${{ secrets.SMTP_USER }}
+          SMTP_PASS:      ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL_TO: ${{ secrets.ALERT_EMAIL_TO }}
+          JOB_NAME:       "Earnings-Historie (fetch_earnings_history.yml)"
+          RUN_URL:        "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+        run: python notify_failure.py
