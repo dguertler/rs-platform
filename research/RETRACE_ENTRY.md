@@ -108,6 +108,32 @@ Aufteilung der heutigen Signale: **Muster** = vorher 3/3 grün, dann 4H rot, Ret
   (+702 %) keinen Platz bekommt. Die Kennzahlen je Signal ändern sich dabei kaum.
 - Den Rest wegzulassen bringt also nichts. Die Engine handelt das Muster bereits.
 
+## Variante Weekly-Gedächtnis (`MODE=wm`, Beispiel AVGO 12.09.2024)
+
+AVGO am 12.09.2024 14:00: Daily grün (Marke 158,06, Bruch am 15.08.), 4H springt auf grün
+(Schluss 160,39 über dem Retracement-Hoch 156,13). Weekly ist rot, weil die Juli-Marke 173,51
+offen ist. Der vorherige Weekly-Bruch (137,12, Juni) liegt aber klar unter der Daily-Marke.
+Regel: Weekly zählt auch als grün, wenn der vorherige Weekly-Bruch höchstens `WMWEEKS` Wochen
+her ist und die Daily-Marke darüber liegt. Alle anderen Regeln wie die Engine.
+
+| Weekly-Bruch höchstens | Stopp | Zusatz-Signale | PF Zusatz | Ø Zusatz | Depot | CAGR | PF Depot | Max-DD | 2016–25 |
+|---|---|---|---|---|---|---|---|---|---|
+| – (heute) | Tag | – | – | – | 464.413 € | 15,3 % | 1,91 | −30,4 % | ×2,32 |
+| 13 Wochen | Tag | 16 | 1,88 | +2,4 % | 474.665 € | 15,6 % | 1,95 | −31,3 % | ×2,37 |
+| 26 Wochen | Tag | 78 | 1,13 | +0,4 % | 332.714 € | 11,8 % | 1,58 | −34,6 % | ×2,12 |
+| 52 Wochen | Tag | 135 | 1,31 | +1,0 % | 361.121 € | 12,7 % | 1,61 | −35,1 % | ×2,32 |
+| 26 Wochen | 4H | 82 | 1,03 | +0,1 % | 467.791 € | 15,4 % | 1,89 | −35,3 % | ×2,43 |
+| 52 Wochen | 4H | 135 | 1,39 | +1,2 % | 512.272 € | 16,4 % | 1,88 | −36,2 % | ×2,75 |
+
+(Vergleich 4H-Stopp ohne Zusatz-Signale: 511.027 €, PF 2,04, −31,2 %.)
+
+- Die Zusatz-Signale sind je Trade klar schwächer als die normalen (PF 1,0–1,4 statt 1,9).
+  Weekly rot heißt meist: Der übergeordnete Trend ist angeschlagen.
+- AVGO selbst: 12.09.2024 Kauf zu 160,46, Ausstieg am 04.11. über die Tagesstruktur, +3,7 %.
+  Die Regel löst aber schon am 30.08. aus: Kauf 159,82, Stopp am 04.09., −7,9 %.
+- Mit 13 Wochen bleibt die Regel neutral (16 Zusatz-Signale), sonst kostet sie Rendite und
+  erhöht den Drawdown. **Nicht übernehmen.**
+
 **Kandidat:** pb 2 %, 40 Kerzen Wartezeit. Vor einer Umstellung offen:
 - Robustheitslauf mit zufällig weggelassenen Signalen (wie in `README.md`)
 - Prüfen, ob Weekly und Daily beim Kauf noch grün sein müssen

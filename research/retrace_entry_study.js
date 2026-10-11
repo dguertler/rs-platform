@@ -14,6 +14,10 @@
 //               über dem Daily-Swing-Tief vor dem Daily-Ausbruch, dann 4H wieder grün.
 //               FILTER=re (nur Muster) | other (nur der Rest) | all; STOP=d (Engine) | h4
 //               (Retracement-Tief × 0,99, 4H-Prüfung)
+//   MODE=wm     Signal wie live, Weekly zählt aber auch als grün, wenn die aktuelle
+//               Weekly-Marke noch offen ist, der vorherige Weekly-Bruch stattfand (höchstens
+//               WMWEEKS Wochen her) und die Daily-Marke über diesem Weekly-Bruch liegt
+//               (Beispiel AVGO 12.09.2024). STOP=d (Engine) | h4 (letztes 4H-Swing-Tief)
 //   MODE=pb     Schluss mind. PB % unter dem höchsten Schluss seit dem Signal, danach
 //               4H-Schluss über dem Hoch der Vorkerze → Kauf zur nächsten 4H-Kerze
 // Stopp: tiefstes 4H-Tief seit dem Signal × 0,99 (now: letztes 4H-Swing-Tief × 0,99),
@@ -28,6 +32,8 @@ const WAIT = +(process.env.WAIT || 20);
 const DL = process.env.DL || 'signal';
 const FILTER = process.env.FILTER || 'all', STOP = process.env.STOP || 'd';
 const MAXRED = +(process.env.MAXRED || 60);
+const WMWEEKS = +(process.env.WMWEEKS || 52);
+const wmTrades = [];
 const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0, noRetrace: 0, re: 0, other: 0 };
 
 const src = fs.readFileSync(path.join(ROOT, 'backtest_ndx.js'), 'utf8')
@@ -75,6 +81,12 @@ function retraceStart(h, j, { p4, ohlcv_w, ohlcv_d, dIdx }) {
   return dailyLow != null && lowest(h, r, j) >= dailyLow ? r : -1;
 }
 
+// Vorheriger Weekly-Bruch gilt weiter: Bruch höchstens WMWEEKS Wochen her, Daily-Marke darüber
+function weeklyMemory(sw, sd, nW) {
+  if (!sw?.prevGwswHigh || sw.prevBreakoutIdx == null || !sd?.gwsdHigh) return false;
+  return nW - 1 - sw.prevBreakoutIdx <= WMWEEKS && sd.gwsdHigh.price > sw.prevGwswHigh.price;
+}
+
 function lowest(h, a, b) {
   let m = Infinity;
   for (let i = a; i <= b; i++) m = Math.min(m, h[i].l);
@@ -118,6 +130,11 @@ function findEntry(h, j, ctx) {
   const k0 = buyBar(h, j);
   if (k0 < 0) return null;
   if (MODE === 'tw') return findTrendChangeEntry(h, j, ctx);
+  if (MODE === 'wm') {
+    if (STOP === 'd') return { hStart: k0, entryPrice: h[k0].o, daily: true };
+    const sl = recentSwingLowOf(h.slice(0, k0));
+    return sl == null ? null : { hStart: k0, entryPrice: h[k0].o, stopPrice: sl * 0.99 };
+  }
   if (MODE === 're') {
     const r = retraceStart(h, j, ctx);
     stats[r >= 0 ? 're' : 'other']++;
@@ -211,8 +228,12 @@ globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
       dHistory = ohlcv_d.slice(0, i).concat([{ d: day, o: db.o, h: Math.max(db.o, bar.h), l: Math.min(db.o, bar.l), c: bar.c }]);
     } else dHistory = ohlcv_d.slice(0, i + 1);
     if (dHistory.length < 30) continue;
-    if (!analyzeStructure(dHistory)?.broken) continue;
-    if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
+    const sd = analyzeStructure(dHistory);
+    if (!sd?.broken) continue;
+    const wBars = weeklyUpTo(ohlcv_w, dHistory);
+    const sw = analyzeWeeklyStructure(wBars, dHistory);
+    const wmExtra = MODE === 'wm' && !sw?.broken && weeklyMemory(sw, sd, wBars.length);
+    if (!sw?.broken && !wmExtra) continue;
     stats.signals++;
     const e = findEntry(h, j, { p4, ohlcv_w, ohlcv_d, dIdx, dHistory });
     if (e?.resolved != null) pendingUntil = e.resolved;
@@ -223,6 +244,7 @@ globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
       ? tradeFromEntry(ohlcv_d, h[e.hStart].d.slice(0, 10), e.entryPrice, { ...extra, entryTime: h[e.hStart].d.slice(11, 16) })
       : tradeH4(ohlcv_d, h, e.hStart, e.entryPrice, e.stopPrice, extra);
     if (!t) continue;
+    if (wmExtra) wmTrades.push(t);
     stats.entered++;
     trades.push(t);
     busyUntil = t.exitDate;
@@ -236,7 +258,13 @@ globalThis.__report = () => {
   const avg = (a, f) => a.reduce((s, t) => s + f(t), 0) / (a.length || 1);
   const dist = T.map(t => (t.entryPrice - t.stopPrice) / t.entryPrice * 100).sort((a, b) => a - b);
   const grow = (a, b) => { let f = 1; for (let y = a; y <= b; y++) f *= 1 + (r.years[y]?.returnPct ?? 0) / 100; return f.toFixed(2); };
-  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT, dl: MODE === 'tw' ? DL : undefined, filter: MODE === 're' ? FILTER : undefined, stop: MODE === 're' ? STOP : undefined, maxRed: MODE === 're' ? MAXRED : undefined,
+  const wmPf = (() => {
+    const sum = a => a.reduce((x, t) => x + t.pnl, 0);
+    const lo = sum(wmTrades.filter(t => t.pnl <= 0));
+    return { n: wmTrades.length, pf: lo < 0 ? +Math.abs(sum(wmTrades.filter(t => t.pnl > 0)) / lo).toFixed(2) : null,
+             avgPct: +(wmTrades.reduce((x, t) => x + t.pnlPct, 0) / (wmTrades.length || 1)).toFixed(2) };
+  })();
+  console.log(JSON.stringify({ wmExtra: MODE === 'wm' ? wmPf : undefined, wmWeeks: MODE === 'wm' ? WMWEEKS : undefined, mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT, dl: MODE === 'tw' ? DL : undefined, filter: MODE === 're' ? FILTER : undefined, stop: ['re', 'wm'].includes(MODE) ? STOP : undefined, maxRed: MODE === 're' ? MAXRED : undefined,
     ...stats, depot: r.depot.endEquity, cagr: r.depot.cagr, pf: r.depot.profitFactor, maxDD: r.depot.maxDD,
     depotTrades: T.filter(t => t.depot).length, winrate: +(w.length / cl.length * 100).toFixed(1),
     avgWin: +avg(w, t => t.pnlPct).toFixed(1), avgLoss: +avg(l, t => t.pnlPct).toFixed(1),
@@ -245,5 +273,5 @@ globalThis.__report = () => {
 };
 
 process.env.BACKTEST_NDX_OUT = process.env.BACKTEST_NDX_OUT
-  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}_${FILTER}_${STOP}_${MAXRED}.json`);
+  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}_${FILTER}_${STOP}_${MAXRED}_${WMWEEKS}.json`);
 eval(src.replace(/^#!.*\n/, ''));
