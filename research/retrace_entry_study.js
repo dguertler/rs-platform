@@ -5,6 +5,10 @@
 //   MODE=touch  eine 4H-Kerze läuft bis auf 1 % an die gebrochene 4H-Marke zurück,
 //               Kauf zur nächsten 4H-Kerze
 //   MODE=limit  Limit-Kauf auf der gebrochenen 4H-Marke (ab der Kerze, zu der live gekauft würde)
+//   MODE=tw     4H-Trendwechsel: nach dem Signal tieferes 4H-Tief (neue 4H-Marke, 4H rot),
+//               kein 4H-Tief unter dem Daily-Low des Bruchs (DL=signal: Tageskerze des
+//               Signaltags, DL=breakout: Tageskerze des Daily-Ausbruchs); Kauf, wenn ein
+//               4H-Schluss über dem letzten Hoch des Retracements (neue 4H-Marke) liegt
 //   MODE=pb     Schluss mind. PB % unter dem höchsten Schluss seit dem Signal, danach
 //               4H-Schluss über dem Hoch der Vorkerze → Kauf zur nächsten 4H-Kerze
 // Stopp: tiefstes 4H-Tief seit dem Signal × 0,99 (now: letztes 4H-Swing-Tief × 0,99),
@@ -16,7 +20,8 @@ const ROOT = path.join(__dirname, '..');
 const MODE = process.env.MODE || 'now';
 const PB = +(process.env.PB || 3) / 100;
 const WAIT = +(process.env.WAIT || 20);
-const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0 };
+const DL = process.env.DL || 'signal';
+const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0, noRetrace: 0 };
 
 const src = fs.readFileSync(path.join(ROOT, 'backtest_ndx.js'), 'utf8')
   .replace("const ROOT = __dirname;", `const ROOT = ${JSON.stringify(ROOT)};`)
@@ -75,9 +80,10 @@ function tradeH4(ohlcv_d, h, hStart, entryPrice, stopPrice, extra) {
 }
 
 // Rücksetzer nach dem Signal in Kerze j suchen → { hStart, entryPrice, stopPrice } oder null
-function findEntry(h, j) {
+function findEntry(h, j, ctx) {
   const k0 = buyBar(h, j);
   if (k0 < 0) return null;
+  if (MODE === 'tw') return findTrendChangeEntry(h, j, ctx);
   if (MODE === 'now') {
     const sl = recentSwingLowOf(h.slice(0, k0));
     return sl == null ? null : { hStart: k0, entryPrice: h[k0].o, stopPrice: sl * 0.99 };
@@ -115,6 +121,30 @@ function findEntry(h, j) {
   return null;
 }
 
+// Trendwechsel-Retracement: 4H rot (tieferes Tief) und wieder grün, über dem Daily-Low
+function findTrendChangeEntry(h, j, { p4, ohlcv_d, dIdx, dHistory }) {
+  const day = h[j].d.slice(0, 10);
+  let dailyLow = ohlcv_d[dIdx.get(day)].l;
+  if (DL === 'breakout') {
+    const bi = analyzeStructure(dHistory)?.breakoutIdx;
+    const bDay = bi != null ? dHistory[bi].d : null;
+    if (bDay == null || !dIdx.has(bDay)) return null;
+    dailyLow = ohlcv_d[dIdx.get(bDay)].l;
+  }
+  const end = Math.min(h.length - 1, j + WAIT);
+  let down = false;
+  for (let m = j + 1; m <= end; m++) {
+    if (h[m].l < dailyLow) { stats.cancelled++; return { resolved: m }; }
+    if (p4[m] === 0) { down = true; continue; }
+    if (!down || p4[m - 1] !== 0) continue;
+    const k = buyBar(h, m);
+    if (k < 0) return { resolved: m };
+    return { resolved: m, hStart: k, entryPrice: h[k].o, stopPrice: lowest(h, j, m) * 0.99 };
+  }
+  stats[down ? 'expired' : 'noRetrace']++;
+  return { resolved: end };
+}
+
 globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
   const trades = [];
   const dIdx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
@@ -124,9 +154,9 @@ globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
   for (let j = first; j < h.length; j++) {
     p4[j] = analyze4HStructure(h.slice(Math.max(0, j - 59), j + 1))?.broken4h ? 1 : 0;
   }
-  let busyUntil = '';
+  let busyUntil = '', pendingUntil = -1;
   for (let j = first + 1; j < h.length; j++) {
-    if (p4[j - 1] !== 0 || p4[j] !== 1) continue;
+    if (p4[j - 1] !== 0 || p4[j] !== 1 || j <= pendingUntil) continue;
     const bar = h[j], day = bar.d.slice(0, 10);
     if (day < start || day < busyUntil || (inTop && !inTop(day))) continue;
     const i = dIdx.get(day);
@@ -142,8 +172,9 @@ globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
     if (!analyzeStructure(dHistory)?.broken) continue;
     if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
     stats.signals++;
-    const e = findEntry(h, j);
-    if (!e) continue;
+    const e = findEntry(h, j, { p4, ohlcv_d, dIdx, dHistory });
+    if (e?.resolved != null) pendingUntil = e.resolved;
+    if (!e || e.hStart == null) continue;
     const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
     const t = tradeH4(ohlcv_d, h, e.hStart, e.entryPrice, e.stopPrice,
       { signalBar: bar.d, signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) });
@@ -161,7 +192,7 @@ globalThis.__report = () => {
   const avg = (a, f) => a.reduce((s, t) => s + f(t), 0) / (a.length || 1);
   const dist = T.map(t => (t.entryPrice - t.stopPrice) / t.entryPrice * 100).sort((a, b) => a - b);
   const grow = (a, b) => { let f = 1; for (let y = a; y <= b; y++) f *= 1 + (r.years[y]?.returnPct ?? 0) / 100; return f.toFixed(2); };
-  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT,
+  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT, dl: MODE === 'tw' ? DL : undefined,
     ...stats, depot: r.depot.endEquity, cagr: r.depot.cagr, pf: r.depot.profitFactor, maxDD: r.depot.maxDD,
     depotTrades: T.filter(t => t.depot).length, winrate: +(w.length / cl.length * 100).toFixed(1),
     avgWin: +avg(w, t => t.pnlPct).toFixed(1), avgLoss: +avg(l, t => t.pnlPct).toFixed(1),
@@ -170,5 +201,5 @@ globalThis.__report = () => {
 };
 
 process.env.BACKTEST_NDX_OUT = process.env.BACKTEST_NDX_OUT
-  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}.json`);
+  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}.json`);
 eval(src.replace(/^#!.*\n/, ''));

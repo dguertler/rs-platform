@@ -56,6 +56,29 @@ MODE=pb PB=2 WAIT=40 node research/retrace_entry_study.js    # MODE=now|touch|li
   sehr eng (Median 1,8–2,6 %), die Trefferquote fällt auf 33–37 %.
 - Weniger Trades (rund 850 statt 1013) → mit Kosten verschiebt sich das Bild eher zugunsten des Rücksetzers.
 
+## Variante Trendwechsel-Retracement (`MODE=tw`)
+
+Nach dem Signal bildet sich auf 4H ein tieferes Tief (neue 4H-Marke, 4H-Punkt rot =
+Trendwechsel). Kein 4H-Tief seit dem Signal darf unter dem Daily-Low des Bruchs liegen
+(`DL=signal`: Tageskerze des Signaltags, `DL=breakout`: Tageskerze des Daily-Ausbruchs).
+Kauf, wenn ein 4H-Schluss das letzte Hoch des Retracements (die neue 4H-Marke)
+überwindet. Stopp: tiefstes 4H-Tief seit dem Signal × 0,99.
+
+| Daily-Low | Warten | Signale | gekauft | abgebrochen (Daily-Low) | Depot | CAGR | PF | Max-DD | Trefferq. | Stopp (Median) | 2016–25 |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| Signaltag | 40 | 1874 | 245 | 1261 | 122.604 € | 1,9 % | 1,33 | −18,3 % | 50,0 % | 6,6 % | ×1,19 |
+| Signaltag | 80 | 1645 | 408 | 1165 | 179.171 € | 5,6 % | 1,74 | −17,9 % | 51,2 % | 8,0 % | ×1,35 |
+| Signaltag | 120 | 1609 | 442 | 1146 | 193.008 € | 6,3 % | 1,80 | −14,4 % | 50,5 % | 8,3 % | ×1,46 |
+| Daily-Ausbruch | 40 | 1567 | 498 | 431 | 215.952 € | 7,4 % | 1,79 | −21,5 % | 51,6 % | 6,0 % | ×1,49 |
+| Daily-Ausbruch | 80 | 1308 | 767 | 423 | 200.718 € | 6,7 % | 1,51 | −31,0 % | 49,8 % | 6,9 % | ×1,59 |
+| Daily-Ausbruch | 120 | 1274 | 820 | 428 | 211.507 € | 7,2 % | 1,49 | −31,2 % | 49,5 % | 7,0 % | ×1,69 |
+
+**Klar schlechter als heute (×2,32) und als pb 2 % (×2,96).** Mit dem Daily-Low des
+Signaltags fallen rund drei Viertel der Signale weg, weil das tiefere 4H-Tief meist
+darunter liegt. Die übrigen Käufe kommen spät (Median gut zwei Wochen nach dem Signal),
+mit weitem Stopp (6–8 %) und schwächerem PF. Die Trefferquote steigt zwar auf rund 50 %,
+die Gewinner fallen aber kleiner aus (Ø +8,6 bis +9,6 %).
+
 **Kandidat:** pb 2 %, 40 Kerzen Wartezeit. Vor einer Umstellung offen:
 - Robustheitslauf mit zufällig weggelassenen Signalen (wie in `README.md`)
 - Prüfen, ob Weekly und Daily beim Kauf noch grün sein müssen
