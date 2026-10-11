@@ -161,7 +161,7 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket), je Eintrag mit `trigger` (`eps-beat` / `kursreaktion`) und `eps_distorted` — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `data/watchlist.json` | Beobachtete Ticker — Grundlage der Verkaufs- und SL-Verschiebungs-Meldungen (in der täglichen Breakout-Mail). Führende Quelle; die Watchlist-Seite liest sie beim Laden und schreibt Änderungen direkt zurück (GitHub-Contents-API, Token pro Gerät im localStorage). Ohne Token bleibt die Liste lokal und lässt sich über „exportieren" als Datei ablegen | Laufend über `frontend/watchlist.html` |
-| `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg, Stopp und zuletzt gemeldetem wirksamen SL (`sl_level`), plus bereits abgeschlossene Signale — Verkäufe (Stopp, Strukturbruch, Zeitstopp) und SL-Verschiebungen stehen in derselben Mail wie die Breakouts | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml` → `check_alerts.py` → `check_exits.process_watchlist`) |
+| `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg, Stopp und zuletzt gemeldetem wirksamen SL (`sl_level`), plus bereits abgeschlossene Signale — Verkäufe (Stopp, Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch entstand, Zeitstopp; Verkauf zur Eröffnung am Folgetag — identisch in `check_exits.py` und `frontend/backtest_logic.js`) und SL-Verschiebungen stehen in derselben Mail wie die Breakouts | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml` → `check_alerts.py` → `check_exits.process_watchlist`) |
 | `data/live_depot.json` | Modell-Depot der verschickten Breakouts (höchstens 10 Positionen) — entscheidet in der Breakout-Mail über „Kauf“ oder „Kein Kauf – 10 von 10 Plätzen belegt“; beim ersten Lauf aus den seit 22.09.2026 verschickten 4H-Alerts rekonstruiert | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `data/intraday_alert_state.json` | Zuletzt geprüfte 4H-Kerzen des 4H-Prüfjobs (`check_alerts_4h.py`): prüft 20 Min. nach dem Schluss der Kerzen 10–14 und 14–18 Uhr Berliner Zeit (Kerzen wie TradingView ab 10/14/18/22 Uhr) die Top-20-Titel zeitpunktgenau und schickt bei neuem 4H-Breakout sofort die Kaufmail (Kauf zur nächsten Kerze, Kauffenster 10:00–22:10); Kerzen mit Schluss 22 bzw. 2 Uhr meldet der Nachtlauf | Mo–Fr 12:20/13:20/16:20/17:20 UTC automatisch (`stock_alerts_4h.yml`) |
 | Branch `backtest-data-sp500` | Historischer S&P-500-Backtest (Top 20 point-in-time ab 2016, identische Pipeline und Engine wie NASDAQ-100, Benchmark ^GSPC wie `sp500_colab_1.py`): `sp500_results.json` + Kursdateien je Aktie unter `charts/` — eigener Branch, weil zu groß für `master` | Manuell über `backtest_history_sp500.yml` |
@@ -187,7 +187,9 @@ Anpassungen an der Logik dürfen an diesen Trades nichts ändern.
   node check_reference_trades.js              # nur Backtest-Engine, mit Klartext je Trade
   ```
   Eine Variante, die einen Referenz-Trade verändert, gilt als abgelehnt bzw. muss
-  dem Nutzer mit genau dieser Abweichung vorgelegt werden.
+  dem Nutzer mit genau dieser Abweichung vorgelegt werden. Zusätzlich prüft
+  `update_backtest_daily.yml` die Trades täglich mit den aktuellen Kursen
+  (Abweichung → Fehler-Mail).
 - **Geprüft wird:** Signal in derselben 4H-Kerze, Kauf zur selben Kerze, Ausstieg am
   freigegebenen Tag (Verkauf am Signaltag oder zur Eröffnung des nächsten
   Handelstages) — in der Engine und in `check_exits.find_exit`.

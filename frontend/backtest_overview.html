@@ -8,7 +8,7 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261011"></script>
+  <script src="backtest_logic.js?v=20261012"></script>
   <script type="text/babel" src="live_alerts_panel.js?v=20261010"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -182,7 +182,7 @@ function OverviewApp() {
       <div className="note" style={{ marginBottom: 14 }}>
         <b>Zeitpunktgenau wie live:</b> Signal an jedem 4H-Kerzenschluss (4H-Punkt neu, Wochen- und Tagespunkt zu diesem Zeitpunkt grün,
         Top 20 am Signaltag). Kauf zur nächsten 4H-Kerze bei den Kerzen 10–14 und 14–18 Uhr (4H-Prüfjob), sonst um 10 Uhr am nächsten Handelstag.
-        Stopp am letzten Swing-Tief, Ausstieg bei Strukturbruch, Zeitstopp nach 10 Handelstagen unter +5 %.
+        Stopp am letzten Swing-Tief, Ausstieg bei Trendumkehr (Schluss unter dem Tief, aus dem das letzte Hoch entstand), Zeitstopp nach 10 Handelstagen unter +5 %.
         Depot: 100.000 € Start, höchstens 10 Positionen, Zinseszins. NASDAQ-100 über QQQ (inkl. Dividenden).
       </div>
 

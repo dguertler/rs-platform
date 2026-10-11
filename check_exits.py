@@ -7,16 +7,15 @@ prüft es nur die Watchlist und meldet Verkäufe/SL-Verschiebungen allein.
 
 Ausstiegsregel wie in frontend/backtest_logic.js (simulateTrades):
   Signal am Tagesschluss, wenn
-    • die Tagesstruktur (Stand Vortag) NICHT gebrochen ist
-      UND der Schlusskurs unter dem letzten Swing-Tief liegt, oder
+    • Trendumkehr: der Schlusskurs liegt unter dem Trendumkehr-Tief (Stand
+      Vortag) — dem letzten Swing-Tief vor dem letzten Swing-Hoch, oder
     • der Schlusskurs unter dem Stopp liegt, oder
     • Zeitstopp: 10 Handelstage nach dem Einstieg liegt der Schluss nicht
       mindestens 5 % über dem Einstiegskurs
   Ausführung zur Eröffnung des Folgetages.
 
-Wirksamer Stopp (SL) für den nächsten Tag = höherer Wert aus Stopp und letztem
-Swing-Tief, solange die Tagesstruktur nicht gebrochen ist — ändert er sich,
-wird das als SL-Verschiebung gemeldet.
+Wirksamer Stopp (SL) für den nächsten Tag = höherer Wert aus Stopp und
+Trendumkehr-Tief — ändert er sich, wird das als SL-Verschiebung gemeldet.
 
 Zustand:
   data/watchlist.json     — vom Nutzer gepflegt (Ticker-Liste)
@@ -75,7 +74,19 @@ def daily_structure(ohlcv):
     return {
         "broken": gws_high is not None and breakout_idx is not None,
         "swing_lows": swing_lows[-6:],
+        "swing_highs": swing_highs[-6:],
     }
+
+
+def trend_low(struct):
+    """Trendumkehr-Tief wie trendLowOf in backtest_logic.js: das letzte Swing-Tief
+    vor dem letzten Swing-Hoch — das Tief, aus dem das letzte Hoch entstanden ist
+    (Referenz-Trade AVGO: Tief 25.06.2024, Schluss darunter am 17.07.2024)."""
+    if not struct or not struct["swing_highs"]:
+        return None
+    last_high = struct["swing_highs"][-1]["idx"]
+    lows = [l for l in struct["swing_lows"] if l["idx"] < last_high]
+    return lows[-1]["price"] if lows else None
 
 
 # ── Dateien ───────────────────────────────────────────────────────────────────
@@ -151,11 +162,9 @@ def find_exit(ohlcv, position, last_checked):
         if (entry_idx is not None and i - entry_idx == TIME_STOP_DAYS
                 and day["c"] < position["entry_price"] * (1 + TIME_STOP_MIN)):
             reason = "Zeitstopp"
-        struct = daily_structure(ohlcv[:i]) if reason is None else None
-        if struct and not struct["broken"]:
-            lows = struct["swing_lows"]
-            if lows and day["c"] < lows[-1]["price"]:
-                reason = "Strukturbruch"
+        low = trend_low(daily_structure(ohlcv[:i])) if reason is None else None
+        if low is not None and day["c"] < low:
+            reason = "Trendumkehr"
         if reason is None and day["c"] < position["stop_price"]:
             reason = "Stopp"
         if reason is None:
@@ -175,13 +184,11 @@ def find_exit(ohlcv, position, last_checked):
 def exit_level(ohlcv, stop_price):
     """Wirksamer Stopp für den nächsten Handelstag: (Kurs, Art).
 
-    Ist die Tagesstruktur nicht gebrochen, löst schon ein Schluss unter dem
-    letzten Swing-Tief aus — dann gilt der höhere der beiden Werte."""
-    struct = daily_structure(ohlcv)
-    if struct and not struct["broken"] and struct["swing_lows"]:
-        low = struct["swing_lows"][-1]["price"]
-        if low > stop_price:
-            return round(low, 2), "letztes Swing-Tief"
+    Ein Schluss unter dem Trendumkehr-Tief löst ebenfalls aus — es gilt der
+    höhere der beiden Werte."""
+    low = trend_low(daily_structure(ohlcv))
+    if low is not None and low > stop_price:
+        return round(low, 2), "Trendumkehr-Tief"
     return round(stop_price, 2), "Stopp"
 
 
@@ -251,8 +258,8 @@ def build_email_html(exits, moves=()):
   <p style="color:#64748b;margin:0 0 20px;font-size:12px">Watchlist-Titel</p>
   {exit_rows_html(exits)}{sl_rows_html(moves)}
   <p style="color:#475569;font-size:11px;margin-top:24px;line-height:1.6">
-    Regel wie im Backtest: Schluss unter dem Stopp bzw. (bei nicht gebrochener
-    Tagesstruktur) unter dem letzten Swing-Tief, oder Zeitstopp (10 Handelstage
+    Regel wie im Backtest: Schluss unter dem Stopp bzw. unter dem Tief, aus dem
+    das letzte Hoch entstanden ist (Trendumkehr), oder Zeitstopp (10 Handelstage
     nach dem Einstieg nicht mind. +5 %). Verkauf zur Eröffnung des Folgetages.
     Die Meldung bezieht sich auf das Signal des Systems, nicht auf deinen
     tatsächlichen Depotbestand.

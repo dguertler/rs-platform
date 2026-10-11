@@ -3,8 +3,8 @@
 Läuft ohne Netzwerk:  python3 -m unittest test_check_exits
 
 Geprüft wird die Regel aus frontend/backtest_logic.js: Signal am Tagesschluss
-(Struktur gebrochen und Schluss unter dem letzten Swing-Tief, oder Schluss unter
-dem Stopp), Ausführung zur Eröffnung des Folgetages.
+(Schluss unter dem Trendumkehr-Tief — letztes Swing-Tief vor dem letzten
+Swing-Hoch — oder unter dem Stopp), Ausführung zur Eröffnung des Folgetages.
 """
 import unittest
 
@@ -153,7 +153,7 @@ class TestZeitstoppUndSL(unittest.TestCase):
         from check_exits import exit_level
         level, kind = exit_level(rising(45), 90.0)
         self.assertGreaterEqual(level, 90.0)
-        self.assertIn(kind, ("Stopp", "letztes Swing-Tief"))
+        self.assertIn(kind, ("Stopp", "Trendumkehr-Tief"))
 
     def test_depot_hoechstens_10_kaeufe(self):
         import os

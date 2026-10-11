@@ -298,18 +298,25 @@ function recentSwingLowOf(barsBeforeEntry) {
   return barsBeforeEntry.length > 0 ? Math.min(...barsBeforeEntry.slice(-5).map(d => d.l)) : null;
 }
 
-// Ausstiegssignal am Tagesschluss von dHistory[k]: GWS-D-Struktur (aus den
-// Kerzen davor) intakt und Schluss unter dem letzten Swing-Tief, oder Schluss
-// unter dem Stopp. Ausführung am nächsten Handelstag zur Eröffnung.
+// Trendumkehr-Tief: das letzte Swing-Tief vor dem letzten Swing-Hoch — das Tief,
+// aus dem das letzte Hoch entstanden ist (Referenz-Trade AVGO: Tief 25.06.2024,
+// Schluss darunter am 17.07.2024). null, wenn es keins gibt.
+function trendLowOf(struct) {
+  const highs = struct?.swingHighs ?? [];
+  const lastHigh = highs[highs.length - 1];
+  if (!lastHigh) return null;
+  const lows = (struct.swingLows ?? []).filter(l => l.idx < lastHigh.idx);
+  return lows.length > 0 ? lows[lows.length - 1].price : null;
+}
+
+// Ausstiegssignal am Tagesschluss von dHistory[k]: Schluss unter dem
+// Trendumkehr-Tief (aus den Kerzen davor), unter dem Stopp oder Zeitstopp.
+// Ausführung am nächsten Handelstag zur Eröffnung.
 function isExitDay(dHistory, k, stopPrice, entry = null) {
   const day = dHistory[k];
   if (entry && isTimeStop(dHistory, k, entry)) return true;
-  const structBefore = analyzeStructure(dHistory.slice(0, k));
-  if (structBefore && !structBefore.broken) {
-    const swingLows = structBefore.swingLows ?? [];
-    const lastSL    = swingLows.length > 0 ? swingLows[swingLows.length - 1] : null;
-    if (lastSL != null && day.c < lastSL.price) return true;
-  }
+  const trendLow = trendLowOf(analyzeStructure(dHistory.slice(0, k)));
+  if (trendLow != null && day.c < trendLow) return true;
   return stopPrice != null && day.c < stopPrice;
 }
 

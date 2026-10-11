@@ -61,6 +61,12 @@ jobs:
           git pull --rebase origin master
           git push origin master
 
+      # Freigegebene Referenz-Trades (data/reference_trades.json) müssen mit den
+      # aktuellen Kursen unverändert herauskommen — sonst Fehler-Mail. Läuft nach dem
+      # Push, damit die Tagesdaten trotzdem aktualisiert werden.
+      - name: Referenz-Trades prüfen
+        run: node check_reference_trades.js
+
       - name: Fehler-Mail senden
         if: failure()
         env:
