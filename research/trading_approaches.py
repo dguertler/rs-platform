@@ -167,7 +167,9 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
     i0 = int(m.dates.searchsorted(pd.Timestamp(start)))
     i1 = int(m.dates.searchsorted(pd.Timestamp(end), side="right"))
     qqq_up = m.ind["qqq_up"].values
-    qqq_ret = m.qqq["c"].pct_change().fillna(0).values
+    # Freies Cash im QQQ: Übernacht-Anteil (Schluss → Eröffnung) vor dem Handel, Tagesanteil
+    # (Eröffnung → Schluss) danach — Käufe/Verkäufe zur Eröffnung verdienen bzw. verpassen ihn korrekt.
+    q_o, q_c = m.qqq["o"].values, m.qqq["c"].values
     cash = START_CAPITAL
     open_pos: list[Position] = []
     equity = np.full(i1 - i0, np.nan)
@@ -183,8 +185,8 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
                        "pnl": proceeds - p.cost, "ret": proceeds / p.cost - 1, "days": i - p.entry_i})
 
     for i in range(i0, i1):
-        if s.cash_in_qqq and i > i0:
-            cash *= 1 + qqq_ret[i]
+        if s.cash_in_qqq and i > i0 and q_o[i] > 0 and q_c[i - 1] > 0:
+            cash *= q_o[i] / q_c[i - 1]
         # 1. Verkäufe zur Eröffnung (Signal vom Vortag) bzw. feste Engine-Ausstiege
         for p in list(open_pos):
             k = col[p.sym]
@@ -222,6 +224,8 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
             open_pos.append(Position(e.sym, i, price, net / price, amount, e.stop, price, e.fixed_exit, tag=e.tag))
             held.add(e.sym)
 
+        if s.cash_in_qqq and q_o[i] > 0:
+            cash *= q_c[i] / q_o[i]
         # 3. Bewertung zum Schluss + Verkaufssignale
         for p in open_pos:
             k = col[p.sym]

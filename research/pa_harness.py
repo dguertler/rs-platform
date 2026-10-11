@@ -59,6 +59,7 @@ def _slice(res: dict, a: str, z: str) -> dict:
 def run(m, strat: Strategy, fee: float = FEE) -> dict:
     """Ein Lauf 2008–2026. Merkt sich je Einstieg die Stoppweite (für das Nullmodell)."""
     stops: dict = {}
+    tags: dict = {}
     inner = strat.candidates
     o = m.o.values
     col = {x: k for k, x in enumerate(m.c.columns)}
@@ -69,6 +70,7 @@ def run(m, strat: Strategy, fee: float = FEE) -> dict:
             px = e.price if e.price is not None else o[i, col[e.sym]]
             if e.stop is not None and px and px > e.stop:
                 stops[(e.sym, i)] = 1 - e.stop / px
+            tags[(e.sym, i)] = e.tag
         return es
     strat.candidates = cand
     res = simulate(m, strat, START, END, fee=fee)
@@ -76,6 +78,7 @@ def run(m, strat: Strategy, fee: float = FEE) -> dict:
     idx = {d: i for i, d in enumerate(m.dates.strftime("%Y-%m-%d"))}
     for t in res["trades"]:
         t["stop_frac"] = stops.get((t["sym"], idx.get(t["entry"])))
+        t["tag"] = tags.get((t["sym"], idx.get(t["entry"])), "")
     return {k: _slice(res, a, z) for k, (a, z) in PERIODS.items()} | {"_raw": res}
 
 
@@ -90,8 +93,7 @@ def null_model(m, build, real: dict, n: int, fee: float = FEE, seed0: int = 4242
         i = idx.get(t["entry"])
         if i is None:
             continue
-        stop_frac = t.get("stop_frac")
-        per_day.setdefault(i, []).append(stop_frac)
+        per_day.setdefault(i, []).append((t.get("stop_frac"), t.get("tag", "")))
     syms = list(m.c.columns)
     top = m.in_top.values
     base = build(m, None)
@@ -108,12 +110,13 @@ def null_model(m, build, real: dict, n: int, fee: float = FEE, seed0: int = 4242
                 return []
             pick = rng.choice(len(pool), size=min(len(lst), len(pool)), replace=False)
             es = []
-            for j, sf in zip(pick, lst):
+            for j, (sf, tag) in zip(pick, lst):
                 s = pool[j]
                 px = o[i, col[s]]
-                es.append(Entry(s, 0.0, None, px * (1 - sf) if sf else None, tag=base.name))
+                es.append(Entry(s, 0.0, None, px * (1 - sf) if sf is not None else None, tag=tag))
             return es
-        st = Strategy(f"null{r}", cand, base.exit_rule, max_positions=base.max_positions, cash_in_qqq=base.cash_in_qqq)
+        st = Strategy(f"null{r}", cand, base.exit_rule, sizing=base.sizing, max_positions=base.max_positions,
+                      regime_exit=base.regime_exit, cash_in_qqq=base.cash_in_qqq)
         res = simulate(m, st, START, END, fee=fee)
         out.append({k: _slice(res, a, z)["cagr"] for k, (a, z) in PERIODS.items()})
     return out

@@ -19,7 +19,7 @@ m, sigs4 = load()
 S = Struct(m)
 F4 = prak.features(m, sigs4)
 COL = {x: k for k, x in enumerate(m.c.columns)}
-QRET = m.qqq['c'].pct_change().fillna(0).values
+Q_O, Q_C = m.qqq['o'].values, m.qqq['c'].values
 MONTH = m.dates.to_period('M')
 
 CAND = {  # Name: (Stopp-Mindestweite %, QQQ-Umschichtung, Zeitstopp-Tage)
@@ -58,7 +58,7 @@ def sim_sweep(sigs, F, cfg, start, end, fee=0.0025, seed=None, allowed=None, max
     if sweep in ('trade', 'month'):
         to_qqq(cash)
     for i in range(i0, i1):
-        if i > i0: qv *= 1 + QRET[i]
+        if i > i0: qv *= Q_O[i] / Q_C[i - 1]   # Übernacht-Anteil vor dem Handel zur Eröffnung
         for p in list(open_pos):
             k = COL[p.sym]
             if p.exit_flag:
@@ -95,6 +95,7 @@ def sim_sweep(sigs, F, cfg, start, end, fee=0.0025, seed=None, allowed=None, max
             cash -= amt; fees += amt * fee
             open_pos.append(Position(e.sym, i, e.price, amt * (1 - fee) / e.price, amt, e.stop, e.price, None))
             held.add(e.sym)
+        qv *= Q_C[i] / Q_O[i]                  # Tagesanteil nach dem Handel
         for p in open_pos:
             k = COL[p.sym]
             if not math.isnan(c[i, k]):

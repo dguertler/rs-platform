@@ -111,6 +111,16 @@ Die Regeln:
 3. **Für die Live-Logik unabhängig davon übernehmen:** Frühausstieg Tag 2 und Klimax-Sperre (siehe
    `TRADE_PATTERNS.md`). Sie verbessern Sharpe und Drawdown in allen Prüfungen.
 
+## Korrektur 10/2026 (nach den Loops)
+
+Der Prüfstand buchte die QQQ-Rendite des freien Cash für den ganzen Tag (Schluss → Schluss), bevor
+zur Eröffnung gehandelt wurde. Ein kleiner Vorgriff, gefunden vom Quant-Skeptiker in den
+Price-Action-Loops. Korrigiert in `trading_approaches.simulate` und `loops/r4b.py`: Übernacht-Anteil
+vor dem Handel, Tagesanteil danach. Die Strategien mit tradeweiser Umschichtung verlieren dadurch
+bis zu 3 Punkte p. a. R4B ist wegen der monatlichen Umschichtung kaum betroffen: 26,4 / 33,2 / 29,5 %
+statt 26,8 / 32,8 / 29,5 % (2016–21 / 2022–26 / 2016–26, 0,25 % Kosten). Damit liegt R4B 2016–21
+weiter über QQQ (25,0 %). Die Werte aus Loop 1–3 mit „Cash in QQQ“ sind entsprechend etwas zu hoch.
+
 ## Grenzen
 
 - **Keine 4H-Kerzen vor 2016.** Der Out-of-Sample-Test nutzt eine Tagesnäherung des Signals, die
