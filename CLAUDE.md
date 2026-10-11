@@ -173,6 +173,23 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 | `data/reference_trades.json` | Freigegebene Referenz-Trades (Signal-Kerze, Kauf, Ausstiegstag + Begründung) — Regressionsschutz für Logik-Änderungen, siehe „Referenz-Trades“ | Manuell, nur auf Freigabe des Nutzers |
 
+## Logik-Änderungen: erst Wirkung zeigen, dann übernehmen
+
+Jede Änderung an Signal-, Einstiegs-, Ausstiegs- oder Depotlogik (Backtest und
+Live) wird **erst übernommen (Commit/Push), nachdem der Nutzer die Wirkung gesehen
+hat**. Vorher im Chat ausgeben — gerechnet mit `node backtest_ndx.js` (bzw. einer
+Variante davon) gegen den aktuellen Stand:
+
+| Kennzahl | bisher | neu |
+|---|---|---|
+| betroffene Trades (weggefallen / neu / mit anderem Ausstieg) | – | Anzahl |
+| Profitfaktor (Depot) | | |
+| Rendite p. a. (CAGR) | | |
+| absolute Rendite (Endkapital, Gesamtrendite %) | | |
+| max. Rückgang | | |
+
+Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
+
 ## Referenz-Trades (Regressionsschutz)
 
 `data/reference_trades.json` enthält vom Nutzer freigegebene, „perfekte“ Trades.
