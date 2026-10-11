@@ -134,6 +134,34 @@ her ist und die Daily-Marke darüber liegt. Alle anderen Regeln wie die Engine.
 - Mit 13 Wochen bleibt die Regel neutral (16 Zusatz-Signale), sonst kostet sie Rendite und
   erhöht den Drawdown. **Nicht übernehmen.**
 
+## Anzahl Depotplätze (`MAXPOS`)
+
+Depot 100.000 € Start, Slot = Depotwert / Plätze (`MAXPOS=N`), sonst unverändert.
+
+| Logik | Plätze | Depot | CAGR | PF | Max-DD | genommen / ausgelassen | 2016–25 |
+|---|---|---|---|---|---|---|---|
+| Heute | 5 | 335.423 € | 11,9 % | 1,49 | −45,0 % | 576 / 765 | ×2,25 |
+| Heute | **10** | 464.413 € | 15,3 % | 1,91 | −30,4 % | 1013 / 328 | ×2,32 |
+| Heute | 15 | 384.827 € | 13,3 % | 1,87 | −25,0 % | 1272 / 69 | ×2,26 |
+| Heute | 20 | 318.015 € | 11,4 % | 1,88 | −19,6 % | 1332 / 9 | ×2,06 |
+| Heute | 30 | 225.952 € | 7,9 % | 1,88 | −13,9 % | 1341 / 0 | ×1,65 |
+| Sofort, 4H-Stopp | 10 | 511.027 € | 16,4 % | 2,04 | −31,2 % | 1071 / 324 | ×2,48 |
+| Sofort, 4H-Stopp | 15 | 444.074 € | 14,9 % | 1,98 | −26,2 % | 1320 / 75 | ×2,58 |
+| Sofort, 4H-Stopp | 20 | 343.503 € | 12,2 % | 1,96 | −20,2 % | 1383 / 12 | ×2,16 |
+| pb 2 %, 40 Kerzen | 5 | 923.943 € | 23,0 % | 2,21 | −33,2 % | 513 / 473 | ×4,68 |
+| pb 2 %, 40 Kerzen | 10 | 598.622 € | 18,1 % | 2,27 | −27,6 % | 846 / 140 | ×2,96 |
+| pb 2 %, 40 Kerzen | 15 | 357.250 € | 12,6 % | 1,97 | −22,8 % | 973 / 13 | ×2,17 |
+| pb 2 %, 40 Kerzen | 20 | 277.991 € | 10,0 % | 2,00 | −17,8 % | 986 / 0 | ×1,82 |
+
+- Mehr Plätze nehmen fast alle Signale mit, aber jede Position wird kleiner, und mangels
+  Signalen liegt ein großer Teil des Geldes brach. Rendite und Drawdown sinken beide.
+  Ab 20 Plätzen werden praktisch keine Signale mehr ausgelassen.
+- Rendite je Drawdown bleibt etwa gleich (heute: 0,50 bei 10, 0,53 bei 15, 0,58 bei 20 Plätzen).
+- 10 Plätze sind für heute und den 4H-Stopp das Optimum der Rendite. 15 Plätze sind ein
+  Kompromiss mit weniger Rückgang (−25 % statt −30 %) für 2 Pp. weniger CAGR.
+- pb 2 % mit 5 Plätzen sieht stark aus, hängt aber an wenigen großen Gewinnern
+  (Platzvergabe-Zufall, vgl. MU +702 %). Nicht belastbar.
+
 **Kandidat:** pb 2 %, 40 Kerzen Wartezeit. Vor einer Umstellung offen:
 - Robustheitslauf mit zufällig weggelassenen Signalen (wie in `README.md`)
 - Prüfen, ob Weekly und Daily beim Kauf noch grün sein müssen

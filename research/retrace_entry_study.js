@@ -34,12 +34,16 @@ const FILTER = process.env.FILTER || 'all', STOP = process.env.STOP || 'd';
 const MAXRED = +(process.env.MAXRED || 60);
 const WMWEEKS = +(process.env.WMWEEKS || 52);
 const wmTrades = [];
+const MAXPOS = +(process.env.MAXPOS || 10);
 const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0, noRetrace: 0, re: 0, other: 0 };
 
 const src = fs.readFileSync(path.join(ROOT, 'backtest_ndx.js'), 'utf8')
   .replace("const ROOT = __dirname;", `const ROOT = ${JSON.stringify(ROOT)};`)
   .replace("require('./backtest_kpis')", `require(${JSON.stringify(ROOT + '/backtest_kpis')})`)
   .replace("require('./backtest_history/portfolio')", `require(${JSON.stringify(ROOT + '/backtest_history/portfolio')})`)
+  // MAXPOS=N: Depot mit N Plätzen, Slot = Depotwert / N (100.000 € Start)
+  .replace("{ start: PIT_START, maxPositions: MAX_POSITIONS }",
+    `{ start: PIT_START, maxPositions: ${MAXPOS}, baseSlot: ${100000 / MAXPOS} }`)
   .replace("for (const tr of simulateTradesPIT(", "for (const tr of globalThis.__sim(")
   .replace("if (require.main === module) main();", "main(); globalThis.__report();");
 
@@ -273,5 +277,5 @@ globalThis.__report = () => {
 };
 
 process.env.BACKTEST_NDX_OUT = process.env.BACKTEST_NDX_OUT
-  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}_${FILTER}_${STOP}_${MAXRED}_${WMWEEKS}.json`);
+  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}_${DL}_${FILTER}_${STOP}_${MAXRED}_${WMWEEKS}_${MAXPOS}.json`);
 eval(src.replace(/^#!.*\n/, ''));
