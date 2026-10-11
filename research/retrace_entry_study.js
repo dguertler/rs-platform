@@ -1,0 +1,174 @@
+// Studie 10/2026: Einstieg nach 4H-Rücksetzer statt sofort (Ergebnis: research/RETRACE_ENTRY.md).
+// Signal wie live (simulateTradesPIT): 4H springt auf grün, Woche und Tag zu diesem
+// Zeitpunkt grün, Top 20 am Signaltag. Danach wird auf einen Rücksetzer gewartet:
+//   MODE=now    sofort kaufen (Vergleich, entspricht dem 4H-Stopp aus STOP_LEVEL.md)
+//   MODE=touch  eine 4H-Kerze läuft bis auf 1 % an die gebrochene 4H-Marke zurück,
+//               Kauf zur nächsten 4H-Kerze
+//   MODE=limit  Limit-Kauf auf der gebrochenen 4H-Marke (ab der Kerze, zu der live gekauft würde)
+//   MODE=pb     Schluss mind. PB % unter dem höchsten Schluss seit dem Signal, danach
+//               4H-Schluss über dem Hoch der Vorkerze → Kauf zur nächsten 4H-Kerze
+// Stopp: tiefstes 4H-Tief seit dem Signal × 0,99 (now: letztes 4H-Swing-Tief × 0,99),
+// geprüft an jedem 4H-Schluss. Tagesstruktur-Ausstieg und Zeitstopp wie die Engine.
+// Abbruch: Schluss unter dem 4H-Stopp zum Signalzeitpunkt oder nach WAIT 4H-Kerzen.
+// Aufruf: MODE=pb PB=3 WAIT=20 node research/retrace_entry_study.js
+const fs = require('fs'), path = require('path');
+const ROOT = path.join(__dirname, '..');
+const MODE = process.env.MODE || 'now';
+const PB = +(process.env.PB || 3) / 100;
+const WAIT = +(process.env.WAIT || 20);
+const stats = { signals: 0, entered: 0, cancelled: 0, expired: 0, noLevel: 0 };
+
+const src = fs.readFileSync(path.join(ROOT, 'backtest_ndx.js'), 'utf8')
+  .replace("const ROOT = __dirname;", `const ROOT = ${JSON.stringify(ROOT)};`)
+  .replace("require('./backtest_kpis')", `require(${JSON.stringify(ROOT + '/backtest_kpis')})`)
+  .replace("require('./backtest_history/portfolio')", `require(${JSON.stringify(ROOT + '/backtest_history/portfolio')})`)
+  .replace("for (const tr of simulateTradesPIT(", "for (const tr of globalThis.__sim(")
+  .replace("if (require.main === module) main();", "main(); globalThis.__report();");
+
+// Kaufkerze wie live: Signal in den Kerzen 10–14/14–18 Uhr → nächste 4H-Kerze am selben
+// Tag, sonst die erste Kerze des nächsten Handelstages
+function buyBar(h, j) {
+  const day = h[j].d.slice(0, 10);
+  let k = j + 1;
+  if (!(h4Block(h[j].d) <= 1 && h[k] && h[k].d.slice(0, 10) === day)) {
+    while (k < h.length && h[k].d.slice(0, 10) <= day) k++;
+  }
+  return k < h.length ? k : -1;
+}
+
+function lowest(h, a, b) {
+  let m = Infinity;
+  for (let i = a; i <= b; i++) m = Math.min(m, h[i].l);
+  return m;
+}
+
+// Trade ab 4H-Kerze hStart (Kauf zu entryPrice), Stopp an jedem 4H-Schluss ab hStart
+function tradeH4(ohlcv_d, h, hStart, entryPrice, stopPrice, extra) {
+  const entryDay = h[hStart].d.slice(0, 10);
+  const idx = ohlcv_d.findIndex(b => b.d >= entryDay);
+  if (idx < 0 || !(entryPrice > stopPrice)) return null;
+  let shares = Math.floor(MAX_RISK / (entryPrice - stopPrice));
+  if (shares * entryPrice > CAPITAL) shares = Math.floor(CAPITAL / entryPrice);
+  if (shares <= 0) return null;
+  const entry = { ...extra, trigger: '4H', entryDate: ohlcv_d[idx].d, entryTime: h[hStart].d.slice(11, 16),
+                  entryPrice, stopPrice, shares, invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
+  const weeks = d => Math.round((new Date(d) - new Date(entry.entryDate)) / (7 * 864e5));
+  const done = (exitDate, exitPrice, isOpen = false) => {
+    const pnl = (exitPrice - entryPrice) * shares;
+    return { ...entry, exitDate, exitPrice, pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
+             isWin: pnl > 0, isOpen, holdingWeeks: weeks(exitDate) };
+  };
+  let hj = hStart;
+  for (let k = idx; k < ohlcv_d.length; k++) {
+    const day = ohlcv_d[k].d;
+    for (; hj < h.length && h[hj].d.slice(0, 10) <= day; hj++) {
+      if (h[hj].d.slice(0, 10) < day || h[hj].c >= stopPrice) continue;
+      const nx = h[hj + 1];
+      return nx ? done(nx.d.slice(0, 10), nx.o) : done(day, h[hj].c);
+    }
+    if (!isExitDay(ohlcv_d, k, null, entry)) continue;
+    const next = ohlcv_d[k + 1];
+    return done(next ? next.d : day, next ? next.o : ohlcv_d[k].c);
+  }
+  const last = ohlcv_d[ohlcv_d.length - 1];
+  return done(last.d, last.c, true);
+}
+
+// Rücksetzer nach dem Signal in Kerze j suchen → { hStart, entryPrice, stopPrice } oder null
+function findEntry(h, j) {
+  const k0 = buyBar(h, j);
+  if (k0 < 0) return null;
+  if (MODE === 'now') {
+    const sl = recentSwingLowOf(h.slice(0, k0));
+    return sl == null ? null : { hStart: k0, entryPrice: h[k0].o, stopPrice: sl * 0.99 };
+  }
+  const sl0 = recentSwingLowOf(h.slice(0, j + 1));
+  if (sl0 == null) return null;
+  const stop0 = sl0 * 0.99;
+  let level = null;
+  if (MODE === 'touch' || MODE === 'limit') {
+    level = analyze4HStructure(h.slice(Math.max(0, j - 59), j + 1))?.gws4hHigh?.price ?? null;
+    if (level == null) { stats.noLevel++; return null; }
+  }
+  let hiC = h[j].c, pulled = false;
+  const end = Math.min(h.length - 1, j + WAIT);
+  for (let m = j + 1; m <= end; m++) {
+    const bar = h[m];
+    if (MODE === 'limit' && m >= k0 && bar.l <= level) {
+      const fill = Math.min(bar.o, level);
+      return { hStart: m, entryPrice: fill, stopPrice: Math.min(lowest(h, j, m - 1), fill) * 0.99 };
+    }
+    if (bar.c < stop0) { stats.cancelled++; return null; }
+    let trig = false;
+    if (MODE === 'touch') trig = bar.l <= level * 1.01;
+    if (MODE === 'pb') {
+      if (bar.c <= hiC * (1 - PB)) pulled = true;
+      trig = pulled && bar.c > h[m - 1].h;
+      hiC = Math.max(hiC, bar.c);
+    }
+    if (!trig) continue;
+    const k = buyBar(h, m);
+    if (k < 0) return null;
+    return { hStart: k, entryPrice: h[k].o, stopPrice: lowest(h, j, m) * 0.99 };
+  }
+  stats.expired++;
+  return null;
+}
+
+globalThis.__sim = (ohlcv_w, ohlcv_d, h, inTop, start = PIT_START) => {
+  const trades = [];
+  const dIdx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
+  const first = Math.max(8, h.findIndex(b => b.d.slice(0, 10) >= start) - 1);
+  if (first < 8 || h.length < 10) return trades;
+  const p4 = new Array(h.length).fill(null);
+  for (let j = first; j < h.length; j++) {
+    p4[j] = analyze4HStructure(h.slice(Math.max(0, j - 59), j + 1))?.broken4h ? 1 : 0;
+  }
+  let busyUntil = '';
+  for (let j = first + 1; j < h.length; j++) {
+    if (p4[j - 1] !== 0 || p4[j] !== 1) continue;
+    const bar = h[j], day = bar.d.slice(0, 10);
+    if (day < start || day < busyUntil || (inTop && !inTop(day))) continue;
+    const i = dIdx.get(day);
+    if (i == null) continue;
+    const blk = h4Block(bar.d);
+    let dHistory;
+    if (blk === 0) dHistory = ohlcv_d.slice(0, i);
+    else if (blk === 1) {
+      const db = ohlcv_d[i];
+      dHistory = ohlcv_d.slice(0, i).concat([{ d: day, o: db.o, h: Math.max(db.o, bar.h), l: Math.min(db.o, bar.l), c: bar.c }]);
+    } else dHistory = ohlcv_d.slice(0, i + 1);
+    if (dHistory.length < 30) continue;
+    if (!analyzeStructure(dHistory)?.broken) continue;
+    if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
+    stats.signals++;
+    const e = findEntry(h, j);
+    if (!e) continue;
+    const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
+    const t = tradeH4(ohlcv_d, h, e.hStart, e.entryPrice, e.stopPrice,
+      { signalBar: bar.d, signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) });
+    if (!t) continue;
+    stats.entered++;
+    trades.push(t);
+    busyUntil = t.exitDate;
+  }
+  return trades;
+};
+
+globalThis.__report = () => {
+  const r = JSON.parse(fs.readFileSync(process.env.BACKTEST_NDX_OUT, 'utf8'));
+  const T = r.trades, cl = T.filter(t => !t.isOpen), w = cl.filter(t => t.pnl > 0), l = cl.filter(t => t.pnl <= 0);
+  const avg = (a, f) => a.reduce((s, t) => s + f(t), 0) / (a.length || 1);
+  const dist = T.map(t => (t.entryPrice - t.stopPrice) / t.entryPrice * 100).sort((a, b) => a - b);
+  const grow = (a, b) => { let f = 1; for (let y = a; y <= b; y++) f *= 1 + (r.years[y]?.returnPct ?? 0) / 100; return f.toFixed(2); };
+  console.log(JSON.stringify({ mode: MODE, pb: MODE === 'pb' ? PB * 100 : undefined, wait: MODE === 'now' ? undefined : WAIT,
+    ...stats, depot: r.depot.endEquity, cagr: r.depot.cagr, pf: r.depot.profitFactor, maxDD: r.depot.maxDD,
+    depotTrades: T.filter(t => t.depot).length, winrate: +(w.length / cl.length * 100).toFixed(1),
+    avgWin: +avg(w, t => t.pnlPct).toFixed(1), avgLoss: +avg(l, t => t.pnlPct).toFixed(1),
+    stopDistMedian: +dist[dist.length >> 1].toFixed(1), g1620: grow(2016, 2020), g2125: grow(2021, 2025),
+    years: Object.fromEntries(Object.entries(r.years).map(([y, v]) => [y, v.returnPct])) }));
+};
+
+process.env.BACKTEST_NDX_OUT = process.env.BACKTEST_NDX_OUT
+  || path.join(require('os').tmpdir(), `retrace_${MODE}_${PB * 100}_${WAIT}.json`);
+eval(src.replace(/^#!.*\n/, ''));
