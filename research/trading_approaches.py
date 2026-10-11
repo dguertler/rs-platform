@@ -158,6 +158,8 @@ class Strategy:
     max_positions: int = MAX_POSITIONS
     regime_exit: bool = False            # alles verkaufen, wenn QQQ unter die 200-Tage-Linie fällt
     cash_in_qqq: bool = False            # freies Cash liegt im QQQ (Kosten bei jeder Umschichtung)
+    qqq_sweep: str = "trade"             # "trade": bei jedem Trade umschichten | "month": Verkaufserlöse
+                                         # bleiben Cash und gehen zum Monatsanfang in QQQ, Käufe zuerst aus Cash
 
 
 def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) -> dict:
@@ -170,7 +172,12 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
     # Freies Cash im QQQ: Übernacht-Anteil (Schluss → Eröffnung) vor dem Handel, Tagesanteil
     # (Eröffnung → Schluss) danach — Käufe/Verkäufe zur Eröffnung verdienen bzw. verpassen ihn korrekt.
     q_o, q_c = m.qqq["o"].values, m.qqq["c"].values
+    monthly = s.cash_in_qqq and s.qqq_sweep == "month"
+    month = m.dates.to_period("M")
     cash = START_CAPITAL
+    qv = 0.0                         # QQQ-Bestand (nur Modus "month")
+    if monthly:
+        qv, cash = cash * (1 - fee), 0.0
     open_pos: list[Position] = []
     equity = np.full(i1 - i0, np.nan)
     invested = np.zeros(i1 - i0)
@@ -180,13 +187,16 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
     def close_pos(p: Position, i: int, price: float):
         nonlocal cash
         proceeds = p.shares * price * (1 - fee)
-        cash += proceeds * (1 - fee if s.cash_in_qqq else 1)
+        cash += proceeds * (1 - fee if s.cash_in_qqq and not monthly else 1)
         trades.append({"sym": p.sym, "entry": str(m.dates[p.entry_i].date()), "exit": str(m.dates[i].date()),
                        "pnl": proceeds - p.cost, "ret": proceeds / p.cost - 1, "days": i - p.entry_i})
 
     for i in range(i0, i1):
         if s.cash_in_qqq and i > i0 and q_o[i] > 0 and q_c[i - 1] > 0:
-            cash *= q_o[i] / q_c[i - 1]
+            if monthly:
+                qv *= q_o[i] / q_c[i - 1]
+            else:
+                cash *= q_o[i] / q_c[i - 1]
         # 1. Verkäufe zur Eröffnung (Signal vom Vortag) bzw. feste Engine-Ausstiege
         for p in list(open_pos):
             k = col[p.sym]
@@ -205,7 +215,7 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
 
         # 2. Käufe
         held = {p.sym for p in open_pos}
-        eq_prev = cash + sum(p.shares * last_close.get(p.sym, p.entry_price) for p in open_pos)
+        eq_prev = cash + qv + sum(p.shares * last_close.get(p.sym, p.entry_price) for p in open_pos)
         for e in sorted(s.candidates(i, held), key=lambda x: -x.priority):
             if len(open_pos) >= s.max_positions or e.sym in held:
                 continue
@@ -216,16 +226,26 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
             slot = eq_prev / s.max_positions
             if s.sizing == "risk" and e.stop is not None and price > e.stop:
                 slot = min(slot, eq_prev * RISK_PER_TRADE / (price - e.stop) * price)
+            if monthly and cash < slot and qv > 0:      # fehlendes Geld aus dem QQQ-Bestand
+                gross = min(qv, (slot - cash) / (1 - fee))
+                qv -= gross
+                cash += gross * (1 - fee)
             amount = min(slot, cash)
             if amount < 0.2 * eq_prev / s.max_positions:
                 continue
             cash -= amount
-            net = amount * (1 - fee) * (1 - fee if s.cash_in_qqq else 1)
+            net = amount * (1 - fee) * (1 - fee if s.cash_in_qqq and not monthly else 1)
             open_pos.append(Position(e.sym, i, price, net / price, amount, e.stop, price, e.fixed_exit, tag=e.tag))
             held.add(e.sym)
 
+        if monthly and i > i0 and month[i] != month[i - 1] and cash > 0:
+            qv += cash * (1 - fee)
+            cash = 0.0
         if s.cash_in_qqq and q_o[i] > 0:
-            cash *= q_c[i] / q_o[i]
+            if monthly:
+                qv *= q_c[i] / q_o[i]
+            else:
+                cash *= q_c[i] / q_o[i]
         # 3. Bewertung zum Schluss + Verkaufssignale
         for p in open_pos:
             k = col[p.sym]
@@ -237,8 +257,8 @@ def simulate(m: Market, s: Strategy, start: str, end: str, fee: float = COST) ->
             if s.regime_exit and not qqq_up[i]:
                 p.exit_flag = True
         pos_val = sum(p.shares * last_close.get(p.sym, p.entry_price) for p in open_pos)
-        equity[i - i0] = cash + pos_val
-        invested[i - i0] = pos_val / (cash + pos_val)
+        equity[i - i0] = cash + qv + pos_val
+        invested[i - i0] = pos_val / (cash + qv + pos_val)
 
     for p in open_pos:               # offen zum Datenende: Buchwert
         trades.append({"sym": p.sym, "entry": str(m.dates[p.entry_i].date()), "exit": None,
