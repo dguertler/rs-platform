@@ -189,6 +189,15 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   schwächer). Kauf zur nächsten 4H-Kerze (Kerzen 10–14/14–18 Uhr) bzw. 10 Uhr am
   nächsten Handelstag. Code: `pitSignals`/`simulateTradesPIT` in
   `frontend/backtest_logic.js`, live `check_alerts.py`/`check_alerts_4h.py`
+- **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
+  neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem Tief
+  der Ausbruchskerze der zuletzt gebrochenen Marke liegt (Weekly: Woche mit dem ersten
+  Tagesschluss über der Marke). Die Trendumkehr ist nur Ausstieg aus dem Trade, nicht
+  das Ende des Signals (AVGO KW 15.07.2024: Marke 137,12 → 173,51, Tief der
+  Ausbruchswoche 13.05. bei 129,48 hält). Code: `heldAfterBreakout`/`holdSignal` in
+  `frontend/backtest_logic.js` und `frontend/rs_charts.js` (Seiten-Ampeln), live
+  `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY` in `check_alerts.py`).
+  Varianten testbar mit `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
@@ -199,7 +208,8 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Earnings:** kein Kauf < 4 Kalendertage vor den Zahlen (`data/earnings_history.json`)
 - **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
-  Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg
+  Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,
+  Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg)
 
 ### Ablauf
 

@@ -13,6 +13,40 @@ const TIME_STOP_MIN  = 0.05;
 let timeStopEnabled = false;
 function setTimeStop(on) { timeStopEnabled = !!on; }
 
+// Signal halten (Weekly und Daily, seit 12.10.2026 Backtest und live): Bildet ein
+// tieferes Tief eine neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein
+// Schluss unter dem Tief der Ausbruchskerze der zuletzt gebrochenen Marke liegt. Die
+// Trendumkehr ist dann nur Ausstieg aus dem Trade, nicht das Ende des Signals
+// (AVGO KW 15.07.2024: Weekly-Marke 137,12 → 173,51, Tief der Ausbruchswoche 13.05.
+// bei 129,48 hält). 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
+// gws_core.held_after_breakout. Systemparameter — Studien mit backtest_ndx.js --halten=…
+let holdSignal = { w: true, d: true, h4: false };
+function setHoldSignal(h) { holdSignal = { w: !!h.w, d: !!h.d, h4: !!h.h4 }; }
+
+// breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
+function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
+  for (let c = cands.length - 1; c >= 0; c--) {
+    let b = -1;
+    if (breakoutIdx) b = breakoutIdx(cands[c]);
+    else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
+    if (b < 0) continue;
+    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
+    return true;
+  }
+  return false;
+}
+
+// Weekly wie broken: Ausbruch = erster Tagesschluss über der Marke, Ausbruchskerze = seine Woche
+function weeklyBreakoutIdx(ohlcvW, ohlcvD) {
+  return cand => {
+    const day = ohlcvD.find(d => d.d > cand.date && d.c > cand.price);
+    if (!day) return -1;
+    let b = -1;
+    for (let i = 0; i < ohlcvW.length && ohlcvW[i].d <= day.d; i++) b = i;
+    return b;
+  };
+}
+
 // ── GWS-D Analyse ────────────────────────────────────────────────────────────────
 function analyzeStructure(ohlcv) {
   if (!ohlcv || ohlcv.length < 30) return null;
@@ -79,7 +113,8 @@ function analyzeStructure(ohlcv) {
     else if (last.price < prev.price) trend = "bearish";
   }
 
-  const broken       = gwsdHigh !== null && breakoutIdx !== null;
+  const broken       = gwsdHigh !== null && (breakoutIdx !== null
+    || (holdSignal.d && heldAfterBreakout(gwsdCandidates, closes, lows, n)));
   const currentClose = closes[n - 1];
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
@@ -160,7 +195,9 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   const hasDailyCandles = Array.isArray(ohlcvD) && ohlcvD.length > 0;
   const broken = gwswHigh !== null && (hasDailyCandles
     ? ohlcvD.some(d => d.d > gwswHigh.date && d.c > gwswHigh.price)
-    : breakoutIdx !== null);
+    : breakoutIdx !== null)
+    || (gwswHigh !== null && holdSignal.w && heldAfterBreakout(gwswCandidates, closes, lows, n,
+      hasDailyCandles ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined));
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
@@ -243,7 +280,9 @@ function analyze4HStructure(ohlcv4h) {
   })();
 
   return {
-    gws4hHigh, breakout4hIdx, broken4h: gws4hHigh === null || breakout4hIdx !== null,
+    gws4hHigh, breakout4hIdx,
+    broken4h: gws4hHigh === null || breakout4hIdx !== null
+      || (holdSignal.h4 && heldAfterBreakout(gws4hCandidates, closes, lows, n)),
     prevGws4hHigh, prevBreakout4hIdx, recentBreakout,
     tiefNeu: lastGws4hDefLow,
     swingHighs: swingHighs.slice(-8),

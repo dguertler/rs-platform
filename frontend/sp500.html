@@ -52,7 +52,7 @@
 <script>
   window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
-<script type="text/babel" src="rs_charts.js?v=20260922"></script>
+<script type="text/babel" src="rs_charts.js?v=20261012"></script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
 
@@ -224,7 +224,7 @@ function App() {
     return c?.ohlcv_4h?.length > 0 ? c.ohlcv_4h : null;
   }, [ohlcvCache, selected]);
 
-  const structureW  = useMemo(() => analyzeWeeklyStructure(ohlcvW), [ohlcvW]);
+  const structureW  = useMemo(() => analyzeWeeklyStructure(ohlcvW, ohlcv), [ohlcvW, ohlcv]);
 
   // Slice daily + 4H to match weekly candle count so charts show same time window
   const nCandles = ohlcvW?.length ?? 60;
@@ -251,7 +251,7 @@ function App() {
     const map = {};
     data.data.forEach(entry => {
       map[entry.ticker] = {
-        weekly: analyzeWeeklyStructure(entry.ohlcv_w) || {},
+        weekly: analyzeWeeklyStructure(entry.ohlcv_w, entry.ohlcv) || {},
         daily:  analyzeStructure(entry.ohlcv) || {},
         h4:     analyze4HStructure(entry.ohlcv_4h) || {},
       };

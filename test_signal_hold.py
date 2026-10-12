@@ -1,0 +1,79 @@
+"""Tests für das Signal-Halten nach Trendumkehr (Weekly und Daily, gws_core.held_after_breakout).
+
+Bildet ein tieferes Tief eine neue Marke, bleibt die Ebene grün, solange seit der
+Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt —
+identisch zu heldAfterBreakout in frontend/backtest_logic.js.
+"""
+import json
+import os
+import subprocess
+import unittest
+
+import check_alerts
+from gws_core import held_after_breakout
+
+ROOT = os.path.dirname(os.path.abspath(__file__))
+AVGO_CHART = os.path.join(ROOT, "data", "backtest_history", "charts", "AVGO.json")
+
+
+def bars(rows):
+    return [{"d": r[0], "o": r[1], "h": r[2], "l": r[3], "c": r[4]} for r in rows]
+
+
+class HeldAfterBreakoutTest(unittest.TestCase):
+    # Marke bei 10 (idx 1), Ausbruch idx 3 (Schluss 11, Tief 9), danach neue Marke bei 14
+    closes = [8, 9, 8, 11, 13, 12, 10]
+    lows = [7, 8, 7, 9, 12, 11, 9.5]
+    cands = [{"idx": 1, "price": 10}, {"idx": 4, "price": 14}]
+
+    def test_holds_while_no_close_below_breakout_low(self):
+        self.assertTrue(held_after_breakout(self.cands, self.closes, self.lows, 7, min_margin=0))
+
+    def test_ends_with_close_below_breakout_low(self):
+        closes = self.closes[:-1] + [8.5]
+        self.assertFalse(held_after_breakout(self.cands, closes, self.lows, 7, min_margin=0))
+
+    def test_without_broken_mark_stays_red(self):
+        self.assertFalse(held_after_breakout([{"idx": 4, "price": 14}], self.closes, self.lows, 7, min_margin=0))
+
+
+@unittest.skipUnless(os.path.exists(AVGO_CHART), "Kursdatei AVGO fehlt")
+class AvgoWeeklyTest(unittest.TestCase):
+    """AVGO KW 15.07.2024: tieferes Wochentief → Marke 137,12 → 173,51. Das Tief der
+    Ausbruchswoche 13.05.2024 (129,48) hält, Weekly bleibt grün."""
+
+    def setUp(self):
+        chart = json.load(open(AVGO_CHART))
+        self.w, self.d = bars(chart["w"]), bars(chart["d"])
+        self.addCleanup(setattr, check_alerts, "HOLD_WEEKLY", check_alerts.HOLD_WEEKLY)
+
+    def weekly(self, day):
+        return check_alerts.analyze_weekly_structure([b for b in self.w if b["d"] <= day][-60:],
+                                                     [b for b in self.d if b["d"] <= day])
+
+    def test_new_mark_from_trend_reversal(self):
+        self.assertAlmostEqual(self.weekly("2024-08-12")["gws_price"], 173.51, places=2)
+
+    def test_weekly_held_green(self):
+        check_alerts.HOLD_WEEKLY = True
+        self.assertTrue(self.weekly("2024-08-12")["broken"])
+
+    def test_weekly_red_without_hold(self):
+        check_alerts.HOLD_WEEKLY = False
+        self.assertFalse(self.weekly("2024-08-12")["broken"])
+
+    def test_backtest_engine_holds_weekly(self):
+        script = (
+            "require('vm').runInThisContext(require('fs').readFileSync('frontend/backtest_logic.js','utf8'));"
+            "const c=require('./data/backtest_history/charts/AVGO.json');"
+            "const b=a=>({d:a[0],o:a[1],h:a[2],l:a[3],c:a[4]});"
+            "const W=normalizeWeekly(c.w.map(b)), D=c.d.map(b).filter(x=>x.d<='2024-07-23');"
+            "const r=[analyzeWeeklyStructure(weeklyUpTo(W,D),D).broken];"
+            "setHoldSignal({w:false,d:true});r.push(analyzeWeeklyStructure(weeklyUpTo(W,D),D).broken);"
+            "console.log(JSON.stringify(r));")
+        out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(out.stdout), [True, False])
+
+
+if __name__ == "__main__":
+    unittest.main()

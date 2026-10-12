@@ -21,7 +21,13 @@ import matplotlib.patches as mpatches
 # Exakte Portierung der analyzeStructure / analyzeWeeklyStructure / analyze4HStructure
 # Funktionen aus index.html
 
-from gws_core import _find_swing_points, _gws_core, swing_low_stop
+from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_breakout,
+                      swing_low_stop, weekly_breakout_idx)
+
+# Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
+# frontend/backtest_logic.js): grün bis zum Schluss unter dem Tief der Ausbruchskerze
+HOLD_WEEKLY = True
+HOLD_DAILY = True
 
 
 def analyze_daily_structure(ohlcv):
@@ -46,6 +52,8 @@ def analyze_daily_structure(ohlcv):
             trend = 'bearish'
 
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
+    if not broken and gws_high and HOLD_DAILY:
+        broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n)
     return {
         'broken':      broken,
         'gws_price':   gws_high['price'] if gws_high else None,
@@ -55,8 +63,9 @@ def analyze_daily_structure(ohlcv):
     }
 
 
-def analyze_weekly_structure(ohlcv_w):
-    """Port von analyzeWeeklyStructure() aus index.html (±1 Bar wie im JS)."""
+def analyze_weekly_structure(ohlcv_w, ohlcv_d=None):
+    """Port von analyzeWeeklyStructure() aus index.html (±1 Bar wie im JS).
+    ohlcv_d: Tageskerzen für die Ausbruchswoche beim Signal-Halten (sonst Wochenschluss)."""
     if not ohlcv_w or len(ohlcv_w) < 8:
         return None
     n      = len(ohlcv_w)
@@ -79,6 +88,9 @@ def analyze_weekly_structure(ohlcv_w):
 
     # broken: GWS durchbrochen ODER kein GWS vorhanden aber klarer Aufwärtstrend
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
+    if not broken and gws_high and HOLD_WEEKLY:
+        broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n,
+                                     breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None)
 
     return {
         'broken':       broken,
@@ -138,7 +150,7 @@ def _is_recent(date_str, max_days=3):
 
 def count_points(entry):
     """Berechnet die aktiven Punkte (0–3: W / D / 4H) für einen Ticker."""
-    struct_w  = analyze_weekly_structure(entry.get('ohlcv_w',  []))
+    struct_w  = analyze_weekly_structure(entry.get('ohlcv_w',  []), entry.get('ohlcv') or None)
     struct_d  = analyze_daily_structure(entry.get('ohlcv',    []))
     struct_4h = analyze_4h_structure(entry.get('ohlcv_4h', []))
 

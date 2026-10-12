@@ -17,7 +17,7 @@ from check_alerts import analyze_weekly_structure, analyze_daily_structure, anal
 
 
 def count_points(entry):
-    struct_w  = analyze_weekly_structure(entry.get("ohlcv_w", []))
+    struct_w  = analyze_weekly_structure(entry.get("ohlcv_w", []), entry.get("ohlcv") or None)
     struct_d  = analyze_daily_structure(entry.get("ohlcv", []))
     struct_4h = analyze_4h_structure(entry.get("ohlcv_4h", []))
     p_w  = bool(struct_w.get("broken"))    if struct_w  else False

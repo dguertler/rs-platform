@@ -19,9 +19,8 @@ def _find_swing_points(highs, lows, n, window=2):
     return swing_highs, swing_lows
 
 
-def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
-    """Kernlogik: tiefere Tiefs erkennen → GWS = höchstes Hoch dazwischen.
-    min_margin: Close muss mindestens diesen Bruchteil über GWS liegen (Standard 0.1%)."""
+def gws_candidates(swing_highs, swing_lows):
+    """Alle GWS-Marken: jedes tiefere Tief bildet eine, Marke = höchstes Hoch dazwischen."""
     candidates = []
     for j in range(1, len(swing_lows)):
         tief_neu = swing_lows[j]
@@ -30,9 +29,14 @@ def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
             hochs = [h for h in swing_highs
                      if tief_alt['idx'] < h['idx'] < tief_neu['idx']]
             if hochs:
-                gws_hoch = max(hochs, key=lambda h: h['price'])
-                candidates.append(gws_hoch)
+                candidates.append(max(hochs, key=lambda h: h['price']))
+    return candidates
 
+
+def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
+    """Kernlogik: tiefere Tiefs erkennen → GWS = höchstes Hoch dazwischen.
+    min_margin: Close muss mindestens diesen Bruchteil über GWS liegen (Standard 0.1%)."""
+    candidates = gws_candidates(swing_highs, swing_lows)
     gws_high = candidates[-1] if candidates else None
 
     breakout_idx = None
@@ -44,6 +48,42 @@ def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
                 break
 
     return gws_high, breakout_idx
+
+
+def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_idx=None):
+    """Signal halten wie heldAfterBreakout in frontend/backtest_logic.js: Hat ein
+    tieferes Tief eine neue, noch ungebrochene Marke gebildet (Trendumkehr), bleibt die
+    Ebene grün, solange seit der Ausbruchskerze der zuletzt gebrochenen Marke kein
+    Schluss unter deren Tief liegt (AVGO KW 15.07.2024: Ausbruchswoche 13.05., Tief
+    129,48). breakout_idx(marke) → Index der Ausbruchskerze (optional, sonst erster
+    Schluss über der Marke)."""
+    for cand in reversed(candidates):
+        if breakout_idx:
+            b = breakout_idx(cand)
+        else:
+            threshold = cand['price'] * (1 + min_margin)
+            b = next((i for i in range(cand['idx'] + 1, n) if closes[i] > threshold), -1)
+        if b is None or b < 0:
+            continue
+        return all(closes[i] >= lows[b] for i in range(b + 1, n))
+    return False
+
+
+def weekly_breakout_idx(ohlcv_w, ohlcv_d):
+    """Ausbruchswoche wie weeklyBreakoutIdx in backtest_logic.js: die Woche mit dem
+    ersten Tagesschluss über der Marke (Wochenkerzen mit Montagsdatum)."""
+    def find(cand):
+        mark_day = ohlcv_w[cand['idx']]['d']
+        day = next((d['d'] for d in ohlcv_d if d['d'] > mark_day and d['c'] > cand['price']), None)
+        if day is None:
+            return -1
+        b = -1
+        for i, w in enumerate(ohlcv_w):
+            if w['d'] > day:
+                break
+            b = i
+        return b
+    return find
 
 
 def swing_low_stop(bars, buffer=0.99):

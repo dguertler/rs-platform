@@ -4,6 +4,34 @@
 // im Weekly-Chart gab es nur in einer Kopie in der robusten Fassung). Hier steht er
 // einmal; die Seiten binden ihn per <script type="text/babel" src="rs_charts.js"> ein.
 
+// Signal halten nach Trendumkehr (Weekly und Daily, wie heldAfterBreakout in
+// backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
+// neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
+// Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt.
+// breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
+function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
+  for (let c = cands.length - 1; c >= 0; c--) {
+    let b = -1;
+    if (breakoutIdx) b = breakoutIdx(cands[c]);
+    else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
+    if (b < 0) continue;
+    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
+    return true;
+  }
+  return false;
+}
+
+// Weekly: Ausbruchswoche = Woche mit dem ersten Tagesschluss über der Marke
+function weeklyBreakoutIdx(ohlcvW, ohlcvD) {
+  return cand => {
+    const day = ohlcvD.find(d => d.d > cand.date && d.c > cand.price);
+    if (!day) return -1;
+    let b = -1;
+    for (let i = 0; i < ohlcvW.length && ohlcvW[i].d <= day.d; i++) b = i;
+    return b;
+  };
+}
+
 function analyzeStructure(ohlcv) {
   if (!ohlcv || ohlcv.length < 10) return null;
   const n      = ohlcv.length;
@@ -78,7 +106,8 @@ function analyzeStructure(ohlcv) {
     else if (last.price < prev.price) trend = "bearish";
   }
 
-  const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish");
+  const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish")
+    || (gwsdHigh !== null && heldAfterBreakout(gwsdCandidates, closes, lows, n));
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
@@ -94,7 +123,8 @@ function analyzeStructure(ohlcv) {
 }
 
 // ── GWS-W Analyse (Weekly, gleiche korrekte Logik) ───────────────────────────
-function analyzeWeeklyStructure(ohlcvW) {
+// ohlcvD (optional): Tageskerzen für die Ausbruchswoche beim Signal-Halten
+function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   if (!ohlcvW || ohlcvW.length < 8) return null;
   const n      = ohlcvW.length;
   const highs  = ohlcvW.map(d => d.h);
@@ -158,7 +188,9 @@ function analyzeWeeklyStructure(ohlcvW) {
   }
 
   // Broken: GWS durchbrochen ODER kein GWS-Muster aber klarer Aufwärtstrend
-  const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish");
+  const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish")
+    || (gwswHigh !== null && heldAfterBreakout(gwswCandidates, closes, lows, n,
+      ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined));
 
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 

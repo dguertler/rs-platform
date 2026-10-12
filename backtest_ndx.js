@@ -11,10 +11,13 @@
  * Depot wie live: 100.000 € Start, höchstens 10 Positionen, Zinseszins
  * (backtest_history/portfolio.js). Vergleich: NASDAQ-100 über QQQ (Kurs).
  *
- * Aufruf: node backtest_ndx.js [--hist-only] [--mit-zeitstopp]   → data/backtest_ndx.json
+ * Aufruf: node backtest_ndx.js [--hist-only] [--mit-zeitstopp] [--halten=W,D]   → data/backtest_ndx.json
  *   --hist-only: nur die historischen Kurse (Abgleich mit der Studie)
  *   --mit-zeitstopp: Systemoptimierung — Lauf mit dem (seit 12.10.2026 abgeschalteten)
  *     Zeitstopp; schreibt nur mit BACKTEST_NDX_OUT, nie in data/backtest_ndx.json
+ *   --halten=W,D,4H: Studie — Ebenen, auf denen das Signal nach einer Trendumkehr bis zum
+ *     Schluss unter dem Ausbruchstief grün bleibt (Standard W,D; --halten= ohne Ebene = aus);
+ *     nur mit BACKTEST_NDX_OUT
  */
 const fs = require('fs');
 const path = require('path');
@@ -27,7 +30,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -39,6 +42,12 @@ const histOnly = process.argv.includes('--hist-only');
 if (process.argv.includes('--mit-zeitstopp')) {
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--mit-zeitstopp nur mit BACKTEST_NDX_OUT (Optimierungslauf)');
   globalThis.__e.setTimeStop(true);
+}
+const holdArg = process.argv.find((a) => a.startsWith('--halten='));
+if (holdArg) {
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--halten nur mit BACKTEST_NDX_OUT (Studie)');
+  const lv = holdArg.slice(9).toUpperCase().split(',');
+  globalThis.__e.setHoldSignal({ w: lv.includes('W'), d: lv.includes('D'), h4: lv.includes('4H') });
 }
 // Earnings-Termine je Ticker (fetch_earnings_history.py); fehlt die Datei, gilt die Regel nicht
 const EARNINGS_FILE = path.join(DATA, 'earnings_history.json');
