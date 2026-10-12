@@ -188,14 +188,23 @@ Trade, höchstens 1.000 € Risiko). Grundlage: `trades` aus
 Variante davon) gegen denselben Lauf mit dem aktuellen Stand, Kennzahlen mit
 `kpis()` aus `backtest_kpis.js`. Vorher im Chat ausgeben:
 
+Tabelle mit `node compare_backtest.js vorher.json nachher.json` erzeugen (beide Läufe
+mit `--ohne-zeitstopp`):
+
 | Kennzahl (alle Top-20-Signale, je Trade 10.000 €) | bisher | neu |
 |---|---|---|
 | betroffene Trades (weggefallen / neu / mit anderem Ausstieg) | – | Anzahl + Gewinnsumme |
 | Anzahl Trades | | |
 | Profitfaktor | | |
 | absolute Rendite (Gewinnsumme in €) | | |
+| **Gesamtrendite in %** — Summe der Jahresrenditen über **alle** Jahre inkl. des laufenden | | |
+| **NASDAQ-100 Gesamtrendite in %** — Summe seiner Jahresrenditen, gleicher Zeitraum | | |
 | Ø Rendite je Trade / Trefferquote | | |
 | größter Rückgang der Gewinnsumme (€) | | |
+
+Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, Summenzeile).
+Jahresrendite der Signale = Gewinn der im Jahr verkauften Trades (offene: laufendes
+Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €, Bezugsgröße wie B-ÜBERSICHT).
 
 Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
 Entscheidungsgrundlage. Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
