@@ -2,13 +2,13 @@
   "description": "Freigegebene Referenz-Trades. Jede Änderung an der Signal-/Ausstiegslogik (frontend/backtest_logic.js, check_exits.py, check_alerts*.py) und jeder Backtest-Lauf muss diese Trades unverändert wiedergeben. Prüfung: node check_reference_trades.js bzw. python3 -m pytest test_reference_trades.py. Ausstieg: Verkauf am Ausstiegstag oder zur Eröffnung des nächsten Handelstages. exit = mit Earnings-Regel (data/earnings_history.json), exit_without_earnings = Ausstieg der übrigen Regeln, wenn man die Earnings-Regel weglässt.",
   "trades": [
     {
-      "id": "AVGO-2024-05-14",
+      "id": "AVGO-2024-06-05",
       "ticker": "AVGO",
-      "approved": "2026-10-12",
-      "setup": "Weekly grün (Marke 137,12 gebrochen), Daily durch das Signal-Halten grün (tiefstes Tief zwischen Marke und Ausbruch hält). Am 14.05.2024 schließt die 4H-Kerze 10–14 Uhr über der 4H-Marke 131,69 → Kauf zur nächsten 4H-Kerze. Ersetzt den Referenz-Trade AVGO-2024-06-05 (Kauf erst nach dem 4H-Retracement), freigegeben mit dem Halte-Anker „tiefstes Tief“.",
+      "approved": "2026-10-11",
+      "setup": "Daily-Bruch am 15.05.2024, Weekly ebenfalls grün. Danach 4H-Retracement abwarten; am 05.06.2024 schließt die 4H-Kerze über dem letzten Hoch des Retracements.",
       "entry": {
-        "signal_bar": "2024-05-14 14:00",
-        "date": "2024-05-14",
+        "signal_bar": "2024-06-05 14:00",
+        "date": "2024-06-05",
         "time": "18:00"
       },
       "exit": {

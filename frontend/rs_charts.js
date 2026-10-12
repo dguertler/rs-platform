@@ -7,8 +7,7 @@
 // Signal halten nach Trendumkehr (Weekly und Daily, wie heldAfterBreakout in
 // backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
 // neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
-// Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem tiefsten Tief
-// zwischen dieser Marke und ihrer Ausbruchskerze liegt.
+// Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt.
 // breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
   for (let c = cands.length - 1; c >= 0; c--) {
@@ -16,8 +15,7 @@ function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    const anchor = Math.min(...lows.slice(cands[c].idx, b + 1));   // tiefstes Tief zwischen Marke und Ausbruch
-    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return false;
+    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
     return true;
   }
   return false;

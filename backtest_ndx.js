@@ -18,8 +18,6 @@
  *   --halten=W,D,4H: Studie — Ebenen, auf denen das Signal nach einer Trendumkehr bis zum
  *     Schluss unter dem Ausbruchstief grün bleibt (Standard W,D; --halten= ohne Ebene = aus);
  *     nur mit BACKTEST_NDX_OUT
- *   --halteanker=tiefstes|kerze|swingtief: Studie — Tief, unter dem ein gehaltenes Signal
- *     erlischt (Standard tiefstes = tiefstes Tief zwischen Marke und Ausbruch); nur mit BACKTEST_NDX_OUT
  */
 const fs = require('fs');
 const path = require('path');
@@ -32,7 +30,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -50,12 +48,6 @@ if (holdArg) {
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--halten nur mit BACKTEST_NDX_OUT (Studie)');
   const lv = holdArg.slice(9).toUpperCase().split(',');
   globalThis.__e.setHoldSignal({ w: lv.includes('W'), d: lv.includes('D'), h4: lv.includes('4H') });
-}
-for (const [flag, set] of [['--halteanker=', 'setHoldAnchor']]) {
-  const arg = process.argv.find((a) => a.startsWith(flag));
-  if (!arg) continue;
-  if (!process.env.BACKTEST_NDX_OUT) throw new Error(`${flag.slice(0, -1)} nur mit BACKTEST_NDX_OUT (Studie)`);
-  globalThis.__e[set](arg.slice(flag.length));
 }
 // Earnings-Termine je Ticker (fetch_earnings_history.py); fehlt die Datei, gilt die Regel nicht
 const EARNINGS_FILE = path.join(DATA, 'earnings_history.json');

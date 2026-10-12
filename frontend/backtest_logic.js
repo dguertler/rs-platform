@@ -15,28 +15,13 @@ function setTimeStop(on) { timeStopEnabled = !!on; }
 
 // Signal halten (Weekly und Daily, seit 12.10.2026 Backtest und live): Bildet ein
 // tieferes Tief eine neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein
-// Schluss unter dem tiefsten Tief zwischen der zuletzt gebrochenen Marke und ihrer
-// Ausbruchskerze liegt (dem Tief, aus dem der Ausbruch entstand). Die Trendumkehr ist
-// dann nur Ausstieg aus dem Trade, nicht das Ende des Signals (AVGO Weekly: Marke 173,51,
-// Ausbruch 26.09.2024, Tief 05.08. bei 125,90 hält bis zum Ausbruch über 181,90 im
-// Dezember). 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
+// Schluss unter dem Tief der Ausbruchskerze der zuletzt gebrochenen Marke liegt. Die
+// Trendumkehr ist dann nur Ausstieg aus dem Trade, nicht das Ende des Signals
+// (AVGO KW 15.07.2024: Weekly-Marke 137,12 → 173,51, Tief der Ausbruchswoche 13.05.
+// bei 129,48 hält). 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
 // gws_core.held_after_breakout. Systemparameter — Studien mit backtest_ndx.js --halten=…
-// und --halteanker=…
 let holdSignal = { w: true, d: true, h4: false };
 function setHoldSignal(h) { holdSignal = { w: !!h.w, d: !!h.d, h4: !!h.h4 }; }
-
-// Anker des Signal-Haltens: 'tiefstes' = tiefstes Tief zwischen Marke und Ausbruchskerze
-// (seit 12.10.2026, Backtest und live — Tief, aus dem der Ausbruch entstand); für Studien
-// 'kerze' = Tief der Ausbruchskerze, 'swingtief' = letztes Swing-Tief vor dem Ausbruch
-let holdAnchor = 'tiefstes';
-function setHoldAnchor(a) { holdAnchor = a; }
-function holdAnchorLow(lows, markIdx, b) {
-  if (holdAnchor === 'kerze') return lows[b];
-  if (holdAnchor === 'swingtief') {
-    for (let k = b - 1; k > markIdx; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) return lows[k];
-  }
-  return Math.min(...lows.slice(markIdx, b + 1));
-}
 
 // breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
@@ -45,8 +30,7 @@ function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    const anchor = holdAnchorLow(lows, cands[c].idx, b);
-    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return false;
+    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
     return true;
   }
   return false;
