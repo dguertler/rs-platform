@@ -48,7 +48,7 @@ function ChartLegendMarkers({ showSL = false }) {
       </div>
       <div style={item}>
         <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.18"/></svg>
-        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), rückt mit jedem höheren Swing-Tief nach oben</span>
+        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
       </div>
       <div style={{...item, flexBasis:"100%", flexWrap:"wrap", gap:"2px 12px"}}>
         <span style={{display:"flex",alignItems:"center",gap:4}}>

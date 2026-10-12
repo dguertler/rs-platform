@@ -206,10 +206,10 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
   letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten
   Linie — Weekly: Anker des Signals; Daily/4H (nur Darstellung, Logik unverändert):
-  Swing-Tief vor dem Ausbruch (SL-Höhe), rückt mit jedem höheren Swing-Tief nach oben;
-  ein Schluss darunter beendet das Band, ein neues beginnt beim nächsten Schluss über dem
-  letzten Swing-Hoch seitdem (`trailingZone`; AVGO Daily: 15.08.–23.08.2024, neu ab
-  12.09. mit Tief 09.09.),
+  Swing-Tief vor dem Ausbruch (SL-Höhe); bei jedem weiteren Ausbruch nach oben (Schluss
+  über dem letzten Swing-Hoch) springt es auf das Swing-Tief vor diesem Ausbruch; ein
+  Schluss darunter beendet das Band, ein neues beginnt beim nächsten Ausbruch
+  (`trailingZone`; AVGO Daily: 15.08.2024 → 133,08, 12.09. → 132,17, 20.09. → 157,16),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99

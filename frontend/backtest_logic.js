@@ -40,10 +40,11 @@ function holdAnchorLow(lows, markIdx, b, mode) {
 }
 
 // Gültigkeitsbereich im Chart (Daily, 4H — nur Darstellung, die Logik bleibt unverändert):
-// unten das Swing-Tief vor dem Ausbruch b (SL-Höhe), rückt mit jedem höheren Swing-Tief nach
-// oben. Schließt eine Kerze darunter, endet der Bereich; ein neuer beginnt beim nächsten
-// Schluss über dem letzten Swing-Hoch seitdem (AVGO Daily: Bereich ab 15.08.2024 endet am
-// 26.08., neuer ab 12.09. mit Tief 09.09.). { from, top, low } (Indizes) oder null.
+// unten das Swing-Tief vor dem Ausbruch b (SL-Höhe). Bei jedem weiteren Ausbruch nach oben
+// (Schluss über dem letzten Swing-Hoch) springt die Untergrenze auf das Swing-Tief vor diesem
+// Ausbruch (AVGO Daily: 15.08.2024 → 133,08, 12.09. → 132,17 vom 09.09., 20.09. → 157,16 vom
+// 16.09.). Schließt eine Kerze darunter, endet der Bereich; ein neuer beginnt beim nächsten
+// Ausbruch. { from, top, low } (Indizes) oder null.
 function trailingZone(highs, lows, closes, b, n) {
   const isLow  = k => k >= 1 && k + 1 < n && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1];
   const isHigh = k => k >= 1 && k + 1 < n && highs[k] >= highs[k - 1] && highs[k] >= highs[k + 1];
@@ -51,17 +52,21 @@ function trailingZone(highs, lows, closes, b, n) {
     for (let k = s - 1; k >= 1; k--) if (isLow(k)) return lows[k];
     return Math.min(...lows.slice(Math.max(0, s - 5), s + 1));
   };
-  let start = b, low = lowBefore(b), top = highs[b], broke = -1;
+  // letztes bestätigtes Swing-Hoch nach der Kerze after (bis k-2), sonst null
+  const highAfter = (k, after) => {
+    for (let j = k - 2; j > after; j--) if (isHigh(j)) return highs[j];
+    return null;
+  };
+  let start = b, low = lowBefore(b), top = highs[b], last = b;
   for (let k = b + 1; k < n; k++) {
+    const sh = highAfter(k, last);
     if (start >= 0) {
-      if (k - 1 >= start && isLow(k - 1) && lows[k - 1] > low) low = lows[k - 1];
-      if (closes[k] < low) { start = -1; broke = k; continue; }
+      if (closes[k] < low) { start = -1; last = k; continue; }
+      // Ausbruch nach oben: Untergrenze springt auf das Swing-Tief davor (SL dieses Ausbruchs)
+      if (sh != null && closes[k] > sh) { low = lowBefore(k); last = k; }
       top = Math.max(top, highs[k]);
-    } else {
-      // neuer Ausbruch: Schluss über dem letzten Swing-Hoch seit dem Bruch
-      let sh = null;
-      for (let j = k - 2; j > broke; j--) if (isHigh(j)) { sh = highs[j]; break; }
-      if (sh != null && closes[k] > sh) { start = k; low = lowBefore(k); top = highs[k]; }
+    } else if (sh != null && closes[k] > sh) {
+      start = k; low = lowBefore(k); top = highs[k]; last = k;   // neuer Bereich
     }
   }
   return start >= 0 ? { from: start, top, low } : null;
