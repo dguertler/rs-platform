@@ -103,16 +103,22 @@ def tu_anchor_low(nxt, lows, b):
     """Daily-Anker nach Trendumkehr wie tuAnchorLow in frontend/backtest_logic.js: Die
     Trendumkehr (tieferes Tief tief_neu der nächsten Marke) deaktiviert nur den Trade; die
     Ebene bleibt gehalten bis zu einem Schluss unter dem letzten Swing-Tief vor tief_neu, das
-    tiefer liegt als tief_neu — höchstens bis zum Tief der Ausbruchskerze b (AVGO Daily:
-    Trendumkehr 04.08.2023 bei 84,09 → Anker 81,29 vom 06.07., Schluss 10.08. darunter)."""
+    tiefer liegt als tief_neu, gesucht höchstens bis zum Swing-Tief vor dem Ausbruch b (grüne
+    Linie im Chart); liegt die Trendumkehr darunter, gilt dieses Swing-Tief (AVGO Daily:
+    Trendumkehr 04.08.2023 bei 84,09 → Anker 81,29 vom 06.07., Schluss 10.08. darunter;
+    Trendumkehr 26.10.2023 bei 79,22 → Anker 78,58 vom 06.10., vor dem Ausbruch 11.10.)."""
     t = (nxt or {}).get('tief_neu')
     if not t or t['idx'] <= b:
         return lows[b]
-    for k in range(t['idx'] - 1, 1, -1):
-        if (k + 2 < len(lows) and lows[k] < t['price']
-                and all(lows[k] <= lows[k - j] and lows[k] <= lows[k + j] for j in (1, 2))):
-            return max(lows[k], lows[b])
-    return lows[b]
+
+    def is_low(k):
+        return 2 <= k and k + 2 < len(lows) and all(lows[k] <= lows[k - j] and lows[k] <= lows[k + j]
+                                                     for j in (1, 2))
+    p = next((k for k in range(b - 1, 1, -1) if is_low(k)), -1)   # Swing-Tief vor dem Ausbruch
+    for k in range(t['idx'] - 1, max(2, p) - 1, -1):
+        if is_low(k) and lows[k] < t['price']:
+            return lows[k]
+    return lows[p] if p >= 0 else lows[b]
 
 
 def weekly_breakout_idx(ohlcv_w, ohlcv_d):

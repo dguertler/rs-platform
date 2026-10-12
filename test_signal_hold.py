@@ -79,6 +79,15 @@ class AvgoDailyTest(unittest.TestCase):
 
 
 @unittest.skipUnless(os.path.exists(AVGO_CHART), "Kursdatei AVGO fehlt")
+class AvgoDailyOctober2023Test(AvgoDailyTest):
+    """AVGO 30.10.2023: Trendumkehr (Tief 26.10. bei 79,22, neue Marke 85,48) — Daily bleibt
+    gehalten, weil das Swing-Tief vor dem Ausbruch 11.10. (78,58 vom 06.10., grüne Linie) per
+    Schluss nicht unterschritten wird; ab 07.11. wieder regulär grün."""
+    days = ["2023-10-27", "2023-10-30", "2023-11-03", "2023-11-07"]
+    expected = [True, True, True, True]
+
+
+@unittest.skipUnless(os.path.exists(AVGO_CHART), "Kursdatei AVGO fehlt")
 class AvgoWeeklyTest(unittest.TestCase):
     """AVGO KW 15.07.2024: tieferes Wochentief → Marke 137,12 → 173,51. Das Tief der
     Ausbruchswoche 13.05.2024 (129,48) hält, Weekly bleibt grün."""

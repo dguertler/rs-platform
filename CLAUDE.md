@@ -203,11 +203,14 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: tiefstes Tief zwischen Marke
   und Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **Daily: letztes
   Swing-Tief vor der Trendumkehr, das sie noch nicht unterschritten hat**, geprüft ab der
-  Trendumkehr; ohne solches Swing-Tief nach dem Ausbruch das Tief der Ausbruchskerze
-  (`tuAnchorLow`/`tu_anchor_low`; AVGO Daily: Trendumkehr 04.08.2023 bei 84,09 → Anker
-  81,29 vom 06.07., Schluss 10.08. bei 81,16 darunter → Daily rot bis zum Ausbruch 21.08.;
-  über alle Top-20-Signale Gewinnsumme 254.937 € → 256.906 €, PF 1,66 → 1,65 gegenüber dem
-  Tief der Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
+  Trendumkehr und gesucht höchstens bis zum Swing-Tief vor dem Ausbruch (der grünen Linie im
+  Chart); liegt die Trendumkehr darunter, gilt dieses Swing-Tief — **keine** Begrenzung auf
+  das Tief der Ausbruchskerze (`tuAnchorLow`/`tu_anchor_low`; AVGO Daily: Trendumkehr
+  04.08.2023 bei 84,09 → Anker 81,29 vom 06.07., Schluss 10.08. bei 81,16 darunter → Daily rot
+  bis zum Ausbruch 21.08.; Trendumkehr 26.10.2023 bei 79,22 → Anker 78,58 vom 06.10., Daily
+  bleibt gehalten; März–Mai 2024 gehalten über 116,96 vom 21.02.; über alle Top-20-Signale
+  Gewinnsumme 257.389 € → 286.939 €, PF 1,66 → 1,70 gegenüber der Begrenzung auf das Tief der
+  Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
   (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 125,90, hält über die
   Trendumkehr vom 11.11.2024; 181,90, Ausbruch 13.12.2024 → 154,86). Die Trendumkehr ist
   nur Ausstieg aus dem Trade, nicht das Ende des Signals. Code: `heldAfterBreakout`/

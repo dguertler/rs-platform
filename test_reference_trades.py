@@ -40,17 +40,17 @@ class TestReferenceTradesLive(unittest.TestCase):
     def test_live_exit_signal_on_reference_day(self):
         earnings = load_earnings()
         for ref in REFS:
-            runs = [(earnings.get(ref["ticker"]), ref["exit"])]
+            runs = [(earnings.get(ref["ticker"]), ref["entry"], ref["exit"])]
             if ref.get("exit_without_earnings"):
-                runs.append((None, ref["exit_without_earnings"]))
-            for earn, expected in runs:
+                runs.append((None, ref.get("entry_without_earnings") or ref["entry"], ref["exit_without_earnings"]))
+            for earn, entry, expected in runs:
                 with self.subTest(ref["id"], earnings=earn is not None):
                     if earn is not None:
                         self.assertTrue(earn, f"keine Earnings-Termine für {ref['ticker']}")
                     daily, h4 = chart(ref["ticker"])
-                    entry_bar = next(b for b in h4 if b["d"] == f"{ref['entry']['date']} {ref['entry']['time']}")
-                    before = [b for b in daily if b["d"] < ref["entry"]["date"]]
-                    position = {"entry_date": ref["entry"]["date"], "entry_price": entry_bar["o"],
+                    entry_bar = next(b for b in h4 if b["d"] == f"{entry['date']} {entry['time']}")
+                    before = [b for b in daily if b["d"] < entry["date"]]
+                    position = {"entry_date": entry["date"], "entry_price": entry_bar["o"],
                                 "stop_price": swing_low_stop(before, STOP_BUFFER)}
                     exit_ = find_exit(daily, position, None, earn, h4)
                     self.assertIsNotNone(exit_, "kein Ausstieg gefunden")

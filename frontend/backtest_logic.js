@@ -83,15 +83,19 @@ function zoneFrom(bars, z) {
 // deaktiviert nur den Trade; die Ebene bleibt gehalten, bis ein Schluss unter dem letzten
 // Swing-Tief vor tiefNeu liegt, das die Trendumkehr noch nicht unterschritten hat (AVGO
 // Daily: Trendumkehr 04.08.2023 bei 84,09 → Anker 81,29 vom 06.07., Schluss 10.08. bei 81,16
-// darunter → Daily rot). Ohne Trendumkehr: Tief der Ausbruchskerze.
+// darunter → Daily rot). Gesucht wird höchstens bis zum Swing-Tief vor dem Ausbruch (grüne Linie
+// im Chart); liegt die Trendumkehr darunter, gilt dieses Swing-Tief (AVGO 30.10.2023: Trendumkehr
+// 26.10. bei 79,22 → Anker 78,58 vom 06.10., vor dem Ausbruch 11.10.). Ohne Trendumkehr: Tief der
+// Ausbruchskerze.
 function tuAnchorLow(next, lows, b) {
   const t = next?.tiefNeu;
   if (!t || t.idx <= b) return lows[b];
-  for (let k = t.idx - 1; k >= 2; k--) {
-    if (k + 2 < lows.length && lows[k] < t.price && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
-        && lows[k] <= lows[k+1] && lows[k] <= lows[k+2]) return Math.max(lows[k], lows[b]);
-  }
-  return lows[b];
+  const isLow = k => k >= 2 && k + 2 < lows.length && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
+    && lows[k] <= lows[k+1] && lows[k] <= lows[k+2];
+  let p = -1;                                       // Swing-Tief vor dem Ausbruch (grüne Linie)
+  for (let k = b - 1; k >= 2; k--) if (isLow(k)) { p = k; break; }
+  for (let k = t.idx - 1; k >= Math.max(2, p); k--) if (isLow(k) && lows[k] < t.price) return lows[k];
+  return p >= 0 ? lows[p] : lows[b];
 }
 
 // Daily: Swing-Tief schon mit einer Folgekerze, wenn diese Kerze die daraus entstehende Marke

@@ -16,16 +16,18 @@ function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) 
   return heldBreakout(cands, closes, lows, n, breakoutIdx, lowest) !== null;
 }
 // Daily-Anker nach Trendumkehr wie tuAnchorLow in backtest_logic.js: letztes Swing-Tief vor
-// tiefNeu (dem tieferen Tief der nächsten Marke), das tiefer liegt als tiefNeu — höchstens bis
-// zum Tief der Ausbruchskerze b (AVGO Daily 04.08.2023 → 81,29 vom 06.07.)
+// tiefNeu (dem tieferen Tief der nächsten Marke), das tiefer liegt als tiefNeu — gesucht höchstens
+// bis zum Swing-Tief vor dem Ausbruch b (AVGO Daily 04.08.2023 → 81,29 vom 06.07.; 30.10.2023 →
+// 78,58 vom 06.10.)
 function tuAnchorLow(next, lows, b) {
   const t = next?.tiefNeu;
   if (!t || t.idx <= b) return lows[b];
-  for (let k = t.idx - 1; k >= 2; k--) {
-    if (k + 2 < lows.length && lows[k] < t.price && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
-        && lows[k] <= lows[k+1] && lows[k] <= lows[k+2]) return Math.max(lows[k], lows[b]);
-  }
-  return lows[b];
+  const isLow = k => k >= 2 && k + 2 < lows.length && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
+    && lows[k] <= lows[k+1] && lows[k] <= lows[k+2];
+  let p = -1;                                       // Swing-Tief vor dem Ausbruch (grüne Linie)
+  for (let k = b - 1; k >= 2; k--) if (isLow(k)) { p = k; break; }
+  for (let k = t.idx - 1; k >= Math.max(2, p); k--) if (isLow(k) && lows[k] < t.price) return lows[k];
+  return p >= 0 ? lows[p] : lows[b];
 }
 // Daily: Swing-Tief schon mit einer Folgekerze, wenn diese Kerze die daraus entstehende Marke
 // bricht (wie provisionalMark in backtest_logic.js, live gws_core.provisional_mark_break;
