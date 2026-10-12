@@ -7,6 +7,10 @@ const MAX_RISK = 1000;
 // (Studie 10/2026 über alle Alpaca-Signale seit 2016: PF 2,60 → 3,23).
 const TIME_STOP_DAYS = 10;
 const TIME_STOP_MIN  = 0.05;
+// Für Bewertungsläufe von Logik-Änderungen abschaltbar (backtest_ndx.js --ohne-zeitstopp,
+// siehe CLAUDE.md „Logik-Änderungen“); live und auf den Seiten immer an
+let timeStopEnabled = true;
+function setTimeStop(on) { timeStopEnabled = !!on; }
 
 // ── GWS-D Analyse ────────────────────────────────────────────────────────────────
 function analyzeStructure(ohlcv) {
@@ -339,7 +343,7 @@ function isTimeStop(dHistory, k, entry) {
   // dHistory beginnt immer mit derselben ersten Tageskerze — der Index bleibt gleich
   if (!_entryIdxCache.has(entry)) _entryIdxCache.set(entry, dHistory.findIndex(d => d.d >= entry.entryDate));
   const idx = _entryIdxCache.get(entry);
-  return idx >= 0 && k - idx === TIME_STOP_DAYS
+  return timeStopEnabled && idx >= 0 && k - idx === TIME_STOP_DAYS
     && dHistory[k].c < entry.entryPrice * (1 + TIME_STOP_MIN);
 }
 

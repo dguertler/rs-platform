@@ -180,11 +180,13 @@ Jede Änderung an Signal-, Einstiegs-, Ausstiegs- oder Depotlogik (Backtest und
 Live) wird **erst übernommen (Commit/Push), nachdem der Nutzer die Wirkung gesehen
 hat**. Bewertet wird die **Logik über alle Signale der Top-20-Titel** (Titel am
 Signaltag in den Top 20, derselbe Filter wie `backtest_ndx.js`/B-ÜBERSICHT) —
-ohne die Begrenzung auf 10 Depotplätze (sonst entscheidet die Platzvergabe mit):
-jeder Trade aus `simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je Trade,
-höchstens 1.000 € Risiko). Grundlage: `trades` aus `node backtest_ndx.js` (bzw.
-einer Variante davon) gegen den aktuellen Stand, Kennzahlen mit `kpis()` aus
-`backtest_kpis.js`. Vorher im Chat ausgeben:
+**ohne die Begrenzung auf 10 Depotplätze und vorerst ohne Zeitstopp** (beide
+Systemparameter würden das Urteil über die Logik verzerren, siehe unten): jeder
+Trade aus `simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je
+Trade, höchstens 1.000 € Risiko). Grundlage: `trades` aus
+`BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --ohne-zeitstopp` (bzw. einer
+Variante davon) gegen denselben Lauf mit dem aktuellen Stand, Kennzahlen mit
+`kpis()` aus `backtest_kpis.js`. Vorher im Chat ausgeben:
 
 | Kennzahl (alle Top-20-Signale, je Trade 10.000 €) | bisher | neu |
 |---|---|---|
@@ -197,6 +199,22 @@ einer Variante davon) gegen den aktuellen Stand, Kennzahlen mit `kpis()` aus
 
 Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
 Entscheidungsgrundlage. Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
+
+**Systemparameter — bei einer Systemoptimierung gesondert berücksichtigen.** Beide
+bleiben live und auf den Seiten (B-ÜBERSICHT/B-DETAILS) aktiv, werden aber bei der
+Bewertung von Logik-Änderungen ausgeblendet. Soll das System als Ganzes optimiert
+werden, sind sie neu zu prüfen (mit der dann gültigen Logik):
+- **Depot höchstens 10 Positionen** (`MAX_POSITIONS` in `backtest_history/portfolio.js`
+  und `check_exits.py`) — begrenzt, welche Signale gekauft werden
+- **Zeitstopp**: 10 Handelstage nach dem Kauf nicht mind. +5 % → Verkauf
+  (`TIME_STOP_DAYS`/`TIME_STOP_MIN` in `frontend/backtest_logic.js`, `check_exits.py`).
+  Zuletzt geprüft vor Trendumkehr-Ausstieg und Earnings-Regel; schneidet Trades ab,
+  die sich erst nach zwei Wochen entwickeln (z. B. AVGO 05.05.2026: Zeitstopp −4,0 %,
+  ohne Zeitstopp Verkauf vor Earnings +12,7 %)
+
+**Frontend-Cache:** Nach jeder Änderung an `frontend/*.js` die Version `?v=…` in
+allen HTML-Seiten hochsetzen, die die Datei einbinden — sonst mischt der Browser
+alte und neue Dateien (B-DETAILS blieb so am 12.10.2026 leer).
 
 ## Referenz-Trades (Regressionsschutz)
 

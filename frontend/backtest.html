@@ -8,8 +8,8 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261013"></script>
-  <script type="text/babel" src="backtest_charts.js?v=20261014"></script>
+  <script src="backtest_logic.js?v=20261015"></script>
+  <script type="text/babel" src="backtest_charts.js?v=20261015"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
@@ -290,7 +290,7 @@ function BacktestApp() {
                       <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:t.isOpen?'#fbbf24':'#cbd5e1'}}>
                         {t.exitPrice.toFixed(2)}
                       </span>
-                      {(() => { const r = EXIT_REASONS[t.exitReason];
+                      {(() => { const r = (typeof EXIT_REASONS !== 'undefined' ? EXIT_REASONS : {})[t.exitReason];
                         return <span title={r ? r.label : t.isOpen ? 'Position offen' : ''}
                           style={{textAlign:'center',fontFamily:'monospace',fontSize:10,fontWeight:700,color:r ? r.color : '#475569'}}>
                           {r ? r.short : t.isOpen ? '–' : ''}</span>; })()}
@@ -307,7 +307,7 @@ function BacktestApp() {
               </div>
               {/* Legende Verkaufsgründe (auch für die Marker in den Charts) */}
               <div style={{display:'flex',flexWrap:'wrap',gap:'4px 14px',padding:'6px 4px 0',fontSize:10,fontFamily:'monospace',color:'#64748b'}}>
-                {Object.entries(EXIT_REASONS).map(([k, r]) => (
+                {Object.entries(typeof EXIT_REASONS !== 'undefined' ? EXIT_REASONS : {}).map(([k, r]) => (
                   <span key={k} title={r.label}><b style={{color:r.color}}>{r.short}</b> {r.label.split(':')[0]}</span>
                 ))}
               </div>

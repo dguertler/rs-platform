@@ -11,8 +11,10 @@
  * Depot wie live: 100.000 € Start, höchstens 10 Positionen, Zinseszins
  * (backtest_history/portfolio.js). Vergleich: NASDAQ-100 über QQQ (Kurs).
  *
- * Aufruf: node backtest_ndx.js [--hist-only]   → data/backtest_ndx.json
+ * Aufruf: node backtest_ndx.js [--hist-only] [--ohne-zeitstopp]   → data/backtest_ndx.json
  *   --hist-only: nur die historischen Kurse (Abgleich mit der Studie)
+ *   --ohne-zeitstopp: Bewertungslauf für Logik-Änderungen ohne Zeitstopp (CLAUDE.md);
+ *     schreibt nur mit BACKTEST_NDX_OUT, nie in data/backtest_ndx.json
  */
 const fs = require('fs');
 const path = require('path');
@@ -25,7 +27,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -34,6 +36,11 @@ const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]/g, '_');
 const liveFile = (t) => path.join(DATA, `backtest_${slug(t)}.json`);
 const histOnly = process.argv.includes('--hist-only');
+const noTimeStop = process.argv.includes('--ohne-zeitstopp') || process.env.BACKTEST_NO_TIME_STOP === '1';
+if (noTimeStop) {
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--ohne-zeitstopp nur mit BACKTEST_NDX_OUT (Bewertungslauf)');
+  globalThis.__e.setTimeStop(false);
+}
 // Earnings-Termine je Ticker (fetch_earnings_history.py); fehlt die Datei, gilt die Regel nicht
 const EARNINGS_FILE = path.join(DATA, 'earnings_history.json');
 const earningsByTicker = fs.existsSync(EARNINGS_FILE) ? readJson(EARNINGS_FILE).tickers || {} : {};

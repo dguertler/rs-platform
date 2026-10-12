@@ -117,7 +117,7 @@ function LiveAlerts({ live, stages }) {
                   <td style={{ color: '#94a3b8' }}>{t.trigger}</td>
                   <td>{t.alertDate}{t.basis === 'naeherung' ? '*' : ''}</td>
                   <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}</td>
-                  {(() => { const r = EXIT_REASONS[t.exitReason];
+                  {(() => { const r = (typeof EXIT_REASONS !== 'undefined' ? EXIT_REASONS : {})[t.exitReason];
                     return <td title={r ? r.label : ''} style={{ color: r ? r.color : '#475569', fontWeight: 700 }}>{r ? r.short : '–'}</td>; })()}
                   <td style={{ color: pnlColor(t.pnlPct) }}>{pct(t.pnlPct)}</td>
                   <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
