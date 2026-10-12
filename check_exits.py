@@ -10,7 +10,7 @@ Ausstiegsregel wie in frontend/backtest_logic.js (simulateTrades):
     • Trendumkehr: der Schlusskurs liegt unter dem Trendumkehr-Tief (Stand
       Vortag) — dem letzten Swing-Tief vor dem letzten Swing-Hoch, oder
     • der Schlusskurs unter dem Stopp liegt, oder
-    • Zeitstopp: 10 Handelstage nach dem Einstieg liegt der Schluss nicht
+    • Zeitstopp (seit 12.10.2026 abgeschaltet, TIME_STOP_ENABLED): 10 Handelstage nach dem Einstieg liegt der Schluss nicht
       mindestens 5 % über dem Einstiegskurs
   Ausführung zur Eröffnung des Folgetages.
 
@@ -53,6 +53,7 @@ SOURCE_FILES = {
 
 MIN_BARS = 30        # wie analyzeStructure in backtest_logic.js
 STOP_BUFFER = 0.99   # Stopp einen Tick unter das Swing-Tief
+TIME_STOP_ENABLED = False   # wie timeStopEnabled in backtest_logic.js (abgeschaltet seit 12.10.2026)
 TIME_STOP_DAYS = 10  # Zeitstopp wie TIME_STOP_DAYS / TIME_STOP_MIN in backtest_logic.js
 TIME_STOP_MIN = 0.05
 MAX_POSITIONS = 10   # Modell-Depot wie backtest_history/portfolio.js
@@ -228,7 +229,7 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
                     "earnings": True}
 
         reason = None
-        if (entry_idx is not None and i - entry_idx == TIME_STOP_DAYS
+        if (TIME_STOP_ENABLED and entry_idx is not None and i - entry_idx == TIME_STOP_DAYS
                 and day["c"] < position["entry_price"] * (1 + TIME_STOP_MIN)):
             reason = "Zeitstopp"
         low = trend_low(daily_structure(ohlcv[:i])) if reason is None else None
@@ -304,8 +305,9 @@ def sl_rows_html(moves):
     for m in moves:
         up = m["new"] > m["old"]
         color = "#4ade80" if up else "#fbbf24"
-        ts = (f"Zeitstopp-Prüfung am {m['time_stop_date']}: Schluss mind. {m['time_stop_need']:.2f}"
-              if m.get("time_stop_pending") else "Zeitstopp bestanden")
+        ts = ("" if not TIME_STOP_ENABLED else
+              f" &middot; Zeitstopp-Prüfung am {m['time_stop_date']}: Schluss mind. {m['time_stop_need']:.2f}"
+              if m.get("time_stop_pending") else " &middot; Zeitstopp bestanden")
         rows.append(f"""
   <div style="margin:0 0 16px;padding:14px;background:#0f172a;
               border:1px solid #1e293b;border-left:4px solid {color};border-radius:8px">
@@ -316,7 +318,7 @@ def sl_rows_html(moves):
     <div style="font-size:12px;color:#94a3b8;line-height:1.7">
       Neuer Stopp: <strong style="color:#e2e8f0">{m['new']:.2f}</strong> ({m['kind']}) &middot;
       letzter Schluss {m['last_close']:.2f}<br>
-      Einstieg: {m['entry_date']} zu {m['entry_price']:.2f} &middot; {ts}
+      Einstieg: {m['entry_date']} zu {m['entry_price']:.2f}{ts}
     </div>
   </div>""")
     return "".join(rows)
@@ -332,8 +334,8 @@ def build_email_html(exits, moves=()):
   {exit_rows_html(exits)}{sl_rows_html(moves)}
   <p style="color:#475569;font-size:11px;margin-top:24px;line-height:1.6">
     Regel wie im Backtest: Schluss unter dem Stopp bzw. unter dem Tief, aus dem
-    das letzte Hoch entstanden ist (Trendumkehr), oder Zeitstopp (10 Handelstage
-    nach dem Einstieg nicht mind. +5 %). Verkauf zur Eröffnung des Folgetages.
+    das letzte Hoch entstanden ist (Trendumkehr) — Verkauf zur Eröffnung des
+    Folgetages —, oder vor Earnings zum Schluss der 14-Uhr-Kerze am Tag davor.
     Die Meldung bezieht sich auf das Signal des Systems, nicht auf deinen
     tatsächlichen Depotbestand.
   </p>

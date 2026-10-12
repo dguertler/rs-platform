@@ -3,13 +3,14 @@
 const CAPITAL  = 10000;
 const MAX_RISK = 1000;
 // Zeitstopp: Liegt der Schlusskurs 10 Handelstage nach dem Einstieg nicht
-// mindestens 5 % über dem Einstiegskurs, wird zur nächsten Eröffnung verkauft
-// (Studie 10/2026 über alle Alpaca-Signale seit 2016: PF 2,60 → 3,23).
+// mindestens 5 % über dem Einstiegskurs, wird zur nächsten Eröffnung verkauft.
+// Seit 12.10.2026 abgeschaltet (Backtest und live, check_exits.TIME_STOP_ENABLED):
+// mit Trendumkehr-Ausstieg und Earnings-Regel PF 1,61 → 1,70 ohne Zeitstopp.
+// Systemparameter für eine spätere Optimierung — testen mit
+// backtest_ndx.js --mit-zeitstopp (siehe CLAUDE.md).
 const TIME_STOP_DAYS = 10;
 const TIME_STOP_MIN  = 0.05;
-// Für Bewertungsläufe von Logik-Änderungen abschaltbar (backtest_ndx.js --ohne-zeitstopp,
-// siehe CLAUDE.md „Logik-Anpassungen & Logik-Verbesserungen“); live und auf den Seiten immer an
-let timeStopEnabled = true;
+let timeStopEnabled = false;
 function setTimeStop(on) { timeStopEnabled = !!on; }
 
 // ── GWS-D Analyse ────────────────────────────────────────────────────────────────

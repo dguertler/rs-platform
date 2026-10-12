@@ -135,10 +135,20 @@ if __name__ == "__main__":
 class TestZeitstoppUndSL(unittest.TestCase):
     """Zeitstopp (10 Handelstage, mind. +5 %), wirksamer SL und Modell-Depot (10 Plätze)."""
 
-    def test_zeitstopp_wenn_nach_10_tagen_unter_plus_5_prozent(self):
+    def test_zeitstopp_abgeschaltet(self):
         rows = rising(31) + [bar(f"2026-02-{d:02d}", 131.0, 132.0, 130.0, 131.0) for d in range(1, 13)]
         pos = {"entry_date": rows[30]["d"], "entry_price": rows[30]["o"], "stop_price": 90.0}
-        hit = find_exit(rows, pos, None)
+        self.assertIsNone(find_exit(rows, pos, None))
+
+    def test_zeitstopp_wenn_eingeschaltet_nach_10_tagen_unter_plus_5_prozent(self):
+        import check_exits
+        rows = rising(31) + [bar(f"2026-02-{d:02d}", 131.0, 132.0, 130.0, 131.0) for d in range(1, 13)]
+        pos = {"entry_date": rows[30]["d"], "entry_price": rows[30]["o"], "stop_price": 90.0}
+        check_exits.TIME_STOP_ENABLED = True
+        try:
+            hit = find_exit(rows, pos, None)
+        finally:
+            check_exits.TIME_STOP_ENABLED = False
         self.assertEqual(hit["reason"], "Zeitstopp")
         self.assertEqual(hit["signal_date"], rows[40]["d"])      # 10. Handelstag nach dem Einstieg
         self.assertEqual(hit["exit_date"], rows[41]["d"])        # Verkauf zur nächsten Eröffnung

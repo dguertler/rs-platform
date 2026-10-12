@@ -10,7 +10,7 @@
  * laufenden Jahres. NASDAQ-100 ebenso als Summe seiner Jahresrenditen (years[].ndxPct).
  *
  * Aufruf: node compare_backtest.js vorher.json nachher.json
- *   Läufe z. B.: BACKTEST_NDX_OUT=/tmp/vorher.json node backtest_ndx.js --ohne-zeitstopp
+ *   Läufe z. B.: BACKTEST_NDX_OUT=/tmp/vorher.json node backtest_ndx.js
  */
 const fs = require('fs');
 const { kpis } = require('./backtest_kpis');

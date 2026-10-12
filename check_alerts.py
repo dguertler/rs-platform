@@ -368,7 +368,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
 
         # Kauf-Entscheidung (Modell-Depot, höchstens 10 Positionen), Einstieg und
         # Stopp nach der Backtest-Regel: Kauf zur Eröffnung des Folgetages, Stopp
-        # beim letzten Swing-Tief minus Puffer, Zeitstopp nach 10 Handelstagen.
+        # beim letzten Swing-Tief minus Puffer (Zeitstopp seit 12.10.2026 abgeschaltet).
         stop_price = alert.get('stop_price')
         decision = alert.get('decision')
         if decision or stop_price:
@@ -383,7 +383,7 @@ def send_alert_email(alerts, smtp_host, smtp_port, smtp_user, smtp_pass, to_addr
                 f'font-size:12px;color:#94a3b8;line-height:1.7">'
                 f'<strong style="color:{d_color}">{d_text}</strong><br>'
                 + (f'SL: <strong style="color:#fca5a5">{stop_price:.2f}</strong> (rote Linie im Chart)'
-                   f'&nbsp;&middot;&nbsp;Zeitstopp: nach 10 Handelstagen Schluss mind. +5 % über Einstieg'
+                   f'&nbsp;&middot;&nbsp;Verkauf bei Trendumkehr oder vor Earnings'
                    if stop_price else '')
                 + '</div>\n'
             )

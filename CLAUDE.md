@@ -161,7 +161,7 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `data/earnings_alerts_log.json` | Event-Log gesendeter Earnings-Alerts (Global-Scan + Live-Premarket), je Eintrag mit `trigger` (`eps-beat` / `kursreaktion`) und `eps_distorted` — Basis für den `earning`/`earningsanalyse`-Automatik-Modus | Laufend automatisch (bei jedem Alert) |
 | `data/last_breakout_alerts.json` | Zuletzt per Mail+Telegram versendete Breakout-Alert-Charge (2→3 Punkte) — Basis für den `aktienanalyse`-Automatik-Modus, wird bei jedem Lauf überschrieben (kein Verlauf) | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `data/watchlist.json` | Beobachtete Ticker — Grundlage der Verkaufs- und SL-Verschiebungs-Meldungen (in der täglichen Breakout-Mail). Führende Quelle; die Watchlist-Seite liest sie beim Laden und schreibt Änderungen direkt zurück (GitHub-Contents-API, Token pro Gerät im localStorage). Ohne Token bleibt die Liste lokal und lässt sich über „exportieren" als Datei ablegen | Laufend über `frontend/watchlist.html` |
-| `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg, Stopp und zuletzt gemeldetem wirksamen SL (`sl_level`), plus bereits abgeschlossene Signale — Verkäufe (Stopp, Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch entstand, Zeitstopp; Verkauf zur Eröffnung am Folgetag; vor Earnings Verkauf zum Schluss der 14-Uhr-Kerze am letzten Handelstag davor — identisch in `check_exits.py` und `frontend/backtest_logic.js`) und SL-Verschiebungen stehen in derselben Mail wie die Breakouts | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml` → `check_alerts.py` → `check_exits.process_watchlist`) |
+| `data/open_signals.json` | Offene 4H-Breakout-Signale der Watchlist-Titel inkl. Einstieg, Stopp und zuletzt gemeldetem wirksamen SL (`sl_level`), plus bereits abgeschlossene Signale — Verkäufe (Stopp, Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch entstand; Verkauf zur Eröffnung am Folgetag; vor Earnings Verkauf zum Schluss der 14-Uhr-Kerze am letzten Handelstag davor — identisch in `check_exits.py` und `frontend/backtest_logic.js`) und SL-Verschiebungen stehen in derselben Mail wie die Breakouts | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml` → `check_alerts.py` → `check_exits.process_watchlist`) |
 | `data/live_depot.json` | Modell-Depot der verschickten Breakouts (höchstens 10 Positionen) — entscheidet in der Breakout-Mail über „Kauf“ oder „Kein Kauf – 10 von 10 Plätzen belegt“; beim ersten Lauf aus den seit 22.09.2026 verschickten 4H-Alerts rekonstruiert | Di–Sa 02:00 UTC automatisch (`stock_alerts.yml`) |
 | `data/intraday_alert_state.json` | Zuletzt geprüfte 4H-Kerzen des 4H-Prüfjobs (`check_alerts_4h.py`): prüft 20 Min. nach dem Schluss der Kerzen 10–14 und 14–18 Uhr Berliner Zeit (Kerzen wie TradingView ab 10/14/18/22 Uhr) die Top-20-Titel zeitpunktgenau und schickt bei neuem 4H-Breakout sofort die Kaufmail (Kauf zur nächsten Kerze, Kauffenster 10:00–22:10); Kerzen mit Schluss 22 bzw. 2 Uhr meldet der Nachtlauf | Mo–Fr 12:20/13:20/16:20/17:20 UTC automatisch (`stock_alerts_4h.yml`) |
 | Branch `backtest-data-sp500` | Historischer S&P-500-Backtest (Top 20 point-in-time ab 2016, identische Pipeline und Engine wie NASDAQ-100, Benchmark ^GSPC wie `sp500_colab_1.py`): `sp500_results.json` + Kursdateien je Aktie unter `charts/` — eigener Branch, weil zu groß für `master` | Manuell über `backtest_history_sp500.yml` |
@@ -178,7 +178,8 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 
 Gilt, sobald es um Signal-, Einstiegs-, Ausstiegs- oder Depotlogik geht (z. B. „ist
 dieser Trade richtig?", „Stopp/Ausstieg ändern", „neue Regel", „rechne durch, ob …").
-Jeder Chat kann damit ohne Vorwissen weiterarbeiten.
+Jeder Chat kann damit ohne Vorwissen weiterarbeiten. **Jede Logik-Änderung gilt immer
+für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines von beiden.
 
 ### Aktueller Logik-Stand (Backtest = Live)
 
@@ -191,8 +192,9 @@ Jeder Chat kann damit ohne Vorwissen weiterarbeiten.
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
-  entstand (TU) · Zeitstopp 10 Handelstage < +5 % (ZS) · Verkauf vor Earnings zum
-  Schluss der 14-Uhr-Kerze (ER). Daily-Signale → Verkauf zur Eröffnung am Folgetag.
+  entstand (TU) · Verkauf vor Earnings zum Schluss der 14-Uhr-Kerze (ER). Daily-Signale
+  → Verkauf zur Eröffnung am Folgetag. **Kein Zeitstopp** (abgeschaltet seit
+  12.10.2026; Kürzel ZS nur noch bei `--mit-zeitstopp`).
   Code: `exitReasonOf`/`tradeFromEntry`, live `check_exits.find_exit`
 - **Earnings:** kein Kauf < 4 Kalendertage vor den Zahlen (`data/earnings_history.json`)
 - **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
@@ -222,14 +224,14 @@ Jeder Chat kann damit ohne Vorwissen weiterarbeiten.
 
 Bewertet wird die **Logik über alle Signale der Top-20-Titel** (Titel am Signaltag in
 den Top 20, derselbe Filter wie `backtest_ndx.js`/B-ÜBERSICHT) — **ohne die
-Begrenzung auf 10 Depotplätze und vorerst ohne Zeitstopp** (beide Systemparameter
-würden das Urteil über die Logik verzerren, siehe unten): jeder Trade aus
+Begrenzung auf 10 Depotplätze** (Systemparameter, würde das Urteil über die Logik
+verzerren, siehe unten): jeder Trade aus
 `simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je Trade, höchstens
 1.000 € Risiko).
 
 ```bash
-BACKTEST_NDX_OUT=/tmp/vorher.json  node backtest_ndx.js --ohne-zeitstopp   # Stand vor der Änderung
-BACKTEST_NDX_OUT=/tmp/nachher.json node backtest_ndx.js --ohne-zeitstopp   # mit Änderung
+BACKTEST_NDX_OUT=/tmp/vorher.json  node backtest_ndx.js   # Stand vor der Änderung
+BACKTEST_NDX_OUT=/tmp/nachher.json node backtest_ndx.js   # mit Änderung
 node compare_backtest.js /tmp/vorher.json /tmp/nachher.json                # Tabelle + Jahrestabelle
 ```
 
@@ -252,17 +254,19 @@ Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €, Bezugsgröße wie B-ÜBER
 Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
 Entscheidungsgrundlage.
 
-**Systemparameter — bei einer Systemoptimierung gesondert berücksichtigen.** Beide
-bleiben live und auf den Seiten (B-ÜBERSICHT/B-DETAILS) aktiv, werden aber bei der
-Bewertung von Logik-Änderungen ausgeblendet. Soll das System als Ganzes optimiert
-werden, sind sie neu zu prüfen (mit der dann gültigen Logik):
+**Systemparameter — bei einer Systemoptimierung gesondert berücksichtigen.** Soll das
+System als Ganzes optimiert werden, sind sie neu zu prüfen (mit der dann gültigen Logik):
 - **Depot höchstens 10 Positionen** (`MAX_POSITIONS` in `backtest_history/portfolio.js`
-  und `check_exits.py`) — begrenzt, welche Signale gekauft werden
-- **Zeitstopp**: 10 Handelstage nach dem Kauf nicht mind. +5 % → Verkauf
-  (`TIME_STOP_DAYS`/`TIME_STOP_MIN` in `frontend/backtest_logic.js`, `check_exits.py`).
-  Zuletzt geprüft vor Trendumkehr-Ausstieg und Earnings-Regel; schneidet Trades ab,
-  die sich erst nach zwei Wochen entwickeln (z. B. AVGO 05.05.2026: Zeitstopp −4,0 %,
-  ohne Zeitstopp Verkauf vor Earnings +12,7 %)
+  und `check_exits.py`) — live und auf B-ÜBERSICHT aktiv, bei der Logik-Bewertung
+  ausgeblendet; begrenzt, welche Signale gekauft werden
+- **Zeitstopp** (10 Handelstage nach dem Kauf nicht mind. +5 % → Verkauf) —
+  **abgeschaltet seit 12.10.2026, Backtest und Live** (`timeStopEnabled` in
+  `frontend/backtest_logic.js`, `TIME_STOP_ENABLED` in `check_exits.py`). Mit
+  Trendumkehr und Earnings-Regel ohne Zeitstopp: PF 1,61 → 1,70, Gesamtrendite
+  +172 % → +205 %, größter Rückgang −32.186 € → −38.350 €. Schnitt Trades ab, die
+  sich erst nach zwei Wochen entwickeln (AVGO 05.05.2026: −4,0 % statt +12,7 %).
+  Für eine Optimierung wieder testbar mit
+  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --mit-zeitstopp`
 
 **Frontend-Cache:** Nach jeder Änderung an `frontend/*.js` die Version `?v=…` in
 allen HTML-Seiten hochsetzen, die die Datei einbinden — sonst mischt der Browser

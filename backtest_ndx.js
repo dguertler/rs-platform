@@ -11,10 +11,10 @@
  * Depot wie live: 100.000 € Start, höchstens 10 Positionen, Zinseszins
  * (backtest_history/portfolio.js). Vergleich: NASDAQ-100 über QQQ (Kurs).
  *
- * Aufruf: node backtest_ndx.js [--hist-only] [--ohne-zeitstopp]   → data/backtest_ndx.json
+ * Aufruf: node backtest_ndx.js [--hist-only] [--mit-zeitstopp]   → data/backtest_ndx.json
  *   --hist-only: nur die historischen Kurse (Abgleich mit der Studie)
- *   --ohne-zeitstopp: Bewertungslauf für Logik-Änderungen ohne Zeitstopp (CLAUDE.md);
- *     schreibt nur mit BACKTEST_NDX_OUT, nie in data/backtest_ndx.json
+ *   --mit-zeitstopp: Systemoptimierung — Lauf mit dem (seit 12.10.2026 abgeschalteten)
+ *     Zeitstopp; schreibt nur mit BACKTEST_NDX_OUT, nie in data/backtest_ndx.json
  */
 const fs = require('fs');
 const path = require('path');
@@ -36,10 +36,9 @@ const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]/g, '_');
 const liveFile = (t) => path.join(DATA, `backtest_${slug(t)}.json`);
 const histOnly = process.argv.includes('--hist-only');
-const noTimeStop = process.argv.includes('--ohne-zeitstopp') || process.env.BACKTEST_NO_TIME_STOP === '1';
-if (noTimeStop) {
-  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--ohne-zeitstopp nur mit BACKTEST_NDX_OUT (Bewertungslauf)');
-  globalThis.__e.setTimeStop(false);
+if (process.argv.includes('--mit-zeitstopp')) {
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--mit-zeitstopp nur mit BACKTEST_NDX_OUT (Optimierungslauf)');
+  globalThis.__e.setTimeStop(true);
 }
 // Earnings-Termine je Ticker (fetch_earnings_history.py); fehlt die Datei, gilt die Regel nicht
 const EARNINGS_FILE = path.join(DATA, 'earnings_history.json');
@@ -126,7 +125,7 @@ function main() {
     start: PIT_START,
     rule: 'Zeitpunktgenau wie live: Signal an jedem 4H-Kerzenschluss (4H neu, Woche und Tag zu diesem Zeitpunkt grün), '
       + 'Kauf zur nächsten 4H-Kerze (Kerzen 10–14/14–18 Uhr) bzw. um 10 Uhr am nächsten Handelstag, Top 20 am Signaltag, '
-      + 'Stopp/Ausstieg/Zeitstopp wie Engine; Depot 100.000 €, höchstens 10 Positionen, Zinseszins',
+      + 'Stopp/Trendumkehr/Verkauf vor Earnings wie Engine; Depot 100.000 €, höchstens 10 Positionen, Zinseszins',
     depot: {
       startCapital: depot.startCapital, endEquity: round(depot.endEquity, 0), returnPct: round(depot.returnPct),
       cagr: round(depot.cagr), maxDD: round(depot.maxDD), profitFactor: round(depot.profitFactor),
