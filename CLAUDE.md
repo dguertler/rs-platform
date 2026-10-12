@@ -255,12 +255,15 @@ Die Ausgabe enthält immer:
 | absolute Rendite (Gewinnsumme in €) | | |
 | **Gesamtrendite in %** — Summe der Jahresrenditen über **alle** Jahre inkl. des laufenden | | |
 | **NASDAQ-100 Gesamtrendite in %** — Summe seiner Jahresrenditen, gleicher Zeitraum | | |
+| **Monate über NASDAQ-100** — Anzahl aller Monate (inkl. laufendem), in denen die Monatsrendite der Signale über der des NASDAQ-100 lag („X von Y“, Anteil) | | |
 | Ø Rendite je Trade / Trefferquote | | |
 | größter Rückgang der Gewinnsumme (€) | | |
 
-Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, Summenzeile).
-Jahresrendite der Signale = Gewinn der im Jahr verkauften Trades (offene: laufendes
-Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €, Bezugsgröße wie B-ÜBERSICHT).
+Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, dazu Monate über NASDAQ-100
+bisher / neu je Jahr, Summenzeile). Jahresrendite der Signale = Gewinn der im Jahr
+verkauften Trades (offene: laufendes Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €,
+Bezugsgröße wie B-ÜBERSICHT); Monatsrendite ebenso je Monat, NASDAQ-100 je Monat aus
+denselben QQQ-Kursen (`ndxMonths` in `data/backtest_ndx.json`).
 Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
 Entscheidungsgrundlage.
 

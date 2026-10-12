@@ -73,18 +73,21 @@ function seriesFor(ticker, rs) {
   return { series, inTop, earnings: earningsByTicker[ticker] || null };
 }
 
-/** NASDAQ-100-Jahresrendite aus QQQ-Schlusskursen (historisch + aktuell). */
-function ndxByYear(rs) {
+/** NASDAQ-100-Rendite je Jahr (keyLen 4, 'YYYY') bzw. je Monat (keyLen 7, 'YYYY-MM') aus
+ *  QQQ-Schlusskursen (historisch + aktuell): letzter Schluss der Periode / letzter davor. */
+function ndxByPeriod(rs, keyLen = 4) {
   const benchPath = path.join(CHARTS, '_benchmark.json');
   const closes = new Map();
   if (fs.existsSync(benchPath)) for (const b of readJson(benchPath).d) closes.set(b[0], b[4]);
   if (!histOnly) for (const b of rs.benchmark_ohlcv || []) closes.set(b.d, b.c);
   const days = [...closes.keys()].sort();
+  const lastOf = new Map();
+  for (const d of days) lastOf.set(d.slice(0, keyLen), d);
   const out = {};
-  for (let y = +PIT_START.slice(0, 4); y <= +days[days.length - 1].slice(0, 4); y++) {
-    const before = days.filter((d) => d < `${y}-01-01`).pop();
-    const last = days.filter((d) => d.startsWith(`${y}`)).pop();
-    if (before && last) out[y] = (closes.get(last) / closes.get(before) - 1) * 100;
+  let prev = null;
+  for (const [p, last] of lastOf) {
+    if (prev && p >= PIT_START.slice(0, keyLen)) out[p] = (closes.get(last) / closes.get(prev) - 1) * 100;
+    prev = last;
   }
   return out;
 }
@@ -118,7 +121,7 @@ function main() {
   const sim = simulatePortfolio(depotTrades, closesBySymbol, { start: PIT_START, maxPositions: MAX_POSITIONS });
   const depot = portfolioStats(sim, depotTrades);
   const taken = new Set(depotTrades.filter((t) => sim.results.get(t)?.taken).map((t) => `${t.symbol}|${t.entryDate}`));
-  const ndx = ndxByYear(rs);
+  const ndx = ndxByPeriod(rs, 4);
 
   const years = {};
   for (const [y, v] of Object.entries(depot.years)) {
@@ -141,6 +144,7 @@ function main() {
       taken: depot.taken, skipped: depot.skipped, ndxPct: round((ndxTotal - 1) * 100),
     },
     signals: (() => { const k = kpis(trades, 10000); return { nTrades: trades.length, profitFactor: round(k.profitFactor), winrate: round(k.winrate, 1) }; })(),
+    ndxMonths: Object.fromEntries(Object.entries(ndxByPeriod(rs, 7)).map(([m, v]) => [m, round(v)])),
     years: Object.fromEntries(Object.entries(years).map(([y, v]) => [y, Object.fromEntries(Object.entries(v).map(([k, x]) => [k, round(x, k === 'trades' ? 0 : 2)]))])),
     trades: trades.map((t) => ({
       ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), signalBar: t.signalBar, weeklyDate: t.weeklyDate, entryDate: t.entryDate, entryTime: t.entryTime,
@@ -161,4 +165,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { readJson, seriesFor, simulateTradesPIT };
+module.exports = { readJson, seriesFor, simulateTradesPIT, ndxByPeriod };
