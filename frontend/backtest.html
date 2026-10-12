@@ -154,6 +154,17 @@ function BacktestApp() {
   // damit insbesondere der Profitfaktor überall gleich gerechnet wird.
   const kpis = useMemo(() => calcKpis(trades), [trades]);
 
+  // Käufe/Verkäufe je Woche (Montag der Kauf- bzw. Verkaufswoche) für die Spalte „Trade“
+  const tradeWeeks = useMemo(() => {
+    const m = {};
+    const add = (d, k, t) => { const w = mondayOf(d); (m[w] = m[w] || { buy: [], sell: [] })[k].push(t); };
+    for (const t of trades) {
+      add(t.entryDate, 'buy', t);
+      if (!t.isOpen) add(t.exitDate, 'sell', t);
+    }
+    return m;
+  }, [trades]);
+
   const tradeMarkers = useMemo(() =>
     trades.flatMap(t => [
       { date: t.entryDate, time: t.entryTime, weeklyDate: t.weeklyDate, type: 'entry', stopPrice: t.stopPrice },
@@ -321,13 +332,14 @@ function BacktestApp() {
           <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,overflow:'hidden'}}>
 
             {/* Tabellen-Header */}
-            <div style={{display:'grid',gridTemplateColumns:'72px 96px 72px 36px 36px 36px 40px',gap:0,
+            <div style={{display:'grid',gridTemplateColumns:'88px 84px 64px 30px 30px 30px 64px 40px',gap:0,
               background:'#0f172a',borderBottom:'1px solid #1e293b',padding:'7px 12px',
               fontSize:10,fontWeight:700,color:'#475569',fontFamily:'monospace',letterSpacing:'0.05em'}}>
               <span>KW</span><span>Datum</span><span style={{textAlign:'right'}}>Close</span>
               <span style={{textAlign:'center'}}>W</span>
               <span style={{textAlign:'center'}}>D</span>
               <span style={{textAlign:'center'}}>4H</span>
+              <span style={{textAlign:'center'}}>Trade</span>
               <span style={{textAlign:'center'}}>T20</span>
             </div>
 
@@ -348,13 +360,15 @@ function BacktestApp() {
                 fri.setUTCDate(fri.getUTCDate() - 1);
                 const friStr = fri.toISOString().slice(0,10);
                 const isT20 = top20Hist ? top20Hist(addDaysISO(row.week.d, 4)) : null;
+                const tw = tradeWeeks[mondayOf(row.week.d)];
+                const fmtT = t => `${t.entryDate} ${t.entryTime ?? ''} → ${t.isOpen ? 'offen' : `${t.exitDate} (${EXIT_REASONS[t.exitReason]?.short ?? t.exitReason ?? ''})`} ${t.pnlPct.toFixed(1)} %`;
                 return (
                   <div key={row.i}
                     ref={el => weekRowRefs.current[row.i] = el}
                     className="tbl-row"
                     onClick={() => handleRowClick(row.i)}
                     style={{
-                      display:'grid', gridTemplateColumns:'72px 96px 72px 36px 36px 36px 40px',
+                      display:'grid', gridTemplateColumns:'88px 84px 64px 30px 30px 30px 64px 40px',
                       gap:0, padding:'5px 12px',
                       background: isSel ? '#1a2f4a' : bgPts,
                       borderLeft: isSel ? '3px solid #3b82f6' : borderLeft,
@@ -375,6 +389,15 @@ function BacktestApp() {
                     <span style={{textAlign:'center'}}><PktDot val={row.pW}  has={true}/></span>
                     <span style={{textAlign:'center'}}><PktDot val={row.pD}  has={row.dSlice.length >= 10}/></span>
                     <span style={{textAlign:'center'}}><PktDot val={row.p4H} has={row.has4h}/></span>
+                    <span style={{textAlign:'center',display:'flex',flexDirection:'column',lineHeight:1.15,
+                      fontFamily:'monospace',fontSize:9,fontWeight:700}}
+                      title={tw ? [...tw.buy.map(t => 'Kauf ' + fmtT(t)), ...tw.sell.map(t => 'Verkauf ' + fmtT(t))].join('\n') : ''}>
+                      {tw?.buy.length > 0 && <span style={{color:'#4ade80'}}>BUY</span>}
+                      {tw?.sell.length > 0 && <span style={{color:'#f87171'}}>
+                        SELL{tw.sell[0].exitReason && EXIT_REASONS[tw.sell[0].exitReason] ? ' ' + EXIT_REASONS[tw.sell[0].exitReason].short : ''}
+                      </span>}
+                      {!tw && <span style={{color:'#1e293b'}}>·</span>}
+                    </span>
                     <span style={{textAlign:'center'}}>
                       {isT20 === null ? <span style={{color:'#334155',fontSize:9}}>–</span>
                         : isT20 ? <span style={{color:'#4ade80',fontSize:9,fontWeight:700,fontFamily:'monospace'}}>T20</span>
