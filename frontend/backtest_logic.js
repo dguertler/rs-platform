@@ -43,13 +43,15 @@ function holdAnchorLow(lows, markIdx, b, mode) {
 // unten das Swing-Tief vor dem Ausbruch b (SL-Höhe). Bei jedem weiteren Ausbruch nach oben
 // (Schluss über dem letzten Swing-Hoch) springt die Untergrenze auf das Swing-Tief vor diesem
 // Ausbruch (AVGO Daily: 15.08.2024 → 133,08, 12.09. → 132,17 vom 09.09., 20.09. → 157,16 vom
-// 16.09.). Schließt eine Kerze darunter, endet der Bereich; ein neuer beginnt beim nächsten
-// Ausbruch. { from, top, low } (Indizes) oder null.
+// 16.09.). Zählt nur ein Swing-Tief, das schon vor der Ausbruchskerze bestätigt war — die
+// Ausbruchskerze selbst bestätigt keins (AVGO Daily 14.05.2026: 404,92 vom 07.05., bestätigt
+// am 08.05., nicht 403,43 vom 13.05.). Schließt eine Kerze darunter, endet der Bereich; ein
+// neuer beginnt beim nächsten Ausbruch. { from, top, low } (Indizes) oder null.
 function trailingZone(highs, lows, closes, b, n) {
   const isLow  = k => k >= 1 && k + 1 < n && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1];
   const isHigh = k => k >= 1 && k + 1 < n && highs[k] >= highs[k - 1] && highs[k] >= highs[k + 1];
   const lowBefore = s => {
-    for (let k = s - 1; k >= 1; k--) if (isLow(k)) return lows[k];
+    for (let k = s - 2; k >= 1; k--) if (isLow(k)) return lows[k];   // bestätigt vor s
     return Math.min(...lows.slice(Math.max(0, s - 5), s + 1));
   };
   // letztes bestätigtes Swing-Hoch nach der Kerze after (bis k-2), sonst null
