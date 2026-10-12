@@ -29,7 +29,7 @@ ENV: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS, ALERT_EMAIL_TO
 import json
 import os
 import smtplib
-from datetime import datetime
+from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 
 from gws_core import _find_swing_points, _gws_core, swing_low_stop
@@ -41,6 +41,8 @@ WATCHLIST_FILE = os.path.join(DATA_DIR, "watchlist.json")
 STATE_FILE = os.path.join(DATA_DIR, "open_signals.json")
 DEPOT_FILE = os.path.join(DATA_DIR, "live_depot.json")
 SIGNALS_FILE = os.path.join(DATA_DIR, "signals.json")
+EARNINGS_FILE = os.path.join(DATA_DIR, "earnings_history.json")
+CALENDAR_FILE = os.path.join(DATA_DIR, "earnings_calendar.json")
 
 # Quelle → RS-Datei. Das Feld `source` in signals.json zeigt hierauf.
 SOURCE_FILES = {
@@ -54,6 +56,7 @@ STOP_BUFFER = 0.99   # Stopp einen Tick unter das Swing-Tief
 TIME_STOP_DAYS = 10  # Zeitstopp wie TIME_STOP_DAYS / TIME_STOP_MIN in backtest_logic.js
 TIME_STOP_MIN = 0.05
 MAX_POSITIONS = 10   # Modell-Depot wie backtest_history/portfolio.js
+EARNINGS_BLOCK_DAYS = 4   # wie EARNINGS_BLOCK_DAYS in backtest_logic.js
 DEPOT_SINCE = "2026-09-22"   # ab hier nur noch 4H-Auslöser verschickt (Rekonstruktion)
 
 
@@ -89,6 +92,59 @@ def trend_low(struct):
     return lows[-1]["price"] if lows else None
 
 
+# ── Earnings (wie nextEarnings/earningsSellDay in backtest_logic.js) ──────────
+
+def load_earnings():
+    """ticker → [[YYYY-MM-DD, 'bmo'|'amc'|'unk'], …] aus earnings_history.json;
+    fehlt ein Ticker dort, zählt der nächste Termin aus earnings_calendar.json
+    (Uhrzeit unbekannt)."""
+    hist = load_json(EARNINGS_FILE, {}).get("tickers", {})
+    cal = load_json(CALENDAR_FILE, {}).get("next_earnings", {})
+    out = {t: rows for t, rows in hist.items()}
+    for t, d in cal.items():
+        rows = out.setdefault(t, [])
+        if all(r[0] != d for r in rows):
+            rows.append([d, "unk"])
+            rows.sort()
+    return out
+
+
+def next_earnings(earnings, day):
+    return next((e for e in earnings or [] if e[0] >= day), None)
+
+
+def earnings_blocks_entry(earnings, entry_day):
+    """Kein Kauf, wenn die nächsten Zahlen weniger als 4 Kalendertage entfernt sind."""
+    e = next_earnings(earnings, entry_day)
+    if not e:
+        return None
+    days = (datetime.strptime(e[0], "%Y-%m-%d") - datetime.strptime(entry_day, "%Y-%m-%d")).days
+    return e if days < EARNINGS_BLOCK_DAYS else None
+
+
+def earnings_sell_day(ohlcv, e):
+    """Verkaufstag vor den Zahlen: nach Börsenschluss derselbe Tag, sonst der
+    Handelstag davor (bei Zahlen vor Börsenbeginn bzw. unbekannter Uhrzeit).
+    Liegt der Vortag noch nicht in den Kursen, wird der Werktag davor geschätzt."""
+    if e[1] == "amc":
+        return e[0]
+    prev = [b["d"] for b in ohlcv if b["d"] < e[0]]
+    if prev and ohlcv[-1]["d"] >= e[0]:
+        return prev[-1]
+    d = datetime.strptime(e[0], "%Y-%m-%d") - timedelta(days=1)
+    while d.weekday() >= 5:
+        d -= timedelta(days=1)
+    return d.strftime("%Y-%m-%d")
+
+
+def h4_close_14(h4, day):
+    """Schluss der 14-Uhr-Kerze (Block 10–14/14–18 Uhr Berlin wie h4Block)."""
+    for b in h4 or []:
+        if b["d"][:10] == day and 10 < int(b["d"][11:13]) <= 14:
+            return b["c"]
+    return None
+
+
 # ── Dateien ───────────────────────────────────────────────────────────────────
 
 def load_json(path, default):
@@ -114,7 +170,7 @@ def load_market_data():
             ticker = entry.get("ticker")
             rows = entry.get("ohlcv") or []
             if ticker and rows and ticker not in market:
-                market[ticker] = {"ohlcv": rows, "source": source}
+                market[ticker] = {"ohlcv": rows, "source": source, "ohlcv_4h": entry.get("ohlcv_4h") or []}
     return market
 
 
@@ -149,14 +205,27 @@ def derive_entry(ohlcv, signal_date):
 
 # ── Ausstieg ──────────────────────────────────────────────────────────────────
 
-def find_exit(ohlcv, position, last_checked):
-    """Erster Ausstiegstag nach last_checked. Gibt None zurück, solange keiner vorliegt."""
+def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None):
+    """Erster Ausstiegstag nach last_checked. Gibt None zurück, solange keiner vorliegt.
+
+    earnings: Termine des Titels — Verkauf zum Schluss der 14-Uhr-Kerze am letzten
+    Handelstag vor den nächsten Zahlen. Liegt dieser Tag nach dem letzten Kurs, aber
+    spätestens heute (today), wird der Verkauf schon als anstehend gemeldet."""
     entry_idx = next((k for k, b in enumerate(ohlcv) if b["d"] >= position["entry_date"]), None)
+    e = next_earnings(earnings, position["entry_date"])
+    sell_day = earnings_sell_day(ohlcv, e) if e else None
+    if sell_day and sell_day < position["entry_date"]:
+        sell_day = None
+    when = {"amc": "nach Börsenschluss", "bmo": "vor Börsenbeginn"}.get(e[1], "Uhrzeit offen") if e else ""
     for i, day in enumerate(ohlcv):
         if day["d"] < position["entry_date"]:
             continue
         if last_checked and day["d"] <= last_checked:
             continue
+        if sell_day and day["d"] >= sell_day:
+            return {"signal_date": day["d"], "exit_date": day["d"], "reason": f"Earnings am {e[0]} ({when})",
+                    "exit_price": h4_close_14(h4, day["d"]) or day["c"], "pending": False,
+                    "earnings": True}
 
         reason = None
         if (entry_idx is not None and i - entry_idx == TIME_STOP_DAYS
@@ -178,6 +247,9 @@ def find_exit(ohlcv, position, last_checked):
             "reason": reason,
             "pending": nxt is None,   # Ausführung erst am nächsten Handelstag
         }
+    if sell_day and ohlcv and ohlcv[-1]["d"] < sell_day <= (today or "0000"):
+        return {"signal_date": sell_day, "exit_date": sell_day, "reason": f"Earnings am {e[0]} ({when})",
+                "exit_price": ohlcv[-1]["c"], "pending": True, "earnings": True}
     return None
 
 
@@ -219,7 +291,8 @@ def exit_rows_html(exits):
     <div style="font-size:12px;color:#94a3b8;line-height:1.7">
       Grund: <strong style="color:#e2e8f0">{e['reason']}</strong><br>
       Einstieg: {e['entry_date']} zu {e['entry_price']:.2f}<br>
-      Signal am {e['signal_date']}, Verkauf zur Eröffnung {e['exit_date']}
+      {f"Verkauf am {e['exit_date']} zum Schluss der 14-Uhr-Kerze (18:00)" if e.get('earnings')
+       else f"Signal am {e['signal_date']}, Verkauf zur Eröffnung {e['exit_date']}"}
       ({'Kurs folgt' if e.get('pending') else f"{e['exit_price']:.2f}"})
     </div>
   </div>""")
@@ -289,7 +362,7 @@ def send_email(exits, moves=()):
 
 # ── Hauptprogramm ─────────────────────────────────────────────────────────────
 
-def collect_new_positions(watchlist, market, signals, positions, closed):
+def collect_new_positions(watchlist, market, signals, positions, closed, earnings=None):
     """Neue 4H-Breakouts für Watchlist-Titel als offene Position aufnehmen.
 
     Übersprungen wird ein Signal, wenn es bereits abgeschlossen wurde (`closed`)
@@ -312,6 +385,9 @@ def collect_new_positions(watchlist, market, signals, positions, closed):
             entry["entry_price"] = latest["entry_price"]
         if not entry:
             pending.append(f"{key} ({latest['signal_date']})")
+            continue
+        if earnings_blocks_entry((earnings or {}).get(ticker), entry["entry_date"]):
+            closed[key] = latest["signal_date"]      # kein Kauf so kurz vor den Zahlen
             continue
         positions[key] = {
             "ticker": ticker,
@@ -355,7 +431,9 @@ def process_watchlist(market=None, signals=None):
     for key in [k for k in positions if k not in watchlist]:
         positions.pop(key)
 
-    opened, pending = collect_new_positions(watchlist, market, signals, positions, closed)
+    earnings = load_earnings()
+    today = datetime.now().strftime("%Y-%m-%d")
+    opened, pending = collect_new_positions(watchlist, market, signals, positions, closed, earnings)
     for key in opened:
         p = positions[key]
         print(f"  neu verfolgt: {key} ab {p['entry_date']} zu {p['entry_price']:.2f}, "
@@ -368,7 +446,8 @@ def process_watchlist(market=None, signals=None):
         data = market.get(position["ticker"])
         if not data:
             continue
-        hit = find_exit(data["ohlcv"], position, position.get("last_checked"))
+        hit = find_exit(data["ohlcv"], position, position.get("last_checked"),
+                        earnings.get(position["ticker"]), data.get("ohlcv_4h"), today)
         if hit and hit["pending"] and not position.get("adopted"):
             # Signal steht, Verkauf zur nächsten Eröffnung — jetzt melden, Position
             # erst nach der Ausführung schließen (dann ohne zweite Meldung)
@@ -402,7 +481,7 @@ def process_watchlist(market=None, signals=None):
 
 # ── Modell-Depot (höchstens 10 Positionen) ────────────────────────────────────
 
-def _close_finished(positions, market, until=None):
+def _close_finished(positions, market, until=None, earnings=None):
     """Positionen mit Ausstiegssignal entfernen (auch wenn der Verkauf erst zur
     nächsten Eröffnung stattfindet — der Platz ist dann für Käufe am selben Tag frei)."""
     freed = []
@@ -418,7 +497,8 @@ def _close_finished(positions, market, until=None):
                     positions.pop(key)
                 continue
             p.update(entry)
-        hit = find_exit(data["ohlcv"], p, None)
+        hit = find_exit(data["ohlcv"], p, None, (earnings or {}).get(p["ticker"]), data.get("ohlcv_4h"),
+                        datetime.now().strftime("%Y-%m-%d"))
         if hit and (until is None or hit["exit_date"] <= until):
             positions.pop(key)
             freed.append({**p, **hit})
@@ -431,18 +511,21 @@ def rebuild_depot(signals, market):
                    if s.get("in_top20") and s.get("trigger_tf") == "4h" and s["signal_date"] >= DEPOT_SINCE),
                   key=lambda x: x[0])
     positions = {}
+    earnings = load_earnings()
     for date, ticker in sent:
         data = market.get(ticker)
         if not data or ticker.upper() in positions:
             continue
         entry = derive_entry(data["ohlcv"], date)
-        _close_finished(positions, market, until=entry["entry_date"] if entry else date)
+        _close_finished(positions, market, until=entry["entry_date"] if entry else date, earnings=earnings)
         if not entry and any(b["d"] >= date for b in data["ohlcv"]):
             continue          # kein gültiger Einstieg (Stopp über dem Kurs)
+        if earnings_blocks_entry(earnings.get(ticker), entry["entry_date"] if entry else date):
+            continue          # kein Kauf so kurz vor den Zahlen
         if len(positions) < MAX_POSITIONS:
             positions[ticker.upper()] = {"ticker": ticker, "source": data["source"], "signal_date": date,
                                          **(entry or {"entry_price": None})}
-    _close_finished(positions, market)
+    _close_finished(positions, market, earnings=earnings)
     return {"positions": positions, "rebuilt_from": DEPOT_SINCE}
 
 
@@ -450,12 +533,16 @@ def depot_decisions(alerts, signals, market, today):
     """Kauf / kein Kauf je Breakout (Reihenfolge = RS-Rang) und Depot fortschreiben."""
     depot = load_json(DEPOT_FILE, None) or rebuild_depot(signals, market)
     positions = depot.setdefault("positions", {})
-    for f in _close_finished(positions, market):
+    earnings = load_earnings()
+    for f in _close_finished(positions, market, earnings=earnings):
         print(f"  Depot: {f['ticker']} raus ({f['reason']}, Signal {f['signal_date']})")
     for a in sorted(alerts, key=lambda x: x.get("rank") or 99):
         key = a["ticker"].upper()
+        blocked = earnings_blocks_entry(earnings.get(a["ticker"]), today)
         if key in positions:
             a["decision"] = "bereits im Depot"
+        elif blocked:
+            a["decision"] = f"Kein Kauf – Earnings am {datetime.strptime(blocked[0], '%Y-%m-%d'):%d.%m.%Y}"
         elif len(positions) < MAX_POSITIONS:
             a["decision"] = "Kauf"
             positions[key] = {"ticker": a["ticker"], "source": a.get("source", ""), "signal_date": today,

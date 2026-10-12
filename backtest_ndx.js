@@ -34,6 +34,9 @@ const readJson = (p) => JSON.parse(fs.readFileSync(p, 'utf8'));
 const slug = (t) => t.toLowerCase().replace(/[^a-z0-9]/g, '_');
 const liveFile = (t) => path.join(DATA, `backtest_${slug(t)}.json`);
 const histOnly = process.argv.includes('--hist-only');
+// Earnings-Termine je Ticker (fetch_earnings_history.py); fehlt die Datei, gilt die Regel nicht
+const EARNINGS_FILE = path.join(DATA, 'earnings_history.json');
+const earningsByTicker = fs.existsSync(EARNINGS_FILE) ? readJson(EARNINGS_FILE).tickers || {} : {};
 
 function loadUniverse() {
   const rs = readJson(path.join(DATA, 'rs_full.json'));
@@ -52,7 +55,7 @@ function seriesFor(ticker, rs) {
   if (!series || !series.ohlcv_d?.length || !series.ohlcv_4h?.length) return null;
   const histEnd = hist ? hist.ohlcv_d[hist.ohlcv_d.length - 1].d : '0000';
   const inTop = top20Lookup(ticker.replace(/_\d{4}$/, ''), chart?.top20?.inkl ?? null, histEnd, histOnly ? null : rs.top20_history);
-  return { series, inTop };
+  return { series, inTop, earnings: earningsByTicker[ticker] || null };
 }
 
 /** NASDAQ-100-Jahresrendite aus QQQ-Schlusskursen (historisch + aktuell). */
@@ -84,12 +87,12 @@ function main() {
     if (d[d.length - 1].d > lastDay) lastDay = d[d.length - 1].d;
     loaded.push({ t, ...s });
   }
-  for (const { t, series, inTop } of loaded) {
+  for (const { t, series, inTop, earnings } of loaded) {
     const d = series.ohlcv_d;
     const active = d[d.length - 1].d >= lastDay.slice(0, 8) + '01' || d[d.length - 1].d >= lastDay;
     const ticker = t.replace(/_\d{4}$/, '');
     closesBySymbol[t] = new Map(d.map((b) => [b.d, b.c]));
-    for (const tr of simulateTradesPIT(series.ohlcv_w, d, series.ohlcv_4h, inTop)) {
+    for (const tr of simulateTradesPIT(series.ohlcv_w, d, series.ohlcv_4h, inTop, PIT_START, earnings)) {
       trades.push({ ...tr, ticker, symbol: t, rank: 10, isOpen: tr.isOpen && active, dataEnded: tr.isOpen && !active });
     }
   }
@@ -128,7 +131,7 @@ function main() {
       ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), signalBar: t.signalBar, weeklyDate: t.weeklyDate, entryDate: t.entryDate, entryTime: t.entryTime,
       entryPrice: round(t.entryPrice, 4), stopPrice: round(t.stopPrice, 4), exitDate: t.exitDate, exitPrice: round(t.exitPrice, 4),
       invested: Math.round(t.invested), pnl: Math.round(t.pnl), pnlPct: round(t.pnlPct, 1), holdingWeeks: t.holdingWeeks,
-      isOpen: t.isOpen, ...(t.dataEnded ? { dataEnded: true } : {}), depot: taken.has(`${t.symbol}|${t.entryDate}`),
+      isOpen: t.isOpen, ...(t.exitReason ? { exitReason: t.exitReason } : {}), ...(t.dataEnded ? { dataEnded: true } : {}), depot: taken.has(`${t.symbol}|${t.entryDate}`),
     })),
   };
   fs.writeFileSync(OUT, JSON.stringify(result));

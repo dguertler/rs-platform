@@ -171,3 +171,33 @@ class TestZeitstoppUndSL(unittest.TestCase):
                 check_exits.DEPOT_FILE = old
         self.assertEqual(sum(a["decision"] == "Kauf" for a in alerts), 10)
         self.assertTrue(alerts[-1]["decision"].startswith("Kein Kauf"))
+
+
+class TestEarnings(unittest.TestCase):
+    """Kein Kauf < 4 Kalendertage vor den Zahlen; Verkauf 14-Uhr-Kerze am letzten Handelstag davor."""
+
+    def setUp(self):
+        self.ohlcv = rising(20)            # 2026-01-01 … 2026-01-20, gleichmäßig steigend
+        self.pos = {"entry_date": "2026-01-02", "entry_price": 101.0, "stop_price": 50.0}
+
+    def test_kauf_gesperrt_weniger_als_4_tage_vorher(self):
+        from check_exits import earnings_blocks_entry
+        self.assertTrue(earnings_blocks_entry([["2026-01-12", "amc"]], "2026-01-09"))
+        self.assertFalse(earnings_blocks_entry([["2026-01-12", "amc"]], "2026-01-08"))
+        self.assertFalse(earnings_blocks_entry(None, "2026-01-08"))
+
+    def test_verkauf_nach_boersenschluss_am_selben_tag_zum_14_uhr_schluss(self):
+        h4 = [{"d": "2026-01-10 14:00", "o": 1, "h": 1, "l": 1, "c": 111.11}]
+        hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-10", "amc"]], h4)
+        self.assertEqual((hit["signal_date"], hit["exit_date"], hit["exit_price"]), ("2026-01-10", "2026-01-10", 111.11))
+        self.assertFalse(hit["pending"])
+
+    def test_verkauf_vor_boersenbeginn_am_vortag(self):
+        hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-10", "bmo"]])
+        self.assertEqual(hit["exit_date"], "2026-01-09")
+
+    def test_anstehender_verkauf_wird_am_verkaufstag_gemeldet(self):
+        hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-21", "amc"]], today="2026-01-21")
+        self.assertTrue(hit["pending"])
+        self.assertEqual(hit["exit_date"], "2026-01-21")
+        self.assertIsNone(find_exit(self.ohlcv, self.pos, None, [["2026-01-21", "amc"]], today="2026-01-20"))

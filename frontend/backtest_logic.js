@@ -528,8 +528,44 @@ function weeklyUpTo(ohlcv_w, dHistory) {
   return out.slice(-60);
 }
 
-// Ein Trade ab Einstieg (Tag + Kurs): Stopp, Ausstieg und Zeitstopp wie simulateTrades
-function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra) {
+// ── Earnings ──────────────────────────────────────────────────────────────────────
+// earnings: [[YYYY-MM-DD, 'bmo'|'amc'|'unk'], …] aufsteigend (data/earnings_history.json).
+// Kein Kauf, wenn die nächsten Zahlen weniger als EARNINGS_BLOCK_DAYS Kalendertage
+// entfernt sind; offene Positionen werden zum Schluss der 14-Uhr-Kerze am letzten
+// Handelstag vor den Zahlen verkauft (nach Börsenschluss: derselbe Tag, vor
+// Börsenbeginn oder unbekannt: der Handelstag davor).
+const EARNINGS_BLOCK_DAYS = 4;
+
+function nextEarnings(earnings, day) {
+  return earnings ? earnings.find(([d]) => d >= day) ?? null : null;
+}
+
+function calendarDays(a, b) {
+  return Math.round((new Date(b + 'T12:00:00Z') - new Date(a + 'T12:00:00Z')) / 864e5);
+}
+
+function earningsBlocksEntry(earnings, entryDay) {
+  const e = nextEarnings(earnings, entryDay);
+  return !!e && calendarDays(entryDay, e[0]) < EARNINGS_BLOCK_DAYS;
+}
+
+// Verkaufstag vor den Zahlen e (Handelstag aus ohlcv_d)
+function earningsSellDay(ohlcv_d, e) {
+  if (e[1] === 'amc') return e[0];
+  let prev = null;
+  for (const b of ohlcv_d) { if (b.d >= e[0]) break; prev = b.d; }
+  return prev;
+}
+
+// Schluss der 14-Uhr-Kerze (Block 1) am Tag day; ersatzweise der Tagesschluss
+function earningsExitPrice(ohlcv_d, h4, day) {
+  const bar = (h4 || []).find(b => b.d.slice(0, 10) === day && h4Block(b.d) === 1);
+  return bar ? bar.c : ohlcv_d.find(b => b.d === day)?.c;
+}
+
+// Ein Trade ab Einstieg (Tag + Kurs): Stopp, Ausstieg und Zeitstopp wie simulateTrades.
+// earn = { earnings, h4 }: Verkauf vor den nächsten Zahlen (siehe oben)
+function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
   const idx = ohlcv_d.findIndex(b => b.d >= entryDate);
   if (idx < 0) return null;
   const swingLow = recentSwingLowOf(ohlcv_d.slice(0, idx));
@@ -541,7 +577,15 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra) {
   const entry = { ...extra, trigger: '4H', entryDate: ohlcv_d[idx].d, entryPrice, stopPrice, shares,
                   invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
   const weeks = d => Math.round((new Date(d) - new Date(entry.entryDate)) / (7 * 864e5));
+  const nextE = nextEarnings(earn?.earnings, entry.entryDate);
+  const sellDay = nextE ? earningsSellDay(ohlcv_d, nextE) : null;
   for (let k = idx; k < ohlcv_d.length; k++) {
+    if (sellDay && sellDay >= entry.entryDate && ohlcv_d[k].d >= sellDay) {
+      const exitDate = ohlcv_d[k].d, exitPrice = earningsExitPrice(ohlcv_d, earn.h4, exitDate);
+      const pnl = (exitPrice - entryPrice) * shares;
+      return { ...entry, exitDate, exitPrice, exitReason: 'earnings', pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
+               isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
+    }
     if (!isExitDay(ohlcv_d, k, stopPrice, entry)) continue;
     const next = ohlcv_d[k + 1];
     const exitPrice = next ? next.o : ohlcv_d[k].c;
@@ -556,8 +600,9 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra) {
            isWin: pnl > 0, isOpen: true, holdingWeeks: weeks(last.d) };
 }
 
-// inTop(day) → true/false (Top 20 am Signaltag); null = ohne Top-20-Filter
-function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT_START) {
+// inTop(day) → true/false (Top 20 am Signaltag); null = ohne Top-20-Filter.
+// earnings: Termine des Titels (siehe nextEarnings); null = ohne Earnings-Regel
+function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT_START, earnings = null) {
   const trades = [];
   const dIdx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
   const h = ohlcv_4h;
@@ -590,9 +635,11 @@ function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT
       while (k < h.length && h[k].d.slice(0, 10) <= day) k++;
     }
     if (k >= h.length) continue;
+    if (earningsBlocksEntry(earnings, h[k].d.slice(0, 10))) continue;
     const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
     const t = tradeFromEntry(ohlcv_d, h[k].d.slice(0, 10), h[k].o,
-      { signalBar: bar.d, entryTime: h[k].d.slice(11, 16), signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) });
+      { signalBar: bar.d, entryTime: h[k].d.slice(11, 16), signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) },
+      earnings ? { earnings, h4: h } : null);
     if (!t) continue;
     trades.push(t);
     busyUntil = t.exitDate;

@@ -1,5 +1,5 @@
 {
-  "description": "Freigegebene Referenz-Trades. Jede Änderung an der Signal-/Ausstiegslogik (frontend/backtest_logic.js, check_exits.py, check_alerts*.py) und jeder Backtest-Lauf muss diese Trades unverändert wiedergeben. Prüfung: node check_reference_trades.js bzw. python3 -m pytest test_reference_trades.py. Ausstieg: Signal zum Tagesschluss am Ausstiegstag, Verkauf am selben Tag oder zur Eröffnung des nächsten Handelstages.",
+  "description": "Freigegebene Referenz-Trades. Jede Änderung an der Signal-/Ausstiegslogik (frontend/backtest_logic.js, check_exits.py, check_alerts*.py) und jeder Backtest-Lauf muss diese Trades unverändert wiedergeben. Prüfung: node check_reference_trades.js bzw. python3 -m pytest test_reference_trades.py. Ausstieg: Verkauf am Ausstiegstag oder zur Eröffnung des nächsten Handelstages. exit = mit Earnings-Regel (data/earnings_history.json), exit_without_earnings = Ausstieg der übrigen Regeln, wenn man die Earnings-Regel weglässt.",
   "trades": [
     {
       "id": "AVGO-2024-06-05",
@@ -12,6 +12,10 @@
         "time": "18:00"
       },
       "exit": {
+        "signal_date": "2024-06-12",
+        "reason": "Verkauf vor Earnings (12.06.2024 nach Börsenschluss) zum Schluss der 14-Uhr-Kerze"
+      },
+      "exit_without_earnings": {
         "signal_date": "2024-07-17",
         "reason": "Daily-Trendumkehr: Schluss unter dem Tief vom 25.06.2024"
       }

@@ -8,7 +8,7 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261012"></script>
+  <script src="backtest_logic.js?v=20261013"></script>
   <script type="text/babel" src="backtest_charts.js?v=20261009"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -97,7 +97,8 @@ function BacktestApp() {
       getJson(`data/backtest_${slug}.json`),
       getJson('data/rs_full.json'),
       getJson('data/rs_sp500.json'),
-    ]).then(([chart, live, rsNdx, rsSpx]) => {
+      getJson('data/earnings_history.json'),
+    ]).then(([chart, live, rsNdx, rsSpx, earningsHist]) => {
       const rs = [rsNdx, rsSpx].find(d => d && (d.data || []).some(e => e.ticker === t)) || null;
       const entry = rs ? rs.data.find(e => e.ticker === t) : null;
       const liveSeries = live && live.ohlcv_d ? { ohlcv_w: live.ohlcv_w || [], ohlcv_d: live.ohlcv_d, ohlcv_4h: live.ohlcv_4h || [] }
@@ -107,7 +108,8 @@ function BacktestApp() {
       if (!merged || !merged.ohlcv_d.length) throw new Error('keine Kurse');
       const histEnd = hist ? hist.ohlcv_d[hist.ohlcv_d.length - 1].d : '0000';
       setTop20Hist(() => top20Lookup(t, chart?.top20?.inkl ?? null, histEnd, rs?.top20_history ?? (rsNdx?.top20_history)));
-      setData({ ...merged, generated: live?.generated || rs?.timestamp || '–', fromHistory: !!chart });
+      setData({ ...merged, earnings: earningsHist?.tickers?.[t] || null,
+                generated: live?.generated || rs?.timestamp || '–', fromHistory: !!chart });
       setLoading(false);
     }).catch(e => { setLoadError(e.message); setLoading(false); });
 
@@ -141,7 +143,7 @@ function BacktestApp() {
   const trades = useMemo(() => {
     if (!data) return [];
     // Zeitpunktgenau wie live (simulateTradesPIT) — dieselben Trades wie B-ÜBERSICHT
-    return simulateTradesPIT(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h, useTop20 ? top20Hist : null);
+    return simulateTradesPIT(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h, useTop20 ? top20Hist : null, PIT_START, data.earnings);
   }, [data, top20Hist, useTop20]);
 
   // Eine einzige KPI-Definition für Detail- und Übersichtsseite (backtest_logic.js),

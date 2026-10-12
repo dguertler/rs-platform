@@ -6,7 +6,8 @@
  *
  * Je Trade muss die Engine das Signal in derselben 4H-Kerze liefern, zur selben
  * Kerze kaufen und am erwarteten Tag aussteigen (Verkauf am Ausstiegstag oder zur
- * Eröffnung des nächsten Handelstages).
+ * Eröffnung des nächsten Handelstages) — mit Earnings-Regel (exit) und, falls
+ * angegeben, ohne sie (exit_without_earnings, prüft die übrigen Ausstiegsregeln).
  *
  * Aufruf: node check_reference_trades.js   → Exit-Code 1, wenn ein Trade abweicht
  */
@@ -18,22 +19,29 @@ const DATA = path.join(__dirname, 'data');
 function checkTrade(ref, rs) {
   const s = seriesFor(ref.ticker, rs);
   if (!s) return [`keine Kursdaten für ${ref.ticker}`];
+  if (!s.earnings) return [`keine Earnings-Termine für ${ref.ticker} (data/earnings_history.json)`];
+  const errors = checkRun(ref, s, s.earnings, ref.exit, '');
+  if (ref.exit_without_earnings) errors.push(...checkRun(ref, s, null, ref.exit_without_earnings, 'ohne Earnings-Regel: '));
+  return errors;
+}
+
+function checkRun(ref, s, earnings, exit, label) {
   const days = s.series.ohlcv_d.map((b) => b.d);
-  const trades = simulateTradesPIT(s.series.ohlcv_w, s.series.ohlcv_d, s.series.ohlcv_4h, s.inTop);
+  const trades = simulateTradesPIT(s.series.ohlcv_w, s.series.ohlcv_d, s.series.ohlcv_4h, s.inTop, undefined, earnings);
   const t = trades.find((x) => x.signalBar === ref.entry.signal_bar);
   if (!t) {
     const near = trades.filter((x) => x.signalDate >= ref.entry.date.slice(0, 7)).slice(0, 1)
       .map((x) => ` (nächstes Signal: ${x.signalBar})`).join('');
-    return [`kein Signal in der Kerze ${ref.entry.signal_bar}${near}`];
+    return [`${label}kein Signal in der Kerze ${ref.entry.signal_bar}${near}`];
   }
   const errors = [];
   if (t.entryDate !== ref.entry.date || t.entryTime !== ref.entry.time) {
-    errors.push(`Kauf ${t.entryDate} ${t.entryTime}, erwartet ${ref.entry.date} ${ref.entry.time}`);
+    errors.push(`${label}Kauf ${t.entryDate} ${t.entryTime}, erwartet ${ref.entry.date} ${ref.entry.time}`);
   }
-  const nextDay = days.find((d) => d > ref.exit.signal_date);
-  if (t.isOpen) errors.push(`Trade noch offen, erwartet Ausstieg am ${ref.exit.signal_date}`);
-  else if (t.exitDate !== ref.exit.signal_date && t.exitDate !== nextDay) {
-    errors.push(`Verkauf ${t.exitDate}, erwartet ${ref.exit.signal_date} (${ref.exit.reason})`);
+  const nextDay = days.find((d) => d > exit.signal_date);
+  if (t.isOpen) errors.push(`${label}Trade noch offen, erwartet Ausstieg am ${exit.signal_date}`);
+  else if (t.exitDate !== exit.signal_date && t.exitDate !== nextDay) {
+    errors.push(`${label}Verkauf ${t.exitDate}, erwartet ${exit.signal_date} (${exit.reason})`);
   }
   return errors;
 }
