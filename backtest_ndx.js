@@ -18,8 +18,8 @@
  *   --halten=W,D,4H: Studie — Ebenen, auf denen das Signal nach einer Trendumkehr bis zum
  *     Schluss unter dem Ausbruchstief grün bleibt (Standard W,D; --halten= ohne Ebene = aus);
  *     nur mit BACKTEST_NDX_OUT
- *   --halteanker=W:tiefstes,D:kerze: Studie — Anker je Ebene (kerze | tiefstes | swingtief,
- *     Standard W:tiefstes, D:kerze); nur mit BACKTEST_NDX_OUT
+ *   --halteanker=W:tiefstes,D:kerze: Studie — Anker je Ebene (kerze | tiefstes | swingtief | tu,
+ *     Standard W:tiefstes, D:tu); nur mit BACKTEST_NDX_OUT
  */
 const fs = require('fs');
 const path = require('path');

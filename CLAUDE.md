@@ -192,8 +192,13 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
   neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
   **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: tiefstes Tief zwischen Marke
-  und Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **Daily: Tief
-  der Ausbruchskerze**. Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
+  und Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **Daily: letztes
+  Swing-Tief vor der Trendumkehr, das sie noch nicht unterschritten hat**, geprüft ab der
+  Trendumkehr; ohne solches Swing-Tief nach dem Ausbruch das Tief der Ausbruchskerze
+  (`tuAnchorLow`/`tu_anchor_low`; AVGO Daily: Trendumkehr 04.08.2023 bei 84,09 → Anker
+  81,29 vom 06.07., Schluss 10.08. bei 81,16 darunter → Daily rot bis zum Ausbruch 22.08.;
+  über alle Top-20-Signale Gewinnsumme 254.937 € → 256.906 €, PF 1,66 → 1,65 gegenüber dem
+  Tief der Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
   (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 125,90, hält über die
   Trendumkehr vom 11.11.2024; 181,90, Ausbruch 13.12.2024 → 154,86). Die Trendumkehr ist
   nur Ausstieg aus dem Trade, nicht das Ende des Signals. Code: `heldAfterBreakout`/
@@ -201,7 +206,7 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   (Seiten-Ampeln), live `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY`,
   Weekly mit `lowest=True` in `check_alerts.py`). Studien:
   `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H` bzw.
-  `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief)
+  `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief | tu)
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
   letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten

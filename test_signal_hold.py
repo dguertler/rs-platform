@@ -2,7 +2,8 @@
 
 Bildet ein tieferes Tief eine neue Marke, bleibt die Ebene grün, solange seit der
 Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt (Weekly:
-tiefstes Tief zwischen Marke und Ausbruchswoche, Daily: Tief der Ausbruchskerze) —
+tiefstes Tief zwischen Marke und Ausbruchswoche, Daily: letztes Swing-Tief, das die
+Trendumkehr noch nicht unterschritten hat, geprüft ab der Trendumkehr) —
 identisch zu heldAfterBreakout in frontend/backtest_logic.js.
 """
 import json
@@ -11,7 +12,7 @@ import subprocess
 import unittest
 
 import check_alerts
-from gws_core import held_after_breakout
+from gws_core import held_after_breakout, tu_anchor_low
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 AVGO_CHART = os.path.join(ROOT, "data", "backtest_history", "charts", "AVGO.json")
@@ -36,6 +37,43 @@ class HeldAfterBreakoutTest(unittest.TestCase):
 
     def test_without_broken_mark_stays_red(self):
         self.assertFalse(held_after_breakout([{"idx": 4, "price": 14}], self.closes, self.lows, 7, min_margin=0))
+
+
+class TuAnchorTest(unittest.TestCase):
+    """Daily-Anker nach Trendumkehr: letztes Swing-Tief vor tief_neu, das tiefer liegt."""
+    # Ausbruch idx 2 (Tief 9), Swing-Tiefs bei idx 5 (11) und idx 9 (13), Trendumkehr idx 13 (12)
+    lows = [8, 8.5, 9, 12, 11.5, 11, 12, 13, 13.5, 13, 14, 15, 14, 12, 13, 14]
+
+    def test_anchor_is_swing_low_below_trend_reversal(self):
+        nxt = {"idx": 11, "price": 16, "tief_neu": {"idx": 13, "price": 12}}
+        self.assertEqual(tu_anchor_low(nxt, self.lows, 2), 11)
+
+    def test_without_trend_reversal_breakout_low(self):
+        self.assertEqual(tu_anchor_low(None, self.lows, 2), 9)
+
+
+@unittest.skipUnless(os.path.exists(AVGO_CHART), "Kursdatei AVGO fehlt")
+class AvgoDailyTest(unittest.TestCase):
+    """AVGO Daily 2023: Trendumkehr 04.08. (84,09) deaktiviert nur den Trade; Daily bleibt
+    gehalten bis zum Schluss unter dem Swing-Tief vom 06.07. (81,29) am 10.08. (81,16) und ist
+    bis zum neuen Ausbruch am 22.08. rot — live und in der Backtest-Engine gleich."""
+    days = ["2023-08-08", "2023-08-09", "2023-08-10", "2023-08-18", "2023-08-22"]
+    expected = [True, True, False, False, True]
+
+    def test_live_daily(self):
+        d = bars(json.load(open(AVGO_CHART))["d"])
+        got = [check_alerts.analyze_daily_structure([b for b in d if b["d"] <= day])["broken"]
+               for day in self.days]
+        self.assertEqual(got, self.expected)
+
+    def test_backtest_engine_daily(self):
+        script = (
+            "require('vm').runInThisContext(require('fs').readFileSync('frontend/backtest_logic.js','utf8'));"
+            "const c=require('./data/backtest_history/charts/AVGO.json');"
+            "const D=c.d.map(a=>({d:a[0],o:a[1],h:a[2],l:a[3],c:a[4]}));"
+            f"console.log(JSON.stringify({json.dumps(self.days)}.map(t=>analyzeStructure(D.filter(x=>x.d<=t)).broken)));")
+        out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(out.stdout), self.expected)
 
 
 @unittest.skipUnless(os.path.exists(AVGO_CHART), "Kursdatei AVGO fehlt")

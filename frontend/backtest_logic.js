@@ -16,7 +16,8 @@ function setTimeStop(on) { timeStopEnabled = !!on; }
 // Signal halten (Weekly und Daily, seit 12.10.2026 Backtest und live): Bildet ein
 // tieferes Tief eine neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein
 // Schluss unter dem Anker der zuletzt gebrochenen Marke liegt (Weekly: tiefstes Tief
-// zwischen Marke und Ausbruchswoche, Daily: Tief der Ausbruchskerze, siehe holdAnchor).
+// zwischen Marke und Ausbruchswoche, Daily: letztes Swing-Tief, das die Trendumkehr noch
+// nicht unterschritten hat, siehe holdAnchor/tuAnchorLow).
 // Die Trendumkehr ist dann nur Ausstieg aus dem Trade, nicht das Ende des Signals.
 // 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
 // gws_core.held_after_breakout. Systemparameter — Studien mit backtest_ndx.js --halten=…
@@ -26,10 +27,11 @@ function setHoldSignal(h) { holdSignal = { w: !!h.w, d: !!h.d, h4: !!h.h4 }; }
 
 // Anker je Ebene (seit 12.10.2026, Backtest und live): Weekly 'tiefstes' = tiefstes Tief
 // zwischen Marke und Ausbruchswoche (AVGO: Marke 173,51, Ausbruch 26.09.2024, Tief 05.08.
-// bei 125,90 hält über die Trendumkehr vom 11.11.2024), Daily 'kerze' = Tief der
-// Ausbruchskerze (tiefer Anker auch für Daily getestet: zu viele Fehlkäufe, AVGO-PF
-// 2,48 → 1,77). Für Studien zusätzlich 'swingtief' = letztes Swing-Tief vor dem Ausbruch
-let holdAnchor = { w: 'tiefstes', d: 'kerze' };
+// bei 125,90 hält über die Trendumkehr vom 11.11.2024), Daily 'tu' = letztes Swing-Tief vor
+// der Trendumkehr, das sie noch nicht unterschritten hat (tuAnchorLow; vorher 'kerze' = Tief
+// der Ausbruchskerze; tiefster Anker auch für Daily getestet: zu viele Fehlkäufe, AVGO-PF
+// 2,48 → 1,77). Für Studien zusätzlich 'kerze' und 'swingtief' = letztes Swing-Tief vor dem Ausbruch
+let holdAnchor = { w: 'tiefstes', d: 'tu' };
 function setHoldAnchor(a) { holdAnchor = { ...holdAnchor, ...a }; }
 function holdAnchorLow(lows, markIdx, b, mode) {
   if (mode === 'swingtief') {
@@ -77,6 +79,21 @@ function zoneFrom(bars, z) {
   return z ? { from: bars[z.from].d, top: z.top, anchor: z.low } : null;
 }
 
+// Anker 'tu' (Daily, seit 12.10.2026): Die Trendumkehr (tieferes Tief tiefNeu, das die nächste Marke bildet)
+// deaktiviert nur den Trade; die Ebene bleibt gehalten, bis ein Schluss unter dem letzten
+// Swing-Tief vor tiefNeu liegt, das die Trendumkehr noch nicht unterschritten hat (AVGO
+// Daily: Trendumkehr 04.08.2023 bei 84,09 → Anker 81,29 vom 06.07., Schluss 10.08. bei 81,16
+// darunter → Daily rot). Ohne Trendumkehr: Tief der Ausbruchskerze.
+function tuAnchorLow(next, lows, b) {
+  const t = next?.tiefNeu;
+  if (!t || t.idx <= b) return lows[b];
+  for (let k = t.idx - 1; k >= 2; k--) {
+    if (k + 2 < lows.length && lows[k] < t.price && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
+        && lows[k] <= lows[k+1] && lows[k] <= lows[k+2]) return Math.max(lows[k], lows[b]);
+  }
+  return lows[b];
+}
+
 // breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
   return heldBreakout(cands, closes, lows, n, breakoutIdx, mode) !== null;
@@ -88,8 +105,10 @@ function heldBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    const anchor = holdAnchorLow(lows, cands[c].idx, b, mode);
-    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return null;
+    const anchor = mode === 'tu' ? tuAnchorLow(cands[c + 1], lows, b) : holdAnchorLow(lows, cands[c].idx, b, mode);
+    // 'tu': erst ab der Trendumkehr prüfen (davor liegt das Swing-Tief noch im Aufwärtstrend)
+    const from = mode === 'tu' && cands[c + 1]?.tiefNeu?.idx > b ? cands[c + 1].tiefNeu.idx : b + 1;
+    for (let i = from; i < n; i++) if (closes[i] < anchor) return null;
     return { b, anchor };
   }
   return null;

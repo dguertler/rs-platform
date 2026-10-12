@@ -8,11 +8,24 @@
 // backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
 // neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
 // Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt
-// (Weekly: tiefstes Tief zwischen Marke und Ausbruch, Daily: Tief der Ausbruchskerze).
+// (Weekly: tiefstes Tief zwischen Marke und Ausbruch, Daily: letztes Swing-Tief vor der
+// Trendumkehr, das sie noch nicht unterschritten hat — tuAnchorLow, geprüft ab der Trendumkehr).
 // breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
-// lowest: Anker = tiefstes Tief zwischen Marke und Ausbruch (Weekly), sonst Tief der Ausbruchskerze (Daily)
+// lowest: Anker = tiefstes Tief zwischen Marke und Ausbruch (Weekly), sonst Daily-Anker 'tu'
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
   return heldBreakout(cands, closes, lows, n, breakoutIdx, lowest) !== null;
+}
+// Daily-Anker nach Trendumkehr wie tuAnchorLow in backtest_logic.js: letztes Swing-Tief vor
+// tiefNeu (dem tieferen Tief der nächsten Marke), das tiefer liegt als tiefNeu — höchstens bis
+// zum Tief der Ausbruchskerze b (AVGO Daily 04.08.2023 → 81,29 vom 06.07.)
+function tuAnchorLow(next, lows, b) {
+  const t = next?.tiefNeu;
+  if (!t || t.idx <= b) return lows[b];
+  for (let k = t.idx - 1; k >= 2; k--) {
+    if (k + 2 < lows.length && lows[k] < t.price && lows[k] <= lows[k-1] && lows[k] <= lows[k-2]
+        && lows[k] <= lows[k+1] && lows[k] <= lows[k+2]) return Math.max(lows[k], lows[b]);
+  }
+  return lows[b];
 }
 // Gehaltene Marke: { b: Index der Ausbruchskerze, anchor } oder null
 function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
@@ -21,8 +34,9 @@ function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    const anchor = lowest ? Math.min(...lows.slice(cands[c].idx, b + 1)) : lows[b];
-    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return null;
+    const anchor = lowest ? Math.min(...lows.slice(cands[c].idx, b + 1)) : tuAnchorLow(cands[c + 1], lows, b);
+    const from = !lowest && cands[c + 1]?.tiefNeu?.idx > b ? cands[c + 1].tiefNeu.idx : b + 1;
+    for (let i = from; i < n; i++) if (closes[i] < anchor) return null;
     return { b, anchor };
   }
   return null;
