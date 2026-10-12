@@ -204,7 +204,8 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief)
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
-  letzten grünen Kerze, vom Hoch der Ausbruchskerze bis zum Anker (gestrichelte Linie;
+  letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zum Anker
+  (gestrichelte Linie;
   4H: Tief der Ausbruchskerze),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
