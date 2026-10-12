@@ -108,7 +108,7 @@ function LiveAlerts({ live, stages }) {
       {show && (
         <div style={{ overflow: 'auto', maxHeight: 420, marginTop: 10 }}>
           <table>
-            <thead><tr><th>Ticker</th><th>Index</th><th>Auslöser</th><th>Alert</th><th>Ausstieg</th><th>Rendite</th><th>P&L</th></tr></thead>
+            <thead><tr><th>Ticker</th><th>Index</th><th>Auslöser</th><th>Alert</th><th>Ausstieg</th><th title="Verkaufsgrund">Grund</th><th>Rendite</th><th>P&L</th></tr></thead>
             <tbody>
               {[...live.trades].reverse().map((t, i) => (
                 <tr key={i} className="data-row">
@@ -117,6 +117,8 @@ function LiveAlerts({ live, stages }) {
                   <td style={{ color: '#94a3b8' }}>{t.trigger}</td>
                   <td>{t.alertDate}{t.basis === 'naeherung' ? '*' : ''}</td>
                   <td style={{ color: t.isOpen ? amber : '#e2e8f0' }}>{t.isOpen ? 'offen' : t.exitDate}</td>
+                  {(() => { const r = EXIT_REASONS[t.exitReason];
+                    return <td title={r ? r.label : ''} style={{ color: r ? r.color : '#475569', fontWeight: 700 }}>{r ? r.short : '–'}</td>; })()}
                   <td style={{ color: pnlColor(t.pnlPct) }}>{pct(t.pnlPct)}</td>
                   <td style={{ color: pnlColor(t.pnl) }}>{eur(t.pnl)}</td>
                 </tr>

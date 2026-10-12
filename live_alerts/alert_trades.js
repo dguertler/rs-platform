@@ -60,7 +60,7 @@ function alertTrades() {
       entryDate: t.entryDate, entryPrice: +t.entryPrice.toFixed(2), stopPrice: +t.stopPrice.toFixed(2),
       exitDate: t.exitDate, exitPrice: +t.exitPrice.toFixed(2), invested: Math.round(t.invested),
       riskAmount: Math.round(t.riskAmount), pnl: Math.round(t.pnl), pnlPct: +t.pnlPct.toFixed(1),
-      isWin: t.isWin, isOpen: t.isOpen,
+      isWin: t.isWin, isOpen: t.isOpen, ...(t.exitReason ? { exitReason: t.exitReason } : {}),
     });
   }
   return { generated, sent, trades, skipped };

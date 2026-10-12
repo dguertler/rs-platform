@@ -131,7 +131,7 @@ function main() {
       ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), signalBar: t.signalBar, weeklyDate: t.weeklyDate, entryDate: t.entryDate, entryTime: t.entryTime,
       entryPrice: round(t.entryPrice, 4), stopPrice: round(t.stopPrice, 4), exitDate: t.exitDate, exitPrice: round(t.exitPrice, 4),
       invested: Math.round(t.invested), pnl: Math.round(t.pnl), pnlPct: round(t.pnlPct, 1), holdingWeeks: t.holdingWeeks,
-      isOpen: t.isOpen, ...(t.exitReason ? { exitReason: t.exitReason } : {}), ...(t.dataEnded ? { dataEnded: true } : {}), depot: taken.has(`${t.symbol}|${t.entryDate}`),
+      isOpen: t.isOpen, ...(t.exitReason ? { exitReason: t.exitReason } : t.dataEnded ? { exitReason: 'datenende' } : {}), ...(t.dataEnded ? { dataEnded: true } : {}), depot: taken.has(`${t.symbol}|${t.entryDate}`),
     })),
   };
   fs.writeFileSync(OUT, JSON.stringify(result));

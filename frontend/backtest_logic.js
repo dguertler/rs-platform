@@ -309,15 +309,28 @@ function trendLowOf(struct) {
   return lows.length > 0 ? lows[lows.length - 1].price : null;
 }
 
-// Ausstiegssignal am Tagesschluss von dHistory[k]: Schluss unter dem
-// Trendumkehr-Tief (aus den Kerzen davor), unter dem Stopp oder Zeitstopp.
-// Ausführung am nächsten Handelstag zur Eröffnung.
-function isExitDay(dHistory, k, stopPrice, entry = null) {
+// Verkaufsgründe — Kürzel und Farbe für Chart-Marker und Trade-Listen
+const EXIT_REASONS = {
+  stopp:       { short: 'SL', label: 'Stopp: Schluss unter dem Stopp',                                   color: '#f87171' },
+  trendumkehr: { short: 'TU', label: 'Trendumkehr: Schluss unter dem Tief, aus dem das letzte Hoch entstand', color: '#fb923c' },
+  zeitstopp:   { short: 'ZS', label: 'Zeitstopp: 10 Handelstage nach dem Kauf nicht mind. +5 %',          color: '#c084fc' },
+  earnings:    { short: 'ER', label: 'Verkauf vor Earnings (Schluss der 14-Uhr-Kerze)',                   color: '#38bdf8' },
+  datenende:   { short: 'DE', label: 'Kursdaten enden (Titel nicht mehr gehandelt)',                      color: '#94a3b8' },
+};
+
+// Ausstiegsgrund am Tagesschluss von dHistory[k] ('zeitstopp' | 'trendumkehr' |
+// 'stopp') oder null: Zeitstopp, Schluss unter dem Trendumkehr-Tief (aus den
+// Kerzen davor) oder unter dem Stopp. Ausführung am nächsten Handelstag zur Eröffnung.
+function exitReasonOf(dHistory, k, stopPrice, entry = null) {
   const day = dHistory[k];
-  if (entry && isTimeStop(dHistory, k, entry)) return true;
+  if (entry && isTimeStop(dHistory, k, entry)) return 'zeitstopp';
   const trendLow = trendLowOf(analyzeStructure(dHistory.slice(0, k)));
-  if (trendLow != null && day.c < trendLow) return true;
-  return stopPrice != null && day.c < stopPrice;
+  if (trendLow != null && day.c < trendLow) return 'trendumkehr';
+  return stopPrice != null && day.c < stopPrice ? 'stopp' : null;
+}
+
+function isExitDay(dHistory, k, stopPrice, entry = null) {
+  return exitReasonOf(dHistory, k, stopPrice, entry) != null;
 }
 
 // Zeitstopp am Tagesschluss von dHistory[k] (Handelstage ab dem Einstiegstag gezählt)
@@ -348,11 +361,12 @@ function simulateFromEntry(ohlcv_d, entryDate, entryPriceOverride = null) {
   const entry = { entryDate: entryBar.d, entryPrice, stopPrice, shares,
                   invested: shares * entryPrice, riskAmount: shares * (entryPrice - stopPrice) };
   for (let k = entryIdx; k < ohlcv_d.length; k++) {
-    if (!isExitDay(ohlcv_d, k, stopPrice, entry)) continue;
+    const exitReason = exitReasonOf(ohlcv_d, k, stopPrice, entry);
+    if (!exitReason) continue;
     const next = ohlcv_d[k + 1];
     const exitPrice = next ? next.o : ohlcv_d[k].c;
     const pnl = (exitPrice - entryPrice) * shares;
-    return { ...entry, exitDate: next ? next.d : ohlcv_d[k].d, exitPrice, pnl,
+    return { ...entry, exitDate: next ? next.d : ohlcv_d[k].d, exitPrice, exitReason, pnl,
              pnlPct: (exitPrice / entryPrice - 1) * 100, isWin: pnl > 0, isOpen: false };
   }
   const last = ohlcv_d[ohlcv_d.length - 1];
@@ -586,12 +600,13 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
       return { ...entry, exitDate, exitPrice, exitReason: 'earnings', pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
                isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
     }
-    if (!isExitDay(ohlcv_d, k, stopPrice, entry)) continue;
+    const exitReason = exitReasonOf(ohlcv_d, k, stopPrice, entry);
+    if (!exitReason) continue;
     const next = ohlcv_d[k + 1];
     const exitPrice = next ? next.o : ohlcv_d[k].c;
     const exitDate = next ? next.d : ohlcv_d[k].d;
     const pnl = (exitPrice - entryPrice) * shares;
-    return { ...entry, exitDate, exitPrice, pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
+    return { ...entry, exitDate, exitPrice, exitReason, pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
              isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
   }
   const last = ohlcv_d[ohlcv_d.length - 1];

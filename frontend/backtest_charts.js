@@ -2,6 +2,24 @@
 // Wird als <script type="text/babel" src>
 // geladen; die React-Hooks (useState, useRef, …) deklariert die jeweilige Seite.
 
+// Verkaufs-Marker: roter Pfeil, eingefärbt und beschriftet nach Verkaufsgrund
+// (EXIT_REASONS aus backtest_logic.js), Tooltip mit Datum, Kurs und Grund
+function ExitMarker({ m, x, yTip }) {
+  const r = (typeof EXIT_REASONS !== 'undefined' && EXIT_REASONS[m.reason]) || null;
+  const col = r ? r.color : '#f87171';
+  const tip = `Verkauf ${m.date}${m.price != null ? ` zu ${m.price.toFixed(2)}` : ''} — ${r ? r.label : 'Verkauf'}`;
+  return <g>
+    <title>{tip}</title>
+    <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill={col} opacity="0.95"/>
+    <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, 0)} stroke={col} strokeWidth="1.5"/>
+    {r && <>
+      <rect x={x-9} y={yTip-33} width={18} height={11} rx={2} fill="#0b1220" stroke={col} strokeWidth="0.8"/>
+      <text x={x} y={yTip-24.5} textAnchor="middle" fill={col} fontSize="8" fontWeight="700" fontFamily="monospace">{r.short}</text>
+    </>}
+  </g>;
+}
+
+
 function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
@@ -170,11 +188,8 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
               <line x1={x} x2={x} y1={yTip+10} y2={Math.min(yTip+20, PT+cH)} stroke="#4ade80" strokeWidth="1.5"/>
             </g>;
           } else {
-            const yTip = Math.max(toY(ohlcvW[idx].h) - 3, PT + 14);
-            return <g key={`tm${mi}`}>
-              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
-              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
-            </g>;
+            const yTip = Math.max(toY(ohlcvW[idx].h) - 3, PT + 36);
+            return <ExitMarker key={`tm${mi}`} m={m} x={x} yTip={yTip}/>;
           }
         })}
 
@@ -415,11 +430,8 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
               </>}
             </g>;
           } else {
-            const yTip = Math.max(toY(ohlcv[idx].h) - 3, PT + 14);
-            return <g key={`tm${mi}`}>
-              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
-              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
-            </g>;
+            const yTip = Math.max(toY(ohlcv[idx].h) - 3, PT + 36);
+            return <ExitMarker key={`tm${mi}`} m={m} x={x} yTip={yTip}/>;
           }
         })}
 
@@ -632,6 +644,11 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
           let best = Infinity, idx = -1;
           display4h.forEach((d, i) => { const diff = Math.abs(new Date(d.d.slice(0,10)) - new Date(target)); if (diff < best) { best = diff; idx = i; } });
           if (idx < 0 || best > 3 * 86400000) return null;
+          // genaue Kerze: Kauf zur Kaufkerze, Earnings-Verkauf zum Schluss der 14-Uhr-Kerze
+          const exact = display4h.findIndex(d => d.d.slice(0,10) === target && (m.time
+            ? d.d.slice(11,16) === m.time
+            : m.reason === 'earnings' && h4Block(d.d) === 1));
+          if (exact >= 0) idx = exact;
           const x = toX(idx);
           if (m.type === 'entry') {
             const yTip = Math.min(toY(display4h[idx].l) + 3, PT + cH - 16);
@@ -640,11 +657,8 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
               <line x1={x} x2={x} y1={yTip+10} y2={Math.min(yTip+20, PT+cH)} stroke="#4ade80" strokeWidth="1.5"/>
             </g>;
           } else {
-            const yTip = Math.max(toY(display4h[idx].h) - 3, PT + 14);
-            return <g key={`tm${mi}`}>
-              <polygon points={`${x-5},${yTip-10} ${x+5},${yTip-10} ${x},${yTip}`} fill="#f87171" opacity="0.95"/>
-              <line x1={x} x2={x} y1={yTip-10} y2={Math.max(yTip-20, PT)} stroke="#f87171" strokeWidth="1.5"/>
-            </g>;
+            const yTip = Math.max(toY(display4h[idx].h) - 3, PT + 36);
+            return <ExitMarker key={`tm${mi}`} m={m} x={x} yTip={yTip}/>;
           }
         })}
 

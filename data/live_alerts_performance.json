@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-11 21:02",
+ "generated": "2026-10-12 03:41",
  "alertsGenerated": "2026-10-10 12:53",
  "rule": "Kauf zur Eröffnung am Alert-Tag, Stopp/Ausstieg wie Backtest-Engine, 10000 € je Signal, max. 1000 € Risiko, eine Position je Titel",
  "alertsSent": 374,
@@ -568,7 +568,8 @@
    "pnl": 5460,
    "pnlPct": 84.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "GFS",
@@ -586,7 +587,8 @@
    "pnl": 5443,
    "pnlPct": 54.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NVDA",
@@ -604,7 +606,8 @@
    "pnl": 150,
    "pnlPct": 2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMD",
@@ -622,7 +625,8 @@
    "pnl": 2618,
    "pnlPct": 66.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "GOOGL",
@@ -640,7 +644,8 @@
    "pnl": 1352,
    "pnlPct": 13.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MCHP",
@@ -658,7 +663,8 @@
    "pnl": 1648,
    "pnlPct": 16.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ON",
@@ -676,7 +682,8 @@
    "pnl": 1733,
    "pnlPct": 41.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ADI",
@@ -694,7 +701,8 @@
    "pnl": 586,
    "pnlPct": 6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MRVL",
@@ -712,7 +720,8 @@
    "pnl": 4283,
    "pnlPct": 59.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ROST",
@@ -730,7 +739,8 @@
    "pnl": -29,
    "pnlPct": -0.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ODFL",
@@ -748,7 +758,8 @@
    "pnl": -1330,
    "pnlPct": -13.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AMAT",
@@ -766,7 +777,8 @@
    "pnl": -535,
    "pnlPct": -5.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "AVGO",
@@ -784,7 +796,8 @@
    "pnl": -60,
    "pnlPct": -0.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "LRCX",
@@ -802,7 +815,8 @@
    "pnl": -440,
    "pnlPct": -4.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MRNA",
@@ -820,7 +834,8 @@
    "pnl": -893,
    "pnlPct": -9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "SNDK",
@@ -838,7 +853,8 @@
    "pnl": 8801,
    "pnlPct": 92.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AMZN",
@@ -856,7 +872,8 @@
    "pnl": 120,
    "pnlPct": 1.2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "KLAC",
@@ -874,7 +891,8 @@
    "pnl": -428,
    "pnlPct": -5.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "STX",
@@ -892,7 +910,8 @@
    "pnl": -142,
    "pnlPct": -4.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CAT",
@@ -910,7 +929,8 @@
    "pnl": -423,
    "pnlPct": -4.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "CMI",
@@ -928,7 +948,8 @@
    "pnl": -472,
    "pnlPct": -4.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HPE",
@@ -946,7 +967,8 @@
    "pnl": 4436,
    "pnlPct": 45.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NUE",
@@ -964,7 +986,8 @@
    "pnl": -496,
    "pnlPct": -5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "STLD",
@@ -982,7 +1005,8 @@
    "pnl": -653,
    "pnlPct": -6.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "VRT",
@@ -1000,7 +1024,8 @@
    "pnl": -821,
    "pnlPct": -8.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "VTRS",
@@ -1018,7 +1043,8 @@
    "pnl": 235,
    "pnlPct": 2.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "WDC",
@@ -1036,7 +1062,8 @@
    "pnl": -171,
    "pnlPct": -2.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMAT",
@@ -1054,7 +1081,8 @@
    "pnl": -229,
    "pnlPct": -2.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ASML",
@@ -1072,7 +1100,8 @@
    "pnl": -232,
    "pnlPct": -3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "KEYS",
@@ -1090,7 +1119,8 @@
    "pnl": -499,
    "pnlPct": -6.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "LRCX",
@@ -1108,7 +1138,8 @@
    "pnl": -300,
    "pnlPct": -5.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AKAM",
@@ -1126,7 +1157,8 @@
    "pnl": -12,
    "pnlPct": -0.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ALB",
@@ -1144,7 +1176,8 @@
    "pnl": -1002,
    "pnlPct": -10.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "PWR",
@@ -1162,7 +1195,8 @@
    "pnl": -793,
    "pnlPct": -8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HUM",
@@ -1180,7 +1214,8 @@
    "pnl": 173,
    "pnlPct": 3.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MTZ",
@@ -1198,7 +1233,8 @@
    "pnl": -1107,
    "pnlPct": -11.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "CRWD",
@@ -1216,7 +1252,8 @@
    "pnl": 42,
    "pnlPct": 1.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "DDOG",
@@ -1234,7 +1271,8 @@
    "pnl": 114,
    "pnlPct": 4.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "FTNT",
@@ -1252,7 +1290,8 @@
    "pnl": 1226,
    "pnlPct": 17.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "LRCX",
@@ -1270,7 +1309,8 @@
    "pnl": 372,
    "pnlPct": 5.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MU",
@@ -1288,7 +1328,8 @@
    "pnl": 2001,
    "pnlPct": 33.1,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "PANW",
@@ -1306,7 +1347,8 @@
    "pnl": 2531,
    "pnlPct": 25.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "QCOM",
@@ -1324,7 +1366,8 @@
    "pnl": 110,
    "pnlPct": 1.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SIRI",
@@ -1342,7 +1385,8 @@
    "pnl": -117,
    "pnlPct": -1.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ASML",
@@ -1360,7 +1404,8 @@
    "pnl": 628,
    "pnlPct": 9.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CSCO",
@@ -1378,7 +1423,8 @@
    "pnl": -67,
    "pnlPct": -0.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "NXPI",
@@ -1396,7 +1442,8 @@
    "pnl": -748,
    "pnlPct": -9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "TXN",
@@ -1414,7 +1461,8 @@
    "pnl": -766,
    "pnlPct": -7.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "F",
@@ -1432,7 +1480,8 @@
    "pnl": 27,
    "pnlPct": 0.4,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "GLW",
@@ -1450,7 +1499,8 @@
    "pnl": -798,
    "pnlPct": -12.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "KEYS",
@@ -1468,7 +1518,8 @@
    "pnl": -549,
    "pnlPct": -5.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "LSTR",
@@ -1486,7 +1537,8 @@
    "pnl": 434,
    "pnlPct": 7.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NTAP",
@@ -1504,7 +1556,8 @@
    "pnl": 851,
    "pnlPct": 13.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "QRVO",
@@ -1522,7 +1575,8 @@
    "pnl": -491,
    "pnlPct": -9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SM",
@@ -1540,7 +1594,8 @@
    "pnl": -650,
    "pnlPct": -6.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "STLD",
@@ -1558,7 +1613,8 @@
    "pnl": 347,
    "pnlPct": 3.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "SWKS",
@@ -1576,7 +1632,8 @@
    "pnl": -568,
    "pnlPct": -12.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "WDC",
@@ -1594,7 +1651,8 @@
    "pnl": -26,
    "pnlPct": -0.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMAT",
@@ -1612,7 +1670,8 @@
    "pnl": 1202,
    "pnlPct": 18.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "KLAC",
@@ -1630,7 +1689,8 @@
    "pnl": 433,
    "pnlPct": 8.1,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "NUE",
@@ -1648,7 +1708,8 @@
    "pnl": 547,
    "pnlPct": 5.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "STX",
@@ -1666,7 +1727,8 @@
    "pnl": -214,
    "pnlPct": -4.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CAT",
@@ -1684,7 +1746,8 @@
    "pnl": 73,
    "pnlPct": 0.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "HPQ",
@@ -1702,7 +1765,8 @@
    "pnl": -214,
    "pnlPct": -4.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "JBHT",
@@ -1720,7 +1784,8 @@
    "pnl": 43,
    "pnlPct": 0.4,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "BBY",
@@ -1738,7 +1803,8 @@
    "pnl": 379,
    "pnlPct": 9,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "FCX",
@@ -1756,7 +1822,8 @@
    "pnl": -310,
    "pnlPct": -3.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "FSLR",
@@ -1774,7 +1841,8 @@
    "pnl": -360,
    "pnlPct": -9.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SMCI",
@@ -1792,7 +1860,8 @@
    "pnl": -988,
    "pnlPct": -34.2,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "OKTA",
@@ -1810,7 +1879,8 @@
    "pnl": -272,
    "pnlPct": -8.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ORCL",
@@ -1828,7 +1898,8 @@
    "pnl": -1001,
    "pnlPct": -19.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AKAM",
@@ -1846,7 +1917,8 @@
    "pnl": -1134,
    "pnlPct": -11.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CNC",
@@ -1864,7 +1936,8 @@
    "pnl": -68,
    "pnlPct": -0.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "FDX",
@@ -1882,7 +1955,8 @@
    "pnl": -285,
    "pnlPct": -2.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HUM",
@@ -1900,7 +1974,8 @@
    "pnl": 1871,
    "pnlPct": 19.2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "IBM",
@@ -1918,7 +1993,8 @@
    "pnl": -664,
    "pnlPct": -15.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MGM",
@@ -1936,7 +2012,8 @@
    "pnl": -162,
    "pnlPct": -5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "LITE",
@@ -1954,7 +2031,8 @@
    "pnl": -428,
    "pnlPct": -5.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SM",
@@ -1972,7 +2050,8 @@
    "pnl": -1436,
    "pnlPct": -16.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ELV",
@@ -1990,7 +2069,8 @@
    "pnl": -319,
    "pnlPct": -3.2,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "H",
@@ -2008,7 +2088,8 @@
    "pnl": 409,
    "pnlPct": 4.1,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ODFL",
@@ -2026,7 +2107,8 @@
    "pnl": -734,
    "pnlPct": -9.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "RS",
@@ -2044,7 +2126,8 @@
    "pnl": 151,
    "pnlPct": 1.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "XPO",
@@ -2062,7 +2145,8 @@
    "pnl": -735,
    "pnlPct": -7.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CVS",
@@ -2080,7 +2164,8 @@
    "pnl": -307,
    "pnlPct": -3.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "UNH",
@@ -2098,7 +2183,8 @@
    "pnl": -24,
    "pnlPct": -0.2,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MOH",
@@ -2116,7 +2202,8 @@
    "pnl": 465,
    "pnlPct": 7.4,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CSCO",
@@ -2134,7 +2221,8 @@
    "pnl": -597,
    "pnlPct": -6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NUE",
@@ -2152,7 +2240,8 @@
    "pnl": -908,
    "pnlPct": -9.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "STX",
@@ -2170,7 +2259,8 @@
    "pnl": -543,
    "pnlPct": -13.2,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "KLAC",
@@ -2188,7 +2278,8 @@
    "pnl": 197,
    "pnlPct": 4.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CAT",
@@ -2206,7 +2297,8 @@
    "pnl": 199,
    "pnlPct": 2.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMD",
@@ -2224,7 +2316,8 @@
    "pnl": -282,
    "pnlPct": -2.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "BEN",
@@ -2242,7 +2335,8 @@
    "pnl": 376,
    "pnlPct": 3.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CMI",
@@ -2260,7 +2354,8 @@
    "pnl": -449,
    "pnlPct": -6.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HWM",
@@ -2278,7 +2373,8 @@
    "pnl": -357,
    "pnlPct": -5.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MRNA",
@@ -2296,7 +2392,8 @@
    "pnl": -348,
    "pnlPct": -10.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "STT",
@@ -2314,7 +2411,8 @@
    "pnl": 213,
    "pnlPct": 2.2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "TER",
@@ -2332,7 +2430,8 @@
    "pnl": -388,
    "pnlPct": -8.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "TXN",
@@ -2350,7 +2449,8 @@
    "pnl": -754,
    "pnlPct": -10.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "WDC",
@@ -2368,7 +2468,8 @@
    "pnl": -695,
    "pnlPct": -30.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CARR",
@@ -2386,7 +2487,8 @@
    "pnl": -193,
    "pnlPct": -1.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CNC",
@@ -2404,7 +2506,8 @@
    "pnl": 80,
    "pnlPct": 0.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "GFS",
@@ -2422,7 +2525,8 @@
    "pnl": -747,
    "pnlPct": -7.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "GLW",
@@ -2440,7 +2544,8 @@
    "pnl": 428,
    "pnlPct": 4.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "IRM",
@@ -2458,7 +2563,8 @@
    "pnl": -611,
    "pnlPct": -6.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "KEYS",
@@ -2476,7 +2582,8 @@
    "pnl": -784,
    "pnlPct": -8.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MCHP",
@@ -2494,7 +2601,8 @@
    "pnl": -142,
    "pnlPct": -1.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "MS",
@@ -2512,7 +2620,8 @@
    "pnl": -66,
    "pnlPct": -0.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MTZ",
@@ -2530,7 +2639,8 @@
    "pnl": 326,
    "pnlPct": 4.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "PWR",
@@ -2548,7 +2658,8 @@
    "pnl": -276,
    "pnlPct": -2.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "TGT",
@@ -2566,7 +2677,8 @@
    "pnl": -591,
    "pnlPct": -6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ILMN",
@@ -2584,7 +2696,8 @@
    "pnl": 1196,
    "pnlPct": 14.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NTRA",
@@ -2602,7 +2715,8 @@
    "pnl": 191,
    "pnlPct": 3.1,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SWK",
@@ -2620,7 +2734,8 @@
    "pnl": -192,
    "pnlPct": -1.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CRL",
@@ -2638,7 +2753,8 @@
    "pnl": 1559,
    "pnlPct": 27.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MAS",
@@ -2656,7 +2772,8 @@
    "pnl": -295,
    "pnlPct": -3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "OKTA",
@@ -2674,7 +2791,8 @@
    "pnl": 954,
    "pnlPct": 9.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "UNH",
@@ -2692,7 +2810,8 @@
    "pnl": -162,
    "pnlPct": -1.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "DDOG",
@@ -2710,7 +2829,8 @@
    "pnl": 2,
    "pnlPct": 0,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "LLY",
@@ -2728,7 +2848,8 @@
    "pnl": -500,
    "pnlPct": -6.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "VLO",
@@ -2764,7 +2885,8 @@
    "pnl": -431,
    "pnlPct": -4.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AXON",
@@ -2782,7 +2904,8 @@
    "pnl": -513,
    "pnlPct": -14.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ABBV",
@@ -2800,7 +2923,8 @@
    "pnl": -631,
    "pnlPct": -6.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "GE",
@@ -2818,7 +2942,8 @@
    "pnl": -405,
    "pnlPct": -4.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "IFF",
@@ -2836,7 +2961,8 @@
    "pnl": -617,
    "pnlPct": -7.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "JNJ",
@@ -2854,7 +2980,8 @@
    "pnl": -431,
    "pnlPct": -4.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "SIRI",
@@ -2872,7 +2999,8 @@
    "pnl": 0,
    "pnlPct": 0,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SON",
@@ -2890,7 +3018,8 @@
    "pnl": -829,
    "pnlPct": -8.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "WELL",
@@ -2908,7 +3037,8 @@
    "pnl": 179,
    "pnlPct": 2.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "BAX",
@@ -2926,7 +3056,8 @@
    "pnl": -204,
    "pnlPct": -2,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CRWD",
@@ -2944,7 +3075,8 @@
    "pnl": -220,
    "pnlPct": -4.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MPC",
@@ -2962,7 +3094,8 @@
    "pnl": 480,
    "pnlPct": 4.9,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NTAP",
@@ -2980,7 +3113,8 @@
    "pnl": -128,
    "pnlPct": -1.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMD",
@@ -2998,7 +3132,8 @@
    "pnl": -486,
    "pnlPct": -5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "PSX",
@@ -3016,7 +3151,8 @@
    "pnl": 685,
    "pnlPct": 8.9,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CSCO",
@@ -3034,7 +3170,8 @@
    "pnl": -898,
    "pnlPct": -9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AAPL",
@@ -3052,7 +3189,8 @@
    "pnl": -123,
    "pnlPct": -1.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "AMG",
@@ -3070,7 +3208,8 @@
    "pnl": -943,
    "pnlPct": -9.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "CSX",
@@ -3088,7 +3227,8 @@
    "pnl": -73,
    "pnlPct": -0.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "DXCM",
@@ -3106,7 +3246,8 @@
    "pnl": -868,
    "pnlPct": -8.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "JBHT",
@@ -3124,7 +3265,8 @@
    "pnl": -843,
    "pnlPct": -8.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MNST",
@@ -3142,7 +3284,8 @@
    "pnl": -537,
    "pnlPct": -5.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ODFL",
@@ -3160,7 +3303,8 @@
    "pnl": -498,
    "pnlPct": -5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "VTRS",
@@ -3178,7 +3322,8 @@
    "pnl": 196,
    "pnlPct": 2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "XPO",
@@ -3196,7 +3341,8 @@
    "pnl": -408,
    "pnlPct": -4.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "TRV",
@@ -3214,7 +3360,8 @@
    "pnl": 57,
    "pnlPct": 0.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ANET",
@@ -3232,7 +3379,8 @@
    "pnl": 715,
    "pnlPct": 7.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "EIX",
@@ -3250,7 +3398,8 @@
    "pnl": -726,
    "pnlPct": -7.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "DGX",
@@ -3268,7 +3417,8 @@
    "pnl": 324,
    "pnlPct": 3.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "NVCR",
@@ -3286,7 +3436,8 @@
    "pnl": -1005,
    "pnlPct": -27.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "UNP",
@@ -3304,7 +3455,8 @@
    "pnl": -473,
    "pnlPct": -4.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HPQ",
@@ -3322,7 +3474,8 @@
    "pnl": 611,
    "pnlPct": 6.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "ROST",
@@ -3340,7 +3493,8 @@
    "pnl": 179,
    "pnlPct": 1.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "DVA",
@@ -3358,7 +3512,8 @@
    "pnl": -1471,
    "pnlPct": -14.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "PCAR",
@@ -3376,7 +3531,8 @@
    "pnl": -431,
    "pnlPct": -4.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "PYPL",
@@ -3394,7 +3550,8 @@
    "pnl": 255,
    "pnlPct": 2.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CDW",
@@ -3412,7 +3569,8 @@
    "pnl": -164,
    "pnlPct": -2.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "GRMN",
@@ -3430,7 +3588,8 @@
    "pnl": 159,
    "pnlPct": 3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "SIRI",
@@ -3448,7 +3607,8 @@
    "pnl": -7,
    "pnlPct": -0.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "DXCM",
@@ -3466,7 +3626,8 @@
    "pnl": 327,
    "pnlPct": 4.9,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "FTNT",
@@ -3484,7 +3645,8 @@
    "pnl": -342,
    "pnlPct": -4.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "NTAP",
@@ -3502,7 +3664,8 @@
    "pnl": 426,
    "pnlPct": 4.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "DDOG",
@@ -3520,7 +3683,8 @@
    "pnl": -959,
    "pnlPct": -19.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "DELL",
@@ -3538,7 +3702,8 @@
    "pnl": -328,
    "pnlPct": -5.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "HPE",
@@ -3556,7 +3721,8 @@
    "pnl": 220,
    "pnlPct": 2.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "IT",
@@ -3574,7 +3740,8 @@
    "pnl": 115,
    "pnlPct": 2.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "MRVL",
@@ -3592,7 +3759,8 @@
    "pnl": -258,
    "pnlPct": -5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MSFT",
@@ -3610,7 +3778,8 @@
    "pnl": -104,
    "pnlPct": -2.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "WDAY",
@@ -3628,7 +3797,8 @@
    "pnl": 1346,
    "pnlPct": 13.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NTRA",
@@ -3646,7 +3816,8 @@
    "pnl": 140,
    "pnlPct": 2.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "PLTR",
@@ -3664,7 +3835,8 @@
    "pnl": 277,
    "pnlPct": 3.2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "TEAM",
@@ -3682,7 +3854,8 @@
    "pnl": 586,
    "pnlPct": 17.1,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CRWD",
@@ -3700,7 +3873,8 @@
    "pnl": -1019,
    "pnlPct": -10.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "MPC",
@@ -3754,7 +3928,8 @@
    "pnl": -1327,
    "pnlPct": -13.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HUM",
@@ -3772,7 +3947,8 @@
    "pnl": 59,
    "pnlPct": 0.6,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "LITE",
@@ -3790,7 +3966,8 @@
    "pnl": 85,
    "pnlPct": 1.5,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "SMCI",
@@ -3808,7 +3985,8 @@
    "pnl": -35,
    "pnlPct": -0.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "PAYC",
@@ -3826,7 +4004,8 @@
    "pnl": -370,
    "pnlPct": -3.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "PYPL",
@@ -3844,7 +4023,8 @@
    "pnl": -1168,
    "pnlPct": -11.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "STX",
@@ -3862,7 +4042,8 @@
    "pnl": -741,
    "pnlPct": -18.7,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CRM",
@@ -3880,7 +4061,8 @@
    "pnl": -164,
    "pnlPct": -3.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NOW",
@@ -3898,7 +4080,8 @@
    "pnl": -570,
    "pnlPct": -9.6,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "PSX",
@@ -3970,7 +4153,8 @@
    "pnl": -469,
    "pnlPct": -4.8,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "IQV",
@@ -3988,7 +4172,8 @@
    "pnl": 81,
    "pnlPct": 0.8,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "OKTA",
@@ -4042,7 +4227,8 @@
    "pnl": 272,
    "pnlPct": 3.9,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "AMD",
@@ -4096,7 +4282,8 @@
    "pnl": -330,
    "pnlPct": -3.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "CRM",
@@ -4114,7 +4301,8 @@
    "pnl": -451,
    "pnlPct": -4.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "HPQ",
@@ -4132,7 +4320,8 @@
    "pnl": -416,
    "pnlPct": -5.4,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "NTAP",
@@ -4168,7 +4357,8 @@
    "pnl": -409,
    "pnlPct": -4.1,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "CNC",
@@ -4186,7 +4376,8 @@
    "pnl": -919,
    "pnlPct": -9.3,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "FTNT",
@@ -4204,7 +4395,8 @@
    "pnl": 413,
    "pnlPct": 4.2,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "ZS",
@@ -4312,7 +4504,8 @@
    "pnl": 264,
    "pnlPct": 2.7,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "PLTR",
@@ -4348,7 +4541,8 @@
    "pnl": 329,
    "pnlPct": 3.3,
    "isWin": true,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "zeitstopp"
   },
   {
    "ticker": "DDOG",
@@ -4402,7 +4596,8 @@
    "pnl": -484,
    "pnlPct": -4.9,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "stopp"
   },
   {
    "ticker": "ASML",
@@ -4420,7 +4615,8 @@
    "pnl": -47,
    "pnlPct": -0.5,
    "isWin": false,
-   "isOpen": false
+   "isOpen": false,
+   "exitReason": "trendumkehr"
   },
   {
    "ticker": "KLAC",

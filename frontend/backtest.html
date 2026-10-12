@@ -9,7 +9,7 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <script src="backtest_logic.js?v=20261013"></script>
-  <script type="text/babel" src="backtest_charts.js?v=20261009"></script>
+  <script type="text/babel" src="backtest_charts.js?v=20261014"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
@@ -152,8 +152,8 @@ function BacktestApp() {
 
   const tradeMarkers = useMemo(() =>
     trades.flatMap(t => [
-      { date: t.entryDate, weeklyDate: t.weeklyDate, type: 'entry', stopPrice: t.stopPrice },
-      ...(!t.isOpen ? [{ date: t.exitDate, type: 'exit', price: t.exitPrice }] : []),
+      { date: t.entryDate, time: t.entryTime, weeklyDate: t.weeklyDate, type: 'entry', stopPrice: t.stopPrice },
+      ...(!t.isOpen ? [{ date: t.exitDate, type: 'exit', price: t.exitPrice, reason: t.exitReason }] : []),
     ]),
   [trades]);
 
@@ -261,21 +261,22 @@ function BacktestApp() {
           {trades.length > 0 && (
             <div style={{marginBottom:10}}>
               <div style={{background:'#0a0f1e',border:'1px solid #1e293b',borderRadius:10,overflowX:'auto'}}>
-                <div style={{minWidth:572}}>
-                  <div style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 72px 62px 52px',
+                <div style={{minWidth:616}}>
+                  <div style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 44px 72px 62px 52px',
                     gap:0,background:'#0f172a',borderBottom:'1px solid #1e293b',padding:'6px 12px',
                     fontSize:10,fontWeight:700,color:'#475569',fontFamily:'monospace',letterSpacing:'0.04em'}}>
                     <span>Entry</span><span>TF</span>
                     <span style={{textAlign:'right'}}>Entry €</span>
                     <span style={{textAlign:'right'}}>Exit</span>
                     <span style={{textAlign:'right'}}>Exit €</span>
+                    <span style={{textAlign:'center'}} title="Verkaufsgrund">Grund</span>
                     <span style={{textAlign:'right'}}>Gewinn</span>
                     <span style={{textAlign:'right'}}>Rendite</span>
                     <span style={{textAlign:'right'}}>W</span>
                   </div>
                   {[...trades].reverse().map((t, i) => (
                     <div key={i} onClick={() => handleTradeClick(t)}
-                      style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 72px 62px 52px',
+                      style={{display:'grid',gridTemplateColumns:'112px 24px 72px 84px 72px 44px 72px 62px 52px',
                       gap:0,padding:'5px 12px',borderBottom:'1px solid #0f172a',alignItems:'center',
                       cursor:'pointer',
                       background: t.isOpen ? '#0a1520' : t.isWin ? '#061206' : '#120606'}}>
@@ -289,6 +290,10 @@ function BacktestApp() {
                       <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,color:t.isOpen?'#fbbf24':'#cbd5e1'}}>
                         {t.exitPrice.toFixed(2)}
                       </span>
+                      {(() => { const r = EXIT_REASONS[t.exitReason];
+                        return <span title={r ? r.label : t.isOpen ? 'Position offen' : ''}
+                          style={{textAlign:'center',fontFamily:'monospace',fontSize:10,fontWeight:700,color:r ? r.color : '#475569'}}>
+                          {r ? r.short : t.isOpen ? '–' : ''}</span>; })()}
                       <span style={{textAlign:'right',fontFamily:'monospace',fontSize:11,fontWeight:700,color:t.pnl>=0?'#4ade80':'#f87171'}}>
                         {t.pnl>=0?'+':'−'}{fmtK(t.pnl)}€
                       </span>
@@ -299,6 +304,12 @@ function BacktestApp() {
                     </div>
                   ))}
                 </div>
+              </div>
+              {/* Legende Verkaufsgründe (auch für die Marker in den Charts) */}
+              <div style={{display:'flex',flexWrap:'wrap',gap:'4px 14px',padding:'6px 4px 0',fontSize:10,fontFamily:'monospace',color:'#64748b'}}>
+                {Object.entries(EXIT_REASONS).map(([k, r]) => (
+                  <span key={k} title={r.label}><b style={{color:r.color}}>{r.short}</b> {r.label.split(':')[0]}</span>
+                ))}
               </div>
             </div>
           )}
@@ -437,7 +448,7 @@ function BacktestApp() {
                       ohlcv4h={sel.h4Slice}
                       structure4h={sel.struct4H}
                       chartId={`bt_4h_${sel.i}`}
-                      tradeMarkers={tradeMarkers.filter(m => m.type === 'entry')}/>
+                      tradeMarkers={tradeMarkers}/>
                   </div>
                 ) : (
                   <div className="chart-full-width" style={{background:'#07090f',borderRadius:8,
