@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Vorher/Nachher-Vergleich zweier Backtest-Läufe (Ausgabe von backtest_ndx.js) für
- * Logik-Änderungen — Tabelle wie in CLAUDE.md „Logik-Änderungen“ vorgegeben.
+ * Logik-Änderungen — Tabelle wie in CLAUDE.md „Logik-Anpassungen & Logik-Verbesserungen“ vorgegeben.
  *
  * Bewertet werden alle Trades der Läufe (= alle Top-20-Signale, ohne Depot-Begrenzung),
  * je Trade 10.000 € Einsatz wie in der Engine. Jahresrendite = Gewinn der im Jahr

@@ -8,7 +8,7 @@ const MAX_RISK = 1000;
 const TIME_STOP_DAYS = 10;
 const TIME_STOP_MIN  = 0.05;
 // Für Bewertungsläufe von Logik-Änderungen abschaltbar (backtest_ndx.js --ohne-zeitstopp,
-// siehe CLAUDE.md „Logik-Änderungen“); live und auf den Seiten immer an
+// siehe CLAUDE.md „Logik-Anpassungen & Logik-Verbesserungen“); live und auf den Seiten immer an
 let timeStopEnabled = true;
 function setTimeStop(on) { timeStopEnabled = !!on; }
 

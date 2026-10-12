@@ -174,22 +174,66 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 | `analyses/PROMPT.md` | Vollständiger System-Prompt | Manuell gepflegt |
 | `data/reference_trades.json` | Freigegebene Referenz-Trades (Signal-Kerze, Kauf, Ausstiegstag + Begründung) — Regressionsschutz für Logik-Änderungen, siehe „Referenz-Trades“ | Manuell, nur auf Freigabe des Nutzers |
 
-## Logik-Änderungen: erst Wirkung zeigen, dann übernehmen
+## Logik-Anpassungen & Logik-Verbesserungen (Workflow)
 
-Jede Änderung an Signal-, Einstiegs-, Ausstiegs- oder Depotlogik (Backtest und
-Live) wird **erst übernommen (Commit/Push), nachdem der Nutzer die Wirkung gesehen
-hat**. Bewertet wird die **Logik über alle Signale der Top-20-Titel** (Titel am
-Signaltag in den Top 20, derselbe Filter wie `backtest_ndx.js`/B-ÜBERSICHT) —
-**ohne die Begrenzung auf 10 Depotplätze und vorerst ohne Zeitstopp** (beide
-Systemparameter würden das Urteil über die Logik verzerren, siehe unten): jeder
-Trade aus `simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je
-Trade, höchstens 1.000 € Risiko). Grundlage: `trades` aus
-`BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --ohne-zeitstopp` (bzw. einer
-Variante davon) gegen denselben Lauf mit dem aktuellen Stand, Kennzahlen mit
-`kpis()` aus `backtest_kpis.js`. Vorher im Chat ausgeben:
+Gilt, sobald es um Signal-, Einstiegs-, Ausstiegs- oder Depotlogik geht (z. B. „ist
+dieser Trade richtig?", „Stopp/Ausstieg ändern", „neue Regel", „rechne durch, ob …").
+Jeder Chat kann damit ohne Vorwissen weiterarbeiten.
 
-Tabelle mit `node compare_backtest.js vorher.json nachher.json` erzeugen (beide Läufe
-mit `--ohne-zeitstopp`):
+### Aktueller Logik-Stand (Backtest = Live)
+
+- **Signal:** 4H springt auf grün (Schluss über der 4H-Marke), Weekly und Daily sind zu
+  diesem Zeitpunkt grün, Titel am Signaltag in den Top 20 (NASDAQ-100). Nur 4H als
+  letzter Punkt löst aus — Weekly/Daily als letzter Punkt bewusst nicht (getestet,
+  schwächer). Kauf zur nächsten 4H-Kerze (Kerzen 10–14/14–18 Uhr) bzw. 10 Uhr am
+  nächsten Handelstag. Code: `pitSignals`/`simulateTradesPIT` in
+  `frontend/backtest_logic.js`, live `check_alerts.py`/`check_alerts_4h.py`
+- **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
+- **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
+  Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
+  entstand (TU) · Zeitstopp 10 Handelstage < +5 % (ZS) · Verkauf vor Earnings zum
+  Schluss der 14-Uhr-Kerze (ER). Daily-Signale → Verkauf zur Eröffnung am Folgetag.
+  Code: `exitReasonOf`/`tradeFromEntry`, live `check_exits.find_exit`
+- **Earnings:** kein Kauf < 4 Kalendertage vor den Zahlen (`data/earnings_history.json`)
+- **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
+- **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
+  Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg
+
+### Ablauf
+
+1. **Fall verstehen** — betroffenen Titel/Zeitraum mit
+   `node inspect_ticker.js TICKER VON BIS` ansehen (W/D/4H je 4H-Kerze, Marken,
+   Top 20, Trades der Engine inkl. Verkaufsgrund). Abweichungen zur Sicht des Nutzers
+   mit konkreten Kursen/Marken benennen und klären, bevor gebaut wird.
+2. **Bauen — immer Backtest und Live identisch** (`frontend/backtest_logic.js` und
+   `check_exits.py`/`check_alerts*.py`), Tests ergänzen.
+3. **Wirkung messen** (Regeln unten) und **Referenz-Trades prüfen**.
+4. **Dem Nutzer vorlegen** — Tabelle + Jahrestabelle + Referenzprüfung, Einschätzung
+   in zwei Sätzen, dann fragen. **Nichts committen**, bis der Nutzer zustimmt; bis
+   dahin die Änderung als Patch im Scratchpad sichern (`git diff > …patch`,
+   `git checkout -- .`), damit das Repo sauber bleibt.
+5. **Nach Zustimmung übernehmen:** Patch einspielen, `node backtest_ndx.js` (normaler
+   Lauf, schreibt `data/backtest_ndx.json`), Tests + Referenzprüfung, bei geänderten
+   `frontend/*.js` die `?v=` hochsetzen, Doku in dieser Datei anpassen (Logik-Stand
+   oben ersetzen), committen, auf Arbeits-Branch und `master` pushen, Hash ausgeben.
+   Auswirkungen auf Live (Mails, Modell-Depot) im Chat nennen.
+
+### Wirkung messen
+
+Bewertet wird die **Logik über alle Signale der Top-20-Titel** (Titel am Signaltag in
+den Top 20, derselbe Filter wie `backtest_ndx.js`/B-ÜBERSICHT) — **ohne die
+Begrenzung auf 10 Depotplätze und vorerst ohne Zeitstopp** (beide Systemparameter
+würden das Urteil über die Logik verzerren, siehe unten): jeder Trade aus
+`simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je Trade, höchstens
+1.000 € Risiko).
+
+```bash
+BACKTEST_NDX_OUT=/tmp/vorher.json  node backtest_ndx.js --ohne-zeitstopp   # Stand vor der Änderung
+BACKTEST_NDX_OUT=/tmp/nachher.json node backtest_ndx.js --ohne-zeitstopp   # mit Änderung
+node compare_backtest.js /tmp/vorher.json /tmp/nachher.json                # Tabelle + Jahrestabelle
+```
+
+Die Ausgabe enthält immer:
 
 | Kennzahl (alle Top-20-Signale, je Trade 10.000 €) | bisher | neu |
 |---|---|---|
@@ -205,9 +249,8 @@ mit `--ohne-zeitstopp`):
 Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, Summenzeile).
 Jahresrendite der Signale = Gewinn der im Jahr verkauften Trades (offene: laufendes
 Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €, Bezugsgröße wie B-ÜBERSICHT).
-
 Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
-Entscheidungsgrundlage. Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
+Entscheidungsgrundlage.
 
 **Systemparameter — bei einer Systemoptimierung gesondert berücksichtigen.** Beide
 bleiben live und auf den Seiten (B-ÜBERSICHT/B-DETAILS) aktiv, werden aber bei der
@@ -224,6 +267,10 @@ werden, sind sie neu zu prüfen (mit der dann gültigen Logik):
 **Frontend-Cache:** Nach jeder Änderung an `frontend/*.js` die Version `?v=…` in
 allen HTML-Seiten hochsetzen, die die Datei einbinden — sonst mischt der Browser
 alte und neue Dateien (B-DETAILS blieb so am 12.10.2026 leer).
+
+**Netz in Cloud-Sessions:** Yahoo, SEC, Nasdaq und Alpaca sind gesperrt — neue Daten
+(z. B. Termine, Kurse) über einen GitHub-Workflow laden (Muster:
+`fetch_earnings_history.yml`, Start per GitHub-MCP `actions_run_trigger`).
 
 ## Referenz-Trades (Regressionsschutz)
 
