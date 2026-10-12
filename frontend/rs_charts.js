@@ -386,6 +386,50 @@ function analyze4HStructure(ohlcv4h) {
   };
 }
 
+// ── Gemeinsame Legende, einmal über dem ersten Chart ─────────────────────────
+// Die einzige Legende der Charts (unter den Charts steht keine): GWS-Linien je Ebene,
+// letzter Break, Gültigkeitsbereich, Trendlinie, Kurslinie, Benchmark und Signal
+function ChartLegend({ benchLabel = null, showSignal = false }) {
+  const item = { display: "flex", alignItems: "center", gap: 4 };
+  const txt  = { fontSize: 9, color: "#64748b" };
+  const dash = (color, w = 1.8, op = 1) =>
+    <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke={color} strokeWidth={w} strokeDasharray="4,3" opacity={op}/></svg>;
+  return (
+    <div style={{padding:"6px 12px",marginBottom:12,display:"flex",gap:"4px 14px",alignItems:"center",background:"#0a0f1e",border:"1px solid #1e293b",borderRadius:10,flexWrap:"wrap",fontFamily:"monospace"}}>
+      <div style={item}>
+        {dash("#f59e0b")}<span style={txt}>GWS-W</span>
+        {dash("#ef4444")}<span style={txt}>GWS-D</span>
+        {dash("#a78bfa")}<span style={txt}>GWS-4H</span>
+      </div>
+      <div style={item}>{dash("#94a3b8", 1.2, 0.35)}<span style={txt}>letzter Break (gedimmt, Farbe der Ebene)</span></div>
+      <div style={item}>
+        <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#4ade80" strokeWidth="1.2" strokeDasharray="3,6" opacity="0.7"/></svg>
+        <span style={txt}>Trend ↑ (höhere Hochs, keine GWS)</span>
+      </div>
+      <div style={item}>
+        <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#7dd3fc" strokeWidth="0.9" strokeDasharray="2,3" opacity="0.7"/></svg>
+        <span style={txt}>letzter Kurs</span>
+      </div>
+      {benchLabel && (
+        <div style={item}>
+          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
+          <span style={txt}>{benchLabel} (Weekly/Daily)</span>
+        </div>
+      )}
+      {showSignal && (
+        <div style={item}>
+          <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
+          <span style={{...txt, color:"#eab308"}}>Signal</span>
+        </div>
+      )}
+      <div style={item}>
+        <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
+        <span style={txt}>Gültigkeitsbereich (kräftig = nur gehalten): ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
+      </div>
+    </div>
+  );
+}
+
 // ── Weekly Candlestick Chart ───────────────────────────────────────────────
 function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], zones = null }) {
   const svgRef = useRef(null);
@@ -588,32 +632,6 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
       </svg>
 
       <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>GWS-W</span>
-        </div>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
-        </div>
-        {zones && zones.length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
-          </div>
-        )}
-        {benchLine.length > 1 && benchLabel && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>{benchLabel}</span>
-          </div>
-        )}
-        {signals.length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
-            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
-          </div>
-        )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcvW.length} Wochen · Weekly</div>
       </div>
     </div>
@@ -825,32 +843,6 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
       </svg>
 
       <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>GWS-D</span>
-        </div>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
-        </div>
-        {zones && zones.length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
-          </div>
-        )}
-        {benchLine.length > 1 && benchLabel && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>{benchLabel}</span>
-          </div>
-        )}
-        {signals.filter(s => s.daily_bar_date).length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
-            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
-          </div>
-        )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcv.length} Tage · Daily</div>
       </div>
     </div>
@@ -1043,26 +1035,6 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], zones = null }) 
       </svg>
 
       <div style={{padding:"5px 12px",display:"flex",gap:14,alignItems:"center",background:"#0a0f1e",borderTop:"1px solid #0f172a",flexWrap:"wrap"}}>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.8" strokeDasharray="4,3"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>GWS-4H</span>
-        </div>
-        <div style={{display:"flex",alignItems:"center",gap:4}}>
-          <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.1" strokeDasharray="4,4" opacity="0.3"/></svg>
-          <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
-        </div>
-        {zones && zones.length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
-          </div>
-        )}
-        {signals.filter(s => s.h4_bar_date).length > 0 && (
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>
-            <span style={{fontSize:9,color:"#eab308"}}>Signal</span>
-          </div>
-        )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{n} Kerzen (von {ohlcv4h.length}) · 4H</div>
       </div>
     </div>

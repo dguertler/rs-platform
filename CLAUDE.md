@@ -302,6 +302,13 @@ System als Ganzes optimiert werden, sind sie neu zu prüfen (mit der dann gülti
 allen HTML-Seiten hochsetzen, die die Datei einbinden — sonst mischt der Browser
 alte und neue Dateien (B-DETAILS blieb so am 12.10.2026 leer).
 
+**Chart-Legende:** Unter den Charts (Weekly, Daily, 4H) steht keine Legende — alle
+Erklärungen (GWS-Linien je Ebene, letzter Break, Gültigkeitsbereich, Marker, Verkaufskürzel,
+SL, Trend, Kurs, Benchmark, Signal) stehen gesammelt in **einer** Legende über dem ersten
+Chart: `ChartLegendMarkers` in `frontend/backtest_charts.js` (B-DETAILS), `ChartLegend` in
+`frontend/rs_charts.js` (Index- und Watchlist-Seiten). Neue Chart-Elemente dort erklären;
+unter den Charts nur die Kerzenzahl.
+
 **Netz in Cloud-Sessions:** Yahoo, SEC, Nasdaq und Alpaca sind gesperrt — neue Daten
 (z. B. Termine, Kurse) über einen GitHub-Workflow laden (Muster:
 `fetch_earnings_history.yml`, Start per GitHub-MCP `actions_run_trigger`).
