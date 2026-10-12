@@ -8,8 +8,8 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
-  <script src="backtest_logic.js?v=20261018"></script>
-  <script type="text/babel" src="backtest_charts.js?v=20261019"></script>
+  <script src="backtest_logic.js?v=20261019"></script>
+  <script type="text/babel" src="backtest_charts.js?v=20261020"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
@@ -135,6 +135,9 @@ function BacktestApp() {
   }, [data]);
 
   const sel = selectedIdx !== null ? weekRows[selectedIdx] : null;
+  // Kerzen, die nur durch das Signal-Halten nach Trendumkehr grün sind (grün hinterlegt)
+  const heldW = useMemo(() => sel ? heldWeeklyFlags(data.ohlcv_w, data.ohlcv_d, sel.wSlice) : [], [sel, data]);
+  const heldD = useMemo(() => sel ? heldDailyFlags(data.ohlcv_d, sel.dSlice) : [], [sel, data]);
 
   // ── Trade-Simulation ──────────────────────────────────────────────────────
   const CAPITAL  = 10000;
@@ -417,6 +420,7 @@ function BacktestApp() {
                   <ChartWeekly
                     ohlcvW={sel.wSlice}
                     structureW={sel.structW}
+                    heldBars={heldW}
                     chartId={`bt_w_${sel.i}`}
                     benchOhlcv={benchData?.benchmark_ohlcv_w}
                     benchLabel={benchData?.benchmark}
@@ -433,6 +437,7 @@ function BacktestApp() {
                   <CandleChart
                     ohlcv={sel.dSlice}
                     structure={sel.structD}
+                    heldBars={heldD}
                     chartId={`bt_d_${sel.i}`}
                     benchOhlcv={benchData?.benchmark_ohlcv}
                     benchLabel={benchData?.benchmark}

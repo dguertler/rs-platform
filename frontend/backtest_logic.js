@@ -113,13 +113,15 @@ function analyzeStructure(ohlcv) {
     else if (last.price < prev.price) trend = "bearish";
   }
 
-  const broken       = gwsdHigh !== null && (breakoutIdx !== null
-    || (holdSignal.d && heldAfterBreakout(gwsdCandidates, closes, lows, n)));
+  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
+  const held         = gwsdHigh !== null && breakoutIdx === null
+    && holdSignal.d && heldAfterBreakout(gwsdCandidates, closes, lows, n);
+  const broken       = gwsdHigh !== null && (breakoutIdx !== null || held);
   const currentClose = closes[n - 1];
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
   return {
-    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, trend,
+    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, trend,
     prevGwsdHigh, prevBreakoutIdx, recentBreakout,
     swingHighs: swingHighs.slice(-6),
     swingLows:  swingLows.slice(-6),
@@ -193,15 +195,17 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   }
 
   const hasDailyCandles = Array.isArray(ohlcvD) && ohlcvD.length > 0;
-  const broken = gwswHigh !== null && (hasDailyCandles
+  const brokenMark = gwswHigh !== null && (hasDailyCandles
     ? ohlcvD.some(d => d.d > gwswHigh.date && d.c > gwswHigh.price)
-    : breakoutIdx !== null)
-    || (gwswHigh !== null && holdSignal.w && heldAfterBreakout(gwswCandidates, closes, lows, n,
-      hasDailyCandles ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined));
+    : breakoutIdx !== null);
+  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
+  const held = gwswHigh !== null && !brokenMark && holdSignal.w && heldAfterBreakout(gwswCandidates, closes, lows, n,
+    hasDailyCandles ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined);
+  const broken = brokenMark || held;
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
-    gwswHigh, breakoutIdx, breakoutPrice, broken,
+    gwswHigh, breakoutIdx, breakoutPrice, broken, held,
     prevGwswHigh, prevBreakoutIdx, recentBreakout,
     swingHighs: swingHighs.slice(-6),
     swingLows:  swingLows.slice(-6),
@@ -288,6 +292,26 @@ function analyze4HStructure(ohlcv4h) {
     swingHighs: swingHighs.slice(-8),
     swingLows:  swingLows.slice(-8),
   };
+}
+
+// ── Signal-Halten je Kerze (Chart-Hinterlegung) ──────────────────────────────────
+// Für jede angezeigte Kerze: war die Ebene zu ihrem Schluss nur durch das Signal-Halten
+// grün? Zeitpunktgenau mit den Kerzen bis dahin (Weekly: 60 Wochen + Tageskerzen bis
+// Wochenende wie buildWeekRows, Daily: alle Tageskerzen bis zum Tag).
+function heldWeeklyFlags(ohlcv_w, ohlcv_d, shown) {
+  return shown.map(b => {
+    const a = ohlcv_w.findIndex(w => w.d === b.d);
+    if (a < 0) return false;
+    const end = getWeekEnd(b.d);
+    return !!analyzeWeeklyStructure(ohlcv_w.slice(Math.max(0, a - 59), a + 1), ohlcv_d.filter(d => d.d <= end))?.held;
+  });
+}
+function heldDailyFlags(ohlcv_d, shown) {
+  const idx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
+  return shown.map(b => {
+    const i = idx.get(b.d);
+    return i != null && !!analyzeStructure(ohlcv_d.slice(0, i + 1))?.held;
+  });
 }
 
 // ── Hilfsfunktionen ───────────────────────────────────────────────────────────────

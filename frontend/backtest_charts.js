@@ -64,7 +64,7 @@ function ChartLegendMarkers({ showSL = false }) {
 }
 
 
-function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {
+function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [], heldBars = [] }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 260;
@@ -204,6 +204,11 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           </>;
         })()}
 
+        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
+        {heldBars.map((h, i) => h && (
+          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
+        ))}
+
         {/* Kerzen */}
         {ohlcvW.map((d, i) => {
           const bull = d.c >= d.o;
@@ -276,6 +281,12 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
+        {heldBars.some(Boolean) && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+          </div>
+        )}
         {benchLine.length > 1 && benchLabel && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
@@ -295,7 +306,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
 }
 
 // ── Daily Candlestick Chart ────────────────────────────────────────────────
-function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [] }) {
+function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], tradeMarkers = [], heldBars = [] }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 270;
@@ -438,6 +449,11 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </>;
         })()}
 
+        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
+        {heldBars.map((h, i) => h && (
+          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
+        ))}
+
         {/* Kerzen */}
         {ohlcv.map((d, i) => {
           const bull = d.c >= d.o;
@@ -518,6 +534,12 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
+        {heldBars.some(Boolean) && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+          </div>
+        )}
         {benchLine.length > 1 && benchLabel && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>

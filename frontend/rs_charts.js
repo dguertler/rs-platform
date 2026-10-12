@@ -32,6 +32,27 @@ function weeklyBreakoutIdx(ohlcvW, ohlcvD) {
   };
 }
 
+// Je angezeigter Kerze: zu ihrem Schluss nur durch das Signal-Halten grün? (Chart-Hinterlegung)
+// Weekly mit den Wochen und Tageskerzen bis dahin, Daily mit allen Tageskerzen bis zum Tag.
+function heldWeeklyFlags(ohlcvW, ohlcvD, shown) {
+  if (!ohlcvW || !shown) return [];
+  return shown.map(b => {
+    const a = ohlcvW.findIndex(w => w.d === b.d);
+    if (a < 0) return false;
+    const next = ohlcvW[a + 1]?.d;
+    const days = ohlcvD ? ohlcvD.filter(d => !next || d.d < next) : null;
+    return !!analyzeWeeklyStructure(ohlcvW.slice(0, a + 1), days)?.held;
+  });
+}
+function heldDailyFlags(ohlcvD, shown) {
+  if (!ohlcvD || !shown) return [];
+  const idx = new Map(ohlcvD.map((b, i) => [b.d, i]));
+  return shown.map(b => {
+    const i = idx.get(b.d);
+    return i != null && !!analyzeStructure(ohlcvD.slice(0, i + 1))?.held;
+  });
+}
+
 function analyzeStructure(ohlcv) {
   if (!ohlcv || ohlcv.length < 10) return null;
   const n      = ohlcv.length;
@@ -106,14 +127,15 @@ function analyzeStructure(ohlcv) {
     else if (last.price < prev.price) trend = "bearish";
   }
 
-  const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish")
-    || (gwsdHigh !== null && heldAfterBreakout(gwsdCandidates, closes, lows, n));
+  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
+  const held         = gwsdHigh !== null && breakoutIdx === null && heldAfterBreakout(gwsdCandidates, closes, lows, n);
+  const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
   return {
-    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, trend,
+    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, trend,
     prevGwsdHigh, prevBreakoutIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-6),
@@ -188,14 +210,14 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   }
 
   // Broken: GWS durchbrochen ODER kein GWS-Muster aber klarer Aufwärtstrend
-  const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish")
-    || (gwswHigh !== null && heldAfterBreakout(gwswCandidates, closes, lows, n,
-      ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined));
+  const held = gwswHigh !== null && breakoutIdx === null && heldAfterBreakout(gwswCandidates, closes, lows, n,
+    ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined);
+  const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish") || held;
 
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
-    gwswHigh, breakoutIdx, breakoutPrice, broken,
+    gwswHigh, breakoutIdx, breakoutPrice, broken, held,
     prevGwswHigh, prevBreakoutIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-6),
@@ -281,7 +303,7 @@ function analyze4HStructure(ohlcv4h) {
 }
 
 // ── Weekly Candlestick Chart ───────────────────────────────────────────────
-function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [] }) {
+function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], heldBars = [] }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 260;
@@ -421,6 +443,11 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           </>;
         })()}
 
+        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
+        {heldBars.map((h, i) => h && (
+          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
+        ))}
+
         {/* Kerzen */}
         {ohlcvW.map((d, i) => {
           const bull = d.c >= d.o;
@@ -478,6 +505,12 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
+        {heldBars.some(Boolean) && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+          </div>
+        )}
         {benchLine.length > 1 && benchLabel && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>
@@ -497,7 +530,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
 }
 
 // ── Daily Candlestick Chart ────────────────────────────────────────────────
-function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [] }) {
+function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], heldBars = [] }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 270;
@@ -640,6 +673,11 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </>;
         })()}
 
+        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
+        {heldBars.map((h, i) => h && (
+          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
+        ))}
+
         {/* Kerzen */}
         {ohlcv.map((d, i) => {
           const bull = d.c >= d.o;
@@ -697,6 +735,12 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
+        {heldBars.some(Boolean) && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+          </div>
+        )}
         {benchLine.length > 1 && benchLabel && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#64748b" strokeWidth="1.2" opacity="0.55"/></svg>

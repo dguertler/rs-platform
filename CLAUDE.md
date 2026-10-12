@@ -197,7 +197,9 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   Ausbruchswoche 13.05. bei 129,48 hält). Code: `heldAfterBreakout`/`holdSignal` in
   `frontend/backtest_logic.js` und `frontend/rs_charts.js` (Seiten-Ampeln), live
   `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY` in `check_alerts.py`).
-  Varianten testbar mit `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`
+  In den Weekly-/Daily-Charts (B-DETAILS, Index-/Watchlist-Seiten) sind Kerzen, die
+  zu ihrem Schluss nur durch das Halten grün sind, grün transparent hinterlegt
+  (`held` je Struktur, `heldWeeklyFlags`/`heldDailyFlags`). Varianten testbar mit `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch

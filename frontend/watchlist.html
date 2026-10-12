@@ -52,7 +52,7 @@
 <script>
   window.apiFetch = function (url, opts) { return fetch(url, opts || {}); };
 </script>
-<script type="text/babel" src="rs_charts.js?v=20261012"></script>
+<script type="text/babel" src="rs_charts.js?v=20261013"></script>
 <script type="text/babel">
 const { useState, useMemo, useRef, useCallback, useEffect } = React;
 
@@ -304,6 +304,9 @@ function App() {
   const ohlcv4hDisplay = useMemo(() => ohlcv4h?.slice(-nCandles) ?? null, [ohlcv4h, nCandles]);
 
   const structure   = useMemo(() => analyzeStructure(ohlcvDisplay),   [ohlcvDisplay]);
+  // Kerzen, die nur durch das Signal-Halten nach Trendumkehr grün sind (grün hinterlegt)
+  const heldW = useMemo(() => heldWeeklyFlags(ohlcvW, ohlcv, ohlcvW), [ohlcvW, ohlcv]);
+  const heldD = useMemo(() => heldDailyFlags(ohlcv, ohlcvDisplay), [ohlcv, ohlcvDisplay]);
   const structure4h = useMemo(() => analyze4HStructure(ohlcv4hDisplay), [ohlcv4hDisplay]);
 
   const tickerSignals = useMemo(() => (selected && signals[selected]) ? signals[selected] : [], [signals, selected]);
@@ -707,7 +710,7 @@ function App() {
           <div className="charts-grid">
             {/* Weekly Chart */}
             {ohlcvW && structureW ? (
-              <ChartWeekly ohlcvW={ohlcvW} structureW={structureW} chartId={selected+"_w"}
+              <ChartWeekly ohlcvW={ohlcvW} structureW={structureW} heldBars={heldW} chartId={selected+"_w"}
                 benchOhlcv={benchOhlcvW} benchLabel={data.benchmark} signals={tickerSignals}/>
             ) : (
               <div style={{background:"#07090f",borderRadius:8,border:"1px solid #1e293b",padding:"12px 16px",color:"#334155",fontSize:11,fontFamily:"monospace"}}>
@@ -717,7 +720,7 @@ function App() {
 
             {/* Daily Chart */}
             {ohlcvDisplay && structure && (
-              <CandleChart ohlcv={ohlcvDisplay} structure={structure} chartId={selected+"_d"}
+              <CandleChart ohlcv={ohlcvDisplay} structure={structure} heldBars={heldD} chartId={selected+"_d"}
                 benchOhlcv={benchOhlcvD} benchLabel={data.benchmark} signals={tickerSignals}/>
             )}
 
