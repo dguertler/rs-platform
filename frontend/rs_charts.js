@@ -7,18 +7,25 @@
 // Signal halten nach Trendumkehr (Weekly und Daily, wie heldAfterBreakout in
 // backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
 // neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
-// Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt.
+// Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt
+// (Weekly: tiefstes Tief zwischen Marke und Ausbruch, Daily: Tief der Ausbruchskerze).
 // breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
-function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
+// lowest: Anker = tiefstes Tief zwischen Marke und Ausbruch (Weekly), sonst Tief der Ausbruchskerze (Daily)
+function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
+  return heldBreakout(cands, closes, lows, n, breakoutIdx, lowest) !== null;
+}
+// Gehaltene Marke: { b: Index der Ausbruchskerze, anchor } oder null
+function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
   for (let c = cands.length - 1; c >= 0; c--) {
     let b = -1;
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
-    return true;
+    const anchor = lowest ? Math.min(...lows.slice(cands[c].idx, b + 1)) : lows[b];
+    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return null;
+    return { b, anchor };
   }
-  return false;
+  return null;
 }
 
 // Weekly: Ausbruchswoche = Woche mit dem ersten Tagesschluss über der Marke
@@ -32,24 +39,52 @@ function weeklyBreakoutIdx(ohlcvW, ohlcvD) {
   };
 }
 
-// Je angezeigter Kerze: zu ihrem Schluss nur durch das Signal-Halten grün? (Chart-Hinterlegung)
-// Weekly mit den Wochen und Tageskerzen bis dahin, Daily mit allen Tageskerzen bis zum Tag.
-function heldWeeklyFlags(ohlcvW, ohlcvD, shown) {
-  if (!ohlcvW || !shown) return [];
-  return shown.map(b => {
+// Gültigkeitsbereiche je Chart (wie validityZones in backtest_logic.js): je angezeigter
+// Kerze die Struktur zu ihrem Schluss; grüne Kerzen gehören zum Bereich ihrer
+// Ausbruchskerze — von dort bis zur letzten grünen Kerze, oben bis zum Anker.
+// Ergebnis: [{ start, end, anchor, held }] mit Indizes in shown.
+function validityZones(shown, structAt) {
+  const zones = [];
+  if (!shown) return zones;
+  shown.forEach((bar, k) => {
+    const st = structAt(bar);
+    const z = st?.zone;
+    const last = zones[zones.length - 1];
+    if (!z) return;
+    if (last && last.from === z.from && last.anchor === z.anchor && last.end === k - 1) {
+      last.end = k; last.held = last.held || !!st.held; return;
+    }
+    let start = shown.findIndex(b => b.d >= z.from);
+    if (start < 0 || start > k) start = k;
+    if (last && start <= last.end) start = last.end + 1;
+    zones.push({ from: z.from, anchor: z.anchor, start, end: k, held: !!st.held });
+  });
+  return zones;
+}
+function weeklyZones(ohlcvW, ohlcvD, shown) {
+  if (!ohlcvW) return [];
+  return validityZones(shown, b => {
     const a = ohlcvW.findIndex(w => w.d === b.d);
-    if (a < 0) return false;
+    if (a < 0) return null;
     const next = ohlcvW[a + 1]?.d;
     const days = ohlcvD ? ohlcvD.filter(d => !next || d.d < next) : null;
-    return !!analyzeWeeklyStructure(ohlcvW.slice(0, a + 1), days)?.held;
+    return analyzeWeeklyStructure(ohlcvW.slice(0, a + 1), days);
   });
 }
-function heldDailyFlags(ohlcvD, shown) {
-  if (!ohlcvD || !shown) return [];
+function dailyZones(ohlcvD, shown) {
+  if (!ohlcvD) return [];
   const idx = new Map(ohlcvD.map((b, i) => [b.d, i]));
-  return shown.map(b => {
+  return validityZones(shown, b => {
     const i = idx.get(b.d);
-    return i != null && !!analyzeStructure(ohlcvD.slice(0, i + 1))?.held;
+    return i == null ? null : analyzeStructure(ohlcvD.slice(0, i + 1));
+  });
+}
+function h4Zones(ohlcv4h, shown) {
+  if (!ohlcv4h) return [];
+  const idx = new Map(ohlcv4h.map((b, i) => [b.d, i]));
+  return validityZones(shown, b => {
+    const i = idx.get(b.d);
+    return i == null ? null : analyze4HStructure(ohlcv4h.slice(Math.max(0, i - 59), i + 1));
   });
 }
 
@@ -128,14 +163,18 @@ function analyzeStructure(ohlcv) {
   }
 
   // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
-  const held         = gwsdHigh !== null && breakoutIdx === null && heldAfterBreakout(gwsdCandidates, closes, lows, n);
+  const heldD        = gwsdHigh !== null && breakoutIdx === null ? heldBreakout(gwsdCandidates, closes, lows, n) : null;
+  const held         = heldD !== null;
   const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
+  // Gültigkeitsbereich: Ausbruchskerze und Anker (Tief der Ausbruchskerze)
+  const zone = breakoutIdx !== null ? { from: ohlcv[breakoutIdx].d, anchor: lows[breakoutIdx] }
+    : held ? { from: ohlcv[heldD.b].d, anchor: heldD.anchor } : null;
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
   return {
-    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, trend,
+    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, zone, trend,
     prevGwsdHigh, prevBreakoutIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-6),
@@ -210,14 +249,19 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   }
 
   // Broken: GWS durchbrochen ODER kein GWS-Muster aber klarer Aufwärtstrend
-  const held = gwswHigh !== null && breakoutIdx === null && heldAfterBreakout(gwswCandidates, closes, lows, n,
-    ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined);
+  const heldW = gwswHigh !== null && breakoutIdx === null ? heldBreakout(gwswCandidates, closes, lows, n,
+    ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined, true) : null;
+  const held = heldW !== null;
   const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish") || held;
+  // Gültigkeitsbereich: Ausbruchswoche und Anker (tiefstes Tief zwischen Marke und Ausbruch)
+  const zone = breakoutIdx !== null
+    ? { from: ohlcvW[breakoutIdx].d, anchor: Math.min(...lows.slice(gwswHigh.idx, breakoutIdx + 1)) }
+    : held ? { from: ohlcvW[heldW.b].d, anchor: heldW.anchor } : null;
 
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
-    gwswHigh, breakoutIdx, breakoutPrice, broken, held,
+    gwswHigh, breakoutIdx, breakoutPrice, broken, held, zone,
     prevGwswHigh, prevBreakoutIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-6),
@@ -295,6 +339,8 @@ function analyze4HStructure(ohlcv4h) {
   })();
   return {
     gws4hHigh, breakout4hIdx, broken4h: breakout4hIdx !== null || (gws4hHigh === null && trend4h === "bullish"),
+    // Gültigkeitsbereich: Ausbruchskerze und ihr Tief (4H hält nicht)
+    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, anchor: lows[breakout4hIdx] } : null,
     prevGws4hHigh, prevBreakout4hIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-8),
@@ -303,7 +349,7 @@ function analyze4HStructure(ohlcv4h) {
 }
 
 // ── Weekly Candlestick Chart ───────────────────────────────────────────────
-function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], heldBars = [] }) {
+function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, signals = [], zones = null }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 260;
@@ -402,8 +448,8 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           </g>
         ))}
 
-        {/* Breakout-Zone */}
-        {breakoutIdx !== null && (
+        {/* Breakout-Zone (nur ohne Gültigkeitsbereiche) */}
+        {!zones && breakoutIdx !== null && (
           <rect x={toX(breakoutIdx)} y={PT} width={PL+cW-toX(breakoutIdx)} height={cH} fill={`url(#bgW_${chartId})`}/>
         )}
 
@@ -443,10 +489,16 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           </>;
         })()}
 
-        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
-        {heldBars.map((h, i) => h && (
-          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
-        ))}
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
+            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {zones && zones.map((z, zi) => {
+          const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
+          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          return <g key={`zone${zi}`}>
+            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
+          </g>;
+        })}
 
         {/* Kerzen */}
         {ohlcvW.map((d, i) => {
@@ -505,10 +557,10 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#f59e0b" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.30"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
-        {heldBars.some(Boolean) && (
+        {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -530,7 +582,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
 }
 
 // ── Daily Candlestick Chart ────────────────────────────────────────────────
-function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], heldBars = [] }) {
+function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signals = [], zones = null }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 270;
@@ -628,8 +680,8 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </g>
         ))}
 
-        {/* Breakout-Zone */}
-        {breakoutIdx !== null && (
+        {/* Breakout-Zone (nur ohne Gültigkeitsbereiche) */}
+        {!zones && breakoutIdx !== null && (
           <rect x={toX(breakoutIdx)} y={PT}
             width={PL+cW-toX(breakoutIdx)} height={cH}
             fill={`url(#bg_${chartId})`}/>
@@ -673,10 +725,16 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </>;
         })()}
 
-        {/* Signal gehalten: Ebene nur durch das Signal-Halten grün (Trendumkehr, Ausbruchstief hält) */}
-        {heldBars.map((h, i) => h && (
-          <rect key={`held${i}`} x={PL + i * (cW / n)} y={PT} width={cW / n} height={cH} fill="#22c55e" opacity="0.14"/>
-        ))}
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
+            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {zones && zones.map((z, zi) => {
+          const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
+          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          return <g key={`zone${zi}`}>
+            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
+          </g>;
+        })}
 
         {/* Kerzen */}
         {ohlcv.map((d, i) => {
@@ -735,10 +793,10 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#ef4444" strokeWidth="1.2" strokeDasharray="4,4" opacity="0.35"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
-        {heldBars.some(Boolean) && (
+        {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Signal gehalten</span>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -760,7 +818,7 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
 }
 
 // ── 4H Candlestick Chart (60 Kerzen) ─────────────────────────────────────────
-function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
+function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], zones = null }) {
   const svgRef = useRef(null);
   const [hover, setHover] = useState(null);
   const W = 600, H = 260;
@@ -849,8 +907,8 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
           </g>
         ))}
 
-        {/* Breakout-Zone 4H */}
-        {localBreakout4hIdx !== null && localBreakout4hIdx >= 0 && (
+        {/* Breakout-Zone 4H (nur ohne Gültigkeitsbereiche) */}
+        {!zones && localBreakout4hIdx !== null && localBreakout4hIdx >= 0 && (
           <rect x={toX(localBreakout4hIdx)} y={PT} width={PL+cW-toX(localBreakout4hIdx)} height={cH} fill={`url(#g4h_${chartId})`}/>
         )}
 
@@ -888,6 +946,17 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
             <text x={PL+6} y={y-4} fill="#4ade80" fontSize="8" fontFamily="monospace" opacity="0.8">Trend ↑</text>
           </>;
         })()}
+
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
+            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {zones && zones.map((z, zi) => {
+          const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
+          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          return <g key={`zone${zi}`}>
+            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
+          </g>;
+        })}
 
         {/* Kerzen 4H */}
         {display4h.map((d, i) => {
@@ -941,6 +1010,12 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [] }) {
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#a78bfa" strokeWidth="1.1" strokeDasharray="4,4" opacity="0.3"/></svg>
           <span style={{fontSize:9,color:"#64748b"}}>Letzter Break</span>
         </div>
+        {zones && zones.length > 0 && (
+          <div style={{display:"flex",alignItems:"center",gap:4}}>
+            <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
+          </div>
+        )}
         {signals.filter(s => s.h4_bar_date).length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="10" height="16"><polygon points="5,0 9,8 1,8" fill="#eab308"/><line x1="5" x2="5" y1="8" y2="16" stroke="#eab308" strokeWidth="1.5"/></svg>

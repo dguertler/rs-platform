@@ -1,7 +1,8 @@
 """Tests für das Signal-Halten nach Trendumkehr (Weekly und Daily, gws_core.held_after_breakout).
 
 Bildet ein tieferes Tief eine neue Marke, bleibt die Ebene grün, solange seit der
-Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt —
+Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt (Weekly:
+tiefstes Tief zwischen Marke und Ausbruchswoche, Daily: Tief der Ausbruchskerze) —
 identisch zu heldAfterBreakout in frontend/backtest_logic.js.
 """
 import json
@@ -61,6 +62,14 @@ class AvgoWeeklyTest(unittest.TestCase):
     def test_weekly_red_without_hold(self):
         check_alerts.HOLD_WEEKLY = False
         self.assertFalse(self.weekly("2024-08-12")["broken"])
+
+    def test_weekly_held_through_november_2024(self):
+        # Ausbruch über 173,51 am 26.09.2024; Wochenschluss 11.11. (162,03) unter dem Tief der
+        # Ausbruchswoche (165,48), aber über dem tiefsten Tief seit der Marke (125,90) → grün
+        check_alerts.HOLD_WEEKLY = True
+        st = self.weekly("2024-12-02")
+        self.assertAlmostEqual(st["gws_price"], 181.90, places=2)
+        self.assertTrue(st["broken"])
 
     def test_backtest_engine_holds_weekly(self):
         script = (

@@ -25,7 +25,8 @@ from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_
                       swing_low_stop, weekly_breakout_idx)
 
 # Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
-# frontend/backtest_logic.js): grün bis zum Schluss unter dem Tief der Ausbruchskerze
+# frontend/backtest_logic.js): grün bis zum Schluss unter dem Anker — Weekly tiefstes Tief
+# zwischen Marke und Ausbruchswoche, Daily Tief der Ausbruchskerze
 HOLD_WEEKLY = True
 HOLD_DAILY = True
 
@@ -90,7 +91,8 @@ def analyze_weekly_structure(ohlcv_w, ohlcv_d=None):
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
     if not broken and gws_high and HOLD_WEEKLY:
         broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n,
-                                     breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None)
+                                     breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None,
+                                     lowest=True)
 
     return {
         'broken':       broken,

@@ -190,16 +190,23 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   nächsten Handelstag. Code: `pitSignals`/`simulateTradesPIT` in
   `frontend/backtest_logic.js`, live `check_alerts.py`/`check_alerts_4h.py`
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
-  neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem Tief
-  der Ausbruchskerze der zuletzt gebrochenen Marke liegt (Weekly: Woche mit dem ersten
-  Tagesschluss über der Marke). Die Trendumkehr ist nur Ausstieg aus dem Trade, nicht
-  das Ende des Signals (AVGO KW 15.07.2024: Marke 137,12 → 173,51, Tief der
-  Ausbruchswoche 13.05. bei 129,48 hält). Code: `heldAfterBreakout`/`holdSignal` in
-  `frontend/backtest_logic.js` und `frontend/rs_charts.js` (Seiten-Ampeln), live
-  `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY` in `check_alerts.py`).
-  In den Weekly-/Daily-Charts (B-DETAILS, Index-/Watchlist-Seiten) sind Kerzen, die
-  zu ihrem Schluss nur durch das Halten grün sind, grün transparent hinterlegt
-  (`held` je Struktur, `heldWeeklyFlags`/`heldDailyFlags`). Varianten testbar mit `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`
+  neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
+  **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: tiefstes Tief zwischen Marke
+  und Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **Daily: Tief
+  der Ausbruchskerze**. Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
+  (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 125,90, hält über die
+  Trendumkehr vom 11.11.2024; 181,90, Ausbruch 13.12.2024 → 154,86). Die Trendumkehr ist
+  nur Ausstieg aus dem Trade, nicht das Ende des Signals. Code: `heldAfterBreakout`/
+  `holdSignal`/`holdAnchor` in `frontend/backtest_logic.js` und `frontend/rs_charts.js`
+  (Seiten-Ampeln), live `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY`,
+  Weekly mit `lowest=True` in `check_alerts.py`). Studien:
+  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H` bzw.
+  `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief)
+- **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
+  Index-/Watchlist-Seiten): grün transparent von der Ausbruchskerze bis zur letzten
+  grünen Kerze, oben bis zum Anker (gestrichelte Linie; 4H: Tief der Ausbruchskerze),
+  kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
+  Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
@@ -211,7 +218,9 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
   Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,
-  Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg)
+  Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg),
+  tiefster Anker auch für Daily (zu viele Fehlkäufe, AVGO-PF 2,48 → 1,77), in gehaltenen
+  Fällen nach dem Daily-Bruch erst ein 4H-Retracement abwarten (Gewinnsumme −105.000 €)
 
 ### Ablauf
 

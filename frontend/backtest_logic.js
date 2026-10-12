@@ -15,25 +15,46 @@ function setTimeStop(on) { timeStopEnabled = !!on; }
 
 // Signal halten (Weekly und Daily, seit 12.10.2026 Backtest und live): Bildet ein
 // tieferes Tief eine neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein
-// Schluss unter dem Tief der Ausbruchskerze der zuletzt gebrochenen Marke liegt. Die
-// Trendumkehr ist dann nur Ausstieg aus dem Trade, nicht das Ende des Signals
-// (AVGO KW 15.07.2024: Weekly-Marke 137,12 → 173,51, Tief der Ausbruchswoche 13.05.
-// bei 129,48 hält). 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
+// Schluss unter dem Anker der zuletzt gebrochenen Marke liegt (Weekly: tiefstes Tief
+// zwischen Marke und Ausbruchswoche, Daily: Tief der Ausbruchskerze, siehe holdAnchor).
+// Die Trendumkehr ist dann nur Ausstieg aus dem Trade, nicht das Ende des Signals.
+// 4H bewusst nicht (getestet: Gewinnsumme −16 %). Gegenstück live:
 // gws_core.held_after_breakout. Systemparameter — Studien mit backtest_ndx.js --halten=…
+// und --halteanker=W:…,D:…
 let holdSignal = { w: true, d: true, h4: false };
 function setHoldSignal(h) { holdSignal = { w: !!h.w, d: !!h.d, h4: !!h.h4 }; }
 
+// Anker je Ebene (seit 12.10.2026, Backtest und live): Weekly 'tiefstes' = tiefstes Tief
+// zwischen Marke und Ausbruchswoche (AVGO: Marke 173,51, Ausbruch 26.09.2024, Tief 05.08.
+// bei 125,90 hält über die Trendumkehr vom 11.11.2024), Daily 'kerze' = Tief der
+// Ausbruchskerze (tiefer Anker auch für Daily getestet: zu viele Fehlkäufe, AVGO-PF
+// 2,48 → 1,77). Für Studien zusätzlich 'swingtief' = letztes Swing-Tief vor dem Ausbruch
+let holdAnchor = { w: 'tiefstes', d: 'kerze' };
+function setHoldAnchor(a) { holdAnchor = { ...holdAnchor, ...a }; }
+function holdAnchorLow(lows, markIdx, b, mode) {
+  if (mode === 'swingtief') {
+    for (let k = b - 1; k > markIdx; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) return lows[k];
+  }
+  if (mode === 'tiefstes' || mode === 'swingtief') return Math.min(...lows.slice(markIdx, b + 1));
+  return lows[b];
+}
+
 // breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
-function heldAfterBreakout(cands, closes, lows, n, breakoutIdx) {
+function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
+  return heldBreakout(cands, closes, lows, n, breakoutIdx, mode) !== null;
+}
+// Gehaltene Marke: { b: Index der Ausbruchskerze, anchor } oder null
+function heldBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
   for (let c = cands.length - 1; c >= 0; c--) {
     let b = -1;
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    for (let i = b + 1; i < n; i++) if (closes[i] < lows[b]) return false;
-    return true;
+    const anchor = holdAnchorLow(lows, cands[c].idx, b, mode);
+    for (let i = b + 1; i < n; i++) if (closes[i] < anchor) return null;
+    return { b, anchor };
   }
-  return false;
+  return null;
 }
 
 // Weekly wie broken: Ausbruch = erster Tagesschluss über der Marke, Ausbruchskerze = seine Woche
@@ -113,15 +134,20 @@ function analyzeStructure(ohlcv) {
     else if (last.price < prev.price) trend = "bearish";
   }
 
-  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
-  const held         = gwsdHigh !== null && breakoutIdx === null
-    && holdSignal.d && heldAfterBreakout(gwsdCandidates, closes, lows, n);
+  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen)
+  const heldD        = gwsdHigh !== null && breakoutIdx === null && holdSignal.d
+    ? heldBreakout(gwsdCandidates, closes, lows, n, undefined, holdAnchor.d) : null;
+  const held         = heldD !== null;
   const broken       = gwsdHigh !== null && (breakoutIdx !== null || held);
+  // Gültigkeitsbereich für die Charts: Ausbruchskerze und Anker, unter dem das Signal erlischt
+  const zone = !broken ? null : breakoutIdx !== null
+    ? { from: ohlcv[breakoutIdx].d, anchor: holdAnchorLow(lows, gwsdHigh.idx, breakoutIdx, holdAnchor.d) }
+    : { from: ohlcv[heldD.b].d, anchor: heldD.anchor };
   const currentClose = closes[n - 1];
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
   return {
-    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, trend,
+    currentClose, gwsdHigh, breakoutIdx, breakoutPrice, broken, held, zone, trend,
     prevGwsdHigh, prevBreakoutIdx, recentBreakout,
     swingHighs: swingHighs.slice(-6),
     swingLows:  swingLows.slice(-6),
@@ -198,14 +224,21 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   const brokenMark = gwswHigh !== null && (hasDailyCandles
     ? ohlcvD.some(d => d.d > gwswHigh.date && d.c > gwswHigh.price)
     : breakoutIdx !== null);
-  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
-  const held = gwswHigh !== null && !brokenMark && holdSignal.w && heldAfterBreakout(gwswCandidates, closes, lows, n,
-    hasDailyCandles ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined);
+  // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen)
+  const wBreak = hasDailyCandles ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined;
+  const heldW = gwswHigh !== null && !brokenMark && holdSignal.w
+    ? heldBreakout(gwswCandidates, closes, lows, n, wBreak, holdAnchor.w) : null;
+  const held = heldW !== null;
   const broken = brokenMark || held;
+  // Gültigkeitsbereich für die Charts: Ausbruchswoche und Anker, unter dem das Signal erlischt
+  const wb = brokenMark ? (wBreak ? wBreak(gwswHigh) : breakoutIdx) : null;
+  const zone = brokenMark && wb != null && wb >= 0
+    ? { from: ohlcvW[wb].d, anchor: holdAnchorLow(lows, gwswHigh.idx, wb, holdAnchor.w) }
+    : held ? { from: ohlcvW[heldW.b].d, anchor: heldW.anchor } : null;
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
-    gwswHigh, breakoutIdx, breakoutPrice, broken, held,
+    gwswHigh, breakoutIdx, breakoutPrice, broken, held, zone,
     prevGwswHigh, prevBreakoutIdx, recentBreakout,
     swingHighs: swingHighs.slice(-6),
     swingLows:  swingLows.slice(-6),
@@ -288,29 +321,56 @@ function analyze4HStructure(ohlcv4h) {
     broken4h: gws4hHigh === null || breakout4hIdx !== null
       || (holdSignal.h4 && heldAfterBreakout(gws4hCandidates, closes, lows, n)),
     prevGws4hHigh, prevBreakout4hIdx, recentBreakout,
+    // Gültigkeitsbereich für die Charts: Ausbruchskerze und ihr Tief (4H hält nicht)
+    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, anchor: lows[breakout4hIdx] } : null,
     tiefNeu: lastGws4hDefLow,
     swingHighs: swingHighs.slice(-8),
     swingLows:  swingLows.slice(-8),
   };
 }
 
-// ── Signal-Halten je Kerze (Chart-Hinterlegung) ──────────────────────────────────
-// Für jede angezeigte Kerze: war die Ebene zu ihrem Schluss nur durch das Signal-Halten
-// grün? Zeitpunktgenau mit den Kerzen bis dahin (Weekly: 60 Wochen + Tageskerzen bis
-// Wochenende wie buildWeekRows, Daily: alle Tageskerzen bis zum Tag).
-function heldWeeklyFlags(ohlcv_w, ohlcv_d, shown) {
-  return shown.map(b => {
+// ── Gültigkeitsbereiche je Chart ─────────────────────────────────────────────────
+// Für jede angezeigte Kerze die Struktur zu ihrem Schluss (zeitpunktgenau, wie die
+// Punkte): ist die Ebene grün, gehört die Kerze zum Bereich ihrer Ausbruchskerze. Ein
+// Bereich reicht von der Ausbruchskerze bis zur letzten grünen Kerze, vom Chart-Oberrand
+// bis zum Anker (darunter erlischt das Signal). Ergebnis: [{ start, end, anchor, held }]
+// mit Indizes in shown.
+function validityZones(shown, structAt) {
+  const zones = [];
+  shown.forEach((bar, k) => {
+    const st = structAt(bar);
+    const z = st?.zone;
+    const last = zones[zones.length - 1];
+    if (!z) return;
+    if (last && last.from === z.from && last.anchor === z.anchor && last.end === k - 1) {
+      last.end = k; last.held = last.held || !!st.held; return;
+    }
+    let start = shown.findIndex(b => b.d >= z.from);
+    if (start < 0 || start > k) start = k;
+    if (last && start <= last.end) start = last.end + 1;
+    zones.push({ from: z.from, anchor: z.anchor, start, end: k, held: !!st.held });
+  });
+  return zones;
+}
+function weeklyZones(ohlcv_w, ohlcv_d, shown) {
+  return validityZones(shown, b => {
     const a = ohlcv_w.findIndex(w => w.d === b.d);
-    if (a < 0) return false;
     const end = getWeekEnd(b.d);
-    return !!analyzeWeeklyStructure(ohlcv_w.slice(Math.max(0, a - 59), a + 1), ohlcv_d.filter(d => d.d <= end))?.held;
+    return a < 0 ? null : analyzeWeeklyStructure(ohlcv_w.slice(Math.max(0, a - 59), a + 1), ohlcv_d.filter(d => d.d <= end));
   });
 }
-function heldDailyFlags(ohlcv_d, shown) {
+function dailyZones(ohlcv_d, shown) {
   const idx = new Map(ohlcv_d.map((b, i) => [b.d, i]));
-  return shown.map(b => {
+  return validityZones(shown, b => {
     const i = idx.get(b.d);
-    return i != null && !!analyzeStructure(ohlcv_d.slice(0, i + 1))?.held;
+    return i == null ? null : analyzeStructure(ohlcv_d.slice(0, i + 1));
+  });
+}
+function h4Zones(ohlcv_4h, shown) {
+  const idx = new Map(ohlcv_4h.map((b, i) => [b.d, i]));
+  return validityZones(shown, b => {
+    const i = idx.get(b.d);
+    return i == null ? null : analyze4HStructure(ohlcv_4h.slice(Math.max(0, i - 59), i + 1));
   });
 }
 
