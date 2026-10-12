@@ -204,9 +204,10 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief)
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
-  letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zum Anker
-  (gestrichelte Linie;
-  4H: Tief der Ausbruchskerze),
+  letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten
+  Linie — Weekly: Anker des Signals; Daily/4H (nur Darstellung, Logik unverändert):
+  Swing-Tief vor dem Ausbruch (SL-Höhe), rückt mit jedem höheren Swing-Tief nach oben
+  (`trailingLow`),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99

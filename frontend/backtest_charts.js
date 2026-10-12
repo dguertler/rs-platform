@@ -48,7 +48,7 @@ function ChartLegendMarkers({ showSL = false }) {
       </div>
       <div style={item}>
         <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.18"/></svg>
-        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zum Anker (gestrichelt) — grün, solange kein Schluss unter dem Anker (Weekly: tiefstes Tief vor dem Ausbruch, Daily/4H: Tief der Ausbruchskerze)</span>
+        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), rückt mit jedem höheren Swing-Tief nach oben</span>
       </div>
       <div style={{...item, flexBasis:"100%", flexWrap:"wrap", gap:"2px 12px"}}>
         <span style={{display:"flex",alignItems:"center",gap:4}}>
@@ -291,7 +291,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -551,7 +551,7 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -792,7 +792,7 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {signals.filter(s => s.trigger_tf === '4h').length > 0 && (

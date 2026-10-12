@@ -28,6 +28,19 @@ function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
   return null;
 }
 
+// Untergrenze des Gültigkeitsbereichs im Chart (Daily, 4H — nur Darstellung, wie trailingLow
+// in backtest_logic.js): Swing-Tief vor der Ausbruchskerze b, rückt mit jedem höheren
+// Swing-Tief nach oben, nie nach unten.
+function trailingLow(lows, b, n) {
+  let low = null;
+  for (let k = b - 1; k >= 1 && low == null; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) low = lows[k];
+  if (low == null) low = Math.min(...lows.slice(Math.max(0, b - 5), b + 1));
+  for (let k = b; k <= n - 2; k++) {
+    if (k >= 1 && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1] && lows[k] > low) low = lows[k];
+  }
+  return low;
+}
+
 // Weekly: Ausbruchswoche = Woche mit dem ersten Tagesschluss über der Marke
 function weeklyBreakoutIdx(ohlcvW, ohlcvD) {
   return cand => {
@@ -166,9 +179,9 @@ function analyzeStructure(ohlcv) {
   const heldD        = gwsdHigh !== null && breakoutIdx === null ? heldBreakout(gwsdCandidates, closes, lows, n) : null;
   const held         = heldD !== null;
   const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
-  // Gültigkeitsbereich: Ausbruchskerze und Anker (Tief der Ausbruchskerze)
-  const zone = breakoutIdx !== null ? { from: ohlcv[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: lows[breakoutIdx] }
-    : held ? { from: ohlcv[heldD.b].d, top: Math.max(...highs.slice(heldD.b)), anchor: heldD.anchor } : null;
+  // Gültigkeitsbereich: ab Ausbruchskerze, unten nachgezogenes Swing-Tief (nur Darstellung)
+  const zone = breakoutIdx !== null ? { from: ohlcv[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: trailingLow(lows, breakoutIdx, n) }
+    : held ? { from: ohlcv[heldD.b].d, top: Math.max(...highs.slice(heldD.b)), anchor: trailingLow(lows, heldD.b, n) } : null;
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
@@ -339,8 +352,8 @@ function analyze4HStructure(ohlcv4h) {
   })();
   return {
     gws4hHigh, breakout4hIdx, broken4h: breakout4hIdx !== null || (gws4hHigh === null && trend4h === "bullish"),
-    // Gültigkeitsbereich: Ausbruchskerze und ihr Tief (4H hält nicht)
-    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: Math.max(...highs.slice(breakout4hIdx)), anchor: lows[breakout4hIdx] } : null,
+    // Gültigkeitsbereich: ab Ausbruchskerze, unten nachgezogenes Swing-Tief (nur Darstellung)
+    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: Math.max(...highs.slice(breakout4hIdx)), anchor: trailingLow(lows, breakout4hIdx, n) } : null,
     prevGws4hHigh, prevBreakout4hIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-8),
@@ -561,7 +574,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -798,7 +811,7 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -1016,7 +1029,7 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], zones = null }) 
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (höchstes Hoch seit Ausbruch bis Tief, kräftig = gehalten)</span>
           </div>
         )}
         {signals.filter(s => s.h4_bar_date).length > 0 && (

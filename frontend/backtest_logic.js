@@ -39,6 +39,19 @@ function holdAnchorLow(lows, markIdx, b, mode) {
   return lows[b];
 }
 
+// Untergrenze des Gültigkeitsbereichs im Chart (Daily, 4H — nur Darstellung, nicht die
+// Logik): beginnt beim letzten Swing-Tief vor der Ausbruchskerze b (Höhe des SL) und rückt mit
+// jedem höheren Swing-Tief seitdem nach oben, nie nach unten. Stand nach der Kerze n-1.
+function trailingLow(lows, b, n) {
+  let low = null;
+  for (let k = b - 1; k >= 1 && low == null; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) low = lows[k];
+  if (low == null) low = Math.min(...lows.slice(Math.max(0, b - 5), b + 1));
+  for (let k = b; k <= n - 2; k++) {
+    if (k >= 1 && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1] && lows[k] > low) low = lows[k];
+  }
+  return low;
+}
+
 // breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
   return heldBreakout(cands, closes, lows, n, breakoutIdx, mode) !== null;
@@ -139,10 +152,11 @@ function analyzeStructure(ohlcv) {
     ? heldBreakout(gwsdCandidates, closes, lows, n, undefined, holdAnchor.d) : null;
   const held         = heldD !== null;
   const broken       = gwsdHigh !== null && (breakoutIdx !== null || held);
-  // Gültigkeitsbereich für die Charts: Ausbruchskerze und Anker, unter dem das Signal erlischt
+  // Gültigkeitsbereich für die Charts: ab Ausbruchskerze, unten nachgezogenes Swing-Tief
+  // (trailingLow, nur Darstellung — das Signal selbst erlischt unter dem Tief der Ausbruchskerze)
   const zone = !broken ? null : breakoutIdx !== null
-    ? { from: ohlcv[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: holdAnchorLow(lows, gwsdHigh.idx, breakoutIdx, holdAnchor.d) }
-    : { from: ohlcv[heldD.b].d, top: Math.max(...highs.slice(heldD.b)), anchor: heldD.anchor };
+    ? { from: ohlcv[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: trailingLow(lows, breakoutIdx, n) }
+    : { from: ohlcv[heldD.b].d, top: Math.max(...highs.slice(heldD.b)), anchor: trailingLow(lows, heldD.b, n) };
   const currentClose = closes[n - 1];
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
@@ -321,8 +335,8 @@ function analyze4HStructure(ohlcv4h) {
     broken4h: gws4hHigh === null || breakout4hIdx !== null
       || (holdSignal.h4 && heldAfterBreakout(gws4hCandidates, closes, lows, n)),
     prevGws4hHigh, prevBreakout4hIdx, recentBreakout,
-    // Gültigkeitsbereich für die Charts: Ausbruchskerze und ihr Tief (4H hält nicht)
-    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: Math.max(...highs.slice(breakout4hIdx)), anchor: lows[breakout4hIdx] } : null,
+    // Gültigkeitsbereich für die Charts: ab Ausbruchskerze, unten nachgezogenes Swing-Tief
+    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: Math.max(...highs.slice(breakout4hIdx)), anchor: trailingLow(lows, breakout4hIdx, n) } : null,
     tiefNeu: lastGws4hDefLow,
     swingHighs: swingHighs.slice(-8),
     swingLows:  swingLows.slice(-8),
