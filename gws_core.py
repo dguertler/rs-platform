@@ -79,6 +79,26 @@ def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_
     return False
 
 
+def provisional_mark_break(swing_highs, swing_lows, highs, lows, closes, n, min_margin=0.001):
+    """Daily wie provisionalMark in frontend/backtest_logic.js: Ist das Tief der vorletzten
+    Kerze ein tieferes Tief (Swing-Tief mit erst einer Folgekerze) und schließt die letzte
+    Kerze über dem höchsten Swing-Hoch seit dem letzten bestätigten Swing-Tief, ist diese
+    Marke sofort gebrochen (AVGO 21.08.2023: Tief 18.08. bei 78,18, Marke 82,28 vom 15.08.,
+    Schluss 83,30). Rückgabe: Marke (dict) oder None."""
+    k = n - 2
+    if k < 2 or not swing_lows or swing_lows[-1]['idx'] >= k:
+        return None
+    last = swing_lows[-1]
+    if not (lows[k] <= lows[k - 1] and lows[k] <= lows[k - 2] and lows[k] <= lows[k + 1]
+            and lows[k] < last['price']):
+        return None
+    hs = [h for h in swing_highs if last['idx'] < h['idx'] < k]
+    if not hs:
+        return None
+    mark = max(hs, key=lambda h: h['price'])
+    return mark if closes[n - 1] > mark['price'] * (1 + min_margin) else None
+
+
 def tu_anchor_low(nxt, lows, b):
     """Daily-Anker nach Trendumkehr wie tuAnchorLow in frontend/backtest_logic.js: Die
     Trendumkehr (tieferes Tief tief_neu der nächsten Marke) deaktiviert nur den Trade; die

@@ -94,6 +94,22 @@ function tuAnchorLow(next, lows, b) {
   return lows[b];
 }
 
+// Daily: Swing-Tief schon mit einer Folgekerze, wenn diese Kerze die daraus entstehende Marke
+// bricht (seit 12.10.2026, Backtest und live — gws_core.provisional_mark_break). Marke = höchstes
+// Swing-Hoch zwischen dem letzten bestätigten Swing-Tief und dem neuen tieferen Tief (Kerze
+// n-2); Ausbruch = Schluss der letzten Kerze darüber. Studie ohne: backtest_ndx.js --ohne-fruehbruch
+let earlyMarkBreak = true;
+function setEarlyMarkBreak(on) { earlyMarkBreak = !!on; }
+function provisionalMark(highs, lows, closes, swingHighs, swingLows, n) {
+  const k = n - 2, last = swingLows[swingLows.length - 1];
+  if (k < 2 || !last || last.idx >= k) return null;
+  if (!(lows[k] <= lows[k-1] && lows[k] <= lows[k-2] && lows[k] <= lows[k+1] && lows[k] < last.price)) return null;
+  const hs = swingHighs.filter(h => h.idx > last.idx && h.idx < k);
+  if (!hs.length) return null;
+  const mark = hs.reduce((a, h) => h.price > a.price ? h : a);
+  return closes[n - 1] > mark.price ? { ...mark, tiefAlt: last, tiefNeu: { idx: k, price: lows[k] } } : null;
+}
+
 // breakoutIdx(cand) (optional): Index der Ausbruchskerze, sonst erster Schluss über der Marke
 function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, mode = 'kerze') {
   return heldBreakout(cands, closes, lows, n, breakoutIdx, mode) !== null;
@@ -165,9 +181,8 @@ function analyzeStructure(ohlcv) {
     }
   }
 
-  const gwsdHigh     = gwsdCandidates.length > 0 ? gwsdCandidates[gwsdCandidates.length - 1] : null;
-  const prevGwsdHigh = gwsdCandidates.length > 1 ? gwsdCandidates[gwsdCandidates.length - 2] : null;
-  const breakoutPrice = gwsdHigh ? gwsdHigh.price : null;
+  let gwsdHigh       = gwsdCandidates.length > 0 ? gwsdCandidates[gwsdCandidates.length - 1] : null;
+  let prevGwsdHigh   = gwsdCandidates.length > 1 ? gwsdCandidates[gwsdCandidates.length - 2] : null;
 
   let breakoutIdx = null;
   if (gwsdHigh) {
@@ -175,6 +190,15 @@ function analyzeStructure(ohlcv) {
       if (closes[i] > gwsdHigh.price) { breakoutIdx = i; break; }
     }
   }
+  // Ausbruch bestätigt das Swing-Tief: Ist das vorletzte Tief ein tieferes Tief (Swing-Tief mit
+  // erst einer Folgekerze) und schließt die letzte Kerze über dem höchsten Hoch seit dem
+  // vorigen Swing-Tief, ist diese Marke sofort gebrochen (AVGO 21.08.2023: Tief 18.08. bei
+  // 78,18, Marke 82,28 vom 15.08., Schluss 83,30 → Daily grün mit dem 4H-Signal um 18:00).
+  if (breakoutIdx === null && earlyMarkBreak) {
+    const pm = provisionalMark(highs, lows, closes, swingHighs, swingLows, n);
+    if (pm) { prevGwsdHigh = gwsdHigh; gwsdHigh = pm; breakoutIdx = n - 1; }
+  }
+  const breakoutPrice = gwsdHigh ? gwsdHigh.price : null;
 
   let prevBreakoutIdx = null;
   if (prevGwsdHigh) {

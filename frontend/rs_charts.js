@@ -27,6 +27,18 @@ function tuAnchorLow(next, lows, b) {
   }
   return lows[b];
 }
+// Daily: Swing-Tief schon mit einer Folgekerze, wenn diese Kerze die daraus entstehende Marke
+// bricht (wie provisionalMark in backtest_logic.js, live gws_core.provisional_mark_break;
+// AVGO 21.08.2023: Tief 18.08. bei 78,18, Marke 82,28 vom 15.08., Schluss 83,30 → grün)
+function provisionalMark(highs, lows, closes, swingHighs, swingLows, n) {
+  const k = n - 2, last = swingLows[swingLows.length - 1];
+  if (k < 2 || !last || last.idx >= k) return null;
+  if (!(lows[k] <= lows[k-1] && lows[k] <= lows[k-2] && lows[k] <= lows[k+1] && lows[k] < last.price)) return null;
+  const hs = swingHighs.filter(h => h.idx > last.idx && h.idx < k);
+  if (!hs.length) return null;
+  const mark = hs.reduce((a, h) => h.price > a.price ? h : a);
+  return closes[n - 1] > mark.price ? { ...mark, tiefAlt: last, tiefNeu: { idx: k, price: lows[k] } } : null;
+}
 // Gehaltene Marke: { b: Index der Ausbruchskerze, anchor } oder null
 function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
   for (let c = cands.length - 1; c >= 0; c--) {
@@ -187,10 +199,8 @@ function analyzeStructure(ohlcv) {
     }
   }
 
-  const gwsdHigh     = gwsdCandidates.length > 0 ? gwsdCandidates[gwsdCandidates.length - 1] : null;
-  const prevGwsdHigh = gwsdCandidates.length > 1 ? gwsdCandidates[gwsdCandidates.length - 2] : null;
-
-  const breakoutPrice = gwsdHigh ? gwsdHigh.price : null;
+  let gwsdHigh     = gwsdCandidates.length > 0 ? gwsdCandidates[gwsdCandidates.length - 1] : null;
+  let prevGwsdHigh = gwsdCandidates.length > 1 ? gwsdCandidates[gwsdCandidates.length - 2] : null;
 
   let breakoutIdx = null;
   if (gwsdHigh) {
@@ -198,6 +208,12 @@ function analyzeStructure(ohlcv) {
       if (closes[i] > gwsdHigh.price) { breakoutIdx = i; break; }
     }
   }
+  // Ausbruch bestätigt das Swing-Tief (wie provisionalMark in backtest_logic.js)
+  if (breakoutIdx === null) {
+    const pm = provisionalMark(highs, lows, closes, swingHighs, swingLows, n);
+    if (pm) { prevGwsdHigh = gwsdHigh; gwsdHigh = pm; breakoutIdx = n - 1; }
+  }
+  const breakoutPrice = gwsdHigh ? gwsdHigh.price : null;
 
   let prevBreakoutIdx = null;
   if (prevGwsdHigh) {

@@ -22,6 +22,7 @@ import matplotlib.patches as mpatches
 # Funktionen aus index.html
 
 from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_breakout,
+                      provisional_mark_break,
                       swing_low_stop, weekly_breakout_idx)
 
 # Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
@@ -42,6 +43,10 @@ def analyze_daily_structure(ohlcv):
 
     swing_highs, swing_lows = _find_swing_points(highs, lows, n)
     gws_high, breakout_idx  = _gws_core(swing_highs, swing_lows, closes, n)
+    if breakout_idx is None:   # Ausbruch bestätigt das Swing-Tief (provisional_mark_break)
+        mark = provisional_mark_break(swing_highs, swing_lows, highs, lows, closes, n)
+        if mark:
+            gws_high, breakout_idx = mark, n - 1
 
     trend = None
     if len(swing_highs) >= 2:

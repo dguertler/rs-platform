@@ -32,7 +32,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -50,6 +50,10 @@ if (holdArg) {
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--halten nur mit BACKTEST_NDX_OUT (Studie)');
   const lv = holdArg.slice(9).toUpperCase().split(',');
   globalThis.__e.setHoldSignal({ w: lv.includes('W'), d: lv.includes('D'), h4: lv.includes('4H') });
+}
+if (process.argv.includes('--ohne-fruehbruch')) {   // Studie: Daily-Swing-Tief erst nach zwei Folgekerzen
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--ohne-fruehbruch nur mit BACKTEST_NDX_OUT (Studie)');
+  globalThis.__e.setEarlyMarkBreak(false);
 }
 const anchorArg = process.argv.find((a) => a.startsWith('--halteanker='));
 if (anchorArg) {   // Studie, z. B. --halteanker=W:tiefstes,D:kerze

@@ -189,6 +189,15 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   schwächer). Kauf zur nächsten 4H-Kerze (Kerzen 10–14/14–18 Uhr) bzw. 10 Uhr am
   nächsten Handelstag. Code: `pitSignals`/`simulateTradesPIT` in
   `frontend/backtest_logic.js`, live `check_alerts.py`/`check_alerts_4h.py`
+- **Daily-Marke — Ausbruch bestätigt das Swing-Tief (seit 12.10.2026):** Ein Swing-Tief
+  braucht sonst zwei Folgekerzen. Ist das Tief der vorletzten Kerze ein tieferes Tief und
+  schließt die letzte Kerze über dem höchsten Swing-Hoch seit dem letzten Swing-Tief, ist
+  diese Marke sofort gebrochen — Daily wird mit derselben Kerze grün wie 4H (AVGO
+  21.08.2023: Tief 18.08. bei 78,18, Marke 82,28 vom 15.08., Schluss 83,30 → Signal 18:00,
+  Kauf 22.08.; über alle Top-20-Signale 6 Trades neu, 1 weg, Gewinnsumme 256.906 € →
+  253.812 €, PF 1,65 → 1,64). Code: `provisionalMark` in `frontend/backtest_logic.js` und
+  `frontend/rs_charts.js`, live `gws_core.provisional_mark_break` (`check_alerts.py`).
+  Studie ohne: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --ohne-fruehbruch`
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
   neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
   **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: tiefstes Tief zwischen Marke
@@ -196,7 +205,7 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   Swing-Tief vor der Trendumkehr, das sie noch nicht unterschritten hat**, geprüft ab der
   Trendumkehr; ohne solches Swing-Tief nach dem Ausbruch das Tief der Ausbruchskerze
   (`tuAnchorLow`/`tu_anchor_low`; AVGO Daily: Trendumkehr 04.08.2023 bei 84,09 → Anker
-  81,29 vom 06.07., Schluss 10.08. bei 81,16 darunter → Daily rot bis zum Ausbruch 22.08.;
+  81,29 vom 06.07., Schluss 10.08. bei 81,16 darunter → Daily rot bis zum Ausbruch 21.08.;
   über alle Top-20-Signale Gewinnsumme 254.937 € → 256.906 €, PF 1,66 → 1,65 gegenüber dem
   Tief der Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
   (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 125,90, hält über die

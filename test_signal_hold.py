@@ -56,9 +56,11 @@ class TuAnchorTest(unittest.TestCase):
 class AvgoDailyTest(unittest.TestCase):
     """AVGO Daily 2023: Trendumkehr 04.08. (84,09) deaktiviert nur den Trade; Daily bleibt
     gehalten bis zum Schluss unter dem Swing-Tief vom 06.07. (81,29) am 10.08. (81,16) und ist
-    bis zum neuen Ausbruch am 22.08. rot — live und in der Backtest-Engine gleich."""
-    days = ["2023-08-08", "2023-08-09", "2023-08-10", "2023-08-18", "2023-08-22"]
-    expected = [True, True, False, False, True]
+    rot bis zum neuen Ausbruch am 21.08.: Schluss 83,30 über der Marke 82,28 (Hoch 15.08.), die
+    das tiefere Tief vom 18.08. bildet — der Ausbruch bestätigt dieses Swing-Tief schon mit
+    einer Folgekerze. Live und in der Backtest-Engine gleich."""
+    days = ["2023-08-08", "2023-08-09", "2023-08-10", "2023-08-18", "2023-08-21", "2023-08-22"]
+    expected = [True, True, False, False, True, True]
 
     def test_live_daily(self):
         d = bars(json.load(open(AVGO_CHART))["d"])
