@@ -48,7 +48,7 @@ function ChartLegendMarkers({ showSL = false }) {
       </div>
       <div style={item}>
         <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.18"/></svg>
-        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, grün solange kein Schluss unter der Linie (Weekly: tiefstes Tief vor dem Ausbruch, Daily/4H: Tief der Ausbruchskerze)</span>
+        <span style={txt}>Gültigkeitsbereich: ab Ausbruchskerze, von ihrem Hoch bis zum Anker (gestrichelt) — grün, solange kein Schluss unter dem Anker (Weekly: tiefstes Tief vor dem Ausbruch, Daily/4H: Tief der Ausbruchskerze)</span>
       </div>
       <div style={{...item, flexBasis:"100%", flexWrap:"wrap", gap:"2px 12px"}}>
         <span style={{display:"flex",alignItems:"center",gap:4}}>
@@ -204,13 +204,14 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
           </>;
         })()}
 
-        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
-            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, vom Hoch der
+            Ausbruchskerze bis zum Anker (Schluss darunter → Signal erlischt); gehalten kräftiger */}
         {zones && zones.map((z, zi) => {
           const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
-          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          const clampY = y => Math.min(PT + cH, Math.max(PT, y));
+          const yA = clampY(toY(z.anchor)), yT = clampY(toY(z.top));
           return <g key={`zone${zi}`}>
-            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <rect x={x1} y={yT} width={x2 - x1} height={Math.max(0, yA - yT)} fill="#22c55e" opacity={z.held ? 0.22 : 0.13}/>
             <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
           </g>;
         })}
@@ -290,7 +291,7 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Hoch der Ausbruchskerze bis Anker, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -455,13 +456,14 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
           </>;
         })()}
 
-        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
-            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, vom Hoch der
+            Ausbruchskerze bis zum Anker (Schluss darunter → Signal erlischt); gehalten kräftiger */}
         {zones && zones.map((z, zi) => {
           const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
-          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          const clampY = y => Math.min(PT + cH, Math.max(PT, y));
+          const yA = clampY(toY(z.anchor)), yT = clampY(toY(z.top));
           return <g key={`zone${zi}`}>
-            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <rect x={x1} y={yT} width={x2 - x1} height={Math.max(0, yA - yT)} fill="#22c55e" opacity={z.held ? 0.22 : 0.13}/>
             <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
           </g>;
         })}
@@ -549,7 +551,7 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Hoch der Ausbruchskerze bis Anker, kräftig = gehalten)</span>
           </div>
         )}
         {benchLine.length > 1 && benchLabel && (
@@ -700,13 +702,14 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
           </>;
         })()}
 
-        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker
-            (Schluss darunter → Signal erlischt); gehaltene Bereiche kräftiger */}
+        {/* Gültigkeitsbereiche: Ausbruchskerze bis letzte grüne Kerze, vom Hoch der
+            Ausbruchskerze bis zum Anker (Schluss darunter → Signal erlischt); gehalten kräftiger */}
         {zones && zones.map((z, zi) => {
           const x1 = PL + z.start * (cW / n), x2 = PL + (z.end + 1) * (cW / n);
-          const yA = Math.min(PT + cH, Math.max(PT, toY(z.anchor)));
+          const clampY = y => Math.min(PT + cH, Math.max(PT, y));
+          const yA = clampY(toY(z.anchor)), yT = clampY(toY(z.top));
           return <g key={`zone${zi}`}>
-            <rect x={x1} y={PT} width={x2 - x1} height={yA - PT} fill="#22c55e" opacity={z.held ? 0.17 : 0.09}/>
+            <rect x={x1} y={yT} width={x2 - x1} height={Math.max(0, yA - yT)} fill="#22c55e" opacity={z.held ? 0.22 : 0.13}/>
             <line x1={x1} x2={x2} y1={yA} y2={yA} stroke="#22c55e" strokeWidth="1" strokeDasharray="3,3" opacity="0.8"/>
           </g>;
         })}
@@ -789,7 +792,7 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
         {zones && zones.length > 0 && (
           <div style={{display:"flex",alignItems:"center",gap:4}}>
             <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Ausbruch bis Anker, kräftig = gehalten)</span>
+            <span style={{fontSize:9,color:"#64748b"}}>Gültigkeit (Hoch der Ausbruchskerze bis Anker, kräftig = gehalten)</span>
           </div>
         )}
         {signals.filter(s => s.trigger_tf === '4h').length > 0 && (

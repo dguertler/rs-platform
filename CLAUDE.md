@@ -203,8 +203,9 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H` bzw.
   `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief)
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
-  Index-/Watchlist-Seiten): grün transparent von der Ausbruchskerze bis zur letzten
-  grünen Kerze, oben bis zum Anker (gestrichelte Linie; 4H: Tief der Ausbruchskerze),
+  Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
+  letzten grünen Kerze, vom Hoch der Ausbruchskerze bis zum Anker (gestrichelte Linie;
+  4H: Tief der Ausbruchskerze),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99

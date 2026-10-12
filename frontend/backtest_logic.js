@@ -141,8 +141,8 @@ function analyzeStructure(ohlcv) {
   const broken       = gwsdHigh !== null && (breakoutIdx !== null || held);
   // Gültigkeitsbereich für die Charts: Ausbruchskerze und Anker, unter dem das Signal erlischt
   const zone = !broken ? null : breakoutIdx !== null
-    ? { from: ohlcv[breakoutIdx].d, anchor: holdAnchorLow(lows, gwsdHigh.idx, breakoutIdx, holdAnchor.d) }
-    : { from: ohlcv[heldD.b].d, anchor: heldD.anchor };
+    ? { from: ohlcv[breakoutIdx].d, top: highs[breakoutIdx], anchor: holdAnchorLow(lows, gwsdHigh.idx, breakoutIdx, holdAnchor.d) }
+    : { from: ohlcv[heldD.b].d, top: highs[heldD.b], anchor: heldD.anchor };
   const currentClose = closes[n - 1];
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
 
@@ -233,8 +233,8 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   // Gültigkeitsbereich für die Charts: Ausbruchswoche und Anker, unter dem das Signal erlischt
   const wb = brokenMark ? (wBreak ? wBreak(gwswHigh) : breakoutIdx) : null;
   const zone = brokenMark && wb != null && wb >= 0
-    ? { from: ohlcvW[wb].d, anchor: holdAnchorLow(lows, gwswHigh.idx, wb, holdAnchor.w) }
-    : held ? { from: ohlcvW[heldW.b].d, anchor: heldW.anchor } : null;
+    ? { from: ohlcvW[wb].d, top: highs[wb], anchor: holdAnchorLow(lows, gwswHigh.idx, wb, holdAnchor.w) }
+    : held ? { from: ohlcvW[heldW.b].d, top: highs[heldW.b], anchor: heldW.anchor } : null;
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);
 
   return {
@@ -322,7 +322,7 @@ function analyze4HStructure(ohlcv4h) {
       || (holdSignal.h4 && heldAfterBreakout(gws4hCandidates, closes, lows, n)),
     prevGws4hHigh, prevBreakout4hIdx, recentBreakout,
     // Gültigkeitsbereich für die Charts: Ausbruchskerze und ihr Tief (4H hält nicht)
-    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, anchor: lows[breakout4hIdx] } : null,
+    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: highs[breakout4hIdx], anchor: lows[breakout4hIdx] } : null,
     tiefNeu: lastGws4hDefLow,
     swingHighs: swingHighs.slice(-8),
     swingLows:  swingLows.slice(-8),
@@ -332,8 +332,9 @@ function analyze4HStructure(ohlcv4h) {
 // ── Gültigkeitsbereiche je Chart ─────────────────────────────────────────────────
 // Für jede angezeigte Kerze die Struktur zu ihrem Schluss (zeitpunktgenau, wie die
 // Punkte): ist die Ebene grün, gehört die Kerze zum Bereich ihrer Ausbruchskerze. Ein
-// Bereich reicht von der Ausbruchskerze bis zur letzten grünen Kerze, vom Chart-Oberrand
-// bis zum Anker (darunter erlischt das Signal). Ergebnis: [{ start, end, anchor, held }]
+// Bereich reicht von der Ausbruchskerze bis zur letzten grünen Kerze, vom Hoch der
+// Ausbruchskerze bis zum Anker (darunter erlischt das Signal). Ergebnis:
+// [{ start, end, top, anchor, held }]
 // mit Indizes in shown.
 function validityZones(shown, structAt) {
   const zones = [];
@@ -343,12 +344,12 @@ function validityZones(shown, structAt) {
     const last = zones[zones.length - 1];
     if (!z) return;
     if (last && last.from === z.from && last.anchor === z.anchor && last.end === k - 1) {
-      last.end = k; last.held = last.held || !!st.held; return;
+      last.end = k; last.top = z.top; last.held = last.held || !!st.held; return;
     }
     let start = shown.findIndex(b => b.d >= z.from);
     if (start < 0 || start > k) start = k;
     if (last && start <= last.end) start = last.end + 1;
-    zones.push({ from: z.from, anchor: z.anchor, start, end: k, held: !!st.held });
+    zones.push({ from: z.from, top: z.top, anchor: z.anchor, start, end: k, held: !!st.held });
   });
   return zones;
 }
