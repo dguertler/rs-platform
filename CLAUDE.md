@@ -234,7 +234,17 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   → Verkauf zur Eröffnung am Folgetag. **Kein Zeitstopp** (abgeschaltet seit
   12.10.2026; Kürzel ZS nur noch bei `--mit-zeitstopp`).
   Code: `exitReasonOf`/`tradeFromEntry`, live `check_exits.find_exit`
-- **Earnings:** kein Kauf < 4 Kalendertage vor den Zahlen (`data/earnings_history.json`)
+- **Earnings:** kein Kauf < 4 Kalendertage vor den Zahlen (`data/earnings_history.json`).
+  **Kurs fällt nach den Zahlen (seit 12.10.2026):** Schließt der Reaktionstag (nach
+  Börsenschluss: nächster Handelstag, sonst der Tag der Zahlen) mindestens 5 % unter dem
+  Schluss davor, gibt es keinen Kauf, bis Daily danach einmal rot war (und wieder grün ist)
+  oder ein Schluss über dem Kurs vor den Zahlen liegt (AVGO: Zahlen 31.08.2023 nach
+  Börsenschluss, 01.09. −5,4 % → kein Kauf am 14.09.; über alle Top-20-Signale 38 Trades weg
+  (zusammen −2.600 €), 6 neu, Gewinnsumme 253.812 € → 257.389 €, PF 1,64 → 1,66; ohne
+  Mindestrückgang und ohne Freigabe über dem Kurs vor den Zahlen verworfen: 295 Trades weg,
+  Gewinnsumme 210.839 €). Code: `earningsDropBlocks` in `frontend/backtest_logic.js`, live
+  `check_exits.earnings_drop_block` (Modell-Depot, Kaufentscheid in der Mail, Watchlist).
+  Studie ohne: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --ohne-earningsfall`
 - **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
   Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,

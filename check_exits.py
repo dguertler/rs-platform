@@ -123,6 +123,39 @@ def earnings_blocks_entry(earnings, entry_day):
     return e if days < EARNINGS_BLOCK_DAYS else None
 
 
+EARNINGS_DROP_MIN = 0.05
+
+
+def earnings_drop_block(earnings, ohlcv, signal_day):
+    """Kurs fällt nach den Zahlen (wie earningsDropBlocks in frontend/backtest_logic.js):
+    Schließt der Reaktionstag (nach Börsenschluss: nächster Handelstag, sonst der Tag der
+    Zahlen) mindestens 5 % unter dem Schluss davor, gibt es keinen Kauf, bis Daily danach
+    einmal rot war oder ein Schluss über dem Kurs vor den Zahlen liegt (AVGO: Zahlen
+    31.08.2023 nach Börsenschluss, 01.09. −5,4 % → kein Kauf am 14.09.). Rückgabe: der
+    Termin [Datum, Zeit], der sperrt, sonst None. ohlcv: Tageskerzen, mindestens bis vor
+    signal_day."""
+    from check_alerts import analyze_daily_structure   # spät: check_alerts importiert dieses Modul
+    e = None
+    for x in earnings or []:
+        if x[0] >= signal_day:
+            break
+        e = x
+    if not e:
+        return None
+    r = next((i for i, b in enumerate(ohlcv)
+              if (b["d"] > e[0] if e[1] == "amc" else b["d"] >= e[0])), -1)
+    if r < 1 or ohlcv[r]["d"] >= signal_day or ohlcv[r]["c"] > ohlcv[r - 1]["c"] * (1 - EARNINGS_DROP_MIN):
+        return None
+    sig = next((i for i, b in enumerate(ohlcv) if b["d"] >= signal_day), len(ohlcv))
+    if any(ohlcv[i]["c"] > ohlcv[r - 1]["c"] for i in range(r + 1, sig)):
+        return None
+    for i in range(r, sig):
+        st = analyze_daily_structure(ohlcv[:i + 1])
+        if not (st and st["broken"]):
+            return None
+    return e
+
+
 def earnings_sell_day(ohlcv, e):
     """Verkaufstag vor den Zahlen: nach Börsenschluss derselbe Tag, sonst der
     Handelstag davor (bei Zahlen vor Börsenbeginn bzw. unbekannter Uhrzeit).
@@ -391,6 +424,9 @@ def collect_new_positions(watchlist, market, signals, positions, closed, earning
         if earnings_blocks_entry((earnings or {}).get(ticker), entry["entry_date"]):
             closed[key] = latest["signal_date"]      # kein Kauf so kurz vor den Zahlen
             continue
+        if earnings_drop_block((earnings or {}).get(ticker), market[ticker]["ohlcv"], latest["signal_date"]):
+            closed[key] = latest["signal_date"]      # kein Kauf: Kurs fiel nach den Zahlen
+            continue
         positions[key] = {
             "ticker": ticker,
             "source": latest.get("source") or market[ticker]["source"],
@@ -524,6 +560,8 @@ def rebuild_depot(signals, market):
             continue          # kein gültiger Einstieg (Stopp über dem Kurs)
         if earnings_blocks_entry(earnings.get(ticker), entry["entry_date"] if entry else date):
             continue          # kein Kauf so kurz vor den Zahlen
+        if earnings_drop_block(earnings.get(ticker), data["ohlcv"], date):
+            continue          # kein Kauf: Kurs fiel nach den Zahlen
         if len(positions) < MAX_POSITIONS:
             positions[ticker.upper()] = {"ticker": ticker, "source": data["source"], "signal_date": date,
                                          **(entry or {"entry_price": None})}
@@ -541,10 +579,15 @@ def depot_decisions(alerts, signals, market, today):
     for a in sorted(alerts, key=lambda x: x.get("rank") or 99):
         key = a["ticker"].upper()
         blocked = earnings_blocks_entry(earnings.get(a["ticker"]), today)
+        ohlcv = (market.get(a["ticker"]) or {}).get("ohlcv") or []
+        dropped = earnings_drop_block(earnings.get(a["ticker"]), ohlcv, today)
         if key in positions:
             a["decision"] = "bereits im Depot"
         elif blocked:
             a["decision"] = f"Kein Kauf – Earnings am {datetime.strptime(blocked[0], '%Y-%m-%d'):%d.%m.%Y}"
+        elif dropped:
+            a["decision"] = (f"Kein Kauf – Kurs fiel nach den Earnings vom "
+                             f"{datetime.strptime(dropped[0], '%Y-%m-%d'):%d.%m.%Y}")
         elif len(positions) < MAX_POSITIONS:
             a["decision"] = "Kauf"
             positions[key] = {"ticker": a["ticker"], "source": a.get("source", ""), "signal_date": today,

@@ -774,6 +774,31 @@ function earningsBlocksEntry(earnings, entryDay) {
   return !!e && calendarDays(entryDay, e[0]) < EARNINGS_BLOCK_DAYS;
 }
 
+// Kurs fällt nach den Zahlen (seit 12.10.2026, Backtest und live — check_exits.earnings_drop_block):
+// Schließt der Reaktionstag (nach Börsenschluss: nächster Handelstag, sonst der Tag der Zahlen)
+// mindestens EARNINGS_DROP_MIN unter dem Schluss davor, gibt es keinen Kauf, bis Daily nach der
+// Reaktion einmal rot war (und wieder grün ist) oder ein Schluss über dem Kurs vor den Zahlen
+// liegt (AVGO: Zahlen 31.08.2023 nach Börsenschluss, 01.09. Schluss 84,02 nach 88,79 = −5,4 %
+// → kein Kauf am 14.09., Daily blieb grün). dailyGreen(i): Daily grün mit Tageskerze i.
+const EARNINGS_DROP_MIN = 0.05;
+let earningsDropRule = true;
+function setEarningsDropRule(on) { earningsDropRule = !!on; }
+function earningsDropBlocks(earnings, ohlcv_d, dIdx, signalDay, dailyGreen) {
+  if (!earningsDropRule || !earnings) return false;
+  let e = null;
+  for (const x of earnings) { if (x[0] >= signalDay) break; e = x; }
+  if (!e) return false;
+  let r = -1;
+  for (let i = 0; i < ohlcv_d.length; i++) {
+    if (e[1] === 'amc' ? ohlcv_d[i].d > e[0] : ohlcv_d[i].d >= e[0]) { r = i; break; }
+  }
+  if (r < 1 || ohlcv_d[r].d >= signalDay || ohlcv_d[r].c > ohlcv_d[r - 1].c * (1 - EARNINGS_DROP_MIN)) return false;
+  const sig = dIdx.get(signalDay) ?? ohlcv_d.length;
+  for (let i = r + 1; i < sig; i++) if (ohlcv_d[i].c > ohlcv_d[r - 1].c) return false;   // über dem Kurs vor den Zahlen
+  for (let i = r; i < sig; i++) if (!dailyGreen(i)) return false;   // Daily war rot → wieder frei
+  return true;
+}
+
 // Verkaufstag vor den Zahlen e (Handelstag aus ohlcv_d)
 function earningsSellDay(ohlcv_d, e) {
   if (e[1] === 'amc') return e[0];
@@ -839,6 +864,11 @@ function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT
     p4[j] = analyze4HStructure(h.slice(Math.max(0, j - 59), j + 1))?.broken4h ? 1 : 0;
   }
   let busyUntil = '';
+  const dGreen = new Map();   // Daily grün je Tageskerze (für die Earnings-Fall-Sperre)
+  const dailyGreen = i => {
+    if (!dGreen.has(i)) dGreen.set(i, !!analyzeStructure(ohlcv_d.slice(0, i + 1))?.broken);
+    return dGreen.get(i);
+  };
   for (let j = first + 1; j < h.length; j++) {
     if (p4[j - 1] !== 0 || p4[j] !== 1) continue;
     const bar = h[j], day = bar.d.slice(0, 10);
@@ -862,6 +892,7 @@ function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT
     }
     if (k >= h.length) continue;
     if (earningsBlocksEntry(earnings, h[k].d.slice(0, 10))) continue;
+    if (earningsDropBlocks(earnings, ohlcv_d, dIdx, day, dailyGreen)) continue;
     const wk = ohlcv_w.find(w => weekOfBar(w.d) === mondayOf(day));
     const t = tradeFromEntry(ohlcv_d, h[k].d.slice(0, 10), h[k].o,
       { signalBar: bar.d, entryTime: h[k].d.slice(11, 16), signalDate: day, weeklyDate: wk ? wk.d : mondayOf(day) },
