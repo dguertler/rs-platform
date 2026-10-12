@@ -28,17 +28,35 @@ function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
   return null;
 }
 
-// Untergrenze des Gültigkeitsbereichs im Chart (Daily, 4H — nur Darstellung, wie trailingLow
-// in backtest_logic.js): Swing-Tief vor der Ausbruchskerze b, rückt mit jedem höheren
-// Swing-Tief nach oben, nie nach unten.
-function trailingLow(lows, b, n) {
-  let low = null;
-  for (let k = b - 1; k >= 1 && low == null; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) low = lows[k];
-  if (low == null) low = Math.min(...lows.slice(Math.max(0, b - 5), b + 1));
-  for (let k = b; k <= n - 2; k++) {
-    if (k >= 1 && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1] && lows[k] > low) low = lows[k];
+// Gültigkeitsbereich im Chart (Daily, 4H — nur Darstellung, die Logik bleibt unverändert):
+// unten das Swing-Tief vor dem Ausbruch b (SL-Höhe), rückt mit jedem höheren Swing-Tief nach
+// oben. Schließt eine Kerze darunter, endet der Bereich; ein neuer beginnt beim nächsten
+// Schluss über dem letzten Swing-Hoch seitdem (AVGO Daily: Bereich ab 15.08.2024 endet am
+// 26.08., neuer ab 12.09. mit Tief 09.09.). { from, top, low } (Indizes) oder null.
+function trailingZone(highs, lows, closes, b, n) {
+  const isLow  = k => k >= 1 && k + 1 < n && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1];
+  const isHigh = k => k >= 1 && k + 1 < n && highs[k] >= highs[k - 1] && highs[k] >= highs[k + 1];
+  const lowBefore = s => {
+    for (let k = s - 1; k >= 1; k--) if (isLow(k)) return lows[k];
+    return Math.min(...lows.slice(Math.max(0, s - 5), s + 1));
+  };
+  let start = b, low = lowBefore(b), top = highs[b], broke = -1;
+  for (let k = b + 1; k < n; k++) {
+    if (start >= 0) {
+      if (k - 1 >= start && isLow(k - 1) && lows[k - 1] > low) low = lows[k - 1];
+      if (closes[k] < low) { start = -1; broke = k; continue; }
+      top = Math.max(top, highs[k]);
+    } else {
+      // neuer Ausbruch: Schluss über dem letzten Swing-Hoch seit dem Bruch
+      let sh = null;
+      for (let j = k - 2; j > broke; j--) if (isHigh(j)) { sh = highs[j]; break; }
+      if (sh != null && closes[k] > sh) { start = k; low = lowBefore(k); top = highs[k]; }
+    }
   }
-  return low;
+  return start >= 0 ? { from: start, top, low } : null;
+}
+function zoneFrom(bars, z) {
+  return z ? { from: bars[z.from].d, top: z.top, anchor: z.low } : null;
 }
 
 // Weekly: Ausbruchswoche = Woche mit dem ersten Tagesschluss über der Marke
@@ -180,8 +198,8 @@ function analyzeStructure(ohlcv) {
   const held         = heldD !== null;
   const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
   // Gültigkeitsbereich: ab Ausbruchskerze, unten nachgezogenes Swing-Tief (nur Darstellung)
-  const zone = breakoutIdx !== null ? { from: ohlcv[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: trailingLow(lows, breakoutIdx, n) }
-    : held ? { from: ohlcv[heldD.b].d, top: Math.max(...highs.slice(heldD.b)), anchor: trailingLow(lows, heldD.b, n) } : null;
+  const zone = breakoutIdx !== null ? zoneFrom(ohlcv, trailingZone(highs, lows, closes, breakoutIdx, n))
+    : held ? zoneFrom(ohlcv, trailingZone(highs, lows, closes, heldD.b, n)) : null;
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);
@@ -353,7 +371,7 @@ function analyze4HStructure(ohlcv4h) {
   return {
     gws4hHigh, breakout4hIdx, broken4h: breakout4hIdx !== null || (gws4hHigh === null && trend4h === "bullish"),
     // Gültigkeitsbereich: ab Ausbruchskerze, unten nachgezogenes Swing-Tief (nur Darstellung)
-    zone: breakout4hIdx !== null ? { from: ohlcv4h[breakout4hIdx].d, top: Math.max(...highs.slice(breakout4hIdx)), anchor: trailingLow(lows, breakout4hIdx, n) } : null,
+    zone: breakout4hIdx !== null ? zoneFrom(ohlcv4h, trailingZone(highs, lows, closes, breakout4hIdx, n)) : null,
     prevGws4hHigh, prevBreakout4hIdx,
     recentBreakout,
     swingHighs: swingHighs.slice(-8),
