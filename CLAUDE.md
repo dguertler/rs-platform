@@ -190,16 +190,21 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   nächsten Handelstag. Code: `pitSignals`/`simulateTradesPIT` in
   `frontend/backtest_logic.js`, live `check_alerts.py`/`check_alerts_4h.py`
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
-  neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem Tief
-  der Ausbruchskerze der zuletzt gebrochenen Marke liegt (Weekly: Woche mit dem ersten
+  neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
+  **tiefsten Tief zwischen der zuletzt gebrochenen Marke und ihrer Ausbruchskerze** liegt
+  (dem Tief, aus dem der Ausbruch entstand; Weekly: Ausbruchskerze = Woche mit dem ersten
   Tagesschluss über der Marke). Die Trendumkehr ist nur Ausstieg aus dem Trade, nicht
-  das Ende des Signals (AVGO KW 15.07.2024: Marke 137,12 → 173,51, Tief der
-  Ausbruchswoche 13.05. bei 129,48 hält). Code: `heldAfterBreakout`/`holdSignal` in
+  das Ende des Signals (AVGO Weekly: Marke 173,51, Ausbruch 26.09.2024, Tief 05.08. bei
+  125,90 hält bis zum Ausbruch über 181,90 im Dezember). Code: `heldAfterBreakout`/
+  `holdSignal`/`holdAnchor` in
   `frontend/backtest_logic.js` und `frontend/rs_charts.js` (Seiten-Ampeln), live
   `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY` in `check_alerts.py`).
   In den Weekly-/Daily-Charts (B-DETAILS, Index-/Watchlist-Seiten) sind Kerzen, die
   zu ihrem Schluss nur durch das Halten grün sind, grün transparent hinterlegt
-  (`held` je Struktur, `heldWeeklyFlags`/`heldDailyFlags`). Varianten testbar mit `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`
+  (`held` je Struktur, `heldWeeklyFlags`/`heldDailyFlags`). Varianten testbar mit
+  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H` bzw.
+  `--halteanker=kerze|swingtief` (Tief der Ausbruchskerze: Gewinnsumme 312.615 € →
+  248.223 €, AVGO-Weekly erlosch im November 2024)
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
@@ -211,7 +216,9 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Depot:** höchstens 10 Positionen (nur Depot-Simulation/Modell-Depot)
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
   Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,
-  Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg)
+  Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg),
+  in gehaltenen Fällen nach dem Daily-Bruch erst ein 4H-Retracement abwarten
+  (Gewinnsumme 312.615 € → 207.790 €, PF 1,71 → 1,64 — die direkten Käufe sind profitabel)
 
 ### Ablauf
 

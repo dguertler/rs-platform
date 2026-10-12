@@ -1,7 +1,8 @@
 """Tests für das Signal-Halten nach Trendumkehr (Weekly und Daily, gws_core.held_after_breakout).
 
 Bildet ein tieferes Tief eine neue Marke, bleibt die Ebene grün, solange seit der
-Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter deren Tief liegt —
+Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem tiefsten Tief
+zwischen Marke und Ausbruchskerze liegt —
 identisch zu heldAfterBreakout in frontend/backtest_logic.js.
 """
 import json
@@ -21,16 +22,18 @@ def bars(rows):
 
 
 class HeldAfterBreakoutTest(unittest.TestCase):
-    # Marke bei 10 (idx 1), Ausbruch idx 3 (Schluss 11, Tief 9), danach neue Marke bei 14
+    # Marke bei 10 (idx 1), Ausbruch idx 3 (Schluss 11), tiefstes Tief dazwischen 7 (idx 2),
+    # danach neue Marke bei 14
     closes = [8, 9, 8, 11, 13, 12, 10]
     lows = [7, 8, 7, 9, 12, 11, 9.5]
     cands = [{"idx": 1, "price": 10}, {"idx": 4, "price": 14}]
 
-    def test_holds_while_no_close_below_breakout_low(self):
-        self.assertTrue(held_after_breakout(self.cands, self.closes, self.lows, 7, min_margin=0))
+    def test_holds_below_breakout_bar_low_above_lowest_low(self):
+        closes = self.closes[:-1] + [8.5]                       # unter dem Tief der Ausbruchskerze (9)
+        self.assertTrue(held_after_breakout(self.cands, closes, self.lows, 7, min_margin=0))
 
-    def test_ends_with_close_below_breakout_low(self):
-        closes = self.closes[:-1] + [8.5]
+    def test_ends_with_close_below_lowest_low(self):
+        closes = self.closes[:-1] + [6.5]
         self.assertFalse(held_after_breakout(self.cands, closes, self.lows, 7, min_margin=0))
 
     def test_without_broken_mark_stays_red(self):
@@ -61,6 +64,14 @@ class AvgoWeeklyTest(unittest.TestCase):
     def test_weekly_red_without_hold(self):
         check_alerts.HOLD_WEEKLY = False
         self.assertFalse(self.weekly("2024-08-12")["broken"])
+
+    def test_weekly_held_through_november_2024(self):
+        # Ausbruch über 173,51 am 26.09.2024, Wochenschluss 11.11. (162,03) unter dem Tief der
+        # Ausbruchswoche, aber über dem tiefsten Tief seit der Marke (125,90) → bleibt grün
+        check_alerts.HOLD_WEEKLY = True
+        st = self.weekly("2024-12-02")
+        self.assertAlmostEqual(st["gws_price"], 181.90, places=2)
+        self.assertTrue(st["broken"])
 
     def test_backtest_engine_holds_weekly(self):
         script = (

@@ -25,7 +25,8 @@ from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_
                       swing_low_stop, weekly_breakout_idx)
 
 # Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
-# frontend/backtest_logic.js): grün bis zum Schluss unter dem Tief der Ausbruchskerze
+# frontend/backtest_logic.js): grün bis zum Schluss unter dem tiefsten Tief zwischen
+# Marke und Ausbruchskerze
 HOLD_WEEKLY = True
 HOLD_DAILY = True
 

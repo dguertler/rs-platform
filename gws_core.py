@@ -54,8 +54,9 @@ def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_
     """Signal halten wie heldAfterBreakout in frontend/backtest_logic.js: Hat ein
     tieferes Tief eine neue, noch ungebrochene Marke gebildet (Trendumkehr), bleibt die
     Ebene grün, solange seit der Ausbruchskerze der zuletzt gebrochenen Marke kein
-    Schluss unter deren Tief liegt (AVGO KW 15.07.2024: Ausbruchswoche 13.05., Tief
-    129,48). breakout_idx(marke) → Index der Ausbruchskerze (optional, sonst erster
+    Schluss unter dem tiefsten Tief zwischen Marke und Ausbruchskerze liegt — dem Tief,
+    aus dem der Ausbruch entstand (AVGO Weekly: Marke 173,51, Ausbruch 26.09.2024, Tief
+    05.08. bei 125,90). breakout_idx(marke) → Index der Ausbruchskerze (optional, sonst erster
     Schluss über der Marke)."""
     for cand in reversed(candidates):
         if breakout_idx:
@@ -65,7 +66,8 @@ def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_
             b = next((i for i in range(cand['idx'] + 1, n) if closes[i] > threshold), -1)
         if b is None or b < 0:
             continue
-        return all(closes[i] >= lows[b] for i in range(b + 1, n))
+        anchor = min(lows[cand['idx']:b + 1])   # tiefstes Tief zwischen Marke und Ausbruch
+        return all(closes[i] >= anchor for i in range(b + 1, n))
     return False
 
 
