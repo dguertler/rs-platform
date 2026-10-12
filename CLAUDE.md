@@ -177,18 +177,24 @@ versendeten Breakout-Alert ermittelt statt manuell übergeben:
 
 Jede Änderung an Signal-, Einstiegs-, Ausstiegs- oder Depotlogik (Backtest und
 Live) wird **erst übernommen (Commit/Push), nachdem der Nutzer die Wirkung gesehen
-hat**. Vorher im Chat ausgeben — gerechnet mit `node backtest_ndx.js` (bzw. einer
-Variante davon) gegen den aktuellen Stand:
+hat**. Bewertet wird die **Logik über alle Signale** — ohne die Begrenzung auf 10
+Depotplätze (sonst entscheidet die Platzvergabe mit): jeder Trade aus
+`simulateTradesPIT` zählt gleich, mit dem Engine-Einsatz (10.000 € je Trade,
+höchstens 1.000 € Risiko). Grundlage: `trades` aus `node backtest_ndx.js` (bzw.
+einer Variante davon) gegen den aktuellen Stand, Kennzahlen mit `kpis()` aus
+`backtest_kpis.js`. Vorher im Chat ausgeben:
 
-| Kennzahl | bisher | neu |
+| Kennzahl (alle Signale, je Trade 10.000 €) | bisher | neu |
 |---|---|---|
-| betroffene Trades (weggefallen / neu / mit anderem Ausstieg) | – | Anzahl |
-| Profitfaktor (Depot) | | |
-| Rendite p. a. (CAGR) | | |
-| absolute Rendite (Endkapital, Gesamtrendite %) | | |
-| max. Rückgang | | |
+| betroffene Trades (weggefallen / neu / mit anderem Ausstieg) | – | Anzahl + Gewinnsumme |
+| Anzahl Trades | | |
+| Profitfaktor | | |
+| absolute Rendite (Gewinnsumme in €) | | |
+| Ø Rendite je Trade / Trefferquote | | |
+| größter Rückgang der Gewinnsumme (€) | | |
 
-Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
+Depotwerte (10 Plätze, CAGR, Endkapital) höchstens ergänzend nennen — nie als
+Entscheidungsgrundlage. Dazu das Ergebnis der Referenz-Trade-Prüfung (siehe unten).
 
 ## Referenz-Trades (Regressionsschutz)
 
