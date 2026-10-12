@@ -351,7 +351,11 @@ Anpassungen an der Logik dürfen an diesen Trades nichts ändern.
   node check_reference_trades.js              # nur Backtest-Engine, mit Klartext je Trade
   ```
   Eine Variante, die einen Referenz-Trade verändert, gilt als abgelehnt bzw. muss
-  dem Nutzer mit genau dieser Abweichung vorgelegt werden. Zusätzlich prüft
+  dem Nutzer mit genau dieser Abweichung vorgelegt werden — **immer mit Bild**: Änderung
+  im Arbeitsverzeichnis lassen, `node reference_trade_shots.js [ID] [--w YYYY-MM-DD]`
+  ausführen und `out/reference_trades/<ID>.png` per SendUserFile zeigen (B-DETAILS mit
+  Legende, Weekly, Daily und 4H; Spalten vorher = Logik aus dem letzten Commit / nachher =
+  Änderung, Zeilen mit / ohne Earnings-Regel). Erst danach als Patch sichern. Zusätzlich prüft
   `update_backtest_daily.yml` die Trades täglich mit den aktuellen Kursen
   (Abweichung → Fehler-Mail).
 - **Geprüft wird:** Signal in derselben 4H-Kerze, Kauf zur selben Kerze, Ausstieg am

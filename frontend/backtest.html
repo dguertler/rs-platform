@@ -108,7 +108,8 @@ function BacktestApp() {
       if (!merged || !merged.ohlcv_d.length) throw new Error('keine Kurse');
       const histEnd = hist ? hist.ohlcv_d[hist.ohlcv_d.length - 1].d : '0000';
       setTop20Hist(() => top20Lookup(t, chart?.top20?.inkl ?? null, histEnd, rs?.top20_history ?? (rsNdx?.top20_history)));
-      setData({ ...merged, earnings: earningsHist?.tickers?.[t] || null,
+      // er=0: ohne Earnings-Regel (Gegenprobe der Referenz-Trades, reference_trade_shots.js)
+      setData({ ...merged, earnings: params.get('er') === '0' ? null : (earningsHist?.tickers?.[t] || null),
                 generated: live?.generated || rs?.timestamp || '–', fromHistory: !!chart });
       setLoading(false);
     }).catch(e => { setLoadError(e.message); setLoading(false); });
@@ -133,6 +134,14 @@ function BacktestApp() {
     const from = Math.max(0, data.ohlcv_w.findIndex(w => w.d >= '2015-12-01'));
     return buildWeekRows(data.ohlcv_w, data.ohlcv_d, data.ohlcv_4h, from).map((r, k) => ({ ...r, i: k }));
   }, [data]);
+
+  // w=YYYY-MM-DD: Woche mit diesem Tag vorwählen (Bilder der Referenz-Trades, reference_trade_shots.js)
+  useEffect(() => {
+    const w = new URLSearchParams(window.location.search).get('w');
+    if (!w || !weekRows.length) return;
+    const row = weekRows.find(r => weekOfBar(r.week.d) === mondayOf(w));
+    if (row) setSelectedIdx(row.i);
+  }, [weekRows]);
 
   const sel = selectedIdx !== null ? weekRows[selectedIdx] : null;
   // Gültigkeitsbereiche je Chart (Ausbruchskerze bis letzte grüne Kerze, oben bis zum Anker)
