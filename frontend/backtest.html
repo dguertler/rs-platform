@@ -9,7 +9,7 @@
   <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
   <script src="backtest_logic.js?v=20261017"></script>
-  <script type="text/babel" src="backtest_charts.js?v=20261018"></script>
+  <script type="text/babel" src="backtest_charts.js?v=20261019"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #060b14; color: #e2e8f0; font-family: 'Inter', system-ui, sans-serif; }
@@ -407,6 +407,9 @@ function BacktestApp() {
                   <span style={{marginLeft:4}}><PktBadge pts={sel.pts} has4h={sel.has4h}/></span>
                 </div>
               </div>
+
+              {/* Legende für alle Charts (Marker, Verkaufskürzel, Linien) */}
+              <ChartLegendMarkers showSL/>
 
               <div className="charts-grid">
                 {/* Weekly Chart */}

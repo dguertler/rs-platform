@@ -19,15 +19,15 @@ function ExitMarker({ m, x, yTip }) {
   </g>;
 }
 
-// Zweite Legendenzeile unter jedem Chart: Kauf-/Verkaufs-Marker mit allen
+// Gemeinsame Legende, einmal über den Charts: Kauf-/Verkaufs-Marker mit allen
 // Verkaufskürzeln (EXIT_REASONS), SL-Linie (nur Daily), Trendlinie, Kurslinie
-// und Breakout-Zone — damit jedes Zeichen im Chart erklärt ist
+// und Breakout-Zone — die GWS-Linien erklärt die Fußzeile des jeweiligen Charts
 function ChartLegendMarkers({ showSL = false }) {
   const item = { display: "flex", alignItems: "center", gap: 4 };
   const txt  = { fontSize: 9, color: "#64748b" };
   const reasons = Object.entries(typeof EXIT_REASONS !== 'undefined' ? EXIT_REASONS : {});
   return (
-    <div style={{padding:"4px 12px 6px",display:"flex",gap:"4px 14px",alignItems:"center",background:"#0a0f1e",flexWrap:"wrap",fontFamily:"monospace"}}>
+    <div style={{padding:"6px 12px",marginBottom:12,display:"flex",gap:"4px 14px",alignItems:"center",background:"#0a0f1e",border:"1px solid #1e293b",borderRadius:10,flexWrap:"wrap",fontFamily:"monospace"}}>
       <div style={item}>
         <svg width="10" height="14"><polygon points="5,0 10,8 0,8" fill="#4ade80"/><line x1="5" x2="5" y1="8" y2="14" stroke="#4ade80" strokeWidth="1.5"/></svg>
         <span style={txt}>Kauf</span>
@@ -35,7 +35,7 @@ function ChartLegendMarkers({ showSL = false }) {
       {showSL && (
         <div style={item}>
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#e2e8f0" strokeWidth="1.2" strokeDasharray="4,3" opacity="0.85"/></svg>
-          <span style={txt}>SL = Stopp beim Kauf (Swing-Tief × 0,99)</span>
+          <span style={txt}>SL = Stopp beim Kauf (Swing-Tief × 0,99, nur Daily)</span>
         </div>
       )}
       <div style={item}>
@@ -290,7 +290,6 @@ function ChartWeekly({ ohlcvW, structureW, chartId, benchOhlcv, benchLabel, sign
         )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcvW.length} Wochen · Weekly</div>
       </div>
-      <ChartLegendMarkers/>
     </div>
   );
 }
@@ -533,7 +532,6 @@ function CandleChart({ ohlcv, structure, chartId, benchOhlcv, benchLabel, signal
         )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{ohlcv.length} Tage · Daily</div>
       </div>
-      <ChartLegendMarkers showSL/>
     </div>
   );
 }
@@ -751,7 +749,6 @@ function Chart4H({ ohlcv4h, structure4h, chartId, signals = [], tradeMarkers = [
         )}
         <div style={{marginLeft:"auto",fontSize:9,color:"#334155",fontFamily:"monospace"}}>{n} Kerzen (von {ohlcv4h.length}) · 4H</div>
       </div>
-      <ChartLegendMarkers/>
     </div>
   );
 }
