@@ -119,8 +119,8 @@ function OverviewApp() {
   const [sortKey, setSortKey] = useState('pnl');
   const [sortAsc, setSortAsc] = useState(false);
   const [search, setSearch] = useState('');
-  const [top20, setTop20] = useState(() => { try { return localStorage.getItem('btTop20') === '1'; } catch { return false; } });
-  const toggleTop20 = on => { setTop20(on); try { localStorage.setItem('btTop20', on ? '1' : '0'); } catch { /* egal */ } };
+  const [top20, setTop20] = useState(() => { try { return localStorage.getItem('btTop20Signal') !== '0'; } catch { return true; } });
+  const toggleTop20 = on => { setTop20(on); try { localStorage.setItem('btTop20Signal', on ? '1' : '0'); } catch { /* egal */ } };
 
   useEffect(() => {
     window.apiFetch('data/backtest_ndx.json')
@@ -128,15 +128,13 @@ function OverviewApp() {
       .then(setRes).catch(e => setError(e.message));
   }, []);
 
-  // Schalter „Top 20 heute“: Kennzahlen, Jahrestabelle und Aktien nur für die heutigen Top 20
-  // (Depot dafür eigens gerechnet in backtest_ndx.js → top20Now)
+  // Schalter: „Top 20 am Tradetag“ (System, Standard) oder „Alle Signale“ ohne Top-20-Filter
+  // (Depot dafür eigens gerechnet in backtest_ndx.js → allSignals)
   const view = useMemo(() => {
     if (!res) return null;
-    const t20 = res.top20Now;
-    if (!top20 || !t20) return { depot: res.depot, years: res.years, signals: res.signals, trades: res.trades };
-    const set = new Set(t20.tickers), dep = new Set(t20.depotTrades);
-    return { depot: t20.depot, years: t20.years, signals: t20.signals,
-      trades: res.trades.flatMap((t, i) => !t.symbol && set.has(t.ticker) ? [{ ...t, depot: dep.has(i) }] : []) };
+    const a = res.allSignals;
+    return top20 || !a ? { depot: res.depot, years: res.years, signals: res.signals, trades: res.trades }
+      : { depot: a.depot, years: a.years, signals: a.signals, trades: a.trades };
   }, [res, top20]);
 
   // Trades je Aktie; Jahr = Jahr des Verkaufs (offene: Datenende), wie in der Jahrestabelle
@@ -199,20 +197,19 @@ function OverviewApp() {
         Depot: 100.000 € Start, höchstens 10 Positionen, Zinseszins. NASDAQ-100 über QQQ (inkl. Dividenden).
       </div>
 
-      {res.top20Now && (
+      {res.allSignals && (
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginBottom: 14 }}>
-          {[[false, 'Alle Aktien'], [true, 'Top 20 heute']].map(([on, label]) => (
+          {[[true, 'Top 20 am Tradetag'], [false, 'Alle Signale']].map(([on, label]) => (
             <button key={label} onClick={() => toggleTop20(on)}
               style={{ background: top20 === on ? '#1e293b' : 'transparent', border: `1px solid ${top20 === on ? '#475569' : '#1e293b'}`,
                 borderRadius: 6, padding: '5px 12px', color: top20 === on ? '#f1f5f9' : '#64748b', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
               {label}
             </button>
           ))}
-          {top20 && (
-            <span style={{ fontSize: 11, color: '#64748b', fontFamily: 'monospace' }}>
-              nur Signale dieser Aktien seit {res.start.slice(0, 4)} (je Signal weiterhin Top 20 am Signaltag), Depot eigens gerechnet: {res.top20Now.tickers.join(' · ')}
-            </span>
-          )}
+          <span style={{ fontSize: 11, color: '#64748b', fontFamily: 'monospace' }}>
+            {top20 ? 'nur Trades von Aktien, die am Signaltag in den Top 20 standen (System)'
+              : 'alle Signale derselben Aktien, auch außerhalb der Top 20 — nur zum Vergleich, Depot eigens gerechnet'}
+          </span>
         </div>
       )}
 

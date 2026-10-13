@@ -146,6 +146,7 @@ function ndxByPeriod(rs, keyLen = 4) {
 function main() {
   const { rs, tickers } = loadUniverse();
   const trades = [];
+  const unfiltered = [];   // Schalter „Alle Signale“ auf B-ÜBERSICHT: ohne Top-20-Filter
   const closesBySymbol = {};
   let lastDay = '0000';
   const loaded = [];
@@ -161,19 +162,17 @@ function main() {
     const active = d[d.length - 1].d >= lastDay.slice(0, 8) + '01' || d[d.length - 1].d >= lastDay;
     const ticker = t.replace(/_\d{4}$/, '');
     closesBySymbol[t] = new Map(d.map((b) => [b.d, b.c]));
-    for (const tr of simulateTradesPIT(series.ohlcv_w, d, series.ohlcv_4h, inTop, PIT_START, earnings)) {
-      trades.push({ ...tr, ticker, symbol: t, rank: 10, isOpen: tr.isOpen && active, dataEnded: tr.isOpen && !active });
-    }
+    const add = (list, tr) => list.push({ ...tr, ticker, symbol: t, rank: 10, isOpen: tr.isOpen && active, dataEnded: tr.isOpen && !active });
+    for (const tr of simulateTradesPIT(series.ohlcv_w, d, series.ohlcv_4h, inTop, PIT_START, earnings)) add(trades, tr);
+    if (!histOnly) for (const tr of simulateTradesPIT(series.ohlcv_w, d, series.ohlcv_4h, null, PIT_START, earnings)) add(unfiltered, tr);
   }
-  trades.sort((a, b) => (a.entryDate < b.entryDate ? -1 : a.entryDate > b.entryDate ? 1 : a.entryTime < b.entryTime ? -1 : 1));
+  const byEntry = (a, b) => (a.entryDate < b.entryDate ? -1 : a.entryDate > b.entryDate ? 1 : a.entryTime < b.entryTime ? -1 : 1);
+  trades.sort(byEntry);
+  unfiltered.sort(byEntry);
 
   const ndx = ndxByPeriod(rs, 4);
   const all = depotView(trades, closesBySymbol, ndx);
-  // Schalter „Top 20 heute“ auf B-ÜBERSICHT: dieselbe Rechnung nur mit den Signalen der
-  // heutigen Top 20 (rs_full.json top20; frühere Firmen gleichen Kürzels ausgenommen)
-  const top20Now = new Set(rs.top20 || []);
-  const topTrades = trades.filter((t) => t.symbol === t.ticker && top20Now.has(t.ticker));
-  const top = depotView(topTrades, closesBySymbol, ndx);
+  const alle = unfiltered.length ? depotView(unfiltered, closesBySymbol, ndx) : null;
   const { depot, years, taken } = all;
   const ndxTotal = Object.values(ndx).reduce((f, p) => f * (1 + p / 100), 1);
 
@@ -188,10 +187,14 @@ function main() {
     signals: signalsJson(trades),
     ndxMonths: Object.fromEntries(Object.entries(ndxByPeriod(rs, 7)).map(([m, v]) => [m, round(v)])),
     years: yearsJson(years),
-    top20Now: {
-      tickers: [...top20Now], depot: depotJson(top.depot, ndxTotal), signals: signalsJson(topTrades), years: yearsJson(top.years),
-      depotTrades: trades.flatMap((t, i) => (top.taken.has(`${t.symbol}|${t.entryDate}`) ? [i] : [])),
-    },
+    // Vergleich ohne Top-20-Filter (alle Signale derselben Aktien), eigenes Depot; Trades kompakt
+    ...(alle ? { allSignals: {
+      depot: depotJson(alle.depot, ndxTotal), signals: signalsJson(unfiltered), years: yearsJson(alle.years),
+      trades: unfiltered.map((t) => ({
+        ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), exitDate: t.exitDate, pnl: Math.round(t.pnl),
+        pnlPct: round(t.pnlPct, 1), isOpen: t.isOpen, depot: alle.taken.has(`${t.symbol}|${t.entryDate}`),
+      })),
+    } } : {}),
     trades: trades.map((t) => ({
       ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), signalBar: t.signalBar, weeklyDate: t.weeklyDate, entryDate: t.entryDate, entryTime: t.entryTime,
       entryPrice: round(t.entryPrice, 4), stopPrice: round(t.stopPrice, 4), exitDate: t.exitDate, exitPrice: round(t.exitPrice, 4),
