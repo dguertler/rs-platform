@@ -2,8 +2,8 @@
 
 Bildet ein tieferes Tief eine neue Marke, bleibt die Ebene grün, solange seit der
 Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt (Weekly:
-tiefstes Tief zwischen Marke und Ausbruchswoche, Daily: letztes Swing-Tief, das die
-Trendumkehr noch nicht unterschritten hat, geprüft ab der Trendumkehr) —
+letztes Swing-Tief vor der Ausbruchswoche, gebrochen beim ersten Tagesschluss darunter, Daily:
+letztes Swing-Tief, das die Trendumkehr noch nicht unterschritten hat, geprüft ab der Trendumkehr) —
 identisch zu heldAfterBreakout in frontend/backtest_logic.js.
 """
 import json
@@ -114,7 +114,7 @@ class AvgoWeeklyTest(unittest.TestCase):
 
     def test_weekly_held_through_november_2024(self):
         # Ausbruch über 173,51 am 26.09.2024; Wochenschluss 11.11. (162,03) unter dem Tief der
-        # Ausbruchswoche (165,48), aber über dem tiefsten Tief seit der Marke (125,90) → grün
+        # Ausbruchswoche (165,48), aber kein Tagesschluss unter dem Swing-Tief davor (132,17) → grün
         check_alerts.HOLD_WEEKLY = True
         st = self.weekly("2024-12-02")
         self.assertAlmostEqual(st["gws_price"], 181.90, places=2)
@@ -131,6 +131,44 @@ class AvgoWeeklyTest(unittest.TestCase):
             "console.log(JSON.stringify(r));")
         out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
         self.assertEqual(json.loads(out.stdout), [True, False])
+
+
+PANW_CHART = os.path.join(ROOT, "data", "backtest_history", "charts", "PANW.json")
+
+
+@unittest.skipUnless(os.path.exists(PANW_CHART), "Kursdatei PANW fehlt")
+class PanwWeeklyBreakTest(unittest.TestCase):
+    """PANW 2022: Ausbruch über 95,44 (Woche 28.02.), Anker = Swing-Tief davor 77,75 (21.02.).
+    Tagesschluss 09.05.2022 bei 76,58 darunter → Weekly rot, obwohl die Marke noch gebrochen ist
+    und der Wochenschluss (81,83) darüber liegt; erst am 22.02.2023 wieder grün."""
+
+    def setUp(self):
+        with open(PANW_CHART) as f:
+            chart = json.load(f)
+        self.w, self.d = bars(chart["w"]), bars(chart["d"])
+
+    def weekly(self, day):
+        return check_alerts.analyze_weekly_structure([b for b in self.w if b["d"] <= day][-60:],
+                                                     [b for b in self.d if b["d"] <= day])
+
+    def test_live_weekly_green_before_close_below_anchor(self):
+        self.assertTrue(self.weekly("2022-05-06")["broken"])
+
+    def test_live_weekly_red_after_daily_close_below_anchor(self):
+        for day in ("2022-05-09", "2022-06-02", "2022-07-05", "2022-08-22"):
+            with self.subTest(day=day):
+                self.assertFalse(self.weekly(day)["broken"])
+
+    def test_backtest_engine_matches_live(self):
+        script = (
+            "require('vm').runInThisContext(require('fs').readFileSync('frontend/backtest_logic.js','utf8'));"
+            "const c=require('./data/backtest_history/charts/PANW.json');"
+            "const b=a=>({d:a[0],o:a[1],h:a[2],l:a[3],c:a[4]});const W=normalizeWeekly(c.w.map(b));"
+            "console.log(JSON.stringify(['2022-05-06','2022-05-09','2022-07-05'].map(day=>{"
+            "const D=c.d.map(b).filter(x=>x.d<=day);return analyzeWeeklyStructure(weeklyUpTo(W,D),D).broken;})));"
+        )
+        out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(out.stdout), [True, False, False])
 
 
 if __name__ == "__main__":

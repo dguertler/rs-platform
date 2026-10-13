@@ -8,12 +8,19 @@
 // backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
 // neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
 // Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt
-// (Weekly: tiefstes Tief zwischen Marke und Ausbruch, Daily: letztes Swing-Tief vor der
-// Trendumkehr, das sie noch nicht unterschritten hat — tuAnchorLow, geprüft ab der Trendumkehr).
+// (Weekly: letztes Swing-Tief vor der Ausbruchswoche, gebrochen beim ersten Tagesschluss darunter —
+// weeklyAnchorLow/closedBelow; Daily: letztes Swing-Tief vor der Trendumkehr, das sie noch nicht
+// unterschritten hat — tuAnchorLow, geprüft ab der Trendumkehr).
 // breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
-// lowest: Anker = tiefstes Tief zwischen Marke und Ausbruch (Weekly), sonst Daily-Anker 'tu'
-function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
-  return heldBreakout(cands, closes, lows, n, breakoutIdx, lowest) !== null;
+// weekly: Weekly-Anker, sonst Daily-Anker 'tu'; closedBelow(b, anchor) (optional): eigene Bruchprüfung
+function heldAfterBreakout(cands, closes, lows, n, breakoutIdx, weekly = false, closedBelow = null) {
+  return heldBreakout(cands, closes, lows, n, breakoutIdx, weekly, closedBelow) !== null;
+}
+// Weekly-Anker wie holdAnchorLow(…, 'swingtief') in backtest_logic.js: letztes Swing-Tief vor der
+// Ausbruchswoche b (nach der Marke), sonst tiefstes Tief dazwischen (PANW: 77,75 vom 21.02.2022)
+function weeklyAnchorLow(lows, markIdx, b) {
+  for (let k = b - 1; k > markIdx; k--) if (lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1]) return lows[k];
+  return Math.min(...lows.slice(markIdx, b + 1));
 }
 // Daily-Anker nach Trendumkehr wie tuAnchorLow in backtest_logic.js: letztes Swing-Tief vor
 // tiefNeu (dem tieferen Tief der nächsten Marke), das tiefer liegt als tiefNeu — gesucht höchstens
@@ -42,15 +49,16 @@ function provisionalMark(highs, lows, closes, swingHighs, swingLows, n) {
   return closes[n - 1] > mark.price ? { ...mark, tiefAlt: last, tiefNeu: { idx: k, price: lows[k] } } : null;
 }
 // Gehaltene Marke: { b: Index der Ausbruchskerze, anchor } oder null
-function heldBreakout(cands, closes, lows, n, breakoutIdx, lowest = false) {
+function heldBreakout(cands, closes, lows, n, breakoutIdx, weekly = false, closedBelow = null) {
   for (let c = cands.length - 1; c >= 0; c--) {
     let b = -1;
     if (breakoutIdx) b = breakoutIdx(cands[c]);
     else for (let i = cands[c].idx + 1; i < n; i++) if (closes[i] > cands[c].price) { b = i; break; }
     if (b < 0) continue;
-    const anchor = lowest ? Math.min(...lows.slice(cands[c].idx, b + 1)) : tuAnchorLow(cands[c + 1], lows, b);
-    const from = !lowest && cands[c + 1]?.tiefNeu?.idx > b ? cands[c + 1].tiefNeu.idx : b + 1;
-    for (let i = from; i < n; i++) if (closes[i] < anchor) return null;
+    const anchor = weekly ? weeklyAnchorLow(lows, cands[c].idx, b) : tuAnchorLow(cands[c + 1], lows, b);
+    const from = !weekly && cands[c + 1]?.tiefNeu?.idx > b ? cands[c + 1].tiefNeu.idx : b + 1;
+    if (closedBelow) { if (closedBelow(b, anchor)) return null; }
+    else for (let i = from; i < n; i++) if (closes[i] < anchor) return null;
     return { b, anchor };
   }
   return null;
@@ -319,13 +327,20 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   }
 
   // Broken: GWS durchbrochen ODER kein GWS-Muster aber klarer Aufwärtstrend
+  // Weekly-Bruch: erster Tagesschluss unter dem Anker ab der Woche nach der Ausbruchswoche b
+  // (ohne Tageskerzen: Wochenschluss) — wie weeklyBreakCheck in backtest_logic.js
+  const closedBelow = (b, anchor) => b + 1 < n && (ohlcvD?.length
+    ? ohlcvD.some(d => d.d >= ohlcvW[b + 1].d && d.c < anchor) : closes.slice(b + 1).some(c => c < anchor));
   const heldW = gwswHigh !== null && breakoutIdx === null ? heldBreakout(gwswCandidates, closes, lows, n,
-    ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined, true) : null;
+    ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined, true, closedBelow) : null;
   const held = heldW !== null;
-  const broken = breakoutIdx !== null || (gwswHigh === null && trend === "bullish") || held;
-  // Gültigkeitsbereich: Ausbruchswoche und Anker (tiefstes Tief zwischen Marke und Ausbruch)
-  const zone = breakoutIdx !== null
-    ? { from: ohlcvW[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: Math.min(...lows.slice(gwswHigh.idx, breakoutIdx + 1)) }
+  // gebrochene Marke: erlischt schon beim Unterschreiten des Ankers, bevor die Trendumkehr eine neue
+  // Marke bildet (PANW KW 09.05.2022)
+  const markLost = breakoutIdx !== null && closedBelow(breakoutIdx, weeklyAnchorLow(lows, gwswHigh.idx, breakoutIdx));
+  const broken = (breakoutIdx !== null && !markLost) || (gwswHigh === null && trend === "bullish") || held;
+  // Gültigkeitsbereich: Ausbruchswoche und Anker (letztes Swing-Tief vor dem Ausbruch)
+  const zone = breakoutIdx !== null && !markLost
+    ? { from: ohlcvW[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: weeklyAnchorLow(lows, gwswHigh.idx, breakoutIdx) }
     : held ? { from: ohlcvW[heldW.b].d, top: Math.max(...highs.slice(heldW.b)), anchor: heldW.anchor } : null;
 
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);

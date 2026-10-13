@@ -200,8 +200,14 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   Studie ohne: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --ohne-fruehbruch`
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
   neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
-  **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: tiefstes Tief zwischen Marke
-  und Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **Daily: letztes
+  **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: letztes Swing-Tief vor der
+  Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), gebrochen beim **ersten
+  Tagesschluss darunter** — auch schon, solange die gebrochene Marke noch gilt und die
+  Trendumkehr noch keine neue Marke gebildet hat (seit 13.10.2026; PANW: Ausbruch über 95,44
+  Woche 28.02.2022, Anker 77,75 vom 21.02., Tagesschluss 09.05.2022 bei 76,58 → Weekly rot bis
+  22.02.2023, die Trades 02.06./05.07./22.08.2022 entfallen; über alle Top-20-Signale 30 Trades
+  weg (14.612 €), 2 neu (11.130 €), PF 1,75 → 1,77, Gewinnsumme 277.974 € → 274.492 €, größter
+  Rückgang −56.787 € → −49.093 €; vorher tiefstes Tief und Wochenschluss), **Daily: letztes
   Swing-Tief vor der Trendumkehr, das sie noch nicht unterschritten hat**, geprüft ab der
   Trendumkehr und gesucht höchstens bis zum Swing-Tief vor dem Ausbruch (der grünen Linie im
   Chart); liegt die Trendumkehr darunter, gilt dieses Swing-Tief — **keine** Begrenzung auf
@@ -211,18 +217,19 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   bleibt gehalten; März–Mai 2024 gehalten über 116,96 vom 21.02.; über alle Top-20-Signale
   Gewinnsumme 257.389 € → 286.939 €, PF 1,66 → 1,70 gegenüber der Begrenzung auf das Tief der
   Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
-  (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 125,90, hält über die
+  (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 132,17, hält über die
   Trendumkehr vom 11.11.2024; 181,90, Ausbruch 13.12.2024 → 154,86). Die Trendumkehr ist
   nur Ausstieg aus dem Trade, nicht das Ende des Signals. Code: `heldAfterBreakout`/
   `holdSignal`/`holdAnchor` in `frontend/backtest_logic.js` und `frontend/rs_charts.js`
   (Seiten-Ampeln), live `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY`,
-  Weekly mit `lowest=True` in `check_alerts.py`). Studien:
-  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H` bzw.
-  `--halteanker=W:kerze,D:tiefstes` (kerze | tiefstes | swingtief | tu)
+  Weekly mit `weekly=True` und `gws_core.weekly_closed_below` in `check_alerts.py`). Studien:
+  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`,
+  `--halteanker=W:tiefstes,D:kerze` (kerze | tiefstes | swingtief | tu) bzw.
+  `--wochenbruch=wochenschluss|tief`
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
   letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten
-  Linie — Weekly: Anker des Signals; Daily/4H (nur Darstellung, Logik unverändert):
+  Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch); Daily/4H (nur Darstellung, Logik unverändert):
   Swing-Tief vor dem Ausbruch (SL-Höhe; nur ein schon vor der Ausbruchskerze bestätigtes —
   AVGO Daily 14.05.2026: 404,92 vom 07.05., nicht 403,43 vom 13.05.); bei jedem weiteren Ausbruch nach oben (Schluss
   über dem letzten Swing-Hoch) springt es auf das Swing-Tief vor diesem Ausbruch; ein
@@ -317,7 +324,9 @@ Die Ausgabe enthält immer:
 
 Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, dazu Monate über NASDAQ-100
 bisher / neu je Jahr, Summenzeile) — Jahresrenditen im Chat **immer als Tabelle**, nie als
-Fließtext. Jahresrendite der Signale = Gewinn der im Jahr
+Fließtext. Die NASDAQ-100-Gesamtrendite hier ist die **Summe** der Jahresrenditen (wie die
+Signale, je Jahr auf 100.000 €); B-ÜBERSICHT zeigt sie **verkettet** (Zinseszins, wie das Depot)
+— daher dort ein höherer Wert aus denselben Jahren. Jahresrendite der Signale = Gewinn der im Jahr
 verkauften Trades (offene: laufendes Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €,
 Bezugsgröße wie B-ÜBERSICHT); Monatsrendite ebenso je Monat, NASDAQ-100 je Monat aus
 denselben QQQ-Kursen (`ndxMonths` in `data/backtest_ndx.json`).

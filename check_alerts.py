@@ -22,12 +22,12 @@ import matplotlib.patches as mpatches
 # Funktionen aus index.html
 
 from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_breakout,
-                      provisional_mark_break,
+                      provisional_mark_break, weekly_anchor_low, weekly_closed_below,
                       swing_low_stop, weekly_breakout_idx)
 
 # Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
-# frontend/backtest_logic.js): grün bis zum Schluss unter dem Anker — Weekly tiefstes Tief
-# zwischen Marke und Ausbruchswoche, Daily Tief der Ausbruchskerze
+# frontend/backtest_logic.js): grün bis zum Schluss unter dem Anker — Weekly letztes Swing-Tief
+# vor der Ausbruchswoche (Tagesschluss darunter), Daily Anker 'tu' (gws_core.tu_anchor_low)
 HOLD_WEEKLY = True
 HOLD_DAILY = True
 # Weekly-Trendumkehr → 4H-Retracement nach dem Daily-Ausbruch abwarten (weekly_reversal_blocks)
@@ -96,11 +96,18 @@ def analyze_weekly_structure(ohlcv_w, ohlcv_d=None):
 
     # broken: GWS durchbrochen ODER kein GWS vorhanden aber klarer Aufwärtstrend
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
+    closed_below = weekly_closed_below(ohlcv_w, ohlcv_d)
+    w_break = weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None
+    # gebrochene Marke erlischt beim ersten Tagesschluss unter dem Anker, auch bevor die
+    # Trendumkehr eine neue Marke bildet (PANW KW 09.05.2022, wie markLost in backtest_logic.js)
+    if breakout_idx is not None and gws_high:
+        b = w_break(gws_high) if w_break else breakout_idx
+        if b is not None and b >= 0 and closed_below(b, weekly_anchor_low(lows, gws_high['idx'], b)):
+            broken = False
     held = False
-    if not broken and gws_high and HOLD_WEEKLY:
+    if breakout_idx is None and gws_high and HOLD_WEEKLY:
         held = broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n,
-                                            breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None,
-                                            lowest=True)
+                                            breakout_idx=w_break, weekly=True, closed_below=closed_below)
 
     return {
         'broken':       broken,

@@ -21,7 +21,9 @@
  *   --wochenumkehr=aus|bestaetigt: Studie — Weekly-Trendumkehr-Regel (4H-Retracement nach dem
  *     Daily-Ausbruch) aus bzw. nur bei bestätigter Umkehr; nur mit BACKTEST_NDX_OUT
  *   --halteanker=W:tiefstes,D:kerze: Studie — Anker je Ebene (kerze | tiefstes | swingtief | tu,
- *     Standard W:tiefstes, D:tu); nur mit BACKTEST_NDX_OUT
+ *     Standard W:swingtief, D:tu); nur mit BACKTEST_NDX_OUT
+ *   --wochenbruch=wochenschluss|tief: Studie — Weekly-Anker bricht am Wochenschluss bzw. Wochentief
+ *     statt am Tagesschluss (Standard); nur mit BACKTEST_NDX_OUT
  */
 const fs = require('fs');
 const path = require('path');
@@ -34,7 +36,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -66,6 +68,11 @@ if (wrArg) {   // Studie: --wochenumkehr=aus | bestaetigt (Retracement nur bei b
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--wochenumkehr nur mit BACKTEST_NDX_OUT (Studie)');
   const v = wrArg.slice(15);
   globalThis.__e.setWeeklyReversalRule(v === 'bestaetigt' ? 'bestaetigt' : v === 'aus' ? false : true);
+}
+const wbArg = process.argv.find((a) => a.startsWith('--wochenbruch='));
+if (wbArg) {   // Studie: --wochenbruch=wochenschluss|tief (Standard tagesschluss: womit der Weekly-Anker bricht)
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--wochenbruch nur mit BACKTEST_NDX_OUT (Studie)');
+  globalThis.__e.setWeeklyBreakCheck(wbArg.slice(14));
 }
 const anchorArg = process.argv.find((a) => a.startsWith('--halteanker='));
 if (anchorArg) {   // Studie, z. B. --halteanker=W:tiefstes,D:kerze

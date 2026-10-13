@@ -50,15 +50,17 @@ def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
     return gws_high, breakout_idx
 
 
-def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_idx=None, lowest=False):
+def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_idx=None, weekly=False,
+                        closed_below=None):
     """Signal halten wie heldAfterBreakout in frontend/backtest_logic.js: Hat ein
     tieferes Tief eine neue, noch ungebrochene Marke gebildet (Trendumkehr), bleibt die
     Ebene grün, solange seit der Ausbruchskerze der zuletzt gebrochenen Marke kein
     Schluss unter deren Tief liegt (AVGO KW 15.07.2024: Ausbruchswoche 13.05., Tief
     129,48). breakout_idx(marke) → Index der Ausbruchskerze (optional, sonst erster
-    Schluss über der Marke). lowest: Anker = tiefstes Tief zwischen Marke und Ausbruch
-    (Weekly, wie holdAnchor.w), sonst Daily-Anker 'tu' (tu_anchor_low), geprüft ab der
-    Trendumkehr."""
+    Schluss über der Marke). weekly: Anker = letztes Swing-Tief vor der Ausbruchswoche
+    (weekly_anchor_low, wie holdAnchor.w 'swingtief'), sonst Daily-Anker 'tu' (tu_anchor_low),
+    geprüft ab der Trendumkehr. closed_below(b, anker) (optional): eigene Bruchprüfung, z. B.
+    Weekly per Tagesschluss (weekly_closed_below)."""
     for c in range(len(candidates) - 1, -1, -1):
         cand = candidates[c]
         if breakout_idx:
@@ -69,14 +71,40 @@ def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_
         if b is None or b < 0:
             continue
         nxt = candidates[c + 1] if c + 1 < len(candidates) else None
-        if lowest:
-            anchor, start = min(lows[cand['idx']:b + 1]), b + 1
+        if weekly:
+            anchor, start = weekly_anchor_low(lows, cand['idx'], b), b + 1
         else:
             anchor = tu_anchor_low(nxt, lows, b)
             t = (nxt or {}).get('tief_neu')
             start = t['idx'] if t and t['idx'] > b else b + 1
+        if closed_below and weekly:
+            return not closed_below(b, anchor)
         return all(closes[i] >= anchor for i in range(start, n))
     return False
+
+
+def weekly_anchor_low(lows, mark_idx, b):
+    """Weekly-Anker wie holdAnchorLow(…, 'swingtief') in frontend/backtest_logic.js (seit
+    13.10.2026): letztes Swing-Tief (±1) vor der Ausbruchswoche b nach der Marke, sonst das
+    tiefste Tief dazwischen (PANW: Ausbruch Woche 28.02.2022 → 77,75 vom 21.02.)."""
+    for k in range(b - 1, mark_idx, -1):
+        if lows[k] <= lows[k - 1] and lows[k] <= lows[k + 1]:
+            return lows[k]
+    return min(lows[mark_idx:b + 1])
+
+
+def weekly_closed_below(ohlcv_w, ohlcv_d):
+    """Weekly-Bruch wie weeklyBreakCheck 'tagesschluss' in frontend/backtest_logic.js: erster
+    Tagesschluss unter dem Anker ab der Woche nach der Ausbruchswoche b (ohne Tageskerzen:
+    Wochenschluss). PANW: Tagesschluss 09.05.2022 bei 76,58 unter 77,75 → Weekly rot."""
+    def check(b, anchor):
+        if b + 1 >= len(ohlcv_w):
+            return False
+        if ohlcv_d:
+            start = ohlcv_w[b + 1]['d']
+            return any(d['d'] >= start and d['c'] < anchor for d in ohlcv_d)
+        return any(w['c'] < anchor for w in ohlcv_w[b + 1:])
+    return check
 
 
 def provisional_mark_break(swing_highs, swing_lows, highs, lows, closes, n, min_margin=0.001):
