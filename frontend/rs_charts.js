@@ -8,8 +8,8 @@
 // backtest_logic.js und gws_core.held_after_breakout live): Hat ein tieferes Tief eine
 // neue, noch ungebrochene Marke gebildet, bleibt die Ebene grün, solange seit der
 // Ausbruchskerze der zuletzt gebrochenen Marke kein Schluss unter dem Anker liegt
-// (Weekly: letztes Swing-Tief vor der Ausbruchswoche, gebrochen beim ersten Tagesschluss darunter —
-// weeklyAnchorLow/closedBelow; Daily: letztes Swing-Tief vor der Trendumkehr, das sie noch nicht
+// (Weekly: letztes Swing-Tief vor der Ausbruchswoche, bei erneutem Ausbruch nachgezogen, gebrochen
+// beim ersten Wochentief darunter — weeklyAnchorLow/anchorWalk; Daily: letztes Swing-Tief vor der Trendumkehr, das sie noch nicht
 // unterschritten hat — tuAnchorLow, geprüft ab der Trendumkehr).
 // breakoutIdx(marke) (optional): Index der Ausbruchskerze, sonst erster Schluss darüber.
 // weekly: Weekly-Anker, sonst Daily-Anker 'tu'; closedBelow(b, anchor) (optional): eigene Bruchprüfung
@@ -327,10 +327,25 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   }
 
   // Broken: GWS durchbrochen ODER kein GWS-Muster aber klarer Aufwärtstrend
-  // Weekly-Bruch: erster Tagesschluss unter dem Anker ab der Woche nach der Ausbruchswoche b
-  // (ohne Tageskerzen: Wochenschluss) — wie weeklyBreakCheck in backtest_logic.js
-  const closedBelow = (b, anchor) => b + 1 < n && (ohlcvD?.length
-    ? ohlcvD.some(d => d.d >= ohlcvW[b + 1].d && d.c < anchor) : closes.slice(b + 1).some(c => c < anchor));
+  // Weekly-Bruch wie anchorWalk in backtest_logic.js: Wochentief unter dem Anker ab der Woche nach
+  // der Ausbruchswoche b; bei jedem erneuten Ausbruch (Wochenschluss über dem letzten Swing-Hoch)
+  // rückt der Anker auf das Swing-Tief davor (ZS: 08.01.2024 → 206,67, Woche 19.02. Tief 202,44 → rot)
+  const isSwingLow = k => k >= 1 && k + 1 < n && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1];
+  const isSwingHigh = k => k >= 1 && k + 1 < n && highs[k] >= highs[k - 1] && highs[k] >= highs[k + 1];
+  const anchorWalk = (b, anchor) => {
+    let last = b;
+    for (let k = b + 1; k < n; k++) {
+      if (lows[k] < anchor) return { lost: true, anchor };
+      let sh = null;
+      for (let j = k - 2; j > last; j--) if (isSwingHigh(j)) { sh = highs[j]; break; }
+      if (sh != null && closes[k] > sh) {
+        for (let j = k - 1; j > last; j--) if (isSwingLow(j)) { anchor = Math.max(anchor, lows[j]); break; }
+        last = k;
+      }
+    }
+    return { lost: false, anchor };
+  };
+  const closedBelow = (b, anchor) => anchorWalk(b, anchor).lost;
   const heldW = gwswHigh !== null && breakoutIdx === null ? heldBreakout(gwswCandidates, closes, lows, n,
     ohlcvD?.length ? weeklyBreakoutIdx(ohlcvW, ohlcvD) : undefined, true, closedBelow) : null;
   const held = heldW !== null;
@@ -340,7 +355,7 @@ function analyzeWeeklyStructure(ohlcvW, ohlcvD = null) {
   const broken = (breakoutIdx !== null && !markLost) || (gwswHigh === null && trend === "bullish") || held;
   // Gültigkeitsbereich: Ausbruchswoche und Anker (letztes Swing-Tief vor dem Ausbruch)
   const zone = breakoutIdx !== null && !markLost
-    ? { from: ohlcvW[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: weeklyAnchorLow(lows, gwswHigh.idx, breakoutIdx) }
+    ? { from: ohlcvW[breakoutIdx].d, top: Math.max(...highs.slice(breakoutIdx)), anchor: anchorWalk(breakoutIdx, weeklyAnchorLow(lows, gwswHigh.idx, breakoutIdx)).anchor }
     : held ? { from: ohlcvW[heldW.b].d, top: Math.max(...highs.slice(heldW.b)), anchor: heldW.anchor } : null;
 
   const recentBreakout = breakoutIdx !== null && (n - 1 - breakoutIdx <= 1);

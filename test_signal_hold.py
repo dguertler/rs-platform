@@ -139,7 +139,7 @@ PANW_CHART = os.path.join(ROOT, "data", "backtest_history", "charts", "PANW.json
 @unittest.skipUnless(os.path.exists(PANW_CHART), "Kursdatei PANW fehlt")
 class PanwWeeklyBreakTest(unittest.TestCase):
     """PANW 2022: Ausbruch über 95,44 (Woche 28.02.), Anker = Swing-Tief davor 77,75 (21.02.).
-    Tagesschluss 09.05.2022 bei 76,58 darunter → Weekly rot, obwohl die Marke noch gebrochen ist
+    Wochentief 09.05.2022 bei 75,05 darunter → Weekly rot, obwohl die Marke noch gebrochen ist
     und der Wochenschluss (81,83) darüber liegt; erst am 22.02.2023 wieder grün."""
 
     def setUp(self):
@@ -154,7 +154,7 @@ class PanwWeeklyBreakTest(unittest.TestCase):
     def test_live_weekly_green_before_close_below_anchor(self):
         self.assertTrue(self.weekly("2022-05-06")["broken"])
 
-    def test_live_weekly_red_after_daily_close_below_anchor(self):
+    def test_live_weekly_red_after_weekly_low_below_anchor(self):
         for day in ("2022-05-09", "2022-06-02", "2022-07-05", "2022-08-22"):
             with self.subTest(day=day):
                 self.assertFalse(self.weekly(day)["broken"])
@@ -169,6 +169,42 @@ class PanwWeeklyBreakTest(unittest.TestCase):
         )
         out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
         self.assertEqual(json.loads(out.stdout), [True, False, False])
+
+
+ZS_CHART = os.path.join(ROOT, "data", "backtest_history", "charts", "ZS.json")
+
+
+@unittest.skipUnless(os.path.exists(ZS_CHART), "Kursdatei ZS fehlt")
+class ZsWeeklyTrailTest(unittest.TestCase):
+    """ZS 2024: Woche 08.01. schließt bei 230,77 über dem Swing-Hoch 227,29 (25.12.2023) → Anker
+    rückt auf 206,67 (Tief der Woche 01.01.); Woche 19.02. Tief 202,44 darunter → Weekly rot."""
+
+    def setUp(self):
+        with open(ZS_CHART) as f:
+            chart = json.load(f)
+        self.w, self.d = bars(chart["w"]), bars(chart["d"])
+
+    def weekly(self, day):
+        return check_alerts.analyze_weekly_structure([b for b in self.w if b["d"] <= day][-60:],
+                                                     [b for b in self.d if b["d"] <= day])
+
+    def test_live_green_before_and_red_after_trailing_anchor(self):
+        self.assertTrue(self.weekly("2024-02-16")["broken"])
+        for day in ("2024-02-23", "2024-05-17"):
+            with self.subTest(day=day):
+                self.assertFalse(self.weekly(day)["broken"])
+
+    def test_backtest_engine_matches_live(self):
+        script = (
+            "require('vm').runInThisContext(require('fs').readFileSync('frontend/backtest_logic.js','utf8'));"
+            "const c=require('./data/backtest_history/charts/ZS.json');"
+            "const b=a=>({d:a[0],o:a[1],h:a[2],l:a[3],c:a[4]});const W=normalizeWeekly(c.w.map(b));"
+            "console.log(JSON.stringify(['2024-02-16','2024-02-21','2024-05-17'].map(day=>{"
+            "const D=c.d.map(b).filter(x=>x.d<=day);const s=analyzeWeeklyStructure(weeklyUpTo(W,D),D);"
+            "return [s.broken, s.zone ? +s.zone.anchor.toFixed(2) : null];})));"
+        )
+        out = subprocess.run(["node", "-e", script], cwd=ROOT, capture_output=True, text=True, check=True)
+        self.assertEqual(json.loads(out.stdout), [[True, 206.67], [False, None], [False, None]])
 
 
 if __name__ == "__main__":

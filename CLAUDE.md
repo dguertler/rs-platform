@@ -201,13 +201,17 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Signal halten (Weekly und Daily, seit 12.10.2026):** Bildet ein tieferes Tief eine
   neue Marke (Trendumkehr), bleibt die Ebene grün, solange kein Schluss unter dem
   **Anker** der zuletzt gebrochenen Marke liegt — **Weekly: letztes Swing-Tief vor der
-  Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), gebrochen beim **ersten
-  Tagesschluss darunter** — auch schon, solange die gebrochene Marke noch gilt und die
-  Trendumkehr noch keine neue Marke gebildet hat (seit 13.10.2026; PANW: Ausbruch über 95,44
-  Woche 28.02.2022, Anker 77,75 vom 21.02., Tagesschluss 09.05.2022 bei 76,58 → Weekly rot bis
-  22.02.2023, die Trades 02.06./05.07./22.08.2022 entfallen; über alle Top-20-Signale 30 Trades
-  weg (14.612 €), 2 neu (11.130 €), PF 1,75 → 1,77, Gewinnsumme 277.974 € → 274.492 €, größter
-  Rückgang −56.787 € → −49.093 €; vorher tiefstes Tief und Wochenschluss), **Daily: letztes
+  Ausbruchswoche** (Woche mit dem ersten Tagesschluss über der Marke), **nachgezogen** bei jedem
+  erneuten Ausbruch (Wochenschluss über dem letzten bestätigten Swing-Hoch → Swing-Tief davor) und
+  gebrochen, sobald ein **Wochentief darunter** liegt — auch schon, solange die gebrochene Marke
+  noch gilt und die Trendumkehr noch keine neue Marke gebildet hat (seit 13.10.2026; PANW:
+  Ausbruch über 95,44 Woche 28.02.2022, Anker 77,75 vom 21.02., Wochentief 09.05.2022 bei 75,05 →
+  Weekly rot bis 22.02.2023, Trades 02.06./05.07./22.08.2022 entfallen; ZS: Woche 08.01.2024
+  schließt bei 230,77 über 227,29 vom 25.12.2023 → Anker 206,67 vom 01.01., Woche 19.02. Tief
+  202,44 → Weekly rot bis 10.06.2024; über alle Top-20-Signale gegenüber festem Anker mit
+  Tagesschluss 102 Trades weg (−350 €), 14 neu (−884 €), PF 1,77 → 1,82, Gesamtrendite verkettet
+  +671,0 % → +700,6 %, größter Rückgang −49.093 € → −45.709 €, Depot +440,3 % → +481,6 %; davor
+  tiefstes Tief und Wochenschluss: PF 1,75), **Daily: letztes
   Swing-Tief vor der Trendumkehr, das sie noch nicht unterschritten hat**, geprüft ab der
   Trendumkehr und gesucht höchstens bis zum Swing-Tief vor dem Ausbruch (der grünen Linie im
   Chart); liegt die Trendumkehr darunter, gilt dieses Swing-Tief — **keine** Begrenzung auf
@@ -217,19 +221,20 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   bleibt gehalten; März–Mai 2024 gehalten über 116,96 vom 21.02.; über alle Top-20-Signale
   Gewinnsumme 257.389 € → 286.939 €, PF 1,66 → 1,70 gegenüber der Begrenzung auf das Tief der
   Ausbruchskerze). Mit jedem neuen Ausbruch rückt der Anker auf die neue Marke nach
-  (AVGO Weekly: 137,12 → Anker 116,96; 173,51, Ausbruch 26.09.2024 → 132,17, hält über die
-  Trendumkehr vom 11.11.2024; 181,90, Ausbruch 13.12.2024 → 154,86). Die Trendumkehr ist
+  (Weekly zusätzlich nachgezogen, siehe oben). Die Trendumkehr ist
   nur Ausstieg aus dem Trade, nicht das Ende des Signals. Code: `heldAfterBreakout`/
   `holdSignal`/`holdAnchor` in `frontend/backtest_logic.js` und `frontend/rs_charts.js`
   (Seiten-Ampeln), live `gws_core.held_after_breakout` (`HOLD_WEEKLY`/`HOLD_DAILY`,
-  Weekly mit `weekly=True` und `gws_core.weekly_closed_below` in `check_alerts.py`). Studien:
+  Weekly mit `weekly=True` und `gws_core.weekly_anchor_walk`/`weekly_closed_below` in
+  `check_alerts.py`, `anchorWalk` in `backtest_logic.js`/`rs_charts.js`). Studien:
   `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`,
   `--halteanker=W:tiefstes,D:kerze` (kerze | tiefstes | swingtief | tu) bzw.
-  `--wochenbruch=wochenschluss|tief`
+  `--wochenbruch=tagesschluss|wochenschluss`, `--wochenanker-fest`
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
   letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten
-  Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch); Daily/4H (nur Darstellung, Logik unverändert):
+  Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch, bei erneutem Ausbruch
+  nachgezogen); Daily/4H (nur Darstellung, Logik unverändert):
   Swing-Tief vor dem Ausbruch (SL-Höhe; nur ein schon vor der Ausbruchskerze bestätigtes —
   AVGO Daily 14.05.2026: 404,92 vom 07.05., nicht 403,43 vom 13.05.); bei jedem weiteren Ausbruch nach oben (Schluss
   über dem letzten Swing-Hoch) springt es auf das Swing-Tief vor diesem Ausbruch; ein

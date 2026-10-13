@@ -93,17 +93,41 @@ def weekly_anchor_low(lows, mark_idx, b):
     return min(lows[mark_idx:b + 1])
 
 
-def weekly_closed_below(ohlcv_w, ohlcv_d):
-    """Weekly-Bruch wie weeklyBreakCheck 'tagesschluss' in frontend/backtest_logic.js: erster
-    Tagesschluss unter dem Anker ab der Woche nach der Ausbruchswoche b (ohne Tageskerzen:
-    Wochenschluss). PANW: Tagesschluss 09.05.2022 bei 76,58 unter 77,75 → Weekly rot."""
+def weekly_anchor_walk(ohlcv_w, b, anchor):
+    """Weekly-Anker ab der Ausbruchswoche b wie anchorWalk in frontend/backtest_logic.js (seit
+    13.10.2026): Woche für Woche gebrochen, sobald ein Wochentief unter dem Anker liegt; schließt
+    eine Woche über dem letzten bestätigten Swing-Hoch (erneuter Ausbruch), rückt der Anker auf das
+    Swing-Tief davor (ZS: Woche 08.01.2024 → 206,67 vom 01.01., Woche 19.02. Tief 202,44 → gebrochen;
+    PANW: Woche 09.05.2022 Tief 75,05 unter 77,75). Rückgabe: (gebrochen, aktueller Anker)."""
+    n = len(ohlcv_w)
+    lows = [w['l'] for w in ohlcv_w]
+    highs = [w['h'] for w in ohlcv_w]
+    closes = [w['c'] for w in ohlcv_w]
+
+    def swing_low(k):
+        return 1 <= k < n - 1 and lows[k] <= lows[k - 1] and lows[k] <= lows[k + 1]
+
+    def swing_high(k):
+        return 1 <= k < n - 1 and highs[k] >= highs[k - 1] and highs[k] >= highs[k + 1]
+
+    last = b
+    for k in range(b + 1, n):
+        if lows[k] < anchor:
+            return True, anchor
+        sh = next((highs[j] for j in range(k - 2, last, -1) if swing_high(j)), None)
+        if sh is not None and closes[k] > sh:
+            sl = next((lows[j] for j in range(k - 1, last, -1) if swing_low(j)), None)
+            if sl is not None:
+                anchor = max(anchor, sl)
+            last = k
+    return False, anchor
+
+
+def weekly_closed_below(ohlcv_w, ohlcv_d=None):
+    """Weekly-Bruch für held_after_breakout/check_alerts: weekly_anchor_walk als Prüffunktion
+    (b, anker) → gebrochen. ohlcv_d bleibt für die Ausbruchswoche (weekly_breakout_idx) nötig."""
     def check(b, anchor):
-        if b + 1 >= len(ohlcv_w):
-            return False
-        if ohlcv_d:
-            start = ohlcv_w[b + 1]['d']
-            return any(d['d'] >= start and d['c'] < anchor for d in ohlcv_d)
-        return any(w['c'] < anchor for w in ohlcv_w[b + 1:])
+        return weekly_anchor_walk(ohlcv_w, b, anchor)[0]
     return check
 
 
