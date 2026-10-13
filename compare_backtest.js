@@ -6,8 +6,8 @@
  * Bewertet werden alle Trades der Läufe (= alle Top-20-Signale, ohne Depot-Begrenzung),
  * je Trade 10.000 € Einsatz wie in der Engine. Jahresrendite = Gewinn der im Jahr
  * verkauften Trades (offene: laufendes Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €,
- * Bezugsgröße wie B-ÜBERSICHT); Gesamtrendite = Summe der Jahresrenditen inkl. des
- * laufenden Jahres. NASDAQ-100 ebenso als Summe seiner Jahresrenditen (years[].ndxPct).
+ * Bezugsgröße wie B-ÜBERSICHT); Gesamtrendite = Jahresrenditen inkl. des laufenden Jahres
+ * verkettet (Zinseszins, wie B-ÜBERSICHT). NASDAQ-100 ebenso verkettet (years[].ndxPct).
  * Monate über NASDAQ: Monatsrendite der Signale (Gewinn der im Monat verkauften Trades,
  * offene: laufender Monat / 100.000 €) größer als die des NASDAQ-100 (ndxMonths; fehlt das
  * Feld in einem älteren Lauf, aus denselben QQQ-Kursen wie backtest_ndx.js).
@@ -79,7 +79,8 @@ function main() {
   const ya = yearly(a), yb = yearly(b);
   const years = [...new Set([...Object.keys(ya), ...Object.keys(yb)])].sort();
   const ndx = Object.fromEntries(years.map((y) => [y, (b.years[y] || a.years[y] || {}).ndxPct ?? 0]));
-  const total = (o) => years.reduce((s, y) => s + (o[y] || 0), 0);
+  // verkettet: (1 + r1) × (1 + r2) × … − 1, wie B-ÜBERSICHT
+  const total = (o) => (years.reduce((f, y) => f * (1 + (o[y] || 0) / 100), 1) - 1) * 100;
   const ndxMonths = loadNdxMonths(a, b);
   const months = Object.keys(ndxMonths).sort();
   const ma = monthsBeaten(monthly(a, months), ndxMonths), mb = monthsBeaten(monthly(b, months), ndxMonths);
@@ -98,8 +99,8 @@ function main() {
   console.log(`| Anzahl Trades | ${a.trades.length} | ${b.trades.length} |`);
   console.log(`| Profitfaktor | ${fmtNum(ka.profitFactor)} | ${fmtNum(kb.profitFactor)} |`);
   console.log(`| absolute Rendite (Gewinnsumme) | ${fmtEur(ka.totalPnl)} | ${fmtEur(kb.totalPnl)} |`);
-  console.log(`| **Gesamtrendite ${span}** (Summe der Jahresrenditen) | ${fmtPct(total(ya))} | ${fmtPct(total(yb))} |`);
-  console.log(`| NASDAQ-100 Gesamtrendite ${span} (Summe der Jahresrenditen) | ${fmtPct(total(ndx))} | ${fmtPct(total(ndx))} |`);
+  console.log(`| **Gesamtrendite ${span}** (Jahresrenditen verkettet) | ${fmtPct(total(ya))} | ${fmtPct(total(yb))} |`);
+  console.log(`| NASDAQ-100 Gesamtrendite ${span} (verkettet) | ${fmtPct(total(ndx))} | ${fmtPct(total(ndx))} |`);
   console.log(`| **Monate über NASDAQ-100** (Monatsrendite der Signale > NASDAQ-100) | ${fmtWon(ma, 1)} | ${fmtWon(mb, 1)} |`);
   console.log(`| Ø Rendite je Trade / Trefferquote | ${fmtPct(ka.avgReturnPerTrade, 2)} / ${fmtNum(ka.winrate, 1)} % | ${fmtPct(kb.avgReturnPerTrade, 2)} / ${fmtNum(kb.winrate, 1)} % |`);
   console.log(`| größter Rückgang der Gewinnsumme | ${fmtEur(maxDrawdown(a.trades))} | ${fmtEur(maxDrawdown(b.trades))} |`);
@@ -108,7 +109,7 @@ function main() {
   console.log(`|---|---|---|---|---|---|`);
   const mY = (w, y) => (w.byYear[y] ? fmtWon(w.byYear[y]) : '–');
   for (const y of years) console.log(`| ${y} | ${fmtPct(ndx[y])} | ${fmtPct(ya[y] || 0)} | ${fmtPct(yb[y] || 0)} | ${mY(ma, y)} | ${mY(mb, y)} |`);
-  console.log(`| **Summe** | **${fmtPct(total(ndx))}** | **${fmtPct(total(ya))}** | **${fmtPct(total(yb))}** | **${fmtWon(ma)}** | **${fmtWon(mb)}** |`);
+  console.log(`| **Gesamt (verkettet)** | **${fmtPct(total(ndx))}** | **${fmtPct(total(ya))}** | **${fmtPct(total(yb))}** | **${fmtWon(ma)}** | **${fmtWon(mb)}** |`);
 }
 
 main();
