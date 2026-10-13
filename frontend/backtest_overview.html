@@ -84,6 +84,7 @@ const chain = (vals) => (vals.reduce((f, v) => f * (1 + (v || 0) / 100), 1) - 1)
 function YearTable({ res, sig }) {
   const years = Object.entries(res.years);
   const d = res.depot;
+  const nl = res.ndxLogic;   // NASDAQ-100 mit Logik (QQQ, voll investiert, verkettet)
   const sigTotal = sig ? chain(years.map(([y]) => sig[y])) : null;
   const better = (v, ndx) => v != null && ndx != null && v > ndx ? '#4ade8012' : undefined;
   return (
@@ -92,6 +93,7 @@ function YearTable({ res, sig }) {
         <thead><tr>
           <th style={{ ...head, textAlign: 'left' }}>Jahr</th>
           <th style={head}>NASDAQ-100</th>
+          {nl && <th style={head}>NASDAQ mit Logik</th>}
           {sig && <th style={head}>Signale ohne Platzlimit</th>}
           <th style={head}>Depot (10 Plätze)</th>
           <th style={head}>Gewinn</th>
@@ -103,6 +105,7 @@ function YearTable({ res, sig }) {
             <tr key={y} className="plain-row">
               <td style={{ ...cell, textAlign: 'left', color: '#f1f5f9', fontWeight: 700 }}>{y}{y === res.dataEnd.slice(0, 4) ? ' *' : ''}</td>
               <td style={{ ...cell, color: pnlColor(v.ndxPct) }}>{pct(v.ndxPct)}</td>
+              {nl && <td style={{ ...cell, color: pnlColor(nl.years[y] ?? 0), background: better(nl.years[y] ?? 0, v.ndxPct) }}>{pct(nl.years[y] ?? 0)}</td>}
               {sig && <td style={{ ...cell, color: pnlColor(sig[y] || 0), background: better(sig[y] || 0, v.ndxPct) }}>{pct(sig[y] || 0)}</td>}
               <td style={{ ...cell, color: pnlColor(v.returnPct), fontWeight: 700, background: better(v.returnPct, v.ndxPct) }}>{pct(v.returnPct)}</td>
               <td style={{ ...cell, color: pnlColor(v.pnl) }}>{eur(v.pnl)}</td>
@@ -113,6 +116,7 @@ function YearTable({ res, sig }) {
           <tr style={{ background: '#0d1526' }}>
             <td style={{ ...cell, textAlign: 'left', color: '#fbbf24', fontWeight: 800 }}>Gesamt</td>
             <td style={{ ...cell, color: pnlColor(d.ndxPct), fontWeight: 700 }}>{pct(d.ndxPct)}</td>
+            {nl && <td style={{ ...cell, color: pnlColor(nl.returnPct), fontWeight: 800, background: better(nl.returnPct, d.ndxPct) }}>{pct(nl.returnPct)}</td>}
             {sig && <td style={{ ...cell, color: pnlColor(sigTotal), fontWeight: 800, background: better(sigTotal, d.ndxPct) }}>{pct(sigTotal)}</td>}
             <td style={{ ...cell, color: pnlColor(d.returnPct), fontWeight: 800 }}>{pct(d.returnPct)} <span className="pa" style={{ color: '#64748b', fontWeight: 400 }}>({pct(d.cagr)} p. a.)</span></td>
             <td style={{ ...cell, color: pnlColor(d.endEquity - d.startCapital), fontWeight: 800 }}>{eur(d.endEquity - d.startCapital)}</td>
@@ -179,6 +183,16 @@ function OverviewApp() {
   }, [res, view, year, sortKey, sortAsc, search]);
 
   const sigYears = useMemo(() => view ? signalYears(view.trades) : {}, [view]);
+  // NASDAQ-100 (QQQ) mit derselben Logik — oberste Zeile der Aktienliste, Klick → B-DETAILS
+  const qqqRow = useMemo(() => {
+    const list = (res?.ndxLogic?.trades || []).filter(t => year === 'ALL' || t.exitDate.slice(0, 4) === year);
+    if (!list.length) return null;
+    const closed = list.filter(t => !t.isOpen);
+    return { trades: list.length, open: list.some(t => t.isOpen), pnl: list.reduce((s, t) => s + t.pnl, 0),
+      ret: (list.reduce((f, t) => f * (1 + t.pnlPct / 100), 1) - 1) * 100,
+      winrate: closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null,
+      wins: closed.filter(t => t.pnl > 0).length, closed: closed.length, pf: pfOf(list) };
+  }, [res, year]);
   const sel = useMemo(() => view ? view.trades.filter(t => year === 'ALL' || t.exitDate.slice(0, 4) === year) : [], [view, year]);
 
   if (error) return <div style={{ padding: 40, color: red, fontFamily: 'monospace' }}>Backtest-Daten fehlen ({error})</div>;
@@ -235,6 +249,7 @@ function OverviewApp() {
           ['Depot gesamt', pct(d.returnPct, 0), d.returnPct],
           ['Rendite p. a.', pct(d.cagr), d.cagr],
           ['NASDAQ-100 gesamt', pct(d.ndxPct, 0), d.ndxPct],
+          ...(res.ndxLogic ? [['NASDAQ mit Logik', pct(res.ndxLogic.returnPct, 0), res.ndxLogic.returnPct]] : []),
           ...(sigTotal != null ? [['Signale ohne Platzlimit', pct(sigTotal, 0), sigTotal]] : []),
           ['Profitfaktor', pfText(d.profitFactor), d.profitFactor - 1],
           ['Max. Rückgang', pct(d.maxDD), d.maxDD],
@@ -251,6 +266,7 @@ function OverviewApp() {
       <div style={{ fontSize: 11, color: '#475569', fontFamily: 'monospace', margin: '-12px 0 22px' }}>
         Depot, Gewinn und PF = Depot mit höchstens 10 Plätzen im Kalenderjahr
         {top20 ? ' · Signale ohne Platzlimit = Gewinn aller Signale (je 10.000 €) mit Verkauf im Jahr / 100.000 € — Maß für die Logik, braucht in starken Phasen mehr als 100.000 €' : ' · bei „Alle Signale“ keine Rechnung ohne Platzlimit (zu viele gleichzeitige Signale für 100.000 €)'}
+        {res.ndxLogic ? ' · NASDAQ mit Logik = dieselbe Logik auf QQQ, 100.000 € voll investiert solange ein Trade läuft, sonst Bargeld' : ''}
         {' · '}Gesamt = Jahre verkettet (Zinseszins) · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
         {' · '}* laufendes Jahr
       </div>
@@ -278,6 +294,23 @@ function OverviewApp() {
             {sortHead('pf', 'PF')}
           </tr></thead>
           <tbody>
+            {qqqRow && (!search || 'nasdaq qqq'.includes(search.toLowerCase())) && (
+              <tr className="data-row" onClick={() => { window.location.href = 'backtest.html?t=QQQ&top20=0'; }}
+                style={{ borderLeft: '3px solid #38bdf8', background: '#0b1a2e' }}>
+                <td style={{ ...cell, textAlign: 'left', fontWeight: 700, fontSize: 13, color: '#38bdf8' }}>
+                  NASDAQ-100 (QQQ)
+                  {qqqRow.open && <span style={{ marginLeft: 6, fontSize: 9, background: '#78350f', color: '#fbbf24', borderRadius: 3, padding: '1px 5px', fontWeight: 700 }}>OFFEN</span>}
+                </td>
+                <td style={{ ...cell, color: '#94a3b8' }}>{qqqRow.trades}</td>
+                <td style={{ ...cell, color: '#64748b' }}>–</td>
+                <td style={{ ...cell, color: pnlColor(qqqRow.pnl), fontWeight: 600 }}>{eur(qqqRow.pnl)}</td>
+                <td style={{ ...cell, color: pnlColor(qqqRow.ret) }}>{pct(qqqRow.ret)}</td>
+                <td style={{ ...cell, color: qqqRow.winrate == null ? neutral : wrColor(qqqRow.winrate) }}>
+                  {qqqRow.winrate == null ? '–' : num(qqqRow.winrate, 0) + ' %'}<span style={{ color: '#334155', fontSize: 10, marginLeft: 4 }}>({qqqRow.wins}/{qqqRow.closed})</span>
+                </td>
+                <td style={{ ...cell, color: qqqRow.pf == null || qqqRow.pf >= 1 ? green : red }}>{qqqRow.pf == null ? '∞' : num(qqqRow.pf, 2)}</td>
+              </tr>
+            )}
             {stocks.map(r => (
               <tr key={r.symbol} className="data-row" onClick={() => { window.location.href = `backtest.html?t=${encodeURIComponent(r.symbol)}${top20 ? '' : '&top20=0'}`; }}
                 style={{ borderLeft: `3px solid ${r.open ? '#92400e' : 'transparent'}` }}>

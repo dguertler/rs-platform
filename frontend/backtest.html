@@ -78,6 +78,7 @@ function BacktestApp() {
   // top20=0|1 in der URL (Klick aus B-ÜBERSICHT „Alle Signale“) geht vor der gespeicherten Wahl
   const [useTop20,    setUseTop20]    = useState(() => {
     const p = new URLSearchParams(window.location.search).get('top20');
+    if ((new URLSearchParams(window.location.search).get('t') || '').toUpperCase() === 'QQQ') return false;   // Index: kein Top-20-Filter
     return p != null ? p !== '0' : localStorage.getItem('bt_use_top20') !== 'false';
   });
   const [benchData,   setBenchData]   = useState(null);

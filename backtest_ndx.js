@@ -110,7 +110,7 @@ const earningsByTicker = fs.existsSync(EARNINGS_FILE) ? readJson(EARNINGS_FILE).
 function loadUniverse() {
   const rs = readJson(path.join(DATA, 'rs_full.json'));
   const charts = fs.existsSync(CHARTS)
-    ? fs.readdirSync(CHARTS).filter((f) => f.endsWith('.json') && f[0] !== '_').map((f) => f.slice(0, -5)) : [];
+    ? fs.readdirSync(CHARTS).filter((f) => f.endsWith('.json') && f[0] !== '_' && f !== 'QQQ.json').map((f) => f.slice(0, -5)) : [];
   const members = histOnly ? [] : (rs.data || []).map((e) => e.ticker);
   return { rs, tickers: [...new Set([...charts, ...members])].sort() };
 }
@@ -151,6 +151,35 @@ const depotJson = (depot, ndxTotal) => ({
 const signalsJson = (list) => { const k = kpis(list, 10000); return { nTrades: list.length, profitFactor: round(k.profitFactor), winrate: round(k.winrate, 1) }; };
 const yearsJson = (years) => Object.fromEntries(Object.entries(years).map(([y, v]) =>
   [y, Object.fromEntries(Object.entries(v).map(([k, x]) => [k, round(x, k === 'trades' ? 0 : 2)]))]));
+
+/** „NASDAQ-100 mit Logik“: dieselbe Signal-/Ausstiegslogik auf QQQ selbst (ohne Top-20-Filter,
+ *  ohne Earnings), Kurse charts/QQQ.json + backtest_qqq.json. Rendite = 100.000 € voll in QQQ
+ *  investiert, solange ein Trade läuft (sonst Bargeld), Trades verkettet; Jahr = Jahr des Verkaufs. */
+function ndxLogicView(rs, ndx) {
+  const s = seriesFor('QQQ', rs);
+  if (!s) return null;
+  const d = s.series.ohlcv_d;
+  const trades = simulateTradesPIT(s.series.ohlcv_w, d, s.series.ohlcv_4h, null, PIT_START, null)
+    .map((t) => ({ ...t, ticker: 'QQQ', symbol: 'QQQ' }));
+  const years = {};
+  for (const t of trades) {
+    const y = t.exitDate.slice(0, 4);
+    years[y] = (years[y] ?? 1) * (1 + t.pnlPct / 100);
+  }
+  let eq = 1, peak = 1, maxDD = 0;
+  for (const t of trades) { eq *= 1 + t.pnlPct / 100; peak = Math.max(peak, eq); maxDD = Math.min(maxDD, eq / peak - 1); }
+  const k = kpis(trades, 10000);
+  return {
+    returnPct: round((eq - 1) * 100), maxDD: round(maxDD * 100), nTrades: trades.length,
+    profitFactor: round(k.profitFactor), winrate: round(k.winrate, 1),
+    years: Object.fromEntries(Object.keys(ndx).map((y) => [y, round(((years[y] ?? 1) - 1) * 100)])),
+    trades: trades.map((t) => ({
+      ticker: 'QQQ', signalBar: t.signalBar, entryDate: t.entryDate, entryTime: t.entryTime, entryPrice: round(t.entryPrice, 4),
+      exitDate: t.exitDate, exitPrice: round(t.exitPrice, 4), pnl: Math.round(t.pnl), pnlPct: round(t.pnlPct, 1),
+      isOpen: t.isOpen, ...(t.exitReason ? { exitReason: t.exitReason } : {}),
+    })),
+  };
+}
 
 /** NASDAQ-100-Rendite je Jahr (keyLen 4, 'YYYY') bzw. je Monat (keyLen 7, 'YYYY-MM') aus
  *  QQQ-Schlusskursen (historisch + aktuell): letzter Schluss der Periode / letzter davor. */
@@ -201,6 +230,7 @@ function main() {
   const ndx = ndxByPeriod(rs, 4);
   const all = depotView(trades, closesBySymbol, ndx);
   const alle = unfiltered.length ? depotView(unfiltered, closesBySymbol, ndx) : null;
+  const ndxLogic = histOnly ? null : ndxLogicView(rs, ndx);
   const { depot, years, taken } = all;
   const ndxTotal = Object.values(ndx).reduce((f, p) => f * (1 + p / 100), 1);
 
@@ -216,6 +246,7 @@ function main() {
     ndxMonths: Object.fromEntries(Object.entries(ndxByPeriod(rs, 7)).map(([m, v]) => [m, round(v)])),
     years: yearsJson(years),
     // Vergleich ohne Top-20-Filter (alle Signale derselben Aktien), eigenes Depot; Trades kompakt
+    ...(ndxLogic ? { ndxLogic } : {}),
     ...(alle ? { allSignals: {
       depot: depotJson(alle.depot, ndxTotal), signals: signalsJson(unfiltered), years: yearsJson(alle.years),
       trades: unfiltered.map((t) => ({
