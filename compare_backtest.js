@@ -101,21 +101,15 @@ function main() {
   console.log(`| absolute Rendite (Gewinnsumme) | ${fmtEur(ka.totalPnl)} | ${fmtEur(kb.totalPnl)} |`);
   console.log(`| **Gesamtrendite ${span}** (Jahresrenditen verkettet) | ${fmtPct(total(ya))} | ${fmtPct(total(yb))} |`);
   console.log(`| NASDAQ-100 Gesamtrendite ${span} (verkettet) | ${fmtPct(total(ndx))} | ${fmtPct(total(ndx))} |`);
-  // NASDAQ-100 mit Logik: dieselbe Logik auf QQQ (backtest_ndx.js → ndxLogic, voll investiert, verkettet)
-  const nl = (r) => r.ndxLogic ? `${fmtPct(r.ndxLogic.returnPct)} (${r.ndxLogic.nTrades} Trades, PF ${fmtNum(r.ndxLogic.profitFactor)})` : '–';
-  console.log(`| NASDAQ-100 mit Logik ${span} (QQQ, voll investiert, verkettet) | ${nl(a)} | ${nl(b)} |`);
   console.log(`| **Monate über NASDAQ-100** (Monatsrendite der Signale > NASDAQ-100) | ${fmtWon(ma, 1)} | ${fmtWon(mb, 1)} |`);
   console.log(`| Ø Rendite je Trade / Trefferquote | ${fmtPct(ka.avgReturnPerTrade, 2)} / ${fmtNum(ka.winrate, 1)} % | ${fmtPct(kb.avgReturnPerTrade, 2)} / ${fmtNum(kb.winrate, 1)} % |`);
   console.log(`| größter Rückgang der Gewinnsumme | ${fmtEur(maxDrawdown(a.trades))} | ${fmtEur(maxDrawdown(b.trades))} |`);
   console.log('');
-  const nlA = a.ndxLogic?.years || {}, nlB = b.ndxLogic?.years || {};
-  const nlCell = (o, y) => (o[y] == null ? '–' : fmtPct(o[y]));
-  console.log(`| Jahr | NASDAQ-100 | NASDAQ mit Logik bisher | neu | Signale bisher | neu | Monate über NASDAQ bisher | neu |`);
-  console.log(`|---|---|---|---|---|---|---|---|`);
+  console.log(`| Jahr | NASDAQ-100 | bisher | neu | Monate über NASDAQ bisher | neu |`);
+  console.log(`|---|---|---|---|---|---|`);
   const mY = (w, y) => (w.byYear[y] ? fmtWon(w.byYear[y]) : '–');
-  for (const y of years) console.log(`| ${y} | ${fmtPct(ndx[y])} | ${nlCell(nlA, y)} | ${nlCell(nlB, y)} | ${fmtPct(ya[y] || 0)} | ${fmtPct(yb[y] || 0)} | ${mY(ma, y)} | ${mY(mb, y)} |`);
-  const nlT = (r) => (r.ndxLogic ? `**${fmtPct(r.ndxLogic.returnPct)}**` : '–');
-  console.log(`| **Gesamt (verkettet)** | **${fmtPct(total(ndx))}** | ${nlT(a)} | ${nlT(b)} | **${fmtPct(total(ya))}** | **${fmtPct(total(yb))}** | **${fmtWon(ma)}** | **${fmtWon(mb)}** |`);
+  for (const y of years) console.log(`| ${y} | ${fmtPct(ndx[y])} | ${fmtPct(ya[y] || 0)} | ${fmtPct(yb[y] || 0)} | ${mY(ma, y)} | ${mY(mb, y)} |`);
+  console.log(`| **Gesamt (verkettet)** | **${fmtPct(total(ndx))}** | **${fmtPct(total(ya))}** | **${fmtPct(total(yb))}** | **${fmtWon(ma)}** | **${fmtWon(mb)}** |`);
 }
 
 main();
