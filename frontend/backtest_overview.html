@@ -151,7 +151,8 @@ function OverviewApp() {
       return {
         symbol, ticker, label: symbol === ticker ? ticker : `${ticker} (bis ${list[list.length - 1].exitDate.slice(0, 4)})`, trades: list.length, open: list.some(t => t.isOpen),
         pnl: list.reduce((s, t) => s + t.pnl, 0),
-        ret: list.reduce((s, t) => s + t.pnlPct, 0),
+        // Trades nacheinander verkettet (Zinseszins), wie die Gesamtrenditen der Jahrestabelle
+        ret: (list.reduce((f, t) => f * (1 + t.pnlPct / 100), 1) - 1) * 100,
         winrate: closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null,
         wins: closed.filter(t => t.pnl > 0).length, closed: closed.length,
         pf: pfOf(list), depot: list.filter(t => t.depot).length,
@@ -193,7 +194,7 @@ function OverviewApp() {
       <div className="note" style={{ marginBottom: 14 }}>
         <b>Zeitpunktgenau wie live:</b> Signal an jedem 4H-Kerzenschluss (4H-Punkt neu, Wochen- und Tagespunkt zu diesem Zeitpunkt grün,
         Top 20 am Signaltag). Kauf zur nächsten 4H-Kerze bei den Kerzen 10–14 und 14–18 Uhr (4H-Prüfjob), sonst um 10 Uhr am nächsten Handelstag.
-        Stopp am letzten Swing-Tief, Ausstieg bei Trendumkehr (Schluss unter dem Tief, aus dem das letzte Hoch entstand), Zeitstopp nach 10 Handelstagen unter +5 %.
+        Stopp am letzten Swing-Tief, Ausstieg bei Trendumkehr (Schluss unter dem Tief, aus dem das letzte Hoch entstand) und vor Earnings, kein Zeitstopp.
         Depot: 100.000 € Start, höchstens 10 Positionen, Zinseszins. NASDAQ-100 über QQQ (inkl. Dividenden).
       </div>
 
@@ -232,7 +233,7 @@ function OverviewApp() {
 
       <YearTable res={{ ...res, years: view.years, depot: d }} />
       <div style={{ fontSize: 11, color: '#475569', fontFamily: 'monospace', margin: '-12px 0 22px' }}>
-        Rendite und Gewinn = Depot im Kalenderjahr · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
+        Rendite und Gewinn = Depot im Kalenderjahr · Gesamt = Jahre verkettet (Zinseszins) · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
         {' · '}* laufendes Jahr
       </div>
 
@@ -254,7 +255,7 @@ function OverviewApp() {
             {sortHead('trades', 'Trades')}
             {sortHead('depot', 'davon im Depot')}
             {sortHead('pnl', 'P&L €')}
-            {sortHead('ret', 'Σ Rendite')}
+            {sortHead('ret', 'Rendite verkettet')}
             {sortHead('winrate', 'Win Rate')}
             {sortHead('pf', 'PF')}
           </tr></thead>
