@@ -99,6 +99,31 @@ function seriesFor(ticker, rs) {
   return { series, inTop, earnings: earningsByTicker[ticker] || null };
 }
 
+const round = (v, n = 2) => (v == null ? null : +v.toFixed(n));
+
+/** Depot-Simulation (10 Plätze, Zinseszins) für eine Signalliste: Kennzahlen, Jahre, gekaufte Trades */
+function depotView(list, closesBySymbol, ndx) {
+  // closes je Symbol (Ticker mit Jahreszahl = frühere Firma gleichen Kürzels)
+  const depotTrades = list.map((t) => ({ ...t, ticker: t.symbol }));
+  const sim = simulatePortfolio(depotTrades, closesBySymbol, { start: PIT_START, maxPositions: MAX_POSITIONS });
+  const depot = portfolioStats(sim, depotTrades);
+  const taken = new Set(depotTrades.filter((t) => sim.results.get(t)?.taken).map((t) => `${t.symbol}|${t.entryDate}`));
+  const years = {};
+  for (const [y, v] of Object.entries(depot.years)) {
+    years[y] = { ndxPct: ndx[y] ?? null, returnPct: v.returnPct, pnl: v.endEquity - v.startEquity,
+                 profitFactor: v.profitFactor, trades: v.taken, startEquity: v.startEquity, endEquity: v.endEquity, maxDD: v.maxDD };
+  }
+  return { depot, years, taken };
+}
+const depotJson = (depot, ndxTotal) => ({
+  startCapital: depot.startCapital, endEquity: round(depot.endEquity, 0), returnPct: round(depot.returnPct),
+  cagr: round(depot.cagr), maxDD: round(depot.maxDD), profitFactor: round(depot.profitFactor),
+  taken: depot.taken, skipped: depot.skipped, ndxPct: round((ndxTotal - 1) * 100),
+});
+const signalsJson = (list) => { const k = kpis(list, 10000); return { nTrades: list.length, profitFactor: round(k.profitFactor), winrate: round(k.winrate, 1) }; };
+const yearsJson = (years) => Object.fromEntries(Object.entries(years).map(([y, v]) =>
+  [y, Object.fromEntries(Object.entries(v).map(([k, x]) => [k, round(x, k === 'trades' ? 0 : 2)]))]));
+
 /** NASDAQ-100-Rendite je Jahr (keyLen 4, 'YYYY') bzw. je Monat (keyLen 7, 'YYYY-MM') aus
  *  QQQ-Schlusskursen (historisch + aktuell): letzter Schluss der Periode / letzter davor. */
 function ndxByPeriod(rs, keyLen = 4) {
@@ -142,21 +167,16 @@ function main() {
   }
   trades.sort((a, b) => (a.entryDate < b.entryDate ? -1 : a.entryDate > b.entryDate ? 1 : a.entryTime < b.entryTime ? -1 : 1));
 
-  // Depot: closes je Symbol (Ticker mit Jahreszahl = frühere Firma gleichen Kürzels)
-  const depotTrades = trades.map((t) => ({ ...t, ticker: t.symbol }));
-  const sim = simulatePortfolio(depotTrades, closesBySymbol, { start: PIT_START, maxPositions: MAX_POSITIONS });
-  const depot = portfolioStats(sim, depotTrades);
-  const taken = new Set(depotTrades.filter((t) => sim.results.get(t)?.taken).map((t) => `${t.symbol}|${t.entryDate}`));
   const ndx = ndxByPeriod(rs, 4);
-
-  const years = {};
-  for (const [y, v] of Object.entries(depot.years)) {
-    years[y] = { ndxPct: ndx[y] ?? null, returnPct: v.returnPct, pnl: v.endEquity - v.startEquity,
-                 profitFactor: v.profitFactor, trades: v.taken, startEquity: v.startEquity, endEquity: v.endEquity, maxDD: v.maxDD };
-  }
+  const all = depotView(trades, closesBySymbol, ndx);
+  // Schalter „Top 20 heute“ auf B-ÜBERSICHT: dieselbe Rechnung nur mit den Signalen der
+  // heutigen Top 20 (rs_full.json top20; frühere Firmen gleichen Kürzels ausgenommen)
+  const top20Now = new Set(rs.top20 || []);
+  const topTrades = trades.filter((t) => t.symbol === t.ticker && top20Now.has(t.ticker));
+  const top = depotView(topTrades, closesBySymbol, ndx);
+  const { depot, years, taken } = all;
   const ndxTotal = Object.values(ndx).reduce((f, p) => f * (1 + p / 100), 1);
 
-  const round = (v, n = 2) => (v == null ? null : +v.toFixed(n));
   const result = {
     generated: new Date().toISOString().slice(0, 16).replace('T', ' '),
     dataEnd: lastDay,
@@ -164,14 +184,14 @@ function main() {
     rule: 'Zeitpunktgenau wie live: Signal an jedem 4H-Kerzenschluss (4H neu, Woche und Tag zu diesem Zeitpunkt grün), '
       + 'Kauf zur nächsten 4H-Kerze (Kerzen 10–14/14–18 Uhr) bzw. um 10 Uhr am nächsten Handelstag, Top 20 am Signaltag, '
       + 'Stopp/Trendumkehr/Verkauf vor Earnings wie Engine; Depot 100.000 €, höchstens 10 Positionen, Zinseszins',
-    depot: {
-      startCapital: depot.startCapital, endEquity: round(depot.endEquity, 0), returnPct: round(depot.returnPct),
-      cagr: round(depot.cagr), maxDD: round(depot.maxDD), profitFactor: round(depot.profitFactor),
-      taken: depot.taken, skipped: depot.skipped, ndxPct: round((ndxTotal - 1) * 100),
-    },
-    signals: (() => { const k = kpis(trades, 10000); return { nTrades: trades.length, profitFactor: round(k.profitFactor), winrate: round(k.winrate, 1) }; })(),
+    depot: depotJson(depot, ndxTotal),
+    signals: signalsJson(trades),
     ndxMonths: Object.fromEntries(Object.entries(ndxByPeriod(rs, 7)).map(([m, v]) => [m, round(v)])),
-    years: Object.fromEntries(Object.entries(years).map(([y, v]) => [y, Object.fromEntries(Object.entries(v).map(([k, x]) => [k, round(x, k === 'trades' ? 0 : 2)]))])),
+    years: yearsJson(years),
+    top20Now: {
+      tickers: [...top20Now], depot: depotJson(top.depot, ndxTotal), signals: signalsJson(topTrades), years: yearsJson(top.years),
+      depotTrades: trades.flatMap((t, i) => (top.taken.has(`${t.symbol}|${t.entryDate}`) ? [i] : [])),
+    },
     trades: trades.map((t) => ({
       ticker: t.ticker, ...(t.symbol !== t.ticker ? { symbol: t.symbol } : {}), signalBar: t.signalBar, weeklyDate: t.weeklyDate, entryDate: t.entryDate, entryTime: t.entryTime,
       entryPrice: round(t.entryPrice, 4), stopPrice: round(t.stopPrice, 4), exitDate: t.exitDate, exitPrice: round(t.exitPrice, 4),

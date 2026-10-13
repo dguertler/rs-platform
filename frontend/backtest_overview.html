@@ -119,6 +119,8 @@ function OverviewApp() {
   const [sortKey, setSortKey] = useState('pnl');
   const [sortAsc, setSortAsc] = useState(false);
   const [search, setSearch] = useState('');
+  const [top20, setTop20] = useState(() => { try { return localStorage.getItem('btTop20') === '1'; } catch { return false; } });
+  const toggleTop20 = on => { setTop20(on); try { localStorage.setItem('btTop20', on ? '1' : '0'); } catch { /* egal */ } };
 
   useEffect(() => {
     window.apiFetch('data/backtest_ndx.json')
@@ -126,11 +128,22 @@ function OverviewApp() {
       .then(setRes).catch(e => setError(e.message));
   }, []);
 
+  // Schalter „Top 20 heute“: Kennzahlen, Jahrestabelle und Aktien nur für die heutigen Top 20
+  // (Depot dafür eigens gerechnet in backtest_ndx.js → top20Now)
+  const view = useMemo(() => {
+    if (!res) return null;
+    const t20 = res.top20Now;
+    if (!top20 || !t20) return { depot: res.depot, years: res.years, signals: res.signals, trades: res.trades };
+    const set = new Set(t20.tickers), dep = new Set(t20.depotTrades);
+    return { depot: t20.depot, years: t20.years, signals: t20.signals,
+      trades: res.trades.flatMap((t, i) => !t.symbol && set.has(t.ticker) ? [{ ...t, depot: dep.has(i) }] : []) };
+  }, [res, top20]);
+
   // Trades je Aktie; Jahr = Jahr des Verkaufs (offene: Datenende), wie in der Jahrestabelle
   const stocks = useMemo(() => {
     if (!res) return [];
     const by = {};
-    for (const t of res.trades) {
+    for (const t of view.trades) {
       if (year !== 'ALL' && t.exitDate.slice(0, 4) !== year) continue;
       (by[t.symbol || t.ticker] ||= []).push(t);
     }
@@ -151,14 +164,14 @@ function OverviewApp() {
       const av = a[sortKey] ?? -Infinity, bv = b[sortKey] ?? -Infinity;
       return (av < bv ? -1 : av > bv ? 1 : 0) * (sortAsc ? 1 : -1);
     });
-  }, [res, year, sortKey, sortAsc, search]);
+  }, [res, view, year, sortKey, sortAsc, search]);
 
-  const sel = useMemo(() => res ? res.trades.filter(t => year === 'ALL' || t.exitDate.slice(0, 4) === year) : [], [res, year]);
+  const sel = useMemo(() => view ? view.trades.filter(t => year === 'ALL' || t.exitDate.slice(0, 4) === year) : [], [view, year]);
 
   if (error) return <div style={{ padding: 40, color: red, fontFamily: 'monospace' }}>Backtest-Daten fehlen ({error})</div>;
   if (!res) return <div style={{ padding: '100px 24px', textAlign: 'center', color: '#475569', fontFamily: 'monospace' }}>Lade Backtest…</div>;
 
-  const d = res.depot;
+  const d = view.depot;
   const sortHead = (key, label, left = false) => (
     <th onClick={() => { if (sortKey === key) setSortAsc(p => !p); else { setSortKey(key); setSortAsc(key === 'ticker'); } }}
       style={{ ...head, textAlign: left ? 'left' : 'right', cursor: 'pointer', userSelect: 'none', color: sortKey === key ? '#f1f5f9' : '#64748b' }}>
@@ -186,6 +199,23 @@ function OverviewApp() {
         Depot: 100.000 € Start, höchstens 10 Positionen, Zinseszins. NASDAQ-100 über QQQ (inkl. Dividenden).
       </div>
 
+      {res.top20Now && (
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, alignItems: 'center', marginBottom: 14 }}>
+          {[[false, 'Alle Aktien'], [true, 'Top 20 heute']].map(([on, label]) => (
+            <button key={label} onClick={() => toggleTop20(on)}
+              style={{ background: top20 === on ? '#1e293b' : 'transparent', border: `1px solid ${top20 === on ? '#475569' : '#1e293b'}`,
+                borderRadius: 6, padding: '5px 12px', color: top20 === on ? '#f1f5f9' : '#64748b', fontFamily: 'monospace', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}>
+              {label}
+            </button>
+          ))}
+          {top20 && (
+            <span style={{ fontSize: 11, color: '#64748b', fontFamily: 'monospace' }}>
+              nur Signale dieser Aktien seit {res.start.slice(0, 4)} (je Signal weiterhin Top 20 am Signaltag), Depot eigens gerechnet: {res.top20Now.tickers.join(' · ')}
+            </span>
+          )}
+        </div>
+      )}
+
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
         {[
           ['Depot heute', Math.round(d.endEquity).toLocaleString('de-DE') + ' €', d.endEquity - d.startCapital],
@@ -194,7 +224,7 @@ function OverviewApp() {
           ['NASDAQ-100 gesamt', pct(d.ndxPct, 0), d.ndxPct],
           ['Profitfaktor', pfText(d.profitFactor), d.profitFactor - 1],
           ['Max. Rückgang', pct(d.maxDD), d.maxDD],
-          ['Trades im Depot', `${d.taken} von ${res.signals.nTrades}`, null],
+          ['Trades im Depot', `${d.taken} von ${view.signals.nTrades}`, null],
         ].map(([label, val, col]) => (
           <div key={label} style={{ background: '#0d1526', border: '1px solid #1e293b', borderRadius: 8, padding: '10px 16px', flex: '1 1 140px', minWidth: 125 }}>
             <div style={{ fontSize: 10, color: '#64748b', fontFamily: 'monospace', marginBottom: 4 }}>{label}</div>
@@ -203,7 +233,7 @@ function OverviewApp() {
         ))}
       </div>
 
-      <YearTable res={res} />
+      <YearTable res={{ ...res, years: view.years, depot: d }} />
       <div style={{ fontSize: 11, color: '#475569', fontFamily: 'monospace', margin: '-12px 0 22px' }}>
         Rendite und Gewinn = Depot im Kalenderjahr · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
         {' · '}* laufendes Jahr
