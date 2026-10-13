@@ -75,7 +75,11 @@ function BacktestApp() {
   const [loading,     setLoading]     = useState(true);
   const [selectedIdx, setSelectedIdx] = useState(null);
   const [top20Hist,   setTop20Hist]   = useState(null);
-  const [useTop20,    setUseTop20]    = useState(() => localStorage.getItem('bt_use_top20') !== 'false');
+  // top20=0|1 in der URL (Klick aus B-ÜBERSICHT „Alle Signale“) geht vor der gespeicherten Wahl
+  const [useTop20,    setUseTop20]    = useState(() => {
+    const p = new URLSearchParams(window.location.search).get('top20');
+    return p != null ? p !== '0' : localStorage.getItem('bt_use_top20') !== 'false';
+  });
   const [benchData,   setBenchData]   = useState(null);
   const chartRef     = useRef(null);
   const weekTableRef = useRef(null);

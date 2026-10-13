@@ -72,16 +72,28 @@ function pfOf(list) {
   return l < 0 ? w / -l : null;
 }
 
-function YearTable({ res }) {
+// Signale ohne Platzlimit: Gewinn der im Jahr verkauften Trades (offene: laufendes Jahr) / 100.000 €
+// (10 × 10.000 €), Gesamt verkettet — wie die Logik-Bewertung (compare_backtest.js)
+function signalYears(trades) {
+  const out = {};
+  for (const t of trades) { const y = t.exitDate.slice(0, 4); out[y] = (out[y] || 0) + t.pnl / 1000; }
+  return out;
+}
+const chain = (vals) => (vals.reduce((f, v) => f * (1 + (v || 0) / 100), 1) - 1) * 100;
+
+function YearTable({ res, sig }) {
   const years = Object.entries(res.years);
   const d = res.depot;
+  const sigTotal = sig ? chain(years.map(([y]) => sig[y])) : null;
+  const better = (v, ndx) => v != null && ndx != null && v > ndx ? '#4ade8012' : undefined;
   return (
     <div style={{ background: '#0a101e', border: '1px solid #1e293b', borderRadius: 10, overflow: 'auto', marginBottom: 20 }}>
       <table className="yt">
         <thead><tr>
           <th style={{ ...head, textAlign: 'left' }}>Jahr</th>
           <th style={head}>NASDAQ-100</th>
-          <th style={head}>Rendite</th>
+          {sig && <th style={head}>Signale ohne Platzlimit</th>}
+          <th style={head}>Depot (10 Plätze)</th>
           <th style={head}>Gewinn</th>
           <th style={head}>PF</th>
           <th style={head} className="col-trades">Trades</th>
@@ -91,8 +103,8 @@ function YearTable({ res }) {
             <tr key={y} className="plain-row">
               <td style={{ ...cell, textAlign: 'left', color: '#f1f5f9', fontWeight: 700 }}>{y}{y === res.dataEnd.slice(0, 4) ? ' *' : ''}</td>
               <td style={{ ...cell, color: pnlColor(v.ndxPct) }}>{pct(v.ndxPct)}</td>
-              <td style={{ ...cell, color: pnlColor(v.returnPct), fontWeight: 700,
-                background: v.ndxPct != null && v.returnPct > v.ndxPct ? '#4ade8012' : undefined }}>{pct(v.returnPct)}</td>
+              {sig && <td style={{ ...cell, color: pnlColor(sig[y] || 0), background: better(sig[y] || 0, v.ndxPct) }}>{pct(sig[y] || 0)}</td>}
+              <td style={{ ...cell, color: pnlColor(v.returnPct), fontWeight: 700, background: better(v.returnPct, v.ndxPct) }}>{pct(v.returnPct)}</td>
               <td style={{ ...cell, color: pnlColor(v.pnl) }}>{eur(v.pnl)}</td>
               <td style={{ ...cell, color: v.profitFactor == null || v.profitFactor >= 1 ? green : red }}>{pfText(v.profitFactor)}</td>
               <td style={{ ...cell, color: '#94a3b8' }} className="col-trades">{v.trades}</td>
@@ -101,6 +113,7 @@ function YearTable({ res }) {
           <tr style={{ background: '#0d1526' }}>
             <td style={{ ...cell, textAlign: 'left', color: '#fbbf24', fontWeight: 800 }}>Gesamt</td>
             <td style={{ ...cell, color: pnlColor(d.ndxPct), fontWeight: 700 }}>{pct(d.ndxPct)}</td>
+            {sig && <td style={{ ...cell, color: pnlColor(sigTotal), fontWeight: 800, background: better(sigTotal, d.ndxPct) }}>{pct(sigTotal)}</td>}
             <td style={{ ...cell, color: pnlColor(d.returnPct), fontWeight: 800 }}>{pct(d.returnPct)} <span className="pa" style={{ color: '#64748b', fontWeight: 400 }}>({pct(d.cagr)} p. a.)</span></td>
             <td style={{ ...cell, color: pnlColor(d.endEquity - d.startCapital), fontWeight: 800 }}>{eur(d.endEquity - d.startCapital)}</td>
             <td style={{ ...cell, color: d.profitFactor >= 1 ? green : red, fontWeight: 800 }}>{pfText(d.profitFactor)}</td>
@@ -165,12 +178,14 @@ function OverviewApp() {
     });
   }, [res, view, year, sortKey, sortAsc, search]);
 
+  const sigYears = useMemo(() => view ? signalYears(view.trades) : {}, [view]);
   const sel = useMemo(() => view ? view.trades.filter(t => year === 'ALL' || t.exitDate.slice(0, 4) === year) : [], [view, year]);
 
   if (error) return <div style={{ padding: 40, color: red, fontFamily: 'monospace' }}>Backtest-Daten fehlen ({error})</div>;
   if (!res) return <div style={{ padding: '100px 24px', textAlign: 'center', color: '#475569', fontFamily: 'monospace' }}>Lade Backtest…</div>;
 
   const d = view.depot;
+  const sigTotal = top20 ? chain(Object.keys(view.years).map(y => sigYears[y])) : null;
   const sortHead = (key, label, left = false) => (
     <th onClick={() => { if (sortKey === key) setSortAsc(p => !p); else { setSortKey(key); setSortAsc(key === 'ticker'); } }}
       style={{ ...head, textAlign: left ? 'left' : 'right', cursor: 'pointer', userSelect: 'none', color: sortKey === key ? '#f1f5f9' : '#64748b' }}>
@@ -217,9 +232,10 @@ function OverviewApp() {
       <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 16 }}>
         {[
           ['Depot heute', Math.round(d.endEquity).toLocaleString('de-DE') + ' €', d.endEquity - d.startCapital],
-          ['Rendite gesamt', pct(d.returnPct, 0), d.returnPct],
+          ['Depot gesamt', pct(d.returnPct, 0), d.returnPct],
           ['Rendite p. a.', pct(d.cagr), d.cagr],
           ['NASDAQ-100 gesamt', pct(d.ndxPct, 0), d.ndxPct],
+          ...(sigTotal != null ? [['Signale ohne Platzlimit', pct(sigTotal, 0), sigTotal]] : []),
           ['Profitfaktor', pfText(d.profitFactor), d.profitFactor - 1],
           ['Max. Rückgang', pct(d.maxDD), d.maxDD],
           ['Trades im Depot', `${d.taken} von ${view.signals.nTrades}`, null],
@@ -231,9 +247,11 @@ function OverviewApp() {
         ))}
       </div>
 
-      <YearTable res={{ ...res, years: view.years, depot: d }} />
+      <YearTable res={{ ...res, years: view.years, depot: d }} sig={top20 ? sigYears : null} />
       <div style={{ fontSize: 11, color: '#475569', fontFamily: 'monospace', margin: '-12px 0 22px' }}>
-        Rendite und Gewinn = Depot im Kalenderjahr · Gesamt = Jahre verkettet (Zinseszins) · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
+        Depot, Gewinn und PF = Depot mit höchstens 10 Plätzen im Kalenderjahr
+        {top20 ? ' · Signale ohne Platzlimit = Gewinn aller Signale (je 10.000 €) mit Verkauf im Jahr / 100.000 € — Maß für die Logik, braucht in starken Phasen mehr als 100.000 €' : ' · bei „Alle Signale“ keine Rechnung ohne Platzlimit (zu viele gleichzeitige Signale für 100.000 €)'}
+        {' · '}Gesamt = Jahre verkettet (Zinseszins) · PF = gekaufte Trades mit Verkauf im Jahr (offene zum aktuellen Kurs) · grün hinterlegt = besser als NASDAQ-100
         {' · '}* laufendes Jahr
       </div>
 
@@ -261,7 +279,7 @@ function OverviewApp() {
           </tr></thead>
           <tbody>
             {stocks.map(r => (
-              <tr key={r.symbol} className="data-row" onClick={() => { window.location.href = `backtest.html?t=${encodeURIComponent(r.symbol)}`; }}
+              <tr key={r.symbol} className="data-row" onClick={() => { window.location.href = `backtest.html?t=${encodeURIComponent(r.symbol)}${top20 ? '' : '&top20=0'}`; }}
                 style={{ borderLeft: `3px solid ${r.open ? '#92400e' : 'transparent'}` }}>
                 <td style={{ ...cell, textAlign: 'left', fontWeight: 700, fontSize: 13, color: '#f1f5f9' }}>
                   {r.label}
