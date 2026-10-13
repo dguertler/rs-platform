@@ -27,7 +27,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import check_exits                                                     # noqa: E402
 from alpaca_live import RECENT_DELAY, fetch_intraday                   # noqa: E402
-from check_alerts import (_breakout_date, analyze_4h_structure, count_points,   # noqa: E402
+from check_alerts import (_breakout_date, analyze_4h_structure, count_points, weekly_reversal_blocks,   # noqa: E402
                           load_signals, load_state, render_chart, save_signals,
                           save_state, send_alert_email, swing_low_stop)
 
@@ -84,7 +84,8 @@ def evaluate(entry, intraday, now):
     daily, weekly = with_today(entry, intraday.get("today"))
     info = count_points({"ohlcv_w": weekly, "ohlcv": daily, "ohlcv_4h": now_rows})
     before = analyze_4h_structure(prev_rows)
-    if info["points"] == 3 and info["h4"] and not (before and before.get("broken4h")):
+    if (info["points"] == 3 and info["h4"] and not (before and before.get("broken4h"))
+            and not weekly_reversal_blocks(info, daily, now_rows)):
         return last, info, {"w": weekly, "d": daily, "h4": now_rows}
     return None
 

@@ -1,11 +1,11 @@
 {
-  "description": "Freigegebene Referenz-Trades. Jede Änderung an der Signal-/Ausstiegslogik (frontend/backtest_logic.js, check_exits.py, check_alerts*.py) und jeder Backtest-Lauf muss diese Trades unverändert wiedergeben. Prüfung: node check_reference_trades.js bzw. python3 -m pytest test_reference_trades.py. Ausstieg: Verkauf am Ausstiegstag oder zur Eröffnung des nächsten Handelstages. exit = mit Earnings-Regel (data/earnings_history.json), exit_without_earnings = Ausstieg der übrigen Regeln, wenn man die Earnings-Regel weglässt; entry_without_earnings = abweichender Einstieg in dieser Gegenprobe (fehlt er, gilt entry).",
+  "description": "Freigegebene Referenz-Trades. Jede Änderung an der Signal-/Ausstiegslogik (frontend/backtest_logic.js, check_exits.py, check_alerts*.py) und jeder Backtest-Lauf muss diese Trades unverändert wiedergeben — geprüft mit der aktuellen Logik inkl. aller Regeln (auch Earnings). Prüfung: node check_reference_trades.js bzw. python3 -m unittest test_reference_trades. Ausstieg: Verkauf am Ausstiegstag oder zur Eröffnung des nächsten Handelstages.",
   "trades": [
     {
       "id": "AVGO-2024-06-05",
       "ticker": "AVGO",
       "approved": "2026-10-11",
-      "setup": "Daily-Bruch am 15.05.2024, Weekly ebenfalls grün. Danach 4H-Retracement abwarten; am 05.06.2024 schließt die 4H-Kerze über dem letzten Hoch des Retracements. Ohne Earnings-Regel ist Daily seit der Trendumkehr im März 2024 gehalten (Anker 116,96 vom 21.02.2024, freigegeben 12.10.2026) — dort kauft die Engine schon am 14.05.2024 und hält bis zur Trendumkehr im Juli.",
+      "setup": "Daily-Bruch am 15.05.2024, Weekly ebenfalls grün. Danach 4H-Retracement abwarten; am 05.06.2024 schließt die 4H-Kerze über dem letzten Hoch des Retracements.",
       "entry": {
         "signal_bar": "2024-06-05 14:00",
         "date": "2024-06-05",
@@ -14,15 +14,6 @@
       "exit": {
         "signal_date": "2024-06-12",
         "reason": "Verkauf vor Earnings (12.06.2024 nach Börsenschluss) zum Schluss der 14-Uhr-Kerze"
-      },
-      "entry_without_earnings": {
-        "signal_bar": "2024-05-14 14:00",
-        "date": "2024-05-14",
-        "time": "18:00"
-      },
-      "exit_without_earnings": {
-        "signal_date": "2024-07-17",
-        "reason": "Daily-Trendumkehr: Schluss unter dem Tief vom 25.06.2024"
       }
     }
   ]

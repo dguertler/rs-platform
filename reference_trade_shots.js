@@ -7,8 +7,8 @@
  *   vorher  = Logik frontend/*.js aus dem letzten Commit (git HEAD)
  *   nachher = frontend/*.js aus dem Arbeitsverzeichnis (die ungesicherte Änderung)
  *
- * Je Referenz-Trade entsteht ein Bild mit zwei Zeilen (mit Earnings-Regel = System, ohne =
- * Gegenprobe) und zwei Spalten (vorher | nachher):
+ * Je Referenz-Trade entsteht ein Bild mit zwei Spalten (vorher | nachher), beide mit der
+ * vollständigen Logik (alle Regeln inkl. Earnings):
  *   out/reference_trades/<ID>.png
  *
  * Aufruf: node reference_trade_shots.js [ID …] [--out DIR] [--w YYYY-MM-DD]
@@ -98,7 +98,7 @@ function serve() {
 
 let composeHtml = '';
 
-async function shoot(browser, port, version, ref, withEarnings, file) {
+async function shoot(browser, port, version, ref, file) {
   const page = await browser.newPage({ viewport: { width: 1500, height: 2200 } });
   // React/Babel immer aus npm (gleiche Versionen wie auf der Seite) — das CDN ist in
   // Cloud-Sessions gesperrt und macht die Bilder sonst vom Netz abhängig
@@ -106,7 +106,7 @@ async function shoot(browser, port, version, ref, withEarnings, file) {
     path: path.join(DEPS, 'node_modules', CDN_FILES[route.request().url().split('/').pop()]),
     contentType: 'application/javascript' }));
   const week = WEEK || ref.entry.date;
-  const url = `http://127.0.0.1:${port}/${version}/frontend/backtest.html?t=${ref.ticker}&w=${week}${withEarnings ? '' : '&er=0'}`;
+  const url = `http://127.0.0.1:${port}/${version}/frontend/backtest.html?t=${ref.ticker}&w=${week}`;
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   page.on('requestfailed', r => errors.push(`${r.url()}: ${r.failure()?.errorText}`));
@@ -134,18 +134,15 @@ async function main() {
   const port = server.address().port;
   for (const ref of refs) {
     const cells = [];
-    for (const withEarnings of [true, false]) {
-      for (const version of ['vorher', 'nachher']) {
-        const name = `${ref.id}_${version}_${withEarnings ? 'mit' : 'ohne'}_earnings.png`;
-        await shoot(browser, port, version, ref, withEarnings, path.join(OUT, name));
-        cells.push({ name, version, withEarnings });
-      }
+    for (const version of ['vorher', 'nachher']) {
+      const name = `${ref.id}_${version}.png`;
+      await shoot(browser, port, version, ref, path.join(OUT, name));
+      cells.push({ name, version });
     }
-    const head = (c) => `${c.version === 'vorher' ? 'VORHER (letzter Commit)' : 'NACHHER (Änderung)'} · `
-      + `${c.withEarnings ? 'mit Earnings-Regel (System)' : 'ohne Earnings-Regel (Gegenprobe)'}`;
+    const head = (c) => (c.version === 'vorher' ? 'VORHER (letzter Commit)' : 'NACHHER (Änderung)');
     composeHtml = `<!doctype html><meta charset="utf-8"><body style="margin:0;background:#020617;color:#e2e8f0;font:14px monospace">
       <div style="padding:10px 14px;font-size:18px;font-weight:700">Referenz-Trade ${ref.id} — Signal ${ref.entry.signal_bar},
-        Kauf ${ref.entry.date} ${ref.entry.time}, Verkauf ${ref.exit.signal_date}${ref.exit_without_earnings ? ` (ohne Earnings-Regel ${ref.exit_without_earnings.signal_date})` : ''}</div>
+        Kauf ${ref.entry.date} ${ref.entry.time}, Verkauf ${ref.exit.signal_date}</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 10px 10px">
       ${cells.map(c => `<div><div style="padding:4px 2px;color:${c.version === 'vorher' ? '#94a3b8' : '#fbbf24'}">${head(c)}</div>
         <img src="/x/shots/${c.name}" style="width:100%;display:block;border:1px solid #1e293b"></div>`).join('')}

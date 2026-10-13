@@ -18,6 +18,8 @@
  *   --halten=W,D,4H: Studie — Ebenen, auf denen das Signal nach einer Trendumkehr bis zum
  *     Schluss unter dem Ausbruchstief grün bleibt (Standard W,D; --halten= ohne Ebene = aus);
  *     nur mit BACKTEST_NDX_OUT
+ *   --wochenumkehr=aus|bestaetigt: Studie — Weekly-Trendumkehr-Regel (4H-Retracement nach dem
+ *     Daily-Ausbruch) aus bzw. nur bei bestätigter Umkehr; nur mit BACKTEST_NDX_OUT
  *   --halteanker=W:tiefstes,D:kerze: Studie — Anker je Ebene (kerze | tiefstes | swingtief | tu,
  *     Standard W:tiefstes, D:tu); nur mit BACKTEST_NDX_OUT
  */
@@ -32,7 +34,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -58,6 +60,12 @@ if (process.argv.includes('--ohne-earningsfall')) {   // Studie: Kauf auch nach 
 if (process.argv.includes('--ohne-fruehbruch')) {   // Studie: Daily-Swing-Tief erst nach zwei Folgekerzen
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--ohne-fruehbruch nur mit BACKTEST_NDX_OUT (Studie)');
   globalThis.__e.setEarlyMarkBreak(false);
+}
+const wrArg = process.argv.find((a) => a.startsWith('--wochenumkehr='));
+if (wrArg) {   // Studie: --wochenumkehr=aus | bestaetigt (Retracement nur bei bestätigter Weekly-Umkehr)
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--wochenumkehr nur mit BACKTEST_NDX_OUT (Studie)');
+  const v = wrArg.slice(15);
+  globalThis.__e.setWeeklyReversalRule(v === 'bestaetigt' ? 'bestaetigt' : v === 'aus' ? false : true);
 }
 const anchorArg = process.argv.find((a) => a.startsWith('--halteanker='));
 if (anchorArg) {   // Studie, z. B. --halteanker=W:tiefstes,D:kerze

@@ -230,6 +230,19 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   (`trailingZone`; AVGO Daily: 15.08.2024 → 133,08, 12.09. → 132,17, 20.09. → 157,16),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
+- **Weekly-Trendumkehr → Retracement abwarten (seit 13.10.2026):** Zeigt Weekly eine
+  Trendumkehr (Ebene nur gehalten oder tieferes Tief unter dem letzten bestätigten Swing-Tief
+  in Bildung), zählt ein 4H-Signal erst, wenn Daily tatsächlich über seine Marke ausgebrochen
+  ist (nicht nur gehalten) und 4H nach dem Tag dieses Daily-Ausbruchs einmal rot war
+  (Retracement). AVGO: kein Kauf 31.07.2024 (Woche 29.07. unterbietet das Tief der Woche
+  22.07., Daily nur gehalten über 161,98) und 13.08.; Daily bricht 158,06 am 15.08., erstes
+  4H-Grün danach am 30.08. vor Earnings gesperrt → Kauf 12.09.2024. Über alle Top-20-Signale
+  214 Trades weg (27.546 €), 56 neu (18.581 €), PF 1,70 → 1,75, Gewinnsumme 286.939 € →
+  277.974 €, größter Rückgang −58.467 € → −56.787 €. Code: `weeklyReversal`/
+  `weeklyReversalRule` in `simulateTradesPIT` (`frontend/backtest_logic.js`), live
+  `check_alerts.weekly_reversal_blocks` (`WEEKLY_REVERSAL_RULE`; Nachtlauf und
+  `check_alerts_4h.py` — ein gesperrtes Signal wird nicht gemeldet und nicht gekauft).
+  Studien: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --wochenumkehr=aus|bestaetigt`
 - **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
@@ -252,8 +265,7 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
   Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,
   Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg),
-  tiefster Anker auch für Daily (zu viele Fehlkäufe, AVGO-PF 2,48 → 1,77), in gehaltenen
-  Fällen nach dem Daily-Bruch erst ein 4H-Retracement abwarten (Gewinnsumme −105.000 €)
+  tiefster Anker auch für Daily (zu viele Fehlkäufe, AVGO-PF 2,48 → 1,77)
 
 ### Ablauf
 
@@ -304,7 +316,8 @@ Die Ausgabe enthält immer:
 | größter Rückgang der Gewinnsumme (€) | | |
 
 Dazu die Jahrestabelle (NASDAQ-100 / bisher / neu je Jahr, dazu Monate über NASDAQ-100
-bisher / neu je Jahr, Summenzeile). Jahresrendite der Signale = Gewinn der im Jahr
+bisher / neu je Jahr, Summenzeile) — Jahresrenditen im Chat **immer als Tabelle**, nie als
+Fließtext. Jahresrendite der Signale = Gewinn der im Jahr
 verkauften Trades (offene: laufendes Jahr, aktueller Kurs) / 100.000 € (10 × 10.000 €,
 Bezugsgröße wie B-ÜBERSICHT); Monatsrendite ebenso je Monat, NASDAQ-100 je Monat aus
 denselben QQQ-Kursen (`ndxMonths` in `data/backtest_ndx.json`).
@@ -343,7 +356,9 @@ unter den Charts nur die Kerzenzahl.
 ## Referenz-Trades (Regressionsschutz)
 
 `data/reference_trades.json` enthält vom Nutzer freigegebene, „perfekte“ Trades.
-Anpassungen an der Logik dürfen an diesen Trades nichts ändern.
+Anpassungen an der Logik dürfen an diesen Trades nichts ändern. Geprüft wird **nur mit der
+aktuellen Logik inkl. aller Regeln** (auch der Earnings-Regel) — keine Gegenprobe ohne eine
+Regel, die zur aktuellen Logik gehört.
 
 - **Prüfen — PFLICHT** vor und nach jeder Änderung an Signal-/Ausstiegslogik
   (`frontend/backtest_logic.js`, `check_exits.py`, `check_alerts*.py`, `gws_core.py`,
@@ -354,11 +369,12 @@ Anpassungen an der Logik dürfen an diesen Trades nichts ändern.
   node check_reference_trades.js              # nur Backtest-Engine, mit Klartext je Trade
   ```
   Eine Variante, die einen Referenz-Trade verändert, gilt als abgelehnt bzw. muss
-  dem Nutzer mit genau dieser Abweichung vorgelegt werden — **immer mit Bild**: Änderung
+  dem Nutzer mit genau dieser Abweichung vorgelegt werden — **mit Bild, aber nur bei einer
+  Abweichung** (ohne Abweichung kein Bild): Änderung
   im Arbeitsverzeichnis lassen, `node reference_trade_shots.js [ID] [--w YYYY-MM-DD]`
   ausführen und `out/reference_trades/<ID>.png` per SendUserFile zeigen (B-DETAILS mit
   Legende, Weekly, Daily und 4H; Spalten vorher = Logik aus dem letzten Commit / nachher =
-  Änderung, Zeilen mit / ohne Earnings-Regel). Erst danach als Patch sichern. Zusätzlich prüft
+  Änderung). Erst danach als Patch sichern. Zusätzlich prüft
   `update_backtest_daily.yml` die Trades täglich mit den aktuellen Kursen
   (Abweichung → Fehler-Mail).
 - **Geprüft wird:** Signal in derselben 4H-Kerze, Kauf zur selben Kerze, Ausstieg am

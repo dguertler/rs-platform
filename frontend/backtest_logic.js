@@ -855,6 +855,25 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
            isWin: pnl > 0, isOpen: true, holdingWeeks: weeks(last.d) };
 }
 
+// Weekly-Trendumkehr → Retracement abwarten (seit 13.10.2026, Backtest und live —
+// check_alerts.weekly_reversal_blocks): Zeigt Weekly eine Trendumkehr (Ebene nur gehalten oder
+// tieferes Tief in Bildung), zählt ein 4H-Signal erst, wenn Daily tatsächlich über seine Marke
+// ausgebrochen ist (nicht nur gehalten) und 4H nach dem Tag dieses Daily-Ausbruchs einmal rot war
+// (Retracement). AVGO: kein Kauf 31.07. (Daily nur gehalten über 161,98) und 13.08.2024, Daily
+// bricht 158,06 am 15.08., Kauf 12.09.2024. Studien: backtest_ndx.js --wochenumkehr=aus|bestaetigt
+let weeklyReversalRule = true;   // true | 'bestaetigt' (nur bestätigte Umkehr = gehalten) | false
+function setWeeklyReversalRule(v) { weeklyReversalRule = v; }
+function weeklyReversal(wBars, wS) {
+  if (wS.held) return true;
+  if (weeklyReversalRule === 'bestaetigt') return false;
+  const lows = wBars.map(b => b.l), n = lows.length;
+  let sl = -1;
+  for (let i = n - 2; i >= 1; i--) if (lows[i] <= lows[i - 1] && lows[i] <= lows[i + 1]) { sl = i; break; }
+  if (sl < 0 || !wS.gwswHigh) return false;
+  // nur Tiefs nach dem Ausbruch über die aktuelle Marke zählen
+  return sl > wS.gwswHigh.idx && Math.min(...lows.slice(sl + 1)) < lows[sl];
+}
+
 // inTop(day) → true/false (Top 20 am Signaltag); null = ohne Top-20-Filter.
 // earnings: Termine des Titels (siehe nextEarnings); null = ohne Earnings-Regel
 function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT_START, earnings = null) {
@@ -887,8 +906,13 @@ function simulateTradesPIT(ohlcv_w, ohlcv_d, ohlcv_4h, inTop = null, start = PIT
       dHistory = ohlcv_d.slice(0, i).concat([{ d: day, o: db.o, h: Math.max(db.o, bar.h), l: Math.min(db.o, bar.l), c: bar.c }]);
     } else dHistory = ohlcv_d.slice(0, i + 1);                          // Tageskerze komplett
     if (dHistory.length < 30) continue;
-    if (!analyzeStructure(dHistory)?.broken) continue;
-    if (!analyzeWeeklyStructure(weeklyUpTo(ohlcv_w, dHistory), dHistory)?.broken) continue;
+    const dS = analyzeStructure(dHistory);
+    if (!dS?.broken) continue;
+    const wBars = weeklyUpTo(ohlcv_w, dHistory);
+    const wS = analyzeWeeklyStructure(wBars, dHistory);
+    if (!wS?.broken) continue;
+    if (weeklyReversalRule && weeklyReversal(wBars, wS)
+        && (dS.breakoutIdx === null || h[j - 1].d.slice(0, 10) <= dHistory[dS.breakoutIdx].d)) continue;
 
     let k = j + 1;
     if (!(blk <= 1 && h[k] && h[k].d.slice(0, 10) === day)) {

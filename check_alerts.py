@@ -30,6 +30,8 @@ from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_
 # zwischen Marke und Ausbruchswoche, Daily Tief der Ausbruchskerze
 HOLD_WEEKLY = True
 HOLD_DAILY = True
+# Weekly-Trendumkehr → 4H-Retracement nach dem Daily-Ausbruch abwarten (weekly_reversal_blocks)
+WEEKLY_REVERSAL_RULE = True
 
 
 def analyze_daily_structure(ohlcv):
@@ -94,16 +96,43 @@ def analyze_weekly_structure(ohlcv_w, ohlcv_d=None):
 
     # broken: GWS durchbrochen ODER kein GWS vorhanden aber klarer Aufwärtstrend
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
+    held = False
     if not broken and gws_high and HOLD_WEEKLY:
-        broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n,
-                                     breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None,
-                                     lowest=True)
+        held = broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n,
+                                            breakout_idx=weekly_breakout_idx(ohlcv_w, ohlcv_d) if ohlcv_d else None,
+                                            lowest=True)
 
     return {
         'broken':       broken,
         'gws_price':    gws_high['price'] if gws_high else None,
         'breakout_idx': breakout_idx,
+        'reversal':     held or (gws_high is not None and _weekly_lower_low_forming(lows, gws_high['idx'])),
     }
+
+
+def _weekly_lower_low_forming(lows, mark_idx):
+    """Tieferes Tief in Bildung wie weeklyReversal in frontend/backtest_logic.js: Kerzen nach
+    dem letzten bestätigten Weekly-Swing-Tief (±1, nach der aktuellen Marke) unterbieten es
+    (AVGO 31.07.2024: Woche 29.07. unter dem Tief der Woche 22.07.)."""
+    n = len(lows)
+    sl = next((i for i in range(n - 2, 0, -1) if lows[i] <= lows[i - 1] and lows[i] <= lows[i + 1]), -1)
+    return mark_idx < sl and min(lows[sl + 1:]) < lows[sl]
+
+
+def weekly_reversal_blocks(info, ohlcv_d, ohlcv_4h):
+    """Weekly-Trendumkehr → Retracement abwarten wie in simulateTradesPIT
+    (frontend/backtest_logic.js, seit 13.10.2026): Zeigt Weekly eine Trendumkehr (nur gehalten
+    oder tieferes Tief in Bildung), zählt das 4H-Signal nur, wenn Daily tatsächlich über seine
+    Marke ausgebrochen ist (nicht nur gehalten) und die 4H-Kerze vor dem Signal (rot) nach dem
+    Tag des Daily-Ausbruchs liegt. AVGO: kein Kauf 31.07. und 13.08.2024, Kauf 12.09.2024.
+    True = kein Signal."""
+    if not WEEKLY_REVERSAL_RULE or not (info.get('struct_w') or {}).get('reversal'):
+        return False
+    d_idx = (info.get('struct_d') or {}).get('breakout_idx')
+    h_idx = (info.get('struct_4h') or {}).get('breakout_idx')
+    if d_idx is None or h_idx is None or h_idx < 1:
+        return True
+    return ohlcv_4h[h_idx - 1]['d'][:10] <= ohlcv_d[d_idx]['d'][:10]
 
 
 def analyze_4h_structure(ohlcv_4h):
@@ -683,6 +712,10 @@ def process_json(json_path, source_label, prev_states, today_str, signals=None):
             # rund die halbe Kapitaleffizienz und den doppelten Drawdown-Beitrag.
             if not new_h4:
                 print(f'  SKIP {ticker}: 3 Punkte erreicht, aber Auslöser war nicht 4H.')
+                continue
+
+            if weekly_reversal_blocks(info, entry.get('ohlcv', []), entry.get('ohlcv_4h', [])):
+                print(f'  SKIP {ticker}: Weekly-Trendumkehr — erst Daily-Ausbruch und 4H-Retracement abwarten.')
                 continue
 
             print(f'  ALERT: {ticker} ({source_label})  {prev_points} → {info["points"]} Punkte'

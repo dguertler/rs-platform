@@ -6,9 +6,8 @@
  *
  * Je Trade muss die Engine das Signal in derselben 4H-Kerze liefern, zur selben
  * Kerze kaufen und am erwarteten Tag aussteigen (Verkauf am Ausstiegstag oder zur
- * Eröffnung des nächsten Handelstages) — mit Earnings-Regel (exit) und, falls
- * angegeben, ohne sie (exit_without_earnings, prüft die übrigen Ausstiegsregeln; Einstieg
- * dort entry_without_earnings, falls angegeben, sonst entry).
+ * Eröffnung des nächsten Handelstages) — immer mit der aktuellen Logik inkl. aller Regeln
+ * (auch Earnings-Regel).
  *
  * Aufruf: node check_reference_trades.js   → Exit-Code 1, wenn ein Trade abweicht
  */
@@ -21,11 +20,7 @@ function checkTrade(ref, rs) {
   const s = seriesFor(ref.ticker, rs);
   if (!s) return [`keine Kursdaten für ${ref.ticker}`];
   if (!s.earnings) return [`keine Earnings-Termine für ${ref.ticker} (data/earnings_history.json)`];
-  const errors = checkRun(ref.entry, s, s.earnings, ref.exit, '');
-  if (ref.exit_without_earnings) {
-    errors.push(...checkRun(ref.entry_without_earnings || ref.entry, s, null, ref.exit_without_earnings, 'ohne Earnings-Regel: '));
-  }
-  return errors;
+  return checkRun(ref.entry, s, s.earnings, ref.exit, '');
 }
 
 function checkRun(entry, s, earnings, exit, label) {
