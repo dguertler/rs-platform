@@ -189,7 +189,7 @@ function OverviewApp() {
     if (!list.length) return null;
     const closed = list.filter(t => !t.isOpen);
     return { trades: list.length, open: list.some(t => t.isOpen), pnl: list.reduce((s, t) => s + t.pnl, 0),
-      ret: (list.reduce((f, t) => f * (1 + t.pnlPct / 100), 1) - 1) * 100,
+      ret: year === 'ALL' ? res.ndxLogic.returnPct : (res.ndxLogic.years[year] ?? 0),   // wie Jahrestabelle
       winrate: closed.length ? closed.filter(t => t.pnl > 0).length / closed.length * 100 : null,
       wins: closed.filter(t => t.pnl > 0).length, closed: closed.length, pf: pfOf(list) };
   }, [res, year]);
