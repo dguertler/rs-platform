@@ -53,6 +53,10 @@ SOURCE_FILES = {
 
 MIN_BARS = 30        # wie analyzeStructure in backtest_logic.js
 STOP_BUFFER = 0.99   # Stopp einen Tick unter das Swing-Tief
+# Einstands-Stopp wie breakEven in backtest_logic.js (seit 13.10.2026): Schließt ein Tag mindestens
+# BREAK_EVEN_R × R über dem Einstieg (R = Einstieg − Stopp), gilt ab dem nächsten Tag der Einstieg
+# als Stopp; ein Schluss darunter → Verkauf zur Eröffnung (Grund „Einstand“)
+BREAK_EVEN_R = 2
 TIME_STOP_ENABLED = False   # wie timeStopEnabled in backtest_logic.js (abgeschaltet seit 12.10.2026)
 TIME_STOP_DAYS = 10  # Zeitstopp wie TIME_STOP_DAYS / TIME_STOP_MIN in backtest_logic.js
 TIME_STOP_MIN = 0.05
@@ -239,6 +243,17 @@ def derive_entry(ohlcv, signal_date):
 
 # ── Ausstieg ──────────────────────────────────────────────────────────────────
 
+def effective_stop(ohlcv, position, i):
+    """Stopp für den Tagesschluss von ohlcv[i]: ursprünglicher Stopp oder — sobald ein Schluss seit
+    dem Einstieg (vor Tag i) mindestens BREAK_EVEN_R × R darüber lag — der Einstieg (Einstand)."""
+    entry, stop = position.get("entry_price"), position.get("stop_price")
+    if not BREAK_EVEN_R or entry is None or stop is None or entry <= stop:
+        return stop, False
+    target = entry + BREAK_EVEN_R * (entry - stop)
+    hit = any(b["d"] >= position["entry_date"] and b["c"] >= target for b in ohlcv[:i])
+    return (entry, True) if hit else (stop, False)
+
+
 def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None):
     """Erster Ausstiegstag nach last_checked. Gibt None zurück, solange keiner vorliegt.
 
@@ -268,8 +283,9 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
         low = trend_low(daily_structure(ohlcv[:i])) if reason is None else None
         if low is not None and day["c"] < low:
             reason = "Trendumkehr"
-        if reason is None and day["c"] < position["stop_price"]:
-            reason = "Stopp"
+        stop, at_entry = effective_stop(ohlcv, position, i)
+        if reason is None and day["c"] < stop:
+            reason = "Einstand" if at_entry else "Stopp"
         if reason is None:
             continue
 
@@ -441,7 +457,10 @@ def collect_new_positions(watchlist, market, signals, positions, closed, earning
 
 def _sl_move(key, position, ohlcv):
     """Neuen wirksamen Stopp berechnen; Änderung gegenüber dem gemeldeten Stand zurückgeben."""
-    level, kind = exit_level(ohlcv, position["stop_price"])
+    stop, at_entry = effective_stop(ohlcv, position, len(ohlcv))
+    level, kind = exit_level(ohlcv, stop)
+    if at_entry and kind == "Stopp":
+        kind = "Einstand"
     prev = position.get("sl_level")
     position["sl_level"] = level
     if prev is None or abs(level - prev) < 0.005:

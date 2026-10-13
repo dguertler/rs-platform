@@ -24,6 +24,7 @@
  *     Standard W:swingtief, D:tu); nur mit BACKTEST_NDX_OUT
  *   --wochenbruch=tagesschluss|wochenschluss: Studie — Weekly-Anker bricht am Tages- bzw. Wochenschluss
  *     statt am Wochentief (Standard); nur mit BACKTEST_NDX_OUT
+ *   --einstand=R:offset[:hoch] | --ohne-einstand: Studie — Einstands-Stopp (Standard 2:0, Tagesschluss)
  *   --wochenanker-fest: Studie — Weekly-Anker bei erneutem Ausbruch nicht nachziehen
  */
 const fs = require('fs');
@@ -37,7 +38,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck, setWeeklyTrail };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck, setWeeklyTrail, setBreakEven };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -78,6 +79,16 @@ if (wbArg) {   // Studie: --wochenbruch=tagesschluss|wochenschluss (Standard tie
 if (process.argv.includes('--wochenanker-fest')) {   // Studie: Weekly-Anker bei erneutem Ausbruch nicht nachziehen
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--wochenanker-fest nur mit BACKTEST_NDX_OUT (Studie)');
   globalThis.__e.setWeeklyTrail(false);
+}
+const beArg = process.argv.find((a) => a.startsWith('--einstand='));
+if (process.argv.includes('--ohne-einstand')) {   // Studie: ohne Einstands-Stopp
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--ohne-einstand nur mit BACKTEST_NDX_OUT (Studie)');
+  globalThis.__e.setBreakEven(null);
+}
+if (beArg) {   // Studie: --einstand=2:0[:hoch] (ab 2R Gewinn Stopp auf Einstieg + 0 × R; Basis Schluss oder Hoch)
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--einstand nur mit BACKTEST_NDX_OUT (Studie)');
+  const [r, offset, basis] = beArg.slice(11).split(':');
+  globalThis.__e.setBreakEven({ r: parseFloat(r), offset: parseFloat(offset || '0'), basis: basis || 'schluss' });
 }
 const anchorArg = process.argv.find((a) => a.startsWith('--halteanker='));
 if (anchorArg) {   // Studie, z. B. --halteanker=W:tiefstes,D:kerze

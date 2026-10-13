@@ -569,6 +569,7 @@ function trendLowOf(struct) {
 const EXIT_REASONS = {
   stopp:       { short: 'SL', label: 'Stopp: Schluss unter dem Stopp',                                   color: '#f87171' },
   trendumkehr: { short: 'TU', label: 'Trendumkehr: Schluss unter dem Tief, aus dem das letzte Hoch entstand', color: '#fb923c' },
+  einstand:    { short: 'BE', label: 'Einstand: nach 2R Gewinn (Tagesschluss) Stopp auf Einstieg, Schluss darunter', color: '#facc15' },
   zeitstopp:   { short: 'ZS', label: 'Zeitstopp: 10 Handelstage nach dem Kauf nicht mind. +5 %',          color: '#c084fc' },
   earnings:    { short: 'ER', label: 'Verkauf vor Earnings (Schluss der 14-Uhr-Kerze)',                   color: '#38bdf8' },
   datenende:   { short: 'DE', label: 'Kursdaten enden (Titel nicht mehr gehandelt)',                      color: '#94a3b8' },
@@ -858,6 +859,14 @@ function earningsExitPrice(ohlcv_d, h4, day) {
   return bar ? bar.c : ohlcv_d.find(b => b.d === day)?.c;
 }
 
+// Einstands-Stopp (seit 13.10.2026, Backtest und live — check_exits.effective_stop): Schließt ein
+// Tag mindestens breakEven.r × R über dem Einstieg (R = Einstieg − Stopp), rückt der Stopp ab dem
+// nächsten Tag auf Einstieg + breakEven.offset × R; ein Schluss darunter → Verkauf zur Eröffnung
+// (Grund 'einstand'). Über alle Top-20-Signale PF 1,82 → 1,83, Gewinnsumme +1.652 €. Studien:
+// backtest_ndx.js --einstand=R:offset[:hoch] bzw. --ohne-einstand
+let breakEven = { r: 2, offset: 0, basis: 'schluss' };
+function setBreakEven(v) { breakEven = v; }
+
 // Ein Trade ab Einstieg (Tag + Kurs): Stopp, Ausstieg und Zeitstopp wie simulateTrades.
 // earn = { earnings, h4 }: Verkauf vor den nächsten Zahlen (siehe oben)
 function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
@@ -874,6 +883,7 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
   const weeks = d => Math.round((new Date(d) - new Date(entry.entryDate)) / (7 * 864e5));
   const nextE = nextEarnings(earn?.earnings, entry.entryDate);
   const sellDay = nextE ? earningsSellDay(ohlcv_d, nextE) : null;
+  let curStop = stopPrice;
   for (let k = idx; k < ohlcv_d.length; k++) {
     if (sellDay && sellDay >= entry.entryDate && ohlcv_d[k].d >= sellDay) {
       const exitDate = ohlcv_d[k].d, exitPrice = earningsExitPrice(ohlcv_d, earn.h4, exitDate);
@@ -881,7 +891,13 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
       return { ...entry, exitDate, exitPrice, exitReason: 'earnings', pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
                isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
     }
-    const exitReason = exitReasonOf(ohlcv_d, k, stopPrice, entry);
+    let exitReason = exitReasonOf(ohlcv_d, k, curStop, entry);
+    if (exitReason === 'stopp' && curStop > stopPrice) exitReason = 'einstand';
+    if (!exitReason && breakEven && curStop < entryPrice + breakEven.offset * (entryPrice - stopPrice)) {
+      const R = entryPrice - stopPrice;
+      const px = breakEven.basis === 'hoch' ? ohlcv_d[k].h : ohlcv_d[k].c;
+      if (px >= entryPrice + breakEven.r * R) curStop = entryPrice + breakEven.offset * R;
+    }
     if (!exitReason) continue;
     const next = ohlcv_d[k + 1];
     const exitPrice = next ? next.o : ohlcv_d[k].c;

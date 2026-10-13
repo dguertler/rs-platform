@@ -255,9 +255,17 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `check_alerts.weekly_reversal_blocks` (`WEEKLY_REVERSAL_RULE`; Nachtlauf und
   `check_alerts_4h.py` — ein gesperrtes Signal wird nicht gemeldet und nicht gekauft).
   Studien: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --wochenumkehr=aus|bestaetigt`
-- **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99
+- **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99. **Einstand (seit 13.10.2026):** Schließt
+  ein Tag mindestens 2R über dem Einstieg (R = Einstieg − Stopp), gilt ab dem nächsten Tag der
+  Einstieg als Stopp; ein Schluss darunter → Verkauf zur Eröffnung, Kürzel BE (über alle
+  Top-20-Signale 7 Trades mit anderem Ausstieg, 1 neu, PF 1,82 → 1,83, Gewinnsumme 273.958 € →
+  275.610 €, Gesamtrendite verkettet +700,6 % → +711,0 %; früher nachziehen schlechter: ab 1R
+  per Tagesschluss +677,3 %, ab 1R per Tageshoch +638,2 %). Code: `breakEven` in
+  `tradeFromEntry` (`frontend/backtest_logic.js`), live `check_exits.effective_stop`
+  (`BREAK_EVEN_R`, Verkaufsmeldung „Einstand“ und SL-Verschiebung). Studien:
+  `--einstand=R:offset[:hoch]`, `--ohne-einstand`
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
-  Stopp (SL) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
+  Stopp (SL) · Einstand nach 2R (BE) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
   entstand (TU) · Verkauf vor Earnings zum Schluss der 14-Uhr-Kerze (ER). Daily-Signale
   → Verkauf zur Eröffnung am Folgetag. **Kein Zeitstopp** (abgeschaltet seit
   12.10.2026; Kürzel ZS nur noch bei `--mit-zeitstopp`).

@@ -48,7 +48,7 @@ function ChartLegendMarkers({ showSL = false, benchLabel = null }) {
       {showSL && (
         <div style={item}>
           <svg width="20" height="8"><line x1="0" y1="4" x2="20" y2="4" stroke="#e2e8f0" strokeWidth="1.2" strokeDasharray="4,3" opacity="0.85"/></svg>
-          <span style={txt}>SL = Stopp beim Kauf (Swing-Tief × 0,99, nur Daily)</span>
+          <span style={txt}>SL = Stopp beim Kauf (Swing-Tief × 0,99, nur Daily); nach 2R Gewinn per Tagesschluss gilt der Einstieg als Stopp (BE)</span>
         </div>
       )}
       <div style={item}>
@@ -67,7 +67,7 @@ function ChartLegendMarkers({ showSL = false, benchLabel = null }) {
       )}
       <div style={item}>
         <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-        <span style={txt}>Gültigkeitsbereich (kräftig = nur gehalten): ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
+        <span style={txt}>Gültigkeitsbereich (kräftig = nur gehalten): ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch, bei erneutem Ausbruch nachgezogen; Wochentief darunter beendet das Signal); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
       </div>
       <div style={{...item, flexBasis:"100%", flexWrap:"wrap", gap:"2px 12px"}}>
         <span style={{display:"flex",alignItems:"center",gap:4}}>

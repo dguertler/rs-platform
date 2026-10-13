@@ -486,7 +486,7 @@ function ChartLegend({ benchLabel = null, showSignal = false }) {
       )}
       <div style={item}>
         <svg width="14" height="10"><rect width="14" height="10" fill="#22c55e" opacity="0.3"/><line x1="0" x2="14" y1="9.5" y2="9.5" stroke="#22c55e" strokeDasharray="2,2"/></svg>
-        <span style={txt}>Gültigkeitsbereich (kräftig = nur gehalten): ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (tiefstes Tief vor dem Ausbruch); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
+        <span style={txt}>Gültigkeitsbereich (kräftig = nur gehalten): ab Ausbruchskerze, vom höchsten Hoch seit dem Ausbruch bis zur gestrichelten Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch, bei erneutem Ausbruch nachgezogen; Wochentief darunter beendet das Signal); Daily/4H: Swing-Tief vor dem Ausbruch (SL-Höhe), springt bei jedem weiteren Ausbruch nach oben auf das Swing-Tief davor</span>
       </div>
     </div>
   );

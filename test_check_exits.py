@@ -85,6 +85,27 @@ class TestFindExit(unittest.TestCase):
         self.assertTrue(hit is None or hit["signal_date"] >= "2026-02-01")
 
 
+class TestBreakEvenStop(unittest.TestCase):
+    """Einstands-Stopp wie breakEven in backtest_logic.js: nach einem Schluss ≥ Einstieg + 2R gilt
+    der Einstieg als Stopp, ein Schluss darunter → Verkauf „Einstand“."""
+
+    def test_einstand_nach_2r(self):
+        from check_exits import effective_stop
+        rows = rising(40)                                   # Schlusskurse steigen bis ~139
+        pos = {"entry_date": rows[20]["d"], "entry_price": 125.0, "stop_price": 120.0}   # R = 5, 2R bei 135
+        self.assertEqual(effective_stop(rows, pos, 21), (120.0, False))
+        self.assertEqual(effective_stop(rows, pos, len(rows)), (125.0, True))
+
+    def test_verkauf_einstand_bei_schluss_unter_dem_einstieg(self):
+        rows = rising(40)
+        rows.append(bar("2026-02-10", 139.0, 139.5, 123.0, 124.0))   # unter Einstieg 125, über Stopp 120
+        rows.append(bar("2026-02-11", 124.0, 125.0, 122.0, 124.5))
+        pos = {"entry_date": rows[20]["d"], "entry_price": 125.0, "stop_price": 120.0}
+        hit = find_exit(rows, pos, None)
+        self.assertEqual(hit["reason"], "Einstand")
+        self.assertEqual(hit["signal_date"], "2026-02-10")
+
+
 class TestCollectNewPositions(unittest.TestCase):
     """Nur 4H-Auslöser, nur Watchlist-Titel, keine bereits abgeschlossenen Signale."""
 
