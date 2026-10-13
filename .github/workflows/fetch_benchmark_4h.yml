@@ -1,0 +1,49 @@
+name: QQQ-4H-Kerzen ab 2016 laden (NASDAQ-100 mit Logik)
+
+permissions:
+  contents: write
+
+# Nur manuell: lädt die 4H-Historie von QQQ über Alpaca nach
+# data/backtest_history/charts/QQQ.json (Grundlage für „NASDAQ-100 mit Logik“
+# auf B-ÜBERSICHT und in compare_backtest.js). Laufende Kurse danach täglich über
+# update_backtest_daily.py (data/backtest_qqq.json).
+on:
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Abhängigkeiten installieren
+        run: pip install pandas yfinance
+
+      - name: QQQ-4H-Kerzen laden
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+        run: python backtest_history/fetch_benchmark_4h.py
+
+      - name: Tageskerzen QQQ für die laufenden Kurse anlegen
+        env:
+          ALPACA_API_KEY:    ${{ secrets.ALPACA_API_KEY }}
+          ALPACA_API_SECRET: ${{ secrets.ALPACA_API_SECRET }}
+        run: python -c "import update_backtest_daily as u; print(u.update_ticker('QQQ'))"
+
+      - name: Committen und pushen
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/backtest_history/charts/QQQ.json data/backtest_qqq.json
+          git diff --staged --quiet || git commit -m "QQQ-4H-Kerzen ab 2016 geladen"
+          git pull --rebase origin master
+          git push origin master

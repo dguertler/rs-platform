@@ -222,6 +222,11 @@ def main():
                 tickers.append(t)
                 seen.add(t)
 
+    # QQQ für „NASDAQ-100 mit Logik“ (backtest_ndx.js → ndxLogic)
+    if "QQQ" not in seen:
+        tickers.append("QQQ")
+        seen.add("QQQ")
+
     # Vorhandene Dateien aktualisieren; für alle Indextitel (tickers aus
     # rs_full.json + rs_sp500.json) fehlende Dateien anlegen, damit
     # B-Übersicht/B-Details die volle 4H-Historie haben
