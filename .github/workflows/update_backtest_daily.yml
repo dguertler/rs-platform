@@ -58,7 +58,7 @@ jobs:
           git config user.email "actions@github.com"
           git add data/backtest_*.json data/live_alerts.json data/live_alerts_performance.json data/top20_performance.json data/backtest_ndx.json
           git diff --staged --quiet || git commit -m "Backtest-Daten täglich aktualisiert"
-          git pull --rebase origin master
+          git pull --rebase --autostash -X theirs origin master
           git push origin master
 
       # Freigegebene Referenz-Trades (data/reference_trades.json) müssen mit den
