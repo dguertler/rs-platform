@@ -266,7 +266,12 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `--einstand=R:offset[:hoch]`, `--ohne-einstand`
 - **Ausstiege** (Grund je Trade als `exitReason`, in Charts/Listen als Kürzel):
   Stopp (SL) · Einstand nach 2R (BE) · Trendumkehr = Schluss unter dem Tief, aus dem das letzte Hoch
-  entstand (TU) · Verkauf vor Earnings zum Schluss der 14-Uhr-Kerze (ER). Daily-Signale
+  entstand (TU; war dieses Tief schon vor dem Kauf per Schluss unterschritten, ist es verbraucht —
+  dann gilt bis zum nächsten Swing-Hoch das tiefste Tief seit dem Bruch bis vor den Kauftag, seit
+  13.10.2026; CDNS 29.06.2026: 375,94 vom 12.06. schon am 24./25.06. gebrochen → 358,76 vom 26.06.;
+  über alle Top-20-Signale 116 Trades mit anderem Ausstieg (−14.403 € → +19.425 €), 40 Wiedereinstiege
+  weg, PF 1,83 → 1,86, Gewinnsumme 275.610 € → 292.403 €, Gesamtrendite verkettet +711,0 % → +828,3 %;
+  `entryTrendLow`, live `check_exits.entry_trend_low`, Studie ohne `--tu-alt`) · Verkauf vor Earnings zum Schluss der 14-Uhr-Kerze (ER). Daily-Signale
   → Verkauf zur Eröffnung am Folgetag. **Kein Zeitstopp** (abgeschaltet seit
   12.10.2026; Kürzel ZS nur noch bei `--mit-zeitstopp`).
   Code: `exitReasonOf`/`tradeFromEntry`, live `check_exits.find_exit`

@@ -97,6 +97,22 @@ def trend_low(struct):
     return lows[-1]["price"] if lows else None
 
 
+def entry_trend_low(ohlcv, struct, entry_date):
+    """Trendumkehr-Tief für eine offene Position wie entryTrendLow in backtest_logic.js (seit
+    13.10.2026): War das Tief schon vor dem Kauf per Schluss unterschritten (verbraucht), gilt bis
+    zum nächsten Swing-Hoch das tiefste Tief seit diesem Bruch bis vor den Kauftag (CDNS 29.06.2026:
+    375,94 vom 12.06. am 24./25.06. gebrochen → 358,76 vom 26.06.)."""
+    low = trend_low(struct)
+    if low is None or not entry_date:
+        return low
+    last_high = struct["swing_highs"][-1]["idx"]
+    e = next((i for i, b in enumerate(ohlcv) if b["d"] >= entry_date), None)
+    if e is None or last_high >= e:
+        return low
+    first = next((i for i in range(last_high + 1, e) if ohlcv[i]["c"] < low), None)
+    return low if first is None else min(b["l"] for b in ohlcv[first:e])
+
+
 # ── Earnings (wie nextEarnings/earningsSellDay in backtest_logic.js) ──────────
 
 def load_earnings():
@@ -280,7 +296,7 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
         if (TIME_STOP_ENABLED and entry_idx is not None and i - entry_idx == TIME_STOP_DAYS
                 and day["c"] < position["entry_price"] * (1 + TIME_STOP_MIN)):
             reason = "Zeitstopp"
-        low = trend_low(daily_structure(ohlcv[:i])) if reason is None else None
+        low = entry_trend_low(ohlcv, daily_structure(ohlcv[:i]), position["entry_date"]) if reason is None else None
         if low is not None and day["c"] < low:
             reason = "Trendumkehr"
         stop, at_entry = effective_stop(ohlcv, position, i)
@@ -303,12 +319,12 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
     return None
 
 
-def exit_level(ohlcv, stop_price):
+def exit_level(ohlcv, stop_price, entry_date=None):
     """Wirksamer Stopp für den nächsten Handelstag: (Kurs, Art).
 
     Ein Schluss unter dem Trendumkehr-Tief löst ebenfalls aus — es gilt der
-    höhere der beiden Werte."""
-    low = trend_low(daily_structure(ohlcv))
+    höhere der beiden Werte (vor dem Kauf verbrauchtes Tief: entry_trend_low)."""
+    low = entry_trend_low(ohlcv, daily_structure(ohlcv), entry_date)
     if low is not None and low > stop_price:
         return round(low, 2), "Trendumkehr-Tief"
     return round(stop_price, 2), "Stopp"
@@ -458,7 +474,7 @@ def collect_new_positions(watchlist, market, signals, positions, closed, earning
 def _sl_move(key, position, ohlcv):
     """Neuen wirksamen Stopp berechnen; Änderung gegenüber dem gemeldeten Stand zurückgeben."""
     stop, at_entry = effective_stop(ohlcv, position, len(ohlcv))
-    level, kind = exit_level(ohlcv, stop)
+    level, kind = exit_level(ohlcv, stop, position.get("entry_date"))
     if at_entry and kind == "Stopp":
         kind = "Einstand"
     prev = position.get("sl_level")

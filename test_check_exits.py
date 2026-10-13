@@ -8,7 +8,7 @@ Swing-Hoch — oder unter dem Stopp), Ausführung zur Eröffnung des Folgetages.
 """
 import unittest
 
-from check_exits import collect_new_positions, derive_entry, find_exit
+from check_exits import collect_new_positions, daily_structure, derive_entry, find_exit
 
 
 def bar(date, open_, high, low, close):
@@ -104,6 +104,24 @@ class TestBreakEvenStop(unittest.TestCase):
         hit = find_exit(rows, pos, None)
         self.assertEqual(hit["reason"], "Einstand")
         self.assertEqual(hit["signal_date"], "2026-02-10")
+
+
+class TestVerbrauchtesTrendumkehrTief(unittest.TestCase):
+    """Trendumkehr-Tief, das schon vor dem Kauf per Schluss unterschritten war, zählt nicht —
+    es gilt das tiefste Tief seit dem Bruch (wie entryTrendLow in backtest_logic.js)."""
+
+    def test_cdns_2026(self):
+        import json, os
+        from check_exits import entry_trend_low
+        path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "backtest_history", "charts", "CDNS.json")
+        if not os.path.exists(path):
+            self.skipTest("Kursdatei CDNS fehlt")
+        with open(path) as f:
+            d = [{"d": r[0], "o": r[1], "h": r[2], "l": r[3], "c": r[4]} for r in json.load(f)["d"]]
+        if d[-1]["d"] < "2026-06-30":
+            self.skipTest("Kursdatei CDNS endet vor 06/2026")
+        rows = [b for b in d if b["d"] < "2026-06-30"]
+        self.assertAlmostEqual(entry_trend_low(rows, daily_structure(rows), "2026-06-29"), 358.76, places=2)
 
 
 class TestCollectNewPositions(unittest.TestCase):

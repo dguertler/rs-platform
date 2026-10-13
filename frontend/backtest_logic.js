@@ -578,10 +578,28 @@ const EXIT_REASONS = {
 // Ausstiegsgrund am Tagesschluss von dHistory[k] ('zeitstopp' | 'trendumkehr' |
 // 'stopp') oder null: Zeitstopp, Schluss unter dem Trendumkehr-Tief (aus den
 // Kerzen davor) oder unter dem Stopp. Ausführung am nächsten Handelstag zur Eröffnung.
+// Verbrauchtes Trendumkehr-Tief (seit 13.10.2026, Backtest und live — check_exits.entry_trend_low):
+// War das Trendumkehr-Tief schon vor dem Kauf per Schluss unterschritten, gilt bis zum nächsten
+// Swing-Hoch das tiefste Tief seit diesem Bruch bis vor den Kauftag (das Tief, aus dem der Anstieg
+// zum Kauf kam; CDNS 29.06.2026: 375,94 vom 12.06. schon am 24./25.06. gebrochen → 358,76 vom
+// 26.06.). Über alle Top-20-Signale PF 1,83 → 1,86, Gewinnsumme +16.793 €. Studie ohne: --tu-alt
+let freshTrendLow = true;
+function setFreshTrendLow(on) { freshTrendLow = !!on; }
+function entryTrendLow(dHistory, struct, entry) {
+  const trendLow = trendLowOf(struct);
+  if (!freshTrendLow || !entry || trendLow == null) return trendLow;
+  const lastHigh = struct.swingHighs[struct.swingHighs.length - 1];
+  const e = dHistory.findIndex(b => b.d >= entry.entryDate);
+  if (e < 0 || lastHigh.idx >= e) return trendLow;
+  let first = -1;
+  for (let i = lastHigh.idx + 1; i < e; i++) if (dHistory[i].c < trendLow) { first = i; break; }
+  return first < 0 ? trendLow : Math.min(...dHistory.slice(first, e).map(b => b.l));
+}
+
 function exitReasonOf(dHistory, k, stopPrice, entry = null) {
   const day = dHistory[k];
   if (entry && isTimeStop(dHistory, k, entry)) return 'zeitstopp';
-  const trendLow = trendLowOf(analyzeStructure(dHistory.slice(0, k)));
+  const trendLow = entryTrendLow(dHistory, analyzeStructure(dHistory.slice(0, k)), entry);
   if (trendLow != null && day.c < trendLow) return 'trendumkehr';
   return stopPrice != null && day.c < stopPrice ? 'stopp' : null;
 }
