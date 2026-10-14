@@ -277,8 +277,16 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
     Handelstag vor den nächsten Zahlen. Liegt dieser Tag nach dem letzten Kurs, aber
     spätestens heute (today), wird der Verkauf schon als anstehend gemeldet."""
     entry_idx = next((k for k, b in enumerate(ohlcv) if b["d"] >= position["entry_date"]), None)
-    e = next_earnings(earnings, position["entry_date"])
-    sell_day = earnings_sell_day(ohlcv, e) if e else None
+    # Erste Zahlen, deren Verkaufstag noch nicht geprüft wurde — ein Termin, der schon vor
+    # last_checked lag, löst nicht nachträglich aus (MRVL 12.10.2026: Zahlen 27.08., Position erst
+    # ab 09.10. verfolgt → fälschlich „Earnings“ verkauft)
+    e, sell_day, after = None, None, position["entry_date"]
+    while True:
+        e = next_earnings(earnings, after)
+        sell_day = earnings_sell_day(ohlcv, e) if e else None
+        if not (sell_day and last_checked and sell_day <= last_checked):
+            break
+        after = (datetime.strptime(e[0], "%Y-%m-%d") + timedelta(days=1)).strftime("%Y-%m-%d")
     if sell_day and sell_day < position["entry_date"]:
         sell_day = None
     when = {"amc": "nach Börsenschluss", "bmo": "vor Börsenbeginn"}.get(e[1], "Uhrzeit offen") if e else ""

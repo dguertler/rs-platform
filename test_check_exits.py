@@ -245,6 +245,16 @@ class TestEarnings(unittest.TestCase):
         hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-10", "bmo"]])
         self.assertEqual(hit["exit_date"], "2026-01-09")
 
+    def test_bereits_vergangene_zahlen_loesen_nicht_nachtraeglich_aus(self):
+        # MRVL 12.10.2026: Zahlen lagen vor dem ersten geprüften Tag → kein Earnings-Verkauf
+        earnings = [["2026-01-05", "amc"], ["2026-01-30", "amc"]]
+        self.assertIsNone(find_exit(self.ohlcv, self.pos, "2026-01-08", earnings, today="2026-01-20"))
+
+    def test_naechste_zahlen_nach_der_pruefung_gelten_weiter(self):
+        earnings = [["2026-01-05", "amc"], ["2026-01-15", "amc"]]
+        hit = find_exit(self.ohlcv, self.pos, "2026-01-08", earnings)
+        self.assertEqual(hit["exit_date"], "2026-01-15")
+
     def test_anstehender_verkauf_wird_am_verkaufstag_gemeldet(self):
         hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-21", "amc"]], today="2026-01-21")
         self.assertTrue(hit["pending"])
