@@ -57,6 +57,9 @@ STOP_BUFFER = 0.99   # Stopp einen Tick unter das Swing-Tief
 # BREAK_EVEN_R × R über dem Einstieg (R = Einstieg − Stopp), gilt ab dem nächsten Tag der Einstieg
 # als Stopp; ein Schluss darunter → Verkauf zur Eröffnung (Grund „Einstand“)
 BREAK_EVEN_R = 2
+# Durch die Zahlen halten (seit 14.10.2026, wie earningsHoldR in backtest_logic.js): Lag vor dem
+# Verkaufstag schon ein Schluss ≥ Einstieg + EARNINGS_HOLD_R × R, wird vor den Zahlen nicht verkauft
+EARNINGS_HOLD_R = 2
 TIME_STOP_ENABLED = False   # wie timeStopEnabled in backtest_logic.js (abgeschaltet seit 12.10.2026)
 TIME_STOP_DAYS = 10  # Zeitstopp wie TIME_STOP_DAYS / TIME_STOP_MIN in backtest_logic.js
 TIME_STOP_MIN = 0.05
@@ -270,6 +273,15 @@ def effective_stop(ohlcv, position, i):
     return (entry, True) if hit else (stop, False)
 
 
+def holds_through_earnings(ohlcv, position, before):
+    """True, wenn seit dem Einstieg vor dem Tag `before` ein Schluss ≥ Einstieg + EARNINGS_HOLD_R × R lag."""
+    entry, stop = position.get("entry_price"), position.get("stop_price")
+    if EARNINGS_HOLD_R is None or entry is None or stop is None or entry <= stop:
+        return False
+    target = entry + EARNINGS_HOLD_R * (entry - stop)
+    return any(position["entry_date"] <= b["d"] < before and b["c"] >= target for b in ohlcv)
+
+
 def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None):
     """Erster Ausstiegstag nach last_checked. Gibt None zurück, solange keiner vorliegt.
 
@@ -295,7 +307,7 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
             continue
         if last_checked and day["d"] <= last_checked:
             continue
-        if sell_day and day["d"] >= sell_day:
+        if sell_day and day["d"] >= sell_day and not holds_through_earnings(ohlcv, position, sell_day):
             return {"signal_date": day["d"], "exit_date": day["d"], "reason": f"Earnings am {e[0]} ({when})",
                     "exit_price": h4_close_14(h4, day["d"]) or day["c"], "pending": False,
                     "earnings": True}
@@ -321,7 +333,8 @@ def find_exit(ohlcv, position, last_checked, earnings=None, h4=None, today=None)
             "reason": reason,
             "pending": nxt is None,   # Ausführung erst am nächsten Handelstag
         }
-    if sell_day and ohlcv and ohlcv[-1]["d"] < sell_day <= (today or "0000"):
+    if (sell_day and ohlcv and ohlcv[-1]["d"] < sell_day <= (today or "0000")
+            and not holds_through_earnings(ohlcv, position, sell_day)):
         return {"signal_date": sell_day, "exit_date": sell_day, "reason": f"Earnings am {e[0]} ({when})",
                 "exit_price": ohlcv[-1]["c"], "pending": True, "earnings": True}
     return None
@@ -408,7 +421,8 @@ def build_email_html(exits, moves=()):
   <p style="color:#475569;font-size:11px;margin-top:24px;line-height:1.6">
     Regel wie im Backtest: Schluss unter dem Stopp bzw. unter dem Tief, aus dem
     das letzte Hoch entstanden ist (Trendumkehr) — Verkauf zur Eröffnung des
-    Folgetages —, oder vor Earnings zum Schluss der 14-Uhr-Kerze am Tag davor.
+    Folgetages —, oder vor Earnings zum Schluss der 14-Uhr-Kerze am Tag davor
+    (entfällt, wenn der Trade vorher schon 2R im Gewinn geschlossen hat).
     Die Meldung bezieht sich auf das Signal des Systems, nicht auf deinen
     tatsächlichen Depotbestand.
   </p>
@@ -472,7 +486,7 @@ def collect_new_positions(watchlist, market, signals, positions, closed, earning
             "source": latest.get("source") or market[ticker]["source"],
             "signal_date": latest["signal_date"],
             "last_checked": None,
-            "adopted": True,          # erster Lauf: Altbestand nicht melden
+            "adopted": True,          # erster Lauf: keine SL-Verschiebung melden
             **entry,
         }
         opened.append(key)
@@ -529,7 +543,8 @@ def process_watchlist(market=None, signals=None):
             continue
         hit = find_exit(data["ohlcv"], position, position.get("last_checked"),
                         earnings.get(position["ticker"]), data.get("ohlcv_4h"), today)
-        if hit and hit["pending"] and not position.get("adopted"):
+        # Jedes Verkaufssignal kommt genau einmal in die Mail — auch bei neu erfassten Positionen
+        if hit and hit["pending"]:
             # Signal steht, Verkauf zur nächsten Eröffnung — jetzt melden, Position
             # erst nach der Ausführung schließen (dann ohne zweite Meldung)
             if position.get("exit_reported") != hit["signal_date"]:
@@ -539,11 +554,7 @@ def process_watchlist(market=None, signals=None):
         if hit and not hit["pending"]:
             positions.pop(key)
             closed[key] = position["signal_date"]
-            if position.get("adopted"):
-                # Beim ersten Erfassen liegt der Ausstieg oft schon Wochen zurück —
-                # das ist keine Handlungsaufforderung und wird nicht gemeldet.
-                print(f"  {key}: Signal bereits abgeschlossen ({hit['signal_date']}), nicht gemeldet")
-            elif position.get("exit_reported") != hit["signal_date"]:
+            if position.get("exit_reported") != hit["signal_date"]:
                 exits.append({**position, **hit})
             continue
         position["last_checked"] = data["ohlcv"][-1]["d"]

@@ -39,7 +39,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck, setWeeklyTrail, setBreakEven, setFreshTrendLow };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck, setWeeklyTrail, setBreakEven, setFreshTrendLow, setEarningsHoldR };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -90,6 +90,12 @@ if (beArg) {   // Studie: --einstand=2:0[:hoch] (ab 2R Gewinn Stopp auf Einstieg
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--einstand nur mit BACKTEST_NDX_OUT (Studie)');
   const [r, offset, basis] = beArg.slice(11).split(':');
   globalThis.__e.setBreakEven({ r: parseFloat(r), offset: parseFloat(offset || '0'), basis: basis || 'schluss' });
+}
+const ehArg = process.argv.find((a) => a.startsWith('--earnings-halten='));
+if (ehArg) {   // Studie: durch die Zahlen halten ab R (aus = immer vor den Zahlen verkaufen)
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--earnings-halten nur mit BACKTEST_NDX_OUT (Studie)');
+  const v = ehArg.slice(18);
+  globalThis.__e.setEarningsHoldR(v === 'aus' ? null : parseFloat(v));
 }
 if (process.argv.includes('--tu-alt')) {   // Studie: auch ein vor dem Kauf gebrochenes Trendumkehr-Tief verwenden
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--tu-alt nur mit BACKTEST_NDX_OUT (Studie)');

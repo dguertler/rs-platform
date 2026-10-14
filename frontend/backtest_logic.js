@@ -885,6 +885,13 @@ function earningsExitPrice(ohlcv_d, h4, day) {
 let breakEven = { r: 2, offset: 0, basis: 'schluss' };
 function setBreakEven(v) { breakEven = v; }
 
+// Durch die Zahlen halten ab 2R (seit 14.10.2026, Backtest und live — check_exits.EARNINGS_HOLD_R):
+// Hatte der Trade vor dem Verkaufstag schon einen Schluss ≥ Einstieg + earningsHoldR × R, wird vor
+// den Zahlen nicht verkauft (Einstand-Stopp schützt). Über alle Top-20-Signale PF 1,85 → 1,93,
+// Gesamtrendite verkettet +815,8 % → +911,5 %. Studien: backtest_ndx.js --earnings-halten=R|aus
+let earningsHoldR = 2;
+function setEarningsHoldR(v) { earningsHoldR = v; }
+
 // Ein Trade ab Einstieg (Tag + Kurs): Stopp, Ausstieg und Zeitstopp wie simulateTrades.
 // earn = { earnings, h4 }: Verkauf vor den nächsten Zahlen (siehe oben)
 function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
@@ -901,15 +908,17 @@ function tradeFromEntry(ohlcv_d, entryDate, entryPrice, extra, earn = null) {
   const weeks = d => Math.round((new Date(d) - new Date(entry.entryDate)) / (7 * 864e5));
   const nextE = nextEarnings(earn?.earnings, entry.entryDate);
   const sellDay = nextE ? earningsSellDay(ohlcv_d, nextE) : null;
-  let curStop = stopPrice;
+  let curStop = stopPrice, maxClose = -Infinity;
   for (let k = idx; k < ohlcv_d.length; k++) {
-    if (sellDay && sellDay >= entry.entryDate && ohlcv_d[k].d >= sellDay) {
+    const holdThrough = earningsHoldR != null && maxClose >= entryPrice + earningsHoldR * (entryPrice - stopPrice);
+    if (sellDay && sellDay >= entry.entryDate && ohlcv_d[k].d >= sellDay && !holdThrough) {
       const exitDate = ohlcv_d[k].d, exitPrice = earningsExitPrice(ohlcv_d, earn.h4, exitDate);
       const pnl = (exitPrice - entryPrice) * shares;
       return { ...entry, exitDate, exitPrice, exitReason: 'earnings', pnl, pnlPct: (exitPrice / entryPrice - 1) * 100,
                isWin: pnl > 0, isOpen: false, holdingWeeks: weeks(exitDate) };
     }
     let exitReason = exitReasonOf(ohlcv_d, k, curStop, entry);
+    maxClose = Math.max(maxClose, ohlcv_d[k].c);
     if (exitReason === 'stopp' && curStop > stopPrice) exitReason = 'einstand';
     if (!exitReason && breakEven && curStop < entryPrice + breakEven.offset * (entryPrice - stopPrice)) {
       const R = entryPrice - stopPrice;

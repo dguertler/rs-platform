@@ -167,6 +167,45 @@ class TestCollectNewPositions(unittest.TestCase):
         self.assertEqual(len(pending), 1)
 
 
+class TestVerkaufImmerMelden(unittest.TestCase):
+    """Jedes Verkaufssignal kommt in die Mail — auch bei einer gerade erst erfassten Position."""
+
+    def run_watchlist(self, rows, state):
+        from unittest import mock
+        import check_exits
+        saved = {}
+        with mock.patch.object(check_exits, "load_watchlist", return_value={"MU"}), \
+             mock.patch.object(check_exits, "load_json", return_value=state), \
+             mock.patch.object(check_exits, "load_earnings", return_value={}), \
+             mock.patch.object(check_exits, "save_state", side_effect=lambda s: saved.update(s)):
+            exits, _ = check_exits.process_watchlist({"MU": {"ohlcv": rows, "source": "QQQ"}}, {})
+        return exits, saved
+
+    def position(self, rows):
+        return {"ticker": "MU", "source": "QQQ", "signal_date": rows[29]["d"], "last_checked": None,
+                "adopted": True, "entry_date": rows[30]["d"], "entry_price": 130.0, "stop_price": 120.0}
+
+    def test_neu_erfasste_position_mit_offenem_verkauf_wird_gemeldet(self):
+        rows = rising(40) + [bar("2026-02-10", 139.0, 139.5, 100.0, 101.0)]
+        exits, saved = self.run_watchlist(rows, {"positions": {"MU": self.position(rows)}, "closed": {}})
+        self.assertEqual([e["signal_date"] for e in exits], ["2026-02-10"])
+        self.assertIn("MU", saved["positions"])          # Ausführung erst zur nächsten Eröffnung
+
+    def test_neu_erfasste_position_mit_ausgefuehrtem_verkauf_wird_gemeldet(self):
+        rows = rising(40) + [bar("2026-02-10", 139.0, 139.5, 100.0, 101.0),
+                             bar("2026-02-11", 99.0, 100.0, 98.0, 99.5)]
+        exits, saved = self.run_watchlist(rows, {"positions": {"MU": self.position(rows)}, "closed": {}})
+        self.assertEqual(len(exits), 1)
+        self.assertNotIn("MU", saved["positions"])
+
+    def test_bereits_gemeldeter_verkauf_nicht_doppelt(self):
+        rows = rising(40) + [bar("2026-02-10", 139.0, 139.5, 100.0, 101.0),
+                             bar("2026-02-11", 99.0, 100.0, 98.0, 99.5)]
+        pos = {**self.position(rows), "exit_reported": "2026-02-10"}
+        exits, _ = self.run_watchlist(rows, {"positions": {"MU": pos}, "closed": {}})
+        self.assertEqual(exits, [])
+
+
 if __name__ == "__main__":
     unittest.main()
 
@@ -254,6 +293,17 @@ class TestEarnings(unittest.TestCase):
         earnings = [["2026-01-05", "amc"], ["2026-01-15", "amc"]]
         hit = find_exit(self.ohlcv, self.pos, "2026-01-08", earnings)
         self.assertEqual(hit["exit_date"], "2026-01-15")
+
+    def test_ab_2r_durch_die_zahlen_halten(self):
+        # R = 101 − 95 = 6, 2R bei 113 — Schluss 113,5 am 14.01., Zahlen 17.01. → kein Verkauf
+        pos = {"entry_date": "2026-01-02", "entry_price": 101.0, "stop_price": 95.0}
+        self.assertIsNone(find_exit(self.ohlcv, pos, None, [["2026-01-17", "amc"]]))
+
+    def test_unter_2r_vor_den_zahlen_verkaufen(self):
+        pos = {"entry_date": "2026-01-02", "entry_price": 101.0, "stop_price": 95.0}
+        hit = find_exit(self.ohlcv, pos, None, [["2026-01-10", "amc"]])
+        self.assertTrue(hit["earnings"])
+        self.assertEqual(hit["exit_date"], "2026-01-10")
 
     def test_anstehender_verkauf_wird_am_verkaufstag_gemeldet(self):
         hit = find_exit(self.ohlcv, self.pos, None, [["2026-01-21", "amc"]], today="2026-01-21")
