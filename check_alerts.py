@@ -22,7 +22,7 @@ import matplotlib.patches as mpatches
 # Funktionen aus index.html
 
 from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_breakout,
-                      provisional_mark_break, weekly_anchor_low, weekly_closed_below,
+                      held_breakout_idx, provisional_mark_break, retracement_zone, weekly_anchor_low, weekly_closed_below,
                       swing_low_stop, weekly_breakout_idx)
 
 # Signal halten nach Trendumkehr (Weekly und Daily, wie holdSignal in
@@ -30,6 +30,8 @@ from gws_core import (_find_swing_points, _gws_core, gws_candidates, held_after_
 # vor der Ausbruchswoche (Tagesschluss darunter), Daily Anker 'tu' (gws_core.tu_anchor_low)
 HOLD_WEEKLY = True
 HOLD_DAILY = True
+# Daily erlischt bei Schluss unter der Rücksetzer-Untergrenze (gws_core.retracement_zone)
+DAILY_RETR_ZONE = True
 # Weekly-Trendumkehr → 4H-Retracement nach dem Daily-Ausbruch abwarten (weekly_reversal_blocks)
 WEEKLY_REVERSAL_RULE = True
 
@@ -60,8 +62,13 @@ def analyze_daily_structure(ohlcv):
             trend = 'bearish'
 
     broken = breakout_idx is not None or (gws_high is None and trend == 'bullish')
+    zone_b = breakout_idx
     if not broken and gws_high and HOLD_DAILY:
-        broken = held_after_breakout(gws_candidates(swing_highs, swing_lows), closes, lows, n)
+        zone_b = held_breakout_idx(gws_candidates(swing_highs, swing_lows), closes, lows, n)
+        broken = zone_b is not None
+    if broken and DAILY_RETR_ZONE and zone_b is not None \
+            and retracement_zone(highs, lows, closes, zone_b, n) is None:
+        broken = False
     return {
         'broken':      broken,
         'gws_price':   gws_high['price'] if gws_high else None,

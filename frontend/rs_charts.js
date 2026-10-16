@@ -98,6 +98,39 @@ function trailingZone(highs, lows, closes, b, n) {
   }
   return start >= 0 ? { from: start, top, low } : null;
 }
+// Daily-Gültigkeit (seit 16.10.2026, Backtest = Live gws_core.retracement_zone): Untergrenze ist
+// das Swing-Tief vor dem Ausbruch b. Sie rückt nur nach einem Rücksetzer von mindestens
+// RETR_MIN_DAYS Handelstagen (zwei Wochenkerzen) zwischen dem bisherigen höchsten Hoch und einem
+// neuen Hoch darüber nach — auf das tiefste Tief dieses Rücksetzers. Ein Schluss darunter beendet
+// das Daily-Signal; ein neues beginnt beim nächsten Schluss über einem Swing-Hoch (MRNA 06.05.2021:
+// Tief 143,56 unter 153,27, Schluss 160,50 darüber → bleibt). { from, top, low } oder null.
+const RETR_MIN_DAYS = 10;
+function retracementZone(highs, lows, closes, b, n) {
+  const isLow  = k => k >= 1 && k + 1 < n && lows[k] <= lows[k - 1] && lows[k] <= lows[k + 1];
+  const isHigh = k => k >= 1 && k + 1 < n && highs[k] >= highs[k - 1] && highs[k] >= highs[k + 1];
+  const lowBefore = s => {
+    for (let k = s - 2; k >= 1; k--) if (isLow(k)) return lows[k];   // bestätigt vor s
+    return Math.min(...lows.slice(Math.max(0, s - 5), s + 1));
+  };
+  const highAfter = (k, after) => {
+    for (let j = k - 2; j > after; j--) if (isHigh(j)) return highs[j];
+    return null;
+  };
+  let start = b, low = lowBefore(b), peak = highs[b], peakIdx = b, last = b;
+  for (let k = b + 1; k < n; k++) {
+    if (start >= 0) {
+      if (closes[k] < low) { start = -1; last = k; continue; }
+      if (highs[k] > peak) {
+        if (k - peakIdx >= RETR_MIN_DAYS) low = Math.min(...lows.slice(peakIdx, k + 1));
+        peak = highs[k]; peakIdx = k;
+      }
+    } else {
+      const sh = highAfter(k, last);
+      if (sh != null && closes[k] > sh) { start = k; low = lowBefore(k); peak = highs[k]; peakIdx = k; last = k; }
+    }
+  }
+  return start >= 0 ? { from: start, top: peak, low } : null;
+}
 function zoneFrom(bars, z) {
   return z ? { from: bars[z.from].d, top: z.top, anchor: z.low } : null;
 }
@@ -243,10 +276,13 @@ function analyzeStructure(ohlcv) {
   // held: grün nur durch das Signal-Halten (Marke selbst ungebrochen) — Chart-Hinterlegung
   const heldD        = gwsdHigh !== null && breakoutIdx === null ? heldBreakout(gwsdCandidates, closes, lows, n) : null;
   const held         = heldD !== null;
-  const broken       = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
-  // Gültigkeitsbereich: ab Ausbruchskerze, unten nachgezogenes Swing-Tief (nur Darstellung)
-  const zone = breakoutIdx !== null ? zoneFrom(ohlcv, trailingZone(highs, lows, closes, breakoutIdx, n))
-    : held ? zoneFrom(ohlcv, trailingZone(highs, lows, closes, heldD.b, n)) : null;
+  let broken         = breakoutIdx !== null || (gwsdHigh === null && trend === "bullish") || held;
+  // Gültigkeitsbereich wie backtest_logic.js: Untergrenze nach retracementZone, ein Schluss
+  // darunter beendet das Daily-Signal
+  const zb = breakoutIdx !== null ? breakoutIdx : held ? heldD.b : null;
+  const rz = zb === null ? null : retracementZone(highs, lows, closes, zb, n);
+  if (zb !== null && !rz) broken = false;
+  const zone = rz ? zoneFrom(ohlcv, rz) : null;
   const currentClose = closes[n - 1];
 
   const recentBreakout = broken && (n - 1 - breakoutIdx <= 7);

@@ -44,15 +44,15 @@ class EarningsDropRuleTest(unittest.TestCase):
 @unittest.skipUnless(os.path.exists(AVGO_CHART) and os.path.exists(EARNINGS), "Kurs- oder Termindatei fehlt")
 class AvgoSeptember2023Test(unittest.TestCase):
     """AVGO: Zahlen 31.08.2023 nach Börsenschluss, 01.09. Schluss 84,02 nach 88,79 (−5,4 %),
-    Daily bleibt grün bzw. gehalten → kein Kauf am 14.09. und Anfang Oktober; frei erst nach
-    dem Schluss über 88,79 am 10.11.2023."""
+    Daily bleibt bis 20.09. grün → kein Kauf am 14.09.; am 21.09. wird Daily rot (Schluss unter
+    der Rücksetzer-Untergrenze, gws_core.retracement_zone) → Sperre ab dann aufgehoben."""
 
     def test_live_block(self):
         d = [{"d": r[0], "o": r[1], "h": r[2], "l": r[3], "c": r[4]} for r in json.load(open(AVGO_CHART))["d"]]
         e = json.load(open(EARNINGS))["tickers"]["AVGO"]
         got = [bool(check_exits.earnings_drop_block(e, [b for b in d if b["d"] < day], day))
                for day in ("2023-09-01", "2023-09-14", "2023-10-02", "2023-11-13")]
-        self.assertEqual(got, [False, True, True, False])
+        self.assertEqual(got, [False, True, False, False])
 
     def test_backtest_engine_skips_trade(self):
         out = subprocess.run(["node", "inspect_ticker.js", "AVGO", "2023-09-01", "2023-09-30"],

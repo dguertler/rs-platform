@@ -52,6 +52,12 @@ def _gws_core(swing_highs, swing_lows, closes, n, min_margin=0.001):
 
 def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_idx=None, weekly=False,
                         closed_below=None):
+    """True, wenn die Ebene über das Signal-Halten grün bleibt (siehe held_breakout_idx)."""
+    return held_breakout_idx(candidates, closes, lows, n, min_margin, breakout_idx, weekly, closed_below) is not None
+
+
+def held_breakout_idx(candidates, closes, lows, n, min_margin=0.001, breakout_idx=None, weekly=False,
+                      closed_below=None):
     """Signal halten wie heldAfterBreakout in frontend/backtest_logic.js: Hat ein
     tieferes Tief eine neue, noch ungebrochene Marke gebildet (Trendumkehr), bleibt die
     Ebene grün, solange seit der Ausbruchskerze der zuletzt gebrochenen Marke kein
@@ -78,9 +84,54 @@ def held_after_breakout(candidates, closes, lows, n, min_margin=0.001, breakout_
             t = (nxt or {}).get('tief_neu')
             start = t['idx'] if t and t['idx'] > b else b + 1
         if closed_below and weekly:
-            return not closed_below(b, anchor)
-        return all(closes[i] >= anchor for i in range(start, n))
-    return False
+            return None if closed_below(b, anchor) else b
+        return b if all(closes[i] >= anchor for i in range(start, n)) else None
+    return None
+
+
+RETR_MIN_DAYS = 10
+
+
+def retracement_zone(highs, lows, closes, b, n):
+    """Daily-Gültigkeit wie retracementZone in frontend/backtest_logic.js (seit 16.10.2026):
+    Untergrenze = Swing-Tief vor dem Ausbruch b; sie rückt nur nach einem Rücksetzer von
+    mindestens RETR_MIN_DAYS Handelstagen zwischen dem bisherigen höchsten Hoch und einem neuen
+    Hoch darüber nach (tiefstes Tief des Rücksetzers). Ein Schluss darunter beendet das Signal,
+    ein neues beginnt beim nächsten Schluss über einem Swing-Hoch. Rückgabe: Untergrenze oder
+    None (Signal erloschen)."""
+    def is_low(k):
+        return 1 <= k and k + 1 < n and lows[k] <= lows[k - 1] and lows[k] <= lows[k + 1]
+
+    def is_high(k):
+        return 1 <= k and k + 1 < n and highs[k] >= highs[k - 1] and highs[k] >= highs[k + 1]
+
+    def low_before(s):
+        for k in range(s - 2, 0, -1):
+            if is_low(k):
+                return lows[k]
+        return min(lows[max(0, s - 5):s + 1])
+
+    def high_after(k, after):
+        for j in range(k - 2, after, -1):
+            if is_high(j):
+                return highs[j]
+        return None
+
+    active, low, peak, peak_idx, last = True, low_before(b), highs[b], b, b
+    for k in range(b + 1, n):
+        if active:
+            if closes[k] < low:
+                active, last = False, k
+                continue
+            if highs[k] > peak:
+                if k - peak_idx >= RETR_MIN_DAYS:
+                    low = min(lows[peak_idx:k + 1])
+                peak, peak_idx = highs[k], k
+        else:
+            sh = high_after(k, last)
+            if sh is not None and closes[k] > sh:
+                active, low, peak, peak_idx, last = True, low_before(k), highs[k], k, k
+    return low if active else None
 
 
 def weekly_anchor_low(lows, mark_idx, b):

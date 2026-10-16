@@ -230,16 +230,31 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --halten=W,D,4H`,
   `--halteanker=W:tiefstes,D:kerze` (kerze | tiefstes | swingtief | tu) bzw.
   `--wochenbruch=tagesschluss|wochenschluss`, `--wochenanker-fest`
+- **Daily erlischt unter der Rücksetzer-Untergrenze (seit 16.10.2026):** Untergrenze ist das
+  Swing-Tief vor dem Daily-Ausbruch (bzw. vor der Ausbruchskerze der gehaltenen Marke). Sie rückt
+  **nur nach einem Rücksetzer von mindestens 10 Handelstagen** (zwei Wochenkerzen) zwischen dem
+  bisherigen höchsten Hoch und einem neuen Hoch darüber nach — auf das tiefste Tief dieses
+  Rücksetzers; kürzere Rücksetzer setzen kein neues Low. Ein **Schluss** darunter macht Daily rot
+  (ein Tief darunter mit Schluss darüber nicht — MRNA 06.05.2021: Tief 143,56 unter 153,27, Schluss
+  160,50); ein neues Signal beginnt beim nächsten Schluss über einem Swing-Hoch. NFLX 27.09.2017
+  bleibt gültig (Hochs 12.–21.09. ohne 10-Tage-Rücksetzer → Low 17,63 vom 08.09., Schluss 25.09.
+  17,86 darüber); AVGO: Daily rot ab 21.09.2023. Über alle Top-20-Signale 36 Trades weg (3.720 €),
+  12 neu (4.029 €), PF 1,90 → 1,93, Gewinnsumme 298.350 € → 298.659 €, Gesamtrendite verkettet
+  +900,5 % → +909,0 %, größter Rückgang −42.465 € → −41.509 €; verworfen: Untergrenze bei jedem
+  Ausbruch über ein Swing-Hoch nachziehen (wie das alte Chart-Band) — per Schluss +591,9 %, per Tief
+  +600,9 %. Code: `retracementZone` in `frontend/backtest_logic.js` und `frontend/rs_charts.js`,
+  live `gws_core.retracement_zone` (`DAILY_RETR_ZONE` in `check_alerts.py`). Studie ohne:
+  `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --tageszone-alt`
 - **Gültigkeitsbereiche in den Charts** (Weekly, Daily, 4H auf B-DETAILS und den
   Index-/Watchlist-Seiten): grün transparentes Band von der Ausbruchskerze bis zur
   letzten grünen Kerze, vom höchsten Hoch seit der Ausbruchskerze bis zur gestrichelten
   Linie — Weekly: Anker des Signals (letztes Swing-Tief vor dem Ausbruch, bei erneutem Ausbruch
-  nachgezogen); Daily/4H (nur Darstellung, Logik unverändert):
+  nachgezogen); Daily: Rücksetzer-Untergrenze (siehe oben, Logik = Band); 4H (nur Darstellung):
   Swing-Tief vor dem Ausbruch (SL-Höhe; nur ein schon vor der Ausbruchskerze bestätigtes —
   AVGO Daily 14.05.2026: 404,92 vom 07.05., nicht 403,43 vom 13.05.); bei jedem weiteren Ausbruch nach oben (Schluss
   über dem letzten Swing-Hoch) springt es auf das Swing-Tief vor diesem Ausbruch; ein
   Schluss darunter beendet das Band, ein neues beginnt beim nächsten Ausbruch
-  (`trailingZone`; AVGO Daily: 15.08.2024 → 133,08, 12.09. → 132,17, 20.09. → 157,16),
+  (`trailingZone`),
   kräftiger, wenn die Ebene nur gehalten ist — je Kerze zeitpunktgenau (`zone` je
   Struktur, `weeklyZones`/`dailyZones`/`h4Zones`)
 - **Weekly-Trendumkehr → Retracement abwarten (seit 13.10.2026):** Zeigt Weekly eine
@@ -301,6 +316,8 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
 - **Verworfen (nicht erneut vorschlagen ohne neuen Anlass):** Weekly als letzter
   Punkt, Daily-Fakeout-Sperre, Retracement-Varianten als Ersatz-Einstieg,
   Signal halten auf 4H (Gewinnsumme 204.991 € → 172.381 €, nimmt Wiedereinstiege weg),
+  Daily-Trendumkehr → zweites 4H-Signal abwarten (Gesamtrendite +896,9 % → +574,2 %; Kaufsperre
+  solange Daily nur gehalten: +447,2 %),
   tiefster Anker auch für Daily (zu viele Fehlkäufe, AVGO-PF 2,48 → 1,77)
 
 ### Ablauf

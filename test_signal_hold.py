@@ -209,3 +209,47 @@ class ZsWeeklyTrailTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestRetracementZone(unittest.TestCase):
+    """Daily erlischt erst bei Schluss unter der Untergrenze; sie rückt nur nach einem Rücksetzer
+    von mindestens 10 Handelstagen nach (gws_core.retracement_zone = retracementZone in JS)."""
+
+    @staticmethod
+    def series(lows_closes, highs):
+        return [h for h in highs], [l for l, _ in lows_closes], [c for _, c in lows_closes]
+
+    def js(self, highs, lows, closes, b):
+        import json, subprocess
+        snippet = ("const fs = require('fs'), vm = require('vm');"
+                   "vm.runInThisContext(fs.readFileSync('frontend/backtest_logic.js', 'utf8'));"
+                   f"const z = retracementZone({json.dumps(highs)}, {json.dumps(lows)}, {json.dumps(closes)}, {b}, {len(highs)});"
+                   "console.log(JSON.stringify(z ? z.low : null));")
+        return json.loads(subprocess.run(["node", "-e", snippet], capture_output=True, text=True, check=True).stdout)
+
+    def check(self, highs, lows, closes, b, expected):
+        from gws_core import retracement_zone
+        self.assertEqual(retracement_zone(highs, lows, closes, b, len(highs)), expected)
+        self.assertEqual(self.js(highs, lows, closes, b), expected)
+
+    def test_tief_darunter_schluss_darueber_bleibt(self):
+        # Swing-Tief 8 vor dem Ausbruch (Index 4); Index 6 Tief 7 < 8, Schluss 9 > 8 → bleibt
+        highs  = [10, 9, 9.5, 9, 11, 12, 11]
+        lows   = [9, 8.5, 8, 8.5, 10, 11, 7]
+        closes = [9.5, 9, 9, 9, 10.8, 11.5, 9]
+        self.check(highs, lows, closes, 4, 8)
+
+    def test_kurzer_ruecksetzer_ruekt_nicht_nach(self):
+        # neues Hoch 3 Tage nach dem alten → Untergrenze bleibt 8, Schluss 8,5 hält
+        highs  = [10, 9, 9.5, 9, 11, 12, 11.5, 11, 13, 10]
+        lows   = [9, 8.5, 8, 8.5, 10, 11, 10.5, 10, 12, 8.2]
+        closes = [9.5, 9, 9, 9, 10.8, 11.5, 11, 10.5, 12.5, 8.5]
+        self.check(highs, lows, closes, 4, 8)
+
+    def test_langer_ruecksetzer_setzt_neues_tief(self):
+        # Hoch 12 an Index 5, Rücksetzer bis Index 15 (10 Tage), Tief 10,2 → neue Untergrenze
+        highs  = [10, 9, 9.5, 9, 11, 12] + [11.5] * 9 + [12.5, 12]
+        lows   = [9, 8.5, 8, 8.5, 10, 11] + [10.5, 10.4, 10.2] + [10.6] * 6 + [11.5, 11]
+        closes = [9.5, 9, 9, 9, 10.8, 11.5] + [11] * 9 + [12.4, 11.8]
+        self.check(highs, lows, closes, 4, 10.2)
+        self.check(highs + [10.5], lows + [9.9], closes + [10.0], 4, None)   # Schluss unter 10,2 → erloschen
