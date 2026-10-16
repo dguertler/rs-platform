@@ -546,10 +546,20 @@ function buildWeekRows(ohlcv_w, ohlcv_d, ohlcv_4h, from = 0, to = ohlcv_w.length
 // ── Stopp und Ausstieg (gemeinsam für simulateTrades und simulateFromEntry) ────
 // Letztes Swing-Tief (von beiden Nachbartagen nicht unterboten) der Tageskerzen
 // vor dem Einstieg; sonst das Minimum der letzten fünf Kerzen.
+// Stopp-Tief (seit 16.10.2026, live gws_core.swing_low_stop): Ein Swing-Tief, das vor dem Kauf
+// schon per Schluss unterschritten war, ist verbraucht — dann gilt das tiefste Tief seit dem
+// Bruch (NFLX 27.09.2017: 18,32 vom 20.09. am 25.09. gebrochen → 17,66 vom 26.09.).
+// Studie ohne: backtest_ndx.js --sl-alt
+let freshStopLow = true;
+function setFreshStopLow(on) { freshStopLow = !!on; }
 function recentSwingLowOf(barsBeforeEntry) {
   for (let k = barsBeforeEntry.length - 2; k >= 1; k--) {
-    if (barsBeforeEntry[k].l <= barsBeforeEntry[k-1].l && barsBeforeEntry[k].l <= barsBeforeEntry[k+1].l)
-      return barsBeforeEntry[k].l;
+    if (barsBeforeEntry[k].l <= barsBeforeEntry[k-1].l && barsBeforeEntry[k].l <= barsBeforeEntry[k+1].l) {
+      const low = barsBeforeEntry[k].l;
+      if (!freshStopLow) return low;
+      const first = barsBeforeEntry.findIndex((b, i) => i > k && b.c < low);
+      return first < 0 ? low : Math.min(...barsBeforeEntry.slice(first).map(b => b.l));
+    }
   }
   return barsBeforeEntry.length > 0 ? Math.min(...barsBeforeEntry.slice(-5).map(d => d.l)) : null;
 }

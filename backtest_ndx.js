@@ -25,6 +25,7 @@
  *   --wochenbruch=tagesschluss|wochenschluss: Studie — Weekly-Anker bricht am Tages- bzw. Wochenschluss
  *     statt am Wochentief (Standard); nur mit BACKTEST_NDX_OUT
  *   --einstand=R:offset[:hoch] | --ohne-einstand: Studie — Einstands-Stopp (Standard 2:0, Tagesschluss)
+ *   --sl-alt: Studie — Stopp auch aus einem vor dem Kauf schon per Schluss gebrochenen Swing-Tief
  *   --tu-alt: Studie — Trendumkehr-Tief auch verwenden, wenn es schon vor dem Kauf gebrochen war
  *   --wochenanker-fest: Studie — Weekly-Anker bei erneutem Ausbruch nicht nachziehen
  */
@@ -39,7 +40,7 @@ const OUT = process.env.BACKTEST_NDX_OUT || path.join(DATA, 'backtest_ndx.json')
 const MAX_POSITIONS = 10;
 
 vm.runInThisContext(fs.readFileSync(path.join(ROOT, 'frontend', 'backtest_logic.js'), 'utf8')
-  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setWeeklyBreakCheck, setWeeklyTrail, setBreakEven, setFreshTrendLow, setEarningsHoldR };');
+  + '\n;globalThis.__e = { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START, setTimeStop, setHoldSignal, setHoldAnchor, setEarlyMarkBreak, setEarningsDropRule, setWeeklyReversalRule, setFreshStopLow, setWeeklyBreakCheck, setWeeklyTrail, setBreakEven, setFreshTrendLow, setEarningsHoldR };');
 const { simulateTradesPIT, mergeSeries, chartToSeries, top20Lookup, PIT_START } = globalThis.__e;
 const { kpis } = require('./backtest_kpis');
 const { simulatePortfolio, portfolioStats } = require('./backtest_history/portfolio');
@@ -71,6 +72,10 @@ if (wrArg) {   // Studie: --wochenumkehr=aus | bestaetigt (Retracement nur bei b
   if (!process.env.BACKTEST_NDX_OUT) throw new Error('--wochenumkehr nur mit BACKTEST_NDX_OUT (Studie)');
   const v = wrArg.slice(15);
   globalThis.__e.setWeeklyReversalRule(v === 'bestaetigt' ? 'bestaetigt' : v === 'aus' ? false : true);
+}
+if (process.argv.includes('--sl-alt')) {   // Studie: Stopp auch aus einem vor dem Kauf gebrochenen Swing-Tief
+  if (!process.env.BACKTEST_NDX_OUT) throw new Error('--sl-alt nur mit BACKTEST_NDX_OUT (Studie)');
+  globalThis.__e.setFreshStopLow(false);
 }
 const wbArg = process.argv.find((a) => a.startsWith('--wochenbruch='));
 if (wbArg) {   // Studie: --wochenbruch=tagesschluss|wochenschluss (Standard tief: womit der Weekly-Anker bricht)

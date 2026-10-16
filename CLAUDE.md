@@ -255,7 +255,13 @@ für Backtest und Live** (Seiten, Mails, Modell-Depot) — nie nur für eines vo
   `check_alerts.weekly_reversal_blocks` (`WEEKLY_REVERSAL_RULE`; Nachtlauf und
   `check_alerts_4h.py` — ein gesperrtes Signal wird nicht gemeldet und nicht gekauft).
   Studien: `BACKTEST_NDX_OUT=/tmp/x.json node backtest_ndx.js --wochenumkehr=aus|bestaetigt`
-- **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99. **Einstand (seit 13.10.2026):** Schließt
+- **Stopp:** letztes Daily-Swing-Tief vor dem Kauf × 0,99 — **war es vor dem Kauf schon per Schluss
+  unterschritten, ist es verbraucht; dann gilt das tiefste Tief seit dem Bruch** (seit 16.10.2026; NFLX
+  27.09.2017: 18,32 vom 20.09. am 25.09. gebrochen → 17,66 vom 26.09., Stopp 17,48 statt 18,14, Trade
+  +5,5 % bis 10.11. statt −0,5 % am 29.09.; über alle Top-20-Signale 9 Trades weg, 10 neu, 36 mit anderem
+  Ausstieg, PF 1,91 → 1,90, Gewinnsumme 296.963 € → 298.350 €, Gesamtrendite verkettet +896,9 % → +900,5 %,
+  Monate über NASDAQ-100 63 → 66 von 130; `recentSwingLowOf`, live `gws_core.swing_low_stop`, Studie ohne
+  `--sl-alt`). **Einstand (seit 13.10.2026):** Schließt
   ein Tag mindestens 2R über dem Einstieg (R = Einstieg − Stopp), gilt ab dem nächsten Tag der
   Einstieg als Stopp; ein Schluss darunter → Verkauf zur Eröffnung, Kürzel BE (über alle
   Top-20-Signale 7 Trades mit anderem Ausstieg, 1 neu, PF 1,82 → 1,83, Gewinnsumme 273.958 € →

@@ -310,3 +310,32 @@ class TestEarnings(unittest.TestCase):
         self.assertTrue(hit["pending"])
         self.assertEqual(hit["exit_date"], "2026-01-21")
         self.assertIsNone(find_exit(self.ohlcv, self.pos, None, [["2026-01-21", "amc"]], today="2026-01-20"))
+
+
+class TestVerbrauchtesStoppTief(unittest.TestCase):
+    """Stopp-Tief, das schon vor dem Kauf per Schluss unterschritten war, zählt nicht — es gilt
+    das tiefste Tief seit dem Bruch, live (gws_core.swing_low_stop) wie im Backtest
+    (recentSwingLowOf in frontend/backtest_logic.js). NFLX-Kauf 27.09.2017."""
+
+    BARS = [bar("2017-09-18", 18.36, 18.55, 18.27, 18.46), bar("2017-09-19", 18.50, 18.62, 18.42, 18.57),
+            bar("2017-09-20", 18.61, 18.65, 18.32, 18.55), bar("2017-09-21", 18.58, 19.00, 18.45, 18.88),
+            bar("2017-09-22", 18.84, 18.98, 18.64, 18.73), bar("2017-09-25", 18.65, 18.66, 17.77, 17.86),
+            bar("2017-09-26", 18.07, 18.09, 17.66, 17.94)]
+
+    def js_stop(self, bars):
+        import json, subprocess
+        snippet = ("const fs = require('fs'), vm = require('vm');"
+                   "vm.runInThisContext(fs.readFileSync('frontend/backtest_logic.js', 'utf8'));"
+                   f"console.log(JSON.stringify(recentSwingLowOf({json.dumps(bars)})));")
+        return json.loads(subprocess.run(["node", "-e", snippet], capture_output=True, text=True, check=True).stdout)
+
+    def test_nflx_2017_tiefstes_tief_seit_dem_bruch(self):
+        from gws_core import swing_low_stop
+        self.assertAlmostEqual(swing_low_stop(self.BARS), 17.66 * 0.99, places=4)
+        self.assertAlmostEqual(self.js_stop(self.BARS), 17.66, places=4)
+
+    def test_ungebrochenes_swing_tief_bleibt(self):
+        from gws_core import swing_low_stop
+        bars = self.BARS[:5]
+        self.assertAlmostEqual(swing_low_stop(bars), 18.32 * 0.99, places=4)
+        self.assertAlmostEqual(self.js_stop(bars), 18.32, places=4)

@@ -197,10 +197,18 @@ def swing_low_stop(bars, buffer=0.99):
     von beiden Nachbartagen nicht unterboten wird, mit einem Puffer darunter.
     Fällt auf das Minimum der letzten fünf Kerzen zurück, wenn es kein solches
     Tief gibt. Gibt None zurück, wenn zu wenige Kerzen vorliegen.
+
+    Ein Swing-Tief, das vor dem Kauf schon per Schluss unterschritten war, ist
+    verbraucht — dann gilt das tiefste Tief seit dem Bruch (seit 16.10.2026,
+    NFLX 27.09.2017: 18,32 vom 20.09. am 25.09. gebrochen → 17,66 vom 26.09.).
     """
     if not bars or len(bars) < 3:
         return None
     for k in range(len(bars) - 2, 0, -1):
         if bars[k]['l'] <= bars[k - 1]['l'] and bars[k]['l'] <= bars[k + 1]['l']:
-            return bars[k]['l'] * buffer
+            low = bars[k]['l']
+            first = next((i for i in range(k + 1, len(bars)) if bars[i]['c'] < low), None)
+            if first is not None:
+                low = min(b['l'] for b in bars[first:])
+            return low * buffer
     return min(b['l'] for b in bars[-5:]) * buffer
