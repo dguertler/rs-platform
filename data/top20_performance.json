@@ -1,47 +1,47 @@
 {
- "generated": "2026-10-15 07:20",
+ "generated": "2026-10-17 07:09",
  "capital": 10000,
  "maxRisk": 1000,
  "note": "Einstiege = tatsächlich verschickte Alerts (Kauf zur Eröffnung am Alert-Tag), Stopp/Ausstieg wie frontend/backtest_logic.js, eine Position je Titel.",
- "alertsSent": 374,
+ "alertsSent": 376,
  "indices": {
   "QQQ": {
    "name": "NASDAQ-100",
    "start": "2026-04-14",
-   "lastBar": "2026-10-14",
+   "lastBar": "2026-10-16",
    "benchmark": "QQQ",
-   "benchmarkPct": 16.211778209992666,
+   "benchmarkPct": 13.158817715142046,
    "kpis": {
     "nTrades": 88,
-    "nClosed": 77,
-    "nOpen": 11,
+    "nClosed": 82,
+    "nOpen": 6,
     "nTickers": 48,
-    "winrate": 35.064935064935064,
-    "totalPnl": 45930,
-    "realizedPnl": 16493,
-    "openPnl": 29437,
+    "winrate": 36.58536585365854,
+    "totalPnl": 41681,
+    "realizedPnl": 16807,
+    "openPnl": 24874,
     "invested": 690741,
-    "returnOnInvested": 6.64938088226991,
-    "avgPnlPerTrade": 521.9318181818181,
-    "avgReturnPerTrade": 7.190909090909097,
+    "returnOnInvested": 6.034244383929722,
+    "avgPnlPerTrade": 473.64772727272725,
+    "avgReturnPerTrade": 6.632954545454549,
     "avgInvested": 7849.329545454545,
     "avgRisk": 839.6590909090909,
-    "avgWin": 1691.3333333333333,
-    "avgWinPct": 23.98518518518518,
-    "avgLoss": -583.46,
-    "avgLossPct": -7.5440000000000005,
-    "profitFactor": 2.541482078131293,
-    "profitFactorClosed": 1.5653515236691462,
+    "avgWin": 1587.2666666666667,
+    "avgWinPct": 22.249999999999996,
+    "avgLoss": -592.5192307692307,
+    "avgLossPct": -7.640384615384615,
+    "profitFactor": 2.3455901342975207,
+    "profitFactorClosed": 1.5454870013956055,
     "avgHoldingWeeks": null,
     "maxDD": 50.77,
     "best": [
      {
       "ticker": "MRNA",
       "entryDate": "2026-08-12",
-      "exitDate": "2026-10-14",
+      "exitDate": "2026-10-16",
       "isOpen": true,
-      "pnl": 22372,
-      "pnlPct": 273.6
+      "pnl": 21253,
+      "pnlPct": 259.9
      },
      {
       "ticker": "SNDK",
@@ -78,6 +78,14 @@
     ],
     "worst": [
      {
+      "ticker": "MRVL",
+      "entryDate": "2026-10-02",
+      "exitDate": "2026-10-15",
+      "isOpen": false,
+      "pnl": -1645,
+      "pnlPct": -16.9
+     },
+     {
       "ticker": "LITE",
       "entryDate": "2026-06-04",
       "exitDate": "2026-07-06",
@@ -102,20 +110,12 @@
       "pnlPct": -13.4
      },
      {
-      "ticker": "MRVL",
-      "entryDate": "2026-10-02",
-      "exitDate": "2026-10-14",
+      "ticker": "KLAC",
+      "entryDate": "2026-09-30",
+      "exitDate": "2026-10-15",
       "isOpen": false,
-      "pnl": -1145,
-      "pnlPct": -11.8
-     },
-     {
-      "ticker": "CRWD",
-      "entryDate": "2026-08-12",
-      "exitDate": "2026-08-20",
-      "isOpen": false,
-      "pnl": -1019,
-      "pnlPct": -10.3
+      "pnl": -1097,
+      "pnlPct": -11
      }
     ]
    }
@@ -123,40 +123,40 @@
   "SPX": {
    "name": "S&P 500",
    "start": "2026-05-05",
-   "lastBar": "2026-10-14",
+   "lastBar": "2026-10-16",
    "benchmark": "SPX",
-   "benchmarkPct": 6.332911800441354,
+   "benchmarkPct": 5.51326451051215,
    "kpis": {
-    "nTrades": 108,
-    "nClosed": 100,
+    "nTrades": 110,
+    "nClosed": 102,
     "nOpen": 8,
     "nTickers": 80,
-    "winrate": 26,
-    "totalPnl": -11385,
-    "realizedPnl": -25894,
-    "openPnl": 14509,
-    "invested": 882861,
-    "returnOnInvested": -1.2895574728071577,
-    "avgPnlPerTrade": -105.41666666666667,
-    "avgReturnPerTrade": -1.7527777777777787,
-    "avgInvested": 8174.638888888889,
-    "avgRisk": 818.8425925925926,
-    "avgWin": 705.0384615384615,
-    "avgWinPct": 9.234615384615386,
-    "avgLoss": -597.6351351351351,
-    "avgLossPct": -8.17432432432432,
-    "profitFactor": 0.743234100135318,
-    "profitFactorClosed": 0.41449406444318826,
+    "winrate": 27.450980392156865,
+    "totalPnl": -16348,
+    "realizedPnl": -26658,
+    "openPnl": 10310,
+    "invested": 898024,
+    "returnOnInvested": -1.8204413245080309,
+    "avgPnlPerTrade": -148.61818181818182,
+    "avgReturnPerTrade": -2.2227272727272736,
+    "avgInvested": 8163.854545454546,
+    "avgRisk": 822.1181818181818,
+    "avgWin": 655.5357142857143,
+    "avgWinPct": 8.553571428571429,
+    "avgLoss": -608.2837837837837,
+    "avgLossPct": -8.304054054054053,
+    "profitFactor": 0.6423304964228674,
+    "profitFactorClosed": 0.4077710883522538,
     "avgHoldingWeeks": null,
-    "maxDD": 258.94,
+    "maxDD": 271.23,
     "best": [
      {
       "ticker": "VLO",
       "entryDate": "2026-06-30",
-      "exitDate": "2026-10-14",
+      "exitDate": "2026-10-16",
       "isOpen": true,
-      "pnl": 5783,
-      "pnlPct": 72.2
+      "pnl": 5331,
+      "pnlPct": 66.6
      },
      {
       "ticker": "HPE",
@@ -169,29 +169,45 @@
      {
       "ticker": "MPC",
       "entryDate": "2026-08-12",
-      "exitDate": "2026-10-14",
+      "exitDate": "2026-10-16",
       "isOpen": true,
-      "pnl": 3147,
-      "pnlPct": 44.7
+      "pnl": 3003,
+      "pnlPct": 42.7
      },
      {
       "ticker": "PSX",
       "entryDate": "2026-09-01",
-      "exitDate": "2026-10-14",
+      "exitDate": "2026-10-16",
       "isOpen": true,
-      "pnl": 1780,
-      "pnlPct": 18.1
+      "pnl": 1619,
+      "pnlPct": 16.5
      },
      {
-      "ticker": "HPE",
-      "entryDate": "2026-09-04",
-      "exitDate": "2026-10-14",
-      "isOpen": true,
-      "pnl": 1713,
-      "pnlPct": 17.2
+      "ticker": "CRL",
+      "entryDate": "2026-06-29",
+      "exitDate": "2026-09-10",
+      "isOpen": false,
+      "pnl": 1559,
+      "pnlPct": 27.8
      }
     ],
     "worst": [
+     {
+      "ticker": "COHR",
+      "entryDate": "2026-10-02",
+      "exitDate": "2026-10-15",
+      "isOpen": false,
+      "pnl": -1735,
+      "pnlPct": -21.1
+     },
+     {
+      "ticker": "BE",
+      "entryDate": "2026-09-28",
+      "exitDate": "2026-10-15",
+      "isOpen": false,
+      "pnl": -1689,
+      "pnlPct": -20.6
+     },
      {
       "ticker": "DVA",
       "entryDate": "2026-07-29",
@@ -209,64 +225,48 @@
       "pnlPct": -16.1
      },
      {
-      "ticker": "COHR",
-      "entryDate": "2026-10-02",
-      "exitDate": "2026-10-14",
-      "isOpen": false,
-      "pnl": -1384,
-      "pnlPct": -16.8
-     },
-     {
       "ticker": "IBM",
       "entryDate": "2026-06-02",
       "exitDate": "2026-07-15",
       "isOpen": false,
       "pnl": -1299,
       "pnlPct": -29.6
-     },
-     {
-      "ticker": "BE",
-      "entryDate": "2026-09-28",
-      "exitDate": "2026-10-14",
-      "isOpen": false,
-      "pnl": -1252,
-      "pnlPct": -15.3
      }
     ]
    }
   }
  },
  "total": {
-  "nTrades": 196,
-  "nClosed": 177,
-  "nOpen": 19,
+  "nTrades": 198,
+  "nClosed": 184,
+  "nOpen": 14,
   "nTickers": 127,
-  "winrate": 29.943502824858758,
-  "totalPnl": 34545,
-  "realizedPnl": -9401,
-  "openPnl": 43946,
-  "invested": 1573602,
-  "returnOnInvested": 2.195281907369208,
-  "avgPnlPerTrade": 176.25,
-  "avgReturnPerTrade": 2.262755102040817,
-  "avgInvested": 8028.581632653061,
-  "avgRisk": 828.1887755102041,
-  "avgWin": 1207.4905660377358,
-  "avgWinPct": 16.74905660377358,
-  "avgLoss": -591.9193548387096,
-  "avgLossPct": -7.920161290322576,
-  "profitFactor": 1.465967950793137,
-  "profitFactorClosed": 0.8719174909398076,
+  "winrate": 31.521739130434785,
+  "totalPnl": 25333,
+  "realizedPnl": -9851,
+  "openPnl": 35184,
+  "invested": 1588765,
+  "returnOnInvested": 1.5945089424804801,
+  "avgPnlPerTrade": 127.94444444444444,
+  "avgReturnPerTrade": 1.713131313131314,
+  "avgInvested": 8024.065656565656,
+  "avgRisk": 829.9141414141415,
+  "avgWin": 1137.4655172413793,
+  "avgWinPct": 15.637931034482756,
+  "avgLoss": -601.7777777777778,
+  "avgLossPct": -8.030158730158726,
+  "profitFactor": 1.330360053727684,
+  "profitFactorClosed": 0.8700807132306394,
   "avgHoldingWeeks": null,
-  "maxDD": 101.64999999999999,
+  "maxDD": 108.22790612394573,
   "best": [
    {
     "ticker": "MRNA",
     "entryDate": "2026-08-12",
-    "exitDate": "2026-10-14",
+    "exitDate": "2026-10-16",
     "isOpen": true,
-    "pnl": 22372,
-    "pnlPct": 273.6
+    "pnl": 21253,
+    "pnlPct": 259.9
    },
    {
     "ticker": "SNDK",
@@ -275,14 +275,6 @@
     "isOpen": false,
     "pnl": 8801,
     "pnlPct": 92.8
-   },
-   {
-    "ticker": "VLO",
-    "entryDate": "2026-06-30",
-    "exitDate": "2026-10-14",
-    "isOpen": true,
-    "pnl": 5783,
-    "pnlPct": 72.2
    },
    {
     "ticker": "ARM",
@@ -299,9 +291,41 @@
     "isOpen": false,
     "pnl": 5443,
     "pnlPct": 54.5
+   },
+   {
+    "ticker": "VLO",
+    "entryDate": "2026-06-30",
+    "exitDate": "2026-10-16",
+    "isOpen": true,
+    "pnl": 5331,
+    "pnlPct": 66.6
    }
   ],
   "worst": [
+   {
+    "ticker": "COHR",
+    "entryDate": "2026-10-02",
+    "exitDate": "2026-10-15",
+    "isOpen": false,
+    "pnl": -1735,
+    "pnlPct": -21.1
+   },
+   {
+    "ticker": "BE",
+    "entryDate": "2026-09-28",
+    "exitDate": "2026-10-15",
+    "isOpen": false,
+    "pnl": -1689,
+    "pnlPct": -20.6
+   },
+   {
+    "ticker": "MRVL",
+    "entryDate": "2026-10-02",
+    "exitDate": "2026-10-15",
+    "isOpen": false,
+    "pnl": -1645,
+    "pnlPct": -16.9
+   },
    {
     "ticker": "LITE",
     "entryDate": "2026-06-04",
@@ -317,30 +341,6 @@
     "isOpen": false,
     "pnl": -1471,
     "pnlPct": -14.9
-   },
-   {
-    "ticker": "SM",
-    "entryDate": "2026-06-04",
-    "exitDate": "2026-06-16",
-    "isOpen": false,
-    "pnl": -1436,
-    "pnlPct": -16.1
-   },
-   {
-    "ticker": "COHR",
-    "entryDate": "2026-10-02",
-    "exitDate": "2026-10-14",
-    "isOpen": false,
-    "pnl": -1384,
-    "pnlPct": -16.8
-   },
-   {
-    "ticker": "ODFL",
-    "entryDate": "2026-04-21",
-    "exitDate": "2026-05-05",
-    "isOpen": false,
-    "pnl": -1330,
-    "pnlPct": -13.5
    }
   ]
  }
