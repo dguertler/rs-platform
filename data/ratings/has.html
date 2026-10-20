@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HAS — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">20.10.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>HAS</h1>
+      <h2>Hasbro, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Leisure</span></div>
+        <div class="mi">MCap: <span>$14B</span></div>
+        <div class="mi">Signal: <span>Kein Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 20.10.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">55.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$98.76</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$5.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">63.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">284.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">159.6%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+7.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">135–150</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">105–120</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–70</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $135–$150 (25 %) · Base $105–$120 (50 %) · Bear $58–$70 (25 %) · EV ~$107,88</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 19.10.2026 (Kurs $98,76) liegt vor der Kursreaktion auf die Q3-Zahlen vom 20.10.2026 (+8,9 % laut Earnings-Alert, Kursniveau rund $107). Konfidenz der Bewertungsaussagen reduziert; Multiples unten auf ~$107 umgerechnet.</p>
+<p>Hasbro ist kein Spielzeugkonzern mehr, der nebenbei Karten verkauft — Hasbro ist ein Lizenz- und IP-Geschäft mit angehängtem Spielzeugvertrieb. Q3 2026 macht das unübersehbar: Umsatz $1,595 Mrd. (+15 %), bereinigtes EPS $2,90 nach $1,85 erwartet (+56,6 %), Magic: The Gathering erstmals über $600 Mio. im Quartal (+34 %). Wizards of the Coast verdient bei 49 % Segmentmarge rund zwei Drittel des Konzerngewinns. Das Management hebt die Jahresprognose an (Umsatz cc +7–9 % statt +5–7 %, bereinigtes EBITDA $1,575–1,625 Mrd. statt $1,45–1,50 Mrd.) und verdoppelt das Rückkaufziel. Was der Markt übersieht: Rund $55 Mio. des Quartalsgewinns sind Zollrückerstattungen — einmalig. Und Magic wächst aktuell über ein dichtes Set-Programm mit Lizenzpartnern (The Hobbit), das hohe Lizenzkosten trägt und Vergleichsbasen für 2027 verschärft. Die Frage ist nicht, ob Wizards ein Juwel ist, sondern ob +34 % ein neues Niveau oder ein Set-Zyklus-Hoch sind.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Wizards of the Coast & Digital Gaming: Magic, Dungeons & Dragons, Monopoly Go-Lizenzen — Q3-Umsatz +31 %, Segment-Operating-Profit $367 Mio., Marge 49 %</li>
+<li>Magic ist ein Verbrauchsgut für Sammler: Booster-Packs mit hoher Bruttomarge, Nachfrage getrieben von Set-Taktung und Sammlerwerten im Sekundärmarkt</li>
+<li>Universes-Beyond-Kooperationen (Herr der Ringe/Hobbit, Marvel u. a.) erweitern die Reichweite, kosten aber Lizenzgebühren — der Mix drückt die Segmentmarge strukturell</li>
+<li>Consumer Products (Spielzeug, Spiele): +4 % Umsatz, bereinigte Marge 21,5 % nach 11,2 % — inklusive $48 Mio. Zollrückerstattung, also nur teilweise wiederholbar</li>
+<li>Asset-light-Umbau: Fertigung zunehmend ausgelagert, Lizenzierung der Spielzeugmarken an Dritte — weniger Kapital, mehr Fremdabhängigkeit</li>
+<li>Saisonalität: Q4 trägt das Spielzeuggeschäft, Q3 ist Lageraufbau beim Handel</li>
+<li>Kapitalrückfluss: Dividendenrendite ~2,8 % plus verdoppeltes Rückkaufziel</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Magic hält das Niveau über 2027, D&D-Digital zahlt sich aus, Consumer Products stabilisiert bei mittleren Zehnermargen. Peers: Take-Two 19,9x Forward, Acushnet 18,9x, Mattel ~9,7x (Stand Mitte 2026, Oktober-Wert nicht verifizierbar) — Peer-Bandbreite 10–20x.</p>
+<p>Bull $135–$150 = FY27-EPS ~$7,60 (Annahme, kein Konsens: +17 % auf Snapshot-Forward-EPS $6,48 durch Mix und Rückkäufe) × 18–20x (oberes Peer-Ende, TTWO-Niveau für ein IP-getriebenes Spielegeschäft). Begründung Margennachhaltigkeit: proprietäres IP mit 30 Jahren Spielerbasis, hohe Switching Costs durch Kartensammlungen, Skaleneffekte im Set-Druck. Eintrittswahrscheinlichkeit: 25 %.</p>
+<h3>4. BASE CASE</h3>
+<p>Magic normalisiert auf hohes einstelliges Wachstum, die Zollrückerstattung entfällt, Rückkäufe stützen das EPS. Base $105–$120 = FY27-EPS ~$7,00 (Annahme, kein Konsens) × 15–17x (eigenes Forward-KGV, auf ~$107 umgerechnet 16,5x auf $6,48 — Mitte der Peer-Bandbreite). Analyst-Konsensziel $111,38 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; nach dem Beat wird es nachziehen. Eintrittswahrscheinlichkeit: 50 %.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: ein schwaches Magic-Set 2027 bei harter Vergleichsbasis plus schwaches Weihnachtsgeschäft im Spielzeug. Bear $58–$70 = FY27-EPS ~$5,60 (Annahme: Rückfall auf das Vor-Beat-Niveau ohne Einmaleffekte) × 10–12x (Mattel-Niveau, Kompression vom IP- zurück zum Spielzeug-Multiple). Eintrittswahrscheinlichkeit: 25 %.</p>
+<ul class="al">
+<li>Kundenkonzentration: im Spielzeug wenige Großhändler (Walmart, Target, Amazon) — Anteile auf Datenbasis nicht quantifizierbar</li>
+<li>Geopolitik / China: Spielzeugfertigung überwiegend in Asien, Zölle schon jetzt ergebnisrelevant (Rückerstattung zeigt die Größenordnung)</li>
+<li>Lieferkette: Auftragsfertiger in China/Vietnam, Kartendruck an wenigen Standorten — Single-Source-Risiko auf Datenbasis nicht beurteilbar</li>
+<li>Verwässerung: kein Hinweis, Rückkäufe verringern die Aktienzahl</li>
+<li>Regulierung / Recht: Lizenzabhängigkeit (Universes Beyond), Glücksspiel-Nähe von Booster-Mechaniken als latentes Regulierungsthema</li>
+</ul>
+<p>Summe: 25 % + 50 % + 25 % = 100 %.</p>
+<p>Erwartungswert: $107,88 — implizites Upside/Downside vs. aktuellem Kurs (~$107): +0,8 %.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge 63,8 %, operative Marge 22,2 % (TTM), Nettomarge 16,0 %, im Q3 bereinigte operative Marge 33,9 %. Free Cashflow TTM $688 Mio., operativer Cashflow Jan.–Sep. $907 Mio. (+85 %). Anomalie: ROE 159,6 % bei ROIC 6,3 % — Ursache ist das nach den Abschreibungen 2025 sehr dünne Eigenkapital (Verschuldungsgrad Debt/Equity 531 %); aus den Daten nicht abschließend auflösbar, ROE fließt nicht in die Bewertung ein. Der ROIC von 6,3 % ist ebenfalls durch Abschreibungen verzerrt. Burggraben echt bei Wizards, scheinbar bei Consumer Products. Bilanz ist der Schwachpunkt: hohe Verschuldung relativ zum Eigenkapital. RPO nicht anwendbar.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Bei ~$107 liegt das Forward-KGV bei 16,5x auf $6,48 — innerhalb der Peer-Bandbreite (Mattel ~9,7x bis Take-Two 19,9x), deutlich über Mattel. Die Prämie ist strukturell begründet: Wizards mit 49 % Marge ist ein Spielegeschäft, kein Spielzeug. FCF-Rendite auf Marktkapitalisierung (~$15,1 Mrd. bei $107): ~4,6 %.</p>
+<p>Was preist der Kurs ein? $107 = 16x × EPS $6,70 — also Umsatzwachstum von 5–7 % p. a., eine operative Marge um 23 % und ein Exit-Multiple von 16x. Das ist plausibel, aber nicht günstig: Der Kurs preist ein, dass Q3 ohne Einmaleffekt weitgehend wiederholbar ist.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Analysten: Empfehlung „strong buy", 13 Meinungen, Konsensziel $111,38 — knapp über dem Kurs nach dem Sprung. Short Float nicht im Datensatz. Wochenvolumen KW 42 8,5 Mio. Stück, gestiegen gegenüber Vorwoche (7,5 Mio.). Hypothese, nicht datenbasiert: Der Kurssprung an das 52-Wochen-Hoch ($106,98) zwingt unterpositionierte Konsumgüter-Fonds nachzukaufen. Enttäuschungsrisiko: der Q4-Spielzeug-Saisonbericht im Februar.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 55,53, Rang 130 im S&P 500. Fenster: 5T +4,1 %, 20T +14,3 %, 50T +5,8 %, 6M +1,0 %, 12M +20,5 % — das Momentum ist frisch und fundamental gestützt, die 6-Monats-Bilanz zeigt aber eine lange Seitwärtsphase. GWS-Daten nicht verfügbar. Der Kurs steht am 52-Wochen-Hoch von $106,98; ein Wochenschluss darüber wäre ein Ausbruch aus der Range. Warnsignal: Rückfall unter $98, also Schließung der Earnings-Lücke.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<ul class="al">
+<li>Bull $170–$210: Magic und D&D wachsen zweistellig, Digital wird zur dritten Säule, EPS ~$10 × 18–20x</li>
+<li>Base $120–$150: Wizards wächst hoch einstellig, Spielzeug stagniert, EPS ~$8,50 × 15–17x</li>
+<li>Bear $60–$85: Sammlerblase bei Magic platzt, EPS ~$6 × 10–14x</li>
+</ul>
+<p>Entscheidende Variable: ob die Magic-Nachfrage Spieler- oder Spekulanten-getrieben ist.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Ein Qualitäts-IP-Wert im Gewand eines Spielzeugkonzerns, aber nach dem Sprung kein Schnäppchen. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — EV +0,8 % vs. ~$107. Der Beat ist echt und breit (Umsatz, Marge, Prognose, Rückkäufe), aber ein Teil ist Einmaleffekt, und Magic läuft auf Rekordniveau mit harter Vergleichsbasis. Für dividendenorientierte Qualitätsinvestoren auf Rücksetzern Richtung $95–100 interessant; als Momentum-Trade nur mit reduzierter Größe. Peers: Take-Two (19,9x) ist das reinere Spiele-Instrument, Mattel (~9,7x, Stand Mitte 2026) das günstigere, aber IP-ärmere Spielzeug-Instrument.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5 (vorläufig, Datenstand)</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — nach dem Kurssprung auf ~$107 liegt der EV nur 0,8 % über dem Kurs, und ein Teil des Beats stammt aus der einmaligen Zollrückerstattung von rund $55 Mio.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
