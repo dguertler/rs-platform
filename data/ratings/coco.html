@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>COCO — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">23.10.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>COCO</h1>
+      <h2>The Vita Coco Company, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Beverages - Non-Alcoholic</span></div>
+        <div class="mi">MCap: <span>$3B</span></div>
+        <div class="mi">Signal: <span>Smallcap</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">66</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 23.10.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">110.5</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★★☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$58.69</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">25.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$0.7B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">41.1%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">31.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">78–86</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">56–63</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">34–38</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $78–$86 (25 %) · Base $56–$63 (50 %) · Bear $34–$38 (25 %) · EV ~$59,25</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>Vita Coco hat mit Q3 2026 geliefert, was ein Momentum-Beat braucht: Umsatz 244 Mio. $ (+34 %), bereinigter EPS 0,66 $ gegen 0,53 $ Konsens (+24 %), dazu eine angehobene Jahresprognose (Umsatz 810–820 Mio. $ statt 790–805 Mio. $, Adj. EBITDA 170–175 Mio. $ statt 154–161 Mio. $). Der Markt hat trotzdem mit −7,1 % geantwortet — und das ist der eigentliche Punkt. Organisch wuchs der Umsatz „nur" 18 %, rund die Hälfte des Sprungs stammt aus dem Zukauf Copra (Juli 2026), der vor allem das margenschwache Private-Label-Geschäft (+152 %) aufbläht. Die Bruttomarge lag bei 38 % und damit nur auf Vorjahresniveau; die Jahresmarge von 42 % wird durch einmalige Zollerstattungen (+240 Basispunkte) gestützt. Die Prognose impliziert für H2 rund 35 % Bruttomarge nach 45 % in H1. Der Markt preist also nicht den Beat, sondern die Frage, ob die Normalmarge ohne Erstattungen eher bei 35 % als bei 40 % liegt. Strukturelle Verträge, die das Risikoprofil verändern würden, sind nicht erkennbar.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Markenführer bei Kokoswasser in den USA und Großbritannien; die Marke Vita Coco ist der Gewinnmotor, Kokoswasser wuchs in Q3 um 15 %</li>
+<li>Asset-light: Abfüllung über Co-Packer in Südostasien und Lateinamerika, eigenes Kapital fließt kaum in Fabriken — daher ROIC 42 %</li>
+<li>Private Label (u. a. für Großhändler) liefert Volumen und Auslastung, aber deutlich niedrigere Margen; durch Copra wächst genau dieser Anteil</li>
+<li>Operativer Hebel liegt bei Fracht und Rohware: Containerraten und Kokospreise entscheiden über ±5 Prozentpunkte Bruttomarge</li>
+<li>Vertrieb stark über Club- und Großhandel (Costco, Walmart) — Kanalmacht liegt beim Händler</li>
+<li>Kostenstruktur importlastig, damit direkt von US-Zöllen betroffen; die Erstattungen 2026 sind einmalig</li>
+<li>Netto schuldenfrei (Debt/Equity 3,5 %), FCF 104,6 Mio. $ TTM</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers aus `data/fundamentals.json`: Monster (MNST) 34,9x, Coca-Cola (KO) 26,7x, National Beverage (FIZZ) 17,9x Forward-KGV — Bandbreite 17,9–34,9x.</p>
+<p>Auslöser: Frachtraten fallen, Kokospreise normalisieren sich, die H2-Marge landet bei 38 % statt 35 %, und das Kokoswasser-Volumen wächst weiter zweistellig. Copra wird integriert und hebt die Private-Label-Marge. Dann steigt der FY27-EPS auf ~2,60 $ (Annahme, kein Konsens; Konsens-Forward-EPS 2,34 $).</p>
+<p>Kursziel **$78–$86** = FY27-EPS 2,60 $ × 30–33x (nahe MNST, Prämie für höheres Wachstum als KO). Das entspricht etwa dem 52-Wochen-Hoch von 85,83 $. Strukturelle Margennachhaltigkeit: Markenprämie und Regalführung belegt, dauerhaft höhere Margen als im Zyklusmittel aber nicht beurteilbar auf Basis verfügbarer Daten — die Marge hängt an Fracht und Rohware, nicht an IP.</p>
+<p>Wahrscheinlichkeit: **25 %**.</p>
+<h3>4. BASE CASE</h3>
+<p>Die Prognose wird erfüllt, die H2-Marge liegt um 35–36 %, 2027 bringt organisches Wachstum im niedrigen Zehnerbereich plus Copra-Effekt bis Mitte 2027. FY27-EPS ~2,34 $ (Konsens-Forward-EPS).</p>
+<p>Kursziel **$56–$63** = FY27-EPS 2,34 $ × 24–27x (eigenes Forward-KGV 25,1x, innerhalb der Peer-Bandbreite). RPO nicht anwendbar (kein Subscription-Modell).</p>
+<p>Wahrscheinlichkeit: **50 %**.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Der Wegfall der Zollerstattungen plus neue Zölle auf Importe aus den Philippinen, Thailand oder Brasilien drücken die Bruttomarge 2027 Richtung 33 %; ein Großhändler weitet eigene Kokoswasser-Marken aus oder setzt Preisrabatte durch. FY27-EPS fällt auf ~1,90 $ (Annahme).</p>
+<p>Kursziel **$34–$38** = FY27-EPS 1,90 $ × 18–20x (nahe FIZZ als niedrigstem Peer). Das liegt nahe dem 52-Wochen-Tief von 39,46 $.</p>
+<ul class="al">
+<li>Kundenkonzentration: Club-/Großhandel dominiert den Vertrieb, genaue Anteile aus den Daten nicht quantifizierbar</li>
+<li>Geopolitik/Zölle: hohes Risiko — fast die gesamte Ware wird importiert, Zollerstattungen 2026 einmalig</li>
+<li>Lieferkette: Abhängigkeit von wenigen Co-Packern und Ernten in Südostasien (Wetter, El Niño), kein Single-Source-Halbleiterrisiko, aber Konzentration auf wenige Regionen</li>
+<li>Verwässerung: SBC nicht verfügbar, Aktienanzahl rund 58 Mio. — auf Datenbasis nicht beurteilbar</li>
+<li>Regulierung/Recht: Zoll- und Handelspolitik ist das Hauptrisiko, darüber hinaus keine bekannten Verfahren</li>
+</ul>
+<p>Wahrscheinlichkeit: **25 %**. Summe: 25 % + 50 % + 25 % = **100 %**.</p>
+<p>Erwartungswert: 0,25 × $82 + 0,50 × $59,50 + 0,25 × $36 = **$59,25** — implizites Upside vs. aktuellem Kurs ($58,69): **+1,0 %**.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 31,4 %, ROIC 42,4 %, Bruttomarge TTM 41,1 %, Nettomarge 15,5 %, FCF 104,6 Mio. $, praktisch keine Schulden. Anomalie: Die ausgewiesene operative Marge von 29,2 % passt nicht zu 41 % Bruttomarge und 15,5 % Nettomarge bei einem Konsumgüterhersteller mit hohen Vertriebskosten; plausibel ist ein Quartalseffekt der Zollerstattungen oder ein Datenartefakt — aus den Daten nicht abschließend auflösbar, daher nicht verwendet. Unverzerrte Basis: die Adj.-EBITDA-Prognose von 172,5 Mio. $ auf 815 Mio. $ Umsatz = ~21 % EBITDA-Marge. Die Marge ist zyklisch und 2026 durch Erstattungen geschönt. Burggraben: Marke plus Beschaffungsnetz.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Forward-KGV 25,1x, KGV TTM 32,4x, FCF-Rendite 3,1 % (104,6 Mio. $ / 3,40 Mrd. $), KBV 8,4. Das Forward-KGV liegt mittig in der Peer-Bandbreite: unter MNST (34,9x), knapp unter KO (26,7x), deutlich über FIZZ (17,9x). Die Prämie gegenüber KO ist durch das höhere Wachstum (+28 % TTM vs. +7 %) begründbar, der Abschlag zu MNST durch die niedrigere und zyklischere Marge.</p>
+<p>Was preist der Kurs ein? Bei 58,69 $ und 25x muss der EPS 2027 bei ~2,35 $ liegen. Mit ~58 Mio. Aktien sind das ~136 Mio. $ Nettogewinn; bei ~920 Mio. $ Umsatz 2027 (+13 % nach Copra-Basiseffekt, Annahme) braucht es ~14,8 % Nettomarge — knapp unter den 15,5 % TTM, die die Zollerstattungen enthalten. Das ist **plausibel, aber ohne Sicherheitsmarge**: Die Normalmarge muss ohne Erstattungen fast auf dem jetzigen Niveau bleiben. Keine Value-Falle, aber auch kein Abschlag.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Interest lag Anfang Oktober laut Sekundärquelle bei 10,9 % des Free Floats — erhöht für einen Getränkehersteller. Die Aktie lief vor den Zahlen in drei Tagen von 59,08 $ auf 63,50 $ bei mehr als doppeltem Volumen (2,40 Mio. vs. Ø 1,22 Mio.), dann −7,1 % nach den Zahlen. Das Muster passt zu Gewinnmitnahmen nach einer Erwartungsrally. Hypothese, nicht datenbasiert: Neue Käufer kommen erst, wenn eine Q4-Marge über 35 % sichtbar wird. Analysten-Konsensziel 78,60 $ (10 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 110,45, Rang 159 (Smallcap-Universum). Fenster: 5T +9,71 %, 10T +13,13 %, 20T +7,44 %, 50T +3,08 %, 6M +32,35 %, 12M +44,74 %. Kurs nach der Reaktion bei rund 59 $ — knapp über SMA50 (58,67 $), unter SMA200 (61,65 $), RSI14 vor den Zahlen 64. Der Abwärtstrend seit Juni (Hoch 85,83 $) ist trotz Erholung vom Tief am 07.10. (50,46 $) nicht gebrochen. GWS-Ampel für Smallcaps nicht verfügbar. Das Momentum ist fundamental gestützt, der Markt gewichtet aber die Marge höher. Warnsignal: Schluss unter 56 $ (SMA20/Gap-Basis) öffnet den Weg zurück Richtung 50 $. Bestätigung: Schluss über 63,50 $ und damit über der SMA200.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($110–$140):** Kokoswasser wird zur Mainstream-Kategorie wie Sportgetränke, Vita Coco hält die Führung, EPS 2030 3,70–4,20 $ × 30–33x.</p>
+<p>**Base ($70–$90):** Wachstum normalisiert auf hohe einstellige Raten, Marge 36–39 %, EPS 2030 3,00–3,40 $ × 23–26x.</p>
+<p>**Bear ($35–$50):** Zölle bleiben dauerhaft, Private Label verdrängt Markenware, EPS stagniert bei 2,00–2,40 $ × 18–20x.</p>
+<p>Entscheidende Variable: die Bruttomarge ohne Zollerstattungen — 35 % oder 40 % entscheidet über rund ein Drittel des Gewinns.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Ein solides Qualitätsunternehmen mit echtem Beat-and-Raise, aber kein High-Conviction-Momentum-Play auf dem aktuellen Niveau. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — EV +1,0 %. Der Beat ist zur Hälfte zugekauft, die Marge kommt aus einem Erstattungsjahr, und der Markt hat genau das mit −7 % quittiert. Für geduldige Wachstumsanleger ein Beobachtungskandidat; Positionsgröße klein halten (max. 2–3 %), weil Zollentscheidungen das Ergebnis über Nacht verschieben können.</p>
+<p>Peers: **Monster (MNST)** ist bei 34,9x teurer, hat aber die stabilere Marge und kaum Zollrisiko — das reinere Qualitätsinstrument. **National Beverage (FIZZ)** ist bei 17,9x deutlich günstiger, wächst aber nicht (0 % Umsatzwachstum) — kein Ersatz für die Wachstumsthese.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 4/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — bei 25,1x Forward-KGV und einem EV von nur +1,0 % ist die Marge ohne Zollerstattungen nicht eingepreist, die Wachstumsthese bleibt aber intakt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
