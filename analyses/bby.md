@@ -1,90 +1,85 @@
 # BBY — KI-Aktienbewertung
 
-**Best Buy Co., Inc.** · Consumer Cyclical · 15.09.2026 · Signal: Breakout (3/3)
+**Best Buy Co., Inc.** · Consumer Cyclical · 10.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 90.8 |
-| Market Cap | $19.04 Mrd. |
-| Forward PE | 12.59 |
-| Revenue (TTM) | $42.20 Mrd. |
-| Gross Margin | 22.6% |
-| ROE | 43.1% |
-| RS-Score | 100.5 |
+| Kurs | 77.99 |
+| Market Cap | $16.44 Mrd. |
+| Forward PE | 11.03 |
+| Revenue (TTM) | $41.86 Mrd. |
+| Gross Margin | 22.5% |
+| ROE | 39.1% |
+| RS-Score | 48.6 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-Best Buy hat mit dem Q2-FY27-Report (27.08.) den Markt überrascht: Comparable Sales +4,1% gegenüber einer eigenen Guidance von nur +1% — ein Beat auf jeder Kennzahl, getragen von Computing, TVs und überraschend von "AI Glasses" und Trading Cards. Das Unternehmen hob die FY27-Guidance kräftig an (Revenue $42,3–42,8 Mrd. von zuvor $41,2–42,1 Mrd., adj. EPS $6,70–6,90 von zuvor $6,30–6,60). Was der Markt einpreist: eine zyklische Erholung im Konsumelektronik-Refresh (Windows-10-Ablauf-getriebener PC-Refresh, TV-Zyklus). Was er möglicherweise noch nicht vollständig würdigt: Ein Teil des Q2-Gewinnbeitrags stammte aus einer $34-Mio.-Zollrückerstattung — ein Einmaleffekt, den das Management selbst transparent als nicht wiederholbar kommunizierte. Die zugrunde liegende operative Verbesserung (Produktmargen fielen laut Berichten trotz des Beats) ist differenzierter zu bewerten als die Schlagzeilenzahlen suggerieren.
+Best Buy ist der letzte verbliebene große Flächen-Elektronikhändler in den USA und hat sein Geschäftsmodell in den letzten Jahren von reinem Produktverkauf zu einem Service-/Membership-Hybrid umgebaut (Total Tech Membership, In-Store-Shops mit Apple und Samsung). Die eigentliche Story ist nicht Wachstum, sondern Verteidigung von Marktanteilen gegen Amazon und Walmart bei gleichzeitig sich abzeichnendem PC-Ersatzzyklus: Das Windows-10-Support-Ende treibt einen mehrjährigen Hardware-Refresh, von dem Best Buy als größter Nicht-Amazon-Elektronikhändler überproportional profitieren könnte. Was der Markt aktuell einpreist: Die Aktie notiert nahe dem 52-Wochen-Hoch ($84,99), aber das RS-Signal ist mit Rang 93 im S&P 500 nur mittelmäßig — kein breiter institutioneller Zustrom, eher ein selektives Comeback nach Jahren der Underperformance. Auffällig ist die Diskrepanz zwischen dem starken 50-Tage-Fenster (+31,45%) und der deutlich schwächeren kurzfristigen Dynamik (5T +1,76%, 10T +1,5%) — die Rally hat sich in den letzten Handelstagen spürbar verlangsamt.
 
 ## 2. GESCHÄFTSMODELL
 
-- Spezialisierter Elektronikeinzelhändler (Consumer Electronics, Computing, Appliances) mit Omnichannel-Modell (Filiale + E-Commerce + Best Buy Health)
-- Operating Margin nur 3,9% — strukturell dünne Marge, typisch für Elektronik-Einzelhandel mit hohem Wettbewerbsdruck durch Amazon und Walmart
-- Wachsendes Werbe-/Marktplatz-Geschäft (Retail Media, "Best Buy Ads") als margenstärkere Diversifizierung — laut Berichten ein Schlüsselfaktor zur Stabilisierung der Gesamtmarge trotz sinkender Produktmargen
-- Strukturelle Abhängigkeit von Konsumelektronik-Refresh-Zyklen (PC-, TV-, Smartphone-Ersatzzyklen) — kein wiederkehrendes Subscription-Modell
-- $34 Mio. Zollrückerstattung im Q2 verzerrt die Margen-Vergleichbarkeit — ein Einmaleffekt, kein struktureller Margentreiber
-- Dividendenrendite von 4,36% signalisiert Reifephasen-Geschäftsmodell mit begrenztem Reinvestitionsbedarf, nicht Hypergrowth
-- D/E 130,1 ist für einen Einzelhändler mit umfangreichen Leasingverpflichtungen (Filialnetz) nicht ungewöhnlich hoch
-- ROE 43,1% ist stark, aber bei einem margenschwachen Geschäft überwiegend durch Financial Leverage (Bilanzstruktur, Aktienrückkäufe) getrieben, nicht durch operative Exzellenz
+- Kernumsatz aus Elektronikeinzelhandel (Computing, Mobile, Appliances, Entertainment) über ~1.000 US-Filialen
+- Total-Tech-Membership-Programm monetarisiert Support/Reparatur-Dienstleistungen als margenstärkeren Recurring-Umsatz
+- Store-in-Store-Partnerschaften (Apple, Samsung) binden Fußgängerverkehr und Vendor-Marketingzuschüsse
+- Filialnetz dient zunehmend als Fulfillment-Hub für Same-Day-Delivery — Omnichannel-Logistikvorteil gegenüber reinen Online-Händlern
+- Operativer Hebel ist gering: Gross Margin 22,5%, Operating Margin nur 4,0% — Fixkosten des Filialnetzes drücken auf die Marge
+- Strukturelle Abhängigkeit vom Konsumentenzyklus bei diskretionären Elektronikausgaben — kein defensives Geschäftsmodell
+- Preistransparenz durch Online-Vergleichsportale limitiert Pricing Power strukturell
+- Kapitalrückführung über Dividende und Buybacks als zentrales Element der Aktionärsrendite bei begrenztem organischem Wachstum
 
 ## 3. BULL CASE
 
-Peers: Target (TGT, Fwd-PE 16,3x), Walmart (WMT, Fwd-PE 33,2x), Costco (COST, Fwd-PE 40,0x) — Bandbreite 16,3x–40,0x. Der PC-/Elektronik-Refresh-Zyklus hält länger an als erwartet, das Retail-Media-Geschäft skaliert schneller und stabilisiert die Gesamtmarge strukturell, Comparable Sales bleiben im positiven Bereich. Annahme (kein Konsens): FY28-EPS $7,80 × 16x (Re-Rating Richtung TGT als niedrigstem Peer-Multiple, konservativ trotz starkem Beat) = $124,80. Bull-Kursziel: $115–$135. Eintrittswahrscheinlichkeit: 20%.
+Windows-10-Support-Ende (Oktober 2025) löst einen mehrjährigen PC-Ersatzzyklus aus, Comps stabilisieren sich, Total-Tech-Membership verbessert den Margenmix strukturell. Annahme (kein Konsens): FY27E EPS ~$8,50 × 14x Forward = $119. Kursziel Bull: $105–$130 (Mittelwert $118). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Der positive Comp-Sales-Trend hält an, aber ohne die Einmaleffekte (Zollrückerstattung) normalisiert sich das Margenwachstum, Produktmargen bleiben unter Druck. Annahme: FY28-EPS $7,21 (Konsens-Forward-EPS) × 13x (leicht über eigenem aktuellen Forward-KGV 12,6x, weiterhin unterhalb der Peer-Bandbreite — Diskont-Begründung siehe Abschnitt 7) = $93,73. Base-Kursziel: $85–$100. Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Moderates Comp-Wachstum, Margen bleiben stabil um 4% Operating Margin. Forward-EPS ~$7,07 (aus Forward-PE 11,0x auf Snapshot-Basis) leicht steigend auf ~$7,30 als Ausgangspunkt × 10,5–12x = $77–$88. Kursziel Base: $72–$88 (Mittelwert $80). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Der Comp-Sales-Beat erweist sich als Vorzieheffekt (Tariff-Front-Running durch Konsumenten vor möglichen Preiserhöhungen), Produktmargen verschlechtern sich weiter durch anhaltenden Preiskampf mit Amazon/Walmart, neue Zollrunden treffen Best Buys importlastiges Sortiment ohne erneute Rückerstattung. Kundenkonzentration: nicht anwendbar (breite Konsumentenbasis, kein Konzentrationsrisiko). Geopolitik/Zölle: das materiellste Einzelrisiko der Aktie — Best Buys Sortiment ist stark importabhängig (Asien-Lieferketten für Elektronik), Zollrisiken sind real und bereits einmal kursrelevant geworden (siehe Q2-Zollrückerstattung als Beleg für die Zoll-Exponierung). Lieferketten-/Foundry-Abhängigkeit: hohe Abhängigkeit von asiatischen Elektronik-Lieferketten (Konsumgüter, nicht Halbleiter-Fertigung direkt), Single-Source-Risiko nicht separat quantifizierbar. Verwässerung: gering, Shares Outstanding in den Daten nicht verfügbar (N/A), keine akuten Anzeichen für Verwässerung. Regulierung: Zoll-/Handelspolitik ist das dominante regulatorische Risiko. EPS fällt auf $5,50 × 9x (unter TGT als Floor, Bewertungskompression bei erneuter Zoll-Eskalation) = $49,50. Bear-Kursziel: $45–$58. Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Konsumausgaben für diskretionäre Elektronik schwächen sich ab (Rezessionsdruck oder Zollbelastung auf importierte Hardware), gleichzeitig verschärft sich der Preiswettbewerb mit Amazon/Walmart. Kundenkonzentration: Kein relevantes Einzelkundenrisiko im B2C-Retail — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Erhebliche China-Lieferkettenabhängigkeit bei Consumer Electronics — Zollrisiko ist der konkreteste Makro-Auslöser für dieses Segment. Lieferketten: Diversifizierte Lieferantenbasis (Vendor-Modell), aber keine eigene Fertigung — Preisschwankungen werden nur teilweise weitergegeben. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; historisch nettoreduzierend durch Buybacks. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$4,50 bei Margendruck. Annahme: FY27E EPS ~$4,50 × 8–9x = $36–$41. Kursziel Bear: $35–$48 (Mittelwert $41,50). Eintrittswahrscheinlichkeit: 35%.
 
-**Summe: 20% + 45% + 35% = 100%**
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Erwartungswert:** EV = 0,20 × $125 + 0,45 × $92,50 + 0,35 × $51,50 = $25,00 + $41,63 + $18,03 = **~$84,65 — implizites Upside/Downside vs. aktuellem Kurs ($90,80): −6,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — der starke Q2-Beat war teilweise einmaleffektgetrieben und ist im Kurs bereits verarbeitet.
+**Erwartungswert:** EV = 0,20 × $118 + 0,45 × $80 + 0,35 × $41,50 = $23,60 + $36,00 + $14,53 = **~$74,10 — implizites Downside vs. aktuellem Kurs ($77,99): −5,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Operating Margin 3,9% und Net Margin 3,0% sind strukturell dünn — sektortypisch für Elektronik-Einzelhandel, aber deutlich schwächer als bei Software-/Security-Namen im selben Alert-Batch. ROE 43,1% wirkt auf den ersten Blick stark, ist aber überwiegend durch die Bilanzstruktur (hohe Verschuldung D/E 130,1, aggressive Aktienrückkäufe) getrieben, nicht durch operative Marge — eine Anomalie, die klar zu benennen ist: hohe ROE bei niedriger Net Margin deutet auf Financial Leverage statt operativer Exzellenz hin, aus den Daten nicht vollständig auflösbar, aber plausibel durch die Bilanzstruktur erklärbar. FCF $1,40 Mrd. auf $42,2 Mrd. Revenue (FCF-Marge 3,3%) ist niedrig und typisch für das margenschwache Retail-Modell. RPO nicht anwendbar (kein Subscription-Geschäftsmodell) — Best Buy Totaltech (Membership-Programm) hat SaaS-ähnliche Deferred-Revenue-Elemente, aber die entsprechenden Daten liegen nicht vor, daher als "RPO-Analogon nicht verifizierbar" zu kennzeichnen. Der wirtschaftliche Burggraben ist begrenzt (austauschbares Elektronik-Sortiment, intensiver Preiswettbewerb), das Retail-Media-Geschäft ist der einzige strukturell margenstärkende Hebel.
+ROE von 39,1% wirkt auf den ersten Blick stark, ist aber vor allem ein Hebel-Effekt: Debt/Equity von 134,1% und ein durch Buybacks verkleinertes Eigenkapital treiben die Kennzahl, nicht überlegene operative Kapitalrenditen. Die eigentliche Ertragskraft zeigt sich in Gross Margin 22,5% und Operating Margin 4,0% — beides typisch für margenschwachen Elektronikeinzelhandel ohne strukturellen Burggraben. Free Cashflow von $1,14 Mrd. bei $41,86 Mrd. Umsatz ist solide und stützt Dividende plus Buybacks. Der wirtschaftliche Burggraben ist überwiegend scheinbar: Skalenvorteile im Einkauf und das Fulfillment-Netzwerk sind real, aber keine Preissetzungsmacht gegenüber Amazon.
 
 ## 7. BEWERTUNG
 
-Forward-PE 12,6x liegt UNTERHALB der gesamten Peer-Bandbreite (16,3x–40,0x) — ein struktureller Abschlag ggü. TGT, WMT und COST, der weitgehend gerechtfertigt ist: geringere Diversifikation (reine Konsumelektronik statt breitem Sortiment inkl. Lebensmitteln), höhere Zyklizität, dünnere operative Marge und höhere Zoll-Exposure als bei den breiter aufgestellten Peers. Was preist der Kurs ein? Bei $90,80 und einem EV/Revenue von ~0,5x (Trailing, sektortypisch niedrig bei Elektronik-Einzelhandel) preist der Markt eine moderate, aber nicht nachhaltige Fortsetzung der Comp-Sales-Erholung ein — plausibel, aber mit dem Zoll-Risiko als tragendem Unsicherheitsfaktor. Der Bewertungsabschlag ggü. Peers ist strukturell zu einem großen Teil durch das Geschäftsmodell (geringere Diversifikation, Zoll-Exposure) erklärbar, nicht primär eine Marktineffizienz.
+Trailing PE 14,4x, Forward PE 11,0x, P/B 5,3x — keine zyklische Rohstoffaktie, aber ein konsumzyklisches Geschäft, das über den Zyklus und nicht nur am aktuellen KGV bewertet werden sollte. Rückrechnung "Was preist der Kurs ein?": $77,99 bei Forward-EPS $7,07 impliziert, dass der Markt eine leichte Margenverbesserung und stabile bis leicht wachsende Umsätze für plausibel hält — konsistent mit dem Base Case dieser Analyse, nicht mit einer aggressiven Turnaround-These. Das ist plausibel, nicht übertrieben. Analyst-Konsensziel $79,15 (20 Analysten, "hold") liegt nur 1,5% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Indiz für begrenzten Street-Optimismus.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short-Float-Daten in den vorliegenden Datensätzen nicht verfügbar (N/A). RS-Score 100,50, Rang 65 im S&P 500 — solides, aber nicht extremes Momentum. Windows: 5T +6,9%, 10T +19,2%, 20T +12,6%, 50T +20,5%, 6M +41,4% — die Beschleunigung im 10T-Fenster deutet auf den unmittelbaren Post-Earnings-Effekt hin. Hypothese, nicht datenbasiert: Nach der überraschend starken Guidance-Anhebung dürfte ein Mix aus Short-Covering (bei einem strukturell unter Druck stehenden Sektor) und neuem Long-Interesse die Positionierung treiben — das Enttäuschungsrisiko ist erhöht, sollte sich der Comp-Sales-Beat als teilweise vorgezogener Zoll-Front-Running-Effekt herausstellen.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der starke 50-Tage-Trend bei gleichzeitig abflachender kurzfristiger Dynamik (5T/10T nahe null) deutet auf eine Konsolidierungsphase nach der eigentlichen Rally hin — Fast-Money-Positionen könnten bereits teilweise realisiert worden sein. Für neue institutionelle Käufer müsste ein konkreter Comp-Beat oder eine Guidance-Anhebung zum PC-Zyklus sichtbar werden. Enttäuschungsrisiko: Schwache Feiertagssaison-Kommentare oder ein verhaltener Ausblick zum PC-Refresh-Tempo.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS-Ampel voll aktiv (Weekly, Daily, 4H — 3/3 Punkte). Kurs $90,80 nahe dem 52-Wochen-Hoch $91,37 (0,6% entfernt) — der Titel notiert praktisch auf Jahreshoch, weit über dem 52-Wochen-Tief $55,10. Das Momentum ist fundamental gestützt (echter Comp-Sales-Beat, Guidance-Anhebung), aber der Kurs hat die positive Nachricht bereits nahezu vollständig eingepreist. Warnsignal: Ein Rückfall unter $80 (ca. 12% unter aktuellem Kurs) würde die Post-Earnings-Rally technisch entwerten und auf eine Neubewertung der Nachhaltigkeit des Comp-Sales-Trends hindeuten.
+RS-Score 48,62, Rang 93 im S&P 500 — nur mittelmäßig. 5T +1,76%, 10T +1,5%, 20T +3,35%, 50T +31,45%, 6M +10,56% — die große Bewegung liegt im 50-Tage-Fenster, seither deutliche Abkühlung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt aktuell keinen neuen Ausbruch. Momentum wirkt teilweise fundamental gestützt (PC-Zyklus-Narrativ), aber die jüngste Seitwärtsbewegung ist ein erstes Warnsignal für nachlassende Dynamik. Ein Rückfall unter die 50-Tage-Basis wäre ein klareres technisches Warnsignal.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($110–$140):** Das Retail-Media-/Marktplatz-Geschäft skaliert zu einem strukturell margenstärkenden zweiten Standbein, der PC-/Elektronik-Refresh-Zyklus bleibt mehrjährig intakt. Normalisiertes EPS $8,00–9,50 × 14–16x.
-
-**Base ($80–$105):** Stabiles, aber margenschwaches Kerngeschäft, moderate Diversifizierung über Retail Media, Zoll-Risiko bleibt ein wiederkehrender Belastungsfaktor. Normalisiertes EPS $6,50–7,80 × 12–14x.
-
-**Bear ($45–$65):** Strukturelle Margenerosion durch anhaltenden Amazon-/Walmart-Preisdruck, wiederholte Zoll-Eskalationen ohne Rückerstattungen, Comp-Sales fallen zurück in den negativen Bereich. Normalisiertes EPS $4,50–5,80 × 9–11x.
-
-Entscheidende Variable: Ob das Retail-Media-/Marktplatz-Geschäft schnell genug skaliert, um die strukturell dünne Produktmarge und die Zoll-Exposure langfristig zu kompensieren.
+Bull (3–5 Jahre): Total-Tech-Membership skaliert auf einen zweistelligen Umsatzanteil, Margenmix verbessert sich strukturell, PC- und KI-Hardware-Zyklen liefern mehrjährigen Rückenwind. Kursziel: $130–$170.
+Base: Moderates Comp-Wachstum, stabile Marge um 4–5%, Marktanteilserhalt gegen Amazon/Walmart. Kursziel: $85–$115.
+Bear: Strukturelle Marktanteilsverluste an Online-Handel beschleunigen sich, Filialnetz wird zur Kostenlast. Kursziel: $30–$50.
+Entscheidende Variable: Ob Total-Tech-Membership und Store-in-Store-Partnerschaften die Marge strukturell heben können, bevor der Online-Preisdruck weiter zunimmt.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau einen negativen Erwartungswert (−6,8%) — der starke Q2-Beat war teilweise einmaleffektgetrieben (Zollrückerstattung) und der Kurs notiert bereits nahe dem 52-Wochen-Hoch. Best Buy ist kein Compounder (strukturell dünne Marge, hohe Zyklizität) und kein High-Conviction-Momentum-Play, sondern ein zyklischer Value-/Dividenden-Trade mit realem, aber begrenztem Katalysator. Die Dividendenrendite von 4,36% bietet einen gewissen Bewertungspuffer, das Zoll-/Handelspolitikrisiko bleibt aber ein wiederkehrender, nicht diversifizierbarer Belastungsfaktor. Für einkommensorientierte Value-Investoren mit Toleranz für zyklische Schwankungen geeignet, für Wachstums- oder Momentum-Portfolios nach dem jüngsten Run-up weniger attraktiv. Positionsgröße: moderat, mit Bewusstsein für die Zoll-Sensitivität.
-
-Peers: **Target (TGT)** bietet bei ähnlichem Multiple (16,3x) eine breiter diversifizierte Sortimentsbasis (inkl. Lebensmittel/Haushaltswaren) mit geringerer reiner Elektronik-Zyklizität; **Walmart (WMT)** und **Costco (COST)** sind die qualitativ hochwertigeren, aber deutlich teureren (33,2x/40,0x) Handels-Compounder ohne BBYs spezifisches Zoll-/Elektronik-Konzentrationsrisiko.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −5,0%). BBY ist kein Compounder und kein High-Conviction-Momentum-Play, sondern ein zyklischer Trade auf den PC-Ersatzzyklus mit einem strukturell margenschwachen Grundgeschäft. Nahe dem 52-Wochen-Hoch bei nur mittelmäßigem RS-Rang ist das Chance-Risiko-Verhältnis für Neueinstiege unattraktiv. Bestehende Positionen mit Trailing-Stop (10–12%) führen. Positionsgröße bei Neueinstieg klein halten (max. 1–2%) angesichts der leicht negativen EV-Rechnung und der Konsumzyklus-Abhängigkeit. Direkte Peers: Kein anderer reiner US-Elektronikhändler dieser Größe mehr im Markt (Circuit City, RadioShack ausgeschieden) — nächstliegende Vergleichsgrößen wären Amazon (Segment) oder Walmart Electronics, beide nicht als reines Instrument für diese These handelbar. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 2/5
 - Wachstum: 2/5
-- Bewertung: 4/5
+- Bewertung: 3/5
 - Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — der Q2-Beat war teilweise durch eine nicht wiederholbare Zollrückerstattung getrieben, der Kurs notiert bereits nahe dem 52-Wochen-Hoch, der Erwartungswert bleibt trotz günstiger relativer Bewertung negativ.
+**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Der PC-Ersatzzyklus ist real, aber die zuletzt abflachende kurzfristige Dynamik (5T/10T nahe null) liefert derzeit keinen akuten technischen Auslöser für die volle Positionsgröße.
 
 ---
 
@@ -92,10 +87,10 @@ Peers: **Target (TGT)** bietet bei ähnlichem Multiple (16,3x) eine breiter dive
 |---|---|
 | Qualität | 2/5 |
 | Wachstum | 2/5 |
-| Bewertung | 4/5 |
+| Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -1.2% |
+| EV-Upside | +2.1% |
 
-**Verdict: WATCH (49/100)**
+**Verdict: WATCH (50/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

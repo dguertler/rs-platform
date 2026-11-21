@@ -17,14 +17,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "BAYN.DE",
-      "verdict": "HOLD",
-      "score": 65,
-      "created_at": "2026-06-01T20:38:52.215185",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
       "ticker": "BNR.DE",
       "verdict": "HOLD",
       "score": 60,
@@ -53,14 +45,6 @@
       "verdict": "HOLD",
       "score": 60,
       "created_at": "2026-06-01T20:38:52.268111",
-      "asymmetric_edge": true,
-      "ev_upside_pct": null
-    },
-    {
-      "ticker": "EOAN.DE",
-      "verdict": "HOLD",
-      "score": 60,
-      "created_at": "2026-06-01T20:38:52.276316",
       "asymmetric_edge": true,
       "ev_upside_pct": null
     },
@@ -722,19 +706,6 @@
       "ev_upside_pct": -9.8
     },
     {
-      "ticker": "PSX",
-      "verdict": "WATCH",
-      "score": 54,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "Negativer Free Cashflow (\u2212$1,13 Mrd.) belastet die Dividendendeckung trotz moderater Bewertung und intakter Erholungsstory."
-      },
-      "created_at": "2026-07-10T10:09:55.375823",
-      "ev_upside_pct": -9.9
-    },
-    {
       "ticker": "EBAY",
       "verdict": "HOLD",
       "score": 62,
@@ -1227,19 +1198,6 @@
         "reason": "Trotz starker H1-Zahlen und au\u00dfergew\u00f6hnlicher ROE/ROIC liegt das Trailing-KGV bereits an der Spitze der Peer-Bandbreite nahe dem 52W-Hoch, und der EV von \u221216,5% rechtfertigt keine volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-08-05T10:53:17.981039"
-    },
-    {
-      "ticker": "CSX",
-      "verdict": "HOLD",
-      "score": 66,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 0.5,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Q2-Earnings-Beat mit Margenexpansion best\u00e4tigt die fundamentale These, kein Risikofaktor \u00fcberwiegt aktuell das intakte Setup."
-      },
-      "created_at": "2026-07-23T07:05:05.454399"
     },
     {
       "ticker": "PCG",
@@ -1864,19 +1822,6 @@
         "reason": "RS-Score -21,04 (Rang 778) und negative Mittelfrist-Fenster (20T -10,8 %, 50T -28,7 %) zeigen kein tragf\u00e4higes technisches Setup trotz Earnings-Beat; der fundamentale Turnaround ist zu fr\u00fch, um ein aktives Signal zu rechtfertigen."
       },
       "created_at": "2026-07-30T06:55:03.473893"
-    },
-    {
-      "ticker": "WDC",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 8.9,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bilanz",
-        "reason": "RS-Rang 3 im S&P500 st\u00fctzt die technische These, aber D/E 17,81x aus der Spin-off-Struktur begrenzt die Fehlertoleranz bei einem Nachfrage-Digestion-Szenario, weshalb trotz intaktem AI-Storage-Katalysator keine volle Positionsgr\u00f6\u00dfe gerechtfertigt ist."
-      },
-      "created_at": "2026-07-30T14:03:37.374451"
     },
     {
       "ticker": "CDNA",
@@ -2516,19 +2461,6 @@
       "created_at": "2026-09-04T11:51:38.282377"
     },
     {
-      "ticker": "HPE",
-      "verdict": "HOLD",
-      "score": 62,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 5.5,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Sonstiges",
-        "reason": "trotz Beat-and-Raise verkauft der Markt die Aktie wegen dokumentierter Shipment-Conversion-Zweifel (Speicher-/NAND-Engp\u00e4sse), der EV-Edge bleibt mit +4,0% unter der Asymmetrie-Schwelle."
-      },
-      "created_at": "2026-09-04T11:51:38.301850"
-    },
-    {
       "ticker": "IQV",
       "verdict": "WATCH",
       "score": 53,
@@ -2540,19 +2472,6 @@
         "reason": "die hohe Verschuldung (D/E 257,98) begrenzt die Flexibilit\u00e4t, der EV-Edge ist mit \u22123,4% leicht negativ und bietet keine Kompensation f\u00fcr das Bilanzrisiko."
       },
       "created_at": "2026-09-04T11:51:38.321000"
-    },
-    {
-      "ticker": "STX",
-      "verdict": "WATCH",
-      "score": 48,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -12.9,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bilanz",
-        "reason": "Die Kombination aus negativem Erwartungswert (\u221214,2%) und einer strukturell hohen Verschuldung (Debt/Equity 179,9%) bei d\u00fcnner Eigenkapitalbasis \u00fcberwiegt das technische Funnel-Signal."
-      },
-      "created_at": "2026-09-05T08:14:29.656382"
     },
     {
       "ticker": "BBCP",
@@ -2631,19 +2550,6 @@
         "reason": "der reale operative Turnaround (HBR-Verbesserung, Guidance-Anhebung) wird durch den geplanten Medicaid-Mitgliederr\u00fcckgang (\u22128/\u22129%) und das ungel\u00f6ste ACA-Subventionsrisiko aufgewogen, der Erwartungswert bleibt trotz g\u00fcnstiger Bewertung leicht negativ."
       },
       "created_at": "2026-09-15T07:42:33.965520"
-    },
-    {
-      "ticker": "BBY",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -1.2,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Sonstiges",
-        "reason": "der Q2-Beat war teilweise durch eine nicht wiederholbare Zollr\u00fcckerstattung getrieben, der Kurs notiert bereits nahe dem 52-Wochen-Hoch, der Erwartungswert bleibt trotz g\u00fcnstiger relativer Bewertung negativ."
-      },
-      "created_at": "2026-09-15T07:44:10.928115"
     },
     {
       "ticker": "TEAM",
@@ -3203,6 +3109,102 @@
         "reason": "40,8x Forward \u00fcber allen Peers bei 9,9 % Umsatzwachstum, RSI ~76, der EV liegt 10,4 % unter dem Kurs."
       },
       "created_at": "2026-11-21T07:02:21.730635"
+    },
+    {
+      "ticker": "PSX",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "EV-Rechnung zeigt nach dem Ausbruch auf ein neues 52-Wochen-Hoch ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221211,0%) bei nur mittelm\u00e4\u00dfigem RS-Rang (41) und ungekl\u00e4rtem negativem Free Cashflow."
+      },
+      "created_at": "2026-07-10T10:14:56.340977"
+    },
+    {
+      "ticker": "BBY",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Der PC-Ersatzzyklus ist real, aber die zuletzt abflachende kurzfristige Dynamik (5T/10T nahe null) liefert derzeit keinen akuten technischen Ausl\u00f6ser f\u00fcr die volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-10T10:16:44.239848"
+    },
+    {
+      "ticker": "CSX",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die EV-Rechnung zeigt bei einem historisch teuren KGV (30x Trailing gegen\u00fcber sektortypisch 15\u201320x) ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221210,0%), ein erheblicher Teil der aktuellen Pr\u00e4mie beruht auf unbest\u00e4tigter M&A-Spekulation."
+      },
+      "created_at": "2026-07-10T10:18:03.734436"
+    },
+    {
+      "ticker": "BAYN.DE",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "Trotz des st\u00e4rksten RS-Signals im DAX-40 (Rang 1) \u00fcberwiegt das bilanzielle Risiko aus der ungel\u00f6sten Glyphosat-Haftung (D/E 134,3%, negativer Net Margin) das technische Setup; die EV-Rechnung best\u00e4tigt fehlenden Edge (\u221210,6%)."
+      },
+      "created_at": "2026-07-10T10:19:31.561302"
+    },
+    {
+      "ticker": "WDC",
+      "verdict": "WATCH",
+      "score": 48,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Trotz Rang 1 im S&P-500-RS-Ranking und einem realen fundamentalen Katalysator (KI-Nearline-Nachfrage) ergibt die EV-Rechnung nach der +180%-6-Monats-Rally ein deutlich negatives Chance-Risiko-Verh\u00e4ltnis (\u221227,6%) bei bereits extrem hohen Multiples (31,6x Forward-KGV)."
+      },
+      "created_at": "2026-07-10T10:22:38.545641"
+    },
+    {
+      "ticker": "STX",
+      "verdict": "WATCH",
+      "score": 40,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bilanz",
+        "reason": "Die extreme Verschuldung (D/E 381,6%, P/B 182x auf aktuellem Kursniveau) macht die Position trotz starkem RS-Signal und realem fundamentalen Katalysator zu riskant f\u00fcr die volle Positionsgr\u00f6\u00dfe; die EV-Rechnung best\u00e4tigt das deutlich negative Chance-Risiko-Verh\u00e4ltnis (\u221240,9%)."
+      },
+      "created_at": "2026-07-10T10:24:05.983117"
+    },
+    {
+      "ticker": "HPE",
+      "verdict": "BUY",
+      "score": 72,
+      "asymmetric_edge": true,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die au\u00dfergew\u00f6hnliche 5-Tage-Bewegung (+18,3%) l\u00e4sst sich aus den vorliegenden Daten nicht auf einen konkreten, best\u00e4tigten Ausl\u00f6ser zur\u00fcckf\u00fchren; solange dieser nicht verifiziert ist, rechtfertigt das RS-Signal keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-07-10T10:25:35.957810"
+    },
+    {
+      "ticker": "EOAN.DE",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Solides reguliertes Gesch\u00e4ftsmodell mit strukturellem Elektrifizierungs-R\u00fcckenwind, aber ohne aktives GWS-Signal und ohne konkreten kurzfristigen Ausl\u00f6ser bleibt die volle Positionsgr\u00f6\u00dfe nicht gerechtfertigt."
+      },
+      "created_at": "2026-07-10T10:26:53.414017"
     }
   ]
 }

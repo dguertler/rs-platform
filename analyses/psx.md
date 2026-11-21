@@ -16,87 +16,83 @@
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $235–$285 (20 %) · Base $175–$210 (45 %) · Bear $75–$105 (35 %) · EV ~$170
-
 ## 1. INVESTMENT-CASE
 
-Phillips 66 ist ein integrierter Energiekonzern (Raffinerie + Midstream + Chemicals via CPChem-JV), dessen operative Marge (0,64 %) aktuell einen klassischen Raffinerie-Zyklus-Tiefpunkt zeigt — Crack Spreads sind komprimiert, und der freie Cashflow ist mit −$1,13 Mrd. negativ. Trotzdem ist der Kurs in 6 Monaten um 30,8 % gestiegen, und der Forward-PE von nur 10,1x impliziert bereits eine deutliche Ergebniserholung (Forward-EPS ~$17,40 vs. Trailing-EPS ~$10,13 — ein erwarteter Sprung von ~72 %). Was der Markt einpreist: Der Markt sieht über den Zyklustiefpunkt hinweg auf eine Erholung der Raffineriemargen, gestützt durch industrieweite Kapazitätsschließungen bei Wettbewerbern. Strukturell relevant: Das wachsende Midstream- (DCP-Konsolidierung) und Chemicals-Geschäft (CPChem, Sweeny-Ausbau) reduziert die reine Raffinerie-Zyklus-Abhängigkeit graduell, ist aber noch nicht dominant genug, um die These fundamental zu verändern.
+DATENLAGE: Fundamental-Snapshot vom 06.07.2026 liegt vor der jüngsten Kursbewegung (Schlusskurs 09.07.2026: $189,82, +7,6% ggü. Snapshot). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $189,82 neu gerechnet.
+
+Phillips 66 ist kein reiner Raffineriebetreiber mehr, sondern ein integriertes Downstream-Portfolio aus Refining, Midstream (seit 2023 vollständig konsolidierte DCP Midstream) und Chemicals (50%-JV CPChem mit Chevron). Die eigentliche Story der letzten Jahre war der Elliott-Management-Aktivismus, der eine stärkere Trennung von Midstream- und Refining-Cashflows sowie mehr Kapitaldisziplin erzwungen hat — der Markt bewertet das Unternehmen zunehmend als Summe zweier unterschiedlich zyklischer Geschäfte, nicht mehr als reinen Refiner. Was der Markt hier übersieht: Trotz des Kurssprungs auf ein neues 52-Wochen-Hoch ($190,61) bleibt das operative Bild gemischt — das ausgewiesene Operating-Margin von 0,6% ist zwar branchentypisch dünn für Refining (hohe Umsatzbasis, geringe Marge je Barrel), aber der negative Free Cashflow von -$1,13 Mrd. bei $134,49 Mrd. Umsatz ist aus den vorliegenden Daten nicht abschließend auflösbar — mögliche Ursachen sind Capex-Spitzen im Midstream-Ausbau oder Working-Capital-Effekte, beides nicht separat ausgewiesen. Das RS-Signal (Score 56,35, Rang 41 im S&P 500) ist nur mittelmäßig — kein Top-Momentum-Kandidat trotz des Ausbruchs.
 
 ## 2. GESCHÄFTSMODELL
 
-- Raffineriegeschäft (Crack-Spread-getrieben) bleibt der volatilste und größte Ergebnistreiber
-- Midstream-Segment (Pipelines, Terminals, DCP-Konsolidierung) liefert stabilere, gebührenbasierte Cashflows
-- CPChem-Petrochemie-Joint-Venture diversifiziert das Geschäftsmodell zusätzlich zum reinen Raffineriezyklus
-- Sweeny-Hub-Ausbau (Petrochemie) als struktureller Wachstumskatalysator jenseits des Raffineriezyklus
-- Rodeo Renewable-Diesel-Projekt hängt an regulatorischen Kreditpreisen (LCFS/RFS) — zusätzliches Regulierungsrisiko
-- Dividendenrendite 2,88 % bei aktuell negativem FCF — Deckungsfrage muss beobachtet werden
-- Umsatz TTM $134,49 Mrd., Wachstum +6,9 % YoY — margengetrieben, nicht volumengetrieben
-- Debt/Equity 91,4x — moderat für ein kapitalintensives integriertes Energieunternehmen
+- Refining: Verarbeitung von Rohöl zu Produkten (Benzin, Diesel, Jet Fuel) — Marge hängt an Crack-Spreads, nicht am Ölpreis selbst
+- Midstream (DCP Midstream, vollständig integriert): Pipelines, Terminals, NGL-Verarbeitung — stabilere, gebührenbasierte Cashflows
+- Chemicals (CPChem, 50% JV mit Chevron): Petrochemikalien, Polyethylen — eigener Zyklus, unabhängig von Refining-Margen
+- Marketing & Specialties: Vertriebsnetz, Schmierstoffe — margenstärker, aber kleinerer Umsatzanteil
+- Operativer Hebel: Bei steigenden Crack-Spreads schlägt jeder zusätzliche Dollar fast vollständig auf das Ergebnis durch — Fixkostenbasis der Raffinerien ist hoch
+- Strukturelle Abhängigkeit: Nachfrage nach Raffinerieprodukten korreliert mit globalem BIP-Wachstum und Mobilität — zyklisch, nicht strukturell wachsend
+- Portfolio-Diversifikation über Midstream/Chemicals reduziert die reine Refining-Zyklizität, ersetzt sie aber nicht vollständig
+- Kapitalrückführung: Aktienrückkäufe und Dividende als zentrales Element der Elliott-getriebenen Kapitaldisziplin-Story
 
 ## 3. BULL CASE
 
-Raffineriemargen erholen sich deutlicher als erwartet durch branchenweite Kapazitätsschließungen bei Wettbewerbern, Sweeny-Petrochemie-Ausbau liefert zusätzliches Volumen. Annahme (kein Konsens): FY27-EPS ~$20,00 × 13x = $260. Bull-Kursziel: $235–$285 (Mittelpunkt $260). Eintrittswahrscheinlichkeit: 20 %.
+Crack-Spreads bleiben strukturell erhöht durch unterinvestierte globale Raffineriekapazität und starke US-Exportnachfrage; Midstream-EBITDA-Mix wächst weiter und stützt eine höhere Bewertungsbasis. Annahme (kein Konsens): FY27E EPS ~$20 × 12–14x Forward = $240–$280. Kursziel Bull: $240–$280 (Mittelwert $260). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Raffineriemargen normalisieren sich moderat in Richtung des Konsens-Forward-Niveaus, Midstream/Chemicals wachsen stetig weiter. Annahme (kein Konsens): FY27-EPS ~$16,00 × 12x (normalisiertes Zyklus-Multiple) = $192. Base-Kursziel: $175–$210 (Mittelpunkt $192,50). Eintrittswahrscheinlichkeit: 45 %.
+Wahrscheinlichstes Szenario: Crack-Spreads normalisieren leicht vom aktuellen Niveau, bleiben aber über dem historischen Mittel; Midstream-Wachstum kompensiert einen Teil der Refining-Normalisierung. Forward-EPS ~$17,50 (aus adjustierter Forward-PE 10,9x auf aktuellem Kursniveau) als Ausgangspunkt × 10,5–12x = $184–$210. Kursziel Base: $184–$210 (Mittelwert $197). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Raffineriemargen bleiben strukturell gedrückt durch Überkapazität und nachlassende Produktnachfrage (Effizienzgewinne, EV-Adoption), hoher Capex belastet den FCF weiter. Kundenkonzentration: breite Abnehmerbasis für Raffinerieprodukte, geringes Einzelkundenrisiko. Geopolitik: Ölpreisvolatilität und geopolitische Angebotsschocks wirken zweiseitig auf Crack Spreads und Rohölkosten. Lieferketten: diversifizierte Rohölbeschaffung, kein Single-Source-Risiko im klassischen Sinn. Verwässerung: Aktienanzahl-Trend nicht im Datensatz verfügbar — auf Datenbasis nicht beurteilbar. Regulierung: Umwelt-/Emissionsauflagen sowie LCFS/RFS-Kreditpreisrisiken für das Rodeo-Projekt sind ein reales strukturelles Risiko. Annahme: FY27-EPS ~$8,00 × 11x = $88. Bear-Kursziel: $75–$105 (Mittelpunkt $90). Eintrittswahrscheinlichkeit: 35 %.
+Auslöser: Globale Raffineriekapazität (China, Naher Osten) kommt schneller online als erwartet, gleichzeitig bremst eine Nachfrageschwäche die Crack-Spreads auf zyklische Tiefstände. Kundenkonzentration: Produkte werden im Großhandel/Spotmarkt vertrieben, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik: Kein direktes China-Fertigungsrisiko, aber Rohölimport- und Exportlogistik bleibt sensitiv gegenüber OPEC+-Entscheidungen und Sanktionsregimen. Lieferketten/Foundry: Kein Single-Source-Risiko im klassischen Sinn, aber einzelne Großraffinerien sind Klumpenrisiken bei ungeplanten Ausfällen. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar — historisch nettoreduzierend durch Buybacks. Regulierung: Verschärfte Emissionsvorgaben oder CO2-Bepreisung könnten Compliance-Kosten strukturell erhöhen. EPS fällt auf ~$9 (Zyklustief, vgl. negativer FCF bereits heute als Frühindikator). Annahme: FY27E EPS ~$9 × 8–10x = $72–$90. Kursziel Bear: $72–$90 (Mittelwert $81). Eintrittswahrscheinlichkeit: 35%.
 
-**Summe: 20 % + 45 % + 35 % = 100 %**
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Erwartungswert:** EV = 0,20 × $260 + 0,45 × $192,50 + 0,35 × $90 = $52 + $86,625 + $31,5 = **~$170 — implizites Downside vs. aktuellem Kurs ($176,42): −3,6 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen klaren asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $260 + 0,45 × $197 + 0,35 × $81 = $52,00 + $88,65 + $28,35 = **~$169 — implizites Downside vs. aktuellem Kurs ($189,82): −11,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 14,55 % und ROIC 11,4 % sind für ein kapitalintensives Energieunternehmen solide — aber die operative Marge von 0,64 % ist ein Zyklustiefpunkt-Wert und darf nicht als repräsentativ für die Ertragskraft über den vollen Zyklus interpretiert werden. Nettomarge 3,07 % wird durch Midstream-/Chemicals-Beiträge gestützt, die die Raffinerie-Schwäche teilweise kompensieren. Der negative FCF (−$1,13 Mrd.) ist kurzfristig ein Warnsignal für die Dividendendeckung und muss aktiv beobachtet werden.
+ROE 14,5% ist solide, aber nicht herausragend für ein Downstream-Geschäft im Zyklushoch. Operating Margin von 0,6% muss im Zykluskontext bewertet werden — bei Refinern ist dies keine Anomalie, sondern die typische Größenordnung eines margenschwachen, umsatzstarken Geschäfts. Der negative Free Cashflow (-$1,13 Mrd.) trotz positivem Nettoergebnis ist die auffälligste Kennzahl-Anomalie und aus den Daten nicht abschließend auflösbar — dies sollte vor einer Positionsentscheidung zwingend im Quartalsbericht geprüft werden. Debt/Equity von 91,4% ist moderat für die Branche. Der echte wirtschaftliche Burggraben liegt in der Midstream-Infrastruktur (Pipelines, Terminals) mit langfristigen Verträgen — die Refining-Sparte selbst hat keinen strukturellen Burggraben, nur Skalenvorteile.
 
-## 7. BEWERTUNG
+## 7. BEWERTUNG (vorläufig, Datenstand)
 
-Trailing-PE 17,4x wirkt moderat, basiert aber auf einem Zyklustief-EPS. Der Forward-PE von 10,1x impliziert bereits eine kräftige Ergebniserholung (Forward-EPS $17,40, +72 % ggü. Trailing). Rückrechnung: Bei $176,42 und einem Mid-Cycle-Multiple von 12x müsste das Forward-EPS bei $14,70 liegen — leicht unter der Konsensschätzung ($17,40), das heißt der aktuelle Kurs preist bereits eine recht aggressive, aber nicht unrealistische Erholung ein, sofern die branchenweite Kapazitätsdisziplin anhält. Buchwert-Vergleich: P/B 2,48x ist für ein integriertes Energieunternehmen mit werthaltigem Sachanlagevermögen angemessen.
+Snapshot-Multiples (Trailing PE 17,4x, Forward PE 10,1x, P/B 2,48x) vor dem Kurssprung. Auf aktuellem Niveau ($189,82): Trailing PE ~18,7x, Forward PE ~10,9x, P/B ~2,67x. Eine zyklische Aktie nie nur am aktuellen KGV bewerten — 10,9x Forward wirkt moderat, spiegelt aber Zyklusspitzen-Erwartungen bei Crack-Spreads. Rückrechnung "Was preist der Kurs ein?": $189,82 bei Forward-EPS $17,40 impliziert eine Fortsetzung der aktuell starken Margenumgebung mindestens bis FY27 — ambitioniert, da Crack-Spreads historisch mean-reverting sind. Das Analysten-Konsensziel ($194,50, 18 Analysten, "buy") liegt nur 2,5% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Indiz für begrenzten Street-Optimismus auf diesem Niveau.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 56,4 (Rang 41 im S&P 500), Kurs +30,8 % über 6 Monate trotz schwacher operativer Marge — der Markt blickt über den Zyklustiefpunkt hinweg. Analysten-Konsens (Buy, $194,50) liegt über dem aktuellen Kurs und bietet moderaten Rückenwind — Kursziele sollten dennoch als Sentiment-Indikator, nicht als Bewertungs-Ceiling verstanden werden. Short-Float-Daten nicht verfügbar.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der Ausbruch auf ein neues 52-Wochen-Hoch bei nur mittelmäßigem RS-Score (56,35, Rang 41) deutet eher auf eine breite Sektorrotation in Energie/Refining als auf einen idiosynkratischen Katalysator hin. Für neue Käufer müsste entweder eine erneute Crack-Spread-Ausweitung oder eine konkrete Midstream-Bewertungsaufwertung (Multiple-Re-Rating) sichtbar werden. Enttäuschungsrisiko: Der negative Free Cashflow bei gleichzeitigem Allzeithoch ist ein klassisches Setup für eine Korrektur, sollte der nächste Quartalsbericht dies nicht auflösen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Das 20T-Fenster ist nahezu flach (+0,65 %) nach einer starken Rallye (50T +10,1 %, 6M +30,8 %) — deutet auf eine Konsolidierungsphase nach der Rallye hin. Kurs liegt 7,5 % unter dem 52-Wochen-Hoch. Ein Rückfall unter die $155–160-Zone (~−12–15 %) wäre die erste technische Warnung, ein Verlust der $140er-Marke signalisiert eine tiefere Korrektur.
+RS-Score 56,35, Rang 41 im S&P 500 — solides, aber kein Spitzenmomentum. 5T +6,79%, 10T +7,98%, 20T +0,65%, 50T +10,12%, 6M +30,81% — die Bewegung hat sich in den letzten 20 Handelstagen deutlich verlangsamt, der jüngste Sprung (5T/10T) wirkt wie ein isolierter Ausbruch statt einer breiten Trendbeschleunigung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt den Ausbruch nicht zusätzlich. Warnsignal: Ein Rückfall unter $176 (Snapshot-Niveau) würde den gesamten jüngsten Sprung negieren.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($220–$280):** Strukturelle Kapazitätsbereinigung in der Raffineriebranche schafft ein dauerhaft höheres Margenniveau; Sweeny/CPChem-Ausbau und Midstream-Wachstum re-raten PSX Richtung eines hybriden Energie-Infrastruktur-Multiples.
-
-**Base ($150–$210):** Raffineriemargen zyklisieren normal um einen Mid-Cycle-Durchschnitt; Midstream/Chemicals liefern Stabilität.
-
-**Bear ($70–$120):** Strukturelle Raffinerie-Überkapazität hält an (EV-Adoption, Effizienzgewinne dämpfen Produktnachfrage), Marge strukturell belastet, Dividendenkürzungsrisiko bei anhaltend negativem FCF.
-
-Entscheidende Variable: Branchenweite Raffineriekapazitätsdisziplin und Tempo der Produktnachfrageentwicklung.
+Bull (3–5 Jahre): Midstream wächst auf >40% des EBITDA-Mix, Multiple-Re-Rating Richtung Pipeline-Peers (12–15x). Kursziel: $300–$380. Entscheidende Variable: erfolgreiche Portfolio-Transformation weg von reinem Refining.
+Base: Refining bleibt Kernsegment, Midstream wächst moderat, Crack-Spreads pendeln um historisches Mittel. Kursziel: $200–$260.
+Bear: Strukturelle Nachfrageerosion durch EV-Durchdringung im Straßenverkehr trifft Refining-Volumina, Midstream-Wachstum kann dies nicht kompensieren. Kursziel: $90–$150.
+Entscheidende Variable über alle Szenarien: Tempo und Erfolg der Midstream-Diversifikation relativ zur strukturellen Nachfrageentwicklung bei Raffinerieprodukten.
 
 ## 11. PROFI-FAZIT
 
-PSX ist primär ein zyklischer Trading-Trade auf die Raffineriemarge, kein reiner Buy-and-Hold-Compounder trotz Dividendenrendite — die operative Marge von 0,64 % zeigt, wie volatil das Kerngeschäft ist. Für zyklus-erfahrene Value-/Income-Investoren geeignet, die die Raffinerie-Zyklik verstehen; Positionsgröße angesichts des negativen FCF und des Dividendendeckungsrisikos moderat halten. Peers: **Valero (VLO)** als reineres Raffinerie-Play, oft günstiger bewertet, **Marathon Petroleum (MPC)** mit ähnlichem integriertem Modell. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −11,0%). PSX ist kein Compounder, sondern ein zyklischer Trade auf Crack-Spreads mit einer wachsenden, stabilisierenden Midstream-Komponente. Nach dem Sprung auf ein neues 52-Wochen-Hoch bei nur mittelmäßigem RS-Rang und negativem Free Cashflow ist die Aktie für Neueinstiege kein High-Conviction-Setup — der negative FCF sollte vor jeder Positionsentscheidung im nächsten Quartalsbericht geklärt werden. Bestehende Positionen mit Trailing-Stop (10%) führen. Positionsgröße bei Neueinstieg klein halten (max. 1–2%) angesichts der negativen EV-Rechnung. Direkte Peers: **VLO** (Valero) ist bilanziell konservativer (D/E 42,7% vs. PSX 91,4%) bei vergleichbarer Crack-Spread-Exposure; **MPC** (Marathon Petroleum) hat das höhere D/E (146,5%), aber eine ähnliche Elliott-getriebene Kapitaldisziplin-Story. Peer-Multiples nicht vollständig im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
-- Wachstum: 2/5
-- Bewertung: 3/5
-- Katalysator: 3/5
+- Wachstum: 3/5
+- Bewertung: 2/5
+- Katalysator: 2/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Negativer Free Cashflow (−$1,13 Mrd.) belastet die Dividendendeckung trotz moderater Bewertung und intakter Erholungsstory.
-
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — EV-Rechnung zeigt nach dem Ausbruch auf ein neues 52-Wochen-Hoch ein negatives Chance-Risiko-Verhältnis (−11,0%) bei nur mittelmäßigem RS-Rang (41) und ungeklärtem negativem Free Cashflow.
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 3/5 |
-| Wachstum | 2/5 |
-| Bewertung | 3/5 |
-| Katalysator | 3/5 |
-| EV-Upside | +2.5% |
+| Wachstum | 3/5 |
+| Bewertung | 2/5 |
+| Katalysator | 2/5 |
+| EV-Upside | +1.7% |
 
-**Verdict: WATCH (54/100)**
+**Verdict: WATCH (50/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

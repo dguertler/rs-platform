@@ -1,93 +1,89 @@
 # HPE — KI-Aktienbewertung
 
-**Hewlett Packard Enterprise Comp** · Technology · 04.09.2026 · Signal: Kein Signal
+**Hewlett Packard Enterprise Comp** · Technology · 10.07.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 50.87 |
-| Market Cap | $67.36 Mrd. |
-| Forward PE | 12.46 |
+| Kurs | 41.23 |
+| Market Cap | $54.60 Mrd. |
+| Forward PE | 10.31 |
 | Revenue (TTM) | $38.79 Mrd. |
 | Gross Margin | 33.8% |
 | ROE | 6.3% |
-| RS-Score | 284.1 |
+| RS-Score | 207.9 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
----
+**⚡ ASYMMETRISCHER EDGE** — EV-Upside +30.2% (>20%)
 
-DATENLAGE: Fundamental-Snapshot vom 02.09.2026 fällt mit dem Earnings-Tag zusammen (Q3-FY26-Zahlen wurden am 02.09.2026 nach Handelsschluss veröffentlicht) — Snapshot-Kurs $50,87 spiegelt noch nicht die volle Marktreaktion. Aktuell recherchierter Kurs: $48,40 (04.09.2026, nach -9,5% am 03.09. und weiteren -6,6% intraday am 04.09.). Abweichung ~4,9%, Multiples zusätzlich auf aktuellem Niveau gerechnet.
+---
 
 ## 1. INVESTMENT-CASE
 
-Auslöser öffentlich verifizierbar: Trotz Rekordumsatz ($12,2 Mrd., +34% YoY), Rekord-EPS ($1,11 non-GAAP vs. $0,93 erwartet) und angehobener FY26-Guidance (EPS $3,75–3,85, Umsatz $45,96–46,99 Mrd.) verkauft der Markt die Aktie — Grund laut Berichterstattung: AI-Systems-Orders wachsen schneller als der Umsatz (Auftragsbestand $6,8 Mrd., +30% sequenziell), weil Speicher-/NAND-/Wafer-Engpässe die Auslieferung limitieren. Das ist die Kernfrage der These: Ist das ein temporäres Lieferketten-Problem oder ein strukturelles Konversionsrisiko für den AI-Systems-Backlog?
+DATENLAGE: Fundamental-Snapshot vom 06.07.2026 ($41,23) liegt deutlich vor der jüngsten Kursbewegung — Schlusskurs 09.07.2026: $49,11 (+19,1%). Konfidenz der Bewertungsaussagen stark reduziert; alle Multiples werden nachfolgend auf Basis von $49,11 neu gerechnet. Der Auslöser dieser Bewegung ist aus den vorliegenden Daten nicht verifizierbar — vor einer Positionsentscheidung zwingend prüfen, was den Sprung ausgelöst hat.
+
+HPE hat sich in den letzten Jahren von einem klassischen Server-/Storage-Hardwarehersteller zu einem AI-Infrastruktur- und Networking-Anbieter gewandelt: Die 2025 abgeschlossene Übernahme von Juniper Networks hat das Networking-Segment strukturell gestärkt, während GreenLake (Hybrid-Cloud-as-a-Service) den Umsatzmix schrittweise Richtung wiederkehrender Erlöse verschiebt. Die eigentliche Story ist der Versuch, aus einem margenschwachen Hardware-Geschäft (Operating Margin 8,7%) über Recurring-Revenue-Anteile und AI-Server-Nachfrage ein strukturell besseres Margenprofil zu entwickeln. Das RS-Signal ist mit Score 207,93 und Rang 9 im S&P 500 sehr stark, angetrieben von einer außergewöhnlichen 5-Tage-Bewegung (+18,31%) — genau diese Bewegung deckt sich mit der oben beschriebenen Diskrepanz zwischen Snapshot- und aktuellem Kurs und sollte vor jeder Entscheidung anhand aktueller Nachrichtenlage verifiziert werden, da eine Ursache aus den Daten hier nicht behauptet werden darf.
 
 ## 2. GESCHÄFTSMODELL
 
-- Server-/Compute-Segment (inkl. AI Systems) als Hauptwachstumstreiber, Backlog $6,8 Mrd. AI-spezifisch
-- Networking-Segment durch die abgeschlossene Juniper-Networks-Integration (vor Zeitplan abgeschlossen) strukturell gestärkt
-- Storage- und Hybrid-Cloud-Segment als margenstabilere, reifere Ergänzung
-- Operativer Hebel: Non-GAAP-Bruttomarge im Rekordbereich, aber Auftragswachstum (+42% YoY lt. Guidance-Kontext) übersteigt Umsatzwachstum — Konversions-Lag als strukturelles Merkmal des aktuellen Zyklus
-- Strukturelle Abhängigkeit von Nvidia-/Speicherchip-Lieferanten für AI-Systems — kein Single-Source-Monopol wie bei reinen GPU-Designern, aber Komponentenverfügbarkeit ist der limitierende Faktor
-- Juniper-Integration liefert Cross-Sell-Potenzial (Networking + AI-Infrastruktur aus einer Hand) — noch nicht vollständig in den Zahlen sichtbar
-- FY27-Rahmenwerk: Umsatzwachstum 13–17%, EPS $4,40–4,60, FCF ≥$5 Mrd. — erste mehrjährige Sichtbarkeit über den aktuellen AI-Zyklus hinaus
-- Bilanz: D/E 84,03 — moderat erhöht, aber im Rahmen für einen Infrastruktur-Hardware-Anbieter dieser Größe
+- AI-Server (GPU-basierte Systeme) über eine Partnerschaft mit NVIDIA — wachstumsstärkstes Segment
+- Networking: seit der Juniper-Übernahme (2025) ein deutlich gestärktes, margenstärkeres Segment
+- GreenLake: Hybrid-Cloud-as-a-Service-Modell, das Hardware-Verkäufe schrittweise in wiederkehrende Umsätze überführt
+- Storage und klassisches Server-Geschäft (Compute) als Kernbasis mit strukturell niedrigeren Margen
+- Operativer Hebel: Bei geringer Basis-Marge (8,7% Operating Margin) hängt die Ergebnisentwicklung stark am Produktmix-Shift Richtung GreenLake/Networking
+- Strukturelle Abhängigkeit von Hyperscaler- und Enterprise-AI-Capex-Zyklen sowie von NVIDIA-GPU-Verfügbarkeit als Engpassfaktor
+- Regierungskunden (u.a. über die frühere Cray-Akquisition) liefern stabile, aber politisch abhängige Aufträge
+- Kapitalrückführung über Dividende bei gleichzeitig laufender Integration der Juniper-Akquisition
 
 ## 3. BULL CASE
 
-Peers: NetApp (NTAP, Fwd-PE 18,2x), Cisco (CSCO, Fwd-PE 19,6x), Super Micro (SMCI, Fwd-PE 6,9x) — Bandbreite 6,9x–19,6x (Dell aktuell bei ~30x als Ausreißer, hier nicht als Anker verwendet). Speicher-/NAND-Engpässe lösen sich schneller als erwartet, Backlog-Konversion beschleunigt sich, Juniper-Cross-Sell trägt zusätzlich. Annahme (kein Konsens): FY27-EPS ~$5,00 (über dem eigenen Rahmenwerk-Top von $4,60) × 17x (nahe NTAP/CSCO) = $85. Bull-Kursziel: $75–$95. Eintrittswahrscheinlichkeit: 25%.
+GreenLake skaliert auf über $12 Mrd. ARR bis FY28, die Juniper-Integration liefert die erwarteten Networking-Synergien vollständig, der AI-Server-Marktanteil wächst weiter über die NVIDIA-Partnerschaft. Strukturelle Margennachhaltigkeit: Ein steigender GreenLake-/Networking-Mix (Margen 18–22%) gegenüber klassischen Server-Margen (5–8%) ist ein echter, in der aktuellen Umsatzentwicklung bereits sichtbarer Mix-Shift-Hebel. Annahme (kein Konsens): FY27E EPS ~$5,50 × 15–17x Forward = $82,50–$93,50. Kursziel Bull: $78–$96 (Mittelwert $87). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: FY27-Rahmenwerk wird getroffen, Komponentenengpässe bleiben ein moderater, aber kein eskalierender Bremsfaktor. FY27-EPS $4,50 (Mittelpunkt der eigenen Guidance-Bandbreite $4,40–4,60) × 11x (nahe eigenem aktuellen neu berechneten Forward-KGV von ~10,8x, innerhalb der Peer-Bandbreite) = $49,5. Base-Kursziel: $45–$55. Eintrittswahrscheinlichkeit: 40%.
+Wahrscheinlichstes Szenario: Der AI-Server-Boom hält an, GreenLake wächst stetig weiter, moderate Margenverbesserung auf rund 10% Operating Margin bis FY27. Forward-EPS ~$4,00 (aus Forward-PE 10,3x auf Snapshot-Basis) leicht steigend auf ~$4,20 als Ausgangspunkt × 12–13x = $50–$55. Kursziel Base: $48–$58 (Mittelwert $53). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Die vom Markt bereits am Earnings-Tag adressierten Speicher-/NAND-/Wafer-Engpässe eskalieren, Auslieferungen verzögern sich strukturell, Marge leidet unter Spot-Markt-Beschaffungskosten. Kundenkonzentration: AI-Systems-Orders konzentrieren sich vermutlich auf wenige Großkunden — aus den Daten nicht quantifizierbar. Geopolitik/Exportkontrollen: Nvidia-GPU-Exportbeschränkungen könnten Teile des AI-Systems-Geschäfts einschränken — real, nicht quantifizierbar. Lieferkette: Speicher-/NAND-/Wafer-Engpässe sind bereits jetzt der dokumentierte, aktive Risikofaktor — das materiellste Einzelrisiko dieser These. Verwässerung: Shares Outstanding nicht im Datensatz — aus den Daten nicht abschließend beurteilbar. Regulierung: sektortypisch, keine akuten Signale. FY27-EPS verfehlt auf ~$3,20 × 8x (nahe SMCI-Floor) = $25,6. Bear-Kursziel: $22–$30. Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Eine Pause bei AI-Infrastruktur-Capex bei Hyperscalern, der Server-Markt fällt in einen Überangebotszyklus wie 2022–2023, HPE verliert AI-Server-Marktanteile an Dell, SuperMicro und ODM-Anbieter. Kundenkonzentration: Regierungskunden machen über das ehemalige Cray-Geschäft schätzungsweise rund 20% des relevanten Umsatzes aus — politische Risiken bei Budgetkürzungen sind real, aber aus den Daten nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: Server-Exporte nach China sind durch bestehende Exportkontrollen bereits limitiert — ein weiteres Verschärfungsrisiko besteht. Lieferketten/Foundry: NVIDIA-GPU-Verfügbarkeit ist ein zentraler Flaschenhals für das AI-Server-Geschäft — ein klassisches Single-Source-Abhängigkeitsrisiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; die Juniper-Akquisition wurde teilweise fremdfinanziert. Regulierung: DoD-Vertragsrisiken bei politischen Regierungswechseln sind ein bekanntes Branchenrisiko für den Regierungskundenanteil. EPS fällt auf ~$2,00 bei Margendruck und Integrationskosten. Annahme: FY27E EPS ~$2,00 × 9–10x = $18–$20. Kursziel Bear: $16–$26 (Mittelwert $21). Eintrittswahrscheinlichkeit: 35%.
 
-**Summe: 25% + 40% + 35% = 100%**
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Erwartungswert:** EV = 0,25 × $85 + 0,40 × $50 + 0,35 × $26 = $21,25 + $20,00 + $9,10 = **~$50,35 — implizites Upside/Downside vs. aktuellem Kurs ($48,40): +4,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $87 + 0,45 × $53 + 0,35 × $21 = $17,40 + $23,85 + $7,35 = **~$48,60 — implizites Downside vs. aktuellem Kurs ($49,11): −1,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
-## 6. FUNDAMENTALE QUALITÄT
+## 6. FUNDAMENTALE QUALITÄT (vorläufig, Datenstand)
 
-ROE 6,3% und Net Margin 4,0% (TTM) sind für ein Hardware-/Infrastruktur-Unternehmen unauffällig, aber nicht herausragend — die aktuelle Ergebnisdynamik (Rekord-Op-Marge laut Q3-Bericht) ist in den TTM-Zahlen noch nicht vollständig sichtbar. FCF $3,84 Mrd. bei $38,79 Mrd. Umsatz (FCF-Marge ~10%) ist solide für das Geschäftsmodell. RPO nicht anwendbar (kein Subscription-Modell) — der AI-Systems-Backlog ($6,8 Mrd., +30% sequenziell) wird funktional wie RPO behandelt: sein überproportionales Wachstum ggü. dem Umsatz ist grundsätzlich positiv, wird aber durch die vom Markt explizit adressierten Lieferketten-Engpässe als Warnsignal relativiert — die Sichtbarkeit ist hoch, die Konversionssicherheit aktuell nicht.
+ROE von 6,3% und Operating Margin von 8,7% sind für ein margenschwaches Hardware-Geschäft im Übergang zu mehr Recurring Revenue nachvollziehbar, aber noch nicht beeindruckend. Das Umsatzwachstum von 40,0% YoY ist sehr hoch, aber aus den vorliegenden Daten nicht sauber in organisches Wachstum und den Konsolidierungseffekt der Juniper-Übernahme aufzuschlüsseln — dies sollte vor einer Bewertung der nachhaltigen Wachstumsrate zwingend geprüft werden. Free Cashflow von $3,84 Mrd. liegt deutlich über dem impliziten Nettoergebnis (~$1,55 Mrd. aus Net Margin × Umsatz) — plausibel erklärbar durch hohe Abschreibungen im kapitalintensiven Hardware-Geschäft, nicht abschließend auflösbar ohne Segmentdaten. Debt/Equity von 84,0% ist erhöht, aber im Rahmen der Juniper-Akquisitionsfinanzierung nachvollziehbar. Der wirtschaftliche Burggraben liegt im GreenLake-/Networking-Mix-Shift, ist aber noch im Aufbau, nicht etabliert.
 
-## 7. BEWERTUNG
+## 7. BEWERTUNG (vorläufig, Datenstand)
 
-Das neu berechnete Forward-KGV (Kurs $48,40 / FY27-Guidance-Mittelpunkt $4,50) liegt bei ca. 10,8x — innerhalb der Peer-Bandbreite (6,9x–19,6x), näher am unteren Ende bei SMCI als bei NTAP/CSCO. Das ist trotz Rekordzahlen und angehobener Guidance keine Prämie — aus den Daten teilweise erklärbar durch die frische Marktskepsis gegenüber der Backlog-Konversion. Was preist der Kurs ein? Bei $48,40 preist der Markt ein deutlich gedämpftes EPS-Wachstum ein, das die eigene FY27-Guidance kaum vollständig honoriert — nach dem Kursrückgang eher konservativ als ambitioniert. Analystenkursziele wurden trotz des Kursrückgangs mehrfach angehoben (BofA $82, Citi $74, JPM $70) — ein deutliches Auseinanderlaufen zwischen kurzfristiger Marktreaktion und mittelfristiger Analystenmeinung, als Sentiment-Indikator, nicht als Kursziel-Ceiling zu verstehen.
+Snapshot-Multiples (Trailing PE 38,5x, Forward PE 10,3x, P/B 2,16x) vor dem Kurssprung. Auf aktuellem Niveau ($49,11): Trailing PE ~45,9x, Forward PE ~12,3x, P/B ~2,57x. Die große Lücke zwischen Trailing- und Forward-PE deutet auf eine erwartete deutliche Ergebnisverbesserung hin — plausibel durch den GreenLake-/Networking-Mix-Shift, aber noch nicht bestätigt. Rückrechnung "Was preist der Kurs ein?": $49,11 bei Forward-EPS $4,00 impliziert eine Fortsetzung der Margenverbesserung Richtung des Base-Case-Szenarios dieser Analyse — plausibel, nicht übertrieben, aber abhängig von der noch unklaren Nachhaltigkeit des 40%-Umsatzwachstums. Das Analysten-Konsensziel ($64,13, 19 Analysten, "buy") liegt 30,6% über dem aktuellen Kurs — deutlich über der eigenen EV-Rechnung dieser Analyse; als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Hinweis auf deutlich optimistischere Street-Annahmen als das hier gerechnete Base-Case-Szenario.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 284,06, Windows: 5T +3,6%, 10T +0,9%, 20T +2,4%, 50T +11,2%, 6M +145,1%, 12M +120,8% — die kurzfristigen Fenster (5T/10T/20T) zeigen bereits die Abkühlung nach dem Q3-Ausverkauf, während die mittelfristige Struktur (6M/12M) weiterhin außergewöhnlich stark ist. Short Float: N/A. Hypothese, nicht datenbasiert: Der scharfe Ausverkauf trotz eines Beat-and-Raise deutet auf eine bereits sehr hohe Erwartungshaltung/Positionierung vor dem Print hin ("Sell the News") — ein Teil der Fast-Money-Investoren dürfte nach der starken YTD-Rally Gewinne mitgenommen haben.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die außergewöhnliche 5-Tage-Bewegung (+18,31%) bei gleichzeitig starkem RS-Rang (9 im S&P 500) deutet auf einen konkreten, aber aus den Daten nicht identifizierbaren Katalysator hin — möglicherweise ein Ergebnis-Beat, eine Guidance-Anhebung oder eine AI-Partnerschafts-Ankündigung. Dies ist ausdrücklich eine Hypothese, keine bestätigte Tatsache. Für neue Käufer wäre eine Bestätigung des Auslösers durch offizielle Unternehmensmitteilungen zwingend erforderlich. Enttäuschungsrisiko: Sollte sich die Bewegung als überzogene Reaktion auf ein einzelnes Ereignis erweisen, ist eine schnelle Korrektur Richtung des Snapshot-Niveaus ($41–43) ein reales Risiko.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-GWS-Signale inaktiv. Die RS-Windows zeigen einen klaren Bruch der kurzfristigen Dynamik (5T/10T/20T nahe null bis leicht positiv) bei weiterhin starker mittelfristiger Basis (6M/12M) — ein klassisches Post-Earnings-Konsolidierungsmuster nach einer Extremrally. Das Momentum ist gemischt: fundamental gestützt durch reale Rekordzahlen, aber technisch durch die Verkaufswelle beschädigt. Warnsignal: Ein weiterer Rückfall unter $45 würde die Konsolidierung in eine echte Trendwende drehen.
+RS-Score 207,93, Rang 9 im S&P 500 — sehr stark. 5T +18,31%, 10T +2,59%, 20T +4,47%, 50T +70,55%, 6M +112,01% — die 5-Tage-Bewegung sticht deutlich heraus und dominiert die kurzfristige RS-Berechnung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt den jüngsten Sprung nicht zusätzlich über die reine Kursbewegung hinaus. Ob das Momentum fundamental gestützt ist, lässt sich aus den vorliegenden Daten nicht abschließend beurteilen, da der Auslöser der Bewegung nicht verifizierbar ist. Warnsignal: Eine schnelle Rückgabe der 5-Tage-Gewinne wäre ein klares Zeichen, dass die Bewegung überzogen war.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($75–$100):** Juniper-Integration und AI-Systems-Backlog konvertieren vollständig, Lieferketten-Engpässe lösen sich, HPE etabliert sich als margenstärkerer AI-Infrastruktur-Vollsortimenter. Normalisiertes EPS $5,50–7,00 × 14–16x.
-
-**Base ($42–$60):** FY27-Rahmenwerk wird grundsätzlich erreicht, Engpässe bleiben ein wiederkehrender, aber beherrschbarer Bremsfaktor. Normalisiertes EPS $4,20–5,20 × 10–12x.
-
-**Bear ($18–$30):** Lieferketten-Engpässe eskalieren strukturell, Backlog-Konversion enttäuscht wiederholt, Marge erodiert. Normalisiertes EPS $2,80–3,60 × 7–8x.
-
-Entscheidende Variable: Ob sich die Speicher-/NAND-/Wafer-Engpässe als temporär oder strukturell erweisen.
+Bull (3–5 Jahre): GreenLake und Networking (Juniper) treiben den Umsatzmix strukturell Richtung Software-/Service-ähnlicher Margen, AI-Server-Marktanteil wächst nachhaltig. Kursziel: $95–$130.
+Base: Moderates Wachstum, graduelle Margenverbesserung, AI-Server bleibt ein zyklisches, aber wachsendes Segment. Kursziel: $55–$75.
+Bear: AI-Capex-Zyklus dreht, Networking-Integration enttäuscht, Marktanteilsverluste im Server-Geschäft. Kursziel: $18–$32.
+Entscheidende Variable: Ob der Umsatzmix-Shift Richtung GreenLake/Networking die strukturelle Margenschwäche des klassischen Hardware-Geschäfts dauerhaft kompensiert.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV +4,0%, unter der 10%-Schwelle). HPE ist nach dem Q3-Ausverkauf fair bewertet innerhalb der Peer-Bandbreite, mit einem realen, aber durch Lieferketten-Zweifel getrübten Katalysator (Beat-and-Raise, aber Marktreaktion negativ). Kein High-Conviction-Kauf auf aktuellem Niveau, aber auch keine fundamentale Verschlechterung — eher eine Abwarten-Position bis sich die Konversions-Frage (nächstes Quartal) klärt. Für Trading-orientierte Investoren mit Fokus auf AI-Infrastruktur ein Beobachtungskandidat, für Buy-and-Hold-Investoren neutral. Positionsgröße bei Neuaufbau: max. 2–3% eines diversifizierten Portfolios.
-
-Peers: **Dell (DELL)** bietet dieselbe AI-Server-Backlog-Story bei deutlich höherem, kaum peer-gestütztem Multiple (~30x); **NetApp (NTAP)** ist die margenstärkere, konservativere Storage-Alternative im selben Umfeld.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen Edge in beide Richtungen (EV −1,0%) — ein neutrales Chance-Risiko-Bild. Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. HPE ist ein zyklischer AI-Infrastruktur-Trade mit einer noch unbestätigten strukturellen Margenverbesserungs-These (GreenLake/Networking) — kein reiner Momentum-Trade und noch kein etablierter Compounder. Der jüngste Kurssprung (+19,1% seit Snapshot) sollte vor jeder Positionsentscheidung anhand der aktuellen Nachrichtenlage verifiziert werden, da der Auslöser aus den Daten nicht bestätigt werden kann. Geeignet für Investoren mit AI-Infrastruktur-Exposure-Wunsch und Toleranz für Ergebnis-Unsicherheit — bei unklarem Auslöser der jüngsten Bewegung ist Zurückhaltung bei Neueinstiegen angebracht. Bestehende Positionen mit Trailing-Stop (12%) führen. Direkte Peers: **Dell Technologies** und **Super Micro Computer** sind reinere AI-Server-Instrumente ohne den Networking-/GreenLake-Mix; keiner davon ist im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 4/5
 - Bewertung: 3/5
 - Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — trotz Beat-and-Raise verkauft der Markt die Aktie wegen dokumentierter Shipment-Conversion-Zweifel (Speicher-/NAND-Engpässe), der EV-Edge bleibt mit +4,0% unter der Asymmetrie-Schwelle.
-
+**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die außergewöhnliche 5-Tage-Bewegung (+18,3%) lässt sich aus den vorliegenden Daten nicht auf einen konkreten, bestätigten Auslöser zurückführen; solange dieser nicht verifiziert ist, rechtfertigt das RS-Signal keine volle Positionsgröße.
 
 ---
 
@@ -97,8 +93,8 @@ Peers: **Dell (DELL)** bietet dieselbe AI-Server-Backlog-Story bei deutlich höh
 | Wachstum | 4/5 |
 | Bewertung | 3/5 |
 | Katalysator | 3/5 |
-| EV-Upside | +5.5% |
+| EV-Upside | +30.2% |
 
-**Verdict: HOLD (62/100)**
+**Verdict: BUY (72/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
