@@ -1,90 +1,98 @@
 # TXN — KI-Aktienbewertung
 
-**Texas Instruments Incorporated** · Technology · 30.06.2026 · Signal: Kein GWS-Signal
+**Texas Instruments Incorporated** · Technology · 21.11.2026 · Signal: GWS 3/3
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 285.43 |
-| Market Cap | $259.76 Mrd. |
-| Forward PE | 29.81 |
-| Revenue (TTM) | $18.44 Mrd. |
-| Gross Margin | 57.3% |
-| ROE | 32.3% |
-| RS-Score | 109.7 |
+| Kurs | 303.6 |
+| Market Cap | $277.42 Mrd. |
+| Forward PE | 26.1 |
+| Revenue (TTM) | $20.77 Mrd. |
+| Gross Margin | 60.2% |
+| ROE | 39.7% |
+| RS-Score | 110.9 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
+**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $340–$390 (20%) · Base $260–$320 (50%) · Bear $140–$180 (30%) · EV ~$266
+**Szenarien (12–18 Monate):** Bull $320–$355 (25 %) · Base $255–$290 (45 %) · Bear $160–$200 (30 %) · EV ~$261
 
 ## 1. INVESTMENT-CASE
 
-TXN ist ein analoger Halbleiter-Zyklus-Erholungstrade in Echtzeit — RS-Rang 14/100 und +64,63% relative 6M-Performance zeigen einen der stärksten Momentum-Namen im NASDAQ-100, nach Jahren der Underperformance während der 2023-2024 Analog-/Industrial-Lagerkorrektur. Revenue-Wachstum hat sich auf 18,6% YoY re-akzeleriert — erstes Zeichen, dass die mehrjährige Fab-Capex-Investition (300mm-Fabs in Sherman TX, Lehi UT) sich in Ergebnishebel übersetzt. Net Margin 29,1%, ROE 32,3%, weiterhin gesund trotz hoher Abschreibungslast aus neuer Fab-Kapazität. Der Markt preist dies klar als Zyklus-Erholung; die Frage ist, wie viel davon nach dem starken Lauf bereits eingepreist ist.
+DATENLAGE: Fundamental-Snapshot vom 16.11.2026 ($303,60) liegt vor der jüngsten Kursbewegung (Schluss 19.11.: $285,75, −5,9 %). Konfidenz der Bewertungsaussagen reduziert.
+
+Texas Instruments ist der Marktführer im Analog-Halbleiter-Zyklus und gerade in der Phase, in der sich eine jahrelange Investition auszahlt: Das Unternehmen hat seine 300-mm-Fertigung massiv ausgebaut, die Capex-Last sinkt, und der FCF steigt. Der Umsatz wächst um 27,7 % auf $20,8 Mrd., das Forward-EPS liegt bei $11,63 gegenüber trailing $7,71. Die eigentliche Story ist der Kostenvorteil: 300-mm-Wafer senken die Stückkosten um rund 40 % gegenüber 200-mm-Wettbewerbern. Was der Markt übersieht: Bei 24,6x Forward ist der Aufschwung des Analogzyklus bereits eingepreist, während Industrie- und Auto-Nachfrage zyklisch bleiben.
 
 ## 2. GESCHÄFTSMODELL
 
-- Analog- und Embedded-Halbleiter (Power Management, Signal Chain) für Industrial, Automotive, Personal Electronics — breit diversifizierte Endmärkte
-- Eigene 300mm-Fab-Strategie als strukturelles Differenzierungsmerkmal gegenüber Fabless-Peers — Kostenvorteil pro Wafer, aber massive Capex-Vorlaufkosten
-- Operativer Hebel: bei steigender Fab-Auslastung steigt die Marge überproportional — aktuelle 37,8% Operating Margin noch unter historischem Spitzenniveau (>45%)
-- Automotive-Segment als strukturell wachsender Treiber (Elektrifizierung, ADAS) mit langen Designwin-Zyklen
-- Industrial-Segment zyklisch, aber Lagerbestandserholung treibt aktuelles Wachstum
-- FCF $1,07 Mrd. bei $18,44 Mrd. Revenue (5,8% FCF-Marge) — deutlich unter historischem TXN-Niveau, reflektiert laufenden Capex-Höhepunkt
-- Dividendenkennzahl im Datensatz (199,0%) wirkt wie Payout-Ratio über 100% — konsistent mit Capex-belastetem FCF, nicht als Dividendenrendite interpretierbar
-- D/E 83,7% — höhere Verschuldung als historisch üblich, Resultat der fremdfinanzierten Fab-Expansion
+- Analog-Chips (Stromversorgung, Signalverarbeitung): Zehntausende Produkte, lange Lebenszyklen
+- Embedded-Prozessoren: Mikrocontroller für Industrie und Auto
+- Industrie und Auto machen den Großteil des Umsatzes aus — zyklisch
+- Eigene Fertigung (300 mm) in den USA — Kostenvorteil und Versorgungssicherheit
+- Hohe Fixkosten: Der operative Hebel wirkt im Aufschwung stark
+- Dividende 2,0 %, lange Dividendenhistorie
+- Debt/Equity 70,7 — erhöht durch den Fab-Ausbau
+- FCF $4,78 Mrd., steigend mit sinkender Capex
 
 ## 3. BULL CASE
 
-Analog-Zyklus-Erholung setzt sich fort, Fab-Auslastung steigt schneller als erwartet, Operating Margin normalisiert Richtung 45%+, Automotive-Designwins beschleunigen Umsatzbeitrag. Annahme (kein Konsens): FY27-EPS ~$11,50 (+20% ggü. Forward-EPS $9,58) × 32x = $368. Bull-Kursziel: $340–$390 (Midpoint $365). Eintrittswahrscheinlichkeit: 20%.
+Peers: Analog Devices (ADI, Fwd-KGV 24,1x), NXP (NXPI, 14,4x), Microchip (MCHP, 13,9x), ON Semi (ON, 15,0x) — Bandbreite 13,9x–24,1x. TXN: 26,1x Forward (Snapshot), ~24,6x auf aktuellem Kurs — am oberen Rand.
+
+Der Analogzyklus läuft bis 2028, die 300-mm-Kapazität wird ausgelastet, die Margen steigen über die bisherige Spitze. Margennachhaltigkeit: Kostenvorteil der 300-mm-Fertigung und die breiteste Produktpalette der Branche. Annahme (kein Konsens): FY27-EPS ~$13,00 × 26x (leicht über ADI) = $338. Bull-Kursziel: $320–$355. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Zyklus-Erholung setzt sich moderat fort, Fab-Hochlauf verläuft planmäßig, Margen verbessern sich graduell. Annahme: FY27-EPS ~$10,20 × 28x = $285,60. Base-Kursziel: $260–$320 (Midpoint $290). Eintrittswahrscheinlichkeit: 50%.
+Der Aufschwung setzt sich fort, aber das Multiple normalisiert sich leicht. Annahme (kein Konsens): FY27-EPS ~$11,80 × 23x (nahe ADI) = $271. Base-Kursziel: $255–$290. Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Industrial-/Automotive-Endnachfrage schwächt erneut ab (Lagerkorrektur wiederholt sich), Fab-Überkapazität bei stagnierender Nachfrage drückt Operating Margin. Kundenkonzentration: breite Diversifizierung über zehntausende Kunden laut Geschäftsmodell — strukturell geringes Einzelkundenrisiko, aus aktuellen Daten nicht quantifizierbar. Geopolitik/China-Exposure: signifikanter China-Umsatzanteil als Risikofaktor bei Exportkontrollen — aus Daten nicht quantifizierbar. Lieferketten/Foundry: eigene Fab-Strategie reduziert Foundry-Abhängigkeit strukturell — Vorteil gegenüber Fabless-Peers. Verwässerung: Shares Outstanding nicht im Datensatz — nicht beurteilbar. Regulierung: Exportkontrollen für Halbleitertechnologie nach China als laufendes Risiko. EPS fällt auf ~$7,00 bei anhaltender Margenkompression, Multiple komprimiert auf 22x. Bear-Kursziel: $140–$180 (Midpoint $160). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Industrie-Lagerabbau 2027 und chinesische Analog-Konkurrenz drücken Volumen und Preise.
 
-**Summe: 20% + 50% + 30% = 100%**
+Kundenkonzentration: gering, sehr breite Kundenbasis. Geopolitik/China: materiell — China ist ein großer Absatzmarkt, chinesische Analoganbieter gewinnen Anteile, Zölle betreffen die Lieferkette. Lieferkette: eigene Fabs, kein Single-Source-Risiko. Verwässerung: gering, Aktienzahl stabil. Regulierung: CHIPS-Act-Förderung, gering.
 
-**Erwartungswert:** EV = 0,20×$365 + 0,50×$290 + 0,30×$160 = $73 + $145 + $48 = **~$266 — implizites Downside vs. aktuellem Kurs ($285,43): -6,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+Annahme (kein Konsens): FY27-EPS ~$9,50 × 19x (Mitte zwischen MCHP und ADI) = $181. Bear-Kursziel: $160–$200. Eintrittswahrscheinlichkeit: 30%.
+
+**Summe: 25% + 45% + 30% = 100%**
+
+**Erwartungswert:** EV = 0,25 × $337,50 + 0,45 × $272,50 + 0,30 × $180 = **~$261 — implizites Downside vs. aktuellem Kurs ($285,75): −8,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 32,3% — solide trotz Capex-Belastung. Gross Margin 57,3%, Operating Margin 37,8% — beide unter historischem TXN-Spitzenniveau (Gross Margin historisch bis 65%+), zeigt noch nicht abgeschlossene Fab-Hochlaufphase. Net Margin 29,1% gesund. FCF-Marge nur 5,8% — Zykluskontext entscheidend: bewusste Investitionsphase, keine operative Schwäche, aber der Burggraben (eigene Fab-Basis) zahlt sich erst mit Verzögerung aus. D/E 83,7% — erhöhte Verschuldung, im Zykluskontext der Capex-Welle einzuordnen.
+ROE 39,7 %, ROIC 20,2 %, Bruttomarge 60,2 %, operative Marge 41,1 %, FCF $4,78 Mrd. Hervorragende Qualität, aber im Aufschwung gemessen. Der Burggraben liegt im Kostenvorteil der eigenen 300-mm-Fertigung. RPO nicht anwendbar.
 
 ## 7. BEWERTUNG
 
-Trailing PE 48,79x sehr hoch (verzerrt durch Capex-/Abschreibungsdruck auf aktuelle Earnings), Forward PE 29,81x deutlich niedriger und realistischer Bewertungsmaßstab. P/B 15,48 hoch im historischen Vergleich. Rückrechnung (Annahme): Bei $285,43 und Forward-EPS $9,58 (29,81x) preist der Markt eine deutliche Margenerholung der nächsten 12-24 Monate ein — ambitioniert, aber nicht unrealistisch angesichts der Fab-Hochlaufdynamik. Analyst-Konsensziel $295,03 USD (32 Analysten) liegt nur knapp über dem aktuellen Kurs — Coverage sieht aktuell wenig zusätzliches Upside, als Orientierungspunkt zu verstehen, nicht als Ceiling.
+Normalisiert: Über einen vollen Zyklus schätzen wir ein EPS von $8–10 (Annahme, kein Konsens). Bei $285,75 ergibt das ein normalisiertes KGV von 29–36x. Was preist der Kurs ein? Bei ~$261 Mrd. Marktwert und einem Exit-Multiple von 22x braucht TXN ~$11,9 Mrd. Nettogewinn. Bei 34 % Nettomarge entspricht das ~$35 Mrd. Umsatz — +68 %, also ~11 % jährlich über fünf Jahre. Ambitioniert für einen zyklischen Analoganbieter. Peer-Einordnung: 24,6x liegt über allen Peers, knapp über ADI. Die Prämie ist durch den Fertigungskostenvorteil teilweise erklärbar. Analyst-Konsensziel $338,79 bei 29 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 109,72, Rang 14 von 100 im NASDAQ-100 — Top-Quartil-Momentum, deutliches Zeichen, dass der Markt die Zyklus-Erholungsstory bereits goutiert. +64,63% relative Performance über 6 Monate ist ein starker Lauf — Enttäuschungsrisiko entsprechend erhöht, falls die nächsten Quartalszahlen die Margenerholung nicht bestätigen. Short Float nicht im Datensatz. Hypothese, nicht datenbasiert: nach einem derart starken Lauf könnte Fast-Money-Positionierung überwiegen, was die Aktie bei enttäuschenden Daten anfälliger für scharfe Korrekturen macht.
+Short Float nicht verfügbar. Ableitbar: Rang 8, Volumen der letzten fünf Tage bei 81 % des 50-Tage-Schnitts. Am 19.11. eine Tagesspanne von $301 bis $283. Hypothese, nicht datenbasiert: TXN wird als Frühindikator des Industriezyklus gehandelt.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 109,72 (Rang 14/100). 5T: +0,84%, 10T: +6,9%, 20T: +2,89%, 50T: +34,46%, 6M: +64,63% — durchgängig positive relative Performance, stärkstes Momentum in mittleren bis längeren Zeitfenstern. Kein GWS-Signal aktiv. Momentum erscheint fundamental gestützt durch die re-akzelerierte Umsatzwachstumsrate, nicht rein reaktiv. Technisches Warnsignal: Abkühlung im 5T-Fenster (+0,84% nach starkem 50T/6M-Lauf) könnte erster Hinweis auf nachlassende kurzfristige Dynamik sein.
+RS-Score 110,9. Fenster: 5T −0,75 %, 10T +4,71 %, 20T +9,29 %, 50T +16,54 %, 6M +3,25 %, 12M +77,8 %. Kurs $285,75 auf der SMA50 ($285,52), über der SMA200 ($263,87), RSI ~43. GWS 3/3 aktiv. Warnsignal: ein Schluss unter dem Daily-Swing-Tief bei $271,23.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($420–$500):** Fab-Strategie zahlt sich voll aus, Operating Margin erreicht 48-50%, Automotive-Elektrifizierung treibt strukturelles Umsatzwachstum.
+**Bull ($380–$480):** 300-mm-Kostenvorteil bringt Marktanteile, EPS $15–17 × 25–28x.
 
-**Base ($300–$400):** Zyklus normalisiert sich auf höherem Niveau als vor der Fab-Investition, moderate Margenexpansion.
+**Base ($260–$360):** Zyklischer Verlauf, EPS $12–14 × 21–25x.
 
-**Bear ($150–$250):** Wiederholter Analog-Abschwung, Fab-Überkapazität belastet Margen dauerhaft, China-Exportrisiken materialisieren sich.
+**Bear ($170–$230):** China-Konkurrenz und Industrieschwäche.
 
-Entscheidende Variable: Geschwindigkeit und Nachhaltigkeit der Fab-Auslastungssteigerung im Verhältnis zur Endmarktnachfrage.
+Entscheidende Variable: Auslastung der 300-mm-Kapazität.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben einen leicht negativen Erwartungswert (-6,8%) — nach dem starken 6-Monats-Lauf (+64,63% relative Performance) ist ein Großteil der Zyklus-Erholungsstory bereits eingepreist. TXN ist ein zyklischer Qualitäts-Compounder mit struktureller Fab-Differenzierung, aber kein High-Conviction-Momentum-Play auf aktuellem Niveau — eher ein Halten bestehender Positionen als ein Neueinstieg. Für Investoren mit langem Zyklus-Horizont bleibt die Fab-Strategie ein überzeugendes strukturelles Argument; kurzfristige Käufer sollten auf einen Rücksetzer oder eine Bestätigung der Margenerholung warten. Positionsgröße: bestehende Positionen halten, kein aggressiver Nachkauf nach dem starken Lauf.
-
-**ADI** (Analog Devices) als reinster Vergleichswert im Analog-Segment. **ON Semiconductor** für reinere Automotive-Exposure. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Ein zyklischer Qualitätswert mit Kostenvorteil, aber am oberen Ende der Peer-Bewertung. Der EV liegt 8,7 % unter dem Kurs — die eigenen Szenarien ergeben keinen asymmetrischen Edge. Für Dividenden- und Qualitätsinvestoren eine Halteposition, kein Neukauf. Peers: **Analog Devices (ADI)** bei 24,1x vergleichbar bewertet, **NXP (NXPI)** bei 14,4x das günstigere Instrument für den Analog-/Auto-Zyklus.
 
 - Qualität: 4/5
-- Wachstum: 4/5
-- Bewertung: 2/5
+- Wachstum: 3/5
+- Bewertung: 2/5 (vorläufig, Datenstand)
 - Katalysator: 3/5
+
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — 24,6x Forward über allen Peers bei zyklisch hoher Ertragskraft, der EV liegt 8,7 % unter dem Kurs.
 
 
 ---
@@ -92,11 +100,11 @@ Die eigenen Szenarien ergeben einen leicht negativen Erwartungswert (-6,8%) — 
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 4/5 |
+| Wachstum | 3/5 |
 | Bewertung | 2/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -4.8% |
+| EV-Upside | -13.3% |
 
-**Verdict: HOLD (57/100)**
+**Verdict: WATCH (48/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

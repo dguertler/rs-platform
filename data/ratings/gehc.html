@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GEHC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>GEHC</h1>
+      <h2>GE HealthCare Technologies Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Medical Devices</span></div>
+        <div class="mi">MCap: <span>$38B</span></div>
+        <div class="mi">Signal: <span>GWS 2/3</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">58</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">108.7</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$83.02</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$21.6B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">39.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">19.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">20.0%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+3.0%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">100–115</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">80–92</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">25%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#86c429;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#86c429">✓ Aktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><p>**Szenarien (12–18 Monate):** Bull $100–$115 (25 %) · Base $80–$92 (50 %) · Bear $58–$68 (25 %) · EV ~$86</p>
+<h3>1. INVESTMENT-CASE</h3>
+<p>GE HealthCare ist die Medizintechnik-Abspaltung von General Electric und einer der drei globalen Anbieter von Bildgebung (CT, MRT, Ultraschall) neben Siemens Healthineers und Philips. Die Story ist eine Bewertungs-Aufholjagd: Bei 14,9x Forward auf aktuellem Kurs ist GEHC das günstigste Medtech-Unternehmen seiner Größe, obwohl es Marktführer in mehreren Segmenten ist. Der Treiber der letzten 50 Tage (+37,8 %) ist aus den vorliegenden Daten nicht verifizierbar. Strukturell relevant: Pharmazeutische Diagnostika (Kontrastmittel, Radiopharmaka) und der installierte Gerätebestand liefern wiederkehrende Umsätze. Das mildert die Zyklizität der Investitionsgüter-Seite deutlich.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Imaging (CT, MRT, Röntgen): größtes Segment, abhängig von Krankenhaus-Investitionsbudgets</li>
+<li>Ultraschall: margenstärkeres Segment, breiter Kundenkreis</li>
+<li>Pharmaceutical Diagnostics: Kontrastmittel und Radiopharmaka — wiederkehrende, margenstarke Umsätze</li>
+<li>Service auf den installierten Bestand: stabile Ertragsbasis</li>
+<li>Bruttomarge 39,3 %, operative Marge 13,8 % — Aufholpotenzial gegenüber Peers</li>
+<li>FCF $1,83 Mrd., Debt/Equity 87,7 aus der Abspaltung</li>
+<li>Umsatzwachstum +7,2 % — moderat</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Peers: Medtronic (MDT, Fwd-KGV 16,1x), Boston Scientific (BSX, 14,2x), Danaher (DHR, 25,0x) — Bandbreite 14,2x–25,0x. Direkte Bildgebungs-Peers (Siemens Healthineers, Philips) nicht im Datensatz. GEHC: 15,1x Forward (Snapshot).</p>
+<p>Die Margenverbesserung setzt sich fort, Radiopharmaka wachsen zweistellig, das Multiple nähert sich dem Medtech-Durchschnitt. Margennachhaltigkeit: installierter Bestand und Serviceverträge, Skaleneffekte bei Kontrastmitteln. Annahme (kein Konsens): FY27-EPS ~$6,00 × 18x = $108. Bull-Kursziel: $100–$115. Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Stetiges Wachstum, Multiple stabil. Annahme (kein Konsens): FY27-EPS ~$5,70 × 15x = $86. Base-Kursziel: $80–$92. Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: China-Nachfrage bricht durch die Volumenbeschaffung (VBP) ein, Zölle belasten die Margen.</p>
+<p>Kundenkonzentration: gering, breit gestreute Krankenhauskunden. Geopolitik/China: materiell — China ist ein relevanter Absatzmarkt, staatliche Beschaffungsprogramme und Zölle drücken Preise und Margen. Lieferkette: Helium und Spezialkomponenten für MRT — Single-Source-Risiko auf Datenbasis nicht beurteilbar. Verwässerung: gering. Regulierung: FDA-Zulassungen und Krankenhausbudgets — moderat.</p>
+<p>Annahme (kein Konsens): FY27-EPS ~$4,80 × 13x (unter BSX) = $62. Bear-Kursziel: $58–$68. Eintrittswahrscheinlichkeit: 25%.</p>
+<p>**Summe: 25% + 50% + 25% = 100%**</p>
+<p>**Erwartungswert:** EV = 0,25 × $107,50 + 0,50 × $86 + 0,25 × $63 = **~$86 — implizites Upside vs. aktuellem Kurs ($81,89): +4,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE 20,0 %, ROIC 15,3 %, Bruttomarge 39,3 %, operative Marge 13,8 %, FCF $1,83 Mrd. Solide, aber unter den Medtech-Spitzenwerten. Der Burggraben liegt im installierten Bestand und in der Oligopolstruktur der Bildgebung. RPO nicht anwendbar; der Auftragsbestand wäre ein Vorlaufindikator, ist aber nicht im Datensatz.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Was preist der Kurs ein? Bei ~$37 Mrd. Marktwert und einem Exit-Multiple von 16x braucht GEHC ~$2,3 Mrd. Nettogewinn. Bei 10 % Nettomarge entspricht das ~$23 Mrd. Umsatz — nur +6 % gegenüber heute. Das ist plausibel, eher konservativ. Peer-Einordnung: 14,9x liegt am unteren Rand der Bandbreite. Der Abschlag ist durch niedrigeres Wachstum und die Zyklizität der Investitionsgüter erklärbar. Analyst-Konsensziel $87,85 bei 20 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float nicht verfügbar. Ableitbar: Rangsprung von 20 auf 9, Volumen der letzten fünf Tage bei 77 % des 50-Tage-Schnitts. Beta 0,77. Hypothese, nicht datenbasiert: Rotation in günstig bewertete defensive Medtech-Werte.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 108,7. Fenster: 5T +3,76 %, 10T +1,09 %, 20T +23,04 %, 50T +37,84 %, 6M +37,55 %. Kurs $81,89 über der SMA50 ($71,83) und der SMA200 ($69,92), RSI ~62. GWS: Weekly und Daily aktiv, 4H inaktiv (2/3). Warnsignal: ein Schluss unter dem Daily-Swing-Tief bei $81,42 — der Kurs steht unmittelbar darüber.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>**Bull ($120–$150):** Margen erreichen Peer-Niveau, EPS $7,50 × 18x.</p>
+<p>**Base ($85–$115):** Stetiges Wachstum, EPS $6,50 × 15x.</p>
+<p>**Bear ($60–$75):** China-Schwäche und Margendruck.</p>
+<p>Entscheidende Variable: Margenausweitung und China-Entwicklung.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Ein günstiger Medtech-Wert mit Aufholpotenzial, aber nach +37,8 % in 50 Tagen ohne kurzfristigen Edge. Der EV liegt 4,6 % über dem Kurs — die eigenen Szenarien ergeben keinen asymmetrischen Edge. Für Value- und Qualitätsinvestoren eine Halteposition. Peers: **Medtronic (MDT)** bei 16,1x mit höherer Dividende, **Danaher (DHR)** bei 25,0x als höherwertiges Life-Science-Instrument.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 3/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** PASS — Kategorie: Bewertung — 14,9x Forward am unteren Rand der Peer-Bandbreite, kein fundamentaler Einwand gegen das technische Setup.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

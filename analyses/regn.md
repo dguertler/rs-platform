@@ -1,90 +1,95 @@
 # REGN — KI-Aktienbewertung
 
-**Regeneron Pharmaceuticals, Inc.** · Healthcare · 11.08.2026 · Signal: Kein Signal
+**Regeneron Pharmaceuticals, Inc.** · Healthcare · 21.11.2026 · Signal: GWS 2/3
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 784.36 |
-| Market Cap | $72.90 Mrd. |
-| Forward PE | 17.5 |
-| Revenue (TTM) | $15.50 Mrd. |
-| Gross Margin | 44.6% |
+| Kurs | 955.47 |
+| Market Cap | $98.84 Mrd. |
+| Forward PE | 13.49 |
+| Revenue (TTM) | $16.90 Mrd. |
+| Gross Margin | 46.7% |
 | ROE | 14.9% |
-| RS-Score | 59.1 |
+| RS-Score | 135.1 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
+**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $970–$1.080 (20 %) · Base $740–$830 (55 %) · Bear $395–$445 (25 %) · EV ~$742
+**Szenarien (12–18 Monate):** Bull $1.150–$1.300 (25 %) · Base $900–$1.020 (50 %) · Bear $620–$720 (25 %) · EV ~$954
 
 ## 1. INVESTMENT-CASE
 
-Regeneron ist kein reines Wachstumsstory mehr, sondern ein Übergangsfall: Der historisch zweitgrößte Umsatztreiber Eylea verliert in den USA durch Biosimilar-Konkurrenz (Amgens Pavblu, Samsung Bioepis' Opuviz) rund ein Viertel des Vorjahresumsatzes pro Quartal, während Dupixent (mit Sanofi) mit +38 % Wachstum (konstante Währung) im Q2 2026 diesen Ausfall überkompensiert und die Gruppe auf +17 % Umsatzwachstum hebt. Der Markt honorierte das jüngst: Non-GAAP-EPS $14,29 schlug den Konsens von $10,58 um ~35 % — ein außergewöhnlicher Beat, der den Kurs vom Jahrestief deutlich erholen ließ (52W-Range $541–$821, aktuell $784). Was der Markt noch unterschätzt: Die Sanofi-Kollaborationserlöse erreichten mit $2,2 Mrd. im Quartal ein Allzeithoch — Dupixent ist wirtschaftlich zur tragenden Säule geworden, aber strukturell an einen einzigen Partner gebunden. Die Frage für die nächsten 12–18 Monate: reicht das Dupixent-Tempo, um die Eylea-Erosion dauerhaft zu überkompensieren, bevor bei itepekimab (COPD) und der Obesity-Pipeline Klarheit entsteht.
+Regeneron ist der Biotech-Titel mit dem niedrigsten Multiple der großen Peers und einem Gewinnsprung, den der Markt erst teilweise glaubt: Forward-EPS $70,84 gegenüber trailing $45,24 (+57 %), TTM-Umsatz $16,9 Mrd. (+36,3 %). Der strukturelle Kern ist der Wechsel des Gewinntreibers: Das alte Eylea-Geschäft verliert durch Biosimilars an Boden, während Dupixent (Gewinnteilung mit Sanofi) und die Hochdosis-Version Eylea HD die Lücke schließen. Was der Markt übersieht: Bei 13,0x Forward auf aktuellem Kurs bewertet er Regeneron immer noch wie ein Unternehmen mit Patentklippe — obwohl der Umsatz zuletzt stark gewachsen ist. Das Risiko liegt in der Ursache des Gewinnsprungs: Ein Teil kann aus einmaligen Kollaborations- oder Lizenzeffekten stammen, was aus den Daten nicht abschließend auflösbar ist.
 
 ## 2. GESCHÄFTSMODELL
 
-- Dupixent (Sanofi-50/50-Kollaboration, IL-4/IL-13-Blocker) ist der zentrale Wachstumstreiber über wachsende Indikationen (atopische Dermatitis, Asthma, COPD, CRSwNP)
-- Sanofi-Kollaborationserlöse erreichten in Q2 2026 mit $2,2 Mrd. ein Allzeithoch — strukturelle Abhängigkeit von einem einzigen Partner für den größten Werttreiber
-- Eylea/Eylea HD (Anti-VEGF) verliert US-Marktanteile an Biosimilars — struktureller Gegenwind beim einst größten Einzelprodukt
-- Libtayo (PD-1-Onkologie) wächst zweistellig (+29 % cc) als dritte, aber deutlich kleinere Ertragssäule
-- Eigene, vollständig integrierte Biologika-Fertigung (u. a. Rensselaer, NY) als operativer Hebel und zugleich Konzentrationsrisiko
-- Pipeline-Optionalität: itepekimab (COPD, gemischte Phase-3-Daten, möglicherweise dritte Studie nötig) und Obesity-Kombinationen (mit Semaglutid) als nächste Wachstumswelle, aber unbewiesen
-- Sehr geringe Verschuldung (D/E 0,06) und $15,1 Mrd. Netto-Cash erlauben M&A/Rückkäufe ohne Fremdkapitaldruck
-- Kapitalrückführung primär über Aktienrückkäufe (Shares outstanding −5,65 % YoY) statt Dividende
+- Dupixent (mit Sanofi): der wichtigste Ertragstreiber, verbucht als Kollaborationsergebnis
+- Eylea/Eylea HD: Augenheilkunde, unter Druck durch Biosimilars beim alten Präparat
+- Libtayo (Onkologie) und eine breite Antikörper-Pipeline
+- VelociSuite-Plattform: eigene Antikörper-Entwicklung, niedrigere Kosten je Kandidat
+- Hohe F&E-Ausgaben als Kostenblock
+- Bilanz: Debt/Equity 8,1, hohe Netto-Cash-Position, FCF $2,58 Mrd.
+- Anomalie: Bruttomarge 46,7 % bei operativer Marge 30,4 % — für ein Biotech-Unternehmen ungewöhnlich niedrig. Plausible Ursache: Kollaborationskosten (Sanofi-Anteil) werden in den Umsatzkosten verbucht; aus den Daten nicht abschließend auflösbar. Die Bruttomarge fließt daher nicht in die Bewertung ein, stattdessen operative Marge und Nettomarge
 
 ## 3. BULL CASE
 
-Dupixent-Wachstum bleibt zweistellig, Eylea-Erosion stabilisiert sich schneller als erwartet, itepekimab erhält trotz gemischter Daten eine Zulassung, erste positive Obesity-Kombinationsdaten (Semaglutid + Trevogrumab/Garetosmab) liefern neue Story. Peer-Bandbreite (BIIB 12,53x, GILD 13,49x, AMGN 17,03x Forward-KGV) — Bull-Multiple leicht über dem Top-Peer AMGN, da bestätigte Outperformance eine moderate Prämie rechtfertigt. Annahme (kein Konsens): FY27-EPS ~$54 (ggü. FY26-Konsens $44,78, +21 %) × 19x Forward = $1.026. Kursziel: $970–$1.080 (Midpoint $1.025). Eintrittswahrscheinlichkeit: 20 %.
+Peers: Vertex (VRTX, Fwd-KGV 27,0x), Amgen (AMGN, 18,6x), Gilead (GILD, 16,6x), Biogen (BIIB, 15,6x) — Bandbreite 15,6x–27,0x. REGN: 13,5x Forward (Snapshot), ~13,0x auf aktuellem Kurs — unter allen Peers.
+
+Dupixent wächst in neuen Indikationen (COPD), Eylea HD gewinnt Anteile, die Pipeline liefert. Margennachhaltigkeit: Patentschutz auf Dupixent bis in die 2030er und die eigene Antikörper-Plattform. Annahme (kein Konsens): FY27-EPS ~$72 × 17x (AMGN/GILD-Niveau) = $1.224. Bull-Kursziel: $1.150–$1.300. Eintrittswahrscheinlichkeit: 25%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Dupixent wächst weiter solide, Eylea-Erosion setzt sich planmäßig fort, itepekimab-Entscheidung verzögert sich (dritte Studie), keine transformativen Pipeline-Katalysatoren im Horizont. Base-Multiple nahe der Mitte der Peer-Bandbreite (16x, zwischen AMGN 17,03x und dem eigenen aktuellen Niveau). Annahme (kein Konsens): FY27-EPS ~$49 (moderates Wachstum ggü. FY26-Konsens $44,78) × 16x = $784. Kursziel: $740–$830 (Midpoint $785). Eintrittswahrscheinlichkeit: 55 %.
+Gewinnsprung bestätigt sich weitgehend, das Multiple bleibt nahe dem heutigen. Annahme (kein Konsens): FY27-EPS ~$68 × 14x = $952. Base-Kursziel: $900–$1.020. Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: Eylea-Erosion beschleunigt sich über die aktuellen ~25 % YoY hinaus, itepekimab scheitert an der dritten Phase-3-Studie, Dupixent-Wachstum verlangsamt sich durch Wettbewerb (z. B. neue IL-13-Antikörper). Kundenkonzentration: Sanofi-Kollaborationserlöse ($2,2 Mrd./Quartal, ~51 % des Konzernumsatzes) sind eine harte Abhängigkeit von einem einzigen Partner — quantifizierbares, materielles Risiko. Geopolitik/China: kein signifikantes China-Exposure aus den Daten erkennbar — auf Datenbasis nicht beurteilbar. Lieferketten: eigene, konzentrierte Biologika-Fertigung (Rensselaer) — Single-Site-Risiko bei Kapazitätsausfällen, nicht quantifizierbar. Verwässerung: kein Risiko erkennbar, Shares outstanding rückläufig (Rückkäufe). Regulierung: IRA-Medicare-Preisverhandlungen betreffen Eylea bereits und könnten mittelfristig auch Dupixent erfassen — das materiellste regulatorische Risiko für die Franchise. Bear-Multiple nahe/unter dem niedrigsten Peer (BIIB 12,53x) bei 11x. Annahme (kein Konsens): FY27-EPS fällt auf ~$38 (Kompression ggü. FY26-Konsens) × 11x = $418. Kursziel: $395–$445 (Midpoint $420). Eintrittswahrscheinlichkeit: 25 %.
+Auslöser: Das Forward-EPS von $70,84 erweist sich als durch Einmaleffekte erhöht, die Eylea-Erosion beschleunigt sich.
 
-**Summe: 20 % + 55 % + 25 % = 100 %**
+Kundenkonzentration: Abhängigkeit von Sanofi als Partner für Dupixent — strukturell hoch, aus den Daten nicht quantifizierbar. Geopolitik/China: gering. Lieferkette: eigene Biologika-Fertigung, Single-Source-Risiko gering. Verwässerung: gering, Aktienrückkäufe laufen. Regulierung: materiell — Medicare-Preisverhandlungen (IRA) betreffen Eylea und künftig weitere Präparate.
 
-**Erwartungswert:** EV = 0,20 × $1.025 + 0,55 × $785 + 0,25 × $420 = $205,00 + $431,75 + $105,00 = **$741,75 — implizites Downside vs. aktuellem Kurs ($784,36): −5,4 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — nach dem starken Post-Earnings-Lauf ist ein High-Conviction-Framing für Neueinsteiger nicht gerechtfertigt.
+Annahme (kein Konsens): FY27-EPS ~$50 × 13x (unter dem niedrigsten Peer BIIB) = $650. Bear-Kursziel: $620–$720. Eintrittswahrscheinlichkeit: 25%.
+
+**Summe: 25% + 50% + 25% = 100%**
+
+**Erwartungswert:** EV = 0,25 × $1.225 + 0,50 × $960 + 0,25 × $670 = **~$954 — implizites Upside vs. aktuellem Kurs ($923,34): +3,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 14,87 % und ROIC im Bereich 9–12 % (Quellen streuen leicht) sind solide. Operating Margin 25,81 % ist die belastbarere Kernkennzahl; die Net Margin (31,41 %) liegt darüber — eine Anomalie (Net Margin > Operating Margin), plausibel durch Kapitalerträge aus der Cash-Position sowie Steuereffekte erklärbar, aus den Daten aber nicht abschließend auflösbar. FCF lag in H1 2026 bei $1,4 Mrd. (Q2 $572,8 Mio., 13,3 % Marge) — Jahreswert hier auf ca. $2,8 Mrd. hochgerechnet (Annahme, kein Konsenswert). Bilanzqualität ist exzellent: D/E 0,06, $15,1 Mrd. Netto-Cash. Der Burggraben liegt im Dupixent-Patentschutz und der Sanofi-Vertriebsinfrastruktur — strukturell stark, aber zeitlich begrenzt; Eylea zeigt bereits, wie schnell ein Burggraben bei Biosimilar-Eintritt erodiert.
+ROE 14,9 %, ROIC 14,7 %, operative Marge 30,4 %, Nettomarge 28,5 %, FCF $2,58 Mrd. Die Renditen sind solide, aber für ein Unternehmen mit hoher Netto-Cash-Position eher durchschnittlich. Der Burggraben liegt in der Antikörper-Plattform und im Dupixent-Patentschutz. RPO nicht anwendbar.
 
 ## 7. BEWERTUNG
 
-Forward-KGV ca. 17,5x (Kurs $784,36 / FY26-Konsens-EPS $44,78) liegt oberhalb von BIIB (12,53x) und GILD (13,49x), nahe AMGN (17,03x) und deutlich unter JNJ (21,06x)/LLY (25,62x). Die Prämie ggü. BIIB/GILD ist durch das höhere Dupixent-Tempo und die stärkere ROE erklärbar; der Abschlag ggü. LLY resultiert aus fehlender GLP-1-Hypergrowth-Optionalität und dem Eylea-Gegenwind. Rückrechnung: Der Kurs impliziert bei 17,5x Forward-KGV grob ein FY27-EPS von $46–48 — nahe Analystenkonsens, also weder ambitioniert noch günstig. Trailing-KGV (~18,9x auf $41,48) bestätigt das. Analyst-Konsensziel liegt je nach Quelle zwischen $825 und $967 (Ø ca. $833, 29 Analysten) — Orientierungspunkt, kein Kursziel-Ceiling.
+Was preist der Kurs ein? Bei ~$95 Mrd. Marktwert und einem Exit-Multiple von 15x braucht Regeneron ~$6,4 Mrd. Nettogewinn. Bei 28,5 % Nettomarge entspricht das ~$22 Mrd. Umsatz — ein Plus von 30 % gegenüber heute, also ~5 % jährlich über fünf Jahre. Das ist plausibel und eher konservativ. Peer-Einordnung: 13,0x liegt unter dem niedrigsten Peer BIIB (15,6x). Der Abschlag ist durch die Eylea-Erosion und die Abhängigkeit von Sanofi strukturell erklärbar. Analyst-Konsensziel $984,96 bei 27 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 59,06, Rang 24 im NASDAQ-100 — solides, aber nicht Top-Segment. Momentum: klassische V-Erholung — 5T +6,64 %, 10T +9,52 %, 20T +22,99 %, 50T +33,69 %, aber 6M weiterhin −13,78 % — der Kurs holte den Jahres-Drawdown aus der Eylea-Angst erst nach dem Q2-Beat auf. Short-Float-/Positionierungsdaten liegen nicht vor. Hypothese, nicht datenbasiert: Die niedrige Beta (0,40) deutet auf Long-Only-/Qualitäts-Ownership hin. Enttäuschungsrisiko: Nach dem Kurssprung würde jede weitere Eylea-Enttäuschung oder ein itepekimab-Rückschlag überproportional wirken.
+Short Float nicht verfügbar. Ableitbar: Beta 0,095 — die Aktie bewegt sich fast unabhängig vom Markt, ein defensiver Halter-Typ. Volumen im Normalbereich (99 % des 50-Tage-Schnitts). Hypothese, nicht datenbasiert: Generalisten-Fonds kehren nach dem Eylea-Abverkauf in den Titel zurück.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Kurs $784,36 liegt rund 4,5 % unter dem 52W-Hoch ($821,11) und 45 % über dem 52W-Tief ($541,00). Momentum über 5T–50T ist durchgängig positiv und beschleunigt — fundamental gestützt durch den EPS-Beat, nicht rein reaktiv. GWS-Ampel ohne aktives Signal auf allen Zeitebenen. Warnsignal: ein Wochenschluss unter der Post-Earnings-Kurslücke (grob $720–$740) würde die Erholung technisch in Frage stellen.
+RS-Score 135,1, Rang 6. Fenster: 5T +1,76 %, 10T +3,79 %, 20T +23,12 %, 50T +27,83 %, 6M +54,6 %. Kurs $923,34 über der SMA50 ($826,97) und der SMA200 ($749,64), RSI ~49, 6,9 % unter dem Hoch. GWS: Weekly und Daily aktiv, 4H inaktiv (2/3). Das Momentum ist fundamental gestützt. Warnsignal: ein Schluss unter dem Daily-Swing-Tief bei $887,04.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($1.100–$1.400):** Dupixent verteidigt die Führung über den Patentzyklus hinaus durch neue Indikationen, itepekimab und die Obesity-Kombinationen liefern eine neue Blockbuster-Klasse, Eylea HD stabilisiert die Augenheilkunde-Franchise.
+**Bull ($1.400–$1.800):** Pipeline-Erfolge und Dupixent-Expansion, EPS $85–100 × 17–18x.
 
-**Base ($850–$1.050):** Solides zweistelliges Dupixent-Wachstum kompensiert die vollständige Eylea-Erosion, Pipeline liefert inkrementelle, keine transformativen Beiträge.
+**Base ($950–$1.300):** Stetiges Wachstum, EPS $70–85 × 14–15x.
 
-**Bear ($550–$700):** Eylea-Erosion fällt stärker aus als erwartet, itepekimab scheitert endgültig, IRA-Preisverhandlungen erfassen auch Dupixent, keine neue Blockbuster-Säule entsteht.
+**Bear ($600–$800):** IRA-Preisdruck und Biosimilars, EPS stagniert.
 
-Entscheidende Variable: Tempo der Dupixent-Indikationsausweitung vs. Tempo der Eylea-Biosimilar-Erosion. Szenario-Konsistenz: kurzfristiger Bear (Midpoint $420) liegt klar unter dem langfristigen Base ($850–$1.050); kurzfristiger Bull (Midpoint $1.025) liegt unter dem langfristigen Bull ($1.100–$1.400) — konsistent.
+Entscheidende Variable: Nachhaltigkeit des Forward-EPS-Sprungs.
 
 ## 11. PROFI-FAZIT
 
-Regeneron ist ein fundamental gestützter, aber kein High-Conviction-Trade: ein Qualitätscompounder in einer echten Übergangsphase, dessen EPS-Beat die Aktie bereits deutlich vom Jahrestief zurückgeholt hat. Der Erwartungswert von $741,75 liegt 5,4 % unter dem Kurs — kein asymmetrischer Edge für Neueinsteiger, auch wenn die Dupixent-Story intakt bleibt. Geeignet für: langfristige Qualitätsinvestoren, die Sanofi-Abhängigkeit und Eylea-Erosion akzeptieren. Weniger geeignet für: Momentum-Trader nach dem Post-Earnings-Run. Positionsgröße: reguläre bis reduzierte Kernposition, idealerweise Nachkäufe unter $740. Peers: **Amgen (AMGN)** als ähnlich bewerteter, diversifizierterer Peer (17,03x vs. REGNs ~17,5x); **Biogen (BIIB)** als günstigerer, wachstumsschwächerer Vergleichstitel (12,53x) — REGN bietet das bessere Wachstumsprofil, BIIB die günstigere Bewertung.
+Ein unterbewerteter Qualitäts-Biotech mit defensivem Profil, aber ohne kurzfristigen Edge. Der EV liegt nur 3,3 % über dem Kurs — die eigenen Szenarien ergeben keinen asymmetrischen Edge. Für langfristige Investoren eine solide Position, Positionsgröße normal. Peers: **Amgen (AMGN)** bei 18,6x mit höherer Dividende, **Vertex (VRTX)** bei 27,0x als Wachstumsinstrument.
 
 - Qualität: 4/5
-- Wachstum: 4/5
-- Bewertung: 3/5
-- Katalysator: 4/5
+- Wachstum: 3/5
+- Bewertung: 4/5
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der Erwartungswert liegt trotz starkem Q2-Beat 5,4 % unter dem aktuellen Kurs und das Forward-KGV notiert bereits am oberen Rand der direkten Peer-Bandbreite (nahe AMGN) — kein voller Rückenwind für die volle Positionsgröße trotz robustem RS-Signal.
+**Funnel-Entscheidung:** PASS — Kategorie: Bewertung — 13,0x Forward unter allen Peers bei 36,3 % Umsatzwachstum, kein fundamentaler Einwand gegen das technische Setup.
 
 
 ---
@@ -92,11 +97,11 @@ Regeneron ist ein fundamental gestützter, aber kein High-Conviction-Trade: ein 
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 4/5 |
-| Bewertung | 3/5 |
-| Katalysator | 4/5 |
-| EV-Upside | -5.2% |
+| Wachstum | 3/5 |
+| Bewertung | 4/5 |
+| Katalysator | 3/5 |
+| EV-Upside | -0.4% |
 
-**Verdict: HOLD (65/100)**
+**Verdict: HOLD (61/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*
