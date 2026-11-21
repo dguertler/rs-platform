@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>AMGN — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>AMGN</h1>
+      <h2>Amgen Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Drug Manufacturers - General</span></div>
+        <div class="mi">MCap: <span>$252B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">57</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">94.3</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$465.67</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">18.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$38.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">72.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">216.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">78.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-9.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">560–620</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">410–460</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">220–260</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 16.11.2026 ($465,67) liegt vor der jüngsten Kursbewegung (Schlusskurs 19.11.2026: $438,82, −5,8%). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $438,82 neu gerechnet.</p>
+<p>Amgen ist ein etablierter Biotech-Großkonzern mit einem reifen, aber strukturell erodierenden Legacy-Portfolio (Enbrel unter anhaltendem Biosimilar-Druck) und einer potenziell transformativen Pipeline-Wette: MariTide, Amgens Kandidat im Obesity-/GLP-1-Markt, befindet sich in Phase-3-Studien und konkurriert direkt mit Eli Lillys und Novo Nordisks etablierten Produkten in einem der größten pharmazeutischen Wachstumsmärkte der letzten Jahrzehnte. Die eigentliche Story ist, ob Amgen mit MariTide einen relevanten Anteil dieses Marktes erobern kann, bevor die Legacy-Franchise-Erosion (Enbrel, teilweise Prolia/EVENITY durch Wettbewerb) das Gesamtwachstum belastet. Was der Markt aktuell einpreist: Nach einem starken 6-Monats-Lauf (+40,0%) zeigt sich in den letzten Handelstagen eine erste Konsolidierung (5T −0,64%, 10T −3,01%) — möglicherweise eine Pause vor dem nächsten MariTide-Datenkatalysator, der Auslöser dieser kurzfristigen Schwäche ist aus den Daten nicht verifizierbar.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Legacy-Biologika-Franchise (Enbrel, Neulasta) unter anhaltendem Biosimilar-/Patentdruck</li>
+<li>Prolia/EVENITY (Osteoporose) und Repatha (Cholesterinsenkung) als etablierte, aber reifere Wachstumstreiber</li>
+<li>MariTide: Phase-3-Obesity-/GLP-1-plus-GIPR-Antagonist-Kandidat — der zentrale potenzielle Wachstumstreiber der nächsten Dekade</li>
+<li>Tepezza/Uplizna (aus der Horizon-Therapeutics-Akquisition 2023) als Spezialtherapie-Ergänzung im Seltene-Erkrankungen-Segment</li>
+<li>Operativer Hebel: Hohe Bruttomarge (72,5%) bei spezialisierter biopharmazeutischer Fertigung und Vertriebsinfrastruktur</li>
+<li>Strukturelle Abhängigkeit vom Erfolg der Pipeline (v.a. MariTide) zur Kompensation der Legacy-Erosion</li>
+<li>Die Horizon-Akquisition hat die Verschuldung strukturell erhöht (Debt/Equity 376,3%) — eine bewusste, fremdfinanzierte Wachstumswette</li>
+<li>Biosimilar-Eigengeschäft (Amgen launcht selbst Biosimilars für Wettbewerberprodukte) als zusätzlicher, margenschwächerer Wachstumshebel</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>MariTide liefert überzeugende Phase-3-Daten zu Wirksamkeit und Verträglichkeit, die Markteinführung gelingt bis FY27/28 und erobert einen relevanten Anteil des Obesity-Marktes, die Biosimilar-Erosion der Legacy-Franchise wird durch neue Launches mehr als kompensiert. Annahme (kein Konsens): FY27E EPS ~$29,00 × 20–21x Forward = $580–$609. Kursziel Bull: $560–$620 (Mittelwert $590). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: MariTide macht Fortschritte, aber die kommerzielle Markteinführung steht noch aus bzw. ist früh; die Kernfranchise (Prolia, Repatha, Biosimilars) wächst stetig weiter, die Enbrel-Erosion verläuft wie erwartet. Forward-EPS ~$25,09 (aus Forward-PE 17,5x auf aktuellem Kursniveau) leicht steigend auf ~$26,50 als Ausgangspunkt × 16–17x = $424–$450,50. Kursziel Base: $410–$460 (Mittelwert $435). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: MariTide-Phase-3-Daten enttäuschen bei Wirksamkeit oder Verträglichkeit (ein reales binäres Risiko für Obesity-Wirkstoffkandidaten), der Wettbewerbsmarkt (Lilly/Novo Nordisk dominieren bereits) lässt kaum Raum für einen dritten relevanten Player, die Legacy-Franchise-Erosion beschleunigt sich. Kundenkonzentration: Breite Patienten-/Kostenträgerbasis, aber starke Abhängigkeit von US-Erstattungspolitik bei Spezialtherapien — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein materielles China-Exposure erkennbar. Lieferketten/Foundry: Spezialisierte biopharmazeutische Fertigung ist konzentriert, kein akutes Single-Source-Fremdanbieter-Risiko bekannt. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: FDA-Zulassungsrisiko für MariTide sowie allgemeine Erstattungsrisiken bei Spezialtherapien. Bilanz: Debt/Equity von 376,3% aus der Horizon-Akquisition ist bei einer Enttäuschung ein verstärkender Risikofaktor — weniger finanzieller Spielraum für eine Pipeline-Korrektur. EPS fällt auf ~$18,00. Annahme: FY27E EPS ~$18,00 × 13–14x = $234–$252. Kursziel Bear: $220–$260 (Mittelwert $240). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $590 + 0,45 × $435 + 0,35 × $240 = $118,00 + $195,75 + $84,00 = **~$397,75 — implizites Downside vs. aktuellem Kurs ($438,82): −9,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT (vorläufig, Datenstand)</h3>
+<p>Bruttomarge (72,5%), Operating Margin (34,1%) und Net Margin (24,1%) sind für einen etablierten Biotech-Konzern solide und zeigen intakte Preissetzungsmacht trotz der Legacy-Erosion. Der ausgewiesene ROE von 78,4% ist primär ein Hebel-Effekt aus der hohen Verschuldung (Debt/Equity 376,3%), nicht nur überlegene operative Kapitalrenditen. Free Cashflow von $7,38 Mrd. ist stark und stützt sowohl Dividende als auch Entschuldung. Die Horizon-Akquisitionsverschuldung bleibt die zentrale bilanzielle Schwachstelle — der wirtschaftliche Burggraben in der etablierten Biologika-Produktpalette ist real, wird aber durch die Biosimilar-Konkurrenz strukturell unter Druck gesetzt.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Snapshot-Multiples (Trailing PE 27,0x, Forward PE 18,6x, P/B 17,5x) vor der jüngsten Kursbewegung. Auf aktuellem Niveau ($438,82): Trailing PE ~25,4x, Forward PE ~17,5x, P/B ~16,5x. Rückrechnung "Was preist der Kurs ein?": $438,82 bei Forward-EPS $25,09 impliziert eine stetige Fortsetzung des aktuellen Ergebniswachstums ohne vollständige MariTide-Erfolgsgarantie — plausibel, konsistent mit dem Base Case dieser Analyse. Das Analysten-Konsensziel ($432,84, 29 Analysten, "hold") liegt leicht unter dem aktuellen Kurs — ein Indiz für begrenzten zusätzlichen Street-Optimismus auf diesem Niveau, konsistent mit der "Hold"-Einstufung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die kurzfristige Schwäche nach dem starken 6-Monats-Lauf könnte auf Gewinnmitnahmen vor einem erwarteten MariTide-Datenkatalysator hindeuten — dies ist jedoch nicht aus den Daten verifizierbar. Für neue nachhaltige Käufer müsste ein konkreter positiver MariTide-Datenpunkt erfolgen. Enttäuschungsrisiko: Ein negativer oder gemischter Phase-3-Datenpunkt wäre angesichts der bereits hohen Erwartungen der klarste negative Katalysator.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 94,33, Rang 15 im NASDAQ-100 — solide. 5T −0,64%, 10T −3,01%, 20T +8,33%, 50T +25,97%, 6M +40,0%, 12M +23,68% — nach einem starken mehrmonatigen Aufwärtstrend zeigt sich eine erste kurzfristige Konsolidierung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Ob das Momentum fundamental gestützt bleibt, hängt entscheidend vom MariTide-Datenfluss ab, der aus den vorliegenden Daten nicht vorhersehbar ist. Warnsignal: Eine Fortsetzung der kurzfristigen Schwäche unter die 50-Tage-Basis wäre ein erstes ernstzunehmendes technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): MariTide etabliert sich als relevanter dritter Player im Obesity-Markt neben Lilly/Novo Nordisk, Legacy-Erosion wird vollständig kompensiert, Entschuldung schreitet voran. Kursziel: $650–$850.</p>
+<p>Base: MariTide liefert moderate, aber nicht dominierende Marktanteile, Legacy-Franchise erodiert planmäßig, Bilanz normalisiert sich graduell. Kursziel: $440–$560.</p>
+<p>Bear: MariTide scheitert kommerziell oder regulatorisch, Legacy-Erosion beschleunigt sich, hohe Verschuldung wird zur Belastung. Kursziel: $180–$280.</p>
+<p>Entscheidende Variable: Kommerzieller Erfolg von MariTide im hochkompetitiven Obesity-Markt relativ zum Tempo der Legacy-Franchise-Erosion.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −9,4%), nahe der Schwelle für eine neutrale Einschätzung. Amgen ist ein fundamentaler Pipeline-Katalysator-Trade auf MariTide, überlagert von einem reifen, defensiven Legacy-Geschäft — weder reiner Momentum-Titel noch klassischer Buy-and-Hold-Compounder angesichts der hohen Verschuldung. Für Healthcare-/Biotech-fokussierte Investoren mit Toleranz für binäres Pipeline-Risiko geeignet. Explizite Risikowarnung: Die hohe Verschuldung (D/E 376,3%) aus der Horizon-Akquisition verstärkt das Abwärtsrisiko bei einer MariTide-Enttäuschung — Positionsgröße entsprechend moderat halten (max. 2–3%). Bestehende Positionen mit Trailing-Stop (10%) führen. Direkte Peers: **Gilead Sciences (GILD)** als vergleichbarer Biotech-Großkonzern mit eigenem Pipeline-Katalysator (Lenacapavir), **Eli Lilly** und **Novo Nordisk** als die etablierten Obesity-Marktführer, gegen die MariTide antreten muss — nicht im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Die hohe Verschuldung (D/E 376,3%) aus der Horizon-Akquisition mindert die fundamentale Tragfähigkeit der vollen Positionsgröße, trotz des realen MariTide-Katalysators und einer EV-Rechnung nahe der neutralen Schwelle (−9,4%).</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

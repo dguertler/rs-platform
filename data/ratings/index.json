@@ -643,14 +643,6 @@
       "ev_upside_pct": -2.5
     },
     {
-      "ticker": "FAST",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.706500",
-      "ev_upside_pct": -0.5
-    },
-    {
       "ticker": "AEP",
       "verdict": "HOLD",
       "score": 56,
@@ -1614,45 +1606,6 @@
         "reason": "Sehr starkes RS-Signal (Rang 5 im DAX) plus aktiver 4H-Breakout, gest\u00fctzt durch best\u00e4tigtes Umsatzwachstum und Guidance; der GAAP-Verlust ist integrationsbedingt und einmalig, kein struktureller Einwand gegen die volle Positionsgr\u00f6\u00dfe."
       },
       "created_at": "2026-07-29T12:01:34.805218"
-    },
-    {
-      "ticker": "CCEP",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -7.1,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Katalysator fehlt",
-        "reason": "Starkes RS-Signal (Rang 39) und aktiver Daily-Breakout, aber kein aktueller fundamentaler Katalysator vor dem n\u00e4chsten Bericht (04.08.2026); Reduzierung bis zur Best\u00e4tigung."
-      },
-      "created_at": "2026-07-29T12:02:42.325368"
-    },
-    {
-      "ticker": "ROP",
-      "verdict": "BUY",
-      "score": 78,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 1.8,
-      "funnel_veto": {
-        "decision": "PASS",
-        "category": "Sonstiges",
-        "reason": "Exzellente Qualit\u00e4t (Margen, ROE, FCF) bei einem Bewertungsabschlag von 22\u201351% zu allen genannten Peers (Danaher, Ametek, Fortive); RS-Signal (Rang 82) und aktiver Weekly-Breakout best\u00e4tigen das Momentum nach dem Q2-Beat-and-Raise; kein fundamentaler Einwand."
-      },
-      "created_at": "2026-07-29T12:05:12.080322"
-    },
-    {
-      "ticker": "ABNB",
-      "verdict": "WATCH",
-      "score": 49,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -3.6,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV ~23,4x liegt deutlich \u00fcber Booking Holdings (~15,7\u201317,7x) und Expedia (~9,8\u201316x); zunehmender regulatorischer Gegenwind verst\u00e4rkt das Risiko, RS-Signal (Rang 54) und aktiver Weekly-Breakout best\u00e4tigen aber ein reales Momentum."
-      },
-      "created_at": "2026-07-29T12:06:27.146466"
     },
     {
       "ticker": "CAKE",
@@ -3135,18 +3088,6 @@
       "created_at": "2026-07-10T10:16:44.239848"
     },
     {
-      "ticker": "CSX",
-      "verdict": "WATCH",
-      "score": 45,
-      "asymmetric_edge": false,
-      "funnel_veto": {
-        "decision": "VETO",
-        "category": "Bewertung",
-        "reason": "Die EV-Rechnung zeigt bei einem historisch teuren KGV (30x Trailing gegen\u00fcber sektortypisch 15\u201320x) ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221210,0%), ein erheblicher Teil der aktuellen Pr\u00e4mie beruht auf unbest\u00e4tigter M&A-Spekulation."
-      },
-      "created_at": "2026-07-10T10:18:03.734436"
-    },
-    {
       "ticker": "BAYN.DE",
       "verdict": "WATCH",
       "score": 45,
@@ -3205,6 +3146,136 @@
         "reason": "Solides reguliertes Gesch\u00e4ftsmodell mit strukturellem Elektrifizierungs-R\u00fcckenwind, aber ohne aktives GWS-Signal und ohne konkreten kurzfristigen Ausl\u00f6ser bleibt die volle Positionsgr\u00f6\u00dfe nicht gerechtfertigt."
       },
       "created_at": "2026-07-10T10:26:53.414017"
+    },
+    {
+      "ticker": "GILD",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.8,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Trotz des realen Lenacapavir-Katalysators ergibt die EV-Rechnung nahe dem 52-Wochen-Hoch (P/B 16,0x) ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221212,4%), das keine volle Positionsgr\u00f6\u00dfe rechtfertigt."
+      },
+      "created_at": "2026-11-21T07:34:26.792415"
+    },
+    {
+      "ticker": "CCEP",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.4,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertung nahe dem 52-Wochen-Hoch (P/B 5,65x) bei nur 4,4% Umsatzwachstum l\u00e4sst keinen Puffer f\u00fcr Entt\u00e4uschungen; die EV-Rechnung best\u00e4tigt das negative Chance-Risiko-Verh\u00e4ltnis (\u22128,5%), zus\u00e4tzlich untermauert durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-11-21T07:35:35.741051"
+    },
+    {
+      "ticker": "AMGN",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -9.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die hohe Verschuldung (D/E 376,3%) aus der Horizon-Akquisition mindert die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe, trotz des realen MariTide-Katalysators und einer EV-Rechnung nahe der neutralen Schwelle (\u22129,4%)."
+      },
+      "created_at": "2026-11-21T07:36:50.763140"
+    },
+    {
+      "ticker": "ADP",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.0,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Die Bewertung nahe dem 52-Wochen-Hoch (P/B 24,1x) nach einer durch das Umsatzwachstum nicht gerechtfertigten Multiple-Expansion (6-Monats-Trend +45,47% vs. 6,1% Revenue-Wachstum) rechtfertigt keine volle Positionsgr\u00f6\u00dfe, best\u00e4tigt durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-11-21T07:37:59.134885"
+    },
+    {
+      "ticker": "ABNB",
+      "verdict": "HOLD",
+      "score": 57,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -8.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die weiterhin hohen Multiples (Forward PE 27,2x) nach der j\u00fcngsten Korrektur bei unklarem Ausl\u00f6ser und realem regulatorischem Gegenwind rechtfertigen nicht die volle Positionsgr\u00f6\u00dfe, auch wenn die technische These (RS-Rang 13) grunds\u00e4tzlich intakt bleibt."
+      },
+      "created_at": "2026-11-21T07:39:13.297685"
+    },
+    {
+      "ticker": "ROP",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.9,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die Portfoliotransformation ist real, aber gradueller Natur ohne akuten unmittelbaren Ausl\u00f6ser; die ungekl\u00e4rte Netto-Margen-Anomalie rechtfertigt zus\u00e4tzliche Vorsicht vor der vollen Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-11-21T07:40:32.997223"
+    },
+    {
+      "ticker": "COST",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -2.8,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Das Trailing-KGV von 53,3x nahe dem 52-Wochen-Hoch l\u00e4sst keinen Bewertungspuffer f\u00fcr Entt\u00e4uschungen; die EV-Rechnung best\u00e4tigt das negative Chance-Risiko-Verh\u00e4ltnis (\u22128,0%), zus\u00e4tzlich untermauert durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-11-21T07:41:47.522197"
+    },
+    {
+      "ticker": "FAST",
+      "verdict": "WATCH",
+      "score": 53,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.5,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Das Trailing-KGV von 44,9x liegt weit \u00fcber dem historischen Sektordurchschnitt f\u00fcr Industriedistributoren; die EV-Rechnung best\u00e4tigt das negative Chance-Risiko-Verh\u00e4ltnis (\u22129,8%), zus\u00e4tzlich untermauert durch ein deutlich unter dem Kurs liegendes \"Hold\"-Analystenziel."
+      },
+      "created_at": "2026-11-21T07:42:52.758945"
+    },
+    {
+      "ticker": "CSX",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -7.8,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Trotz beschleunigtem Umsatzwachstum (12,0% YoY) bleibt das historisch teure KGV (27,1x Trailing gegen\u00fcber sektortypisch 15\u201320x) nahe dem 52-Wochen-Hoch bestehen; die EV-Rechnung best\u00e4tigt ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221210,0%), ein erheblicher Teil der Pr\u00e4mie beruht weiterhin auf unbest\u00e4tigter M&A-Spekulation."
+      },
+      "created_at": "2026-11-21T07:44:00.762470"
+    },
+    {
+      "ticker": "ADI",
+      "verdict": "HOLD",
+      "score": 56,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -11.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die EV-Rechnung zeigt ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221210,6%) unmittelbar vor dem bin\u00e4ren Quartalsbericht-Katalysator am 24.11.; die volle Positionsgr\u00f6\u00dfe ist angesichts des bevorstehenden Event-Risikos nicht gerechtfertigt, auch wenn die fundamentale Restocking-These intakt bleibt."
+      },
+      "created_at": "2026-11-21T07:45:26.761735"
     }
   ]
 }

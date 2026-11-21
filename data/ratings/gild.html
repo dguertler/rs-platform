@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>GILD — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>GILD</h1>
+      <h2>Gilead Sciences, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Healthcare</span></div>
+        <div class="mi">Industrie: <span>Drug Manufacturers - General</span></div>
+        <div class="mi">MCap: <span>$208B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">107.6</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$168.08</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">16.6×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$31.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">79.9%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">195.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">-22.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-7.8%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">195–225</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">150–170</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">85–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Gilead ist der dominante Player in HIV-Behandlung und -Prävention — Biktarvy allein trägt den Großteil des Konzernumsatzes als Erhaltungstherapie-Standard. Die eigentliche Story ist aktuell nicht Biktarvy, sondern Lenacapavir (Markenname Yeztugo), die 2025 zugelassene zweimal-jährliche Injektion zur HIV-Präexpositionsprophylaxe — ein potenzieller Kategorie-Wechsel vom täglichen Pillenschema zu einem Long-Acting-Produkt, das die PrEP-Adhärenz strukturell verbessern könnte. Was der Markt hier einpreist: Der Kurs notiert nahe dem 52-Wochen-Hoch ($176,58) bei starkem RS-Score (107,6, Rang 17 im NASDAQ-100), was auf Vertrauen in eine erfolgreiche Lenacapavir-Markteinführung hindeutet. Auffällig: Der ausgewiesene Net Margin (-12,46%) liegt weit unter dem Operating Margin (38,23%) — eine Kennzahl-Anomalie, die aus den vorliegenden Daten nicht abschließend auflösbar ist (plausible Ursachen: Einmalabschreibungen auf IPR&D-Positionen aus Lizenz-/Akquisitionsdeals oder Rechtsstreit-Rückstellungen), und die operative Ertragskraft daher nicht verzerrt widerspiegeln sollte.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>HIV-Franchise (Biktarvy als Kernprodukt) liefert den Großteil des operativen Cashflows — Erhaltungstherapie mit hoher Patientenbindung</li>
+<li>Lenacapavir/Yeztugo: neues Long-Acting-PrEP-Produkt, strukturell anderes Einnahmeschema als bisherige tägliche Prophylaxe</li>
+<li>Onkologie (Trodelvy, Kite-Zelltherapien Yescarta/Tecartus) als zweites Standbein mit Wachstumspotenzial, aber geringerer Marktgröße</li>
+<li>Veklury (COVID-Antivirum) als rückläufiges, auslaufendes Nebenprodukt</li>
+<li>Operativer Hebel: Hohe Bruttomarge (79,9%) bei spezialisierter Vertriebsstruktur für wenige, hochpreisige Produkte</li>
+<li>Strukturelle Abhängigkeit vom HIV-Patentschutz — Biktarvy-Exklusivität läuft in den 2030er-Jahren aus, Lenacapavir ist auch eine Franchise-Verlängerungsstrategie</li>
+<li>Hohe Verschuldung (Debt/Equity 202,5%) aus früheren Akquisitionen/Lizenzdeals begrenzt finanzielle Flexibilität</li>
+<li>Kapitalrückführung über Dividende (Rendite 1,95%) bei weiterhin starkem Free Cashflow ($10,68 Mrd.)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Die Lenacapavir/Yeztugo-Markteinführung übertrifft die Erwartungen und wird bis FY27/28 zu einem Multi-Milliarden-Dollar-Produkt, die HIV-Franchise verteidigt sich erfolgreich gegen aufkommenden Wettbewerb, Onkologie-Pipeline (Trodelvy-Kombinationsdaten) liefert zusätzliche Impulse. Annahme (kein Konsens): FY27E EPS ~$11,50 × 18–19x Forward = $207–$218,50. Kursziel Bull: $195–$225 (Mittelwert $210). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Lenacapavir rampt solide, aber nicht explosiv; die HIV-Kernfranchise zeigt erste moderate Erosionssignale, Onkologie wächst, kompensiert dies aber nicht vollständig. Forward-EPS ~$10,15 (aktueller Konsens) leicht steigend auf ~$10,50 als Ausgangspunkt × 15–16x = $157,50–$168. Kursziel Base: $150–$170 (Mittelwert $160). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Biktarvy gerät früher als erwartet unter Preisdruck durch neue Wettbewerbsprodukte, die Lenacapavir-Einführung enttäuscht wegen Zugangs-/Erstattungshürden bei Kostenträgern (ein reales, dokumentiertes Risiko bei hochpreisigen PrEP-Injektionen), Onkologie-Pipeline liefert nicht die erwarteten Daten. Kundenkonzentration: Breite Patienten- und Kostenträgerbasis, aber starke Abhängigkeit von US-Erstattungspolitik bei Spezialmedikamenten — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein materielles China-Exposure erkennbar. Lieferketten/Foundry: Spezialisierte biopharmazeutische Fertigung ist konzentriert, aber kein klassisches Single-Source-Fremdanbieter-Risiko bekannt. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: FDA-/Erstattungsrisiken bei Spezialtherapien sind das zentrale strukturelle Risiko dieser These. EPS fällt auf ~$7,00 bei anhaltendem Gewinndruck. Annahme: FY27E EPS ~$7,00 × 13–14x = $91–$98. Kursziel Bear: $85–$105 (Mittelwert $95). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $210 + 0,45 × $160 + 0,35 × $95 = $42,00 + $72,00 + $33,25 = **~$147,25 — implizites Downside vs. aktuellem Kurs ($168,08): −12,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge (79,9%) und Operating Margin (38,2%) sind für ein Biopharma-Unternehmen exzellent und zeigen echte Preissetzungsmacht bei patentgeschützten Spezialtherapien. Der negative Net Margin (-12,46%) ist die auffälligste Anomalie und aus den Daten nicht abschließend auflösbar — er sollte nicht als operative Schwäche interpretiert werden, da Free Cashflow ($10,68 Mrd.) und operative Marge auf eine fundamental profitable Kernoperative hindeuten. Debt/Equity von 202,5% ist erhöht und die zentrale bilanzielle Schwachstelle. Der wirtschaftliche Burggraben in der HIV-Franchise ist real und patentgeschützt, aber zeitlich begrenzt — die Lenacapavir-Erweiterung ist der Versuch, diesen Burggraben über den Biktarvy-Patentablauf hinaus zu verlängern.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE ist wegen des negativen TTM-Ergebnisses N/A — eine reine KGV-Betrachtung ist hier ohnehin nicht sinnvoll. Forward PE 16,6x und P/B 16,0x sind für ein Biopharma-Unternehmen mit nur moderatem Umsatzwachstum (6,8%) auf der teureren Seite. Rückrechnung "Was preist der Kurs ein?": $168,08 bei Forward-EPS $10,15 impliziert eine erfolgreiche Lenacapavir-Markteinführung und eine stabile HIV-Kernfranchise — konsistent mit einem optimistischeren Szenario als dem hier gerechneten Base Case. Das ist ambitioniert, nicht das plausibelste Szenario. Das Analysten-Konsensziel ($174,77, 26 Analysten, "buy") liegt nur 4,0% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, deutet aber auf begrenzten zusätzlichen Street-Optimismus hin.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der starke RS-Score bei einem Kurs nahe dem 52-Wochen-Hoch deutet auf breites Long-Only-Interesse an der Lenacapavir-Story hin, nicht auf spekulatives Fast-Money. Für neue nachhaltige Käufer müsste eine konkrete Umsatzbestätigung der Yeztugo-Markteinführung in den kommenden Quartalsberichten erfolgen. Enttäuschungsrisiko: Verzögerungen bei der Erstattungsübernahme durch Kostenträger wären der klarste negative Katalysator.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 107,6, Rang 17 im NASDAQ-100 — solide. 5T +4,2%, 10T +1,47%, 20T +15,15%, 50T +26,2%, 6M +35,37%, 12M +25,21% — ein breiter, mehrmonatiger Aufwärtstrend ohne akute kurzfristige Überhitzung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt fundamental gestützt durch die Lenacapavir-Zulassung und -Markteinführung, nicht rein reaktiv. Warnsignal: Ein Rückfall unter die 50-Tage-Basis wäre das erste technische Warnsignal nach dem langen Aufwärtstrend.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Lenacapavir wird zum globalen PrEP-Standard, Onkologie-Pipeline liefert zusätzliche Blockbuster, HIV-Franchise verteidigt sich erfolgreich über den Patentablauf hinaus. Kursziel: $220–$280.</p>
+<p>Base: Lenacapavir etabliert sich als solides, aber nicht dominierendes Produkt, graduelle HIV-Franchise-Erosion wird durch neue Produkte kompensiert. Kursziel: $155–$195.</p>
+<p>Bear: Biktarvy-Patentablauf trifft früher und härter, Lenacapavir-Zugangshürden begrenzen das Umsatzpotenzial dauerhaft. Kursziel: $75–$115.</p>
+<p>Entscheidende Variable: Geschwindigkeit und Umfang der globalen Lenacapavir-Adoption als Nachfolgeprodukt für die auslaufende Biktarvy-Exklusivität.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −12,4%). Gilead ist ein fundamentaler Katalysator-Trade auf die Lenacapavir-Markteinführung, kein reiner Momentum-Titel — die Bewertung nahe dem 52-Wochen-Hoch lässt wenig Spielraum für Enttäuschungen. Geeignet für Healthcare-fokussierte Investoren mit Verständnis für Launch-Risiken bei Spezialtherapien, weniger für Trading-Kapital angesichts der begrenzten kurzfristigen Katalysatoren. Explizite Risikowarnung: Die hohe Verschuldung (D/E 202,5%) begrenzt die Flexibilität bei einer etwaigen Enttäuschung. Bestehende Positionen mit Trailing-Stop (10%) führen, Neueinstiege auf diesem Niveau nur in kleiner Positionsgröße (max. 2–3%). Direkte Peers: **Amgen (AMGN)** als vergleichbar großer Biotech-Compounder mit eigener Pipeline-Story, **ViiV Healthcare** (GSK-Tochter) als direkter HIV-Wettbewerber, nicht im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 2/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Trotz des realen Lenacapavir-Katalysators ergibt die EV-Rechnung nahe dem 52-Wochen-Hoch (P/B 16,0x) ein negatives Chance-Risiko-Verhältnis (−12,4%), das keine volle Positionsgröße rechtfertigt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

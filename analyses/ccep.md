@@ -1,100 +1,96 @@
 # CCEP — KI-Aktienbewertung
 
-**Coca-Cola Europacific Partners ** · Consumer Defensive · 29.07.2026 · Signal: Daily-Breakout (QQQ)
+**Coca-Cola Europacific Partners ** · Consumer Defensive · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 105.11 |
-| Market Cap | $46.49 Mrd. |
-| Forward PE | 18.84 |
-| Revenue (TTM) | $20.90 Mrd. |
+| Kurs | 118.57 |
+| Market Cap | $52.01 Mrd. |
+| Forward PE | 21.39 |
+| Revenue (TTM) | $21.35 Mrd. |
 | Gross Margin | 35.6% |
-| ROE | 22.9% |
-| RS-Score | 65.0 |
+| ROE | 23.5% |
+| RS-Score | 97.9 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✓ Aktiv · 4H ✗ Inaktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $112–$125 (20 %) · Base $98–$112 (50 %) · Bear $63–$76 (30 %) · EV ~$97,05
-
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: CCEP hatte in den letzten 7 Tagen keinen Earnings-Termin (nächster Bericht: 04.08.2026). Coca-Cola Europacific Partners ist der exklusive Abfüll-/Vertriebspartner für Coca-Cola-Produkte in weiten Teilen Europas und im pazifischen Raum (Australien, Indonesien, Neuseeland, Papua-Neuguinea). Der letzte Trading-Update (Q1 2026, 28.04.2026) zeigte solide operative Dynamik: Umsatz +6,7% reported/+9,4% währungsbereinigt, Volumen +8,5% auf 970 Mio. Unit Cases, FY26-Guidance (3–4% vergleichbares Umsatzwachstum, ~7% operatives Gewinnwachstum, FCF ≥1,7 Mrd. €) bestätigt. Ein aktives 1-Mrd.-€-Aktienrückkaufprogramm (zweite Tranche seit 06.07.2026) unterstreicht die Kapitaldisziplin. Die eigentliche Story ist eher strukturell als ereignisgetrieben: CCEP ist ein stabiles, dividendenstarkes Abfüller-Geschäft mit territorialer Exklusivität, das aktuell mittig innerhalb der Coca-Cola-Bottler-Bewertungsbandbreite handelt — kein akuter Katalysator, aber solide operative Kontinuität.
+CCEP ist der Abfüll- und Vertriebspartner von Coca-Cola für Westeuropa, Australien/Neuseeland/Pazifik und seit der 2025er-Konsolidierung von Coca-Cola Europacific Partners Philippines/Indonesia zusätzlich für zwei der bevölkerungsreichsten Wachstumsmärkte Südostasiens. Die eigentliche Story ist nicht mehr nur ein defensives europäisches Abfüllgeschäft, sondern eine geografische Diversifikation in Märkte mit deutlich höherem strukturellem Volumenwachstumspotenzial als die gesättigten europäischen Kernmärkte. Was der Markt aktuell einpreist: Der Kurs notiert praktisch auf dem 52-Wochen-Hoch ($119,09), getragen von einem starken 6-Monats- (+33,43%) und 12-Monats-Trend (+23,34%) — der Markt hat die SE-Asien-Expansion bereits deutlich honoriert, bevor die vollständige Integrationswirkung in den Zahlen sichtbar ist. Das Bottler-Geschäftsmodell bleibt strukturell margensensitiv gegenüber Rohstoffkosten (Aluminium, PET, Zucker), die aus den vorliegenden Daten nicht separat nachvollziehbar sind.
 
 ## 2. GESCHÄFTSMODELL
 
-- Exklusiver Abfüll-/Vertriebspartner für Coca-Cola-Markenprodukte in Europa und dem pazifischen Raum — territoriale Exklusivität als struktureller Burggraben
-- Zweisegment-Struktur: Europa (größter Umsatzträger, +9,1% Q1) und APS (Australien/Pazifik/Südostasien, +1,1% reported/+8,6% fx-neutral)
-- Kosten-pro-Unit-Case-Disziplin (Guidance +1,5%) ist der zentrale operative Hebel gegen Rohstoffkosteninflation
-- Aktives Aktienrückkaufprogramm (1 Mrd. €, zweite Tranche seit Juli 2026) reduziert Aktienzahl und stützt EPS-Wachstum unabhängig vom operativen Geschäft
-- Dividendenausschüttungsquote-Ziel ~50%, H1-Zwischendividende 0,82 €/Aktie (~40% der FY25-Dividende) — verlässliches Income-Profil
-- D/E 130% ist für ein Abfüllunternehmen mit stabilen, vorhersagbaren Cashflows tragbar, aber strukturell nennenswert
-- Wachstum ist strukturell moderat (3–4% Guidance) — kein Hochwachstumsprofil, sondern ein Cash-Compounder
+- Abfüllung und Vertrieb von Coca-Cola-Markenprodukten in Westeuropa, Australien/Pazifik und seit 2025 Philippinen/Indonesien
+- Zahlt Konzentrat-/Lizenzgebühren an The Coca-Cola Company — Marge hängt an lokaler Preissetzung, Volumen und Rohstoffkosten
+- Geografische Diversifikation in SE-Asien-Wachstumsmärkte als strukturell neue Komponente seit der 2025er-Konsolidierung
+- Operativer Hebel: Bei steigenden Volumina schlägt ein Großteil direkt auf die Marge durch, da die Abfüllinfrastruktur bereits vorhanden ist
+- Strukturelle Abhängigkeit von Rohstoffkosten (Aluminiumdosen, PET-Flaschen, Zucker) und von der Preisstrategie des Markeneigentümers Coca-Cola Co.
+- Europäische Kernmärkte sind strukturell gesättigt — Wachstum kommt primär aus Preis/Mix, nicht aus Volumen
+- Defensives, nicht-zyklisches Konsumgütergeschäft mit niedrigem Beta (0,46) — stabile Nachfrage über den Konjunkturzyklus
+- Kapitalrückführung über Dividende (Rendite 2,03%) bei moderatem, aber nicht niedrigem Verschuldungsgrad
 
 ## 3. BULL CASE
 
-Volumenwachstum beschleunigt sich über die Guidance hinaus, Kosten-pro-Unit-Case-Disziplin hält, das Rückkaufprogramm reduziert die Aktienzahl weiter. Annahme (kein Konsens): EPS $5,90 (moderate Beschleunigung) × 20x (leichte Prämie innerhalb der Bottler-Bandbreite, Annäherung an KO 24,5x) = $118,00. Bull-Kursziel: $112–$125 (Mittelpunkt $118,5). Eintrittswahrscheinlichkeit: 20%.
+Die Integration der philippinischen und indonesischen Geschäfte liefert überdurchschnittliches Volumenwachstum, Rohstoffkosten (Aluminium, PET) entspannen sich, Preissetzungsmacht in den europäischen Kernmärkten hält. Annahme (kein Konsens): FY27E EPS ~$6,20 × 22–24x Forward = $136,40–$148,80. Kursziel Bull: $130–$150 (Mittelwert $140). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: FY26-Guidance wird erreicht, Multiple hält sich auf aktuellem Niveau. Annahme: EPS $5,58 (Konsens-Forward) × 18,8x (eigenes aktuelles Forward-KGV) = $104,90. Base-Kursziel: $98–$112 (Mittelpunkt $105, nahe aktuellem Kurs). Eintrittswahrscheinlichkeit: 50%.
+Wahrscheinlichstes Szenario: Stetiges Volumenwachstum im niedrigen einstelligen Bereich in Europa, stärkeres Wachstum in den neuen SE-Asien-Märkten, moderate Margenausweitung durch Preis/Mix. Forward-EPS ~$5,54 (aktueller Konsens) leicht steigend auf ~$5,80 als Ausgangspunkt × 20–21x = $116–$121,80. Kursziel Base: $112–$124 (Mittelwert $118). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
 
-Auslöser: europäischer Konsum schwächelt (diskretionäre Getränkeausgaben unter Druck), Währungsgegenwind (Euro/Pfund vs. USD-Berichtswährung) belastet reported Zahlen, Rohstoffkosten (Zucker, Aluminium, PET) steigen wieder an. Kundenkonzentration: breite Endkundenbasis (Einzelhandel/Gastronomie), auf Datenbasis nicht als kritisches Risiko einzustufen. Geopolitik: begrenzte, primär handelsbezogene Exposure in Europa/Pazifik. Lieferketten: Rohstoffabhängigkeit (Zucker, Verpackung) als branchentypisches Risiko. Verwässerung: das Rückkaufprogramm wirkt aktuell aktienzahlreduzierend (positiv) — kein Verwässerungsrisiko erkennbar. Regulierung: Zuckersteuer-/Verpackungsregulierung in mehreren europäischen Märkten als laufendes Hintergrundrisiko. Annahme: EPS fällt auf $4,60 × 15x (Kompression Richtung Coca-Cola HBC/FEMSA-Niveau) = $69,00. Bear-Kursziel: $63–$76 (Mittelpunkt $69,5). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Rohstoffkosteninflation (Zucker, Aluminium, Verpackungszölle) kehrt zurück, die europäische Konsumnachfrage schwächt sich ab, die SE-Asien-Integration verursacht höhere Kosten als erwartet. Kundenkonzentration: Breite Endkundenbasis im Konsumgütergeschäft, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein direktes China-Exposure, aber Zölle auf Verpackungsmaterial (Aluminium) sind ein reales Kostenrisiko. Lieferketten/Foundry: Diversifizierte Rohstoffbeschaffung, kein klassisches Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Zucker-/Verpackungssteuern in europäischen Märkten sind ein bekanntes, aber kalkulierbares Branchenrisiko. EPS fällt auf ~$4,20 bei Margendruck. Annahme: FY27E EPS ~$4,20 × 16–17x = $67,20–$71,40. Kursziel Bear: $65–$78 (Mittelwert $71,50). Eintrittswahrscheinlichkeit: 30%.
 
-**Summe: 20% + 50% + 30% = 100%**
+Summe Bull + Base + Bear: 20% + 50% + 30% = 100%.
 
-**Erwartungswert:** EV = 0,20 × $118,5 + 0,50 × $105 + 0,30 × $69,5 = $23,70 + $52,50 + $20,85 = **~$97,05 — implizites Downside vs. aktuellem Kurs ($105,11): −7,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $140 + 0,50 × $118 + 0,30 × $71,50 = $28,00 + $59,00 + $21,45 = **~$108,45 — implizites Downside vs. aktuellem Kurs ($118,57): −8,5%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 22,9%, Operating Margin 13,7% — solide für ein Abfüllunternehmen. FCF $1,75 Mrd. bei $20,9 Mrd. Umsatz (8,4% FCF-Marge) deckt die Dividende und das Rückkaufprogramm strukturell. Anzumerken: der TTM-Umsatzwachstumswert im Datensatz (+0,2%) kontrastiert mit dem deutlich stärkeren jüngsten Quartalswachstum (+6,7% reported/+9,4% fx-neutral) — dies dürfte einen Basiseffekt aus früheren, schwächeren Quartalen reflektieren und ist kein Widerspruch zur aktuellen positiven Dynamik. Der Burggraben liegt in der territorialen Exklusivität als Coca-Cola-Abfüllpartner — strukturell stark und schwer replizierbar.
+ROE von 23,54% ist solide für ein Bottler-Geschäft. Operating Margin (13,57%) und Net Margin (9,35%) sind für die Branche angemessen, aber nicht herausragend — Bottler-Geschäfte sind margentechnisch strukturell zwischen Markeneigentümern (hohe Marge) und reinen Distributoren (niedrige Marge) positioniert. Free Cashflow von $1,58 Mrd. ist solide und deckt Dividende und Investitionen. Debt/Equity von 139,1% ist für ein kapitalintensives Abfüllgeschäft mit stabilen Cashflows vertretbar, aber nicht niedrig. Der wirtschaftliche Burggraben liegt in der exklusiven Abfüll-/Vertriebslizenz für definierte Gebiete — real, aber vom Markeneigentümer abhängig, nicht vollständig in eigener Hand.
 
 ## 7. BEWERTUNG
 
-Forward-KGV 18,8x liegt zwischen den günstigeren Bottler-Peers Coca-Cola HBC (~14,6x, Datenstand möglicherweise älter) und Coca-Cola FEMSA (~15,6x) einerseits und den teureren Comps Coca-Cola Consolidated (~28,1x) und Konzernmutter Coca-Cola (~24,5x) andererseits — eine mittige, nicht extreme Positionierung. Was preist der Kurs ein? Bei $105,11 und Forward-EPS $5,58 preist der Markt eine Fortsetzung des moderaten, aber stabilen Wachstumsprofils gemäß Guidance ein (vereinfachte Rechnung, Annahme) — plausibel und nicht übertrieben ambitioniert.
+Trailing PE 22,9x, Forward PE 21,4x, P/B 5,65x — für ein defensives Bottler-Geschäft mit nur 4,4% Umsatzwachstum auf der teureren Seite. Rückrechnung "Was preist der Kurs ein?": $118,57 bei Forward-EPS $5,54 impliziert eine erfolgreiche SE-Asien-Integration plus anhaltende Preissetzungsmacht in Europa — ambitioniert für ein Geschäftsmodell mit historisch niedrigerem Multiple. Das Analysten-Konsensziel ($113,14, 12 Analysten, "buy") liegt bereits unter dem aktuellen Kurs — ein Indiz, dass die Street der aktuellen Bewertung nahe dem 52-Wochen-Hoch skeptisch gegenübersteht.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Analystenkonsens "Buy", Kursziel $108,07 (11 Analysten) — nahe am aktuellen Kurs, deutet auf einen bereits weitgehend eingepreisten, stabilen Ausblick hin; "Analyst-Konsensziel $108,07 — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen". Short-Float-Daten nicht verfügbar. Niedriges Beta (0,467) und Dividendenprofil deuten auf überwiegend defensiv orientierte, langfristige institutionelle Investoren hin (Hypothese, nicht datenbasiert) — geringe Enttäuschungsdynamik zu erwarten, da wenig spekulatives Fast-Money-Kapital involviert sein dürfte.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Defensive Konsumgüteraktien wie CCEP ziehen typischerweise Long-Only-Kapital an; der starke 6-/12-Monats-Trend bei niedrigem Beta (0,46) deutet auf eine Rotation in stabile Compounder hin. Für neue nachhaltige Käufer müsste eine konkrete Bestätigung der SE-Asien-Wachstumsbeiträge in den kommenden Quartalsberichten erfolgen. Enttäuschungsrisiko: Das Analysten-Konsensziel unter dem aktuellen Kurs deutet bereits auf begrenzte Fortsetzungserwartung hin.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score +65,02 (Rang 39 im NASDAQ-100) — starkes relatives Momentum trotz des defensiven Geschäftsprofils. Windows: 5T +6,2%, 10T +7,77%, 20T +12,79%, 50T +25,3%, 6M +12,96% — konsistent positiver Trend über alle Zeitfenster. GWS-Signal: aktiver Daily-Breakout (29.07.2026, QQQ-Referenz), kein Weekly- oder 4H-Signal aktuell aktiv. Warnsignal: Rückfall unter $98–100 wäre ein erstes technisches Warnsignal.
+RS-Score 97,87, Rang 21 im NASDAQ-100 — solide, aber knapp außerhalb der Top 20. 5T +3,18%, 10T +1,8%, 20T +13,32%, 50T +22,8%, 6M +33,43%, 12M +23,34% — ein breiter, konsistenter Aufwärtstrend ohne akute kurzfristige Überhitzung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt teilweise fundamental gestützt (SE-Asien-Expansion), aber die Bewertung nahe dem 52-Wochen-Hoch lässt wenig technischen Spielraum. Warnsignal: Ein Rückfall unter die 50-Tage-Basis wäre das erste Warnsignal nach dem langen Aufwärtstrend.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($120–$145):** Volumenwachstum übertrifft strukturell die Guidance, Kostendisziplin liefert Margenexpansion, kontinuierliche Rückkäufe treiben EPS-Wachstum über das operative Geschäft hinaus.
-
-**Base ($90–$115):** Stabiles, moderates Abfüller-Geschäft mit verlässlicher Dividende ohne strukturelle Neubewertung.
-
-**Bear ($55–$78):** Europäischer Konsumrückgang, Rohstoffkosteninflation kehrt zurück, Währungsgegenwind belastet reported Ergebnisse dauerhaft.
-
-Entscheidende Variable: Nachhaltigkeit der Kosten-pro-Unit-Case-Disziplin und Volumenentwicklung in Europa.
+Bull (3–5 Jahre): SE-Asien-Expansion liefert mehrjährig überdurchschnittliches Volumenwachstum, Europa hält Preissetzungsmacht, Margen expandieren strukturell. Kursziel: $150–$190.
+Base: Stetiges Wachstum aus der Kombination reifer europäischer Märkte und wachsender SE-Asien-Beiträge. Kursziel: $115–$140.
+Bear: Rohstoffkosteninflation und europäische Konsumschwäche belasten die Marge dauerhaft, SE-Asien-Integration bleibt hinter den Erwartungen zurück. Kursziel: $60–$90.
+Entscheidende Variable: Tempo und Profitabilität der SE-Asien-Integration relativ zur Reife der europäischen Kernmärkte.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −7,7%). CCEP ist ein solider Cash-Compounder mit territorialer Exklusivität und verlässlicher Dividende — kein Momentum-Play trotz des starken RS-Signals, das hier primär die defensive Sektorrotation reflektiert. Für Dividenden-/Qualitätsinvestoren geeignet, weniger für Wachstums- oder Momentum-orientierte Portfolios. Positionsgröße: solide Kernposition (4–6%) in einem diversifizierten Dividendenportfolio. Peers: **Coca-Cola HBC** und **Coca-Cola FEMSA** sind die günstigeren Bottler-Alternativen (~14,6–15,6x) mit unterschiedlicher geografischer Exposure (Osteuropa/Afrika bzw. Lateinamerika).
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,5%). CCEP ist ein defensiver Buy-and-Hold-Compounder mit einer neuen, noch unbestätigten Wachstumskomponente aus der SE-Asien-Expansion — kein Momentum-Trade trotz des starken technischen Trends. Für konservative, dividendenorientierte Investoren mit Geduld für die Integrationsphase geeignet, weniger für Trading-Kapital angesichts der Bewertung nahe dem 52-Wochen-Hoch. Positionsgröße bei Neueinstieg moderat halten (max. 2–4%) angesichts der negativen EV-Rechnung. Direkte Peers: **Coca-Cola HBC** (osteuropäischer/afrikanischer Bottler) und **Coca-Cola FEMSA** (lateinamerikanischer Bottler) als vergleichbare regionale Abfüllpartner, nicht im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-- Qualität: 4/5
-- Wachstum: 3/5
-- Bewertung: 3/5
-- Katalysator: 2/5
+- Qualität: 3/5
+- Wachstum: 2/5
+- Bewertung: 2/5
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Starkes RS-Signal (Rang 39) und aktiver Daily-Breakout, aber kein aktueller fundamentaler Katalysator vor dem nächsten Bericht (04.08.2026); Reduzierung bis zur Bestätigung.
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Die Bewertung nahe dem 52-Wochen-Hoch (P/B 5,65x) bei nur 4,4% Umsatzwachstum lässt keinen Puffer für Enttäuschungen; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−8,5%), zusätzlich untermauert durch ein Analystenziel unterhalb des aktuellen Kurses.
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 4/5 |
-| Wachstum | 3/5 |
-| Bewertung | 3/5 |
-| Katalysator | 2/5 |
-| EV-Upside | -7.1% |
+| Qualität | 3/5 |
+| Wachstum | 2/5 |
+| Bewertung | 2/5 |
+| Katalysator | 3/5 |
+| EV-Upside | -7.4% |
 
-**Verdict: WATCH (53/100)**
+**Verdict: WATCH (45/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

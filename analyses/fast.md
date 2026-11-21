@@ -1,96 +1,95 @@
 # FAST — KI-Aktienbewertung
 
-**Fastenal Company** · Industrials · 03.07.2026 · Signal: Manuell generiert
+**Fastenal Company** · Industrials · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 47.1 |
-| Market Cap | $54.07 Mrd. |
-| Forward PE | 34.36 |
-| Revenue (TTM) | $8.44 Mrd. |
-| Gross Margin | 44.9% |
-| ROE | 33.8% |
-| RS-Score | 24.9 |
+| Kurs | 55.19 |
+| Market Cap | $63.32 Mrd. |
+| Forward PE | 39.0 |
+| Revenue (TTM) | $9.08 Mrd. |
+| Gross Margin | 44.6% |
+| ROE | 35.3% |
+| RS-Score | 88.2 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
 ## 1. INVESTMENT-CASE
 
-Fastenal ist ein struktureller Compounder im industriellen Vertriebsgeschäft (Befestigungstechnik, Instandhaltungsprodukte), dessen eigentlicher Wert in der Onsite-Ökonomie liegt: Fastenal platziert eigene Mitarbeiter und Lagerbestände direkt in den Fabriken großer Industriekunden, was Wechselkosten strukturell erhöht und die Kundenbeziehung tief in den Betriebsablauf des Kunden integriert. Umsatzwachstum von 12,4% YoY bei 33,8% ROE zeigt fortgesetzte operative Stärke, während der aktuelle Analysten-Konsens "hold" (statt "buy") und ein Kursziel ($46,66) nahe dem aktuellen Kurs ($47,10) auf eine ausgereizte kurzfristige Bewertung hindeuten. Was der Markt hier einpreist, ist die Fortsetzung des soliden, aber nicht spektakulären industriellen Wachstums – die Onsite-Expansion-Strategie (mehr Onsite-Standorte bei bestehenden Großkunden) bleibt der wichtigste, aber vom Markt nicht immer klar quantifizierte Wachstumstreiber.
+Fastenal ist ein Industriedistributor für Befestigungstechnik und MRO-Bedarf (Maintenance, Repair, Operations), aber die eigentliche Story ist nicht der Produktkatalog, sondern das Vertriebsmodell: Fastenal platziert eigene Vending-Automaten und ganze "Onsite"-Standorte direkt in den Produktionsstätten seiner Kunden — ein strukturelles Alleinstellungsmerkmal unter Industriedistributoren, das echte Switching Costs und sehr enge Kundenbindung schafft. Was der Markt aktuell einpreist: Mit einem Trailing-KGV von 44,9x bezahlt der Markt eine Prämie, die weit über dem historischen Bewertungsniveau klassischer Industriedistributoren (typischerweise 15–25x) liegt — eine "Qualitätsprämie" ähnlich der Costco-Bewertung in dieser Analyseserie, nur im Industriesektor. Das starke Umsatzwachstum (15,5% YoY) reflektiert sowohl die Onsite-/Vending-Expansion als auch einen allgemeinen Reshoring-/Fertigungsinvestitions-Rückenwind in den USA.
 
 ## 2. GESCHÄFTSMODELL
 
-- Industrieller Vertrieb von Befestigungstechnik, Werkzeugen und MRO-Produkten (Maintenance, Repair, Operations) über ein dichtes Filial- und Onsite-Netzwerk
-- Onsite-Standorte (Fastenal-Personal direkt beim Kunden vor Ort) sind der zentrale strukturelle Wachstumshebel – erhöhen Wechselkosten und Vertriebsdurchdringung bei Großkunden signifikant
-- Vending-Maschinen-Netzwerk (FAST-Solutions) für Verbrauchsmaterial-Ausgabe direkt am Fertigungsort erhöht Kundenbindung und liefert Echtzeit-Nachfragedaten
-- Fragmentierter Wettbewerbsmarkt (regionale Distributoren) bietet strukturellen Konsolidierungsspielraum, den Fastenal durch überlegene Logistik/Skalierung nutzt
-- Operativer Hebel: Bruttomarge 44,9% bei Operating Margin 20,3% zeigt disziplinierte Kostenkontrolle im margenschwächeren Distributionsgeschäft
-- Konjunktursensitivität ist real: Industrieproduktion und Fabrikauslastung korrelieren direkt mit Nachfrage nach Befestigungstechnik – klassisches zyklisches B2B-Geschäft mit strukturellem Wachstumsoverlay
-- Free Cashflow $0,90 Mrd. bei $8,44 Mrd. Revenue (10,7% FCF-Marge) ist solide, aber Distributionsgeschäfte haben strukturell geringere Margen als Software/MedTech in diesem Batch
-- D/E 11,17 ist sehr niedrig – konservative Bilanzführung typisch für Fastenal
+- Vertrieb von Befestigungstechnik und MRO-Verbrauchsmaterial an Industriekunden
+- Onsite-Standorte: eigene Fastenal-Mitarbeiter und Lagerbestände direkt in Kundenproduktionsstätten — zentrale strukturelle Differenzierung
+- Vending-Automaten-Netzwerk (FAST Solutions): automatisierte Materialausgabe direkt am Einsatzort, erhöht Kundenbindung zusätzlich
+- Operativer Hebel: Bei wachsendem Onsite-/Vending-Netzwerk steigt die Marge durch höhere Vertriebseffizienz pro Standort
+- Strukturelle Abhängigkeit von der US-Industrieproduktion und dem Tempo des Reshoring-Trends
+- Wettbewerbsdruck durch Grainger (größerer, breiterer Industriedistributor) und zunehmend durch E-Commerce-Industrieanbieter (Amazon Business)
+- Sehr niedrige Verschuldung (Debt/Equity 10,9%) verschafft außergewöhnliche Bilanzflexibilität für weiteres Netzwerkwachstum
+- Kapitalrückführung über Dividende (Rendite 1,88%) bei konsistent hoher operativer Kapitalrendite
 
 ## 3. BULL CASE
 
-Onsite-Expansion beschleunigt sich deutlich über historische Raten, Industrieproduktion in den USA erholt sich zyklisch (Reshoring-Trend), Vending-Netzwerk treibt zusätzliche Margenexpansion durch höhere Datentransparenz und Cross-Sell. Annahme (kein Konsens): FY28 EPS ~$1,55 × 38x Forward = $58,90. Bull-Kursziel: $54–$65 (Midpoint $59,50). Eintrittswahrscheinlichkeit: 15%.
+Die Onsite-/Vending-Netzwerkexpansion beschleunigt sich, der Reshoring-/Fertigungsinvestitionsboom in den USA hält über mehrere Jahre an, der Produktmix verschiebt sich weiter zu höhermargigen Onsite-Verträgen. Annahme (kein Konsens): FY27E EPS ~$1,65 × 42–44x Forward = $69,30–$72,60. Kursziel Bull: $66–$75 (Mittelwert $70,50). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Umsatzwachstum stabilisiert sich bei 8-12%, Onsite-Expansion setzt sich in moderatem Tempo fort, Margen bleiben stabil bei aktuellem Niveau. Annahme (kein Konsens): FY28 EPS ~$1,35 × 34x Forward (nahe aktuellem Niveau) = $45,90. Base-Kursziel: $42–$52 (Midpoint $47). Eintrittswahrscheinlichkeit: 55%.
+Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Trends, graduelle Fortsetzung der Onsite-/Vending-Netzwerkexpansion. Forward-EPS ~$1,415 (aktueller Konsens) leicht steigend auf ~$1,52 als Ausgangspunkt × 36–38x = $54,70–$57,80. Kursziel Base: $52–$60 (Mittelwert $56). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Konjunkturabschwung reduziert US-Industrieproduktion und Fabrikauslastung signifikant, was die zyklische Nachfrage nach Befestigungstechnik direkt trifft; gleichzeitig verschärfter Preisdruck durch Online-B2B-Distributoren (Amazon Business, Grainger). Kundenkonzentration: nicht quantifizierbar, aber Großkundenabhängigkeit bei Onsite-Standorten schafft reales Konzentrationsrisiko bei Werksschließungen. Geopolitik/China-Exposure: Zollpolitik auf importierte Befestigungstechnik-Komponenten ist ein reales, aus Daten nicht quantifizierbares Kostenrisiko. Lieferketten/Foundry: nicht auf Halbleiter-Ebene relevant, aber Importabhängigkeit von asiatischen Stahl-/Metallkomponenten-Lieferanten ist strukturell. Verwässerung: SBC nicht in Daten quantifiziert, historisch bei Fastenal niedrig. Regulierung: kein spezifisches materielles Risiko erkennbar. Wachstum fällt auf 2-4%, Margendruck durch Fixkostendeleveraging bei sinkendem Volumen. Annahme: FY28 EPS ~$1,05 × 27x = $28,35. Bear-Kursziel: $25–$34 (Midpoint $29,50). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Die US-Industrieproduktion verlangsamt sich konjunkturbedingt, der Reshoring-Rückenwind lässt nach, gleichzeitig verschärft sich der Wettbewerbsdruck durch Grainger und E-Commerce-Industrieanbieter — bei der aktuell hohen Bewertungsprämie würde bereits eine moderate Wachstumsverlangsamung eine scharfe Multiple-Kompression auslösen. Kundenkonzentration: Breite Industriekundenbasis über viele Branchen, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Importzölle auf Metallkomponenten (Befestigungstechnik) sind ein reales Kostenrisiko. Lieferketten/Foundry: Diversifizierte globale Lieferantenbasis, kein klassisches Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$1,00 bei Nachfragerückgang. Annahme: FY27E EPS ~$1,00 × 28–30x = $28–$30. Kursziel Bear: $26–$34 (Mittelwert $30). Eintrittswahrscheinlichkeit: 35%.
 
-**Summe: 15% + 55% + 30% = 100%**
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Erwartungswert:** EV = 0,15 × $59,50 + 0,55 × $47 + 0,30 × $29,50 = $8,93 + $25,85 + $8,85 = **~$44 — implizites Downside vs. aktuellem Kurs ($47,10): −6,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, aber die Abweichung ist moderat.
+**Erwartungswert:** EV = 0,20 × $70,50 + 0,45 × $56 + 0,35 × $30 = $14,10 + $25,20 + $10,50 = **~$49,80 — implizites Downside vs. aktuellem Kurs ($55,19): −9,8%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 33,8% ist stark und historisch für Fastenal über den Zyklus vergleichsweise stabil (auch in Abschwungphasen selten stark negativ, da diversifizierte Kundenbasis über viele Industrien). Operating Margin 20,3% und Net Margin 15,4% sind solide für ein Distributionsgeschäft. Free Cashflow $0,90 Mrd. (10,7% FCF-Marge) ist angemessen, aber nicht außergewöhnlich für dieses Geschäftsmodell. D/E 11,17 zeigt eine sehr konservative, robuste Bilanz. Der Burggraben ist real und strukturell: Onsite-Präsenz und Vending-Infrastruktur erzeugen echte Wechselkosten, die über reine Preisvergleichsplattformen (Amazon Business) nicht leicht zu unterlaufen sind.
+ROE von 35,3% bei einer außergewöhnlich niedrigen Verschuldung (Debt/Equity 10,9%) zeigt echte, nicht hebelgetriebene operative Kapitaleffizienz — eine der stärksten Bilanzen in dieser Analyseserie. Operating Margin (20,5%) und Net Margin (15,6%) sind für einen Industriedistributor überdurchschnittlich und spiegeln die Differenzierung durch das Onsite-/Vending-Modell wider. Free Cashflow von $916 Mio. ist solide im Verhältnis zur Unternehmensgröße. Der wirtschaftliche Burggraben (physisch eingebettete Vertriebsinfrastruktur direkt bei den Kunden) ist real und strukturell schwer zu kopieren — einer der konkretesten Switching-Cost-Burggräben in dieser Analyseserie.
 
 ## 7. BEWERTUNG
 
-Trailing PE 41,68x und Forward PE 34,36x sind für ein Distributionsgeschäft mit 12,4% Wachstum hoch bewertet – deutlich über dem historischen Industrials-Sektordurchschnitt. Price/Book 13,55x unterstreicht die Premium-Bewertung. Analysten-Konsens "hold" (statt "buy") mit Kursziel $46,66 nahe aktuellem Kurs signalisiert, dass die Coverage die Bewertung bereits als ausgereizt einstuft. Normalisiert über FCF: FCF-Yield von 1,7% ($0,90 Mrd. / $54,07 Mrd. MCap) ist niedrig. Dividende: als "195,0%" ausgewiesener Wert ist ein yfinance-Datenartefakt – plausibler tatsächlicher Wert liegt bei ca. 1,9-2,0%, aus den Daten nicht abschließend auflösbar. Rückrechnung: Aktueller Kurs impliziert bei 34,36x Forward-PE ein FY-EPS von ~$1,37 – plausibel bei fortgesetztem Wachstum, aber wenig Bewertungsspielraum für zyklische Enttäuschung.
+Trailing PE 44,9x, Forward PE 39,0x, P/B 15,3x — eines der höchsten Bewertungsniveaus für einen Industriedistributor überhaupt, weit über dem historischen Sektordurchschnitt (15–25x). Rückrechnung "Was preist der Kurs ein?": $55,19 bei Forward-EPS $1,415 impliziert eine Fortsetzung des aktuellen Wachstumstempos (15,5% Umsatzwachstum) über mehrere Jahre bei weiterer Margenausweitung — ambitioniert für ein Industriegeschäft, das strukturell konjunktursensitiv bleibt. Das Analysten-Konsensziel ($51,15, 13 Analysten, "hold") liegt deutlich unter dem aktuellen Kurs — ein klares Indiz, dass die Street der aktuellen Bewertungsprämie skeptisch gegenübersteht.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float nicht in den Daten verfügbar. Analysten-Konsens "hold" bei nur 12 Analysten (geringe Coverage-Breite), Kursziel $46,66 praktisch auf aktuellem Kursniveau – die Coverage sieht aktuell kein signifikantes Upside mehr. Hypothese, nicht datenbasiert: Das "hold"-Rating bei gleichzeitig starkem technischem Momentum (RS-Score 24,92) deutet auf eine Divergenz zwischen fundamentalorientierten Analysten (Bewertung ausgereizt) und technisch/Fast-Money-getriebenen Käufern hin. Enttäuschungsrisiko: bei zyklischer Wachstumsverlangsamung durch schwächere Industrieproduktionsdaten.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Fastenal wird häufig als "Qualitäts-Industrietitel" gehandelt, dessen Bewertungsprämie auf dem Onsite-/Vending-Burggraben beruht — dies spricht für überwiegend Long-Only-Positionierung statt spekulatives Fast-Money. Für neue nachhaltige Käufer müsste eine konkrete Beschleunigung der Reshoring-Investitionen oder eine Margenausweitung in den kommenden Quartalsberichten sichtbar werden. Enttäuschungsrisiko: Das deutlich unter dem Kurs liegende Analystenziel ("hold") signalisiert bereits erhebliche Skepsis der Street gegenüber dem aktuellen Bewertungsniveau.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 24,92, moderat positiv über die meisten Fenster: 5T +2,32%, 10T +9,58%, 20T +6,73%, 50T +0,14%, 6M +6,15%. GWS-Ampel zeigt Struktur-Breakout auf allen drei Zeitebenen (3/3). Das Momentum wirkt moderat und nicht exzessiv – eher eine solide, aber keine spekulative Kursbewegung. Fundamental teilweise gestützt durch fortgesetztes Wachstum, aber angesichts des "hold"-Analysten-Konsens auch mit reaktiver Komponente. Warnsignal: Schwache Industrieproduktionsdaten oder ISM-Einkaufsmanagerindex unter 50 wären ein Frühwarnsignal für zyklische Nachfrageschwäche.
+RS-Score 88,24, Rang 12 im NASDAQ-100 — solide. 5T +0,58%, 10T +1,1%, 20T +10,42%, 50T +17,03%, 6M +31,07%, 12M +28,04% — ein breiter, konsistenter Aufwärtstrend ohne akute kurzfristige Überhitzung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt teilweise fundamental gestützt durch den Reshoring-Trend, aber die Bewertungsprämie lässt wenig technischen Spielraum für Enttäuschungen. Warnsignal: Ein Rückfall unter die 50-Tage-Basis wäre angesichts der hohen Bewertung ein ernstzunehmendes Warnsignal für eine Multiple-Korrektur.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($62–$78):** Onsite-Netzwerk erreicht signifikant größere Kundendurchdringung, Reshoring-Trend treibt US-Industrieproduktion strukturell nach oben, Vending-Datenanalyse wird zum eigenständigen Margentreiber.
-
-**Base ($44–$60):** Stetiges Wachstum von 8-12% p.a. mit stabilen Margen, klassisches Industrials-Compounder-Profil ohne dramatische Neubewertung.
-
-**Bear ($22–$38):** Konjunkturabschwung reduziert Industrieproduktion strukturell über mehrere Quartale, Online-B2B-Distributoren erodieren Preissetzungsmacht im Commodity-Segment.
-
-Entscheidende Variable: US-Industrieproduktionszyklus und Tempo der Onsite-Standort-Expansion bei Großkunden.
+Bull (3–5 Jahre): Das Onsite-/Vending-Netzwerk verdichtet sich strukturell weiter, der Reshoring-Trend hält über mehrere Jahre an, Margenausweitung setzt sich fort. Kursziel: $78–$100.
+Base: Stetiges Wachstum aus der Netzwerkexpansion im aktuellen Tempo. Kursziel: $56–$70.
+Bear: Eine Industrierezession trifft die MRO-Nachfrage, die Bewertungsprämie korrigiert sich strukturell nach unten Richtung Sektordurchschnitt. Kursziel: $25–$38.
+Entscheidende Variable: Ob der Reshoring-/Fertigungsinvestitions-Rückenwind über mehrere Jahre anhält oder sich als zyklisches Zwischenhoch erweist.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −6,7%), und der Analysten-Konsens "hold" bestätigt die ausgereizte kurzfristige Bewertung. Fastenal ist ein solider Buy-and-Hold-Compounder mit realem Onsite-Burggraben, aber auf aktuellem Niveau ohne klare Sicherheitsmarge – eher ein Halten bestehender Positionen als ein überzeugender Neueinstieg. Die zyklische Komponente (Industrieproduktion) macht das Unternehmen weniger defensiv als klassische Compounder wie Cintas. Positionsgröße moderat, auf Rücksetzer für attraktiveren Einstieg warten. Peers: **W.W. Grainger (GWW)** als größerer, diversifizierterer Industrial-Distributor mit ähnlichem Geschäftsmodell, **MSC Industrial (MSM)** als kleinerer, günstiger bewerteter Peer im gleichen Segment. Peer-Multiples nicht im Datensatz – relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −9,8%). Fastenal ist ein struktureller Qualitäts-Compounder mit einem echten, physisch verankerten Burggraben, aber die aktuelle Bewertung (Trailing PE 44,9x) ist für ein konjunktursensitives Industriegeschäft historisch hoch und bietet keinen attraktiven Einstiegspunkt. Für sehr langfristig orientierte Qualitätsinvestoren mit Fokus auf den Onsite-/Vending-Burggraben geeignet, kein Kandidat für Neueinstiege auf diesem Bewertungsniveau angesichts der konjunkturellen Sensitivität. Bestehende Positionen halten, Neueinstiege zurückstellen. Direkte Peers: **W.W. Grainger (GWW)** als größerer, breiterer Industriedistributor mit niedrigerem Multiple, **MSC Industrial Direct** als weiterer MRO-Distributor-Peer — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 4/5
-- Wachstum: 3/5
-- Bewertung: 2/5
+- Wachstum: 4/5
+- Bewertung: 1/5
 - Katalysator: 3/5
+
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Das Trailing-KGV von 44,9x liegt weit über dem historischen Sektordurchschnitt für Industriedistributoren; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−9,8%), zusätzlich untermauert durch ein deutlich unter dem Kurs liegendes "Hold"-Analystenziel.
 
 ---
 
 | Rating | Score |
 |---|---|
 | Qualität | 4/5 |
-| Wachstum | 3/5 |
-| Bewertung | 2/5 |
+| Wachstum | 4/5 |
+| Bewertung | 1/5 |
 | Katalysator | 3/5 |
-| EV-Upside | -3.8% |
+| EV-Upside | -5.5% |
 
 **Verdict: WATCH (53/100)**
 
