@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WMT — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>WMT</h1>
+      <h2>Walmart Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Discount Stores</span></div>
+        <div class="mi">MCap: <span>$1019B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">41</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">113.1</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$128.09</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">39.7×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$735.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">24.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">77.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.3%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-6.4%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">145–165</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">120–136</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">68–85</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Walmart hatte laut Earnings-Kalender am 19.11.2026 — vor zwei Handelstagen — einen Quartalsbericht. Ein Live-Refetch der Fundamentaldaten war netzwerkseitig blockiert, die konkreten Berichtsinhalte sind daher aus den vorliegenden Daten nicht verifizierbar; der Fundamental-Snapshot gilt entsprechend als möglicherweise noch nicht vollständig aktualisiert.</p>
+<p>Walmart ist der relative Stärke-Gewinner der Stunde: Während der NASDAQ-100 in den letzten 5 Handelstagen um -10,4% eingebrochen ist, steht Walmart mit +7,7% da — eine der deutlichsten Divergenzen im gesamten Index. Die eigentliche Story ist die Transformation vom reinen Grocery-getriebenen Traffic-Modell zu einem zunehmend margenstärkeren Mix aus Walmart Connect (Werbenetzwerk auf der eigenen Plattform, hochmargig) und Walmart+ (Membership-Programm mit Costco-ähnlicher Ökonomie). Was der Markt aktuell einpreist: Ein Trailing-KGV von 46,4x ist für einen Einzelhändler mit einer Nettomarge von nur 3,0% außergewöhnlich hoch — eine "Qualitätsprämie", die stark auf der Erwartung beruht, dass Werbe- und Membership-Einnahmen das margenschwache Kerngeschäft zunehmend überlagern.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Grocery-getriebenes Traffic-Modell: Lebensmittel als Frequenztreiber für margenstärkeres General Merchandise</li>
+<li>Walmart Connect: wachsendes Werbenetzwerk auf der eigenen E-Commerce-/App-Plattform — hochmargiger Wachstumstreiber</li>
+<li>Walmart+: Membership-Programm mit zunehmend Costco-ähnlicher Gebühren-Ökonomie</li>
+<li>Internationale Beteiligungen (Flipkart Indien, Walmex Mexiko) als zusätzliche Wachstumshebel außerhalb des US-Kerngeschäfts</li>
+<li>Operativer Hebel: Bei einer Umsatzbasis von $735,8 Mrd. bewegen selbst kleine Margenverbesserungen absolut betrachtet erhebliche Ergebnisbeträge</li>
+<li>Strukturelle Abhängigkeit vom US-Konsumklima, abgefedert durch den hohen Lebensmittelanteil (defensiver als reine Non-Food-Händler)</li>
+<li>Wettbewerbsdruck durch Amazon im E-Commerce und durch Costco im Membership-Segment</li>
+<li>Kapitalrückführung über Dividende (Rendite 0,77%) und Aktienrückkäufe bei weiterhin hohem Investitionstempo</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Walmart Connect skaliert schneller als erwartet und wird zu einem relevanten Ergebnistreiber, das Walmart+-Mitgliederwachstum beschleunigt sich, die E-Commerce-Profitabilität verbessert sich strukturell, internationale Beteiligungen (Flipkart, Walmex) liefern zusätzliche Beiträge. Annahme (kein Konsens): FY27E EPS ~$3,60 × 42–44x Forward = $151,20–$158,40. Kursziel Bull: $145–$165 (Mittelwert $155). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Grocery-getriebenen Modells, Werbe- und Membership-Einnahmen wachsen graduell weiter. Forward-EPS ~$3,22 (aktueller Konsens) leicht steigend auf ~$3,45 als Ausgangspunkt × 36–38x = $124,20–$131,10. Kursziel Base: $120–$136 (Mittelwert $128). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Eine breitere Konsumabschwächung trifft auch das Grocery-Geschäft, der Margendruck im Kerngeschäft intensiviert sich, das Werbeumsatzwachstum verlangsamt sich, die extrem hohe Bewertung komprimiert sich scharf bei der ersten Enttäuschung. Kundenkonzentration: Breite Endkundenbasis, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Importzölle auf Konsumgüter sind ein reales Kostenrisiko für das margenschwache Warengeschäft. Lieferketten/Foundry: Diversifizierte globale Lieferantenbasis, kein klassisches Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$2,60 bei Margendruck. Annahme: FY27E EPS ~$2,60 × 28–30x = $72,80–$78. Kursziel Bear: $68–$85 (Mittelwert $76,50). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $155 + 0,45 × $128 + 0,35 × $76,50 = $31,00 + $57,60 + $26,78 = **~$115,38 — implizites Downside vs. aktuellem Kurs ($128,09): −9,9%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 22,3% ist solide, Operating Margin (3,9%) und Net Margin (3,0%) sind branchentypisch dünn für einen großflächigen Einzelhändler und dürfen nicht mit einem Softwaregeschäft verglichen werden — bei der enormen Umsatzbasis ($735,8 Mrd.) ergeben sich daraus trotzdem substanzielle absolute Ergebnisse. Free Cashflow von $7,13 Mrd. wirkt im Verhältnis zur Umsatzgröße moderat, was auf anhaltend hohe Investitionen in E-Commerce-/Logistikinfrastruktur hindeutet. Debt/Equity von 71,7% ist für die Größe und Stabilität des Geschäfts vertretbar. Der wirtschaftliche Burggraben (Skaleneffekte im Einkauf, Logistiknetzwerk-Dichte) ist real und einer der stärksten im globalen Einzelhandel.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 46,4x, Forward PE 39,7x, P/B 10,4x — für einen Einzelhändler mit 3,0% Nettomarge und nur 5,9% Umsatzwachstum außergewöhnlich hoch, ähnlich der "Qualitätsprämie" bei Costco in dieser Analyseserie. Rückrechnung "Was preist der Kurs ein?": $128,09 bei Forward-EPS $3,22 impliziert, dass Werbe- und Membership-Einnahmen das margenschwache Kerngeschäft in den kommenden Jahren strukturell überlagern — ambitioniert, nicht konservativ. Das Analysten-Konsensziel ($131,45, 40 Analysten, "buy") liegt nur leicht über dem aktuellen Kurs — ein Hinweis auf begrenzten zusätzlichen Street-Optimismus auf diesem bereits hohen Bewertungsniveau.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die deutliche relative Stärke gegenüber dem um -10,4% gefallenen NASDAQ-100 deutet auf eine klassische Rotation in defensive Konsumgüter-Qualitätstitel während eines Tech-Ausverkaufs hin — Walmarts niedriges Beta (0,53) stützt diese Lesart. Für neue nachhaltige Käufer müsste der gerade erfolgte Quartalsbericht (dessen Inhalte hier nicht verifizierbar sind) konkrete Bestätigung des Werbe-/Membership-Wachstums liefern. Enttäuschungsrisiko: Bei der extremen Bewertung würde bereits eine moderate Wachstumsverlangsamung eine überproportionale Korrektur auslösen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 113,06, Rang 30 im NASDAQ-100 — solide. 5T +7,7%, 10T +12,26%, 20T +20,94%, 50T +31,41%, 6M +24,67%, 12M +16,08% — ein außergewöhnlich starker, breiter Aufwärtstrend über alle Zeitfenster, der sich gerade in der Marktschwäche der letzten Tage noch verstärkt hat. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt in diesem Marktumfeld klar als defensive Rotation gestützt, nicht rein reaktiv. Warnsignal: Ein Rückfall unter die 50-Tage-Basis nach diesem außergewöhnlichen Lauf wäre ein ernstzunehmendes Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Walmart Connect und Walmart+ etablieren sich als substanzielle, margenstarke zweite und dritte Säule neben dem Kerngeschäft, internationale Beteiligungen liefern zusätzliches Wachstum. Kursziel: $165–$205.</p>
+<p>Base: Stetiges Wachstum aus der Kombination von Grocery-Traffic und graduell wachsenden Werbe-/Membership-Einnahmen. Kursziel: $130–$155.</p>
+<p>Bear: Eine Konsumabschwächung trifft auch das defensive Grocery-Geschäft, die extreme Bewertungsprämie korrigiert sich strukturell. Kursziel: $65–$90.</p>
+<p>Entscheidende Variable: Tempo und Profitabilität der Walmart-Connect-/Walmart+-Skalierung relativ zum margenschwachen Kerngeschäft.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −9,9%). Walmart ist der archetypische defensive Qualitäts-Compounder, der sich in diesem NASDAQ-Ausverkauf (-10,4% über 5 Tage) als relativer Gewinner (+7,7%) erweist — aber die aktuelle Bewertung (Trailing PE 46,4x) ist selbst für diese Qualität historisch hoch und bietet keinen attraktiven Einstiegspunkt. Für defensive, dividendenorientierte Investoren mit Fokus auf Kapitalerhalt in volatilen Marktphasen geeignet, kein Kandidat für Neueinstiege auf diesem Bewertungsniveau. Bestehende Positionen halten, Neueinstiege zurückstellen bis zu einer Bewertungskorrektur oder einer verifizierten Bestätigung der Werbe-/Membership-Wachstumsraten aus dem jüngsten Quartalsbericht. Direkte Peers: **Costco (COST)** als vergleichbarer Membership-/Qualitäts-Einzelhändler mit ähnlich hoher Bewertungsprämie, **Target (TGT)** als deutlich günstiger bewerteter, aber schwächerer Wettbewerber — keiner im Datensatz direkt vergleichbar. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 1/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Das Trailing-KGV von 46,4x ist für einen Einzelhändler mit 3,0% Nettomarge historisch hoch; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−9,9%), und die Berichtsinhalte des gerade erfolgten Quartalsberichts sind nicht verifizierbar.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

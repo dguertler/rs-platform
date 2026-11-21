@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>EXC — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>EXC</h1>
+      <h2>Exelon Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Utilities</span></div>
+        <div class="mi">Industrie: <span>Utilities - Regulated Electric</span></div>
+        <div class="mi">MCap: <span>$48B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">62</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">72.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★★★☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$46.25</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">15.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$25.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">41.5%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">363.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">9.1%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+4.1%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">58–68</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">25%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">47–54</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">27–35</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Exelon ist seit der 2022er-Abspaltung der Erzeugungssparte (heute Constellation Energy) ein reiner regulierter Netzbetreiber mit sechs Versorgungsunternehmen (ComEd Illinois, PECO Philadelphia, BGE Baltimore, Pepco DC/Maryland, Delmarva, Atlantic City Electric). Die eigentliche Story ist der strukturelle Lastwachstumsschub durch Rechenzentren im PJM-Versorgungsgebiet — mehrere Exelon-Tochterunternehmen liegen in Regionen mit den am schnellsten wachsenden Rechenzentrums-/KI-Infrastruktur-Stromnachfrageprognosen der USA, ein real dokumentierter, branchenweiter Trend seit 2024/2025. Was der Markt aktuell einpreist: In einem um -10,4% gefallenen NASDAQ-100 über 5 Handelstage steht Exelon mit +6,42% klar im Plus — eine klassische defensive Rotation in regulierte Versorger, verstärkt durch die strukturelle KI-/Rechenzentrums-Nachfragegeschichte, die Exelon von reinen "Flucht in Sicherheit"-Käufen unterscheidet.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Sechs regulierte Strom-/Gasversorger im Nordosten und Mittleren Westen der USA — reines Netz-/Vertriebsmodell ohne eigene Erzeugung</li>
+<li>Rechenzentrums-/KI-Infrastruktur-Lastwachstum in mehreren PJM-Versorgungsgebieten als struktureller, zusätzlicher Nachfragetreiber über die organische Elektrifizierung hinaus</li>
+<li>Operativer Hebel: Regulierte Netzerlöse sind an genehmigte Eigenkapitalverzinsung (WACC) gekoppelt — Ergebniswachstum folgt direkt aus dem Investitionsvolumen in die regulierte Vermögensbasis (RAB)</li>
+<li>Strukturelle Abhängigkeit von den Regulierungsperioden und den durch die jeweiligen Bundesstaaten-Regulierungsbehörden festgelegten Erlösobergrenzen</li>
+<li>Elektrifizierung (Wärmepumpen, E-Mobilität) und Rechenzentrumslast zusammen treiben einen mehrjährigen Netzausbaubedarf</li>
+<li>Hohe Kapitalintensität: Der laufende Investitionszyklus bindet mehr Kapital als der operative Cashflow aktuell deckt (negativer Free Cashflow)</li>
+<li>Diversifikation über sechs separate Versorgungsgebiete reduziert das regulatorische Einzelrisiko gegenüber einem reinen Single-State-Versorger</li>
+<li>Kapitalrückführung über Dividende (Rendite 3,63%) bleibt trotz des laufenden Investitionszyklus Priorität</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Das Rechenzentrums-/KI-getriebene Lastwachstum in den PJM-Versorgungsgebieten beschleunigt sich weiter, Regulierungsbehörden genehmigen eine beschleunigte Capex-Erholung und höhere zugelassene Eigenkapitalverzinsung, die allgemeine Elektrifizierung setzt sich fort. Annahme (kein Konsens): FY27E EPS ~$3,60 × 17–18x Forward = $61,20–$64,80. Kursziel Bull: $58–$68 (Mittelwert $63). Eintrittswahrscheinlichkeit: 25%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Stetiges reguliertes Netzwachstum aus dem aktuellen Investitionsplan, moderater Beitrag aus dem Rechenzentrumslastwachstum. Forward-EPS ~$3,03 (aktueller Konsens) leicht steigend auf ~$3,25 als Ausgangspunkt × 15–16x = $48,75–$52. Kursziel Base: $47–$54 (Mittelwert $50,50). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Regulierungsbehörden lehnen Tariferhöhungen zur Finanzierung des Netzausbaus ab oder senken die genehmigte Eigenkapitalverzinsung, die Rechenzentrums-Lastwachstumsprognosen erweisen sich als überzogen (ein reales Risiko, da viele Prognosen auf frühen Planungsstadien basieren), steigende Zinskosten auf die bereits hohe Verschuldung belasten das Ergebnis. Kundenkonzentration: Breite Endkundenbasis über sechs Versorgungsgebiete, aber zunehmende Abhängigkeit von wenigen sehr großen Rechenzentrumskunden in einzelnen Gebieten — aus den Daten nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: Kein materielles Exposure erkennbar. Lieferketten/Foundry: Materialengpässe (Transformatoren, Kabel) könnten die Capex-Umsetzung verzögern. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; eine Kapitalerhöhung zur Finanzierung des Netzausbaus ist bei anhaltend negativem FCF ein reales Risiko. Regulierung: Das zentrale Risiko dieser These über alle sechs Versorgungsgebiete hinweg. EPS fällt auf ~$2,40 bei Zinskostendruck. Annahme: FY27E EPS ~$2,40 × 12–13x = $28,80–$31,20. Kursziel Bear: $27–$35 (Mittelwert $31). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>Summe Bull + Base + Bear: 25% + 45% + 30% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,25 × $63 + 0,45 × $50,50 + 0,30 × $31 = $15,75 + $22,73 + $9,30 = **~$47,78 — implizites Upside vs. aktuellem Kurs ($46,25): +3,3%.** Die eigenen Szenarien ergeben einen leicht positiven, aber nicht asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 9,06% ist für einen regulierten Netzbetreiber moderat. Operating Margin (19,8%) und Net Margin (10,2%) sind solide. Der negative Free Cashflow (-$3,29 Mrd.) muss im Zykluskontext des laufenden, durch das Rechenzentrumslastwachstum zusätzlich verstärkten Netzausbau-Investitionsprogramms bewertet werden — bei regulierten Versorgern in Ausbauphasen normal, solange die regulierte Verzinsung die Kapitalkosten deckt. Debt/Equity von 176,5% ist die zentrale bilanzielle Schwachstelle und höher als bei vielen Versorger-Peers. Der wirtschaftliche Burggraben (regionales Verteilnetz-Monopol) ist real und durch das Rechenzentrumslastwachstum zusätzlich strukturell gestärkt.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 18,1x, Forward PE 15,2x, P/B 1,59x — für einen Versorger mit sichtbarem strukturellem KI-/Rechenzentrums-Wachstumstreiber im moderaten Bereich, nicht überteuert. Rückrechnung "Was preist der Kurs ein?": $46,25 bei Forward-EPS $3,03 impliziert eine Fortsetzung des aktuellen regulierten Ergebniswachstums mit einem gewissen Rechenzentrums-Wachstumsbeitrag, aber ohne eine vollständige Einpreisung des optimistischsten Lastwachstumsszenarios — plausibel und nicht ambitioniert. Das Analysten-Konsensziel ($48,00, 17 Analysten, "hold") liegt leicht über dem aktuellen Kurs — konsistent mit der eigenen, leicht positiven EV-Rechnung dieser Analyse.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die klare relative Stärke gegenüber dem fallenden NASDAQ-100 deutet auf eine doppelte Rotation hin — defensive Versorger-Allokation plus spezifisches Interesse an der Rechenzentrums-/KI-Stromnachfrage-These, die Exelon von reinen "Flucht in Sicherheit"-Käufen unterscheidet. Für neue nachhaltige Käufer müsste eine konkrete regulatorische Genehmigung für beschleunigte Capex-Erholung erfolgen. Enttäuschungsrisiko: Sollten sich die Rechenzentrums-Lastwachstumsprognosen als verfrüht erweisen, droht eine Enttäuschung bei den damit verbundenen erhöhten Wachstumserwartungen.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 71,96, Rang 50 im NASDAQ-100 — moderat. 5T +6,42%, 10T +10,55%, 20T +17,17%, 50T +21,09%, 6M +17,68%, 12M -0,95% — ein breiter, sich beschleunigender Aufwärtstrend über die letzten Monate nach einem flachen 12-Monats-Zeitraum. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt sowohl durch die defensive Rotation als auch durch die reale Rechenzentrums-Wachstumsstory fundamental gestützt. Warnsignal: Ein Rückfall unter die 50-Tage-Basis wäre nach diesem beschleunigten Lauf ein erstes Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Das Rechenzentrums-/KI-Lastwachstum übertrifft die aktuellen Prognosen deutlich, Regulierungsbehörden genehmigen beschleunigte Capex-Programme mit attraktiven Renditen. Kursziel: $68–$85.</p>
+<p>Base: Stetiges reguliertes Wachstum aus der Kombination von Elektrifizierung und moderatem Rechenzentrumsbeitrag. Kursziel: $48–$60.</p>
+<p>Bear: Regulatorische Zurückhaltung bei Tariferhöhungen, überzogene Lastwachstumsprognosen werden nach unten korrigiert. Kursziel: $25–$35.</p>
+<p>Entscheidende Variable: Tatsächliches Tempo und Umfang des Rechenzentrums-/KI-getriebenen Lastwachstums in den PJM-Versorgungsgebieten relativ zu den aktuellen Prognosen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben einen leicht positiven, aber nicht asymmetrischen Edge (EV +3,3%). Exelon kombiniert einen defensiven regulierten Versorger-Charakter mit einer echten strukturellen Wachstumskomponente aus dem Rechenzentrums-/KI-Lastwachstum — attraktiver als ein reiner "Flucht in Sicherheit"-Versorger, aber durch die hohe Verschuldung (D/E 176,5%) qualitativ nicht ganz erstklassig. Für Investoren geeignet, die defensive Stabilität mit struktureller KI-Infrastruktur-Exposure kombinieren wollen. Explizite Risikowarnung: Die hohe Verschuldung macht die Position sensitiv gegenüber Zinsänderungen — Positionsgröße entsprechend moderat halten. Direkte Peers: **American Electric Power (AEP)** und **Xcel Energy (XEL)** als weitere Versorger mit Rechenzentrums-Lastwachstums-Exposure, Letzterer ebenfalls in dieser Analyseserie behandelt — relative Bewertung indikativ, Peer-Multiples nicht im Datensatz.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 4/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Bilanz — Die hohe Verschuldung (D/E 176,5%) und der negative Free Cashflow mindern die fundamentale Tragfähigkeit der vollen Positionsgröße, trotz des realen Rechenzentrums-Lastwachstums-Katalysators und einer leicht positiven EV-Rechnung.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

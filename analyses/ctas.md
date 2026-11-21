@@ -1,93 +1,96 @@
 # CTAS — KI-Aktienbewertung
 
-**Cintas Corporation** · Industrials · 16.07.2026 · Signal: NASDAQ-100
+**Cintas Corporation** · Industrials · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 182.11 |
-| Market Cap | $72.87 Mrd. |
-| Forward PE | 33.52 |
-| Revenue (TTM) | $11.03 Mrd. |
-| Gross Margin | 50.4% |
-| ROE | 41.3% |
-| RS-Score | 25.1 |
+| Kurs | 226.24 |
+| Market Cap | $89.83 Mrd. |
+| Forward PE | 36.72 |
+| Revenue (TTM) | $11.56 Mrd. |
+| Gross Margin | 51.0% |
+| ROE | 41.4% |
+| RS-Score | 114.2 |
 
-**GWS-Ampel:** Weekly ✓ Aktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $210–$240 (25%) · Base $172–$188 (50%) · Bear $118–$138 (25%) · EV ~$178
-
 ## 1. INVESTMENT-CASE
-Cintas ist der Prototyp eines Route-Density-Compounders: Berufsbekleidungs-Verleih und Facility-Services mit wiederkehrenden Verträgen, hoher Kundenbindung (Wechselkosten durch operative Integration beim Kunden) und einer ROE von 41,3% — Spitzenwert selbst für Qualitätscompounder. Der Kurs notiert 19,7% unter dem 52-Wochen-Hoch (182,11 $ vs. 226,75 $), während die RS-Fenster über 6 Monate negativ sind (-14,6%) — der Markt hat die Bewertung nach Jahren der Multiple-Expansion teilweise zurückgenommen. Die Kernfrage: Ist das eine gesunde Konsolidierung eines strukturell intakten Compounders oder der Beginn eines nachhaltigeren Wachstumsabschwungs?
+
+Cintas ist ein Uniform-/Facility-Services-Anbieter mit einem Routen-basierten, abonnementähnlichen Geschäftsmodell — Uniformen, Reinigungsmatten, Hygieneartikel und Erste-Hilfe-Ausrüstung werden über langjährige Verträge an Kunden vermietet und regelmäßig gewartet/ausgetauscht. Die eigentliche Story ist die Kombination aus hoher struktureller Kundenbindung (mehrjährige Verträge, Wechselkosten durch eingespielte Lieferrouten) und fortgesetzter Konsolidierung eines fragmentierten Marktes durch gezielte Übernahmen regionaler Wettbewerber. Was der Markt aktuell einpreist: In einem um -10,4% gefallenen NASDAQ-100 über 5 Handelstage steht Cintas mit +6,2% klar im Plus, nahe seinem 52-Wochen-Hoch ($233,46, 96,9% davon) — ein klassisches Beispiel für Rotation in einen defensiven, nicht-zyklischen B2B-Dienstleistungs-Compounder während eines Tech-Ausverkaufs.
 
 ## 2. GESCHÄFTSMODELL
-- Uniform-Rental und Facility-Services mit routenbasiertem, wiederkehrendem Vertragsgeschäft
-- Hohe Wechselkosten: Kunden müssten komplette Logistik- und Ausstattungsprozesse neu aufsetzen
-- Cross-Selling in angrenzende Segmente (Erste-Hilfe, Feuerlöscher-Wartung, Reinigungsmatten) erhöht den Umsatz pro Kunde ohne neue Akquisitionskosten
-- Operativer Hebel über Routendichte: mehr Kunden pro Route senken die Grenzkosten überproportional
-- Strukturell hohe Bruttomarge (50,4%) und ROE (41,3%) zeigen ein kapitaleffizientes, margenstarkes Modell
-- Wachstum primär organisch über Penetration bestehender Routen plus selektive Bolt-on-Akquisitionen
+
+- Routen-basierte Vermietung und Wartung von Uniformen, Reinigungsmatten und Hygieneartikeln für Geschäftskunden
+- Zusätzliche Servicelinien (Erste-Hilfe-/Sicherheitsausrüstung, Feuerschutz) als Cross-Sell-Hebel innerhalb der bestehenden Kundenbeziehungen
+- Mehrjährige Verträge und eingespielte Lieferrouten schaffen echte Wechselkosten — ein struktureller Burggraben
+- Operativer Hebel: Höhere Routendichte senkt die Kosten pro Lieferung, was die Marge bei Wachstum strukturell verbessert
+- Fortgesetzte Konsolidierung eines fragmentierten Marktes durch Übernahmen kleinerer regionaler Uniform-/Service-Anbieter
+- Strukturelle Abhängigkeit von der allgemeinen Unternehmensbeschäftigung (mehr Mitarbeiter = mehr Uniformbedarf) als Makro-Sensitivität
+- Niedrige Kundenabwanderung durch die Kombination aus Vertragsbindung und praktischer Umstellungsreibung
+- Kapitalrückführung über Dividende (Rendite 0,92%) bei weiterhin hoher Reinvestitionsrate in M&A und Routennetzwerk
 
 ## 3. BULL CASE
-Peer-Hinweis: Die im Datensatz verfügbaren "Specialty Business Services"-Peers (GPN 4,7x, DLB 10,7x, RELX 15,4x, CPRT 16,4x) sind Geschäftsmodell-fremd (Zahlungsabwicklung, Audio-Tech, Auto-Auktionen) — echte Uniform-Rental-Peers (UniFirst, Aramark) fehlen im Datensatz. Peer-Multiples nur eingeschränkt verifizierbar; Cintas' strukturelle Prämie (Routendichte-Moat, ROE 41%) rechtfertigt ein deutlich höheres Multiple als die gezeigte Vergleichsgruppe. Bull-Multiple 37x (moderate Ausweitung ggü. eigenem Forward-KGV bei bestätigter Margenexpansion). Bull-EPS FY27: $6,10 (Annahme) — Penetration in Gesundheitswesen/Hospitality beschleunigt sich. Kursziel: 6,10 × 37x ≈ $225,7 → Bandbreite $210–$240. Eintrittswahrscheinlichkeit: 25%.
+
+Die Routendichte erhöht sich weiter, das Cross-Selling zusätzlicher Servicelinien (Erste-Hilfe, Feuerschutz) beschleunigt sich, die Konsolidierung des fragmentierten Marktes setzt sich über weitere Übernahmen fort. Annahme (kein Konsens): FY27E EPS ~$7,20 × 38–40x Forward = $273,60–$288. Kursziel Bull: $260–$300 (Mittelwert $280). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
-Base-Multiple 33x (nahe eigenem Forward-KGV 33,5x — strukturelle Qualitätsprämie bereits im Kurs). Base-EPS: Konsens $5,43. Kursziel: 5,43 × 33x ≈ $179,2 → Bandbreite $172–$188. Wahrscheinlichstes Szenario: stetiges, aber kein beschleunigtes Wachstum, Multiple konsolidiert auf aktuellem Niveau. Eintrittswahrscheinlichkeit: 50%.
+
+Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Trends aus organischem Wachstum und moderater M&A-Aktivität. Forward-EPS ~$6,16 (aktueller Konsens) leicht steigend auf ~$6,60 als Ausgangspunkt × 34–36x = $224,40–$237,60. Kursziel Base: $215–$245 (Mittelwert $230). Eintrittswahrscheinlichkeit: 50%.
 
 ## 5. BEAR CASE
-Bear-Multiple 26x (Kompression Richtung reiferer Business-Services-Multiples wie CPRT 16,4x, aber nicht vollständig — der Moat bleibt real). Bear-EPS FY27: $4,90 (Annahme) — konjunkturelle Abkühlung im US-Mittelstandssegment bremst Neuvertragswachstum. Kursziel: 4,90 × 26x ≈ $127,4 → Bandbreite $118–$138. Eintrittswahrscheinlichkeit: 25%.
 
-Risikodimensionen:
-- Kundenkonzentration: gering — breite Diversifikation über Kleinst- und Mittelbetriebe, auf Datenbasis nicht quantifizierbar
-- Geopolitik/China-Exposure: minimal, primär US-Inlandsgeschäft
-- Lieferketten: moderates Risiko bei Textil-/Rohstoffbeschaffung, auf Datenbasis nicht quantifizierbar
-- Verwässerung: kein Hinweis auf SBC-getriebene Verwässerung im Datensatz
-- Regulierung: Mindestlohn-/Arbeitsrechtsänderungen in den USA sind ein direktes Kostenrisiko für das personalintensive Servicegeschäft
+Auslöser: Ein angespannter Arbeitsmarkt erhöht die Kosten für die Servicebereitstellung (Personalmangel bei Lieferrouten), Unternehmen kürzen bei einer konjunkturellen Abschwächung ausgelagerte Servicekosten, der Wettbewerbsdruck intensiviert sich. Kundenkonzentration: Breite Geschäftskundenbasis über viele Branchen, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein materielles Exposure erkennbar. Lieferketten/Foundry: Diversifizierte Textil-/Materiallieferantenbasis, kein akutes Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Arbeitsrechtliche Änderungen sind ein bekanntes, aber kalkulierbares Branchenrisiko. EPS fällt auf ~$4,80 bei Kostendruck. Annahme: FY27E EPS ~$4,80 × 26–28x = $124,80–$134,40. Kursziel Bear: $118–$145 (Mittelwert $131,50). Eintrittswahrscheinlichkeit: 30%.
 
-**Bull 25% + Base 50% + Bear 25% = 100%**
-**Erwartungswert: $178 — implizites Upside/Downside vs. aktuellem Kurs ($182,11): -2,3%.**
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — kein High-Conviction-Framing gerechtfertigt.
+Summe Bull + Base + Bear: 20% + 50% + 30% = 100%.
+
+**Erwartungswert:** EV = 0,20 × $280 + 0,50 × $230 + 0,30 × $131,50 = $56,00 + $115,00 + $39,45 = **~$210,45 — implizites Downside vs. aktuellem Kurs ($226,24): −7,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
-ROE 41,3% ist außergewöhnlich hoch und über den Zyklus stabil (kein Top-of-Cycle-Einmaleffekt, sondern strukturelles Merkmal des Geschäftsmodells). Operative Marge 23,2%, Nettomarge 17,6% — beide auf hohem, konsistentem Niveau. FCF von 1,51 Mrd. $ bei 11,03 Mrd. $ Umsatz (FCF-Marge ~13,7%) bestätigt die Kapitaleffizienz. Der Burggraben ist real und strukturell: Routendichte und Wechselkosten sind über Jahrzehnte aufgebaut und schwer anzugreifen.
+
+ROE von 41,4% bei moderater Verschuldung (Debt/Equity 52,1%) zeigt überwiegend echte, nicht nur hebelgetriebene operative Kapitaleffizienz. Operating Margin (23,6%) und Net Margin (17,8%) sind für ein Dienstleistungsunternehmen stark und spiegeln die Vorteile der Routendichte-Skalierung wider. Free Cashflow von $1,74 Mrd. ist solide. Der wirtschaftliche Burggraben (vertragliche Kundenbindung plus Routennetzwerk-Skaleneffekte) ist real und einer der konkretesten Switching-Cost-Burggräben in dieser Analyseserie — ähnlich der Argumentation bei Fastenal, nur im B2B-Service- statt Industriedistributions-Segment.
 
 ## 7. BEWERTUNG
-Ein reines KGV von 33,5x wirkt hoch, ist aber im Kontext eines Compounders mit 41% ROE über den Zyklus zu beurteilen, nicht isoliert. Rückrechnung "Was preist der Kurs ein?": Bei $182,11 und Forward-EPS $5,43 impliziert der Markt ein KGV von 33,5x — das setzt anhaltend hohes zweistelliges EPS-Wachstum über mehrere Jahre voraus. Ambitioniert, aber angesichts der historischen Konsistenz des Geschäftsmodells nicht unrealistisch. Das eigene Forward-Multiple liegt deutlich über der (geschäftsmodell-fremden) Vergleichsgruppe im Datensatz — dieser Abstand ist strukturell durch die überlegene Kapitalrendite erklärbar, nicht "aus den Daten nicht erklärbar".
+
+Trailing PE 44,6x, Forward PE 36,7x, P/B 17,4x — für ein reifes B2B-Dienstleistungsunternehmen mit 10,9% Umsatzwachstum historisch hoch, ähnlich der "Qualitätsprämie" bei anderen Compoundern in dieser Analyseserie (Costco, Fastenal, Walmart). Rückrechnung "Was preist der Kurs ein?": $226,24 bei Forward-EPS $6,16 impliziert eine Fortsetzung des aktuellen Wachstumstempos ohne signifikante zusätzliche Beschleunigung — plausibel, aber nicht günstig. Das Analysten-Konsensziel ($218,44, 16 Analysten, "buy") liegt unter dem aktuellen Kurs — ein Indiz, dass die Street der aktuellen Bewertung nahe dem 52-Wochen-Hoch bereits leicht skeptisch gegenübersteht.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
-Short-Float-Daten nicht verfügbar. Analystenkonsens "Buy" bei 16 Analysten, Kursziel $208,69 deutlich über aktuellem Kurs — als Sentiment-Indikator, nicht als Ceiling. Hypothese, nicht datenbasiert: Die 19,7%-Korrektur vom Hoch könnte eine Rotation aus hochbewerteten Qualitätscompoundern in zyklischere Value-Titel widerspiegeln.
+
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die klare relative Stärke gegenüber dem fallenden NASDAQ-100 deutet auf eine Rotation in defensive, nicht-zyklische B2B-Service-Compounder hin — ein typisches Long-Only-Qualitätsmuster in Risk-Off-Phasen. Cintas ist zudem eine aktive Position im regelbasierten Modell-Depot der Plattform (Einstieg 05.11. bei $231,64, aktuell leicht im Minus) — die technische 4H-Breakout-These bleibt laut Systemregeln intakt, solange kein Stopp/Trendumkehr-Signal greift. Für neue nachhaltige Käufer müsste eine konkrete Beschleunigung der Cross-Sell-/M&A-Aktivität sichtbar werden. Enttäuschungsrisiko: Das unter dem Kurs liegende Analystenziel signalisiert bereits begrenzten zusätzlichen Spielraum.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
-RS-Score 25,1 (Rang #65 im NASDAQ-100), kurzfristig positiv (5T +9,0%, 10T +11,4%) nach schwachem 6-Monats-Fenster (-14,6%) — deutet auf eine beginnende Erholung nach der Korrektur hin. GWS-Ampel: Weekly, Daily und 4H allesamt gebrochen (3/3 Punkte) — technisches Signal für eine Bodenbildung. Ein Warnsignal wäre ein erneuter Bruch unter die jüngsten Swing-Tiefs bei enttäuschender Guidance im nächsten Quartalsbericht.
+
+RS-Score 114,18, Rang 22 im NASDAQ-100 — stark. 5T +6,2%, 10T +9,25%, 20T +12,17%, 50T +23,92%, 6M +45,73%, 12M +16,91% — ein außergewöhnlich starker, breiter Aufwärtstrend über alle Zeitfenster. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt in diesem Marktumfeld klar als defensive Rotation gestützt. Warnsignal: Ein Rückfall unter die 50-Tage-Basis nach diesem außergewöhnlichen Lauf wäre ein ernstzunehmendes Warnsignal, insbesondere angesichts der bereits hohen Bewertung.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
-- Bull: $260–$310 — anhaltende Marktanteilsgewinne, Margenexpansion durch Skaleneffekte, Multiple bleibt auf Compounder-Niveau
-- Base: $200–$250 — stetiges Wachstum im Rahmen der historischen Konsistenz
-- Bear: $130–$165 — konjunktureller Abschwung bremst Neukundenakquise strukturell über mehrere Jahre
-Entscheidende Variable: Tempo der Penetration in Gesundheitswesen/Hospitality und Widerstandsfähigkeit gegenüber einer US-Konjunkturabkühlung.
+
+Bull (3–5 Jahre): Die Marktkonsolidierung setzt sich über weitere Jahre fort, Cross-Sell-Umsätze pro Kunde steigen strukturell, die Routendichte-Skaleneffekte verbessern die Marge weiter. Kursziel: $300–$380.
+Base: Stetiges Wachstum aus der Kombination von organischem Wachstum und moderater M&A-Aktivität im aktuellen Tempo. Kursziel: $230–$280.
+Bear: Eine Konjunkturabschwächung trifft die Unternehmensbeschäftigung und damit die Uniformnachfrage, die hohe Bewertungsprämie korrigiert sich. Kursziel: $115–$150.
+Entscheidende Variable: Ob die Routendichte-Skaleneffekte und Cross-Sell-Umsätze die bereits hohe Bewertung über mehrere Jahre rechtfertigen können.
 
 ## 11. PROFI-FAZIT
-Cintas ist ein klassischer Buy-and-Hold-Compounder, kein zyklischer Trading-Trade — geeignet für langfristig orientierte Qualitätsinvestoren, die die hohe Bewertung als Preis für Konsistenz akzeptieren. Für kurzfristige Momentum-Trader ist die aktuelle Bewertung trotz technischer Bodenbildung wenig attraktiv (EV-Edge negativ). Peers: Im Datensatz kein direkter Uniform-Rental-Vergleich vorhanden — relative Bewertung gegenüber UniFirst/Aramark indikativ, nicht datenbasiert einzuordnen.
 
-Qualität: 5/5
-Wachstum: 3/5
-Bewertung: 2/5
-Katalysator: 2/5
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −7,0%). Cintas ist ein qualitativ hochwertiger Buy-and-Hold-Compounder mit einem echten Switching-Cost-Burggraben, der sich in diesem NASDAQ-Ausverkauf als relativer Gewinner erweist — aber die aktuelle Bewertung (Trailing PE 44,6x) nahe dem 52-Wochen-Hoch bietet keinen attraktiven neuen Einstiegspunkt. Für langfristig orientierte Qualitätsinvestoren geeignet, die die Position bereits halten; für Neueinsteiger kein günstiger Zeitpunkt. Bestehende Positionen (auch im regelbasierten Modell-Depot der Plattform) nach Systemregeln weiterlaufen lassen, Neueinstiege zurückstellen. Direkte Peers: **UniFirst (UNF)** als kleinerer, direkter Uniform-Rental-Wettbewerber mit niedrigerem Multiple — nicht im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Trotz technischer Bodenbildung (3/3 GWS-Punkte) rechtfertigt das hohe Forward-KGV (33,5x) bei negativem EV-Edge nur halbe Positionsgröße.
+- Qualität: 4/5
+- Wachstum: 3/5
+- Bewertung: 2/5
+- Katalysator: 2/5
 
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Das Trailing-KGV von 44,6x nahe dem 52-Wochen-Hoch lässt keinen Bewertungspuffer für Enttäuschungen; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−7,0%) für Neueinstiege, bestätigt zusätzlich durch ein Analystenziel unterhalb des aktuellen Kurses.
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 5/5 |
+| Qualität | 4/5 |
 | Wachstum | 3/5 |
 | Bewertung | 2/5 |
 | Katalysator | 2/5 |
-| EV-Upside | -2.4% |
+| EV-Upside | -5.5% |
 
-**Verdict: WATCH (53/100)**
+**Verdict: WATCH (49/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

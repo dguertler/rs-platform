@@ -635,14 +635,6 @@
       "ev_upside_pct": null
     },
     {
-      "ticker": "XEL",
-      "verdict": "HOLD",
-      "score": 57,
-      "asymmetric_edge": false,
-      "created_at": "2026-07-03T10:10:50.698999",
-      "ev_upside_pct": -2.5
-    },
-    {
       "ticker": "AEP",
       "verdict": "HOLD",
       "score": 56,
@@ -878,19 +870,6 @@
         "reason": "Starkes technisches Signal (3/3 GWS-Punkte) und best\u00e4tigte Stabilisierung, volle Positionsgr\u00f6\u00dfe vertretbar trotz moderatem EV-Edge."
       },
       "created_at": "2026-07-16T10:34:54.856245"
-    },
-    {
-      "ticker": "CTAS",
-      "verdict": "WATCH",
-      "score": 53,
-      "asymmetric_edge": false,
-      "ev_upside_pct": -2.4,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Trotz technischer Bodenbildung (3/3 GWS-Punkte) rechtfertigt das hohe Forward-KGV (33,5x) bei negativem EV-Edge nur halbe Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-07-16T10:35:59.318625"
     },
     {
       "ticker": "VRSK",
@@ -2154,19 +2133,6 @@
       "created_at": "2026-08-11T09:53:02.563342"
     },
     {
-      "ticker": "TTWO",
-      "verdict": "HOLD",
-      "score": 66,
-      "asymmetric_edge": false,
-      "ev_upside_pct": 8.1,
-      "funnel_veto": {
-        "decision": "REDUCE",
-        "category": "Bewertung",
-        "reason": "Forward-KGV von ~37\u201338x auf FY27-Basis liegt deutlich \u00fcber dem einzigen sauberen Peer EA (21,78x); trotz des st\u00e4rksten Katalysators aller vier Titel (GTA VI, 19.11.2026 best\u00e4tigt) tr\u00e4gt die Bewertung nicht die volle Positionsgr\u00f6\u00dfe."
-      },
-      "created_at": "2026-08-11T09:53:02.585759"
-    },
-    {
       "ticker": "CTSH",
       "verdict": "HOLD",
       "score": 58,
@@ -3330,6 +3296,136 @@
         "reason": "Die extreme Trailing-/Forward-KGV-Diskrepanz (27,7x vs. 8,1x) nach einem Kursr\u00fcckgang von -54% vom 52-Wochen-Hoch signalisiert tiefe Marktskepsis gegen\u00fcber der Nachhaltigkeit der Konsens-Ergebnissch\u00e4tzungen; die EV-Rechnung best\u00e4tigt das deutlich negative Chance-Risiko-Verh\u00e4ltnis (\u221240,0%), verst\u00e4rkt durch die weiterhin erh\u00f6hte Verschuldung."
       },
       "created_at": "2026-11-21T08:02:27.805993"
+    },
+    {
+      "ticker": "WMT",
+      "verdict": "WATCH",
+      "score": 41,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -6.4,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Das Trailing-KGV von 46,4x ist f\u00fcr einen Einzelh\u00e4ndler mit 3,0% Nettomarge historisch hoch; die EV-Rechnung best\u00e4tigt das negative Chance-Risiko-Verh\u00e4ltnis (\u22129,9%), und die Berichtsinhalte des gerade erfolgten Quartalsberichts sind nicht verifizierbar."
+      },
+      "created_at": "2026-11-21T08:36:00.786547"
+    },
+    {
+      "ticker": "FANG",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -8.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Die extreme Trailing-/Forward-KGV-Diskrepanz ist aus den Daten nicht abschlie\u00dfend aufl\u00f6sbar, und die EV-Rechnung auf Basis konservativerer EPS-Annahmen zeigt ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221214,6%); die relative St\u00e4rke im aktuellen Marktumfeld ist prim\u00e4r ein Sektor-Rotationseffekt."
+      },
+      "created_at": "2026-11-21T08:37:15.222748"
+    },
+    {
+      "ticker": "TTWO",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -17.0,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Trotz des au\u00dfergew\u00f6hnlich starken GTA-VI-Katalysators (Katalysator-Rating 5/5) zeigt die EV-Rechnung auf Basis konservativerer Annahmen ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221213,6%); die extreme Ergebniskonzentration auf einen einzigen, bereits mehrfach verz\u00f6gerten Produktlaunch rechtfertigt keine volle Positionsgr\u00f6\u00dfe."
+      },
+      "created_at": "2026-11-21T08:38:31.977728"
+    },
+    {
+      "ticker": "EXC",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 4.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die hohe Verschuldung (D/E 176,5%) und der negative Free Cashflow mindern die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe, trotz des realen Rechenzentrums-Lastwachstums-Katalysators und einer leicht positiven EV-Rechnung."
+      },
+      "created_at": "2026-11-21T08:39:42.240178"
+    },
+    {
+      "ticker": "CTAS",
+      "verdict": "WATCH",
+      "score": 49,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -5.5,
+      "funnel_veto": {
+        "decision": "VETO",
+        "category": "Bewertung",
+        "reason": "Das Trailing-KGV von 44,6x nahe dem 52-Wochen-Hoch l\u00e4sst keinen Bewertungspuffer f\u00fcr Entt\u00e4uschungen; die EV-Rechnung best\u00e4tigt das negative Chance-Risiko-Verh\u00e4ltnis (\u22127,0%) f\u00fcr Neueinstiege, best\u00e4tigt zus\u00e4tzlich durch ein Analystenziel unterhalb des aktuellen Kurses."
+      },
+      "created_at": "2026-11-21T08:40:55.149229"
+    },
+    {
+      "ticker": "MDLZ",
+      "verdict": "WATCH",
+      "score": 50,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 0.2,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Katalysator fehlt",
+        "reason": "Die Kakaopreis-Normalisierung w\u00e4re ein realer positiver Katalysator, ist aber zeitlich nicht absehbar; ohne diese Kl\u00e4rung rechtfertigt die relative St\u00e4rke allein keine volle Positionsgr\u00f6\u00dfe trotz solider Markenqualit\u00e4t."
+      },
+      "created_at": "2026-11-21T08:42:02.390743"
+    },
+    {
+      "ticker": "KDP",
+      "verdict": "WATCH",
+      "score": 41,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -1.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die hohe Verschuldung (D/E 94,97%) aus der JDE-Peet's-Akquisitionsfinanzierung mindert die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe w\u00e4hrend der laufenden, noch unsicheren Konzernaufspaltung."
+      },
+      "created_at": "2026-11-21T08:43:17.679404"
+    },
+    {
+      "ticker": "XEL",
+      "verdict": "WATCH",
+      "score": 45,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -4.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Sonstiges",
+        "reason": "Das reale, noch ungekl\u00e4rte Waldbrand-Haftungsrisiko (Texas Panhandle 2024, Colorado Marshall Fire 2021) ist ein konkretes, aus den Daten nicht abschlie\u00dfend quantifizierbares Rechtsrisiko, das trotz der defensiven Rotation und soliden regulierten Grundgesch\u00e4fts die volle Positionsgr\u00f6\u00dfe nicht rechtfertigt."
+      },
+      "created_at": "2026-11-21T08:44:30.375929"
+    },
+    {
+      "ticker": "HON",
+      "verdict": "WATCH",
+      "score": 44,
+      "asymmetric_edge": false,
+      "ev_upside_pct": -10.1,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bewertung",
+        "reason": "Das irref\u00fchrend niedrige Trailing-KGV (11,0x) ist durch einen Einmalgewinn aus der Advanced-Materials-Abspaltung verzerrt; auf Basis des repr\u00e4sentativeren Forward-KGV zeigt die EV-Rechnung ein negatives Chance-Risiko-Verh\u00e4ltnis (\u221210,3%) w\u00e4hrend der noch laufenden Konzernaufspaltung."
+      },
+      "created_at": "2026-11-21T08:45:42.109527"
+    },
+    {
+      "ticker": "TMUS",
+      "verdict": "HOLD",
+      "score": 62,
+      "asymmetric_edge": false,
+      "ev_upside_pct": 5.4,
+      "funnel_veto": {
+        "decision": "REDUCE",
+        "category": "Bilanz",
+        "reason": "Die au\u00dfergew\u00f6hnlich hohe Verschuldung (D/E 211,3%) aus der Sprint-Fusionsfinanzierung mindert die fundamentale Tragf\u00e4higkeit der vollen Positionsgr\u00f6\u00dfe, trotz der realen 5G-Home-Internet-Wachstumsstory und einer leicht positiven EV-Rechnung."
+      },
+      "created_at": "2026-11-21T08:46:49.103367"
     }
   ]
 }

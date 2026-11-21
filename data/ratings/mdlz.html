@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>MDLZ — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>MDLZ</h1>
+      <h2>Mondelez International, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Defensive</span></div>
+        <div class="mi">Industrie: <span>Confectioners</span></div>
+        <div class="mi">MCap: <span>$85B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">50</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">102.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$67.54</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">20.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$39.9B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">34.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">308.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">15.5%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+0.2%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">82–92</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">68–78</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–48</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">35%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Mondelez ist ein globaler Snack-/Süßwarenkonzern (Oreo, Cadbury, Toblerone, Milka, Ritz, belVita), dessen zentrale Story der letzten zwei Jahre nicht Wachstum, sondern die Bewältigung der historischen Kakaopreis-Spitze ist — die westafrikanische Angebotskrise hat die Kakaopreise auf Rekordniveaus getrieben und die Margen der gesamten Schokoladenbranche massiv unter Druck gesetzt. Die eigentliche Frage ist, ob Mondelez die notwendigen Preiserhöhungen durchsetzen kann, ohne signifikante Volumenverluste zu erleiden — das sehr niedrige Umsatzwachstum (2,3% YoY) deutet darauf hin, dass Verbraucher zumindest teilweise mit reduzierten Kaufmengen reagieren. Was der Markt aktuell einpreist: In einem um -10,4% gefallenen NASDAQ-100 über 5 Handelstage steht Mondelez mit +6,19% im Plus, nahezu auf seinem 52-Wochen-Hoch ($68,75, 98,2% davon) — eine klassische Rotation in defensive Konsumgüter während eines Tech-Ausverkaufs.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Globales Markenportfolio bei Snacks/Süßwaren (Oreo, Cadbury, Toblerone, Milka u.a.) mit starker Markenbindung</li>
+<li>Kakao als zentraler Rohstoff-Inputfaktor — die jüngste Preisspitze ist der dominante Kostenfaktor der letzten zwei Jahre</li>
+<li>Geografische Diversifikation über entwickelte und Schwellenländer reduziert regionale Konzentrationsrisiken</li>
+<li>Operativer Hebel: Preiserhöhungen zur Kakaokostenkompensation wirken sich direkt auf die Marge aus, sofern die Volumina nicht proportional sinken</li>
+<li>Strukturelle Abhängigkeit von der Entwicklung der globalen Kakaopreise, die außerhalb der Kontrolle des Unternehmens liegen</li>
+<li>belVita und weitere "besser für dich"-Snack-Linien als struktureller Wachstumshebel über das klassische Süßwarengeschäft hinaus</li>
+<li>Wettbewerbsdruck durch Nestlé, Hershey und private-Label-Anbieter im Snack-/Süßwarensegment</li>
+<li>Kapitalrückführung über Dividende (Rendite 3,08%) bei moderater Verschuldung (Debt/Equity 83,8%)</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Die Kakaopreise normalisieren sich deutlich von den jüngsten Rekordhöhen, die durchgesetzten Preiserhöhungen bleiben weitgehend stabil ohne signifikante Volumenverluste, die Marge erholt sich spürbar. Annahme (kein Konsens): FY27E EPS ~$3,90 × 22–23x Forward = $85,80–$89,70. Kursziel Bull: $82–$92 (Mittelwert $87). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Die Kakaopreise bleiben erhöht, aber stabil, eine graduelle Margenerholung setzt sich fort. Forward-EPS ~$3,36 (aktueller Konsens) leicht steigend auf ~$3,55 als Ausgangspunkt × 20–21x = $71–$74,55. Kursziel Base: $68–$78 (Mittelwert $73). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die Kakaopreise steigen erneut oder bleiben dauerhaft auf extrem hohem Niveau, der Verbraucher-Gegenwind gegenüber weiteren Preiserhöhungen beschleunigt die Volumenverluste, die Margenkompression setzt sich fort. Kundenkonzentration: Breite Endkundenbasis über den Einzelhandel, aber Konzentration auf wenige große Einzelhandelsketten als Vertriebspartner — aus den Daten nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: Die westafrikanische Kakao-Lieferkette (Elfenbeinküste, Ghana) bleibt ein strukturelles geopolitisches und klimatisches Risiko. Lieferketten/Foundry: Hohe Abhängigkeit von einer geografisch konzentrierten Kakao-Anbauregion — ein reales Lieferketten-Konzentrationsrisiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Zucker-/Verpackungssteuern in einzelnen Märkten sind ein bekanntes, kalkulierbares Branchenrisiko. EPS fällt auf ~$2,60 bei anhaltendem Margendruck. Annahme: FY27E EPS ~$2,60 × 16–17x = $41,60–$44,20. Kursziel Bear: $38–$48 (Mittelwert $43). Eintrittswahrscheinlichkeit: 35%.</p>
+<p>Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $87 + 0,45 × $73 + 0,35 × $43 = $17,40 + $32,85 + $15,05 = **~$65,30 — implizites Downside vs. aktuellem Kurs ($67,54): −3,3%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, nahe der neutralen Schwelle.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>ROE von 15,48% ist angesichts des anhaltenden Kakaopreisdrucks solide. Operating Margin (14,6%) und Net Margin (10,2%) sind für einen Markenkonsumgüterkonzern in dieser Kostenbelastungsphase angemessen, aber nicht herausragend. Free Cashflow von $2,78 Mrd. bleibt stark und untermauert die Dividende. Debt/Equity von 83,8% ist moderat. Der wirtschaftliche Burggraben (globale Markenstärke bei Oreo, Cadbury u.a.) ist real und strukturell, wird aber durch die Lieferketten-Konzentration beim Rohstoff Kakao in einer geografisch engen Anbauregion überlagert — ein echtes strukturelles Risiko, kein nur scheinbares.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 21,3x, Forward PE 20,1x, P/B 3,22x — für einen defensiven Konsumgüterkonzern im moderaten Bereich, nicht überteuert trotz der Kursnähe zum 52-Wochen-Hoch. Rückrechnung "Was preist der Kurs ein?": $67,54 bei Forward-EPS $3,36 impliziert eine graduelle Margenerholung ohne vollständige Kakaopreis-Normalisierung — plausibel, konsistent mit dem Base Case dieser Analyse. Das Analysten-Konsensziel ($70,45, 22 Analysten, "buy") liegt leicht über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen, aber ein Indiz für moderaten zusätzlichen Street-Optimismus.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die klare relative Stärke gegenüber dem fallenden NASDAQ-100 deutet auf eine klassische Rotation in defensive Konsumgüter-Qualitätstitel hin, verstärkt durch mögliche Hoffnung auf eine Kakaopreis-Normalisierung. Für neue nachhaltige Käufer müsste eine konkrete, nachhaltige Entspannung der Kakaopreise erfolgen. Enttäuschungsrisiko: Ein erneuter Kakaopreisanstieg (z. B. durch Wetterereignisse in Westafrika) wäre angesichts der bereits strapazierten Margen der klarste negative Katalysator.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 102,85, Rang 29 im NASDAQ-100 — stark. 5T +6,19%, 10T +10,2%, 20T +19,82%, 50T +21,29%, 6M +26,61%, 12M +18,74% — ein breiter, konsistenter Aufwärtstrend über alle Zeitfenster. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt primär als defensive Rotation gestützt, mit zusätzlicher Hoffnung auf Kakaopreis-Entspannung. Warnsignal: Ein Rückfall unter die 50-Tage-Basis wäre nach diesem starken Lauf nahe dem 52-Wochen-Hoch ein ernstzunehmendes Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Die Kakaopreise normalisieren sich strukturell durch neue Anbauinvestitionen und diversifizierte Beschaffung, die Margen erholen sich auf historische Niveaus, "besser für dich"-Snacks liefern zusätzliches Wachstum. Kursziel: $88–$105.</p>
+<p>Base: Die Kakaopreise bleiben erhöht, aber beherrschbar, graduelle Margenerholung setzt sich über Jahre fort. Kursziel: $70–$85.</p>
+<p>Bear: Strukturell dauerhaft hohe Kakaopreise durch anhaltende westafrikanische Angebotsprobleme, Volumenverluste beschleunigen sich. Kursziel: $35–$50.</p>
+<p>Entscheidende Variable: Nachhaltigkeit der Kakaopreis-Normalisierung relativ zur strukturellen westafrikanischen Angebotsproblematik.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −3,3%), nahe der neutralen Schwelle. Mondelez ist ein defensiver Markenkonsumgüter-Compounder mit einem realen, aber lösbaren Rohstoffkosten-Problem — die relative Stärke im aktuellen Marktumfeld ist primär ein defensiver Rotationseffekt, kein eigenständiges fundamentales Signal einer Kakaopreis-Lösung. Für konservative, dividendenorientierte Investoren mit Geduld für die Kakaopreis-Normalisierung geeignet. Positionsgröße bei Neueinstieg moderat halten (max. 2–4%) angesichts der ungelösten Rohstoffkosten-Unsicherheit. Direkte Peers: **Hershey (HSY)** als US-fokussierterer Schokoladen-Peer mit ähnlichem Kakaopreis-Risiko, **Nestlé** als diversifizierterer globaler Konsumgüterkonzern — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die Kakaopreis-Normalisierung wäre ein realer positiver Katalysator, ist aber zeitlich nicht absehbar; ohne diese Klärung rechtfertigt die relative Stärke allein keine volle Positionsgröße trotz solider Markenqualität.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>
