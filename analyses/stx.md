@@ -1,16 +1,16 @@
 # STX — KI-Aktienbewertung
 
-**Seagate Technology Holdings PLC** · Technology · 10.07.2026 · Signal: Kein GWS-Signal
+**Seagate Technology Holdings PLC** · Technology · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 820.16 |
-| Market Cap | $185.56 Mrd. |
-| Forward PE | 30.09 |
-| Revenue (TTM) | $11.01 Mrd. |
-| Gross Margin | 41.6% |
-| ROE | UNGÜLTIG (17.8797) |
-| RS-Score | 226.0 |
+| Kurs | 528.29 |
+| Market Cap | $121.27 Mrd. |
+| Forward PE | 8.09 |
+| Revenue (TTM) | $13.80 Mrd. |
+| Gross Margin | 50.4% |
+| ROE | 259.4% |
+| RS-Score | 50.8 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
@@ -18,80 +18,78 @@
 
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: Fundamental-Snapshot vom 06.07.2026 ($820,16) liegt vor der jüngsten Kursbewegung (Schlusskurs 09.07.2026: $890,09, +8,5%). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $890,09 neu gerechnet.
-
-Seagate ist wie WDC ein Nutznießer des Nearline-HDD-Booms für KI-Trainingsdaten-Speicherung, unterscheidet sich aber fundamental in der Kapitalstruktur: Jahrelange, überwiegend fremdfinanzierte Aktienrückkäufe haben die Eigenkapitalbasis auf ein Minimum reduziert — Debt/Equity liegt bei 381,6%, der Price/Book-Multiple von 168x (Snapshot) ist das direkte Resultat einer nahezu aufgezehrten Buchwertbasis. Die eigentliche Story ist damit doppelt gehebelt: operativ über den HDD-Zyklus und finanziell über die extreme Bilanzstruktur. Was der Markt hier einpreist, ist nicht nur eine Fortsetzung des Nearline-Booms, sondern implizit auch, dass die dünne Eigenkapitaldecke im nächsten Abschwung nicht zum Problem wird. Das RS-Signal ist mit Score 225,97 und Rang 2 im S&P 500 fast identisch stark wie bei WDC, die Aktie hat sich aber ebenfalls bereits um -15,72% von ihren jüngsten Hochs gelöst (10-Tage-Fenster).
+Seagate hat seit der letzten Analyse dieser Serie (10.07.2026, damals $890,09) einen noch dramatischeren Kurseinbruch erlitten als der Peer WDC — die Aktie notiert nun bei $528,29, nur noch 46,1% ihres 52-Wochen-Hochs ($1.145,00), nach einem Rückgang von -25,84% im 6-Monats-Fenster. Die zentrale Frage hat sich seit der letzten Analyse verschärft: Das Forward-KGV (8,1x) impliziert bei einem Forward-EPS-Konsens von $65,34 einen gewaltigen Ergebnissprung gegenüber dem Trailing-EPS ($19,07) — ein noch extremeres Beispiel der "Zyklusspitzen-Paradoxie" als bei WDC: Je niedriger das Multiple bei vermeintlich hohen erwarteten Gewinnen, desto stärker die implizite Marktskepsis, dass diese Gewinne von Dauer sind. Anders als bei WDC bleibt bei Seagate zusätzlich die strukturell höhere Verschuldung (Debt/Equity 77,4%) ein verstärkender Risikofaktor in einem Abschwungszenario.
 
 ## 2. GESCHÄFTSMODELL
 
-- Nearline-HDD für Hyperscaler-Rechenzentren — Kernsegment, direkter Wettbewerber zu WDC im faktischen Duopol
+- Nearline-HDD für Hyperscaler-Rechenzentren — identisches Duopol-Geschäftsmodell wie WDC
 - HAMR-Technologie (Heat-Assisted Magnetic Recording) als nächste Kapazitätsgeneration jenseits von 30TB pro Laufwerk
-- Operativer Hebel: Bei steigenden ASPs schlägt praktisch der gesamte Zusatzumsatz auf das Ergebnis durch — hohe Fixkostenbasis der Fertigung
-- Strukturelle Abhängigkeit von Hyperscaler-Capex-Zyklen, identisch zu WDC
-- Aggressive, überwiegend fremdfinanzierte Kapitalrückführung über Jahre hat die Eigenkapitalbasis strukturell minimiert
+- Operativer Hebel: Bei fallenden ASPs oder Nachfrage schlägt die hohe Fixkostenbasis der Fertigung stark negativ durch
+- Strukturelle Abhängigkeit von Hyperscaler-Capex-Zyklen — der massive Kursrückgang deutet auf zunehmende Marktskepsis hin
+- Weiterhin erhöhte, wenn auch gegenüber der letzten Analyse gesunkene Verschuldung (Debt/Equity 77,4% vs. zuvor 381,6%) — die Bilanz hat sich verbessert, bleibt aber ein Risikofaktor
 - Duopol-Preisdisziplin mit WDC verhindert einen ruinösen Preiswettbewerb im Nearline-Segment
-- Deutlich höheres finanzielles Risiko als WDC durch die extreme Verschuldung — Zinskosten binden einen wachsenden Anteil des operativen Ergebnisses
-- Kapitalrückführung bleibt trotz der bereits dünnen Eigenkapitalbasis ein zentrales Element der Aktionärsrendite-Strategie
+- HAMR-Technologieführerschaft gegenüber WDCs UltraSMR-Ansatz als potenzieller Differenzierungsfaktor
+- Kapitalrückführung (Dividendenrendite 0,58%) bleibt angesichts der Bilanzverbesserung moderat
 
 ## 3. BULL CASE
 
-HAMR-Technologie setzt sich als dominante 30TB+-Technologie durch, ASPs steigen auf über $200/Laufwerk, der Nearline-Boom verlängert sich bis 2028 durch den weiteren Ausbau der KI-Inference-Infrastruktur. Strukturelle Margennachhaltigkeit: Operativer Hebel bei hoher Fixkostenbasis und Technologieführerschaft bei HAMR könnten dauerhaft höhere Margen als historische Zyklusmittel stützen — dies bleibt jedoch eng an den Fortbestand der aktuellen Nachfragedynamik gekoppelt und ist nicht unabhängig davon zu bewerten. Annahme (kein Konsens): FY27E EPS ~$32 × 30–33x Forward = $960–$1.056. Kursziel Bull: $900–$1.100 (Mittelwert $1.000). Eintrittswahrscheinlichkeit: 15%.
+Die HDD-Zyklusstärke hält an, die HAMR-Technologie setzt sich erfolgreich durch, Seagate bestätigt, dass die aktuelle Ertragskraft nachhaltig ist, der Markt re-ratet die Aktie zurück auf ein normalisiertes Multiple. Annahme (kein Konsens): FY27E EPS ~$55,00 (moderate Normalisierung vom optimistischen Konsens) × 12–14x Forward = $660–$770. Kursziel Bull: $620–$800 (Mittelwert $710). Eintrittswahrscheinlichkeit: 15%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Der Nearline-Boom normalisiert auf +20–25% YoY, Seagate hält seinen Marktanteil von rund 45%, HAMR liefert eine moderate ASP-Prämie gegenüber konventioneller Technologie. Forward-EPS ~$27,26 (aus Forward-PE 30,1x auf Snapshot-Basis) leicht steigend auf ~$29 als Ausgangspunkt × 22–25x = $638–$725. Kursziel Base: $620–$740 (Mittelwert $680). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Das Ergebniswachstum normalisiert sich deutlich vom optimistischen Forward-Konsens, das Multiple bleibt aus zyklischer Vorsicht komprimiert. Konservativ normalisiertes EPS ~$35,00 (statt des optimistischen Forward-Konsens $65,34) × 9–10x = $315–$350. Kursziel Base: $300–$370 (Mittelwert $335). Eintrittswahrscheinlichkeit: 40%.
 
 ## 5. BEAR CASE
 
-Auslöser: QLC-SSD erreicht Preisparität mit Nearline-HDD im Kapazitätssegment früher als erwartet, gleichzeitig pausiert ein großer Hyperscaler seine KI-Capex-Pläne. Kundenkonzentration: Die Top-3-Hyperscaler dürften einen Großteil des Nearline-Umsatzes ausmachen — aus den vorliegenden Daten nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: Kein direktes China-Fertigungsrisiko bei HDD-Produktion; China-Absatzmärkte könnten durch Exportkontrollen indirekt betroffen sein, aus Daten nicht genau beurteilbar. Lieferketten/Foundry: HAMR-Rollout-Verzögerungen (Laser-Komponenten, neue Medienbeschichtung) sind ein technologiespezifisches Risiko, das WDC beim Marktanteil begünstigen könnte. Verwässerung: Netto-SBC-Effekt durch Buybacks bei bereits stark reduziertem Eigenkapital ist strukturell unklar und ein Risikofaktor bei Kapitalmarktstress. Regulierung: Keine signifikanten direkten Risiken erkennbar. Das Debt/Equity von 381,6% ist das mit Abstand größte Risiko im Abschwung: Bei fallendem EPS und sinkendem FCF droht eine akute Refinanzierungs- oder Bilanzkrise, die über einen reinen Nachfragerückgang hinausgeht. Annahme: FY27E EPS ~$8 × 16–20x = $128–$160, zusätzlicher Bilanzrisikoabschlag berücksichtigt. Kursziel Bear: $130–$220 (Mittelwert $175). Eintrittswahrscheinlichkeit: 40%.
+Auslöser: Der HDD-Zyklus kehrt sich beschleunigt um, gleichzeitig verstärkt die weiterhin erhöhte Verschuldung (Debt/Equity 77,4%) das Abwärtsrisiko in einem Abschwungszenario deutlich stärker als bei dem bilanziell gesünderen Peer WDC. Kundenkonzentration: Die größten Hyperscaler dürften einen Großteil des Nearline-Umsatzes ausmachen — aus den Daten nicht exakt quantifizierbar. Geopolitik/Exportkontrollen: Keine direkten China-Fertigungsrisiken bei HDD-Produktion. Lieferketten/Foundry: HAMR-Fertigung ist technologisch komplex und konzentriert sich auf wenige eigene Werke — ein Ausführungsrisiko bei der Kapazitätsskalierung. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Bilanz: Die weiterhin erhöhte Verschuldung bleibt das materiellste Einzelrisiko im Abschwung. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS bricht auf ~$15,00 ein. Annahme: FY27E EPS ~$15,00 × 10–12x = $150–$180. Kursziel Bear: $140–$200 (Mittelwert $170). Eintrittswahrscheinlichkeit: 45%.
 
-Summe Bull + Base + Bear: 15% + 45% + 40% = 100%.
+Summe Bull + Base + Bear: 15% + 40% + 45% = 100%.
 
-**Erwartungswert:** EV = 0,15 × $1.000 + 0,45 × $680 + 0,40 × $175 = $150,00 + $306,00 + $70,00 = **~$526,00 — implizites Downside vs. aktuellem Kurs ($890,09): −40,9%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,15 × $710 + 0,40 × $335 + 0,45 × $170 = $106,50 + $134,00 + $76,50 = **~$317,00 — implizites Downside vs. aktuellem Kurs ($528,29): −40,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau ein noch deutlicher negatives Chance-Risiko-Verhältnis als beim Peer WDC.
 
-## 6. FUNDAMENTALE QUALITÄT (vorläufig, Datenstand)
+## 6. FUNDAMENTALE QUALITÄT
 
-Der ausgewiesene ROE-Wert ist als Dateartefakt markiert (UNGÜLTIG) und wird hier nicht verwendet — bei einer nahezu aufgezehrten Eigenkapitalbasis verliert die Kennzahl ohnehin ihre Aussagekraft. Operating Margin von 35,7% und Net Margin von 21,6% sind solide und branchentypisch für den aktuellen Zyklushöhepunkt; die Differenz zwischen beiden reflektiert plausibel die hohe Zinslast aus der extremen Verschuldung. Free Cashflow von $1,61 Mrd. ist positiv und stützt weiterhin die Kapitalrückführung. Das entscheidende Qualitätsmerkmal ist aber die Bilanz: Debt/Equity von 381,6% und ein Price/Book von 168x (Snapshot) zeigen eine strukturell fragile Eigenkapitalbasis, die im nächsten zyklischen Abschwung zum zentralen Risiko wird — der operative Burggraben (Duopol-Struktur) ist real, wird aber durch das Bilanzrisiko überlagert.
+Operating Margin (40,5%) bleibt stark. Der ausgewiesene ROE von 259,4% ist ein extremes Artefakt der weiterhin sehr dünnen Eigenkapitalbasis aus Jahren aggressiver Aktienrückkäufe und wird hier nicht als nachhaltige Kapitalrendite interpretiert — der P/B von 35,1x bestätigt diese strukturelle Verzerrung. Debt/Equity von 77,4% ist gegenüber der letzten Analyse dieser Serie (381,6%) deutlich gesunken — eine reale Verbesserung, die aber angesichts der Zyklusunsicherheit weiterhin Vorsicht gebietet. Free Cashflow von $2,30 Mrd. bleibt solide. Der entscheidende Qualitätstest bleibt identisch zur letzten Analyse: Ob die aktuellen Rekordmargen nach dem massiven Kursrückgang noch als nachhaltig gelten können.
 
-## 7. BEWERTUNG (vorläufig, Datenstand)
+## 7. BEWERTUNG
 
-Snapshot-Multiples (Trailing PE 77,5x, Forward PE 30,1x, P/B 168,1x) vor dem Kurssprung. Auf aktuellem Niveau ($890,09): Trailing PE ~84,1x, Forward PE ~32,7x, P/B ~182,4x — die P/B-Kennzahl ist durch die fast aufgezehrte Eigenkapitalbasis strukturell verzerrt und nicht sinnvoll interpretierbar, dient hier nur als Bilanzrisiko-Indikator, nicht als Bewertungsanker. Rückrechnung "Was preist der Kurs ein?": $890,09 bei Forward-EPS $27,26 impliziert eine Fortsetzung des aktuellen Margenniveaus über mehrere Jahre bei gleichzeitig stabiler Refinanzierung der hohen Schuldenlast — das ist ambitioniert und nicht das plausibelste Szenario angesichts der HDD-Zyklizität. Das Analysten-Konsensziel ($948,17, 23 Analysten, "buy") liegt 6,5% über dem aktuellen Kurs — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
+Trailing PE 27,7x, Forward PE 8,1x, P/B 35,1x — die extreme Diskrepanz zwischen Trailing- und Forward-KGV bei einem Kursrückgang von -54% vom 52-Wochen-Hoch ist noch ausgeprägter als bei WDC und spricht für tiefe Marktskepsis gegenüber der Nachhaltigkeit der Konsens-Ergebnisschätzungen. Rückrechnung "Was preist der Kurs ein?": $528,29 bei einem konservativ normalisierten EPS (nicht dem optimistischen Forward-Konsens $65,34) impliziert, dass der Markt bereits einen erheblichen Ergebnisrückgang erwartet — plausibel angesichts der HDD-Zyklizität und der im Vergleich zu WDC höheren Verschuldung. Das Analysten-Konsensziel ($1.044,83, 24 Analysten, "strong_buy") liegt fast doppelt so hoch wie der aktuelle Kurs — ein außergewöhnlich großer Abstand, der als Sentiment-Indikator zu verstehen ist, nicht als verlässlicher Fair-Value-Anker in dieser Marktphase.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der fast identisch starke RS-Score wie bei WDC (Rang 2 vs. Rang 1) bei gleichzeitig deutlich höherem Bilanzrisiko deutet darauf hin, dass der Markt Seagate aktuell primär über die Sektor-Story handelt, ohne das höhere Leverage-Risiko vollständig zu differenzieren. Für neue nachhaltige Käufer müsste eine Bestätigung anhaltender Hyperscaler-Nachfrage bei gleichzeitig sichtbarer Entschuldung erfolgen. Enttäuschungsrisiko: Bei einer HDD-Nachfrageabkühlung würde Seagate wegen der Bilanzstruktur überproportional stärker abverkauft als WDC.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der massive Kursrückgang bei gleichzeitig noch sehr hohem Analysten-Konsensziel deutet darauf hin, dass der Markt die Nachhaltigkeit des HDD-Booms deutlich stärker neu bewertet hat als die Analystenmodelle. Für neue nachhaltige Käufer müsste eine Stabilisierung der Ergebnisse auf einem nachvollziehbar nachhaltigen Niveau erfolgen. Enttäuschungsrisiko: Angesichts der höheren Verschuldung gegenüber WDC würde eine weitere Guidance-Kürzung bei Seagate überproportional stärker durchschlagen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 225,97, Rang 2 im S&P 500 — praktisch gleichauf mit WDC an der Spitze des Index. 5T +7,72%, 10T -15,72%, 20T +5,35%, 50T +48,16%, 6M +180,46% — nahezu deckungsgleiche Bewegung zu WDC, inklusive der jüngsten zehntägigen Korrektur. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum ist fundamental gestützt durch die reale Nachfragedynamik, aber die Bewertung — verstärkt durch die extreme Bilanzstruktur — hat der operativen Entwicklung deutlich vorgegriffen. Warnsignal: Ein Bruch unter die 50-Tage-Basis wäre bei diesem Bilanzprofil ein besonders ernstzunehmendes Warnsignal, da eine schnelle Korrektur bei geringer Eigenkapitaldecke stärker durchschlägt.
+RS-Score 50,77, Rang 72 im NASDAQ-100 — ein dramatischer Abfall gegenüber Rang 2 in der letzten Analyse dieser Serie. 5T +3,82%, 10T +14,79%, 20T -8,88%, 50T -27,47%, 6M -25,84%, 12M +94,35% — nach dem massiven Einbruch zeigt sich eine erste technische Erholung im 10-Tage-Fenster, stärker noch als bei WDC. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Die jüngste Erholung könnte eine Stabilisierung andeuten oder eine technische Gegenbewegung sein. Warnsignal: Ein erneuter Rückfall unter die jüngsten Tiefs würde die Bodenbildungs-These widerlegen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-Bull (3–5 Jahre): HAMR wird zum Industriestandard, Seagate gewinnt Marktanteile zurück, Entschuldung setzt ein und stabilisiert die Bilanz. Kursziel: $1.100–$1.450.
-Base: Nearline-Nachfrage normalisiert, Seagate hält Marktanteil, Bilanz bleibt angespannt, aber tragfähig. Kursziel: $650–$900.
-Bear: HDD-Substitution durch SSD beschleunigt sich, die dünne Eigenkapitalbasis erzwingt eine Kapitalerhöhung oder Dividendenkürzung. Kursziel: $150–$300.
-Entscheidende Variable: Ob Seagate die Verschuldung im aktuellen Zyklushoch aktiv reduziert, bevor der nächste Abschwung die dünne Eigenkapitaldecke unter Druck setzt.
+Bull (3–5 Jahre): HAMR wird zum Industriestandard, die Nearline-HDD-Nachfrage erweist sich als strukturell nicht zyklisch, Entschuldung setzt sich fort. Kursziel: $750–$1.000.
+Base: Die Ergebnisse normalisieren sich moderat vom Zyklushoch, die Bilanz verbessert sich weiter graduell. Kursziel: $320–$450.
+Bear: Der HDD-Zyklus kehrt vollständig um, die weiterhin erhöhte Verschuldung erzwingt eine Kapitalerhöhung oder Dividendenkürzung. Kursziel: $100–$180.
+Entscheidende Variable: Ob Seagate seine Verschuldung weiter reduzieren kann, bevor eine etwaige Zyklusumkehr die Bilanz unter Druck setzt.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −40,9%) — das deutlichste negative Chance-Risiko-Verhältnis unter den in dieser Serie analysierten Werten. STX ist das aggressivste, spekulativste Momentum-Instrument auf den HDD-Boom — nicht für risikobewusste Anleger, da die extreme Verschuldung (D/E 381,6%, faktisch aufgezehrtes Eigenkapital) das operative Zyklusrisiko finanziell verstärkt. Explizite Risikowarnung: Positionsgröße auf maximal 1% eines diversifizierten Portfolios begrenzen. Bestehende Positionen nur mit eng gesetztem Trailing-Stop (10%) halten, kein Nachkauf auf diesem Niveau. Direkter Peer: **WDC** ist bei praktisch identischem operativen Momentum (RS-Rang 1 vs. 2) mit der wesentlich gesünderen Bilanz (D/E 17,8% vs. 381,6%) die klar defensivere Wahl innerhalb desselben Sektor-Themas. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau ein deutlich negatives Chance-Risiko-Verhältnis (EV −40,0%) — trotz des bereits massiven Kursrückgangs seit der letzten Analyse dieser Serie das negativste Ergebnis unter allen bisher in dieser Serie analysierten Titeln. Seagate bleibt das aggressivere, spekulativere der beiden HDD-Duopol-Instrumente — die Bilanzverbesserung gegenüber der letzten Analyse ist real, ändert aber nichts an der grundsätzlichen Unsicherheit über die Nachhaltigkeit der Zyklushoch-Erträge. Für risikotolerante, zyklus-erfahrene Investoren geeignet, kein Compounder-Kandidat. Explizite Risikowarnung: Positionsgröße maximal 1% eines diversifizierten Portfolios angesichts der Kombination aus Zyklusrisiko und weiterhin erhöhter Verschuldung. Direkter Peer: **WDC** zeigt eine etwas weniger extreme, aber qualitativ ähnliche Entwicklung mit deutlich gesünderer Bilanz (Debt/Equity 9,9% vs. STX 77,4%) — die klar defensivere Wahl innerhalb desselben Sektor-Themas. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-- Qualität: 1/5
+- Qualität: 2/5
 - Wachstum: 4/5
 - Bewertung: 1/5
-- Katalysator: 4/5
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** VETO — Kategorie: Bilanz — Die extreme Verschuldung (D/E 381,6%, P/B 182x auf aktuellem Kursniveau) macht die Position trotz starkem RS-Signal und realem fundamentalen Katalysator zu riskant für die volle Positionsgröße; die EV-Rechnung bestätigt das deutlich negative Chance-Risiko-Verhältnis (−40,9%).
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Die extreme Trailing-/Forward-KGV-Diskrepanz (27,7x vs. 8,1x) nach einem Kursrückgang von -54% vom 52-Wochen-Hoch signalisiert tiefe Marktskepsis gegenüber der Nachhaltigkeit der Konsens-Ergebnisschätzungen; die EV-Rechnung bestätigt das deutlich negative Chance-Risiko-Verhältnis (−40,0%), verstärkt durch die weiterhin erhöhte Verschuldung.
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 1/5 |
+| Qualität | 2/5 |
 | Wachstum | 4/5 |
 | Bewertung | 1/5 |
-| Katalysator | 4/5 |
-| EV-Upside | -46.9% |
+| Katalysator | 3/5 |
+| EV-Upside | -23.3% |
 
 **Verdict: WATCH (40/100)**
 

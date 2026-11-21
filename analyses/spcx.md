@@ -1,112 +1,96 @@
 # SPCX — KI-Aktienbewertung
 
-**Space Exploration Technologies ** · Industrials · 09.10.2026 · Signal: 4H-Breakout (2/3)
+**Space Exploration Technologies ** · Industrials · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 158.96 |
-| Market Cap | $2095.38 Mrd. |
-| Forward PE | 82.55 |
-| Revenue (TTM) | $23.04 Mrd. |
-| Gross Margin | 51.9% |
+| Kurs | 139.11 |
+| Market Cap | $1889.26 Mrd. |
+| Forward PE | 50.73 |
+| Revenue (TTM) | $32.04 Mrd. |
+| Gross Margin | 56.8% |
 | ROE | N/A |
-| RS-Score | 44.0 |
+| RS-Score | 12.9 |
 
-**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✓ Aktiv · 4H ✓ Aktiv
+**GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $220–$260 (25 %) · Base $140–$175 (45 %) · Bear $60–$90 (30 %) · EV ~$153
-
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: SpaceX ist seit Juni 2026 gelistet. Trailing-KGV, Free Cashflow, ROE, Beta und Umsatzschätzung sind im Datensatz nicht verfügbar, die TTM-Werte sind durch die xAI-Fusion (Februar 2026) und den Börsengang verzerrt. Primäre Basis ist daher der annualisierte Q2-Run-Rate: $7,8 Mrd. × 4 = ~$31,2 Mrd. (TTM laut Datensatz: $23,04 Mrd., fusionsverzerrt).
-
-Der strukturelle Kern ist nicht die Raumfahrt, sondern ein Infrastruktur-Konglomerat aus drei Teilen mit sehr unterschiedlicher Qualität. Starlink ist eine profitable Telekom-Plattform: $4,3 Mrd. Quartalsumsatz (+66 %), 12 Mio. Abonnenten und $1,66 Mrd. operativer Gewinn, als einziges profitables Segment. Daneben steht xAI als kapitalverschlingender KI-Block: $2,6 Mrd. Umsatz, aber rund $15,8 Mrd. der $18,4 Mrd. Quartals-Capex. Was der Markt übersieht: Die Bewertung von ~$2,1 Bio. bezahlt die Starlink-Qualität mit, finanziert aber vor allem eine KI-Wette, deren Rendite noch unbewiesen ist — und die jetzt zusätzlich mit ~$40 Mrd. Fremdkapital für Nvidia-Chips skaliert werden soll. Positiv strukturell: Starship hat erstmals den Orbit erreicht und 26 Starlink-V3-Satelliten ausgesetzt; das senkt die Kosten je Bit im Starlink-Netz und ist ein echter Burggraben-Ausbau.
+SPCX (Space Exploration Technologies) ist als jünger gelisteter Titel im Datensatz zu behandeln — die 6- und 12-Monats-RS-Fenster sind nicht verfügbar, was auf eine begrenzte Handelshistorie hindeutet. TTM-Kennzahlen können daher möglicherweise verzerrt sein und sollten mit entsprechender Vorsicht interpretiert werden. Die eigentliche Story ist die Doppelstrategie aus dominanter kommerzieller Raketenstart-Infrastruktur (Falcon 9/Falcon Heavy, mit Starship als nächster Entwicklungsstufe) und dem rapide skalierenden Starlink-Satelliteninternet-Geschäft. Das Umsatzwachstum von 161,4% YoY ist außergewöhnlich und plausibel mit der bekannten schnellen Starlink-Abonnentenexpansion konsistent, auch wenn die absolute Umsatzbasis hier nicht unabhängig verifizierbar ist. Was der Markt aktuell einpreist: Ein extrem hohes Forward-KGV (50,7x) bei nahezu Null-Trailing-Ergebnis — eine klassische Bewertung für ein Unternehmen in intensiver Infrastruktur-Investitionsphase, nicht für ein bereits ausgereiftes, margenstarkes Geschäft.
 
 ## 2. GESCHÄFTSMODELL
 
-- Connectivity (Starlink): wiederkehrende Abo-Erlöse, 12 Mio. Kunden, ARPU $66/Monat (Vorjahr $85) — Wachstum über Volumen und Internationalisierung, bei sinkendem Preis
-- Enterprise, Aviation, Maritime und Regierung treiben den Mix nach oben; Starlink Mobile (Direct-to-Cell, zugekauftes 800-MHz-Spektrum) greift Mobilfunker direkt an
-- Space-Segment: $962 Mio. im Quartal; Falcon 9/Crew-Missionen mit NASA und DoD — kleiner Umsatzanteil, aber strategischer Kostenvorteil für den eigenen Satellitenausbau
-- AI-Segment (xAI): $2,6 Mrd. Umsatz, Wachstum aus Cloud-Compute-Verträgen; operativ verlustreich
-- Operativer Hebel: Starship-V3 senkt die Launch-Kosten je Satellit — die Starlink-Margen hängen direkt daran
-- Strukturelle Abhängigkeit: KI-Ausbau ist von Nvidia-GPUs abhängig, Starlink von Spektrumrechten und Landegenehmigungen
-- Kontrollierte Gesellschaft: Class-B-Aktien mit 10 Stimmen, Musk hält über 80 % der Stimmrechte
-- Anomalie: Nettomarge −35,7 % deutlich unter der operativen Marge von −1,8 %. Plausibel sind fusions- und IPO-bezogene Sonderposten (Abschreibungen, aktienbasierte Vergütung beim Börsengang, Zinsen); aus den Daten nicht abschließend auflösbar. Die Nettomarge fließt deshalb nicht ins Scoring, stattdessen werden die Segment-Ergebnisse und das bereinigte EBITDA von $3,5 Mrd. im Quartal verwendet
+- Kommerzielle Raketenstarts (Falcon 9, Falcon Heavy) mit weltweit höchster Startkadenz — dominante Marktposition im kommerziellen Launch-Geschäft
+- Starlink: Satelliteninternet-Konstellation, skaliert rapide von einem Nischenprodukt zu einem relevanten Breitband-Geschäft für Privat- und Unternehmenskunden
+- Starship als nächste Entwicklungsstufe für schwerere Lasten und perspektivisch bemannte Missionen — hohe laufende Entwicklungsinvestitionen
+- Operativer Hebel: Die Fixkosten der Raketen- und Satellitenproduktion sind hoch, die Marge hängt stark an der erreichten Skalierung
+- Strukturelle Abhängigkeit von der erfolgreichen Starship-Entwicklung als Grundlage für zukünftige Kostensenkungen bei schweren Lasten
+- Wettbewerbsdruck im Satelliteninternet-Geschäft durch Amazons Project Kuiper und andere aufkommende Konstellationen
+- Moderate Verschuldung (Debt/Equity 22,2%) bei weiterhin kapitalintensiver Wachstumsphase
+- Kein Dividenden-Zahler — sämtliches Kapital wird in die Infrastruktur-Skalierung reinvestiert
 
 ## 3. BULL CASE
 
-Peers: Palantir (PLTR, Fwd-KGV 80,5x), Tesla (TSLA, 172,8x), GE Aerospace (GE, 34,1x) — Bandbreite 34x–173x. Direkte Satelliten-Peers (RKLB, ASTS) sind im Datensatz ohne gültiges Forward-KGV; Peer-Multiples dort nicht verifizierbar.
-
-Starlink wächst auf über 18 Mio. Abonnenten, Starlink Mobile monetarisiert das Spektrum, Starship-V3 skaliert und die xAI-Compute-Verträge decken den Capex. Strukturelle Margennachhaltigkeit: vertikal integrierter Launch-Kostenvorteil, den kein Satelliten-Konkurrent hat, Skaleneffekte im Netz und Switching Costs bei Regierung und Aviation. Annahme (kein Konsens): FY27-EPS ~$2,40 × 100x (zwischen PLTR 80,5x und TSLA 172,8x) = $240. Bull-Kursziel: $220–$260. Eintrittswahrscheinlichkeit: 25 %.
+Starship wird für reguläre Schwerlast-Missionen operativ einsatzbereit, die Starlink-Abonnentenbasis wächst weiter stark (inklusive Direct-to-Cell-Diensterweiterung), die Startkadenz steigt weiter und zementiert die Marktdominanz, die Margen verbessern sich, da die intensive Investitionsphase reift. Annahme (kein Konsens): FY27E EPS ~$5,50 × 45–50x Forward = $247,50–$275. Kursziel Bull: $235–$290 (Mittelwert $262,50). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Starlink liefert, die KI-Sparte bleibt ein Kapitalfresser, der Markt hält das Multiple. Lockup-Tranchen deckeln den Kurs zeitweise. Annahme (kein Konsens): FY27-EPS ~$1,95 (nahe Forward-EPS $1,93) × 80x (eigenes Forward-KGV 82,6x, nahe PLTR 80,5x) = $156. Base-Kursziel: $140–$175. Eintrittswahrscheinlichkeit: 45 %.
+Wahrscheinlichstes Szenario: Starlink skaliert stetig weiter, die Starship-Entwicklung macht Fortschritte ohne einen großen kommerziellen Durchbruch, das Launch-Geschäft bleibt dominant. Forward-EPS ~$2,74 (aktueller Konsens) leicht steigend auf ~$3,20 als Ausgangspunkt × 40–42x = $128–$134,40. Kursziel Base: $120–$145 (Mittelwert $132,50). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Der fremdfinanzierte KI-Ausbau (~$40 Mrd. Schulden für Nvidia-Chips) bringt keine ausreichenden Compute-Erlöse, gleichzeitig drückt der ARPU-Rückgang die Starlink-Marge und die großen Lockup-Freigaben nach Q3 und am 8. Dezember treffen auf eine dünne Nachfrage. Annahme (kein Konsens): FY27-EPS ~$1,30 × 55x (Kompression Richtung GE 34,1x) = $72. Bear-Kursziel: $60–$90. Eintrittswahrscheinlichkeit: 30 %.
+Auslöser: Rückschläge oder Verzögerungen bei der Starship-Entwicklung, das Starlink-Abonnentenwachstum verlangsamt sich durch aufkommenden Wettbewerb (Amazon Kuiper, OneWeb), die anhaltend hohen Investitionsausgaben belasten die Marge weiter ohne entsprechende Umsatzskalierung. Kundenkonzentration: Das Launch-Geschäft hat eine gewisse Abhängigkeit von Regierungs-/NASA-Aufträgen — aus den Daten nicht exakt quantifizierbar, aber ein bekanntes Branchenrisiko. Geopolitik/Exportkontrollen: Satelliten- und Raumfahrttechnologie unterliegt strengen US-Exportkontrollen — ein reales, aber für ein US-Unternehmen in diesem Sektor eher schützendes als belastendes Risiko. Lieferketten/Foundry: Eigene vertikal integrierte Fertigung reduziert externe Abhängigkeiten, bleibt aber bei Komponentenengpässen ein Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar — bei einem jung gelisteten Unternehmen potenziell ein relevanter Faktor. Regulierung: Satellitenfrequenz- und Orbitalslot-Regulierung ist ein branchenspezifisches, aber kalkulierbares Risiko. EPS bleibt niedrig/nahe Null bei anhaltendem Investitionsdruck. Annahme: FY27E EPS ~$0,80 × 35–40x = $28–$32. Kursziel Bear: $25–$40 (Mittelwert $32,50). Eintrittswahrscheinlichkeit: 35%.
 
-Kundenkonzentration: Regierung (NASA, DoD) und die Compute-Kunden der KI-Sparte sind relevant, aber aus den Daten nicht quantifizierbar. Geopolitik/Exportkontrollen: ITAR-Beschränkungen, Landerechte in einzelnen Staaten und chinesische Konkurrenz-Konstellationen (Qianfan) begrenzen die internationale Expansion. Lieferkette/Single-Source: hohe GPU-Abhängigkeit von Nvidia im KI-Segment. Verwässerung: ~13,1 Mrd. Aktien nach der xAI-Fusion; Lockup-Freigaben von ~911 Mio. (6. August), ~328 Mio. (9. Oktober) sowie weitere Tranchen bis 8. Dezember erhöhen den Free Float massiv, SBC nicht im Datensatz verfügbar. Regulierung/Rechtsrisiken: FAA-Starterlaubnisse, FCC-Spektrumvergabe und Key-Person-Risiko Musk bei fehlender Board-Unabhängigkeit (Controlled-Company-Status).
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Summe: 25 % + 45 % + 30 % = 100 %**
-
-**Erwartungswert:** EV = 0,25 × $240 + 0,45 × $157,50 + 0,30 × $75 = **~$153 — implizites Downside vs. aktuellem Kurs ($160,57): −4,5 %.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $262,50 + 0,45 × $132,50 + 0,35 × $32,50 = $52,50 + $59,63 + $11,38 = **~$123,50 — implizites Downside vs. aktuellem Kurs ($139,11): −11,2%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, die Bandbreite ist angesichts der frühen Phase des Unternehmens außergewöhnlich breit.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Bruttomarge 51,9 %, operative Marge −1,8 %, ROIC −6,7 %, ROE und FCF nicht verfügbar. Bei $18,4 Mrd. Quartals-Capex (laut 10-Q) ist der Free Cashflow strukturell deutlich negativ — die Zahl selbst fehlt im Datensatz. Die Qualität ist zweigeteilt: Starlink mit ~39 % Segmentmarge ist ein echter Burggraben (Kostenvorteil durch eigene Raketen, Netzdichte, Regierungsverträge). Die Konzernkennzahlen werden aber von der KI-Sparte dominiert. Bilanz: ~$100 Mrd. Cash nach IPO und $25-Mrd.-Anleihe, Debt/Equity 31,2 — solide, aber der geplante Chip-Kredit verschiebt das Bild. RPO: Starlink ist ein Abo-Modell, RPO und Deferred Revenue sind aber im Datensatz nicht verfügbar und nicht per Primärquelle verifiziert — RPO-Einordnung daher offen.
+TTM-Kennzahlen sind bei diesem jung gelisteten Titel möglicherweise verzerrt und sollten mit Vorsicht interpretiert werden. Operating Margin (1,8%) ist nahe der Gewinnschwelle, der negative Net Margin (-8,6%) deutet auf erhebliche nicht-operative Belastungen (vermutlich Investitionsaufwand, Zinskosten oder Sondereffekte) hin, die aus den Daten nicht abschließend auflösbar sind. ROE und Free Cashflow sind als N/A ausgewiesen — eine vollständige Qualitätsbeurteilung ist auf Basis der vorliegenden Daten nicht möglich. Die Bruttomarge (56,8%) ist solide und deutet auf ein grundsätzlich margenfähiges Geschäftsmodell hin, sobald die Investitionsphase reift. Der wirtschaftliche Burggraben (vertikal integrierte Fertigung, Startkadenz-Dominanz) ist real und einzigartig in der Branche.
 
 ## 7. BEWERTUNG
 
-Was preist der Kurs ein? ~$2,12 Bio. Marktwert. Bei einem reifen Exit-Multiple von 35x (GE-Niveau) braucht SpaceX ~$60 Mrd. Nettogewinn; bei 25 % Nettomarge entspricht das ~$240 Mrd. Umsatz — gegenüber ~$31 Mrd. Run-Rate rund das Achtfache, also ~50 % jährliches Wachstum über fünf Jahre. Das ist ambitioniert, nicht unmöglich, aber vollständig eingepreist. Kurs/Umsatz auf Run-Rate: ~68x. Price/Book 16,5.
-
-Peer-Einordnung: 82,6x Forward liegt innerhalb der Bandbreite, knapp über PLTR (80,5x), deutlich über GE (34,1x), weit unter TSLA (172,8x). Die Prämie gegenüber GE ist durch +92 % Umsatzwachstum strukturell begründbar; im Vergleich zu PLTR fehlt SpaceX aber die positive Free-Cashflow-Qualität. Eine strukturierte Wette, kein übersehenes Upside. Analyst-Konsensziel $226,04 (25 Analysten) — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen; bei Neulistungen häufig noch unreife Modelle.
+Trailing PE von 604,8x ist praktisch bedeutungslos angesichts des nahe Null liegenden Trailing-EPS ($0,23) — eine Bewertung über das Trailing-KGV ist hier nicht sinnvoll. Forward PE 50,7x bleibt auch auf Basis des erwarteten Ergebnissprungs hoch. Rückrechnung "Was preist der Kurs ein?": $139,11 bei Forward-EPS $2,74 impliziert einen fortgesetzten starken Ergebnisanstieg aus der aktuellen Investitionsphase — ambitioniert, aber bei einer explosiven Wachstumsrate (161,4%) nicht unplausibel. Das Analysten-Konsensziel ($255,63, 37 Analysten, "buy") liegt deutlich über dem aktuellen Kurs — ein Hinweis auf erheblich mehr Street-Optimismus als die eigene konservativere EV-Rechnung dieser Analyse.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float nicht verfügbar. Ableitbar: IPO-Woche mit Hoch $225,64 bei ~925 Mio. Wochenvolumen, danach −53 % bis zum Tief von $104,83 Anfang August. Die Q2-Woche brachte erneut ~920 Mio. Volumen und die Wende. Aktuell ~70–135 Mio. Tagesvolumen, unter dem 50-Tage-Schnitt von ~100 Mio. am letzten Handelstag. Hypothese, nicht datenbasiert: Der Kurs wird stark von Retail-Nachfrage und Musk-Narrativ getragen, institutionelle Long-Only-Käufer warten auf Lockup-Abbau und Index-Aufnahmen. Enttäuschungsrisiko: Q3-Zahlen am 3. November mit Capex-Ausweitung, unmittelbar gefolgt von großen Lockup-Freigaben.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Als jung gelisteter, stark nachgefragter Titel dürfte die Eigentümerstruktur noch stark von frühen institutionellen und Insider-Positionen geprägt sein — dies ist jedoch nicht aus den Daten verifizierbar. Für neue nachhaltige Käufer müsste ein konkreter operativer Meilenstein (Starship-Erfolg, Starlink-Abonnentenzahlen) kommuniziert werden. Enttäuschungsrisiko: Als jung gelisteter Titel mit begrenzter Handelshistorie könnte die Volatilität bei enttäuschenden Nachrichten überproportional ausfallen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 44,0, Rang 29. Fenster: 5T +1,28 %, 10T +7,58 %, 20T +1,51 %, 50T +33,63 %. Kurs $160,57 über SMA20 ($153,83) und SMA50 ($143,23), RSI(14) ~57. GWS-Ampel 2/3: Daily seit 04.08. aktiv, 4H-Breakout am 01.10., Weekly inaktiv — das IPO-Hoch von $225,64 bleibt der Deckel. Die Woche ab 5. Oktober lief bis $176,42 und schloss die Lücke zum IPO-Kurs, drehte dann aber deutlich zurück. Momentum fundamental gestützt durch Starship-Orbit und Q2-Beat, aber anfällig für Angebotsdruck. Warnsignal: Schlusskurs unter $145 (Septemberbasis); Bestätigung erst über $176.
+RS-Score 12,92, Rang 65 im NASDAQ-100 — schwach trotz des 5-Tage-Anstiegs. 5T +4,64%, 10T +4,78%, 20T +2,28%, 50T +1,22%, 6M und 12M nicht verfügbar (begrenzte Handelshistorie). Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Aufgrund der begrenzten Handelshistorie lässt sich das Momentum nicht im historischen Kontext einordnen. Warnsignal: Ohne längere Historie ist die technische Einschätzung bei diesem Titel grundsätzlich mit höherer Unsicherheit behaftet.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($350–$500):** Starlink wird globaler Mobilfunk- und Breitbandanbieter, xAI erzielt Cloud-Renditen über Kapitalkosten, Starship ermöglicht neue Märkte. EPS $5–6 × 70–85x.
-
-**Base ($170–$260):** Starlink wächst stark, KI bleibt kapitalintensiv mit moderater Rendite. EPS $3,5–4,5 × 50–60x.
-
-**Bear ($50–$100):** KI-Investitionen werden abgeschrieben, ARPU-Erosion, Multiple-Normalisierung auf Industrieniveau.
-
-Entscheidende Variable: die Kapitalrendite der KI-Investitionen — Starlink allein trägt die Bewertung nicht.
+Bull (3–5 Jahre): Starship wird zur dominanten Schwerlast-Plattform, Starlink skaliert zu einem der größten globalen Breitbandanbieter, zusätzliche Geschäftsfelder (Punkt-zu-Punkt-Transport, Mars-Programm-Vorbereitung) liefern Optionswert. Kursziel: $300–$420.
+Base: Stetiges Wachstum aus Launch-Dominanz und Starlink-Skalierung im aktuellen Tempo. Kursziel: $140–$200.
+Bear: Starship-Entwicklungsrückschläge, Starlink-Wettbewerb intensiviert sich, Investitionsphase verlängert sich ohne Margenverbesserung. Kursziel: $40–$70.
+Entscheidende Variable: Erfolgreicher Übergang von der aktuellen Investitionsphase zu profitabler Skalierung bei Starship und Starlink.
 
 ## 11. PROFI-FAZIT
 
-Ein High-Conviction-Momentum-Play mit Konglomerat-Struktur, kein Buy-and-Hold-Compounder auf aktuellem Niveau. Der EV liegt 4,5 % unter dem Kurs — die eigenen Szenarien ergeben keinen asymmetrischen Edge. Starlink ist ein erstklassiges Asset, aber es wird zusammen mit einer fremdfinanzierten KI-Wette und einem massiven Lockup-Überhang bis Dezember verkauft. Für Momentum-Trader mit Stopp unter $145 geeignet, Positionsgröße maximal halbe Gewichtung bis nach den Q3-Zahlen und der Dezember-Freigabe.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −11,2%), bei außergewöhnlich breiter Streuung aufgrund der frühen Unternehmensphase und der begrenzten Datenhistorie. SPCX ist ein fundamentaler Wachstums-/Infrastruktur-Investitions-Trade, kein etablierter Compounder und auch kein reiner Momentum-Titel — die TTM-Kennzahlen sollten als vorläufig behandelt werden. Für wachstumsorientierte Investoren mit hoher Risikotoleranz und langem Zeithorizont geeignet, nicht für konservative Portfolios angesichts der begrenzten Datenhistorie und des negativen Net Margins. Explizite Risikowarnung: Positionsgröße klein halten (max. 1–2%) angesichts der eingeschränkten Datenbasis und der frühen Unternehmensphase. Direkte Peers: **Rocket Lab (RKLB)** als kleinerer Launch-Wettbewerber, **Amazon** (über Project Kuiper) als aufkommender Starlink-Konkurrent im Satelliteninternet — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-Peers: **Palantir (PLTR)** ist bei praktisch identischem Forward-KGV (80,5x vs. 82,6x) das reinere KI-Instrument mit positivem Cashflow. **GE Aerospace (GE)** bei 34,1x ist die deutlich günstigere Luftfahrt-/Industrie-Exponierung, ohne Satelliten-Wachstum.
-
-- Qualität: 3/5
-- Wachstum: 5/5
-- Bewertung: 1/5
+- Qualität: 2/5
+- Wachstum: 4/5
+- Bewertung: 2/5
 - Katalysator: 4/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — bei 82,6x Forward-KGV und ~68x Run-Rate-Umsatz ist das Wachstum vollständig eingepreist, der EV liegt 4,5 % unter dem Kurs und der Lockup-Überhang bis 8. Dezember trägt keine volle Position.
-
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Das extrem hohe Forward-KGV (50,7x) bei negativem Net Margin und begrenzter Datenhistorie rechtfertigt trotz des realen Starship-/Starlink-Katalysators keine volle Positionsgröße; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−11,2%).
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 3/5 |
-| Wachstum | 5/5 |
-| Bewertung | 1/5 |
+| Qualität | 2/5 |
+| Wachstum | 4/5 |
+| Bewertung | 2/5 |
 | Katalysator | 4/5 |
-| EV-Upside | -0.9% |
+| EV-Upside | +2.4% |
 
-**Verdict: HOLD (57/100)**
+**Verdict: HOLD (58/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

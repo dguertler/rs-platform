@@ -1,91 +1,85 @@
 # CSCO — KI-Aktienbewertung
 
-**Cisco Systems, Inc.** · Technology · 11.08.2026 · Signal: Kein Signal
+**Cisco Systems, Inc.** · Technology · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 121.43 |
-| Market Cap | $478.61 Mrd. |
-| Forward PE | 25.32 |
-| Revenue (TTM) | $60.75 Mrd. |
-| Gross Margin | 64.3% |
-| ROE | 25.2% |
-| RS-Score | 34.3 |
+| Kurs | 95.64 |
+| Market Cap | $376.53 Mrd. |
+| Forward PE | 15.92 |
+| Revenue (TTM) | $66.96 Mrd. |
+| Gross Margin | 64.1% |
+| ROE | 30.4% |
+| RS-Score | 2.7 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $145–$170 (25 %) · Base $112–$130 (45 %) · Bear $70–$90 (30 %) · EV ~$117,83
-
 ## 1. INVESTMENT-CASE
 
-Cisco steht morgen (12.08.2026, nach Börsenschluss) mit den Q4-FY26-Zahlen vor dem nächsten harten Datenpunkt — diese Analyse basiert auf dem Datenstand vor dem Report und bezieht das Ergebnis explizit NICHT ein. Die eigentliche Story hinter Cisco ist der Umbau vom klassischen Netzwerk-Hardware-Anbieter zum AI-Infrastruktur- und Security-Software-Player: Nach der Splunk-Übernahme verschiebt sich der Umsatzmix zunehmend Richtung Observability/Security-Software, während gleichzeitig AI-Rechenzentren-Switching (800G-Ethernet) ein neues Wachstumsfeld öffnet, in dem Cisco gegen Arista um Hyperscaler-Aufträge konkurriert. Der Kurs $121,43 liegt nur 6,9 % unter dem 52-Wochen-Hoch ($130,37) bei einem 6-Monats-Fenster von +24,92 % — der Markt preist bereits einen erheblichen Teil der AI-Networking-Story ein. Was der Markt teilweise übersieht: Cisco bleibt strukturell ein margenstarker Software-/Service-Mix-Gewinner (64,3 % Bruttomarge), aber das reine Hardware-Refresh-Geschäft bleibt zyklisch, und die morgige Guidance wird zeigen, ob das AI-Momentum bereits in harten Auftragseingängen ankommt oder noch Narrativ ist.
+Cisco ist der etablierte Netzwerkausrüstungs-Marktführer (Switches, Router) im strukturellen Übergang von reinem Hardware-Verkauf zu einem stärker wiederkehrenden Software-/Sicherheits-Umsatzmodell — die Splunk-Übernahme (2024) hat das Observability-/Security-Analytics-Portfolio erheblich erweitert. Die eigentliche Story der letzten Quartale ist die beschleunigte Nachfrage nach Hochgeschwindigkeits-Switching-Infrastruktur für KI-Rechenzentren, die zusammen mit der Splunk-Konsolidierung das Umsatzwachstum auf für Cisco historisch außergewöhnliche 24,4% YoY gehoben hat. Diese beiden Wachstumstreiber sind aus den vorliegenden Daten nicht sauber in organisches AI-Infrastruktur-Wachstum und M&A-Konsolidierungseffekt aufzuschlüsseln. Was der Markt aktuell einpreist: Der RS-Score liegt mit 2,71 nahe null trotz eines soliden 5-Tage-Anstiegs (+4,14%) — ein deutliches Zeichen, dass die mittelfristige relative Stärke (20T -2,65%, 50T -5,54%, 6M -10,84%) weiterhin schwach ist und der jüngste Kurssprung eine isolierte Bewegung ohne breitere Trendbestätigung sein könnte.
 
 ## 2. GESCHÄFTSMODELL
 
-- Netzwerk-Hardware (Switching/Routing) bleibt Kerngeschäft, aber mit sinkendem Umsatzanteil zugunsten Software/Security
-- Splunk-Integration verschiebt Mix Richtung Observability/Security-Software — höhere Marge, mehrjährige Subscription-Verträge
-- AI-Rechenzentren-Networking (800G-Switching) als neues Wachstumsfeld — direkter Wettbewerb mit Arista Networks
-- Multi-Year Enterprise Agreements (Software-Bundles) reduzieren Umsatz-Volatilität ggü. reinem Transaktionsgeschäft
-- Bruttomarge 64,3 %, operative Marge 25,0 % — solide, aber unter reinen Software-Peers wegen Hardware-Anteil
-- FCF $9,29 Mrd. bei $60,75 Mrd. Umsatz (15,3 % FCF-Marge) — stabile, aber für die Unternehmensgröße nicht herausragende Cash-Generierung
-- Dividendenrendite 1,38 % signalisiert Kapitalrückführungs-Disziplin, Debt/Equity 67,5 % moderat
-- Strukturelle Abhängigkeit von Hyperscaler-/Enterprise-IT-Capex-Zyklen — AI-Infrastruktur-Investitionen sind aktuell die entscheidende Nachfragequelle
+- Netzwerkausrüstung (Switches, Router) für Unternehmen und Rechenzentren — Kerngeschäft mit zunehmender Nachfrage aus dem KI-Infrastruktur-Ausbau
+- Splunk (seit 2024): Observability- und Security-Analytics-Software, erweitert das wiederkehrende Umsatzmodell erheblich
+- Operativer Hebel: Hohe Bruttomarge (64,1%) bei zunehmendem Software-/Subscription-Anteil im Portfoliomix
+- Strukturelle Abhängigkeit vom Tempo des KI-Rechenzentrums-Infrastrukturausbaus bei Hyperscalern und Unternehmen
+- Splunk-Integration als zentraler Hebel für Cross-Sell-Synergien zwischen Netzwerk- und Security-/Observability-Produkten
+- Wettbewerbsdruck durch Arista Networks (insbesondere im High-End-Rechenzentrums-Switching) und Juniper Networks
+- Moderate Verschuldung (Debt/Equity 57,7%) primär aus der Splunk-Akquisitionsfinanzierung
+- Kapitalrückführung über Dividende (Rendite 1,76%) bei weiterhin hohem Free Cashflow ($10,82 Mrd.)
 
 ## 3. BULL CASE
 
-AI-Rechenzentren-Switching-Aufträge beschleunigen über die morgige Guidance hinaus, Security/Observability-Cross-Sell (Splunk) skaliert schneller als erwartet, Enterprise-IT-Refresh-Zyklus zieht an. Strukturelle Margennachhaltigkeit: Produktmix-Verschiebung zu höhermargiger Software und Skalierungseffekte im AI-Switching-Geschäft sprechen für graduelle Margenexpansion; Wettbewerbsposition ggü. Arista ist im Enterprise-Segment stark, im reinen Hyperscaler-AI-Segment aber noch nicht bewiesen. Annahme (kein Konsens): FY-EPS ~$5,30 (+11 % ggü. aktuellem Forward-EPS $4,80) × 30x (Annäherung an ANET-Prämie 36,69x, reflektiert bestätigten AI-Networking-Anteilsgewinn) = $159. Kursziel: $145–$170 (Midpoint $157,50). Eintrittswahrscheinlichkeit: 25%.
+Die Nachfrage nach KI-Rechenzentrums-Switching-Infrastruktur beschleunigt sich weiter, die Splunk-Integration liefert vollständige Security-/Observability-Cross-Sell-Synergien, der Software-/Subscription-Anteil verschiebt sich weiter positiv. Annahme (kein Konsens): FY27E EPS ~$7,20 × 18–19x Forward = $129,60–$136,80. Kursziel Bull: $123–$142 (Mittelwert $132,50). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: solides, aber kein beschleunigtes Wachstum, AI-Networking bleibt ein Wachstumsbeitrag, aber kein Gamechanger, Kern-Hardware wächst niedrig- bis mittel-einstellig. Annahme (kein Konsens): FY-EPS ~$4,85 (nahe aktuellem Forward-EPS $4,80) × 25x (eigenes aktuelles Forward-Multiple, innerhalb Peer-Bandbreite) = $121,25. Kursziel: $112–$130 (Midpoint $121). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Trends, die Splunk-Integration verläuft planmäßig. Forward-EPS ~$6,01 (aktueller Konsens) leicht steigend auf ~$6,40 als Ausgangspunkt × 15–16x = $96–$102,40. Kursziel Base: $92–$108 (Mittelwert $100). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Enterprise-IT-Budgets werden angesichts makroökonomischer Unsicherheit gekürzt, Arista gewinnt weiter Marktanteile im AI-Backend-Networking, die Splunk-Integration liefert nicht die erwarteten Cross-Sell-Synergien. Kundenkonzentration: Hyperscaler-/Großkunden-Konzentration im AI-Networking-Neugeschäft wächst strukturell, auf Datenbasis nicht quantifizierbar, aber ein wachsendes Risiko. Geopolitik/China: signifikante historische China-Exponierung im Networking-Geschäft, Exportkontrollen auf fortschrittliche Netzwerktechnologie sowie Wettbewerb durch Huawei in Drittmärkten sind materielle, bekannte Risiken. Lieferketten/Foundry: Abhängigkeit von Halbleiter-/ASIC-Zulieferern und Auftragsfertigern für Switching-Hardware — Kapazitätskonkurrenz mit AI-Chip-Nachfrage ist real, im Datensatz nicht quantifizierbar. Verwässerung: kein signifikantes Risiko erkennbar, Cisco finanziert primär über Cashflow, Dividende und Rückkäufe. Regulierung: Cybersecurity-Compliance-Anforderungen könnten Kosten erhöhen, aber auch Security-Nachfrage stützen — Nettoeffekt unklar. Annahme (kein Konsens): FY-EPS fällt auf ~$4,30 × 18x (Kompression Richtung HPE-Niveau 13,27x, nicht vollständig, da Cisco strukturell profitabler) = $77,40. Kursziel: $70–$90 (Midpoint $80). Eintrittswahrscheinlichkeit: 30%.
+Auslöser: Unternehmens-IT-Ausgaben verlangsamen sich konjunkturbedingt, die KI-Rechenzentrums-Nachfrage nach der initialen Ausbauwelle flacht schneller ab als erwartet, die Splunk-Integration enttäuscht. Kundenkonzentration: Breite Unternehmens- und Hyperscaler-Kundenbasis, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Netzwerkausrüstung unterliegt in einigen Märkten Exportbeschränkungen (insbesondere gegenüber China), kein akutes Kernrisiko für das US-Kerngeschäft. Lieferketten/Foundry: Halbleiterkomponenten für Netzwerkausrüstung unterliegen allgemeinen Lieferkettenrisiken, kein akutes Single-Source-Risiko bekannt. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$4,50 bei Nachfrageverlangsamung. Annahme: FY27E EPS ~$4,50 × 12–13x = $54–$58,50. Kursziel Bear: $50–$64 (Mittelwert $57). Eintrittswahrscheinlichkeit: 35%.
 
-**Summe: 25% + 45% + 30% = 100%**
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-**Erwartungswert:** EV = 0,25 × $157,50 + 0,45 × $121 + 0,30 × $80 = $39,38 + $54,45 + $24,00 = **$117,83 — implizites Downside vs. aktuellem Kurs ($121,43): −3,0%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge. Zusätzlich: Die morgigen Q4-Zahlen (12.08.) sind ein unmittelbares binäres Risiko, das in dieser Bewertung noch nicht reflektiert ist.
+**Erwartungswert:** EV = 0,20 × $132,50 + 0,45 × $100 + 0,35 × $57 = $26,50 + $45,00 + $19,95 = **~$91,45 — implizites Downside vs. aktuellem Kurs ($95,64): −4,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-ROE 25,2 % und ROIC 17,48 % sind solide für ein Hardware-/Software-Mischunternehmen dieser Größe, im Zykluskontext nicht Top-of-Cycle-verzerrt. FCF-Marge 15,3 % ist stabil, aber deutlich niedriger als bei reinen Software-Peers — reflektiert den Hardware-Anteil im Umsatzmix. Bilanzqualität: Debt/Equity 67,5 % ist moderat, Investment-Grade-Bonität historisch gegeben. Der Burggraben liegt in installierter Netzwerk-Basis und Enterprise-Switching-Standards (hohe Umstellungskosten) — strukturell real im Enterprise-Segment, im AI-Hyperscaler-Segment aber noch nicht bewiesen, da dort Arista aktuell das technologische Momentum hat.
+Bruttomarge (64,1%), Operating Margin (27,2%) und ROE (30,4%) sind solide und zeigen ein fundamental gesundes, margenstarkes Geschäft. Das Umsatzwachstum von 24,4% ist für Cisco historisch außergewöhnlich, aber aus den Daten nicht sauber zwischen organischem KI-Infrastruktur-Wachstum und dem Splunk-Konsolidierungseffekt aufzuschlüsseln — die operative Marge ist die belastbarere Kennzahl für die nachhaltige Kernertragskraft. Free Cashflow von $10,82 Mrd. ist stark und untermauert sowohl Dividende als auch Entschuldung. Der wirtschaftliche Burggraben (etablierte Netzwerkinfrastruktur-Beziehungen, zunehmend ergänzt durch Splunk-Security-Analytics) ist real, aber im High-End-Rechenzentrums-Segment durch Arista Networks zunehmend herausgefordert.
 
 ## 7. BEWERTUNG
 
-Eigenes Forward-KGV 25,32x liegt innerhalb der Peer-Bandbreite HPE 13,27x – ANET 36,69x, näher an der Mitte. Juniper Networks (JNPR) ist als eigenständiger Peer nicht mehr nutzbar (durch HPE übernommen, Deal geschlossen 02.07.2025) — daher nur zwei valide Vergleichstitel. Die Prämie ggü. HPE ist durch höhere Marge und den Security-/Software-Mix strukturell erklärbar, der Abschlag ggü. ANET reflektiert Aristas reineren, schnelleren AI-Networking-Wachstumspfad. Rückrechnung: Der aktuelle Kurs $121,43 impliziert bei 25,32x Forward-KGV ein FY-EPS von ~$4,80 — deckungsgleich mit der gecachten Forward-EPS, also intern konsistent, aber abhängig davon, ob der morgige Report diese Schätzung bestätigt. Analyst-Konsensziel $132,59 (22 Analysten) — als Orientierungspunkt, nicht als Ceiling; impliziert ~9,2 % Aufwärtspotenzial ggü. aktuellem Kurs, deutlich optimistischer als der eigene Base Case.
+Trailing PE 25,4x, Forward PE 15,9x, P/B 7,32x — die Diskrepanz zwischen Trailing- und Forward-KGV deutet auf einen von Analysten erwarteten Ergebnissprung hin. Rückrechnung "Was preist der Kurs ein?": $95,64 bei Forward-EPS $6,01 impliziert eine Fortsetzung des aktuellen Wachstumstempos ohne größere Enttäuschung bei der KI-Infrastruktur-Nachfrage oder der Splunk-Integration — plausibel, konsistent mit dem Base Case dieser Analyse. Das Analysten-Konsensziel ($129,96, 24 Analysten, "buy") liegt deutlich über dem aktuellen Kurs — ein Hinweis auf mehr Street-Optimismus als die eigene konservativere EV-Rechnung dieser Analyse.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-RS-Score 34,28, Rang 19 von 500 im S&P 500 — starkes relatives Momentum trotz moderatem Score-Wert. Kursfenster: 5T +1,09 %, 10T −0,67 %, aber 6M +24,92 % — kurzfristig konsolidierend nach starkem mehrmonatigem Lauf, klassisches Pre-Earnings-Zögern. Short-Float-Daten liegen nicht vor. Hypothese, nicht datenbasiert: Die niedrige Beta (1,00) und Dividendenrendite deuten auf breite Long-Only-Institutional-Ownership hin, die vor dem Report Gewinne teilweise sichert. Enttäuschungsrisiko: Bei einem Kurs nahe dem 52-Wochen-Hoch würde eine verhaltene FY27-Guidance (insbesondere zum AI-Networking-Auftragseingang) überproportional negativ wirken.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der nahezu bei null liegende RS-Score (2,71) bei gleichzeitig positivem 5-Tage-Fenster deutet darauf hin, dass der jüngste Kurssprung eine isolierte Bewegung ohne breitere institutionelle Trendbestätigung sein könnte — möglicherweise eine kurzfristige Reaktion auf eine einzelne Nachricht. Für neue nachhaltige Käufer müsste sich die mittelfristige relative Schwäche (50T -5,54%, 6M -10,84%) umkehren. Enttäuschungsrisiko: Sollte der 5-Tage-Anstieg nicht durch fundamentale Nachrichten gestützt sein, droht eine schnelle Rückgabe der Gewinne.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-Kurs $121,43 nahe 52-Wochen-Hoch ($130,37), weit über dem 52-Wochen-Tief ($65,75) — Kurs hat sich fast verdoppelt. Die Abflachung im 5-/10-Tage-Fenster nach starkem 6-Monats-Lauf ist typisch für eine Konsolidierungsphase vor einem bekannten Katalysator (Earnings morgen). Kein GWS-Signal aktuell aktiv. Technisches Warnsignal: Ein Kursrückgang unter $110 (grobe Unterstützungszone der letzten Konsolidierung) nach den Zahlen wäre das erste Anzeichen einer ernsteren Korrektur.
+RS-Score 2,71, Rang 54 im NASDAQ-100 — ein außergewöhnlich schwacher Gesamtscore trotz der Top-10-Platzierung im reinen 5-Tage-Ranking. 5T +4,14%, 10T +2,59%, 20T -2,65%, 50T -5,54%, 6M -10,84%, 12M +15,01% — die mittelfristigen Fenster zeigen durchgängige Schwäche, nur der 5-Tage- und 12-Monats-Wert sind positiv. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Dies ist ein klassisches Beispiel dafür, dass ein starker kurzfristiger Ausschlag nicht automatisch ein bestätigtes Momentum-Signal darstellt — die zugrunde liegende mittelfristige Trendschwäche bleibt ungelöst. Warnsignal: Ein Rückfall unter die jüngsten Tiefs würde die mittelfristige Schwäche bestätigen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($170–$200):** AI-Rechenzentren-Networking-Supercycle hält mehrjährig an, Splunk-Cross-Sell skaliert voll, Multiple re-ratet Richtung ANET-Niveau.
-
-**Base ($125–$150):** Stetiges Wachstum im hohen einstelligen Bereich, Kapitalrückführung bleibt zentraler Renditebaustein.
-
-**Bear ($75–$95):** AI-Infrastruktur-Capex-Verdauungsphase, anhaltender Marktanteilsverlust an Arista, China-/Exportgegenwind belastet strukturell.
-
-Entscheidende Variable: Erfolgreiche Positionierung im AI-Hyperscaler-Networking ggü. Arista. Szenario-Konsistenz: kurzfristiger Bear ($70–$90) unter langfristigem Base ($125–$150) — konsistent; kurzfristiger Bull ($145–$170) bis an langfristigen Bull ($170–$200) heran — konsistent.
+Bull (3–5 Jahre): Die KI-Rechenzentrums-Switching-Nachfrage hält über mehrere Jahre an, Splunk-Cross-Sell-Synergien materialisieren sich vollständig, Cisco verteidigt seine Marktposition gegen Arista Networks. Kursziel: $140–$180.
+Base: Stetiges Wachstum aus der Kombination von Netzwerk-Hardware und Splunk-Software im aktuellen Tempo. Kursziel: $98–$125.
+Bear: Arista Networks und andere Wettbewerber gewinnen strukturell Marktanteile im High-End-Rechenzentrumssegment, die Splunk-Integration bleibt hinter den Erwartungen zurück. Kursziel: $48–$68.
+Entscheidende Variable: Ob Cisco seine Marktposition im High-End-KI-Rechenzentrums-Switching gegen spezialisierte Wettbewerber wie Arista Networks verteidigen kann.
 
 ## 11. PROFI-FAZIT
 
-Cisco ist aktuell kein reines Momentum-Play, sondern ein zyklischer Qualitätstitel im Übergang zu einem Software-/AI-Networking-Mix — mit einem unmittelbaren binären Risiko: den Q4-FY26-Zahlen morgen (12.08.). Der Erwartungswert von $117,83 liegt −3,0 % unter dem aktuellen Kurs — kein asymmetrischer Edge vor dem Report. Geeignet für: langfristig orientierte Qualitätsinvestoren mit Dividendenfokus, die die AI-Networking-Transformation als mehrjährige These akzeptieren. Nicht geeignet für: kurzfristige Neueinsteiger unmittelbar vor einem binären Ergebnis-Event — das Chance-Risiko-Verhältnis ist bis zur Bestätigung der Guidance unausgewogen. Positionsgröße: bestehende Positionen halten, Neuaufbau idealerweise nach dem Report abwarten. Peers: **Arista Networks (ANET)** ist das reinere AI-Networking-Instrument für die Wachstumsthese, aber zu 36,69x Forward-KGV deutlich teurer. **HPE** (13,27x) ist günstiger, aber mit geringerer struktureller Marge und ohne vergleichbaren Security-Software-Mix.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −4,4%), nahe der neutralen Schwelle. Cisco ist ein etablierter Netzwerk-Compounder im Übergang zu mehr Software-/Subscription-Umsatz, aber der nahezu bei null liegende Gesamt-RS-Score relativiert die Aussagekraft des jüngsten 5-Tage-Anstiegs erheblich. Für Investoren mit Fokus auf die KI-Infrastruktur-Nachfrage und Splunk-Integrationsfortschritt geeignet, kein klares Momentum-Signal auf Basis der Gesamtdatenlage. Positionsgröße bei Neueinstieg moderat halten (max. 2–3%) angesichts der widersprüchlichen kurzfristigen vs. mittelfristigen Signale. Direkte Peers: **Arista Networks (ANET)** als spezialisierter, schnellerer wachsender Wettbewerber im High-End-Rechenzentrums-Switching, **Juniper Networks** als weiterer Netzwerk-Peer — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 4/5
 - Wachstum: 3/5
 - Bewertung: 3/5
-- Katalysator: 3/5
+- Katalysator: 2/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Q4-FY26-Zahlen fallen exakt auf morgen (12.08.), das Ergebnis ist in dieser Analyse nicht enthalten, und der eigene EV ist mit −3,0% bereits vor dem Report neutral bis leicht negativ.
-
+**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Der nahezu bei null liegende Gesamt-RS-Score (2,71) bei durchgängig negativen mittelfristigen Fenstern (20T, 50T, 6M) bestätigt den jüngsten 5-Tage-Anstieg nicht als breiteren Trend; die volle Positionsgröße ist auf dieser schmalen Datenbasis nicht gerechtfertigt.
 
 ---
 
@@ -94,9 +88,9 @@ Cisco ist aktuell kein reines Momentum-Play, sondern ein zyklischer Qualitätsti
 | Qualität | 4/5 |
 | Wachstum | 3/5 |
 | Bewertung | 3/5 |
-| Katalysator | 3/5 |
-| EV-Upside | -1.6% |
+| Katalysator | 2/5 |
+| EV-Upside | +0.9% |
 
-**Verdict: HOLD (57/100)**
+**Verdict: HOLD (58/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

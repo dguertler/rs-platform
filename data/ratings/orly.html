@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>ORLY — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>ORLY</h1>
+      <h2>O'Reilly Automotive, Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Auto Parts</span></div>
+        <div class="mi">MCap: <span>$74B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">53</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">36.0</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★★☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$92.19</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">25.2×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$19.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">51.6%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">N/A</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#f87171">-0.9%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">112–130</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">90–100</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">50%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">52–64</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">30%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>O'Reilly Automotive ist ein Auto-Ersatzteilhändler mit einem dualen Geschäftsmodell aus DIY-Endkunden und professionellen Werkstattkunden (Commercial/Professional-Segment). Die eigentliche Story ist der strukturelle Rückenwind aus dem steigenden Durchschnittsalter der US-Fahrzeugflotte — je älter die Fahrzeuge, desto höher der Ersatzteilbedarf, ein seit Jahren anhaltender, gut dokumentierter Branchentrend. Auffällig in den Daten: Das Price/Book-Verhältnis ist negativ (-35,44x), ein direktes Resultat jahrelanger, aggressiver Aktienrückkäufe, die das bilanzielle Eigenkapital ins Negative gedrückt haben — ein bekanntes, bei O'Reilly (ähnlich wie bei AutoZone) strukturelles Merkmal, keine Bilanzschwäche im klassischen Sinn. Was der Markt aktuell einpreist: Nach einem schwachen 12-Monats-Zeitraum (-14,21%) zeigt sich seit mehreren Wochen eine Erholung (50T +17,59%), die Aktie notiert bei 90% ihres 52-Wochen-Hochs.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Dual-Market-Modell: DIY-Endkunden (Privatkunden) und Commercial/Professional-Kunden (Werkstätten) im selben Filialnetz</li>
+<li>Strukturelle Abhängigkeit vom steigenden Durchschnittsalter der US-Fahrzeugflotte als zentraler Nachfragetreiber</li>
+<li>Dichtes Filial- und Distributionsnetz ermöglicht kurze Lieferzeiten für dringend benötigte Ersatzteile — ein echter operativer Wettbewerbsvorteil gegenüber E-Commerce-Anbietern</li>
+<li>Operativer Hebel: Gross Margin von 51,6% bei wachsender Filialdichte und Skaleneffekten im Einkauf</li>
+<li>Langjährige, aggressive Aktienrückkäufe haben die bilanzielle Eigenkapitalbasis ins Negative gedrückt — Kapitalrückführung statt Bilanzaufbau als bewusste Strategie</li>
+<li>Wettbewerbsdruck durch AutoZone, Advance Auto Parts und zunehmend E-Commerce-Anbieter (Amazon) bei Standardteilen</li>
+<li>Strukturelles Risiko durch zunehmende EV-Durchdringung (weniger Verschleißteile, geringerer Wartungsbedarf) als langfristiger Gegenwind</li>
+<li>Kein Dividenden-Zahler — Kapitalrückführung ausschließlich über Aktienrückkäufe</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Der Trend zum steigenden Durchschnittsalter der US-Fahrzeugflotte beschleunigt sich weiter, das Commercial/Professional-Segment gewinnt zusätzliche Marktanteile, Margenausweitung durch Distributionsnetzdichte setzt sich fort. Annahme (kein Konsens): FY27E EPS ~$4,30 × 27–29x Forward = $116,10–$124,70. Kursziel Bull: $112–$130 (Mittelwert $121). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Trends, moderate Fortsetzung des Aging-Fleet-Rückenwinds. Forward-EPS ~$3,66 (aktueller Konsens) leicht steigend auf ~$3,90 als Ausgangspunkt × 24–25x = $93,60–$97,50. Kursziel Base: $90–$100 (Mittelwert $95). Eintrittswahrscheinlichkeit: 50%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Eine Erholung der Neuwagenverkäufe reduziert den Aging-Fleet-Rückenwind, die zunehmende EV-Durchdringung senkt den strukturellen Wartungsbedarf (weniger Verschleißteile), gleichzeitig verschärft sich der Wettbewerbsdruck durch AutoZone und E-Commerce-Anbieter. Kundenkonzentration: Breite Kundenbasis über DIY- und Commercial-Segmente, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Importzölle auf Ersatzteile/Komponenten sind ein reales Kostenrisiko. Lieferketten/Foundry: Diversifizierte Lieferantenbasis, kein klassisches Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar, aber die negative Eigenkapitalbasis aus Buybacks ist bereits strukturell etabliert. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$2,80 bei Nachfragerückgang. Annahme: FY27E EPS ~$2,80 × 20–21x = $56–$58,80. Kursziel Bear: $52–$64 (Mittelwert $58). Eintrittswahrscheinlichkeit: 30%.</p>
+<p>Summe Bull + Base + Bear: 20% + 50% + 30% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $121 + 0,50 × $95 + 0,30 × $58 = $24,20 + $47,50 + $17,40 = **~$89,10 — implizites Downside vs. aktuellem Kurs ($92,19): −3,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge (51,6%), Operating Margin (19,6%) und Net Margin (14,3%) sind solide für einen Einzelhändler mit diesem Geschäftsmodell. Debt/Equity und ROE sind als N/A ausgewiesen, da die negative Eigenkapitalbasis (Resultat der langjährigen Aktienrückkäufe) diese Kennzahlen rechnerisch unsinnig macht — dies ist aus den Daten klar auf die Kapitalrückführungsstrategie zurückzuführen, keine operative Schwäche. Free Cashflow von $1,58 Mrd. bestätigt solide operative Cash-Generierung, die die fortlaufenden Buybacks deckt. Der wirtschaftliche Burggraben (dichtes Distributionsnetz, kurze Lieferzeiten für dringend benötigte Teile) ist real und schwer von E-Commerce-Anbietern zu replizieren.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 28,3x, Forward PE 25,2x — moderat bis leicht erhöht für einen reifen Einzelhändler mit 8,8% Umsatzwachstum. Eine P/B-Betrachtung ist wegen der negativen Eigenkapitalbasis nicht sinnvoll. Rückrechnung "Was preist der Kurs ein?": $92,19 bei Forward-EPS $3,66 impliziert eine Fortsetzung des aktuellen Wachstumstempos ohne signifikante zusätzliche Beschleunigung — plausibel, konsistent mit dem Base Case dieser Analyse. Das Analysten-Konsensziel ($106,46, 26 Analysten, "buy") liegt deutlich über dem aktuellen Kurs — ein Hinweis auf mehr Street-Optimismus als die eigene konservativere EV-Rechnung dieser Analyse.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Auto-Ersatzteilhändler wie O'Reilly gelten traditionell als defensive, konjunkturresistente Long-Only-Positionen; die Erholung nach dem schwachen 12-Monats-Zeitraum deutet auf eine Rückkehr des Vertrauens in die strukturelle Aging-Fleet-These hin. Für neue nachhaltige Käufer müsste eine konkrete Bestätigung der Wachstumsbeschleunigung im Commercial-Segment erfolgen. Enttäuschungsrisiko: Eine Abschwächung des Aging-Fleet-Trends durch höhere Neuwagenverkäufe wäre ein struktureller, aber graduell wirkender negativer Faktor.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 35,95, Rang 68 im NASDAQ-100 — moderat. 5T +5,58%, 10T +4,71%, 20T +11,42%, 50T +17,59%, 6M +10,86%, 12M -14,21% — eine klare Erholung nach einem schwachen Jahresverlauf. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt teilweise fundamental gestützt durch die Aging-Fleet-These, ohne akuten neuen Katalysator. Warnsignal: Ein Rückfall unter die 50-Tage-Basis nach der Erholung wäre ein erstes technisches Warnsignal.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Der Aging-Fleet-Trend hält über mehrere Jahre an, das Commercial-Segment gewinnt strukturell Marktanteile, Margenausweitung setzt sich fort. Kursziel: $125–$155.</p>
+<p>Base: Stetiges Wachstum aus der Kombination von DIY- und Commercial-Segment im aktuellen Tempo. Kursziel: $92–$115.</p>
+<p>Bear: Beschleunigte EV-Durchdringung reduziert den strukturellen Wartungsbedarf, Wettbewerbsdruck intensiviert sich. Kursziel: $48–$68.</p>
+<p>Entscheidende Variable: Tempo der EV-Durchdringung im US-Fahrzeugpark relativ zum Fortbestand des Aging-Fleet-Rückenwinds bei Verbrennerfahrzeugen.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −3,4%), nahe der neutralen Schwelle. O'Reilly ist ein defensiver Buy-and-Hold-Compounder mit einem realen strukturellen Rückenwind (Aging Fleet), aber ohne akuten kurzfristigen Katalysator auf dem aktuellen Bewertungsniveau. Für konservative, konjunkturresistent ausgerichtete Investoren geeignet, kein Momentum-Trade. Positionsgröße bei Neueinstieg moderat halten (max. 2–4%). Direkte Peers: **AutoZone (AZO)** als nächster direkter Vergleichstitel mit ähnlichem negativem Eigenkapital-Profil aus Buybacks, **Advance Auto Parts (AAP)** als kleinerer, schwächerer Wettbewerber — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 4/5</li>
+<li>Wachstum: 3/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die Aging-Fleet-These ist real und strukturell intakt, aber ohne akuten kurzfristigen Auslöser und ohne aktives GWS-Signal rechtfertigt dies nicht die volle Positionsgröße trotz solider Fundamentaldaten.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

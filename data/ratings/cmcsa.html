@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CMCSA — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a0505;color:#f87171;border:1px solid #ef4444}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>CMCSA</h1>
+      <h2>Comcast Corporation</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Communication Services</span></div>
+        <div class="mi">Industrie: <span>Telecom Services</span></div>
+        <div class="mi">MCap: <span>$89B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">WATCH</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f87171;font-size:20px">51</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">42.8</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★☆☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★★☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$25.16</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">7.1×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$123.0B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">69.8%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">525.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">11.4%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+10.6%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">34–42</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">15%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">24–30</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">45%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">15–22</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>Comcast ist ein diversifizierter Medien-/Telekommunikationskonzern (Xfinity-Breitband/Kabel, NBCUniversal mit Rundfunk, Universal Pictures und Themenparks, Peacock-Streaming, Sky in Europa), der sich seit der 2025er-Abspaltung der klassischen Kabelsender (Versant-Spin-off, u.a. USA Network, CNBC, MSNBC) stärker auf Breitband, Streaming und Content/Themenparks konzentriert hat. Der ausgewiesene Umsatzrückgang von -6,1% YoY ist aus den vorliegenden Daten nicht eindeutig zwischen struktureller Kabel-/Broadband-Erosion und dem Versant-Spin-off-Effekt aufzuschlüsseln — TTM-Vergleiche könnten durch diese Restrukturierung verzerrt sein. Die eigentliche Story ist, ob Comcast sein Breitbandgeschäft gegen die wachsende Konkurrenz von Glasfaser- und Festnetz-5G-Anbietern (Fixed Wireless Access von T-Mobile/Verizon) verteidigen kann, während Peacock auf dem Weg zur Profitabilität ist. Was der Markt aktuell einpreist: Ein Price/Book von nur 0,97x signalisiert tiefe Skepsis gegenüber der nachhaltigen Ertragskraft des bestehenden Geschäftsmodells — eine klassische "Value oder Value-Trap"-Bewertungssituation.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Xfinity-Breitband/Kabel: traditionell margenstarkes Kerngeschäft, zunehmend unter Konkurrenzdruck durch Glasfaser und Festnetz-5G</li>
+<li>NBCUniversal: Rundfunknetz, Universal-Filmstudio, Themenparks — nach dem Versant-Spin-off stärker auf Kernmarken fokussiert</li>
+<li>Peacock: Streaming-Dienst, noch in der Phase der Verlustreduzierung auf dem Weg zur Profitabilität</li>
+<li>Sky: europäisches Pay-TV-Geschäft (primär Großbritannien), ähnlichem strukturellem Cord-Cutting-Druck ausgesetzt wie das US-Kerngeschäft</li>
+<li>Operativer Hebel: Hohe Bruttomarge (69,8%) im Breitbandgeschäft, aber strukturell sinkende Abonnentenbasis bei klassischem Kabel-TV</li>
+<li>Strukturelle Abhängigkeit vom Ausgang des Wettbewerbs mit Glasfaser- und 5G-Festnetz-Anbietern um Breitbandkunden</li>
+<li>Sehr hohe Dividendenrendite (5,25%) signalisiert, dass der Markt eine Risikoprämie für die strukturelle Unsicherheit verlangt</li>
+<li>Kapitalrückführung über Dividende und Aktienrückkäufe bleibt trotz der strukturellen Herausforderungen hoch</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Die Wettbewerbsposition im Breitbandgeschäft stabilisiert sich durch Netzwerkinvestitionen und Mobilfunk-Bundling (Xfinity Mobile), Peacock erreicht Profitabilität und skaliert weiter, NBCUniversal-Content/Themenparks entwickeln sich nach dem Spin-off-fokussierten Portfolio stark. Annahme (kein Konsens): FY27E EPS ~$4,00 × 9–10x Forward = $36–$40. Kursziel Bull: $34–$42 (Mittelwert $38). Eintrittswahrscheinlichkeit: 15%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Das Breitbandwachstum bleibt angesichts der Glasfaser-/5G-Konkurrenz nahezu flach bis leicht rückläufig, Peacock-Verluste verringern sich graduell, das klassische Kabelgeschäft erodiert weiter moderat. Forward-EPS ~$3,52 (aktueller Konsens) etwa stabil bei ~$3,60 als Ausgangspunkt × 7–8x = $25,20–$28,80. Kursziel Base: $24–$30 (Mittelwert $27). Eintrittswahrscheinlichkeit: 45%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Breitbandabonnentenverluste beschleunigen sich durch intensivierten Festnetz-5G-Wettbewerb, Peacock-Verluste bleiben bestehen und belasten das Konzernergebnis weiter, die Erosion der klassischen Kabel-/Zuliefererumsätze beschleunigt sich nach dem Spin-off zusätzlich. Kundenkonzentration: Breite Endkundenbasis im Breitband-/Medienbereich, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Kein materielles Exposure erkennbar. Lieferketten/Foundry: Nicht relevant für ein Telekommunikations-/Mediengeschäftsmodell. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Medienregulierung und Netzneutralitätsdebatten bleiben ein bekanntes, aber kalkulierbares Branchenrisiko. EPS fällt auf ~$2,80 bei beschleunigter struktureller Erosion. Annahme: FY27E EPS ~$2,80 × 6–7x = $16,80–$19,60. Kursziel Bear: $15–$22 (Mittelwert $18,50). Eintrittswahrscheinlichkeit: 40%.</p>
+<p>Summe Bull + Base + Bear: 15% + 45% + 40% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,15 × $38 + 0,45 × $27 + 0,40 × $18,50 = $5,70 + $12,15 + $7,40 = **~$25,25 — implizites Upside vs. aktuellem Kurs ($25,16): +0,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.</p>
+<h3>6. FUNDAMENTALE QUALITÄT</h3>
+<p>Bruttomarge (69,8%) bleibt stark, aber Operating Margin (14,7%) und Net Margin (9,2%) sind für ein Unternehmen dieser Größe moderat und spiegeln den strukturellen Druck auf das Kerngeschäft wider. Der Umsatzrückgang (-6,1%) muss im Kontext des Versant-Spin-offs bewertet werden — ein direkter Vergleich mit Vorjahreszahlen ohne Bereinigung um den Spin-off-Effekt ist aus den vorliegenden Daten nicht möglich und wird hier explizit als Einschränkung markiert. Free Cashflow von $13,08 Mrd. bleibt stark und deckt die hohe Dividendenausschüttung komfortabel. Debt/Equity von 94,3% ist erhöht, aber angesichts der stabilen Cashflow-Generierung tragbar. Der wirtschaftliche Burggraben im Breitbandgeschäft war historisch sehr stark (regionales Quasi-Monopol), wird aber durch Glasfaser- und 5G-Festnetz-Wettbewerb zunehmend infrage gestellt — ein struktureller, nicht nur scheinbarer Burggrabenverlust.</p>
+<h3>7. BEWERTUNG</h3>
+<p>Trailing PE 8,0x, Forward PE 7,1x, P/B 0,97x — eine der günstigsten Bewertungen im gesamten Datensatz dieser Analyseserie, konsistent mit tiefer Marktskepsis gegenüber der strukturellen Zukunft des Kerngeschäfts. Rückrechnung "Was preist der Kurs ein?": $25,16 bei Forward-EPS $3,52 impliziert, dass der Markt bereits einen anhaltenden strukturellen Ergebnisrückgang einpreist, ohne eine vollständige Erholung zu unterstellen — konsistent mit einer Mischung aus Base und Bear Case dieser Analyse, nicht mit einer optimistischen Turnaround-These. Das Analysten-Konsensziel ($27,98, 22 Analysten, "hold") liegt über dem aktuellen Kurs, aber die "Hold"-Einstufung selbst signalisiert begrenzte Überzeugung der Street für eine deutliche Neubewertung.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Die sehr hohe Dividendenrendite (5,25%) bei einem P/B unter 1x deutet auf eine überwiegend Value-/Income-orientierte Investorenbasis hin, die eine Risikoprämie für die strukturelle Unsicherheit im Kerngeschäft verlangt. Für neue nachhaltige Käufer müsste eine konkrete Stabilisierung der Breitbandabonnentenzahlen oder ein klarer Peacock-Profitabilitätspfad kommuniziert werden. Enttäuschungsrisiko: Eine weitere Beschleunigung der Breitbandabonnentenverluste wäre angesichts der ohnehin schon niedrigen Bewertung ein Zeichen struktureller statt zyklischer Schwäche.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 42,78, Rang 51 im NASDAQ-100 — moderat. 5T +3,93%, 10T +3,61%, 20T +17,99%, 50T +9,86%, 6M +11,42%, 12M -4,03% — eine deutliche Erholung in den letzten Wochen nach einem schwachen Jahresverlauf. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum könnte eine beginnende Neubewertung der extrem niedrigen Bewertung widerspiegeln oder eine technische Gegenbewegung sein — aus den Daten nicht abschließend unterscheidbar. Warnsignal: Ein Rückfall unter die 50-Tage-Basis würde die jüngste Erholung als kurzfristigen Ausreißer entlarven.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Breitbandgeschäft stabilisiert sich durch Netzwerkmodernisierung und Mobilfunk-Bundling, Peacock wird profitabel und skaliert, NBCUniversal-Content-Portfolio performt stark nach dem Spin-off-fokussierten Zuschnitt. Kursziel: $42–$55.</p>
+<p>Base: Moderate strukturelle Erosion im Kabelgeschäft wird durch Breitband-/Streaming-Stabilisierung teilweise kompensiert. Kursziel: $26–$34.</p>
+<p>Bear: Glasfaser- und 5G-Festnetz-Wettbewerb erodiert die Breitband-Kundenbasis strukturell, Peacock bleibt dauerhaft unprofitabel. Kursziel: $12–$20.</p>
+<p>Entscheidende Variable: Ob Comcast seine historische Breitband-Quasi-Monopolstellung gegen Glasfaser- und 5G-Festnetz-Wettbewerber strukturell verteidigen kann.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau praktisch keinen Edge in beide Richtungen (EV +0,4%). Comcast ist eine klassische Value-Situation mit echtem strukturellem Gegenwind im Kerngeschäft — die extrem niedrige Bewertung (P/B 0,97x) ist kein automatisches Kaufsignal, sondern spiegelt reale Risiken wider. Für Value-/Income-orientierte Investoren mit Toleranz für strukturelle Unsicherheit und Fokus auf die hohe Dividendenrendite geeignet, kein Wachstums- oder Momentum-Kandidat. Positionsgröße bei Neueinstieg moderat halten (max. 2–3%) angesichts des unklaren strukturellen Ausgangs. Direkte Peers: **Charter Communications (CHTR)** als direkter Kabel-/Breitband-Wettbewerber mit ähnlichem strukturellem Druck, **Verizon/T-Mobile** als die Festnetz-5G-Konkurrenten, die das Kerngeschäft herausfordern — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 2/5</li>
+<li>Wachstum: 1/5</li>
+<li>Bewertung: 4/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Katalysator fehlt — Die extrem niedrige Bewertung (P/B 0,97x) ist attraktiv, aber ohne konkreten Katalysator zur Stabilisierung des Breitbandgeschäfts bleibt das Risiko einer fortgesetzten strukturellen Erosion hoch; die volle Positionsgröße ist auf dieser Basis nicht gerechtfertigt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

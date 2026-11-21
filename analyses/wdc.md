@@ -1,16 +1,16 @@
 # WDC — KI-Aktienbewertung
 
-**Western Digital Corporation** · Technology · 10.07.2026 · Signal: Kein GWS-Signal
+**Western Digital Corporation** · Technology · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 539.0 |
-| Market Cap | $185.78 Mrd. |
-| Forward PE | 29.51 |
-| Revenue (TTM) | $11.78 Mrd. |
-| Gross Margin | 45.4% |
-| ROE | 85.9% |
-| RS-Score | 226.2 |
+| Kurs | 295.65 |
+| Market Cap | $110.67 Mrd. |
+| Forward PE | 7.32 |
+| Revenue (TTM) | $14.48 Mrd. |
+| Gross Margin | 52.6% |
+| ROE | 129.6% |
+| RS-Score | 46.8 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
@@ -18,70 +18,68 @@
 
 ## 1. INVESTMENT-CASE
 
-DATENLAGE: Fundamental-Snapshot vom 06.07.2026 ($539,00) liegt vor der jüngsten Kursbewegung (Schlusskurs 09.07.2026: $578,05, +7,3%). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $578,05 neu gerechnet.
-
-Western Digital ist seit der vollständigen Abspaltung des NAND-Flash-Geschäfts (SanDisk, Februar 2025) ein reiner Nearline-HDD-Hersteller für Hyperscaler-Rechenzentren. Die eigentliche Story ist nicht mehr Diversifikation zwischen Flash und Festplatten, sondern eine fokussierte Wette auf den strukturellen Nachfrageboom bei hochkapazitiven Festplatten für KI-Trainingsdaten-Speicherung — ein Markt, in dem WDC gemeinsam mit Seagate ein faktisches Duopol bildet. Was der Markt aktuell einpreist: Nach einer der stärksten 12-Monats-Bewegungen im S&P 500 (RS-Score 226,15, Rang 1) hat sich die Aktie in den letzten zehn Handelstagen bereits um -16,94% von ihren Hochs gelöst — ein erstes Anzeichen, dass der Markt beginnt, die Nachhaltigkeit der aktuellen Nachfragedynamik zu hinterfragen. Auffällig: Der Net Margin (55,3%) liegt über dem Operating Margin (37,0%) — eine Kennzahl-Anomalie, die aus den vorliegenden Daten nicht abschließend auflösbar ist (mögliche Ursachen: Sondererträge im Zusammenhang mit dem SanDisk-Spin-off, Steuereffekte oder Beteiligungserträge), und die daher nicht unkritisch in die Bewertung einfließen sollte.
+Western Digital hat seit der letzten Analyse dieser Serie (10.07.2026, damals $578,05) einen dramatischen Kurseinbruch erlitten — die Aktie notiert nun bei $295,65, nur noch 37% ihres 52-Wochen-Hochs ($799,87), nach einem Rückgang von -28,77% allein im 6-Monats-Fenster. Die eigentliche Frage hat sich seit der letzten Analyse fundamental verändert: Damals ging es darum, ob die Bewertung die KI-getriebene Nearline-HDD-Rally bereits zu stark vorwegnahm — heute geht es darum, ob der Markt die Nachhaltigkeit der aktuell noch sehr hohen Ergebnisse (Forward-EPS $40,40, weit über dem Trailing-EPS $28,43) zu Recht anzweifelt. Trailing-KGV (10,4x) und Forward-KGV (7,3x) wirken auf den ersten Blick günstig, aber bei einem zyklischen Hardware-Geschäft ist ein niedriges Multiple bei vermeintlich hohen Gewinnen oft ein Signal, dass der Markt einen baldigen Gewinnrückgang erwartet — nicht ein Kaufsignal per se. Auffällig: Der Net Margin (69,2%) liegt weit über dem Operating Margin (40,9%) — eine noch extremere Ausprägung derselben Anomalie wie in der letzten Analyse, aus den Daten nicht abschließend auflösbar und für die Bewertung nicht verwendet.
 
 ## 2. GESCHÄFTSMODELL
 
-- Nearline-HDD für Hyperscaler-Rechenzentren (AWS, Microsoft, Google) — Kernsegment nach dem SanDisk-Spin-off
+- Nearline-HDD für Hyperscaler-Rechenzentren — Kernsegment nach dem SanDisk-Spin-off (Februar 2025)
 - Client- und Consumer-HDD als kleineres, stabileres Nebengeschäft
 - Duopol-Struktur mit Seagate verhindert ruinösen Preiswettbewerb bei Nearline-Kapazität
-- Operativer Hebel: Bei steigenden ASPs (Average Selling Price je Terabyte) schlägt ein Großteil direkt auf die Marge durch — Fixkostenbasis der Fertigung ist hoch
-- Strukturelle Abhängigkeit von Hyperscaler-Capex-Zyklen — eine Kürzung der KI-Infrastrukturausgaben trifft die Nachfrage überproportional
-- UltraSMR- und perspektivisch HAMR-Technologie als Weg zu höheren Kapazitäten pro Laufwerk und damit höheren ASPs
-- Nach dem Spin-off deutlich schlankere Bilanz (Debt/Equity nur 17,8%) — finanzielle Flexibilität ist ein struktureller Vorteil gegenüber dem höher verschuldeten Seagate
-- Kapitalrückführung (Dividende, Buybacks) beginnt erst langsam nach der Post-Spin-off-Konsolidierung der Bilanz
+- Operativer Hebel: Bei fallenden ASPs oder Nachfrage schlägt die hohe Fixkostenbasis der Fertigung ebenso stark negativ durch wie sie zuvor positiv wirkte
+- Strukturelle Abhängigkeit von Hyperscaler-Capex-Zyklen — der Kursrückgang der letzten 6 Monate deutet darauf hin, dass der Markt diese Abhängigkeit zunehmend vorsichtiger bewertet
+- UltraSMR- und perspektivisch HAMR-Technologie als Weg zu höheren Kapazitäten pro Laufwerk
+- Weiterhin sehr niedrige Verschuldung (Debt/Equity 9,9%) — die Bilanzqualität bleibt trotz des Kursrückgangs intakt
+- Kapitalrückführung (Dividendenrendite 0,24%) bleibt im Vergleich zur Bilanzstärke noch gering
 
 ## 3. BULL CASE
 
-Nearline-HDD-Nachfrage aus KI-Trainingsdaten-Speicherung wächst weiter überproportional, UltraSMR-Kapazitätssprünge (32TB+) treiben ASPs auf $180–200/Laufwerk, die Duopol-Struktur verhindert einen Preiskrieg. Strukturelle Margennachhaltigkeit: Höherer Anteil hochkapazitiver Enterprise-Laufwerke am Produktmix und Skaleneffekte aus der fokussierten Post-Spin-off-Struktur stützen dauerhaft höhere Margen als historische Zyklusmittel — dies ist aus der aktuellen Margenentwicklung ableitbar, bleibt aber vom Fortbestand der Nachfragedynamik abhängig. Annahme (kein Konsens): FY27E EPS ~$24 × 30–33x Forward = $720–$792. Kursziel Bull: $700–$800 (Mittelwert $750). Eintrittswahrscheinlichkeit: 20%.
+Die Nearline-HDD-Nachfrage aus KI-Trainingsdaten-Speicherung bleibt strukturell stark, WDC bestätigt, dass die aktuelle Ertragskraft nicht nur ein Zyklushoch ist, der Markt re-ratet die Aktie zurück auf ein normalisiertes Multiple bei weiterhin starken Ergebnissen. Annahme (kein Konsens): FY27E EPS ~$35,00 (moderate Normalisierung vom Zyklushoch) × 12–14x Forward = $420–$490. Kursziel Bull: $400–$500 (Mittelwert $450). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Wahrscheinlichstes Szenario: Nearline-Boom hält an, aber das Wachstumstempo normalisiert sich von den aktuellen 45,5% YoY auf ein nachhaltigeres Niveau. Forward-EPS ~$18,27 (aus Forward-PE 29,5x auf Snapshot-Basis) leicht steigend auf ~$19 als Ausgangspunkt × 24–27x = $456–$513. Kursziel Base: $440–$520 (Mittelwert $480). Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Das Ergebniswachstum normalisiert sich deutlich vom explosiven Zyklushoch, das Multiple bleibt aus zyklischer Vorsicht komprimiert, die Aktie findet auf aktuellem Niveau einen Boden mit moderatem Aufwärtspotenzial. Konservativ normalisiertes EPS ~$30,00 (statt des optimistischen Forward-Konsens $40,40) × 9–10x = $270–$300. Kursziel Base: $260–$320 (Mittelwert $290). Eintrittswahrscheinlichkeit: 40%.
 
 ## 5. BEAR CASE
 
-Auslöser: QLC-SSD-Preise nähern sich der Kapazitätsparität mit Nearline-HDD schneller als erwartet, gleichzeitig pausiert mindestens ein großer Hyperscaler seine KI-Infrastruktur-Capex-Pläne. Kundenkonzentration: Die drei größten Hyperscaler dürften den Großteil des Nearline-Umsatzes ausmachen — aus den vorliegenden Daten nicht exakt quantifizierbar, aber ein bekanntes Branchenrisiko mit hoher Konzentration. Geopolitik/Exportkontrollen: Keine direkten China-Fertigungsrisiken bei HDD-Produktion; Exportkontrollen betreffen primär fortschrittliche Halbleiterfertigung, nicht klassische Festplattentechnologie. Lieferketten/Foundry: WDC bezieht Komponenten (Motoren, Substrate) von diversifizierten externen Zulieferern — kein akutes Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar; der Spin-off hat die Aktienstruktur bereits grundlegend verändert. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$8,50 bei starkem Nachfragerückgang. Annahme: FY27E EPS ~$8,50 × 16–19x = $136–$162. Kursziel Bear: $130–$170 (Mittelwert $150). Eintrittswahrscheinlichkeit: 35%.
+Auslöser: Der HDD-Zyklus hat seinen Höhepunkt überschritten und kehrt sich beschleunigt um — SSD-Substitution im Kapazitätssegment setzt sich schneller durch als erwartet, oder ein großer Hyperscaler pausiert seine Speicher-Capex-Pläne. Kundenkonzentration: Die größten Hyperscaler dürften einen Großteil des Nearline-Umsatzes ausmachen — aus den Daten nicht exakt quantifizierbar, aber ein bekanntes Branchenrisiko. Geopolitik/Exportkontrollen: Keine direkten China-Fertigungsrisiken bei HDD-Produktion. Lieferketten/Foundry: Diversifizierte externe Zulieferer, kein akutes Single-Source-Risiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS bricht auf ~$12,00 ein, deutlich unter das Niveau der letzten Analyse dieser Serie. Annahme: FY27E EPS ~$12,00 × 10–12x = $120–$144. Kursziel Bear: $110–$160 (Mittelwert $135). Eintrittswahrscheinlichkeit: 40%.
 
-Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
+Summe Bull + Base + Bear: 20% + 40% + 40% = 100%.
 
-**Erwartungswert:** EV = 0,20 × $750 + 0,45 × $480 + 0,35 × $150 = $150,00 + $216,00 + $52,50 = **~$418,50 — implizites Downside vs. aktuellem Kurs ($578,05): −27,6%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $450 + 0,40 × $290 + 0,40 × $135 = $90,00 + $116,00 + $54,00 = **~$260,00 — implizites Downside vs. aktuellem Kurs ($295,65): −12,1%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge — trotz des bereits erfolgten Kursrückgangs von -28,77% im 6-Monats-Fenster.
 
-## 6. FUNDAMENTALE QUALITÄT (vorläufig, Datenstand)
+## 6. FUNDAMENTALE QUALITÄT
 
-ROE von 85,9% ist zyklusbedingt extrem und muss im Kontext der post-Spin-off-verkleinerten Eigenkapitalbasis bewertet werden — dies ist keine nachhaltige, wiederholbare Kapitalrendite, sondern eine Momentaufnahme am Zyklushoch. Die Anomalie Net Margin (55,3%) über Operating Margin (37,0%) ist aus den Daten nicht abschließend auflösbar und sollte nicht unkritisch in die Bewertung einfließen — die operative Marge von 37,0% ist die konservativere, belastbarere Kennzahl für die Kernprofitabilität. Debt/Equity von nur 17,8% ist eine echte Stärke und der klarste strukturelle Vorteil gegenüber dem hoch verschuldeten Peer Seagate. Free Cashflow von $2,08 Mrd. bestätigt solide operative Cash-Generierung. Der wirtschaftliche Burggraben (Duopol-Struktur) ist real, aber zyklisch — kein struktureller, von der Nachfragedynamik unabhängiger Burggraben.
+Operating Margin (40,9%) bleibt stark und ist die belastbarere Kennzahl gegenüber dem anomal hohen Net Margin (69,2%), der aus den Daten nicht abschließend auflösbar ist und hier nicht als nachhaltige Ertragskraft interpretiert wird. Debt/Equity von nur 9,9% ist weiterhin eine echte Stärke und hat sich gegenüber der letzten Analyse (17,8%) nochmals verbessert — die Bilanzqualität bleibt trotz des Kursrückgangs intakt. Free Cashflow von $2,73 Mrd. bestätigt solide operative Cash-Generierung. Der entscheidende Qualitätstest ist nun, ob die aktuellen Rekordmargen nach dem Kursrückgang noch als nachhaltig gelten können oder ob der Markt mit seiner Skepsis Recht hat.
 
-## 7. BEWERTUNG (vorläufig, Datenstand)
+## 7. BEWERTUNG
 
-Snapshot-Multiples (Trailing PE 32,3x, Forward PE 29,5x, P/B 25,8x) vor dem Kurssprung. Auf aktuellem Niveau ($578,05): Trailing PE ~34,6x, Forward PE ~31,6x, P/B ~27,6x — extrem hohe Multiples selbst für ein Unternehmen mit starkem Wachstum. Eine zyklische Hardware-Aktie nie nur am aktuellen KGV bewerten — 31,6x Forward preist bereits eine Fortsetzung der außergewöhnlichen Nachfragedynamik über mehrere Jahre ein. Rückrechnung "Was preist der Kurs ein?": $578,05 bei Forward-EPS $18,27 impliziert eine Fortsetzung des aktuellen Margen- und Wachstumsniveaus mindestens bis FY28 — das ist ambitioniert, nicht plausibel, angesichts der historischen Zyklizität des HDD-Marktes. Das Analysten-Konsensziel ($589,88, 24 Analysten, "strong_buy") liegt nur 2,0% über dem aktuellen Kurs trotz "Strong Buy"-Einstufung — ein Indiz, dass selbst optimistische Analystenmodelle kaum noch Luft nach oben sehen.
+Trailing PE 10,4x, Forward PE 7,3x, P/B 11,83x — die extreme Diskrepanz zwischen Trailing- und Forward-KGV bei gleichzeitigem Kursrückgang von -63% vom 52-Wochen-Hoch ist ungewöhnlich: Trotz eines fast verdoppelten Forward-EPS gegenüber dem Trailing-EPS bewertet der Markt die Aktie so niedrig, dass dies eher für tiefe Skepsis gegenüber der Nachhaltigkeit der aktuellen Ergebnisse spricht als für eine klassische Unterbewertung. Rückrechnung "Was preist der Kurs ein?": $295,65 bei einem konservativ normalisierten EPS (nicht dem optimistischen Forward-Konsens) impliziert, dass der Markt bereits einen erheblichen Ergebnisrückgang vom Zyklushoch erwartet — plausibel angesichts der HDD-Zyklizität, nicht übertrieben pessimistisch. Das Analysten-Konsensziel ($613,38, 24 Analysten, "strong_buy") liegt mehr als doppelt so hoch wie der aktuelle Kurs — ein außergewöhnlich großer Abstand, der auf eine erhebliche Diskrepanz zwischen Analystenmodellen (die vermutlich noch auf den alten Ergebnisannahmen basieren) und der aktuellen Marktbewertung hindeutet; dies ist ein Sentiment-Indikator, kein verlässlicher Fair-Value-Anker in dieser Situation.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der Rang 1 im S&P-500-RS-Ranking bei gleichzeitiger 10-Tage-Korrektur (-16,94%) deutet auf beginnende Gewinnmitnahmen von Fast-Money-Positionen nach einer außergewöhnlichen Rally hin, während Long-Only-Investoren möglicherweise noch an der KI-Speicher-These festhalten. Für neue nachhaltige Käufer müsste entweder eine weitere ASP-Anhebung oder eine Bestätigung anhaltender Hyperscaler-Capex-Pläne im nächsten Quartalsbericht erfolgen. Enttäuschungsrisiko: Jede Andeutung einer Hyperscaler-Capex-Pause würde angesichts der bereits extrem hohen Bewertung zu einer scharfen Korrektur führen.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Der massive Kursrückgang bei gleichzeitig noch hohem Analysten-Konsensziel deutet auf eine erhebliche Neubewertung durch den Markt hin, die den Analystenschätzungen noch vorausläuft — möglicherweise haben institutionelle Investoren die Nachhaltigkeit des Nearline-Booms neu bewertet. Für neue nachhaltige Käufer müsste eine Stabilisierung der Ergebnisse auf einem nachvollziehbar nachhaltigen Niveau sichtbar werden. Enttäuschungsrisiko: Eine weitere Guidance-Kürzung würde die bereits begonnene Neubewertung beschleunigen.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score 226,15, Rang 1 im S&P 500 — das stärkste Momentum-Signal im gesamten Index trotz der jüngsten Korrektur. 5T +6,44%, 10T -16,94%, 20T +14,14%, 50T +42,17%, 6M +180,34% — eine der außergewöhnlichsten 6-Monats-Bewegungen überhaupt, mit einer ersten deutlichen Korrekturphase in den letzten zehn Handelstagen. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv) — die technische Struktur bestätigt aktuell keinen neuen Ausbruch, sondern eher eine Konsolidierung nach der Rally. Momentum ist fundamental gestützt (reale Nachfragedynamik), aber die Bewertung hat der operativen Entwicklung bereits deutlich vorgegriffen. Warnsignal: Ein Bruch unter die 50-Tage-Basis (~$500 geschätzt aus dem 50T-Fenster) wäre ein klares technisches Warnsignal für das Ende der Rally.
+RS-Score 46,84, Rang 73 im NASDAQ-100 — ein dramatischer Abfall gegenüber Rang 1 in der letzten Analyse dieser Serie. 5T +5,51%, 10T +14,2%, 20T -5,22%, 50T -23,96%, 6M -28,77%, 12M +85,08% — nach dem kompletten Einbruch zeigt sich in den letzten Handelstagen eine erste technische Erholung. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Die jüngste Erholung könnte eine Stabilisierung andeuten oder eine technische Gegenbewegung nach Überverkauftheit sein — aus den Daten nicht abschließend unterscheidbar. Warnsignal: Ein erneuter Rückfall unter die jüngsten Tiefs würde die Bodenbildungs-These widerlegen.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-Bull (3–5 Jahre): KI-Trainingsdaten-Speicherbedarf wächst strukturell weiter, HAMR-Technologie liefert die nächste Kapazitätsgeneration, Duopol-Preisdisziplin hält über mehrere Zyklen. Kursziel: $850–$1.100.
-Base: Nearline-Nachfrage normalisiert auf ein nachhaltiges, aber deutlich niedrigeres Wachstumstempo, Margen pendeln um ein erhöhtes, aber nicht rekordhohes Niveau. Kursziel: $500–$680.
-Bear: SSD-Kapazitätsparität erreicht Nearline-Segment früher als erwartet, strukturelle Substitution beschleunigt sich. Kursziel: $120–$220.
-Entscheidende Variable: Tempo der SSD/HDD-Kostenparität im Kapazitätssegment — bestimmt, ob der aktuelle Nachfrageboom strukturell oder zyklisch ist.
+Bull (3–5 Jahre): Die Nearline-HDD-Nachfrage erweist sich als strukturell, nicht zyklisch, das Multiple normalisiert sich auf ein nachhaltiges Niveau bei weiterhin starken Ergebnissen. Kursziel: $480–$650.
+Base: Die Ergebnisse normalisieren sich moderat vom Zyklushoch, die Aktie pendelt um ein mittleres Bewertungsniveau. Kursziel: $280–$380.
+Bear: Der HDD-Zyklus kehrt vollständig um, SSD-Substitution beschleunigt sich strukturell. Kursziel: $90–$150.
+Entscheidende Variable: Ob die aktuellen Rekordergebnisse eine neue, nachhaltige Ertragsbasis darstellen oder einen vorübergehenden Zyklushöhepunkt, der sich bereits umzukehren beginnt.
 
 ## 11. PROFI-FAZIT
 
-Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −27,6%) — deutlich negativer als bei den meisten anderen Momentum-Titeln im Datensatz. WDC ist der reine Momentum-Trade auf den KI-getriebenen Nearline-HDD-Boom — fundamental durch reale Nachfrage untermauert, aber bei aktuellem Kursniveau (31,6x Forward-KGV, 27,6x P/B) weit über den eigenen Szenario-Mittelpunkten. Für Neueinsteiger ist das Chance-Risiko-Verhältnis nach der +180% 6-Monats-Bewegung klar negativ. Bestehende Positionen mit striktem Trailing-Stop (12–15%) führen; kein Nachkauf auf diesem Niveau. Positionsgröße bei etwaigem Neueinstieg nur nach deutlicherer Korrektur und mit kleiner Größe (max. 1–2%). Direkter Peer: **STX** (Seagate) ist ähnlich positioniert, aber mit wesentlich höherem D/E-Risiko (381,6% vs. WDC 17,8%) — WDC ist die bilanziell deutlich defensivere HDD-Wahl bei vergleichbarem zyklischen Momentum. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −12,1%) — trotz des bereits massiven Kursrückgangs seit der letzten Analyse dieser Serie bleibt das Chance-Risiko-Verhältnis negativ, da die zugrunde liegende Ertragsnachhaltigkeit weiterhin unklar ist. WDC ist nach dem Einbruch kein klarer "Value"-Kauf, sondern eine offene Wette auf die Nachhaltigkeit der HDD-Zyklus-Spitzenerträge. Für zyklus-erfahrene Investoren mit hoher Risikotoleranz geeignet, kein Compounder-Kandidat. Explizite Risikowarnung: Der scheinbar niedrige Multiple (Trailing PE 10,4x) ist angesichts der HDD-Zyklizität kein verlässliches Kaufsignal — Positionsgröße entsprechend klein halten (max. 1–2%) bis sich die Ergebnisnachhaltigkeit klärt. Direkter Peer: **STX** (Seagate) zeigt im selben Zeitraum eine ähnliche Kursentwicklung mit noch höherem Bilanzrisiko. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
 - Qualität: 3/5
 - Wachstum: 4/5
-- Bewertung: 1/5
-- Katalysator: 4/5
+- Bewertung: 3/5
+- Katalysator: 3/5
 
-**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Trotz Rang 1 im S&P-500-RS-Ranking und einem realen fundamentalen Katalysator (KI-Nearline-Nachfrage) ergibt die EV-Rechnung nach der +180%-6-Monats-Rally ein deutlich negatives Chance-Risiko-Verhältnis (−27,6%) bei bereits extrem hohen Multiples (31,6x Forward-KGV).
+**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — Der scheinbar günstige Multiple (Trailing PE 10,4x) verschleiert die zugrunde liegende Unsicherheit über die Nachhaltigkeit der Zyklushoch-Erträge; die EV-Rechnung bestätigt ein weiterhin negatives Chance-Risiko-Verhältnis (−12,1%) trotz des bereits erfolgten Kursrückgangs.
 
 ---
 
@@ -89,10 +87,10 @@ Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edg
 |---|---|
 | Qualität | 3/5 |
 | Wachstum | 4/5 |
-| Bewertung | 1/5 |
-| Katalysator | 4/5 |
-| EV-Upside | -14.7% |
+| Bewertung | 3/5 |
+| Katalysator | 3/5 |
+| EV-Upside | -1.3% |
 
-**Verdict: WATCH (48/100)**
+**Verdict: HOLD (57/100)**
 
 *Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten.*

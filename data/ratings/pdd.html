@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>PDD — Aktienbewertung</title>
+<style>
+:root{--bg:#060b14;--bg2:#0d1526;--bg3:#111d33;--bdr:#1e2d45;
+  --tx:#e2e8f0;--mu:#64748b;--gl:#86c429;--al:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Inter',system-ui,sans-serif;
+  font-size:14px;line-height:1.6;padding:20px}
+.w{max-width:960px;margin:0 auto}
+.hdr{background:var(--bg2);border:1px solid var(--bdr);border-radius:10px;
+  padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;
+  justify-content:space-between;flex-wrap:wrap;gap:12px}
+.hdr h1{font-size:28px;font-weight:800;letter-spacing:-.5px}
+.hdr h2{font-size:14px;color:var(--mu);font-weight:400;margin-top:2px}
+.meta{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+.mi{font-size:12px;color:var(--mu)}.mi span{color:var(--tx);font-weight:600}
+.vb{padding:8px 20px;border-radius:6px;font-size:16px;font-weight:800;letter-spacing:1px;
+  background:#1a1200;color:#f59e0b;border:1px solid #b45309}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+@media(max-width:600px){.g3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;padding:14px 16px}
+.cl{font-size:11px;color:var(--mu);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.cv{font-size:18px;font-weight:700;color:var(--gl)}
+.sec{background:var(--bg2);border:1px solid var(--bdr);border-radius:8px;
+  padding:18px 20px;margin-bottom:16px}
+.st{font-size:13px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin-bottom:14px}
+.ac h3{font-size:12px;font-weight:700;color:var(--mu);text-transform:uppercase;
+  letter-spacing:.5px;margin:16px 0 8px;padding-top:10px;border-top:1px solid var(--bdr)}
+.ac h3:first-child{margin-top:0;padding-top:0;border-top:none}
+.ac p{font-size:13px;margin-bottom:8px;line-height:1.6}
+.al{padding-left:16px;margin-bottom:8px}
+.al li{font-size:13px;margin-bottom:4px;line-height:1.5}
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(max-width:480px){.sg{grid-template-columns:1fr}}
+.sz{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media(max-width:600px){.sz{grid-template-columns:1fr}}
+.sr{background:var(--bg3);border-radius:6px;padding:10px 12px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:relative;cursor:pointer;user-select:none}
+.stars{color:var(--al);font-size:14px;letter-spacing:1px;flex-shrink:0}
+.tip{display:none;position:absolute;bottom:calc(100% + 6px);left:50%;
+  transform:translateX(-50%);background:#0a1628;border:1px solid var(--bdr);
+  border-radius:6px;padding:9px 12px;font-size:11px;color:#94a3b8;
+  width:210px;z-index:20;line-height:1.6;pointer-events:none;
+  box-shadow:0 4px 16px rgba(0,0,0,.4)}
+.sr:hover .tip,.sr.open .tip{display:block}
+.dis{background:var(--bg3);border:1px solid var(--bdr);border-radius:6px;
+  padding:10px 14px;font-size:11px;color:var(--mu);line-height:1.5;margin-top:16px}
+</style>
+</head>
+<body>
+<div style="background:#0a1628;border-bottom:1px solid #1e2d45;padding:7px 20px;
+  font-size:11px;color:#64748b;display:flex;justify-content:space-between;align-items:center">
+  <span>KI-Aktienbewertung &middot; RS-Platform</span>
+  <span>&#128337; Letzte Aktualisierung: <strong style="color:#94a3b8">21.11.2026</strong></span>
+</div>
+<div class="w">
+  <div class="hdr">
+    <div>
+      <h1>PDD</h1>
+      <h2>PDD Holdings Inc.</h2>
+      <div class="meta">
+        <div class="mi">Sektor: <span>Consumer Cyclical</span></div>
+        <div class="mi">Industrie: <span>Internet Retail</span></div>
+        <div class="mi">MCap: <span>$112B</span></div>
+        <div class="mi">Signal: <span>Kein GWS-Signal</span></div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px">
+      <div style="display:flex;align-items:center;gap:6px">
+        <div class="vb">HOLD</div>
+        
+      </div>
+      <div style="font-size:12px;color:var(--mu);text-align:right">
+        Score: <strong style="color:#f59e0b;font-size:20px">55</strong><span style="color:var(--mu)">/100</span>
+      </div>
+      <div style="font-size:11px;color:var(--mu)">Erstellt: 21.11.2026</div>
+      <div style="font-size:11px;color:var(--mu)">RS-Score: <span style="color:#86c429;font-weight:700">22.4</span></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Gesamteinschätzung</div>
+    <div class="sg">
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Qualität</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Burggraben, FCF-Stärke, Bilanzqualität, Margenstabilität über den Zyklus.<br><br>5 = Compounder-Qualität<br>1 = strukturell gefährdet</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Wachstum</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Umsatzwachstum und Nachhaltigkeit. Strukturell vs. zyklisch bewertet.<br><br>5 = &gt;30% nachhaltiges Wachstum<br>1 = schrumpfend oder rein zyklisch</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Bewertung</span><span class="stars">★★★☆☆</span>
+        <div class="tip">Kurs vs. fairer Wert — normalisiertes FCF-KGV über den vollen Zyklus.<br><br>5 = deutlich unterbewertet<br>1 = massiv überstreckt</div>
+      </div>
+      <div class="sr">
+        <span style="font-size:12px;color:var(--mu)">Katalysator</span><span class="stars">★★☆☆☆</span>
+        <div class="tip">Stärke und Nachhaltigkeit des Auslösers: Earnings-Beat, Guidance, Produktzyklus, Makro-Tailwind.<br><br>5 = starker fundamentaler Treiber<br>1 = rein technisches Momentum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card"><div class="cl">Kurs</div><div class="cv" style="color:var(--tx)">$78.97</div></div>
+    <div class="card"><div class="cl">Forward PE</div><div class="cv">6.4×</div></div>
+    <div class="card"><div class="cl">Revenue (TTM)</div><div class="cv">$450.8B</div></div>
+    <div class="card"><div class="cl">Gross Margin</div><div class="cv">56.3%</div></div>
+    <div class="card"><div class="cl">Dividende</div><div class="cv" style="color:var(--al)">0.00%</div></div>
+    <div class="card"><div class="cl">ROE</div><div class="cv">22.7%</div></div>
+    <div class="card"><div class="cl">EV-Upside</div><div class="cv" style="color:#86c429">+15.7%</div></div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Szenarien — 12–18 Monate</div>
+    <div class="sz">
+      <div style="background:#0a1a00;border:1px solid #2d5a00;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#86c429;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▲ Bull Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">120–145</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#86c429">20%</div></div>
+      <div style="background:#111d33;border:1px solid #1e2d45;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f59e0b;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">◆ Base Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">85–105</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f59e0b">40%</div></div>
+      <div style="background:#1a0505;border:1px solid #3b0a0a;border-radius:8px;padding:14px 16px;text-align:center"><div style="font-size:10px;color:#f87171;text-transform:uppercase;font-weight:700;letter-spacing:1px;margin-bottom:10px">▼ Bear Case</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Kursziel</div><div style="font-size:13px;font-weight:700;color:#e2e8f0;margin-bottom:8px">38–55</div><div style="font-size:11px;color:#64748b;margin-bottom:3px">Wahrscheinlichkeit</div><div style="font-size:20px;font-weight:800;color:#f87171">40%</div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">GWS-Ampel — Breakout-Status</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Weekly</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">Daily</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+      <div style="background:#111d33;border-radius:6px;padding:10px 14px;text-align:center;border:1px solid #1e2d45"><div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px">4H</div><div><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#334155;margin-right:5px;vertical-align:middle"></span><span style="font-size:12px;font-weight:700;color:#64748b">✗ Inaktiv</span></div></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="st">Professionelle Analyse</div>
+    <div class="ac"><h3>1. INVESTMENT-CASE</h3>
+<p>DATENLAGE: Fundamental-Snapshot vom 16.11.2026 ($78,97) liegt vor der jüngsten Kursbewegung (Schlusskurs 19.11.2026: $86,00, +8,9%). Konfidenz der Bewertungsaussagen reduziert; alle Multiples werden nachfolgend auf Basis von $86,00 neu gerechnet. PDD hatte laut Earnings-Kalender am 19.11.2026 — also unmittelbar vor dem jüngsten Kurssprung — einen Quartalsbericht. Ein Live-Refetch der Fundamentaldaten war netzwerkseitig blockiert, die konkreten Berichtsinhalte (Beat/Miss, Guidance) sind daher aus den vorliegenden Daten nicht verifizierbar — der Auslöser der +8,9%-Bewegung wird hier nicht behauptet, nur die zeitliche Koinzidenz festgehalten. Zusätzliche Datenanomalie: Der ausgewiesene TTM-Umsatz ($450,78 Mrd.) ist im Verhältnis zur Marktkapitalisierung ($112,4 Mrd.) und zu Vergleichsgrößen im Sektor unplausibel hoch — vermutlich ein Währungs- oder Konsolidierungsartefakt. Dieser absolute Wert wird in der Bewertung NICHT verwendet; die Analyse stützt sich stattdessen auf die intern konsistenten EPS- und Margenkennzahlen.</p>
+<p>PDD Holdings (Pinduoduo-Kernplattform in China, Temu international) ist eine E-Commerce-Doppelstrategie: Pinduoduo als etabliertes Social-Commerce-Modell im chinesischen Heimatmarkt, Temu als aggressiv wachsende, aber regulatorisch unter Druck stehende grenzüberschreitende Ultra-Low-Cost-Plattform. Die eigentliche Story ist, ob Temus internationales Geschäftsmodell die zunehmende regulatorische Belastung durch verschärfte Zoll- und De-Minimis-Regelungen in den USA und der EU auf kleine, aus China versandte Paketsendungen überstehen kann. Was der Markt aktuell einpreist: Nach einem sehr schwachen 12-Monats-Zeitraum (-35,17%) zeigt der jüngste 5-Tage-Sprung (+14,03%) eine mögliche Stabilisierung — bei einem negativen Beta (-0,079) bewegt sich die Aktie zuletzt zudem weitgehend unabhängig vom breiteren Markt, was auf überwiegend unternehmens-/regulierungsspezifische statt makrogetriebene Kursbewegungen hindeutet.</p>
+<h3>2. GESCHÄFTSMODELL</h3>
+<ul class="al">
+<li>Pinduoduo: Social-Commerce-Plattform im chinesischen Heimatmarkt mit Gruppenkauf-Mechanik</li>
+<li>Temu: internationale Cross-Border-Ultra-Low-Cost-E-Commerce-Plattform, expandiert seit 2022 aggressiv in die USA, Europa und weitere Märkte</li>
+<li>Operativer Hebel: Asset-leichtes Marktplatzmodell, aber Temu ist stark auf günstige grenzüberschreitende Versandlogistik angewiesen</li>
+<li>Strukturelle Abhängigkeit von De-Minimis-/Zollregelungen für kleine Paketsendungen aus China — ein zentrales, sich veränderndes regulatorisches Umfeld in den USA und der EU</li>
+<li>Wettbewerbsdruck im Heimatmarkt durch Alibaba und JD.com, international durch Shein und etablierte E-Commerce-Plattformen</li>
+<li>Extrem niedrige Verschuldung (Debt/Equity ~1,1%) verschafft außergewöhnliche finanzielle Flexibilität zur Absorption regulatorischer Belastungen</li>
+<li>Margenprofil (Bruttomarge 56,3%, Operating Margin 21,9%) deutet auf ein strukturell profitables Kerngeschäft trotz der Temu-Investitionsphase hin</li>
+<li>Kein Dividenden-Zahler — Kapital wird primär in internationale Expansion und Wettbewerbsfähigkeit reinvestiert</li>
+</ul>
+<h3>3. BULL CASE</h3>
+<p>Temu stabilisiert sein internationales Geschäftsmodell trotz De-Minimis-/Zollbelastungen durch einen Umbau hin zu lokaler Lagerhaltung in Zielmärkten, die Pinduoduo-Kernplattform verteidigt ihre Marktposition gegen Alibaba/JD.com, die Marge erholt sich. Annahme (kein Konsens): FY27E EPS ~$14,00 × 9–10x Forward = $126–$140. Kursziel Bull: $120–$145 (Mittelwert $132,50). Eintrittswahrscheinlichkeit: 20%.</p>
+<h3>4. BASE CASE</h3>
+<p>Wahrscheinlichstes Szenario: Temus internationales Wachstum verlangsamt sich deutlich durch die regulatorischen Belastungen, die Kernplattform Pinduoduo bleibt stabil, moderates EPS-Wachstum gegenüber dem aktuellen Forward-Niveau. Forward-EPS ~$12,35 (aus Forward-PE 7,0x auf aktuellem Kursniveau) leicht steigend auf ~$12,80 als Ausgangspunkt × 7–8x = $89,60–$102,40. Kursziel Base: $85–$105 (Mittelwert $95). Eintrittswahrscheinlichkeit: 40%.</p>
+<h3>5. BEAR CASE</h3>
+<p>Auslöser: Die regulatorische Verschärfung gegenüber kleinwertigen Importsendungen aus China (De-Minimis-Abschaffung, zusätzliche Zölle) in den USA und der EU eskaliert weiter, Temus Einheitsökonomie bricht zusammen, gleichzeitig verschärft sich der Wettbewerbsdruck durch Shein und einheimische Plattformen im Kernmarkt. Kundenkonzentration: Breite Endkundenbasis in beiden Geschäftsbereichen, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Das zentrale strukturelle Risiko dieser These — US-/EU-Handelspolitik gegenüber chinesischen E-Commerce-Importen ist volatil und schwer vorhersehbar. Lieferketten/Foundry: Nicht im klassischen Sinn relevant, aber die grenzüberschreitende Versandlogistik ist ein strukturelles Abhängigkeitsrisiko. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Siehe Geopolitik — dies ist im Kern ein regulatorisches, nicht operatives Risiko. EPS fällt auf ~$7,00 bei eskalierenden Handelsbarrieren. Annahme: FY27E EPS ~$7,00 × 6–7x = $42–$49. Kursziel Bear: $38–$55 (Mittelwert $46,50). Eintrittswahrscheinlichkeit: 40%.</p>
+<p>Summe Bull + Base + Bear: 20% + 40% + 40% = 100%.</p>
+<p>**Erwartungswert:** EV = 0,20 × $132,50 + 0,40 × $95 + 0,40 × $46,50 = $26,50 + $38,00 + $18,60 = **~$83,10 — implizites Downside vs. aktuellem Kurs ($86,00): −3,4%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge, die Bandbreite ist aber angesichts des binären regulatorischen Risikos ungewöhnlich breit gefächert.</p>
+<h3>6. FUNDAMENTALE QUALITÄT (vorläufig, Datenstand)</h3>
+<p>Bruttomarge (56,3%) und Operating Margin (21,9%) sind solide und intern konsistent, auch wenn der absolute TTM-Umsatzwert als Anomalie markiert und hier nicht verwendet wird. ROE von 22,75% bei einer außergewöhnlich niedrigen Verschuldung (Debt/Equity ~1,1%) zeigt eine sehr konservative, nicht fremdfinanzierte Bilanz — eine der stärksten in dieser Analyseserie. Die TTM-Umsatz- und Free-Cashflow-Zahlen ($74,6 Mrd.) sind aus den Daten nicht abschließend auflösbare Anomalien und wurden in der Bewertung bewusst nicht als absolute Größen verwendet. Der wirtschaftliche Burggraben in der Kernplattform Pinduoduo ist real, bei Temu dagegen stark von der politischen Handelsregulierung abhängig und daher fragiler.</p>
+<h3>7. BEWERTUNG (vorläufig, Datenstand)</h3>
+<p>Snapshot-Multiples (Trailing PE 8,9x, Forward PE 6,4x, P/B 1,66x) vor der jüngsten Kursbewegung. Auf aktuellem Niveau ($86,00): Trailing PE ~9,7x, Forward PE ~7,0x, P/B ~1,80x — eines der günstigsten Bewertungsniveaus im gesamten Datensatz dieser Analyseserie. Rückrechnung "Was preist der Kurs ein?": $86,00 bei Forward-EPS $12,35 impliziert, dass der Markt bereits ein erhebliches regulatorisches Risikoabschlag auf Temus Wachstumspotenzial einpreist — konsistent mit einer Mischung aus Base und Bear Case dieser Analyse, nicht mit einer optimistischen Wachstumsgeschichte. Das Analysten-Konsensziel ($113,63, 33 Analysten, "buy") liegt deutlich über dem aktuellen Kurs — ein Hinweis, dass die Street das regulatorische Risiko weniger stark gewichtet als die eigene konservative Base/Bear-Gewichtung dieser Analyse.</p>
+<h3>8. MARKTPSYCHOLOGIE & POSITIONIERUNG</h3>
+<p>Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: Das negative Beta (-0,079) in Kombination mit dem schwachen 12-Monats-Trend (-35,17%) deutet darauf hin, dass PDD zuletzt primär von unternehmens-/regulierungsspezifischen Nachrichten statt vom breiteren Marktumfeld getrieben wurde — konsistent mit einer Aktie, die stark auf China-/Handelspolitik-Schlagzeilen reagiert. Für neue nachhaltige Käufer müsste eine konkrete regulatorische Entspannung bei den De-Minimis-Regelungen oder ein bestätigter Earnings-Beat erfolgen. Enttäuschungsrisiko: Eine weitere Verschärfung der Handelsbarrieren wäre angesichts der ohnehin schwachen 12-Monats-Performance der klarste negative Katalysator.</p>
+<h3>9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM</h3>
+<p>RS-Score 22,45, Rang 93 im NASDAQ-100 — insgesamt schwach trotz der jüngsten Erholung. 5T +14,03%, 10T +5,26%, 20T +17,23%, 50T +20,2%, 6M +0,9%, 12M -35,17% — ein starker kurzfristiger Erholungsimpuls nach einem sehr schwachen Jahr. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Ob das Momentum fundamental gestützt ist (z. B. durch einen tatsächlichen Earnings-Beat) oder rein reaktiv/spekulativ, lässt sich aus den vorliegenden Daten nicht abschließend beurteilen, da die Berichtsinhalte des Quartalsberichts vom 19.11. nicht verifizierbar sind. Warnsignal: Eine schnelle Rückgabe der 5-Tage-Gewinne wäre ein Zeichen, dass die Bewegung überzogen war.</p>
+<h3>10. LANGFRISTIGES POTENZIAL (3–5 Jahre)</h3>
+<p>Bull (3–5 Jahre): Temu etabliert ein tragfähiges lokales Logistikmodell, das regulatorisch robuster ist, die Kernplattform wächst weiter profitabel. Kursziel: $150–$200.</p>
+<p>Base: Temus internationales Wachstum normalisiert sich auf ein deutlich niedrigeres, aber positives Niveau, Pinduoduo bleibt stabil. Kursziel: $90–$130.</p>
+<p>Bear: Eskalierende Handelsbarrieren zerstören Temus Geschäftsmodell strukturell, der Kernmarkt verliert Anteile an Konkurrenten. Kursziel: $30–$55.</p>
+<p>Entscheidende Variable: Entwicklung der US-/EU-Handelspolitik gegenüber kleinwertigen E-Commerce-Importsendungen aus China — dominiert alle anderen Faktoren über den Zeithorizont.</p>
+<h3>11. PROFI-FAZIT</h3>
+<p>Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −3,4%), bei außergewöhnlich breiter Szenario-Streuung aufgrund des binären regulatorischen Risikos. PDD ist eine fundamentale Sondersituation mit politischem/regulatorischem Kern-Risiko, kein klassischer Momentum- oder Compounder-Titel — der jüngste Kurssprung fällt mit einem nicht verifizierbaren Quartalsbericht zusammen und sollte vor einer Positionsentscheidung zwingend auf die tatsächlichen Berichtsinhalte hin geprüft werden. Für risikotolerante Investoren mit Verständnis für China-/Handelspolitik-Exposure geeignet, nicht für konservative Portfolios angesichts des binären Regulierungsrisikos. Explizite Risikowarnung: Positionsgröße klein halten (max. 1–2%) angesichts der politischen Unsicherheit. Direkte Peers: **Alibaba (BABA)** als größerer, diversifizierterer chinesischer E-Commerce-Peer mit geringerem Temu-spezifischem Risiko, **Shein** (nicht börsennotiert) als direkter internationaler Wettbewerber mit identischem De-Minimis-Risikoprofil — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.</p>
+<ul class="al">
+<li>Qualität: 3/5</li>
+<li>Wachstum: 2/5</li>
+<li>Bewertung: 3/5</li>
+<li>Katalysator: 2/5</li>
+</ul>
+<p>**Funnel-Entscheidung:** REDUCE — Kategorie: Sonstiges — Der jüngste Kurssprung fällt mit einem nicht verifizierbaren Quartalsbericht zusammen, und das dominante Risiko (US-/EU-Handelspolitik gegenüber chinesischen E-Commerce-Importen) ist politisch, nicht operativ bedingt — die volle Positionsgröße ist angesichts dieser Unsicherheit nicht gerechtfertigt.</p></div>
+  </div>
+
+  <div class="dis">Keine Anlageberatung. KI-generierte Analyse auf Basis öffentlicher Daten zum Zeitpunkt des GWS-Breakout-Signals. Kurse können verzögert oder veraltet sein. Eigene Recherche empfohlen.</div>
+</div>
+<script>
+var srs=document.querySelectorAll('.sr');
+srs.forEach(function(el){
+  el.addEventListener('click',function(e){
+    var isOpen=el.classList.contains('open');
+    srs.forEach(function(x){x.classList.remove('open');});
+    if(!isOpen)el.classList.add('open');
+    e.stopPropagation();
+  });
+});
+document.addEventListener('click',function(){
+  srs.forEach(function(el){el.classList.remove('open');});
+});
+</script>
+</body>
+</html>

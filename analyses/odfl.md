@@ -1,118 +1,95 @@
 # ODFL — KI-Aktienbewertung
 
-**Old Dominion Freight Line, Inc.** · Industrials · 21.09.2026 · Signal: Kein Signal
+**Old Dominion Freight Line, Inc.** · Industrials · 21.11.2026 · Signal: Kein GWS-Signal
 
 | Kennzahl | Wert |
 |---|---|
-| Kurs | 173.0 |
-| Market Cap | $35.87 Mrd. |
-| Forward PE | 26.01 |
-| Revenue (TTM) | $5.60 Mrd. |
-| Gross Margin | 39.6% |
-| ROE | 24.8% |
-| RS-Score | -84.3 |
+| Kurs | 174.54 |
+| Market Cap | $35.96 Mrd. |
+| Forward PE | 25.83 |
+| Revenue (TTM) | $5.79 Mrd. |
+| Gross Margin | 39.9% |
+| ROE | 26.0% |
+| RS-Score | 43.6 |
 
 **GWS-Ampel:** Weekly ✗ Inaktiv · Daily ✗ Inaktiv · 4H ✗ Inaktiv
 
 ---
 
-**Szenarien (12–18 Monate):** Bull $235–$285 (28 %) · Base $155–$195 (45 %) · Bear $65–$95 (27 %) · EV ~$173,15
-
 ## 1. INVESTMENT-CASE
 
-Old Dominion ist der beste Betreiber einer Branche, die sich in der dritten Jahresphase einer Frachtrezession befindet. Die Tonnage fällt seit Quartalen: LTL-Tonnen pro Tag im Februar −6,8 %, im ersten Quartal −7,7 % bei gleichzeitig −7,9 % Sendungen, im Mai noch −3,8 %, im August −0,9 %. Dass der Umsatz TTM trotzdem um 10,4 % gewachsen ist, liegt ausschließlich am Preis — im Mai stieg der Umsatz pro Tag um 12,3 %, im August um 12,4 %, jeweils bei fallendem Volumen.
-
-Genau das ist der eigentliche Investment-Case und zugleich das Risiko. Preisdurchsetzung in einer Nachfrageschwäche ist der härteste Beleg für Marktmacht, den ein Transportunternehmen liefern kann — und die Betriebsmarge von 28,8 % gegenüber Saia (13,1 %), XPO (12,3 %) und J.B. Hunt (7,4 %) bestätigt, dass Old Dominion strukturell anders verdient als die Konkurrenz. Was der Markt nicht mehr bezahlt, ist die Prämie dafür: Der Kurs ist von $252,03 auf $173,00 gefallen, RS-Rang 94 von 100. Der Grund ist einfach: Bei 26,01x Forward zahlt man für den Zyklustief-Gewinn eines Unternehmens, dessen Volumen noch nicht dreht.
+Old Dominion Freight Line ist der qualitativ führende LTL-Frachtführer (Less-than-Truckload) der USA — die eigentliche Story ist nicht Wachstum durch Übernahmen, sondern jahrzehntelange organische Marktanteilsgewinne durch überlegene Servicequalität (branchenführende Pünktlichkeits- und Schadensraten) bei gleichzeitig der konservativsten Bilanz der gesamten Branche (Debt/Equity nur 0,4%). Was der Markt aktuell einpreist: Nach einem starken 12-Monats-Trend (+29,14%) zeigt sich im 6-Monats-Fenster eine Korrektur (-7,26%) — plausibel im Zusammenhang mit einer allgemeinen Abschwächung der US-Industrieproduktion, die die Frachtvolumina im LTL-Segment branchenweit belastet. Die Aktie notiert bei 69,3% ihres 52-Wochen-Hochs.
 
 ## 2. GESCHÄFTSMODELL
 
-- Stückgutverkehr (LTL) mit eigenem Terminalnetz — Sendungen mehrerer Kunden werden über Umschlagzentren konsolidiert
-- Das Terminalnetz ist der Burggraben und die Fixkostenlast zugleich: Kapazität wird antizyklisch vorgehalten, was in der Erholung Marktanteile bringt und in der Schwäche die Marge drückt
-- Betriebsmarge 28,8 % bei Bruttomarge 39,6 % — nur 10,8 Punkte Abstand, die effizienteste Kostenstruktur der Branche
-- Preis ist derzeit der einzige Umsatztreiber: Umsatz pro Tag +12,4 % bei Tonnage −0,9 % (August)
-- Servicequalität als Preisargument: Old Dominion erzielt seit Jahren die niedrigsten Schadensquoten der Branche und rechtfertigt damit höhere Raten
-- Sehr geringe Verschuldung: Debt/Equity 0,44 — die konservativste Bilanz dieser Analysegruppe
-- Aktienrückkäufe stützen das Ergebnis je Aktie: seit Juli 2023 wurden rund 10,3 Mio. Aktien für etwa $1,86 Mrd. eingezogen
-- Anomalie: Die ausgewiesene Dividendenrendite von 67,0 % ist ein Datenartefakt und bleibt unberücksichtigt
+- LTL-Frachtführer (Less-than-Truckload) mit Fokus auf zeitkritische, servicesensitive Sendungen
+- Organisches Netzwerkwachstum (Terminals, Flotte) statt Wachstum durch Übernahmen — ein strukturelles Differenzierungsmerkmal gegenüber vielen Branchenkonsolidierern
+- Branchenführende Servicequalität (Pünktlichkeit, Schadensfreiheit) ermöglicht Preisprämien gegenüber Wettbewerbern
+- Operativer Hebel: Hohe Fixkostenbasis (Terminals, Flotte) bedeutet starke Gewinnhebelwirkung in beide Richtungen bei Volumenänderungen
+- Strukturelle Abhängigkeit von der US-Industrieproduktion und dem allgemeinen Frachtvolumenzyklus
+- Außergewöhnlich konservative Bilanz (Debt/Equity 0,4%) verschafft maximale finanzielle Flexibilität über den Frachtzyklus hinweg
+- Konsolidierung in der LTL-Branche (Wettbewerberausfälle wie Yellow Corporation 2023) hat das Marktumfeld für verbliebene Qualitätsanbieter strukturell verbessert
+- Kapitalrückführung über Dividende (Rendite 0,66%) und Aktienrückkäufe bei weiterhin hoher Reinvestitionsrate in das Netzwerk
 
 ## 3. BULL CASE
 
-Peers: XPO (Fwd-KGV 26,9x), Saia (SAIA, 24,1x), J.B. Hunt (JBHT, 23,3x), C.H. Robinson (CHRW, 20,4x), FedEx (FDX, 14,6x), UPS (12,3x) — Bandbreite 12,3x–26,9x.
-
-Der Frachtzyklus dreht 2027. Genau dann zahlt sich die antizyklisch vorgehaltene Terminalkapazität aus: Old Dominion kann Volumen aufnehmen, ohne zu investieren, während Wettbewerber erst Kapazität aufbauen müssen — der operative Hebel wirkt dann in die Gegenrichtung. Strukturelle Margennachhaltigkeit ist gut begründet: Das eigene Terminalnetz ist über Jahrzehnte gewachsen und nicht replizierbar, die Servicequalität stützt die Preisdurchsetzung, und der Abstand von 15 Prozentpunkten Betriebsmarge zum nächstbesten Peer ist über den ganzen Zyklus stabil geblieben. Annahme (kein Konsens): FY28-EPS ~$9,50 × 27x (am oberen Rand der Bandbreite, nahe XPO 26,9x — dort handelt ODFL historisch in der Erholung) = $257. Bull-Kursziel: $235–$285. Eintrittswahrscheinlichkeit: 28%.
+Die Frachtvolumina erholen sich mit einer Belebung der US-Industrieproduktion, ODFL setzt seine organischen Marktanteilsgewinne durch Netzwerkdichte-Vorteile fort, die operative Effizienzquote verbessert sich weiter. Annahme (kein Konsens): FY27E EPS ~$8,00 × 28–30x Forward = $224–$240. Kursziel Bull: $215–$250 (Mittelwert $232,50). Eintrittswahrscheinlichkeit: 20%.
 
 ## 4. BASE CASE
 
-Die Frachtrezession zieht sich bis ins Jahr 2027, der Preis trägt weiter, das Volumen bleibt schwach. Old Dominion bleibt hochprofitabel, aber der Gewinn stagniert, und das Multiple komprimiert Richtung Branchenmitte. Annahme (kein Konsens): FY28-EPS ~$7,60 × 23x (zwischen JBHT 23,3x und SAIA 24,1x) = $175. Base-Kursziel: $155–$195. Eintrittswahrscheinlichkeit: 45%.
+Wahrscheinlichstes Szenario: Stetiges Wachstum im Rahmen des aktuellen Trends, moderate Erholung der Frachtvolumina. Forward-EPS ~$6,76 (aktueller Konsens) leicht steigend auf ~$7,30 als Ausgangspunkt × 24–25x = $175,20–$182,50. Kursziel Base: $168–$190 (Mittelwert $179). Eintrittswahrscheinlichkeit: 45%.
 
 ## 5. BEAR CASE
 
-Auslöser: Die Überkapazität, die nach dem Marktaustritt eines großen Wettbewerbers 2023 aus dem Markt verschwunden war, ist inzwischen von Saia, XPO und anderen wieder aufgebaut worden. Kippt die Preisdisziplin, verschwindet der einzige Umsatztreiber sofort — und bei einem Fixkostenanteil, der ein eigenes Terminalnetz trägt, fällt die Betriebsmarge von 28,8 % dann überproportional. Der konkrete Frühindikator wäre ein Monat mit Umsatz pro Tag unter +5 % bei weiter fallender Tonnage.
+Auslöser: Eine tiefere Frachtrezession durch anhaltende Schwäche der US-Industrieproduktion, verschärfter Preiswettbewerb im LTL-Segment, Volumenrückgänge belasten das hochfixkostenintensive Netzwerk überproportional. Kundenkonzentration: Breite Kundenbasis über viele Industrien, keine relevante Einzelkundenabhängigkeit — auf Datenbasis nicht weiter quantifizierbar. Geopolitik/Exportkontrollen: Handelskonflikte/Zölle können Importfrachtvolumina belasten, kein direktes China-Fertigungsrisiko. Lieferketten/Foundry: Nicht relevant für ein Frachtführer-Geschäftsmodell. Verwässerung: Aktienanzahl-Trend/SBC nicht im Datensatz verfügbar. Regulierung: Keine signifikanten branchenspezifischen Risiken erkennbar. EPS fällt auf ~$4,80 bei Volumenrückgang. Annahme: FY27E EPS ~$4,80 × 18–20x = $86,40–$96. Kursziel Bear: $80–$105 (Mittelwert $92,50). Eintrittswahrscheinlichkeit: 35%.
 
-Kundenkonzentration: breit über Industrie- und Handelskunden gestreut, kein Einzelkunde materiell — aus den Daten nicht quantifizierbar, strukturell gering. Geopolitik/Exportkontrollen: mittelbar materiell — Zölle und Handelsunsicherheit sind laut Branchenkommentar ein Haupttreiber der schwachen Nachfrage. Lieferkette/Single-Source: keine kritische Abhängigkeit; Lkw und Trailer sind von mehreren Herstellern beziehbar, Fahrerverfügbarkeit ist der engere Faktor. Verwässerung: das Gegenteil ist der Fall — rund 10,3 Mio. eingezogene Aktien seit Juli 2023 stützen das EPS; SBC ist nicht im Datensatz, das Nettobild bleibt aktionärsfreundlich. Regulierung/Rechtsrisiken: sektortypisch (Arbeitszeitregeln, Emissionsvorgaben für Flotten), keine besonderen Verfahren erkennbar.
+Summe Bull + Base + Bear: 20% + 45% + 35% = 100%.
 
-Annahme (kein Konsens): FY28-EPS ~$4,80 × 14x (auf FDX-Niveau 14,6x, dem unteren Bereich der Bandbreite) = $67. Bear-Kursziel: $65–$95. Eintrittswahrscheinlichkeit: 27%.
-
-**Summe: 28% + 45% + 27% = 100%**
-
-**Erwartungswert:** EV = 0,28 × $260 + 0,45 × $175 + 0,27 × $80 = **~$173,15 — implizites Upside vs. aktuellem Kurs ($173,00): +0,1%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
+**Erwartungswert:** EV = 0,20 × $232,50 + 0,45 × $179 + 0,35 × $92,50 = $46,50 + $80,55 + $32,38 = **~$159,43 — implizites Downside vs. aktuellem Kurs ($174,54): −8,7%.** Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge.
 
 ## 6. FUNDAMENTALE QUALITÄT
 
-Die beste operative Qualität dieser Analysegruppe, gemessen am Abstand zur eigenen Branche. Betriebsmarge 28,8 % gegenüber SAIA 13,1 %, XPO 12,3 %, JBHT 7,4 % und CHRW 5,3 % — Old Dominion verdient je Umsatzdollar mehr als das Doppelte des nächstbesten Stückgut-Wettbewerbers. Entscheidend ist der Zykluskontext: Das sind **keine** Top-of-Cycle-Zahlen, sondern Werte aus dem dritten Jahr einer Frachtrezession. In einer normalisierten Nachfragelage lag die Betriebsmarge historisch höher, nicht niedriger — das kehrt die übliche Vorsicht bei zyklischen Spitzenmargen hier um.
-
-ROE 24,8 % und ROIC 24,2 % liegen praktisch gleichauf, was die geringe Verschuldung bestätigt: Debt/Equity 0,44 ist der niedrigste Wert der gesamten Analysegruppe. FCF $0,97 Mrd. auf $5,60 Mrd. Umsatz ergibt 17,3 % FCF-Marge und 2,7 % Rendite auf den Marktwert — solide, aber nicht billig. RPO nicht anwendbar (kein Subscription-Modell); das funktionale Äquivalent sind die monatlich veröffentlichten Betriebskennzahlen zu Tonnage und Umsatz pro Tag, und die sind hier der aussagekräftigste Vorlaufindikator: Die Tonnage-Rückgänge verlangsamen sich von −7,7 % im ersten Quartal auf −0,9 % im August. Das ist noch keine Wende, aber eine klare Abflachung. Der Burggraben ist echt und liegt im Terminalnetz — eine Fläche, die über Jahrzehnte erworben wurde und heute weder genehmigungsrechtlich noch wirtschaftlich replizierbar ist.
+ROE von 26,0% bei einer außergewöhnlich niedrigen Verschuldung (Debt/Equity 0,4%) zeigt echte, nicht hebelgetriebene operative Kapitaleffizienz — eine der konservativsten Bilanzen in der gesamten Transportbranche. Operating Margin (26,2%) und Net Margin (20,1%) sind für ein LTL-Frachtunternehmen außergewöhnlich stark und spiegeln die Servicequalitäts-Preisprämie wider. Free Cashflow von $997 Mio. ist solide im Verhältnis zur Unternehmensgröße. Der wirtschaftliche Burggraben (Netzwerkdichte, Servicequalität-Reputation über Jahrzehnte aufgebaut) ist real und schwer kurzfristig zu kopieren.
 
 ## 7. BEWERTUNG
 
-Ein Transportunternehmen darf nicht am aktuellen KGV bewertet werden — bei Old Dominion wirkt das jedoch in beide Richtungen: 26,01x Forward wirkt teuer, basiert aber auf einem Zyklustief-Gewinn. Auf normalisierter FCF-Basis: Bei einer über den Zyklus geschätzten FCF-Spanne von $1,2–1,8 Mrd. (Annahme, kein Konsens) ergibt sich auf $35,87 Mrd. Marktwert ein FCF-Multiple von 20–30x. Das ist für ein kapitalintensives Transportgeschäft am oberen Ende dessen, was sich rechtfertigen lässt. Price/Book 7,89 bei ROE 24,8 % ist ebenfalls anspruchsvoll — für einen Industriewert mit Anlagevermögen ist das ein hoher Aufschlag auf die Substanz.
-
-Peer-Einordnung: 26,01x Forward liegt am **oberen Rand** der Bandbreite, praktisch gleichauf mit XPO (26,9x), über SAIA (24,1x), JBHT (23,3x) und CHRW (20,4x) sowie beim Doppelten von UPS (12,3x). Diese Prämie ist strukturell begründbar — Old Dominion hat die mehr als doppelte Betriebsmarge der genannten LTL-Peers —, sie ist aber vollständig eingepreist. Auf Umsatzbasis liegt ODFL bei 6,40x Sales gegenüber SAIA 2,68x und XPO 2,38x, also beim Zweieinhalbfachen.
-
-Was preist der Kurs ein? Bei $35,87 Mrd. Marktwert und einem unterstellten reifen Industrie-Multiple von 20x müsste Old Dominion dauerhaft ~$1,79 Mrd. Nettogewinn erzielen — bei 19,4 % Nettomarge entspricht das ~$9,2 Mrd. Umsatz gegenüber heute $5,60 Mrd., also 64 % Wachstum. Für ein Unternehmen, dessen Tonnage seit drei Jahren fällt, ist das ambitioniert: Es setzt eine vollständige Zykluserholung **plus** weitere Marktanteilsgewinne voraus. Analyst-Konsensziel $228,78 bei 23 Analysten — als Orientierungspunkt, nicht als Kursziel-Ceiling zu verstehen.
+Trailing PE 31,3x, Forward PE 25,8x, P/B 7,72x — für ein zyklisches Frachtunternehmen historisch hoch, auch wenn die Qualitätsprämie gegenüber Wettbewerbern gerechtfertigt ist. Rückrechnung "Was preist der Kurs ein?": $174,54 bei Forward-EPS $6,76 impliziert eine Fortsetzung des aktuellen Wachstumstempos trotz der jüngsten Frachtvolumenschwäche — ambitioniert angesichts der sichtbaren 6-Monats-Korrektur. Das Analysten-Konsensziel ($213,48, 21 Analysten, "buy") liegt deutlich über dem aktuellen Kurs — ein Hinweis auf mehr Street-Optimismus bezüglich einer Frachtvolumenerholung als die eigene konservativere EV-Rechnung dieser Analyse.
 
 ## 8. MARKTPSYCHOLOGIE & POSITIONIERUNG
 
-Short Float nicht verfügbar — Aussagen zur Leerverkäufer-Positionierung sind nicht möglich. Ableitbar ist der Rangverlust: von prev_rank 75 auf Rang 94 — der größte Absturz im RS-Ranking innerhalb dieser Analysegruppe. Old Dominion hat also nicht nur verloren, sondern zuletzt beschleunigt verloren, sichtbar auch im 50-Tage-Fenster von −23,32 %. Ableitbar ist außerdem, dass die Sell-Side mit einem mittleren Ziel von $228,78 rund 32 % über dem Kurs liegt und am "buy"-Rating festhält. Hypothese, nicht datenbasiert: Old Dominion ist eine klassische Qualitäts-Kernposition in Industriefonds; solche Positionen werden nicht bei der ersten Schwäche verkauft, sondern über Quartale abgebaut — das erklärt den stetigen, schlagzeilenlosen Abwärtsdruck. Was neue Käufer anziehen würde, ist ein einziger Monat mit positiver Tonnage-Veränderung. Genau darauf laufen die Betriebskennzahlen zu, erreicht ist es noch nicht.
+Short Float und institutionelle Flow-Daten sind im Datensatz nicht enthalten. Hypothese, nicht datenbasiert: LTL-Qualitätsanbieter wie ODFL gelten traditionell als Long-Only-Qualitätstitel in der Transportbranche; die jüngste 6-Monats-Korrektur bei weiterhin starkem 12-Monats-Trend deutet auf eine Konsolidierungsphase inmitten branchenweiter Frachtvolumensorgen hin. Für neue nachhaltige Käufer müsste eine konkrete Bestätigung der Frachtvolumenerholung in den kommenden Quartalsberichten erfolgen. Enttäuschungsrisiko: Eine anhaltende Schwäche der US-Industrieproduktion wäre der klarste strukturelle negative Katalysator.
 
 ## 9. TECHNISCHE EINSCHÄTZUNG / MOMENTUM
 
-RS-Score −84,33, Rang 94 von 100 nach zuvor Rang 75. Fenster: 5T −6,63 %, 10T −7,27 %, 20T −17,20 %, 50T −23,32 %, 6M −29,91 %. Durchgehend negativ mit der stärksten Belastung im 50-Tage-Fenster — der Abwärtstrend ist intakt und hat sich im Sommer verschärft. Der Kurs bei $173,00 liegt 37,3 % über dem 52-Wochen-Tief von $126,01 und 31,4 % unter dem Hoch. GWS-Ampel auf allen drei Ebenen inaktiv (0/3) — kein Breakout-Signal, kein Funnel-Kandidat. Das Momentum ist fundamental erklärbar: Es folgt der Tonnage-Entwicklung. Genau deshalb ist die Abflachung der Tonnage-Rückgänge der relevante Frühindikator und nicht der Kurs. Warnsignal: Ein Bruch unter $155 würde die Sommerkorrektur fortsetzen; ein Einstiegssignal wäre die Rückeroberung von $195.
+RS-Score 43,62, Rang 80 im NASDAQ-100 — moderat. 5T +4,72%, 10T +7,09%, 20T +3,57%, 50T +6,36%, 6M -7,26%, 12M +29,14% — eine jüngste kurzfristige Erholung nach der 6-Monats-Korrektur. Kein aktives GWS-Signal (Weekly/Daily/4H inaktiv). Momentum wirkt teilweise fundamental gestützt, aber die zugrunde liegende Frachtvolumenschwäche der letzten Monate bleibt ein ungelöster Belastungsfaktor. Warnsignal: Ein erneuter Rückfall unter die jüngsten Tiefs würde auf eine Fortsetzung der Frachtvolumenschwäche hindeuten.
 
 ## 10. LANGFRISTIGES POTENZIAL (3–5 Jahre)
 
-**Bull ($330–$430):** Frachtzyklus dreht, Old Dominion gewinnt mit vorgehaltener Kapazität Marktanteile, Betriebsmarge kehrt über 30 % zurück. Normalisiertes EPS $13–17 × 25–26x.
-
-**Base ($190–$290):** Zyklus normalisiert langsam, Marge stabil bei 28–29 %, Multiple bei 22–24x. Normalisiertes EPS $9–12 × 22–24x.
-
-**Bear ($60–$120):** Preisdisziplin bricht bei anhaltender Überkapazität, Betriebsmarge fällt Richtung 20 %.
-
-Entscheidende Variable: die Preisdisziplin der Branche, nicht die Konjunktur. Old Dominion hat bewiesen, dass es bei fallendem Volumen Preise durchsetzen kann — die Frage ist, ob die Wettbewerber das mitmachen.
+Bull (3–5 Jahre): Die US-Industrieproduktion erholt sich strukturell, ODFL gewinnt weiter organisch Marktanteile von schwächeren Wettbewerbern. Kursziel: $240–$310.
+Base: Stetiges Wachstum aus der Kombination von Marktanteilsgewinnen und moderater Frachtvolumenentwicklung. Kursziel: $175–$220.
+Bear: Eine mehrjährige Frachtrezession belastet die Branche strukturell, Preiswettbewerb intensiviert sich. Kursziel: $75–$110.
+Entscheidende Variable: Tempo der Erholung der US-Industrieproduktion relativ zur Fortsetzung der organischen Marktanteilsgewinne von Old Dominion.
 
 ## 11. PROFI-FAZIT
 
-Ein herausragendes Unternehmen zu einem Preis, der die Erholung bereits vollständig unterstellt. Das ist die Kernaussage: Betriebsmarge 28,8 % bei mehr als dem Doppelten der LTL-Peers, Debt/Equity 0,44, ROIC 24,2 % — operativ gibt es nichts zu bemängeln. Aber bei 26,01x Forward am oberen Rand der Peer-Bandbreite und einem Erwartungswert von $173,15 gegenüber einem Kurs von $173,00 ergeben die eigenen Szenarien keinen asymmetrischen Edge. Man zahlt heute den fairen Preis für einen Zyklus, der noch nicht gedreht hat.
+Die eigenen Szenarien ergeben auf dem aktuellen Niveau keinen asymmetrischen Edge (EV −8,7%). Old Dominion ist ein qualitativ erstklassiger Buy-and-Hold-Compounder mit der konservativsten Bilanz der Branche, aber die aktuelle Bewertung (Trailing PE 31,3x) bei gleichzeitiger Frachtvolumenschwäche bietet keinen attraktiven Einstiegspunkt. Für geduldige Qualitätsinvestoren mit Verständnis für die zyklische Frachtvolumenkomponente geeignet, kein kurzfristiger Trading-Kandidat. Bestehende Positionen halten, Neueinstiege auf diesem Niveau zurückstellen. Direkte Peers: **Saia (SAIA)** und **XPO Inc.** als weitere LTL-Qualitätsanbieter, die von der Yellow-Corporation-Insolvenz 2023 ebenfalls profitiert haben — keiner im Datensatz enthalten. Peer-Multiples nicht im Datensatz — relative Bewertung indikativ.
 
-Einordnung: zyklischer Qualitätswert, kein Momentum-Play und kein Value-Fall. RS-Score −84,33, Rang 94, GWS 0/3 — der Funnel liefert diesen Titel nicht. Für Industrie-Investoren, die den Frachtzyklus bewusst spielen, ist Old Dominion das qualitativ beste Instrument; der Einstiegszeitpunkt ist es nicht. Sinnvoll wäre ein Aufbau erst nach dem ersten Monat mit positiver Tonnage-Veränderung — dieser Indikator wird monatlich veröffentlicht und ist damit ein harter, überprüfbarer Trigger statt einer Kursvermutung. Bestehende Positionen halten, keine Aufstockung auf diesem Niveau.
-
-Peers: **Saia (SAIA)** ist bei 24,1x Forward und 2,68x Sales günstiger bewertet und bietet als kleinerer LTL-Anbieter den höheren operativen Hebel in einer Erholung — bei deutlich schwächerer Marge und damit höherem Risiko im Abschwung. **FedEx (FDX)** ist bei 14,6x Forward und 0,76x Sales der Value-Punkt des Sektors, allerdings mit einem strukturell anderen Geschäftsmix.
-
-- Qualität: 5/5
-- Wachstum: 2/5
+- Qualität: 4/5
+- Wachstum: 3/5
 - Bewertung: 2/5
 - Katalysator: 2/5
 
-**Funnel-Entscheidung:** REDUCE — Kategorie: Bewertung — 26,01x Forward am oberen Rand der Peer-Bandbreite und 6,40x Sales beim Zweieinhalbfachen der LTL-Peers, bei einem EV von +0,1 % gegenüber dem aktuellen Kurs.
+**Funnel-Entscheidung:** VETO — Kategorie: Bewertung — Das Trailing-KGV von 31,3x ist für ein zyklisches Frachtunternehmen inmitten einer sichtbaren 6-Monats-Volumenschwäche hoch; die EV-Rechnung bestätigt das negative Chance-Risiko-Verhältnis (−8,7%).
 
 ---
 
 | Rating | Score |
 |---|---|
-| Qualität | 5/5 |
-| Wachstum | 2/5 |
+| Qualität | 4/5 |
+| Wachstum | 3/5 |
 | Bewertung | 2/5 |
 | Katalysator | 2/5 |
-| EV-Upside | -0.8% |
+| EV-Upside | -3.7% |
 
 **Verdict: WATCH (49/100)**
 
